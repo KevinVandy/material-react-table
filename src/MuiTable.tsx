@@ -8,11 +8,11 @@ import { useReactTableMui } from './useReactTableMui';
 interface Props {}
 
 export const MuiTable: FC<Props> = () => {
-  const { tableInstance } = useReactTableMui();
+  const { tableInstance, tableProps, tableContainerProps } = useReactTableMui();
 
   return (
-    <TableContainer component={Paper}>
-      <Table {...tableInstance.getTableProps()}>
+    <TableContainer {...tableContainerProps} component={Paper}>
+      <Table stickyHeader {...tableProps} {...tableInstance.getTableProps()}>
         <MuiTableHead />
         <MuiTableBody />
         <MuiTableFooter />
