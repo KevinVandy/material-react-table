@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const MuiTableHeadCell: FC<Props> = ({ column }) => {
-  const isParentHeader: boolean = (column?.columns?.length ?? 0) > 0;
+  const isParentHeader = (column?.columns?.length ?? 0) > 0;
 
   return (
     <TableCell

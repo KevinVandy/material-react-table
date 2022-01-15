@@ -9,13 +9,12 @@ interface Props {}
 
 export const MuiTable: FC<Props> = () => {
   const { reactTable } = useReactTableMui();
-  const { getTableProps } = reactTable;
 
   return (
     <TableContainer component={Paper}>
-      <Table {...getTableProps()}>
-        <MuiTableHead reactTable={reactTable} />
-        <MuiTableBody reactTable={reactTable} />
+      <Table {...reactTable.getTableProps()}>
+        <MuiTableHead />
+        <MuiTableBody />
         <MuiTableFooter />
       </Table>
     </TableContainer>
