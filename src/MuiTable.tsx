@@ -1,17 +1,16 @@
 import { Paper, Table, TableContainer } from '@mui/material';
 import React, { FC } from 'react';
-import { TableInstance } from 'react-table';
 import { MuiTableBody } from './MuiTableBody';
 import { MuiTableFooter } from './MuiTableFooter';
 import { MuiTableHead } from './MuiTableHead';
+import { useReactTableMui } from './useReactTableMui';
 
-interface Props {
-  reactTable: TableInstance<object>;
-}
+interface Props {}
 
-export const MuiTable: FC<Props> = ({ reactTable }) => {
+export const MuiTable: FC<Props> = () => {
+  const { reactTable } = useReactTableMui();
   const { getTableProps } = reactTable;
-  
+
   return (
     <TableContainer component={Paper}>
       <Table {...getTableProps()}>

@@ -1,13 +1,17 @@
 import React, { FC } from 'react';
-import { Column, useTable } from 'react-table';
+import { Column } from 'react-table';
 import { MuiTable } from './MuiTable';
+import { ReactTableMuiProvider } from './useReactTableMui';
 
-export interface Props {
+export interface ReactMuiTableProps {
   columns: Column[];
   data: any[];
 }
 
-export const ReactTableMui: FC<Props> = ({ columns, data }) => {
-  const reactTable = useTable({ columns, data });
-  return <MuiTable reactTable={reactTable} />;
+export const ReactTableMui: FC<ReactMuiTableProps> = (props) => {
+  return (
+    <ReactTableMuiProvider {...props}>
+      <MuiTable />
+    </ReactTableMuiProvider>
+  );
 };

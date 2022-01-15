@@ -1,13 +1,12 @@
-import { TableBody } from '@mui/material';
 import React, { FC } from 'react';
-import { TableInstance } from 'react-table';
+import { TableBody } from '@mui/material';
 import { MuiTableBodyRow } from './MuiTableBodyRow';
+import { useReactTableMui } from './useReactTableMui';
 
-interface Props {
-  reactTable: TableInstance<object>;
-}
+interface Props {}
 
-export const MuiTableBody: FC<Props> = ({ reactTable }) => {
+export const MuiTableBody: FC<Props> = ({}) => {
+  const { reactTable } = useReactTableMui();
   const { getTableBodyProps, rows, prepareRow } = reactTable;
 
   return (

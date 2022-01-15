@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 import { TableRow } from '@mui/material';
-import { HeaderGroup, TableInstance } from 'react-table';
+import { HeaderGroup } from 'react-table';
 import { MuiTableHeadCell } from './MuiTableHeadCell';
 
 interface Props {
-  // reactTable: TableInstance<object>;
   headerGroup: HeaderGroup<object>;
 }
 

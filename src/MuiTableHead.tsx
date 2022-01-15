@@ -1,18 +1,16 @@
 import React, { FC } from 'react';
 import { TableHead } from '@mui/material';
 import { MuiTableHeadRow } from './MuiTableHeadRow';
-import { TableInstance } from 'react-table';
+import { useReactTableMui } from './useReactTableMui';
 
-interface Props {
-  reactTable: TableInstance<object>;
-}
+interface Props {}
 
-export const MuiTableHead: FC<Props> = ({ reactTable }) => {
-  const { headerGroups } = reactTable;
+export const MuiTableHead: FC<Props> = () => {
+  const { reactTable } = useReactTableMui();
 
   return (
     <TableHead>
-      {headerGroups.map((headerGroup) => (
+      {reactTable.headerGroups.map((headerGroup) => (
         <MuiTableHeadRow key={headerGroup.id} headerGroup={headerGroup} />
       ))}
     </TableHead>

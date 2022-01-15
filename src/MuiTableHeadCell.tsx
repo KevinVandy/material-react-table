@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { styled, TableCell as MuiTableCell } from '@mui/material';
-import { HeaderGroup, TableInstance } from 'react-table';
+import { HeaderGroup } from 'react-table';
 
 const TableCell = styled(MuiTableCell)({
   fontWeight: 'bold',
@@ -8,7 +8,6 @@ const TableCell = styled(MuiTableCell)({
 });
 
 interface Props {
-  // reactTable: TableInstance<object>;
   column: HeaderGroup;
 }
 
