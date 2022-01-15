@@ -8,16 +8,17 @@ interface Props {}
 export const MuiTableFooter: FC<Props> = () => {
   const { reactTable } = useReactTableMui();
 
-  console.log(reactTable.footerGroups);
+  const hasFooterGroups = reactTable.columns.some((c) => !!c.Footer);
 
   return (
     <TableFooter>
-      {reactTable.footerGroups.map((footerGroup, index) => (
-        <MuiTableFooterRow
-          key={`${index}-${footerGroup.id}`}
-          footerGroup={footerGroup}
-        />
-      ))}
+      {hasFooterGroups &&
+        reactTable.footerGroups.map((footerGroup, index) => (
+          <MuiTableFooterRow
+            key={`${index}-${footerGroup.id}`}
+            footerGroup={footerGroup}
+          />
+        ))}
     </TableFooter>
   );
 };
