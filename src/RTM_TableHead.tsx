@@ -6,10 +6,10 @@ import { useReactTableMui } from './useReactTableMui';
 interface Props {}
 
 export const RTM_TableHead: FC<Props> = () => {
-  const { tableInstance } = useReactTableMui();
+  const { tableInstance, tableHeadProps } = useReactTableMui();
 
   return (
-    <TableHead>
+    <TableHead {...tableHeadProps}>
       {tableInstance.headerGroups.map((headerGroup, index) => (
         <RTM_TableHeadRow
           key={`${index}-${headerGroup.id}`}

@@ -1,12 +1,19 @@
 import React, { FC } from 'react';
-import { TableContainerProps, TableProps } from '@mui/material';
+import {
+  TableContainerProps,
+  TableFooterProps,
+  TableHeadProps,
+  TableProps,
+} from '@mui/material';
 import { Column } from 'react-table';
 import { ReactTableMuiProvider } from './useReactTableMui';
 import { RTM_TableContainer } from './RTM_TableContainer';
 
 export interface ReactTableMuiOptionsProps {
-  tableProps?: TableProps;
   tableContainerProps?: TableContainerProps;
+  tableFooterProps?: TableFooterProps;
+  tableHeadProps?: TableHeadProps;
+  tableProps?: TableProps;
 }
 
 export interface ReactTableMuiProps extends ReactTableMuiOptionsProps {
