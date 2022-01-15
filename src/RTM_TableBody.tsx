@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { TableBody } from '@mui/material';
-import { MuiTableBodyRow } from './MuiTableBodyRow';
+import { RTM_TableBodyRow } from './RTM_TableBodyRow';
 import { useReactTableMui } from './useReactTableMui';
 
 interface Props {}
 
-export const MuiTableBody: FC<Props> = () => {
+export const RTM_TableBody: FC<Props> = () => {
   const { tableInstance } = useReactTableMui();
   const { getTableBodyProps, rows, prepareRow } = tableInstance;
 
@@ -13,7 +13,7 @@ export const MuiTableBody: FC<Props> = () => {
     <TableBody {...getTableBodyProps()}>
       {rows.map((row, index) => {
         prepareRow(row);
-        return <MuiTableBodyRow key={`${index}-${row.id}`} row={row} />;
+        return <RTM_TableBodyRow key={`${index}-${row.id}`} row={row} />;
       })}
     </TableBody>
   );

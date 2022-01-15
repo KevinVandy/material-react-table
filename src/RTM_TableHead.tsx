@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
 import { TableHead } from '@mui/material';
-import { MuiTableHeadRow } from './MuiTableHeadRow';
+import { RTM_TableHeadRow } from './RTM_TableHeadRow';
 import { useReactTableMui } from './useReactTableMui';
 
 interface Props {}
 
-export const MuiTableHead: FC<Props> = () => {
+export const RTM_TableHead: FC<Props> = () => {
   const { tableInstance } = useReactTableMui();
 
   return (
     <TableHead>
       {tableInstance.headerGroups.map((headerGroup, index) => (
-        <MuiTableHeadRow
+        <RTM_TableHeadRow
           key={`${index}-${headerGroup.id}`}
           headerGroup={headerGroup}
         />

@@ -10,16 +10,16 @@ interface Props {
   column: HeaderGroup;
 }
 
-export const MuiTableFooterCell: FC<Props> = ({ column }) => {
+export const RTM_TableHeadCell: FC<Props> = ({ column }) => {
   const isParentHeader = (column?.columns?.length ?? 0) > 0;
 
   return (
     <TableCell
       align={isParentHeader ? 'center' : 'left'}
       variant="head"
-      {...column.getFooterProps()}
+      {...column.getHeaderProps()}
     >
-      {column.render('Footer')}
+      {column.render('Header')}
     </TableCell>
   );
 };
