@@ -10,8 +10,11 @@ export const MuiTableHead: FC<Props> = () => {
 
   return (
     <TableHead>
-      {reactTable.headerGroups.map((headerGroup) => (
-        <MuiTableHeadRow key={headerGroup.id} headerGroup={headerGroup} />
+      {reactTable.headerGroups.map((headerGroup, index) => (
+        <MuiTableHeadRow
+          key={`${index}-${headerGroup.id}`}
+          headerGroup={headerGroup}
+        />
       ))}
     </TableHead>
   );

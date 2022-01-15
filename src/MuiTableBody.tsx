@@ -11,9 +11,9 @@ export const MuiTableBody: FC<Props> = ({}) => {
 
   return (
     <TableBody {...getTableBodyProps()}>
-      {rows.map((row) => {
+      {rows.map((row, index) => {
         prepareRow(row);
-        return <MuiTableBodyRow key={row.id} row={row} />;
+        return <MuiTableBodyRow key={`${index}-${row.id}`} row={row} />;
       })}
     </TableBody>
   );

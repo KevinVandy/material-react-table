@@ -10,8 +10,8 @@ interface Props {
 export const MuiTableHeadRow: FC<Props> = ({ headerGroup }) => {
   return (
     <TableRow {...headerGroup.getHeaderGroupProps()}>
-      {headerGroup.headers.map((column) => (
-        <MuiTableHeadCell key={column.id} column={column} />
+      {headerGroup.headers.map((column, index) => (
+        <MuiTableHeadCell key={`${index}-${column.id}`} column={column} />
       ))}
     </TableRow>
   );

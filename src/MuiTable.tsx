@@ -1,5 +1,5 @@
-import { Paper, Table, TableContainer } from '@mui/material';
 import React, { FC } from 'react';
+import { Paper, Table, TableContainer } from '@mui/material';
 import { MuiTableBody } from './MuiTableBody';
 import { MuiTableFooter } from './MuiTableFooter';
 import { MuiTableHead } from './MuiTableHead';
