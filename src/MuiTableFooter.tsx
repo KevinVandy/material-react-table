@@ -6,7 +6,7 @@ interface Props {}
 export const MuiTableFooter: FC = () => {
   return (
     <TableFooter>
-      <TablePagination rowsPerPageOptions={[10, 50]} />
+      {/* <TablePagination rowsPerPageOptions={[10, 50]} /> */}
     </TableFooter>
   );
 };

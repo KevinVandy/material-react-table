@@ -12,7 +12,7 @@ export const MuiTableHeadRow: FC<Props> = ({ headerGroup }) => {
   return (
     <TableRow {...headerGroup.getHeaderGroupProps()}>
       {headerGroup.headers.map((column) => (
-        <MuiTableHeadCell  column={column} />
+        <MuiTableHeadCell key={column.id} column={column} />
       ))}
     </TableRow>
   );

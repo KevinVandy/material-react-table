@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { useTable } from 'react-table';
+import { Column, useTable } from 'react-table';
 import { MuiTable } from './MuiTable';
 
 export interface Props {
-  columns: any[];
+  columns: Column[];
   data: any[];
 }
 

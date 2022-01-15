@@ -13,7 +13,7 @@ export const MuiTableHead: FC<Props> = ({ reactTable }) => {
   return (
     <TableHead>
       {headerGroups.map((headerGroup) => (
-        <MuiTableHeadRow headerGroup={headerGroup} />
+        <MuiTableHeadRow key={headerGroup.id} headerGroup={headerGroup} />
       ))}
     </TableHead>
   );

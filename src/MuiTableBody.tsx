@@ -14,7 +14,7 @@ export const MuiTableBody: FC<Props> = ({ reactTable }) => {
     <TableBody {...getTableBodyProps()}>
       {rows.map((row) => {
         prepareRow(row);
-        return <MuiTableBodyRow row={row} />;
+        return <MuiTableBodyRow key={row.id} row={row} />;
       })}
     </TableBody>
   );
