@@ -1,16 +1,16 @@
 import React, { createContext, FC, useContext } from 'react';
 import { TableInstance, useTable } from 'react-table';
-import { ReactMuiTableProps } from '.';
+import { ReactTableMuiProps } from '.';
 
 interface IUseReactTableMui {
-  reactTable: TableInstance<object>;
+  tableInstance: TableInstance<object>;
 }
 
-const ReactMuiTableContext = createContext<IUseReactTableMui>(
+const ReactTableMuiContext = createContext<IUseReactTableMui>(
   {} as IUseReactTableMui,
 );
 
-interface Props extends ReactMuiTableProps {
+interface Props extends ReactTableMuiProps {
   children: React.ReactNode;
 }
 
@@ -19,13 +19,14 @@ export const ReactTableMuiProvider: FC<Props> = ({
   columns,
   data,
 }) => {
-  const reactTable = useTable({ columns, data });
+  const tableInstance = useTable({ columns, data });
+
   return (
-    <ReactMuiTableContext.Provider value={{ reactTable }}>
+    <ReactTableMuiContext.Provider value={{ tableInstance }}>
       {children}
-    </ReactMuiTableContext.Provider>
+    </ReactTableMuiContext.Provider>
   );
 };
 
 export const useReactTableMui = (): IUseReactTableMui =>
-  useContext(ReactMuiTableContext);
+  useContext(ReactTableMuiContext);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { ReactTableMui, ReactMuiTableProps } from '../src';
+import { ReactTableMui, ReactTableMuiProps } from '../src';
 
 const meta: Meta = {
   title: 'ReactTableMui',
@@ -13,7 +13,7 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<ReactMuiTableProps> = (args) => (
+const Template: Story<ReactTableMuiProps> = (args) => (
   <ReactTableMui {...args} />
 );
 

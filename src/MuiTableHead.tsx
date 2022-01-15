@@ -6,11 +6,11 @@ import { useReactTableMui } from './useReactTableMui';
 interface Props {}
 
 export const MuiTableHead: FC<Props> = () => {
-  const { reactTable } = useReactTableMui();
+  const { tableInstance } = useReactTableMui();
 
   return (
     <TableHead>
-      {reactTable.headerGroups.map((headerGroup, index) => (
+      {tableInstance.headerGroups.map((headerGroup, index) => (
         <MuiTableHeadRow
           key={`${index}-${headerGroup.id}`}
           headerGroup={headerGroup}

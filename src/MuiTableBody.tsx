@@ -5,9 +5,9 @@ import { useReactTableMui } from './useReactTableMui';
 
 interface Props {}
 
-export const MuiTableBody: FC<Props> = ({}) => {
-  const { reactTable } = useReactTableMui();
-  const { getTableBodyProps, rows, prepareRow } = reactTable;
+export const MuiTableBody: FC<Props> = () => {
+  const { tableInstance } = useReactTableMui();
+  const { getTableBodyProps, rows, prepareRow } = tableInstance;
 
   return (
     <TableBody {...getTableBodyProps()}>
