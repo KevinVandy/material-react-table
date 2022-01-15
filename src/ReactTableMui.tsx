@@ -10,7 +10,7 @@ import { Column } from 'react-table';
 import { ReactTableMuiProvider } from './useReactTableMui';
 import { RTM_TableContainer } from './RTM_TableContainer';
 
-export interface ReactTableMuiOptionsProps {
+export interface ReactTableMuiOptionalProps {
   tableContainerProps?: TableContainerProps;
   tableFooterProps?: TableFooterProps;
   tableHeadProps?: TableHeadProps;
@@ -18,7 +18,7 @@ export interface ReactTableMuiOptionsProps {
   tablePaginationProps?: TablePaginationProps;
 }
 
-export interface ReactTableMuiProps extends ReactTableMuiOptionsProps {
+export interface ReactTableMuiProps extends ReactTableMuiOptionalProps {
   columns: Column[];
   data: any[];
 }

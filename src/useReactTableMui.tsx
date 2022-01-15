@@ -1,8 +1,8 @@
 import React, { createContext, FC, useContext } from 'react';
 import { TableInstance, usePagination, useTable } from 'react-table';
-import { ReactTableMuiOptionsProps, ReactTableMuiProps } from '.';
+import { ReactTableMuiOptionalProps, ReactTableMuiProps } from '.';
 
-interface IUseReactTableMui extends ReactTableMuiOptionsProps {
+interface IUseReactTableMui extends ReactTableMuiOptionalProps {
   tableInstance: TableInstance<object>;
 }
 

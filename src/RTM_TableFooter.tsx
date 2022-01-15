@@ -9,7 +9,9 @@ interface Props {}
 export const RTM_TableFooter: FC<Props> = () => {
   const { tableInstance, tableFooterProps } = useReactTableMui();
 
-  const hasFooterGroups = tableInstance.columns.some((c) => !!c.Footer);
+  const hasFooterGroups = tableInstance.columns.some(
+    (c) => c.depth === 0 && !!c.Footer,
+  );
 
   return (
     <TableFooter {...tableFooterProps}>
