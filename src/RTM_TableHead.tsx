@@ -11,7 +11,7 @@ export const RTM_TableHead: FC<Props> = () => {
 
   return (
     <TableHead {...tableHeadProps}>
-      {['top', 'both'].includes(options.showPagination.toString()) && (
+      {['top', 'both'].includes(options.enablePagination.toString()) && (
         <RTM_TablePagination />
       )}
       {tableInstance.headerGroups.map((headerGroup, index) => (

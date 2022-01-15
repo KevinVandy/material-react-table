@@ -1,11 +1,11 @@
 import { ReactTableMuiOptions } from '.';
 
 export const defaultOptions: ReactTableMuiOptions = {
-  showPagination: 'bottom',
-  showSearch: true,
-  showHead: true,
+  enableFilters: false,
+  enablePagination: 'bottom',
+  enableSearch: true,
+  enableSorting: true,
   showFooter: true,
+  showHead: true,
   showToolbar: true,
-  showFilters: false,
-  showSorting: true,
 };

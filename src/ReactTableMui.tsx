@@ -12,19 +12,17 @@ import { RTM_TableContainer } from './RTM_TableContainer';
 import { defaultOptions } from './defaults';
 
 export interface ReactTableMuiOptions {
-  showPagination: boolean | 'top' | 'bottom' | 'both' | 'none';
-  showSearch: boolean;
-  showHead: boolean;
+  enableFilters: boolean;
+  enablePagination: boolean | 'top' | 'bottom' | 'both' | 'none';
+  enableSearch: boolean;
+  enableSorting: boolean;
   showFooter: boolean;
+  showHead: boolean;
   showToolbar: boolean;
-  showFilters: boolean;
-  showSorting: boolean;
 }
 
-type ReactTableMuiOptionProps = Partial<ReactTableMuiOptions>;
-
 export interface ReactTableMuiOptionalProps {
-  options?: ReactTableMuiOptionProps;
+  options?: Partial<ReactTableMuiOptions>;
   tableContainerProps?: TableContainerProps;
   tableFooterProps?: TableFooterProps;
   tableHeadProps?: TableHeadProps;

@@ -8,13 +8,13 @@ import { useReactTableMui } from './useReactTableMui';
 interface Props {}
 
 export const RTM_Table: FC<Props> = () => {
-  const { tableInstance, tableProps } = useReactTableMui();
+  const { tableInstance, tableProps, options } = useReactTableMui();
 
   return (
     <Table stickyHeader {...tableProps} {...tableInstance.getTableProps()}>
-      <RTM_TableHead />
+      {options.showHead && <RTM_TableHead />}
       <RTM_TableBody />
-      <RTM_TableFooter />
+      {options.showFooter && <RTM_TableFooter />}
     </Table>
   );
 };

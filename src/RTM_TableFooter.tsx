@@ -22,8 +22,8 @@ export const RTM_TableFooter: FC<Props> = () => {
             footerGroup={footerGroup}
           />
         ))}
-      {options.showPagination === true ||
-        (['bottom', 'both'].includes(options.showPagination.toString()) && (
+      {options.enablePagination === true ||
+        (['bottom', 'both'].includes(options.enablePagination.toString()) && (
           <RTM_TablePagination />
         ))}
     </TableFooter>
