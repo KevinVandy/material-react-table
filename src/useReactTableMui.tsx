@@ -1,9 +1,15 @@
 import React, { createContext, FC, useContext } from 'react';
 import { TableInstance, usePagination, useTable } from 'react-table';
-import { ReactTableMuiOptionalProps, ReactTableMuiProps } from '.';
+import {
+  ReactTableMuiOptionalProps,
+  ReactTableMuiOptions,
+  ReactTableMuiProps,
+} from '.';
+import { defaultOptions } from './defaults';
 
 interface IUseReactTableMui extends ReactTableMuiOptionalProps {
   tableInstance: TableInstance<object>;
+  options: ReactTableMuiOptions;
 }
 
 const ReactTableMuiContext = createContext<IUseReactTableMui>(
@@ -18,12 +24,19 @@ export const ReactTableMuiProvider: FC<ProviderProps> = ({
   children,
   columns,
   data,
+  options,
   ...rest
 }) => {
   const tableInstance = useTable({ columns, data }, usePagination);
 
   return (
-    <ReactTableMuiContext.Provider value={{ tableInstance, ...rest }}>
+    <ReactTableMuiContext.Provider
+      value={{
+        options: { ...defaultOptions, ...options },
+        tableInstance,
+        ...rest,
+      }}
+    >
       {children}
     </ReactTableMuiContext.Provider>
   );

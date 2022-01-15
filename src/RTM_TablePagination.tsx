@@ -4,7 +4,7 @@ import { useReactTableMui } from './useReactTableMui';
 
 interface Props {}
 
-export const RTM_TableFooterPagination: FC<Props> = () => {
+export const RTM_TablePagination: FC<Props> = () => {
   const { tableInstance, tablePaginationProps } = useReactTableMui();
 
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
@@ -20,6 +20,12 @@ export const RTM_TableFooterPagination: FC<Props> = () => {
         onRowsPerPageChange={handleChangeRowsPerPage}
         page={tableInstance.state.pageIndex}
         rowsPerPage={tableInstance.state.pageSize}
+        showFirstButton={
+          tableInstance.rows.length / tableInstance.state.pageSize > 2
+        }
+        showLastButton={
+          tableInstance.rows.length / tableInstance.state.pageSize > 2
+        }
         {...tablePaginationProps}
       />
     </TableRow>
