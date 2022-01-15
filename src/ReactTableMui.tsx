@@ -3,6 +3,7 @@ import {
   TableContainerProps,
   TableFooterProps,
   TableHeadProps,
+  TablePaginationProps,
   TableProps,
 } from '@mui/material';
 import { Column } from 'react-table';
@@ -14,6 +15,7 @@ export interface ReactTableMuiOptionsProps {
   tableFooterProps?: TableFooterProps;
   tableHeadProps?: TableHeadProps;
   tableProps?: TableProps;
+  tablePaginationProps?: TablePaginationProps;
 }
 
 export interface ReactTableMuiProps extends ReactTableMuiOptionsProps {

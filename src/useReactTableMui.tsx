@@ -1,5 +1,5 @@
 import React, { createContext, FC, useContext } from 'react';
-import { TableInstance, useTable } from 'react-table';
+import { TableInstance, usePagination, useTable } from 'react-table';
 import { ReactTableMuiOptionsProps, ReactTableMuiProps } from '.';
 
 interface IUseReactTableMui extends ReactTableMuiOptionsProps {
@@ -20,7 +20,7 @@ export const ReactTableMuiProvider: FC<ProviderProps> = ({
   data,
   ...rest
 }) => {
-  const tableInstance = useTable({ columns, data });
+  const tableInstance = useTable({ columns, data }, usePagination);
 
   return (
     <ReactTableMuiContext.Provider value={{ tableInstance, ...rest }}>

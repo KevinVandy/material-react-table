@@ -62,12 +62,8 @@ HeaderGroups.args = {
           accessor: 'age',
         },
         {
-          Header: 'Visits',
-          accessor: 'visits',
-        },
-        {
-          Header: 'Profile Progress',
-          accessor: 'progress',
+          Header: 'Address',
+          accessor: 'address',
         },
       ],
     },
@@ -76,8 +72,7 @@ HeaderGroups.args = {
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     age: faker.datatype.number(100),
-    visits: faker.datatype.number(50),
-    progress: faker.datatype.number(100),
+    address: faker.address.streetAddress(),
   })),
 };
 
@@ -111,14 +106,9 @@ FooterGroups.args = {
           accessor: 'age',
         },
         {
-          Header: 'Visits',
-          Footer: 'Visits',
-          accessor: 'visits',
-        },
-        {
-          Header: 'Profile Progress',
-          Footer: 'Profile Progress',
-          accessor: 'progress',
+          Header: 'Address',
+          Footer: 'Address',
+          accessor: 'address',
         },
       ],
     },
@@ -127,7 +117,6 @@ FooterGroups.args = {
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     age: faker.datatype.number(100),
-    visits: faker.datatype.number(50),
-    progress: faker.datatype.number(100),
+    address: faker.address.streetAddress(),
   })),
 };
