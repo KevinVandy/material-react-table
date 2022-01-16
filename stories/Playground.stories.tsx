@@ -4,17 +4,14 @@ import { MaterialReactTable, MaterialReactTableProps } from '../src';
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
-  title: 'MaterialReactTable',
+  title: 'Playground',
   component: MaterialReactTable,
 };
 
 export default meta;
 
 const Template: Story<MaterialReactTableProps> = (args) => (
-  <MaterialReactTable
-    renderDetailPanel={(rowData) => <div>Hello There, General Kenobil</div>}
-    {...args}
-  />
+  <MaterialReactTable {...args} />
 );
 
 export const Default = Template.bind({});
