@@ -8,13 +8,14 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 interface Props {}
 
 export const MRT_Table: FC<Props> = () => {
-  const { tableInstance, tableProps, options } = useMaterialReactTable();
+  const { tableInstance, tableProps, showHead, showFooter } =
+    useMaterialReactTable();
 
   return (
     <Table stickyHeader {...tableProps} {...tableInstance.getTableProps()}>
-      {options.showHead && <MRT_TableHead />}
+      {showHead && <MRT_TableHead />}
       <MRT_TableBody />
-      {options.showFooter && <MRT_TableFooter />}
+      {showFooter && <MRT_TableFooter />}
     </Table>
   );
 };

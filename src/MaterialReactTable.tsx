@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEvent, ReactNode } from 'react';
 import {
   TableContainerProps,
   TableFooterProps,
@@ -6,42 +6,62 @@ import {
   TablePaginationProps,
   TableProps,
 } from '@mui/material';
-import { Column } from 'react-table';
+import { Column, Row } from 'react-table';
 import { MaterialReactTableProvider } from './useMaterialReactTable';
 import { MRT_TableContainer } from './table/MRT_TableContainer';
-import { defaultOptions } from './defaults';
-
-export interface MaterialReactTableOptions {
-  enableFilters: boolean;
-  enablePagination: boolean | 'top' | 'bottom' | 'both' | 'none';
-  enableSearch: boolean;
-  enableSorting: boolean;
-  showFooter: boolean;
-  showHead: boolean;
-  showToolbar: boolean;
-}
 
 export interface MaterialReactTableOptionalProps {
-  options?: Partial<MaterialReactTableOptions>;
+  enableFilters?: boolean;
+  enablePagination?: boolean;
+  enableSearch?: boolean;
+  enableSelectAll?: boolean;
+  enableSelection?: boolean;
+  enableSorting?: boolean;
+  onRowClick?: (
+    event: MouseEvent<HTMLTableRowElement>,
+    rowData: Row<object>,
+  ) => void;
+  positionPagination?: 'bottom' | 'top' | 'both';
+  renderDetailPanel?: (rowData: Row<object>) => ReactNode;
+  showFooter?: boolean;
+  showHead?: boolean;
+  showToolbar?: boolean;
   tableContainerProps?: TableContainerProps;
   tableFooterProps?: TableFooterProps;
   tableHeadProps?: TableHeadProps;
   tablePaginationProps?: TablePaginationProps;
   tableProps?: TableProps;
-  renderDetailPanel?: (rowData: any) => React.ReactNode;
 }
 
-export interface MaterialReactTableProps extends MaterialReactTableOptionalProps {
+export interface MaterialReactTableProps
+  extends MaterialReactTableOptionalProps {
   columns: Column[];
   data: any[];
 }
 
 export const MaterialReactTable: FC<MaterialReactTableProps> = ({
-  options = defaultOptions,
+  enableFilters = true,
+  enablePagination = true,
+  enableSearch = true,
+  enableSorting = true,
+  positionPagination = 'bottom',
+  showFooter = true,
+  showHead = true,
+  showToolbar = false,
   ...rest
 }) => {
   return (
-    <MaterialReactTableProvider options={options} {...rest}>
+    <MaterialReactTableProvider
+      enableFilters={enableFilters}
+      enablePagination={enablePagination}
+      enableSearch={enableSearch}
+      enableSorting={enableSorting}
+      positionPagination={positionPagination}
+      showFooter={showFooter}
+      showHead={showHead}
+      showToolbar={showToolbar}
+      {...rest}
+    >
       <MRT_TableContainer />
     </MaterialReactTableProvider>
   );

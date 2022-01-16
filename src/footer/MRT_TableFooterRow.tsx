@@ -11,6 +11,10 @@ interface Props {
 export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
   const { renderDetailPanel } = useMaterialReactTable();
 
+  if (!footerGroup.getFooterGroupProps.name) {
+    return null;
+  }
+
   return (
     <TableRow {...footerGroup.getFooterGroupProps()}>
       {renderDetailPanel && <TableCell style={{ width: '2rem' }} />}

@@ -7,16 +7,10 @@ import {
   useSortBy,
   useTable,
 } from 'react-table';
-import {
-  MaterialReactTableOptionalProps,
-  MaterialReactTableOptions,
-  MaterialReactTableProps,
-} from '.';
-import { defaultOptions } from './defaults';
+import { MaterialReactTableOptionalProps, MaterialReactTableProps } from '.';
 
 interface IUseMaterialReactTable extends MaterialReactTableOptionalProps {
   tableInstance: TableInstance<object>;
-  options: MaterialReactTableOptions;
 }
 
 const MaterialReactTableContext = createContext<IUseMaterialReactTable>(
@@ -31,7 +25,6 @@ export const MaterialReactTableProvider: FC<ProviderProps> = ({
   children,
   columns,
   data,
-  options,
   ...rest
 }) => {
   const tableInstance = useTable(
@@ -39,13 +32,12 @@ export const MaterialReactTableProvider: FC<ProviderProps> = ({
     useSortBy,
     useExpanded,
     usePagination,
-    useRowSelect
+    useRowSelect,
   );
 
   return (
     <MaterialReactTableContext.Provider
       value={{
-        options: { ...defaultOptions, ...options },
         tableInstance,
         ...rest,
       }}

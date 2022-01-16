@@ -7,13 +7,19 @@ import { MRT_TablePagination } from '../toolbar/MRT_TablePagination';
 interface Props {}
 
 export const MRT_TableHead: FC<Props> = () => {
-  const { tableInstance, tableHeadProps, options } = useMaterialReactTable();
+  const {
+    tableInstance,
+    tableHeadProps,
+    enablePagination,
+    positionPagination,
+  } = useMaterialReactTable();
 
   return (
     <TableHead {...tableHeadProps}>
-      {['top', 'both'].includes(options.enablePagination.toString()) && (
-        <MRT_TablePagination />
-      )}
+      {enablePagination &&
+        ['top', 'both'].includes(positionPagination ?? '') && (
+          <MRT_TablePagination />
+        )}
       {tableInstance.headerGroups.map((headerGroup, index) => (
         <MRT_TableHeadRow
           key={`${index}-${headerGroup.id}`}
