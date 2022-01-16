@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.0-beta.1",
   "license": "MIT",
   "name": "react-table-mui",
   "description": "A fully featured Material-UI implementation of react-table, inspired by material-table, written from the ground up in TypeScript.",
