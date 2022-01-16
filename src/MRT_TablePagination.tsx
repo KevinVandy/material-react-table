@@ -1,11 +1,11 @@
 import React, { ChangeEvent, FC } from 'react';
 import { TablePagination, TableRow } from '@mui/material';
-import { useReactTableMui } from './useReactTableMui';
+import { useMaterialReactTable } from './useMaterialReactTable';
 
 interface Props {}
 
-export const RTM_TablePagination: FC<Props> = () => {
-  const { tableInstance, tablePaginationProps } = useReactTableMui();
+export const MRT_TablePagination: FC<Props> = () => {
+  const { tableInstance, tablePaginationProps } = useMaterialReactTable();
 
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     tableInstance.setPageSize(+event.target.value);

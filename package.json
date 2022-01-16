@@ -1,7 +1,7 @@
 {
   "version": "0.1.0-beta.1",
   "license": "MIT",
-  "name": "react-table-mui",
+  "name": "material-react-table",
   "description": "A fully featured Material-UI implementation of react-table, inspired by material-table, written from the ground up in TypeScript.",
   "author": "Kevin Vandy",
   "keywords": [
@@ -11,14 +11,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/KevinVandy/react-table-mui"
+    "url": "https://github.com/KevinVandy/material-react-table"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "homepage": "https://github.com/KevinVandy/react-table-mui#readme",
+  "homepage": "https://github.com/KevinVandy/material-react-table#readme",
   "bugs": {
-    "url": "https://github.com/KevinVandy/react-table-mui/issues"
+    "url": "https://github.com/KevinVandy/material-react-table/issues"
   },
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -45,14 +42,14 @@
       "pre-commit": "tsdx lint"
     }
   },
-  "module": "dist/react-table-mui.esm.js",
+  "module": "dist/material-react-table.esm.js",
   "size-limit": [
     {
-      "path": "dist/react-table-mui.cjs.production.min.js",
+      "path": "dist/material-react-table.cjs.production.min.js",
       "limit": "20 KB"
     },
     {
-      "path": "dist/react-table-mui.esm.js",
+      "path": "dist/material-react-table.esm.js",
       "limit": "20 KB"
     }
   ],

@@ -1,6 +1,6 @@
-import { ReactTableMuiOptions } from '.';
+import { MaterialReactTableOptions } from '.';
 
-export const defaultOptions: ReactTableMuiOptions = {
+export const defaultOptions: MaterialReactTableOptions = {
   enableFilters: false,
   enablePagination: 'bottom',
   enableSearch: true,

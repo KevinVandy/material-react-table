@@ -6,7 +6,7 @@ interface Props {
   cell: Cell<object>;
 }
 
-export const RTM_TableBodyCell: FC<Props> = ({ cell }) => {
+export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
   return (
     <TableCell variant="body" {...cell.getCellProps()}>
       {cell.render('Cell')}

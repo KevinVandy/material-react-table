@@ -1,17 +1,17 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { ReactTableMui, ReactTableMuiProps } from '../src';
+import { MaterialReactTable, MaterialReactTableProps } from '../src';
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
-  title: 'ReactTableMui',
-  component: ReactTableMui,
+  title: 'MaterialReactTable',
+  component: MaterialReactTable,
 };
 
 export default meta;
 
-const Template: Story<ReactTableMuiProps> = (args) => (
-  <ReactTableMui
+const Template: Story<MaterialReactTableProps> = (args) => (
+  <MaterialReactTable
     renderDetailPanel={(rowData) => <div>Hello There, General Kenobil</div>}
     {...args}
   />

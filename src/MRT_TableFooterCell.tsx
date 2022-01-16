@@ -10,7 +10,7 @@ interface Props {
   column: HeaderGroup;
 }
 
-export const RTM_TableFooterCell: FC<Props> = ({ column }) => {
+export const MRT_TableFooterCell: FC<Props> = ({ column }) => {
   const isParentHeader = (column?.columns?.length ?? 0) > 0;
 
   return (

@@ -7,11 +7,11 @@ import {
   TableProps,
 } from '@mui/material';
 import { Column } from 'react-table';
-import { ReactTableMuiProvider } from './useReactTableMui';
-import { RTM_TableContainer } from './RTM_TableContainer';
+import { MaterialReactTableProvider } from './useMaterialReactTable';
+import { MRT_TableContainer } from './MRT_TableContainer';
 import { defaultOptions } from './defaults';
 
-export interface ReactTableMuiOptions {
+export interface MaterialReactTableOptions {
   enableFilters: boolean;
   enablePagination: boolean | 'top' | 'bottom' | 'both' | 'none';
   enableSearch: boolean;
@@ -21,8 +21,8 @@ export interface ReactTableMuiOptions {
   showToolbar: boolean;
 }
 
-export interface ReactTableMuiOptionalProps {
-  options?: Partial<ReactTableMuiOptions>;
+export interface MaterialReactTableOptionalProps {
+  options?: Partial<MaterialReactTableOptions>;
   tableContainerProps?: TableContainerProps;
   tableFooterProps?: TableFooterProps;
   tableHeadProps?: TableHeadProps;
@@ -31,18 +31,18 @@ export interface ReactTableMuiOptionalProps {
   renderDetailPanel?: (rowData: any) => React.ReactNode;
 }
 
-export interface ReactTableMuiProps extends ReactTableMuiOptionalProps {
+export interface MaterialReactTableProps extends MaterialReactTableOptionalProps {
   columns: Column[];
   data: any[];
 }
 
-export const ReactTableMui: FC<ReactTableMuiProps> = ({
+export const MaterialReactTable: FC<MaterialReactTableProps> = ({
   options = defaultOptions,
   ...rest
 }) => {
   return (
-    <ReactTableMuiProvider options={options} {...rest}>
-      <RTM_TableContainer />
-    </ReactTableMuiProvider>
+    <MaterialReactTableProvider options={options} {...rest}>
+      <MRT_TableContainer />
+    </MaterialReactTableProvider>
   );
 };

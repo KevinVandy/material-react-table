@@ -1,21 +1,21 @@
 import React, { FC } from 'react';
 import { TableHead } from '@mui/material';
-import { RTM_TableHeadRow } from './RTM_TableHeadRow';
-import { useReactTableMui } from './useReactTableMui';
-import { RTM_TablePagination } from './RTM_TablePagination';
+import { MRT_TableHeadRow } from './MRT_TableHeadRow';
+import { useMaterialReactTable } from './useMaterialReactTable';
+import { MRT_TablePagination } from './MRT_TablePagination';
 
 interface Props {}
 
-export const RTM_TableHead: FC<Props> = () => {
-  const { tableInstance, tableHeadProps, options } = useReactTableMui();
+export const MRT_TableHead: FC<Props> = () => {
+  const { tableInstance, tableHeadProps, options } = useMaterialReactTable();
 
   return (
     <TableHead {...tableHeadProps}>
       {['top', 'both'].includes(options.enablePagination.toString()) && (
-        <RTM_TablePagination />
+        <MRT_TablePagination />
       )}
       {tableInstance.headerGroups.map((headerGroup, index) => (
-        <RTM_TableHeadRow
+        <MRT_TableHeadRow
           key={`${index}-${headerGroup.id}`}
           headerGroup={headerGroup}
         />

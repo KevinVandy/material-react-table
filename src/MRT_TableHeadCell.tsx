@@ -6,7 +6,7 @@ interface Props {
   column: HeaderGroup;
 }
 
-export const RTM_TableHeadCell: FC<Props> = ({ column }) => {
+export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
   const isParentHeader = (column?.columns?.length ?? 0) > 0;
 
   return (

@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { TableFooter } from '@mui/material';
-import { RTM_TableFooterRow } from './RTM_TableFooterRow';
-import { useReactTableMui } from './useReactTableMui';
-import { RTM_TablePagination } from './RTM_TablePagination';
+import { MRT_TableFooterRow } from './MRT_TableFooterRow';
+import { useMaterialReactTable } from './useMaterialReactTable';
+import { MRT_TablePagination } from './MRT_TablePagination';
 
 interface Props {}
 
-export const RTM_TableFooter: FC<Props> = () => {
-  const { tableInstance, tableFooterProps, options } = useReactTableMui();
+export const MRT_TableFooter: FC<Props> = () => {
+  const { tableInstance, tableFooterProps, options } = useMaterialReactTable();
 
   const hasFooterGroups = tableInstance.columns.some(
     (c) => c.depth === 0 && !!c.Footer,
@@ -17,14 +17,14 @@ export const RTM_TableFooter: FC<Props> = () => {
     <TableFooter {...tableFooterProps}>
       {hasFooterGroups &&
         tableInstance.footerGroups.map((footerGroup, index) => (
-          <RTM_TableFooterRow
+          <MRT_TableFooterRow
             key={`${index}-${footerGroup.id}`}
             footerGroup={footerGroup}
           />
         ))}
       {options.enablePagination === true ||
         (['bottom', 'both'].includes(options.enablePagination.toString()) && (
-          <RTM_TablePagination />
+          <MRT_TablePagination />
         ))}
     </TableFooter>
   );

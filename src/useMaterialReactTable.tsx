@@ -7,26 +7,26 @@ import {
   useTable,
 } from 'react-table';
 import {
-  ReactTableMuiOptionalProps,
-  ReactTableMuiOptions,
-  ReactTableMuiProps,
+  MaterialReactTableOptionalProps,
+  MaterialReactTableOptions,
+  MaterialReactTableProps,
 } from '.';
 import { defaultOptions } from './defaults';
 
-interface IUseReactTableMui extends ReactTableMuiOptionalProps {
+interface IUseMaterialReactTable extends MaterialReactTableOptionalProps {
   tableInstance: TableInstance<object>;
-  options: ReactTableMuiOptions;
+  options: MaterialReactTableOptions;
 }
 
-const ReactTableMuiContext = createContext<IUseReactTableMui>(
-  {} as IUseReactTableMui,
+const MaterialReactTableContext = createContext<IUseMaterialReactTable>(
+  {} as IUseMaterialReactTable,
 );
 
-interface ProviderProps extends ReactTableMuiProps {
+interface ProviderProps extends MaterialReactTableProps {
   children: React.ReactNode;
 }
 
-export const ReactTableMuiProvider: FC<ProviderProps> = ({
+export const MaterialReactTableProvider: FC<ProviderProps> = ({
   children,
   columns,
   data,
@@ -41,7 +41,7 @@ export const ReactTableMuiProvider: FC<ProviderProps> = ({
   );
 
   return (
-    <ReactTableMuiContext.Provider
+    <MaterialReactTableContext.Provider
       value={{
         options: { ...defaultOptions, ...options },
         tableInstance,
@@ -49,9 +49,9 @@ export const ReactTableMuiProvider: FC<ProviderProps> = ({
       }}
     >
       {children}
-    </ReactTableMuiContext.Provider>
+    </MaterialReactTableContext.Provider>
   );
 };
 
-export const useReactTableMui = (): IUseReactTableMui =>
-  useContext(ReactTableMuiContext);
+export const useMaterialReactTable = (): IUseMaterialReactTable =>
+  useContext(MaterialReactTableContext);

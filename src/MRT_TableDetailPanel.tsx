@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import { Collapse, TableCell, TableRow } from '@mui/material';
 import { Row } from 'react-table';
-import { useReactTableMui } from './useReactTableMui';
+import { useMaterialReactTable } from './useMaterialReactTable';
 
 interface Props {
   row: Row<object>;
 }
 
-export const RTM_TableDetailPanel: FC<Props> = ({ row }) => {
-  const { tableInstance, renderDetailPanel } = useReactTableMui();
+export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
+  const { tableInstance, renderDetailPanel } = useMaterialReactTable();
 
   return (
     <TableRow {...row.getToggleRowExpandedProps()}>

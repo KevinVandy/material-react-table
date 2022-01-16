@@ -1,21 +1,21 @@
 import React, { FC } from 'react';
 import { TableCell, TableRow } from '@mui/material';
 import { HeaderGroup } from 'react-table';
-import { RTM_TableFooterCell } from './RTM_TableFooterCell';
-import { useReactTableMui } from './useReactTableMui';
+import { MRT_TableFooterCell } from './MRT_TableFooterCell';
+import { useMaterialReactTable } from './useMaterialReactTable';
 
 interface Props {
   footerGroup: HeaderGroup<object>;
 }
 
-export const RTM_TableFooterRow: FC<Props> = ({ footerGroup }) => {
-  const { renderDetailPanel } = useReactTableMui();
+export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
+  const { renderDetailPanel } = useMaterialReactTable();
 
   return (
     <TableRow {...footerGroup.getFooterGroupProps()}>
       {renderDetailPanel && <TableCell style={{ width: '2rem' }} />}
       {footerGroup.headers.map((column, index) => (
-        <RTM_TableFooterCell key={`${index}-${column.id}`} column={column} />
+        <MRT_TableFooterCell key={`${index}-${column.id}`} column={column} />
       ))}
     </TableRow>
   );

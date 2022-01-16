@@ -1,1 +1,1 @@
-export * from './ReactTableMui';
+export * from './MaterialReactTable';
