@@ -1,5 +1,11 @@
 import React, { createContext, FC, useContext } from 'react';
-import { TableInstance, usePagination, useSortBy, useTable } from 'react-table';
+import {
+  TableInstance,
+  useExpanded,
+  usePagination,
+  useSortBy,
+  useTable,
+} from 'react-table';
 import {
   ReactTableMuiOptionalProps,
   ReactTableMuiOptions,
@@ -27,7 +33,12 @@ export const ReactTableMuiProvider: FC<ProviderProps> = ({
   options,
   ...rest
 }) => {
-  const tableInstance = useTable({ columns, data }, useSortBy, usePagination);
+  const tableInstance = useTable(
+    { columns, data },
+    useSortBy,
+    useExpanded,
+    usePagination,
+  );
 
   return (
     <ReactTableMuiContext.Provider

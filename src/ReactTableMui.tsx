@@ -28,6 +28,7 @@ export interface ReactTableMuiOptionalProps {
   tableHeadProps?: TableHeadProps;
   tablePaginationProps?: TablePaginationProps;
   tableProps?: TableProps;
+  renderDetailPanel?: (rowData: any) => React.ReactNode;
 }
 
 export interface ReactTableMuiProps extends ReactTableMuiOptionalProps {

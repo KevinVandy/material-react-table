@@ -15,6 +15,7 @@ export const RTM_TablePagination: FC<Props> = () => {
   return (
     <TableRow>
       <TablePagination
+        colSpan={tableInstance.visibleColumns.length + 10}
         count={tableInstance.rows.length}
         onPageChange={(_, newPage) => tableInstance.gotoPage(newPage)}
         onRowsPerPageChange={handleChangeRowsPerPage}

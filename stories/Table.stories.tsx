@@ -11,7 +11,10 @@ const meta: Meta = {
 export default meta;
 
 const Template: Story<ReactTableMuiProps> = (args) => (
-  <ReactTableMui {...args} />
+  <ReactTableMui
+    renderDetailPanel={(rowData) => <div>Hello There, General Kenobil</div>}
+    {...args}
+  />
 );
 
 export const Default = Template.bind({});
@@ -27,6 +30,10 @@ Default.args = {
       accessor: 'lastName',
     },
     {
+      Header: 'Age',
+      accessor: 'age',
+    },
+    {
       Header: 'Address',
       accessor: 'address',
     },
@@ -34,6 +41,7 @@ Default.args = {
   data: [...Array(21)].map((_) => ({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
+    age: faker.datatype.number(80),
     address: faker.address.streetAddress(),
   })),
 };
