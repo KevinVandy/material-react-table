@@ -1,5 +1,9 @@
 import React, { FC } from 'react';
-import { styled, TableCell as MuiTableCell } from '@mui/material';
+import {
+  styled,
+  TableCell as MuiTableCell,
+  TableSortLabel,
+} from '@mui/material';
 import { HeaderGroup } from 'react-table';
 
 const TableCell = styled(MuiTableCell)({
@@ -17,9 +21,14 @@ export const RTM_TableHeadCell: FC<Props> = ({ column }) => {
     <TableCell
       align={isParentHeader ? 'center' : 'left'}
       variant="head"
-      {...column.getHeaderProps()}
+      {...column.getHeaderProps(column.getSortByToggleProps())}
     >
-      {column.render('Header')}
+      <TableSortLabel
+        active={column.isSorted}
+        direction={column.isSortedDesc && column.isSortedDesc ? 'desc' : 'asc'}
+      >
+        {column.render('Header')}
+      </TableSortLabel>
     </TableCell>
   );
 };
