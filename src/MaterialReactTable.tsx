@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { Column } from 'react-table';
 import { MaterialReactTableProvider } from './useMaterialReactTable';
-import { MRT_TableContainer } from './MRT_TableContainer';
+import { MRT_TableContainer } from './table/MRT_TableContainer';
 import { defaultOptions } from './defaults';
 
 export interface MaterialReactTableOptions {

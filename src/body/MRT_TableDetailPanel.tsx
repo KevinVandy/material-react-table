@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Collapse, TableCell, TableRow } from '@mui/material';
 import { Row } from 'react-table';
-import { useMaterialReactTable } from './useMaterialReactTable';
+import { useMaterialReactTable } from '../useMaterialReactTable';
 
 interface Props {
   row: Row<object>;

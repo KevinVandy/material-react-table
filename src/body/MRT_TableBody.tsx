@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { TableBody } from '@mui/material';
 import { MRT_TableBodyRow } from './MRT_TableBodyRow';
-import { useMaterialReactTable } from './useMaterialReactTable';
+import { useMaterialReactTable } from '../useMaterialReactTable';
 
 interface Props {}
 

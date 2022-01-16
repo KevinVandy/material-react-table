@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { TableCell, TableRow } from '@mui/material';
 import { HeaderGroup } from 'react-table';
 import { MRT_TableHeadCell } from './MRT_TableHeadCell';
-import { useMaterialReactTable } from './useMaterialReactTable';
+import { useMaterialReactTable } from '../useMaterialReactTable';
 
 interface Props {
   headerGroup: HeaderGroup<object>;

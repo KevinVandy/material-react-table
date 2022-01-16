@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Paper, TableContainer } from '@mui/material';
-import { useMaterialReactTable } from './useMaterialReactTable';
+import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_Table } from './MRT_Table';
 
 interface Props {}

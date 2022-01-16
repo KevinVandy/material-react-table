@@ -3,6 +3,7 @@ import {
   TableInstance,
   useExpanded,
   usePagination,
+  useRowSelect,
   useSortBy,
   useTable,
 } from 'react-table';
@@ -38,6 +39,7 @@ export const MaterialReactTableProvider: FC<ProviderProps> = ({
     useSortBy,
     useExpanded,
     usePagination,
+    useRowSelect
   );
 
   return (

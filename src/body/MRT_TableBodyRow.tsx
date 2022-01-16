@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import { TableRow } from '@mui/material';
 import { Row } from 'react-table';
 import { MRT_TableBodyCell } from './MRT_TableBodyCell';
-import { useMaterialReactTable } from './useMaterialReactTable';
+import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
-import { MRT_TableExpandButton } from './MRT_TableExpandButton';
+import { MRT_TableExpandButton } from '../inputs/MRT_TableExpandButton';
 
 interface Props {
   row: Row<object>;

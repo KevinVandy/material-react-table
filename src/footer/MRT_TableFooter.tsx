@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { TableFooter } from '@mui/material';
 import { MRT_TableFooterRow } from './MRT_TableFooterRow';
-import { useMaterialReactTable } from './useMaterialReactTable';
-import { MRT_TablePagination } from './MRT_TablePagination';
+import { useMaterialReactTable } from '../useMaterialReactTable';
+import { MRT_TablePagination } from '../toolbar/MRT_TablePagination';
 
 interface Props {}
 

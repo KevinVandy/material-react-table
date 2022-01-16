@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC } from 'react';
 import { TablePagination, TableRow } from '@mui/material';
-import { useMaterialReactTable } from './useMaterialReactTable';
+import { useMaterialReactTable } from '../useMaterialReactTable';
 
 interface Props {}
 
