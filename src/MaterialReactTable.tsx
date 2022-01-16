@@ -47,7 +47,6 @@ export const MaterialReactTable: FC<MaterialReactTableProps> = ({
   positionPagination = 'bottom',
   showFooter = true,
   showHead = true,
-  showToolbar = false,
   ...rest
 }) => {
   return (
@@ -59,7 +58,6 @@ export const MaterialReactTable: FC<MaterialReactTableProps> = ({
       positionPagination={positionPagination}
       showFooter={showFooter}
       showHead={showHead}
-      showToolbar={showToolbar}
       {...rest}
     >
       <MRT_TableContainer />
