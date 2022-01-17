@@ -4,7 +4,7 @@ import { MaterialReactTable, MaterialReactTableProps } from '../src';
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
-  title: 'Playground',
+  title: 'Prop Playground',
   component: MaterialReactTable,
 };
 

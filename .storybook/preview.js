@@ -1,6 +1,12 @@
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { ThemeProvider as Emotion10ThemeProvider } from 'emotion-theming';
-// import { muiTheme } from 'storybook-addon-material-ui';
+import { withPerformance } from 'storybook-addon-performance';
+import { setConsoleOptions } from '@storybook/addon-console';
+import { withConsole } from '@storybook/addon-console';
+
+setConsoleOptions({
+  panelExclude: [],
+});
 
 export const parameters = {
   actions: { argTypesRegex: '^on.*' },
@@ -19,4 +25,6 @@ const withThemeProvider = (Story, context) => {
   );
 };
 
-export const decorators = [withThemeProvider];
+const console = (storyFn, context) => withConsole()(storyFn)(context);
+
+export const decorators = [withThemeProvider, withPerformance, console];

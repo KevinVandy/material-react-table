@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent, ReactNode } from 'react';
+import React, { ChangeEvent, FC, MouseEvent, ReactNode } from 'react';
 import {
   TableContainerProps,
   TableFooterProps,
@@ -6,7 +6,7 @@ import {
   TablePaginationProps,
   TableProps,
 } from '@mui/material';
-import { Column, Row } from 'react-table';
+import { Column, Row, UseRowStateLocalState } from 'react-table';
 import { MaterialReactTableProvider } from './useMaterialReactTable';
 import { MRT_TableContainer } from './table/MRT_TableContainer';
 
@@ -20,6 +20,10 @@ export interface MaterialReactTableOptionalProps {
   onRowClick?: (
     event: MouseEvent<HTMLTableRowElement>,
     rowData: Row<object>,
+  ) => void;
+  onRowSelectChange?: (
+    event: ChangeEvent,
+    rowState: UseRowStateLocalState<object, unknown>,
   ) => void;
   positionPagination?: 'bottom' | 'top' | 'both';
   renderDetailPanel?: (rowData: Row<object>) => ReactNode;
