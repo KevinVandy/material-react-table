@@ -2,6 +2,8 @@ import React, { createContext, FC, useContext } from 'react';
 import {
   TableInstance,
   useExpanded,
+  useFilters,
+  useGlobalFilter,
   usePagination,
   useRowSelect,
   useSortBy,
@@ -29,6 +31,8 @@ export const MaterialReactTableProvider: FC<ProviderProps> = ({
 }) => {
   const tableInstance = useTable(
     { columns, data },
+    useFilters,
+    useGlobalFilter,
     useSortBy,
     useExpanded,
     usePagination,

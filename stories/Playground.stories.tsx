@@ -35,7 +35,7 @@ Default.args = {
       accessor: 'address',
     },
   ],
-  data: [...Array(21)].map((_) => ({
+  data: [...Array(3)].map((_) => ({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     age: faker.datatype.number(80),

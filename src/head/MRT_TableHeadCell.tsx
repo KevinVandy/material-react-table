@@ -5,6 +5,8 @@ import {
   styled,
 } from '@mui/material';
 import { HeaderGroup } from 'react-table';
+import { useMaterialReactTable } from '../useMaterialReactTable';
+import { MRT_FilterTextfield } from '../inputs/MRT_FilterTextField';
 
 const TableCell = styled(MuiTableCell)({
   fontWeight: 'bold',
@@ -15,16 +17,17 @@ interface Props {
 }
 
 export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
+  const { enableFiltering } = useMaterialReactTable();
+
   const isParentHeader = (column?.columns?.length ?? 0) > 0;
 
   return (
     <TableCell
       align={isParentHeader ? 'center' : 'left'}
-      style={{ fontWeight: 'bold !important' }}
       variant="head"
       {...column.getHeaderProps(column.getSortByToggleProps())}
     >
-      {!isParentHeader ? (
+      {!isParentHeader && column.canSort ? (
         <TableSortLabel
           active={column.isSorted}
           direction={
@@ -35,6 +38,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
         </TableSortLabel>
       ) : (
         column.render('Header')
+      )}
+      {enableFiltering && column.canFilter && (
+        <MRT_FilterTextfield column={column} />
       )}
     </TableCell>
   );

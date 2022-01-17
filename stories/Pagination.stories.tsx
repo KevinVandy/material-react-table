@@ -4,7 +4,7 @@ import { MaterialReactTable, MaterialReactTableProps } from '../src';
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
-  title: 'Examples/Pagination Examples',
+  title: 'Feature Examples/Pagination Examples',
 };
 
 export default meta;

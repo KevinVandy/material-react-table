@@ -5,6 +5,8 @@ import {
   TableHeadProps,
   TablePaginationProps,
   TableProps,
+  TextFieldProps,
+  TypographyProps,
 } from '@mui/material';
 import { Column, Row, UseRowStateLocalState } from 'react-table';
 import { MaterialReactTableProvider } from './useMaterialReactTable';
@@ -13,7 +15,7 @@ import { MRT_TableContainer } from './table/MRT_TableContainer';
 export interface MaterialReactTableProps {
   columns: Column[];
   data: any[];
-  enableFilters?: boolean;
+  enableFiltering?: boolean;
   enablePagination?: boolean;
   enableSearch?: boolean;
   enableSelectAll?: boolean;
@@ -37,11 +39,13 @@ export interface MaterialReactTableProps {
   tableFooterProps?: TableFooterProps;
   tableHeadProps?: TableHeadProps;
   tablePaginationProps?: TablePaginationProps;
+  tableSearchTextfieldProps?: TextFieldProps;
   tableProps?: TableProps;
+  tableTitleProps?: TypographyProps;
+  title?: string | ReactNode;
 }
 
 export const MaterialReactTable: FC<MaterialReactTableProps> = ({
-  enableFilters = true,
   enablePagination = true,
   enableSearch = true,
   enableSorting = true,
@@ -52,7 +56,6 @@ export const MaterialReactTable: FC<MaterialReactTableProps> = ({
 }) => {
   return (
     <MaterialReactTableProvider
-      enableFilters={enableFilters}
       enablePagination={enablePagination}
       enableSearch={enableSearch}
       enableSorting={enableSorting}

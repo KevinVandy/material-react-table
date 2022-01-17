@@ -4,7 +4,7 @@ import { MaterialReactTable, MaterialReactTableProps } from '../src';
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
-  title: 'Examples/Header Groups Examples',
+  title: 'Feature Examples/Header Groups Examples',
 };
 
 export default meta;
