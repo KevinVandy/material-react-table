@@ -42,7 +42,7 @@ export const MRT_SearchTextField: FC<Props> = () => {
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <SearchIcon />
+            <SearchIcon fontSize="small" />
           </InputAdornment>
         ),
         endAdornment: (

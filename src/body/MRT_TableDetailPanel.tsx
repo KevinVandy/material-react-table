@@ -15,9 +15,10 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
       <TableCell
         colSpan={tableInstance.visibleColumns.length + 10}
         style={{
+          borderBottom: !row.isExpanded ? 'none' : undefined,
           paddingBottom: row.isExpanded ? '1rem' : 0,
           paddingTop: row.isExpanded ? '1rem' : 0,
-          transition: 'padding 0.2s',
+          transition: 'all 0.2s',
         }}
       >
         <Collapse in={row.isExpanded}>{renderDetailPanel?.(row)}</Collapse>

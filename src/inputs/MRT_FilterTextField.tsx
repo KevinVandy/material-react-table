@@ -22,6 +22,7 @@ export const MRT_FilterTextfield: FC<Props> = ({ column }) => {
 
   return (
     <TextField
+      margin="dense"
       placeholder="Filter"
       onChange={(e: ChangeEvent<HTMLInputElement>) => {
         setFilterValue(e.target.value);
