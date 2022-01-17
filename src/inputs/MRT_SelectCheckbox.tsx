@@ -8,11 +8,11 @@ interface Props {
 }
 
 export const MRT_SelectCheckbox: FC<Props> = ({ row }) => {
-  const {onRowSelectChange} = useMaterialReactTable()
+  const { tableInstance, onRowSelectChange } = useMaterialReactTable();
 
   const onSelectChange = (event: ChangeEvent) => {
     row.getToggleRowSelectedProps()?.onChange?.(event);
-    onRowSelectChange?.(event, row.state);
+    onRowSelectChange?.(event, row.state, tableInstance.selectedFlatRows);
   };
 
   return (

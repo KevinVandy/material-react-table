@@ -10,7 +10,9 @@ import { Column, Row, UseRowStateLocalState } from 'react-table';
 import { MaterialReactTableProvider } from './useMaterialReactTable';
 import { MRT_TableContainer } from './table/MRT_TableContainer';
 
-export interface MaterialReactTableOptionalProps {
+export interface MaterialReactTableProps {
+  columns: Column[];
+  data: any[];
   enableFilters?: boolean;
   enablePagination?: boolean;
   enableSearch?: boolean;
@@ -24,6 +26,7 @@ export interface MaterialReactTableOptionalProps {
   onRowSelectChange?: (
     event: ChangeEvent,
     rowState: UseRowStateLocalState<object, unknown>,
+    selectedRows: Row<object>[],
   ) => void;
   positionPagination?: 'bottom' | 'top' | 'both';
   renderDetailPanel?: (rowData: Row<object>) => ReactNode;
@@ -35,12 +38,6 @@ export interface MaterialReactTableOptionalProps {
   tableHeadProps?: TableHeadProps;
   tablePaginationProps?: TablePaginationProps;
   tableProps?: TableProps;
-}
-
-export interface MaterialReactTableProps
-  extends MaterialReactTableOptionalProps {
-  columns: Column[];
-  data: any[];
 }
 
 export const MaterialReactTable: FC<MaterialReactTableProps> = ({

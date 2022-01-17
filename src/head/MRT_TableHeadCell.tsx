@@ -1,6 +1,14 @@
 import React, { FC } from 'react';
-import { TableCell, TableSortLabel } from '@mui/material';
+import {
+  TableCell as MuiTableCell,
+  TableSortLabel,
+  styled,
+} from '@mui/material';
 import { HeaderGroup } from 'react-table';
+
+const TableCell = styled(MuiTableCell)({
+  fontWeight: 'bold',
+});
 
 interface Props {
   column: HeaderGroup;
@@ -16,12 +24,18 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
       variant="head"
       {...column.getHeaderProps(column.getSortByToggleProps())}
     >
-      <TableSortLabel
-        active={column.isSorted}
-        direction={column.isSortedDesc && column.isSortedDesc ? 'desc' : 'asc'}
-      >
-        {column.render('Header')}
-      </TableSortLabel>
+      {!isParentHeader ? (
+        <TableSortLabel
+          active={column.isSorted}
+          direction={
+            column.isSortedDesc && column.isSortedDesc ? 'desc' : 'asc'
+          }
+        >
+          {column.render('Header')}
+        </TableSortLabel>
+      ) : (
+        column.render('Header')
+      )}
     </TableCell>
   );
 };

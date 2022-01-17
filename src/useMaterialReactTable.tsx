@@ -7,9 +7,9 @@ import {
   useSortBy,
   useTable,
 } from 'react-table';
-import { MaterialReactTableOptionalProps, MaterialReactTableProps } from '.';
+import { MaterialReactTableProps } from '.';
 
-interface IUseMaterialReactTable extends MaterialReactTableOptionalProps {
+interface IUseMaterialReactTable extends MaterialReactTableProps {
   tableInstance: TableInstance<object>;
 }
 
@@ -38,6 +38,8 @@ export const MaterialReactTableProvider: FC<ProviderProps> = ({
   return (
     <MaterialReactTableContext.Provider
       value={{
+        columns,
+        data,
         tableInstance,
         ...rest,
       }}

@@ -12,7 +12,7 @@ interface Props {
 
 export const MRT_TableFooterCell: FC<Props> = ({ column }) => {
   const isParentHeader = (column?.columns?.length ?? 0) > 0;
-
+console.log('g', column.getFooterProps())
   return (
     <TableCell
       align={isParentHeader ? 'center' : 'left'}
