@@ -1,4 +1,9 @@
-import React, { createContext, FC, useContext } from 'react';
+import React, {
+  Context,
+  createContext,
+  PropsWithChildren,
+  useContext,
+} from 'react';
 import {
   TableInstance,
   useExpanded,
@@ -11,24 +16,22 @@ import {
 } from 'react-table';
 import { MaterialReactTableProps } from '.';
 
-interface IUseMaterialReactTable extends MaterialReactTableProps {
-  tableInstance: TableInstance<object>;
+interface UseMaterialReactTable<D extends {}>
+  extends MaterialReactTableProps<D> {
+  tableInstance: TableInstance<D>;
 }
 
-const MaterialReactTableContext = createContext<IUseMaterialReactTable>(
-  {} as IUseMaterialReactTable,
-);
+const MaterialReactTableContext = (<D extends {}>() =>
+  createContext<UseMaterialReactTable<D>>(
+    {} as UseMaterialReactTable<D>,
+  ) as Context<UseMaterialReactTable<D>>)();
 
-interface ProviderProps extends MaterialReactTableProps {
-  children: React.ReactNode;
-}
-
-export const MaterialReactTableProvider: FC<ProviderProps> = ({
+export const MaterialReactTableProvider = <D extends {}>({
   children,
   columns,
   data,
   ...rest
-}) => {
+}: PropsWithChildren<MaterialReactTableProps<D>>) => {
   const tableInstance = useTable(
     { columns, data },
     useFilters,
@@ -41,6 +44,7 @@ export const MaterialReactTableProvider: FC<ProviderProps> = ({
 
   return (
     <MaterialReactTableContext.Provider
+      //@ts-ignore
       value={{
         columns,
         data,
@@ -53,5 +57,8 @@ export const MaterialReactTableProvider: FC<ProviderProps> = ({
   );
 };
 
-export const useMaterialReactTable = (): IUseMaterialReactTable =>
-  useContext(MaterialReactTableContext);
+export const useMaterialReactTable = <
+  D extends {},
+>(): UseMaterialReactTable<D> =>
+  //@ts-ignore
+  useContext<UseMaterialReactTable<D>>(MaterialReactTableContext);
