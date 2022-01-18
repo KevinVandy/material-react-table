@@ -2,17 +2,22 @@ import React, { FC } from 'react';
 import { TableFooter } from '@mui/material';
 import { MRT_TableFooterRow } from './MRT_TableFooterRow';
 import { useMaterialReactTable } from '../useMaterialReactTable';
-import { MRT_TablePagination } from '../toolbar/MRT_TablePagination';
+import { MRT_TablePagination } from './MRT_TablePagination';
 
 interface Props {}
 
 export const MRT_TableFooter: FC<Props> = () => {
   const {
-    tableInstance,
-    tableFooterProps,
+    OverrideTableFooterComponent,
     enablePagination,
     positionPagination,
+    tableFooterProps,
+    tableInstance,
   } = useMaterialReactTable();
+
+  if (OverrideTableFooterComponent) {
+    return <>{OverrideTableFooterComponent(tableInstance)}</>;
+  }
 
   return (
     <TableFooter {...tableFooterProps}>

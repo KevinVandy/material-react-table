@@ -12,7 +12,17 @@ interface Props {
 }
 
 export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
-  const { renderDetailPanel, onRowClick, enableSelection } = useMaterialReactTable();
+  const {
+    OverrideTableBodyRowComponent,
+    enableSelection,
+    onRowClick,
+    renderDetailPanel,
+    tableInstance,
+  } = useMaterialReactTable();
+
+  if (OverrideTableBodyRowComponent) {
+    return <>{OverrideTableBodyRowComponent(row, tableInstance)}</>;
+  }
 
   return (
     <>

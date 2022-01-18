@@ -6,7 +6,11 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 interface Props {}
 
 export const MRT_TableBody: FC<Props> = () => {
-  const { tableInstance, enablePagination } = useMaterialReactTable();
+  const { tableInstance, enablePagination, OverrideTableBodyComponent } = useMaterialReactTable();
+
+  if (OverrideTableBodyComponent) {
+    return <>{OverrideTableBodyComponent(tableInstance)}</>;
+  }
 
   const rows = enablePagination ? tableInstance.page : tableInstance.rows;
 

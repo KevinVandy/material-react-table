@@ -8,7 +8,15 @@ interface Props {
 }
 
 export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
-  const { tableInstance, renderDetailPanel } = useMaterialReactTable();
+  const {
+    tableInstance,
+    renderDetailPanel,
+    OverrideTableDetailPanelComponent,
+  } = useMaterialReactTable();
+
+  if (OverrideTableDetailPanelComponent) {
+    return <>{OverrideTableDetailPanelComponent(row, tableInstance)}</>;
+  }
 
   return (
     <TableRow {...row.getToggleRowExpandedProps()}>

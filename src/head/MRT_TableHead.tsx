@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { TableHead } from '@mui/material';
 import { MRT_TableHeadRow } from './MRT_TableHeadRow';
 import { useMaterialReactTable } from '../useMaterialReactTable';
-import { MRT_TablePagination } from '../toolbar/MRT_TablePagination';
+import { MRT_TablePagination } from '../footer/MRT_TablePagination';
 
 interface Props {}
 

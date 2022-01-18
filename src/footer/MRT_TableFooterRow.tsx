@@ -9,12 +9,23 @@ interface Props {
 }
 
 export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
-  const { renderDetailPanel, columns } = useMaterialReactTable();
+  const {
+    renderDetailPanel,
+    columns,
+    enableSelection,
+    tableInstance,
+    OverrideTableFooterRowComponent,
+  } = useMaterialReactTable();
 
   if (!columns.some((c) => c.Footer)) return null;
 
+  if (OverrideTableFooterRowComponent) {
+    return <>{OverrideTableFooterRowComponent(footerGroup, tableInstance)}</>;
+  }
+
   return (
     <TableRow {...footerGroup.getFooterGroupProps()}>
+      {enableSelection && <TableCell style={{ width: '2rem' }} />}
       {renderDetailPanel && <TableCell style={{ width: '2rem' }} />}
       {footerGroup.headers.map((column, index) => (
         <MRT_TableFooterCell key={`${index}-${column.id}`} column={column} />

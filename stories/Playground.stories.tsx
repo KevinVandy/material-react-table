@@ -42,3 +42,88 @@ Default.args = {
     address: faker.address.streetAddress(),
   })),
 };
+
+export const MinimumFeatures = Template.bind({});
+
+MinimumFeatures.args = {
+  columns: [
+    {
+      Header: 'First Name',
+      accessor: 'firstName',
+    },
+    {
+      Header: 'Last Name',
+      accessor: 'lastName',
+    },
+    {
+      Header: 'Age',
+      accessor: 'age',
+    },
+    {
+      Header: 'Address',
+      accessor: 'address',
+    },
+  ],
+  data: [...Array(6)].map((_) => ({
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    age: faker.datatype.number(80),
+    address: faker.address.streetAddress(),
+  })),
+  enablePagination: false,
+  enableSorting: false,
+  showFooter: false,
+  showHead: false,
+};
+
+const maxFeaturesData = [...Array(21)].map((_) => ({
+  firstName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
+  age: faker.datatype.number(80),
+  address: faker.address.streetAddress(),
+}));
+
+export const MaximumFeatures = Template.bind({});
+
+MaximumFeatures.args = {
+  columns: [
+    {
+      Header: 'Name',
+      Footer: 'Footer',
+      columns: [
+        {
+          Header: 'First Name',
+          Footer: 'First Name',
+          accessor: 'firstName',
+        },
+        {
+          Header: 'Last Name',
+          Footer: 'Last Name',
+          accessor: 'lastName',
+        },
+      ],
+    },
+    {
+      Header: 'Info',
+      Footer: 'Info',
+      columns: [
+        {
+          Header: 'Age',
+          Footer: 'Age',
+          accessor: 'age',
+        },
+        {
+          Header: 'Address',
+          Footer: 'Address',
+          accessor: 'address',
+        },
+      ],
+    },
+  ],
+  data: maxFeaturesData,
+  enableFiltering: true,
+  enableSelectAll: true,
+  enableSelection: true,
+  showToolbar: true,
+  title: 'Kitchen Sink',
+};

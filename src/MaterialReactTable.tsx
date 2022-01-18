@@ -8,7 +8,14 @@ import {
   TextFieldProps,
   TypographyProps,
 } from '@mui/material';
-import { Column, Row, UseRowStateLocalState } from 'react-table';
+import {
+  Cell,
+  Column,
+  HeaderGroup,
+  Row,
+  TableInstance,
+  UseRowStateLocalState,
+} from 'react-table';
 import { MaterialReactTableProvider } from './useMaterialReactTable';
 import { MRT_TableContainer } from './table/MRT_TableContainer';
 
@@ -39,10 +46,37 @@ export interface MaterialReactTableProps<D extends {} = {}> {
   tableFooterProps?: TableFooterProps;
   tableHeadProps?: TableHeadProps;
   tablePaginationProps?: TablePaginationProps;
-  tableSearchTextfieldProps?: TextFieldProps;
   tableProps?: TableProps;
+  tableSearchTextfieldProps?: TextFieldProps;
   tableTitleProps?: TypographyProps;
   title?: string | ReactNode;
+  OverrideTableBodyCellComponent?(
+    cell: Cell<D>,
+    tableInstance: TableInstance<D>,
+  ): ReactNode;
+  OverrideTableBodyComponent?(tableInstance: TableInstance<D>): ReactNode;
+  OverrideTableBodyRowComponent?(
+    row: Row<D>,
+    tableInstance: TableInstance<D>,
+  ): ReactNode;
+  OverrideTableContainerComponent?(tableInstance: TableInstance<D>): ReactNode;
+  OverrideTableDetailPanelComponent?(
+    row: Row<D>,
+    tableInstance: TableInstance<D>,
+  ): ReactNode;
+  OverrideTableFooterComponent?(tableInstance: TableInstance<D>): ReactNode;
+  OverrideTableFooterCellComponent?(
+    column: HeaderGroup<D>,
+    tableInstance: TableInstance<D>,
+  ): ReactNode;
+  OverrideTableFooterRowComponent?(
+    footerGroup: HeaderGroup<D>,
+    tableInstance: TableInstance<D>,
+  ): ReactNode;
+  OverrideTableHeadComponent?(tableInstance: TableInstance<D>): ReactNode;
+  OverrideTableHeadRowComponent?(tableInstance: TableInstance<D>): ReactNode;
+  OverrideTablePaginationComponent?(tableInstance: TableInstance<D>): ReactNode;
+  OverrideTableToolbarComponent?(tableInstance: TableInstance<D>): ReactNode;
 }
 
 export const MaterialReactTable = <D extends {}>({

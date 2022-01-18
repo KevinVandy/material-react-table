@@ -22,7 +22,7 @@ export const MRT_SearchTextField: FC<Props> = () => {
   const [searchValue, setSearchValue] = useState('');
 
   const handleChange = useAsyncDebounce((value) => {
-    tableInstance.setGlobalFilter(value || undefined);
+    tableInstance.setGlobalFilter(value ?? undefined);
   }, 200);
 
   const handleClear = () => {
@@ -47,7 +47,11 @@ export const MRT_SearchTextField: FC<Props> = () => {
         ),
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton onClick={handleClear} size="small">
+            <IconButton
+              disabled={searchValue?.length === 0}
+              onClick={handleClear}
+              size="small"
+            >
               <CloseIcon fontSize="small" />
             </IconButton>
           </InputAdornment>

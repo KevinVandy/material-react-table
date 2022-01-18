@@ -39,7 +39,11 @@ export const MRT_FilterTextfield: FC<Props> = ({ column }) => {
         ),
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton onClick={handleClear} size="small">
+            <IconButton
+              disabled={filterValue?.length === 0}
+              onClick={handleClear}
+              size="small"
+            >
               <CloseIcon fontSize="small" />
             </IconButton>
           </InputAdornment>

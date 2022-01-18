@@ -12,7 +12,17 @@ const Toolbar = styled(MuiToolbar)({
 interface Props {}
 
 export const MRT_Toolbar: FC<Props> = () => {
-  const { enableSearch, title, tableTitleProps } = useMaterialReactTable();
+  const {
+    enableSearch,
+    title,
+    tableTitleProps,
+    OverrideTableToolbarComponent,
+    tableInstance,
+  } = useMaterialReactTable();
+
+  if (OverrideTableToolbarComponent) {
+    return <>{OverrideTableToolbarComponent(tableInstance)}</>;
+  }
 
   return (
     <Toolbar>

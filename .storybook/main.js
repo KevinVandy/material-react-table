@@ -5,7 +5,7 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-a11y',
     '@storybook/addon-storysource',
-    'storybook-addon-performance/register'
+    'storybook-addon-performance/register',
   ],
   typescript: {
     check: true,

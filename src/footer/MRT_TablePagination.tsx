@@ -5,12 +5,17 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 interface Props {}
 
 export const MRT_TablePagination: FC<Props> = () => {
-  const { tableInstance, tablePaginationProps } = useMaterialReactTable();
+  const { tableInstance, tablePaginationProps, OverrideTablePaginationComponent } =
+    useMaterialReactTable();
 
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     tableInstance.setPageSize(+event.target.value);
     tableInstance.gotoPage(0);
   };
+
+  if (OverrideTablePaginationComponent) {
+    return <>{OverrideTablePaginationComponent(tableInstance)}</>;
+  }
 
   return (
     <TableRow>

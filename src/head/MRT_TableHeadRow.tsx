@@ -10,12 +10,21 @@ interface Props {
 }
 
 export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
-  const { renderDetailPanel, enableSelection } =
-    useMaterialReactTable();
+  const { renderDetailPanel, enableSelection } = useMaterialReactTable();
+
+  const isParentHeader = headerGroup.headers.some(
+    (h) => (h.columns?.length ?? 0) > 0,
+  );
 
   return (
     <TableRow {...headerGroup.getHeaderGroupProps()}>
-      {enableSelection && <MRT_SelectAllCheckbox />}
+      {enableSelection ? (
+        !isParentHeader ? (
+          <MRT_SelectAllCheckbox />
+        ) : (
+          <TableCell style={{ width: '2rem' }} />
+        )
+      ) : null}
       {renderDetailPanel && <TableCell style={{ width: '2rem' }} />}
       {headerGroup.headers.map((column, index) => (
         <MRT_TableHeadCell key={`${index}-${column.id}`} column={column} />
