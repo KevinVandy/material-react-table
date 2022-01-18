@@ -8,7 +8,7 @@ import { MRT_TableExpandButton } from '../inputs/MRT_TableExpandButton';
 import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 
 interface Props {
-  row: Row<object>;
+  row: Row;
 }
 
 export const MRT_TableBodyRow: FC<Props> = ({ row }) => {

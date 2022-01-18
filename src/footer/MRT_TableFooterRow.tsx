@@ -5,7 +5,7 @@ import { MRT_TableFooterCell } from './MRT_TableFooterCell';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 
 interface Props {
-  footerGroup: HeaderGroup<object>;
+  footerGroup: HeaderGroup;
 }
 
 export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {

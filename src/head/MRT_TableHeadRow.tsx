@@ -6,7 +6,7 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_SelectAllCheckbox } from '../inputs/MRT_SelectAllCheckbox';
 
 interface Props {
-  headerGroup: HeaderGroup<object>;
+  headerGroup: HeaderGroup;
 }
 
 export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {

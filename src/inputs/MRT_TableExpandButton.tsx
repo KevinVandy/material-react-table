@@ -5,7 +5,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 // import { useMaterialReactTable } from './useMaterialReactTable';
 
 interface Props {
-  row: Row<object>;
+  row: Row;
 }
 
 export const MRT_TableExpandButton: FC<Props> = ({ row }) => {

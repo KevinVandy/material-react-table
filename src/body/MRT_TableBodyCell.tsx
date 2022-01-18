@@ -3,7 +3,7 @@ import { TableCell } from '@mui/material';
 import { Cell } from 'react-table';
 
 interface Props {
-  cell: Cell<object>;
+  cell: Cell;
 }
 
 export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {

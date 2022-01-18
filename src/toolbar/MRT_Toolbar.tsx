@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { styled, Toolbar as MuiToolbar, Typography } from '@mui/material';
 import { MRT_SearchTextField } from '../inputs/MRT_SearchTextField';
 import { useMaterialReactTable } from '../useMaterialReactTable';
@@ -9,7 +9,9 @@ const Toolbar = styled(MuiToolbar)({
   justifyContent: 'space-between',
 });
 
-export const MRT_Toolbar = () => {
+interface Props {}
+
+export const MRT_Toolbar: FC<Props> = () => {
   const { enableSearch, title, tableTitleProps } = useMaterialReactTable();
 
   return (

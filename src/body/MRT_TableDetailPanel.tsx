@@ -4,7 +4,7 @@ import { Row } from 'react-table';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 
 interface Props {
-  row: Row<object>;
+  row: Row;
 }
 
 export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
