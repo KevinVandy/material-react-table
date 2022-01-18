@@ -12,7 +12,7 @@ export const MRT_Table: FC<Props> = () => {
     useMaterialReactTable();
 
   return (
-    <Table stickyHeader {...tableProps} {...tableInstance.getTableProps()}>
+    <Table {...tableProps} {...tableInstance.getTableProps()}>
       {showHead && <MRT_TableHead />}
       <MRT_TableBody />
       {showFooter && <MRT_TableFooter />}

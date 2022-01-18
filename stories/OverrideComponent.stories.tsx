@@ -40,12 +40,14 @@ const data = [...Array(100)].map((_) => ({
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const OverrideTableToolbarComponent: Story<MaterialReactTableProps> = () => (
+export const OverrideTableToolbarComponent: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     showToolbar
-    OverrideTableToolbarComponent={(tableInstance) => (
+    OverrideTableBodyComponent={(tableInstance) => (
       <div>
         <h1>Custom Toolbar</h1>
       </div>

@@ -15,6 +15,7 @@ import {
   useTable,
 } from 'react-table';
 import { MaterialReactTableProps } from '.';
+import { showOverrideWarnings } from './utils/overrideWarnings';
 
 interface UseMaterialReactTable<D extends {}>
   extends MaterialReactTableProps<D> {
@@ -30,6 +31,7 @@ export const MaterialReactTableProvider = <D extends {}>({
   children,
   columns,
   data,
+  surpressOverrideWarnings,
   ...rest
 }: PropsWithChildren<MaterialReactTableProps<D>>) => {
   const tableInstance = useTable(
@@ -41,6 +43,10 @@ export const MaterialReactTableProvider = <D extends {}>({
     usePagination,
     useRowSelect,
   );
+
+  if (process.env.NODE_ENV !== 'production' && !surpressOverrideWarnings) {
+    showOverrideWarnings(rest);
+  }
 
   return (
     <MaterialReactTableContext.Provider

@@ -8,11 +8,16 @@ interface Props {}
 
 export const MRT_TableHead: FC<Props> = () => {
   const {
+    OverrideTableHeadComponent,
     tableInstance,
     tableHeadProps,
     enablePagination,
     positionPagination,
   } = useMaterialReactTable();
+
+  if(OverrideTableHeadComponent) {
+    return <>{OverrideTableHeadComponent(tableInstance)}</>;
+  }
 
   return (
     <TableHead {...tableHeadProps}>

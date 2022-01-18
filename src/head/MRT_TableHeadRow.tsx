@@ -10,7 +10,16 @@ interface Props {
 }
 
 export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
-  const { renderDetailPanel, enableSelection } = useMaterialReactTable();
+  const {
+    OverrideTableHeadRowComponent,
+    enableSelection,
+    renderDetailPanel,
+    tableInstance,
+  } = useMaterialReactTable();
+
+  if (OverrideTableHeadRowComponent) {
+    return <>{OverrideTableHeadRowComponent(headerGroup, tableInstance)}</>;
+  }
 
   const isParentHeader = headerGroup.headers.some(
     (h) => (h.columns?.length ?? 0) > 0,

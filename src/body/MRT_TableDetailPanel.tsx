@@ -12,6 +12,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
     tableInstance,
     renderDetailPanel,
     OverrideTableDetailPanelComponent,
+    tableDetailPanelProps,
   } = useMaterialReactTable();
 
   if (OverrideTableDetailPanelComponent) {
@@ -28,6 +29,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
           paddingTop: row.isExpanded ? '1rem' : 0,
           transition: 'all 0.2s',
         }}
+        {...tableDetailPanelProps}
       >
         <Collapse in={row.isExpanded}>{renderDetailPanel?.(row)}</Collapse>
       </TableCell>

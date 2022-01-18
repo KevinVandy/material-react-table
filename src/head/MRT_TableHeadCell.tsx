@@ -20,7 +20,12 @@ interface Props {
 }
 
 export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
-  const { enableFiltering } = useMaterialReactTable();
+  const { enableFiltering, tableInstance, OverrideTableHeadCellComponent } =
+    useMaterialReactTable();
+
+  if (OverrideTableHeadCellComponent) {
+    return <>{OverrideTableHeadCellComponent(column, tableInstance)}</>;
+  }
 
   const isParentHeader = (column?.columns?.length ?? 0) > 0;
 

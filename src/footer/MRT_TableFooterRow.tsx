@@ -17,6 +17,7 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
     OverrideTableFooterRowComponent,
   } = useMaterialReactTable();
 
+  //if no content in row, skip row
   if (!columns.some((c) => c.Footer)) return null;
 
   if (OverrideTableFooterRowComponent) {

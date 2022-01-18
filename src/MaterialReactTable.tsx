@@ -1,5 +1,7 @@
 import React, { ChangeEvent, MouseEvent, ReactNode } from 'react';
 import {
+  TableBodyProps,
+  TableCellProps,
   TableContainerProps,
   TableFooterProps,
   TableHeadProps,
@@ -42,7 +44,10 @@ export interface MaterialReactTableProps<D extends {} = {}> {
   showFooter?: boolean;
   showHead?: boolean;
   showToolbar?: boolean;
+  surpressOverrideWarnings?: boolean;
+  tableBodyProps?: TableBodyProps;
   tableContainerProps?: TableContainerProps;
+  tableDetailPanelProps?: TableCellProps;
   tableFooterProps?: TableFooterProps;
   tableHeadProps?: TableHeadProps;
   tablePaginationProps?: TablePaginationProps;
@@ -59,7 +64,6 @@ export interface MaterialReactTableProps<D extends {} = {}> {
     row: Row<D>,
     tableInstance: TableInstance<D>,
   ): ReactNode;
-  OverrideTableContainerComponent?(tableInstance: TableInstance<D>): ReactNode;
   OverrideTableDetailPanelComponent?(
     row: Row<D>,
     tableInstance: TableInstance<D>,
@@ -73,8 +77,15 @@ export interface MaterialReactTableProps<D extends {} = {}> {
     footerGroup: HeaderGroup<D>,
     tableInstance: TableInstance<D>,
   ): ReactNode;
+  OverrideTableHeadCellComponent?(
+    column: HeaderGroup<D>,
+    tableInstance: TableInstance<D>,
+  ): ReactNode;
   OverrideTableHeadComponent?(tableInstance: TableInstance<D>): ReactNode;
-  OverrideTableHeadRowComponent?(tableInstance: TableInstance<D>): ReactNode;
+  OverrideTableHeadRowComponent?(
+    headerGroup: HeaderGroup<D>,
+    tableInstance: TableInstance<D>,
+  ): ReactNode;
   OverrideTablePaginationComponent?(tableInstance: TableInstance<D>): ReactNode;
   OverrideTableToolbarComponent?(tableInstance: TableInstance<D>): ReactNode;
 }
