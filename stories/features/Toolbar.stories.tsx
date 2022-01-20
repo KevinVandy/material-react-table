@@ -1,10 +1,10 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { MaterialReactTable, MaterialReactTableProps } from '../src';
+import { MaterialReactTable, MaterialReactTableProps } from '../../src';
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
-  title: 'Feature Examples/Override Component Examples',
+  title: 'Features/Toolbar Examples',
 };
 
 export default meta;
@@ -19,12 +19,12 @@ const columns = [
     accessor: 'lastName',
   },
   {
-    Header: 'Address',
-    accessor: 'address',
+    Header: 'Age',
+    accessor: 'age',
   },
   {
-    Header: 'State',
-    accessor: 'state',
+    Header: 'Address',
+    accessor: 'address',
   },
   {
     Header: 'Phone Number',
@@ -32,25 +32,19 @@ const columns = [
   },
 ];
 
-const data = [...Array(100)].map((_) => ({
+const data = [...Array(5)].map((_) => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
+  age: faker.datatype.number(80),
   address: faker.address.streetAddress(),
-  state: faker.address.state(),
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const OverrideTableToolbarComponent: Story<
-  MaterialReactTableProps
-> = () => (
+export const ToolbarEnabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     showToolbar
-    OverrideTableBodyComponent={(tableInstance) => (
-      <div>
-        <h1>Custom Toolbar</h1>
-      </div>
-    )}
+    title="People Data"
   />
 );

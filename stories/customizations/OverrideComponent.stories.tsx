@@ -1,10 +1,10 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { MaterialReactTable, MaterialReactTableProps } from '../src';
+import { MaterialReactTable, MaterialReactTableProps } from '../../src';
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
-  title: 'Feature Examples/Filtering Examples',
+  title: 'Customization/Override Component Examples',
 };
 
 export default meta;
@@ -26,6 +26,10 @@ const columns = [
     Header: 'State',
     accessor: 'state',
   },
+  {
+    Header: 'Phone Number',
+    accessor: 'phoneNumber',
+  },
 ];
 
 const data = [...Array(100)].map((_) => ({
@@ -33,8 +37,20 @@ const data = [...Array(100)].map((_) => ({
   lastName: faker.name.lastName(),
   address: faker.address.streetAddress(),
   state: faker.address.state(),
+  phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const FilteringEnabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} enableFiltering />
+export const OverrideTableToolbarComponent: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    showToolbar
+    OverrideTableBodyComponent={(tableInstance) => (
+      <div>
+        <h1>Custom Toolbar</h1>
+      </div>
+    )}
+  />
 );

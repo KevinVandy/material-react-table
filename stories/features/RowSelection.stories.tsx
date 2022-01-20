@@ -1,10 +1,10 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { MaterialReactTable, MaterialReactTableProps } from '../src';
+import { MaterialReactTable, MaterialReactTableProps } from '../../src';
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
-  title: 'Feature Examples/Toolbar Examples',
+  title: 'Features/Row Selection Examples',
 };
 
 export default meta;
@@ -26,25 +26,34 @@ const columns = [
     Header: 'Address',
     accessor: 'address',
   },
-  {
-    Header: 'Phone Number',
-    accessor: 'phoneNumber',
-  },
 ];
-
 const data = [...Array(5)].map((_) => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   age: faker.datatype.number(80),
   address: faker.address.streetAddress(),
-  phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const ToolbarEnabled: Story<MaterialReactTableProps> = () => (
+export const SelectionEnabled: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} enableSelection />
+);
+
+export const SelectAllEnabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    showToolbar
-    title="People Data"
+    enableSelection
+    enableSelectAll
+  />
+);
+
+export const onRowSelectChange: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableSelection
+    onRowSelectChange={(event, rowState, selectedRows) => {
+      console.log({ event, rowState, selectedRows });
+    }}
   />
 );

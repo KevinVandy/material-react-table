@@ -93,10 +93,8 @@ export interface MaterialReactTableProps<D extends {} = {}> {
 }
 
 export const MaterialReactTable = <D extends {}>({
-  enableExpandAll = true,
   enablePagination = true,
   enableSearch = true,
-  enableSelectAll = true,
   enableSorting = true,
   enableSubRowTree = true,
   positionPagination = 'bottom',
@@ -105,9 +103,7 @@ export const MaterialReactTable = <D extends {}>({
   ...rest
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
-    enableExpandAll={enableExpandAll}
     enablePagination={enablePagination}
-    enableSelectAll={enableSelectAll}
     enableSearch={enableSearch}
     enableSorting={enableSorting}
     enableSubRowTree={enableSubRowTree}
