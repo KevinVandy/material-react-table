@@ -47,12 +47,19 @@ export const TreeDataSubRows: Story<MaterialReactTableProps> = () => (
         age: faker.datatype.number(80),
         address: faker.address.streetAddress(),
         phoneNumber: faker.phone.phoneNumber(),
-        subRows: [...Array(2)].map((_) => ({
+        subRows: [...Array(3)].map((_) => ({
           firstName: faker.name.firstName(),
           lastName: faker.name.lastName(),
           age: faker.datatype.number(80),
           address: faker.address.streetAddress(),
           phoneNumber: faker.phone.phoneNumber(),
+          subRows: [...Array(2)].map((_) => ({
+            firstName: faker.name.firstName(),
+            lastName: faker.name.lastName(),
+            age: faker.datatype.number(80),
+            address: faker.address.streetAddress(),
+            phoneNumber: faker.phone.phoneNumber(),
+          })),
         })),
       })),
     }))}

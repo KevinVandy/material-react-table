@@ -24,6 +24,7 @@ import { MRT_TableContainer } from './table/MRT_TableContainer';
 export interface MaterialReactTableProps<D extends {} = {}> {
   columns: Column<D | {}>[];
   data: D[];
+  enableExpandAll?: boolean;
   enableFiltering?: boolean;
   enablePagination?: boolean;
   enableSearch?: boolean;
@@ -92,18 +93,24 @@ export interface MaterialReactTableProps<D extends {} = {}> {
 }
 
 export const MaterialReactTable = <D extends {}>({
+  enableExpandAll = true,
   enablePagination = true,
   enableSearch = true,
+  enableSelectAll = true,
   enableSorting = true,
+  enableSubRowTree = true,
   positionPagination = 'bottom',
   showFooter = true,
   showHead = true,
   ...rest
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
+    enableExpandAll={enableExpandAll}
     enablePagination={enablePagination}
+    enableSelectAll={enableSelectAll}
     enableSearch={enableSearch}
     enableSorting={enableSorting}
+    enableSubRowTree={enableSubRowTree}
     positionPagination={positionPagination}
     showFooter={showFooter}
     showHead={showHead}

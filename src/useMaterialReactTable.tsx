@@ -15,10 +15,12 @@ import {
   useTable,
 } from 'react-table';
 import { MaterialReactTableProps } from '.';
+import { UseMRTCalcs, useMRTCalcs } from './useMRTCalcs';
 import { showOverrideWarnings } from './utils/overrideWarnings';
 
 interface UseMaterialReactTable<D extends {}>
-  extends MaterialReactTableProps<D> {
+  extends MaterialReactTableProps<D>,
+    UseMRTCalcs {
   tableInstance: TableInstance<D>;
 }
 
@@ -44,6 +46,8 @@ export const MaterialReactTableProvider = <D extends {}>({
     useRowSelect,
   );
 
+  const mrtCalcs = useMRTCalcs({ tableInstance });
+
   if (process.env.NODE_ENV !== 'production' && !surpressOverrideWarnings) {
     showOverrideWarnings(rest);
   }
@@ -55,6 +59,7 @@ export const MaterialReactTableProvider = <D extends {}>({
         columns,
         data,
         tableInstance,
+        ...mrtCalcs,
         ...rest,
       }}
     >

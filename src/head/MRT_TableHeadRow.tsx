@@ -4,6 +4,7 @@ import { HeaderGroup } from 'react-table';
 import { MRT_TableHeadCell } from './MRT_TableHeadCell';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_SelectAllCheckbox } from '../inputs/MRT_SelectAllCheckbox';
+import { MRT_ExpandAllButton } from '../inputs/MRT_ExpandAllButton';
 
 interface Props {
   headerGroup: HeaderGroup;
@@ -12,6 +13,8 @@ interface Props {
 export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
   const {
     OverrideTableHeadRowComponent,
+    anyRowsCanExpand,
+    enableExpandAll,
     enableSelection,
     renderDetailPanel,
     tableInstance,
@@ -25,8 +28,6 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
     (h) => (h.columns?.length ?? 0) > 0,
   );
 
-  const canAnyRowsExpand = tableInstance.page.some((p) => p.canExpand);
-
   return (
     <TableRow {...headerGroup.getHeaderGroupProps()}>
       {enableSelection ? (
@@ -36,9 +37,13 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
           <TableCell style={{ width: '2rem' }} />
         )
       ) : null}
-      {(canAnyRowsExpand || renderDetailPanel) && (
-        <TableCell style={{ width: '2rem' }} />
-      )}
+      {anyRowsCanExpand || renderDetailPanel ? (
+        enableExpandAll && !isParentHeader ? (
+          <MRT_ExpandAllButton />
+        ) : (
+          <TableCell style={{ width: '2rem' }} />
+        )
+      ) : null}
       {headerGroup.headers.map((column, index) => (
         <MRT_TableHeadCell key={`${index}-${column.id}`} column={column} />
       ))}

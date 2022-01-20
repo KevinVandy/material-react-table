@@ -2,13 +2,12 @@ import React, { FC } from 'react';
 import { IconButton, TableCell } from '@mui/material';
 import { Row } from 'react-table';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-// import { useMaterialReactTable } from './useMaterialReactTable';
 
 interface Props {
   row: Row;
 }
 
-export const MRT_TableExpandButton: FC<Props> = ({ row }) => {
+export const MRT_ExpandButton: FC<Props> = ({ row }) => {
   return (
     <TableCell
       style={{ width: '2rem' }}
@@ -16,7 +15,7 @@ export const MRT_TableExpandButton: FC<Props> = ({ row }) => {
       variant="head"
       {...row.getToggleRowExpandedProps({
         style: {
-          paddingLeft: `${row.depth * 1.5 + 0.25}rem`,
+          paddingLeft: `${row.depth * 1.75 + 0.25}rem`,
         },
       })}
     >

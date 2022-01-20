@@ -4,7 +4,7 @@ import { Row } from 'react-table';
 import { MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
-import { MRT_TableExpandButton } from '../inputs/MRT_TableExpandButton';
+import { MRT_ExpandButton } from '../inputs/MRT_ExpandButton';
 import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 
 interface Props {
@@ -14,6 +14,7 @@ interface Props {
 export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
   const {
     OverrideTableBodyRowComponent,
+    anyRowsCanExpand,
     enableSelection,
     enableSubRowTree,
     onRowClick,
@@ -24,7 +25,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
   if (OverrideTableBodyRowComponent) {
     return <>{OverrideTableBodyRowComponent(row, tableInstance)}</>;
   }
-
+  console.log('rowcanexpand', row.canExpand);
   return (
     <>
       <TableRow
@@ -34,8 +35,12 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         {...row.getRowProps()}
       >
         {enableSelection && <MRT_SelectCheckbox row={row} />}
-        {(enableSubRowTree || renderDetailPanel) &&
-          (row.canExpand ? <MRT_TableExpandButton row={row} /> : <TableCell />)}
+        {((enableSubRowTree && anyRowsCanExpand) || renderDetailPanel) &&
+          (row.canExpand || renderDetailPanel ? (
+            <MRT_ExpandButton row={row} />
+          ) : (
+            <TableCell />
+          ))}
         {row.cells.map((cell, index) => (
           <MRT_TableBodyCell key={`${index}-${cell.value}`} cell={cell} />
         ))}
