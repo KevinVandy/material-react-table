@@ -30,6 +30,7 @@ export interface MaterialReactTableProps<D extends {} = {}> {
   enableSelectAll?: boolean;
   enableSelection?: boolean;
   enableSorting?: boolean;
+  enableSubRowTree?: boolean;
   onRowClick?: (
     event: MouseEvent<HTMLTableRowElement>,
     rowData: Row<D>,
@@ -98,18 +99,16 @@ export const MaterialReactTable = <D extends {}>({
   showFooter = true,
   showHead = true,
   ...rest
-}: MaterialReactTableProps<D>) => {
-  return (
-    <MaterialReactTableProvider
-      enablePagination={enablePagination}
-      enableSearch={enableSearch}
-      enableSorting={enableSorting}
-      positionPagination={positionPagination}
-      showFooter={showFooter}
-      showHead={showHead}
-      {...rest}
-    >
-      <MRT_TableContainer />
-    </MaterialReactTableProvider>
-  );
-};
+}: MaterialReactTableProps<D>) => (
+  <MaterialReactTableProvider
+    enablePagination={enablePagination}
+    enableSearch={enableSearch}
+    enableSorting={enableSorting}
+    positionPagination={positionPagination}
+    showFooter={showFooter}
+    showHead={showHead}
+    {...rest}
+  >
+    <MRT_TableContainer />
+  </MaterialReactTableProvider>
+);

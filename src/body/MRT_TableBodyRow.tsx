@@ -1,5 +1,5 @@
 import React, { FC, MouseEvent } from 'react';
-import { TableRow } from '@mui/material';
+import { TableCell, TableRow } from '@mui/material';
 import { Row } from 'react-table';
 import { MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { useMaterialReactTable } from '../useMaterialReactTable';
@@ -15,6 +15,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
   const {
     OverrideTableBodyRowComponent,
     enableSelection,
+    enableSubRowTree,
     onRowClick,
     renderDetailPanel,
     tableInstance,
@@ -33,7 +34,8 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         {...row.getRowProps()}
       >
         {enableSelection && <MRT_SelectCheckbox row={row} />}
-        {renderDetailPanel && <MRT_TableExpandButton row={row} />}
+        {(enableSubRowTree || renderDetailPanel) &&
+          (row.canExpand ? <MRT_TableExpandButton row={row} /> : <TableCell />)}
         {row.cells.map((cell, index) => (
           <MRT_TableBodyCell key={`${index}-${cell.value}`} cell={cell} />
         ))}

@@ -10,8 +10,17 @@ interface Props {
 
 export const MRT_TableExpandButton: FC<Props> = ({ row }) => {
   return (
-    <TableCell style={{ width: '2rem' }} size="small" variant="head">
-      <IconButton onClick={() => row.toggleRowExpanded()} size="small">
+    <TableCell
+      style={{ width: '2rem' }}
+      size="small"
+      variant="head"
+      {...row.getToggleRowExpandedProps({
+        style: {
+          paddingLeft: `${row.depth * 1.5 + 0.25}rem`,
+        },
+      })}
+    >
+      <IconButton>
         <ArrowForwardIosIcon
           fontSize="small"
           style={{

@@ -25,6 +25,8 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
     (h) => (h.columns?.length ?? 0) > 0,
   );
 
+  const canAnyRowsExpand = tableInstance.page.some((p) => p.canExpand);
+
   return (
     <TableRow {...headerGroup.getHeaderGroupProps()}>
       {enableSelection ? (
@@ -34,7 +36,9 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
           <TableCell style={{ width: '2rem' }} />
         )
       ) : null}
-      {renderDetailPanel && <TableCell style={{ width: '2rem' }} />}
+      {(canAnyRowsExpand || renderDetailPanel) && (
+        <TableCell style={{ width: '2rem' }} />
+      )}
       {headerGroup.headers.map((column, index) => (
         <MRT_TableHeadCell key={`${index}-${column.id}`} column={column} />
       ))}
