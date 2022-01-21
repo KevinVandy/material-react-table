@@ -15,7 +15,6 @@ export const MRT_Toolbar: FC<Props> = () => {
   const {
     OverrideTableToolbarComponent,
     enableSearch,
-    enableColumnHiding,
     tableInstance,
     tableTitleProps,
     tableToolbarProps,
@@ -27,7 +26,7 @@ export const MRT_Toolbar: FC<Props> = () => {
   }
 
   //if no features in the toolbar are enabled, don't render anything
-  if (!enableSearch && !title && !tableToolbarProps && !enableColumnHiding) {
+  if (!enableSearch && !title && !tableToolbarProps) {
     return null;
   }
 

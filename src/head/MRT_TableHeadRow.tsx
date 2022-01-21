@@ -48,7 +48,11 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         )
       ) : null}
       {headerGroup.headers.map((column, index) => (
-        <MRT_TableHeadCell key={`${index}-${column.id}`} column={column} />
+        <MRT_TableHeadCell
+          key={`${index}-${column.id}`}
+          column={column}
+          index={index}
+        />
       ))}
       {enableColumnHiding && !isParentHeader && <MRT_ShowHideColumnsButton />}
     </TableRow>

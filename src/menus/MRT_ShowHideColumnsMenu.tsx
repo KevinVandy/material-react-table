@@ -12,7 +12,7 @@ interface Props {
   column: ColumnInstance;
 }
 
-export const ShowHideColumnsMenu: FC<Props> = ({ column }) => {
+export const MRT_ShowHideColumnsMenu: FC<Props> = ({ column }) => {
   const { maxColumnDepth } = useMaterialReactTable();
 
   const isMaxDepth = column.depth === maxColumnDepth;
@@ -32,7 +32,7 @@ export const ShowHideColumnsMenu: FC<Props> = ({ column }) => {
         )}
       </MenuItem>
       {column.columns?.map((c, i) => (
-        <ShowHideColumnsMenu key={`${i}-${c.id}`} column={c} />
+        <MRT_ShowHideColumnsMenu key={`${i}-${c.id}`} column={c} />
       ))}
     </>
   );

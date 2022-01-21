@@ -1,19 +1,23 @@
 export interface MRT_Localization {
   expandAllButtonTitle?: string;
   expandButtonTitle?: string;
-  showHideColumnsButtonTitle?: string;
-  filterTextFieldPlaceholder?: string;
   filterTextFieldClearButtonTitle?: string;
-  searchTextFieldPlaceholder?: string;
+  filterTextFieldPlaceholder?: string;
   searchTextFieldClearButtonTitle?: string;
+  searchTextFieldPlaceholder?: string;
+  showHideColumnsButtonTitle?: string;
+  toggleTableHeadCommandMenuHideMenuItem?: string;
+  toggleTableHeadCommandMenuButtonTitle?: string;
 }
 
 export const defaultLocalization: MRT_Localization = {
   expandAllButtonTitle: 'Expand all',
   expandButtonTitle: 'Expand',
-  showHideColumnsButtonTitle: 'Show/Hide columns',
-  filterTextFieldPlaceholder: 'Filter',
   filterTextFieldClearButtonTitle: 'Clear filter',
-  searchTextFieldPlaceholder: 'Search',
+  filterTextFieldPlaceholder: 'Filter',
   searchTextFieldClearButtonTitle: 'Clear search',
+  searchTextFieldPlaceholder: 'Search',
+  showHideColumnsButtonTitle: 'Show/Hide columns',
+  toggleTableHeadCommandMenuHideMenuItem: 'Hide column',
+  toggleTableHeadCommandMenuButtonTitle: 'Column Actions'
 };
