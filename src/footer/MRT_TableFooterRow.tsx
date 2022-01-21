@@ -12,6 +12,7 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
   const {
     renderDetailPanel,
     columns,
+    enableColumnHiding,
     enableSelection,
     tableInstance,
     OverrideTableFooterRowComponent,
@@ -31,6 +32,7 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
       {footerGroup.headers.map((column, index) => (
         <MRT_TableFooterCell key={`${index}-${column.id}`} column={column} />
       ))}
+      {enableColumnHiding && <TableCell />}
     </TableRow>
   );
 };

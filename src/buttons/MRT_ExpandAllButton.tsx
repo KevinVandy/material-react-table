@@ -12,7 +12,6 @@ export const MRT_ExpandAllButton: FC<Props> = () => {
   return (
     <TableCell
       size="small"
-      variant="head"
       {...tableInstance.getToggleAllRowsExpandedProps({
         style: { width: '2rem', paddingLeft: '0.5rem' },
       })}

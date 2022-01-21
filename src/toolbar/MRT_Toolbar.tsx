@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { styled, Toolbar as MuiToolbar, Typography } from '@mui/material';
 import { MRT_SearchTextField } from '../inputs/MRT_SearchTextField';
 import { useMaterialReactTable } from '../useMaterialReactTable';
-import { MRT_ShowHideColumnsButtonMenu } from '../buttons/MRT_ShowHideColumnsButtonMenu';
 
 const Toolbar = styled(MuiToolbar)({
   padding: '0.5rem',
@@ -36,7 +35,6 @@ export const MRT_Toolbar: FC<Props> = () => {
     <Toolbar variant="dense" {...tableToolbarProps}>
       {title ? <Typography {...tableTitleProps}>{title}</Typography> : <span />}
       {enableSearch && <MRT_SearchTextField />}
-      {enableColumnHiding && <MRT_ShowHideColumnsButtonMenu />}
     </Toolbar>
   );
 };

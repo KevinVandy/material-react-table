@@ -15,6 +15,12 @@ const TableCell = styled(MuiTableCell)({
 const TableCellContents = styled('div')({
   display: 'grid',
 });
+
+const TableCellText = styled('div')(({ theme }) => ({
+  borderRight: `solid 2px ${theme.palette.divider}`,
+  width: '100%',
+}));
+
 interface Props {
   column: HeaderGroup;
 }
@@ -32,21 +38,20 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
   return (
     <TableCell
       align={isParentHeader ? 'center' : 'left'}
-      variant="head"
       {...column.getHeaderProps(column.getSortByToggleProps())}
     >
       <TableCellContents>
         {!isParentHeader && column.canSort ? (
-          <TableSortLabel
-            active={column.isSorted}
-            direction={
-              column.isSortedDesc && column.isSortedDesc ? 'desc' : 'asc'
-            }
-          >
-            {column.render('Header')}
-          </TableSortLabel>
+          <TableCellText>
+            <TableSortLabel
+              active={column.isSorted}
+              direction={column.isSortedDesc ? 'desc' : 'asc'}
+            >
+              {column.render('Header')}
+            </TableSortLabel>
+          </TableCellText>
         ) : (
-          column.render('Header')
+          <TableCellText>{column.render('Header')}</TableCellText>
         )}
         {enableFiltering && column.canFilter && (
           <MRT_FilterTextfield column={column} />
