@@ -21,6 +21,7 @@ import {
 } from 'react-table';
 import { MaterialReactTableProvider } from './useMaterialReactTable';
 import { MRT_TableContainer } from './table/MRT_TableContainer';
+import { defaultLocalization, MRT_Localization } from './utils/localization';
 
 export interface MaterialReactTableProps<D extends {} = {}> {
   columns: Column<D | {}>[];
@@ -34,6 +35,7 @@ export interface MaterialReactTableProps<D extends {} = {}> {
   enableSelection?: boolean;
   enableSorting?: boolean;
   enableSubRowTree?: boolean;
+  localization?: MRT_Localization;
   onRowClick?: (
     event: MouseEvent<HTMLTableRowElement>,
     rowData: Row<D>,
@@ -99,6 +101,7 @@ export const MaterialReactTable = <D extends {}>({
   enablePagination = true,
   enableSorting = true,
   enableSubRowTree = true,
+  localization = defaultLocalization,
   positionPagination = 'bottom',
   showFooter = true,
   showHead = true,
@@ -109,6 +112,7 @@ export const MaterialReactTable = <D extends {}>({
     enablePagination={enablePagination}
     enableSorting={enableSorting}
     enableSubRowTree={enableSubRowTree}
+    localization={{ ...defaultLocalization, ...localization }}
     positionPagination={positionPagination}
     showFooter={showFooter}
     showHead={showHead}

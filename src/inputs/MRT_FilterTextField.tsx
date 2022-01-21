@@ -3,12 +3,15 @@ import { IconButton, InputAdornment, TextField } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import FilterIcon from '@mui/icons-material/FilterList';
 import { HeaderGroup, useAsyncDebounce } from 'react-table';
+import { useMaterialReactTable } from '../useMaterialReactTable';
 
 interface Props {
   column: HeaderGroup;
 }
 
 export const MRT_FilterTextfield: FC<Props> = ({ column }) => {
+  const { localization } = useMaterialReactTable();
+
   const [filterValue, setFilterValue] = useState('');
 
   const handleChange = useAsyncDebounce((value) => {
@@ -23,7 +26,7 @@ export const MRT_FilterTextfield: FC<Props> = ({ column }) => {
   return (
     <TextField
       margin="dense"
-      placeholder="Filter"
+      placeholder={localization?.filterTextFieldPlaceholder}
       onChange={(e: ChangeEvent<HTMLInputElement>) => {
         setFilterValue(e.target.value);
         handleChange(e.target.value);
@@ -40,9 +43,11 @@ export const MRT_FilterTextfield: FC<Props> = ({ column }) => {
         endAdornment: (
           <InputAdornment position="end">
             <IconButton
+              aria-label={localization?.filterTextFieldClearButtonTitle}
               disabled={filterValue?.length === 0}
               onClick={handleClear}
               size="small"
+              title={localization?.filterTextFieldClearButtonTitle}
             >
               <CloseIcon fontSize="small" />
             </IconButton>

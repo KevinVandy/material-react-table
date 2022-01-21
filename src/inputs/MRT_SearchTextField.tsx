@@ -17,7 +17,7 @@ const TextField = styled(MuiTextField)({
 interface Props {}
 
 export const MRT_SearchTextField: FC<Props> = () => {
-  const { tableInstance, tableSearchTextfieldProps } = useMaterialReactTable();
+  const { tableInstance, tableSearchTextfieldProps, localization } = useMaterialReactTable();
 
   const [searchValue, setSearchValue] = useState('');
 
@@ -32,7 +32,7 @@ export const MRT_SearchTextField: FC<Props> = () => {
 
   return (
     <TextField
-      placeholder="Search"
+      placeholder={localization?.searchTextFieldPlaceholder}
       onChange={(e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value);
         handleChange(e.target.value);
@@ -48,9 +48,11 @@ export const MRT_SearchTextField: FC<Props> = () => {
         endAdornment: (
           <InputAdornment position="end">
             <IconButton
+              aria-label={localization?.searchTextFieldClearButtonTitle}
               disabled={searchValue?.length === 0}
               onClick={handleClear}
               size="small"
+              title={localization?.searchTextFieldClearButtonTitle}
             >
               <CloseIcon fontSize="small" />
             </IconButton>

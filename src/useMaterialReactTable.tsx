@@ -15,7 +15,7 @@ import {
   useTable,
 } from 'react-table';
 import { MaterialReactTableProps } from '.';
-import { UseMRTCalcs, useMRTCalcs } from './useMRTCalcs';
+import { UseMRTCalcs, useMRTCalcs } from './utils/useMRTCalcs';
 import { showOverrideWarnings } from './utils/overrideWarnings';
 
 interface UseMaterialReactTable<D extends {}>

@@ -43,8 +43,8 @@ const ColumnsMenuItem: FC<ColumnsMenuItemProps> = ({ column }) => {
 
 interface Props {}
 
-export const MRT_HideColumnsButtonMenu: FC<Props> = () => {
-  const { tableInstance } = useMaterialReactTable();
+export const MRT_ShowHideColumnsButtonMenu: FC<Props> = () => {
+  const { tableInstance, localization } = useMaterialReactTable();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -54,7 +54,11 @@ export const MRT_HideColumnsButtonMenu: FC<Props> = () => {
 
   return (
     <>
-      <IconButton onClick={handleClick}>
+      <IconButton
+        aria-label={localization?.showHideColumnsButtonTitle}
+        title={localization?.showHideColumnsButtonTitle}
+        onClick={handleClick}
+      >
         <ViewColumnIcon />
       </IconButton>
       <Menu

@@ -6,7 +6,7 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 interface Props {}
 
 export const MRT_ExpandAllButton: FC<Props> = () => {
-  const { tableInstance } = useMaterialReactTable();
+  const { tableInstance, localization } = useMaterialReactTable();
 
   return (
     <TableCell
@@ -16,7 +16,7 @@ export const MRT_ExpandAllButton: FC<Props> = () => {
         style: { width: '2rem' },
       })}
     >
-      <IconButton>
+      <IconButton aria-label={localization?.expandAllButtonTitle} title={localization?.expandAllButtonTitle}>
         <AllOutIcon
           fontSize="small"
           style={{

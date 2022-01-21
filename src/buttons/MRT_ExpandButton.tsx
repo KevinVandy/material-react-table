@@ -2,12 +2,15 @@ import React, { FC } from 'react';
 import { IconButton, TableCell } from '@mui/material';
 import { Row } from 'react-table';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useMaterialReactTable } from '../useMaterialReactTable';
 
 interface Props {
   row: Row;
 }
 
 export const MRT_ExpandButton: FC<Props> = ({ row }) => {
+  const { localization } = useMaterialReactTable();
+
   return (
     <TableCell
       style={{ width: '2rem' }}
@@ -19,7 +22,10 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
         },
       })}
     >
-      <IconButton>
+      <IconButton
+        aria-label={localization?.expandButtonTitle}
+        title={localization?.expandButtonTitle}
+      >
         <ArrowForwardIosIcon
           fontSize="small"
           style={{
