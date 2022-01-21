@@ -130,5 +130,5 @@ MaximumFeatures.args = {
   enableSelectAll: true,
   enableSelection: true,
   showToolbar: true,
-  title: <h2>Kitchen Sink</h2>,
+  title: 'Kitchen Sink',
 };

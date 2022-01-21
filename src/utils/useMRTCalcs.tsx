@@ -3,6 +3,7 @@ import { TableInstance } from 'react-table';
 
 export interface UseMRTCalcs {
   anyRowsCanExpand: boolean;
+  anyRowsExpanded: boolean;
   maxColumnDepth: number;
 }
 
@@ -18,6 +19,11 @@ export const useMRTCalcs = <D extends {}>({
     [tableInstance.rows],
   );
 
+  const anyRowsExpanded = useMemo(
+    () => tableInstance.rows.some((row) => row.isExpanded),
+    [tableInstance.rows],
+  );
+
   const maxColumnDepth = useMemo(() => {
     let maxDepth = 1;
     tableInstance.columns.forEach((column) => {
@@ -28,5 +34,5 @@ export const useMRTCalcs = <D extends {}>({
     return maxDepth - 1;
   }, [tableInstance.columns]);
 
-  return { anyRowsCanExpand, maxColumnDepth };
+  return { anyRowsCanExpand, anyRowsExpanded, maxColumnDepth };
 };
