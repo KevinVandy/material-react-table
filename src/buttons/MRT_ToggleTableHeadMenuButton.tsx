@@ -24,6 +24,7 @@ export const MRT_ToggleHeadMenuButton: FC<Props> = ({ column }) => {
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation();
+    event.preventDefault();
     setAnchorEl(event.currentTarget);
   };
 

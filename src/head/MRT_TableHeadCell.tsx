@@ -47,11 +47,11 @@ export const MRT_TableHeadCell: FC<Props> = ({ column, index }) => {
   return (
     <TableCell
       align={isParentHeader ? 'center' : 'left'}
-      {...column.getHeaderProps(column.getSortByToggleProps())}
+      {...column.getHeaderProps()}
     >
       <TableCellContents>
         <TableCellText isLastColumn={isLastColumn}>
-          <span>
+          <span {...column.getSortByToggleProps()}>
             {column.render('Header')}
             {!isParentHeader && column.canSort && (
               <TableSortLabel
