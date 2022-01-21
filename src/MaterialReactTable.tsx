@@ -8,6 +8,7 @@ import {
   TablePaginationProps,
   TableProps,
   TextFieldProps,
+  ToolbarProps,
   TypographyProps,
 } from '@mui/material';
 import {
@@ -24,6 +25,7 @@ import { MRT_TableContainer } from './table/MRT_TableContainer';
 export interface MaterialReactTableProps<D extends {} = {}> {
   columns: Column<D | {}>[];
   data: D[];
+  enableColumnHiding?: boolean;
   enableExpandAll?: boolean;
   enableFiltering?: boolean;
   enablePagination?: boolean;
@@ -51,6 +53,7 @@ export interface MaterialReactTableProps<D extends {} = {}> {
   tableContainerProps?: TableContainerProps;
   tableDetailPanelProps?: TableCellProps;
   tableFooterProps?: TableFooterProps;
+  tableToolbarProps?: ToolbarProps;
   tableHeadProps?: TableHeadProps;
   tablePaginationProps?: TablePaginationProps;
   tableProps?: TableProps;
@@ -94,22 +97,22 @@ export interface MaterialReactTableProps<D extends {} = {}> {
 
 export const MaterialReactTable = <D extends {}>({
   enablePagination = true,
-  enableSearch = true,
   enableSorting = true,
   enableSubRowTree = true,
   positionPagination = 'bottom',
   showFooter = true,
   showHead = true,
+  showToolbar = true,
   ...rest
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
     enablePagination={enablePagination}
-    enableSearch={enableSearch}
     enableSorting={enableSorting}
     enableSubRowTree={enableSubRowTree}
     positionPagination={positionPagination}
     showFooter={showFooter}
     showHead={showHead}
+    showToolbar={showToolbar}
     {...rest}
   >
     <MRT_TableContainer />

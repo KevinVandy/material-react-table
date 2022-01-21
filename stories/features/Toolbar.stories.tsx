@@ -41,10 +41,24 @@ const data = [...Array(5)].map((_) => ({
 }));
 
 export const ToolbarEnabled: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} showToolbar />
+);
+
+export const ToolbarEnabledWithTitle: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     showToolbar
-    title="People Data"
+    title="My People Table"
+  />
+);
+
+export const ToolbarEnabledWithSearch: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    showToolbar
+    title="My People Table"
+    enableSearch
   />
 );

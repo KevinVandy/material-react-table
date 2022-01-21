@@ -4,7 +4,7 @@ import { Row } from 'react-table';
 import { MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
-import { MRT_ExpandButton } from '../inputs/MRT_ExpandButton';
+import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
 import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 
 interface Props {
@@ -25,7 +25,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
   if (OverrideTableBodyRowComponent) {
     return <>{OverrideTableBodyRowComponent(row, tableInstance)}</>;
   }
-  console.log('rowcanexpand', row.canExpand);
+
   return (
     <>
       <TableRow

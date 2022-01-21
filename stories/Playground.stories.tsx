@@ -123,9 +123,12 @@ MaximumFeatures.args = {
     },
   ],
   data: maxFeaturesData,
+  enableColumnHiding: true,
+  enableExpandAll: true,
   enableFiltering: true,
+  enableSearch: true,
   enableSelectAll: true,
   enableSelection: true,
   showToolbar: true,
-  title: 'Kitchen Sink',
+  title: <h2>Kitchen Sink</h2>,
 };

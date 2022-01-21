@@ -4,7 +4,7 @@ import { HeaderGroup } from 'react-table';
 import { MRT_TableHeadCell } from './MRT_TableHeadCell';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_SelectAllCheckbox } from '../inputs/MRT_SelectAllCheckbox';
-import { MRT_ExpandAllButton } from '../inputs/MRT_ExpandAllButton';
+import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
 
 interface Props {
   headerGroup: HeaderGroup;
