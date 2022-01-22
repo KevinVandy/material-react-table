@@ -6,6 +6,7 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_SelectAllCheckbox } from '../inputs/MRT_SelectAllCheckbox';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
 import { MRT_ShowHideColumnsButton } from '../buttons/MRT_ShowHideColumnsButton';
+import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
 
 interface Props {
   headerGroup: HeaderGroup;
@@ -37,8 +38,8 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         enableExpandAll && !isParentHeader ? (
           <MRT_ExpandAllButton />
         ) : (
-          <TableCell
-            style={{ width: `${tableInstance.expandedDepth + 0.5}rem` }}
+          <MRT_TableSpacerCell
+            width={`${tableInstance.expandedDepth + 0.5}rem`}
           />
         )
       ) : null}
@@ -46,7 +47,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         !isParentHeader ? (
           <MRT_SelectAllCheckbox />
         ) : (
-          <TableCell style={{ width: '1rem' }} />
+          <MRT_TableSpacerCell width="1rem" />
         )
       ) : null}
       {headerGroup.headers.map((column, index) => (

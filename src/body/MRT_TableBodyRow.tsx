@@ -6,6 +6,7 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
 import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
+import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
 
 interface Props {
   row: Row;
@@ -47,7 +48,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         {row.cells.map((cell, index) => (
           <MRT_TableBodyCell key={`${index}-${cell.value}`} cell={cell} />
         ))}
-        {enableColumnHiding && <TableCell />}
+        {enableColumnHiding && <MRT_TableSpacerCell />}
       </TableRow>
       {renderDetailPanel && <MRT_TableDetailPanel row={row} />}
     </>

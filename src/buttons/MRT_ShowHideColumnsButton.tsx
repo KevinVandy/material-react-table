@@ -16,7 +16,7 @@ export const MRT_ShowHideColumnsButton: FC<Props> = () => {
   };
 
   return (
-    <TableCell style={{ width: '2rem', padding: '0.75rem 0' }}>
+    <TableCell size="small" style={{ width: '2rem', padding: '0.75rem 0' }}>
       <IconButton
         aria-label={localization?.showHideColumnsButtonTitle}
         title={localization?.showHideColumnsButtonTitle}
