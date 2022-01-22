@@ -8,6 +8,7 @@ import {
   TablePaginationProps,
   TableProps,
   TextFieldProps,
+  Theme,
   ToolbarProps,
   TypographyProps,
 } from '@mui/material';
@@ -67,6 +68,7 @@ export interface MaterialReactTableProps<D extends {} = {}> {
   tableProps?: TableProps;
   tableSearchTextfieldProps?: TextFieldProps;
   tableTitleProps?: TypographyProps;
+  theme?: Theme;
   title?: string | ReactNode;
   OverrideTableBodyCellComponent?(
     cell: Cell<D>,

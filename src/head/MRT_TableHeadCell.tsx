@@ -22,6 +22,7 @@ const TableCellContents = styled('div')({
 const TableCellText = styled('div')({
   width: '100%',
   display: 'flex',
+  alignItems: 'center',
   justifyContent: 'space-between',
 });
 
@@ -55,7 +56,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ column, index }) => {
       {...column.getHeaderProps()}
     >
       <TableCellContents>
-        <TableCellText>
+        <TableCellText
+          style={{ justifyContent: isParentHeader ? 'center' : undefined }}
+        >
           <span {...column.getSortByToggleProps()}>
             {column.render('Header')}
             {!isParentHeader && column.canSort && (

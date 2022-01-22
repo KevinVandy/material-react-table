@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Divider, Menu, MenuItem as MuiMenuItem, styled } from '@mui/material';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 import { ColumnInstance } from 'react-table';
+import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SortIcon from '@mui/icons-material/Sort';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
@@ -23,6 +24,11 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
 }) => {
   const { enableColumnHiding, enableSorting, localization } =
     useMaterialReactTable();
+
+  const handleClearSort = () => {
+    column.clearSortBy();
+    setAnchorEl(null);
+  };
 
   const handleSortAsc = () => {
     column.toggleSortBy(false);
@@ -47,10 +53,19 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     >
       {enableSorting && (
         <>
-          <MenuItem onClick={handleSortAsc}>
+          <MenuItem disabled={!column.isSorted} onClick={handleClearSort}>
+            <ClearAllIcon /> {localization?.columnActionMenuItemClearSort}
+          </MenuItem>
+          <MenuItem
+            disabled={column.isSorted && !column.isSortedDesc}
+            onClick={handleSortAsc}
+          >
             <SortIcon /> {localization?.columnActionMenuItemSortAsc}
           </MenuItem>
-          <MenuItem onClick={handleSortDesc}>
+          <MenuItem
+            disabled={column.isSorted && column.isSortedDesc}
+            onClick={handleSortDesc}
+          >
             <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />{' '}
             {localization?.columnActionMenuItemSortDesc}
           </MenuItem>

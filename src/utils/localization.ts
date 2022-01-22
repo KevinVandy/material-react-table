@@ -2,6 +2,7 @@ export interface MRT_Localization {
   columnActionMenuButtonTitle?: string;
   columnActionMenuItemHideColumn?: string;
   columnActionMenuItemSortAsc?: string;
+  columnActionMenuItemClearSort?: string;
   columnActionMenuItemSortDesc?: string;
   expandAllButtonTitle?: string;
   expandButtonTitle?: string;
@@ -15,8 +16,9 @@ export interface MRT_Localization {
 export const defaultLocalization: MRT_Localization = {
   columnActionMenuButtonTitle: 'Column Actions',
   columnActionMenuItemHideColumn: 'Hide column',
-  columnActionMenuItemSortAsc: 'Sort Ascending',
-  columnActionMenuItemSortDesc: 'Sort Descending',
+  columnActionMenuItemSortAsc: 'Sort ascending',
+  columnActionMenuItemClearSort: 'Clear sorting',
+  columnActionMenuItemSortDesc: 'Sort descending',
   expandAllButtonTitle: 'Expand all',
   expandButtonTitle: 'Expand',
   filterTextFieldClearButtonTitle: 'Clear filter',
