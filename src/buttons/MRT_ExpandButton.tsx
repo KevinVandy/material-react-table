@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const MRT_ExpandButton: FC<Props> = ({ row }) => {
-  const { localization } = useMaterialReactTable();
+  const { localization, tableInstance } = useMaterialReactTable();
 
   return (
     <TableCell
@@ -19,8 +19,7 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
         padding: '0.5rem',
         paddingRight: '0',
         paddingLeft: `${row.depth + 0.5}rem`,
-        width: '3rem',
-        maxWidth: '3rem',
+        width: `${tableInstance.expandedDepth - row.depth + 2}rem`,
       }}
     >
       <IconButton

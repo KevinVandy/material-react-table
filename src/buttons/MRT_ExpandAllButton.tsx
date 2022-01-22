@@ -16,7 +16,7 @@ export const MRT_ExpandAllButton: FC<Props> = () => {
       style={{
         padding: '0.5rem',
         paddingRight: '0',
-        width: '3rem',
+        width: `${tableInstance.expandedDepth + 2}rem`,
       }}
     >
       <IconButton
