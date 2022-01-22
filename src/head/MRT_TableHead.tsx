@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { TableHead } from '@mui/material';
+import { LinearProgress, TableHead } from '@mui/material';
 import { MRT_TableHeadRow } from './MRT_TableHeadRow';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_TablePagination } from '../footer/MRT_TablePagination';
@@ -12,15 +12,17 @@ export const MRT_TableHead: FC<Props> = () => {
     tableInstance,
     tableHeadProps,
     enablePagination,
+    isReloading,
     positionPagination,
   } = useMaterialReactTable();
 
-  if(OverrideTableHeadComponent) {
+  if (OverrideTableHeadComponent) {
     return <>{OverrideTableHeadComponent(tableInstance)}</>;
   }
 
   return (
     <TableHead {...tableHeadProps}>
+      {isReloading && <LinearProgress />}
       {enablePagination &&
         ['top', 'both'].includes(positionPagination ?? '') && (
           <MRT_TablePagination />

@@ -39,6 +39,7 @@ export interface MaterialReactTableProps<D extends {} = {}> {
   enableSorting?: boolean;
   enableSubRowTree?: boolean;
   isLoading?: boolean;
+  isReloading?: boolean;
   localization?: MRT_Localization;
   onRowClick?: (
     event: MouseEvent<HTMLTableRowElement>,
