@@ -1,10 +1,5 @@
 import React, { FC } from 'react';
-import {
-  Checkbox,
-  FormControlLabel,
-  MenuItem,
-  Typography,
-} from '@mui/material';
+import { FormControlLabel, MenuItem, Switch, Typography } from '@mui/material';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 import { ColumnInstance } from 'react-table';
 
@@ -25,7 +20,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({ column }) => {
             onChange={() => isMaxDepth && column.toggleHidden()}
             label={column.Header as string}
             checked={column.isVisible}
-            control={<Checkbox />}
+            control={<Switch />}
           />
         ) : (
           <Typography>{column.Header}</Typography>

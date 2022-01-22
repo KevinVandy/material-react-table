@@ -52,6 +52,7 @@ export interface MaterialReactTableProps<D extends {} = {}> {
   ) => void;
   positionPagination?: 'bottom' | 'top' | 'both';
   renderDetailPanel?: (rowData: Row<D>) => ReactNode;
+  showFiltersInColumnHead?: boolean;
   showFooter?: boolean;
   showHead?: boolean;
   showToolbar?: boolean;
@@ -108,6 +109,7 @@ export const MaterialReactTable = <D extends {}>({
   enableSubRowTree = true,
   localization = defaultLocalization,
   positionPagination = 'bottom',
+  showFiltersInColumnHead = true,
   showFooter = true,
   showHead = true,
   showToolbar = true,
@@ -119,6 +121,7 @@ export const MaterialReactTable = <D extends {}>({
     enableSubRowTree={enableSubRowTree}
     localization={{ ...defaultLocalization, ...localization }}
     positionPagination={positionPagination}
+    showFiltersInColumnHead={showFiltersInColumnHead}
     showFooter={showFooter}
     showHead={showHead}
     showToolbar={showToolbar}

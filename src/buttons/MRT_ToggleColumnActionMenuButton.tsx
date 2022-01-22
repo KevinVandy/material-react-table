@@ -2,7 +2,7 @@ import React, { FC, MouseEvent, useState } from 'react';
 import { IconButton as MuiIconButton, styled } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useMaterialReactTable } from '../useMaterialReactTable';
-import { MRT_TableHeadCommandMenu } from '../menus/MRT_TableHeadCommandMenu';
+import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
 import { HeaderGroup } from 'react-table';
 
 const IconButton = styled(MuiIconButton)({
@@ -18,7 +18,7 @@ interface Props {
   column: HeaderGroup;
 }
 
-export const MRT_ToggleHeadMenuButton: FC<Props> = ({ column }) => {
+export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
   const { localization } = useMaterialReactTable();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -32,14 +32,14 @@ export const MRT_ToggleHeadMenuButton: FC<Props> = ({ column }) => {
   return (
     <>
       <IconButton
-        aria-label={localization?.toggleTableHeadCommandMenuButtonTitle}
-        title={localization?.toggleTableHeadCommandMenuButtonTitle}
+        aria-label={localization?.toggleColumnActionMenuButtonTitle}
+        title={localization?.toggleColumnActionMenuButtonTitle}
         onClick={handleClick}
         size="small"
       >
         <MoreVertIcon />
       </IconButton>
-      <MRT_TableHeadCommandMenu
+      <MRT_ColumnActionMenu
         anchorEl={anchorEl}
         column={column}
         setAnchorEl={setAnchorEl}

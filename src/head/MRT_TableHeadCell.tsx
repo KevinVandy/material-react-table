@@ -4,11 +4,12 @@ import {
   TableSortLabel,
   styled,
   Divider,
+  Collapse,
 } from '@mui/material';
 import { HeaderGroup } from 'react-table';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_FilterTextfield } from '../inputs/MRT_FilterTextField';
-import { MRT_ToggleHeadMenuButton } from '../buttons/MRT_ToggleTableHeadMenuButton';
+import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
 
 const TableCell = styled(MuiTableCell)({
   fontWeight: 'bold',
@@ -31,11 +32,12 @@ interface Props {
 
 export const MRT_TableHeadCell: FC<Props> = ({ column, index }) => {
   const {
-    enableFiltering,
-    enableColumnResizing,
-    enableColumnActions,
-    tableInstance,
     OverrideTableHeadCellComponent,
+    enableColumnActions,
+    enableColumnResizing,
+    enableFiltering,
+    showFiltersInColumnHead,
+    tableInstance,
   } = useMaterialReactTable();
 
   if (OverrideTableHeadCellComponent) {
@@ -65,7 +67,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ column, index }) => {
           </span>
           <span style={{ display: 'flex' }}>
             {enableColumnActions && !isParentHeader && (
-              <MRT_ToggleHeadMenuButton column={column} />
+              <MRT_ToggleColumnActionMenuButton column={column} />
             )}
             {enableColumnResizing && !isLastColumn && (
               <Divider
@@ -79,7 +81,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ column, index }) => {
           </span>
         </TableCellText>
         {enableFiltering && column.canFilter && (
-          <MRT_FilterTextfield column={column} />
+          <Collapse in={showFiltersInColumnHead}>
+            <MRT_FilterTextfield column={column} />
+          </Collapse>
         )}
       </TableCellContents>
     </TableCell>

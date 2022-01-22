@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react';
-import { TableCell, TableRow } from '@mui/material';
+import { TableRow } from '@mui/material';
 import { HeaderGroup } from 'react-table';
 import { MRT_TableHeadCell } from './MRT_TableHeadCell';
 import { useMaterialReactTable } from '../useMaterialReactTable';
