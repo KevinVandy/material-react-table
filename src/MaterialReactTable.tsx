@@ -26,7 +26,10 @@ import { defaultLocalization, MRT_Localization } from './utils/localization';
 export interface MaterialReactTableProps<D extends {} = {}> {
   columns: Column<D | {}>[];
   data: D[];
+  enableColumnActions?: boolean;
   enableColumnHiding?: boolean;
+  enableColumnReordering?: boolean;
+  enableColumnResizing?: boolean;
   enableExpandAll?: boolean;
   enableFiltering?: boolean;
   enablePagination?: boolean;
@@ -35,6 +38,7 @@ export interface MaterialReactTableProps<D extends {} = {}> {
   enableSelection?: boolean;
   enableSorting?: boolean;
   enableSubRowTree?: boolean;
+  isLoading?: boolean;
   localization?: MRT_Localization;
   onRowClick?: (
     event: MouseEvent<HTMLTableRowElement>,

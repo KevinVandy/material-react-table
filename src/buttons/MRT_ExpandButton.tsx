@@ -13,13 +13,15 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
 
   return (
     <TableCell
-      style={{ width: '2rem' }}
       size="small"
-      {...row.getToggleRowExpandedProps({
-        style: {
-          paddingLeft: `${row.depth * 1.75 + 0.5}rem`,
-        },
-      })}
+      {...row.getToggleRowExpandedProps()}
+      style={{
+        padding: '0.5rem',
+        paddingRight: '0',
+        paddingLeft: `${row.depth + 0.5}rem`,
+        width: '3rem',
+        maxWidth: '3rem',
+      }}
     >
       <IconButton
         aria-label={localization?.expandButtonTitle}

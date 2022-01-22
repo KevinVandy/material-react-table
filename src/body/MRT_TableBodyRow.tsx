@@ -40,7 +40,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
           (row.canExpand || renderDetailPanel ? (
             <MRT_ExpandButton row={row} />
           ) : (
-            <TableCell />
+            <TableCell style={{ width: '1.5rem' }} />
           ))}
         {row.cells.map((cell, index) => (
           <MRT_TableBodyCell key={`${index}-${cell.value}`} cell={cell} />

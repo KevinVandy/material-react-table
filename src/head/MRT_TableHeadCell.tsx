@@ -30,8 +30,13 @@ interface Props {
 }
 
 export const MRT_TableHeadCell: FC<Props> = ({ column, index }) => {
-  const { enableFiltering, tableInstance, OverrideTableHeadCellComponent } =
-    useMaterialReactTable();
+  const {
+    enableFiltering,
+    enableColumnResizing,
+    enableColumnActions,
+    tableInstance,
+    OverrideTableHeadCellComponent,
+  } = useMaterialReactTable();
 
   if (OverrideTableHeadCellComponent) {
     return <>{OverrideTableHeadCellComponent(column, tableInstance)}</>;
@@ -47,7 +52,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ column, index }) => {
       align={isParentHeader ? 'center' : 'left'}
       {...column.getHeaderProps()}
     >
-      <TableCellContents {...column.getResizerProps()}>
+      <TableCellContents>
         <TableCellText>
           <span {...column.getSortByToggleProps()}>
             {column.render('Header')}
@@ -59,13 +64,16 @@ export const MRT_TableHeadCell: FC<Props> = ({ column, index }) => {
             )}
           </span>
           <span style={{ display: 'flex' }}>
-            {!isParentHeader && <MRT_ToggleHeadMenuButton column={column} />}
-            {!isLastColumn && (
+            {enableColumnActions && !isParentHeader && (
+              <MRT_ToggleHeadMenuButton column={column} />
+            )}
+            {enableColumnResizing && !isLastColumn && (
               <Divider
                 flexItem
                 orientation="vertical"
                 style={{ borderRightWidth: '2px', borderRadius: '2px' }}
                 onDoubleClick={() => tableInstance.resetResizing()}
+                {...column.getResizerProps()}
               />
             )}
           </span>

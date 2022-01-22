@@ -70,8 +70,6 @@ MinimumFeatures.args = {
     age: faker.datatype.number(80),
     address: faker.address.streetAddress(),
   })),
-  enableExpandAll: true,
-  enableSelectAll: true,
   enablePagination: false,
   enableSorting: false,
   showFooter: false,
