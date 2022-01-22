@@ -35,7 +35,6 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         }
         {...row.getRowProps()}
       >
-        {enableSelection && <MRT_SelectCheckbox row={row} />}
         {((enableSubRowTree && anyRowsCanExpand) || renderDetailPanel) &&
           (row.canExpand || renderDetailPanel ? (
             <MRT_ExpandButton row={row} />
@@ -44,6 +43,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
               style={{ width: `${tableInstance.expandedDepth + 0.5}rem` }}
             />
           ))}
+        {enableSelection && <MRT_SelectCheckbox row={row} />}
         {row.cells.map((cell, index) => (
           <MRT_TableBodyCell key={`${index}-${cell.value}`} cell={cell} />
         ))}

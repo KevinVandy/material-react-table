@@ -33,18 +33,20 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
 
   return (
     <TableRow {...headerGroup.getHeaderGroupProps()}>
-      {enableSelection ? (
-        !isParentHeader ? (
-          <MRT_SelectAllCheckbox />
-        ) : (
-          <TableCell style={{ width: '2rem' }} />
-        )
-      ) : null}
       {anyRowsCanExpand || renderDetailPanel ? (
         enableExpandAll && !isParentHeader ? (
           <MRT_ExpandAllButton />
         ) : (
-          <TableCell style={{ width: '2rem' }} />
+          <TableCell
+            style={{ width: `${tableInstance.expandedDepth + 0.5}rem` }}
+          />
+        )
+      ) : null}
+      {enableSelection ? (
+        !isParentHeader ? (
+          <MRT_SelectAllCheckbox />
+        ) : (
+          <TableCell style={{ width: '1rem' }} />
         )
       ) : null}
       {headerGroup.headers.map((column, index) => (

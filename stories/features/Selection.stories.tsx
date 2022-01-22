@@ -4,7 +4,7 @@ import { MaterialReactTable, MaterialReactTableProps } from '../../src';
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
-  title: 'Features/Row Selection Examples',
+  title: 'Features/Selection Examples',
 };
 
 export default meta;

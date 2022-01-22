@@ -12,6 +12,7 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
   const {
     renderDetailPanel,
     columns,
+    anyRowsCanExpand,
     enableColumnHiding,
     enableSelection,
     tableInstance,
@@ -27,8 +28,10 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
 
   return (
     <TableRow {...footerGroup.getFooterGroupProps()}>
-      {enableSelection && <TableCell style={{ width: '2rem' }} />}
-      {renderDetailPanel && <TableCell style={{ width: '2rem' }} />}
+      {(anyRowsCanExpand || renderDetailPanel) && (
+        <TableCell style={{ width: `${tableInstance.expandedDepth + 0.5}rem` }} />
+      )}
+      {enableSelection && <TableCell style={{ width: '1rem' }} />}
       {footerGroup.headers.map((column, index) => (
         <MRT_TableFooterCell key={`${index}-${column.id}`} column={column} />
       ))}

@@ -81,6 +81,12 @@ const maxFeaturesData = [...Array(21)].map((_) => ({
   lastName: faker.name.lastName(),
   age: faker.datatype.number(80),
   address: faker.address.streetAddress(),
+  subRows: [...Array(faker.datatype.number(2))].map((_) => ({
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    age: faker.datatype.number(80),
+    address: faker.address.streetAddress(),
+  })),
 }));
 
 export const MaximumFeatures = Template.bind({});
@@ -121,7 +127,10 @@ MaximumFeatures.args = {
     },
   ],
   data: maxFeaturesData,
+  enableColumnActions: true,
   enableColumnHiding: true,
+  enableColumnReordering: true,
+  enableColumnResizing: true,
   enableExpandAll: true,
   enableFiltering: true,
   enableSearch: true,
