@@ -32,8 +32,8 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
   return (
     <>
       <IconButton
-        aria-label={localization?.toggleColumnActionMenuButtonTitle}
-        title={localization?.toggleColumnActionMenuButtonTitle}
+        aria-label={localization?.columnActionMenuButtonTitle}
+        title={localization?.columnActionMenuButtonTitle}
         onClick={handleClick}
         size="small"
       >
