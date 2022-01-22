@@ -3,6 +3,7 @@ import {
   TableCell as MuiTableCell,
   TableSortLabel,
   styled,
+  Divider,
 } from '@mui/material';
 import { HeaderGroup } from 'react-table';
 import { useMaterialReactTable } from '../useMaterialReactTable';
@@ -17,14 +18,11 @@ const TableCellContents = styled('div')({
   display: 'grid',
 });
 
-const TableCellText = styled('div', {
-  shouldForwardProp: (prop) => prop !== 'isLastColumn',
-})<{ isLastColumn?: boolean }>(({ theme, isLastColumn }) => ({
-  borderRight: !isLastColumn ? `solid 2px ${theme.palette.divider}` : undefined,
+const TableCellText = styled('div')({
   width: '100%',
   display: 'flex',
   justifyContent: 'space-between',
-}));
+});
 
 interface Props {
   column: HeaderGroup;
@@ -49,8 +47,8 @@ export const MRT_TableHeadCell: FC<Props> = ({ column, index }) => {
       align={isParentHeader ? 'center' : 'left'}
       {...column.getHeaderProps()}
     >
-      <TableCellContents>
-        <TableCellText isLastColumn={isLastColumn}>
+      <TableCellContents {...column.getResizerProps()}>
+        <TableCellText>
           <span {...column.getSortByToggleProps()}>
             {column.render('Header')}
             {!isParentHeader && column.canSort && (
@@ -60,7 +58,17 @@ export const MRT_TableHeadCell: FC<Props> = ({ column, index }) => {
               />
             )}
           </span>
-          {!isParentHeader && <MRT_ToggleHeadMenuButton column={column} />}
+          <span style={{ display: 'flex' }}>
+            {!isParentHeader && <MRT_ToggleHeadMenuButton column={column} />}
+            {!isLastColumn && (
+              <Divider
+                flexItem
+                orientation="vertical"
+                style={{ borderRightWidth: '2px', borderRadius: '2px' }}
+                onDoubleClick={() => tableInstance.resetResizing()}
+              />
+            )}
+          </span>
         </TableCellText>
         {enableFiltering && column.canFilter && (
           <MRT_FilterTextfield column={column} />

@@ -8,8 +8,10 @@ import {
   TableInstance,
   useExpanded,
   useFilters,
+  useFlexLayout,
   useGlobalFilter,
   usePagination,
+  useResizeColumns,
   useRowSelect,
   useSortBy,
   useTable,
@@ -38,6 +40,8 @@ export const MaterialReactTableProvider = <D extends {}>({
 }: PropsWithChildren<MaterialReactTableProps<D>>) => {
   const tableInstance = useTable(
     { columns, data },
+    useFlexLayout,
+    useResizeColumns,
     useFilters,
     useGlobalFilter,
     useSortBy,

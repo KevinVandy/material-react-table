@@ -34,5 +34,9 @@ export const useMRTCalcs = <D extends {}>({
     return maxDepth - 1;
   }, [tableInstance.columns]);
 
-  return { anyRowsCanExpand, anyRowsExpanded, maxColumnDepth };
+  return {
+    anyRowsCanExpand,
+    anyRowsExpanded,
+    maxColumnDepth,
+  };
 };
