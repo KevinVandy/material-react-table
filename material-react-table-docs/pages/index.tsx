@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
-const Home: NextPage = () => {
+const Page: NextPage = () => {
   return (
     <div>
       <Head>
@@ -9,8 +9,9 @@ const Home: NextPage = () => {
         <meta name="description" content="Material React Table Docs" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      Home Page
     </div>
   );
 };
 
-export default Home;
+export default Page;
