@@ -6,7 +6,7 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 interface Props {}
 
 export const MRT_ExpandAllButton: FC<Props> = () => {
-  const { tableInstance, localization, anyRowsExpanded } =
+  const { tableInstance, localization, anyRowsExpanded, renderDetailPanel } =
     useMaterialReactTable();
 
   return (
@@ -16,7 +16,7 @@ export const MRT_ExpandAllButton: FC<Props> = () => {
       style={{
         padding: '0.5rem',
         paddingRight: '0',
-        width: `${tableInstance.expandedDepth + 2}rem`,
+        width: `${renderDetailPanel ? 2 : tableInstance.expandedDepth + 2}rem`,
       }}
     >
       <IconButton

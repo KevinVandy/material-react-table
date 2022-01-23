@@ -31,7 +31,11 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
     <TableRow {...footerGroup.getFooterGroupProps()}>
       {(anyRowsCanExpand || renderDetailPanel) && (
         <TableCell
-          style={{ width: `${tableInstance.expandedDepth + 0.5}rem` }}
+          style={{
+            width: `${
+              renderDetailPanel ? 2 : tableInstance.expandedDepth + 0.5
+            }rem`,
+          }}
         />
       )}
       {enableSelection && <MRT_TableSpacerCell width="1rem" />}
