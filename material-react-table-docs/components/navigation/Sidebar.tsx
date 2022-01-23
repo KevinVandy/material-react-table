@@ -1,4 +1,5 @@
-import type { NextPage } from 'next';
+import Link from 'next/link';
+import { FC } from 'react';
 import {
   Divider,
   Drawer as MuiDrawer,
@@ -9,8 +10,6 @@ import {
   Typography,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import Link from 'next/link';
-import { FC } from 'react';
 
 const Drawer = styled(MuiDrawer)({
   zIndex: 1,
@@ -21,13 +20,23 @@ const List = styled(MuiList)({
   padding: '80px 0',
 });
 
-const ListItem = styled(MuiListItem)({
+const ListItem = styled(MuiListItem)(({ theme }) => ({
   cursor: 'pointer',
+  fontWeight: 'bold',
   transition: 'all .2s',
   padding: '1rem',
+  color: theme.palette.primary.dark,
   '&:hover': {
     backgroundColor: 'rgba(0, 0, 0, 0.08)',
   },
+}));
+
+const ListItemExamples = styled(ListItem)({
+  paddingLeft: '2rem',
+});
+
+const ListItemHeader = styled(MuiListItem)({
+  padding: '1rem',
 });
 
 interface Props {
@@ -50,11 +59,9 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
           <ListItem>Install</ListItem>
         </Link>
         <Divider />
-
-        <Typography>Examples</Typography>
-
+        <ListItemHeader>Examples</ListItemHeader>
         <Link href="/docs/examples/basic" passHref>
-          <ListItem>Basic</ListItem>
+          <ListItemExamples>Basic</ListItemExamples>
         </Link>
       </List>
     </Drawer>
