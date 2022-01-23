@@ -4,7 +4,7 @@ import TopBar from '../components/navigation/TopBar';
 import SideBar from '../components/navigation/Sidebar';
 
 const PageContainer = styled('div')({
-  transition: 'all .2s',
+  transition: 'all .3s ease',
 });
 
 export const Layout: FC = ({ children }) => {
@@ -15,7 +15,7 @@ export const Layout: FC = ({ children }) => {
       <TopBar navOpen={navOpen} setNavOpen={setNavOpen} />
       <SideBar navOpen={navOpen} setNavOpen={setNavOpen} />
       <PageContainer
-        style={{ padding: `80px 32px 800px ${navOpen ? '220px' : '32px'}` }}
+        style={{ padding: `80px 32px 800px ${navOpen ? '260px' : '32px'}` }}
       >
         {children}
       </PageContainer>

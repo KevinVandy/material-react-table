@@ -20,10 +20,10 @@ const List = styled(MuiList)({
   padding: '80px 0',
 });
 
-const ListItem = styled(MuiListItem)(({ theme }) => ({
+const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
   cursor: 'pointer',
   fontWeight: 'bold',
-  transition: 'all .2s',
+  transition: 'all .3s ease',
   padding: '1rem',
   color: theme.palette.primary.dark,
   '&:hover': {
@@ -31,7 +31,7 @@ const ListItem = styled(MuiListItem)(({ theme }) => ({
   },
 }));
 
-const ListItemExamples = styled(ListItem)({
+const ListItemLevel2 = styled(ListItemLevel1)({
   paddingLeft: '2rem',
 });
 
@@ -47,21 +47,19 @@ interface Props {
 const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
   return (
     <Drawer open={navOpen} variant="permanent">
-      <List style={{ width: navOpen ? '200px' : '0', transition: 'all .2s' }}>
+      <List style={{ width: navOpen ? '240px' : '0', transition: 'all .2s' }}>
         <Link href="/" passHref>
-          <ListItem>Home</ListItem>
+          <ListItemLevel1>Home</ListItemLevel1>
         </Link>
         <Divider />
-        <Link href="/docs/getting-started" passHref>
-          <ListItem>Getting Started</ListItem>
-        </Link>
+        <ListItemHeader>Getting Started</ListItemHeader>
         <Link href="/docs/install" passHref>
-          <ListItem>Install</ListItem>
+          <ListItemLevel2>Install</ListItemLevel2>
         </Link>
         <Divider />
         <ListItemHeader>Examples</ListItemHeader>
         <Link href="/docs/examples/basic" passHref>
-          <ListItemExamples>Basic</ListItemExamples>
+          <ListItemLevel2>Basic</ListItemLevel2>
         </Link>
       </List>
     </Drawer>
