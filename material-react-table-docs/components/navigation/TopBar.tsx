@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import { FC } from 'react';
 import {
   AppBar as MuiAppBar,
   IconButton,
@@ -13,7 +13,12 @@ const AppBar = styled(MuiAppBar)({
   zIndex: 2,
 });
 
-const TopBar: NextPage = ({ navOpen, setNavOpen }) => {
+interface Props {
+  navOpen: boolean;
+  setNavOpen: (navOpen: boolean) => void;
+}
+
+const TopBar: FC<Props> = ({ navOpen, setNavOpen }) => {
   return (
     <AppBar position="fixed">
       <Toolbar>
