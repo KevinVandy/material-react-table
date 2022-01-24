@@ -5,6 +5,7 @@ import { ColumnInstance } from 'react-table';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SortIcon from '@mui/icons-material/Sort';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 
 const MenuItem = styled(MuiMenuItem)({
   display: 'flex',
@@ -22,8 +23,12 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
   column,
   setAnchorEl,
 }) => {
-  const { enableColumnHiding, enableSorting, localization } =
-    useMaterialReactTable();
+  const {
+    enableColumnHiding,
+    enableColumnGrouping,
+    enableSorting,
+    localization,
+  } = useMaterialReactTable();
 
   const handleClearSort = () => {
     column.clearSortBy();
@@ -45,36 +50,51 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     setAnchorEl(null);
   };
 
+  const handleGroupByColumn = () => {
+    column.toggleGroupBy();
+    setAnchorEl(null);
+  };
+
   return (
     <Menu
       anchorEl={anchorEl}
       open={!!anchorEl}
       onClose={() => setAnchorEl(null)}
     >
-      {enableSorting && (
-        <>
-          <MenuItem disabled={!column.isSorted} onClick={handleClearSort}>
-            <ClearAllIcon /> {localization?.columnActionMenuItemClearSort}
-          </MenuItem>
-          <MenuItem
-            disabled={column.isSorted && !column.isSortedDesc}
-            onClick={handleSortAsc}
-          >
-            <SortIcon /> {localization?.columnActionMenuItemSortAsc}
-          </MenuItem>
-          <MenuItem
-            disabled={column.isSorted && column.isSortedDesc}
-            onClick={handleSortDesc}
-          >
-            <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />{' '}
-            {localization?.columnActionMenuItemSortDesc}
-          </MenuItem>
-          <Divider />
-        </>
-      )}
+      {enableSorting && [
+        <MenuItem key={1} disabled={!column.isSorted} onClick={handleClearSort}>
+          <ClearAllIcon /> {localization?.columnActionMenuItemClearSort}
+        </MenuItem>,
+        <MenuItem
+          key={2}
+          disabled={column.isSorted && !column.isSortedDesc}
+          onClick={handleSortAsc}
+        >
+          <SortIcon /> {localization?.columnActionMenuItemSortAsc}
+        </MenuItem>,
+        <MenuItem
+          key={3}
+          disabled={column.isSorted && column.isSortedDesc}
+          onClick={handleSortDesc}
+        >
+          <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />{' '}
+          {localization?.columnActionMenuItemSortDesc}
+        </MenuItem>,
+        <Divider key={4} />,
+      ]}
       {enableColumnHiding && (
         <MenuItem onClick={handleHideColumn}>
           <VisibilityOffIcon /> {localization?.columnActionMenuItemHideColumn}
+        </MenuItem>
+      )}
+      {enableColumnGrouping && column.canGroupBy && (
+        <MenuItem disabled={column.isGrouped} onClick={handleGroupByColumn}>
+          <DynamicFeedIcon /> {localization?.columnActionMenuItemGroupBy}
+        </MenuItem>
+      )}
+      {enableColumnGrouping && column.canGroupBy && (
+        <MenuItem disabled={!column.isGrouped} onClick={handleGroupByColumn}>
+          <DynamicFeedIcon /> {localization?.columnActionMenuItemUnGroupBy}
         </MenuItem>
       )}
     </Menu>

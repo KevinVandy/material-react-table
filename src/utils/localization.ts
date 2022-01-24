@@ -4,6 +4,8 @@ export interface MRT_Localization {
   columnActionMenuItemSortAsc?: string;
   columnActionMenuItemClearSort?: string;
   columnActionMenuItemSortDesc?: string;
+  columnActionMenuItemGroupBy?: string;
+  columnActionMenuItemUnGroupBy?: string;
   expandAllButtonTitle?: string;
   expandButtonTitle?: string;
   filterTextFieldClearButtonTitle?: string;
@@ -19,11 +21,13 @@ export const defaultLocalization: MRT_Localization = {
   columnActionMenuItemSortAsc: 'Sort ascending',
   columnActionMenuItemClearSort: 'Clear sorting',
   columnActionMenuItemSortDesc: 'Sort descending',
+  columnActionMenuItemGroupBy: 'Group by column',
+  columnActionMenuItemUnGroupBy: 'Ungroup column',
   expandAllButtonTitle: 'Expand all',
   expandButtonTitle: 'Expand',
   filterTextFieldClearButtonTitle: 'Clear filter',
   filterTextFieldPlaceholder: 'Filter',
   searchTextFieldClearButtonTitle: 'Clear search',
   searchTextFieldPlaceholder: 'Search',
-  showHideColumnsButtonTitle: 'Show/Hide columns'
+  showHideColumnsButtonTitle: 'Show/Hide columns',
 };

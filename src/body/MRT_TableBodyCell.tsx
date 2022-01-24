@@ -8,10 +8,10 @@ interface Props {
 }
 
 export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
-  const {
-    tableInstance,
-    OverrideTableBodyCellComponent,
-  } = useMaterialReactTable();
+  const { tableInstance, OverrideTableBodyCellComponent } =
+    useMaterialReactTable();
+
+
 
   if (OverrideTableBodyCellComponent) {
     return <>{OverrideTableBodyCellComponent(cell, tableInstance)}</>;
@@ -19,7 +19,15 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
 
   return (
     <TableCell variant="body" {...cell.getCellProps()}>
-      {cell.render('Cell')}
+      {cell.isPlaceholder ? null : cell.isAggregated ? (
+        cell.render('Aggregated')
+      ) : cell.isGrouped ? (
+        <span>
+          {cell.render('Cell')} ({cell.row.subRows.length})
+        </span>
+      ) : (
+        cell.render('Cell')
+      )}
     </TableCell>
   );
 };

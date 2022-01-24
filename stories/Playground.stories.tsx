@@ -128,6 +128,7 @@ MaximumFeatures.args = {
   ],
   data: maxFeaturesData,
   enableColumnActions: true,
+  enableColumnGrouping: true,
   enableColumnHiding: true,
   enableColumnReordering: true,
   enableColumnResizing: true,

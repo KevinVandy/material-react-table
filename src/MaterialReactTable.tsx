@@ -33,6 +33,7 @@ export interface MaterialReactTableProps<D extends {} = {}> {
   enableColumnResizing?: boolean;
   enableExpandAll?: boolean;
   enableFiltering?: boolean;
+  enableColumnGrouping?: boolean;
   enablePagination?: boolean;
   enableSearch?: boolean;
   enableSelectAll?: boolean;
