@@ -16,11 +16,11 @@ import {
   useSortBy,
   useTable,
 } from 'react-table';
-import { MaterialReactTableProps } from '.';
+import { MaterialReactTableProps } from './MaterialReactTable';
 import { UseMRTCalcs, useMRTCalcs } from './utils/useMRTCalcs';
 import { showOverrideWarnings } from './utils/overrideWarnings';
 
-interface UseMaterialReactTable<D extends {}>
+export interface UseMaterialReactTable<D extends {}>
   extends MaterialReactTableProps<D>,
     UseMRTCalcs {
   tableInstance: TableInstance<D>;

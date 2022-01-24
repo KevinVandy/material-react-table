@@ -1,1 +1,6 @@
-export * from './MaterialReactTable';
+import {
+  MaterialReactTable,
+  MaterialReactTableProps,
+} from './MaterialReactTable';
+export default MaterialReactTable;
+export type { MaterialReactTableProps };
