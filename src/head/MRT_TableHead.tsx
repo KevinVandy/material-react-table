@@ -8,20 +8,15 @@ interface Props {}
 
 export const MRT_TableHead: FC<Props> = () => {
   const {
-    overrideTableHeadComponent,
     tableInstance,
-    tableHeadProps,
+    muiTableHeadProps,
     enablePagination,
     isFetching,
     positionPagination,
   } = useMaterialReactTable();
 
-  if (overrideTableHeadComponent) {
-    return <>{overrideTableHeadComponent(tableInstance)}</>;
-  }
-
   return (
-    <TableHead {...tableHeadProps}>
+    <TableHead {...muiTableHeadProps}>
       {isFetching && <LinearProgress />}
       {enablePagination &&
         ['top', 'both'].includes(positionPagination ?? '') && (

@@ -7,10 +7,10 @@ import { MRT_Toolbar } from '../toolbar/MRT_Toolbar';
 interface Props {}
 
 export const MRT_TableContainer: FC<Props> = () => {
-  const { tableContainerProps, showToolbar } = useMaterialReactTable();
+  const { muiTableContainerProps, showToolbar } = useMaterialReactTable();
 
   return (
-    <TableContainer component={Paper} {...tableContainerProps}>
+    <TableContainer component={Paper} {...muiTableContainerProps}>
       {showToolbar && <MRT_Toolbar />}
       <MRT_Table />
     </TableContainer>

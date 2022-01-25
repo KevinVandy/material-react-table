@@ -13,26 +13,24 @@ interface Props {}
 
 export const MRT_Toolbar: FC<Props> = () => {
   const {
-    overrideTableToolbarComponent,
     enableSearch,
-    tableInstance,
-    tableTitleProps,
-    tableToolbarProps,
+    muiTableTitleProps,
+    muiTableToolbarProps,
     title,
   } = useMaterialReactTable();
 
-  if (overrideTableToolbarComponent) {
-    return <>{overrideTableToolbarComponent(tableInstance)}</>;
-  }
-
   //if no features in the toolbar are enabled, don't render anything
-  if (!enableSearch && !title && !tableToolbarProps) {
+  if (!enableSearch && !title && !muiTableToolbarProps) {
     return null;
   }
 
   return (
-    <Toolbar variant="dense" {...tableToolbarProps}>
-      {title ? <Typography {...tableTitleProps}>{title}</Typography> : <span />}
+    <Toolbar variant="dense" {...muiTableToolbarProps}>
+      {title ? (
+        <Typography {...muiTableTitleProps}>{title}</Typography>
+      ) : (
+        <span />
+      )}
       {enableSearch && <MRT_SearchTextField />}
     </Toolbar>
   );

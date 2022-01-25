@@ -25,23 +25,14 @@ const CircularProgressWrapper = styled('div')({
 interface Props {}
 
 export const MRT_TableBody: FC<Props> = () => {
-  const {
-    tableInstance,
-    tableBodyProps,
-    isLoading,
-    enablePagination,
-    overrideTableBodyComponent,
-  } = useMaterialReactTable();
-
-  if (overrideTableBodyComponent) {
-    return <>{overrideTableBodyComponent(tableInstance)}</>;
-  }
+  const { tableInstance, muiTableBodyProps, isLoading, enablePagination } =
+    useMaterialReactTable();
 
   const rows = enablePagination ? tableInstance.page : tableInstance.rows;
 
   return (
     <>
-      <TableBody {...tableBodyProps} {...tableInstance.getTableBodyProps()}>
+      <TableBody {...muiTableBodyProps} {...tableInstance.getTableBodyProps()}>
         {isLoading && (
           <CircularProgressWrapper>
             <CircularProgress />

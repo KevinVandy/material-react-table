@@ -13,9 +13,7 @@ import {
 } from '@mui/material';
 import {
   Cell,
-  HeaderGroup,
   Row,
-  TableInstance,
   TableOptions,
   UseExpandedOptions,
   UseFiltersOptions,
@@ -58,6 +56,16 @@ export interface MaterialReactTableProps<D extends {} = {}>
   isFetching?: boolean;
   isLoading?: boolean;
   localization?: Partial<MRT_Localization>;
+  muiSearchTextFieldProps?: TextFieldProps;
+  muiTableBodyProps?: TableBodyProps;
+  muiTableContainerProps?: TableContainerProps;
+  muiTableDetailPanelProps?: TableCellProps;
+  muiTableFooterProps?: TableFooterProps;
+  muiTableHeadProps?: TableHeadProps;
+  muiTablePaginationProps?: TablePaginationProps;
+  muiTableProps?: TableProps;
+  muiTableTitleProps?: TypographyProps;
+  muiTableToolbarProps?: ToolbarProps;
   onCellClick?: (
     event: MouseEvent<HTMLTableCellElement>,
     cell: Cell<D>,
@@ -73,56 +81,12 @@ export interface MaterialReactTableProps<D extends {} = {}>
     selectedRows: Row<D>[],
   ) => void;
   onSearchChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  overrideTableBodyCellComponent?(
-    cell: Cell<D>,
-    tableInstance: TableInstance<D>,
-  ): ReactNode;
-  overrideTableBodyComponent?(tableInstance: TableInstance<D>): ReactNode;
-  overrideTableBodyRowComponent?(
-    row: Row<D>,
-    tableInstance: TableInstance<D>,
-  ): ReactNode;
-  overrideTableDetailPanelComponent?(
-    row: Row<D>,
-    tableInstance: TableInstance<D>,
-  ): ReactNode;
-  overrideTableFooterCellComponent?(
-    column: HeaderGroup<D>,
-    tableInstance: TableInstance<D>,
-  ): ReactNode;
-  overrideTableFooterComponent?(tableInstance: TableInstance<D>): ReactNode;
-  overrideTableFooterRowComponent?(
-    footerGroup: HeaderGroup<D>,
-    tableInstance: TableInstance<D>,
-  ): ReactNode;
-  overrideTableHeadCellComponent?(
-    column: HeaderGroup<D>,
-    tableInstance: TableInstance<D>,
-  ): ReactNode;
-  overrideTableHeadComponent?(tableInstance: TableInstance<D>): ReactNode;
-  overrideTableHeadRowComponent?(
-    headerGroup: HeaderGroup<D>,
-    tableInstance: TableInstance<D>,
-  ): ReactNode;
-  overrideTablePaginationComponent?(tableInstance: TableInstance<D>): ReactNode;
-  overrideTableToolbarComponent?(tableInstance: TableInstance<D>): ReactNode;
   positionPagination?: 'bottom' | 'top' | 'both';
   renderDetailPanel?: (rowData: Row<D>) => ReactNode;
   showFiltersInColumnHead?: boolean;
   showFooter?: boolean;
   showHead?: boolean;
   showToolbar?: boolean;
-  surpressoverrideWarnings?: boolean;
-  tableBodyProps?: TableBodyProps;
-  tableContainerProps?: TableContainerProps;
-  tableDetailPanelProps?: TableCellProps;
-  tableFooterProps?: TableFooterProps;
-  tableHeadProps?: TableHeadProps;
-  tablePaginationProps?: TablePaginationProps;
-  tableProps?: TableProps;
-  tableSearchTextfieldProps?: TextFieldProps;
-  tableTitleProps?: TypographyProps;
-  tableToolbarProps?: ToolbarProps;
   title?: string | ReactNode;
 }
 

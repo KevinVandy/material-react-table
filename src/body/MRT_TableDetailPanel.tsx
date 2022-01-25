@@ -8,16 +8,8 @@ interface Props {
 }
 
 export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
-  const {
-    tableInstance,
-    renderDetailPanel,
-    overrideTableDetailPanelComponent,
-    tableDetailPanelProps,
-  } = useMaterialReactTable();
-
-  if (overrideTableDetailPanelComponent) {
-    return <>{overrideTableDetailPanelComponent(row, tableInstance)}</>;
-  }
+  const { tableInstance, renderDetailPanel, muiTableDetailPanelProps } =
+    useMaterialReactTable();
 
   return (
     <TableRow {...row.getToggleRowExpandedProps()}>
@@ -29,7 +21,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
           paddingTop: row.isExpanded ? '1rem' : 0,
           transition: 'all 0.2s',
         }}
-        {...tableDetailPanelProps}
+        {...muiTableDetailPanelProps}
       >
         <Collapse in={row.isExpanded}>{renderDetailPanel?.(row)}</Collapse>
       </TableCell>

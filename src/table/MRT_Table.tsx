@@ -8,11 +8,11 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 interface Props {}
 
 export const MRT_Table: FC<Props> = () => {
-  const { tableInstance, tableProps, showHead, showFooter } =
+  const { tableInstance, muiTableProps, showHead, showFooter } =
     useMaterialReactTable();
 
   return (
-    <Table {...tableProps} {...tableInstance.getTableProps()}>
+    <Table {...muiTableProps} {...tableInstance.getTableProps()}>
       {showHead && <MRT_TableHead />}
       <MRT_TableBody />
       {showFooter && <MRT_TableFooter />}

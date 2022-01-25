@@ -5,20 +5,12 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 interface Props {}
 
 export const MRT_TablePagination: FC<Props> = () => {
-  const {
-    tableInstance,
-    tablePaginationProps,
-    overrideTablePaginationComponent,
-  } = useMaterialReactTable();
+  const { tableInstance, muiTablePaginationProps } = useMaterialReactTable();
 
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     tableInstance.setPageSize(+event.target.value);
     tableInstance.gotoPage(0);
   };
-
-  if (overrideTablePaginationComponent) {
-    return <>{overrideTablePaginationComponent(tableInstance)}</>;
-  }
 
   return (
     <TableRow>
@@ -35,7 +27,7 @@ export const MRT_TablePagination: FC<Props> = () => {
         showLastButton={
           tableInstance.rows.length / tableInstance.state.pageSize > 2
         }
-        {...tablePaginationProps}
+        {...muiTablePaginationProps}
       />
     </TableRow>
   );

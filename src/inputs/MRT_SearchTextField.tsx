@@ -19,7 +19,7 @@ interface Props {}
 export const MRT_SearchTextField: FC<Props> = () => {
   const {
     tableInstance,
-    tableSearchTextfieldProps,
+    muiSearchTextFieldProps,
     localization,
     onSearchChange,
   } = useMaterialReactTable();
@@ -68,7 +68,7 @@ export const MRT_SearchTextField: FC<Props> = () => {
           </InputAdornment>
         ),
       }}
-      {...tableSearchTextfieldProps}
+      {...muiSearchTextFieldProps}
     />
   );
 };

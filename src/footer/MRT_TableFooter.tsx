@@ -8,19 +8,14 @@ interface Props {}
 
 export const MRT_TableFooter: FC<Props> = () => {
   const {
-    overrideTableFooterComponent,
     enablePagination,
     positionPagination,
-    tableFooterProps,
+    muiTableFooterProps,
     tableInstance,
   } = useMaterialReactTable();
 
-  if (overrideTableFooterComponent) {
-    return <>{overrideTableFooterComponent(tableInstance)}</>;
-  }
-
   return (
-    <TableFooter {...tableFooterProps}>
+    <TableFooter {...muiTableFooterProps}>
       {tableInstance.footerGroups.map((footerGroup, index) => (
         <MRT_TableFooterRow
           key={`${index}-${footerGroup.id}`}

@@ -17,15 +17,10 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
     enableColumnHiding,
     enableSelection,
     tableInstance,
-    overrideTableFooterRowComponent,
   } = useMaterialReactTable();
 
   //if no content in row, skip row
   if (!columns?.some((c) => c.Footer)) return null;
-
-  if (overrideTableFooterRowComponent) {
-    return <>{overrideTableFooterRowComponent(footerGroup, tableInstance)}</>;
-  }
 
   return (
     <TableRow {...footerGroup.getFooterGroupProps()}>
