@@ -36,11 +36,24 @@ export const MaterialReactTableProvider = <D extends {}>({
   children,
   columns,
   data,
+  defaultColumn,
+  getRowId,
+  getSubRows,
+  initialState,
+  stateReducer,
   surpressOverrideWarnings,
   ...rest
 }: PropsWithChildren<MaterialReactTableProps<D>>) => {
   const tableInstance = useTable(
-    { columns, data },
+    {
+      columns,
+      data,
+      defaultColumn,
+      getRowId,
+      getSubRows,
+      initialState,
+      stateReducer,
+    },
     useFlexLayout,
     useResizeColumns,
     useFilters,
@@ -62,8 +75,6 @@ export const MaterialReactTableProvider = <D extends {}>({
     <MaterialReactTableContext.Provider
       //@ts-ignore
       value={{
-        columns,
-        data,
         tableInstance,
         ...mrtCalcs,
         ...rest,

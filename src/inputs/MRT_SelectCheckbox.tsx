@@ -12,7 +12,7 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row }) => {
 
   const onSelectChange = (event: ChangeEvent) => {
     row.getToggleRowSelectedProps()?.onChange?.(event);
-    onRowSelectChange?.(event, row.state, tableInstance.selectedFlatRows);
+    onRowSelectChange?.(event, row, tableInstance.selectedFlatRows);
   };
 
   return (

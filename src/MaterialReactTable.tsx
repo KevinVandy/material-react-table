@@ -8,17 +8,18 @@ import {
   TablePaginationProps,
   TableProps,
   TextFieldProps,
-  Theme,
   ToolbarProps,
   TypographyProps,
 } from '@mui/material';
 import {
+  ActionType,
   Cell,
   Column,
   HeaderGroup,
   Row,
   TableInstance,
-  UseRowStateLocalState,
+  TableState,
+  UseTableColumnOptions,
 } from 'react-table';
 import { MaterialReactTableProvider } from './useMaterialReactTable';
 import { MRT_TableContainer } from './table/MRT_TableContainer';
@@ -27,49 +28,71 @@ import { defaultLocalization, MRT_Localization } from './utils/localization';
 export interface MaterialReactTableProps<D extends {} = {}> {
   columns: Column<D | {}>[];
   data: D[];
+  defaultColumn?: UseTableColumnOptions<D>;
   enableColumnActions?: boolean;
+  enableColumnGrouping?: boolean;
   enableColumnHiding?: boolean;
   enableColumnReordering?: boolean;
   enableColumnResizing?: boolean;
   enableExpandAll?: boolean;
   enableFiltering?: boolean;
-  enableColumnGrouping?: boolean;
   enablePagination?: boolean;
   enableSearch?: boolean;
   enableSelectAll?: boolean;
   enableSelection?: boolean;
   enableSorting?: boolean;
   enableSubRowTree?: boolean;
+  getRowId?: (
+    originalRow?: Partial<Row<D>>,
+    relativeIndex?: number,
+    parent?: Row<D | {}>,
+  ) => string;
+  getSubRows?: (
+    originalRow: Partial<Row<D>>,
+    relativeIndex: number,
+  ) => Row<D>[];
+  initialState?: Partial<TableState<D>>;
   isLoading?: boolean;
-  isReloading?: boolean;
-  localization?: MRT_Localization;
-  onRowClick?: (
-    event: MouseEvent<HTMLTableRowElement>,
-    rowData: Row<D>,
+  isFetching?: boolean;
+  localization?: Partial<MRT_Localization>;
+  onCellClick?: (
+    event: MouseEvent<HTMLTableCellElement>,
+    cell: Cell<D>,
+  ) => void;
+  onRowClick?: (event: MouseEvent<HTMLTableRowElement>, row: Row<D>) => void;
+  onRowExpandChange?: (
+    event: MouseEvent<HTMLButtonElement>,
+    row: Row<D>,
   ) => void;
   onRowSelectChange?: (
     event: ChangeEvent,
-    rowState: UseRowStateLocalState<D, unknown>,
+    row: Row<D>,
     selectedRows: Row<D>[],
   ) => void;
+  onSearchChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   positionPagination?: 'bottom' | 'top' | 'both';
   renderDetailPanel?: (rowData: Row<D>) => ReactNode;
   showFiltersInColumnHead?: boolean;
   showFooter?: boolean;
   showHead?: boolean;
   showToolbar?: boolean;
+  stateReducer?: (
+    newState: TableState<D>,
+    action: ActionType,
+    previousState: TableState<D>,
+    tableInstance?: TableInstance<{} | D>,
+  ) => TableState;
   surpressOverrideWarnings?: boolean;
   tableBodyProps?: TableBodyProps;
   tableContainerProps?: TableContainerProps;
   tableDetailPanelProps?: TableCellProps;
   tableFooterProps?: TableFooterProps;
-  tableToolbarProps?: ToolbarProps;
   tableHeadProps?: TableHeadProps;
   tablePaginationProps?: TablePaginationProps;
   tableProps?: TableProps;
   tableSearchTextfieldProps?: TextFieldProps;
   tableTitleProps?: TypographyProps;
-  theme?: Theme;
+  tableToolbarProps?: ToolbarProps;
   title?: string | ReactNode;
   OverrideTableBodyCellComponent?(
     cell: Cell<D>,
@@ -84,11 +107,11 @@ export interface MaterialReactTableProps<D extends {} = {}> {
     row: Row<D>,
     tableInstance: TableInstance<D>,
   ): ReactNode;
-  OverrideTableFooterComponent?(tableInstance: TableInstance<D>): ReactNode;
   OverrideTableFooterCellComponent?(
     column: HeaderGroup<D>,
     tableInstance: TableInstance<D>,
   ): ReactNode;
+  OverrideTableFooterComponent?(tableInstance: TableInstance<D>): ReactNode;
   OverrideTableFooterRowComponent?(
     footerGroup: HeaderGroup<D>,
     tableInstance: TableInstance<D>,
@@ -107,6 +130,7 @@ export interface MaterialReactTableProps<D extends {} = {}> {
 }
 
 export const MaterialReactTable = <D extends {}>({
+  defaultColumn = { minWidth: 50, maxWidth: 1000 },
   enablePagination = true,
   enableSorting = true,
   enableSubRowTree = true,
@@ -119,6 +143,7 @@ export const MaterialReactTable = <D extends {}>({
   ...rest
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
+    defaultColumn={defaultColumn}
     enablePagination={enablePagination}
     enableSorting={enableSorting}
     enableSubRowTree={enableSubRowTree}

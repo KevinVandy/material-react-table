@@ -17,13 +17,22 @@ const TextField = styled(MuiTextField)({
 interface Props {}
 
 export const MRT_SearchTextField: FC<Props> = () => {
-  const { tableInstance, tableSearchTextfieldProps, localization } = useMaterialReactTable();
+  const {
+    tableInstance,
+    tableSearchTextfieldProps,
+    localization,
+    onSearchChange,
+  } = useMaterialReactTable();
 
   const [searchValue, setSearchValue] = useState('');
 
-  const handleChange = useAsyncDebounce((value) => {
-    tableInstance.setGlobalFilter(value ?? undefined);
-  }, 200);
+  const handleChange = useAsyncDebounce(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      tableInstance.setGlobalFilter(event.target.value ?? undefined);
+      onSearchChange?.(event);
+    },
+    200,
+  );
 
   const handleClear = () => {
     setSearchValue('');
@@ -33,9 +42,9 @@ export const MRT_SearchTextField: FC<Props> = () => {
   return (
     <TextField
       placeholder={localization?.searchTextFieldPlaceholder}
-      onChange={(e: ChangeEvent<HTMLInputElement>) => {
-        setSearchValue(e.target.value);
-        handleChange(e.target.value);
+      onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        setSearchValue(event.target.value);
+        handleChange(event);
       }}
       value={searchValue ?? ''}
       variant="standard"

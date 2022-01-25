@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEvent } from 'react';
 import { TableCell } from '@mui/material';
 import { Cell } from 'react-table';
 import { useMaterialReactTable } from '../useMaterialReactTable';
@@ -8,17 +8,21 @@ interface Props {
 }
 
 export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
-  const { tableInstance, OverrideTableBodyCellComponent } =
+  const { tableInstance, OverrideTableBodyCellComponent, onCellClick } =
     useMaterialReactTable();
-
-
 
   if (OverrideTableBodyCellComponent) {
     return <>{OverrideTableBodyCellComponent(cell, tableInstance)}</>;
   }
 
   return (
-    <TableCell variant="body" {...cell.getCellProps()}>
+    <TableCell
+      onClick={(event: MouseEvent<HTMLTableCellElement>) =>
+        onCellClick?.(event, cell)
+      }
+      variant="body"
+      {...cell.getCellProps()}
+    >
       {cell.isPlaceholder ? null : cell.isAggregated ? (
         cell.render('Aggregated')
       ) : cell.isGrouped ? (

@@ -45,5 +45,5 @@ export const LoadingExample: Story<MaterialReactTableProps> = () => (
 );
 
 export const ReloadingExample: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} isReloading />
+  <MaterialReactTable columns={columns} data={data} isFetching />
 );
