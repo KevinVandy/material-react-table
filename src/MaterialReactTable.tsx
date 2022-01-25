@@ -38,7 +38,7 @@ export interface MaterialReactTableProps<D extends {} = {}>
     UsePaginationOptions<D>,
     UseResizeColumnsOptions<D>,
     UseRowSelectOptions<D>,
-    UseRowStateOptions<D>,
+    UseRowStateOptions<D>, 
     UseSortByOptions<D> {
   enableColumnActions?: boolean;
   enableColumnGrouping?: boolean;
@@ -90,7 +90,7 @@ export interface MaterialReactTableProps<D extends {} = {}>
   title?: string | ReactNode;
 }
 
-export const MaterialReactTable = <D extends {}>({
+export default <D extends {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
   enablePagination = true,
   enableSorting = true,
