@@ -12,23 +12,18 @@ import {
   TypographyProps,
 } from '@mui/material';
 import {
-  ActionType,
   Cell,
-  Column,
   HeaderGroup,
   Row,
   TableInstance,
-  TableState,
-  UseTableColumnOptions,
+  TableOptions,
 } from 'react-table';
 import { MaterialReactTableProvider } from './useMaterialReactTable';
 import { MRT_TableContainer } from './table/MRT_TableContainer';
 import { defaultLocalization, MRT_Localization } from './utils/localization';
 
-export interface MaterialReactTableProps<D extends {} = {}> {
-  columns: Column<D | {}>[];
-  data: D[];
-  defaultColumn?: UseTableColumnOptions<D>;
+export interface MaterialReactTableProps<D extends {} = {}>
+  extends TableOptions<D> {
   enableColumnActions?: boolean;
   enableColumnGrouping?: boolean;
   enableColumnHiding?: boolean;
@@ -42,18 +37,8 @@ export interface MaterialReactTableProps<D extends {} = {}> {
   enableSelection?: boolean;
   enableSorting?: boolean;
   enableSubRowTree?: boolean;
-  getRowId?: (
-    originalRow?: Partial<Row<D>>,
-    relativeIndex?: number,
-    parent?: Row<D | {}>,
-  ) => string;
-  getSubRows?: (
-    originalRow: Partial<Row<D>>,
-    relativeIndex: number,
-  ) => Row<D>[];
-  initialState?: Partial<TableState<D>>;
-  isLoading?: boolean;
   isFetching?: boolean;
+  isLoading?: boolean;
   localization?: Partial<MRT_Localization>;
   onCellClick?: (
     event: MouseEvent<HTMLTableCellElement>,
@@ -70,19 +55,46 @@ export interface MaterialReactTableProps<D extends {} = {}> {
     selectedRows: Row<D>[],
   ) => void;
   onSearchChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  overrideTableBodyCellComponent?(
+    cell: Cell<D>,
+    tableInstance: TableInstance<D>,
+  ): ReactNode;
+  overrideTableBodyComponent?(tableInstance: TableInstance<D>): ReactNode;
+  overrideTableBodyRowComponent?(
+    row: Row<D>,
+    tableInstance: TableInstance<D>,
+  ): ReactNode;
+  overrideTableDetailPanelComponent?(
+    row: Row<D>,
+    tableInstance: TableInstance<D>,
+  ): ReactNode;
+  overrideTableFooterCellComponent?(
+    column: HeaderGroup<D>,
+    tableInstance: TableInstance<D>,
+  ): ReactNode;
+  overrideTableFooterComponent?(tableInstance: TableInstance<D>): ReactNode;
+  overrideTableFooterRowComponent?(
+    footerGroup: HeaderGroup<D>,
+    tableInstance: TableInstance<D>,
+  ): ReactNode;
+  overrideTableHeadCellComponent?(
+    column: HeaderGroup<D>,
+    tableInstance: TableInstance<D>,
+  ): ReactNode;
+  overrideTableHeadComponent?(tableInstance: TableInstance<D>): ReactNode;
+  overrideTableHeadRowComponent?(
+    headerGroup: HeaderGroup<D>,
+    tableInstance: TableInstance<D>,
+  ): ReactNode;
+  overrideTablePaginationComponent?(tableInstance: TableInstance<D>): ReactNode;
+  overrideTableToolbarComponent?(tableInstance: TableInstance<D>): ReactNode;
   positionPagination?: 'bottom' | 'top' | 'both';
   renderDetailPanel?: (rowData: Row<D>) => ReactNode;
   showFiltersInColumnHead?: boolean;
   showFooter?: boolean;
   showHead?: boolean;
   showToolbar?: boolean;
-  stateReducer?: (
-    newState: TableState<D>,
-    action: ActionType,
-    previousState: TableState<D>,
-    tableInstance?: TableInstance<{} | D>,
-  ) => TableState;
-  surpressOverrideWarnings?: boolean;
+  surpressoverrideWarnings?: boolean;
   tableBodyProps?: TableBodyProps;
   tableContainerProps?: TableContainerProps;
   tableDetailPanelProps?: TableCellProps;
@@ -94,39 +106,6 @@ export interface MaterialReactTableProps<D extends {} = {}> {
   tableTitleProps?: TypographyProps;
   tableToolbarProps?: ToolbarProps;
   title?: string | ReactNode;
-  OverrideTableBodyCellComponent?(
-    cell: Cell<D>,
-    tableInstance: TableInstance<D>,
-  ): ReactNode;
-  OverrideTableBodyComponent?(tableInstance: TableInstance<D>): ReactNode;
-  OverrideTableBodyRowComponent?(
-    row: Row<D>,
-    tableInstance: TableInstance<D>,
-  ): ReactNode;
-  OverrideTableDetailPanelComponent?(
-    row: Row<D>,
-    tableInstance: TableInstance<D>,
-  ): ReactNode;
-  OverrideTableFooterCellComponent?(
-    column: HeaderGroup<D>,
-    tableInstance: TableInstance<D>,
-  ): ReactNode;
-  OverrideTableFooterComponent?(tableInstance: TableInstance<D>): ReactNode;
-  OverrideTableFooterRowComponent?(
-    footerGroup: HeaderGroup<D>,
-    tableInstance: TableInstance<D>,
-  ): ReactNode;
-  OverrideTableHeadCellComponent?(
-    column: HeaderGroup<D>,
-    tableInstance: TableInstance<D>,
-  ): ReactNode;
-  OverrideTableHeadComponent?(tableInstance: TableInstance<D>): ReactNode;
-  OverrideTableHeadRowComponent?(
-    headerGroup: HeaderGroup<D>,
-    tableInstance: TableInstance<D>,
-  ): ReactNode;
-  OverrideTablePaginationComponent?(tableInstance: TableInstance<D>): ReactNode;
-  OverrideTableToolbarComponent?(tableInstance: TableInstance<D>): ReactNode;
 }
 
 export const MaterialReactTable = <D extends {}>({

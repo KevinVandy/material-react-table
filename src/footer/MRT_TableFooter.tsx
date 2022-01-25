@@ -8,15 +8,15 @@ interface Props {}
 
 export const MRT_TableFooter: FC<Props> = () => {
   const {
-    OverrideTableFooterComponent,
+    overrideTableFooterComponent,
     enablePagination,
     positionPagination,
     tableFooterProps,
     tableInstance,
   } = useMaterialReactTable();
 
-  if (OverrideTableFooterComponent) {
-    return <>{OverrideTableFooterComponent(tableInstance)}</>;
+  if (overrideTableFooterComponent) {
+    return <>{overrideTableFooterComponent(tableInstance)}</>;
   }
 
   return (

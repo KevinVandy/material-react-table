@@ -17,12 +17,12 @@ export const HeaderGroups: Story<MaterialReactTableProps> = () => (
         columns: [
           {
             Header: 'First Name',
-            accessor: 'firstName',
+            accessor: 'firstName' as const,
           },
 
           {
             Header: 'Last Name',
-            accessor: 'lastName',
+            accessor: 'lastName' as const,
           },
         ],
       },
@@ -31,11 +31,11 @@ export const HeaderGroups: Story<MaterialReactTableProps> = () => (
         columns: [
           {
             Header: 'Age',
-            accessor: 'age',
+            accessor: 'age' as const,
           },
           {
             Header: 'Address',
-            accessor: 'address',
+            accessor: 'address' as const,
           },
         ],
       },
@@ -59,13 +59,13 @@ export const HeaderAndFooterGroups: Story<MaterialReactTableProps> = () => (
           {
             Header: 'First Name',
             Footer: 'First Name',
-            accessor: 'firstName',
+            accessor: 'firstName' as const,
           },
 
           {
             Header: 'Last Name',
             Footer: 'Last Name',
-            accessor: 'lastName',
+            accessor: 'lastName' as const,
           },
         ],
       },
@@ -76,12 +76,12 @@ export const HeaderAndFooterGroups: Story<MaterialReactTableProps> = () => (
           {
             Header: 'Age',
             Footer: 'Age',
-            accessor: 'age',
+            accessor: 'age' as const,
           },
           {
             Header: 'Address',
             Footer: 'Address',
-            accessor: 'address',
+            accessor: 'address' as const,
           },
         ],
       },

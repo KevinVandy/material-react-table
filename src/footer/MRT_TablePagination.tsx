@@ -8,7 +8,7 @@ export const MRT_TablePagination: FC<Props> = () => {
   const {
     tableInstance,
     tablePaginationProps,
-    OverrideTablePaginationComponent,
+    overrideTablePaginationComponent,
   } = useMaterialReactTable();
 
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
@@ -16,8 +16,8 @@ export const MRT_TablePagination: FC<Props> = () => {
     tableInstance.gotoPage(0);
   };
 
-  if (OverrideTablePaginationComponent) {
-    return <>{OverrideTablePaginationComponent(tableInstance)}</>;
+  if (overrideTablePaginationComponent) {
+    return <>{overrideTablePaginationComponent(tableInstance)}</>;
   }
 
   return (

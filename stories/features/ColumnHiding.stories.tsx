@@ -12,27 +12,27 @@ export default meta;
 const columns = [
   {
     Header: 'First Name',
-    accessor: 'firstName',
+    accessor: 'firstName' as const,
   },
   {
     Header: 'Last Name',
-    accessor: 'lastName',
+    accessor: 'lastName' as const,
   },
   {
     Header: 'Address',
-    accessor: 'address',
+    accessor: 'address' as const,
   },
   {
     Header: 'State',
-    accessor: 'state',
+    accessor: 'state' as const,
   },
   {
     Header: 'Zip',
-    accessor: 'zip',
+    accessor: 'zip' as const,
   },
   {
     Header: 'Phone Number',
-    accessor: 'phoneNumber',
+    accessor: 'phoneNumber' as const,
   },
 ];
 

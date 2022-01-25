@@ -19,7 +19,7 @@ import {
 } from 'react-table';
 import { MaterialReactTableProps } from './MaterialReactTable';
 import { UseMRTCalcs, useMRTCalcs } from './utils/useMRTCalcs';
-import { showOverrideWarnings } from './utils/overrideWarnings';
+import { showoverrideWarnings } from './utils/overrideWarnings';
 
 export interface UseMaterialReactTable<D extends {}>
   extends MaterialReactTableProps<D>,
@@ -41,10 +41,10 @@ export const MaterialReactTableProvider = <D extends {}>({
   getSubRows,
   initialState,
   stateReducer,
-  surpressOverrideWarnings,
+  surpressoverrideWarnings,
   ...rest
 }: PropsWithChildren<MaterialReactTableProps<D>>) => {
-  const tableInstance = useTable(
+  const tableInstance = useTable<D>(
     {
       columns,
       data,
@@ -67,14 +67,14 @@ export const MaterialReactTableProvider = <D extends {}>({
 
   const mrtCalcs = useMRTCalcs({ tableInstance });
 
-  if (process.env.NODE_ENV !== 'production' && !surpressOverrideWarnings) {
-    showOverrideWarnings(rest);
+  if (process.env.NODE_ENV !== 'production' && !surpressoverrideWarnings) {
+    showoverrideWarnings(rest);
   }
 
   return (
     <MaterialReactTableContext.Provider
-      //@ts-ignore
       value={{
+        //@ts-ignore
         tableInstance,
         ...mrtCalcs,
         ...rest,

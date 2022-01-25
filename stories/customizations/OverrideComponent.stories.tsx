@@ -4,7 +4,7 @@ import MaterialReactTable, { MaterialReactTableProps } from '../../src';
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
-  title: 'Customization/Override Component Examples',
+  title: 'Customization/override Component Examples',
 };
 
 export default meta;
@@ -12,23 +12,23 @@ export default meta;
 const columns = [
   {
     Header: 'First Name',
-    accessor: 'firstName',
+    accessor: 'firstName' as const,
   },
   {
     Header: 'Last Name',
-    accessor: 'lastName',
+    accessor: 'lastName' as const,
   },
   {
     Header: 'Address',
-    accessor: 'address',
+    accessor: 'address' as const,
   },
   {
     Header: 'State',
-    accessor: 'state',
+    accessor: 'state' as const,
   },
   {
     Header: 'Phone Number',
-    accessor: 'phoneNumber',
+    accessor: 'phoneNumber' as const,
   },
 ];
 
@@ -40,14 +40,14 @@ const data = [...Array(100)].map((_) => ({
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const OverrideTableToolbarComponent: Story<
+export const overrideTableToolbarComponent: Story<
   MaterialReactTableProps
 > = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     showToolbar
-    OverrideTableBodyComponent={(tableInstance) => (
+    overrideTableBodyComponent={(tableInstance) => (
       <div>
         <h1>Custom Toolbar</h1>
       </div>

@@ -1,0 +1,7 @@
+dist
+storybook-static
+node_modules
+types
+*.json
+.next
+*.md

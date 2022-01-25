@@ -8,11 +8,11 @@ interface Props {
 }
 
 export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
-  const { tableInstance, OverrideTableBodyCellComponent, onCellClick } =
+  const { tableInstance, overrideTableBodyCellComponent, onCellClick } =
     useMaterialReactTable();
 
-  if (OverrideTableBodyCellComponent) {
-    return <>{OverrideTableBodyCellComponent(cell, tableInstance)}</>;
+  if (overrideTableBodyCellComponent) {
+    return <>{overrideTableBodyCellComponent(cell, tableInstance)}</>;
   }
 
   return (

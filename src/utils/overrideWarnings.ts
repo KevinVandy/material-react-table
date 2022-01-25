@@ -1,35 +1,35 @@
-export const showOverrideWarnings = (props: any) => {
-  if (props.OverrideTableBodyCellComponent) {
+export const showoverrideWarnings = (props: any) => {
+  if (props.overrideTableBodyCellComponent) {
     showWarning('TableCell', 'props');
   }
-  if (props.OverrideTableBodyComponent) {
+  if (props.overrideTableBodyComponent) {
     showWarning('TableBody', 'tableBodyProps');
   }
-  if (props.OverrideTableBodyRowComponent) {
+  if (props.overrideTableBodyRowComponent) {
     showWarning('TableRow', 'props');
   }
-  if (props.OverrideTableDetailPanelComponent) {
+  if (props.overrideTableDetailPanelComponent) {
     showWarning('Detail Panel', 'tableDetailPanelProps');
   }
-  if (props.OverrideTableFooterComponent) {
+  if (props.overrideTableFooterComponent) {
     showWarning('TableFooter', 'tableFooterProps');
   }
-  if (props.OverrideTableFooterCellComponent) {
+  if (props.overrideTableFooterCellComponent) {
     showWarning('TableCell', 'props');
   }
-  if (props.OverrideTableFooterRowComponent) {
+  if (props.overrideTableFooterRowComponent) {
     showWarning('TableRow', 'props');
   }
-  if (props.OverrideTableHeadComponent) {
+  if (props.overrideTableHeadComponent) {
     showWarning('TableHead', 'tableHeadProps');
   }
-  if (props.OverrideTableHeadRowComponent) {
+  if (props.overrideTableHeadRowComponent) {
     showWarning('TableRow', 'props');
   }
-  if (props.OverrideTablePaginationComponent) {
+  if (props.overrideTablePaginationComponent) {
     showWarning('', 'props');
   }
-  if (props.OverrideTableToolbarComponent) {
+  if (props.overrideTableToolbarComponent) {
     showWarning('TableBodyCell', 'props');
   }
 };

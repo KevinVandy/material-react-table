@@ -12,11 +12,11 @@ interface Props {
 }
 
 export const MRT_TableFooterCell: FC<Props> = ({ column }) => {
-  const { tableInstance, OverrideTableFooterCellComponent } =
+  const { tableInstance, overrideTableFooterCellComponent } =
     useMaterialReactTable();
 
-  if (OverrideTableFooterCellComponent) {
-    return <>{OverrideTableFooterCellComponent(column, tableInstance)}</>;
+  if (overrideTableFooterCellComponent) {
+    return <>{overrideTableFooterCellComponent(column, tableInstance)}</>;
   }
 
   const isParentHeader = (column?.columns?.length ?? 0) > 0;

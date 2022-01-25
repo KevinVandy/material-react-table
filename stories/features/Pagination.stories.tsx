@@ -12,19 +12,19 @@ export default meta;
 const columns = [
   {
     Header: 'First Name',
-    accessor: 'firstName',
+    accessor: 'firstName' as const,
   },
   {
     Header: 'Last Name',
-    accessor: 'lastName',
+    accessor: 'lastName' as const,
   },
   {
     Header: 'Age',
-    accessor: 'age',
+    accessor: 'age' as const,
   },
   {
     Header: 'Address',
-    accessor: 'address',
+    accessor: 'address' as const,
   },
 ];
 const data = [...Array(21)].map((_) => ({

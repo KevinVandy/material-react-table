@@ -30,11 +30,11 @@ export const MRT_TableBody: FC<Props> = () => {
     tableBodyProps,
     isLoading,
     enablePagination,
-    OverrideTableBodyComponent,
+    overrideTableBodyComponent,
   } = useMaterialReactTable();
 
-  if (OverrideTableBodyComponent) {
-    return <>{OverrideTableBodyComponent(tableInstance)}</>;
+  if (overrideTableBodyComponent) {
+    return <>{overrideTableBodyComponent(tableInstance)}</>;
   }
 
   const rows = enablePagination ? tableInstance.page : tableInstance.rows;

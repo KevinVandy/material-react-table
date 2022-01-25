@@ -42,7 +42,7 @@ interface Props {
 
 export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
   const {
-    OverrideTableHeadCellComponent,
+    overrideTableHeadCellComponent,
     enableColumnActions,
     enableColumnResizing,
     enableFiltering,
@@ -50,8 +50,8 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
     tableInstance,
   } = useMaterialReactTable();
 
-  if (OverrideTableHeadCellComponent) {
-    return <>{OverrideTableHeadCellComponent(column, tableInstance)}</>;
+  if (overrideTableHeadCellComponent) {
+    return <>{overrideTableHeadCellComponent(column, tableInstance)}</>;
   }
 
   const isParentHeader = (column?.columns?.length ?? 0) > 0;

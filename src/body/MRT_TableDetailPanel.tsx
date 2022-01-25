@@ -11,12 +11,12 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
   const {
     tableInstance,
     renderDetailPanel,
-    OverrideTableDetailPanelComponent,
+    overrideTableDetailPanelComponent,
     tableDetailPanelProps,
   } = useMaterialReactTable();
 
-  if (OverrideTableDetailPanelComponent) {
-    return <>{OverrideTableDetailPanelComponent(row, tableInstance)}</>;
+  if (overrideTableDetailPanelComponent) {
+    return <>{overrideTableDetailPanelComponent(row, tableInstance)}</>;
   }
 
   return (

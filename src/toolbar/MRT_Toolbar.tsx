@@ -13,7 +13,7 @@ interface Props {}
 
 export const MRT_Toolbar: FC<Props> = () => {
   const {
-    OverrideTableToolbarComponent,
+    overrideTableToolbarComponent,
     enableSearch,
     tableInstance,
     tableTitleProps,
@@ -21,8 +21,8 @@ export const MRT_Toolbar: FC<Props> = () => {
     title,
   } = useMaterialReactTable();
 
-  if (OverrideTableToolbarComponent) {
-    return <>{OverrideTableToolbarComponent(tableInstance)}</>;
+  if (overrideTableToolbarComponent) {
+    return <>{overrideTableToolbarComponent(tableInstance)}</>;
   }
 
   //if no features in the toolbar are enabled, don't render anything

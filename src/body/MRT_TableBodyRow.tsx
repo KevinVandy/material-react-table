@@ -14,7 +14,7 @@ interface Props {
 
 export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
   const {
-    OverrideTableBodyRowComponent,
+    overrideTableBodyRowComponent,
     anyRowsCanExpand,
     enableSelection,
     enableSubRowTree,
@@ -24,8 +24,8 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
     tableInstance,
   } = useMaterialReactTable();
 
-  if (OverrideTableBodyRowComponent) {
-    return <>{OverrideTableBodyRowComponent(row, tableInstance)}</>;
+  if (overrideTableBodyRowComponent) {
+    return <>{overrideTableBodyRowComponent(row, tableInstance)}</>;
   }
 
   return (

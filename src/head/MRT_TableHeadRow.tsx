@@ -14,7 +14,7 @@ interface Props {
 
 export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
   const {
-    OverrideTableHeadRowComponent,
+    overrideTableHeadRowComponent,
     anyRowsCanExpand,
     enableColumnHiding,
     enableExpandAll,
@@ -23,8 +23,8 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
     tableInstance,
   } = useMaterialReactTable();
 
-  if (OverrideTableHeadRowComponent) {
-    return <>{OverrideTableHeadRowComponent(headerGroup, tableInstance)}</>;
+  if (overrideTableHeadRowComponent) {
+    return <>{overrideTableHeadRowComponent(headerGroup, tableInstance)}</>;
   }
 
   const isParentHeader = useMemo(
