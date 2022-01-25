@@ -32,28 +32,11 @@ const MaterialReactTableContext = (<D extends {}>() =>
     {} as UseMaterialReactTable<D>,
   ) as Context<UseMaterialReactTable<D>>)();
 
-export const MaterialReactTableProvider = <D extends {}>({
-  children,
-  columns,
-  data,
-  defaultColumn,
-  getRowId,
-  getSubRows,
-  initialState,
-  stateReducer,
-  surpressoverrideWarnings,
-  ...rest
-}: PropsWithChildren<MaterialReactTableProps<D>>) => {
+export const MaterialReactTableProvider = <D extends {}>(
+  props: PropsWithChildren<MaterialReactTableProps<D>>,
+) => {
   const tableInstance = useTable<D>(
-    {
-      columns,
-      data,
-      defaultColumn,
-      getRowId,
-      getSubRows,
-      initialState,
-      stateReducer,
-    },
+    props,
     useFlexLayout,
     useResizeColumns,
     useFilters,
@@ -67,8 +50,11 @@ export const MaterialReactTableProvider = <D extends {}>({
 
   const mrtCalcs = useMRTCalcs({ tableInstance });
 
-  if (process.env.NODE_ENV !== 'production' && !surpressoverrideWarnings) {
-    showoverrideWarnings(rest);
+  if (
+    process.env.NODE_ENV !== 'production' &&
+    !props.surpressoverrideWarnings
+  ) {
+    showoverrideWarnings(props);
   }
 
   return (
@@ -77,10 +63,10 @@ export const MaterialReactTableProvider = <D extends {}>({
         //@ts-ignore
         tableInstance,
         ...mrtCalcs,
-        ...rest,
+        ...props,
       }}
     >
-      {children}
+      {props.children}
     </MaterialReactTableContext.Provider>
   );
 };

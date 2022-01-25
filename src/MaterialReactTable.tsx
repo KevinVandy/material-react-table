@@ -17,13 +17,31 @@ import {
   Row,
   TableInstance,
   TableOptions,
+  UseExpandedOptions,
+  UseFiltersOptions,
+  UseGlobalFiltersOptions,
+  UseGroupByOptions,
+  UsePaginationOptions,
+  UseResizeColumnsOptions,
+  UseRowSelectOptions,
+  UseRowStateOptions,
+  UseSortByOptions,
 } from 'react-table';
 import { MaterialReactTableProvider } from './useMaterialReactTable';
 import { MRT_TableContainer } from './table/MRT_TableContainer';
 import { defaultLocalization, MRT_Localization } from './utils/localization';
 
 export interface MaterialReactTableProps<D extends {} = {}>
-  extends TableOptions<D> {
+  extends TableOptions<D>,
+    UseExpandedOptions<D>,
+    UseFiltersOptions<D>,
+    UseGlobalFiltersOptions<D>,
+    UseGroupByOptions<D>,
+    UsePaginationOptions<D>,
+    UseResizeColumnsOptions<D>,
+    UseRowSelectOptions<D>,
+    UseRowStateOptions<D>,
+    UseSortByOptions<D> {
   enableColumnActions?: boolean;
   enableColumnGrouping?: boolean;
   enableColumnHiding?: boolean;
