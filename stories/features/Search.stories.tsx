@@ -41,5 +41,5 @@ const data = [...Array(100)].map((_) => ({
 }));
 
 export const SearchEnabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} showToolbar enableSearch />
+  <MaterialReactTable columns={columns} data={data} showToolbar />
 );

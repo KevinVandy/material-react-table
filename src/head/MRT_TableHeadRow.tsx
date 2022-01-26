@@ -5,7 +5,6 @@ import { MRT_TableHeadCell } from './MRT_TableHeadCell';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_SelectAllCheckbox } from '../inputs/MRT_SelectAllCheckbox';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
-import { MRT_ShowHideColumnsButton } from '../buttons/MRT_ShowHideColumnsButton';
 import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
 
 interface Props {
@@ -15,7 +14,6 @@ interface Props {
 export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
   const {
     anyRowsCanExpand,
-    enableColumnHiding,
     enableExpandAll,
     enableSelection,
     renderDetailPanel,
@@ -50,7 +48,6 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
       {headerGroup.headers.map((column, index) => (
         <MRT_TableHeadCell key={`${index}-${column.id}`} column={column} />
       ))}
-      {enableColumnHiding && !isParentHeader && <MRT_ShowHideColumnsButton />}
     </TableRow>
   );
 };

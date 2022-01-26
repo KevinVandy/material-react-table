@@ -17,7 +17,6 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
     anyRowsCanExpand,
     enableSelection,
     enableSubRowTree,
-    enableColumnHiding,
     onRowClick,
     renderDetailPanel,
     tableInstance,
@@ -46,7 +45,6 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         {row.cells.map((cell, index) => (
           <MRT_TableBodyCell key={`${index}-${cell.value}`} cell={cell} />
         ))}
-        {enableColumnHiding && <MRT_TableSpacerCell />}
       </TableRow>
       {renderDetailPanel && <MRT_TableDetailPanel row={row} />}
     </>

@@ -1,5 +1,5 @@
 import React, { FC, MouseEvent, useState } from 'react';
-import { IconButton, Menu, TableCell } from '@mui/material';
+import { IconButton, Menu } from '@mui/material';
 import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_ShowHideColumnsMenu } from '../menus/MRT_ShowHideColumnsMenu';
@@ -16,13 +16,12 @@ export const MRT_ShowHideColumnsButton: FC<Props> = () => {
   };
 
   return (
-    <TableCell size="small" style={{ width: '2rem', padding: '0.75rem 0' }}>
+    <>
       <IconButton
         aria-label={localization?.showHideColumnsButtonTitle}
         title={localization?.showHideColumnsButtonTitle}
         onClick={handleClick}
         size="small"
-        style={{ margin: '0 0 0 -0.75rem' }}
       >
         <ViewColumnIcon />
       </IconButton>
@@ -38,6 +37,6 @@ export const MRT_ShowHideColumnsButton: FC<Props> = () => {
           />
         ))}
       </Menu>
-    </TableCell>
+    </>
   );
 };

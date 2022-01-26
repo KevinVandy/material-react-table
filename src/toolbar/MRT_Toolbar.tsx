@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { styled, Toolbar as MuiToolbar, Typography } from '@mui/material';
 import { MRT_SearchTextField } from '../inputs/MRT_SearchTextField';
 import { useMaterialReactTable } from '../useMaterialReactTable';
+import { MRT_ToolbarButtons } from './MRT_ToolbarButtons';
 
 const Toolbar = styled(MuiToolbar)({
   padding: '0.5rem',
@@ -9,20 +10,25 @@ const Toolbar = styled(MuiToolbar)({
   justifyContent: 'space-between',
 });
 
+const ToolbarActionsContainer = styled('div')({
+  display: 'flex',
+  gap: '0.5rem',
+});
+
 interface Props {}
 
 export const MRT_Toolbar: FC<Props> = () => {
   const {
-    enableSearch,
+    disableGlobalFilter,
     muiTableTitleProps,
     muiTableToolbarProps,
     title,
   } = useMaterialReactTable();
 
   //if no features in the toolbar are enabled, don't render anything
-  if (!enableSearch && !title && !muiTableToolbarProps) {
-    return null;
-  }
+  // if (disableGlobalFilter && !title && !muiTableToolbarProps) {
+  //   return null;
+  // }
 
   return (
     <Toolbar variant="dense" {...muiTableToolbarProps}>
@@ -31,7 +37,10 @@ export const MRT_Toolbar: FC<Props> = () => {
       ) : (
         <span />
       )}
-      {enableSearch && <MRT_SearchTextField />}
+      <ToolbarActionsContainer>
+        {!disableGlobalFilter && <MRT_SearchTextField />}
+        <MRT_ToolbarButtons />
+      </ToolbarActionsContainer>
     </Toolbar>
   );
 };

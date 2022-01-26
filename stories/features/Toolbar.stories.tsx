@@ -59,6 +59,5 @@ export const ToolbarEnabledWithSearch: Story<MaterialReactTableProps> = () => (
     data={data}
     showToolbar
     title="My People Table"
-    enableSearch
   />
 );

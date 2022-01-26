@@ -26,7 +26,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
   const {
     enableColumnHiding,
     enableColumnGrouping,
-    enableSorting,
+    disableSortBy,
     localization,
   } = useMaterialReactTable();
 
@@ -61,7 +61,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       open={!!anchorEl}
       onClose={() => setAnchorEl(null)}
     >
-      {enableSorting && [
+      {!disableSortBy && [
         <MenuItem key={1} disabled={!column.isSorted} onClick={handleClearSort}>
           <ClearAllIcon /> {localization?.columnActionMenuItemClearSort}
         </MenuItem>,

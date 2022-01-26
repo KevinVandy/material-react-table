@@ -1,18 +1,19 @@
 export interface MRT_Localization {
-  columnActionMenuButtonTitle?: string;
-  columnActionMenuItemHideColumn?: string;
-  columnActionMenuItemSortAsc?: string;
-  columnActionMenuItemClearSort?: string;
-  columnActionMenuItemSortDesc?: string;
-  columnActionMenuItemGroupBy?: string;
-  columnActionMenuItemUnGroupBy?: string;
-  expandAllButtonTitle?: string;
-  expandButtonTitle?: string;
-  filterTextFieldClearButtonTitle?: string;
-  filterTextFieldPlaceholder?: string;
-  searchTextFieldClearButtonTitle?: string;
-  searchTextFieldPlaceholder?: string;
-  showHideColumnsButtonTitle?: string;
+  columnActionMenuButtonTitle: string;
+  columnActionMenuItemHideColumn: string;
+  columnActionMenuItemSortAsc: string;
+  columnActionMenuItemClearSort: string;
+  columnActionMenuItemSortDesc: string;
+  columnActionMenuItemGroupBy: string;
+  columnActionMenuItemUnGroupBy: string;
+  expandAllButtonTitle: string;
+  expandButtonTitle: string;
+  filterTextFieldClearButtonTitle: string;
+  filterTextFieldPlaceholder: string;
+  searchTextFieldClearButtonTitle: string;
+  searchTextFieldPlaceholder: string;
+  showHideColumnsButtonTitle: string;
+  toggleFilterButtonTitle: string;
 }
 
 export const defaultLocalization: MRT_Localization = {
@@ -30,4 +31,5 @@ export const defaultLocalization: MRT_Localization = {
   searchTextFieldClearButtonTitle: 'Clear search',
   searchTextFieldPlaceholder: 'Search',
   showHideColumnsButtonTitle: 'Show/Hide columns',
+  toggleFilterButtonTitle: 'Toggle filters'
 };

@@ -14,7 +14,6 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
     renderDetailPanel,
     columns,
     anyRowsCanExpand,
-    enableColumnHiding,
     enableSelection,
     tableInstance,
   } = useMaterialReactTable();
@@ -37,7 +36,6 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
       {footerGroup.headers.map((column, index) => (
         <MRT_TableFooterCell key={`${index}-${column.id}`} column={column} />
       ))}
-      {enableColumnHiding && <MRT_TableSpacerCell />}
     </TableRow>
   );
 };

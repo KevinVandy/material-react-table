@@ -71,7 +71,6 @@ MinimumFeatures.args = {
     address: faker.address.streetAddress(),
   })),
   enablePagination: false,
-  enableSorting: false,
   showFooter: false,
   showHead: false,
 };
@@ -133,8 +132,6 @@ MaximumFeatures.args = {
   enableColumnReordering: true,
   enableColumnResizing: true,
   enableExpandAll: true,
-  enableFiltering: true,
-  enableSearch: true,
   enableSelectAll: true,
   enableSelection: true,
   showToolbar: true,

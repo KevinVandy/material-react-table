@@ -45,8 +45,6 @@ export const ColumnActionsEnabled: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableColumnActions
-    enableFiltering
     enableColumnHiding
-    showFiltersInColumnHead={false}
   />
 );

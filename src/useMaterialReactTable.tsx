@@ -3,6 +3,7 @@ import React, {
   createContext,
   PropsWithChildren,
   useContext,
+  useState,
 } from 'react';
 import {
   TableInstance,
@@ -24,6 +25,7 @@ export interface UseMaterialReactTable<D extends {}>
   extends MaterialReactTableProps<D>,
     UseMRTCalcs {
   tableInstance: TableInstance<D>;
+  setShowFiltersInColumnHead: (showFiltersInColumnHead: boolean) => void;
 }
 
 const MaterialReactTableContext = (<D extends {}>() =>
@@ -49,13 +51,19 @@ export const MaterialReactTableProvider = <D extends {}>(
 
   const mrtCalcs = useMRTCalcs({ tableInstance });
 
+  const [showFiltersInColumnHead, setShowFiltersInColumnHead] = useState(
+    props.defaultShowFilters,
+  );
+
   return (
     <MaterialReactTableContext.Provider
       value={{
-        // @ts-ignore
-        tableInstance,
         ...mrtCalcs,
         ...props,
+        setShowFiltersInColumnHead,
+        showFiltersInColumnHead,
+        // @ts-ignore
+        tableInstance,
       }}
     >
       {props.children}

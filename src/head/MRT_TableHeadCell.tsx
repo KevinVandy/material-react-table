@@ -44,7 +44,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
   const {
     enableColumnActions,
     enableColumnResizing,
-    enableFiltering,
+    disableFilters,
     showFiltersInColumnHead,
     tableInstance,
   } = useMaterialReactTable();
@@ -84,7 +84,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
             )}
           </CellFlexItem>
         </TableCellText>
-        {enableFiltering && column.canFilter && (
+        {!disableFilters && column.canFilter && (
           <Collapse in={showFiltersInColumnHead}>
             <MRT_FilterTextfield column={column} />
           </Collapse>

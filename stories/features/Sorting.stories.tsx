@@ -4,7 +4,7 @@ import MaterialReactTable, { MaterialReactTableProps } from '../../src';
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
-  title: 'Features/Filtering Examples',
+  title: 'Features/Sorting Examples',
 };
 
 export default meta;
@@ -26,6 +26,10 @@ const columns = [
     Header: 'State',
     accessor: 'state' as const,
   },
+  {
+    Header: 'Phone Number',
+    accessor: 'phoneNumber' as const,
+  },
 ];
 
 const data = [...Array(100)].map((_) => ({
@@ -33,21 +37,18 @@ const data = [...Array(100)].map((_) => ({
   lastName: faker.name.lastName(),
   address: faker.address.streetAddress(),
   state: faker.address.state(),
+  phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const FilteringEnabledDefault: Story<MaterialReactTableProps> = () => (
+export const SortingEnabledDefault: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
-export const FilteringEnabledAndShown: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} defaultShowFilters />
+export const DisableSorting: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} disableSortBy />
 );
 
-export const FilteringDisabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} disableFilters />
-);
-
-export const FilteringDisabledForCertainColumns: Story<
+export const DisableSortingForSpecificColumns: Story<
   MaterialReactTableProps
 > = () => (
   <MaterialReactTable
@@ -63,14 +64,18 @@ export const FilteringDisabledForCertainColumns: Story<
       {
         Header: 'Address',
         accessor: 'address' as const,
-        disableFilters: true,
+        disableSortBy: true,
       },
       {
         Header: 'State',
         accessor: 'state' as const,
       },
+      {
+        Header: 'Phone Number',
+        accessor: 'phoneNumber' as const,
+        disableSortBy: true,
+      },
     ]}
     data={data}
-    defaultShowFilters
   />
 );

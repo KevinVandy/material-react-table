@@ -38,7 +38,7 @@ export interface MaterialReactTableProps<D extends {} = {}>
     UsePaginationOptions<D>,
     UseResizeColumnsOptions<D>,
     UseRowSelectOptions<D>,
-    UseRowStateOptions<D>, 
+    UseRowStateOptions<D>,
     UseSortByOptions<D> {
   enableColumnActions?: boolean;
   enableColumnGrouping?: boolean;
@@ -46,12 +46,9 @@ export interface MaterialReactTableProps<D extends {} = {}>
   enableColumnReordering?: boolean;
   enableColumnResizing?: boolean;
   enableExpandAll?: boolean;
-  enableFiltering?: boolean;
   enablePagination?: boolean;
-  enableSearch?: boolean;
   enableSelectAll?: boolean;
   enableSelection?: boolean;
-  enableSorting?: boolean;
   enableSubRowTree?: boolean;
   isFetching?: boolean;
   isLoading?: boolean;
@@ -83,7 +80,7 @@ export interface MaterialReactTableProps<D extends {} = {}>
   onSearchChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   positionPagination?: 'bottom' | 'top' | 'both';
   renderDetailPanel?: (rowData: Row<D>) => ReactNode;
-  showFiltersInColumnHead?: boolean;
+  defaultShowFilters?: boolean;
   showFooter?: boolean;
   showHead?: boolean;
   showToolbar?: boolean;
@@ -93,11 +90,9 @@ export interface MaterialReactTableProps<D extends {} = {}>
 export default <D extends {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
   enablePagination = true,
-  enableSorting = true,
   enableSubRowTree = true,
   localization = defaultLocalization,
   positionPagination = 'bottom',
-  showFiltersInColumnHead = true,
   showFooter = true,
   showHead = true,
   showToolbar = true,
@@ -106,11 +101,9 @@ export default <D extends {}>({
   <MaterialReactTableProvider
     defaultColumn={defaultColumn}
     enablePagination={enablePagination}
-    enableSorting={enableSorting}
     enableSubRowTree={enableSubRowTree}
     localization={{ ...defaultLocalization, ...localization }}
     positionPagination={positionPagination}
-    showFiltersInColumnHead={showFiltersInColumnHead}
     showFooter={showFooter}
     showHead={showHead}
     showToolbar={showToolbar}
