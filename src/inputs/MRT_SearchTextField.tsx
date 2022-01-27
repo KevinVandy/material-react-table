@@ -21,7 +21,7 @@ export const MRT_SearchTextField: FC<Props> = () => {
     tableInstance,
     muiSearchTextFieldProps,
     localization,
-    onSearchChange,
+    onGlobalFilterChange,
   } = useMaterialReactTable();
 
   const [searchValue, setSearchValue] = useState('');
@@ -29,7 +29,7 @@ export const MRT_SearchTextField: FC<Props> = () => {
   const handleChange = useAsyncDebounce(
     (event: ChangeEvent<HTMLInputElement>) => {
       tableInstance.setGlobalFilter(event.target.value ?? undefined);
-      onSearchChange?.(event);
+      onGlobalFilterChange?.(event);
     },
     200,
   );

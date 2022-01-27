@@ -18,6 +18,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
     enableSelection,
     renderDetailPanel,
     tableInstance,
+    muiTableHeadRowProps,
   } = useMaterialReactTable();
 
   const isParentHeader = useMemo(
@@ -25,8 +26,22 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
     [headerGroup.headers],
   );
 
+  const mTableHeadRowProps =
+    muiTableHeadRowProps instanceof Function
+      ? muiTableHeadRowProps(headerGroup)
+      : muiTableHeadRowProps;
+
+  const tableRowProps = {
+    ...mTableHeadRowProps,
+    ...headerGroup.getHeaderGroupProps(),
+    style: {
+      ...headerGroup.getHeaderGroupProps().style,
+      ...(mTableHeadRowProps?.style ?? {}),
+    },
+  };
+
   return (
-    <TableRow {...headerGroup.getHeaderGroupProps()}>
+    <TableRow {...tableRowProps}>
       {anyRowsCanExpand || renderDetailPanel ? (
         !disableExpandAll && !isParentHeader ? (
           <MRT_ExpandAllButton />
@@ -45,8 +60,8 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
           <MRT_TableSpacerCell width="1rem" />
         )
       ) : null}
-      {headerGroup.headers.map((column, index) => (
-        <MRT_TableHeadCell key={`${index}-${column.id}`} column={column} />
+      {headerGroup.headers.map((column) => (
+        <MRT_TableHeadCell key={column.getHeaderProps().key} column={column} />
       ))}
     </TableRow>
   );

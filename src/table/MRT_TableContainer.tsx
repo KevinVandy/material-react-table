@@ -9,13 +9,8 @@ interface Props {}
 export const MRT_TableContainer: FC<Props> = () => {
   const { muiTableContainerProps, hideToolbar } = useMaterialReactTable();
 
-  const tableContainerProps = {
-    component: Paper,
-    ...muiTableContainerProps,
-  };
-
   return (
-    <TableContainer {...tableContainerProps}>
+    <TableContainer component={Paper} {...muiTableContainerProps}>
       {!hideToolbar && <MRT_Toolbar />}
       <MRT_Table />
     </TableContainer>

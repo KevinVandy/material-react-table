@@ -17,9 +17,24 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
     anyRowsCanExpand,
     enableSelection,
     onRowClick,
+    muiTableBodyRowProps,
     renderDetailPanel,
     tableInstance,
   } = useMaterialReactTable();
+
+  const mTableBodyRowProps =
+    muiTableBodyRowProps instanceof Function
+      ? muiTableBodyRowProps(row)
+      : muiTableBodyRowProps;
+
+  const tableRowProps = {
+    ...mTableBodyRowProps,
+    ...row.getRowProps(),
+    style: {
+      ...row.getRowProps().style,
+      ...(mTableBodyRowProps?.style ?? {}),
+    },
+  };
 
   return (
     <>
@@ -28,7 +43,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         onClick={(event: MouseEvent<HTMLTableRowElement>) =>
           onRowClick?.(event, row)
         }
-        {...row.getRowProps()}
+        {...tableRowProps}
       >
         {(anyRowsCanExpand || renderDetailPanel) &&
           (row.canExpand || renderDetailPanel ? (
@@ -41,8 +56,8 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
             />
           ))}
         {enableSelection && <MRT_SelectCheckbox row={row} />}
-        {row.cells.map((cell, index) => (
-          <MRT_TableBodyCell key={`${index}-${cell.value}`} cell={cell} />
+        {row.cells.map((cell) => (
+          <MRT_TableBodyCell key={cell.getCellProps().key} cell={cell} />
         ))}
       </TableRow>
       {renderDetailPanel && <MRT_TableDetailPanel row={row} />}

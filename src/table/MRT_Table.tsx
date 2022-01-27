@@ -8,14 +8,23 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 interface Props {}
 
 export const MRT_Table: FC<Props> = () => {
-  const { tableInstance, muiTableProps, hideHead, hideFooter } =
+  const { tableInstance, muiTableProps, hideTableHead, hideTableFooter } =
     useMaterialReactTable();
 
+  const tableProps = {
+    ...muiTableProps,
+    ...tableInstance.getTableProps(),
+    style: {
+      ...tableInstance.getTableProps().style,
+      ...(muiTableProps?.style ?? {}),
+    },
+  };
+
   return (
-    <Table {...muiTableProps} {...tableInstance.getTableProps()}>
-      {!hideHead && <MRT_TableHead />}
+    <Table {...tableProps}>
+      {!hideTableHead && <MRT_TableHead />}
       <MRT_TableBody />
-      {!hideFooter && <MRT_TableFooter />}
+      {!hideTableFooter && <MRT_TableFooter />}
     </Table>
   );
 };

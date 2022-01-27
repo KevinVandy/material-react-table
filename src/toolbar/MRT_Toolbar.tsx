@@ -25,6 +25,7 @@ export const MRT_Toolbar: FC<Props> = () => {
     disableFilters,
     muiTableToolbarProps,
     title,
+    tableInstance,
   } = useMaterialReactTable();
 
   // if no features in the toolbar are enabled, don't render anything
@@ -38,10 +39,17 @@ export const MRT_Toolbar: FC<Props> = () => {
     return null;
   }
 
+  const toolbarProps =
+    muiTableToolbarProps instanceof Function
+      ? muiTableToolbarProps(tableInstance)
+      : muiTableToolbarProps;
+
   return (
-    <Toolbar variant="dense" {...muiTableToolbarProps}>
+    <Toolbar variant="dense" {...toolbarProps}>
       {title ? (
-        <Typography {...muiTableTitleProps}>{title}</Typography>
+        <Typography variant="h5" {...muiTableTitleProps}>
+          {title}
+        </Typography>
       ) : (
         <span />
       )}

@@ -8,15 +8,28 @@ interface Props {
 }
 
 export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
-  const { onCellClick } = useMaterialReactTable();
+  const { onCellClick, muiTableBodyCellProps } = useMaterialReactTable();
+
+  const mTableCellBodyProps =
+    muiTableBodyCellProps instanceof Function
+      ? muiTableBodyCellProps(cell)
+      : muiTableBodyCellProps;
+
+  const tableCellProps = {
+    ...mTableCellBodyProps,
+    ...cell.getCellProps(),
+    style: {
+      ...cell.getCellProps().style,
+      ...(mTableCellBodyProps?.style ?? {}),
+    },
+  };
 
   return (
     <TableCell
       onClick={(event: MouseEvent<HTMLTableCellElement>) =>
         onCellClick?.(event, cell)
       }
-      variant="body"
-      {...cell.getCellProps()}
+      {...tableCellProps}
     >
       {cell.isPlaceholder ? null : cell.isAggregated ? (
         cell.render('Aggregated')

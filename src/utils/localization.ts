@@ -31,5 +31,5 @@ export const defaultLocalization: MRT_Localization = {
   searchTextFieldClearButtonTitle: 'Clear search',
   searchTextFieldPlaceholder: 'Search',
   showHideColumnsButtonTitle: 'Show/Hide columns',
-  toggleFilterButtonTitle: 'Toggle filters'
+  toggleFilterButtonTitle: 'Toggle filters',
 };

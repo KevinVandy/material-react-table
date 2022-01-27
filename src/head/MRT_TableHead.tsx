@@ -15,8 +15,13 @@ export const MRT_TableHead: FC<Props> = () => {
     positionPagination,
   } = useMaterialReactTable();
 
+  const tableHeadProps =
+    muiTableHeadProps instanceof Function
+      ? muiTableHeadProps(tableInstance)
+      : muiTableHeadProps;
+
   return (
-    <TableHead {...muiTableHeadProps}>
+    <TableHead {...tableHeadProps}>
       {isFetching && <LinearProgress />}
       {!manualPagination &&
         ['top', 'both'].includes(positionPagination ?? '') && (

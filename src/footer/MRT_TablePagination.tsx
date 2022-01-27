@@ -7,6 +7,11 @@ interface Props {}
 export const MRT_TablePagination: FC<Props> = () => {
   const { tableInstance, muiTablePaginationProps } = useMaterialReactTable();
 
+  const tablePaginationProps =
+    muiTablePaginationProps instanceof Function
+      ? muiTablePaginationProps(tableInstance)
+      : muiTablePaginationProps;
+
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     tableInstance.setPageSize(+event.target.value);
     tableInstance.gotoPage(0);
@@ -27,7 +32,7 @@ export const MRT_TablePagination: FC<Props> = () => {
         showLastButton={
           tableInstance.rows.length / tableInstance.state.pageSize > 2
         }
-        {...muiTablePaginationProps}
+        {...tablePaginationProps}
       />
     </TableRow>
   );

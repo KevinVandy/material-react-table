@@ -46,16 +46,28 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
     enableColumnResizing,
     disableFilters,
     showFiltersInColumnHead,
+    muiTableHeadCellProps,
     tableInstance,
   } = useMaterialReactTable();
 
   const isParentHeader = (column?.columns?.length ?? 0) > 0;
 
+  const mTableHeadCellProps =
+    muiTableHeadCellProps instanceof Function
+      ? muiTableHeadCellProps(column)
+      : muiTableHeadCellProps;
+
+  const tableCellProps = {
+    ...mTableHeadCellProps,
+    ...column.getHeaderProps(),
+    style: {
+      ...column.getHeaderProps().style,
+      ...(mTableHeadCellProps?.style ?? {}),
+    },
+  };
+
   return (
-    <TableCell
-      align={isParentHeader ? 'center' : 'left'}
-      {...column.getHeaderProps()}
-    >
+    <TableCell align={isParentHeader ? 'center' : 'left'} {...tableCellProps}>
       <TableCellContents>
         <TableCellText
           style={{ justifyContent: isParentHeader ? 'center' : undefined }}
