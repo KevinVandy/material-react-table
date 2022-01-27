@@ -16,7 +16,6 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
   const {
     anyRowsCanExpand,
     enableSelection,
-    enableSubRowTree,
     onRowClick,
     renderDetailPanel,
     tableInstance,
@@ -31,7 +30,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         }
         {...row.getRowProps()}
       >
-        {((enableSubRowTree && anyRowsCanExpand) || renderDetailPanel) &&
+        {(anyRowsCanExpand || renderDetailPanel) &&
           (row.canExpand || renderDetailPanel ? (
             <MRT_ExpandButton row={row} />
           ) : (

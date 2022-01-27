@@ -14,7 +14,7 @@ interface Props {
 export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
   const {
     anyRowsCanExpand,
-    enableExpandAll,
+    disableExpandAll,
     enableSelection,
     renderDetailPanel,
     tableInstance,
@@ -28,7 +28,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
   return (
     <TableRow {...headerGroup.getHeaderGroupProps()}>
       {anyRowsCanExpand || renderDetailPanel ? (
-        enableExpandAll && !isParentHeader ? (
+        !disableExpandAll && !isParentHeader ? (
           <MRT_ExpandAllButton />
         ) : (
           <MRT_TableSpacerCell

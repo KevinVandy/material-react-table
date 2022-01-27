@@ -10,9 +10,9 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<MaterialReactTableProps> = (args) => (
-  <MaterialReactTable {...args} />
-);
+const Template: Story<MaterialReactTableProps> = (
+  args: MaterialReactTableProps,
+) => <MaterialReactTable {...args} />;
 
 export const Default = Template.bind({});
 
@@ -41,7 +41,7 @@ Default.args = {
     age: faker.datatype.number(80),
     address: faker.address.streetAddress(),
   })),
-};
+} as MaterialReactTableProps;
 
 export const MinimumFeatures = Template.bind({});
 
@@ -70,10 +70,12 @@ MinimumFeatures.args = {
     age: faker.datatype.number(80),
     address: faker.address.streetAddress(),
   })),
-  enablePagination: false,
-  showFooter: false,
-  showHead: false,
-};
+  manualPagination: true,
+  disableGlobalFilter: true,
+  disableFilters: true,
+  disableColumnActions: true,
+  disableColumnHiding: true,
+} as MaterialReactTableProps;
 
 const maxFeaturesData = [...Array(21)].map((_) => ({
   firstName: faker.name.firstName(),
@@ -126,14 +128,8 @@ MaximumFeatures.args = {
     },
   ],
   data: maxFeaturesData,
-  enableColumnActions: true,
   enableColumnGrouping: true,
-  enableColumnHiding: true,
-  enableColumnReordering: true,
   enableColumnResizing: true,
-  enableExpandAll: true,
-  enableSelectAll: true,
   enableSelection: true,
-  showToolbar: true,
   title: 'Kitchen Sink',
-};
+} as MaterialReactTableProps;

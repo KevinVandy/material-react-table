@@ -42,7 +42,7 @@ interface Props {
 
 export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
   const {
-    enableColumnActions,
+    disableColumnActions,
     enableColumnResizing,
     disableFilters,
     showFiltersInColumnHead,
@@ -71,7 +71,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
             )}
           </CellFlexItem>
           <CellFlexItem>
-            {enableColumnActions && !isParentHeader && (
+            {!disableColumnActions && !isParentHeader && (
               <MRT_ToggleColumnActionMenuButton column={column} />
             )}
             {enableColumnResizing && !isParentHeader && (

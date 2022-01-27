@@ -48,3 +48,14 @@ const data = [...Array(8)].map((_) => ({
 export const ColumnResizingEnabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableColumnResizing />
 );
+
+export const ColumnResizingCustomDefaultWidths: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnResizing
+    defaultColumn={{ width: 150, minWidth: 100, maxWidth: 300 }}
+  />
+);

@@ -40,6 +40,10 @@ const data = [...Array(100)].map((_) => ({
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const SearchEnabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} showToolbar />
+export const SearchEnabledDefault: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} />
+);
+
+export const SearchDisabled: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} disableGlobalFilter />
 );

@@ -40,16 +40,18 @@ export interface MaterialReactTableProps<D extends {} = {}>
     UseRowSelectOptions<D>,
     UseRowStateOptions<D>,
     UseSortByOptions<D> {
-  enableColumnActions?: boolean;
+  defaultShowFilters?: boolean;
+  disableColumnActions?: boolean;
+  disableColumnHiding?: boolean;
+  disableExpandAll?: boolean;
+  disableSelectAll?: boolean;
+  disableSubRowTree?: boolean;
   enableColumnGrouping?: boolean;
-  enableColumnHiding?: boolean;
-  enableColumnReordering?: boolean;
   enableColumnResizing?: boolean;
-  enableExpandAll?: boolean;
-  enablePagination?: boolean;
-  enableSelectAll?: boolean;
   enableSelection?: boolean;
-  enableSubRowTree?: boolean;
+  hideFooter?: boolean;
+  hideHead?: boolean;
+  hideToolbar?: boolean;
   isFetching?: boolean;
   isLoading?: boolean;
   localization?: Partial<MRT_Localization>;
@@ -80,33 +82,19 @@ export interface MaterialReactTableProps<D extends {} = {}>
   onSearchChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   positionPagination?: 'bottom' | 'top' | 'both';
   renderDetailPanel?: (rowData: Row<D>) => ReactNode;
-  defaultShowFilters?: boolean;
-  showFooter?: boolean;
-  showHead?: boolean;
-  showToolbar?: boolean;
   title?: string | ReactNode;
 }
 
 export default <D extends {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
-  enablePagination = true,
-  enableSubRowTree = true,
   localization = defaultLocalization,
   positionPagination = 'bottom',
-  showFooter = true,
-  showHead = true,
-  showToolbar = true,
   ...rest
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
     defaultColumn={defaultColumn}
-    enablePagination={enablePagination}
-    enableSubRowTree={enableSubRowTree}
     localization={{ ...defaultLocalization, ...localization }}
     positionPagination={positionPagination}
-    showFooter={showFooter}
-    showHead={showHead}
-    showToolbar={showToolbar}
     {...rest}
   >
     <MRT_TableContainer />

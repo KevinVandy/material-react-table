@@ -24,7 +24,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
   setAnchorEl,
 }) => {
   const {
-    enableColumnHiding,
+    disableColumnHiding,
     enableColumnGrouping,
     disableSortBy,
     localization,
@@ -61,28 +61,33 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       open={!!anchorEl}
       onClose={() => setAnchorEl(null)}
     >
-      {!disableSortBy && [
-        <MenuItem key={1} disabled={!column.isSorted} onClick={handleClearSort}>
-          <ClearAllIcon /> {localization?.columnActionMenuItemClearSort}
-        </MenuItem>,
-        <MenuItem
-          key={2}
-          disabled={column.isSorted && !column.isSortedDesc}
-          onClick={handleSortAsc}
-        >
-          <SortIcon /> {localization?.columnActionMenuItemSortAsc}
-        </MenuItem>,
-        <MenuItem
-          key={3}
-          disabled={column.isSorted && column.isSortedDesc}
-          onClick={handleSortDesc}
-        >
-          <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />{' '}
-          {localization?.columnActionMenuItemSortDesc}
-        </MenuItem>,
-        <Divider key={4} />,
-      ]}
-      {enableColumnHiding && (
+      {!disableSortBy &&
+        column.canSort && [
+          <MenuItem
+            key={1}
+            disabled={!column.isSorted}
+            onClick={handleClearSort}
+          >
+            <ClearAllIcon /> {localization?.columnActionMenuItemClearSort}
+          </MenuItem>,
+          <MenuItem
+            key={2}
+            disabled={column.isSorted && !column.isSortedDesc}
+            onClick={handleSortAsc}
+          >
+            <SortIcon /> {localization?.columnActionMenuItemSortAsc}
+          </MenuItem>,
+          <MenuItem
+            key={3}
+            disabled={column.isSorted && column.isSortedDesc}
+            onClick={handleSortDesc}
+          >
+            <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />{' '}
+            {localization?.columnActionMenuItemSortDesc}
+          </MenuItem>,
+          <Divider key={4} />,
+        ]}
+      {!disableColumnHiding && (
         <MenuItem onClick={handleHideColumn}>
           <VisibilityOffIcon /> {localization?.columnActionMenuItemHideColumn}
         </MenuItem>

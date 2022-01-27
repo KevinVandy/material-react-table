@@ -20,15 +20,23 @@ interface Props {}
 export const MRT_Toolbar: FC<Props> = () => {
   const {
     disableGlobalFilter,
+    disableColumnHiding,
     muiTableTitleProps,
+    disableFilters,
     muiTableToolbarProps,
     title,
   } = useMaterialReactTable();
 
-  //if no features in the toolbar are enabled, don't render anything
-  // if (disableGlobalFilter && !title && !muiTableToolbarProps) {
-  //   return null;
-  // }
+  // if no features in the toolbar are enabled, don't render anything
+  if (
+    !muiTableToolbarProps &&
+    !title &&
+    disableColumnHiding &&
+    disableFilters &&
+    disableGlobalFilter
+  ) {
+    return null;
+  }
 
   return (
     <Toolbar variant="dense" {...muiTableToolbarProps}>

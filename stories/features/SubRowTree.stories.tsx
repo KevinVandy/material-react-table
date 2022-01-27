@@ -32,7 +32,7 @@ const columns = [
   },
 ];
 
-export const SubRowTree: Story<MaterialReactTableProps> = () => (
+export const SubRowTreeEnabledDefault: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={[...Array(5)].map((_) => ({
@@ -63,11 +63,12 @@ export const SubRowTree: Story<MaterialReactTableProps> = () => (
         })),
       })),
     }))}
-    enablePagination={false}
   />
 );
 
-export const SubRowTreeExpandAll: Story<MaterialReactTableProps> = () => (
+export const SubRowTreeDisableExpandAll: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable
     columns={columns}
     data={[...Array(5)].map((_) => ({
@@ -98,7 +99,6 @@ export const SubRowTreeExpandAll: Story<MaterialReactTableProps> = () => (
         })),
       })),
     }))}
-    enableExpandAll
-    enablePagination={false}
+    disableExpandAll
   />
 );

@@ -8,7 +8,7 @@ interface Props {}
 
 export const MRT_TableFooter: FC<Props> = () => {
   const {
-    enablePagination,
+    manualPagination,
     positionPagination,
     muiTableFooterProps,
     tableInstance,
@@ -22,7 +22,7 @@ export const MRT_TableFooter: FC<Props> = () => {
           footerGroup={footerGroup}
         />
       ))}
-      {enablePagination &&
+      {!manualPagination &&
         ['bottom', 'both'].includes(positionPagination ?? '') && (
           <MRT_TablePagination />
         )}

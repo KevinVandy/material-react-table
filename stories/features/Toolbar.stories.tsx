@@ -40,24 +40,19 @@ const data = [...Array(5)].map((_) => ({
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const ToolbarEnabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} showToolbar />
+export const ToolbarEnabledDefault: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} />
 );
 
-export const ToolbarEnabledWithTitle: Story<MaterialReactTableProps> = () => (
+export const ToolbarHidden: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} hideToolbar />
+);
+
+export const ToolbarWithTitle: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    showToolbar
     title="My People Table"
-  />
-);
-
-export const ToolbarEnabledWithSearch: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    showToolbar
-    title="My People Table"
+    muiTableTitleProps={{ variant: 'h4' }}
   />
 );

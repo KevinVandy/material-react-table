@@ -12,12 +12,12 @@ const ToolbarButtonsContainer = styled('div')({
 interface Props {}
 
 export const MRT_ToolbarButtons: FC<Props> = () => {
-  const { disableFilters } = useMaterialReactTable();
+  const { disableFilters, disableColumnHiding } = useMaterialReactTable();
 
   return (
     <ToolbarButtonsContainer>
       {!disableFilters && <MRT_ToggleFiltersButton />}
-      <MRT_ShowHideColumnsButton />
+      {!disableColumnHiding && <MRT_ShowHideColumnsButton />}
     </ToolbarButtonsContainer>
   );
 };

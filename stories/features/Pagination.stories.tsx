@@ -34,13 +34,13 @@ const data = [...Array(21)].map((_) => ({
   address: faker.address.streetAddress(),
 }));
 
-export const PaginationEnabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} enablePagination />
+export const PaginationEnabledDefault: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} />
 );
 
-export const PaginationDisabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} enablePagination={false} />
-);
+export const PaginationDisabledOrOverriden: Story<
+  MaterialReactTableProps
+> = () => <MaterialReactTable columns={columns} data={data} manualPagination />;
 
 export const PaginationPositionBottom: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
