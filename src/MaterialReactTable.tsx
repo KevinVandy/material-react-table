@@ -43,18 +43,22 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
   UseRowSelectOptions<D> &
   UseRowStateOptions<D> &
   UseSortByOptions<D> & {
+    defaultDensePadding?: boolean;
     defaultShowFilters?: boolean;
     disableColumnActions?: boolean;
     disableColumnHiding?: boolean;
     disableExpandAll?: boolean;
     disableSelectAll?: boolean;
     disableSubRowTree?: boolean;
+    disableDensePaddingToggle?: boolean;
     enableColumnGrouping?: boolean;
     enableColumnResizing?: boolean;
     enableSelection?: boolean;
     hideTableFooter?: boolean;
     hideTableHead?: boolean;
-    hideToolbar?: boolean;
+    hideToolbarTop?: boolean;
+    hideToolbarBottom?: boolean;
+    hideToolbarActions?: boolean;
     isFetching?: boolean;
     isLoading?: boolean;
     localization?: Partial<MRT_Localization>;
@@ -87,7 +91,10 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
       | ((tableInstance: TableInstance<D>) => TablePaginationProps);
     muiTableProps?: TableProps;
     muiTableTitleProps?: TypographyProps;
-    muiTableToolbarProps?:
+    muiTableToolbarTopProps?:
+      | ToolbarProps
+      | ((tableInstance: TableInstance<D>) => ToolbarProps);
+    muiTableToolbarBottomProps?:
       | ToolbarProps
       | ((tableInstance: TableInstance<D>) => ToolbarProps);
     onCellClick?: (
@@ -110,6 +117,7 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
     ) => void;
     onGlobalFilterChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     positionPagination?: 'bottom' | 'top' | 'both';
+    positionToolbarActions?: 'bottom' | 'top';
     renderDetailPanel?: (rowData: Row<D>) => ReactNode;
     title?: string | ReactNode;
   };
@@ -118,12 +126,14 @@ export default <D extends {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
   localization = defaultLocalization,
   positionPagination = 'bottom',
+  positionToolbarActions = 'top',
   ...rest
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
     defaultColumn={defaultColumn}
     localization={{ ...defaultLocalization, ...localization }}
     positionPagination={positionPagination}
+    positionToolbarActions={positionToolbarActions}
     {...rest}
   >
     <MRT_TableContainer />

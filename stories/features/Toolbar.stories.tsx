@@ -41,14 +41,40 @@ const data = [...Array(5)].map((_) => ({
 }));
 
 export const ToolbarEnabledDefault: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} />
+  <MaterialReactTable columns={columns} data={data} title="My Table" />
 );
 
-export const ToolbarHidden: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} hideToolbar />
+export const TopToolbarHidden: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} hideToolbarTop />
 );
 
-export const ToolbarWithTitle: Story<MaterialReactTableProps> = () => (
+export const BottomToolbarHidden: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} hideToolbarBottom />
+);
+
+export const NoToolbars: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    hideToolbarTop
+    hideToolbarBottom
+  />
+);
+
+export const hideToolbarActions: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} hideToolbarActions />
+);
+
+export const toolbarActionsOnBottom: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    title="My People Table"
+    positionToolbarActions="bottom"
+  />
+);
+
+export const ToolbarWithStyledTitle: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

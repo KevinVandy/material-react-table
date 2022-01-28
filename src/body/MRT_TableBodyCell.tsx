@@ -8,7 +8,8 @@ interface Props {
 }
 
 export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
-  const { onCellClick, muiTableBodyCellProps } = useMaterialReactTable();
+  const { onCellClick, muiTableBodyCellProps, densePadding } =
+    useMaterialReactTable();
 
   const mTableCellBodyProps =
     muiTableBodyCellProps instanceof Function
@@ -19,6 +20,8 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
     ...mTableCellBodyProps,
     ...cell.getCellProps(),
     style: {
+      padding: densePadding ? '0.5rem' : '1rem',
+      transition: 'all 0.2s ease-in-out',
       ...cell.getCellProps().style,
       ...(mTableCellBodyProps?.style ?? {}),
     },

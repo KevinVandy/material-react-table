@@ -24,8 +24,11 @@ import { UseMRTCalcs, useMRTCalcs } from './utils/useMRTCalcs';
 export interface UseMaterialReactTable<D extends {}>
   extends MaterialReactTableProps<D>,
     UseMRTCalcs {
+  densePadding: boolean;
+  setDensePadding: (densePadding: boolean) => void;
+  setShowFilters: (showFilters: boolean) => void;
+  showFilters: boolean;
   tableInstance: TableInstance<D>;
-  setShowFiltersInColumnHead: (showFiltersInColumnHead: boolean) => void;
 }
 
 const MaterialReactTableContext = (<D extends {}>() =>
@@ -51,8 +54,11 @@ export const MaterialReactTableProvider = <D extends {}>(
 
   const mrtCalcs = useMRTCalcs({ tableInstance });
 
-  const [showFiltersInColumnHead, setShowFiltersInColumnHead] = useState(
-    props.defaultShowFilters,
+  const [showFilters, setShowFilters] = useState<boolean>(
+    props.defaultShowFilters ?? false,
+  );
+  const [densePadding, setDensePadding] = useState<boolean>(
+    props.defaultDensePadding ?? false,
   );
 
   return (
@@ -60,8 +66,10 @@ export const MaterialReactTableProvider = <D extends {}>(
       value={{
         ...mrtCalcs,
         ...props,
-        setShowFiltersInColumnHead,
-        showFiltersInColumnHead,
+        densePadding,
+        setDensePadding,
+        setShowFilters,
+        showFilters,
         // @ts-ignore
         tableInstance,
       }}

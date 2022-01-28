@@ -6,16 +6,21 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 interface Props {}
 
 export const MRT_ExpandAllButton: FC<Props> = () => {
-  const { tableInstance, localization, anyRowsExpanded, renderDetailPanel } =
-    useMaterialReactTable();
+  const {
+    tableInstance,
+    localization,
+    anyRowsExpanded,
+    densePadding,
+    renderDetailPanel,
+  } = useMaterialReactTable();
 
   return (
     <TableCell
       size="small"
       {...tableInstance.getToggleAllRowsExpandedProps()}
       style={{
-        padding: '0.5rem',
-        paddingRight: '0',
+        padding: densePadding ? '0' : '0.5rem 0.5rem',
+        transition: 'all 0.2s ease-in-out',
         width: `${renderDetailPanel ? 2 : tableInstance.expandedDepth + 2}rem`,
       }}
     >

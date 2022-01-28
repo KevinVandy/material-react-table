@@ -41,7 +41,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
       borderBottom: !row.isExpanded ? 'none' : undefined,
       paddingBottom: row.isExpanded ? '1rem' : 0,
       paddingTop: row.isExpanded ? '1rem' : 0,
-      transition: 'all 0.2s',
+      transition: 'all 0.2s ease-in-out',
       ...(mTableDetailPanelProps?.style || {}),
     },
   };

@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const MRT_TableFooterCell: FC<Props> = ({ column }) => {
-  const { muiTableFooterCellProps } = useMaterialReactTable();
+  const { muiTableFooterCellProps, densePadding } = useMaterialReactTable();
 
   const isParentHeader = (column?.columns?.length ?? 0) > 0;
 
@@ -25,6 +25,8 @@ export const MRT_TableFooterCell: FC<Props> = ({ column }) => {
     ...mTableFooterCellProps,
     ...column.getFooterProps(),
     style: {
+      padding: densePadding ? '0.5rem' : '1rem',
+      transition: 'all 0.2s ease-in-out',
       ...column.getFooterProps().style,
       ...(mTableFooterCellProps?.style ?? {}),
     },

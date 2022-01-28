@@ -8,7 +8,8 @@ interface Props {
 }
 
 export const MRT_SelectCheckbox: FC<Props> = ({ row }) => {
-  const { tableInstance, onRowSelectChange } = useMaterialReactTable();
+  const { tableInstance, onRowSelectChange, densePadding } =
+    useMaterialReactTable();
 
   const onSelectChange = (event: ChangeEvent) => {
     row.getToggleRowSelectedProps()?.onChange?.(event);
@@ -16,7 +17,13 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row }) => {
   };
 
   return (
-    <TableCell style={{ width: '2rem', padding: '0.5rem' }}>
+    <TableCell
+      style={{
+        width: '2rem',
+        padding: densePadding ? '0' : '0.6rem',
+        transition: 'all 0.2s ease-in-out',
+      }}
+    >
       <Checkbox
         {...row.getToggleRowSelectedProps()}
         onChange={onSelectChange}

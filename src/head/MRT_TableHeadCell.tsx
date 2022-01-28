@@ -42,11 +42,12 @@ interface Props {
 
 export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
   const {
+    densePadding,
     disableColumnActions,
-    enableColumnResizing,
     disableFilters,
-    showFiltersInColumnHead,
+    enableColumnResizing,
     muiTableHeadCellProps,
+    showFilters,
     tableInstance,
   } = useMaterialReactTable();
 
@@ -61,6 +62,8 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
     ...mTableHeadCellProps,
     ...column.getHeaderProps(),
     style: {
+      padding: densePadding ? '0.5rem' : '1rem',
+      transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
       ...column.getHeaderProps().style,
       ...(mTableHeadCellProps?.style ?? {}),
     },
@@ -97,7 +100,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
           </CellFlexItem>
         </TableCellText>
         {!disableFilters && column.canFilter && (
-          <Collapse in={showFiltersInColumnHead}>
+          <Collapse in={showFilters}>
             <MRT_FilterTextfield column={column} />
           </Collapse>
         )}

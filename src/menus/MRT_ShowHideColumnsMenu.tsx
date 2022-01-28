@@ -17,10 +17,10 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({ column }) => {
       <MenuItem style={{ paddingLeft: `${column.depth + 1}rem` }}>
         {isMaxDepth ? (
           <FormControlLabel
-            onChange={() => isMaxDepth && column.toggleHidden()}
-            label={column.Header as string}
             checked={column.isVisible}
             control={<Switch />}
+            label={column.Header as string}
+            onChange={() => isMaxDepth && column.toggleHidden()}
           />
         ) : (
           <Typography>{column.Header}</Typography>

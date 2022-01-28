@@ -7,17 +7,16 @@ import FilterListOffIcon from '@mui/icons-material/FilterListOff';
 type Props = {};
 
 export const MRT_ToggleFiltersButton: FC<Props> = () => {
-  const { localization, setShowFiltersInColumnHead, showFiltersInColumnHead } =
-    useMaterialReactTable();
+  const { localization, setShowFilters, showFilters } = useMaterialReactTable();
 
   return (
     <IconButton
       aria-label={localization?.toggleFilterButtonTitle}
       title={localization?.toggleFilterButtonTitle}
-      onClick={() => setShowFiltersInColumnHead(!showFiltersInColumnHead)}
+      onClick={() => setShowFilters(!showFilters)}
       size="small"
     >
-      {showFiltersInColumnHead ? <FilterListOffIcon /> : <FilterListIcon />}
+      {showFilters ? <FilterListOffIcon /> : <FilterListIcon />}
     </IconButton>
   );
 };

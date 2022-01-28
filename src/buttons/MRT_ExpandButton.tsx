@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const MRT_ExpandButton: FC<Props> = ({ row }) => {
-  const { localization, tableInstance, renderDetailPanel } =
+  const { localization, tableInstance, densePadding, renderDetailPanel } =
     useMaterialReactTable();
 
   return (
@@ -17,9 +17,9 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
       size="small"
       {...row.getToggleRowExpandedProps()}
       style={{
-        padding: '0.5rem',
-        paddingRight: '0',
+        padding: densePadding ? '0' : '0.6rem 0',
         paddingLeft: `${row.depth + 0.5}rem`,
+        transition: 'all 0.2s ease-in-out',
         width: `${
           renderDetailPanel ? 2 : tableInstance.expandedDepth - row.depth + 2
         }rem`,

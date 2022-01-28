@@ -14,6 +14,7 @@ export interface MRT_Localization {
   searchTextFieldPlaceholder: string;
   showHideColumnsButtonTitle: string;
   toggleFilterButtonTitle: string;
+  toggleDensePaddingSwitchTitle: string;
 }
 
 export const defaultLocalization: MRT_Localization = {
@@ -32,4 +33,5 @@ export const defaultLocalization: MRT_Localization = {
   searchTextFieldPlaceholder: 'Search',
   showHideColumnsButtonTitle: 'Show/Hide columns',
   toggleFilterButtonTitle: 'Toggle filters',
+  toggleDensePaddingSwitchTitle: 'Toggle dense padding',
 };
