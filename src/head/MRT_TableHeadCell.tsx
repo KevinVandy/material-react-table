@@ -28,6 +28,7 @@ const TableCellText = styled('div')({
 const CellFlexItem = styled('span')({
   display: 'flex',
   flexWrap: 'nowrap',
+  alignItems: 'center',
 });
 
 const Divider = styled(MuiDivider)({
@@ -46,6 +47,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
     disableColumnActions,
     disableFilters,
     enableColumnResizing,
+    localization,
     muiTableHeadCellProps,
     showFilters,
     tableInstance,
@@ -79,6 +81,13 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
             {column.render('Header')}
             {!isParentHeader && column.canSort && (
               <TableSortLabel
+                aria-label={
+                  column.isSorted
+                    ? column.sortDescFirst
+                      ? localization?.columnActionMenuItemClearSort
+                      : localization?.columnActionMenuItemSortDesc
+                    : localization?.columnActionMenuItemSortAsc
+                }
                 active={column.isSorted}
                 direction={column.isSortedDesc ? 'desc' : 'asc'}
                 style={{ margin: 0 }}

@@ -6,7 +6,6 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
 import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
-import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
 
 interface Props {
   row: Row;
@@ -19,7 +18,6 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
     onRowClick,
     muiTableBodyRowProps,
     renderDetailPanel,
-    tableInstance,
   } = useMaterialReactTable();
 
   const mTableBodyRowProps =
@@ -45,16 +43,9 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         }
         {...tableRowProps}
       >
-        {(anyRowsCanExpand || renderDetailPanel) &&
-          (row.canExpand || renderDetailPanel ? (
-            <MRT_ExpandButton row={row} />
-          ) : (
-            <MRT_TableSpacerCell
-              width={`${
-                renderDetailPanel ? 2 : tableInstance.expandedDepth + 0.5
-              }rem`}
-            />
-          ))}
+        {(anyRowsCanExpand || renderDetailPanel) && (
+          <MRT_ExpandButton row={row} />
+        )}
         {enableSelection && <MRT_SelectCheckbox row={row} />}
         {row.cells.map((cell) => (
           <MRT_TableBodyCell key={cell.getCellProps().key} cell={cell} />

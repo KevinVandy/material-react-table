@@ -59,3 +59,20 @@ export const PaginationPositionTopAndBottom: Story<
 > = () => (
   <MaterialReactTable columns={columns} data={data} positionPagination="both" />
 );
+
+export const CustomizePaginationComponents: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    initialState={{ pageSize: 5 }}
+    muiTablePaginationProps={{
+      rowsPerPageOptions: [5, 10, 20],
+      showFirstButton: false,
+      showLastButton: false,
+      SelectProps: { native: true },
+      labelRowsPerPage: 'Number of rows visible',
+    }}
+  />
+);

@@ -87,8 +87,8 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
       | TableRowProps
       | ((row: HeaderGroup<D>) => TableRowProps);
     muiTablePaginationProps?:
-      | TablePaginationProps
-      | ((tableInstance: TableInstance<D>) => TablePaginationProps);
+      | Partial<TablePaginationProps>
+      | ((tableInstance: TableInstance<D>) => Partial<TablePaginationProps>);
     muiTableProps?: TableProps;
     muiTableTitleProps?: TypographyProps;
     muiTableToolbarTopProps?:
