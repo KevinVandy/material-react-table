@@ -1,5 +1,5 @@
 import React, { FC, MouseEvent, useState } from 'react';
-import { IconButton, Menu } from '@mui/material';
+import { IconButton, Menu, Tooltip } from '@mui/material';
 import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_ShowHideColumnsMenu } from '../menus/MRT_ShowHideColumnsMenu';
@@ -17,14 +17,15 @@ export const MRT_ShowHideColumnsButton: FC<Props> = () => {
 
   return (
     <>
-      <IconButton
-        aria-label={localization?.showHideColumnsButtonTitle}
-        title={localization?.showHideColumnsButtonTitle}
-        onClick={handleClick}
-        size="small"
-      >
-        <ViewColumnIcon />
-      </IconButton>
+      <Tooltip arrow title={localization?.showHideColumnsButtonTitle ?? ''}>
+        <IconButton
+          aria-label={localization?.showHideColumnsButtonTitle}
+          onClick={handleClick}
+          size="small"
+        >
+          <ViewColumnIcon />
+        </IconButton>
+      </Tooltip>
       <Menu
         anchorEl={anchorEl}
         open={!!anchorEl}

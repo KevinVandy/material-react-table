@@ -6,6 +6,7 @@ import React, {
   useState,
 } from 'react';
 import {
+  PluginHook,
   TableInstance,
   useExpanded,
   useFilters,
@@ -39,9 +40,7 @@ const MaterialReactTableContext = (<D extends {}>() =>
 export const MaterialReactTableProvider = <D extends {}>(
   props: PropsWithChildren<MaterialReactTableProps<D>>,
 ) => {
-  const tableInstance = useTable<D>(
-    props,
-    useFlexLayout,
+  const hooks: PluginHook<D>[] = [
     useResizeColumns,
     useFilters,
     useGlobalFilter,
@@ -50,7 +49,11 @@ export const MaterialReactTableProvider = <D extends {}>(
     useExpanded,
     usePagination,
     useRowSelect,
-  );
+  ];
+
+  if (props.enableColumnResizing) hooks.unshift(useFlexLayout);
+
+  const tableInstance = useTable<D>(props, ...hooks);
 
   const mrtCalcs = useMRTCalcs({ tableInstance });
 

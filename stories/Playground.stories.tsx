@@ -71,10 +71,9 @@ MinimumFeatures.args = {
     address: faker.address.streetAddress(),
   })),
   manualPagination: true,
-  disableGlobalFilter: true,
-  disableFilters: true,
+  hideToolbarTop: true,
+  hideToolbarBottom: true,
   disableColumnActions: true,
-  disableColumnHiding: true,
 } as MaterialReactTableProps;
 
 const maxFeaturesData = [...Array(21)].map((_) => ({
