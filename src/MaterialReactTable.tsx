@@ -33,6 +33,8 @@ import { MaterialReactTableProvider } from './useMaterialReactTable';
 import { MRT_TableContainer } from './table/MRT_TableContainer';
 import { defaultLocalization, MRT_Localization } from './utils/localization';
 
+
+
 export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
   UseExpandedOptions<D> &
   UseFiltersOptions<D> &
@@ -43,6 +45,7 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
   UseRowSelectOptions<D> &
   UseRowStateOptions<D> &
   UseSortByOptions<D> & {
+    columns: Column<D>[];
     defaultDensePadding?: boolean;
     defaultShowFilters?: boolean;
     disableColumnActions?: boolean;

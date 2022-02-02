@@ -23,6 +23,11 @@ export const MRT_FilterTextfield: FC<Props> = ({ column }) => {
     column.setFilter(undefined);
   };
 
+  if (column.Filter) {
+    //@ts-ignore
+    return <>{column.Filter({ column })}</>;
+  }
+
   return (
     <TextField
       margin="dense"
