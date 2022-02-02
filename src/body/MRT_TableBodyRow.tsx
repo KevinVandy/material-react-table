@@ -1,5 +1,5 @@
 import React, { FC, MouseEvent } from 'react';
-import { TableRow } from '@mui/material';
+import { alpha, TableRow, useTheme } from '@mui/material';
 import { Row } from 'react-table';
 import { MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { useMaterialReactTable } from '../useMaterialReactTable';
@@ -19,6 +19,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
     muiTableBodyRowProps,
     renderDetailPanel,
   } = useMaterialReactTable();
+  const theme= useTheme();
 
   const mTableBodyRowProps =
     muiTableBodyRowProps instanceof Function
@@ -29,6 +30,9 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
     ...mTableBodyRowProps,
     ...row.getRowProps(),
     style: {
+      backgroundColor: row.isSelected
+        ? alpha(theme.palette.primary.light, 0.1)
+        : 'transparent',
       ...row.getRowProps().style,
       ...(mTableBodyRowProps?.style ?? {}),
     },

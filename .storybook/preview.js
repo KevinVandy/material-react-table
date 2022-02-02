@@ -12,9 +12,12 @@ setConsoleOptions({
 export const parameters = {
   actions: { argTypesRegex: '^on.*' },
   controls: { expanded: true, sort: 'requiredFirst' },
+  darkMode: {
+    current: 'light',
+  },
 };
 
-const defaultTheme = createTheme(); // or your custom theme
+const defaultTheme = createTheme();
 
 const withThemeProvider = (Story, context) => {
   return (
@@ -22,8 +25,8 @@ const withThemeProvider = (Story, context) => {
       <ThemeProvider theme={defaultTheme}>
         <Story {...context} />
         <Typography variant="subtitle2" style={{ paddingTop: '2rem' }}>
-          View Source Code Below in the Story Tab or the Show Code Button (in
-          Docs)
+          View Source Code Below in the Story Tab on Canvas or the Show Code
+          Button in Docs
         </Typography>
       </ThemeProvider>
     </Emotion10ThemeProvider>
