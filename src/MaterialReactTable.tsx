@@ -45,23 +45,24 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
   UseRowSelectOptions<D> &
   UseRowStateOptions<D> &
   UseSortByOptions<D> & {
-    columns: Column<D>[];
     defaultDensePadding?: boolean;
     defaultShowFilters?: boolean;
     disableColumnActions?: boolean;
     disableColumnHiding?: boolean;
+    disableDensePaddingToggle?: boolean;
     disableExpandAll?: boolean;
     disableSelectAll?: boolean;
     disableSubRowTree?: boolean;
-    disableDensePaddingToggle?: boolean;
     enableColumnGrouping?: boolean;
     enableColumnResizing?: boolean;
+    enableRowActions?: boolean;
+    enableRowEditing?: boolean;
     enableSelection?: boolean;
     hideTableFooter?: boolean;
     hideTableHead?: boolean;
-    hideToolbarTop?: boolean;
-    hideToolbarBottom?: boolean;
     hideToolbarActions?: boolean;
+    hideToolbarBottom?: boolean;
+    hideToolbarTop?: boolean;
     isFetching?: boolean;
     isLoading?: boolean;
     localization?: Partial<MRT_Localization>;
@@ -94,10 +95,10 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
       | ((tableInstance: TableInstance<D>) => Partial<TablePaginationProps>);
     muiTableProps?: TableProps;
     muiTableTitleProps?: TypographyProps;
-    muiTableToolbarTopProps?:
+    muiTableToolbarBottomProps?:
       | ToolbarProps
       | ((tableInstance: TableInstance<D>) => ToolbarProps);
-    muiTableToolbarBottomProps?:
+    muiTableToolbarTopProps?:
       | ToolbarProps
       | ((tableInstance: TableInstance<D>) => ToolbarProps);
     onCellClick?: (
@@ -108,7 +109,9 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
       event: MouseEvent<HTMLTableCellElement>,
       row: Row<D>,
     ) => void;
+    onGlobalFilterChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     onRowClick?: (event: MouseEvent<HTMLTableRowElement>, row: Row<D>) => void;
+    onRowEditSubmit?: (row: Row<D>) => Promise<void> | void;
     onRowExpandChange?: (
       event: MouseEvent<HTMLButtonElement>,
       row: Row<D>,
@@ -118,10 +121,14 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
       row: Row<D>,
       selectedRows: Row<D>[],
     ) => void;
-    onGlobalFilterChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     positionPagination?: 'bottom' | 'top' | 'both';
     positionToolbarActions?: 'bottom' | 'top';
     renderDetailPanel?: (rowData: Row<D>) => ReactNode;
+    renderRowActionMenuItems?: (
+      rowData: Row<D>,
+      tableInstance: TableInstance<D>,
+      closeMenu: () => void,
+    ) => ReactNode[];
     title?: string | ReactNode;
   };
 

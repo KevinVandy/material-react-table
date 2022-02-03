@@ -1,37 +1,47 @@
 export interface MRT_Localization {
   columnActionMenuButtonTitle: string;
+  columnActionMenuItemClearSort: string;
+  columnActionMenuItemGroupBy: string;
   columnActionMenuItemHideColumn: string;
   columnActionMenuItemSortAsc: string;
-  columnActionMenuItemClearSort: string;
   columnActionMenuItemSortDesc: string;
-  columnActionMenuItemGroupBy: string;
   columnActionMenuItemUnGroupBy: string;
   expandAllButtonTitle: string;
   expandButtonTitle: string;
   filterTextFieldClearButtonTitle: string;
   filterTextFieldPlaceholder: string;
+  rowActionMenuButtonTitle: string;
+  rowActionsColumnTitle: string;
+  rowActionButtonSave: string;
+  rowActionButtonCancel: string;
+  rowActionMenuItemEdit: string;
   searchTextFieldClearButtonTitle: string;
   searchTextFieldPlaceholder: string;
   showHideColumnsButtonTitle: string;
-  toggleFilterButtonTitle: string;
   toggleDensePaddingSwitchTitle: string;
+  toggleFilterButtonTitle: string;
 }
 
 export const defaultLocalization: MRT_Localization = {
   columnActionMenuButtonTitle: 'Column Actions',
+  columnActionMenuItemClearSort: 'Clear sorting',
+  columnActionMenuItemGroupBy: 'Group by column',
   columnActionMenuItemHideColumn: 'Hide column',
   columnActionMenuItemSortAsc: 'Sort ascending',
-  columnActionMenuItemClearSort: 'Clear sorting',
   columnActionMenuItemSortDesc: 'Sort descending',
-  columnActionMenuItemGroupBy: 'Group by column',
   columnActionMenuItemUnGroupBy: 'Ungroup column',
   expandAllButtonTitle: 'Expand all',
   expandButtonTitle: 'Expand',
   filterTextFieldClearButtonTitle: 'Clear filter',
   filterTextFieldPlaceholder: 'Filter',
+  rowActionMenuButtonTitle: 'Row Actions',
+  rowActionsColumnTitle: 'Actions',
+  rowActionMenuItemEdit: 'Edit',
+  rowActionButtonSave: 'Save',
+  rowActionButtonCancel: 'Cancel',
   searchTextFieldClearButtonTitle: 'Clear search',
   searchTextFieldPlaceholder: 'Search',
   showHideColumnsButtonTitle: 'Show/Hide columns',
-  toggleFilterButtonTitle: 'Toggle filters',
   toggleDensePaddingSwitchTitle: 'Toggle dense padding',
+  toggleFilterButtonTitle: 'Toggle filters',
 };

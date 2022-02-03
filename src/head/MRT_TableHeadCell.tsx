@@ -13,6 +13,7 @@ import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnAct
 
 const TableCell = styled(MuiTableCell)({
   fontWeight: 'bold',
+  verticalAlign: 'text-top',
 });
 
 const TableCellContents = styled('div')({

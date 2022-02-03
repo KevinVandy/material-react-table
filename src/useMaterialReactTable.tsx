@@ -25,7 +25,9 @@ import { UseMRTCalcs, useMRTCalcs } from './utils/useMRTCalcs';
 export interface UseMaterialReactTable<D extends {}>
   extends MaterialReactTableProps<D>,
     UseMRTCalcs {
+      currentEditingRowId: string | null;
   densePadding: boolean;
+  setCurrentEditingRowId: (currentRowEditingId: string | null) => void;
   setDensePadding: (densePadding: boolean) => void;
   setShowFilters: (showFilters: boolean) => void;
   showFilters: boolean;
@@ -63,6 +65,9 @@ export const MaterialReactTableProvider = <D extends {}>(
   const [densePadding, setDensePadding] = useState<boolean>(
     props.defaultDensePadding ?? false,
   );
+  const [currentEditingRowId, setCurrentEditingRowId] = useState<string | null>(
+    null,
+  );
 
   return (
     <MaterialReactTableContext.Provider
@@ -72,6 +77,8 @@ export const MaterialReactTableProvider = <D extends {}>(
         densePadding,
         setDensePadding,
         setShowFilters,
+        currentEditingRowId,
+        setCurrentEditingRowId,
         showFilters,
         // @ts-ignore
         tableInstance,

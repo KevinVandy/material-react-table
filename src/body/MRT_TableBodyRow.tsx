@@ -1,11 +1,12 @@
 import React, { FC, MouseEvent } from 'react';
-import { alpha, TableRow, useTheme } from '@mui/material';
+import { alpha, TableCell, TableRow, useTheme } from '@mui/material';
 import { Row } from 'react-table';
 import { MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
 import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
+import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMenuButton';
 
 interface Props {
   row: Row;
@@ -15,11 +16,12 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
   const {
     anyRowsCanExpand,
     enableSelection,
+    enableRowActions,
     onRowClick,
     muiTableBodyRowProps,
     renderDetailPanel,
   } = useMaterialReactTable();
-  const theme= useTheme();
+  const theme = useTheme();
 
   const mTableBodyRowProps =
     muiTableBodyRowProps instanceof Function
@@ -47,6 +49,11 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         }
         {...tableRowProps}
       >
+        {enableRowActions && (
+          <TableCell>
+            <MRT_ToggleRowActionMenuButton row={row} />
+          </TableCell>
+        )}
         {(anyRowsCanExpand || renderDetailPanel) && (
           <MRT_ExpandButton row={row} />
         )}
