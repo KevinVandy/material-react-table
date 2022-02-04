@@ -95,7 +95,7 @@ MaximumFeatures.args = {
   columns: [
     {
       Header: 'Name',
-      Footer: 'Footer',
+      Footer: 'Name',
       columns: [
         {
           Header: 'First Name',
@@ -128,7 +128,9 @@ MaximumFeatures.args = {
   ],
   data: maxFeaturesData,
   enableColumnGrouping: true,
-  enableColumnResizing: true,
+  enableColumnResizing: false,
   enableSelection: true,
+  enableRowActions: true,
+  enableRowEditing: true,
   title: 'Kitchen Sink',
 } as MaterialReactTableProps;

@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react';
-import { TableCell, TableRow } from '@mui/material';
+import { TableRow } from '@mui/material';
 import { HeaderGroup } from 'react-table';
-import { MRT_TableHeadCell } from './MRT_TableHeadCell';
+import { MRT_TableHeadCell, StyledTableHeadCell } from './MRT_TableHeadCell';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_SelectAllCheckbox } from '../inputs/MRT_SelectAllCheckbox';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
@@ -15,11 +15,13 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
   const {
     anyRowsCanExpand,
     disableExpandAll,
-    enableSelection,
     enableRowActions,
+    enableSelection,
+    localization,
+    muiTableHeadRowProps,
+    positionActionsColumn,
     renderDetailPanel,
     tableInstance,
-    muiTableHeadRowProps,
   } = useMaterialReactTable();
 
   const isParentHeader = useMemo(
@@ -43,7 +45,15 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
 
   return (
     <TableRow {...tableRowProps}>
-      {enableRowActions && <TableCell>Actions</TableCell>}
+      {enableRowActions &&
+        positionActionsColumn === 'first' &&
+        (isParentHeader ? (
+          <MRT_TableSpacerCell />
+        ) : (
+          <StyledTableHeadCell>
+            {localization?.actionsHeadColumnTitle}
+          </StyledTableHeadCell>
+        ))}
       {anyRowsCanExpand || renderDetailPanel ? (
         !disableExpandAll && !isParentHeader ? (
           <MRT_ExpandAllButton />
@@ -65,6 +75,15 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
       {headerGroup.headers.map((column) => (
         <MRT_TableHeadCell key={column.getHeaderProps().key} column={column} />
       ))}
+      {enableRowActions &&
+        positionActionsColumn === 'last' &&
+        (isParentHeader ? (
+          <MRT_TableSpacerCell />
+        ) : (
+          <StyledTableHeadCell>
+            {localization?.actionsHeadColumnTitle}
+          </StyledTableHeadCell>
+        ))}
     </TableRow>
   );
 };

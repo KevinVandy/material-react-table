@@ -22,7 +22,12 @@ interface Props {
 }
 
 export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
-  const { localization, currentEditingRowId } = useMaterialReactTable();
+  const {
+    localization,
+    currentEditingRowId,
+    renderRowActions,
+    tableInstance,
+  } = useMaterialReactTable();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -31,6 +36,10 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
     event.preventDefault();
     setAnchorEl(event.currentTarget);
   };
+
+  if (renderRowActions) {
+    return <>{renderRowActions(row, tableInstance)}</>;
+  }
 
   if (row.id === currentEditingRowId) {
     return <MRT_EditActionButtons row={row} />;

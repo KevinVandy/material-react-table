@@ -1,4 +1,5 @@
 export interface MRT_Localization {
+  actionsHeadColumnTitle: string;
   columnActionMenuButtonTitle: string;
   columnActionMenuItemClearSort: string;
   columnActionMenuItemGroupBy: string;
@@ -23,6 +24,7 @@ export interface MRT_Localization {
 }
 
 export const defaultLocalization: MRT_Localization = {
+  actionsHeadColumnTitle: 'Actions',
   columnActionMenuButtonTitle: 'Column Actions',
   columnActionMenuItemClearSort: 'Clear sorting',
   columnActionMenuItemGroupBy: 'Group by column',

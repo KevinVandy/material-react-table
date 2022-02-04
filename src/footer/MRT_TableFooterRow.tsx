@@ -15,6 +15,8 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
     columns,
     anyRowsCanExpand,
     enableSelection,
+    enableRowActions,
+    positionActionsColumn,
     tableInstance,
     muiTableFooterRowProps,
   } = useMaterialReactTable();
@@ -38,6 +40,9 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
 
   return (
     <TableRow {...tableRowProps}>
+      {enableRowActions && positionActionsColumn === 'first' && (
+        <MRT_TableSpacerCell />
+      )}
       {(anyRowsCanExpand || renderDetailPanel) && (
         <MRT_TableSpacerCell
           width={`${
@@ -49,6 +54,9 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
       {footerGroup.headers.map((column, index) => (
         <MRT_TableFooterCell key={`${index}-${column.id}`} column={column} />
       ))}
+      {enableRowActions && positionActionsColumn === 'last' && (
+        <MRT_TableSpacerCell />
+      )}
     </TableRow>
   );
 };

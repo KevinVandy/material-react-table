@@ -11,7 +11,7 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_FilterTextfield } from '../inputs/MRT_FilterTextField';
 import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
 
-const TableCell = styled(MuiTableCell)({
+export const StyledTableHeadCell = styled(MuiTableCell)({
   fontWeight: 'bold',
   verticalAlign: 'text-top',
 });
@@ -73,7 +73,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
   };
 
   return (
-    <TableCell align={isParentHeader ? 'center' : 'left'} {...tableCellProps}>
+    <StyledTableHeadCell align={isParentHeader ? 'center' : 'left'} {...tableCellProps}>
       <TableCellContents>
         <TableCellText
           style={{ justifyContent: isParentHeader ? 'center' : undefined }}
@@ -115,6 +115,6 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
           </Collapse>
         )}
       </TableCellContents>
-    </TableCell>
+    </StyledTableHeadCell>
   );
 };

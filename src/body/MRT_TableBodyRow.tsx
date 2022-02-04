@@ -15,10 +15,11 @@ interface Props {
 export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
   const {
     anyRowsCanExpand,
-    enableSelection,
     enableRowActions,
-    onRowClick,
+    enableSelection,
     muiTableBodyRowProps,
+    onRowClick,
+    positionActionsColumn,
     renderDetailPanel,
   } = useMaterialReactTable();
   const theme = useTheme();
@@ -49,7 +50,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         }
         {...tableRowProps}
       >
-        {enableRowActions && (
+        {enableRowActions && positionActionsColumn === 'first' && (
           <TableCell>
             <MRT_ToggleRowActionMenuButton row={row} />
           </TableCell>
@@ -61,6 +62,11 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         {row.cells.map((cell) => (
           <MRT_TableBodyCell key={cell.getCellProps().key} cell={cell} />
         ))}
+        {enableRowActions && positionActionsColumn === 'last' && (
+          <TableCell>
+            <MRT_ToggleRowActionMenuButton row={row} />
+          </TableCell>
+        )}
       </TableRow>
       {renderDetailPanel && <MRT_TableDetailPanel row={row} />}
     </>

@@ -33,8 +33,6 @@ import { MaterialReactTableProvider } from './useMaterialReactTable';
 import { MRT_TableContainer } from './table/MRT_TableContainer';
 import { defaultLocalization, MRT_Localization } from './utils/localization';
 
-
-
 export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
   UseExpandedOptions<D> &
   UseFiltersOptions<D> &
@@ -121,9 +119,14 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
       row: Row<D>,
       selectedRows: Row<D>[],
     ) => void;
+    positionActionsColumn?: 'first' | 'last';
     positionPagination?: 'bottom' | 'top' | 'both';
     positionToolbarActions?: 'bottom' | 'top';
-    renderDetailPanel?: (rowData: Row<D>) => ReactNode;
+    renderRowActions?: (
+      row: Row<D>,
+      tableInstance: TableInstance<D>,
+    ) => ReactNode;
+    renderDetailPanel?: (row: Row<D>) => ReactNode;
     renderRowActionMenuItems?: (
       rowData: Row<D>,
       tableInstance: TableInstance<D>,
@@ -135,6 +138,7 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
 export default <D extends {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
   localization = defaultLocalization,
+  positionActionsColumn = 'first',
   positionPagination = 'bottom',
   positionToolbarActions = 'top',
   ...rest
@@ -143,6 +147,7 @@ export default <D extends {}>({
     defaultColumn={defaultColumn}
     localization={{ ...defaultLocalization, ...localization }}
     positionPagination={positionPagination}
+    positionActionsColumn={positionActionsColumn}
     positionToolbarActions={positionToolbarActions}
     {...rest}
   >
