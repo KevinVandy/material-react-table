@@ -40,11 +40,14 @@ export const DefaultTheme: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableSelection />
 );
 
-export const CustomTheme: Story<MaterialReactTableProps> = () => {
+export const CustomLightTheme: Story<MaterialReactTableProps> = () => {
   const theme = createTheme({
     palette: {
       primary: {
         main: '#ff9800',
+      },
+      background: {
+        paper: '#ffffef',
       },
       secondary: {
         main: '#00bcd4',
@@ -60,7 +63,7 @@ export const CustomTheme: Story<MaterialReactTableProps> = () => {
   );
 };
 
-export const DarkTheme: Story<MaterialReactTableProps> = () => {
+export const CustomDarkTheme: Story<MaterialReactTableProps> = () => {
   const theme = createTheme({
     palette: {
       mode: 'dark',
