@@ -13,6 +13,30 @@ setConsoleOptions({
 export const parameters = {
   actions: { argTypesRegex: '^on.*' },
   controls: { expanded: true, sort: 'requiredFirst' },
+  status: {
+    statuses: {
+      unimplemented: {
+        background: 'pink',
+        color: '#ffffff',
+        description: 'This feature does not work yet',
+      },
+      alpha: {
+        background: 'red',
+        color: '#ffffff',
+        description: 'This feature has some functionality but is not complete',
+      },
+      beta: {
+        background: 'orange',
+        color: '#ffffff',
+        description: 'This feature is getting close to stable',
+      },
+      stable: {
+        background: 'green',
+        color: '#ffffff',
+        description: 'Should fully work',
+      },
+    },
+  },
 };
 
 const withThemeProvider = (Story, context) => {

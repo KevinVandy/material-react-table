@@ -5,6 +5,11 @@ import faker from '@faker-js/faker';
 
 const meta: Meta = {
   title: 'Features/Column Grouping Examples',
+  parameters: {
+    status: {
+      type: 'beta',
+    },
+  },
 };
 
 export default meta;

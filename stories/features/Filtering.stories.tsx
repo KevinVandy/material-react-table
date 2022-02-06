@@ -7,6 +7,11 @@ import { Column } from 'react-table';
 
 const meta: Meta = {
   title: 'Features/Filtering Examples',
+  parameters: {
+    status: {
+      type: 'beta',
+    },
+  },
 };
 
 export default meta;

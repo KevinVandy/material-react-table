@@ -11,6 +11,11 @@ const MenuItem = styled(MuiMenuItem)({
 
 const meta: Meta = {
   title: 'Features/Row Editing Examples',
+  parameters: {
+    status: {
+      type: 'alpha',
+    },
+  },
 };
 
 export default meta;

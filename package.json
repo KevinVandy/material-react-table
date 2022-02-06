@@ -58,6 +58,7 @@
     "@babel/core": "^7.16.12",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@etchteam/storybook-addon-status": "^4.2.0",
     "@faker-js/faker": "^6.0.0-alpha.5",
     "@mui/icons-material": "^5.3.1",
     "@mui/material": "^5.3.1",

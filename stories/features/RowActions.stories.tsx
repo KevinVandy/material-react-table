@@ -14,6 +14,11 @@ const MenuItem = styled(MuiMenuItem)({
 
 const meta: Meta = {
   title: 'Features/Row Actions Examples',
+  parameters: {
+    status: {
+      type: 'beta',
+    },
+  },
 };
 
 export default meta;

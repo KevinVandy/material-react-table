@@ -5,6 +5,11 @@ import faker from '@faker-js/faker';
 
 const meta: Meta = {
   title: 'Features/Column Resizing Examples',
+  parameters: {
+    status: {
+      type: 'alpha',
+    },
+  },
 };
 
 export default meta;

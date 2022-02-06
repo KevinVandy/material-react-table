@@ -5,6 +5,11 @@ import faker from '@faker-js/faker';
 
 const meta: Meta = {
   title: 'Features/Header Groups Examples',
+  parameters: {
+    status: {
+      type: 'stable',
+    },
+  },
 };
 
 export default meta;
