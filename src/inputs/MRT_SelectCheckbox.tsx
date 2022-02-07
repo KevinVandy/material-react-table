@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const MRT_SelectCheckbox: FC<Props> = ({ row }) => {
-  const { tableInstance, onRowSelectChange, densePadding } =
+  const { tableInstance, onRowSelectChange, densePadding, localization } =
     useMaterialReactTable();
 
   const onSelectChange = (event: ChangeEvent) => {
@@ -26,8 +26,11 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row }) => {
   return (
     <TableCell densePadding={densePadding}>
       <Checkbox
-        {...row.getToggleRowSelectedProps()}
+        inputProps={{
+          'aria-label': localization?.selectCheckboxTitle,
+        }}
         onChange={onSelectChange}
+        {...row.getToggleRowSelectedProps()}
       />
     </TableCell>
   );

@@ -22,12 +22,8 @@ interface Props {
 }
 
 export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
-  const {
-    localization,
-    currentEditingRow,
-    renderRowActions,
-    tableInstance,
-  } = useMaterialReactTable();
+  const { localization, currentEditingRow, renderRowActions, tableInstance } =
+    useMaterialReactTable();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 

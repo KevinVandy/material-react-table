@@ -84,6 +84,7 @@
     "react-is": "^17.0.2",
     "react-table": "^7.7.0",
     "size-limit": "^7.0.5",
+    "storybook-addon-paddings": "^4.2.1",
     "storybook-addon-performance": "^0.16.1",
     "storybook-dark-mode": "^1.0.8",
     "tsdx": "^0.14.1",

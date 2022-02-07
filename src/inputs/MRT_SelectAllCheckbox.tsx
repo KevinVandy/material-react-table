@@ -17,7 +17,9 @@ export const MRT_SelectAllCheckbox = () => {
     <TableCell densePadding={densePadding} variant="head">
       {!disableSelectAll ? (
         <Checkbox
-          aria-label={localization?.selectAllCheckboxTitle}
+          inputProps={{
+            'aria-label': localization?.selectAllCheckboxTitle ?? '',
+          }}
           {...tableInstance.getToggleAllPageRowsSelectedProps()}
         />
       ) : null}

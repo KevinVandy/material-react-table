@@ -12,14 +12,37 @@ setConsoleOptions({
 
 export const parameters = {
   actions: { argTypesRegex: '^on.*' },
+  backgrounds: {
+    values: [
+      {
+        name: 'white',
+        value: '#fff',
+      },
+      {
+        name: 'lightgrey',
+        value: '#fafeff',
+      },
+      {
+        name: 'darkgrey',
+        value: '#333',
+      },
+      {
+        name: 'black',
+        value: '#000',
+      },
+    ],
+  },
   controls: { expanded: true, sort: 'requiredFirst' },
+  paddings: {
+    values: [
+      { name: 'Small', value: '4px' },
+      { name: 'Medium', value: '16px' },
+      { name: 'Large', value: '64px' },
+    ],
+    default: 'Medium',
+  },
   status: {
     statuses: {
-      unimplemented: {
-        background: 'pink',
-        color: '#ffffff',
-        description: 'This feature does not work yet',
-      },
       alpha: {
         background: 'red',
         color: '#ffffff',

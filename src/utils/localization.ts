@@ -19,6 +19,7 @@ export interface MRT_Localization {
   searchTextFieldClearButtonTitle: string;
   searchTextFieldPlaceholder: string;
   selectAllCheckboxTitle: string;
+  selectCheckboxTitle: string;
   showHideColumnsButtonTitle: string;
   toggleDensePaddingSwitchTitle: string;
   toggleFilterButtonTitle: string;
@@ -41,6 +42,7 @@ export const defaultLocalization: MRT_Localization = {
   rowActionButtonSave: 'Save',
   rowActionMenuButtonTitle: 'Row Actions',
   rowActionMenuItemEdit: 'Edit',
+  selectCheckboxTitle: 'Select row',
   rowActionsColumnTitle: 'Actions',
   searchTextFieldClearButtonTitle: 'Clear search',
   searchTextFieldPlaceholder: 'Search',

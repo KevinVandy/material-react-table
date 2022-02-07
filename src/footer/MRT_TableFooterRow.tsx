@@ -51,8 +51,11 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
         />
       )}
       {enableSelection && <MRT_TableSpacerCell width="1rem" />}
-      {footerGroup.headers.map((column,) => (
-        <MRT_TableFooterCell key={column.getFooterProps().key} column={column} />
+      {footerGroup.headers.map((column) => (
+        <MRT_TableFooterCell
+          key={column.getFooterProps().key}
+          column={column}
+        />
       ))}
       {enableRowActions && positionActionsColumn === 'last' && (
         <MRT_TableSpacerCell />

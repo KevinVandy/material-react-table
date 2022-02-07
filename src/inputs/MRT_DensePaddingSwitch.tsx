@@ -11,6 +11,9 @@ export const MRT_DensePaddingSwitch: FC<Props> = () => {
   return (
     <Tooltip arrow title={localization?.toggleDensePaddingSwitchTitle ?? ''}>
       <Switch
+        inputProps={{
+          'aria-label': localization?.toggleDensePaddingSwitchTitle ?? '',
+        }}
         color="default"
         checked={densePadding}
         size="small"

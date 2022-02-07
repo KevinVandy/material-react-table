@@ -1,4 +1,4 @@
-import { MaterialReactTable } from 'material-react-table';
+import MaterialReactTable from 'material-react-table';
 import React, { useMemo } from 'react';
 
 export const BasicExample = () => {
@@ -6,23 +6,23 @@ export const BasicExample = () => {
     () => [
       {
         Header: 'First Name',
-        accessor: 'firstName',
+        accessor: 'firstName' as const,
       },
       {
         Header: 'Last Name',
-        accessor: 'lastName',
+        accessor: 'lastName' as const,
       },
       {
         Header: 'Address',
-        accessor: 'address',
+        accessor: 'address' as const,
       },
       {
         Header: 'State',
-        accessor: 'state',
+        accessor: 'state' as const,
       },
       {
         Header: 'Phone Number',
-        accessor: 'phoneNumber',
+        accessor: 'phoneNumber' as const,
       },
     ],
     [],
@@ -180,6 +180,5 @@ export const BasicExample = () => {
     ],
     [],
   );
-  console.log({ data });
   return <MaterialReactTable columns={columns} data={data} />;
 };
