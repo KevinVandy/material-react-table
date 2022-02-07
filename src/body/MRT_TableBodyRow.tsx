@@ -49,7 +49,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
       ...(mTableBodyRowProps?.style ?? {}),
     },
   };
-
+  console.log(row.values);
   return (
     <>
       <TableRow

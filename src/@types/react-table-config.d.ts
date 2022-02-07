@@ -114,7 +114,7 @@ declare module 'react-table' {
     }) => ReactNode;
     muiTableBodyCellProps?:
       | TableCellProps
-      | ((cell?: Cell<D>) => TableCellProps);
+      | ((cell: Cell<D>) => TableCellProps);
     muiTableHeadCellProps?:
       | TableCellProps
       | ((column: Column<D>) => TableCellProps);
@@ -123,7 +123,7 @@ declare module 'react-table' {
       | ((column: Column<D>) => TableCellProps);
     muiTableBodyCellEditTextFieldProps?:
       | TextFieldProps
-      | ((cell?: Cell<D>) => TextFieldProps);
+      | ((cell: Cell<D>) => TextFieldProps);
     muiTableHeadCellFilterTextFieldProps?:
       | TextFieldProps
       | ((column: Column<D>) => TextFieldProps);
@@ -149,5 +149,3 @@ declare module 'react-table' {
       UseRowSelectRowProps<D>,
       UseRowStateRowProps<D> {}
 }
-
-export module 'react-table';

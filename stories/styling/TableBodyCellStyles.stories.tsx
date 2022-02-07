@@ -38,6 +38,54 @@ export const DefaultTableBodyCellStyles: Story<
   MaterialReactTableProps
 > = () => <MaterialReactTable columns={columns} data={data} />;
 
+export const StyleAllMuiTableBodyCell: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    muiTableBodyCellProps={{
+      style: {
+        backgroundColor: 'rgba(52, 210, 235, 0.1)',
+        borderRight: '1px solid rgba(224,224,224,1)',
+      },
+    }}
+  />
+);
+
+export const StyleMuiTableBodyCellConditionallyIn1Column: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        Header: 'First Name',
+        accessor: 'firstName' as const,
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'lastName' as const,
+      },
+      {
+        Header: 'Age',
+        accessor: 'age' as const,
+        //@ts-ignore
+        muiTableBodyCellProps: (cell) => ({
+          style: {
+            backgroundColor:
+              cell.value > 40 ? 'rgba(22, 184, 44, 0.5)' : undefined,
+            fontWeight:
+              cell.column.id === 'age' && cell.value > 40 ? '700' : '400',
+          },
+        }),
+      },
+      {
+        Header: 'Address',
+        accessor: 'address' as const,
+      },
+    ]}
+    data={data}
+  />
+);
+
 export const CustomCellRender: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={[
@@ -77,49 +125,5 @@ export const CustomCellRender: Story<MaterialReactTableProps> = () => (
       },
     ]}
     data={data}
-  />
-);
-
-export const StyleMuiTableBodyCell: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    muiTableBodyCellProps={{
-      style: {
-        backgroundColor: 'rgba(52, 210, 235, 0.1)',
-        borderRight: '1px solid rgba(224,224,224,1)',
-      },
-    }}
-  />
-);
-
-export const StyleMuiTableBodyCellConditionally: Story<
-  MaterialReactTableProps
-> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    muiTableBodyCellProps={(cell) => ({
-      style: {
-        backgroundColor:
-          cell.column.id === 'age' && cell.value > 40
-            ? 'rgba(22, 184, 44, 0.5)'
-            : undefined,
-        fontWeight: cell.column.id === 'age' && cell.value > 40 ? '700' : '400',
-      },
-    })}
-  />
-);
-
-export const StyleCustomStripedRows: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    muiTableBodyCellProps={(cell) => ({
-      style: {
-        backgroundColor:
-          cell.row.index % 2 === 0 ? 'rgba(52, 54, 245, 0.05)' : '',
-      },
-    })}
   />
 );
