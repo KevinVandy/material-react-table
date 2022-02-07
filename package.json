@@ -1,5 +1,5 @@
 {
-  "version": "0.3.1",
+  "version": "0.3.2",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material-UI implementation of react-table, inspired by material-table and the mui DataGrid, written from the ground up in TypeScript.",
@@ -13,7 +13,7 @@
     "type": "git",
     "url": "https://github.com/KevinVandy/material-react-table"
   },
-  "homepage": "https://github.com/KevinVandy/material-react-table#readme",
+  "homepage": "https://www.material-react-table.com/",
   "bugs": {
     "url": "https://github.com/KevinVandy/material-react-table/issues"
   },
@@ -24,7 +24,7 @@
     "src"
   ],
   "engines": {
-    "node": ">=14"
+    "node": ">=12"
   },
   "scripts": {
     "start": "tsdx watch",
@@ -55,25 +55,25 @@
     }
   ],
   "devDependencies": {
-    "@babel/core": "^7.16.12",
+    "@babel/core": "^7.17.0",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@etchteam/storybook-addon-status": "^4.2.0",
     "@faker-js/faker": "^6.0.0-alpha.5",
     "@mui/icons-material": "^5.3.1",
-    "@mui/material": "^5.3.1",
+    "@mui/material": "^5.4.0",
     "@size-limit/preset-small-lib": "^7.0.5",
-    "@storybook/addon-a11y": "^6.4.16",
-    "@storybook/addon-actions": "^6.4.16",
+    "@storybook/addon-a11y": "^6.4.18",
+    "@storybook/addon-actions": "^6.4.18",
     "@storybook/addon-console": "^1.2.3",
-    "@storybook/addon-essentials": "^6.4.16",
+    "@storybook/addon-essentials": "^6.4.18",
     "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-links": "^6.4.16",
-    "@storybook/addon-storysource": "^6.4.16",
-    "@storybook/addons": "^6.4.16",
-    "@storybook/react": "^6.4.16",
+    "@storybook/addon-links": "^6.4.18",
+    "@storybook/addon-storysource": "^6.4.18",
+    "@storybook/addons": "^6.4.18",
+    "@storybook/react": "^6.4.18",
     "@types/faker": "^6.6.8",
-    "@types/react": "^17.0.38",
+    "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
     "@types/react-table": "^7.7.9",
     "babel-loader": "^8.2.3",
@@ -94,7 +94,7 @@
     "@emotion/react": ">=11",
     "@mui/icons-material": ">=5",
     "@mui/material": ">=5",
-    "react": ">=17",
+    "react": ">=16.8",
     "react-table": ">=7"
   }
 }

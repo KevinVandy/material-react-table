@@ -52,7 +52,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
   const tableCellProps = {
     ...mTableDetailPanelProps,
     style: {
-      ...(mTableDetailPanelProps?.style || {}),
+      ...(mTableDetailPanelProps?.style ?? {}),
     },
   };
 
