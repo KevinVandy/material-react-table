@@ -10,9 +10,9 @@ export const MRT_TableFooter: FC<Props> = () => {
 
   return (
     <TableFooter {...muiTableFooterProps}>
-      {tableInstance.footerGroups.map((footerGroup, index) => (
+      {tableInstance.footerGroups.map((footerGroup) => (
         <MRT_TableFooterRow
-          key={`${index}-${footerGroup.id}`}
+          key={footerGroup.getFooterGroupProps().key}
           footerGroup={footerGroup}
         />
       ))}

@@ -9,16 +9,16 @@ interface Props {
 export const MRT_TableSpacerCell: FC<Props> = ({ width }) => {
   const { muiTableBodyCellProps } = useMaterialReactTable();
 
-  const mTableBodyRowProps =
+  const mTableBodyCellrops =
     muiTableBodyCellProps instanceof Function
       ? muiTableBodyCellProps()
       : muiTableBodyCellProps;
 
   const tableCellProps = {
-    ...mTableBodyRowProps,
+    ...mTableBodyCellrops,
     style: {
       width,
-      ...(mTableBodyRowProps?.style ?? {}),
+      ...(mTableBodyCellrops?.style ?? {}),
     },
   };
 

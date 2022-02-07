@@ -14,28 +14,13 @@ interface Props {}
 
 export const MRT_ToolbarBottom: FC<Props> = () => {
   const {
-    disableGlobalFilter,
-    disableColumnHiding,
-    manualPagination,
-    positionPagination,
-    disableFilters,
     hideToolbarActions,
-    positionToolbarActions,
+    manualPagination,
     muiTableToolbarBottomProps,
-    title,
+    positionPagination,
+    positionToolbarActions,
     tableInstance,
   } = useMaterialReactTable();
-
-  // if no features in the toolbar are enabled, don't render anything
-  if (
-    !muiTableToolbarBottomProps &&
-    !title &&
-    disableColumnHiding &&
-    disableFilters &&
-    disableGlobalFilter
-  ) {
-    return null;
-  }
 
   const toolbarProps =
     muiTableToolbarBottomProps instanceof Function

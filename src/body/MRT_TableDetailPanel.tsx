@@ -1,7 +1,21 @@
 import React, { FC, MouseEvent } from 'react';
-import { Collapse, TableCell, TableRow } from '@mui/material';
+import {
+  Collapse,
+  styled,
+  TableCell as MuiTableCell,
+  TableRow,
+} from '@mui/material';
 import { Row } from 'react-table';
 import { useMaterialReactTable } from '../useMaterialReactTable';
+
+const TableCell = styled(MuiTableCell, {
+  shouldForwardProp: (prop) => prop !== 'isExpanded',
+})<{ isExpanded?: boolean }>(({ isExpanded }) => ({
+  borderBottom: !isExpanded ? 'none' : undefined,
+  paddingBottom: isExpanded ? '1rem' : 0,
+  paddingTop: isExpanded ? '1rem' : 0,
+  transition: 'all 0.2s ease-in-out',
+}));
 
 interface Props {
   row: Row;
@@ -38,10 +52,6 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
   const tableCellProps = {
     ...mTableDetailPanelProps,
     style: {
-      borderBottom: !row.isExpanded ? 'none' : undefined,
-      paddingBottom: row.isExpanded ? '1rem' : 0,
-      paddingTop: row.isExpanded ? '1rem' : 0,
-      transition: 'all 0.2s ease-in-out',
       ...(mTableDetailPanelProps?.style || {}),
     },
   };
@@ -50,6 +60,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
     <TableRow hover {...tableRowProps}>
       <TableCell
         colSpan={tableInstance.visibleColumns.length + 10}
+        isExpanded={row.isExpanded}
         onClick={(event: MouseEvent<HTMLTableCellElement>) =>
           onDetailPanelClick?.(event, row)
         }

@@ -11,13 +11,14 @@ export interface MRT_Localization {
   expandButtonTitle: string;
   filterTextFieldClearButtonTitle: string;
   filterTextFieldPlaceholder: string;
-  rowActionMenuButtonTitle: string;
-  rowActionsColumnTitle: string;
-  rowActionButtonSave: string;
   rowActionButtonCancel: string;
+  rowActionButtonSave: string;
+  rowActionMenuButtonTitle: string;
   rowActionMenuItemEdit: string;
+  rowActionsColumnTitle: string;
   searchTextFieldClearButtonTitle: string;
   searchTextFieldPlaceholder: string;
+  selectAllCheckboxTitle: string;
   showHideColumnsButtonTitle: string;
   toggleDensePaddingSwitchTitle: string;
   toggleFilterButtonTitle: string;
@@ -36,13 +37,14 @@ export const defaultLocalization: MRT_Localization = {
   expandButtonTitle: 'Expand',
   filterTextFieldClearButtonTitle: 'Clear filter',
   filterTextFieldPlaceholder: 'Filter',
-  rowActionMenuButtonTitle: 'Row Actions',
-  rowActionsColumnTitle: 'Actions',
-  rowActionMenuItemEdit: 'Edit',
-  rowActionButtonSave: 'Save',
   rowActionButtonCancel: 'Cancel',
+  rowActionButtonSave: 'Save',
+  rowActionMenuButtonTitle: 'Row Actions',
+  rowActionMenuItemEdit: 'Edit',
+  rowActionsColumnTitle: 'Actions',
   searchTextFieldClearButtonTitle: 'Clear search',
   searchTextFieldPlaceholder: 'Search',
+  selectAllCheckboxTitle: 'Select all',
   showHideColumnsButtonTitle: 'Show/Hide columns',
   toggleDensePaddingSwitchTitle: 'Toggle dense padding',
   toggleFilterButtonTitle: 'Toggle filters',

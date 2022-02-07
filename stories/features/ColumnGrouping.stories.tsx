@@ -7,7 +7,7 @@ const meta: Meta = {
   title: 'Features/Column Grouping Examples',
   parameters: {
     status: {
-      type: 'beta',
+      type: 'alpha',
     },
   },
 };

@@ -65,6 +65,9 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
     isLoading?: boolean;
     localization?: Partial<MRT_Localization>;
     muiSearchTextFieldProps?: TextFieldProps;
+    muiTableBodyCellEditTextFieldProps?:
+      | TextFieldProps
+      | ((cell?: Cell<D>) => TextFieldProps);
     muiTableBodyCellProps?:
       | TableCellProps
       | ((cell?: Cell<D>) => TableCellProps);
@@ -81,15 +84,12 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
     muiTableFooterRowProps?:
       | TableRowProps
       | ((footerGroup: HeaderGroup<D>) => TableRowProps);
-    muiTableHeadCellProps?:
-      | TableCellProps
-      | ((column: Column<D>) => TableCellProps);
-    muiTableBodyCellEditTextFieldProps?:
-      | TextFieldProps
-      | ((cell?: Cell<D>) => TextFieldProps);
     muiTableHeadCellFilterTextFieldProps?:
       | TextFieldProps
       | ((column: Column<D>) => TextFieldProps);
+    muiTableHeadCellProps?:
+      | TableCellProps
+      | ((column: Column<D>) => TableCellProps);
     muiTableHeadProps?: TableHeadProps;
     muiTableHeadRowProps?:
       | TableRowProps
@@ -128,16 +128,16 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
     positionActionsColumn?: 'first' | 'last';
     positionPagination?: 'bottom' | 'top' | 'both';
     positionToolbarActions?: 'bottom' | 'top';
-    renderRowActions?: (
-      row: Row<D>,
-      tableInstance: TableInstance<D>,
-    ) => ReactNode;
     renderDetailPanel?: (row: Row<D>) => ReactNode;
     renderRowActionMenuItems?: (
       rowData: Row<D>,
       tableInstance: TableInstance<D>,
       closeMenu: () => void,
     ) => ReactNode[];
+    renderRowActions?: (
+      row: Row<D>,
+      tableInstance: TableInstance<D>,
+    ) => ReactNode;
     title?: string | ReactNode;
   };
 

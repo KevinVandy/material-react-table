@@ -1,7 +1,14 @@
 import React, { ChangeEvent, FC } from 'react';
-import { Checkbox, TableCell } from '@mui/material';
+import { Checkbox, TableCell as MuiTableCell, styled } from '@mui/material';
 import { Row } from 'react-table';
 import { useMaterialReactTable } from '../useMaterialReactTable';
+
+const TableCell = styled(MuiTableCell, {
+  shouldForwardProp: (prop) => prop !== 'densePadding',
+})<{ densePadding?: boolean }>(({ densePadding }) => ({
+  padding: densePadding ? '0' : '0.6rem',
+  transition: 'all 0.2s ease-in-out',
+}));
 
 interface Props {
   row: Row;
@@ -17,13 +24,7 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row }) => {
   };
 
   return (
-    <TableCell
-      style={{
-        width: '2rem',
-        padding: densePadding ? '0' : '0.6rem',
-        transition: 'all 0.2s ease-in-out',
-      }}
-    >
+    <TableCell densePadding={densePadding}>
       <Checkbox
         {...row.getToggleRowSelectedProps()}
         onChange={onSelectChange}

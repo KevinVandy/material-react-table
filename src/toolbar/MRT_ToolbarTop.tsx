@@ -25,28 +25,15 @@ interface Props {}
 export const MRT_ToolbarTop: FC<Props> = () => {
   const {
     disableGlobalFilter,
-    disableColumnHiding,
-    muiTableTitleProps,
-    disableFilters,
-    manualPagination,
-    positionPagination,
-    muiTableToolbarTopProps,
     hideToolbarActions,
+    manualPagination,
+    muiTableTitleProps,
+    muiTableToolbarTopProps,
+    positionPagination,
     positionToolbarActions,
-    title,
     tableInstance,
+    title,
   } = useMaterialReactTable();
-
-  // if no features in the toolbar are enabled, don't render anything
-  if (
-    !muiTableToolbarTopProps &&
-    !title &&
-    disableColumnHiding &&
-    disableFilters &&
-    disableGlobalFilter
-  ) {
-    return null;
-  }
 
   const toolbarProps =
     muiTableToolbarTopProps instanceof Function

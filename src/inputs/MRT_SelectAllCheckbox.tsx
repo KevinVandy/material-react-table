@@ -1,23 +1,23 @@
 import React from 'react';
-import { Checkbox, TableCell } from '@mui/material';
+import { Checkbox, TableCell as MuiTableCell, styled } from '@mui/material';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 
+const TableCell = styled(MuiTableCell, {
+  shouldForwardProp: (prop) => prop !== 'densePadding',
+})<{ densePadding?: boolean }>(({ densePadding }) => ({
+  padding: densePadding ? '0' : '0.6rem',
+  transition: 'all 0.2s ease-in-out',
+}));
+
 export const MRT_SelectAllCheckbox = () => {
-  const { tableInstance, disableSelectAll, densePadding } =
+  const { tableInstance, disableSelectAll, densePadding, localization } =
     useMaterialReactTable();
 
   return (
-    <TableCell
-      style={{
-        width: '2rem',
-        padding: densePadding ? '0' : '0.6rem',
-        transition: 'all 0.2s ease-in-out',
-      }}
-      variant="head"
-    >
+    <TableCell densePadding={densePadding} variant="head">
       {!disableSelectAll ? (
         <Checkbox
-          aria-label=""
+          aria-label={localization?.selectAllCheckboxTitle}
           {...tableInstance.getToggleAllPageRowsSelectedProps()}
         />
       ) : null}

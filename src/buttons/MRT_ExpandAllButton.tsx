@@ -1,7 +1,14 @@
 import React, { FC } from 'react';
-import { IconButton, TableCell } from '@mui/material';
-import ArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import { IconButton, styled, TableCell } from '@mui/material';
+import MuiArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 import { useMaterialReactTable } from '../useMaterialReactTable';
+
+const ArrowRightIcon = styled(MuiArrowRightIcon, {
+  shouldForwardProp: (prop) => prop !== 'rotation',
+})<{ rotation?: number }>(({ rotation }) => ({
+  transform: `rotate(${rotation}deg)`,
+  transition: 'transform 0.2s',
+}));
 
 interface Props {}
 
@@ -30,14 +37,9 @@ export const MRT_ExpandAllButton: FC<Props> = () => {
       >
         <ArrowRightIcon
           fontSize="small"
-          style={{
-            transform: tableInstance.isAllRowsExpanded
-              ? 'rotate(-180deg)'
-              : anyRowsExpanded
-              ? 'rotate(-90deg)'
-              : 'rotate(0)',
-            transition: 'transform 0.2s',
-          }}
+          rotation={
+            tableInstance.isAllRowsExpanded ? -180 : anyRowsExpanded ? -90 : 0
+          }
         />
       </IconButton>
     </TableCell>
