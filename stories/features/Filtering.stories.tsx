@@ -3,7 +3,6 @@ import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, { MaterialReactTableProps } from '../../src';
 import faker from '@faker-js/faker';
 import { MenuItem, TextField } from '@mui/material';
-import { Column } from 'react-table';
 
 const meta: Meta = {
   title: 'Features/Filtering Examples',
@@ -158,11 +157,6 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
       {
         Header: 'Gender',
         accessor: 'gender' as const,
-        filter: (rows, _columnIds, filterValue) =>
-          rows.filter(
-            (row) =>
-              row.values['gender'].toLowerCase() === filterValue.toLowerCase(),
-          ),
         Filter: ({ column }) => (
           <TextField
             onChange={(e) => column.setFilter(e.target.value || undefined)}
@@ -177,6 +171,11 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
             <MenuItem value="Female">F</MenuItem>
           </TextField>
         ),
+        filter: (rows, _columnIds, filterValue) =>
+          rows.filter(
+            (row) =>
+              row.values['gender'].toLowerCase() === filterValue.toLowerCase(),
+          ),
       },
       {
         Header: 'Address',

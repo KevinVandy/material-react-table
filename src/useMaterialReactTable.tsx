@@ -66,9 +66,7 @@ export const MaterialReactTableProvider = <D extends {}>(
   const [densePadding, setDensePadding] = useState<boolean>(
     props.defaultDensePadding ?? false,
   );
-  const [currentEditingRow, setCurrentEditingRow] = useState<string | null>(
-    null,
-  );
+  const [currentEditingRow, setCurrentEditingRow] = useState<Row | null>(null);
 
   return (
     <MaterialReactTableContext.Provider

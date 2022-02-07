@@ -7,15 +7,13 @@ interface Props {
   cell: Cell;
 }
 
-export const MRT_EditCellTextbox: FC<Props> = ({ cell }) => {
-  const { localization, currentEditingRow, setCurrentEditingRow } =
-    useMaterialReactTable();
-
-  //@ts-ignore
-  if (cell.Edit) {
-    //@ts-ignore
-    return <>{column.Edit({ cell })}</>;
-  }
+export const MRT_EditCellTextfield: FC<Props> = ({ cell }) => {
+  const {
+    localization,
+    currentEditingRow,
+    setCurrentEditingRow,
+    muiTableBodyCellEditTextFieldProps,
+  } = useMaterialReactTable();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (currentEditingRow) {
@@ -26,6 +24,25 @@ export const MRT_EditCellTextbox: FC<Props> = ({ cell }) => {
     }
   };
 
+  const textFieldProps = {
+    ...muiTableBodyCellEditTextFieldProps,
+    ...cell.column.muiTableBodyCellEditTextFieldProps,
+    style: {
+      //@ts-ignore
+      ...muiTableBodyCellEditTextFieldProps?.style,
+      //@ts-ignore
+      ...cell.column.muiTableBodyCellEditTextFieldProps?.style,
+    },
+  };
+
+  if (cell.column.editable && cell.column.Edit) {
+    return (
+      <>
+        {cell.column.Edit({ ...textFieldProps, cell, onChange: handleChange })}
+      </>
+    );
+  }
+
   return (
     <TextField
       margin="dense"
@@ -34,6 +51,7 @@ export const MRT_EditCellTextbox: FC<Props> = ({ cell }) => {
       onClick={(e) => e.stopPropagation()}
       value={currentEditingRow?.values?.[cell.column.id]}
       variant="standard"
+      {...textFieldProps}
     />
   );
 };

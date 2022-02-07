@@ -11,10 +11,17 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_FilterTextfield } from '../inputs/MRT_FilterTextField';
 import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
 
-export const StyledTableHeadCell = styled(MuiTableCell)({
-  fontWeight: 'bold',
-  verticalAlign: 'text-top',
-});
+export const StyledTableHeadCell = styled(MuiTableCell, {
+  shouldForwardProp: (prop) =>
+    prop !== 'densePadding' && prop !== 'enableColumnResizing',
+})<{ densePadding?: boolean; enableColumnResizing?: boolean }>(
+  ({ densePadding, enableColumnResizing }) => ({
+    fontWeight: 'bold',
+    verticalAlign: 'text-top',
+    padding: densePadding ? '0.5rem' : '1rem',
+    transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
+  }),
+);
 
 const TableCellContents = styled('div')({
   display: 'grid',
@@ -61,19 +68,29 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
       ? muiTableHeadCellProps(column)
       : muiTableHeadCellProps;
 
+  const mcTableHeadCellProps =
+    column.muiTableHeadCellProps instanceof Function
+      ? column.muiTableHeadCellProps(column)
+      : column.muiTableHeadCellProps;
+
   const tableCellProps = {
     ...mTableHeadCellProps,
+    ...mcTableHeadCellProps,
     ...column.getHeaderProps(),
     style: {
-      padding: densePadding ? '0.5rem' : '1rem',
-      transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
       ...column.getHeaderProps().style,
       ...(mTableHeadCellProps?.style ?? {}),
+      ...(mcTableHeadCellProps?.style ?? {}),
     },
   };
 
   return (
-    <StyledTableHeadCell align={isParentHeader ? 'center' : 'left'} {...tableCellProps}>
+    <StyledTableHeadCell
+      align={isParentHeader ? 'center' : 'left'}
+      densePadding={densePadding}
+      enableColumnResizing={enableColumnResizing}
+      {...tableCellProps}
+    >
       <TableCellContents>
         <TableCellText
           style={{ justifyContent: isParentHeader ? 'center' : undefined }}

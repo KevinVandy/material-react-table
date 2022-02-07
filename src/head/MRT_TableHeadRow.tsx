@@ -14,6 +14,7 @@ interface Props {
 export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
   const {
     anyRowsCanExpand,
+    densePadding,
     disableExpandAll,
     enableRowActions,
     enableSelection,
@@ -72,7 +73,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
           <MRT_TableSpacerCell width="1rem" />
         )
       ) : null}
-      {headerGroup.headers.map((column) => (
+      {headerGroup.headers.map((column: HeaderGroup) => (
         <MRT_TableHeadCell key={column.getHeaderProps().key} column={column} />
       ))}
       {enableRowActions &&
@@ -80,7 +81,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         (isParentHeader ? (
           <MRT_TableSpacerCell />
         ) : (
-          <StyledTableHeadCell>
+          <StyledTableHeadCell densePadding={densePadding}>
             {localization?.actionsHeadColumnTitle}
           </StyledTableHeadCell>
         ))}

@@ -1,8 +1,15 @@
 import React, { FC, MouseEvent } from 'react';
-import { TableCell } from '@mui/material';
+import { styled, TableCell as MuiTableCell } from '@mui/material';
 import { Cell } from 'react-table';
 import { useMaterialReactTable } from '../useMaterialReactTable';
-import { MRT_EditCellTextbox } from '../inputs/MRT_EditCellTextbox';
+import { MRT_EditCellTextfield } from '../inputs/MRT_EditCellTextfield';
+
+const TableCell = styled(MuiTableCell, {
+  shouldForwardProp: (prop) => prop !== 'densePadding',
+})<{ densePadding?: boolean }>(({ densePadding }) => ({
+  padding: densePadding ? '0.5rem' : '1rem',
+  transition: 'all 0.2s ease-in-out',
+}));
 
 interface Props {
   cell: Cell;
@@ -21,26 +28,32 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
       ? muiTableBodyCellProps(cell)
       : muiTableBodyCellProps;
 
+  const mcTableCellBodyProps =
+    cell.column.muiTableBodyCellProps instanceof Function
+      ? cell.column.muiTableBodyCellProps(cell)
+      : cell.column.muiTableBodyCellProps;
+
   const tableCellProps = {
     ...mTableCellBodyProps,
+    ...mcTableCellBodyProps,
     ...cell.getCellProps(),
     style: {
-      padding: densePadding ? '0.5rem' : '1rem',
-      transition: 'all 0.2s ease-in-out',
       ...cell.getCellProps().style,
       ...(mTableCellBodyProps?.style ?? {}),
+      ...(mcTableCellBodyProps?.style ?? {}),
     },
   };
 
   return (
     <TableCell
+      densePadding={densePadding}
       onClick={(event: MouseEvent<HTMLTableCellElement>) =>
         onCellClick?.(event, cell)
       }
       {...tableCellProps}
     >
       {currentEditingRow?.id === cell.row.id ? (
-        <MRT_EditCellTextbox cell={cell} />
+        <MRT_EditCellTextfield cell={cell} />
       ) : cell.isPlaceholder ? null : cell.isAggregated ? (
         cell.render('Aggregated')
       ) : cell.isGrouped ? (

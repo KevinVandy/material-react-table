@@ -2,12 +2,6 @@ import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, { MaterialReactTableProps } from '../../src';
 import faker from '@faker-js/faker';
-import { MenuItem as MuiMenuItem, styled } from '@mui/material';
-
-const MenuItem = styled(MuiMenuItem)({
-  display: 'flex',
-  gap: '0.75rem',
-});
 
 const meta: Meta = {
   title: 'Features/Row Editing Examples',
@@ -24,22 +18,27 @@ const columns = [
   {
     Header: 'First Name',
     accessor: 'firstName' as const,
+    editable: true,
   },
   {
     Header: 'Last Name',
     accessor: 'lastName' as const,
+    editable: true,
   },
   {
     Header: 'Address',
     accessor: 'address' as const,
+    editable: true,
   },
   {
     Header: 'State',
     accessor: 'state' as const,
+    editable: true,
   },
   {
     Header: 'Phone Number',
     accessor: 'phoneNumber' as const,
+    editable: true,
   },
 ];
 
@@ -52,7 +51,7 @@ const data = [...Array(10)].map((_) => ({
 }));
 
 export const RowEditingEnabled: Story<MaterialReactTableProps> = () => {
-  const [tableData, setTableData] = useState(() => data);
+  const [tableData, setTableData] = useState(data);
 
   const handleSaveRow = async (row: any) => {
     tableData[+row.index] = row.values;
@@ -71,13 +70,11 @@ export const RowEditingEnabled: Story<MaterialReactTableProps> = () => {
 };
 
 export const RowEditingEnabledAsync: Story<MaterialReactTableProps> = () => {
-  const [tableData, setTableData] = useState(() => data);
+  const [tableData, setTableData] = useState(data);
   const [isSaving, setIsSaving] = useState(false);
 
   const handleSaveRow = async (row) => {
     setIsSaving(true);
-    console.log(row);
-    //simulate backend api call
     await setTimeout(() => {
       tableData[+row.index] = row.values;
       setTableData([...tableData]);

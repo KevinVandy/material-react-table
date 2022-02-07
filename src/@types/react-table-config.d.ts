@@ -1,3 +1,5 @@
+import { TableCellProps, TextFieldProps } from '@mui/material';
+import { ReactNode } from 'react';
 import {
   UseColumnOrderInstanceProps,
   UseColumnOrderState,
@@ -99,7 +101,33 @@ declare module 'react-table' {
       UseGlobalFiltersColumnOptions<D>,
       UseGroupByColumnOptions<D>,
       UseResizeColumnsColumnOptions<D>,
-      UseSortByColumnOptions<D> {}
+      UseSortByColumnOptions<D> {
+    disableFilters?: boolean;
+    Filter?: ({ column }: { column: HeaderGroup<D> }) => ReactNode;
+    editable?: boolean;
+    Edit?: ({
+      cell,
+      onChange,
+    }: {
+      cell: Cell<D>;
+      onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    }) => ReactNode;
+    muiTableBodyCellProps?:
+      | TableCellProps
+      | ((cell?: Cell<D>) => TableCellProps);
+    muiTableHeadCellProps?:
+      | TableCellProps
+      | ((column: Column<D>) => TableCellProps);
+    muiTableFooterCellProps?:
+      | TableCellProps
+      | ((column: Column<D>) => TableCellProps);
+    muiTableBodyCellEditTextFieldProps?:
+      | TextFieldProps
+      | ((cell?: Cell<D>) => TextFieldProps);
+    muiTableHeadCellFilterTextFieldProps?:
+      | TextFieldProps
+      | ((column: Column<D>) => TextFieldProps);
+  }
 
   export interface ColumnInstance<
     D extends Record<string, unknown> = Record<string, unknown>,
@@ -121,3 +149,5 @@ declare module 'react-table' {
       UseRowSelectRowProps<D>,
       UseRowStateRowProps<D> {}
 }
+
+export module 'react-table';
