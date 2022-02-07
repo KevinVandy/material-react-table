@@ -24,12 +24,12 @@ export const MRT_RowActionMenu: FC<Props> = ({
     enableRowEditing,
     localization,
     renderRowActionMenuItems,
-    setCurrentEditingRowId,
+    setCurrentEditingRow,
     tableInstance,
   } = useMaterialReactTable();
 
   const handleEdit = () => {
-    setCurrentEditingRowId(row.id);
+    setCurrentEditingRow({ ...row });
     setAnchorEl(null);
   };
 

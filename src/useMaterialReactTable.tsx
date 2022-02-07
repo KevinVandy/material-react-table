@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import {
   PluginHook,
+  Row,
   TableInstance,
   useExpanded,
   useFilters,
@@ -25,9 +26,9 @@ import { UseMRTCalcs, useMRTCalcs } from './utils/useMRTCalcs';
 export interface UseMaterialReactTable<D extends {}>
   extends MaterialReactTableProps<D>,
     UseMRTCalcs {
-      currentEditingRowId: string | null;
+  currentEditingRow: Row<D> | null;
   densePadding: boolean;
-  setCurrentEditingRowId: (currentRowEditingId: string | null) => void;
+  setCurrentEditingRow: (currentRowEditingId: Row<D> | null) => void;
   setDensePadding: (densePadding: boolean) => void;
   setShowFilters: (showFilters: boolean) => void;
   showFilters: boolean;
@@ -65,7 +66,7 @@ export const MaterialReactTableProvider = <D extends {}>(
   const [densePadding, setDensePadding] = useState<boolean>(
     props.defaultDensePadding ?? false,
   );
-  const [currentEditingRowId, setCurrentEditingRowId] = useState<string | null>(
+  const [currentEditingRow, setCurrentEditingRow] = useState<string | null>(
     null,
   );
 
@@ -77,8 +78,8 @@ export const MaterialReactTableProvider = <D extends {}>(
         densePadding,
         setDensePadding,
         setShowFilters,
-        currentEditingRowId,
-        setCurrentEditingRowId,
+        currentEditingRow,
+        setCurrentEditingRow,
         showFilters,
         // @ts-ignore
         tableInstance,

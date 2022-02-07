@@ -51,32 +51,48 @@ const data = [...Array(10)].map((_) => ({
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const RowEditingEnabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    enableRowActions
-    enableRowEditing
-  />
-);
+export const RowEditingEnabled: Story<MaterialReactTableProps> = () => {
+  const [tableData, setTableData] = useState(() => data);
 
-export const RowEditingEnabledAsync: Story<MaterialReactTableProps> = () => {
-  const [isSaving, setIsSaving] = useState(false);
-
-  const handleSave = async (row) => {
-    setIsSaving(true);
-    console.log(row);
-    await setTimeout(() => setIsSaving(false), 1500);
+  const handleSaveRow = async (row: any) => {
+    tableData[+row.index] = row.values;
+    setTableData([...tableData]);
   };
 
   return (
     <MaterialReactTable
       columns={columns}
-      data={data}
+      data={tableData}
+      enableRowActions
+      enableRowEditing
+      onRowEditSubmit={handleSaveRow}
+    />
+  );
+};
+
+export const RowEditingEnabledAsync: Story<MaterialReactTableProps> = () => {
+  const [tableData, setTableData] = useState(() => data);
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSaveRow = async (row) => {
+    setIsSaving(true);
+    console.log(row);
+    //simulate backend api call
+    await setTimeout(() => {
+      tableData[+row.index] = row.values;
+      setTableData([...tableData]);
+      setIsSaving(false);
+    }, 1500);
+  };
+
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={tableData}
       enableRowActions
       enableRowEditing
       isFetching={isSaving}
-      onRowEditSubmit={handleSave}
+      onRowEditSubmit={handleSaveRow}
     />
   );
 };

@@ -24,7 +24,7 @@ interface Props {
 export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
   const {
     localization,
-    currentEditingRowId,
+    currentEditingRow,
     renderRowActions,
     tableInstance,
   } = useMaterialReactTable();
@@ -41,7 +41,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
     return <>{renderRowActions(row, tableInstance)}</>;
   }
 
-  if (row.id === currentEditingRowId) {
+  if (row.id === currentEditingRow?.id) {
     return <MRT_EditActionButtons row={row} />;
   }
 

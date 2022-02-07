@@ -15,16 +15,20 @@ interface Props {
 }
 
 export const MRT_EditActionButtons: FC<Props> = ({ row }) => {
-  const { localization, setCurrentEditingRowId, onRowEditSubmit } =
-    useMaterialReactTable();
+  const {
+    localization,
+    setCurrentEditingRow,
+    onRowEditSubmit,
+    currentEditingRow,
+  } = useMaterialReactTable();
 
   const handleCancel = () => {
-    setCurrentEditingRowId(null);
+    setCurrentEditingRow(null);
   };
 
   const handleSave = async () => {
-    setCurrentEditingRowId(null);
-    await onRowEditSubmit?.(row);
+    await onRowEditSubmit?.(currentEditingRow ?? row);
+    setCurrentEditingRow(null);
   };
 
   return (

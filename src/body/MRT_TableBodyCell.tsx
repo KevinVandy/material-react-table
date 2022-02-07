@@ -2,14 +2,19 @@ import React, { FC, MouseEvent } from 'react';
 import { TableCell } from '@mui/material';
 import { Cell } from 'react-table';
 import { useMaterialReactTable } from '../useMaterialReactTable';
+import { MRT_EditCellTextbox } from '../inputs/MRT_EditCellTextbox';
 
 interface Props {
   cell: Cell;
 }
 
 export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
-  const { onCellClick, muiTableBodyCellProps, densePadding } =
-    useMaterialReactTable();
+  const {
+    onCellClick,
+    muiTableBodyCellProps,
+    densePadding,
+    currentEditingRow,
+  } = useMaterialReactTable();
 
   const mTableCellBodyProps =
     muiTableBodyCellProps instanceof Function
@@ -34,7 +39,9 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
       }
       {...tableCellProps}
     >
-      {cell.isPlaceholder ? null : cell.isAggregated ? (
+      {currentEditingRow?.id === cell.row.id ? (
+        <MRT_EditCellTextbox cell={cell} />
+      ) : cell.isPlaceholder ? null : cell.isAggregated ? (
         cell.render('Aggregated')
       ) : cell.isGrouped ? (
         <span>
@@ -43,6 +50,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
       ) : (
         cell.render('Cell')
       )}
+      {}
     </TableCell>
   );
 };
