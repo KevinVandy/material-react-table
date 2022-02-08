@@ -69,66 +69,34 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
     isLoading?: boolean;
     localization?: Partial<MRT_Localization>;
     muiSearchTextFieldProps?: TextFieldProps;
-    muiTableBodyCellEditTextFieldProps?:
-      | TextFieldProps
-      | ((cell?: Cell<D>) => TextFieldProps);
-    muiTableBodyCellProps?:
-      | TableCellProps
-      | ((cell?: Cell<D>) => TableCellProps);
+    muiTableBodyCellEditTextFieldProps?: TextFieldProps | ((cell?: Cell<D>) => TextFieldProps);
+    muiTableBodyCellProps?: TableCellProps | ((cell?: Cell<D>) => TableCellProps);
     muiTableBodyProps?: TableBodyProps;
     muiTableBodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
     muiTableContainerProps?: TableContainerProps;
-    muiTableDetailPanelProps?:
-      | TableCellProps
-      | ((row: Row<D>) => TableCellProps);
-    muiTableFooterCellProps?:
-      | TableCellProps
-      | ((column: Column<D>) => TableCellProps);
+    muiTableDetailPanelProps?: TableCellProps | ((row: Row<D>) => TableCellProps);
+    muiTableFooterCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
     muiTableFooterProps?: TableFooterProps;
-    muiTableFooterRowProps?:
-      | TableRowProps
-      | ((footerGroup: HeaderGroup<D>) => TableRowProps);
-    muiTableHeadCellFilterTextFieldProps?:
-      | TextFieldProps
-      | ((column: Column<D>) => TextFieldProps);
-    muiTableHeadCellProps?:
-      | TableCellProps
-      | ((column: Column<D>) => TableCellProps);
+    muiTableFooterRowProps?: TableRowProps | ((footerGroup: HeaderGroup<D>) => TableRowProps);
+    muiTableHeadCellFilterTextFieldProps?: TextFieldProps | ((column: Column<D>) => TextFieldProps);
+    muiTableHeadCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
     muiTableHeadProps?: TableHeadProps;
-    muiTableHeadRowProps?:
-      | TableRowProps
-      | ((row: HeaderGroup<D>) => TableRowProps);
+    muiTableHeadRowProps?: TableRowProps | ((row: HeaderGroup<D>) => TableRowProps);
     muiTablePaginationProps?:
       | Partial<TablePaginationProps>
       | ((tableInstance: TableInstance<D>) => Partial<TablePaginationProps>);
     muiTableProps?: TableProps;
     muiTableTitleProps?: TypographyProps;
-    muiTableToolbarBottomProps?:
-      | ToolbarProps
-      | ((tableInstance: TableInstance<D>) => ToolbarProps);
-    muiTableToolbarTopProps?:
-      | ToolbarProps
-      | ((tableInstance: TableInstance<D>) => ToolbarProps);
-    onCellClick?: (
-      event: MouseEvent<HTMLTableCellElement>,
-      cell: Cell<D>,
-    ) => void;
-    onDetailPanelClick?: (
-      event: MouseEvent<HTMLTableCellElement>,
-      row: Row<D>,
-    ) => void;
+    muiTableToolbarBottomProps?: ToolbarProps | ((tableInstance: TableInstance<D>) => ToolbarProps);
+    muiTableToolbarTopProps?: ToolbarProps | ((tableInstance: TableInstance<D>) => ToolbarProps);
+    onCellClick?: (event: MouseEvent<HTMLTableCellElement>, cell: Cell<D>) => void;
+    onColumnHide?: (column: Column<D>, visibleColumns: Column<D>[]) => void;
+    onDetailPanelClick?: (event: MouseEvent<HTMLTableCellElement>, row: Row<D>) => void;
     onGlobalFilterChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     onRowClick?: (event: MouseEvent<HTMLTableRowElement>, row: Row<D>) => void;
     onRowEditSubmit?: (row: Row<D>) => Promise<void> | void;
-    onRowExpandChange?: (
-      event: MouseEvent<HTMLButtonElement>,
-      row: Row<D>,
-    ) => void;
-    onRowSelectChange?: (
-      event: ChangeEvent,
-      row: Row<D>,
-      selectedRows: Row<D>[],
-    ) => void;
+    onRowExpandChange?: (event: MouseEvent<HTMLButtonElement>, row: Row<D>) => void;
+    onRowSelectChange?: (event: ChangeEvent, row: Row<D>, selectedRows: Row<D>[]) => void;
     positionActionsColumn?: 'first' | 'last';
     positionPagination?: 'bottom' | 'top' | 'both';
     positionToolbarActions?: 'bottom' | 'top';
@@ -138,10 +106,7 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
       tableInstance: TableInstance<D>,
       closeMenu: () => void,
     ) => ReactNode[];
-    renderRowActions?: (
-      row: Row<D>,
-      tableInstance: TableInstance<D>,
-    ) => ReactNode;
+    renderRowActions?: (row: Row<D>, tableInstance: TableInstance<D>) => ReactNode;
     title?: string | ReactNode;
   };
 

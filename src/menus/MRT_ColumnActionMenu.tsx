@@ -18,17 +18,9 @@ interface Props {
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
 }
 
-export const MRT_ColumnActionMenu: FC<Props> = ({
-  anchorEl,
-  column,
-  setAnchorEl,
-}) => {
-  const {
-    disableColumnHiding,
-    enableColumnGrouping,
-    disableSortBy,
-    localization,
-  } = useMaterialReactTable();
+export const MRT_ColumnActionMenu: FC<Props> = ({ anchorEl, column, setAnchorEl }) => {
+  const { disableColumnHiding, enableColumnGrouping, disableSortBy, localization } =
+    useMaterialReactTable();
 
   const handleClearSort = () => {
     column.clearSortBy();
@@ -56,18 +48,10 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
   };
 
   return (
-    <Menu
-      anchorEl={anchorEl}
-      open={!!anchorEl}
-      onClose={() => setAnchorEl(null)}
-    >
+    <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={() => setAnchorEl(null)}>
       {!disableSortBy &&
         column.canSort && [
-          <MenuItem
-            key={1}
-            disabled={!column.isSorted}
-            onClick={handleClearSort}
-          >
+          <MenuItem key={1} disabled={!column.isSorted} onClick={handleClearSort}>
             <ClearAllIcon /> {localization?.columnActionMenuItemClearSort}
           </MenuItem>,
           <MenuItem

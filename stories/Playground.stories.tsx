@@ -10,9 +10,9 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<MaterialReactTableProps> = (
-  args: MaterialReactTableProps,
-) => <MaterialReactTable {...args} />;
+const Template: Story<MaterialReactTableProps> = (args: MaterialReactTableProps) => (
+  <MaterialReactTable {...args} />
+);
 
 export const Default = Template.bind({});
 

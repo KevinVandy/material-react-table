@@ -15,11 +15,7 @@ interface Props {
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
 }
 
-export const MRT_RowActionMenu: FC<Props> = ({
-  anchorEl,
-  row,
-  setAnchorEl,
-}) => {
+export const MRT_RowActionMenu: FC<Props> = ({ anchorEl, row, setAnchorEl }) => {
   const {
     enableRowEditing,
     localization,
@@ -34,19 +30,13 @@ export const MRT_RowActionMenu: FC<Props> = ({
   };
 
   return (
-    <Menu
-      anchorEl={anchorEl}
-      open={!!anchorEl}
-      onClose={() => setAnchorEl(null)}
-    >
+    <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={() => setAnchorEl(null)}>
       {enableRowEditing && (
         <MenuItem onClick={handleEdit}>
           <EditIcon /> {localization?.rowActionMenuItemEdit}
         </MenuItem>
       )}
-      {renderRowActionMenuItems?.(row, tableInstance, () =>
-        setAnchorEl(null),
-      ) ?? null}
+      {renderRowActionMenuItems?.(row, tableInstance, () => setAnchorEl(null)) ?? null}
     </Menu>
   );
 };

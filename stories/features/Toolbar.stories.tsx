@@ -58,12 +58,7 @@ export const BottomToolbarHidden: Story<MaterialReactTableProps> = () => (
 );
 
 export const NoToolbars: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    hideToolbarTop
-    hideToolbarBottom
-  />
+  <MaterialReactTable columns={columns} data={data} hideToolbarTop hideToolbarBottom />
 );
 
 export const hideToolbarActions: Story<MaterialReactTableProps> = () => (

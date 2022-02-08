@@ -34,10 +34,9 @@ export const MRT_ToolbarBottom: FC<Props> = () => {
       ) : (
         <span />
       )}
-      {!manualPagination &&
-        ['bottom', 'both'].includes(positionPagination ?? '') && (
-          <MRT_TablePagination />
-        )}
+      {!manualPagination && ['bottom', 'both'].includes(positionPagination ?? '') && (
+        <MRT_TablePagination />
+      )}
     </Toolbar>
   );
 };

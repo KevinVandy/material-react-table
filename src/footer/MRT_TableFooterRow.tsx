@@ -40,26 +40,17 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
 
   return (
     <TableRow {...tableRowProps}>
-      {enableRowActions && positionActionsColumn === 'first' && (
-        <MRT_TableSpacerCell />
-      )}
+      {enableRowActions && positionActionsColumn === 'first' && <MRT_TableSpacerCell />}
       {(anyRowsCanExpand || renderDetailPanel) && (
         <MRT_TableSpacerCell
-          width={`${
-            renderDetailPanel ? 2 : tableInstance.expandedDepth + 0.5
-          }rem`}
+          width={`${renderDetailPanel ? 2 : tableInstance.expandedDepth + 0.5}rem`}
         />
       )}
       {enableSelection && <MRT_TableSpacerCell width="1rem" />}
       {footerGroup.headers.map((column) => (
-        <MRT_TableFooterCell
-          key={column.getFooterProps().key}
-          column={column}
-        />
+        <MRT_TableFooterCell key={column.getFooterProps().key} column={column} />
       ))}
-      {enableRowActions && positionActionsColumn === 'last' && (
-        <MRT_TableSpacerCell />
-      )}
+      {enableRowActions && positionActionsColumn === 'last' && <MRT_TableSpacerCell />}
     </TableRow>
   );
 };

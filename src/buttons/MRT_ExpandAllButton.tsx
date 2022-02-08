@@ -14,8 +14,7 @@ const ArrowRightIcon = styled(MuiArrowRightIcon, {
 interface Props {}
 
 export const MRT_ExpandAllButton: FC<Props> = () => {
-  const { tableInstance, localization, anyRowsExpanded, densePadding } =
-    useMaterialReactTable();
+  const { tableInstance, localization, anyRowsExpanded, densePadding } = useMaterialReactTable();
 
   return (
     <MRT_TableButtonCell
@@ -29,9 +28,7 @@ export const MRT_ExpandAllButton: FC<Props> = () => {
       >
         <ArrowRightIcon
           fontSize="small"
-          rotation={
-            tableInstance.isAllRowsExpanded ? -180 : anyRowsExpanded ? -90 : 0
-          }
+          rotation={tableInstance.isAllRowsExpanded ? -180 : anyRowsExpanded ? -90 : 0}
         />
       </IconButton>
     </MRT_TableButtonCell>

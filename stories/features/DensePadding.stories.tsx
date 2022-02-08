@@ -55,14 +55,8 @@ const data = [...Array(25)].map((_) => ({
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const DensePaddingToggleEnabledDefault: Story<
-  MaterialReactTableProps
-> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    initialState={{ pageSize: 25 }}
-  />
+export const DensePaddingToggleEnabledDefault: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} initialState={{ pageSize: 25 }} />
 );
 
 export const DensePaddingDisabled: Story<MaterialReactTableProps> = () => (

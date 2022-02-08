@@ -63,9 +63,7 @@ export const FilteringDisabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} disableFilters />
 );
 
-export const FilteringDisabledForCertainColumns: Story<
-  MaterialReactTableProps
-> = () => (
+export const FilteringDisabledForCertainColumns: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={[
       {
@@ -128,9 +126,7 @@ export const CustomFilterFunction: Story<MaterialReactTableProps> = () => (
         accessor: 'state' as const,
         filter: (rows, _columnIds, filterValue) =>
           rows.filter((row) =>
-            row.values['state']
-              .toLowerCase()
-              .startsWith(filterValue.toLowerCase()),
+            row.values['state'].toLowerCase().startsWith(filterValue.toLowerCase()),
           ),
       },
     ]}
@@ -172,10 +168,7 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
           </TextField>
         ),
         filter: (rows, _columnIds, filterValue) =>
-          rows.filter(
-            (row) =>
-              row.values['gender'].toLowerCase() === filterValue.toLowerCase(),
-          ),
+          rows.filter((row) => row.values['gender'].toLowerCase() === filterValue.toLowerCase()),
       },
       {
         Header: 'Address',

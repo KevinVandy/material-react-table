@@ -23,13 +23,8 @@ interface Props {
 }
 
 export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
-  const {
-    localization,
-    currentEditingRow,
-    renderRowActions,
-    tableInstance,
-    densePadding,
-  } = useMaterialReactTable();
+  const { localization, currentEditingRow, renderRowActions, tableInstance, densePadding } =
+    useMaterialReactTable();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -56,11 +51,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
           >
             <MoreHorizIcon />
           </IconButton>
-          <MRT_RowActionMenu
-            anchorEl={anchorEl}
-            row={row}
-            setAnchorEl={setAnchorEl}
-          />
+          <MRT_RowActionMenu anchorEl={anchorEl} row={row} setAnchorEl={setAnchorEl} />
         </>
       )}
     </MRT_TableButtonCell>

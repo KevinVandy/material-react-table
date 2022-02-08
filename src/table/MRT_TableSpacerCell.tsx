@@ -10,9 +10,7 @@ export const MRT_TableSpacerCell: FC<Props> = ({ width }) => {
   const { muiTableBodyCellProps } = useMaterialReactTable();
 
   const mTableBodyCellrops =
-    muiTableBodyCellProps instanceof Function
-      ? muiTableBodyCellProps()
-      : muiTableBodyCellProps;
+    muiTableBodyCellProps instanceof Function ? muiTableBodyCellProps() : muiTableBodyCellProps;
 
   const tableCellProps = {
     ...mTableBodyCellrops,

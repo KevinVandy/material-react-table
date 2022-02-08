@@ -74,8 +74,7 @@ export const RowEditingEnabled: Story<MaterialReactTableProps> = () => {
           editable: true,
           editValidator: (value) => {
             if (value.length === 0) return 'Phone number is required';
-            if (!value.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/))
-              return 'Invalid phone number';
+            if (!value.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/)) return 'Invalid phone number';
             return true;
           },
         },
@@ -146,8 +145,7 @@ export const RowEditingEnabledAsync: Story<MaterialReactTableProps> = () => {
           editable: true,
           editValidator: (value) => {
             if (value.length === 0) return 'Phone number is required';
-            if (!value.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/))
-              return 'Invalid phone number';
+            if (!value.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/)) return 'Invalid phone number';
             return true;
           },
         },

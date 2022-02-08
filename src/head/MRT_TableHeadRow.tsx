@@ -51,18 +51,14 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         (isParentHeader ? (
           <MRT_TableSpacerCell />
         ) : (
-          <StyledTableHeadCell>
-            {localization?.actionsHeadColumnTitle}
-          </StyledTableHeadCell>
+          <StyledTableHeadCell>{localization?.actionsHeadColumnTitle}</StyledTableHeadCell>
         ))}
       {anyRowsCanExpand || renderDetailPanel ? (
         !disableExpandAll && !isParentHeader ? (
           <MRT_ExpandAllButton />
         ) : (
           <MRT_TableSpacerCell
-            width={`${
-              renderDetailPanel ? 2 : tableInstance.expandedDepth + 0.5
-            }rem`}
+            width={`${renderDetailPanel ? 2 : tableInstance.expandedDepth + 0.5}rem`}
           />
         )
       ) : null}

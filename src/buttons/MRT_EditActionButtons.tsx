@@ -15,12 +15,8 @@ interface Props {
 }
 
 export const MRT_EditActionButtons: FC<Props> = ({ row }) => {
-  const {
-    localization,
-    setCurrentEditingRow,
-    onRowEditSubmit,
-    currentEditingRow,
-  } = useMaterialReactTable();
+  const { localization, setCurrentEditingRow, onRowEditSubmit, currentEditingRow } =
+    useMaterialReactTable();
 
   const handleCancel = () => {
     setCurrentEditingRow(null);
@@ -34,10 +30,7 @@ export const MRT_EditActionButtons: FC<Props> = ({ row }) => {
   return (
     <EditActionButtonWrappers>
       <Tooltip arrow title={localization?.rowActionButtonCancel ?? ''}>
-        <IconButton
-          aria-label={localization?.rowActionButtonCancel}
-          onClick={handleCancel}
-        >
+        <IconButton aria-label={localization?.rowActionButtonCancel} onClick={handleCancel}>
           <CancelIcon />
         </IconButton>
       </Tooltip>

@@ -12,8 +12,7 @@ import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
 import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
 
 export const StyledTableHeadCell = styled(MuiTableCell, {
-  shouldForwardProp: (prop) =>
-    prop !== 'densePadding' && prop !== 'enableColumnResizing',
+  shouldForwardProp: (prop) => prop !== 'densePadding' && prop !== 'enableColumnResizing',
 })<{ densePadding?: boolean; enableColumnResizing?: boolean }>(
   ({ densePadding, enableColumnResizing }) => ({
     fontWeight: 'bold',
@@ -92,9 +91,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
       {...tableCellProps}
     >
       <TableCellContents>
-        <TableCellText
-          style={{ justifyContent: isParentHeader ? 'center' : undefined }}
-        >
+        <TableCellText style={{ justifyContent: isParentHeader ? 'center' : undefined }}>
           <CellFlexItem {...column.getSortByToggleProps()}>
             {column.render('Header')}
             {!isParentHeader && column.canSort && (

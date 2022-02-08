@@ -24,8 +24,7 @@ interface Props {
 }
 
 export const MRT_ExpandButton: FC<Props> = ({ row }) => {
-  const { localization, densePadding, renderDetailPanel } =
-    useMaterialReactTable();
+  const { localization, densePadding, renderDetailPanel } = useMaterialReactTable();
 
   return (
     <TableCell size="small" densePadding={densePadding} depth={row.depth}>
@@ -37,13 +36,7 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
       >
         <ExpandMoreIcon
           fontSize={row.canExpand || renderDetailPanel ? 'medium' : 'small'}
-          rotation={
-            !row.canExpand && !renderDetailPanel
-              ? -90
-              : row.isExpanded
-              ? -180
-              : 0
-          }
+          rotation={!row.canExpand && !renderDetailPanel ? -90 : row.isExpanded ? -180 : 0}
         />
       </IconButton>
     </TableCell>

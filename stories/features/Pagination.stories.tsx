@@ -43,31 +43,23 @@ export const PaginationEnabledDefault: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
-export const PaginationDisabledOrOverriden: Story<
-  MaterialReactTableProps
-> = () => <MaterialReactTable columns={columns} data={data} manualPagination />;
+export const PaginationDisabledOrOverriden: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} manualPagination />
+);
 
 export const PaginationPositionBottom: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    positionPagination="bottom"
-  />
+  <MaterialReactTable columns={columns} data={data} positionPagination="bottom" />
 );
 
 export const PaginationPositionTop: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} positionPagination="top" />
 );
 
-export const PaginationPositionTopAndBottom: Story<
-  MaterialReactTableProps
-> = () => (
+export const PaginationPositionTopAndBottom: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} positionPagination="both" />
 );
 
-export const CustomizePaginationComponents: Story<
-  MaterialReactTableProps
-> = () => (
+export const CustomizePaginationComponents: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

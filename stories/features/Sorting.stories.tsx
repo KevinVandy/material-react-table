@@ -53,9 +53,7 @@ export const DisableSorting: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} disableSortBy />
 );
 
-export const DisableSortingForSpecificColumns: Story<
-  MaterialReactTableProps
-> = () => (
+export const DisableSortingForSpecificColumns: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={[
       {

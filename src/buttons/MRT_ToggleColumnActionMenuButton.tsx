@@ -41,11 +41,7 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
       >
         <MoreVertIcon />
       </IconButton>
-      <MRT_ColumnActionMenu
-        anchorEl={anchorEl}
-        column={column}
-        setAnchorEl={setAnchorEl}
-      />
+      <MRT_ColumnActionMenu anchorEl={anchorEl} column={column} setAnchorEl={setAnchorEl} />
     </>
   );
 };

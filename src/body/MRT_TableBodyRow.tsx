@@ -1,9 +1,5 @@
 import React, { FC, MouseEvent } from 'react';
-import {
-  alpha,
-  styled,
-  TableRow as MuiTableRow,
-} from '@mui/material';
+import { alpha, styled, TableRow as MuiTableRow } from '@mui/material';
 import { Row } from 'react-table';
 import { MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { useMaterialReactTable } from '../useMaterialReactTable';
@@ -15,9 +11,7 @@ import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMen
 export const TableRow = styled(MuiTableRow, {
   shouldForwardProp: (prop) => prop !== 'isSelected',
 })<{ isSelected?: boolean }>(({ isSelected, theme }) => ({
-  backgroundColor: isSelected
-    ? alpha(theme.palette.primary.light, 0.1)
-    : 'transparent',
+  backgroundColor: isSelected ? alpha(theme.palette.primary.light, 0.1) : 'transparent',
 }));
 
 interface Props {
@@ -36,9 +30,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
   } = useMaterialReactTable();
 
   const mTableBodyRowProps =
-    muiTableBodyRowProps instanceof Function
-      ? muiTableBodyRowProps(row)
-      : muiTableBodyRowProps;
+    muiTableBodyRowProps instanceof Function ? muiTableBodyRowProps(row) : muiTableBodyRowProps;
 
   const tableRowProps = {
     ...mTableBodyRowProps,
@@ -54,17 +46,13 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
       <TableRow
         isSelected={row.isSelected}
         hover
-        onClick={(event: MouseEvent<HTMLTableRowElement>) =>
-          onRowClick?.(event, row)
-        }
+        onClick={(event: MouseEvent<HTMLTableRowElement>) => onRowClick?.(event, row)}
         {...tableRowProps}
       >
         {enableRowActions && positionActionsColumn === 'first' && (
           <MRT_ToggleRowActionMenuButton row={row} />
         )}
-        {(anyRowsCanExpand || renderDetailPanel) && (
-          <MRT_ExpandButton row={row} />
-        )}
+        {(anyRowsCanExpand || renderDetailPanel) && <MRT_ExpandButton row={row} />}
         {enableSelection && <MRT_SelectCheckbox row={row} />}
         {row.cells.map((cell) => (
           <MRT_TableBodyCell key={cell.getCellProps().key} cell={cell} />

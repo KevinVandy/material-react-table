@@ -52,16 +52,13 @@ export const MRT_ToolbarTop: FC<Props> = () => {
         )}
         <ToolbarActionsContainer>
           {!disableGlobalFilter && <MRT_SearchTextField />}
-          {!hideToolbarActions && positionToolbarActions === 'top' && (
-            <MRT_ToolbarButtons />
-          )}
+          {!hideToolbarActions && positionToolbarActions === 'top' && <MRT_ToolbarButtons />}
         </ToolbarActionsContainer>
       </ToolbarTopRow>
       <div>
-        {!manualPagination &&
-          ['top', 'both'].includes(positionPagination ?? '') && (
-            <MRT_TablePagination />
-          )}
+        {!manualPagination && ['top', 'both'].includes(positionPagination ?? '') && (
+          <MRT_TablePagination />
+        )}
       </div>
     </Toolbar>
   );

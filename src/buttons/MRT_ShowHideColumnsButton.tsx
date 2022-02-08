@@ -26,16 +26,9 @@ export const MRT_ShowHideColumnsButton: FC<Props> = () => {
           <ViewColumnIcon />
         </IconButton>
       </Tooltip>
-      <Menu
-        anchorEl={anchorEl}
-        open={!!anchorEl}
-        onClose={() => setAnchorEl(null)}
-      >
+      <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={() => setAnchorEl(null)}>
         {tableInstance.columns.map((column, index) => (
-          <MRT_ShowHideColumnsMenu
-            key={`${index}-${column.id}`}
-            column={column}
-          />
+          <MRT_ShowHideColumnsMenu key={`${index}-${column.id}`} column={column} />
         ))}
       </Menu>
     </>

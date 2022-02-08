@@ -91,9 +91,7 @@ export const RowActionsEnabled: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const RowActionsAndEditingEnabled: Story<
-  MaterialReactTableProps
-> = () => (
+export const RowActionsAndEditingEnabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -199,9 +197,7 @@ export const CustomRowActionButtons: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const CustomRowActionButtonsLastColumn: Story<
-  MaterialReactTableProps
-> = () => (
+export const CustomRowActionButtonsLastColumn: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

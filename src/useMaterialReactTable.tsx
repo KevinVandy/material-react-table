@@ -1,10 +1,4 @@
-import React, {
-  Context,
-  createContext,
-  PropsWithChildren,
-  useContext,
-  useState,
-} from 'react';
+import React, { Context, createContext, PropsWithChildren, useContext, useState } from 'react';
 import {
   PluginHook,
   Row,
@@ -36,9 +30,9 @@ export interface UseMaterialReactTable<D extends {}>
 }
 
 const MaterialReactTableContext = (<D extends {}>() =>
-  createContext<UseMaterialReactTable<D>>(
-    {} as UseMaterialReactTable<D>,
-  ) as Context<UseMaterialReactTable<D>>)();
+  createContext<UseMaterialReactTable<D>>({} as UseMaterialReactTable<D>) as Context<
+    UseMaterialReactTable<D>
+  >)();
 
 export const MaterialReactTableProvider = <D extends {}>(
   props: PropsWithChildren<MaterialReactTableProps<D>>,
@@ -60,12 +54,8 @@ export const MaterialReactTableProvider = <D extends {}>(
 
   const mrtCalcs = useMRTCalcs({ tableInstance });
 
-  const [showFilters, setShowFilters] = useState<boolean>(
-    props.defaultShowFilters ?? false,
-  );
-  const [densePadding, setDensePadding] = useState<boolean>(
-    props.defaultDensePadding ?? false,
-  );
+  const [showFilters, setShowFilters] = useState<boolean>(props.defaultShowFilters ?? false);
+  const [densePadding, setDensePadding] = useState<boolean>(props.defaultDensePadding ?? false);
   const [currentEditingRow, setCurrentEditingRow] = useState<Row | null>(null);
 
   return (
@@ -88,8 +78,6 @@ export const MaterialReactTableProvider = <D extends {}>(
   );
 };
 
-export const useMaterialReactTable = <
-  D extends {},
->(): UseMaterialReactTable<D> =>
+export const useMaterialReactTable = <D extends {}>(): UseMaterialReactTable<D> =>
   //@ts-ignore
   useContext<UseMaterialReactTable<D>>(MaterialReactTableContext);

@@ -10,8 +10,7 @@ const TableBody = styled(MuiTableBody)({
 interface Props {}
 
 export const MRT_TableBody: FC<Props> = () => {
-  const { tableInstance, muiTableBodyProps, manualPagination } =
-    useMaterialReactTable();
+  const { tableInstance, muiTableBodyProps, manualPagination } = useMaterialReactTable();
 
   const rows = manualPagination ? tableInstance.rows : tableInstance.page;
 

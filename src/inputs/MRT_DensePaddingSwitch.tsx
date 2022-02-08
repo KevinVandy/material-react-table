@@ -5,8 +5,7 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 interface Props {}
 
 export const MRT_DensePaddingSwitch: FC<Props> = () => {
-  const { densePadding, setDensePadding, localization } =
-    useMaterialReactTable();
+  const { densePadding, setDensePadding, localization } = useMaterialReactTable();
 
   return (
     <Tooltip arrow title={localization?.toggleDensePaddingSwitchTitle ?? ''}>

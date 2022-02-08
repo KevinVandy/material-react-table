@@ -4,8 +4,7 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_TableButtonCell } from '../table/MRT_TableButtonCell';
 
 export const MRT_SelectAllCheckbox = () => {
-  const { tableInstance, disableSelectAll, densePadding, localization } =
-    useMaterialReactTable();
+  const { tableInstance, disableSelectAll, densePadding, localization } = useMaterialReactTable();
 
   return (
     <MRT_TableButtonCell densePadding={densePadding} variant="head">

@@ -26,13 +26,8 @@ const CircularProgressWrapper = styled('div')(({ theme }) => ({
 interface Props {}
 
 export const MRT_TableContainer: FC<Props> = () => {
-  const {
-    muiTableContainerProps,
-    hideToolbarTop,
-    hideToolbarBottom,
-    isLoading,
-    isFetching,
-  } = useMaterialReactTable();
+  const { muiTableContainerProps, hideToolbarTop, hideToolbarBottom, isLoading, isFetching } =
+    useMaterialReactTable();
 
   return (
     <TableContainer component={Paper} {...muiTableContainerProps}>
