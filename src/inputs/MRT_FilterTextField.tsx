@@ -9,7 +9,7 @@ interface Props {
   column: HeaderGroup;
 }
 
-export const MRT_FilterTextfield: FC<Props> = ({ column }) => {
+export const MRT_FilterTextField: FC<Props> = ({ column }) => {
   const { localization } = useMaterialReactTable();
 
   const [filterValue, setFilterValue] = useState('');

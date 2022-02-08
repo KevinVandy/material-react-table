@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { HeaderGroup } from 'react-table';
 import { useMaterialReactTable } from '../useMaterialReactTable';
-import { MRT_FilterTextfield } from '../inputs/MRT_FilterTextField';
+import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
 import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
 
 export const StyledTableHeadCell = styled(MuiTableCell, {
@@ -128,7 +128,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
         </TableCellText>
         {!disableFilters && column.canFilter && (
           <Collapse in={showFilters}>
-            <MRT_FilterTextfield column={column} />
+            <MRT_FilterTextField column={column} />
           </Collapse>
         )}
       </TableCellContents>

@@ -1,20 +1,14 @@
 import React from 'react';
-import { Checkbox, TableCell as MuiTableCell, styled } from '@mui/material';
+import { Checkbox } from '@mui/material';
 import { useMaterialReactTable } from '../useMaterialReactTable';
-
-const TableCell = styled(MuiTableCell, {
-  shouldForwardProp: (prop) => prop !== 'densePadding',
-})<{ densePadding?: boolean }>(({ densePadding }) => ({
-  padding: densePadding ? '0' : '0.6rem',
-  transition: 'all 0.2s ease-in-out',
-}));
+import { MRT_TableButtonCell } from '../table/MRT_TableButtonCell';
 
 export const MRT_SelectAllCheckbox = () => {
   const { tableInstance, disableSelectAll, densePadding, localization } =
     useMaterialReactTable();
 
   return (
-    <TableCell densePadding={densePadding} variant="head">
+    <MRT_TableButtonCell densePadding={densePadding} variant="head">
       {!disableSelectAll ? (
         <Checkbox
           inputProps={{
@@ -23,6 +17,6 @@ export const MRT_SelectAllCheckbox = () => {
           {...tableInstance.getToggleAllPageRowsSelectedProps()}
         />
       ) : null}
-    </TableCell>
+    </MRT_TableButtonCell>
   );
 };

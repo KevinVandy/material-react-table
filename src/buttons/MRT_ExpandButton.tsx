@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
-import { IconButton, styled, TableCell as MuiTableCell } from '@mui/material';
+import { IconButton, styled } from '@mui/material';
 import { Row } from 'react-table';
 import MuiExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useMaterialReactTable } from '../useMaterialReactTable';
+import { MRT_TableButtonCell } from '../table/MRT_TableButtonCell';
 
-const TableCell = styled(MuiTableCell, {
-  shouldForwardProp: (prop) => prop !== 'densePadding' && prop !== 'depth',
-})<{ densePadding?: boolean; depth: number }>(({ densePadding, depth }) => ({
-  padding: densePadding ? '0' : '0.6rem',
+const TableCell = styled(MRT_TableButtonCell, {
+  shouldForwardProp: (prop) => prop !== 'depth',
+})<{ depth: number }>(({ depth }) => ({
   paddingLeft: `${depth + 0.5}rem`,
-  transition: 'all 0.2s ease-in-out',
+  textAlign: 'left',
 }));
 
 const ExpandMoreIcon = styled(MuiExpandMoreIcon, {

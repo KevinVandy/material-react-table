@@ -59,14 +59,8 @@ export type MRT_ColumnInterface<D extends {} = {}> =
       disableFilters?: boolean;
       Filter?: ({ column }: { column: HeaderGroup<D> }) => ReactNode;
       editable?: boolean;
-      editValidator?: () => boolean;
-      Edit?: ({
-        cell,
-        onChange,
-      }: {
-        cell: Cell<D>;
-        onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-      }) => ReactNode;
+      editValidator?: (value) => boolean | string;
+      Edit?: ({ cell, onChange }: { cell: Cell<D> }) => ReactNode;
       muiTableBodyCellProps?:
         | TableCellProps
         | ((cell: Cell<D>) => TableCellProps);
@@ -77,10 +71,10 @@ export type MRT_ColumnInterface<D extends {} = {}> =
         | TableCellProps
         | ((column: Column<D>) => TableCellProps);
       muiTableBodyCellEditTextFieldProps?:
-        | (TextFieldProps & HTMLAttributes)
+        | TextFieldProps
         | ((cell: Cell<D>) => TextFieldProps);
       muiTableHeadCellFilterTextFieldProps?:
-        | (TextFieldProps & HTMLAttributes)
+        | TextFieldProps
         | ((column: Column<D>) => TextFieldProps);
     };
 

@@ -2,7 +2,6 @@ import React, { FC, MouseEvent } from 'react';
 import {
   alpha,
   styled,
-  TableCell,
   TableRow as MuiTableRow,
 } from '@mui/material';
 import { Row } from 'react-table';
@@ -49,7 +48,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
       ...(mTableBodyRowProps?.style ?? {}),
     },
   };
-  console.log(row.values);
+
   return (
     <>
       <TableRow
@@ -61,9 +60,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         {...tableRowProps}
       >
         {enableRowActions && positionActionsColumn === 'first' && (
-          <TableCell>
-            <MRT_ToggleRowActionMenuButton row={row} />
-          </TableCell>
+          <MRT_ToggleRowActionMenuButton row={row} />
         )}
         {(anyRowsCanExpand || renderDetailPanel) && (
           <MRT_ExpandButton row={row} />
@@ -73,9 +70,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
           <MRT_TableBodyCell key={cell.getCellProps().key} cell={cell} />
         ))}
         {enableRowActions && positionActionsColumn === 'last' && (
-          <TableCell>
-            <MRT_ToggleRowActionMenuButton row={row} />
-          </TableCell>
+          <MRT_ToggleRowActionMenuButton row={row} />
         )}
       </TableRow>
       {renderDetailPanel && <MRT_TableDetailPanel row={row} />}

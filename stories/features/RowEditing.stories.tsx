@@ -14,34 +14,6 @@ const meta: Meta = {
 
 export default meta;
 
-const columns = [
-  {
-    Header: 'First Name',
-    accessor: 'firstName' as const,
-    editable: true,
-  },
-  {
-    Header: 'Last Name',
-    accessor: 'lastName' as const,
-    editable: true,
-  },
-  {
-    Header: 'Address',
-    accessor: 'address' as const,
-    editable: true,
-  },
-  {
-    Header: 'State',
-    accessor: 'state' as const,
-    editable: true,
-  },
-  {
-    Header: 'Phone Number',
-    accessor: 'phoneNumber' as const,
-    editable: true,
-  },
-];
-
 const data = [...Array(10)].map((_) => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
@@ -60,8 +32,56 @@ export const RowEditingEnabled: Story<MaterialReactTableProps> = () => {
 
   return (
     <MaterialReactTable
-      columns={columns}
+      columns={[
+        {
+          Header: 'First Name',
+          accessor: 'firstName' as const,
+          editable: true,
+          editValidator: (value) => {
+            if (value.length === 0) return 'First name is required';
+            return true;
+          },
+        },
+        {
+          Header: 'Last Name',
+          accessor: 'lastName' as const,
+          editable: true,
+          editValidator: (value) => {
+            if (value.length === 0) return 'Last name is required';
+            return true;
+          },
+        },
+        {
+          Header: 'Address',
+          accessor: 'address' as const,
+          editable: true,
+        },
+        {
+          Header: 'State',
+          accessor: 'state' as const,
+          editable: true,
+          editValidator: (value) => {
+            //test if state is valid
+            if (value.length === 0) return 'State is required';
+            const validStates = ['Nebraska', 'Virginia', 'Indiana'];
+            if (!validStates.includes(value)) return 'That is not a cool state';
+            return true;
+          },
+        },
+        {
+          Header: 'Phone Number',
+          accessor: 'phoneNumber' as const,
+          editable: true,
+          editValidator: (value) => {
+            if (value.length === 0) return 'Phone number is required';
+            if (!value.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/))
+              return 'Invalid phone number';
+            return true;
+          },
+        },
+      ]}
       data={tableData}
+      onSaveRow={handleSaveRow}
       enableRowActions
       enableRowEditing
       onRowEditSubmit={handleSaveRow}
@@ -84,7 +104,54 @@ export const RowEditingEnabledAsync: Story<MaterialReactTableProps> = () => {
 
   return (
     <MaterialReactTable
-      columns={columns}
+      columns={[
+        {
+          Header: 'First Name',
+          accessor: 'firstName' as const,
+          editable: true,
+          editValidator: (value) => {
+            if (value.length === 0) return 'First name is required';
+            return true;
+          },
+        },
+        {
+          Header: 'Last Name',
+          accessor: 'lastName' as const,
+          editable: true,
+          editValidator: (value) => {
+            if (value.length === 0) return 'Last name is required';
+            return true;
+          },
+        },
+        {
+          Header: 'Address',
+          accessor: 'address' as const,
+          editable: true,
+        },
+        {
+          Header: 'State',
+          accessor: 'state' as const,
+          editable: true,
+          editValidator: (value) => {
+            //test if state is valid
+            if (value.length === 0) return 'State is required';
+            const validStates = ['Nebraska', 'Virginia', 'Indiana'];
+            if (!validStates.includes(value)) return 'That is not a cool state';
+            return true;
+          },
+        },
+        {
+          Header: 'Phone Number',
+          accessor: 'phoneNumber' as const,
+          editable: true,
+          editValidator: (value) => {
+            if (value.length === 0) return 'Phone number is required';
+            if (!value.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/))
+              return 'Invalid phone number';
+            return true;
+          },
+        },
+      ]}
       data={tableData}
       enableRowActions
       enableRowEditing

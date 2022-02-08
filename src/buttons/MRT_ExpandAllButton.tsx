@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { IconButton, styled, TableCell } from '@mui/material';
+import { IconButton, styled } from '@mui/material';
 import MuiArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 import { useMaterialReactTable } from '../useMaterialReactTable';
+import { MRT_TableButtonCell } from '../table/MRT_TableButtonCell';
 
 const ArrowRightIcon = styled(MuiArrowRightIcon, {
   shouldForwardProp: (prop) => prop !== 'rotation',
@@ -13,23 +14,14 @@ const ArrowRightIcon = styled(MuiArrowRightIcon, {
 interface Props {}
 
 export const MRT_ExpandAllButton: FC<Props> = () => {
-  const {
-    tableInstance,
-    localization,
-    anyRowsExpanded,
-    densePadding,
-    renderDetailPanel,
-  } = useMaterialReactTable();
+  const { tableInstance, localization, anyRowsExpanded, densePadding } =
+    useMaterialReactTable();
 
   return (
-    <TableCell
+    <MRT_TableButtonCell
       size="small"
+      densePadding={densePadding}
       {...tableInstance.getToggleAllRowsExpandedProps()}
-      style={{
-        padding: densePadding ? '0' : '0.5rem 0.5rem',
-        transition: 'all 0.2s ease-in-out',
-        width: `${renderDetailPanel ? 2 : tableInstance.expandedDepth + 2}rem`,
-      }}
     >
       <IconButton
         aria-label={localization?.expandAllButtonTitle}
@@ -42,6 +34,6 @@ export const MRT_ExpandAllButton: FC<Props> = () => {
           }
         />
       </IconButton>
-    </TableCell>
+    </MRT_TableButtonCell>
   );
 };

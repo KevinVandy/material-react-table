@@ -5,6 +5,7 @@ import { useMaterialReactTable } from '../useMaterialReactTable';
 import { Row } from 'react-table';
 import { MRT_RowActionMenu } from '../menus/MRT_RowActionMenu';
 import { MRT_EditActionButtons } from './MRT_EditActionButtons';
+import { MRT_TableButtonCell } from '../table/MRT_TableButtonCell';
 
 const IconButton = styled(MuiIconButton)({
   opacity: 0.5,
@@ -22,8 +23,13 @@ interface Props {
 }
 
 export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
-  const { localization, currentEditingRow, renderRowActions, tableInstance } =
-    useMaterialReactTable();
+  const {
+    localization,
+    currentEditingRow,
+    renderRowActions,
+    tableInstance,
+    densePadding,
+  } = useMaterialReactTable();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -33,29 +39,30 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
     setAnchorEl(event.currentTarget);
   };
 
-  if (renderRowActions) {
-    return <>{renderRowActions(row, tableInstance)}</>;
-  }
-
-  if (row.id === currentEditingRow?.id) {
-    return <MRT_EditActionButtons row={row} />;
-  }
-
   return (
-    <>
-      <IconButton
-        aria-label={localization?.rowActionMenuButtonTitle}
-        title={localization?.rowActionMenuButtonTitle}
-        onClick={handleOpenRowActionMenu}
-        size="small"
-      >
-        <MoreHorizIcon />
-      </IconButton>
-      <MRT_RowActionMenu
-        anchorEl={anchorEl}
-        row={row}
-        setAnchorEl={setAnchorEl}
-      />
-    </>
+    <MRT_TableButtonCell densePadding={densePadding}>
+      {renderRowActions ? (
+        <>{renderRowActions(row, tableInstance)}</>
+      ) : row.id === currentEditingRow?.id ? (
+        <MRT_EditActionButtons row={row} />
+      ) : (
+        <>
+          {' '}
+          <IconButton
+            aria-label={localization?.rowActionMenuButtonTitle}
+            title={localization?.rowActionMenuButtonTitle}
+            onClick={handleOpenRowActionMenu}
+            size="small"
+          >
+            <MoreHorizIcon />
+          </IconButton>
+          <MRT_RowActionMenu
+            anchorEl={anchorEl}
+            row={row}
+            setAnchorEl={setAnchorEl}
+          />
+        </>
+      )}
+    </MRT_TableButtonCell>
   );
 };
