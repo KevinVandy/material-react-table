@@ -1,5 +1,5 @@
 import { TableCellProps, TextFieldProps } from '@mui/material';
-import { ReactNode } from 'react';
+import React, { HTMLAttributes, ReactNode } from 'react';
 import {
   UseColumnOrderInstanceProps,
   UseColumnOrderState,
@@ -50,6 +50,40 @@ import {
   UseSortByState,
 } from 'react-table';
 
+export type MRT_ColumnInterface<D extends {} = {}> =
+  UseFiltersColumnOptions<D> &
+    UseGlobalFiltersColumnOptions<D> &
+    UseGroupByColumnOptions<D> &
+    UseResizeColumnsColumnOptions<D> &
+    UseSortByColumnOptions<D> & {
+      disableFilters?: boolean;
+      Filter?: ({ column }: { column: HeaderGroup<D> }) => ReactNode;
+      editable?: boolean;
+      editValidator?: () => boolean;
+      Edit?: ({
+        cell,
+        onChange,
+      }: {
+        cell: Cell<D>;
+        onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+      }) => ReactNode;
+      muiTableBodyCellProps?:
+        | TableCellProps
+        | ((cell: Cell<D>) => TableCellProps);
+      muiTableHeadCellProps?:
+        | TableCellProps
+        | ((column: Column<D>) => TableCellProps);
+      muiTableFooterCellProps?:
+        | TableCellProps
+        | ((column: Column<D>) => TableCellProps);
+      muiTableBodyCellEditTextFieldProps?:
+        | (TextFieldProps & HTMLAttributes)
+        | ((cell: Cell<D>) => TextFieldProps);
+      muiTableHeadCellFilterTextFieldProps?:
+        | (TextFieldProps & HTMLAttributes)
+        | ((column: Column<D>) => TextFieldProps);
+    };
+
 declare module 'react-table' {
   export interface TableOptions<D extends Record<string, unknown>>
     extends UseExpandedOptions<D>,
@@ -97,37 +131,7 @@ declare module 'react-table' {
 
   export interface ColumnInterface<
     D extends Record<string, unknown> = Record<string, unknown>,
-  > extends UseFiltersColumnOptions<D>,
-      UseGlobalFiltersColumnOptions<D>,
-      UseGroupByColumnOptions<D>,
-      UseResizeColumnsColumnOptions<D>,
-      UseSortByColumnOptions<D> {
-    disableFilters?: boolean;
-    Filter?: ({ column }: { column: HeaderGroup<D> }) => ReactNode;
-    editable?: boolean;
-    Edit?: ({
-      cell,
-      onChange,
-    }: {
-      cell: Cell<D>;
-      onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-    }) => ReactNode;
-    muiTableBodyCellProps?:
-      | TableCellProps
-      | ((cell: Cell<D>) => TableCellProps);
-    muiTableHeadCellProps?:
-      | TableCellProps
-      | ((column: Column<D>) => TableCellProps);
-    muiTableFooterCellProps?:
-      | TableCellProps
-      | ((column: Column<D>) => TableCellProps);
-    muiTableBodyCellEditTextFieldProps?:
-      | TextFieldProps
-      | ((cell: Cell<D>) => TextFieldProps);
-    muiTableHeadCellFilterTextFieldProps?:
-      | TextFieldProps
-      | ((column: Column<D>) => TextFieldProps);
-  }
+  > extends MRT_ColumnInterface {}
 
   export interface ColumnInstance<
     D extends Record<string, unknown> = Record<string, unknown>,

@@ -67,7 +67,6 @@ export const StyleMuiTableBodyCellConditionallyIn1Column: Story<
       {
         Header: 'Age',
         accessor: 'age' as const,
-        //@ts-ignore
         muiTableBodyCellProps: (cell) => ({
           style: {
             backgroundColor:

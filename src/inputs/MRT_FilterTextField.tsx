@@ -24,7 +24,7 @@ export const MRT_FilterTextfield: FC<Props> = ({ column }) => {
   };
 
   if (column.Filter) {
-    return <>{column.Filter({ column })}</>;
+    return <>{column.Filter?.({ column })}</>;
   }
 
   return (

@@ -30,7 +30,6 @@ export const MRT_EditCellTextfield: FC<Props> = ({ cell }) => {
     style: {
       //@ts-ignore
       ...muiTableBodyCellEditTextFieldProps?.style,
-      //@ts-ignore
       ...cell.column.muiTableBodyCellEditTextFieldProps?.style,
     },
   };
