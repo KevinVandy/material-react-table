@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 import { TextField } from '@mui/material';
 import { Cell } from 'react-table';
 import { useMaterialReactTable } from '../useMaterialReactTable';
@@ -9,23 +9,20 @@ interface Props {
 
 export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
   const {
-    localization,
     currentEditingRow,
-    setCurrentEditingRow,
+    localization,
     muiTableBodyCellEditTextFieldProps,
+    setCurrentEditingRow,
   } = useMaterialReactTable();
-
-  const [error, setError] = useState<boolean | string>(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (currentEditingRow) {
+      cell.row.values[cell.column.id] = event.target.value;
       setCurrentEditingRow({
         ...currentEditingRow,
-        values: { ...cell.row.values, [cell.column.id]: event.target.value },
       });
-      const err = cell.column.editValidator?.(event.target.value) ?? true;
-      setError(err !== true && err);
     }
+    cell.column.onCellEditChange?.(event, cell);
   };
 
   const textFieldProps = {
@@ -45,8 +42,6 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
 
   return (
     <TextField
-      error={!!error}
-      helperText={error}
       margin="dense"
       onChange={handleChange}
       onClick={(e) => e.stopPropagation()}

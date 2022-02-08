@@ -19,6 +19,7 @@ export const MRT_EditActionButtons: FC<Props> = ({ row }) => {
     useMaterialReactTable();
 
   const handleCancel = () => {
+    row.values = row.original;
     setCurrentEditingRow(null);
   };
 

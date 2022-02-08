@@ -2,7 +2,7 @@ import React, { FC, MouseEvent } from 'react';
 import { styled, TableCell as MuiTableCell } from '@mui/material';
 import { Cell } from 'react-table';
 import { useMaterialReactTable } from '../useMaterialReactTable';
-import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField2';
+import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 
 const TableCell = styled(MuiTableCell, {
   shouldForwardProp: (prop) => prop !== 'densePadding',

@@ -58,13 +58,13 @@ export type MRT_ColumnInterface<D extends {} = {}> = UseFiltersColumnOptions<D> 
     disableFilters?: boolean;
     Filter?: ({ column }: { column: HeaderGroup<D> }) => ReactNode;
     editable?: boolean;
-    editValidator?: (value) => boolean | string;
     Edit?: ({ cell, onChange }: { cell: Cell<D> }) => ReactNode;
     muiTableBodyCellProps?: TableCellProps | ((cell: Cell<D>) => TableCellProps);
     muiTableHeadCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
     muiTableFooterCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
     muiTableBodyCellEditTextFieldProps?: TextFieldProps | ((cell: Cell<D>) => TextFieldProps);
     muiTableHeadCellFilterTextFieldProps?: TextFieldProps | ((column: Column<D>) => TextFieldProps);
+    onCellEditChange?: (event: ChangeEvent<HTMLInputElement>, cell: Cell<D>) => void;
     onFilterChange?: (event: ChangeEvent<HTMLInputElement>, filterValue: any) => void;
   };
 
