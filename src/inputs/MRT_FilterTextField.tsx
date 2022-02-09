@@ -29,8 +29,12 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
 
   return (
     <TextField
+      fullWidth
       margin="dense"
-      placeholder={localization?.filterTextFieldPlaceholder}
+      placeholder={localization?.filterTextFieldPlaceholder?.replace(
+        '{column}',
+        String(column.Header),
+      )}
       onChange={(e: ChangeEvent<HTMLInputElement>) => {
         setFilterValue(e.target.value);
         handleChange(e.target.value);

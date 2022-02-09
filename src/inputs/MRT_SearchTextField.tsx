@@ -1,5 +1,11 @@
 import React, { ChangeEvent, FC, useState } from 'react';
-import { IconButton, InputAdornment, styled, TextField as MuiTextField } from '@mui/material';
+import {
+  Collapse,
+  IconButton,
+  InputAdornment,
+  styled,
+  TextField as MuiTextField,
+} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import { useMaterialReactTable } from '../useMaterialReactTable';
@@ -12,7 +18,7 @@ const TextField = styled(MuiTextField)({
 interface Props {}
 
 export const MRT_SearchTextField: FC<Props> = () => {
-  const { tableInstance, muiSearchTextFieldProps, localization, onGlobalFilterChange } =
+  const { showSearch, localization, muiSearchTextFieldProps, onGlobalFilterChange, tableInstance } =
     useMaterialReactTable();
 
   const [searchValue, setSearchValue] = useState('');
@@ -28,35 +34,37 @@ export const MRT_SearchTextField: FC<Props> = () => {
   };
 
   return (
-    <TextField
-      placeholder={localization?.searchTextFieldPlaceholder}
-      onChange={(event: ChangeEvent<HTMLInputElement>) => {
-        setSearchValue(event.target.value);
-        handleChange(event);
-      }}
-      value={searchValue ?? ''}
-      variant="standard"
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <SearchIcon fontSize="small" />
-          </InputAdornment>
-        ),
-        endAdornment: (
-          <InputAdornment position="end">
-            <IconButton
-              aria-label={localization?.searchTextFieldClearButtonTitle}
-              disabled={searchValue?.length === 0}
-              onClick={handleClear}
-              size="small"
-              title={localization?.searchTextFieldClearButtonTitle}
-            >
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </InputAdornment>
-        ),
-      }}
-      {...muiSearchTextFieldProps}
-    />
+    <Collapse in={showSearch} orientation="horizontal">
+      <TextField
+        placeholder={localization?.searchTextFieldPlaceholder}
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+          setSearchValue(event.target.value);
+          handleChange(event);
+        }}
+        value={searchValue ?? ''}
+        variant="standard"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon fontSize="small" />
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label={localization?.searchTextFieldClearButtonTitle}
+                disabled={searchValue?.length === 0}
+                onClick={handleClear}
+                size="small"
+                title={localization?.searchTextFieldClearButtonTitle}
+              >
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+        {...muiSearchTextFieldProps}
+      />
+    </Collapse>
   );
 };

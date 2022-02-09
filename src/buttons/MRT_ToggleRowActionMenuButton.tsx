@@ -1,6 +1,7 @@
 import React, { FC, MouseEvent, useState } from 'react';
-import { IconButton as MuiIconButton, styled } from '@mui/material';
+import { IconButton as MuiIconButton, styled, Tooltip } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import EditIcon from '@mui/icons-material/Edit';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 import { Row } from 'react-table';
 import { MRT_RowActionMenu } from '../menus/MRT_RowActionMenu';
@@ -23,8 +24,16 @@ interface Props {
 }
 
 export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
-  const { localization, currentEditingRow, renderRowActions, tableInstance, densePadding } =
-    useMaterialReactTable();
+  const {
+    currentEditingRow,
+    densePadding,
+    localization,
+    renderRowActionMenuItems,
+    enableRowEditing,
+    setCurrentEditingRow,
+    renderRowActions,
+    tableInstance,
+  } = useMaterialReactTable();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -34,15 +43,25 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleEdit = () => {
+    setCurrentEditingRow({ ...row });
+    setAnchorEl(null);
+  };
+
   return (
     <MRT_TableButtonCell densePadding={densePadding}>
       {renderRowActions ? (
         <>{renderRowActions(row, tableInstance)}</>
       ) : row.id === currentEditingRow?.id ? (
         <MRT_EditActionButtons row={row} />
-      ) : (
+      ) : !renderRowActionMenuItems && enableRowEditing ? (
+        <Tooltip placement="right" arrow title={localization?.rowActionMenuItemEdit ?? ''}>
+          <IconButton onClick={handleEdit}>
+            <EditIcon />
+          </IconButton>
+        </Tooltip>
+      ) : renderRowActionMenuItems ? (
         <>
-          {' '}
           <IconButton
             aria-label={localization?.rowActionMenuButtonTitle}
             title={localization?.rowActionMenuButtonTitle}
@@ -51,9 +70,14 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
           >
             <MoreHorizIcon />
           </IconButton>
-          <MRT_RowActionMenu anchorEl={anchorEl} row={row} setAnchorEl={setAnchorEl} />
+          <MRT_RowActionMenu
+            anchorEl={anchorEl}
+            handleEdit={handleEdit}
+            row={row}
+            setAnchorEl={setAnchorEl}
+          />
         </>
-      )}
+      ) : null}
     </MRT_TableButtonCell>
   );
 };

@@ -7,7 +7,7 @@ const meta: Meta = {
   title: 'Features/Column Resizing Examples',
   parameters: {
     status: {
-      type: 'alpha',
+      type: 'proofOfConcept',
     },
   },
 };

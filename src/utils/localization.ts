@@ -23,6 +23,7 @@ export interface MRT_Localization {
   showHideColumnsButtonTitle: string;
   toggleDensePaddingSwitchTitle: string;
   toggleFilterButtonTitle: string;
+  toggleSearchButtonTitle: string;
 }
 
 export const defaultLocalization: MRT_Localization = {
@@ -37,7 +38,7 @@ export const defaultLocalization: MRT_Localization = {
   expandAllButtonTitle: 'Expand all',
   expandButtonTitle: 'Expand',
   filterTextFieldClearButtonTitle: 'Clear filter',
-  filterTextFieldPlaceholder: 'Filter',
+  filterTextFieldPlaceholder: 'Filter by {column}',
   rowActionButtonCancel: 'Cancel',
   rowActionButtonSave: 'Save',
   rowActionMenuButtonTitle: 'Row Actions',
@@ -50,4 +51,5 @@ export const defaultLocalization: MRT_Localization = {
   showHideColumnsButtonTitle: 'Show/Hide columns',
   toggleDensePaddingSwitchTitle: 'Toggle dense padding',
   toggleFilterButtonTitle: 'Toggle filters',
+  toggleSearchButtonTitle: 'Toggle search'
 };

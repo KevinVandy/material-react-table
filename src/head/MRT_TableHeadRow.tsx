@@ -51,7 +51,9 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         (isParentHeader ? (
           <MRT_TableSpacerCell />
         ) : (
-          <StyledTableHeadCell>{localization?.actionsHeadColumnTitle}</StyledTableHeadCell>
+          <StyledTableHeadCell style={{ textAlign: 'center' }}>
+            {localization?.actionsHeadColumnTitle}
+          </StyledTableHeadCell>
         ))}
       {anyRowsCanExpand || renderDetailPanel ? (
         !disableExpandAll && !isParentHeader ? (

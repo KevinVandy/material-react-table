@@ -49,6 +49,7 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
     columns: (Column<D> & MRT_ColumnInterface)[];
     defaultDensePadding?: boolean;
     defaultShowFilters?: boolean;
+    defaultShowSearchTextField?: boolean;
     disableColumnActions?: boolean;
     disableColumnHiding?: boolean;
     disableDensePaddingToggle?: boolean;

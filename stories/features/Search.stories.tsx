@@ -49,6 +49,14 @@ export const SearchEnabledDefault: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
+export const ShowSearchBoxByDefault: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} defaultShowSearchTextField />
+);
+
+export const JustASearchBox: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} defaultShowSearchTextField hideToolbarActions />
+);
+
 export const SearchDisabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} disableGlobalFilter />
 );
@@ -57,6 +65,7 @@ export const CustomizeSearchTextBox: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    defaultShowSearchTextField
     muiSearchTextFieldProps={{
       variant: 'outlined',
       placeholder: 'Search 100 rows',

@@ -13,21 +13,12 @@ interface Props {
   anchorEl: HTMLElement | null;
   row: Row;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
+  handleEdit: () => void;
 }
 
-export const MRT_RowActionMenu: FC<Props> = ({ anchorEl, row, setAnchorEl }) => {
-  const {
-    enableRowEditing,
-    localization,
-    renderRowActionMenuItems,
-    setCurrentEditingRow,
-    tableInstance,
-  } = useMaterialReactTable();
-
-  const handleEdit = () => {
-    setCurrentEditingRow({ ...row });
-    setAnchorEl(null);
-  };
+export const MRT_RowActionMenu: FC<Props> = ({ anchorEl, row, handleEdit, setAnchorEl }) => {
+  const { enableRowEditing, localization, renderRowActionMenuItems, tableInstance } =
+    useMaterialReactTable();
 
   return (
     <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={() => setAnchorEl(null)}>
