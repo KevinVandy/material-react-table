@@ -25,9 +25,19 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
     cell.column.onCellEditChange?.(event, cell);
   };
 
+  const mTableBodyCellEditTextFieldProps =
+    muiTableBodyCellEditTextFieldProps instanceof Function
+      ? muiTableBodyCellEditTextFieldProps(cell)
+      : muiTableBodyCellEditTextFieldProps;
+
+  const mcTableBodyCellEditTextFieldProps =
+    cell.column.muiTableBodyCellEditTextFieldProps instanceof Function
+      ? cell.column.muiTableBodyCellEditTextFieldProps(cell)
+      : cell.column.muiTableBodyCellEditTextFieldProps;
+
   const textFieldProps = {
-    ...muiTableBodyCellEditTextFieldProps,
-    ...cell.column.muiTableBodyCellEditTextFieldProps,
+    ...mTableBodyCellEditTextFieldProps,
+    ...mcTableBodyCellEditTextFieldProps,
     style: {
       //@ts-ignore
       ...muiTableBodyCellEditTextFieldProps?.style,
@@ -46,7 +56,7 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
       onChange={handleChange}
       onClick={(e) => e.stopPropagation()}
       placeholder={localization?.filterTextFieldPlaceholder}
-      value={currentEditingRow?.values?.[cell.column.id]}
+      value={cell.value}
       variant="standard"
       {...textFieldProps}
     />

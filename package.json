@@ -27,20 +27,21 @@
     "node": ">=12"
   },
   "scripts": {
-    "start": "tsdx watch",
+    "analyze": "size-limit --why",
     "build": "tsdx build && size-limit",
-    "test": "tsdx test --passWithNoTests",
+    "build-storybook": "build-storybook",
+    "format": "prettier -w .",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
-    "analyze": "size-limit --why",
+    "start": "tsdx watch",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "test": "tsdx test --passWithNoTests",
     "upgrade": "ncu -u && npm i"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "pre-commit": "tsdx lint && format"
     }
   },
   "module": "dist/material-react-table.esm.js",
