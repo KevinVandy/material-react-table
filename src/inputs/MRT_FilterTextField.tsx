@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, useState } from 'react';
-import { IconButton, InputAdornment, TextField } from '@mui/material';
+import { IconButton, InputAdornment, TextField, Tooltip } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import FilterIcon from '@mui/icons-material/FilterList';
 import { HeaderGroup, useAsyncDebounce } from 'react-table';
@@ -30,6 +30,12 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
   return (
     <TextField
       fullWidth
+      id={`filter-${column.id}-column`}
+      inputProps={{
+        style: {
+          textOverflow: 'ellipsis',
+        },
+      }}
       margin="dense"
       placeholder={localization?.filterTextFieldPlaceholder?.replace(
         '{column}',
@@ -44,21 +50,34 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
       variant="standard"
       InputProps={{
         startAdornment: (
-          <InputAdornment position="start">
-            <FilterIcon />
-          </InputAdornment>
+          <Tooltip
+            arrow
+            title={
+              localization?.filterTextFieldPlaceholder?.replace(
+                '{column}',
+                String(column.Header),
+              ) ?? ''
+            }
+          >
+            <InputAdornment position="start">
+              <FilterIcon />
+            </InputAdornment>
+          </Tooltip>
         ),
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton
-              aria-label={localization?.filterTextFieldClearButtonTitle}
-              disabled={filterValue?.length === 0}
-              onClick={handleClear}
-              size="small"
-              title={localization?.filterTextFieldClearButtonTitle}
-            >
-              <CloseIcon fontSize="small" />
-            </IconButton>
+            <Tooltip arrow title={localization?.filterTextFieldClearButtonTitle ?? ''}>
+              <span>
+                <IconButton
+                  aria-label={localization?.filterTextFieldClearButtonTitle}
+                  disabled={filterValue?.length === 0}
+                  onClick={handleClear}
+                  size="small"
+                >
+                  <CloseIcon fontSize="small" />
+                </IconButton>
+              </span>
+            </Tooltip>
           </InputAdornment>
         ),
       }}

@@ -9,8 +9,8 @@ const IconButton = styled(MuiIconButton)({
   opacity: 0.5,
   transition: 'opacity 0.2s',
   marginRight: '2px',
-  height: '2rem',
-  width: '2rem',
+  height: '1.6rem',
+  width: '1.6rem',
   '&:hover': {
     opacity: 1,
   },
@@ -35,9 +35,9 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
     <>
       <IconButton
         aria-label={localization?.columnActionMenuButtonTitle}
-        title={localization?.columnActionMenuButtonTitle}
         onClick={handleClick}
         size="small"
+        title={localization?.columnActionMenuButtonTitle}
       >
         <MoreVertIcon />
       </IconButton>

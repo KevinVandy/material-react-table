@@ -36,6 +36,7 @@ export const MRT_SearchTextField: FC<Props> = () => {
   return (
     <Collapse in={showSearch} orientation="horizontal">
       <TextField
+        id="global-search-text-field"
         placeholder={localization?.searchTextFieldPlaceholder}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setSearchValue(event.target.value);

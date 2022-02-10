@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import { Divider, Menu, MenuItem as MuiMenuItem, styled } from '@mui/material';
 import { useMaterialReactTable } from '../useMaterialReactTable';
-import { ColumnInstance } from 'react-table';
+import { HeaderGroup } from 'react-table';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SortIcon from '@mui/icons-material/Sort';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
+import FilterIcon from '@mui/icons-material/FilterList';
 
 const MenuItem = styled(MuiMenuItem)({
   display: 'flex',
@@ -14,13 +15,19 @@ const MenuItem = styled(MuiMenuItem)({
 
 interface Props {
   anchorEl: HTMLElement | null;
-  column: ColumnInstance;
+  column: HeaderGroup;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
 }
 
 export const MRT_ColumnActionMenu: FC<Props> = ({ anchorEl, column, setAnchorEl }) => {
-  const { disableColumnHiding, enableColumnGrouping, disableSortBy, localization } =
-    useMaterialReactTable();
+  const {
+    disableColumnHiding,
+    enableColumnGrouping,
+    disableSortBy,
+    localization,
+    disableFilters,
+    setShowFilters,
+  } = useMaterialReactTable();
 
   const handleClearSort = () => {
     column.clearSortBy();
@@ -47,6 +54,21 @@ export const MRT_ColumnActionMenu: FC<Props> = ({ anchorEl, column, setAnchorEl 
     setAnchorEl(null);
   };
 
+  const handleFilterByColumn = () => {
+    setShowFilters(true);
+    setTimeout(
+      () =>
+        document
+          .getElementById(
+            // @ts-ignore
+            column.muiTableHeadCellFilterTextFieldProps?.id ?? `filter-${column.id}-column`,
+          )
+          ?.focus(),
+      200,
+    );
+    setAnchorEl(null);
+  };
+
   return (
     <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={() => setAnchorEl(null)}>
       {!disableSortBy &&
@@ -59,7 +81,8 @@ export const MRT_ColumnActionMenu: FC<Props> = ({ anchorEl, column, setAnchorEl 
             disabled={column.isSorted && !column.isSortedDesc}
             onClick={handleSortAsc}
           >
-            <SortIcon /> {localization?.columnActionMenuItemSortAsc}
+            <SortIcon />{' '}
+            {localization?.columnActionMenuItemSortAsc?.replace('{column}', String(column.Header))}
           </MenuItem>,
           <MenuItem
             key={3}
@@ -67,25 +90,34 @@ export const MRT_ColumnActionMenu: FC<Props> = ({ anchorEl, column, setAnchorEl 
             onClick={handleSortDesc}
           >
             <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />{' '}
-            {localization?.columnActionMenuItemSortDesc}
+            {localization?.columnActionMenuItemSortDesc?.replace('{column}', String(column.Header))}
           </MenuItem>,
-          <Divider key={4} />,
         ]}
-      {!disableColumnHiding && (
-        <MenuItem onClick={handleHideColumn}>
-          <VisibilityOffIcon /> {localization?.columnActionMenuItemHideColumn}
-        </MenuItem>
-      )}
-      {enableColumnGrouping && column.canGroupBy && (
-        <MenuItem disabled={column.isGrouped} onClick={handleGroupByColumn}>
-          <DynamicFeedIcon /> {localization?.columnActionMenuItemGroupBy}
-        </MenuItem>
-      )}
-      {enableColumnGrouping && column.canGroupBy && (
-        <MenuItem disabled={!column.isGrouped} onClick={handleGroupByColumn}>
-          <DynamicFeedIcon /> {localization?.columnActionMenuItemUnGroupBy}
-        </MenuItem>
-      )}
+      {!disableFilters &&
+        column.canFilter && [
+          <Divider key={0} />,
+          <MenuItem key={1} onClick={handleFilterByColumn}>
+            <FilterIcon />{' '}
+            {localization?.filterTextFieldPlaceholder?.replace('{column}', String(column.Header))}
+          </MenuItem>,
+        ]}
+      {enableColumnGrouping &&
+        column.canGroupBy && [
+          <Divider key={1} />,
+          <MenuItem key={2} onClick={handleGroupByColumn}>
+            <DynamicFeedIcon />{' '}
+            {localization?.[
+              column.isGrouped ? 'columnActionMenuItemUnGroupBy' : 'columnActionMenuItemGroupBy'
+            ]?.replace('{column}', String(column.Header))}
+          </MenuItem>,
+        ]}
+      {!disableColumnHiding && [
+        <Divider key={0} />,
+        <MenuItem key={1} onClick={handleHideColumn}>
+          <VisibilityOffIcon />{' '}
+          {localization?.columnActionMenuItemHideColumn?.replace('{column}', String(column.Header))}
+        </MenuItem>,
+      ]}
     </Menu>
   );
 };

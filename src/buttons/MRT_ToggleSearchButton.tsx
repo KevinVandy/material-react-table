@@ -7,11 +7,21 @@ import SearchOffIcon from '@mui/icons-material/SearchOff';
 type Props = {};
 
 export const MRT_ToggleSearchButton: FC<Props> = () => {
-  const { localization, setShowSearch, showSearch } = useMaterialReactTable();
+  const { localization, setShowSearch, showSearch, muiSearchTextFieldProps } =
+    useMaterialReactTable();
+
+  const handleToggleSearch = () => {
+    setShowSearch(!showSearch);
+    setTimeout(
+      () =>
+        document.getElementById(muiSearchTextFieldProps?.id ?? `global-search-text-field`)?.focus(),
+      200,
+    );
+  };
 
   return (
     <Tooltip arrow title={localization?.toggleSearchButtonTitle ?? ''}>
-      <IconButton size="small" onClick={() => setShowSearch(!showSearch)}>
+      <IconButton size="small" onClick={handleToggleSearch}>
         {showSearch ? <SearchOffIcon /> : <SearchIcon />}
       </IconButton>
     </Tooltip>

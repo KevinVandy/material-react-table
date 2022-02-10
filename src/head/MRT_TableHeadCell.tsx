@@ -16,26 +16,30 @@ export const StyledTableHeadCell = styled(MuiTableCell, {
 })<{ densePadding?: boolean; enableColumnResizing?: boolean }>(
   ({ densePadding, enableColumnResizing }) => ({
     fontWeight: 'bold',
-    verticalAlign: 'text-top',
+    height: '100%',
     padding: densePadding ? '0.5rem' : '1rem',
     transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
+    verticalAlign: 'text-top',
   }),
 );
 
-const TableCellContents = styled('div')({
+const TableCellWrapper = styled('div')({
+  alignContent: 'space-between',
   display: 'grid',
+  height: '100%',
 });
 
-const TableCellText = styled('div')({
+const TableCellTopContents = styled('div')({
   width: '100%',
   display: 'flex',
   justifyContent: 'space-between',
+  alignItems: 'flex-start',
 });
 
 const CellFlexItem = styled('span')({
+  alignItems: 'center',
   display: 'flex',
   flexWrap: 'nowrap',
-  alignItems: 'center',
 });
 
 const Divider = styled(MuiDivider)({
@@ -90,8 +94,8 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
       enableColumnResizing={enableColumnResizing}
       {...tableCellProps}
     >
-      <TableCellContents>
-        <TableCellText style={{ justifyContent: isParentHeader ? 'center' : undefined }}>
+      <TableCellWrapper>
+        <TableCellTopContents style={{ justifyContent: isParentHeader ? 'center' : undefined }}>
           <CellFlexItem {...column.getSortByToggleProps()}>
             {column.render('Header')}
             {!isParentHeader && column.canSort && (
@@ -105,7 +109,6 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
                 }
                 active={column.isSorted}
                 direction={column.isSortedDesc ? 'desc' : 'asc'}
-                style={{ margin: 0 }}
               />
             )}
           </CellFlexItem>
@@ -122,13 +125,13 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
               />
             )}
           </CellFlexItem>
-        </TableCellText>
+        </TableCellTopContents>
         {!disableFilters && column.canFilter && (
           <Collapse in={showFilters}>
             <MRT_FilterTextField column={column} />
           </Collapse>
         )}
-      </TableCellContents>
+      </TableCellWrapper>
     </StyledTableHeadCell>
   );
 };
