@@ -1,7 +1,7 @@
 import React, { FC, MouseEvent } from 'react';
 import { styled, TableCell as MuiTableCell } from '@mui/material';
 import { Cell } from 'react-table';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 
 const TableCell = styled(MuiTableCell, {
@@ -17,11 +17,17 @@ interface Props {
 }
 
 export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
-  const { onCellClick, muiTableBodyCellProps, densePadding, currentEditingRow } =
-    useMaterialReactTable();
+  const {
+    onCellClick,
+    muiTableBodyCellProps,
+    densePadding,
+    currentEditingRow,
+  } = useMRT();
 
   const mTableCellBodyProps =
-    muiTableBodyCellProps instanceof Function ? muiTableBodyCellProps(cell) : muiTableBodyCellProps;
+    muiTableBodyCellProps instanceof Function
+      ? muiTableBodyCellProps(cell)
+      : muiTableBodyCellProps;
 
   const mcTableCellBodyProps =
     cell.column.muiTableBodyCellProps instanceof Function
@@ -42,7 +48,9 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
   return (
     <TableCell
       densePadding={densePadding}
-      onClick={(event: MouseEvent<HTMLTableCellElement>) => onCellClick?.(event, cell)}
+      onClick={(event: MouseEvent<HTMLTableCellElement>) =>
+        onCellClick?.(event, cell)
+      }
       {...tableCellProps}
     >
       {currentEditingRow?.id === cell.row.id ? (

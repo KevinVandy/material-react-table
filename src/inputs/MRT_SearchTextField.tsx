@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 import { useAsyncDebounce } from 'react-table';
 
 const TextField = styled(MuiTextField)({
@@ -18,15 +18,23 @@ const TextField = styled(MuiTextField)({
 interface Props {}
 
 export const MRT_SearchTextField: FC<Props> = () => {
-  const { showSearch, localization, muiSearchTextFieldProps, onGlobalFilterChange, tableInstance } =
-    useMaterialReactTable();
+  const {
+    showSearch,
+    localization,
+    muiSearchTextFieldProps,
+    onGlobalFilterChange,
+    tableInstance,
+  } = useMRT();
 
   const [searchValue, setSearchValue] = useState('');
 
-  const handleChange = useAsyncDebounce((event: ChangeEvent<HTMLInputElement>) => {
-    tableInstance.setGlobalFilter(event.target.value ?? undefined);
-    onGlobalFilterChange?.(event);
-  }, 200);
+  const handleChange = useAsyncDebounce(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      tableInstance.setGlobalFilter(event.target.value ?? undefined);
+      onGlobalFilterChange?.(event);
+    },
+    200,
+  );
 
   const handleClear = () => {
     setSearchValue('');

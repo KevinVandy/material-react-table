@@ -1,11 +1,11 @@
 import React, { ChangeEvent, FC } from 'react';
 import { TablePagination } from '@mui/material';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 
 interface Props {}
 
 export const MRT_TablePagination: FC<Props> = () => {
-  const { tableInstance, muiTablePaginationProps } = useMaterialReactTable();
+  const { tableInstance, muiTablePaginationProps } = useMRT();
 
   const tablePaginationProps =
     muiTablePaginationProps instanceof Function
@@ -25,8 +25,12 @@ export const MRT_TablePagination: FC<Props> = () => {
       onRowsPerPageChange={handleChangeRowsPerPage}
       page={tableInstance.state.pageIndex}
       rowsPerPage={tableInstance.state.pageSize}
-      showFirstButton={tableInstance.rows.length / tableInstance.state.pageSize > 2}
-      showLastButton={tableInstance.rows.length / tableInstance.state.pageSize > 2}
+      showFirstButton={
+        tableInstance.rows.length / tableInstance.state.pageSize > 2
+      }
+      showLastButton={
+        tableInstance.rows.length / tableInstance.state.pageSize > 2
+      }
       style={{ padding: 0 }}
       {...tablePaginationProps}
     />

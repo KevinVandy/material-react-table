@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC } from 'react';
 import { TextField } from '@mui/material';
 import { Cell } from 'react-table';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 
 interface Props {
   cell: Cell;
@@ -13,7 +13,7 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
     localization,
     muiTableBodyCellEditTextFieldProps,
     setCurrentEditingRow,
-  } = useMaterialReactTable();
+  } = useMRT();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (currentEditingRow) {

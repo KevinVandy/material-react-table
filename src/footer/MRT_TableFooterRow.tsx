@@ -3,7 +3,7 @@ import { TableRow } from '@mui/material';
 import { HeaderGroup } from 'react-table';
 import { MRT_TableFooterCell } from './MRT_TableFooterCell';
 import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 
 interface Props {
   footerGroup: HeaderGroup;
@@ -19,7 +19,7 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
     positionActionsColumn,
     tableInstance,
     muiTableFooterRowProps,
-  } = useMaterialReactTable();
+  } = useMRT();
 
   //if no content in row, skip row
   if (!columns?.some((c) => c.Footer)) return null;
@@ -40,17 +40,26 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
 
   return (
     <TableRow {...tableRowProps}>
-      {enableRowActions && positionActionsColumn === 'first' && <MRT_TableSpacerCell />}
+      {enableRowActions && positionActionsColumn === 'first' && (
+        <MRT_TableSpacerCell />
+      )}
       {(anyRowsCanExpand || renderDetailPanel) && (
         <MRT_TableSpacerCell
-          width={`${renderDetailPanel ? 2 : tableInstance.expandedDepth + 0.5}rem`}
+          width={`${
+            renderDetailPanel ? 2 : tableInstance.expandedDepth + 0.5
+          }rem`}
         />
       )}
       {enableSelection && <MRT_TableSpacerCell width="1rem" />}
       {footerGroup.headers.map((column) => (
-        <MRT_TableFooterCell key={column.getFooterProps().key} column={column} />
+        <MRT_TableFooterCell
+          key={column.getFooterProps().key}
+          column={column}
+        />
       ))}
-      {enableRowActions && positionActionsColumn === 'last' && <MRT_TableSpacerCell />}
+      {enableRowActions && positionActionsColumn === 'last' && (
+        <MRT_TableSpacerCell />
+      )}
     </TableRow>
   );
 };

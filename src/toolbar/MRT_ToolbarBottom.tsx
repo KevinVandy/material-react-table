@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { styled, Toolbar as MuiToolbar } from '@mui/material';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarButtons } from './MRT_ToolbarButtons';
 
@@ -19,7 +19,7 @@ export const MRT_ToolbarBottom: FC<Props> = () => {
     positionPagination,
     positionToolbarActions,
     tableInstance,
-  } = useMaterialReactTable();
+  } = useMRT();
 
   const toolbarProps =
     muiTableToolbarBottomProps instanceof Function
@@ -33,9 +33,10 @@ export const MRT_ToolbarBottom: FC<Props> = () => {
       ) : (
         <span />
       )}
-      {!manualPagination && ['bottom', 'both'].includes(positionPagination ?? '') && (
-        <MRT_TablePagination />
-      )}
+      {!manualPagination &&
+        ['bottom', 'both'].includes(positionPagination ?? '') && (
+          <MRT_TablePagination />
+        )}
     </Toolbar>
   );
 };

@@ -50,11 +50,20 @@ export const SearchEnabledDefault: Story<MaterialReactTableProps> = () => (
 );
 
 export const ShowSearchBoxByDefault: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} defaultShowSearchTextField />
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    defaultShowSearchTextField
+  />
 );
 
 export const JustASearchBox: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} defaultShowSearchTextField hideToolbarActions />
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    defaultShowSearchTextField
+    hideToolbarActions
+  />
 );
 
 export const SearchDisabled: Story<MaterialReactTableProps> = () => (

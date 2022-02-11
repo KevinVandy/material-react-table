@@ -1,7 +1,12 @@
 import React, { FC, MouseEvent } from 'react';
-import { Collapse, styled, TableCell as MuiTableCell, TableRow } from '@mui/material';
+import {
+  Collapse,
+  styled,
+  TableCell as MuiTableCell,
+  TableRow,
+} from '@mui/material';
 import { Row } from 'react-table';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 
 const TableCell = styled(MuiTableCell, {
   shouldForwardProp: (prop) => prop !== 'isExpanded',
@@ -23,10 +28,12 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
     muiTableDetailPanelProps,
     muiTableBodyRowProps,
     onDetailPanelClick,
-  } = useMaterialReactTable();
+  } = useMRT();
 
   const mTableBodyRowProps =
-    muiTableBodyRowProps instanceof Function ? muiTableBodyRowProps(row) : muiTableBodyRowProps;
+    muiTableBodyRowProps instanceof Function
+      ? muiTableBodyRowProps(row)
+      : muiTableBodyRowProps;
 
   const tableRowProps = {
     ...mTableBodyRowProps,
@@ -54,7 +61,9 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
       <TableCell
         colSpan={tableInstance.visibleColumns.length + 10}
         isExpanded={row.isExpanded}
-        onClick={(event: MouseEvent<HTMLTableCellElement>) => onDetailPanelClick?.(event, row)}
+        onClick={(event: MouseEvent<HTMLTableCellElement>) =>
+          onDetailPanelClick?.(event, row)
+        }
         {...tableCellProps}
       >
         <Collapse in={row.isExpanded}>{renderDetailPanel?.(row)}</Collapse>

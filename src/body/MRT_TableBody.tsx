@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { styled, TableBody as MuiTableBody } from '@mui/material';
 import { MRT_TableBodyRow } from './MRT_TableBodyRow';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 
 const TableBody = styled(MuiTableBody)({
   overflowY: 'hidden',
@@ -10,7 +10,7 @@ const TableBody = styled(MuiTableBody)({
 interface Props {}
 
 export const MRT_TableBody: FC<Props> = () => {
-  const { tableInstance, muiTableBodyProps, manualPagination } = useMaterialReactTable();
+  const { tableInstance, muiTableBodyProps, manualPagination } = useMRT();
 
   const rows = manualPagination ? tableInstance.rows : tableInstance.page;
 

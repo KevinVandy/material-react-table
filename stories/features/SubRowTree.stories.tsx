@@ -71,7 +71,9 @@ export const SubRowTreeEnabledDefault: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const SubRowTreeDisableExpandAll: Story<MaterialReactTableProps> = () => (
+export const SubRowTreeDisableExpandAll: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable
     columns={columns}
     data={[...Array(5)].map((_) => ({

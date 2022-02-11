@@ -1,13 +1,13 @@
 import React, { FC, MouseEvent, useState } from 'react';
 import { IconButton, Menu, Tooltip } from '@mui/material';
 import ViewColumnIcon from '@mui/icons-material/ViewColumn';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 import { MRT_ShowHideColumnsMenu } from '../menus/MRT_ShowHideColumnsMenu';
 
 interface Props {}
 
 export const MRT_ShowHideColumnsButton: FC<Props> = () => {
-  const { tableInstance, localization } = useMaterialReactTable();
+  const { tableInstance, localization } = useMRT();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -26,9 +26,16 @@ export const MRT_ShowHideColumnsButton: FC<Props> = () => {
           <ViewColumnIcon />
         </IconButton>
       </Tooltip>
-      <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={() => setAnchorEl(null)}>
+      <Menu
+        anchorEl={anchorEl}
+        open={!!anchorEl}
+        onClose={() => setAnchorEl(null)}
+      >
         {tableInstance.columns.map((column, index) => (
-          <MRT_ShowHideColumnsMenu key={`${index}-${column.id}`} column={column} />
+          <MRT_ShowHideColumnsMenu
+            key={`${index}-${column.id}`}
+            column={column}
+          />
         ))}
       </Menu>
     </>

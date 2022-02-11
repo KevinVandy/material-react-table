@@ -1,7 +1,7 @@
 import React, { FC, MouseEvent, useState } from 'react';
 import { IconButton as MuiIconButton, styled } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
 import { HeaderGroup } from 'react-table';
 
@@ -21,7 +21,7 @@ interface Props {
 }
 
 export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
-  const { localization } = useMaterialReactTable();
+  const { localization } = useMRT();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -41,7 +41,11 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
       >
         <MoreVertIcon />
       </IconButton>
-      <MRT_ColumnActionMenu anchorEl={anchorEl} column={column} setAnchorEl={setAnchorEl} />
+      <MRT_ColumnActionMenu
+        anchorEl={anchorEl}
+        column={column}
+        setAnchorEl={setAnchorEl}
+      />
     </>
   );
 };

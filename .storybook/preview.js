@@ -89,7 +89,8 @@ const withThemeProvider = (Story, context) => {
           variant="subtitle2"
           style={{ paddingTop: '2rem', color: useDarkMode() ? '#fff' : '#666' }}
         >
-          View source code below in the story tab on Canvas or the Show Code Button in Docs
+          View source code below in the story tab on Canvas or the Show Code
+          Button in Docs
         </Typography>
       </ThemeProvider>
     </Emotion10ThemeProvider>

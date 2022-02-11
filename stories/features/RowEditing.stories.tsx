@@ -175,7 +175,9 @@ export const RowEditingWithValidation: Story<MaterialReactTableProps> = () => {
   const [tableData, setTableData] = useState(data);
   const [firstNameError, setFirstNameError] = useState<string | boolean>(false);
   const [lastNameError, setLastNameError] = useState<string | boolean>(false);
-  const [phoneNumberError, setPhoneNumberError] = useState<string | boolean>(false);
+  const [phoneNumberError, setPhoneNumberError] = useState<string | boolean>(
+    false,
+  );
 
   const handleSaveRow = async (row: any) => {
     tableData[+row.index] = row.values;
@@ -194,7 +196,8 @@ export const RowEditingWithValidation: Story<MaterialReactTableProps> = () => {
 
   const validatePhoneNumber = (value: string) => {
     if (value.length === 0) return 'Phone number is required';
-    if (!value.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/)) return 'Invalid phone number';
+    if (!value.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/))
+      return 'Invalid phone number';
     return false;
   };
 

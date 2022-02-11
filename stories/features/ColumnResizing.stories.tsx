@@ -54,7 +54,9 @@ export const ColumnResizingEnabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableColumnResizing />
 );
 
-export const ColumnResizingCustomDefaultWidths: Story<MaterialReactTableProps> = () => (
+export const ColumnResizingCustomDefaultWidths: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

@@ -74,13 +74,16 @@ export const StyleCustomStripedRows: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const ConditionallyStyleMuiTableRow: Story<MaterialReactTableProps> = () => (
+export const ConditionallyStyleMuiTableRow: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     muiTableBodyRowProps={(row) => ({
       style: {
-        backgroundColor: row.values['age'] > 50 ? 'rgba(255, 54, 33, 0.18)' : '',
+        backgroundColor:
+          row.values['age'] > 50 ? 'rgba(255, 54, 33, 0.18)' : '',
         fontStyle: 'italic',
       },
     })}

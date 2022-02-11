@@ -34,9 +34,9 @@ const data = [...Array(21)].map((_) => ({
   address: faker.address.streetAddress(),
 }));
 
-export const DefaultTableBodyCellStyles: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} />
-);
+export const DefaultTableBodyCellStyles: Story<
+  MaterialReactTableProps
+> = () => <MaterialReactTable columns={columns} data={data} />;
 
 export const StyleAllMuiTableBodyCell: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
@@ -51,7 +51,9 @@ export const StyleAllMuiTableBodyCell: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const StyleMuiTableBodyCellConditionallyIn1Column: Story<MaterialReactTableProps> = () => (
+export const StyleMuiTableBodyCellConditionallyIn1Column: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable
     columns={[
       {
@@ -67,8 +69,10 @@ export const StyleMuiTableBodyCellConditionallyIn1Column: Story<MaterialReactTab
         accessor: 'age' as const,
         muiTableBodyCellProps: (cell) => ({
           style: {
-            backgroundColor: cell.value > 40 ? 'rgba(22, 184, 44, 0.5)' : undefined,
-            fontWeight: cell.column.id === 'age' && cell.value > 40 ? '700' : '400',
+            backgroundColor:
+              cell.value > 40 ? 'rgba(22, 184, 44, 0.5)' : undefined,
+            fontWeight:
+              cell.column.id === 'age' && cell.value > 40 ? '700' : '400',
           },
         }),
       },
@@ -87,7 +91,9 @@ export const CustomCellRender: Story<MaterialReactTableProps> = () => (
       {
         Header: 'First Name',
         accessor: 'firstName' as const,
-        Cell: (cell) => <span style={{ fontStyle: 'italic' }}>{cell.value}</span>,
+        Cell: (cell) => (
+          <span style={{ fontStyle: 'italic' }}>{cell.value}</span>
+        ),
       },
       {
         Header: 'Last Name',
@@ -103,7 +109,9 @@ export const CustomCellRender: Story<MaterialReactTableProps> = () => (
               fontStyle: 'italic',
               padding: '0.5rem',
               backgroundColor:
-                cell.column.id === 'age' && cell.value > 40 ? 'rgba(22, 184, 44, 0.5)' : undefined,
+                cell.column.id === 'age' && cell.value > 40
+                  ? 'rgba(22, 184, 44, 0.5)'
+                  : undefined,
             }}
           >
             {cell.value}

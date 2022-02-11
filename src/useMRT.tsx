@@ -1,4 +1,10 @@
-import React, { Context, createContext, PropsWithChildren, useContext, useState } from 'react';
+import React, {
+  Context,
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useState,
+} from 'react';
 import {
   PluginHook,
   Row,
@@ -17,7 +23,7 @@ import {
 import { MaterialReactTableProps } from './MaterialReactTable';
 import { UseMRTCalcs, useMRTCalcs } from './utils/useMRTCalcs';
 
-export interface UseMaterialReactTable<D extends {}>
+export interface UseMRT<D extends {}>
   extends MaterialReactTableProps<D>,
     UseMRTCalcs {
   currentEditingRow: Row<D> | null;
@@ -32,9 +38,7 @@ export interface UseMaterialReactTable<D extends {}>
 }
 
 const MaterialReactTableContext = (<D extends {}>() =>
-  createContext<UseMaterialReactTable<D>>({} as UseMaterialReactTable<D>) as Context<
-    UseMaterialReactTable<D>
-  >)();
+  createContext<UseMRT<D>>({} as UseMRT<D>) as Context<UseMRT<D>>)();
 
 export const MaterialReactTableProvider = <D extends {}>(
   props: PropsWithChildren<MaterialReactTableProps<D>>,
@@ -56,9 +60,15 @@ export const MaterialReactTableProvider = <D extends {}>(
 
   const mrtCalcs = useMRTCalcs({ tableInstance });
 
-  const [showSearch, setShowSearch] = useState(props.defaultShowSearchTextField ?? false);
-  const [showFilters, setShowFilters] = useState<boolean>(props.defaultShowFilters ?? false);
-  const [densePadding, setDensePadding] = useState<boolean>(props.defaultDensePadding ?? false);
+  const [showSearch, setShowSearch] = useState(
+    props.defaultShowSearchTextField ?? false,
+  );
+  const [showFilters, setShowFilters] = useState<boolean>(
+    props.defaultShowFilters ?? false,
+  );
+  const [densePadding, setDensePadding] = useState<boolean>(
+    props.defaultDensePadding ?? false,
+  );
   const [currentEditingRow, setCurrentEditingRow] = useState<Row | null>(null);
 
   return (
@@ -83,6 +93,6 @@ export const MaterialReactTableProvider = <D extends {}>(
   );
 };
 
-export const useMaterialReactTable = <D extends {}>(): UseMaterialReactTable<D> =>
+export const useMRT = <D extends {}>(): UseMRT<D> =>
   //@ts-ignore
-  useContext<UseMaterialReactTable<D>>(MaterialReactTableContext);
+  useContext<UseMRT<D>>(MaterialReactTableContext);

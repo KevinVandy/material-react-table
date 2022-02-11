@@ -51,5 +51,5 @@ export const defaultLocalization: MRT_Localization = {
   showHideColumnsButtonTitle: 'Show/Hide columns',
   toggleDensePaddingSwitchTitle: 'Toggle dense padding',
   toggleFilterButtonTitle: 'Toggle filters',
-  toggleSearchButtonTitle: 'Toggle search'
+  toggleSearchButtonTitle: 'Toggle search',
 };

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { FormControlLabel, MenuItem, Switch, Typography } from '@mui/material';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 import { ColumnInstance } from 'react-table';
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const MRT_ShowHideColumnsMenu: FC<Props> = ({ column }) => {
-  const { maxColumnDepth } = useMaterialReactTable();
+  const { maxColumnDepth } = useMRT();
 
   const isMaxDepth = column.depth === maxColumnDepth;
 

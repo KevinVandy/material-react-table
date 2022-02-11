@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Menu, MenuItem as MuiMenuItem, styled } from '@mui/material';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 import { Row } from 'react-table';
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -16,18 +16,33 @@ interface Props {
   handleEdit: () => void;
 }
 
-export const MRT_RowActionMenu: FC<Props> = ({ anchorEl, row, handleEdit, setAnchorEl }) => {
-  const { enableRowEditing, localization, renderRowActionMenuItems, tableInstance } =
-    useMaterialReactTable();
+export const MRT_RowActionMenu: FC<Props> = ({
+  anchorEl,
+  row,
+  handleEdit,
+  setAnchorEl,
+}) => {
+  const {
+    enableRowEditing,
+    localization,
+    renderRowActionMenuItems,
+    tableInstance,
+  } = useMRT();
 
   return (
-    <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={() => setAnchorEl(null)}>
+    <Menu
+      anchorEl={anchorEl}
+      open={!!anchorEl}
+      onClose={() => setAnchorEl(null)}
+    >
       {enableRowEditing && (
         <MenuItem onClick={handleEdit}>
           <EditIcon /> {localization?.rowActionMenuItemEdit}
         </MenuItem>
       )}
-      {renderRowActionMenuItems?.(row, tableInstance, () => setAnchorEl(null)) ?? null}
+      {renderRowActionMenuItems?.(row, tableInstance, () =>
+        setAnchorEl(null),
+      ) ?? null}
     </Menu>
   );
 };

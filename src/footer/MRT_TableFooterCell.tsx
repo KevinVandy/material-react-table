@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import { styled, TableCell as MuiTableCell } from '@mui/material';
 import { HeaderGroup } from 'react-table';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 
 const TableCell = styled(MuiTableCell, {
-  shouldForwardProp: (prop) => prop !== 'densePadding' && prop !== 'enableColumnResizing',
+  shouldForwardProp: (prop) =>
+    prop !== 'densePadding' && prop !== 'enableColumnResizing',
 })<{ densePadding?: boolean; enableColumnResizing?: boolean }>(
   ({ densePadding, enableColumnResizing }) => ({
     fontWeight: 'bold',
@@ -19,7 +20,8 @@ interface Props {
 }
 
 export const MRT_TableFooterCell: FC<Props> = ({ column }) => {
-  const { muiTableFooterCellProps, densePadding, enableColumnResizing } = useMaterialReactTable();
+  const { muiTableFooterCellProps, densePadding, enableColumnResizing } =
+    useMRT();
 
   const isParentHeader = (column?.columns?.length ?? 0) > 0;
 

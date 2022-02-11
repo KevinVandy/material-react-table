@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { IconButton, styled } from '@mui/material';
 import { Row } from 'react-table';
 import MuiExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 import { MRT_TableButtonCell } from '../table/MRT_TableButtonCell';
 
 const TableCell = styled(MRT_TableButtonCell, {
@@ -24,7 +24,7 @@ interface Props {
 }
 
 export const MRT_ExpandButton: FC<Props> = ({ row }) => {
-  const { localization, densePadding, renderDetailPanel } = useMaterialReactTable();
+  const { localization, densePadding, renderDetailPanel } = useMRT();
 
   return (
     <TableCell size="small" densePadding={densePadding} depth={row.depth}>
@@ -36,7 +36,13 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
       >
         <ExpandMoreIcon
           fontSize={row.canExpand || renderDetailPanel ? 'medium' : 'small'}
-          rotation={!row.canExpand && !renderDetailPanel ? -90 : row.isExpanded ? -180 : 0}
+          rotation={
+            !row.canExpand && !renderDetailPanel
+              ? -90
+              : row.isExpanded
+              ? -180
+              : 0
+          }
         />
       </IconButton>
     </TableCell>

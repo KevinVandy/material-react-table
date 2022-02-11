@@ -1,11 +1,12 @@
 import React, { FC, useMemo } from 'react';
 import { TableRow } from '@mui/material';
 import { HeaderGroup } from 'react-table';
-import { MRT_TableHeadCell, StyledTableHeadCell } from './MRT_TableHeadCell';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { MRT_TableHeadCell } from './MRT_TableHeadCell';
+import { useMRT } from '../useMRT';
 import { MRT_SelectAllCheckbox } from '../inputs/MRT_SelectAllCheckbox';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
 import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
+import { MRT_TableHeadCellActions } from './MRT_TableHeadCellActions';
 
 interface Props {
   headerGroup: HeaderGroup;
@@ -14,16 +15,14 @@ interface Props {
 export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
   const {
     anyRowsCanExpand,
-    densePadding,
     disableExpandAll,
     enableRowActions,
     enableSelection,
-    localization,
     muiTableHeadRowProps,
     positionActionsColumn,
     renderDetailPanel,
     tableInstance,
-  } = useMaterialReactTable();
+  } = useMRT();
 
   const isParentHeader = useMemo(
     () => headerGroup.headers.some((h) => (h.columns?.length ?? 0) > 0),
@@ -51,16 +50,16 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         (isParentHeader ? (
           <MRT_TableSpacerCell />
         ) : (
-          <StyledTableHeadCell style={{ textAlign: 'center' }}>
-            {localization?.actionsHeadColumnTitle}
-          </StyledTableHeadCell>
+          <MRT_TableHeadCellActions />
         ))}
       {anyRowsCanExpand || renderDetailPanel ? (
         !disableExpandAll && !isParentHeader ? (
           <MRT_ExpandAllButton />
         ) : (
           <MRT_TableSpacerCell
-            width={`${renderDetailPanel ? 2 : tableInstance.expandedDepth + 0.5}rem`}
+            width={`${
+              renderDetailPanel ? 2 : tableInstance.expandedDepth + 0.5
+            }rem`}
           />
         )
       ) : null}
@@ -79,9 +78,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         (isParentHeader ? (
           <MRT_TableSpacerCell />
         ) : (
-          <StyledTableHeadCell densePadding={densePadding}>
-            {localization?.actionsHeadColumnTitle}
-          </StyledTableHeadCell>
+          <MRT_TableHeadCellActions />
         ))}
     </TableRow>
   );

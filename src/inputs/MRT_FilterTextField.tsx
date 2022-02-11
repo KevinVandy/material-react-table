@@ -3,14 +3,14 @@ import { IconButton, InputAdornment, TextField, Tooltip } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import FilterIcon from '@mui/icons-material/FilterList';
 import { HeaderGroup, useAsyncDebounce } from 'react-table';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 
 interface Props {
   column: HeaderGroup;
 }
 
 export const MRT_FilterTextField: FC<Props> = ({ column }) => {
-  const { localization } = useMaterialReactTable();
+  const { localization } = useMRT();
 
   const [filterValue, setFilterValue] = useState('');
 
@@ -66,7 +66,10 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
         ),
         endAdornment: (
           <InputAdornment position="end">
-            <Tooltip arrow title={localization?.filterTextFieldClearButtonTitle ?? ''}>
+            <Tooltip
+              arrow
+              title={localization?.filterTextFieldClearButtonTitle ?? ''}
+            >
               <span>
                 <IconButton
                   aria-label={localization?.filterTextFieldClearButtonTitle}

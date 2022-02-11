@@ -50,7 +50,9 @@ export const DetailPanelEnabled: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const DetailPanelExpandAllDisabled: Story<MaterialReactTableProps> = () => (
+export const DetailPanelExpandAllDisabled: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable
     columns={[
       {

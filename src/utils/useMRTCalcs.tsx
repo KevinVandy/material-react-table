@@ -11,7 +11,9 @@ interface Props<D extends {}> {
   tableInstance: TableInstance<D>;
 }
 
-export const useMRTCalcs = <D extends {}>({ tableInstance }: Props<D>): UseMRTCalcs => {
+export const useMRTCalcs = <D extends {}>({
+  tableInstance,
+}: Props<D>): UseMRTCalcs => {
   const anyRowsCanExpand = useMemo(
     () => tableInstance.rows.some((row) => row.canExpand),
     [tableInstance.rows],

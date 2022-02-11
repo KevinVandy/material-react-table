@@ -51,9 +51,9 @@ const data = [...Array(100)].map((_) => ({
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const ColumnHidingEnabledDefault: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} />
-);
+export const ColumnHidingEnabledDefault: Story<
+  MaterialReactTableProps
+> = () => <MaterialReactTable columns={columns} data={data} />;
 
 export const ColumnHidingDisabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} disableColumnHiding />

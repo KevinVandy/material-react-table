@@ -2,7 +2,7 @@ import React, { FC, MouseEvent, useState } from 'react';
 import { IconButton as MuiIconButton, styled, Tooltip } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import EditIcon from '@mui/icons-material/Edit';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 import { Row } from 'react-table';
 import { MRT_RowActionMenu } from '../menus/MRT_RowActionMenu';
 import { MRT_EditActionButtons } from './MRT_EditActionButtons';
@@ -33,7 +33,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
     setCurrentEditingRow,
     renderRowActions,
     tableInstance,
-  } = useMaterialReactTable();
+  } = useMRT();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -55,7 +55,11 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
       ) : row.id === currentEditingRow?.id ? (
         <MRT_EditActionButtons row={row} />
       ) : !renderRowActionMenuItems && enableRowEditing ? (
-        <Tooltip placement="right" arrow title={localization?.rowActionMenuItemEdit ?? ''}>
+        <Tooltip
+          placement="right"
+          arrow
+          title={localization?.rowActionMenuItemEdit ?? ''}
+        >
           <IconButton onClick={handleEdit}>
             <EditIcon />
           </IconButton>

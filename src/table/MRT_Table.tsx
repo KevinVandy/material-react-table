@@ -3,12 +3,13 @@ import { Table } from '@mui/material';
 import { MRT_TableHead } from '../head/MRT_TableHead';
 import { MRT_TableBody } from '../body/MRT_TableBody';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 
 interface Props {}
 
 export const MRT_Table: FC<Props> = () => {
-  const { tableInstance, muiTableProps, hideTableHead, hideTableFooter } = useMaterialReactTable();
+  const { tableInstance, muiTableProps, hideTableHead, hideTableFooter } =
+    useMRT();
 
   const tableProps = {
     ...muiTableProps,

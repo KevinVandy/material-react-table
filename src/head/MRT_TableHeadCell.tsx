@@ -7,12 +7,13 @@ import {
   Collapse,
 } from '@mui/material';
 import { HeaderGroup } from 'react-table';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
 import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
 
-export const StyledTableHeadCell = styled(MuiTableCell, {
-  shouldForwardProp: (prop) => prop !== 'densePadding' && prop !== 'enableColumnResizing',
+export const MRT_StyledTableHeadCell = styled(MuiTableCell, {
+  shouldForwardProp: (prop) =>
+    prop !== 'densePadding' && prop !== 'enableColumnResizing',
 })<{ densePadding?: boolean; enableColumnResizing?: boolean }>(
   ({ densePadding, enableColumnResizing }) => ({
     fontWeight: 'bold',
@@ -62,7 +63,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
     muiTableHeadCellProps,
     showFilters,
     tableInstance,
-  } = useMaterialReactTable();
+  } = useMRT();
 
   const isParentHeader = (column?.columns?.length ?? 0) > 0;
 
@@ -88,14 +89,16 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
   };
 
   return (
-    <StyledTableHeadCell
+    <MRT_StyledTableHeadCell
       align={isParentHeader ? 'center' : 'left'}
       densePadding={densePadding}
       enableColumnResizing={enableColumnResizing}
       {...tableCellProps}
     >
       <TableCellWrapper>
-        <TableCellTopContents style={{ justifyContent: isParentHeader ? 'center' : undefined }}>
+        <TableCellTopContents
+          style={{ justifyContent: isParentHeader ? 'center' : undefined }}
+        >
           <CellFlexItem {...column.getSortByToggleProps()}>
             {column.render('Header')}
             {!isParentHeader && column.canSort && (
@@ -132,6 +135,6 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
           </Collapse>
         )}
       </TableCellWrapper>
-    </StyledTableHeadCell>
+    </MRT_StyledTableHeadCell>
   );
 };

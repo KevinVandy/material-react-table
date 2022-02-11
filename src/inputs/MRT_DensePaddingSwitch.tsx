@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { Switch, Tooltip } from '@mui/material';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 
 interface Props {}
 
 export const MRT_DensePaddingSwitch: FC<Props> = () => {
-  const { densePadding, setDensePadding, localization } = useMaterialReactTable();
+  const { densePadding, setDensePadding, localization } = useMRT();
 
   return (
     <Tooltip arrow title={localization?.toggleDensePaddingSwitchTitle ?? ''}>

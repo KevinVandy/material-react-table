@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { IconButton, styled, Tooltip } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 import { Row } from 'react-table';
 
 const EditActionButtonWrappers = styled('div')({
@@ -15,8 +15,12 @@ interface Props {
 }
 
 export const MRT_EditActionButtons: FC<Props> = ({ row }) => {
-  const { localization, setCurrentEditingRow, onRowEditSubmit, currentEditingRow } =
-    useMaterialReactTable();
+  const {
+    localization,
+    setCurrentEditingRow,
+    onRowEditSubmit,
+    currentEditingRow,
+  } = useMRT();
 
   const handleCancel = () => {
     row.values = row.original;
@@ -31,7 +35,10 @@ export const MRT_EditActionButtons: FC<Props> = ({ row }) => {
   return (
     <EditActionButtonWrappers>
       <Tooltip arrow title={localization?.rowActionButtonCancel ?? ''}>
-        <IconButton aria-label={localization?.rowActionButtonCancel} onClick={handleCancel}>
+        <IconButton
+          aria-label={localization?.rowActionButtonCancel}
+          onClick={handleCancel}
+        >
           <CancelIcon />
         </IconButton>
       </Tooltip>

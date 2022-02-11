@@ -14,7 +14,9 @@ export const Layout: FC = ({ children }) => {
     <>
       <TopBar navOpen={navOpen} setNavOpen={setNavOpen} />
       <SideBar navOpen={navOpen} setNavOpen={setNavOpen} />
-      <PageContainer style={{ padding: `80px 32px 800px ${navOpen ? '260px' : '32px'}` }}>
+      <PageContainer
+        style={{ padding: `80px 32px 800px ${navOpen ? '260px' : '32px'}` }}
+      >
         {children}
       </PageContainer>
     </>

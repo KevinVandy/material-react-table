@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Divider, Menu, MenuItem as MuiMenuItem, styled } from '@mui/material';
-import { useMaterialReactTable } from '../useMaterialReactTable';
+import { useMRT } from '../useMRT';
 import { HeaderGroup } from 'react-table';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SortIcon from '@mui/icons-material/Sort';
@@ -19,7 +19,11 @@ interface Props {
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
 }
 
-export const MRT_ColumnActionMenu: FC<Props> = ({ anchorEl, column, setAnchorEl }) => {
+export const MRT_ColumnActionMenu: FC<Props> = ({
+  anchorEl,
+  column,
+  setAnchorEl,
+}) => {
   const {
     disableColumnHiding,
     enableColumnGrouping,
@@ -27,7 +31,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({ anchorEl, column, setAnchorEl 
     localization,
     disableFilters,
     setShowFilters,
-  } = useMaterialReactTable();
+  } = useMRT();
 
   const handleClearSort = () => {
     column.clearSortBy();
@@ -61,7 +65,8 @@ export const MRT_ColumnActionMenu: FC<Props> = ({ anchorEl, column, setAnchorEl 
         document
           .getElementById(
             // @ts-ignore
-            column.muiTableHeadCellFilterTextFieldProps?.id ?? `filter-${column.id}-column`,
+            column.muiTableHeadCellFilterTextFieldProps?.id ??
+              `filter-${column.id}-column`,
           )
           ?.focus(),
       200,
@@ -70,10 +75,18 @@ export const MRT_ColumnActionMenu: FC<Props> = ({ anchorEl, column, setAnchorEl 
   };
 
   return (
-    <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={() => setAnchorEl(null)}>
+    <Menu
+      anchorEl={anchorEl}
+      open={!!anchorEl}
+      onClose={() => setAnchorEl(null)}
+    >
       {!disableSortBy &&
         column.canSort && [
-          <MenuItem key={1} disabled={!column.isSorted} onClick={handleClearSort}>
+          <MenuItem
+            key={1}
+            disabled={!column.isSorted}
+            onClick={handleClearSort}
+          >
             <ClearAllIcon /> {localization?.columnActionMenuItemClearSort}
           </MenuItem>,
           <MenuItem
@@ -82,7 +95,10 @@ export const MRT_ColumnActionMenu: FC<Props> = ({ anchorEl, column, setAnchorEl 
             onClick={handleSortAsc}
           >
             <SortIcon />{' '}
-            {localization?.columnActionMenuItemSortAsc?.replace('{column}', String(column.Header))}
+            {localization?.columnActionMenuItemSortAsc?.replace(
+              '{column}',
+              String(column.Header),
+            )}
           </MenuItem>,
           <MenuItem
             key={3}
@@ -90,7 +106,10 @@ export const MRT_ColumnActionMenu: FC<Props> = ({ anchorEl, column, setAnchorEl 
             onClick={handleSortDesc}
           >
             <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />{' '}
-            {localization?.columnActionMenuItemSortDesc?.replace('{column}', String(column.Header))}
+            {localization?.columnActionMenuItemSortDesc?.replace(
+              '{column}',
+              String(column.Header),
+            )}
           </MenuItem>,
         ]}
       {!disableFilters &&
@@ -98,7 +117,10 @@ export const MRT_ColumnActionMenu: FC<Props> = ({ anchorEl, column, setAnchorEl 
           <Divider key={0} />,
           <MenuItem key={1} onClick={handleFilterByColumn}>
             <FilterIcon />{' '}
-            {localization?.filterTextFieldPlaceholder?.replace('{column}', String(column.Header))}
+            {localization?.filterTextFieldPlaceholder?.replace(
+              '{column}',
+              String(column.Header),
+            )}
           </MenuItem>,
         ]}
       {enableColumnGrouping &&
@@ -107,7 +129,9 @@ export const MRT_ColumnActionMenu: FC<Props> = ({ anchorEl, column, setAnchorEl 
           <MenuItem key={2} onClick={handleGroupByColumn}>
             <DynamicFeedIcon />{' '}
             {localization?.[
-              column.isGrouped ? 'columnActionMenuItemUnGroupBy' : 'columnActionMenuItemGroupBy'
+              column.isGrouped
+                ? 'columnActionMenuItemUnGroupBy'
+                : 'columnActionMenuItemGroupBy'
             ]?.replace('{column}', String(column.Header))}
           </MenuItem>,
         ]}
@@ -115,7 +139,10 @@ export const MRT_ColumnActionMenu: FC<Props> = ({ anchorEl, column, setAnchorEl 
         <Divider key={0} />,
         <MenuItem key={1} onClick={handleHideColumn}>
           <VisibilityOffIcon />{' '}
-          {localization?.columnActionMenuItemHideColumn?.replace('{column}', String(column.Header))}
+          {localization?.columnActionMenuItemHideColumn?.replace(
+            '{column}',
+            String(column.Header),
+          )}
         </MenuItem>,
       ]}
     </Menu>
