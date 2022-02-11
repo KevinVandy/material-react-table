@@ -10,7 +10,6 @@ import {
   TableRowProps,
   TextFieldProps,
   ToolbarProps,
-  TypographyProps,
 } from '@mui/material';
 import {
   Cell,
@@ -87,7 +86,6 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
       | Partial<TablePaginationProps>
       | ((tableInstance: TableInstance<D>) => Partial<TablePaginationProps>);
     muiTableProps?: TableProps;
-    muiTableTitleProps?: TypographyProps;
     muiTableToolbarBottomProps?: ToolbarProps | ((tableInstance: TableInstance<D>) => ToolbarProps);
     muiTableToolbarTopProps?: ToolbarProps | ((tableInstance: TableInstance<D>) => ToolbarProps);
     onCellClick?: (event: MouseEvent<HTMLTableCellElement>, cell: Cell<D>) => void;
@@ -108,7 +106,7 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
       closeMenu: () => void,
     ) => ReactNode[];
     renderRowActions?: (row: Row<D>, tableInstance: TableInstance<D>) => ReactNode;
-    title?: string | ReactNode;
+    renderToolbarActions?: (tableInstance: TableInstance<D>) => ReactNode;
   };
 
 export default <D extends {}>({

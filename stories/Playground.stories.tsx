@@ -73,6 +73,7 @@ MinimumFeatures.args = {
   manualPagination: true,
   hideToolbarTop: true,
   hideToolbarBottom: true,
+  disableSortBy: true,
   disableColumnActions: true,
 } as MaterialReactTableProps;
 
@@ -132,5 +133,4 @@ MaximumFeatures.args = {
   enableSelection: true,
   enableRowActions: true,
   enableRowEditing: true,
-  title: 'Kitchen Sink',
 } as MaterialReactTableProps;

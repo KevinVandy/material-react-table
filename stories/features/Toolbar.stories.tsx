@@ -2,6 +2,8 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, { MaterialReactTableProps } from '../../src';
 import faker from '@faker-js/faker';
+import { Button, IconButton, Tooltip } from '@mui/material';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const meta: Meta = {
   title: 'Features/Toolbar Examples',
@@ -46,7 +48,7 @@ const data = [...Array(5)].map((_) => ({
 }));
 
 export const ToolbarEnabledDefault: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} title="My Table" />
+  <MaterialReactTable columns={columns} data={data} />
 );
 
 export const TopToolbarHidden: Story<MaterialReactTableProps> = () => (
@@ -66,19 +68,83 @@ export const hideToolbarActions: Story<MaterialReactTableProps> = () => (
 );
 
 export const toolbarActionsOnBottom: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} positionToolbarActions="bottom" />
+);
+
+export const CustomToolbarActions: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    title="My People Table"
-    positionToolbarActions="bottom"
+    renderToolbarActions={(tableInstance) => {
+      const handleCreateNewUser = () => {
+        prompt('Create new user modal');
+      };
+
+      return (
+        <div>
+          <Tooltip arrow title="Create New User">
+            <IconButton onClick={handleCreateNewUser}>
+              <AddBoxIcon />
+            </IconButton>
+          </Tooltip>
+        </div>
+      );
+    }}
   />
 );
 
-export const ToolbarWithStyledTitle: Story<MaterialReactTableProps> = () => (
+export const CustomToolbarSelectionActions: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    title="My People Table"
-    muiTableTitleProps={{ variant: 'h4' }}
+    enableSelection
+    renderToolbarActions={(tableInstance) => {
+      const handleDeactivate = () => {
+        tableInstance.selectedFlatRows.map((row) => {
+          alert('deactivating ' + row.original.firstName);
+        });
+      };
+
+      const handleActivate = () => {
+        tableInstance.selectedFlatRows.map((row) => {
+          alert('activating ' + row.original.firstName);
+        });
+      };
+
+      const handleContact = () => {
+        tableInstance.selectedFlatRows.map((row) => {
+          alert('contact ' + row.original.firstName);
+        });
+      };
+
+      return (
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <Button
+            color="error"
+            disabled={tableInstance.selectedFlatRows.length === 0}
+            onClick={handleDeactivate}
+            variant="contained"
+          >
+            Deactivate
+          </Button>
+          <Button
+            color="success"
+            disabled={tableInstance.selectedFlatRows.length === 0}
+            onClick={handleActivate}
+            variant="contained"
+          >
+            Activate
+          </Button>
+          <Button
+            color="info"
+            disabled={tableInstance.selectedFlatRows.length === 0}
+            onClick={handleContact}
+            variant="contained"
+          >
+            Contact
+          </Button>
+        </div>
+      );
+    }}
   />
 );

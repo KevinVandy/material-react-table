@@ -5,7 +5,6 @@ import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarButtons } from './MRT_ToolbarButtons';
 
 const Toolbar = styled(MuiToolbar)({
-  padding: 0,
   display: 'flex',
   justifyContent: 'space-between',
 });
@@ -28,7 +27,7 @@ export const MRT_ToolbarBottom: FC<Props> = () => {
       : muiTableToolbarBottomProps;
 
   return (
-    <Toolbar variant="dense" {...toolbarProps}>
+    <Toolbar style={{ padding: 0 }} variant="dense" {...toolbarProps}>
       {!hideToolbarActions && positionToolbarActions === 'bottom' ? (
         <MRT_ToolbarButtons />
       ) : (

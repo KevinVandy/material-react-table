@@ -27,6 +27,7 @@ export const MRT_TablePagination: FC<Props> = () => {
       rowsPerPage={tableInstance.state.pageSize}
       showFirstButton={tableInstance.rows.length / tableInstance.state.pageSize > 2}
       showLastButton={tableInstance.rows.length / tableInstance.state.pageSize > 2}
+      style={{ padding: 0 }}
       {...tablePaginationProps}
     />
   );

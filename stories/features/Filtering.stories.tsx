@@ -116,6 +116,10 @@ export const CustomFilterFunction: Story<MaterialReactTableProps> = () => (
       {
         Header: 'Gender',
         accessor: 'gender' as const,
+        filter: (rows, _columnIds, filterValue) =>
+          rows.filter((row) =>
+            row.values['gender'].toLowerCase().startsWith(filterValue.toLowerCase()),
+          ),
       },
       {
         Header: 'Address',

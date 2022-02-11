@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { styled, Toolbar as MuiToolbar, Typography } from '@mui/material';
+import { styled, Toolbar as MuiToolbar } from '@mui/material';
 import { MRT_SearchTextField } from '../inputs/MRT_SearchTextField';
 import { useMaterialReactTable } from '../useMaterialReactTable';
 import { MRT_ToolbarButtons } from './MRT_ToolbarButtons';
@@ -7,6 +7,7 @@ import { MRT_TablePagination } from './MRT_TablePagination';
 
 const Toolbar = styled(MuiToolbar)({
   display: 'grid',
+  padding: '0.5rem !important',
 });
 
 const ToolbarTopRow = styled('div')({
@@ -27,12 +28,11 @@ export const MRT_ToolbarTop: FC<Props> = () => {
     disableGlobalFilter,
     hideToolbarActions,
     manualPagination,
-    muiTableTitleProps,
     muiTableToolbarTopProps,
     positionPagination,
     positionToolbarActions,
+    renderToolbarActions,
     tableInstance,
-    title,
   } = useMaterialReactTable();
 
   const toolbarProps =
@@ -43,13 +43,7 @@ export const MRT_ToolbarTop: FC<Props> = () => {
   return (
     <Toolbar variant="dense" {...toolbarProps}>
       <ToolbarTopRow>
-        {title ? (
-          <Typography variant="h5" {...muiTableTitleProps}>
-            {title}
-          </Typography>
-        ) : (
-          <span />
-        )}
+        {renderToolbarActions?.(tableInstance) ?? <span />}
         <ToolbarActionsContainer>
           {!disableGlobalFilter && <MRT_SearchTextField />}
           {!hideToolbarActions && positionToolbarActions === 'top' && <MRT_ToolbarButtons />}
