@@ -26,10 +26,10 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
 }) => {
   const {
     disableColumnHiding,
-    enableColumnGrouping,
-    disableSortBy,
-    localization,
     disableFilters,
+    disableSortBy,
+    enableColumnGrouping,
+    localization,
     setShowFilters,
   } = useMRT();
 

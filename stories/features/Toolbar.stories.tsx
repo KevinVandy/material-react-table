@@ -9,7 +9,7 @@ const meta: Meta = {
   title: 'Features/Toolbar Examples',
   parameters: {
     status: {
-      type: 'alpha',
+      type: 'beta',
     },
   },
 };

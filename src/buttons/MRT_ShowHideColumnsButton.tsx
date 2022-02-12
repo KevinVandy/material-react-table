@@ -1,8 +1,21 @@
 import React, { FC, MouseEvent, useState } from 'react';
-import { IconButton, Menu, Tooltip } from '@mui/material';
+import {
+  Button,
+  IconButton,
+  Menu,
+  Tooltip,
+  styled,
+  Divider,
+} from '@mui/material';
 import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import { useMRT } from '../useMRT';
 import { MRT_ShowHideColumnsMenu } from '../menus/MRT_ShowHideColumnsMenu';
+
+const MenuButtons = styled('div')({
+  display: 'flex',
+  justifyContent: 'space-between',
+  padding: '0 0.5rem 0.5rem 0.5rem',
+});
 
 interface Props {}
 
@@ -31,6 +44,24 @@ export const MRT_ShowHideColumnsButton: FC<Props> = () => {
         open={!!anchorEl}
         onClose={() => setAnchorEl(null)}
       >
+        <MenuButtons>
+          <Button
+            disabled={
+              !tableInstance.getToggleHideAllColumnsProps().checked &&
+              !tableInstance.getToggleHideAllColumnsProps().indeterminate
+            }
+            onClick={() => tableInstance.toggleHideAllColumns(true)}
+          >
+            {localization?.columnShowHideMenuHideAll}
+          </Button>
+          <Button
+            disabled={tableInstance.getToggleHideAllColumnsProps().checked}
+            onClick={() => tableInstance.toggleHideAllColumns(false)}
+          >
+            {localization?.columnShowHideMenuShowAll}
+          </Button>
+        </MenuButtons>
+        <Divider />
         {tableInstance.columns.map((column, index) => (
           <MRT_ShowHideColumnsMenu
             key={`${index}-${column.id}`}

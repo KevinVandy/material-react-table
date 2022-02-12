@@ -7,7 +7,7 @@ const meta: Meta = {
   title: 'Features/Pagination Examples',
   parameters: {
     status: {
-      type: 'stable',
+      type: 'beta',
     },
   },
 };

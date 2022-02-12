@@ -7,6 +7,8 @@ export interface MRT_Localization {
   columnActionMenuItemSortAsc: string;
   columnActionMenuItemSortDesc: string;
   columnActionMenuItemUnGroupBy: string;
+  columnShowHideMenuHideAll: string;
+  columnShowHideMenuShowAll: string;
   expandAllButtonTitle: string;
   expandButtonTitle: string;
   filterTextFieldClearButtonTitle: string;
@@ -35,6 +37,8 @@ export const defaultLocalization: MRT_Localization = {
   columnActionMenuItemSortAsc: 'Sort by {column} ascending',
   columnActionMenuItemSortDesc: 'Sort by {column} descending',
   columnActionMenuItemUnGroupBy: 'Ungroup by {column}',
+  columnShowHideMenuHideAll: 'Hide all',
+  columnShowHideMenuShowAll: 'Show all',
   expandAllButtonTitle: 'Expand all',
   expandButtonTitle: 'Expand',
   filterTextFieldClearButtonTitle: 'Clear filter',
@@ -43,11 +47,11 @@ export const defaultLocalization: MRT_Localization = {
   rowActionButtonSave: 'Save',
   rowActionMenuButtonTitle: 'Row Actions',
   rowActionMenuItemEdit: 'Edit',
-  selectCheckboxTitle: 'Select row',
   rowActionsColumnTitle: 'Actions',
   searchTextFieldClearButtonTitle: 'Clear search',
   searchTextFieldPlaceholder: 'Search',
   selectAllCheckboxTitle: 'Select all',
+  selectCheckboxTitle: 'Select row',
   showHideColumnsButtonTitle: 'Show/Hide columns',
   toggleDensePaddingSwitchTitle: 'Toggle dense padding',
   toggleFilterButtonTitle: 'Toggle filters',
