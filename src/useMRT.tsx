@@ -3,6 +3,7 @@ import React, {
   createContext,
   PropsWithChildren,
   useContext,
+  useMemo,
   useState,
 } from 'react';
 import {
@@ -21,15 +22,16 @@ import {
   useTable,
 } from 'react-table';
 import { MaterialReactTableProps } from './MaterialReactTable';
-import { UseMRTCalcs, useMRTCalcs } from './utils/useMRTCalcs';
 
-export interface UseMRT<D extends {}>
-  extends MaterialReactTableProps<D>,
-    UseMRTCalcs {
+export interface UseMRT<D extends {} = {}> extends MaterialReactTableProps<D> {
+  anyRowsCanExpand: boolean;
+  anyRowsExpanded: boolean;
   currentEditingRow: Row<D> | null;
   densePadding: boolean;
+  fullScreen: boolean;
   setCurrentEditingRow: (currentRowEditingId: Row<D> | null) => void;
   setDensePadding: (densePadding: boolean) => void;
+  setFullScreen: (fullScreen: boolean) => void;
   setShowFilters: (showFilters: boolean) => void;
   setShowSearch: (showSearch: boolean) => void;
   showFilters: boolean;
@@ -58,33 +60,45 @@ export const MaterialReactTableProvider = <D extends {}>(
 
   const tableInstance = useTable<D>(props, ...hooks);
 
-  const mrtCalcs = useMRTCalcs({ tableInstance });
-
+  const anyRowsCanExpand = useMemo(
+    () => tableInstance.rows.some((row) => row.canExpand),
+    [tableInstance.rows],
+  );
+  const anyRowsExpanded = useMemo(
+    () => tableInstance.rows.some((row) => row.isExpanded),
+    [tableInstance.rows],
+  );
+  const [currentEditingRow, setCurrentEditingRow] = useState<Row | null>(null);
+  const [densePadding, setDensePadding] = useState(
+    props.defaultDensePadding ?? false,
+  );
+  const [fullScreen, setFullScreen] = useState(
+    props.defaultFullScreen ?? false,
+  );
+  const [showFilters, setShowFilters] = useState(
+    props.defaultShowFilters ?? false,
+  );
   const [showSearch, setShowSearch] = useState(
     props.defaultShowSearchTextField ?? false,
   );
-  const [showFilters, setShowFilters] = useState<boolean>(
-    props.defaultShowFilters ?? false,
-  );
-  const [densePadding, setDensePadding] = useState<boolean>(
-    props.defaultDensePadding ?? false,
-  );
-  const [currentEditingRow, setCurrentEditingRow] = useState<Row | null>(null);
 
   return (
     <MaterialReactTableContext.Provider
       value={{
-        ...mrtCalcs,
         ...props,
+        anyRowsCanExpand,
+        anyRowsExpanded,
         currentEditingRow,
         densePadding,
         setCurrentEditingRow,
         setDensePadding,
+        fullScreen,
+        setFullScreen,
         setShowFilters,
         setShowSearch,
         showFilters,
         showSearch,
-        // @ts-ignore
+        //@ts-ignore
         tableInstance,
       }}
     >

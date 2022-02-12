@@ -168,13 +168,15 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
             onChange={(e) => column.setFilter(e.target.value || undefined)}
             select
             value={column.filterValue ?? ''}
+            margin="dense"
             placeholder="Filter"
             variant="standard"
             fullWidth
           >
-            <MenuItem value=""></MenuItem>
-            <MenuItem value="Male">M</MenuItem>
-            <MenuItem value="Female">F</MenuItem>
+            <MenuItem value={null}>All</MenuItem>
+            <MenuItem value="Male">Male</MenuItem>
+            <MenuItem value="Female">Female</MenuItem>
+            <MenuItem value="Other">Other</MenuItem>
           </TextField>
         ),
         filter: (rows, _columnIds, filterValue) =>

@@ -25,6 +25,7 @@ export interface MRT_Localization {
   showHideColumnsButtonTitle: string;
   toggleDensePaddingSwitchTitle: string;
   toggleFilterButtonTitle: string;
+  toggleFullScreenButtonTitle: string;
   toggleSearchButtonTitle: string;
 }
 
@@ -55,5 +56,6 @@ export const defaultLocalization: MRT_Localization = {
   showHideColumnsButtonTitle: 'Show/Hide columns',
   toggleDensePaddingSwitchTitle: 'Toggle dense padding',
   toggleFilterButtonTitle: 'Toggle filters',
+  toggleFullScreenButtonTitle: 'Toggle full screen',
   toggleSearchButtonTitle: 'Toggle search',
 };

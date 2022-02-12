@@ -7,6 +7,7 @@ import { MRT_ToolbarButtons } from './MRT_ToolbarButtons';
 const Toolbar = styled(MuiToolbar)({
   display: 'flex',
   justifyContent: 'space-between',
+  padding: '0 0.5rem !important',
 });
 
 interface Props {}
@@ -27,7 +28,7 @@ export const MRT_ToolbarBottom: FC<Props> = () => {
       : muiTableToolbarBottomProps;
 
   return (
-    <Toolbar style={{ padding: 0 }} variant="dense" {...toolbarProps}>
+    <Toolbar variant="dense" {...toolbarProps}>
       {!hideToolbarActions && positionToolbarActions === 'bottom' ? (
         <MRT_ToolbarButtons />
       ) : (

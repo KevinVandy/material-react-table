@@ -47,12 +47,14 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
   UseSortByOptions<D> & {
     columns: (Column<D> & MRT_ColumnInterface)[];
     defaultDensePadding?: boolean;
+    defaultFullScreen?: boolean;
     defaultShowFilters?: boolean;
     defaultShowSearchTextField?: boolean;
     disableColumnActions?: boolean;
     disableColumnHiding?: boolean;
     disableDensePaddingToggle?: boolean;
     disableExpandAll?: boolean;
+    disableFullScreenToggle?: boolean;
     disableSelectAll?: boolean;
     disableSubRowTree?: boolean;
     enableColumnGrouping?: boolean;

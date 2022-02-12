@@ -5,6 +5,7 @@ import { MRT_ShowHideColumnsButton } from '../buttons/MRT_ShowHideColumnsButton'
 import { useMRT } from '../useMRT';
 import { MRT_DensePaddingSwitch } from '../inputs/MRT_DensePaddingSwitch';
 import { MRT_ToggleSearchButton } from '../buttons/MRT_ToggleSearchButton';
+import { MRT_FullScreenToggleButton } from '../buttons/MRT_FullScreenToggleButton';
 
 const ToolbarButtonsContainer = styled('div')({
   display: 'flex',
@@ -20,6 +21,7 @@ export const MRT_ToolbarButtons: FC<Props> = () => {
     disableColumnHiding,
     disableDensePaddingToggle,
     disableGlobalFilter,
+    disableFullScreenToggle,
   } = useMRT();
 
   return (
@@ -28,6 +30,7 @@ export const MRT_ToolbarButtons: FC<Props> = () => {
       {!disableFilters && <MRT_ToggleFiltersButton />}
       {!disableColumnHiding && <MRT_ShowHideColumnsButton />}
       {!disableDensePaddingToggle && <MRT_DensePaddingSwitch />}
+      {!disableFullScreenToggle && <MRT_FullScreenToggleButton />}
     </ToolbarButtonsContainer>
   );
 };

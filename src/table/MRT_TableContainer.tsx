@@ -1,16 +1,30 @@
 import React, { FC } from 'react';
 import {
-  alpha,
   CircularProgress,
   LinearProgress,
   Paper,
+  TableContainer as MuiTableContainer,
+  alpha,
   styled,
-  TableContainer,
 } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_Table } from './MRT_Table';
 import { MRT_ToolbarTop } from '../toolbar/MRT_ToolbarTop';
 import { MRT_ToolbarBottom } from '../toolbar/MRT_ToolbarBottom';
+
+const TableContainer = styled(MuiTableContainer, {
+  shouldForwardProp: (prop) => prop !== 'fullScreen',
+})<{ fullScreen?: boolean; component?: any }>(({ fullScreen }) => ({
+  bottom: fullScreen ? '0' : undefined,
+  height: fullScreen ? '100%' : undefined,
+  left: fullScreen ? '0' : undefined,
+  margin: fullScreen ? '0' : undefined,
+  position: fullScreen ? 'absolute' : undefined,
+  right: fullScreen ? '0' : undefined,
+  top: fullScreen ? '0' : undefined,
+  transition: 'all 0.2s ease-in-out',
+  width: fullScreen ? '100vw' : undefined,
+}));
 
 const CircularProgressWrapper = styled('div')(({ theme }) => ({
   alignItems: 'center',
@@ -30,12 +44,17 @@ export const MRT_TableContainer: FC<Props> = () => {
     muiTableContainerProps,
     hideToolbarTop,
     hideToolbarBottom,
+    fullScreen,
     isLoading,
     isFetching,
   } = useMRT();
 
   return (
-    <TableContainer component={Paper} {...muiTableContainerProps}>
+    <TableContainer
+      component={Paper}
+      fullScreen={fullScreen}
+      {...muiTableContainerProps}
+    >
       {!hideToolbarTop && <MRT_ToolbarTop />}
       {isFetching && <LinearProgress />}
       {isLoading && (

@@ -7,7 +7,7 @@ import { MRT_TablePagination } from './MRT_TablePagination';
 
 const Toolbar = styled(MuiToolbar)({
   display: 'grid',
-  padding: '0.5rem !important',
+  padding: '0 0.5rem !important',
 });
 
 const ToolbarTopRow = styled('div')({
