@@ -46,7 +46,6 @@ export const MaterialReactTableProvider = <D extends {}>(
   props: PropsWithChildren<MaterialReactTableProps<D>>,
 ) => {
   const hooks: PluginHook<D>[] = [
-    useResizeColumns,
     useFilters,
     useGlobalFilter,
     useGroupBy,
@@ -56,7 +55,8 @@ export const MaterialReactTableProvider = <D extends {}>(
     useRowSelect,
   ];
 
-  if (props.enableColumnResizing) hooks.unshift(useFlexLayout);
+  if (props.enableColumnResizing)
+    hooks.unshift(useResizeColumns, useFlexLayout);
 
   const tableInstance = useTable<D>(props, ...hooks);
 

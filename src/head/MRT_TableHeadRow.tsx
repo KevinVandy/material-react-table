@@ -1,7 +1,10 @@
 import React, { FC, useMemo } from 'react';
 import { TableRow } from '@mui/material';
 import { HeaderGroup } from 'react-table';
-import { MRT_TableHeadCell } from './MRT_TableHeadCell';
+import {
+  MRT_StyledTableHeadCell,
+  MRT_TableHeadCell,
+} from './MRT_TableHeadCell';
 import { useMRT } from '../useMRT';
 import { MRT_SelectAllCheckbox } from '../inputs/MRT_SelectAllCheckbox';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
@@ -16,6 +19,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
   const {
     anyRowsCanExpand,
     disableExpandAll,
+    enableRowNumbers,
     enableRowActions,
     enableSelection,
     muiTableHeadRowProps,
@@ -45,6 +49,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
 
   return (
     <TableRow {...tableRowProps}>
+      {enableRowNumbers && <MRT_StyledTableHeadCell>#</MRT_StyledTableHeadCell>}
       {enableRowActions &&
         positionActionsColumn === 'first' &&
         (isParentHeader ? (

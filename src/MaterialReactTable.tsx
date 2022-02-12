@@ -57,6 +57,7 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
     disableFullScreenToggle?: boolean;
     disableSelectAll?: boolean;
     disableSubRowTree?: boolean;
+    enableRowNumbers?: boolean;
     enableColumnGrouping?: boolean;
     enableColumnResizing?: boolean;
     enableRowActions?: boolean;

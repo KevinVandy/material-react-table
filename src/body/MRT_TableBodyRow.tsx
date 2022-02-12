@@ -1,7 +1,10 @@
 import React, { FC, MouseEvent } from 'react';
 import { alpha, styled, TableRow as MuiTableRow } from '@mui/material';
 import { Row } from 'react-table';
-import { MRT_TableBodyCell } from './MRT_TableBodyCell';
+import {
+  MRT_StyledTableBodyCell,
+  MRT_TableBodyCell,
+} from './MRT_TableBodyCell';
 import { useMRT } from '../useMRT';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
@@ -24,6 +27,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
   const {
     anyRowsCanExpand,
     enableRowActions,
+    enableRowNumbers,
     enableSelection,
     muiTableBodyRowProps,
     onRowClick,
@@ -55,6 +59,9 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         }
         {...tableRowProps}
       >
+        {enableRowNumbers && (
+          <MRT_StyledTableBodyCell>{row.index + 1}</MRT_StyledTableBodyCell>
+        )}
         {enableRowActions && positionActionsColumn === 'first' && (
           <MRT_ToggleRowActionMenuButton row={row} />
         )}

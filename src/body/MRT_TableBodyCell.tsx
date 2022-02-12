@@ -4,7 +4,7 @@ import { Cell } from 'react-table';
 import { useMRT } from '../useMRT';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 
-const TableCell = styled(MuiTableCell, {
+export const MRT_StyledTableBodyCell = styled(MuiTableCell, {
   shouldForwardProp: (prop) => prop !== 'densePadding',
 })<{ densePadding?: boolean }>(({ densePadding }) => ({
   padding: densePadding ? '0.5rem' : '1rem',
@@ -46,7 +46,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
   };
 
   return (
-    <TableCell
+    <MRT_StyledTableBodyCell
       densePadding={densePadding}
       onClick={(event: MouseEvent<HTMLTableCellElement>) =>
         onCellClick?.(event, cell)
@@ -64,7 +64,6 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
       ) : (
         cell.render('Cell')
       )}
-      {}
-    </TableCell>
+    </MRT_StyledTableBodyCell>
   );
 };
