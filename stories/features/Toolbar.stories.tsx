@@ -4,6 +4,7 @@ import MaterialReactTable, { MaterialReactTableProps } from '../../src';
 import faker from '@faker-js/faker';
 import { Button, IconButton, Tooltip } from '@mui/material';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const meta: Meta = {
   title: 'Features/Toolbar Examples',
@@ -84,7 +85,7 @@ export const CustomToolbarActions: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    renderToolbarActions={(tableInstance) => {
+    renderToolbarCustomActions={(tableInstance) => {
       const handleCreateNewUser = () => {
         prompt('Create new user modal');
       };
@@ -109,7 +110,7 @@ export const CustomToolbarSelectionActions: Story<
     columns={columns}
     data={data}
     enableSelection
-    renderToolbarActions={(tableInstance) => {
+    renderToolbarCustomActions={(tableInstance) => {
       const handleDeactivate = () => {
         tableInstance.selectedFlatRows.map((row) => {
           alert('deactivating ' + row.original.firstName);
@@ -154,6 +155,43 @@ export const CustomToolbarSelectionActions: Story<
           >
             Contact
           </Button>
+        </div>
+      );
+    }}
+  />
+);
+
+export const ToolbarAlertBannerBottom: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableSelection
+    positionToolbarAlertBanner="bottom"
+    renderToolbarCustomActions={(tableInstance) => {
+      const handleCreateNewUser = () => {
+        prompt('Create new user modal');
+      };
+      const handleRemoveUsers = () => {
+        confirm('Are you sure you want to remove the selected users?');
+      };
+
+      return (
+        <div>
+          <Tooltip arrow title="Create New User">
+            <IconButton onClick={handleCreateNewUser}>
+              <AddBoxIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip arrow title="Remove Users">
+            <span>
+              <IconButton
+                disabled={tableInstance.selectedFlatRows.length === 0}
+                onClick={handleRemoveUsers}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </span>
+          </Tooltip>
         </div>
       );
     }}

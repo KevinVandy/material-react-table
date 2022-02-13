@@ -19,6 +19,7 @@ export const MRT_StyledTableHeadCell = styled(MuiTableCell, {
     fontWeight: 'bold',
     height: '100%',
     padding: densePadding ? '0.5rem' : '1rem',
+    paddingTop: densePadding ? '0.75rem' : '1.25rem',
     transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
     verticalAlign: 'text-top',
   }),

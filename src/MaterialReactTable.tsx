@@ -1,5 +1,6 @@
 import React, { ChangeEvent, MouseEvent, ReactNode } from 'react';
 import {
+  AlertProps,
   TableBodyProps,
   TableCellProps,
   TableContainerProps,
@@ -105,6 +106,9 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
       | Partial<TablePaginationProps>
       | ((tableInstance: TableInstance<D>) => Partial<TablePaginationProps>);
     muiTableProps?: TableProps;
+    muiTableToolbarAlertBannerProps?:
+      | AlertProps
+      | ((tableInstance: TableInstance<D>) => AlertProps);
     muiTableToolbarBottomProps?:
       | ToolbarProps
       | ((tableInstance: TableInstance<D>) => ToolbarProps);
@@ -135,6 +139,7 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
     positionActionsColumn?: 'first' | 'last';
     positionPagination?: 'bottom' | 'top' | 'both';
     positionToolbarActions?: 'bottom' | 'top';
+    positionToolbarAlertBanner?: 'bottom' | 'top';
     renderDetailPanel?: (row: Row<D>) => ReactNode;
     renderRowActionMenuItems?: (
       rowData: Row<D>,
@@ -145,7 +150,7 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
       row: Row<D>,
       tableInstance: TableInstance<D>,
     ) => ReactNode;
-    renderToolbarActions?: (tableInstance: TableInstance<D>) => ReactNode;
+    renderToolbarCustomActions?: (tableInstance: TableInstance<D>) => ReactNode;
   };
 
 export default <D extends {}>({
@@ -154,14 +159,16 @@ export default <D extends {}>({
   positionActionsColumn = 'first',
   positionPagination = 'bottom',
   positionToolbarActions = 'top',
+  positionToolbarAlertBanner = 'top',
   ...rest
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
     defaultColumn={defaultColumn}
     localization={{ ...defaultLocalization, ...localization }}
-    positionPagination={positionPagination}
     positionActionsColumn={positionActionsColumn}
+    positionPagination={positionPagination}
     positionToolbarActions={positionToolbarActions}
+    positionToolbarAlertBanner={positionToolbarAlertBanner}
     {...rest}
   >
     <MRT_TableContainer />

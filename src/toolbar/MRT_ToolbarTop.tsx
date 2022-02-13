@@ -4,6 +4,7 @@ import { MRT_SearchTextField } from '../inputs/MRT_SearchTextField';
 import { useMRT } from '../useMRT';
 import { MRT_ToolbarButtons } from './MRT_ToolbarButtons';
 import { MRT_TablePagination } from './MRT_TablePagination';
+import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 
 const Toolbar = styled(MuiToolbar)({
   display: 'grid',
@@ -19,6 +20,8 @@ const ToolbarTopRow = styled('div')({
 const ToolbarActionsContainer = styled('div')({
   display: 'flex',
   gap: '0.5rem',
+  position: 'relative',
+  zIndex: 3,
 });
 
 interface Props {}
@@ -31,7 +34,8 @@ export const MRT_ToolbarTop: FC<Props> = () => {
     muiTableToolbarTopProps,
     positionPagination,
     positionToolbarActions,
-    renderToolbarActions,
+    positionToolbarAlertBanner,
+    renderToolbarCustomActions,
     tableInstance,
   } = useMRT();
 
@@ -42,8 +46,9 @@ export const MRT_ToolbarTop: FC<Props> = () => {
 
   return (
     <Toolbar variant="dense" {...toolbarProps}>
+      {positionToolbarAlertBanner === 'top' && <MRT_ToolbarAlertBanner />}
       <ToolbarTopRow>
-        {renderToolbarActions?.(tableInstance) ?? <span />}
+        {renderToolbarCustomActions?.(tableInstance) ?? <span />}
         <ToolbarActionsContainer>
           {!disableGlobalFilter && <MRT_SearchTextField />}
           {!hideToolbarActions && positionToolbarActions === 'top' && (

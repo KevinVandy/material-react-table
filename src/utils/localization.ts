@@ -27,6 +27,9 @@ export interface MRT_Localization {
   toggleFilterButtonTitle: string;
   toggleFullScreenButtonTitle: string;
   toggleSearchButtonTitle: string;
+  toolbarAlertSelectionMessage: string;
+  toolbarAlertGroupedByMessage: string;
+  toolbarAlertGroupedThenByMessage: string;
 }
 
 export const defaultLocalization: MRT_Localization = {
@@ -58,4 +61,7 @@ export const defaultLocalization: MRT_Localization = {
   toggleFilterButtonTitle: 'Toggle filters',
   toggleFullScreenButtonTitle: 'Toggle full screen',
   toggleSearchButtonTitle: 'Toggle search',
+  toolbarAlertSelectionMessage: '{selectedCount} of {rowCount} row(s) selected',
+  toolbarAlertGroupedByMessage: 'Grouped by ',
+  toolbarAlertGroupedThenByMessage: ', then by ',
 };
