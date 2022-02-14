@@ -49,7 +49,12 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
 
   return (
     <TableRow {...tableRowProps}>
-      {enableRowNumbers && <MRT_StyledTableHeadCell>#</MRT_StyledTableHeadCell>}
+      {enableRowNumbers &&
+        (isParentHeader ? (
+          <MRT_TableSpacerCell />
+        ) : (
+          <MRT_StyledTableHeadCell>#</MRT_StyledTableHeadCell>
+        ))}
       {enableRowActions &&
         positionActionsColumn === 'first' &&
         (isParentHeader ? (

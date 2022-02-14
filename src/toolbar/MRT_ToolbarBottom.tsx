@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { styled, Toolbar as MuiToolbar } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_TablePagination } from './MRT_TablePagination';
-import { MRT_ToolbarButtons } from './MRT_ToolbarButtons';
+import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 
 const Toolbar = styled(MuiToolbar)({
@@ -33,7 +33,7 @@ export const MRT_ToolbarBottom: FC<Props> = () => {
   return (
     <Toolbar variant="dense" {...toolbarProps}>
       {!hideToolbarActions && positionToolbarActions === 'bottom' ? (
-        <MRT_ToolbarButtons />
+        <MRT_ToolbarInternalButtons />
       ) : (
         <span />
       )}

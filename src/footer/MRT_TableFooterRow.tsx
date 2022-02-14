@@ -16,6 +16,7 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
     anyRowsCanExpand,
     enableSelection,
     enableRowActions,
+    enableRowNumbers,
     positionActionsColumn,
     tableInstance,
     muiTableFooterRowProps,
@@ -40,6 +41,7 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
 
   return (
     <TableRow {...tableRowProps}>
+      {enableRowNumbers && <MRT_TableSpacerCell />}
       {enableRowActions && positionActionsColumn === 'first' && (
         <MRT_TableSpacerCell />
       )}

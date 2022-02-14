@@ -15,7 +15,7 @@ const ToolbarButtonsContainer = styled('div')({
 
 interface Props {}
 
-export const MRT_ToolbarButtons: FC<Props> = () => {
+export const MRT_ToolbarInternalButtons: FC<Props> = () => {
   const {
     disableFilters,
     disableColumnHiding,

@@ -21,7 +21,7 @@ const Alert = styled(MuiAlert, {
     position: displayAbsolute ? 'absolute' : 'relative',
     right: 0,
     top: 0,
-    width: '100%',
+    width: `calc(100% - ${displayAbsolute ? '2.5rem' : '1.5rem'})`,
     zIndex: 2,
   }),
 );
@@ -64,7 +64,7 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
             {index > 0 ? localization?.toolbarAlertGroupedThenByMessage : ''}
             <Chip
               color="secondary"
-              key={columnId}
+              key={`${index}-${columnId}`}
               label={
                 tableInstance.allColumns.find(
                   (column) => column.id === columnId,

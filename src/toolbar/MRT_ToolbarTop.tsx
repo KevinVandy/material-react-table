@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { styled, Toolbar as MuiToolbar } from '@mui/material';
 import { MRT_SearchTextField } from '../inputs/MRT_SearchTextField';
 import { useMRT } from '../useMRT';
-import { MRT_ToolbarButtons } from './MRT_ToolbarButtons';
+import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 
@@ -12,7 +12,7 @@ const Toolbar = styled(MuiToolbar)({
 });
 
 const ToolbarTopRow = styled('div')({
-  padding: '0.5rem',
+  padding: '1rem 0.5rem',
   display: 'flex',
   justifyContent: 'space-between',
 });
@@ -52,7 +52,7 @@ export const MRT_ToolbarTop: FC<Props> = () => {
         <ToolbarActionsContainer>
           {!disableGlobalFilter && <MRT_SearchTextField />}
           {!hideToolbarActions && positionToolbarActions === 'top' && (
-            <MRT_ToolbarButtons />
+            <MRT_ToolbarInternalButtons />
           )}
         </ToolbarActionsContainer>
       </ToolbarTopRow>
