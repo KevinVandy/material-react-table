@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 import {
   Alert as MuiAlert,
   Chip,
@@ -60,11 +60,10 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
       <span>
         {localization?.toolbarAlertGroupedByMessage}{' '}
         {tableInstance.state.groupBy.map((columnId, index) => (
-          <>
+          <Fragment key={`${index}-${columnId}`}>
             {index > 0 ? localization?.toolbarAlertGroupedThenByMessage : ''}
             <Chip
               color="secondary"
-              key={`${index}-${columnId}`}
               label={
                 tableInstance.allColumns.find(
                   (column) => column.id === columnId,
@@ -72,7 +71,7 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
               }
               onDelete={() => tableInstance.toggleGroupBy(columnId, false)}
             />
-          </>
+          </Fragment>
         ))}
       </span>
     ) : null;
