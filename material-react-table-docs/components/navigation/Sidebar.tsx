@@ -3,13 +3,10 @@ import { FC } from 'react';
 import {
   Divider,
   Drawer as MuiDrawer,
-  IconButton,
   List as MuiList,
   ListItem as MuiListItem,
   styled,
-  Typography,
 } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 
 const Drawer = styled(MuiDrawer)({
   zIndex: 1,
@@ -21,11 +18,12 @@ const List = styled(MuiList)({
 });
 
 const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
+  color: theme.palette.primary.dark,
   cursor: 'pointer',
   fontWeight: 'bold',
-  transition: 'all .3s ease',
   padding: '1rem',
-  color: theme.palette.primary.dark,
+  transition: 'all .3s ease',
+  whiteSpace: 'nowrap',
   '&:hover': {
     backgroundColor: 'rgba(0, 0, 0, 0.08)',
   },

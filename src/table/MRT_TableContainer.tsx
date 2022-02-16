@@ -24,6 +24,7 @@ const TableContainer = styled(MuiTableContainer, {
   top: fullScreen ? '0' : undefined,
   transition: 'all 0.2s ease-in-out',
   width: fullScreen ? '100vw' : undefined,
+  zIndex: 1200,
 }));
 
 const CircularProgressWrapper = styled('div')(({ theme }) => ({
@@ -41,19 +42,25 @@ interface Props {}
 
 export const MRT_TableContainer: FC<Props> = () => {
   const {
-    muiTableContainerProps,
-    hideToolbarTop,
-    hideToolbarBottom,
     fullScreen,
-    isLoading,
+    hideToolbarBottom,
+    hideToolbarTop,
     isFetching,
+    isLoading,
+    muiTableContainerProps,
+    tableInstance,
   } = useMRT();
+
+  const tableContainerProps =
+    muiTableContainerProps instanceof Function
+      ? muiTableContainerProps(tableInstance)
+      : muiTableContainerProps;
 
   return (
     <TableContainer
       component={Paper}
       fullScreen={fullScreen}
-      {...muiTableContainerProps}
+      {...tableContainerProps}
     >
       {!hideToolbarTop && <MRT_ToolbarTop />}
       {isFetching && <LinearProgress />}

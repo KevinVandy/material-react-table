@@ -81,7 +81,9 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
       | ((cell?: Cell<D>) => TableCellProps);
     muiTableBodyProps?: TableBodyProps;
     muiTableBodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
-    muiTableContainerProps?: TableContainerProps;
+    muiTableContainerProps?:
+      | TableContainerProps
+      | ((table: TableInstance<D>) => TableContainerProps);
     muiTableDetailPanelProps?:
       | TableCellProps
       | ((row: Row<D>) => TableCellProps);
