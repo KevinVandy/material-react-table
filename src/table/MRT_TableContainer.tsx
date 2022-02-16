@@ -24,7 +24,7 @@ const TableContainer = styled(MuiTableContainer, {
   top: fullScreen ? '0' : undefined,
   transition: 'all 0.2s ease-in-out',
   width: fullScreen ? '100vw' : undefined,
-  zIndex: fullScreen ? 1200 : undefined,
+  zIndex: fullScreen ? 1200 : 1,
 }));
 
 const CircularProgressWrapper = styled('div')(({ theme }) => ({
