@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useState } from 'react';
-import Highlight, { defaultProps, Language } from 'prism-react-renderer';
-import github from 'prism-react-renderer/themes/github';
+import Highlight, { defaultProps } from 'prism-react-renderer';
+import github from 'prism-react-renderer/themes/vsDark';
 import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 
 export interface Props {
@@ -43,7 +43,7 @@ export const CodeSnippetExample: FC<Props> = ({
         <Highlight
           {...defaultProps}
           code={isTypeScript ? typeScriptCode : javaScriptCode}
-          language={isTypeScript ? 'typescript' : 'javascript'}
+          language={isTypeScript ? 'tsx' : 'jsx'}
           theme={github}
         >
           {({ className, style, tokens, getLineProps, getTokenProps }) => (
