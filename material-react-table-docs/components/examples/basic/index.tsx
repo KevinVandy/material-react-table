@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeSnippetExample } from '../../code/CodeSnippetExample';
+import { CodeSnippetExample } from '../../mdx/CodeSnippetExample';
 import BasicExample from './BasicExample';
 const BasicExampleTS = require('!!raw-loader!./BasicExample.tsx').default;
 const BasicExampleJS = require('!!raw-loader!./BasicExample.js').default;

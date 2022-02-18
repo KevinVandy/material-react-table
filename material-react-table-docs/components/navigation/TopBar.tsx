@@ -52,12 +52,7 @@ const TopBar: FC<Props> = ({
               <MenuIcon color="inherit" />
             )}
           </IconButton>
-          <Typography
-            style={{ fontSize: '2rem', paddingLeft: '1.5rem' }}
-            variant="h1"
-          >
-            Material React Table
-          </Typography>
+          <Typography variant="h1">Material React Table</Typography>
         </Flex>
         <Flex>
           <IconButton onClick={() => setDarkTheme(!darkTheme)}>
