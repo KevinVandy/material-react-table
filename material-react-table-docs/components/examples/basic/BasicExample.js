@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
 
-export const BasicExample = () => {
+const BasicExample = () => {
   const columns = useMemo(
     () => [
       {

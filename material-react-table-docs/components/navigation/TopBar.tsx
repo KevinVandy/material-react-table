@@ -4,6 +4,7 @@ import {
   IconButton as MuiIconButton,
   styled,
   Toolbar as MuiToolbar,
+  Tooltip,
   Typography,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -22,10 +23,13 @@ const Toolbar = styled(MuiToolbar)({
 
 const Flex = styled('div')({
   display: 'flex',
+  alignItems: 'center',
 });
 
 const IconButton = styled(MuiIconButton)({
   color: '#fff',
+  height: '3rem',
+  width: '3rem',
 });
 
 interface Props {
@@ -45,7 +49,10 @@ const TopBar: FC<Props> = ({
     <AppBar position="fixed">
       <Toolbar>
         <Flex>
-          <IconButton onClick={() => setNavOpen(!navOpen)}>
+          <IconButton
+            aria-label="Open nav menu"
+            onClick={() => setNavOpen(!navOpen)}
+          >
             {navOpen ? (
               <MenuOpenIcon color="inherit" />
             ) : (
@@ -55,9 +62,14 @@ const TopBar: FC<Props> = ({
           <Typography variant="h1">Material React Table</Typography>
         </Flex>
         <Flex>
-          <IconButton onClick={() => setDarkTheme(!darkTheme)}>
-            {darkTheme ? <DarkModeIcon /> : <LightModeIcon />}
-          </IconButton>
+          <Tooltip arrow title="Toggle Light/Dark Mode">
+            <IconButton
+              aria-label="Toggle Light/Dark Mode"
+              onClick={() => setDarkTheme(!darkTheme)}
+            >
+              {darkTheme ? <DarkModeIcon /> : <LightModeIcon />}
+            </IconButton>
+          </Tooltip>
         </Flex>
       </Toolbar>
     </AppBar>
