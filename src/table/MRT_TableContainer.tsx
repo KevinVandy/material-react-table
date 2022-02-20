@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import {
   CircularProgress,
   LinearProgress,
@@ -14,7 +14,7 @@ import { MRT_ToolbarBottom } from '../toolbar/MRT_ToolbarBottom';
 
 const TableContainer = styled(MuiTableContainer, {
   shouldForwardProp: (prop) => prop !== 'fullScreen',
-})<{ fullScreen?: boolean; component?: any }>(({ fullScreen }) => ({
+})<{ fullScreen?: boolean, component: any }>(({ fullScreen }) => ({
   bottom: fullScreen ? '0' : undefined,
   height: fullScreen ? '100%' : undefined,
   left: fullScreen ? '0' : undefined,
@@ -50,6 +50,14 @@ export const MRT_TableContainer: FC<Props> = () => {
     muiTableContainerProps,
     tableInstance,
   } = useMRT();
+
+  useEffect(() => {
+    if(fullScreen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [fullScreen]);
 
   const tableContainerProps =
     muiTableContainerProps instanceof Function

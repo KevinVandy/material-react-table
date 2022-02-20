@@ -3,7 +3,7 @@ import { styled } from '@mui/material';
 import { MRT_ToggleFiltersButton } from '../buttons/MRT_ToggleFiltersButton';
 import { MRT_ShowHideColumnsButton } from '../buttons/MRT_ShowHideColumnsButton';
 import { useMRT } from '../useMRT';
-import { MRT_DensePaddingSwitch } from '../inputs/MRT_DensePaddingSwitch';
+import { MRT_ToggleDensePaddingButton } from '../buttons/MRT_ToggleDensePaddingButton';
 import { MRT_ToggleSearchButton } from '../buttons/MRT_ToggleSearchButton';
 import { MRT_FullScreenToggleButton } from '../buttons/MRT_FullScreenToggleButton';
 
@@ -29,7 +29,7 @@ export const MRT_ToolbarInternalButtons: FC<Props> = () => {
       {!disableGlobalFilter && <MRT_ToggleSearchButton />}
       {!disableFilters && <MRT_ToggleFiltersButton />}
       {!disableColumnHiding && <MRT_ShowHideColumnsButton />}
-      {!disableDensePaddingToggle && <MRT_DensePaddingSwitch />}
+      {!disableDensePaddingToggle && <MRT_ToggleDensePaddingButton />}
       {!disableFullScreenToggle && <MRT_FullScreenToggleButton />}
     </ToolbarButtonsContainer>
   );
