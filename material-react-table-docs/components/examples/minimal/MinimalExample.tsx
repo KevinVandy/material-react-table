@@ -1,6 +1,5 @@
 import React, { FC, useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
-import { getMockData } from '../getMockData';
 
 export const BasicExample: FC = () => {
   const columns = useMemo(
