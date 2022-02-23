@@ -19,14 +19,14 @@ import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
 
 const CopyButton = styled(IconButton)({
   position: 'absolute',
-  right: '2.75rem',
-  marginTop: '0.75rem',
+  top: '0.5rem',
+  right: '0.5rem',
 });
 
 const ToggleFullCodeButton = styled(IconButton)({
   position: 'absolute',
-  right: '5.5rem',
-  marginTop: '0.75rem',
+  top: '0.5rem',
+  right: '3.5rem',
 });
 
 export interface Props {
@@ -75,6 +75,7 @@ export const SourceCodeSnippet: FC<Props> = ({
       }}
     >
       <Divider />
+      <Typography variant="h4">Demo</Typography>
       <Component />
       <div>
         <div style={{ display: 'flex', gap: '1rem' }}>
@@ -103,7 +104,7 @@ export const SourceCodeSnippet: FC<Props> = ({
           theme={theme.palette.mode === 'dark' ? vsDark : vsLight}
         >
           {({ className, style, tokens, getLineProps, getTokenProps }) => (
-            <div>
+            <div style={{ position: 'relative' }}>
               <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Code'}>
                 <CopyButton onClick={handleCopy}>
                   {isCopied ? <LibraryAddCheckIcon /> : <ContentCopyIcon />}

@@ -11,7 +11,6 @@ export const Blockquote: FC<any> = (props) => {
           0.6,
         )}`,
         padding: '0.5rem 1rem',
-        maxWidth: '110ch',
         backgroundColor: alpha(theme.palette.primary.main, 0.05),
         borderRadius: '4px',
       }}

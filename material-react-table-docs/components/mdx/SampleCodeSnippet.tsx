@@ -8,8 +8,8 @@ import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 
 const CopyButton = styled(IconButton)({
   position: 'absolute',
-  right: '2.75rem',
-  marginTop: '0.25rem',
+  top: '0.25rem',
+  right: '0.25rem',
 });
 
 export const SampleCodeSnippet: FC<any> = (props) => {
@@ -30,7 +30,7 @@ export const SampleCodeSnippet: FC<any> = (props) => {
       theme={theme.palette.mode === 'dark' ? vsDark : vsLight}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <div>
+        <div style={{ position: 'relative' }}>
           <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Code'}>
             <CopyButton onClick={handleCopy}>
               {isCopied ? <LibraryAddCheckIcon /> : <ContentCopyIcon />}

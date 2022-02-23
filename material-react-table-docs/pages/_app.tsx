@@ -15,6 +15,12 @@ const PageContainer = styled('div')(({ theme }) => ({
   transition: 'all 200ms ease-in-out',
 }));
 
+const PageContent = styled('div')(({ theme }) => ({
+  maxWidth: '1700px',
+  margin: '2rem auto',
+  transition: 'all 200ms ease-in-out',
+}));
+
 function App({ Component, pageProps }: AppProps) {
   const [navOpen, setNavOpen] = useState(true);
   const [darkTheme, setDarkTheme] = useState(false);
@@ -50,7 +56,9 @@ function App({ Component, pageProps }: AppProps) {
         <PageContainer
           style={{ padding: `64px 32px 800px ${navOpen ? '260px' : '32px'}` }}
         >
-          <Component components={mdxComponents} {...pageProps} />
+          <PageContent>
+            <Component components={mdxComponents} {...pageProps} />
+          </PageContent>
         </PageContainer>
       </ThemeProvider>
     </>

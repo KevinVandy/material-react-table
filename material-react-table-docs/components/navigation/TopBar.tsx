@@ -12,6 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
+import Link from 'next/link';
 
 const AppBar = styled(MuiAppBar)({
   zIndex: 2,
@@ -62,12 +63,17 @@ const TopBar: FC<Props> = ({
               <MenuIcon color="inherit" />
             )}
           </IconButton>
-          <Typography
-            style={{ fontSize: isMobile ? '1.6rem' : undefined }}
-            variant="h1"
-          >
-            Material React Table
-          </Typography>
+          <Link href="/" passHref>
+            <Typography
+              style={{
+                cursor: 'pointer',
+                fontSize: isMobile ? '1.6rem' : undefined,
+              }}
+              variant="h1"
+            >
+              Material React Table
+            </Typography>
+          </Link>
         </Flex>
         <Flex>
           <Tooltip arrow title="Toggle Light/Dark Mode">
