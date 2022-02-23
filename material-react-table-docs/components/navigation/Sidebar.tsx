@@ -14,9 +14,15 @@ const Drawer = styled(MuiDrawer)({
   position: 'relative',
 });
 
-const List = styled(MuiList)({
+const List = styled(MuiList, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})<{ navOpen?: boolean }>(({ navOpen }) => ({
+  overflow: 'visible',
+  overflowY: navOpen ? 'auto' : 'hidden',
   padding: '68px 0',
-});
+  transition: 'all .2s',
+  width: navOpen ? '240px' : '0',
+}));
 
 const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
   color: theme.palette.primary.dark,
@@ -47,7 +53,7 @@ interface Props {
 const SideBar: FC<Props> = ({ navOpen }) => {
   return (
     <Drawer open={navOpen} variant="permanent">
-      <List style={{ width: navOpen ? '240px' : '0', transition: 'all .2s' }}>
+      <List navOpen={navOpen}>
         <Link href="/" passHref>
           <ListItemLevel1>Home</ListItemLevel1>
         </Link>
@@ -125,6 +131,9 @@ const SideBar: FC<Props> = ({ navOpen }) => {
         </Link>
         <Link href="/docs/features/column-resizing" passHref>
           <ListItemLevel2>Column Resizing</ListItemLevel2>
+        </Link>
+        <Link href="/docs/features/localization" passHref>
+          <ListItemLevel2>Localization</ListItemLevel2>
         </Link>
         <Link href="/docs/features/row-actions" passHref>
           <ListItemLevel2>Row Actions</ListItemLevel2>

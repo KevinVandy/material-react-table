@@ -14,12 +14,12 @@ import { MRT_ToolbarBottom } from '../toolbar/MRT_ToolbarBottom';
 
 const TableContainer = styled(MuiTableContainer, {
   shouldForwardProp: (prop) => prop !== 'fullScreen',
-})<{ fullScreen?: boolean, component: any }>(({ fullScreen }) => ({
+})<{ fullScreen?: boolean; component: any }>(({ fullScreen }) => ({
   bottom: fullScreen ? '0' : undefined,
   height: fullScreen ? '100%' : undefined,
   left: fullScreen ? '0' : undefined,
   margin: fullScreen ? '0' : undefined,
-  position: fullScreen ? 'absolute' : undefined,
+  position: fullScreen ? 'fixed' : undefined,
   right: fullScreen ? '0' : undefined,
   top: fullScreen ? '0' : undefined,
   transition: 'all 0.2s ease-in-out',
@@ -52,7 +52,7 @@ export const MRT_TableContainer: FC<Props> = () => {
   } = useMRT();
 
   useEffect(() => {
-    if(fullScreen) {
+    if (fullScreen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';

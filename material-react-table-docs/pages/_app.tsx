@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { AppProps } from 'next/app';
-import { createTheme, styled, ThemeProvider } from '@mui/material';
+import { styled, ThemeProvider } from '@mui/material';
 import { mdxComponents } from '../components/mdx/mdxComponents';
 import TopBar from '../components/navigation/TopBar';
 import SideBar from '../components/navigation/Sidebar';
@@ -15,11 +15,11 @@ const PageContainer = styled('div')(({ theme }) => ({
   transition: 'all 200ms ease-in-out',
 }));
 
-const PageContent = styled('div')(({ theme }) => ({
+const PageContent = styled('div')({
   maxWidth: '1700px',
-  margin: '2rem auto',
+  margin: 'auto',
   transition: 'all 200ms ease-in-out',
-}));
+});
 
 function App({ Component, pageProps }: AppProps) {
   const [navOpen, setNavOpen] = useState(true);
@@ -30,10 +30,10 @@ function App({ Component, pageProps }: AppProps) {
     [],
   );
 
-  useEffect(
-    () => localStorage.setItem('darkTheme', darkTheme.toString()),
-    [darkTheme],
-  );
+  useEffect(() => {
+    document.body.style.backgroundColor = darkTheme ? '#111' : '#fff';
+    localStorage.setItem('darkTheme', darkTheme.toString());
+  }, [darkTheme]);
 
   return (
     <>
