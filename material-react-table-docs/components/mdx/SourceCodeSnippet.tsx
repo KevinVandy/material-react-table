@@ -10,6 +10,7 @@ import {
   styled,
   IconButton,
   Tooltip,
+  Divider,
 } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
@@ -34,7 +35,7 @@ export interface Props {
   Component: FC;
 }
 
-export const CodeSnippetExample: FC<Props> = ({
+export const SourceCodeSnippet: FC<Props> = ({
   typeScriptCode,
   javaScriptCode,
   Component,
@@ -73,6 +74,7 @@ export const CodeSnippetExample: FC<Props> = ({
         margin: '1rem auto',
       }}
     >
+      <Divider />
       <Component />
       <div>
         <div style={{ display: 'flex', gap: '1rem' }}>

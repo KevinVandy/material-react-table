@@ -14,7 +14,7 @@ const Drawer = styled(MuiDrawer)({
 });
 
 const List = styled(MuiList)({
-  padding: '64px 0',
+  padding: '68px 0',
 });
 
 const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({

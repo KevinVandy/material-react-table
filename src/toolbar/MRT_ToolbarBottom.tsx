@@ -27,7 +27,7 @@ interface Props {}
 
 export const MRT_ToolbarBottom: FC<Props> = () => {
   const {
-    hideToolbarActions,
+    hideToolbarInternalActions,
     manualPagination,
     muiTableToolbarBottomProps,
     positionPagination,
@@ -44,7 +44,7 @@ export const MRT_ToolbarBottom: FC<Props> = () => {
 
   return (
     <Toolbar fullScreen={fullScreen} variant="dense" {...toolbarProps}>
-      {!hideToolbarActions && positionToolbarActions === 'bottom' ? (
+      {!hideToolbarInternalActions && positionToolbarActions === 'bottom' ? (
         <MRT_ToolbarInternalButtons />
       ) : (
         <span />

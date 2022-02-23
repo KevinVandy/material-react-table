@@ -22,7 +22,23 @@ export const MRT_ToolbarInternalButtons: FC<Props> = () => {
     disableDensePaddingToggle,
     disableGlobalFilter,
     disableFullScreenToggle,
+    renderToolbarInternalActions,
+    tableInstance,
   } = useMRT();
+
+  if (renderToolbarInternalActions) {
+    return (
+      <>
+        {renderToolbarInternalActions(tableInstance, {
+          MRT_ToggleSearchButton,
+          MRT_ToggleFiltersButton,
+          MRT_ShowHideColumnsButton,
+          MRT_ToggleDensePaddingButton,
+          MRT_FullScreenToggleButton,
+        })}
+      </>
+    );
+  }
 
   return (
     <ToolbarButtonsContainer>

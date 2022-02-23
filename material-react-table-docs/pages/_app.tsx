@@ -6,6 +6,7 @@ import TopBar from '../components/navigation/TopBar';
 import SideBar from '../components/navigation/Sidebar';
 import '../styles/globals.css';
 import Head from 'next/head';
+import { theme } from '../styles/MuiTheme';
 
 const PageContainer = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
@@ -38,49 +39,7 @@ function App({ Component, pageProps }: AppProps) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ThemeProvider
-        theme={createTheme({
-          palette: {
-            mode: darkTheme ? 'dark' : 'light',
-          },
-          typography: {
-            h1: {
-              fontSize: '2rem',
-              lineHeight: '3rem',
-              paddingLeft: '1.5rem',
-            },
-            h2: {
-              fontSize: '2.5rem',
-              lineHeight: '5rem',
-              fontWeight: 'bold',
-            },
-            h3: {
-              fontSize: '2rem',
-              lineHeight: '4rem',
-            },
-            h4: {
-              fontSize: '1.75rem',
-              lineHeight: '3rem',
-            },
-            h5: {
-              fontSize: '1.5rem',
-              lineHeight: '3rem',
-            },
-            h6: {
-              fontSize: '1.25rem',
-              lineHeight: '3rem',
-            },
-            subtitle1: {
-              marginBottom: '1rem',
-            },
-            body1: {
-              fontSize: '1rem',
-              lineHeight: '2rem',
-              marginBottom: '0.5rem',
-            },
-          },
-        })}
-      >
+      <ThemeProvider theme={theme(darkTheme)}>
         <TopBar
           darkTheme={darkTheme}
           navOpen={navOpen}

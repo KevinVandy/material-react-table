@@ -1,4 +1,4 @@
-import React, { ChangeEvent, MouseEvent, ReactNode } from 'react';
+import React, { ChangeEvent, FC, MouseEvent, ReactNode } from 'react';
 import {
   AlertProps,
   TableBodyProps,
@@ -66,7 +66,7 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
     enableSelection?: boolean;
     hideTableFooter?: boolean;
     hideTableHead?: boolean;
-    hideToolbarActions?: boolean;
+    hideToolbarInternalActions?: boolean;
     hideToolbarBottom?: boolean;
     hideToolbarTop?: boolean;
     isFetching?: boolean;
@@ -153,6 +153,22 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
       tableInstance: TableInstance<D>,
     ) => ReactNode;
     renderToolbarCustomActions?: (tableInstance: TableInstance<D>) => ReactNode;
+    renderToolbarInternalActions?: (
+      tableInstance: TableInstance<D>,
+      {
+        MRT_ToggleSearchButton,
+        MRT_ToggleFiltersButton,
+        MRT_ShowHideColumnsButton,
+        MRT_ToggleDensePaddingButton,
+        MRT_FullScreenToggleButton,
+      }: {
+        MRT_ToggleSearchButton: FC;
+        MRT_ToggleFiltersButton: FC;
+        MRT_ShowHideColumnsButton: FC;
+        MRT_ToggleDensePaddingButton: FC;
+        MRT_FullScreenToggleButton: FC;
+      },
+    ) => ReactNode;
   };
 
 export default <D extends {}>({

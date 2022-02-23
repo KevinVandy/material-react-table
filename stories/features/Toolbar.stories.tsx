@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, { MaterialReactTableProps } from '../../src';
 import faker from '@faker-js/faker';
-import { Button, IconButton, Tooltip } from '@mui/material';
+import { Button, IconButton, Tooltip, Typography } from '@mui/material';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -69,15 +69,52 @@ export const NoToolbars: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const hideToolbarActions: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} hideToolbarActions />
+export const HideToolbarInternalActions: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    hideToolbarInternalActions
+  />
 );
 
-export const toolbarActionsOnBottom: Story<MaterialReactTableProps> = () => (
+export const ToolbarInternalActionsOnBottom: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     positionToolbarActions="bottom"
+  />
+);
+
+export const CustomToolbarInternalActions: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    renderToolbarInternalActions={(
+      tableInstance,
+      { MRT_FullScreenToggleButton },
+    ) => {
+      return (
+        <>
+          <MRT_FullScreenToggleButton />
+        </>
+      );
+    }}
+  />
+);
+
+export const TableTitle: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    renderToolbarCustomActions={(tableInstance) => {
+      return <Typography variant="h4">Table Title</Typography>;
+    }}
   />
 );
 

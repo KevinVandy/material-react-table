@@ -62,7 +62,7 @@ export const JustASearchBox: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     defaultShowSearchTextField
-    hideToolbarActions
+    hideToolbarInternalActions
   />
 );
 

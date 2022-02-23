@@ -6,6 +6,7 @@ import {
   Toolbar as MuiToolbar,
   Tooltip,
   Typography,
+  useMediaQuery,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
@@ -45,9 +46,11 @@ const TopBar: FC<Props> = ({
   setDarkTheme,
   setNavOpen,
 }) => {
+  const isMobile = useMediaQuery('(max-width: 600px)');
+
   return (
     <AppBar position="fixed">
-      <Toolbar>
+      <Toolbar variant={isMobile ? 'dense' : 'regular'}>
         <Flex>
           <IconButton
             aria-label="Open nav menu"
@@ -59,7 +62,12 @@ const TopBar: FC<Props> = ({
               <MenuIcon color="inherit" />
             )}
           </IconButton>
-          <Typography variant="h1">Material React Table</Typography>
+          <Typography
+            style={{ fontSize: isMobile ? '1.6rem' : undefined }}
+            variant="h1"
+          >
+            Material React Table
+          </Typography>
         </Flex>
         <Flex>
           <Tooltip arrow title="Toggle Light/Dark Mode">

@@ -40,7 +40,7 @@ interface Props {}
 export const MRT_ToolbarTop: FC<Props> = () => {
   const {
     disableGlobalFilter,
-    hideToolbarActions,
+    hideToolbarInternalActions,
     manualPagination,
     muiTableToolbarTopProps,
     positionPagination,
@@ -63,7 +63,7 @@ export const MRT_ToolbarTop: FC<Props> = () => {
         {renderToolbarCustomActions?.(tableInstance) ?? <span />}
         <ToolbarActionsContainer>
           {!disableGlobalFilter && <MRT_SearchTextField />}
-          {!hideToolbarActions && positionToolbarActions === 'top' && (
+          {!hideToolbarInternalActions && positionToolbarActions === 'top' && (
             <MRT_ToolbarInternalButtons />
           )}
         </ToolbarActionsContainer>

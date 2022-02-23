@@ -9,6 +9,15 @@ import Example from '../../../components/examples/basic';
 
 ### View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/prop-playground--default)**
 
-To get started creating a basic table, all you need is to provide the **columns** definitions and the table **data**.
+To get started creating a basic table, all you need to do is to provide the **columns** definitions and the table **data**.
+
+```jsx
+<MaterialReactTable
+  columns={columns} //must be memoized
+  data={data} //must be memoized
+/>
+```
+
+> **Note:** It is very important to memoize both the columns and the data that you pass to MaterialReactTable. Otherwise, the entire table will be re-rendered during every react render in your application, and can lead to performance issues. To learn more, checkout the [react-table docs](https://react-table.tanstack.com/docs/quick-start#getting-your-data)
 
 <Example />
