@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { IconButton, Tooltip } from '@mui/material';
+import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
 import SearchIcon from '@mui/icons-material/Search';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
 
-type Props = {};
+interface Props extends IconButtonProps {}
 
-export const MRT_ToggleSearchButton: FC<Props> = () => {
+export const MRT_ToggleSearchButton: FC<Props> = ({ ...rest }) => {
   const { localization, setShowSearch, showSearch, muiSearchTextFieldProps } =
     useMRT();
 
@@ -25,7 +25,7 @@ export const MRT_ToggleSearchButton: FC<Props> = () => {
 
   return (
     <Tooltip arrow title={localization?.toggleSearchButtonTitle ?? ''}>
-      <IconButton size="small" onClick={handleToggleSearch}>
+      <IconButton size="small" onClick={handleToggleSearch} {...rest}>
         {showSearch ? <SearchOffIcon /> : <SearchIcon />}
       </IconButton>
     </Tooltip>

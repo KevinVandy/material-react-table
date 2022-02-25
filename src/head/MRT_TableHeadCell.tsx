@@ -5,6 +5,7 @@ import {
   styled,
   Divider as MuiDivider,
   Collapse,
+  Tooltip,
 } from '@mui/material';
 import { HeaderGroup } from 'react-table';
 import { useMRT } from '../useMRT';
@@ -89,6 +90,18 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
     },
   };
 
+  const sortTooltip = column.isSorted
+    ? column.isSortedDesc
+      ? localization?.columnActionMenuItemClearSort ?? ''
+      : localization?.columnActionMenuItemSortDesc?.replace(
+          '{column}',
+          column.Header as string,
+        ) ?? ''
+    : localization?.columnActionMenuItemSortAsc?.replace(
+        '{column}',
+        column.Header as string,
+      ) ?? '';
+
   return (
     <MRT_StyledTableHeadCell
       align={isParentHeader ? 'center' : 'left'}
@@ -100,20 +113,16 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
         <TableCellTopContents
           style={{ justifyContent: isParentHeader ? 'center' : undefined }}
         >
-          <CellFlexItem {...column.getSortByToggleProps()}>
+          <CellFlexItem {...column.getSortByToggleProps()} title={undefined}>
             {column.render('Header')}
             {!isParentHeader && column.canSort && (
-              <TableSortLabel
-                aria-label={
-                  column.isSorted
-                    ? column.sortDescFirst
-                      ? localization?.columnActionMenuItemClearSort
-                      : localization?.columnActionMenuItemSortDesc
-                    : localization?.columnActionMenuItemSortAsc
-                }
-                active={column.isSorted}
-                direction={column.isSortedDesc ? 'desc' : 'asc'}
-              />
+              <Tooltip arrow title={sortTooltip}>
+                <TableSortLabel
+                  aria-label={sortTooltip}
+                  active={column.isSorted}
+                  direction={column.isSortedDesc ? 'desc' : 'asc'}
+                />
+              </Tooltip>
             )}
           </CellFlexItem>
           <CellFlexItem>

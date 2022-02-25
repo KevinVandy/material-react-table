@@ -6,7 +6,6 @@ module.exports = {
     '@storybook/addon-a11y',
     'storybook-addon-paddings',
     '@storybook/addon-storysource',
-    'storybook-addon-performance/register',
     'storybook-dark-mode',
     '@etchteam/storybook-addon-status',
   ],

@@ -6,6 +6,7 @@ import {
   Tooltip,
   styled,
   Divider,
+  IconButtonProps,
 } from '@mui/material';
 import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import { useMRT } from '../useMRT';
@@ -17,9 +18,9 @@ const MenuButtons = styled('div')({
   padding: '0 0.5rem 0.5rem 0.5rem',
 });
 
-interface Props {}
+interface Props extends IconButtonProps {}
 
-export const MRT_ShowHideColumnsButton: FC<Props> = () => {
+export const MRT_ShowHideColumnsButton: FC<Props> = ({ ...rest }) => {
   const { tableInstance, localization } = useMRT();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -35,6 +36,7 @@ export const MRT_ShowHideColumnsButton: FC<Props> = () => {
           aria-label={localization?.showHideColumnsButtonTitle}
           onClick={handleClick}
           size="small"
+          {...rest}
         >
           <ViewColumnIcon />
         </IconButton>

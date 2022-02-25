@@ -11,15 +11,16 @@ interface Props {
 
 export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
   const {
-    renderDetailPanel,
-    columns,
     anyRowsCanExpand,
-    enableSelection,
+    columns,
     enableRowActions,
+    enableRowEditing,
     enableRowNumbers,
-    positionActionsColumn,
-    tableInstance,
+    enableSelection,
     muiTableFooterRowProps,
+    positionActionsColumn,
+    renderDetailPanel,
+    tableInstance,
   } = useMRT();
 
   //if no content in row, skip row
@@ -42,9 +43,8 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
   return (
     <TableRow {...tableRowProps}>
       {enableRowNumbers && <MRT_TableSpacerCell />}
-      {enableRowActions && positionActionsColumn === 'first' && (
-        <MRT_TableSpacerCell />
-      )}
+      {(enableRowActions || enableRowEditing) &&
+        positionActionsColumn === 'first' && <MRT_TableSpacerCell />}
       {(anyRowsCanExpand || renderDetailPanel) && (
         <MRT_TableSpacerCell
           width={`${
@@ -59,9 +59,8 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
           column={column}
         />
       ))}
-      {enableRowActions && positionActionsColumn === 'last' && (
-        <MRT_TableSpacerCell />
-      )}
+      {(enableRowActions || enableRowEditing) &&
+        positionActionsColumn === 'last' && <MRT_TableSpacerCell />}
     </TableRow>
   );
 };

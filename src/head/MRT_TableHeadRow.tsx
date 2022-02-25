@@ -6,7 +6,7 @@ import {
   MRT_TableHeadCell,
 } from './MRT_TableHeadCell';
 import { useMRT } from '../useMRT';
-import { MRT_SelectAllCheckbox } from '../inputs/MRT_SelectAllCheckbox';
+import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
 import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
 import { MRT_TableHeadCellActions } from './MRT_TableHeadCellActions';
@@ -19,8 +19,9 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
   const {
     anyRowsCanExpand,
     disableExpandAll,
-    enableRowNumbers,
     enableRowActions,
+    enableRowEditing,
+    enableRowNumbers,
     enableSelection,
     muiTableHeadRowProps,
     positionActionsColumn,
@@ -55,7 +56,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         ) : (
           <MRT_StyledTableHeadCell>#</MRT_StyledTableHeadCell>
         ))}
-      {enableRowActions &&
+      {(enableRowActions || enableRowEditing) &&
         positionActionsColumn === 'first' &&
         (isParentHeader ? (
           <MRT_TableSpacerCell />
@@ -75,7 +76,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
       ) : null}
       {enableSelection ? (
         !isParentHeader ? (
-          <MRT_SelectAllCheckbox />
+          <MRT_SelectCheckbox selectAll />
         ) : (
           <MRT_TableSpacerCell width="1rem" />
         )
@@ -83,7 +84,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
       {headerGroup.headers.map((column: HeaderGroup) => (
         <MRT_TableHeadCell key={column.getHeaderProps().key} column={column} />
       ))}
-      {enableRowActions &&
+      {(enableRowActions || enableRowEditing) &&
         positionActionsColumn === 'last' &&
         (isParentHeader ? (
           <MRT_TableSpacerCell />

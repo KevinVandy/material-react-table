@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FC, MouseEvent, ReactNode } from 'react';
 import {
   AlertProps,
+  IconButtonProps,
   TableBodyProps,
   TableCellProps,
   TableContainerProps,
@@ -138,6 +139,7 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
       row: Row<D>,
       selectedRows: Row<D>[],
     ) => void;
+    onSelectAllChange?: (event: ChangeEvent, selectedRows: Row<D>[]) => void;
     positionActionsColumn?: 'first' | 'last';
     positionPagination?: 'bottom' | 'top' | 'both';
     positionToolbarActions?: 'bottom' | 'top';
@@ -162,11 +164,11 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
         MRT_ToggleDensePaddingButton,
         MRT_FullScreenToggleButton,
       }: {
-        MRT_ToggleSearchButton: FC;
-        MRT_ToggleFiltersButton: FC;
-        MRT_ShowHideColumnsButton: FC;
-        MRT_ToggleDensePaddingButton: FC;
-        MRT_FullScreenToggleButton: FC;
+        MRT_ToggleSearchButton: FC<IconButtonProps>;
+        MRT_ToggleFiltersButton: FC<IconButtonProps>;
+        MRT_ShowHideColumnsButton: FC<IconButtonProps>;
+        MRT_ToggleDensePaddingButton: FC<IconButtonProps>;
+        MRT_FullScreenToggleButton: FC<IconButtonProps>;
       },
     ) => ReactNode;
   };

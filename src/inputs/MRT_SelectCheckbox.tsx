@@ -1,31 +1,60 @@
 import React, { ChangeEvent, FC } from 'react';
-import { Checkbox } from '@mui/material';
+import { Checkbox, Tooltip } from '@mui/material';
 import { Row } from 'react-table';
 import { useMRT } from '../useMRT';
 import { MRT_TableButtonCell } from '../table/MRT_TableButtonCell';
 
 interface Props {
-  row: Row;
+  row?: Row;
+  selectAll?: boolean;
 }
 
-export const MRT_SelectCheckbox: FC<Props> = ({ row }) => {
-  const { tableInstance, onRowSelectChange, densePadding, localization } =
-    useMRT();
+export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
+  const {
+    densePadding,
+    localization,
+    onRowSelectChange,
+    onSelectAllChange,
+    tableInstance,
+  } = useMRT();
 
-  const onSelectChange = (event: ChangeEvent) => {
-    row.getToggleRowSelectedProps()?.onChange?.(event);
-    onRowSelectChange?.(event, row, tableInstance.selectedFlatRows);
+  const onSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (selectAll) {
+      onSelectAllChange?.(event, tableInstance.selectedFlatRows);
+      tableInstance.toggleAllRowsSelected(event.target.checked);
+    } else if (row) {
+      row?.getToggleRowSelectedProps()?.onChange?.(event);
+      onRowSelectChange?.(event, row, tableInstance.selectedFlatRows);
+    }
   };
+
+  const checkboxProps = selectAll
+    ? tableInstance.getToggleAllRowsSelectedProps()
+    : row?.getToggleRowSelectedProps();
 
   return (
     <MRT_TableButtonCell densePadding={densePadding}>
-      <Checkbox
-        inputProps={{
-          'aria-label': localization?.selectCheckboxTitle,
-        }}
-        onChange={onSelectChange}
-        {...row.getToggleRowSelectedProps()}
-      />
+      <Tooltip
+        arrow
+        enterDelay={1000}
+        enterNextDelay={1000}
+        title={
+          selectAll
+            ? localization?.selectAllCheckboxTitle ?? ''
+            : localization?.selectCheckboxTitle ?? ''
+        }
+      >
+        <Checkbox
+          inputProps={{
+            'aria-label': selectAll
+              ? localization?.selectAllCheckboxTitle ?? ''
+              : localization?.selectCheckboxTitle ?? '',
+          }}
+          onChange={onSelectChange}
+          {...checkboxProps}
+          title={undefined}
+        />
+      </Tooltip>
     </MRT_TableButtonCell>
   );
 };

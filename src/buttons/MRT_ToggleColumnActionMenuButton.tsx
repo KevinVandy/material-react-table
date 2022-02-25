@@ -1,5 +1,5 @@
 import React, { FC, MouseEvent, useState } from 'react';
-import { IconButton as MuiIconButton, styled } from '@mui/material';
+import { IconButton as MuiIconButton, styled, Tooltip } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useMRT } from '../useMRT';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
@@ -33,14 +33,20 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
 
   return (
     <>
-      <IconButton
-        aria-label={localization?.columnActionMenuButtonTitle}
-        onClick={handleClick}
-        size="small"
-        title={localization?.columnActionMenuButtonTitle}
+      <Tooltip
+        arrow
+        enterDelay={1000}
+        enterNextDelay={1000}
+        title={localization?.columnActionMenuButtonTitle ?? ''}
       >
-        <MoreVertIcon />
-      </IconButton>
+        <IconButton
+          aria-label={localization?.columnActionMenuButtonTitle}
+          onClick={handleClick}
+          size="small"
+        >
+          <MoreVertIcon />
+        </IconButton>
+      </Tooltip>
       <MRT_ColumnActionMenu
         anchorEl={anchorEl}
         column={column}

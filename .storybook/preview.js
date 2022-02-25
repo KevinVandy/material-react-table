@@ -1,6 +1,5 @@
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { ThemeProvider as Emotion10ThemeProvider } from 'emotion-theming';
-import { withPerformance } from 'storybook-addon-performance';
 import { setConsoleOptions } from '@storybook/addon-console';
 import { withConsole } from '@storybook/addon-console';
 import { Typography } from '@mui/material';
@@ -99,4 +98,4 @@ const withThemeProvider = (Story, context) => {
 
 const console = (storyFn, context) => withConsole()(storyFn)(context);
 
-export const decorators = [withThemeProvider, withPerformance, console];
+export const decorators = [withThemeProvider, console];
