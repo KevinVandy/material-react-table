@@ -33,8 +33,9 @@ import {
 } from 'react-table';
 import { MaterialReactTableProvider } from './useMRT';
 import { MRT_TableContainer } from './table/MRT_TableContainer';
-import { defaultLocalization, MRT_Localization } from './utils/localization';
 import { MRT_ColumnInterface } from './@types/react-table-config';
+import { MRT_Localization } from './locales/MRT_Localization';
+import { MRT_DefaultLocalization_EN } from './locales/en';
 
 export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
   UseTableOptions<D> &
@@ -175,7 +176,7 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
 
 export default <D extends {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
-  localization = defaultLocalization,
+  localization,
   positionActionsColumn = 'first',
   positionPagination = 'bottom',
   positionToolbarActions = 'top',
@@ -184,7 +185,7 @@ export default <D extends {}>({
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
     defaultColumn={defaultColumn}
-    localization={{ ...defaultLocalization, ...localization }}
+    localization={{ ...MRT_DefaultLocalization_EN, ...localization }}
     positionActionsColumn={positionActionsColumn}
     positionPagination={positionPagination}
     positionToolbarActions={positionToolbarActions}

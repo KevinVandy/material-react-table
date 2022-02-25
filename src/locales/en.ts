@@ -1,38 +1,6 @@
-export interface MRT_Localization {
-  actionsHeadColumnTitle: string;
-  columnActionMenuButtonTitle: string;
-  columnActionMenuItemClearSort: string;
-  columnActionMenuItemGroupBy: string;
-  columnActionMenuItemHideColumn: string;
-  columnActionMenuItemSortAsc: string;
-  columnActionMenuItemSortDesc: string;
-  columnActionMenuItemUnGroupBy: string;
-  columnShowHideMenuHideAll: string;
-  columnShowHideMenuShowAll: string;
-  expandAllButtonTitle: string;
-  expandButtonTitle: string;
-  filterTextFieldClearButtonTitle: string;
-  filterTextFieldPlaceholder: string;
-  rowActionButtonCancel: string;
-  rowActionButtonSave: string;
-  rowActionMenuButtonTitle: string;
-  rowActionMenuItemEdit: string;
-  rowActionsColumnTitle: string;
-  searchTextFieldClearButtonTitle: string;
-  searchTextFieldPlaceholder: string;
-  selectAllCheckboxTitle: string;
-  selectCheckboxTitle: string;
-  showHideColumnsButtonTitle: string;
-  toggleDensePaddingSwitchTitle: string;
-  toggleFilterButtonTitle: string;
-  toggleFullScreenButtonTitle: string;
-  toggleSearchButtonTitle: string;
-  toolbarAlertSelectionMessage: string;
-  toolbarAlertGroupedByMessage: string;
-  toolbarAlertGroupedThenByMessage: string;
-}
+import { MRT_Localization } from './MRT_Localization';
 
-export const defaultLocalization: MRT_Localization = {
+export const MRT_DefaultLocalization_EN: MRT_Localization = {
   actionsHeadColumnTitle: 'Actions',
   columnActionMenuButtonTitle: 'Column Actions',
   columnActionMenuItemClearSort: 'Clear sort',
