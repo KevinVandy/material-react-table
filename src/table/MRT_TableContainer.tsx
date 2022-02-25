@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import {
   CircularProgress,
   LinearProgress,
@@ -50,14 +50,6 @@ export const MRT_TableContainer: FC<Props> = () => {
     muiTableContainerProps,
     tableInstance,
   } = useMRT();
-
-  useEffect(() => {
-    if (fullScreen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [fullScreen]);
 
   const tableContainerProps =
     muiTableContainerProps instanceof Function

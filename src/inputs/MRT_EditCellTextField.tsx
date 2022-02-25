@@ -10,7 +10,6 @@ interface Props {
 export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
   const {
     currentEditingRow,
-    localization,
     muiTableBodyCellEditTextFieldProps,
     setCurrentEditingRow,
   } = useMRT();
@@ -55,7 +54,7 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
       margin="dense"
       onChange={handleChange}
       onClick={(e) => e.stopPropagation()}
-      placeholder={localization?.filterTextFieldPlaceholder}
+      placeholder={cell.column.Header as string}
       value={cell.value}
       variant="standard"
       {...textFieldProps}
