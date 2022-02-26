@@ -5,3 +5,4 @@ types
 *.json
 .next
 *.md
+material-react-table-docs/.next

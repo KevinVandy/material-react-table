@@ -26,7 +26,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
     currentEditingRow,
     densePadding,
     enableRowEditing,
-    icons: {EditIcon, MoreHorizIcon},
+    icons: { EditIcon, MoreHorizIcon },
     localization,
     renderRowActionMenuItems,
     renderRowActions,

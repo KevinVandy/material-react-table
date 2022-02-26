@@ -1,8 +1,10 @@
 import { FC } from 'react';
+import Link from 'next/link';
 import {
   AppBar as MuiAppBar,
   IconButton as MuiIconButton,
   styled,
+  SvgIcon,
   Toolbar as MuiToolbar,
   Tooltip,
   Typography,
@@ -12,7 +14,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
-import Link from 'next/link';
 
 const AppBar = styled(MuiAppBar)({
   zIndex: 2,
@@ -26,6 +27,7 @@ const Toolbar = styled(MuiToolbar)({
 const Flex = styled('div')({
   display: 'flex',
   alignItems: 'center',
+  gap: '0.5rem',
 });
 
 const IconButton = styled(MuiIconButton)({
@@ -48,10 +50,11 @@ const TopBar: FC<Props> = ({
   setNavOpen,
 }) => {
   const isMobile = useMediaQuery('(max-width: 600px)');
+  const isTablet = useMediaQuery('(max-width: 900px)');
 
   return (
     <AppBar position="fixed">
-      <Toolbar variant={isMobile ? 'dense' : 'regular'}>
+      <Toolbar variant={isTablet ? 'dense' : 'regular'}>
         <Flex>
           <IconButton
             aria-label="Open nav menu"
@@ -67,7 +70,8 @@ const TopBar: FC<Props> = ({
             <Typography
               style={{
                 cursor: 'pointer',
-                fontSize: isMobile ? '1.6rem' : undefined,
+                fontSize: isTablet ? '1.6rem' : undefined,
+                display: isMobile ? 'none' : 'inline',
               }}
               variant="h1"
             >
@@ -76,6 +80,37 @@ const TopBar: FC<Props> = ({
           </Link>
         </Flex>
         <Flex>
+          <Tooltip arrow title="Github">
+            <a
+              href="https://github.com/KevinVandy/material-react-table"
+              target="_blank"
+            >
+              <IconButton aria-label="Github">
+                <img
+                  height={30}
+                  style={{
+                    backgroundColor: '#fff',
+                    borderRadius: '50%',
+                  }}
+                  src="/github.svg"
+                />
+              </IconButton>
+            </a>
+          </Tooltip>
+          <Tooltip arrow title="Discord">
+            <a href="https://discord.gg/5wqyRx6fnm" target="_blank">
+              <IconButton aria-label="Discord">
+                <img
+                  height={25}
+                  style={{
+                    padding: '-3px',
+                    borderRadius: '50%',
+                  }}
+                  src="/Discord-Logo-White.svg"
+                />
+              </IconButton>
+            </a>
+          </Tooltip>
           <Tooltip arrow title="Toggle Light/Dark Mode">
             <IconButton
               aria-label="Toggle Light/Dark Mode"

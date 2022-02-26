@@ -166,7 +166,8 @@ const PropTable = () => {
         prop: 'hideToolbarInternalActions',
         type: 'boolean',
         default: null,
-        description: 'Hide all 5 of the default action icon buttons in top toolbar',
+        description:
+          'Hide all 5 of the default action icon buttons in top toolbar',
       },
       {
         prop: 'hideToolbarTop',
@@ -182,7 +183,7 @@ const PropTable = () => {
         description: 'Override the default Mui icons',
         link: '/docs/features/customize-icons',
         linkText: 'MRT customize icons docs',
-      }
+      },
     ],
     [],
   );

@@ -26,78 +26,81 @@ To get started creating a basic table, all you need to do is to provide the **co
 />
 ```
 
-> **Note:** It is very important to *memoize* the columns and data that you pass to MaterialReactTable. Otherwise, the entire table will be re-rendered during every react render in your application, and can lead to performance issues. To learn more, checkout the [react-table docs](https://react-table.tanstack.com/docs/quick-start#getting-your-data).
-
-
+> **Note:** It is very important to _memoize_ the columns and data that you pass to MaterialReactTable. Otherwise, the entire table will be re-rendered during every react render in your application, and can lead to performance issues. To learn more, checkout the [react-table docs](https://react-table.tanstack.com/docs/quick-start#getting-your-data).
 
 Each column definition must have at the very least, an `accessor` propery. This is the key that will be used to join the data from the `data` values. A Header string can also be provided to display the column header.
 
 ```jsx
-const columns = useMemo(() => [
-  {
-    Header: 'Name',
-    accessor: 'name',
-  },
-  {
-    Header: 'Age',
-    accessor: 'age',
-  },
-], []);
+const columns = useMemo(
+  () => [
+    {
+      Header: 'Name',
+      accessor: 'name',
+    },
+    {
+      Header: 'Age',
+      accessor: 'age',
+    },
+  ],
+  [],
+);
 ```
 
 Your data is an array of objects that have properties matching the accessors in your column definitions.
 
 ```jsx
-const data = useMemo(() => [
-  {
-    name: 'John',
-    age: 30,
-  },
-  {
-    name: 'Sara',
-    age: 25,
-  },
-], []);
+const data = useMemo(
+  () => [
+    {
+      name: 'John',
+      age: 30,
+    },
+    {
+      name: 'Sara',
+      age: 25,
+    },
+  ],
+  [],
+);
 ```
 
 Throw it all together and you have a basic table!
 
 ```jsx
-import { useMemo } from "react";
-import MaterialReactTable from "material-react-table";
+import { useMemo } from 'react';
+import MaterialReactTable from 'material-react-table';
 
 export default function App() {
   const columns = useMemo(
     () => [
       {
-        Header: "Name",
-        accessor: "name"
+        Header: 'Name',
+        accessor: 'name',
       },
       {
-        Header: "Age",
-        accessor: "age"
-      }
+        Header: 'Age',
+        accessor: 'age',
+      },
     ],
-    []
+    [],
   );
 
   const data = useMemo(
     () => [
       {
-        name: "John",
-        age: 30
+        name: 'John',
+        age: 30,
       },
       {
-        name: "Sara",
-        age: 25
-      }
+        name: 'Sara',
+        age: 25,
+      },
     ],
-    []
+    [],
   );
 
   return <MaterialReactTable columns={columns} data={data} />;
 }
-
 ```
 
 Now this is just the default table that you get. You may want to disable some features that you don't need, or enable and customize other features that you may want. See the [minimal example](/docs/examples/minimal) and [advanced example](/docs/examples/advanced) to get a better idea for how you may want to customize your table, and visit the [all props page](/docs/all-props) to see all the props that you can use to turn features on and off, and customize the look and feel of your table.

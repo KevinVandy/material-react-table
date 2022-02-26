@@ -12,7 +12,7 @@ View additional storybook examples at https://www.material-react-table.dev/
 
 View the source code and open issues at https://github.com/KevinVandy/material-react-table
 
-Join the discord development discussion at https://discord.gg/Gjm62HGw
+Join the discord development discussion at https://discord.gg/5wqyRx6fnm
 
 <br />
 
@@ -25,6 +25,7 @@ Join the discord development discussion at https://discord.gg/Gjm62HGw
 - [x] Column Hiding
 - [x] Custom Styling
 - [x] Dense Padding Toggle
+- [x] Localization
 - [x] Filtering
 - [x] Global Search
 - [x] HeaderGroups
@@ -40,7 +41,7 @@ Join the discord development discussion at https://discord.gg/Gjm62HGw
 1. Install Peer Dependencies (material-ui v5 and react table v7)
 
 ```bash
-npm install @mui/material @mui/icons-material @emotion/react react-table
+npm install @mui/material @mui/icons-material @emotion/react @emotion/styled react-table
 ```
 
 2. Install material-react-table

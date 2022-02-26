@@ -7,6 +7,7 @@ import {
   List as MuiList,
   ListItem as MuiListItem,
   styled,
+  useMediaQuery,
 } from '@mui/material';
 
 const Drawer = styled(MuiDrawer)({
@@ -23,6 +24,9 @@ const List = styled(MuiList, {
   padding: 0,
   transition: 'all .2s',
   width: navOpen ? '260px' : '0',
+  '@media (max-width: 900px)': {
+    marginTop: '50px',
+  },
 }));
 
 const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
@@ -51,15 +55,21 @@ interface Props {
   setNavOpen: (navOpen: boolean) => void;
 }
 
-const SideBar: FC<Props> = ({ navOpen }) => {
+const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
+  const isTablet = useMediaQuery('(max-width: 900px)');
+
   return (
-    <Drawer open={navOpen} variant="permanent">
+    <Drawer
+      open={navOpen}
+      onClose={() => setNavOpen(false)}
+      variant={isTablet ? 'temporary' : 'permanent'}
+    >
       <List navOpen={navOpen}>
         <Link href="/" passHref>
           <ListItemLevel1>Home</ListItemLevel1>
         </Link>
         <Link href="/about" passHref>
-          <ListItemLevel1>About</ListItemLevel1>
+          <ListItemLevel1>About &amp; FAQ</ListItemLevel1>
         </Link>
 
         <Divider />
@@ -91,7 +101,7 @@ const SideBar: FC<Props> = ({ navOpen }) => {
 
         <Divider />
 
-        <ListItemHeader>Default Features</ListItemHeader>
+        <ListItemHeader>Default Feature Guides</ListItemHeader>
         <Link href="/docs/features/column-actions" passHref>
           <ListItemLevel2>Column Actions</ListItemLevel2>
         </Link>
@@ -120,7 +130,7 @@ const SideBar: FC<Props> = ({ navOpen }) => {
           <ListItemLevel2>Sorting</ListItemLevel2>
         </Link>
 
-        <ListItemHeader>More Features</ListItemHeader>
+        <ListItemHeader>More Feature Guides</ListItemHeader>
         <Link href="/docs/features/customize-css" passHref>
           <ListItemLevel2>Customize CSS</ListItemLevel2>
         </Link>

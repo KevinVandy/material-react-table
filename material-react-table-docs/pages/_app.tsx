@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { AppProps } from 'next/app';
-import { styled, ThemeProvider } from '@mui/material';
+import { styled, ThemeProvider, useMediaQuery } from '@mui/material';
 import { mdxComponents } from '../components/mdx/mdxComponents';
 import TopBar from '../components/navigation/TopBar';
 import SideBar from '../components/navigation/Sidebar';
@@ -17,12 +17,12 @@ const PageContainer = styled('div')(({ theme }) => ({
 
 const PageContent = styled('div')({
   maxWidth: '1200px',
-  paddingLeft: '1rem',
   margin: 'auto',
   transition: 'all 200ms ease-in-out',
 });
 
 function App({ Component, pageProps }: AppProps) {
+  const isTablet = useMediaQuery('(max-width: 900px)');
   const [navOpen, setNavOpen] = useState(true);
   const [darkTheme, setDarkTheme] = useState(false);
 
@@ -55,7 +55,11 @@ function App({ Component, pageProps }: AppProps) {
         />
         <SideBar navOpen={navOpen} setNavOpen={setNavOpen} />
         <PageContainer
-          style={{ padding: `64px 32px 800px ${navOpen ? '260px' : '32px'}` }}
+          style={{
+            padding: `64px 32px 800px ${
+              navOpen && !isTablet ? '280px' : '32px'
+            }`,
+          }}
         >
           <PageContent>
             <Component components={mdxComponents} {...pageProps} />

@@ -11,6 +11,7 @@ import {
   IconButton,
   Tooltip,
   Divider,
+  useMediaQuery,
 } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
@@ -41,6 +42,7 @@ export const SourceCodeSnippet: FC<Props> = ({
   Component,
 }) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery('(max-width: 720px)');
   const [isTypeScript, setIsTypeScript] = useState(true);
   const [isCopied, setIsCopied] = useState(false);
   const [isFullCode, setIsFullCode] = useState(false);
@@ -104,7 +106,12 @@ export const SourceCodeSnippet: FC<Props> = ({
           theme={theme.palette.mode === 'dark' ? vsDark : vsLight}
         >
           {({ className, style, tokens, getLineProps, getTokenProps }) => (
-            <div style={{ position: 'relative', fontSize: '1.2em' }}>
+            <div
+              style={{
+                position: 'relative',
+                fontSize: isMobile ? '1em' : '1.2em',
+              }}
+            >
               <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Code'}>
                 <CopyButton onClick={handleCopy}>
                   {isCopied ? <LibraryAddCheckIcon /> : <ContentCopyIcon />}
@@ -128,7 +135,10 @@ export const SourceCodeSnippet: FC<Props> = ({
                 className={className}
                 style={{
                   ...style,
-                  padding: '0.5rem',
+                  padding: isMobile
+                    ? '3rem 0.5rem 1rem 0.5rem'
+                    : '0.5rem 0.25rem',
+                  whiteSpace: 'pre-wrap',
                 }}
               >
                 {tokens.map((line, i) => (
@@ -140,14 +150,17 @@ export const SourceCodeSnippet: FC<Props> = ({
                       display: !isFullCode && skipCodeLine ? 'none' : 'block',
                     }}
                   >
-                    <span
-                      style={{
-                        padding: '0 12px',
-                        color: theme.palette.text.secondary,
-                      }}
-                    >
-                      {i + 1}
-                    </span>
+                    {!isMobile && (
+                      <span
+                        style={{
+                          padding: '1ch',
+                          paddingRight: `${3 - String(i + 1).length}ch`,
+                          color: theme.palette.text.secondary,
+                        }}
+                      >
+                        {i + 1}
+                      </span>
+                    )}
                     {line.map((token, key) => {
                       if (
                         token.content === '//column definitions...' ||
