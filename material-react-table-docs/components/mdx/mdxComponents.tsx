@@ -4,7 +4,7 @@ import { Blockquote } from './Blockquote';
 import { SampleCodeSnippet } from './SampleCodeSnippet';
 
 export const mdxComponents = {
-  a: (props: any) => <Link target="_blank" {...props} />,
+  a: (props: any) => <Link target="_blank" rel="noreferrer" {...props} />,
   blockquote: (props: any) => <Blockquote {...props} />,
   code: (props: any) => <SampleCodeSnippet {...props} />,
   h1: (props: any) => <Typography variant="h1" {...props} />,

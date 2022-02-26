@@ -85,6 +85,7 @@ const TopBar: FC<Props> = ({
           <Tooltip arrow title="Github">
             <a
               href="https://github.com/KevinVandy/material-react-table"
+              rel="noreferrer"
               target="_blank"
             >
               <IconButton aria-label="Github">
@@ -100,7 +101,11 @@ const TopBar: FC<Props> = ({
             </a>
           </Tooltip>
           <Tooltip arrow title="Discord">
-            <a href="https://discord.gg/5wqyRx6fnm" target="_blank">
+            <a
+              href="https://discord.gg/5wqyRx6fnm"
+              rel="noreferrer"
+              target="_blank"
+            >
               <IconButton aria-label="Discord">
                 <img
                   height={25}
