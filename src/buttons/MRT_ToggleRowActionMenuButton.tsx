@@ -1,7 +1,5 @@
 import React, { FC, MouseEvent, useState } from 'react';
 import { IconButton as MuiIconButton, styled, Tooltip } from '@mui/material';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import EditIcon from '@mui/icons-material/Edit';
 import { useMRT } from '../useMRT';
 import { Row } from 'react-table';
 import { MRT_RowActionMenu } from '../menus/MRT_RowActionMenu';
@@ -27,11 +25,12 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
   const {
     currentEditingRow,
     densePadding,
+    enableRowEditing,
+    icons: {EditIcon, MoreHorizIcon},
     localization,
     renderRowActionMenuItems,
-    enableRowEditing,
-    setCurrentEditingRow,
     renderRowActions,
+    setCurrentEditingRow,
     tableInstance,
   } = useMRT();
 
@@ -58,7 +57,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
         <Tooltip
           placement="right"
           arrow
-          title={localization?.rowActionMenuItemEdit ?? ''}
+          title={localization.rowActionMenuItemEdit}
         >
           <IconButton onClick={handleEdit}>
             <EditIcon />
@@ -67,8 +66,8 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
       ) : renderRowActionMenuItems ? (
         <>
           <IconButton
-            aria-label={localization?.rowActionMenuButtonTitle}
-            title={localization?.rowActionMenuButtonTitle}
+            aria-label={localization.rowActionMenuButtonTitle}
+            title={localization.rowActionMenuButtonTitle}
             onClick={handleOpenRowActionMenu}
             size="small"
           >

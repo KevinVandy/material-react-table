@@ -1,7 +1,5 @@
 import React, { ChangeEvent, FC, useState } from 'react';
 import { IconButton, InputAdornment, TextField, Tooltip } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import FilterIcon from '@mui/icons-material/FilterList';
 import { HeaderGroup, useAsyncDebounce } from 'react-table';
 import { useMRT } from '../useMRT';
 
@@ -10,7 +8,10 @@ interface Props {
 }
 
 export const MRT_FilterTextField: FC<Props> = ({ column }) => {
-  const { localization } = useMRT();
+  const {
+    icons: { FilterListIcon, CloseIcon },
+    localization,
+  } = useMRT();
 
   const [filterValue, setFilterValue] = useState('');
 
@@ -37,7 +38,7 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
         },
       }}
       margin="dense"
-      placeholder={localization?.filterTextFieldPlaceholder?.replace(
+      placeholder={localization.filterTextFieldPlaceholder?.replace(
         '{column}',
         String(column.Header),
       )}
@@ -52,15 +53,13 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
         startAdornment: (
           <Tooltip
             arrow
-            title={
-              localization?.filterTextFieldPlaceholder?.replace(
-                '{column}',
-                String(column.Header),
-              ) ?? ''
-            }
+            title={localization.filterTextFieldPlaceholder?.replace(
+              '{column}',
+              String(column.Header),
+            )}
           >
             <InputAdornment position="start">
-              <FilterIcon />
+              <FilterListIcon />
             </InputAdornment>
           </Tooltip>
         ),
@@ -68,11 +67,11 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
           <InputAdornment position="end">
             <Tooltip
               arrow
-              title={localization?.filterTextFieldClearButtonTitle ?? ''}
+              title={localization.filterTextFieldClearButtonTitle ?? ''}
             >
               <span>
                 <IconButton
-                  aria-label={localization?.filterTextFieldClearButtonTitle}
+                  aria-label={localization.filterTextFieldClearButtonTitle}
                   disabled={filterValue?.length === 0}
                   onClick={handleClear}
                   size="small"

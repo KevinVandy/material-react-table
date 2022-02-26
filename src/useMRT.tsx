@@ -21,14 +21,18 @@ import {
   useSortBy,
   useTable,
 } from 'react-table';
+import { MRT_Icons } from './icons';
+import { MRT_Localization } from './localization';
 import { MaterialReactTableProps } from './MaterialReactTable';
 
-export interface UseMRT<D extends {} = {}> extends MaterialReactTableProps<D> {
+export type UseMRT<D extends {} = {}> = MaterialReactTableProps<D> & {
   anyRowsCanExpand: boolean;
   anyRowsExpanded: boolean;
   currentEditingRow: Row<D> | null;
   densePadding: boolean;
   fullScreen: boolean;
+  icons: MRT_Icons;
+  localization: MRT_Localization;
   setCurrentEditingRow: (currentRowEditingId: Row<D> | null) => void;
   setDensePadding: (densePadding: boolean) => void;
   setFullScreen: (fullScreen: boolean) => void;
@@ -37,7 +41,7 @@ export interface UseMRT<D extends {} = {}> extends MaterialReactTableProps<D> {
   showFilters: boolean;
   showSearch: boolean;
   tableInstance: TableInstance<D>;
-}
+};
 
 const MaterialReactTableContext = (<D extends {}>() =>
   createContext<UseMRT<D>>({} as UseMRT<D>) as Context<UseMRT<D>>)();

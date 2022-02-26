@@ -63,9 +63,10 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         {enableRowNumbers && (
           <MRT_StyledTableBodyCell>{row.index + 1}</MRT_StyledTableBodyCell>
         )}
-        {(enableRowActions || enableRowEditing) && positionActionsColumn === 'first' && (
-          <MRT_ToggleRowActionMenuButton row={row} />
-        )}
+        {(enableRowActions || enableRowEditing) &&
+          positionActionsColumn === 'first' && (
+            <MRT_ToggleRowActionMenuButton row={row} />
+          )}
         {(anyRowsCanExpand || renderDetailPanel) && (
           <MRT_ExpandButton row={row} />
         )}
@@ -73,9 +74,10 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         {row.cells.map((cell) => (
           <MRT_TableBodyCell key={cell.getCellProps().key} cell={cell} />
         ))}
-        {(enableRowActions || enableRowEditing) && positionActionsColumn === 'last' && (
-          <MRT_ToggleRowActionMenuButton row={row} />
-        )}
+        {(enableRowActions || enableRowEditing) &&
+          positionActionsColumn === 'last' && (
+            <MRT_ToggleRowActionMenuButton row={row} />
+          )}
       </TableRow>
       {renderDetailPanel && <MRT_TableDetailPanel row={row} />}
     </>

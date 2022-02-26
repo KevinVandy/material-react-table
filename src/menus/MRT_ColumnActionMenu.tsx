@@ -2,11 +2,6 @@ import React, { FC } from 'react';
 import { Divider, Menu, MenuItem as MuiMenuItem, styled } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { HeaderGroup } from 'react-table';
-import ClearAllIcon from '@mui/icons-material/ClearAll';
-import SortIcon from '@mui/icons-material/Sort';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
-import FilterIcon from '@mui/icons-material/FilterList';
 
 const MenuItem = styled(MuiMenuItem)({
   display: 'flex',
@@ -31,6 +26,13 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     enableColumnGrouping,
     localization,
     setShowFilters,
+    icons: {
+      FilterListIcon,
+      SortIcon,
+      ClearAllIcon,
+      DynamicFeedIcon,
+      VisibilityOffIcon,
+    },
   } = useMRT();
 
   const handleClearSort = () => {
@@ -87,7 +89,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             disabled={!column.isSorted}
             onClick={handleClearSort}
           >
-            <ClearAllIcon /> {localization?.columnActionMenuItemClearSort}
+            <ClearAllIcon /> {localization.columnActionMenuItemClearSort}
           </MenuItem>,
           <MenuItem
             key={2}
@@ -95,7 +97,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             onClick={handleSortAsc}
           >
             <SortIcon />{' '}
-            {localization?.columnActionMenuItemSortAsc?.replace(
+            {localization.columnActionMenuItemSortAsc?.replace(
               '{column}',
               String(column.Header),
             )}
@@ -106,7 +108,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             onClick={handleSortDesc}
           >
             <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />{' '}
-            {localization?.columnActionMenuItemSortDesc?.replace(
+            {localization.columnActionMenuItemSortDesc?.replace(
               '{column}',
               String(column.Header),
             )}
@@ -116,8 +118,8 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
         column.canFilter && [
           <Divider key={0} />,
           <MenuItem key={1} onClick={handleFilterByColumn}>
-            <FilterIcon />{' '}
-            {localization?.filterTextFieldPlaceholder?.replace(
+            <FilterListIcon />{' '}
+            {localization.filterTextFieldPlaceholder?.replace(
               '{column}',
               String(column.Header),
             )}
@@ -128,7 +130,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           <Divider key={1} />,
           <MenuItem key={2} onClick={handleGroupByColumn}>
             <DynamicFeedIcon />{' '}
-            {localization?.[
+            {localization[
               column.isGrouped
                 ? 'columnActionMenuItemUnGroupBy'
                 : 'columnActionMenuItemGroupBy'
@@ -139,7 +141,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
         <Divider key={0} />,
         <MenuItem key={1} onClick={handleHideColumn}>
           <VisibilityOffIcon />{' '}
-          {localization?.columnActionMenuItemHideColumn?.replace(
+          {localization.columnActionMenuItemHideColumn?.replace(
             '{column}',
             String(column.Header),
           )}

@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
 import { IconButton, styled, Tooltip } from '@mui/material';
-import SaveIcon from '@mui/icons-material/Save';
-import CancelIcon from '@mui/icons-material/Cancel';
 import { useMRT } from '../useMRT';
 import { Row } from 'react-table';
 
@@ -16,6 +14,7 @@ interface Props {
 
 export const MRT_EditActionButtons: FC<Props> = ({ row }) => {
   const {
+    icons: { CancelIcon, SaveIcon },
     localization,
     setCurrentEditingRow,
     onRowEditSubmit,
@@ -34,17 +33,17 @@ export const MRT_EditActionButtons: FC<Props> = ({ row }) => {
 
   return (
     <EditActionButtonWrappers>
-      <Tooltip arrow title={localization?.rowActionButtonCancel ?? ''}>
+      <Tooltip arrow title={localization.rowActionButtonCancel}>
         <IconButton
-          aria-label={localization?.rowActionButtonCancel}
+          aria-label={localization.rowActionButtonCancel}
           onClick={handleCancel}
         >
           <CancelIcon />
         </IconButton>
       </Tooltip>
-      <Tooltip arrow title={localization?.rowActionButtonSave ?? ''}>
+      <Tooltip arrow title={localization.rowActionButtonSave}>
         <IconButton
-          aria-label={localization?.rowActionButtonSave}
+          aria-label={localization.rowActionButtonSave}
           color="info"
           onClick={handleSave}
         >

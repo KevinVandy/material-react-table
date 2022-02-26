@@ -92,15 +92,15 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
 
   const sortTooltip = column.isSorted
     ? column.isSortedDesc
-      ? localization?.columnActionMenuItemClearSort ?? ''
-      : localization?.columnActionMenuItemSortDesc?.replace(
+      ? localization.columnActionMenuItemClearSort
+      : localization.columnActionMenuItemSortDesc?.replace(
           '{column}',
           column.Header as string,
-        ) ?? ''
-    : localization?.columnActionMenuItemSortAsc?.replace(
+        )
+    : localization.columnActionMenuItemSortAsc?.replace(
         '{column}',
         column.Header as string,
-      ) ?? '';
+      );
 
   return (
     <MRT_StyledTableHeadCell

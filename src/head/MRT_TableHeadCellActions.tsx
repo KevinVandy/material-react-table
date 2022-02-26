@@ -12,7 +12,7 @@ export const MRT_TableHeadCellActions: FC<Props> = () => {
       densePadding={densePadding}
       style={{ textAlign: 'center' }}
     >
-      {localization?.actionsHeadColumnTitle}
+      {localization.actionsHeadColumnTitle}
     </MRT_StyledTableHeadCell>
   );
 };

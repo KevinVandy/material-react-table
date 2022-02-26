@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { Menu, MenuItem as MuiMenuItem, styled } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { Row } from 'react-table';
-import EditIcon from '@mui/icons-material/Edit';
 
 const MenuItem = styled(MuiMenuItem)({
   display: 'flex',
@@ -23,6 +22,7 @@ export const MRT_RowActionMenu: FC<Props> = ({
   setAnchorEl,
 }) => {
   const {
+    icons: { EditIcon },
     enableRowEditing,
     localization,
     renderRowActionMenuItems,
@@ -37,7 +37,7 @@ export const MRT_RowActionMenu: FC<Props> = ({
     >
       {enableRowEditing && (
         <MenuItem onClick={handleEdit}>
-          <EditIcon /> {localization?.rowActionMenuItemEdit}
+          <EditIcon /> {localization.rowActionMenuItemEdit}
         </MenuItem>
       )}
       {renderRowActionMenuItems?.(row, tableInstance, () =>

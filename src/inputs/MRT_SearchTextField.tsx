@@ -6,8 +6,6 @@ import {
   styled,
   TextField as MuiTextField,
 } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import CloseIcon from '@mui/icons-material/Close';
 import { useMRT } from '../useMRT';
 import { useAsyncDebounce } from 'react-table';
 
@@ -19,6 +17,7 @@ interface Props {}
 
 export const MRT_SearchTextField: FC<Props> = () => {
   const {
+    icons: { SearchIcon, CloseIcon },
     showSearch,
     localization,
     muiSearchTextFieldProps,
@@ -45,7 +44,7 @@ export const MRT_SearchTextField: FC<Props> = () => {
     <Collapse in={showSearch} orientation="horizontal">
       <TextField
         id="global-search-text-field"
-        placeholder={localization?.searchTextFieldPlaceholder}
+        placeholder={localization.searchTextFieldPlaceholder}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setSearchValue(event.target.value);
           handleChange(event);
@@ -61,11 +60,11 @@ export const MRT_SearchTextField: FC<Props> = () => {
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
-                aria-label={localization?.searchTextFieldClearButtonTitle}
+                aria-label={localization.searchTextFieldClearButtonTitle}
                 disabled={searchValue?.length === 0}
                 onClick={handleClear}
                 size="small"
-                title={localization?.searchTextFieldClearButtonTitle}
+                title={localization.searchTextFieldClearButtonTitle}
               >
                 <CloseIcon fontSize="small" />
               </IconButton>

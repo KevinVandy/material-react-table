@@ -34,8 +34,8 @@ import {
 import { MaterialReactTableProvider } from './useMRT';
 import { MRT_TableContainer } from './table/MRT_TableContainer';
 import { MRT_ColumnInterface } from './@types/react-table-config';
-import { MRT_Localization } from './locales/MRT_Localization';
-import { MRT_DefaultLocalization_EN } from './locales/en';
+import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
+import { MRT_Default_Icons, MRT_Icons } from './icons';
 
 export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
   UseTableOptions<D> &
@@ -71,6 +71,7 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
     hideToolbarInternalActions?: boolean;
     hideToolbarBottom?: boolean;
     hideToolbarTop?: boolean;
+    icons?: Partial<MRT_Icons>;
     isFetching?: boolean;
     isLoading?: boolean;
     localization?: Partial<MRT_Localization>;
@@ -176,6 +177,7 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
 
 export default <D extends {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
+  icons,
   localization,
   positionActionsColumn = 'first',
   positionPagination = 'bottom',
@@ -185,6 +187,7 @@ export default <D extends {}>({
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
     defaultColumn={defaultColumn}
+    icons={{ ...MRT_Default_Icons, ...icons }}
     localization={{ ...MRT_DefaultLocalization_EN, ...localization }}
     positionActionsColumn={positionActionsColumn}
     positionPagination={positionPagination}

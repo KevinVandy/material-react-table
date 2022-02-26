@@ -40,15 +40,15 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
         enterNextDelay={1000}
         title={
           selectAll
-            ? localization?.selectAllCheckboxTitle ?? ''
-            : localization?.selectCheckboxTitle ?? ''
+            ? localization.selectAllCheckboxTitle
+            : localization.selectCheckboxTitle
         }
       >
         <Checkbox
           inputProps={{
             'aria-label': selectAll
-              ? localization?.selectAllCheckboxTitle ?? ''
-              : localization?.selectCheckboxTitle ?? '',
+              ? localization.selectAllCheckboxTitle
+              : localization.selectCheckboxTitle,
           }}
           onChange={onSelectChange}
           {...checkboxProps}

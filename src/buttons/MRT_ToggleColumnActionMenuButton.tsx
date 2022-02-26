@@ -1,6 +1,5 @@
 import React, { FC, MouseEvent, useState } from 'react';
 import { IconButton as MuiIconButton, styled, Tooltip } from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useMRT } from '../useMRT';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
 import { HeaderGroup } from 'react-table';
@@ -21,7 +20,10 @@ interface Props {
 }
 
 export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
-  const { localization } = useMRT();
+  const {
+    localization,
+    icons: { MoreVertIcon },
+  } = useMRT();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -37,10 +39,10 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
         arrow
         enterDelay={1000}
         enterNextDelay={1000}
-        title={localization?.columnActionMenuButtonTitle ?? ''}
+        title={localization.columnActionMenuButtonTitle}
       >
         <IconButton
-          aria-label={localization?.columnActionMenuButtonTitle}
+          aria-label={localization.columnActionMenuButtonTitle}
           onClick={handleClick}
           size="small"
         >

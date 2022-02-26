@@ -8,7 +8,6 @@ import {
   Divider,
   IconButtonProps,
 } from '@mui/material';
-import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import { useMRT } from '../useMRT';
 import { MRT_ShowHideColumnsMenu } from '../menus/MRT_ShowHideColumnsMenu';
 
@@ -21,7 +20,11 @@ const MenuButtons = styled('div')({
 interface Props extends IconButtonProps {}
 
 export const MRT_ShowHideColumnsButton: FC<Props> = ({ ...rest }) => {
-  const { tableInstance, localization } = useMRT();
+  const {
+    tableInstance,
+    localization,
+    icons: { ViewColumnIcon },
+  } = useMRT();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -31,9 +34,9 @@ export const MRT_ShowHideColumnsButton: FC<Props> = ({ ...rest }) => {
 
   return (
     <>
-      <Tooltip arrow title={localization?.showHideColumnsButtonTitle ?? ''}>
+      <Tooltip arrow title={localization.showHideColumnsButtonTitle}>
         <IconButton
-          aria-label={localization?.showHideColumnsButtonTitle}
+          aria-label={localization.showHideColumnsButtonTitle}
           onClick={handleClick}
           size="small"
           {...rest}
@@ -54,13 +57,13 @@ export const MRT_ShowHideColumnsButton: FC<Props> = ({ ...rest }) => {
             }
             onClick={() => tableInstance.toggleHideAllColumns(true)}
           >
-            {localization?.columnShowHideMenuHideAll}
+            {localization.columnShowHideMenuHideAll}
           </Button>
           <Button
             disabled={tableInstance.getToggleHideAllColumnsProps().checked}
             onClick={() => tableInstance.toggleHideAllColumns(false)}
           >
-            {localization?.columnShowHideMenuShowAll}
+            {localization.columnShowHideMenuShowAll}
           </Button>
         </MenuButtons>
         <Divider />

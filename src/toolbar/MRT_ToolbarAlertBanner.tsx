@@ -47,7 +47,7 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
 
   const selectMessage =
     tableInstance.selectedFlatRows.length > 0
-      ? localization?.toolbarAlertSelectionMessage
+      ? localization.toolbarAlertSelectionMessage
           ?.replace(
             '{selectedCount}',
             tableInstance.selectedFlatRows.length.toString(),
@@ -58,10 +58,10 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
   const groupedByMessage =
     tableInstance.state.groupBy.length > 0 ? (
       <span>
-        {localization?.toolbarAlertGroupedByMessage}{' '}
+        {localization.toolbarAlertGroupedByMessage}{' '}
         {tableInstance.state.groupBy.map((columnId, index) => (
           <Fragment key={`${index}-${columnId}`}>
-            {index > 0 ? localization?.toolbarAlertGroupedThenByMessage : ''}
+            {index > 0 ? localization.toolbarAlertGroupedThenByMessage : ''}
             <Chip
               color="secondary"
               label={
