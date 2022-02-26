@@ -60,16 +60,16 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
     disableFullScreenToggle?: boolean;
     disableSelectAll?: boolean;
     disableSubRowTree?: boolean;
-    enableRowNumbers?: boolean;
     enableColumnGrouping?: boolean;
     enableColumnResizing?: boolean;
     enableRowActions?: boolean;
     enableRowEditing?: boolean;
+    enableRowNumbers?: boolean;
     enableSelection?: boolean;
     hideTableFooter?: boolean;
     hideTableHead?: boolean;
-    hideToolbarInternalActions?: boolean;
     hideToolbarBottom?: boolean;
+    hideToolbarInternalActions?: boolean;
     hideToolbarTop?: boolean;
     icons?: Partial<MRT_Icons>;
     isFetching?: boolean;
