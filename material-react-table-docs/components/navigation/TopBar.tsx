@@ -51,31 +51,33 @@ const TopBar: FC<Props> = ({
 }) => {
   const isMobile = useMediaQuery('(max-width: 600px)');
   const isTablet = useMediaQuery('(max-width: 900px)');
+  const isDesktop = useMediaQuery('(min-width: 1600px)');
 
   return (
     <AppBar position="fixed">
       <Toolbar variant={isTablet ? 'dense' : 'regular'}>
         <Flex>
-          <IconButton
-            aria-label="Open nav menu"
-            onClick={() => setNavOpen(!navOpen)}
-          >
-            {navOpen ? (
-              <MenuOpenIcon color="inherit" />
-            ) : (
-              <MenuIcon color="inherit" />
-            )}
-          </IconButton>
+          {!isDesktop && (
+            <IconButton
+              aria-label="Open nav menu"
+              onClick={() => setNavOpen(!navOpen)}
+            >
+              {navOpen ? (
+                <MenuOpenIcon color="inherit" />
+              ) : (
+                <MenuIcon color="inherit" />
+              )}
+            </IconButton>
+          )}
           <Link href="/" passHref>
             <Typography
               style={{
                 cursor: 'pointer',
                 fontSize: isTablet ? '1.6rem' : undefined,
-                display: isMobile ? 'none' : 'inline',
               }}
               variant="h1"
             >
-              Material React Table
+              {isMobile ? 'MRT' : 'Material React Table'}
             </Typography>
           </Link>
         </Flex>

@@ -12,7 +12,7 @@ export const theme = (darkTheme: boolean) =>
       h1: {
         fontSize: '2rem',
         lineHeight: '3rem',
-        paddingLeft: '1.5rem',
+        paddingLeft: '1rem',
       },
       h2: {
         fontSize: '2.5rem',

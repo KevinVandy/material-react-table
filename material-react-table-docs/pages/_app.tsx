@@ -23,6 +23,7 @@ const PageContent = styled('div')({
 
 function App({ Component, pageProps }: AppProps) {
   const isTablet = useMediaQuery('(max-width: 900px)');
+  const isDesktop = useMediaQuery('(min-width: 1600px)');
   const [navOpen, setNavOpen] = useState(true);
   const [darkTheme, setDarkTheme] = useState(false);
 
@@ -49,15 +50,15 @@ function App({ Component, pageProps }: AppProps) {
       <ThemeProvider theme={theme(darkTheme)}>
         <TopBar
           darkTheme={darkTheme}
-          navOpen={navOpen}
+          navOpen={navOpen || isDesktop}
           setDarkTheme={setDarkTheme}
           setNavOpen={setNavOpen}
         />
-        <SideBar navOpen={navOpen} setNavOpen={setNavOpen} />
+        <SideBar navOpen={navOpen || isDesktop} setNavOpen={setNavOpen} />
         <PageContainer
           style={{
             padding: `64px 32px 800px ${
-              navOpen && !isTablet ? '280px' : '32px'
+              (navOpen || isDesktop) && !isTablet ? '280px' : '32px'
             }`,
           }}
         >
