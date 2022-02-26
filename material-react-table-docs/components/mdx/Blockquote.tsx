@@ -13,6 +13,7 @@ export const Blockquote: FC<any> = (props) => {
         padding: '0.5rem 1rem',
         backgroundColor: alpha(theme.palette.primary.main, 0.05),
         borderRadius: '4px',
+        margin: '3rem',
       }}
       {...props}
     />

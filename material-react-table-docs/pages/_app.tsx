@@ -16,7 +16,8 @@ const PageContainer = styled('div')(({ theme }) => ({
 }));
 
 const PageContent = styled('div')({
-  maxWidth: '1700px',
+  maxWidth: '1200px',
+  paddingLeft: '1rem',
   margin: 'auto',
   transition: 'all 200ms ease-in-out',
 });

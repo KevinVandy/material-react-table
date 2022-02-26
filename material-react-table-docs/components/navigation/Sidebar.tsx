@@ -19,9 +19,10 @@ const List = styled(MuiList, {
 })<{ navOpen?: boolean }>(({ navOpen }) => ({
   overflow: 'visible',
   overflowY: navOpen ? 'auto' : 'hidden',
-  padding: '68px 0',
+  marginTop: '64px',
+  padding: 0,
   transition: 'all .2s',
-  width: navOpen ? '240px' : '0',
+  width: navOpen ? '260px' : '0',
 }));
 
 const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
@@ -66,6 +67,9 @@ const SideBar: FC<Props> = ({ navOpen }) => {
         <ListItemHeader>Getting Started</ListItemHeader>
         <Link href="/docs/install" passHref>
           <ListItemLevel2>Install</ListItemLevel2>
+        </Link>
+        <Link href="/docs/usage" passHref>
+          <ListItemLevel2>Usage</ListItemLevel2>
         </Link>
         <Link href="/docs/props" passHref>
           <ListItemLevel2>All Props</ListItemLevel2>

@@ -11,7 +11,11 @@ export const mdxComponents = {
   h5: (props: any) => <Typography variant="h5" {...props} />,
   h6: (props: any) => <Typography variant="h6" {...props} />,
   p: (props: any) => (
-    <Typography style={{ maxWidth: '120ch' }} variant="body1" {...props} />
+    <Typography
+      style={{ maxWidth: '120ch', margin: '1.5rem 0' }}
+      variant="body1"
+      {...props}
+    />
   ),
   code: (props: any) => <SampleCodeSnippet {...props} />,
   blockquote: (props: any) => <Blockquote {...props} />,
