@@ -1479,6 +1479,7 @@ const Example: FC = () => {
           }}
         >
           <img
+            alt="avatar"
             height={200}
             src={row.original.avatar}
             loading="lazy"

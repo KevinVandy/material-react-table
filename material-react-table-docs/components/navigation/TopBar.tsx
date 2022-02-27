@@ -90,6 +90,7 @@ const TopBar: FC<Props> = ({
             >
               <IconButton aria-label="Github">
                 <img
+                  alt="Github"
                   height={30}
                   style={{
                     backgroundColor: '#fff',
@@ -108,6 +109,7 @@ const TopBar: FC<Props> = ({
             >
               <IconButton aria-label="Discord">
                 <img
+                  alt="Discord"
                   height={25}
                   style={{
                     padding: '-3px',

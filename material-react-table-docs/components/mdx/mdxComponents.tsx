@@ -14,7 +14,13 @@ export const mdxComponents = {
   h5: (props: any) => <Typography variant="h5" {...props} />,
   h6: (props: any) => <Typography variant="h6" {...props} />,
   img: (props: any) => (
-    <Image height={200} width={200} objectFit="scale-down" {...props} />
+    <Image
+      alt="avatar"
+      height={200}
+      width={200}
+      objectFit="scale-down"
+      {...props}
+    />
   ),
   li: (props: any) => (
     <li {...props}>
