@@ -20,8 +20,8 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
 
   const onSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (selectAll) {
+      tableInstance?.getToggleAllRowsSelectedProps?.()?.onChange?.(event);
       onSelectAllChange?.(event, tableInstance.selectedFlatRows);
-      tableInstance.toggleAllRowsSelected(event.target.checked);
     } else if (row) {
       row?.getToggleRowSelectedProps()?.onChange?.(event);
       onRowSelectChange?.(event, row, tableInstance.selectedFlatRows);

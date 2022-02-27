@@ -153,8 +153,8 @@ export const SourceCodeSnippet: FC<Props> = ({
                     {!isMobile && (
                       <span
                         style={{
-                          padding: '1ch',
-                          paddingRight: `${3 - String(i + 1).length}ch`,
+                          paddingRight: '2ch',
+                          paddingLeft: `${4 - String(i + 1).length}ch`,
                           color: theme.palette.text.secondary,
                         }}
                       >

@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
 
-const BasicExample: FC = () => {
+const Example: FC = () => {
   const columns = useMemo(
     () => [
       {
@@ -71,4 +71,4 @@ const BasicExample: FC = () => {
   return <MaterialReactTable columns={columns} data={data} />;
 };
 
-export default BasicExample;
+export default Example;

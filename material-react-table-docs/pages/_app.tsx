@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 import { styled, ThemeProvider, useMediaQuery } from '@mui/material';
 import { mdxComponents } from '../components/mdx/mdxComponents';
 import TopBar from '../components/navigation/TopBar';
 import SideBar from '../components/navigation/Sidebar';
 import '../styles/globals.css';
-import Head from 'next/head';
+
 import { theme } from '../styles/MuiTheme';
 
 const PageContainer = styled('div')(({ theme }) => ({
@@ -25,7 +26,7 @@ function App({ Component, pageProps }: AppProps) {
   const isTablet = useMediaQuery('(max-width: 900px)');
   const isDesktop = useMediaQuery('(min-width: 1600px)');
   const [navOpen, setNavOpen] = useState(true);
-  const [darkTheme, setDarkTheme] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(true);
 
   useEffect(
     () => setDarkTheme(localStorage.getItem('darkTheme') === 'true'),

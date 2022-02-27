@@ -1,38 +1,35 @@
-import React, { FC, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
 
-export const BasicExample: FC = () => {
+const Example = () => {
   const columns = useMemo(
     () => [
-      //column definitions...
       {
         Header: 'First Name',
-        accessor: 'firstName' as const,
+        accessor: 'firstName',
       },
       {
         Header: 'Last Name',
-        accessor: 'lastName' as const,
+        accessor: 'lastName',
       },
       {
         Header: 'Address',
-        accessor: 'address' as const,
+        accessor: 'address',
       },
       {
         Header: 'City',
-        accessor: 'city' as const,
+        accessor: 'city',
       },
       {
         Header: 'State',
-        accessor: 'state' as const,
+        accessor: 'state',
       },
-      //end
     ],
     [],
   );
 
   const data = useMemo(
     () => [
-      //data definitions...
       {
         firstName: 'Dylan',
         lastName: 'Murray',
@@ -68,22 +65,10 @@ export const BasicExample: FC = () => {
         city: 'Charleston',
         state: 'South Carolina',
       },
-      //end
     ],
     [],
   );
-
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      disableColumnActions
-      disableSortBy
-      hideToolbarBottom
-      hideToolbarTop
-      manualPagination
-    />
-  );
+  return <MaterialReactTable columns={columns} data={data} />;
 };
 
-export default BasicExample;
+export default Example;

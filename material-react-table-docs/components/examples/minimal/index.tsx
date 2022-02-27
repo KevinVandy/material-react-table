@@ -1,17 +1,17 @@
 import React from 'react';
 import { SourceCodeSnippet } from '../../mdx/SourceCodeSnippet';
-import MinimalExample from './MinimalExample';
-const MinimalExampleTS = require('!!raw-loader!./MinimalExample.tsx').default;
-const MinimalExampleJS = require('!!raw-loader!./MinimalExample.js').default;
+import Example from './TS';
+const JS = require('!!raw-loader!./JS.js').default;
+const TS = require('!!raw-loader!./TS.tsx').default;
 
-const Example = () => {
+const ExampleTable = () => {
   return (
     <SourceCodeSnippet
-      typeScriptCode={MinimalExampleTS}
-      javaScriptCode={MinimalExampleJS}
-      Component={MinimalExample}
+      Component={Example}
+      javaScriptCode={JS}
+      typeScriptCode={TS}
     />
   );
 };
 
-export default Example;
+export default ExampleTable;

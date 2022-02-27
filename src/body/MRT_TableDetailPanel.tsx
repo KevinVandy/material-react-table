@@ -23,11 +23,11 @@ interface Props {
 
 export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
   const {
-    tableInstance,
-    renderDetailPanel,
-    muiTableDetailPanelProps,
     muiTableBodyRowProps,
+    muiTableDetailPanelProps,
     onDetailPanelClick,
+    renderDetailPanel,
+    tableInstance,
   } = useMRT();
 
   const mTableBodyRowProps =
@@ -37,24 +37,17 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
 
   const tableRowProps = {
     ...mTableBodyRowProps,
-    ...row.getToggleRowExpandedProps(),
+    ...row.getRowProps(),
     style: {
-      ...row.getToggleRowExpandedProps().style,
+      ...row.getRowProps().style,
       ...(mTableBodyRowProps?.style ?? {}),
     },
   };
 
-  const mTableDetailPanelProps =
+  const tableCellProps =
     muiTableDetailPanelProps instanceof Function
       ? muiTableDetailPanelProps(row)
       : muiTableDetailPanelProps;
-
-  const tableCellProps = {
-    ...mTableDetailPanelProps,
-    style: {
-      ...(mTableDetailPanelProps?.style ?? {}),
-    },
-  };
 
   return (
     <TableRow hover {...tableRowProps}>

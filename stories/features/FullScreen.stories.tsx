@@ -16,34 +16,53 @@ export default meta;
 
 const columns = [
   {
-    Header: 'First Name',
-    accessor: 'firstName' as const,
+    Header: 'Employee',
+    columns: [
+      {
+        Header: 'First Name',
+        accessor: 'firstName' as const,
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'lastName' as const,
+      },
+      {
+        Header: 'Email',
+        accessor: 'email' as const,
+      },
+    ],
   },
   {
-    Header: 'Last Name',
-    accessor: 'lastName' as const,
-  },
-  {
-    Header: 'Address',
-    accessor: 'address' as const,
-  },
-  {
-    Header: 'State',
-    accessor: 'state' as const,
-  },
-  {
-    Header: 'Phone Number',
-    accessor: 'phoneNumber' as const,
+    Header: 'Job Info',
+    columns: [
+      {
+        Header: 'Job Title',
+        accessor: 'jobTitle' as const,
+      },
+      {
+        Header: 'Salary',
+        accessor: 'salary' as const,
+      },
+      {
+        Header: 'Start Date',
+        accessor: 'startDate' as const,
+      },
+    ],
   },
 ];
 
-const data = [...Array(50)].map((_) => ({
+const data = [...Array(128)].map((_) => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
-  address: faker.address.streetAddress(),
-  state: faker.address.state(),
-  phoneNumber: faker.phone.phoneNumber(),
+  email: faker.internet.email(),
+  jobTitle: faker.name.jobTitle(),
+  salary: +faker.finance.amount(0, 150000, 0) + 20000,
+  startDate: faker.date.past(8).toLocaleDateString(),
+  signatureCatchPhrase: faker.company.catchPhrase(),
+  avatar: faker.image.avatar(),
 }));
+
+console.log({ data });
 
 export const FullScreenToggleEnabledDefault: Story<
   MaterialReactTableProps
