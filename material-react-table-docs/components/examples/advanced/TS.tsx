@@ -1488,7 +1488,7 @@ const Example: FC = () => {
           <div style={{ textAlign: 'center' }}>
             <Typography variant="h4">Signature Catch Phrase:</Typography>
             <Typography variant="h1">
-              "{row.original.signatureCatchPhrase}"
+              &quot;{row.original.signatureCatchPhrase}&quot;
             </Typography>
           </div>
         </div>
