@@ -79,7 +79,9 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
             <MRT_ToggleRowActionMenuButton row={row} />
           )}
       </TableRow>
-      {renderDetailPanel && <MRT_TableDetailPanel row={row} />}
+      {renderDetailPanel && !row.isGrouped && (
+        <MRT_TableDetailPanel row={row} />
+      )}
     </>
   );
 };

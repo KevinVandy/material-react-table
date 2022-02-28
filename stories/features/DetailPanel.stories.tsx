@@ -39,6 +39,7 @@ export const DetailPanelEnabled: Story<MaterialReactTableProps> = () => (
       zipCode: faker.address.zipCode(),
       phone: faker.phone.phoneNumber(),
     }))}
+    enableColumnGrouping
     renderDetailPanel={(rowData) => (
       <div style={{ display: 'grid' }}>
         <span>City: {rowData.original.city}</span>

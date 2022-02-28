@@ -84,7 +84,11 @@ export type MRT_TableOptions<D extends {} = {}> = TableOptions<D> &
   UseResizeColumnsOptions<D> &
   UseRowSelectOptions<D> &
   UseRowStateOptions<D> &
-  UseSortByOptions<D> & {};
+  UseSortByOptions<D> & {
+    columns: (Column<D> & MRT_ColumnInterface)[];
+    data: D[];
+    initialState?: Partial<MRT_TableState>;
+  };
 
 export type MRT_TableInstance<D extends {} = {}> = TableInstance<D> &
   UseTableInstanceProps<D> &
@@ -194,8 +198,7 @@ export type MRT_TableState<D extends {} = {}> = TableState<D> &
     showSearchTextField?: boolean;
   };
 
-export type MaterialReactTableProps<D extends {} = {}> = MRT_TableOptions<D> &
-  UseTableOptions<D> &
+export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
   UseExpandedOptions<D> &
   UseFiltersOptions<D> &
   UseGlobalFiltersOptions<D> &
@@ -204,9 +207,8 @@ export type MaterialReactTableProps<D extends {} = {}> = MRT_TableOptions<D> &
   UseResizeColumnsOptions<D> &
   UseRowSelectOptions<D> &
   UseRowStateOptions<D> &
-  UseSortByOptions<D> & {
-    columns: (Column<D> & MRT_ColumnInterface)[];
-    data: D[];
+  UseSortByOptions<D> &
+  MRT_TableOptions<D> & {
     disableColumnActions?: boolean;
     disableColumnHiding?: boolean;
     disableDensePaddingToggle?: boolean;
@@ -226,7 +228,6 @@ export type MaterialReactTableProps<D extends {} = {}> = MRT_TableOptions<D> &
     hideToolbarInternalActions?: boolean;
     hideToolbarTop?: boolean;
     icons?: Partial<MRT_Icons>;
-    initialState?: Partial<MRT_TableState>;
     isFetching?: boolean;
     isLoading?: boolean;
     localization?: Partial<MRT_Localization>;
