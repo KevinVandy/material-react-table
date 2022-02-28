@@ -1,6 +1,5 @@
 import React, { FC, useMemo } from 'react';
 import { TableRow } from '@mui/material';
-import { HeaderGroup } from 'react-table';
 import {
   MRT_StyledTableHeadCell,
   MRT_TableHeadCell,
@@ -10,9 +9,10 @@ import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
 import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
 import { MRT_TableHeadCellActions } from './MRT_TableHeadCellActions';
+import { MRT_HeaderGroup } from '..';
 
 interface Props {
-  headerGroup: HeaderGroup;
+  headerGroup: MRT_HeaderGroup;
 }
 
 export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
@@ -81,7 +81,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
           <MRT_TableSpacerCell width="1rem" />
         )
       ) : null}
-      {headerGroup.headers.map((column: HeaderGroup) => (
+      {headerGroup.headers.map((column: MRT_HeaderGroup) => (
         <MRT_TableHeadCell key={column.getHeaderProps().key} column={column} />
       ))}
       {(enableRowActions || enableRowEditing) &&

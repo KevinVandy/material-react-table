@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import { FormControlLabel, MenuItem, Switch } from '@mui/material';
 import { ColumnInstance } from 'react-table';
+import { MRT_ColumnInstance } from '..';
 
 interface Props {
-  column: ColumnInstance;
+  column: MRT_ColumnInstance;
 }
 
 export const MRT_ShowHideColumnsMenu: FC<Props> = ({ column }) => {
@@ -35,7 +36,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({ column }) => {
           onChange={() => handleToggleColumnHidden(column)}
         />
       </MenuItem>
-      {column.columns?.map((c, i) => (
+      {column.columns?.map((c: MRT_ColumnInstance, i) => (
         <MRT_ShowHideColumnsMenu key={`${i}-${c.id}`} column={c} />
       ))}
     </>

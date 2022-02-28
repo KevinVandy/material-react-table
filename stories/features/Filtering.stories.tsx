@@ -56,7 +56,11 @@ export const FilteringEnabledDefault: Story<MaterialReactTableProps> = () => (
 );
 
 export const FilteringEnabledAndShown: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} defaultShowFilters />
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    initialState={{ showFilters: true }}
+  />
 );
 
 export const FilteringDisabled: Story<MaterialReactTableProps> = () => (
@@ -96,7 +100,7 @@ export const FilteringDisabledForCertainColumns: Story<
       },
     ]}
     data={data}
-    defaultShowFilters
+    initialState={{ showFilters: true }}
   />
 );
 
@@ -141,7 +145,7 @@ export const CustomFilterFunction: Story<MaterialReactTableProps> = () => (
       },
     ]}
     data={data}
-    defaultShowFilters
+    initialState={{ showFilters: true }}
   />
 );
 
@@ -195,6 +199,6 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
       },
     ]}
     data={data}
-    defaultShowFilters
+    initialState={{ showFilters: true }}
   />
 );

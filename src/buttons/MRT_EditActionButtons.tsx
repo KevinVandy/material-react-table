@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { IconButton, styled, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
-import { Row } from 'react-table';
+import { MRT_Row } from '..';
 
 const EditActionButtonWrappers = styled('div')({
   display: 'flex',
@@ -9,7 +9,7 @@ const EditActionButtonWrappers = styled('div')({
 });
 
 interface Props {
-  row: Row;
+  row: MRT_Row;
 }
 
 export const MRT_EditActionButtons: FC<Props> = ({ row }) => {

@@ -62,8 +62,6 @@ const data = [...Array(128)].map((_) => ({
   avatar: faker.image.avatar(),
 }));
 
-console.log({ data });
-
 export const FullScreenToggleEnabledDefault: Story<
   MaterialReactTableProps
 > = () => <MaterialReactTable columns={columns} data={data} />;
@@ -73,5 +71,9 @@ export const DisableFullScreenToggle: Story<MaterialReactTableProps> = () => (
 );
 
 export const DefaultFullScreenOn: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} defaultFullScreen />
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    initialState={{ fullScreen: true }}
+  />
 );

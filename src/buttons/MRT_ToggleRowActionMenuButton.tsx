@@ -1,10 +1,10 @@
 import React, { FC, MouseEvent, useState } from 'react';
 import { IconButton as MuiIconButton, styled, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
-import { Row } from 'react-table';
 import { MRT_RowActionMenu } from '../menus/MRT_RowActionMenu';
 import { MRT_EditActionButtons } from './MRT_EditActionButtons';
 import { MRT_TableButtonCell } from '../table/MRT_TableButtonCell';
+import { MRT_Row } from '..';
 
 const IconButton = styled(MuiIconButton)({
   opacity: 0.5,
@@ -18,7 +18,7 @@ const IconButton = styled(MuiIconButton)({
 });
 
 interface Props {
-  row: Row;
+  row: MRT_Row;
 }
 
 export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {

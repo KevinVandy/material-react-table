@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Divider, Menu, MenuItem as MuiMenuItem, styled } from '@mui/material';
 import { useMRT } from '../useMRT';
-import { HeaderGroup } from 'react-table';
+import { MRT_HeaderGroup } from '..';
 
 const MenuItem = styled(MuiMenuItem)({
   display: 'flex',
@@ -10,7 +10,7 @@ const MenuItem = styled(MuiMenuItem)({
 
 interface Props {
   anchorEl: HTMLElement | null;
-  column: HeaderGroup;
+  column: MRT_HeaderGroup;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
 }
 

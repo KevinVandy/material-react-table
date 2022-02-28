@@ -78,7 +78,6 @@ export const DefaultToDensePadding: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    defaultDensePadding
-    initialState={{ pageSize: 25 }}
+    initialState={{ pageSize: 25, densePadding: true }}
   />
 );

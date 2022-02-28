@@ -16,28 +16,185 @@ import {
 import {
   Cell,
   Column,
+  ColumnInstance,
+  // ColumnInterface,
   HeaderGroup,
   Row,
   TableInstance,
   TableOptions,
+  TableState,
+  UseColumnOrderInstanceProps,
+  UseColumnOrderState,
+  UseExpandedInstanceProps,
   UseExpandedOptions,
+  UseExpandedRowProps,
+  UseExpandedState,
+  UseFiltersColumnOptions,
+  UseFiltersColumnProps,
+  UseFiltersInstanceProps,
   UseFiltersOptions,
+  UseFiltersState,
+  UseGlobalFiltersColumnOptions,
+  UseGlobalFiltersInstanceProps,
   UseGlobalFiltersOptions,
+  UseGlobalFiltersState,
+  UseGroupByCellProps,
+  UseGroupByColumnOptions,
+  UseGroupByColumnProps,
+  UseGroupByInstanceProps,
   UseGroupByOptions,
+  UseGroupByRowProps,
+  UseGroupByState,
+  UsePaginationInstanceProps,
   UsePaginationOptions,
+  UsePaginationState,
+  UseResizeColumnsColumnOptions,
+  UseResizeColumnsColumnProps,
   UseResizeColumnsOptions,
+  UseResizeColumnsState,
+  UseRowSelectInstanceProps,
   UseRowSelectOptions,
+  UseRowSelectRowProps,
+  UseRowSelectState,
+  UseRowStateCellProps,
+  UseRowStateInstanceProps,
   UseRowStateOptions,
+  UseRowStateRowProps,
+  UseRowStateState,
+  UseSortByColumnOptions,
+  UseSortByColumnProps,
+  UseSortByInstanceProps,
   UseSortByOptions,
+  UseSortByState,
+  UseTableHeaderGroupProps,
+  UseTableInstanceProps,
   UseTableOptions,
 } from 'react-table';
 import { MaterialReactTableProvider } from './useMRT';
 import { MRT_TableContainer } from './table/MRT_TableContainer';
-import { MRT_ColumnInterface } from './@types/react-table-config';
 import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
 
-export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
+export type MRT_TableOptions<D extends {} = {}> = TableOptions<D> &
+  UseExpandedOptions<D> &
+  UseFiltersOptions<D> &
+  UseGlobalFiltersOptions<D> &
+  UseGroupByOptions<D> &
+  UsePaginationOptions<D> &
+  UseResizeColumnsOptions<D> &
+  UseRowSelectOptions<D> &
+  UseRowStateOptions<D> &
+  UseSortByOptions<D> & {};
+
+export type MRT_TableInstance<D extends {} = {}> = TableInstance<D> &
+  UseTableInstanceProps<D> &
+  UseColumnOrderInstanceProps<D> &
+  UseExpandedInstanceProps<D> &
+  UseFiltersInstanceProps<D> &
+  UseGlobalFiltersInstanceProps<D> &
+  UseGroupByInstanceProps<D> &
+  UsePaginationInstanceProps<D> &
+  UseRowSelectInstanceProps<D> &
+  UseRowStateInstanceProps<D> &
+  UseSortByInstanceProps<D> & {
+    columns: (Column<D> & MRT_ColumnInstance<D>)[];
+    headerGroups: MRT_HeaderGroup<D>[];
+    footerGroups: MRT_HeaderGroup<D>[];
+    state: MRT_TableState<D>;
+    rows: MRT_Row<D>[];
+    page: MRT_Row<D>[];
+    resetResizing: () => void;
+    getToggleAllRowsExpandedProps: () => void;
+  };
+
+export type MRT_ColumnInterface<D extends {} = {}> =
+  // ColumnInterface<D> &
+  UseFiltersColumnOptions<D> &
+    UseGlobalFiltersColumnOptions<D> &
+    UseGroupByColumnOptions<D> &
+    UseResizeColumnsColumnOptions<D> &
+    UseSortByColumnOptions<D> & {
+      Edit?: ({
+        cell,
+        onChange,
+      }: {
+        cell: MRT_Cell<D>;
+        onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+      }) => ReactNode;
+      Filter?: ({ column }: { column: MRT_HeaderGroup<D> }) => ReactNode;
+      Footer?: string;
+      Header?: string;
+      disableFilters?: boolean;
+      editable?: boolean;
+      muiTableBodyCellEditTextFieldProps?:
+        | TextFieldProps
+        | ((cell: MRT_Cell<D>) => TextFieldProps);
+      muiTableBodyCellProps?:
+        | TableCellProps
+        | ((cell: MRT_Cell<D>) => TableCellProps);
+      muiTableFooterCellProps?:
+        | TableCellProps
+        | ((column: Column<D>) => TableCellProps);
+      muiTableHeadCellFilterTextFieldProps?:
+        | TextFieldProps
+        | ((column: Column<D>) => TextFieldProps);
+      muiTableHeadCellProps?:
+        | TableCellProps
+        | ((column: Column<D>) => TableCellProps);
+      onCellEditChange?: (
+        event: ChangeEvent<HTMLInputElement>,
+        cell: MRT_Cell<D>,
+      ) => void;
+      onFilterChange?: (
+        event: ChangeEvent<HTMLInputElement>,
+        filterValue: any,
+      ) => void;
+    };
+
+export type MRT_ColumnInstance<D extends {} = {}> = ColumnInstance<D> &
+  UseFiltersColumnProps<D> &
+  UseGroupByColumnProps<D> &
+  UseResizeColumnsColumnProps<D> &
+  UseSortByColumnProps<D> & {
+    columns?: MRT_ColumnInstance<D>[];
+  };
+
+export type MRT_HeaderGroup<D extends {} = {}> = HeaderGroup<D> &
+  MRT_ColumnInstance<D> &
+  UseTableHeaderGroupProps<D> & {
+    headers: MRT_HeaderGroup<D>[];
+  };
+
+export type MRT_Row<D extends {} = {}> = Row<D> &
+  UseExpandedRowProps<D> &
+  UseGroupByRowProps<D> &
+  UseRowSelectRowProps<D> &
+  UseRowStateRowProps<D> & {
+    cells: MRT_Cell<D>[];
+  };
+
+export type MRT_Cell<D extends {} = {}, _V = any> = Cell<D> &
+  UseGroupByCellProps<D> &
+  UseRowStateCellProps<D> & {};
+
+export type MRT_TableState<D extends {} = {}> = TableState<D> &
+  UseColumnOrderState<D> &
+  UseExpandedState<D> &
+  UseFiltersState<D> &
+  UseGlobalFiltersState<D> &
+  UseGroupByState<D> &
+  UsePaginationState<D> &
+  UseResizeColumnsState<D> &
+  UseRowSelectState<D> &
+  UseRowStateState<D> &
+  UseSortByState<D> & {
+    densePadding?: boolean;
+    fullScreen?: boolean;
+    showFilters?: boolean;
+    showSearchTextField?: boolean;
+  };
+
+export type MaterialReactTableProps<D extends {} = {}> = MRT_TableOptions<D> &
   UseTableOptions<D> &
   UseExpandedOptions<D> &
   UseFiltersOptions<D> &
@@ -49,10 +206,7 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
   UseRowStateOptions<D> &
   UseSortByOptions<D> & {
     columns: (Column<D> & MRT_ColumnInterface)[];
-    defaultDensePadding?: boolean;
-    defaultFullScreen?: boolean;
-    defaultShowFilters?: boolean;
-    defaultShowSearchTextField?: boolean;
+    data: D[];
     disableColumnActions?: boolean;
     disableColumnHiding?: boolean;
     disableDensePaddingToggle?: boolean;
@@ -72,21 +226,22 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
     hideToolbarInternalActions?: boolean;
     hideToolbarTop?: boolean;
     icons?: Partial<MRT_Icons>;
+    initialState?: Partial<MRT_TableState>;
     isFetching?: boolean;
     isLoading?: boolean;
     localization?: Partial<MRT_Localization>;
     muiSearchTextFieldProps?: TextFieldProps;
     muiTableBodyCellEditTextFieldProps?:
       | TextFieldProps
-      | ((cell?: Cell<D>) => TextFieldProps);
+      | ((cell?: MRT_Cell<D>) => TextFieldProps);
     muiTableBodyCellProps?:
       | TableCellProps
-      | ((cell?: Cell<D>) => TableCellProps);
+      | ((cell?: MRT_Cell<D>) => TableCellProps);
     muiTableBodyProps?: TableBodyProps;
     muiTableBodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
     muiTableContainerProps?:
       | TableContainerProps
-      | ((table: TableInstance<D>) => TableContainerProps);
+      | ((table: MRT_TableInstance<D>) => TableContainerProps);
     muiTableDetailPanelProps?:
       | TableCellProps
       | ((row: Row<D>) => TableCellProps);
@@ -96,7 +251,7 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
     muiTableFooterProps?: TableFooterProps;
     muiTableFooterRowProps?:
       | TableRowProps
-      | ((footerGroup: HeaderGroup<D>) => TableRowProps);
+      | ((footerGroup: MRT_HeaderGroup<D>) => TableRowProps);
     muiTableHeadCellFilterTextFieldProps?:
       | TextFieldProps
       | ((column: Column<D>) => TextFieldProps);
@@ -106,23 +261,25 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
     muiTableHeadProps?: TableHeadProps;
     muiTableHeadRowProps?:
       | TableRowProps
-      | ((row: HeaderGroup<D>) => TableRowProps);
+      | ((row: MRT_HeaderGroup<D>) => TableRowProps);
     muiTablePaginationProps?:
       | Partial<TablePaginationProps>
-      | ((tableInstance: TableInstance<D>) => Partial<TablePaginationProps>);
+      | ((
+          tableInstance: MRT_TableInstance<D>,
+        ) => Partial<TablePaginationProps>);
     muiTableProps?: TableProps;
     muiTableToolbarAlertBannerProps?:
       | AlertProps
-      | ((tableInstance: TableInstance<D>) => AlertProps);
+      | ((tableInstance: MRT_TableInstance<D>) => AlertProps);
     muiTableToolbarBottomProps?:
       | ToolbarProps
-      | ((tableInstance: TableInstance<D>) => ToolbarProps);
+      | ((tableInstance: MRT_TableInstance<D>) => ToolbarProps);
     muiTableToolbarTopProps?:
       | ToolbarProps
-      | ((tableInstance: TableInstance<D>) => ToolbarProps);
+      | ((tableInstance: MRT_TableInstance<D>) => ToolbarProps);
     onCellClick?: (
       event: MouseEvent<HTMLTableCellElement>,
-      cell: Cell<D>,
+      cell: MRT_Cell<D>,
     ) => void;
     onColumnHide?: (column: Column<D>, visibleColumns: Column<D>[]) => void;
     onDetailPanelClick?: (
@@ -149,16 +306,18 @@ export type MaterialReactTableProps<D extends {} = {}> = TableOptions<D> &
     renderDetailPanel?: (row: Row<D>) => ReactNode;
     renderRowActionMenuItems?: (
       rowData: Row<D>,
-      tableInstance: TableInstance<D>,
+      tableInstance: MRT_TableInstance<D>,
       closeMenu: () => void,
     ) => ReactNode[];
     renderRowActions?: (
       row: Row<D>,
-      tableInstance: TableInstance<D>,
+      tableInstance: MRT_TableInstance<D>,
     ) => ReactNode;
-    renderToolbarCustomActions?: (tableInstance: TableInstance<D>) => ReactNode;
+    renderToolbarCustomActions?: (
+      tableInstance: MRT_TableInstance<D>,
+    ) => ReactNode;
     renderToolbarInternalActions?: (
-      tableInstance: TableInstance<D>,
+      tableInstance: MRT_TableInstance<D>,
       {
         MRT_ToggleSearchButton,
         MRT_ToggleFiltersButton,

@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { TableRow } from '@mui/material';
-import { HeaderGroup } from 'react-table';
 import { MRT_TableFooterCell } from './MRT_TableFooterCell';
 import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
 import { useMRT } from '../useMRT';
+import { MRT_HeaderGroup } from '..';
 
 interface Props {
-  footerGroup: HeaderGroup;
+  footerGroup: MRT_HeaderGroup;
 }
 
 export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
@@ -53,7 +53,7 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
         />
       )}
       {enableSelection && <MRT_TableSpacerCell width="1rem" />}
-      {footerGroup.headers.map((column) => (
+      {footerGroup.headers.map((column: MRT_HeaderGroup) => (
         <MRT_TableFooterCell
           key={column.getFooterProps().key}
           column={column}

@@ -1,10 +1,10 @@
 import React, { ChangeEvent, FC } from 'react';
 import { TextField } from '@mui/material';
-import { Cell } from 'react-table';
 import { useMRT } from '../useMRT';
+import { MRT_Cell } from '..';
 
 interface Props {
-  cell: Cell;
+  cell: MRT_Cell;
 }
 
 export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {

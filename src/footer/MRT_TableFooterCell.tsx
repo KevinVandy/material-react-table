@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { styled, TableCell as MuiTableCell } from '@mui/material';
-import { HeaderGroup } from 'react-table';
 import { useMRT } from '../useMRT';
+import { MRT_HeaderGroup } from '..';
 
 const TableCell = styled(MuiTableCell, {
   shouldForwardProp: (prop) =>
@@ -16,7 +16,7 @@ const TableCell = styled(MuiTableCell, {
 );
 
 interface Props {
-  column: HeaderGroup;
+  column: MRT_HeaderGroup;
 }
 
 export const MRT_TableFooterCell: FC<Props> = ({ column }) => {

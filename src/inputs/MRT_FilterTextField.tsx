@@ -1,10 +1,11 @@
 import React, { ChangeEvent, FC, useState } from 'react';
 import { IconButton, InputAdornment, TextField, Tooltip } from '@mui/material';
-import { HeaderGroup, useAsyncDebounce } from 'react-table';
+import { useAsyncDebounce } from 'react-table';
 import { useMRT } from '../useMRT';
+import { MRT_HeaderGroup } from '..';
 
 interface Props {
-  column: HeaderGroup;
+  column: MRT_HeaderGroup;
 }
 
 export const MRT_FilterTextField: FC<Props> = ({ column }) => {

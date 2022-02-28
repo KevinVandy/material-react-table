@@ -192,14 +192,13 @@ const PropTable = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      defaultShowSearchTextField
-      defaultDensePadding
       manualPagination
       hideToolbarBottom
       initialState={{
-        // @ts-ignore
         sortBy: [{ id: 'prop', desc: false }],
         hiddenColumns: ['default'],
+        showSearchTextField: true,
+        densePadding: true,
       }}
     />
   );

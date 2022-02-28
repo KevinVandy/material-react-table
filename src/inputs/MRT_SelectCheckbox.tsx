@@ -1,11 +1,11 @@
 import React, { ChangeEvent, FC } from 'react';
 import { Checkbox, Tooltip } from '@mui/material';
-import { Row } from 'react-table';
 import { useMRT } from '../useMRT';
 import { MRT_TableButtonCell } from '../table/MRT_TableButtonCell';
+import { MRT_Row } from '..';
 
 interface Props {
-  row?: Row;
+  row?: MRT_Row;
   selectAll?: boolean;
 }
 

@@ -7,10 +7,10 @@ import {
   Collapse,
   Tooltip,
 } from '@mui/material';
-import { HeaderGroup } from 'react-table';
 import { useMRT } from '../useMRT';
 import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
 import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
+import { MRT_HeaderGroup } from '..';
 
 export const MRT_StyledTableHeadCell = styled(MuiTableCell, {
   shouldForwardProp: (prop) =>
@@ -52,7 +52,7 @@ const Divider = styled(MuiDivider)({
 });
 
 interface Props {
-  column: HeaderGroup;
+  column: MRT_HeaderGroup;
 }
 
 export const MRT_TableHeadCell: FC<Props> = ({ column }) => {

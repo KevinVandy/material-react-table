@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Menu, MenuItem as MuiMenuItem, styled } from '@mui/material';
 import { useMRT } from '../useMRT';
-import { Row } from 'react-table';
+import { MRT_Row } from '..';
 
 const MenuItem = styled(MuiMenuItem)({
   display: 'flex',
@@ -10,7 +10,7 @@ const MenuItem = styled(MuiMenuItem)({
 
 interface Props {
   anchorEl: HTMLElement | null;
-  row: Row;
+  row: MRT_Row;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
   handleEdit: () => void;
 }

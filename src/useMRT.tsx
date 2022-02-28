@@ -1,15 +1,13 @@
 import React, {
   Context,
-  createContext,
   PropsWithChildren,
+  createContext,
   useContext,
   useMemo,
   useState,
 } from 'react';
 import {
   PluginHook,
-  Row,
-  TableInstance,
   useExpanded,
   useFilters,
   useFlexLayout,
@@ -21,6 +19,7 @@ import {
   useSortBy,
   useTable,
 } from 'react-table';
+import { MRT_Row, MRT_TableInstance } from '.';
 import { MRT_Icons } from './icons';
 import { MRT_Localization } from './localization';
 import { MaterialReactTableProps } from './MaterialReactTable';
@@ -28,19 +27,19 @@ import { MaterialReactTableProps } from './MaterialReactTable';
 export type UseMRT<D extends {} = {}> = MaterialReactTableProps<D> & {
   anyRowsCanExpand: boolean;
   anyRowsExpanded: boolean;
-  currentEditingRow: Row<D> | null;
+  currentEditingRow: MRT_Row<D> | null;
   densePadding: boolean;
   fullScreen: boolean;
   icons: MRT_Icons;
   localization: MRT_Localization;
-  setCurrentEditingRow: (currentRowEditingId: Row<D> | null) => void;
+  setCurrentEditingRow: (currentRowEditingId: MRT_Row<D> | null) => void;
   setDensePadding: (densePadding: boolean) => void;
   setFullScreen: (fullScreen: boolean) => void;
   setShowFilters: (showFilters: boolean) => void;
   setShowSearch: (showSearch: boolean) => void;
   showFilters: boolean;
   showSearch: boolean;
-  tableInstance: TableInstance<D>;
+  tableInstance: MRT_TableInstance<D>;
 };
 
 const MaterialReactTableContext = (<D extends {}>() =>
@@ -62,28 +61,32 @@ export const MaterialReactTableProvider = <D extends {}>(
   if (props.enableColumnResizing)
     hooks.unshift(useResizeColumns, useFlexLayout);
 
-  const tableInstance = useTable<D>(props, ...hooks);
+  const tableInstance = useTable<D>(props, ...hooks) as MRT_TableInstance<D>;
 
   const anyRowsCanExpand = useMemo(
-    () => tableInstance.rows.some((row) => row.canExpand),
+    // @ts-ignore
+    () => tableInstance.rows.some((row: MRT_Row) => row.canExpand),
     [tableInstance.rows],
   );
   const anyRowsExpanded = useMemo(
-    () => tableInstance.rows.some((row) => row.isExpanded),
+    // @ts-ignore
+    () => tableInstance.rows.some((row: MRT_Row) => row.isExpanded),
     [tableInstance.rows],
   );
-  const [currentEditingRow, setCurrentEditingRow] = useState<Row | null>(null);
+  const [currentEditingRow, setCurrentEditingRow] = useState<MRT_Row | null>(
+    null,
+  );
   const [densePadding, setDensePadding] = useState(
-    props.defaultDensePadding ?? false,
+    props.initialState?.densePadding ?? false,
   );
   const [fullScreen, setFullScreen] = useState(
-    props.defaultFullScreen ?? false,
+    props.initialState?.fullScreen ?? false,
   );
   const [showFilters, setShowFilters] = useState(
-    props.defaultShowFilters ?? false,
+    props.initialState?.showFilters ?? false,
   );
   const [showSearch, setShowSearch] = useState(
-    props.defaultShowSearchTextField ?? false,
+    props.initialState?.showSearchTextField ?? false,
   );
 
   return (
@@ -112,5 +115,5 @@ export const MaterialReactTableProvider = <D extends {}>(
 };
 
 export const useMRT = <D extends {}>(): UseMRT<D> =>
-  //@ts-ignore
+  // @ts-ignore
   useContext<UseMRT<D>>(MaterialReactTableContext);

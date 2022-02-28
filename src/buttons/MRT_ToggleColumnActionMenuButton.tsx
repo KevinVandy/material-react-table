@@ -2,7 +2,7 @@ import React, { FC, MouseEvent, useState } from 'react';
 import { IconButton as MuiIconButton, styled, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
-import { HeaderGroup } from 'react-table';
+import { MRT_HeaderGroup } from '..';
 
 const IconButton = styled(MuiIconButton)({
   opacity: 0.5,
@@ -16,7 +16,7 @@ const IconButton = styled(MuiIconButton)({
 });
 
 interface Props {
-  column: HeaderGroup;
+  column: MRT_HeaderGroup;
 }
 
 export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {

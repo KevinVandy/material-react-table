@@ -5,8 +5,8 @@ import {
   TableCell as MuiTableCell,
   TableRow,
 } from '@mui/material';
-import { Row } from 'react-table';
 import { useMRT } from '../useMRT';
+import { MRT_Row } from '..';
 
 const TableCell = styled(MuiTableCell, {
   shouldForwardProp: (prop) => prop !== 'isExpanded',
@@ -18,7 +18,7 @@ const TableCell = styled(MuiTableCell, {
 }));
 
 interface Props {
-  row: Row;
+  row: MRT_Row;
 }
 
 export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
@@ -50,7 +50,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
       : muiTableDetailPanelProps;
 
   return (
-    <TableRow hover {...tableRowProps}>
+    <TableRow {...tableRowProps}>
       <TableCell
         colSpan={tableInstance.visibleColumns.length + 10}
         isExpanded={row.isExpanded}
