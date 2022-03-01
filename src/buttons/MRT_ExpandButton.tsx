@@ -1,15 +1,8 @@
 import React, { FC } from 'react';
-import { IconButton, styled } from '@mui/material';
+import { IconButton, TableCell } from '@mui/material';
 import { useMRT } from '../useMRT';
-import { MRT_TableButtonCell } from '../table/MRT_TableButtonCell';
 import { MRT_Row } from '..';
-
-const TableCell = styled(MRT_TableButtonCell, {
-  shouldForwardProp: (prop) => prop !== 'depth',
-})<{ depth: number }>(({ depth }) => ({
-  paddingLeft: `${depth + 0.5}rem`,
-  textAlign: 'left',
-}));
+import { commonTableBodyButtonCellStyles } from '../body/MRT_TableBodyCell';
 
 interface Props {
   row: MRT_Row;
@@ -24,7 +17,14 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
   } = useMRT();
 
   return (
-    <TableCell size="small" densePadding={densePadding} depth={row.depth}>
+    <TableCell
+      size="small"
+      sx={{
+        ...commonTableBodyButtonCellStyles(densePadding),
+        pl: `${row.depth + 0.5}rem`,
+        textAlign: 'left',
+      }}
+    >
       <IconButton
         aria-label={localization.expandButtonTitle}
         disabled={!row.canExpand && !renderDetailPanel}

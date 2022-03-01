@@ -1,54 +1,27 @@
 import React, { FC } from 'react';
 import {
-  TableCell as MuiTableCell,
+  TableCell,
   TableSortLabel,
-  styled,
-  Divider as MuiDivider,
+  Divider,
   Collapse,
   Tooltip,
+  Box,
 } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
 import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
 import { MRT_HeaderGroup } from '..';
 
-export const MRT_StyledTableHeadCell = styled(MuiTableCell, {
-  shouldForwardProp: (prop) =>
-    prop !== 'densePadding' && prop !== 'enableColumnResizing',
-})<{ densePadding?: boolean; enableColumnResizing?: boolean }>(
-  ({ densePadding, enableColumnResizing }) => ({
-    fontWeight: 'bold',
-    height: '100%',
-    padding: densePadding ? '0.5rem' : '1rem',
-    paddingTop: densePadding ? '0.75rem' : '1.25rem',
-    transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
-    verticalAlign: 'text-top',
-  }),
-);
-
-const TableCellWrapper = styled('div')({
-  alignContent: 'space-between',
-  display: 'grid',
+export const commonTableHeadCellStyles = (
+  densePadding: boolean,
+  enableColumnResizing?: boolean,
+) => ({
+  fontWeight: 'bold',
   height: '100%',
-});
-
-const TableCellTopContents = styled('div')({
-  width: '100%',
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'flex-start',
-});
-
-const CellFlexItem = styled('span')({
-  alignItems: 'center',
-  display: 'flex',
-  flexWrap: 'nowrap',
-});
-
-const Divider = styled(MuiDivider)({
-  borderRightWidth: '2px',
-  borderRadius: '2px',
-  maxHeight: '2rem',
+  p: densePadding ? '0.5rem' : '1rem',
+  pt: densePadding ? '0.75rem' : '1.25rem',
+  transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
+  verticalAlign: 'text-top',
 });
 
 interface Props {
@@ -85,8 +58,8 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
     ...column.getHeaderProps(),
     style: {
       ...column.getHeaderProps().style,
-      ...(mTableHeadCellProps?.style ?? {}),
-      ...(mcTableHeadCellProps?.style ?? {}),
+      ...mTableHeadCellProps?.style,
+      ...mcTableHeadCellProps?.style,
     },
   };
 
@@ -103,17 +76,30 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
       );
 
   return (
-    <MRT_StyledTableHeadCell
+    <TableCell
       align={isParentHeader ? 'center' : 'left'}
-      densePadding={densePadding}
-      enableColumnResizing={enableColumnResizing}
       {...tableCellProps}
+      sx={{
+        ...commonTableHeadCellStyles(densePadding, enableColumnResizing),
+        ...tableCellProps?.sx,
+      }}
     >
-      <TableCellWrapper>
-        <TableCellTopContents
-          style={{ justifyContent: isParentHeader ? 'center' : undefined }}
+      <Box
+        sx={{ alignContent: 'space-between', display: 'grid', height: '100%' }}
+      >
+        <Box
+          sx={{
+            alignItems: 'flex-start',
+            display: 'flex',
+            justifyContent: isParentHeader ? 'center' : 'space-between',
+            width: '100%',
+          }}
         >
-          <CellFlexItem {...column.getSortByToggleProps()} title={undefined}>
+          <Box
+            {...column.getSortByToggleProps()}
+            sx={{ alignItems: 'center', display: 'flex', flexWrap: 'nowrap' }}
+            title={undefined}
+          >
             {column.render('Header')}
             {!isParentHeader && column.canSort && (
               <Tooltip arrow title={sortTooltip}>
@@ -124,8 +110,10 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
                 />
               </Tooltip>
             )}
-          </CellFlexItem>
-          <CellFlexItem>
+          </Box>
+          <Box
+            sx={{ alignItems: 'center', display: 'flex', flexWrap: 'nowrap' }}
+          >
             {!disableColumnActions && !isParentHeader && (
               <MRT_ToggleColumnActionMenuButton column={column} />
             )}
@@ -135,16 +123,21 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
                 orientation="vertical"
                 onDoubleClick={() => tableInstance.resetResizing()}
                 {...column.getResizerProps()}
+                sx={{
+                  borderRightWidth: '2px',
+                  borderRadius: '2px',
+                  maxHeight: '2rem',
+                }}
               />
             )}
-          </CellFlexItem>
-        </TableCellTopContents>
+          </Box>
+        </Box>
         {!disableFilters && column.canFilter && (
           <Collapse in={showFilters}>
             <MRT_FilterTextField column={column} />
           </Collapse>
         )}
-      </TableCellWrapper>
-    </MRT_StyledTableHeadCell>
+      </Box>
+    </TableCell>
   );
 };

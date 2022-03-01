@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react';
-import { TableRow } from '@mui/material';
+import { TableCell, TableRow } from '@mui/material';
 import {
-  MRT_StyledTableHeadCell,
+  commonTableHeadCellStyles,
   MRT_TableHeadCell,
 } from './MRT_TableHeadCell';
 import { useMRT } from '../useMRT';
@@ -18,6 +18,7 @@ interface Props {
 export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
   const {
     anyRowsCanExpand,
+    densePadding,
     disableExpandAll,
     enableRowActions,
     enableRowEditing,
@@ -44,7 +45,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
     ...headerGroup.getHeaderGroupProps(),
     style: {
       ...headerGroup.getHeaderGroupProps().style,
-      ...(mTableHeadRowProps?.style ?? {}),
+      ...mTableHeadRowProps?.style,
     },
   };
 
@@ -54,7 +55,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         (isParentHeader ? (
           <MRT_TableSpacerCell />
         ) : (
-          <MRT_StyledTableHeadCell>#</MRT_StyledTableHeadCell>
+          <TableCell sx={{...commonTableHeadCellStyles(densePadding)}}>#</TableCell>
         ))}
       {(enableRowActions || enableRowEditing) &&
         positionActionsColumn === 'first' &&

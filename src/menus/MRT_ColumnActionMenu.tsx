@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { Divider, Menu, MenuItem as MuiMenuItem, styled } from '@mui/material';
+import { Divider, Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_HeaderGroup } from '..';
 
-const MenuItem = styled(MuiMenuItem)({
+const commonMenuItemStyles = {
   display: 'flex',
   gap: '0.75rem',
-});
+};
 
 interface Props {
   anchorEl: HTMLElement | null;
@@ -88,6 +88,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             key={1}
             disabled={!column.isSorted}
             onClick={handleClearSort}
+            sx={commonMenuItemStyles}
           >
             <ClearAllIcon /> {localization.columnActionMenuItemClearSort}
           </MenuItem>,
@@ -95,6 +96,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             key={2}
             disabled={column.isSorted && !column.isSortedDesc}
             onClick={handleSortAsc}
+            sx={commonMenuItemStyles}
           >
             <SortIcon />{' '}
             {localization.columnActionMenuItemSortAsc?.replace(
@@ -106,6 +108,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             key={3}
             disabled={column.isSorted && column.isSortedDesc}
             onClick={handleSortDesc}
+            sx={commonMenuItemStyles}
           >
             <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />{' '}
             {localization.columnActionMenuItemSortDesc?.replace(
@@ -117,7 +120,11 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       {!disableFilters &&
         column.canFilter && [
           <Divider key={0} />,
-          <MenuItem key={1} onClick={handleFilterByColumn}>
+          <MenuItem
+            key={1}
+            onClick={handleFilterByColumn}
+            sx={commonMenuItemStyles}
+          >
             <FilterListIcon />{' '}
             {localization.filterTextFieldPlaceholder?.replace(
               '{column}',
@@ -128,7 +135,11 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       {enableColumnGrouping &&
         column.canGroupBy && [
           <Divider key={1} />,
-          <MenuItem key={2} onClick={handleGroupByColumn}>
+          <MenuItem
+            key={2}
+            onClick={handleGroupByColumn}
+            sx={commonMenuItemStyles}
+          >
             <DynamicFeedIcon />{' '}
             {localization[
               column.isGrouped
@@ -139,7 +150,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
         ]}
       {!disableColumnHiding && [
         <Divider key={0} />,
-        <MenuItem key={1} onClick={handleHideColumn}>
+        <MenuItem key={1} onClick={handleHideColumn} sx={commonMenuItemStyles}>
           <VisibilityOffIcon />{' '}
           {localization.columnActionMenuItemHideColumn?.replace(
             '{column}',

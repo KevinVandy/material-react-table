@@ -1,30 +1,6 @@
 import React, { FC, Fragment } from 'react';
-import {
-  Alert as MuiAlert,
-  Chip,
-  Collapse,
-  styled,
-  useMediaQuery,
-} from '@mui/material';
+import { Alert, Box, Chip, Collapse, useMediaQuery } from '@mui/material';
 import { useMRT } from '../useMRT';
-
-const Alert = styled(MuiAlert, {
-  shouldForwardProp: (prop) =>
-    prop !== 'displayAbsolute' && prop !== 'toolbarPosition',
-})<{ displayAbsolute?: boolean; toolbarPosition?: 'top' | 'bottom' }>(
-  ({ displayAbsolute, toolbarPosition }) => ({
-    borderRadius: 0,
-    fontSize: '1rem',
-    left: 0,
-    marginLeft: !displayAbsolute ? '-0.5rem' : undefined,
-    padding: toolbarPosition === 'bottom' ? '0 1rem' : '0.5rem 1.25rem',
-    position: displayAbsolute ? 'absolute' : 'relative',
-    right: 0,
-    top: 0,
-    width: `calc(100% - ${displayAbsolute ? '2.5rem' : '1.5rem'})`,
-    zIndex: 2,
-  }),
-);
 
 interface Props {}
 
@@ -89,13 +65,27 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
       timeout={displayAbsolute ? 0 : 200}
     >
       <Alert
-        displayAbsolute={displayAbsolute}
-        icon={false}
         color="info"
+        icon={false}
+        sx={{
+          borderRadius: 0,
+          fontSize: '1rem',
+          left: 0,
+          p: 0,
+          position: displayAbsolute ? 'absolute' : 'relative',
+          right: 0,
+          minHeight: '3.5rem',
+          top: 0,
+          width: '100%',
+          zIndex: 2,
+          ...alertProps?.sx,
+        }}
         {...alertProps}
       >
-        {selectMessage}
-        {groupedByMessage}
+        <Box sx={{ p: '0.5rem 1rem' }}>
+          {selectMessage}
+          {groupedByMessage}
+        </Box>
       </Alert>
     </Collapse>
   );

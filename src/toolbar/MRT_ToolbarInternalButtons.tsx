@@ -1,17 +1,11 @@
 import React, { FC } from 'react';
-import { styled } from '@mui/material';
-import { MRT_ToggleFiltersButton } from '../buttons/MRT_ToggleFiltersButton';
-import { MRT_ShowHideColumnsButton } from '../buttons/MRT_ShowHideColumnsButton';
-import { useMRT } from '../useMRT';
-import { MRT_ToggleDensePaddingButton } from '../buttons/MRT_ToggleDensePaddingButton';
-import { MRT_ToggleSearchButton } from '../buttons/MRT_ToggleSearchButton';
+import { Box } from '@mui/material';
 import { MRT_FullScreenToggleButton } from '../buttons/MRT_FullScreenToggleButton';
-
-const ToolbarButtonsContainer = styled('div')({
-  display: 'flex',
-  gap: '0.5rem',
-  alignItems: 'center',
-});
+import { MRT_ShowHideColumnsButton } from '../buttons/MRT_ShowHideColumnsButton';
+import { MRT_ToggleDensePaddingButton } from '../buttons/MRT_ToggleDensePaddingButton';
+import { MRT_ToggleFiltersButton } from '../buttons/MRT_ToggleFiltersButton';
+import { MRT_ToggleSearchButton } from '../buttons/MRT_ToggleSearchButton';
+import { useMRT } from '../useMRT';
 
 interface Props {}
 
@@ -41,12 +35,19 @@ export const MRT_ToolbarInternalButtons: FC<Props> = () => {
   }
 
   return (
-    <ToolbarButtonsContainer>
+    <Box
+      sx={{
+        display: 'flex',
+        gap: '0.5rem',
+        alignItems: 'center',
+        p: '0 0.5rem',
+      }}
+    >
       {!disableGlobalFilter && <MRT_ToggleSearchButton />}
       {!disableFilters && <MRT_ToggleFiltersButton />}
       {!disableColumnHiding && <MRT_ShowHideColumnsButton />}
       {!disableDensePaddingToggle && <MRT_ToggleDensePaddingButton />}
       {!disableFullScreenToggle && <MRT_FullScreenToggleButton />}
-    </ToolbarButtonsContainer>
+    </Box>
   );
 };

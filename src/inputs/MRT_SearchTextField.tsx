@@ -1,17 +1,7 @@
 import React, { ChangeEvent, FC, useState } from 'react';
-import {
-  Collapse,
-  IconButton,
-  InputAdornment,
-  styled,
-  TextField as MuiTextField,
-} from '@mui/material';
+import { Collapse, IconButton, InputAdornment, TextField } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { useAsyncDebounce } from 'react-table';
-
-const TextField = styled(MuiTextField)({
-  justifySelf: 'end',
-});
 
 interface Props {}
 
@@ -72,6 +62,7 @@ export const MRT_SearchTextField: FC<Props> = () => {
           ),
         }}
         {...muiSearchTextFieldProps}
+        sx={{ justifySelf: 'end', ...muiSearchTextFieldProps?.sx }}
       />
     </Collapse>
   );

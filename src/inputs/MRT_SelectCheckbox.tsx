@@ -1,8 +1,8 @@
 import React, { ChangeEvent, FC } from 'react';
-import { Checkbox, Tooltip } from '@mui/material';
+import { Checkbox, TableCell, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
-import { MRT_TableButtonCell } from '../table/MRT_TableButtonCell';
 import { MRT_Row } from '..';
+import { commonTableBodyButtonCellStyles } from '../body/MRT_TableBodyCell';
 
 interface Props {
   row?: MRT_Row;
@@ -33,7 +33,7 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
     : row?.getToggleRowSelectedProps();
 
   return (
-    <MRT_TableButtonCell densePadding={densePadding}>
+    <TableCell sx={commonTableBodyButtonCellStyles(densePadding)} >
       <Tooltip
         arrow
         enterDelay={1000}
@@ -55,6 +55,6 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
           title={undefined}
         />
       </Tooltip>
-    </MRT_TableButtonCell>
+    </TableCell>
   );
 };

@@ -1,7 +1,7 @@
 import React, { FC, MouseEvent } from 'react';
-import { alpha, styled, TableRow as MuiTableRow } from '@mui/material';
+import { alpha, TableCell, TableRow } from '@mui/material';
 import {
-  MRT_StyledTableBodyCell,
+  commonTableBodyCellStyles,
   MRT_TableBodyCell,
 } from './MRT_TableBodyCell';
 import { useMRT } from '../useMRT';
@@ -11,14 +11,6 @@ import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMenuButton';
 import { MRT_Cell, MRT_Row } from '..';
 
-export const TableRow = styled(MuiTableRow, {
-  shouldForwardProp: (prop) => prop !== 'isSelected',
-})<{ isSelected?: boolean }>(({ isSelected, theme }) => ({
-  backgroundColor: isSelected
-    ? alpha(theme.palette.primary.light, 0.1)
-    : 'transparent',
-}));
-
 interface Props {
   row: MRT_Row;
 }
@@ -26,6 +18,7 @@ interface Props {
 export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
   const {
     anyRowsCanExpand,
+    densePadding,
     enableRowActions,
     enableRowEditing,
     enableRowNumbers,
@@ -46,22 +39,30 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
     ...row.getRowProps(),
     style: {
       ...row.getRowProps().style,
-      ...(mTableBodyRowProps?.style ?? {}),
+      ...mTableBodyRowProps?.style,
     },
   };
 
   return (
     <>
       <TableRow
-        isSelected={row.isSelected}
         hover
         onClick={(event: MouseEvent<HTMLTableRowElement>) =>
           onRowClick?.(event, row)
         }
         {...tableRowProps}
+        //@ts-ignore
+        sx={(theme) => ({
+          backgroundColor: row.isSelected
+            ? alpha(theme.palette.primary.light, 0.1)
+            : 'transparent',
+          ...tableRowProps?.sx,
+        })}
       >
         {enableRowNumbers && (
-          <MRT_StyledTableBodyCell>{row.index + 1}</MRT_StyledTableBodyCell>
+          <TableCell sx={{ ...commonTableBodyCellStyles(densePadding) }}>
+            {row.index + 1}
+          </TableCell>
         )}
         {(enableRowActions || enableRowEditing) &&
           positionActionsColumn === 'first' && (

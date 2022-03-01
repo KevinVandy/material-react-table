@@ -4,19 +4,13 @@ import {
   IconButton,
   Menu,
   Tooltip,
-  styled,
   Divider,
   IconButtonProps,
+  Box,
 } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_ShowHideColumnsMenu } from '../menus/MRT_ShowHideColumnsMenu';
 import { MRT_ColumnInstance } from '..';
-
-const MenuButtons = styled('div')({
-  display: 'flex',
-  justifyContent: 'space-between',
-  padding: '0 0.5rem 0.5rem 0.5rem',
-});
 
 interface Props extends IconButtonProps {}
 
@@ -50,7 +44,13 @@ export const MRT_ShowHideColumnsButton: FC<Props> = ({ ...rest }) => {
         open={!!anchorEl}
         onClose={() => setAnchorEl(null)}
       >
-        <MenuButtons>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            p: '0 0.5rem 0.5rem 0.5rem',
+          }}
+        >
           <Button
             disabled={
               !tableInstance.getToggleHideAllColumnsProps().checked &&
@@ -66,7 +66,7 @@ export const MRT_ShowHideColumnsButton: FC<Props> = ({ ...rest }) => {
           >
             {localization.columnShowHideMenuShowAll}
           </Button>
-        </MenuButtons>
+        </Box>
         <Divider />
         {tableInstance.columns.map((column: MRT_ColumnInstance, index) => (
           <MRT_ShowHideColumnsMenu

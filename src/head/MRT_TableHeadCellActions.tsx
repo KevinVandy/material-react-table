@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
+import { TableCell } from '@mui/material';
 import { useMRT } from '../useMRT';
-import { MRT_StyledTableHeadCell } from './MRT_TableHeadCell';
+import { commonTableHeadCellStyles } from './MRT_TableHeadCell';
 
 interface Props {}
 
@@ -8,11 +9,11 @@ export const MRT_TableHeadCellActions: FC<Props> = () => {
   const { densePadding, localization } = useMRT();
 
   return (
-    <MRT_StyledTableHeadCell
-      densePadding={densePadding}
+    <TableCell
       style={{ textAlign: 'center' }}
+      sx={{ ...commonTableHeadCellStyles(densePadding), textAlign: 'center' }}
     >
       {localization.actionsHeadColumnTitle}
-    </MRT_StyledTableHeadCell>
+    </TableCell>
   );
 };

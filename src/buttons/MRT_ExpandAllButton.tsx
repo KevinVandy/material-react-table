@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { IconButton } from '@mui/material';
+import { IconButton, TableCell } from '@mui/material';
 import { useMRT } from '../useMRT';
-import { MRT_TableButtonCell } from '../table/MRT_TableButtonCell';
+import { commonTableBodyButtonCellStyles } from '../body/MRT_TableBodyCell';
 
 interface Props {}
 
@@ -15,10 +15,10 @@ export const MRT_ExpandAllButton: FC<Props> = () => {
   } = useMRT();
 
   return (
-    <MRT_TableButtonCell
+    <TableCell
       size="small"
-      densePadding={densePadding}
       {...tableInstance.getToggleAllRowsExpandedProps()}
+      sx={commonTableBodyButtonCellStyles(densePadding)}
     >
       <IconButton
         aria-label={localization.expandAllButtonTitle}
@@ -33,6 +33,6 @@ export const MRT_ExpandAllButton: FC<Props> = () => {
           }}
         />
       </IconButton>
-    </MRT_TableButtonCell>
+    </TableCell>
   );
 };

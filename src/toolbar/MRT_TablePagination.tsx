@@ -32,8 +32,13 @@ export const MRT_TablePagination: FC<Props> = () => {
       showLastButton={
         tableInstance.rows.length / tableInstance.state.pageSize > 2
       }
-      style={{ padding: 0, position: 'relative', zIndex: 2 }}
       {...tablePaginationProps}
+      sx={{
+        p: 0,
+        position: 'relative',
+        zIndex: 2,
+        ...tablePaginationProps?.sx,
+      }}
     />
   );
 };

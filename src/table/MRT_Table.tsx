@@ -16,7 +16,7 @@ export const MRT_Table: FC<Props> = () => {
     ...tableInstance.getTableProps(),
     style: {
       ...tableInstance.getTableProps().style,
-      ...(muiTableProps?.style ?? {}),
+      ...muiTableProps?.style,
     },
   };
 

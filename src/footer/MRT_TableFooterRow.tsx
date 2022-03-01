@@ -36,7 +36,7 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
     ...footerGroup.getFooterGroupProps(),
     style: {
       ...footerGroup.getFooterGroupProps().style,
-      ...(mTableFooterRowProps?.style ?? {}),
+      ...mTableFooterRowProps?.style,
     },
   };
 

@@ -1,19 +1,8 @@
 import React, { FC, MouseEvent, useState } from 'react';
-import { IconButton as MuiIconButton, styled, Tooltip } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
 import { MRT_HeaderGroup } from '..';
-
-const IconButton = styled(MuiIconButton)({
-  opacity: 0.5,
-  transition: 'opacity 0.2s',
-  marginRight: '2px',
-  height: '1.6rem',
-  width: '1.6rem',
-  '&:hover': {
-    opacity: 1,
-  },
-});
 
 interface Props {
   column: MRT_HeaderGroup;
@@ -45,6 +34,16 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
           aria-label={localization.columnActionMenuButtonTitle}
           onClick={handleClick}
           size="small"
+          sx={{
+            opacity: 0.5,
+            transition: 'opacity 0.2s',
+            marginRight: '2px',
+            height: '1.6rem',
+            width: '1.6rem',
+            '&:hover': {
+              opacity: 1,
+            },
+          }}
         >
           <MoreVertIcon />
         </IconButton>

@@ -1,12 +1,12 @@
 import React, { FC, MouseEvent, useState } from 'react';
-import { IconButton as MuiIconButton, styled, Tooltip } from '@mui/material';
+import { IconButton, TableCell, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_RowActionMenu } from '../menus/MRT_RowActionMenu';
 import { MRT_EditActionButtons } from './MRT_EditActionButtons';
-import { MRT_TableButtonCell } from '../table/MRT_TableButtonCell';
 import { MRT_Row } from '..';
+import { commonTableBodyButtonCellStyles } from '../body/MRT_TableBodyCell';
 
-const IconButton = styled(MuiIconButton)({
+const commonIconButtonStyles = {
   opacity: 0.5,
   transition: 'opacity 0.2s',
   marginRight: '2px',
@@ -15,7 +15,7 @@ const IconButton = styled(MuiIconButton)({
   '&:hover': {
     opacity: 1,
   },
-});
+};
 
 interface Props {
   row: MRT_Row;
@@ -48,7 +48,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
   };
 
   return (
-    <MRT_TableButtonCell densePadding={densePadding}>
+    <TableCell sx={commonTableBodyButtonCellStyles(densePadding)}>
       {renderRowActions ? (
         <>{renderRowActions(row, tableInstance)}</>
       ) : row.id === currentEditingRow?.id ? (
@@ -59,7 +59,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
           arrow
           title={localization.rowActionMenuItemEdit}
         >
-          <IconButton onClick={handleEdit}>
+          <IconButton sx={commonIconButtonStyles} onClick={handleEdit}>
             <EditIcon />
           </IconButton>
         </Tooltip>
@@ -67,9 +67,10 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
         <>
           <IconButton
             aria-label={localization.rowActionMenuButtonTitle}
-            title={localization.rowActionMenuButtonTitle}
             onClick={handleOpenRowActionMenu}
             size="small"
+            sx={commonIconButtonStyles}
+            title={localization.rowActionMenuButtonTitle}
           >
             <MoreHorizIcon />
           </IconButton>
@@ -81,6 +82,6 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
           />
         </>
       ) : null}
-    </MRT_TableButtonCell>
+    </TableCell>
   );
 };

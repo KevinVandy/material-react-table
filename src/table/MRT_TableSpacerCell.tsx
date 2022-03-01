@@ -17,10 +17,11 @@ export const MRT_TableSpacerCell: FC<Props> = ({ width }) => {
   const tableCellProps = {
     ...mTableBodyCellrops,
     style: {
-      width,
-      ...(mTableBodyCellrops?.style ?? {}),
+      ...mTableBodyCellrops?.style,
     },
   };
 
-  return <TableCell {...tableCellProps} />;
+  return (
+    <TableCell {...tableCellProps} sx={{ width, ...tableCellProps?.sx }} />
+  );
 };
