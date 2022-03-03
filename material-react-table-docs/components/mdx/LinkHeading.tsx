@@ -29,7 +29,8 @@ export const LinkHeading = (props) => {
         <IconButton
           onClick={handleCopy}
           sx={{
-            opacity: 0.5,
+            opacity: 0.2,
+            transition: 'all 0.2s ease',
             '&:hover': {
               opacity: 1,
             },

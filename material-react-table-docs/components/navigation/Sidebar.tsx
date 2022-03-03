@@ -111,9 +111,6 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
         <Link href="/docs/guides/dense-padding-toggle" passHref>
           <ListItemLevel2>Dense Padding Toggle</ListItemLevel2>
         </Link>
-        <Link href="/docs/guides/detail-panel" passHref>
-          <ListItemLevel2>Detail Panel</ListItemLevel2>
-        </Link>
         <Link href="/docs/guides/filtering" passHref>
           <ListItemLevel2>Filtering</ListItemLevel2>
         </Link>
@@ -146,8 +143,11 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
         <Link href="/docs/guides/column-resizing" passHref>
           <ListItemLevel2>Column Resizing</ListItemLevel2>
         </Link>
+        <Link href="/docs/guides/detail-panel" passHref>
+          <ListItemLevel2>Detail Panel (Expanding)</ListItemLevel2>
+        </Link>
         <Link href="/docs/guides/localization" passHref>
-          <ListItemLevel2>Localization</ListItemLevel2>
+          <ListItemLevel2>Localization (i18n)</ListItemLevel2>
         </Link>
         <Link href="/docs/guides/row-actions" passHref>
           <ListItemLevel2>Row Actions</ListItemLevel2>
