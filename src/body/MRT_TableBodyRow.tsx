@@ -18,7 +18,6 @@ interface Props {
 export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
   const {
     anyRowsCanExpand,
-    densePadding,
     enableRowActions,
     enableRowEditing,
     enableRowNumbers,
@@ -27,6 +26,9 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
     onRowClick,
     positionActionsColumn,
     renderDetailPanel,
+    tableInstance: {
+      state: { densePadding },
+    },
   } = useMRT();
 
   const mTableBodyRowProps =
@@ -51,13 +53,14 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
           onRowClick?.(event, row)
         }
         {...tableRowProps}
-        //@ts-ignore
-        sx={(theme) => ({
-          backgroundColor: row.isSelected
-            ? alpha(theme.palette.primary.light, 0.1)
-            : 'transparent',
-          ...tableRowProps?.sx,
-        })}
+        sx={(theme) =>
+          ({
+            backgroundColor: row.isSelected
+              ? alpha(theme.palette.primary.light, 0.1)
+              : 'transparent',
+            ...tableRowProps?.sx,
+          } as any)
+        }
       >
         {enableRowNumbers && (
           <TableCell sx={{ ...commonTableBodyCellStyles(densePadding) }}>

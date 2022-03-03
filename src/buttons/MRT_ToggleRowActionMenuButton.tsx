@@ -23,8 +23,6 @@ interface Props {
 
 export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
   const {
-    currentEditingRow,
-    densePadding,
     enableRowEditing,
     icons: { EditIcon, MoreHorizIcon },
     localization,
@@ -48,10 +46,12 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
   };
 
   return (
-    <TableCell sx={commonTableBodyButtonCellStyles(densePadding)}>
+    <TableCell
+      sx={commonTableBodyButtonCellStyles(tableInstance.state.densePadding)}
+    >
       {renderRowActions ? (
         <>{renderRowActions(row, tableInstance)}</>
-      ) : row.id === currentEditingRow?.id ? (
+      ) : row.id === tableInstance.state.currentEditingRow?.id ? (
         <MRT_EditActionButtons row={row} />
       ) : !renderRowActionMenuItems && enableRowEditing ? (
         <Tooltip
@@ -65,15 +65,21 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
         </Tooltip>
       ) : renderRowActionMenuItems ? (
         <>
-          <IconButton
-            aria-label={localization.rowActionMenuButtonTitle}
-            onClick={handleOpenRowActionMenu}
-            size="small"
-            sx={commonIconButtonStyles}
+          <Tooltip
+            arrow
+            enterDelay={1000}
+            enterNextDelay={1000}
             title={localization.rowActionMenuButtonTitle}
           >
-            <MoreHorizIcon />
-          </IconButton>
+            <IconButton
+              aria-label={localization.rowActionMenuButtonTitle}
+              onClick={handleOpenRowActionMenu}
+              size="small"
+              sx={commonIconButtonStyles}
+            >
+              <MoreHorizIcon />
+            </IconButton>
+          </Tooltip>
           <MRT_RowActionMenu
             anchorEl={anchorEl}
             handleEdit={handleEdit}

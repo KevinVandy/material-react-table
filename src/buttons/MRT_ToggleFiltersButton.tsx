@@ -6,10 +6,10 @@ interface Props extends IconButtonProps {}
 
 export const MRT_ToggleFiltersButton: FC<Props> = ({ ...rest }) => {
   const {
+    icons: { FilterListIcon, FilterListOffIcon },
     localization,
     setShowFilters,
-    showFilters,
-    icons: { FilterListIcon, FilterListOffIcon },
+    tableInstance: { state: { showFilters } },
   } = useMRT();
 
   return (

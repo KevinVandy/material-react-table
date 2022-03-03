@@ -14,8 +14,6 @@ import {
 } from '..';
 
 declare module 'react-table' {
-  // take this file as-is, or comment out the sections that don't apply to your plugin configuration
-
   export interface TableOptions<D extends Record<string, unknown>>
     extends MRT_TableOptions<D> {}
 
@@ -28,7 +26,9 @@ declare module 'react-table' {
 
   export interface TableInstance<
     D extends Record<string, unknown> = Record<string, unknown>,
-  > extends MRT_TableInstance<D> {}
+  > extends MRT_TableInstance<D> {
+    rows: MRT_Row<D>[];
+  }
 
   export interface TableState<
     D extends Record<string, unknown> = Record<string, unknown>,

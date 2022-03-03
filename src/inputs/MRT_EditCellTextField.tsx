@@ -9,9 +9,11 @@ interface Props {
 
 export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
   const {
-    currentEditingRow,
     muiTableBodyCellEditTextFieldProps,
     setCurrentEditingRow,
+    tableInstance: {
+      state: { currentEditingRow },
+    },
   } = useMRT();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

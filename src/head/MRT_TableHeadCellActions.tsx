@@ -6,7 +6,12 @@ import { commonTableHeadCellStyles } from './MRT_TableHeadCell';
 interface Props {}
 
 export const MRT_TableHeadCellActions: FC<Props> = () => {
-  const { densePadding, localization } = useMRT();
+  const {
+    localization,
+    tableInstance: {
+      state: { densePadding },
+    },
+  } = useMRT();
 
   return (
     <TableCell

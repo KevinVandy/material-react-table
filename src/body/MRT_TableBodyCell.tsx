@@ -24,8 +24,9 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
   const {
     onCellClick,
     muiTableBodyCellProps,
-    densePadding,
-    currentEditingRow,
+    tableInstance: {
+      state: { currentEditingRow, densePadding },
+    },
   } = useMRT();
 
   const mTableCellBodyProps =

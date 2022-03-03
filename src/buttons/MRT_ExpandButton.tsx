@@ -10,10 +10,12 @@ interface Props {
 
 export const MRT_ExpandButton: FC<Props> = ({ row }) => {
   const {
-    densePadding,
     icons: { ExpandMoreIcon },
     localization,
     renderDetailPanel,
+    tableInstance: {
+      state: { densePadding },
+    },
   } = useMRT();
 
   return (

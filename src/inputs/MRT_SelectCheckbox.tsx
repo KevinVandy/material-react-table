@@ -11,7 +11,6 @@ interface Props {
 
 export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
   const {
-    densePadding,
     localization,
     onRowSelectChange,
     onSelectAllChange,
@@ -33,7 +32,7 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
     : row?.getToggleRowSelectedProps();
 
   return (
-    <TableCell sx={commonTableBodyButtonCellStyles(densePadding)} >
+    <TableCell sx={commonTableBodyButtonCellStyles(tableInstance.state.densePadding)} >
       <Tooltip
         arrow
         enterDelay={1000}

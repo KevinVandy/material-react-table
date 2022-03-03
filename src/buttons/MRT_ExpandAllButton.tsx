@@ -7,18 +7,17 @@ interface Props {}
 
 export const MRT_ExpandAllButton: FC<Props> = () => {
   const {
-    tableInstance,
-    localization,
     anyRowsExpanded,
-    densePadding,
     icons: { DoubleArrowDownIcon },
+    localization,
+    tableInstance,
   } = useMRT();
 
   return (
     <TableCell
       size="small"
       {...tableInstance.getToggleAllRowsExpandedProps()}
-      sx={commonTableBodyButtonCellStyles(densePadding)}
+      sx={commonTableBodyButtonCellStyles(tableInstance.state.densePadding)}
     >
       <IconButton
         aria-label={localization.expandAllButtonTitle}

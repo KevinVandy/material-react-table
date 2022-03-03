@@ -18,7 +18,6 @@ interface Props {
 export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
   const {
     anyRowsCanExpand,
-    densePadding,
     disableExpandAll,
     enableRowActions,
     enableRowEditing,
@@ -55,7 +54,13 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         (isParentHeader ? (
           <MRT_TableSpacerCell />
         ) : (
-          <TableCell sx={{...commonTableHeadCellStyles(densePadding)}}>#</TableCell>
+          <TableCell
+            sx={{
+              ...commonTableHeadCellStyles(tableInstance.state.densePadding),
+            }}
+          >
+            #
+          </TableCell>
         ))}
       {(enableRowActions || enableRowEditing) &&
         positionActionsColumn === 'first' &&

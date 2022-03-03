@@ -197,7 +197,7 @@ const PropTable = () => {
       initialState={{
         sortBy: [{ id: 'prop', desc: false }],
         hiddenColumns: ['default'],
-        showSearchTextField: true,
+        showSearch: true,
         densePadding: true,
       }}
     />

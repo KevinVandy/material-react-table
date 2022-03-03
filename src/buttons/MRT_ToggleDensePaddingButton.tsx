@@ -6,10 +6,12 @@ interface Props extends IconButtonProps {}
 
 export const MRT_ToggleDensePaddingButton: FC<Props> = ({ ...rest }) => {
   const {
-    densePadding,
     setDensePadding,
     localization,
     icons: { DensityMediumIcon, DensitySmallIcon },
+    tableInstance: {
+      state: { densePadding },
+    },
   } = useMRT();
 
   return (

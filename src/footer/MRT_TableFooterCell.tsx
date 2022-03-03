@@ -8,8 +8,13 @@ interface Props {
 }
 
 export const MRT_TableFooterCell: FC<Props> = ({ column }) => {
-  const { muiTableFooterCellProps, densePadding, enableColumnResizing } =
-    useMRT();
+  const {
+    muiTableFooterCellProps,
+    enableColumnResizing,
+    tableInstance: {
+      state: { densePadding },
+    },
+  } = useMRT();
 
   const isParentHeader = (column?.columns?.length ?? 0) > 0;
 

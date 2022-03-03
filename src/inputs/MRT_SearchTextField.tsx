@@ -8,7 +8,6 @@ interface Props {}
 export const MRT_SearchTextField: FC<Props> = () => {
   const {
     icons: { SearchIcon, CloseIcon },
-    showSearch,
     localization,
     muiSearchTextFieldProps,
     onGlobalFilterChange,
@@ -31,7 +30,7 @@ export const MRT_SearchTextField: FC<Props> = () => {
   };
 
   return (
-    <Collapse in={showSearch} orientation="horizontal">
+    <Collapse in={tableInstance.state.showSearch} orientation="horizontal">
       <TextField
         id="global-search-text-field"
         placeholder={localization.searchTextFieldPlaceholder}

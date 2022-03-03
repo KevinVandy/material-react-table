@@ -192,10 +192,11 @@ export type MRT_TableState<D extends {} = {}> = TableState<D> &
   UseRowSelectState<D> &
   UseRowStateState<D> &
   UseSortByState<D> & {
-    densePadding?: boolean;
-    fullScreen?: boolean;
-    showFilters?: boolean;
-    showSearchTextField?: boolean;
+    currentEditingRow: MRT_Row<D> | null;
+    densePadding: boolean;
+    fullScreen: boolean;
+    showFilters: boolean;
+    showSearch: boolean;
   };
 
 export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &

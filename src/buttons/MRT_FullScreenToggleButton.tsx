@@ -6,10 +6,12 @@ interface Props extends IconButtonProps {}
 
 export const MRT_FullScreenToggleButton: FC<Props> = ({ ...rest }) => {
   const {
-    fullScreen,
     icons: { FullscreenExitIcon, FullscreenIcon },
     localization,
     setFullScreen,
+    tableInstance: {
+      state: { fullScreen },
+    },
   } = useMRT();
 
   return (

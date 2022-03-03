@@ -9,7 +9,6 @@ interface Props {}
 
 export const MRT_TableContainer: FC<Props> = () => {
   const {
-    fullScreen,
     hideToolbarBottom,
     hideToolbarTop,
     isFetching,
@@ -17,6 +16,7 @@ export const MRT_TableContainer: FC<Props> = () => {
     muiTableContainerProps,
     tableInstance,
   } = useMRT();
+  const fullScreen = tableInstance.state.fullScreen;
   const originalBodyOverflowStyle = useRef<string | undefined>();
 
   useEffect(() => {

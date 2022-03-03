@@ -30,13 +30,11 @@ interface Props {
 
 export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
   const {
-    densePadding,
     disableColumnActions,
     disableFilters,
     enableColumnResizing,
     localization,
     muiTableHeadCellProps,
-    showFilters,
     tableInstance,
   } = useMRT();
 
@@ -80,7 +78,10 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
       align={isParentHeader ? 'center' : 'left'}
       {...tableCellProps}
       sx={{
-        ...commonTableHeadCellStyles(densePadding, enableColumnResizing),
+        ...commonTableHeadCellStyles(
+          tableInstance.state.densePadding,
+          enableColumnResizing,
+        ),
         ...tableCellProps?.sx,
       }}
     >
@@ -133,7 +134,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
           </Box>
         </Box>
         {!disableFilters && column.canFilter && (
-          <Collapse in={showFilters}>
+          <Collapse in={tableInstance.state.showFilters}>
             <MRT_FilterTextField column={column} />
           </Collapse>
         )}
