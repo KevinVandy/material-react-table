@@ -100,7 +100,7 @@ const PropTable = () => {
         type: 'boolean',
         default: null,
         description: 'Show row numbers in the first column',
-        link: '/docs/features/row-numbers',
+        link: '/docs/guides/row-numbers',
         linkText: 'MRT row numbers docs',
       },
       {
@@ -108,7 +108,7 @@ const PropTable = () => {
         type: 'boolean',
         default: null,
         description: 'Enable the column grouping feature',
-        link: '/docs/features/column-grouping',
+        link: '/docs/guides/column-grouping',
         linkText: 'MRT column grouping docs',
       },
       {
@@ -116,7 +116,7 @@ const PropTable = () => {
         type: 'boolean',
         default: null,
         description: 'Enable the column resizing feature',
-        link: '/docs/features/column-resizing',
+        link: '/docs/guides/column-resizing',
         linkText: 'MRT column resizing docs',
       },
       {
@@ -124,7 +124,7 @@ const PropTable = () => {
         type: 'boolean',
         default: null,
         description: 'Enable row actions menu button in each row',
-        link: '/docs/features/row-actions',
+        link: '/docs/guides/row-actions',
         linkText: 'MRT row actions docs',
       },
       {
@@ -132,7 +132,7 @@ const PropTable = () => {
         type: 'boolean',
         default: null,
         description: 'Enable row edit button in each row',
-        link: '/docs/features/row-editing',
+        link: '/docs/guides/row-editing',
         linkText: 'MRT row editing docs',
       },
       {
@@ -140,7 +140,7 @@ const PropTable = () => {
         type: 'boolean',
         default: null,
         description: 'Enable row selection checkboxes in each row',
-        link: '/docs/features/row-selection',
+        link: '/docs/guides/row-selection',
         linkText: 'MRT row selection docs',
       },
       {
@@ -181,7 +181,7 @@ const PropTable = () => {
         type: 'MRT_Icons',
         default: null,
         description: 'Override the default Mui icons',
-        link: '/docs/features/customize-icons',
+        link: '/docs/guides/customize-icons',
         linkText: 'MRT customize icons docs',
       },
     ],

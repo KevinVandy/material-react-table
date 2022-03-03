@@ -21,7 +21,7 @@ export const LinkHeading = (props) => {
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 3000);
   };
-  console.log(href);
+
   return (
     <Typography id={id} {...props}>
       {props.children}{' '}

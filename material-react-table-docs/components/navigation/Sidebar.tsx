@@ -102,63 +102,63 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
         <Divider />
 
         <ListItemHeader>Default Feature Guides</ListItemHeader>
-        <Link href="/docs/features/column-actions" passHref>
+        <Link href="/docs/guides/column-actions" passHref>
           <ListItemLevel2>Column Actions</ListItemLevel2>
         </Link>
-        <Link href="/docs/features/column-hiding" passHref>
+        <Link href="/docs/guides/column-hiding" passHref>
           <ListItemLevel2>Column Hiding</ListItemLevel2>
         </Link>
-        <Link href="/docs/features/dense-padding-toggle" passHref>
+        <Link href="/docs/guides/dense-padding-toggle" passHref>
           <ListItemLevel2>Dense Padding Toggle</ListItemLevel2>
         </Link>
-        <Link href="/docs/features/detail-panel" passHref>
+        <Link href="/docs/guides/detail-panel" passHref>
           <ListItemLevel2>Detail Panel</ListItemLevel2>
         </Link>
-        <Link href="/docs/features/filtering" passHref>
+        <Link href="/docs/guides/filtering" passHref>
           <ListItemLevel2>Filtering</ListItemLevel2>
         </Link>
-        <Link href="/docs/features/full-screen-toggle" passHref>
+        <Link href="/docs/guides/full-screen-toggle" passHref>
           <ListItemLevel2>Full Screen Toggle</ListItemLevel2>
         </Link>
-        <Link href="/docs/features/pagination" passHref>
+        <Link href="/docs/guides/pagination" passHref>
           <ListItemLevel2>Pagination</ListItemLevel2>
         </Link>
-        <Link href="/docs/features/search" passHref>
+        <Link href="/docs/guides/search" passHref>
           <ListItemLevel2>Search (Global Filtering)</ListItemLevel2>
         </Link>
-        <Link href="/docs/features/sorting" passHref>
+        <Link href="/docs/guides/sorting" passHref>
           <ListItemLevel2>Sorting</ListItemLevel2>
         </Link>
 
         <ListItemHeader>More Feature Guides</ListItemHeader>
-        <Link href="/docs/features/customize-css" passHref>
+        <Link href="/docs/guides/customize-css" passHref>
           <ListItemLevel2>Customize CSS</ListItemLevel2>
         </Link>
-        <Link href="/docs/features/customize-icons" passHref>
+        <Link href="/docs/guides/customize-icons" passHref>
           <ListItemLevel2>Customize Icons</ListItemLevel2>
         </Link>
-        <Link href="/docs/features/customize-toolbars" passHref>
+        <Link href="/docs/guides/customize-toolbars" passHref>
           <ListItemLevel2>Customize Toolbars</ListItemLevel2>
         </Link>
-        <Link href="/docs/features/column-grouping" passHref>
+        <Link href="/docs/guides/column-grouping" passHref>
           <ListItemLevel2>Column Grouping</ListItemLevel2>
         </Link>
-        <Link href="/docs/features/column-resizing" passHref>
+        <Link href="/docs/guides/column-resizing" passHref>
           <ListItemLevel2>Column Resizing</ListItemLevel2>
         </Link>
-        <Link href="/docs/features/localization" passHref>
+        <Link href="/docs/guides/localization" passHref>
           <ListItemLevel2>Localization</ListItemLevel2>
         </Link>
-        <Link href="/docs/features/row-actions" passHref>
+        <Link href="/docs/guides/row-actions" passHref>
           <ListItemLevel2>Row Actions</ListItemLevel2>
         </Link>
-        <Link href="/docs/features/row-editing" passHref>
+        <Link href="/docs/guides/row-editing" passHref>
           <ListItemLevel2>Row (Data) Editing</ListItemLevel2>
         </Link>
-        <Link href="/docs/features/row-numbers" passHref>
+        <Link href="/docs/guides/row-numbers" passHref>
           <ListItemLevel2>Row Numbers</ListItemLevel2>
         </Link>
-        <Link href="/docs/features/row-selection" passHref>
+        <Link href="/docs/guides/row-selection" passHref>
           <ListItemLevel2>Row Selection</ListItemLevel2>
         </Link>
       </List>

@@ -5,7 +5,6 @@ import vsLight from 'prism-react-renderer/themes/github';
 import {
   ToggleButton,
   ToggleButtonGroup,
-  Typography,
   useTheme,
   styled,
   IconButton,
