@@ -17,6 +17,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
+import { LinkHeading } from './LinkHeading';
 
 const CopyButton = styled(IconButton)({
   position: 'absolute',
@@ -77,11 +78,11 @@ export const SourceCodeSnippet: FC<Props> = ({
       }}
     >
       <Divider />
-      <Typography variant="h3">Demo</Typography>
+      <LinkHeading variant="h3">Demo</LinkHeading>
       <Component />
       <div>
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <Typography variant="h4">Source Code</Typography>
+          <LinkHeading variant="h4">Source Code</LinkHeading>
           <ToggleButtonGroup>
             <ToggleButton
               onClick={() => setIsTypeScript(true)}
