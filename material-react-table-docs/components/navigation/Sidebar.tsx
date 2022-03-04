@@ -60,6 +60,8 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
 
   return (
     <Drawer
+      // @ts-ignore
+      PaperProps={{ component: 'aside' }}
       open={navOpen}
       onClose={() => setNavOpen(false)}
       variant={isTablet ? 'temporary' : 'permanent'}

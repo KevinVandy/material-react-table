@@ -8,7 +8,7 @@ export const LinkHeading = (props) => {
   const [isCopied, setIsCopied] = useState(false);
   const [href, setHref] = useState('');
 
-  const id = props.children.toLowerCase().replaceAll(' ', '-');
+  const id = props.children?.toLowerCase?.()?.replaceAll?.(' ', '-');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
