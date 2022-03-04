@@ -30,7 +30,13 @@ export const mdxComponents = {
   ),
   p: (props: any) => (
     <Typography
-      style={{ textAlign: 'justify', margin: '1.5rem 0' }}
+      sx={{
+        textAlign: {
+          xs: 'left',
+          md: 'justify',
+        },
+        m: '1.5rem 0',
+      }}
       variant="body1"
       {...props}
     />

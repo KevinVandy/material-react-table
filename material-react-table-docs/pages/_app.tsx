@@ -58,8 +58,8 @@ function App({ Component, pageProps }: AppProps) {
           />
           <SideBar navOpen={navOpen || isDesktop} setNavOpen={setNavOpen} />
           <PageContainer
-            style={{
-              padding: `64px 32px 800px ${
+            sx={{
+              p: `64px 32px 800px ${
                 (navOpen || isDesktop) && !isTablet ? '280px' : '32px'
               }`,
             }}

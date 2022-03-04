@@ -1,34 +1,37 @@
-import { alpha, Box, Card, Stack, useTheme } from '@mui/material';
+import { alpha, Card, Stack } from '@mui/material';
 import Image from 'next/image';
 
 const cardData = [
   {
     text: 'The perfect mashup of Material-UI and React Table',
     image: '/mashup.svg',
+    alt: 'Mashup',
   },
   {
     text: 'High quality and performant modern table features with a minimal amount of effort',
     image: '/quality.svg',
+    alt: 'Quality',
   },
   {
     text: 'Fully customizable with a variety of options',
     image: '/customizable.svg',
+    alt: 'Customizable',
   },
   {
     text: "Easy to opt out of features or UI that you don't need",
     image: '/opt-out.svg',
+    alt: 'Easy Opt-out',
   },
   {
     text: 'Efficient bundle size (currently < 12kb gzipped)',
     image: '/efficient.svg',
+    alt: 'Efficient',
   },
 ];
 
 export const HomeCards = () => {
-  const theme = useTheme();
-
   return (
-    <Stack sx={{ mt: '3rem', gap: '1rem' }}>
+    <Stack sx={{ mt: '2rem', gap: '1rem' }}>
       {cardData.map((cd, index) => (
         <Card
           key={index}

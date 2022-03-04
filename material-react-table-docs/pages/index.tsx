@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { alpha, Box, Button, darken, Stack, Typography } from '@mui/material';
 import { HomeCards } from '../components/mdx/HomeCards';
 import Summary from '../components/mdx/Summary.mdx';
+import { LinkCards } from '../components/mdx/LinkCards';
 
 const HomePage = () => {
   return (
@@ -16,11 +17,19 @@ const HomePage = () => {
         <Typography
           sx={{
             textAlign: 'center',
-            fontSize: '4rem',
+            fontSize: {
+              xs: '2rem',
+              sm: '3rem',
+              md: '4rem',
+            },
             fontWeight: 'bold',
-            mt: '6rem',
+            mt: '5rem',
             mb: '2rem',
-            lineHeight: '5rem',
+            lineHeight: {
+              xs: '3rem',
+              sm: '4rem',
+              md: '5rem',
+            },
           }}
           variant="h1"
         >
@@ -35,7 +44,10 @@ const HomePage = () => {
             m: '2rem auto',
             display: 'grid',
             gap: '1.5rem',
-            gridTemplateColumns: '10rem 10rem',
+            gridTemplateColumns: {
+              xs: 'auto',
+              sm: '10rem 10rem',
+            },
           }}
         >
           <Link href="/docs/install" passHref>
@@ -64,6 +76,7 @@ const HomePage = () => {
           </Button>
         </Box>
         <HomeCards />
+        <LinkCards />
       </Stack>
     </>
   );
