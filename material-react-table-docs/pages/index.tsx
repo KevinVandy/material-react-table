@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { alpha, Box, Button, darken, Stack, Typography } from '@mui/material';
 import { HomeCards } from '../components/mdx/HomeCards';
-import Summary from '../components/mdx/summary.mdx';
+import Summary from '../components/mdx/Summary.mdx';
 
 const HomePage = () => {
   return (
