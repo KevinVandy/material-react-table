@@ -1,5 +1,11 @@
 import React, { FC, useEffect, useRef } from 'react';
-import { LinearProgress, Paper, TableContainer, Collapse } from '@mui/material';
+import {
+  LinearProgress,
+  Paper,
+  TableContainer,
+  Collapse,
+  Box,
+} from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_Table } from './MRT_Table';
 import { MRT_ToolbarTop } from '../toolbar/MRT_ToolbarTop';
@@ -63,7 +69,14 @@ export const MRT_TableContainer: FC<Props> = () => {
       <Collapse in={isFetching || isLoading} unmountOnExit>
         <LinearProgress />
       </Collapse>
-      <MRT_Table />
+      <Box
+        sx={{
+          maxWidth: '100%',
+          overflowX: 'auto',
+        }}
+      >
+        <MRT_Table />
+      </Box>
       {!hideToolbarBottom && <MRT_ToolbarBottom />}
     </TableContainer>
   );

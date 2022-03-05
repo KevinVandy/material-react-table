@@ -11,12 +11,17 @@ export const MRT_Table: FC<Props> = () => {
   const { tableInstance, muiTableProps, hideTableHead, hideTableFooter } =
     useMRT();
 
+  const mTableProps =
+    muiTableProps instanceof Function
+      ? muiTableProps(tableInstance)
+      : muiTableProps;
+
   const tableProps = {
-    ...muiTableProps,
+    ...mTableProps,
     ...tableInstance.getTableProps(),
     style: {
       ...tableInstance.getTableProps().style,
-      ...muiTableProps?.style,
+      ...mTableProps?.style,
     },
   };
 

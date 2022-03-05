@@ -11,12 +11,17 @@ export const MRT_TableBody: FC<Props> = () => {
 
   const rows = manualPagination ? tableInstance.rows : tableInstance.page;
 
+  const mTableBodyProps =
+    muiTableBodyProps instanceof Function
+      ? muiTableBodyProps(tableInstance)
+      : muiTableBodyProps;
+
   const tableBodyProps = {
-    ...muiTableBodyProps,
+    ...mTableBodyProps,
     ...tableInstance.getTableBodyProps(),
     style: {
       ...tableInstance.getTableBodyProps().style,
-      ...muiTableBodyProps?.style,
+      ...mTableBodyProps?.style,
     },
   };
 

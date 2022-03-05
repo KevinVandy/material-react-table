@@ -239,18 +239,22 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
     muiTableBodyCellProps?:
       | TableCellProps
       | ((cell?: MRT_Cell<D>) => TableCellProps);
-    muiTableBodyProps?: TableBodyProps;
+    muiTableBodyProps?:
+      | TableBodyProps
+      | ((tableInstance: MRT_TableInstance<D>) => TableBodyProps);
     muiTableBodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
     muiTableContainerProps?:
       | TableContainerProps
-      | ((table: MRT_TableInstance<D>) => TableContainerProps);
+      | ((tableInstance: MRT_TableInstance<D>) => TableContainerProps);
     muiTableDetailPanelProps?:
       | TableCellProps
       | ((row: Row<D>) => TableCellProps);
     muiTableFooterCellProps?:
       | TableCellProps
       | ((column: Column<D>) => TableCellProps);
-    muiTableFooterProps?: TableFooterProps;
+    muiTableFooterProps?:
+      | TableFooterProps
+      | ((tableInstance: MRT_TableInstance<D>) => TableFooterProps);
     muiTableFooterRowProps?:
       | TableRowProps
       | ((footerGroup: MRT_HeaderGroup<D>) => TableRowProps);
@@ -260,7 +264,9 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
     muiTableHeadCellProps?:
       | TableCellProps
       | ((column: Column<D>) => TableCellProps);
-    muiTableHeadProps?: TableHeadProps;
+    muiTableHeadProps?:
+      | TableHeadProps
+      | ((tableInstance: MRT_TableInstance<D>) => TableHeadProps);
     muiTableHeadRowProps?:
       | TableRowProps
       | ((row: MRT_HeaderGroup<D>) => TableRowProps);
@@ -269,7 +275,7 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
       | ((
           tableInstance: MRT_TableInstance<D>,
         ) => Partial<TablePaginationProps>);
-    muiTableProps?: TableProps;
+    muiTableProps?: TableProps | ((tableInstance: MRT_TableInstance<D>) => TableProps);
     muiTableToolbarAlertBannerProps?:
       | AlertProps
       | ((tableInstance: MRT_TableInstance<D>) => AlertProps);

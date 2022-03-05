@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import PropTable from '../../components/mdx/PropTable';
+import RootPropTable from '../../components/mdx/props/RootPropTable';
 
 <Head>
   <title>Material React Table - Props</title>
@@ -7,6 +7,16 @@ import PropTable from '../../components/mdx/PropTable';
 
 ## All Props
 
-Many of the props that you can pass to MaterialReactTable are the same as the ones that you can pass to [react-table](https://react-table.tanstack.com/docs/api/useTable).
+> Many of the props that you can pass to `<MaterialReactTable />` are the same as the ones that you can pass to the [react-table](https://react-table.tanstack.com/docs/api/useTable) useTable hook.
 
-<PropTable />
+### Root Props
+
+Here is a list of all the props that you can pass to the root `<MaterialReactTable />`. Some of these props can be large objects that are detailed further down below in other prop tables, or linked to
+
+```jsx
+<MaterialReactTable
+//all the props you can pass here
+/>
+```
+
+<RootPropTable />
