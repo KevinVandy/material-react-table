@@ -4,7 +4,7 @@ import {
   alpha,
   Divider,
   Drawer as MuiDrawer,
-  List as MuiList,
+  List,
   ListItem as MuiListItem,
   styled,
   useMediaQuery,
@@ -14,20 +14,6 @@ const Drawer = styled(MuiDrawer)({
   zIndex: 1,
   position: 'relative',
 });
-
-const List = styled(MuiList, {
-  shouldForwardProp: (prop) => prop !== 'navOpen',
-})<{ navOpen?: boolean }>(({ navOpen }) => ({
-  overflow: 'visible',
-  overflowY: navOpen ? 'auto' : 'hidden',
-  marginTop: '64px',
-  padding: 0,
-  transition: 'all .2s',
-  width: navOpen ? '260px' : '0',
-  '@media (max-width: 900px)': {
-    marginTop: '50px',
-  },
-}));
 
 const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
   color: theme.palette.primary.dark,
@@ -66,7 +52,19 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
       onClose={() => setNavOpen(false)}
       variant={isTablet ? 'temporary' : 'permanent'}
     >
-      <List navOpen={navOpen}>
+      <List
+        sx={{
+          overflow: 'visible',
+          overflowY: navOpen ? 'overlay' : 'hidden',
+          mt: '64px',
+          padding: 0,
+          transition: 'all .2s',
+          width: navOpen ? '260px' : '0',
+          '@media (max-width: 900px)': {
+            mt: '50px',
+          },
+        }}
+      >
         <Link href="/" passHref>
           <ListItemLevel1>Home</ListItemLevel1>
         </Link>

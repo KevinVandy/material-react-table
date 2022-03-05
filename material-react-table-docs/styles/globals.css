@@ -6,6 +6,7 @@ body {
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
+  overflow-y: overlay;
   overflow-x: hidden;
 }
 
@@ -24,11 +25,11 @@ a {
 
 ::-webkit-scrollbar {
   right: 0;
-  width: 5px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: #999;
-  border-radius: 5px;
-  width: 5px;
+  border-radius: 8px;
+  width: 8px;
 }
