@@ -5,7 +5,13 @@ import { SampleCodeSnippet } from './SampleCodeSnippet';
 import { LinkHeading } from './LinkHeading';
 
 export const mdxComponents = {
-  a: (props: any) => <MuiLink target="_blank" rel="noreferrer" {...props} />,
+  a: (props: any) => (
+    <MuiLink
+      target={!props.href.startsWith('#') ? '_blank' : undefined}
+      rel="noreferrer"
+      {...props}
+    />
+  ),
   blockquote: (props: any) => <Blockquote {...props} />,
   code: (props: any) => <SampleCodeSnippet {...props} />,
   h1: (props: any) => <Typography variant="h1" {...props} />,

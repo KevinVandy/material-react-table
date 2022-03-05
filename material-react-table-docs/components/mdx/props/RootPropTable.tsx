@@ -42,6 +42,13 @@ const RootPropTable = () => {
         link: 'https://react-table.tanstack.com/docs/api/useTable#column-options',
         linkText: 'react-table column api docs',
         required: true,
+        // subRows: [
+        //   {
+        //     prop: 'Header',
+        //     type: 'string',
+        //     description: 'String that is used as the header for this column',
+        //   },
+        // ],
       },
       {
         prop: 'data',
@@ -163,6 +170,12 @@ const RootPropTable = () => {
         description: 'Override the default Mui icons',
         link: '/docs/guides/customize-icons',
         linkText: 'MRT customize icons docs',
+      },
+      {
+        prop: 'idPrefix',
+        type: 'string',
+        description:
+          'Manually set a prefix for all html ids in the table. (Otherwise randomly generated)',
       },
       {
         prop: 'initialState',

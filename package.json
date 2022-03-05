@@ -93,6 +93,7 @@
   },
   "peerDependencies": {
     "@emotion/react": ">=11",
+    "@emotion/styled": ">=11",
     "@mui/icons-material": ">=5",
     "@mui/material": ">=5",
     "react": ">=16.8",
