@@ -10,12 +10,8 @@ interface Props {
 }
 
 export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
-  const {
-    localization,
-    onRowSelectChange,
-    onSelectAllChange,
-    tableInstance,
-  } = useMRT();
+  const { localization, onRowSelectChange, onSelectAllChange, tableInstance } =
+    useMRT();
 
   const onSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (selectAll) {
@@ -32,7 +28,9 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
     : row?.getToggleRowSelectedProps();
 
   return (
-    <TableCell sx={commonTableBodyButtonCellStyles(tableInstance.state.densePadding)} >
+    <TableCell
+      sx={commonTableBodyButtonCellStyles(tableInstance.state.densePadding)}
+    >
       <Tooltip
         arrow
         enterDelay={1000}

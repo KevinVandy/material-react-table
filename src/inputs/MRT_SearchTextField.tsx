@@ -8,6 +8,7 @@ interface Props {}
 export const MRT_SearchTextField: FC<Props> = () => {
   const {
     icons: { SearchIcon, CloseIcon },
+    idPrefix,
     localization,
     muiSearchTextFieldProps,
     onGlobalFilterChange,
@@ -32,7 +33,7 @@ export const MRT_SearchTextField: FC<Props> = () => {
   return (
     <Collapse in={tableInstance.state.showSearch} orientation="horizontal">
       <TextField
-        id="global-search-text-field"
+        id={`mrt-${idPrefix}-search-text-field`}
         placeholder={localization.searchTextFieldPlaceholder}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setSearchValue(event.target.value);

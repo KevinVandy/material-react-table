@@ -28,6 +28,7 @@ export type UseMRT<D extends {} = {}> = MaterialReactTableProps<D> & {
   anyRowsCanExpand: boolean;
   anyRowsExpanded: boolean;
   icons: MRT_Icons;
+  idPrefix: string;
   localization: MRT_Localization;
   setCurrentEditingRow: (currentRowEditingId: MRT_Row<D> | null) => void;
   setDensePadding: (densePadding: boolean) => void;
@@ -100,6 +101,10 @@ export const MaterialReactTableProvider = <D extends {}>(
     ...hooks,
   ) as MRT_TableInstance<D>;
 
+  const idPrefix = useMemo(
+    () => props.idPrefix ?? Math.random().toString(36).substring(2, 9),
+    [props.idPrefix],
+  );
   const anyRowsCanExpand = useMemo(
     () => tableInstance.rows.some((row) => row.canExpand),
     [tableInstance.rows],
@@ -115,6 +120,7 @@ export const MaterialReactTableProvider = <D extends {}>(
         ...props,
         anyRowsCanExpand,
         anyRowsExpanded,
+        idPrefix,
         setCurrentEditingRow,
         setDensePadding,
         setFullScreen,

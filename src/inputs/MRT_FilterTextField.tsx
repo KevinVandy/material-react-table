@@ -11,6 +11,7 @@ interface Props {
 export const MRT_FilterTextField: FC<Props> = ({ column }) => {
   const {
     icons: { FilterListIcon, CloseIcon },
+    idPrefix,
     localization,
   } = useMRT();
 
@@ -32,7 +33,7 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
   return (
     <TextField
       fullWidth
-      id={`filter-${column.id}-column`}
+      id={`mrt-${idPrefix}-${column.id}-filter-text-field`}
       inputProps={{
         style: {
           textOverflow: 'ellipsis',

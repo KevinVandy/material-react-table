@@ -7,10 +7,13 @@ interface Props extends IconButtonProps {}
 export const MRT_ToggleSearchButton: FC<Props> = ({ ...rest }) => {
   const {
     icons: { SearchIcon, SearchOffIcon },
+    idPrefix,
     localization,
     muiSearchTextFieldProps,
     setShowSearch,
-    tableInstance: { state: { showSearch } },
+    tableInstance: {
+      state: { showSearch },
+    },
   } = useMRT();
 
   const handleToggleSearch = () => {
@@ -19,7 +22,7 @@ export const MRT_ToggleSearchButton: FC<Props> = ({ ...rest }) => {
       () =>
         document
           .getElementById(
-            muiSearchTextFieldProps?.id ?? `global-search-text-field`,
+            muiSearchTextFieldProps?.id ?? `mrt-${idPrefix}-search-text-field`,
           )
           ?.focus(),
       200,

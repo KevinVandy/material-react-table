@@ -229,6 +229,7 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
     hideToolbarInternalActions?: boolean;
     hideToolbarTop?: boolean;
     icons?: Partial<MRT_Icons>;
+    idPrefix?: string;
     isFetching?: boolean;
     isLoading?: boolean;
     localization?: Partial<MRT_Localization>;
@@ -275,7 +276,9 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
       | ((
           tableInstance: MRT_TableInstance<D>,
         ) => Partial<TablePaginationProps>);
-    muiTableProps?: TableProps | ((tableInstance: MRT_TableInstance<D>) => TableProps);
+    muiTableProps?:
+      | TableProps
+      | ((tableInstance: MRT_TableInstance<D>) => TableProps);
     muiTableToolbarAlertBannerProps?:
       | AlertProps
       | ((tableInstance: MRT_TableInstance<D>) => AlertProps);

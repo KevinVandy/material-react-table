@@ -13,7 +13,9 @@ export const MRT_EditActionButtons: FC<Props> = ({ row }) => {
     localization,
     onRowEditSubmit,
     setCurrentEditingRow,
-    tableInstance: { state: { currentEditingRow } },
+    tableInstance: {
+      state: { currentEditingRow },
+    },
   } = useMRT();
 
   const handleCancel = () => {

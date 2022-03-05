@@ -24,15 +24,16 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     disableFilters,
     disableSortBy,
     enableColumnGrouping,
-    localization,
-    setShowFilters,
     icons: {
-      FilterListIcon,
-      SortIcon,
       ClearAllIcon,
       DynamicFeedIcon,
+      FilterListIcon,
+      SortIcon,
       VisibilityOffIcon,
     },
+    idPrefix,
+    localization,
+    setShowFilters,
   } = useMRT();
 
   const handleClearSort = () => {
@@ -68,7 +69,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           .getElementById(
             // @ts-ignore
             column.muiTableHeadCellFilterTextFieldProps?.id ??
-              `filter-${column.id}-column`,
+              `mrt-${idPrefix}-${column.id}-filter-text-field`,
           )
           ?.focus(),
       200,
