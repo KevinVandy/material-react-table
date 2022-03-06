@@ -35,11 +35,12 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
           onClick={handleClick}
           size="small"
           sx={{
+            height: '2rem',
+            mr: '2px',
+            mt: '-0.2rem',
             opacity: 0.5,
             transition: 'opacity 0.2s',
-            marginRight: '2px',
-            height: '1.6rem',
-            width: '1.6rem',
+            width: '2rem',
             '&:hover': {
               opacity: 1,
             },

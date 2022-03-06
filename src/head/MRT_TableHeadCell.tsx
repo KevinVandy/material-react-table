@@ -73,6 +73,8 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
         column.Header as string,
       );
 
+  const columnHeader = column.render('Header') as string;
+
   return (
     <TableCell
       align={isParentHeader ? 'center' : 'left'}
@@ -86,59 +88,58 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
       }}
     >
       <Box
-        sx={{ alignContent: 'space-between', display: 'grid', height: '100%' }}
+        sx={{
+          alignItems: 'flex-start',
+          display: 'flex',
+          justifyContent: isParentHeader ? 'center' : 'space-between',
+          width: '100%',
+        }}
       >
         <Box
+          {...column.getSortByToggleProps()}
           sx={{
-            alignItems: 'flex-start',
+            alignItems: 'center',
             display: 'flex',
-            justifyContent: isParentHeader ? 'center' : 'space-between',
-            width: '100%',
+            flexWrap: 'nowrap',
+            whiteSpace: columnHeader.length < 15 ? 'nowrap' : 'normal',
           }}
+          title={undefined}
         >
-          <Box
-            {...column.getSortByToggleProps()}
-            sx={{ alignItems: 'center', display: 'flex', flexWrap: 'nowrap' }}
-            title={undefined}
-          >
-            {column.render('Header')}
-            {!isParentHeader && column.canSort && (
-              <Tooltip arrow title={sortTooltip}>
-                <TableSortLabel
-                  aria-label={sortTooltip}
-                  active={column.isSorted}
-                  direction={column.isSortedDesc ? 'desc' : 'asc'}
-                />
-              </Tooltip>
-            )}
-          </Box>
-          <Box
-            sx={{ alignItems: 'center', display: 'flex', flexWrap: 'nowrap' }}
-          >
-            {!disableColumnActions && !isParentHeader && (
-              <MRT_ToggleColumnActionMenuButton column={column} />
-            )}
-            {enableColumnResizing && !isParentHeader && (
-              <Divider
-                flexItem
-                orientation="vertical"
-                onDoubleClick={() => tableInstance.resetResizing()}
-                {...column.getResizerProps()}
-                sx={{
-                  borderRightWidth: '2px',
-                  borderRadius: '2px',
-                  maxHeight: '2rem',
-                }}
+          {column.render('Header')}
+          {!isParentHeader && column.canSort && (
+            <Tooltip arrow title={sortTooltip}>
+              <TableSortLabel
+                aria-label={sortTooltip}
+                active={column.isSorted}
+                direction={column.isSortedDesc ? 'desc' : 'asc'}
               />
-            )}
-          </Box>
+            </Tooltip>
+          )}
         </Box>
-        {!disableFilters && column.canFilter && (
-          <Collapse in={tableInstance.state.showFilters}>
-            <MRT_FilterTextField column={column} />
-          </Collapse>
-        )}
+        <Box sx={{ alignItems: 'center', display: 'flex', flexWrap: 'nowrap' }}>
+          {!disableColumnActions && !isParentHeader && (
+            <MRT_ToggleColumnActionMenuButton column={column} />
+          )}
+          {enableColumnResizing && !isParentHeader && (
+            <Divider
+              flexItem
+              orientation="vertical"
+              onDoubleClick={() => tableInstance.resetResizing()}
+              {...column.getResizerProps()}
+              sx={{
+                borderRightWidth: '2px',
+                borderRadius: '2px',
+                maxHeight: '2rem',
+              }}
+            />
+          )}
+        </Box>
       </Box>
+      {!disableFilters && column.canFilter && (
+        <Collapse in={tableInstance.state.showFilters}>
+          <MRT_FilterTextField column={column} />
+        </Collapse>
+      )}
     </TableCell>
   );
 };
