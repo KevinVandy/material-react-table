@@ -1,5 +1,11 @@
 import React, { ChangeEvent, FC, useState } from 'react';
-import { IconButton, InputAdornment, TextField, Tooltip } from '@mui/material';
+import {
+  IconButton,
+  InputAdornment,
+  TextField,
+  TextFieldProps,
+  Tooltip,
+} from '@mui/material';
 import { useAsyncDebounce } from 'react-table';
 import { useMRT } from '../useMRT';
 import { MRT_HeaderGroup } from '..';
@@ -33,7 +39,7 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
       ...mTableHeadCellFilterTextFieldProps?.style,
       ...mcTableHeadCellFilterTextFieldProps?.style,
     },
-  };
+  } as TextFieldProps;
 
   const [filterValue, setFilterValue] = useState('');
 
@@ -116,6 +122,7 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
         {...textFieldProps}
         sx={{
           minWidth: '6rem',
+          ...textFieldProps?.sx,
         }}
       />
     </Tooltip>
