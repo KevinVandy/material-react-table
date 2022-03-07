@@ -85,8 +85,10 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
         fullWidth
         id={`mrt-${idPrefix}-${column.id}-filter-text-field`}
         inputProps={{
+          disabled: !!filterChipLabel,
           sx: {
             textOverflow: 'ellipsis',
+            width: filterChipLabel ? 0 : 'auto',
           },
           title: filterPlaceholder,
         }}
@@ -141,7 +143,7 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
         {...textFieldProps}
         sx={{
           m: '0 -0.25rem',
-          minWidth: '5rem',
+          minWidth: !filterChipLabel ? '5rem' : 'auto',
           width: 'calc(100% + 0.5rem)',
           ...textFieldProps?.sx,
         }}

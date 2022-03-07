@@ -68,7 +68,7 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
     [],
   );
 
-  const handleSelectMenuItem = (value: MRT_FilterType) => {
+  const handleSelectFilterType = (value: MRT_FilterType) => {
     setAnchorEl(null);
     setCurrentFilterTypes((prev: { [key: string]: MRT_FilterType }) => ({
       ...prev,
@@ -94,7 +94,7 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
           <MenuItem
             divider={divider}
             key={type}
-            onClick={() => handleSelectMenuItem(type)}
+            onClick={() => handleSelectFilterType(type)}
             selected={type === filterType}
             value={type}
           >

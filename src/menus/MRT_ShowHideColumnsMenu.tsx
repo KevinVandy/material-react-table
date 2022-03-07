@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const MRT_ShowHideColumnsMenu: FC<Props> = ({ column }) => {
-  const isParentHeader = (column?.columns?.length ?? 0) > 0;
+  const isParentHeader = !!column?.columns?.length;
 
   const allChildColumnsVisible =
     isParentHeader &&

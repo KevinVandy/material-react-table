@@ -16,7 +16,7 @@ export const MRT_TableFooterCell: FC<Props> = ({ column }) => {
     },
   } = useMRT();
 
-  const isParentHeader = (column?.columns?.length ?? 0) > 0;
+  const isParentHeader = !!column?.columns?.length;
 
   const mTableFooterCellProps =
     muiTableFooterCellProps instanceof Function

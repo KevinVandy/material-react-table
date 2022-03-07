@@ -11,6 +11,7 @@ export interface MRT_Localization {
   columnShowHideMenuShowAll: string;
   expandAllButtonTitle: string;
   expandButtonTitle: string;
+  filterApplied: string;
   filterMenuItemContains: string;
   filterMenuItemEmpty: string;
   filterMenuItemEndsWith: string;
@@ -57,11 +58,12 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   columnShowHideMenuShowAll: 'Show all',
   expandAllButtonTitle: 'Expand all',
   expandButtonTitle: 'Expand',
+  filterApplied: 'Filtering by {column} - ({filterType})',
   filterMenuItemContains: 'Contains Exact',
   filterMenuItemEmpty: 'Empty',
   filterMenuItemEndsWith: 'Ends With',
   filterMenuItemEquals: 'Equals',
-  filterMenuItemFuzzy: 'Fuzzy Match',
+  filterMenuItemFuzzy: 'Fuzzy Match (Default)',
   filterMenuItemNotEmpty: 'Not Empty',
   filterMenuItemNotEquals: 'Not Equals',
   filterMenuItemStartsWith: 'Starts With',

@@ -6,6 +6,7 @@ import {
   Collapse,
   Tooltip,
   Box,
+  IconButton,
 } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
@@ -33,12 +34,14 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
     disableColumnActions,
     disableFilters,
     enableColumnResizing,
+    icons: { FilterAltIcon, FilterAltOff },
     localization,
     muiTableHeadCellProps,
+    setShowFilters,
     tableInstance,
   } = useMRT();
 
-  const isParentHeader = (column?.columns?.length ?? 0) > 0;
+  const isParentHeader = !!column?.columns?.length;
 
   const mTableHeadCellProps =
     muiTableHeadCellProps instanceof Function
@@ -72,6 +75,23 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
         '{column}',
         column.Header as string,
       );
+
+  const filterTooltip = !!column.filterValue
+    ? localization.filterApplied
+        .replace('{column}', String(column.Header))
+        .replace(
+          '{filterType}',
+          // @ts-ignore
+          localization[
+            `filterMenuItem${
+              tableInstance.state.currentFilterTypes[column.id]
+                .charAt(0)
+                .toUpperCase() +
+              tableInstance.state.currentFilterTypes[column.id].slice(1)
+            }`
+          ],
+        )
+    : localization.toggleFilterButtonTitle;
 
   const columnHeader = column.render('Header') as string;
 
@@ -113,6 +133,32 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
                 active={column.isSorted}
                 direction={column.isSortedDesc ? 'desc' : 'asc'}
               />
+            </Tooltip>
+          )}
+          {!isParentHeader && !!column.canFilter && (
+            <Tooltip arrow title={filterTooltip}>
+              <IconButton
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setShowFilters(!tableInstance.state.showFilters);
+                }}
+                size="small"
+                sx={{
+                  opacity: !!column.filterValue ? 0.8 : 0,
+                  p: '2px',
+                  m: 0,
+                  transition: 'all 0.2s ease-in-out',
+                  '&:hover': {
+                    opacity: 0.8,
+                  },
+                }}
+              >
+                {tableInstance.state.showFilters && !column.filterValue ? (
+                  <FilterAltOff fontSize="small" />
+                ) : (
+                  <FilterAltIcon fontSize="small" />
+                )}
+              </IconButton>
             </Tooltip>
           )}
         </Box>
