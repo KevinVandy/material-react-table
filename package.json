@@ -1,5 +1,5 @@
 {
-  "version": "0.5.3",
+  "version": "0.5.4",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material-UI implementation of react-table, inspired by material-table and the mui DataGrid, written from the ground up in TypeScript.",
@@ -98,5 +98,8 @@
     "@mui/material": ">=5",
     "react": ">=16.8",
     "react-table": ">=7"
+  },
+  "dependencies": {
+    "match-sorter": "^6.3.1"
   }
 }

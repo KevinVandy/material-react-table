@@ -181,6 +181,16 @@ export type MRT_Cell<D extends {} = {}, _V = any> = Cell<D> &
   UseGroupByCellProps<D> &
   UseRowStateCellProps<D> & {};
 
+export type MRT_FilterType =
+  | 'contains'
+  | 'empty'
+  | 'endsWith'
+  | 'equals'
+  | 'fuzzy'
+  | 'notEmpty'
+  | 'notEquals'
+  | 'startsWith';
+
 export type MRT_TableState<D extends {} = {}> = TableState<D> &
   UseColumnOrderState<D> &
   UseExpandedState<D> &
@@ -193,6 +203,7 @@ export type MRT_TableState<D extends {} = {}> = TableState<D> &
   UseRowStateState<D> &
   UseSortByState<D> & {
     currentEditingRow: MRT_Row<D> | null;
+    currentFilterTypes: { [key: string]: MRT_FilterType };
     densePadding: boolean;
     fullScreen: boolean;
     showFilters: boolean;

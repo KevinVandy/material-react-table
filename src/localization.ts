@@ -11,6 +11,15 @@ export interface MRT_Localization {
   columnShowHideMenuShowAll: string;
   expandAllButtonTitle: string;
   expandButtonTitle: string;
+  filterMenuItemContains: string;
+  filterMenuItemEmpty: string;
+  filterMenuItemEndsWith: string;
+  filterMenuItemEquals: string;
+  filterMenuItemFuzzy: string;
+  filterMenuItemNotEmpty: string;
+  filterMenuItemNotEquals: string;
+  filterMenuItemStartsWith: string;
+  filterMenuTitle: string;
   filterTextFieldClearButtonTitle: string;
   filterTextFieldPlaceholder: string;
   rowActionButtonCancel: string;
@@ -27,9 +36,9 @@ export interface MRT_Localization {
   toggleFilterButtonTitle: string;
   toggleFullScreenButtonTitle: string;
   toggleSearchButtonTitle: string;
-  toolbarAlertSelectionMessage: string;
   toolbarAlertGroupedByMessage: string;
   toolbarAlertGroupedThenByMessage: string;
+  toolbarAlertSelectionMessage: string;
 }
 
 export const MRT_DefaultLocalization_EN: MRT_Localization = {
@@ -45,6 +54,15 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   columnShowHideMenuShowAll: 'Show all',
   expandAllButtonTitle: 'Expand all',
   expandButtonTitle: 'Expand',
+  filterMenuItemContains: 'Contains Exact',
+  filterMenuItemEmpty: 'Empty',
+  filterMenuItemEndsWith: 'Ends With',
+  filterMenuItemEquals: 'Equals',
+  filterMenuItemFuzzy: 'Fuzzy Match',
+  filterMenuItemNotEmpty: 'Not Empty',
+  filterMenuItemNotEquals: 'Not Equals',
+  filterMenuItemStartsWith: 'Starts With',
+  filterMenuTitle: 'Filter Mode',
   filterTextFieldClearButtonTitle: 'Clear filter',
   filterTextFieldPlaceholder: 'Filter by {column}',
   rowActionButtonCancel: 'Cancel',
@@ -61,7 +79,7 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   toggleFilterButtonTitle: 'Toggle filters',
   toggleFullScreenButtonTitle: 'Toggle full screen',
   toggleSearchButtonTitle: 'Toggle search',
-  toolbarAlertSelectionMessage: '{selectedCount} of {rowCount} row(s) selected',
   toolbarAlertGroupedByMessage: 'Grouped by ',
   toolbarAlertGroupedThenByMessage: ', then by ',
+  toolbarAlertSelectionMessage: '{selectedCount} of {rowCount} row(s) selected',
 };

@@ -1,5 +1,6 @@
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { ChangeEvent, FC, MouseEvent, useState } from 'react';
 import {
+  Chip,
   IconButton,
   InputAdornment,
   TextField,
@@ -9,6 +10,7 @@ import {
 import { useAsyncDebounce } from 'react-table';
 import { useMRT } from '../useMRT';
 import { MRT_HeaderGroup } from '..';
+import { MRT_FilterMenu } from '../menus/MRT_FilterMenu';
 
 interface Props {
   column: MRT_HeaderGroup;
@@ -20,7 +22,11 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
     idPrefix,
     localization,
     muiTableHeadCellFilterTextFieldProps,
+    setCurrentFilterTypes,
+    tableInstance,
   } = useMRT();
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const mTableHeadCellFilterTextFieldProps =
     muiTableHeadCellFilterTextFieldProps instanceof Function
@@ -47,25 +53,34 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
     column.setFilter(value ?? undefined);
   }, 150);
 
+  const handleFilterMenuOpen = (event: MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
   const handleClear = () => {
     setFilterValue('');
     column.setFilter(undefined);
+  };
+
+  const handleClearFilterChip = () => {
+    setFilterValue('');
+    column.setFilter(undefined);
+    setCurrentFilterTypes((prev) => ({ ...prev, [column.id]: 'fuzzy' }));
   };
 
   if (column.Filter) {
     return <>{column.Filter?.({ column })}</>;
   }
 
+  const filterType = tableInstance.state.currentFilterTypes[column.id];
+  const showFilterChip = ['empty', 'notEmpty'].includes(filterType);
+  const filterPlaceholder = localization.filterTextFieldPlaceholder?.replace(
+    '{column}',
+    String(column.Header),
+  );
+
   return (
-    <Tooltip
-      arrow
-      enterDelay={1000}
-      enterNextDelay={1000}
-      title={localization.filterTextFieldPlaceholder?.replace(
-        '{column}',
-        String(column.Header),
-      )}
-    >
+    <>
       <TextField
         fullWidth
         id={`mrt-${idPrefix}-${column.id}-filter-text-field`}
@@ -73,12 +88,10 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
           sx: {
             textOverflow: 'ellipsis',
           },
+          title: filterPlaceholder,
         }}
-        margin="dense"
-        placeholder={localization.filterTextFieldPlaceholder?.replace(
-          '{column}',
-          String(column.Header),
-        )}
+        margin="none"
+        placeholder={showFilterChip ? '' : filterPlaceholder}
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFilterValue(e.target.value);
           handleChange(e.target.value);
@@ -89,15 +102,21 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <IconButton
-                size="small"
-                sx={{ height: '1.75rem', width: '1.75rem' }}
-              >
-                <FilterListIcon />
-              </IconButton>
+              <Tooltip arrow title="Change Filter Mode">
+                <IconButton
+                  onClick={handleFilterMenuOpen}
+                  size="small"
+                  sx={{ height: '1.75rem', width: '1.75rem' }}
+                >
+                  <FilterListIcon />
+                </IconButton>
+              </Tooltip>
+              {showFilterChip && (
+                <Chip onDelete={handleClearFilterChip} label={filterType} />
+              )}
             </InputAdornment>
           ),
-          endAdornment: (
+          endAdornment: !showFilterChip && (
             <InputAdornment position="end">
               <Tooltip
                 arrow
@@ -125,6 +144,11 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
           ...textFieldProps?.sx,
         }}
       />
-    </Tooltip>
+      <MRT_FilterMenu
+        anchorEl={anchorEl}
+        column={column}
+        setAnchorEl={setAnchorEl}
+      />
+    </>
   );
 };

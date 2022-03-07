@@ -1,12 +1,17 @@
-import React, { FC } from 'react';
-import { Divider, Menu, MenuItem } from '@mui/material';
+import React, { FC, useState } from 'react';
+import {
+  Divider,
+  IconButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  MenuList,
+} from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_HeaderGroup } from '..';
-
-const commonMenuItemStyles = {
-  display: 'flex',
-  gap: '0.75rem',
-};
+import { MRT_FilterMenu } from './MRT_FilterMenu';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 interface Props {
   anchorEl: HTMLElement | null;
@@ -35,6 +40,9 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     localization,
     setShowFilters,
   } = useMRT();
+
+  const [filterMenuAnchorEl, setFilterMenuAnchorEl] =
+    useState<null | HTMLElement>(null);
 
   const handleClearSort = () => {
     column.clearSortBy();
@@ -77,88 +85,119 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     setAnchorEl(null);
   };
 
+  const handleOpenFilterModeMenu = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+    setFilterMenuAnchorEl(event.currentTarget);
+  };
+
   return (
     <Menu
       anchorEl={anchorEl}
       open={!!anchorEl}
       onClose={() => setAnchorEl(null)}
     >
-      {!disableSortBy &&
-        column.canSort && [
-          <MenuItem
-            key={1}
-            disabled={!column.isSorted}
-            onClick={handleClearSort}
-            sx={commonMenuItemStyles}
-          >
-            <ClearAllIcon /> {localization.columnActionMenuItemClearSort}
-          </MenuItem>,
-          <MenuItem
-            key={2}
-            disabled={column.isSorted && !column.isSortedDesc}
-            onClick={handleSortAsc}
-            sx={commonMenuItemStyles}
-          >
-            <SortIcon />{' '}
-            {localization.columnActionMenuItemSortAsc?.replace(
-              '{column}',
-              String(column.Header),
-            )}
-          </MenuItem>,
-          <MenuItem
-            key={3}
-            disabled={column.isSorted && column.isSortedDesc}
-            onClick={handleSortDesc}
-            sx={commonMenuItemStyles}
-          >
-            <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />{' '}
-            {localization.columnActionMenuItemSortDesc?.replace(
-              '{column}',
-              String(column.Header),
-            )}
-          </MenuItem>,
-        ]}
-      {!disableFilters &&
-        column.canFilter && [
+      <MenuList>
+        {!disableSortBy &&
+          column.canSort && [
+            <MenuItem
+              key={1}
+              disabled={!column.isSorted}
+              onClick={handleClearSort}
+            >
+              <ListItemIcon>
+                <ClearAllIcon />
+              </ListItemIcon>
+              <ListItemText>
+                {localization.columnActionMenuItemClearSort}
+              </ListItemText>
+            </MenuItem>,
+            <MenuItem
+              key={2}
+              disabled={column.isSorted && !column.isSortedDesc}
+              onClick={handleSortAsc}
+            >
+              <ListItemIcon>
+                <SortIcon />
+              </ListItemIcon>
+              <ListItemText>
+                {localization.columnActionMenuItemSortAsc?.replace(
+                  '{column}',
+                  String(column.Header),
+                )}
+              </ListItemText>
+            </MenuItem>,
+            <MenuItem
+              key={3}
+              disabled={column.isSorted && column.isSortedDesc}
+              onClick={handleSortDesc}
+            >
+              <ListItemIcon>
+                <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
+              </ListItemIcon>
+              <ListItemText>
+                {localization.columnActionMenuItemSortDesc?.replace(
+                  '{column}',
+                  String(column.Header),
+                )}
+              </ListItemText>
+            </MenuItem>,
+          ]}
+        {!disableFilters &&
+          column.canFilter && [
+            <Divider key={0} />,
+            <MenuItem key={1} onClick={handleFilterByColumn}>
+              <ListItemIcon>
+                <FilterListIcon />
+              </ListItemIcon>
+              <ListItemText>
+                {localization.filterTextFieldPlaceholder?.replace(
+                  '{column}',
+                  String(column.Header),
+                )}
+              </ListItemText>
+              <IconButton size="small" onMouseEnter={handleOpenFilterModeMenu}>
+                <ArrowRightIcon />
+              </IconButton>
+            </MenuItem>,
+            <MRT_FilterMenu
+              anchorEl={filterMenuAnchorEl}
+              column={column}
+              key={2}
+              setAnchorEl={setFilterMenuAnchorEl}
+              onSelect={handleFilterByColumn}
+            />,
+          ]}
+        {enableColumnGrouping &&
+          column.canGroupBy && [
+            <Divider key={1} />,
+            <MenuItem key={2} onClick={handleGroupByColumn}>
+              <ListItemIcon>
+                <DynamicFeedIcon />
+              </ListItemIcon>
+              <ListItemText>
+                {localization[
+                  column.isGrouped
+                    ? 'columnActionMenuItemUnGroupBy'
+                    : 'columnActionMenuItemGroupBy'
+                ]?.replace('{column}', String(column.Header))}
+              </ListItemText>
+            </MenuItem>,
+          ]}
+        {!disableColumnHiding && [
           <Divider key={0} />,
-          <MenuItem
-            key={1}
-            onClick={handleFilterByColumn}
-            sx={commonMenuItemStyles}
-          >
-            <FilterListIcon />{' '}
-            {localization.filterTextFieldPlaceholder?.replace(
-              '{column}',
-              String(column.Header),
-            )}
+          <MenuItem key={1} onClick={handleHideColumn}>
+            <ListItemIcon>
+              <VisibilityOffIcon />
+            </ListItemIcon>
+            <ListItemText>
+              {localization.columnActionMenuItemHideColumn?.replace(
+                '{column}',
+                String(column.Header),
+              )}
+            </ListItemText>
           </MenuItem>,
         ]}
-      {enableColumnGrouping &&
-        column.canGroupBy && [
-          <Divider key={1} />,
-          <MenuItem
-            key={2}
-            onClick={handleGroupByColumn}
-            sx={commonMenuItemStyles}
-          >
-            <DynamicFeedIcon />{' '}
-            {localization[
-              column.isGrouped
-                ? 'columnActionMenuItemUnGroupBy'
-                : 'columnActionMenuItemGroupBy'
-            ]?.replace('{column}', String(column.Header))}
-          </MenuItem>,
-        ]}
-      {!disableColumnHiding && [
-        <Divider key={0} />,
-        <MenuItem key={1} onClick={handleHideColumn} sx={commonMenuItemStyles}>
-          <VisibilityOffIcon />{' '}
-          {localization.columnActionMenuItemHideColumn?.replace(
-            '{column}',
-            String(column.Header),
-          )}
-        </MenuItem>,
-      ]}
+      </MenuList>
     </Menu>
   );
 };

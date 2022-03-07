@@ -5,6 +5,8 @@ import React, {
   useContext,
   useMemo,
   useState,
+  Dispatch,
+  SetStateAction,
 } from 'react';
 import {
   PluginHook,
@@ -19,7 +21,8 @@ import {
   useSortBy,
   useTable,
 } from 'react-table';
-import { MRT_Row, MRT_TableInstance } from '.';
+import { MRT_FilterType, MRT_Row, MRT_TableInstance } from '.';
+import { defaultFilterFNs } from './filtersFNs';
 import { MRT_Icons } from './icons';
 import { MRT_Localization } from './localization';
 import { MaterialReactTableProps } from './MaterialReactTable';
@@ -30,18 +33,23 @@ export type UseMRT<D extends {} = {}> = MaterialReactTableProps<D> & {
   icons: MRT_Icons;
   idPrefix: string;
   localization: MRT_Localization;
-  setCurrentEditingRow: (currentRowEditingId: MRT_Row<D> | null) => void;
-  setDensePadding: (densePadding: boolean) => void;
-  setFullScreen: (fullScreen: boolean) => void;
-  setShowFilters: (showFilters: boolean) => void;
-  setShowSearch: (showSearch: boolean) => void;
+  setCurrentEditingRow: Dispatch<SetStateAction<MRT_Row<D> | null>>;
+  setCurrentFilterTypes: Dispatch<
+    SetStateAction<{
+      [key: string]: MRT_FilterType;
+    }>
+  >;
+  setDensePadding: Dispatch<SetStateAction<boolean>>;
+  setFullScreen: Dispatch<SetStateAction<boolean>>;
+  setShowFilters: Dispatch<SetStateAction<boolean>>;
+  setShowSearch: Dispatch<SetStateAction<boolean>>;
   tableInstance: MRT_TableInstance<D>;
 };
 
-const MaterialReactTableContext = (<D extends {}>() =>
+const MaterialReactTableContext = (<D extends {} = {}>() =>
   createContext<UseMRT<D>>({} as UseMRT<D>) as Context<UseMRT<D>>)();
 
-export const MaterialReactTableProvider = <D extends {}>(
+export const MaterialReactTableProvider = <D extends {} = {}>(
   props: PropsWithChildren<MaterialReactTableProps<D>>,
 ) => {
   const hooks: PluginHook<D>[] = [
@@ -57,7 +65,7 @@ export const MaterialReactTableProvider = <D extends {}>(
   if (props.enableColumnResizing)
     hooks.unshift(useResizeColumns, useFlexLayout);
 
-  const [currentEditingRow, setCurrentEditingRow] = useState<MRT_Row | null>(
+  const [currentEditingRow, setCurrentEditingRow] = useState<MRT_Row<D> | null>(
     null,
   );
   const [densePadding, setDensePadding] = useState(
@@ -73,14 +81,50 @@ export const MaterialReactTableProvider = <D extends {}>(
     props.initialState?.showSearch ?? false,
   );
 
-  const tableInstance = useTable<D>(
+  const filterTypes = useMemo<Partial<{ [key in MRT_FilterType]: any }>>(
+    () => ({
+      ...defaultFilterFNs,
+      ...props.filterTypes,
+    }),
+    [props.filterTypes],
+  );
+
+  const [currentFilterTypes, setCurrentFilterTypes] = useState<{
+    [key: string]: MRT_FilterType;
+  }>(() =>
+    Object.assign(
+      {},
+      ...props.columns
+        .map((c) => c.accessor?.toString() as string)
+        .map((accessor) => ({
+          [accessor]:
+            props?.initialState?.filters?.[accessor as any] ?? 'fuzzy',
+        })),
+    ),
+  );
+
+  const columns = useMemo(
+    () =>
+      props.columns.map((column) => {
+        column.filter =
+          filterTypes[currentFilterTypes[column.accessor as string]];
+        return column;
+      }),
+    [props.columns, filterTypes, currentFilterTypes],
+  );
+
+  const tableInstance = useTable(
     {
       ...props,
+      columns,
+      // @ts-ignore
+      filterTypes,
       useControlledState: (state) =>
         useMemo(
           () => ({
             ...state,
             currentEditingRow,
+            currentFilterTypes,
             densePadding,
             fullScreen,
             showFilters,
@@ -90,6 +134,7 @@ export const MaterialReactTableProvider = <D extends {}>(
           }),
           [
             currentEditingRow,
+            currentFilterTypes,
             densePadding,
             fullScreen,
             showFilters,
@@ -121,7 +166,9 @@ export const MaterialReactTableProvider = <D extends {}>(
         anyRowsCanExpand,
         anyRowsExpanded,
         idPrefix,
+        //@ts-ignore
         setCurrentEditingRow,
+        setCurrentFilterTypes,
         setDensePadding,
         setFullScreen,
         setShowFilters,
@@ -135,6 +182,7 @@ export const MaterialReactTableProvider = <D extends {}>(
   );
 };
 
-export const useMRT = <D extends {}>(): UseMRT<D> =>
-  // @ts-ignore
-  useContext<UseMRT<D>>(MaterialReactTableContext);
+export const useMRT = <D extends {} = {}>(): UseMRT<D> =>
+  useContext<UseMRT<D>>(
+    MaterialReactTableContext as unknown as Context<UseMRT<D>>,
+  );
