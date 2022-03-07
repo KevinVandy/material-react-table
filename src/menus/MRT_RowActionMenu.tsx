@@ -1,5 +1,11 @@
 import React, { FC } from 'react';
-import { Menu, MenuItem } from '@mui/material';
+import {
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  MenuList,
+} from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_Row } from '..';
 
@@ -30,14 +36,19 @@ export const MRT_RowActionMenu: FC<Props> = ({
       open={!!anchorEl}
       onClose={() => setAnchorEl(null)}
     >
-      {enableRowEditing && (
-        <MenuItem sx={{ display: 'flex', gap: '0.75rem' }} onClick={handleEdit}>
-          <EditIcon /> {localization.rowActionMenuItemEdit}
-        </MenuItem>
-      )}
-      {renderRowActionMenuItems?.(row, tableInstance, () =>
-        setAnchorEl(null),
-      ) ?? null}
+      <MenuList dense={tableInstance.state.densePadding} disablePadding>
+        {enableRowEditing && (
+          <MenuItem onClick={handleEdit}>
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
+            <ListItemText>{localization.rowActionMenuItemEdit}</ListItemText>
+          </MenuItem>
+        )}
+        {renderRowActionMenuItems?.(row, tableInstance, () =>
+          setAnchorEl(null),
+        ) ?? null}
+      </MenuList>
     </Menu>
   );
 };

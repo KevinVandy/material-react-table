@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react';
-import { Divider, Menu, MenuItem, Typography } from '@mui/material';
+import { Menu, MenuItem, MenuList } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_FilterType, MRT_HeaderGroup } from '..';
 
@@ -10,7 +10,7 @@ interface Props {
   onSelect?: () => void;
 }
 
-export const MRT_FilterMenu: FC<Props> = ({
+export const MRT_FilterTypeMenu: FC<Props> = ({
   anchorEl,
   column,
   onSelect,
@@ -85,25 +85,23 @@ export const MRT_FilterMenu: FC<Props> = ({
   return (
     <Menu
       anchorEl={anchorEl}
-      open={!!anchorEl}
       anchorOrigin={{ vertical: 'center', horizontal: 'right' }}
       onClose={() => setAnchorEl(null)}
+      open={!!anchorEl}
     >
-      <Typography sx={{ fontWeight: 'bold', p: '1rem', fontSize: '1.1rem' }}>
-        {localization.filterMenuTitle}
-      </Typography>
-      <Divider />
-      {filterTypes.map(({ type, label, divider }) => (
-        <MenuItem
-          divider={divider}
-          key={type}
-          onClick={() => handleSelectMenuItem(type)}
-          selected={type === filterType}
-          value={type}
-        >
-          {label}
-        </MenuItem>
-      ))}
+      <MenuList dense={tableInstance.state.densePadding} disablePadding>
+        {filterTypes.map(({ type, label, divider }) => (
+          <MenuItem
+            divider={divider}
+            key={type}
+            onClick={() => handleSelectMenuItem(type)}
+            selected={type === filterType}
+            value={type}
+          >
+            {label}
+          </MenuItem>
+        ))}
+      </MenuList>
     </Menu>
   );
 };

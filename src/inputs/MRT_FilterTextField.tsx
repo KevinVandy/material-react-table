@@ -10,7 +10,7 @@ import {
 import { useAsyncDebounce } from 'react-table';
 import { useMRT } from '../useMRT';
 import { MRT_HeaderGroup } from '..';
-import { MRT_FilterMenu } from '../menus/MRT_FilterMenu';
+import { MRT_FilterTypeMenu } from '../menus/MRT_FilterTypeMenu';
 
 interface Props {
   column: MRT_HeaderGroup;
@@ -73,7 +73,7 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
   }
 
   const filterType = tableInstance.state.currentFilterTypes[column.id];
-  const showFilterChip = ['empty', 'notEmpty'].includes(filterType);
+  const filterChipLabel = ['empty', 'notEmpty'].includes(filterType);
   const filterPlaceholder = localization.filterTextFieldPlaceholder?.replace(
     '{column}',
     String(column.Header),
@@ -91,7 +91,7 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
           title: filterPlaceholder,
         }}
         margin="none"
-        placeholder={showFilterChip ? '' : filterPlaceholder}
+        placeholder={filterChipLabel ? '' : filterPlaceholder}
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFilterValue(e.target.value);
           handleChange(e.target.value);
@@ -111,12 +111,12 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
                   <FilterListIcon />
                 </IconButton>
               </Tooltip>
-              {showFilterChip && (
+              {filterChipLabel && (
                 <Chip onDelete={handleClearFilterChip} label={filterType} />
               )}
             </InputAdornment>
           ),
-          endAdornment: !showFilterChip && (
+          endAdornment: !filterChipLabel && (
             <InputAdornment position="end">
               <Tooltip
                 arrow
@@ -140,11 +140,13 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
         }}
         {...textFieldProps}
         sx={{
-          minWidth: '6rem',
+          m: '0 -0.25rem',
+          minWidth: '5rem',
+          width: 'calc(100% + 0.5rem)',
           ...textFieldProps?.sx,
         }}
       />
-      <MRT_FilterMenu
+      <MRT_FilterTypeMenu
         anchorEl={anchorEl}
         column={column}
         setAnchorEl={setAnchorEl}

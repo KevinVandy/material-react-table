@@ -20,6 +20,9 @@ export interface MRT_Localization {
   filterMenuItemNotEquals: string;
   filterMenuItemStartsWith: string;
   filterMenuTitle: string;
+  filterTextFieldChangeFilterButtonTitle: string;
+  filterTextFieldChipLabelEmpty: string;
+  filterTextFieldChipLabelNotEmpty: string;
   filterTextFieldClearButtonTitle: string;
   filterTextFieldPlaceholder: string;
   rowActionButtonCancel: string;
@@ -63,6 +66,9 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   filterMenuItemNotEquals: 'Not Equals',
   filterMenuItemStartsWith: 'Starts With',
   filterMenuTitle: 'Filter Mode',
+  filterTextFieldChangeFilterButtonTitle: 'Change Filter Mode',
+  filterTextFieldChipLabelEmpty: 'Empty',
+  filterTextFieldChipLabelNotEmpty: 'Not Empty',
   filterTextFieldClearButtonTitle: 'Clear filter',
   filterTextFieldPlaceholder: 'Filter by {column}',
   rowActionButtonCancel: 'Cancel',
@@ -76,9 +82,9 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   selectCheckboxTitle: 'Toggle select row',
   showHideColumnsButtonTitle: 'Show/Hide columns',
   toggleDensePaddingSwitchTitle: 'Toggle dense padding',
-  toggleFilterButtonTitle: 'Toggle filters',
+  toggleFilterButtonTitle: 'Show/Hide filters',
   toggleFullScreenButtonTitle: 'Toggle full screen',
-  toggleSearchButtonTitle: 'Toggle search',
+  toggleSearchButtonTitle: 'Show/Hide search',
   toolbarAlertGroupedByMessage: 'Grouped by ',
   toolbarAlertGroupedThenByMessage: ', then by ',
   toolbarAlertSelectionMessage: '{selectedCount} of {rowCount} row(s) selected',
