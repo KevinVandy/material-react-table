@@ -5,7 +5,6 @@ import {
   ListItemText,
   Menu,
   MenuItem,
-  MenuList,
 } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_HeaderGroup } from '..';
@@ -100,131 +99,129 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       anchorEl={anchorEl}
       open={!!anchorEl}
       onClose={() => setAnchorEl(null)}
+      MenuListProps={{
+        dense: tableInstance.state.densePadding,
+        disablePadding: true,
+      }}
     >
-      <MenuList dense={tableInstance.state.densePadding} disablePadding>
-        {!disableSortBy &&
-          column.canSort && [
-            <MenuItem
-              key={1}
-              disabled={!column.isSorted}
-              onClick={handleClearSort}
-              sx={commonMenuItemStyles}
-            >
-              <ListItemIcon>
-                <ClearAllIcon />
-              </ListItemIcon>
-              <ListItemText>
-                {localization.columnActionMenuItemClearSort}
-              </ListItemText>
-            </MenuItem>,
-            <MenuItem
-              disabled={column.isSorted && !column.isSortedDesc}
-              key={2}
-              onClick={handleSortAsc}
-              sx={commonMenuItemStyles}
-            >
-              <ListItemIcon>
-                <SortIcon />
-              </ListItemIcon>
-              <ListItemText>
-                {localization.columnActionMenuItemSortAsc?.replace(
-                  '{column}',
-                  String(column.Header),
-                )}
-              </ListItemText>
-            </MenuItem>,
-            <MenuItem
-              divider={
-                !disableFilters || enableColumnGrouping || !disableColumnHiding
-              }
-              key={3}
-              disabled={column.isSorted && column.isSortedDesc}
-              onClick={handleSortDesc}
-              sx={commonMenuItemStyles}
-            >
-              <ListItemIcon>
-                <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
-              </ListItemIcon>
-              <ListItemText>
-                {localization.columnActionMenuItemSortDesc?.replace(
-                  '{column}',
-                  String(column.Header),
-                )}
-              </ListItemText>
-            </MenuItem>,
-          ]}
-        {!disableFilters &&
-          column.canFilter && [
-            <MenuItem
-              divider={enableColumnGrouping || !disableColumnHiding}
-              key={1}
-              onClick={handleFilterByColumn}
-              sx={commonMenuItemStyles}
-            >
-              <ListItemIcon>
-                <FilterListIcon />
-              </ListItemIcon>
-              <ListItemText>
-                {localization.filterTextFieldPlaceholder?.replace(
-                  '{column}',
-                  String(column.Header),
-                )}
-              </ListItemText>
-              <IconButton
-                onClick={handleOpenFilterModeMenu}
-                onMouseEnter={handleOpenFilterModeMenu}
-                size="small"
-                sx={{ p: 0 }}
-              >
-                <ArrowRightIcon />
-              </IconButton>
-            </MenuItem>,
-            <MRT_FilterTypeMenu
-              anchorEl={filterMenuAnchorEl}
-              column={column}
-              key={2}
-              setAnchorEl={setFilterMenuAnchorEl}
-              onSelect={handleFilterByColumn}
-            />,
-          ]}
-        {enableColumnGrouping &&
-          column.canGroupBy && [
-            <MenuItem
-              divider={!disableColumnHiding}
-              key={2}
-              onClick={handleGroupByColumn}
-              sx={commonMenuItemStyles}
-            >
-              <ListItemIcon>
-                <DynamicFeedIcon />
-              </ListItemIcon>
-              <ListItemText>
-                {localization[
-                  column.isGrouped
-                    ? 'columnActionMenuItemUnGroupBy'
-                    : 'columnActionMenuItemGroupBy'
-                ]?.replace('{column}', String(column.Header))}
-              </ListItemText>
-            </MenuItem>,
-          ]}
-        {!disableColumnHiding && [
+      {!disableSortBy &&
+        column.canSort && [
           <MenuItem
             key={1}
-            onClick={handleHideColumn}
+            disabled={!column.isSorted}
+            onClick={handleClearSort}
             sx={commonMenuItemStyles}
           >
             <ListItemIcon>
-              <VisibilityOffIcon />
+              <ClearAllIcon />
             </ListItemIcon>
             <ListItemText>
-              {localization.columnActionMenuItemHideColumn?.replace(
+              {localization.columnActionMenuItemClearSort}
+            </ListItemText>
+          </MenuItem>,
+          <MenuItem
+            disabled={column.isSorted && !column.isSortedDesc}
+            key={2}
+            onClick={handleSortAsc}
+            sx={commonMenuItemStyles}
+          >
+            <ListItemIcon>
+              <SortIcon />
+            </ListItemIcon>
+            <ListItemText>
+              {localization.columnActionMenuItemSortAsc?.replace(
+                '{column}',
+                String(column.Header),
+              )}
+            </ListItemText>
+          </MenuItem>,
+          <MenuItem
+            divider={
+              !disableFilters || enableColumnGrouping || !disableColumnHiding
+            }
+            key={3}
+            disabled={column.isSorted && column.isSortedDesc}
+            onClick={handleSortDesc}
+            sx={commonMenuItemStyles}
+          >
+            <ListItemIcon>
+              <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
+            </ListItemIcon>
+            <ListItemText>
+              {localization.columnActionMenuItemSortDesc?.replace(
                 '{column}',
                 String(column.Header),
               )}
             </ListItemText>
           </MenuItem>,
         ]}
-      </MenuList>
+      {!disableFilters &&
+        column.canFilter && [
+          <MenuItem
+            divider={enableColumnGrouping || !disableColumnHiding}
+            key={1}
+            onClick={handleFilterByColumn}
+            sx={commonMenuItemStyles}
+          >
+            <ListItemIcon>
+              <FilterListIcon />
+            </ListItemIcon>
+            <ListItemText>
+              {localization.filterTextFieldPlaceholder?.replace(
+                '{column}',
+                String(column.Header),
+              )}
+            </ListItemText>
+            <IconButton
+              onClick={handleOpenFilterModeMenu}
+              onMouseEnter={handleOpenFilterModeMenu}
+              size="small"
+              sx={{ p: 0 }}
+            >
+              <ArrowRightIcon />
+            </IconButton>
+          </MenuItem>,
+          <MRT_FilterTypeMenu
+            anchorEl={filterMenuAnchorEl}
+            column={column}
+            key={2}
+            setAnchorEl={setFilterMenuAnchorEl}
+            onSelect={handleFilterByColumn}
+          />,
+        ]}
+      {enableColumnGrouping &&
+        column.canGroupBy && [
+          <MenuItem
+            divider={!disableColumnHiding}
+            key={2}
+            onClick={handleGroupByColumn}
+            sx={commonMenuItemStyles}
+          >
+            <ListItemIcon>
+              <DynamicFeedIcon />
+            </ListItemIcon>
+            <ListItemText>
+              {localization[
+                column.isGrouped
+                  ? 'columnActionMenuItemUnGroupBy'
+                  : 'columnActionMenuItemGroupBy'
+              ]?.replace('{column}', String(column.Header))}
+            </ListItemText>
+          </MenuItem>,
+        ]}
+      {!disableColumnHiding && [
+        <MenuItem key={1} onClick={handleHideColumn} sx={commonMenuItemStyles}>
+          <ListItemIcon>
+            <VisibilityOffIcon />
+          </ListItemIcon>
+          <ListItemText>
+            {localization.columnActionMenuItemHideColumn?.replace(
+              '{column}',
+              String(column.Header),
+            )}
+          </ListItemText>
+        </MenuItem>,
+      ]}
     </Menu>
   );
 };

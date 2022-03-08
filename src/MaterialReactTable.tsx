@@ -2,6 +2,8 @@ import React, { ChangeEvent, FC, MouseEvent, ReactNode } from 'react';
 import {
   AlertProps,
   IconButtonProps,
+  LinearProgressProps,
+  SkeletonProps,
   TableBodyProps,
   TableCellProps,
   TableContainerProps,
@@ -244,6 +246,9 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
     isFetching?: boolean;
     isLoading?: boolean;
     localization?: Partial<MRT_Localization>;
+    muiLinearProgressProps?:
+      | LinearProgressProps
+      | ((tableInstance: MRT_TableInstance) => LinearProgressProps);
     muiSearchTextFieldProps?: TextFieldProps;
     muiTableBodyCellEditTextFieldProps?:
       | TextFieldProps
@@ -251,6 +256,9 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
     muiTableBodyCellProps?:
       | TableCellProps
       | ((cell?: MRT_Cell<D>) => TableCellProps);
+    muiTableBodyCellSkeletonProps?:
+      | SkeletonProps
+      | ((cell?: MRT_Cell<D>) => SkeletonProps);
     muiTableBodyProps?:
       | TableBodyProps
       | ((tableInstance: MRT_TableInstance<D>) => TableBodyProps);

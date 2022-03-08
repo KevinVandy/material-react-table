@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react';
-import { Menu, MenuItem, MenuList } from '@mui/material';
+import { Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_FilterType, MRT_HeaderGroup } from '..';
 
@@ -88,20 +88,22 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
       anchorOrigin={{ vertical: 'center', horizontal: 'right' }}
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
+      MenuListProps={{
+        dense: tableInstance.state.densePadding,
+        disablePadding: true,
+      }}
     >
-      <MenuList dense={tableInstance.state.densePadding} disablePadding>
-        {filterTypes.map(({ type, label, divider }) => (
-          <MenuItem
-            divider={divider}
-            key={type}
-            onClick={() => handleSelectFilterType(type)}
-            selected={type === filterType}
-            value={type}
-          >
-            {label}
-          </MenuItem>
-        ))}
-      </MenuList>
+      {filterTypes.map(({ type, label, divider }) => (
+        <MenuItem
+          divider={divider}
+          key={type}
+          onClick={() => handleSelectFilterType(type)}
+          selected={type === filterType}
+          value={type}
+        >
+          {label}
+        </MenuItem>
+      ))}
     </Menu>
   );
 };

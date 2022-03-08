@@ -19,6 +19,7 @@ export const MRT_TableContainer: FC<Props> = () => {
     hideToolbarTop,
     isFetching,
     isLoading,
+    muiLinearProgressProps,
     muiTableContainerProps,
     tableInstance,
   } = useMRT();
@@ -47,6 +48,11 @@ export const MRT_TableContainer: FC<Props> = () => {
       ? muiTableContainerProps(tableInstance)
       : muiTableContainerProps;
 
+  const linearProgressProps =
+    muiLinearProgressProps instanceof Function
+      ? muiLinearProgressProps(tableInstance)
+      : muiLinearProgressProps;
+
   return (
     <TableContainer
       component={Paper}
@@ -67,7 +73,7 @@ export const MRT_TableContainer: FC<Props> = () => {
     >
       {!hideToolbarTop && <MRT_ToolbarTop />}
       <Collapse in={isFetching || isLoading} unmountOnExit>
-        <LinearProgress />
+        <LinearProgress {...linearProgressProps} />
       </Collapse>
       <Box
         sx={{

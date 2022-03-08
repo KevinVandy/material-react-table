@@ -1,5 +1,5 @@
 import React, { FC, MouseEvent } from 'react';
-import { TableCell, TableCellProps } from '@mui/material';
+import { Skeleton, TableCell, TableCellProps } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import { MRT_Cell } from '..';
@@ -22,8 +22,10 @@ interface Props {
 
 export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
   const {
-    onCellClick,
+    isLoading,
     muiTableBodyCellProps,
+    muiTableBodyCellSkeletonProps,
+    onCellClick,
     tableInstance: {
       state: { currentEditingRow, densePadding },
     },
@@ -63,7 +65,14 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
         } as TableCellProps['sx']
       }
     >
-      {currentEditingRow?.id === cell.row.id ? (
+      {isLoading ? (
+        <Skeleton
+          animation="wave"
+          height={20}
+          width={Math.random() * (120 - 60) + 60}
+          {...muiTableBodyCellSkeletonProps}
+        />
+      ) : currentEditingRow?.id === cell.row.id ? (
         <MRT_EditCellTextField cell={cell} />
       ) : cell.isPlaceholder ? null : cell.isAggregated ? (
         cell.render('Aggregated')

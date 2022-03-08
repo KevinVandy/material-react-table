@@ -1,11 +1,5 @@
 import React, { FC } from 'react';
-import {
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-  MenuList,
-} from '@mui/material';
+import { ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_Row } from '..';
 
@@ -35,20 +29,22 @@ export const MRT_RowActionMenu: FC<Props> = ({
       anchorEl={anchorEl}
       open={!!anchorEl}
       onClose={() => setAnchorEl(null)}
+      MenuListProps={{
+        dense: tableInstance.state.densePadding,
+        disablePadding: true,
+      }}
     >
-      <MenuList dense={tableInstance.state.densePadding} disablePadding>
-        {enableRowEditing && (
-          <MenuItem onClick={handleEdit}>
-            <ListItemIcon>
-              <EditIcon />
-            </ListItemIcon>
-            <ListItemText>{localization.rowActionMenuItemEdit}</ListItemText>
-          </MenuItem>
-        )}
-        {renderRowActionMenuItems?.(row, tableInstance, () =>
-          setAnchorEl(null),
-        ) ?? null}
-      </MenuList>
+      {enableRowEditing && (
+        <MenuItem onClick={handleEdit}>
+          <ListItemIcon>
+            <EditIcon />
+          </ListItemIcon>
+          <ListItemText>{localization.rowActionMenuItemEdit}</ListItemText>
+        </MenuItem>
+      )}
+      {renderRowActionMenuItems?.(row, tableInstance, () =>
+        setAnchorEl(null),
+      ) ?? null}
     </Menu>
   );
 };

@@ -88,7 +88,7 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
           disabled: !!filterChipLabel,
           sx: {
             textOverflow: 'ellipsis',
-            width: filterChipLabel ? 0 : 'auto',
+            width: filterChipLabel ? 0 : undefined,
           },
           title: filterPlaceholder,
         }}
