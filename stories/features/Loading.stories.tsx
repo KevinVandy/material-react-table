@@ -46,7 +46,7 @@ const data = [...Array(100)].map((_) => ({
 }));
 
 export const LoadingExample: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} isLoading />
+  <MaterialReactTable columns={columns} data={[]} isLoading />
 );
 
 export const ReloadingExample: Story<MaterialReactTableProps> = () => (

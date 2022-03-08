@@ -1,17 +1,19 @@
 import React, { FC, useState } from 'react';
-import {
-  IconButton,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-} from '@mui/material';
+import { Box, IconButton, Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_HeaderGroup } from '..';
 import { MRT_FilterTypeMenu } from './MRT_FilterTypeMenu';
 
-const commonMenuItemStyles = {
+export const commonMenuItemStyles = {
+  py: '5px',
+  my: 0,
+  justifyContent: 'space-between',
+  alignItems: 'center',
+};
+
+export const commonListItemStyles = {
   display: 'flex',
+  gap: '0.75rem',
   alignItems: 'center',
 };
 
@@ -107,17 +109,15 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       {!disableSortBy &&
         column.canSort && [
           <MenuItem
-            key={1}
             disabled={!column.isSorted}
+            key={1}
             onClick={handleClearSort}
             sx={commonMenuItemStyles}
           >
-            <ListItemIcon>
+            <Box sx={commonListItemStyles}>
               <ClearAllIcon />
-            </ListItemIcon>
-            <ListItemText>
               {localization.columnActionMenuItemClearSort}
-            </ListItemText>
+            </Box>
           </MenuItem>,
           <MenuItem
             disabled={column.isSorted && !column.isSortedDesc}
@@ -125,15 +125,13 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             onClick={handleSortAsc}
             sx={commonMenuItemStyles}
           >
-            <ListItemIcon>
+            <Box sx={commonListItemStyles}>
               <SortIcon />
-            </ListItemIcon>
-            <ListItemText>
               {localization.columnActionMenuItemSortAsc?.replace(
                 '{column}',
                 String(column.Header),
               )}
-            </ListItemText>
+            </Box>
           </MenuItem>,
           <MenuItem
             divider={
@@ -144,15 +142,13 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             onClick={handleSortDesc}
             sx={commonMenuItemStyles}
           >
-            <ListItemIcon>
+            <Box sx={commonListItemStyles}>
               <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
-            </ListItemIcon>
-            <ListItemText>
               {localization.columnActionMenuItemSortDesc?.replace(
                 '{column}',
                 String(column.Header),
               )}
-            </ListItemText>
+            </Box>
           </MenuItem>,
         ]}
       {!disableFilters &&
@@ -163,15 +159,13 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             onClick={handleFilterByColumn}
             sx={commonMenuItemStyles}
           >
-            <ListItemIcon>
+            <Box sx={commonListItemStyles}>
               <FilterListIcon />
-            </ListItemIcon>
-            <ListItemText>
               {localization.filterTextFieldPlaceholder?.replace(
                 '{column}',
                 String(column.Header),
               )}
-            </ListItemText>
+            </Box>
             <IconButton
               onClick={handleOpenFilterModeMenu}
               onMouseEnter={handleOpenFilterModeMenu}
@@ -197,29 +191,25 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             onClick={handleGroupByColumn}
             sx={commonMenuItemStyles}
           >
-            <ListItemIcon>
+            <Box sx={commonListItemStyles}>
               <DynamicFeedIcon />
-            </ListItemIcon>
-            <ListItemText>
               {localization[
                 column.isGrouped
                   ? 'columnActionMenuItemUnGroupBy'
                   : 'columnActionMenuItemGroupBy'
               ]?.replace('{column}', String(column.Header))}
-            </ListItemText>
+            </Box>
           </MenuItem>,
         ]}
       {!disableColumnHiding && [
         <MenuItem key={1} onClick={handleHideColumn} sx={commonMenuItemStyles}>
-          <ListItemIcon>
+          <Box sx={commonListItemStyles}>
             <VisibilityOffIcon />
-          </ListItemIcon>
-          <ListItemText>
             {localization.columnActionMenuItemHideColumn?.replace(
               '{column}',
               String(column.Header),
             )}
-          </ListItemText>
+          </Box>
         </MenuItem>,
       ]}
     </Menu>

@@ -2,6 +2,7 @@ import React, { FC, useMemo } from 'react';
 import { Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_FilterType, MRT_HeaderGroup } from '..';
+import { commonMenuItemStyles } from './MRT_ColumnActionMenu';
 
 interface Props {
   anchorEl: HTMLElement | null;
@@ -99,6 +100,7 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
           key={type}
           onClick={() => handleSelectFilterType(type)}
           selected={type === filterType}
+          sx={commonMenuItemStyles}
           value={type}
         >
           {label}

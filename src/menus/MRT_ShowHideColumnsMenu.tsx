@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { FormControlLabel, MenuItem, Switch } from '@mui/material';
 import { ColumnInstance } from 'react-table';
 import { MRT_ColumnInstance } from '..';
+import { commonMenuItemStyles } from './MRT_ColumnActionMenu';
 
 interface Props {
   column: MRT_ColumnInstance;
@@ -28,8 +29,11 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({ column }) => {
 
   return (
     <>
-      <MenuItem sx={{ pl: `${(column.depth + 0.5) * 2}rem` }}>
+      <MenuItem
+        sx={{ ...commonMenuItemStyles, pl: `${(column.depth + 0.5) * 2}rem` }}
+      >
         <FormControlLabel
+          componentsProps={{ typography: { sx: { marginBottom: 0 } } }}
           checked={switchChecked}
           control={<Switch />}
           label={column.Header as string}

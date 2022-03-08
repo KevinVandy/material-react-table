@@ -1,5 +1,5 @@
 {
-  "version": "0.5.6",
+  "version": "0.5.8",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material-UI implementation of react-table, inspired by material-table and the mui DataGrid, written from the ground up in TypeScript.",
@@ -28,7 +28,7 @@
   },
   "scripts": {
     "analyze": "size-limit --why",
-    "build": "tsdx build && size-limit",
+    "build": "tsdx build && size-limit && rm -rf material-react-table-docs/node_modules/material-react-table/dist  && cp -r dist material-react-table-docs/node_modules/material-react-table/ && cp -r src material-react-table-docs/node_modules/material-react-table/ && cp -r package.json material-react-table-docs/node_modules/material-react-table/package.json",
     "build-storybook": "build-storybook",
     "format": "prettier -w .",
     "lint": "tsdx lint",
@@ -36,8 +36,7 @@
     "size": "size-limit",
     "start": "tsdx watch",
     "storybook": "start-storybook -p 6006",
-    "test": "tsdx test --passWithNoTests",
-    "upgrade": "ncu -u && npm i"
+    "test": "tsdx test --passWithNoTests"
   },
   "husky": {
     "hooks": {

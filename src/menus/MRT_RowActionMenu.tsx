@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
+import { Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_Row } from '..';
+import { commonMenuItemStyles } from './MRT_ColumnActionMenu';
 
 interface Props {
   anchorEl: HTMLElement | null;
@@ -35,11 +36,9 @@ export const MRT_RowActionMenu: FC<Props> = ({
       }}
     >
       {enableRowEditing && (
-        <MenuItem onClick={handleEdit}>
-          <ListItemIcon>
-            <EditIcon />
-          </ListItemIcon>
-          <ListItemText>{localization.rowActionMenuItemEdit}</ListItemText>
+        <MenuItem onClick={handleEdit} sx={commonMenuItemStyles}>
+          <EditIcon />
+          {localization.rowActionMenuItemEdit}
         </MenuItem>
       )}
       {renderRowActionMenuItems?.(row, tableInstance, () =>
