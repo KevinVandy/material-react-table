@@ -96,6 +96,34 @@ export const notEqualsFilterFN = (
 
 notEqualsFilterFN.autoRemove = (val: any) => !val;
 
+export const greaterThanFilterFN = (
+  rows: MRT_Row[],
+  id: string,
+  filterValue: string | number,
+) =>
+  rows.filter((row) =>
+    !isNaN(+filterValue) && !isNaN(+row.values[id])
+      ? +row.values[id] > +filterValue
+      : row.values[id].toString().toLowerCase().trim() >
+        filterValue.toString().toLowerCase().trim(),
+  );
+
+greaterThanFilterFN.autoRemove = (val: any) => !val;
+
+export const lessThanFilterFN = (
+  rows: MRT_Row[],
+  id: string,
+  filterValue: string | number,
+) =>
+  rows.filter((row) =>
+    !isNaN(+filterValue) && !isNaN(+row.values[id])
+      ? +row.values[id] < +filterValue
+      : row.values[id].toString().toLowerCase().trim() <
+        filterValue.toString().toLowerCase().trim(),
+  );
+
+lessThanFilterFN.autoRemove = (val: any) => !val;
+
 export const emptyFilterFN = (
   rows: MRT_Row[],
   id: string,
@@ -116,6 +144,8 @@ export const defaultFilterFNs = {
   contains: containsFilterFN,
   empty: emptyFilterFN,
   endsWith: endsWithFilterFN,
+  greaterThan: greaterThanFilterFN,
+  lessThan: lessThanFilterFN,
   equals: equalsFilterFN,
   fuzzy: fuzzyFilterFN,
   notEmpty: notEmptyFilterFN,

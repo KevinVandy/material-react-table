@@ -10,8 +10,9 @@ import {
 } from '@mui/material';
 import { useAsyncDebounce } from 'react-table';
 import { useMRT } from '../useMRT';
-import { MRT_FILTER_TYPE, MRT_HeaderGroup } from '..';
+import type { MRT_HeaderGroup } from '..';
 import { MRT_FilterTypeMenu } from '../menus/MRT_FilterTypeMenu';
+import { MRT_FILTER_TYPE } from '../enums';
 
 interface Props {
   column: MRT_HeaderGroup;
@@ -128,7 +129,6 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
               <Tooltip arrow title={localization.changeFilterMode}>
                 <span>
                   <IconButton
-                    disabled={isCustomFilterType}
                     onClick={handleFilterMenuOpen}
                     size="small"
                     sx={{ height: '1.75rem', width: '1.75rem' }}

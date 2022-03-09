@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_ShowHideColumnsMenu } from '../menus/MRT_ShowHideColumnsMenu';
-import { MRT_ColumnInstance } from '..';
+import type { MRT_ColumnInstance } from '..';
 
 interface Props extends IconButtonProps {}
 

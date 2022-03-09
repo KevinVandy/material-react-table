@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
-import { MRT_Row } from '..';
+import type { MRT_Row } from '..';
 
 interface Props {
   row: MRT_Row;

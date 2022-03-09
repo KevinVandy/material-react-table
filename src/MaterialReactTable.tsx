@@ -77,6 +77,7 @@ import { MaterialReactTableProvider } from './useMRT';
 import { MRT_TableContainer } from './table/MRT_TableContainer';
 import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
+import { MRT_FILTER_TYPE } from './enums';
 
 export type MRT_TableOptions<D extends {} = {}> = TableOptions<D> &
   UseExpandedOptions<D> &
@@ -185,17 +186,6 @@ export type MRT_Row<D extends {} = {}> = Row<D> &
 export type MRT_Cell<D extends {} = {}, _V = any> = Cell<D> &
   UseGroupByCellProps<D> &
   UseRowStateCellProps<D> & {};
-
-export enum MRT_FILTER_TYPE {
-  CONTAINS = 'contains',
-  EMPTY = 'empty',
-  ENDS_WITH = 'endsWith',
-  EQUALS = 'equals',
-  FUZZY = 'fuzzy',
-  NOT_EMPTY = 'notEmpty',
-  NOT_EQUALS = 'notEquals',
-  STARTS_WITH = 'startsWith',
-}
 
 export type MRT_FilterType = MRT_FILTER_TYPE | Function;
 

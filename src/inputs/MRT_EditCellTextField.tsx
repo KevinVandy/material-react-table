@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC } from 'react';
 import { TextField } from '@mui/material';
 import { useMRT } from '../useMRT';
-import { MRT_Cell } from '..';
+import type { MRT_Cell } from '..';
 
 interface Props {
   cell: MRT_Cell;

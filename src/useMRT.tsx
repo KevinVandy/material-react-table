@@ -21,7 +21,8 @@ import {
   useSortBy,
   useTable,
 } from 'react-table';
-import { MRT_FilterType, MRT_FILTER_TYPE, MRT_Row, MRT_TableInstance } from '.';
+import type { MRT_FilterType, MRT_Row, MRT_TableInstance } from '.';
+import { MRT_FILTER_TYPE } from './enums';
 import { defaultFilterFNs } from './filtersFNs';
 import { MRT_Icons } from './icons';
 import { MRT_Localization } from './localization';
@@ -91,19 +92,35 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     [props.filterTypes],
   );
 
-  const [currentFilterTypes, setCurrentFilterTypes] = useState<{
-    [key: string]: MRT_FilterType;
-  }>(() =>
-    Object.assign(
+  const getInitialFilterTypeState = () => {
+    let lowestLevelColumns: any[] = props.columns;
+    let currentCols: any[] = props.columns;
+    while (!!currentCols.length && currentCols.some((col) => col.columns)) {
+      const nextCols = currentCols
+        .filter((col) => !!col.columns)
+        .map((col) => col.columns)
+        .flat();
+      if (nextCols.every((col) => !col.columns)) {
+        lowestLevelColumns = [...lowestLevelColumns, ...nextCols];
+      }
+      currentCols = nextCols;
+    }
+    lowestLevelColumns = lowestLevelColumns.filter((col) => !col.columns);
+
+    return Object.assign(
       {},
-      ...props.columns.map((c) => ({
+      ...lowestLevelColumns.map((c) => ({
         [c.accessor as string]:
           c.filter ??
           props?.initialState?.filters?.[c.accessor as any] ??
           (!!c.filterSelectOptions ? 'equals' : 'fuzzy'),
       })),
-    ),
-  );
+    );
+  };
+
+  const [currentFilterTypes, setCurrentFilterTypes] = useState<{
+    [key: string]: MRT_FilterType;
+  }>(() => getInitialFilterTypeState());
 
   const columns = useMemo(
     () =>

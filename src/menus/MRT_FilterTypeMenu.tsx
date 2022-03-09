@@ -1,7 +1,20 @@
 import React, { FC, useMemo } from 'react';
 import { Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
-import { MRT_FilterType, MRT_FILTER_TYPE, MRT_HeaderGroup } from '..';
+import type { MRT_FilterType, MRT_HeaderGroup } from '..';
+import { MRT_FILTER_TYPE } from '../enums';
+import {
+  containsFilterFN,
+  emptyFilterFN,
+  endsWithFilterFN,
+  equalsFilterFN,
+  fuzzyFilterFN,
+  greaterThanFilterFN,
+  lessThanFilterFN,
+  notEmptyFilterFN,
+  notEqualsFilterFN,
+  startsWithFilterFN,
+} from '../filtersFNs';
 
 const commonMenuItemStyles = {
   py: '6px',
@@ -28,47 +41,68 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
     type: MRT_FILTER_TYPE;
     label: string;
     divider: boolean;
+    fn: Function;
   }[] = useMemo(
     () => [
       {
         type: MRT_FILTER_TYPE.FUZZY,
         label: localization.filterMenuItemFuzzy,
         divider: false,
+        fn: fuzzyFilterFN,
       },
       {
         type: MRT_FILTER_TYPE.CONTAINS,
         label: localization.filterMenuItemContains,
         divider: true,
+        fn: containsFilterFN,
       },
       {
         type: MRT_FILTER_TYPE.STARTS_WITH,
         label: localization.filterMenuItemStartsWith,
         divider: false,
+        fn: startsWithFilterFN,
       },
       {
         type: MRT_FILTER_TYPE.ENDS_WITH,
         label: localization.filterMenuItemEndsWith,
         divider: true,
+        fn: endsWithFilterFN,
       },
       {
         type: MRT_FILTER_TYPE.EQUALS,
         label: localization.filterMenuItemEquals,
         divider: false,
+        fn: equalsFilterFN,
       },
       {
         type: MRT_FILTER_TYPE.NOT_EQUALS,
         label: localization.filterMenuItemNotEquals,
         divider: true,
+        fn: notEqualsFilterFN,
+      },
+      {
+        type: MRT_FILTER_TYPE.GREATER_THAN,
+        label: localization.filterMenuItemGreaterThan,
+        divider: false,
+        fn: greaterThanFilterFN,
+      },
+      {
+        type: MRT_FILTER_TYPE.LESS_THAN,
+        label: localization.filterMenuItemLessThan,
+        divider: true,
+        fn: lessThanFilterFN,
       },
       {
         type: MRT_FILTER_TYPE.EMPTY,
         label: localization.filterMenuItemEmpty,
         divider: false,
+        fn: emptyFilterFN,
       },
       {
         type: MRT_FILTER_TYPE.NOT_EMPTY,
         label: localization.filterMenuItemNotEmpty,
         divider: false,
+        fn: notEmptyFilterFN,
       },
     ],
     [],
@@ -98,12 +132,12 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
         dense: tableInstance.state.densePadding,
       }}
     >
-      {filterTypes.map(({ type, label, divider }, index) => (
+      {filterTypes.map(({ type, label, divider, fn }, index) => (
         <MenuItem
           divider={divider}
           key={index}
           onClick={() => handleSelectFilterType(type)}
-          selected={type === filterType}
+          selected={type === filterType || fn === filterType}
           sx={commonMenuItemStyles}
           value={type}
         >

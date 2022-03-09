@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
-import { MRT_Row } from '..';
+import type { MRT_Row } from '..';
 import { commonMenuItemStyles } from './MRT_ColumnActionMenu';
 
 interface Props {

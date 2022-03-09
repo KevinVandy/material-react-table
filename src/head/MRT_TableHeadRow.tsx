@@ -9,7 +9,7 @@ import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
 import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
 import { MRT_TableHeadCellActions } from './MRT_TableHeadCellActions';
-import { MRT_HeaderGroup } from '..';
+import type { MRT_HeaderGroup } from '..';
 
 interface Props {
   headerGroup: MRT_HeaderGroup;

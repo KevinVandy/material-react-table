@@ -1,5 +1,6 @@
 export interface MRT_Localization {
   actionsHeadColumnTitle: string;
+  changeFilterMode: string;
   columnActionMenuButtonTitle: string;
   columnActionMenuItemClearSort: string;
   columnActionMenuItemGroupBy: string;
@@ -17,6 +18,8 @@ export interface MRT_Localization {
   filterMenuItemEndsWith: string;
   filterMenuItemEquals: string;
   filterMenuItemFuzzy: string;
+  filterMenuItemGreaterThan: string;
+  filterMenuItemLessThan: string;
   filterMenuItemNotEmpty: string;
   filterMenuItemNotEquals: string;
   filterMenuItemStartsWith: string;
@@ -26,7 +29,6 @@ export interface MRT_Localization {
   filterTextFieldChipLabelNotEmpty: string;
   filterTextFieldClearButtonTitle: string;
   filterTextFieldPlaceholder: string;
-  changeFilterMode: string;
   rowActionButtonCancel: string;
   rowActionButtonSave: string;
   rowActionMenuButtonTitle: string;
@@ -48,6 +50,7 @@ export interface MRT_Localization {
 
 export const MRT_DefaultLocalization_EN: MRT_Localization = {
   actionsHeadColumnTitle: 'Actions',
+  changeFilterMode: 'Change filter mode',
   columnActionMenuButtonTitle: 'Column Actions',
   columnActionMenuItemClearSort: 'Clear sort',
   columnActionMenuItemGroupBy: 'Group by {column}',
@@ -64,8 +67,9 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   filterMenuItemEmpty: 'Empty',
   filterMenuItemEndsWith: 'Ends With',
   filterMenuItemEquals: 'Equals',
-  changeFilterMode: 'Change filter mode',
   filterMenuItemFuzzy: 'Fuzzy Match (Default)',
+  filterMenuItemGreaterThan: 'Greater Than',
+  filterMenuItemLessThan: 'Less Than',
   filterMenuItemNotEmpty: 'Not Empty',
   filterMenuItemNotEquals: 'Not Equals',
   filterMenuItemStartsWith: 'Starts With',

@@ -3,7 +3,7 @@ import { TableRow } from '@mui/material';
 import { MRT_TableFooterCell } from './MRT_TableFooterCell';
 import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
 import { useMRT } from '../useMRT';
-import { MRT_HeaderGroup } from '..';
+import type { MRT_HeaderGroup } from '..';
 
 interface Props {
   footerGroup: MRT_HeaderGroup;

@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC } from 'react';
 import { Checkbox, TableCell, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
-import { MRT_Row } from '..';
+import type { MRT_Row } from '..';
 import { commonTableBodyButtonCellStyles } from '../body/MRT_TableBodyCell';
 
 interface Props {

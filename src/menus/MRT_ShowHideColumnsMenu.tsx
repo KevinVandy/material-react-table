@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { FormControlLabel, MenuItem, Switch } from '@mui/material';
 import { ColumnInstance } from 'react-table';
-import { MRT_ColumnInstance } from '..';
+import type { MRT_ColumnInstance } from '..';
 import { commonMenuItemStyles } from './MRT_ColumnActionMenu';
 
 interface Props {

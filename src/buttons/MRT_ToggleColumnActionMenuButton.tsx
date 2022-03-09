@@ -2,7 +2,7 @@ import React, { FC, MouseEvent, useState } from 'react';
 import { IconButton, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
-import { MRT_HeaderGroup } from '..';
+import type { MRT_HeaderGroup } from '..';
 
 interface Props {
   column: MRT_HeaderGroup;
@@ -28,6 +28,7 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
         arrow
         enterDelay={1000}
         enterNextDelay={1000}
+        placement="top"
         title={localization.columnActionMenuButtonTitle}
       >
         <IconButton

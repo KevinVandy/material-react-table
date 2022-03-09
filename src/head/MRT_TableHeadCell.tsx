@@ -11,7 +11,7 @@ import {
 import { useMRT } from '../useMRT';
 import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
 import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
-import { MRT_HeaderGroup } from '..';
+import type { MRT_HeaderGroup } from '..';
 
 export const commonTableHeadCellStyles = (
   densePadding: boolean,

@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Box, IconButton, Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
-import { MRT_HeaderGroup } from '..';
+import type { MRT_HeaderGroup } from '..';
 import { MRT_FilterTypeMenu } from './MRT_FilterTypeMenu';
 
 export const commonMenuItemStyles = {

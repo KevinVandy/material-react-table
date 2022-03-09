@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { TableHead } from '@mui/material';
 import { MRT_TableHeadRow } from './MRT_TableHeadRow';
 import { useMRT } from '../useMRT';
-import { MRT_HeaderGroup } from '..';
+import type { MRT_HeaderGroup } from '..';
 
 interface Props {}
 

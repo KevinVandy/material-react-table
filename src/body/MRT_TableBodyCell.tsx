@@ -2,7 +2,7 @@ import React, { FC, MouseEvent } from 'react';
 import { Skeleton, TableCell, TableCellProps } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
-import { MRT_Cell } from '..';
+import type { MRT_Cell } from '..';
 
 export const commonTableBodyCellStyles = (densePadding: boolean) => ({
   p: densePadding ? '0.5rem' : '1rem',
