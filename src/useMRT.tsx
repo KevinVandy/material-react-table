@@ -81,7 +81,9 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     props.initialState?.showSearch ?? false,
   );
 
-  const filterTypes = useMemo<Partial<{ [key in MRT_FilterType]: any }>>(
+  const filterTypes = useMemo<{
+    [key in MRT_FilterType]: any;
+  }>(
     () => ({
       ...defaultFilterFNs,
       ...props.filterTypes,
@@ -94,12 +96,12 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
   }>(() =>
     Object.assign(
       {},
-      ...props.columns
-        .map((c) => c.accessor?.toString() as string)
-        .map((accessor) => ({
-          [accessor]:
-            props?.initialState?.filters?.[accessor as any] ?? 'fuzzy',
-        })),
+      ...props.columns.map((c) => ({
+        [c.accessor as string]:
+          c.filter ??
+          props?.initialState?.filters?.[c.accessor as any] ??
+          (!!c.filterSelectOptions ? 'equals' : 'fuzzy'),
+      })),
     ),
   );
 
@@ -119,6 +121,7 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
       columns,
       // @ts-ignore
       filterTypes,
+      globalFilterValue: 'fuzzy',
       useControlledState: (state) =>
         useMemo(
           () => ({

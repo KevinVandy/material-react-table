@@ -3,6 +3,7 @@ import {
   Chip,
   IconButton,
   InputAdornment,
+  MenuItem,
   TextField,
   TextFieldProps,
   Tooltip,
@@ -73,6 +74,7 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
   }
 
   const filterType = tableInstance.state.currentFilterTypes[column.id];
+  const isSelectFilter = !!column.filterSelectOptions;
   const filterChipLabel = ['empty', 'notEmpty'].includes(filterType);
   const filterPlaceholder = localization.filterTextFieldPlaceholder?.replace(
     '{column}',
@@ -92,17 +94,28 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
           },
           title: filterPlaceholder,
         }}
+        label={isSelectFilter && !filterValue ? filterPlaceholder : undefined}
+        InputLabelProps={{
+          shrink: false,
+          sx: {
+            maxWidth: 'calc(100% - 2.5rem)',
+          },
+          title: filterPlaceholder,
+        }}
         margin="none"
-        placeholder={filterChipLabel ? '' : filterPlaceholder}
+        placeholder={
+          filterChipLabel || isSelectFilter ? undefined : filterPlaceholder
+        }
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFilterValue(e.target.value);
           handleChange(e.target.value);
         }}
         onClick={(e) => e.stopPropagation()}
+        select={isSelectFilter}
         value={filterValue ?? ''}
         variant="standard"
         InputProps={{
-          startAdornment: (
+          startAdornment: !isSelectFilter && (
             <InputAdornment position="start">
               <Tooltip arrow title="Change Filter Mode">
                 <IconButton
@@ -122,16 +135,20 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
             <InputAdornment position="end">
               <Tooltip
                 arrow
+                disableHoverListener={isSelectFilter}
                 placement="right"
                 title={localization.filterTextFieldClearButtonTitle ?? ''}
               >
                 <span>
                   <IconButton
                     aria-label={localization.filterTextFieldClearButtonTitle}
-                    disabled={filterValue?.length === 0}
+                    disabled={!filterValue?.length}
                     onClick={handleClear}
                     size="small"
-                    sx={{ height: '1.75rem', width: '1.75rem' }}
+                    sx={{
+                      height: '1.75rem',
+                      width: '1.75rem',
+                    }}
                   >
                     <CloseIcon fontSize="small" />
                   </IconButton>
@@ -145,9 +162,35 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
           m: '0 -0.25rem',
           minWidth: !filterChipLabel ? '5rem' : 'auto',
           width: 'calc(100% + 0.5rem)',
+          mt: isSelectFilter && !filterValue ? '-1rem' : undefined,
+          '&	.MuiSelect-icon': {
+            mr: '1.5rem',
+          },
           ...textFieldProps?.sx,
         }}
-      />
+      >
+        {isSelectFilter && (
+          <MenuItem divider disabled={!filterValue} value="">
+            {localization.filterTextFieldClearButtonTitle}
+          </MenuItem>
+        )}
+        {column?.filterSelectOptions?.map((option) => {
+          let value;
+          let text;
+          if (typeof option === 'string') {
+            value = option;
+            text = option;
+          } else if (typeof option === 'object') {
+            value = option.value;
+            text = option.text;
+          }
+          return (
+            <MenuItem key={value} value={value}>
+              {text}
+            </MenuItem>
+          );
+        })}
+      </TextField>
       <MRT_FilterTypeMenu
         anchorEl={anchorEl}
         column={column}

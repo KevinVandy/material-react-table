@@ -67,6 +67,47 @@ export const FilteringDisabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} disableFilters />
 );
 
+export const FilterTypes: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        Header: 'First Name',
+        accessor: 'firstName' as const,
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'lastName' as const,
+      },
+      {
+        Header: 'Age',
+        accessor: 'age' as const,
+        filter: 'startsWith',
+      },
+      {
+        Header: 'Gender',
+        accessor: 'gender' as const,
+        filterSelectOptions: ['Male', 'Female', 'Other'],
+      },
+      {
+        Header: 'Address',
+        accessor: 'address' as const,
+      },
+      {
+        Header: 'State',
+        accessor: 'state' as const,
+        filterSelectOptions: [
+          { text: 'CA', value: 'California' },
+          { text: 'TX', value: 'Texas' },
+          { text: 'NY', value: 'New York' },
+          { text: 'FL', value: 'Florida' },
+        ],
+      },
+    ]}
+    data={data}
+    initialState={{ showFilters: true }}
+  />
+);
+
 export const FilteringDisabledForCertainColumns: Story<
   MaterialReactTableProps
 > = () => (
@@ -83,7 +124,6 @@ export const FilteringDisabledForCertainColumns: Story<
       {
         Header: 'Age',
         accessor: 'age' as const,
-        disableFilters: true,
       },
       {
         Header: 'Gender',
@@ -92,7 +132,6 @@ export const FilteringDisabledForCertainColumns: Story<
       {
         Header: 'Address',
         accessor: 'address' as const,
-        disableFilters: true,
       },
       {
         Header: 'State',

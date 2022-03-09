@@ -2,7 +2,12 @@ import React, { FC, useMemo } from 'react';
 import { Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_FilterType, MRT_HeaderGroup } from '..';
-import { commonMenuItemStyles } from './MRT_ColumnActionMenu';
+
+const commonMenuItemStyles = {
+  py: '6px',
+  my: 0,
+  alignItems: 'center',
+};
 
 interface Props {
   anchorEl: HTMLElement | null;
@@ -75,7 +80,7 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
       ...prev,
       [column.id]: value,
     }));
-    if (['empty', 'notEmpty'].includes(value)) {
+    if (['empty', 'notEmpty'].includes(value.toString())) {
       column.setFilter(' ');
     }
     onSelect?.();
@@ -91,13 +96,12 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
       open={!!anchorEl}
       MenuListProps={{
         dense: tableInstance.state.densePadding,
-        disablePadding: true,
       }}
     >
-      {filterTypes.map(({ type, label, divider }) => (
+      {filterTypes.map(({ type, label, divider }, index) => (
         <MenuItem
           divider={divider}
-          key={type}
+          key={index}
           onClick={() => handleSelectFilterType(type)}
           selected={type === filterType}
           sx={commonMenuItemStyles}

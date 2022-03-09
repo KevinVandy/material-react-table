@@ -19,6 +19,7 @@ import {
   Cell,
   Column,
   ColumnInstance,
+  FilterType,
   // ColumnInterface,
   HeaderGroup,
   Row,
@@ -132,6 +133,8 @@ export type MRT_ColumnInterface<D extends {} = {}> =
       Header?: string;
       disableFilters?: boolean;
       editable?: boolean;
+      filter?: MRT_FilterType | string | FilterType<D>;
+      filterSelectOptions?: (string | { text: string; value: string })[];
       muiTableBodyCellEditTextFieldProps?:
         | TextFieldProps
         | ((cell: MRT_Cell<D>) => TextFieldProps);

@@ -32,7 +32,6 @@ export const MRT_RowActionMenu: FC<Props> = ({
       onClose={() => setAnchorEl(null)}
       MenuListProps={{
         dense: tableInstance.state.densePadding,
-        disablePadding: true,
       }}
     >
       {enableRowEditing && (

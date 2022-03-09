@@ -79,18 +79,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
   const filterTooltip = !!column.filterValue
     ? localization.filterApplied
         .replace('{column}', String(column.Header))
-        .replace(
-          '{filterType}',
-          // @ts-ignore
-          localization[
-            `filterMenuItem${
-              tableInstance.state.currentFilterTypes[column.id]
-                .charAt(0)
-                .toUpperCase() +
-              tableInstance.state.currentFilterTypes[column.id].slice(1)
-            }`
-          ],
-        )
+        .replace('{filterType}', column.filterValue)
     : localization.toggleFilterButtonTitle;
 
   const columnHeader = column.render('Header') as string;
@@ -127,7 +116,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
         >
           {column.render('Header')}
           {!isParentHeader && column.canSort && (
-            <Tooltip arrow title={sortTooltip}>
+            <Tooltip arrow placement="top" title={sortTooltip}>
               <TableSortLabel
                 aria-label={sortTooltip}
                 active={column.isSorted}
@@ -136,19 +125,21 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
             </Tooltip>
           )}
           {!isParentHeader && !!column.canFilter && (
-            <Tooltip arrow title={filterTooltip}>
+            <Tooltip arrow placement="top" title={filterTooltip}>
               <IconButton
+                disableRipple
                 onClick={(event) => {
                   event.stopPropagation();
                   setShowFilters(!tableInstance.state.showFilters);
                 }}
                 size="small"
                 sx={{
+                  m: 0,
                   opacity: !!column.filterValue ? 0.8 : 0,
                   p: '2px',
-                  m: 0,
                   transition: 'all 0.2s ease-in-out',
                   '&:hover': {
+                    backgroundColor: 'transparent',
                     opacity: 0.8,
                   },
                 }}

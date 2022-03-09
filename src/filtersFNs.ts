@@ -1,6 +1,18 @@
 import { matchSorter } from 'match-sorter';
 import { MRT_Row } from '.';
 
+export const fuzzySearchFN = (
+  rows: MRT_Row[],
+  columnIds: string[],
+  filterValue: string | number,
+) =>
+  matchSorter(rows, filterValue.toString().trim(), {
+    keys: columnIds.map((c) => `values.${c}`),
+    sorter: (rankedItems) => rankedItems,
+  });
+
+fuzzySearchFN.autoRemove = (val: any) => !val;
+
 export const fuzzyFilterFN = (
   rows: MRT_Row[],
   id: string,

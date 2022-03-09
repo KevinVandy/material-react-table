@@ -45,7 +45,6 @@ export const MRT_ShowHideColumnsButton: FC<Props> = ({ ...rest }) => {
         onClose={() => setAnchorEl(null)}
         MenuListProps={{
           dense: tableInstance.state.densePadding,
-          disablePadding: true,
         }}
       >
         <Box

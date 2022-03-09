@@ -5,7 +5,7 @@ import { MRT_HeaderGroup } from '..';
 import { MRT_FilterTypeMenu } from './MRT_FilterTypeMenu';
 
 export const commonMenuItemStyles = {
-  py: '5px',
+  py: '6px',
   my: 0,
   justifyContent: 'space-between',
   alignItems: 'center',
@@ -38,6 +38,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       ClearAllIcon,
       DynamicFeedIcon,
       FilterListIcon,
+      FilterListOffIcon,
       SortIcon,
       VisibilityOffIcon,
     },
@@ -75,6 +76,11 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     setAnchorEl(null);
   };
 
+  const handleClearFilter = () => {
+    column.setFilter('');
+    setAnchorEl(null);
+  };
+
   const handleFilterByColumn = () => {
     setShowFilters(true);
     setTimeout(
@@ -103,7 +109,6 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       onClose={() => setAnchorEl(null)}
       MenuListProps={{
         dense: tableInstance.state.densePadding,
-        disablePadding: true,
       }}
     >
       {!disableSortBy &&
@@ -154,6 +159,17 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       {!disableFilters &&
         column.canFilter && [
           <MenuItem
+            disabled={!column.filterValue}
+            key={0}
+            onClick={handleClearFilter}
+            sx={commonMenuItemStyles}
+          >
+            <Box sx={commonListItemStyles}>
+              <FilterListOffIcon />
+              {localization.filterTextFieldClearButtonTitle}
+            </Box>
+          </MenuItem>,
+          <MenuItem
             divider={enableColumnGrouping || !disableColumnHiding}
             key={1}
             onClick={handleFilterByColumn}
@@ -166,14 +182,16 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
                 String(column.Header),
               )}
             </Box>
-            <IconButton
-              onClick={handleOpenFilterModeMenu}
-              onMouseEnter={handleOpenFilterModeMenu}
-              size="small"
-              sx={{ p: 0 }}
-            >
-              <ArrowRightIcon />
-            </IconButton>
+            {!column.filterSelectOptions && (
+              <IconButton
+                onClick={handleOpenFilterModeMenu}
+                onMouseEnter={handleOpenFilterModeMenu}
+                size="small"
+                sx={{ p: 0 }}
+              >
+                <ArrowRightIcon />
+              </IconButton>
+            )}
           </MenuItem>,
           <MRT_FilterTypeMenu
             anchorEl={filterMenuAnchorEl}
