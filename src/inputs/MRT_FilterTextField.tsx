@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { useAsyncDebounce } from 'react-table';
 import { useMRT } from '../useMRT';
-import { MRT_HeaderGroup } from '..';
+import { MRT_FILTER_TYPE, MRT_HeaderGroup } from '..';
 import { MRT_FilterTypeMenu } from '../menus/MRT_FilterTypeMenu';
 
 interface Props {
@@ -66,7 +66,10 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
   const handleClearFilterChip = () => {
     setFilterValue('');
     column.setFilter(undefined);
-    setCurrentFilterTypes((prev) => ({ ...prev, [column.id]: 'fuzzy' }));
+    setCurrentFilterTypes((prev) => ({
+      ...prev,
+      [column.id]: MRT_FILTER_TYPE.FUZZY,
+    }));
   };
 
   if (column.Filter) {
@@ -74,8 +77,13 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
   }
 
   const filterType = tableInstance.state.currentFilterTypes[column.id];
+  const isCustomFilterType = filterType instanceof Function;
   const isSelectFilter = !!column.filterSelectOptions;
-  const filterChipLabel = ['empty', 'notEmpty'].includes(filterType);
+  const filterChipLabel =
+    !isCustomFilterType &&
+    [MRT_FILTER_TYPE.EMPTY, MRT_FILTER_TYPE.NOT_EMPTY].includes(
+      filterType as MRT_FILTER_TYPE,
+    );
   const filterPlaceholder = localization.filterTextFieldPlaceholder?.replace(
     '{column}',
     String(column.Header),
@@ -117,14 +125,17 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
         InputProps={{
           startAdornment: !isSelectFilter && (
             <InputAdornment position="start">
-              <Tooltip arrow title="Change Filter Mode">
-                <IconButton
-                  onClick={handleFilterMenuOpen}
-                  size="small"
-                  sx={{ height: '1.75rem', width: '1.75rem' }}
-                >
-                  <FilterListIcon />
-                </IconButton>
+              <Tooltip arrow title={localization.changeFilterMode}>
+                <span>
+                  <IconButton
+                    disabled={isCustomFilterType}
+                    onClick={handleFilterMenuOpen}
+                    size="small"
+                    sx={{ height: '1.75rem', width: '1.75rem' }}
+                  >
+                    <FilterListIcon />
+                  </IconButton>
+                </span>
               </Tooltip>
               {filterChipLabel && (
                 <Chip onDelete={handleClearFilterChip} label={filterType} />

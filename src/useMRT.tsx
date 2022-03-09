@@ -21,7 +21,7 @@ import {
   useSortBy,
   useTable,
 } from 'react-table';
-import { MRT_FilterType, MRT_Row, MRT_TableInstance } from '.';
+import { MRT_FilterType, MRT_FILTER_TYPE, MRT_Row, MRT_TableInstance } from '.';
 import { defaultFilterFNs } from './filtersFNs';
 import { MRT_Icons } from './icons';
 import { MRT_Localization } from './localization';
@@ -82,7 +82,7 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
   );
 
   const filterTypes = useMemo<{
-    [key in MRT_FilterType]: any;
+    [key in MRT_FILTER_TYPE]: any;
   }>(
     () => ({
       ...defaultFilterFNs,
@@ -109,7 +109,9 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     () =>
       props.columns.map((column) => {
         column.filter =
-          filterTypes[currentFilterTypes[column.accessor as string]];
+          filterTypes[
+            currentFilterTypes[column.accessor as string] as MRT_FILTER_TYPE
+          ];
         return column;
       }),
     [props.columns, filterTypes, currentFilterTypes],

@@ -124,6 +124,7 @@ export const FilteringDisabledForCertainColumns: Story<
       {
         Header: 'Age',
         accessor: 'age' as const,
+        disableFilters: true,
       },
       {
         Header: 'Gender',
@@ -132,6 +133,7 @@ export const FilteringDisabledForCertainColumns: Story<
       {
         Header: 'Address',
         accessor: 'address' as const,
+        disableFilters: true,
       },
       {
         Header: 'State',

@@ -26,6 +26,7 @@ export interface MRT_Localization {
   filterTextFieldChipLabelNotEmpty: string;
   filterTextFieldClearButtonTitle: string;
   filterTextFieldPlaceholder: string;
+  changeFilterMode: string;
   rowActionButtonCancel: string;
   rowActionButtonSave: string;
   rowActionMenuButtonTitle: string;
@@ -63,6 +64,7 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   filterMenuItemEmpty: 'Empty',
   filterMenuItemEndsWith: 'Ends With',
   filterMenuItemEquals: 'Equals',
+  changeFilterMode: 'Change filter mode',
   filterMenuItemFuzzy: 'Fuzzy Match (Default)',
   filterMenuItemNotEmpty: 'Not Empty',
   filterMenuItemNotEquals: 'Not Equals',

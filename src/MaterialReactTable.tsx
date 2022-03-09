@@ -186,15 +186,18 @@ export type MRT_Cell<D extends {} = {}, _V = any> = Cell<D> &
   UseGroupByCellProps<D> &
   UseRowStateCellProps<D> & {};
 
-export type MRT_FilterType =
-  | 'contains'
-  | 'empty'
-  | 'endsWith'
-  | 'equals'
-  | 'fuzzy'
-  | 'notEmpty'
-  | 'notEquals'
-  | 'startsWith';
+export enum MRT_FILTER_TYPE {
+  CONTAINS = 'contains',
+  EMPTY = 'empty',
+  ENDS_WITH = 'endsWith',
+  EQUALS = 'equals',
+  FUZZY = 'fuzzy',
+  NOT_EMPTY = 'notEmpty',
+  NOT_EQUALS = 'notEquals',
+  STARTS_WITH = 'startsWith',
+}
+
+export type MRT_FilterType = MRT_FILTER_TYPE | Function;
 
 export type MRT_TableState<D extends {} = {}> = TableState<D> &
   UseColumnOrderState<D> &

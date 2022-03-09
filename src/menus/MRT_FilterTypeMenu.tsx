@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react';
 import { Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
-import { MRT_FilterType, MRT_HeaderGroup } from '..';
+import { MRT_FilterType, MRT_FILTER_TYPE, MRT_HeaderGroup } from '..';
 
 const commonMenuItemStyles = {
   py: '6px',
@@ -25,48 +25,48 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
   const { localization, setCurrentFilterTypes, tableInstance } = useMRT();
 
   const filterTypes: {
-    type: MRT_FilterType;
+    type: MRT_FILTER_TYPE;
     label: string;
     divider: boolean;
   }[] = useMemo(
     () => [
       {
-        type: 'fuzzy',
+        type: MRT_FILTER_TYPE.FUZZY,
         label: localization.filterMenuItemFuzzy,
         divider: false,
       },
       {
-        type: 'contains',
+        type: MRT_FILTER_TYPE.CONTAINS,
         label: localization.filterMenuItemContains,
         divider: true,
       },
       {
-        type: 'startsWith',
+        type: MRT_FILTER_TYPE.STARTS_WITH,
         label: localization.filterMenuItemStartsWith,
         divider: false,
       },
       {
-        type: 'endsWith',
+        type: MRT_FILTER_TYPE.ENDS_WITH,
         label: localization.filterMenuItemEndsWith,
         divider: true,
       },
       {
-        type: 'equals',
+        type: MRT_FILTER_TYPE.EQUALS,
         label: localization.filterMenuItemEquals,
         divider: false,
       },
       {
-        type: 'notEquals',
+        type: MRT_FILTER_TYPE.NOT_EQUALS,
         label: localization.filterMenuItemNotEquals,
         divider: true,
       },
       {
-        type: 'empty',
+        type: MRT_FILTER_TYPE.EMPTY,
         label: localization.filterMenuItemEmpty,
         divider: false,
       },
       {
-        type: 'notEmpty',
+        type: MRT_FILTER_TYPE.NOT_EMPTY,
         label: localization.filterMenuItemNotEmpty,
         divider: false,
       },
@@ -74,13 +74,13 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
     [],
   );
 
-  const handleSelectFilterType = (value: MRT_FilterType) => {
+  const handleSelectFilterType = (value: MRT_FILTER_TYPE) => {
     setAnchorEl(null);
     setCurrentFilterTypes((prev: { [key: string]: MRT_FilterType }) => ({
       ...prev,
       [column.id]: value,
     }));
-    if (['empty', 'notEmpty'].includes(value.toString())) {
+    if ([MRT_FILTER_TYPE.EMPTY, MRT_FILTER_TYPE.NOT_EMPTY].includes(value)) {
       column.setFilter(' ');
     }
     onSelect?.();
