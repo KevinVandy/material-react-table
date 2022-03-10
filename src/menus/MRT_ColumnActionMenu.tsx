@@ -3,6 +3,7 @@ import { Box, IconButton, Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
 import type { MRT_HeaderGroup } from '..';
 import { MRT_FilterTypeMenu } from './MRT_FilterTypeMenu';
+import { MRT_ShowHideColumnsMenu } from './MRT_ShowHideColumnsMenu';
 
 export const commonMenuItemStyles = {
   py: '6px',
@@ -36,6 +37,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     icons: {
       ArrowRightIcon,
       ClearAllIcon,
+      ViewColumnIcon,
       DynamicFeedIcon,
       FilterListIcon,
       FilterListOffIcon,
@@ -49,6 +51,9 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
   } = useMRT();
 
   const [filterMenuAnchorEl, setFilterMenuAnchorEl] =
+    useState<null | HTMLElement>(null);
+
+  const [showHideColumnsMenuAnchorEl, setShowHideColumnsMenuAnchorEl] =
     useState<null | HTMLElement>(null);
 
   const handleClearSort = () => {
@@ -100,6 +105,13 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
   const handleOpenFilterModeMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation();
     setFilterMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleOpenShowHideColumnsMenu = (
+    event: React.MouseEvent<HTMLElement>,
+  ) => {
+    event.stopPropagation();
+    setShowHideColumnsMenuAnchorEl(event.currentTarget);
   };
 
   return (
@@ -229,6 +241,36 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             )}
           </Box>
         </MenuItem>,
+        <MenuItem
+          key={1}
+          // onClick={handleShowColumnsMenu}
+          sx={commonMenuItemStyles}
+        >
+          <Box sx={commonListItemStyles}>
+            <ViewColumnIcon />
+
+            {localization.showHideColumnsButtonTitle?.replace(
+              '{column}',
+              String(column.Header),
+            )}
+          </Box>
+          {!column.filterSelectOptions && (
+            <IconButton
+              onClick={handleOpenShowHideColumnsMenu}
+              onMouseEnter={handleOpenShowHideColumnsMenu}
+              size="small"
+              sx={{ p: 0 }}
+            >
+              <ArrowRightIcon />
+            </IconButton>
+          )}
+        </MenuItem>,
+        <MRT_ShowHideColumnsMenu
+          anchorEl={showHideColumnsMenuAnchorEl}
+          isSubMenu
+          key={2}
+          setAnchorEl={setShowHideColumnsMenuAnchorEl}
+        />,
       ]}
     </Menu>
   );

@@ -1,48 +1,65 @@
 import React, { FC } from 'react';
-import { FormControlLabel, MenuItem, Switch } from '@mui/material';
-import { ColumnInstance } from 'react-table';
+import { Button, Menu, Divider, Box } from '@mui/material';
 import type { MRT_ColumnInstance } from '..';
-import { commonMenuItemStyles } from './MRT_ColumnActionMenu';
+import { useMRT } from '../useMRT';
+import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
 
 interface Props {
-  column: MRT_ColumnInstance;
+  anchorEl: HTMLElement | null;
+  isSubMenu?: boolean;
+  setAnchorEl: (anchorEl: HTMLElement | null) => void;
 }
 
-export const MRT_ShowHideColumnsMenu: FC<Props> = ({ column }) => {
-  const isParentHeader = !!column?.columns?.length;
-
-  const allChildColumnsVisible =
-    isParentHeader &&
-    !!column.columns?.every((childColumn) => childColumn.isVisible);
-
-  const switchChecked = column.isVisible ?? allChildColumnsVisible;
-
-  const handleToggleColumnHidden = (column: ColumnInstance) => {
-    if (isParentHeader) {
-      column?.columns?.forEach?.((childColumn) => {
-        childColumn.toggleHidden(switchChecked);
-      });
-    } else {
-      column.toggleHidden();
-    }
-  };
+export const MRT_ShowHideColumnsMenu: FC<Props> = ({
+  anchorEl,
+  isSubMenu,
+  setAnchorEl,
+}) => {
+  const { localization, tableInstance } = useMRT();
 
   return (
-    <>
-      <MenuItem
-        sx={{ ...commonMenuItemStyles, pl: `${(column.depth + 0.5) * 2}rem` }}
+    <Menu
+      anchorEl={anchorEl}
+      open={!!anchorEl}
+      onClose={() => setAnchorEl(null)}
+      MenuListProps={{
+        dense: tableInstance.state.densePadding,
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: isSubMenu ? 'center' : 'space-between',
+          p: '0.5rem',
+          pt: 0,
+        }}
       >
-        <FormControlLabel
-          componentsProps={{ typography: { sx: { marginBottom: 0 } } }}
-          checked={switchChecked}
-          control={<Switch />}
-          label={column.Header as string}
-          onChange={() => handleToggleColumnHidden(column)}
+        {!isSubMenu && (
+          <Button
+            disabled={
+              !tableInstance.getToggleHideAllColumnsProps().checked &&
+              !tableInstance.getToggleHideAllColumnsProps().indeterminate
+            }
+            onClick={() => tableInstance.toggleHideAllColumns(true)}
+          >
+            {localization.columnShowHideMenuHideAll}
+          </Button>
+        )}
+        <Button
+          disabled={tableInstance.getToggleHideAllColumnsProps().checked}
+          onClick={() => tableInstance.toggleHideAllColumns(false)}
+        >
+          {localization.columnShowHideMenuShowAll}
+        </Button>
+      </Box>
+      <Divider />
+      {tableInstance.columns.map((column: MRT_ColumnInstance, index) => (
+        <MRT_ShowHideColumnsMenuItems
+          column={column}
+          isSubMenu={isSubMenu}
+          key={`${index}-${column.id}`}
         />
-      </MenuItem>
-      {column.columns?.map((c: MRT_ColumnInstance, i) => (
-        <MRT_ShowHideColumnsMenu key={`${i}-${c.id}`} column={c} />
       ))}
-    </>
+    </Menu>
   );
 };
