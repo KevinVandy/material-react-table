@@ -1,99 +1,92 @@
 export interface MRT_Localization {
-  actionsHeadColumnTitle: string;
+  actions: string;
   changeFilterMode: string;
-  columnActionMenuButtonTitle: string;
-  columnActionMenuItemClearSort: string;
-  columnActionMenuItemGroupBy: string;
-  columnActionMenuItemHideColumn: string;
-  columnActionMenuItemSortAsc: string;
-  columnActionMenuItemSortDesc: string;
-  columnActionMenuItemUnGroupBy: string;
-  columnShowHideMenuHideAll: string;
-  columnShowHideMenuShowAll: string;
-  expandAllButtonTitle: string;
-  expandButtonTitle: string;
-  filterApplied: string;
-  filterMenuItemContains: string;
-  filterMenuItemEmpty: string;
-  filterMenuItemEndsWith: string;
-  filterMenuItemEquals: string;
-  filterMenuItemFuzzy: string;
-  filterMenuItemGreaterThan: string;
-  filterMenuItemLessThan: string;
-  filterMenuItemNotEmpty: string;
-  filterMenuItemNotEquals: string;
-  filterMenuItemStartsWith: string;
-  filterMenuTitle: string;
-  filterTextFieldChangeFilterButtonTitle: string;
-  filterTextFieldChipLabelEmpty: string;
-  filterTextFieldChipLabelNotEmpty: string;
-  filterTextFieldClearButtonTitle: string;
-  filterTextFieldPlaceholder: string;
-  rowActionButtonCancel: string;
-  rowActionButtonSave: string;
-  rowActionMenuButtonTitle: string;
-  rowActionMenuItemEdit: string;
-  rowActionsColumnTitle: string;
-  searchTextFieldClearButtonTitle: string;
-  searchTextFieldPlaceholder: string;
-  selectAllCheckboxTitle: string;
-  selectCheckboxTitle: string;
-  showHideColumnsButtonTitle: string;
-  toggleDensePaddingSwitchTitle: string;
-  toggleFilterButtonTitle: string;
-  toggleFullScreenButtonTitle: string;
-  toggleSearchButtonTitle: string;
-  toolbarAlertGroupedByMessage: string;
-  toolbarAlertGroupedThenByMessage: string;
-  toolbarAlertSelectionMessage: string;
+  columnActions: string;
+  clearSort: string;
+  groupByColumn: string;
+  hideColumn: string;
+  sortByColumnAsc: string;
+  sortByColumnDesc: string;
+  ungroupByColumn: string;
+  hideAll: string;
+  showAll: string;
+  expandAll: string;
+  expand: string;
+  filteringByColumn: string;
+  filterContains: string;
+  filterEmpty: string;
+  filterEndsWith: string;
+  filterEquals: string;
+  filterFuzzy: string;
+  filterGreaterThan: string;
+  filterLessThan: string;
+  filterNotEmpty: string;
+  filterNotEquals: string;
+  filterStartsWith: string;
+  filterMode: string;
+  clearFilter: string;
+  filterByColumn: string;
+  cancel: string;
+  save: string;
+  rowActions: string;
+  edit: string;
+  clearSearch: string;
+  search: string;
+  toggleSelectAll: string;
+  toggleSelectRow: string;
+  showHideColumns: string;
+  toggleDensePadding: string;
+  showHideFilters: string;
+  toggleFullScreen: string;
+  showHideSearch: string;
+  groupedBy: string;
+  thenBy: string;
+  selectedCountOfRowCountRowsSelected: string;
 }
 
 export const MRT_DefaultLocalization_EN: MRT_Localization = {
-  actionsHeadColumnTitle: 'Actions',
+  actions: 'Actions',
   changeFilterMode: 'Change filter mode',
-  columnActionMenuButtonTitle: 'Column Actions',
-  columnActionMenuItemClearSort: 'Clear sort',
-  columnActionMenuItemGroupBy: 'Group by {column}',
-  columnActionMenuItemHideColumn: 'Hide {column} column',
-  columnActionMenuItemSortAsc: 'Sort by {column} ascending',
-  columnActionMenuItemSortDesc: 'Sort by {column} descending',
-  columnActionMenuItemUnGroupBy: 'Ungroup by {column}',
-  columnShowHideMenuHideAll: 'Hide all',
-  columnShowHideMenuShowAll: 'Show all',
-  expandAllButtonTitle: 'Expand all',
-  expandButtonTitle: 'Expand',
-  filterApplied: 'Filtering by {column} - ({filterType})',
-  filterMenuItemContains: 'Contains Exact',
-  filterMenuItemEmpty: 'Empty',
-  filterMenuItemEndsWith: 'Ends With',
-  filterMenuItemEquals: 'Equals',
-  filterMenuItemFuzzy: 'Fuzzy Match (Default)',
-  filterMenuItemGreaterThan: 'Greater Than',
-  filterMenuItemLessThan: 'Less Than',
-  filterMenuItemNotEmpty: 'Not Empty',
-  filterMenuItemNotEquals: 'Not Equals',
-  filterMenuItemStartsWith: 'Starts With',
-  filterMenuTitle: 'Filter Mode',
-  filterTextFieldChangeFilterButtonTitle: 'Change Filter Mode',
-  filterTextFieldChipLabelEmpty: 'Empty',
-  filterTextFieldChipLabelNotEmpty: 'Not Empty',
-  filterTextFieldClearButtonTitle: 'Clear filter',
-  filterTextFieldPlaceholder: 'Filter by {column}',
-  rowActionButtonCancel: 'Cancel',
-  rowActionButtonSave: 'Save',
-  rowActionMenuButtonTitle: 'Row Actions',
-  rowActionMenuItemEdit: 'Edit',
-  rowActionsColumnTitle: 'Actions',
-  searchTextFieldClearButtonTitle: 'Clear search',
-  searchTextFieldPlaceholder: 'Search',
-  selectAllCheckboxTitle: 'Toggle select all',
-  selectCheckboxTitle: 'Toggle select row',
-  showHideColumnsButtonTitle: 'Show/Hide columns',
-  toggleDensePaddingSwitchTitle: 'Toggle dense padding',
-  toggleFilterButtonTitle: 'Show/Hide filters',
-  toggleFullScreenButtonTitle: 'Toggle full screen',
-  toggleSearchButtonTitle: 'Show/Hide search',
-  toolbarAlertGroupedByMessage: 'Grouped by ',
-  toolbarAlertGroupedThenByMessage: ', then by ',
-  toolbarAlertSelectionMessage: '{selectedCount} of {rowCount} row(s) selected',
+  columnActions: 'Column Actions',
+  clearSort: 'Clear sort',
+  groupByColumn: 'Group by {column}',
+  hideColumn: 'Hide {column} column',
+  sortByColumnAsc: 'Sort by {column} ascending',
+  sortByColumnDesc: 'Sort by {column} descending',
+  ungroupByColumn: 'Ungroup by {column}',
+  hideAll: 'Hide all',
+  showAll: 'Show all',
+  expandAll: 'Expand all',
+  expand: 'Expand',
+  filteringByColumn: 'Filtering by {column} - ({filterType})',
+  filterContains: 'Contains Exact',
+  filterEmpty: 'Empty',
+  filterEndsWith: 'Ends With',
+  filterEquals: 'Equals',
+  filterFuzzy: 'Fuzzy Match (Default)',
+  filterGreaterThan: 'Greater Than',
+  filterLessThan: 'Less Than',
+  filterNotEmpty: 'Not Empty',
+  filterNotEquals: 'Not Equals',
+  filterStartsWith: 'Starts With',
+  filterMode: 'Filter Mode',
+  clearFilter: 'Clear filter',
+  filterByColumn: 'Filter by {column}',
+  cancel: 'Cancel',
+  save: 'Save',
+  rowActions: 'Row Actions',
+  edit: 'Edit',
+  clearSearch: 'Clear search',
+  search: 'Search',
+  toggleSelectAll: 'Toggle select all',
+  toggleSelectRow: 'Toggle select row',
+  showHideColumns: 'Show/Hide columns',
+  toggleDensePadding: 'Toggle dense padding',
+  showHideFilters: 'Show/Hide filters',
+  toggleFullScreen: 'Toggle full screen',
+  showHideSearch: 'Show/Hide search',
+  groupedBy: 'Grouped by ',
+  thenBy: ', then by ',
+  selectedCountOfRowCountRowsSelected:
+    '{selectedCount} of {rowCount} row(s) selected',
 };

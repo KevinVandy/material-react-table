@@ -85,7 +85,7 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
     [MRT_FILTER_TYPE.EMPTY, MRT_FILTER_TYPE.NOT_EMPTY].includes(
       filterType as MRT_FILTER_TYPE,
     );
-  const filterPlaceholder = localization.filterTextFieldPlaceholder?.replace(
+  const filterPlaceholder = localization.filterByColumn?.replace(
     '{column}',
     String(column.Header),
   );
@@ -148,11 +148,11 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
                 arrow
                 disableHoverListener={isSelectFilter}
                 placement="right"
-                title={localization.filterTextFieldClearButtonTitle ?? ''}
+                title={localization.clearFilter ?? ''}
               >
                 <span>
                   <IconButton
-                    aria-label={localization.filterTextFieldClearButtonTitle}
+                    aria-label={localization.clearFilter}
                     disabled={!filterValue?.length}
                     onClick={handleClear}
                     size="small"
@@ -182,7 +182,7 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
       >
         {isSelectFilter && (
           <MenuItem divider disabled={!filterValue} value="">
-            {localization.filterTextFieldClearButtonTitle}
+            {localization.clearFilter}
           </MenuItem>
         )}
         {column?.filterSelectOptions?.map((option) => {

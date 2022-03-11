@@ -37,7 +37,7 @@ export const MRT_RowActionMenu: FC<Props> = ({
       {enableRowEditing && (
         <MenuItem onClick={handleEdit} sx={commonMenuItemStyles}>
           <EditIcon />
-          {localization.rowActionMenuItemEdit}
+          {localization.edit}
         </MenuItem>
       )}
       {renderRowActionMenuItems?.(row, tableInstance, () =>

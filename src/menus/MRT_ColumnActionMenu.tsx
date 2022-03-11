@@ -133,7 +133,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           >
             <Box sx={commonListItemStyles}>
               <ClearAllIcon />
-              {localization.columnActionMenuItemClearSort}
+              {localization.clearSort}
             </Box>
           </MenuItem>,
           <MenuItem
@@ -144,7 +144,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           >
             <Box sx={commonListItemStyles}>
               <SortIcon />
-              {localization.columnActionMenuItemSortAsc?.replace(
+              {localization.sortByColumnAsc?.replace(
                 '{column}',
                 String(column.Header),
               )}
@@ -161,7 +161,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           >
             <Box sx={commonListItemStyles}>
               <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
-              {localization.columnActionMenuItemSortDesc?.replace(
+              {localization.sortByColumnDesc?.replace(
                 '{column}',
                 String(column.Header),
               )}
@@ -178,7 +178,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           >
             <Box sx={commonListItemStyles}>
               <FilterListOffIcon />
-              {localization.filterTextFieldClearButtonTitle}
+              {localization.clearFilter}
             </Box>
           </MenuItem>,
           <MenuItem
@@ -189,7 +189,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           >
             <Box sx={commonListItemStyles}>
               <FilterListIcon />
-              {localization.filterTextFieldPlaceholder?.replace(
+              {localization.filterByColumn?.replace(
                 '{column}',
                 String(column.Header),
               )}
@@ -224,9 +224,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             <Box sx={commonListItemStyles}>
               <DynamicFeedIcon />
               {localization[
-                column.isGrouped
-                  ? 'columnActionMenuItemUnGroupBy'
-                  : 'columnActionMenuItemGroupBy'
+                column.isGrouped ? 'ungroupByColumn' : 'groupByColumn'
               ]?.replace('{column}', String(column.Header))}
             </Box>
           </MenuItem>,
@@ -235,7 +233,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
         <MenuItem key={1} onClick={handleHideColumn} sx={commonMenuItemStyles}>
           <Box sx={commonListItemStyles}>
             <VisibilityOffIcon />
-            {localization.columnActionMenuItemHideColumn?.replace(
+            {localization.hideColumn?.replace(
               '{column}',
               String(column.Header),
             )}
@@ -249,7 +247,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           <Box sx={commonListItemStyles}>
             <ViewColumnIcon />
 
-            {localization.showHideColumnsButtonTitle?.replace(
+            {localization.showHideColumns?.replace(
               '{column}',
               String(column.Header),
             )}

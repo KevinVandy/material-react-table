@@ -66,21 +66,21 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
 
   const sortTooltip = column.isSorted
     ? column.isSortedDesc
-      ? localization.columnActionMenuItemClearSort
-      : localization.columnActionMenuItemSortDesc?.replace(
+      ? localization.clearSort
+      : localization.sortByColumnDesc?.replace(
           '{column}',
           column.Header as string,
         )
-    : localization.columnActionMenuItemSortAsc?.replace(
+    : localization.sortByColumnAsc?.replace(
         '{column}',
         column.Header as string,
       );
 
   const filterTooltip = !!column.filterValue
-    ? localization.filterApplied
+    ? localization.filteringByColumn
         .replace('{column}', String(column.Header))
         .replace('{filterType}', column.filterValue)
-    : localization.toggleFilterButtonTitle;
+    : localization.showHideFilters;
 
   const columnHeader = column.render('Header') as string;
 

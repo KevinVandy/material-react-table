@@ -42,14 +42,14 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
             }
             onClick={() => tableInstance.toggleHideAllColumns(true)}
           >
-            {localization.columnShowHideMenuHideAll}
+            {localization.hideAll}
           </Button>
         )}
         <Button
           disabled={tableInstance.getToggleHideAllColumnsProps().checked}
           onClick={() => tableInstance.toggleHideAllColumns(false)}
         >
-          {localization.columnShowHideMenuShowAll}
+          {localization.showAll}
         </Button>
       </Box>
       <Divider />

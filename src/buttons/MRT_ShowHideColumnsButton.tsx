@@ -19,9 +19,9 @@ export const MRT_ShowHideColumnsButton: FC<Props> = ({ ...rest }) => {
 
   return (
     <>
-      <Tooltip arrow title={localization.showHideColumnsButtonTitle}>
+      <Tooltip arrow title={localization.showHideColumns}>
         <IconButton
-          aria-label={localization.showHideColumnsButtonTitle}
+          aria-label={localization.showHideColumns}
           onClick={handleClick}
           size="small"
           {...rest}
@@ -29,10 +29,7 @@ export const MRT_ShowHideColumnsButton: FC<Props> = ({ ...rest }) => {
           <ViewColumnIcon />
         </IconButton>
       </Tooltip>
-      <MRT_ShowHideColumnsMenu
-        anchorEl={anchorEl}
-        setAnchorEl={setAnchorEl}
-      />
+      <MRT_ShowHideColumnsMenu anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
     </>
   );
 };

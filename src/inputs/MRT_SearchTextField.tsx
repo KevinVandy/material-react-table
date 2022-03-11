@@ -34,7 +34,7 @@ export const MRT_SearchTextField: FC<Props> = () => {
     <Collapse in={tableInstance.state.showSearch} orientation="horizontal">
       <TextField
         id={`mrt-${idPrefix}-search-text-field`}
-        placeholder={localization.searchTextFieldPlaceholder}
+        placeholder={localization.search}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setSearchValue(event.target.value);
           handleChange(event);
@@ -50,11 +50,11 @@ export const MRT_SearchTextField: FC<Props> = () => {
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
-                aria-label={localization.searchTextFieldClearButtonTitle}
+                aria-label={localization.clearSearch}
                 disabled={searchValue?.length === 0}
                 onClick={handleClear}
                 size="small"
-                title={localization.searchTextFieldClearButtonTitle}
+                title={localization.clearSearch}
               >
                 <CloseIcon fontSize="small" />
               </IconButton>

@@ -30,17 +30,14 @@ export const MRT_EditActionButtons: FC<Props> = ({ row }) => {
 
   return (
     <Box sx={{ display: 'flex', gap: '0.75rem' }}>
-      <Tooltip arrow title={localization.rowActionButtonCancel}>
-        <IconButton
-          aria-label={localization.rowActionButtonCancel}
-          onClick={handleCancel}
-        >
+      <Tooltip arrow title={localization.cancel}>
+        <IconButton aria-label={localization.cancel} onClick={handleCancel}>
           <CancelIcon />
         </IconButton>
       </Tooltip>
-      <Tooltip arrow title={localization.rowActionButtonSave}>
+      <Tooltip arrow title={localization.save}>
         <IconButton
-          aria-label={localization.rowActionButtonSave}
+          aria-label={localization.save}
           color="info"
           onClick={handleSave}
         >

@@ -20,8 +20,8 @@ export const MRT_ExpandAllButton: FC<Props> = () => {
       sx={commonTableBodyButtonCellStyles(tableInstance.state.densePadding)}
     >
       <IconButton
-        aria-label={localization.expandAllButtonTitle}
-        title={localization.expandAllButtonTitle}
+        aria-label={localization.expandAll}
+        title={localization.expandAll}
       >
         <DoubleArrowDownIcon
           style={{

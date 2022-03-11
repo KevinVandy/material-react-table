@@ -30,7 +30,7 @@ export const MRT_ToggleSearchButton: FC<Props> = ({ ...rest }) => {
   };
 
   return (
-    <Tooltip arrow title={localization.toggleSearchButtonTitle}>
+    <Tooltip arrow title={localization.showHideSearch}>
       <IconButton size="small" onClick={handleToggleSearch} {...rest}>
         {showSearch ? <SearchOffIcon /> : <SearchIcon />}
       </IconButton>

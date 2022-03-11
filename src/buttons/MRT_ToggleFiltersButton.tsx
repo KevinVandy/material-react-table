@@ -15,9 +15,9 @@ export const MRT_ToggleFiltersButton: FC<Props> = ({ ...rest }) => {
   } = useMRT();
 
   return (
-    <Tooltip arrow title={localization.toggleFilterButtonTitle}>
+    <Tooltip arrow title={localization.showHideFilters}>
       <IconButton
-        aria-label={localization.toggleFilterButtonTitle}
+        aria-label={localization.showHideFilters}
         onClick={() => setShowFilters(!showFilters)}
         size="small"
         {...rest}

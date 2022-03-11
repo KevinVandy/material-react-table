@@ -28,9 +28,9 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
       }}
     >
       <IconButton
-        aria-label={localization.expandButtonTitle}
+        aria-label={localization.expand}
         disabled={!row.canExpand && !renderDetailPanel}
-        title={localization.expandButtonTitle}
+        title={localization.expand}
         {...row.getToggleRowExpandedProps()}
       >
         <ExpandMoreIcon

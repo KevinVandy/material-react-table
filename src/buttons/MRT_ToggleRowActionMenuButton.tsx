@@ -54,11 +54,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
       ) : row.id === tableInstance.state.currentEditingRow?.id ? (
         <MRT_EditActionButtons row={row} />
       ) : !renderRowActionMenuItems && enableRowEditing ? (
-        <Tooltip
-          placement="right"
-          arrow
-          title={localization.rowActionMenuItemEdit}
-        >
+        <Tooltip placement="right" arrow title={localization.edit}>
           <IconButton sx={commonIconButtonStyles} onClick={handleEdit}>
             <EditIcon />
           </IconButton>
@@ -69,10 +65,10 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
             arrow
             enterDelay={1000}
             enterNextDelay={1000}
-            title={localization.rowActionMenuButtonTitle}
+            title={localization.rowActions}
           >
             <IconButton
-              aria-label={localization.rowActionMenuButtonTitle}
+              aria-label={localization.rowActions}
               onClick={handleOpenRowActionMenu}
               size="small"
               sx={commonIconButtonStyles}

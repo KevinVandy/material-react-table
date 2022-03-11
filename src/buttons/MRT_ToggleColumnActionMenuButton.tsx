@@ -29,10 +29,10 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
         enterDelay={1000}
         enterNextDelay={1000}
         placement="top"
-        title={localization.columnActionMenuButtonTitle}
+        title={localization.columnActions}
       >
         <IconButton
-          aria-label={localization.columnActionMenuButtonTitle}
+          aria-label={localization.columnActions}
           onClick={handleClick}
           size="small"
           sx={{

@@ -15,9 +15,9 @@ export const MRT_ToggleDensePaddingButton: FC<Props> = ({ ...rest }) => {
   } = useMRT();
 
   return (
-    <Tooltip arrow title={localization.toggleDensePaddingSwitchTitle}>
+    <Tooltip arrow title={localization.toggleDensePadding}>
       <IconButton
-        aria-label={localization.toggleDensePaddingSwitchTitle}
+        aria-label={localization.toggleDensePadding}
         onClick={() => setDensePadding(!densePadding)}
         size="small"
         {...rest}
