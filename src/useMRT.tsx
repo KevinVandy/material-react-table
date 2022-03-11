@@ -7,6 +7,7 @@ import React, {
   useState,
   Dispatch,
   SetStateAction,
+  useCallback,
 } from 'react';
 import {
   PluginHook,
@@ -92,7 +93,7 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     [props.filterTypes],
   );
 
-  const getInitialFilterTypeState = () => {
+  const findLowestLevelCols = useCallback(() => {
     let lowestLevelColumns: any[] = props.columns;
     let currentCols: any[] = props.columns;
     while (!!currentCols.length && currentCols.some((col) => col.columns)) {
@@ -105,26 +106,26 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
       }
       currentCols = nextCols;
     }
-    lowestLevelColumns = lowestLevelColumns.filter((col) => !col.columns);
+    return lowestLevelColumns.filter((col) => !col.columns);
+  }, [props.columns]);
 
-    return Object.assign(
+  const [currentFilterTypes, setCurrentFilterTypes] = useState<{
+    [key: string]: MRT_FilterType;
+  }>(() =>
+    Object.assign(
       {},
-      ...lowestLevelColumns.map((c) => ({
+      ...findLowestLevelCols().map((c) => ({
         [c.accessor as string]:
           c.filter ??
           props?.initialState?.filters?.[c.accessor as any] ??
           (!!c.filterSelectOptions ? 'equals' : 'fuzzy'),
       })),
-    );
-  };
-
-  const [currentFilterTypes, setCurrentFilterTypes] = useState<{
-    [key: string]: MRT_FilterType;
-  }>(() => getInitialFilterTypeState());
+    ),
+  );
 
   const columns = useMemo(
     () =>
-      props.columns.map((column) => {
+      findLowestLevelCols().map((column) => {
         column.filter =
           filterTypes[
             currentFilterTypes[column.accessor as string] as MRT_FILTER_TYPE
@@ -140,7 +141,7 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
       columns,
       // @ts-ignore
       filterTypes,
-      globalFilterValue: 'fuzzy',
+      globalFilter: props.globalFilter ?? 'globalFuzzy',
       useControlledState: (state) =>
         useMemo(
           () => ({

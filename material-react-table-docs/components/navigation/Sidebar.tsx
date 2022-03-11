@@ -3,17 +3,12 @@ import { FC } from 'react';
 import {
   alpha,
   Divider,
-  Drawer as MuiDrawer,
+  Drawer,
   List,
   ListItem as MuiListItem,
   styled,
   useMediaQuery,
 } from '@mui/material';
-
-const Drawer = styled(MuiDrawer)({
-  zIndex: 1,
-  position: 'relative',
-});
 
 const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
   color: theme.palette.primary.dark,
@@ -51,6 +46,10 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
       open={navOpen}
       onClose={() => setNavOpen(false)}
       variant={isTablet ? 'temporary' : 'permanent'}
+      sx={{
+        zIndex: 1,
+        position: 'relative',
+      }}
     >
       <List
         sx={{
@@ -59,7 +58,7 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
           mt: '64px',
           padding: 0,
           transition: 'all .2s',
-          width: navOpen ? '260px' : '0',
+          width: navOpen ? '260px' : 0,
           '@media (max-width: 900px)': {
             mt: '50px',
           },
