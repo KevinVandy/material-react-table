@@ -76,10 +76,23 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
         column.Header as string,
       );
 
+  const filterType = tableInstance.state.currentFilterTypes[column.id];
+
   const filterTooltip = !!column.filterValue
     ? localization.filteringByColumn
         .replace('{column}', String(column.Header))
-        .replace('{filterType}', column.filterValue)
+        .replace(
+          '{filterType}',
+          filterType instanceof Function
+            ? ''
+            : // @ts-ignore
+              localization[
+                `filter${
+                  filterType.charAt(0).toUpperCase() + filterType.slice(1)
+                }`
+              ],
+        )
+        .replace('{filterValue}', column.filterValue)
     : localization.showHideFilters;
 
   const columnHeader = column.render('Header') as string;

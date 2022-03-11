@@ -107,6 +107,10 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     setFilterMenuAnchorEl(event.currentTarget);
   };
 
+  const handleShowAllColumns = () => {
+    tableInstance.toggleHideAllColumns(false);
+  };
+
   const handleOpenShowHideColumnsMenu = (
     event: React.MouseEvent<HTMLElement>,
   ) => {
@@ -127,7 +131,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
         column.canSort && [
           <MenuItem
             disabled={!column.isSorted}
-            key={1}
+            key={0}
             onClick={handleClearSort}
             sx={commonMenuItemStyles}
           >
@@ -138,7 +142,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           </MenuItem>,
           <MenuItem
             disabled={column.isSorted && !column.isSortedDesc}
-            key={2}
+            key={1}
             onClick={handleSortAsc}
             sx={commonMenuItemStyles}
           >
@@ -154,7 +158,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             divider={
               !disableFilters || enableColumnGrouping || !disableColumnHiding
             }
-            key={3}
+            key={2}
             disabled={column.isSorted && column.isSortedDesc}
             onClick={handleSortDesc}
             sx={commonMenuItemStyles}
@@ -217,7 +221,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
         column.canGroupBy && [
           <MenuItem
             divider={!disableColumnHiding}
-            key={2}
+            key={0}
             onClick={handleGroupByColumn}
             sx={commonMenuItemStyles}
           >
@@ -230,7 +234,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           </MenuItem>,
         ]}
       {!disableColumnHiding && [
-        <MenuItem key={1} onClick={handleHideColumn} sx={commonMenuItemStyles}>
+        <MenuItem key={0} onClick={handleHideColumn} sx={commonMenuItemStyles}>
           <Box sx={commonListItemStyles}>
             <VisibilityOffIcon />
             {localization.hideColumn?.replace(
@@ -240,14 +244,15 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           </Box>
         </MenuItem>,
         <MenuItem
+          disabled={!tableInstance.state.hiddenColumns?.length}
           key={1}
-          // onClick={handleShowColumnsMenu}
+          onClick={handleShowAllColumns}
           sx={commonMenuItemStyles}
         >
           <Box sx={commonListItemStyles}>
             <ViewColumnIcon />
 
-            {localization.showHideColumns?.replace(
+            {localization.showAllColumns?.replace(
               '{column}',
               String(column.Header),
             )}

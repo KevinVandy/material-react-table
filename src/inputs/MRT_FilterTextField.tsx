@@ -84,7 +84,12 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
     !isCustomFilterType &&
     [MRT_FILTER_TYPE.EMPTY, MRT_FILTER_TYPE.NOT_EMPTY].includes(
       filterType as MRT_FILTER_TYPE,
-    );
+    )
+      ? //@ts-ignore
+        localization[
+          `filter${filterType.charAt(0).toUpperCase() + filterType.slice(1)}`
+        ]
+      : '';
   const filterPlaceholder = localization.filterByColumn?.replace(
     '{column}',
     String(column.Header),
@@ -102,6 +107,22 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
             width: filterChipLabel ? 0 : undefined,
           },
           title: filterPlaceholder,
+        }}
+        helperText={
+          filterType instanceof Function
+            ? ''
+            : localization.filterMode.replace(
+                '{filterType}',
+                // @ts-ignore
+                localization[
+                  `filter${
+                    filterType.charAt(0).toUpperCase() + filterType.slice(1)
+                  }`
+                ],
+              )
+        }
+        FormHelperTextProps={{
+          sx: { fontSize: '0.6rem', lineHeight: '0.8rem' },
         }}
         label={isSelectFilter && !filterValue ? filterPlaceholder : undefined}
         InputLabelProps={{
@@ -138,7 +159,10 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
                 </span>
               </Tooltip>
               {filterChipLabel && (
-                <Chip onDelete={handleClearFilterChip} label={filterType} />
+                <Chip
+                  onDelete={handleClearFilterChip}
+                  label={filterChipLabel}
+                />
               )}
             </InputAdornment>
           ),
@@ -170,7 +194,8 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
         }}
         {...textFieldProps}
         sx={{
-          m: '0 -0.25rem',
+          m: '-0.25rem',
+          p: 0,
           minWidth: !filterChipLabel ? '5rem' : 'auto',
           width: 'calc(100% + 0.5rem)',
           mt: isSelectFilter && !filterValue ? '-1rem' : undefined,
