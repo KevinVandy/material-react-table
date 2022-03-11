@@ -78,10 +78,9 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
   }
 
   const filterType = tableInstance.state.currentFilterTypes[column.id];
-  const isCustomFilterType = filterType instanceof Function;
   const isSelectFilter = !!column.filterSelectOptions;
   const filterChipLabel =
-    !isCustomFilterType &&
+    !(filterType instanceof Function) &&
     [MRT_FILTER_TYPE.EMPTY, MRT_FILTER_TYPE.NOT_EMPTY].includes(
       filterType as MRT_FILTER_TYPE,
     )
