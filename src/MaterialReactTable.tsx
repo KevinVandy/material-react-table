@@ -20,7 +20,7 @@ import {
   Column,
   ColumnInstance,
   FilterType,
-  // ColumnInterface,
+  ColumnInterface,
   HeaderGroup,
   Row,
   TableInstance,
@@ -78,6 +78,7 @@ import { MRT_TableContainer } from './table/MRT_TableContainer';
 import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_FILTER_TYPE } from './enums';
+import { defaultFilterFNs } from './filtersFNs';
 
 export type MRT_TableOptions<D extends {} = {}> = TableOptions<D> &
   UseExpandedOptions<D> &
@@ -115,57 +116,60 @@ export type MRT_TableInstance<D extends {} = {}> = TableInstance<D> &
     getToggleAllRowsExpandedProps: () => void;
   };
 
-export type MRT_ColumnInterface<D extends {} = {}> =
-  // ColumnInterface<D> &
+export type MRT_ColumnInterface<D extends {} = {}> = ColumnInterface<D> &
   UseFiltersColumnOptions<D> &
-    UseGlobalFiltersColumnOptions<D> &
-    UseGroupByColumnOptions<D> &
-    UseResizeColumnsColumnOptions<D> &
-    UseSortByColumnOptions<D> & {
-      Edit?: ({
-        cell,
-        onChange,
-      }: {
-        cell: MRT_Cell<D>;
-        onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-      }) => ReactNode;
-      Filter?: ({ column }: { column: MRT_HeaderGroup<D> }) => ReactNode;
-      Footer?: string;
-      Header?: string;
-      disableFilters?: boolean;
-      editable?: boolean;
-      filter?: MRT_FilterType | string | FilterType<D>;
-      filterSelectOptions?: (string | { text: string; value: string })[];
-      muiTableBodyCellEditTextFieldProps?:
-        | TextFieldProps
-        | ((cell: MRT_Cell<D>) => TextFieldProps);
-      muiTableBodyCellProps?:
-        | TableCellProps
-        | ((cell: MRT_Cell<D>) => TableCellProps);
-      muiTableFooterCellProps?:
-        | TableCellProps
-        | ((column: Column<D>) => TableCellProps);
-      muiTableHeadCellFilterTextFieldProps?:
-        | TextFieldProps
-        | ((column: Column<D>) => TextFieldProps);
-      muiTableHeadCellProps?:
-        | TableCellProps
-        | ((column: Column<D>) => TableCellProps);
-      onCellEditChange?: (
-        event: ChangeEvent<HTMLInputElement>,
-        cell: MRT_Cell<D>,
-      ) => void;
-      onFilterChange?: (
-        event: ChangeEvent<HTMLInputElement>,
-        filterValue: any,
-      ) => void;
-    };
+  UseGlobalFiltersColumnOptions<D> &
+  UseGroupByColumnOptions<D> &
+  UseResizeColumnsColumnOptions<D> &
+  UseSortByColumnOptions<D> & {
+    Edit?: ({
+      cell,
+      onChange,
+    }: {
+      cell: MRT_Cell<D>;
+      onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+    }) => ReactNode;
+    Filter?: ({ column }: { column: MRT_HeaderGroup<D> }) => ReactNode;
+    Footer?: string;
+    Header?: string;
+    accessor: string;
+    columns?: (Column<D> & MRT_ColumnInterface<D>)[];
+    disableFilters?: boolean;
+    editable?: boolean;
+    filter?: MRT_FilterType | string | FilterType<D>;
+    filterSelectOptions?: (string | { text: string; value: string })[];
+    filterTypes: MRT_FILTER_TYPE[];
+    muiTableBodyCellEditTextFieldProps?:
+      | TextFieldProps
+      | ((cell: MRT_Cell<D>) => TextFieldProps);
+    muiTableBodyCellProps?:
+      | TableCellProps
+      | ((cell: MRT_Cell<D>) => TableCellProps);
+    muiTableFooterCellProps?:
+      | TableCellProps
+      | ((column: Column<D>) => TableCellProps);
+    muiTableHeadCellFilterTextFieldProps?:
+      | TextFieldProps
+      | ((column: Column<D>) => TextFieldProps);
+    muiTableHeadCellProps?:
+      | TableCellProps
+      | ((column: Column<D>) => TableCellProps);
+    onCellEditChange?: (
+      event: ChangeEvent<HTMLInputElement>,
+      cell: MRT_Cell<D>,
+    ) => void;
+    onFilterChange?: (
+      event: ChangeEvent<HTMLInputElement>,
+      filterValue: any,
+    ) => void;
+  };
 
 export type MRT_ColumnInstance<D extends {} = {}> = ColumnInstance<D> &
   UseFiltersColumnProps<D> &
   UseGroupByColumnProps<D> &
   UseResizeColumnsColumnProps<D> &
-  UseSortByColumnProps<D> & {
+  UseSortByColumnProps<D> &
+  MRT_ColumnInterface<D> & {
     columns?: MRT_ColumnInstance<D>[];
   };
 
@@ -185,7 +189,9 @@ export type MRT_Row<D extends {} = {}> = Row<D> &
 
 export type MRT_Cell<D extends {} = {}, _V = any> = Cell<D> &
   UseGroupByCellProps<D> &
-  UseRowStateCellProps<D> & {};
+  UseRowStateCellProps<D> & {
+    column: MRT_ColumnInstance<D>;
+  };
 
 export type MRT_FilterType = MRT_FILTER_TYPE | Function;
 
@@ -232,6 +238,7 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
     enableRowEditing?: boolean;
     enableRowNumbers?: boolean;
     enableSelection?: boolean;
+    filterTypes?: { [key in MRT_FILTER_TYPE]: any };
     hideTableFooter?: boolean;
     hideTableHead?: boolean;
     hideToolbarBottom?: boolean;
@@ -362,6 +369,8 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
 
 export default <D extends {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
+  filterTypes,
+  globalFilter = 'fuzzy',
   icons,
   localization,
   positionActionsColumn = 'first',
@@ -372,6 +381,9 @@ export default <D extends {}>({
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
     defaultColumn={defaultColumn}
+    // @ts-ignore
+    filterTypes={{ ...defaultFilterFNs, ...filterTypes }}
+    globalFilter={globalFilter}
     icons={{ ...MRT_Default_Icons, ...icons }}
     localization={{ ...MRT_DefaultLocalization_EN, ...localization }}
     positionActionsColumn={positionActionsColumn}

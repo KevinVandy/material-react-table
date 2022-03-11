@@ -1,25 +1,15 @@
 import { matchSorter } from 'match-sorter';
 import { MRT_Row } from '.';
 
-export const fuzzySearchFN = (
-  rows: MRT_Row[],
-  columnIds: string[],
-  filterValue: string | number,
-) =>
-  matchSorter(rows, filterValue.toString().trim(), {
-    keys: columnIds.map((c) => `values.${c}`),
-    sorter: (rankedItems) => rankedItems,
-  });
-
-fuzzySearchFN.autoRemove = (val: any) => !val;
-
 export const fuzzyFilterFN = (
   rows: MRT_Row[],
-  id: string,
+  columnIds: string[] | string,
   filterValue: string | number,
 ) =>
   matchSorter(rows, filterValue.toString().trim(), {
-    keys: [`values.${id}`],
+    keys: Array.isArray(columnIds)
+      ? columnIds.map((c) => `values.${c}`)
+      : [`values.${columnIds}`],
     sorter: (rankedItems) => rankedItems,
   });
 
@@ -146,7 +136,6 @@ export const defaultFilterFNs = {
   endsWith: endsWithFilterFN,
   equals: equalsFilterFN,
   fuzzy: fuzzyFilterFN,
-  globalFuzzy: fuzzySearchFN,
   greaterThan: greaterThanFilterFN,
   lessThan: lessThanFilterFN,
   notEmpty: notEmptyFilterFN,

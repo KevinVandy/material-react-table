@@ -22,9 +22,13 @@ import {
   useSortBy,
   useTable,
 } from 'react-table';
-import type { MRT_FilterType, MRT_Row, MRT_TableInstance } from '.';
+import type {
+  MRT_ColumnInterface,
+  MRT_FilterType,
+  MRT_Row,
+  MRT_TableInstance,
+} from '.';
 import { MRT_FILTER_TYPE } from './enums';
-import { defaultFilterFNs } from './filtersFNs';
 import { MRT_Icons } from './icons';
 import { MRT_Localization } from './localization';
 import { MaterialReactTableProps } from './MaterialReactTable';
@@ -34,6 +38,7 @@ export type UseMRT<D extends {} = {}> = MaterialReactTableProps<D> & {
   anyRowsExpanded: boolean;
   icons: MRT_Icons;
   idPrefix: string;
+  filterTypes: { [key in MRT_FILTER_TYPE]: any };
   localization: MRT_Localization;
   setCurrentEditingRow: Dispatch<SetStateAction<MRT_Row<D> | null>>;
   setCurrentFilterTypes: Dispatch<
@@ -83,16 +88,6 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     props.initialState?.showSearch ?? false,
   );
 
-  const filterTypes = useMemo<{
-    [key in MRT_FILTER_TYPE]: any;
-  }>(
-    () => ({
-      ...defaultFilterFNs,
-      ...props.filterTypes,
-    }),
-    [props.filterTypes],
-  );
-
   const findLowestLevelCols = useCallback(() => {
     let lowestLevelColumns: any[] = props.columns;
     let currentCols: any[] = props.columns;
@@ -123,25 +118,33 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     ),
   );
 
-  const columns = useMemo(
-    () =>
-      findLowestLevelCols().map((column) => {
-        column.filter =
-          filterTypes[
-            currentFilterTypes[column.accessor as string] as MRT_FILTER_TYPE
-          ];
+  const applyFiltersToColumns = useCallback(
+    (cols: MRT_ColumnInterface[]) =>
+      cols.map((column) => {
+        if (column.columns) {
+          applyFiltersToColumns(column.columns);
+        } else {
+          column.filter =
+            props?.filterTypes?.[
+              currentFilterTypes[column.accessor as string] as MRT_FILTER_TYPE
+            ];
+        }
         return column;
       }),
-    [props.columns, filterTypes, currentFilterTypes],
+    [currentFilterTypes, props.filterTypes],
+  );
+
+  const columns = useMemo(
+    () => applyFiltersToColumns(props.columns),
+    [props.columns, applyFiltersToColumns],
   );
 
   const tableInstance = useTable(
+    // @ts-ignore
     {
       ...props,
-      columns,
       // @ts-ignore
-      filterTypes,
-      globalFilter: props.globalFilter ?? 'globalFuzzy',
+      columns,
       useControlledState: (state) =>
         useMemo(
           () => ({
@@ -167,7 +170,7 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
         ),
     },
     ...hooks,
-  ) as MRT_TableInstance<D>;
+  ) as unknown as MRT_TableInstance<D>;
 
   const idPrefix = useMemo(
     () => props.idPrefix ?? Math.random().toString(36).substring(2, 9),

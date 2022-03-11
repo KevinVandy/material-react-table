@@ -149,6 +149,7 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
               <Tooltip arrow title={localization.changeFilterMode}>
                 <span>
                   <IconButton
+                    aria-label={localization.changeFilterMode}
                     onClick={handleFilterMenuOpen}
                     size="small"
                     sx={{ height: '1.75rem', width: '1.75rem' }}
