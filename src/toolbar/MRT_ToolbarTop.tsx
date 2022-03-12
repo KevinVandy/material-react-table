@@ -1,10 +1,28 @@
 import React, { FC } from 'react';
-import { alpha, Box, Toolbar } from '@mui/material';
+import { alpha, Box, Theme, Toolbar } from '@mui/material';
 import { MRT_SearchTextField } from '../inputs/MRT_SearchTextField';
 import { useMRT } from '../useMRT';
 import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
+import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
+import { MRT_TableInstance } from '..';
+
+export const commonToolbarStyles = (
+  theme: Theme,
+  tableInstance: MRT_TableInstance,
+) => ({
+  backgroundColor: theme.palette.background.default,
+  backgroundImage: `linear-gradient(${alpha(
+    theme.palette.common.white,
+    0.05,
+  )},${alpha(theme.palette.common.white, 0.05)})`,
+  display: 'grid',
+  opacity: tableInstance.state.fullScreen ? 0.95 : 1,
+  p: '0 !important',
+  width: '100%',
+  zIndex: 1,
+});
 
 interface Props {}
 
@@ -32,17 +50,9 @@ export const MRT_ToolbarTop: FC<Props> = () => {
       {...toolbarProps}
       sx={(theme) =>
         ({
-          backgroundColor: theme.palette.background.default,
-          backgroundImage: `linear-gradient(${alpha(
-            theme.palette.common.white,
-            0.05,
-          )},${alpha(theme.palette.common.white, 0.05)})`,
-          display: 'grid',
-          p: '0 !important',
           position: tableInstance.state.fullScreen ? 'sticky' : undefined,
           top: tableInstance.state.fullScreen ? '0' : undefined,
-          width: '100%',
-          zIndex: 1,
+          ...commonToolbarStyles(theme, tableInstance),
           ...toolbarProps?.sx,
         } as any)
       }
@@ -76,6 +86,7 @@ export const MRT_ToolbarTop: FC<Props> = () => {
             <MRT_TablePagination />
           )}
       </div>
+      <MRT_LinearProgressBar />
     </Toolbar>
   );
 };

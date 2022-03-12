@@ -32,6 +32,7 @@ import { MRT_FILTER_TYPE } from './enums';
 import { MRT_Icons } from './icons';
 import { MRT_Localization } from './localization';
 import { MaterialReactTableProps } from './MaterialReactTable';
+import { findLowestLevelCols } from './utils';
 
 export type UseMRT<D extends {} = {}> = MaterialReactTableProps<D> & {
   anyRowsCanExpand: boolean;
@@ -88,28 +89,12 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     props.initialState?.showSearch ?? false,
   );
 
-  const findLowestLevelCols = useCallback(() => {
-    let lowestLevelColumns: any[] = props.columns;
-    let currentCols: any[] = props.columns;
-    while (!!currentCols.length && currentCols.some((col) => col.columns)) {
-      const nextCols = currentCols
-        .filter((col) => !!col.columns)
-        .map((col) => col.columns)
-        .flat();
-      if (nextCols.every((col) => !col.columns)) {
-        lowestLevelColumns = [...lowestLevelColumns, ...nextCols];
-      }
-      currentCols = nextCols;
-    }
-    return lowestLevelColumns.filter((col) => !col.columns);
-  }, [props.columns]);
-
   const [currentFilterTypes, setCurrentFilterTypes] = useState<{
     [key: string]: MRT_FilterType;
   }>(() =>
     Object.assign(
       {},
-      ...findLowestLevelCols().map((c) => ({
+      ...findLowestLevelCols(props.columns).map((c) => ({
         [c.accessor as string]:
           c.filter ??
           props?.initialState?.filters?.[c.accessor as any] ??
@@ -146,7 +131,7 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
         : [...Array(10)].map((_) =>
             Object.assign(
               {},
-              ...findLowestLevelCols().map((c) => ({
+              ...findLowestLevelCols(props.columns).map((c) => ({
                 [c.accessor as string]: null,
               })),
             ),

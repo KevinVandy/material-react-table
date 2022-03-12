@@ -34,7 +34,7 @@ export const MRT_TablePagination: FC<Props> = () => {
       }
       {...tablePaginationProps}
       sx={{
-        p: 0,
+        m: '0 0.5rem',
         position: 'relative',
         zIndex: 2,
         ...tablePaginationProps?.sx,

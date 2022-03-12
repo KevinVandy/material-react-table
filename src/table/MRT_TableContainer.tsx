@@ -1,11 +1,5 @@
-import React, { FC, useEffect, useRef } from 'react';
-import {
-  LinearProgress,
-  Paper,
-  TableContainer,
-  Collapse,
-  Box,
-} from '@mui/material';
+import React, { FC, useEffect } from 'react';
+import { Paper, TableContainer, Box } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_Table } from './MRT_Table';
 import { MRT_ToolbarTop } from '../toolbar/MRT_ToolbarTop';
@@ -17,28 +11,17 @@ export const MRT_TableContainer: FC<Props> = () => {
   const {
     hideToolbarBottom,
     hideToolbarTop,
-    isFetching,
-    isLoading,
-    muiLinearProgressProps,
     muiTableContainerProps,
     tableInstance,
   } = useMRT();
   const fullScreen = tableInstance.state.fullScreen;
-  const originalBodyOverflowStyle = useRef<string | undefined>();
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      originalBodyOverflowStyle.current = document?.body?.style?.overflow;
-    }
-  }, [typeof window !== 'undefined']);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       if (fullScreen) {
         document.body.style.overflow = 'hidden';
       } else {
-        document.body.style.overflow =
-          originalBodyOverflowStyle.current ?? 'auto';
+        document.body.style.overflow = 'auto';
       }
     }
   }, [fullScreen]);
@@ -47,11 +30,6 @@ export const MRT_TableContainer: FC<Props> = () => {
     muiTableContainerProps instanceof Function
       ? muiTableContainerProps(tableInstance)
       : muiTableContainerProps;
-
-  const linearProgressProps =
-    muiLinearProgressProps instanceof Function
-      ? muiLinearProgressProps(tableInstance)
-      : muiLinearProgressProps;
 
   return (
     <TableContainer
@@ -62,6 +40,7 @@ export const MRT_TableContainer: FC<Props> = () => {
         height: fullScreen ? '100%' : undefined,
         left: fullScreen ? '0' : undefined,
         m: fullScreen ? '0' : undefined,
+        overflowY: 'hidden',
         position: fullScreen ? 'fixed' : undefined,
         right: fullScreen ? '0' : undefined,
         top: fullScreen ? '0' : undefined,
@@ -72,9 +51,6 @@ export const MRT_TableContainer: FC<Props> = () => {
       }}
     >
       {!hideToolbarTop && <MRT_ToolbarTop />}
-      <Collapse in={isFetching || isLoading} unmountOnExit>
-        <LinearProgress {...linearProgressProps} />
-      </Collapse>
       <Box
         sx={{
           maxWidth: '100%',

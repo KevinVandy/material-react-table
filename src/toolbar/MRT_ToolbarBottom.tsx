@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
-import { alpha, Toolbar } from '@mui/material';
+import { Box, Toolbar } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
+import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
+import { commonToolbarStyles } from './MRT_ToolbarTop';
 
 interface Props {}
 
@@ -29,33 +31,28 @@ export const MRT_ToolbarBottom: FC<Props> = () => {
       {...toolbarProps}
       sx={(theme) =>
         ({
-          backgroundColor: theme.palette.background.default,
-          backgroundImage: `linear-gradient(${alpha(
-            theme.palette.common.white,
-            0.05,
-          )},${alpha(theme.palette.common.white, 0.05)})`,
           bottom: tableInstance.state.fullScreen ? '0' : undefined,
-          display: 'flex',
-          justifyContent: 'space-between',
-          overflowY: 'hidden',
-          p: '0 0.5rem !important',
           position: tableInstance.state.fullScreen ? 'fixed' : undefined,
-          width: 'calc(100% - 1rem)',
-          zIndex: 1,
+          ...commonToolbarStyles(theme, tableInstance),
           ...toolbarProps?.sx,
         } as any)
       }
     >
-      {!hideToolbarInternalActions && positionToolbarActions === 'bottom' ? (
-        <MRT_ToolbarInternalButtons />
-      ) : (
-        <span />
-      )}
-      {positionToolbarAlertBanner === 'bottom' && <MRT_ToolbarAlertBanner />}
-      {!manualPagination &&
-        ['bottom', 'both'].includes(positionPagination ?? '') && (
-          <MRT_TablePagination />
+      <MRT_LinearProgressBar />
+      <Box
+        sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
+      >
+        {!hideToolbarInternalActions && positionToolbarActions === 'bottom' ? (
+          <MRT_ToolbarInternalButtons />
+        ) : (
+          <span />
         )}
+        {positionToolbarAlertBanner === 'bottom' && <MRT_ToolbarAlertBanner />}
+        {!manualPagination &&
+          ['bottom', 'both'].includes(positionPagination ?? '') && (
+            <MRT_TablePagination />
+          )}
+      </Box>
     </Toolbar>
   );
 };

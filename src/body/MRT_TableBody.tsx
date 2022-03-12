@@ -28,7 +28,9 @@ export const MRT_TableBody: FC<Props> = () => {
   return (
     <TableBody
       {...tableBodyProps}
-      sx={{ overflowY: 'hidden', ...tableBodyProps?.sx }}
+      sx={{
+        ...tableBodyProps?.sx,
+      }}
     >
       {rows.map((row: MRT_Row) => {
         tableInstance.prepareRow(row);

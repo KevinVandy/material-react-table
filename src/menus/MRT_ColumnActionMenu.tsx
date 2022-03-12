@@ -102,13 +102,14 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     setAnchorEl(null);
   };
 
+  const handleShowAllColumns = () => {
+    tableInstance.toggleHideAllColumns(false);
+    setAnchorEl(null);
+  };
+
   const handleOpenFilterModeMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation();
     setFilterMenuAnchorEl(event.currentTarget);
-  };
-
-  const handleShowAllColumns = () => {
-    tableInstance.toggleHideAllColumns(false);
   };
 
   const handleOpenShowHideColumnsMenu = (
