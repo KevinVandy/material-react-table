@@ -90,7 +90,7 @@ export type MRT_TableOptions<D extends {} = {}> = TableOptions<D> &
   UseRowSelectOptions<D> &
   UseRowStateOptions<D> &
   UseSortByOptions<D> & {
-    columns: (Column<D> & MRT_ColumnInterface)[];
+    columns: MRT_ColumnInterface[];
     data: D[];
     initialState?: Partial<MRT_TableState>;
   };
@@ -107,13 +107,13 @@ export type MRT_TableInstance<D extends {} = {}> = TableInstance<D> &
   UseRowStateInstanceProps<D> &
   UseSortByInstanceProps<D> & {
     columns: (Column<D> & MRT_ColumnInstance<D>)[];
-    headerGroups: MRT_HeaderGroup<D>[];
     footerGroups: MRT_HeaderGroup<D>[];
-    state: MRT_TableState<D>;
-    rows: MRT_Row<D>[];
+    getToggleAllRowsExpandedProps: () => void;
+    headerGroups: MRT_HeaderGroup<D>[];
     page: MRT_Row<D>[];
     resetResizing: () => void;
-    getToggleAllRowsExpandedProps: () => void;
+    rows: MRT_Row<D>[];
+    state: MRT_TableState<D>;
   };
 
 export type MRT_ColumnInterface<D extends {} = {}> = ColumnInterface<D> &
@@ -132,13 +132,13 @@ export type MRT_ColumnInterface<D extends {} = {}> = ColumnInterface<D> &
     Filter?: ({ column }: { column: MRT_HeaderGroup<D> }) => ReactNode;
     Footer?: string;
     Header?: string;
-    accessor: string;
-    columns?: (Column<D> & MRT_ColumnInterface<D>)[];
+    accessor?: string;
+    columns?: MRT_ColumnInterface<D>[];
     disableFilters?: boolean;
     editable?: boolean;
     filter?: MRT_FilterType | string | FilterType<D>;
     filterSelectOptions?: (string | { text: string; value: string })[];
-    filterTypes: MRT_FILTER_TYPE[];
+    filterTypes?: (MRT_FILTER_TYPE | string)[];
     muiTableBodyCellEditTextFieldProps?:
       | TextFieldProps
       | ((cell: MRT_Cell<D>) => TextFieldProps);
@@ -380,9 +380,11 @@ export default <D extends {}>({
   ...rest
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
+    //@ts-ignore
     defaultColumn={defaultColumn}
-    // @ts-ignore
+    //@ts-ignore
     filterTypes={{ ...defaultFilterFNs, ...filterTypes }}
+    //@ts-ignore
     globalFilter={globalFilter}
     icons={{ ...MRT_Default_Icons, ...icons }}
     localization={{ ...MRT_DefaultLocalization_EN, ...localization }}

@@ -1,13 +1,13 @@
 import React, {
   Context,
+  Dispatch,
   PropsWithChildren,
+  SetStateAction,
   createContext,
+  useCallback,
   useContext,
   useMemo,
   useState,
-  Dispatch,
-  SetStateAction,
-  useCallback,
 } from 'react';
 import {
   PluginHook,
@@ -139,12 +139,28 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     [props.columns, applyFiltersToColumns],
   );
 
+  const data = useMemo(
+    () =>
+      !props.isLoading || !!props.data.length
+        ? props.data
+        : [...Array(10)].map((_) =>
+            Object.assign(
+              {},
+              ...findLowestLevelCols().map((c) => ({
+                [c.accessor as string]: null,
+              })),
+            ),
+          ),
+    [props.data, props.isLoading],
+  );
+
   const tableInstance = useTable(
     // @ts-ignore
     {
       ...props,
       // @ts-ignore
       columns,
+      data,
       useControlledState: (state) =>
         useMemo(
           () => ({

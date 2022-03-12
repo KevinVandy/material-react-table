@@ -7,7 +7,7 @@ const meta: Meta = {
   title: 'Features/Column Action Examples',
   parameters: {
     status: {
-      type: 'beta',
+      type: 'stable',
     },
   },
 };

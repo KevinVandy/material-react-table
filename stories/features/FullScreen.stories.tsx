@@ -7,7 +7,7 @@ const meta: Meta = {
   title: 'Features/Full Screen Examples',
   parameters: {
     status: {
-      type: 'alpha',
+      type: 'beta',
     },
   },
 };

@@ -30,7 +30,7 @@ export const MRT_TableContainer: FC<Props> = () => {
     if (typeof window !== 'undefined') {
       originalBodyOverflowStyle.current = document?.body?.style?.overflow;
     }
-  }, []);
+  }, [typeof window !== 'undefined']);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

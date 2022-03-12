@@ -76,7 +76,6 @@ export const CustomSpanishLocalizationExample: Story<
         save: 'Salvar',
         rowActions: 'Acciones de fila',
         edit: 'Editar',
-        actions: 'Acciones',
         clearSearch: 'Borrar búsqueda',
         search: 'Búsqueda',
         toggleSelectAll: 'Seleccionar todo',

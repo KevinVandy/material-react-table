@@ -7,7 +7,7 @@ const meta: Meta = {
   title: 'Features/Dense Padding Examples',
   parameters: {
     status: {
-      type: 'beta',
+      type: 'stable',
     },
   },
 };
