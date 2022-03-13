@@ -367,7 +367,7 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
     ) => ReactNode;
   };
 
-export default <D extends {}>({
+export default <D extends {} = {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
   filterTypes,
   globalFilter = 'fuzzy',

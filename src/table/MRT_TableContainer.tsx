@@ -40,7 +40,7 @@ export const MRT_TableContainer: FC<Props> = () => {
         height: fullScreen ? '100%' : undefined,
         left: fullScreen ? '0' : undefined,
         m: fullScreen ? '0' : undefined,
-        overflowY: 'hidden',
+        overflowY: !fullScreen ? 'hidden' : undefined,
         position: fullScreen ? 'fixed' : undefined,
         right: fullScreen ? '0' : undefined,
         top: fullScreen ? '0' : undefined,

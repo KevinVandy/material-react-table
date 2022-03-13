@@ -1,7 +1,7 @@
 import { matchSorter } from 'match-sorter';
 import { MRT_Row } from '.';
 
-export const fuzzyFilterFN = (
+export const fuzzy = (
   rows: MRT_Row[],
   columnIds: string[] | string,
   filterValue: string | number,
@@ -13,9 +13,9 @@ export const fuzzyFilterFN = (
     sorter: (rankedItems) => rankedItems,
   });
 
-fuzzyFilterFN.autoRemove = (val: any) => !val;
+fuzzy.autoRemove = (val: any) => !val;
 
-export const containsFilterFN = (
+export const contains = (
   rows: MRT_Row[],
   id: string,
   filterValue: string | number,
@@ -28,9 +28,9 @@ export const containsFilterFN = (
       .includes(filterValue.toString().toLowerCase().trim()),
   );
 
-containsFilterFN.autoRemove = (val: any) => !val;
+contains.autoRemove = (val: any) => !val;
 
-export const startsWithFilterFN = (
+export const startsWith = (
   rows: MRT_Row[],
   id: string,
   filterValue: string | number,
@@ -43,9 +43,9 @@ export const startsWithFilterFN = (
       .startsWith(filterValue.toString().toLowerCase().trim()),
   );
 
-startsWithFilterFN.autoRemove = (val: any) => !val;
+startsWith.autoRemove = (val: any) => !val;
 
-export const endsWithFilterFN = (
+export const endsWith = (
   rows: MRT_Row[],
   id: string,
   filterValue: string | number,
@@ -58,9 +58,9 @@ export const endsWithFilterFN = (
       .endsWith(filterValue.toString().toLowerCase().trim()),
   );
 
-endsWithFilterFN.autoRemove = (val: any) => !val;
+endsWith.autoRemove = (val: any) => !val;
 
-export const equalsFilterFN = (
+export const equals = (
   rows: MRT_Row[],
   id: string,
   filterValue: string | number,
@@ -71,9 +71,9 @@ export const equalsFilterFN = (
       filterValue.toString().toLowerCase().trim(),
   );
 
-equalsFilterFN.autoRemove = (val: any) => !val;
+equals.autoRemove = (val: any) => !val;
 
-export const notEqualsFilterFN = (
+export const notEquals = (
   rows: MRT_Row[],
   id: string,
   filterValue: string | number,
@@ -84,9 +84,9 @@ export const notEqualsFilterFN = (
       filterValue.toString().toLowerCase().trim(),
   );
 
-notEqualsFilterFN.autoRemove = (val: any) => !val;
+notEquals.autoRemove = (val: any) => !val;
 
-export const greaterThanFilterFN = (
+export const greaterThan = (
   rows: MRT_Row[],
   id: string,
   filterValue: string | number,
@@ -98,9 +98,9 @@ export const greaterThanFilterFN = (
         filterValue.toString().toLowerCase().trim(),
   );
 
-greaterThanFilterFN.autoRemove = (val: any) => !val;
+greaterThan.autoRemove = (val: any) => !val;
 
-export const lessThanFilterFN = (
+export const lessThan = (
   rows: MRT_Row[],
   id: string,
   filterValue: string | number,
@@ -112,33 +112,33 @@ export const lessThanFilterFN = (
         filterValue.toString().toLowerCase().trim(),
   );
 
-lessThanFilterFN.autoRemove = (val: any) => !val;
+lessThan.autoRemove = (val: any) => !val;
 
-export const emptyFilterFN = (
+export const empty = (
   rows: MRT_Row[],
   id: string,
   _filterValue: string | number,
 ) => rows.filter((row) => !row.values[id].toString().toLowerCase().trim());
 
-emptyFilterFN.autoRemove = (val: any) => !val;
+empty.autoRemove = (val: any) => !val;
 
-export const notEmptyFilterFN = (
+export const notEmpty = (
   rows: MRT_Row[],
   id: string,
   _filterValue: string | number,
 ) => rows.filter((row) => !!row.values[id].toString().toLowerCase().trim());
 
-notEmptyFilterFN.autoRemove = (val: any) => !val;
+notEmpty.autoRemove = (val: any) => !val;
 
 export const defaultFilterFNs = {
-  contains: containsFilterFN,
-  empty: emptyFilterFN,
-  endsWith: endsWithFilterFN,
-  equals: equalsFilterFN,
-  fuzzy: fuzzyFilterFN,
-  greaterThan: greaterThanFilterFN,
-  lessThan: lessThanFilterFN,
-  notEmpty: notEmptyFilterFN,
-  notEquals: notEqualsFilterFN,
-  startsWith: startsWithFilterFN,
+  contains,
+  empty,
+  endsWith,
+  equals,
+  fuzzy,
+  greaterThan,
+  lessThan,
+  notEmpty,
+  notEquals,
+  startsWith,
 };

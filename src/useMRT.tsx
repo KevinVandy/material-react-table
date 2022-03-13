@@ -128,7 +128,7 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     () =>
       !props.isLoading || !!props.data.length
         ? props.data
-        : [...Array(10)].map((_) =>
+        : [...Array(10).fill(null)].map((_) =>
             Object.assign(
               {},
               ...findLowestLevelCols(props.columns).map((c) => ({

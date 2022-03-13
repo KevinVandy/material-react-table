@@ -77,6 +77,7 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
     return <>{column.Filter?.({ column })}</>;
   }
 
+  const filterId = `mrt-${idPrefix}-${column.id}-filter-text-field`;
   const filterType = tableInstance.state.currentFilterTypes[column.id];
   const isSelectFilter = !!column.filterSelectOptions;
   const filterChipLabel =
@@ -98,7 +99,7 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
     <>
       <TextField
         fullWidth
-        id={`mrt-${idPrefix}-${column.id}-filter-text-field`}
+        id={filterId}
         inputProps={{
           disabled: !!filterChipLabel,
           sx: {
@@ -108,17 +109,28 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
           title: filterPlaceholder,
         }}
         helperText={
-          filterType instanceof Function
-            ? ''
-            : localization.filterMode.replace(
-                '{filterType}',
-                // @ts-ignore
-                localization[
-                  `filter${
-                    filterType.charAt(0).toUpperCase() + filterType.slice(1)
-                  }`
-                ],
-              )
+          <label htmlFor={filterId}>
+            {filterType instanceof Function
+              ? localization.filterMode.replace(
+                  '{filterType}',
+                  // @ts-ignore
+                  localization[
+                    `filter${
+                      filterType.name.charAt(0).toUpperCase() +
+                      filterType.name.slice(1)
+                    }`
+                  ] ?? '',
+                ) ?? ''
+              : localization.filterMode.replace(
+                  '{filterType}',
+                  // @ts-ignore
+                  localization[
+                    `filter${
+                      filterType.charAt(0).toUpperCase() + filterType.slice(1)
+                    }`
+                  ],
+                )}
+          </label>
         }
         FormHelperTextProps={{
           sx: { fontSize: '0.6rem', lineHeight: '0.8rem' },
