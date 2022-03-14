@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEvent } from 'react';
 import { IconButton, TableCell } from '@mui/material';
 import { useMRT } from '../useMRT';
 import type { MRT_Row } from '..';
@@ -12,11 +12,18 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
   const {
     icons: { ExpandMoreIcon },
     localization,
+    onRowExpandChange,
     renderDetailPanel,
     tableInstance: {
       state: { densePadding },
     },
   } = useMRT();
+
+  const handleToggleExpand = (event: MouseEvent<HTMLButtonElement>) => {
+    // @ts-ignore
+    row.getToggleRowExpandedProps()?.onClick(event);
+    onRowExpandChange?.(event, row);
+  };
 
   return (
     <TableCell
@@ -32,6 +39,7 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
         disabled={!row.canExpand && !renderDetailPanel}
         title={localization.expand}
         {...row.getToggleRowExpandedProps()}
+        onClick={handleToggleExpand}
       >
         <ExpandMoreIcon
           style={{

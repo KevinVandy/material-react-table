@@ -42,13 +42,6 @@ const RootPropTable = () => {
         link: 'https://react-table.tanstack.com/docs/api/useTable#column-options',
         linkText: 'react-table column api docs',
         required: true,
-        // subRows: [
-        //   {
-        //     prop: 'Header',
-        //     type: 'string',
-        //     description: 'String that is used as the header for this column',
-        //   },
-        // ],
       },
       {
         prop: 'data',
@@ -137,6 +130,14 @@ const RootPropTable = () => {
         linkText: 'MRT row selection docs',
       },
       {
+        prop: 'filterTypes',
+        type: 'Object<string, any>',
+        description:
+          'Override and define your own custom filter types and functions',
+        link: '/docs/guides/filtering',
+        linkText: 'MRT filtering docs',
+      },
+      {
         prop: 'hideTabbleFooter',
         type: 'boolean',
         description: 'Hide the table footer rows (not toolbar with pagination)',
@@ -203,6 +204,13 @@ const RootPropTable = () => {
           'Override any of the default english strings to whatever you want',
       },
       {
+        prop: 'muiLiniearProgressProps',
+        type: 'MUI LinearProgressProps',
+        description: 'Override the default Mui LinearProgress props',
+        link: 'https://material-ui.com/api/linear-progress/#props',
+        linkText: 'Mui LinearProgress docs',
+      },
+      {
         prop: 'muiSearchTextFieldProps',
         type: 'MUI TextFieldProps',
         description:
@@ -225,6 +233,13 @@ const RootPropTable = () => {
           'Pass in custom props to every Mui TableBodyCell. Also available within the columns definition',
         link: 'https://mui.com/api/table-cell',
         linkText: 'Mui TableCell API docs',
+      },
+      {
+        prop: 'muiTableBodyCellSkeletonProps',
+        type: 'MUI SkeletonProps',
+        description: 'Pass in custom props to the Mui Skeleton',
+        link: 'https://mui.com/api/skeleton',
+        linkText: 'Mui Skeleton API docs',
       },
       {
         prop: 'muiTableBodyProps',
@@ -352,8 +367,39 @@ const RootPropTable = () => {
       },
       {
         prop: 'onColumnHide',
-        type: '(column, visibleColumns) => void',
+        type: '(column, hiddenColumns) => void',
         description: 'Callback for when a column is hidden',
+      },
+      {
+        prop: 'onDetailPanelClick',
+        type: '(event, row) => void',
+        description: 'Callback for when a detail panel is clicked',
+      },
+      {
+        prop: 'onGlobalFilterChange',
+        type: '(event) => void',
+        description:
+          'Callback for when the value search box (global filter) changes',
+      },
+      {
+        prop: 'onRowClick',
+        type: '(event, row) => void',
+        description: 'Callback for when a row is clicked',
+      },
+      {
+        prop: 'onRowEditSubmit',
+        type: '(event, row) => void',
+        description: 'Callback for when a row save button is clicked',
+      },
+      {
+        prop: 'onRowSelectChange',
+        type: '(event, row, selectedRows) => void',
+        description: 'Callback for when a row is selected or deselected',
+      },
+      {
+        prop: 'onRowSelectAllChange',
+        type: '(event, selectedRows) => void',
+        description: 'Callback for when all rows are selected or deselected',
       },
     ],
     [],
@@ -368,7 +414,6 @@ const RootPropTable = () => {
       initialState={{
         densePadding: true,
         hiddenColumns: ['default'],
-        showFilters: true,
         showSearch: true,
         sortBy: [{ id: 'prop', desc: false }],
       }}

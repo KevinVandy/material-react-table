@@ -3,6 +3,7 @@ import { FormControlLabel, MenuItem, Switch } from '@mui/material';
 import { ColumnInstance } from 'react-table';
 import type { MRT_ColumnInstance } from '..';
 import { commonMenuItemStyles } from './MRT_ColumnActionMenu';
+import { useMRT } from '../useMRT';
 
 interface Props {
   column: MRT_ColumnInstance;
@@ -13,6 +14,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
   column,
   isSubMenu,
 }) => {
+  const { onColumnHide, tableInstance } = useMRT();
   const isParentHeader = !!column?.columns?.length;
 
   const allChildColumnsVisible =
@@ -29,6 +31,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
     } else {
       column.toggleHidden();
     }
+    onColumnHide?.(column, tableInstance.state.hiddenColumns);
   };
 
   return (

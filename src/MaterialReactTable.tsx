@@ -314,7 +314,7 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
       event: MouseEvent<HTMLTableCellElement>,
       cell: MRT_Cell<D>,
     ) => void;
-    onColumnHide?: (column: Column<D>, visibleColumns: Column<D>[]) => void;
+    onColumnHide?: (column: Column<D>, hiddenColumns?: string[]) => void;
     onDetailPanelClick?: (
       event: MouseEvent<HTMLTableCellElement>,
       row: Row<D>,
