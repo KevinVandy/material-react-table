@@ -21,21 +21,18 @@ const Example = () => {
   const parsedData = useMemo(
     () =>
       remoteData.map((rd) => ({
-        id: rd.id,
         name: rd.name,
         username: rd.username,
         email: rd.email,
         address: rd.address.street,
+        city: rd.address.city,
+        zipcode: rd.address.zipcode,
       })) ?? [],
     [remoteData],
   );
 
   const columns = useMemo(
     () => [
-      {
-        Header: 'Id',
-        accessor: 'id',
-      },
       {
         Header: 'Name',
         accessor: 'name',
@@ -51,6 +48,14 @@ const Example = () => {
       {
         Header: 'Address',
         accessor: 'address',
+      },
+      {
+        Header: 'City',
+        accessor: 'city',
+      },
+      {
+        Header: 'Zip Code',
+        accessor: 'zipcode',
       },
     ],
     [],

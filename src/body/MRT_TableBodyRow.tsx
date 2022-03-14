@@ -1,5 +1,5 @@
 import React, { FC, MouseEvent } from 'react';
-import { alpha, TableCell, TableRow } from '@mui/material';
+import { TableCell, TableRow } from '@mui/material';
 import {
   commonTableBodyCellStyles,
   MRT_TableBodyCell,
@@ -52,15 +52,8 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         onClick={(event: MouseEvent<HTMLTableRowElement>) =>
           onRowClick?.(event, row)
         }
+        selected={row.isSelected}
         {...tableRowProps}
-        sx={(theme) =>
-          ({
-            backgroundColor: row.isSelected
-              ? alpha(theme.palette.primary.light, 0.1)
-              : 'transparent',
-            ...tableRowProps?.sx,
-          } as any)
-        }
       >
         {enableRowNumbers && (
           <TableCell sx={{ ...commonTableBodyCellStyles(densePadding) }}>
