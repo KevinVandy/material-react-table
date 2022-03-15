@@ -37,27 +37,23 @@ export const RowEditingEnabled: Story<MaterialReactTableProps> = () => {
         {
           Header: 'First Name',
           accessor: 'firstName' as const,
-          editable: true,
         },
         {
           Header: 'Last Name',
           accessor: 'lastName' as const,
-          editable: true,
         },
         {
           Header: 'Address',
           accessor: 'address' as const,
-          editable: true,
         },
         {
           Header: 'State',
           accessor: 'state' as const,
-          editable: true,
         },
         {
           Header: 'Phone Number',
           accessor: 'phoneNumber' as const,
-          editable: true,
+          disableEditing: true,
         },
       ]}
       data={tableData}
@@ -139,23 +135,18 @@ export const RowEditingCustomizeInput: Story<MaterialReactTableProps> = () => {
         {
           Header: 'First Name',
           accessor: 'firstName' as const,
-          editable: true,
         },
         {
           Header: 'Last Name',
           accessor: 'lastName' as const,
-          editable: true,
         },
         {
           Header: 'Address',
           accessor: 'address' as const,
-          editable: true,
         },
-
         {
           Header: 'State',
           accessor: 'state' as const,
-          editable: true,
           muiTableBodyCellEditTextFieldProps: (cell) => ({
             children: usStates.map((state) => (
               <MenuItem key={state} value={state}>
@@ -169,7 +160,6 @@ export const RowEditingCustomizeInput: Story<MaterialReactTableProps> = () => {
         {
           Header: 'Phone Number',
           accessor: 'phoneNumber' as const,
-          editable: true,
         },
       ]}
       data={tableData}
@@ -217,7 +207,6 @@ export const RowEditingWithValidation: Story<MaterialReactTableProps> = () => {
         {
           Header: 'First Name',
           accessor: 'firstName' as const,
-          editable: true,
           muiTableBodyCellEditTextFieldProps: {
             error: !!firstNameError,
             helperText: firstNameError,
@@ -229,7 +218,6 @@ export const RowEditingWithValidation: Story<MaterialReactTableProps> = () => {
         {
           Header: 'Last Name',
           accessor: 'lastName' as const,
-          editable: true,
           muiTableBodyCellEditTextFieldProps: {
             error: !!lastNameError,
             helperText: lastNameError,
@@ -241,7 +229,6 @@ export const RowEditingWithValidation: Story<MaterialReactTableProps> = () => {
         {
           Header: 'Phone Number',
           accessor: 'phoneNumber' as const,
-          editable: true,
           muiTableBodyCellEditTextFieldProps: {
             error: !!phoneNumberError,
             helperText: phoneNumberError,
@@ -279,27 +266,22 @@ export const RowEditingEnabledAsync: Story<MaterialReactTableProps> = () => {
         {
           Header: 'First Name',
           accessor: 'firstName' as const,
-          editable: true,
         },
         {
           Header: 'Last Name',
           accessor: 'lastName' as const,
-          editable: true,
         },
         {
           Header: 'Address',
           accessor: 'address' as const,
-          editable: true,
         },
         {
           Header: 'State',
           accessor: 'state' as const,
-          editable: true,
         },
         {
           Header: 'Phone Number',
           accessor: 'phoneNumber' as const,
-          editable: true,
         },
       ]}
       data={tableData}

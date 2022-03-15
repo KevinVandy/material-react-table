@@ -1,4 +1,12 @@
-import { alpha, Box, Card, Typography, useTheme, Link } from '@mui/material';
+import {
+  alpha,
+  Box,
+  Card,
+  Typography,
+  useTheme,
+  Link,
+  CardContent,
+} from '@mui/material';
 import Image from 'next/image';
 
 const cardData = [
@@ -79,6 +87,8 @@ export const LinkCards = () => {
                 cursor: 'pointer',
                 display: 'flex',
                 flexDirection: 'column',
+                minWidth: '200px',
+                minHeight: '180px',
                 fontWeight: 'bold',
                 gap: '1rem',
                 justifyContent: 'center',
@@ -104,7 +114,9 @@ export const LinkCards = () => {
                 height={100}
                 objectFit="scale-down"
               />
-              {cd.text}
+              <CardContent sx={{ whiteSpace: 'nowrap', pb: '0 !important' }}>
+                {cd.text}
+              </CardContent>
             </Card>
           </Link>
         ))}

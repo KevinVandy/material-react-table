@@ -44,13 +44,13 @@ const Example: FC = () => {
 
   const parsedData = useMemo(
     () =>
-      remoteData.map((rd: UserData) => ({
-        name: rd.name,
-        username: rd.username,
-        email: rd.email,
-        address: rd.address.street,
-        city: rd.address.city,
-        zipcode: rd.address.zipcode,
+      remoteData.map((userData: UserData) => ({
+        name: userData.name,
+        username: userData.username,
+        email: userData.email,
+        address: userData.address.street,
+        city: userData.address.city,
+        zipcode: userData.address.zipcode,
       })) ?? [],
     [remoteData],
   );

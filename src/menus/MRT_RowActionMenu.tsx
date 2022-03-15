@@ -1,8 +1,11 @@
 import React, { FC } from 'react';
-import { Menu, MenuItem } from '@mui/material';
+import { Box, Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
 import type { MRT_Row } from '..';
-import { commonMenuItemStyles } from './MRT_ColumnActionMenu';
+import {
+  commonListItemStyles,
+  commonMenuItemStyles,
+} from './MRT_ColumnActionMenu';
 
 interface Props {
   anchorEl: HTMLElement | null;
@@ -36,8 +39,10 @@ export const MRT_RowActionMenu: FC<Props> = ({
     >
       {enableRowEditing && (
         <MenuItem onClick={handleEdit} sx={commonMenuItemStyles}>
-          <EditIcon />
-          {localization.edit}
+          <Box sx={commonListItemStyles}>
+            <EditIcon />
+            {localization.edit}
+          </Box>
         </MenuItem>
       )}
       {renderRowActionMenuItems?.(row, tableInstance, () =>

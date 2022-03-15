@@ -86,7 +86,7 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
 
         <Divider />
 
-        <ListItemHeader>Examples</ListItemHeader>
+        <ListItemHeader>Quick Examples</ListItemHeader>
 
         <Link href="/docs/examples/basic" passHref>
           <ListItemLevel2>Basic Example</ListItemLevel2>
@@ -99,6 +99,9 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
         </Link>
         <Link href="/docs/examples/remote" passHref>
           <ListItemLevel2>Remote Data Example</ListItemLevel2>
+        </Link>
+        <Link href="/docs/examples/ssr" passHref>
+          <ListItemLevel2>SSR Example</ListItemLevel2>
         </Link>
 
         <Divider />

@@ -134,8 +134,8 @@ export type MRT_ColumnInterface<D extends {} = {}> = ColumnInterface<D> &
     Header?: string;
     accessor?: string;
     columns?: MRT_ColumnInterface<D>[];
+    disableEditing?: boolean;
     disableFilters?: boolean;
-    editable?: boolean;
     filter?: MRT_FilterType | string | FilterType<D>;
     filterSelectOptions?: (string | { text: string; value: string })[];
     filterTypes?: (MRT_FILTER_TYPE | string)[];

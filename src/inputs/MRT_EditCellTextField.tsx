@@ -47,7 +47,7 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
     },
   };
 
-  if (cell.column.editable && cell.column.Edit) {
+  if (!cell.column.disableEditing && cell.column.Edit) {
     return <>{cell.column.Edit({ ...textFieldProps, cell })}</>;
   }
 

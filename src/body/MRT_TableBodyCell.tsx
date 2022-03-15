@@ -72,7 +72,8 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
           width={Math.random() * (120 - 60) + 60}
           {...muiTableBodyCellSkeletonProps}
         />
-      ) : currentEditingRow?.id === cell.row.id ? (
+      ) : !cell.column.disableEditing &&
+        currentEditingRow?.id === cell.row.id ? (
         <MRT_EditCellTextField cell={cell} />
       ) : cell.isPlaceholder ? null : cell.isAggregated ? (
         cell.render('Aggregated')
