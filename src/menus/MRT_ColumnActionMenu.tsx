@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Box, IconButton, Menu, MenuItem } from '@mui/material';
+import { Box, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
 import type { MRT_HeaderGroup } from '..';
 import { MRT_FilterTypeMenu } from './MRT_FilterTypeMenu';
@@ -14,7 +14,6 @@ export const commonMenuItemStyles = {
 
 export const commonListItemStyles = {
   display: 'flex',
-  gap: '0.75rem',
   alignItems: 'center',
 };
 
@@ -137,7 +136,9 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             sx={commonMenuItemStyles}
           >
             <Box sx={commonListItemStyles}>
-              <ClearAllIcon />
+              <ListItemIcon>
+                <ClearAllIcon />
+              </ListItemIcon>
               {localization.clearSort}
             </Box>
           </MenuItem>,
@@ -148,7 +149,9 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             sx={commonMenuItemStyles}
           >
             <Box sx={commonListItemStyles}>
-              <SortIcon />
+              <ListItemIcon>
+                <SortIcon />
+              </ListItemIcon>
               {localization.sortByColumnAsc?.replace(
                 '{column}',
                 String(column.Header),
@@ -165,7 +168,9 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             sx={commonMenuItemStyles}
           >
             <Box sx={commonListItemStyles}>
-              <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
+              <ListItemIcon>
+                <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
+              </ListItemIcon>
               {localization.sortByColumnDesc?.replace(
                 '{column}',
                 String(column.Header),
@@ -182,7 +187,9 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             sx={commonMenuItemStyles}
           >
             <Box sx={commonListItemStyles}>
-              <FilterListOffIcon />
+              <ListItemIcon>
+                <FilterListOffIcon />
+              </ListItemIcon>
               {localization.clearFilter}
             </Box>
           </MenuItem>,
@@ -193,7 +200,9 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             sx={commonMenuItemStyles}
           >
             <Box sx={commonListItemStyles}>
-              <FilterListIcon />
+              <ListItemIcon>
+                <FilterListIcon />
+              </ListItemIcon>
               {localization.filterByColumn?.replace(
                 '{column}',
                 String(column.Header),
@@ -227,7 +236,9 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             sx={commonMenuItemStyles}
           >
             <Box sx={commonListItemStyles}>
-              <DynamicFeedIcon />
+              <ListItemIcon>
+                <DynamicFeedIcon />
+              </ListItemIcon>
               {localization[
                 column.isGrouped ? 'ungroupByColumn' : 'groupByColumn'
               ]?.replace('{column}', String(column.Header))}
@@ -237,7 +248,9 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       {!disableColumnHiding && [
         <MenuItem key={0} onClick={handleHideColumn} sx={commonMenuItemStyles}>
           <Box sx={commonListItemStyles}>
-            <VisibilityOffIcon />
+            <ListItemIcon>
+              <VisibilityOffIcon />
+            </ListItemIcon>
             {localization.hideColumn?.replace(
               '{column}',
               String(column.Header),
@@ -251,8 +264,9 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           sx={commonMenuItemStyles}
         >
           <Box sx={commonListItemStyles}>
-            <ViewColumnIcon />
-
+            <ListItemIcon>
+              <ViewColumnIcon />
+            </ListItemIcon>
             {localization.showAllColumns?.replace(
               '{column}',
               String(column.Header),

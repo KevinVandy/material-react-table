@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Box, Menu, MenuItem } from '@mui/material';
+import { Box, ListItemIcon, Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
 import type { MRT_Row } from '..';
 import {
@@ -40,7 +40,9 @@ export const MRT_RowActionMenu: FC<Props> = ({
       {enableRowEditing && (
         <MenuItem onClick={handleEdit} sx={commonMenuItemStyles}>
           <Box sx={commonListItemStyles}>
-            <EditIcon />
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
             {localization.edit}
           </Box>
         </MenuItem>

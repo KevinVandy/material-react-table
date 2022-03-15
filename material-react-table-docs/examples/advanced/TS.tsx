@@ -1503,13 +1503,14 @@ const Example: FC = () => {
           </div>
         </div>
       )}
-      renderRowActionMenuItems={(row, _tableInstance, closeMenu) => [
+      renderRowActionMenuItems={(_row, _tableInstance, closeMenu) => [
         <MenuItem
           key={0}
           onClick={() => {
             // View profile logic...
             closeMenu();
           }}
+          sx={{ m: 0 }}
         >
           <ListItemIcon>
             <AccountCircle />
@@ -1522,6 +1523,7 @@ const Example: FC = () => {
             // Send email logic...
             closeMenu();
           }}
+          sx={{ m: 0 }}
         >
           <ListItemIcon>
             <Send />
