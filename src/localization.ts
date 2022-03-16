@@ -5,7 +5,9 @@ export interface MRT_Localization {
   clearFilter: string;
   clearSearch: string;
   clearSort: string;
+  clickToCopy: string;
   columnActions: string;
+  copiedToClipboard: string;
   edit: string;
   expand: string;
   expandAll: string;
@@ -52,7 +54,9 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   clearFilter: 'Clear filter',
   clearSearch: 'Clear search',
   clearSort: 'Clear sort',
+  clickToCopy: 'Click to copy',
   columnActions: 'Column Actions',
+  copiedToClipboard: 'Copied to clipboard',
   edit: 'Edit',
   expand: 'Expand',
   expandAll: 'Expand all',

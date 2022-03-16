@@ -1,8 +1,9 @@
 import React, { FC, MouseEvent } from 'react';
-import { Skeleton, TableCell, TableCellProps } from '@mui/material';
+import { Box, Skeleton, TableCell, TableCellProps } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import type { MRT_Cell } from '..';
+import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 
 export const commonTableBodyCellStyles = (densePadding: boolean) => ({
   p: densePadding ? '0.5rem' : '1rem',
@@ -22,6 +23,7 @@ interface Props {
 
 export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
   const {
+    enableCellCopyButtons,
     isLoading,
     muiTableBodyCellProps,
     muiTableBodyCellSkeletonProps,
@@ -81,6 +83,11 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
         <span>
           {cell.render('Cell')} ({cell.row.subRows.length})
         </span>
+      ) : enableCellCopyButtons && !cell.column.disableCellCopyButton ? (
+        <Box sx={{ whiteSpace: 'nowrap' }}>
+          {cell.render('Cell')}
+          {<MRT_CopyButton cell={cell} />}
+        </Box>
       ) : (
         cell.render('Cell')
       )}
