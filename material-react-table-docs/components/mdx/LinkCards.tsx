@@ -1,12 +1,4 @@
-import {
-  alpha,
-  Box,
-  Card,
-  Typography,
-  useTheme,
-  Link,
-  CardContent,
-} from '@mui/material';
+import { alpha, Box, Card, Typography, useTheme, Link } from '@mui/material';
 import Image from 'next/image';
 
 const cardData = [
@@ -35,7 +27,7 @@ const cardData = [
     href: 'https://discord.gg/5wqyRx6fnm',
   },
   {
-    text: 'Storybook Examples',
+    text: 'Storybook',
     image: '/storybook.svg',
     alt: 'storybook examples',
     href: 'https://material-react-table.dev',
@@ -48,13 +40,8 @@ export const LinkCards = () => {
   return (
     <Box
       sx={{
-        backgroundColor: alpha(theme.palette.primary.main, 0.1),
-        left: '50%',
-        ml: 'calc(-50vw)',
         mt: '4rem',
         textAlign: 'center',
-        position: 'relative',
-        width: '100vw',
       }}
     >
       <Typography sx={{ p: '1rem' }} variant="h3">
@@ -81,24 +68,24 @@ export const LinkCards = () => {
             sx={{ textDecoration: 'none' }}
           >
             <Card
+              elevation={4}
               sx={(theme) => ({
                 borderRadius: '0.5rem',
                 color: theme.palette.primary.dark,
                 cursor: 'pointer',
                 display: 'flex',
                 flexDirection: 'column',
-                minWidth: '200px',
-                minHeight: '180px',
+                minHeight: '100px',
                 fontWeight: 'bold',
                 gap: '1rem',
                 justifyContent: 'center',
                 p: '1rem',
                 textAlign: 'center',
-                width: '12rem',
+                width: '10rem',
                 '&:hover': {
-                  boxShadow: `4px 4px 16px ${alpha(
+                  boxShadow: `1px 4px 8px ${alpha(
                     theme.palette.primary.dark,
-                    0.2,
+                    0.5,
                   )}`,
                   '& img': {
                     transform: 'scale(1.01)',
@@ -110,13 +97,11 @@ export const LinkCards = () => {
               <Image
                 src={cd.image}
                 alt={cd.text}
-                width={100}
-                height={100}
+                width={60}
+                height={60}
                 objectFit="scale-down"
               />
-              <CardContent sx={{ whiteSpace: 'nowrap', pb: '0 !important' }}>
-                {cd.text}
-              </CardContent>
+              <Typography>{cd.text}</Typography>
             </Card>
           </Link>
         ))}

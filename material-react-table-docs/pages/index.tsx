@@ -76,8 +76,8 @@ const HomePage = () => {
           </Button>
         </Box>
         <HomeCards />
-        <LinkCards />
       </Stack>
+      <LinkCards />
     </>
   );
 };

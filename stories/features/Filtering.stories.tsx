@@ -108,6 +108,45 @@ export const FilterTypes: Story<MaterialReactTableProps> = () => (
   />
 );
 
+export const DisableSomeFilterTypesForCertainColumns: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        Header: 'First Name',
+        accessor: 'firstName' as const,
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'lastName' as const,
+        filterTypes: ['startsWith', 'endsWith'],
+        filter: 'startsWith',
+      },
+      {
+        Header: 'Age',
+        accessor: 'age' as const,
+      },
+      {
+        Header: 'Gender',
+        accessor: 'gender' as const,
+        filterTypes: ['equals', 'notEquals'],
+        filter: 'equals',
+      },
+      {
+        Header: 'Address',
+        accessor: 'address' as const,
+      },
+      {
+        Header: 'State',
+        accessor: 'state' as const,
+      },
+    ]}
+    data={data}
+    initialState={{ showFilters: true }}
+  />
+);
+
 export const FilteringDisabledForCertainColumns: Story<
   MaterialReactTableProps
 > = () => (

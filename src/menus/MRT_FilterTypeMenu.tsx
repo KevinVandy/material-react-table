@@ -43,68 +43,72 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
     divider: boolean;
     fn: Function;
   }[] = useMemo(
-    () => [
-      {
-        type: MRT_FILTER_TYPE.FUZZY,
-        label: localization.filterFuzzy,
-        divider: false,
-        fn: fuzzy,
-      },
-      {
-        type: MRT_FILTER_TYPE.CONTAINS,
-        label: localization.filterContains,
-        divider: true,
-        fn: contains,
-      },
-      {
-        type: MRT_FILTER_TYPE.STARTS_WITH,
-        label: localization.filterStartsWith,
-        divider: false,
-        fn: startsWith,
-      },
-      {
-        type: MRT_FILTER_TYPE.ENDS_WITH,
-        label: localization.filterEndsWith,
-        divider: true,
-        fn: endsWith,
-      },
-      {
-        type: MRT_FILTER_TYPE.EQUALS,
-        label: localization.filterEquals,
-        divider: false,
-        fn: equals,
-      },
-      {
-        type: MRT_FILTER_TYPE.NOT_EQUALS,
-        label: localization.filterNotEquals,
-        divider: true,
-        fn: notEquals,
-      },
-      {
-        type: MRT_FILTER_TYPE.GREATER_THAN,
-        label: localization.filterGreaterThan,
-        divider: false,
-        fn: greaterThan,
-      },
-      {
-        type: MRT_FILTER_TYPE.LESS_THAN,
-        label: localization.filterLessThan,
-        divider: true,
-        fn: lessThan,
-      },
-      {
-        type: MRT_FILTER_TYPE.EMPTY,
-        label: localization.filterEmpty,
-        divider: false,
-        fn: empty,
-      },
-      {
-        type: MRT_FILTER_TYPE.NOT_EMPTY,
-        label: localization.filterNotEmpty,
-        divider: false,
-        fn: notEmpty,
-      },
-    ],
+    () =>
+      [
+        {
+          type: MRT_FILTER_TYPE.FUZZY,
+          label: localization.filterFuzzy,
+          divider: false,
+          fn: fuzzy,
+        },
+        {
+          type: MRT_FILTER_TYPE.CONTAINS,
+          label: localization.filterContains,
+          divider: true,
+          fn: contains,
+        },
+        {
+          type: MRT_FILTER_TYPE.STARTS_WITH,
+          label: localization.filterStartsWith,
+          divider: false,
+          fn: startsWith,
+        },
+        {
+          type: MRT_FILTER_TYPE.ENDS_WITH,
+          label: localization.filterEndsWith,
+          divider: true,
+          fn: endsWith,
+        },
+        {
+          type: MRT_FILTER_TYPE.EQUALS,
+          label: localization.filterEquals,
+          divider: false,
+          fn: equals,
+        },
+        {
+          type: MRT_FILTER_TYPE.NOT_EQUALS,
+          label: localization.filterNotEquals,
+          divider: true,
+          fn: notEquals,
+        },
+        {
+          type: MRT_FILTER_TYPE.GREATER_THAN,
+          label: localization.filterGreaterThan,
+          divider: false,
+          fn: greaterThan,
+        },
+        {
+          type: MRT_FILTER_TYPE.LESS_THAN,
+          label: localization.filterLessThan,
+          divider: true,
+          fn: lessThan,
+        },
+        {
+          type: MRT_FILTER_TYPE.EMPTY,
+          label: localization.filterEmpty,
+          divider: false,
+          fn: empty,
+        },
+        {
+          type: MRT_FILTER_TYPE.NOT_EMPTY,
+          label: localization.filterNotEmpty,
+          divider: false,
+          fn: notEmpty,
+        },
+      ].filter(
+        (filterType) =>
+          !column.filterTypes || column.filterTypes.includes(filterType.type),
+      ),
     [],
   );
 
