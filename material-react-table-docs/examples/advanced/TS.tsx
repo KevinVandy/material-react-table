@@ -1,6 +1,6 @@
 import React, { FC, useMemo, useState } from 'react';
-import MaterialReactTable from 'material-react-table';
-import { ListItemIcon, MenuItem, Typography } from '@mui/material';
+import MaterialReactTable, { MRT_Cell } from 'material-react-table';
+import { Box, ListItemIcon, MenuItem, Typography } from '@mui/material';
 import { AccountCircle, Send } from '@mui/icons-material';
 
 const Example: FC = () => {
@@ -10,12 +10,16 @@ const Example: FC = () => {
         Header: 'Employee',
         columns: [
           {
-            Header: 'First Name',
-            accessor: 'firstName' as const,
-          },
-          {
-            Header: 'Last Name',
+            Header: 'Name',
             accessor: 'lastName' as const,
+            Cell: ({ cell }: { cell: MRT_Cell }) => (
+              <>
+                {cell.row.original?.['firstName']}
+                <br />
+                {cell.row.original?.['lastName']}
+              </>
+            ),
+            disableClickToCopy: true,
           },
           {
             Header: 'Email',
@@ -33,13 +37,29 @@ const Example: FC = () => {
           {
             Header: 'Salary',
             accessor: 'salary' as const,
-            Cell: ({ cell: { value } }: any) =>
-              value.toLocaleString?.('en-US', {
-                style: 'currency',
-                currency: 'USD',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0,
-              }),
+            Cell: ({ cell: { value } }: { cell: MRT_Cell }) => (
+              <Box
+                sx={(theme) => ({
+                  backgroundColor:
+                    value < 50_000
+                      ? theme.palette.error.main
+                      : value >= 50_000 && value < 75_000
+                      ? theme.palette.warning.main
+                      : theme.palette.success.main,
+                  borderRadius: '0.25rem',
+                  color: 'white',
+                  maxWidth: '9ch',
+                  p: '0.25rem',
+                })}
+              >
+                {value?.toLocaleString?.('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                })}
+              </Box>
+            ),
             disableEditing: true,
           },
           {
@@ -1475,9 +1495,10 @@ const Example: FC = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
+      enableClickToCopy
       enableColumnGrouping
-      enableRowEditing
       enableRowActions
+      enableRowEditing
       enableSelection
       onRowEditSubmit={handleSaveRow}
       renderDetailPanel={(row) => (
@@ -1491,14 +1512,14 @@ const Example: FC = () => {
           <img
             alt="avatar"
             height={200}
-            src={row.original.avatar}
+            src={row.original['avatar']}
             loading="lazy"
             style={{ borderRadius: '50%' }}
           />
           <div style={{ textAlign: 'center' }}>
             <Typography variant="h4">Signature Catch Phrase:</Typography>
             <Typography variant="h1">
-              &quot;{row.original.signatureCatchPhrase}&quot;
+              &quot;{row.original['signatureCatchPhrase']}&quot;
             </Typography>
           </div>
         </div>

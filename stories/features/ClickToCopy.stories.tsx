@@ -4,10 +4,10 @@ import MaterialReactTable, { MaterialReactTableProps } from '../../src';
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
-  title: 'Features/CopyButton',
+  title: 'Features/Click to Copy',
   parameters: {
     status: {
-      type: 'alpha',
+      type: 'beta',
     },
   },
 };
@@ -50,6 +50,6 @@ const data = [...Array(100)].map((_) => ({
   state: faker.address.state(),
 }));
 
-export const EnableCopyButtons: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} enableCellCopyButtons />
+export const ClickToCopyEnabled: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} enableClickToCopy />
 );

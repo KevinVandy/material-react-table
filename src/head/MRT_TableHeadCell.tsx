@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { CSSProperties, FC } from 'react';
 import {
   TableCell,
   TableSortLabel,
@@ -16,6 +16,11 @@ import type { MRT_HeaderGroup } from '..';
 export const commonTableHeadCellStyles = (
   densePadding: boolean,
   enableColumnResizing?: boolean,
+  widths?: {
+    maxWidth?: CSSProperties['maxWidth'];
+    minWidth?: CSSProperties['minWidth'];
+    width?: CSSProperties['width'];
+  },
 ) => ({
   fontWeight: 'bold',
   height: '100%',
@@ -23,6 +28,7 @@ export const commonTableHeadCellStyles = (
   pt: densePadding ? '0.75rem' : '1.25rem',
   transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
   verticalAlign: 'text-top',
+  ...widths,
 });
 
 interface Props {
@@ -105,6 +111,11 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
         ...commonTableHeadCellStyles(
           tableInstance.state.densePadding,
           enableColumnResizing,
+          {
+            maxWidth: column.maxWidth,
+            minWidth: column.minWidth,
+            width: column.width,
+          },
         ),
         ...tableCellProps?.sx,
       }}

@@ -80,7 +80,7 @@ const Example: FC = () => {
       {
         Header: 'Zip Code',
         accessor: 'zipcode' as const,
-      }
+      },
     ],
     [],
   );

@@ -16,7 +16,12 @@ export const MRT_TableHeadCellActions: FC<Props> = () => {
   return (
     <TableCell
       style={{ textAlign: 'center' }}
-      sx={{ ...commonTableHeadCellStyles(densePadding), textAlign: 'center' }}
+      sx={{
+        ...commonTableHeadCellStyles(densePadding),
+        textAlign: 'center',
+        maxWidth: '4rem',
+        width: '4rem',
+      }}
     >
       {localization.actions}
     </TableCell>

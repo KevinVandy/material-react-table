@@ -45,7 +45,7 @@ export const HomeCards = () => {
           variant="outlined"
         >
           <Image src={cd.image} alt={cd.text} height={50} width={50} />
-          <CardContent >{cd.text}</CardContent>
+          <CardContent>{cd.text}</CardContent>
         </Card>
       ))}
     </Stack>

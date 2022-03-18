@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { IconButton, Tooltip } from '@mui/material';
+import { Button, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_Cell } from '..';
 
@@ -8,43 +8,43 @@ interface Props {
 }
 
 export const MRT_CopyButton: FC<Props> = ({ cell }) => {
-  const {
-    icons: { CheckBoxIcon, ContentCopyIcon },
-    localization,
-  } = useMRT();
+  const { localization } = useMRT();
 
   const [copied, setCopied] = useState(false);
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setTimeout(() => setCopied(false), 4000);
   };
 
   return (
     <Tooltip
       arrow
+      enterDelay={1000}
+      enterNextDelay={1000}
+      placement="top"
       title={copied ? localization.copiedToClipboard : localization.clickToCopy}
     >
-      <IconButton
+      <Button
         aria-label={localization.clickToCopy}
         onClick={() => handleCopy(cell.value)}
         size="small"
         sx={{
-          opacity: 0.05,
-          m: '0 0.5rem',
-          transition: 'all 0.2s ease-in-out',
-          '&:hover': {
-            opacity: 1,
-          },
+          backgroundColor: 'transparent',
+          color: 'inherit',
+          letterSpacing: 'inherit',
+          fontFamily: 'inherit',
+          fontSize: 'inherit',
+          m: '-0.25rem',
+          textTransform: 'inherit',
+          textAlign: 'inherit',
+          minWidth: 'unset',
         }}
+        variant="text"
       >
-        {copied ? (
-          <CheckBoxIcon color="success" fontSize="small" />
-        ) : (
-          <ContentCopyIcon fontSize="small" />
-        )}
-      </IconButton>
+        {cell.render('Cell')}
+      </Button>
     </Tooltip>
   );
 };

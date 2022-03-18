@@ -134,9 +134,9 @@ export type MRT_ColumnInterface<D extends {} = {}> = ColumnInterface<D> &
     Header?: string;
     accessor?: string;
     columns?: MRT_ColumnInterface<D>[];
+    disableClickToCopy?: boolean;
     disableEditing?: boolean;
     disableFilters?: boolean;
-    disableCellCopyButton?: boolean;
     filter?: MRT_FilterType | string | FilterType<D>;
     filterSelectOptions?: (string | { text: string; value: string })[];
     filterTypes?: (MRT_FILTER_TYPE | string)[];
@@ -233,7 +233,7 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
     disableFullScreenToggle?: boolean;
     disableSelectAll?: boolean;
     disableSubRowTree?: boolean;
-    enableCellCopyButtons?: boolean;
+    enableClickToCopy?: boolean;
     enableColumnGrouping?: boolean;
     enableColumnResizing?: boolean;
     enableRowActions?: boolean;
