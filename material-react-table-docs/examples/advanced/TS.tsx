@@ -42,12 +42,12 @@ const Example: FC = () => {
                 sx={(theme) => ({
                   backgroundColor:
                     value < 50_000
-                      ? theme.palette.error.main
+                      ? theme.palette.error.dark
                       : value >= 50_000 && value < 75_000
-                      ? theme.palette.warning.main
-                      : theme.palette.success.main,
+                      ? theme.palette.warning.dark
+                      : theme.palette.success.dark,
                   borderRadius: '0.25rem',
-                  color: 'white',
+                  color: '#fff',
                   maxWidth: '9ch',
                   p: '0.25rem',
                 })}

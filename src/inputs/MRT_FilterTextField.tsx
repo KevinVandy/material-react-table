@@ -43,10 +43,6 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
   const textFieldProps = {
     ...mTableHeadCellFilterTextFieldProps,
     ...mcTableHeadCellFilterTextFieldProps,
-    style: {
-      ...mTableHeadCellFilterTextFieldProps?.style,
-      ...mcTableHeadCellFilterTextFieldProps?.style,
-    },
   } as TextFieldProps;
 
   const [filterValue, setFilterValue] = useState('');

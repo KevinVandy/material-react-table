@@ -34,12 +34,14 @@ export interface Props {
   typeScriptCode: string;
   javaScriptCode: string;
   Component: FC;
+  idPrefix?: string;
 }
 
 export const SourceCodeSnippet: FC<Props> = ({
   typeScriptCode,
   javaScriptCode,
   Component,
+  idPrefix,
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery('(max-width: 720px)');
@@ -77,11 +79,15 @@ export const SourceCodeSnippet: FC<Props> = ({
       }}
     >
       <Divider />
-      <LinkHeading variant="h3">Demo</LinkHeading>
+      <LinkHeading idPrefix={idPrefix} variant="h3">
+        Demo
+      </LinkHeading>
       <Component />
       <div>
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <LinkHeading variant="h4">Source Code</LinkHeading>
+          <LinkHeading idPrefix={idPrefix} variant="h4">
+            Source Code
+          </LinkHeading>
           <ToggleButtonGroup>
             <ToggleButton
               onClick={() => setIsTypeScript(true)}

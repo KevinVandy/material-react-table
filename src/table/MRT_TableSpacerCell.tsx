@@ -9,17 +9,10 @@ interface Props {
 export const MRT_TableSpacerCell: FC<Props> = ({ width }) => {
   const { muiTableBodyCellProps } = useMRT();
 
-  const mTableBodyCellrops =
+  const tableCellProps =
     muiTableBodyCellProps instanceof Function
       ? muiTableBodyCellProps()
       : muiTableBodyCellProps;
-
-  const tableCellProps = {
-    ...mTableBodyCellrops,
-    style: {
-      ...mTableBodyCellrops?.style,
-    },
-  };
 
   return (
     <TableCell {...tableCellProps} sx={{ width, ...tableCellProps?.sx }} />

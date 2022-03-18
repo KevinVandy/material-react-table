@@ -39,12 +39,6 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
   const textFieldProps = {
     ...mTableBodyCellEditTextFieldProps,
     ...mcTableBodyCellEditTextFieldProps,
-    style: {
-      //@ts-ignore
-      ...muiTableBodyCellEditTextFieldProps?.style,
-      //@ts-ignore
-      ...cell.column.muiTableBodyCellEditTextFieldProps?.style,
-    },
   };
 
   if (!cell.column.disableEditing && cell.column.Edit) {

@@ -13,7 +13,7 @@ const columns = [
   {
     Header: 'ID',
     accessor: 'id' as const,
-    maxWidth: 20,
+    maxWidth: 50,
   },
   {
     Header: 'First Name',
@@ -28,7 +28,7 @@ const columns = [
   {
     Header: 'Age',
     accessor: 'age' as const,
-    maxWidth: 20,
+    maxWidth: 50,
   },
   {
     Header: 'Address',

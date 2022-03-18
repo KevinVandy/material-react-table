@@ -1,20 +1,31 @@
-import { useEffect, useState } from 'react';
+import { FC, ReactNode, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import LinkIcon from '@mui/icons-material/Link';
 import AddLinkIcon from '@mui/icons-material/AddLink';
-import { Typography, IconButton, Tooltip } from '@mui/material';
+import {
+  IconButton,
+  Tooltip,
+  Typography,
+  TypographyProps,
+} from '@mui/material';
 
-export const LinkHeading = (props) => {
+interface Props extends TypographyProps {
+  children: ReactNode | string;
+  idPrefix?: string;
+}
+
+export const LinkHeading: FC<Props> = ({ children, idPrefix, ...rest }) => {
+  const { pathname } = useRouter();
+
   const [isCopied, setIsCopied] = useState(false);
-  const [href, setHref] = useState('');
 
-  const id = props.children?.toLowerCase?.()?.replaceAll?.(' ', '-');
+  const id = `${idPrefix ?? ''}${children
+    ?.toString()
+    ?.toLowerCase?.()
+    ?.replaceAll?.(' ', '-')}`;
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setHref(`${window.location.pathname}#${id}`);
-    }
-  }, [id]);
+  const href = `${pathname}#${id}`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(window.location.origin + href);
@@ -23,8 +34,8 @@ export const LinkHeading = (props) => {
   };
 
   return (
-    <Typography id={id} {...props}>
-      {props.children}{' '}
+    <Typography id={id} {...rest}>
+      {children}{' '}
       <Link href={href} passHref>
         <IconButton
           onClick={handleCopy}

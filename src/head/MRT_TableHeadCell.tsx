@@ -178,9 +178,11 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
           )}
         </Box>
         <Box sx={{ alignItems: 'center', display: 'flex', flexWrap: 'nowrap' }}>
-          {!disableColumnActions && !isParentHeader && (
-            <MRT_ToggleColumnActionMenuButton column={column} />
-          )}
+          {!disableColumnActions &&
+            !column.disableColumnActions &&
+            !isParentHeader && (
+              <MRT_ToggleColumnActionMenuButton column={column} />
+            )}
           {enableColumnResizing && !isParentHeader && (
             <Divider
               flexItem

@@ -10,8 +10,9 @@ interface Props {
 
 export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
   const {
-    localization,
     icons: { MoreVertIcon },
+    localization,
+    muiTableHeadCellColumnActionsButtonProps,
   } = useMRT();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -20,6 +21,21 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
     event.stopPropagation();
     event.preventDefault();
     setAnchorEl(event.currentTarget);
+  };
+
+  const mTableHeadCellColumnActionsButtonProps =
+    muiTableHeadCellColumnActionsButtonProps instanceof Function
+      ? muiTableHeadCellColumnActionsButtonProps(column)
+      : muiTableHeadCellColumnActionsButtonProps;
+
+  const mcTableHeadCellColumnActionsButtonProps =
+    column.muiTableHeadCellColumnActionsButtonProps instanceof Function
+      ? column.muiTableHeadCellColumnActionsButtonProps(column)
+      : column.muiTableHeadCellColumnActionsButtonProps;
+
+  const iconButtonProps = {
+    ...mTableHeadCellColumnActionsButtonProps,
+    ...mcTableHeadCellColumnActionsButtonProps,
   };
 
   return (
@@ -35,6 +51,7 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
           aria-label={localization.columnActions}
           onClick={handleClick}
           size="small"
+          {...iconButtonProps}
           sx={{
             height: '2rem',
             mr: '2px',
@@ -45,6 +62,7 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
             '&:hover': {
               opacity: 1,
             },
+            ...iconButtonProps.sx,
           }}
         >
           <MoreVertIcon />

@@ -135,6 +135,7 @@ export type MRT_ColumnInterface<D extends {} = {}> = ColumnInterface<D> &
     accessor?: string;
     columns?: MRT_ColumnInterface<D>[];
     disableClickToCopy?: boolean;
+    disableColumnActions?: boolean;
     disableEditing?: boolean;
     disableFilters?: boolean;
     filter?: MRT_FilterType | string | FilterType<D>;
@@ -152,6 +153,9 @@ export type MRT_ColumnInterface<D extends {} = {}> = ColumnInterface<D> &
     muiTableHeadCellFilterTextFieldProps?:
       | TextFieldProps
       | ((column: Column<D>) => TextFieldProps);
+    muiTableHeadCellColumnActionsButtonProps?:
+      | IconButtonProps
+      | ((column: Column<D>) => IconButtonProps);
     muiTableHeadCellProps?:
       | TableCellProps
       | ((column: Column<D>) => TableCellProps);
@@ -277,6 +281,9 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
     muiTableFooterCellProps?:
       | TableCellProps
       | ((column: Column<D>) => TableCellProps);
+    muiTableHeadCellColumnActionsButtonProps?:
+      | IconButtonProps
+      | ((column: Column<D>) => IconButtonProps);
     muiTableFooterProps?:
       | TableFooterProps
       | ((tableInstance: MRT_TableInstance<D>) => TableFooterProps);
