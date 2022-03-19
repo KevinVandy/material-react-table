@@ -4,6 +4,7 @@ import {
   commonTableHeadCellStyles,
   MRT_TableHeadCell,
 } from './MRT_TableHeadCell';
+import { commonTableBodyButtonCellStyles } from '../body/MRT_TableBodyCell';
 import { useMRT } from '../useMRT';
 import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
@@ -83,7 +84,17 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
       ) : null}
       {enableSelection ? (
         !isParentHeader && !disableSelectAll ? (
-          <MRT_SelectCheckbox selectAll />
+          <TableCell
+            sx={{
+              ...commonTableBodyButtonCellStyles(
+                tableInstance.state.densePadding,
+              ),
+              maxWidth: '3rem',
+              width: '3rem',
+            }}
+          >
+            <MRT_SelectCheckbox selectAll />
+          </TableCell>
         ) : (
           <MRT_TableSpacerCell width="1rem" />
         )

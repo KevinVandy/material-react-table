@@ -1,6 +1,7 @@
 import React, { FC, MouseEvent } from 'react';
 import { TableCell, TableRow } from '@mui/material';
 import {
+  commonTableBodyButtonCellStyles,
   commonTableBodyCellStyles,
   MRT_TableBodyCell,
 } from './MRT_TableBodyCell';
@@ -26,6 +27,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
     onRowClick,
     positionActionsColumn,
     renderDetailPanel,
+    tableInstance,
     tableInstance: {
       state: { densePadding },
     },
@@ -67,7 +69,19 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         {(anyRowsCanExpand || renderDetailPanel) && (
           <MRT_ExpandButton row={row} />
         )}
-        {enableSelection && <MRT_SelectCheckbox row={row} />}
+        {enableSelection && (
+          <TableCell
+            sx={{
+              ...commonTableBodyButtonCellStyles(
+                tableInstance.state.densePadding,
+              ),
+              maxWidth: '3rem',
+              width: '3rem',
+            }}
+          >
+            <MRT_SelectCheckbox row={row} />
+          </TableCell>
+        )}
         {row.cells.map((cell: MRT_Cell) => (
           <MRT_TableBodyCell key={cell.getCellProps().key} cell={cell} />
         ))}

@@ -1,8 +1,7 @@
 import React, { ChangeEvent, FC } from 'react';
-import { Checkbox, TableCell, Tooltip } from '@mui/material';
+import { Checkbox, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
 import type { MRT_Row } from '..';
-import { commonTableBodyButtonCellStyles } from '../body/MRT_TableBodyCell';
 
 interface Props {
   row?: MRT_Row;
@@ -16,10 +15,27 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
   const onSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (selectAll) {
       tableInstance?.getToggleAllRowsSelectedProps?.()?.onChange?.(event);
-      onSelectAllChange?.(event, tableInstance.selectedFlatRows);
+      if (event.target.checked) {
+        onSelectAllChange?.(event, tableInstance.rows);
+      } else {
+        onSelectAllChange?.(event, []);
+      }
     } else if (row) {
       row?.getToggleRowSelectedProps()?.onChange?.(event);
-      onRowSelectChange?.(event, row, tableInstance.selectedFlatRows);
+      if (event.target.checked) {
+        onRowSelectChange?.(event, row, [
+          ...tableInstance.selectedFlatRows,
+          row,
+        ]);
+      } else {
+        onRowSelectChange?.(
+          event,
+          row,
+          tableInstance.selectedFlatRows.filter(
+            (selectedRow) => selectedRow.id !== row.id,
+          ),
+        );
+      }
     }
   };
 
@@ -28,34 +44,24 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
     : row?.getToggleRowSelectedProps();
 
   return (
-    <TableCell
-      sx={{
-        ...commonTableBodyButtonCellStyles(tableInstance.state.densePadding),
-        maxWidth: '2rem',
-        width: '2rem',
-      }}
+    <Tooltip
+      arrow
+      enterDelay={1000}
+      enterNextDelay={1000}
+      title={
+        selectAll ? localization.toggleSelectAll : localization.toggleSelectRow
+      }
     >
-      <Tooltip
-        arrow
-        enterDelay={1000}
-        enterNextDelay={1000}
-        title={
-          selectAll
+      <Checkbox
+        inputProps={{
+          'aria-label': selectAll
             ? localization.toggleSelectAll
-            : localization.toggleSelectRow
-        }
-      >
-        <Checkbox
-          inputProps={{
-            'aria-label': selectAll
-              ? localization.toggleSelectAll
-              : localization.toggleSelectRow,
-          }}
-          onChange={onSelectChange}
-          {...checkboxProps}
-          title={undefined}
-        />
-      </Tooltip>
-    </TableCell>
+            : localization.toggleSelectRow,
+        }}
+        {...checkboxProps}
+        onChange={onSelectChange}
+        title={undefined}
+      />
+    </Tooltip>
   );
 };
