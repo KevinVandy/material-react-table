@@ -20,7 +20,7 @@ export const mdxComponents = {
   h4: (props: any) => <LinkHeading variant="h4" {...props} />,
   h5: (props: any) => <Typography variant="h5" {...props} />,
   h6: (props: any) => <Typography variant="h6" {...props} />,
-  hr: (props: any) => <Divider {...props} />,
+  hr: (props: any) => <Divider sx={{ mb: '1rem' }} {...props} />,
   img: (props: any) => (
     <Image
       alt="avatar"

@@ -123,11 +123,11 @@ const RootPropTable = () => {
         linkText: 'MRT row editing docs',
       },
       {
-        prop: 'enableRowSelection',
+        prop: 'enableSelection',
         type: 'boolean',
-        description: 'Enable row selection checkboxes in each row',
-        link: '/docs/guides/row-selection',
-        linkText: 'MRT row selection docs',
+        description: 'Enable selection checkboxes in each row',
+        link: '/docs/guides/selection',
+        linkText: 'MRT selection docs',
       },
       {
         prop: 'filterTypes',
@@ -219,6 +219,14 @@ const RootPropTable = () => {
         linkText: 'Mui TextField API docs',
       },
       {
+        prop: 'muiSelectCheckboxProps',
+        type: 'MUI CheckboxProps',
+        description:
+          'Pass in custom props to the Mui Checkbox for all selection checkboxes',
+        link: 'https://material-ui.com/api/checkbox/#props',
+        linkText: 'Mui Checkbox API docs',
+      },
+      {
         prop: 'muiTableBodyCellEditTextFieldProps',
         type: 'MUI TextFieldProps',
         description:
@@ -291,6 +299,14 @@ const RootPropTable = () => {
         description: 'Pass in custom props to every Mui TableFooterRow',
         link: 'https://mui.com/api/table-row',
         linkText: 'Mui TableRow API docs',
+      },
+      {
+        prop: 'muiTableHeadCellColumnActionsButtonProps',
+        type: 'MUI IconButtonProps',
+        description:
+          'Pass in custom props to the column actions button in each column header',
+        link: 'https://mui.com/api/icon-button',
+        linkText: 'Mui IconButton API docs',
       },
       {
         prop: 'muiTableHeadCellFilterTextFieldProps',
@@ -392,12 +408,12 @@ const RootPropTable = () => {
         description: 'Callback for when a row save button is clicked',
       },
       {
-        prop: 'onRowSelectChange',
+        prop: 'onSelectChange',
         type: '(event, row, selectedRows) => void',
         description: 'Callback for when a row is selected or deselected',
       },
       {
-        prop: 'onRowSelectAllChange',
+        prop: 'onSelectAllChange',
         type: '(event, selectedRows) => void',
         description: 'Callback for when all rows are selected or deselected',
       },

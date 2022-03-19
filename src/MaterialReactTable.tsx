@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FC, MouseEvent, ReactNode } from 'react';
 import {
   AlertProps,
+  CheckboxProps,
   IconButtonProps,
   LinearProgressProps,
   SkeletonProps,
@@ -260,6 +261,13 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
       | LinearProgressProps
       | ((tableInstance: MRT_TableInstance) => LinearProgressProps);
     muiSearchTextFieldProps?: TextFieldProps;
+    muiSelectCheckboxProps?:
+      | CheckboxProps
+      | ((
+          isSelectAll?: boolean,
+          row?: MRT_Row<D>,
+          tableInstance?: MRT_TableInstance<D>,
+        ) => CheckboxProps);
     muiTableBodyCellEditTextFieldProps?:
       | TextFieldProps
       | ((cell?: MRT_Cell<D>) => TextFieldProps);
@@ -282,15 +290,15 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
     muiTableFooterCellProps?:
       | TableCellProps
       | ((column: Column<D>) => TableCellProps);
-    muiTableHeadCellColumnActionsButtonProps?:
-      | IconButtonProps
-      | ((column: Column<D>) => IconButtonProps);
     muiTableFooterProps?:
       | TableFooterProps
       | ((tableInstance: MRT_TableInstance<D>) => TableFooterProps);
     muiTableFooterRowProps?:
       | TableRowProps
       | ((footerGroup: MRT_HeaderGroup<D>) => TableRowProps);
+    muiTableHeadCellColumnActionsButtonProps?:
+      | IconButtonProps
+      | ((column: Column<D>) => IconButtonProps);
     muiTableHeadCellFilterTextFieldProps?:
       | TextFieldProps
       | ((column: Column<D>) => TextFieldProps);
@@ -336,7 +344,7 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
       event: MouseEvent<HTMLButtonElement>,
       row: Row<D>,
     ) => void;
-    onRowSelectChange?: (
+    onSelectChange?: (
       event: ChangeEvent,
       row: Row<D>,
       selectedRows: Row<D>[],

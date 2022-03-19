@@ -1,41 +1,46 @@
-import React, { useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
 
-const Example = () => {
+const Example: FC = () => {
   const columns = useMemo(
     () => [
+      //column definitions...
       {
         Header: 'First Name',
-        accessor: 'firstName',
-        disableColumnHiding: true,
+        accessor: 'firstName' as const,
       },
       {
         Header: 'Last Name',
-        accessor: 'lastName',
-        disableColumnHiding: true,
+        accessor: 'lastName' as const,
+      },
+      {
+        Header: 'Age',
+        accessor: 'age' as const,
       },
       {
         Header: 'Address',
-        accessor: 'address',
+        accessor: 'address' as const,
       },
       {
         Header: 'City',
-        accessor: 'city',
+        accessor: 'city' as const,
       },
       {
         Header: 'State',
-        accessor: 'state',
+        accessor: 'state' as const,
       },
+      //end
     ],
     [],
   );
 
   const data = useMemo(
     () => [
-      //data definitions
+      //data definitions...
       {
         firstName: 'Dylan',
         lastName: 'Murray',
+        age: 22,
         address: '261 Erdman Ford',
         city: 'East Daphne',
         state: 'Kentucky',
@@ -43,6 +48,7 @@ const Example = () => {
       {
         firstName: 'Raquel',
         lastName: 'Kohler',
+        age: 18,
         address: '769 Dominic Grove',
         city: 'Columbus',
         state: 'Ohio',
@@ -50,6 +56,7 @@ const Example = () => {
       {
         firstName: 'Ervin',
         lastName: 'Reinger',
+        age: 20,
         address: '566 Brakus Inlet',
         city: 'South Linda',
         state: 'West Virginia',
@@ -57,6 +64,7 @@ const Example = () => {
       {
         firstName: 'Brittany',
         lastName: 'McCullough',
+        age: 21,
         address: '722 Emie Stream',
         city: 'Lincoln',
         state: 'Nebraska',
@@ -64,6 +72,7 @@ const Example = () => {
       {
         firstName: 'Branson',
         lastName: 'Frami',
+        age: 32,
         address: '32188 Larkin Turnpike',
         city: 'Charleston',
         state: 'South Carolina',
@@ -76,7 +85,15 @@ const Example = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      initialState={{ hiddenColumns: ['address'] }}
+      disableSelectAll
+      enableSelection
+      muiSelectCheckboxProps={(isSelectAll, row, _tableInstance) => ({
+        color: 'secondary',
+        disabled: !isSelectAll && row?.values?.age < 21,
+      })}
+      onSelectChange={(event, row, selectedRows) => {
+        console.log({ event, row, selectedRows });
+      }}
     />
   );
 };

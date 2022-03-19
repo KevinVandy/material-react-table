@@ -4,15 +4,18 @@ import MaterialReactTable from 'material-react-table';
 const Example = () => {
   const columns = useMemo(
     () => [
+      //column definitions...
       {
         Header: 'First Name',
         accessor: 'firstName',
-        disableColumnHiding: true,
       },
       {
         Header: 'Last Name',
         accessor: 'lastName',
-        disableColumnHiding: true,
+      },
+      {
+        Header: 'Age',
+        accessor: 'age',
       },
       {
         Header: 'Address',
@@ -26,16 +29,18 @@ const Example = () => {
         Header: 'State',
         accessor: 'state',
       },
+      //end
     ],
     [],
   );
 
   const data = useMemo(
     () => [
-      //data definitions
+      //data definitions...
       {
         firstName: 'Dylan',
         lastName: 'Murray',
+        age: 22,
         address: '261 Erdman Ford',
         city: 'East Daphne',
         state: 'Kentucky',
@@ -43,42 +48,16 @@ const Example = () => {
       {
         firstName: 'Raquel',
         lastName: 'Kohler',
+        age: 18,
         address: '769 Dominic Grove',
         city: 'Columbus',
         state: 'Ohio',
-      },
-      {
-        firstName: 'Ervin',
-        lastName: 'Reinger',
-        address: '566 Brakus Inlet',
-        city: 'South Linda',
-        state: 'West Virginia',
-      },
-      {
-        firstName: 'Brittany',
-        lastName: 'McCullough',
-        address: '722 Emie Stream',
-        city: 'Lincoln',
-        state: 'Nebraska',
-      },
-      {
-        firstName: 'Branson',
-        lastName: 'Frami',
-        address: '32188 Larkin Turnpike',
-        city: 'Charleston',
-        state: 'South Carolina',
       },
       //end
     ],
     [],
   );
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      initialState={{ hiddenColumns: ['address'] }}
-    />
-  );
+  return <MaterialReactTable columns={columns} data={data} enableSelection />;
 };
 
 export default Example;

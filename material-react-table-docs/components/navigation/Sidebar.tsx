@@ -164,8 +164,8 @@ const navItems = [
         label: 'Row Numbers',
       },
       {
-        href: '/docs/guides/row-selection',
-        label: 'Row Selection (Checkboxes)',
+        href: '/docs/guides/selection',
+        label: 'Selection (Checkboxes)',
       },
     ],
   },

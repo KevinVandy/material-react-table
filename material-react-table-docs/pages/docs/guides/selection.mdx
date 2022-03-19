@@ -1,0 +1,64 @@
+import Head from 'next/head';
+import EnableExample from '../../../examples/enableSelection';
+import CustomizeExample from '../../../examples/customizeSelection';
+
+<Head>
+  <title>Material React Table - Selection Feature Guide</title>
+</Head>
+
+## Selection Feature Guide
+
+_Easy to opt in, easy to customize_
+
+### Relavent Props
+
+- autoResetSelectedRows
+- disableSelectAll
+- enableSelection
+- initialState.selectedRowIds
+- manualRowSelectedKey
+- muiSelectCheckboxProps
+- onSelectAllChange
+- onSelectChange
+
+---
+
+### Enable Selection
+
+Selection checkboxes can be enabled with the `enableSelection` prop.
+
+<EnableExample />
+
+### Disable Select All
+
+By default, if you enable selection for each row, there will also be a select all checkbox in the header of the checkbox column. It can be hidden with the `disableSelectAll` prop.
+
+```jsx
+<MaterialReactTable
+  data={data}
+  columns={columns}
+  disableSelectAll
+  enableSelection
+/>
+```
+
+### Customize Select Checkboxes
+
+The selection checkboxes can be customized with the `muiSelectCheckboxProps` prop. Any prop that can be passed to a Mui Checkbox component can be specified here. For example, you may want to use a different color for the checkbox, or use some logic to disable certain rows from being selected.
+
+```jsx
+<MaterialReactTable
+  data={data}
+  columns={columns}
+  enableSelection
+  muiSelectCheckboxProps={{
+    color: 'secondary',
+  }}
+/>
+```
+
+### Selection Callback Functions
+
+There are two callbacks that can be used to respond to selection changes. `onSelectChange` is called when a row is selected or deselected. `onSelectAllChange` is called when the select all checkbox is selected or deselected.
+
+<CustomizeExample />

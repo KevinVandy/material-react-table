@@ -52,16 +52,27 @@ export const SelectAllDisabled: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const onRowSelectChange: Story<MaterialReactTableProps> = () => (
+export const onSelectChange: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     enableSelection
-    onRowSelectChange={(event, row, selectedRows) => {
+    onSelectChange={(event, row, selectedRows) => {
       console.log({ event, row, selectedRows });
     }}
     onSelectAllChange={(event, selectedRows) => {
       console.log({ event, selectedRows });
     }}
+  />
+);
+
+export const SelectCheckboxSecondaryColor: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableSelection
+    muiSelectCheckboxProps={{ color: 'secondary' }}
   />
 );
