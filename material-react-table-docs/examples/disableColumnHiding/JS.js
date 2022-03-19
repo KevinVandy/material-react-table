@@ -1,17 +1,18 @@
 import React, { useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
 
-export const Example = () => {
+const Example = () => {
   const columns = useMemo(
     () => [
-      //column definitions...
       {
         Header: 'First Name',
         accessor: 'firstName',
+        disableColumnHiding: true,
       },
       {
         Header: 'Last Name',
         accessor: 'lastName',
+        disableColumnHiding: true,
       },
       {
         Header: 'Address',
@@ -25,14 +26,12 @@ export const Example = () => {
         Header: 'State',
         accessor: 'state',
       },
-      //end
     ],
     [],
   );
 
   const data = useMemo(
     () => [
-      //data definitions...
       {
         firstName: 'Dylan',
         lastName: 'Murray',
@@ -68,21 +67,14 @@ export const Example = () => {
         city: 'Charleston',
         state: 'South Carolina',
       },
-      //end
     ],
     [],
   );
-
   return (
     <MaterialReactTable
       columns={columns}
       data={data}
-      disableColumnActions
-      disableSortBy
-      hideToolbarBottom
-      hideToolbarTop
-      manualPagination
-      muiTableBodyRowProps={{ hover: false }}
+      initialState={{ hiddenColumns: ['address'] }}
     />
   );
 };

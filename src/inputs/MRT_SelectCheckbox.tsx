@@ -29,7 +29,11 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
 
   return (
     <TableCell
-      sx={commonTableBodyButtonCellStyles(tableInstance.state.densePadding)}
+      sx={{
+        ...commonTableBodyButtonCellStyles(tableInstance.state.densePadding),
+        maxWidth: '2rem',
+        width: '2rem',
+      }}
     >
       <Tooltip
         arrow

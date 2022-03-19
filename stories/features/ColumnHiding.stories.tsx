@@ -64,6 +64,41 @@ export const ColumnHidingDisabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} disableColumnHiding />
 );
 
+export const ColumnHidingDisabledPerColumn: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={[
+    {
+      Header: 'First Name',
+      accessor: 'firstName' as const,
+      disableColumnHiding: true,
+    },
+    {
+      Header: 'Last Name',
+      accessor: 'lastName' as const,
+      disableColumnHiding: true,
+    },
+    {
+      Header: 'Address',
+      accessor: 'address' as const,
+    },
+    {
+      Header: 'State',
+      accessor: 'state' as const,
+    },
+    {
+      Header: 'Zip',
+      accessor: 'zip' as const,
+    },
+    {
+      Header: 'Email Address',
+      accessor: 'email' as const,
+    },
+    {
+      Header: 'Phone Number',
+      accessor: 'phoneNumber' as const,
+    },
+  ]} data={data} />
+);
+
 export const ColumnHidingWithHeaderGroups: Story<
   MaterialReactTableProps
 > = () => (

@@ -38,6 +38,7 @@ const Example: FC = () => {
     ],
     [],
   );
+  
   return <MaterialReactTable columns={columns} data={data} />;
 };
 

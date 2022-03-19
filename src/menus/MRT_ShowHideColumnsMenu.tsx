@@ -3,6 +3,7 @@ import { Button, Menu, Divider, Box } from '@mui/material';
 import type { MRT_ColumnInstance } from '..';
 import { useMRT } from '../useMRT';
 import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
+import { findLowestLevelCols } from '../utils';
 
 interface Props {
   anchorEl: HTMLElement | null;
@@ -16,6 +17,16 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
   setAnchorEl,
 }) => {
   const { localization, tableInstance } = useMRT();
+
+  const hideAllColumns = () => {
+    (
+      findLowestLevelCols(
+        tableInstance.columns as MRT_ColumnInstance[],
+      ) as MRT_ColumnInstance[]
+    )
+      .filter((col: MRT_ColumnInstance) => !col.disableColumnHiding)
+      .forEach((col: MRT_ColumnInstance) => col.toggleHidden(true));
+  };
 
   return (
     <Menu
@@ -40,7 +51,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
               !tableInstance.getToggleHideAllColumnsProps().checked &&
               !tableInstance.getToggleHideAllColumnsProps().indeterminate
             }
-            onClick={() => tableInstance.toggleHideAllColumns(true)}
+            onClick={hideAllColumns}
           >
             {localization.hideAll}
           </Button>

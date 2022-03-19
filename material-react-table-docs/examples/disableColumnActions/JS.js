@@ -38,6 +38,7 @@ const Example = () => {
     ],
     [],
   );
+
   return <MaterialReactTable columns={columns} data={data} />;
 };
 

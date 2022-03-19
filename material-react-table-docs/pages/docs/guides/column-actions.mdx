@@ -9,9 +9,21 @@ import Example from '../../../examples/disableColumnActions';
 
 _Enabled by default, easy to opt out, easy to customize_
 
+### Relevant Props
+
+- disableColumnActions
+- muiTableHeadCellColumnActionsButtonProps
+
+### Relevant Column Options
+
+- disableColumnActions
+- muiTableHeadCellColumnActionsButtonProps
+
+---
+
 By default, Material React Table renders a column actions button for each column header. It contains a dropdown menu to help your users use the other features of the table. All of these actions can be triggered in some other way other than from this dropdown menu, so this serves as a UI/UX alternative to make sure your users can find many of the table features easily.
 
-### How Do I Turn This Feature Off?
+### Disabling and Hiding Column Actions Buttons
 
 You can pass the `disableColumnActions` prop to the table to disable this feature and hide the button in each column header completely.
 
@@ -25,4 +37,6 @@ In this demo, we disable the column actions button for the 'id' column.
 
 <Example />
 
-### How Do I Customize the Column Actions?
+### Customizing Column Actions
+
+View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-column-action-examples--column-actions-disabled)**

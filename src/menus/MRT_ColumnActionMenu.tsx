@@ -246,7 +246,12 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           </MenuItem>,
         ]}
       {!disableColumnHiding && [
-        <MenuItem key={0} onClick={handleHideColumn} sx={commonMenuItemStyles}>
+        <MenuItem
+          disabled={column.disableColumnHiding}
+          key={0}
+          onClick={handleHideColumn}
+          sx={commonMenuItemStyles}
+        >
           <Box sx={commonListItemStyles}>
             <ListItemIcon>
               <VisibilityOffIcon />

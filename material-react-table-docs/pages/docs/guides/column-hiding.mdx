@@ -1,7 +1,40 @@
 import Head from 'next/head';
+import Example from '../../../examples/disableColumnHiding';
 
 <Head>
   <title>Material React Table - Column Hiding Feature Guide</title>
 </Head>
 
 ## Column Hiding Feature Guide
+
+_Enabled by default, easy to opt out_
+
+### Relevant Props
+
+- autoResetHiddenColumns - [More Info](https://react-table.tanstack.com/docs/api/useTable#table-options)
+- disableColumnHiding
+- initialState.hiddenColumns
+
+### Relevant Column Options
+
+- disableColumnHiding
+
+---
+
+The Show/Hide columns button is enabled by default in the top toolbar internal actions area.
+
+### Disabling Column Hiding
+
+If you don't want this feature to be enabled at all, you can disable it by passing the `disableColumnHiding` prop.
+
+```jsx
+<MaterialReactTable columns={columns} data={data} disableColumnHiding />
+```
+
+Alternatively, you can disable hiding specific columns by setting the `disableColumnHiding` column option to true.
+
+If you want to hide certain columns by default, you can specify an array of column names in the `initialState.hiddenColumns` prop. This can also be useful for making the column hiding state persistant.
+
+<Example />
+
+View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-column-hiding-examples--column-hiding-with-header-groups)**

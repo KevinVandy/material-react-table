@@ -136,6 +136,7 @@ export type MRT_ColumnInterface<D extends {} = {}> = ColumnInterface<D> &
     columns?: MRT_ColumnInterface<D>[];
     disableClickToCopy?: boolean;
     disableColumnActions?: boolean;
+    disableColumnHiding?: boolean;
     disableEditing?: boolean;
     disableFilters?: boolean;
     filter?: MRT_FilterType | string | FilterType<D>;

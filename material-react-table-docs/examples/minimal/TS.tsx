@@ -82,6 +82,7 @@ export const Example: FC = () => {
       hideToolbarBottom
       hideToolbarTop
       manualPagination
+      muiTableBodyRowProps={{ hover: false }}
     />
   );
 };

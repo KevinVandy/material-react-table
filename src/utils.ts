@@ -1,8 +1,12 @@
-import { MRT_ColumnInterface } from '.';
+import { MRT_ColumnInstance, MRT_ColumnInterface } from '.';
 
-export const findLowestLevelCols = (columns: MRT_ColumnInterface[]) => {
-  let lowestLevelColumns: MRT_ColumnInterface[] = columns;
-  let currentCols: MRT_ColumnInterface[] | undefined = columns;
+export const findLowestLevelCols = (
+  columns: MRT_ColumnInterface[] | MRT_ColumnInstance[],
+) => {
+  let lowestLevelColumns: MRT_ColumnInterface[] | MRT_ColumnInstance[] =
+    columns;
+  let currentCols: MRT_ColumnInterface[] | MRT_ColumnInstance[] | undefined =
+    columns;
   while (!!currentCols?.length && currentCols.some((col) => col.columns)) {
     const nextCols: MRT_ColumnInterface[] = currentCols
       .filter((col) => !!col.columns)

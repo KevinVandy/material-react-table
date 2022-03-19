@@ -19,6 +19,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
   const {
     anyRowsCanExpand,
     disableExpandAll,
+    disableSelectAll,
     enableRowActions,
     enableRowEditing,
     enableRowNumbers,
@@ -81,7 +82,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         )
       ) : null}
       {enableSelection ? (
-        !isParentHeader ? (
+        !isParentHeader && !disableSelectAll ? (
           <MRT_SelectCheckbox selectAll />
         ) : (
           <MRT_TableSpacerCell width="1rem" />

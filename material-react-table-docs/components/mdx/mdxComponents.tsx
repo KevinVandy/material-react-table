@@ -1,4 +1,4 @@
-import { Typography, Link as MuiLink } from '@mui/material';
+import { Typography, Link as MuiLink, Divider } from '@mui/material';
 import Image from 'next/image';
 import { Blockquote } from './Blockquote';
 import { SampleCodeSnippet } from './SampleCodeSnippet';
@@ -20,6 +20,7 @@ export const mdxComponents = {
   h4: (props: any) => <LinkHeading variant="h4" {...props} />,
   h5: (props: any) => <Typography variant="h5" {...props} />,
   h6: (props: any) => <Typography variant="h6" {...props} />,
+  hr: (props: any) => <Divider {...props} />,
   img: (props: any) => (
     <Image
       alt="avatar"
