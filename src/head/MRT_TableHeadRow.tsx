@@ -59,6 +59,8 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
           <TableCell
             sx={{
               ...commonTableHeadCellStyles(tableInstance.state.densePadding),
+              width: '2rem',
+              maxWidth: '2rem',
             }}
           >
             #

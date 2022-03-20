@@ -84,6 +84,23 @@ const navItems = [
     ],
   },
   {
+    title: 'Customization',
+    items: [
+      {
+        href: '/docs/guides/customize-css',
+        label: 'Customize CSS',
+      },
+      {
+        href: '/docs/guides/customize-icons',
+        label: 'Customize Icons',
+      },
+      {
+        href: '/docs/guides/localization',
+        label: 'Localization (i18n)',
+      },
+    ],
+  },
+  {
     title: 'Default Feature Guides',
     items: [
       {
@@ -124,16 +141,8 @@ const navItems = [
     title: 'More Feature Guides',
     items: [
       {
-        href: '/docs/guides/customize-css',
-        label: 'Customize CSS',
-      },
-      {
-        href: '/docs/guides/customize-icons',
-        label: 'Customize Icons',
-      },
-      {
-        href: '/docs/guides/customize-toolbars',
-        label: 'Customize Toolbars',
+        href: '/docs/guides/click-to-copy',
+        label: 'Click to Copy',
       },
       {
         href: '/docs/guides/column-grouping',
@@ -144,12 +153,12 @@ const navItems = [
         label: 'Column Resizing',
       },
       {
-        href: '/docs/guides/detail-panel',
-        label: 'Detail Panel (Expanding)',
+        href: '/docs/guides/customize-toolbars',
+        label: 'Customize Toolbars',
       },
       {
-        href: '/docs/guides/localization',
-        label: 'Localization (i18n)',
+        href: '/docs/guides/detail-panel',
+        label: 'Detail Panel (Expanding)',
       },
       {
         href: '/docs/guides/row-actions',

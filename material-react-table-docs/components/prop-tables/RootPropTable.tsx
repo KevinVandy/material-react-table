@@ -36,11 +36,20 @@ const RootPropTable = () => {
   const data = useMemo(
     () => [
       {
+        prop: 'autoResetHiddenColumns',
+        type: 'boolean',
+        default: 'true',
+        description:
+          'When true, the hiddenColumns state will automatically reset if columns is changed',
+        link: 'https://react-table.tanstack.com/docs/api/useTable#table-options',
+        linkText: 'React Table useTable options',
+      },
+      {
         prop: 'columns',
         type: 'Array<MRT_Column>',
         description: 'react-table column definitions',
         link: 'https://react-table.tanstack.com/docs/api/useTable#column-options',
-        linkText: 'react-table column api docs',
+        linkText: 'React Table column api docs',
         required: true,
       },
       {
@@ -50,6 +59,15 @@ const RootPropTable = () => {
         link: '/docs/usage',
         linkText: 'MRT usage docs',
         required: true,
+      },
+      {
+        prop: 'defaultColumn',
+        type: 'Object',
+        description:
+          'The default column object for every column passed to React Table.',
+        default: '{}',
+        link: 'https://react-table.tanstack.com/docs/api/useTable#table-options',
+        linkText: 'React Table useTable options',
       },
       {
         prop: 'disableColumnActions',
@@ -95,6 +113,14 @@ const RootPropTable = () => {
         linkText: 'MRT row numbers docs',
       },
       {
+        prop: 'enableClickToCopy',
+        type: 'boolean',
+        description:
+          'Enable click to copy functionality for all table body cells. Individual columns can turn this feature off.',
+        link: '/docs/guides/click-to-copy',
+        linkText: 'MRT click to copy docs',
+      },
+      {
         prop: 'enableColumnGrouping',
         type: 'boolean',
         description: 'Enable the column grouping feature',
@@ -136,6 +162,22 @@ const RootPropTable = () => {
           'Override and define your own custom filter types and functions',
         link: '/docs/guides/filtering',
         linkText: 'MRT filtering docs',
+      },
+      {
+        prop: 'getSubRows',
+        type: '(row, relativeIndex) => Rows[]',
+        description:
+          'Use this function to change how React Table detects subrows. You could even use this function to generate sub rows if you want.',
+        link: 'https://react-table.tanstack.com/docs/api/useTable#table-options',
+        linkText: 'React Table useTable options',
+      },
+      {
+        prop: 'getRowId',
+        type: '(row, relativeIndex, ?parent) => string',
+        description:
+          "Use this function to change how React Table detects unique rows and also how it constructs each row's underlying id property.",
+        link: 'https://react-table.tanstack.com/docs/api/useTable#table-options',
+        linkText: 'React Table useTable options',
       },
       {
         prop: 'hideTabbleFooter',
@@ -416,6 +458,22 @@ const RootPropTable = () => {
         prop: 'onSelectAllChange',
         type: '(event, selectedRows) => void',
         description: 'Callback for when all rows are selected or deselected',
+      },
+      {
+        prop: 'stateReducer',
+        type: '(newState, action, prevState) => newState',
+        description:
+          "With every action that is dispatched to the table's internal React.useReducer instance, this reducer is called and is allowed to modify the final state object for updating.",
+        link: 'https://react-table.tanstack.com/docs/api/useTable#table-options',
+        linkText: 'React Table useTable Options',
+      },
+      {
+        prop: 'useControlledState',
+        type: 'useMemo(state) => controlledState',
+        description:
+          'Use this hook to control the state of the table, run every single render.',
+        link: 'https://react-table.tanstack.com/docs/api/useTable#table-options',
+        linkText: 'React Table useTable Options',
       },
     ],
     [],

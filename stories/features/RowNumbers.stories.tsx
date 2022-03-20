@@ -45,6 +45,6 @@ const data = [...Array(100)].map((_) => ({
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const SearchEnabledDefault: Story<MaterialReactTableProps> = () => (
+export const enableRowNumbers: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableRowNumbers />
 );
