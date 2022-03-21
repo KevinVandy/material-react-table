@@ -99,6 +99,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
               ],
         )
         .replace('{filterValue}', column.filterValue)
+        .replace('" "', '')
     : localization.showHideFilters;
 
   const columnHeader = column.render('Header') as string;

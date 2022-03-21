@@ -65,7 +65,7 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
     column.setFilter(undefined);
     setCurrentFilterTypes((prev) => ({
       ...prev,
-      [column.id]: MRT_FILTER_TYPE.FUZZY,
+      [column.id]: MRT_FILTER_TYPE.BEST_MATCH,
     }));
   };
 
@@ -132,13 +132,6 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
           sx: { fontSize: '0.6rem', lineHeight: '0.8rem' },
         }}
         label={isSelectFilter && !filterValue ? filterPlaceholder : undefined}
-        InputLabelProps={{
-          shrink: false,
-          sx: {
-            maxWidth: 'calc(100% - 2.5rem)',
-          },
-          title: filterPlaceholder,
-        }}
         margin="none"
         placeholder={
           filterChipLabel || isSelectFilter ? undefined : filterPlaceholder

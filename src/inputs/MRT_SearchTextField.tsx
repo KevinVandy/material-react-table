@@ -1,7 +1,14 @@
-import React, { ChangeEvent, FC, useState } from 'react';
-import { Collapse, IconButton, InputAdornment, TextField } from '@mui/material';
+import React, { ChangeEvent, FC, MouseEvent, useState } from 'react';
+import {
+  Collapse,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Tooltip,
+} from '@mui/material';
 import { useMRT } from '../useMRT';
 import { useAsyncDebounce } from 'react-table';
+import { MRT_FilterTypeMenu } from '../menus/MRT_FilterTypeMenu';
 
 interface Props {}
 
@@ -15,6 +22,7 @@ export const MRT_SearchTextField: FC<Props> = () => {
     tableInstance,
   } = useMRT();
 
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [searchValue, setSearchValue] = useState('');
 
   const handleChange = useAsyncDebounce(
@@ -24,6 +32,10 @@ export const MRT_SearchTextField: FC<Props> = () => {
     },
     200,
   );
+
+  const handleGlobalFilterMenuOpen = (event: MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleClear = () => {
     setSearchValue('');
@@ -44,7 +56,18 @@ export const MRT_SearchTextField: FC<Props> = () => {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <SearchIcon fontSize="small" />
+              <Tooltip arrow title={localization.changeSearchMode}>
+                <span>
+                  <IconButton
+                    aria-label={localization.changeSearchMode}
+                    onClick={handleGlobalFilterMenuOpen}
+                    size="small"
+                    sx={{ height: '1.75rem', width: '1.75rem' }}
+                  >
+                    <SearchIcon fontSize="small" />
+                  </IconButton>
+                </span>
+              </Tooltip>
             </InputAdornment>
           ),
           endAdornment: (
@@ -64,6 +87,7 @@ export const MRT_SearchTextField: FC<Props> = () => {
         {...muiSearchTextFieldProps}
         sx={{ justifySelf: 'end', ...muiSearchTextFieldProps?.sx }}
       />
+      <MRT_FilterTypeMenu anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
     </Collapse>
   );
 };

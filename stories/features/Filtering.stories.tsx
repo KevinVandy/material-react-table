@@ -120,7 +120,7 @@ export const DisableSomeFilterTypesForCertainColumns: Story<
       {
         Header: 'Last Name',
         accessor: 'lastName' as const,
-        filterTypes: ['startsWith', 'endsWith'],
+        enabledFilterTypes: ['startsWith', 'endsWith'],
         filter: 'startsWith',
       },
       {
@@ -130,7 +130,7 @@ export const DisableSomeFilterTypesForCertainColumns: Story<
       {
         Header: 'Gender',
         accessor: 'gender' as const,
-        filterTypes: ['equals', 'notEquals'],
+        enabledFilterTypes: ['equals', 'notEquals'],
         filter: 'equals',
       },
       {

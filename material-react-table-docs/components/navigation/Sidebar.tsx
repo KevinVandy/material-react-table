@@ -88,7 +88,7 @@ const navItems = [
     items: [
       {
         href: '/docs/guides/customize-css',
-        label: 'Customize CSS',
+        label: 'Customize CSS & MUI',
       },
       {
         href: '/docs/guides/customize-icons',
@@ -175,6 +175,15 @@ const navItems = [
       {
         href: '/docs/guides/selection',
         label: 'Selection (Checkboxes)',
+      },
+    ],
+  },
+  {
+    title: 'Advanced Guides',
+    items: [
+      {
+        href: '/docs/guides/persistent-state',
+        label: 'Persistent State',
       },
     ],
   },

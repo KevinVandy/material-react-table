@@ -155,6 +155,7 @@ MaximumFeatures.args = {
     },
   ],
   data: maxFeaturesData,
+  enableClickToCopy: true,
   enableColumnGrouping: true,
   enableColumnResizing: false,
   enableSelection: true,

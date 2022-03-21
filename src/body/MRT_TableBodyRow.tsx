@@ -57,17 +57,21 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         selected={row.isSelected}
         {...tableRowProps}
       >
-        {enableRowNumbers && (
-          <TableCell sx={{ ...commonTableBodyCellStyles(densePadding) }}>
-            {row.index + 1}
-          </TableCell>
-        )}
         {(enableRowActions || enableRowEditing) &&
           positionActionsColumn === 'first' && (
             <MRT_ToggleRowActionMenuButton row={row} />
           )}
         {(anyRowsCanExpand || renderDetailPanel) && (
-          <MRT_ExpandButton row={row} />
+          <TableCell
+            size="small"
+            sx={{
+              ...commonTableBodyButtonCellStyles(densePadding),
+              pl: `${row.depth + 0.5}rem`,
+              textAlign: 'left',
+            }}
+          >
+            <MRT_ExpandButton row={row} />
+          </TableCell>
         )}
         {enableSelection && (
           <TableCell
@@ -80,6 +84,11 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
             }}
           >
             <MRT_SelectCheckbox row={row} />
+          </TableCell>
+        )}
+        {enableRowNumbers && (
+          <TableCell sx={{ ...commonTableBodyCellStyles(densePadding) }}>
+            {row.index + 1}
           </TableCell>
         )}
         {row.cells.map((cell: MRT_Cell) => (

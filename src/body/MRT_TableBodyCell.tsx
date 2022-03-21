@@ -78,13 +78,19 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
         currentEditingRow?.id === cell.row.id ? (
         <MRT_EditCellTextField cell={cell} />
       ) : cell.isPlaceholder ? null : cell.isAggregated ? (
-        cell.render('Aggregated')
+        enableClickToCopy && !cell.column.disableClickToCopy ? (
+          <MRT_CopyButton cell={cell}>
+            {cell.render('Aggregated')}
+          </MRT_CopyButton>
+        ) : (
+          cell.render('Aggregated')
+        )
       ) : cell.isGrouped ? (
         <span>
           {cell.render('Cell')} ({cell.row.subRows.length})
         </span>
       ) : enableClickToCopy && !cell.column.disableClickToCopy ? (
-        <MRT_CopyButton cell={cell} />
+        <MRT_CopyButton cell={cell}>{cell.render('Cell')}</MRT_CopyButton>
       ) : (
         cell.render('Cell')
       )}

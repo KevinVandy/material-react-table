@@ -47,6 +47,7 @@ export type UseMRT<D extends {} = {}> = MaterialReactTableProps<D> & {
       [key: string]: MRT_FilterType;
     }>
   >;
+  setCurrentGlobalFilterType: Dispatch<SetStateAction<MRT_FILTER_TYPE>>;
   setDensePadding: Dispatch<SetStateAction<boolean>>;
   setFullScreen: Dispatch<SetStateAction<boolean>>;
   setShowFilters: Dispatch<SetStateAction<boolean>>;
@@ -98,10 +99,16 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
         [c.accessor as string]:
           c.filter ??
           props?.initialState?.filters?.[c.accessor as any] ??
-          (!!c.filterSelectOptions ? 'equals' : 'fuzzy'),
+          (!!c.filterSelectOptions?.length
+            ? MRT_FILTER_TYPE.EQUALS
+            : MRT_FILTER_TYPE.BEST_MATCH),
       })),
     ),
   );
+
+  const [currentGlobalFilterType, setCurrentGlobalFilterType] = useState<
+    MRT_FilterType | string | undefined
+  >(props.globalFilter);
 
   const applyFiltersToColumns = useCallback(
     (cols: MRT_ColumnInterface[]) =>
@@ -146,12 +153,14 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
       // @ts-ignore
       columns,
       data,
+      globalFilter: currentGlobalFilterType,
       useControlledState: (state) =>
         useMemo(
           () => ({
             ...state,
             currentEditingRow,
             currentFilterTypes,
+            currentGlobalFilterType,
             densePadding,
             fullScreen,
             showFilters,
@@ -162,6 +171,7 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
           [
             currentEditingRow,
             currentFilterTypes,
+            currentGlobalFilterType,
             densePadding,
             fullScreen,
             showFilters,
@@ -196,6 +206,7 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
         //@ts-ignore
         setCurrentEditingRow,
         setCurrentFilterTypes,
+        setCurrentGlobalFilterType,
         setDensePadding,
         setFullScreen,
         setShowFilters,

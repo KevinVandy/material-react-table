@@ -2,6 +2,7 @@ export interface MRT_Localization {
   actions: string;
   cancel: string;
   changeFilterMode: string;
+  changeSearchMode: string;
   clearFilter: string;
   clearSearch: string;
   clearSort: string;
@@ -11,12 +12,13 @@ export interface MRT_Localization {
   edit: string;
   expand: string;
   expandAll: string;
+  filterBestMatchFirst: string;
   filterByColumn: string;
   filterContains: string;
   filterEmpty: string;
   filterEndsWith: string;
   filterEquals: string;
-  filterFuzzy: string;
+  filterBestMatch: string;
   filterGreaterThan: string;
   filterLessThan: string;
   filterMode: string;
@@ -51,6 +53,7 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   actions: 'Actions',
   cancel: 'Cancel',
   changeFilterMode: 'Change filter mode',
+  changeSearchMode: 'Change search mode',
   clearFilter: 'Clear filter',
   clearSearch: 'Clear search',
   clearSort: 'Clear sort',
@@ -60,12 +63,13 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   edit: 'Edit',
   expand: 'Expand',
   expandAll: 'Expand all',
+  filterBestMatch: 'Best Match',
+  filterBestMatchFirst: 'Best Match First',
   filterByColumn: 'Filter by {column}',
-  filterContains: 'Contains Exact',
+  filterContains: 'Contains',
   filterEmpty: 'Empty',
   filterEndsWith: 'Ends With',
   filterEquals: 'Equals',
-  filterFuzzy: 'Fuzzy Match',
   filterGreaterThan: 'Greater Than',
   filterLessThan: 'Less Than',
   filterMode: 'Filter Mode: {filterType}',

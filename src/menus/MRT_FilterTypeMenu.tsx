@@ -4,11 +4,12 @@ import { useMRT } from '../useMRT';
 import type { MRT_FilterType, MRT_HeaderGroup } from '..';
 import { MRT_FILTER_TYPE } from '../enums';
 import {
+  bestMatch,
+  bestMatchFirst,
   contains,
   empty,
   endsWith,
   equals,
-  fuzzy,
   greaterThan,
   lessThan,
   notEmpty,
@@ -24,7 +25,7 @@ const commonMenuItemStyles = {
 
 interface Props {
   anchorEl: HTMLElement | null;
-  column: MRT_HeaderGroup;
+  column?: MRT_HeaderGroup;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
   onSelect?: () => void;
 }
@@ -35,7 +36,13 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
   onSelect,
   setAnchorEl,
 }) => {
-  const { localization, setCurrentFilterTypes, tableInstance } = useMRT();
+  const {
+    enabledGlobalFilterTypes,
+    localization,
+    setCurrentFilterTypes,
+    setCurrentGlobalFilterType,
+    tableInstance,
+  } = useMRT();
 
   const filterTypes: {
     type: MRT_FILTER_TYPE;
@@ -46,15 +53,21 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
     () =>
       [
         {
-          type: MRT_FILTER_TYPE.FUZZY,
-          label: localization.filterFuzzy,
+          type: MRT_FILTER_TYPE.BEST_MATCH_FIRST,
+          label: localization.filterBestMatchFirst,
           divider: false,
-          fn: fuzzy,
+          fn: bestMatchFirst,
+        },
+        {
+          type: MRT_FILTER_TYPE.BEST_MATCH,
+          label: localization.filterBestMatch,
+          divider: !!column,
+          fn: bestMatch,
         },
         {
           type: MRT_FILTER_TYPE.CONTAINS,
           label: localization.filterContains,
-          divider: true,
+          divider: false,
           fn: contains,
         },
         {
@@ -105,26 +118,39 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
           divider: false,
           fn: notEmpty,
         },
-      ].filter(
-        (filterType) =>
-          !column.filterTypes || column.filterTypes.includes(filterType.type),
+      ].filter((filterType) =>
+        column
+          ? !column.enabledFilterTypes ||
+            column.enabledFilterTypes.includes(filterType.type)
+          : (!enabledGlobalFilterTypes ||
+              enabledGlobalFilterTypes.includes(filterType.type)) &&
+            [
+              MRT_FILTER_TYPE.BEST_MATCH_FIRST,
+              MRT_FILTER_TYPE.BEST_MATCH,
+            ].includes(filterType.type),
       ),
     [],
   );
 
   const handleSelectFilterType = (value: MRT_FILTER_TYPE) => {
-    setAnchorEl(null);
-    setCurrentFilterTypes((prev: { [key: string]: MRT_FilterType }) => ({
-      ...prev,
-      [column.id]: value,
-    }));
-    if ([MRT_FILTER_TYPE.EMPTY, MRT_FILTER_TYPE.NOT_EMPTY].includes(value)) {
-      column.setFilter(' ');
+    if (column) {
+      setCurrentFilterTypes((prev: { [key: string]: MRT_FilterType }) => ({
+        ...prev,
+        [column.id]: value,
+      }));
+      if ([MRT_FILTER_TYPE.EMPTY, MRT_FILTER_TYPE.NOT_EMPTY].includes(value)) {
+        column.setFilter(' ');
+      }
+    } else {
+      setCurrentGlobalFilterType(value);
     }
+    setAnchorEl(null);
     onSelect?.();
   };
 
-  const filterType = tableInstance.state.currentFilterTypes[column.id];
+  const filterType = column
+    ? tableInstance.state.currentFilterTypes[column.id]
+    : tableInstance.state.currentGlobalFilterType;
 
   return (
     <Menu

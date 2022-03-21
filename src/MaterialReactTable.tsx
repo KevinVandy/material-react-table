@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FC, MouseEvent, ReactNode } from 'react';
 import {
   AlertProps,
+  ButtonProps,
   CheckboxProps,
   IconButtonProps,
   LinearProgressProps,
@@ -140,9 +141,12 @@ export type MRT_ColumnInterface<D extends {} = {}> = ColumnInterface<D> &
     disableColumnHiding?: boolean;
     disableEditing?: boolean;
     disableFilters?: boolean;
+    enabledFilterTypes?: (MRT_FILTER_TYPE | string)[];
     filter?: MRT_FilterType | string | FilterType<D>;
     filterSelectOptions?: (string | { text: string; value: string })[];
-    filterTypes?: (MRT_FILTER_TYPE | string)[];
+    muiTableBodyCellCopyButtonProps?:
+      | ButtonProps
+      | ((cell?: MRT_Cell<D>) => ButtonProps);
     muiTableBodyCellEditTextFieldProps?:
       | TextFieldProps
       | ((cell: MRT_Cell<D>) => TextFieldProps);
@@ -152,12 +156,12 @@ export type MRT_ColumnInterface<D extends {} = {}> = ColumnInterface<D> &
     muiTableFooterCellProps?:
       | TableCellProps
       | ((column: Column<D>) => TableCellProps);
-    muiTableHeadCellFilterTextFieldProps?:
-      | TextFieldProps
-      | ((column: Column<D>) => TextFieldProps);
     muiTableHeadCellColumnActionsButtonProps?:
       | IconButtonProps
       | ((column: Column<D>) => IconButtonProps);
+    muiTableHeadCellFilterTextFieldProps?:
+      | TextFieldProps
+      | ((column: Column<D>) => TextFieldProps);
     muiTableHeadCellProps?:
       | TableCellProps
       | ((column: Column<D>) => TableCellProps);
@@ -215,6 +219,7 @@ export type MRT_TableState<D extends {} = {}> = TableState<D> &
   UseSortByState<D> & {
     currentEditingRow: MRT_Row<D> | null;
     currentFilterTypes: { [key: string]: MRT_FilterType };
+    currentGlobalFilterType: MRT_FilterType;
     densePadding: boolean;
     fullScreen: boolean;
     showFilters: boolean;
@@ -246,6 +251,7 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
     enableRowEditing?: boolean;
     enableRowNumbers?: boolean;
     enableSelection?: boolean;
+    enabledGlobalFilterTypes?: (MRT_FILTER_TYPE | string)[];
     filterTypes?: { [key in MRT_FILTER_TYPE]: any };
     hideTableFooter?: boolean;
     hideTableHead?: boolean;
@@ -268,6 +274,9 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
           row?: MRT_Row<D>,
           tableInstance?: MRT_TableInstance<D>,
         ) => CheckboxProps);
+    muiTableBodyCellCopyButtonProps?:
+      | ButtonProps
+      | ((cell?: MRT_Cell<D>) => ButtonProps);
     muiTableBodyCellEditTextFieldProps?:
       | TextFieldProps
       | ((cell?: MRT_Cell<D>) => TextFieldProps);
@@ -344,12 +353,12 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
       event: MouseEvent<HTMLButtonElement>,
       row: Row<D>,
     ) => void;
+    onSelectAllChange?: (event: ChangeEvent, selectedRows: Row<D>[]) => void;
     onSelectChange?: (
       event: ChangeEvent,
       row: Row<D>,
       selectedRows: Row<D>[],
     ) => void;
-    onSelectAllChange?: (event: ChangeEvent, selectedRows: Row<D>[]) => void;
     positionActionsColumn?: 'first' | 'last';
     positionPagination?: 'bottom' | 'top' | 'both';
     positionToolbarActions?: 'bottom' | 'top';
@@ -388,7 +397,7 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
 export default <D extends {} = {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
   filterTypes,
-  globalFilter = 'fuzzy',
+  globalFilter = MRT_FILTER_TYPE.BEST_MATCH_FIRST,
   icons,
   localization,
   positionActionsColumn = 'first',

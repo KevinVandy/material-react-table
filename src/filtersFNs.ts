@@ -1,7 +1,20 @@
 import { matchSorter } from 'match-sorter';
 import { MRT_Row } from '.';
 
-export const fuzzy = (
+export const bestMatchFirst = (
+  rows: MRT_Row[],
+  columnIds: string[] | string,
+  filterValue: string | number,
+) =>
+  matchSorter(rows, filterValue.toString().trim(), {
+    keys: Array.isArray(columnIds)
+      ? columnIds.map((c) => `values.${c}`)
+      : [`values.${columnIds}`],
+  });
+
+bestMatchFirst.autoRemove = (val: any) => !val;
+
+export const bestMatch = (
   rows: MRT_Row[],
   columnIds: string[] | string,
   filterValue: string | number,
@@ -13,7 +26,7 @@ export const fuzzy = (
     sorter: (rankedItems) => rankedItems,
   });
 
-fuzzy.autoRemove = (val: any) => !val;
+bestMatch.autoRemove = (val: any) => !val;
 
 export const contains = (
   rows: MRT_Row[],
@@ -131,11 +144,12 @@ export const notEmpty = (
 notEmpty.autoRemove = (val: any) => !val;
 
 export const defaultFilterFNs = {
+  bestMatch,
+  bestMatchFirst,
   contains,
   empty,
   endsWith,
   equals,
-  fuzzy,
   greaterThan,
   lessThan,
   notEmpty,

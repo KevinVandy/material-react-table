@@ -7,8 +7,8 @@ interface Props {
   cell: MRT_Cell;
 }
 
-export const MRT_CopyButton: FC<Props> = ({ cell }) => {
-  const { localization } = useMRT();
+export const MRT_CopyButton: FC<Props> = ({ cell, children }) => {
+  const { localization, muiTableBodyCellCopyButtonProps } = useMRT();
 
   const [copied, setCopied] = useState(false);
 
@@ -16,6 +16,21 @@ export const MRT_CopyButton: FC<Props> = ({ cell }) => {
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 4000);
+  };
+
+  const mTableBodyCellCopyButtonProps =
+    muiTableBodyCellCopyButtonProps instanceof Function
+      ? muiTableBodyCellCopyButtonProps(cell)
+      : muiTableBodyCellCopyButtonProps;
+
+  const mcTableBodyCellCopyButtonProps =
+    cell.column.muiTableBodyCellCopyButtonProps instanceof Function
+      ? cell.column.muiTableBodyCellCopyButtonProps(cell)
+      : cell.column.muiTableBodyCellCopyButtonProps;
+
+  const buttonProps = {
+    ...mTableBodyCellCopyButtonProps,
+    ...mcTableBodyCellCopyButtonProps,
   };
 
   return (
@@ -30,20 +45,23 @@ export const MRT_CopyButton: FC<Props> = ({ cell }) => {
         aria-label={localization.clickToCopy}
         onClick={() => handleCopy(cell.value)}
         size="small"
+        {...buttonProps}
         sx={{
           backgroundColor: 'transparent',
+          border: 'none',
           color: 'inherit',
-          letterSpacing: 'inherit',
           fontFamily: 'inherit',
           fontSize: 'inherit',
+          letterSpacing: 'inherit',
           m: '-0.25rem',
-          textTransform: 'inherit',
-          textAlign: 'inherit',
           minWidth: 'unset',
+          textAlign: 'inherit',
+          textTransform: 'inherit',
+          ...buttonProps?.sx,
         }}
         variant="text"
       >
-        {cell.render('Cell')}
+        {children}
       </Button>
     </Tooltip>
   );

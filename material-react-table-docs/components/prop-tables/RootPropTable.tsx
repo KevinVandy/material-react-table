@@ -269,6 +269,14 @@ const RootPropTable = () => {
         linkText: 'Mui Checkbox API docs',
       },
       {
+        prop: 'muiTableBodyCellCopyButtonProps',
+        type: 'MUI ButtonProps',
+        description:
+          'Pass in custom props to the Mui Button for click to copy buttons in every table cell',
+        link: 'https://material-ui.com/api/button/#props',
+        linkText: 'Mui Button API docs',
+      },
+      {
         prop: 'muiTableBodyCellEditTextFieldProps',
         type: 'MUI TextFieldProps',
         description:
