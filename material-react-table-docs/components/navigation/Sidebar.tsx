@@ -198,6 +198,10 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
   const { pathname } = useRouter();
   const isTablet = useMediaQuery('(max-width: 900px)');
 
+  const handleCloseMenu = () => {
+    if (isTablet) setTimeout(() => setNavOpen(false), 400);
+  };
+
   return (
     <Drawer
       // @ts-ignore
@@ -233,7 +237,10 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
                 {items?.map(({ href: href2, label: label2 }, index2) => {
                   return (
                     <Link key={index2} href={href2} passHref>
-                      <ListItemLevel2 selected={pathname === href2}>
+                      <ListItemLevel2
+                        onClick={handleCloseMenu}
+                        selected={pathname === href2}
+                      >
                         {label2}
                       </ListItemLevel2>
                     </Link>
@@ -244,7 +251,10 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
           } else {
             return (
               <Link key={index} href={href as string} passHref>
-                <ListItemLevel1 selected={pathname === href}>
+                <ListItemLevel1
+                  onClick={handleCloseMenu}
+                  selected={pathname === href}
+                >
                   {label}
                 </ListItemLevel1>
               </Link>
