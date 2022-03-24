@@ -115,6 +115,7 @@ export type MRT_TableInstance<D extends {} = {}> = TableInstance<D> &
     page: MRT_Row<D>[];
     resetResizing: () => void;
     rows: MRT_Row<D>[];
+    selectedFlatRows: MRT_Row<D>[];
     state: MRT_TableState<D>;
   };
 
@@ -289,13 +290,13 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
     muiTableBodyProps?:
       | TableBodyProps
       | ((tableInstance: MRT_TableInstance<D>) => TableBodyProps);
-    muiTableBodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
+    muiTableBodyRowProps?: TableRowProps | ((row: MRT_Row<D>) => TableRowProps);
     muiTableContainerProps?:
       | TableContainerProps
       | ((tableInstance: MRT_TableInstance<D>) => TableContainerProps);
     muiTableDetailPanelProps?:
       | TableCellProps
-      | ((row: Row<D>) => TableCellProps);
+      | ((row: MRT_Row<D>) => TableCellProps);
     muiTableFooterCellProps?:
       | TableCellProps
       | ((column: Column<D>) => TableCellProps);
@@ -344,33 +345,39 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
     onColumnHide?: (column: Column<D>, hiddenColumns?: string[]) => void;
     onDetailPanelClick?: (
       event: MouseEvent<HTMLTableCellElement>,
-      row: Row<D>,
+      row: MRT_Row<D>,
     ) => void;
     onGlobalFilterChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-    onRowClick?: (event: MouseEvent<HTMLTableRowElement>, row: Row<D>) => void;
-    onRowEditSubmit?: (row: Row<D>) => Promise<void> | void;
+    onRowClick?: (
+      event: MouseEvent<HTMLTableRowElement>,
+      row: MRT_Row<D>,
+    ) => void;
+    onRowEditSubmit?: (row: MRT_Row<D>) => Promise<void> | void;
     onRowExpandChange?: (
       event: MouseEvent<HTMLButtonElement>,
-      row: Row<D>,
+      row: MRT_Row<D>,
     ) => void;
-    onSelectAllChange?: (event: ChangeEvent, selectedRows: Row<D>[]) => void;
+    onSelectAllChange?: (
+      event: ChangeEvent,
+      selectedRows: MRT_Row<D>[],
+    ) => void;
     onSelectChange?: (
       event: ChangeEvent,
-      row: Row<D>,
-      selectedRows: Row<D>[],
+      row: MRT_Row<D>,
+      selectedRows: MRT_Row<D>[],
     ) => void;
     positionActionsColumn?: 'first' | 'last';
     positionPagination?: 'bottom' | 'top' | 'both';
     positionToolbarActions?: 'bottom' | 'top';
     positionToolbarAlertBanner?: 'bottom' | 'top';
-    renderDetailPanel?: (row: Row<D>) => ReactNode;
+    renderDetailPanel?: (row: MRT_Row<D>) => ReactNode;
     renderRowActionMenuItems?: (
-      rowData: Row<D>,
+      rowData: MRT_Row<D>,
       tableInstance: MRT_TableInstance<D>,
       closeMenu: () => void,
     ) => ReactNode[];
     renderRowActions?: (
-      row: Row<D>,
+      row: MRT_Row<D>,
       tableInstance: MRT_TableInstance<D>,
     ) => ReactNode;
     renderToolbarCustomActions?: (
