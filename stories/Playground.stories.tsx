@@ -6,7 +6,6 @@ import { Button, MenuItem } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShareIcon from '@mui/icons-material/Share';
-import { TableInstance } from 'react-table';
 
 const meta: Meta = {
   title: 'Prop Playground',

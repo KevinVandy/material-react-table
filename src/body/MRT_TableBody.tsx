@@ -2,14 +2,13 @@ import React, { FC } from 'react';
 import { TableBody } from '@mui/material';
 import { MRT_TableBodyRow } from './MRT_TableBodyRow';
 import { useMRT } from '../useMRT';
-import type { MRT_Row } from '..';
 
 interface Props {}
 
 export const MRT_TableBody: FC<Props> = () => {
   const { tableInstance, muiTableBodyProps, manualPagination } = useMRT();
 
-  const rows = manualPagination ? tableInstance.rows : tableInstance.page;
+  const rows = tableInstance.getRows();
 
   const mTableBodyProps =
     muiTableBodyProps instanceof Function
@@ -17,12 +16,8 @@ export const MRT_TableBody: FC<Props> = () => {
       : muiTableBodyProps;
 
   const tableBodyProps = {
-    ...mTableBodyProps,
     ...tableInstance.getTableBodyProps(),
-    style: {
-      ...tableInstance.getTableBodyProps().style,
-      ...mTableBodyProps?.style,
-    },
+    ...mTableBodyProps,
   };
 
   return (
@@ -32,8 +27,7 @@ export const MRT_TableBody: FC<Props> = () => {
         ...tableBodyProps?.sx,
       }}
     >
-      {rows.map((row: MRT_Row) => {
-        tableInstance.prepareRow(row);
+      {rows.map((row) => {
         return <MRT_TableBodyRow key={row.getRowProps().key} row={row} />;
       })}
     </TableBody>

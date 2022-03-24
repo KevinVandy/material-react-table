@@ -1,3 +1,4 @@
+import { createTable, ReactTable } from '@tanstack/react-table';
 import React, {
   Context,
   Dispatch,
@@ -9,19 +10,6 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import {
-  PluginHook,
-  useExpanded,
-  useFilters,
-  useFlexLayout,
-  useGlobalFilter,
-  useGroupBy,
-  usePagination,
-  useResizeColumns,
-  useRowSelect,
-  useSortBy,
-  useTable,
-} from 'react-table';
 import type {
   MRT_ColumnInterface,
   MRT_FilterType,
@@ -52,8 +40,21 @@ export type UseMRT<D extends {} = {}> = MaterialReactTableProps<D> & {
   setFullScreen: Dispatch<SetStateAction<boolean>>;
   setShowFilters: Dispatch<SetStateAction<boolean>>;
   setShowSearch: Dispatch<SetStateAction<boolean>>;
-  tableInstance: MRT_TableInstance<D>;
+  tableInstance: ReactTable<D, undefined, undefined, undefined, undefined>;
 };
+
+const createGroup = (table, column) =>
+  table.createGroup({
+    ...column,
+    columns: column?.columns?.map?.((col) =>
+      col.columns ? createGroup(table, col) : createColumn(table, col),
+    ),
+  });
+
+const createColumn = (table, column) =>
+  column.columnType === 'display'
+    ? table.createDisplayColumn(column)
+    : table.createDataColumn(column);
 
 const MaterialReactTableContext = (<D extends {} = {}>() =>
   createContext<UseMRT<D>>({} as UseMRT<D>) as Context<UseMRT<D>>)();
@@ -61,21 +62,8 @@ const MaterialReactTableContext = (<D extends {} = {}>() =>
 export const MaterialReactTableProvider = <D extends {} = {}>(
   props: PropsWithChildren<MaterialReactTableProps<D>>,
 ) => {
-  const hooks: PluginHook<D>[] = [
-    useFilters,
-    useGlobalFilter,
-    useGroupBy,
-    useSortBy,
-    useExpanded,
-    usePagination,
-    useRowSelect,
-  ];
-
-  if (props.enableColumnResizing)
-    hooks.unshift(useResizeColumns, useFlexLayout);
-
   const [currentEditingRow, setCurrentEditingRow] = useState<MRT_Row<D> | null>(
-    null,
+    props.initialState.currentEditingRow ?? null,
   );
   const [densePadding, setDensePadding] = useState(
     props.initialState?.densePadding ?? false,
@@ -126,10 +114,24 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     [currentFilterTypes, props.filterTypes],
   );
 
+  let table = useMemo(() => createTable().RowType<D>(), []);
+
   const columns = useMemo(
-    () => applyFiltersToColumns(props.columns),
-    [props.columns, applyFiltersToColumns],
+    () =>
+      table.createColumns(
+        props.columns.map((column) =>
+          column.columns
+            ? createGroup(table, column)
+            : createColumn(table, column),
+        ),
+      ),
+    [table],
   );
+
+  // const columns = useMemo(
+  //   () => applyFiltersToColumns(props.columns),
+  //   [props.columns, applyFiltersToColumns],
+  // );
 
   const data = useMemo(
     () =>
@@ -146,54 +148,33 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     [props.data, props.isLoading],
   );
 
-  const tableInstance = useTable(
-    // @ts-ignore
-    {
-      ...props,
-      // @ts-ignore
-      columns,
-      data,
-      globalFilter: currentGlobalFilterType,
-      useControlledState: (state) =>
-        useMemo(
-          () => ({
-            ...state,
-            currentEditingRow,
-            currentFilterTypes,
-            currentGlobalFilterType,
-            densePadding,
-            fullScreen,
-            showFilters,
-            showSearch,
-            //@ts-ignore
-            ...props?.useControlledState?.(state),
-          }),
-          [
-            currentEditingRow,
-            currentFilterTypes,
-            currentGlobalFilterType,
-            densePadding,
-            fullScreen,
-            showFilters,
-            showSearch,
-            state,
-          ],
-        ),
+  const tableInstance = table.useTable({
+    ...props,
+    columns,
+    data,
+    state: {
+      ...props.initialState,
+      currentEditingRow,
+      currentFilterTypes,
+      currentGlobalFilterType,
+      densePadding,
+      fullScreen,
+      showFilters,
+      showSearch,
     },
-    ...hooks,
-  ) as unknown as MRT_TableInstance<D>;
+  });
 
   const idPrefix = useMemo(
     () => props.idPrefix ?? Math.random().toString(36).substring(2, 9),
     [props.idPrefix],
   );
   const anyRowsCanExpand = useMemo(
-    () => tableInstance.rows.some((row) => row.canExpand),
-    [tableInstance.rows],
+    () => tableInstance.getRows().some((row) => row.getCanExpand()),
+    [tableInstance.getRows()],
   );
   const anyRowsExpanded = useMemo(
-    () => tableInstance.rows.some((row) => row.isExpanded),
-    [tableInstance.rows],
+    () => tableInstance.getExpandedFlatRows().length > 0,
+    [tableInstance],
   );
 
   return (

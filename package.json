@@ -1,5 +1,5 @@
 {
-  "version": "0.6.10",
+  "version": "0.7.0",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material-UI implementation of react-table, inspired by material-table and the mui DataGrid, written from the ground up in TypeScript.",
@@ -72,17 +72,16 @@
     "@storybook/addon-storysource": "^6.4.19",
     "@storybook/addons": "^6.4.19",
     "@storybook/react": "^6.4.19",
+    "@tanstack/react-table": "^8.0.0-alpha.3",
     "@types/faker": "^6.6.8",
     "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.13",
-    "@types/react-table": "^7.7.10",
     "babel-loader": "^8.2.3",
     "husky": "^7.0.4",
     "prettier": "^2.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
-    "react-table": "^7.7.0",
     "size-limit": "^7.0.8",
     "storybook-addon-paddings": "^4.2.1",
     "storybook-dark-mode": "^1.0.9",
@@ -95,8 +94,8 @@
     "@emotion/styled": ">=11",
     "@mui/icons-material": ">=5",
     "@mui/material": ">=5",
-    "react": ">=16.8",
-    "react-table": ">=7"
+    "@tanstack/react-table": "^8.0.0-alpha.3",
+    "react": ">=16.8"
   },
   "dependencies": {
     "match-sorter": "^6.3.1"

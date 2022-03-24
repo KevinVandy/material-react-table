@@ -10,10 +10,10 @@ import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
 import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMenuButton';
-import type { MRT_Cell, MRT_Row } from '..';
+import { Row } from '@tanstack/react-table';
 
-interface Props {
-  row: MRT_Row;
+interface Props<D extends {} = {}> {
+  row: Row<D, undefined, undefined, undefined, undefined, undefined>;
 }
 
 export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
@@ -28,9 +28,6 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
     positionActionsColumn,
     renderDetailPanel,
     tableInstance,
-    tableInstance: {
-      state: { densePadding },
-    },
   } = useMRT();
 
   const mTableBodyRowProps =
@@ -65,7 +62,9 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
           <TableCell
             size="small"
             sx={{
-              ...commonTableBodyButtonCellStyles(densePadding),
+              ...commonTableBodyButtonCellStyles(
+                tableInstance.getState().densePadding,
+              ),
               pl: `${row.depth + 0.5}rem`,
               textAlign: 'left',
             }}
@@ -77,7 +76,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
           <TableCell
             sx={{
               ...commonTableBodyButtonCellStyles(
-                tableInstance.state.densePadding,
+                tableInstance.getState().densePadding,
               ),
               maxWidth: '3rem',
               width: '3rem',
@@ -87,7 +86,13 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
           </TableCell>
         )}
         {enableRowNumbers && (
-          <TableCell sx={{ ...commonTableBodyCellStyles(densePadding) }}>
+          <TableCell
+            sx={{
+              ...commonTableBodyCellStyles(
+                tableInstance.getState().densePadding,
+              ),
+            }}
+          >
             {row.index + 1}
           </TableCell>
         )}

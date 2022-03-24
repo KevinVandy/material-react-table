@@ -14,7 +14,7 @@ export const MRT_TableContainer: FC<Props> = () => {
     muiTableContainerProps,
     tableInstance,
   } = useMRT();
-  const fullScreen = tableInstance.state.fullScreen;
+  const fullScreen = tableInstance.getState().fullScreen;
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

@@ -8,7 +8,6 @@ import {
   TextFieldProps,
   Tooltip,
 } from '@mui/material';
-import { useAsyncDebounce } from 'react-table';
 import { useMRT } from '../useMRT';
 import type { MRT_HeaderGroup } from '..';
 import { MRT_FilterTypeMenu } from '../menus/MRT_FilterTypeMenu';
