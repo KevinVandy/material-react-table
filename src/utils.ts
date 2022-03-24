@@ -19,3 +19,16 @@ export const findLowestLevelCols = (
   }
   return lowestLevelColumns.filter((col) => !col.columns);
 };
+
+export const createGroup = (table, column) =>
+  table.createGroup({
+    ...column,
+    columns: column?.columns?.map?.((col) =>
+      col.columns ? createGroup(table, col) : createColumn(table, col),
+    ),
+  });
+
+export const createColumn = (table, column) =>
+  column.columnType === 'display'
+    ? table.createDisplayColumn(column)
+    : table.createDataColumn(column);

@@ -3,8 +3,8 @@ import { Checkbox, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
 import type { MRT_Row } from '..';
 
-interface Props {
-  row?: MRT_Row;
+interface Props<D extends {} = {}> {
+  row?: MRT_Row<D>;
   selectAll?: boolean;
 }
 
@@ -33,8 +33,8 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
         event,
         row,
         event.target.checked
-          ? [...tableInstance.selectedFlatRows, row]
-          : tableInstance.selectedFlatRows.filter(
+          ? [...(tableInstance.selectedFlatRows as MRT_Row[]), row]
+          : (tableInstance.selectedFlatRows as MRT_Row[]).filter(
               (selectedRow) => selectedRow.id !== row.id,
             ),
       );
