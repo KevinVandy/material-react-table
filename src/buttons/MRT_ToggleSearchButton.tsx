@@ -11,13 +11,11 @@ export const MRT_ToggleSearchButton: FC<Props> = ({ ...rest }) => {
     localization,
     muiSearchTextFieldProps,
     setShowSearch,
-    tableInstance: {
-      state: { showSearch },
-    },
+    tableInstance: { getState },
   } = useMRT();
 
   const handleToggleSearch = () => {
-    setShowSearch(!showSearch);
+    setShowSearch(!getState().showSearch);
     setTimeout(
       () =>
         document
@@ -32,7 +30,7 @@ export const MRT_ToggleSearchButton: FC<Props> = ({ ...rest }) => {
   return (
     <Tooltip arrow title={localization.showHideSearch}>
       <IconButton size="small" onClick={handleToggleSearch} {...rest}>
-        {showSearch ? <SearchOffIcon /> : <SearchIcon />}
+        {getState().showSearch ? <SearchOffIcon /> : <SearchIcon />}
       </IconButton>
     </Tooltip>
   );

@@ -30,6 +30,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
     renderRowActions,
     setCurrentEditingRow,
     tableInstance,
+    tableInstance: { getState },
   } = useMRT();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -47,11 +48,11 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
 
   return (
     <TableCell
-      sx={commonTableBodyButtonCellStyles(tableInstance.state.densePadding)}
+      sx={commonTableBodyButtonCellStyles(getState().densePadding)}
     >
       {renderRowActions ? (
         <>{renderRowActions(row, tableInstance)}</>
-      ) : row.id === tableInstance.state.currentEditingRow?.id ? (
+      ) : row.id === getState().currentEditingRow?.id ? (
         <MRT_EditActionButtons row={row} />
       ) : !renderRowActionMenuItems && enableRowEditing ? (
         <Tooltip placement="right" arrow title={localization.edit}>

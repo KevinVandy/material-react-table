@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FC, MouseEvent, useState } from 'react';
 import {
   Chip,
+  debounce,
   IconButton,
   InputAdornment,
   MenuItem,
@@ -8,7 +9,6 @@ import {
   TextFieldProps,
   Tooltip,
 } from '@mui/material';
-import { useAsyncDebounce } from 'react-table';
 import { useMRT } from '../useMRT';
 import type { MRT_HeaderGroup } from '..';
 import { MRT_FilterTypeMenu } from '../menus/MRT_FilterTypeMenu';
@@ -25,7 +25,7 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
     localization,
     muiTableHeadCellFilterTextFieldProps,
     setCurrentFilterTypes,
-    tableInstance,
+    tableInstance: { getState },
   } = useMRT();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -47,8 +47,8 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
 
   const [filterValue, setFilterValue] = useState('');
 
-  const handleChange = useAsyncDebounce((value) => {
-    column.setFilter(value ?? undefined);
+  const handleChange = debounce((value: string) => {
+    column.setColumnFilterValue(value ?? undefined);
   }, 150);
 
   const handleFilterMenuOpen = (event: MouseEvent<HTMLElement>) => {
@@ -57,12 +57,12 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
 
   const handleClear = () => {
     setFilterValue('');
-    column.setFilter(undefined);
+    column.setColumnFilterValue(undefined);
   };
 
   const handleClearFilterChip = () => {
     setFilterValue('');
-    column.setFilter(undefined);
+    column.setColumnFilterValue(undefined);
     setCurrentFilterTypes((prev) => ({
       ...prev,
       [column.id]: MRT_FILTER_TYPE.BEST_MATCH,
@@ -74,7 +74,7 @@ export const MRT_FilterTextField: FC<Props> = ({ column }) => {
   }
 
   const filterId = `mrt-${idPrefix}-${column.id}-filter-text-field`;
-  const filterType = tableInstance.state.currentFilterTypes[column.id];
+  const filterType = getState().currentFilterTypes?.[column.id];
   const isSelectFilter = !!column.filterSelectOptions;
   const filterChipLabel =
     !(filterType instanceof Function) &&

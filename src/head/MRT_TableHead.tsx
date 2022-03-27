@@ -16,10 +16,10 @@ export const MRT_TableHead: FC<Props> = () => {
 
   return (
     <TableHead {...tableHeadProps}>
-      {tableInstance.headerGroups.map((headerGroup: MRT_HeaderGroup) => (
+      {tableInstance.getHeaderGroups().map((headerGroup) => (
         <MRT_TableHeadRow
           key={headerGroup.getHeaderGroupProps().key}
-          headerGroup={headerGroup}
+          headerGroup={headerGroup as MRT_HeaderGroup}
         />
       ))}
     </TableHead>

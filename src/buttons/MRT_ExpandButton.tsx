@@ -24,7 +24,7 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
   return (
     <IconButton
       aria-label={localization.expand}
-      disabled={!row.canExpand && !renderDetailPanel}
+      disabled={!row.getCanExpand() && !renderDetailPanel}
       title={localization.expand}
       {...row.getToggleRowExpandedProps()}
       onClick={handleToggleExpand}
@@ -32,9 +32,9 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
       <ExpandMoreIcon
         style={{
           transform: `rotate(${
-            !row.canExpand && !renderDetailPanel
+            !row.getCanExpand() && !renderDetailPanel
               ? -90
-              : row.isExpanded
+              : row.getIsExpanded()
               ? -180
               : 0
           }deg)`,

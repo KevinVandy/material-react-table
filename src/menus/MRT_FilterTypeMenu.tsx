@@ -42,6 +42,7 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
     setCurrentFilterTypes,
     setCurrentGlobalFilterType,
     tableInstance,
+    tableInstance: { getState },
   } = useMRT();
 
   const filterTypes: {
@@ -139,7 +140,7 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
         [column.id]: value,
       }));
       if ([MRT_FILTER_TYPE.EMPTY, MRT_FILTER_TYPE.NOT_EMPTY].includes(value)) {
-        column.setFilter(' ');
+        column.setColumnFilterValue(' ');
       }
     } else {
       setCurrentGlobalFilterType(value);
@@ -149,8 +150,8 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
   };
 
   const filterType = column
-    ? tableInstance.state.currentFilterTypes[column.id]
-    : tableInstance.state.currentGlobalFilterType;
+    ? getState().currentFilterTypes[column.id]
+    : getState().currentGlobalFilterType;
 
   return (
     <Menu
@@ -159,7 +160,7 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
       MenuListProps={{
-        dense: tableInstance.state.densePadding,
+        dense: getState().densePadding,
       }}
     >
       {filterTypes.map(({ type, label, divider, fn }, index) => (

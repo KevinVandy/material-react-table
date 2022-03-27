@@ -19,10 +19,6 @@ export const MRT_Table: FC<Props> = () => {
   const tableProps = {
     ...mTableProps,
     ...tableInstance.getTableProps(),
-    style: {
-      ...tableInstance.getTableProps().style,
-      ...mTableProps?.style,
-    },
   };
 
   return (

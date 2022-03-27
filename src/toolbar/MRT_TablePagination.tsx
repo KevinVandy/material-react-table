@@ -5,7 +5,11 @@ import { useMRT } from '../useMRT';
 interface Props {}
 
 export const MRT_TablePagination: FC<Props> = () => {
-  const { tableInstance, muiTablePaginationProps } = useMRT();
+  const {
+    muiTablePaginationProps,
+    tableInstance,
+    tableInstance: { getState },
+  } = useMRT();
 
   const tablePaginationProps =
     muiTablePaginationProps instanceof Function
@@ -14,24 +18,24 @@ export const MRT_TablePagination: FC<Props> = () => {
 
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     tableInstance.setPageSize(+event.target.value);
-    tableInstance.gotoPage(0);
+    tableInstance.setPageIndex(0);
   };
+
+  const showFirstLastPageButtons =
+    tableInstance.getRowModel().rows.length / getState().pagination.pageSize >
+    2;
 
   return (
     <TablePagination
       component={'div'}
-      count={tableInstance.rows.length}
-      onPageChange={(_, newPage) => tableInstance.gotoPage(newPage)}
+      count={tableInstance.getRowModel().rows.length}
+      onPageChange={(_, newPage) => tableInstance.setPageIndex(newPage)}
       onRowsPerPageChange={handleChangeRowsPerPage}
-      page={tableInstance.state.pageIndex}
-      rowsPerPage={tableInstance.state.pageSize}
+      page={getState().pagination.pageIndex}
+      rowsPerPage={getState().pagination.pageSize}
       SelectProps={{ style: { margin: '0 1rem 0 1ch' } }}
-      showFirstButton={
-        tableInstance.rows.length / tableInstance.state.pageSize > 2
-      }
-      showLastButton={
-        tableInstance.rows.length / tableInstance.state.pageSize > 2
-      }
+      showFirstButton={showFirstLastPageButtons}
+      showLastButton={showFirstLastPageButtons}
       {...tablePaginationProps}
       sx={{
         m: '0 0.5rem',

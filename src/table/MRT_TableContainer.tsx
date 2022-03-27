@@ -13,8 +13,10 @@ export const MRT_TableContainer: FC<Props> = () => {
     hideToolbarTop,
     muiTableContainerProps,
     tableInstance,
+    tableInstance: { getState },
   } = useMRT();
-  const fullScreen = tableInstance.state.fullScreen;
+
+  const fullScreen = getState().fullScreen;
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

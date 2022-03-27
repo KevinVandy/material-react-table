@@ -30,8 +30,8 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
 }) => {
   const {
     disableColumnHiding,
-    disableFilters,
-    disableSortBy,
+    enableColumnFilters,
+    enableSorting,
     enableColumnGrouping,
     icons: {
       ArrowRightIcon,
@@ -47,6 +47,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     localization,
     setShowFilters,
     tableInstance,
+    tableInstance: { getState },
   } = useMRT();
 
   const [filterMenuAnchorEl, setFilterMenuAnchorEl] =
@@ -56,32 +57,32 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     useState<null | HTMLElement>(null);
 
   const handleClearSort = () => {
-    column.clearSortBy();
+    tableInstance.resetSorting();
     setAnchorEl(null);
   };
 
   const handleSortAsc = () => {
-    column.toggleSortBy(false);
+    column.toggleSorting(false);
     setAnchorEl(null);
   };
 
   const handleSortDesc = () => {
-    column.toggleSortBy(true);
+    column.toggleSorting(true);
     setAnchorEl(null);
   };
 
   const handleHideColumn = () => {
-    column.toggleHidden();
+    column.toggleVisibility(false);
     setAnchorEl(null);
   };
 
   const handleGroupByColumn = () => {
-    column.toggleGroupBy();
+    column.toggleGrouping();
     setAnchorEl(null);
   };
 
   const handleClearFilter = () => {
-    column.setFilter('');
+    column.setColumnFilterValue('');
     setAnchorEl(null);
   };
 
@@ -102,7 +103,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
   };
 
   const handleShowAllColumns = () => {
-    tableInstance.toggleHideAllColumns(false);
+    tableInstance.toggleAllColumnsVisible(true);
     setAnchorEl(null);
   };
 
@@ -124,13 +125,13 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       open={!!anchorEl}
       onClose={() => setAnchorEl(null)}
       MenuListProps={{
-        dense: tableInstance.state.densePadding,
+        dense: getState().densePadding,
       }}
     >
-      {!disableSortBy &&
-        column.canSort && [
+      {enableSorting &&
+        column.getCanSort() && [
           <MenuItem
-            disabled={!column.isSorted}
+            disabled={!column.getIsSorted()}
             key={0}
             onClick={handleClearSort}
             sx={commonMenuItemStyles}
@@ -143,7 +144,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             </Box>
           </MenuItem>,
           <MenuItem
-            disabled={column.isSorted && !column.isSortedDesc}
+            disabled={column.getIsSorted() === 'asc'}
             key={1}
             onClick={handleSortAsc}
             sx={commonMenuItemStyles}
@@ -160,10 +161,12 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           </MenuItem>,
           <MenuItem
             divider={
-              !disableFilters || enableColumnGrouping || !disableColumnHiding
+              enableColumnFilters ||
+              enableColumnGrouping ||
+              !disableColumnHiding
             }
             key={2}
-            disabled={column.isSorted && column.isSortedDesc}
+            disabled={column.getIsSorted() === 'desc'}
             onClick={handleSortDesc}
             sx={commonMenuItemStyles}
           >
@@ -178,10 +181,10 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             </Box>
           </MenuItem>,
         ]}
-      {!disableFilters &&
-        column.canFilter && [
+      {enableColumnFilters &&
+        column.getCanColumnFilter() && [
           <MenuItem
-            disabled={!column.filterValue}
+            disabled={!column.getColumnFilterValue()}
             key={0}
             onClick={handleClearFilter}
             sx={commonMenuItemStyles}
@@ -228,7 +231,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           />,
         ]}
       {enableColumnGrouping &&
-        column.canGroupBy && [
+        column.getCanGroup() && [
           <MenuItem
             divider={!disableColumnHiding}
             key={0}
@@ -240,7 +243,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
                 <DynamicFeedIcon />
               </ListItemIcon>
               {localization[
-                column.isGrouped ? 'ungroupByColumn' : 'groupByColumn'
+                column.getIsGrouped() ? 'ungroupByColumn' : 'groupByColumn'
               ]?.replace('{column}', String(column.Header))}
             </Box>
           </MenuItem>,
@@ -263,7 +266,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           </Box>
         </MenuItem>,
         <MenuItem
-          disabled={!tableInstance.state.hiddenColumns?.length}
+          disabled={!getState().columnVisibility?.length} //TODO
           key={1}
           onClick={handleShowAllColumns}
           sx={commonMenuItemStyles}

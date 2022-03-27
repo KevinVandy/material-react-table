@@ -1,13 +1,13 @@
 import React, { ChangeEvent, FC, MouseEvent, useState } from 'react';
 import {
   Collapse,
+  debounce,
   IconButton,
   InputAdornment,
   TextField,
   Tooltip,
 } from '@mui/material';
 import { useMRT } from '../useMRT';
-import { useAsyncDebounce } from 'react-table';
 import { MRT_FilterTypeMenu } from '../menus/MRT_FilterTypeMenu';
 
 interface Props {}
@@ -20,12 +20,13 @@ export const MRT_SearchTextField: FC<Props> = () => {
     muiSearchTextFieldProps,
     onGlobalFilterChange,
     tableInstance,
+    tableInstance: { getState },
   } = useMRT();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [searchValue, setSearchValue] = useState('');
 
-  const handleChange = useAsyncDebounce(
+  const handleChange = debounce(
     (event: ChangeEvent<HTMLInputElement>) => {
       tableInstance.setGlobalFilter(event.target.value ?? undefined);
       onGlobalFilterChange?.(event);
@@ -43,7 +44,7 @@ export const MRT_SearchTextField: FC<Props> = () => {
   };
 
   return (
-    <Collapse in={tableInstance.state.showSearch} orientation="horizontal">
+    <Collapse in={getState().showSearch} orientation="horizontal">
       <TextField
         id={`mrt-${idPrefix}-search-text-field`}
         placeholder={localization.search}

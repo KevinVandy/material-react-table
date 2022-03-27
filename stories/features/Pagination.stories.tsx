@@ -45,7 +45,9 @@ export const PaginationEnabledDefault: Story<MaterialReactTableProps> = () => (
 
 export const PaginationDisabledOrOverriden: Story<
   MaterialReactTableProps
-> = () => <MaterialReactTable columns={columns} data={data} manualPagination />;
+> = () => (
+  <MaterialReactTable columns={columns} data={data} disablePagination />
+);
 
 export const PaginationPositionBottom: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable

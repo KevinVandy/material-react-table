@@ -29,20 +29,20 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
   return (
     <TableRow {...tableRowProps}>
       <TableCell
-        colSpan={tableInstance.visibleColumns.length + 10}
+        colSpan={tableInstance.getVisibleFlatColumns().length + 10}
         onClick={(event: MouseEvent<HTMLTableCellElement>) =>
           onDetailPanelClick?.(event, row)
         }
         {...tableCellProps}
         sx={{
-          borderBottom: !row.isExpanded ? 'none' : undefined,
-          pb: row.isExpanded ? '1rem' : 0,
-          pt: row.isExpanded ? '1rem' : 0,
+          borderBottom: !row.getIsExpanded() ? 'none' : undefined,
+          pb: row.getIsExpanded() ? '1rem' : 0,
+          pt: row.getIsExpanded() ? '1rem' : 0,
           transition: 'all 0.2s ease-in-out',
           ...tableCellProps?.sx,
         }}
       >
-        <Collapse in={row.isExpanded}>{renderDetailPanel?.(row)}</Collapse>
+        <Collapse in={row.getIsExpanded()}>{renderDetailPanel?.(row)}</Collapse>
       </TableCell>
     </TableRow>
   );

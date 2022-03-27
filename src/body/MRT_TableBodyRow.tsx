@@ -27,10 +27,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
     onRowClick,
     positionActionsColumn,
     renderDetailPanel,
-    tableInstance,
-    tableInstance: {
-      state: { densePadding },
-    },
+    tableInstance: { getState },
   } = useMRT();
 
   const mTableBodyRowProps =
@@ -39,12 +36,8 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
       : muiTableBodyRowProps;
 
   const tableRowProps = {
-    ...mTableBodyRowProps,
     ...row.getRowProps(),
-    style: {
-      ...row.getRowProps().style,
-      ...mTableBodyRowProps?.style,
-    },
+    ...mTableBodyRowProps,
   };
 
   return (
@@ -54,7 +47,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         onClick={(event: MouseEvent<HTMLTableRowElement>) =>
           onRowClick?.(event, row)
         }
-        selected={row.isSelected}
+        selected={row.getIsSelected()}
         {...tableRowProps}
       >
         {(enableRowActions || enableRowEditing) &&
@@ -65,7 +58,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
           <TableCell
             size="small"
             sx={{
-              ...commonTableBodyButtonCellStyles(densePadding),
+              ...commonTableBodyButtonCellStyles(getState().densePadding),
               pl: `${row.depth + 0.5}rem`,
               textAlign: 'left',
             }}
@@ -76,9 +69,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         {enableSelection && (
           <TableCell
             sx={{
-              ...commonTableBodyButtonCellStyles(
-                tableInstance.state.densePadding,
-              ),
+              ...commonTableBodyButtonCellStyles(getState().densePadding),
               maxWidth: '3rem',
               width: '3rem',
             }}
@@ -87,7 +78,9 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
           </TableCell>
         )}
         {enableRowNumbers && (
-          <TableCell sx={{ ...commonTableBodyCellStyles(densePadding) }}>
+          <TableCell
+            sx={{ ...commonTableBodyCellStyles(getState().densePadding) }}
+          >
             {row.index + 1}
           </TableCell>
         )}
@@ -99,7 +92,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
             <MRT_ToggleRowActionMenuButton row={row} />
           )}
       </TableRow>
-      {renderDetailPanel && !row.isGrouped && (
+      {renderDetailPanel && !row.getIsGrouped() && (
         <MRT_TableDetailPanel row={row} />
       )}
     </>

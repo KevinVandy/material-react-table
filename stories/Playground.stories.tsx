@@ -74,7 +74,7 @@ MinimumFeatures.args = {
     age: faker.datatype.number(80),
     address: faker.address.streetAddress(),
   })),
-  manualPagination: true,
+  disablePagination: true,
   hideToolbarTop: true,
   hideToolbarBottom: true,
   disableSortBy: true,

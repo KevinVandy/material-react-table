@@ -15,9 +15,7 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
     onSelectChange,
     onSelectAllChange,
     tableInstance,
-    tableInstance: {
-      state: { densePadding },
-    },
+    tableInstance: { getState },
   } = useMRT();
 
   const handleSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +23,9 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
       tableInstance?.getToggleAllRowsSelectedProps?.()?.onChange?.(event);
       onSelectAllChange?.(
         event,
-        event.target.checked ? tableInstance.rows : [],
+        (event.target.checked
+          ? tableInstance.getRowModel().flatRows
+          : []) as MRT_Row[],
       );
     } else if (row) {
       row?.getToggleRowSelectedProps()?.onChange?.(event);
@@ -33,8 +33,8 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
         event,
         row,
         event.target.checked
-          ? [...(tableInstance.selectedFlatRows as MRT_Row[]), row]
-          : (tableInstance.selectedFlatRows as MRT_Row[]).filter(
+          ? [...(tableInstance.getSelectedFlatRows() as MRT_Row[]), row]
+          : (tableInstance.getSelectedFlatRows() as MRT_Row[]).filter(
               (selectedRow) => selectedRow.id !== row.id,
             ),
       );
@@ -74,7 +74,7 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
             ? localization.toggleSelectAll
             : localization.toggleSelectRow,
         }}
-        size={densePadding ? 'small' : 'medium'}
+        size={getState().densePadding ? 'small' : 'medium'}
         {...checkboxProps}
         onChange={handleSelectChange}
         title={undefined}

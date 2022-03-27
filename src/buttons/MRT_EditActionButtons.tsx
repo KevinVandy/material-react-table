@@ -13,18 +13,16 @@ export const MRT_EditActionButtons: FC<Props> = ({ row }) => {
     localization,
     onRowEditSubmit,
     setCurrentEditingRow,
-    tableInstance: {
-      state: { currentEditingRow },
-    },
+    tableInstance: { getState },
   } = useMRT();
 
   const handleCancel = () => {
-    row.values = row.original;
+    row.values = row.original ?? {};
     setCurrentEditingRow(null);
   };
 
   const handleSave = async () => {
-    await onRowEditSubmit?.(currentEditingRow ?? row);
+    await onRowEditSubmit?.(getState().currentEditingRow ?? row);
     setCurrentEditingRow(null);
   };
 

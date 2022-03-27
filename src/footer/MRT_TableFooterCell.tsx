@@ -11,9 +11,7 @@ export const MRT_TableFooterCell: FC<Props> = ({ column }) => {
   const {
     muiTableFooterCellProps,
     enableColumnResizing,
-    tableInstance: {
-      state: { densePadding },
-    },
+    tableInstance: { getState },
   } = useMRT();
 
   const isParentHeader = !!column?.columns?.length;
@@ -29,14 +27,9 @@ export const MRT_TableFooterCell: FC<Props> = ({ column }) => {
       : column.muiTableFooterCellProps;
 
   const tableCellProps = {
+    ...column.getFooterGroupProps(),
     ...mTableFooterCellProps,
     ...mcTableFooterCellProps,
-    ...column.getFooterProps(),
-    style: {
-      ...column.getFooterProps().style,
-      ...mTableFooterCellProps?.style,
-      ...mcTableFooterCellProps?.style,
-    },
   };
 
   return (
@@ -47,12 +40,12 @@ export const MRT_TableFooterCell: FC<Props> = ({ column }) => {
       sx={{
         fontWeight: 'bold',
         verticalAlign: 'text-top',
-        p: densePadding ? '0.5rem' : '1rem',
+        p: getState().densePadding ? '0.5rem' : '1rem',
         transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
         ...tableCellProps?.sx,
       }}
     >
-      {column.render('Footer')}
+      {column.header}
     </TableCell>
   );
 };

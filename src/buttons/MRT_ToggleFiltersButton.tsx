@@ -9,20 +9,18 @@ export const MRT_ToggleFiltersButton: FC<Props> = ({ ...rest }) => {
     icons: { FilterListIcon, FilterListOffIcon },
     localization,
     setShowFilters,
-    tableInstance: {
-      state: { showFilters },
-    },
+    tableInstance: { getState },
   } = useMRT();
 
   return (
     <Tooltip arrow title={localization.showHideFilters}>
       <IconButton
         aria-label={localization.showHideFilters}
-        onClick={() => setShowFilters(!showFilters)}
+        onClick={() => setShowFilters(!getState().showFilters)}
         size="small"
         {...rest}
       >
-        {showFilters ? <FilterListOffIcon /> : <FilterListIcon />}
+        {getState().showFilters ? <FilterListOffIcon /> : <FilterListIcon />}
       </IconButton>
     </Tooltip>
   );

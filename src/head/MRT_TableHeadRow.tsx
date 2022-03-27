@@ -28,10 +28,11 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
     positionActionsColumn,
     renderDetailPanel,
     tableInstance,
+    tableInstance: {getState}
   } = useMRT();
 
   const isParentHeader = useMemo(
-    () => headerGroup.headers.some((h) => (h.columns?.length ?? 0) > 0),
+    () => headerGroup.headers.some((h) => !!h.subHeaders?.length),
     [headerGroup.headers],
   );
 
@@ -41,12 +42,8 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
       : muiTableHeadRowProps;
 
   const tableRowProps = {
-    ...mTableHeadRowProps,
     ...headerGroup.getHeaderGroupProps(),
-    style: {
-      ...headerGroup.getHeaderGroupProps().style,
-      ...mTableHeadRowProps?.style,
-    },
+    ...mTableHeadRowProps,
   };
 
   return (
@@ -64,7 +61,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
             size="small"
             {...tableInstance.getToggleAllRowsExpandedProps()}
             sx={{
-              ...commonTableHeadCellStyles(tableInstance.state.densePadding),
+              ...commonTableHeadCellStyles(getState().densePadding),
               width: '3rem',
               maxWidth: '3rem',
               textAlign: 'center',
@@ -75,7 +72,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         ) : (
           <MRT_TableSpacerCell
             width={`${
-              renderDetailPanel ? 2 : tableInstance.expandedDepth + 0.5
+              renderDetailPanel ? 2 : tableInstance.getExpandedDepth() + 0.5
             }rem`}
           />
         )
@@ -84,7 +81,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         !isParentHeader && !disableSelectAll ? (
           <TableCell
             sx={{
-              ...commonTableHeadCellStyles(tableInstance.state.densePadding),
+              ...commonTableHeadCellStyles(getState().densePadding),
               maxWidth: '3rem',
               width: '3rem',
               textAlign: 'center',
@@ -102,7 +99,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         ) : (
           <TableCell
             sx={{
-              ...commonTableHeadCellStyles(tableInstance.state.densePadding),
+              ...commonTableHeadCellStyles(getState().densePadding),
               width: '2rem',
               maxWidth: '2rem',
             }}
@@ -111,7 +108,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
           </TableCell>
         ))}
       {headerGroup.headers.map((column: MRT_HeaderGroup) => (
-        <MRT_TableHeadCell key={column.getHeaderProps().key} column={column} />
+        <MRT_TableHeadCell key={column.getHeaderGroupProps().key} column={column} />
       ))}
       {(enableRowActions || enableRowEditing) &&
         positionActionsColumn === 'last' &&

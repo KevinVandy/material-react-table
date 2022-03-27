@@ -6,19 +6,15 @@ import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
-import { MRT_TableInstance } from '..';
 
-export const commonToolbarStyles = (
-  theme: Theme,
-  tableInstance: MRT_TableInstance,
-) => ({
+export const commonToolbarStyles = (theme: Theme, fullScreen?: boolean) => ({
   backgroundColor: theme.palette.background.default,
   backgroundImage: `linear-gradient(${alpha(
     theme.palette.common.white,
     0.05,
   )},${alpha(theme.palette.common.white, 0.05)})`,
   display: 'grid',
-  opacity: tableInstance.state.fullScreen ? 0.95 : 1,
+  opacity: fullScreen ? 0.95 : 1,
   p: '0 !important',
   width: '100%',
   zIndex: 1,
@@ -28,15 +24,16 @@ interface Props {}
 
 export const MRT_ToolbarTop: FC<Props> = () => {
   const {
-    disableGlobalFilter,
+    enableGlobalFilter,
     hideToolbarInternalActions,
-    manualPagination,
+    disablePagination,
     muiTableToolbarTopProps,
     positionPagination,
     positionToolbarActions,
     positionToolbarAlertBanner,
     renderToolbarCustomActions,
     tableInstance,
+    tableInstance: { getState },
   } = useMRT();
 
   const toolbarProps =
@@ -50,9 +47,9 @@ export const MRT_ToolbarTop: FC<Props> = () => {
       {...toolbarProps}
       sx={(theme) =>
         ({
-          position: tableInstance.state.fullScreen ? 'sticky' : undefined,
-          top: tableInstance.state.fullScreen ? '0' : undefined,
-          ...commonToolbarStyles(theme, tableInstance),
+          position: getState().fullScreen ? 'sticky' : undefined,
+          top: getState().fullScreen ? '0' : undefined,
+          ...commonToolbarStyles(theme, getState().fullScreen),
           ...toolbarProps?.sx,
         } as any)
       }
@@ -74,14 +71,14 @@ export const MRT_ToolbarTop: FC<Props> = () => {
             zIndex: 3,
           }}
         >
-          {!disableGlobalFilter && <MRT_SearchTextField />}
+          {enableGlobalFilter && <MRT_SearchTextField />}
           {!hideToolbarInternalActions && positionToolbarActions === 'top' && (
             <MRT_ToolbarInternalButtons />
           )}
         </Box>
       </Box>
       <div>
-        {!manualPagination &&
+        {!disablePagination &&
           ['top', 'both'].includes(positionPagination ?? '') && (
             <MRT_TablePagination />
           )}

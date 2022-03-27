@@ -11,16 +11,14 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
   const {
     muiTableBodyCellEditTextFieldProps,
     setCurrentEditingRow,
-    tableInstance: {
-      state: { currentEditingRow },
-    },
+    tableInstance: { getState },
   } = useMRT();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (currentEditingRow) {
+    if (getState().currentEditingRow) {
       cell.row.values[cell.column.id] = event.target.value;
       setCurrentEditingRow({
-        ...currentEditingRow,
+        ...getState().currentEditingRow,
       });
     }
     cell.column.onCellEditChange?.(event, cell);

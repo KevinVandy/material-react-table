@@ -6,12 +6,13 @@ interface Props {}
 
 export const MRT_ToolbarAlertBanner: FC<Props> = () => {
   const {
-    muiTableToolbarAlertBannerProps,
-    tableInstance,
-    positionToolbarAlertBanner,
-    positionToolbarActions,
     localization,
+    muiTableToolbarAlertBannerProps,
+    positionToolbarActions,
+    positionToolbarAlertBanner,
     renderToolbarCustomActions,
+    tableInstance,
+    tableInstance: { getState },
   } = useMRT();
 
   const isMobile = useMediaQuery('(max-width:720px)');
@@ -22,30 +23,30 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
       : muiTableToolbarAlertBannerProps;
 
   const selectMessage =
-    tableInstance.selectedFlatRows.length > 0
+    tableInstance.getSelectedFlatRows().length > 0
       ? localization.selectedCountOfRowCountRowsSelected
           ?.replace(
             '{selectedCount}',
-            tableInstance.selectedFlatRows.length.toString(),
+            tableInstance.getSelectedFlatRows().length.toString(),
           )
-          ?.replace('{rowCount}', tableInstance.flatRows.length.toString())
+          ?.replace('{rowCount}', tableInstance.getFlatRows().length.toString())
       : null;
 
   const groupedByMessage =
-    tableInstance.state.groupBy.length > 0 ? (
+    getState().grouping.length > 0 ? (
       <span>
         {localization.groupedBy}{' '}
-        {tableInstance.state.groupBy.map((columnId, index) => (
+        {getState().grouping.map((columnId, index) => (
           <Fragment key={`${index}-${columnId}`}>
             {index > 0 ? localization.thenBy : ''}
             <Chip
               color="secondary"
               label={
-                tableInstance.allColumns.find(
+                tableInstance.getAllColumns().find(
                   (column) => column.id === columnId,
                 )?.Header
               }
-              onDelete={() => tableInstance.toggleGroupBy(columnId, false)}
+              onDelete={() => tableInstance.toggleColumnGrouping(columnId)}
             />
           </Fragment>
         ))}

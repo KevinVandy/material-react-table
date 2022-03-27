@@ -24,7 +24,7 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
   } = useMRT();
 
   //if no content in row, skip row
-  if (!columns?.some((c) => c.Footer)) return null;
+  if (!columns?.some((c) => c.footer)) return null;
 
   const mTableFooterRowProps =
     muiTableFooterRowProps instanceof Function
@@ -32,12 +32,8 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
       : muiTableFooterRowProps;
 
   const tableRowProps = {
-    ...mTableFooterRowProps,
     ...footerGroup.getFooterGroupProps(),
-    style: {
-      ...footerGroup.getFooterGroupProps().style,
-      ...mTableFooterRowProps?.style,
-    },
+    ...mTableFooterRowProps,
   };
 
   return (
@@ -48,14 +44,14 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
       {(anyRowsCanExpand || renderDetailPanel) && (
         <MRT_TableSpacerCell
           width={`${
-            renderDetailPanel ? 2 : tableInstance.expandedDepth + 0.5
+            renderDetailPanel ? 2 : tableInstance.getExpandedDepth() + 0.5
           }rem`}
         />
       )}
       {enableSelection && <MRT_TableSpacerCell width="1rem" />}
       {footerGroup.headers.map((column: MRT_HeaderGroup) => (
         <MRT_TableFooterCell
-          key={column.getFooterProps().key}
+          key={column.getFooterGroupProps().key}
           column={column}
         />
       ))}

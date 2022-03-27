@@ -28,9 +28,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
     muiTableBodyCellProps,
     muiTableBodyCellSkeletonProps,
     onCellClick,
-    tableInstance: {
-      state: { currentEditingRow, densePadding },
-    },
+    tableInstance: { getState },
   } = useMRT();
 
   const mTableCellBodyProps =
@@ -44,14 +42,9 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
       : cell.column.muiTableBodyCellProps;
 
   const tableCellProps = {
+    ...cell.getCellProps(),
     ...mTableCellBodyProps,
     ...mcTableCellBodyProps,
-    ...cell.getCellProps(),
-    style: {
-      ...cell.getCellProps().style,
-      ...mTableCellBodyProps?.style,
-      ...mcTableCellBodyProps?.style,
-    },
   };
 
   return (
@@ -62,7 +55,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
       {...tableCellProps}
       sx={
         {
-          ...commonTableBodyCellStyles(densePadding),
+          ...commonTableBodyCellStyles(getState().densePadding),
           ...tableCellProps?.sx,
         } as TableCellProps['sx']
       }
@@ -75,24 +68,22 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
           {...muiTableBodyCellSkeletonProps}
         />
       ) : !cell.column.disableEditing &&
-        currentEditingRow?.id === cell.row.id ? (
+        getState().currentEditingRow?.id === cell.row.id ? (
         <MRT_EditCellTextField cell={cell} />
       ) : cell.isPlaceholder ? null : cell.isAggregated ? (
         enableClickToCopy && !cell.column.disableClickToCopy ? (
-          <MRT_CopyButton cell={cell}>
-            {cell.render('Aggregated')}
-          </MRT_CopyButton>
+          <MRT_CopyButton cell={cell}>{cell.renderCell()}</MRT_CopyButton>
         ) : (
-          cell.render('Aggregated')
+          cell.renderCell()
         )
       ) : cell.isGrouped ? (
         <span>
-          {cell.render('Cell')} ({cell.row.subRows.length})
+          {cell.renderCell()} ({cell.row.subRows.length})
         </span>
       ) : enableClickToCopy && !cell.column.disableClickToCopy ? (
-        <MRT_CopyButton cell={cell}>{cell.render('Cell')}</MRT_CopyButton>
+        <MRT_CopyButton cell={cell}>{cell.renderCell()}</MRT_CopyButton>
       ) : (
-        cell.render('Cell')
+        cell.renderCell()
       )}
     </TableCell>
   );
