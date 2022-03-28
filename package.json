@@ -72,7 +72,7 @@
     "@storybook/addon-storysource": "^6.4.19",
     "@storybook/addons": "^6.4.19",
     "@storybook/react": "^6.4.19",
-    "@tanstack/react-table": "^8.0.0-alpha.8",
+    "@tanstack/react-table": "^8.0.0-alpha.9",
     "@types/faker": "^6.6.8",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
@@ -94,7 +94,7 @@
     "@emotion/styled": ">=11",
     "@mui/icons-material": ">=5",
     "@mui/material": ">=5",
-    "@tanstack/react-table": "^8.0.0-alpha.8",
+    "@tanstack/react-table": "^8.0.0-alpha.9",
     "react": ">=16.8"
   },
   "dependencies": {

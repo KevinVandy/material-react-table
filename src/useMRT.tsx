@@ -105,15 +105,15 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
   //   [props.columns, applyFiltersToColumns],
   // );
 
-  let table = useMemo(() => createTable().RowType<D>(), []);
+  const table = useMemo(() => createTable<D>(), []);
 
   const columns = useMemo(
     () =>
       table.createColumns(
-        props.columns.map((column) =>
+        props.columns.map((column: MRT_ColumnInterface<D>) =>
           !!column.columns
-            ? createGroup(table, column as MRT_ColumnInterface<D>)
-            : createColumn(table, column as MRT_ColumnInterface<D>),
+            ? createGroup(table, column)
+            : createColumn(table, column),
         ),
       ),
     [table],
@@ -151,19 +151,21 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     },
   });
 
+  console.log(tableInstance.getState());
+
   const idPrefix = useMemo(
     () => props.idPrefix ?? Math.random().toString(36).substring(2, 9),
     [props.idPrefix],
   );
 
   const anyRowsCanExpand = useMemo(
-    () => tableInstance.getRows().some((row) => row.getCanExpand()),
-    [tableInstance.getRows()],
+    () => tableInstance.getRowModel().rows.some((row) => row.getCanExpand()),
+    [tableInstance.getRowModel().rows],
   );
 
   const anyRowsExpanded = useMemo(
-    () => tableInstance.getRows().some((row) => row.getIsExpanded()),
-    [tableInstance.getRows()],
+    () => tableInstance.getRowModel().rows.some((row) => row.getIsExpanded()),
+    [tableInstance.getRowModel().rows],
   );
   console.log({ tableInstance });
   return (

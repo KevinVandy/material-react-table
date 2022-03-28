@@ -22,9 +22,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
   } = useMRT();
 
   const hideAllColumns = () => {
-    // findLowestLevelCols(
     (tableInstance.getVisibleLeafColumns() as MRT_ColumnInstance[])
-      // ) as MRT_ColumnInstance[]
       .filter((col: MRT_ColumnInstance) => !col.disableColumnHiding)
       .forEach((col: MRT_ColumnInstance) => col.toggleVisibility(false));
   };
@@ -59,7 +57,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
           </Button>
         )}
         <Button
-          disabled={tableInstance.getToggleAllColumnsVisibilityProps().checked}
+          disabled={tableInstance.getToggleAllColumnsVisibilityProps()?.checked}
           onClick={() => tableInstance.toggleAllColumnsVisible(false)}
         >
           {localization.showAll}

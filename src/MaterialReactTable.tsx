@@ -17,43 +17,34 @@ import {
   TextFieldProps,
   ToolbarProps,
 } from '@mui/material';
+import {
+  Cell,
+  Column,
+  ColumnDef,
+  Header,
+  HeaderGroup,
+  Options,
+  Row,
+  TableInstance,
+  TableState,
+} from '@tanstack/react-table';
 import { MaterialReactTableProvider } from './useMRT';
 import { MRT_TableContainer } from './table/MRT_TableContainer';
 import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_FILTER_TYPE } from './enums';
-import { defaultFilterFNs } from './filtersFNs';
-import {
-  Cell,
-  Column,
-  Header,
-  HeaderGroup,
-  Options,
-  ReactTable,
-  Row,
-  TableState,
-} from '@tanstack/react-table';
 import { FilterType } from '@tanstack/react-table/build/types/features/Filters';
 
-export type MRT_TableOptions<D extends {} = {}> = Options<
-  D,
-  unknown,
-  unknown,
-  unknown,
-  unknown
-> & {
+export type MRT_TableOptions<D extends {} = {}> = Options<D> & {
   columns: MRT_ColumnInterface<D>[];
   data: D[];
   initialState?: Partial<MRT_TableState<D>>;
   state: Partial<MRT_TableState<D>>;
 };
 
-export type MRT_TableInstance<D extends {} = {}> = ReactTable<
-  D,
-  unknown,
-  unknown,
-  unknown,
-  unknown
+export type MRT_TableInstance<D extends {} = {}> = Omit<
+  TableInstance<D>,
+  'getState'
 > & {
   getState: () => MRT_TableState<D>;
 };
@@ -68,13 +59,7 @@ export type MRT_TableState<D extends {} = {}> = TableState & {
   showSearch: boolean;
 };
 
-export type MRT_ColumnInterface<D extends {} = {}> = Column<
-  D,
-  unknown,
-  unknown,
-  unknown,
-  unknown
-> & {
+export type MRT_ColumnInterface<D extends {} = {}> = ColumnDef<D> & {
   Edit?: ({
     cell,
     onChange,
@@ -82,11 +67,11 @@ export type MRT_ColumnInterface<D extends {} = {}> = Column<
     cell: MRT_Cell<D>;
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   }) => ReactNode;
-  // Filter?: ({ column }: { column: MRT_HeaderGroup<D> }) => ReactNode;
-  // Footer?: string;
-  // Header?: string;
-  columns?: MRT_ColumnInterface<D>[];
+  Filter?: ({ column }: { column: MRT_HeaderGroup<D> }) => ReactNode;
+  Footer?: ReactNode;
+  Header?: ReactNode;
   columnType: 'group' | 'data' | 'display' | null;
+  columns?: MRT_ColumnInterface<D>[];
   disableClickToCopy?: boolean;
   disableColumnActions?: boolean;
   disableColumnHiding?: boolean;
@@ -95,6 +80,9 @@ export type MRT_ColumnInterface<D extends {} = {}> = Column<
   enabledFilterTypes?: (MRT_FILTER_TYPE | string)[];
   filter?: MRT_FilterType | string | FilterType<D>;
   filterSelectOptions?: (string | { text: string; value: string })[];
+  footer: string;
+  header: string;
+  id: keyof D;
   muiTableBodyCellCopyButtonProps?:
     | ButtonProps
     | ((cell?: MRT_Cell<D>) => ButtonProps);
@@ -127,48 +115,24 @@ export type MRT_ColumnInterface<D extends {} = {}> = Column<
 };
 
 export type MRT_ColumnInstance<D extends {} = {}> = MRT_ColumnInterface<D> &
-  Column<D, unknown, unknown, unknown, unknown> & {
+  Column<D> & {
     columns?: MRT_ColumnInstance<D>[];
   };
 
-export type MRT_Header<D extends {} = {}> = Header<
-  D,
-  unknown,
-  unknown,
-  unknown,
-  unknown
-> & {
+export type MRT_Header<D extends {} = {}> = Header<D> & {
   column: MRT_ColumnInstance<D>;
 };
 
-export type MRT_HeaderGroup<D extends {} = {}> = HeaderGroup<
-  D,
-  unknown,
-  unknown,
-  unknown,
-  unknown
-> & {
+export type MRT_HeaderGroup<D extends {} = {}> = HeaderGroup<D> & {
   headers: MRT_Header<D>[];
 };
 
-export type MRT_Row<D extends {} = {}> = Row<
-  D,
-  unknown,
-  unknown,
-  unknown,
-  unknown
-> & {
+export type MRT_Row<D extends {} = {}> = Row<D> & {
   getVisibleCells: () => MRT_Cell<D>[];
   getAllCells: () => MRT_Cell<D>[];
 };
 
-export type MRT_Cell<D extends {} = {}> = Cell<
-  D,
-  unknown,
-  unknown,
-  unknown,
-  unknown
-> & {
+export type MRT_Cell<D extends {} = {}> = Cell<D> & {
   column: MRT_ColumnInstance<D>;
 };
 
@@ -350,7 +314,7 @@ export default <D extends {} = {}>({
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
     defaultColumn={defaultColumn}
-    filterTypes={{ ...defaultFilterFNs, ...filterTypes }}
+    // filterTypes={{ ...defaultFilterFNs, ...filterTypes }}
     icons={{ ...MRT_Default_Icons, ...icons }}
     localization={{ ...MRT_DefaultLocalization_EN, ...localization }}
     positionActionsColumn={positionActionsColumn}

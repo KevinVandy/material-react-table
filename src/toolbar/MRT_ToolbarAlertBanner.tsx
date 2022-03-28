@@ -23,13 +23,13 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
       : muiTableToolbarAlertBannerProps;
 
   const selectMessage =
-    tableInstance.getSelectedFlatRows().length > 0
+    tableInstance.getSelectedRowModel().rows.length > 0
       ? localization.selectedCountOfRowCountRowsSelected
           ?.replace(
             '{selectedCount}',
-            tableInstance.getSelectedFlatRows().length.toString(),
+            tableInstance.getSelectedRowModel().rows.length.toString(),
           )
-          ?.replace('{rowCount}', tableInstance.getFlatRows().length.toString())
+          ?.replace('{rowCount}', tableInstance.getSelectedRowModel().rows.length.toString())
       : null;
 
   const groupedByMessage =
@@ -44,7 +44,7 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
               label={
                 tableInstance.getAllColumns().find(
                   (column) => column.id === columnId,
-                )?.Header
+                )?.header
               }
               onDelete={() => tableInstance.toggleColumnGrouping(columnId)}
             />
