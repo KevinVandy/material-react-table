@@ -11,7 +11,7 @@ import {
 import { useMRT } from '../useMRT';
 import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
 import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
-import type { MRT_HeaderGroup } from '..';
+import type { MRT_Header } from '..';
 
 export const commonTableHeadCellStyles = (
   densePadding: boolean,
@@ -32,13 +32,14 @@ export const commonTableHeadCellStyles = (
 });
 
 interface Props {
-  column: MRT_HeaderGroup;
+  header: MRT_Header;
 }
 
-export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
+export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
+  console.log({ header });
   const {
     disableColumnActions,
-    disableFilters,
+    enableColumnFilters,
     enableColumnResizing,
     icons: { FilterAltIcon, FilterAltOff },
     localization,
@@ -48,41 +49,41 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
     tableInstance: { getState },
   } = useMRT();
 
-  const isParentHeader = !!column?.columns?.length;
+  const isParentHeader = !!header.column.columns.length;
 
   const mTableHeadCellProps =
     muiTableHeadCellProps instanceof Function
-      ? muiTableHeadCellProps(column)
+      ? muiTableHeadCellProps(header.column)
       : muiTableHeadCellProps;
 
   const mcTableHeadCellProps =
-    column.muiTableHeadCellProps instanceof Function
-      ? column.muiTableHeadCellProps(column)
-      : column.muiTableHeadCellProps;
+    header.column.muiTableHeadCellProps instanceof Function
+      ? header.column.muiTableHeadCellProps(header.column)
+      : header.column.muiTableHeadCellProps;
 
   const tableCellProps = {
-    ...column.getHeaderGroupProps(),
+    ...header.getHeaderProps(),
     ...mTableHeadCellProps,
     ...mcTableHeadCellProps,
   };
 
-  const sortTooltip = !!column.getIsSorted()
-    ? column.getIsSorted() === 'desc'
+  const sortTooltip = !!header.column.getIsSorted()
+    ? header.column.getIsSorted() === 'desc'
       ? localization.clearSort
-      : localization.sortByColumnDesc?.replace(
+      : localization.sortByColumnDesc.replace(
           '{column}',
-          column.Header as string,
+          header.column.header as string,
         )
-    : localization.sortByColumnAsc?.replace(
+    : localization.sortByColumnAsc.replace(
         '{column}',
-        column.Header as string,
+        header.column.header as string,
       );
 
-  const filterType = getState().currentFilterTypes[column.id];
+  const filterType = getState()?.currentFilterTypes?.[header.id];
 
-  const filterTooltip = !!column.getColumnFilterValue()
+  const filterTooltip = !!header.column.getColumnFilterValue()
     ? localization.filteringByColumn
-        .replace('{column}', String(column.Header))
+        .replace('{column}', String(header.column.header))
         .replace(
           '{filterType}',
           filterType instanceof Function
@@ -94,11 +95,14 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
                 }`
               ],
         )
-        .replace('{filterValue}', column.getColumnFilterValue())
+        .replace(
+          '{filterValue}',
+          header.column.getColumnFilterValue() as string,
+        )
         .replace('" "', '')
     : localization.showHideFilters;
 
-  const columnHeader = column.header as string;
+  const columnHeader = header.column.header as string;
 
   return (
     <TableCell
@@ -109,9 +113,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
           getState().densePadding,
           enableColumnResizing,
           {
-            maxWidth: column.maxWidth,
-            minWidth: column.minWidth,
-            width: column.width,
+            maxWidth: header.column.maxWidth,
+            minWidth: header.column.minWidth,
+            width: header.column.width,
           },
         ),
         ...tableCellProps?.sx,
@@ -126,7 +130,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
         }}
       >
         <Box
-          {...column.getToggleSortingProps()}
+          {...header.column.getToggleSortingProps()}
           sx={{
             alignItems: 'center',
             display: 'flex',
@@ -136,20 +140,20 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
           title={undefined}
         >
           {columnHeader}
-          {!isParentHeader && column.getCanSort() && (
+          {!isParentHeader && header.column.getCanSort() && (
             <Tooltip arrow placement="top" title={sortTooltip}>
               <TableSortLabel
                 aria-label={sortTooltip}
-                active={!!column.getIsSorted()}
+                active={!!header.column.getIsSorted()}
                 direction={
-                  column.getIsSorted()
-                    ? (column.getIsSorted() as 'asc' | 'desc')
+                  header.column.getIsSorted()
+                    ? (header.column.getIsSorted() as 'asc' | 'desc')
                     : undefined
                 }
               />
             </Tooltip>
           )}
-          {!isParentHeader && !!column.getCanColumnFilter() && (
+          {!isParentHeader && !!header.column.getCanColumnFilter() && (
             <Tooltip arrow placement="top" title={filterTooltip}>
               <IconButton
                 disableRipple
@@ -160,7 +164,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
                 size="small"
                 sx={{
                   m: 0,
-                  opacity: !!column.getColumnFilterValue() ? 0.8 : 0,
+                  opacity: !!header.column.getColumnFilterValue()
+                    ? 0.8
+                    : 0,
                   p: '2px',
                   transition: 'all 0.2s ease-in-out',
                   '&:hover': {
@@ -169,7 +175,8 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
                   },
                 }}
               >
-                {getState().showFilters && !column.getColumnFilterValue() ? (
+                {getState().showFilters &&
+                !header.column.getColumnFilterValue() ? (
                   <FilterAltOff fontSize="small" />
                 ) : (
                   <FilterAltIcon fontSize="small" />
@@ -180,16 +187,18 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
         </Box>
         <Box sx={{ alignItems: 'center', display: 'flex', flexWrap: 'nowrap' }}>
           {!disableColumnActions &&
-            !column.disableColumnActions &&
+            !header.column.disableColumnActions &&
             !isParentHeader && (
-              <MRT_ToggleColumnActionMenuButton column={column} />
+              <MRT_ToggleColumnActionMenuButton header={header} />
             )}
           {enableColumnResizing && !isParentHeader && (
             <Divider
               flexItem
               orientation="vertical"
-              onDoubleClick={() => tableInstance.resetColumnSize(column.id)}
-              {...column.getResizerProps()}
+              onDoubleClick={() =>
+                tableInstance.resetColumnSize(header.id)
+              }
+              {...header.column.getResizerProps()}
               sx={{
                 borderRightWidth: '2px',
                 borderRadius: '2px',
@@ -199,9 +208,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ column }) => {
           )}
         </Box>
       </Box>
-      {!disableFilters && column.getCanColumnFilter() && (
+      {enableColumnFilters && header.column.getCanColumnFilter() && (
         <Collapse in={getState().showFilters}>
-          <MRT_FilterTextField column={column} />
+          <MRT_FilterTextField header={header} />
         </Collapse>
       )}
     </TableCell>

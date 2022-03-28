@@ -9,7 +9,7 @@ import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
 import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
 import { MRT_TableHeadCellActions } from './MRT_TableHeadCellActions';
-import type { MRT_HeaderGroup } from '..';
+import type { MRT_Header, MRT_HeaderGroup } from '..';
 
 interface Props {
   headerGroup: MRT_HeaderGroup;
@@ -28,7 +28,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
     positionActionsColumn,
     renderDetailPanel,
     tableInstance,
-    tableInstance: {getState}
+    tableInstance: { getState },
   } = useMRT();
 
   const isParentHeader = useMemo(
@@ -42,7 +42,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
       : muiTableHeadRowProps;
 
   const tableRowProps = {
-    ...headerGroup.getHeaderGroupProps(),
+    ...headerGroup?.getHeaderGroupProps(),
     ...mTableHeadRowProps,
   };
 
@@ -107,8 +107,8 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
             #
           </TableCell>
         ))}
-      {headerGroup.headers.map((column: MRT_HeaderGroup) => (
-        <MRT_TableHeadCell key={column.getHeaderGroupProps().key} column={column} />
+      {headerGroup.headers.map((header: MRT_Header, index) => (
+        <MRT_TableHeadCell key={header.id || index} header={header} />
       ))}
       {(enableRowActions || enableRowEditing) &&
         positionActionsColumn === 'last' &&

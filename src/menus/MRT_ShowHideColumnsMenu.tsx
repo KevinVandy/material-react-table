@@ -15,7 +15,11 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
   isSubMenu,
   setAnchorEl,
 }) => {
-  const { localization, tableInstance, tableInstance: {getState} } = useMRT();
+  const {
+    localization,
+    tableInstance,
+    tableInstance: { getState },
+  } = useMRT();
 
   const hideAllColumns = () => {
     // findLowestLevelCols(
@@ -46,7 +50,8 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
           <Button
             disabled={
               !tableInstance?.getToggleAllColumnsVisibilityProps()?.checked &&
-              !tableInstance?.getToggleAllColumnsVisibilityProps()?.indeterminate
+              !tableInstance?.getToggleAllColumnsVisibilityProps()
+                ?.indeterminate
             }
             onClick={hideAllColumns}
           >
@@ -54,7 +59,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
           </Button>
         )}
         <Button
-          disabled={tableInstance.getToggleHideAllColumnsProps().checked}
+          disabled={tableInstance.getToggleAllColumnsVisibilityProps().checked}
           onClick={() => tableInstance.toggleAllColumnsVisible(false)}
         >
           {localization.showAll}

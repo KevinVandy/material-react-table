@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Box, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
-import type { MRT_HeaderGroup } from '..';
+import type { MRT_Header } from '..';
 import { MRT_FilterTypeMenu } from './MRT_FilterTypeMenu';
 import { MRT_ShowHideColumnsMenu } from './MRT_ShowHideColumnsMenu';
 
@@ -19,13 +19,13 @@ export const commonListItemStyles = {
 
 interface Props {
   anchorEl: HTMLElement | null;
-  column: MRT_HeaderGroup;
+  header: MRT_Header;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
 }
 
 export const MRT_ColumnActionMenu: FC<Props> = ({
   anchorEl,
-  column,
+  header,
   setAnchorEl,
 }) => {
   const {
@@ -62,27 +62,27 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
   };
 
   const handleSortAsc = () => {
-    column.toggleSorting(false);
+    header.column.toggleSorting(false);
     setAnchorEl(null);
   };
 
   const handleSortDesc = () => {
-    column.toggleSorting(true);
+    header.column.toggleSorting(true);
     setAnchorEl(null);
   };
 
   const handleHideColumn = () => {
-    column.toggleVisibility(false);
+    header.column.toggleVisibility(false);
     setAnchorEl(null);
   };
 
   const handleGroupByColumn = () => {
-    column.toggleGrouping();
+    header.column.toggleGrouping();
     setAnchorEl(null);
   };
 
   const handleClearFilter = () => {
-    column.setColumnFilterValue('');
+    header.column.setColumnFilterValue('');
     setAnchorEl(null);
   };
 
@@ -93,8 +93,8 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
         document
           .getElementById(
             // @ts-ignore
-            column.muiTableHeadCellFilterTextFieldProps?.id ??
-              `mrt-${idPrefix}-${column.id}-filter-text-field`,
+            header.muiTableHeadCellFilterTextFieldProps?.id ??
+              `mrt-${idPrefix}-${header.id}-filter-text-field`,
           )
           ?.focus(),
       200,
@@ -129,9 +129,9 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       }}
     >
       {enableSorting &&
-        column.getCanSort() && [
+        header.column.getCanSort() && [
           <MenuItem
-            disabled={!column.getIsSorted()}
+            disabled={!header.column.getIsSorted()}
             key={0}
             onClick={handleClearSort}
             sx={commonMenuItemStyles}
@@ -144,7 +144,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             </Box>
           </MenuItem>,
           <MenuItem
-            disabled={column.getIsSorted() === 'asc'}
+            disabled={header.column.getIsSorted() === 'asc'}
             key={1}
             onClick={handleSortAsc}
             sx={commonMenuItemStyles}
@@ -155,7 +155,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
               </ListItemIcon>
               {localization.sortByColumnAsc?.replace(
                 '{column}',
-                String(column.Header),
+                String(header.column.header),
               )}
             </Box>
           </MenuItem>,
@@ -166,7 +166,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
               !disableColumnHiding
             }
             key={2}
-            disabled={column.getIsSorted() === 'desc'}
+            disabled={header.column.getIsSorted() === 'desc'}
             onClick={handleSortDesc}
             sx={commonMenuItemStyles}
           >
@@ -176,15 +176,15 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
               </ListItemIcon>
               {localization.sortByColumnDesc?.replace(
                 '{column}',
-                String(column.Header),
+                String(header.column.header),
               )}
             </Box>
           </MenuItem>,
         ]}
       {enableColumnFilters &&
-        column.getCanColumnFilter() && [
+        header.column.getCanColumnFilter() && [
           <MenuItem
-            disabled={!column.getColumnFilterValue()}
+            disabled={!header.column.getColumnFilterValue()}
             key={0}
             onClick={handleClearFilter}
             sx={commonMenuItemStyles}
@@ -208,10 +208,10 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
               </ListItemIcon>
               {localization.filterByColumn?.replace(
                 '{column}',
-                String(column.Header),
+                String(header.column.header),
               )}
             </Box>
-            {!column.filterSelectOptions && (
+            {!header.column.filterSelectOptions && (
               <IconButton
                 onClick={handleOpenFilterModeMenu}
                 onMouseEnter={handleOpenFilterModeMenu}
@@ -224,14 +224,14 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           </MenuItem>,
           <MRT_FilterTypeMenu
             anchorEl={filterMenuAnchorEl}
-            column={column}
+            header={header}
             key={2}
             setAnchorEl={setFilterMenuAnchorEl}
             onSelect={handleFilterByColumn}
           />,
         ]}
       {enableColumnGrouping &&
-        column.getCanGroup() && [
+        header.column.getCanGroup() && [
           <MenuItem
             divider={!disableColumnHiding}
             key={0}
@@ -243,14 +243,14 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
                 <DynamicFeedIcon />
               </ListItemIcon>
               {localization[
-                column.getIsGrouped() ? 'ungroupByColumn' : 'groupByColumn'
-              ]?.replace('{column}', String(column.Header))}
+                header.column.getIsGrouped() ? 'ungroupByColumn' : 'groupByColumn'
+              ]?.replace('{column}', String(header.column.header))}
             </Box>
           </MenuItem>,
         ]}
       {!disableColumnHiding && [
         <MenuItem
-          disabled={column.disableColumnHiding}
+          disabled={header.column.disableColumnHiding}
           key={0}
           onClick={handleHideColumn}
           sx={commonMenuItemStyles}
@@ -261,7 +261,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             </ListItemIcon>
             {localization.hideColumn?.replace(
               '{column}',
-              String(column.Header),
+              String(header.column.header),
             )}
           </Box>
         </MenuItem>,
@@ -277,10 +277,10 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             </ListItemIcon>
             {localization.showAllColumns?.replace(
               '{column}',
-              String(column.Header),
+              String(header.column.header),
             )}
           </Box>
-          {!column.filterSelectOptions && (
+          {!header.column.filterSelectOptions && (
             <IconButton
               onClick={handleOpenShowHideColumnsMenu}
               onMouseEnter={handleOpenShowHideColumnsMenu}

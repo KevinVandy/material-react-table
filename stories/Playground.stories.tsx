@@ -23,20 +23,20 @@ export const Default = Template.bind({});
 Default.args = {
   columns: [
     {
-      Header: 'First Name',
-      accessor: 'firstName',
+      header: 'First Name',
+      id: 'firstName',
     },
     {
-      Header: 'Last Name',
-      accessor: 'lastName',
+      header: 'Last Name',
+      id: 'lastName',
     },
     {
-      Header: 'Age',
-      accessor: 'age',
+      header: 'Age',
+      id: 'age',
     },
     {
-      Header: 'Address',
-      accessor: 'address',
+      header: 'Address',
+      id: 'address',
     },
   ],
   data: [...Array(6)].map((_) => ({

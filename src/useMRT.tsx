@@ -165,7 +165,7 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     () => tableInstance.getRows().some((row) => row.getIsExpanded()),
     [tableInstance.getRows()],
   );
-
+  console.log({ tableInstance });
   return (
     <MaterialReactTableContext.Provider
       value={{

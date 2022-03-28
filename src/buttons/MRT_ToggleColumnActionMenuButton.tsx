@@ -2,13 +2,13 @@ import React, { FC, MouseEvent, useState } from 'react';
 import { IconButton, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
-import type { MRT_HeaderGroup } from '..';
+import type { MRT_Header } from '..';
 
 interface Props {
-  column: MRT_HeaderGroup;
+  header: MRT_Header;
 }
 
-export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
+export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ header }) => {
   const {
     icons: { MoreVertIcon },
     localization,
@@ -25,13 +25,13 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
 
   const mTableHeadCellColumnActionsButtonProps =
     muiTableHeadCellColumnActionsButtonProps instanceof Function
-      ? muiTableHeadCellColumnActionsButtonProps(column)
+      ? muiTableHeadCellColumnActionsButtonProps(header.column)
       : muiTableHeadCellColumnActionsButtonProps;
 
   const mcTableHeadCellColumnActionsButtonProps =
-    column.muiTableHeadCellColumnActionsButtonProps instanceof Function
-      ? column.muiTableHeadCellColumnActionsButtonProps(column)
-      : column.muiTableHeadCellColumnActionsButtonProps;
+    header.column.muiTableHeadCellColumnActionsButtonProps instanceof Function
+      ? header.column.muiTableHeadCellColumnActionsButtonProps(header.column)
+      : header.column.muiTableHeadCellColumnActionsButtonProps;
 
   const iconButtonProps = {
     ...mTableHeadCellColumnActionsButtonProps,
@@ -70,7 +70,7 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ column }) => {
       </Tooltip>
       <MRT_ColumnActionMenu
         anchorEl={anchorEl}
-        column={column}
+        header={header}
         setAnchorEl={setAnchorEl}
       />
     </>

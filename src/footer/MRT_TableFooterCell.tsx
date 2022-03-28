@@ -1,33 +1,33 @@
 import React, { FC } from 'react';
 import { TableCell } from '@mui/material';
 import { useMRT } from '../useMRT';
-import type { MRT_HeaderGroup } from '..';
+import type { MRT_Header } from '..';
 
 interface Props {
-  column: MRT_HeaderGroup;
+  footer: MRT_Header;
 }
 
-export const MRT_TableFooterCell: FC<Props> = ({ column }) => {
+export const MRT_TableFooterCell: FC<Props> = ({ footer }) => {
   const {
     muiTableFooterCellProps,
     enableColumnResizing,
     tableInstance: { getState },
   } = useMRT();
 
-  const isParentHeader = !!column?.columns?.length;
+  const isParentHeader = !!footer.column.columns.length;
 
   const mTableFooterCellProps =
     muiTableFooterCellProps instanceof Function
-      ? muiTableFooterCellProps(column)
+      ? muiTableFooterCellProps(footer.column)
       : muiTableFooterCellProps;
 
   const mcTableFooterCellProps =
-    column.muiTableFooterCellProps instanceof Function
-      ? column.muiTableFooterCellProps(column)
-      : column.muiTableFooterCellProps;
+    footer.column.muiTableFooterCellProps instanceof Function
+      ? footer.column.muiTableFooterCellProps(footer.column)
+      : footer.column.muiTableFooterCellProps;
 
   const tableCellProps = {
-    ...column.getFooterGroupProps(),
+    ...footer.getFooterProps(),
     ...mTableFooterCellProps,
     ...mcTableFooterCellProps,
   };
@@ -45,7 +45,7 @@ export const MRT_TableFooterCell: FC<Props> = ({ column }) => {
         ...tableCellProps?.sx,
       }}
     >
-      {column.header}
+      {footer.column.header}
     </TableCell>
   );
 };

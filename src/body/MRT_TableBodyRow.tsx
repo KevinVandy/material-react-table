@@ -84,7 +84,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
             {row.index + 1}
           </TableCell>
         )}
-        {row.cells.map((cell: MRT_Cell) => (
+        {row.getVisibleCells().map((cell: MRT_Cell) => (
           <MRT_TableBodyCell key={cell.getCellProps().key} cell={cell} />
         ))}
         {(enableRowActions || enableRowEditing) &&

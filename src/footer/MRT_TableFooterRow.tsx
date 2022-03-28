@@ -3,7 +3,7 @@ import { TableRow } from '@mui/material';
 import { MRT_TableFooterCell } from './MRT_TableFooterCell';
 import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
 import { useMRT } from '../useMRT';
-import type { MRT_HeaderGroup } from '..';
+import type { MRT_Header, MRT_HeaderGroup } from '..';
 
 interface Props {
   footerGroup: MRT_HeaderGroup;
@@ -49,10 +49,10 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
         />
       )}
       {enableSelection && <MRT_TableSpacerCell width="1rem" />}
-      {footerGroup.headers.map((column: MRT_HeaderGroup) => (
+      {footerGroup.headers.map((footer: MRT_Header) => (
         <MRT_TableFooterCell
-          key={column.getFooterGroupProps().key}
-          column={column}
+          key={footer.getFooterGroupProps().key}
+          footer={footer}
         />
       ))}
       {(enableRowActions || enableRowEditing) &&

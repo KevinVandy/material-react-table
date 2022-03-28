@@ -26,6 +26,7 @@ import { defaultFilterFNs } from './filtersFNs';
 import {
   Cell,
   Column,
+  Header,
   HeaderGroup,
   Options,
   ReactTable,
@@ -41,7 +42,8 @@ export type MRT_TableOptions<D extends {} = {}> = Options<
   unknown,
   unknown
 > & {
-  columns: MRT_ColumnInterface[];
+  columns: MRT_ColumnInterface<D>[];
+  data: D[];
   initialState?: Partial<MRT_TableState<D>>;
   state: Partial<MRT_TableState<D>>;
 };
@@ -80,9 +82,9 @@ export type MRT_ColumnInterface<D extends {} = {}> = Column<
     cell: MRT_Cell<D>;
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   }) => ReactNode;
-  Filter?: ({ column }: { column: MRT_HeaderGroup<D> }) => ReactNode;
-  Footer?: string;
-  Header?: string;
+  // Filter?: ({ column }: { column: MRT_HeaderGroup<D> }) => ReactNode;
+  // Footer?: string;
+  // Header?: string;
   columns?: MRT_ColumnInterface<D>[];
   columnType: 'group' | 'data' | 'display' | null;
   disableClickToCopy?: boolean;
@@ -129,16 +131,25 @@ export type MRT_ColumnInstance<D extends {} = {}> = MRT_ColumnInterface<D> &
     columns?: MRT_ColumnInstance<D>[];
   };
 
+export type MRT_Header<D extends {} = {}> = Header<
+  D,
+  unknown,
+  unknown,
+  unknown,
+  unknown
+> & {
+  column: MRT_ColumnInstance<D>;
+};
+
 export type MRT_HeaderGroup<D extends {} = {}> = HeaderGroup<
   D,
   unknown,
   unknown,
   unknown,
   unknown
-> &
-  MRT_ColumnInstance<D> & {
-    headers: MRT_HeaderGroup<D>[];
-  };
+> & {
+  headers: MRT_Header<D>[];
+};
 
 export type MRT_Row<D extends {} = {}> = Row<
   D,
@@ -147,7 +158,8 @@ export type MRT_Row<D extends {} = {}> = Row<
   unknown,
   unknown
 > & {
-  cells: MRT_Cell<D>[];
+  getVisibleCells: () => MRT_Cell<D>[];
+  getAllCells: () => MRT_Cell<D>[];
 };
 
 export type MRT_Cell<D extends {} = {}> = Cell<
@@ -246,7 +258,7 @@ export type MaterialReactTableProps<D extends {} = {}> = MRT_TableOptions<D> & {
     | ((tableInstance: MRT_TableInstance<D>) => TableHeadProps);
   muiTableHeadRowProps?:
     | TableRowProps
-    | ((row: MRT_HeaderGroup<D>) => TableRowProps);
+    | ((headerGroup: MRT_HeaderGroup<D>) => TableRowProps);
   muiTablePaginationProps?:
     | Partial<TablePaginationProps>
     | ((tableInstance: MRT_TableInstance<D>) => Partial<TablePaginationProps>);
@@ -328,7 +340,6 @@ export type MaterialReactTableProps<D extends {} = {}> = MRT_TableOptions<D> & {
 export default <D extends {} = {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
   filterTypes,
-  // globalFilter = MRT_FILTER_TYPE.BEST_MATCH_FIRST,
   icons,
   localization,
   positionActionsColumn = 'first',
@@ -338,12 +349,8 @@ export default <D extends {} = {}>({
   ...rest
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
-    //@ts-ignore
     defaultColumn={defaultColumn}
-    //@ts-ignore
     filterTypes={{ ...defaultFilterFNs, ...filterTypes }}
-    //@ts-ignore
-    globalFilter={globalFilter}
     icons={{ ...MRT_Default_Icons, ...icons }}
     localization={{ ...MRT_DefaultLocalization_EN, ...localization }}
     positionActionsColumn={positionActionsColumn}

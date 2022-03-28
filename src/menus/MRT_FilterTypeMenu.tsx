@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react';
 import { Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
-import type { MRT_FilterType, MRT_HeaderGroup } from '..';
+import type { MRT_FilterType, MRT_Header } from '..';
 import { MRT_FILTER_TYPE } from '../enums';
 import {
   bestMatch,
@@ -25,14 +25,14 @@ const commonMenuItemStyles = {
 
 interface Props {
   anchorEl: HTMLElement | null;
-  column?: MRT_HeaderGroup;
+  header?: MRT_Header;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
   onSelect?: () => void;
 }
 
 export const MRT_FilterTypeMenu: FC<Props> = ({
   anchorEl,
-  column,
+  header,
   onSelect,
   setAnchorEl,
 }) => {
@@ -41,7 +41,6 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
     localization,
     setCurrentFilterTypes,
     setCurrentGlobalFilterType,
-    tableInstance,
     tableInstance: { getState },
   } = useMRT();
 
@@ -62,7 +61,7 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
         {
           type: MRT_FILTER_TYPE.BEST_MATCH,
           label: localization.filterBestMatch,
-          divider: !!column,
+          divider: !!header,
           fn: bestMatch,
         },
         {
@@ -120,9 +119,9 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
           fn: notEmpty,
         },
       ].filter((filterType) =>
-        column
-          ? !column.enabledFilterTypes ||
-            column.enabledFilterTypes.includes(filterType.type)
+        header
+          ? !header.enabledFilterTypes ||
+            header.enabledFilterTypes.includes(filterType.type)
           : (!enabledGlobalFilterTypes ||
               enabledGlobalFilterTypes.includes(filterType.type)) &&
             [
@@ -134,13 +133,13 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
   );
 
   const handleSelectFilterType = (value: MRT_FILTER_TYPE) => {
-    if (column) {
+    if (header) {
       setCurrentFilterTypes((prev: { [key: string]: MRT_FilterType }) => ({
         ...prev,
-        [column.id]: value,
+        [header.id]: value,
       }));
       if ([MRT_FILTER_TYPE.EMPTY, MRT_FILTER_TYPE.NOT_EMPTY].includes(value)) {
-        column.setColumnFilterValue(' ');
+        header.column.setColumnFilterValue(' ');
       }
     } else {
       setCurrentGlobalFilterType(value);
@@ -149,8 +148,8 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
     onSelect?.();
   };
 
-  const filterType = column
-    ? getState().currentFilterTypes[column.id]
+  const filterType = header
+    ? getState().currentFilterTypes[header.id]
     : getState().currentGlobalFilterType;
 
   return (

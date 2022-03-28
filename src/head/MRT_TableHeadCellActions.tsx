@@ -8,16 +8,14 @@ interface Props {}
 export const MRT_TableHeadCellActions: FC<Props> = () => {
   const {
     localization,
-    tableInstance: {
-      state: { densePadding },
-    },
+    tableInstance: { getState },
   } = useMRT();
 
   return (
     <TableCell
       style={{ textAlign: 'center' }}
       sx={{
-        ...commonTableHeadCellStyles(densePadding),
+        ...commonTableHeadCellStyles(getState().densePadding),
         textAlign: 'center',
         maxWidth: '4rem',
         width: '4rem',
