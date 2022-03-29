@@ -52,7 +52,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
           componentsProps={{ typography: { sx: { marginBottom: 0 } } }}
           checked={switchChecked}
           control={<Switch />}
-          disabled={(isSubMenu && switchChecked) || column.disableColumnHiding}
+          disabled={(isSubMenu && switchChecked) || !column.enableHiding}
           label={column.Header as string}
           onChange={() => handleToggleColumnHidden(column)}
         />

@@ -12,7 +12,7 @@ interface Props {}
 export const MRT_ToolbarBottom: FC<Props> = () => {
   const {
     hideToolbarInternalActions,
-    disablePagination,
+    enablePagination,
     muiTableToolbarBottomProps,
     positionPagination,
     positionToolbarActions,
@@ -34,7 +34,7 @@ export const MRT_ToolbarBottom: FC<Props> = () => {
         ({
           bottom: getState().fullScreen ? '0' : undefined,
           position: getState().fullScreen ? 'fixed' : undefined,
-          ...commonToolbarStyles(theme, tableInstance),
+          ...commonToolbarStyles(theme, getState().fullScreen),
           ...toolbarProps?.sx,
         } as any)
       }
@@ -49,7 +49,7 @@ export const MRT_ToolbarBottom: FC<Props> = () => {
           <span />
         )}
         {positionToolbarAlertBanner === 'bottom' && <MRT_ToolbarAlertBanner />}
-        {!disablePagination &&
+        {enablePagination &&
           ['bottom', 'both'].includes(positionPagination ?? '') && (
             <MRT_TablePagination />
           )}

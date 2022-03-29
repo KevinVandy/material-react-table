@@ -121,7 +121,7 @@ const RootPropTable = () => {
         linkText: 'MRT click to copy docs',
       },
       {
-        prop: 'enableColumnGrouping',
+        prop: 'enableGrouping',
         type: 'boolean',
         description: 'Enable the column grouping feature',
         link: '/docs/guides/column-grouping',

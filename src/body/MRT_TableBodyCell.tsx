@@ -67,20 +67,10 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
           width={Math.random() * (120 - 60) + 60}
           {...muiTableBodyCellSkeletonProps}
         />
-      ) : !cell.column.disableEditing &&
+      ) : cell.column.enableEditing &&
         getState().currentEditingRow?.id === cell.row.id ? (
         <MRT_EditCellTextField cell={cell} />
-      ) : cell.isPlaceholder ? null : cell.isAggregated ? (
-        enableClickToCopy && !cell.column.disableClickToCopy ? (
-          <MRT_CopyButton cell={cell}>{cell.renderCell()}</MRT_CopyButton>
-        ) : (
-          cell.renderCell()
-        )
-      ) : cell.isGrouped ? (
-        <span>
-          {cell.renderCell()} ({cell.row.subRows.length})
-        </span>
-      ) : enableClickToCopy && !cell.column.disableClickToCopy ? (
+      ) : enableClickToCopy || cell.column.enableClickToCopy ? (
         <MRT_CopyButton cell={cell}>{cell.renderCell()}</MRT_CopyButton>
       ) : (
         cell.renderCell()

@@ -18,8 +18,8 @@ interface Props {
 export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
   const {
     anyRowsCanExpand,
-    disableExpandAll,
-    disableSelectAll,
+    enableExpandAll,
+    enableSelectAll,
     enableRowActions,
     enableRowEditing,
     enableRowNumbers,
@@ -56,7 +56,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
           <MRT_TableHeadCellActions />
         ))}
       {anyRowsCanExpand || renderDetailPanel ? (
-        !disableExpandAll && !isParentHeader ? (
+        enableExpandAll && !isParentHeader ? (
           <TableCell
             size="small"
             {...tableInstance.getToggleAllRowsExpandedProps()}
@@ -78,7 +78,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         )
       ) : null}
       {enableSelection ? (
-        !isParentHeader && !disableSelectAll ? (
+        !isParentHeader && enableSelectAll ? (
           <TableCell
             sx={{
               ...commonTableHeadCellStyles(getState().densePadding),

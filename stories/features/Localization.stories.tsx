@@ -54,7 +54,7 @@ export const CustomSpanishLocalizationExample: Story<
     <MaterialReactTable
       columns={columns}
       data={data}
-      enableColumnGrouping
+      enableGrouping
       enableRowEditing
       enableSelection
       localization={{

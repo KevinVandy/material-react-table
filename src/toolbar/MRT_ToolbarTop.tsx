@@ -26,7 +26,7 @@ export const MRT_ToolbarTop: FC<Props> = () => {
   const {
     enableGlobalFilter,
     hideToolbarInternalActions,
-    disablePagination,
+    enablePagination,
     muiTableToolbarTopProps,
     positionPagination,
     positionToolbarActions,
@@ -78,7 +78,7 @@ export const MRT_ToolbarTop: FC<Props> = () => {
         </Box>
       </Box>
       <div>
-        {!disablePagination &&
+        {enablePagination &&
           ['top', 'both'].includes(positionPagination ?? '') && (
             <MRT_TablePagination />
           )}

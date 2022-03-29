@@ -35,18 +35,21 @@ import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_FILTER_TYPE } from './enums';
 import { FilterType } from '@tanstack/react-table/build/types/features/Filters';
 
-export type MRT_TableOptions<D extends {} = {}> = Options<D> & {
+export type MRT_TableOptions<D extends {} = {}> = Partial<
+  Omit<Options<D>, 'columns' | 'data' | 'initialState' | 'state'>
+> & {
   columns: MRT_ColumnInterface<D>[];
   data: D[];
   initialState?: Partial<MRT_TableState<D>>;
-  state: Partial<MRT_TableState<D>>;
+  state?: Partial<MRT_TableState<D>>;
 };
 
 export type MRT_TableInstance<D extends {} = {}> = Omit<
   TableInstance<D>,
-  'getState'
+  'getState' | 'getAllColumns'
 > & {
   getState: () => MRT_TableState<D>;
+  getAllColumns: () => MRT_ColumnInstance<D>[];
 };
 
 export type MRT_TableState<D extends {} = {}> = TableState & {
@@ -59,7 +62,10 @@ export type MRT_TableState<D extends {} = {}> = TableState & {
   showSearch: boolean;
 };
 
-export type MRT_ColumnInterface<D extends {} = {}> = ColumnDef<D> & {
+export type MRT_ColumnInterface<D extends {} = {}> = Omit<
+  ColumnDef<D>,
+  'header' | 'id' | 'footer'
+> & {
   Edit?: ({
     cell,
     onChange,
@@ -72,11 +78,11 @@ export type MRT_ColumnInterface<D extends {} = {}> = ColumnDef<D> & {
   Header?: ReactNode;
   columnType: 'group' | 'data' | 'display' | null;
   columns?: MRT_ColumnInterface<D>[];
-  disableClickToCopy?: boolean;
-  disableColumnActions?: boolean;
-  disableColumnHiding?: boolean;
-  disableEditing?: boolean;
-  disableFilters?: boolean;
+  enableClickToCopy?: boolean;
+  enableColumnActions?: boolean;
+  enableEditing?: boolean;
+  enableColumnFilters?: boolean;
+  enableHiding?: boolean;
   enabledFilterTypes?: (MRT_FILTER_TYPE | string)[];
   filter?: MRT_FilterType | string | FilterType<D>;
   filterSelectOptions?: (string | { text: string; value: string })[];
@@ -114,46 +120,50 @@ export type MRT_ColumnInterface<D extends {} = {}> = ColumnDef<D> & {
   ) => void;
 };
 
-export type MRT_ColumnInstance<D extends {} = {}> = MRT_ColumnInterface<D> &
-  Column<D> & {
+export type MRT_ColumnInstance<D extends {} = {}> = Omit<Column<D>, 'columns'> &
+  MRT_ColumnInterface<D> & {
     columns?: MRT_ColumnInstance<D>[];
   };
 
-export type MRT_Header<D extends {} = {}> = Header<D> & {
+export type MRT_Header<D extends {} = {}> = Omit<Header<D>, 'column'> & {
   column: MRT_ColumnInstance<D>;
 };
 
-export type MRT_HeaderGroup<D extends {} = {}> = HeaderGroup<D> & {
+export type MRT_HeaderGroup<D extends {} = {}> = Omit<
+  HeaderGroup<D>,
+  'headers'
+> & {
   headers: MRT_Header<D>[];
 };
 
-export type MRT_Row<D extends {} = {}> = Row<D> & {
+export type MRT_Row<D extends {} = {}> = Omit<
+  Row<D>,
+  'getVisibleCells' | 'getAllCells'
+> & {
   getVisibleCells: () => MRT_Cell<D>[];
   getAllCells: () => MRT_Cell<D>[];
 };
 
-export type MRT_Cell<D extends {} = {}> = Cell<D> & {
+export type MRT_Cell<D extends {} = {}> = Omit<Cell<D>, 'column'> & {
   column: MRT_ColumnInstance<D>;
 };
 
 export type MRT_FilterType = MRT_FILTER_TYPE | Function;
 
 export type MaterialReactTableProps<D extends {} = {}> = MRT_TableOptions<D> & {
-  disableColumnActions?: boolean;
-  disableColumnHiding?: boolean;
-  disableDensePaddingToggle?: boolean;
-  disableExpandAll?: boolean;
-  disableFullScreenToggle?: boolean;
-  disablePagination?: boolean;
-  disableSelectAll?: boolean;
-  disableSubRowTree?: boolean;
   enableClickToCopy?: boolean;
-  enableColumnGrouping?: boolean;
+  enableColumnActions?: boolean;
   enableColumnResizing?: boolean;
+  enableDensePaddingToggle?: boolean;
+  enableExpandAll?: boolean;
+  enableFullScreenToggle?: boolean;
+  enablePagination?: boolean;
   enableRowActions?: boolean;
   enableRowEditing?: boolean;
   enableRowNumbers?: boolean;
+  enableSelectAll?: boolean;
   enableSelection?: boolean;
+  enableSubRowTree?: boolean;
   enabledGlobalFilterTypes?: (MRT_FILTER_TYPE | string)[];
   filterTypes?: { [key in MRT_FILTER_TYPE]: any };
   hideTableFooter?: boolean;
@@ -302,7 +312,15 @@ export type MaterialReactTableProps<D extends {} = {}> = MRT_TableOptions<D> & {
 };
 
 export default <D extends {} = {}>({
-  defaultColumn = { minWidth: 50, maxWidth: 1000 },
+  // defaultColumn = { minWidth: 50, maxWidth: 1000 },
+  enableColumnActions = true,
+  enableColumnFilters = true,
+  enableDensePaddingToggle = true,
+  enableFullScreenToggle = true,
+  enableGlobalFilter = true,
+  enableHiding = true,
+  enablePagination = true,
+  enableSorting = true,
   filterTypes,
   icons,
   localization,
@@ -313,7 +331,15 @@ export default <D extends {} = {}>({
   ...rest
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
-    defaultColumn={defaultColumn}
+    // defaultColumn={defaultColumn}
+    enableColumnActions={enableColumnActions}
+    enableColumnFilters={enableColumnFilters}
+    enableDensePaddingToggle={enableDensePaddingToggle}
+    enableFullScreenToggle={enableFullScreenToggle}
+    enableGlobalFilter={enableGlobalFilter}
+    enableHiding={enableHiding}
+    enablePagination={enablePagination}
+    enableSorting={enableSorting}
     // filterTypes={{ ...defaultFilterFNs, ...filterTypes }}
     icons={{ ...MRT_Default_Icons, ...icons }}
     localization={{ ...MRT_DefaultLocalization_EN, ...localization }}

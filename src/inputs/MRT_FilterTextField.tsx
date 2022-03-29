@@ -18,7 +18,7 @@ interface Props {
   header: MRT_Header;
 }
 
-export const MRT_FilterTextField: FC<Props> = ({ header: header }) => {
+export const MRT_FilterTextField: FC<Props> = ({ header }) => {
   const {
     icons: { FilterListIcon, CloseIcon },
     idPrefix,
@@ -60,32 +60,32 @@ export const MRT_FilterTextField: FC<Props> = ({ header: header }) => {
     header.column.setColumnFilterValue(undefined);
   };
 
-  const handleClearFilterChip = () => {
-    setFilterValue('');
-    header.column.setColumnFilterValue(undefined);
-    setCurrentFilterTypes((prev) => ({
-      ...prev,
-      [header.id]: MRT_FILTER_TYPE.BEST_MATCH,
-    }));
-  };
+  // const handleClearFilterChip = () => {
+  //   setFilterValue('');
+  //   header.column.setColumnFilterValue(undefined);
+  //   setCurrentFilterTypes((prev) => ({
+  //     ...prev,
+  //     [header.id]: MRT_FILTER_TYPE.BEST_MATCH,
+  //   }));
+  // };
 
   // if (header.Filter) {
   //   return <>{header.Filter?.({ column: header })}</>;
   // }
 
   const filterId = `mrt-${idPrefix}-${header.id}-filter-text-field`;
-  const filterType = getState().currentFilterTypes?.[header.id];
+  // const filterType = getState().currentFilterTypes?.[header.id];
   const isSelectFilter = !!header.column.filterSelectOptions;
-  const filterChipLabel =
-    !(filterType instanceof Function) &&
-    [MRT_FILTER_TYPE.EMPTY, MRT_FILTER_TYPE.NOT_EMPTY].includes(
-      filterType as MRT_FILTER_TYPE,
-    )
-      ? //@ts-ignore
-        localization[
-          `filter${filterType.charAt(0).toUpperCase() + filterType.slice(1)}`
-        ]
-      : '';
+  const filterChipLabel = '';
+  //   !(filterType instanceof Function) &&
+  //   [MRT_FILTER_TYPE.EMPTY, MRT_FILTER_TYPE.NOT_EMPTY].includes(
+  //     filterType as MRT_FILTER_TYPE,
+  //   )
+  //     ? //@ts-ignore
+  //       localization[
+  //         `filter${filterType.charAt(0).toUpperCase() + filterType.slice(1)}`
+  //       ]
+  //     : '';
   const filterPlaceholder = localization.filterByColumn?.replace(
     '{column}',
     String(header.column.header),
@@ -97,44 +97,45 @@ export const MRT_FilterTextField: FC<Props> = ({ header: header }) => {
         fullWidth
         id={filterId}
         inputProps={{
-          disabled: !!filterChipLabel,
+          // disabled: !!filterChipLabel,
           sx: {
             textOverflow: 'ellipsis',
-            width: filterChipLabel ? 0 : undefined,
+            // width: filterChipLabel ? 0 : undefined,
           },
           title: filterPlaceholder,
         }}
-        helperText={
-          <label htmlFor={filterId}>
-            {filterType instanceof Function
-              ? localization.filterMode.replace(
-                  '{filterType}',
-                  // @ts-ignore
-                  localization[
-                    `filter${
-                      filterType.name.charAt(0).toUpperCase() +
-                      filterType.name.slice(1)
-                    }`
-                  ] ?? '',
-                ) ?? ''
-              : localization.filterMode.replace(
-                  '{filterType}',
-                  // @ts-ignore
-                  localization[
-                    `filter${
-                      filterType.charAt(0).toUpperCase() + filterType.slice(1)
-                    }`
-                  ],
-                )}
-          </label>
-        }
+        // helperText={
+        //   <label htmlFor={filterId}>
+        //     {filterType instanceof Function
+        //       ? localization.filterMode.replace(
+        //           '{filterType}',
+        //           // @ts-ignore
+        //           localization[
+        //             `filter${
+        //               filterType.name.charAt(0).toUpperCase() +
+        //               filterType.name.slice(1)
+        //             }`
+        //           ] ?? '',
+        //         ) ?? ''
+        //       : localization.filterMode.replace(
+        //           '{filterType}',
+        //           // @ts-ignore
+        //           localization[
+        //             `filter${
+        //               filterType.charAt(0).toUpperCase() + filterType.slice(1)
+        //             }`
+        //           ],
+        //         )}
+        //   </label>
+        // }
         FormHelperTextProps={{
           sx: { fontSize: '0.6rem', lineHeight: '0.8rem' },
         }}
         label={isSelectFilter && !filterValue ? filterPlaceholder : undefined}
         margin="none"
         placeholder={
-          filterChipLabel || isSelectFilter ? undefined : filterPlaceholder
+          filterPlaceholder
+          // filterChipLabel || isSelectFilter ? undefined : filterPlaceholder
         }
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFilterValue(e.target.value);
@@ -159,12 +160,12 @@ export const MRT_FilterTextField: FC<Props> = ({ header: header }) => {
                   </IconButton>
                 </span>
               </Tooltip>
-              {filterChipLabel && (
+              {/* {filterChipLabel && (
                 <Chip
                   onDelete={handleClearFilterChip}
                   label={filterChipLabel}
                 />
-              )}
+              )} */}
             </InputAdornment>
           ),
           endAdornment: !filterChipLabel && (

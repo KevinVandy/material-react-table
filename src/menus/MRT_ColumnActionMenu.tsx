@@ -29,10 +29,10 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
   setAnchorEl,
 }) => {
   const {
-    disableColumnHiding,
+    enableHiding,
     enableColumnFilters,
     enableSorting,
-    enableColumnGrouping,
+    enableGrouping,
     icons: {
       ArrowRightIcon,
       ClearAllIcon,
@@ -160,11 +160,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             </Box>
           </MenuItem>,
           <MenuItem
-            divider={
-              enableColumnFilters ||
-              enableColumnGrouping ||
-              !disableColumnHiding
-            }
+            divider={enableColumnFilters || enableGrouping || enableHiding}
             key={2}
             disabled={header.column.getIsSorted() === 'desc'}
             onClick={handleSortDesc}
@@ -197,7 +193,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             </Box>
           </MenuItem>,
           <MenuItem
-            divider={enableColumnGrouping || !disableColumnHiding}
+            divider={enableGrouping || enableHiding}
             key={1}
             onClick={handleFilterByColumn}
             sx={commonMenuItemStyles}
@@ -230,10 +226,10 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             onSelect={handleFilterByColumn}
           />,
         ]}
-      {enableColumnGrouping &&
+      {enableGrouping &&
         header.column.getCanGroup() && [
           <MenuItem
-            divider={!disableColumnHiding}
+            divider={enableHiding}
             key={0}
             onClick={handleGroupByColumn}
             sx={commonMenuItemStyles}
@@ -243,14 +239,16 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
                 <DynamicFeedIcon />
               </ListItemIcon>
               {localization[
-                header.column.getIsGrouped() ? 'ungroupByColumn' : 'groupByColumn'
+                header.column.getIsGrouped()
+                  ? 'ungroupByColumn'
+                  : 'groupByColumn'
               ]?.replace('{column}', String(header.column.header))}
             </Box>
           </MenuItem>,
         ]}
-      {!disableColumnHiding && [
+      {enableHiding && [
         <MenuItem
-          disabled={header.column.disableColumnHiding}
+          disabled={!header.column.enableHiding}
           key={0}
           onClick={handleHideColumn}
           sx={commonMenuItemStyles}

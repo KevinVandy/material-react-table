@@ -7,11 +7,11 @@ import type { MRT_Row } from '..';
 interface Props {}
 
 export const MRT_TableBody: FC<Props> = () => {
-  const { disablePagination, muiTableBodyProps, tableInstance } = useMRT();
+  const { enablePagination, muiTableBodyProps, tableInstance } = useMRT();
 
-  const rows = disablePagination
-    ? tableInstance.getRowModel().rows
-    : tableInstance.getPaginationRowModel().rows;
+  const rows = enablePagination
+    ? tableInstance.getPaginationRowModel().rows
+    : tableInstance.getRowModel().rows;
 
   const mTableBodyProps =
     muiTableBodyProps instanceof Function

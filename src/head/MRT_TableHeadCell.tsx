@@ -36,16 +36,14 @@ interface Props {
 }
 
 export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
-  console.log({ header });
   const {
-    disableColumnActions,
+    enableColumnActions,
     enableColumnFilters,
     enableColumnResizing,
     icons: { FilterAltIcon, FilterAltOff },
     localization,
     muiTableHeadCellProps,
     setShowFilters,
-    tableInstance,
     tableInstance: { getState },
   } = useMRT();
 
@@ -133,6 +131,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
           {...header.column.getToggleSortingProps()}
           sx={{
             alignItems: 'center',
+            cursor: 'pointer',
             display: 'flex',
             flexWrap: 'nowrap',
             whiteSpace: columnHeader.length < 15 ? 'nowrap' : 'normal',
@@ -164,9 +163,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
                 size="small"
                 sx={{
                   m: 0,
-                  opacity: !!header.column.getColumnFilterValue()
-                    ? 0.8
-                    : 0,
+                  opacity: !!header.column.getColumnFilterValue() ? 0.8 : 0,
                   p: '2px',
                   transition: 'all 0.2s ease-in-out',
                   '&:hover': {
@@ -186,8 +183,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
           )}
         </Box>
         <Box sx={{ alignItems: 'center', display: 'flex', flexWrap: 'nowrap' }}>
-          {!disableColumnActions &&
-            !header.column.disableColumnActions &&
+          {(enableColumnActions || header.column.enableColumnActions) &&
             !isParentHeader && (
               <MRT_ToggleColumnActionMenuButton header={header} />
             )}
@@ -195,10 +191,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
             <Divider
               flexItem
               orientation="vertical"
-              onDoubleClick={() =>
-                tableInstance.resetColumnSize(header.id)
-              }
-              {...header.column.getResizerProps()}
+              onDoubleClick={() => header.resetSize()}
               sx={{
                 borderRightWidth: '2px',
                 borderRadius: '2px',

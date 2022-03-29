@@ -26,13 +26,10 @@ export const MRT_SearchTextField: FC<Props> = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [searchValue, setSearchValue] = useState('');
 
-  const handleChange = debounce(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      tableInstance.setGlobalFilter(event.target.value ?? undefined);
-      onGlobalFilterChange?.(event);
-    },
-    200,
-  );
+  const handleChange = debounce((event: ChangeEvent<HTMLInputElement>) => {
+    tableInstance.setGlobalFilter(event.target.value ?? undefined);
+    onGlobalFilterChange?.(event);
+  }, 200);
 
   const handleGlobalFilterMenuOpen = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);

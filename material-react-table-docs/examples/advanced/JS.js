@@ -1496,7 +1496,7 @@ const Example = () => {
       columns={columns}
       data={data}
       enableClickToCopy
-      enableColumnGrouping
+      enableGrouping
       enableRowActions
       enableRowEditing
       enableSelection

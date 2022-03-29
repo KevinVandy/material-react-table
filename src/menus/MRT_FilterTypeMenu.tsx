@@ -120,8 +120,8 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
         },
       ].filter((filterType) =>
         header
-          ? !header.enabledFilterTypes ||
-            header.enabledFilterTypes.includes(filterType.type)
+          ? !header.column.enabledFilterTypes ||
+            header.column.enabledFilterTypes.includes(filterType.type)
           : (!enabledGlobalFilterTypes ||
               enabledGlobalFilterTypes.includes(filterType.type)) &&
             [
@@ -148,9 +148,9 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
     onSelect?.();
   };
 
-  const filterType = header
-    ? getState().currentFilterTypes[header.id]
-    : getState().currentGlobalFilterType;
+  // const filterType = !!header
+  //   ? getState().currentFilterTypes[header.id]
+  //   : getState().currentGlobalFilterType;
 
   return (
     <Menu
@@ -167,7 +167,7 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
           divider={divider}
           key={index}
           onClick={() => handleSelectFilterType(type)}
-          selected={type === filterType || fn === filterType}
+          // selected={type === filterType || fn === filterType}
           sx={commonMenuItemStyles}
           value={type}
         >

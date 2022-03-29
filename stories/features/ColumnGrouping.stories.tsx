@@ -46,7 +46,7 @@ const data = [...Array(200)].map((_) => ({
 }));
 
 export const ColumnGroupingEnabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} enableColumnGrouping />
+  <MaterialReactTable columns={columns} data={data} enableGrouping />
 );
 
 export const ColumnGroupingBannerOnBottom: Story<
@@ -55,7 +55,7 @@ export const ColumnGroupingBannerOnBottom: Story<
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableColumnGrouping
+    enableGrouping
     positionToolbarAlertBanner="bottom"
   />
 );

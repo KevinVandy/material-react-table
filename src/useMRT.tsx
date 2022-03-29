@@ -1,4 +1,4 @@
-import { createTable } from '@tanstack/react-table';
+import { createTable, sortRowsFn, useTable } from '@tanstack/react-table';
 import React, {
   Context,
   Dispatch,
@@ -110,7 +110,7 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
   const columns = useMemo(
     () =>
       table.createColumns(
-        props.columns.map((column: MRT_ColumnInterface<D>) =>
+        props.columns.map((column) =>
           !!column.columns
             ? createGroup(table, column)
             : createColumn(table, column),
@@ -119,7 +119,7 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     [table],
   );
 
-  const data = useMemo(
+  const data: D[] = useMemo(
     () =>
       !props.isLoading || !!props.data.length
         ? props.data
@@ -134,10 +134,11 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     [props.data, props.isLoading],
   );
 
-  const tableInstance = table.useTable({
+  const tableInstance = useTable(table, {
     ...props,
     columns,
     data,
+    sortRowsFn,
     // globalFilter: currentGlobalFilterType,
     state: {
       currentEditingRow,
@@ -150,8 +151,6 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
       ...props.state,
     },
   });
-
-  console.log(tableInstance.getState());
 
   const idPrefix = useMemo(
     () => props.idPrefix ?? Math.random().toString(36).substring(2, 9),
@@ -167,7 +166,7 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     () => tableInstance.getRowModel().rows.some((row) => row.getIsExpanded()),
     [tableInstance.getRowModel().rows],
   );
-  console.log({ tableInstance });
+
   return (
     <MaterialReactTableContext.Provider
       value={{
@@ -175,7 +174,6 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
         anyRowsCanExpand,
         anyRowsExpanded,
         idPrefix,
-        //@ts-ignore
         setCurrentEditingRow,
         // setCurrentFilterTypes,
         // setCurrentGlobalFilterType,
@@ -183,7 +181,6 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
         setFullScreen,
         setShowFilters,
         setShowSearch,
-        //@ts-ignore
         tableInstance,
       }}
     >

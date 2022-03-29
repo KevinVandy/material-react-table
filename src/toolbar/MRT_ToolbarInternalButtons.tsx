@@ -11,11 +11,11 @@ interface Props {}
 
 export const MRT_ToolbarInternalButtons: FC<Props> = () => {
   const {
-    enableFilters,
+    enableColumnFilters,
     enableHiding,
-    disableDensePaddingToggle,
+    enableDensePaddingToggle,
     enableGlobalFilter,
-    disableFullScreenToggle,
+    enableFullScreenToggle,
     renderToolbarInternalActions,
     tableInstance,
   } = useMRT();
@@ -44,10 +44,10 @@ export const MRT_ToolbarInternalButtons: FC<Props> = () => {
       }}
     >
       {enableGlobalFilter && <MRT_ToggleSearchButton />}
-      {enableFilters && <MRT_ToggleFiltersButton />}
+      {enableColumnFilters && <MRT_ToggleFiltersButton />}
       {enableHiding && <MRT_ShowHideColumnsButton />}
-      {!disableDensePaddingToggle && <MRT_ToggleDensePaddingButton />}
-      {!disableFullScreenToggle && <MRT_FullScreenToggleButton />}
+      {enableDensePaddingToggle && <MRT_ToggleDensePaddingButton />}
+      {enableFullScreenToggle && <MRT_FullScreenToggleButton />}
     </Box>
   );
 };

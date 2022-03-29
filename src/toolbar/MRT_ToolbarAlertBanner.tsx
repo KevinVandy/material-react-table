@@ -29,7 +29,10 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
             '{selectedCount}',
             tableInstance.getSelectedRowModel().rows.length.toString(),
           )
-          ?.replace('{rowCount}', tableInstance.getSelectedRowModel().rows.length.toString())
+          ?.replace(
+            '{rowCount}',
+            tableInstance.getSelectedRowModel().rows.length.toString(),
+          )
       : null;
 
   const groupedByMessage =
@@ -42,9 +45,9 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
             <Chip
               color="secondary"
               label={
-                tableInstance.getAllColumns().find(
-                  (column) => column.id === columnId,
-                )?.header
+                tableInstance
+                  .getAllColumns()
+                  .find((column) => column.id === columnId)?.header
               }
               onDelete={() => tableInstance.toggleColumnGrouping(columnId)}
             />
