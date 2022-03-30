@@ -35,24 +35,24 @@ export const RowEditingEnabled: Story<MaterialReactTableProps> = () => {
     <MaterialReactTable
       columns={[
         {
-          Header: 'First Name',
-          accessor: 'firstName' as const,
+          header: 'First Name',
+          id: 'firstName',
         },
         {
-          Header: 'Last Name',
-          accessor: 'lastName' as const,
+          header: 'Last Name',
+          id: 'lastName',
         },
         {
-          Header: 'Address',
-          accessor: 'address' as const,
+          header: 'Address',
+          id: 'address',
         },
         {
-          Header: 'State',
-          accessor: 'state' as const,
+          header: 'State',
+          id: 'state',
         },
         {
-          Header: 'Phone Number',
-          accessor: 'phoneNumber' as const,
+          header: 'Phone Number',
+          id: 'phoneNumber',
           disableEditing: true,
         },
       ]}
@@ -133,20 +133,20 @@ export const RowEditingCustomizeInput: Story<MaterialReactTableProps> = () => {
     <MaterialReactTable
       columns={[
         {
-          Header: 'First Name',
-          accessor: 'firstName' as const,
+          header: 'First Name',
+          id: 'firstName',
         },
         {
-          Header: 'Last Name',
-          accessor: 'lastName' as const,
+          header: 'Last Name',
+          id: 'lastName',
         },
         {
-          Header: 'Address',
-          accessor: 'address' as const,
+          header: 'Address',
+          id: 'address',
         },
         {
-          Header: 'State',
-          accessor: 'state' as const,
+          header: 'State',
+          id: 'state',
           muiTableBodyCellEditTextFieldProps: (cell) => ({
             children: usStates.map((state) => (
               <MenuItem key={state} value={state}>
@@ -158,8 +158,8 @@ export const RowEditingCustomizeInput: Story<MaterialReactTableProps> = () => {
           }),
         },
         {
-          Header: 'Phone Number',
-          accessor: 'phoneNumber' as const,
+          header: 'Phone Number',
+          id: 'phoneNumber',
         },
       ]}
       data={tableData}
@@ -205,8 +205,8 @@ export const RowEditingWithValidation: Story<MaterialReactTableProps> = () => {
     <MaterialReactTable
       columns={[
         {
-          Header: 'First Name',
-          accessor: 'firstName' as const,
+          header: 'First Name',
+          id: 'firstName',
           muiTableBodyCellEditTextFieldProps: {
             error: !!firstNameError,
             helperText: firstNameError,
@@ -216,8 +216,8 @@ export const RowEditingWithValidation: Story<MaterialReactTableProps> = () => {
           },
         },
         {
-          Header: 'Last Name',
-          accessor: 'lastName' as const,
+          header: 'Last Name',
+          id: 'lastName',
           muiTableBodyCellEditTextFieldProps: {
             error: !!lastNameError,
             helperText: lastNameError,
@@ -227,8 +227,8 @@ export const RowEditingWithValidation: Story<MaterialReactTableProps> = () => {
           },
         },
         {
-          Header: 'Phone Number',
-          accessor: 'phoneNumber' as const,
+          header: 'Phone Number',
+          id: 'phoneNumber',
           muiTableBodyCellEditTextFieldProps: {
             error: !!phoneNumberError,
             helperText: phoneNumberError,
@@ -264,24 +264,24 @@ export const RowEditingEnabledAsync: Story<MaterialReactTableProps> = () => {
     <MaterialReactTable
       columns={[
         {
-          Header: 'First Name',
-          accessor: 'firstName' as const,
+          header: 'First Name',
+          id: 'firstName',
         },
         {
-          Header: 'Last Name',
-          accessor: 'lastName' as const,
+          header: 'Last Name',
+          id: 'lastName',
         },
         {
-          Header: 'Address',
-          accessor: 'address' as const,
+          header: 'Address',
+          id: 'address',
         },
         {
-          Header: 'State',
-          accessor: 'state' as const,
+          header: 'State',
+          id: 'state',
         },
         {
-          Header: 'Phone Number',
-          accessor: 'phoneNumber' as const,
+          header: 'Phone Number',
+          id: 'phoneNumber',
         },
       ]}
       data={tableData}

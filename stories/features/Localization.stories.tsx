@@ -18,24 +18,24 @@ export default meta;
 
 const columns = [
   {
-    Header: 'Primer nombre',
-    accessor: 'firstName' as const,
+    header: 'Primer nombre',
+    id: 'firstName',
   },
   {
-    Header: 'Apellido',
-    accessor: 'lastName' as const,
+    header: 'Apellido',
+    id: 'lastName',
   },
   {
-    Header: 'Dirección',
-    accessor: 'address' as const,
+    header: 'Dirección',
+    id: 'address',
   },
   {
-    Header: 'Ciudad',
-    accessor: 'city' as const,
+    header: 'Ciudad',
+    id: 'city',
   },
   {
-    Header: 'Estado',
-    accessor: 'state' as const,
+    header: 'Estado',
+    id: 'state',
   },
 ];
 

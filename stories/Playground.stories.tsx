@@ -30,7 +30,6 @@ interface Row {
 Default.args = {
   columns: [
     {
-      Header: <i>First Name</i>,
       header: 'First Name',
       id: 'firstName',
     },
@@ -60,20 +59,20 @@ export const MinimumFeatures = Template.bind({});
 MinimumFeatures.args = {
   columns: [
     {
-      Header: 'First Name',
-      accessor: 'firstName',
+      header: 'First Name',
+      id: 'firstName',
     },
     {
-      Header: 'Last Name',
-      accessor: 'lastName',
+      header: 'Last Name',
+      id: 'lastName',
     },
     {
-      Header: 'Age',
-      accessor: 'age',
+      header: 'Age',
+      id: 'age',
     },
     {
-      Header: 'Address',
-      accessor: 'address',
+      header: 'Address',
+      id: 'address',
     },
   ],
   data: [...Array(6)].map((_) => ({
@@ -82,11 +81,12 @@ MinimumFeatures.args = {
     age: faker.datatype.number(80),
     address: faker.address.streetAddress(),
   })),
-  disablePagination: true,
-  hideToolbarTop: true,
+  enableColumnActions: false,
+  enablePagination: false,
+  enableSorting: false,
+  enableColumnFilters: false,
   hideToolbarBottom: true,
-  disableSortBy: true,
-  disableColumnActions: true,
+  hideToolbarTop: true,
 } as MaterialReactTableProps<Row>;
 
 const maxFeaturesData = [...Array(250)].map((_) => ({
@@ -119,44 +119,44 @@ export const MaximumFeatures = Template.bind({});
 MaximumFeatures.args = {
   columns: [
     {
-      Header: 'Name',
-      Footer: 'Name',
+      header: 'Name',
+      footer: 'Name',
       columns: [
         {
-          Header: 'First Name',
-          Footer: 'First Name',
-          accessor: 'firstName',
+          header: 'First Name',
+          footer: 'First Name',
+          id: 'firstName',
         },
         {
-          Header: 'Last Name',
-          Footer: 'Last Name',
-          accessor: 'lastName',
+          header: 'Last Name',
+          footer: 'Last Name',
+          id: 'lastName',
         },
       ],
     },
     {
-      Header: 'Info',
-      Footer: 'Info',
+      header: 'Info',
+      footer: 'Info',
       columns: [
         {
-          Header: 'Age',
-          Footer: 'Age',
-          accessor: 'age',
+          header: 'Age',
+          footer: 'Age',
+          id: 'age',
         },
         {
-          Header: 'Address',
-          Footer: 'Address',
-          accessor: 'address',
+          header: 'Address',
+          footer: 'Address',
+          id: 'address',
         },
         {
-          Header: 'City',
-          Footer: 'City',
-          accessor: 'city',
+          header: 'City',
+          footer: 'City',
+          id: 'city',
         },
         {
-          Header: 'State',
-          Footer: 'State',
-          accessor: 'state',
+          header: 'State',
+          footer: 'State',
+          id: 'state',
         },
       ],
     },

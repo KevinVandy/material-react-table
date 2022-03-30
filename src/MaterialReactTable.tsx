@@ -66,6 +66,7 @@ export type MRT_ColumnInterface<D extends {} = {}> = Omit<
   ColumnDef<D>,
   'header' | 'id' | 'footer'
 > & {
+  [Please_use_the_create_table_column_utilities_to_define_columns]: undefined;
   Edit?: ({
     cell,
     onChange,

@@ -5,28 +5,28 @@ const ExamplePage = ({ data }) => {
   const columns = useMemo(
     () => [
       {
-        Header: 'Name',
-        accessor: 'name',
+        header: 'Name',
+        id: 'name',
       },
       {
-        Header: 'Username',
-        accessor: 'username',
+        header: 'Username',
+        id: 'username',
       },
       {
-        Header: 'Email',
-        accessor: 'email',
+        header: 'Email',
+        id: 'email',
       },
       {
-        Header: 'Address',
-        accessor: 'address',
+        header: 'Address',
+        id: 'address',
       },
       {
-        Header: 'City',
-        accessor: 'city',
+        header: 'City',
+        id: 'city',
       },
       {
-        Header: 'Zip Code',
-        accessor: 'zipcode',
+        header: 'Zip Code',
+        id: 'zipcode',
       },
     ],
     [],

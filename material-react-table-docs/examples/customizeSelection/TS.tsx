@@ -6,28 +6,28 @@ const Example: FC = () => {
     () => [
       //column definitions...
       {
-        Header: 'First Name',
-        accessor: 'firstName' as const,
+        header: 'First Name',
+        id: 'firstName',
       },
       {
-        Header: 'Last Name',
-        accessor: 'lastName' as const,
+        header: 'Last Name',
+        id: 'lastName',
       },
       {
-        Header: 'Age',
-        accessor: 'age' as const,
+        header: 'Age',
+        id: 'age',
       },
       {
-        Header: 'Address',
-        accessor: 'address' as const,
+        header: 'Address',
+        id: 'address',
       },
       {
-        Header: 'City',
-        accessor: 'city' as const,
+        header: 'City',
+        id: 'city',
       },
       {
-        Header: 'State',
-        accessor: 'state' as const,
+        header: 'State',
+        id: 'state',
       },
       //end
     ],

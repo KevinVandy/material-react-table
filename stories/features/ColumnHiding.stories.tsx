@@ -16,32 +16,32 @@ export default meta;
 
 const columns = [
   {
-    Header: 'First Name',
-    accessor: 'firstName' as const,
+    header: 'First Name',
+    id: 'firstName',
   },
   {
-    Header: 'Last Name',
-    accessor: 'lastName' as const,
+    header: 'Last Name',
+    id: 'lastName',
   },
   {
-    Header: 'Address',
-    accessor: 'address' as const,
+    header: 'Address',
+    id: 'address',
   },
   {
-    Header: 'State',
-    accessor: 'state' as const,
+    header: 'State',
+    id: 'state',
   },
   {
-    Header: 'Zip',
-    accessor: 'zip' as const,
+    header: 'Zip',
+    id: 'zip',
   },
   {
-    Header: 'Email Address',
-    accessor: 'email' as const,
+    header: 'Email Address',
+    id: 'email',
   },
   {
-    Header: 'Phone Number',
-    accessor: 'phoneNumber' as const,
+    header: 'Phone Number',
+    id: 'phoneNumber',
   },
 ];
 
@@ -70,34 +70,34 @@ export const ColumnHidingDisabledPerColumn: Story<
   <MaterialReactTable
     columns={[
       {
-        Header: 'First Name',
-        accessor: 'firstName' as const,
+        header: 'First Name',
+        id: 'firstName',
         disableColumnHiding: true,
       },
       {
-        Header: 'Last Name',
-        accessor: 'lastName' as const,
+        header: 'Last Name',
+        id: 'lastName',
         disableColumnHiding: true,
       },
       {
-        Header: 'Address',
-        accessor: 'address' as const,
+        header: 'Address',
+        id: 'address',
       },
       {
-        Header: 'State',
-        accessor: 'state' as const,
+        header: 'State',
+        id: 'state',
       },
       {
-        Header: 'Zip',
-        accessor: 'zip' as const,
+        header: 'Zip',
+        id: 'zip',
       },
       {
-        Header: 'Email Address',
-        accessor: 'email' as const,
+        header: 'Email Address',
+        id: 'email',
       },
       {
-        Header: 'Phone Number',
-        accessor: 'phoneNumber' as const,
+        header: 'Phone Number',
+        id: 'phoneNumber',
       },
     ]}
     data={data}
@@ -110,45 +110,45 @@ export const ColumnHidingWithHeaderGroups: Story<
   <MaterialReactTable
     columns={[
       {
-        Header: 'Name',
+        header: 'Name',
         columns: [
           {
-            Header: 'First Name',
-            accessor: 'firstName' as const,
+            header: 'First Name',
+            id: 'firstName',
           },
           {
-            Header: 'Last Name',
-            accessor: 'lastName' as const,
+            header: 'Last Name',
+            id: 'lastName',
           },
         ],
       },
       {
-        Header: 'Mailing Info',
+        header: 'Mailing Info',
         columns: [
           {
-            Header: 'Address',
-            accessor: 'address' as const,
+            header: 'Address',
+            id: 'address',
           },
           {
-            Header: 'State',
-            accessor: 'state' as const,
+            header: 'State',
+            id: 'state',
           },
           {
-            Header: 'Zip',
-            accessor: 'zip' as const,
+            header: 'Zip',
+            id: 'zip',
           },
         ],
       },
       {
-        Header: 'Contact Info',
+        header: 'Contact Info',
         columns: [
           {
-            Header: 'Email Address',
-            accessor: 'email' as const,
+            header: 'Email Address',
+            id: 'email',
           },
           {
-            Header: 'Phone Number',
-            accessor: 'phoneNumber' as const,
+            header: 'Phone Number',
+            id: 'phoneNumber',
           },
         ],
       },

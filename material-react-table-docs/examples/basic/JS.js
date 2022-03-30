@@ -5,24 +5,24 @@ const Example = () => {
   const columns = useMemo(
     () => [
       {
-        Header: 'First Name',
-        accessor: 'firstName',
+        header: 'First Name',
+        id: 'firstName',
       },
       {
-        Header: 'Last Name',
-        accessor: 'lastName',
+        header: 'Last Name',
+        id: 'lastName',
       },
       {
-        Header: 'Address',
-        accessor: 'address',
+        header: 'Address',
+        id: 'address',
       },
       {
-        Header: 'City',
-        accessor: 'city',
+        header: 'City',
+        id: 'city',
       },
       {
-        Header: 'State',
-        accessor: 'state',
+        header: 'State',
+        id: 'state',
       },
     ],
     [],

@@ -16,36 +16,36 @@ export default meta;
 
 const columns = [
   {
-    Header: 'Employee',
+    header: 'Employee',
     columns: [
       {
-        Header: 'First Name',
-        accessor: 'firstName' as const,
+        header: 'First Name',
+        id: 'firstName',
       },
       {
-        Header: 'Last Name',
-        accessor: 'lastName' as const,
+        header: 'Last Name',
+        id: 'lastName',
       },
       {
-        Header: 'Email',
-        accessor: 'email' as const,
+        header: 'Email',
+        id: 'email',
       },
     ],
   },
   {
-    Header: 'Job Info',
+    header: 'Job Info',
     columns: [
       {
-        Header: 'Job Title',
-        accessor: 'jobTitle' as const,
+        header: 'Job Title',
+        id: 'jobTitle',
       },
       {
-        Header: 'Salary',
-        accessor: 'salary' as const,
+        header: 'Salary',
+        id: 'salary',
       },
       {
-        Header: 'Start Date',
-        accessor: 'startDate' as const,
+        header: 'Start Date',
+        id: 'startDate',
       },
     ],
   },

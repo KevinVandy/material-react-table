@@ -11,28 +11,28 @@ export default meta;
 
 const columns = [
   {
-    Header: 'ID',
-    accessor: 'id' as const,
+    header: 'ID',
+    id: 'id',
     maxWidth: 50,
   },
   {
-    Header: 'First Name',
-    accessor: 'firstName' as const,
+    header: 'First Name',
+    id: 'firstName',
     minWidth: 300,
   },
   {
-    Header: 'Last Name',
-    accessor: 'lastName' as const,
+    header: 'Last Name',
+    id: 'lastName',
     width: 100,
   },
   {
-    Header: 'Age',
-    accessor: 'age' as const,
+    header: 'Age',
+    id: 'age',
     maxWidth: 50,
   },
   {
-    Header: 'Address',
-    accessor: 'address' as const,
+    header: 'Address',
+    id: 'address',
   },
 ];
 const data = [...Array(21)].map((_) => ({

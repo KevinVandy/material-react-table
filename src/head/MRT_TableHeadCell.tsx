@@ -40,6 +40,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
     enableColumnActions,
     enableColumnFilters,
     enableColumnResizing,
+    enableSorting,
     icons: { FilterAltIcon, FilterAltOff },
     localization,
     muiTableHeadCellProps,
@@ -131,7 +132,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
           {...header.column.getToggleSortingProps()}
           sx={{
             alignItems: 'center',
-            cursor: 'pointer',
+            cursor: enableSorting ? 'pointer' : undefined,
             display: 'flex',
             flexWrap: 'nowrap',
             whiteSpace: columnHeaderText.length < 15 ? 'nowrap' : 'normal',
@@ -152,35 +153,37 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
               />
             </Tooltip>
           )}
-          {!isParentHeader && !!header.column.getCanColumnFilter() && (
-            <Tooltip arrow placement="top" title={filterTooltip}>
-              <IconButton
-                disableRipple
-                onClick={(event) => {
-                  event.stopPropagation();
-                  setShowFilters(!getState().showFilters);
-                }}
-                size="small"
-                sx={{
-                  m: 0,
-                  opacity: !!header.column.getColumnFilterValue() ? 0.8 : 0,
-                  p: '2px',
-                  transition: 'all 0.2s ease-in-out',
-                  '&:hover': {
-                    backgroundColor: 'transparent',
-                    opacity: 0.8,
-                  },
-                }}
-              >
-                {getState().showFilters &&
-                !header.column.getColumnFilterValue() ? (
-                  <FilterAltOff fontSize="small" />
-                ) : (
-                  <FilterAltIcon fontSize="small" />
-                )}
-              </IconButton>
-            </Tooltip>
-          )}
+          {!isParentHeader &&
+            enableColumnFilters &&
+            !!header.column.getCanColumnFilter() && (
+              <Tooltip arrow placement="top" title={filterTooltip}>
+                <IconButton
+                  disableRipple
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setShowFilters(!getState().showFilters);
+                  }}
+                  size="small"
+                  sx={{
+                    m: 0,
+                    opacity: !!header.column.getColumnFilterValue() ? 0.8 : 0,
+                    p: '2px',
+                    transition: 'all 0.2s ease-in-out',
+                    '&:hover': {
+                      backgroundColor: 'transparent',
+                      opacity: 0.8,
+                    },
+                  }}
+                >
+                  {getState().showFilters &&
+                  !header.column.getColumnFilterValue() ? (
+                    <FilterAltOff fontSize="small" />
+                  ) : (
+                    <FilterAltIcon fontSize="small" />
+                  )}
+                </IconButton>
+              </Tooltip>
+            )}
         </Box>
         <Box sx={{ alignItems: 'center', display: 'flex', flexWrap: 'nowrap' }}>
           {(enableColumnActions || header.column.enableColumnActions) &&

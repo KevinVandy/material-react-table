@@ -5,26 +5,26 @@ const Example: FC = () => {
   const columns = useMemo(
     () => [
       {
-        Header: 'First Name',
-        accessor: 'firstName' as const,
+        header: 'First Name',
+        id: 'firstName',
         disableColumnHiding: true,
       },
       {
-        Header: 'Last Name',
-        accessor: 'lastName' as const,
+        header: 'Last Name',
+        id: 'lastName',
         disableColumnHiding: true,
       },
       {
-        Header: 'Address',
-        accessor: 'address' as const,
+        header: 'Address',
+        id: 'address',
       },
       {
-        Header: 'City',
-        accessor: 'city' as const,
+        header: 'City',
+        id: 'city',
       },
       {
-        Header: 'State',
-        accessor: 'state' as const,
+        header: 'State',
+        id: 'state',
       },
     ],
     [],
