@@ -17,9 +17,9 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (getState().currentEditingRow) {
       cell.row.values[cell.column.id] = event.target.value;
-      setCurrentEditingRow({
-        ...getState().currentEditingRow,
-      });
+      // setCurrentEditingRow({
+      //   ...getState().currentEditingRow,
+      // });
     }
     cell.column.onCellEditChange?.(event, cell);
   };
@@ -39,7 +39,7 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
     ...mcTableBodyCellEditTextFieldProps,
   };
 
-  if (!cell.column.disableEditing && cell.column.Edit) {
+  if (cell.column.enableEditing && cell.column.Edit) {
     return <>{cell.column.Edit({ ...textFieldProps, cell })}</>;
   }
 

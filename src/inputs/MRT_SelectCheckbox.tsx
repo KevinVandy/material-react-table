@@ -28,13 +28,16 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
           : []) as MRT_Row[],
       );
     } else if (row) {
-      row?.getToggleRowSelectedProps()?.onChange?.(event);
+      row?.getToggleSelectedProps()?.onChange?.(event);
       onSelectChange?.(
         event,
         row,
         event.target.checked
-          ? [...(tableInstance.getSelectedFlatRows() as MRT_Row[]), row]
-          : (tableInstance.getSelectedFlatRows() as MRT_Row[]).filter(
+          ? [
+              ...(tableInstance.getSelectedRowModel().flatRows as MRT_Row[]),
+              row,
+            ]
+          : (tableInstance.getSelectedRowModel().flatRows as MRT_Row[]).filter(
               (selectedRow) => selectedRow.id !== row.id,
             ),
       );
@@ -48,15 +51,11 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
 
   const rtSelectCheckboxProps = selectAll
     ? tableInstance.getToggleAllRowsSelectedProps()
-    : row?.getToggleRowSelectedProps();
+    : row?.getToggleSelectedProps();
 
   const checkboxProps = {
-    ...mTableBodyRowSelectCheckboxProps,
     ...rtSelectCheckboxProps,
-    style: {
-      ...rtSelectCheckboxProps?.style,
-      ...mTableBodyRowSelectCheckboxProps?.style,
-    },
+    ...mTableBodyRowSelectCheckboxProps,
   };
 
   return (

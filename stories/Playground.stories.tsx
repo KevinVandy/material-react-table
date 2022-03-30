@@ -20,9 +20,17 @@ const Template: Story<MaterialReactTableProps> = (
 
 export const Default = Template.bind({});
 
+interface Row {
+  firstName: string;
+  lastName: string;
+  age: number;
+  address: string;
+}
+
 Default.args = {
   columns: [
     {
+      Header: <i>First Name</i>,
       header: 'First Name',
       id: 'firstName',
     },
@@ -45,7 +53,7 @@ Default.args = {
     age: faker.datatype.number(80),
     address: faker.address.streetAddress(),
   })),
-} as MaterialReactTableProps;
+} as MaterialReactTableProps<Row>;
 
 export const MinimumFeatures = Template.bind({});
 
@@ -79,7 +87,7 @@ MinimumFeatures.args = {
   hideToolbarBottom: true,
   disableSortBy: true,
   disableColumnActions: true,
-} as MaterialReactTableProps;
+} as MaterialReactTableProps<Row>;
 
 const maxFeaturesData = [...Array(250)].map((_) => ({
   firstName: faker.name.firstName(),

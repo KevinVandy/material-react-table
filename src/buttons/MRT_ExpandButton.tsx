@@ -16,8 +16,7 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
   } = useMRT();
 
   const handleToggleExpand = (event: MouseEvent<HTMLButtonElement>) => {
-    // @ts-ignore
-    row.getToggleRowExpandedProps()?.onClick(event);
+    row.toggleExpanded();
     onRowExpandChange?.(event, row);
   };
 
@@ -26,7 +25,6 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
       aria-label={localization.expand}
       disabled={!row.getCanExpand() && !renderDetailPanel}
       title={localization.expand}
-      {...row.getToggleRowExpandedProps()}
       onClick={handleToggleExpand}
     >
       <ExpandMoreIcon

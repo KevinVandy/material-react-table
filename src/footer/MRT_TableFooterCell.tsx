@@ -14,7 +14,7 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer }) => {
     tableInstance: { getState },
   } = useMRT();
 
-  const isParentHeader = !!footer.column.columns.length;
+  const isParentHeader = !!footer.column.columns?.length;
 
   const mTableFooterCellProps =
     muiTableFooterCellProps instanceof Function

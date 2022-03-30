@@ -21,6 +21,7 @@ import {
   Cell,
   Column,
   ColumnDef,
+  FilterType,
   Header,
   HeaderGroup,
   Options,
@@ -33,7 +34,6 @@ import { MRT_TableContainer } from './table/MRT_TableContainer';
 import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_FILTER_TYPE } from './enums';
-import { FilterType } from '@tanstack/react-table/build/types/features/Filters';
 
 export type MRT_TableOptions<D extends {} = {}> = Partial<
   Omit<Options<D>, 'columns' | 'data' | 'initialState' | 'state'>
@@ -76,7 +76,7 @@ export type MRT_ColumnInterface<D extends {} = {}> = Omit<
   Filter?: ({ column }: { column: MRT_HeaderGroup<D> }) => ReactNode;
   Footer?: ReactNode;
   Header?: ReactNode;
-  columnType: 'group' | 'data' | 'display' | null;
+  columnType?: 'group' | 'data' | 'display' | null;
   columns?: MRT_ColumnInterface<D>[];
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;
@@ -86,9 +86,9 @@ export type MRT_ColumnInterface<D extends {} = {}> = Omit<
   enabledFilterTypes?: (MRT_FILTER_TYPE | string)[];
   filter?: MRT_FilterType | string | FilterType<D>;
   filterSelectOptions?: (string | { text: string; value: string })[];
-  footer: string;
+  footer?: string;
   header: string;
-  id: keyof D;
+  id: keyof D | string;
   muiTableBodyCellCopyButtonProps?:
     | ButtonProps
     | ((cell?: MRT_Cell<D>) => ButtonProps);
@@ -138,10 +138,11 @@ export type MRT_HeaderGroup<D extends {} = {}> = Omit<
 
 export type MRT_Row<D extends {} = {}> = Omit<
   Row<D>,
-  'getVisibleCells' | 'getAllCells'
+  'getVisibleCells' | 'getAllCells' | 'id'
 > & {
   getVisibleCells: () => MRT_Cell<D>[];
   getAllCells: () => MRT_Cell<D>[];
+  id: string;
 };
 
 export type MRT_Cell<D extends {} = {}> = Omit<Cell<D>, 'column'> & {

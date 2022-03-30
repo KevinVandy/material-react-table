@@ -1,4 +1,9 @@
-import { createTable, sortRowsFn, useTable } from '@tanstack/react-table';
+import {
+  columnFilterRowsFn,
+  createTable,
+  sortRowsFn,
+  useTable,
+} from '@tanstack/react-table';
 import React, {
   Context,
   Dispatch,
@@ -16,6 +21,7 @@ import type {
   MRT_TableInstance,
 } from '.';
 import { MRT_FILTER_TYPE } from './enums';
+import { defaultFilterFNs } from './filtersFNs';
 import { MRT_Icons } from './icons';
 import { MRT_Localization } from './localization';
 import { MaterialReactTableProps } from './MaterialReactTable';
@@ -139,6 +145,8 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     columns,
     data,
     sortRowsFn,
+    columnFilterRowsFn: columnFilterRowsFn,
+    filterTypes: defaultFilterFNs,
     // globalFilter: currentGlobalFilterType,
     state: {
       currentEditingRow,

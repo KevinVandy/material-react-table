@@ -51,7 +51,7 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
       {enableSelection && <MRT_TableSpacerCell width="1rem" />}
       {footerGroup.headers.map((footer: MRT_Header) => (
         <MRT_TableFooterCell
-          key={footer.getFooterGroupProps().key}
+          key={footer.getFooterProps().key}
           footer={footer}
         />
       ))}

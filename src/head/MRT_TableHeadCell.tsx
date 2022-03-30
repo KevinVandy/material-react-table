@@ -47,7 +47,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
     tableInstance: { getState },
   } = useMRT();
 
-  const isParentHeader = !!header.column.columns.length;
+  const isParentHeader = !!header.column.columns?.length;
 
   const mTableHeadCellProps =
     muiTableHeadCellProps instanceof Function
@@ -100,7 +100,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
         .replace('" "', '')
     : localization.showHideFilters;
 
-  const columnHeader = header.column.header as string;
+  const columnHeaderText = header.column.header;
 
   return (
     <TableCell
@@ -134,11 +134,11 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
             cursor: 'pointer',
             display: 'flex',
             flexWrap: 'nowrap',
-            whiteSpace: columnHeader.length < 15 ? 'nowrap' : 'normal',
+            whiteSpace: columnHeaderText.length < 15 ? 'nowrap' : 'normal',
           }}
           title={undefined}
         >
-          {columnHeader}
+          {header.column.Header ?? columnHeaderText}
           {!isParentHeader && header.column.getCanSort() && (
             <Tooltip arrow placement="top" title={sortTooltip}>
               <TableSortLabel

@@ -3,7 +3,6 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import CloseIcon from '@mui/icons-material/Close';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import DoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
@@ -32,7 +31,6 @@ export interface MRT_Icons {
   CheckBoxIcon: any;
   ClearAllIcon: any;
   CloseIcon: any;
-  ContentCopyIcon: any;
   DensityMediumIcon: any;
   DensitySmallIcon: any;
   DoubleArrowDownIcon: any;
@@ -62,7 +60,6 @@ export const MRT_Default_Icons: MRT_Icons = {
   CheckBoxIcon,
   ClearAllIcon,
   CloseIcon,
-  ContentCopyIcon,
   DensityMediumIcon,
   DensitySmallIcon,
   DoubleArrowDownIcon,

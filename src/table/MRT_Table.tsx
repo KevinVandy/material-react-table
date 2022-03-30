@@ -17,8 +17,8 @@ export const MRT_Table: FC<Props> = () => {
       : muiTableProps;
 
   const tableProps = {
-    ...mTableProps,
     ...tableInstance.getTableProps(),
+    ...mTableProps,
   };
 
   return (

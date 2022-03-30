@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
 import type { MRT_Row } from '..';
+import { RowValues } from '@tanstack/react-table';
 
 interface Props {
   row: MRT_Row;
@@ -17,7 +18,7 @@ export const MRT_EditActionButtons: FC<Props> = ({ row }) => {
   } = useMRT();
 
   const handleCancel = () => {
-    row.values = row.original ?? {};
+    row.values = (row.original as RowValues) ?? {};
     setCurrentEditingRow(null);
   };
 
