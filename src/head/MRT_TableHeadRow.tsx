@@ -27,8 +27,11 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
     muiTableHeadRowProps,
     positionActionsColumn,
     renderDetailPanel,
-    tableInstance,
-    tableInstance: { getState },
+    tableInstance: {
+      getState,
+      getToggleAllRowsExpandedProps,
+      getExpandedDepth,
+    },
   } = useMRT();
 
   const isParentHeader = useMemo(
@@ -59,7 +62,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         enableExpandAll && !isParentHeader ? (
           <TableCell
             size="small"
-            {...tableInstance.getToggleAllRowsExpandedProps()}
+            {...getToggleAllRowsExpandedProps()}
             sx={{
               ...commonTableHeadCellStyles(getState().densePadding),
               width: '3rem',
@@ -71,9 +74,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
           </TableCell>
         ) : (
           <MRT_TableSpacerCell
-            width={`${
-              renderDetailPanel ? 2 : tableInstance.getExpandedDepth() + 0.5
-            }rem`}
+            width={`${renderDetailPanel ? 2 : getExpandedDepth() + 0.5}rem`}
           />
         )
       ) : null}

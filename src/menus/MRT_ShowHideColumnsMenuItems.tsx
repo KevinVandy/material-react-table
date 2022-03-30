@@ -13,19 +13,15 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
   column,
   isSubMenu,
 }) => {
+  console.log({ column });
   const {
     onColumnHide,
-    tableInstance: { getState },
+    tableInstance: { getState, getIsAllColumnsVisible },
   } = useMRT();
   const isParentHeader = !!column?.columns?.length;
 
-  const allChildColumnsVisible =
-    isParentHeader &&
-    !!column.columns?.every((childColumn: MRT_ColumnInstance) =>
-      childColumn.getIsVisible(),
-    );
-
-  const switchChecked = column.getIsVisible() ?? allChildColumnsVisible;
+  const switchChecked =
+    column.getIsVisible() || (isParentHeader && getIsAllColumnsVisible());
 
   const handleToggleColumnHidden = (column: MRT_ColumnInstance) => {
     if (isParentHeader) {
@@ -52,8 +48,10 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
           componentsProps={{ typography: { sx: { marginBottom: 0 } } }}
           checked={switchChecked}
           control={<Switch />}
-          disabled={(isSubMenu && switchChecked) || !column.enableHiding}
-          label={column.Header as string}
+          disabled={
+            (isSubMenu && switchChecked) || column.enableHiding === false
+          }
+          label={column.header}
           onChange={() => handleToggleColumnHidden(column)}
         />
       </MenuItem>

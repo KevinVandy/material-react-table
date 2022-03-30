@@ -12,7 +12,7 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
     positionToolbarAlertBanner,
     renderToolbarCustomActions,
     tableInstance,
-    tableInstance: { getState },
+    tableInstance: { getState, getSelectedRowModel, toggleColumnGrouping },
   } = useMRT();
 
   const isMobile = useMediaQuery('(max-width:720px)');
@@ -23,16 +23,13 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
       : muiTableToolbarAlertBannerProps;
 
   const selectMessage =
-    tableInstance.getSelectedRowModel().rows.length > 0
+    getSelectedRowModel().rows.length > 0
       ? localization.selectedCountOfRowCountRowsSelected
           ?.replace(
             '{selectedCount}',
-            tableInstance.getSelectedRowModel().rows.length.toString(),
+            getSelectedRowModel().rows.length.toString(),
           )
-          ?.replace(
-            '{rowCount}',
-            tableInstance.getSelectedRowModel().rows.length.toString(),
-          )
+          ?.replace('{rowCount}', getSelectedRowModel().rows.length.toString())
       : null;
 
   const groupedByMessage =
@@ -49,7 +46,7 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
                   .getAllColumns()
                   .find((column) => column.id === columnId)?.header
               }
-              onDelete={() => tableInstance.toggleColumnGrouping(columnId)}
+              onDelete={() => toggleColumnGrouping(columnId)}
             />
           </Fragment>
         ))}

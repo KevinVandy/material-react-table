@@ -13,7 +13,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
     muiTableDetailPanelProps,
     onDetailPanelClick,
     renderDetailPanel,
-    tableInstance,
+    tableInstance: { getVisibleFlatColumns },
   } = useMRT();
 
   const tableRowProps =
@@ -29,7 +29,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
   return (
     <TableRow {...tableRowProps}>
       <TableCell
-        colSpan={tableInstance.getVisibleFlatColumns().length + 10}
+        colSpan={getVisibleFlatColumns().length + 10}
         onClick={(event: MouseEvent<HTMLTableCellElement>) =>
           onDetailPanelClick?.(event, row)
         }

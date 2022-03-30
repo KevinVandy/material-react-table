@@ -87,6 +87,7 @@ MinimumFeatures.args = {
   enableColumnFilters: false,
   hideToolbarBottom: true,
   hideToolbarTop: true,
+  muiTableBodyRowProps: { hover: false },
 } as MaterialReactTableProps<Row>;
 
 const maxFeaturesData = [...Array(250)].map((_) => ({

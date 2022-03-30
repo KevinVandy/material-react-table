@@ -8,8 +8,13 @@ import { useMRT } from '../useMRT';
 interface Props {}
 
 export const MRT_Table: FC<Props> = () => {
-  const { tableInstance, muiTableProps, hideTableHead, hideTableFooter } =
-    useMRT();
+  const {
+    hideTableFooter,
+    hideTableHead,
+    muiTableProps,
+    tableInstance,
+    tableInstance: { getTableProps },
+  } = useMRT();
 
   const mTableProps =
     muiTableProps instanceof Function
@@ -17,7 +22,7 @@ export const MRT_Table: FC<Props> = () => {
       : muiTableProps;
 
   const tableProps = {
-    ...tableInstance.getTableProps(),
+    ...getTableProps(),
     ...mTableProps,
   };
 

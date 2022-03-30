@@ -15,7 +15,6 @@ import React, {
   useState,
 } from 'react';
 import type {
-  MRT_ColumnInterface,
   MRT_FilterType,
   MRT_Row,
   MRT_TableInstance,

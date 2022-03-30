@@ -9,7 +9,7 @@ export const MRT_ExpandAllButton: FC<Props> = () => {
     anyRowsExpanded,
     icons: { DoubleArrowDownIcon },
     localization,
-    tableInstance,
+    tableInstance: { getIsAllRowsExpanded },
   } = useMRT();
 
   return (
@@ -20,11 +20,7 @@ export const MRT_ExpandAllButton: FC<Props> = () => {
       <DoubleArrowDownIcon
         style={{
           transform: `rotate(${
-            tableInstance.getIsAllRowsExpanded()
-              ? -180
-              : anyRowsExpanded
-              ? -90
-              : 0
+            getIsAllRowsExpanded() ? -180 : anyRowsExpanded ? -90 : 0
           }deg)`,
           transition: 'transform 0.2s',
         }}

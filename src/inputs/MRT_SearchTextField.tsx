@@ -19,15 +19,14 @@ export const MRT_SearchTextField: FC<Props> = () => {
     localization,
     muiSearchTextFieldProps,
     onGlobalFilterChange,
-    tableInstance,
-    tableInstance: { getState },
+    tableInstance: { getState, setGlobalFilter },
   } = useMRT();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [searchValue, setSearchValue] = useState('');
 
   const handleChange = debounce((event: ChangeEvent<HTMLInputElement>) => {
-    tableInstance.setGlobalFilter(event.target.value ?? undefined);
+    setGlobalFilter(event.target.value ?? undefined);
     onGlobalFilterChange?.(event);
   }, 200);
 
@@ -37,7 +36,7 @@ export const MRT_SearchTextField: FC<Props> = () => {
 
   const handleClear = () => {
     setSearchValue('');
-    tableInstance.setGlobalFilter(undefined);
+    setGlobalFilter(undefined);
   };
 
   return (

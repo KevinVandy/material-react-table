@@ -46,8 +46,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     idPrefix,
     localization,
     setShowFilters,
-    tableInstance,
-    tableInstance: { getState },
+    tableInstance: { getState, resetSorting, toggleAllColumnsVisible },
   } = useMRT();
 
   const [filterMenuAnchorEl, setFilterMenuAnchorEl] =
@@ -57,7 +56,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     useState<null | HTMLElement>(null);
 
   const handleClearSort = () => {
-    tableInstance.resetSorting();
+    resetSorting();
     setAnchorEl(null);
   };
 
@@ -103,7 +102,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
   };
 
   const handleShowAllColumns = () => {
-    tableInstance.toggleAllColumnsVisible(true);
+    toggleAllColumnsVisible(true);
     setAnchorEl(null);
   };
 
@@ -248,7 +247,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
         ]}
       {enableHiding && [
         <MenuItem
-          disabled={!header.column.enableHiding}
+          disabled={header.column.enableHiding === false}
           key={0}
           onClick={handleHideColumn}
           sx={commonMenuItemStyles}

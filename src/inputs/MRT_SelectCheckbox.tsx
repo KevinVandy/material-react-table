@@ -15,17 +15,20 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
     onSelectChange,
     onSelectAllChange,
     tableInstance,
-    tableInstance: { getState },
+    tableInstance: {
+      getRowModel,
+      getSelectedRowModel,
+      getState,
+      getToggleAllRowsSelectedProps,
+    },
   } = useMRT();
 
   const handleSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (selectAll) {
-      tableInstance?.getToggleAllRowsSelectedProps?.()?.onChange?.(event);
+      getToggleAllRowsSelectedProps?.()?.onChange?.(event);
       onSelectAllChange?.(
         event,
-        (event.target.checked
-          ? tableInstance.getRowModel().flatRows
-          : []) as MRT_Row[],
+        (event.target.checked ? getRowModel().flatRows : []) as MRT_Row[],
       );
     } else if (row) {
       row?.getToggleSelectedProps()?.onChange?.(event);
@@ -33,11 +36,8 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
         event,
         row,
         event.target.checked
-          ? [
-              ...(tableInstance.getSelectedRowModel().flatRows as MRT_Row[]),
-              row,
-            ]
-          : (tableInstance.getSelectedRowModel().flatRows as MRT_Row[]).filter(
+          ? [...(getSelectedRowModel().flatRows as MRT_Row[]), row]
+          : (getSelectedRowModel().flatRows as MRT_Row[]).filter(
               (selectedRow) => selectedRow.id !== row.id,
             ),
       );
@@ -50,7 +50,7 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
       : muiSelectCheckboxProps;
 
   const rtSelectCheckboxProps = selectAll
-    ? tableInstance.getToggleAllRowsSelectedProps()
+    ? getToggleAllRowsSelectedProps()
     : row?.getToggleSelectedProps();
 
   const checkboxProps = {

@@ -25,6 +25,7 @@ import {
   Header,
   HeaderGroup,
   Options,
+  Please_use_the_create_table_column_utilities_to_define_columns,
   Row,
   TableInstance,
   TableState,
@@ -64,9 +65,11 @@ export type MRT_TableState<D extends {} = {}> = TableState & {
 
 export type MRT_ColumnInterface<D extends {} = {}> = Omit<
   ColumnDef<D>,
-  'header' | 'id' | 'footer'
+  | 'header'
+  | 'id'
+  | 'footer'
+  | typeof Please_use_the_create_table_column_utilities_to_define_columns
 > & {
-  [Please_use_the_create_table_column_utilities_to_define_columns]: undefined;
   Edit?: ({
     cell,
     onChange,
