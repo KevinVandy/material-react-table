@@ -30,6 +30,8 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
     tableInstance: { getState },
   } = useMRT();
 
+  const { isDensePadding } = getState();
+
   const mTableBodyRowProps =
     muiTableBodyRowProps instanceof Function
       ? muiTableBodyRowProps(row)
@@ -58,7 +60,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
           <TableCell
             size="small"
             sx={{
-              ...commonTableBodyButtonCellStyles(getState().densePadding),
+              ...commonTableBodyButtonCellStyles({ isDensePadding }),
               pl: `${row.depth + 0.5}rem`,
               textAlign: 'left',
             }}
@@ -69,7 +71,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
         {enableSelection && (
           <TableCell
             sx={{
-              ...commonTableBodyButtonCellStyles(getState().densePadding),
+              ...commonTableBodyButtonCellStyles({ isDensePadding }),
               maxWidth: '3rem',
               width: '3rem',
             }}
@@ -78,9 +80,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
           </TableCell>
         )}
         {enableRowNumbers && (
-          <TableCell
-            sx={{ ...commonTableBodyCellStyles(getState().densePadding) }}
-          >
+          <TableCell sx={{ ...commonTableBodyCellStyles({ isDensePadding }) }}>
             {row.index + 1}
           </TableCell>
         )}

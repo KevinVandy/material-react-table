@@ -45,7 +45,9 @@ export const MRT_FilterTextField: FC<Props> = ({ header }) => {
     ...mcTableHeadCellFilterTextFieldProps,
   } as TextFieldProps;
 
-  const [filterValue, setFilterValue] = useState('');
+  const [filterValue, setFilterValue] = useState<string>(
+    (header.column.getColumnFilterValue() ?? '') as string,
+  );
 
   const handleChange = debounce((value: string) => {
     header.column.setColumnFilterValue(value ?? undefined);

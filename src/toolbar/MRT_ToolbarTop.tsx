@@ -7,14 +7,20 @@ import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
 
-export const commonToolbarStyles = (theme: Theme, fullScreen?: boolean) => ({
+export const commonToolbarStyles = ({
+  theme,
+  isFullScreen,
+}: {
+  theme: Theme;
+  isFullScreen?: boolean;
+}) => ({
   backgroundColor: theme.palette.background.default,
   backgroundImage: `linear-gradient(${alpha(
     theme.palette.common.white,
     0.05,
   )},${alpha(theme.palette.common.white, 0.05)})`,
   display: 'grid',
-  opacity: fullScreen ? 0.95 : 1,
+  opacity: isFullScreen ? 0.95 : 1,
   p: '0 !important',
   width: '100%',
   zIndex: 1,
@@ -36,6 +42,8 @@ export const MRT_ToolbarTop: FC<Props> = () => {
     tableInstance: { getState },
   } = useMRT();
 
+  const { isFullScreen } = getState();
+
   const toolbarProps =
     muiTableToolbarTopProps instanceof Function
       ? muiTableToolbarTopProps(tableInstance)
@@ -47,9 +55,9 @@ export const MRT_ToolbarTop: FC<Props> = () => {
       {...toolbarProps}
       sx={(theme) =>
         ({
-          position: getState().fullScreen ? 'sticky' : undefined,
-          top: getState().fullScreen ? '0' : undefined,
-          ...commonToolbarStyles(theme, getState().fullScreen),
+          position: isFullScreen ? 'sticky' : undefined,
+          top: isFullScreen ? '0' : undefined,
+          ...commonToolbarStyles({ theme, isFullScreen }),
           ...toolbarProps?.sx,
         } as any)
       }

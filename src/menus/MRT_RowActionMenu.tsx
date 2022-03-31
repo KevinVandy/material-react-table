@@ -29,13 +29,15 @@ export const MRT_RowActionMenu: FC<Props> = ({
     tableInstance: { getState },
   } = useMRT();
 
+  const { isDensePadding } = getState();
+
   return (
     <Menu
       anchorEl={anchorEl}
       open={!!anchorEl}
       onClose={() => setAnchorEl(null)}
       MenuListProps={{
-        dense: getState().densePadding,
+        dense: isDensePadding,
       }}
     >
       {enableRowEditing && (

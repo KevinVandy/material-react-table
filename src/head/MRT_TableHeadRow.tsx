@@ -34,6 +34,8 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
     },
   } = useMRT();
 
+  const { isDensePadding } = getState();
+
   const isParentHeader = useMemo(
     () => headerGroup.headers.some((h) => !!h.subHeaders?.length),
     [headerGroup.headers],
@@ -64,7 +66,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
             size="small"
             {...getToggleAllRowsExpandedProps()}
             sx={{
-              ...commonTableHeadCellStyles(getState().densePadding),
+              ...commonTableHeadCellStyles({ isDensePadding }),
               width: '3rem',
               maxWidth: '3rem',
               textAlign: 'center',
@@ -82,7 +84,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         !isParentHeader && enableSelectAll ? (
           <TableCell
             sx={{
-              ...commonTableHeadCellStyles(getState().densePadding),
+              ...commonTableHeadCellStyles({ isDensePadding }),
               maxWidth: '3rem',
               width: '3rem',
               textAlign: 'center',
@@ -100,7 +102,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         ) : (
           <TableCell
             sx={{
-              ...commonTableHeadCellStyles(getState().densePadding),
+              ...commonTableHeadCellStyles({ isDensePadding }),
               width: '2rem',
               maxWidth: '2rem',
             }}

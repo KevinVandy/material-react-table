@@ -16,17 +16,17 @@ export const MRT_TableContainer: FC<Props> = () => {
     tableInstance: { getState },
   } = useMRT();
 
-  const fullScreen = getState().fullScreen;
+  const { isFullScreen } = getState();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      if (fullScreen) {
+      if (isFullScreen) {
         document.body.style.overflow = 'hidden';
       } else {
         document.body.style.overflow = 'auto';
       }
     }
-  }, [fullScreen]);
+  }, [isFullScreen]);
 
   const tableContainerProps =
     muiTableContainerProps instanceof Function
@@ -38,17 +38,17 @@ export const MRT_TableContainer: FC<Props> = () => {
       component={Paper}
       {...tableContainerProps}
       sx={{
-        bottom: fullScreen ? '0' : undefined,
-        height: fullScreen ? '100%' : undefined,
-        left: fullScreen ? '0' : undefined,
-        m: fullScreen ? '0' : undefined,
-        overflowY: !fullScreen ? 'hidden' : undefined,
-        position: fullScreen ? 'fixed' : undefined,
-        right: fullScreen ? '0' : undefined,
-        top: fullScreen ? '0' : undefined,
+        bottom: isFullScreen ? '0' : undefined,
+        height: isFullScreen ? '100%' : undefined,
+        left: isFullScreen ? '0' : undefined,
+        m: isFullScreen ? '0' : undefined,
+        overflowY: !isFullScreen ? 'hidden' : undefined,
+        position: isFullScreen ? 'fixed' : undefined,
+        right: isFullScreen ? '0' : undefined,
+        top: isFullScreen ? '0' : undefined,
         transition: 'all 0.2s ease-in-out',
-        width: fullScreen ? '100vw' : undefined,
-        zIndex: fullScreen ? 1200 : 1,
+        width: isFullScreen ? '100vw' : undefined,
+        zIndex: isFullScreen ? 1200 : 1,
         ...tableContainerProps?.sx,
       }}
     >

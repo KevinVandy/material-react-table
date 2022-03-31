@@ -82,8 +82,8 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
 
 export type MRT_TableState<D extends Record<string, any> = {}> = TableState & {
   currentEditingRow: MRT_Row<D> | null;
-  densePadding: boolean;
-  fullScreen: boolean;
+  isDensePadding: boolean;
+  isFullScreen: boolean;
   showFilters: boolean;
   showSearch: boolean;
 };

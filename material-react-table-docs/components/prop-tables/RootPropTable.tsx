@@ -494,7 +494,7 @@ const RootPropTable = () => {
       manualPagination
       hideToolbarBottom
       initialState={{
-        densePadding: true,
+        isDensePadding: true,
         hiddenColumns: ['default'],
         showSearch: true,
         sortBy: [{ id: 'prop', desc: false }],

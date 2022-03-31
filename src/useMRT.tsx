@@ -42,8 +42,8 @@ export type UseMRT<D extends Record<string, any> = {}> =
       }>
     >;
     setCurrentGlobalFilterType: Dispatch<SetStateAction<MRT_FILTER_TYPE>>;
-    setDensePadding: Dispatch<SetStateAction<boolean>>;
-    setFullScreen: Dispatch<SetStateAction<boolean>>;
+    setIsDensePadding: Dispatch<SetStateAction<boolean>>;
+    setIsFullScreen: Dispatch<SetStateAction<boolean>>;
     setShowFilters: Dispatch<SetStateAction<boolean>>;
     setShowSearch: Dispatch<SetStateAction<boolean>>;
     tableInstance: MRT_TableInstance<D>;
@@ -58,11 +58,11 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
   const [currentEditingRow, setCurrentEditingRow] = useState<MRT_Row | null>(
     null,
   );
-  const [densePadding, setDensePadding] = useState(
-    props.initialState?.densePadding ?? false,
+  const [isDensePadding, setIsDensePadding] = useState(
+    props.initialState?.isDensePadding ?? false,
   );
-  const [fullScreen, setFullScreen] = useState(
-    props.initialState?.fullScreen ?? false,
+  const [isFullScreen, setIsFullScreen] = useState(
+    props.initialState?.isFullScreen ?? false,
   );
   const [showFilters, setShowFilters] = useState(
     props.initialState?.showFilters ?? false,
@@ -152,8 +152,8 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
     filterTypes: defaultFilterFNs,
     state: {
       currentEditingRow,
-      densePadding,
-      fullScreen,
+      isDensePadding,
+      isFullScreen,
       showFilters,
       showSearch,
       ...props.state,
@@ -186,8 +186,8 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
           setCurrentEditingRow,
           // setCurrentFilterTypes,
           // setCurrentGlobalFilterType,
-          setDensePadding,
-          setFullScreen,
+          setIsDensePadding,
+          setIsFullScreen,
           setShowFilters,
           setShowSearch,
           tableInstance,

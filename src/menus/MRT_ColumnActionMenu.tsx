@@ -49,6 +49,8 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     tableInstance: { getState, toggleAllColumnsVisible },
   } = useMRT();
 
+  const {isDensePadding, columnVisibility} = getState();
+
   const [filterMenuAnchorEl, setFilterMenuAnchorEl] =
     useState<null | HTMLElement>(null);
 
@@ -125,7 +127,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       open={!!anchorEl}
       onClose={() => setAnchorEl(null)}
       MenuListProps={{
-        dense: getState().densePadding,
+        dense: isDensePadding,
       }}
     >
       {enableSorting &&
@@ -264,7 +266,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           </Box>
         </MenuItem>,
         <MenuItem
-          disabled={!getState().columnVisibility?.length} //TODO
+          disabled={!columnVisibility?.length} //TODO
           key={1}
           onClick={handleShowAllColumns}
           sx={commonMenuItemStyles}

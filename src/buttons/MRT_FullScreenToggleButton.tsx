@@ -8,19 +8,21 @@ export const MRT_FullScreenToggleButton: FC<Props> = ({ ...rest }) => {
   const {
     icons: { FullscreenExitIcon, FullscreenIcon },
     localization,
-    setFullScreen,
+    setIsFullScreen,
     tableInstance: { getState },
   } = useMRT();
+
+  const { isFullScreen } = getState();
 
   return (
     <Tooltip arrow title={localization.toggleFullScreen}>
       <IconButton
         aria-label={localization.showHideFilters}
-        onClick={() => setFullScreen(!getState().fullScreen)}
+        onClick={() => setIsFullScreen(!isFullScreen)}
         size="small"
         {...rest}
       >
-        {getState().fullScreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
+        {isFullScreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
       </IconButton>
     </Tooltip>
   );

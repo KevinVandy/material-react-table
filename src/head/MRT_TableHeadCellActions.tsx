@@ -11,11 +11,13 @@ export const MRT_TableHeadCellActions: FC<Props> = () => {
     tableInstance: { getState },
   } = useMRT();
 
+  const { isDensePadding } = getState();
+
   return (
     <TableCell
       style={{ textAlign: 'center' }}
       sx={{
-        ...commonTableHeadCellStyles(getState().densePadding),
+        ...commonTableHeadCellStyles({ isDensePadding }),
         textAlign: 'center',
         maxWidth: '4rem',
         width: '4rem',

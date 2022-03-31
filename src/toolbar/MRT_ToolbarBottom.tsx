@@ -21,6 +21,8 @@ export const MRT_ToolbarBottom: FC<Props> = () => {
     tableInstance: { getState },
   } = useMRT();
 
+  const { isFullScreen } = getState();
+
   const toolbarProps =
     muiTableToolbarBottomProps instanceof Function
       ? muiTableToolbarBottomProps(tableInstance)
@@ -32,9 +34,9 @@ export const MRT_ToolbarBottom: FC<Props> = () => {
       {...toolbarProps}
       sx={(theme) =>
         ({
-          bottom: getState().fullScreen ? '0' : undefined,
-          position: getState().fullScreen ? 'fixed' : undefined,
-          ...commonToolbarStyles(theme, getState().fullScreen),
+          bottom: isFullScreen ? '0' : undefined,
+          position: isFullScreen ? 'fixed' : undefined,
+          ...commonToolbarStyles({ theme, isFullScreen }),
           ...toolbarProps?.sx,
         } as any)
       }

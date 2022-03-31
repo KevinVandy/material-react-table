@@ -74,6 +74,6 @@ export const DefaultFullScreenOn: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    initialState={{ fullScreen: true }}
+    initialState={{ isFullScreen: true }}
   />
 );

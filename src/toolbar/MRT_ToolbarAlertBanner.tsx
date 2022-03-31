@@ -15,6 +15,8 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
     tableInstance: { getState, getSelectedRowModel, toggleColumnGrouping },
   } = useMRT();
 
+  const { grouping } = getState();
+
   const isMobile = useMediaQuery('(max-width:720px)');
 
   const alertProps =
@@ -33,10 +35,10 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
       : null;
 
   const groupedByMessage =
-    getState().grouping.length > 0 ? (
+    grouping.length > 0 ? (
       <span>
         {localization.groupedBy}{' '}
-        {getState().grouping.map((columnId, index) => (
+        {grouping.map((columnId, index) => (
           <Fragment key={`${index}-${columnId}`}>
             {index > 0 ? localization.thenBy : ''}
             <Chip

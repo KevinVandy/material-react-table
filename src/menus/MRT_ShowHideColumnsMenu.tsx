@@ -25,13 +25,15 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
     },
   } = useMRT();
 
+  const { isDensePadding } = getState();
+
   return (
     <Menu
       anchorEl={anchorEl}
       open={!!anchorEl}
       onClose={() => setAnchorEl(null)}
       MenuListProps={{
-        dense: getState().densePadding,
+        dense: isDensePadding,
       }}
     >
       <Box

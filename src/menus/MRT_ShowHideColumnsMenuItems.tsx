@@ -13,13 +13,14 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
   column,
   isSubMenu,
 }) => {
-  console.log({ column });
   const {
     onColumnHide,
     tableInstance: { getState, getIsAllColumnsVisible },
   } = useMRT();
-  const isParentHeader = !!column?.columns?.length;
 
+  const { columnVisibility } = getState();
+
+  const isParentHeader = !!column?.columns?.length;
   const switchChecked =
     column.getIsVisible() || (isParentHeader && getIsAllColumnsVisible());
 
@@ -33,7 +34,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
     }
     onColumnHide?.(
       column,
-      Object.entries(getState().columnVisibility)
+      Object.entries(columnVisibility)
         .filter((entry) => entry[1])
         .map((entry) => entry[0]),
     );

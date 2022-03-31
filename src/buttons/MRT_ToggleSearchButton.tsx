@@ -14,8 +14,10 @@ export const MRT_ToggleSearchButton: FC<Props> = ({ ...rest }) => {
     tableInstance: { getState },
   } = useMRT();
 
+  const { showSearch } = getState();
+
   const handleToggleSearch = () => {
-    setShowSearch(!getState().showSearch);
+    setShowSearch(!showSearch);
     setTimeout(
       () =>
         document
@@ -30,7 +32,7 @@ export const MRT_ToggleSearchButton: FC<Props> = ({ ...rest }) => {
   return (
     <Tooltip arrow title={localization.showHideSearch}>
       <IconButton size="small" onClick={handleToggleSearch} {...rest}>
-        {getState().showSearch ? <SearchOffIcon /> : <SearchIcon />}
+        {showSearch ? <SearchOffIcon /> : <SearchIcon />}
       </IconButton>
     </Tooltip>
   );

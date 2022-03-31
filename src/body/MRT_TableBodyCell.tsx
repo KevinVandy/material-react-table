@@ -5,14 +5,22 @@ import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import type { MRT_Cell } from '..';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 
-export const commonTableBodyCellStyles = (densePadding: boolean) => ({
-  p: densePadding ? '0.5rem' : '1rem',
+export const commonTableBodyCellStyles = ({
+  isDensePadding,
+}: {
+  isDensePadding: boolean;
+}) => ({
+  p: isDensePadding ? '0.5rem' : '1rem',
   transition: 'all 0.2s ease-in-out',
-  whiteSpace: densePadding ? 'nowrap' : 'normal',
+  whiteSpace: isDensePadding ? 'nowrap' : 'normal',
 });
 
-export const commonTableBodyButtonCellStyles = (densePadding: boolean) => ({
-  p: densePadding ? '1px' : '0.6rem',
+export const commonTableBodyButtonCellStyles = ({
+  isDensePadding,
+}: {
+  isDensePadding: boolean;
+}) => ({
+  p: isDensePadding ? '1px' : '0.6rem',
   textAlign: 'center',
   transition: 'all 0.2s ease-in-out',
 });
@@ -30,6 +38,8 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
     onCellClick,
     tableInstance: { getState },
   } = useMRT();
+
+  const { currentEditingRow, isDensePadding } = getState();
 
   const mTableCellBodyProps =
     muiTableBodyCellProps instanceof Function
@@ -55,7 +65,9 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
       {...tableCellProps}
       //@ts-ignore
       sx={{
-        ...commonTableBodyCellStyles(getState().densePadding),
+        ...commonTableBodyCellStyles({
+          isDensePadding,
+        }),
         //@ts-ignore
         ...tableCellProps?.sx,
       }}
@@ -67,8 +79,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
           width={Math.random() * (120 - 60) + 60}
           {...muiTableBodyCellSkeletonProps}
         />
-      ) : cell.column.enableEditing &&
-        getState().currentEditingRow?.id === cell.row.id ? (
+      ) : cell.column.enableEditing && currentEditingRow?.id === cell.row.id ? (
         <MRT_EditCellTextField cell={cell} />
       ) : enableClickToCopy || cell.column.enableClickToCopy ? (
         <MRT_CopyButton cell={cell}>{cell.renderCell()}</MRT_CopyButton>

@@ -33,6 +33,8 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
     tableInstance: { getState },
   } = useMRT();
 
+  const { currentEditingRow, isDensePadding } = getState();
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleOpenRowActionMenu = (event: MouseEvent<HTMLElement>) => {
@@ -47,10 +49,10 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
   };
 
   return (
-    <TableCell sx={commonTableBodyButtonCellStyles(getState().densePadding)}>
+    <TableCell sx={commonTableBodyButtonCellStyles({isDensePadding})}>
       {renderRowActions ? (
         <>{renderRowActions(row, tableInstance)}</>
-      ) : row.id === getState().currentEditingRow?.id ? (
+      ) : row.id === currentEditingRow?.id ? (
         <MRT_EditActionButtons row={row} />
       ) : !renderRowActionMenuItems && enableRowEditing ? (
         <Tooltip placement="right" arrow title={localization.edit}>

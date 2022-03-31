@@ -23,6 +23,8 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
     },
   } = useMRT();
 
+  const { isDensePadding } = getState();
+
   const handleSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (selectAll) {
       getToggleAllRowsSelectedProps?.()?.onChange?.(event as any);
@@ -73,7 +75,7 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
             ? localization.toggleSelectAll
             : localization.toggleSelectRow,
         }}
-        size={getState().densePadding ? 'small' : 'medium'}
+        size={isDensePadding ? 'small' : 'medium'}
         {...checkboxProps}
         onChange={handleSelectChange}
         title={undefined}

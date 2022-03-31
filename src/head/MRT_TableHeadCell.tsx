@@ -13,19 +13,23 @@ import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
 import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
 import type { MRT_Header } from '..';
 
-export const commonTableHeadCellStyles = (
-  densePadding: boolean,
-  enableColumnResizing?: boolean,
+export const commonTableHeadCellStyles = ({
+  isDensePadding,
+  enableColumnResizing,
+  widths,
+}: {
+  isDensePadding: boolean;
+  enableColumnResizing?: boolean;
   widths?: {
     maxWidth?: CSSProperties['maxWidth'];
     minWidth?: CSSProperties['minWidth'];
     width?: CSSProperties['width'];
-  },
-) => ({
+  };
+}) => ({
   fontWeight: 'bold',
   height: '100%',
-  p: densePadding ? '0.5rem' : '1rem',
-  pt: densePadding ? '0.75rem' : '1.25rem',
+  p: isDensePadding ? '0.5rem' : '1rem',
+  pt: isDensePadding ? '0.75rem' : '1.25rem',
   transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
   verticalAlign: 'text-top',
   ...widths,
@@ -47,6 +51,8 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
     setShowFilters,
     tableInstance: { getState },
   } = useMRT();
+
+  const { isDensePadding, showFilters } = getState();
 
   const isParentHeader = !!header.column.columns?.length;
 
@@ -109,15 +115,15 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
       align={isParentHeader ? 'center' : 'left'}
       {...tableCellProps}
       sx={{
-        ...commonTableHeadCellStyles(
-          getState().densePadding,
+        ...commonTableHeadCellStyles({
+          isDensePadding,
           enableColumnResizing,
-          {
+          widths: {
             maxWidth: header.column.maxWidth,
             minWidth: header.column.minWidth,
             width: header.column.width,
           },
-        ),
+        }),
         //@ts-ignore
         ...tableCellProps?.sx,
       }}
@@ -163,7 +169,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
                   disableRipple
                   onClick={(event) => {
                     event.stopPropagation();
-                    setShowFilters(!getState().showFilters);
+                    setShowFilters(!showFilters);
                   }}
                   size="small"
                   sx={{
@@ -177,7 +183,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
                     },
                   }}
                 >
-                  {getState().showFilters &&
+                  {showFilters &&
                   !header.column.getColumnFilterValue() ? (
                     <FilterAltOff fontSize="small" />
                   ) : (
@@ -207,7 +213,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
         </Box>
       </Box>
       {enableColumnFilters && header.column.getCanColumnFilter() && (
-        <Collapse in={getState().showFilters}>
+        <Collapse in={showFilters}>
           <MRT_FilterTextField header={header} />
         </Collapse>
       )}

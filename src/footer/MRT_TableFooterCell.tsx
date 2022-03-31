@@ -14,6 +14,8 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer }) => {
     tableInstance: { getState },
   } = useMRT();
 
+  const { isDensePadding } = getState();
+
   const isParentHeader = !!footer.column.columns?.length;
 
   const mTableFooterCellProps =
@@ -40,7 +42,7 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer }) => {
       sx={{
         fontWeight: 'bold',
         verticalAlign: 'text-top',
-        p: getState().densePadding ? '0.5rem' : '1rem',
+        p: isDensePadding ? '0.5rem' : '1rem',
         transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
         //@ts-ignore
         ...tableCellProps?.sx,

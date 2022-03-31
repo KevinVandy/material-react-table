@@ -44,6 +44,8 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
     tableInstance: { getState },
   } = useMRT();
 
+  const { isDensePadding } = getState();
+
   const filterTypes: {
     type: MRT_FILTER_TYPE;
     label: string;
@@ -149,8 +151,8 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
   };
 
   // const filterType = !!header
-  //   ? getState().currentFilterTypes[header.id]
-  //   : getState().currentGlobalFilterType;
+  //   ? currentFilterTypes[header.id]
+  //   : currentGlobalFilterType;
 
   return (
     <Menu
@@ -159,7 +161,7 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
       MenuListProps={{
-        dense: getState().densePadding,
+        dense: isDensePadding,
       }}
     >
       {filterTypes.map(({ type, label, divider }, index) => (
