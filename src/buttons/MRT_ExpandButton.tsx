@@ -3,8 +3,8 @@ import { IconButton } from '@mui/material';
 import { useMRT } from '../useMRT';
 import type { MRT_Row } from '..';
 
-interface Props {
-  row: MRT_Row;
+interface Props<D extends Record<string, any> = {}> {
+  row: MRT_Row<D>;
 }
 
 export const MRT_ExpandButton: FC<Props> = ({ row }) => {

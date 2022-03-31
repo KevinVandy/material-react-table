@@ -78,28 +78,29 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
         header.column.header as string,
       );
 
-  const filterType = getState()?.currentFilterTypes?.[header.id];
+  // const filterType = getState()?.currentFilterTypes?.[header.id];
 
-  const filterTooltip = !!header.column.getColumnFilterValue()
-    ? localization.filteringByColumn
-        .replace('{column}', String(header.column.header))
-        .replace(
-          '{filterType}',
-          filterType instanceof Function
-            ? ''
-            : // @ts-ignore
-              localization[
-                `filter${
-                  filterType.charAt(0).toUpperCase() + filterType.slice(1)
-                }`
-              ],
-        )
-        .replace(
-          '{filterValue}',
-          header.column.getColumnFilterValue() as string,
-        )
-        .replace('" "', '')
-    : localization.showHideFilters;
+  const filterTooltip = '';
+  // !!header.column.getColumnFilterValue()
+  //   ? localization.filteringByColumn
+  //       .replace('{column}', String(header.column.header))
+  //       .replace(
+  //         '{filterType}',
+  //         filterType instanceof Function
+  //           ? ''
+  //           : // @ts-ignore
+  //             localization[
+  //               `filter${
+  //                 filterType.charAt(0).toUpperCase() + filterType.slice(1)
+  //               }`
+  //             ],
+  //       )
+  //       .replace(
+  //         '{filterValue}',
+  //         header.column.getColumnFilterValue() as string,
+  //       )
+  //       .replace('" "', '')
+  //   : localization.showHideFilters;
 
   const columnHeaderText = header.column.header;
 
@@ -117,6 +118,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
             width: header.column.width,
           },
         ),
+        //@ts-ignore
         ...tableCellProps?.sx,
       }}
     >

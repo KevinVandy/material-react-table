@@ -10,7 +10,7 @@ interface Props {
 export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
   const {
     muiTableBodyCellEditTextFieldProps,
-    setCurrentEditingRow,
+    // setCurrentEditingRow,
     tableInstance: { getState },
   } = useMRT();
 

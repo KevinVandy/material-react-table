@@ -42,6 +42,7 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer }) => {
         verticalAlign: 'text-top',
         p: getState().densePadding ? '0.5rem' : '1rem',
         transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
+        //@ts-ignore
         ...tableCellProps?.sx,
       }}
     >

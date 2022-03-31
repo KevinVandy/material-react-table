@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, MouseEvent, useState } from 'react';
 import {
-  Chip,
+  // Chip,
   debounce,
   IconButton,
   InputAdornment,
@@ -12,7 +12,7 @@ import {
 import { useMRT } from '../useMRT';
 import type { MRT_Header } from '..';
 import { MRT_FilterTypeMenu } from '../menus/MRT_FilterTypeMenu';
-import { MRT_FILTER_TYPE } from '../enums';
+// import { MRT_FILTER_TYPE } from '../enums';
 
 interface Props {
   header: MRT_Header;
@@ -24,8 +24,8 @@ export const MRT_FilterTextField: FC<Props> = ({ header }) => {
     idPrefix,
     localization,
     muiTableHeadCellFilterTextFieldProps,
-    setCurrentFilterTypes,
-    tableInstance: { getState },
+    // setCurrentFilterTypes,
+    // tableInstance: { getState },
   } = useMRT();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

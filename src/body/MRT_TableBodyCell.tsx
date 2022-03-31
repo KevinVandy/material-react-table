@@ -1,5 +1,5 @@
 import React, { FC, MouseEvent } from 'react';
-import { Skeleton, TableCell, TableCellProps } from '@mui/material';
+import { Skeleton, TableCell } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import type { MRT_Cell } from '..';
@@ -53,12 +53,12 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
         onCellClick?.(event, cell)
       }
       {...tableCellProps}
-      sx={
-        {
-          ...commonTableBodyCellStyles(getState().densePadding),
-          ...tableCellProps?.sx,
-        } as TableCellProps['sx']
-      }
+      //@ts-ignore
+      sx={{
+        ...commonTableBodyCellStyles(getState().densePadding),
+        //@ts-ignore
+        ...tableCellProps?.sx,
+      }}
     >
       {isLoading ? (
         <Skeleton

@@ -162,7 +162,7 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
         dense: getState().densePadding,
       }}
     >
-      {filterTypes.map(({ type, label, divider, fn }, index) => (
+      {filterTypes.map(({ type, label, divider }, index) => (
         <MenuItem
           divider={divider}
           key={index}

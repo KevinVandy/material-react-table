@@ -15,6 +15,7 @@ import React, {
   useState,
 } from 'react';
 import type {
+  MRT_ColumnInterface,
   MRT_FilterType,
   MRT_Row,
   MRT_TableInstance,
@@ -26,34 +27,35 @@ import { MRT_Localization } from './localization';
 import { MaterialReactTableProps } from './MaterialReactTable';
 import { createColumn, createGroup, findLowestLevelCols } from './utils';
 
-export type UseMRT<D extends {} = {}> = MaterialReactTableProps<D> & {
-  anyRowsCanExpand: boolean;
-  anyRowsExpanded: boolean;
-  icons: MRT_Icons;
-  idPrefix: string;
-  filterTypes: { [key in MRT_FILTER_TYPE]: any };
-  localization: MRT_Localization;
-  setCurrentEditingRow: Dispatch<SetStateAction<MRT_Row<D> | null>>;
-  setCurrentFilterTypes: Dispatch<
-    SetStateAction<{
-      [key: string]: MRT_FilterType;
-    }>
-  >;
-  setCurrentGlobalFilterType: Dispatch<SetStateAction<MRT_FILTER_TYPE>>;
-  setDensePadding: Dispatch<SetStateAction<boolean>>;
-  setFullScreen: Dispatch<SetStateAction<boolean>>;
-  setShowFilters: Dispatch<SetStateAction<boolean>>;
-  setShowSearch: Dispatch<SetStateAction<boolean>>;
-  tableInstance: MRT_TableInstance<D>;
-};
+export type UseMRT<D extends Record<string, any> = {}> =
+  MaterialReactTableProps<D> & {
+    anyRowsCanExpand: boolean;
+    anyRowsExpanded: boolean;
+    icons: MRT_Icons;
+    idPrefix: string;
+    filterTypes: { [key in MRT_FILTER_TYPE]: any };
+    localization: MRT_Localization;
+    setCurrentEditingRow: Dispatch<SetStateAction<MRT_Row<D> | null>>;
+    setCurrentFilterTypes: Dispatch<
+      SetStateAction<{
+        [key: string]: MRT_FilterType;
+      }>
+    >;
+    setCurrentGlobalFilterType: Dispatch<SetStateAction<MRT_FILTER_TYPE>>;
+    setDensePadding: Dispatch<SetStateAction<boolean>>;
+    setFullScreen: Dispatch<SetStateAction<boolean>>;
+    setShowFilters: Dispatch<SetStateAction<boolean>>;
+    setShowSearch: Dispatch<SetStateAction<boolean>>;
+    tableInstance: MRT_TableInstance<D>;
+  };
 
-const MaterialReactTableContext = (<D extends {} = {}>() =>
+const MaterialReactTableContext = (<D extends Record<string, any> = {}>() =>
   createContext<UseMRT<D>>({} as UseMRT<D>) as Context<UseMRT<D>>)();
 
-export const MaterialReactTableProvider = <D extends {} = {}>(
+export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
   props: PropsWithChildren<MaterialReactTableProps<D>>,
 ) => {
-  const [currentEditingRow, setCurrentEditingRow] = useState<MRT_Row<D> | null>(
+  const [currentEditingRow, setCurrentEditingRow] = useState<MRT_Row | null>(
     null,
   );
   const [densePadding, setDensePadding] = useState(
@@ -116,12 +118,12 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     () =>
       table.createColumns(
         props.columns.map((column) =>
-          !!column.columns
-            ? createGroup(table, column)
-            : createColumn(table, column),
+          column.columns
+            ? createGroup(table, column as any)
+            : createColumn(table, column as any),
         ),
       ),
-    [table],
+    [table, props.columns],
   );
 
   const data: D[] = useMemo(
@@ -131,7 +133,9 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
         : [...Array(10).fill(null)].map((_) =>
             Object.assign(
               {},
-              ...findLowestLevelCols(props.columns).map((c) => ({
+              ...findLowestLevelCols(
+                props.columns as MRT_ColumnInterface[],
+              ).map((c) => ({
                 [c.id]: null,
               })),
             ),
@@ -146,18 +150,15 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
     sortRowsFn,
     columnFilterRowsFn: columnFilterRowsFn,
     filterTypes: defaultFilterFNs,
-    // globalFilter: currentGlobalFilterType,
     state: {
       currentEditingRow,
-      // currentFilterTypes,
-      // currentGlobalFilterType,
       densePadding,
       fullScreen,
       showFilters,
       showSearch,
       ...props.state,
     },
-  });
+  } as any);
 
   const idPrefix = useMemo(
     () => props.idPrefix ?? Math.random().toString(36).substring(2, 9),
@@ -176,27 +177,29 @@ export const MaterialReactTableProvider = <D extends {} = {}>(
 
   return (
     <MaterialReactTableContext.Provider
-      value={{
-        ...props,
-        anyRowsCanExpand,
-        anyRowsExpanded,
-        idPrefix,
-        setCurrentEditingRow,
-        // setCurrentFilterTypes,
-        // setCurrentGlobalFilterType,
-        setDensePadding,
-        setFullScreen,
-        setShowFilters,
-        setShowSearch,
-        tableInstance,
-      }}
+      value={
+        {
+          ...props,
+          anyRowsCanExpand,
+          anyRowsExpanded,
+          idPrefix,
+          setCurrentEditingRow,
+          // setCurrentFilterTypes,
+          // setCurrentGlobalFilterType,
+          setDensePadding,
+          setFullScreen,
+          setShowFilters,
+          setShowSearch,
+          tableInstance,
+        } as any
+      }
     >
       {props.children}
     </MaterialReactTableContext.Provider>
   );
 };
 
-export const useMRT = <D extends {} = {}>(): UseMRT<D> =>
+export const useMRT = <D extends Record<string, any> = {}>(): UseMRT<D> =>
   useContext<UseMRT<D>>(
     MaterialReactTableContext as unknown as Context<UseMRT<D>>,
   );

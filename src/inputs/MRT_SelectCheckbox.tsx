@@ -3,7 +3,7 @@ import { Checkbox, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
 import type { MRT_Row } from '..';
 
-interface Props<D extends {} = {}> {
+interface Props<D extends Record<string, any> = {}> {
   row?: MRT_Row<D>;
   selectAll?: boolean;
 }
@@ -25,19 +25,19 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
 
   const handleSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (selectAll) {
-      getToggleAllRowsSelectedProps?.()?.onChange?.(event);
+      getToggleAllRowsSelectedProps?.()?.onChange?.(event as any);
       onSelectAllChange?.(
         event,
-        (event.target.checked ? getRowModel().flatRows : []) as MRT_Row[],
+        event.target.checked ? getRowModel().flatRows : [],
       );
     } else if (row) {
-      row?.getToggleSelectedProps()?.onChange?.(event);
+      row?.getToggleSelectedProps()?.onChange?.(event as any);
       onSelectChange?.(
         event,
         row,
         event.target.checked
-          ? [...(getSelectedRowModel().flatRows as MRT_Row[]), row]
-          : (getSelectedRowModel().flatRows as MRT_Row[]).filter(
+          ? [...getSelectedRowModel().flatRows, row]
+          : getSelectedRowModel().flatRows.filter(
               (selectedRow) => selectedRow.id !== row.id,
             ),
       );

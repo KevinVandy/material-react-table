@@ -12,8 +12,8 @@ import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMenuButton';
 import type { MRT_Row } from '..';
 
-interface Props {
-  row: MRT_Row;
+interface Props<D extends Record<string, any> = {}> {
+  row: MRT_Row<D>;
 }
 
 export const MRT_TableBodyRow: FC<Props> = ({ row }) => {

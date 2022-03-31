@@ -46,7 +46,7 @@ const columns: MRT_ColumnInterface<Row>[] = [
     header: 'Phone Number',
     id: 'phoneNumber',
   },
-] ;
+];
 
 const data: Row[] = [...Array(100)].map((_) => ({
   firstName: faker.name.firstName(),

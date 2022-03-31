@@ -46,7 +46,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     idPrefix,
     localization,
     setShowFilters,
-    tableInstance: { getState, resetSorting, toggleAllColumnsVisible },
+    tableInstance: { getState, toggleAllColumnsVisible },
   } = useMRT();
 
   const [filterMenuAnchorEl, setFilterMenuAnchorEl] =
@@ -56,7 +56,8 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     useState<null | HTMLElement>(null);
 
   const handleClearSort = () => {
-    resetSorting();
+    //@ts-ignore
+    header.column.resetSorting();
     setAnchorEl(null);
   };
 
