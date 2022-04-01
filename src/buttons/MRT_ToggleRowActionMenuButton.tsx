@@ -49,7 +49,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
   };
 
   return (
-    <TableCell sx={commonTableBodyButtonCellStyles({isDensePadding})}>
+    <TableCell sx={commonTableBodyButtonCellStyles({ isDensePadding })}>
       {renderRowActions ? (
         <>{renderRowActions(row, tableInstance)}</>
       ) : row.id === currentEditingRow?.id ? (

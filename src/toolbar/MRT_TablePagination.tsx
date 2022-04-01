@@ -8,11 +8,16 @@ export const MRT_TablePagination: FC<Props> = () => {
   const {
     muiTablePaginationProps,
     tableInstance,
-    tableInstance: { getRowModel, getState, setPageIndex, setPageSize },
+    tableInstance: {
+      getPrePaginationRowModel,
+      getState,
+      setPageIndex,
+      setPageSize,
+    },
   } = useMRT();
 
   const {
-    pagination: { pageSize, pageIndex },
+    pagination: { pageSize = 10, pageIndex = 0 },
   } = getState();
 
   const tablePaginationProps =
@@ -22,20 +27,20 @@ export const MRT_TablePagination: FC<Props> = () => {
 
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     setPageSize(+event.target.value);
-    setPageIndex(0);
   };
 
-  const showFirstLastPageButtons = getRowModel().rows.length / pageSize > 2;
+  const showFirstLastPageButtons =
+    getPrePaginationRowModel().rows.length / pageSize > 2;
 
   return (
     <TablePagination
-      component={'div'}
-      count={getRowModel().rows.length}
+      component="div"
+      count={getPrePaginationRowModel().rows.length}
       onPageChange={(_, newPage) => setPageIndex(newPage)}
       onRowsPerPageChange={handleChangeRowsPerPage}
       page={pageIndex}
       rowsPerPage={pageSize}
-      SelectProps={{ style: { margin: '0 1rem 0 1ch' } }}
+      SelectProps={{ sx: { m: '0 1rem 0 1ch' } }}
       showFirstButton={showFirstLastPageButtons}
       showLastButton={showFirstLastPageButtons}
       {...tablePaginationProps}

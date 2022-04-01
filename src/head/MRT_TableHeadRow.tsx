@@ -17,7 +17,7 @@ interface Props {
 
 export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
   const {
-    anyRowsCanExpand,
+    getCanSomeRowsExpand,
     enableExpandAll,
     enableSelectAll,
     enableRowActions,
@@ -60,7 +60,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
         ) : (
           <MRT_TableHeadCellActions />
         ))}
-      {anyRowsCanExpand || renderDetailPanel ? (
+      {getCanSomeRowsExpand() || renderDetailPanel ? (
         enableExpandAll && !isParentHeader ? (
           <TableCell
             size="small"

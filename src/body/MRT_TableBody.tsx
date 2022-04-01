@@ -10,12 +10,16 @@ export const MRT_TableBody: FC<Props> = () => {
     enablePagination,
     muiTableBodyProps,
     tableInstance,
-    tableInstance: { getPaginationRowModel, getRowModel, getTableBodyProps },
+    tableInstance: {
+      getPaginationRowModel,
+      getPrePaginationRowModel,
+      getTableBodyProps,
+    },
   } = useMRT();
 
   const rows = enablePagination
     ? getPaginationRowModel().rows
-    : getRowModel().rows;
+    : getPrePaginationRowModel().rows;
 
   const mTableBodyProps =
     muiTableBodyProps instanceof Function

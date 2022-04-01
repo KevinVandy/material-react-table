@@ -11,7 +11,7 @@ interface Props {
 
 export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
   const {
-    anyRowsCanExpand,
+    getCanSomeRowsExpand,
     columns,
     enableRowActions,
     enableRowEditing,
@@ -41,7 +41,7 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
       {enableRowNumbers && <MRT_TableSpacerCell />}
       {(enableRowActions || enableRowEditing) &&
         positionActionsColumn === 'first' && <MRT_TableSpacerCell />}
-      {(anyRowsCanExpand || renderDetailPanel) && (
+      {(getCanSomeRowsExpand() || renderDetailPanel) && (
         <MRT_TableSpacerCell
           width={`${renderDetailPanel ? 2 : getExpandedDepth() + 0.5}rem`}
         />

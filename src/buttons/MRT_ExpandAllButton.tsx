@@ -6,7 +6,7 @@ interface Props {}
 
 export const MRT_ExpandAllButton: FC<Props> = () => {
   const {
-    anyRowsExpanded,
+    getIsSomeRowsExpanded,
     icons: { DoubleArrowDownIcon },
     localization,
     tableInstance: { getIsAllRowsExpanded },
@@ -20,7 +20,7 @@ export const MRT_ExpandAllButton: FC<Props> = () => {
       <DoubleArrowDownIcon
         style={{
           transform: `rotate(${
-            getIsAllRowsExpanded() ? -180 : anyRowsExpanded ? -90 : 0
+            getIsAllRowsExpanded() ? -180 : getIsSomeRowsExpanded() ? -90 : 0
           }deg)`,
           transition: 'transform 0.2s',
         }}

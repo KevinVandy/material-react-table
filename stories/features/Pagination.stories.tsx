@@ -46,7 +46,7 @@ export const PaginationEnabledDefault: Story<MaterialReactTableProps> = () => (
 export const PaginationDisabledOrOverriden: Story<
   MaterialReactTableProps
 > = () => (
-  <MaterialReactTable columns={columns} data={data} disablePagination />
+  <MaterialReactTable columns={columns} data={data} enablePagination={false} />
 );
 
 export const PaginationPositionBottom: Story<MaterialReactTableProps> = () => (
@@ -73,7 +73,7 @@ export const CustomizePaginationComponents: Story<
   <MaterialReactTable
     columns={columns}
     data={data}
-    initialState={{ pageSize: 5 }}
+    initialState={{ pagination: { pageSize: 5 } }}
     muiTablePaginationProps={{
       rowsPerPageOptions: [5, 10, 20],
       showFirstButton: false,

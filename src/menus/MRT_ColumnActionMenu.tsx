@@ -49,7 +49,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     tableInstance: { getState, toggleAllColumnsVisible },
   } = useMRT();
 
-  const {isDensePadding, columnVisibility} = getState();
+  const { isDensePadding, columnVisibility } = getState();
 
   const [filterMenuAnchorEl, setFilterMenuAnchorEl] =
     useState<null | HTMLElement>(null);

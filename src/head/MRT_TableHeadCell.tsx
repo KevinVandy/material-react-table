@@ -183,8 +183,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
                     },
                   }}
                 >
-                  {showFilters &&
-                  !header.column.getColumnFilterValue() ? (
+                  {showFilters && !header.column.getColumnFilterValue() ? (
                     <FilterAltOff fontSize="small" />
                   ) : (
                     <FilterAltIcon fontSize="small" />

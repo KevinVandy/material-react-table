@@ -18,7 +18,7 @@ interface Props<D extends Record<string, any> = {}> {
 
 export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
   const {
-    anyRowsCanExpand,
+    getCanSomeRowsExpand,
     enableRowActions,
     enableRowEditing,
     enableRowNumbers,
@@ -56,7 +56,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
           positionActionsColumn === 'first' && (
             <MRT_ToggleRowActionMenuButton row={row} />
           )}
-        {(anyRowsCanExpand || renderDetailPanel) && (
+        {(getCanSomeRowsExpand() || renderDetailPanel) && (
           <TableCell
             size="small"
             sx={{

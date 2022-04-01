@@ -27,6 +27,7 @@ import {
   HeaderGroup,
   Options,
   Overwrite,
+  PaginationState,
   Please_use_the_create_table_column_utilities_to_define_columns,
   Row,
   TableInstance,
@@ -56,15 +57,21 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
       }
     >
   >,
-  | 'getState'
   | 'getAllColumns'
   | 'getPaginationRowModel'
+  | 'getPrePaginationRowModel'
   | 'getRowModel'
   | 'getSelectedRowModel'
+  | 'getState'
 > & {
   getState: () => MRT_TableState<D>;
   getAllColumns: () => MRT_ColumnInstance<D>[];
   getPaginationRowModel: () => {
+    rows: MRT_Row<D>[];
+    flatRows: MRT_Row<D>[];
+    rowsById: { [key: string]: MRT_Row<D> };
+  };
+  getPrePaginationRowModel: () => {
     rows: MRT_Row<D>[];
     flatRows: MRT_Row<D>[];
     rowsById: { [key: string]: MRT_Row<D> };
@@ -80,12 +87,16 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   };
 };
 
-export type MRT_TableState<D extends Record<string, any> = {}> = TableState & {
+export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
+  TableState,
+  'pagination'
+> & {
   currentEditingRow: MRT_Row<D> | null;
   isDensePadding: boolean;
   isFullScreen: boolean;
   showFilters: boolean;
   showSearch: boolean;
+  pagination: Partial<PaginationState>;
 };
 
 export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<

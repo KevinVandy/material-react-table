@@ -1,6 +1,9 @@
 import {
   columnFilterRowsFn,
   createTable,
+  functionalUpdate,
+  paginateRowsFn,
+  PaginationState,
   sortRowsFn,
   useTable,
 } from '@tanstack/react-table';
@@ -13,6 +16,7 @@ import React, {
   useContext,
   useMemo,
   useState,
+  useCallback,
 } from 'react';
 import type {
   MRT_ColumnInterface,
@@ -29,8 +33,8 @@ import { createColumn, createGroup, findLowestLevelCols } from './utils';
 
 export type UseMRT<D extends Record<string, any> = {}> =
   MaterialReactTableProps<D> & {
-    anyRowsCanExpand: boolean;
-    anyRowsExpanded: boolean;
+    getCanSomeRowsExpand: () => boolean;
+    getIsSomeRowsExpanded: () => boolean;
     icons: MRT_Icons;
     idPrefix: string;
     filterTypes: { [key in MRT_FILTER_TYPE]: any };
@@ -70,6 +74,11 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
   const [showSearch, setShowSearch] = useState(
     props.initialState?.showSearch ?? false,
   );
+
+  const [pagination, setPagination] = useState<Partial<PaginationState>>({
+    pageIndex: props.initialState?.pagination?.pageIndex ?? 0,
+    pageSize: props.initialState?.pagination?.pageSize ?? 10,
+  });
 
   // const [currentFilterTypes, setCurrentFilterTypes] = useState<{
   //   [key: string]: MRT_FilterType;
@@ -145,15 +154,23 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
 
   const tableInstance = useTable(table, {
     ...props,
+    columnFilterRowsFn,
     columns,
     data,
-    sortRowsFn,
-    columnFilterRowsFn: columnFilterRowsFn,
     filterTypes: defaultFilterFNs,
+    paginateRowsFn: paginateRowsFn,
+    sortRowsFn,
+    onPaginationChange: (updater: any) => {
+      setPagination((old) => {
+        const newValue = functionalUpdate(updater, old);
+        return newValue;
+      });
+    },
     state: {
       currentEditingRow,
       isDensePadding,
       isFullScreen,
+      pagination,
       showFilters,
       showSearch,
       ...props.state,
@@ -165,12 +182,12 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
     [props.idPrefix],
   );
 
-  const anyRowsCanExpand = useMemo(
+  const getCanSomeRowsExpand = useCallback(
     () => tableInstance.getRowModel().rows.some((row) => row.getCanExpand()),
     [tableInstance.getRowModel().rows],
   );
 
-  const anyRowsExpanded = useMemo(
+  const getIsSomeRowsExpanded = useCallback(
     () => tableInstance.getRowModel().rows.some((row) => row.getIsExpanded()),
     [tableInstance.getRowModel().rows],
   );
@@ -180,8 +197,8 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
       value={
         {
           ...props,
-          anyRowsCanExpand,
-          anyRowsExpanded,
+          getCanSomeRowsExpand,
+          getIsSomeRowsExpanded,
           idPrefix,
           setCurrentEditingRow,
           // setCurrentFilterTypes,
