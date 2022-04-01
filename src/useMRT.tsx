@@ -142,6 +142,15 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
             maxWidth: 30,
             width: 30,
           }),
+          props.enableRowNumbers &&
+          createDisplayColumn(table, {
+            Cell: ({ cell }) => cell.row.index + 1,
+            Header: () => '#',
+            header: props.localization?.rowNumbers,
+            id: 'selection',
+            maxWidth: 30,
+            width: 30,
+          }),
       ].filter(Boolean),
     [props.enableRowSelection, props.enableSelectAll],
   );

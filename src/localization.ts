@@ -31,6 +31,7 @@ export interface MRT_Localization {
   hideAll: string;
   hideColumn: string;
   rowActions: string;
+  rowNumbers: string;
   save: string;
   search: string;
   selectedCountOfRowCountRowsSelected: string;
@@ -83,9 +84,11 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   hideAll: 'Hide all',
   hideColumn: 'Hide {column} column',
   rowActions: 'Row Actions',
+  rowNumbers: 'Row Numbers',
   save: 'Save',
   search: 'Search',
-  selectedCountOfRowCountRowsSelected:    '{selectedCount} of {rowCount} row(s) selected',
+  selectedCountOfRowCountRowsSelected:
+    '{selectedCount} of {rowCount} row(s) selected',
   selection: 'Selection',
   showAll: 'Show all',
   showAllColumns: 'Show all columns',

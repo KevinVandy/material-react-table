@@ -20,7 +20,6 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
     enableExpandAll,
     enableRowActions,
     enableRowEditing,
-    enableRowNumbers,
     muiTableHeadRowProps,
     positionActionsColumn,
     renderDetailPanel,
@@ -77,20 +76,6 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
           />
         )
       ) : null}
-      {enableRowNumbers &&
-        (isParentHeader ? (
-          <MRT_TableSpacerCell />
-        ) : (
-          <TableCell
-            sx={{
-              ...commonTableHeadCellStyles({ isDensePadding }),
-              width: '2rem',
-              maxWidth: '2rem',
-            }}
-          >
-            #
-          </TableCell>
-        ))}
       {headerGroup.headers.map((header: MRT_Header, index) => (
         <MRT_TableHeadCell key={header.id || index} header={header} />
       ))}

@@ -2,7 +2,6 @@ import React, { FC, MouseEvent } from 'react';
 import { TableCell, TableRow } from '@mui/material';
 import {
   commonTableBodyButtonCellStyles,
-  commonTableBodyCellStyles,
   MRT_TableBodyCell,
 } from './MRT_TableBodyCell';
 import { useMRT } from '../useMRT';
@@ -20,7 +19,6 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
     getCanSomeRowsExpand,
     enableRowActions,
     enableRowEditing,
-    enableRowNumbers,
     muiTableBodyRowProps,
     onRowClick,
     positionActionsColumn,
@@ -64,11 +62,6 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
             }}
           >
             <MRT_ExpandButton row={row} />
-          </TableCell>
-        )}
-        {enableRowNumbers && (
-          <TableCell sx={{ ...commonTableBodyCellStyles({ isDensePadding }) }}>
-            {row.index + 1}
           </TableCell>
         )}
         {row.getVisibleCells().map((cell) => (

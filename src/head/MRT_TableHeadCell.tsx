@@ -32,10 +32,10 @@ export const commonTableHeadCellStyles = ({
   height: '100%',
   p: isDensePadding
     ? isDisplayColumn
-      ? '0'
+      ? '0 0.5rem'
       : '0.5rem'
     : isDisplayColumn
-    ? '0.5rem'
+    ? '0.5rem 0.75rem'
     : '1rem',
   pt: isDensePadding ? '0.75rem' : '1.25rem',
   transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,

@@ -14,10 +14,10 @@ export const commonTableBodyCellStyles = ({
 }) => ({
   p: isDensePadding
     ? isDisplayColumn
-      ? '0'
+      ? '0 0.5rem'
       : '0.5rem'
     : isDisplayColumn
-    ? '0.5rem'
+    ? '0.5rem 0.75rem'
     : '1rem',
   transition: 'all 0.2s ease-in-out',
   whiteSpace: isDensePadding ? 'nowrap' : 'normal',
