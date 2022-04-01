@@ -60,13 +60,25 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
         </Button>
       </Box>
       <Divider />
-      {getAllColumns().map((column, index) => (
-        <MRT_ShowHideColumnsMenuItems
-          column={column}
-          isSubMenu={isSubMenu}
-          key={`${index}-${column.id}`}
-        />
-      ))}
+      {getAllColumns()
+        .filter((col) => col.isDisplayColumn)
+        .map((column, index) => (
+          <MRT_ShowHideColumnsMenuItems
+            column={column}
+            isSubMenu={isSubMenu}
+            key={`${index}-${column.id}`}
+          />
+        ))}
+      <Divider />
+      {getAllColumns()
+        .filter((col) => !col.isDisplayColumn)
+        .map((column, index) => (
+          <MRT_ShowHideColumnsMenuItems
+            column={column}
+            isSubMenu={isSubMenu}
+            key={`${index}-${column.id}`}
+          />
+        ))}
     </Menu>
   );
 };

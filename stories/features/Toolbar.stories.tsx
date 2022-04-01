@@ -146,7 +146,7 @@ export const CustomToolbarSelectionActions: Story<
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableSelection
+    enableRowSelection
     renderToolbarCustomActions={(tableInstance) => {
       const handleDeactivate = () => {
         tableInstance.selectedFlatRows.map((row) => {
@@ -202,7 +202,7 @@ export const ToolbarAlertBannerBottom: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableSelection
+    enableRowSelection
     positionToolbarAlertBanner="bottom"
     renderToolbarCustomActions={(tableInstance) => {
       const handleCreateNewUser = () => {

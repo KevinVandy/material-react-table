@@ -166,7 +166,7 @@ MaximumFeatures.args = {
   enableClickToCopy: true,
   enableGrouping: true,
   enableColumnResizing: false,
-  enableSelection: true,
+  enableRowSelection: true,
   enableRowActions: true,
   enableRowNumbers: true,
   enableRowEditing: true,

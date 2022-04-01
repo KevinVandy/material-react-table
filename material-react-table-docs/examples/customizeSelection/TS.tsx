@@ -86,7 +86,7 @@ const Example: FC = () => {
       columns={columns}
       data={data}
       disableSelectAll
-      enableSelection
+      enableRowSelection
       muiSelectCheckboxProps={(isSelectAll, row, _tableInstance) => ({
         color: 'secondary',
         disabled: !isSelectAll && row?.values?.age < 21,

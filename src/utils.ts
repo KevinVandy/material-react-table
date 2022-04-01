@@ -26,14 +26,20 @@ export const createGroup = <D extends Record<string, any> = {}>(
   table.createGroup({
     ...column,
     columns: column?.columns?.map?.((col) =>
-      col.columns ? createGroup<D>(table, col) : createColumn(table, col),
+      col.columns ? createGroup<D>(table, col) : createDataColumn(table, col),
     ),
   } as any);
 
-export const createColumn = <D extends Record<string, any> = {}>(
+export const createDataColumn = <D extends Record<string, any> = {}>(
   table: TableFactory<D>,
   column: MRT_ColumnInterface<D>,
+): ColumnDef<D> => table.createDataColumn(column.id, column as any);
+
+export const createDisplayColumn = <D extends Record<string, any> = {}>(
+  table: TableFactory<D>,
+  column: Omit<MRT_ColumnInterface<D>, 'header'> & { header?: string },
 ): ColumnDef<D> =>
-  column.columnType === 'display'
-    ? table.createDisplayColumn(column as any)
-    : table.createDataColumn(column.id, column as any);
+  table.createDisplayColumn({
+    ...column,
+    isDisplayColumn: true,
+  } as any);

@@ -7,10 +7,18 @@ import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 
 export const commonTableBodyCellStyles = ({
   isDensePadding,
+  isDisplayColumn,
 }: {
   isDensePadding: boolean;
+  isDisplayColumn?: boolean;
 }) => ({
-  p: isDensePadding ? '0.5rem' : '1rem',
+  p: isDensePadding
+    ? isDisplayColumn
+      ? '0'
+      : '0.5rem'
+    : isDisplayColumn
+    ? '0.5rem'
+    : '1rem',
   transition: 'all 0.2s ease-in-out',
   whiteSpace: isDensePadding ? 'nowrap' : 'normal',
 });
@@ -20,7 +28,7 @@ export const commonTableBodyButtonCellStyles = ({
 }: {
   isDensePadding: boolean;
 }) => ({
-  p: isDensePadding ? '1px' : '0.6rem',
+  p: isDensePadding ? '1px' : '0.5rem',
   textAlign: 'center',
   transition: 'all 0.2s ease-in-out',
 });
@@ -36,6 +44,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
     muiTableBodyCellProps,
     muiTableBodyCellSkeletonProps,
     onCellClick,
+    tableInstance,
     tableInstance: { getState },
   } = useMRT();
 
@@ -67,12 +76,15 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
       sx={{
         ...commonTableBodyCellStyles({
           isDensePadding,
+          isDisplayColumn: cell.column.isDisplayColumn,
         }),
         //@ts-ignore
         ...tableCellProps?.sx,
       }}
     >
-      {isLoading ? (
+      {cell.column.isDisplayColumn ? (
+        cell.column.Cell?.({ cell, tableInstance })
+      ) : isLoading ? (
         <Skeleton
           animation="wave"
           height={20}

@@ -8,7 +8,6 @@ import {
 import { useMRT } from '../useMRT';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
-import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMenuButton';
 import type { MRT_Row } from '..';
 
@@ -22,7 +21,6 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
     enableRowActions,
     enableRowEditing,
     enableRowNumbers,
-    enableSelection,
     muiTableBodyRowProps,
     onRowClick,
     positionActionsColumn,
@@ -66,17 +64,6 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
             }}
           >
             <MRT_ExpandButton row={row} />
-          </TableCell>
-        )}
-        {enableSelection && (
-          <TableCell
-            sx={{
-              ...commonTableBodyButtonCellStyles({ isDensePadding }),
-              maxWidth: '3rem',
-              width: '3rem',
-            }}
-          >
-            <MRT_SelectCheckbox row={row} />
           </TableCell>
         )}
         {enableRowNumbers && (

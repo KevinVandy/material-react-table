@@ -29,6 +29,7 @@ import {
   Overwrite,
   PaginationState,
   Please_use_the_create_table_column_utilities_to_define_columns,
+  Renderable,
   Row,
   TableInstance,
   TableState,
@@ -106,17 +107,40 @@ export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
   | 'columns'
   | typeof Please_use_the_create_table_column_utilities_to_define_columns
 > & {
-  Edit?: ({
+  Edit?: (
+    props: Renderable<{
+      cell: MRT_Cell<D>;
+      tableInstance: MRT_TableInstance<D>;
+      onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+    }>,
+  ) => ReactNode;
+  Filter?: (
+    props: Renderable<{
+      header: MRT_Header<D>;
+      tableInstance: MRT_TableInstance<D>;
+      onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+    }>,
+  ) => ReactNode;
+  Footer?: (
+    props: Renderable<{
+      header: MRT_Header<D>;
+      tableInstance: MRT_TableInstance<D>;
+    }>,
+  ) => ReactNode;
+  Header?: (
+    props: Renderable<{
+      header: MRT_Header<D>;
+      tableInstance: MRT_TableInstance<D>;
+    }>,
+  ) => ReactNode;
+  Cell?: ({
     cell,
-    onChange,
+    tableInstance,
   }: {
     cell: MRT_Cell<D>;
-    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+    tableInstance: MRT_TableInstance<D>;
   }) => ReactNode;
-  Filter?: ({ column }: { column: MRT_HeaderGroup<D> }) => ReactNode;
-  Footer?: ReactNode;
-  Header?: ReactNode;
-  columnType?: 'group' | 'data' | 'display' | null;
+  isDisplayColumn?: boolean;
   columns?: MRT_ColumnInterface<D>[];
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;
@@ -161,7 +185,7 @@ export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
 
 export type MRT_ColumnInstance<D extends Record<string, any> = {}> = Omit<
   Column<D>,
-  'columns'
+  'header' | 'footer' | 'columns'
 > &
   MRT_ColumnInterface<D> & {
     columns?: MRT_ColumnInstance<D>[];
@@ -191,9 +215,10 @@ export type MRT_Row<D extends Record<string, any> = {}> = Omit<
 
 export type MRT_Cell<D extends Record<string, any> = {}> = Omit<
   Cell<D>,
-  'column'
+  'column' | 'row'
 > & {
   column: MRT_ColumnInstance<D>;
+  row: MRT_Row<D>;
 };
 
 export type MRT_FilterType = MRT_FILTER_TYPE | Function;
@@ -211,7 +236,6 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     enableRowEditing?: boolean;
     enableRowNumbers?: boolean;
     enableSelectAll?: boolean;
-    enableSelection?: boolean;
     enableSubRowTree?: boolean;
     enabledGlobalFilterTypes?: (MRT_FILTER_TYPE | string)[];
     filterTypes?: { [key in MRT_FILTER_TYPE]: any };
@@ -366,7 +390,6 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
   };
 
 export default <D extends Record<string, any> = {}>({
-  // defaultColumn = { minWidth: 50, maxWidth: 1000 },
   enableColumnActions = true,
   enableColumnFilters = true,
   enableDensePaddingToggle = true,
@@ -374,6 +397,7 @@ export default <D extends Record<string, any> = {}>({
   enableGlobalFilter = true,
   enableHiding = true,
   enablePagination = true,
+  enableSelectAll = true,
   enableSorting = true,
   filterTypes,
   icons,
@@ -385,7 +409,6 @@ export default <D extends Record<string, any> = {}>({
   ...rest
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
-    // defaultColumn={defaultColumn}
     enableColumnActions={enableColumnActions}
     enableColumnFilters={enableColumnFilters}
     enableDensePaddingToggle={enableDensePaddingToggle}
@@ -393,6 +416,7 @@ export default <D extends Record<string, any> = {}>({
     enableGlobalFilter={enableGlobalFilter}
     enableHiding={enableHiding}
     enablePagination={enablePagination}
+    enableSelectAll={enableSelectAll}
     enableSorting={enableSorting}
     // filterTypes={{ ...defaultFilterFNs, ...filterTypes }}
     icons={{ ...MRT_Default_Icons, ...icons }}

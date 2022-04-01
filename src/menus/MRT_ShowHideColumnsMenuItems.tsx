@@ -15,14 +15,17 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
 }) => {
   const {
     onColumnHide,
-    tableInstance: { getState, getIsAllColumnsVisible },
+    tableInstance: { getState },
   } = useMRT();
 
   const { columnVisibility } = getState();
 
   const isParentHeader = !!column?.columns?.length;
+
   const switchChecked =
-    column.getIsVisible() || (isParentHeader && getIsAllColumnsVisible());
+    (!isParentHeader && column.getIsVisible()) ||
+    (isParentHeader &&
+      column.getLeafColumns().some((col) => col.getIsVisible()));
 
   const handleToggleColumnHidden = (column: MRT_ColumnInstance) => {
     if (isParentHeader) {

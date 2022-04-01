@@ -27,9 +27,15 @@ import type {
 import { MRT_FILTER_TYPE } from './enums';
 import { defaultFilterFNs } from './filtersFNs';
 import { MRT_Icons } from './icons';
+import { MRT_SelectCheckbox } from './inputs/MRT_SelectCheckbox';
 import { MRT_Localization } from './localization';
 import { MaterialReactTableProps } from './MaterialReactTable';
-import { createColumn, createGroup, findLowestLevelCols } from './utils';
+import {
+  createDataColumn,
+  createDisplayColumn,
+  createGroup,
+  findLowestLevelCols,
+} from './utils';
 
 export type UseMRT<D extends Record<string, any> = {}> =
   MaterialReactTableProps<D> & {
@@ -123,15 +129,33 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
 
   const table = useMemo(() => createTable<D>(), []);
 
+  const displayColumns = useMemo(
+    () =>
+      [
+        props.enableRowSelection &&
+          createDisplayColumn(table, {
+            Cell: ({ cell }) => <MRT_SelectCheckbox row={cell.row as any} />,
+            Header: () =>
+              props.enableSelectAll ? <MRT_SelectCheckbox selectAll /> : null,
+            header: props.localization?.selection,
+            id: 'selection',
+            maxWidth: 30,
+            width: 30,
+          }),
+      ].filter(Boolean),
+    [props.enableRowSelection, props.enableSelectAll],
+  );
+
   const columns = useMemo(
     () =>
-      table.createColumns(
-        props.columns.map((column) =>
+      table.createColumns([
+        ...displayColumns,
+        ...props.columns.map((column) =>
           column.columns
             ? createGroup(table, column as any)
-            : createColumn(table, column as any),
+            : createDataColumn(table, column as any),
         ),
-      ),
+      ] as any),
     [table, props.columns],
   );
 
@@ -161,10 +185,7 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
     paginateRowsFn: paginateRowsFn,
     sortRowsFn,
     onPaginationChange: (updater: any) => {
-      setPagination((old) => {
-        const newValue = functionalUpdate(updater, old);
-        return newValue;
-      });
+      setPagination((old) => functionalUpdate(updater, old));
     },
     state: {
       currentEditingRow,

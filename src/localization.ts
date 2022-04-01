@@ -12,13 +12,13 @@ export interface MRT_Localization {
   edit: string;
   expand: string;
   expandAll: string;
+  filterBestMatch: string;
   filterBestMatchFirst: string;
   filterByColumn: string;
   filterContains: string;
   filterEmpty: string;
   filterEndsWith: string;
   filterEquals: string;
-  filterBestMatch: string;
   filterGreaterThan: string;
   filterLessThan: string;
   filterMode: string;
@@ -34,9 +34,10 @@ export interface MRT_Localization {
   save: string;
   search: string;
   selectedCountOfRowCountRowsSelected: string;
+  selection: string;
   showAll: string;
-  showHideColumns: string;
   showAllColumns: string;
+  showHideColumns: string;
   showHideFilters: string;
   showHideSearch: string;
   sortByColumnAsc: string;
@@ -84,8 +85,8 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   rowActions: 'Row Actions',
   save: 'Save',
   search: 'Search',
-  selectedCountOfRowCountRowsSelected:
-    '{selectedCount} of {rowCount} row(s) selected',
+  selectedCountOfRowCountRowsSelected:    '{selectedCount} of {rowCount} row(s) selected',
+  selection: 'Selection',
   showAll: 'Show all',
   showAllColumns: 'Show all columns',
   showHideColumns: 'Show/Hide columns',

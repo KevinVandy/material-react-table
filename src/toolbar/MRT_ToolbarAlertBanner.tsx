@@ -12,7 +12,12 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
     positionToolbarAlertBanner,
     renderToolbarCustomActions,
     tableInstance,
-    tableInstance: { getState, getSelectedRowModel, toggleColumnGrouping },
+    tableInstance: {
+      getPrePaginationRowModel,
+      getSelectedRowModel,
+      getState,
+      toggleColumnGrouping,
+    },
   } = useMRT();
 
   const { grouping } = getState();
@@ -31,7 +36,10 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
             '{selectedCount}',
             getSelectedRowModel().rows.length.toString(),
           )
-          ?.replace('{rowCount}', getSelectedRowModel().rows.length.toString())
+          ?.replace(
+            '{rowCount}',
+            getPrePaginationRowModel().rows.length.toString(),
+          )
       : null;
 
   const groupedByMessage =

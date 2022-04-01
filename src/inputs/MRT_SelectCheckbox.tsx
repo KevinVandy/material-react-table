@@ -10,6 +10,7 @@ interface Props<D extends Record<string, any> = {}> {
 
 export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
   const {
+    isLoading,
     localization,
     muiSelectCheckboxProps,
     onSelectChange,
@@ -70,6 +71,7 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
       }
     >
       <Checkbox
+        disabled={isLoading}
         inputProps={{
           'aria-label': selectAll
             ? localization.toggleSelectAll

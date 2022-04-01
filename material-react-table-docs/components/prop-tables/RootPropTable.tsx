@@ -149,7 +149,7 @@ const RootPropTable = () => {
         linkText: 'MRT row editing docs',
       },
       {
-        prop: 'enableSelection',
+        prop: 'enableRowSelection',
         type: 'boolean',
         description: 'Enable selection checkboxes in each row',
         link: '/docs/guides/selection',

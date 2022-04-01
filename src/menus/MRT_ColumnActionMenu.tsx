@@ -266,7 +266,10 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           </Box>
         </MenuItem>,
         <MenuItem
-          disabled={!columnVisibility?.length} //TODO
+          disabled={
+            !Object.values(columnVisibility).filter((visible) => !visible)
+              .length
+          }
           key={1}
           onClick={handleShowAllColumns}
           sx={commonMenuItemStyles}
@@ -280,16 +283,14 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
               String(header.column.header),
             )}
           </Box>
-          {!header.column.filterSelectOptions && (
-            <IconButton
-              onClick={handleOpenShowHideColumnsMenu}
-              onMouseEnter={handleOpenShowHideColumnsMenu}
-              size="small"
-              sx={{ p: 0 }}
-            >
-              <ArrowRightIcon />
-            </IconButton>
-          )}
+          <IconButton
+            onClick={handleOpenShowHideColumnsMenu}
+            onMouseEnter={handleOpenShowHideColumnsMenu}
+            size="small"
+            sx={{ p: 0 }}
+          >
+            <ArrowRightIcon />
+          </IconButton>
         </MenuItem>,
         <MRT_ShowHideColumnsMenu
           anchorEl={showHideColumnsMenuAnchorEl}

@@ -1499,7 +1499,7 @@ const Example: FC = () => {
       enableGrouping
       enableRowActions
       enableRowEditing
-      enableSelection
+      enableRowSelection
       onRowEditSubmit={handleSaveRow}
       renderDetailPanel={(row) => (
         <div

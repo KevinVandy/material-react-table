@@ -16,7 +16,7 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
     enableRowActions,
     enableRowEditing,
     enableRowNumbers,
-    enableSelection,
+    enableRowSelection,
     muiTableFooterRowProps,
     positionActionsColumn,
     renderDetailPanel,
@@ -46,7 +46,7 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup }) => {
           width={`${renderDetailPanel ? 2 : getExpandedDepth() + 0.5}rem`}
         />
       )}
-      {enableSelection && <MRT_TableSpacerCell width="1rem" />}
+      {enableRowSelection && <MRT_TableSpacerCell width="1rem" />}
       {footerGroup.headers.map((footer: MRT_Header) => (
         <MRT_TableFooterCell
           key={footer.getFooterProps().key}

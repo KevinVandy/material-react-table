@@ -5,7 +5,6 @@ import {
   MRT_TableHeadCell,
 } from './MRT_TableHeadCell';
 import { useMRT } from '../useMRT';
-import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
 import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
 import { MRT_TableHeadCellActions } from './MRT_TableHeadCellActions';
@@ -19,11 +18,9 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
   const {
     getCanSomeRowsExpand,
     enableExpandAll,
-    enableSelectAll,
     enableRowActions,
     enableRowEditing,
     enableRowNumbers,
-    enableSelection,
     muiTableHeadRowProps,
     positionActionsColumn,
     renderDetailPanel,
@@ -78,22 +75,6 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
           <MRT_TableSpacerCell
             width={`${renderDetailPanel ? 2 : getExpandedDepth() + 0.5}rem`}
           />
-        )
-      ) : null}
-      {enableSelection ? (
-        !isParentHeader && enableSelectAll ? (
-          <TableCell
-            sx={{
-              ...commonTableHeadCellStyles({ isDensePadding }),
-              maxWidth: '3rem',
-              width: '3rem',
-              textAlign: 'center',
-            }}
-          >
-            <MRT_SelectCheckbox selectAll />
-          </TableCell>
-        ) : (
-          <MRT_TableSpacerCell width="1rem" />
         )
       ) : null}
       {enableRowNumbers &&

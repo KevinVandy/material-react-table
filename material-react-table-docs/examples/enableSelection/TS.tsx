@@ -57,7 +57,9 @@ const Example: FC = () => {
     ],
     [],
   );
-  return <MaterialReactTable columns={columns} data={data} enableSelection />;
+  return (
+    <MaterialReactTable columns={columns} data={data} enableRowSelection />
+  );
 };
 
 export default Example;

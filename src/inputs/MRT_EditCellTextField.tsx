@@ -48,7 +48,7 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
       margin="dense"
       onChange={handleChange}
       onClick={(e) => e.stopPropagation()}
-      placeholder={cell.column.Header as string}
+      placeholder={cell.column.header}
       value={cell.value}
       variant="standard"
       {...textFieldProps}

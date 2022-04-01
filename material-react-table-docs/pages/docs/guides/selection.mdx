@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import EnableExample from '../../../examples/enableSelection';
+import EnableExample from '../../../examples/enableRowSelection';
 import CustomizeExample from '../../../examples/customizeSelection';
 
 <Head>
@@ -14,7 +14,7 @@ _Easy to opt in, easy to customize_
 
 - autoResetSelectedRows
 - disableSelectAll
-- enableSelection
+- enableRowSelection
 - initialState.selectedRowIds
 - manualRowSelectedKey
 - muiSelectCheckboxProps
@@ -25,7 +25,7 @@ _Easy to opt in, easy to customize_
 
 ### Enable Selection
 
-Selection checkboxes can be enabled with the `enableSelection` prop.
+Selection checkboxes can be enabled with the `enableRowSelection` prop.
 
 <EnableExample />
 
@@ -38,7 +38,7 @@ By default, if you enable selection for each row, there will also be a select al
   data={data}
   columns={columns}
   disableSelectAll
-  enableSelection
+  enableRowSelection
 />
 ```
 
@@ -50,7 +50,7 @@ The selection checkboxes can be customized with the `muiSelectCheckboxProps` pro
 <MaterialReactTable
   data={data}
   columns={columns}
-  enableSelection
+  enableRowSelection
   muiSelectCheckboxProps={{
     color: 'secondary',
   }}

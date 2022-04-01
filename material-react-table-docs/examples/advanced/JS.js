@@ -1499,7 +1499,7 @@ const Example = () => {
       enableGrouping
       enableRowActions
       enableRowEditing
-      enableSelection
+      enableRowSelection
       onRowEditSubmit={handleSaveRow}
       renderDetailPanel={(row) => (
         <div

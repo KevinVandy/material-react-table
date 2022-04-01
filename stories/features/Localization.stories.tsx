@@ -56,7 +56,7 @@ export const CustomSpanishLocalizationExample: Story<
       data={data}
       enableGrouping
       enableRowEditing
-      enableSelection
+      enableRowSelection
       localization={{
         actions: 'Acciones',
         columnActions: 'Acciones de columna',
