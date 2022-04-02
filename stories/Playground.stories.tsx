@@ -122,6 +122,7 @@ MaximumFeatures.args = {
     {
       header: 'Name',
       footer: 'Name',
+      id: 'name',
       columns: [
         {
           header: 'First Name',
@@ -138,6 +139,7 @@ MaximumFeatures.args = {
     {
       header: 'Info',
       footer: 'Info',
+      id: 'info',
       columns: [
         {
           header: 'Age',

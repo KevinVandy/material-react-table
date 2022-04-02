@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { TableCell } from '@mui/material';
 import { useMRT } from '../useMRT';
 import type { MRT_Header } from '..';
+import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
 
 interface Props {
   footer: MRT_Header;
@@ -11,6 +12,7 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer }) => {
   const {
     muiTableFooterCellProps,
     enableColumnResizing,
+    tableInstance,
     tableInstance: { getState },
   } = useMRT();
 
@@ -34,6 +36,18 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer }) => {
     ...mcTableFooterCellProps,
   };
 
+  const footerElement =
+    footer.column?.Footer?.({
+      footer,
+      tableInstance,
+    }) ??
+    footer.column.footer ??
+    null;
+
+  if (footer.isPlaceholder) {
+    return <MRT_TableSpacerCell />;
+  }
+
   return (
     <TableCell
       align={isParentHeader ? 'center' : 'left'}
@@ -48,7 +62,7 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer }) => {
         ...tableCellProps?.sx,
       }}
     >
-      {footer.column.header}
+      {footerElement}
     </TableCell>
   );
 };

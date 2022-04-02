@@ -125,10 +125,10 @@ export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   }) => ReactNode;
   Footer?: ({
-    header,
+    footer,
     tableInstance,
   }: {
-    header: MRT_Header<D>;
+    footer: MRT_Header<D>;
     tableInstance: MRT_TableInstance<D>;
   }) => ReactNode;
   Header?: ({
@@ -146,6 +146,7 @@ export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
     tableInstance: MRT_TableInstance<D>;
   }) => ReactNode;
   isDisplayColumn?: boolean;
+  id: keyof D | string;
   columns?: MRT_ColumnInterface<D>[];
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;

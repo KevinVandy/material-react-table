@@ -12,6 +12,7 @@ import { useMRT } from '../useMRT';
 import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
 import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
 import type { MRT_Header } from '..';
+import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
 
 export const commonTableHeadCellStyles = ({
   isDensePadding,
@@ -123,6 +124,10 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
       tableInstance,
     }) ?? header.column.header;
 
+  if (header.isPlaceholder) {
+    return <MRT_TableSpacerCell />;
+  }
+
   return (
     <TableCell
       align={isParentHeader ? 'center' : 'left'}
@@ -233,6 +238,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
         </Box>
       )}
       {!header.column.isDisplayColumn &&
+        !isParentHeader &&
         enableColumnFilters &&
         header.column.getCanColumnFilter() && (
           <Collapse in={showFilters}>

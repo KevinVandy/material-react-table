@@ -58,7 +58,6 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     useState<null | HTMLElement>(null);
 
   const handleClearSort = () => {
-    //@ts-ignore
     header.column.resetSorting();
     setAnchorEl(null);
   };

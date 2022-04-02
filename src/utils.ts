@@ -1,4 +1,4 @@
-import { ColumnDef, TableFactory } from '@tanstack/react-table';
+import { ColumnDef, Table } from '@tanstack/react-table';
 import { MRT_ColumnInterface } from '.';
 
 export const findLowestLevelCols = (
@@ -20,7 +20,7 @@ export const findLowestLevelCols = (
 };
 
 export const createGroup = <D extends Record<string, any> = {}>(
-  table: TableFactory<D>,
+  table: Table<D>,
   column: MRT_ColumnInterface<D>,
 ): ColumnDef<D> =>
   table.createGroup({
@@ -31,12 +31,12 @@ export const createGroup = <D extends Record<string, any> = {}>(
   } as any);
 
 export const createDataColumn = <D extends Record<string, any> = {}>(
-  table: TableFactory<D>,
+  table: Table<D>,
   column: MRT_ColumnInterface<D>,
-): ColumnDef<D> => table.createDataColumn(column.id, column as any);
+): ColumnDef<D> => table.createDataColumn(column.id, column as any) as any;
 
 export const createDisplayColumn = <D extends Record<string, any> = {}>(
-  table: TableFactory<D>,
+  table: Table<D>,
   column: Omit<MRT_ColumnInterface<D>, 'header'> & { header?: string },
 ): ColumnDef<D> =>
   table.createDisplayColumn({
