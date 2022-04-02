@@ -22,10 +22,17 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
       getIsSomeColumnsVisible,
       getState,
       toggleAllColumnsVisible,
+      getAllLeafColumns,
     },
   } = useMRT();
 
   const { isDensePadding } = getState();
+
+  const hideAllColumns = () => {
+    getAllLeafColumns()
+      .filter((col) => col.enableHiding !== false)
+      .forEach((col) => col.toggleVisibility(false));
+  };
 
   return (
     <Menu
@@ -47,7 +54,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
         {!isSubMenu && (
           <Button
             disabled={!getIsSomeColumnsVisible()}
-            onClick={() => toggleAllColumnsVisible(false)}
+            onClick={hideAllColumns}
           >
             {localization.hideAll}
           </Button>

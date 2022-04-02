@@ -1,7 +1,7 @@
 import { ColumnDef, Table } from '@tanstack/react-table';
 import { MRT_ColumnInterface } from '.';
 
-export const findLowestLevelCols = (
+export const getAllLeafColumnDefs = (
   columns: MRT_ColumnInterface[],
 ): MRT_ColumnInterface[] => {
   let lowestLevelColumns: MRT_ColumnInterface[] = columns;

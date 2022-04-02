@@ -72,12 +72,12 @@ export const ColumnHidingDisabledPerColumn: Story<
       {
         header: 'First Name',
         id: 'firstName',
-        disableColumnHiding: true,
+        enableHiding: false,
       },
       {
         header: 'Last Name',
         id: 'lastName',
-        disableColumnHiding: true,
+        enableHiding: false,
       },
       {
         header: 'Address',
@@ -111,6 +111,7 @@ export const ColumnHidingWithHeaderGroups: Story<
     columns={[
       {
         header: 'Name',
+        id: 'name',
         columns: [
           {
             header: 'First Name',
@@ -124,6 +125,7 @@ export const ColumnHidingWithHeaderGroups: Story<
       },
       {
         header: 'Mailing Info',
+        id: 'mailingInfo',
         columns: [
           {
             header: 'Address',
@@ -141,6 +143,7 @@ export const ColumnHidingWithHeaderGroups: Story<
       },
       {
         header: 'Contact Info',
+        id: 'contactInfo',
         columns: [
           {
             header: 'Email Address',

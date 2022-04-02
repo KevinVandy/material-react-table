@@ -36,7 +36,7 @@ import {
   createDataColumn,
   createDisplayColumn,
   createGroup,
-  findLowestLevelCols,
+  getAllLeafColumnDefs,
 } from './utils';
 
 export type UseMRT<D extends Record<string, any> = {}> =
@@ -190,7 +190,7 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
         : [...Array(10).fill(null)].map((_) =>
             Object.assign(
               {},
-              ...findLowestLevelCols(
+              ...getAllLeafColumnDefs(
                 props.columns as MRT_ColumnInterface[],
               ).map((c) => ({
                 [c.id]: null,

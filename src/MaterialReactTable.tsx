@@ -63,6 +63,7 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   | 'getRowModel'
   | 'getSelectedRowModel'
   | 'getState'
+  | 'getAllLeafColumns'
 > & {
   getState: () => MRT_TableState<D>;
   getAllColumns: () => MRT_ColumnInstance<D>[];
@@ -85,6 +86,7 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
     flatRows: MRT_Row<D>[];
     rows: MRT_Row<D>[];
   };
+  getAllLeafColumns: () => MRT_ColumnInstance<D>[];
 };
 
 export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
