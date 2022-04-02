@@ -162,7 +162,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
             {...header.column.getToggleSortingProps()}
             sx={{
               alignItems: 'center',
-              cursor: enableSorting ? 'pointer' : undefined,
+              cursor: enableSorting && !isParentHeader ? 'pointer' : undefined,
               display: 'flex',
               flexWrap: 'nowrap',
               whiteSpace:

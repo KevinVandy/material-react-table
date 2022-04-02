@@ -1,16 +1,15 @@
 import React, { FC, MouseEvent, useState } from 'react';
-import { IconButton, TableCell, Tooltip } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_RowActionMenu } from '../menus/MRT_RowActionMenu';
 import { MRT_EditActionButtons } from './MRT_EditActionButtons';
 import type { MRT_Row } from '..';
-import { commonTableBodyButtonCellStyles } from '../body/MRT_TableBodyCell';
 
 const commonIconButtonStyles = {
+  height: '2rem',
+  ml: '10px',
   opacity: 0.5,
   transition: 'opacity 0.2s',
-  marginRight: '2px',
-  height: '2rem',
   width: '2rem',
   '&:hover': {
     opacity: 1,
@@ -33,7 +32,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
     tableInstance: { getState },
   } = useMRT();
 
-  const { currentEditingRow, isDensePadding } = getState();
+  const { currentEditingRow } = getState();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -49,7 +48,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
   };
 
   return (
-    <TableCell sx={commonTableBodyButtonCellStyles({ isDensePadding })}>
+    <>
       {renderRowActions ? (
         <>{renderRowActions(row, tableInstance)}</>
       ) : row.id === currentEditingRow?.id ? (
@@ -85,6 +84,6 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
           />
         </>
       ) : null}
-    </TableCell>
+    </>
   );
 };

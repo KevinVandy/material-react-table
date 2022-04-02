@@ -26,6 +26,7 @@ import type {
 } from '.';
 import { MRT_ExpandAllButton } from './buttons/MRT_ExpandAllButton';
 import { MRT_ExpandButton } from './buttons/MRT_ExpandButton';
+import { MRT_ToggleRowActionMenuButton } from './buttons/MRT_ToggleRowActionMenuButton';
 import { MRT_FILTER_TYPE } from './enums';
 import { defaultFilterFNs } from './filtersFNs';
 import { MRT_Icons } from './icons';
@@ -134,6 +135,16 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
   const displayColumns = useMemo(
     () =>
       [
+        (props.enableRowActions || props.enableRowEditing) &&
+          createDisplayColumn(table, {
+            Cell: ({ cell }) => (
+              <MRT_ToggleRowActionMenuButton row={cell.row as any} />
+            ),
+            header: props.localization?.actions,
+            id: 'mrt-row-actions',
+            maxWidth: 60,
+            width: 60,
+          }),
         props.enableExpanded &&
           createDisplayColumn(table, {
             Cell: ({ cell }) => <MRT_ExpandButton row={cell.row as any} />,
@@ -143,7 +154,6 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
             id: 'mrt-expand',
             maxWidth: 40,
             width: 40,
-            minWidth: 40,
           }),
         props.enableRowSelection &&
           createDisplayColumn(table, {
@@ -154,7 +164,6 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
             id: 'mrt-select',
             maxWidth: 40,
             width: 40,
-            minWidth: 40,
           }),
         props.enableRowNumbers &&
           createDisplayColumn(table, {
@@ -208,9 +217,8 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
     filterTypes: defaultFilterFNs,
     paginateRowsFn: paginateRowsFn,
     sortRowsFn,
-    onPaginationChange: (updater: any) => {
-      setPagination((old) => functionalUpdate(updater, old));
-    },
+    onPaginationChange: (updater: any) =>
+      setPagination((old) => functionalUpdate(updater, old)),
     state: {
       currentEditingRow,
       isDensePadding,
