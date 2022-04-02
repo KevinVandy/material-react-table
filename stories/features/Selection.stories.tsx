@@ -48,7 +48,7 @@ export const SelectAllDisabled: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableRowSelection
-    disableSelectAll
+    enableSelectAll={false}
   />
 );
 

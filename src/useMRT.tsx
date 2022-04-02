@@ -24,6 +24,8 @@ import type {
   MRT_Row,
   MRT_TableInstance,
 } from '.';
+import { MRT_ExpandAllButton } from './buttons/MRT_ExpandAllButton';
+import { MRT_ExpandButton } from './buttons/MRT_ExpandButton';
 import { MRT_FILTER_TYPE } from './enums';
 import { defaultFilterFNs } from './filtersFNs';
 import { MRT_Icons } from './icons';
@@ -127,29 +129,42 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
   //   [props.columns, applyFiltersToColumns],
   // );
 
-  const table = useMemo(() => createTable<D>(), []);
+  const table = useMemo(() => createTable<{ Row: D }>(), []);
 
   const displayColumns = useMemo(
     () =>
       [
+        props.enableExpanded &&
+          createDisplayColumn(table, {
+            Cell: ({ cell }) => <MRT_ExpandButton row={cell.row as any} />,
+            Header: () =>
+              props.enableExpandAll ? <MRT_ExpandAllButton /> : null,
+            header: props.localization?.expand,
+            id: 'mrt-expand',
+            maxWidth: 40,
+            width: 40,
+            minWidth: 40,
+          }),
         props.enableRowSelection &&
           createDisplayColumn(table, {
             Cell: ({ cell }) => <MRT_SelectCheckbox row={cell.row as any} />,
             Header: () =>
               props.enableSelectAll ? <MRT_SelectCheckbox selectAll /> : null,
-            header: props.localization?.selection,
-            id: 'selection',
-            maxWidth: 30,
-            width: 30,
+            header: props.localization?.select,
+            id: 'mrt-select',
+            maxWidth: 40,
+            width: 40,
+            minWidth: 40,
           }),
-          props.enableRowNumbers &&
+        props.enableRowNumbers &&
           createDisplayColumn(table, {
             Cell: ({ cell }) => cell.row.index + 1,
             Header: () => '#',
             header: props.localization?.rowNumbers,
-            id: 'selection',
-            maxWidth: 30,
-            width: 30,
+            id: 'mrt-row-numbers',
+            maxWidth: 40,
+            width: 40,
+            minWidth: 40,
           }),
       ].filter(Boolean),
     [props.enableRowSelection, props.enableSelectAll],

@@ -29,7 +29,6 @@ import {
   Overwrite,
   PaginationState,
   Please_use_the_create_table_column_utilities_to_define_columns,
-  Renderable,
   Row,
   TableInstance,
   TableState,
@@ -107,32 +106,38 @@ export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
   | 'columns'
   | typeof Please_use_the_create_table_column_utilities_to_define_columns
 > & {
-  Edit?: (
-    props: Renderable<{
-      cell: MRT_Cell<D>;
-      tableInstance: MRT_TableInstance<D>;
-      onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-    }>,
-  ) => ReactNode;
-  Filter?: (
-    props: Renderable<{
-      header: MRT_Header<D>;
-      tableInstance: MRT_TableInstance<D>;
-      onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-    }>,
-  ) => ReactNode;
-  Footer?: (
-    props: Renderable<{
-      header: MRT_Header<D>;
-      tableInstance: MRT_TableInstance<D>;
-    }>,
-  ) => ReactNode;
-  Header?: (
-    props: Renderable<{
-      header: MRT_Header<D>;
-      tableInstance: MRT_TableInstance<D>;
-    }>,
-  ) => ReactNode;
+  Edit?: ({
+    cell,
+    tableInstance,
+    onChange,
+  }: {
+    cell: MRT_Cell<D>;
+    tableInstance: MRT_TableInstance<D>;
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  }) => ReactNode;
+  Filter?: ({
+    header,
+    tableInstance,
+    onChange,
+  }: {
+    header: MRT_Header<D>;
+    tableInstance: MRT_TableInstance<D>;
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  }) => ReactNode;
+  Footer?: ({
+    header,
+    tableInstance,
+  }: {
+    header: MRT_Header<D>;
+    tableInstance: MRT_TableInstance<D>;
+  }) => ReactNode;
+  Header?: ({
+    header,
+    tableInstance,
+  }: {
+    header: MRT_Header<D>;
+    tableInstance: MRT_TableInstance<D>;
+  }) => ReactNode;
   Cell?: ({
     cell,
     tableInstance,
@@ -390,9 +395,11 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
   };
 
 export default <D extends Record<string, any> = {}>({
+  // defaultCanExpand = true,
   enableColumnActions = true,
   enableColumnFilters = true,
   enableDensePaddingToggle = true,
+  enableExpandAll = true,
   enableFullScreenToggle = true,
   enableGlobalFilter = true,
   enableHiding = true,
@@ -409,9 +416,11 @@ export default <D extends Record<string, any> = {}>({
   ...rest
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
+    // defaultCanExpand={defaultCanExpand}
     enableColumnActions={enableColumnActions}
     enableColumnFilters={enableColumnFilters}
     enableDensePaddingToggle={enableDensePaddingToggle}
+    enableExpandAll={enableExpandAll}
     enableFullScreenToggle={enableFullScreenToggle}
     enableGlobalFilter={enableGlobalFilter}
     enableHiding={enableHiding}

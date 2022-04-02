@@ -16,14 +16,14 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
   } = useMRT();
 
   const handleToggleExpand = (event: MouseEvent<HTMLButtonElement>) => {
-    row.toggleExpanded();
+    row.toggleExpanded(true);
     onRowExpandChange?.(event, row);
   };
 
   return (
     <IconButton
       aria-label={localization.expand}
-      disabled={!row.getCanExpand() && !renderDetailPanel}
+      disabled={!row.getCanExpand()}
       title={localization.expand}
       onClick={handleToggleExpand}
     >

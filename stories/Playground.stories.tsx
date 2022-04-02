@@ -201,19 +201,19 @@ MaximumFeatures.args = {
   ],
   renderToolbarCustomActions: (tableInstance) => {
     const handleDeactivate = () => {
-      tableInstance.selectedFlatRows.map((row) => {
+      tableInstance.getSelectedRowModel().rows.map((row) => {
         console.log('deactivating ' + row.original);
       });
     };
 
     const handleActivate = () => {
-      tableInstance.selectedFlatRows.map((row) => {
+      tableInstance.getSelectedRowModel().rows.map((row) => {
         console.log('activating ' + row.original);
       });
     };
 
     const handleContact = () => {
-      tableInstance.selectedFlatRows.map((row) => {
+      tableInstance.getSelectedRowModel().rows.map((row) => {
         console.log('contact ' + row.original);
       });
     };
@@ -222,7 +222,7 @@ MaximumFeatures.args = {
       <div style={{ display: 'flex', gap: '0.5rem' }}>
         <Button
           color="error"
-          disabled={tableInstance.selectedFlatRows.length === 0}
+          disabled={tableInstance.getSelectedRowModel().rows.length === 0}
           onClick={handleDeactivate}
           variant="contained"
         >
@@ -230,7 +230,7 @@ MaximumFeatures.args = {
         </Button>
         <Button
           color="success"
-          disabled={tableInstance.selectedFlatRows.length === 0}
+          disabled={tableInstance.getSelectedRowModel().rows.length === 0}
           onClick={handleActivate}
           variant="contained"
         >
@@ -238,7 +238,7 @@ MaximumFeatures.args = {
         </Button>
         <Button
           color="info"
-          disabled={tableInstance.selectedFlatRows.length === 0}
+          disabled={tableInstance.getSelectedRowModel().rows.length === 0}
           onClick={handleContact}
           variant="contained"
         >
@@ -248,4 +248,4 @@ MaximumFeatures.args = {
     );
   },
   positionToolbarAlertBanner: 'bottom',
-} as MaterialReactTableProps;
+} as MaterialReactTableProps<typeof maxFeaturesData[0]>;

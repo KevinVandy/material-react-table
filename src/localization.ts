@@ -35,7 +35,7 @@ export interface MRT_Localization {
   save: string;
   search: string;
   selectedCountOfRowCountRowsSelected: string;
-  selection: string;
+  select: string;
   showAll: string;
   showAllColumns: string;
   showHideColumns: string;
@@ -89,7 +89,7 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   search: 'Search',
   selectedCountOfRowCountRowsSelected:
     '{selectedCount} of {rowCount} row(s) selected',
-  selection: 'Selection',
+  select: 'Select',
   showAll: 'Show all',
   showAllColumns: 'Show all columns',
   showHideColumns: 'Show/Hide columns',

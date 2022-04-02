@@ -39,9 +39,9 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
     ...mcTableBodyCellEditTextFieldProps,
   };
 
-  if (cell.column.enableEditing && cell.column.Edit) {
-    return <>{cell.column.Edit({ ...textFieldProps, cell })}</>;
-  }
+  // if (cell.column.enableEditing && cell.column.Edit) {
+  //   return <>{cell.column.Edit({ ...textFieldProps, cell })}</>;
+  // }
 
   return (
     <TextField

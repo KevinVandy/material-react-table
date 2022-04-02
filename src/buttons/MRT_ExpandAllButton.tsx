@@ -9,13 +9,14 @@ export const MRT_ExpandAllButton: FC<Props> = () => {
     getIsSomeRowsExpanded,
     icons: { DoubleArrowDownIcon },
     localization,
-    tableInstance: { getIsAllRowsExpanded },
+    tableInstance: { getIsAllRowsExpanded, toggleAllRowsExpanded },
   } = useMRT();
 
   return (
     <IconButton
       aria-label={localization.expandAll}
       title={localization.expandAll}
+      onClick={() => toggleAllRowsExpanded(!getIsAllRowsExpanded())}
     >
       <DoubleArrowDownIcon
         style={{
