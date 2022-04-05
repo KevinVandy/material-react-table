@@ -28,7 +28,6 @@ import {
   Options,
   Overwrite,
   PaginationState,
-  Please_use_the_create_table_column_utilities_to_define_columns,
   Row,
   TableInstance,
   TableState,
@@ -40,12 +39,16 @@ import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_FILTER_TYPE } from './enums';
 
 export type MRT_TableOptions<D extends Record<string, any> = {}> = Partial<
-  Omit<Options<D>, 'columns' | 'data' | 'initialState' | 'state'>
+  Omit<
+    Options<D>,
+    'columns' | 'data' | 'initialState' | 'state' | 'expandRowsFn'
+  >
 > & {
   columns: MRT_ColumnInterface<D>[];
   data: D[];
   initialState?: Partial<MRT_TableState<D>>;
   state?: Partial<MRT_TableState<D>>;
+  expandRowsFn?: (dataRow: D) => D[];
 };
 
 export interface MRT_RowModel<D extends Record<string, any> = {}> {
@@ -96,10 +99,7 @@ export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
 
 export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
   ColumnDef<D>,
-  | 'header'
-  | 'footer'
-  | 'columns'
-  | typeof Please_use_the_create_table_column_utilities_to_define_columns
+  'header' | 'footer' | 'columns'
 > & {
   Edit?: ({
     cell,

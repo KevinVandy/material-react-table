@@ -13,6 +13,7 @@ import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
 import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
 import type { MRT_Header } from '..';
 import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
+import { ColumnResizerProps } from '@tanstack/react-table';
 
 export const commonTableHeadCellStyles = ({
   isDensePadding,
@@ -216,7 +217,6 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
                 <MRT_ToggleColumnActionMenuButton header={header} />
               )}
             {enableColumnResizing && !isParentHeader && (
-              //@ts-ignore
               <Divider
                 flexItem
                 orientation="vertical"
@@ -233,7 +233,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
                     opacity: 1,
                   },
                 })}
-                {...header.getResizerProps((props) => ({
+                {...(header.getResizerProps((props: ColumnResizerProps) => ({
                   ...props,
                   style: {
                     transform: header.column.getIsResizing()
@@ -242,7 +242,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
                         }px)`
                       : '',
                   },
-                }))}
+                })) as any)}
               />
             )}
           </Box>

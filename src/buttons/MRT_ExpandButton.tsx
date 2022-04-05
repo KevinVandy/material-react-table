@@ -16,7 +16,7 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
   } = useMRT();
 
   const handleToggleExpand = (event: MouseEvent<HTMLButtonElement>) => {
-    row.toggleExpanded(true);
+    row.toggleExpanded();
     onRowExpandChange?.(event, row);
   };
 

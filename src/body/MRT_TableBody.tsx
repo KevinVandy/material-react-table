@@ -8,20 +8,16 @@ interface Props {}
 export const MRT_TableBody: FC<Props> = () => {
   const {
     enablePagination,
-    enableExpanded,
     muiTableBodyProps,
     tableInstance,
     tableInstance: {
       getPaginationRowModel,
       getPrePaginationRowModel,
       getTableBodyProps,
-      getExpandedRowModel,
     },
   } = useMRT();
 
-  const rows = enableExpanded
-    ? getExpandedRowModel().rows
-    : enablePagination
+  const rows = enablePagination
     ? getPaginationRowModel().rows
     : getPrePaginationRowModel().rows;
 

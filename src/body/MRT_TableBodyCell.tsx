@@ -1,5 +1,5 @@
 import React, { FC, MouseEvent } from 'react';
-import { Skeleton, TableCell } from '@mui/material';
+import { Skeleton, SxProps, TableCell } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import type { MRT_Cell } from '..';
@@ -11,7 +11,7 @@ export const commonTableBodyCellStyles = ({
 }: {
   isDensePadding: boolean;
   isDisplayColumn?: boolean;
-}) => ({
+}): SxProps => ({
   p: isDensePadding
     ? isDisplayColumn
       ? '0 0.5rem'
@@ -72,12 +72,16 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
         onCellClick?.(event, cell)
       }
       {...tableCellProps}
-      //@ts-ignore
       sx={{
         ...commonTableBodyCellStyles({
           isDensePadding,
           isDisplayColumn: cell.column.isDisplayColumn,
         }),
+        //@ts-ignore
+        pl:
+          cell.column.id === 'mrt-expand'
+            ? `${cell.row.depth + 0.75}rem`
+            : undefined,
         //@ts-ignore
         ...tableCellProps?.sx,
       }}

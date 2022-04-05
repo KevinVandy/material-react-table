@@ -166,12 +166,13 @@ MaximumFeatures.args = {
   ],
   data: maxFeaturesData,
   enableClickToCopy: true,
+  enableColumnResizing: true,
+  enableExpanded: true,
   enableGrouping: true,
-  enableColumnResizing: false,
-  enableRowSelection: true,
   enableRowActions: true,
-  enableRowNumbers: true,
   enableRowEditing: true,
+  enableRowNumbers: true,
+  enableRowSelection: true,
   renderRowActionMenuItems: (row, _tableInstance, closeMenu) => [
     <MenuItem
       key={1}
