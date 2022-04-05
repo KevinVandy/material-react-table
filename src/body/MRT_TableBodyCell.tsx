@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from 'react';
+import React, { FC, MouseEvent, useMemo } from 'react';
 import { Skeleton, SxProps, TableCell } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
@@ -50,6 +50,13 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
 
   const { currentEditingRow, isDensePadding } = getState();
 
+  const skeletonWidth = useMemo(
+    () =>
+      Math.random() * (cell.column.getWidth() - cell.column.getWidth() / 3) +
+      cell.column.getWidth() / 3,
+    [cell.column.getWidth()],
+  );
+
   const mTableCellBodyProps =
     muiTableBodyCellProps instanceof Function
       ? muiTableBodyCellProps(cell)
@@ -92,7 +99,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
         <Skeleton
           animation="wave"
           height={20}
-          width={Math.random() * (120 - 60) + 60}
+          width={skeletonWidth}
           {...muiTableBodyCellSkeletonProps}
         />
       ) : cell.column.enableEditing && currentEditingRow?.id === cell.row.id ? (

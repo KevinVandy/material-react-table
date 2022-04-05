@@ -57,20 +57,13 @@ const data = [...Array(25)].map((_) => ({
 
 export const DensePaddingToggleEnabledDefault: Story<
   MaterialReactTableProps
-> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    initialState={{ pageSize: 25 }}
-  />
-);
+> = () => <MaterialReactTable columns={columns} data={data} />;
 
 export const DensePaddingDisabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    disableDensePaddingToggle
-    initialState={{ pageSize: 25 }}
+    enableDensePaddingToggle={false}
   />
 );
 
@@ -78,6 +71,6 @@ export const DefaultToDensePadding: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    initialState={{ pageSize: 25, isDensePadding: true }}
+    initialState={{ pagination: { pageSize: 25 }, isDensePadding: true }}
   />
 );

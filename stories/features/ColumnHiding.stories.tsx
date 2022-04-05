@@ -61,7 +61,7 @@ export const ColumnHidingEnabledDefault: Story<
 > = () => <MaterialReactTable columns={columns} data={data} />;
 
 export const ColumnHidingDisabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} disableColumnHiding />
+  <MaterialReactTable columns={columns} data={data} enableHiding={false} />
 );
 
 export const ColumnHidingDisabledPerColumn: Story<

@@ -50,7 +50,7 @@ export const SortingEnabledDefault: Story<MaterialReactTableProps> = () => (
 );
 
 export const DisableSorting: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} disableSortBy />
+  <MaterialReactTable columns={columns} data={data} enableSorting={false} />
 );
 
 export const DisableSortingForSpecificColumns: Story<
@@ -69,7 +69,7 @@ export const DisableSortingForSpecificColumns: Story<
       {
         header: 'Address',
         id: 'address',
-        disableSortBy: true,
+        enableSorting: false,
       },
       {
         header: 'State',
@@ -78,7 +78,7 @@ export const DisableSortingForSpecificColumns: Story<
       {
         header: 'Phone Number',
         id: 'phoneNumber',
-        disableSortBy: true,
+        enableSorting: false,
       },
     ]}
     data={data}

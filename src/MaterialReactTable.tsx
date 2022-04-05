@@ -94,7 +94,7 @@ export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
   isFullScreen: boolean;
   showFilters: boolean;
   showSearch: boolean;
-  pagination: PaginationState;
+  pagination: Partial<PaginationState>;
 };
 
 export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
@@ -208,11 +208,12 @@ export type MRT_HeaderGroup<D extends Record<string, any> = {}> = Omit<
 
 export type MRT_Row<D extends Record<string, any> = {}> = Omit<
   Row<D>,
-  'getVisibleCells' | 'getAllCells' | 'subRows'
+  'getVisibleCells' | 'getAllCells' | 'subRows' | 'original'
 > & {
   getVisibleCells: () => MRT_Cell<D>[];
   getAllCells: () => MRT_Cell<D>[];
   subRows?: MRT_Row<D>[];
+  original: D;
 };
 
 export type MRT_Cell<D extends Record<string, any> = {}> = Omit<
@@ -229,7 +230,6 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
   MRT_TableOptions<D> & {
     enableClickToCopy?: boolean;
     enableColumnActions?: boolean;
-    enableColumnResizing?: boolean;
     enableDensePaddingToggle?: boolean;
     enableExpandAll?: boolean;
     enableFullScreenToggle?: boolean;
@@ -238,7 +238,6 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     enableRowEditing?: boolean;
     enableRowNumbers?: boolean;
     enableSelectAll?: boolean;
-    enableSubRowTree?: boolean;
     enabledGlobalFilterTypes?: (MRT_FILTER_TYPE | string)[];
     filterTypes?: { [key in MRT_FILTER_TYPE]: any };
     hideTableFooter?: boolean;

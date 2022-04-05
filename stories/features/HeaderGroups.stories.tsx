@@ -19,6 +19,7 @@ export const HeaderGroups: Story<MaterialReactTableProps> = () => (
     columns={[
       {
         header: 'Name',
+        id: 'name',
         columns: [
           {
             header: 'First Name',
@@ -33,6 +34,7 @@ export const HeaderGroups: Story<MaterialReactTableProps> = () => (
       },
       {
         header: 'Info',
+        id: 'info',
         columns: [
           {
             header: 'Age',
@@ -59,6 +61,7 @@ export const HeaderAndFooterGroups: Story<MaterialReactTableProps> = () => (
     columns={[
       {
         header: 'Name',
+        id: 'name',
         footer: 'Name',
         columns: [
           {
@@ -76,6 +79,7 @@ export const HeaderAndFooterGroups: Story<MaterialReactTableProps> = () => (
       },
       {
         header: 'Info',
+        id: 'info',
         footer: 'Info',
         columns: [
           {

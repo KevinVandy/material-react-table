@@ -51,7 +51,6 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
     enableColumnActions,
     enableColumnFilters,
     enableColumnResizing,
-    enableSorting,
     icons: { FilterAltIcon, FilterAltOff },
     localization,
     muiTableHeadCellProps,
@@ -156,7 +155,10 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
             {...header.column.getToggleSortingProps()}
             sx={{
               alignItems: 'center',
-              cursor: enableSorting && !isParentHeader ? 'pointer' : undefined,
+              cursor:
+                header.column.getCanSort() && !isParentHeader
+                  ? 'pointer'
+                  : undefined,
               display: 'flex',
               flexWrap: 'nowrap',
               whiteSpace:

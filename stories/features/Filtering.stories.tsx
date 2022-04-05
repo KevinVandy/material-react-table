@@ -64,7 +64,11 @@ export const FilteringEnabledAndShown: Story<MaterialReactTableProps> = () => (
 );
 
 export const FilteringDisabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} disableFilters />
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnFilters={false}
+  />
 );
 
 export const FilterTypes: Story<MaterialReactTableProps> = () => (
@@ -163,7 +167,7 @@ export const FilteringDisabledForCertainColumns: Story<
       {
         header: 'Age',
         id: 'age',
-        disableFilters: true,
+        enableColumnFilter: false,
       },
       {
         header: 'Gender',
@@ -172,7 +176,7 @@ export const FilteringDisabledForCertainColumns: Story<
       {
         header: 'Address',
         id: 'address',
-        disableFilters: true,
+        enableColumnFilter: false,
       },
       {
         header: 'State',
@@ -247,11 +251,13 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
       {
         header: 'Gender',
         id: 'gender',
-        Filter: ({ column }) => (
+        Filter: ({ header }) => (
           <TextField
-            onChange={(e) => column.setFilter(e.target.value || undefined)}
+            onChange={(e) =>
+              header.column.setColumnFilterValue(e.target.value || undefined)
+            }
             select
-            value={column.filterValue ?? ''}
+            value={header.column.getColumnFilterValue() ?? ''}
             margin="dense"
             placeholder="Filter"
             variant="standard"
