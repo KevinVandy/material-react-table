@@ -36,8 +36,6 @@ export const MRT_TableBodyRow: FC<Props> = ({ row }) => {
           <MRT_TableBodyCell key={cell.getCellProps().key} cell={cell} />
         ))}
       </TableRow>
-      {row.getIsExpanded() &&
-        row.subRows?.map((subRow) => <MRT_TableBodyRow row={subRow} />)}
       {renderDetailPanel && !row.getIsGrouped() && (
         <MRT_TableDetailPanel row={row} />
       )}

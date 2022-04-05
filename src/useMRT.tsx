@@ -1,6 +1,7 @@
 import {
   columnFilterRowsFn,
   createTable,
+  expandRowsFn,
   functionalUpdate,
   paginateRowsFn,
   PaginationState,
@@ -224,6 +225,7 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
     columnFilterRowsFn,
     columns,
     data,
+    expandRowsFn: expandRowsFn,
     filterTypes: defaultFilterFNs,
     getSubRows: (originalRow: D) => originalRow.subRows,
     paginateRowsFn: paginateRowsFn,
