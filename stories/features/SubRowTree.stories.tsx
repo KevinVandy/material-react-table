@@ -68,6 +68,7 @@ export const SubRowTreeEnabledDefault: Story<MaterialReactTableProps> = () => (
         })),
       })),
     }))}
+    enableExpanded
   />
 );
 
@@ -104,6 +105,7 @@ export const SubRowTreeDisableExpandAll: Story<
         })),
       })),
     }))}
-    disableExpandAll
+    enableExpanded
+    enableExpandAll={false}
   />
 );

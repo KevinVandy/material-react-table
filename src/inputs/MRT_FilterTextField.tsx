@@ -1,4 +1,10 @@
-import React, { ChangeEvent, FC, MouseEvent, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FC,
+  MouseEvent,
+  useCallback,
+  useState,
+} from 'react';
 import {
   // Chip,
   debounce,
@@ -49,9 +55,13 @@ export const MRT_FilterTextField: FC<Props> = ({ header }) => {
     (header.column.getColumnFilterValue() ?? '') as string,
   );
 
-  const handleChange = debounce((value: string) => {
-    header.column.setColumnFilterValue(value ?? undefined);
-  }, 150);
+  const handleChange = useCallback(
+    debounce(
+      (value: string) => header.column.setColumnFilterValue(value ?? undefined),
+      150,
+    ),
+    [],
+  );
 
   const handleFilterMenuOpen = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);

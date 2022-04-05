@@ -84,10 +84,11 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
     props.initialState?.showSearch ?? false,
   );
 
-  const [pagination, setPagination] = useState<Partial<PaginationState>>({
+  const [pagination, setPagination] = useState<PaginationState>(() => ({
     pageIndex: props.initialState?.pagination?.pageIndex ?? 0,
     pageSize: props.initialState?.pagination?.pageSize ?? 10,
-  });
+    pageCount: props.initialState?.pagination?.pageCount ?? -1,
+  }));
 
   // const [currentFilterTypes, setCurrentFilterTypes] = useState<{
   //   [key: string]: MRT_FilterType;
@@ -176,7 +177,16 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
             minWidth: 40,
           }),
       ].filter(Boolean),
-    [props.enableRowSelection, props.enableSelectAll],
+    [
+      props.enableExpandAll,
+      props.enableExpanded,
+      props.enableRowActions,
+      props.enableRowEditing,
+      props.enableRowNumbers,
+      props.enableRowSelection,
+      props.enableSelectAll,
+      props.localization,
+    ],
   );
 
   const columns = useMemo(
@@ -215,10 +225,11 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
     columns,
     data,
     filterTypes: defaultFilterFNs,
+    getSubRows: (originalRow: D) => originalRow.subRows,
     paginateRowsFn: paginateRowsFn,
-    sortRowsFn,
     onPaginationChange: (updater: any) =>
       setPagination((old) => functionalUpdate(updater, old)),
+    sortRowsFn,
     state: {
       currentEditingRow,
       isDensePadding,

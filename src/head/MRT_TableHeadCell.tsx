@@ -17,17 +17,13 @@ import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
 export const commonTableHeadCellStyles = ({
   isDensePadding,
   enableColumnResizing,
-  widths,
+  width,
   isDisplayColumn,
 }: {
   isDensePadding: boolean;
   isDisplayColumn?: boolean;
   enableColumnResizing?: boolean;
-  widths?: {
-    maxWidth?: CSSProperties['maxWidth'];
-    minWidth?: CSSProperties['minWidth'];
-    width?: CSSProperties['width'];
-  };
+  width: CSSProperties['width'];
 }) => ({
   fontWeight: 'bold',
   height: '100%',
@@ -39,9 +35,10 @@ export const commonTableHeadCellStyles = ({
     ? '0.5rem 0.75rem'
     : '1rem',
   pt: isDensePadding ? '0.75rem' : '1.25rem',
-  transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
+  transition: `all ${enableColumnResizing ? 0 : '0.2s'} ease-in-out`,
   verticalAlign: 'text-top',
-  ...widths,
+  width,
+  minWidth: `max(${width}, 100px)`,
 });
 
 interface Props {
@@ -137,11 +134,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
           isDensePadding,
           isDisplayColumn: header.column.isDisplayColumn,
           enableColumnResizing,
-          widths: {
-            maxWidth: header.column.maxWidth,
-            minWidth: header.column.minWidth,
-            width: header.column.width,
-          },
+          width: header.getWidth(),
         }),
         //@ts-ignore
         ...tableCellProps?.sx,
@@ -223,15 +216,33 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
                 <MRT_ToggleColumnActionMenuButton header={header} />
               )}
             {enableColumnResizing && !isParentHeader && (
+              //@ts-ignore
               <Divider
                 flexItem
                 orientation="vertical"
                 onDoubleClick={() => header.resetSize()}
-                sx={{
+                sx={(theme) => ({
                   borderRightWidth: '2px',
                   borderRadius: '2px',
                   maxHeight: '2rem',
-                }}
+                  cursor: 'col-resize',
+                  userSelect: 'none',
+                  touchAction: 'none',
+                  '&:active': {
+                    backgroundColor: theme.palette.secondary.dark,
+                    opacity: 1,
+                  },
+                })}
+                {...header.getResizerProps((props) => ({
+                  ...props,
+                  style: {
+                    transform: header.column.getIsResizing()
+                      ? `translateX(${
+                          getState().columnSizingInfo.deltaOffset
+                        }px)`
+                      : '',
+                  },
+                }))}
               />
             )}
           </Box>

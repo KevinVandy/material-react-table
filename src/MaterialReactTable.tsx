@@ -48,6 +48,12 @@ export type MRT_TableOptions<D extends Record<string, any> = {}> = Partial<
   state?: Partial<MRT_TableState<D>>;
 };
 
+export interface MRT_RowModel<D extends Record<string, any> = {}> {
+  flatRows: MRT_Row<D>[];
+  rows: MRT_Row<D>[];
+  rowsById: { [key: string]: MRT_Row<D> };
+}
+
 export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   TableInstance<
     Overwrite<
@@ -58,35 +64,22 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
     >
   >,
   | 'getAllColumns'
+  | 'getAllLeafColumns'
+  | 'getExpandedRowModel'
   | 'getPaginationRowModel'
   | 'getPrePaginationRowModel'
   | 'getRowModel'
   | 'getSelectedRowModel'
   | 'getState'
-  | 'getAllLeafColumns'
 > & {
-  getState: () => MRT_TableState<D>;
   getAllColumns: () => MRT_ColumnInstance<D>[];
-  getPaginationRowModel: () => {
-    rows: MRT_Row<D>[];
-    flatRows: MRT_Row<D>[];
-    rowsById: { [key: string]: MRT_Row<D> };
-  };
-  getPrePaginationRowModel: () => {
-    rows: MRT_Row<D>[];
-    flatRows: MRT_Row<D>[];
-    rowsById: { [key: string]: MRT_Row<D> };
-  };
-  getRowModel: () => {
-    rows: MRT_Row<D>[];
-    flatRows: MRT_Row<D>[];
-    rowsById: { [key: string]: MRT_Row<D> };
-  };
-  getSelectedRowModel: () => {
-    flatRows: MRT_Row<D>[];
-    rows: MRT_Row<D>[];
-  };
   getAllLeafColumns: () => MRT_ColumnInstance<D>[];
+  getExpandedRowModel: () => MRT_RowModel;
+  getPaginationRowModel: () => MRT_RowModel;
+  getPrePaginationRowModel: () => MRT_RowModel;
+  getRowModel: () => MRT_RowModel;
+  getSelectedRowModel: () => MRT_RowModel;
+  getState: () => MRT_TableState<D>;
 };
 
 export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
@@ -98,7 +91,7 @@ export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
   isFullScreen: boolean;
   showFilters: boolean;
   showSearch: boolean;
-  pagination: Partial<PaginationState>;
+  pagination: PaginationState;
 };
 
 export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
@@ -215,10 +208,11 @@ export type MRT_HeaderGroup<D extends Record<string, any> = {}> = Omit<
 
 export type MRT_Row<D extends Record<string, any> = {}> = Omit<
   Row<D>,
-  'getVisibleCells' | 'getAllCells'
+  'getVisibleCells' | 'getAllCells' | 'subRows'
 > & {
   getVisibleCells: () => MRT_Cell<D>[];
   getAllCells: () => MRT_Cell<D>[];
+  subRows?: MRT_Row<D>[];
 };
 
 export type MRT_Cell<D extends Record<string, any> = {}> = Omit<
