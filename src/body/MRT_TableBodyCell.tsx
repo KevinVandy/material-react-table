@@ -80,7 +80,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
         //@ts-ignore
         pl:
           cell.column.id === 'mrt-expand'
-            ? `${cell.row.depth + 0.75}rem`
+            ? `${cell.row.depth + (isDensePadding ? 0.5 : 0.75)}rem`
             : undefined,
         //@ts-ignore
         ...tableCellProps?.sx,
@@ -97,7 +97,8 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
         />
       ) : cell.column.enableEditing && currentEditingRow?.id === cell.row.id ? (
         <MRT_EditCellTextField cell={cell} />
-      ) : enableClickToCopy || cell.column.enableClickToCopy ? (
+      ) : (enableClickToCopy || cell.column.enableClickToCopy) &&
+        cell.column.enableClickToCopy !== false ? (
         <MRT_CopyButton cell={cell}>{cell.renderCell()}</MRT_CopyButton>
       ) : (
         cell.renderCell()

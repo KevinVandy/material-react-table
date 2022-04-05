@@ -213,6 +213,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
             sx={{ alignItems: 'center', display: 'flex', flexWrap: 'nowrap' }}
           >
             {(enableColumnActions || header.column.enableColumnActions) &&
+              header.column.enableColumnActions !== false &&
               !isParentHeader && (
                 <MRT_ToggleColumnActionMenuButton header={header} />
               )}

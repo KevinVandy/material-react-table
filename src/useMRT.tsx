@@ -43,7 +43,6 @@ import {
 
 export type UseMRT<D extends Record<string, any> = {}> =
   MaterialReactTableProps<D> & {
-    getCanSomeRowsExpand: () => boolean;
     getIsSomeRowsExpanded: () => boolean;
     icons: MRT_Icons;
     idPrefix: string;
@@ -248,11 +247,6 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
     [props.idPrefix],
   );
 
-  const getCanSomeRowsExpand = useCallback(
-    () => tableInstance.getRowModel().rows.some((row) => row.getCanExpand()),
-    [tableInstance.getRowModel().rows],
-  );
-
   const getIsSomeRowsExpanded = useCallback(
     () => tableInstance.getRowModel().rows.some((row) => row.getIsExpanded()),
     [tableInstance.getRowModel().rows],
@@ -263,7 +257,6 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
       value={
         {
           ...props,
-          getCanSomeRowsExpand,
           getIsSomeRowsExpanded,
           idPrefix,
           setCurrentEditingRow,

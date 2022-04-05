@@ -23,7 +23,7 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
   return (
     <IconButton
       aria-label={localization.expand}
-      disabled={!row.getCanExpand()}
+      disabled={!row.getCanExpand() && !renderDetailPanel}
       title={localization.expand}
       onClick={handleToggleExpand}
     >

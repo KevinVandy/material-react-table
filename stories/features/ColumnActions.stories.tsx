@@ -67,3 +67,70 @@ export const ColumnActionsDisabled: Story<MaterialReactTableProps> = () => (
     enableColumnActions={false}
   />
 );
+
+export const ColumnActionsDisabledPerColumn: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        id: 'firstName',
+      },
+      {
+        header: 'Last Name',
+        id: 'lastName',
+      },
+      {
+        header: 'Address',
+        id: 'address',
+        enableColumnActions: false,
+      },
+      {
+        header: 'State',
+        id: 'state',
+        enableColumnActions: false,
+      },
+      {
+        header: 'Phone Number',
+        id: 'phoneNumber',
+        enableColumnActions: false,
+      },
+    ]}
+    data={data}
+  />
+);
+
+export const ColumnActionsEnabledPerColumn: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        id: 'firstName',
+      },
+      {
+        header: 'Last Name',
+        id: 'lastName',
+      },
+      {
+        header: 'Address',
+        id: 'address',
+        enableColumnActions: true,
+      },
+      {
+        header: 'State',
+        id: 'state',
+        enableColumnActions: true,
+      },
+      {
+        header: 'Phone Number',
+        id: 'phoneNumber',
+        enableColumnActions: true,
+      },
+    ]}
+    data={data}
+    enableColumnActions={false}
+  />
+);

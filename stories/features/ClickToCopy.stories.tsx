@@ -10,7 +10,7 @@ const meta: Meta = {
   title: 'Features/Click to Copy',
   parameters: {
     status: {
-      type: 'beta',
+      type: 'stable',
     },
   },
 };
@@ -55,4 +55,76 @@ const data = [...Array(100)].map((_) => ({
 
 export const ClickToCopyEnabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableClickToCopy />
+);
+
+export const ClickToCopyEnabledPerColumn: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        id: 'firstName',
+      },
+      {
+        header: 'Last Name',
+        id: 'lastName',
+      },
+      {
+        header: 'Email Address',
+        id: 'email',
+        enableClickToCopy: true,
+      },
+      {
+        header: 'Address',
+        id: 'address',
+      },
+      {
+        header: 'City',
+        id: 'city',
+      },
+      {
+        header: 'State',
+        id: 'state',
+      },
+    ]}
+    data={data}
+  />
+);
+
+export const ClickToCopyDisabledPerColumn: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        id: 'firstName',
+      },
+      {
+        header: 'Last Name',
+        id: 'lastName',
+      },
+      {
+        header: 'Email Address',
+        id: 'email',
+      },
+      {
+        header: 'Address',
+        id: 'address',
+      },
+      {
+        header: 'City',
+        id: 'city',
+        enableClickToCopy: false,
+      },
+      {
+        header: 'State',
+        id: 'state',
+        enableClickToCopy: false,
+      },
+    ]}
+    data={data}
+    enableClickToCopy
+  />
 );
