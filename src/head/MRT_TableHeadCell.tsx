@@ -116,7 +116,12 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
           : header.column.isDisplayColumn
           ? '0.5rem 0.75rem'
           : '1rem',
-        pt: isDensePadding ? '0.75rem' : '1.25rem',
+        pt: header.column.isDisplayColumn
+          ? 0
+          : isDensePadding
+          ? '0.75rem'
+          : '1.25rem',
+        pb: header.column.isDisplayColumn ? 0 : undefined,
         transition: `all ${enableColumnResizing ? 0 : '0.2s'} ease-in-out`,
         verticalAlign: 'text-top',
         width: header.getWidth(),

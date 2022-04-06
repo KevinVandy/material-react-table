@@ -29,10 +29,11 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
   setAnchorEl,
 }) => {
   const {
-    enableHiding,
     enableColumnFilters,
-    enableSorting,
+    enableColumnPinning,
     enableGrouping,
+    enableHiding,
+    enableSorting,
     icons: {
       ArrowRightIcon,
       ClearAllIcon,
@@ -40,6 +41,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       DynamicFeedIcon,
       FilterListIcon,
       FilterListOffIcon,
+      PushPinIcon,
       SortIcon,
       VisibilityOffIcon,
     },
@@ -75,6 +77,10 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
   const handleHideColumn = () => {
     header.column.toggleVisibility(false);
     setAnchorEl(null);
+  };
+
+  const handlePinColumn = (pinDirection: 'left' | 'right' | false) => {
+    header.column.pin(pinDirection);
   };
 
   const handleGroupByColumn = () => {
@@ -230,7 +236,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       {enableGrouping &&
         header.column.getCanGroup() && [
           <MenuItem
-            divider={enableHiding}
+            divider={enableColumnPinning}
             key={0}
             onClick={handleGroupByColumn}
             sx={commonMenuItemStyles}
@@ -244,6 +250,49 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
                   ? 'ungroupByColumn'
                   : 'groupByColumn'
               ]?.replace('{column}', String(header.column.header))}
+            </Box>
+          </MenuItem>,
+        ]}
+      {enableColumnPinning &&
+        header.column.getCanPin() && [
+          <MenuItem
+            disabled={header.column.getIsPinned() === 'left'}
+            key={0}
+            onClick={() => handlePinColumn('left')}
+            sx={commonMenuItemStyles}
+          >
+            <Box sx={commonListItemStyles}>
+              <ListItemIcon>
+                <PushPinIcon style={{ transform: 'rotate(90deg)' }} />
+              </ListItemIcon>
+              {localization.pinToLeft}
+            </Box>
+          </MenuItem>,
+          <MenuItem
+            disabled={header.column.getIsPinned() === 'right'}
+            key={0}
+            onClick={() => handlePinColumn('right')}
+            sx={commonMenuItemStyles}
+          >
+            <Box sx={commonListItemStyles}>
+              <ListItemIcon>
+                <PushPinIcon style={{ transform: 'rotate(-90deg)' }} />
+              </ListItemIcon>
+              {localization.pinToRight}
+            </Box>
+          </MenuItem>,
+          <MenuItem
+            disabled={!header.column.getIsPinned()}
+            divider={enableHiding}
+            key={0}
+            onClick={() => handlePinColumn(false)}
+            sx={commonMenuItemStyles}
+          >
+            <Box sx={commonListItemStyles}>
+              <ListItemIcon>
+                <PushPinIcon />
+              </ListItemIcon>
+              {localization.unpin}
             </Box>
           </MenuItem>,
         ]}

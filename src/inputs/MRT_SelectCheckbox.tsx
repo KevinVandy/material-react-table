@@ -79,6 +79,10 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
         }}
         size={isDensePadding ? 'small' : 'medium'}
         {...checkboxProps}
+        sx={{
+          height: isDensePadding ? '1.75rem' : '2.25rem',
+          width: isDensePadding ? '1.75rem' : '2.25rem',
+        }}
         onChange={handleSelectChange}
         title={undefined}
       />

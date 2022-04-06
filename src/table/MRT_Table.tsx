@@ -5,9 +5,11 @@ import { MRT_TableBody } from '../body/MRT_TableBody';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
 import { useMRT } from '../useMRT';
 
-interface Props {}
+interface Props {
+  pinned: 'left' | 'center' | 'right' | 'none';
+}
 
-export const MRT_Table: FC<Props> = () => {
+export const MRT_Table: FC<Props> = ({ pinned }) => {
   const {
     enableStickyHeader,
     hideTableFooter,
@@ -29,9 +31,9 @@ export const MRT_Table: FC<Props> = () => {
 
   return (
     <Table stickyHeader={enableStickyHeader} {...tableProps}>
-      {!hideTableHead && <MRT_TableHead />}
-      <MRT_TableBody />
-      {!hideTableFooter && <MRT_TableFooter />}
+      {!hideTableHead && <MRT_TableHead pinned={pinned} />}
+      <MRT_TableBody pinned={pinned} />
+      {!hideTableFooter && <MRT_TableFooter pinned={pinned} />}
     </Table>
   );
 };

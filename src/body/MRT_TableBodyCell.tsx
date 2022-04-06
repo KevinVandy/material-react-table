@@ -12,6 +12,7 @@ interface Props {
 export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
   const {
     enableClickToCopy,
+    enableColumnPinning,
     isLoading,
     muiTableBodyCellProps,
     muiTableBodyCellSkeletonProps,
@@ -20,13 +21,18 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
     tableInstance: { getState },
   } = useMRT();
 
-  const { currentEditingRow, isDensePadding } = getState();
+  const { columnPinning, currentEditingRow, isDensePadding } = getState();
 
   const skeletonWidth = useMemo(
     () =>
       Math.random() * (cell.column.getWidth() - cell.column.getWidth() / 3) +
       cell.column.getWidth() / 3,
     [cell.column.getWidth()],
+  );
+
+  const getIsSomeColumnPinned = useMemo(
+    () => !!columnPinning.left?.length || !!columnPinning.right?.length,
+    [columnPinning.left, columnPinning.right],
   );
 
   const mTableCellBodyProps =
@@ -64,7 +70,10 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
             ? `${cell.row.depth + (isDensePadding ? 0.5 : 0.75)}rem`
             : undefined,
         transition: 'all 0.2s ease-in-out',
-        whiteSpace: isDensePadding ? 'nowrap' : 'normal',
+        whiteSpace:
+          isDensePadding || (enableColumnPinning && getIsSomeColumnPinned)
+            ? 'nowrap'
+            : 'normal',
         //@ts-ignore
         ...tableCellProps?.sx,
       }}

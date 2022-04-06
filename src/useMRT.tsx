@@ -82,11 +82,11 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
     props.initialState?.showSearch ?? false,
   );
 
-  const [pagination, setPagination] = useState<PaginationState>(() => ({
+  const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: props.initialState?.pagination?.pageIndex ?? 0,
     pageSize: props.initialState?.pagination?.pageSize ?? 10,
     pageCount: props.initialState?.pagination?.pageCount ?? -1,
-  }));
+  });
 
   // const [currentFilterTypes, setCurrentFilterTypes] = useState<{
   //   [key: string]: MRT_FilterType;
@@ -230,6 +230,7 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
       setPagination((old) => functionalUpdate(updater, old)),
     sortRowsFn,
     state: {
+      ...props.initialState,
       currentEditingRow,
       isDensePadding,
       isFullScreen,

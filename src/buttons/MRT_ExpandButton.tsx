@@ -13,7 +13,10 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
     localization,
     onRowExpandChange,
     renderDetailPanel,
+    tableInstance: { getState },
   } = useMRT();
+
+  const { isDensePadding } = getState();
 
   const handleToggleExpand = (event: MouseEvent<HTMLButtonElement>) => {
     row.toggleExpanded();
@@ -26,6 +29,10 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
       disabled={!row.getCanExpand() && !renderDetailPanel}
       title={localization.expand}
       onClick={handleToggleExpand}
+      sx={{
+        height: isDensePadding ? '1.75rem' : '2.25rem',
+        width: isDensePadding ? '1.75rem' : '2.25rem',
+      }}
     >
       <ExpandMoreIcon
         style={{

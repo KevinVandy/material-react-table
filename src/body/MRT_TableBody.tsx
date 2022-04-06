@@ -3,9 +3,11 @@ import { TableBody } from '@mui/material';
 import { MRT_TableBodyRow } from './MRT_TableBodyRow';
 import { useMRT } from '../useMRT';
 
-interface Props {}
+interface Props {
+  pinned: 'left' | 'center' | 'right' | 'none';
+}
 
-export const MRT_TableBody: FC<Props> = () => {
+export const MRT_TableBody: FC<Props> = ({ pinned }) => {
   const {
     enablePagination,
     muiTableBodyProps,
@@ -34,7 +36,11 @@ export const MRT_TableBody: FC<Props> = () => {
   return (
     <TableBody {...tableBodyProps}>
       {rows.map((row) => (
-        <MRT_TableBodyRow key={row.getRowProps().key} row={row} />
+        <MRT_TableBodyRow
+          key={row.getRowProps().key}
+          pinned={pinned}
+          row={row}
+        />
       ))}
     </TableBody>
   );

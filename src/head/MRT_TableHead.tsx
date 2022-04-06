@@ -4,15 +4,28 @@ import { MRT_TableHeadRow } from './MRT_TableHeadRow';
 import { useMRT } from '../useMRT';
 import type { MRT_HeaderGroup } from '..';
 
-interface Props {}
+interface Props {
+  pinned: 'left' | 'center' | 'right' | 'none';
+}
 
-export const MRT_TableHead: FC<Props> = () => {
+export const MRT_TableHead: FC<Props> = ({ pinned }) => {
   const {
-    idPrefix,
     muiTableHeadProps,
     tableInstance,
-    tableInstance: { getHeaderGroups },
+    tableInstance: {
+      getCenterHeaderGroups,
+      getHeaderGroups,
+      getLeftHeaderGroups,
+      getRightHeaderGroups,
+    },
   } = useMRT();
+
+  const getHeaderGroupsMap = {
+    center: getCenterHeaderGroups,
+    left: getLeftHeaderGroups,
+    none: getHeaderGroups,
+    right: getRightHeaderGroups,
+  };
 
   const tableHeadProps =
     muiTableHeadProps instanceof Function
@@ -20,8 +33,8 @@ export const MRT_TableHead: FC<Props> = () => {
       : muiTableHeadProps;
 
   return (
-    <TableHead id={`mrt-${idPrefix}-table-head`} {...tableHeadProps}>
-      {getHeaderGroups().map((headerGroup) => (
+    <TableHead {...tableHeadProps}>
+      {getHeaderGroupsMap[pinned]().map((headerGroup) => (
         <MRT_TableHeadRow
           key={headerGroup.getHeaderGroupProps().key}
           headerGroup={headerGroup as MRT_HeaderGroup}

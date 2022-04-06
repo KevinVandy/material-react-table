@@ -209,10 +209,19 @@ export type MRT_HeaderGroup<D extends Record<string, any> = {}> = Omit<
 
 export type MRT_Row<D extends Record<string, any> = {}> = Omit<
   Row<D>,
-  'getVisibleCells' | 'getAllCells' | 'subRows' | 'original'
+  | 'getVisibleCells'
+  | 'getAllCells'
+  | 'subRows'
+  | 'original'
+  | 'getLeftVisibleCells'
+  | 'getRightVisibleCells'
+  | 'getCenterVisibleCells'
 > & {
-  getVisibleCells: () => MRT_Cell<D>[];
   getAllCells: () => MRT_Cell<D>[];
+  getCenterVisibleCells: () => MRT_Cell<D>[];
+  getLeftVisibleCells: () => MRT_Cell<D>[];
+  getRightVisibleCells: () => MRT_Cell<D>[];
+  getVisibleCells: () => MRT_Cell<D>[];
   subRows?: MRT_Row<D>[];
   original: D;
 };
@@ -231,6 +240,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
   MRT_TableOptions<D> & {
     enableClickToCopy?: boolean;
     enableColumnActions?: boolean;
+    enableColumnPinning?: boolean;
     enableDensePaddingToggle?: boolean;
     enableExpandAll?: boolean;
     enableFullScreenToggle?: boolean;

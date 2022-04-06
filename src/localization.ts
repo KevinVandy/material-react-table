@@ -30,12 +30,14 @@ export interface MRT_Localization {
   groupedBy: string;
   hideAll: string;
   hideColumn: string;
+  pinToLeft: string;
+  pinToRight: string;
   rowActions: string;
   rowNumbers: string;
   save: string;
   search: string;
-  selectedCountOfRowCountRowsSelected: string;
   select: string;
+  selectedCountOfRowCountRowsSelected: string;
   showAll: string;
   showAllColumns: string;
   showHideColumns: string;
@@ -49,6 +51,7 @@ export interface MRT_Localization {
   toggleSelectAll: string;
   toggleSelectRow: string;
   ungroupByColumn: string;
+  unpin: string;
 }
 
 export const MRT_DefaultLocalization_EN: MRT_Localization = {
@@ -83,12 +86,15 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   groupedBy: 'Grouped by ',
   hideAll: 'Hide all',
   hideColumn: 'Hide {column} column',
+  pinToLeft: 'Pin to left',
+  pinToRight: 'Pin to right',
   rowActions: 'Row Actions',
   rowNumbers: 'Row Numbers',
   save: 'Save',
   search: 'Search',
   selectedCountOfRowCountRowsSelected:
     '{selectedCount} of {rowCount} row(s) selected',
+
   select: 'Select',
   showAll: 'Show all',
   showAllColumns: 'Show all columns',
@@ -103,4 +109,5 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   toggleSelectAll: 'Toggle select all',
   toggleSelectRow: 'Toggle select row',
   ungroupByColumn: 'Ungroup by {column}',
+  unpin: 'Unpin',
 };
