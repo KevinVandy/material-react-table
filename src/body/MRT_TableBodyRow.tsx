@@ -11,12 +11,7 @@ interface Props<D extends Record<string, any> = {}> {
 }
 
 export const MRT_TableBodyRow: FC<Props> = ({ pinned, row }) => {
-  const {
-    muiTableBodyRowProps,
-    onRowClick,
-    renderDetailPanel,
-    tableInstance: { getState },
-  } = useMRT();
+  const { muiTableBodyRowProps, onRowClick, renderDetailPanel } = useMRT();
 
   const {
     getCenterVisibleCells,
@@ -34,8 +29,6 @@ export const MRT_TableBodyRow: FC<Props> = ({ pinned, row }) => {
     none: getVisibleCells,
     right: getRightVisibleCells,
   };
-
-  const { columnPinning } = getState();
 
   const mTableBodyRowProps =
     muiTableBodyRowProps instanceof Function
