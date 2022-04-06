@@ -12,8 +12,8 @@ export const MRT_CopyButton: FC<Props> = ({ cell, children }) => {
 
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = (text: string) => {
-    navigator.clipboard.writeText(text);
+  const handleCopy = (text: unknown) => {
+    navigator.clipboard.writeText(text as string);
     setCopied(true);
     setTimeout(() => setCopied(false), 4000);
   };

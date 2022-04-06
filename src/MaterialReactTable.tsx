@@ -5,6 +5,7 @@ import {
   CheckboxProps,
   IconButtonProps,
   LinearProgressProps,
+  PaperProps,
   SkeletonProps,
   TableBodyProps,
   TableCellProps,
@@ -20,238 +21,225 @@ import {
 import {
   Cell,
   Column,
-  ColumnInstance,
+  ColumnDef,
+  DefaultGenerics,
   FilterType,
-  ColumnInterface,
+  Header,
   HeaderGroup,
+  Options,
+  Overwrite,
+  PaginationState,
   Row,
   TableInstance,
-  TableOptions,
   TableState,
-  UseColumnOrderInstanceProps,
-  UseColumnOrderState,
-  UseExpandedInstanceProps,
-  UseExpandedOptions,
-  UseExpandedRowProps,
-  UseExpandedState,
-  UseFiltersColumnOptions,
-  UseFiltersColumnProps,
-  UseFiltersInstanceProps,
-  UseFiltersOptions,
-  UseFiltersState,
-  UseGlobalFiltersColumnOptions,
-  UseGlobalFiltersInstanceProps,
-  UseGlobalFiltersOptions,
-  UseGlobalFiltersState,
-  UseGroupByCellProps,
-  UseGroupByColumnOptions,
-  UseGroupByColumnProps,
-  UseGroupByInstanceProps,
-  UseGroupByOptions,
-  UseGroupByRowProps,
-  UseGroupByState,
-  UsePaginationInstanceProps,
-  UsePaginationOptions,
-  UsePaginationState,
-  UseResizeColumnsColumnOptions,
-  UseResizeColumnsColumnProps,
-  UseResizeColumnsOptions,
-  UseResizeColumnsState,
-  UseRowSelectInstanceProps,
-  UseRowSelectOptions,
-  UseRowSelectRowProps,
-  UseRowSelectState,
-  UseRowStateCellProps,
-  UseRowStateInstanceProps,
-  UseRowStateOptions,
-  UseRowStateRowProps,
-  UseRowStateState,
-  UseSortByColumnOptions,
-  UseSortByColumnProps,
-  UseSortByInstanceProps,
-  UseSortByOptions,
-  UseSortByState,
-  UseTableHeaderGroupProps,
-  UseTableInstanceProps,
-  UseTableOptions,
-} from 'react-table';
+} from '@tanstack/react-table';
 import { MaterialReactTableProvider } from './useMRT';
-import { MRT_TableContainer } from './table/MRT_TableContainer';
 import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_FILTER_TYPE } from './enums';
-import { defaultFilterFNs } from './filtersFNs';
+import { MRT_TablePaper } from './table/MRT_TablePaper';
 
-export type MRT_TableOptions<D extends {} = {}> = TableOptions<D> &
-  UseExpandedOptions<D> &
-  UseFiltersOptions<D> &
-  UseGlobalFiltersOptions<D> &
-  UseGroupByOptions<D> &
-  UsePaginationOptions<D> &
-  UseResizeColumnsOptions<D> &
-  UseRowSelectOptions<D> &
-  UseRowStateOptions<D> &
-  UseSortByOptions<D> & {
-    columns: MRT_ColumnInterface[];
-    data: D[];
-    initialState?: Partial<MRT_TableState>;
-  };
+export type MRT_TableOptions<D extends Record<string, any> = {}> = Partial<
+  Omit<
+    Options<D>,
+    'columns' | 'data' | 'initialState' | 'state' | 'expandRowsFn'
+  >
+> & {
+  columns: MRT_ColumnInterface<D>[];
+  data: D[];
+  initialState?: Partial<MRT_TableState<D>>;
+  state?: Partial<MRT_TableState<D>>;
+  expandRowsFn?: (dataRow: D) => D[];
+};
 
-export type MRT_TableInstance<D extends {} = {}> = TableInstance<D> &
-  UseTableInstanceProps<D> &
-  UseColumnOrderInstanceProps<D> &
-  UseExpandedInstanceProps<D> &
-  UseFiltersInstanceProps<D> &
-  UseGlobalFiltersInstanceProps<D> &
-  UseGroupByInstanceProps<D> &
-  UsePaginationInstanceProps<D> &
-  UseRowSelectInstanceProps<D> &
-  UseRowStateInstanceProps<D> &
-  UseSortByInstanceProps<D> & {
-    columns: (Column<D> & MRT_ColumnInstance<D>)[];
-    footerGroups: MRT_HeaderGroup<D>[];
-    getToggleAllRowsExpandedProps: () => void;
-    headerGroups: MRT_HeaderGroup<D>[];
-    page: MRT_Row<D>[];
-    resetResizing: () => void;
-    rows: MRT_Row<D>[];
-    selectedFlatRows: MRT_Row<D>[];
-    state: MRT_TableState<D>;
-  };
+export interface MRT_RowModel<D extends Record<string, any> = {}> {
+  flatRows: MRT_Row<D>[];
+  rows: MRT_Row<D>[];
+  rowsById: { [key: string]: MRT_Row<D> };
+}
 
-export type MRT_ColumnInterface<D extends {} = {}> = ColumnInterface<D> &
-  UseFiltersColumnOptions<D> &
-  UseGlobalFiltersColumnOptions<D> &
-  UseGroupByColumnOptions<D> &
-  UseResizeColumnsColumnOptions<D> &
-  UseSortByColumnOptions<D> & {
-    Edit?: ({
-      cell,
-      onChange,
-    }: {
-      cell: MRT_Cell<D>;
-      onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-    }) => ReactNode;
-    Filter?: ({ column }: { column: MRT_HeaderGroup<D> }) => ReactNode;
-    Footer?: string;
-    Header?: string;
-    accessor?: string;
-    columns?: MRT_ColumnInterface<D>[];
-    disableClickToCopy?: boolean;
-    disableColumnActions?: boolean;
-    disableColumnHiding?: boolean;
-    disableEditing?: boolean;
-    disableFilters?: boolean;
-    enabledFilterTypes?: (MRT_FILTER_TYPE | string)[];
-    filter?: MRT_FilterType | string | FilterType<D>;
-    filterSelectOptions?: (string | { text: string; value: string })[];
-    muiTableBodyCellCopyButtonProps?:
-      | ButtonProps
-      | ((cell?: MRT_Cell<D>) => ButtonProps);
-    muiTableBodyCellEditTextFieldProps?:
-      | TextFieldProps
-      | ((cell: MRT_Cell<D>) => TextFieldProps);
-    muiTableBodyCellProps?:
-      | TableCellProps
-      | ((cell: MRT_Cell<D>) => TableCellProps);
-    muiTableFooterCellProps?:
-      | TableCellProps
-      | ((column: Column<D>) => TableCellProps);
-    muiTableHeadCellColumnActionsButtonProps?:
-      | IconButtonProps
-      | ((column: Column<D>) => IconButtonProps);
-    muiTableHeadCellFilterTextFieldProps?:
-      | TextFieldProps
-      | ((column: Column<D>) => TextFieldProps);
-    muiTableHeadCellProps?:
-      | TableCellProps
-      | ((column: Column<D>) => TableCellProps);
-    onCellEditChange?: (
-      event: ChangeEvent<HTMLInputElement>,
-      cell: MRT_Cell<D>,
-    ) => void;
-    onFilterChange?: (
-      event: ChangeEvent<HTMLInputElement>,
-      filterValue: any,
-    ) => void;
-  };
+export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
+  TableInstance<
+    Overwrite<
+      Partial<DefaultGenerics>,
+      {
+        Row: D;
+      }
+    >
+  >,
+  | 'getAllColumns'
+  | 'getAllLeafColumns'
+  | 'getExpandedRowModel'
+  | 'getPaginationRowModel'
+  | 'getPrePaginationRowModel'
+  | 'getRowModel'
+  | 'getSelectedRowModel'
+  | 'getState'
+> & {
+  getAllColumns: () => MRT_ColumnInstance<D>[];
+  getAllLeafColumns: () => MRT_ColumnInstance<D>[];
+  getExpandedRowModel: () => MRT_RowModel;
+  getPaginationRowModel: () => MRT_RowModel;
+  getPrePaginationRowModel: () => MRT_RowModel;
+  getRowModel: () => MRT_RowModel;
+  getSelectedRowModel: () => MRT_RowModel;
+  getState: () => MRT_TableState<D>;
+};
 
-export type MRT_ColumnInstance<D extends {} = {}> = ColumnInstance<D> &
-  UseFiltersColumnProps<D> &
-  UseGroupByColumnProps<D> &
-  UseResizeColumnsColumnProps<D> &
-  UseSortByColumnProps<D> &
+export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
+  TableState,
+  'pagination'
+> & {
+  currentEditingRow: MRT_Row<D> | null;
+  isDensePadding: boolean;
+  isFullScreen: boolean;
+  showFilters: boolean;
+  showSearch: boolean;
+  pagination: Partial<PaginationState>;
+};
+
+export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
+  ColumnDef<D>,
+  'header' | 'footer' | 'columns'
+> & {
+  Edit?: ({
+    cell,
+    tableInstance,
+    onChange,
+  }: {
+    cell: MRT_Cell<D>;
+    tableInstance: MRT_TableInstance<D>;
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  }) => ReactNode;
+  Filter?: ({
+    header,
+    tableInstance,
+    onChange,
+  }: {
+    header: MRT_Header<D>;
+    tableInstance: MRT_TableInstance<D>;
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  }) => ReactNode;
+  Footer?: ({
+    footer,
+    tableInstance,
+  }: {
+    footer: MRT_Header<D>;
+    tableInstance: MRT_TableInstance<D>;
+  }) => ReactNode;
+  Header?: ({
+    header,
+    tableInstance,
+  }: {
+    header: MRT_Header<D>;
+    tableInstance: MRT_TableInstance<D>;
+  }) => ReactNode;
+  Cell?: ({
+    cell,
+    tableInstance,
+  }: {
+    cell: MRT_Cell<D>;
+    tableInstance: MRT_TableInstance<D>;
+  }) => ReactNode;
+  isDisplayColumn?: boolean;
+  id: keyof D | string;
+  columns?: MRT_ColumnInterface<D>[];
+  enableClickToCopy?: boolean;
+  enableColumnActions?: boolean;
+  enableEditing?: boolean;
+  enableColumnFilters?: boolean;
+  enableHiding?: boolean;
+  enabledFilterTypes?: (MRT_FILTER_TYPE | string)[];
+  filter?: MRT_FilterType | string | FilterType<D>;
+  filterSelectOptions?: (string | { text: string; value: string })[];
+  footer?: string;
+  header: string;
+  muiTableBodyCellCopyButtonProps?:
+    | ButtonProps
+    | ((cell?: MRT_Cell<D>) => ButtonProps);
+  muiTableBodyCellEditTextFieldProps?:
+    | TextFieldProps
+    | ((cell: MRT_Cell<D>) => TextFieldProps);
+  muiTableBodyCellProps?:
+    | TableCellProps
+    | ((cell: MRT_Cell<D>) => TableCellProps);
+  muiTableFooterCellProps?:
+    | TableCellProps
+    | ((column: MRT_ColumnInstance<D>) => TableCellProps);
+  muiTableHeadCellColumnActionsButtonProps?:
+    | IconButtonProps
+    | ((column: MRT_ColumnInstance<D>) => IconButtonProps);
+  muiTableHeadCellFilterTextFieldProps?:
+    | TextFieldProps
+    | ((column: MRT_ColumnInstance<D>) => TextFieldProps);
+  muiTableHeadCellProps?:
+    | TableCellProps
+    | ((column: MRT_ColumnInstance<D>) => TableCellProps);
+  onCellEditChange?: (
+    event: ChangeEvent<HTMLInputElement>,
+    cell: MRT_Cell<D>,
+  ) => void;
+  onFilterChange?: (
+    event: ChangeEvent<HTMLInputElement>,
+    filterValue: any,
+  ) => void;
+};
+
+export type MRT_ColumnInstance<D extends Record<string, any> = {}> = Omit<
+  Column<D>,
+  'header' | 'footer' | 'columns'
+> &
   MRT_ColumnInterface<D> & {
     columns?: MRT_ColumnInstance<D>[];
   };
 
-export type MRT_HeaderGroup<D extends {} = {}> = HeaderGroup<D> &
-  MRT_ColumnInstance<D> &
-  UseTableHeaderGroupProps<D> & {
-    headers: MRT_HeaderGroup<D>[];
-  };
+export type MRT_Header<D extends Record<string, any> = {}> = Omit<
+  Header<D>,
+  'column'
+> & {
+  column: MRT_ColumnInstance<D>;
+};
 
-export type MRT_Row<D extends {} = {}> = Row<D> &
-  UseExpandedRowProps<D> &
-  UseGroupByRowProps<D> &
-  UseRowSelectRowProps<D> &
-  UseRowStateRowProps<D> & {
-    cells: MRT_Cell<D>[];
-  };
+export type MRT_HeaderGroup<D extends Record<string, any> = {}> = Omit<
+  HeaderGroup<D>,
+  'headers'
+> & {
+  headers: MRT_Header<D>[];
+};
 
-export type MRT_Cell<D extends {} = {}, _V = any> = Cell<D> &
-  UseGroupByCellProps<D> &
-  UseRowStateCellProps<D> & {
-    column: MRT_ColumnInstance<D>;
-  };
+export type MRT_Row<D extends Record<string, any> = {}> = Omit<
+  Row<D>,
+  'getVisibleCells' | 'getAllCells' | 'subRows' | 'original'
+> & {
+  getVisibleCells: () => MRT_Cell<D>[];
+  getAllCells: () => MRT_Cell<D>[];
+  subRows?: MRT_Row<D>[];
+  original: D;
+};
+
+export type MRT_Cell<D extends Record<string, any> = {}> = Omit<
+  Cell<D>,
+  'column' | 'row'
+> & {
+  column: MRT_ColumnInstance<D>;
+  row: MRT_Row<D>;
+};
 
 export type MRT_FilterType = MRT_FILTER_TYPE | Function;
 
-export type MRT_TableState<D extends {} = {}> = TableState<D> &
-  UseColumnOrderState<D> &
-  UseExpandedState<D> &
-  UseFiltersState<D> &
-  UseGlobalFiltersState<D> &
-  UseGroupByState<D> &
-  UsePaginationState<D> &
-  UseResizeColumnsState<D> &
-  UseRowSelectState<D> &
-  UseRowStateState<D> &
-  UseSortByState<D> & {
-    currentEditingRow: MRT_Row<D> | null;
-    currentFilterTypes: { [key: string]: MRT_FilterType };
-    currentGlobalFilterType: MRT_FilterType;
-    densePadding: boolean;
-    fullScreen: boolean;
-    showFilters: boolean;
-    showSearch: boolean;
-  };
-
-export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
-  UseExpandedOptions<D> &
-  UseFiltersOptions<D> &
-  UseGlobalFiltersOptions<D> &
-  UseGroupByOptions<D> &
-  UsePaginationOptions<D> &
-  UseResizeColumnsOptions<D> &
-  UseRowSelectOptions<D> &
-  UseRowStateOptions<D> &
-  UseSortByOptions<D> &
+export type MaterialReactTableProps<D extends Record<string, any> = {}> =
   MRT_TableOptions<D> & {
-    disableColumnActions?: boolean;
-    disableColumnHiding?: boolean;
-    disableDensePaddingToggle?: boolean;
-    disableExpandAll?: boolean;
-    disableFullScreenToggle?: boolean;
-    disableSelectAll?: boolean;
-    disableSubRowTree?: boolean;
     enableClickToCopy?: boolean;
-    enableColumnGrouping?: boolean;
-    enableColumnResizing?: boolean;
+    enableColumnActions?: boolean;
+    enableDensePaddingToggle?: boolean;
+    enableExpandAll?: boolean;
+    enableFullScreenToggle?: boolean;
+    enablePagination?: boolean;
     enableRowActions?: boolean;
+    enableStickyHeader?: boolean;
     enableRowEditing?: boolean;
     enableRowNumbers?: boolean;
-    enableSelection?: boolean;
+    enableSelectAll?: boolean;
     enabledGlobalFilterTypes?: (MRT_FILTER_TYPE | string)[];
     filterTypes?: { [key in MRT_FILTER_TYPE]: any };
     hideTableFooter?: boolean;
@@ -299,7 +287,7 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
       | ((row: MRT_Row<D>) => TableCellProps);
     muiTableFooterCellProps?:
       | TableCellProps
-      | ((column: Column<D>) => TableCellProps);
+      | ((column: MRT_ColumnInstance<D>) => TableCellProps);
     muiTableFooterProps?:
       | TableFooterProps
       | ((tableInstance: MRT_TableInstance<D>) => TableFooterProps);
@@ -308,19 +296,22 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
       | ((footerGroup: MRT_HeaderGroup<D>) => TableRowProps);
     muiTableHeadCellColumnActionsButtonProps?:
       | IconButtonProps
-      | ((column: Column<D>) => IconButtonProps);
+      | ((column: MRT_ColumnInstance<D>) => IconButtonProps);
     muiTableHeadCellFilterTextFieldProps?:
       | TextFieldProps
-      | ((column: Column<D>) => TextFieldProps);
+      | ((column: MRT_ColumnInstance<D>) => TextFieldProps);
     muiTableHeadCellProps?:
       | TableCellProps
-      | ((column: Column<D>) => TableCellProps);
+      | ((column: MRT_ColumnInstance<D>) => TableCellProps);
     muiTableHeadProps?:
       | TableHeadProps
       | ((tableInstance: MRT_TableInstance<D>) => TableHeadProps);
     muiTableHeadRowProps?:
       | TableRowProps
-      | ((row: MRT_HeaderGroup<D>) => TableRowProps);
+      | ((headerGroup: MRT_HeaderGroup<D>) => TableRowProps);
+    muiTablePaperProps?:
+      | PaperProps
+      | ((tableInstance: MRT_TableInstance<D>) => PaperProps);
     muiTablePaginationProps?:
       | Partial<TablePaginationProps>
       | ((
@@ -342,7 +333,10 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
       event: MouseEvent<HTMLTableCellElement>,
       cell: MRT_Cell<D>,
     ) => void;
-    onColumnHide?: (column: Column<D>, hiddenColumns?: string[]) => void;
+    onColumnHide?: (
+      column: MRT_ColumnInstance<D>,
+      hiddenColumns?: string[],
+    ) => void;
     onDetailPanelClick?: (
       event: MouseEvent<HTMLTableCellElement>,
       row: MRT_Row<D>,
@@ -401,10 +395,19 @@ export type MaterialReactTableProps<D extends {} = {}> = UseTableOptions<D> &
     ) => ReactNode;
   };
 
-export default <D extends {} = {}>({
-  defaultColumn = { minWidth: 50, maxWidth: 1000 },
+export default <D extends Record<string, any> = {}>({
+  enableColumnActions = true,
+  enableColumnFilters = true,
+  enableDensePaddingToggle = true,
+  enableExpandAll = true,
+  enableFullScreenToggle = true,
+  enableGlobalFilter = true,
+  enableHiding = true,
+  enablePagination = true,
+  enableSelectAll = true,
+  enableSorting = true,
+  enableStickyHeader = true,
   filterTypes,
-  globalFilter = MRT_FILTER_TYPE.BEST_MATCH_FIRST,
   icons,
   localization,
   positionActionsColumn = 'first',
@@ -414,12 +417,18 @@ export default <D extends {} = {}>({
   ...rest
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
-    //@ts-ignore
-    defaultColumn={defaultColumn}
-    //@ts-ignore
-    filterTypes={{ ...defaultFilterFNs, ...filterTypes }}
-    //@ts-ignore
-    globalFilter={globalFilter}
+    enableColumnActions={enableColumnActions}
+    enableColumnFilters={enableColumnFilters}
+    enableDensePaddingToggle={enableDensePaddingToggle}
+    enableExpandAll={enableExpandAll}
+    enableFullScreenToggle={enableFullScreenToggle}
+    enableGlobalFilter={enableGlobalFilter}
+    enableHiding={enableHiding}
+    enablePagination={enablePagination}
+    enableSelectAll={enableSelectAll}
+    enableSorting={enableSorting}
+    enableStickyHeader={enableStickyHeader}
+    // filterTypes={{ ...defaultFilterFNs, ...filterTypes }}
     icons={{ ...MRT_Default_Icons, ...icons }}
     localization={{ ...MRT_DefaultLocalization_EN, ...localization }}
     positionActionsColumn={positionActionsColumn}
@@ -428,6 +437,6 @@ export default <D extends {} = {}>({
     positionToolbarAlertBanner={positionToolbarAlertBanner}
     {...rest}
   >
-    <MRT_TableContainer />
+    <MRT_TablePaper />
   </MaterialReactTableProvider>
 );

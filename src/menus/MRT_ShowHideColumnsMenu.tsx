@@ -1,9 +1,7 @@
 import React, { FC } from 'react';
 import { Button, Menu, Divider, Box } from '@mui/material';
-import type { MRT_ColumnInstance } from '..';
 import { useMRT } from '../useMRT';
 import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
-import { findLowestLevelCols } from '../utils';
 
 interface Props {
   anchorEl: HTMLElement | null;
@@ -16,16 +14,24 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
   isSubMenu,
   setAnchorEl,
 }) => {
-  const { localization, tableInstance } = useMRT();
+  const {
+    localization,
+    tableInstance: {
+      getAllColumns,
+      getIsAllColumnsVisible,
+      getIsSomeColumnsVisible,
+      getState,
+      toggleAllColumnsVisible,
+      getAllLeafColumns,
+    },
+  } = useMRT();
+
+  const { isDensePadding } = getState();
 
   const hideAllColumns = () => {
-    (
-      findLowestLevelCols(
-        tableInstance.columns as MRT_ColumnInstance[],
-      ) as MRT_ColumnInstance[]
-    )
-      .filter((col: MRT_ColumnInstance) => !col.disableColumnHiding)
-      .forEach((col: MRT_ColumnInstance) => col.toggleHidden(true));
+    getAllLeafColumns()
+      .filter((col) => col.enableHiding !== false)
+      .forEach((col) => col.toggleVisibility(false));
   };
 
   return (
@@ -34,7 +40,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
       open={!!anchorEl}
       onClose={() => setAnchorEl(null)}
       MenuListProps={{
-        dense: tableInstance.state.densePadding,
+        dense: isDensePadding,
       }}
     >
       <Box
@@ -47,30 +53,39 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
       >
         {!isSubMenu && (
           <Button
-            disabled={
-              !tableInstance.getToggleHideAllColumnsProps().checked &&
-              !tableInstance.getToggleHideAllColumnsProps().indeterminate
-            }
+            disabled={!getIsSomeColumnsVisible()}
             onClick={hideAllColumns}
           >
             {localization.hideAll}
           </Button>
         )}
         <Button
-          disabled={tableInstance.getToggleHideAllColumnsProps().checked}
-          onClick={() => tableInstance.toggleHideAllColumns(false)}
+          disabled={getIsAllColumnsVisible()}
+          onClick={() => toggleAllColumnsVisible(true)}
         >
           {localization.showAll}
         </Button>
       </Box>
       <Divider />
-      {tableInstance.columns.map((column: MRT_ColumnInstance, index) => (
-        <MRT_ShowHideColumnsMenuItems
-          column={column}
-          isSubMenu={isSubMenu}
-          key={`${index}-${column.id}`}
-        />
-      ))}
+      {getAllColumns()
+        .filter((col) => col.isDisplayColumn)
+        .map((column, index) => (
+          <MRT_ShowHideColumnsMenuItems
+            column={column}
+            isSubMenu={isSubMenu}
+            key={`${index}-${column.id}`}
+          />
+        ))}
+      <Divider />
+      {getAllColumns()
+        .filter((col) => !col.isDisplayColumn)
+        .map((column, index) => (
+          <MRT_ShowHideColumnsMenuItems
+            column={column}
+            isSubMenu={isSubMenu}
+            key={`${index}-${column.id}`}
+          />
+        ))}
     </Menu>
   );
 };

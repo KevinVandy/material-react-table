@@ -18,29 +18,31 @@ export const HeaderGroups: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={[
       {
-        Header: 'Name',
+        header: 'Name',
+        id: 'name',
         columns: [
           {
-            Header: 'First Name',
-            accessor: 'firstName' as const,
+            header: 'First Name',
+            id: 'firstName',
           },
 
           {
-            Header: 'Last Name',
-            accessor: 'lastName' as const,
+            header: 'Last Name',
+            id: 'lastName',
           },
         ],
       },
       {
-        Header: 'Info',
+        header: 'Info',
+        id: 'info',
         columns: [
           {
-            Header: 'Age',
-            accessor: 'age' as const,
+            header: 'Age',
+            id: 'age',
           },
           {
-            Header: 'Address',
-            accessor: 'address' as const,
+            header: 'Address',
+            id: 'address',
           },
         ],
       },
@@ -58,35 +60,37 @@ export const HeaderAndFooterGroups: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={[
       {
-        Header: 'Name',
-        Footer: 'Name',
+        header: 'Name',
+        id: 'name',
+        footer: 'Name',
         columns: [
           {
-            Header: 'First Name',
-            Footer: 'First Name',
-            accessor: 'firstName' as const,
+            header: 'First Name',
+            footer: 'First Name',
+            id: 'firstName',
           },
 
           {
-            Header: 'Last Name',
-            Footer: 'Last Name',
-            accessor: 'lastName' as const,
+            header: 'Last Name',
+            footer: 'Last Name',
+            id: 'lastName',
           },
         ],
       },
       {
-        Header: 'Info',
-        Footer: 'Info',
+        header: 'Info',
+        id: 'info',
+        footer: 'Info',
         columns: [
           {
-            Header: 'Age',
-            Footer: 'Age',
-            accessor: 'age' as const,
+            header: 'Age',
+            footer: 'Age',
+            id: 'age',
           },
           {
-            Header: 'Address',
-            Footer: 'Address',
-            accessor: 'address' as const,
+            header: 'Address',
+            footer: 'Address',
+            id: 'address',
           },
         ],
       },

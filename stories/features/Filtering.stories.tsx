@@ -17,28 +17,28 @@ export default meta;
 
 const columns = [
   {
-    Header: 'First Name',
-    accessor: 'firstName' as const,
+    header: 'First Name',
+    id: 'firstName',
   },
   {
-    Header: 'Last Name',
-    accessor: 'lastName' as const,
+    header: 'Last Name',
+    id: 'lastName',
   },
   {
-    Header: 'Age',
-    accessor: 'age' as const,
+    header: 'Age',
+    id: 'age',
   },
   {
-    Header: 'Gender',
-    accessor: 'gender' as const,
+    header: 'Gender',
+    id: 'gender',
   },
   {
-    Header: 'Address',
-    accessor: 'address' as const,
+    header: 'Address',
+    id: 'address',
   },
   {
-    Header: 'State',
-    accessor: 'state' as const,
+    header: 'State',
+    id: 'state',
   },
 ];
 
@@ -64,37 +64,41 @@ export const FilteringEnabledAndShown: Story<MaterialReactTableProps> = () => (
 );
 
 export const FilteringDisabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} disableFilters />
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnFilters={false}
+  />
 );
 
 export const FilterTypes: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={[
       {
-        Header: 'First Name',
-        accessor: 'firstName' as const,
+        header: 'First Name',
+        id: 'firstName',
       },
       {
-        Header: 'Last Name',
-        accessor: 'lastName' as const,
+        header: 'Last Name',
+        id: 'lastName',
       },
       {
-        Header: 'Age',
-        accessor: 'age' as const,
+        header: 'Age',
+        id: 'age',
         filter: 'startsWith',
       },
       {
-        Header: 'Gender',
-        accessor: 'gender' as const,
+        header: 'Gender',
+        id: 'gender',
         filterSelectOptions: ['Male', 'Female', 'Other'],
       },
       {
-        Header: 'Address',
-        accessor: 'address' as const,
+        header: 'Address',
+        id: 'address',
       },
       {
-        Header: 'State',
-        accessor: 'state' as const,
+        header: 'State',
+        id: 'state',
         filterSelectOptions: [
           { text: 'CA', value: 'California' },
           { text: 'TX', value: 'Texas' },
@@ -114,32 +118,32 @@ export const DisableSomeFilterTypesForCertainColumns: Story<
   <MaterialReactTable
     columns={[
       {
-        Header: 'First Name',
-        accessor: 'firstName' as const,
+        header: 'First Name',
+        id: 'firstName',
       },
       {
-        Header: 'Last Name',
-        accessor: 'lastName' as const,
+        header: 'Last Name',
+        id: 'lastName',
         enabledFilterTypes: ['startsWith', 'endsWith'],
         filter: 'startsWith',
       },
       {
-        Header: 'Age',
-        accessor: 'age' as const,
+        header: 'Age',
+        id: 'age',
       },
       {
-        Header: 'Gender',
-        accessor: 'gender' as const,
+        header: 'Gender',
+        id: 'gender',
         enabledFilterTypes: ['equals', 'notEquals'],
         filter: 'equals',
       },
       {
-        Header: 'Address',
-        accessor: 'address' as const,
+        header: 'Address',
+        id: 'address',
       },
       {
-        Header: 'State',
-        accessor: 'state' as const,
+        header: 'State',
+        id: 'state',
       },
     ]}
     data={data}
@@ -153,30 +157,30 @@ export const FilteringDisabledForCertainColumns: Story<
   <MaterialReactTable
     columns={[
       {
-        Header: 'First Name',
-        accessor: 'firstName' as const,
+        header: 'First Name',
+        id: 'firstName',
       },
       {
-        Header: 'Last Name',
-        accessor: 'lastName' as const,
+        header: 'Last Name',
+        id: 'lastName',
       },
       {
-        Header: 'Age',
-        accessor: 'age' as const,
-        disableFilters: true,
+        header: 'Age',
+        id: 'age',
+        enableColumnFilter: false,
       },
       {
-        Header: 'Gender',
-        accessor: 'gender' as const,
+        header: 'Gender',
+        id: 'gender',
       },
       {
-        Header: 'Address',
-        accessor: 'address' as const,
-        disableFilters: true,
+        header: 'Address',
+        id: 'address',
+        enableColumnFilter: false,
       },
       {
-        Header: 'State',
-        accessor: 'state' as const,
+        header: 'State',
+        id: 'state',
       },
     ]}
     data={data}
@@ -188,20 +192,20 @@ export const CustomFilterFunction: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={[
       {
-        Header: 'First Name',
-        accessor: 'firstName' as const,
+        header: 'First Name',
+        id: 'firstName',
       },
       {
-        Header: 'Last Name',
-        accessor: 'lastName' as const,
+        header: 'Last Name',
+        id: 'lastName',
       },
       {
-        Header: 'Age',
-        accessor: 'age' as const,
+        header: 'Age',
+        id: 'age',
       },
       {
-        Header: 'Gender',
-        accessor: 'gender' as const,
+        header: 'Gender',
+        id: 'gender',
         filter: (rows, _columnIds, filterValue) =>
           rows.filter((row) =>
             row.values['gender']
@@ -210,12 +214,12 @@ export const CustomFilterFunction: Story<MaterialReactTableProps> = () => (
           ),
       },
       {
-        Header: 'Address',
-        accessor: 'address' as const,
+        header: 'Address',
+        id: 'address',
       },
       {
-        Header: 'State',
-        accessor: 'state' as const,
+        header: 'State',
+        id: 'state',
         filter: (rows, _columnIds, filterValue) =>
           rows.filter((row) =>
             row.values['state']
@@ -233,25 +237,27 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={[
       {
-        Header: 'First Name',
-        accessor: 'firstName' as const,
+        header: 'First Name',
+        id: 'firstName',
       },
       {
-        Header: 'Last Name',
-        accessor: 'lastName' as const,
+        header: 'Last Name',
+        id: 'lastName',
       },
       {
-        Header: 'Age',
-        accessor: 'age' as const,
+        header: 'Age',
+        id: 'age',
       },
       {
-        Header: 'Gender',
-        accessor: 'gender' as const,
-        Filter: ({ column }) => (
+        header: 'Gender',
+        id: 'gender',
+        Filter: ({ header }) => (
           <TextField
-            onChange={(e) => column.setFilter(e.target.value || undefined)}
+            onChange={(e) =>
+              header.column.setColumnFilterValue(e.target.value || undefined)
+            }
             select
-            value={column.filterValue ?? ''}
+            value={header.column.getColumnFilterValue() ?? ''}
             margin="dense"
             placeholder="Filter"
             variant="standard"
@@ -270,12 +276,12 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
           ),
       },
       {
-        Header: 'Address',
-        accessor: 'address' as const,
+        header: 'Address',
+        id: 'address',
       },
       {
-        Header: 'State',
-        accessor: 'state' as const,
+        header: 'State',
+        id: 'state',
       },
     ]}
     data={data}

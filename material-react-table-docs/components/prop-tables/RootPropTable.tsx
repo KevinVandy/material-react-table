@@ -6,8 +6,8 @@ const RootPropTable = () => {
   const columns = useMemo(
     () => [
       {
-        Header: 'Prop',
-        accessor: 'prop' as const,
+        header: 'Prop',
+        id: 'prop',
         Cell: (cell: any) =>
           cell.row.original.required ? (
             <strong>{cell.value}*</strong>
@@ -15,11 +15,11 @@ const RootPropTable = () => {
             cell.value
           ),
       },
-      { Header: 'Type', accessor: 'type' as const, disableFilters: true },
-      { Header: 'Default', accessor: 'default' as const, disableFilters: true },
+      { header: 'Type', id: 'type', disableFilters: true },
+      { header: 'Default', id: 'default', disableFilters: true },
       {
-        Header: 'Link to more info',
-        accessor: 'link' as const,
+        header: 'Link to more info',
+        id: 'link',
         disableFilters: true,
         Cell: (cell: any) => (
           <Link href={cell.value} target="_blank">
@@ -28,7 +28,7 @@ const RootPropTable = () => {
           </Link>
         ),
       },
-      { Header: 'Description', accessor: 'description' as const },
+      { header: 'Description', id: 'description' },
     ],
     [],
   );
@@ -121,7 +121,7 @@ const RootPropTable = () => {
         linkText: 'MRT click to copy docs',
       },
       {
-        prop: 'enableColumnGrouping',
+        prop: 'enableGrouping',
         type: 'boolean',
         description: 'Enable the column grouping feature',
         link: '/docs/guides/column-grouping',
@@ -149,7 +149,7 @@ const RootPropTable = () => {
         linkText: 'MRT row editing docs',
       },
       {
-        prop: 'enableSelection',
+        prop: 'enableRowSelection',
         type: 'boolean',
         description: 'Enable selection checkboxes in each row',
         link: '/docs/guides/selection',
@@ -494,7 +494,7 @@ const RootPropTable = () => {
       manualPagination
       hideToolbarBottom
       initialState={{
-        densePadding: true,
+        isDensePadding: true,
         hiddenColumns: ['default'],
         showSearch: true,
         sortBy: [{ id: 'prop', desc: false }],

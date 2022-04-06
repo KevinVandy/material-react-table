@@ -6,7 +6,6 @@ import { Button, MenuItem } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShareIcon from '@mui/icons-material/Share';
-import { TableInstance } from 'react-table';
 
 const meta: Meta = {
   title: 'Prop Playground',
@@ -21,23 +20,30 @@ const Template: Story<MaterialReactTableProps> = (
 
 export const Default = Template.bind({});
 
+interface Row {
+  firstName: string;
+  lastName: string;
+  age: number;
+  address: string;
+}
+
 Default.args = {
   columns: [
     {
-      Header: 'First Name',
-      accessor: 'firstName',
+      header: 'First Name',
+      id: 'firstName',
     },
     {
-      Header: 'Last Name',
-      accessor: 'lastName',
+      header: 'Last Name',
+      id: 'lastName',
     },
     {
-      Header: 'Age',
-      accessor: 'age',
+      header: 'Age',
+      id: 'age',
     },
     {
-      Header: 'Address',
-      accessor: 'address',
+      header: 'Address',
+      id: 'address',
     },
   ],
   data: [...Array(6)].map((_) => ({
@@ -46,27 +52,27 @@ Default.args = {
     age: faker.datatype.number(80),
     address: faker.address.streetAddress(),
   })),
-} as MaterialReactTableProps;
+} as MaterialReactTableProps<Row>;
 
 export const MinimumFeatures = Template.bind({});
 
 MinimumFeatures.args = {
   columns: [
     {
-      Header: 'First Name',
-      accessor: 'firstName',
+      header: 'First Name',
+      id: 'firstName',
     },
     {
-      Header: 'Last Name',
-      accessor: 'lastName',
+      header: 'Last Name',
+      id: 'lastName',
     },
     {
-      Header: 'Age',
-      accessor: 'age',
+      header: 'Age',
+      id: 'age',
     },
     {
-      Header: 'Address',
-      accessor: 'address',
+      header: 'Address',
+      id: 'address',
     },
   ],
   data: [...Array(6)].map((_) => ({
@@ -75,12 +81,14 @@ MinimumFeatures.args = {
     age: faker.datatype.number(80),
     address: faker.address.streetAddress(),
   })),
-  manualPagination: true,
-  hideToolbarTop: true,
+  enableColumnActions: false,
+  enablePagination: false,
+  enableSorting: false,
+  enableColumnFilters: false,
   hideToolbarBottom: true,
-  disableSortBy: true,
-  disableColumnActions: true,
-} as MaterialReactTableProps;
+  hideToolbarTop: true,
+  muiTableBodyRowProps: { hover: false },
+} as MaterialReactTableProps<Row>;
 
 const maxFeaturesData = [...Array(250)].map((_) => ({
   firstName: faker.name.firstName(),
@@ -112,56 +120,59 @@ export const MaximumFeatures = Template.bind({});
 MaximumFeatures.args = {
   columns: [
     {
-      Header: 'Name',
-      Footer: 'Name',
+      header: 'Name',
+      footer: 'Name',
+      id: 'name',
       columns: [
         {
-          Header: 'First Name',
-          Footer: 'First Name',
-          accessor: 'firstName',
+          header: 'First Name',
+          footer: 'First Name',
+          id: 'firstName',
         },
         {
-          Header: 'Last Name',
-          Footer: 'Last Name',
-          accessor: 'lastName',
+          header: 'Last Name',
+          footer: 'Last Name',
+          id: 'lastName',
         },
       ],
     },
     {
-      Header: 'Info',
-      Footer: 'Info',
+      header: 'Info',
+      footer: 'Info',
+      id: 'info',
       columns: [
         {
-          Header: 'Age',
-          Footer: 'Age',
-          accessor: 'age',
+          header: 'Age',
+          footer: 'Age',
+          id: 'age',
         },
         {
-          Header: 'Address',
-          Footer: 'Address',
-          accessor: 'address',
+          header: 'Address',
+          footer: 'Address',
+          id: 'address',
         },
         {
-          Header: 'City',
-          Footer: 'City',
-          accessor: 'city',
+          header: 'City',
+          footer: 'City',
+          id: 'city',
         },
         {
-          Header: 'State',
-          Footer: 'State',
-          accessor: 'state',
+          header: 'State',
+          footer: 'State',
+          id: 'state',
         },
       ],
     },
   ],
   data: maxFeaturesData,
   enableClickToCopy: true,
-  enableColumnGrouping: true,
-  enableColumnResizing: false,
-  enableSelection: true,
+  enableColumnResizing: true,
+  enableExpanded: true,
+  enableGrouping: true,
   enableRowActions: true,
-  enableRowNumbers: true,
   enableRowEditing: true,
+  enableRowNumbers: true,
+  enableRowSelection: true,
   renderRowActionMenuItems: (row, _tableInstance, closeMenu) => [
     <MenuItem
       key={1}
@@ -193,19 +204,19 @@ MaximumFeatures.args = {
   ],
   renderToolbarCustomActions: (tableInstance) => {
     const handleDeactivate = () => {
-      tableInstance.selectedFlatRows.map((row) => {
+      tableInstance.getSelectedRowModel().rows.map((row) => {
         console.log('deactivating ' + row.original);
       });
     };
 
     const handleActivate = () => {
-      tableInstance.selectedFlatRows.map((row) => {
+      tableInstance.getSelectedRowModel().rows.map((row) => {
         console.log('activating ' + row.original);
       });
     };
 
     const handleContact = () => {
-      tableInstance.selectedFlatRows.map((row) => {
+      tableInstance.getSelectedRowModel().rows.map((row) => {
         console.log('contact ' + row.original);
       });
     };
@@ -214,7 +225,7 @@ MaximumFeatures.args = {
       <div style={{ display: 'flex', gap: '0.5rem' }}>
         <Button
           color="error"
-          disabled={tableInstance.selectedFlatRows.length === 0}
+          disabled={tableInstance.getSelectedRowModel().rows.length === 0}
           onClick={handleDeactivate}
           variant="contained"
         >
@@ -222,7 +233,7 @@ MaximumFeatures.args = {
         </Button>
         <Button
           color="success"
-          disabled={tableInstance.selectedFlatRows.length === 0}
+          disabled={tableInstance.getSelectedRowModel().rows.length === 0}
           onClick={handleActivate}
           variant="contained"
         >
@@ -230,7 +241,7 @@ MaximumFeatures.args = {
         </Button>
         <Button
           color="info"
-          disabled={tableInstance.selectedFlatRows.length === 0}
+          disabled={tableInstance.getSelectedRowModel().rows.length === 0}
           onClick={handleContact}
           variant="contained"
         >
@@ -240,4 +251,4 @@ MaximumFeatures.args = {
     );
   },
   positionToolbarAlertBanner: 'bottom',
-} as MaterialReactTableProps;
+} as MaterialReactTableProps<typeof maxFeaturesData[0]>;

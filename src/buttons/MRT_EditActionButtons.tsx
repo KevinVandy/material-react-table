@@ -2,9 +2,10 @@ import React, { FC } from 'react';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
 import type { MRT_Row } from '..';
+import { RowValues } from '@tanstack/react-table';
 
-interface Props {
-  row: MRT_Row;
+interface Props<D extends Record<string, any> = {}> {
+  row: MRT_Row<D>;
 }
 
 export const MRT_EditActionButtons: FC<Props> = ({ row }) => {
@@ -13,18 +14,16 @@ export const MRT_EditActionButtons: FC<Props> = ({ row }) => {
     localization,
     onRowEditSubmit,
     setCurrentEditingRow,
-    tableInstance: {
-      state: { currentEditingRow },
-    },
+    tableInstance: { getState },
   } = useMRT();
 
   const handleCancel = () => {
-    row.values = row.original;
+    row.values = (row.original as RowValues) ?? {};
     setCurrentEditingRow(null);
   };
 
   const handleSave = async () => {
-    await onRowEditSubmit?.(currentEditingRow ?? row);
+    await onRowEditSubmit?.(getState().currentEditingRow ?? row);
     setCurrentEditingRow(null);
   };
 

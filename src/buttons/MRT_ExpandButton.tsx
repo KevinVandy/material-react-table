@@ -3,8 +3,8 @@ import { IconButton } from '@mui/material';
 import { useMRT } from '../useMRT';
 import type { MRT_Row } from '..';
 
-interface Props {
-  row: MRT_Row;
+interface Props<D extends Record<string, any> = {}> {
+  row: MRT_Row<D>;
 }
 
 export const MRT_ExpandButton: FC<Props> = ({ row }) => {
@@ -16,25 +16,23 @@ export const MRT_ExpandButton: FC<Props> = ({ row }) => {
   } = useMRT();
 
   const handleToggleExpand = (event: MouseEvent<HTMLButtonElement>) => {
-    // @ts-ignore
-    row.getToggleRowExpandedProps()?.onClick(event);
+    row.toggleExpanded();
     onRowExpandChange?.(event, row);
   };
 
   return (
     <IconButton
       aria-label={localization.expand}
-      disabled={!row.canExpand && !renderDetailPanel}
+      disabled={!row.getCanExpand() && !renderDetailPanel}
       title={localization.expand}
-      {...row.getToggleRowExpandedProps()}
       onClick={handleToggleExpand}
     >
       <ExpandMoreIcon
         style={{
           transform: `rotate(${
-            !row.canExpand && !renderDetailPanel
+            !row.getCanExpand() && !renderDetailPanel
               ? -90
-              : row.isExpanded
+              : row.getIsExpanded()
               ? -180
               : 0
           }deg)`,

@@ -3,38 +3,44 @@ import { Checkbox, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
 import type { MRT_Row } from '..';
 
-interface Props<D extends {} = {}> {
+interface Props<D extends Record<string, any> = {}> {
   row?: MRT_Row<D>;
   selectAll?: boolean;
 }
 
 export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
   const {
+    isLoading,
     localization,
     muiSelectCheckboxProps,
     onSelectChange,
     onSelectAllChange,
     tableInstance,
     tableInstance: {
-      state: { densePadding },
+      getRowModel,
+      getSelectedRowModel,
+      getState,
+      getToggleAllRowsSelectedProps,
     },
   } = useMRT();
 
+  const { isDensePadding } = getState();
+
   const handleSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (selectAll) {
-      tableInstance?.getToggleAllRowsSelectedProps?.()?.onChange?.(event);
+      getToggleAllRowsSelectedProps?.()?.onChange?.(event as any);
       onSelectAllChange?.(
         event,
-        event.target.checked ? tableInstance.rows : [],
+        event.target.checked ? getRowModel().flatRows : [],
       );
     } else if (row) {
-      row?.getToggleRowSelectedProps()?.onChange?.(event);
+      row?.getToggleSelectedProps()?.onChange?.(event as any);
       onSelectChange?.(
         event,
         row,
         event.target.checked
-          ? [...(tableInstance.selectedFlatRows as MRT_Row[]), row]
-          : (tableInstance.selectedFlatRows as MRT_Row[]).filter(
+          ? [...getSelectedRowModel().flatRows, row]
+          : getSelectedRowModel().flatRows.filter(
               (selectedRow) => selectedRow.id !== row.id,
             ),
       );
@@ -47,16 +53,12 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
       : muiSelectCheckboxProps;
 
   const rtSelectCheckboxProps = selectAll
-    ? tableInstance.getToggleAllRowsSelectedProps()
-    : row?.getToggleRowSelectedProps();
+    ? getToggleAllRowsSelectedProps()
+    : row?.getToggleSelectedProps();
 
   const checkboxProps = {
-    ...mTableBodyRowSelectCheckboxProps,
     ...rtSelectCheckboxProps,
-    style: {
-      ...rtSelectCheckboxProps?.style,
-      ...mTableBodyRowSelectCheckboxProps?.style,
-    },
+    ...mTableBodyRowSelectCheckboxProps,
   };
 
   return (
@@ -69,12 +71,13 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
       }
     >
       <Checkbox
+        disabled={isLoading}
         inputProps={{
           'aria-label': selectAll
             ? localization.toggleSelectAll
             : localization.toggleSelectRow,
         }}
-        size={densePadding ? 'small' : 'medium'}
+        size={isDensePadding ? 'small' : 'medium'}
         {...checkboxProps}
         onChange={handleSelectChange}
         title={undefined}

@@ -1,58 +1,69 @@
 import React, { FC } from 'react';
-import { TableCell } from '@mui/material';
+import { alpha, TableCell } from '@mui/material';
 import { useMRT } from '../useMRT';
-import type { MRT_HeaderGroup } from '..';
+import type { MRT_Header } from '..';
 
 interface Props {
-  column: MRT_HeaderGroup;
+  footer: MRT_Header;
 }
 
-export const MRT_TableFooterCell: FC<Props> = ({ column }) => {
+export const MRT_TableFooterCell: FC<Props> = ({ footer }) => {
   const {
     muiTableFooterCellProps,
     enableColumnResizing,
-    tableInstance: {
-      state: { densePadding },
-    },
+    tableInstance,
+    tableInstance: { getState },
   } = useMRT();
 
-  const isParentHeader = !!column?.columns?.length;
+  const { isDensePadding } = getState();
+
+  const isParentHeader = !!footer.column.columns?.length;
 
   const mTableFooterCellProps =
     muiTableFooterCellProps instanceof Function
-      ? muiTableFooterCellProps(column)
+      ? muiTableFooterCellProps(footer.column)
       : muiTableFooterCellProps;
 
   const mcTableFooterCellProps =
-    column.muiTableFooterCellProps instanceof Function
-      ? column.muiTableFooterCellProps(column)
-      : column.muiTableFooterCellProps;
+    footer.column.muiTableFooterCellProps instanceof Function
+      ? footer.column.muiTableFooterCellProps(footer.column)
+      : footer.column.muiTableFooterCellProps;
 
   const tableCellProps = {
+    ...footer.getFooterProps(),
     ...mTableFooterCellProps,
     ...mcTableFooterCellProps,
-    ...column.getFooterProps(),
-    style: {
-      ...column.getFooterProps().style,
-      ...mTableFooterCellProps?.style,
-      ...mcTableFooterCellProps?.style,
-    },
   };
+
+  const footerElement =
+    footer.column?.Footer?.({
+      footer,
+      tableInstance,
+    }) ??
+    footer.column.footer ??
+    null;
 
   return (
     <TableCell
       align={isParentHeader ? 'center' : 'left'}
       variant="head"
       {...tableCellProps}
-      sx={{
+      //@ts-ignore
+      sx={(theme) => ({
+        backgroundColor: theme.palette.background.default,
+        backgroundImage: `linear-gradient(${alpha(
+          theme.palette.common.white,
+          0.05,
+        )},${alpha(theme.palette.common.white, 0.05)})`,
         fontWeight: 'bold',
-        verticalAlign: 'text-top',
-        p: densePadding ? '0.5rem' : '1rem',
+        p: isDensePadding ? '0.5rem' : '1rem',
         transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
+        verticalAlign: 'text-top',
+        //@ts-ignore
         ...tableCellProps?.sx,
-      }}
+      })}
     >
-      {column.render('Footer')}
+      {footer.isPlaceholder ? null : footerElement}
     </TableCell>
   );
 };

@@ -7,7 +7,7 @@ const meta: Meta = {
   title: 'Features/Full Screen Examples',
   parameters: {
     status: {
-      type: 'beta',
+      type: 'stable',
     },
   },
 };
@@ -16,36 +16,38 @@ export default meta;
 
 const columns = [
   {
-    Header: 'Employee',
+    header: 'Employee',
+    id: 'employee',
     columns: [
       {
-        Header: 'First Name',
-        accessor: 'firstName' as const,
+        header: 'First Name',
+        id: 'firstName',
       },
       {
-        Header: 'Last Name',
-        accessor: 'lastName' as const,
+        header: 'Last Name',
+        id: 'lastName',
       },
       {
-        Header: 'Email',
-        accessor: 'email' as const,
+        header: 'Email',
+        id: 'email',
       },
     ],
   },
   {
-    Header: 'Job Info',
+    header: 'Job Info',
+    id: 'jobInfo',
     columns: [
       {
-        Header: 'Job Title',
-        accessor: 'jobTitle' as const,
+        header: 'Job Title',
+        id: 'jobTitle',
       },
       {
-        Header: 'Salary',
-        accessor: 'salary' as const,
+        header: 'Salary',
+        id: 'salary',
       },
       {
-        Header: 'Start Date',
-        accessor: 'startDate' as const,
+        header: 'Start Date',
+        id: 'startDate',
       },
     ],
   },
@@ -67,13 +69,17 @@ export const FullScreenToggleEnabledDefault: Story<
 > = () => <MaterialReactTable columns={columns} data={data} />;
 
 export const DisableFullScreenToggle: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} disableFullScreenToggle />
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableFullScreenToggle={false}
+  />
 );
 
 export const DefaultFullScreenOn: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    initialState={{ fullScreen: true }}
+    initialState={{ isFullScreen: true }}
   />
 );

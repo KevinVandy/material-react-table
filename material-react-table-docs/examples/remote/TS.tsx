@@ -58,28 +58,28 @@ const Example: FC = () => {
   const columns = useMemo(
     () => [
       {
-        Header: 'Name',
-        accessor: 'name' as const,
+        header: 'Name',
+        id: 'name',
       },
       {
-        Header: 'Username',
-        accessor: 'username' as const,
+        header: 'Username',
+        id: 'username',
       },
       {
-        Header: 'Email',
-        accessor: 'email' as const,
+        header: 'Email',
+        id: 'email',
       },
       {
-        Header: 'Address',
-        accessor: 'address' as const,
+        header: 'Address',
+        id: 'address',
       },
       {
-        Header: 'City',
-        accessor: 'city' as const,
+        header: 'City',
+        id: 'city',
       },
       {
-        Header: 'Zip Code',
-        accessor: 'zipcode' as const,
+        header: 'Zip Code',
+        id: 'zipcode',
       },
     ],
     [],

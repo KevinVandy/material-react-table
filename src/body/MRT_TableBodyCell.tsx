@@ -1,21 +1,9 @@
-import React, { FC, MouseEvent } from 'react';
-import { Skeleton, TableCell, TableCellProps } from '@mui/material';
+import React, { FC, MouseEvent, useMemo } from 'react';
+import { Skeleton, TableCell } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import type { MRT_Cell } from '..';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
-
-export const commonTableBodyCellStyles = (densePadding: boolean) => ({
-  p: densePadding ? '0.5rem' : '1rem',
-  transition: 'all 0.2s ease-in-out',
-  whiteSpace: densePadding ? 'nowrap' : 'normal',
-});
-
-export const commonTableBodyButtonCellStyles = (densePadding: boolean) => ({
-  p: densePadding ? '1px' : '0.6rem',
-  textAlign: 'center',
-  transition: 'all 0.2s ease-in-out',
-});
 
 interface Props {
   cell: MRT_Cell;
@@ -28,10 +16,18 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
     muiTableBodyCellProps,
     muiTableBodyCellSkeletonProps,
     onCellClick,
-    tableInstance: {
-      state: { currentEditingRow, densePadding },
-    },
+    tableInstance,
+    tableInstance: { getState },
   } = useMRT();
+
+  const { currentEditingRow, isDensePadding } = getState();
+
+  const skeletonWidth = useMemo(
+    () =>
+      Math.random() * (cell.column.getWidth() - cell.column.getWidth() / 3) +
+      cell.column.getWidth() / 3,
+    [cell.column.getWidth()],
+  );
 
   const mTableCellBodyProps =
     muiTableBodyCellProps instanceof Function
@@ -44,14 +40,9 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
       : cell.column.muiTableBodyCellProps;
 
   const tableCellProps = {
+    ...cell.getCellProps(),
     ...mTableCellBodyProps,
     ...mcTableCellBodyProps,
-    ...cell.getCellProps(),
-    style: {
-      ...cell.getCellProps().style,
-      ...mTableCellBodyProps?.style,
-      ...mcTableCellBodyProps?.style,
-    },
   };
 
   return (
@@ -60,39 +51,40 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
         onCellClick?.(event, cell)
       }
       {...tableCellProps}
-      sx={
-        {
-          ...commonTableBodyCellStyles(densePadding),
-          ...tableCellProps?.sx,
-        } as TableCellProps['sx']
-      }
+      sx={{
+        p: isDensePadding
+          ? cell.column.isDisplayColumn
+            ? '0 0.5rem'
+            : '0.5rem'
+          : cell.column.isDisplayColumn
+          ? '0.5rem 0.75rem'
+          : '1rem',
+        pl:
+          cell.column.id === 'mrt-expand'
+            ? `${cell.row.depth + (isDensePadding ? 0.5 : 0.75)}rem`
+            : undefined,
+        transition: 'all 0.2s ease-in-out',
+        whiteSpace: isDensePadding ? 'nowrap' : 'normal',
+        //@ts-ignore
+        ...tableCellProps?.sx,
+      }}
     >
-      {isLoading ? (
+      {cell.column.isDisplayColumn ? (
+        cell.column.Cell?.({ cell, tableInstance })
+      ) : isLoading ? (
         <Skeleton
           animation="wave"
           height={20}
-          width={Math.random() * (120 - 60) + 60}
+          width={skeletonWidth}
           {...muiTableBodyCellSkeletonProps}
         />
-      ) : !cell.column.disableEditing &&
-        currentEditingRow?.id === cell.row.id ? (
+      ) : cell.column.enableEditing && currentEditingRow?.id === cell.row.id ? (
         <MRT_EditCellTextField cell={cell} />
-      ) : cell.isPlaceholder ? null : cell.isAggregated ? (
-        enableClickToCopy && !cell.column.disableClickToCopy ? (
-          <MRT_CopyButton cell={cell}>
-            {cell.render('Aggregated')}
-          </MRT_CopyButton>
-        ) : (
-          cell.render('Aggregated')
-        )
-      ) : cell.isGrouped ? (
-        <span>
-          {cell.render('Cell')} ({cell.row.subRows.length})
-        </span>
-      ) : enableClickToCopy && !cell.column.disableClickToCopy ? (
-        <MRT_CopyButton cell={cell}>{cell.render('Cell')}</MRT_CopyButton>
+      ) : (enableClickToCopy || cell.column.enableClickToCopy) &&
+        cell.column.enableClickToCopy !== false ? (
+        <MRT_CopyButton cell={cell}>{cell.renderCell()}</MRT_CopyButton>
       ) : (
-        cell.render('Cell')
+        cell.renderCell()
       )}
     </TableCell>
   );

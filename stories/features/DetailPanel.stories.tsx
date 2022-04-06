@@ -18,16 +18,16 @@ export const DetailPanelEnabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={[
       {
-        Header: 'First Name',
-        accessor: 'firstName' as const,
+        header: 'First Name',
+        id: 'firstName',
       },
       {
-        Header: 'Last Name',
-        accessor: 'lastName' as const,
+        header: 'Last Name',
+        id: 'lastName',
       },
       {
-        Header: 'Address',
-        accessor: 'address' as const,
+        header: 'Address',
+        id: 'address',
       },
     ]}
     data={[...Array(5)].map((_) => ({
@@ -39,7 +39,7 @@ export const DetailPanelEnabled: Story<MaterialReactTableProps> = () => (
       zipCode: faker.address.zipCode(),
       phone: faker.phone.phoneNumber(),
     }))}
-    enableColumnGrouping
+    enableExpanded
     renderDetailPanel={(rowData) => (
       <div style={{ display: 'grid' }}>
         <span>City: {rowData.original.city}</span>
@@ -57,16 +57,16 @@ export const DetailPanelExpandAllDisabled: Story<
   <MaterialReactTable
     columns={[
       {
-        Header: 'First Name',
-        accessor: 'firstName' as const,
+        header: 'First Name',
+        id: 'firstName',
       },
       {
-        Header: 'Last Name',
-        accessor: 'lastName' as const,
+        header: 'Last Name',
+        id: 'lastName',
       },
       {
-        Header: 'Address',
-        accessor: 'address' as const,
+        header: 'Address',
+        id: 'address',
       },
     ]}
     data={[...Array(5)].map((_) => ({
@@ -78,7 +78,8 @@ export const DetailPanelExpandAllDisabled: Story<
       zipCode: faker.address.zipCode(),
       phone: faker.phone.phoneNumber(),
     }))}
-    disableExpandAll
+    enableExpandAll={false}
+    enableExpanded
     renderDetailPanel={(rowData) => (
       <div style={{ display: 'grid' }}>
         <span>City: {rowData.original.city}</span>

@@ -7,7 +7,11 @@ import type { MRT_HeaderGroup } from '..';
 interface Props {}
 
 export const MRT_TableFooter: FC<Props> = () => {
-  const { muiTableFooterProps, tableInstance } = useMRT();
+  const {
+    muiTableFooterProps,
+    tableInstance,
+    tableInstance: { getFooterGroups },
+  } = useMRT();
 
   const tableFooterProps =
     muiTableFooterProps instanceof Function
@@ -16,10 +20,10 @@ export const MRT_TableFooter: FC<Props> = () => {
 
   return (
     <TableFooter {...tableFooterProps}>
-      {tableInstance.footerGroups.map((footerGroup: MRT_HeaderGroup) => (
+      {getFooterGroups().map((footerGroup) => (
         <MRT_TableFooterRow
           key={footerGroup.getFooterGroupProps().key}
-          footerGroup={footerGroup}
+          footerGroup={footerGroup as MRT_HeaderGroup}
         />
       ))}
     </TableFooter>

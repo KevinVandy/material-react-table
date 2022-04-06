@@ -3,8 +3,8 @@ import { Collapse, TableCell, TableRow } from '@mui/material';
 import { useMRT } from '../useMRT';
 import type { MRT_Row } from '..';
 
-interface Props {
-  row: MRT_Row;
+interface Props<D extends Record<string, any> = {}> {
+  row: MRT_Row<D>;
 }
 
 export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
@@ -13,7 +13,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
     muiTableDetailPanelProps,
     onDetailPanelClick,
     renderDetailPanel,
-    tableInstance,
+    tableInstance: { getVisibleFlatColumns },
   } = useMRT();
 
   const tableRowProps =
@@ -29,20 +29,20 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
   return (
     <TableRow {...tableRowProps}>
       <TableCell
-        colSpan={tableInstance.visibleColumns.length + 10}
+        colSpan={getVisibleFlatColumns().length + 10}
         onClick={(event: MouseEvent<HTMLTableCellElement>) =>
           onDetailPanelClick?.(event, row)
         }
         {...tableCellProps}
         sx={{
-          borderBottom: !row.isExpanded ? 'none' : undefined,
-          pb: row.isExpanded ? '1rem' : 0,
-          pt: row.isExpanded ? '1rem' : 0,
+          borderBottom: !row.getIsExpanded() ? 'none' : undefined,
+          pb: row.getIsExpanded() ? '1rem' : 0,
+          pt: row.getIsExpanded() ? '1rem' : 0,
           transition: 'all 0.2s ease-in-out',
           ...tableCellProps?.sx,
         }}
       >
-        <Collapse in={row.isExpanded}>{renderDetailPanel?.(row)}</Collapse>
+        <Collapse in={row.getIsExpanded()}>{renderDetailPanel?.(row)}</Collapse>
       </TableCell>
     </TableRow>
   );

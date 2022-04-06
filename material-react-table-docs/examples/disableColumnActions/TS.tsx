@@ -5,17 +5,17 @@ const Example: FC = () => {
   const columns = useMemo(
     () => [
       {
-        Header: 'ID',
-        accessor: 'id' as const,
+        header: 'ID',
+        id: 'id',
         disableColumnActions: true,
       },
       {
-        Header: 'First Name',
-        accessor: 'firstName' as const,
+        header: 'First Name',
+        id: 'firstName',
       },
       {
-        Header: 'Last Name',
-        accessor: 'lastName' as const,
+        header: 'Last Name',
+        id: 'lastName',
       },
     ],
     [],

@@ -6,13 +6,21 @@ interface Props {}
 
 export const MRT_ToolbarAlertBanner: FC<Props> = () => {
   const {
-    muiTableToolbarAlertBannerProps,
-    tableInstance,
-    positionToolbarAlertBanner,
-    positionToolbarActions,
     localization,
+    muiTableToolbarAlertBannerProps,
+    positionToolbarActions,
+    positionToolbarAlertBanner,
     renderToolbarCustomActions,
+    tableInstance,
+    tableInstance: {
+      getPrePaginationRowModel,
+      getSelectedRowModel,
+      getState,
+      toggleColumnGrouping,
+    },
   } = useMRT();
+
+  const { grouping } = getState();
 
   const isMobile = useMediaQuery('(max-width:720px)');
 
@@ -22,30 +30,33 @@ export const MRT_ToolbarAlertBanner: FC<Props> = () => {
       : muiTableToolbarAlertBannerProps;
 
   const selectMessage =
-    tableInstance.selectedFlatRows.length > 0
+    getSelectedRowModel().rows.length > 0
       ? localization.selectedCountOfRowCountRowsSelected
           ?.replace(
             '{selectedCount}',
-            tableInstance.selectedFlatRows.length.toString(),
+            getSelectedRowModel().rows.length.toString(),
           )
-          ?.replace('{rowCount}', tableInstance.flatRows.length.toString())
+          ?.replace(
+            '{rowCount}',
+            getPrePaginationRowModel().rows.length.toString(),
+          )
       : null;
 
   const groupedByMessage =
-    tableInstance.state.groupBy.length > 0 ? (
+    grouping.length > 0 ? (
       <span>
         {localization.groupedBy}{' '}
-        {tableInstance.state.groupBy.map((columnId, index) => (
+        {grouping.map((columnId, index) => (
           <Fragment key={`${index}-${columnId}`}>
             {index > 0 ? localization.thenBy : ''}
             <Chip
               color="secondary"
               label={
-                tableInstance.allColumns.find(
-                  (column) => column.id === columnId,
-                )?.Header
+                tableInstance
+                  .getAllColumns()
+                  .find((column) => column.id === columnId)?.header
               }
-              onDelete={() => tableInstance.toggleGroupBy(columnId, false)}
+              onDelete={() => toggleColumnGrouping(columnId)}
             />
           </Fragment>
         ))}

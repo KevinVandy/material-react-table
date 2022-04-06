@@ -7,11 +7,11 @@ const Example = () => {
   const columns = useMemo(
     () => [
       {
-        Header: 'Employee',
+        header: 'Employee',
         columns: [
           {
-            Header: 'Name',
-            accessor: 'lastName',
+            header: 'Name',
+            id: 'lastName',
             Cell: ({ cell }) => (
               <>
                 {cell.row.original?.['firstName']}
@@ -22,21 +22,21 @@ const Example = () => {
             disableClickToCopy: true,
           },
           {
-            Header: 'Email',
-            accessor: 'email',
+            header: 'Email',
+            id: 'email',
           },
         ],
       },
       {
-        Header: 'Job Info',
+        header: 'Job Info',
         columns: [
           {
-            Header: 'Job Title',
-            accessor: 'jobTitle',
+            header: 'Job Title',
+            id: 'jobTitle',
           },
           {
-            Header: 'Salary',
-            accessor: 'salary',
+            header: 'Salary',
+            id: 'salary',
             Cell: ({ cell: { value } }) => (
               <Box
                 sx={(theme) => ({
@@ -63,8 +63,8 @@ const Example = () => {
             disableEditing: true,
           },
           {
-            Header: 'Start Date',
-            accessor: 'startDate',
+            header: 'Start Date',
+            id: 'startDate',
           },
         ],
       },
@@ -1496,10 +1496,10 @@ const Example = () => {
       columns={columns}
       data={data}
       enableClickToCopy
-      enableColumnGrouping
+      enableGrouping
       enableRowActions
       enableRowEditing
-      enableSelection
+      enableRowSelection
       onRowEditSubmit={handleSaveRow}
       renderDetailPanel={(row) => (
         <div

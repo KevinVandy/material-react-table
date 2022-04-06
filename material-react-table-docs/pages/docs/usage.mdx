@@ -34,12 +34,12 @@ Each column definition must have at the very least, an `accessor` propery. This 
 const columns = useMemo(
   () => [
     {
-      Header: 'Name',
-      accessor: 'name',
+      header: 'Name',
+      id: 'name',
     },
     {
-      Header: 'Age',
-      accessor: 'age',
+      header: 'Age',
+      id: 'age',
     },
   ],
   [],
@@ -74,12 +74,12 @@ export default function App() {
   const columns = useMemo(
     () => [
       {
-        Header: 'Name',
-        accessor: 'name',
+        header: 'Name',
+        id: 'name',
       },
       {
-        Header: 'Age',
-        accessor: 'age',
+        header: 'Age',
+        id: 'age',
       },
     ],
     [],

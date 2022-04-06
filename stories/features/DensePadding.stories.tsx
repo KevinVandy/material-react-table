@@ -16,32 +16,32 @@ export default meta;
 
 const columns = [
   {
-    Header: 'First Name',
-    accessor: 'firstName' as const,
+    header: 'First Name',
+    id: 'firstName',
   },
   {
-    Header: 'Last Name',
-    accessor: 'lastName' as const,
+    header: 'Last Name',
+    id: 'lastName',
   },
   {
-    Header: 'Address',
-    accessor: 'address' as const,
+    header: 'Address',
+    id: 'address',
   },
   {
-    Header: 'City',
-    accessor: 'city' as const,
+    header: 'City',
+    id: 'city',
   },
   {
-    Header: 'State',
-    accessor: 'state' as const,
+    header: 'State',
+    id: 'state',
   },
   {
-    Header: 'Zip Code',
-    accessor: 'zipCode' as const,
+    header: 'Zip Code',
+    id: 'zipCode',
   },
   {
-    Header: 'Phone Number',
-    accessor: 'phoneNumber' as const,
+    header: 'Phone Number',
+    id: 'phoneNumber',
   },
 ];
 
@@ -57,20 +57,13 @@ const data = [...Array(25)].map((_) => ({
 
 export const DensePaddingToggleEnabledDefault: Story<
   MaterialReactTableProps
-> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    initialState={{ pageSize: 25 }}
-  />
-);
+> = () => <MaterialReactTable columns={columns} data={data} />;
 
 export const DensePaddingDisabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    disableDensePaddingToggle
-    initialState={{ pageSize: 25 }}
+    enableDensePaddingToggle={false}
   />
 );
 
@@ -78,6 +71,6 @@ export const DefaultToDensePadding: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    initialState={{ pageSize: 25, densePadding: true }}
+    initialState={{ pagination: { pageSize: 25 }, isDensePadding: true }}
   />
 );

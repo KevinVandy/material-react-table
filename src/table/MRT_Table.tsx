@@ -8,8 +8,14 @@ import { useMRT } from '../useMRT';
 interface Props {}
 
 export const MRT_Table: FC<Props> = () => {
-  const { tableInstance, muiTableProps, hideTableHead, hideTableFooter } =
-    useMRT();
+  const {
+    enableStickyHeader,
+    hideTableFooter,
+    hideTableHead,
+    muiTableProps,
+    tableInstance,
+    tableInstance: { getTableProps },
+  } = useMRT();
 
   const mTableProps =
     muiTableProps instanceof Function
@@ -17,16 +23,12 @@ export const MRT_Table: FC<Props> = () => {
       : muiTableProps;
 
   const tableProps = {
+    ...getTableProps(),
     ...mTableProps,
-    ...tableInstance.getTableProps(),
-    style: {
-      ...tableInstance.getTableProps().style,
-      ...mTableProps?.style,
-    },
   };
 
   return (
-    <Table {...tableProps}>
+    <Table stickyHeader={enableStickyHeader} {...tableProps}>
       {!hideTableHead && <MRT_TableHead />}
       <MRT_TableBody />
       {!hideTableFooter && <MRT_TableFooter />}

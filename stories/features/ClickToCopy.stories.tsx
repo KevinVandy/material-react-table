@@ -1,43 +1,46 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import MaterialReactTable, { MaterialReactTableProps } from '../../src';
+import MaterialReactTable, {
+  MaterialReactTableProps,
+  MRT_ColumnInterface,
+} from '../../src';
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
   title: 'Features/Click to Copy',
   parameters: {
     status: {
-      type: 'beta',
+      type: 'stable',
     },
   },
 };
 
 export default meta;
 
-const columns = [
+const columns: MRT_ColumnInterface[] = [
   {
-    Header: 'First Name',
-    accessor: 'firstName' as const,
+    header: 'First Name',
+    id: 'firstName',
   },
   {
-    Header: 'Last Name',
-    accessor: 'lastName' as const,
+    header: 'Last Name',
+    id: 'lastName',
   },
   {
-    Header: 'Email Address',
-    accessor: 'email' as const,
+    header: 'Email Address',
+    id: 'email',
   },
   {
-    Header: 'Address',
-    accessor: 'address' as const,
+    header: 'Address',
+    id: 'address',
   },
   {
-    Header: 'City',
-    accessor: 'city' as const,
+    header: 'City',
+    id: 'city',
   },
   {
-    Header: 'State',
-    accessor: 'state' as const,
+    header: 'State',
+    id: 'state',
   },
 ];
 
@@ -52,4 +55,76 @@ const data = [...Array(100)].map((_) => ({
 
 export const ClickToCopyEnabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableClickToCopy />
+);
+
+export const ClickToCopyEnabledPerColumn: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        id: 'firstName',
+      },
+      {
+        header: 'Last Name',
+        id: 'lastName',
+      },
+      {
+        header: 'Email Address',
+        id: 'email',
+        enableClickToCopy: true,
+      },
+      {
+        header: 'Address',
+        id: 'address',
+      },
+      {
+        header: 'City',
+        id: 'city',
+      },
+      {
+        header: 'State',
+        id: 'state',
+      },
+    ]}
+    data={data}
+  />
+);
+
+export const ClickToCopyDisabledPerColumn: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        id: 'firstName',
+      },
+      {
+        header: 'Last Name',
+        id: 'lastName',
+      },
+      {
+        header: 'Email Address',
+        id: 'email',
+      },
+      {
+        header: 'Address',
+        id: 'address',
+      },
+      {
+        header: 'City',
+        id: 'city',
+        enableClickToCopy: false,
+      },
+      {
+        header: 'State',
+        id: 'state',
+        enableClickToCopy: false,
+      },
+    ]}
+    data={data}
+    enableClickToCopy
+  />
 );

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Box, Toolbar } from '@mui/material';
+import { alpha, Box, Toolbar } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
@@ -12,13 +12,17 @@ interface Props {}
 export const MRT_ToolbarBottom: FC<Props> = () => {
   const {
     hideToolbarInternalActions,
-    manualPagination,
+    idPrefix,
+    enablePagination,
     muiTableToolbarBottomProps,
     positionPagination,
     positionToolbarActions,
     positionToolbarAlertBanner,
     tableInstance,
+    tableInstance: { getState },
   } = useMRT();
+
+  const { isFullScreen } = getState();
 
   const toolbarProps =
     muiTableToolbarBottomProps instanceof Function
@@ -27,13 +31,15 @@ export const MRT_ToolbarBottom: FC<Props> = () => {
 
   return (
     <Toolbar
+      id={`mrt-${idPrefix}-toolbar-bottom`}
       variant="dense"
       {...toolbarProps}
       sx={(theme) =>
         ({
-          bottom: tableInstance.state.fullScreen ? '0' : undefined,
-          position: tableInstance.state.fullScreen ? 'fixed' : undefined,
-          ...commonToolbarStyles(theme, tableInstance),
+          ...commonToolbarStyles({ theme }),
+          bottom: isFullScreen ? '0' : undefined,
+          position: isFullScreen ? 'fixed' : undefined,
+          boxShadow: `-3px 0 6px ${alpha(theme.palette.common.black, 0.1)}`,
           ...toolbarProps?.sx,
         } as any)
       }
@@ -48,7 +54,7 @@ export const MRT_ToolbarBottom: FC<Props> = () => {
           <span />
         )}
         {positionToolbarAlertBanner === 'bottom' && <MRT_ToolbarAlertBanner />}
-        {!manualPagination &&
+        {enablePagination &&
           ['bottom', 'both'].includes(positionPagination ?? '') && (
             <MRT_TablePagination />
           )}

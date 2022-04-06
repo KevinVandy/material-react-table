@@ -10,18 +10,16 @@ interface Props {
 export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
   const {
     muiTableBodyCellEditTextFieldProps,
-    setCurrentEditingRow,
-    tableInstance: {
-      state: { currentEditingRow },
-    },
+    // setCurrentEditingRow,
+    tableInstance: { getState },
   } = useMRT();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (currentEditingRow) {
+    if (getState().currentEditingRow) {
       cell.row.values[cell.column.id] = event.target.value;
-      setCurrentEditingRow({
-        ...currentEditingRow,
-      });
+      // setCurrentEditingRow({
+      //   ...getState().currentEditingRow,
+      // });
     }
     cell.column.onCellEditChange?.(event, cell);
   };
@@ -41,16 +39,16 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
     ...mcTableBodyCellEditTextFieldProps,
   };
 
-  if (!cell.column.disableEditing && cell.column.Edit) {
-    return <>{cell.column.Edit({ ...textFieldProps, cell })}</>;
-  }
+  // if (cell.column.enableEditing && cell.column.Edit) {
+  //   return <>{cell.column.Edit({ ...textFieldProps, cell })}</>;
+  // }
 
   return (
     <TextField
       margin="dense"
       onChange={handleChange}
       onClick={(e) => e.stopPropagation()}
-      placeholder={cell.column.Header as string}
+      placeholder={cell.column.header}
       value={cell.value}
       variant="standard"
       {...textFieldProps}

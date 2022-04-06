@@ -16,24 +16,24 @@ export default meta;
 
 const columns = [
   {
-    Header: 'First Name',
-    accessor: 'firstName' as const,
+    header: 'First Name',
+    id: 'firstName',
   },
   {
-    Header: 'Last Name',
-    accessor: 'lastName' as const,
+    header: 'Last Name',
+    id: 'lastName',
   },
   {
-    Header: 'Address',
-    accessor: 'address' as const,
+    header: 'Address',
+    id: 'address',
   },
   {
-    Header: 'State',
-    accessor: 'state' as const,
+    header: 'State',
+    id: 'state',
   },
   {
-    Header: 'Phone Number',
-    accessor: 'phoneNumber' as const,
+    header: 'Phone Number',
+    id: 'phoneNumber',
   },
 ];
 
@@ -50,7 +50,7 @@ export const SortingEnabledDefault: Story<MaterialReactTableProps> = () => (
 );
 
 export const DisableSorting: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} disableSortBy />
+  <MaterialReactTable columns={columns} data={data} enableSorting={false} />
 );
 
 export const DisableSortingForSpecificColumns: Story<
@@ -59,26 +59,26 @@ export const DisableSortingForSpecificColumns: Story<
   <MaterialReactTable
     columns={[
       {
-        Header: 'First Name',
-        accessor: 'firstName' as const,
+        header: 'First Name',
+        id: 'firstName',
       },
       {
-        Header: 'Last Name',
-        accessor: 'lastName' as const,
+        header: 'Last Name',
+        id: 'lastName',
       },
       {
-        Header: 'Address',
-        accessor: 'address' as const,
-        disableSortBy: true,
+        header: 'Address',
+        id: 'address',
+        enableSorting: false,
       },
       {
-        Header: 'State',
-        accessor: 'state' as const,
+        header: 'State',
+        id: 'state',
       },
       {
-        Header: 'Phone Number',
-        accessor: 'phoneNumber' as const,
-        disableSortBy: true,
+        header: 'Phone Number',
+        id: 'phoneNumber',
+        enableSorting: false,
       },
     ]}
     data={data}

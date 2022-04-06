@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react';
 import { Menu, MenuItem } from '@mui/material';
 import { useMRT } from '../useMRT';
-import type { MRT_FilterType, MRT_HeaderGroup } from '..';
+import type { MRT_FilterType, MRT_Header } from '..';
 import { MRT_FILTER_TYPE } from '../enums';
 import {
   bestMatch,
@@ -25,14 +25,14 @@ const commonMenuItemStyles = {
 
 interface Props {
   anchorEl: HTMLElement | null;
-  column?: MRT_HeaderGroup;
+  header?: MRT_Header;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
   onSelect?: () => void;
 }
 
 export const MRT_FilterTypeMenu: FC<Props> = ({
   anchorEl,
-  column,
+  header,
   onSelect,
   setAnchorEl,
 }) => {
@@ -41,8 +41,10 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
     localization,
     setCurrentFilterTypes,
     setCurrentGlobalFilterType,
-    tableInstance,
+    tableInstance: { getState },
   } = useMRT();
+
+  const { isDensePadding } = getState();
 
   const filterTypes: {
     type: MRT_FILTER_TYPE;
@@ -61,7 +63,7 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
         {
           type: MRT_FILTER_TYPE.BEST_MATCH,
           label: localization.filterBestMatch,
-          divider: !!column,
+          divider: !!header,
           fn: bestMatch,
         },
         {
@@ -119,9 +121,9 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
           fn: notEmpty,
         },
       ].filter((filterType) =>
-        column
-          ? !column.enabledFilterTypes ||
-            column.enabledFilterTypes.includes(filterType.type)
+        header
+          ? !header.column.enabledFilterTypes ||
+            header.column.enabledFilterTypes.includes(filterType.type)
           : (!enabledGlobalFilterTypes ||
               enabledGlobalFilterTypes.includes(filterType.type)) &&
             [
@@ -133,13 +135,13 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
   );
 
   const handleSelectFilterType = (value: MRT_FILTER_TYPE) => {
-    if (column) {
+    if (header) {
       setCurrentFilterTypes((prev: { [key: string]: MRT_FilterType }) => ({
         ...prev,
-        [column.id]: value,
+        [header.id]: value,
       }));
       if ([MRT_FILTER_TYPE.EMPTY, MRT_FILTER_TYPE.NOT_EMPTY].includes(value)) {
-        column.setFilter(' ');
+        header.column.setColumnFilterValue(' ');
       }
     } else {
       setCurrentGlobalFilterType(value);
@@ -148,9 +150,9 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
     onSelect?.();
   };
 
-  const filterType = column
-    ? tableInstance.state.currentFilterTypes[column.id]
-    : tableInstance.state.currentGlobalFilterType;
+  // const filterType = !!header
+  //   ? currentFilterTypes[header.id]
+  //   : currentGlobalFilterType;
 
   return (
     <Menu
@@ -159,15 +161,15 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
       MenuListProps={{
-        dense: tableInstance.state.densePadding,
+        dense: isDensePadding,
       }}
     >
-      {filterTypes.map(({ type, label, divider, fn }, index) => (
+      {filterTypes.map(({ type, label, divider }, index) => (
         <MenuItem
           divider={divider}
           key={index}
           onClick={() => handleSelectFilterType(type)}
-          selected={type === filterType || fn === filterType}
+          // selected={type === filterType || fn === filterType}
           sx={commonMenuItemStyles}
           value={type}
         >

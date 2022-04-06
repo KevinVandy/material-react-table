@@ -7,11 +7,11 @@ const Example: FC = () => {
   const columns = useMemo(
     () => [
       {
-        Header: 'Employee',
+        header: 'Employee',
         columns: [
           {
-            Header: 'Name',
-            accessor: 'lastName' as const,
+            header: 'Name',
+            id: 'lastName',
             Cell: ({ cell }: { cell: MRT_Cell }) => (
               <>
                 {cell.row.original?.['firstName']}
@@ -22,21 +22,21 @@ const Example: FC = () => {
             disableClickToCopy: true,
           },
           {
-            Header: 'Email',
-            accessor: 'email' as const,
+            header: 'Email',
+            id: 'email',
           },
         ],
       },
       {
-        Header: 'Job Info',
+        header: 'Job Info',
         columns: [
           {
-            Header: 'Job Title',
-            accessor: 'jobTitle' as const,
+            header: 'Job Title',
+            id: 'jobTitle',
           },
           {
-            Header: 'Salary',
-            accessor: 'salary' as const,
+            header: 'Salary',
+            id: 'salary',
             Cell: ({ cell: { value } }: { cell: MRT_Cell }) => (
               <Box
                 sx={(theme) => ({
@@ -63,8 +63,8 @@ const Example: FC = () => {
             disableEditing: true,
           },
           {
-            Header: 'Start Date',
-            accessor: 'startDate' as const,
+            header: 'Start Date',
+            id: 'startDate',
           },
         ],
       },
@@ -1496,10 +1496,10 @@ const Example: FC = () => {
       columns={columns}
       data={data}
       enableClickToCopy
-      enableColumnGrouping
+      enableGrouping
       enableRowActions
       enableRowEditing
-      enableSelection
+      enableRowSelection
       onRowEditSubmit={handleSaveRow}
       renderDetailPanel={(row) => (
         <div

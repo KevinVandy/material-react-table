@@ -1,6 +1,9 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import MaterialReactTable, { MaterialReactTableProps } from '../../src';
+import MaterialReactTable, {
+  MaterialReactTableProps,
+  MRT_ColumnInterface,
+} from '../../src';
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
@@ -14,30 +17,38 @@ const meta: Meta = {
 
 export default meta;
 
-const columns = [
+interface Row {
+  firstName: string;
+  lastName: string;
+  address: string;
+  state: string;
+  phoneNumber: string;
+}
+
+const columns: MRT_ColumnInterface<Row>[] = [
   {
-    Header: 'First Name',
-    accessor: 'firstName' as const,
+    header: 'First Name',
+    id: 'firstName',
   },
   {
-    Header: 'Last Name',
-    accessor: 'lastName' as const,
+    header: 'Last Name',
+    id: 'lastName',
   },
   {
-    Header: 'Address',
-    accessor: 'address' as const,
+    header: 'Address',
+    id: 'address',
   },
   {
-    Header: 'State',
-    accessor: 'state' as const,
+    header: 'State',
+    id: 'state',
   },
   {
-    Header: 'Phone Number',
-    accessor: 'phoneNumber' as const,
+    header: 'Phone Number',
+    id: 'phoneNumber',
   },
 ];
 
-const data = [...Array(100)].map((_) => ({
+const data: Row[] = [...Array(100)].map((_) => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   address: faker.address.streetAddress(),
@@ -50,5 +61,76 @@ export const ColumnActionsEnabledDefault: Story<
 > = () => <MaterialReactTable columns={columns} data={data} />;
 
 export const ColumnActionsDisabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} disableColumnActions />
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnActions={false}
+  />
+);
+
+export const ColumnActionsDisabledPerColumn: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        id: 'firstName',
+      },
+      {
+        header: 'Last Name',
+        id: 'lastName',
+      },
+      {
+        header: 'Address',
+        id: 'address',
+        enableColumnActions: false,
+      },
+      {
+        header: 'State',
+        id: 'state',
+        enableColumnActions: false,
+      },
+      {
+        header: 'Phone Number',
+        id: 'phoneNumber',
+        enableColumnActions: false,
+      },
+    ]}
+    data={data}
+  />
+);
+
+export const ColumnActionsEnabledPerColumn: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        id: 'firstName',
+      },
+      {
+        header: 'Last Name',
+        id: 'lastName',
+      },
+      {
+        header: 'Address',
+        id: 'address',
+        enableColumnActions: true,
+      },
+      {
+        header: 'State',
+        id: 'state',
+        enableColumnActions: true,
+      },
+      {
+        header: 'Phone Number',
+        id: 'phoneNumber',
+        enableColumnActions: true,
+      },
+    ]}
+    data={data}
+    enableColumnActions={false}
+  />
 );

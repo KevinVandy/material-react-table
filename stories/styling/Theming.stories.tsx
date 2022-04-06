@@ -13,20 +13,20 @@ export default meta;
 
 const columns = [
   {
-    Header: 'First Name',
-    accessor: 'firstName' as const,
+    header: 'First Name',
+    id: 'firstName',
   },
   {
-    Header: 'Last Name',
-    accessor: 'lastName' as const,
+    header: 'Last Name',
+    id: 'lastName',
   },
   {
-    Header: 'Age',
-    accessor: 'age' as const,
+    header: 'Age',
+    id: 'age',
   },
   {
-    Header: 'Address',
-    accessor: 'address' as const,
+    header: 'Address',
+    id: 'address',
   },
 ];
 const data = [...Array(21)].map((_) => ({
@@ -37,7 +37,7 @@ const data = [...Array(21)].map((_) => ({
 }));
 
 export const DefaultTheme: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} enableSelection />
+  <MaterialReactTable columns={columns} data={data} enableRowSelection />
 );
 
 export const CustomLightTheme: Story<MaterialReactTableProps> = () => {
@@ -57,7 +57,7 @@ export const CustomLightTheme: Story<MaterialReactTableProps> = () => {
   return (
     <Emotion10ThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>
-        <MaterialReactTable columns={columns} data={data} enableSelection />
+        <MaterialReactTable columns={columns} data={data} enableRowSelection />
       </ThemeProvider>
     </Emotion10ThemeProvider>
   );
@@ -78,7 +78,7 @@ export const CustomDarkTheme: Story<MaterialReactTableProps> = () => {
   return (
     <Emotion10ThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>
-        <MaterialReactTable columns={columns} data={data} enableSelection />
+        <MaterialReactTable columns={columns} data={data} enableRowSelection />
       </ThemeProvider>
     </Emotion10ThemeProvider>
   );

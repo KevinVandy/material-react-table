@@ -7,7 +7,12 @@ import type { MRT_HeaderGroup } from '..';
 interface Props {}
 
 export const MRT_TableHead: FC<Props> = () => {
-  const { tableInstance, muiTableHeadProps } = useMRT();
+  const {
+    idPrefix,
+    muiTableHeadProps,
+    tableInstance,
+    tableInstance: { getHeaderGroups },
+  } = useMRT();
 
   const tableHeadProps =
     muiTableHeadProps instanceof Function
@@ -15,11 +20,11 @@ export const MRT_TableHead: FC<Props> = () => {
       : muiTableHeadProps;
 
   return (
-    <TableHead {...tableHeadProps}>
-      {tableInstance.headerGroups.map((headerGroup: MRT_HeaderGroup) => (
+    <TableHead id={`mrt-${idPrefix}-table-head`} {...tableHeadProps}>
+      {getHeaderGroups().map((headerGroup) => (
         <MRT_TableHeadRow
           key={headerGroup.getHeaderGroupProps().key}
-          headerGroup={headerGroup}
+          headerGroup={headerGroup as MRT_HeaderGroup}
         />
       ))}
     </TableHead>

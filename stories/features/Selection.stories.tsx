@@ -16,20 +16,20 @@ export default meta;
 
 const columns = [
   {
-    Header: 'First Name',
-    accessor: 'firstName' as const,
+    header: 'First Name',
+    id: 'firstName',
   },
   {
-    Header: 'Last Name',
-    accessor: 'lastName' as const,
+    header: 'Last Name',
+    id: 'lastName',
   },
   {
-    Header: 'Age',
-    accessor: 'age' as const,
+    header: 'Age',
+    id: 'age',
   },
   {
-    Header: 'Address',
-    accessor: 'address' as const,
+    header: 'Address',
+    id: 'address',
   },
 ];
 const data = [...Array(5)].map((_) => ({
@@ -40,15 +40,15 @@ const data = [...Array(5)].map((_) => ({
 }));
 
 export const SelectionEnabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} enableSelection />
+  <MaterialReactTable columns={columns} data={data} enableRowSelection />
 );
 
 export const SelectAllDisabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableSelection
-    disableSelectAll
+    enableRowSelection
+    enableSelectAll={false}
   />
 );
 
@@ -56,7 +56,7 @@ export const onSelectChange: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableSelection
+    enableRowSelection
     onSelectChange={(event, row, selectedRows) => {
       console.log({ event, row, selectedRows });
     }}
@@ -72,7 +72,7 @@ export const SelectCheckboxSecondaryColor: Story<
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableSelection
+    enableRowSelection
     muiSelectCheckboxProps={{ color: 'secondary' }}
   />
 );

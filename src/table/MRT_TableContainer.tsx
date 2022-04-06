@@ -1,65 +1,67 @@
-import React, { FC, useEffect } from 'react';
-import { Paper, TableContainer, Box } from '@mui/material';
+import React, { FC } from 'react';
+import { TableContainer } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_Table } from './MRT_Table';
-import { MRT_ToolbarTop } from '../toolbar/MRT_ToolbarTop';
-import { MRT_ToolbarBottom } from '../toolbar/MRT_ToolbarBottom';
 
 interface Props {}
 
 export const MRT_TableContainer: FC<Props> = () => {
   const {
-    hideToolbarBottom,
-    hideToolbarTop,
+    enableStickyHeader,
+    idPrefix,
     muiTableContainerProps,
     tableInstance,
+    tableInstance: { getState },
   } = useMRT();
-  const fullScreen = tableInstance.state.fullScreen;
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if (fullScreen) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = 'auto';
-      }
-    }
-  }, [fullScreen]);
+  const { isFullScreen } = getState();
 
   const tableContainerProps =
     muiTableContainerProps instanceof Function
       ? muiTableContainerProps(tableInstance)
       : muiTableContainerProps;
 
+  const topToolbarHeight =
+    typeof document !== 'undefined'
+      ? document?.getElementById(`mrt-${idPrefix}-toolbar-top`)?.offsetHeight ??
+        0
+      : 0;
+
+  const bottomToolbarHeight =
+    typeof document !== 'undefined'
+      ? document?.getElementById(`mrt-${idPrefix}-toolbar-bottom`)
+          ?.offsetHeight ?? 0
+      : 0;
+
+  const tableHeadHeight =
+    typeof document !== 'undefined'
+      ? document?.getElementById(`mrt-${idPrefix}-table-head`)?.offsetHeight ??
+        0
+      : 0;
+
+  const subtractHeight =
+    topToolbarHeight +
+    bottomToolbarHeight +
+    (isFullScreen ? 0 : tableHeadHeight);
+
   return (
     <TableContainer
-      component={Paper}
       {...tableContainerProps}
       sx={{
-        bottom: fullScreen ? '0' : undefined,
-        height: fullScreen ? '100%' : undefined,
-        left: fullScreen ? '0' : undefined,
-        m: fullScreen ? '0' : undefined,
-        overflowY: !fullScreen ? 'hidden' : undefined,
-        position: fullScreen ? 'fixed' : undefined,
-        right: fullScreen ? '0' : undefined,
-        top: fullScreen ? '0' : undefined,
-        transition: 'all 0.2s ease-in-out',
-        width: fullScreen ? '100vw' : undefined,
-        zIndex: fullScreen ? 1200 : 1,
+        maxWidth: '100%',
+        overflow: 'auto',
+        maxHeight: enableStickyHeader
+          ? `clamp(350px, calc(100vh - ${subtractHeight}px), 2000px)`
+          : undefined,
         ...tableContainerProps?.sx,
       }}
+      style={{
+        maxHeight: isFullScreen
+          ? `calc(100vh - ${subtractHeight / 1}px)`
+          : undefined,
+      }}
     >
-      {!hideToolbarTop && <MRT_ToolbarTop />}
-      <Box
-        sx={{
-          maxWidth: '100%',
-          overflowX: 'auto',
-        }}
-      >
-        <MRT_Table />
-      </Box>
-      {!hideToolbarBottom && <MRT_ToolbarBottom />}
+      <MRT_Table />
     </TableContainer>
   );
 };

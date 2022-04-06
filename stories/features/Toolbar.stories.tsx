@@ -19,24 +19,24 @@ export default meta;
 
 const columns = [
   {
-    Header: 'First Name',
-    accessor: 'firstName' as const,
+    header: 'First Name',
+    id: 'firstName',
   },
   {
-    Header: 'Last Name',
-    accessor: 'lastName' as const,
+    header: 'Last Name',
+    id: 'lastName',
   },
   {
-    Header: 'Age',
-    accessor: 'age' as const,
+    header: 'Age',
+    id: 'age',
   },
   {
-    Header: 'Address',
-    accessor: 'address' as const,
+    header: 'Address',
+    id: 'address',
   },
   {
-    Header: 'Phone Number',
-    accessor: 'phoneNumber' as const,
+    header: 'Phone Number',
+    id: 'phoneNumber',
   },
 ];
 
@@ -146,7 +146,7 @@ export const CustomToolbarSelectionActions: Story<
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableSelection
+    enableRowSelection
     renderToolbarCustomActions={(tableInstance) => {
       const handleDeactivate = () => {
         tableInstance.selectedFlatRows.map((row) => {
@@ -202,7 +202,7 @@ export const ToolbarAlertBannerBottom: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableSelection
+    enableRowSelection
     positionToolbarAlertBanner="bottom"
     renderToolbarCustomActions={(tableInstance) => {
       const handleCreateNewUser = () => {

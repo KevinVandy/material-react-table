@@ -1,5 +1,5 @@
 {
-  "version": "0.6.10",
+  "version": "0.7.0",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material-UI implementation of react-table, inspired by material-table and the mui DataGrid, written from the ground up in TypeScript.",
@@ -47,11 +47,11 @@
   "size-limit": [
     {
       "path": "dist/material-react-table.cjs.production.min.js",
-      "limit": "20 KB"
+      "limit": "40 KB"
     },
     {
       "path": "dist/material-react-table.esm.js",
-      "limit": "20 KB"
+      "limit": "40 KB"
     }
   ],
   "devDependencies": {
@@ -59,9 +59,9 @@
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@etchteam/storybook-addon-status": "^4.2.0",
-    "@faker-js/faker": "^6.0.0",
+    "@faker-js/faker": "^6.1.1",
     "@mui/icons-material": "^5.5.1",
-    "@mui/material": "^5.5.2",
+    "@mui/material": "^5.5.3",
     "@size-limit/preset-small-lib": "^7.0.8",
     "@storybook/addon-a11y": "^6.4.19",
     "@storybook/addon-actions": "^6.4.19",
@@ -73,32 +73,30 @@
     "@storybook/addons": "^6.4.19",
     "@storybook/react": "^6.4.19",
     "@types/faker": "^6.6.8",
-    "@types/react": "^17.0.42",
+    "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
-    "@types/react-table": "^7.7.10",
     "babel-loader": "^8.2.4",
     "husky": "^7.0.4",
-    "prettier": "^2.6.0",
+    "prettier": "^2.6.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
-    "react-table": "^7.7.0",
     "size-limit": "^7.0.8",
     "storybook-addon-paddings": "^4.2.1",
     "storybook-dark-mode": "^1.0.9",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.6.2"
+    "typescript": "^4.6.3"
   },
   "peerDependencies": {
     "@emotion/react": ">=11",
     "@emotion/styled": ">=11",
     "@mui/icons-material": ">=5",
     "@mui/material": ">=5",
-    "react": ">=16.8",
-    "react-table": ">=7"
+    "react": ">=16.8"
   },
   "dependencies": {
+    "@tanstack/react-table": "^8.0.0-alpha.20",
     "match-sorter": "^6.3.1"
   }
 }
