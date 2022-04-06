@@ -37,39 +37,37 @@ const columns = [
   },
 ];
 
-export const SubRowTreeEnabledDefault: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={[...Array(5)].map((_) => ({
+const data = [...Array(5)].map((_) => ({
+  firstName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
+  age: faker.datatype.number(80),
+  address: faker.address.streetAddress(),
+  phoneNumber: faker.phone.phoneNumber(),
+  subRows: [...Array(faker.datatype.number(4))].map((_) => ({
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    age: faker.datatype.number(80),
+    address: faker.address.streetAddress(),
+    phoneNumber: faker.phone.phoneNumber(),
+    subRows: [...Array(3)].map((_) => ({
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       age: faker.datatype.number(80),
       address: faker.address.streetAddress(),
       phoneNumber: faker.phone.phoneNumber(),
-      subRows: [...Array(faker.datatype.number(4))].map((_) => ({
+      subRows: [...Array(2)].map((_) => ({
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         age: faker.datatype.number(80),
         address: faker.address.streetAddress(),
         phoneNumber: faker.phone.phoneNumber(),
-        subRows: [...Array(3)].map((_) => ({
-          firstName: faker.name.firstName(),
-          lastName: faker.name.lastName(),
-          age: faker.datatype.number(80),
-          address: faker.address.streetAddress(),
-          phoneNumber: faker.phone.phoneNumber(),
-          subRows: [...Array(2)].map((_) => ({
-            firstName: faker.name.firstName(),
-            lastName: faker.name.lastName(),
-            age: faker.datatype.number(80),
-            address: faker.address.streetAddress(),
-            phoneNumber: faker.phone.phoneNumber(),
-          })),
-        })),
       })),
-    }))}
-    enableExpanded
-  />
+    })),
+  })),
+}));
+
+export const SubRowTreeEnabledDefault: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} enableExpanded />
 );
 
 export const SubRowTreeDisableExpandAll: Story<
@@ -77,35 +75,20 @@ export const SubRowTreeDisableExpandAll: Story<
 > = () => (
   <MaterialReactTable
     columns={columns}
-    data={[...Array(5)].map((_) => ({
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-      age: faker.datatype.number(80),
-      address: faker.address.streetAddress(),
-      phoneNumber: faker.phone.phoneNumber(),
-      subRows: [...Array(faker.datatype.number(4))].map((_) => ({
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
-        age: faker.datatype.number(80),
-        address: faker.address.streetAddress(),
-        phoneNumber: faker.phone.phoneNumber(),
-        subRows: [...Array(3)].map((_) => ({
-          firstName: faker.name.firstName(),
-          lastName: faker.name.lastName(),
-          age: faker.datatype.number(80),
-          address: faker.address.streetAddress(),
-          phoneNumber: faker.phone.phoneNumber(),
-          subRows: [...Array(2)].map((_) => ({
-            firstName: faker.name.firstName(),
-            lastName: faker.name.lastName(),
-            age: faker.datatype.number(80),
-            address: faker.address.streetAddress(),
-            phoneNumber: faker.phone.phoneNumber(),
-          })),
-        })),
-      })),
-    }))}
+    data={data}
     enableExpanded
     enableExpandAll={false}
+  />
+);
+
+export const SubRowTreeWithSelection: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableExpanded
+    enableRowSelection
+    enableColumnFilters={false}
+    enableColumnActions={false}
+    enableSorting={false}
   />
 );
