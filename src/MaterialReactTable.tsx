@@ -5,6 +5,7 @@ import {
   CheckboxProps,
   IconButtonProps,
   LinearProgressProps,
+  PaperProps,
   SkeletonProps,
   TableBodyProps,
   TableCellProps,
@@ -33,10 +34,10 @@ import {
   TableState,
 } from '@tanstack/react-table';
 import { MaterialReactTableProvider } from './useMRT';
-import { MRT_TableContainer } from './table/MRT_TableContainer';
 import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_FILTER_TYPE } from './enums';
+import { MRT_TablePaper } from './table/MRT_TablePaper';
 
 export type MRT_TableOptions<D extends Record<string, any> = {}> = Partial<
   Omit<
@@ -235,6 +236,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     enableFullScreenToggle?: boolean;
     enablePagination?: boolean;
     enableRowActions?: boolean;
+    enableStickyHeader?: boolean;
     enableRowEditing?: boolean;
     enableRowNumbers?: boolean;
     enableSelectAll?: boolean;
@@ -307,6 +309,9 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     muiTableHeadRowProps?:
       | TableRowProps
       | ((headerGroup: MRT_HeaderGroup<D>) => TableRowProps);
+    muiTablePaperProps?:
+      | PaperProps
+      | ((tableInstance: MRT_TableInstance<D>) => PaperProps);
     muiTablePaginationProps?:
       | Partial<TablePaginationProps>
       | ((
@@ -391,7 +396,6 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
   };
 
 export default <D extends Record<string, any> = {}>({
-  // defaultCanExpand = true,
   enableColumnActions = true,
   enableColumnFilters = true,
   enableDensePaddingToggle = true,
@@ -402,6 +406,7 @@ export default <D extends Record<string, any> = {}>({
   enablePagination = true,
   enableSelectAll = true,
   enableSorting = true,
+  enableStickyHeader = true,
   filterTypes,
   icons,
   localization,
@@ -412,7 +417,6 @@ export default <D extends Record<string, any> = {}>({
   ...rest
 }: MaterialReactTableProps<D>) => (
   <MaterialReactTableProvider
-    // defaultCanExpand={defaultCanExpand}
     enableColumnActions={enableColumnActions}
     enableColumnFilters={enableColumnFilters}
     enableDensePaddingToggle={enableDensePaddingToggle}
@@ -423,6 +427,7 @@ export default <D extends Record<string, any> = {}>({
     enablePagination={enablePagination}
     enableSelectAll={enableSelectAll}
     enableSorting={enableSorting}
+    enableStickyHeader={enableStickyHeader}
     // filterTypes={{ ...defaultFilterFNs, ...filterTypes }}
     icons={{ ...MRT_Default_Icons, ...icons }}
     localization={{ ...MRT_DefaultLocalization_EN, ...localization }}
@@ -432,6 +437,6 @@ export default <D extends Record<string, any> = {}>({
     positionToolbarAlertBanner={positionToolbarAlertBanner}
     {...rest}
   >
-    <MRT_TableContainer />
+    <MRT_TablePaper />
   </MaterialReactTableProvider>
 );

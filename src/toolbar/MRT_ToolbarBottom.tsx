@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Box, Toolbar } from '@mui/material';
+import { alpha, Box, Toolbar } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
@@ -12,6 +12,7 @@ interface Props {}
 export const MRT_ToolbarBottom: FC<Props> = () => {
   const {
     hideToolbarInternalActions,
+    idPrefix,
     enablePagination,
     muiTableToolbarBottomProps,
     positionPagination,
@@ -30,13 +31,15 @@ export const MRT_ToolbarBottom: FC<Props> = () => {
 
   return (
     <Toolbar
+      id={`mrt-${idPrefix}-toolbar-bottom`}
       variant="dense"
       {...toolbarProps}
       sx={(theme) =>
         ({
+          ...commonToolbarStyles({ theme }),
           bottom: isFullScreen ? '0' : undefined,
           position: isFullScreen ? 'fixed' : undefined,
-          ...commonToolbarStyles({ theme, isFullScreen }),
+          boxShadow: `-3px 0 6px ${alpha(theme.palette.common.black, 0.1)}`,
           ...toolbarProps?.sx,
         } as any)
       }

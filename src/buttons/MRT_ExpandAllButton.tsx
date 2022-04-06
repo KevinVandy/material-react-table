@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { IconButton } from '@mui/material';
 import { useMRT } from '../useMRT';
 
@@ -6,11 +6,17 @@ interface Props {}
 
 export const MRT_ExpandAllButton: FC<Props> = () => {
   const {
-    getIsSomeRowsExpanded,
     icons: { DoubleArrowDownIcon },
     localization,
-    tableInstance: { getIsAllRowsExpanded, toggleAllRowsExpanded },
+    tableInstance: { getState, getIsAllRowsExpanded, toggleAllRowsExpanded },
   } = useMRT();
+
+  const getIsSomeRowsExpanded = useMemo(
+    () =>
+      getState().expanded === true ||
+      Object.values(getState().expanded).some(Boolean),
+    [getState().expanded],
+  );
 
   return (
     <IconButton
@@ -21,7 +27,7 @@ export const MRT_ExpandAllButton: FC<Props> = () => {
       <DoubleArrowDownIcon
         style={{
           transform: `rotate(${
-            getIsAllRowsExpanded() ? -180 : getIsSomeRowsExpanded() ? -90 : 0
+            getIsAllRowsExpanded() ? -180 : getIsSomeRowsExpanded ? -90 : 0
           }deg)`,
           transition: 'transform 0.2s',
         }}

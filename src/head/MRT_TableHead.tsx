@@ -8,6 +8,7 @@ interface Props {}
 
 export const MRT_TableHead: FC<Props> = () => {
   const {
+    idPrefix,
     muiTableHeadProps,
     tableInstance,
     tableInstance: { getHeaderGroups },
@@ -19,7 +20,7 @@ export const MRT_TableHead: FC<Props> = () => {
       : muiTableHeadProps;
 
   return (
-    <TableHead {...tableHeadProps}>
+    <TableHead id={`mrt-${idPrefix}-table-head`} {...tableHeadProps}>
       {getHeaderGroups().map((headerGroup) => (
         <MRT_TableHeadRow
           key={headerGroup.getHeaderGroupProps().key}

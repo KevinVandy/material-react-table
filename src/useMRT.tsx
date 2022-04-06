@@ -17,7 +17,6 @@ import React, {
   useContext,
   useMemo,
   useState,
-  useCallback,
 } from 'react';
 import type {
   MRT_ColumnInterface,
@@ -43,7 +42,6 @@ import {
 
 export type UseMRT<D extends Record<string, any> = {}> =
   MaterialReactTableProps<D> & {
-    getIsSomeRowsExpanded: () => boolean;
     icons: MRT_Icons;
     idPrefix: string;
     filterTypes: { [key in MRT_FILTER_TYPE]: any };
@@ -226,7 +224,7 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
     data,
     expandRowsFn: expandRowsFn,
     filterTypes: defaultFilterFNs,
-    getSubRows: (originalRow: D) => originalRow.subRows,
+    getSubRows: props.getSubRows ?? ((originalRow: D) => originalRow.subRows),
     paginateRowsFn: paginateRowsFn,
     onPaginationChange: (updater: any) =>
       setPagination((old) => functionalUpdate(updater, old)),
@@ -247,17 +245,11 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
     [props.idPrefix],
   );
 
-  const getIsSomeRowsExpanded = useCallback(
-    () => tableInstance.getRowModel().rows.some((row) => row.getIsExpanded()),
-    [tableInstance.getRowModel().rows],
-  );
-
   return (
     <MaterialReactTableContext.Provider
       value={
         {
           ...props,
-          getIsSomeRowsExpanded,
           idPrefix,
           setCurrentEditingRow,
           // setCurrentFilterTypes,

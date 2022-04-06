@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC } from 'react';
+import React, { FC } from 'react';
 import {
   TableCell,
   TableSortLabel,
@@ -7,40 +7,13 @@ import {
   Tooltip,
   Box,
   IconButton,
+  alpha,
 } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
 import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
 import type { MRT_Header } from '..';
-import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
 import { ColumnResizerProps } from '@tanstack/react-table';
-
-export const commonTableHeadCellStyles = ({
-  isDensePadding,
-  enableColumnResizing,
-  width,
-  isDisplayColumn,
-}: {
-  isDensePadding: boolean;
-  isDisplayColumn?: boolean;
-  enableColumnResizing?: boolean;
-  width: CSSProperties['width'];
-}) => ({
-  fontWeight: 'bold',
-  height: '100%',
-  p: isDensePadding
-    ? isDisplayColumn
-      ? '0 0.5rem'
-      : '0.5rem'
-    : isDisplayColumn
-    ? '0.5rem 0.75rem'
-    : '1rem',
-  pt: isDensePadding ? '0.75rem' : '1.25rem',
-  transition: `all ${enableColumnResizing ? 0 : '0.2s'} ease-in-out`,
-  verticalAlign: 'text-top',
-  width,
-  minWidth: `max(${width}, 100px)`,
-});
 
 interface Props {
   header: MRT_Header;
@@ -121,26 +94,37 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
       tableInstance,
     }) ?? header.column.header;
 
-  if (header.isPlaceholder) {
-    return <MRT_TableSpacerCell />;
-  }
-
   return (
     <TableCell
       align={isParentHeader ? 'center' : 'left'}
       {...tableCellProps}
-      sx={{
-        ...commonTableHeadCellStyles({
-          isDensePadding,
-          isDisplayColumn: header.column.isDisplayColumn,
-          enableColumnResizing,
-          width: header.getWidth(),
-        }),
+      //@ts-ignore
+      sx={(theme: Theme) => ({
+        backgroundColor: theme.palette.background.default,
+        backgroundImage: `linear-gradient(${alpha(
+          theme.palette.common.white,
+          0.05,
+        )},${alpha(theme.palette.common.white, 0.05)})`,
+        boxShadow: `3px 0 6px ${alpha(theme.palette.common.black, 0.1)}`,
+        fontWeight: 'bold',
+        height: '100%',
+        minWidth: `max(${header.getWidth()}, 100px)`,
+        p: isDensePadding
+          ? header.column.isDisplayColumn
+            ? '0 0.5rem'
+            : '0.5rem'
+          : header.column.isDisplayColumn
+          ? '0.5rem 0.75rem'
+          : '1rem',
+        pt: isDensePadding ? '0.75rem' : '1.25rem',
+        transition: `all ${enableColumnResizing ? 0 : '0.2s'} ease-in-out`,
+        verticalAlign: 'text-top',
+        width: header.getWidth(),
         //@ts-ignore
         ...tableCellProps?.sx,
-      }}
+      })}
     >
-      {header.column.isDisplayColumn ? (
+      {header.isPlaceholder ? null : header.column.isDisplayColumn ? (
         headerElement
       ) : (
         <Box

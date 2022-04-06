@@ -1,37 +1,9 @@
 import React, { FC, MouseEvent, useMemo } from 'react';
-import { Skeleton, SxProps, TableCell } from '@mui/material';
+import { Skeleton, TableCell } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import type { MRT_Cell } from '..';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
-
-export const commonTableBodyCellStyles = ({
-  isDensePadding,
-  isDisplayColumn,
-}: {
-  isDensePadding: boolean;
-  isDisplayColumn?: boolean;
-}): SxProps => ({
-  p: isDensePadding
-    ? isDisplayColumn
-      ? '0 0.5rem'
-      : '0.5rem'
-    : isDisplayColumn
-    ? '0.5rem 0.75rem'
-    : '1rem',
-  transition: 'all 0.2s ease-in-out',
-  whiteSpace: isDensePadding ? 'nowrap' : 'normal',
-});
-
-export const commonTableBodyButtonCellStyles = ({
-  isDensePadding,
-}: {
-  isDensePadding: boolean;
-}) => ({
-  p: isDensePadding ? '1px' : '0.5rem',
-  textAlign: 'center',
-  transition: 'all 0.2s ease-in-out',
-});
 
 interface Props {
   cell: MRT_Cell;
@@ -80,15 +52,19 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
       }
       {...tableCellProps}
       sx={{
-        ...commonTableBodyCellStyles({
-          isDensePadding,
-          isDisplayColumn: cell.column.isDisplayColumn,
-        }),
-        //@ts-ignore
+        p: isDensePadding
+          ? cell.column.isDisplayColumn
+            ? '0 0.5rem'
+            : '0.5rem'
+          : cell.column.isDisplayColumn
+          ? '0.5rem 0.75rem'
+          : '1rem',
         pl:
           cell.column.id === 'mrt-expand'
             ? `${cell.row.depth + (isDensePadding ? 0.5 : 0.75)}rem`
             : undefined,
+        transition: 'all 0.2s ease-in-out',
+        whiteSpace: isDensePadding ? 'nowrap' : 'normal',
         //@ts-ignore
         ...tableCellProps?.sx,
       }}

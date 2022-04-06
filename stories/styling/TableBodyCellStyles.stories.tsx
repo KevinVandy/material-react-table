@@ -91,19 +91,19 @@ export const CustomCellRender: Story<MaterialReactTableProps> = () => (
       {
         header: 'First Name',
         id: 'firstName',
-        Cell: (cell) => (
+        Cell: ({ cell }) => (
           <span style={{ fontStyle: 'italic' }}>{cell.value}</span>
         ),
       },
       {
         header: 'Last Name',
         id: 'lastName',
-        Cell: (cell) => <span style={{ color: 'red' }}>{cell.value}</span>,
+        Cell: ({ cell }) => <span style={{ color: 'red' }}>{cell.value}</span>,
       },
       {
         header: 'Age',
         id: 'age',
-        Cell: (cell) => (
+        Cell: ({ cell }) => (
           <span
             style={{
               fontStyle: 'italic',

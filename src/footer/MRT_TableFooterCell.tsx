@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
-import { TableCell } from '@mui/material';
+import { alpha, TableCell } from '@mui/material';
 import { useMRT } from '../useMRT';
 import type { MRT_Header } from '..';
-import { MRT_TableSpacerCell } from '../table/MRT_TableSpacerCell';
 
 interface Props {
   footer: MRT_Header;
@@ -44,25 +43,27 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer }) => {
     footer.column.footer ??
     null;
 
-  if (footer.isPlaceholder) {
-    return <MRT_TableSpacerCell />;
-  }
-
   return (
     <TableCell
       align={isParentHeader ? 'center' : 'left'}
       variant="head"
       {...tableCellProps}
-      sx={{
+      //@ts-ignore
+      sx={(theme) => ({
+        backgroundColor: theme.palette.background.default,
+        backgroundImage: `linear-gradient(${alpha(
+          theme.palette.common.white,
+          0.05,
+        )},${alpha(theme.palette.common.white, 0.05)})`,
         fontWeight: 'bold',
-        verticalAlign: 'text-top',
         p: isDensePadding ? '0.5rem' : '1rem',
         transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
+        verticalAlign: 'text-top',
         //@ts-ignore
         ...tableCellProps?.sx,
-      }}
+      })}
     >
-      {footerElement}
+      {footer.isPlaceholder ? null : footerElement}
     </TableCell>
   );
 };

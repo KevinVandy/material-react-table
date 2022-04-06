@@ -9,6 +9,7 @@ interface Props {}
 
 export const MRT_Table: FC<Props> = () => {
   const {
+    enableStickyHeader,
     hideTableFooter,
     hideTableHead,
     muiTableProps,
@@ -27,7 +28,7 @@ export const MRT_Table: FC<Props> = () => {
   };
 
   return (
-    <Table {...tableProps}>
+    <Table stickyHeader={enableStickyHeader} {...tableProps}>
       {!hideTableHead && <MRT_TableHead />}
       <MRT_TableBody />
       {!hideTableFooter && <MRT_TableFooter />}
