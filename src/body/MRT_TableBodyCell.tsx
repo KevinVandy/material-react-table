@@ -26,14 +26,14 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
   const skeletonWidth = useMemo(
     () =>
       cell.column.isDisplayColumn
-        ? cell.column.getWidth() / 3
+        ? cell.column.getWidth() / 2
         : Math.random() *
             (cell.column.getWidth() - cell.column.getWidth() / 3) +
           cell.column.getWidth() / 3,
     [cell.column.isDisplayColumn, cell.column.getWidth()],
   );
 
-  const getIsSomeColumnPinned = useMemo(
+  const getIsSomeColumnsPinned = useMemo(
     () => !!columnPinning.left?.length || !!columnPinning.right?.length,
     [columnPinning.left, columnPinning.right],
   );
@@ -74,7 +74,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
             : undefined,
         transition: 'all 0.2s ease-in-out',
         whiteSpace:
-          isDensePadding || (enableColumnPinning && getIsSomeColumnPinned)
+          isDensePadding || (enableColumnPinning && getIsSomeColumnsPinned)
             ? 'nowrap'
             : 'normal',
         //@ts-ignore

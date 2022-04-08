@@ -36,7 +36,7 @@ export const MRT_TableContainer: FC<Props> = () => {
 
   const { isFullScreen, columnPinning } = getState();
 
-  const getIsSomeColumnPinned = useMemo(
+  const getIsSomeColumnsPinned = useMemo(
     () => !!columnPinning.left?.length || !!columnPinning.right?.length,
     [columnPinning.left, columnPinning.right],
   );
@@ -77,7 +77,7 @@ export const MRT_TableContainer: FC<Props> = () => {
           : undefined,
       }}
     >
-      {enableColumnPinning && getIsSomeColumnPinned ? (
+      {enableColumnPinning && getIsSomeColumnsPinned ? (
         <Box
           sx={{
             display: 'grid',
