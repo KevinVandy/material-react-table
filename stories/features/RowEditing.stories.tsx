@@ -287,7 +287,7 @@ export const RowEditingEnabledAsync: Story<MaterialReactTableProps> = () => {
       data={tableData}
       enableRowActions
       enableRowEditing
-      isFetching={isSaving}
+      isReloading={isSaving}
       onRowEditSubmit={handleSaveRow}
     />
   );

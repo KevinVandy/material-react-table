@@ -25,9 +25,12 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
 
   const skeletonWidth = useMemo(
     () =>
-      Math.random() * (cell.column.getWidth() - cell.column.getWidth() / 3) +
-      cell.column.getWidth() / 3,
-    [cell.column.getWidth()],
+      cell.column.isDisplayColumn
+        ? cell.column.getWidth() / 3
+        : Math.random() *
+            (cell.column.getWidth() - cell.column.getWidth() / 3) +
+          cell.column.getWidth() / 3,
+    [cell.column.isDisplayColumn, cell.column.getWidth()],
   );
 
   const getIsSomeColumnPinned = useMemo(
@@ -78,15 +81,15 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
         ...tableCellProps?.sx,
       }}
     >
-      {cell.column.isDisplayColumn ? (
-        cell.column.Cell?.({ cell, tableInstance })
-      ) : isLoading ? (
+      {isLoading ? (
         <Skeleton
           animation="wave"
           height={20}
           width={skeletonWidth}
           {...muiTableBodyCellSkeletonProps}
         />
+      ) : cell.column.isDisplayColumn ? (
+        cell.column.Cell?.({ cell, tableInstance })
       ) : cell.column.enableEditing && currentEditingRow?.id === cell.row.id ? (
         <MRT_EditCellTextField cell={cell} />
       ) : (enableClickToCopy || cell.column.enableClickToCopy) &&

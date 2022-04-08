@@ -49,6 +49,18 @@ export const LoadingExample: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={[]} isLoading />
 );
 
+export const LoadingDisplayColumns: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={[]}
+    isLoading
+    enableRowSelection
+    enableRowNumbers
+    enableExpanded
+    enableRowActions
+  />
+);
+
 export const ReloadingExample: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} isFetching />
+  <MaterialReactTable columns={columns} data={data} isReloading />
 );

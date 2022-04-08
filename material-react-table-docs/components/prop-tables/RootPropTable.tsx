@@ -228,7 +228,7 @@ const RootPropTable = () => {
           'Give the table a custom initial state. Useful for persisting state',
       },
       {
-        prop: 'isFetching',
+        prop: 'isReloading',
         type: 'boolean',
         description:
           'Shows a linear progress bar while data is loading or refreshing',

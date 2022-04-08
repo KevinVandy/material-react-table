@@ -5,7 +5,7 @@ import { useMRT } from '../useMRT';
 interface Props {}
 
 export const MRT_LinearProgressBar: FC<Props> = () => {
-  const { muiLinearProgressProps, isFetching, isLoading, tableInstance } =
+  const { muiLinearProgressProps, isReloading, isLoading, tableInstance } =
     useMRT();
 
   const linearProgressProps =
@@ -14,7 +14,7 @@ export const MRT_LinearProgressBar: FC<Props> = () => {
       : muiLinearProgressProps;
 
   return (
-    <Collapse in={isFetching || isLoading} unmountOnExit>
+    <Collapse in={isReloading || isLoading} unmountOnExit>
       <LinearProgress
         aria-label="Loading"
         aria-busy="true"

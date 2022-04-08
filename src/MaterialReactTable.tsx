@@ -259,7 +259,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     hideToolbarTop?: boolean;
     icons?: Partial<MRT_Icons>;
     idPrefix?: string;
-    isFetching?: boolean;
+    isReloading?: boolean;
     isLoading?: boolean;
     localization?: Partial<MRT_Localization>;
     muiLinearProgressProps?:

@@ -90,5 +90,6 @@ export const SubRowTreeWithSelection: Story<MaterialReactTableProps> = () => (
     enableColumnFilters={false}
     enableColumnActions={false}
     enableSorting={false}
+    enablePagination={false}
   />
 );
