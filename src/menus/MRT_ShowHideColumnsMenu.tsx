@@ -20,6 +20,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
       getAllColumns,
       getIsAllColumnsVisible,
       getIsSomeColumnsVisible,
+      getIsSomeColumnsPinned,
       getState,
       toggleAllColumnsVisible,
       getAllLeafColumns,
@@ -39,10 +40,16 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
     [getAllColumns()],
   );
 
-  const allDataColumns = useMemo(
-    () => getAllColumns().filter((col) => !col.isDisplayColumn),
-    [getAllColumns()],
-  );
+  const allDataColumns = useMemo(() => {
+    const dataColumns = getAllColumns().filter((col) => !col.isDisplayColumn);
+    return getIsSomeColumnsPinned()
+      ? [
+          ...dataColumns.filter((c) => c.getIsPinned() === 'left'),
+          ...dataColumns.filter((c) => c.getIsPinned() === false),
+          ...dataColumns.filter((c) => c.getIsPinned() === 'right'),
+        ]
+      : dataColumns;
+  }, [getAllColumns(), getState().columnPinning, getIsSomeColumnsPinned()]);
 
   return (
     <Menu
