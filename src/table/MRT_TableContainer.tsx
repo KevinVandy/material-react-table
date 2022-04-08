@@ -6,13 +6,15 @@ import { MRT_Table } from './MRT_Table';
 const commonBoxStyles = ({
   pinned,
   theme,
+  visible,
 }: {
   pinned?: 'left' | 'right';
   theme: Theme;
+  visible?: boolean;
 }) =>
   ({
     display: 'grid',
-    minWidth: '200px',
+    minWidth: visible ? '200px' : 0,
     overflowX: 'auto',
     boxShadow:
       pinned === 'left'
@@ -89,27 +91,35 @@ export const MRT_TableContainer: FC<Props> = () => {
             gridTemplateColumns: `${getLeftTableWidth()}fr ${getCenterTableWidth()}fr ${getRightTableWidth()}fr`,
           }}
         >
-          {!!columnPinning.left?.length && (
-            <Box
-              // @ts-ignore
-              sx={(theme: Theme) => commonBoxStyles({ pinned: 'left', theme })}
-            >
-              <MRT_Table pinned="left" />
-            </Box>
-          )}
+          <Box
+            // @ts-ignore
+            sx={(theme: Theme) =>
+              commonBoxStyles({
+                pinned: 'left',
+                theme,
+                visible: !!columnPinning.left?.length,
+              })
+            }
+          >
+            <MRT_Table pinned="left" />
+          </Box>
           <Box // @ts-ignore
             sx={(theme: Theme) => commonBoxStyles({ theme })}
           >
             <MRT_Table pinned="center" />
           </Box>
-          {!!columnPinning.right?.length && (
-            <Box
-              // @ts-ignore
-              sx={(theme: Theme) => commonBoxStyles({ pinned: 'right', theme })}
-            >
-              <MRT_Table pinned="right" />
-            </Box>
-          )}
+          <Box
+            // @ts-ignore
+            sx={(theme: Theme) =>
+              commonBoxStyles({
+                pinned: 'right',
+                theme,
+                visible: !!columnPinning.right?.length,
+              })
+            }
+          >
+            <MRT_Table pinned="right" />
+          </Box>
         </Box>
       ) : (
         <MRT_Table pinned="none" />
