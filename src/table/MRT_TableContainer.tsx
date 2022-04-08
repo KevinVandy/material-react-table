@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useLayoutEffect, useState } from 'react';
 import { alpha, Box, SxProps, TableContainer, Theme } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_Table } from './MRT_Table';
@@ -31,34 +31,39 @@ export const MRT_TableContainer: FC<Props> = () => {
     idPrefix,
     muiTableContainerProps,
     tableInstance,
-    tableInstance: { getState },
+    tableInstance: {
+      getCenterTableWidth,
+      getIsSomeColumnsPinned,
+      getLeftTableWidth,
+      getRightTableWidth,
+      getState,
+    },
   } = useMRT();
 
   const { isFullScreen, columnPinning } = getState();
 
-  const getIsSomeColumnsPinned = useMemo(
-    () => !!columnPinning.left?.length || !!columnPinning.right?.length,
-    [columnPinning.left, columnPinning.right],
-  );
+  const [totalToolbarHeight, setTotalToolbarHeight] = useState(0);
 
   const tableContainerProps =
     muiTableContainerProps instanceof Function
       ? muiTableContainerProps(tableInstance)
       : muiTableContainerProps;
 
-  const topToolbarHeight =
-    typeof document !== 'undefined'
-      ? document?.getElementById(`mrt-${idPrefix}-toolbar-top`)?.offsetHeight ??
-        0
-      : 0;
+  useLayoutEffect(() => {
+    const topToolbarHeight =
+      typeof document !== 'undefined'
+        ? document?.getElementById(`mrt-${idPrefix}-toolbar-top`)
+            ?.offsetHeight ?? 0
+        : 0;
 
-  const bottomToolbarHeight =
-    typeof document !== 'undefined'
-      ? document?.getElementById(`mrt-${idPrefix}-toolbar-bottom`)
-          ?.offsetHeight ?? 0
-      : 0;
+    const bottomToolbarHeight =
+      typeof document !== 'undefined'
+        ? document?.getElementById(`mrt-${idPrefix}-toolbar-bottom`)
+            ?.offsetHeight ?? 0
+        : 0;
 
-  const subtractHeight = topToolbarHeight + bottomToolbarHeight;
+    setTotalToolbarHeight(topToolbarHeight + bottomToolbarHeight);
+  });
 
   return (
     <TableContainer
@@ -66,22 +71,22 @@ export const MRT_TableContainer: FC<Props> = () => {
       sx={{
         maxWidth: '100%',
         maxHeight: enableStickyHeader
-          ? `clamp(350px, calc(100vh - ${subtractHeight}px), 2000px)`
+          ? `clamp(350px, calc(100vh - ${totalToolbarHeight}px), 2000px)`
           : undefined,
         overflow: 'auto',
         ...tableContainerProps?.sx,
       }}
       style={{
         maxHeight: isFullScreen
-          ? `calc(100vh - ${subtractHeight}px)`
+          ? `calc(100vh - ${totalToolbarHeight}px)`
           : undefined,
       }}
     >
-      {enableColumnPinning && getIsSomeColumnsPinned ? (
+      {enableColumnPinning && getIsSomeColumnsPinned() ? (
         <Box
           sx={{
             display: 'grid',
-            gridTemplateColumns: `${tableInstance.getLeftTableWidth()}fr ${tableInstance.getCenterTableWidth()}fr ${tableInstance.getRightTableWidth()}fr`,
+            gridTemplateColumns: `${getLeftTableWidth()}fr ${getCenterTableWidth()}fr ${getRightTableWidth()}fr`,
           }}
         >
           {!!columnPinning.left?.length && (

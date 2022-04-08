@@ -1,10 +1,11 @@
-import React, { FC, useState } from 'react';
+import React, { FC, ReactNode, useState } from 'react';
 import { Button, Tooltip } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_Cell } from '..';
 
 interface Props {
   cell: MRT_Cell;
+  children: ReactNode;
 }
 
 export const MRT_CopyButton: FC<Props> = ({ cell, children }) => {

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { Button, Menu, Divider, Box } from '@mui/material';
 import { useMRT } from '../useMRT';
 import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
@@ -34,6 +34,16 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
       .forEach((col) => col.toggleVisibility(false));
   };
 
+  const allDisplayColumns = useMemo(
+    () => getAllColumns().filter((col) => col.isDisplayColumn),
+    [getAllColumns()],
+  );
+
+  const allDataColumns = useMemo(
+    () => getAllColumns().filter((col) => !col.isDisplayColumn),
+    [getAllColumns()],
+  );
+
   return (
     <Menu
       anchorEl={anchorEl}
@@ -67,25 +77,21 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
         </Button>
       </Box>
       <Divider />
-      {getAllColumns()
-        .filter((col) => col.isDisplayColumn)
-        .map((column, index) => (
-          <MRT_ShowHideColumnsMenuItems
-            column={column}
-            isSubMenu={isSubMenu}
-            key={`${index}-${column.id}`}
-          />
-        ))}
+      {allDisplayColumns.map((column, index) => (
+        <MRT_ShowHideColumnsMenuItems
+          column={column}
+          isSubMenu={isSubMenu}
+          key={`${index}-${column.id}`}
+        />
+      ))}
       <Divider />
-      {getAllColumns()
-        .filter((col) => !col.isDisplayColumn)
-        .map((column, index) => (
-          <MRT_ShowHideColumnsMenuItems
-            column={column}
-            isSubMenu={isSubMenu}
-            key={`${index}-${column.id}`}
-          />
-        ))}
+      {allDataColumns.map((column, index) => (
+        <MRT_ShowHideColumnsMenuItems
+          column={column}
+          isSubMenu={isSubMenu}
+          key={`${index}-${column.id}`}
+        />
+      ))}
     </Menu>
   );
 };
