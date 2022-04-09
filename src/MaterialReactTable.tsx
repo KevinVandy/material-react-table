@@ -141,7 +141,6 @@ export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
     cell: MRT_Cell<D>;
     tableInstance: MRT_TableInstance<D>;
   }) => ReactNode;
-  isDisplayColumn?: boolean;
   id: keyof D | string;
   columns?: MRT_ColumnInterface<D>[];
   enableClickToCopy?: boolean;

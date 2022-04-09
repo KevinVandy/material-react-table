@@ -16,8 +16,7 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer }) => {
   } = useMRT();
 
   const { isDensePadding } = getState();
-
-  const isParentHeader = !!footer.column.columns?.length;
+  const { columnDefType } = footer.column;
 
   const mTableFooterCellProps =
     muiTableFooterCellProps instanceof Function
@@ -45,7 +44,7 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer }) => {
 
   return (
     <TableCell
-      align={isParentHeader ? 'center' : 'left'}
+      align={columnDefType === 'group' ? 'center' : 'left'}
       variant="head"
       {...tableCellProps}
       //@ts-ignore

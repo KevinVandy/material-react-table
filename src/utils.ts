@@ -38,8 +38,4 @@ export const createDataColumn = <D extends Record<string, any> = {}>(
 export const createDisplayColumn = <D extends Record<string, any> = {}>(
   table: Table<D>,
   column: Omit<MRT_ColumnInterface<D>, 'header'> & { header?: string },
-): ColumnDef<D> =>
-  table.createDisplayColumn({
-    ...column,
-    isDisplayColumn: true,
-  } as any);
+): ColumnDef<D> => table.createDisplayColumn(column);

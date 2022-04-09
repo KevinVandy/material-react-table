@@ -36,12 +36,14 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
   };
 
   const allDisplayColumns = useMemo(
-    () => getAllColumns().filter((col) => col.isDisplayColumn),
+    () => getAllColumns().filter((col) => col.columnDefType === 'display'),
     [getAllColumns()],
   );
 
   const allDataColumns = useMemo(() => {
-    const dataColumns = getAllColumns().filter((col) => !col.isDisplayColumn);
+    const dataColumns = getAllColumns().filter(
+      (col) => col.columnDefType !== 'display',
+    );
     return getIsSomeColumnsPinned()
       ? [
           ...dataColumns.filter((c) => c.getIsPinned() === 'left'),

@@ -19,16 +19,15 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
   } = useMRT();
 
   const { columnVisibility } = getState();
-
-  const isParentHeader = !!column?.columns?.length;
+  const { columnDefType } = column;
 
   const switchChecked =
-    (!isParentHeader && column.getIsVisible()) ||
-    (isParentHeader &&
+    (columnDefType !== 'group' && column.getIsVisible()) ||
+    (columnDefType === 'group' &&
       column.getLeafColumns().some((col) => col.getIsVisible()));
 
   const handleToggleColumnHidden = (column: MRT_ColumnInstance) => {
-    if (isParentHeader) {
+    if (columnDefType === 'group') {
       column?.columns?.forEach?.((childColumn: MRT_ColumnInstance) => {
         childColumn.toggleVisibility(!switchChecked);
       });

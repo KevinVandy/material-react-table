@@ -25,12 +25,12 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
 
   const skeletonWidth = useMemo(
     () =>
-      cell.column.isDisplayColumn
+      cell.column.columnDefType === 'display'
         ? cell.column.getWidth() / 2
         : Math.random() *
             (cell.column.getWidth() - cell.column.getWidth() / 3) +
           cell.column.getWidth() / 3,
-    [cell.column.isDisplayColumn, cell.column.getWidth()],
+    [cell.column.columnDefType, cell.column.getWidth()],
   );
 
   const mTableCellBodyProps =
@@ -57,10 +57,10 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
       {...tableCellProps}
       sx={{
         p: isDensePadding
-          ? cell.column.isDisplayColumn
+          ? cell.column.columnDefType === 'display'
             ? '0 0.5rem'
             : '0.5rem'
-          : cell.column.isDisplayColumn
+          : cell.column.columnDefType === 'display'
           ? '0.5rem 0.75rem'
           : '1rem',
         pl:
@@ -83,7 +83,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell }) => {
           width={skeletonWidth}
           {...muiTableBodyCellSkeletonProps}
         />
-      ) : cell.column.isDisplayColumn ? (
+      ) : cell.column.columnDefType === 'display' ? (
         cell.column.Cell?.({ cell, tableInstance })
       ) : cell.getIsPlaceholder() ||
         (cell.row.getIsGrouped() &&

@@ -33,8 +33,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
   } = useMRT();
 
   const { isDensePadding, showFilters } = getState();
-
-  const isParentHeader = !!header.column.columns?.length;
+  const { columnDefType } = header.column;
 
   const mTableHeadCellProps =
     muiTableHeadCellProps instanceof Function
@@ -96,7 +95,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
 
   return (
     <TableCell
-      align={isParentHeader ? 'center' : 'left'}
+      align={columnDefType === 'group' ? 'center' : 'left'}
       {...tableCellProps}
       //@ts-ignore
       sx={(theme: Theme) => ({
@@ -110,18 +109,19 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
         height: '100%',
         minWidth: `max(${header.getWidth()}, 100px)`,
         p: isDensePadding
-          ? header.column.isDisplayColumn
+          ? columnDefType === 'display'
             ? '0 0.5rem'
             : '0.5rem'
-          : header.column.isDisplayColumn
+          : columnDefType === 'display'
           ? '0.5rem 0.75rem'
           : '1rem',
-        pt: header.column.isDisplayColumn
-          ? 0
-          : isDensePadding
-          ? '0.75rem'
-          : '1.25rem',
-        pb: header.column.isDisplayColumn ? 0 : undefined,
+        pt:
+          columnDefType === 'display'
+            ? 0
+            : isDensePadding
+            ? '0.75rem'
+            : '1.25rem',
+        pb: columnDefType === 'display' ? 0 : undefined,
         transition: `all ${enableColumnResizing ? 0 : '0.2s'} ease-in-out`,
         verticalAlign: 'text-top',
         width: header.getWidth(),
@@ -129,14 +129,15 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
         ...tableCellProps?.sx,
       })}
     >
-      {header.isPlaceholder ? null : header.column.isDisplayColumn ? (
+      {header.isPlaceholder ? null : columnDefType === 'display' ? (
         headerElement
       ) : (
         <Box
           sx={{
             alignItems: 'flex-start',
             display: 'flex',
-            justifyContent: isParentHeader ? 'center' : 'space-between',
+            justifyContent:
+              columnDefType === 'group' ? 'center' : 'space-between',
             width: '100%',
           }}
         >
@@ -145,7 +146,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
             sx={{
               alignItems: 'center',
               cursor:
-                header.column.getCanSort() && !isParentHeader
+                header.column.getCanSort() && columnDefType !== 'group'
                   ? 'pointer'
                   : undefined,
               display: 'flex',
@@ -156,7 +157,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
             title={undefined}
           >
             {headerElement}
-            {!isParentHeader && header.column.getCanSort() && (
+            {columnDefType !== 'group' && header.column.getCanSort() && (
               <Tooltip arrow placement="top" title={sortTooltip}>
                 <TableSortLabel
                   aria-label={sortTooltip}
@@ -169,7 +170,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
                 />
               </Tooltip>
             )}
-            {!isParentHeader &&
+            {columnDefType !== 'group' &&
               enableColumnFilters &&
               !!header.column.getCanColumnFilter() && (
                 <Tooltip arrow placement="top" title={filterTooltip}>
@@ -205,10 +206,10 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
           >
             {(enableColumnActions || header.column.enableColumnActions) &&
               header.column.enableColumnActions !== false &&
-              !isParentHeader && (
+              columnDefType !== 'group' && (
                 <MRT_ToggleColumnActionMenuButton header={header} />
               )}
-            {enableColumnResizing && !isParentHeader && (
+            {enableColumnResizing && columnDefType !== 'group' && (
               <Divider
                 flexItem
                 orientation="vertical"
@@ -240,8 +241,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header }) => {
           </Box>
         </Box>
       )}
-      {!header.column.isDisplayColumn &&
-        !isParentHeader &&
+      {columnDefType === 'data' &&
         enableColumnFilters &&
         header.column.getCanColumnFilter() && (
           <Collapse in={showFilters}>
