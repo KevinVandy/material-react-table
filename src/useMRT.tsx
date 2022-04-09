@@ -3,6 +3,7 @@ import {
   createTable,
   expandRowsFn,
   functionalUpdate,
+  groupRowsFn,
   paginateRowsFn,
   PaginationState,
   sortRowsFn,
@@ -66,6 +67,10 @@ const MaterialReactTableContext = (<D extends Record<string, any> = {}>() =>
 export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
   props: PropsWithChildren<MaterialReactTableProps<D>>,
 ) => {
+  const idPrefix = useMemo(
+    () => props.idPrefix ?? Math.random().toString(36).substring(2, 9),
+    [props.idPrefix],
+  );
   const [currentEditingRow, setCurrentEditingRow] = useState<MRT_Row | null>(
     null,
   );
@@ -144,7 +149,7 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
             maxWidth: 60,
             width: 60,
           }),
-        props.enableExpanded &&
+        (props.enableExpanded || props.enableGrouping) &&
           createDisplayColumn(table, {
             Cell: ({ cell }) => <MRT_ExpandButton row={cell.row as any} />,
             Header: () =>
@@ -224,6 +229,7 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
     data,
     expandRowsFn: expandRowsFn,
     filterTypes: defaultFilterFNs,
+    groupRowsFn: groupRowsFn,
     getSubRows: props.getSubRows ?? ((originalRow: D) => originalRow.subRows),
     paginateRowsFn: paginateRowsFn,
     onPaginationChange: (updater: any) =>
@@ -241,10 +247,7 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
     },
   } as any);
 
-  const idPrefix = useMemo(
-    () => props.idPrefix ?? Math.random().toString(36).substring(2, 9),
-    [props.idPrefix],
-  );
+  
 
   return (
     <MaterialReactTableContext.Provider

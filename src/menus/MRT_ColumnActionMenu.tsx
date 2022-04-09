@@ -48,7 +48,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     idPrefix,
     localization,
     setShowFilters,
-    tableInstance: { getState, toggleAllColumnsVisible },
+    tableInstance: { getState, toggleAllColumnsVisible, setColumnOrder },
   } = useMRT();
 
   const { isDensePadding, columnVisibility } = getState();
@@ -85,6 +85,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
 
   const handleGroupByColumn = () => {
     header.column.toggleGrouping();
+    setColumnOrder((old) => ['mrt-expand', ...old]);
     setAnchorEl(null);
   };
 
