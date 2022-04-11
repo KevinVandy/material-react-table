@@ -1,15 +1,17 @@
 import React, { FC } from 'react';
 import { TableRow } from '@mui/material';
 import { MRT_TableHeadCell } from './MRT_TableHeadCell';
-import { useMRT } from '../useMRT';
-import type { MRT_Header, MRT_HeaderGroup } from '..';
+import type { MRT_Header, MRT_HeaderGroup, MRT_TableInstance } from '..';
 
 interface Props {
   headerGroup: MRT_HeaderGroup;
+  tableInstance: MRT_TableInstance;
 }
 
-export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
-  const { muiTableHeadRowProps } = useMRT();
+export const MRT_TableHeadRow: FC<Props> = ({ headerGroup, tableInstance }) => {
+  const {
+    options: { muiTableHeadRowProps },
+  } = tableInstance;
 
   const mTableHeadRowProps =
     muiTableHeadRowProps instanceof Function
@@ -24,7 +26,11 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup }) => {
   return (
     <TableRow {...tableRowProps}>
       {headerGroup.headers.map((header: MRT_Header, index) => (
-        <MRT_TableHeadCell key={header.id || index} header={header} />
+        <MRT_TableHeadCell
+          header={header}
+          key={header.id || index}
+          tableInstance={tableInstance}
+        />
       ))}
     </TableRow>
   );

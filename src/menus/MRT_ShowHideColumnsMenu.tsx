@@ -1,31 +1,31 @@
 import React, { FC, useMemo } from 'react';
 import { Button, Menu, Divider, Box } from '@mui/material';
-import { useMRT } from '../useMRT';
 import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
+import { MRT_TableInstance } from '..';
 
 interface Props {
   anchorEl: HTMLElement | null;
   isSubMenu?: boolean;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
+  tableInstance: MRT_TableInstance;
 }
 
 export const MRT_ShowHideColumnsMenu: FC<Props> = ({
   anchorEl,
   isSubMenu,
   setAnchorEl,
+  tableInstance,
 }) => {
   const {
-    localization,
-    tableInstance: {
-      getAllColumns,
-      getIsAllColumnsVisible,
-      getIsSomeColumnsVisible,
-      getIsSomeColumnsPinned,
-      getState,
-      toggleAllColumnsVisible,
-      getAllLeafColumns,
-    },
-  } = useMRT();
+    getAllColumns,
+    getIsAllColumnsVisible,
+    getIsSomeColumnsVisible,
+    getIsSomeColumnsPinned,
+    getState,
+    toggleAllColumnsVisible,
+    getAllLeafColumns,
+    options: { localization },
+  } = tableInstance;
 
   const { isDensePadding } = getState();
 
@@ -91,6 +91,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
           column={column}
           isSubMenu={isSubMenu}
           key={`${index}-${column.id}`}
+          tableInstance={tableInstance}
         />
       ))}
       <Divider />
@@ -99,6 +100,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
           column={column}
           isSubMenu={isSubMenu}
           key={`${index}-${column.id}`}
+          tableInstance={tableInstance}
         />
       ))}
     </Menu>

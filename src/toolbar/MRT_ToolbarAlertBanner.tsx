@@ -1,24 +1,25 @@
 import React, { FC, Fragment } from 'react';
 import { Alert, Box, Chip, Collapse, useMediaQuery } from '@mui/material';
-import { useMRT } from '../useMRT';
+import { MRT_TableInstance } from '..';
 
-interface Props {}
+interface Props {
+  tableInstance: MRT_TableInstance;
+}
 
-export const MRT_ToolbarAlertBanner: FC<Props> = () => {
+export const MRT_ToolbarAlertBanner: FC<Props> = ({ tableInstance }) => {
   const {
-    localization,
-    muiTableToolbarAlertBannerProps,
-    positionToolbarActions,
-    positionToolbarAlertBanner,
-    renderToolbarCustomActions,
-    tableInstance,
-    tableInstance: {
-      getPrePaginationRowModel,
-      getSelectedRowModel,
-      getState,
-      toggleColumnGrouping,
+    getPrePaginationRowModel,
+    getSelectedRowModel,
+    getState,
+    toggleColumnGrouping,
+    options: {
+      localization,
+      muiTableToolbarAlertBannerProps,
+      positionToolbarActions,
+      positionToolbarAlertBanner,
+      renderToolbarCustomActions,
     },
-  } = useMRT();
+  } = tableInstance;
 
   const { grouping } = getState();
 

@@ -1,32 +1,31 @@
 import React, { FC } from 'react';
 import { alpha, TableCell } from '@mui/material';
-import { useMRT } from '../useMRT';
-import type { MRT_Header } from '..';
+import type { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
   footer: MRT_Header;
+  tableInstance: MRT_TableInstance;
 }
 
-export const MRT_TableFooterCell: FC<Props> = ({ footer }) => {
+export const MRT_TableFooterCell: FC<Props> = ({ footer, tableInstance }) => {
   const {
-    muiTableFooterCellProps,
-    enableColumnResizing,
-    tableInstance,
-    tableInstance: { getState },
-  } = useMRT();
+    getState,
+    options: { muiTableFooterCellProps, enableColumnResizing },
+  } = tableInstance;
 
   const { isDensePadding } = getState();
-  const { columnDefType } = footer.column;
+
+  const { column } = footer;
 
   const mTableFooterCellProps =
     muiTableFooterCellProps instanceof Function
-      ? muiTableFooterCellProps(footer.column)
+      ? muiTableFooterCellProps(column)
       : muiTableFooterCellProps;
 
   const mcTableFooterCellProps =
-    footer.column.muiTableFooterCellProps instanceof Function
-      ? footer.column.muiTableFooterCellProps(footer.column)
-      : footer.column.muiTableFooterCellProps;
+    column.muiTableFooterCellProps instanceof Function
+      ? column.muiTableFooterCellProps(column)
+      : column.muiTableFooterCellProps;
 
   const tableCellProps = {
     ...footer.getFooterProps(),
@@ -34,17 +33,9 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer }) => {
     ...mcTableFooterCellProps,
   };
 
-  const footerElement =
-    footer.column?.Footer?.({
-      footer,
-      tableInstance,
-    }) ??
-    footer.column.footer ??
-    null;
-
   return (
     <TableCell
-      align={columnDefType === 'group' ? 'center' : 'left'}
+      align={column.columnDefType === 'group' ? 'center' : 'left'}
       variant="head"
       {...tableCellProps}
       //@ts-ignore
@@ -62,7 +53,14 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer }) => {
         ...tableCellProps?.sx,
       })}
     >
-      {footer.isPlaceholder ? null : footerElement}
+      {footer.isPlaceholder
+        ? null
+        : column.Footer?.({
+            footer,
+            tableInstance,
+          }) ??
+          column.footer ??
+          null}
     </TableCell>
   );
 };

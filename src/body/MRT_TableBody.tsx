@@ -1,24 +1,22 @@
 import React, { FC } from 'react';
 import { TableBody } from '@mui/material';
 import { MRT_TableBodyRow } from './MRT_TableBodyRow';
-import { useMRT } from '../useMRT';
+import { MRT_TableInstance } from '..';
 
 interface Props {
   pinned: 'left' | 'center' | 'right' | 'none';
+  tableInstance: MRT_TableInstance;
 }
 
-export const MRT_TableBody: FC<Props> = ({ pinned }) => {
+export const MRT_TableBody: FC<Props> = ({ pinned, tableInstance }) => {
   const {
-    enablePagination,
-    muiTableBodyProps,
-    tableInstance,
-    tableInstance: {
-      getPaginationRowModel,
-      getPrePaginationRowModel,
-      getTableBodyProps,
-    },
-  } = useMRT();
-
+    getPaginationRowModel,
+    getPrePaginationRowModel,
+    getRowModel,
+    getTableBodyProps,
+    options: { enablePagination, muiTableBodyProps },
+  } = tableInstance;
+  getRowModel().rows;
   const rows = enablePagination
     ? getPaginationRowModel().rows
     : getPrePaginationRowModel().rows;
@@ -40,6 +38,7 @@ export const MRT_TableBody: FC<Props> = ({ pinned }) => {
           key={row.getRowProps().key}
           pinned={pinned}
           row={row}
+          tableInstance={tableInstance}
         />
       ))}
     </TableBody>

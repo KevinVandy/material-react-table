@@ -1,27 +1,28 @@
-import React, { ChangeEvent, FC } from 'react';
+import React, { ChangeEvent, FC, MouseEvent } from 'react';
 import { TextField } from '@mui/material';
-import { useMRT } from '../useMRT';
-import type { MRT_Cell } from '..';
+import type { MRT_Cell, MRT_TableInstance } from '..';
 
 interface Props {
   cell: MRT_Cell;
+  tableInstance: MRT_TableInstance;
 }
 
-export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
+export const MRT_EditCellTextField: FC<Props> = ({ cell, tableInstance }) => {
   const {
-    muiTableBodyCellEditTextFieldProps,
-    // setCurrentEditingRow,
-    tableInstance: { getState },
-  } = useMRT();
+    getState,
+    options: { muiTableBodyCellEditTextFieldProps },
+  } = tableInstance;
+
+  const { column, row } = cell;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (getState().currentEditingRow) {
-      cell.row.values[cell.column.id] = event.target.value;
+      row.values[column.id] = event.target.value;
       // setCurrentEditingRow({
       //   ...getState().currentEditingRow,
       // });
     }
-    cell.column.onCellEditChange?.(event, cell);
+    column.onCellEditChange?.(event, cell);
   };
 
   const mTableBodyCellEditTextFieldProps =
@@ -30,25 +31,25 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell }) => {
       : muiTableBodyCellEditTextFieldProps;
 
   const mcTableBodyCellEditTextFieldProps =
-    cell.column.muiTableBodyCellEditTextFieldProps instanceof Function
-      ? cell.column.muiTableBodyCellEditTextFieldProps(cell)
-      : cell.column.muiTableBodyCellEditTextFieldProps;
+    column.muiTableBodyCellEditTextFieldProps instanceof Function
+      ? column.muiTableBodyCellEditTextFieldProps(cell)
+      : column.muiTableBodyCellEditTextFieldProps;
 
   const textFieldProps = {
     ...mTableBodyCellEditTextFieldProps,
     ...mcTableBodyCellEditTextFieldProps,
   };
 
-  // if (cell.column.enableEditing && cell.column.Edit) {
-  //   return <>{cell.column.Edit({ ...textFieldProps, cell })}</>;
+  // if (enableEditing && Edit) {
+  //   return <>{Edit({ ...textFieldProps, cell })}</>;
   // }
 
   return (
     <TextField
       margin="dense"
       onChange={handleChange}
-      onClick={(e) => e.stopPropagation()}
-      placeholder={cell.column.header}
+      onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
+      placeholder={column.header}
       value={cell.value}
       variant="standard"
       {...textFieldProps}

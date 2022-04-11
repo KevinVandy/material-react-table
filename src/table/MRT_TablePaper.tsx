@@ -1,20 +1,19 @@
 import React, { FC, useEffect } from 'react';
 import { Paper } from '@mui/material';
-import { useMRT } from '../useMRT';
 import { MRT_ToolbarTop } from '../toolbar/MRT_ToolbarTop';
 import { MRT_ToolbarBottom } from '../toolbar/MRT_ToolbarBottom';
 import { MRT_TableContainer } from './MRT_TableContainer';
+import { MRT_TableInstance } from '..';
 
-interface Props {}
+interface Props {
+  tableInstance: MRT_TableInstance;
+}
 
-export const MRT_TablePaper: FC<Props> = () => {
+export const MRT_TablePaper: FC<Props> = ({ tableInstance }) => {
   const {
-    hideToolbarBottom,
-    hideToolbarTop,
-    muiTablePaperProps,
-    tableInstance,
-    tableInstance: { getState },
-  } = useMRT();
+    getState,
+    options: { hideToolbarBottom, hideToolbarTop, muiTablePaperProps },
+  } = tableInstance;
 
   const { isFullScreen } = getState();
 
@@ -52,9 +51,11 @@ export const MRT_TablePaper: FC<Props> = () => {
         ...tablePaperProps?.sx,
       }}
     >
-      {!hideToolbarTop && <MRT_ToolbarTop />}
-      <MRT_TableContainer />
-      {!hideToolbarBottom && <MRT_ToolbarBottom />}
+      {!hideToolbarTop && <MRT_ToolbarTop tableInstance={tableInstance} />}
+      <MRT_TableContainer tableInstance={tableInstance} />
+      {!hideToolbarBottom && (
+        <MRT_ToolbarBottom tableInstance={tableInstance} />
+      )}
     </Paper>
   );
 };

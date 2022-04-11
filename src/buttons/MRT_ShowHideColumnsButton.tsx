@@ -1,15 +1,22 @@
 import React, { FC, MouseEvent, useState } from 'react';
 import { IconButton, Tooltip, IconButtonProps } from '@mui/material';
-import { useMRT } from '../useMRT';
 import { MRT_ShowHideColumnsMenu } from '../menus/MRT_ShowHideColumnsMenu';
+import { MRT_TableInstance } from '..';
 
-interface Props extends IconButtonProps {}
+interface Props extends IconButtonProps {
+  tableInstance: MRT_TableInstance;
+}
 
-export const MRT_ShowHideColumnsButton: FC<Props> = ({ ...rest }) => {
+export const MRT_ShowHideColumnsButton: FC<Props> = ({
+  tableInstance,
+  ...rest
+}) => {
   const {
-    icons: { ViewColumnIcon },
-    localization,
-  } = useMRT();
+    options: {
+      icons: { ViewColumnIcon },
+      localization,
+    },
+  } = tableInstance;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -29,7 +36,11 @@ export const MRT_ShowHideColumnsButton: FC<Props> = ({ ...rest }) => {
           <ViewColumnIcon />
         </IconButton>
       </Tooltip>
-      <MRT_ShowHideColumnsMenu anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
+      <MRT_ShowHideColumnsMenu
+        anchorEl={anchorEl}
+        setAnchorEl={setAnchorEl}
+        tableInstance={tableInstance}
+      />
     </>
   );
 };

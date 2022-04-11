@@ -1,33 +1,33 @@
 import React, { FC } from 'react';
 import { FormControlLabel, MenuItem, Switch } from '@mui/material';
-import type { MRT_ColumnInstance } from '..';
+import type { MRT_ColumnInstance, MRT_TableInstance } from '..';
 import { commonMenuItemStyles } from './MRT_ColumnActionMenu';
-import { useMRT } from '../useMRT';
 
 interface Props {
   column: MRT_ColumnInstance;
   isSubMenu?: boolean;
+  tableInstance: MRT_TableInstance;
 }
 
 export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
   column,
   isSubMenu,
+  tableInstance,
 }) => {
   const {
-    onColumnHide,
-    tableInstance: { getState },
-  } = useMRT();
+    getState,
+    options: { onColumnHide },
+  } = tableInstance;
 
   const { columnVisibility } = getState();
-  const { columnDefType } = column;
 
   const switchChecked =
-    (columnDefType !== 'group' && column.getIsVisible()) ||
-    (columnDefType === 'group' &&
+    (column.columnDefType !== 'group' && column.getIsVisible()) ||
+    (column.columnDefType === 'group' &&
       column.getLeafColumns().some((col) => col.getIsVisible()));
 
   const handleToggleColumnHidden = (column: MRT_ColumnInstance) => {
-    if (columnDefType === 'group') {
+    if (column.columnDefType === 'group') {
       column?.columns?.forEach?.((childColumn: MRT_ColumnInstance) => {
         childColumn.toggleVisibility(!switchChecked);
       });
@@ -63,6 +63,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
           key={`${i}-${c.id}`}
           column={c}
           isSubMenu={isSubMenu}
+          tableInstance={tableInstance}
         />
       ))}
     </>

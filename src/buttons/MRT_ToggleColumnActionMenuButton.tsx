@@ -1,19 +1,26 @@
 import React, { FC, MouseEvent, useState } from 'react';
 import { IconButton, Tooltip } from '@mui/material';
-import { useMRT } from '../useMRT';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
-import type { MRT_Header } from '..';
+import type { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
   header: MRT_Header;
+  tableInstance: MRT_TableInstance;
 }
 
-export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ header }) => {
+export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({
+  header,
+  tableInstance,
+}) => {
   const {
-    icons: { MoreVertIcon },
-    localization,
-    muiTableHeadCellColumnActionsButtonProps,
-  } = useMRT();
+    options: {
+      icons: { MoreVertIcon },
+      localization,
+      muiTableHeadCellColumnActionsButtonProps,
+    },
+  } = tableInstance;
+
+  const { column } = header;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -25,13 +32,13 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ header }) => {
 
   const mTableHeadCellColumnActionsButtonProps =
     muiTableHeadCellColumnActionsButtonProps instanceof Function
-      ? muiTableHeadCellColumnActionsButtonProps(header.column)
+      ? muiTableHeadCellColumnActionsButtonProps(column)
       : muiTableHeadCellColumnActionsButtonProps;
 
   const mcTableHeadCellColumnActionsButtonProps =
-    header.column.muiTableHeadCellColumnActionsButtonProps instanceof Function
-      ? header.column.muiTableHeadCellColumnActionsButtonProps(header.column)
-      : header.column.muiTableHeadCellColumnActionsButtonProps;
+    column.muiTableHeadCellColumnActionsButtonProps instanceof Function
+      ? column.muiTableHeadCellColumnActionsButtonProps(column)
+      : column.muiTableHeadCellColumnActionsButtonProps;
 
   const iconButtonProps = {
     ...mTableHeadCellColumnActionsButtonProps,
@@ -72,6 +79,7 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({ header }) => {
         anchorEl={anchorEl}
         header={header}
         setAnchorEl={setAnchorEl}
+        tableInstance={tableInstance}
       />
     </>
   );

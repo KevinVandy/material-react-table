@@ -1,17 +1,19 @@
 import React, { FC, MouseEvent } from 'react';
 import { TableRow } from '@mui/material';
 import { MRT_TableBodyCell } from './MRT_TableBodyCell';
-import { useMRT } from '../useMRT';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
-import type { MRT_Row } from '..';
+import type { MRT_Row, MRT_TableInstance } from '..';
 
-interface Props<D extends Record<string, any> = {}> {
+interface Props {
   pinned: 'left' | 'center' | 'right' | 'none';
-  row: MRT_Row<D>;
+  row: MRT_Row;
+  tableInstance: MRT_TableInstance;
 }
 
-export const MRT_TableBodyRow: FC<Props> = ({ pinned, row }) => {
-  const { muiTableBodyRowProps, onRowClick, renderDetailPanel } = useMRT();
+export const MRT_TableBodyRow: FC<Props> = ({ pinned, row, tableInstance }) => {
+  const {
+    options: { muiTableBodyRowProps, onRowClick, renderDetailPanel },
+  } = tableInstance;
 
   const {
     getCenterVisibleCells,
@@ -23,13 +25,6 @@ export const MRT_TableBodyRow: FC<Props> = ({ pinned, row }) => {
     getVisibleCells,
   } = row;
 
-  const getVisibleCellsMap = {
-    center: getCenterVisibleCells,
-    left: getLeftVisibleCells,
-    none: getVisibleCells,
-    right: getRightVisibleCells,
-  };
-
   const mTableBodyRowProps =
     muiTableBodyRowProps instanceof Function
       ? muiTableBodyRowProps(row)
@@ -38,6 +33,13 @@ export const MRT_TableBodyRow: FC<Props> = ({ pinned, row }) => {
   const tableRowProps = {
     ...getRowProps(),
     ...mTableBodyRowProps,
+  };
+
+  const getVisibleCellsMap = {
+    center: getCenterVisibleCells,
+    left: getLeftVisibleCells,
+    none: getVisibleCells,
+    right: getRightVisibleCells,
   };
 
   return (
@@ -51,11 +53,15 @@ export const MRT_TableBodyRow: FC<Props> = ({ pinned, row }) => {
         {...tableRowProps}
       >
         {getVisibleCellsMap[pinned]().map((cell) => (
-          <MRT_TableBodyCell key={cell.getCellProps().key} cell={cell} />
+          <MRT_TableBodyCell
+            cell={cell}
+            key={cell.getCellProps().key}
+            tableInstance={tableInstance}
+          />
         ))}
       </TableRow>
       {renderDetailPanel && !getIsGrouped() && (
-        <MRT_TableDetailPanel row={row} />
+        <MRT_TableDetailPanel row={row} tableInstance={tableInstance} />
       )}
     </>
   );

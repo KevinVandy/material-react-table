@@ -7,65 +7,26 @@ import {
   paginateRowsFn,
   PaginationState,
   sortRowsFn,
+  Table,
   useTable,
 } from '@tanstack/react-table';
-import React, {
-  Context,
-  Dispatch,
-  PropsWithChildren,
-  SetStateAction,
-  createContext,
-  useContext,
-  useMemo,
-  useState,
-} from 'react';
-import type {
-  MRT_ColumnInterface,
-  MRT_FilterType,
-  MRT_Row,
-  MRT_TableInstance,
-} from '.';
-import { MRT_ExpandAllButton } from './buttons/MRT_ExpandAllButton';
-import { MRT_ExpandButton } from './buttons/MRT_ExpandButton';
-import { MRT_ToggleRowActionMenuButton } from './buttons/MRT_ToggleRowActionMenuButton';
-import { MRT_FILTER_TYPE } from './enums';
-import { defaultFilterFNs } from './filtersFNs';
-import { MRT_Icons } from './icons';
-import { MRT_SelectCheckbox } from './inputs/MRT_SelectCheckbox';
-import { MRT_Localization } from './localization';
-import { MaterialReactTableProps } from './MaterialReactTable';
+import React, { useMemo, useState } from 'react';
+import { MRT_ColumnInterface, MRT_Row, MRT_TableInstance } from '..';
+import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
+import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
+import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMenuButton';
+import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
+import { MaterialReactTableProps } from '../MaterialReactTable';
+import { MRT_TablePaper } from './MRT_TablePaper';
 import {
   createDataColumn,
   createDisplayColumn,
   createGroup,
   getAllLeafColumnDefs,
-} from './utils';
+} from '../utils';
 
-export type UseMRT<D extends Record<string, any> = {}> =
-  MaterialReactTableProps<D> & {
-    icons: MRT_Icons;
-    idPrefix: string;
-    filterTypes: { [key in MRT_FILTER_TYPE]: any };
-    localization: MRT_Localization;
-    setCurrentEditingRow: Dispatch<SetStateAction<MRT_Row<D> | null>>;
-    setCurrentFilterTypes: Dispatch<
-      SetStateAction<{
-        [key: string]: MRT_FilterType;
-      }>
-    >;
-    setCurrentGlobalFilterType: Dispatch<SetStateAction<MRT_FILTER_TYPE>>;
-    setIsDensePadding: Dispatch<SetStateAction<boolean>>;
-    setIsFullScreen: Dispatch<SetStateAction<boolean>>;
-    setShowFilters: Dispatch<SetStateAction<boolean>>;
-    setShowSearch: Dispatch<SetStateAction<boolean>>;
-    tableInstance: MRT_TableInstance<D>;
-  };
-
-const MaterialReactTableContext = (<D extends Record<string, any> = {}>() =>
-  createContext<UseMRT<D>>({} as UseMRT<D>) as Context<UseMRT<D>>)();
-
-export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
-  props: PropsWithChildren<MaterialReactTableProps<D>>,
+export const MRT_TableRoot = <D extends Record<string, any> = {}>(
+  props: MaterialReactTableProps<D>,
 ) => {
   const idPrefix = useMemo(
     () => props.idPrefix ?? Math.random().toString(36).substring(2, 9),
@@ -134,7 +95,10 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
   //   [props.columns, applyFiltersToColumns],
   // );
 
-  const table = useMemo(() => createTable<{ Row: D }>(), []);
+  const table = useMemo(
+    () => createTable<{ Row: D }>(),
+    [],
+  ) as unknown as Table<D>;
 
   const displayColumns = useMemo(
     () =>
@@ -142,7 +106,10 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
         (props.enableRowActions || props.enableRowEditing) &&
           createDisplayColumn(table, {
             Cell: ({ cell }) => (
-              <MRT_ToggleRowActionMenuButton row={cell.row as any} />
+              <MRT_ToggleRowActionMenuButton
+                row={cell.row as any}
+                tableInstance={tableInstance}
+              />
             ),
             header: props.localization?.actions,
             id: 'mrt-row-actions',
@@ -151,9 +118,16 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
           }),
         (props.enableExpanded || props.enableGrouping) &&
           createDisplayColumn(table, {
-            Cell: ({ cell }) => <MRT_ExpandButton row={cell.row as any} />,
+            Cell: ({ cell }) => (
+              <MRT_ExpandButton
+                row={cell.row as any}
+                tableInstance={tableInstance}
+              />
+            ),
             Header: () =>
-              props.enableExpandAll ? <MRT_ExpandAllButton /> : null,
+              props.enableExpandAll ? (
+                <MRT_ExpandAllButton tableInstance={tableInstance} />
+              ) : null,
             header: props.localization?.expand,
             id: 'mrt-expand',
             maxWidth: 40,
@@ -161,9 +135,16 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
           }),
         props.enableRowSelection &&
           createDisplayColumn(table, {
-            Cell: ({ cell }) => <MRT_SelectCheckbox row={cell.row as any} />,
+            Cell: ({ cell }) => (
+              <MRT_SelectCheckbox
+                row={cell.row as any}
+                tableInstance={tableInstance}
+              />
+            ),
             Header: () =>
-              props.enableSelectAll ? <MRT_SelectCheckbox selectAll /> : null,
+              props.enableSelectAll ? (
+                <MRT_SelectCheckbox selectAll tableInstance={tableInstance} />
+              ) : null,
             header: props.localization?.select,
             id: 'mrt-select',
             maxWidth: 40,
@@ -205,11 +186,10 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
     [table, props.columns],
   );
 
-  const data: D[] = useMemo(
+  const data = useMemo(
     () =>
-      !props.isLoading || !!props.data.length
-        ? props.data
-        : [...Array(10).fill(null)].map((_) =>
+      props.isLoading && !props.data.length
+        ? [...Array(10).fill(null)].map((_) =>
             Object.assign(
               {},
               ...getAllLeafColumnDefs(
@@ -218,60 +198,45 @@ export const MaterialReactTableProvider = <D extends Record<string, any> = {}>(
                 [c.id]: null,
               })),
             ),
-          ),
+          )
+        : props.data,
     [props.data, props.isLoading],
   );
 
-  const tableInstance = useTable(table, {
+  //@ts-ignore
+  const tableInstance: MRT_TableInstance<{}> = useTable(table, {
     ...props,
     columnFilterRowsFn,
     columns,
     data,
     expandRowsFn: expandRowsFn,
-    filterTypes: defaultFilterFNs,
+    // filterTypes: defaultFilterFNs,
     groupRowsFn: groupRowsFn,
     getSubRows: props.getSubRows ?? ((originalRow: D) => originalRow.subRows),
     paginateRowsFn: paginateRowsFn,
     onPaginationChange: (updater: any) =>
       setPagination((old) => functionalUpdate(updater, old)),
     sortRowsFn,
+    idPrefix,
+    setCurrentEditingRow,
+    // setCurrentFilterTypes,
+    // setCurrentGlobalFilterType,
+    setIsDensePadding,
+    setIsFullScreen,
+    setShowFilters,
+    setShowSearch,
     state: {
       ...props.initialState,
       currentEditingRow,
       isDensePadding,
       isFullScreen,
+      //@ts-ignore
       pagination,
       showFilters,
       showSearch,
       ...props.state,
     },
-  } as any);
+  });
 
-  
-
-  return (
-    <MaterialReactTableContext.Provider
-      value={
-        {
-          ...props,
-          idPrefix,
-          setCurrentEditingRow,
-          // setCurrentFilterTypes,
-          // setCurrentGlobalFilterType,
-          setIsDensePadding,
-          setIsFullScreen,
-          setShowFilters,
-          setShowSearch,
-          tableInstance,
-        } as any
-      }
-    >
-      {props.children}
-    </MaterialReactTableContext.Provider>
-  );
+  return <MRT_TablePaper tableInstance={tableInstance} />;
 };
-
-export const useMRT = <D extends Record<string, any> = {}>(): UseMRT<D> =>
-  useContext<UseMRT<D>>(
-    MaterialReactTableContext as unknown as Context<UseMRT<D>>,
-  );

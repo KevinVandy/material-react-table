@@ -1,21 +1,23 @@
 import React, { FC } from 'react';
 import { Box, IconButton, Tooltip } from '@mui/material';
-import { useMRT } from '../useMRT';
-import type { MRT_Row } from '..';
+import type { MRT_Row, MRT_TableInstance } from '..';
 import { RowValues } from '@tanstack/react-table';
 
-interface Props<D extends Record<string, any> = {}> {
-  row: MRT_Row<D>;
+interface Props {
+  row: MRT_Row;
+  tableInstance: MRT_TableInstance;
 }
 
-export const MRT_EditActionButtons: FC<Props> = ({ row }) => {
+export const MRT_EditActionButtons: FC<Props> = ({ row, tableInstance }) => {
   const {
-    icons: { CancelIcon, SaveIcon },
-    localization,
-    onRowEditSubmit,
-    setCurrentEditingRow,
-    tableInstance: { getState },
-  } = useMRT();
+    getState,
+    options: {
+      icons: { CancelIcon, SaveIcon },
+      localization,
+      onRowEditSubmit,
+      setCurrentEditingRow,
+    },
+  } = tableInstance;
 
   const handleCancel = () => {
     row.values = (row.original as RowValues) ?? {};

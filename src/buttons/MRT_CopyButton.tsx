@@ -1,15 +1,21 @@
 import React, { FC, ReactNode, useState } from 'react';
 import { Button, Tooltip } from '@mui/material';
-import { useMRT } from '../useMRT';
-import { MRT_Cell } from '..';
+import { MRT_Cell, MRT_TableInstance } from '..';
 
 interface Props {
   cell: MRT_Cell;
   children: ReactNode;
+  tableInstance: MRT_TableInstance;
 }
 
-export const MRT_CopyButton: FC<Props> = ({ cell, children }) => {
-  const { localization, muiTableBodyCellCopyButtonProps } = useMRT();
+export const MRT_CopyButton: FC<Props> = ({
+  cell,
+  children,
+  tableInstance,
+}) => {
+  const {
+    options: { localization, muiTableBodyCellCopyButtonProps },
+  } = tableInstance;
 
   const [copied, setCopied] = useState(false);
 

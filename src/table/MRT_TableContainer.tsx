@@ -1,7 +1,7 @@
 import React, { FC, useLayoutEffect, useState } from 'react';
 import { alpha, Box, SxProps, TableContainer, Theme } from '@mui/material';
-import { useMRT } from '../useMRT';
 import { MRT_Table } from './MRT_Table';
+import { MRT_TableInstance } from '..';
 
 const commonBoxStyles = ({
   pinned,
@@ -24,23 +24,24 @@ const commonBoxStyles = ({
         : 'none',
   } as SxProps<Theme>);
 
-interface Props {}
+interface Props {
+  tableInstance: MRT_TableInstance;
+}
 
-export const MRT_TableContainer: FC<Props> = () => {
+export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
   const {
-    enableColumnPinning,
-    enableStickyHeader,
-    idPrefix,
-    muiTableContainerProps,
-    tableInstance,
-    tableInstance: {
-      getCenterTableWidth,
-      getIsSomeColumnsPinned,
-      getLeftTableWidth,
-      getRightTableWidth,
-      getState,
+    getCenterTableWidth,
+    getIsSomeColumnsPinned,
+    getLeftTableWidth,
+    getRightTableWidth,
+    getState,
+    options: {
+      enableColumnPinning,
+      enableStickyHeader,
+      idPrefix,
+      muiTableContainerProps,
     },
-  } = useMRT();
+  } = tableInstance;
 
   const { isFullScreen, columnPinning } = getState();
 
@@ -101,12 +102,12 @@ export const MRT_TableContainer: FC<Props> = () => {
               })
             }
           >
-            <MRT_Table pinned="left" />
+            <MRT_Table pinned="left" tableInstance={tableInstance} />
           </Box>
           <Box // @ts-ignore
             sx={(theme: Theme) => commonBoxStyles({ theme })}
           >
-            <MRT_Table pinned="center" />
+            <MRT_Table pinned="center" tableInstance={tableInstance} />
           </Box>
           <Box
             // @ts-ignore
@@ -118,11 +119,11 @@ export const MRT_TableContainer: FC<Props> = () => {
               })
             }
           >
-            <MRT_Table pinned="right" />
+            <MRT_Table pinned="right" tableInstance={tableInstance} />
           </Box>
         </Box>
       ) : (
-        <MRT_Table pinned="none" />
+        <MRT_Table pinned="none" tableInstance={tableInstance} />
       )}
     </TableContainer>
   );

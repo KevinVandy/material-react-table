@@ -1,7 +1,6 @@
 import React, { FC, useMemo } from 'react';
 import { Menu, MenuItem } from '@mui/material';
-import { useMRT } from '../useMRT';
-import type { MRT_FilterType, MRT_Header } from '..';
+import type { MRT_FilterType, MRT_Header, MRT_TableInstance } from '..';
 import { MRT_FILTER_TYPE } from '../enums';
 import {
   bestMatch,
@@ -26,8 +25,9 @@ const commonMenuItemStyles = {
 interface Props {
   anchorEl: HTMLElement | null;
   header?: MRT_Header;
-  setAnchorEl: (anchorEl: HTMLElement | null) => void;
   onSelect?: () => void;
+  setAnchorEl: (anchorEl: HTMLElement | null) => void;
+  tableInstance: MRT_TableInstance;
 }
 
 export const MRT_FilterTypeMenu: FC<Props> = ({
@@ -35,14 +35,17 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
   header,
   onSelect,
   setAnchorEl,
+  tableInstance,
 }) => {
   const {
-    enabledGlobalFilterTypes,
-    localization,
-    setCurrentFilterTypes,
-    setCurrentGlobalFilterType,
-    tableInstance: { getState },
-  } = useMRT();
+    getState,
+    options: {
+      enabledGlobalFilterTypes,
+      localization,
+      setCurrentFilterTypes,
+      setCurrentGlobalFilterType,
+    },
+  } = tableInstance;
 
   const { isDensePadding } = getState();
 

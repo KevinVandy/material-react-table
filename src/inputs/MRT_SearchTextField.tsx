@@ -7,20 +7,25 @@ import {
   TextField,
   Tooltip,
 } from '@mui/material';
-import { useMRT } from '../useMRT';
 import { MRT_FilterTypeMenu } from '../menus/MRT_FilterTypeMenu';
+import { MRT_TableInstance } from '..';
 
-interface Props {}
+interface Props {
+  tableInstance: MRT_TableInstance;
+}
 
-export const MRT_SearchTextField: FC<Props> = () => {
+export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
   const {
-    icons: { SearchIcon, CloseIcon },
-    idPrefix,
-    localization,
-    muiSearchTextFieldProps,
-    onGlobalFilterChange,
-    tableInstance: { getState, setGlobalFilter },
-  } = useMRT();
+    getState,
+    setGlobalFilter,
+    options: {
+      icons: { SearchIcon, CloseIcon },
+      idPrefix,
+      localization,
+      muiSearchTextFieldProps,
+      onGlobalFilterChange,
+    },
+  } = tableInstance;
 
   const { globalFilter, showSearch } = getState();
 
@@ -86,7 +91,11 @@ export const MRT_SearchTextField: FC<Props> = () => {
         {...muiSearchTextFieldProps}
         sx={{ justifySelf: 'end', ...muiSearchTextFieldProps?.sx }}
       />
-      <MRT_FilterTypeMenu anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
+      <MRT_FilterTypeMenu
+        anchorEl={anchorEl}
+        setAnchorEl={setAnchorEl}
+        tableInstance={tableInstance}
+      />
     </Collapse>
   );
 };

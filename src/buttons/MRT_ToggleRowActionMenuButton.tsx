@@ -1,9 +1,8 @@
 import React, { FC, MouseEvent, useState } from 'react';
 import { IconButton, Tooltip } from '@mui/material';
-import { useMRT } from '../useMRT';
 import { MRT_RowActionMenu } from '../menus/MRT_RowActionMenu';
 import { MRT_EditActionButtons } from './MRT_EditActionButtons';
-import type { MRT_Row } from '..';
+import type { MRT_Row, MRT_TableInstance } from '..';
 
 const commonIconButtonStyles = {
   height: '2rem',
@@ -18,19 +17,24 @@ const commonIconButtonStyles = {
 
 interface Props {
   row: MRT_Row;
+  tableInstance: MRT_TableInstance;
 }
 
-export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
+export const MRT_ToggleRowActionMenuButton: FC<Props> = ({
+  row,
+  tableInstance,
+}) => {
   const {
-    enableRowEditing,
-    icons: { EditIcon, MoreHorizIcon },
-    localization,
-    renderRowActionMenuItems,
-    renderRowActions,
-    setCurrentEditingRow,
-    tableInstance,
-    tableInstance: { getState },
-  } = useMRT();
+    getState,
+    options: {
+      enableRowEditing,
+      icons: { EditIcon, MoreHorizIcon },
+      localization,
+      renderRowActionMenuItems,
+      renderRowActions,
+      setCurrentEditingRow,
+    },
+  } = tableInstance;
 
   const { currentEditingRow } = getState();
 
@@ -52,7 +56,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
       {renderRowActions ? (
         <>{renderRowActions(row, tableInstance)}</>
       ) : row.id === currentEditingRow?.id ? (
-        <MRT_EditActionButtons row={row} />
+        <MRT_EditActionButtons row={row} tableInstance={tableInstance} />
       ) : !renderRowActionMenuItems && enableRowEditing ? (
         <Tooltip placement="right" arrow title={localization.edit}>
           <IconButton sx={commonIconButtonStyles} onClick={handleEdit}>
@@ -81,6 +85,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row }) => {
             handleEdit={handleEdit}
             row={row}
             setAnchorEl={setAnchorEl}
+            tableInstance={tableInstance}
           />
         </>
       ) : null}

@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { alpha, Box, Theme, Toolbar } from '@mui/material';
 import { MRT_SearchTextField } from '../inputs/MRT_SearchTextField';
-import { useMRT } from '../useMRT';
 import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
+import { MRT_TableInstance } from '..';
 
 export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
   backgroundColor: theme.palette.background.default,
@@ -19,22 +19,25 @@ export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
   zIndex: 1,
 });
 
-interface Props {}
+interface Props {
+  tableInstance: MRT_TableInstance;
+}
 
-export const MRT_ToolbarTop: FC<Props> = () => {
+export const MRT_ToolbarTop: FC<Props> = ({ tableInstance }) => {
   const {
-    enableGlobalFilter,
-    enablePagination,
-    hideToolbarInternalActions,
-    idPrefix,
-    muiTableToolbarTopProps,
-    positionPagination,
-    positionToolbarActions,
-    positionToolbarAlertBanner,
-    renderToolbarCustomActions,
-    tableInstance,
-    tableInstance: { getState },
-  } = useMRT();
+    getState,
+    options: {
+      enableGlobalFilter,
+      enablePagination,
+      hideToolbarInternalActions,
+      idPrefix,
+      muiTableToolbarTopProps,
+      positionPagination,
+      positionToolbarActions,
+      positionToolbarAlertBanner,
+      renderToolbarCustomActions,
+    },
+  } = tableInstance;
 
   const { isFullScreen } = getState();
 
@@ -57,7 +60,9 @@ export const MRT_ToolbarTop: FC<Props> = () => {
         } as any)
       }
     >
-      {positionToolbarAlertBanner === 'top' && <MRT_ToolbarAlertBanner />}
+      {positionToolbarAlertBanner === 'top' && (
+        <MRT_ToolbarAlertBanner tableInstance={tableInstance} />
+      )}
       <Box
         sx={{
           p: '0.5rem',
@@ -74,19 +79,21 @@ export const MRT_ToolbarTop: FC<Props> = () => {
             zIndex: 3,
           }}
         >
-          {enableGlobalFilter && <MRT_SearchTextField />}
+          {enableGlobalFilter && (
+            <MRT_SearchTextField tableInstance={tableInstance} />
+          )}
           {!hideToolbarInternalActions && positionToolbarActions === 'top' && (
-            <MRT_ToolbarInternalButtons />
+            <MRT_ToolbarInternalButtons tableInstance={tableInstance} />
           )}
         </Box>
       </Box>
       <div>
         {enablePagination &&
           ['top', 'both'].includes(positionPagination ?? '') && (
-            <MRT_TablePagination />
+            <MRT_TablePagination tableInstance={tableInstance} />
           )}
       </div>
-      <MRT_LinearProgressBar />
+      <MRT_LinearProgressBar tableInstance={tableInstance} />
     </Toolbar>
   );
 };

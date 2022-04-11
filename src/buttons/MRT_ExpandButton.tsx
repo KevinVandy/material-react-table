@@ -1,20 +1,22 @@
 import React, { FC, MouseEvent } from 'react';
 import { IconButton } from '@mui/material';
-import { useMRT } from '../useMRT';
-import type { MRT_Row } from '..';
+import type { MRT_Row, MRT_TableInstance } from '..';
 
-interface Props<D extends Record<string, any> = {}> {
-  row: MRT_Row<D>;
+interface Props {
+  row: MRT_Row;
+  tableInstance: MRT_TableInstance;
 }
 
-export const MRT_ExpandButton: FC<Props> = ({ row }) => {
+export const MRT_ExpandButton: FC<Props> = ({ row, tableInstance }) => {
   const {
-    icons: { ExpandMoreIcon },
-    localization,
-    onRowExpandChange,
-    renderDetailPanel,
-    tableInstance: { getState },
-  } = useMRT();
+    getState,
+    options: {
+      icons: { ExpandMoreIcon },
+      localization,
+      onRowExpandChange,
+      renderDetailPanel,
+    },
+  } = tableInstance;
 
   const { isDensePadding } = getState();
 

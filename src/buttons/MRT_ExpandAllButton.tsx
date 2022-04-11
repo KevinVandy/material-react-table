@@ -1,21 +1,23 @@
 import React, { FC } from 'react';
 import { IconButton } from '@mui/material';
-import { useMRT } from '../useMRT';
+import { MRT_TableInstance } from '..';
 
-interface Props {}
+interface Props {
+  tableInstance: MRT_TableInstance;
+}
 
-export const MRT_ExpandAllButton: FC<Props> = () => {
+export const MRT_ExpandAllButton: FC<Props> = ({ tableInstance }) => {
   const {
-    icons: { DoubleArrowDownIcon },
-    isLoading,
-    localization,
-    tableInstance: {
-      getIsAllRowsExpanded,
-      getIsSomeRowsExpanded,
-      getState,
-      toggleAllRowsExpanded,
+    getIsAllRowsExpanded,
+    getIsSomeRowsExpanded,
+    getState,
+    options: {
+      icons: { DoubleArrowDownIcon },
+      isLoading,
+      localization,
     },
-  } = useMRT();
+    toggleAllRowsExpanded,
+  } = tableInstance;
 
   const { isDensePadding } = getState();
 

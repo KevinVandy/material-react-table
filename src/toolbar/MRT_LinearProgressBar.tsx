@@ -1,12 +1,15 @@
 import React, { FC } from 'react';
 import { Collapse, LinearProgress } from '@mui/material';
-import { useMRT } from '../useMRT';
+import { MRT_TableInstance } from '..';
 
-interface Props {}
+interface Props {
+  tableInstance: MRT_TableInstance;
+}
 
-export const MRT_LinearProgressBar: FC<Props> = () => {
-  const { muiLinearProgressProps, isReloading, isLoading, tableInstance } =
-    useMRT();
+export const MRT_LinearProgressBar: FC<Props> = ({ tableInstance }) => {
+  const {
+    options: { muiLinearProgressProps, isReloading, isLoading },
+  } = tableInstance;
 
   const linearProgressProps =
     muiLinearProgressProps instanceof Function

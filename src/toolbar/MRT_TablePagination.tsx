@@ -1,20 +1,19 @@
 import React, { ChangeEvent, FC } from 'react';
 import { TablePagination } from '@mui/material';
-import { useMRT } from '../useMRT';
+import { MRT_TableInstance } from '..';
 
-interface Props {}
+interface Props {
+  tableInstance: MRT_TableInstance;
+}
 
-export const MRT_TablePagination: FC<Props> = () => {
+export const MRT_TablePagination: FC<Props> = ({ tableInstance }) => {
   const {
-    muiTablePaginationProps,
-    tableInstance,
-    tableInstance: {
-      getPrePaginationRowModel,
-      getState,
-      setPageIndex,
-      setPageSize,
-    },
-  } = useMRT();
+    getPrePaginationRowModel,
+    getState,
+    setPageIndex,
+    setPageSize,
+    options: { muiTablePaginationProps },
+  } = tableInstance;
 
   const {
     pagination: { pageSize = 10, pageIndex = 0 },
@@ -36,7 +35,7 @@ export const MRT_TablePagination: FC<Props> = () => {
     <TablePagination
       component="div"
       count={getPrePaginationRowModel().rows.length}
-      onPageChange={(_, newPage) => setPageIndex(newPage)}
+      onPageChange={(_: any, newPage: number) => setPageIndex(newPage)}
       onRowsPerPageChange={handleChangeRowsPerPage}
       page={pageIndex}
       rowsPerPage={pageSize}

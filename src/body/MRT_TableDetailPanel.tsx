@@ -1,20 +1,22 @@
 import React, { FC, MouseEvent } from 'react';
 import { Collapse, TableCell, TableRow } from '@mui/material';
-import { useMRT } from '../useMRT';
-import type { MRT_Row } from '..';
+import type { MRT_Row, MRT_TableInstance } from '..';
 
-interface Props<D extends Record<string, any> = {}> {
-  row: MRT_Row<D>;
+interface Props {
+  row: MRT_Row;
+  tableInstance: MRT_TableInstance;
 }
 
-export const MRT_TableDetailPanel: FC<Props> = ({ row }) => {
+export const MRT_TableDetailPanel: FC<Props> = ({ row, tableInstance }) => {
   const {
-    muiTableBodyRowProps,
-    muiTableDetailPanelProps,
-    onDetailPanelClick,
-    renderDetailPanel,
-    tableInstance: { getVisibleFlatColumns },
-  } = useMRT();
+    getVisibleFlatColumns,
+    options: {
+      muiTableBodyRowProps,
+      muiTableDetailPanelProps,
+      onDetailPanelClick,
+      renderDetailPanel,
+    },
+  } = tableInstance;
 
   const tableRowProps =
     muiTableBodyRowProps instanceof Function

@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { Box, ListItemIcon, Menu, MenuItem } from '@mui/material';
-import { useMRT } from '../useMRT';
-import type { MRT_Row } from '..';
+import type { MRT_Row, MRT_TableInstance } from '..';
 import {
   commonListItemStyles,
   commonMenuItemStyles,
@@ -9,25 +8,28 @@ import {
 
 interface Props {
   anchorEl: HTMLElement | null;
+  handleEdit: () => void;
   row: MRT_Row;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
-  handleEdit: () => void;
+  tableInstance: MRT_TableInstance;
 }
 
 export const MRT_RowActionMenu: FC<Props> = ({
   anchorEl,
-  row,
   handleEdit,
+  row,
   setAnchorEl,
+  tableInstance,
 }) => {
   const {
-    icons: { EditIcon },
-    enableRowEditing,
-    localization,
-    renderRowActionMenuItems,
-    tableInstance,
-    tableInstance: { getState },
-  } = useMRT();
+    getState,
+    options: {
+      icons: { EditIcon },
+      enableRowEditing,
+      localization,
+      renderRowActionMenuItems,
+    },
+  } = tableInstance;
 
   const { isDensePadding } = getState();
 

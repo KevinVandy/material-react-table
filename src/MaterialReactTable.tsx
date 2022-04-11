@@ -1,4 +1,11 @@
-import React, { ChangeEvent, FC, MouseEvent, ReactNode } from 'react';
+import React, {
+  ChangeEvent,
+  Dispatch,
+  FC,
+  MouseEvent,
+  ReactNode,
+  SetStateAction,
+} from 'react';
 import {
   AlertProps,
   ButtonProps,
@@ -33,11 +40,10 @@ import {
   TableInstance,
   TableState,
 } from '@tanstack/react-table';
-import { MaterialReactTableProvider } from './useMRT';
+import { MRT_TableRoot } from './table/MRT_TableRoot';
 import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_FILTER_TYPE } from './enums';
-import { MRT_TablePaper } from './table/MRT_TablePaper';
 
 export type MRT_TableOptions<D extends Record<string, any> = {}> = Partial<
   Omit<
@@ -75,6 +81,7 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   | 'getRowModel'
   | 'getSelectedRowModel'
   | 'getState'
+  | 'options'
 > & {
   getAllColumns: () => MRT_ColumnInstance<D>[];
   getAllLeafColumns: () => MRT_ColumnInstance<D>[];
@@ -84,6 +91,24 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   getRowModel: () => MRT_RowModel;
   getSelectedRowModel: () => MRT_RowModel;
   getState: () => MRT_TableState<D>;
+  options: MaterialReactTableProps<D> & {
+    icons: MRT_Icons;
+    idPrefix: string;
+    filterTypes: { [key in MRT_FILTER_TYPE]: any };
+    localization: MRT_Localization;
+    setCurrentEditingRow: Dispatch<SetStateAction<MRT_Row<D> | null>>;
+    setCurrentFilterTypes: Dispatch<
+      SetStateAction<{
+        [key: string]: MRT_FilterType;
+      }>
+    >;
+    setCurrentGlobalFilterType: Dispatch<SetStateAction<MRT_FILTER_TYPE>>;
+    setIsDensePadding: Dispatch<SetStateAction<boolean>>;
+    setIsFullScreen: Dispatch<SetStateAction<boolean>>;
+    setShowFilters: Dispatch<SetStateAction<boolean>>;
+    setShowSearch: Dispatch<SetStateAction<boolean>>;
+    tableInstance: MRT_TableInstance<D>;
+  };
 };
 
 export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
@@ -395,11 +420,21 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
         MRT_ToggleDensePaddingButton,
         MRT_FullScreenToggleButton,
       }: {
-        MRT_ToggleSearchButton: FC<IconButtonProps>;
-        MRT_ToggleFiltersButton: FC<IconButtonProps>;
-        MRT_ShowHideColumnsButton: FC<IconButtonProps>;
-        MRT_ToggleDensePaddingButton: FC<IconButtonProps>;
-        MRT_FullScreenToggleButton: FC<IconButtonProps>;
+        MRT_ToggleSearchButton: FC<
+          IconButtonProps & { tableInstance: MRT_TableInstance<D> }
+        >;
+        MRT_ToggleFiltersButton: FC<
+          IconButtonProps & { tableInstance: MRT_TableInstance<D> }
+        >;
+        MRT_ShowHideColumnsButton: FC<
+          IconButtonProps & { tableInstance: MRT_TableInstance<D> }
+        >;
+        MRT_ToggleDensePaddingButton: FC<
+          IconButtonProps & { tableInstance: MRT_TableInstance<D> }
+        >;
+        MRT_FullScreenToggleButton: FC<
+          IconButtonProps & { tableInstance: MRT_TableInstance<D> }
+        >;
       },
     ) => ReactNode;
   };
@@ -425,7 +460,8 @@ export default <D extends Record<string, any> = {}>({
   positionToolbarAlertBanner = 'top',
   ...rest
 }: MaterialReactTableProps<D>) => (
-  <MaterialReactTableProvider
+  <MRT_TableRoot
+    // filterTypes={{ ...defaultFilterFNs, ...filterTypes }}
     enableColumnActions={enableColumnActions}
     enableColumnFilters={enableColumnFilters}
     enableDensePaddingToggle={enableDensePaddingToggle}
@@ -437,7 +473,6 @@ export default <D extends Record<string, any> = {}>({
     enableSelectAll={enableSelectAll}
     enableSorting={enableSorting}
     enableStickyHeader={enableStickyHeader}
-    // filterTypes={{ ...defaultFilterFNs, ...filterTypes }}
     icons={{ ...MRT_Default_Icons, ...icons }}
     localization={{ ...MRT_DefaultLocalization_EN, ...localization }}
     positionActionsColumn={positionActionsColumn}
@@ -445,7 +480,5 @@ export default <D extends Record<string, any> = {}>({
     positionToolbarActions={positionToolbarActions}
     positionToolbarAlertBanner={positionToolbarAlertBanner}
     {...rest}
-  >
-    <MRT_TablePaper />
-  </MaterialReactTableProvider>
+  />
 );

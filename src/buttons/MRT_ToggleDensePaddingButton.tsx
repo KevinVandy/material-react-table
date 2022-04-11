@@ -1,16 +1,23 @@
 import React, { FC } from 'react';
 import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
-import { useMRT } from '../useMRT';
+import { MRT_TableInstance } from '..';
 
-interface Props extends IconButtonProps {}
+interface Props extends IconButtonProps {
+  tableInstance: MRT_TableInstance;
+}
 
-export const MRT_ToggleDensePaddingButton: FC<Props> = ({ ...rest }) => {
+export const MRT_ToggleDensePaddingButton: FC<Props> = ({
+  tableInstance,
+  ...rest
+}) => {
   const {
-    setIsDensePadding,
-    localization,
-    icons: { DensityMediumIcon, DensitySmallIcon },
-    tableInstance: { getState },
-  } = useMRT();
+    getState,
+    options: {
+      icons: { DensityMediumIcon, DensitySmallIcon },
+      localization,
+      setIsDensePadding,
+    },
+  } = tableInstance;
 
   const { isDensePadding } = getState();
 

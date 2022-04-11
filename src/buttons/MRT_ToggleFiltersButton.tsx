@@ -1,16 +1,23 @@
 import React, { FC } from 'react';
 import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
-import { useMRT } from '../useMRT';
+import { MRT_TableInstance } from '..';
 
-interface Props extends IconButtonProps {}
+interface Props extends IconButtonProps {
+  tableInstance: MRT_TableInstance;
+}
 
-export const MRT_ToggleFiltersButton: FC<Props> = ({ ...rest }) => {
+export const MRT_ToggleFiltersButton: FC<Props> = ({
+  tableInstance,
+  ...rest
+}) => {
   const {
-    icons: { FilterListIcon, FilterListOffIcon },
-    localization,
-    setShowFilters,
-    tableInstance: { getState },
-  } = useMRT();
+    getState,
+    options: {
+      icons: { FilterListIcon, FilterListOffIcon },
+      localization,
+      setShowFilters,
+    },
+  } = tableInstance;
 
   const { showFilters } = getState();
 

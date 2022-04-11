@@ -1,28 +1,31 @@
 import React, { ChangeEvent, FC } from 'react';
 import { Checkbox, Tooltip } from '@mui/material';
-import { useMRT } from '../useMRT';
-import type { MRT_Row } from '..';
+import type { MRT_Row, MRT_TableInstance } from '..';
 
-interface Props<D extends Record<string, any> = {}> {
-  row?: MRT_Row<D>;
+interface Props {
+  row?: MRT_Row;
   selectAll?: boolean;
+  tableInstance: MRT_TableInstance;
 }
 
-export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll }) => {
+export const MRT_SelectCheckbox: FC<Props> = ({
+  row,
+  selectAll,
+  tableInstance,
+}) => {
   const {
-    isLoading,
-    localization,
-    muiSelectCheckboxProps,
-    onSelectChange,
-    onSelectAllChange,
-    tableInstance,
-    tableInstance: {
-      getRowModel,
-      getSelectedRowModel,
-      getState,
-      getToggleAllRowsSelectedProps,
+    getRowModel,
+    getSelectedRowModel,
+    getState,
+    getToggleAllRowsSelectedProps,
+    options: {
+      isLoading,
+      localization,
+      muiSelectCheckboxProps,
+      onSelectChange,
+      onSelectAllChange,
     },
-  } = useMRT();
+  } = tableInstance;
 
   const { isDensePadding } = getState();
 
