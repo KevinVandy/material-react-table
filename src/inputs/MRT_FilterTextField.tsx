@@ -95,16 +95,16 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
   const filterId = `mrt-${idPrefix}-${header.id}-filter-text-field`;
   const filterType = currentFilterTypes?.[header.id];
   const isSelectFilter = !!column.filterSelectOptions;
-  const filterChipLabel = '';
-  !(filterType instanceof Function) &&
-  [MRT_FILTER_TYPE.EMPTY, MRT_FILTER_TYPE.NOT_EMPTY].includes(
-    filterType as MRT_FILTER_TYPE,
-  )
-    ? //@ts-ignore
-      localization[
-        `filter${filterType.charAt(0).toUpperCase() + filterType.slice(1)}`
-      ]
-    : '';
+  const filterChipLabel =
+    !(filterType instanceof Function) &&
+    [MRT_FILTER_TYPE.EMPTY, MRT_FILTER_TYPE.NOT_EMPTY].includes(
+      filterType as MRT_FILTER_TYPE,
+    )
+      ? //@ts-ignore
+        localization[
+          `filter${filterType.charAt(0).toUpperCase() + filterType.slice(1)}`
+        ]
+      : '';
   const filterPlaceholder = localization.filterByColumn?.replace(
     '{column}',
     String(column.header),
