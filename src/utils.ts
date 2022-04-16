@@ -1,5 +1,6 @@
 import { ColumnDef, Table } from '@tanstack/react-table';
-import { MRT_ColumnInterface } from '.';
+import { MRT_ColumnInterface, MRT_FilterType } from '.';
+import { MRT_FILTER_TYPE } from './enums';
 
 export const getAllLeafColumnDefs = (
   columns: MRT_ColumnInterface[],
@@ -22,18 +23,26 @@ export const getAllLeafColumnDefs = (
 export const createGroup = <D extends Record<string, any> = {}>(
   table: Table<D>,
   column: MRT_ColumnInterface<D>,
+  currentFilterTypes: { [key: string]: MRT_FilterType },
 ): ColumnDef<D> =>
   table.createGroup({
     ...column,
     columns: column?.columns?.map?.((col) =>
-      col.columns ? createGroup<D>(table, col) : createDataColumn(table, col),
+      col.columns
+        ? createGroup<D>(table, col, currentFilterTypes)
+        : createDataColumn(table, col, currentFilterTypes),
     ),
   } as any);
 
 export const createDataColumn = <D extends Record<string, any> = {}>(
   table: Table<D>,
   column: MRT_ColumnInterface<D>,
-): ColumnDef<D> => table.createDataColumn(column.id, column as any) as any;
+  currentFilterTypes: { [key: string]: MRT_FilterType },
+): ColumnDef<D> => // @ts-ignore
+  table.createDataColumn(column.id, {
+    filterType: currentFilterTypes[column.id] || MRT_FILTER_TYPE.BEST_MATCH,
+    ...column,
+  }) as any;
 
 export const createDisplayColumn = <D extends Record<string, any> = {}>(
   table: Table<D>,

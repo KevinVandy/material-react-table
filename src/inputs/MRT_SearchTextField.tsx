@@ -1,4 +1,10 @@
-import React, { ChangeEvent, FC, MouseEvent, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FC,
+  MouseEvent,
+  useCallback,
+  useState,
+} from 'react';
 import {
   Collapse,
   debounce,
@@ -32,10 +38,13 @@ export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [searchValue, setSearchValue] = useState(globalFilter ?? '');
 
-  const handleChange = debounce((event: ChangeEvent<HTMLInputElement>) => {
-    setGlobalFilter(event.target.value ?? undefined);
-    onGlobalFilterChange?.(event);
-  }, 200);
+  const handleChange = useCallback(
+    debounce((event: ChangeEvent<HTMLInputElement>) => {
+      setGlobalFilter(event.target.value ?? undefined);
+      onGlobalFilterChange?.(event);
+    }, 200),
+    [],
+  );
 
   const handleGlobalFilterMenuOpen = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);

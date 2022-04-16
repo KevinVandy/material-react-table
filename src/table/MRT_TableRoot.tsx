@@ -3,6 +3,7 @@ import {
   createTable,
   expandRowsFn,
   functionalUpdate,
+  globalFilterRowsFn,
   groupRowsFn,
   paginateRowsFn,
   PaginationState,
@@ -11,7 +12,12 @@ import {
   useTable,
 } from '@tanstack/react-table';
 import React, { useMemo, useState } from 'react';
-import { MRT_ColumnInterface, MRT_Row, MRT_TableInstance } from '..';
+import {
+  MRT_ColumnInterface,
+  MRT_FilterType,
+  MRT_Row,
+  MRT_TableInstance,
+} from '..';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
 import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
 import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMenuButton';
@@ -24,6 +30,8 @@ import {
   createGroup,
   getAllLeafColumnDefs,
 } from '../utils';
+import { defaultFilterFNs } from '../filtersFNs';
+import { MRT_FILTER_TYPE } from '../enums';
 
 export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   props: MaterialReactTableProps<D>,
@@ -54,46 +62,27 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     pageCount: props.initialState?.pagination?.pageCount ?? -1,
   });
 
-  // const [currentFilterTypes, setCurrentFilterTypes] = useState<{
-  //   [key: string]: MRT_FilterType;
-  // }>(() =>
-  //   Object.assign(
-  //     {},
-  //     ...findLowestLevelCols(props.columns).map((c) => ({
-  //       [c.accessor as string]:
-  //         c.filter ??
-  //         props?.initialState?.filters?.[c.accessor as any] ??
-  //         (!!c.filterSelectOptions?.length
-  //           ? MRT_FILTER_TYPE.EQUALS
-  //           : MRT_FILTER_TYPE.BEST_MATCH),
-  //     })),
-  //   ),
-  // );
+  const [currentFilterTypes, setCurrentFilterTypes] = useState<{
+    [key: string]: MRT_FilterType;
+  }>(() =>
+    Object.assign(
+      {},
+      ...getAllLeafColumnDefs(props.columns as MRT_ColumnInterface[]).map(
+        (c) => ({
+          [c.id as string]:
+            c.filter ??
+            props?.initialState?.columnFilters?.[c.id as any] ??
+            (!!c.filterSelectOptions?.length
+              ? MRT_FILTER_TYPE.EQUALS
+              : MRT_FILTER_TYPE.BEST_MATCH),
+        }),
+      ),
+    ),
+  );
 
-  // const [currentGlobalFilterType, setCurrentGlobalFilterType] = useState<
-  //   MRT_FilterType | string | undefined
-  // >(props.globalFilter);
-
-  // const applyFiltersToColumns = useCallback(
-  //   (cols: MRT_ColumnInterface[]) =>
-  //     cols.map((column) => {
-  //       if (column.columns) {
-  //         applyFiltersToColumns(column.columns);
-  //       } else {
-  //         column.filter =
-  //           props?.filterTypes?.[
-  //             currentFilterTypes[column.accessor as string] as MRT_FILTER_TYPE
-  //           ];
-  //       }
-  //       return column;
-  //     }),
-  //   [currentFilterTypes, props.filterTypes],
-  // );
-
-  // const columns = useMemo(
-  //   () => applyFiltersToColumns(props.columns),
-  //   [props.columns, applyFiltersToColumns],
-  // );
+  const [currentGlobalFilterType, setCurrentGlobalFilterType] = useState(
+    props.globalFilterType ?? MRT_FILTER_TYPE.BEST_MATCH_FIRST,
+  );
 
   const table = useMemo(
     () => createTable<{ Row: D }>(),
@@ -179,11 +168,11 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         ...displayColumns,
         ...props.columns.map((column) =>
           column.columns
-            ? createGroup(table, column as any)
-            : createDataColumn(table, column as any),
+            ? createGroup(table, column, currentFilterTypes)
+            : createDataColumn(table, column, currentFilterTypes),
         ),
       ] as any),
-    [table, props.columns],
+    [table, props.columns, currentFilterTypes],
   );
 
   const data = useMemo(
@@ -206,28 +195,33 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   //@ts-ignore
   const tableInstance: MRT_TableInstance<{}> = useTable(table, {
     ...props,
-    columnFilterRowsFn,
+    //@ts-ignore
+    filterTypes: defaultFilterFNs,
+    globalFilterType: currentGlobalFilterType,
+    columnFilterRowsFn: columnFilterRowsFn,
     columns,
     data,
     expandRowsFn: expandRowsFn,
-    // filterTypes: defaultFilterFNs,
-    groupRowsFn: groupRowsFn,
     getSubRows: props.getSubRows ?? ((originalRow: D) => originalRow.subRows),
-    paginateRowsFn: paginateRowsFn,
+    globalFilterRowsFn: globalFilterRowsFn,
+    groupRowsFn: groupRowsFn,
+    idPrefix,
     onPaginationChange: (updater: any) =>
       setPagination((old) => functionalUpdate(updater, old)),
-    sortRowsFn,
-    idPrefix,
+    paginateRowsFn: paginateRowsFn,
     setCurrentEditingRow,
-    // setCurrentFilterTypes,
-    // setCurrentGlobalFilterType,
+    setCurrentFilterTypes,
+    setCurrentGlobalFilterType,
     setIsDensePadding,
     setIsFullScreen,
     setShowFilters,
     setShowSearch,
+    sortRowsFn,
     state: {
       ...props.initialState,
       currentEditingRow,
+      currentFilterTypes,
+      currentGlobalFilterType,
       isDensePadding,
       isFullScreen,
       //@ts-ignore
@@ -237,6 +231,6 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       ...props.state,
     },
   });
-
+  // console.log(tableInstance.getState());
   return <MRT_TablePaper tableInstance={tableInstance} />;
 };

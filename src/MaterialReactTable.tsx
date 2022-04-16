@@ -40,10 +40,10 @@ import {
   TableInstance,
   TableState,
 } from '@tanstack/react-table';
-import { MRT_TableRoot } from './table/MRT_TableRoot';
 import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_FILTER_TYPE } from './enums';
+import { MRT_TableRoot } from './table/MRT_TableRoot';
 
 export type MRT_TableOptions<D extends Record<string, any> = {}> = Partial<
   Omit<
@@ -107,7 +107,6 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
     setIsFullScreen: Dispatch<SetStateAction<boolean>>;
     setShowFilters: Dispatch<SetStateAction<boolean>>;
     setShowSearch: Dispatch<SetStateAction<boolean>>;
-    tableInstance: MRT_TableInstance<D>;
   };
 };
 
@@ -116,6 +115,8 @@ export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
   'pagination'
 > & {
   currentEditingRow: MRT_Row<D> | null;
+  currentFilterTypes: Record<string, string | Function>;
+  currentGlobalFilterType: Record<string, string | Function>;
   isDensePadding: boolean;
   isFullScreen: boolean;
   showFilters: boolean;
@@ -139,11 +140,9 @@ export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
   Filter?: ({
     header,
     tableInstance,
-    onChange,
   }: {
     header: MRT_Header<D>;
     tableInstance: MRT_TableInstance<D>;
-    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   }) => ReactNode;
   Footer?: ({
     footer,
@@ -461,7 +460,6 @@ export default <D extends Record<string, any> = {}>({
   ...rest
 }: MaterialReactTableProps<D>) => (
   <MRT_TableRoot
-    // filterTypes={{ ...defaultFilterFNs, ...filterTypes }}
     enableColumnActions={enableColumnActions}
     enableColumnFilters={enableColumnFilters}
     enableDensePaddingToggle={enableDensePaddingToggle}
