@@ -1,13 +1,13 @@
 import React, { FC, useMemo } from 'react';
-import MaterialReactTable from 'material-react-table';
+import MaterialReactTable, { MRT_ColumnInterface } from 'material-react-table';
 
 const Example: FC = () => {
-  const columns = useMemo(
+  const columns: MRT_ColumnInterface[] = useMemo(
     () => [
       {
         header: 'ID',
         id: 'id',
-        disableColumnActions: true,
+        enableColumnActions: false,
       },
       {
         header: 'First Name',

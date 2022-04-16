@@ -85,7 +85,7 @@ const Example: FC = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      disableSelectAll
+      enableSelectAll={false}
       enableRowSelection
       muiSelectCheckboxProps={(isSelectAll, row, _tableInstance) => ({
         color: 'secondary',

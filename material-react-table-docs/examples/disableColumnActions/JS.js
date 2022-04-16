@@ -7,7 +7,7 @@ const Example = () => {
       {
         header: 'ID',
         id: 'id',
-        disableColumnActions: true,
+        enableColumnActions: false,
       },
       {
         header: 'First Name',

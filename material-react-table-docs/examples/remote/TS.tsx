@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
-import MaterialReactTable from 'material-react-table';
+import MaterialReactTable, { MRT_ColumnInterface } from 'material-react-table';
 
 interface UserData {
   id: number;
@@ -55,7 +55,7 @@ const Example: FC = () => {
     [remoteData],
   );
 
-  const columns = useMemo(
+  const columns: MRT_ColumnInterface[] = useMemo(
     () => [
       {
         header: 'Name',

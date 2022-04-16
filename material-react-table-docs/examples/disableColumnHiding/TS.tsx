@@ -1,18 +1,18 @@
 import React, { FC, useMemo } from 'react';
-import MaterialReactTable from 'material-react-table';
+import MaterialReactTable, { MRT_ColumnInterface } from 'material-react-table';
 
 const Example: FC = () => {
-  const columns = useMemo(
+  const columns: MRT_ColumnInterface[] = useMemo(
     () => [
       {
         header: 'First Name',
         id: 'firstName',
-        disableColumnHiding: true,
+        enableHiding: false,
       },
       {
         header: 'Last Name',
         id: 'lastName',
-        disableColumnHiding: true,
+        enableHiding: false,
       },
       {
         header: 'Address',
@@ -76,7 +76,7 @@ const Example: FC = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      initialState={{ hiddenColumns: ['address'] }}
+      initialState={{ columnVisibility: { address: false } }}
     />
   );
 };

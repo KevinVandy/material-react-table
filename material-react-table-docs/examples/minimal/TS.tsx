@@ -77,12 +77,14 @@ export const Example: FC = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      disableColumnActions
-      disableSortBy
+      enableColumnActions={false}
+      enableColumnFilters={false}
+      enablePagination={false}
+      enableSorting={false}
       hideToolbarBottom
       hideToolbarTop
-      manualPagination
       muiTableBodyRowProps={{ hover: false }}
+      muiTableProps={{ stickyHeader: false }}
     />
   );
 };

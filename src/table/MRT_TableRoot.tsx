@@ -231,6 +231,6 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       ...props.state,
     },
   });
-  // console.log(tableInstance.getState());
+  console.log(tableInstance.getState().columnVisibility);
   return <MRT_TablePaper tableInstance={tableInstance} />;
 };

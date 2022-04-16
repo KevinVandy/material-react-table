@@ -7,12 +7,12 @@ const Example = () => {
       {
         header: 'First Name',
         id: 'firstName',
-        disableColumnHiding: true,
+        enableHiding: false,
       },
       {
         header: 'Last Name',
         id: 'lastName',
-        disableColumnHiding: true,
+        enableHiding: false,
       },
       {
         header: 'Address',
@@ -76,7 +76,7 @@ const Example = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      initialState={{ hiddenColumns: ['address'] }}
+      initialState={{ columnVisibility: { address: false } }}
     />
   );
 };

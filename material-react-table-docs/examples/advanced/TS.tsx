@@ -1,10 +1,10 @@
 import React, { FC, useMemo, useState } from 'react';
-import MaterialReactTable, { MRT_Cell } from 'material-react-table';
+import MaterialReactTable, { MRT_Cell, MRT_ColumnInterface } from 'material-react-table';
 import { Box, ListItemIcon, MenuItem, Typography } from '@mui/material';
 import { AccountCircle, Send } from '@mui/icons-material';
 
 const Example: FC = () => {
-  const columns = useMemo(
+  const columns: MRT_ColumnInterface[] = useMemo(
     () => [
       {
         header: 'Employee',
