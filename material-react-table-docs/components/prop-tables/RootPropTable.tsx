@@ -491,13 +491,13 @@ const RootPropTable = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      manualPagination
+      enablePagination={false}
       hideToolbarBottom
       initialState={{
         isDensePadding: true,
-        hiddenColumns: ['default'],
+        columnVisibility: {'default': false},
         showSearch: true,
-        sortBy: [{ id: 'prop', desc: false }],
+        sorting: [{id: 'prop', desc: false}],
       }}
     />
   );

@@ -88,6 +88,7 @@ MinimumFeatures.args = {
   hideToolbarBottom: true,
   hideToolbarTop: true,
   muiTableBodyRowProps: { hover: false },
+  muiTableProps: { stickyHeader: false },
 } as MaterialReactTableProps<Row>;
 
 const maxFeaturesData = [...Array(250)].map((_) => ({
@@ -205,19 +206,19 @@ MaximumFeatures.args = {
   ],
   renderToolbarCustomActions: (tableInstance) => {
     const handleDeactivate = () => {
-      tableInstance.getSelectedRowModel().rows.map((row) => {
+      tableInstance.getSelectedRowModel().rows.forEach((row) => {
         console.log('deactivating ' + row.original);
       });
     };
 
     const handleActivate = () => {
-      tableInstance.getSelectedRowModel().rows.map((row) => {
+      tableInstance.getSelectedRowModel().rows.forEach((row) => {
         console.log('activating ' + row.original);
       });
     };
 
     const handleContact = () => {
-      tableInstance.getSelectedRowModel().rows.map((row) => {
+      tableInstance.getSelectedRowModel().rows.forEach((row) => {
         console.log('contact ' + row.original);
       });
     };
