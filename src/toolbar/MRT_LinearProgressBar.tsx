@@ -13,7 +13,7 @@ export const MRT_LinearProgressBar: FC<Props> = ({ tableInstance }) => {
 
   const linearProgressProps =
     muiLinearProgressProps instanceof Function
-      ? muiLinearProgressProps(tableInstance)
+      ? muiLinearProgressProps({ tableInstance })
       : muiLinearProgressProps;
 
   return (

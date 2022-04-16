@@ -95,13 +95,13 @@ export const CustomToolbarInternalActions: Story<
   <MaterialReactTable
     columns={columns}
     data={data}
-    renderToolbarInternalActions={(
+    renderToolbarInternalActions={({
       tableInstance,
-      { MRT_FullScreenToggleButton },
-    ) => {
+      MRT_FullScreenToggleButton,
+    }) => {
       return (
         <>
-          <MRT_FullScreenToggleButton />
+          <MRT_FullScreenToggleButton tableInstance={tableInstance} />
         </>
       );
     }}
@@ -147,21 +147,21 @@ export const CustomToolbarSelectionActions: Story<
     columns={columns}
     data={data}
     enableRowSelection
-    renderToolbarCustomActions={(tableInstance) => {
+    renderToolbarCustomActions={({ tableInstance }) => {
       const handleDeactivate = () => {
-        tableInstance.selectedFlatRows.map((row) => {
+        tableInstance.getSelectedRowModel().flatRows.map((row) => {
           alert('deactivating ' + row.original.firstName);
         });
       };
 
       const handleActivate = () => {
-        tableInstance.selectedFlatRows.map((row) => {
+        tableInstance.getSelectedRowModel().flatRows.map((row) => {
           alert('activating ' + row.original.firstName);
         });
       };
 
       const handleContact = () => {
-        tableInstance.selectedFlatRows.map((row) => {
+        tableInstance.getSelectedRowModel().flatRows.map((row) => {
           alert('contact ' + row.original.firstName);
         });
       };
@@ -170,7 +170,7 @@ export const CustomToolbarSelectionActions: Story<
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           <Button
             color="error"
-            disabled={tableInstance.selectedFlatRows.length === 0}
+            disabled={tableInstance.getSelectedRowModel().flatRows.length === 0}
             onClick={handleDeactivate}
             variant="contained"
           >
@@ -178,7 +178,7 @@ export const CustomToolbarSelectionActions: Story<
           </Button>
           <Button
             color="success"
-            disabled={tableInstance.selectedFlatRows.length === 0}
+            disabled={tableInstance.getSelectedRowModel().flatRows.length === 0}
             onClick={handleActivate}
             variant="contained"
           >
@@ -186,7 +186,7 @@ export const CustomToolbarSelectionActions: Story<
           </Button>
           <Button
             color="info"
-            disabled={tableInstance.selectedFlatRows.length === 0}
+            disabled={tableInstance.getSelectedRowModel().flatRows.length === 0}
             onClick={handleContact}
             variant="contained"
           >
@@ -204,7 +204,7 @@ export const ToolbarAlertBannerBottom: Story<MaterialReactTableProps> = () => (
     data={data}
     enableRowSelection
     positionToolbarAlertBanner="bottom"
-    renderToolbarCustomActions={(tableInstance) => {
+    renderToolbarCustomActions={({ tableInstance }) => {
       const handleCreateNewUser = () => {
         prompt('Create new user modal');
       };
@@ -222,7 +222,9 @@ export const ToolbarAlertBannerBottom: Story<MaterialReactTableProps> = () => (
           <Tooltip arrow title="Remove Users">
             <span>
               <IconButton
-                disabled={tableInstance.selectedFlatRows.length === 0}
+                disabled={
+                  tableInstance.getSelectedRowModel().flatRows.length === 0
+                }
                 onClick={handleRemoveUsers}
               >
                 <DeleteIcon />

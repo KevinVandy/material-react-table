@@ -53,7 +53,7 @@ export const RowEditingEnabled: Story<MaterialReactTableProps> = () => {
         {
           header: 'Phone Number',
           id: 'phoneNumber',
-          disableEditing: true,
+          enableEditing: false,
         },
       ]}
       data={tableData}
@@ -147,7 +147,7 @@ export const RowEditingCustomizeInput: Story<MaterialReactTableProps> = () => {
         {
           header: 'State',
           id: 'state',
-          muiTableBodyCellEditTextFieldProps: (cell) => ({
+          muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
             children: usStates.map((state) => (
               <MenuItem key={state} value={state}>
                 {state}
@@ -211,7 +211,7 @@ export const RowEditingWithValidation: Story<MaterialReactTableProps> = () => {
             error: !!firstNameError,
             helperText: firstNameError,
           },
-          onCellEditChange: (event) => {
+          onCellEditChange: ({ event }) => {
             setFirstNameError(validateFirstName(event.target.value));
           },
         },
@@ -222,7 +222,7 @@ export const RowEditingWithValidation: Story<MaterialReactTableProps> = () => {
             error: !!lastNameError,
             helperText: lastNameError,
           },
-          onCellEditChange: (event) => {
+          onCellEditChange: ({ event }) => {
             setLastNameError(validateLastName(event.target.value));
           },
         },
@@ -233,13 +233,13 @@ export const RowEditingWithValidation: Story<MaterialReactTableProps> = () => {
             error: !!phoneNumberError,
             helperText: phoneNumberError,
           },
-          onCellEditChange: (event) => {
+          onCellEditChange: ({ event }) => {
             setPhoneNumberError(validatePhoneNumber(event.target.value));
           },
         },
       ]}
       data={tableData}
-      onSaveRow={handleSaveRow}
+      // onSaveRow={handleSaveRow}
       enableRowActions
       enableRowEditing
       onRowEditSubmit={handleSaveRow}

@@ -29,7 +29,7 @@ export const MRT_TablePaper: FC<Props> = ({ tableInstance }) => {
 
   const tablePaperProps =
     muiTablePaperProps instanceof Function
-      ? muiTablePaperProps(tableInstance)
+      ? muiTablePaperProps({ tableInstance })
       : muiTablePaperProps;
 
   return (
@@ -37,18 +37,22 @@ export const MRT_TablePaper: FC<Props> = ({ tableInstance }) => {
       elevation={2}
       {...tablePaperProps}
       sx={{
-        bottom: isFullScreen ? '0' : undefined,
+        transition: 'all 0.2s ease-in-out',
+        ...tablePaperProps?.sx,
+      }}
+      style={{
         height: isFullScreen ? '100%' : undefined,
         left: isFullScreen ? '0' : undefined,
-        m: isFullScreen ? '0' : undefined,
+        margin: isFullScreen ? '0' : undefined,
+        maxHeight: isFullScreen ? '100%' : undefined,
+        maxWidth: isFullScreen ? '100%' : undefined,
         overflowY: !isFullScreen ? 'hidden' : undefined,
         position: isFullScreen ? 'fixed' : undefined,
         right: isFullScreen ? '0' : undefined,
         top: isFullScreen ? '0' : undefined,
-        transition: 'all 0.2s ease-in-out',
         width: isFullScreen ? '100vw' : undefined,
         zIndex: isFullScreen ? 1200 : 1,
-        ...tablePaperProps?.sx,
+        bottom: isFullScreen ? '0' : undefined,
       }}
     >
       {!hideToolbarTop && <MRT_ToolbarTop tableInstance={tableInstance} />}

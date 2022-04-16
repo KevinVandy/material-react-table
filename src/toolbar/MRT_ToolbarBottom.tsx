@@ -29,7 +29,7 @@ export const MRT_ToolbarBottom: FC<Props> = ({ tableInstance }) => {
 
   const toolbarProps =
     muiTableToolbarBottomProps instanceof Function
-      ? muiTableToolbarBottomProps(tableInstance)
+      ? muiTableToolbarBottomProps({ tableInstance })
       : muiTableToolbarBottomProps;
 
   return (

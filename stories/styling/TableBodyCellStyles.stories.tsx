@@ -67,7 +67,7 @@ export const StyleMuiTableBodyCellConditionallyIn1Column: Story<
       {
         header: 'Age',
         id: 'age',
-        muiTableBodyCellProps: (cell) => ({
+        muiTableBodyCellProps: ({ cell }) => ({
           style: {
             backgroundColor:
               cell.value > 40 ? 'rgba(22, 184, 44, 0.5)' : undefined,

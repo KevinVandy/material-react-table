@@ -44,12 +44,12 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
 
   const mTableHeadCellFilterTextFieldProps =
     muiTableHeadCellFilterTextFieldProps instanceof Function
-      ? muiTableHeadCellFilterTextFieldProps(column)
+      ? muiTableHeadCellFilterTextFieldProps({ column, tableInstance })
       : muiTableHeadCellFilterTextFieldProps;
 
   const mcTableHeadCellFilterTextFieldProps =
     column.muiTableHeadCellFilterTextFieldProps instanceof Function
-      ? column.muiTableHeadCellFilterTextFieldProps(column)
+      ? column.muiTableHeadCellFilterTextFieldProps({ column, tableInstance })
       : column.muiTableHeadCellFilterTextFieldProps;
 
   const textFieldProps = {

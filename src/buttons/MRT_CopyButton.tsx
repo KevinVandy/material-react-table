@@ -27,12 +27,12 @@ export const MRT_CopyButton: FC<Props> = ({
 
   const mTableBodyCellCopyButtonProps =
     muiTableBodyCellCopyButtonProps instanceof Function
-      ? muiTableBodyCellCopyButtonProps(cell)
+      ? muiTableBodyCellCopyButtonProps({ cell, tableInstance })
       : muiTableBodyCellCopyButtonProps;
 
   const mcTableBodyCellCopyButtonProps =
     cell.column.muiTableBodyCellCopyButtonProps instanceof Function
-      ? cell.column.muiTableBodyCellCopyButtonProps(cell)
+      ? cell.column.muiTableBodyCellCopyButtonProps({ cell, tableInstance })
       : cell.column.muiTableBodyCellCopyButtonProps;
 
   const buttonProps = {

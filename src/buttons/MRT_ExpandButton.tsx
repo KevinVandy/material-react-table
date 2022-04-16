@@ -22,7 +22,7 @@ export const MRT_ExpandButton: FC<Props> = ({ row, tableInstance }) => {
 
   const handleToggleExpand = (event: MouseEvent<HTMLButtonElement>) => {
     row.toggleExpanded();
-    onRowExpandChange?.(event, row);
+    onRowExpandChange?.({ event, row, tableInstance });
   };
 
   return (

@@ -19,12 +19,12 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, tableInstance }) => {
 
   const mTableFooterCellProps =
     muiTableFooterCellProps instanceof Function
-      ? muiTableFooterCellProps(column)
+      ? muiTableFooterCellProps({ column, tableInstance })
       : muiTableFooterCellProps;
 
   const mcTableFooterCellProps =
     column.muiTableFooterCellProps instanceof Function
-      ? column.muiTableFooterCellProps(column)
+      ? column.muiTableFooterCellProps({ column, tableInstance })
       : column.muiTableFooterCellProps;
 
   const tableCellProps = {

@@ -40,12 +40,12 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
 
   const mTableHeadCellProps =
     muiTableHeadCellProps instanceof Function
-      ? muiTableHeadCellProps(column)
+      ? muiTableHeadCellProps({ column, tableInstance })
       : muiTableHeadCellProps;
 
   const mcTableHeadCellProps =
     column.muiTableHeadCellProps instanceof Function
-      ? column.muiTableHeadCellProps(column)
+      ? column.muiTableHeadCellProps({ column, tableInstance })
       : column.muiTableHeadCellProps;
 
   const tableCellProps = {
@@ -57,35 +57,28 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
   const sortTooltip = !!column.getIsSorted()
     ? column.getIsSorted() === 'desc'
       ? localization.clearSort
-      : localization.sortByColumnDesc.replace(
-          '{column}',
-          column.header as string,
+      : localization.sortByColumnDesc.replace('{column}', column.header)
+    : localization.sortByColumnAsc.replace('{column}', column.header);
+
+  const filterType = getState()?.currentFilterTypes?.[header.id];
+
+  const filterTooltip = !!column.getColumnFilterValue()
+    ? localization.filteringByColumn
+        .replace('{column}', String(column.header))
+        .replace(
+          '{filterType}',
+          filterType instanceof Function
+            ? ''
+            : // @ts-ignore
+              localization[
+                `filter${
+                  filterType.charAt(0).toUpperCase() + filterType.slice(1)
+                }`
+              ],
         )
-    : localization.sortByColumnAsc.replace('{column}', column.header as string);
-
-  // const filterType = getState()?.currentFilterTypes?.[id];
-
-  const filterTooltip = '';
-  // !!getColumnFilterValue()
-  //   ? localization.filteringByColumn
-  //       .replace('{column}', String(headerString))
-  //       .replace(
-  //         '{filterType}',
-  //         filterType instanceof Function
-  //           ? ''
-  //           : // @ts-ignore
-  //             localization[
-  //               `filter${
-  //                 filterType.charAt(0).toUpperCase() + filterType.slice(1)
-  //               }`
-  //             ],
-  //       )
-  //       .replace(
-  //         '{filterValue}',
-  //         getColumnFilterValue() as string,
-  //       )
-  //       .replace('" "', '')
-  //   : localization.showHideFilters;
+        .replace('{filterValue}', column.getColumnFilterValue() as string)
+        .replace('" "', '')
+    : localization.showHideFilters;
 
   const headerElement =
     column?.Header?.({

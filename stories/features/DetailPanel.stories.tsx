@@ -40,12 +40,12 @@ export const DetailPanelEnabled: Story<MaterialReactTableProps> = () => (
       phone: faker.phone.phoneNumber(),
     }))}
     enableExpanded
-    renderDetailPanel={(rowData) => (
+    renderDetailPanel={({ row }) => (
       <div style={{ display: 'grid' }}>
-        <span>City: {rowData.original.city}</span>
-        <span>State: {rowData.original.state}</span>
-        <span>Zip: {rowData.original.zipCode}</span>
-        <span>Phone: {rowData.original.phone}</span>
+        <span>City: {row.original.city}</span>
+        <span>State: {row.original.state}</span>
+        <span>Zip: {row.original.zipCode}</span>
+        <span>Phone: {row.original.phone}</span>
       </div>
     )}
   />
@@ -80,12 +80,12 @@ export const DetailPanelExpandAllDisabled: Story<
     }))}
     enableExpandAll={false}
     enableExpanded
-    renderDetailPanel={(rowData) => (
+    renderDetailPanel={({ row }) => (
       <div style={{ display: 'grid' }}>
-        <span>City: {rowData.original.city}</span>
-        <span>State: {rowData.original.state}</span>
-        <span>Zip: {rowData.original.zipCode}</span>
-        <span>Phone: {rowData.original.phone}</span>
+        <span>City: {row.original.city}</span>
+        <span>State: {row.original.state}</span>
+        <span>Zip: {row.original.zipCode}</span>
+        <span>Phone: {row.original.phone}</span>
       </div>
     )}
   />

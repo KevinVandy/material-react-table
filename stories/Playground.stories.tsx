@@ -204,7 +204,7 @@ MaximumFeatures.args = {
       <ShareIcon /> Share
     </MenuItem>,
   ],
-  renderToolbarCustomActions: (tableInstance) => {
+  renderToolbarCustomActions: ({ tableInstance }) => {
     const handleDeactivate = () => {
       tableInstance.getSelectedRowModel().rows.forEach((row) => {
         console.log('deactivating ' + row.original);

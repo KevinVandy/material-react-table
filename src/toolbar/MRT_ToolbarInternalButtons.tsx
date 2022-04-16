@@ -26,12 +26,13 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ tableInstance }) => {
   if (renderToolbarInternalActions) {
     return (
       <>
-        {renderToolbarInternalActions(tableInstance, {
-          MRT_ToggleSearchButton,
-          MRT_ToggleFiltersButton,
+        {renderToolbarInternalActions({
+          MRT_FullScreenToggleButton,
           MRT_ShowHideColumnsButton,
           MRT_ToggleDensePaddingButton,
-          MRT_FullScreenToggleButton,
+          MRT_ToggleFiltersButton,
+          MRT_ToggleSearchButton,
+          tableInstance,
         })}
       </>
     );

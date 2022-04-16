@@ -39,6 +39,7 @@ import {
   Row,
   TableInstance,
   TableState,
+  VisibilityState,
 } from '@tanstack/react-table';
 import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
@@ -85,11 +86,11 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
 > & {
   getAllColumns: () => MRT_ColumnInstance<D>[];
   getAllLeafColumns: () => MRT_ColumnInstance<D>[];
-  getExpandedRowModel: () => MRT_RowModel;
-  getPaginationRowModel: () => MRT_RowModel;
-  getPrePaginationRowModel: () => MRT_RowModel;
-  getRowModel: () => MRT_RowModel;
-  getSelectedRowModel: () => MRT_RowModel;
+  getExpandedRowModel: () => MRT_RowModel<D>;
+  getPaginationRowModel: () => MRT_RowModel<D>;
+  getPrePaginationRowModel: () => MRT_RowModel<D>;
+  getRowModel: () => MRT_RowModel<D>;
+  getSelectedRowModel: () => MRT_RowModel<D>;
   getState: () => MRT_TableState<D>;
   options: MaterialReactTableProps<D> & {
     icons: MRT_Icons;
@@ -131,16 +132,18 @@ export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
   Edit?: ({
     cell,
     tableInstance,
-    onChange,
-  }: {
+  }: // onChange,
+  {
     cell: MRT_Cell<D>;
     tableInstance: MRT_TableInstance<D>;
-    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+    // onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   }) => ReactNode;
   Filter?: ({
+    // onChange,
     header,
     tableInstance,
   }: {
+    // onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     header: MRT_Header<D>;
     tableInstance: MRT_TableInstance<D>;
   }) => ReactNode;
@@ -170,8 +173,6 @@ export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;
   enableEditing?: boolean;
-  enableColumnFilters?: boolean;
-  enableHiding?: boolean;
   enabledFilterTypes?: (MRT_FILTER_TYPE | string)[];
   filter?: MRT_FilterType | string | FilterType<D>;
   filterSelectOptions?: (string | { text: string; value: string })[];
@@ -179,33 +180,83 @@ export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
   header: string;
   muiTableBodyCellCopyButtonProps?:
     | ButtonProps
-    | ((cell?: MRT_Cell<D>) => ButtonProps);
+    | (({
+        tableInstance,
+        cell,
+      }: {
+        tableInstance: MRT_TableInstance;
+        cell: MRT_Cell<D>;
+      }) => ButtonProps);
   muiTableBodyCellEditTextFieldProps?:
     | TextFieldProps
-    | ((cell: MRT_Cell<D>) => TextFieldProps);
+    | (({
+        tableInstance,
+        cell,
+      }: {
+        tableInstance: MRT_TableInstance;
+        cell: MRT_Cell<D>;
+      }) => TextFieldProps);
   muiTableBodyCellProps?:
     | TableCellProps
-    | ((cell: MRT_Cell<D>) => TableCellProps);
+    | (({
+        tableInstance,
+        cell,
+      }: {
+        tableInstance: MRT_TableInstance;
+        cell: MRT_Cell<D>;
+      }) => TableCellProps);
   muiTableFooterCellProps?:
     | TableCellProps
-    | ((column: MRT_ColumnInstance<D>) => TableCellProps);
+    | (({
+        tableInstance,
+        column,
+      }: {
+        tableInstance: MRT_TableInstance;
+        column: MRT_ColumnInstance<D>;
+      }) => TableCellProps);
   muiTableHeadCellColumnActionsButtonProps?:
     | IconButtonProps
-    | ((column: MRT_ColumnInstance<D>) => IconButtonProps);
+    | (({
+        tableInstance,
+        column,
+      }: {
+        tableInstance: MRT_TableInstance;
+        column: MRT_ColumnInstance<D>;
+      }) => IconButtonProps);
   muiTableHeadCellFilterTextFieldProps?:
     | TextFieldProps
-    | ((column: MRT_ColumnInstance<D>) => TextFieldProps);
+    | (({
+        tableInstance,
+        column,
+      }: {
+        tableInstance: MRT_TableInstance;
+        column: MRT_ColumnInstance<D>;
+      }) => TextFieldProps);
   muiTableHeadCellProps?:
     | TableCellProps
-    | ((column: MRT_ColumnInstance<D>) => TableCellProps);
-  onCellEditChange?: (
-    event: ChangeEvent<HTMLInputElement>,
-    cell: MRT_Cell<D>,
-  ) => void;
-  onFilterChange?: (
-    event: ChangeEvent<HTMLInputElement>,
-    filterValue: any,
-  ) => void;
+    | (({
+        tableInstance,
+        column,
+      }: {
+        tableInstance: MRT_TableInstance;
+        column: MRT_ColumnInstance<D>;
+      }) => TableCellProps);
+  onCellEditChange?: ({
+    cell,
+    event,
+    tableInstance,
+  }: {
+    event: ChangeEvent<HTMLInputElement>;
+    cell: MRT_Cell<D>;
+    tableInstance: MRT_TableInstance<D>;
+  }) => void;
+  onColumnFilterValueChange?: ({
+    event,
+    filterValue,
+  }: {
+    event: ChangeEvent<HTMLInputElement>;
+    filterValue: any;
+  }) => void;
 };
 
 export type MRT_ColumnInstance<D extends Record<string, any> = {}> = Omit<
@@ -287,155 +338,342 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     localization?: Partial<MRT_Localization>;
     muiLinearProgressProps?:
       | LinearProgressProps
-      | ((tableInstance: MRT_TableInstance) => LinearProgressProps);
-    muiSearchTextFieldProps?: TextFieldProps;
+      | (({
+          tableInstance,
+        }: {
+          tableInstance: MRT_TableInstance;
+        }) => LinearProgressProps);
+    muiSearchTextFieldProps?:
+      | TextFieldProps
+      | (({
+          tableInstance,
+        }: {
+          tableInstance: MRT_TableInstance;
+        }) => TextFieldProps);
     muiSelectCheckboxProps?:
       | CheckboxProps
-      | ((
-          isSelectAll?: boolean,
-          row?: MRT_Row<D>,
-          tableInstance?: MRT_TableInstance<D>,
-        ) => CheckboxProps);
+      | (({
+          tableInstance,
+          isSelectAll,
+          row,
+        }: {
+          tableInstance: MRT_TableInstance;
+          isSelectAll: boolean;
+          row?: MRT_Row<D>;
+        }) => CheckboxProps);
     muiTableBodyCellCopyButtonProps?:
       | ButtonProps
-      | ((cell?: MRT_Cell<D>) => ButtonProps);
+      | (({
+          tableInstance,
+          cell,
+        }: {
+          tableInstance: MRT_TableInstance;
+          cell: MRT_Cell<D>;
+        }) => ButtonProps);
     muiTableBodyCellEditTextFieldProps?:
       | TextFieldProps
-      | ((cell?: MRT_Cell<D>) => TextFieldProps);
+      | (({
+          tableInstance,
+          cell,
+        }: {
+          tableInstance: MRT_TableInstance;
+          cell: MRT_Cell<D>;
+        }) => TextFieldProps);
     muiTableBodyCellProps?:
       | TableCellProps
-      | ((cell?: MRT_Cell<D>) => TableCellProps);
+      | (({
+          tableInstance,
+          cell,
+        }: {
+          tableInstance: MRT_TableInstance;
+          cell: MRT_Cell<D>;
+        }) => TableCellProps);
     muiTableBodyCellSkeletonProps?:
       | SkeletonProps
-      | ((cell?: MRT_Cell<D>) => SkeletonProps);
+      | (({
+          tableInstance,
+          cell,
+        }: {
+          tableInstance: MRT_TableInstance;
+          cell: MRT_Cell<D>;
+        }) => SkeletonProps);
     muiTableBodyProps?:
       | TableBodyProps
-      | ((tableInstance: MRT_TableInstance<D>) => TableBodyProps);
-    muiTableBodyRowProps?: TableRowProps | ((row: MRT_Row<D>) => TableRowProps);
+      | (({
+          tableInstance,
+        }: {
+          tableInstance: MRT_TableInstance;
+        }) => TableBodyProps);
+    muiTableBodyRowProps?:
+      | TableRowProps
+      | (({
+          tableInstance,
+          row,
+        }: {
+          tableInstance: MRT_TableInstance;
+          row: MRT_Row<D>;
+        }) => TableRowProps);
     muiTableContainerProps?:
       | TableContainerProps
-      | ((tableInstance: MRT_TableInstance<D>) => TableContainerProps);
+      | (({
+          tableInstance,
+        }: {
+          tableInstance: MRT_TableInstance;
+        }) => TableContainerProps);
     muiTableDetailPanelProps?:
       | TableCellProps
-      | ((row: MRT_Row<D>) => TableCellProps);
+      | (({
+          tableInstance,
+          row,
+        }: {
+          tableInstance: MRT_TableInstance;
+          row: MRT_Row<D>;
+        }) => TableCellProps);
     muiTableFooterCellProps?:
       | TableCellProps
-      | ((column: MRT_ColumnInstance<D>) => TableCellProps);
+      | (({
+          tableInstance,
+          column,
+        }: {
+          tableInstance: MRT_TableInstance;
+          column: MRT_ColumnInstance<D>;
+        }) => TableCellProps);
     muiTableFooterProps?:
       | TableFooterProps
-      | ((tableInstance: MRT_TableInstance<D>) => TableFooterProps);
+      | (({
+          tableInstance,
+        }: {
+          tableInstance: MRT_TableInstance;
+        }) => TableFooterProps);
     muiTableFooterRowProps?:
       | TableRowProps
-      | ((footerGroup: MRT_HeaderGroup<D>) => TableRowProps);
+      | (({
+          tableInstance,
+          footerGroup,
+        }: {
+          tableInstance: MRT_TableInstance;
+          footerGroup: MRT_HeaderGroup<D>;
+        }) => TableRowProps);
     muiTableHeadCellColumnActionsButtonProps?:
       | IconButtonProps
-      | ((column: MRT_ColumnInstance<D>) => IconButtonProps);
+      | (({
+          tableInstance,
+          column,
+        }: {
+          tableInstance: MRT_TableInstance;
+          column: MRT_ColumnInstance<D>;
+        }) => IconButtonProps);
     muiTableHeadCellFilterTextFieldProps?:
       | TextFieldProps
-      | ((column: MRT_ColumnInstance<D>) => TextFieldProps);
+      | (({
+          tableInstance,
+          column,
+        }: {
+          tableInstance: MRT_TableInstance;
+          column: MRT_ColumnInstance<D>;
+        }) => TextFieldProps);
     muiTableHeadCellProps?:
       | TableCellProps
-      | ((column: MRT_ColumnInstance<D>) => TableCellProps);
+      | (({
+          tableInstance,
+          column,
+        }: {
+          tableInstance: MRT_TableInstance;
+          column: MRT_ColumnInstance<D>;
+        }) => TableCellProps);
     muiTableHeadProps?:
       | TableHeadProps
-      | ((tableInstance: MRT_TableInstance<D>) => TableHeadProps);
+      | (({
+          tableInstance,
+        }: {
+          tableInstance: MRT_TableInstance;
+        }) => TableHeadProps);
     muiTableHeadRowProps?:
       | TableRowProps
-      | ((headerGroup: MRT_HeaderGroup<D>) => TableRowProps);
+      | (({
+          tableInstance,
+          headerGroup,
+        }: {
+          tableInstance: MRT_TableInstance;
+          headerGroup: MRT_HeaderGroup<D>;
+        }) => TableRowProps);
     muiTablePaperProps?:
       | PaperProps
-      | ((tableInstance: MRT_TableInstance<D>) => PaperProps);
+      | (({
+          tableInstance,
+        }: {
+          tableInstance: MRT_TableInstance;
+        }) => PaperProps);
     muiTablePaginationProps?:
       | Partial<TablePaginationProps>
-      | ((
-          tableInstance: MRT_TableInstance<D>,
-        ) => Partial<TablePaginationProps>);
+      | (({
+          tableInstance,
+        }: {
+          tableInstance: MRT_TableInstance;
+        }) => Partial<TablePaginationProps>);
     muiTableProps?:
       | TableProps
-      | ((tableInstance: MRT_TableInstance<D>) => TableProps);
+      | (({
+          tableInstance,
+        }: {
+          tableInstance: MRT_TableInstance;
+        }) => TableProps);
     muiTableToolbarAlertBannerProps?:
       | AlertProps
-      | ((tableInstance: MRT_TableInstance<D>) => AlertProps);
+      | (({
+          tableInstance,
+        }: {
+          tableInstance: MRT_TableInstance;
+        }) => AlertProps);
     muiTableToolbarBottomProps?:
       | ToolbarProps
-      | ((tableInstance: MRT_TableInstance<D>) => ToolbarProps);
+      | (({
+          tableInstance,
+        }: {
+          tableInstance: MRT_TableInstance;
+        }) => ToolbarProps);
     muiTableToolbarTopProps?:
       | ToolbarProps
-      | ((tableInstance: MRT_TableInstance<D>) => ToolbarProps);
-    onCellClick?: (
-      event: MouseEvent<HTMLTableCellElement>,
-      cell: MRT_Cell<D>,
-    ) => void;
-    onColumnHide?: (
-      column: MRT_ColumnInstance<D>,
-      hiddenColumns?: string[],
-    ) => void;
-    onDetailPanelClick?: (
-      event: MouseEvent<HTMLTableCellElement>,
-      row: MRT_Row<D>,
-    ) => void;
-    onGlobalFilterChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-    onRowClick?: (
-      event: MouseEvent<HTMLTableRowElement>,
-      row: MRT_Row<D>,
-    ) => void;
-    onRowEditSubmit?: (row: MRT_Row<D>) => Promise<void> | void;
-    onRowExpandChange?: (
-      event: MouseEvent<HTMLButtonElement>,
-      row: MRT_Row<D>,
-    ) => void;
-    onSelectAllChange?: (
-      event: ChangeEvent,
-      selectedRows: MRT_Row<D>[],
-    ) => void;
-    onSelectChange?: (
-      event: ChangeEvent,
-      row: MRT_Row<D>,
-      selectedRows: MRT_Row<D>[],
-    ) => void;
+      | (({
+          tableInstance,
+        }: {
+          tableInstance: MRT_TableInstance;
+        }) => ToolbarProps);
+    onCellClick?: ({
+      cell,
+      event,
+      tableInstance,
+    }: {
+      cell: MRT_Cell<D>;
+      tableInstance: MRT_TableInstance<D>;
+      event: MouseEvent<HTMLTableCellElement>;
+    }) => void;
+    onColumnHide?: ({
+      column,
+      columnVisibility,
+      tableInstance,
+    }: {
+      column: MRT_ColumnInstance<D>;
+      columnVisibility: VisibilityState;
+      tableInstance: MRT_TableInstance<D>;
+    }) => void;
+    onDetailPanelClick?: ({
+      event,
+      row,
+      tableInstance,
+    }: {
+      event: MouseEvent<HTMLTableCellElement>;
+      row: MRT_Row<D>;
+      tableInstance: MRT_TableInstance<D>;
+    }) => void;
+    onGlobalFilterChange?: ({
+      event,
+      tableInstance,
+    }: {
+      event: ChangeEvent<HTMLInputElement>;
+      tableInstance: MRT_TableInstance<D>;
+    }) => void;
+    onRowClick?: ({
+      event,
+      row,
+      tableInstance,
+    }: {
+      event: MouseEvent<HTMLTableRowElement>;
+      row: MRT_Row<D>;
+      tableInstance: MRT_TableInstance<D>;
+    }) => void;
+    onRowEditSubmit?: ({
+      row,
+      tableInstance,
+    }: {
+      row: MRT_Row<D>;
+      tableInstance: MRT_TableInstance<D>;
+    }) => Promise<void> | void;
+    onRowExpandChange?: ({
+      event,
+      row,
+    }: {
+      event: MouseEvent<HTMLButtonElement>;
+      row: MRT_Row<D>;
+      tableInstance: MRT_TableInstance<D>;
+    }) => void;
+    onSelectAllChange?: ({
+      event,
+      selectedRows,
+      tableInstance,
+    }: {
+      event: ChangeEvent;
+      selectedRows: MRT_Row<D>[];
+      tableInstance: MRT_TableInstance<D>;
+    }) => void;
+    onSelectChange?: ({
+      event,
+      row,
+      selectedRows,
+      tableInstance,
+    }: {
+      event: ChangeEvent;
+      row: MRT_Row<D>;
+      selectedRows: MRT_Row<D>[];
+      tableInstance: MRT_TableInstance<D>;
+    }) => void;
     positionActionsColumn?: 'first' | 'last';
     positionPagination?: 'bottom' | 'top' | 'both';
     positionToolbarActions?: 'bottom' | 'top';
     positionToolbarAlertBanner?: 'bottom' | 'top';
-    renderDetailPanel?: (row: MRT_Row<D>) => ReactNode;
-    renderRowActionMenuItems?: (
-      rowData: MRT_Row<D>,
-      tableInstance: MRT_TableInstance<D>,
-      closeMenu: () => void,
-    ) => ReactNode[];
-    renderRowActions?: (
-      row: MRT_Row<D>,
-      tableInstance: MRT_TableInstance<D>,
-    ) => ReactNode;
-    renderToolbarCustomActions?: (
-      tableInstance: MRT_TableInstance<D>,
-    ) => ReactNode;
-    renderToolbarInternalActions?: (
-      tableInstance: MRT_TableInstance<D>,
-      {
-        MRT_ToggleSearchButton,
-        MRT_ToggleFiltersButton,
-        MRT_ShowHideColumnsButton,
-        MRT_ToggleDensePaddingButton,
-        MRT_FullScreenToggleButton,
-      }: {
-        MRT_ToggleSearchButton: FC<
-          IconButtonProps & { tableInstance: MRT_TableInstance<D> }
-        >;
-        MRT_ToggleFiltersButton: FC<
-          IconButtonProps & { tableInstance: MRT_TableInstance<D> }
-        >;
-        MRT_ShowHideColumnsButton: FC<
-          IconButtonProps & { tableInstance: MRT_TableInstance<D> }
-        >;
-        MRT_ToggleDensePaddingButton: FC<
-          IconButtonProps & { tableInstance: MRT_TableInstance<D> }
-        >;
-        MRT_FullScreenToggleButton: FC<
-          IconButtonProps & { tableInstance: MRT_TableInstance<D> }
-        >;
-      },
-    ) => ReactNode;
+    renderDetailPanel?: ({
+      row,
+      tableInstance,
+    }: {
+      row: MRT_Row<D>;
+      tableInstance: MRT_TableInstance<D>;
+    }) => ReactNode;
+    renderRowActionMenuItems?: ({
+      closeMenu,
+      row,
+      tableInstance,
+    }: {
+      closeMenu: () => void;
+      row: MRT_Row<D>;
+      tableInstance: MRT_TableInstance<D>;
+    }) => ReactNode[];
+    renderRowActions?: ({
+      row,
+      tableInstance,
+    }: {
+      row: MRT_Row<D>;
+      tableInstance: MRT_TableInstance<D>;
+    }) => ReactNode;
+    renderToolbarCustomActions?: ({
+      tableInstance,
+    }: {
+      tableInstance: MRT_TableInstance<D>;
+    }) => ReactNode;
+    renderToolbarInternalActions?: ({
+      tableInstance,
+      MRT_ToggleSearchButton,
+      MRT_ToggleFiltersButton,
+      MRT_ShowHideColumnsButton,
+      MRT_ToggleDensePaddingButton,
+      MRT_FullScreenToggleButton,
+    }: {
+      tableInstance: MRT_TableInstance<D>;
+      MRT_ToggleSearchButton: FC<
+        IconButtonProps & { tableInstance: MRT_TableInstance<D> }
+      >;
+      MRT_ToggleFiltersButton: FC<
+        IconButtonProps & { tableInstance: MRT_TableInstance<D> }
+      >;
+      MRT_ShowHideColumnsButton: FC<
+        IconButtonProps & { tableInstance: MRT_TableInstance<D> }
+      >;
+      MRT_ToggleDensePaddingButton: FC<
+        IconButtonProps & { tableInstance: MRT_TableInstance<D> }
+      >;
+      MRT_FullScreenToggleButton: FC<
+        IconButtonProps & { tableInstance: MRT_TableInstance<D> }
+      >;
+    }) => ReactNode;
   };
 
 export default <D extends Record<string, any> = {}>({

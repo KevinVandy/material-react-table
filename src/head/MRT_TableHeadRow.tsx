@@ -15,7 +15,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup, tableInstance }) => {
 
   const mTableHeadRowProps =
     muiTableHeadRowProps instanceof Function
-      ? muiTableHeadRowProps(headerGroup)
+      ? muiTableHeadRowProps({ headerGroup, tableInstance })
       : muiTableHeadRowProps;
 
   const tableRowProps = {

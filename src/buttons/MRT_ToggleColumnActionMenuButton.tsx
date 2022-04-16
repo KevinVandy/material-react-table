@@ -32,12 +32,15 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({
 
   const mTableHeadCellColumnActionsButtonProps =
     muiTableHeadCellColumnActionsButtonProps instanceof Function
-      ? muiTableHeadCellColumnActionsButtonProps(column)
+      ? muiTableHeadCellColumnActionsButtonProps({ column, tableInstance })
       : muiTableHeadCellColumnActionsButtonProps;
 
   const mcTableHeadCellColumnActionsButtonProps =
     column.muiTableHeadCellColumnActionsButtonProps instanceof Function
-      ? column.muiTableHeadCellColumnActionsButtonProps(column)
+      ? column.muiTableHeadCellColumnActionsButtonProps({
+          column,
+          tableInstance,
+        })
       : column.muiTableHeadCellColumnActionsButtonProps;
 
   const iconButtonProps = {

@@ -75,16 +75,16 @@ export const Example = () => {
 
   return (
     <MaterialReactTable
-    columns={columns}
-    data={data}
-    enableColumnActions={false}
-    enableColumnFilters={false}
-    enablePagination={false}
-    enableSorting={false}
-    hideToolbarBottom
-    hideToolbarTop
-    muiTableBodyRowProps={{ hover: false }}
-    muiTableProps={{ stickyHeader: false }}
+      columns={columns}
+      data={data}
+      enableColumnActions={false}
+      enableColumnFilters={false}
+      enablePagination={false}
+      enableSorting={false}
+      hideToolbarBottom
+      hideToolbarTop
+      muiTableBodyRowProps={{ hover: false }}
+      muiTableProps={{ stickyHeader: false }}
     />
   );
 };

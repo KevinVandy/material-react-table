@@ -27,7 +27,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ pinned, row, tableInstance }) => {
 
   const mTableBodyRowProps =
     muiTableBodyRowProps instanceof Function
-      ? muiTableBodyRowProps(row)
+      ? muiTableBodyRowProps({ row, tableInstance })
       : muiTableBodyRowProps;
 
   const tableRowProps = {
@@ -47,7 +47,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ pinned, row, tableInstance }) => {
       <TableRow
         hover
         onClick={(event: MouseEvent<HTMLTableRowElement>) =>
-          onRowClick?.(event, row)
+          onRowClick?.({ event, row, tableInstance })
         }
         selected={getIsSelected()}
         {...tableRowProps}

@@ -493,11 +493,12 @@ const RootPropTable = () => {
       data={data}
       enablePagination={false}
       hideToolbarBottom
+      muiTablePaperProps={{ sx: { maxHeight: 'calc(100vh - 120px)' } }}
       initialState={{
         isDensePadding: true,
-        columnVisibility: {'default': false},
+        columnVisibility: { default: false },
         showSearch: true,
-        sorting: [{id: 'prop', desc: false}],
+        sorting: [{ id: 'prop', desc: false }],
       }}
     />
   );

@@ -52,9 +52,11 @@ export const MRT_RowActionMenu: FC<Props> = ({
           </Box>
         </MenuItem>
       )}
-      {renderRowActionMenuItems?.(row, tableInstance, () =>
-        setAnchorEl(null),
-      ) ?? null}
+      {renderRowActionMenuItems?.({
+        row,
+        tableInstance,
+        closeMenu: () => setAnchorEl(null),
+      })}
     </Menu>
   );
 };

@@ -54,7 +54,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({
   return (
     <>
       {renderRowActions ? (
-        <>{renderRowActions(row, tableInstance)}</>
+        <>{renderRowActions({ row, tableInstance })}</>
       ) : row.id === currentEditingRow?.id ? (
         <MRT_EditActionButtons row={row} tableInstance={tableInstance} />
       ) : !renderRowActionMenuItems && enableRowEditing ? (

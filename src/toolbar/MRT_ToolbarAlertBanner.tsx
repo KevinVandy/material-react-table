@@ -27,7 +27,7 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({ tableInstance }) => {
 
   const alertProps =
     muiTableToolbarAlertBannerProps instanceof Function
-      ? muiTableToolbarAlertBannerProps(tableInstance)
+      ? muiTableToolbarAlertBannerProps({ tableInstance })
       : muiTableToolbarAlertBannerProps;
 
   const selectMessage =
@@ -96,6 +96,7 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({ tableInstance }) => {
       >
         <Box sx={{ p: '0.5rem 1rem' }}>
           {selectMessage}
+          <br />
           {groupedByMessage}
         </Box>
       </Alert>

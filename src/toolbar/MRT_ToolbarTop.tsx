@@ -43,7 +43,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ tableInstance }) => {
 
   const toolbarProps =
     muiTableToolbarTopProps instanceof Function
-      ? muiTableToolbarTopProps(tableInstance)
+      ? muiTableToolbarTopProps({ tableInstance })
       : muiTableToolbarTopProps;
 
   return (
@@ -70,7 +70,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ tableInstance }) => {
           justifyContent: 'space-between',
         }}
       >
-        {renderToolbarCustomActions?.(tableInstance) ?? <span />}
+        {renderToolbarCustomActions?.({ tableInstance }) ?? <span />}
         <Box
           sx={{
             display: 'flex',

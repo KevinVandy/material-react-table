@@ -21,7 +21,7 @@ export const MRT_TablePagination: FC<Props> = ({ tableInstance }) => {
 
   const tablePaginationProps =
     muiTablePaginationProps instanceof Function
-      ? muiTablePaginationProps(tableInstance)
+      ? muiTablePaginationProps({ tableInstance })
       : muiTablePaginationProps;
 
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
@@ -33,13 +33,17 @@ export const MRT_TablePagination: FC<Props> = ({ tableInstance }) => {
 
   return (
     <TablePagination
+      SelectProps={{
+        sx: { m: '0 1rem 0 1ch' },
+        MenuProps: { MenuListProps: { disablePadding: true } },
+      }}
       component="div"
       count={getPrePaginationRowModel().rows.length}
       onPageChange={(_: any, newPage: number) => setPageIndex(newPage)}
       onRowsPerPageChange={handleChangeRowsPerPage}
       page={pageIndex}
       rowsPerPage={pageSize}
-      SelectProps={{ sx: { m: '0 1rem 0 1ch' } }}
+      rowsPerPageOptions={[5, 10, 15, 20, 25, 30, 50, 100]}
       showFirstButton={showFirstLastPageButtons}
       showLastButton={showFirstLastPageButtons}
       {...tablePaginationProps}

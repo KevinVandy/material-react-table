@@ -23,13 +23,18 @@ export const MRT_ToggleSearchButton: FC<Props> = ({
 
   const { showSearch } = getState();
 
+  const textFieldProps =
+    muiSearchTextFieldProps instanceof Function
+      ? muiSearchTextFieldProps({ tableInstance })
+      : muiSearchTextFieldProps;
+
   const handleToggleSearch = () => {
     setShowSearch(!showSearch);
     setTimeout(
       () =>
         document
           .getElementById(
-            muiSearchTextFieldProps?.id ?? `mrt-${idPrefix}-search-text-field`,
+            textFieldProps?.id ?? `mrt-${idPrefix}-search-text-field`,
           )
           ?.focus(),
       200,

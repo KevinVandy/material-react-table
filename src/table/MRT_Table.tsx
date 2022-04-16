@@ -23,7 +23,7 @@ export const MRT_Table: FC<Props> = ({ pinned, tableInstance }) => {
 
   const mTableProps =
     muiTableProps instanceof Function
-      ? muiTableProps(tableInstance)
+      ? muiTableProps({ tableInstance })
       : muiTableProps;
 
   const tableProps = {

@@ -20,12 +20,12 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, tableInstance }) => {
 
   const tableRowProps =
     muiTableBodyRowProps instanceof Function
-      ? muiTableBodyRowProps(row)
+      ? muiTableBodyRowProps({ row, tableInstance })
       : muiTableBodyRowProps;
 
   const tableCellProps =
     muiTableDetailPanelProps instanceof Function
-      ? muiTableDetailPanelProps(row)
+      ? muiTableDetailPanelProps({ row, tableInstance })
       : muiTableDetailPanelProps;
 
   return (
@@ -33,7 +33,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, tableInstance }) => {
       <TableCell
         colSpan={getVisibleFlatColumns().length + 10}
         onClick={(event: MouseEvent<HTMLTableCellElement>) =>
-          onDetailPanelClick?.(event, row)
+          onDetailPanelClick?.({ event, row, tableInstance })
         }
         {...tableCellProps}
         sx={{
@@ -44,7 +44,9 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, tableInstance }) => {
           ...tableCellProps?.sx,
         }}
       >
-        <Collapse in={row.getIsExpanded()}>{renderDetailPanel?.(row)}</Collapse>
+        <Collapse in={row.getIsExpanded()}>
+          {renderDetailPanel?.({ row, tableInstance })}
+        </Collapse>
       </TableCell>
     </TableRow>
   );

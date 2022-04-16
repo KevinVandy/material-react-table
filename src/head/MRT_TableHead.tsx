@@ -19,7 +19,7 @@ export const MRT_TableHead: FC<Props> = ({ pinned, tableInstance }) => {
 
   const tableHeadProps =
     muiTableHeadProps instanceof Function
-      ? muiTableHeadProps(tableInstance)
+      ? muiTableHeadProps({ tableInstance })
       : muiTableHeadProps;
 
   const getHeaderGroupsMap = {

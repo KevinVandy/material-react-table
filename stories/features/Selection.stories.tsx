@@ -57,10 +57,10 @@ export const onSelectChange: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableRowSelection
-    onSelectChange={(event, row, selectedRows) => {
+    onSelectChange={({ event, row, selectedRows }) => {
       console.log({ event, row, selectedRows });
     }}
-    onSelectAllChange={(event, selectedRows) => {
+    onSelectAllChange={({ event, selectedRows }) => {
       console.log({ event, selectedRows });
     }}
   />

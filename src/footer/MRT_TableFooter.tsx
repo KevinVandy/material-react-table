@@ -19,7 +19,7 @@ export const MRT_TableFooter: FC<Props> = ({ pinned, tableInstance }) => {
 
   const tableFooterProps =
     muiTableFooterProps instanceof Function
-      ? muiTableFooterProps(tableInstance)
+      ? muiTableFooterProps({ tableInstance })
       : muiTableFooterProps;
 
   const getFooterGroupsMap = {

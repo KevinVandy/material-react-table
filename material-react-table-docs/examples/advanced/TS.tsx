@@ -1,5 +1,8 @@
 import React, { FC, useMemo, useState } from 'react';
-import MaterialReactTable, { MRT_Cell, MRT_ColumnInterface } from 'material-react-table';
+import MaterialReactTable, {
+  MRT_Cell,
+  MRT_ColumnInterface,
+} from 'material-react-table';
 import { Box, ListItemIcon, MenuItem, Typography } from '@mui/material';
 import { AccountCircle, Send } from '@mui/icons-material';
 
@@ -8,6 +11,7 @@ const Example: FC = () => {
     () => [
       {
         header: 'Employee',
+        id: 'employee',
         columns: [
           {
             header: 'Name',
@@ -19,7 +23,7 @@ const Example: FC = () => {
                 {cell.row.original?.['lastName']}
               </>
             ),
-            disableClickToCopy: true,
+            enableClickToCopy: false,
           },
           {
             header: 'Email',
@@ -29,6 +33,7 @@ const Example: FC = () => {
       },
       {
         header: 'Job Info',
+        id: 'jobInfo',
         columns: [
           {
             header: 'Job Title',
@@ -37,13 +42,14 @@ const Example: FC = () => {
           {
             header: 'Salary',
             id: 'salary',
-            Cell: ({ cell: { value } }: { cell: MRT_Cell }) => (
+            Cell: ({ cell }: { cell: MRT_Cell }) => (
               <Box
                 sx={(theme) => ({
                   backgroundColor:
-                    value < 50_000
+                    Number(cell.value) < 50_000
                       ? theme.palette.error.dark
-                      : value >= 50_000 && value < 75_000
+                      : Number(cell.value) >= 50_000 &&
+                        Number(cell.value) < 75_000
                       ? theme.palette.warning.dark
                       : theme.palette.success.dark,
                   borderRadius: '0.25rem',
@@ -52,7 +58,7 @@ const Example: FC = () => {
                   p: '0.25rem',
                 })}
               >
-                {value?.toLocaleString?.('en-US', {
+                {Number(cell.value)?.toLocaleString?.('en-US', {
                   style: 'currency',
                   currency: 'USD',
                   minimumFractionDigits: 0,
@@ -60,7 +66,7 @@ const Example: FC = () => {
                 })}
               </Box>
             ),
-            disableEditing: true,
+            enableEditing: true,
           },
           {
             header: 'Start Date',
@@ -1501,7 +1507,7 @@ const Example: FC = () => {
       enableRowEditing
       enableRowSelection
       onRowEditSubmit={handleSaveRow}
-      renderDetailPanel={(row) => (
+      renderDetailPanel={({ row }) => (
         <div
           style={{
             display: 'flex',
@@ -1524,7 +1530,7 @@ const Example: FC = () => {
           </div>
         </div>
       )}
-      renderRowActionMenuItems={(_row, _tableInstance, closeMenu) => [
+      renderRowActionMenuItems={({ closeMenu }) => [
         <MenuItem
           key={0}
           onClick={() => {

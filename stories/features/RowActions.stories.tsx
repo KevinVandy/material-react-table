@@ -59,7 +59,7 @@ export const RowActionsEnabled: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableRowActions
-    renderRowActionMenuItems={(row, _tableInstance, closeMenu) => [
+    renderRowActionMenuItems={({ row, closeMenu }) => [
       <MenuItem
         key={1}
         onClick={() => {
@@ -99,7 +99,7 @@ export const RowActionsAndEditingEnabled: Story<
     data={data}
     enableRowActions
     enableRowEditing
-    renderRowActionMenuItems={(row, _tableInstance, closeMenu) => [
+    renderRowActionMenuItems={({ row, closeMenu }) => [
       <MenuItem
         key={1}
         onClick={() => {
@@ -137,7 +137,7 @@ export const RowActionsLastColumn: Story<MaterialReactTableProps> = () => (
     data={data}
     enableRowActions
     positionActionsColumn="last"
-    renderRowActionMenuItems={(row, _tableInstance, closeMenu) => [
+    renderRowActionMenuItems={({ row, closeMenu }) => [
       <MenuItem
         key={1}
         onClick={() => {
@@ -174,7 +174,7 @@ export const CustomRowActionButtons: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableRowActions
-    renderRowActions={(row, _tableInstance) => (
+    renderRowActions={({ row }) => (
       <div style={{ display: 'flex', flexWrap: 'nowrap', gap: '0.5rem' }}>
         <Button
           variant="contained"
@@ -207,7 +207,7 @@ export const CustomRowActionButtonsLastColumn: Story<
     data={data}
     enableRowActions
     positionActionsColumn="last"
-    renderRowActions={(row, _tableInstance) => (
+    renderRowActions={({ row }) => (
       <div style={{ display: 'flex', flexWrap: 'nowrap', gap: '0.5rem' }}>
         <Button
           variant="contained"

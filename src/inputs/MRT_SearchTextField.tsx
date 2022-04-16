@@ -41,7 +41,7 @@ export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
   const handleChange = useCallback(
     debounce((event: ChangeEvent<HTMLInputElement>) => {
       setGlobalFilter(event.target.value ?? undefined);
-      onGlobalFilterChange?.(event);
+      onGlobalFilterChange?.({ event, tableInstance });
     }, 200),
     [],
   );
@@ -54,6 +54,11 @@ export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
     setSearchValue('');
     setGlobalFilter(undefined);
   };
+
+  const textFieldProps =
+    muiSearchTextFieldProps instanceof Function
+      ? muiSearchTextFieldProps({ tableInstance })
+      : muiSearchTextFieldProps;
 
   return (
     <Collapse in={showSearch} orientation="horizontal">
@@ -97,8 +102,8 @@ export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
             </InputAdornment>
           ),
         }}
-        {...muiSearchTextFieldProps}
-        sx={{ justifySelf: 'end', ...muiSearchTextFieldProps?.sx }}
+        {...textFieldProps}
+        sx={{ justifySelf: 'end', ...textFieldProps?.sx }}
       />
       <MRT_FilterTypeMenu
         anchorEl={anchorEl}

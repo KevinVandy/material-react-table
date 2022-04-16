@@ -1,7 +1,8 @@
 import React, { FC, useLayoutEffect, useState } from 'react';
-import { alpha, Box, SxProps, TableContainer, Theme } from '@mui/material';
-import { MRT_Table } from './MRT_Table';
+import { alpha, Box, TableContainer, Theme } from '@mui/material';
+import { SystemStyleObject } from '@mui/material/node_modules/@mui/system';
 import { MRT_TableInstance } from '..';
+import { MRT_Table } from './MRT_Table';
 
 const commonBoxStyles = ({
   pinned,
@@ -11,18 +12,17 @@ const commonBoxStyles = ({
   pinned?: 'left' | 'right';
   theme: Theme;
   visible?: boolean;
-}) =>
-  ({
-    display: 'grid',
-    minWidth: visible ? '200px' : 0,
-    overflowX: 'auto',
-    boxShadow:
-      pinned === 'left'
-        ? `0 1px 12px ${alpha(theme.palette.common.black, 0.5)}`
-        : pinned === 'right'
-        ? `0 -1px 12px ${alpha(theme.palette.common.black, 0.5)}`
-        : 'none',
-  } as SxProps<Theme>);
+}): SystemStyleObject<Theme> => ({
+  display: 'grid',
+  minWidth: visible ? '200px' : 0,
+  overflowX: 'auto',
+  boxShadow:
+    pinned === 'left'
+      ? `0 1px 12px ${alpha(theme.palette.common.black, 0.5)}`
+      : pinned === 'right'
+      ? `0 -1px 12px ${alpha(theme.palette.common.black, 0.5)}`
+      : 'none',
+});
 
 interface Props {
   tableInstance: MRT_TableInstance;
@@ -49,7 +49,7 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
 
   const tableContainerProps =
     muiTableContainerProps instanceof Function
-      ? muiTableContainerProps(tableInstance)
+      ? muiTableContainerProps({ tableInstance })
       : muiTableContainerProps;
 
   useLayoutEffect(() => {
@@ -93,7 +93,6 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
           }}
         >
           <Box
-            // @ts-ignore
             sx={(theme: Theme) =>
               commonBoxStyles({
                 pinned: 'left',
@@ -104,13 +103,10 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
           >
             <MRT_Table pinned="left" tableInstance={tableInstance} />
           </Box>
-          <Box // @ts-ignore
-            sx={(theme: Theme) => commonBoxStyles({ theme })}
-          >
+          <Box sx={(theme: Theme) => commonBoxStyles({ theme })}>
             <MRT_Table pinned="center" tableInstance={tableInstance} />
           </Box>
           <Box
-            // @ts-ignore
             sx={(theme: Theme) =>
               commonBoxStyles({
                 pinned: 'right',

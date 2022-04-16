@@ -29,12 +29,12 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
 
   const mTableCellBodyProps =
     muiTableBodyCellProps instanceof Function
-      ? muiTableBodyCellProps(cell)
+      ? muiTableBodyCellProps({ cell, tableInstance })
       : muiTableBodyCellProps;
 
   const mcTableCellBodyProps =
     column.muiTableBodyCellProps instanceof Function
-      ? column.muiTableBodyCellProps(cell)
+      ? column.muiTableBodyCellProps({ cell, tableInstance })
       : column.muiTableBodyCellProps;
 
   const tableCellProps = {
@@ -55,7 +55,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
   return (
     <TableCell
       onClick={(event: MouseEvent<HTMLTableCellElement>) =>
-        onCellClick?.(event, cell)
+        onCellClick?.({ event, cell, tableInstance })
       }
       {...tableCellProps}
       sx={{

@@ -19,13 +19,15 @@ export const MRT_EditActionButtons: FC<Props> = ({ row, tableInstance }) => {
     },
   } = tableInstance;
 
+  const { currentEditingRow } = getState();
+
   const handleCancel = () => {
     row.values = (row.original as RowValues) ?? {};
     setCurrentEditingRow(null);
   };
 
-  const handleSave = async () => {
-    await onRowEditSubmit?.(getState().currentEditingRow ?? row);
+  const handleSave = () => {
+    onRowEditSubmit?.({ row: currentEditingRow ?? row, tableInstance });
     setCurrentEditingRow(null);
   };
 

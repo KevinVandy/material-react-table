@@ -10,7 +10,7 @@ interface Props {
 export const MRT_EditCellTextField: FC<Props> = ({ cell, tableInstance }) => {
   const {
     getState,
-    options: { muiTableBodyCellEditTextFieldProps },
+    options: { enableRowEditing, muiTableBodyCellEditTextFieldProps },
   } = tableInstance;
 
   const { column, row } = cell;
@@ -22,17 +22,17 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, tableInstance }) => {
       //   ...getState().currentEditingRow,
       // });
     }
-    column.onCellEditChange?.(event, cell);
+    column.onCellEditChange?.({ event, cell, tableInstance });
   };
 
   const mTableBodyCellEditTextFieldProps =
     muiTableBodyCellEditTextFieldProps instanceof Function
-      ? muiTableBodyCellEditTextFieldProps(cell)
+      ? muiTableBodyCellEditTextFieldProps({ cell, tableInstance })
       : muiTableBodyCellEditTextFieldProps;
 
   const mcTableBodyCellEditTextFieldProps =
     column.muiTableBodyCellEditTextFieldProps instanceof Function
-      ? column.muiTableBodyCellEditTextFieldProps(cell)
+      ? column.muiTableBodyCellEditTextFieldProps({ cell, tableInstance })
       : column.muiTableBodyCellEditTextFieldProps;
 
   const textFieldProps = {
@@ -40,9 +40,9 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, tableInstance }) => {
     ...mcTableBodyCellEditTextFieldProps,
   };
 
-  // if (enableEditing && Edit) {
-  //   return <>{Edit({ ...textFieldProps, cell })}</>;
-  // }
+  if (enableRowEditing && column.enableEditing !== false && column.Edit) {
+    return <>{column.Edit?.({ cell, tableInstance })}</>;
+  }
 
   return (
     <TextField

@@ -26,7 +26,7 @@ export const MRT_TableFooterRow: FC<Props> = ({
 
   const mTableFooterRowProps =
     muiTableFooterRowProps instanceof Function
-      ? muiTableFooterRowProps(footerGroup)
+      ? muiTableFooterRowProps({ footerGroup, tableInstance })
       : muiTableFooterRowProps;
 
   const tableRowProps = {

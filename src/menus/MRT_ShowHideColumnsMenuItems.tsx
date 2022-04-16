@@ -34,12 +34,11 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
     } else {
       column.toggleVisibility();
     }
-    onColumnHide?.(
+    onColumnHide?.({
       column,
-      Object.entries(columnVisibility)
-        .filter((entry) => entry[1])
-        .map((entry) => entry[0]),
-    );
+      columnVisibility,
+      tableInstance,
+    });
   };
 
   return (
