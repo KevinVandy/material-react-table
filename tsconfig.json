@@ -1,7 +1,8 @@
 {
   "include": [
     "src",
-    "src/@types"
+    "src/@types",
+    "@types/node"
   ],
   "compilerOptions": {
     "declaration": true,
