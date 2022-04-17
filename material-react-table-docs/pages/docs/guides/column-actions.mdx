@@ -11,12 +11,12 @@ _Enabled by default, easy to opt out, easy to customize_
 
 ### Relevant Props
 
-- disableColumnActions
+- enableColumnActions
 - muiTableHeadCellColumnActionsButtonProps
 
 ### Relevant Column Options
 
-- disableColumnActions
+- enableColumnActions
 - muiTableHeadCellColumnActionsButtonProps
 
 ---
@@ -25,13 +25,13 @@ By default, Material React Table renders a column actions button for each column
 
 ### Disable or Hide Column Actions Buttons
 
-You can pass the `disableColumnActions` prop to the table to disable this feature and hide the button in each column header completely.
+You can set the `enableColumnActions` prop to `false` in the table to disable this feature and hide the button in each column header completely.
 
 ```jsx
-<MaterialReactTable data={data} columns={columns} disableColumnActions />
+<MaterialReactTable data={data} columns={columns} enableColumnActions={false} />
 ```
 
-Alternatively, if you only want to hide the column actions button in specific columns, you can set the `disableColumnActions` property the desired column definiton to true instead.
+Alternatively, if you only want to hide the column actions button in specific columns, you can set the `enableColumnActions` property the desired column definiton to `false` instead.
 
 In this demo, we disable the column actions button for the 'id' column.
 
