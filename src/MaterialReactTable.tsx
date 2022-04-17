@@ -688,7 +688,6 @@ export default <D extends Record<string, any> = {}>({
   enableSelectAll = true,
   enableSorting = true,
   enableStickyHeader = true,
-  filterTypes,
   icons,
   localization,
   positionActionsColumn = 'first',

@@ -94,7 +94,6 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   search: 'Search',
   selectedCountOfRowCountRowsSelected:
     '{selectedCount} of {rowCount} row(s) selected',
-
   select: 'Select',
   showAll: 'Show all',
   showAllColumns: 'Show all columns',

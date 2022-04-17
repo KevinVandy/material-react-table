@@ -1,10 +1,9 @@
-import React, { FC, ReactNode, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Button, Tooltip } from '@mui/material';
 import { MRT_Cell, MRT_TableInstance } from '..';
 
 interface Props {
   cell: MRT_Cell;
-  children: ReactNode;
   tableInstance: MRT_TableInstance;
 }
 
