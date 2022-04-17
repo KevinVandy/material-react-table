@@ -14,6 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
+import Image from 'next/image';
 
 const AppBar = styled(MuiAppBar)({
   zIndex: 2,
@@ -71,7 +72,7 @@ const TopBar: FC<Props> = ({
           )}
           <Link href="/" passHref>
             <Typography
-              style={{
+              sx={{
                 cursor: 'pointer',
                 fontSize: isTablet ? '1.6rem' : undefined,
               }}
@@ -81,6 +82,9 @@ const TopBar: FC<Props> = ({
             </Typography>
           </Link>
         </Flex>
+        {!isMobile && (
+          <Image alt="MRT logo" src="/mrt_logo.svg" height={50} width={50} />
+        )}
         <Flex>
           <Tooltip arrow title="Github">
             <a
@@ -89,9 +93,10 @@ const TopBar: FC<Props> = ({
               target="_blank"
             >
               <IconButton aria-label="Github">
-                <img
+                <Image
                   alt="Github"
                   height={30}
+                  width={30}
                   style={{
                     backgroundColor: '#fff',
                     borderRadius: '50%',

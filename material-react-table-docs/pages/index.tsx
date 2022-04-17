@@ -8,11 +8,6 @@ import { LinkCards } from '../components/mdx/LinkCards';
 const HomePage = () => {
   return (
     <>
-      <Head>
-        <title>Material React Table</title>
-        <meta name="description" content="Material React Table Docs" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <Stack sx={{ maxWidth: '80ch', m: 'auto' }}>
         <Typography
           sx={{

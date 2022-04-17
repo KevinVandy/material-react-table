@@ -46,7 +46,7 @@ function App({ Component, pageProps }: AppProps) {
           name="description"
           content="Material React Table Docs. A fully featured Material-UI implementation of react-table, inspired by material-table and the MUI DataGrid, written from the ground up in TypeScript."
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/mrt_logo.png" />
       </Head>
       <ThemeProvider theme={theme(darkTheme)}>
         <MDXProvider components={mdxComponents}>
