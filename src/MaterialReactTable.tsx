@@ -46,6 +46,11 @@ import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_FILTER_TYPE } from './enums';
 import { MRT_TableRoot } from './table/MRT_TableRoot';
 
+//@ts-ignore
+window.performance = window.performance || {
+  now: () => new Date().getTime(),
+};
+
 export type MRT_TableOptions<D extends Record<string, any> = {}> = Partial<
   Omit<
     Options<D>,

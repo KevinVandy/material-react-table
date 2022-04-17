@@ -195,16 +195,16 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   //@ts-ignore
   const tableInstance: MRT_TableInstance<{}> = useTable(table, {
     ...props,
-    //@ts-ignore
-    filterTypes: defaultFilterFNs,
-    debugAll: false,
-    globalFilterType: currentGlobalFilterType,
     columnFilterRowsFn: columnFilterRowsFn,
     columns,
     data,
+    debugAll: false,
     expandRowsFn: expandRowsFn,
+    //@ts-ignore
+    filterTypes: defaultFilterFNs,
     getSubRows: props.getSubRows ?? ((originalRow: D) => originalRow.subRows),
     globalFilterRowsFn: globalFilterRowsFn,
+    globalFilterType: currentGlobalFilterType,
     groupRowsFn: groupRowsFn,
     idPrefix,
     onPaginationChange: (updater: any) =>
