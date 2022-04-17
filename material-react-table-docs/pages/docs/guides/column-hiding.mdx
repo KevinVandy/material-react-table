@@ -12,12 +12,12 @@ _Enabled by default, easy to opt out, easy to customize_
 ### Relevant Props
 
 - autoResetHiddenColumns - [More Info](https://react-table.tanstack.com/docs/api/useTable#table-options)
-- disableColumnHiding
+- enableHiding
 - initialState.hiddenColumns
 
 ### Relevant Column Options
 
-- disableColumnHiding
+- enableHiding
 
 ---
 
@@ -25,15 +25,15 @@ The Show/Hide columns button is enabled by default in the top toolbar internal a
 
 ### Disable Column Hiding
 
-If you don't want this feature to be enabled at all, you can disable it by passing the `disableColumnHiding` prop.
+If you don't want this feature to be enabled at all, you can disable it by setting the `enableHiding` prop to `false`.
 
 ```jsx
-<MaterialReactTable columns={columns} data={data} disableColumnHiding />
+<MaterialReactTable columns={columns} data={data} enableHiding={false} />
 ```
 
-Alternatively, you can disable hiding specific columns by setting the `disableColumnHiding` column option to true.
+Alternatively, you can disable hiding specific columns by setting the `enableHiding` column option to `false`.
 
-If you want to hide certain columns by default, you can specify an array of column names in the `initialState.hiddenColumns` prop. This can also be useful for making the column hiding state persistant.
+If you want to hide certain columns by default, you can specify an column visibility in the `initialState.columnVisibility` prop. This can also be useful for making the column hiding state persistant.
 
 <Example />
 

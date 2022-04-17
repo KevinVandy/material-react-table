@@ -13,7 +13,7 @@ _Easy to opt in, easy to customize_
 ### Relavent Props
 
 - autoResetSelectedRows
-- disableSelectAll
+- enableSelectAll
 - enableRowSelection
 - initialState.selectedRowIds
 - manualRowSelectedKey
@@ -31,13 +31,13 @@ Selection checkboxes can be enabled with the `enableRowSelection` prop.
 
 ### Disable Select All
 
-By default, if you enable selection for each row, there will also be a select all checkbox in the header of the checkbox column. It can be hidden with the `disableSelectAll` prop.
+By default, if you enable selection for each row, there will also be a select all checkbox in the header of the checkbox column. It can be hidden with the `enableSelectAll` prop.
 
 ```jsx
 <MaterialReactTable
   data={data}
   columns={columns}
-  disableSelectAll
+  enableSelectAll={false}
   enableRowSelection
 />
 ```
