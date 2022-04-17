@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const cardData = [
   {
-    text: 'The perfect mashup of Material-UI and React Table',
+    text: 'The perfect mashup of Material UI and React Table',
     image: '/mashup.svg',
     alt: 'Mashup',
   },
