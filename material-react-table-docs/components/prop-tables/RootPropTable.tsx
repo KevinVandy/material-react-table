@@ -249,38 +249,38 @@ const RootPropTable = () => {
         prop: 'muiLiniearProgressProps',
         type: 'MUI LinearProgressProps',
         description: 'Override the default Mui LinearProgress props',
-        link: 'https://material-ui.com/api/linear-progress/#props',
+        link: 'https://mui.com/material-ui/api/linear-progress/#props',
         linkText: 'Mui LinearProgress docs',
       },
       {
         prop: 'muiSearchTextFieldProps',
         type: 'MUI TextFieldProps',
         description:
-          'Pass in custom props to the Mui TextField for the search input',
-        link: 'https://mui.com/api/text-field',
+          'Pass in custom props to the Material UI TextField for the search input',
+        link: 'https://mui.com/material-ui/api/text-field/',
         linkText: 'Mui TextField API docs',
       },
       {
         prop: 'muiSelectCheckboxProps',
         type: 'MUI CheckboxProps',
         description:
-          'Pass in custom props to the Mui Checkbox for all selection checkboxes',
-        link: 'https://material-ui.com/api/checkbox/#props',
+          'Pass in custom props to the Material UI Checkbox for all selection checkboxes',
+        link: 'https://mui.com/material-ui/api/checkbox/#props',
         linkText: 'Mui Checkbox API docs',
       },
       {
         prop: 'muiTableBodyCellCopyButtonProps',
         type: 'MUI ButtonProps',
         description:
-          'Pass in custom props to the Mui Button for click to copy buttons in every table cell',
-        link: 'https://material-ui.com/api/button/#props',
+          'Pass in custom props to the Material UI Button for click to copy buttons in every table cell',
+        link: 'https://mui.com/material-ui/api/button/#props',
         linkText: 'Mui Button API docs',
       },
       {
         prop: 'muiTableBodyCellEditTextFieldProps',
         type: 'MUI TextFieldProps',
         description:
-          'Pass in custom props to the Mui TextField for editable cells',
+          'Pass in custom props to the Material UI TextField for editable cells',
         link: 'https://mui.com/api/text-field',
         linkText: 'Mui TextField API docs',
       },
@@ -295,14 +295,14 @@ const RootPropTable = () => {
       {
         prop: 'muiTableBodyCellSkeletonProps',
         type: 'MUI SkeletonProps',
-        description: 'Pass in custom props to the Mui Skeleton',
+        description: 'Pass in custom props to the Material UI Skeleton',
         link: 'https://mui.com/api/skeleton',
         linkText: 'Mui Skeleton API docs',
       },
       {
         prop: 'muiTableBodyProps',
         type: '(tableInstance) => MUI TableBodyProps',
-        description: 'Pass in custom props to the Mui TableBody',
+        description: 'Pass in custom props to the Material UI TableBody',
         link: 'https://mui.com/api/table-body',
         linkText: 'Mui TableBody API docs',
       },
@@ -316,7 +316,7 @@ const RootPropTable = () => {
       {
         prop: 'muiTableContainerProps',
         type: '(tableInstance) => MUI TableContainerProps',
-        description: 'Pass in custom props to the Mui TableContainer',
+        description: 'Pass in custom props to the Material UI TableContainer',
         link: 'https://mui.com/api/table-container',
         linkText: 'Mui TableContainer API docs',
       },
@@ -339,7 +339,7 @@ const RootPropTable = () => {
       {
         prop: 'muiTableFooterProps',
         type: '(tableInstance) => MUI TableFooterProps',
-        description: 'Pass in custom props to the Mui TableFooter',
+        description: 'Pass in custom props to the Material UI TableFooter',
         link: 'https://mui.com/api/table-footer',
         linkText: 'Mui TableFooter API docs',
       },
@@ -362,7 +362,7 @@ const RootPropTable = () => {
         prop: 'muiTableHeadCellFilterTextFieldProps',
         type: '(column) => MUI TextFieldProps',
         description:
-          'Pass in custom props to the Mui TextField for the filter input in every column header. Also available within the columns definition',
+          'Pass in custom props to the Material UI TextField for the filter input in every column header. Also available within the columns definition',
         link: 'https://mui.com/api/text-field',
         linkText: 'Mui TextField API docs',
       },
@@ -377,7 +377,7 @@ const RootPropTable = () => {
       {
         prop: 'muiTableHeadProps',
         type: '(tableInstance) => MUI TableHeadProps',
-        description: 'Pass in custom props to the Mui TableHead',
+        description: 'Pass in custom props to the Material UI TableHead',
         link: 'https://mui.com/api/table-head',
         linkText: 'Mui TableHead API docs',
       },
@@ -391,14 +391,14 @@ const RootPropTable = () => {
       {
         prop: 'muiTablePaginationProps',
         type: '(tableInstance) => MUI TablePaginationProps',
-        description: 'Pass in custom props to the Mui TablePagination',
+        description: 'Pass in custom props to the Material UI TablePagination',
         link: 'https://mui.com/api/table-pagination',
         linkText: 'Mui TablePagination API docs',
       },
       {
         prop: 'muiTableProps',
         type: '(tableInstance) => MUI TableProps',
-        description: 'Pass in custom props to the Mui Table',
+        description: 'Pass in custom props to the Material UI Table',
         link: 'https://mui.com/api/table',
         linkText: 'Mui Table API docs',
       },
@@ -406,7 +406,7 @@ const RootPropTable = () => {
         prop: 'muiTableToolbarAlertBannerProps',
         type: '(tableInstance) => MUI AlertProps',
         description:
-          'Pass in custom props to the Mui Alert that appears in the toolbar',
+          'Pass in custom props to the Material UI Alert that appears in the toolbar',
         link: 'https://mui.com/api/alert',
         linkText: 'Mui Alert API docs',
       },
@@ -414,7 +414,7 @@ const RootPropTable = () => {
         prop: 'muiTableToolbarBottomProps',
         type: '(tableInstance) => MUI ToolbarProps',
         description:
-          'Pass in custom props to the Mui TableToolbar at the bottom of the table',
+          'Pass in custom props to the Material UI TableToolbar at the bottom of the table',
         link: 'https://mui.com/api/toolbar',
         linkText: 'Mui Toolbar API docs',
       },
@@ -422,7 +422,7 @@ const RootPropTable = () => {
         prop: 'muiTableToolbarTopProps',
         type: '(tableInstance) => MUI ToolbarProps',
         description:
-          'Pass in custom props to the Mui TableToolbar at the top of the table',
+          'Pass in custom props to the Material UI TableToolbar at the top of the table',
         link: 'https://mui.com/api/toolbar',
         linkText: 'Mui Toolbar API docs',
       },

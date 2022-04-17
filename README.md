@@ -2,10 +2,10 @@
 
 > This Project is based on react-table v8, which itself is still in alpha, and therefore this package is also still in alpha
 
-- A fully featured Material-UI v5 implementation of react-table v8 (alpha)
-- Inspired by material-table and the material-ui DataGrid
-- Written from the ground up in TypeScript, Material-UI, and React Table
-- All internal material-ui components are easily customizable
+- A fully featured Material UI v5 implementation of react-table v8 (alpha)
+- Inspired by material-table and the MUI X DataGrid
+- Written from the ground up in TypeScript, Material UI, and React Table
+- All internal Material UI components are easily customizable
 
 ## This project is in alpha, but feel free to install and explore
 
@@ -48,7 +48,7 @@ Join the [discord](https://discord.gg/5wqyRx6fnm) server to join in on the devel
 
 ### Installation
 
-1. Install Peer Dependencies (material-ui v5)
+1. Install Peer Dependencies (Material UI v5)
 
 ```bash
 npm install @mui/material @mui/icons-material @emotion/react @emotion/styled
