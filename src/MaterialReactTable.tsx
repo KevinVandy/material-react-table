@@ -47,7 +47,7 @@ import { MRT_FILTER_TYPE } from './enums';
 import { MRT_TableRoot } from './table/MRT_TableRoot';
 
 //@ts-ignore
-window.performance = window.performance || {
+global.performance = global.performance || {
   now: () => new Date().getTime(),
 };
 
