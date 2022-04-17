@@ -7,7 +7,7 @@ import SimpleCodeSandbox from '../../examples/SimpleCodeSandbox';
 
 ## Usage
 
-In order to start using MaterialReactTable, you need to first [install](/docs/install) `material-react-table` and it's peer dependencies.
+In order to start using MaterialReactTable, you need to first [install](/docs/install) `material-react-table` and the necessary Material-UI v5 dependencies.
 
 There are additional steps and customizations you can do for material-ui, if you have not set it up in your application already. Check out the [material-ui docs](https://material-ui.com/getting-started/installation/) for more information.
 
@@ -26,9 +26,9 @@ To get started creating a basic table, all you need to do is to provide the **co
 />
 ```
 
-> **Note:** It is very important to _memoize_ the columns and data that you pass to MaterialReactTable. Otherwise, the entire table will be re-rendered during every react render in your application, and can lead to performance issues. To learn more, checkout the [react-table docs](https://react-table.tanstack.com/docs/quick-start#getting-your-data).
+> **Note:** It is very important to _memoize_ the columns and data that you pass to `<MaterialReactTable />`. Otherwise, the entire table will be re-rendered during every react re-render in your application, which can lead to performance issues. To learn more, checkout the [react-table docs](https://react-table.tanstack.com/docs/quick-start#getting-your-data) discussing this topic.
 
-Each column definition must have at the very least, an `accessor` propery. This is the key that will be used to join the data from the `data` values. A Header string can also be provided to display the column header.
+Each column definition must have, at the very least, an `id` and `header` property. The `id` property is the key that will be used to join the data from the `data` keys. The `header` property is used to display the column header, but is also used in other places in the table. If you want to pass in custom JSX to render the header, you can pass in a `Header` property in addition to the `header` string property.
 
 ```jsx
 const columns = useMemo(
@@ -39,6 +39,7 @@ const columns = useMemo(
     },
     {
       header: 'Age',
+      Header: () => <i>Age</i>, //optional custom jsx
       id: 'age',
     },
   ],
@@ -79,6 +80,7 @@ export default function App() {
       },
       {
         header: 'Age',
+        Header: () => <i>Age</i>, //optional custom jsx
         id: 'age',
       },
     ],
@@ -103,7 +105,7 @@ export default function App() {
 }
 ```
 
-Now this is just the default table that you get. You may want to disable some features that you don't need, or enable and customize other features that you may want. See the [minimal example](/docs/examples/minimal) and [advanced example](/docs/examples/advanced) to get a better idea for how you may want to customize your table, and visit the [all props page](/docs/props) to see all the props that you can use to turn features on and off, and customize the look and feel of your table.
+This is just the default table that you get. You may want to disable some features that you don't need, or enable and customize other features that you may want. See the [minimal example](/docs/examples/minimal) and [advanced example](/docs/examples/advanced) to get a better idea for how you may want to customize your table, and visit the [all props page](/docs/props) to see all the props that you can use to turn features on and off, and customize the look and feel of your table.
 
 ### Live Code Sandbox Example
 

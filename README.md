@@ -1,47 +1,57 @@
 # Material React Table
 
-- A fully featured Material-UI implementation of react-table
+> This Project is based on react-table v8, which itself is still in alpha, and therefore this package is also still in alpha
+
+- A fully featured Material-UI v5 implementation of react-table v8 (alpha)
 - Inspired by material-table and the material-ui DataGrid
 - Written from the ground up in TypeScript, Material-UI, and React Table
+- All internal material-ui components are easily customizable
 
 ## This project is in alpha, but feel free to install and explore
 
-View the docs (alpha) site at https://www.material-react-table.com/
+View the [docs (alpha) site](https://www.material-react-table.com/)
 
-View additional storybook examples at https://www.material-react-table.dev/
+View additional [storybook examples](https://www.material-react-table.dev/)
 
-View the source code and open issues at https://github.com/KevinVandy/material-react-table
+View the [github source code](https://github.com/KevinVandy/material-react-table) and [github open issues](https://github.com/KevinVandy/material-react-table/issues)
 
-Join the discord development discussion at https://discord.gg/5wqyRx6fnm
+Join the [discord](https://discord.gg/5wqyRx6fnm) server to join in on the development discussion
 
 <br />
 
-### Features (Still In Active Development)
+### Features (Some Still In Active Development)
 
-- [ ] Column Ordering
-- [ ] Column Resizing (in dev)
-- [x] Cell Editing
+- [x] Click To Copy Cell Values
 - [x] Column Actions
 - [x] Column Hiding
-- [x] Custom Styling
+- [x] Column Grouping (Group By and Aggregates)
+- [ ] Column Ordering (react-dnd planned)
+- [x] Column Pinning
+- [x] Column Resizing (work in progress)
+- [x] Custom Icons
+- [x] Custom Styling and internal Mui Components
+- [-] Data Editing (work in progress)
 - [x] Dense Padding Toggle
-- [x] Localization
 - [x] Filtering
-- [x] Global Search
+- [x] Fullscreen
+- [-] Global Search (Advanced search options!)
 - [x] HeaderGroups
-- [x] Pagination
+- [x] Localization i18n
+- [x] Pagination (supports client-side and server-side)
 - [x] Row Actions
-- [x] Selection
+- [x] Row Selection
+- [x] SSR compatible
 - [x] Sorting
 - [x] Toolbars
-- [x] Tree Data (Subrows)
+- [x] Tree Data / Expanding Subrows
+- [ ] Virtualization (planned)
 
 ### Installation
 
-1. Install Peer Dependencies (material-ui v5 and react table v7)
+1. Install Peer Dependencies (material-ui v5)
 
 ```bash
-npm install @mui/material @mui/icons-material @emotion/react @emotion/styled react-table
+npm install @mui/material @mui/icons-material @emotion/react @emotion/styled
 ```
 
 2. Install material-react-table
