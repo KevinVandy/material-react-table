@@ -197,6 +197,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     ...props,
     //@ts-ignore
     filterTypes: defaultFilterFNs,
+    debugAll: false,
     globalFilterType: currentGlobalFilterType,
     columnFilterRowsFn: columnFilterRowsFn,
     columns,
