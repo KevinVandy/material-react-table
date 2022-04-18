@@ -1,35 +1,36 @@
 import React, { useMemo } from 'react';
-import MaterialReactTable from 'material-react-table';
+import MaterialReactTable, { MRT_ColumnInterface } from 'material-react-table';
 import { Link } from '@mui/material';
 
 const RootPropTable = () => {
   const columns = useMemo(
-    () => [
-      {
-        header: 'Prop',
-        id: 'prop',
-        Cell: (cell: any) =>
-          cell.row.original.required ? (
-            <strong>{cell.value}*</strong>
-          ) : (
-            cell.value
+    () =>
+      [
+        {
+          header: 'Prop',
+          id: 'prop',
+          Cell: ({ cell }) =>
+            cell.row.original.required ? (
+              <strong>{cell.value}*</strong>
+            ) : (
+              cell.value
+            ),
+        },
+        { header: 'Type', id: 'type', disableFilters: true },
+        { header: 'Default', id: 'defaultValue', disableFilters: true },
+        {
+          header: 'Link to more info',
+          id: 'link',
+          disableFilters: true,
+          Cell: ({ cell }) => (
+            <Link href={cell.value as string} target="_blank">
+              {' '}
+              {cell.row.original.linkText}{' '}
+            </Link>
           ),
-      },
-      { header: 'Type', id: 'type', disableFilters: true },
-      { header: 'Default', id: 'default', disableFilters: true },
-      {
-        header: 'Link to more info',
-        id: 'link',
-        disableFilters: true,
-        Cell: (cell: any) => (
-          <Link href={cell.value} target="_blank">
-            {' '}
-            {cell.row.original.linkText}{' '}
-          </Link>
-        ),
-      },
-      { header: 'Description', id: 'description' },
-    ],
+        },
+        { header: 'Description', id: 'description' },
+      ] as MRT_ColumnInterface<typeof data[0]>[],
     [],
   );
 
@@ -38,7 +39,7 @@ const RootPropTable = () => {
       {
         prop: 'autoResetHiddenColumns',
         type: 'boolean',
-        default: 'true',
+        defaultValue: 'true',
         description:
           'When true, the hiddenColumns state will automatically reset if columns is changed',
         link: 'https://react-table.tanstack.com/docs/api/useTable#table-options',
@@ -65,7 +66,7 @@ const RootPropTable = () => {
         type: 'Object',
         description:
           'The default column object for every column passed to React Table.',
-        default: '{}',
+        defaultValue: '{}',
         link: 'https://react-table.tanstack.com/docs/api/useTable#table-options',
         linkText: 'React Table useTable options',
       },
@@ -223,7 +224,7 @@ const RootPropTable = () => {
       {
         prop: 'initialState',
         type: 'MRT_InitialState',
-        default: '{}',
+        defaultValue: '{}',
         description:
           'Give the table a custom initial state. Useful for persisting state',
       },
@@ -496,7 +497,7 @@ const RootPropTable = () => {
       muiTablePaperProps={{ sx: { maxHeight: 'calc(100vh - 120px)' } }}
       initialState={{
         isDensePadding: true,
-        columnVisibility: { default: false },
+        columnVisibility: { defaultValue: false },
         showSearch: true,
         sorting: [{ id: 'prop', desc: false }],
       }}

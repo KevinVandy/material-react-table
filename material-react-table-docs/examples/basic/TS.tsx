@@ -2,29 +2,30 @@ import React, { FC, useMemo } from 'react';
 import MaterialReactTable, { MRT_ColumnInterface } from 'material-react-table';
 
 const Example: FC = () => {
-  const columns: MRT_ColumnInterface[] = useMemo(
-    () => [
-      {
-        header: 'First Name',
-        id: 'firstName',
-      },
-      {
-        header: 'Last Name',
-        id: 'lastName',
-      },
-      {
-        header: 'Address',
-        id: 'address',
-      },
-      {
-        header: 'City',
-        id: 'city',
-      },
-      {
-        header: 'State',
-        id: 'state',
-      },
-    ],
+  const columns = useMemo(
+    () =>
+      [
+        {
+          header: 'First Name',
+          id: 'firstName',
+        },
+        {
+          header: 'Last Name',
+          id: 'lastName',
+        },
+        {
+          header: 'Address',
+          id: 'address',
+        },
+        {
+          header: 'City',
+          id: 'city',
+        },
+        {
+          header: 'State',
+          id: 'state',
+        },
+      ] as MRT_ColumnInterface[],
     [],
   );
 

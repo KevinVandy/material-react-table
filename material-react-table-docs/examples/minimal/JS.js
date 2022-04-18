@@ -81,10 +81,10 @@ export const Example = () => {
       enableColumnFilters={false}
       enablePagination={false}
       enableSorting={false}
+      enableStickyHeader={false}
       hideToolbarBottom
       hideToolbarTop
       muiTableBodyRowProps={{ hover: false }}
-      muiTableProps={{ stickyHeader: false }}
     />
   );
 };

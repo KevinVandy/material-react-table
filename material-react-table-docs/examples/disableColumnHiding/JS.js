@@ -32,7 +32,7 @@ const Example = () => {
 
   const data = useMemo(
     () => [
-      //data definitions
+      //data definitions...
       {
         firstName: 'Dylan',
         lastName: 'Murray',

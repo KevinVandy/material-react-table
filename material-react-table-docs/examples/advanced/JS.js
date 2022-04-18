@@ -8,6 +8,7 @@ const Example = () => {
     () => [
       {
         header: 'Employee',
+        id: 'employee',
         columns: [
           {
             header: 'Name',
@@ -19,7 +20,7 @@ const Example = () => {
                 {cell.row.original?.['lastName']}
               </>
             ),
-            disableClickToCopy: true,
+            enableClickToCopy: false,
           },
           {
             header: 'Email',
@@ -29,6 +30,7 @@ const Example = () => {
       },
       {
         header: 'Job Info',
+        id: 'jobInfo',
         columns: [
           {
             header: 'Job Title',
@@ -37,13 +39,14 @@ const Example = () => {
           {
             header: 'Salary',
             id: 'salary',
-            Cell: ({ cell: { value } }) => (
+            Cell: ({ cell }) => (
               <Box
                 sx={(theme) => ({
                   backgroundColor:
-                    value < 50_000
+                    Number(cell.value) < 50_000
                       ? theme.palette.error.dark
-                      : value >= 50_000 && value < 75_000
+                      : Number(cell.value) >= 50_000 &&
+                        Number(cell.value) < 75_000
                       ? theme.palette.warning.dark
                       : theme.palette.success.dark,
                   borderRadius: '0.25rem',
@@ -52,7 +55,7 @@ const Example = () => {
                   p: '0.25rem',
                 })}
               >
-                {value?.toLocaleString?.('en-US', {
+                {Number(cell.value)?.toLocaleString?.('en-US', {
                   style: 'currency',
                   currency: 'USD',
                   minimumFractionDigits: 0,
@@ -60,7 +63,7 @@ const Example = () => {
                 })}
               </Box>
             ),
-            disableEditing: true,
+            enableEditing: true,
           },
           {
             header: 'Start Date',
@@ -1486,7 +1489,7 @@ const Example = () => {
     //end
   ]);
 
-  const handleSaveRow = (row) => {
+  const handleSaveRow = ({ row }) => {
     data[+row.index] = row.values;
     setData([...data]);
   };
@@ -1501,7 +1504,7 @@ const Example = () => {
       enableEditing
       enableRowSelection
       onEditSubmit={handleSaveRow}
-      renderDetailPanel={(row) => (
+      renderDetailPanel={({ row }) => (
         <div
           style={{
             display: 'flex',
@@ -1524,7 +1527,7 @@ const Example = () => {
           </div>
         </div>
       )}
-      renderRowActionMenuItems={(_row, _tableInstance, closeMenu) => [
+      renderRowActionMenuItems={({ closeMenu }) => [
         <MenuItem
           key={0}
           onClick={() => {

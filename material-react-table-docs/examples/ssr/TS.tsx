@@ -37,33 +37,34 @@ interface Props {
 }
 
 const ExamplePage: FC<Props> = ({ data }) => {
-  const columns: MRT_ColumnInterface[] = useMemo(
-    () => [
-      {
-        header: 'Name',
-        id: 'name',
-      },
-      {
-        header: 'Username',
-        id: 'username',
-      },
-      {
-        header: 'Email',
-        id: 'email',
-      },
-      {
-        header: 'Address',
-        id: 'address',
-      },
-      {
-        header: 'City',
-        id: 'city',
-      },
-      {
-        header: 'Zip Code',
-        id: 'zipcode',
-      },
-    ],
+  const columns = useMemo(
+    () =>
+      [
+        {
+          header: 'Name',
+          id: 'name',
+        },
+        {
+          header: 'Username',
+          id: 'username',
+        },
+        {
+          header: 'Email',
+          id: 'email',
+        },
+        {
+          header: 'Address',
+          id: 'address',
+        },
+        {
+          header: 'City',
+          id: 'city',
+        },
+        {
+          header: 'Zip Code',
+          id: 'zipcode',
+        },
+      ] as MRT_ColumnInterface[],
     [],
   );
 
