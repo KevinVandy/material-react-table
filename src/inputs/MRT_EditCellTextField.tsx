@@ -1,6 +1,12 @@
-import React, { ChangeEvent, FC, MouseEvent } from 'react';
+import React, {
+  ChangeEvent,
+  FC,
+  FocusEvent,
+  MouseEvent,
+  useState,
+} from 'react';
 import { TextField } from '@mui/material';
-import type { MRT_Cell, MRT_TableInstance } from '..';
+import type { MRT_Cell, MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
   cell: MRT_Cell;
@@ -10,19 +16,28 @@ interface Props {
 export const MRT_EditCellTextField: FC<Props> = ({ cell, tableInstance }) => {
   const {
     getState,
-    options: { enableRowEditing, muiTableBodyCellEditTextFieldProps },
+    options: {
+      enableEditing,
+      muiTableBodyCellEditTextFieldProps,
+      setCurrentEditingRow,
+    },
   } = tableInstance;
+
+  const [value, setValue] = useState(cell.value);
 
   const { column, row } = cell;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (getState().currentEditingRow) {
-      row.values[column.id] = event.target.value;
-      // setCurrentEditingRow({
-      //   ...getState().currentEditingRow,
-      // });
-    }
+    setValue(event.target.value);
     column.onCellEditChange?.({ event, cell, tableInstance });
+  };
+
+  const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
+    if (getState().currentEditingRow) {
+      row.values[column.id] = value;
+      setCurrentEditingRow({ ...getState().currentEditingRow } as MRT_Row);
+    }
+    column.onCellEditBlur?.({ event, cell, tableInstance });
   };
 
   const mTableBodyCellEditTextFieldProps =
@@ -40,17 +55,18 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, tableInstance }) => {
     ...mcTableBodyCellEditTextFieldProps,
   };
 
-  if (enableRowEditing && column.enableEditing !== false && column.Edit) {
+  if (enableEditing && column.enableEditing !== false && column.Edit) {
     return <>{column.Edit?.({ cell, tableInstance })}</>;
   }
 
   return (
     <TextField
       margin="dense"
+      onBlur={handleBlur}
       onChange={handleChange}
       onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
       placeholder={column.header}
-      value={cell.value}
+      value={value}
       variant="standard"
       {...textFieldProps}
     />

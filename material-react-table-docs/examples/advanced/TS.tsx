@@ -1492,7 +1492,7 @@ const Example: FC = () => {
     //end
   ]);
 
-  const handleSaveRow = (row: any) => {
+  const handleSaveRow = ({row}) => {
     data[+row.index] = row.values;
     setData([...data]);
   };
@@ -1504,9 +1504,9 @@ const Example: FC = () => {
       enableClickToCopy
       enableGrouping
       enableRowActions
-      enableRowEditing
+      enableEditing
       enableRowSelection
-      onRowEditSubmit={handleSaveRow}
+      onEditSubmit={handleSaveRow}
       renderDetailPanel={({ row }) => (
         <div
           style={{

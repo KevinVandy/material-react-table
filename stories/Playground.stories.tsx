@@ -172,7 +172,7 @@ MaximumFeatures.args = {
   enableExpanded: true,
   enableGrouping: true,
   enableRowActions: true,
-  enableRowEditing: true,
+  enableEditing: true,
   enableRowNumbers: true,
   enableRowSelection: true,
   renderRowActionMenuItems: (row, _tableInstance, closeMenu) => [

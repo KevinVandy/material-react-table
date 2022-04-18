@@ -33,6 +33,7 @@ export interface MRT_Localization {
   pinToLeft: string;
   pinToRight: string;
   rowActions: string;
+  rowNumber: string;
   rowNumbers: string;
   save: string;
   search: string;
@@ -89,6 +90,7 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   pinToLeft: 'Pin to left',
   pinToRight: 'Pin to right',
   rowActions: 'Row Actions',
+  rowNumber: '#',
   rowNumbers: 'Row Numbers',
   save: 'Save',
   search: 'Search',

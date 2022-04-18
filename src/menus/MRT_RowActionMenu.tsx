@@ -25,7 +25,7 @@ export const MRT_RowActionMenu: FC<Props> = ({
     getState,
     options: {
       icons: { EditIcon },
-      enableRowEditing,
+      enableEditing,
       localization,
       renderRowActionMenuItems,
     },
@@ -42,7 +42,7 @@ export const MRT_RowActionMenu: FC<Props> = ({
         dense: isDensePadding,
       }}
     >
-      {enableRowEditing && (
+      {enableEditing && (
         <MenuItem onClick={handleEdit} sx={commonMenuItemStyles}>
           <Box sx={commonListItemStyles}>
             <ListItemIcon>

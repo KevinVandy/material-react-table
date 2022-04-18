@@ -1498,9 +1498,9 @@ const Example = () => {
       enableClickToCopy
       enableGrouping
       enableRowActions
-      enableRowEditing
+      enableEditing
       enableRowSelection
-      onRowEditSubmit={handleSaveRow}
+      onEditSubmit={handleSaveRow}
       renderDetailPanel={(row) => (
         <div
           style={{

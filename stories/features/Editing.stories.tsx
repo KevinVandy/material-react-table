@@ -5,7 +5,7 @@ import faker from '@faker-js/faker';
 import { MenuItem } from '@mui/material';
 
 const meta: Meta = {
-  title: 'Features/Row Editing Examples',
+  title: 'Features/Editing Examples',
   parameters: {
     status: {
       type: 'beta',
@@ -23,10 +23,10 @@ const data = [...Array(10)].map((_) => ({
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const RowEditingEnabled: Story<MaterialReactTableProps> = () => {
+export const EditingEnabled: Story<MaterialReactTableProps> = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow = async (row: any) => {
+  const handleSaveRow = ({ row }) => {
     tableData[+row.index] = row.values;
     setTableData([...tableData]);
   };
@@ -58,16 +58,16 @@ export const RowEditingEnabled: Story<MaterialReactTableProps> = () => {
       ]}
       data={tableData}
       enableRowActions
-      enableRowEditing
-      onRowEditSubmit={handleSaveRow}
+      enableEditing
+      onEditSubmit={handleSaveRow}
     />
   );
 };
 
-export const RowEditingCustomizeInput: Story<MaterialReactTableProps> = () => {
+export const EditingCustomizeInput: Story<MaterialReactTableProps> = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow = async (row: any) => {
+  const handleSaveRow = ({ row }) => {
     tableData[+row.index] = row.values;
     setTableData([...tableData]);
   };
@@ -147,14 +147,13 @@ export const RowEditingCustomizeInput: Story<MaterialReactTableProps> = () => {
         {
           header: 'State',
           id: 'state',
-          muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+          muiTableBodyCellEditTextFieldProps: () => ({
             children: usStates.map((state) => (
               <MenuItem key={state} value={state}>
                 {state}
               </MenuItem>
             )),
             select: true,
-            value: cell.value,
           }),
         },
         {
@@ -164,14 +163,14 @@ export const RowEditingCustomizeInput: Story<MaterialReactTableProps> = () => {
       ]}
       data={tableData}
       enableRowActions
-      enableRowEditing
+      enableEditing
       muiTableBodyCellEditTextFieldProps={{ variant: 'outlined' }}
-      onRowEditSubmit={handleSaveRow}
+      onEditSubmit={handleSaveRow}
     />
   );
 };
 
-export const RowEditingWithValidation: Story<MaterialReactTableProps> = () => {
+export const EditingWithValidation: Story<MaterialReactTableProps> = () => {
   const [tableData, setTableData] = useState(data);
   const [firstNameError, setFirstNameError] = useState<string | boolean>(false);
   const [lastNameError, setLastNameError] = useState<string | boolean>(false);
@@ -179,7 +178,7 @@ export const RowEditingWithValidation: Story<MaterialReactTableProps> = () => {
     false,
   );
 
-  const handleSaveRow = async (row: any) => {
+  const handleSaveRow = ({ row }) => {
     tableData[+row.index] = row.values;
     setTableData([...tableData]);
   };
@@ -239,21 +238,20 @@ export const RowEditingWithValidation: Story<MaterialReactTableProps> = () => {
         },
       ]}
       data={tableData}
-      // onSaveRow={handleSaveRow}
       enableRowActions
-      enableRowEditing
-      onRowEditSubmit={handleSaveRow}
+      enableEditing
+      onEditSubmit={handleSaveRow}
     />
   );
 };
 
-export const RowEditingEnabledAsync: Story<MaterialReactTableProps> = () => {
+export const EditingEnabledAsync: Story<MaterialReactTableProps> = () => {
   const [tableData, setTableData] = useState(data);
   const [isSaving, setIsSaving] = useState(false);
 
-  const handleSaveRow = async (row) => {
+  const handleSaveRow = ({ row }) => {
     setIsSaving(true);
-    await setTimeout(() => {
+    setTimeout(() => {
       tableData[+row.index] = row.values;
       setTableData([...tableData]);
       setIsSaving(false);
@@ -286,9 +284,9 @@ export const RowEditingEnabledAsync: Story<MaterialReactTableProps> = () => {
       ]}
       data={tableData}
       enableRowActions
-      enableRowEditing
+      enableEditing
       isReloading={isSaving}
-      onRowEditSubmit={handleSaveRow}
+      onEditSubmit={handleSaveRow}
     />
   );
 };

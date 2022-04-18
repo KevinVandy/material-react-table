@@ -98,7 +98,7 @@ export const RowActionsAndEditingEnabled: Story<
     columns={columns}
     data={data}
     enableRowActions
-    enableRowEditing
+    enableEditing
     renderRowActionMenuItems={({ row, closeMenu }) => [
       <MenuItem
         key={1}

@@ -92,7 +92,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   const displayColumns = useMemo(
     () =>
       [
-        (props.enableRowActions || props.enableRowEditing) &&
+        (props.enableRowActions || props.enableEditing) &&
           createDisplayColumn(table, {
             Cell: ({ cell }) => (
               <MRT_ToggleRowActionMenuButton
@@ -142,7 +142,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         props.enableRowNumbers &&
           createDisplayColumn(table, {
             Cell: ({ cell }) => cell.row.index + 1,
-            Header: () => '#',
+            Header: () => props.localization?.rowNumber,
             header: props.localization?.rowNumbers,
             id: 'mrt-row-numbers',
             maxWidth: 40,
@@ -151,10 +151,12 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
           }),
       ].filter(Boolean),
     [
+      table,
       props.enableExpandAll,
       props.enableExpanded,
       props.enableRowActions,
-      props.enableRowEditing,
+      props.enableGrouping,
+      props.enableEditing,
       props.enableRowNumbers,
       props.enableRowSelection,
       props.enableSelectAll,

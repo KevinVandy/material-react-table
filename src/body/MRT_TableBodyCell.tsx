@@ -16,6 +16,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
     options: {
       enableClickToCopy,
       enableColumnPinning,
+      enableEditing,
       isLoading,
       muiTableBodyCellProps,
       muiTableBodyCellSkeletonProps,
@@ -93,7 +94,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
           column.id !==
             row.groupingColumnId) ? null : cell.getIsAggregated() ? (
         cell.renderAggregatedCell()
-      ) : column.enableEditing && currentEditingRow?.id === row.id ? (
+      ) : (enableEditing && column.enableEditing !== false) && currentEditingRow?.id === row.id ? (
         <MRT_EditCellTextField cell={cell} tableInstance={tableInstance} />
       ) : (enableClickToCopy || column.enableClickToCopy) &&
         column.enableClickToCopy !== false ? (

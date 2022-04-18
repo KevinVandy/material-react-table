@@ -2,6 +2,7 @@ import React, {
   ChangeEvent,
   Dispatch,
   FC,
+  FocusEvent,
   MouseEvent,
   ReactNode,
   SetStateAction,
@@ -246,6 +247,15 @@ export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
         tableInstance: MRT_TableInstance;
         column: MRT_ColumnInstance<D>;
       }) => TableCellProps);
+  onCellEditBlur?: ({
+    cell,
+    event,
+    tableInstance,
+  }: {
+    event: FocusEvent<HTMLInputElement>;
+    cell: MRT_Cell<D>;
+    tableInstance: MRT_TableInstance<D>;
+  }) => void;
   onCellEditChange?: ({
     cell,
     event,
@@ -326,7 +336,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     enablePagination?: boolean;
     enableRowActions?: boolean;
     enableStickyHeader?: boolean;
-    enableRowEditing?: boolean;
+    enableEditing?: boolean;
     enableRowNumbers?: boolean;
     enableSelectAll?: boolean;
     enabledGlobalFilterTypes?: (MRT_FILTER_TYPE | string)[];
@@ -587,7 +597,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       row: MRT_Row<D>;
       tableInstance: MRT_TableInstance<D>;
     }) => void;
-    onRowEditSubmit?: ({
+    onEditSubmit?: ({
       row,
       tableInstance,
     }: {

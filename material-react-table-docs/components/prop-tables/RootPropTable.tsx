@@ -142,7 +142,7 @@ const RootPropTable = () => {
         linkText: 'MRT row actions docs',
       },
       {
-        prop: 'enableRowEditing',
+        prop: 'enableEditing',
         type: 'boolean',
         description: 'Enable row edit button in each row',
         link: '/docs/guides/row-editing',
@@ -453,7 +453,7 @@ const RootPropTable = () => {
         description: 'Callback for when a row is clicked',
       },
       {
-        prop: 'onRowEditSubmit',
+        prop: 'onEditSubmit',
         type: '(event, row) => void',
         description: 'Callback for when a row save button is clicked',
       },
