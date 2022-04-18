@@ -53,7 +53,7 @@ export const StyleMuiTableBodyRow: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     muiTableBodyRowProps={{
-      style: {
+      sx: {
         backgroundColor: 'rgba(52, 210, 235, 0.1)',
         borderRight: '1px solid rgba(224,224,224,1)',
       },
@@ -66,11 +66,11 @@ export const StyleCustomStripedRows: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     muiTableBodyRowProps={({ row }) => ({
-      style: {
+      sx: {
         backgroundColor: row.index % 2 === 0 ? 'rgba(52, 54, 245, 0.08)' : '',
       },
     })}
-    muiTableBodyCellProps={{ style: { border: 'none' } }}
+    muiTableBodyCellProps={{ sx: { border: 'none' } }}
   />
 );
 
@@ -81,7 +81,7 @@ export const ConditionallyStyleMuiTableRow: Story<
     columns={columns}
     data={data}
     muiTableBodyRowProps={({ row }) => ({
-      style: {
+      sx: {
         backgroundColor:
           row.values['age'] > 50 ? 'rgba(255, 54, 33, 0.18)' : '',
         fontStyle: 'italic',

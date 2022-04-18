@@ -87,14 +87,14 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
           width={skeletonWidth}
           {...muiTableBodyCellSkeletonProps}
         />
-      ) : column.columnDefType === 'display' ? (
-        column.Cell?.({ cell, tableInstance })
       ) : cell.getIsPlaceholder() ||
         (row.getIsGrouped() &&
           column.id !==
             row.groupingColumnId) ? null : cell.getIsAggregated() ? (
         cell.renderAggregatedCell()
-      ) : (enableEditing && column.enableEditing !== false) && currentEditingRow?.id === row.id ? (
+      ) : enableEditing &&
+        column.enableEditing !== false &&
+        currentEditingRow?.id === row.id ? (
         <MRT_EditCellTextField cell={cell} tableInstance={tableInstance} />
       ) : (enableClickToCopy || column.enableClickToCopy) &&
         column.enableClickToCopy !== false ? (
@@ -106,7 +106,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
         </>
       ) : (
         <>
-          {cell.renderCell()}
+          {cell.column?.Cell?.({ cell, tableInstance }) ?? cell.renderCell()}
           {row.getIsGrouped() && <> ({row.subRows?.length})</>}
         </>
       )}

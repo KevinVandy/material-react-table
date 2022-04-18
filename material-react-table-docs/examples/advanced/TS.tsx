@@ -7,74 +7,75 @@ import { Box, ListItemIcon, MenuItem, Typography } from '@mui/material';
 import { AccountCircle, Send } from '@mui/icons-material';
 
 const Example: FC = () => {
-  const columns: MRT_ColumnInterface[] = useMemo(
-    () => [
-      {
-        header: 'Employee',
-        id: 'employee',
-        columns: [
-          {
-            header: 'Name',
-            id: 'lastName',
-            Cell: ({ cell }: { cell: MRT_Cell }) => (
-              <>
-                {cell.row.original?.['firstName']}
-                <br />
-                {cell.row.original?.['lastName']}
-              </>
-            ),
-            enableClickToCopy: false,
-          },
-          {
-            header: 'Email',
-            id: 'email',
-          },
-        ],
-      },
-      {
-        header: 'Job Info',
-        id: 'jobInfo',
-        columns: [
-          {
-            header: 'Job Title',
-            id: 'jobTitle',
-          },
-          {
-            header: 'Salary',
-            id: 'salary',
-            Cell: ({ cell }: { cell: MRT_Cell }) => (
-              <Box
-                sx={(theme) => ({
-                  backgroundColor:
-                    Number(cell.value) < 50_000
-                      ? theme.palette.error.dark
-                      : Number(cell.value) >= 50_000 &&
-                        Number(cell.value) < 75_000
-                      ? theme.palette.warning.dark
-                      : theme.palette.success.dark,
-                  borderRadius: '0.25rem',
-                  color: '#fff',
-                  maxWidth: '9ch',
-                  p: '0.25rem',
-                })}
-              >
-                {Number(cell.value)?.toLocaleString?.('en-US', {
-                  style: 'currency',
-                  currency: 'USD',
-                  minimumFractionDigits: 0,
-                  maximumFractionDigits: 0,
-                })}
-              </Box>
-            ),
-            enableEditing: true,
-          },
-          {
-            header: 'Start Date',
-            id: 'startDate',
-          },
-        ],
-      },
-    ],
+  const columns = useMemo(
+    () =>
+      [
+        {
+          header: 'Employee',
+          id: 'employee',
+          columns: [
+            {
+              header: 'Name',
+              id: 'lastName',
+              Cell: ({ cell }: { cell: MRT_Cell }) => (
+                <>
+                  {cell.row.original?.['firstName']}
+                  <br />
+                  {cell.row.original?.['lastName']}
+                </>
+              ),
+              enableClickToCopy: false,
+            },
+            {
+              header: 'Email',
+              id: 'email',
+            },
+          ],
+        },
+        {
+          header: 'Job Info',
+          id: 'jobInfo',
+          columns: [
+            {
+              header: 'Job Title',
+              id: 'jobTitle',
+            },
+            {
+              header: 'Salary',
+              id: 'salary',
+              Cell: ({ cell }) => (
+                <Box
+                  sx={(theme) => ({
+                    backgroundColor:
+                      Number(cell.value) < 50_000
+                        ? theme.palette.error.dark
+                        : Number(cell.value) >= 50_000 &&
+                          Number(cell.value) < 75_000
+                        ? theme.palette.warning.dark
+                        : theme.palette.success.dark,
+                    borderRadius: '0.25rem',
+                    color: '#fff',
+                    maxWidth: '9ch',
+                    p: '0.25rem',
+                  })}
+                >
+                  {Number(cell.value)?.toLocaleString?.('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                  })}
+                </Box>
+              ),
+              enableEditing: true,
+            },
+            {
+              header: 'Start Date',
+              id: 'startDate',
+            },
+          ],
+        },
+      ] as MRT_ColumnInterface[],
     [],
   );
 
@@ -1492,7 +1493,7 @@ const Example: FC = () => {
     //end
   ]);
 
-  const handleSaveRow = ({row}) => {
+  const handleSaveRow = ({ row }) => {
     data[+row.index] = row.values;
     setData([...data]);
   };

@@ -43,7 +43,7 @@ export const StyleAllMuiTableBodyCell: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     muiTableBodyCellProps={{
-      style: {
+      sx: {
         backgroundColor: 'rgba(52, 210, 235, 0.1)',
         borderRight: '1px solid rgba(224,224,224,1)',
       },
@@ -68,7 +68,7 @@ export const StyleMuiTableBodyCellConditionallyIn1Column: Story<
         header: 'Age',
         id: 'age',
         muiTableBodyCellProps: ({ cell }) => ({
-          style: {
+          sx: {
             backgroundColor:
               cell.value > 40 ? 'rgba(22, 184, 44, 0.5)' : undefined,
             fontWeight:
