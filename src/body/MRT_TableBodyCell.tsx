@@ -87,6 +87,8 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
           width={skeletonWidth}
           {...muiTableBodyCellSkeletonProps}
         />
+      ) : column.columnDefType === 'display' ? (
+        column.Cell?.({ cell, tableInstance })
       ) : cell.getIsPlaceholder() ||
         (row.getIsGrouped() &&
           column.id !==
@@ -100,7 +102,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
         column.enableClickToCopy !== false ? (
         <>
           <MRT_CopyButton cell={cell} tableInstance={tableInstance}>
-            {cell.renderCell()}
+            {cell.column?.Cell?.({ cell, tableInstance }) ?? cell.renderCell()}
           </MRT_CopyButton>
           {row.getIsGrouped() && <> ({row.subRows?.length})</>}
         </>
