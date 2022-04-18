@@ -55,7 +55,6 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   const [showSearch, setShowSearch] = useState(
     props.initialState?.showSearch ?? false,
   );
-
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: props.initialState?.pagination?.pageIndex ?? 0,
     pageSize: props.initialState?.pagination?.pageSize ?? 10,
@@ -209,6 +208,8 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     globalFilterType: currentGlobalFilterType,
     groupRowsFn: groupRowsFn,
     idPrefix,
+    //@ts-ignore
+    initialState: props.initialState,
     onPaginationChange: (updater: any) =>
       setPagination((old) => functionalUpdate(updater, old)),
     paginateRowsFn: paginateRowsFn,
@@ -221,7 +222,6 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     setShowSearch,
     sortRowsFn,
     state: {
-      ...props.initialState,
       currentEditingRow,
       currentFilterTypes,
       currentGlobalFilterType,
