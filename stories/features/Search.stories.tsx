@@ -53,7 +53,7 @@ export const ShowSearchBoxByDefault: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    initialState={{ showSearch: true }}
+    initialState={{ showGlobalFilter: true }}
   />
 );
 
@@ -61,7 +61,7 @@ export const JustASearchBox: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    initialState={{ showSearch: true }}
+    initialState={{ showGlobalFilter: true }}
     hideToolbarInternalActions
   />
 );
@@ -74,7 +74,7 @@ export const CustomizeSearchTextBox: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    initialState={{ showSearch: true }}
+    initialState={{ showGlobalFilter: true }}
     muiSearchTextFieldProps={{
       variant: 'outlined',
       placeholder: 'Search 100 rows',

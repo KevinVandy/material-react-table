@@ -52,8 +52,8 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   const [showFilters, setShowFilters] = useState(
     props.initialState?.showFilters ?? false,
   );
-  const [showSearch, setShowSearch] = useState(
-    props.initialState?.showSearch ?? false,
+  const [showGlobalFilter, setShowGlobalFilter] = useState(
+    props.initialState?.showGlobalFilter ?? false,
   );
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: props.initialState?.pagination?.pageIndex ?? 0,
@@ -223,7 +223,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         //@ts-ignore
         pagination,
         showFilters,
-        showSearch,
+        showGlobalFilter,
         ...props.state,
       },
     }),
@@ -233,7 +233,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     setIsDensePadding,
     setIsFullScreen,
     setShowFilters,
-    setShowSearch,
+    setShowGlobalFilter,
   };
 
   return <MRT_TablePaper tableInstance={tableInstance} />;

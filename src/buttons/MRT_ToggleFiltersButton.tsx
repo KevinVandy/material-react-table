@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEvent } from 'react';
 import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
@@ -15,17 +15,27 @@ export const MRT_ToggleFiltersButton: FC<Props> = ({
     options: {
       icons: { FilterListIcon, FilterListOffIcon },
       localization,
+      onToggleShowFilters,
     },
     setShowFilters,
   } = tableInstance;
 
   const { showFilters } = getState();
 
+  const handleToggleShowFilters = (event: MouseEvent<HTMLButtonElement>) => {
+    onToggleShowFilters?.({
+      event,
+      showFilters: !showFilters,
+      tableInstance,
+    });
+    setShowFilters(!showFilters);
+  };
+
   return (
     <Tooltip arrow title={localization.showHideFilters}>
       <IconButton
         aria-label={localization.showHideFilters}
-        onClick={() => setShowFilters(!showFilters)}
+        onClick={handleToggleShowFilters}
         size="small"
         {...rest}
       >

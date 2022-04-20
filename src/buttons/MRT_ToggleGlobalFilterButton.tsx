@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEvent } from 'react';
 import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
@@ -6,7 +6,7 @@ interface Props extends IconButtonProps {
   tableInstance: MRT_TableInstance;
 }
 
-export const MRT_ToggleSearchButton: FC<Props> = ({
+export const MRT_ToggleGlobalFilterButton: FC<Props> = ({
   tableInstance,
   ...rest
 }) => {
@@ -17,19 +17,25 @@ export const MRT_ToggleSearchButton: FC<Props> = ({
       idPrefix,
       localization,
       muiSearchTextFieldProps,
+      onToggleShowGlobalFilter,
     },
-    setShowSearch,
+    setShowGlobalFilter,
   } = tableInstance;
 
-  const { showSearch } = getState();
+  const { showGlobalFilter } = getState();
 
   const textFieldProps =
     muiSearchTextFieldProps instanceof Function
       ? muiSearchTextFieldProps({ tableInstance })
       : muiSearchTextFieldProps;
 
-  const handleToggleSearch = () => {
-    setShowSearch(!showSearch);
+  const handleToggleSearch = (event: MouseEvent<HTMLButtonElement>) => {
+    onToggleShowGlobalFilter?.({
+      event,
+      showGlobalFilter: !showGlobalFilter,
+      tableInstance,
+    });
+    setShowGlobalFilter(!showGlobalFilter);
     setTimeout(
       () =>
         document
@@ -44,7 +50,7 @@ export const MRT_ToggleSearchButton: FC<Props> = ({
   return (
     <Tooltip arrow title={localization.showHideSearch}>
       <IconButton size="small" onClick={handleToggleSearch} {...rest}>
-        {showSearch ? <SearchOffIcon /> : <SearchIcon />}
+        {showGlobalFilter ? <SearchOffIcon /> : <SearchIcon />}
       </IconButton>
     </Tooltip>
   );

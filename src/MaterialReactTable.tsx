@@ -114,7 +114,7 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   setIsDensePadding: Dispatch<SetStateAction<boolean>>;
   setIsFullScreen: Dispatch<SetStateAction<boolean>>;
   setShowFilters: Dispatch<SetStateAction<boolean>>;
-  setShowSearch: Dispatch<SetStateAction<boolean>>;
+  setShowGlobalFilter: Dispatch<SetStateAction<boolean>>;
 };
 
 export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
@@ -127,7 +127,7 @@ export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
   isDensePadding: boolean;
   isFullScreen: boolean;
   showFilters: boolean;
-  showSearch: boolean;
+  showGlobalFilter: boolean;
   pagination: Partial<PaginationState>;
 };
 
@@ -562,15 +562,6 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       tableInstance: MRT_TableInstance<D>;
       event: MouseEvent<HTMLTableCellElement>;
     }) => void;
-    onColumnHide?: ({
-      column,
-      columnVisibility,
-      tableInstance,
-    }: {
-      column: MRT_ColumnInstance<D>;
-      columnVisibility: VisibilityState;
-      tableInstance: MRT_TableInstance<D>;
-    }) => void;
     onDetailPanelClick?: ({
       event,
       row,
@@ -631,6 +622,51 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       selectedRows: MRT_Row<D>[];
       tableInstance: MRT_TableInstance<D>;
     }) => void;
+    onToggleColumnVisibility?: ({
+      column,
+      columnVisibility,
+      tableInstance,
+    }: {
+      column: MRT_ColumnInstance<D>;
+      columnVisibility: VisibilityState;
+      tableInstance: MRT_TableInstance<D>;
+    }) => void;
+    onToggleDensePadding?: ({
+      event,
+      isDensePadding,
+      tableInstance,
+    }: {
+      event: MouseEvent<HTMLButtonElement>;
+      isDensePadding: boolean;
+      tableInstance: MRT_TableInstance<D>;
+    }) => void;
+    onToggleFullScreen?: ({
+      event,
+      isFullScreen,
+      tableInstance,
+    }: {
+      event: MouseEvent<HTMLButtonElement>;
+      isFullScreen: boolean;
+      tableInstance: MRT_TableInstance<D>;
+    }) => void;
+    onToggleShowFilters?: ({
+      event,
+      showFilters,
+      tableInstance,
+    }: {
+      event: MouseEvent<HTMLButtonElement>;
+      showFilters: boolean;
+      tableInstance: MRT_TableInstance<D>;
+    }) => void;
+    onToggleShowGlobalFilter?: ({
+      event,
+      showGlobalFilter,
+      tableInstance,
+    }: {
+      event: MouseEvent<HTMLButtonElement>;
+      showGlobalFilter: boolean;
+      tableInstance: MRT_TableInstance<D>;
+    }) => void;
     positionActionsColumn?: 'first' | 'last';
     positionPagination?: 'bottom' | 'top' | 'both';
     positionToolbarActions?: 'bottom' | 'top';
@@ -665,14 +701,14 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     }) => ReactNode;
     renderToolbarInternalActions?: ({
       tableInstance,
-      MRT_ToggleSearchButton,
+      MRT_ToggleGlobalFilterButton,
       MRT_ToggleFiltersButton,
       MRT_ShowHideColumnsButton,
       MRT_ToggleDensePaddingButton,
       MRT_FullScreenToggleButton,
     }: {
       tableInstance: MRT_TableInstance<D>;
-      MRT_ToggleSearchButton: FC<
+      MRT_ToggleGlobalFilterButton: FC<
         IconButtonProps & { tableInstance: MRT_TableInstance<D> }
       >;
       MRT_ToggleFiltersButton: FC<

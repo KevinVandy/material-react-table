@@ -528,7 +528,7 @@ const RootPropTable = () => {
         description: 'Callback for when a cell is clicked',
       },
       {
-        prop: 'onColumnHide',
+        prop: 'onToggleColumnVisibility',
         type: '(column, hiddenColumns) => void',
         description: 'Callback for when a column is hidden',
       },
@@ -592,7 +592,7 @@ const RootPropTable = () => {
       muiTablePaperProps={{ sx: { maxHeight: 'calc(100vh - 120px)' } }}
       initialState={{
         isDensePadding: true,
-        showSearch: true,
+        showGlobalFilter: true,
         sorting: [{ id: 'prop', desc: false }],
       }}
     />

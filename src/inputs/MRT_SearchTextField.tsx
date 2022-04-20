@@ -33,7 +33,7 @@ export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
     },
   } = tableInstance;
 
-  const { globalFilter, showSearch } = getState();
+  const { globalFilter, showGlobalFilter } = getState();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [searchValue, setSearchValue] = useState(globalFilter ?? '');
@@ -61,7 +61,7 @@ export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
       : muiSearchTextFieldProps;
 
   return (
-    <Collapse in={showSearch} orientation="horizontal">
+    <Collapse in={showGlobalFilter} orientation="horizontal">
       <TextField
         id={`mrt-${idPrefix}-search-text-field`}
         placeholder={localization.search}

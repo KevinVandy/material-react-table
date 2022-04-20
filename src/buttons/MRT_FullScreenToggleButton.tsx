@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEvent } from 'react';
 import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
@@ -15,17 +15,27 @@ export const MRT_FullScreenToggleButton: FC<Props> = ({
     options: {
       icons: { FullscreenExitIcon, FullscreenIcon },
       localization,
+      onToggleFullScreen,
     },
     setIsFullScreen,
   } = tableInstance;
 
   const { isFullScreen } = getState();
 
+  const handleToggleFullScreen = (event: MouseEvent<HTMLButtonElement>) => {
+    onToggleFullScreen?.({
+      event,
+      isFullScreen: !isFullScreen,
+      tableInstance,
+    });
+    setIsFullScreen(!isFullScreen);
+  };
+
   return (
     <Tooltip arrow title={localization.toggleFullScreen}>
       <IconButton
         aria-label={localization.showHideFilters}
-        onClick={() => setIsFullScreen(!isFullScreen)}
+        onClick={handleToggleFullScreen}
         size="small"
         {...rest}
       >

@@ -4,7 +4,7 @@ import { MRT_FullScreenToggleButton } from '../buttons/MRT_FullScreenToggleButto
 import { MRT_ShowHideColumnsButton } from '../buttons/MRT_ShowHideColumnsButton';
 import { MRT_ToggleDensePaddingButton } from '../buttons/MRT_ToggleDensePaddingButton';
 import { MRT_ToggleFiltersButton } from '../buttons/MRT_ToggleFiltersButton';
-import { MRT_ToggleSearchButton } from '../buttons/MRT_ToggleSearchButton';
+import { MRT_ToggleGlobalFilterButton } from '../buttons/MRT_ToggleGlobalFilterButton';
 import { MRT_TableInstance } from '..';
 
 interface Props {
@@ -32,7 +32,7 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ tableInstance }) => {
           MRT_ShowHideColumnsButton,
           MRT_ToggleDensePaddingButton,
           MRT_ToggleFiltersButton,
-          MRT_ToggleSearchButton,
+          MRT_ToggleGlobalFilterButton,
           tableInstance,
         })}
       </>
@@ -49,7 +49,7 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ tableInstance }) => {
       }}
     >
       {enableFilters && enableGlobalFilter && (
-        <MRT_ToggleSearchButton tableInstance={tableInstance} />
+        <MRT_ToggleGlobalFilterButton tableInstance={tableInstance} />
       )}
       {enableFilters && enableColumnFilters && (
         <MRT_ToggleFiltersButton tableInstance={tableInstance} />

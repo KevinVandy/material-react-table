@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEvent } from 'react';
 import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
@@ -15,17 +15,27 @@ export const MRT_ToggleDensePaddingButton: FC<Props> = ({
     options: {
       icons: { DensityMediumIcon, DensitySmallIcon },
       localization,
+      onToggleDensePadding,
     },
     setIsDensePadding,
   } = tableInstance;
 
   const { isDensePadding } = getState();
 
+  const handleToggleDensePadding = (event: MouseEvent<HTMLButtonElement>) => {
+    onToggleDensePadding?.({
+      event,
+      isDensePadding: !isDensePadding,
+      tableInstance,
+    });
+    setIsDensePadding(!isDensePadding);
+  };
+
   return (
     <Tooltip arrow title={localization.toggleDensePadding}>
       <IconButton
         aria-label={localization.toggleDensePadding}
-        onClick={() => setIsDensePadding(!isDensePadding)}
+        onClick={handleToggleDensePadding}
         size="small"
         {...rest}
       >
