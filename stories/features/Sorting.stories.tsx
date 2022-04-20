@@ -84,3 +84,7 @@ export const DisableSortingForSpecificColumns: Story<
     data={data}
   />
 );
+
+export const DisableMultiSorting: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} enableMultiSort={false} />
+);

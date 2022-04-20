@@ -30,8 +30,8 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
       icons: { FilterAltIcon, FilterAltOff },
       localization,
       muiTableHeadCellProps,
-      setShowFilters,
     },
+    setShowFilters,
   } = tableInstance;
 
   const { isDensePadding, showFilters } = getState();

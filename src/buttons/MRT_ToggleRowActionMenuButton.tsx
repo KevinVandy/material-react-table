@@ -32,8 +32,8 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({
       localization,
       renderRowActionMenuItems,
       renderRowActions,
-      setCurrentEditingRow,
     },
+    setCurrentEditingRow,
   } = tableInstance;
 
   const { currentEditingRow } = getState();

@@ -86,10 +86,33 @@ export const SubRowTreeWithSelection: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableExpanded
-    enableRowSelection
-    enableColumnFilters={false}
-    enableColumnActions={false}
-    enableSorting={false}
     enablePagination={false}
+    enableRowSelection
+  />
+);
+
+export const SubRowTreeWithSelectionNoSubRowSelection: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableExpanded
+    enablePagination={false}
+    enableRowSelection
+    enableSubRowSelection={false}
+  />
+);
+
+export const SubRowTreeWithSingleSelection: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableExpanded
+    enableMultiRowSelection={false}
+    enablePagination={false}
+    enableRowSelection
   />
 );

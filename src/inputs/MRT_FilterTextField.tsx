@@ -32,8 +32,8 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
       idPrefix,
       localization,
       muiTableHeadCellFilterTextFieldProps,
-      setCurrentFilterTypes,
     },
+    setCurrentFilterTypes,
   } = tableInstance;
 
   const { column } = header;

@@ -103,18 +103,18 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
     idPrefix: string;
     filterTypes: { [key in MRT_FILTER_TYPE]: any };
     localization: MRT_Localization;
-    setCurrentEditingRow: Dispatch<SetStateAction<MRT_Row<D> | null>>;
-    setCurrentFilterTypes: Dispatch<
-      SetStateAction<{
-        [key: string]: MRT_FilterType;
-      }>
-    >;
-    setCurrentGlobalFilterType: Dispatch<SetStateAction<MRT_FILTER_TYPE>>;
-    setIsDensePadding: Dispatch<SetStateAction<boolean>>;
-    setIsFullScreen: Dispatch<SetStateAction<boolean>>;
-    setShowFilters: Dispatch<SetStateAction<boolean>>;
-    setShowSearch: Dispatch<SetStateAction<boolean>>;
   };
+  setCurrentEditingRow: Dispatch<SetStateAction<MRT_Row<D> | null>>;
+  setCurrentFilterTypes: Dispatch<
+    SetStateAction<{
+      [key: string]: MRT_FilterType;
+    }>
+  >;
+  setCurrentGlobalFilterType: Dispatch<SetStateAction<MRT_FILTER_TYPE>>;
+  setIsDensePadding: Dispatch<SetStateAction<boolean>>;
+  setIsFullScreen: Dispatch<SetStateAction<boolean>>;
+  setShowFilters: Dispatch<SetStateAction<boolean>>;
+  setShowSearch: Dispatch<SetStateAction<boolean>>;
 };
 
 export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
@@ -329,16 +329,15 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
   MRT_TableOptions<D> & {
     enableClickToCopy?: boolean;
     enableColumnActions?: boolean;
-    enableColumnPinning?: boolean;
     enableDensePaddingToggle?: boolean;
+    enableEditing?: boolean;
     enableExpandAll?: boolean;
     enableFullScreenToggle?: boolean;
     enablePagination?: boolean;
     enableRowActions?: boolean;
-    enableStickyHeader?: boolean;
-    enableEditing?: boolean;
     enableRowNumbers?: boolean;
     enableSelectAll?: boolean;
+    enableStickyHeader?: boolean;
     enabledGlobalFilterTypes?: (MRT_FILTER_TYPE | string)[];
     filterTypes?: { [key in MRT_FILTER_TYPE]: any };
     hideTableFooter?: boolean;
@@ -348,8 +347,8 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     hideToolbarTop?: boolean;
     icons?: Partial<MRT_Icons>;
     idPrefix?: string;
-    isReloading?: boolean;
     isLoading?: boolean;
+    isReloading?: boolean;
     localization?: Partial<MRT_Localization>;
     muiLinearProgressProps?:
       | LinearProgressProps
@@ -692,13 +691,16 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
   };
 
 export default <D extends Record<string, any> = {}>({
+  autoResetExpanded = false,
   enableColumnActions = true,
   enableColumnFilters = true,
   enableDensePaddingToggle = true,
   enableExpandAll = true,
+  enableFilters = true,
   enableFullScreenToggle = true,
   enableGlobalFilter = true,
   enableHiding = true,
+  enableMultiRowSelection = true,
   enablePagination = true,
   enableSelectAll = true,
   enableSorting = true,
@@ -712,13 +714,16 @@ export default <D extends Record<string, any> = {}>({
   ...rest
 }: MaterialReactTableProps<D>) => (
   <MRT_TableRoot
+    autoResetExpanded={autoResetExpanded}
     enableColumnActions={enableColumnActions}
     enableColumnFilters={enableColumnFilters}
     enableDensePaddingToggle={enableDensePaddingToggle}
     enableExpandAll={enableExpandAll}
+    enableFilters={enableFilters}
     enableFullScreenToggle={enableFullScreenToggle}
     enableGlobalFilter={enableGlobalFilter}
     enableHiding={enableHiding}
+    enableMultiRowSelection={enableMultiRowSelection}
     enablePagination={enablePagination}
     enableSelectAll={enableSelectAll}
     enableSorting={enableSorting}

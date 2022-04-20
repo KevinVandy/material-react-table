@@ -35,7 +35,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     setColumnOrder,
     options: {
       enableColumnFilters,
-      enableColumnPinning,
+      enablePinning,
       enableGrouping,
       enableHiding,
       enableSorting,
@@ -52,8 +52,8 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       },
       idPrefix,
       localization,
-      setShowFilters,
     },
+    setShowFilters,
   } = tableInstance;
 
   const { column } = header;
@@ -245,7 +245,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       {enableGrouping &&
         column.getCanGroup() && [
           <MenuItem
-            divider={enableColumnPinning}
+            divider={enablePinning}
             key={0}
             onClick={handleGroupByColumn}
             sx={commonMenuItemStyles}
@@ -260,7 +260,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             </Box>
           </MenuItem>,
         ]}
-      {enableColumnPinning &&
+      {enablePinning &&
         column.getCanPin() && [
           <MenuItem
             disabled={column.getIsPinned() === 'left'}

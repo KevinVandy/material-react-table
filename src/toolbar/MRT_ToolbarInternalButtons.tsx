@@ -15,10 +15,11 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ tableInstance }) => {
   const {
     options: {
       enableColumnFilters,
-      enableHiding,
       enableDensePaddingToggle,
-      enableGlobalFilter,
+      enableFilters,
       enableFullScreenToggle,
+      enableGlobalFilter,
+      enableHiding,
       renderToolbarInternalActions,
     },
   } = tableInstance;
@@ -47,10 +48,10 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ tableInstance }) => {
         p: '0 0.5rem',
       }}
     >
-      {enableGlobalFilter && (
+      {enableFilters && enableGlobalFilter && (
         <MRT_ToggleSearchButton tableInstance={tableInstance} />
       )}
-      {enableColumnFilters && (
+      {enableFilters && enableColumnFilters && (
         <MRT_ToggleFiltersButton tableInstance={tableInstance} />
       )}
       {enableHiding && (

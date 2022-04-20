@@ -63,12 +63,16 @@ export const FilteringEnabledAndShown: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const FilteringDisabled: Story<MaterialReactTableProps> = () => (
+export const ColumnFilteringDisabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     enableColumnFilters={false}
   />
+);
+
+export const FilteringDisabled: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} enableFilters={false} />
 );
 
 export const FilterTypes: Story<MaterialReactTableProps> = () => (

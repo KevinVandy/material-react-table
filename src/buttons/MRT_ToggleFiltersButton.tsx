@@ -15,8 +15,8 @@ export const MRT_ToggleFiltersButton: FC<Props> = ({
     options: {
       icons: { FilterListIcon, FilterListOffIcon },
       localization,
-      setShowFilters,
     },
+    setShowFilters,
   } = tableInstance;
 
   const { showFilters } = getState();

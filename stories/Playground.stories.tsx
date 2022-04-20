@@ -167,7 +167,7 @@ MaximumFeatures.args = {
   ],
   data: maxFeaturesData,
   enableClickToCopy: true,
-  enableColumnPinning: true,
+  enablePinning: true,
   enableColumnResizing: true,
   enableExpanded: true,
   enableGrouping: true,

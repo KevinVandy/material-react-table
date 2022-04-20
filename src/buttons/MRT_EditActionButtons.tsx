@@ -15,8 +15,8 @@ export const MRT_EditActionButtons: FC<Props> = ({ row, tableInstance }) => {
       icons: { CancelIcon, SaveIcon },
       localization,
       onEditSubmit,
-      setCurrentEditingRow,
     },
+    setCurrentEditingRow,
   } = tableInstance;
 
   const { currentEditingRow } = getState();

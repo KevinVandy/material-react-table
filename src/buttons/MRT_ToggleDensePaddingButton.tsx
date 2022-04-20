@@ -15,8 +15,8 @@ export const MRT_ToggleDensePaddingButton: FC<Props> = ({
     options: {
       icons: { DensityMediumIcon, DensitySmallIcon },
       localization,
-      setIsDensePadding,
     },
+    setIsDensePadding,
   } = tableInstance;
 
   const { isDensePadding } = getState();

@@ -54,14 +54,14 @@ const data = [...Array(100)].map((_) => ({
 }));
 
 export const ColumnPinningEnabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} enableColumnPinning />
+  <MaterialReactTable columns={columns} data={data} enablePinning />
 );
 
 export const ColumnPinningWithSelect: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableColumnPinning
+    enablePinning
     enableRowSelection
   />
 );
@@ -72,7 +72,7 @@ export const ColumnPinningWithDetailPanel: Story<
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableColumnPinning
+    enablePinning
     enableExpanded
     renderDetailPanel={(row) => <h1>Hi</h1>}
   />

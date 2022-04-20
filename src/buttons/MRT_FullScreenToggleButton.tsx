@@ -15,8 +15,8 @@ export const MRT_FullScreenToggleButton: FC<Props> = ({
     options: {
       icons: { FullscreenExitIcon, FullscreenIcon },
       localization,
-      setIsFullScreen,
     },
+    setIsFullScreen,
   } = tableInstance;
 
   const { isFullScreen } = getState();

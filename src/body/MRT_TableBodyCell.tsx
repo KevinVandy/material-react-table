@@ -15,7 +15,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
     getState,
     options: {
       enableClickToCopy,
-      enableColumnPinning,
+      enablePinning,
       enableEditing,
       isLoading,
       muiTableBodyCellProps,
@@ -73,7 +73,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
             : undefined,
         transition: 'all 0.2s ease-in-out',
         whiteSpace:
-          isDensePadding || (enableColumnPinning && getIsSomeColumnsPinned())
+          isDensePadding || (enablePinning && getIsSomeColumnsPinned())
             ? 'nowrap'
             : 'normal',
         //@ts-ignore

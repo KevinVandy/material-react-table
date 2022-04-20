@@ -16,11 +16,8 @@ interface Props {
 export const MRT_EditCellTextField: FC<Props> = ({ cell, tableInstance }) => {
   const {
     getState,
-    options: {
-      enableEditing,
-      muiTableBodyCellEditTextFieldProps,
-      setCurrentEditingRow,
-    },
+    options: { enableEditing, muiTableBodyCellEditTextFieldProps },
+    setCurrentEditingRow,
   } = tableInstance;
 
   const [value, setValue] = useState(cell.value);

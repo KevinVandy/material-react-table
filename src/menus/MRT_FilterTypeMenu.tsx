@@ -39,12 +39,9 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
 }) => {
   const {
     getState,
-    options: {
-      enabledGlobalFilterTypes,
-      localization,
-      setCurrentFilterTypes,
-      setCurrentGlobalFilterType,
-    },
+    options: { enabledGlobalFilterTypes, localization },
+    setCurrentFilterTypes,
+    setCurrentGlobalFilterType,
   } = tableInstance;
 
   const { isDensePadding, currentFilterTypes, currentGlobalFilterType } =

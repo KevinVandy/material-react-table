@@ -17,8 +17,8 @@ export const MRT_ToggleSearchButton: FC<Props> = ({
       idPrefix,
       localization,
       muiSearchTextFieldProps,
-      setShowSearch,
     },
+    setShowSearch,
   } = tableInstance;
 
   const { showSearch } = getState();

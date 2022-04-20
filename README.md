@@ -15,9 +15,7 @@ View additional [storybook examples](https://www.material-react-table.dev/)
 
 View the [github source code](https://github.com/KevinVandy/material-react-table) and [github open issues](https://github.com/KevinVandy/material-react-table/issues)
 
-Join the [discord](https://discord.gg/5wqyRx6fnm) server to join in on the development discussion
-
-<br />
+Join the [discord](https://discord.gg/5wqyRx6fnm) server to join in on the development discussion or ask questions
 
 ### Features (Some Still In Active Development)
 

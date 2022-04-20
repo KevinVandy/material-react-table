@@ -150,16 +150,16 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
           }),
       ].filter(Boolean),
     [
-      table,
+      props.enableEditing,
       props.enableExpandAll,
       props.enableExpanded,
-      props.enableRowActions,
       props.enableGrouping,
-      props.enableEditing,
+      props.enableRowActions,
       props.enableRowNumbers,
       props.enableRowSelection,
       props.enableSelectAll,
       props.localization,
+      table,
     ],
   );
 
@@ -176,10 +176,10 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     [table, props.columns, currentFilterTypes],
   );
 
-  const data = useMemo(
+  const data: D['Row'][] = useMemo(
     () =>
       props.isLoading && !props.data.length
-        ? [...Array(10).fill(null)].map((_) =>
+        ? [...Array(10).fill(null)].map(() =>
             Object.assign(
               {},
               ...getAllLeafColumnDefs(
@@ -194,25 +194,39 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   );
 
   //@ts-ignore
-  const tableInstance: MRT_TableInstance<{}> = useTable(table, {
-    ...props,
-    columnFilterRowsFn: columnFilterRowsFn,
-    columns,
-    data,
-    debugAll: false,
-    expandRowsFn: expandRowsFn,
-    //@ts-ignore
-    filterTypes: defaultFilterFNs,
-    getSubRows: props.getSubRows ?? ((originalRow: D) => originalRow.subRows),
-    globalFilterRowsFn: globalFilterRowsFn,
-    globalFilterType: currentGlobalFilterType,
-    groupRowsFn: groupRowsFn,
-    idPrefix,
-    //@ts-ignore
-    initialState: props.initialState,
-    onPaginationChange: (updater: any) =>
-      setPagination((old) => functionalUpdate(updater, old)),
-    paginateRowsFn: paginateRowsFn,
+  const tableInstance: MRT_TableInstance<{}> = {
+    ...useTable(table, {
+      ...props,
+      columnFilterRowsFn: columnFilterRowsFn,
+      columns,
+      data,
+      expandRowsFn: expandRowsFn,
+      //@ts-ignore
+      filterTypes: defaultFilterFNs,
+      getSubRows: props.getSubRows ?? ((originalRow: D) => originalRow.subRows),
+      globalFilterRowsFn: globalFilterRowsFn,
+      globalFilterType: currentGlobalFilterType,
+      groupRowsFn: groupRowsFn,
+      idPrefix,
+      //@ts-ignore
+      initialState: props.initialState,
+      onPaginationChange: (updater: any) =>
+        setPagination((old) => functionalUpdate(updater, old)),
+      paginateRowsFn: paginateRowsFn,
+      sortRowsFn,
+      state: {
+        currentEditingRow,
+        currentFilterTypes,
+        currentGlobalFilterType,
+        isDensePadding,
+        isFullScreen,
+        //@ts-ignore
+        pagination,
+        showFilters,
+        showSearch,
+        ...props.state,
+      },
+    }),
     setCurrentEditingRow,
     setCurrentFilterTypes,
     setCurrentGlobalFilterType,
@@ -220,20 +234,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     setIsFullScreen,
     setShowFilters,
     setShowSearch,
-    sortRowsFn,
-    state: {
-      currentEditingRow,
-      currentFilterTypes,
-      currentGlobalFilterType,
-      isDensePadding,
-      isFullScreen,
-      //@ts-ignore
-      pagination,
-      showFilters,
-      showSearch,
-      ...props.state,
-    },
-  });
+  };
 
   return <MRT_TablePaper tableInstance={tableInstance} />;
 };

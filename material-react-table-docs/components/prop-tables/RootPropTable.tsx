@@ -56,7 +56,8 @@ const RootPropTable = () => {
       {
         prop: 'data',
         type: 'Array<any>',
-        description: 'An array of your data objects',
+        description:
+          'An array of your data objects. Flatten your data objects for best performance and compatibility with sorting, filtering, and grouping features.',
         link: '/docs/usage',
         linkText: 'MRT usage docs',
         required: true,
@@ -71,76 +72,38 @@ const RootPropTable = () => {
         linkText: 'React Table useTable options',
       },
       {
-        prop: 'disableColumnActions',
-        type: 'boolean',
-        description: 'Hide column action buttons in table head cells',
-      },
-      {
-        prop: 'disableColumnHiding',
-        type: 'boolean',
-        description:
-          'Hide the toggle show/hide columns button in toolbar and column actions menu',
-      },
-      {
-        prop: 'disableDensePaddingToggle',
-        type: 'boolean',
-        description: 'Hide the toggle dense padding button in toolbar',
-      },
-      {
-        prop: 'disableExpandAll',
-        type: 'boolean',
-        description: 'Hide the expand all rows button in head row',
-      },
-      {
-        prop: 'disableFullScreenToggle',
-        type: 'boolean',
-        description: 'Hide the toggle full screen button in toolbar',
-      },
-      {
-        prop: 'disableSelectAll',
-        type: 'boolean',
-        description: 'Hide the toggle select all checkbox in header row',
-      },
-      {
-        prop: 'disableSubRowTree',
-        type: 'boolean',
-        description: 'Hide the expand/collapse sub rows button in every row',
-      },
-      {
-        prop: 'enableRowNumbers',
-        type: 'boolean',
-        description: 'Show row numbers in the first column',
-        link: '/docs/guides/row-numbers',
-        linkText: 'MRT row numbers docs',
-      },
-      {
         prop: 'enableClickToCopy',
         type: 'boolean',
         description:
-          'Enable click to copy functionality for all table body cells. Individual columns can turn this feature off.',
+          'Enable click to copy functionality for all table body cells. Individual columns can turn this feature off in the column def options.',
         link: '/docs/guides/click-to-copy',
         linkText: 'MRT click to copy docs',
       },
       {
-        prop: 'enableGrouping',
+        prop: 'enableColumnActions',
         type: 'boolean',
-        description: 'Enable the column grouping feature',
-        link: '/docs/guides/column-grouping',
-        linkText: 'MRT column grouping docs',
+        description:
+          'Enable column action buttons in table head cells. Individual columns can turn this feature off in the column def options.',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enableColumnFilters',
+        type: 'boolean',
+        description:
+          'Enable filters for all data columns. Individual columns can turn this feature off in the column def options.',
+        defaultValue: 'true',
       },
       {
         prop: 'enableColumnResizing',
         type: 'boolean',
-        description: 'Enable the column resizing feature',
-        link: '/docs/guides/column-resizing',
-        linkText: 'MRT column resizing docs',
+        description:
+          'Enable a drag handle on column headers to let users manually resize columns',
       },
       {
-        prop: 'enableRowActions',
+        prop: 'enableDensePaddingToggle',
         type: 'boolean',
-        description: 'Enable row actions menu button in each row',
-        link: '/docs/guides/row-actions',
-        linkText: 'MRT row actions docs',
+        description: 'Enable the toggle dense padding button in toolbar',
+        defaultValue: 'true',
       },
       {
         prop: 'enableEditing',
@@ -150,11 +113,143 @@ const RootPropTable = () => {
         linkText: 'MRT row editing docs',
       },
       {
+        prop: 'enableExpandAll',
+        type: 'boolean',
+        description: 'Show the expand all rows button in head row',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enableExpanded',
+        type: 'boolean',
+        description: 'Enable the row expansion/subrows feature',
+      },
+      {
+        prop: 'enableFilters',
+        type: 'boolean',
+        description:
+          'Enable both filter and search functionality. Only use to turn off all filtering features.',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enableFullScreenToggle',
+        type: 'boolean',
+        description:
+          'Enable the fullscreen feature and show the toggle full screen button in toolbar',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enableGlobalFilter',
+        type: 'boolean',
+        description: 'Enable global filter (search) functionality',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enableGrouping',
+        type: 'boolean',
+        description: 'Enable the column grouping feature',
+        link: '/docs/guides/column-grouping',
+        linkText: 'MRT column grouping docs',
+      },
+      {
+        prop: 'enableGroupingRemoval',
+        type: 'boolean',
+        description:
+          'Enable ungrouping columns. Only set to false to permanently group by a column',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enableHiding',
+        type: 'boolean',
+        description:
+          'Enable the column hiding feature and the toggle show/hide columns button in toolbar',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enableMultiRemove',
+        type: 'boolean',
+        description:
+          'Let users remove 1 sorting column from a multi-sort scenario (while holding shift)',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enableMultiRowSelection',
+        type: 'boolean | (row) => boolean',
+        description: 'TBD',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enableMultiSort',
+        type: 'boolean',
+        description:
+          'Let users sort by multiple columns at once by holding shift',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enablePagination',
+        type: 'boolean',
+        description:
+          'Enable the built-in pagination feature. If you want to use your own pagination logic, don\'t disable this, instead use the "manualPagination" option',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enablePinning',
+        type: 'boolean',
+        description:
+          'Enable pinning columns to the left or right of the table from the column actions menu',
+      },
+      {
+        prop: 'enableRowActions',
+        type: 'boolean',
+        description: 'Enable row actions menu button in each row',
+        link: '/docs/guides/row-actions',
+        linkText: 'MRT row actions docs',
+      },
+      {
+        prop: 'enableRowNumbers',
+        type: 'boolean',
+        description: 'Show row numbers in the first column',
+        link: '/docs/guides/row-numbers',
+        linkText: 'MRT row numbers docs',
+      },
+      {
         prop: 'enableRowSelection',
         type: 'boolean',
         description: 'Enable selection checkboxes in each row',
         link: '/docs/guides/selection',
         linkText: 'MRT selection docs',
+      },
+      {
+        prop: 'enableSelectAll',
+        type: 'boolean',
+        description: 'Enable the toggle select all checkbox in header row',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enableSorting',
+        type: 'boolean',
+        description:
+          'Enable all data columns to be sortable. Individual columns can turn this feature off in the column def options.',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enableSortingRemoval',
+        type: 'boolean',
+        description: 'Enable letting users clear a sort.',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enableStickyHeader',
+        type: 'boolean',
+        description:
+          'Enablethe table body being scrollable and the header row being sticky to the top of the table',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enableSubRowSelection',
+        type: 'boolean',
+        description:
+          'Determine if sub rows should be selected if parent row is selected',
+        defaultValue: 'true',
       },
       {
         prop: 'filterTypes',
@@ -497,7 +592,6 @@ const RootPropTable = () => {
       muiTablePaperProps={{ sx: { maxHeight: 'calc(100vh - 120px)' } }}
       initialState={{
         isDensePadding: true,
-        columnVisibility: { defaultValue: false },
         showSearch: true,
         sorting: [{ id: 'prop', desc: false }],
       }}

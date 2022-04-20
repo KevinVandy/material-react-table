@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { alpha, Box, TableContainer, Theme } from '@mui/material';
 import { SystemStyleObject } from '@mui/material/node_modules/@mui/system';
 import { MRT_TableInstance } from '..';
@@ -36,7 +36,7 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
     getRightTableWidth,
     getState,
     options: {
-      enableColumnPinning,
+      enablePinning,
       enableStickyHeader,
       idPrefix,
       muiTableContainerProps,
@@ -52,7 +52,7 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
       ? muiTableContainerProps({ tableInstance })
       : muiTableContainerProps;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const topToolbarHeight =
       typeof document !== 'undefined'
         ? document?.getElementById(`mrt-${idPrefix}-toolbar-top`)
@@ -85,7 +85,7 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
           : undefined,
       }}
     >
-      {enableColumnPinning && getIsSomeColumnsPinned() ? (
+      {enablePinning && getIsSomeColumnsPinned() ? (
         <Box
           sx={{
             display: 'grid',
