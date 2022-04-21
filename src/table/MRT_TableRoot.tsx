@@ -12,6 +12,7 @@ import {
   getSortedRowModelSync,
   useTableInstance,
   getCoreRowModelSync,
+  ColumnDef,
 } from '@tanstack/react-table';
 import {
   MRT_ColumnInterface,
@@ -71,7 +72,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         (c) => ({
           [c.id as string]:
             c.filter ??
-            props?.initialState?.columnFilters?.[c.id as any] ??
+            props?.initialState?.columnFilters?.find((cf) => cf.id === c.id) ??
             (!!c.filterSelectOptions?.length
               ? MRT_FILTER_TYPE.EQUALS
               : MRT_FILTER_TYPE.BEST_MATCH),
@@ -173,7 +174,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
             ? createGroup(table, column, currentFilterTypes)
             : createDataColumn(table, column, currentFilterTypes),
         ),
-      ] as any),
+      ] as ColumnDef<D>[]),
     [table, props.columns, currentFilterTypes],
   );
 

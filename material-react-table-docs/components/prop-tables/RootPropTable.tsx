@@ -538,7 +538,7 @@ const RootPropTable = () => {
         description: 'Callback for when a detail panel is clicked',
       },
       {
-        prop: 'onGlobalFilterChange',
+        prop: 'onGlobalSearchFilterChange',
         type: '(event) => void',
         description:
           'Callback for when the value search box (global filter) changes',

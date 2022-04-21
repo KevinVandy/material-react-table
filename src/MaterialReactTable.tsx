@@ -566,7 +566,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       row: MRT_Row<D>;
       tableInstance: MRT_TableInstance<D>;
     }) => void;
-    onGlobalFilterChange?: ({
+    onGlobalSearchFilterChange?: ({
       event,
       tableInstance,
     }: {
