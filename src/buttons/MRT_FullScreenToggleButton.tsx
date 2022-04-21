@@ -36,7 +36,6 @@ export const MRT_FullScreenToggleButton: FC<Props> = ({
       <IconButton
         aria-label={localization.showHideFilters}
         onClick={handleToggleFullScreen}
-        size="small"
         {...rest}
       >
         {isFullScreen ? <FullscreenExitIcon /> : <FullscreenIcon />}

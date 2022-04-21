@@ -97,7 +97,7 @@
     "react": ">=16.8"
   },
   "dependencies": {
-    "@tanstack/react-table": "^8.0.0-alpha.30",
+    "@tanstack/react-table": "^8.0.0-alpha.42",
     "match-sorter": "^6.3.1"
   }
 }

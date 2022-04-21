@@ -82,7 +82,7 @@ export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
                     size="small"
                     sx={{ height: '1.75rem', width: '1.75rem' }}
                   >
-                    <SearchIcon fontSize="small" />
+                    <SearchIcon />
                   </IconButton>
                 </span>
               </Tooltip>
@@ -97,7 +97,7 @@ export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
                 size="small"
                 title={localization.clearSearch}
               >
-                <CloseIcon fontSize="small" />
+                <CloseIcon />
               </IconButton>
             </InputAdornment>
           ),

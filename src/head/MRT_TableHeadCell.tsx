@@ -56,9 +56,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
 
   const sortTooltip = !!column.getIsSorted()
     ? column.getIsSorted() === 'desc'
-      ? localization.clearSort
-      : localization.sortByColumnDesc.replace('{column}', column.header)
-    : localization.sortByColumnAsc.replace('{column}', column.header);
+      ? localization.sortedByColumnDesc.replace('{column}', column.header)
+      : localization.sortedByColumnAsc.replace('{column}', column.header)
+    : localization.unsorted;
 
   const filterType = getState()?.currentFilterTypes?.[header.id];
 
@@ -135,7 +135,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
           }}
         >
           <Box
-            {...column.getToggleSortingProps()}
+            onClick={() => column.toggleSorting()}
             sx={{
               alignItems: 'center',
               cursor:
@@ -146,7 +146,6 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
               flexWrap: 'nowrap',
               whiteSpace: column.header.length < 15 ? 'nowrap' : 'normal',
             }}
-            title={undefined}
           >
             {headerElement}
             {column.columnDefType !== 'group' && column.getCanSort() && (
@@ -185,9 +184,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
                     }}
                   >
                     {showFilters && !column.getColumnFilterValue() ? (
-                      <FilterAltOff fontSize="small" />
+                      <FilterAltOff />
                     ) : (
-                      <FilterAltIcon fontSize="small" />
+                      <FilterAltIcon />
                     )}
                   </IconButton>
                 </Tooltip>

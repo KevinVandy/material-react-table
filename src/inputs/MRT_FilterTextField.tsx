@@ -206,7 +206,7 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
                       width: '1.75rem',
                     }}
                   >
-                    <CloseIcon fontSize="small" />
+                    <CloseIcon />
                   </IconButton>
                 </span>
               </Tooltip>

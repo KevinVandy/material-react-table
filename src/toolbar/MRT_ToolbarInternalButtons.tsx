@@ -43,9 +43,7 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ tableInstance }) => {
     <Box
       sx={{
         display: 'flex',
-        gap: '0.5rem',
         alignItems: 'center',
-        p: '0 0.5rem',
       }}
     >
       {enableFilters && enableGlobalFilter && (

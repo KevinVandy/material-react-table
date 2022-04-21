@@ -36,7 +36,6 @@ export const MRT_ToggleFiltersButton: FC<Props> = ({
       <IconButton
         aria-label={localization.showHideFilters}
         onClick={handleToggleShowFilters}
-        size="small"
         {...rest}
       >
         {showFilters ? <FilterListOffIcon /> : <FilterListIcon />}

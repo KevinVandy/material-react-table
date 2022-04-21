@@ -30,7 +30,6 @@ export const MRT_ShowHideColumnsButton: FC<Props> = ({
         <IconButton
           aria-label={localization.showHideColumns}
           onClick={handleClick}
-          size="small"
           {...rest}
         >
           <ViewColumnIcon />

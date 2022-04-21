@@ -36,7 +36,6 @@ export const MRT_ToggleDensePaddingButton: FC<Props> = ({
       <IconButton
         aria-label={localization.toggleDensePadding}
         onClick={handleToggleDensePadding}
-        size="small"
         {...rest}
       >
         {isDensePadding ? <DensitySmallIcon /> : <DensityMediumIcon />}

@@ -46,6 +46,8 @@ export interface MRT_Localization {
   showHideSearch: string;
   sortByColumnAsc: string;
   sortByColumnDesc: string;
+  sortedByColumnAsc: string;
+  sortedByColumnDesc: string;
   thenBy: string;
   toggleDensePadding: string;
   toggleFullScreen: string;
@@ -53,6 +55,7 @@ export interface MRT_Localization {
   toggleSelectRow: string;
   ungroupByColumn: string;
   unpin: string;
+  unsorted: string;
 }
 
 export const MRT_DefaultLocalization_EN: MRT_Localization = {
@@ -104,6 +107,8 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   showHideSearch: 'Show/Hide search',
   sortByColumnAsc: 'Sort by {column} ascending',
   sortByColumnDesc: 'Sort by {column} descending',
+  sortedByColumnAsc: 'Sorted by {column} ascending',
+  sortedByColumnDesc: 'Sorted by {column} descending',
   thenBy: ', then by ',
   toggleDensePadding: 'Toggle dense padding',
   toggleFullScreen: 'Toggle full screen',
@@ -111,4 +116,5 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   toggleSelectRow: 'Toggle select row',
   ungroupByColumn: 'Ungroup by {column}',
   unpin: 'Unpin',
+  unsorted: 'Unsorted',
 };

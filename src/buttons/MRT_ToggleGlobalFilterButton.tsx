@@ -49,7 +49,7 @@ export const MRT_ToggleGlobalFilterButton: FC<Props> = ({
 
   return (
     <Tooltip arrow title={localization.showHideSearch}>
-      <IconButton size="small" onClick={handleToggleSearch} {...rest}>
+      <IconButton onClick={handleToggleSearch} {...rest}>
         {showGlobalFilter ? <SearchOffIcon /> : <SearchIcon />}
       </IconButton>
     </Tooltip>

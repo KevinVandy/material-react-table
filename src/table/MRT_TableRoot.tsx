@@ -1,17 +1,18 @@
-import {
-  columnFilterRowsFn,
-  createTable,
-  expandRowsFn,
-  functionalUpdate,
-  globalFilterRowsFn,
-  groupRowsFn,
-  paginateRowsFn,
-  PaginationState,
-  sortRowsFn,
-  Table,
-  useTable,
-} from '@tanstack/react-table';
 import React, { useMemo, useState } from 'react';
+import {
+  PaginationState,
+  Table,
+  createTable,
+  functionalUpdate,
+  getColumnFilteredRowModelSync,
+  getExpandedRowModel,
+  getGlobalFilteredRowModelSync,
+  getGroupedRowModelSync,
+  getPaginationRowModel,
+  getSortedRowModelSync,
+  useTableInstance,
+  getCoreRowModelSync,
+} from '@tanstack/react-table';
 import {
   MRT_ColumnInterface,
   MRT_FilterType,
@@ -95,7 +96,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
           createDisplayColumn(table, {
             Cell: ({ cell }) => (
               <MRT_ToggleRowActionMenuButton
-                row={cell.row as any}
+                row={cell.row as MRT_Row}
                 tableInstance={tableInstance}
               />
             ),
@@ -108,7 +109,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
           createDisplayColumn(table, {
             Cell: ({ cell }) => (
               <MRT_ExpandButton
-                row={cell.row as any}
+                row={cell.row as MRT_Row}
                 tableInstance={tableInstance}
               />
             ),
@@ -125,7 +126,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
           createDisplayColumn(table, {
             Cell: ({ cell }) => (
               <MRT_SelectCheckbox
-                row={cell.row as any}
+                row={cell.row as MRT_Row}
                 tableInstance={tableInstance}
               />
             ),
@@ -195,25 +196,26 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
 
   //@ts-ignore
   const tableInstance: MRT_TableInstance<{}> = {
-    ...useTable(table, {
+    ...useTableInstance(table, {
       ...props,
-      columnFilterRowsFn: columnFilterRowsFn,
       columns,
       data,
-      expandRowsFn: expandRowsFn,
       //@ts-ignore
       filterTypes: defaultFilterFNs,
+      getColumnFilteredRowModel: getColumnFilteredRowModelSync(),
+      getCoreRowModel: getCoreRowModelSync(),
+      getExpandedRowModel: getExpandedRowModel(),
+      getGlobalFilteredRowModel: getGlobalFilteredRowModelSync(),
+      getGroupedRowModel: getGroupedRowModelSync(),
+      getPaginationRowModel: getPaginationRowModel(),
+      getSortedRowModel: getSortedRowModelSync(),
       getSubRows: props.getSubRows ?? ((originalRow: D) => originalRow.subRows),
-      globalFilterRowsFn: globalFilterRowsFn,
       globalFilterType: currentGlobalFilterType,
-      groupRowsFn: groupRowsFn,
       idPrefix,
       //@ts-ignore
       initialState: props.initialState,
       onPaginationChange: (updater: any) =>
         setPagination((old) => functionalUpdate(updater, old)),
-      paginateRowsFn: paginateRowsFn,
-      sortRowsFn,
       state: {
         currentEditingRow,
         currentFilterTypes,
