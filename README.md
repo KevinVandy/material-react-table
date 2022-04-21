@@ -30,9 +30,9 @@ Join the [discord](https://discord.gg/5wqyRx6fnm) server to join in on the devel
 - [x] Custom Styling and internal Mui Components
 - [x] Data Editing
 - [x] Dense Padding Toggle
-- [x] Filtering
+- [x] Filtering and multiple built-in filter modes
 - [x] Fullscreen
-- [ ] Global Search (broken in react-table v8 :( ))
+- [x] Global Filtering (Search)
 - [x] HeaderGroups
 - [x] Localization i18n
 - [x] Pagination (supports client-side and server-side)
