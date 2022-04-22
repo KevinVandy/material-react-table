@@ -29,7 +29,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ tableInstance }) => {
     options: {
       enableGlobalFilter,
       enablePagination,
-      hideToolbarInternalActions,
+      enableToolbarInternalActions,
       idPrefix,
       muiTableToolbarTopProps,
       positionPagination,
@@ -82,7 +82,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ tableInstance }) => {
           {enableGlobalFilter && (
             <MRT_SearchTextField tableInstance={tableInstance} />
           )}
-          {!hideToolbarInternalActions && positionToolbarActions === 'top' && (
+          {enableToolbarInternalActions && positionToolbarActions === 'top' && (
             <MRT_ToolbarInternalButtons tableInstance={tableInstance} />
           )}
         </Box>

@@ -128,7 +128,7 @@ export const DisableSomeFilterTypesForCertainColumns: Story<
       {
         header: 'Last Name',
         id: 'lastName',
-        enabledFilterTypes: ['startsWith', 'endsWith'],
+        enabledColumnFilterTypes: ['startsWith', 'endsWith'],
         filter: 'startsWith',
       },
       {
@@ -138,7 +138,7 @@ export const DisableSomeFilterTypesForCertainColumns: Story<
       {
         header: 'Gender',
         id: 'gender',
-        enabledFilterTypes: ['equals', 'notEquals'],
+        enabledColumnFilterTypes: ['equals', 'notEquals'],
         filter: 'equals',
       },
       {

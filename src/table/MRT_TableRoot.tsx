@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   PaginationState,
   Table,
@@ -14,12 +14,7 @@ import {
   getCoreRowModelSync,
   ColumnDef,
 } from '@tanstack/react-table';
-import {
-  MRT_ColumnInterface,
-  MRT_FilterType,
-  MRT_Row,
-  MRT_TableInstance,
-} from '..';
+import { MRT_ColumnDef, MRT_FilterType, MRT_Row, MRT_TableInstance } from '..';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
 import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
 import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMenuButton';
@@ -34,14 +29,18 @@ import {
 } from '../utils';
 import { defaultFilterFNs } from '../filtersFNs';
 import { MRT_FILTER_TYPE } from '../enums';
+import { Box, Dialog, Grow } from '@mui/material';
 
 export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   props: MaterialReactTableProps<D>,
 ) => {
-  const idPrefix = useMemo(
-    () => props.idPrefix ?? Math.random().toString(36).substring(2, 9),
+  const [idPrefix, setIdPrefix] = useState(props.idPrefix);
+  useEffect(
+    () =>
+      setIdPrefix(props.idPrefix ?? Math.random().toString(36).substring(2, 9)),
     [props.idPrefix],
   );
+
   const [currentEditingRow, setCurrentEditingRow] = useState<MRT_Row | null>(
     null,
   );
@@ -68,16 +67,14 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   }>(() =>
     Object.assign(
       {},
-      ...getAllLeafColumnDefs(props.columns as MRT_ColumnInterface[]).map(
-        (c) => ({
-          [c.id as string]:
-            c.filter ??
-            props?.initialState?.columnFilters?.find((cf) => cf.id === c.id) ??
-            (!!c.filterSelectOptions?.length
-              ? MRT_FILTER_TYPE.EQUALS
-              : MRT_FILTER_TYPE.BEST_MATCH),
-        }),
-      ),
+      ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef[]).map((c) => ({
+        [c.id as string]:
+          c.filter ??
+          props?.initialState?.columnFilters?.find((cf) => cf.id === c.id) ??
+          (!!c.filterSelectOptions?.length
+            ? MRT_FILTER_TYPE.EQUALS
+            : MRT_FILTER_TYPE.BEST_MATCH),
+      })),
     ),
   );
 
@@ -184,11 +181,11 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         ? [...Array(10).fill(null)].map(() =>
             Object.assign(
               {},
-              ...getAllLeafColumnDefs(
-                props.columns as MRT_ColumnInterface[],
-              ).map((c) => ({
-                [c.id]: null,
-              })),
+              ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef[]).map(
+                (c) => ({
+                  [c.id]: null,
+                }),
+              ),
             ),
           )
         : props.data,
@@ -198,9 +195,6 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   //@ts-ignore
   const tableInstance: MRT_TableInstance<{}> = {
     ...useTableInstance(table, {
-      ...props,
-      columns,
-      data,
       //@ts-ignore
       filterTypes: defaultFilterFNs,
       getColumnFilteredRowModel: getColumnFilteredRowModelSync(),
@@ -210,13 +204,14 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       getGroupedRowModel: getGroupedRowModelSync(),
       getPaginationRowModel: getPaginationRowModel(),
       getSortedRowModel: getSortedRowModelSync(),
-      getSubRows: props.getSubRows ?? ((originalRow: D) => originalRow.subRows),
+      getSubRows: (originalRow: D) => originalRow.subRows,
       globalFilterType: currentGlobalFilterType,
       idPrefix,
-      //@ts-ignore
-      initialState: props.initialState,
       onPaginationChange: (updater: any) =>
         setPagination((old) => functionalUpdate(updater, old)),
+      ...props,
+      columns,
+      data,
       state: {
         currentEditingRow,
         currentFilterTypes,
@@ -239,5 +234,23 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     setShowGlobalFilter,
   };
 
-  return <MRT_TablePaper tableInstance={tableInstance} />;
+  return (
+    <>
+      <Dialog
+        TransitionComponent={Grow}
+        PaperComponent={Box}
+        disablePortal
+        fullScreen
+        keepMounted={false}
+        onClose={() => tableInstance.setIsFullScreen(false)}
+        open={tableInstance.getState().isFullScreen}
+        transitionDuration={400}
+      >
+        <MRT_TablePaper tableInstance={tableInstance} />
+      </Dialog>
+      {!tableInstance.getState().isFullScreen && (
+        <MRT_TablePaper tableInstance={tableInstance} />
+      )}
+    </>
+  );
 };

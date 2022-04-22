@@ -12,7 +12,7 @@ interface Props {
 export const MRT_TablePaper: FC<Props> = ({ tableInstance }) => {
   const {
     getState,
-    options: { hideToolbarBottom, hideToolbarTop, muiTablePaperProps },
+    options: { enableToolbarBottom, enableToolbarTop, muiTablePaperProps },
   } = tableInstance;
 
   const { isFullScreen } = getState();
@@ -21,8 +21,10 @@ export const MRT_TablePaper: FC<Props> = ({ tableInstance }) => {
     if (typeof window !== 'undefined') {
       if (isFullScreen) {
         document.body.style.overflow = 'hidden';
+        document.body.style.height = '100vh';
       } else {
         document.body.style.overflow = 'auto';
+        document.body.style.height = 'auto';
       }
     }
   }, [isFullScreen]);
@@ -41,23 +43,17 @@ export const MRT_TablePaper: FC<Props> = ({ tableInstance }) => {
         ...tablePaperProps?.sx,
       }}
       style={{
-        height: isFullScreen ? '100%' : undefined,
-        left: isFullScreen ? '0' : undefined,
+        height: isFullScreen ? '100vh' : undefined,
         margin: isFullScreen ? '0' : undefined,
-        maxHeight: isFullScreen ? '100%' : undefined,
-        maxWidth: isFullScreen ? '100%' : undefined,
-        overflowY: !isFullScreen ? 'hidden' : undefined,
-        position: isFullScreen ? 'fixed' : undefined,
-        right: isFullScreen ? '0' : undefined,
-        top: isFullScreen ? '0' : undefined,
+        maxHeight: isFullScreen ? '100vh' : undefined,
+        maxWidth: isFullScreen ? '100vw' : undefined,
+        padding: isFullScreen ? '0' : undefined,
         width: isFullScreen ? '100vw' : undefined,
-        zIndex: isFullScreen ? 1200 : 1,
-        bottom: isFullScreen ? '0' : undefined,
       }}
     >
-      {!hideToolbarTop && <MRT_ToolbarTop tableInstance={tableInstance} />}
+      {enableToolbarTop && <MRT_ToolbarTop tableInstance={tableInstance} />}
       <MRT_TableContainer tableInstance={tableInstance} />
-      {!hideToolbarBottom && (
+      {enableToolbarBottom && (
         <MRT_ToolbarBottom tableInstance={tableInstance} />
       )}
     </Paper>

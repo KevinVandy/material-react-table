@@ -82,13 +82,13 @@ MinimumFeatures.args = {
     address: faker.address.streetAddress(),
   })),
   enableColumnActions: false,
+  enableColumnFilters: false,
   enablePagination: false,
   enableSorting: false,
-  enableColumnFilters: false,
-  hideToolbarBottom: true,
-  hideToolbarTop: true,
+  enableStickyHeader: false,
+  enableToolbarBottom: false,
+  enableToolbarTop: false,
   muiTableBodyRowProps: { hover: false },
-  muiTableProps: { stickyHeader: false },
 } as MaterialReactTableProps<Row>;
 
 const maxFeaturesData = [...Array(250)].map((_) => ({

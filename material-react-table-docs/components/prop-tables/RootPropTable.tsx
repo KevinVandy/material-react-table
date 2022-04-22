@@ -1,17 +1,23 @@
 import React, { useMemo } from 'react';
-import MaterialReactTable, { MRT_ColumnInterface } from 'material-react-table';
-import { Link } from '@mui/material';
+import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import { Link, useTheme } from '@mui/material';
 
 const RootPropTable = () => {
+  const theme = useTheme();
+
   const columns = useMemo(
     () =>
       [
         {
+          enableClickToCopy: true,
           header: 'Prop',
           id: 'prop',
+          width: 200,
           Cell: ({ cell }) =>
             cell.row.original.required ? (
-              <strong>{cell.value}*</strong>
+              <strong style={{ color: theme.palette.primary.dark }}>
+                {cell.value}*
+              </strong>
             ) : (
               cell.value
             ),
@@ -19,7 +25,7 @@ const RootPropTable = () => {
         { header: 'Type', id: 'type', disableFilters: true },
         { header: 'Default', id: 'defaultValue', disableFilters: true },
         {
-          header: 'Link to more info',
+          header: 'More Info Links',
           id: 'link',
           disableFilters: true,
           Cell: ({ cell }) => (
@@ -30,24 +36,69 @@ const RootPropTable = () => {
           ),
         },
         { header: 'Description', id: 'description' },
-      ] as MRT_ColumnInterface<typeof data[0]>[],
-    [],
+      ] as MRT_ColumnDef<typeof data[0]>[],
+    [theme],
   );
 
   const data = useMemo(
     () => [
       {
-        prop: 'autoResetHiddenColumns',
+        prop: 'aggregationTypes',
+        type: 'unknown',
+        description: '',
+      },
+      {
+        prop: 'autoResetAll',
         type: 'boolean',
-        defaultValue: 'true',
         description:
-          'When true, the hiddenColumns state will automatically reset if columns is changed',
-        link: 'https://react-table.tanstack.com/docs/api/useTable#table-options',
-        linkText: 'React Table useTable options',
+          'Automatically reset all table state when the data changes',
+      },
+      {
+        prop: 'autoResetColumnFilters',
+        type: 'boolean',
+        description: 'Reset column filters state when the data changes',
+      },
+      {
+        prop: 'autoResetExpanded',
+        type: 'boolean',
+        description: 'Reset expanded rows state when the data changes',
+        defaultValue: 'false',
+      },
+      {
+        prop: 'autoResetGlobalFilter',
+        type: 'boolean',
+        description: 'Reset global filter state when the data changes',
+      },
+      {
+        prop: 'autoResetGrouping',
+        type: 'boolean',
+        description: 'Reset grouping state when the data changes',
+      },
+      {
+        prop: 'autoResetPageIndex',
+        type: 'boolean',
+        description:
+          'Reset page index state to first page when the data changes',
+      },
+      {
+        prop: 'autoResetRowSelection',
+        type: 'boolean',
+        description: 'Reset row selection state when the data changes',
+      },
+      {
+        prop: 'autoResetSorting',
+        type: 'boolean',
+        description: 'Reset sorting state when the data changes',
+      },
+      {
+        prop: 'columnResizeMode',
+        type: "'onChange' | 'onEnd'",
+        description: '',
+        defaultValue: "'onEnd'",
       },
       {
         prop: 'columns',
-        type: 'Array<MRT_Column>',
+        type: 'Array<MRT_ColumnDef>',
         description: 'react-table column definitions',
         link: 'https://react-table.tanstack.com/docs/api/useTable#column-options',
         linkText: 'React Table column api docs',
@@ -61,6 +112,36 @@ const RootPropTable = () => {
         link: '/docs/usage',
         linkText: 'MRT usage docs',
         required: true,
+      },
+      {
+        prop: 'debugAll',
+        type: 'boolean',
+        description: '',
+      },
+      {
+        prop: 'debugColumns',
+        type: 'boolean',
+        description: '',
+      },
+      {
+        prop: 'debugHeaders',
+        type: 'boolean',
+        description: '',
+      },
+      {
+        prop: 'debugRows',
+        type: 'boolean',
+        description: '',
+      },
+      {
+        prop: 'debugTable',
+        type: 'boolean',
+        description: '',
+      },
+      {
+        prop: 'defaultCanExpand',
+        type: 'boolean',
+        description: '',
       },
       {
         prop: 'defaultColumn',
@@ -252,10 +333,59 @@ const RootPropTable = () => {
         defaultValue: 'true',
       },
       {
+        prop: 'enableTableFooter',
+        type: 'boolean',
+        description: 'Hide the table footer rows (not toolbar with pagination)',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enableTableHead',
+        type: 'boolean',
+        description: 'Hide the table head rows',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enableToolbarBottom',
+        type: 'boolean',
+        description:
+          'Hide the toolbar at the below the table (also hides bottom pagination)',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enableToolbarInternalActions',
+        type: 'boolean',
+        description:
+          'Hide all 5 of the default action icon buttons in top toolbar',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enableToolbarTop',
+        type: 'boolean',
+        description:
+          'Hide the toolbar at the above the table (also hides action buttons in toolbar)',
+        defaultValue: 'true',
+      },
+      {
+        prop: 'enabledColumnFilterTypes',
+        type: 'Array<MRT_FILTER_TYPE>',
+        description: 'Disable column filter types from being used',
+      },
+      {
+        prop: 'enabledGlobalFilterTypes',
+        type: 'Array<MRT_FILTER_TYPE>',
+        description: 'Disable global filter types from being used',
+        defaultValue: '[bestMatchFirst, bestMatch]',
+      },
+      {
+        prop: 'expandSubRows',
+        type: 'boolean',
+        description: 'Expand all subrows on initial load',
+      },
+      {
         prop: 'filterTypes',
         type: 'Object<string, any>',
         description:
-          'Override and define your own custom filter types and functions',
+          'Override and define your own custom filter types (filter modes) and functions',
         link: '/docs/guides/filtering',
         linkText: 'MRT filtering docs',
       },
@@ -274,34 +404,6 @@ const RootPropTable = () => {
           "Use this function to change how React Table detects unique rows and also how it constructs each row's underlying id property.",
         link: 'https://react-table.tanstack.com/docs/api/useTable#table-options',
         linkText: 'React Table useTable options',
-      },
-      {
-        prop: 'hideTabbleFooter',
-        type: 'boolean',
-        description: 'Hide the table footer rows (not toolbar with pagination)',
-      },
-      {
-        prop: 'hideTableHead',
-        type: 'boolean',
-        description: 'Hide the table head rows',
-      },
-      {
-        prop: 'hideToolbarBottom',
-        type: 'boolean',
-        description:
-          'Hide the toolbar at the below the table (also hides bottom pagination)',
-      },
-      {
-        prop: 'hideToolbarInternalActions',
-        type: 'boolean',
-        description:
-          'Hide all 5 of the default action icon buttons in top toolbar',
-      },
-      {
-        prop: 'hideToolbarTop',
-        type: 'boolean',
-        description:
-          'Hide the toolbar at the above the table (also hides action buttons in toolbar)',
       },
       {
         prop: 'icons',
@@ -588,12 +690,13 @@ const RootPropTable = () => {
       columns={columns}
       data={data}
       enablePagination={false}
-      hideToolbarBottom
-      muiTablePaperProps={{ sx: { maxHeight: 'calc(100vh - 120px)' } }}
+      enableToolbarBottom={false}
+      enablePinning
       initialState={{
         isDensePadding: true,
         showGlobalFilter: true,
         sorting: [{ id: 'prop', desc: false }],
+        columnPinning: { left: ['prop'] },
       }}
     />
   );

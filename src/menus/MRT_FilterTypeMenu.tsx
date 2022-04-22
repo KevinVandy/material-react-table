@@ -123,8 +123,8 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
         },
       ].filter((filterType) =>
         header
-          ? !header.column.enabledFilterTypes ||
-            header.column.enabledFilterTypes.includes(filterType.type)
+          ? !header.column.enabledColumnFilterTypes ||
+            header.column.enabledColumnFilterTypes.includes(filterType.type)
           : (!enabledGlobalFilterTypes ||
               enabledGlobalFilterTypes.includes(filterType.type)) &&
             [

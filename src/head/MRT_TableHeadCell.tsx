@@ -144,7 +144,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
                   : undefined,
               display: 'flex',
               flexWrap: 'nowrap',
-              whiteSpace: column.header.length < 15 ? 'nowrap' : 'normal',
+              whiteSpace: column.header.length < 24 ? 'nowrap' : 'normal',
             }}
           >
             {headerElement}

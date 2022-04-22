@@ -62,12 +62,16 @@ export const JustASearchBox: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     initialState={{ showGlobalFilter: true }}
-    hideToolbarInternalActions
+    enableToolbarInternalActions={false}
   />
 );
 
 export const SearchDisabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} disableGlobalFilter />
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableGlobalFilter={false}
+  />
 );
 
 export const CustomizeSearchTextBox: Story<MaterialReactTableProps> = () => (

@@ -15,7 +15,7 @@ export const MRT_ToolbarBottom: FC<Props> = ({ tableInstance }) => {
   const {
     getState,
     options: {
-      hideToolbarInternalActions,
+      enableToolbarInternalActions,
       idPrefix,
       enablePagination,
       muiTableToolbarBottomProps,
@@ -51,7 +51,7 @@ export const MRT_ToolbarBottom: FC<Props> = ({ tableInstance }) => {
       <Box
         sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
       >
-        {!hideToolbarInternalActions && positionToolbarActions === 'bottom' ? (
+        {enableToolbarInternalActions && positionToolbarActions === 'bottom' ? (
           <MRT_ToolbarInternalButtons tableInstance={tableInstance} />
         ) : (
           <span />

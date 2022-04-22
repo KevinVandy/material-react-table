@@ -53,7 +53,7 @@ export type MRT_TableOptions<D extends Record<string, any> = {}> = Partial<
     'columns' | 'data' | 'initialState' | 'state' | 'expandRowsFn'
   >
 > & {
-  columns: MRT_ColumnInterface<D>[];
+  columns: MRT_ColumnDef<D>[];
   data: D[];
   initialState?: Partial<MRT_TableState<D>>;
   state?: Partial<MRT_TableState<D>>;
@@ -85,8 +85,8 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   | 'getState'
   | 'options'
 > & {
-  getAllColumns: () => MRT_ColumnInstance<D>[];
-  getAllLeafColumns: () => MRT_ColumnInstance<D>[];
+  getAllColumns: () => MRT_Column<D>[];
+  getAllLeafColumns: () => MRT_Column<D>[];
   getExpandedRowModel: () => MRT_RowModel<D>;
   getPaginationRowModel: () => MRT_RowModel<D>;
   getPrePaginationRowModel: () => MRT_RowModel<D>;
@@ -126,7 +126,7 @@ export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
   pagination: Partial<PaginationState>;
 };
 
-export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
+export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
   ColumnDef<D>,
   'header' | 'footer' | 'columns'
 > & {
@@ -170,11 +170,11 @@ export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
     tableInstance: MRT_TableInstance<D>;
   }) => ReactNode;
   id: keyof D | string;
-  columns?: MRT_ColumnInterface<D>[];
+  columns?: MRT_ColumnDef<D>[];
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;
   enableEditing?: boolean;
-  enabledFilterTypes?: (MRT_FILTER_TYPE | string)[];
+  enabledColumnFilterTypes?: (MRT_FILTER_TYPE | string)[];
   filter?: MRT_FilterType | string | FilterType<D>;
   filterSelectOptions?: (string | { text: string; value: string })[];
   footer?: string;
@@ -213,7 +213,7 @@ export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
         column,
       }: {
         tableInstance: MRT_TableInstance;
-        column: MRT_ColumnInstance<D>;
+        column: MRT_Column<D>;
       }) => TableCellProps);
   muiTableHeadCellColumnActionsButtonProps?:
     | IconButtonProps
@@ -222,7 +222,7 @@ export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
         column,
       }: {
         tableInstance: MRT_TableInstance;
-        column: MRT_ColumnInstance<D>;
+        column: MRT_Column<D>;
       }) => IconButtonProps);
   muiTableHeadCellFilterTextFieldProps?:
     | TextFieldProps
@@ -231,7 +231,7 @@ export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
         column,
       }: {
         tableInstance: MRT_TableInstance;
-        column: MRT_ColumnInstance<D>;
+        column: MRT_Column<D>;
       }) => TextFieldProps);
   muiTableHeadCellProps?:
     | TableCellProps
@@ -240,7 +240,7 @@ export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
         column,
       }: {
         tableInstance: MRT_TableInstance;
-        column: MRT_ColumnInstance<D>;
+        column: MRT_Column<D>;
       }) => TableCellProps);
   onCellEditBlur?: ({
     cell,
@@ -269,19 +269,19 @@ export type MRT_ColumnInterface<D extends Record<string, any> = {}> = Omit<
   }) => void;
 };
 
-export type MRT_ColumnInstance<D extends Record<string, any> = {}> = Omit<
+export type MRT_Column<D extends Record<string, any> = {}> = Omit<
   Column<D>,
   'header' | 'footer' | 'columns'
 > &
-  MRT_ColumnInterface<D> & {
-    columns?: MRT_ColumnInstance<D>[];
+  MRT_ColumnDef<D> & {
+    columns?: MRT_Column<D>[];
   };
 
 export type MRT_Header<D extends Record<string, any> = {}> = Omit<
   Header<D>,
   'column'
 > & {
-  column: MRT_ColumnInstance<D>;
+  column: MRT_Column<D>;
 };
 
 export type MRT_HeaderGroup<D extends Record<string, any> = {}> = Omit<
@@ -314,7 +314,7 @@ export type MRT_Cell<D extends Record<string, any> = {}> = Omit<
   Cell<D>,
   'column' | 'row'
 > & {
-  column: MRT_ColumnInstance<D>;
+  column: MRT_Column<D>;
   row: MRT_Row<D>;
 };
 
@@ -333,13 +333,13 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     enableRowNumbers?: boolean;
     enableSelectAll?: boolean;
     enableStickyHeader?: boolean;
+    enableTableFooter?: boolean;
+    enableTableHead?: boolean;
+    enableToolbarBottom?: boolean;
+    enableToolbarInternalActions?: boolean;
+    enableToolbarTop?: boolean;
     enabledGlobalFilterTypes?: (MRT_FILTER_TYPE | string)[];
     filterTypes?: { [key in MRT_FILTER_TYPE]: any };
-    hideTableFooter?: boolean;
-    hideTableHead?: boolean;
-    hideToolbarBottom?: boolean;
-    hideToolbarInternalActions?: boolean;
-    hideToolbarTop?: boolean;
     icons?: Partial<MRT_Icons>;
     idPrefix?: string;
     isLoading?: boolean;
@@ -445,7 +445,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
           column,
         }: {
           tableInstance: MRT_TableInstance;
-          column: MRT_ColumnInstance<D>;
+          column: MRT_Column<D>;
         }) => TableCellProps);
     muiTableFooterProps?:
       | TableFooterProps
@@ -470,7 +470,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
           column,
         }: {
           tableInstance: MRT_TableInstance;
-          column: MRT_ColumnInstance<D>;
+          column: MRT_Column<D>;
         }) => IconButtonProps);
     muiTableHeadCellFilterTextFieldProps?:
       | TextFieldProps
@@ -479,7 +479,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
           column,
         }: {
           tableInstance: MRT_TableInstance;
-          column: MRT_ColumnInstance<D>;
+          column: MRT_Column<D>;
         }) => TextFieldProps);
     muiTableHeadCellProps?:
       | TableCellProps
@@ -488,7 +488,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
           column,
         }: {
           tableInstance: MRT_TableInstance;
-          column: MRT_ColumnInstance<D>;
+          column: MRT_Column<D>;
         }) => TableCellProps);
     muiTableHeadProps?:
       | TableHeadProps
@@ -622,7 +622,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       columnVisibility,
       tableInstance,
     }: {
-      column: MRT_ColumnInstance<D>;
+      column: MRT_Column<D>;
       columnVisibility: VisibilityState;
       tableInstance: MRT_TableInstance<D>;
     }) => void;
@@ -736,6 +736,11 @@ export default <D extends Record<string, any> = {}>({
   enableSelectAll = true,
   enableSorting = true,
   enableStickyHeader = true,
+  enableTableFooter = true,
+  enableTableHead = true,
+  enableToolbarBottom = true,
+  enableToolbarInternalActions = true,
+  enableToolbarTop = true,
   icons,
   localization,
   positionActionsColumn = 'first',
@@ -759,6 +764,11 @@ export default <D extends Record<string, any> = {}>({
     enableSelectAll={enableSelectAll}
     enableSorting={enableSorting}
     enableStickyHeader={enableStickyHeader}
+    enableTableFooter={enableTableFooter}
+    enableTableHead={enableTableHead}
+    enableToolbarBottom={enableToolbarBottom}
+    enableToolbarInternalActions={enableToolbarInternalActions}
+    enableToolbarTop={enableToolbarTop}
     icons={{ ...MRT_Default_Icons, ...icons }}
     localization={{ ...MRT_DefaultLocalization_EN, ...localization }}
     positionActionsColumn={positionActionsColumn}

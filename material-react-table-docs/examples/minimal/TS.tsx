@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react';
-import MaterialReactTable, { MRT_ColumnInterface } from 'material-react-table';
+import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 
 export const Example: FC = () => {
   const columns = useMemo(
@@ -27,7 +27,7 @@ export const Example: FC = () => {
           id: 'state',
         },
         //end
-      ] as MRT_ColumnInterface[],
+      ] as MRT_ColumnDef[],
     [],
   );
 
@@ -83,8 +83,8 @@ export const Example: FC = () => {
       enablePagination={false}
       enableSorting={false}
       enableStickyHeader={false}
-      hideToolbarBottom
-      hideToolbarTop
+      enableToolbarBottom={false}
+      enableToolbarTop={false}
       muiTableBodyRowProps={{ hover: false }}
     />
   );

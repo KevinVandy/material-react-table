@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react';
-import MaterialReactTable, { MRT_ColumnInterface } from 'material-react-table';
+import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 
 interface UserData {
   id: number;
@@ -64,7 +64,7 @@ const ExamplePage: FC<Props> = ({ data }) => {
           header: 'Zip Code',
           id: 'zipcode',
         },
-      ] as MRT_ColumnInterface[],
+      ] as MRT_ColumnDef[],
     [],
   );
 

@@ -82,8 +82,8 @@ export const Example = () => {
       enablePagination={false}
       enableSorting={false}
       enableStickyHeader={false}
-      hideToolbarBottom
-      hideToolbarTop
+      enableToolbarBottom={false}
+      enableToolbarTop={false}
       muiTableBodyRowProps={{ hover: false }}
     />
   );
