@@ -15,7 +15,7 @@ const commonBoxStyles = ({
 }): SystemStyleObject<Theme> => ({
   display: 'grid',
   minWidth: visible ? '200px' : 0,
-  overflowX: 'auto',
+  overflowX: pinned ? 'scroll' : 'auto',
   boxShadow:
     pinned === 'left'
       ? `0 1px 12px ${alpha(theme.palette.common.black, 0.5)}`

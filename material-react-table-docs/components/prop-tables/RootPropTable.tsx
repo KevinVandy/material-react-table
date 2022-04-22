@@ -12,7 +12,6 @@ const RootPropTable = () => {
           enableClickToCopy: true,
           header: 'Prop',
           id: 'prop',
-          width: 200,
           Cell: ({ cell }) =>
             cell.row.original.required ? (
               <strong style={{ color: theme.palette.primary.dark }}>

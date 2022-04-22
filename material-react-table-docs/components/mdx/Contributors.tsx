@@ -3,33 +3,26 @@ import Image from 'next/image';
 
 const cardData = [
   {
-    text: 'NPM',
-    image: '/npm.svg',
-    href: 'https://www.npmjs.com/package/material-react-table',
+    name: 'Kevin Van Cott',
+    role: 'Maintainer, Developer',
+    image: '/contributors/kevinvancott.jpg',
+    href: 'https://github.com/KevinVandy',
   },
   {
-    text: 'Source Code',
-    image: '/source-code.svg',
-    href: 'https://github.com/kevinvandy/material-react-table',
+    name: 'Ryan Kholousi',
+    role: 'UI/UX Designer',
+    image: '/contributors/ryankholousi.jpeg',
+    href: 'https://www.linkedin.com/in/ryan-kholousi-66322979/',
   },
   {
-    text: 'GitHub Issues',
-    image: '/github-issues.svg',
-    href: 'https://github.com/kevinvandy/material-react-table/issues',
-  },
-  {
-    text: 'Discord',
-    image: '/discord.svg',
-    href: 'https://discord.gg/5wqyRx6fnm',
-  },
-  {
-    text: 'Storybook',
-    image: '/storybook.svg',
-    href: 'https://material-react-table.dev',
+    name: 'Daniel Humphrey',
+    role: 'UI/UX, Technical Writer',
+    image: '/contributors/danielhumphrey.jpeg',
+    href: 'https://www.linkedin.com/in/daniel-humphrey-35945514a/',
   },
 ];
 
-export const LinkCards = () => {
+export const Contributors = () => {
   const theme = useTheme();
 
   return (
@@ -39,9 +32,6 @@ export const LinkCards = () => {
         textAlign: 'center',
       }}
     >
-      <Typography sx={{ p: '1rem' }} variant="h3">
-        Important Links
-      </Typography>
       <Box
         sx={{
           p: '1rem 150px 3rem 150px',
@@ -70,8 +60,9 @@ export const LinkCards = () => {
                 cursor: 'pointer',
                 display: 'flex',
                 flexDirection: 'column',
-                minHeight: '100px',
                 fontWeight: 'bold',
+                minWidth: '200px',
+                minHeight: '200px',
                 gap: '1rem',
                 justifyContent: 'center',
                 p: '1rem',
@@ -91,12 +82,14 @@ export const LinkCards = () => {
             >
               <Image
                 src={cd.image}
-                alt={cd.text}
-                width={60}
-                height={60}
+                alt={cd.name}
+                width={190}
+                height={190}
                 objectFit="scale-down"
+                style={{ borderRadius: '4px' }}
               />
-              <Typography>{cd.text}</Typography>
+              <Typography variant="body1">{cd.name}</Typography>
+              <Typography variant="body2">{cd.role}</Typography>
             </Card>
           </Link>
         ))}
