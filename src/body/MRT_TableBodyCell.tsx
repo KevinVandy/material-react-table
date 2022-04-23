@@ -14,17 +14,20 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
     getIsSomeColumnsPinned,
     getState,
     options: {
+      editingMode,
       enableClickToCopy,
-      enablePinning,
       enableEditing,
+      enablePinning,
+      idPrefix,
       isLoading,
       muiTableBodyCellProps,
       muiTableBodyCellSkeletonProps,
       onCellClick,
     },
+    setCurrentEditingCell,
   } = tableInstance;
 
-  const { currentEditingRow, isDensePadding } = getState();
+  const { currentEditingCell, currentEditingRow, isDensePadding } = getState();
 
   const { column, row } = cell;
 
@@ -53,13 +56,43 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
     [column.columnDefType, column.getWidth()],
   );
 
+  const isEditable =
+    (enableEditing || column.enableEditing) && column.enableEditing !== false;
+
+  const isEditing =
+    isEditable &&
+    (editingMode === 'table' ||
+      currentEditingRow?.id === row.id ||
+      currentEditingCell?.id === cell.id);
+
+  const handleDoubleClick = (_event: MouseEvent<HTMLTableCellElement>) => {
+    if (
+      (enableEditing || column.enableEditing) &&
+      column.enableEditing !== false &&
+      editingMode === 'cell'
+    ) {
+      setCurrentEditingCell(cell);
+      setTimeout(() => {
+        const textField = document.getElementById(
+          `mrt-${idPrefix}-edit-cell-text-field-${cell.id}`,
+        ) as HTMLInputElement;
+        if (textField) {
+          textField.focus();
+          textField.select();
+        }
+      }, 200);
+    }
+  };
+
   return (
     <TableCell
       onClick={(event: MouseEvent<HTMLTableCellElement>) =>
         onCellClick?.({ event, cell, tableInstance })
       }
+      onDoubleClick={handleDoubleClick}
       {...tableCellProps}
       sx={{
+        cursor: isEditable && editingMode === 'cell' ? 'pointer' : 'text',
         maxWidth: `min(${column.getWidth()}px, fit-content)`,
         minWidth: `max(${column.getWidth()}px, ${column.minWidth}px)`,
         p: isDensePadding
@@ -97,9 +130,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
           column.id !==
             row.groupingColumnId) ? null : cell.getIsAggregated() ? (
         cell.renderAggregatedCell()
-      ) : enableEditing &&
-        column.enableEditing !== false &&
-        currentEditingRow?.id === row.id ? (
+      ) : isEditing ? (
         <MRT_EditCellTextField cell={cell} tableInstance={tableInstance} />
       ) : (enableClickToCopy || column.enableClickToCopy) &&
         column.enableClickToCopy !== false ? (

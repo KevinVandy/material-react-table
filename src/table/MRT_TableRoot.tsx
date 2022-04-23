@@ -14,7 +14,13 @@ import {
   getCoreRowModelSync,
   ColumnDef,
 } from '@tanstack/react-table';
-import { MRT_ColumnDef, MRT_FilterType, MRT_Row, MRT_TableInstance } from '..';
+import {
+  MRT_Cell,
+  MRT_ColumnDef,
+  MRT_FilterType,
+  MRT_Row,
+  MRT_TableInstance,
+} from '..';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
 import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
 import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMenuButton';
@@ -41,8 +47,12 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     [props.idPrefix],
   );
 
-  const [currentEditingRow, setCurrentEditingRow] = useState<MRT_Row | null>(
-    null,
+  const [currentEditingCell, setCurrentEditingCell] =
+    useState<MRT_Cell<D> | null>(
+      props.initialState?.currentEditingCell ?? null,
+    );
+  const [currentEditingRow, setCurrentEditingRow] = useState<MRT_Row<D> | null>(
+    props.initialState?.currentEditingRow ?? null,
   );
   const [isDensePadding, setIsDensePadding] = useState(
     props.initialState?.isDensePadding ?? false,
@@ -87,7 +97,8 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   const displayColumns = useMemo(
     () =>
       [
-        (props.enableRowActions || props.enableEditing) &&
+        (props.enableRowActions ||
+          (props.enableEditing && props.editingMode === 'row')) &&
           createDisplayColumn(table, {
             Cell: ({ cell }) => (
               <MRT_ToggleRowActionMenuButton
@@ -146,6 +157,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
           }),
       ].filter(Boolean),
     [
+      props.editingMode,
       props.enableEditing,
       props.enableExpandAll,
       props.enableExpanded,
@@ -210,6 +222,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       columns,
       data,
       state: {
+        currentEditingCell,
         currentEditingRow,
         currentFilterTypes,
         currentGlobalFilterType,
@@ -222,6 +235,9 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         ...props.state,
       },
     }),
+    //@ts-ignore
+    setCurrentEditingCell,
+    //@ts-ignore
     setCurrentEditingRow,
     setCurrentFilterTypes,
     setCurrentGlobalFilterType,

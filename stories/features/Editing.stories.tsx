@@ -23,7 +23,9 @@ const data = [...Array(10)].map((_) => ({
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const EditingEnabled: Story<MaterialReactTableProps> = () => {
+export const EditingEnabledEditModeRowDefault: Story<
+  MaterialReactTableProps
+> = () => {
   const [tableData, setTableData] = useState(data);
 
   const handleSaveRow = ({ row }) => {
@@ -57,9 +59,93 @@ export const EditingEnabled: Story<MaterialReactTableProps> = () => {
         },
       ]}
       data={tableData}
-      enableRowActions
       enableEditing
       onEditSubmit={handleSaveRow}
+    />
+  );
+};
+
+export const EditingEnabledEditModeCell: Story<
+  MaterialReactTableProps
+> = () => {
+  const [tableData, setTableData] = useState(data);
+
+  const handleSaveCell = ({ cell, event }) => {
+    tableData[+cell.row.index][cell.column.id] = event.target.value;
+    setTableData([...tableData]);
+  };
+
+  return (
+    <MaterialReactTable
+      columns={[
+        {
+          header: 'First Name',
+          id: 'firstName',
+        },
+        {
+          header: 'Last Name',
+          id: 'lastName',
+        },
+        {
+          header: 'Address',
+          id: 'address',
+        },
+        {
+          header: 'State',
+          id: 'state',
+        },
+        {
+          header: 'Phone Number',
+          id: 'phoneNumber',
+          enableEditing: false,
+        },
+      ]}
+      data={tableData}
+      editingMode="cell"
+      enableEditing
+      onCellEditBlur={handleSaveCell}
+    />
+  );
+};
+
+export const EditingEnabledEditModeTable: Story<
+  MaterialReactTableProps
+> = () => {
+  const [tableData, setTableData] = useState(data);
+
+  const handleSaveCell = ({ cell, event }) => {
+    tableData[+cell.row.index][cell.column.id] = event.target.value;
+    setTableData([...tableData]);
+  };
+
+  return (
+    <MaterialReactTable
+      columns={[
+        {
+          header: 'First Name',
+          id: 'firstName',
+        },
+        {
+          header: 'Last Name',
+          id: 'lastName',
+        },
+        {
+          header: 'Address',
+          id: 'address',
+        },
+        {
+          header: 'State',
+          id: 'state',
+        },
+        {
+          header: 'Phone Number',
+          id: 'phoneNumber',
+        },
+      ]}
+      data={tableData}
+      editingMode="table"
+      enableEditing
+      onCellEditBlur={handleSaveCell}
     />
   );
 };

@@ -56,6 +56,7 @@ export const MRT_CopyButton: FC<Props> = ({
           backgroundColor: 'transparent',
           border: 'none',
           color: 'inherit',
+          cursor: 'copy',
           fontFamily: 'inherit',
           fontSize: 'inherit',
           letterSpacing: 'inherit',

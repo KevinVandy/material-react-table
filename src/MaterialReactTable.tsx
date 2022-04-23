@@ -99,6 +99,7 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
     filterTypes: { [key in MRT_FILTER_TYPE]: any };
     localization: MRT_Localization;
   };
+  setCurrentEditingCell: Dispatch<SetStateAction<MRT_Cell<D> | null>>;
   setCurrentEditingRow: Dispatch<SetStateAction<MRT_Row<D> | null>>;
   setCurrentFilterTypes: Dispatch<
     SetStateAction<{
@@ -116,6 +117,7 @@ export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
   TableState,
   'pagination'
 > & {
+  currentEditingCell: MRT_Cell<D> | null;
   currentEditingRow: MRT_Row<D> | null;
   currentFilterTypes: Record<string, string | Function>;
   currentGlobalFilterType: Record<string, string | Function>;
@@ -261,9 +263,11 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
     tableInstance: MRT_TableInstance<D>;
   }) => void;
   onColumnFilterValueChange?: ({
+    column,
     event,
     filterValue,
   }: {
+    column: MRT_Column<D>;
     event: ChangeEvent<HTMLInputElement>;
     filterValue: any;
   }) => void;
@@ -322,6 +326,7 @@ export type MRT_FilterType = MRT_FILTER_TYPE | Function;
 
 export type MaterialReactTableProps<D extends Record<string, any> = {}> =
   MRT_TableOptions<D> & {
+    editingMode?: 'table' | 'row' | 'cell';
     enableClickToCopy?: boolean;
     enableColumnActions?: boolean;
     enableDensePaddingToggle?: boolean;
@@ -557,6 +562,33 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       tableInstance: MRT_TableInstance<D>;
       event: MouseEvent<HTMLTableCellElement>;
     }) => void;
+    onCellEditBlur?: ({
+      cell,
+      event,
+      tableInstance,
+    }: {
+      event: FocusEvent<HTMLInputElement>;
+      cell: MRT_Cell<D>;
+      tableInstance: MRT_TableInstance<D>;
+    }) => void;
+    onCellEditChange?: ({
+      cell,
+      event,
+      tableInstance,
+    }: {
+      event: ChangeEvent<HTMLInputElement>;
+      cell: MRT_Cell<D>;
+      tableInstance: MRT_TableInstance<D>;
+    }) => void;
+    onColumnFilterValueChange?: ({
+      column,
+      event,
+      filterValue,
+    }: {
+      column: MRT_Column<D>;
+      event: ChangeEvent<HTMLInputElement>;
+      filterValue: any;
+    }) => void;
     onDetailPanelClick?: ({
       event,
       row,
@@ -724,6 +756,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
 export default <D extends Record<string, any> = {}>({
   autoResetExpanded = false,
   columnResizeMode = 'onEnd',
+  editingMode = 'row',
   enableColumnActions = true,
   enableColumnFilters = true,
   enableColumnResizing = false,
@@ -754,6 +787,7 @@ export default <D extends Record<string, any> = {}>({
   <MRT_TableRoot
     autoResetExpanded={autoResetExpanded}
     columnResizeMode={columnResizeMode}
+    editingMode={editingMode}
     enableColumnActions={enableColumnActions}
     enableColumnResizing={enableColumnResizing}
     enableColumnFilters={enableColumnFilters}
