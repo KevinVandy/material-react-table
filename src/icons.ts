@@ -19,6 +19,7 @@ import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PushPinIcon from '@mui/icons-material/PushPin';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import SaveIcon from '@mui/icons-material/Save';
 import SearchIcon from '@mui/icons-material/Search';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
@@ -48,6 +49,7 @@ export interface MRT_Icons {
   MoreHorizIcon: any;
   MoreVertIcon: any;
   PushPinIcon: any;
+  RestartAltIcon: any;
   SaveIcon: any;
   SearchIcon: any;
   SearchOffIcon: any;
@@ -78,6 +80,7 @@ export const MRT_Default_Icons: MRT_Icons = {
   MoreHorizIcon,
   MoreVertIcon,
   PushPinIcon,
+  RestartAltIcon,
   SaveIcon,
   SearchIcon,
   SearchOffIcon,

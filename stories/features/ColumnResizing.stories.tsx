@@ -50,8 +50,57 @@ const data = [...Array(8)].map((_) => ({
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const ColumnResizingEnabled: Story<MaterialReactTableProps> = () => (
+export const ColumnResizingEnabledDefaultOnEnd: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable columns={columns} data={data} enableColumnResizing />
+);
+
+export const ColumnResizingDisabledSomeColumns: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        id: 'firstName',
+      },
+      {
+        header: 'Last Name',
+        id: 'lastName',
+      },
+      {
+        header: 'Address',
+        id: 'address',
+      },
+      {
+        header: 'State',
+        id: 'state',
+      },
+      {
+        header: 'Zip Code',
+        id: 'zipCode',
+        enableResizing: false,
+      },
+      {
+        header: 'Phone Number',
+        id: 'phoneNumber',
+      },
+    ]}
+    data={data}
+    enableColumnResizing
+  />
+);
+
+export const ColumnResizingEnabledOnChange: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnResizing
+    columnResizeMode="onChange"
+  />
 );
 
 export const ColumnResizingCustomDefaultWidths: Story<
@@ -62,5 +111,66 @@ export const ColumnResizingCustomDefaultWidths: Story<
     data={data}
     enableColumnResizing
     defaultColumn={{ width: 150, minWidth: 100, maxWidth: 300 }}
+  />
+);
+
+export const ColumnResizingWithPinning: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnResizing
+    enablePinning
+    initialState={{ columnPinning: { left: ['firstName', 'lastName'] } }}
+  />
+);
+
+export const ColumnResizingWithHeaderGroups: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'Name',
+        id: 'name',
+        footer: 'Name',
+        columns: [
+          {
+            header: 'First Name',
+            footer: 'First Name',
+            id: 'firstName',
+          },
+
+          {
+            header: 'Last Name',
+            footer: 'Last Name',
+            id: 'lastName',
+          },
+        ],
+      },
+      {
+        header: 'Info',
+        id: 'info',
+        footer: 'Info',
+        columns: [
+          {
+            header: 'Age',
+            footer: 'Age',
+            id: 'age',
+          },
+          {
+            header: 'Address',
+            footer: 'Address',
+            id: 'address',
+          },
+        ],
+      },
+    ]}
+    data={[...Array(5)].map((_) => ({
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      age: faker.datatype.number(80),
+      address: faker.address.streetAddress(),
+    }))}
+    enableColumnResizing
   />
 );

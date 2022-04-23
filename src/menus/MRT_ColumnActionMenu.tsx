@@ -35,9 +35,10 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     setColumnOrder,
     options: {
       enableColumnFilters,
-      enablePinning,
+      enableColumnResizing,
       enableGrouping,
       enableHiding,
+      enablePinning,
       enableSorting,
       icons: {
         ArrowRightIcon,
@@ -48,6 +49,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
         FilterListOffIcon,
         PushPinIcon,
         SortIcon,
+        RestartAltIcon,
         VisibilityOffIcon,
       },
       idPrefix,
@@ -58,7 +60,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
 
   const { column } = header;
 
-  const { isDensePadding, columnVisibility } = getState();
+  const { columnSizing, columnVisibility, isDensePadding } = getState();
 
   const [filterMenuAnchorEl, setFilterMenuAnchorEl] =
     useState<null | HTMLElement>(null);
@@ -78,6 +80,11 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
 
   const handleSortDesc = () => {
     column.toggleSorting(true);
+    setAnchorEl(null);
+  };
+
+  const handleResetColumnSize = () => {
+    column.resetSize();
     setAnchorEl(null);
   };
 
@@ -263,7 +270,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       {enablePinning &&
         column.getCanPin() && [
           <MenuItem
-            disabled={column.getIsPinned() === 'left'}
+            disabled={column.getIsPinned() === 'left' || !column.getCanPin()}
             key={0}
             onClick={() => handlePinColumn('left')}
             sx={commonMenuItemStyles}
@@ -276,7 +283,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             </Box>
           </MenuItem>,
           <MenuItem
-            disabled={column.getIsPinned() === 'right'}
+            disabled={column.getIsPinned() === 'right' || !column.getCanPin()}
             key={0}
             onClick={() => handlePinColumn('right')}
             sx={commonMenuItemStyles}
@@ -303,6 +310,21 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             </Box>
           </MenuItem>,
         ]}
+      {enableColumnResizing && [
+        <MenuItem
+          disabled={!column.getCanResize() || !columnSizing[column.id]}
+          key={0}
+          onClick={handleResetColumnSize}
+          sx={commonMenuItemStyles}
+        >
+          <Box sx={commonListItemStyles}>
+            <ListItemIcon>
+              <RestartAltIcon />
+            </ListItemIcon>
+            {localization.resetColumnSize}
+          </Box>
+        </MenuItem>,
+      ]}
       {enableHiding && [
         <MenuItem
           disabled={column.enableHiding === false}

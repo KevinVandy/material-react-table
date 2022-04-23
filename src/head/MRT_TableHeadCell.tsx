@@ -97,10 +97,10 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
           theme.palette.common.white,
           0.05,
         )},${alpha(theme.palette.common.white, 0.05)})`,
-        boxShadow: `3px 0 6px ${alpha(theme.palette.common.black, 0.1)}`,
         fontWeight: 'bold',
         height: '100%',
-        minWidth: `max(${header.getWidth()}, 100px)`,
+        maxWidth: `min(${column.getWidth()}px, ${column.maxWidth}px)`,
+        minWidth: `max(${column.getWidth()}px, ${column.minWidth}px)`,
         p: isDensePadding
           ? column.columnDefType === 'display'
             ? '0 0.5rem'
@@ -115,9 +115,11 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
             ? '0.75rem'
             : '1.25rem',
         pb: column.columnDefType === 'display' ? 0 : undefined,
+        overflow: 'visible',
         transition: `all ${enableColumnResizing ? 0 : '0.2s'} ease-in-out`,
         verticalAlign: 'text-top',
         width: header.getWidth(),
+        zIndex: column.getIsResizing() ? 2 : 1,
         //@ts-ignore
         ...tableCellProps?.sx,
       })}
@@ -148,7 +150,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
             }}
           >
             {headerElement}
-            {column.columnDefType !== 'group' && column.getCanSort() && (
+            {column.columnDefType === 'data' && column.getCanSort() && (
               <Tooltip arrow placement="top" title={sortTooltip}>
                 <TableSortLabel
                   aria-label={sortTooltip}
@@ -161,7 +163,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
                 />
               </Tooltip>
             )}
-            {column.columnDefType !== 'group' &&
+            {column.columnDefType === 'data' &&
               enableColumnFilters &&
               !!column.getCanColumnFilter() && (
                 <Tooltip arrow placement="top" title={filterTooltip}>
@@ -192,59 +194,56 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
                 </Tooltip>
               )}
           </Box>
-          <Box
-            sx={{ alignItems: 'center', display: 'flex', flexWrap: 'nowrap' }}
-          >
-            {(enableColumnActions || column.enableColumnActions) &&
-              column.enableColumnActions !== false &&
-              column.columnDefType !== 'group' && (
-                <MRT_ToggleColumnActionMenuButton
-                  header={header}
-                  tableInstance={tableInstance}
-                />
-              )}
-            {enableColumnResizing && column.columnDefType !== 'group' && (
-              <Divider
-                flexItem
-                orientation="vertical"
-                onDoubleClick={() => header.resetSize()}
-                sx={(theme: Theme) => ({
-                  borderRightWidth: '2px',
-                  borderRadius: '2px',
-                  maxHeight: '2rem',
-                  cursor: 'col-resize',
-                  userSelect: 'none',
-                  touchAction: 'none',
-                  '&:active': {
-                    backgroundColor: theme.palette.secondary.dark,
-                    opacity: 1,
-                  },
-                })}
-                {...(header.getResizerProps((props: ColumnResizerProps) => ({
-                  ...props,
-                  style: {
-                    transform: column.getIsResizing()
-                      ? `translateX(${
-                          getState().columnSizingInfo.deltaOffset
-                        }px)`
-                      : '',
-                  },
-                })) as any)}
+          {(enableColumnActions || column.enableColumnActions) &&
+            column.enableColumnActions !== false &&
+            column.columnDefType !== 'group' && (
+              <MRT_ToggleColumnActionMenuButton
+                header={header}
+                tableInstance={tableInstance}
               />
             )}
-          </Box>
+          {column.getCanResize() && (
+            <Divider
+              flexItem
+              orientation="vertical"
+              onDoubleClick={() => header.resetSize()}
+              sx={(theme: Theme) => ({
+                borderRadius: '2px',
+                borderRightWidth: '2px',
+                cursor: 'col-resize',
+                height:
+                  showFilters && column.columnDefType === 'data'
+                    ? '4rem'
+                    : '2rem',
+                opacity: 0.8,
+                position: 'absolute',
+                right: '1px',
+                touchAction: 'none',
+                transition: 'all 0.2s ease-in-out',
+                userSelect: 'none',
+                zIndex: 2000,
+                '&:active': {
+                  backgroundColor: theme.palette.info.main,
+                  opacity: 1,
+                },
+              })}
+              {...(header.getResizerProps((props: ColumnResizerProps) => ({
+                ...props,
+                style: {
+                  transform: column.getIsResizing()
+                    ? `translateX(${getState().columnSizingInfo.deltaOffset}px)`
+                    : '',
+                },
+              })) as any)}
+            />
+          )}
         </Box>
       )}
-      {column.columnDefType === 'data' &&
-        enableColumnFilters &&
-        column.getCanColumnFilter() && (
-          <Collapse in={showFilters}>
-            <MRT_FilterTextField
-              header={header}
-              tableInstance={tableInstance}
-            />
-          </Collapse>
-        )}
+      {column.columnDefType === 'data' && column.getCanColumnFilter() && (
+        <Collapse in={showFilters}>
+          <MRT_FilterTextField header={header} tableInstance={tableInstance} />
+        </Collapse>
+      )}
     </TableCell>
   );
 };

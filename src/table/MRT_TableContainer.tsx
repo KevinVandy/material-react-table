@@ -1,6 +1,5 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { CSSProperties, FC, useEffect, useState } from 'react';
 import { alpha, Box, TableContainer, Theme } from '@mui/material';
-import { SystemStyleObject } from '@mui/material/node_modules/@mui/system';
 import { MRT_TableInstance } from '..';
 import { MRT_Table } from './MRT_Table';
 
@@ -12,7 +11,7 @@ const commonBoxStyles = ({
   pinned?: 'left' | 'right';
   theme: Theme;
   visible?: boolean;
-}): SystemStyleObject<Theme> => ({
+}): CSSProperties => ({
   display: 'grid',
   minWidth: visible ? '200px' : 0,
   overflowX: pinned ? 'scroll' : 'auto',

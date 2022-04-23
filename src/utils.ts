@@ -1,6 +1,7 @@
 import { ColumnDef, Table } from '@tanstack/react-table';
 import { MRT_ColumnDef, MRT_FilterType } from '.';
 import { MRT_FILTER_TYPE } from './enums';
+import { defaultFilterFNs } from './filtersFNs';
 
 export const getAllLeafColumnDefs = (
   columns: MRT_ColumnDef[],
@@ -40,7 +41,10 @@ export const createDataColumn = <D extends Record<string, any> = {}>(
   currentFilterTypes: { [key: string]: MRT_FilterType },
 ): ColumnDef<D> => // @ts-ignore
   table.createDataColumn(column.id, {
-    filterType: currentFilterTypes[column.id] || MRT_FILTER_TYPE.BEST_MATCH,
+    filterFn:
+      currentFilterTypes[column.id] instanceof Function
+        ? currentFilterTypes[column.id]
+        : defaultFilterFNs[currentFilterTypes[column.id] as MRT_FILTER_TYPE],
     ...column,
   }) as any;
 

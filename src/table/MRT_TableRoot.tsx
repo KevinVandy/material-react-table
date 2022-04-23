@@ -82,10 +82,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     props.globalFilterType ?? MRT_FILTER_TYPE.BEST_MATCH_FIRST,
   );
 
-  const table = useMemo(
-    () => createTable<{ Row: D }>(),
-    [],
-  ) as unknown as Table<D>;
+  const table = useMemo(() => createTable() as unknown as Table<D>, []);
 
   const displayColumns = useMemo(
     () =>

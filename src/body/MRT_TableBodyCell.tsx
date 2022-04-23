@@ -60,6 +60,8 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
       }
       {...tableCellProps}
       sx={{
+        maxWidth: `min(${column.getWidth()}px, fit-content)`,
+        minWidth: `max(${column.getWidth()}px, ${column.minWidth}px)`,
         p: isDensePadding
           ? column.columnDefType === 'display'
             ? '0 0.5rem'
@@ -76,6 +78,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
           isDensePadding || (enablePinning && getIsSomeColumnsPinned())
             ? 'nowrap'
             : 'normal',
+        width: column.getWidth(),
         //@ts-ignore
         ...tableCellProps?.sx,
       }}
