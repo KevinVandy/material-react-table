@@ -20,6 +20,7 @@ import {
   MRT_FilterType,
   MRT_Row,
   MRT_TableInstance,
+  MRT_TableState,
 } from '..';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
 import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
@@ -47,29 +48,54 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     [props.idPrefix],
   );
 
+  const initialState: Partial<MRT_TableState<D>> = useMemo(() => {
+    if (!props.enablePersistantTableState || !props.idPrefix) {
+      return props.initialState;
+    }
+    if (typeof window === 'undefined') {
+      if (process.env.NODE_ENV !== 'production') {
+        console.error(
+          'The MRT Persistant Table State feature is not supported if using SSR, but you can wrap your <MaterialReactTable /> in a MUI <NoSsr> tags to let it work',
+        );
+      }
+      return props.initialState;
+    }
+    const storedState =
+      props.persistantTableStateMode === 'localStorage'
+        ? localStorage.getItem(`mrt-${idPrefix}-table-state`)
+        : props.persistantTableStateMode === 'sessionStorage'
+        ? sessionStorage.getItem(`mrt-${idPrefix}-table-state`)
+        : '{}';
+    if (storedState) {
+      const parsedState = JSON.parse(storedState);
+      if (parsedState) {
+        return { ...props.initialState, ...parsedState };
+      }
+    }
+    return props.initialState;
+  }, []);
+
   const [currentEditingCell, setCurrentEditingCell] =
-    useState<MRT_Cell<D> | null>(
-      props.initialState?.currentEditingCell ?? null,
-    );
+    useState<MRT_Cell<D> | null>(initialState?.currentEditingCell ?? null);
   const [currentEditingRow, setCurrentEditingRow] = useState<MRT_Row<D> | null>(
-    props.initialState?.currentEditingRow ?? null,
+    initialState?.currentEditingRow ?? null,
   );
   const [isDensePadding, setIsDensePadding] = useState(
-    props.initialState?.isDensePadding ?? false,
+    initialState?.isDensePadding ?? false,
   );
   const [isFullScreen, setIsFullScreen] = useState(
-    props.initialState?.isFullScreen ?? false,
+    initialState?.isFullScreen ?? false,
   );
   const [showFilters, setShowFilters] = useState(
-    props.initialState?.showFilters ?? false,
+    initialState?.showFilters ?? false,
   );
   const [showGlobalFilter, setShowGlobalFilter] = useState(
-    props.initialState?.showGlobalFilter ?? false,
+    initialState?.showGlobalFilter ?? false,
   );
   const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: props.initialState?.pagination?.pageIndex ?? 0,
-    pageSize: props.initialState?.pagination?.pageSize ?? 10,
-    pageCount: props.initialState?.pagination?.pageCount ?? -1,
+    pageIndex: initialState?.pagination?.pageIndex ?? 0,
+    pageSize: initialState?.pagination?.pageSize ?? 10,
+    pageCount: initialState?.pagination?.pageCount ?? -1,
   });
 
   const [currentFilterTypes, setCurrentFilterTypes] = useState<{
@@ -80,7 +106,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef[]).map((c) => ({
         [c.id as string]:
           c.filter ??
-          props?.initialState?.columnFilters?.find((cf) => cf.id === c.id) ??
+          initialState?.currentFilterTypes?.[c.id] ??
           (!!c.filterSelectOptions?.length
             ? MRT_FILTER_TYPE.EQUALS
             : MRT_FILTER_TYPE.BEST_MATCH),
@@ -215,12 +241,14 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       getSortedRowModel: getSortedRowModelSync(),
       getSubRows: (originalRow: D) => originalRow.subRows,
       globalFilterType: currentGlobalFilterType,
-      idPrefix,
       onPaginationChange: (updater: any) =>
         setPagination((old) => functionalUpdate(updater, old)),
       ...props,
       columns,
       data,
+      idPrefix,
+      //@ts-ignore
+      initialState,
       state: {
         currentEditingCell,
         currentEditingRow,
@@ -246,6 +274,32 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     setShowFilters,
     setShowGlobalFilter,
   };
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !props.enablePersistantTableState) {
+      return;
+    }
+    if (!props.idPrefix && process.env.NODE_ENV !== 'production') {
+      console.warn(
+        'a unique idPrefix prop is required for persistant table state to work',
+      );
+      return;
+    }
+    const itemArgs: [string, string] = [
+      `mrt-${idPrefix}-table-state`,
+      JSON.stringify(tableInstance.getState()),
+    ];
+    if (props.persistantTableStateMode === 'localStorage') {
+      localStorage.setItem(...itemArgs);
+    } else if (props.persistantTableStateMode === 'sessionStorage') {
+      sessionStorage.setItem(...itemArgs);
+    }
+  }, [
+    props.enablePersistantTableState,
+    props.idPrefix,
+    props.persistantTableStateMode,
+    tableInstance,
+  ]);
 
   return (
     <>

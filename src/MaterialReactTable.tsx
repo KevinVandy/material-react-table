@@ -334,6 +334,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     enableExpandAll?: boolean;
     enableFullScreenToggle?: boolean;
     enablePagination?: boolean;
+    enablePersistantTableState?: boolean;
     enableRowActions?: boolean;
     enableRowNumbers?: boolean;
     enableSelectAll?: boolean;
@@ -694,6 +695,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       showGlobalFilter: boolean;
       tableInstance: MRT_TableInstance<D>;
     }) => void;
+    persistantTableStateMode?: 'localStorage' | 'sessionStorage';
     positionActionsColumn?: 'first' | 'last';
     positionPagination?: 'bottom' | 'top' | 'both';
     positionToolbarActions?: 'bottom' | 'top';
@@ -778,6 +780,7 @@ export default <D extends Record<string, any> = {}>({
   enableToolbarTop = true,
   icons,
   localization,
+  persistantTableStateMode = 'sessionStorage',
   positionActionsColumn = 'first',
   positionPagination = 'bottom',
   positionToolbarActions = 'top',
@@ -809,6 +812,7 @@ export default <D extends Record<string, any> = {}>({
     enableToolbarTop={enableToolbarTop}
     icons={{ ...MRT_Default_Icons, ...icons }}
     localization={{ ...MRT_DefaultLocalization_EN, ...localization }}
+    persistantTableStateMode={persistantTableStateMode}
     positionActionsColumn={positionActionsColumn}
     positionPagination={positionPagination}
     positionToolbarActions={positionToolbarActions}
