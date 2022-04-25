@@ -88,6 +88,7 @@ const RootPropTable = () => {
         prop: 'autoResetSorting',
         type: 'boolean',
         description: 'Reset sorting state when the data changes',
+        defaultValue: 'false',
       },
       {
         prop: 'columnResizeMode',
@@ -365,13 +366,13 @@ const RootPropTable = () => {
         defaultValue: 'true',
       },
       {
-        prop: 'enabledColumnFilterTypes',
-        type: 'Array<MRT_FILTER_TYPE>',
+        prop: 'enabledColumnFilterOptions',
+        type: 'Array<MRT_FILTER_OPTION>',
         description: 'Disable column filter types from being used',
       },
       {
-        prop: 'enabledGlobalFilterTypes',
-        type: 'Array<MRT_FILTER_TYPE>',
+        prop: 'enabledGlobalFilterOptions',
+        type: 'Array<MRT_FILTER_OPTION>',
         description: 'Disable global filter types from being used',
         defaultValue: '[bestMatchFirst, bestMatch]',
       },
@@ -381,7 +382,7 @@ const RootPropTable = () => {
         description: 'Expand all subrows on initial load',
       },
       {
-        prop: 'filterTypes',
+        prop: 'filterFns',
         type: 'Object<string, any>',
         description:
           'Override and define your own custom filter types (filter modes) and functions',

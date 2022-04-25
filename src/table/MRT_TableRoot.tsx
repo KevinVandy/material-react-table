@@ -13,11 +13,12 @@ import {
   useTableInstance,
   getCoreRowModelSync,
   ColumnDef,
+  FilterFn,
 } from '@tanstack/react-table';
 import {
   MRT_Cell,
   MRT_ColumnDef,
-  MRT_FilterType,
+  MRT_FilterFn,
   MRT_Row,
   MRT_TableInstance,
   MRT_TableState,
@@ -35,7 +36,7 @@ import {
   getAllLeafColumnDefs,
 } from '../utils';
 import { defaultFilterFNs } from '../filtersFNs';
-import { MRT_FILTER_TYPE } from '../enums';
+import { MRT_FILTER_OPTION } from '../enums';
 import { Box, Dialog, Grow } from '@mui/material';
 
 export const MRT_TableRoot = <D extends Record<string, any> = {}>(
@@ -98,25 +99,25 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     pageCount: initialState?.pagination?.pageCount ?? -1,
   });
 
-  const [currentFilterTypes, setCurrentFilterTypes] = useState<{
-    [key: string]: MRT_FilterType;
+  const [currentFilterFns, setCurrentFilterFns] = useState<{
+    [key: string]: MRT_FilterFn;
   }>(() =>
     Object.assign(
       {},
       ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef[]).map((c) => ({
         [c.id as string]:
-          c.filter ??
-          initialState?.currentFilterTypes?.[c.id] ??
+          c.filterFn ??
+          initialState?.currentFilterFns?.[c.id] ??
           (!!c.filterSelectOptions?.length
-            ? MRT_FILTER_TYPE.EQUALS
-            : MRT_FILTER_TYPE.BEST_MATCH),
+            ? MRT_FILTER_OPTION.EQUALS
+            : MRT_FILTER_OPTION.BEST_MATCH),
       })),
     ),
   );
 
-  const [currentGlobalFilterType, setCurrentGlobalFilterType] = useState(
-    props.globalFilterType ?? MRT_FILTER_TYPE.BEST_MATCH_FIRST,
-  );
+  const [currentGlobalFilterFn, setCurrentGlobalFilterFn] = useState<
+    MRT_FILTER_OPTION | FilterFn<D> | string | number | symbol
+  >(props.globalFilterFn ?? MRT_FILTER_OPTION.BEST_MATCH_FIRST);
 
   const table = useMemo(() => createTable() as unknown as Table<D>, []);
 
@@ -203,11 +204,11 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         ...displayColumns,
         ...props.columns.map((column) =>
           column.columns
-            ? createGroup(table, column, currentFilterTypes)
-            : createDataColumn(table, column, currentFilterTypes),
+            ? createGroup(table, column, currentFilterFns)
+            : createDataColumn(table, column, currentFilterFns),
         ),
       ] as ColumnDef<D>[]),
-    [table, props.columns, currentFilterTypes],
+    [table, props.columns, currentFilterFns],
   );
 
   const data: D['Row'][] = useMemo(
@@ -231,7 +232,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   const tableInstance: MRT_TableInstance<{}> = {
     ...useTableInstance(table, {
       //@ts-ignore
-      filterTypes: defaultFilterFNs,
+      filterFns: defaultFilterFNs,
       getColumnFilteredRowModel: getColumnFilteredRowModelSync(),
       getCoreRowModel: getCoreRowModelSync(),
       getExpandedRowModel: getExpandedRowModel(),
@@ -240,7 +241,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       getPaginationRowModel: getPaginationRowModel(),
       getSortedRowModel: getSortedRowModelSync(),
       getSubRows: (originalRow: D) => originalRow.subRows,
-      globalFilterType: currentGlobalFilterType,
+      globalFilterFn: currentGlobalFilterFn,
       onPaginationChange: (updater: any) =>
         setPagination((old) => functionalUpdate(updater, old)),
       ...props,
@@ -252,8 +253,8 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       state: {
         currentEditingCell,
         currentEditingRow,
-        currentFilterTypes,
-        currentGlobalFilterType,
+        currentFilterFns,
+        currentGlobalFilterFn,
         isDensePadding,
         isFullScreen,
         //@ts-ignore
@@ -267,8 +268,9 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     setCurrentEditingCell,
     //@ts-ignore
     setCurrentEditingRow,
-    setCurrentFilterTypes,
-    setCurrentGlobalFilterType,
+    setCurrentFilterFns,
+    //@ts-ignore
+    setCurrentGlobalFilterFn,
     setIsDensePadding,
     setIsFullScreen,
     setShowFilters,
@@ -304,20 +306,18 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   return (
     <>
       <Dialog
-        TransitionComponent={Grow}
         PaperComponent={Box}
+        TransitionComponent={Grow}
         disablePortal
         fullScreen
         keepMounted={false}
-        onClose={() => tableInstance.setIsFullScreen(false)}
-        open={tableInstance.getState().isFullScreen}
+        onClose={() => setIsFullScreen(false)}
+        open={isFullScreen}
         transitionDuration={400}
       >
         <MRT_TablePaper tableInstance={tableInstance} />
       </Dialog>
-      {!tableInstance.getState().isFullScreen && (
-        <MRT_TablePaper tableInstance={tableInstance} />
-      )}
+      {!isFullScreen && <MRT_TablePaper tableInstance={tableInstance} />}
     </>
   );
 };

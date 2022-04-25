@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Box, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
 import type { MRT_Header, MRT_TableInstance } from '..';
-import { MRT_FilterTypeMenu } from './MRT_FilterTypeMenu';
+import { MRT_FilterOptionMenu } from './MRT_FilterOptionMenu';
 import { MRT_ShowHideColumnsMenu } from './MRT_ShowHideColumnsMenu';
 
 export const commonMenuItemStyles = {
@@ -240,7 +240,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
               </IconButton>
             )}
           </MenuItem>,
-          <MRT_FilterTypeMenu
+          <MRT_FilterOptionMenu
             anchorEl={filterMenuAnchorEl}
             header={header}
             key={2}

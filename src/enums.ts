@@ -1,4 +1,4 @@
-export enum MRT_FILTER_TYPE {
+export enum MRT_FILTER_OPTION {
   BEST_MATCH = 'bestMatch',
   BEST_MATCH_FIRST = 'bestMatchFirst',
   CONTAINS = 'contains',

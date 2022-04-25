@@ -16,8 +16,8 @@ import {
   Tooltip,
 } from '@mui/material';
 import type { MRT_Header, MRT_TableInstance } from '..';
-import { MRT_FilterTypeMenu } from '../menus/MRT_FilterTypeMenu';
-import { MRT_FILTER_TYPE } from '../enums';
+import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
+import { MRT_FILTER_OPTION } from '../enums';
 
 interface Props {
   header: MRT_Header;
@@ -33,12 +33,12 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
       localization,
       muiTableHeadCellFilterTextFieldProps,
     },
-    setCurrentFilterTypes,
+    setCurrentFilterFns,
   } = tableInstance;
 
   const { column } = header;
 
-  const { currentFilterTypes } = getState();
+  const { currentFilterFns } = getState();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -82,9 +82,9 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
   const handleClearFilterChip = () => {
     setFilterValue('');
     column.setColumnFilterValue(undefined);
-    setCurrentFilterTypes((prev) => ({
+    setCurrentFilterFns((prev) => ({
       ...prev,
-      [header.id]: MRT_FILTER_TYPE.BEST_MATCH,
+      [header.id]: MRT_FILTER_OPTION.BEST_MATCH,
     }));
   };
 
@@ -93,16 +93,16 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
   }
 
   const filterId = `mrt-${idPrefix}-${header.id}-filter-text-field`;
-  const filterType = currentFilterTypes?.[header.id];
+  const filterFn = currentFilterFns?.[header.id];
   const isSelectFilter = !!column.filterSelectOptions;
   const filterChipLabel =
-    !(filterType instanceof Function) &&
-    [MRT_FILTER_TYPE.EMPTY, MRT_FILTER_TYPE.NOT_EMPTY].includes(
-      filterType as MRT_FILTER_TYPE,
+    !(filterFn instanceof Function) &&
+    [MRT_FILTER_OPTION.EMPTY, MRT_FILTER_OPTION.NOT_EMPTY].includes(
+      filterFn as MRT_FILTER_OPTION,
     )
       ? //@ts-ignore
         localization[
-          `filter${filterType.charAt(0).toUpperCase() + filterType.slice(1)}`
+          `filter${filterFn.charAt(0).toUpperCase() + filterFn.slice(1)}`
         ]
       : '';
   const filterPlaceholder = localization.filterByColumn?.replace(
@@ -125,14 +125,14 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
         }}
         helperText={
           <label htmlFor={filterId}>
-            {filterType instanceof Function
+            {filterFn instanceof Function
               ? localization.filterMode.replace(
                   '{filterType}',
                   // @ts-ignore
                   localization[
                     `filter${
-                      filterType.name.charAt(0).toUpperCase() +
-                      filterType.name.slice(1)
+                      filterFn.name.charAt(0).toUpperCase() +
+                      filterFn.name.slice(1)
                     }`
                   ] ?? '',
                 ) ?? ''
@@ -141,7 +141,7 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
                   // @ts-ignore
                   localization[
                     `filter${
-                      filterType.charAt(0).toUpperCase() + filterType.slice(1)
+                      filterFn.charAt(0).toUpperCase() + filterFn.slice(1)
                     }`
                   ],
                 )}
@@ -248,7 +248,7 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
           );
         })}
       </TextField>
-      <MRT_FilterTypeMenu
+      <MRT_FilterOptionMenu
         anchorEl={anchorEl}
         header={header}
         setAnchorEl={setAnchorEl}

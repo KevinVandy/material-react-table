@@ -60,20 +60,18 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
       : localization.sortedByColumnAsc.replace('{column}', column.header)
     : localization.unsorted;
 
-  const filterType = getState()?.currentFilterTypes?.[header.id];
+  const filterFn = getState()?.currentFilterFns?.[header.id];
 
   const filterTooltip = !!column.getColumnFilterValue()
     ? localization.filteringByColumn
         .replace('{column}', String(column.header))
         .replace(
           '{filterType}',
-          filterType instanceof Function
+          filterFn instanceof Function
             ? ''
             : // @ts-ignore
               localization[
-                `filter${
-                  filterType.charAt(0).toUpperCase() + filterType.slice(1)
-                }`
+                `filter${filterFn.charAt(0).toUpperCase() + filterFn.slice(1)}`
               ],
         )
         .replace('{filterValue}', column.getColumnFilterValue() as string)

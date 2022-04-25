@@ -13,7 +13,7 @@ import {
   TextField,
   Tooltip,
 } from '@mui/material';
-import { MRT_FilterTypeMenu } from '../menus/MRT_FilterTypeMenu';
+import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 import { MRT_TableInstance } from '..';
 
 interface Props {
@@ -105,7 +105,7 @@ export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
         {...textFieldProps}
         sx={{ justifySelf: 'end', ...textFieldProps?.sx }}
       />
-      <MRT_FilterTypeMenu
+      <MRT_FilterOptionMenu
         anchorEl={anchorEl}
         setAnchorEl={setAnchorEl}
         tableInstance={tableInstance}

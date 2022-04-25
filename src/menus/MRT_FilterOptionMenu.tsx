@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react';
 import { Menu, MenuItem } from '@mui/material';
-import type { MRT_FilterType, MRT_Header, MRT_TableInstance } from '..';
-import { MRT_FILTER_TYPE } from '../enums';
+import type { MRT_FilterFn, MRT_Header, MRT_TableInstance } from '..';
+import { MRT_FILTER_OPTION } from '../enums';
 import {
   bestMatch,
   bestMatchFirst,
@@ -30,7 +30,7 @@ interface Props {
   tableInstance: MRT_TableInstance;
 }
 
-export const MRT_FilterTypeMenu: FC<Props> = ({
+export const MRT_FilterOptionMenu: FC<Props> = ({
   anchorEl,
   header,
   onSelect,
@@ -39,16 +39,16 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
 }) => {
   const {
     getState,
-    options: { enabledGlobalFilterTypes, localization },
-    setCurrentFilterTypes,
-    setCurrentGlobalFilterType,
+    options: { enabledGlobalFilterOptions, localization },
+    setCurrentFilterFns,
+    setCurrentGlobalFilterFn,
   } = tableInstance;
 
-  const { isDensePadding, currentFilterTypes, currentGlobalFilterType } =
+  const { isDensePadding, currentFilterFns, currentGlobalFilterFn } =
     getState();
 
-  const filterTypes: {
-    type: MRT_FILTER_TYPE;
+  const filterOptions: {
+    type: MRT_FILTER_OPTION;
     label: string;
     divider: boolean;
     fn: Function;
@@ -56,104 +56,106 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
     () =>
       [
         {
-          type: MRT_FILTER_TYPE.BEST_MATCH_FIRST,
+          type: MRT_FILTER_OPTION.BEST_MATCH_FIRST,
           label: localization.filterBestMatchFirst,
           divider: false,
           fn: bestMatchFirst,
         },
         {
-          type: MRT_FILTER_TYPE.BEST_MATCH,
+          type: MRT_FILTER_OPTION.BEST_MATCH,
           label: localization.filterBestMatch,
           divider: !!header,
           fn: bestMatch,
         },
         {
-          type: MRT_FILTER_TYPE.CONTAINS,
+          type: MRT_FILTER_OPTION.CONTAINS,
           label: localization.filterContains,
           divider: false,
           fn: contains,
         },
         {
-          type: MRT_FILTER_TYPE.STARTS_WITH,
+          type: MRT_FILTER_OPTION.STARTS_WITH,
           label: localization.filterStartsWith,
           divider: false,
           fn: startsWith,
         },
         {
-          type: MRT_FILTER_TYPE.ENDS_WITH,
+          type: MRT_FILTER_OPTION.ENDS_WITH,
           label: localization.filterEndsWith,
           divider: true,
           fn: endsWith,
         },
         {
-          type: MRT_FILTER_TYPE.EQUALS,
+          type: MRT_FILTER_OPTION.EQUALS,
           label: localization.filterEquals,
           divider: false,
           fn: equals,
         },
         {
-          type: MRT_FILTER_TYPE.NOT_EQUALS,
+          type: MRT_FILTER_OPTION.NOT_EQUALS,
           label: localization.filterNotEquals,
           divider: true,
           fn: notEquals,
         },
         {
-          type: MRT_FILTER_TYPE.GREATER_THAN,
+          type: MRT_FILTER_OPTION.GREATER_THAN,
           label: localization.filterGreaterThan,
           divider: false,
           fn: greaterThan,
         },
         {
-          type: MRT_FILTER_TYPE.LESS_THAN,
+          type: MRT_FILTER_OPTION.LESS_THAN,
           label: localization.filterLessThan,
           divider: true,
           fn: lessThan,
         },
         {
-          type: MRT_FILTER_TYPE.EMPTY,
+          type: MRT_FILTER_OPTION.EMPTY,
           label: localization.filterEmpty,
           divider: false,
           fn: empty,
         },
         {
-          type: MRT_FILTER_TYPE.NOT_EMPTY,
+          type: MRT_FILTER_OPTION.NOT_EMPTY,
           label: localization.filterNotEmpty,
           divider: false,
           fn: notEmpty,
         },
       ].filter((filterType) =>
         header
-          ? !header.column.enabledColumnFilterTypes ||
-            header.column.enabledColumnFilterTypes.includes(filterType.type)
-          : (!enabledGlobalFilterTypes ||
-              enabledGlobalFilterTypes.includes(filterType.type)) &&
+          ? !header.column.enabledColumnFilterOptions ||
+            header.column.enabledColumnFilterOptions.includes(filterType.type)
+          : (!enabledGlobalFilterOptions ||
+              enabledGlobalFilterOptions.includes(filterType.type)) &&
             [
-              MRT_FILTER_TYPE.BEST_MATCH_FIRST,
-              MRT_FILTER_TYPE.BEST_MATCH,
+              MRT_FILTER_OPTION.BEST_MATCH_FIRST,
+              MRT_FILTER_OPTION.BEST_MATCH,
             ].includes(filterType.type),
       ),
     [],
   );
 
-  const handleSelectFilterType = (value: MRT_FILTER_TYPE) => {
+  const handleSelectFilterType = (value: MRT_FILTER_OPTION) => {
     if (header) {
-      setCurrentFilterTypes((prev: { [key: string]: MRT_FilterType }) => ({
+      setCurrentFilterFns((prev: { [key: string]: MRT_FilterFn }) => ({
         ...prev,
         [header.id]: value,
       }));
-      if ([MRT_FILTER_TYPE.EMPTY, MRT_FILTER_TYPE.NOT_EMPTY].includes(value)) {
+      if (
+        [MRT_FILTER_OPTION.EMPTY, MRT_FILTER_OPTION.NOT_EMPTY].includes(value)
+      ) {
         header.column.setColumnFilterValue(' ');
       }
     } else {
-      setCurrentGlobalFilterType(value);
+      setCurrentGlobalFilterFn(value);
     }
     setAnchorEl(null);
     onSelect?.();
   };
 
   const filterType = !!header
-    ? currentFilterTypes[header.id]
-    : currentGlobalFilterType;
+    ? currentFilterFns[header.id]
+    : currentGlobalFilterFn;
 
   return (
     <Menu
@@ -165,7 +167,7 @@ export const MRT_FilterTypeMenu: FC<Props> = ({
         dense: isDensePadding,
       }}
     >
-      {filterTypes.map(({ type, label, divider, fn }, index) => (
+      {filterOptions.map(({ type, label, divider, fn }, index) => (
         <MenuItem
           divider={divider}
           key={index}

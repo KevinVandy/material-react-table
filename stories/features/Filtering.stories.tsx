@@ -89,7 +89,7 @@ export const FilterTypes: Story<MaterialReactTableProps> = () => (
       {
         header: 'Age',
         id: 'age',
-        filter: 'startsWith',
+        filterFn: 'startsWith',
       },
       {
         header: 'Gender',
@@ -128,8 +128,8 @@ export const DisableSomeFilterTypesForCertainColumns: Story<
       {
         header: 'Last Name',
         id: 'lastName',
-        enabledColumnFilterTypes: ['startsWith', 'endsWith'],
-        filter: 'startsWith',
+        enabledColumnFilterOptions: ['startsWith', 'endsWith'],
+        filterFn: 'startsWith',
       },
       {
         header: 'Age',
@@ -138,8 +138,8 @@ export const DisableSomeFilterTypesForCertainColumns: Story<
       {
         header: 'Gender',
         id: 'gender',
-        enabledColumnFilterTypes: ['equals', 'notEquals'],
-        filter: 'equals',
+        enabledColumnFilterOptions: ['equals', 'notEquals'],
+        filterFn: 'equals',
       },
       {
         header: 'Address',
@@ -210,7 +210,7 @@ export const CustomFilterFunction: Story<MaterialReactTableProps> = () => (
       {
         header: 'Gender',
         id: 'gender',
-        filter: (rows, _columnIds, filterValue) =>
+        filterFn: (rows, _columnIds, filterValue) =>
           rows.filter((row) =>
             row.values['gender']
               .toLowerCase()
@@ -224,7 +224,7 @@ export const CustomFilterFunction: Story<MaterialReactTableProps> = () => (
       {
         header: 'State',
         id: 'state',
-        filter: (rows, _columnIds, filterValue) =>
+        filterFn: (rows, _columnIds, filterValue) =>
           rows.filter((row) =>
             row.values['state']
               .toLowerCase()
@@ -273,7 +273,7 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
             <MenuItem value="Other">Other</MenuItem>
           </TextField>
         ),
-        filter: (rows, _columnIds, filterValue) =>
+        filterFn: (rows, _columnIds, filterValue) =>
           rows.filter(
             (row) =>
               row.values['gender'].toLowerCase() === filterValue.toLowerCase(),

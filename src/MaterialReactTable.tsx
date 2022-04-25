@@ -31,7 +31,8 @@ import {
   Column,
   ColumnDef,
   DefaultGenerics,
-  FilterType,
+  FilterFn,
+  FilterFnOption,
   Header,
   HeaderGroup,
   Options,
@@ -44,20 +45,21 @@ import {
 } from '@tanstack/react-table';
 import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
-import { MRT_FILTER_TYPE } from './enums';
+import { MRT_FILTER_OPTION } from './enums';
 import { MRT_TableRoot } from './table/MRT_TableRoot';
 
 export type MRT_TableOptions<D extends Record<string, any> = {}> = Partial<
   Omit<
     Options<D>,
-    'columns' | 'data' | 'initialState' | 'state' | 'expandRowsFn'
+    'columns' | 'data' | 'initialState' | 'state' | 'expandRowsFn' | 'filterFns'
   >
 > & {
   columns: MRT_ColumnDef<D>[];
   data: D[];
+  expandRowsFn?: (dataRow: D) => D[];
+  filterFns?: MRT_FILTER_OPTION | FilterFn<D> | string | number | symbol;
   initialState?: Partial<MRT_TableState<D>>;
   state?: Partial<MRT_TableState<D>>;
-  expandRowsFn?: (dataRow: D) => D[];
 };
 
 export interface MRT_RowModel<D extends Record<string, any> = {}> {
@@ -96,17 +98,16 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   options: MaterialReactTableProps<D> & {
     icons: MRT_Icons;
     idPrefix: string;
-    filterTypes: { [key in MRT_FILTER_TYPE]: any };
     localization: MRT_Localization;
   };
   setCurrentEditingCell: Dispatch<SetStateAction<MRT_Cell<D> | null>>;
   setCurrentEditingRow: Dispatch<SetStateAction<MRT_Row<D> | null>>;
-  setCurrentFilterTypes: Dispatch<
+  setCurrentFilterFns: Dispatch<
     SetStateAction<{
-      [key: string]: MRT_FilterType;
+      [key: string]: MRT_FilterFn<D>;
     }>
   >;
-  setCurrentGlobalFilterType: Dispatch<SetStateAction<MRT_FILTER_TYPE>>;
+  setCurrentGlobalFilterFn: Dispatch<SetStateAction<MRT_FilterFn<D>>>;
   setIsDensePadding: Dispatch<SetStateAction<boolean>>;
   setIsFullScreen: Dispatch<SetStateAction<boolean>>;
   setShowFilters: Dispatch<SetStateAction<boolean>>;
@@ -119,8 +120,8 @@ export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
 > & {
   currentEditingCell: MRT_Cell<D> | null;
   currentEditingRow: MRT_Row<D> | null;
-  currentFilterTypes: Record<string, string | Function>;
-  currentGlobalFilterType: Record<string, string | Function>;
+  currentFilterFns: Record<string, string | Function>;
+  currentGlobalFilterFn: Record<string, string | Function>;
   isDensePadding: boolean;
   isFullScreen: boolean;
   showFilters: boolean;
@@ -130,23 +131,19 @@ export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
 
 export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
   ColumnDef<D>,
-  'header' | 'footer' | 'columns'
+  'header' | 'footer' | 'columns' | 'filterFn'
 > & {
   Edit?: ({
     cell,
     tableInstance,
-  }: // onChange,
-  {
+  }: {
     cell: MRT_Cell<D>;
     tableInstance: MRT_TableInstance<D>;
-    // onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   }) => ReactNode;
   Filter?: ({
-    // onChange,
     header,
     tableInstance,
   }: {
-    // onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     header: MRT_Header<D>;
     tableInstance: MRT_TableInstance<D>;
   }) => ReactNode;
@@ -176,8 +173,8 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;
   enableEditing?: boolean;
-  enabledColumnFilterTypes?: (MRT_FILTER_TYPE | string)[];
-  filter?: MRT_FilterType | string | FilterType<D>;
+  enabledColumnFilterOptions?: (MRT_FILTER_OPTION | string)[];
+  filterFn?: MRT_FilterFn;
   filterSelectOptions?: (string | { text: string; value: string })[];
   footer?: string;
   header: string;
@@ -322,7 +319,13 @@ export type MRT_Cell<D extends Record<string, any> = {}> = Omit<
   row: MRT_Row<D>;
 };
 
-export type MRT_FilterType = MRT_FILTER_TYPE | Function;
+export type MRT_FilterFn<D extends Record<string, any> = {}> =
+  | FilterFn<D>
+  | FilterFnOption<D>
+  | MRT_FILTER_OPTION
+  | number
+  | string
+  | symbol;
 
 export type MaterialReactTableProps<D extends Record<string, any> = {}> =
   MRT_TableOptions<D> & {
@@ -344,8 +347,8 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     enableToolbarBottom?: boolean;
     enableToolbarInternalActions?: boolean;
     enableToolbarTop?: boolean;
-    enabledGlobalFilterTypes?: (MRT_FILTER_TYPE | string)[];
-    filterTypes?: { [key in MRT_FILTER_TYPE]: any };
+    enabledColumnFilterOptions?: (MRT_FILTER_OPTION | string)[];
+    enabledGlobalFilterOptions?: (MRT_FILTER_OPTION | string)[];
     icons?: Partial<MRT_Icons>;
     idPrefix?: string;
     isLoading?: boolean;
@@ -757,6 +760,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
 
 export default <D extends Record<string, any> = {}>({
   autoResetExpanded = false,
+  autoResetSorting = false,
   columnResizeMode = 'onEnd',
   editingMode = 'row',
   enableColumnActions = true,
@@ -789,6 +793,7 @@ export default <D extends Record<string, any> = {}>({
 }: MaterialReactTableProps<D>) => (
   <MRT_TableRoot
     autoResetExpanded={autoResetExpanded}
+    autoResetSorting={autoResetSorting}
     columnResizeMode={columnResizeMode}
     editingMode={editingMode}
     enableColumnActions={enableColumnActions}

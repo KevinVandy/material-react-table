@@ -1,6 +1,6 @@
 import { ColumnDef, Table } from '@tanstack/react-table';
-import { MRT_ColumnDef, MRT_FilterType } from '.';
-import { MRT_FILTER_TYPE } from './enums';
+import { MRT_ColumnDef, MRT_FilterFn } from '.';
+import { MRT_FILTER_OPTION } from './enums';
 import { defaultFilterFNs } from './filtersFNs';
 
 export const getAllLeafColumnDefs = (
@@ -24,31 +24,31 @@ export const getAllLeafColumnDefs = (
 export const createGroup = <D extends Record<string, any> = {}>(
   table: Table<D>,
   column: MRT_ColumnDef<D>,
-  currentFilterTypes: { [key: string]: MRT_FilterType },
+  currentFilterFns: { [key: string]: MRT_FilterFn },
 ): ColumnDef<D> =>
   table.createGroup({
     ...column,
     columns: column?.columns?.map?.((col) =>
       col.columns
-        ? createGroup<D>(table, col, currentFilterTypes)
-        : createDataColumn(table, col, currentFilterTypes),
+        ? createGroup<D>(table, col, currentFilterFns)
+        : createDataColumn(table, col, currentFilterFns),
     ),
   } as any);
 
 export const createDataColumn = <D extends Record<string, any> = {}>(
   table: Table<D>,
   column: MRT_ColumnDef<D>,
-  currentFilterTypes: { [key: string]: MRT_FilterType },
+  currentFilterFns: { [key: string]: MRT_FilterFn },
 ): ColumnDef<D> => // @ts-ignore
   table.createDataColumn(column.id, {
     filterFn:
-      currentFilterTypes[column.id] instanceof Function
-        ? currentFilterTypes[column.id]
-        : defaultFilterFNs[currentFilterTypes[column.id] as MRT_FILTER_TYPE],
+      currentFilterFns[column.id] instanceof Function
+        ? currentFilterFns[column.id]
+        : defaultFilterFNs[currentFilterFns[column.id] as MRT_FILTER_OPTION],
     ...column,
   }) as any;
 
 export const createDisplayColumn = <D extends Record<string, any> = {}>(
   table: Table<D>,
   column: Omit<MRT_ColumnDef<D>, 'header'> & { header?: string },
-): ColumnDef<D> => table.createDisplayColumn(column);
+): ColumnDef<D> => table.createDisplayColumn(column as ColumnDef<D>);
