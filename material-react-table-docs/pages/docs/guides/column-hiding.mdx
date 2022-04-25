@@ -11,7 +11,6 @@ _Enabled by default, easy to opt out, easy to customize_
 
 ### Relevant Props
 
-- autoResetHiddenColumns - [More Info](https://react-table.tanstack.com/docs/api/useTable#table-options)
 - enableHiding
 - initialState.hiddenColumns
 
@@ -31,9 +30,9 @@ If you don't want this feature to be enabled at all, you can disable it by setti
 <MaterialReactTable columns={columns} data={data} enableHiding={false} />
 ```
 
-Alternatively, you can disable hiding specific columns by setting the `enableHiding` column option to `false`.
+Alternatively, you can disable hiding specific columns by setting the `enableHiding` column option to `false` per column.
 
-If you want to hide certain columns by default, you can specify an column visibility in the `initialState.columnVisibility` prop. This can also be useful for making the column hiding state persistant.
+If you want to hide certain columns by default, you can specify an column visibility in the `initialState.columnVisibility` prop. This can also be useful for making the column hiding state persistent.
 
 <Example />
 

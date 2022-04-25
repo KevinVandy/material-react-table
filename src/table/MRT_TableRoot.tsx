@@ -49,21 +49,21 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   );
 
   const initialState: Partial<MRT_TableState<D>> = useMemo(() => {
-    if (!props.enablePersistantTableState || !props.idPrefix) {
+    if (!props.enablePersistentState || !props.idPrefix) {
       return props.initialState;
     }
     if (typeof window === 'undefined') {
       if (process.env.NODE_ENV !== 'production') {
         console.error(
-          'The MRT Persistant Table State feature is not supported if using SSR, but you can wrap your <MaterialReactTable /> in a MUI <NoSsr> tags to let it work',
+          'The MRT Persistent Table State feature is not supported if using SSR, but you can wrap your <MaterialReactTable /> in a MUI <NoSsr> tags to let it work',
         );
       }
       return props.initialState;
     }
     const storedState =
-      props.persistantTableStateMode === 'localStorage'
+      props.persistentStateMode === 'localStorage'
         ? localStorage.getItem(`mrt-${idPrefix}-table-state`)
-        : props.persistantTableStateMode === 'sessionStorage'
+        : props.persistentStateMode === 'sessionStorage'
         ? sessionStorage.getItem(`mrt-${idPrefix}-table-state`)
         : '{}';
     if (storedState) {
@@ -276,12 +276,12 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   };
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !props.enablePersistantTableState) {
+    if (typeof window === 'undefined' || !props.enablePersistentState) {
       return;
     }
     if (!props.idPrefix && process.env.NODE_ENV !== 'production') {
       console.warn(
-        'a unique idPrefix prop is required for persistant table state to work',
+        'a unique idPrefix prop is required for persistent table state to work',
       );
       return;
     }
@@ -289,15 +289,15 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       `mrt-${idPrefix}-table-state`,
       JSON.stringify(tableInstance.getState()),
     ];
-    if (props.persistantTableStateMode === 'localStorage') {
+    if (props.persistentStateMode === 'localStorage') {
       localStorage.setItem(...itemArgs);
-    } else if (props.persistantTableStateMode === 'sessionStorage') {
+    } else if (props.persistentStateMode === 'sessionStorage') {
       sessionStorage.setItem(...itemArgs);
     }
   }, [
-    props.enablePersistantTableState,
+    props.enablePersistentState,
     props.idPrefix,
-    props.persistantTableStateMode,
+    props.persistentStateMode,
     tableInstance,
   ]);
 

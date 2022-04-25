@@ -14,7 +14,8 @@ import {
 const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
   color: theme.palette.primary.dark,
   cursor: 'pointer',
-  fontWeight: 'bold',
+  fontSize: '1rem',
+  height: '2.5rem',
   padding: '1rem',
   transition: 'all .3s ease',
   whiteSpace: 'nowrap',
@@ -29,6 +30,7 @@ const ListItemLevel2 = styled(ListItemLevel1)({
 
 const ListItemHeader = styled(MuiListItem)({
   padding: '1rem',
+  height: '2.5rem',
   whiteSpace: 'nowrap',
 });
 
@@ -39,7 +41,7 @@ const navItems = [
   },
   {
     href: '/about',
-    label: 'About & FAQ',
+    label: 'About',
   },
   {
     title: 'Getting Started',
@@ -135,6 +137,10 @@ const navItems = [
         href: '/docs/guides/sorting',
         label: 'Sorting',
       },
+      {
+        href: '/docs/guides/sticky-header',
+        label: 'Sticky Header',
+      },
     ],
   },
   {
@@ -161,6 +167,14 @@ const navItems = [
         label: 'Detail Panel (Expanding)',
       },
       {
+        href: '/docs/guides/expanded-rows',
+        label: 'Expanded Rows (Sub-Rows)',
+      },
+      {
+        href: '/docs/guides/persistent-state',
+        label: 'Persistent State',
+      },
+      {
         href: '/docs/guides/row-actions',
         label: 'Row Actions (Buttons)',
       },
@@ -179,11 +193,11 @@ const navItems = [
     ],
   },
   {
-    title: 'Advanced Guides',
+    title: 'Other Advanced Guides',
     items: [
       {
-        href: '/docs/guides/persistent-state',
-        label: 'Persistent State',
+        href: '/docs/guides/typescript',
+        label: 'TypeScript Usage',
       },
     ],
   },

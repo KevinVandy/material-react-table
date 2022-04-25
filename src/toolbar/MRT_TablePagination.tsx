@@ -39,10 +39,7 @@ export const MRT_TablePagination: FC<Props> = ({ tableInstance }) => {
       }}
       component="div"
       count={getPrePaginationRowModel().rows.length}
-      onPageChange={(_: any, newPage: number) => {
-        console.log('newPage', newPage);
-        setPageIndex(newPage);
-      }}
+      onPageChange={(_: any, newPage: number) => setPageIndex(newPage)}
       onRowsPerPageChange={handleChangeRowsPerPage}
       page={pageIndex}
       rowsPerPage={pageSize}

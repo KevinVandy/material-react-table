@@ -7,7 +7,7 @@ import MaterialReactTable, {
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
-  title: 'Features/Persistant State',
+  title: 'Features/Persistent State',
   parameters: {
     status: {
       type: 'stable',
@@ -53,28 +53,28 @@ const data = [...Array(100)].map((_) => ({
   state: faker.address.state(),
 }));
 
-export const PersistantEnabledLocal: Story<MaterialReactTableProps> = () => (
+export const PersistentEnabledLocal: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     enableColumnResizing
-    enablePersistantTableState
+    enablePersistentState
     enablePinning
     enableRowSelection
     idPrefix="my-table"
   />
 );
 
-export const PersistantEnabledSession: Story<MaterialReactTableProps> = () => (
+export const PersistentEnabledSession: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     enableColumnResizing
-    enablePersistantTableState
+    enablePersistentState
     enablePinning
     enableRowSelection
     enableEditing
     idPrefix="my-table"
-    persistantTableStateMode="sessionStorage"
+    persistentStateMode="sessionStorage"
   />
 );
