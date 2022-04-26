@@ -14,10 +14,10 @@ export const MRT_Table: FC<Props> = ({ pinned, tableInstance }) => {
   const {
     getTableProps,
     options: {
-      muiTableProps,
-      enableTableHead,
-      enableTableFooter,
       enableStickyHeader,
+      enableTableFooter,
+      enableTableHead,
+      muiTableProps,
     },
   } = tableInstance;
 

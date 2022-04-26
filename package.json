@@ -1,5 +1,5 @@
 {
-  "version": "0.7.5",
+  "version": "0.7.6",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI implementation of react-table, inspired by material-table and the MUI X DataGrid, written from the ground up in TypeScript.",
@@ -61,7 +61,7 @@
     "@etchteam/storybook-addon-status": "^4.2.1",
     "@faker-js/faker": "^6.2.0",
     "@mui/icons-material": "^5.6.2",
-    "@mui/material": "^5.6.2",
+    "@mui/material": "^5.6.3",
     "@size-limit/preset-small-lib": "^7.0.8",
     "@storybook/addon-a11y": "^6.4.22",
     "@storybook/addon-actions": "^6.4.22",
@@ -97,7 +97,7 @@
     "react": ">=16.8"
   },
   "dependencies": {
-    "@tanstack/react-table": "^8.0.0-alpha.47",
+    "@tanstack/react-table": "^8.0.0-alpha.48",
     "match-sorter": "^6.3.1"
   }
 }

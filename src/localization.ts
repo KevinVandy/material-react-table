@@ -56,6 +56,7 @@ export interface MRT_Localization {
   toggleSelectRow: string;
   ungroupByColumn: string;
   unpin: string;
+  unpinAll: string;
   unsorted: string;
 }
 
@@ -118,5 +119,6 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   toggleSelectRow: 'Toggle select row',
   ungroupByColumn: 'Ungroup by {column}',
   unpin: 'Unpin',
+  unpinAll: 'Unpin all',
   unsorted: 'Unsorted',
 };

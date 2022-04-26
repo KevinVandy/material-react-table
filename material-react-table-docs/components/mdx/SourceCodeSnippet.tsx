@@ -162,6 +162,7 @@ export const SourceCodeSnippet: FC<Props> = ({
                           paddingRight: '2ch',
                           paddingLeft: `${4 - String(i + 1).length}ch`,
                           color: theme.palette.text.secondary,
+                          userSelect: 'none',
                         }}
                       >
                         {i + 1}

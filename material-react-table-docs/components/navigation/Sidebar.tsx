@@ -159,8 +159,20 @@ const navItems = [
         label: 'Column Resizing',
       },
       {
+        href: '/docs/guides/column-ordering',
+        label: 'Column Ordering',
+      },
+      {
+        href: '/docs/guides/column-pinning',
+        label: 'Column Pinning',
+      },
+      {
         href: '/docs/guides/customize-toolbars',
         label: 'Customize Toolbars',
+      },
+      {
+        href: '/docs/guides/editing',
+        label: 'Data Editing (Editable)',
       },
       {
         href: '/docs/guides/detail-panel',
@@ -177,10 +189,6 @@ const navItems = [
       {
         href: '/docs/guides/row-actions',
         label: 'Row Actions (Buttons)',
-      },
-      {
-        href: '/docs/guides/row-editing',
-        label: 'Row Editing (Editable)',
       },
       {
         href: '/docs/guides/row-numbers',

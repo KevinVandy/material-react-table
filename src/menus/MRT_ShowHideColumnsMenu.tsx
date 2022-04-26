@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react';
 import { Button, Menu, Divider, Box } from '@mui/material';
 import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
-import { MRT_TableInstance } from '..';
+import { MRT_Column, MRT_TableInstance } from '..';
 
 interface Props {
   anchorEl: HTMLElement | null;
@@ -24,7 +24,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
     getState,
     toggleAllColumnsVisible,
     getAllLeafColumns,
-    options: { localization },
+    options: { localization, enablePinning },
   } = tableInstance;
 
   const { isDensePadding } = getState();
@@ -40,14 +40,16 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
     [getAllColumns()],
   );
 
-  const allDataColumns = useMemo(() => {
+  const allDataColumns: (MRT_Column | null)[] = useMemo(() => {
     const dataColumns = getAllColumns().filter(
       (col) => col.columnDefType !== 'display',
     );
     return getIsSomeColumnsPinned()
       ? [
           ...dataColumns.filter((c) => c.getIsPinned() === 'left'),
+          null,
           ...dataColumns.filter((c) => c.getIsPinned() === false),
+          null,
           ...dataColumns.filter((c) => c.getIsPinned() === 'right'),
         ]
       : dataColumns;
@@ -78,6 +80,14 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
             {localization.hideAll}
           </Button>
         )}
+        {!isSubMenu && enablePinning && (
+          <Button
+            disabled={!getIsSomeColumnsPinned()}
+            onClick={() => tableInstance.setColumnPinning({})}
+          >
+            {localization.unpinAll}
+          </Button>
+        )}
         <Button
           disabled={getIsAllColumnsVisible()}
           onClick={() => toggleAllColumnsVisible(true)}
@@ -95,14 +105,18 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
         />
       ))}
       <Divider />
-      {allDataColumns.map((column, index) => (
-        <MRT_ShowHideColumnsMenuItems
-          column={column}
-          isSubMenu={isSubMenu}
-          key={`${index}-${column.id}`}
-          tableInstance={tableInstance}
-        />
-      ))}
+      {allDataColumns.map((column, index) =>
+        column ? (
+          <MRT_ShowHideColumnsMenuItems
+            column={column}
+            isSubMenu={isSubMenu}
+            key={`${index}-${column.id}`}
+            tableInstance={tableInstance}
+          />
+        ) : (
+          <Divider key={`${index}-divider`} />
+        ),
+      )}
     </Menu>
   );
 };

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { FormControlLabel, MenuItem, Switch } from '@mui/material';
 import type { MRT_Column, MRT_TableInstance } from '..';
-import { commonMenuItemStyles } from './MRT_ColumnActionMenu';
+import { MRT_ColumnPinningButtons } from '../buttons/MRT_ColumnPinningButtons';
 
 interface Props {
   column: MRT_Column;
@@ -16,7 +16,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
 }) => {
   const {
     getState,
-    options: { onToggleColumnVisibility },
+    options: { onToggleColumnVisibility, enablePinning },
   } = tableInstance;
 
   const { columnVisibility } = getState();
@@ -44,8 +44,20 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
   return (
     <>
       <MenuItem
-        sx={{ ...commonMenuItemStyles, pl: `${(column.depth + 0.5) * 2}rem` }}
+        sx={{
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          my: 0,
+          pl: `${(column.depth + 0.5) * 2}rem`,
+          py: '6px',
+        }}
       >
+        {!isSubMenu && enablePinning && (
+          <MRT_ColumnPinningButtons
+            column={column}
+            tableInstance={tableInstance}
+          />
+        )}
         <FormControlLabel
           componentsProps={{ typography: { sx: { marginBottom: 0 } } }}
           checked={switchChecked}

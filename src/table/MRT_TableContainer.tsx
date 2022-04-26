@@ -30,7 +30,6 @@ interface Props {
 export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
   const {
     getCenterTableWidth,
-    getIsSomeColumnsPinned,
     getLeftTableWidth,
     getRightTableWidth,
     getState,
@@ -42,7 +41,7 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
     },
   } = tableInstance;
 
-  const { isFullScreen, columnPinning } = getState();
+  const { isFullScreen } = getState();
 
   const [totalToolbarHeight, setTotalToolbarHeight] = useState(0);
 
@@ -67,6 +66,9 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
     setTotalToolbarHeight(topToolbarHeight + bottomToolbarHeight);
   });
 
+  const isSomeColumnsPinnedLeft = !!tableInstance.getLeftFlatHeaders().length;
+  const isSomeColumnsPinnedRight = !!tableInstance.getRightFlatHeaders().length;
+
   return (
     <TableContainer
       {...tableContainerProps}
@@ -84,7 +86,8 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
           : undefined,
       }}
     >
-      {enablePinning && getIsSomeColumnsPinned() ? (
+      {(enablePinning && isSomeColumnsPinnedLeft) ||
+      isSomeColumnsPinnedRight ? (
         <Box
           sx={{
             display: 'grid',
@@ -96,13 +99,20 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
               commonBoxStyles({
                 pinned: 'left',
                 theme,
-                visible: !!columnPinning.left?.length,
+                visible: isSomeColumnsPinnedLeft,
               })
             }
           >
             <MRT_Table pinned="left" tableInstance={tableInstance} />
           </Box>
-          <Box sx={(theme: Theme) => commonBoxStyles({ theme })}>
+          <Box
+            sx={(theme: Theme) =>
+              commonBoxStyles({
+                theme,
+                visible: !!tableInstance.getCenterFlatHeaders().length,
+              })
+            }
+          >
             <MRT_Table pinned="center" tableInstance={tableInstance} />
           </Box>
           <Box
@@ -110,7 +120,7 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
               commonBoxStyles({
                 pinned: 'right',
                 theme,
-                visible: !!columnPinning.right?.length,
+                visible: isSomeColumnsPinnedRight,
               })
             }
           >

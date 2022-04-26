@@ -1,19 +1,19 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
+  ColumnDef,
+  FilterFn,
   PaginationState,
   Table,
   createTable,
   functionalUpdate,
   getColumnFilteredRowModelSync,
+  getCoreRowModelSync,
   getExpandedRowModel,
   getGlobalFilteredRowModelSync,
   getGroupedRowModelSync,
   getPaginationRowModel,
   getSortedRowModelSync,
   useTableInstance,
-  getCoreRowModelSync,
-  ColumnDef,
-  FilterFn,
 } from '@tanstack/react-table';
 import {
   MRT_Cell,
