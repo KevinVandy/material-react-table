@@ -30,7 +30,6 @@ import {
   Cell,
   Column,
   ColumnDef,
-  DefaultGenerics,
   FilterFn,
   FilterFnOption,
   Header,
@@ -39,6 +38,7 @@ import {
   Overwrite,
   PaginationState,
   Row,
+  TableGenerics,
   TableInstance,
   TableState,
   VisibilityState,
@@ -71,7 +71,7 @@ export interface MRT_RowModel<D extends Record<string, any> = {}> {
 export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   TableInstance<
     Overwrite<
-      Partial<DefaultGenerics>,
+      Partial<TableGenerics>,
       {
         Row: D;
       }
@@ -774,6 +774,7 @@ export default <D extends Record<string, any> = {}>({
   enableHiding = true,
   enableMultiRowSelection = true,
   enablePagination = true,
+  enablePinning = false,
   enableSelectAll = true,
   enableSorting = true,
   enableStickyHeader = true,
@@ -797,8 +798,8 @@ export default <D extends Record<string, any> = {}>({
     columnResizeMode={columnResizeMode}
     editingMode={editingMode}
     enableColumnActions={enableColumnActions}
-    enableColumnResizing={enableColumnResizing}
     enableColumnFilters={enableColumnFilters}
+    enableColumnResizing={enableColumnResizing}
     enableDensePaddingToggle={enableDensePaddingToggle}
     enableExpandAll={enableExpandAll}
     enableFilters={enableFilters}
@@ -807,6 +808,7 @@ export default <D extends Record<string, any> = {}>({
     enableHiding={enableHiding}
     enableMultiRowSelection={enableMultiRowSelection}
     enablePagination={enablePagination}
+    enablePinning={enablePinning}
     enableSelectAll={enableSelectAll}
     enableSorting={enableSorting}
     enableStickyHeader={enableStickyHeader}

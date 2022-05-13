@@ -1,27 +1,7 @@
-import React, { CSSProperties, FC, useEffect, useState } from 'react';
-import { alpha, Box, TableContainer, Theme } from '@mui/material';
+import React, { FC, useEffect, useState } from 'react';
+import { TableContainer } from '@mui/material';
 import { MRT_TableInstance } from '..';
 import { MRT_Table } from './MRT_Table';
-
-const commonBoxStyles = ({
-  pinned,
-  theme,
-  visible,
-}: {
-  pinned?: 'left' | 'right';
-  theme: Theme;
-  visible?: boolean;
-}): CSSProperties => ({
-  display: 'grid',
-  minWidth: visible ? '200px' : 0,
-  overflowX: pinned ? 'scroll' : 'auto',
-  boxShadow:
-    pinned === 'left'
-      ? `0 1px 12px ${alpha(theme.palette.common.black, 0.5)}`
-      : pinned === 'right'
-      ? `0 -1px 12px ${alpha(theme.palette.common.black, 0.5)}`
-      : 'none',
-});
 
 interface Props {
   tableInstance: MRT_TableInstance;
@@ -29,16 +9,8 @@ interface Props {
 
 export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
   const {
-    getCenterTableWidth,
-    getLeftTableWidth,
-    getRightTableWidth,
     getState,
-    options: {
-      enablePinning,
-      enableStickyHeader,
-      idPrefix,
-      muiTableContainerProps,
-    },
+    options: { enableStickyHeader, idPrefix, muiTableContainerProps },
   } = tableInstance;
 
   const { isFullScreen } = getState();
@@ -66,9 +38,6 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
     setTotalToolbarHeight(topToolbarHeight + bottomToolbarHeight);
   });
 
-  const isSomeColumnsPinnedLeft = !!tableInstance.getLeftFlatHeaders().length;
-  const isSomeColumnsPinnedRight = !!tableInstance.getRightFlatHeaders().length;
-
   return (
     <TableContainer
       {...tableContainerProps}
@@ -86,50 +55,7 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
           : undefined,
       }}
     >
-      {(enablePinning && isSomeColumnsPinnedLeft) ||
-      isSomeColumnsPinnedRight ? (
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: `${getLeftTableWidth()}fr ${getCenterTableWidth()}fr ${getRightTableWidth()}fr`,
-          }}
-        >
-          <Box
-            sx={(theme: Theme) =>
-              commonBoxStyles({
-                pinned: 'left',
-                theme,
-                visible: isSomeColumnsPinnedLeft,
-              })
-            }
-          >
-            <MRT_Table pinned="left" tableInstance={tableInstance} />
-          </Box>
-          <Box
-            sx={(theme: Theme) =>
-              commonBoxStyles({
-                theme,
-                visible: !!tableInstance.getCenterFlatHeaders().length,
-              })
-            }
-          >
-            <MRT_Table pinned="center" tableInstance={tableInstance} />
-          </Box>
-          <Box
-            sx={(theme: Theme) =>
-              commonBoxStyles({
-                pinned: 'right',
-                theme,
-                visible: isSomeColumnsPinnedRight,
-              })
-            }
-          >
-            <MRT_Table pinned="right" tableInstance={tableInstance} />
-          </Box>
-        </Box>
-      ) : (
-        <MRT_Table pinned="none" tableInstance={tableInstance} />
-      )}
+      <MRT_Table pinned="none" tableInstance={tableInstance} />
     </TableContainer>
   );
 };

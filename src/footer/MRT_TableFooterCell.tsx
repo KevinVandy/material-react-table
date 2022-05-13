@@ -38,7 +38,6 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, tableInstance }) => {
       align={column.columnDefType === 'group' ? 'center' : 'left'}
       variant="head"
       {...tableCellProps}
-      //@ts-ignore
       sx={(theme) => ({
         backgroundColor: theme.palette.background.default,
         backgroundImage: `linear-gradient(${alpha(
@@ -46,14 +45,13 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, tableInstance }) => {
           0.05,
         )},${alpha(theme.palette.common.white, 0.05)})`,
         fontWeight: 'bold',
-        maxWidth: `min(${column.getWidth()}px, ${column.maxWidth}px)`,
-        minWidth: `max(${column.getWidth()}px, ${column.minWidth}px)`,
+        maxWidth: `${column.getSize()}px`,
+        minWidth: `${column.getSize()}px`,
         p: isDensePadding ? '0.5rem' : '1rem',
         transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
-        width: column.getWidth(),
+        width: column.getSize(),
         verticalAlign: 'text-top',
-        //@ts-ignore
-        ...tableCellProps?.sx,
+        ...(tableCellProps?.sx as any),
       })}
     >
       {footer.isPlaceholder

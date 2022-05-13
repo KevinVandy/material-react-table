@@ -1,5 +1,5 @@
-import React, { CSSProperties, FC } from 'react';
-import { alpha, TableRow } from '@mui/material';
+import React, { FC } from 'react';
+import { alpha, lighten, TableRow } from '@mui/material';
 import { MRT_TableHeadCell } from './MRT_TableHeadCell';
 import type { MRT_Header, MRT_HeaderGroup, MRT_TableInstance } from '..';
 
@@ -26,13 +26,11 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup, tableInstance }) => {
   return (
     <TableRow
       {...tableRowProps}
-      sx={(theme) =>
-        ({
-          boxShadow: `4px 0 8px ${alpha(theme.palette.common.black, 0.1)}`,
-          //@ts-ignore
-          ...tableRowProps?.sx,
-        } as CSSProperties)
-      }
+      sx={(theme) => ({
+        boxShadow: `4px 0 8px ${alpha(theme.palette.common.black, 0.1)}`,
+        backgroundColor: lighten(theme.palette.background.default, 0.04),
+        ...(tableRowProps?.sx as any),
+      })}
     >
       {headerGroup.headers.map((header: MRT_Header, index) => (
         <MRT_TableHeadCell

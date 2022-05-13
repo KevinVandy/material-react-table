@@ -33,10 +33,8 @@ export const MRT_Table: FC<Props> = ({ pinned, tableInstance }) => {
 
   return (
     <Table stickyHeader={enableStickyHeader} {...tableProps}>
-      {enableTableHead && (
-        <MRT_TableHead pinned={pinned} tableInstance={tableInstance} />
-      )}
-      <MRT_TableBody pinned={pinned} tableInstance={tableInstance} />
+      {enableTableHead && <MRT_TableHead tableInstance={tableInstance} />}
+      <MRT_TableBody tableInstance={tableInstance} />
       {enableTableFooter && (
         <MRT_TableFooter pinned={pinned} tableInstance={tableInstance} />
       )}

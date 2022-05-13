@@ -16,7 +16,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
 }) => {
   const {
     getState,
-    options: { onToggleColumnVisibility, enablePinning },
+    options: { onToggleColumnVisibility },
   } = tableInstance;
 
   const { columnVisibility } = getState();
@@ -52,7 +52,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
           py: '6px',
         }}
       >
-        {!isSubMenu && enablePinning && (
+        {!isSubMenu && column.getCanPin() && (
           <MRT_ColumnPinningButtons
             column={column}
             tableInstance={tableInstance}
@@ -62,9 +62,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
           componentsProps={{ typography: { sx: { marginBottom: 0 } } }}
           checked={switchChecked}
           control={<Switch />}
-          disabled={
-            (isSubMenu && switchChecked) || column.enableHiding === false
-          }
+          disabled={(isSubMenu && switchChecked) || !column.getCanHide()}
           label={column.header}
           onChange={() => handleToggleColumnHidden(column)}
         />

@@ -135,8 +135,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
             ),
             header: props.localization?.actions,
             id: 'mrt-row-actions',
-            maxWidth: 60,
-            width: 60,
+            size: 60,
           }),
         (props.enableExpanded || props.enableGrouping) &&
           createDisplayColumn(table, {
@@ -152,8 +151,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
               ) : null,
             header: props.localization?.expand,
             id: 'mrt-expand',
-            maxWidth: 40,
-            width: 40,
+            size: 40,
           }),
         props.enableRowSelection &&
           createDisplayColumn(table, {
@@ -169,8 +167,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
               ) : null,
             header: props.localization?.select,
             id: 'mrt-select',
-            maxWidth: 40,
-            width: 40,
+            size: 40,
           }),
         props.enableRowNumbers &&
           createDisplayColumn(table, {
@@ -178,9 +175,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
             Header: () => props.localization?.rowNumber,
             header: props.localization?.rowNumbers,
             id: 'mrt-row-numbers',
-            maxWidth: 40,
-            width: 40,
-            minWidth: 40,
+            size: 40,
           }),
       ].filter(Boolean),
     [

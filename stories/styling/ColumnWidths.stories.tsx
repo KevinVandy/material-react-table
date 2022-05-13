@@ -13,22 +13,22 @@ const columns = [
   {
     header: 'ID',
     id: 'id',
-    maxWidth: 50,
+    size: 50,
   },
   {
     header: 'First Name',
     id: 'firstName',
-    minWidth: 300,
+    size: 300,
   },
   {
     header: 'Last Name',
     id: 'lastName',
-    width: 100,
+    size: 100,
   },
   {
     header: 'Age',
     id: 'age',
-    maxWidth: 50,
+    size: 50,
   },
   {
     header: 'Address',

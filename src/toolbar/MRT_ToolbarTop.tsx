@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { alpha, Box, Theme, Toolbar } from '@mui/material';
+import { Box, lighten, Theme, Toolbar } from '@mui/material';
 import { MRT_SearchTextField } from '../inputs/MRT_SearchTextField';
 import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
 import { MRT_TablePagination } from './MRT_TablePagination';
@@ -8,13 +8,11 @@ import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
 import { MRT_TableInstance } from '..';
 
 export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
-  backgroundColor: theme.palette.background.default,
-  backgroundImage: `linear-gradient(${alpha(
-    theme.palette.common.white,
-    0.05,
-  )},${alpha(theme.palette.common.white, 0.05)})`,
+  backgroundColor: lighten(theme.palette.background.default, 0.04),
+  backgroundImage: 'none',
   display: 'grid',
   p: '0 !important',
+  transition: 'all 0.2s ease-in-out',
   width: '100%',
   zIndex: 1,
 });

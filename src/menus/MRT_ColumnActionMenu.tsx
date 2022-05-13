@@ -95,6 +95,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
 
   const handlePinColumn = (pinDirection: 'left' | 'right' | false) => {
     column.pin(pinDirection);
+    setAnchorEl(null);
   };
 
   const handleGroupByColumn = () => {

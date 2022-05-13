@@ -1,14 +1,14 @@
 import React, { FC, MouseEvent } from 'react';
 import {
+  Box,
+  Collapse,
+  Divider,
+  IconButton,
   TableCell,
   TableSortLabel,
-  Divider,
-  Collapse,
-  Tooltip,
-  Box,
-  IconButton,
-  alpha,
   Theme,
+  Tooltip,
+  alpha,
 } from '@mui/material';
 import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
 import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
@@ -84,21 +84,54 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
       tableInstance,
     }) ?? column.header;
 
+  const getIsLastLeftPinnedColumn = () => {
+    return (
+      column.getIsPinned() === 'left' &&
+      tableInstance.getLeftLeafHeaders().length - 1 === column.getPinnedIndex()
+    );
+  };
+
+  const getIsFirstRightPinnedColumn = () => {
+    return column.getIsPinned() === 'right' && column.getPinnedIndex() === 0;
+  };
+
+  const getTotalRight = () => {
+    return (
+      (tableInstance.getRightLeafHeaders().length -
+        1 -
+        column.getPinnedIndex()) *
+      150
+    );
+  };
+
   return (
     <TableCell
       align={column.columnDefType === 'group' ? 'center' : 'left'}
       {...tableCellProps}
-      //@ts-ignore
       sx={(theme: Theme) => ({
-        backgroundColor: theme.palette.background.default,
-        backgroundImage: `linear-gradient(${alpha(
-          theme.palette.common.white,
-          0.05,
-        )},${alpha(theme.palette.common.white, 0.05)})`,
+        boxShadow: getIsLastLeftPinnedColumn()
+          ? `4px 0 4px -2px ${alpha(theme.palette.common.black, 0.1)}`
+          : getIsFirstRightPinnedColumn()
+          ? `-4px 0 4px -2px ${alpha(theme.palette.common.black, 0.1)}`
+          : undefined,
+        backdropFilter:
+          column.getIsPinned() && column.columnDefType !== 'group'
+            ? 'blur(12px)'
+            : undefined,
+        backgroundColor:
+          column.getIsPinned() && column.columnDefType !== 'group'
+            ? alpha(theme.palette.background.default, 0.5)
+            : 'inherit',
+        backgroundImage: 'inherit',
         fontWeight: 'bold',
         height: '100%',
-        maxWidth: `min(${column.getWidth()}px, ${column.maxWidth}px)`,
-        minWidth: `max(${column.getWidth()}px, ${column.minWidth}px)`,
+        left:
+          column.getIsPinned() === 'left'
+            ? `${column.getStart('left')}px`
+            : undefined,
+        maxWidth: `min(${column.getSize()}px, fit-content)`,
+        minWidth: `${column.getSize()}px`,
+        overflow: 'visible',
         p: isDensePadding
           ? column.columnDefType === 'display'
             ? '0 0.5rem'
@@ -106,20 +139,28 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
           : column.columnDefType === 'display'
           ? '0.5rem 0.75rem'
           : '1rem',
+        pb: column.columnDefType === 'display' ? 0 : undefined,
+        position:
+          column.getIsPinned() && column.columnDefType !== 'group'
+            ? 'sticky'
+            : undefined,
         pt:
           column.columnDefType === 'display'
             ? 0
             : isDensePadding
             ? '0.75rem'
             : '1.25rem',
-        pb: column.columnDefType === 'display' ? 0 : undefined,
-        overflow: 'visible',
+        right:
+          column.getIsPinned() === 'right' ? `${getTotalRight()}px` : undefined,
         transition: `all ${enableColumnResizing ? 0 : '0.2s'} ease-in-out`,
         verticalAlign: 'text-top',
-        width: header.getWidth(),
-        zIndex: column.getIsResizing() ? 2 : 1,
-        //@ts-ignore
-        ...tableCellProps?.sx,
+        width: header.getSize(),
+        zIndex: column.getIsResizing()
+          ? 3
+          : column.getIsPinned() && column.columnDefType !== 'group'
+          ? 2
+          : 1,
+        ...(tableCellProps?.sx as any),
       })}
     >
       {header.isPlaceholder ? null : column.columnDefType === 'display' ? (

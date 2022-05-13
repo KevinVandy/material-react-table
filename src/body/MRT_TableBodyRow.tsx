@@ -1,28 +1,26 @@
 import React, { FC, MouseEvent } from 'react';
-import { TableRow } from '@mui/material';
+import { lighten, TableRow } from '@mui/material';
 import { MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
-  pinned: 'left' | 'center' | 'right' | 'none';
   row: MRT_Row;
   tableInstance: MRT_TableInstance;
 }
 
-export const MRT_TableBodyRow: FC<Props> = ({ pinned, row, tableInstance }) => {
+export const MRT_TableBodyRow: FC<Props> = ({ row, tableInstance }) => {
   const {
     options: { muiTableBodyRowProps, onRowClick, renderDetailPanel },
   } = tableInstance;
 
   const {
-    getCenterVisibleCells,
+    // getCenterVisibleCells,
     getIsGrouped,
     getIsSelected,
-    getLeftVisibleCells,
-    getRightVisibleCells,
-    getRowProps,
     getVisibleCells,
+    // getRightVisibleCells,
+    getRowProps,
   } = row;
 
   const mTableBodyRowProps =
@@ -35,13 +33,6 @@ export const MRT_TableBodyRow: FC<Props> = ({ pinned, row, tableInstance }) => {
     ...mTableBodyRowProps,
   };
 
-  const getVisibleCellsMap = {
-    center: getCenterVisibleCells,
-    left: getLeftVisibleCells,
-    none: getVisibleCells,
-    right: getRightVisibleCells,
-  };
-
   return (
     <>
       <TableRow
@@ -51,8 +42,12 @@ export const MRT_TableBodyRow: FC<Props> = ({ pinned, row, tableInstance }) => {
         }
         selected={getIsSelected()}
         {...tableRowProps}
+        sx={(theme) => ({
+          backgroundColor: lighten(theme.palette.background.default, 0.06),
+          ...(tableRowProps?.sx as any),
+        })}
       >
-        {getVisibleCellsMap[pinned]().map((cell) => (
+        {getVisibleCells().map((cell) => (
           <MRT_TableBodyCell
             cell={cell}
             key={cell.getCellProps().key}
