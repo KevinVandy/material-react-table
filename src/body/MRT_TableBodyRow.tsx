@@ -44,6 +44,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, tableInstance }) => {
         {...tableRowProps}
         sx={(theme) => ({
           backgroundColor: lighten(theme.palette.background.default, 0.06),
+          //@ts-ignore
           ...(tableRowProps?.sx as any),
         })}
       >

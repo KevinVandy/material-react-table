@@ -160,6 +160,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
           : column.getIsPinned() && column.columnDefType !== 'group'
           ? 2
           : 1,
+        //@ts-ignore
         ...(tableCellProps?.sx as any),
       })}
     >

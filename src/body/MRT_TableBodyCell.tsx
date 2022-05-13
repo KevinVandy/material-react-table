@@ -144,6 +144,7 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
         whiteSpace: isDensePadding ? 'nowrap' : 'normal',
         width: column.getSize(),
         zIndex: column.getIsPinned() ? 1 : undefined,
+        //@ts-ignore
         ...(tableCellProps?.sx as any),
       })}
     >
