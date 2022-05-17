@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { TableHead } from '@mui/material';
 import { MRT_TableHeadRow } from './MRT_TableHeadRow';
-import type { MRT_HeaderGroup, MRT_TableInstance } from '..';
+import type { MRT_TableInstance } from '..';
 
 interface Props {
   tableInstance: MRT_TableInstance;
@@ -22,8 +22,8 @@ export const MRT_TableHead: FC<Props> = ({ tableInstance }) => {
     <TableHead {...tableHeadProps}>
       {getHeaderGroups().map((headerGroup) => (
         <MRT_TableHeadRow
-          headerGroup={headerGroup as MRT_HeaderGroup}
-          key={headerGroup.getHeaderGroupProps().key}
+          headerGroup={headerGroup as any}
+          key={headerGroup.id}
           tableInstance={tableInstance}
         />
       ))}

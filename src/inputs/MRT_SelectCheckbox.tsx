@@ -17,7 +17,6 @@ export const MRT_SelectCheckbox: FC<Props> = ({
     getRowModel,
     getSelectedRowModel,
     getState,
-    getToggleAllRowsSelectedProps,
     options: {
       isLoading,
       localization,
@@ -31,14 +30,14 @@ export const MRT_SelectCheckbox: FC<Props> = ({
 
   const handleSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (selectAll) {
-      getToggleAllRowsSelectedProps?.()?.onChange?.(event as any);
+      tableInstance.getToggleAllRowsSelectedHandler()(event as any);
       onSelectAllChange?.({
         event,
         selectedRows: event.target.checked ? getRowModel().flatRows : [],
         tableInstance,
       });
     } else if (row) {
-      row?.getToggleSelectedProps()?.onChange?.(event as any);
+      row?.getToggleSelectedHandler()(event as any);
       onSelectChange?.({
         event,
         row,
@@ -52,19 +51,10 @@ export const MRT_SelectCheckbox: FC<Props> = ({
     }
   };
 
-  const mTableBodyRowSelectCheckboxProps =
+  const checkboxProps =
     muiSelectCheckboxProps instanceof Function
       ? muiSelectCheckboxProps({ isSelectAll: !!selectAll, row, tableInstance })
       : muiSelectCheckboxProps;
-
-  const rtSelectCheckboxProps = selectAll
-    ? getToggleAllRowsSelectedProps()
-    : row?.getToggleSelectedProps();
-
-  const checkboxProps = {
-    ...rtSelectCheckboxProps,
-    ...mTableBodyRowSelectCheckboxProps,
-  };
 
   return (
     <Tooltip
@@ -76,20 +66,30 @@ export const MRT_SelectCheckbox: FC<Props> = ({
       }
     >
       <Checkbox
+        checked={
+          selectAll
+            ? tableInstance.getIsAllRowsSelected()
+            : row?.getIsSelected()
+        }
         disabled={isLoading}
+        indeterminate={
+          selectAll
+            ? tableInstance.getIsSomeRowsSelected()
+            : row?.getIsSomeSelected()
+        }
         inputProps={{
           'aria-label': selectAll
             ? localization.toggleSelectAll
             : localization.toggleSelectRow,
         }}
+        onChange={handleSelectChange}
         size={isDensePadding ? 'small' : 'medium'}
         {...checkboxProps}
         sx={{
           height: isDensePadding ? '1.75rem' : '2.25rem',
           width: isDensePadding ? '1.75rem' : '2.25rem',
+          ...checkboxProps?.sx,
         }}
-        onChange={handleSelectChange}
-        title={undefined}
       />
     </Tooltip>
   );

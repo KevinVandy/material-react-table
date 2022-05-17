@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import type { MRT_Row, MRT_TableInstance } from '..';
-import { RowValues } from '@tanstack/react-table';
 
 interface Props {
   row: MRT_Row;
@@ -22,7 +21,7 @@ export const MRT_EditActionButtons: FC<Props> = ({ row, tableInstance }) => {
   const { currentEditingRow } = getState();
 
   const handleCancel = () => {
-    row.values = (row.original as RowValues) ?? {};
+    row.valuesCache = row.original ?? {};
     setCurrentEditingRow(null);
   };
 

@@ -56,7 +56,7 @@ export const LoadingDisplayColumns: Story<MaterialReactTableProps> = () => (
     isLoading
     enableRowSelection
     enableRowNumbers
-    enableExpanded
+    enableExpanding
     enableRowActions
   />
 );

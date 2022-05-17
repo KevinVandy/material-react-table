@@ -67,7 +67,7 @@ const data = [...Array(5)].map((_) => ({
 }));
 
 export const SubRowTreeEnabledDefault: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} enableExpanded />
+  <MaterialReactTable columns={columns} data={data} enableExpanding />
 );
 
 export const SubRowTreeDisableExpandAll: Story<
@@ -76,7 +76,7 @@ export const SubRowTreeDisableExpandAll: Story<
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableExpanded
+    enableExpanding
     enableExpandAll={false}
   />
 );
@@ -85,7 +85,7 @@ export const SubRowTreeWithSelection: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableExpanded
+    enableExpanding
     enablePagination={false}
     enableRowSelection
   />
@@ -97,7 +97,7 @@ export const SubRowTreeWithSelectionNoSubRowSelection: Story<
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableExpanded
+    enableExpanding
     enablePagination={false}
     enableRowSelection
     enableSubRowSelection={false}
@@ -110,7 +110,7 @@ export const SubRowTreeWithSingleSelection: Story<
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableExpanded
+    enableExpanding
     enableMultiRowSelection={false}
     enablePagination={false}
     enableRowSelection

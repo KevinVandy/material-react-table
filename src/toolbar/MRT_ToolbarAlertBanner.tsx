@@ -11,7 +11,6 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({ tableInstance }) => {
     getPrePaginationRowModel,
     getSelectedRowModel,
     getState,
-    toggleColumnGrouping,
     options: {
       localization,
       muiTableToolbarAlertBannerProps,
@@ -57,7 +56,9 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({ tableInstance }) => {
                   .getAllColumns()
                   .find((column) => column.id === columnId)?.header
               }
-              onDelete={() => toggleColumnGrouping(columnId)}
+              onDelete={() =>
+                tableInstance.getColumn(columnId).toggleGrouping()
+              }
             />
           </Fragment>
         ))}

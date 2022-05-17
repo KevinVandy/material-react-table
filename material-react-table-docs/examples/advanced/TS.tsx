@@ -44,10 +44,10 @@ const Example: FC = () => {
                 <Box
                   sx={(theme) => ({
                     backgroundColor:
-                      Number(cell.value) < 50_000
+                      Number(cell.getValue()) < 50_000
                         ? theme.palette.error.dark
-                        : Number(cell.value) >= 50_000 &&
-                          Number(cell.value) < 75_000
+                        : Number(cell.getValue()) >= 50_000 &&
+                          Number(cell.getValue()) < 75_000
                         ? theme.palette.warning.dark
                         : theme.palette.success.dark,
                     borderRadius: '0.25rem',
@@ -56,7 +56,7 @@ const Example: FC = () => {
                     p: '0.25rem',
                   })}
                 >
-                  {Number(cell.value)?.toLocaleString?.('en-US', {
+                  {Number(cell.getValue())?.toLocaleString?.('en-US', {
                     style: 'currency',
                     currency: 'USD',
                     minimumFractionDigits: 0,

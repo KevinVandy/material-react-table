@@ -58,13 +58,13 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
   } as TextFieldProps;
 
   const [filterValue, setFilterValue] = useState<string>(
-    (column.getColumnFilterValue() ?? '') as string,
+    (column.getFilterValue() ?? '') as string,
   );
 
   const handleChange = useCallback(
     debounce(
       (event: ChangeEvent<HTMLInputElement>) =>
-        column.setColumnFilterValue(event.target.value ?? undefined),
+        column.setFilterValue(event.target.value ?? undefined),
       150,
     ),
     [],
@@ -76,15 +76,15 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
 
   const handleClear = () => {
     setFilterValue('');
-    column.setColumnFilterValue(undefined);
+    column.setFilterValue(undefined);
   };
 
   const handleClearFilterChip = () => {
     setFilterValue('');
-    column.setColumnFilterValue(undefined);
+    column.setFilterValue(undefined);
     setCurrentFilterFns((prev) => ({
       ...prev,
-      [header.id]: MRT_FILTER_OPTION.BEST_MATCH,
+      [header.id]: MRT_FILTER_OPTION.FUZZY,
     }));
   };
 

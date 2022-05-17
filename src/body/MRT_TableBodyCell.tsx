@@ -40,7 +40,6 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
       : column.muiTableBodyCellProps;
 
   const tableCellProps = {
-    ...cell.getCellProps(),
     ...mTableCellBodyProps,
     ...mcTableCellBodyProps,
   };
@@ -110,10 +109,10 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
       onDoubleClick={handleDoubleClick}
       {...tableCellProps}
       sx={(theme) => ({
-        backdropFilter: column.getIsPinned() ? 'blur(12px)' : undefined,
+        backdropFilter: column.getIsPinned() ? 'blur(4px)' : undefined,
         backgroundColor: column.getIsPinned()
-          ? alpha(theme.palette.background.default, 0.5)
-          : 'inherit',
+          ? alpha(theme.palette.background.default, 0.9)
+          : undefined,
         boxShadow: getIsLastLeftPinnedColumn()
           ? `4px 0 4px -2px ${alpha(theme.palette.common.black, 0.1)}`
           : getIsFirstRightPinnedColumn()
@@ -148,36 +147,41 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
         ...(tableCellProps?.sx as any),
       })}
     >
-      {isLoading ? (
-        <Skeleton
-          animation="wave"
-          height={20}
-          width={skeletonWidth}
-          {...muiTableBodyCellSkeletonProps}
-        />
-      ) : column.columnDefType === 'display' ? (
-        column.Cell?.({ cell, tableInstance })
-      ) : cell.getIsPlaceholder() ||
-        (row.getIsGrouped() &&
-          column.id !==
-            row.groupingColumnId) ? null : cell.getIsAggregated() ? (
-        cell.renderAggregatedCell()
-      ) : isEditing ? (
-        <MRT_EditCellTextField cell={cell} tableInstance={tableInstance} />
-      ) : (enableClickToCopy || column.enableClickToCopy) &&
-        column.enableClickToCopy !== false ? (
-        <>
-          <MRT_CopyButton cell={cell} tableInstance={tableInstance}>
+      <>
+        {isLoading ? (
+          <Skeleton
+            animation="wave"
+            height={20}
+            width={skeletonWidth}
+            {...muiTableBodyCellSkeletonProps}
+          />
+        ) : column.columnDefType === 'display' ? (
+          column.Cell?.({ cell, tableInstance })
+        ) : cell.getIsPlaceholder() ||
+          (row.getIsGrouped() &&
+            column.id !==
+              row.groupingColumnId) ? null : cell.getIsAggregated() ? (
+          cell.renderAggregatedCell()
+        ) : isEditing ? (
+          <MRT_EditCellTextField cell={cell} tableInstance={tableInstance} />
+        ) : (enableClickToCopy || column.enableClickToCopy) &&
+          column.enableClickToCopy !== false ? (
+          <>
+            <MRT_CopyButton cell={cell} tableInstance={tableInstance}>
+              <>
+                {cell.column?.Cell?.({ cell, tableInstance }) ??
+                  cell.renderCell()}
+              </>
+            </MRT_CopyButton>
+            {row.getIsGrouped() && <> ({row.subRows?.length})</>}
+          </>
+        ) : (
+          <>
             {cell.column?.Cell?.({ cell, tableInstance }) ?? cell.renderCell()}
-          </MRT_CopyButton>
-          {row.getIsGrouped() && <> ({row.subRows?.length})</>}
-        </>
-      ) : (
-        <>
-          {cell.column?.Cell?.({ cell, tableInstance }) ?? cell.renderCell()}
-          {row.getIsGrouped() && <> ({row.subRows?.length})</>}
-        </>
-      )}
+            {row.getIsGrouped() && <> ({row.subRows?.length})</>}
+          </>
+        )}
+      </>
     </TableCell>
   );
 };

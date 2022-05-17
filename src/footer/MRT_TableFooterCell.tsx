@@ -28,7 +28,6 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, tableInstance }) => {
       : column.muiTableFooterCellProps;
 
   const tableCellProps = {
-    ...footer.getFooterProps(),
     ...mTableFooterCellProps,
     ...mcTableFooterCellProps,
   };
@@ -36,6 +35,7 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, tableInstance }) => {
   return (
     <TableCell
       align={column.columnDefType === 'group' ? 'center' : 'left'}
+      colSpan={footer.colSpan}
       variant="head"
       {...tableCellProps}
       sx={(theme) => ({

@@ -34,13 +34,14 @@ import {
   FilterFnOption,
   Header,
   HeaderGroup,
-  Options,
   Overwrite,
   PaginationState,
+  ReactTableGenerics,
   Row,
   TableGenerics,
   TableInstance,
   TableState,
+  UseTableInstanceOptions,
   VisibilityState,
 } from '@tanstack/react-table';
 import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
@@ -50,7 +51,7 @@ import { MRT_TableRoot } from './table/MRT_TableRoot';
 
 export type MRT_TableOptions<D extends Record<string, any> = {}> = Partial<
   Omit<
-    Options<D>,
+    UseTableInstanceOptions<ReactTableGenerics>,
     'columns' | 'data' | 'initialState' | 'state' | 'expandRowsFn' | 'filterFns'
   >
 > & {
@@ -100,11 +101,11 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
     idPrefix: string;
     localization: MRT_Localization;
   };
-  setCurrentEditingCell: Dispatch<SetStateAction<MRT_Cell<D> | null>>;
-  setCurrentEditingRow: Dispatch<SetStateAction<MRT_Row<D> | null>>;
+  setCurrentEditingCell: Dispatch<SetStateAction<MRT_Cell | null>>;
+  setCurrentEditingRow: Dispatch<SetStateAction<MRT_Row | null>>;
   setCurrentFilterFns: Dispatch<
     SetStateAction<{
-      [key: string]: MRT_FilterFn<D>;
+      [key: string]: MRT_FilterFn;
     }>
   >;
   setCurrentGlobalFilterFn: Dispatch<SetStateAction<MRT_FilterFn<D>>>;
@@ -294,18 +295,9 @@ export type MRT_HeaderGroup<D extends Record<string, any> = {}> = Omit<
 
 export type MRT_Row<D extends Record<string, any> = {}> = Omit<
   Row<D>,
-  | 'getVisibleCells'
-  | 'getAllCells'
-  | 'subRows'
-  | 'original'
-  | 'getLeftVisibleCells'
-  | 'getRightVisibleCells'
-  | 'getCenterVisibleCells'
+  'getVisibleCells' | 'getAllCells' | 'subRows' | 'original'
 > & {
   getAllCells: () => MRT_Cell<D>[];
-  getCenterVisibleCells: () => MRT_Cell<D>[];
-  getLeftVisibleCells: () => MRT_Cell<D>[];
-  getRightVisibleCells: () => MRT_Cell<D>[];
   getVisibleCells: () => MRT_Cell<D>[];
   subRows?: MRT_Row<D>[];
   original: D;
@@ -320,7 +312,7 @@ export type MRT_Cell<D extends Record<string, any> = {}> = Omit<
 };
 
 export type MRT_FilterFn<D extends Record<string, any> = {}> =
-  | FilterFn<D>
+  | FilterFn<TableGenerics>
   | FilterFnOption<D>
   | MRT_FILTER_OPTION
   | number
@@ -760,7 +752,6 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
 
 export default <D extends Record<string, any> = {}>({
   autoResetExpanded = false,
-  autoResetSorting = false,
   columnResizeMode = 'onEnd',
   editingMode = 'row',
   enableColumnActions = true,
@@ -794,7 +785,6 @@ export default <D extends Record<string, any> = {}>({
 }: MaterialReactTableProps<D>) => (
   <MRT_TableRoot
     autoResetExpanded={autoResetExpanded}
-    autoResetSorting={autoResetSorting}
     columnResizeMode={columnResizeMode}
     editingMode={editingMode}
     enableColumnActions={enableColumnActions}

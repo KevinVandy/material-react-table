@@ -70,9 +70,9 @@ export const StyleMuiTableBodyCellConditionallyIn1Column: Story<
         muiTableBodyCellProps: ({ cell }) => ({
           sx: {
             backgroundColor:
-              cell.value > 40 ? 'rgba(22, 184, 44, 0.5)' : undefined,
+              cell.getValue() > 40 ? 'rgba(22, 184, 44, 0.5)' : undefined,
             fontWeight:
-              cell.column.id === 'age' && cell.value > 40 ? '700' : '400',
+              cell.column.id === 'age' && cell.getValue() > 40 ? '700' : '400',
           },
         }),
       },
@@ -92,13 +92,15 @@ export const CustomCellRender: Story<MaterialReactTableProps> = () => (
         header: 'First Name',
         id: 'firstName',
         Cell: ({ cell }) => (
-          <span style={{ fontStyle: 'italic' }}>{cell.value}</span>
+          <span style={{ fontStyle: 'italic' }}>{cell.getValue()}</span>
         ),
       },
       {
         header: 'Last Name',
         id: 'lastName',
-        Cell: ({ cell }) => <span style={{ color: 'red' }}>{cell.value}</span>,
+        Cell: ({ cell }) => (
+          <span style={{ color: 'red' }}>{cell.getValue()}</span>
+        ),
       },
       {
         header: 'Age',
@@ -109,12 +111,12 @@ export const CustomCellRender: Story<MaterialReactTableProps> = () => (
               fontStyle: 'italic',
               padding: '0.5rem',
               backgroundColor:
-                cell.column.id === 'age' && cell.value > 40
+                cell.column.id === 'age' && cell.getValue() > 40
                   ? 'rgba(22, 184, 44, 0.5)'
                   : undefined,
             }}
           >
-            {cell.value}
+            {cell.getValue()}
           </span>
         ),
       },

@@ -15,10 +15,10 @@ const RootPropTable = () => {
           Cell: ({ cell }) =>
             cell.row.original.required ? (
               <strong style={{ color: theme.palette.primary.dark }}>
-                {cell.value}*
+                {cell.getValue()}*
               </strong>
             ) : (
-              cell.value
+              cell.getValue()
             ),
         },
         { header: 'Type', id: 'type', disableFilters: true },
@@ -28,7 +28,7 @@ const RootPropTable = () => {
           id: 'link',
           disableFilters: true,
           Cell: ({ cell }) => (
-            <Link href={cell.value as string} target="_blank">
+            <Link href={cell.getValue() as string} target="_blank">
               {' '}
               {cell.row.original.linkText}{' '}
             </Link>
@@ -200,7 +200,7 @@ const RootPropTable = () => {
         defaultValue: 'true',
       },
       {
-        prop: 'enableExpanded',
+        prop: 'enableExpanding',
         type: 'boolean',
         description: 'Enable the row expansion/subrows feature',
       },
@@ -374,7 +374,7 @@ const RootPropTable = () => {
         prop: 'enabledGlobalFilterOptions',
         type: 'Array<MRT_FILTER_OPTION>',
         description: 'Disable global filter types from being used',
-        defaultValue: '[bestMatchFirst, bestMatch]',
+        defaultValue: '[fuzzyFirst, fuzzy]',
       },
       {
         prop: 'expandSubRows',

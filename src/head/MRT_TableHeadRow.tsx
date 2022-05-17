@@ -13,15 +13,10 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup, tableInstance }) => {
     options: { muiTableHeadRowProps },
   } = tableInstance;
 
-  const mTableHeadRowProps =
+  const tableRowProps =
     muiTableHeadRowProps instanceof Function
       ? muiTableHeadRowProps({ headerGroup, tableInstance })
       : muiTableHeadRowProps;
-
-  const tableRowProps = {
-    ...headerGroup?.getHeaderGroupProps(),
-    ...mTableHeadRowProps,
-  };
 
   return (
     <TableRow

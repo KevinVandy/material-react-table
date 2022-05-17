@@ -3,12 +3,11 @@ import { Menu, MenuItem } from '@mui/material';
 import type { MRT_FilterFn, MRT_Header, MRT_TableInstance } from '..';
 import { MRT_FILTER_OPTION } from '../enums';
 import {
-  bestMatch,
-  bestMatchFirst,
   contains,
   empty,
   endsWith,
   equals,
+  fuzzy,
   greaterThan,
   lessThan,
   notEmpty,
@@ -56,16 +55,10 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
     () =>
       [
         {
-          type: MRT_FILTER_OPTION.BEST_MATCH_FIRST,
-          label: localization.filterBestMatchFirst,
+          type: MRT_FILTER_OPTION.FUZZY,
+          label: localization.filterFuzzy,
           divider: false,
-          fn: bestMatchFirst,
-        },
-        {
-          type: MRT_FILTER_OPTION.BEST_MATCH,
-          label: localization.filterBestMatch,
-          divider: !!header,
-          fn: bestMatch,
+          fn: fuzzy,
         },
         {
           type: MRT_FILTER_OPTION.CONTAINS,
@@ -127,10 +120,9 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
             header.column.enabledColumnFilterOptions.includes(filterType.type)
           : (!enabledGlobalFilterOptions ||
               enabledGlobalFilterOptions.includes(filterType.type)) &&
-            [
-              MRT_FILTER_OPTION.BEST_MATCH_FIRST,
-              MRT_FILTER_OPTION.BEST_MATCH,
-            ].includes(filterType.type),
+            [MRT_FILTER_OPTION.FUZZY, MRT_FILTER_OPTION.CONTAINS].includes(
+              filterType.type,
+            ),
       ),
     [],
   );
@@ -144,7 +136,7 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
       if (
         [MRT_FILTER_OPTION.EMPTY, MRT_FILTER_OPTION.NOT_EMPTY].includes(value)
       ) {
-        header.column.setColumnFilterValue(' ');
+        header.column.setFilterValue(' ');
       }
     } else {
       setCurrentGlobalFilterFn(value);

@@ -1,6 +1,5 @@
 export enum MRT_FILTER_OPTION {
-  BEST_MATCH = 'bestMatch',
-  BEST_MATCH_FIRST = 'bestMatchFirst',
+  FUZZY = 'fuzzy',
   CONTAINS = 'contains',
   EMPTY = 'empty',
   ENDS_WITH = 'endsWith',

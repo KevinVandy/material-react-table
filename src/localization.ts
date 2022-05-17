@@ -12,13 +12,12 @@ export interface MRT_Localization {
   edit: string;
   expand: string;
   expandAll: string;
-  filterBestMatch: string;
-  filterBestMatchFirst: string;
   filterByColumn: string;
   filterContains: string;
   filterEmpty: string;
   filterEndsWith: string;
   filterEquals: string;
+  filterFuzzy: string;
   filterGreaterThan: string;
   filterLessThan: string;
   filterMode: string;
@@ -74,13 +73,12 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   edit: 'Edit',
   expand: 'Expand',
   expandAll: 'Expand all',
-  filterBestMatch: 'Best Match',
-  filterBestMatchFirst: 'Best Match First',
   filterByColumn: 'Filter by {column}',
   filterContains: 'Contains',
   filterEmpty: 'Empty',
   filterEndsWith: 'Ends With',
   filterEquals: 'Equals',
+  filterFuzzy: 'Fuzzy',
   filterGreaterThan: 'Greater Than',
   filterLessThan: 'Less Than',
   filterMode: 'Filter Mode: {filterType}',

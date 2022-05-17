@@ -49,7 +49,7 @@ export const MRT_CopyButton: FC<Props> = ({
     >
       <Button
         aria-label={localization.clickToCopy}
-        onClick={() => handleCopy(cell.value)}
+        onClick={() => handleCopy(cell.getValue())}
         size="small"
         {...buttonProps}
         sx={{

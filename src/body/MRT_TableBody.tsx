@@ -4,7 +4,6 @@ import { MRT_TableBodyRow } from './MRT_TableBodyRow';
 import { MRT_TableInstance } from '..';
 
 interface Props {
-  // pinned: 'left' | 'center' | 'right' | 'none';
   tableInstance: MRT_TableInstance;
 }
 
@@ -12,7 +11,6 @@ export const MRT_TableBody: FC<Props> = ({ tableInstance }) => {
   const {
     getPaginationRowModel,
     getPrePaginationRowModel,
-    getTableBodyProps,
     options: { enablePagination, muiTableBodyProps },
   } = tableInstance;
 
@@ -20,22 +18,16 @@ export const MRT_TableBody: FC<Props> = ({ tableInstance }) => {
     ? getPaginationRowModel().rows
     : getPrePaginationRowModel().rows;
 
-  const mTableBodyProps =
+  const tableBodyProps =
     muiTableBodyProps instanceof Function
       ? muiTableBodyProps({ tableInstance })
       : muiTableBodyProps;
-
-  const tableBodyProps = {
-    ...getTableBodyProps(),
-    ...mTableBodyProps,
-  };
 
   return (
     <TableBody {...tableBodyProps}>
       {rows.map((row) => (
         <MRT_TableBodyRow
-          key={row.getRowProps().key}
-          // pinned={pinned}
+          key={row.id}
           row={row}
           tableInstance={tableInstance}
         />

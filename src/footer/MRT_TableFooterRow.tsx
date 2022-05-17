@@ -24,22 +24,17 @@ export const MRT_TableFooterRow: FC<Props> = ({
   )
     return null;
 
-  const mTableFooterRowProps =
+  const tableRowProps =
     muiTableFooterRowProps instanceof Function
       ? muiTableFooterRowProps({ footerGroup, tableInstance })
       : muiTableFooterRowProps;
-
-  const tableRowProps = {
-    ...footerGroup.getFooterGroupProps(),
-    ...mTableFooterRowProps,
-  };
 
   return (
     <TableRow {...tableRowProps}>
       {footerGroup.headers.map((footer: MRT_Header) => (
         <MRT_TableFooterCell
           footer={footer}
-          key={footer.getFooterProps().key}
+          key={footer.id}
           tableInstance={tableInstance}
         />
       ))}

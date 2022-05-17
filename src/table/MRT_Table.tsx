@@ -6,13 +6,11 @@ import { MRT_TableFooter } from '../footer/MRT_TableFooter';
 import { MRT_TableInstance } from '..';
 
 interface Props {
-  pinned: 'left' | 'center' | 'right' | 'none';
   tableInstance: MRT_TableInstance;
 }
 
-export const MRT_Table: FC<Props> = ({ pinned, tableInstance }) => {
+export const MRT_Table: FC<Props> = ({ tableInstance }) => {
   const {
-    getTableProps,
     options: {
       enableStickyHeader,
       enableTableFooter,
@@ -21,23 +19,16 @@ export const MRT_Table: FC<Props> = ({ pinned, tableInstance }) => {
     },
   } = tableInstance;
 
-  const mTableProps =
+  const tableProps =
     muiTableProps instanceof Function
       ? muiTableProps({ tableInstance })
       : muiTableProps;
-
-  const tableProps = {
-    ...getTableProps(),
-    ...mTableProps,
-  };
 
   return (
     <Table stickyHeader={enableStickyHeader} {...tableProps}>
       {enableTableHead && <MRT_TableHead tableInstance={tableInstance} />}
       <MRT_TableBody tableInstance={tableInstance} />
-      {enableTableFooter && (
-        <MRT_TableFooter pinned={pinned} tableInstance={tableInstance} />
-      )}
+      {enableTableFooter && <MRT_TableFooter tableInstance={tableInstance} />}
     </Table>
   );
 };

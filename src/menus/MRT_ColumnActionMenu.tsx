@@ -69,7 +69,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     useState<null | HTMLElement>(null);
 
   const handleClearSort = () => {
-    column.resetSorting();
+    column.clearSorting();
     setAnchorEl(null);
   };
 
@@ -105,7 +105,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
   };
 
   const handleClearFilter = () => {
-    column.setColumnFilterValue('');
+    column.setFilterValue('');
     setAnchorEl(null);
   };
 
@@ -201,9 +201,9 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           </MenuItem>,
         ]}
       {enableColumnFilters &&
-        column.getCanColumnFilter() && [
+        column.getCanFilter() && [
           <MenuItem
-            disabled={!column.getColumnFilterValue()}
+            disabled={!column.getFilterValue()}
             key={0}
             onClick={handleClearFilter}
             sx={commonMenuItemStyles}
@@ -285,7 +285,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           </MenuItem>,
           <MenuItem
             disabled={column.getIsPinned() === 'right' || !column.getCanPin()}
-            key={0}
+            key={1}
             onClick={() => handlePinColumn('right')}
             sx={commonMenuItemStyles}
           >
@@ -299,7 +299,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           <MenuItem
             disabled={!column.getIsPinned()}
             divider={enableHiding}
-            key={0}
+            key={2}
             onClick={() => handlePinColumn(false)}
             sx={commonMenuItemStyles}
           >

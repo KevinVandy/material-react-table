@@ -73,7 +73,7 @@ export const ColumnPinningWithDetailPanel: Story<
     columns={columns}
     data={data}
     enablePinning
-    enableExpanded
+    enableExpanding
     renderDetailPanel={(row) => <h1>Hi</h1>}
   />
 );

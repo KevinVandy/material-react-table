@@ -1,19 +1,18 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
-  ColumnDef,
   FilterFn,
   PaginationState,
-  Table,
   createTable,
   functionalUpdate,
-  getColumnFilteredRowModelSync,
-  getCoreRowModelSync,
   getExpandedRowModel,
-  getGlobalFilteredRowModelSync,
-  getGroupedRowModelSync,
   getPaginationRowModel,
-  getSortedRowModelSync,
   useTableInstance,
+  getGroupedRowModel,
+  getSortedRowModel,
+  getCoreRowModel,
+  getFilteredRowModel,
+  ReactTableGenerics,
+  getFacetedRowModel,
 } from '@tanstack/react-table';
 import {
   MRT_Cell,
@@ -96,7 +95,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: initialState?.pagination?.pageIndex ?? 0,
     pageSize: initialState?.pagination?.pageSize ?? 10,
-    pageCount: initialState?.pagination?.pageCount ?? -1,
+    pageCount: initialState?.pagination?.pageCount,
   });
 
   const [currentFilterFns, setCurrentFilterFns] = useState<{
@@ -110,16 +109,26 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
           initialState?.currentFilterFns?.[c.id] ??
           (!!c.filterSelectOptions?.length
             ? MRT_FILTER_OPTION.EQUALS
-            : MRT_FILTER_OPTION.BEST_MATCH),
+            : MRT_FILTER_OPTION.FUZZY),
       })),
     ),
   );
 
   const [currentGlobalFilterFn, setCurrentGlobalFilterFn] = useState<
-    MRT_FILTER_OPTION | FilterFn<D> | string | number | symbol
-  >(props.globalFilterFn ?? MRT_FILTER_OPTION.BEST_MATCH_FIRST);
+    MRT_FILTER_OPTION | FilterFn<ReactTableGenerics> | string | number | symbol
+  >(props.globalFilterFn ?? MRT_FILTER_OPTION.FUZZY);
 
-  const table = useMemo(() => createTable() as unknown as Table<D>, []);
+  const table = useMemo(
+    () =>
+      createTable().setRowType<D>().setTableMetaType<{
+        updateData: (
+          rowIndex: number,
+          columnId: string,
+          value: unknown,
+        ) => void;
+      }>(),
+    [],
+  );
 
   const displayColumns = useMemo(
     () =>
@@ -129,7 +138,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
           createDisplayColumn(table, {
             Cell: ({ cell }) => (
               <MRT_ToggleRowActionMenuButton
-                row={cell.row as MRT_Row}
+                row={cell.row as any}
                 tableInstance={tableInstance}
               />
             ),
@@ -137,11 +146,11 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
             id: 'mrt-row-actions',
             size: 60,
           }),
-        (props.enableExpanded || props.enableGrouping) &&
+        (props.enableExpanding || props.enableGrouping) &&
           createDisplayColumn(table, {
             Cell: ({ cell }) => (
               <MRT_ExpandButton
-                row={cell.row as MRT_Row}
+                row={cell.row as any}
                 tableInstance={tableInstance}
               />
             ),
@@ -151,13 +160,13 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
               ) : null,
             header: props.localization?.expand,
             id: 'mrt-expand',
-            size: 40,
+            size: 50,
           }),
         props.enableRowSelection &&
           createDisplayColumn(table, {
             Cell: ({ cell }) => (
               <MRT_SelectCheckbox
-                row={cell.row as MRT_Row}
+                row={cell.row as any}
                 tableInstance={tableInstance}
               />
             ),
@@ -167,7 +176,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
               ) : null,
             header: props.localization?.select,
             id: 'mrt-select',
-            size: 40,
+            size: 50,
           }),
         props.enableRowNumbers &&
           createDisplayColumn(table, {
@@ -175,14 +184,14 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
             Header: () => props.localization?.rowNumber,
             header: props.localization?.rowNumbers,
             id: 'mrt-row-numbers',
-            size: 40,
+            size: 50,
           }),
       ].filter(Boolean),
     [
       props.editingMode,
       props.enableEditing,
       props.enableExpandAll,
-      props.enableExpanded,
+      props.enableExpanding,
       props.enableGrouping,
       props.enableRowActions,
       props.enableRowNumbers,
@@ -194,19 +203,18 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   );
 
   const columns = useMemo(
-    () =>
-      table.createColumns([
-        ...displayColumns,
-        ...props.columns.map((column) =>
-          column.columns
-            ? createGroup(table, column, currentFilterFns)
-            : createDataColumn(table, column, currentFilterFns),
-        ),
-      ] as ColumnDef<D>[]),
+    () => [
+      ...displayColumns,
+      ...props.columns.map((column) =>
+        column.columns
+          ? createGroup(table, column as any, currentFilterFns)
+          : createDataColumn(table, column as any, currentFilterFns),
+      ),
+    ],
     [table, props.columns, currentFilterFns],
   );
 
-  const data: D['Row'][] = useMemo(
+  const data = useMemo(
     () =>
       props.isLoading && !props.data.length
         ? [...Array(10).fill(null)].map(() =>
@@ -224,22 +232,32 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   );
 
   //@ts-ignore
-  const tableInstance: MRT_TableInstance<{}> = {
+  const tableInstance = {
     ...useTableInstance(table, {
       //@ts-ignore
       filterFns: defaultFilterFNs,
-      getColumnFilteredRowModel: getColumnFilteredRowModelSync(),
-      getCoreRowModel: getCoreRowModelSync(),
+      //@ts-ignore
+      getCoreRowModel: getCoreRowModel(),
+      //@ts-ignore
       getExpandedRowModel: getExpandedRowModel(),
-      getGlobalFilteredRowModel: getGlobalFilteredRowModelSync(),
-      getGroupedRowModel: getGroupedRowModelSync(),
+      //@ts-ignore
+      getFacetedRowModel: getFacetedRowModel(),
+      //@ts-ignore
+      getFilteredRowModel: getFilteredRowModel(),
+      //@ts-ignore
+      getGroupedRowModel: getGroupedRowModel(),
+      //@ts-ignore
       getPaginationRowModel: getPaginationRowModel(),
-      getSortedRowModel: getSortedRowModelSync(),
-      getSubRows: (originalRow: D) => originalRow.subRows,
+      //@ts-ignore
+      getSortedRowModel: getSortedRowModel(),
+      //@ts-ignore
+      getSubRows: (row) => row?.subRows,
+      //@ts-ignore
       globalFilterFn: currentGlobalFilterFn,
       onPaginationChange: (updater: any) =>
         setPagination((old) => functionalUpdate(updater, old)),
       ...props,
+      //@ts-ignore
       columns,
       data,
       idPrefix,
@@ -259,18 +277,15 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         ...props.state,
       },
     }),
-    //@ts-ignore
     setCurrentEditingCell,
-    //@ts-ignore
     setCurrentEditingRow,
     setCurrentFilterFns,
-    //@ts-ignore
     setCurrentGlobalFilterFn,
     setIsDensePadding,
     setIsFullScreen,
     setShowFilters,
     setShowGlobalFilter,
-  };
+  } as MRT_TableInstance;
 
   useEffect(() => {
     if (typeof window === 'undefined' || !props.enablePersistentState) {

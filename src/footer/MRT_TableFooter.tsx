@@ -1,19 +1,16 @@
 import React, { FC } from 'react';
 import { TableFooter } from '@mui/material';
 import { MRT_TableFooterRow } from './MRT_TableFooterRow';
-import type { MRT_HeaderGroup, MRT_TableInstance } from '..';
+import type { MRT_TableInstance } from '..';
 
 interface Props {
-  pinned: 'left' | 'center' | 'right' | 'none';
   tableInstance: MRT_TableInstance;
 }
 
-export const MRT_TableFooter: FC<Props> = ({ pinned, tableInstance }) => {
+export const MRT_TableFooter: FC<Props> = ({ tableInstance }) => {
   const {
-    getCenterFooterGroups,
     getFooterGroups,
-    getLeftFooterGroups,
-    getRightFooterGroups,
+
     options: { muiTableFooterProps },
   } = tableInstance;
 
@@ -22,19 +19,12 @@ export const MRT_TableFooter: FC<Props> = ({ pinned, tableInstance }) => {
       ? muiTableFooterProps({ tableInstance })
       : muiTableFooterProps;
 
-  const getFooterGroupsMap = {
-    center: getCenterFooterGroups,
-    left: getLeftFooterGroups,
-    none: getFooterGroups,
-    right: getRightFooterGroups,
-  };
-
   return (
     <TableFooter {...tableFooterProps}>
-      {getFooterGroupsMap[pinned]().map((footerGroup) => (
+      {getFooterGroups().map((footerGroup) => (
         <MRT_TableFooterRow
-          footerGroup={footerGroup as MRT_HeaderGroup}
-          key={footerGroup.getFooterGroupProps().key}
+          footerGroup={footerGroup as any}
+          key={footerGroup.id}
           tableInstance={tableInstance}
         />
       ))}
