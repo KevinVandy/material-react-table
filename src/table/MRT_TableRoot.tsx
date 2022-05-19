@@ -214,7 +214,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     [table, props.columns, currentFilterFns],
   );
 
-  const data = useMemo(
+  const data: D[] = useMemo(
     () =>
       props.isLoading && !props.data.length
         ? [...Array(10).fill(null)].map(() =>
@@ -233,8 +233,8 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
 
   //@ts-ignore
   const tableInstance = {
+    //@ts-ignore
     ...useTableInstance(table, {
-      //@ts-ignore
       filterFns: defaultFilterFNs,
       //@ts-ignore
       getCoreRowModel: getCoreRowModel(),
@@ -261,7 +261,6 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       columns,
       data,
       idPrefix,
-      //@ts-ignore
       initialState,
       state: {
         currentEditingCell,

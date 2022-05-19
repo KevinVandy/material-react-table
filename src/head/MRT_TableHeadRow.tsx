@@ -24,7 +24,6 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup, tableInstance }) => {
       sx={(theme) => ({
         boxShadow: `4px 0 8px ${alpha(theme.palette.common.black, 0.1)}`,
         backgroundColor: lighten(theme.palette.background.default, 0.04),
-        //@ts-ignore
         ...(tableRowProps?.sx as any),
       })}
     >

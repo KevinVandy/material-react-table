@@ -9,6 +9,7 @@ import {
   Theme,
   Tooltip,
   alpha,
+  lighten,
 } from '@mui/material';
 import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
 import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
@@ -108,20 +109,16 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
       colSpan={header.colSpan}
       {...tableCellProps}
       sx={(theme: Theme) => ({
-        backdropFilter:
+        backgroundColor:
           column.getIsPinned() && column.columnDefType !== 'group'
-            ? 'blur(4px)'
-            : undefined,
+            ? alpha(lighten(theme.palette.background.default, 0.04), 0.95)
+            : 'inherit',
+        backgroundImage: 'inherit',
         boxShadow: getIsLastLeftPinnedColumn()
           ? `4px 0 4px -2px ${alpha(theme.palette.common.black, 0.1)}`
           : getIsFirstRightPinnedColumn()
           ? `-4px 0 4px -2px ${alpha(theme.palette.common.black, 0.1)}`
           : undefined,
-        backgroundColor:
-          column.getIsPinned() && column.columnDefType !== 'group'
-            ? alpha(theme.palette.background.default, 0.9)
-            : 'inherit',
-        backgroundImage: 'inherit',
         fontWeight: 'bold',
         height: '100%',
         left:
@@ -159,7 +156,6 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
           : column.getIsPinned() && column.columnDefType !== 'group'
           ? 2
           : 1,
-        //@ts-ignore
         ...(tableCellProps?.sx as any),
       })}
     >

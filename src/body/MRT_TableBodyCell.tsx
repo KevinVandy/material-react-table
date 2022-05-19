@@ -1,15 +1,20 @@
 import React, { FC, MouseEvent, useMemo } from 'react';
-import { alpha, Skeleton, TableCell } from '@mui/material';
+import { alpha, darken, lighten, Skeleton, TableCell } from '@mui/material';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import type { MRT_Cell, MRT_TableInstance } from '..';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 
 interface Props {
   cell: MRT_Cell;
+  enableHover?: boolean;
   tableInstance: MRT_TableInstance;
 }
 
-export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
+export const MRT_TableBodyCell: FC<Props> = ({
+  cell,
+  enableHover,
+  tableInstance,
+}) => {
   const {
     getState,
     options: {
@@ -109,9 +114,8 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
       onDoubleClick={handleDoubleClick}
       {...tableCellProps}
       sx={(theme) => ({
-        backdropFilter: column.getIsPinned() ? 'blur(4px)' : undefined,
         backgroundColor: column.getIsPinned()
-          ? alpha(theme.palette.background.default, 0.9)
+          ? alpha(lighten(theme.palette.background.default, 0.04), 0.95)
           : undefined,
         boxShadow: getIsLastLeftPinnedColumn()
           ? `4px 0 4px -2px ${alpha(theme.palette.common.black, 0.1)}`
@@ -143,7 +147,13 @@ export const MRT_TableBodyCell: FC<Props> = ({ cell, tableInstance }) => {
         whiteSpace: isDensePadding ? 'nowrap' : 'normal',
         width: column.getSize(),
         zIndex: column.getIsPinned() ? 1 : undefined,
-        //@ts-ignore
+        '&:hover': {
+          backgroundColor: enableHover
+            ? theme.palette.mode === 'dark'
+              ? `${lighten(theme.palette.background.default, 0.13)} !important`
+              : `${darken(theme.palette.background.default, 0.07)} !important`
+            : undefined,
+        },
         ...(tableCellProps?.sx as any),
       })}
     >

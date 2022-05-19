@@ -21,7 +21,7 @@ export const MRT_EditActionButtons: FC<Props> = ({ row, tableInstance }) => {
   const { currentEditingRow } = getState();
 
   const handleCancel = () => {
-    row.valuesCache = row.original ?? {};
+    row._valuesCache = row.original ?? {};
     setCurrentEditingRow(null);
   };
 

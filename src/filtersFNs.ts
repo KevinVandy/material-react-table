@@ -21,7 +21,8 @@ export const contains = (
   id: string,
   filterValue: string | number,
 ) =>
-  row.valuesCache[id]
+  row
+    .getValue(id)
     .toString()
     .toLowerCase()
     .trim()
@@ -34,7 +35,8 @@ export const startsWith = (
   id: string,
   filterValue: string | number,
 ) =>
-  row.valuesCache[id]
+  row
+    .getValue(id)
     .toString()
     .toLowerCase()
     .trim()
@@ -47,7 +49,8 @@ export const endsWith = (
   id: string,
   filterValue: string | number,
 ) =>
-  row.valuesCache[id]
+  row
+    .getValue(id)
     .toString()
     .toLowerCase()
     .trim()
@@ -60,7 +63,7 @@ export const equals = (
   id: string,
   filterValue: string | number,
 ) =>
-  row.valuesCache[id].toString().toLowerCase().trim() ===
+  row.getValue(id).toString().toLowerCase().trim() ===
   filterValue.toString().toLowerCase().trim();
 
 equals.autoRemove = (val: any) => !val;
@@ -70,7 +73,7 @@ export const notEquals = (
   id: string,
   filterValue: string | number,
 ) =>
-  row.valuesCache[id].toString().toLowerCase().trim() !==
+  row.getValue(id).toString().toLowerCase().trim() !==
   filterValue.toString().toLowerCase().trim();
 
 notEquals.autoRemove = (val: any) => !val;
@@ -80,9 +83,9 @@ export const greaterThan = (
   id: string,
   filterValue: string | number,
 ) =>
-  !isNaN(+filterValue) && !isNaN(+row.valuesCache[id])
-    ? +row.valuesCache[id] > +filterValue
-    : row.valuesCache[id].toString().toLowerCase().trim() >
+  !isNaN(+filterValue) && !isNaN(+row.getValue(id))
+    ? +row.getValue(id) > +filterValue
+    : row.getValue(id).toString().toLowerCase().trim() >
       filterValue.toString().toLowerCase().trim();
 
 greaterThan.autoRemove = (val: any) => !val;
@@ -92,18 +95,25 @@ export const lessThan = (
   id: string,
   filterValue: string | number,
 ) =>
-  !isNaN(+filterValue) && !isNaN(+row.valuesCache[id])
-    ? +row.valuesCache[id] < +filterValue
-    : row.valuesCache[id].toString().toLowerCase().trim() <
+  !isNaN(+filterValue) && !isNaN(+row.getValue(id))
+    ? +row.getValue(id) < +filterValue
+    : row.getValue(id).toString().toLowerCase().trim() <
       filterValue.toString().toLowerCase().trim();
 
 lessThan.autoRemove = (val: any) => !val;
+
+export const between = (
+  row: MRT_Row,
+  id: string,
+  filterValues: [string | number, string | number],
+) =>
+  greaterThan(row, id, filterValues[0]) && lessThan(row, id, filterValues[1]);
 
 export const empty = (
   row: MRT_Row,
   id: string,
   _filterValue: string | number,
-) => !row.valuesCache[id].toString().toLowerCase().trim();
+) => !row.getValue(id).toString().toLowerCase().trim();
 
 empty.autoRemove = (val: any) => !val;
 
@@ -111,11 +121,12 @@ export const notEmpty = (
   row: MRT_Row,
   id: string,
   _filterValue: string | number,
-) => !!row.valuesCache[id].toString().toLowerCase().trim();
+) => !!row.getValue(id).toString().toLowerCase().trim();
 
 notEmpty.autoRemove = (val: any) => !val;
 
 export const defaultFilterFNs = {
+  between,
   contains,
   empty,
   endsWith,

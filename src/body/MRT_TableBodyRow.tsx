@@ -32,13 +32,13 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, tableInstance }) => {
           backgroundColor: lighten(theme.palette.background.default, 0.06),
           transition: 'all 0.2s ease-in-out',
           '&:hover td': {
-            backgroundColor: tableRowProps?.hover
-              ? theme.palette.mode === 'dark'
-                ? lighten(theme.palette.background.default, 0.04)
-                : darken(theme.palette.background.default, 0.04)
-              : undefined,
+            backgroundColor:
+              tableRowProps?.hover !== false
+                ? theme.palette.mode === 'dark'
+                  ? `${lighten(theme.palette.background.default, 0.12)}`
+                  : `${darken(theme.palette.background.default, 0.05)}`
+                : undefined,
           },
-          //@ts-ignore
           ...(tableRowProps?.sx as any),
         })}
       >
@@ -46,6 +46,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, tableInstance }) => {
           <MRT_TableBodyCell
             cell={cell}
             key={cell.id}
+            enableHover={tableRowProps?.hover !== false}
             tableInstance={tableInstance}
           />
         ))}

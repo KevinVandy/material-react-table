@@ -39,7 +39,7 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, tableInstance }) => {
 
   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
     if (getState().currentEditingRow) {
-      row.valuesCache[column.id] = value;
+      row._valuesCache[column.id] = value;
       setCurrentEditingRow({ ...getState().currentEditingRow } as MRT_Row);
     }
     setCurrentEditingCell(null);
