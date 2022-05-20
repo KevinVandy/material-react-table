@@ -128,7 +128,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
             ? `${column.getStart('left')}px`
             : undefined,
         maxWidth: `min(${column.getSize()}px, fit-content)`,
-        minWidth: `${column.getSize()}px`,
+        minWidth: `max${column.getSize()}px, ${column.minSize}px`,
         p: isDensePadding
           ? column.columnDefType === 'display'
             ? '0 0.5rem'

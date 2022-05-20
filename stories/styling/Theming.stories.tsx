@@ -47,7 +47,7 @@ export const CustomLightTheme: Story<MaterialReactTableProps> = () => {
         main: '#ff9800',
       },
       background: {
-        paper: '#ffffef',
+        default: '#ffffef',
       },
       secondary: {
         main: '#00bcd4',

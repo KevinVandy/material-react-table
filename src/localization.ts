@@ -1,5 +1,6 @@
 export interface MRT_Localization {
   actions: string;
+  and: string;
   cancel: string;
   changeFilterMode: string;
   changeSearchMode: string;
@@ -12,6 +13,7 @@ export interface MRT_Localization {
   edit: string;
   expand: string;
   expandAll: string;
+  filterBetween: string;
   filterByColumn: string;
   filterContains: string;
   filterEmpty: string;
@@ -29,6 +31,8 @@ export interface MRT_Localization {
   groupedBy: string;
   hideAll: string;
   hideColumn: string;
+  max: string;
+  min: string;
   pinToLeft: string;
   pinToRight: string;
   resetColumnSize: string;
@@ -49,6 +53,7 @@ export interface MRT_Localization {
   sortedByColumnAsc: string;
   sortedByColumnDesc: string;
   thenBy: string;
+  to: string;
   toggleDensePadding: string;
   toggleFullScreen: string;
   toggleSelectAll: string;
@@ -61,6 +66,7 @@ export interface MRT_Localization {
 
 export const MRT_DefaultLocalization_EN: MRT_Localization = {
   actions: 'Actions',
+  and: 'and',
   cancel: 'Cancel',
   changeFilterMode: 'Change filter mode',
   changeSearchMode: 'Change search mode',
@@ -73,6 +79,7 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   edit: 'Edit',
   expand: 'Expand',
   expandAll: 'Expand all',
+  filterBetween: 'Between',
   filterByColumn: 'Filter by {column}',
   filterContains: 'Contains',
   filterEmpty: 'Empty',
@@ -85,11 +92,13 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   filterNotEmpty: 'Not Empty',
   filterNotEquals: 'Not Equals',
   filterStartsWith: 'Starts With',
-  filteringByColumn: 'Filtering by {column} - {filterType} "{filterValue}"',
+  filteringByColumn: 'Filtering by {column} - {filterType} {filterValue}',
   groupByColumn: 'Group by {column}',
   groupedBy: 'Grouped by ',
   hideAll: 'Hide all',
   hideColumn: 'Hide {column} column',
+  max: 'Max',
+  min: 'Min',
   pinToLeft: 'Pin to left',
   pinToRight: 'Pin to right',
   resetColumnSize: 'Reset column size',
@@ -111,6 +120,7 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   sortedByColumnAsc: 'Sorted by {column} ascending',
   sortedByColumnDesc: 'Sorted by {column} descending',
   thenBy: ', then by ',
+  to: 'to',
   toggleDensePadding: 'Toggle dense padding',
   toggleFullScreen: 'Toggle full screen',
   toggleSelectAll: 'Toggle select all',

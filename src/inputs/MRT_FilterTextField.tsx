@@ -21,10 +21,15 @@ import { MRT_FILTER_OPTION } from '../enums';
 
 interface Props {
   header: MRT_Header;
+  inputIndex?: number;
   tableInstance: MRT_TableInstance;
 }
 
-export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
+export const MRT_FilterTextField: FC<Props> = ({
+  header,
+  inputIndex,
+  tableInstance,
+}) => {
   const {
     getState,
     options: {
@@ -57,14 +62,22 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
     ...mcTableHeadCellFilterTextFieldProps,
   } as TextFieldProps;
 
-  const [filterValue, setFilterValue] = useState<string>(
-    (column.getFilterValue() ?? '') as string,
+  const [filterValue, setFilterValue] = useState<string>(() =>
+    inputIndex !== undefined
+      ? (column.getFilterValue() as [string, string])?.[inputIndex] ?? ''
+      : (column.getFilterValue() as string) ?? '',
   );
 
-  const handleChange = useCallback(
+  const handleChangeDebounced = useCallback(
     debounce(
       (event: ChangeEvent<HTMLInputElement>) =>
-        column.setFilterValue(event.target.value ?? undefined),
+        inputIndex !== undefined
+          ? column.setFilterValue((old: [string, string]) => {
+              const newFilterValues = old ?? ['', ''];
+              newFilterValues[inputIndex] = event.target.value;
+              return newFilterValues;
+            })
+          : column.setFilterValue(event.target.value ?? undefined),
       150,
     ),
     [],
@@ -76,7 +89,15 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
 
   const handleClear = () => {
     setFilterValue('');
-    column.setFilterValue(undefined);
+    if (inputIndex !== undefined) {
+      column.setFilterValue((old: [string | undefined, string | undefined]) => {
+        const newFilterValues = old ?? ['', ''];
+        newFilterValues[inputIndex] = undefined;
+        return newFilterValues;
+      });
+    } else {
+      column.setFilterValue(undefined);
+    }
   };
 
   const handleClearFilterChip = () => {
@@ -92,7 +113,9 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
     return <>{column.Filter?.({ header, tableInstance })}</>;
   }
 
-  const filterId = `mrt-${idPrefix}-${header.id}-filter-text-field`;
+  const filterId = `mrt-${idPrefix}-${header.id}-filter-text-field${
+    inputIndex ?? ''
+  }`;
   const filterFn = currentFilterFns?.[header.id];
   const isSelectFilter = !!column.filterSelectOptions;
   const filterChipLabel =
@@ -105,10 +128,14 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
           `filter${filterFn.charAt(0).toUpperCase() + filterFn.slice(1)}`
         ]
       : '';
-  const filterPlaceholder = localization.filterByColumn?.replace(
-    '{column}',
-    String(column.header),
-  );
+  const filterPlaceholder =
+    inputIndex === undefined
+      ? localization.filterByColumn?.replace('{column}', String(column.header))
+      : inputIndex === 0
+      ? localization.min
+      : inputIndex === 1
+      ? localization.max
+      : '';
 
   return (
     <>
@@ -124,48 +151,53 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
           title: filterPlaceholder,
         }}
         helperText={
-          <label htmlFor={filterId}>
-            {filterFn instanceof Function
-              ? localization.filterMode.replace(
-                  '{filterType}',
-                  // @ts-ignore
-                  localization[
-                    `filter${
-                      filterFn.name.charAt(0).toUpperCase() +
-                      filterFn.name.slice(1)
-                    }`
-                  ] ?? '',
-                ) ?? ''
-              : localization.filterMode.replace(
-                  '{filterType}',
-                  // @ts-ignore
-                  localization[
-                    `filter${
-                      filterFn.charAt(0).toUpperCase() + filterFn.slice(1)
-                    }`
-                  ],
-                )}
-          </label>
+          !inputIndex ? (
+            <label htmlFor={filterId}>
+              {filterFn instanceof Function
+                ? localization.filterMode.replace(
+                    '{filterType}',
+                    // @ts-ignore
+                    localization[
+                      `filter${
+                        filterFn.name.charAt(0).toUpperCase() +
+                        filterFn.name.slice(1)
+                      }`
+                    ] ?? '',
+                  ) ?? ''
+                : localization.filterMode.replace(
+                    '{filterType}',
+                    // @ts-ignore
+                    localization[
+                      `filter${
+                        filterFn.charAt(0).toUpperCase() + filterFn.slice(1)
+                      }`
+                    ],
+                  )}
+            </label>
+          ) : null
         }
         FormHelperTextProps={{
-          sx: { fontSize: '0.6rem', lineHeight: '0.8rem' },
+          sx: {
+            fontSize: '0.6rem',
+            lineHeight: '0.8rem',
+            whiteSpace: 'nowrap',
+          },
         }}
         label={isSelectFilter && !filterValue ? filterPlaceholder : undefined}
         margin="none"
         placeholder={
-          filterPlaceholder
-          // filterChipLabel || isSelectFilter ? undefined : filterPlaceholder
+          filterChipLabel || isSelectFilter ? undefined : filterPlaceholder
         }
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setFilterValue(event.target.value);
-          handleChange(event);
+          handleChangeDebounced(event);
         }}
         onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
         select={isSelectFilter}
         value={filterValue ?? ''}
         variant="standard"
         InputProps={{
-          startAdornment: !isSelectFilter && (
+          startAdornment: !isSelectFilter && !inputIndex && (
             <InputAdornment position="start">
               <Tooltip arrow title={localization.changeFilterMode}>
                 <span>
@@ -217,7 +249,7 @@ export const MRT_FilterTextField: FC<Props> = ({ header, tableInstance }) => {
         sx={{
           m: '-0.25rem',
           p: 0,
-          minWidth: !filterChipLabel ? '5rem' : 'auto',
+          minWidth: !filterChipLabel ? '6rem' : 'auto',
           width: 'calc(100% + 0.5rem)',
           mt: isSelectFilter && !filterValue ? '-1rem' : undefined,
           '&	.MuiSelect-icon': {

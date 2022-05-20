@@ -14,6 +14,8 @@ import {
 import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
 import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
 import type { MRT_Header, MRT_TableInstance } from '..';
+import MRT_FilterRangeFields from '../inputs/MRT_FilterRangeFields';
+import { MRT_FILTER_OPTION } from '../enums';
 
 interface Props {
   header: MRT_Header;
@@ -34,7 +36,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
     setShowFilters,
   } = tableInstance;
 
-  const { isDensePadding, showFilters } = getState();
+  const { currentFilterFns, isDensePadding, showFilters } = getState();
 
   const { column } = header;
 
@@ -73,7 +75,16 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
                 `filter${filterFn.charAt(0).toUpperCase() + filterFn.slice(1)}`
               ],
         )
-        .replace('{filterValue}', column.getFilterValue() as string)
+        .replace(
+          '{filterValue}',
+          `"${
+            Array.isArray(column.getFilterValue())
+              ? (column.getFilterValue() as [string, string]).join(
+                  `" ${localization.and} "`,
+                )
+              : (column.getFilterValue() as string)
+          }"`,
+        )
         .replace('" "', '')
     : localization.showHideFilters;
 
@@ -126,7 +137,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
             ? `${column.getStart('left')}px`
             : undefined,
         maxWidth: `min(${column.getSize()}px, fit-content)`,
-        minWidth: `${column.getSize()}px`,
+        minWidth: `max(${column.getSize()}px, ${column.minSize}px)`,
         overflow: 'visible',
         p: isDensePadding
           ? column.columnDefType === 'display'
@@ -276,8 +287,18 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
         </Box>
       )}
       {column.columnDefType === 'data' && column.getCanFilter() && (
-        <Collapse in={showFilters}>
-          <MRT_FilterTextField header={header} tableInstance={tableInstance} />
+        <Collapse in={showFilters} mountOnEnter unmountOnExit>
+          {currentFilterFns[column.id] === MRT_FILTER_OPTION.BETWEEN ? (
+            <MRT_FilterRangeFields
+              header={header}
+              tableInstance={tableInstance}
+            />
+          ) : (
+            <MRT_FilterTextField
+              header={header}
+              tableInstance={tableInstance}
+            />
+          )}
         </Collapse>
       )}
     </TableCell>

@@ -3,6 +3,7 @@ import { Menu, MenuItem } from '@mui/material';
 import type { MRT_FilterFn, MRT_Header, MRT_TableInstance } from '..';
 import { MRT_FILTER_OPTION } from '../enums';
 import {
+  between,
   contains,
   empty,
   endsWith,
@@ -47,7 +48,7 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
     getState();
 
   const filterOptions: {
-    type: MRT_FILTER_OPTION;
+    option: MRT_FILTER_OPTION;
     label: string;
     divider: boolean;
     fn: Function;
@@ -55,61 +56,67 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
     () =>
       [
         {
-          type: MRT_FILTER_OPTION.FUZZY,
+          option: MRT_FILTER_OPTION.FUZZY,
           label: localization.filterFuzzy,
           divider: false,
           fn: fuzzy,
         },
         {
-          type: MRT_FILTER_OPTION.CONTAINS,
+          option: MRT_FILTER_OPTION.CONTAINS,
           label: localization.filterContains,
           divider: false,
           fn: contains,
         },
         {
-          type: MRT_FILTER_OPTION.STARTS_WITH,
+          option: MRT_FILTER_OPTION.STARTS_WITH,
           label: localization.filterStartsWith,
           divider: false,
           fn: startsWith,
         },
         {
-          type: MRT_FILTER_OPTION.ENDS_WITH,
+          option: MRT_FILTER_OPTION.ENDS_WITH,
           label: localization.filterEndsWith,
           divider: true,
           fn: endsWith,
         },
         {
-          type: MRT_FILTER_OPTION.EQUALS,
+          option: MRT_FILTER_OPTION.EQUALS,
           label: localization.filterEquals,
           divider: false,
           fn: equals,
         },
         {
-          type: MRT_FILTER_OPTION.NOT_EQUALS,
+          option: MRT_FILTER_OPTION.NOT_EQUALS,
           label: localization.filterNotEquals,
           divider: true,
           fn: notEquals,
         },
         {
-          type: MRT_FILTER_OPTION.GREATER_THAN,
+          option: MRT_FILTER_OPTION.BETWEEN,
+          label: localization.filterBetween,
+          divider: false,
+          fn: between,
+        },
+        {
+          option: MRT_FILTER_OPTION.GREATER_THAN,
           label: localization.filterGreaterThan,
           divider: false,
           fn: greaterThan,
         },
         {
-          type: MRT_FILTER_OPTION.LESS_THAN,
+          option: MRT_FILTER_OPTION.LESS_THAN,
           label: localization.filterLessThan,
           divider: true,
           fn: lessThan,
         },
         {
-          type: MRT_FILTER_OPTION.EMPTY,
+          option: MRT_FILTER_OPTION.EMPTY,
           label: localization.filterEmpty,
           divider: false,
           fn: empty,
         },
         {
-          type: MRT_FILTER_OPTION.NOT_EMPTY,
+          option: MRT_FILTER_OPTION.NOT_EMPTY,
           label: localization.filterNotEmpty,
           divider: false,
           fn: notEmpty,
@@ -117,11 +124,11 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
       ].filter((filterType) =>
         header
           ? !header.column.enabledColumnFilterOptions ||
-            header.column.enabledColumnFilterOptions.includes(filterType.type)
+            header.column.enabledColumnFilterOptions.includes(filterType.option)
           : (!enabledGlobalFilterOptions ||
-              enabledGlobalFilterOptions.includes(filterType.type)) &&
+              enabledGlobalFilterOptions.includes(filterType.option)) &&
             [MRT_FILTER_OPTION.FUZZY, MRT_FILTER_OPTION.CONTAINS].includes(
-              filterType.type,
+              filterType.option,
             ),
       ),
     [],
@@ -137,6 +144,10 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
         [MRT_FILTER_OPTION.EMPTY, MRT_FILTER_OPTION.NOT_EMPTY].includes(value)
       ) {
         header.column.setFilterValue(' ');
+      } else if (value === MRT_FILTER_OPTION.BETWEEN) {
+        header.column.setFilterValue(['', '']);
+      } else {
+        header.column.setFilterValue('');
       }
     } else {
       setCurrentGlobalFilterFn(value);
@@ -145,7 +156,7 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
     onSelect?.();
   };
 
-  const filterType = !!header
+  const filterOption = !!header
     ? currentFilterFns[header.id]
     : currentGlobalFilterFn;
 
@@ -159,14 +170,14 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
         dense: isDensePadding,
       }}
     >
-      {filterOptions.map(({ type, label, divider, fn }, index) => (
+      {filterOptions.map(({ option, label, divider, fn }, index) => (
         <MenuItem
           divider={divider}
           key={index}
-          onClick={() => handleSelectFilterType(type)}
-          selected={type === filterType || fn === filterType}
+          onClick={() => handleSelectFilterType(option)}
+          selected={option === filterOption || fn === filterOption}
           sx={commonMenuItemStyles}
-          value={type}
+          value={option}
         >
           {label}
         </MenuItem>
