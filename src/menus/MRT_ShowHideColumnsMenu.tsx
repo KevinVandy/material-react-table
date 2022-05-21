@@ -83,7 +83,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
         {!isSubMenu && enablePinning && (
           <Button
             disabled={!getIsSomeColumnsPinned()}
-            onClick={() => tableInstance.setColumnPinning({})}
+            onClick={() => tableInstance.resetColumnPinning(true)}
           >
             {localization.unpinAll}
           </Button>

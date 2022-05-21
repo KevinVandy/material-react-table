@@ -83,7 +83,7 @@ export const ConditionallyStyleMuiTableRow: Story<
     muiTableBodyRowProps={({ row }) => ({
       sx: {
         backgroundColor:
-          row.values['age'] > 50 ? 'rgba(255, 54, 33, 0.18)' : '',
+          row.getValue('age') > 50 ? 'rgba(255, 54, 33, 0.18)' : '',
         fontStyle: 'italic',
       },
     })}
