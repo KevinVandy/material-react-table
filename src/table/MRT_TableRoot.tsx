@@ -216,7 +216,8 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
 
   const data: D[] = useMemo(
     () =>
-      props.isLoading && !props.data.length
+      (props.state?.isLoading || props.state?.showSkeletons) &&
+      !props.data.length
         ? [...Array(10).fill(null)].map(() =>
             Object.assign(
               {},
@@ -228,7 +229,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
             ),
           )
         : props.data,
-    [props.data, props.isLoading],
+    [props.data, props.state?.isLoading, props.state?.showSkeletons],
   );
 
   //@ts-ignore

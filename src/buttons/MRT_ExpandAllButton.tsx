@@ -13,13 +13,12 @@ export const MRT_ExpandAllButton: FC<Props> = ({ tableInstance }) => {
     getState,
     options: {
       icons: { DoubleArrowDownIcon },
-      isLoading,
       localization,
     },
     toggleAllRowsExpanded,
   } = tableInstance;
 
-  const { isDensePadding } = getState();
+  const { isDensePadding, isLoading } = getState();
 
   return (
     <IconButton

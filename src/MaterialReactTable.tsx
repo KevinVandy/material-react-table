@@ -124,10 +124,13 @@ export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
   currentFilterFns: Record<string, string | Function>;
   currentGlobalFilterFn: Record<string, string | Function>;
   isDensePadding: boolean;
+  isLoading: boolean;
   isFullScreen: boolean;
+  pagination: Partial<PaginationState>;
   showFilters: boolean;
   showGlobalFilter: boolean;
-  pagination: Partial<PaginationState>;
+  showProgressBars: boolean;
+  showSkeletons: boolean;
 };
 
 export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
@@ -343,8 +346,6 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     enabledGlobalFilterOptions?: (MRT_FILTER_OPTION | string)[];
     icons?: Partial<MRT_Icons>;
     idPrefix?: string;
-    isLoading?: boolean;
-    isReloading?: boolean;
     localization?: Partial<MRT_Localization>;
     muiLinearProgressProps?:
       | LinearProgressProps

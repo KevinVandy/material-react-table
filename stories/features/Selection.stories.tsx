@@ -32,7 +32,7 @@ const columns = [
     id: 'address',
   },
 ];
-const data = [...Array(5)].map((_) => ({
+const data = [...Array(15)].map((_) => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   age: faker.datatype.number(80),

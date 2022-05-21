@@ -8,8 +8,11 @@ interface Props {
 
 export const MRT_LinearProgressBar: FC<Props> = ({ tableInstance }) => {
   const {
-    options: { muiLinearProgressProps, isReloading, isLoading },
+    options: { muiLinearProgressProps },
+    getState,
   } = tableInstance;
+
+  const { isLoading, showProgressBars } = getState();
 
   const linearProgressProps =
     muiLinearProgressProps instanceof Function
@@ -17,7 +20,7 @@ export const MRT_LinearProgressBar: FC<Props> = ({ tableInstance }) => {
       : muiLinearProgressProps;
 
   return (
-    <Collapse in={isReloading || isLoading} unmountOnExit>
+    <Collapse in={isLoading || showProgressBars} mountOnEnter unmountOnExit>
       <LinearProgress
         aria-label="Loading"
         aria-busy="true"

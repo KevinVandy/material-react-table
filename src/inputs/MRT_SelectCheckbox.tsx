@@ -18,7 +18,6 @@ export const MRT_SelectCheckbox: FC<Props> = ({
     getSelectedRowModel,
     getState,
     options: {
-      isLoading,
       localization,
       muiSelectCheckboxProps,
       onSelectChange,
@@ -26,7 +25,7 @@ export const MRT_SelectCheckbox: FC<Props> = ({
     },
   } = tableInstance;
 
-  const { isDensePadding } = getState();
+  const { isDensePadding, isLoading } = getState();
 
   const handleSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (selectAll) {

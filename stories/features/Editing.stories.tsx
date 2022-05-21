@@ -29,7 +29,7 @@ export const EditingEnabledEditModeRowDefault: Story<
   const [tableData, setTableData] = useState(data);
 
   const handleSaveRow = ({ row }) => {
-    tableData[+row.index] = row.values;
+    tableData[+row.index] = row._valuesCache;
     setTableData([...tableData]);
   };
 
@@ -116,6 +116,7 @@ export const EditingEnabledEditModeTable: Story<
   const handleSaveCell = ({ cell, event }) => {
     tableData[+cell.row.index][cell.column.id] = event.target.value;
     setTableData([...tableData]);
+    console.info('saved cell with value: ', event.target.value);
   };
 
   return (
@@ -154,7 +155,7 @@ export const EditingCustomizeInput: Story<MaterialReactTableProps> = () => {
   const [tableData, setTableData] = useState(data);
 
   const handleSaveRow = ({ row }) => {
-    tableData[+row.index] = row.values;
+    tableData[+row.index] = row._valuesCache;
     setTableData([...tableData]);
   };
 
@@ -265,7 +266,7 @@ export const EditingWithValidation: Story<MaterialReactTableProps> = () => {
   );
 
   const handleSaveRow = ({ row }) => {
-    tableData[+row.index] = row.values;
+    tableData[+row.index] = row._valuesCache;
     setTableData([...tableData]);
   };
 
@@ -338,7 +339,7 @@ export const EditingEnabledAsync: Story<MaterialReactTableProps> = () => {
   const handleSaveRow = ({ row }) => {
     setIsSaving(true);
     setTimeout(() => {
-      tableData[+row.index] = row.values;
+      tableData[+row.index] = row._valuesCache;
       setTableData([...tableData]);
       setIsSaving(false);
     }, 1500);

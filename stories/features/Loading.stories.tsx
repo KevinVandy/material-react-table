@@ -46,21 +46,25 @@ const data = [...Array(100)].map((_) => ({
 }));
 
 export const LoadingExample: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={[]} isLoading />
+  <MaterialReactTable columns={columns} data={[]} state={{ isLoading: true }} />
 );
 
-export const LoadingDisplayColumns: Story<MaterialReactTableProps> = () => (
+export const SkeletonDisplayColumns: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={[]}
-    isLoading
     enableRowSelection
     enableRowNumbers
     enableExpanding
     enableRowActions
+    state={{ showSkeletons: true }}
   />
 );
 
 export const ReloadingExample: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} isReloading />
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    state={{ showProgressBars: true }}
+  />
 );

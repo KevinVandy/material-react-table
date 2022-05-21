@@ -22,7 +22,6 @@ export const MRT_TableBodyCell: FC<Props> = ({
       enableClickToCopy,
       enableEditing,
       idPrefix,
-      isLoading,
       muiTableBodyCellProps,
       muiTableBodyCellSkeletonProps,
       onCellClick,
@@ -30,7 +29,13 @@ export const MRT_TableBodyCell: FC<Props> = ({
     setCurrentEditingCell,
   } = tableInstance;
 
-  const { currentEditingCell, currentEditingRow, isDensePadding } = getState();
+  const {
+    currentEditingCell,
+    currentEditingRow,
+    isDensePadding,
+    isLoading,
+    showSkeletons,
+  } = getState();
 
   const { column, row } = cell;
 
@@ -158,7 +163,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
       })}
     >
       <>
-        {isLoading ? (
+        {isLoading || showSkeletons ? (
           <Skeleton
             animation="wave"
             height={20}
