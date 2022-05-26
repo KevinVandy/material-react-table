@@ -90,7 +90,9 @@ const Example: FC = () => {
     <MaterialReactTable
       columns={columns}
       data={parsedData}
-      isLoading={isLoading}
+      state={{
+        isLoading,
+      }}
     />
   );
 };

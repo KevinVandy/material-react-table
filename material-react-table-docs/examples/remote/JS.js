@@ -65,7 +65,9 @@ const Example = () => {
     <MaterialReactTable
       columns={columns}
       data={parsedData}
-      isLoading={isLoading}
+      state={{
+        isLoading,
+      }}
     />
   );
 };
