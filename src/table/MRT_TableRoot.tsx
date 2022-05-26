@@ -118,17 +118,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     MRT_FILTER_OPTION | FilterFn<ReactTableGenerics> | string | number | symbol
   >(props.globalFilterFn ?? MRT_FILTER_OPTION.FUZZY);
 
-  const table = useMemo(
-    () =>
-      createTable().setRowType<D>().setTableMetaType<{
-        updateData: (
-          rowIndex: number,
-          columnId: string,
-          value: unknown,
-        ) => void;
-      }>(),
-    [],
-  );
+  const table = useMemo(() => createTable(), []);
 
   const displayColumns = useMemo(
     () =>
