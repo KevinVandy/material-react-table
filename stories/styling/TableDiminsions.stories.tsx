@@ -5,11 +5,6 @@ import faker from '@faker-js/faker';
 
 const meta: Meta = {
   title: 'Styling/Table Diminsions Examples',
-  parameters: {
-    status: {
-      type: 'stable',
-    },
-  },
 };
 
 export default meta;

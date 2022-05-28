@@ -20,8 +20,9 @@ export const MRT_TableFooterRow: FC<Props> = ({
   if (
     !footerGroup.headers?.some(
       (h) =>
-        (typeof h.column.footer === 'string' && !!h.column.footer) ||
-        h.column.Footer,
+        (typeof h.column.columnDef.footer === 'string' &&
+          !!h.column.columnDef.footer) ||
+        h.column.columnDef.Footer,
     )
   )
     return null;

@@ -8,11 +8,6 @@ import faker from '@faker-js/faker';
 
 const meta: Meta = {
   title: 'Features/Persistent State',
-  parameters: {
-    status: {
-      type: 'stable',
-    },
-  },
 };
 
 export default meta;

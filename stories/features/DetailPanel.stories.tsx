@@ -5,11 +5,6 @@ import faker from '@faker-js/faker';
 
 const meta: Meta = {
   title: 'Features/Detail Panel Examples',
-  parameters: {
-    status: {
-      type: 'beta',
-    },
-  },
 };
 
 export default meta;

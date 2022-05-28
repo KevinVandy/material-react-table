@@ -54,14 +54,16 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, tableInstance }) => {
         ...(tableCellProps?.sx as any),
       })}
     >
-      {footer.isPlaceholder
-        ? null
-        : column.Footer?.({
-            footer,
-            tableInstance,
-          }) ??
-          column.footer ??
-          null}
+      <>
+        {footer.isPlaceholder
+          ? null
+          : column.columnDef.Footer?.({
+              footer,
+              tableInstance,
+            }) ??
+            footer.renderFooter() ??
+            null}
+      </>
     </TableCell>
   );
 };

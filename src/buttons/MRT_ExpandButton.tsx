@@ -1,5 +1,5 @@
 import React, { FC, MouseEvent } from 'react';
-import { IconButton } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
@@ -26,28 +26,34 @@ export const MRT_ExpandButton: FC<Props> = ({ row, tableInstance }) => {
   };
 
   return (
-    <IconButton
-      aria-label={localization.expand}
-      disabled={!row.getCanExpand() && !renderDetailPanel}
+    <Tooltip
+      arrow
+      enterDelay={1000}
+      enterNextDelay={1000}
       title={localization.expand}
-      onClick={handleToggleExpand}
-      sx={{
-        height: isDensePadding ? '1.75rem' : '2.25rem',
-        width: isDensePadding ? '1.75rem' : '2.25rem',
-      }}
     >
-      <ExpandMoreIcon
-        style={{
-          transform: `rotate(${
-            !row.getCanExpand() && !renderDetailPanel
-              ? -90
-              : row.getIsExpanded()
-              ? -180
-              : 0
-          }deg)`,
-          transition: 'transform 0.2s',
+      <IconButton
+        aria-label={localization.expand}
+        disabled={!row.getCanExpand() && !renderDetailPanel}
+        onClick={handleToggleExpand}
+        sx={{
+          height: isDensePadding ? '1.75rem' : '2.25rem',
+          width: isDensePadding ? '1.75rem' : '2.25rem',
         }}
-      />
-    </IconButton>
+      >
+        <ExpandMoreIcon
+          style={{
+            transform: `rotate(${
+              !row.getCanExpand() && !renderDetailPanel
+                ? -90
+                : row.getIsExpanded()
+                ? -180
+                : 0
+            }deg)`,
+            transition: 'transform 0.2s',
+          }}
+        />
+      </IconButton>
+    </Tooltip>
   );
 };

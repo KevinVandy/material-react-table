@@ -6,11 +6,6 @@ import { MenuItem } from '@mui/material';
 
 const meta: Meta = {
   title: 'Features/Editing Examples',
-  parameters: {
-    status: {
-      type: 'beta',
-    },
-  },
 };
 
 export default meta;
@@ -372,8 +367,10 @@ export const EditingEnabledAsync: Story<MaterialReactTableProps> = () => {
       data={tableData}
       enableRowActions
       enableEditing
-      isReloading={isSaving}
       onEditSubmit={handleSaveRow}
+      state={{
+        showProgressBars: isSaving,
+      }}
     />
   );
 };

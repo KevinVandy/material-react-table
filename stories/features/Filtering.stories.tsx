@@ -6,11 +6,6 @@ import { MenuItem, TextField } from '@mui/material';
 
 const meta: Meta = {
   title: 'Features/Filtering Examples',
-  parameters: {
-    status: {
-      type: 'beta',
-    },
-  },
 };
 
 export default meta;

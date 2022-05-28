@@ -25,7 +25,7 @@ export const MRT_SelectCheckbox: FC<Props> = ({
     },
   } = tableInstance;
 
-  const { isDensePadding, isLoading } = getState();
+  const { isDensePadding } = getState();
 
   const handleSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (selectAll) {
@@ -70,7 +70,6 @@ export const MRT_SelectCheckbox: FC<Props> = ({
             ? tableInstance.getIsAllRowsSelected()
             : row?.getIsSelected()
         }
-        disabled={isLoading}
         indeterminate={
           selectAll
             ? tableInstance.getIsSomeRowsSelected()

@@ -130,7 +130,10 @@ export const MRT_FilterTextField: FC<Props> = ({
       : '';
   const filterPlaceholder =
     inputIndex === undefined
-      ? localization.filterByColumn?.replace('{column}', String(column.header))
+      ? localization.filterByColumn?.replace(
+          '{column}',
+          String(column.columnDef.header),
+        )
       : inputIndex === 0
       ? localization.min
       : inputIndex === 1

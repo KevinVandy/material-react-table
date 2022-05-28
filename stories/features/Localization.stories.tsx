@@ -7,11 +7,6 @@ import { esES } from '@mui/material/locale';
 
 const meta: Meta = {
   title: 'Features/Localization Examples',
-  parameters: {
-    status: {
-      type: 'stable',
-    },
-  },
 };
 
 export default meta;

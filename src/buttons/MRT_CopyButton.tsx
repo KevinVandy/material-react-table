@@ -4,7 +4,7 @@ import { MRT_Cell, MRT_TableInstance } from '..';
 
 interface Props {
   cell: MRT_Cell;
-  children: ReactNode
+  children: ReactNode;
   tableInstance: MRT_TableInstance;
 }
 

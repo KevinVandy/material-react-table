@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IconButton } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
 interface Props {
@@ -18,27 +18,32 @@ export const MRT_ExpandAllButton: FC<Props> = ({ tableInstance }) => {
     toggleAllRowsExpanded,
   } = tableInstance;
 
-  const { isDensePadding, isLoading } = getState();
+  const { isDensePadding } = getState();
 
   return (
-    <IconButton
-      aria-label={localization.expandAll}
-      disabled={isLoading}
+    <Tooltip
+      arrow
+      enterDelay={1000}
+      enterNextDelay={1000}
       title={localization.expandAll}
-      onClick={() => toggleAllRowsExpanded(!getIsAllRowsExpanded())}
-      sx={{
-        height: isDensePadding ? '1.75rem' : '2.25rem',
-        width: isDensePadding ? '1.75rem' : '2.25rem',
-      }}
     >
-      <DoubleArrowDownIcon
-        style={{
-          transform: `rotate(${
-            getIsAllRowsExpanded() ? -180 : getIsSomeRowsExpanded() ? -90 : 0
-          }deg)`,
-          transition: 'transform 0.2s',
+      <IconButton
+        aria-label={localization.expandAll}
+        onClick={() => toggleAllRowsExpanded(!getIsAllRowsExpanded())}
+        sx={{
+          height: isDensePadding ? '1.75rem' : '2.25rem',
+          width: isDensePadding ? '1.75rem' : '2.25rem',
         }}
-      />
-    </IconButton>
+      >
+        <DoubleArrowDownIcon
+          style={{
+            transform: `rotate(${
+              getIsAllRowsExpanded() ? -180 : getIsSomeRowsExpanded() ? -90 : 0
+            }deg)`,
+            transition: 'transform 0.2s',
+          }}
+        />
+      </IconButton>
+    </Tooltip>
   );
 };

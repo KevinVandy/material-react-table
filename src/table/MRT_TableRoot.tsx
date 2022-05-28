@@ -227,22 +227,14 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     //@ts-ignore
     ...useTableInstance(table, {
       filterFns: defaultFilterFNs,
-      //@ts-ignore
       getCoreRowModel: getCoreRowModel(),
-      //@ts-ignore
       getExpandedRowModel: getExpandedRowModel(),
-      //@ts-ignore
       getFacetedRowModel: getFacetedRowModel(),
-      //@ts-ignore
       getFilteredRowModel: getFilteredRowModel(),
-      //@ts-ignore
       getGroupedRowModel: getGroupedRowModel(),
-      //@ts-ignore
       getPaginationRowModel: getPaginationRowModel(),
-      //@ts-ignore
       getSortedRowModel: getSortedRowModel(),
-      //@ts-ignore
-      getSubRows: (row) => row?.subRows,
+      getSubRows: (row) => (row as MRT_Row)?.subRows,
       //@ts-ignore
       globalFilterFn: currentGlobalFilterFn,
       onPaginationChange: (updater: any) =>

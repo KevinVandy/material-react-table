@@ -5,11 +5,6 @@ import faker from '@faker-js/faker';
 
 const meta: Meta = {
   title: 'Features/Pagination Examples',
-  parameters: {
-    status: {
-      type: 'beta',
-    },
-  },
 };
 
 export default meta;

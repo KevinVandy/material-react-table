@@ -8,11 +8,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const meta: Meta = {
   title: 'Features/Toolbar Examples',
-  parameters: {
-    status: {
-      type: 'beta',
-    },
-  },
 };
 
 export default meta;

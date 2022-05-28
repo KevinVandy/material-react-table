@@ -178,7 +178,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
               </ListItemIcon>
               {localization.sortByColumnAsc?.replace(
                 '{column}',
-                String(column.header),
+                String(column.columnDef.header),
               )}
             </Box>
           </MenuItem>,
@@ -195,7 +195,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
               </ListItemIcon>
               {localization.sortByColumnDesc?.replace(
                 '{column}',
-                String(column.header),
+                String(column.columnDef.header),
               )}
             </Box>
           </MenuItem>,
@@ -227,7 +227,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
               </ListItemIcon>
               {localization.filterByColumn?.replace(
                 '{column}',
-                String(column.header),
+                String(column.columnDef.header),
               )}
             </Box>
             {!column.filterSelectOptions && (
@@ -264,7 +264,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
               </ListItemIcon>
               {localization[
                 column.getIsGrouped() ? 'ungroupByColumn' : 'groupByColumn'
-              ]?.replace('{column}', String(column.header))}
+              ]?.replace('{column}', String(column.columnDef.header))}
             </Box>
           </MenuItem>,
         ]}
@@ -339,7 +339,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             </ListItemIcon>
             {localization.hideColumn?.replace(
               '{column}',
-              String(column.header),
+              String(column.columnDef.header),
             )}
           </Box>
         </MenuItem>,
@@ -358,7 +358,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             </ListItemIcon>
             {localization.showAllColumns?.replace(
               '{column}',
-              String(column.header),
+              String(column.columnDef.header),
             )}
           </Box>
           <IconButton

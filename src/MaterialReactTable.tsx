@@ -280,6 +280,9 @@ export type MRT_Column<D extends Record<string, any> = {}> = Omit<
 > &
   MRT_ColumnDef<D> & {
     columns?: MRT_Column<D>[];
+    columnDef: MRT_ColumnDef<D>;
+    header: string;
+    footer: string;
   };
 
 export type MRT_Header<D extends Record<string, any> = {}> = Omit<

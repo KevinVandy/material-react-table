@@ -5,11 +5,6 @@ import faker from '@faker-js/faker';
 
 const meta: Meta = {
   title: 'Features/Sub Row Tree Examples',
-  parameters: {
-    status: {
-      type: 'alpha',
-    },
-  },
 };
 
 export default meta;

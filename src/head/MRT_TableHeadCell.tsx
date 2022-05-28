@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from 'react';
+import React, { FC, MouseEvent, ReactNode } from 'react';
 import {
   Box,
   Collapse,
@@ -57,15 +57,21 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
 
   const sortTooltip = !!column.getIsSorted()
     ? column.getIsSorted() === 'desc'
-      ? localization.sortedByColumnDesc.replace('{column}', column.header)
-      : localization.sortedByColumnAsc.replace('{column}', column.header)
+      ? localization.sortedByColumnDesc.replace(
+          '{column}',
+          column.columnDef.header,
+        )
+      : localization.sortedByColumnAsc.replace(
+          '{column}',
+          column.columnDef.header,
+        )
     : localization.unsorted;
 
   const filterFn = getState()?.currentFilterFns?.[header.id];
 
   const filterTooltip = !!column.getFilterValue()
     ? localization.filteringByColumn
-        .replace('{column}', String(column.header))
+        .replace('{column}', String(column.columnDef.header))
         .replace(
           '{filterType}',
           filterFn instanceof Function
@@ -88,11 +94,10 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
         .replace('" "', '')
     : localization.showHideFilters;
 
-  const headerElement =
-    column?.Header?.({
-      header,
-      tableInstance,
-    }) ?? column.header;
+  const headerElement = (column.columnDef?.Header?.({
+    header,
+    tableInstance,
+  }) ?? header.renderHeader()) as ReactNode;
 
   const getIsLastLeftPinnedColumn = () => {
     return (
@@ -192,7 +197,10 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
                   : undefined,
               display: 'flex',
               flexWrap: 'nowrap',
-              whiteSpace: column.header.length < 24 ? 'nowrap' : 'normal',
+              whiteSpace:
+                (column.columnDef.header?.length ?? 0) < 24
+                  ? 'nowrap'
+                  : 'normal',
             }}
           >
             {headerElement}

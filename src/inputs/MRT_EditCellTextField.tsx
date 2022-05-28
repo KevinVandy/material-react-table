@@ -73,7 +73,7 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, tableInstance }) => {
       onBlur={handleBlur}
       onChange={handleChange}
       onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
-      placeholder={column.header}
+      placeholder={column.columnDef.header}
       value={value}
       variant="standard"
       {...textFieldProps}
