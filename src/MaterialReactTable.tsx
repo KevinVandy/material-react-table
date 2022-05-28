@@ -757,6 +757,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
 export default <D extends Record<string, any> = {}>({
   autoResetExpanded = false,
   columnResizeMode = 'onEnd',
+  defaultColumn = { minSize: 50, maxSize: 1000, size: 150 },
   editingMode = 'row',
   enableColumnActions = true,
   enableColumnFilters = true,
@@ -790,6 +791,7 @@ export default <D extends Record<string, any> = {}>({
   <MRT_TableRoot
     autoResetExpanded={autoResetExpanded}
     columnResizeMode={columnResizeMode}
+    defaultColumn={defaultColumn}
     editingMode={editingMode}
     enableColumnActions={enableColumnActions}
     enableColumnFilters={enableColumnFilters}

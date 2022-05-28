@@ -141,8 +141,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
           column.getIsPinned() === 'left'
             ? `${column.getStart('left')}px`
             : undefined,
-        maxWidth: `min(${column.getSize()}px, fit-content)`,
-        minWidth: `max(${column.getSize()}px, ${column.minSize}px)`,
+
         overflow: 'visible',
         p: isDensePadding
           ? column.columnDefType === 'display'
@@ -166,7 +165,6 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
           column.getIsPinned() === 'right' ? `${getTotalRight()}px` : undefined,
         transition: `all ${enableColumnResizing ? 0 : '0.2s'} ease-in-out`,
         verticalAlign: 'text-top',
-        width: header.getSize(),
         zIndex: column.getIsResizing()
           ? 3
           : column.getIsPinned() && column.columnDefType !== 'group'
@@ -174,6 +172,11 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
           : 1,
         ...(tableCellProps?.sx as any),
       })}
+      style={{
+        maxWidth: `min(${column.getSize()}px, fit-content)`,
+        minWidth: `max(${column.getSize()}px, ${column.minSize ?? 30}px)`,
+        width: header.getSize(),
+      }}
     >
       {header.isPlaceholder ? null : column.columnDefType === 'display' ? (
         headerElement
@@ -273,7 +276,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
                 position: 'absolute',
                 right: '1px',
                 touchAction: 'none',
-                transition: 'all 0.2s ease-in-out',
+                transition: column.getIsResizing()
+                  ? undefined
+                  : 'all 0.2s ease-in-out',
                 userSelect: 'none',
                 zIndex: 2000,
                 '&:active': {
@@ -281,10 +286,8 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
                   opacity: 1,
                 },
               })}
-              {...{
-                onMouseDown: header.getResizeHandler,
-                onTouchStart: header.getResizeHandler,
-              }}
+              onMouseDown={header.getResizeHandler()}
+              onTouchStart={header.getResizeHandler()}
               style={{
                 transform: column.getIsResizing()
                   ? `translateX(${getState().columnSizingInfo.deltaOffset}px)`

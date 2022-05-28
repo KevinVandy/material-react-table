@@ -132,8 +132,6 @@ export const MRT_TableBodyCell: FC<Props> = ({
           column.getIsPinned() === 'left'
             ? `${column.getStart('left')}px`
             : undefined,
-        maxWidth: `min(${column.getSize()}px, fit-content)`,
-        minWidth: `max${column.getSize()}px, ${column.minSize}px`,
         p: isDensePadding
           ? column.columnDefType === 'display'
             ? '0 0.5rem'
@@ -150,7 +148,6 @@ export const MRT_TableBodyCell: FC<Props> = ({
           column.getIsPinned() === 'right' ? `${getTotalRight()}px` : undefined,
         transition: 'all 0.2s ease-in-out',
         whiteSpace: isDensePadding ? 'nowrap' : 'normal',
-        width: column.getSize(),
         zIndex: column.getIsPinned() ? 1 : undefined,
         '&:hover': {
           backgroundColor: enableHover
@@ -161,6 +158,11 @@ export const MRT_TableBodyCell: FC<Props> = ({
         },
         ...(tableCellProps?.sx as any),
       })}
+      style={{
+        maxWidth: `min(${column.getSize()}px, fit-content)`,
+        minWidth: `max(${column.getSize()}px, ${column.minSize ?? 30}px)`,
+        width: column.getSize(),
+      }}
     >
       <>
         {isLoading || showSkeletons ? (
@@ -192,7 +194,8 @@ export const MRT_TableBodyCell: FC<Props> = ({
           </>
         ) : (
           <>
-            {cell.column.columnDef?.Cell?.({ cell, tableInstance }) ?? cell.renderCell()}
+            {cell.column.columnDef?.Cell?.({ cell, tableInstance }) ??
+              cell.renderCell()}
             {row.getIsGrouped() && <> ({row.subRows?.length ?? ''})</>}
           </>
         )}
