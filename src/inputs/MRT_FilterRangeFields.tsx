@@ -8,7 +8,7 @@ interface Props {
   tableInstance: MRT_TableInstance;
 }
 
-const MRT_FilterRangeFields: FC<Props> = ({ header, tableInstance }) => {
+export const MRT_FilterRangeFields: FC<Props> = ({ header, tableInstance }) => {
   const {
     options: { localization },
   } = tableInstance;
@@ -37,5 +37,3 @@ const MRT_FilterRangeFields: FC<Props> = ({ header, tableInstance }) => {
     </Box>
   );
 };
-
-export default MRT_FilterRangeFields;
