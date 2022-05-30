@@ -80,6 +80,7 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   >,
   | 'getAllColumns'
   | 'getAllLeafColumns'
+  | 'getColumn'
   | 'getExpandedRowModel'
   | 'getPaginationRowModel'
   | 'getPrePaginationRowModel'
@@ -90,6 +91,7 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
 > & {
   getAllColumns: () => MRT_Column<D>[];
   getAllLeafColumns: () => MRT_Column<D>[];
+  getColumn: (columnId: string) => MRT_Column<D>;
   getExpandedRowModel: () => MRT_RowModel<D>;
   getPaginationRowModel: () => MRT_RowModel<D>;
   getPrePaginationRowModel: () => MRT_RowModel<D>;

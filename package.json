@@ -1,13 +1,14 @@
 {
-  "version": "0.8.0-alpha.2",
+  "version": "0.8.0",
   "license": "MIT",
   "name": "material-react-table",
-  "description": "A fully featured Material UI implementation of react-table, inspired by material-table and the MUI X DataGrid, written from the ground up in TypeScript.",
+  "description": "A fully featured Material UI implementation of Tanstack react-table, inspired by material-table and the MUI X DataGrid, written from the ground up in TypeScript.",
   "author": "Kevin Vandy",
   "keywords": [
     "react-table",
     "material-ui",
-    "material-table"
+    "material-table", 
+    "tanstack table"
   ],
   "repository": {
     "type": "git",
@@ -94,6 +95,6 @@
   },
   "dependencies": {
     "@tanstack/match-sorter-utils": "^8.0.0-alpha.83",
-    "@tanstack/react-table": "^8.0.0-beta.2"
+    "@tanstack/react-table": "^8.0.0-alpha.89"
   }
 }

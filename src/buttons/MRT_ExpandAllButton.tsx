@@ -10,10 +10,12 @@ export const MRT_ExpandAllButton: FC<Props> = ({ tableInstance }) => {
   const {
     getIsAllRowsExpanded,
     getIsSomeRowsExpanded,
+    getCanSomeRowsExpand,
     getState,
     options: {
       icons: { DoubleArrowDownIcon },
       localization,
+      renderDetailPanel,
     },
     toggleAllRowsExpanded,
   } = tableInstance;
@@ -29,6 +31,7 @@ export const MRT_ExpandAllButton: FC<Props> = ({ tableInstance }) => {
     >
       <IconButton
         aria-label={localization.expandAll}
+        disabled={!getCanSomeRowsExpand() && !renderDetailPanel}
         onClick={() => toggleAllRowsExpanded(!getIsAllRowsExpanded())}
         sx={{
           height: isDensePadding ? '1.75rem' : '2.25rem',

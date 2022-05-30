@@ -2,7 +2,7 @@
 
 > This Project is based on react-table v8, which itself is still in alpha, and therefore this package is also still in alpha
 
-- A fully featured Material UI v5 implementation of react-table v8 (alpha)
+- A fully featured Material UI v5 implementation of Tanstack react-table v8 (alpha)
 - Inspired by material-table and the MUI X DataGrid
 - Written from the ground up in TypeScript, Material UI, and React Table
 - All internal Material UI components are easily customizable

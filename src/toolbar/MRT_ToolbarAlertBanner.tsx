@@ -1,28 +1,24 @@
 import React, { FC, Fragment } from 'react';
-import { Alert, Box, Chip, Collapse, useMediaQuery } from '@mui/material';
+import { Alert, Box, Chip, Collapse } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
 interface Props {
+  stackAlertBanner?: boolean;
   tableInstance: MRT_TableInstance;
 }
 
-export const MRT_ToolbarAlertBanner: FC<Props> = ({ tableInstance }) => {
+export const MRT_ToolbarAlertBanner: FC<Props> = ({
+  stackAlertBanner,
+  tableInstance,
+}) => {
   const {
     getPrePaginationRowModel,
     getSelectedRowModel,
     getState,
-    options: {
-      localization,
-      muiTableToolbarAlertBannerProps,
-      positionToolbarActions,
-      positionToolbarAlertBanner,
-      renderToolbarCustomActions,
-    },
+    options: { localization, muiTableToolbarAlertBannerProps },
   } = tableInstance;
 
   const { grouping } = getState();
-
-  const isMobile = useMediaQuery('(max-width:720px)');
 
   const alertProps =
     muiTableToolbarAlertBannerProps instanceof Function
@@ -51,11 +47,7 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({ tableInstance }) => {
             {index > 0 ? localization.thenBy : ''}
             <Chip
               color="secondary"
-              label={
-                tableInstance
-                  .getAllColumns()
-                  .find((column) => column.id === columnId)?.header
-              }
+              label={tableInstance.getColumn(columnId).columnDef.header}
               onDelete={() =>
                 tableInstance.getColumn(columnId).toggleGrouping()
               }
@@ -65,17 +57,10 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({ tableInstance }) => {
       </span>
     ) : null;
 
-  const displayAbsolute = !(
-    isMobile ||
-    (positionToolbarAlertBanner === 'bottom' &&
-      positionToolbarActions === 'bottom') ||
-    (positionToolbarAlertBanner === 'top' && !!renderToolbarCustomActions)
-  );
-
   return (
     <Collapse
       in={!!selectMessage || !!groupedByMessage}
-      timeout={displayAbsolute ? 0 : 200}
+      timeout={stackAlertBanner ? 200 : 0}
     >
       <Alert
         color="info"
@@ -85,9 +70,8 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({ tableInstance }) => {
           fontSize: '1rem',
           left: 0,
           p: 0,
-          position: displayAbsolute ? 'absolute' : 'relative',
+          position: 'relative',
           right: 0,
-          minHeight: '3.5rem',
           top: 0,
           width: '100%',
           zIndex: 2,
@@ -97,7 +81,7 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({ tableInstance }) => {
       >
         <Box sx={{ p: '0.5rem 1rem' }}>
           {selectMessage}
-          <br />
+          {selectMessage && groupedByMessage && <br />}
           {groupedByMessage}
         </Box>
       </Alert>

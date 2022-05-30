@@ -61,6 +61,7 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, tableInstance }) => {
               footer,
               tableInstance,
             }) ??
+            column.columnDef.footer ??
             footer.renderFooter() ??
             null}
       </>

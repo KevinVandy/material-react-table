@@ -44,17 +44,23 @@ const data = [...Array(5)].map((_) => ({
 }));
 
 export const ToolbarEnabledDefault: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} />
+  <MaterialReactTable columns={columns} data={data} enableRowSelection />
 );
 
 export const TopToolbarHidden: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} enableToolbarTop={false} />
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowSelection
+    enableToolbarTop={false}
+  />
 );
 
 export const BottomToolbarHidden: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    enableRowSelection
     enableToolbarBottom={false}
   />
 );
@@ -63,6 +69,7 @@ export const NoToolbars: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    enableRowSelection
     enableToolbarTop={false}
     enableToolbarBottom={false}
   />
@@ -74,6 +81,7 @@ export const HideToolbarInternalActions: Story<
   <MaterialReactTable
     columns={columns}
     data={data}
+    enableRowSelection
     enableToolbarInternalActions={false}
   />
 );
@@ -84,6 +92,7 @@ export const ToolbarInternalActionsOnBottom: Story<
   <MaterialReactTable
     columns={columns}
     data={data}
+    enableRowSelection
     positionToolbarActions="bottom"
   />
 );
@@ -94,6 +103,8 @@ export const CustomToolbarInternalActions: Story<
   <MaterialReactTable
     columns={columns}
     data={data}
+    enableRowSelection
+    enableGrouping
     renderToolbarInternalActions={({
       tableInstance,
       MRT_FullScreenToggleButton,
@@ -111,6 +122,7 @@ export const TableTitle: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    enableRowSelection
     renderToolbarCustomActions={(tableInstance) => {
       return <Typography variant="h4">Table Title</Typography>;
     }}
@@ -121,6 +133,7 @@ export const CustomToolbarActions: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    enableRowSelection
     renderToolbarCustomActions={(tableInstance) => {
       const handleCreateNewUser = () => {
         prompt('Create new user modal');

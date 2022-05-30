@@ -52,6 +52,8 @@ export const MRT_CopyButton: FC<Props> = ({
         aria-label={localization.clickToCopy}
         onClick={() => handleCopy(cell.getValue())}
         size="small"
+        type="button"
+        variant="text"
         {...buttonProps}
         sx={{
           backgroundColor: 'transparent',
@@ -67,7 +69,6 @@ export const MRT_CopyButton: FC<Props> = ({
           textTransform: 'inherit',
           ...buttonProps?.sx,
         }}
-        variant="text"
       >
         {children}
       </Button>
