@@ -80,7 +80,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
       150
     );
   };
-  console.log(column.getCanGroup());
+
   return (
     <TableCell
       align={column.columnDefType === 'group' ? 'center' : 'left'}

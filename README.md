@@ -23,7 +23,7 @@ Join the [discord](https://discord.gg/5wqyRx6fnm) server to join in on the devel
 - [x] Column Actions
 - [x] Column Hiding
 - [x] Column Grouping (Group By and Aggregates)
-- [ ] Column Ordering (react-dnd planned)
+- [x] Column Ordering (react-dnd)
 - [x] Column Pinning
 - [x] Column Resizing (work in progress)
 - [x] Custom Icons

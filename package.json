@@ -1,5 +1,5 @@
 {
-  "version": "0.8.1",
+  "version": "0.8.2",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI implementation of Tanstack react-table, inspired by material-table and the MUI X DataGrid, written from the ground up in TypeScript.",
@@ -97,7 +97,6 @@
     "@tanstack/match-sorter-utils": "^8.0.0-alpha.83",
     "@tanstack/react-table": "^8.0.0-alpha.89",
     "react-dnd": "^16.0.1",
-    "react-dnd-html5-backend": "^16.0.1",
-    "react-dnd-scrolling": "^1.2.4"
+    "react-dnd-html5-backend": "^16.0.1"
   }
 }

@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useLayoutEffect, useState } from 'react';
 import { TableContainer } from '@mui/material';
-import { MRT_TableInstance } from '..';
 import { MRT_Table } from './MRT_Table';
+import type { MRT_TableInstance } from '..';
 
 const useIsomorphicLayoutEffect =
   typeof window !== 'undefined' ? useLayoutEffect : useEffect;
