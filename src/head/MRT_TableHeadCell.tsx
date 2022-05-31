@@ -1,24 +1,38 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, Ref } from 'react';
 import { Box, TableCell, Theme, alpha, lighten } from '@mui/material';
-import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
-import { MRT_TableHeadCellSortLabel } from './MRT_TableHeadCellSortLabel';
-import { MRT_TableHeadCellResizeHandle } from './MRT_TableHeadCellResizeHandle';
-import { MRT_TableHeadCellFilterLabel } from './MRT_TableHeadCellFilterLabel';
 import { MRT_TableHeadCellFilterContainer } from './MRT_TableHeadCellFilterContainer';
+import { MRT_TableHeadCellFilterLabel } from './MRT_TableHeadCellFilterLabel';
+import { MRT_TableHeadCellGrabHandle } from './MRT_TableHeadCellGrabHandle';
+import { MRT_TableHeadCellResizeHandle } from './MRT_TableHeadCellResizeHandle';
+import { MRT_TableHeadCellSortLabel } from './MRT_TableHeadCellSortLabel';
+import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
 import type { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
+  dragRef?: Ref<HTMLButtonElement>;
+  dropRef?: Ref<HTMLDivElement>;
   header: MRT_Header;
+  isDragging?: boolean;
+  previewRef?: Ref<HTMLTableCellElement>;
   tableInstance: MRT_TableInstance;
 }
 
-export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
+export const MRT_TableHeadCell: FC<Props> = ({
+  dragRef,
+  dropRef,
+  header,
+  isDragging,
+  previewRef,
+  tableInstance,
+}) => {
   const {
     getState,
     options: {
       enableColumnActions,
       enableColumnFilters,
+      enableColumnOrdering,
       enableColumnResizing,
+      enableGrouping,
       muiTableHeadCellProps,
     },
   } = tableInstance;
@@ -66,12 +80,13 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
       150
     );
   };
-
+  console.log(column.getCanGroup());
   return (
     <TableCell
       align={column.columnDefType === 'group' ? 'center' : 'left'}
       colSpan={header.colSpan}
       {...tableCellProps}
+      ref={column.columnDefType === 'data' ? dropRef : undefined}
       sx={(theme: Theme) => ({
         backgroundColor:
           column.getIsPinned() && column.columnDefType !== 'group'
@@ -89,7 +104,6 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
           column.getIsPinned() === 'left'
             ? `${column.getStart('left')}px`
             : undefined,
-
         overflow: 'visible',
         p: isDensePadding
           ? column.columnDefType === 'display'
@@ -130,11 +144,13 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
         headerElement
       ) : (
         <Box
+          ref={previewRef}
           sx={{
             alignItems: 'flex-start',
             display: 'flex',
             justifyContent:
               column.columnDefType === 'group' ? 'center' : 'space-between',
+            opacity: isDragging ? 0.5 : 1,
             width: '100%',
           }}
         >
@@ -170,14 +186,26 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, tableInstance }) => {
                 />
               )}
           </Box>
-          {(enableColumnActions || column.enableColumnActions) &&
-            column.enableColumnActions !== false &&
-            column.columnDefType !== 'group' && (
-              <MRT_ToggleColumnActionMenuButton
-                header={header}
-                tableInstance={tableInstance}
-              />
-            )}
+          <Box sx={{ whiteSpace: 'nowrap' }}>
+            {column.columnDefType === 'data' &&
+              ((enableColumnOrdering &&
+                column.enableColumnOrdering !== false) ||
+                (enableGrouping && column.enableGrouping !== false)) && (
+                <MRT_TableHeadCellGrabHandle
+                  header={header}
+                  ref={dragRef as Ref<HTMLButtonElement>}
+                  tableInstance={tableInstance}
+                />
+              )}
+            {(enableColumnActions || column.enableColumnActions) &&
+              column.enableColumnActions !== false &&
+              column.columnDefType !== 'group' && (
+                <MRT_ToggleColumnActionMenuButton
+                  header={header}
+                  tableInstance={tableInstance}
+                />
+              )}
+          </Box>
           {column.getCanResize() && (
             <MRT_TableHeadCellResizeHandle
               header={header}

@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { alpha, lighten, TableRow } from '@mui/material';
 import { MRT_TableHeadCell } from './MRT_TableHeadCell';
+import { MRT_DraggableTableHeadCell } from './MRT_DraggableTableHeadCell';
 import type { MRT_Header, MRT_HeaderGroup, MRT_TableInstance } from '..';
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
 
 export const MRT_TableHeadRow: FC<Props> = ({ headerGroup, tableInstance }) => {
   const {
-    options: { muiTableHeadRowProps },
+    options: { enableColumnOrdering, enableGrouping, muiTableHeadRowProps },
   } = tableInstance;
 
   const tableRowProps =
@@ -27,13 +28,21 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup, tableInstance }) => {
         ...(tableRowProps?.sx as any),
       })}
     >
-      {headerGroup.headers.map((header: MRT_Header, index) => (
-        <MRT_TableHeadCell
-          header={header}
-          key={header.id || index}
-          tableInstance={tableInstance}
-        />
-      ))}
+      {headerGroup.headers.map((header: MRT_Header, index) =>
+        enableColumnOrdering || enableGrouping ? (
+          <MRT_DraggableTableHeadCell
+            header={header}
+            key={header.id || index}
+            tableInstance={tableInstance}
+          />
+        ) : (
+          <MRT_TableHeadCell
+            header={header}
+            key={header.id || index}
+            tableInstance={tableInstance}
+          />
+        ),
+      )}
     </TableRow>
   );
 };

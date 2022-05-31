@@ -6,6 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import DoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import DragHandleIcon from '@mui/icons-material/DragHandle';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import EditIcon from '@mui/icons-material/Edit';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
@@ -36,6 +37,7 @@ export interface MRT_Icons {
   DensityMediumIcon: any;
   DensitySmallIcon: any;
   DoubleArrowDownIcon: any;
+  DragHandleIcon: any;
   DynamicFeedIcon: any;
   EditIcon: any;
   ExpandLessIcon: any;
@@ -67,6 +69,7 @@ export const MRT_Default_Icons: MRT_Icons = {
   DensityMediumIcon,
   DensitySmallIcon,
   DoubleArrowDownIcon,
+  DragHandleIcon,
   DynamicFeedIcon,
   EditIcon,
   ExpandLessIcon,

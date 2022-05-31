@@ -178,6 +178,7 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
   columns?: MRT_ColumnDef<D>[];
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;
+  enableColumnOrdering?: boolean;
   enableEditing?: boolean;
   enabledColumnFilterOptions?: (MRT_FILTER_OPTION | string)[];
   filterFn?: MRT_FilterFn;
@@ -332,6 +333,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     editingMode?: 'table' | 'row' | 'cell';
     enableClickToCopy?: boolean;
     enableColumnActions?: boolean;
+    enableColumnOrdering?: boolean;
     enableDensePaddingToggle?: boolean;
     enableEditing?: boolean;
     enableExpandAll?: boolean;
@@ -763,12 +765,14 @@ export default <D extends Record<string, any> = {}>({
   editingMode = 'row',
   enableColumnActions = true,
   enableColumnFilters = true,
+  enableColumnOrdering = false,
   enableColumnResizing = false,
   enableDensePaddingToggle = true,
   enableExpandAll = true,
   enableFilters = true,
   enableFullScreenToggle = true,
   enableGlobalFilter = true,
+  enableGrouping = false,
   enableHiding = true,
   enableMultiRowSelection = true,
   enablePagination = true,
@@ -797,12 +801,14 @@ export default <D extends Record<string, any> = {}>({
     editingMode={editingMode}
     enableColumnActions={enableColumnActions}
     enableColumnFilters={enableColumnFilters}
+    enableColumnOrdering={enableColumnOrdering}
     enableColumnResizing={enableColumnResizing}
     enableDensePaddingToggle={enableDensePaddingToggle}
     enableExpandAll={enableExpandAll}
     enableFilters={enableFilters}
     enableFullScreenToggle={enableFullScreenToggle}
     enableGlobalFilter={enableGlobalFilter}
+    enableGrouping={enableGrouping}
     enableHiding={enableHiding}
     enableMultiRowSelection={enableMultiRowSelection}
     enablePagination={enablePagination}

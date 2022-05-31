@@ -222,6 +222,12 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     [props.data, props.state?.isLoading, props.state?.showSkeletons],
   );
 
+  const [columnOrder, setColumnOrder] = useState<string[]>(() =>
+    initialState?.columnOrder ?? props.enableColumnOrdering
+      ? getAllLeafColumnDefs(columns as MRT_ColumnDef[]).map((c) => c.id)
+      : [],
+  );
+
   //@ts-ignore
   const tableInstance = {
     //@ts-ignore
@@ -237,6 +243,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       getSubRows: (row) => (row as MRT_Row)?.subRows,
       //@ts-ignore
       globalFilterFn: currentGlobalFilterFn,
+      onColumnOrderChange: setColumnOrder,
       onPaginationChange: (updater: any) =>
         setPagination((old) => functionalUpdate(updater, old)),
       ...props,
@@ -246,6 +253,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       idPrefix,
       initialState,
       state: {
+        columnOrder,
         currentEditingCell,
         currentEditingRow,
         currentFilterFns,

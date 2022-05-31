@@ -7,7 +7,7 @@ import MaterialReactTable, {
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
-  title: 'Features/Column Pinning Examples',
+  title: 'Features/Column Ordering Examples',
 };
 
 export default meta;
@@ -48,27 +48,15 @@ const data = [...Array(100)].map((_) => ({
   state: faker.address.state(),
 }));
 
-export const ColumnPinningEnabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} enablePinning />
+export const ColumnOrderingEnabled: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} enableColumnOrdering />
 );
 
-export const ColumnPinningWithSelect: Story<MaterialReactTableProps> = () => (
+export const ColumnOrderingWithSelect: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enablePinning
+    enableColumnOrdering
     enableRowSelection
-  />
-);
-
-export const ColumnPinningWithDetailPanel: Story<
-  MaterialReactTableProps
-> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    enablePinning
-    enableExpanding
-    renderDetailPanel={(row) => <h1>Hi</h1>}
   />
 );

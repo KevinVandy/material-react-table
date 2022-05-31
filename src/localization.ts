@@ -27,6 +27,7 @@ export interface MRT_Localization {
   filterNotEquals: string;
   filterStartsWith: string;
   filteringByColumn: string;
+  grab: string;
   groupByColumn: string;
   groupedBy: string;
   hideAll: string;
@@ -93,6 +94,7 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   filterNotEquals: 'Not Equals',
   filterStartsWith: 'Starts With',
   filteringByColumn: 'Filtering by {column} - {filterType} {filterValue}',
+  grab: 'Grab',
   groupByColumn: 'Group by {column}',
   groupedBy: 'Grouped by ',
   hideAll: 'Hide all',
