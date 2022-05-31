@@ -1,5 +1,5 @@
 {
-  "version": "0.8.2",
+  "version": "0.8.3",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI implementation of Tanstack react-table, inspired by material-table and the MUI X DataGrid, written from the ground up in TypeScript.",
@@ -19,6 +19,7 @@
     "url": "https://github.com/KevinVandy/material-react-table/issues"
   },
   "main": "dist/index.js",
+  "module": "dist/material-react-table.esm.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
@@ -44,15 +45,14 @@
       "pre-commit": "tsdx lint && format"
     }
   },
-  "module": "dist/material-react-table.esm.js",
   "size-limit": [
     {
       "path": "dist/material-react-table.cjs.production.min.js",
-      "limit": "50 KB"
+      "limit": "60 KB"
     },
     {
       "path": "dist/material-react-table.esm.js",
-      "limit": "50 KB"
+      "limit": "60 KB"
     }
   ],
   "devDependencies": {
@@ -60,8 +60,8 @@
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@faker-js/faker": "^6.3.1",
-    "@mui/icons-material": "^5.8.0",
-    "@mui/material": "^5.8.1",
+    "@mui/icons-material": "^5.8.2",
+    "@mui/material": "^5.8.2",
     "@size-limit/preset-small-lib": "^7.0.8",
     "@storybook/addon-a11y": "^6.5.5",
     "@storybook/addon-actions": "^6.5.5",
@@ -96,7 +96,7 @@
   "dependencies": {
     "@tanstack/match-sorter-utils": "^8.0.0-alpha.83",
     "@tanstack/react-table": "^8.0.0-alpha.89",
-    "react-dnd": "^16.0.1",
-    "react-dnd-html5-backend": "^16.0.1"
+    "react-dnd": "^15.1.2",
+    "react-dnd-html5-backend": "^15.1.2"
   }
 }
