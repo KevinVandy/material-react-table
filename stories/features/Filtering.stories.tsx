@@ -253,10 +253,10 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
         Filter: ({ header }) => (
           <TextField
             onChange={(e) =>
-              header.column.setColumnFilterValue(e.target.value || undefined)
+              header.column.setFilterValue(e.target.value || undefined)
             }
             select
-            value={header.column.getColumnFilterValue() ?? ''}
+            value={header.column.getFilterValue() ?? ''}
             margin="dense"
             placeholder="Filter"
             variant="standard"
