@@ -14,7 +14,7 @@ export const MRT_TableHeadCellFilterLabel: FC<Props> = ({
   const {
     getState,
     options: {
-      icons: { FilterAltIcon, FilterAltOff },
+      icons: { FilterAltIcon, FilterAltOffIcon },
       localization,
     },
     setShowFilters,
@@ -72,7 +72,7 @@ export const MRT_TableHeadCellFilterLabel: FC<Props> = ({
         }}
       >
         {showFilters && !column.getFilterValue() ? (
-          <FilterAltOff />
+          <FilterAltOffIcon />
         ) : (
           <FilterAltIcon />
         )}

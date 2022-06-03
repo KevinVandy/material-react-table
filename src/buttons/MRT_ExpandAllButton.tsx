@@ -13,7 +13,7 @@ export const MRT_ExpandAllButton: FC<Props> = ({ tableInstance }) => {
     getCanSomeRowsExpand,
     getState,
     options: {
-      icons: { DoubleArrowDownIcon },
+      icons: { KeyboardDoubleArrowDownIcon },
       localization,
       renderDetailPanel,
     },
@@ -38,7 +38,7 @@ export const MRT_ExpandAllButton: FC<Props> = ({ tableInstance }) => {
           width: isDensePadding ? '1.75rem' : '2.25rem',
         }}
       >
-        <DoubleArrowDownIcon
+        <KeyboardDoubleArrowDownIcon
           style={{
             transform: `rotate(${
               getIsAllRowsExpanded() ? -180 : getIsSomeRowsExpanded() ? -90 : 0

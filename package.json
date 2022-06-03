@@ -1,5 +1,5 @@
 {
-  "version": "0.8.3",
+  "version": "0.8.9",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI implementation of Tanstack react-table, inspired by material-table and the MUI X DataGrid, written from the ground up in TypeScript.",
@@ -70,7 +70,7 @@
     "@storybook/addon-links": "^6.5.5",
     "@storybook/addons": "^6.5.5",
     "@storybook/react": "^6.5.5",
-    "@types/react": "^18.0.9",
+    "@types/react": "^18.0.10",
     "@types/react-dom": "^18.0.5",
     "babel-loader": "^8.2.5",
     "eslint": "^8.16.0",
@@ -80,6 +80,9 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^18.1.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "size-limit": "^7.0.8",
     "storybook-dark-mode": "^1.1.0",
     "tsdx": "^0.14.1",
@@ -96,7 +99,7 @@
   "dependencies": {
     "@tanstack/match-sorter-utils": "^8.0.0-alpha.83",
     "@tanstack/react-table": "^8.0.0-alpha.89",
-    "react-dnd": "^15.1.2",
-    "react-dnd-html5-backend": "^15.1.2"
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1"
   }
 }
