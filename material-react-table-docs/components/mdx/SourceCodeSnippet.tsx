@@ -31,17 +31,19 @@ const ToggleFullCodeButton = styled(IconButton)({
 });
 
 export interface Props {
-  typeScriptCode: string;
-  javaScriptCode: string;
   Component: FC;
+  codeSandboxURL?: string;
   idPrefix?: string;
+  javaScriptCode: string;
+  typeScriptCode: string;
 }
 
 export const SourceCodeSnippet: FC<Props> = ({
-  typeScriptCode,
-  javaScriptCode,
   Component,
+  codeSandboxURL,
   idPrefix,
+  javaScriptCode,
+  typeScriptCode,
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery('(max-width: 720px)');
@@ -103,6 +105,11 @@ export const SourceCodeSnippet: FC<Props> = ({
             >
               JS
             </ToggleButton>
+            {codeSandboxURL && (
+              <a href={codeSandboxURL} rel="noreferrer" target="_blank">
+                <ToggleButton value="sandbox">Code Sandbox</ToggleButton>
+              </a>
+            )}
           </ToggleButtonGroup>
         </div>
         <Highlight
