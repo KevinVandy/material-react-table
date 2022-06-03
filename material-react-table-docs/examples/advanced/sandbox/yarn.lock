@@ -504,17 +504,17 @@
   dependencies:
     remove-accents "0.4.2"
 
-"@tanstack/react-table@^8.0.0-alpha.89":
-  version "8.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.0.0-beta.3.tgz#5ff599def573424a9cd3344f3ac75776d96a8f10"
-  integrity sha512-et7kWHslZ4CDFCY4wHCluTu6aiISYv4/9/C+1O/E4R6O4By5w0sCutDKJg71GR9XBy0wWLLjTnmoz0svZx+TUA==
+"@tanstack/react-table@^8.0.0-beta.4":
+  version "8.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.0.0-beta.4.tgz#3c2be1cb247ebbdde46484bd769994937ce28f83"
+  integrity sha512-0GM6V+eupU8/0ja+rQ0F9d7UCq4kA9D0UBSdZMjv1MJryTu2apDc8bOTyOkwmQiqNl2JMj3pBg7A9izXM6ozzA==
   dependencies:
-    "@tanstack/table-core" "8.0.0-beta.3"
+    "@tanstack/table-core" "8.0.0-beta.4"
 
-"@tanstack/table-core@8.0.0-beta.3":
-  version "8.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.0.0-beta.3.tgz#c5bacfe89fb2c8c014595933ee97e2b017f99915"
-  integrity sha512-ejAiBnQG7a4xKxyYWRYOvnOYwLZzKItJC+2Kb+Y+QMiDKqDZadOGanm5o5jt/jn7uk6dawZrCW3gHVce/wrRKQ==
+"@tanstack/table-core@8.0.0-beta.4":
+  version "8.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.0.0-beta.4.tgz#afcdae6131b60212221b6b6ee8e9dde1f7365a6b"
+  integrity sha512-BIQtkIaYFTkE4+ymhOMNe3kMiiPavhltK9Ik9nFni4wnIt1mRHaQFfBZ9dLwMqeaNW8bBLJ8Je2CNnUf7Dl8/Q==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -686,9 +686,9 @@ dom-helpers@^5.0.1:
     csstype "^3.0.2"
 
 electron-to-chromium@^1.4.118:
-  version "1.4.144"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.144.tgz#9a5d1f41452ecc65b686d529ae919248da44f406"
-  integrity sha512-R3RV3rU1xWwFJlSClVWDvARaOk6VUO/FubHLodIASDB3Mc2dzuWvNdfOgH9bwHUTqT79u92qw60NWfwUdzAqdg==
+  version "1.4.146"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.146.tgz#fd20970c3def2f9e6b32ac13a2e7a6b64e1b0c48"
+  integrity sha512-4eWebzDLd+hYLm4csbyMU2EbBnqhwl8Oe9eF/7CBDPWcRxFmqzx4izxvHH+lofQxzieg8UbB8ZuzNTxeukzfTg==
 
 error-ex@^1.3.1:
   version "1.3.2"
@@ -944,13 +944,13 @@ loose-envify@^1.1.0, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
-material-react-table@0.8.9:
-  version "0.8.9"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.8.9.tgz#aa6cf4343e3505fbd7800385f476f4942095dd0d"
-  integrity sha512-16KVdmEp1QJyurBZG/iyfFPXLO3ErF0ehYYsBxg+izuN8i412yl95FWYoBmNyavK0X3h01qQWWszy69boVq8ag==
+material-react-table@0.8.11:
+  version "0.8.11"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.8.11.tgz#5fb37e639f38c880ce4d0572a0ed5fb477590743"
+  integrity sha512-IfaxZZwUYkzdJi1BwdAVL2Sj6DHkbUhHWSSCMvQv47ZIrAxHL0nPqanriDJ6Ck0JTE5Bc8Ng/fukekpQyhgxnA==
   dependencies:
     "@tanstack/match-sorter-utils" "^8.0.0-alpha.83"
-    "@tanstack/react-table" "^8.0.0-alpha.89"
+    "@tanstack/react-table" "^8.0.0-beta.4"
     react-dnd "^16.0.1"
     react-dnd-html5-backend "^16.0.1"
 
@@ -1175,9 +1175,9 @@ to-fast-properties@^2.0.0:
   integrity sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=
 
 typescript@^4.7.2:
-  version "4.7.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.2.tgz#1f9aa2ceb9af87cca227813b4310fff0b51593c4"
-  integrity sha512-Mamb1iX2FDUpcTRzltPxgWMKy3fhg0TN378ylbktPGPK/99KbDtMQ4W1hwgsbPAsG3a0xKa1vmw4VKZQbkvz5A==
+  version "4.7.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.3.tgz#8364b502d5257b540f9de4c40be84c98e23a129d"
+  integrity sha512-WOkT3XYvrpXx4vMMqlD+8R8R37fZkjyLGlxavMc4iB8lrl8L0DeTcHbYgw/v0N/z9wAFsgBhcsF0ruoySS22mA==
 
 vite@^2.9.9:
   version "2.9.9"
