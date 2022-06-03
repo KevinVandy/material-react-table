@@ -1,0 +1,13 @@
+{
+  "composite": true,
+  "compilerOptions": {
+    "outDir": "./build/types"
+  },
+  "files": [
+    "index.tsx",
+    "src/TS.tsx"
+  ],
+  "include": [
+    "src"
+  ]
+}

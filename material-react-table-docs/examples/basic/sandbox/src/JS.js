@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
 
 const Example = () => {
+  //must be memoized or stable
   const columns = useMemo(
     () => [
       {
@@ -28,6 +29,7 @@ const Example = () => {
     [],
   );
 
+  //must be memoized or stable
   const data = useMemo(
     () => [
       {
@@ -68,6 +70,7 @@ const Example = () => {
     ],
     [],
   );
+
   return <MaterialReactTable columns={columns} data={data} />;
 };
 

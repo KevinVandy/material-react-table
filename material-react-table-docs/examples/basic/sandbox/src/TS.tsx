@@ -2,6 +2,7 @@ import React, { FC, useMemo } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 
 const Example: FC = () => {
+  //must be memoized or stable
   const columns = useMemo(
     () =>
       [
@@ -29,6 +30,7 @@ const Example: FC = () => {
     [],
   );
 
+  //must be memoized or stable
   const data = useMemo(
     () => [
       {
@@ -69,6 +71,7 @@ const Example: FC = () => {
     ],
     [],
   );
+
   return <MaterialReactTable columns={columns} data={data} />;
 };
 
