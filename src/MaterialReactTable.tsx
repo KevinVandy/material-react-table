@@ -137,7 +137,7 @@ export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
 
 export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
   ColumnDef<D>,
-  'header' | 'footer' | 'columns' | 'filterFn'
+  'accessorFN' | 'header' | 'footer' | 'columns' | 'filterFn'
 > & {
   Edit?: ({
     cell,
@@ -153,20 +153,24 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
     header: MRT_Header<D>;
     tableInstance: MRT_TableInstance<D>;
   }) => ReactNode;
-  Footer?: ({
-    footer,
-    tableInstance,
-  }: {
-    footer: MRT_Header<D>;
-    tableInstance: MRT_TableInstance<D>;
-  }) => ReactNode;
-  Header?: ({
-    header,
-    tableInstance,
-  }: {
-    header: MRT_Header<D>;
-    tableInstance: MRT_TableInstance<D>;
-  }) => ReactNode;
+  Footer?:
+    | ReactNode
+    | (({
+        footer,
+        tableInstance,
+      }: {
+        footer: MRT_Header<D>;
+        tableInstance: MRT_TableInstance<D>;
+      }) => ReactNode);
+  Header?:
+    | ReactNode
+    | (({
+        header,
+        tableInstance,
+      }: {
+        header: MRT_Header<D>;
+        tableInstance: MRT_TableInstance<D>;
+      }) => ReactNode);
   Cell?: ({
     cell,
     tableInstance,
@@ -174,7 +178,7 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
     cell: MRT_Cell<D>;
     tableInstance: MRT_TableInstance<D>;
   }) => ReactNode;
-  id: keyof D | string;
+  accessorFN?: (row: D) => any;
   columns?: MRT_ColumnDef<D>[];
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;
@@ -185,6 +189,7 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
   filterSelectOptions?: (string | { text: string; value: string })[];
   footer?: string;
   header: string;
+  id: keyof D | string;
   muiTableBodyCellCopyButtonProps?:
     | ButtonProps
     | (({
@@ -280,13 +285,12 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
 export type MRT_Column<D extends Record<string, any> = {}> = Omit<
   Column<D>,
   'header' | 'footer' | 'columns'
-> &
-  MRT_ColumnDef<D> & {
-    columns?: MRT_Column<D>[];
-    columnDef: MRT_ColumnDef<D>;
-    header: string;
-    footer: string;
-  };
+> & {
+  columns?: MRT_Column<D>[];
+  columnDef: MRT_ColumnDef<D>;
+  header: string;
+  footer: string;
+};
 
 export type MRT_Header<D extends Record<string, any> = {}> = Omit<
   Header<D>,
@@ -304,12 +308,13 @@ export type MRT_HeaderGroup<D extends Record<string, any> = {}> = Omit<
 
 export type MRT_Row<D extends Record<string, any> = {}> = Omit<
   Row<D>,
-  'getVisibleCells' | 'getAllCells' | 'subRows' | 'original'
+  'getVisibleCells' | 'getAllCells' | 'subRows' | 'original' | '_valuesCache'
 > & {
   getAllCells: () => MRT_Cell<D>[];
   getVisibleCells: () => MRT_Cell<D>[];
   subRows?: MRT_Row<D>[];
   original: D;
+  _valuesCache?: D;
 };
 
 export type MRT_Cell<D extends Record<string, any> = {}> = Omit<

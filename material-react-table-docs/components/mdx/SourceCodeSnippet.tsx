@@ -106,9 +106,14 @@ export const SourceCodeSnippet: FC<Props> = ({
               JS
             </ToggleButton>
             {codeSandboxURL && (
-              <a href={codeSandboxURL} rel="noreferrer" target="_blank">
-                <ToggleButton value="sandbox">Code Sandbox</ToggleButton>
-              </a>
+              <ToggleButton
+                href={codeSandboxURL}
+                rel="noreferrer"
+                target="_blank"
+                value="sandbox"
+              >
+                Code Sandbox
+              </ToggleButton>
             )}
           </ToggleButtonGroup>
         </div>

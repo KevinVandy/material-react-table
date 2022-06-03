@@ -60,6 +60,8 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
 
   const { column } = header;
 
+  const { columnDef } = column;
+
   const { columnSizing, columnVisibility, isDensePadding } = getState();
 
   const [filterMenuAnchorEl, setFilterMenuAnchorEl] =
@@ -178,7 +180,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
               </ListItemIcon>
               {localization.sortByColumnAsc?.replace(
                 '{column}',
-                String(column.columnDef.header),
+                String(columnDef.header),
               )}
             </Box>
           </MenuItem>,
@@ -195,7 +197,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
               </ListItemIcon>
               {localization.sortByColumnDesc?.replace(
                 '{column}',
-                String(column.columnDef.header),
+                String(columnDef.header),
               )}
             </Box>
           </MenuItem>,
@@ -227,10 +229,10 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
               </ListItemIcon>
               {localization.filterByColumn?.replace(
                 '{column}',
-                String(column.columnDef.header),
+                String(columnDef.header),
               )}
             </Box>
-            {!column.filterSelectOptions && (
+            {!columnDef.filterSelectOptions && (
               <IconButton
                 onClick={handleOpenFilterModeMenu}
                 onMouseEnter={handleOpenFilterModeMenu}
@@ -264,7 +266,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
               </ListItemIcon>
               {localization[
                 column.getIsGrouped() ? 'ungroupByColumn' : 'groupByColumn'
-              ]?.replace('{column}', String(column.columnDef.header))}
+              ]?.replace('{column}', String(columnDef.header))}
             </Box>
           </MenuItem>,
         ]}
@@ -328,7 +330,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       ]}
       {enableHiding && [
         <MenuItem
-          disabled={column.enableHiding === false}
+          disabled={columnDef.enableHiding === false}
           key={0}
           onClick={handleHideColumn}
           sx={commonMenuItemStyles}
@@ -339,7 +341,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             </ListItemIcon>
             {localization.hideColumn?.replace(
               '{column}',
-              String(column.columnDef.header),
+              String(columnDef.header),
             )}
           </Box>
         </MenuItem>,
@@ -358,7 +360,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             </ListItemIcon>
             {localization.showAllColumns?.replace(
               '{column}',
-              String(column.columnDef.header),
+              String(columnDef.header),
             )}
           </Box>
           <IconButton

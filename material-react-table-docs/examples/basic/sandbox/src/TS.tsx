@@ -1,6 +1,14 @@
 import React, { FC, useMemo } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 
+type Person = {
+  firstName: string;
+  lastName: string;
+  address: string;
+  city: string;
+  state: string;
+};
+
 const Example: FC = () => {
   //must be memoized or stable
   const columns = useMemo(
@@ -26,7 +34,7 @@ const Example: FC = () => {
           header: 'State',
           id: 'state',
         },
-      ] as MRT_ColumnDef[],
+      ] as MRT_ColumnDef<Person>[],
     [],
   );
 

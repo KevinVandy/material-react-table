@@ -1,78 +1,80 @@
-import React, { FC, useMemo, useState } from 'react';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import React, { useMemo, useState } from 'react';
+import MaterialReactTable from 'material-react-table';
 import { Box, ListItemIcon, MenuItem, Typography } from '@mui/material';
 import { AccountCircle, Send } from '@mui/icons-material';
 
-const Example: FC = () => {
+const Example = () => {
   const columns = useMemo(
-    () =>
-      [
-        {
-          header: 'Employee',
-          id: 'employee',
-          columns: [
-            {
-              header: 'Name',
-              id: 'lastName',
-              Cell: ({ cell }) => (
-                <>
-                  {cell.row.original?.['firstName']}
-                  <br />
-                  {cell.row.original?.['lastName']}
-                </>
-              ),
-              enableClickToCopy: false,
-            },
-            {
-              header: 'Email',
-              id: 'email',
-            },
-          ],
-        },
-        {
-          header: 'Job Info',
-          id: 'jobInfo',
-          columns: [
-            {
-              header: 'Job Title',
-              id: 'jobTitle',
-            },
-            {
-              header: 'Salary',
-              id: 'salary',
-              Cell: ({ cell }) => (
-                <Box
-                  sx={(theme) => ({
-                    backgroundColor:
-                      Number(cell.getValue()) < 50_000
-                        ? theme.palette.error.dark
-                        : Number(cell.getValue()) >= 50_000 &&
-                          Number(cell.getValue()) < 75_000
-                        ? theme.palette.warning.dark
-                        : theme.palette.success.dark,
-                    borderRadius: '0.25rem',
-                    color: '#fff',
-                    maxWidth: '9ch',
-                    p: '0.25rem',
-                  })}
-                >
-                  {Number(cell.getValue())?.toLocaleString?.('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0,
-                  })}
-                </Box>
-              ),
-              enableEditing: true,
-            },
-            {
-              header: 'Start Date',
-              id: 'startDate',
-            },
-          ],
-        },
-      ] as MRT_ColumnDef[],
+    () => [
+      {
+        header: 'Employee',
+        id: 'employee',
+        columns: [
+          {
+            header: 'First Name',
+            id: 'firstName',
+            enableClickToCopy: false,
+          },
+          {
+            header: 'Last Name',
+            id: 'lastName',
+            enableClickToCopy: false,
+          },
+          {
+            header: 'Email',
+            id: 'email',
+          },
+        ],
+      },
+      {
+        header: 'Job Info',
+        id: 'jobInfo',
+        columns: [
+          {
+            header: 'Job Title',
+            id: 'jobTitle',
+            width: 500,
+          },
+          {
+            header: 'Salary',
+            id: 'salary',
+            //custom conditional format and styling
+            Cell: ({ cell }) => (
+              <Box
+                sx={(theme) => ({
+                  backgroundColor:
+                    Number(cell.getValue()) < 50_000
+                      ? theme.palette.error.dark
+                      : Number(cell.getValue()) >= 50_000 &&
+                        Number(cell.getValue()) < 75_000
+                      ? theme.palette.warning.dark
+                      : theme.palette.success.dark,
+                  borderRadius: '0.25rem',
+                  color: '#fff',
+                  maxWidth: '9ch',
+                  p: '0.25rem',
+                })}
+              >
+                {Number(cell.getValue())?.toLocaleString?.('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                })}
+              </Box>
+            ),
+            enableEditing: true,
+          },
+          {
+            Cell: ({ cell }) => cell.getValue().toLocaleDateString(), //transform data to readable format for cell render
+            Header: <em>Start Date</em>, //custom header markup
+            accessorFn: (row) => new Date(row.startDate), //transform data before processing so sorting works
+            header: 'Start Date',
+            id: 'startDate',
+          },
+        ],
+      },
+    ],
     [],
   );
 
@@ -1500,9 +1502,12 @@ const Example: FC = () => {
       columns={columns}
       data={data}
       enableClickToCopy
-      enableGrouping
-      enableRowActions
+      enableColumnOrdering
+      enableColumnResizing
       enableEditing
+      enableGrouping
+      enablePinning
+      enableRowActions
       enableRowSelection
       onEditSubmit={handleSaveRow}
       renderDetailPanel={({ row }) => (
@@ -1516,14 +1521,14 @@ const Example: FC = () => {
           <img
             alt="avatar"
             height={200}
-            src={row.original['avatar']}
+            src={row.original.avatar}
             loading="lazy"
             style={{ borderRadius: '50%' }}
           />
           <div style={{ textAlign: 'center' }}>
             <Typography variant="h4">Signature Catch Phrase:</Typography>
             <Typography variant="h1">
-              &quot;{row.original['signatureCatchPhrase']}&quot;
+              &quot;{row.original.signatureCatchPhrase}&quot;
             </Typography>
           </div>
         </div>

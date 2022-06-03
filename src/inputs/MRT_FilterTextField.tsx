@@ -43,6 +43,8 @@ export const MRT_FilterTextField: FC<Props> = ({
 
   const { column } = header;
 
+  const { columnDef } = column;
+
   const { currentFilterFns } = getState();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -53,9 +55,12 @@ export const MRT_FilterTextField: FC<Props> = ({
       : muiTableHeadCellFilterTextFieldProps;
 
   const mcTableHeadCellFilterTextFieldProps =
-    column.muiTableHeadCellFilterTextFieldProps instanceof Function
-      ? column.muiTableHeadCellFilterTextFieldProps({ column, tableInstance })
-      : column.muiTableHeadCellFilterTextFieldProps;
+    columnDef.muiTableHeadCellFilterTextFieldProps instanceof Function
+      ? columnDef.muiTableHeadCellFilterTextFieldProps({
+          column,
+          tableInstance,
+        })
+      : columnDef.muiTableHeadCellFilterTextFieldProps;
 
   const textFieldProps = {
     ...mTableHeadCellFilterTextFieldProps,
@@ -109,15 +114,15 @@ export const MRT_FilterTextField: FC<Props> = ({
     }));
   };
 
-  if (column.Filter) {
-    return <>{column.Filter?.({ header, tableInstance })}</>;
+  if (columnDef.Filter) {
+    return <>{columnDef.Filter?.({ header, tableInstance })}</>;
   }
 
   const filterId = `mrt-${idPrefix}-${header.id}-filter-text-field${
     inputIndex ?? ''
   }`;
   const filterFn = currentFilterFns?.[header.id];
-  const isSelectFilter = !!column.filterSelectOptions;
+  const isSelectFilter = !!columnDef.filterSelectOptions;
   const filterChipLabel =
     !(filterFn instanceof Function) &&
     [MRT_FILTER_OPTION.EMPTY, MRT_FILTER_OPTION.NOT_EMPTY].includes(
@@ -132,14 +137,14 @@ export const MRT_FilterTextField: FC<Props> = ({
     inputIndex === undefined
       ? localization.filterByColumn?.replace(
           '{column}',
-          String(column.columnDef.header),
+          String(columnDef.header),
         )
       : inputIndex === 0
       ? localization.min
       : inputIndex === 1
       ? localization.max
       : '';
-
+  console.log({ textFieldProps });
   return (
     <>
       <TextField
@@ -252,7 +257,7 @@ export const MRT_FilterTextField: FC<Props> = ({
         sx={{
           m: '-0.25rem',
           p: 0,
-          minWidth: !filterChipLabel ? '6rem' : 'auto',
+          minWidth: !filterChipLabel ? '8rem' : 'auto',
           width: 'calc(100% + 0.5rem)',
           mt: isSelectFilter && !filterValue ? '-1rem' : undefined,
           '&	.MuiSelect-icon': {
@@ -266,7 +271,7 @@ export const MRT_FilterTextField: FC<Props> = ({
             {localization.clearFilter}
           </MenuItem>
         )}
-        {column?.filterSelectOptions?.map((option) => {
+        {columnDef?.filterSelectOptions?.map((option) => {
           let value;
           let text;
           if (typeof option === 'string') {

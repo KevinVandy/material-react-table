@@ -47,6 +47,10 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
   const { isDensePadding, currentFilterFns, currentGlobalFilterFn } =
     getState();
 
+  const { column } = header ?? {};
+
+  const { columnDef } = column ?? {};
+
   const filterOptions: {
     option: MRT_FILTER_OPTION;
     label: string;
@@ -122,9 +126,9 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
           fn: notEmpty,
         },
       ].filter((filterType) =>
-        header
-          ? !header.column.enabledColumnFilterOptions ||
-            header.column.enabledColumnFilterOptions.includes(filterType.option)
+        columnDef
+          ? !columnDef.enabledColumnFilterOptions ||
+            columnDef.enabledColumnFilterOptions.includes(filterType.option)
           : (!enabledGlobalFilterOptions ||
               enabledGlobalFilterOptions.includes(filterType.option)) &&
             [MRT_FILTER_OPTION.FUZZY, MRT_FILTER_OPTION.CONTAINS].includes(
@@ -135,7 +139,7 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
   );
 
   const handleSelectFilterType = (value: MRT_FILTER_OPTION) => {
-    if (header) {
+    if (header && column) {
       setCurrentFilterFns((prev: { [key: string]: MRT_FilterFn }) => ({
         ...prev,
         [header.id]: value,
@@ -143,11 +147,11 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
       if (
         [MRT_FILTER_OPTION.EMPTY, MRT_FILTER_OPTION.NOT_EMPTY].includes(value)
       ) {
-        header.column.setFilterValue(' ');
+        column.setFilterValue(' ');
       } else if (value === MRT_FILTER_OPTION.BETWEEN) {
-        header.column.setFilterValue(['', '']);
+        column.setFilterValue(['', '']);
       } else {
-        header.column.setFilterValue('');
+        column.setFilterValue('');
       }
     } else {
       setCurrentGlobalFilterFn(value);

@@ -1,81 +1,105 @@
-import React, { useMemo, useState } from 'react';
-import MaterialReactTable from 'material-react-table';
+import React, { FC, useMemo, useState } from 'react';
+import MaterialReactTable, {
+  MRT_ColumnDef,
+  MRT_Row,
+} from 'material-react-table';
 import { Box, ListItemIcon, MenuItem, Typography } from '@mui/material';
 import { AccountCircle, Send } from '@mui/icons-material';
 
-const Example = () => {
+type Employee = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  jobTitle: string;
+  salary: number;
+  startDate: string;
+  signatureCatchPhrase: string;
+  avatar: string;
+};
+
+const Example: FC = () => {
   const columns = useMemo(
-    () => [
-      {
-        header: 'Employee',
-        id: 'employee',
-        columns: [
-          {
-            header: 'Name',
-            id: 'lastName',
-            Cell: ({ cell }) => (
-              <>
-                {cell.row.original?.['firstName']}
-                <br />
-                {cell.row.original?.['lastName']}
-              </>
-            ),
-            enableClickToCopy: false,
-          },
-          {
-            header: 'Email',
-            id: 'email',
-          },
-        ],
-      },
-      {
-        header: 'Job Info',
-        id: 'jobInfo',
-        columns: [
-          {
-            header: 'Job Title',
-            id: 'jobTitle',
-          },
-          {
-            header: 'Salary',
-            id: 'salary',
-            Cell: ({ cell }) => (
-              <Box
-                sx={(theme) => ({
-                  backgroundColor:
-                    Number(cell.getValue()) < 50_000
-                      ? theme.palette.error.dark
-                      : Number(cell.getValue()) >= 50_000 &&
-                        Number(cell.getValue()) < 75_000
-                      ? theme.palette.warning.dark
-                      : theme.palette.success.dark,
-                  borderRadius: '0.25rem',
-                  color: '#fff',
-                  maxWidth: '9ch',
-                  p: '0.25rem',
-                })}
-              >
-                {Number(cell.getValue())?.toLocaleString?.('en-US', {
-                  style: 'currency',
-                  currency: 'USD',
-                  minimumFractionDigits: 0,
-                  maximumFractionDigits: 0,
-                })}
-              </Box>
-            ),
-            enableEditing: true,
-          },
-          {
-            header: 'Start Date',
-            id: 'startDate',
-          },
-        ],
-      },
-    ],
+    () =>
+      [
+        {
+          header: 'Employee',
+          id: 'employee',
+          columns: [
+            {
+              header: 'First Name',
+              id: 'firstName',
+              enableClickToCopy: false,
+              width: 60,
+            },
+            {
+              header: 'Last Name',
+              id: 'lastName',
+              enableClickToCopy: false,
+              width: 60,
+            },
+            {
+              header: 'Email',
+              id: 'email',
+            },
+          ],
+        },
+        {
+          header: 'Job Info',
+          id: 'jobInfo',
+          columns: [
+            {
+              header: 'Job Title',
+              id: 'jobTitle',
+              width: 250,
+            },
+            {
+              header: 'Salary',
+              id: 'salary',
+              //custom conditional format and styling
+              Cell: ({ cell }) => (
+                <Box
+                  sx={(theme) => ({
+                    backgroundColor:
+                      Number(cell.getValue()) < 50_000
+                        ? theme.palette.error.dark
+                        : Number(cell.getValue()) >= 50_000 &&
+                          Number(cell.getValue()) < 75_000
+                        ? theme.palette.warning.dark
+                        : theme.palette.success.dark,
+                    borderRadius: '0.25rem',
+                    color: '#fff',
+                    maxWidth: '9ch',
+                    p: '0.25rem',
+                  })}
+                >
+                  {Number(cell.getValue())?.toLocaleString?.('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                  })}
+                </Box>
+              ),
+              enableEditing: true,
+            },
+            {
+              Cell: ({ cell }) =>
+                (cell.getValue() as Date).toLocaleDateString(), //transform data to readable format for cell render
+              Header: <em>Start Date</em>, //custom header markup
+              accessorFn: (row: Employee) => new Date(row.startDate), //transform data before processing so sorting works
+              header: 'Start Date',
+              id: 'startDate',
+              muiTableHeadCellFilterTextFieldProps: {
+                type: 'date',
+              },
+            },
+          ],
+        },
+      ] as MRT_ColumnDef<Employee>[],
     [],
   );
 
-  const [data, setData] = useState(() => [
+  const [data, setData] = useState<Employee[]>(() => [
     {
       firstName: 'Dusty',
       lastName: 'Kuvalis',
@@ -1489,8 +1513,8 @@ const Example = () => {
     //end
   ]);
 
-  const handleSaveRow = ({ row }) => {
-    data[+row.index] = row.values;
+  const handleSaveRow = ({ row }: { row: MRT_Row<Employee> }) => {
+    data[+row.index] = row._valuesCache as Employee;
     setData([...data]);
   };
 
@@ -1499,9 +1523,12 @@ const Example = () => {
       columns={columns}
       data={data}
       enableClickToCopy
-      enableGrouping
-      enableRowActions
+      enableColumnOrdering
+      enableColumnResizing
       enableEditing
+      enableGrouping
+      enablePinning
+      enableRowActions
       enableRowSelection
       onEditSubmit={handleSaveRow}
       renderDetailPanel={({ row }) => (
@@ -1515,14 +1542,14 @@ const Example = () => {
           <img
             alt="avatar"
             height={200}
-            src={row.original['avatar']}
+            src={row.original.avatar}
             loading="lazy"
             style={{ borderRadius: '50%' }}
           />
           <div style={{ textAlign: 'center' }}>
             <Typography variant="h4">Signature Catch Phrase:</Typography>
             <Typography variant="h1">
-              &quot;{row.original['signatureCatchPhrase']}&quot;
+              &quot;{row.original.signatureCatchPhrase}&quot;
             </Typography>
           </div>
         </div>

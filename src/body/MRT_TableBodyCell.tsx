@@ -39,15 +39,17 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   const { column, row } = cell;
 
+  const { columnDef } = column;
+
   const mTableCellBodyProps =
     muiTableBodyCellProps instanceof Function
       ? muiTableBodyCellProps({ cell, tableInstance })
       : muiTableBodyCellProps;
 
   const mcTableCellBodyProps =
-    column.muiTableBodyCellProps instanceof Function
-      ? column.muiTableBodyCellProps({ cell, tableInstance })
-      : column.muiTableBodyCellProps;
+    columnDef.muiTableBodyCellProps instanceof Function
+      ? columnDef.muiTableBodyCellProps({ cell, tableInstance })
+      : columnDef.muiTableBodyCellProps;
 
   const tableCellProps = {
     ...mTableCellBodyProps,
@@ -64,7 +66,8 @@ export const MRT_TableBodyCell: FC<Props> = ({
   );
 
   const isEditable =
-    (enableEditing || column.enableEditing) && column.enableEditing !== false;
+    (enableEditing || columnDef.enableEditing) &&
+    columnDef.enableEditing !== false;
 
   const isEditing =
     isEditable &&
@@ -74,8 +77,8 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   const handleDoubleClick = (_event: MouseEvent<HTMLTableCellElement>) => {
     if (
-      (enableEditing || column.enableEditing) &&
-      column.enableEditing !== false &&
+      (enableEditing || columnDef.enableEditing) &&
+      columnDef.enableEditing !== false &&
       editingMode === 'cell'
     ) {
       setCurrentEditingCell(cell);
@@ -160,7 +163,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
       })}
       style={{
         maxWidth: `min(${column.getSize()}px, fit-content)`,
-        minWidth: `max(${column.getSize()}px, ${column.minSize ?? 30}px)`,
+        minWidth: `max(${column.getSize()}px, ${columnDef.minSize ?? 30}px)`,
         width: column.getSize(),
       }}
     >
@@ -173,7 +176,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
             {...muiTableBodyCellSkeletonProps}
           />
         ) : column.columnDefType === 'display' ? (
-          column.columnDef.Cell?.({ cell, tableInstance })
+          columnDef.Cell?.({ cell, tableInstance })
         ) : cell.getIsPlaceholder() ||
           (row.getIsGrouped() &&
             column.id !==
@@ -181,8 +184,8 @@ export const MRT_TableBodyCell: FC<Props> = ({
           cell.renderAggregatedCell()
         ) : isEditing ? (
           <MRT_EditCellTextField cell={cell} tableInstance={tableInstance} />
-        ) : (enableClickToCopy || column.enableClickToCopy) &&
-          column.enableClickToCopy !== false ? (
+        ) : (enableClickToCopy || columnDef.enableClickToCopy) &&
+          columnDef.enableClickToCopy !== false ? (
           <>
             <MRT_CopyButton cell={cell} tableInstance={tableInstance}>
               <>

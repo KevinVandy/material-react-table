@@ -31,7 +31,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
 
   const hideAllColumns = () => {
     getAllLeafColumns()
-      .filter((col) => col.enableHiding !== false)
+      .filter((col) => col.columnDef.enableHiding !== false)
       .forEach((col) => col.toggleVisibility(false));
   };
 

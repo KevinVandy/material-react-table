@@ -31,19 +31,22 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, tableInstance }) => {
 
   const { column, row } = cell;
 
+  const { columnDef } = column;
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
-    column.onCellEditChange?.({ event, cell, tableInstance });
+    columnDef.onCellEditChange?.({ event, cell, tableInstance });
     onCellEditChange?.({ event, cell, tableInstance });
   };
 
   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
     if (getState().currentEditingRow) {
-      row._valuesCache[column.id] = value;
+      if (!row._valuesCache) row._valuesCache = {};
+      (row._valuesCache as Record<string, any>)[column.id] = value;
       setCurrentEditingRow({ ...getState().currentEditingRow } as MRT_Row);
     }
     setCurrentEditingCell(null);
-    column.onCellEditBlur?.({ event, cell, tableInstance });
+    columnDef.onCellEditBlur?.({ event, cell, tableInstance });
     onCellEditBlur?.({ event, cell, tableInstance });
   };
 
@@ -53,17 +56,20 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, tableInstance }) => {
       : muiTableBodyCellEditTextFieldProps;
 
   const mcTableBodyCellEditTextFieldProps =
-    column.muiTableBodyCellEditTextFieldProps instanceof Function
-      ? column.muiTableBodyCellEditTextFieldProps({ cell, tableInstance })
-      : column.muiTableBodyCellEditTextFieldProps;
+    columnDef.muiTableBodyCellEditTextFieldProps instanceof Function
+      ? columnDef.muiTableBodyCellEditTextFieldProps({
+          cell,
+          tableInstance,
+        })
+      : columnDef.muiTableBodyCellEditTextFieldProps;
 
   const textFieldProps = {
     ...mTableBodyCellEditTextFieldProps,
     ...mcTableBodyCellEditTextFieldProps,
   };
 
-  if (enableEditing && column.enableEditing !== false && column.Edit) {
-    return <>{column.Edit?.({ cell, tableInstance })}</>;
+  if (enableEditing && columnDef.enableEditing !== false && columnDef.Edit) {
+    return <>{columnDef.Edit?.({ cell, tableInstance })}</>;
   }
 
   return (
@@ -73,7 +79,7 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, tableInstance }) => {
       onBlur={handleBlur}
       onChange={handleChange}
       onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
-      placeholder={column.columnDef.header}
+      placeholder={columnDef.header}
       value={value}
       variant="standard"
       {...textFieldProps}

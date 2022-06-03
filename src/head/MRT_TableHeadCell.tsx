@@ -41,25 +41,31 @@ export const MRT_TableHeadCell: FC<Props> = ({
 
   const { column } = header;
 
+  const { columnDef, columnDefType } = column;
+
   const mTableHeadCellProps =
     muiTableHeadCellProps instanceof Function
       ? muiTableHeadCellProps({ column, tableInstance })
       : muiTableHeadCellProps;
 
   const mcTableHeadCellProps =
-    column.muiTableHeadCellProps instanceof Function
-      ? column.muiTableHeadCellProps({ column, tableInstance })
-      : column.muiTableHeadCellProps;
+    columnDef.muiTableHeadCellProps instanceof Function
+      ? columnDef.muiTableHeadCellProps({ column, tableInstance })
+      : columnDef.muiTableHeadCellProps;
 
   const tableCellProps = {
     ...mTableHeadCellProps,
     ...mcTableHeadCellProps,
   };
 
-  const headerElement = (column.columnDef?.Header?.({
-    header,
-    tableInstance,
-  }) ?? header.renderHeader()) as ReactNode;
+  const headerElement = (
+    column.columnDef?.Header instanceof Function
+      ? column.columnDef?.Header?.({
+          header,
+          tableInstance,
+        })
+      : column.columnDef?.Header ?? header.renderHeader()
+  ) as ReactNode;
 
   const getIsLastLeftPinnedColumn = () => {
     return (
@@ -83,13 +89,13 @@ export const MRT_TableHeadCell: FC<Props> = ({
 
   return (
     <TableCell
-      align={column.columnDefType === 'group' ? 'center' : 'left'}
+      align={columnDefType === 'group' ? 'center' : 'left'}
       colSpan={header.colSpan}
       {...tableCellProps}
-      ref={column.columnDefType === 'data' ? dropRef : undefined}
+      ref={columnDefType === 'data' ? dropRef : undefined}
       sx={(theme: Theme) => ({
         backgroundColor:
-          column.getIsPinned() && column.columnDefType !== 'group'
+          column.getIsPinned() && columnDefType !== 'group'
             ? alpha(lighten(theme.palette.background.default, 0.04), 0.95)
             : 'inherit',
         backgroundImage: 'inherit',
@@ -106,19 +112,19 @@ export const MRT_TableHeadCell: FC<Props> = ({
             : undefined,
         overflow: 'visible',
         p: isDensePadding
-          ? column.columnDefType === 'display'
+          ? columnDefType === 'display'
             ? '0 0.5rem'
             : '0.5rem'
-          : column.columnDefType === 'display'
+          : columnDefType === 'display'
           ? '0.5rem 0.75rem'
           : '1rem',
-        pb: column.columnDefType === 'display' ? 0 : undefined,
+        pb: columnDefType === 'display' ? 0 : undefined,
         position:
-          column.getIsPinned() && column.columnDefType !== 'group'
+          column.getIsPinned() && columnDefType !== 'group'
             ? 'sticky'
             : undefined,
         pt:
-          column.columnDefType === 'display'
+          columnDefType === 'display'
             ? 0
             : isDensePadding
             ? '0.75rem'
@@ -129,18 +135,18 @@ export const MRT_TableHeadCell: FC<Props> = ({
         verticalAlign: 'text-top',
         zIndex: column.getIsResizing()
           ? 3
-          : column.getIsPinned() && column.columnDefType !== 'group'
+          : column.getIsPinned() && columnDefType !== 'group'
           ? 2
           : 1,
         ...(tableCellProps?.sx as any),
       })}
       style={{
         maxWidth: `min(${column.getSize()}px, fit-content)`,
-        minWidth: `max(${column.getSize()}px, ${column.minSize ?? 30}px)`,
+        minWidth: `max(${column.getSize()}px, ${columnDef.minSize ?? 30}px)`,
         width: header.getSize(),
       }}
     >
-      {header.isPlaceholder ? null : column.columnDefType === 'display' ? (
+      {header.isPlaceholder ? null : columnDefType === 'display' ? (
         headerElement
       ) : (
         <Box
@@ -149,7 +155,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
             alignItems: 'flex-start',
             display: 'flex',
             justifyContent:
-              column.columnDefType === 'group' ? 'center' : 'space-between',
+              columnDefType === 'group' ? 'center' : 'space-between',
             opacity: isDragging ? 0.5 : 1,
             width: '100%',
           }}
@@ -159,25 +165,23 @@ export const MRT_TableHeadCell: FC<Props> = ({
             sx={{
               alignItems: 'center',
               cursor:
-                column.getCanSort() && column.columnDefType !== 'group'
+                column.getCanSort() && columnDefType !== 'group'
                   ? 'pointer'
                   : undefined,
               display: 'flex',
               flexWrap: 'nowrap',
               whiteSpace:
-                (column.columnDef.header?.length ?? 0) < 24
-                  ? 'nowrap'
-                  : 'normal',
+                (columnDef.header?.length ?? 0) < 24 ? 'nowrap' : 'normal',
             }}
           >
             {headerElement}
-            {column.columnDefType === 'data' && column.getCanSort() && (
+            {columnDefType === 'data' && column.getCanSort() && (
               <MRT_TableHeadCellSortLabel
                 header={header}
                 tableInstance={tableInstance}
               />
             )}
-            {column.columnDefType === 'data' &&
+            {columnDefType === 'data' &&
               enableColumnFilters &&
               column.getCanFilter() && (
                 <MRT_TableHeadCellFilterLabel
@@ -187,19 +191,19 @@ export const MRT_TableHeadCell: FC<Props> = ({
               )}
           </Box>
           <Box sx={{ whiteSpace: 'nowrap' }}>
-            {column.columnDefType === 'data' &&
+            {columnDefType === 'data' &&
               ((enableColumnOrdering &&
-                column.enableColumnOrdering !== false) ||
-                (enableGrouping && column.enableGrouping !== false)) && (
+                columnDef.enableColumnOrdering !== false) ||
+                (enableGrouping && columnDef.enableGrouping !== false)) && (
                 <MRT_TableHeadCellGrabHandle
                   header={header}
                   ref={dragRef as Ref<HTMLButtonElement>}
                   tableInstance={tableInstance}
                 />
               )}
-            {(enableColumnActions || column.enableColumnActions) &&
-              column.enableColumnActions !== false &&
-              column.columnDefType !== 'group' && (
+            {(enableColumnActions || columnDef.enableColumnActions) &&
+              columnDef.enableColumnActions !== false &&
+              columnDefType !== 'group' && (
                 <MRT_ToggleColumnActionMenuButton
                   header={header}
                   tableInstance={tableInstance}
@@ -214,7 +218,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
           )}
         </Box>
       )}
-      {column.columnDefType === 'data' && column.getCanFilter() && (
+      {columnDefType === 'data' && column.getCanFilter() && (
         <MRT_TableHeadCellFilterContainer
           header={header}
           tableInstance={tableInstance}

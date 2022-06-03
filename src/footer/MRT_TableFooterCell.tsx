@@ -17,15 +17,17 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, tableInstance }) => {
 
   const { column } = footer;
 
+  const { columnDef } = column;
+
   const mTableFooterCellProps =
     muiTableFooterCellProps instanceof Function
       ? muiTableFooterCellProps({ column, tableInstance })
       : muiTableFooterCellProps;
 
   const mcTableFooterCellProps =
-    column.muiTableFooterCellProps instanceof Function
-      ? column.muiTableFooterCellProps({ column, tableInstance })
-      : column.muiTableFooterCellProps;
+    columnDef.muiTableFooterCellProps instanceof Function
+      ? columnDef.muiTableFooterCellProps({ column, tableInstance })
+      : columnDef.muiTableFooterCellProps;
 
   const tableCellProps = {
     ...mTableFooterCellProps,
@@ -57,11 +59,13 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, tableInstance }) => {
       <>
         {footer.isPlaceholder
           ? null
-          : column.columnDef.Footer?.({
+          : columnDef.Footer instanceof Function
+          ? columnDef.Footer?.({
               footer,
               tableInstance,
-            }) ??
-            column.columnDef.footer ??
+            })
+          : columnDef.Footer ??
+            columnDef.footer ??
             footer.renderFooter() ??
             null}
       </>
