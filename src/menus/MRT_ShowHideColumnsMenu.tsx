@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react';
 import { Button, Menu, Divider, Box } from '@mui/material';
 import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
-import { MRT_Column, MRT_TableInstance } from '..';
+import type { MRT_Column, MRT_TableInstance } from '..';
 
 interface Props {
   anchorEl: HTMLElement | null;
@@ -18,16 +18,16 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
 }) => {
   const {
     getAllColumns,
+    getAllLeafColumns,
     getIsAllColumnsVisible,
-    getIsSomeColumnsVisible,
     getIsSomeColumnsPinned,
+    getIsSomeColumnsVisible,
     getState,
     toggleAllColumnsVisible,
-    getAllLeafColumns,
-    options: { localization, enablePinning },
+    options: { localization, enablePinning, enableColumnOrdering },
   } = tableInstance;
 
-  const { isDensePadding } = getState();
+  const { isDensePadding, columnOrder, columnPinning } = getState();
 
   const hideAllColumns = () => {
     getAllLeafColumns()
@@ -35,25 +35,19 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
       .forEach((col) => col.toggleVisibility(false));
   };
 
-  const allDisplayColumns = useMemo(
-    () => getAllColumns().filter((col) => col.columnDefType === 'display'),
-    [getAllColumns()],
-  );
-
-  const allDataColumns: (MRT_Column | null)[] = useMemo(() => {
-    const dataColumns = getAllColumns().filter(
-      (col) => col.columnDefType !== 'display',
-    );
-    return getIsSomeColumnsPinned()
-      ? [
-          ...dataColumns.filter((c) => c.getIsPinned() === 'left'),
-          null,
-          ...dataColumns.filter((c) => c.getIsPinned() === false),
-          null,
-          ...dataColumns.filter((c) => c.getIsPinned() === 'right'),
-        ]
-      : dataColumns;
-  }, [getAllColumns(), getState().columnPinning, getIsSomeColumnsPinned()]);
+  const allColumns = useMemo(() => {
+    const columns = getAllColumns();
+    if (
+      columnOrder.length > 0 &&
+      !columns.some((col) => col.columnDefType === 'group')
+    ) {
+      return (
+        columnOrder.map((colId) => columns.find((col) => col.id === colId)) ??
+        columns
+      );
+    }
+    return columns;
+  }, [getAllColumns(), columnOrder, columnPinning]) as MRT_Column[];
 
   return (
     <Menu
@@ -80,6 +74,11 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
             {localization.hideAll}
           </Button>
         )}
+        {!isSubMenu && enableColumnOrdering && (
+          <Button onClick={() => tableInstance.resetColumnOrder()}>
+            {localization.resetOrder}
+          </Button>
+        )}
         {!isSubMenu && enablePinning && (
           <Button
             disabled={!getIsSomeColumnsPinned()}
@@ -96,7 +95,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
         </Button>
       </Box>
       <Divider />
-      {allDisplayColumns.map((column, index) => (
+      {allColumns.map((column, index) => (
         <MRT_ShowHideColumnsMenuItems
           column={column}
           isSubMenu={isSubMenu}
@@ -104,19 +103,6 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
           tableInstance={tableInstance}
         />
       ))}
-      <Divider />
-      {allDataColumns.map((column, index) =>
-        column ? (
-          <MRT_ShowHideColumnsMenuItems
-            column={column}
-            isSubMenu={isSubMenu}
-            key={`${index}-${column.id}`}
-            tableInstance={tableInstance}
-          />
-        ) : (
-          <Divider key={`${index}-divider`} />
-        ),
-      )}
     </Menu>
   );
 };

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { FormControlLabel, MenuItem, Switch } from '@mui/material';
-import type { MRT_Column, MRT_TableInstance } from '..';
 import { MRT_ColumnPinningButtons } from '../buttons/MRT_ColumnPinningButtons';
+import type { MRT_Column, MRT_TableInstance } from '..';
 
 interface Props {
   column: MRT_Column;
@@ -21,13 +21,15 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
 
   const { columnVisibility } = getState();
 
+  const { columnDef, columnDefType } = column;
+
   const switchChecked =
-    (column.columnDefType !== 'group' && column.getIsVisible()) ||
-    (column.columnDefType === 'group' &&
+    (columnDefType !== 'group' && column.getIsVisible()) ||
+    (columnDefType === 'group' &&
       column.getLeafColumns().some((col) => col.getIsVisible()));
 
   const handleToggleColumnHidden = (column: MRT_Column) => {
-    if (column.columnDefType === 'group') {
+    if (columnDefType === 'group') {
       column?.columns?.forEach?.((childColumn: MRT_Column) => {
         childColumn.toggleVisibility(!switchChecked);
       });
@@ -59,11 +61,18 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
           />
         )}
         <FormControlLabel
-          componentsProps={{ typography: { sx: { marginBottom: 0 } } }}
+          componentsProps={{
+            typography: {
+              sx: {
+                marginBottom: 0,
+                opacity: columnDefType !== 'display' ? 1 : 0.5,
+              },
+            },
+          }}
           checked={switchChecked}
           control={<Switch />}
           disabled={(isSubMenu && switchChecked) || !column.getCanHide()}
-          label={column.columnDef.header}
+          label={columnDef.header}
           onChange={() => handleToggleColumnHidden(column)}
         />
       </MenuItem>

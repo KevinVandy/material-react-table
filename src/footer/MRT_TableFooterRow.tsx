@@ -19,10 +19,10 @@ export const MRT_TableFooterRow: FC<Props> = ({
   // if no content in row, skip row
   if (
     !footerGroup.headers?.some(
-      (h) =>
-        (typeof h.column.columnDef.footer === 'string' &&
-          !!h.column.columnDef.footer) ||
-        h.column.columnDef.Footer,
+      (header) =>
+        (typeof header.column.columnDef.footer === 'string' &&
+          !!header.column.columnDef.footer) ||
+        header.column.columnDef.Footer,
     )
   )
     return null;

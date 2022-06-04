@@ -17,6 +17,10 @@ export const MRT_CopyButton: FC<Props> = ({
     options: { localization, muiTableBodyCellCopyButtonProps },
   } = tableInstance;
 
+  const { column } = cell;
+
+  const { columnDef } = column;
+
   const [copied, setCopied] = useState(false);
 
   const handleCopy = (text: unknown) => {
@@ -31,12 +35,12 @@ export const MRT_CopyButton: FC<Props> = ({
       : muiTableBodyCellCopyButtonProps;
 
   const mcTableBodyCellCopyButtonProps =
-    cell.column.columnDef.muiTableBodyCellCopyButtonProps instanceof Function
-      ? cell.column.columnDef.muiTableBodyCellCopyButtonProps({
+    columnDef.muiTableBodyCellCopyButtonProps instanceof Function
+      ? columnDef.muiTableBodyCellCopyButtonProps({
           cell,
           tableInstance,
         })
-      : cell.column.columnDef.muiTableBodyCellCopyButtonProps;
+      : columnDef.muiTableBodyCellCopyButtonProps;
 
   const buttonProps = {
     ...mTableBodyCellCopyButtonProps,

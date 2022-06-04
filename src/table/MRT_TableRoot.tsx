@@ -1,9 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
   FilterFn,
-  PaginationState,
   createTable,
-  functionalUpdate,
   getExpandedRowModel,
   getPaginationRowModel,
   useTableInstance,
@@ -48,9 +46,30 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     [props.idPrefix],
   );
 
+  const showActionColumn =
+    props.enableRowActions ||
+    (props.enableEditing && props.editingMode === 'row');
+
+  const showExpandColumn = props.enableExpanding || props.enableGrouping;
+
   const initialState: Partial<MRT_TableState<D>> = useMemo(() => {
+    const initState = props.initialState ?? {};
+
+    initState.columnOrder =
+      initState?.columnOrder ?? props.enableColumnOrdering
+        ? ([
+            showActionColumn && 'mrt-row-actions',
+            showExpandColumn && 'mrt-expand',
+            props.enableRowSelection && 'mrt-select',
+            props.enableRowNumbers && 'mrt-row-numbers',
+            ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef[]).map(
+              (c) => c.id,
+            ),
+          ].filter(Boolean) as string[])
+        : [];
+
     if (!props.enablePersistentState || !props.idPrefix) {
-      return props.initialState;
+      return initState;
     }
     if (typeof window === 'undefined') {
       if (process.env.NODE_ENV !== 'production') {
@@ -58,7 +77,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
           'The MRT Persistent Table State feature is not supported if using SSR, but you can wrap your <MaterialReactTable /> in a MUI <NoSsr> tags to let it work',
         );
       }
-      return props.initialState;
+      return initState;
     }
     const storedState =
       props.persistentStateMode === 'localStorage'
@@ -69,10 +88,10 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     if (storedState) {
       const parsedState = JSON.parse(storedState);
       if (parsedState) {
-        return { ...props.initialState, ...parsedState };
+        return { ...initState, ...parsedState };
       }
     }
-    return props.initialState;
+    return initState;
   }, []);
 
   const [currentEditingCell, setCurrentEditingCell] =
@@ -92,11 +111,6 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   const [showGlobalFilter, setShowGlobalFilter] = useState(
     initialState?.showGlobalFilter ?? false,
   );
-  const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: initialState?.pagination?.pageIndex ?? 0,
-    pageSize: initialState?.pagination?.pageSize ?? 10,
-    pageCount: initialState?.pagination?.pageCount,
-  });
 
   const [currentFilterFns, setCurrentFilterFns] = useState<{
     [key: string]: MRT_FilterFn;
@@ -123,8 +137,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   const displayColumns = useMemo(
     () =>
       [
-        (props.enableRowActions ||
-          (props.enableEditing && props.editingMode === 'row')) &&
+        showActionColumn &&
           createDisplayColumn(table, {
             Cell: ({ cell }) => (
               <MRT_ToggleRowActionMenuButton
@@ -136,7 +149,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
             id: 'mrt-row-actions',
             size: 60,
           }),
-        (props.enableExpanding || props.enableGrouping) &&
+        showExpandColumn &&
           createDisplayColumn(table, {
             Cell: ({ cell }) => (
               <MRT_ExpandButton
@@ -222,15 +235,8 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     [props.data, props.state?.isLoading, props.state?.showSkeletons],
   );
 
-  const [columnOrder, setColumnOrder] = useState<string[]>(() =>
-    initialState?.columnOrder ?? props.enableColumnOrdering
-      ? getAllLeafColumnDefs(columns as MRT_ColumnDef[]).map((c) => c.id)
-      : [],
-  );
-
   //@ts-ignore
   const tableInstance = {
-    //@ts-ignore
     ...useTableInstance(table, {
       filterFns: defaultFilterFNs,
       getCoreRowModel: getCoreRowModel(),
@@ -243,9 +249,6 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       getSubRows: (row) => (row as MRT_Row)?.subRows,
       //@ts-ignore
       globalFilterFn: currentGlobalFilterFn,
-      onColumnOrderChange: setColumnOrder,
-      onPaginationChange: (updater: any) =>
-        setPagination((old) => functionalUpdate(updater, old)),
       ...props,
       //@ts-ignore
       columns,
@@ -253,15 +256,12 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       idPrefix,
       initialState,
       state: {
-        columnOrder,
         currentEditingCell,
         currentEditingRow,
         currentFilterFns,
         currentGlobalFilterFn,
         isDensePadding,
         isFullScreen,
-        //@ts-ignore
-        pagination,
         showFilters,
         showGlobalFilter,
         ...props.state,

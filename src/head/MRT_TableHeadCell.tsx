@@ -59,12 +59,12 @@ export const MRT_TableHeadCell: FC<Props> = ({
   };
 
   const headerElement = (
-    column.columnDef?.Header instanceof Function
-      ? column.columnDef?.Header?.({
+    columnDef?.Header instanceof Function
+      ? columnDef?.Header?.({
           header,
           tableInstance,
         })
-      : column.columnDef?.Header ?? header.renderHeader()
+      : columnDef?.Header ?? header.renderHeader()
   ) as ReactNode;
 
   const getIsLastLeftPinnedColumn = () => {
@@ -123,12 +123,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
           column.getIsPinned() && columnDefType !== 'group'
             ? 'sticky'
             : undefined,
-        pt:
-          columnDefType === 'display'
-            ? 0
-            : isDensePadding
-            ? '0.75rem'
-            : '1.25rem',
+        pt: columnDefType !== 'data' ? 0 : isDensePadding ? '0.25' : '.5rem',
         right:
           column.getIsPinned() === 'right' ? `${getTotalRight()}px` : undefined,
         transition: `all ${enableColumnResizing ? 0 : '0.2s'} ease-in-out`,

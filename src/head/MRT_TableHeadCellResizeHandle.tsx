@@ -17,6 +17,8 @@ export const MRT_TableHeadCellResizeHandle: FC<Props> = ({
 
   const { column } = header;
 
+  const { columnDefType } = column;
+
   return (
     <Divider
       flexItem
@@ -26,8 +28,7 @@ export const MRT_TableHeadCellResizeHandle: FC<Props> = ({
         borderRadius: '2px',
         borderRightWidth: '2px',
         cursor: 'col-resize',
-        height:
-          showFilters && column.columnDefType === 'data' ? '4rem' : '2rem',
+        height: showFilters && columnDefType === 'data' ? '4rem' : '2rem',
         opacity: 0.8,
         position: 'absolute',
         right: '1px',

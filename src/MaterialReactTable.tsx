@@ -35,7 +35,6 @@ import {
   Header,
   HeaderGroup,
   Overwrite,
-  PaginationState,
   ReactTableGenerics,
   Row,
   TableGenerics,
@@ -79,9 +78,11 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
     >
   >,
   | 'getAllColumns'
+  | 'getAllFlatColumns'
   | 'getAllLeafColumns'
   | 'getColumn'
   | 'getExpandedRowModel'
+  | 'getFlatHeaders'
   | 'getPaginationRowModel'
   | 'getPrePaginationRowModel'
   | 'getRowModel'
@@ -90,9 +91,11 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   | 'options'
 > & {
   getAllColumns: () => MRT_Column<D>[];
+  getAllFlatColumns: () => MRT_Column<D>[];
   getAllLeafColumns: () => MRT_Column<D>[];
   getColumn: (columnId: string) => MRT_Column<D>;
   getExpandedRowModel: () => MRT_RowModel<D>;
+  getFlatHeaders: () => MRT_Header<D>[];
   getPaginationRowModel: () => MRT_RowModel<D>;
   getPrePaginationRowModel: () => MRT_RowModel<D>;
   getRowModel: () => MRT_RowModel<D>;
@@ -117,10 +120,7 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   setShowGlobalFilter: Dispatch<SetStateAction<boolean>>;
 };
 
-export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
-  TableState,
-  'pagination'
-> & {
+export type MRT_TableState<D extends Record<string, any> = {}> = TableState & {
   currentEditingCell: MRT_Cell<D> | null;
   currentEditingRow: MRT_Row<D> | null;
   currentFilterFns: Record<string, string | Function>;
@@ -128,7 +128,6 @@ export type MRT_TableState<D extends Record<string, any> = {}> = Omit<
   isDensePadding: boolean;
   isLoading: boolean;
   isFullScreen: boolean;
-  pagination: Partial<PaginationState>;
   showFilters: boolean;
   showGlobalFilter: boolean;
   showProgressBars: boolean;

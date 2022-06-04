@@ -17,7 +17,7 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, tableInstance }) => {
 
   const { column } = footer;
 
-  const { columnDef } = column;
+  const { columnDef, columnDefType } = column;
 
   const mTableFooterCellProps =
     muiTableFooterCellProps instanceof Function
@@ -36,7 +36,7 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, tableInstance }) => {
 
   return (
     <TableCell
-      align={column.columnDefType === 'group' ? 'center' : 'left'}
+      align={columnDefType === 'group' ? 'center' : 'left'}
       colSpan={footer.colSpan}
       variant="head"
       {...tableCellProps}

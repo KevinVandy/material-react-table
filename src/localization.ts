@@ -37,6 +37,7 @@ export interface MRT_Localization {
   pinToLeft: string;
   pinToRight: string;
   resetColumnSize: string;
+  resetOrder: string;
   rowActions: string;
   rowNumber: string;
   rowNumbers: string;
@@ -104,6 +105,7 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   pinToLeft: 'Pin to left',
   pinToRight: 'Pin to right',
   resetColumnSize: 'Reset column size',
+  resetOrder: 'Reset order',
   rowActions: 'Row Actions',
   rowNumber: '#',
   rowNumbers: 'Row Numbers',

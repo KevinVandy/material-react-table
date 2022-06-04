@@ -24,11 +24,13 @@ export const MRT_TableHeadCellFilterLabel: FC<Props> = ({
 
   const { column } = header;
 
+  const { columnDef } = column;
+
   const filterFn = getState()?.currentFilterFns?.[header.id];
 
   const filterTooltip = !!column.getFilterValue()
     ? localization.filteringByColumn
-        .replace('{column}', String(column.columnDef.header))
+        .replace('{column}', String(columnDef.header))
         .replace(
           '{filterType}',
           filterFn instanceof Function

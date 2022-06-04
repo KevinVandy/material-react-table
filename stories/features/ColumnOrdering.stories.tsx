@@ -60,3 +60,12 @@ export const ColumnOrderingWithSelect: Story<MaterialReactTableProps> = () => (
     enableRowSelection
   />
 );
+
+export const ColumnOrderingWithPinning: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnOrdering
+    enablePinning
+  />
+);

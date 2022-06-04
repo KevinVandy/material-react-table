@@ -9,46 +9,47 @@ const meta: Meta = {
 
 export default meta;
 
-export const HeaderGroups: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable
-    columns={[
+const columns = [
+  {
+    header: 'Name',
+    id: 'name',
+    columns: [
       {
-        header: 'Name',
-        id: 'name',
-        columns: [
-          {
-            header: 'First Name',
-            id: 'firstName',
-          },
+        header: 'First Name',
+        id: 'firstName',
+      },
 
-          {
-            header: 'Last Name',
-            id: 'lastName',
-          },
-        ],
+      {
+        header: 'Last Name',
+        id: 'lastName',
+      },
+    ],
+  },
+  {
+    header: 'Info',
+    id: 'info',
+    columns: [
+      {
+        header: 'Age',
+        id: 'age',
       },
       {
-        header: 'Info',
-        id: 'info',
-        columns: [
-          {
-            header: 'Age',
-            id: 'age',
-          },
-          {
-            header: 'Address',
-            id: 'address',
-          },
-        ],
+        header: 'Address',
+        id: 'address',
       },
-    ]}
-    data={[...Array(5)].map((_) => ({
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-      age: faker.datatype.number(80),
-      address: faker.address.streetAddress(),
-    }))}
-  />
+    ],
+  },
+];
+
+const data = [...Array(5)].map((_) => ({
+  firstName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
+  age: faker.datatype.number(80),
+  address: faker.address.streetAddress(),
+}));
+
+export const HeaderGroups: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} />
 );
 
 export const HeaderAndFooterGroups: Story<MaterialReactTableProps> = () => (
@@ -90,11 +91,16 @@ export const HeaderAndFooterGroups: Story<MaterialReactTableProps> = () => (
         ],
       },
     ]}
-    data={[...Array(5)].map((_) => ({
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-      age: faker.datatype.number(80),
-      address: faker.address.streetAddress(),
-    }))}
+    data={data}
   />
 );
+
+export const HeaderGroupsWithColumnOrdering: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable columns={columns} data={data} enableColumnOrdering />
+);
+
+export const HeaderGroupsWithColumnPinning: Story<
+  MaterialReactTableProps
+> = () => <MaterialReactTable columns={columns} data={data} enablePinning />;

@@ -22,6 +22,8 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({
 
   const { column } = header;
 
+  const { columnDef } = column;
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
@@ -36,13 +38,12 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({
       : muiTableHeadCellColumnActionsButtonProps;
 
   const mcTableHeadCellColumnActionsButtonProps =
-    column.columnDef.muiTableHeadCellColumnActionsButtonProps instanceof
-    Function
-      ? column.columnDef.muiTableHeadCellColumnActionsButtonProps({
+    columnDef.muiTableHeadCellColumnActionsButtonProps instanceof Function
+      ? columnDef.muiTableHeadCellColumnActionsButtonProps({
           column,
           tableInstance,
         })
-      : column.columnDef.muiTableHeadCellColumnActionsButtonProps;
+      : columnDef.muiTableHeadCellColumnActionsButtonProps;
 
   const iconButtonProps = {
     ...mTableHeadCellColumnActionsButtonProps,

@@ -144,7 +144,7 @@ export const MRT_FilterTextField: FC<Props> = ({
       : inputIndex === 1
       ? localization.max
       : '';
-  console.log({ textFieldProps });
+
   return (
     <>
       <TextField

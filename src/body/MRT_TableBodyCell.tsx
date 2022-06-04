@@ -39,7 +39,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   const { column, row } = cell;
 
-  const { columnDef } = column;
+  const { columnDef, columnDefType } = column;
 
   const mTableCellBodyProps =
     muiTableBodyCellProps instanceof Function
@@ -58,11 +58,11 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   const skeletonWidth = useMemo(
     () =>
-      column.columnDefType === 'display'
+      columnDefType === 'display'
         ? column.getSize() / 2
         : Math.random() * (column.getSize() - column.getSize() / 3) +
           column.getSize() / 3,
-    [column.columnDefType, column.getSize()],
+    [columnDefType, column.getSize()],
   );
 
   const isEditable =
@@ -136,10 +136,10 @@ export const MRT_TableBodyCell: FC<Props> = ({
             ? `${column.getStart('left')}px`
             : undefined,
         p: isDensePadding
-          ? column.columnDefType === 'display'
+          ? columnDefType === 'display'
             ? '0 0.5rem'
             : '0.5rem'
-          : column.columnDefType === 'display'
+          : columnDefType === 'display'
           ? '0.5rem 0.75rem'
           : '1rem',
         pl:
@@ -175,7 +175,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
             width={skeletonWidth}
             {...muiTableBodyCellSkeletonProps}
           />
-        ) : column.columnDefType === 'display' ? (
+        ) : columnDefType === 'display' ? (
           columnDef.Cell?.({ cell, tableInstance })
         ) : cell.getIsPlaceholder() ||
           (row.getIsGrouped() &&
@@ -189,7 +189,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
           <>
             <MRT_CopyButton cell={cell} tableInstance={tableInstance}>
               <>
-                {cell.column.columnDef?.Cell?.({ cell, tableInstance }) ??
+                {columnDef?.Cell?.({ cell, tableInstance }) ??
                   cell.renderCell()}
               </>
             </MRT_CopyButton>
@@ -197,8 +197,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
           </>
         ) : (
           <>
-            {cell.column.columnDef?.Cell?.({ cell, tableInstance }) ??
-              cell.renderCell()}
+            {columnDef?.Cell?.({ cell, tableInstance }) ?? cell.renderCell()}
             {row.getIsGrouped() && <> ({row.subRows?.length ?? ''})</>}
           </>
         )}

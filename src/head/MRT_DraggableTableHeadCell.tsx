@@ -20,18 +20,25 @@ export const MRT_DraggableTableHeadCell: FC<Props> = ({
 
   const { columnOrder } = getState();
 
-  const reorder = (item: MRT_Header, newIndex: number) => {
-    const { index: currentIndex } = item;
-    columnOrder.splice(newIndex, 0, columnOrder.splice(currentIndex, 1)[0]);
+  const reorder = (movingHeader: MRT_Header, receivingHeader: MRT_Header) => {
+    if (movingHeader.column.getCanPin()) {
+      movingHeader.column.pin(receivingHeader.column.getIsPinned());
+    }
+    const { index: currentIndex } = movingHeader;
+    columnOrder.splice(
+      receivingHeader.index,
+      0,
+      columnOrder.splice(currentIndex, 1)[0],
+    );
     setColumnOrder([...columnOrder]);
   };
 
-  const [, drop] = useDrop({
+  const [, dropRef] = useDrop({
     accept: 'header',
-    drop: (item: MRT_Header) => reorder(item, header.index),
+    drop: (movingHeader: MRT_Header) => reorder(movingHeader, header),
   });
 
-  const [{ isDragging }, drag, preview] = useDrag({
+  const [{ isDragging }, dragRef, previewRef] = useDrag({
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -41,11 +48,11 @@ export const MRT_DraggableTableHeadCell: FC<Props> = ({
 
   return (
     <MRT_TableHeadCell
-      dragRef={drag}
-      dropRef={drop}
+      dragRef={dragRef}
+      dropRef={dropRef}
       header={header}
       isDragging={isDragging}
-      previewRef={preview}
+      previewRef={previewRef}
       tableInstance={tableInstance}
     />
   );

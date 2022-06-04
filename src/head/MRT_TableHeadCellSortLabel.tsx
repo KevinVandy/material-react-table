@@ -17,16 +17,12 @@ export const MRT_TableHeadCellSortLabel: FC<Props> = ({
 
   const { column } = header;
 
+  const { columnDef } = column;
+
   const sortTooltip = !!column.getIsSorted()
     ? column.getIsSorted() === 'desc'
-      ? localization.sortedByColumnDesc.replace(
-          '{column}',
-          column.columnDef.header,
-        )
-      : localization.sortedByColumnAsc.replace(
-          '{column}',
-          column.columnDef.header,
-        )
+      ? localization.sortedByColumnDesc.replace('{column}', columnDef.header)
+      : localization.sortedByColumnAsc.replace('{column}', columnDef.header)
     : localization.unsorted;
 
   return (
