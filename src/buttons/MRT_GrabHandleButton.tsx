@@ -1,14 +1,13 @@
 import { IconButton, Tooltip } from '@mui/material';
 import React, { FC, forwardRef, Ref } from 'react';
-import { MRT_Header, MRT_TableInstance } from '..';
+import { MRT_TableInstance } from '..';
 
 interface Props {
-  header: MRT_Header;
   ref: Ref<HTMLButtonElement>;
   tableInstance: MRT_TableInstance;
 }
 
-export const MRT_TableHeadCellGrabHandle: FC<Props> = forwardRef(
+export const MRT_GrabHandleButton: FC<Props> = forwardRef(
   ({ tableInstance }, ref) => {
     const {
       options: {

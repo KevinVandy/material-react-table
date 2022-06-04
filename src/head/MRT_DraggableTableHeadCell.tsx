@@ -24,11 +24,10 @@ export const MRT_DraggableTableHeadCell: FC<Props> = ({
     if (movingHeader.column.getCanPin()) {
       movingHeader.column.pin(receivingHeader.column.getIsPinned());
     }
-    const { index: currentIndex } = movingHeader;
     columnOrder.splice(
       receivingHeader.index,
       0,
-      columnOrder.splice(currentIndex, 1)[0],
+      columnOrder.splice(movingHeader.index, 1)[0],
     );
     setColumnOrder([...columnOrder]);
   };

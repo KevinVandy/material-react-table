@@ -97,6 +97,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
       <Divider />
       {allColumns.map((column, index) => (
         <MRT_ShowHideColumnsMenuItems
+          allColumns={allColumns}
           column={column}
           isSubMenu={isSubMenu}
           key={`${index}-${column.id}`}

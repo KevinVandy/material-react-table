@@ -1,27 +1,57 @@
-import React, { FC } from 'react';
-import { FormControlLabel, MenuItem, Switch } from '@mui/material';
+import React, { FC, Ref } from 'react';
+import { useDrag, useDrop } from 'react-dnd';
+import { Box, FormControlLabel, MenuItem, Switch } from '@mui/material';
 import { MRT_ColumnPinningButtons } from '../buttons/MRT_ColumnPinningButtons';
+import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 import type { MRT_Column, MRT_TableInstance } from '..';
 
 interface Props {
+  allColumns: MRT_Column[];
   column: MRT_Column;
   isSubMenu?: boolean;
   tableInstance: MRT_TableInstance;
 }
 
 export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
+  allColumns,
   column,
   isSubMenu,
   tableInstance,
 }) => {
   const {
     getState,
-    options: { onToggleColumnVisibility },
+    options: { enableColumnOrdering, onToggleColumnVisibility },
+    setColumnOrder,
   } = tableInstance;
 
-  const { columnVisibility } = getState();
+  const { columnOrder, columnVisibility } = getState();
 
   const { columnDef, columnDefType } = column;
+
+  const reorder = (movingColumn: MRT_Column, receivingColumn: MRT_Column) => {
+    if (movingColumn.getCanPin()) {
+      movingColumn.pin(receivingColumn.getIsPinned());
+    }
+    columnOrder.splice(
+      columnOrder.indexOf(receivingColumn.id),
+      0,
+      columnOrder.splice(columnOrder.indexOf(movingColumn.id), 1)[0],
+    );
+    setColumnOrder([...columnOrder]);
+  };
+
+  const [, dropRef] = useDrop({
+    accept: 'column',
+    drop: (movingColumn: MRT_Column) => reorder(movingColumn, column),
+  });
+
+  const [, dragRef, previewRef] = useDrag({
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+    item: () => column,
+    type: 'column',
+  });
 
   const switchChecked =
     (columnDefType !== 'group' && column.getIsVisible()) ||
@@ -46,6 +76,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
   return (
     <>
       <MenuItem
+        ref={columnDefType === 'data' ? dropRef : undefined}
         sx={{
           alignItems: 'center',
           justifyContent: 'flex-start',
@@ -54,30 +85,43 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
           py: '6px',
         }}
       >
-        {!isSubMenu && column.getCanPin() && (
-          <MRT_ColumnPinningButtons
-            column={column}
-            tableInstance={tableInstance}
-          />
-        )}
-        <FormControlLabel
-          componentsProps={{
-            typography: {
-              sx: {
-                marginBottom: 0,
-                opacity: columnDefType !== 'display' ? 1 : 0.5,
+        <Box ref={previewRef} sx={{ display: 'flex', flexWrap: 'nowrap' }}>
+          {columnDefType !== 'group' &&
+            enableColumnOrdering &&
+            columnDef.enableColumnOrdering !== false &&
+            !allColumns.some((col) => col.columnDefType === 'group') && (
+              <MRT_GrabHandleButton
+                ref={dragRef as Ref<HTMLButtonElement>}
+                tableInstance={tableInstance}
+              />
+            )}
+          {!isSubMenu && column.getCanPin() && (
+            <MRT_ColumnPinningButtons
+              column={column}
+              tableInstance={tableInstance}
+            />
+          )}
+          <FormControlLabel
+            componentsProps={{
+              typography: {
+                sx: {
+                  mb: 0,
+                  opacity: columnDefType !== 'display' ? 1 : 0.5,
+                },
               },
-            },
-          }}
-          checked={switchChecked}
-          control={<Switch />}
-          disabled={(isSubMenu && switchChecked) || !column.getCanHide()}
-          label={columnDef.header}
-          onChange={() => handleToggleColumnHidden(column)}
-        />
+            }}
+            checked={switchChecked}
+            control={<Switch />}
+            disabled={(isSubMenu && switchChecked) || !column.getCanHide()}
+            label={columnDef.header}
+            onChange={() => handleToggleColumnHidden(column)}
+            sx={{ ml: '4px' }}
+          />
+        </Box>
       </MenuItem>
       {column.columns?.map((c: MRT_Column, i) => (
         <MRT_ShowHideColumnsMenuItems
+          allColumns={allColumns}
           key={`${i}-${c.id}`}
           column={c}
           isSubMenu={isSubMenu}
