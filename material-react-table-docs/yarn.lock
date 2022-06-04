@@ -1950,10 +1950,10 @@ match-sorter@^6.0.2:
     "@babel/runtime" "^7.12.5"
     remove-accents "0.4.2"
 
-material-react-table@^0.8.13:
-  version "0.8.13"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.8.13.tgz#1eb9acd5259a1dda0265e044e14b192154a59b6b"
-  integrity sha512-2Lu45g2lLk9TsYfGcHec5bFMdv/rfQIypTnAIC2umhPHyUo13y0fpSlmGrvNVpNBuXYtVxCEUjxMbobXJORg9Q==
+material-react-table@^0.8.14:
+  version "0.8.14"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.8.14.tgz#ba63ed46ab1171224491c87db0ee78841cb39f31"
+  integrity sha512-JQjgWkq8RHvaqKh8rn5FgZJAigHs7ARNAPMfjeBt3Lz9LVf8qGqJa8E1gUCudbIF5iWO94bWEn6OrCOIbSbeaA==
   dependencies:
     "@tanstack/match-sorter-utils" "^8.0.0-alpha.83"
     "@tanstack/react-table" "^8.0.0-beta.4"

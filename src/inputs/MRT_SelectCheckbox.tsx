@@ -22,6 +22,7 @@ export const MRT_SelectCheckbox: FC<Props> = ({
       muiSelectCheckboxProps,
       onSelectChange,
       onSelectAllChange,
+      selectAllMode,
     },
   } = tableInstance;
 
@@ -29,7 +30,11 @@ export const MRT_SelectCheckbox: FC<Props> = ({
 
   const handleSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (selectAll) {
-      tableInstance.getToggleAllRowsSelectedHandler()(event as any);
+      if (selectAllMode === 'all') {
+        tableInstance.getToggleAllRowsSelectedHandler()(event as any);
+      } else if (selectAllMode === 'page') {
+        tableInstance.getToggleAllPageRowsSelectedHandler()(event as any);
+      }
       onSelectAllChange?.({
         event,
         selectedRows: event.target.checked ? getRowModel().flatRows : [],

@@ -760,6 +760,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
         IconButtonProps & { tableInstance: MRT_TableInstance<D> }
       >;
     }) => ReactNode;
+    selectAllMode?: 'all' | 'page';
   };
 
 export default <D extends Record<string, any> = {}>({
@@ -796,6 +797,7 @@ export default <D extends Record<string, any> = {}>({
   positionPagination = 'bottom',
   positionToolbarActions = 'top',
   positionToolbarAlertBanner = 'top',
+  selectAllMode = 'all',
   ...rest
 }: MaterialReactTableProps<D>) => (
   <MRT_TableRoot
@@ -832,6 +834,7 @@ export default <D extends Record<string, any> = {}>({
     positionPagination={positionPagination}
     positionToolbarActions={positionToolbarActions}
     positionToolbarAlertBanner={positionToolbarAlertBanner}
+    selectAllMode={selectAllMode}
     {...rest}
   />
 );

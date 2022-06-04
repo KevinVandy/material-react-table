@@ -133,7 +133,24 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     MRT_FILTER_OPTION | FilterFn<ReactTableGenerics> | string | number | symbol
   >(props.globalFilterFn ?? MRT_FILTER_OPTION.FUZZY);
 
-  const table = useMemo(() => createTable(), []);
+  const table = useMemo(
+    () =>
+      createTable().setOptions({
+        //@ts-ignore
+        filterFns: defaultFilterFNs,
+        getCoreRowModel: getCoreRowModel(),
+        getExpandedRowModel: getExpandedRowModel(),
+        getFacetedRowModel: getFacetedRowModel(),
+        getFilteredRowModel: getFilteredRowModel(),
+        getGroupedRowModel: getGroupedRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
+        getSortedRowModel: getSortedRowModel(),
+        getSubRows: (row) => (row as MRT_Row)?.subRows,
+        idPrefix,
+        initialState,
+      }),
+    [],
+  );
 
   const displayColumns = useMemo(
     () =>
@@ -238,24 +255,14 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
 
   //@ts-ignore
   const tableInstance = {
+    //@ts-ignore
     ...useTableInstance(table, {
-      filterFns: defaultFilterFNs,
-      getCoreRowModel: getCoreRowModel(),
-      getExpandedRowModel: getExpandedRowModel(),
-      getFacetedRowModel: getFacetedRowModel(),
-      getFilteredRowModel: getFilteredRowModel(),
-      getGroupedRowModel: getGroupedRowModel(),
-      getPaginationRowModel: getPaginationRowModel(),
-      getSortedRowModel: getSortedRowModel(),
-      getSubRows: (row) => (row as MRT_Row)?.subRows,
-      //@ts-ignore
-      globalFilterFn: currentGlobalFilterFn,
       ...props,
       //@ts-ignore
       columns,
       data,
-      idPrefix,
-      initialState,
+      //@ts-ignore
+      globalFilterFn: currentGlobalFilterFn,
       state: {
         currentEditingCell,
         currentEditingRow,
