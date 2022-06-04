@@ -11,6 +11,7 @@ import {
   getFilteredRowModel,
   ReactTableGenerics,
   getFacetedRowModel,
+  TableState,
 } from '@tanstack/react-table';
 import {
   MRT_Cell,
@@ -265,7 +266,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         showFilters,
         showGlobalFilter,
         ...props.state,
-      },
+      } as TableState,
     }),
     setCurrentEditingCell,
     setCurrentEditingRow,

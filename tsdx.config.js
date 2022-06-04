@@ -16,17 +16,6 @@ module.exports = {
         '@tanstack/match-sorter-utils',
         '@tanstack/react-table',
       ];
-      config.globals = {
-        react: 'React',
-        'react-dom': 'ReactDOM',
-        'react/jsx-runtime': 'ReactJsxRuntime',
-        '@emotion/react': 'EmotionReact',
-        '@emotion/styled': 'EmotionStyled',
-        '@mui/icons-material': 'MuiIconsMaterial',
-        '@mui/material': 'MuiMaterial',
-        '@tanstack/match-sorter-utils': 'MatchSorterUtils',
-        '@tanstack/react-table': 'ReactTable',
-      };
       config.plugins.push(
         commonjs({
           include: /node_modules/,
