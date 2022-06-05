@@ -1,8 +1,10 @@
 import React, { FC, MouseEvent, useMemo } from 'react';
+import { useDrop } from 'react-dnd';
 import { alpha, darken, lighten, Skeleton, TableCell } from '@mui/material';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
-import type { MRT_Cell, MRT_TableInstance } from '..';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
+import { reorderColumn } from '../utils';
+import type { MRT_Cell, MRT_Column, MRT_TableInstance } from '..';
 
 interface Props {
   cell: MRT_Cell;
@@ -20,16 +22,19 @@ export const MRT_TableBodyCell: FC<Props> = ({
     options: {
       editingMode,
       enableClickToCopy,
+      enableColumnOrdering,
       enableEditing,
       idPrefix,
       muiTableBodyCellProps,
       muiTableBodyCellSkeletonProps,
       onCellClick,
     },
+    setColumnOrder,
     setCurrentEditingCell,
   } = tableInstance;
 
   const {
+    columnOrder,
     currentEditingCell,
     currentEditingRow,
     isDensePadding,
@@ -40,6 +45,12 @@ export const MRT_TableBodyCell: FC<Props> = ({
   const { column, row } = cell;
 
   const { columnDef, columnDefType } = column;
+
+  const [, dropRef] = useDrop({
+    accept: 'column',
+    drop: (movingColumn: MRT_Column) =>
+      reorderColumn(movingColumn, column, columnOrder, setColumnOrder),
+  });
 
   const mTableCellBodyProps =
     muiTableBodyCellProps instanceof Function
@@ -121,6 +132,9 @@ export const MRT_TableBodyCell: FC<Props> = ({
       }
       onDoubleClick={handleDoubleClick}
       {...tableCellProps}
+      ref={
+        columnDefType === 'data' && enableColumnOrdering ? dropRef : undefined
+      }
       sx={(theme) => ({
         backgroundColor: column.getIsPinned()
           ? alpha(lighten(theme.palette.background.default, 0.04), 0.95)

@@ -19,9 +19,12 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
   const {
     getAllColumns,
     getAllLeafColumns,
+    getCenterLeafColumns,
     getIsAllColumnsVisible,
     getIsSomeColumnsPinned,
     getIsSomeColumnsVisible,
+    getLeftLeafColumns,
+    getRightLeafColumns,
     getState,
     toggleAllColumnsVisible,
     options: { localization, enablePinning, enableColumnOrdering },
@@ -41,14 +44,23 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
       columnOrder.length > 0 &&
       !columns.some((col) => col.columnDefType === 'group')
     ) {
-      return (
-        [...new Set(columnOrder)].map((colId) =>
-          columns.find((col) => col.id === colId),
-        ) ?? columns
-      );
+      return [
+        ...getLeftLeafColumns(),
+        ...[...new Set(columnOrder)].map((colId) =>
+          getCenterLeafColumns().find((col) => col?.id === colId),
+        ),
+        ...getRightLeafColumns(),
+      ].filter(Boolean);
     }
     return columns;
-  }, [getAllColumns(), columnOrder, columnPinning]) as MRT_Column[];
+  }, [
+    columnOrder,
+    columnPinning,
+    getAllColumns(),
+    getCenterLeafColumns(),
+    getLeftLeafColumns(),
+    getRightLeafColumns(),
+  ]) as MRT_Column[];
 
   return (
     <Menu

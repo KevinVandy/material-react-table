@@ -23,7 +23,7 @@ export const MRT_ColumnPinningButtons: FC<Props> = ({
   };
 
   return (
-    <Box sx={{ mr: '4px' }}>
+    <Box sx={{ minWidth: '70px', textAlign: 'center' }}>
       {column.getIsPinned() ? (
         <Tooltip arrow title={localization.unpin}>
           <IconButton onClick={() => handlePinColumn(false)} size="small">

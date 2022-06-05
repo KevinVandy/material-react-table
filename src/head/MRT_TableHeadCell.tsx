@@ -58,14 +58,14 @@ export const MRT_TableHeadCell: FC<Props> = ({
     ...mcTableHeadCellProps,
   };
 
-  const headerElement = (
-    columnDef?.Header instanceof Function
-      ? columnDef?.Header?.({
-          header,
-          tableInstance,
-        })
-      : columnDef?.Header ?? header.renderHeader()
-  ) as ReactNode;
+  const headerElement = ((columnDef?.Header instanceof Function
+    ? columnDef?.Header?.({
+        header,
+        tableInstance,
+      })
+    : columnDef?.Header) ??
+    header.renderHeader() ??
+    columnDef.header) as ReactNode;
 
   const getIsLastLeftPinnedColumn = () => {
     return (

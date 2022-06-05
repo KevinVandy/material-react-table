@@ -1,5 +1,10 @@
-import { ColumnDef, Table } from '@tanstack/react-table';
-import { MRT_ColumnDef, MRT_FilterFn } from '.';
+import {
+  ColumnDef,
+  ColumnOrderState,
+  Table,
+  Updater,
+} from '@tanstack/react-table';
+import { MRT_Column, MRT_ColumnDef, MRT_FilterFn, } from '.';
 import { MRT_FILTER_OPTION } from './enums';
 import { defaultFilterFNs } from './filtersFNs';
 
@@ -52,3 +57,20 @@ export const createDisplayColumn = <D extends Record<string, any> = {}>(
   table: Table<D>,
   column: Omit<MRT_ColumnDef<D>, 'header'> & { header?: string },
 ): ColumnDef<D> => table.createDisplayColumn(column as ColumnDef<D>);
+
+export const reorderColumn = (
+  movingColumn: MRT_Column,
+  receivingColumn: MRT_Column,
+  columnOrder: ColumnOrderState,
+  setColumnOrder: (updater: Updater<ColumnOrderState>) => void,
+) => {
+  if (movingColumn.getCanPin()) {
+    movingColumn.pin(receivingColumn.getIsPinned());
+  }
+  columnOrder.splice(
+    columnOrder.indexOf(receivingColumn.id),
+    0,
+    columnOrder.splice(columnOrder.indexOf(movingColumn.id), 1)[0],
+  );
+  setColumnOrder([...columnOrder]);
+};

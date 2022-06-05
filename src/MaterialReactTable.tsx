@@ -80,11 +80,14 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   | 'getAllColumns'
   | 'getAllFlatColumns'
   | 'getAllLeafColumns'
+  | 'getCenterLeafColumns'
   | 'getColumn'
   | 'getExpandedRowModel'
   | 'getFlatHeaders'
+  | 'getLeftLeafColumns'
   | 'getPaginationRowModel'
   | 'getPrePaginationRowModel'
+  | 'getRightLeafColumns'
   | 'getRowModel'
   | 'getSelectedRowModel'
   | 'getState'
@@ -93,11 +96,14 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   getAllColumns: () => MRT_Column<D>[];
   getAllFlatColumns: () => MRT_Column<D>[];
   getAllLeafColumns: () => MRT_Column<D>[];
+  getCenterLeafColumns: () => MRT_Column<D>[];
   getColumn: (columnId: string) => MRT_Column<D>;
   getExpandedRowModel: () => MRT_RowModel<D>;
   getFlatHeaders: () => MRT_Header<D>[];
+  getLeftLeafColumns: () => MRT_Column<D>[];
   getPaginationRowModel: () => MRT_RowModel<D>;
   getPrePaginationRowModel: () => MRT_RowModel<D>;
+  getRightLeafColumns: () => MRT_Column<D>[];
   getRowModel: () => MRT_RowModel<D>;
   getSelectedRowModel: () => MRT_RowModel<D>;
   getState: () => MRT_TableState<D>;

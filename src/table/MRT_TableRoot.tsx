@@ -12,6 +12,7 @@ import {
   ReactTableGenerics,
   getFacetedRowModel,
   TableState,
+  Table,
 } from '@tanstack/react-table';
 import {
   MRT_Cell,
@@ -136,6 +137,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
 
   const table = useMemo(
     () =>
+      // @ts-ignore
       createTable().setOptions({
         //@ts-ignore
         filterFns: defaultFilterFNs,
@@ -149,7 +151,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         getSubRows: (row) => (row as MRT_Row)?.subRows,
         idPrefix,
         initialState,
-      }),
+      }) as Table<D>,
     [],
   );
 
@@ -166,6 +168,8 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
             ),
             header: props.localization?.actions,
             id: 'mrt-row-actions',
+            muiTableBodyCellProps: props.muiTableBodyCellProps,
+            muiTableHeadCellProps: props.muiTableHeadCellProps,
             size: 60,
           }),
         showExpandColumn &&
@@ -182,6 +186,8 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
               ) : null,
             header: props.localization?.expand,
             id: 'mrt-expand',
+            muiTableBodyCellProps: props.muiTableBodyCellProps,
+            muiTableHeadCellProps: props.muiTableHeadCellProps,
             size: 50,
           }),
         props.enableRowSelection &&
@@ -198,6 +204,8 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
               ) : null,
             header: props.localization?.select,
             id: 'mrt-select',
+            muiTableBodyCellProps: props.muiTableBodyCellProps,
+            muiTableHeadCellProps: props.muiTableHeadCellProps,
             size: 50,
           }),
         props.enableRowNumbers &&
@@ -206,6 +214,8 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
             Header: () => props.localization?.rowNumber,
             header: props.localization?.rowNumbers,
             id: 'mrt-row-numbers',
+            muiTableBodyCellProps: props.muiTableBodyCellProps,
+            muiTableHeadCellProps: props.muiTableHeadCellProps,
             size: 50,
           }),
       ].filter(Boolean),

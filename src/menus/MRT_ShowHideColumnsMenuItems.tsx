@@ -3,6 +3,7 @@ import { useDrag, useDrop } from 'react-dnd';
 import { Box, FormControlLabel, MenuItem, Switch } from '@mui/material';
 import { MRT_ColumnPinningButtons } from '../buttons/MRT_ColumnPinningButtons';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
+import { reorderColumn } from '../utils';
 import type { MRT_Column, MRT_TableInstance } from '..';
 
 interface Props {
@@ -28,21 +29,10 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
 
   const { columnDef, columnDefType } = column;
 
-  const reorder = (movingColumn: MRT_Column, receivingColumn: MRT_Column) => {
-    if (movingColumn.getCanPin()) {
-      movingColumn.pin(receivingColumn.getIsPinned());
-    }
-    columnOrder.splice(
-      columnOrder.indexOf(receivingColumn.id),
-      0,
-      columnOrder.splice(columnOrder.indexOf(movingColumn.id), 1)[0],
-    );
-    setColumnOrder([...columnOrder]);
-  };
-
   const [, dropRef] = useDrop({
     accept: 'column',
-    drop: (movingColumn: MRT_Column) => reorder(movingColumn, column),
+    drop: (movingColumn: MRT_Column) =>
+      reorderColumn(movingColumn, column, columnOrder, setColumnOrder),
   });
 
   const [, dragRef, previewRef] = useDrag({
@@ -85,7 +75,14 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
           py: '6px',
         }}
       >
-        <Box ref={previewRef} sx={{ display: 'flex', flexWrap: 'nowrap' }}>
+        <Box
+          ref={previewRef}
+          sx={{
+            display: 'flex',
+            flexWrap: 'nowrap',
+            gap: '8px',
+          }}
+        >
           {columnDefType !== 'group' &&
             enableColumnOrdering &&
             columnDef.enableColumnOrdering !== false &&
@@ -119,7 +116,6 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
             }
             label={columnDef.header}
             onChange={() => handleToggleColumnHidden(column)}
-            sx={{ ml: '4px' }}
           />
         </Box>
       </MenuItem>

@@ -538,10 +538,10 @@
   resolved "https://registry.yarnpkg.com/@types/ms/-/ms-0.7.31.tgz#31b7ca6407128a3d2bbc27fe2d21b345397f6197"
   integrity sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==
 
-"@types/node@^17.0.39":
-  version "17.0.39"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.39.tgz#3652d82e2a16b4ea679d5ea3143b816c91b7e113"
-  integrity sha512-JDU3YLlnPK3WDao6/DlXLOgSNpG13ct+CwIO17V8q0/9fWJyeMJJ/VyZ1lv8kDprihvZMydzVwf0tQOqGiY2Nw==
+"@types/node@^17.0.40":
+  version "17.0.40"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.40.tgz#76ee88ae03650de8064a6cf75b8d95f9f4a16090"
+  integrity sha512-UXdBxNGqTMtm7hCwh9HtncFVLrXoqA3oJW30j6XWp5BH/wu3mVeaxo7cq5benFdBw34HB3XDT2TRPI7rXZ+mDg==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -1950,10 +1950,10 @@ match-sorter@^6.0.2:
     "@babel/runtime" "^7.12.5"
     remove-accents "0.4.2"
 
-material-react-table@^0.8.14:
-  version "0.8.14"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.8.14.tgz#ba63ed46ab1171224491c87db0ee78841cb39f31"
-  integrity sha512-JQjgWkq8RHvaqKh8rn5FgZJAigHs7ARNAPMfjeBt3Lz9LVf8qGqJa8E1gUCudbIF5iWO94bWEn6OrCOIbSbeaA==
+material-react-table@^0.8.15:
+  version "0.8.15"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.8.15.tgz#509ada3c6e02d8c47e64791e14999d6673c9a63d"
+  integrity sha512-wjAxwMl/W25+iX5q6BtrptnTkT6clBwH6111KFZEL27KSlDp7o8zenn+jNvDpr9gWUZ5aKfDjmKQnJdi9sR6rw==
   dependencies:
     "@tanstack/match-sorter-utils" "^8.0.0-alpha.83"
     "@tanstack/react-table" "^8.0.0-beta.4"

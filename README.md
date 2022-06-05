@@ -72,3 +72,4 @@ npm install @mui/material @mui/icons-material @emotion/react @emotion/styled
 npm install material-react-table
 ```
 
+_`@tanstack/react-table` and `react-dnd`_ are internal dependencies, so you don't need to install them.

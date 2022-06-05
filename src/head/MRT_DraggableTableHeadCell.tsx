@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { MRT_TableHeadCell } from './MRT_TableHeadCell';
-import type { MRT_Header, MRT_TableInstance } from '..';
+import type { MRT_Column, MRT_Header, MRT_TableInstance } from '..';
+import { reorderColumn } from '../utils';
 
 interface Props {
   header: MRT_Header;
@@ -20,29 +21,20 @@ export const MRT_DraggableTableHeadCell: FC<Props> = ({
 
   const { columnOrder } = getState();
 
-  const reorder = (movingHeader: MRT_Header, receivingHeader: MRT_Header) => {
-    if (movingHeader.column.getCanPin()) {
-      movingHeader.column.pin(receivingHeader.column.getIsPinned());
-    }
-    columnOrder.splice(
-      receivingHeader.index,
-      0,
-      columnOrder.splice(movingHeader.index, 1)[0],
-    );
-    setColumnOrder([...columnOrder]);
-  };
+  const { column } = header;
 
   const [, dropRef] = useDrop({
-    accept: 'header',
-    drop: (movingHeader: MRT_Header) => reorder(movingHeader, header),
+    accept: 'column',
+    drop: (movingColumn: MRT_Column) =>
+      reorderColumn(movingColumn, column, columnOrder, setColumnOrder),
   });
 
   const [{ isDragging }, dragRef, previewRef] = useDrag({
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
-    item: () => header,
-    type: 'header',
+    item: () => column,
+    type: 'column',
   });
 
   return (
