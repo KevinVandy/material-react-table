@@ -42,8 +42,9 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
       !columns.some((col) => col.columnDefType === 'group')
     ) {
       return (
-        columnOrder.map((colId) => columns.find((col) => col.id === colId)) ??
-        columns
+        [...new Set(columnOrder)].map((colId) =>
+          columns.find((col) => col.id === colId),
+        ) ?? columns
       );
     }
     return columns;

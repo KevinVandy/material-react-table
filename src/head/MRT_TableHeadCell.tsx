@@ -92,7 +92,9 @@ export const MRT_TableHeadCell: FC<Props> = ({
       align={columnDefType === 'group' ? 'center' : 'left'}
       colSpan={header.colSpan}
       {...tableCellProps}
-      ref={columnDefType === 'data' ? dropRef : undefined}
+      ref={
+        columnDefType === 'data' && enableColumnOrdering ? dropRef : undefined
+      }
       sx={(theme: Theme) => ({
         backgroundColor:
           column.getIsPinned() && columnDefType !== 'group'
@@ -123,7 +125,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
           column.getIsPinned() && columnDefType !== 'group'
             ? 'sticky'
             : undefined,
-        pt: columnDefType !== 'data' ? 0 : isDensePadding ? '0.25' : '.5rem',
+        pt: columnDefType !== 'data' ? 0 : isDensePadding ? '0.25' : '.75rem',
         right:
           column.getIsPinned() === 'right' ? `${getTotalRight()}px` : undefined,
         transition: `all ${enableColumnResizing ? 0 : '0.2s'} ease-in-out`,

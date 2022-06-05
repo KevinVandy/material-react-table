@@ -112,7 +112,11 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
             }}
             checked={switchChecked}
             control={<Switch />}
-            disabled={(isSubMenu && switchChecked) || !column.getCanHide()}
+            disabled={
+              (isSubMenu && switchChecked) ||
+              !column.getCanHide() ||
+              column.getIsGrouped()
+            }
             label={columnDef.header}
             onChange={() => handleToggleColumnHidden(column)}
             sx={{ ml: '4px' }}

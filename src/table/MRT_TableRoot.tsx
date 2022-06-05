@@ -57,7 +57,8 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     const initState = props.initialState ?? {};
 
     initState.columnOrder =
-      initState?.columnOrder ?? props.enableColumnOrdering
+      initState?.columnOrder ??
+      (props.enableColumnOrdering || props.enableGrouping)
         ? ([
             showActionColumn && 'mrt-row-actions',
             showExpandColumn && 'mrt-expand',
