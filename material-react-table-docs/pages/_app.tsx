@@ -44,7 +44,7 @@ function App({ Component, pageProps }: AppProps) {
         <title>Material React Table</title>
         <meta
           name="description"
-          content="Material React Table Docs. A fully featured Material UI implementation of react-table, inspired by material-table and the MUI X DataGrid, written from the ground up in TypeScript."
+          content="Material React Table Docs. A fully featured Material UI implementation of TanStack Table v8. Inspired by material-table, written from the ground up in TypeScript."
         />
         <link rel="icon" href="/mrt_logo.png" />
       </Head>

@@ -16,7 +16,7 @@ export const MRT_ToolbarBottom: FC<Props> = ({ tableInstance }) => {
     getState,
     options: {
       enableToolbarInternalActions,
-      idPrefix,
+      tableId,
       enablePagination,
       muiTableToolbarBottomProps,
       positionPagination,
@@ -45,20 +45,20 @@ export const MRT_ToolbarBottom: FC<Props> = ({ tableInstance }) => {
 
   return (
     <Toolbar
-      id={`mrt-${idPrefix}-toolbar-bottom`}
+      id={`mrt-${tableId}-toolbar-bottom`}
       variant="dense"
       {...toolbarProps}
       sx={(theme) =>
         ({
           ...commonToolbarStyles({ theme }),
           bottom: isFullScreen ? '0' : undefined,
-          position: isFullScreen ? 'fixed' : undefined,
           boxShadow: `-3px 0 6px ${alpha(theme.palette.common.black, 0.1)}`,
+          position: isFullScreen ? 'fixed' : 'relative',
           ...toolbarProps?.sx,
         } as any)
       }
     >
-      <MRT_LinearProgressBar tableInstance={tableInstance} />
+      <MRT_LinearProgressBar alignTo='top' tableInstance={tableInstance} />
       {positionToolbarAlertBanner === 'bottom' && (
         <MRT_ToolbarAlertBanner tableInstance={tableInstance} />
       )}

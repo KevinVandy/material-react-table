@@ -52,7 +52,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
         RestartAltIcon,
         VisibilityOffIcon,
       },
-      idPrefix,
+      tableId,
       localization,
     },
     setShowFilters,
@@ -119,7 +119,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           .getElementById(
             // @ts-ignore
             header.muiTableHeadCellFilterTextFieldProps?.id ??
-              `mrt-${idPrefix}-${header.id}-filter-text-field`,
+              `mrt-${tableId}-${header.id}-filter-text-field`,
           )
           ?.focus(),
       200,

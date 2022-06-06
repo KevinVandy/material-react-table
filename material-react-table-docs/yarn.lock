@@ -583,10 +583,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@^18.0.11":
-  version "18.0.11"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.11.tgz#94c9b62020caff17d117374d724de853ec711d21"
-  integrity sha512-JxSwm54IgMW4XTR+zFF5QpNx4JITmFbB4WHR2J0vg9RpjNeyqEMlODXsD2e64br6GX70TL0UYjZJETpyyC1WdA==
+"@types/react@^18.0.12":
+  version "18.0.12"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.12.tgz#cdaa209d0a542b3fcf69cf31a03976ec4cdd8840"
+  integrity sha512-duF1OTASSBQtcigUvhuiTB1Ya3OvSy+xORCiEf20H0P0lzx+/KeVsA99U5UjLXSbyo1DRJDlLKqTeM1ngosqtg==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -1950,10 +1950,10 @@ match-sorter@^6.0.2:
     "@babel/runtime" "^7.12.5"
     remove-accents "0.4.2"
 
-material-react-table@^0.8.15:
-  version "0.8.15"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.8.15.tgz#509ada3c6e02d8c47e64791e14999d6673c9a63d"
-  integrity sha512-wjAxwMl/W25+iX5q6BtrptnTkT6clBwH6111KFZEL27KSlDp7o8zenn+jNvDpr9gWUZ5aKfDjmKQnJdi9sR6rw==
+material-react-table@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.9.0.tgz#9bc09aeadea0d3d8b464a704a1e770a5f9041835"
+  integrity sha512-Y9YYS0/6NS7EjYEdNPgt3b46eBa9gzLkA+qB/APF0NUwxWyZQ59ZaH/wuKMxJbT6dmHFYRM+lS3qo157bWfb5A==
   dependencies:
     "@tanstack/match-sorter-utils" "^8.0.0-alpha.83"
     "@tanstack/react-table" "^8.0.0-beta.4"

@@ -33,7 +33,7 @@ const ToggleFullCodeButton = styled(IconButton)({
 export interface Props {
   Component: FC;
   codeSandboxURL?: string;
-  idPrefix?: string;
+  tableId?: string;
   javaScriptCode: string;
   typeScriptCode: string;
 }
@@ -41,7 +41,7 @@ export interface Props {
 export const SourceCodeSnippet: FC<Props> = ({
   Component,
   codeSandboxURL,
-  idPrefix,
+  tableId,
   javaScriptCode,
   typeScriptCode,
 }) => {
@@ -81,13 +81,13 @@ export const SourceCodeSnippet: FC<Props> = ({
       }}
     >
       <Divider />
-      <LinkHeading idPrefix={idPrefix} variant="h3">
+      <LinkHeading tableId={tableId} variant="h3">
         Demo
       </LinkHeading>
       <Component />
       <div>
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <LinkHeading idPrefix={idPrefix} variant="h4">
+          <LinkHeading tableId={tableId} variant="h4">
             Source Code
           </LinkHeading>
           <ToggleButtonGroup>

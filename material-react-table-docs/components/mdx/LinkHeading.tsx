@@ -12,15 +12,15 @@ import {
 
 interface Props extends TypographyProps {
   children: ReactNode | string;
-  idPrefix?: string;
+  tableId?: string;
 }
 
-export const LinkHeading: FC<Props> = ({ children, idPrefix, ...rest }) => {
+export const LinkHeading: FC<Props> = ({ children, tableId, ...rest }) => {
   const { pathname } = useRouter();
 
   const [isCopied, setIsCopied] = useState(false);
 
-  const id = `${idPrefix ?? ''}${children
+  const id = `${tableId ?? ''}${children
     ?.toString()
     ?.toLowerCase?.()
     ?.replaceAll?.(' ', '-')}`;

@@ -15,7 +15,7 @@ export const MRT_ToggleDensePaddingButton: FC<Props> = ({
     options: {
       icons: { DensityMediumIcon, DensitySmallIcon },
       localization,
-      onToggleDensePadding,
+      onMrtToggleDensePadding,
     },
     setIsDensePadding,
   } = tableInstance;
@@ -23,7 +23,7 @@ export const MRT_ToggleDensePaddingButton: FC<Props> = ({
   const { isDensePadding } = getState();
 
   const handleToggleDensePadding = (event: MouseEvent<HTMLButtonElement>) => {
-    onToggleDensePadding?.({
+    onMrtToggleDensePadding?.({
       event,
       isDensePadding: !isDensePadding,
       tableInstance,

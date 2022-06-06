@@ -21,6 +21,7 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ tableInstance }) => {
       enableFullScreenToggle,
       enableGlobalFilter,
       enableHiding,
+      positionGlobalFilter,
       renderToolbarInternalActions,
     },
   } = tableInstance;
@@ -42,7 +43,7 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ tableInstance }) => {
         tableInstance,
       }) ?? (
         <>
-          {enableGlobalFilter && (
+          {enableGlobalFilter && positionGlobalFilter === 'right' && (
             <MRT_SearchTextField tableInstance={tableInstance} />
           )}
           {enableFilters && enableGlobalFilter && (

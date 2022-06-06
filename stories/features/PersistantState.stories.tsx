@@ -56,7 +56,7 @@ export const PersistentEnabledLocal: Story<MaterialReactTableProps> = () => (
     enablePersistentState
     enablePinning
     enableRowSelection
-    idPrefix="my-table"
+    tableId="my-table"
   />
 );
 
@@ -69,7 +69,7 @@ export const PersistentEnabledSession: Story<MaterialReactTableProps> = () => (
     enablePinning
     enableRowSelection
     enableEditing
-    idPrefix="my-table"
+    tableId="my-table"
     persistentStateMode="sessionStorage"
   />
 );

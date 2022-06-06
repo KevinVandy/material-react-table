@@ -547,10 +547,19 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^18.0.10":
+"@types/react@*":
   version "18.0.10"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.10.tgz#5692944d4a45e204fb7a981eb1388afe919cf4d0"
   integrity sha512-dIugadZuIPrRzvIEevIu7A1smqOAjkSMv8qOfwPt9Ve6i6JT/FQcCHyk2qIAxwsQNKZt5/oGR0T4z9h2dXRAkg==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
+
+"@types/react@^18.0.12":
+  version "18.0.12"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.12.tgz#cdaa209d0a542b3fcf69cf31a03976ec4cdd8840"
+  integrity sha512-duF1OTASSBQtcigUvhuiTB1Ya3OvSy+xORCiEf20H0P0lzx+/KeVsA99U5UjLXSbyo1DRJDlLKqTeM1ngosqtg==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -944,10 +953,10 @@ loose-envify@^1.1.0, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
-material-react-table@0.8.11:
-  version "0.8.11"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.8.11.tgz#5fb37e639f38c880ce4d0572a0ed5fb477590743"
-  integrity sha512-IfaxZZwUYkzdJi1BwdAVL2Sj6DHkbUhHWSSCMvQv47ZIrAxHL0nPqanriDJ6Ck0JTE5Bc8Ng/fukekpQyhgxnA==
+material-react-table@0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.9.0.tgz#9bc09aeadea0d3d8b464a704a1e770a5f9041835"
+  integrity sha512-Y9YYS0/6NS7EjYEdNPgt3b46eBa9gzLkA+qB/APF0NUwxWyZQ59ZaH/wuKMxJbT6dmHFYRM+lS3qo157bWfb5A==
   dependencies:
     "@tanstack/match-sorter-utils" "^8.0.0-alpha.83"
     "@tanstack/react-table" "^8.0.0-beta.4"
@@ -1174,7 +1183,7 @@ to-fast-properties@^2.0.0:
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-2.0.0.tgz#dc5e698cbd079265bc73e0377681a4e4e83f616e"
   integrity sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=
 
-typescript@^4.7.2:
+typescript@^4.7.3:
   version "4.7.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.3.tgz#8364b502d5257b540f9de4c40be84c98e23a129d"
   integrity sha512-WOkT3XYvrpXx4vMMqlD+8R8R37fZkjyLGlxavMc4iB8lrl8L0DeTcHbYgw/v0N/z9wAFsgBhcsF0ruoySS22mA==

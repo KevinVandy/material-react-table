@@ -4,7 +4,7 @@ import {
   Table,
   Updater,
 } from '@tanstack/react-table';
-import { MRT_Column, MRT_ColumnDef, MRT_FilterFn, } from '.';
+import { MRT_Column, MRT_ColumnDef, MRT_FilterFn } from '.';
 import { MRT_FILTER_OPTION } from './enums';
 import { defaultFilterFNs } from './filtersFNs';
 

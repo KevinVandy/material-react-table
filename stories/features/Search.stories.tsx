@@ -44,11 +44,36 @@ export const SearchEnabledDefault: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
-export const ShowSearchBoxByDefault: Story<MaterialReactTableProps> = () => (
+export const ShowSearchRightBoxByDefault: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     initialState={{ showGlobalFilter: true }}
+  />
+);
+
+export const ShowSearchBoxLeftByDefault: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    initialState={{ showGlobalFilter: true }}
+    positionGlobalFilter="left"
+  />
+);
+
+export const ShowSearchBoxLeftByDefaultWithSelection: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowSelection
+    initialState={{ showGlobalFilter: true }}
+    positionGlobalFilter="left"
   />
 );
 

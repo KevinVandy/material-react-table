@@ -13,7 +13,7 @@ export const MRT_EditActionButtons: FC<Props> = ({ row, tableInstance }) => {
     options: {
       icons: { CancelIcon, SaveIcon },
       localization,
-      onEditSubmit,
+      onMrtEditRowSubmit,
     },
     setCurrentEditingRow,
   } = tableInstance;
@@ -26,7 +26,7 @@ export const MRT_EditActionButtons: FC<Props> = ({ row, tableInstance }) => {
   };
 
   const handleSave = () => {
-    onEditSubmit?.({ row: currentEditingRow ?? row, tableInstance });
+    onMrtEditRowSubmit?.({ row: currentEditingRow ?? row, tableInstance });
     setCurrentEditingRow(null);
   };
 

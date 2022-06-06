@@ -109,7 +109,7 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   getState: () => MRT_TableState<D>;
   options: MaterialReactTableProps<D> & {
     icons: MRT_Icons;
-    idPrefix: string;
+    tableId: string;
     localization: MRT_Localization;
   };
   setCurrentEditingCell: Dispatch<SetStateAction<MRT_Cell | null>>;
@@ -144,6 +144,13 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
   ColumnDef<D>,
   'accessorFN' | 'header' | 'footer' | 'columns' | 'filterFn'
 > & {
+  Cell?: ({
+    cell,
+    tableInstance,
+  }: {
+    cell: MRT_Cell<D>;
+    tableInstance: MRT_TableInstance<D>;
+  }) => ReactNode;
   Edit?: ({
     cell,
     tableInstance,
@@ -176,13 +183,6 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
         header: MRT_Header<D>;
         tableInstance: MRT_TableInstance<D>;
       }) => ReactNode);
-  Cell?: ({
-    cell,
-    tableInstance,
-  }: {
-    cell: MRT_Cell<D>;
-    tableInstance: MRT_TableInstance<D>;
-  }) => ReactNode;
   accessorFN?: (row: D) => any;
   columns?: MRT_ColumnDef<D>[];
   enableClickToCopy?: boolean;
@@ -258,7 +258,7 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
         tableInstance: MRT_TableInstance;
         column: MRT_Column<D>;
       }) => TableCellProps);
-  onCellEditBlur?: ({
+  onMrtCellEditBlur?: ({
     cell,
     event,
     tableInstance,
@@ -267,7 +267,7 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
     cell: MRT_Cell<D>;
     tableInstance: MRT_TableInstance<D>;
   }) => void;
-  onCellEditChange?: ({
+  onMrtCellEditChange?: ({
     cell,
     event,
     tableInstance,
@@ -276,7 +276,7 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
     cell: MRT_Cell<D>;
     tableInstance: MRT_TableInstance<D>;
   }) => void;
-  onColumnFilterValueChange?: ({
+  onMrtFilterValueChange?: ({
     column,
     event,
     filterValue,
@@ -362,7 +362,6 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     enabledColumnFilterOptions?: (MRT_FILTER_OPTION | string)[];
     enabledGlobalFilterOptions?: (MRT_FILTER_OPTION | string)[];
     icons?: Partial<MRT_Icons>;
-    idPrefix?: string;
     localization?: Partial<MRT_Localization>;
     muiLinearProgressProps?:
       | LinearProgressProps
@@ -525,13 +524,6 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
           tableInstance: MRT_TableInstance;
           headerGroup: MRT_HeaderGroup<D>;
         }) => TableRowProps);
-    muiTablePaperProps?:
-      | PaperProps
-      | (({
-          tableInstance,
-        }: {
-          tableInstance: MRT_TableInstance;
-        }) => PaperProps);
     muiTablePaginationProps?:
       | Partial<TablePaginationProps>
       | (({
@@ -539,6 +531,13 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
         }: {
           tableInstance: MRT_TableInstance;
         }) => Partial<TablePaginationProps>);
+    muiTablePaperProps?:
+      | PaperProps
+      | (({
+          tableInstance,
+        }: {
+          tableInstance: MRT_TableInstance;
+        }) => PaperProps);
     muiTableProps?:
       | TableProps
       | (({
@@ -567,7 +566,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
         }: {
           tableInstance: MRT_TableInstance;
         }) => ToolbarProps);
-    onCellClick?: ({
+    onMrtCellClick?: ({
       cell,
       event,
       tableInstance,
@@ -576,7 +575,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       tableInstance: MRT_TableInstance<D>;
       event: MouseEvent<HTMLTableCellElement>;
     }) => void;
-    onCellEditBlur?: ({
+    onMrtCellEditBlur?: ({
       cell,
       event,
       tableInstance,
@@ -585,7 +584,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       cell: MRT_Cell<D>;
       tableInstance: MRT_TableInstance<D>;
     }) => void;
-    onCellEditChange?: ({
+    onMrtCellEditChange?: ({
       cell,
       event,
       tableInstance,
@@ -594,16 +593,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       cell: MRT_Cell<D>;
       tableInstance: MRT_TableInstance<D>;
     }) => void;
-    onColumnFilterValueChange?: ({
-      column,
-      event,
-      filterValue,
-    }: {
-      column: MRT_Column<D>;
-      event: ChangeEvent<HTMLInputElement>;
-      filterValue: any;
-    }) => void;
-    onDetailPanelClick?: ({
+    onMrtDetailPanelClick?: ({
       event,
       row,
       tableInstance,
@@ -612,14 +602,30 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       row: MRT_Row<D>;
       tableInstance: MRT_TableInstance<D>;
     }) => void;
-    onGlobalSearchFilterChange?: ({
+    onMrtEditRowSubmit?: ({
+      row,
+      tableInstance,
+    }: {
+      row: MRT_Row<D>;
+      tableInstance: MRT_TableInstance<D>;
+    }) => Promise<void> | void;
+    onMrtFilterValueChange?: ({
+      column,
+      event,
+      filterValue,
+    }: {
+      column: MRT_Column<D>;
+      event: ChangeEvent<HTMLInputElement>;
+      filterValue: any;
+    }) => void;
+    onMrtGlobalFilterValueChange?: ({
       event,
       tableInstance,
     }: {
       event: ChangeEvent<HTMLInputElement>;
       tableInstance: MRT_TableInstance<D>;
     }) => void;
-    onRowClick?: ({
+    onMrtRowClick?: ({
       event,
       row,
       tableInstance,
@@ -628,14 +634,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       row: MRT_Row<D>;
       tableInstance: MRT_TableInstance<D>;
     }) => void;
-    onEditSubmit?: ({
-      row,
-      tableInstance,
-    }: {
-      row: MRT_Row<D>;
-      tableInstance: MRT_TableInstance<D>;
-    }) => Promise<void> | void;
-    onRowExpandChange?: ({
+    onMrtRowExpandChange?: ({
       event,
       row,
     }: {
@@ -643,7 +642,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       row: MRT_Row<D>;
       tableInstance: MRT_TableInstance<D>;
     }) => void;
-    onSelectAllChange?: ({
+    onMrtSelectAllChange?: ({
       event,
       selectedRows,
       tableInstance,
@@ -652,7 +651,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       selectedRows: MRT_Row<D>[];
       tableInstance: MRT_TableInstance<D>;
     }) => void;
-    onSelectChange?: ({
+    onMrtSelectRowChange?: ({
       event,
       row,
       selectedRows,
@@ -663,7 +662,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       selectedRows: MRT_Row<D>[];
       tableInstance: MRT_TableInstance<D>;
     }) => void;
-    onToggleColumnVisibility?: ({
+    onMrtToggleColumnVisibility?: ({
       column,
       columnVisibility,
       tableInstance,
@@ -672,7 +671,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       columnVisibility: VisibilityState;
       tableInstance: MRT_TableInstance<D>;
     }) => void;
-    onToggleDensePadding?: ({
+    onMrtToggleDensePadding?: ({
       event,
       isDensePadding,
       tableInstance,
@@ -681,7 +680,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       isDensePadding: boolean;
       tableInstance: MRT_TableInstance<D>;
     }) => void;
-    onToggleFullScreen?: ({
+    onMrtToggleFullScreen?: ({
       event,
       isFullScreen,
       tableInstance,
@@ -690,7 +689,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       isFullScreen: boolean;
       tableInstance: MRT_TableInstance<D>;
     }) => void;
-    onToggleShowFilters?: ({
+    onMrtToggleShowFilters?: ({
       event,
       showFilters,
       tableInstance,
@@ -699,7 +698,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       showFilters: boolean;
       tableInstance: MRT_TableInstance<D>;
     }) => void;
-    onToggleShowGlobalFilter?: ({
+    onMrtToggleShowGlobalFilter?: ({
       event,
       showGlobalFilter,
       tableInstance,
@@ -711,6 +710,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     persistentStateMode?: 'localStorage' | 'sessionStorage';
     positionActionsColumn?: 'first' | 'last';
     positionPagination?: 'bottom' | 'top' | 'both';
+    positionGlobalFilter?: 'left' | 'right';
     positionToolbarActions?: 'bottom' | 'top';
     positionToolbarAlertBanner?: 'bottom' | 'top';
     renderDetailPanel?: ({
@@ -767,6 +767,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       >;
     }) => ReactNode;
     selectAllMode?: 'all' | 'page';
+    tableId?: string;
   };
 
 export default <D extends Record<string, any> = {}>({
@@ -801,6 +802,7 @@ export default <D extends Record<string, any> = {}>({
   persistentStateMode = 'sessionStorage',
   positionActionsColumn = 'first',
   positionPagination = 'bottom',
+  positionGlobalFilter = 'right',
   positionToolbarActions = 'top',
   positionToolbarAlertBanner = 'top',
   selectAllMode = 'all',
@@ -837,6 +839,7 @@ export default <D extends Record<string, any> = {}>({
     localization={{ ...MRT_DefaultLocalization_EN, ...localization }}
     persistentStateMode={persistentStateMode}
     positionActionsColumn={positionActionsColumn}
+    positionGlobalFilter={positionGlobalFilter}
     positionPagination={positionPagination}
     positionToolbarActions={positionToolbarActions}
     positionToolbarAlertBanner={positionToolbarAlertBanner}

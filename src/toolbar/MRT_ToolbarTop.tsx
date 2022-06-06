@@ -5,6 +5,7 @@ import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
 import { MRT_TableInstance } from '..';
+import { MRT_SearchTextField } from '../inputs/MRT_SearchTextField';
 
 export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
   backgroundColor: lighten(theme.palette.background.default, 0.04),
@@ -26,18 +27,20 @@ export const MRT_ToolbarTop: FC<Props> = ({ tableInstance }) => {
   const {
     getState,
     options: {
+      enableGlobalFilter,
       enablePagination,
       enableToolbarInternalActions,
-      idPrefix,
+      tableId,
       muiTableToolbarTopProps,
       positionPagination,
+      positionGlobalFilter,
       positionToolbarActions,
       positionToolbarAlertBanner,
       renderToolbarCustomActions,
     },
   } = tableInstance;
 
-  const { isFullScreen } = getState();
+  const { isFullScreen, showGlobalFilter } = getState();
 
   const isMobile = useMediaQuery('(max-width:720px)');
 
@@ -48,11 +51,12 @@ export const MRT_ToolbarTop: FC<Props> = ({ tableInstance }) => {
 
   const stackAlertBanner =
     isMobile ||
-    (positionToolbarAlertBanner === 'top' && !!renderToolbarCustomActions);
+    (positionToolbarAlertBanner === 'top' &&
+      (!!renderToolbarCustomActions || showGlobalFilter));
 
   return (
     <Toolbar
-      id={`mrt-${idPrefix}-toolbar-top`}
+      id={`mrt-${tableId}-toolbar-top`}
       variant="dense"
       {...toolbarProps}
       sx={(theme) =>
@@ -78,9 +82,12 @@ export const MRT_ToolbarTop: FC<Props> = ({ tableInstance }) => {
           position: stackAlertBanner ? 'relative' : 'absolute',
           right: 0,
           top: 0,
-          width: 'calc(100% - 1rem)',
+          width: renderToolbarCustomActions ? '100%' : undefined,
         }}
       >
+        {enableGlobalFilter && positionGlobalFilter === 'left' && (
+          <MRT_SearchTextField tableInstance={tableInstance} />
+        )}
         {renderToolbarCustomActions?.({ tableInstance }) ?? <span />}
         {enableToolbarInternalActions && positionToolbarActions === 'top' && (
           <MRT_ToolbarInternalButtons tableInstance={tableInstance} />
@@ -92,7 +99,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ tableInstance }) => {
             <MRT_TablePagination tableInstance={tableInstance} />
           )}
       </div>
-      <MRT_LinearProgressBar tableInstance={tableInstance} />
+      <MRT_LinearProgressBar alignTo="bottom" tableInstance={tableInstance} />
     </Toolbar>
   );
 };

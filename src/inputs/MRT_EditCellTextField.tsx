@@ -17,11 +17,11 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, tableInstance }) => {
   const {
     getState,
     options: {
-      idPrefix,
+      tableId,
       enableEditing,
       muiTableBodyCellEditTextFieldProps,
-      onCellEditBlur,
-      onCellEditChange,
+      onMrtCellEditBlur,
+      onMrtCellEditChange,
     },
     setCurrentEditingCell,
     setCurrentEditingRow,
@@ -35,8 +35,8 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, tableInstance }) => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
-    columnDef.onCellEditChange?.({ event, cell, tableInstance });
-    onCellEditChange?.({ event, cell, tableInstance });
+    columnDef.onMrtCellEditChange?.({ event, cell, tableInstance });
+    onMrtCellEditChange?.({ event, cell, tableInstance });
   };
 
   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
@@ -46,8 +46,8 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, tableInstance }) => {
       setCurrentEditingRow({ ...getState().currentEditingRow } as MRT_Row);
     }
     setCurrentEditingCell(null);
-    columnDef.onCellEditBlur?.({ event, cell, tableInstance });
-    onCellEditBlur?.({ event, cell, tableInstance });
+    columnDef.onMrtCellEditBlur?.({ event, cell, tableInstance });
+    onMrtCellEditBlur?.({ event, cell, tableInstance });
   };
 
   const mTableBodyCellEditTextFieldProps =
@@ -74,7 +74,7 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, tableInstance }) => {
 
   return (
     <TextField
-      id={`mrt-${idPrefix}-edit-cell-text-field-${cell.id}`}
+      id={`mrt-${tableId}-edit-cell-text-field-${cell.id}`}
       margin="dense"
       onBlur={handleBlur}
       onChange={handleChange}

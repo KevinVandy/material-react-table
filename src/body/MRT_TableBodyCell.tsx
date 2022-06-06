@@ -24,10 +24,10 @@ export const MRT_TableBodyCell: FC<Props> = ({
       enableClickToCopy,
       enableColumnOrdering,
       enableEditing,
-      idPrefix,
+      tableId,
       muiTableBodyCellProps,
       muiTableBodyCellSkeletonProps,
-      onCellClick,
+      onMrtCellClick,
     },
     setColumnOrder,
     setCurrentEditingCell,
@@ -95,7 +95,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
       setCurrentEditingCell(cell);
       setTimeout(() => {
         const textField = document.getElementById(
-          `mrt-${idPrefix}-edit-cell-text-field-${cell.id}`,
+          `mrt-${tableId}-edit-cell-text-field-${cell.id}`,
         ) as HTMLInputElement;
         if (textField) {
           textField.focus();
@@ -128,7 +128,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
   return (
     <TableCell
       onClick={(event: MouseEvent<HTMLTableCellElement>) =>
-        onCellClick?.({ event, cell, tableInstance })
+        onMrtCellClick?.({ event, cell, tableInstance })
       }
       onDoubleClick={handleDoubleClick}
       {...tableCellProps}

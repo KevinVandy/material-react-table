@@ -11,7 +11,7 @@ interface Props {
 
 export const MRT_TableBodyRow: FC<Props> = ({ row, tableInstance }) => {
   const {
-    options: { muiTableBodyRowProps, onRowClick, renderDetailPanel },
+    options: { muiTableBodyRowProps, onMrtRowClick, renderDetailPanel },
   } = tableInstance;
 
   const tableRowProps =
@@ -24,7 +24,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, tableInstance }) => {
       <TableRow
         hover
         onClick={(event: MouseEvent<HTMLTableRowElement>) =>
-          onRowClick?.({ event, row, tableInstance })
+          onMrtRowClick?.({ event, row, tableInstance })
         }
         selected={row.getIsSelected()}
         {...tableRowProps}

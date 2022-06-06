@@ -13,7 +13,7 @@ export const MRT_ExpandButton: FC<Props> = ({ row, tableInstance }) => {
     options: {
       icons: { ExpandMoreIcon },
       localization,
-      onRowExpandChange,
+      onMrtRowExpandChange,
       renderDetailPanel,
     },
   } = tableInstance;
@@ -22,7 +22,7 @@ export const MRT_ExpandButton: FC<Props> = ({ row, tableInstance }) => {
 
   const handleToggleExpand = (event: MouseEvent<HTMLButtonElement>) => {
     row.toggleExpanded();
-    onRowExpandChange?.({ event, row, tableInstance });
+    onMrtRowExpandChange?.({ event, row, tableInstance });
   };
 
   return (

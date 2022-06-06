@@ -92,7 +92,7 @@ const Example: FC = () => {
         color: 'secondary',
         disabled: !isSelectAll && row?.getValue('age') < 21,
       })}
-      onSelectChange={({ event, row, selectedRows }) => {
+      onMrtSelectRowChange={({ event, row, selectedRows }) => {
         console.log({ event, row, selectedRows });
       }}
     />

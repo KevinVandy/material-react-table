@@ -41,11 +41,11 @@ import { Box, Dialog, Grow } from '@mui/material';
 export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   props: MaterialReactTableProps<D>,
 ) => {
-  const [idPrefix, setIdPrefix] = useState(props.idPrefix);
+  const [tableId, setIdPrefix] = useState(props.tableId);
   useEffect(
     () =>
-      setIdPrefix(props.idPrefix ?? Math.random().toString(36).substring(2, 9)),
-    [props.idPrefix],
+      setIdPrefix(props.tableId ?? Math.random().toString(36).substring(2, 9)),
+    [props.tableId],
   );
 
   const showActionColumn =
@@ -71,7 +71,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
           ].filter(Boolean) as string[])
         : [];
 
-    if (!props.enablePersistentState || !props.idPrefix) {
+    if (!props.enablePersistentState || !props.tableId) {
       return initState;
     }
     if (typeof window === 'undefined') {
@@ -84,9 +84,9 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     }
     const storedState =
       props.persistentStateMode === 'localStorage'
-        ? localStorage.getItem(`mrt-${idPrefix}-table-state`)
+        ? localStorage.getItem(`mrt-${tableId}-table-state`)
         : props.persistentStateMode === 'sessionStorage'
-        ? sessionStorage.getItem(`mrt-${idPrefix}-table-state`)
+        ? sessionStorage.getItem(`mrt-${tableId}-table-state`)
         : '{}';
     if (storedState) {
       const parsedState = JSON.parse(storedState);
@@ -149,7 +149,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         getPaginationRowModel: getPaginationRowModel(),
         getSortedRowModel: getSortedRowModel(),
         getSubRows: (row) => (row as MRT_Row)?.subRows,
-        idPrefix,
+        tableId,
         initialState,
       }) as Table<D>,
     [],
@@ -300,14 +300,14 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     if (typeof window === 'undefined' || !props.enablePersistentState) {
       return;
     }
-    if (!props.idPrefix && process.env.NODE_ENV !== 'production') {
+    if (!props.tableId && process.env.NODE_ENV !== 'production') {
       console.warn(
-        'a unique idPrefix prop is required for persistent table state to work',
+        'a unique tableId prop is required for persistent table state to work',
       );
       return;
     }
     const itemArgs: [string, string] = [
-      `mrt-${idPrefix}-table-state`,
+      `mrt-${tableId}-table-state`,
       JSON.stringify(tableInstance.getState()),
     ];
     if (props.persistentStateMode === 'localStorage') {
@@ -317,7 +317,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     }
   }, [
     props.enablePersistentState,
-    props.idPrefix,
+    props.tableId,
     props.persistentStateMode,
     tableInstance,
   ]);

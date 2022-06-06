@@ -19,7 +19,7 @@
 
 View the [docs (alpha) site](https://www.material-react-table.com/)
 
-View a basic [example](https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples/basic/sandbox)
+View a basic [example](https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples/basic/sandbox?file=/src/TS.tsx)
 
 View additional [storybook examples](https://www.material-react-table.dev/)
 

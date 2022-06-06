@@ -46,7 +46,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
     ) {
       return [
         ...getLeftLeafColumns(),
-        ...[...new Set(columnOrder)].map((colId) =>
+        ...Array.from(new Set(columnOrder)).map((colId) =>
           getCenterLeafColumns().find((col) => col?.id === colId),
         ),
         ...getRightLeafColumns(),

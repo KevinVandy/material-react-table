@@ -14,10 +14,10 @@ export const MRT_ToggleGlobalFilterButton: FC<Props> = ({
     getState,
     options: {
       icons: { SearchIcon, SearchOffIcon },
-      idPrefix,
+      tableId,
       localization,
       muiSearchTextFieldProps,
-      onToggleShowGlobalFilter,
+      onMrtToggleShowGlobalFilter,
     },
     setShowGlobalFilter,
   } = tableInstance;
@@ -30,7 +30,7 @@ export const MRT_ToggleGlobalFilterButton: FC<Props> = ({
       : muiSearchTextFieldProps;
 
   const handleToggleSearch = (event: MouseEvent<HTMLButtonElement>) => {
-    onToggleShowGlobalFilter?.({
+    onMrtToggleShowGlobalFilter?.({
       event,
       showGlobalFilter: !showGlobalFilter,
       tableInstance,
@@ -40,7 +40,7 @@ export const MRT_ToggleGlobalFilterButton: FC<Props> = ({
       () =>
         document
           .getElementById(
-            textFieldProps?.id ?? `mrt-${idPrefix}-search-text-field`,
+            textFieldProps?.id ?? `mrt-${tableId}-search-text-field`,
           )
           ?.focus(),
       200,

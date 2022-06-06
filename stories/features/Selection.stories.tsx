@@ -47,15 +47,15 @@ export const SelectAllDisabled: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const onSelectChange: Story<MaterialReactTableProps> = () => (
+export const onMrtSelectRowChange: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     enableRowSelection
-    onSelectChange={({ event, row, selectedRows }) => {
+    onMrtSelectRowChange={({ event, row, selectedRows }) => {
       console.log({ event, row, selectedRows });
     }}
-    onSelectAllChange={({ event, selectedRows }) => {
+    onMrtSelectAllChange={({ event, selectedRows }) => {
       console.log({ event, selectedRows });
     }}
   />

@@ -13,7 +13,7 @@ interface Props {
 export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
   const {
     getState,
-    options: { enableStickyHeader, idPrefix, muiTableContainerProps },
+    options: { enableStickyHeader, tableId, muiTableContainerProps },
   } = tableInstance;
 
   const { isFullScreen } = getState();
@@ -28,13 +28,13 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
   useIsomorphicLayoutEffect(() => {
     const topToolbarHeight =
       typeof document !== 'undefined'
-        ? document?.getElementById(`mrt-${idPrefix}-toolbar-top`)
+        ? document?.getElementById(`mrt-${tableId}-toolbar-top`)
             ?.offsetHeight ?? 0
         : 0;
 
     const bottomToolbarHeight =
       typeof document !== 'undefined'
-        ? document?.getElementById(`mrt-${idPrefix}-toolbar-bottom`)
+        ? document?.getElementById(`mrt-${tableId}-toolbar-bottom`)
             ?.offsetHeight ?? 0
         : 0;
 

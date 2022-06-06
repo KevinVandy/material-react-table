@@ -67,6 +67,7 @@ export const MRT_TableHeadCellFilterLabel: FC<Props> = ({
           opacity: !!column.getFilterValue() || showFilters ? 0.8 : 0,
           p: '2px',
           transition: 'all 0.2s ease-in-out',
+          transform: 'scale(0.66)',
           '&:hover': {
             backgroundColor: 'transparent',
             opacity: 0.8,

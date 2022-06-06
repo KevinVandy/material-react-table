@@ -34,7 +34,7 @@ export const MRT_FilterTextField: FC<Props> = ({
     getState,
     options: {
       icons: { FilterListIcon, CloseIcon },
-      idPrefix,
+      tableId,
       localization,
       muiTableHeadCellFilterTextFieldProps,
     },
@@ -118,7 +118,7 @@ export const MRT_FilterTextField: FC<Props> = ({
     return <>{columnDef.Filter?.({ header, tableInstance })}</>;
   }
 
-  const filterId = `mrt-${idPrefix}-${header.id}-filter-text-field${
+  const filterId = `mrt-${tableId}-${header.id}-filter-text-field${
     inputIndex ?? ''
   }`;
   const filterFn = currentFilterFns?.[header.id];

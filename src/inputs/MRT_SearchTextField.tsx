@@ -26,10 +26,10 @@ export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
     setGlobalFilter,
     options: {
       icons: { SearchIcon, CloseIcon },
-      idPrefix,
+      tableId,
       localization,
       muiSearchTextFieldProps,
-      onGlobalSearchFilterChange,
+      onMrtGlobalFilterValueChange,
     },
   } = tableInstance;
 
@@ -41,7 +41,7 @@ export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
   const handleChange = useCallback(
     debounce((event: ChangeEvent<HTMLInputElement>) => {
       setGlobalFilter(event.target.value ?? undefined);
-      onGlobalSearchFilterChange?.({ event, tableInstance });
+      onMrtGlobalFilterValueChange?.({ event, tableInstance });
     }, 200),
     [],
   );
@@ -63,7 +63,7 @@ export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
   return (
     <Collapse in={showGlobalFilter} orientation="horizontal">
       <TextField
-        id={`mrt-${idPrefix}-search-text-field`}
+        id={`mrt-${tableId}-search-text-field`}
         placeholder={localization.search}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setSearchValue(event.target.value);

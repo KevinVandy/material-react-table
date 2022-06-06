@@ -10,7 +10,7 @@ const ExampleTable = () => {
       Component={Example}
       javaScriptCode={JS}
       typeScriptCode={TS}
-      idPrefix="enable-selection-"
+      tableId="enable-selection-"
     />
   );
 };

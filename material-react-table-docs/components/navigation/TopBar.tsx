@@ -17,7 +17,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import Image from 'next/image';
 
 const AppBar = styled(MuiAppBar)({
-  zIndex: 2,
+  zIndex: 4,
 });
 
 const Toolbar = styled(MuiToolbar)({

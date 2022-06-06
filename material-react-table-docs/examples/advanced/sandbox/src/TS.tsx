@@ -1530,7 +1530,7 @@ const Example: FC = () => {
       enablePinning
       enableRowActions
       enableRowSelection
-      onEditSubmit={handleSaveRow}
+      onMrtEditRowSubmit={handleSaveRow}
       renderDetailPanel={({ row }) => (
         <div
           style={{
