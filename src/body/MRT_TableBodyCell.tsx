@@ -167,11 +167,15 @@ export const MRT_TableBodyCell: FC<Props> = ({
         whiteSpace: isDensePadding ? 'nowrap' : 'normal',
         zIndex: column.getIsPinned() ? 1 : undefined,
         '&:hover': {
-          backgroundColor: enableHover
-            ? theme.palette.mode === 'dark'
-              ? `${lighten(theme.palette.background.default, 0.13)} !important`
-              : `${darken(theme.palette.background.default, 0.07)} !important`
-            : undefined,
+          backgroundColor:
+            enableHover && enableEditing && editingMode !== 'row'
+              ? theme.palette.mode === 'dark'
+                ? `${lighten(
+                    theme.palette.background.default,
+                    0.13,
+                  )} !important`
+                : `${darken(theme.palette.background.default, 0.07)} !important`
+              : undefined,
         },
         ...(tableCellProps?.sx as any),
       })}

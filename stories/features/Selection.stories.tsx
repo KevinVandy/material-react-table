@@ -38,6 +38,10 @@ export const SelectionEnabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableRowSelection />
 );
 
+export const SelectAllModeAll: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} enableRowSelection selectAllMode='all' />
+);
+
 export const SelectAllDisabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}

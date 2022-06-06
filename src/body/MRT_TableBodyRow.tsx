@@ -11,6 +11,7 @@ interface Props {
 
 export const MRT_TableBodyRow: FC<Props> = ({ row, tableInstance }) => {
   const {
+    getIsSomeColumnsPinned,
     options: { muiTableBodyRowProps, onMrtRowClick, renderDetailPanel },
   } = tableInstance;
 
@@ -33,7 +34,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, tableInstance }) => {
           transition: 'all 0.2s ease-in-out',
           '&:hover td': {
             backgroundColor:
-              tableRowProps?.hover !== false
+              tableRowProps?.hover !== false && getIsSomeColumnsPinned()
                 ? theme.palette.mode === 'dark'
                   ? `${lighten(theme.palette.background.default, 0.12)}`
                   : `${darken(theme.palette.background.default, 0.05)}`
