@@ -13,7 +13,7 @@ interface Props {
 export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
   const {
     getState,
-    options: { enableStickyHeader, tableId, muiTableContainerProps },
+    options: { enableStickyHeader, muiTableContainerProps, tableId },
   } = tableInstance;
 
   const { isFullScreen } = getState();
@@ -41,9 +41,12 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
     setTotalToolbarHeight(topToolbarHeight + bottomToolbarHeight);
   });
 
+  const tableContainerRef = React.useRef<HTMLDivElement>(null);
+
   return (
     <TableContainer
       {...tableContainerProps}
+      ref={tableContainerRef}
       sx={{
         maxWidth: '100%',
         maxHeight: enableStickyHeader
@@ -58,7 +61,10 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
           : undefined,
       }}
     >
-      <MRT_Table tableInstance={tableInstance} />
+      <MRT_Table
+        tableContainerRef={tableContainerRef}
+        tableInstance={tableInstance}
+      />
     </TableContainer>
   );
 };

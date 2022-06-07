@@ -352,6 +352,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     enablePersistentState?: boolean;
     enableRowActions?: boolean;
     enableRowNumbers?: boolean;
+    enableRowVirtualization?: boolean;
     enableSelectAll?: boolean;
     enableStickyHeader?: boolean;
     enableTableFooter?: boolean;
