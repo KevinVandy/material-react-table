@@ -10,12 +10,10 @@ interface Props {
   tableInstance: MRT_TableInstance;
 }
 
-export const MRT_Table: FC<Props> = ({
-  tableContainerRef,
-  tableInstance
-}) => {
+export const MRT_Table: FC<Props> = ({ tableContainerRef, tableInstance }) => {
   const {
     options: {
+      enableColumnResizing,
       enableStickyHeader,
       enableTableFooter,
       enableTableHead,
@@ -29,7 +27,14 @@ export const MRT_Table: FC<Props> = ({
       : muiTableProps;
 
   return (
-    <Table stickyHeader={enableStickyHeader} {...tableProps}>
+    <Table
+      stickyHeader={enableStickyHeader}
+      {...tableProps}
+      sx={{
+        tableLayout: enableColumnResizing ? 'fixed' : undefined,
+        ...tableProps?.sx,
+      }}
+    >
       {enableTableHead && <MRT_TableHead tableInstance={tableInstance} />}
       <MRT_TableBody
         tableContainerRef={tableContainerRef}

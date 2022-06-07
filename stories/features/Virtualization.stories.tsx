@@ -13,7 +13,7 @@ const meta: Meta = {
 
 export default meta;
 
-const columns: MRT_ColumnDef[] = [
+const shortColumns: MRT_ColumnDef[] = [
   {
     header: 'First Name',
     id: 'firstName',
@@ -40,7 +40,62 @@ const columns: MRT_ColumnDef[] = [
   },
 ];
 
-const data = [...Array(500)].map((_) => ({
+const longColumns: MRT_ColumnDef[] = [
+  {
+    header: 'First Name',
+    id: 'firstName',
+  },
+  {
+    header: 'Middle Name',
+    id: 'middleName',
+  },
+  {
+    header: 'Last Name',
+    id: 'lastName',
+  },
+  {
+    header: 'Email Address',
+    id: 'email',
+  },
+  {
+    header: 'Phone Number',
+    id: 'phoneNumber',
+  },
+  {
+    header: 'Address',
+    id: 'address',
+  },
+  {
+    header: 'Zip Code',
+    id: 'zipCode',
+  },
+  {
+    header: 'City',
+    id: 'city',
+  },
+  {
+    header: 'State',
+    id: 'state',
+  },
+  {
+    header: 'Country',
+    id: 'country',
+  },
+  {
+    header: 'Favorite Quote',
+    id: 'favoriteQuote',
+  },
+  {
+    header: 'Favorite Color',
+    id: 'favoriteColor',
+  },
+  {
+    header: 'Pet Name',
+    id: 'petName',
+  },
+];
+
+const shortData = [...Array(500)].map((_) => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   email: faker.internet.email(),
@@ -49,31 +104,39 @@ const data = [...Array(500)].map((_) => ({
   state: faker.address.state(),
 }));
 
+const longData = [...Array(500)].map((_) => ({
+  firstName: faker.name.firstName(),
+  middleName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
+  email: faker.internet.email(),
+  phoneNumber: faker.phone.phoneNumber(),
+  address: faker.address.streetAddress(),
+  zipCode: faker.address.zipCode(),
+  city: faker.address.city(),
+  state: faker.address.state(),
+  country: faker.address.country(),
+  favoriteQuote: faker.lorem.sentence(),
+  favoriteColor: faker.internet.color(),
+  petName: faker.animal.cat(),
+}));
+
 export const VirtualizationDisabledDefault: Story<
   MaterialReactTableProps
 > = () => (
   <MaterialReactTable
-    columns={columns}
-    data={data}
+    columns={shortColumns}
+    data={shortData}
     enablePagination={false}
     enableTableFooter={false}
-    renderToolbarCustomActions={() => (
-      <Typography>No Row Virtualization, Poor Scroll Performance</Typography>
-    )}
   />
 );
 
 export const EnableRowVirtualization: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
-    columns={columns}
-    data={data}
+    columns={longColumns}
+    data={longData}
     enablePagination={false}
     enableRowVirtualization
     enableTableFooter={false}
-    renderToolbarCustomActions={() => (
-      <Typography>
-        Row Virtualization Enabled, Better Scroll Performance
-      </Typography>
-    )}
   />
 );

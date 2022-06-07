@@ -27,7 +27,7 @@ View the [github source code](https://github.com/KevinVandy/material-react-table
 
 Join the [discord](https://discord.gg/5wqyRx6fnm) server to join in on the development discussion or ask questions
 
-### Features (Some still being polished, but all are functional!)
+### Features (All Features work and are MVP, but are still being polished)
 
 - [x] Click To Copy Cell Values
 - [x] Column Actions
@@ -56,7 +56,7 @@ Join the [discord](https://discord.gg/5wqyRx6fnm) server to join in on the devel
 - [x] Theming (Respects your Material UI Theme)
 - [x] Toolbars (Add your own action buttons)
 - [x] Tree Data / Expanding Subrows
-- [ ] Virtualization (planned)
+- [x] Virtualization (react-virtual)
 
 ### Installation
 
@@ -72,4 +72,4 @@ npm install @mui/material @mui/icons-material @emotion/react @emotion/styled
 npm install material-react-table
 ```
 
-_`@tanstack/react-table` and `react-dnd`_ are internal dependencies, so you don't need to install them.
+_`@tanstack/react-table`, `react-virtual` and `react-dnd`_ are internal dependencies, so you don't need to install them yourself.

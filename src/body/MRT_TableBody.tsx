@@ -1,8 +1,8 @@
 import React, { FC, RefObject } from 'react';
+import { useVirtual } from 'react-virtual';
 import { TableBody } from '@mui/material';
 import { MRT_TableBodyRow } from './MRT_TableBodyRow';
-import { MRT_Row, MRT_TableInstance } from '..';
-import { useVirtual } from 'react-virtual';
+import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
   tableInstance: MRT_TableInstance;
@@ -31,16 +31,18 @@ export const MRT_TableBody: FC<Props> = ({
     ? getPaginationRowModel().rows
     : getPrePaginationRowModel().rows;
 
-  const rowVirtualizer = useVirtual({
-    overscan: isDensePadding ? 15 : 5,
-    size: rows.length,
-    parentRef: tableContainerRef,
-  });
+  const rowVirtualizer = enableRowVirtualization
+    ? useVirtual({
+        overscan: isDensePadding ? 15 : 5,
+        size: rows.length,
+        parentRef: tableContainerRef,
+      })
+    : ({} as any);
 
   const { virtualItems: virtualRows } = rowVirtualizer;
-  const paddingTop = virtualRows.length > 0 ? virtualRows[0].start : 0;
+  const paddingTop = virtualRows?.length > 0 ? virtualRows[0].start : 0;
   const paddingBottom =
-    virtualRows.length > 0
+    virtualRows?.length > 0
       ? rowVirtualizer.totalSize - virtualRows[virtualRows.length - 1].end
       : 0;
 
