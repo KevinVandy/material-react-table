@@ -97,13 +97,11 @@ const Example = () => {
       data={employeeData}
       enableClickToCopy
       enableColumnOrdering
-      enableColumnResizing
       enableEditing
       enableGrouping
       enablePinning
       enableRowActions
       enableRowSelection
-      enableRowVirtualization
       onMrtEditRowSubmit={handleSaveRow}
       renderDetailPanel={({ row }) => (
         <div
