@@ -55,7 +55,7 @@ export const MRT_TableBody: FC<Props> = ({
       )}
       {/* @ts-ignore */}
       {(enableRowVirtualization ? virtualRows : rows).map(
-        (rowOrVirtualRow: any) => {
+        (rowOrVirtualRow: any, rowIndex: number) => {
           const row = enableRowVirtualization
             ? (rows[rowOrVirtualRow.index] as MRT_Row)
             : (rowOrVirtualRow as MRT_Row);
@@ -63,6 +63,9 @@ export const MRT_TableBody: FC<Props> = ({
             <MRT_TableBodyRow
               key={row.id}
               row={row}
+              rowIndex={
+                enableRowVirtualization ? rowOrVirtualRow.index : rowIndex
+              }
               tableInstance={tableInstance}
             />
           );

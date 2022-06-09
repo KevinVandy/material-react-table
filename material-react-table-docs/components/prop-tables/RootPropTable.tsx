@@ -1478,6 +1478,16 @@ const data = [
     type: '',
   },
   {
+    prop: 'rowNumberMode',
+    defaultValue: 'original',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: "'original' | 'static'",
+  },
+  {
     prop: 'selectAllMode',
     defaultValue: '',
     description: '',
@@ -1592,6 +1602,7 @@ const RootPropTable = () => {
         columnPinning: { left: ['mrt-row-numbers', 'prop'], right: [] },
       }}
       positionGlobalFilter="left"
+      rowNumberMode="static"
       tableId="root"
     />
   );

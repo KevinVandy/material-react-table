@@ -40,6 +40,48 @@ const data = [...Array(100)].map((_) => ({
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const enableRowNumbers: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} enableRowNumbers />
+export const enableRowNumbersOriginal: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowNumbers
+    rowNumberMode="original"
+  />
+);
+
+export const enableRowNumbersStatic: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowNumbers
+    enableRowVirtualization
+    rowNumberMode="static"
+  />
+);
+
+export const enableRowNumbersOriginalVirtual: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enablePagination={false}
+    enableRowNumbers
+    enableToolbarBottom={false}
+    rowNumberMode="original"
+  />
+);
+
+export const enableRowNumbersStaticVirtual: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enablePagination={false}
+    enableRowNumbers
+    enableRowVirtualization
+    enableToolbarBottom={false}
+    rowNumberMode="static"
+  />
 );

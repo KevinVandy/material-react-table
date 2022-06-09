@@ -6,10 +6,11 @@ import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
   row: MRT_Row;
+  rowIndex: number;
   tableInstance: MRT_TableInstance;
 }
 
-export const MRT_TableBodyRow: FC<Props> = ({ row, tableInstance }) => {
+export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, tableInstance }) => {
   const {
     getIsSomeColumnsPinned,
     options: { muiTableBodyRowProps, onMrtRowClick, renderDetailPanel },
@@ -48,6 +49,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, tableInstance }) => {
             cell={cell}
             key={cell.id}
             enableHover={tableRowProps?.hover !== false}
+            rowIndex={rowIndex}
             tableInstance={tableInstance}
           />
         ))}

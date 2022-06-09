@@ -9,12 +9,14 @@ import type { MRT_Cell, MRT_Column, MRT_TableInstance } from '..';
 interface Props {
   cell: MRT_Cell;
   enableHover?: boolean;
+  rowIndex: number;
   tableInstance: MRT_TableInstance;
 }
 
 export const MRT_TableBodyCell: FC<Props> = ({
   cell,
   enableHover,
+  rowIndex,
   tableInstance,
 }) => {
   const {
@@ -23,12 +25,12 @@ export const MRT_TableBodyCell: FC<Props> = ({
       editingMode,
       enableClickToCopy,
       enableColumnOrdering,
-      enableColumnResizing,
       enableEditing,
-      enableRowVirtualization,
+      enableRowNumbers,
       muiTableBodyCellProps,
       muiTableBodyCellSkeletonProps,
       onMrtCellClick,
+      rowNumberMode,
       tableId,
     },
     setColumnOrder,
@@ -133,15 +135,6 @@ export const MRT_TableBodyCell: FC<Props> = ({
         onMrtCellClick?.({ event, cell, tableInstance })
       }
       onDoubleClick={handleDoubleClick}
-      title={
-        (enableRowVirtualization || enableColumnResizing) &&
-        !columnDef?.Cell &&
-        !cell.getIsGrouped() &&
-        !columnDef.enableClickToCopy &&
-        typeof cell.getValue() === 'string'
-          ? (cell.getValue() as string)
-          : ''
-      }
       {...tableCellProps}
       ref={
         columnDefType === 'data' && enableColumnOrdering ? dropRef : undefined
@@ -175,7 +168,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
         position: column.getIsPinned() ? 'sticky' : 'relative',
         right:
           column.getIsPinned() === 'right' ? `${getTotalRight()}px` : undefined,
-        textOverflow: 'ellipsis',
+        textOverflow: columnDefType !== 'display' ? 'ellipsis' : undefined,
         transition: 'all 0.2s ease-in-out',
         whiteSpace: isDensePadding ? 'nowrap' : 'normal',
         zIndex: column.getIsPinned() ? 1 : undefined,
@@ -206,6 +199,10 @@ export const MRT_TableBodyCell: FC<Props> = ({
             width={skeletonWidth}
             {...muiTableBodyCellSkeletonProps}
           />
+        ) : enableRowNumbers &&
+          rowNumberMode === 'static' &&
+          column.id === 'mrt-row-numbers' ? (
+          rowIndex + 1
         ) : columnDefType === 'display' ? (
           columnDef.Cell?.({ cell, tableInstance })
         ) : cell.getIsPlaceholder() ||
