@@ -105,7 +105,7 @@ export const ColumnResizingCustomDefaultWidths: Story<
     columns={columns}
     data={data}
     enableColumnResizing
-    defaultColumn={{ width: 150, minWidth: 100, maxWidth: 300 }}
+    defaultColumn={{ size: 150, minSize: 100, maxSize: 300 }}
   />
 );
 
@@ -167,5 +167,6 @@ export const ColumnResizingWithHeaderGroups: Story<
       address: faker.address.streetAddress(),
     }))}
     enableColumnResizing
+    enableRowSelection
   />
 );

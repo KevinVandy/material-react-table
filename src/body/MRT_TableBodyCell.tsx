@@ -23,11 +23,13 @@ export const MRT_TableBodyCell: FC<Props> = ({
       editingMode,
       enableClickToCopy,
       enableColumnOrdering,
+      enableColumnResizing,
       enableEditing,
-      tableId,
+      enableRowVirtualization,
       muiTableBodyCellProps,
       muiTableBodyCellSkeletonProps,
       onMrtCellClick,
+      tableId,
     },
     setColumnOrder,
     setCurrentEditingCell,
@@ -131,6 +133,15 @@ export const MRT_TableBodyCell: FC<Props> = ({
         onMrtCellClick?.({ event, cell, tableInstance })
       }
       onDoubleClick={handleDoubleClick}
+      title={
+        (enableRowVirtualization || enableColumnResizing) &&
+        !columnDef?.Cell &&
+        !cell.getIsGrouped() &&
+        !columnDef.enableClickToCopy &&
+        typeof cell.getValue() === 'string'
+          ? (cell.getValue() as string)
+          : ''
+      }
       {...tableCellProps}
       ref={
         columnDefType === 'data' && enableColumnOrdering ? dropRef : undefined
@@ -149,6 +160,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
           column.getIsPinned() === 'left'
             ? `${column.getStart('left')}px`
             : undefined,
+        overflow: 'hidden',
         p: isDensePadding
           ? columnDefType === 'display'
             ? '0 0.5rem'
@@ -163,6 +175,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
         position: column.getIsPinned() ? 'sticky' : 'relative',
         right:
           column.getIsPinned() === 'right' ? `${getTotalRight()}px` : undefined,
+        textOverflow: 'ellipsis',
         transition: 'all 0.2s ease-in-out',
         whiteSpace: isDensePadding ? 'nowrap' : 'normal',
         zIndex: column.getIsPinned() ? 1 : undefined,
