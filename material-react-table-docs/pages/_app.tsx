@@ -60,7 +60,7 @@ function App({ Component, pageProps }: AppProps) {
           <PageContainer
             sx={{
               p: `64px 32px 800px ${
-                (navOpen || isDesktop) && !isTablet ? '280px' : '32px'
+                (navOpen || isDesktop) && !isTablet ? '300px' : '32px'
               }`,
             }}
           >

@@ -90,7 +90,11 @@ const navItems = [
     items: [
       {
         href: '/docs/guides/customize-css',
-        label: 'Customize CSS & MUI',
+        label: 'Customize CSS',
+      },
+      {
+        href: '/docs/guides/customize-mui',
+        label: 'Customize MUI',
       },
       {
         href: '/docs/guides/customize-icons',
@@ -122,16 +126,16 @@ const navItems = [
         label: 'Filtering',
       },
       {
+        href: '/docs/guides/global-filtering',
+        label: 'Global Filtering (Search)',
+      },
+      {
         href: '/docs/guides/full-screen-toggle',
         label: 'Full Screen Toggle',
       },
       {
         href: '/docs/guides/pagination',
         label: 'Pagination',
-      },
-      {
-        href: '/docs/guides/search',
-        label: 'Search (Global Filtering)',
       },
       {
         href: '/docs/guides/sorting',
@@ -152,7 +156,7 @@ const navItems = [
       },
       {
         href: '/docs/guides/column-grouping',
-        label: 'Column Grouping',
+        label: 'Column Grouping (Aggregation)',
       },
       {
         href: '/docs/guides/column-resizing',
@@ -160,7 +164,7 @@ const navItems = [
       },
       {
         href: '/docs/guides/column-ordering',
-        label: 'Column Ordering',
+        label: 'Column Ordering (DnD)',
       },
       {
         href: '/docs/guides/column-pinning',
@@ -195,14 +199,22 @@ const navItems = [
         label: 'Row Numbers',
       },
       {
-        href: '/docs/guides/selection',
-        label: 'Selection (Checkboxes)',
+        href: '/docs/guides/row-selection',
+        label: 'Row Selection (Checkboxes)',
+      },
+      {
+        href: '/docs/guides/row-virtualization',
+        label: 'Row Virtualization',
       },
     ],
   },
   {
     title: 'Other Advanced Guides',
     items: [
+      {
+        href: '/docs/guides/table-state-management',
+        label: 'Table State Management',
+      },
       {
         href: '/docs/guides/typescript',
         label: 'TypeScript Usage',
@@ -244,7 +256,7 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
           p: 0,
           pb: '10rem',
           transition: 'all .2s',
-          width: navOpen ? '260px' : 0,
+          width: navOpen ? '280px' : 0,
           '@media (max-width: 900px)': {
             mt: '50px',
           },
