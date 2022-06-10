@@ -371,11 +371,11 @@ const data = [
     prop: 'enableRowNumbers',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: '/docs/guides/row-numbers',
+    linkText: 'Row Numbers Feature Guide',
     required: false,
-    source: '',
-    type: '',
+    source: 'MRT',
+    type: 'boolean',
   },
   {
     prop: 'enableRowSelection',
@@ -1479,7 +1479,7 @@ const data = [
   },
   {
     prop: 'rowNumberMode',
-    defaultValue: 'original',
+    defaultValue: "'original'",
     description: '',
     link: '',
     linkText: '',
@@ -1610,6 +1610,10 @@ const RootPropTable = () => {
           { id: 'prop', desc: false },
         ],
         columnPinning: { left: ['mrt-row-numbers', 'prop'], right: [] },
+      }}
+      muiSearchTextFieldProps={{
+        placeholder: 'Search All Props',
+        variant: 'outlined',
       }}
       positionGlobalFilter="left"
       rowNumberMode="static"

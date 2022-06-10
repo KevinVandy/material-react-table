@@ -1,7 +1,32 @@
 import Head from 'next/head';
+import OriginalExample from '../../../examples/enableRowNumbersOriginal';
+import StaticExample from '../../../examples/enableRowNumbersStatic';
 
 <Head>
   <title>Material React Table Docs - Row Numbers Feature Guide</title>
 </Head>
 
 ## Row Numbers Feature Guide
+
+### Relavent Props
+
+- enableRowNumbers
+- rowNumberMode
+
+---
+
+There are two row number modes that you can enable.
+
+### Enable Row Numbers (Original Mode)
+
+In the default rowNumberMode (`original`), the row numbers linked to the original index of the data array. This means that when you search or filter, the same row numbers will stay with the row, though they will not be in the same order when sorted or will skip numbers when filtered.
+
+<OriginalExample />
+
+### Enable Row Numbers (Static Mode)
+
+Alternatively, if you just want row numbers to always be the same and in order, you can use the `static` row number mode.
+
+<StaticExample />
+
+View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-row-number-examples)**

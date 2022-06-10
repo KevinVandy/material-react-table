@@ -11,6 +11,8 @@ import {
   Tooltip,
   Divider,
   useMediaQuery,
+  Box,
+  Button,
 } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
@@ -81,9 +83,23 @@ export const SourceCodeSnippet: FC<Props> = ({
       }}
     >
       <Divider />
-      <LinkHeading tableId={tableId} variant="h3">
-        Demo
-      </LinkHeading>
+      <Box sx={{ display: 'flex' }}>
+        <LinkHeading tableId={tableId} variant="h3">
+          Demo
+        </LinkHeading>
+        {codeSandboxURL && (
+          <Button
+            href={codeSandboxURL}
+            rel="noreferrer"
+            target="_blank"
+            sx={{ height: '3rem', ml: '1rem' }}
+            variant="outlined"
+          >
+            Open Code Sandbox
+          </Button>
+        )}
+      </Box>
+
       <Component />
       <div>
         <div style={{ display: 'flex', gap: '1rem' }}>
