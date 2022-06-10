@@ -97,6 +97,7 @@ const Example = () => {
       data={employeeData}
       enableClickToCopy
       enableColumnOrdering
+      enableColumnResizing
       enableEditing
       enableGrouping
       enablePinning

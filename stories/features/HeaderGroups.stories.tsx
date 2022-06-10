@@ -104,3 +104,9 @@ export const HeaderGroupsWithColumnOrdering: Story<
 export const HeaderGroupsWithColumnPinning: Story<
   MaterialReactTableProps
 > = () => <MaterialReactTable columns={columns} data={data} enablePinning />;
+
+export const HeaderGroupsWithColumResizing: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable columns={columns} data={data} enableColumnResizing />
+);

@@ -17,7 +17,12 @@ export const MRT_TableBody: FC<Props> = ({
     getPaginationRowModel,
     getPrePaginationRowModel,
     getState,
-    options: { enablePagination, enableRowVirtualization, muiTableBodyProps },
+    options: {
+      enablePagination,
+      enableRowVirtualization,
+      muiTableBodyProps,
+      virtualizerProps,
+    },
   } = tableInstance;
 
   const { isDensePadding } = getState();
@@ -36,6 +41,7 @@ export const MRT_TableBody: FC<Props> = ({
         overscan: isDensePadding ? 15 : 5,
         size: rows.length,
         parentRef: tableContainerRef,
+        ...virtualizerProps,
       })
     : ({} as any);
 

@@ -33,7 +33,7 @@ export const MRT_Table: FC<Props> = ({ tableContainerRef, tableInstance }) => {
       {...tableProps}
       sx={{
         tableLayout:
-          enableColumnResizing || enableRowVirtualization ? 'fixed' : undefined,
+          enableColumnResizing || enableRowVirtualization ? 'fixed' : 'auto',
         ...tableProps?.sx,
       }}
     >

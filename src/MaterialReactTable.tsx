@@ -43,6 +43,7 @@ import {
   UseTableInstanceOptions,
   VisibilityState,
 } from '@tanstack/react-table';
+import { Options as VirtualizerOptions } from 'react-virtual';
 import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_FILTER_OPTION } from './enums';
@@ -770,12 +771,13 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     rowNumberMode?: 'original' | 'static';
     selectAllMode?: 'all' | 'page';
     tableId?: string;
+    virtualizerProps?: VirtualizerOptions<HTMLDivElement>;
   };
 
 export default <D extends Record<string, any> = {}>({
   autoResetExpanded = false,
   columnResizeMode = 'onEnd',
-  defaultColumn = { minSize: 30, maxSize: 1000, size: 180 },
+  defaultColumn = { minSize: 40, maxSize: 1000, size: 180 },
   editingMode = 'row',
   enableColumnActions = true,
   enableColumnFilters = true,

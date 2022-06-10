@@ -113,6 +113,7 @@ const Example: FC = () => {
       data={employeeData}
       enableClickToCopy
       enableColumnOrdering
+      enableColumnResizing
       enableEditing
       enableGrouping
       enablePinning

@@ -9,7 +9,7 @@ interface Props {
 
 export const MRT_TableDetailPanel: FC<Props> = ({ row, tableInstance }) => {
   const {
-    getVisibleFlatColumns,
+    getVisibleLeafColumns,
     options: {
       muiTableBodyRowProps,
       muiTableDetailPanelProps,
@@ -31,7 +31,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, tableInstance }) => {
   return (
     <TableRow {...tableRowProps}>
       <TableCell
-        colSpan={getVisibleFlatColumns().length + 10}
+        colSpan={getVisibleLeafColumns().length}
         onClick={(event: MouseEvent<HTMLTableCellElement>) =>
           onMrtDetailPanelClick?.({ event, row, tableInstance })
         }
@@ -41,6 +41,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, tableInstance }) => {
           pb: row.getIsExpanded() ? '1rem' : 0,
           pt: row.getIsExpanded() ? '1rem' : 0,
           transition: 'all 0.2s ease-in-out',
+          width: `${tableInstance.getTotalSize()}px`,
           ...tableCellProps?.sx,
         }}
       >

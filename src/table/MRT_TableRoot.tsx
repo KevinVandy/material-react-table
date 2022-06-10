@@ -170,7 +170,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
             id: 'mrt-row-actions',
             muiTableBodyCellProps: props.muiTableBodyCellProps,
             muiTableHeadCellProps: props.muiTableHeadCellProps,
-            size: 60,
+            size: 70,
           }),
         showExpandColumn &&
           createDisplayColumn(table, {

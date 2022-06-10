@@ -1537,6 +1537,16 @@ const data = [
     source: '',
     type: '',
   },
+  {
+    prop: 'virtualizerProps',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '',
+  },
 ] as PropRow[];
 
 const RootPropTable = () => {

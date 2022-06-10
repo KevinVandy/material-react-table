@@ -184,12 +184,10 @@ export const MRT_TableBodyCell: FC<Props> = ({
               : undefined,
         },
         ...(tableCellProps?.sx as any),
-      })}
-      style={{
         maxWidth: `min(${column.getSize()}px, fit-content)`,
         minWidth: `max(${column.getSize()}px, ${columnDef.minSize ?? 30}px)`,
         width: column.getSize(),
-      }}
+      })}
     >
       <>
         {isLoading || showSkeletons ? (

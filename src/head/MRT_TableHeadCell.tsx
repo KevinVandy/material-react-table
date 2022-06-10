@@ -136,12 +136,10 @@ export const MRT_TableHeadCell: FC<Props> = ({
           ? 2
           : 1,
         ...(tableCellProps?.sx as any),
-      })}
-      style={{
         maxWidth: `min(${column.getSize()}px, fit-content)`,
         minWidth: `max(${column.getSize()}px, ${columnDef.minSize ?? 30}px)`,
         width: header.getSize(),
-      }}
+      })}
     >
       {header.isPlaceholder ? null : columnDefType === 'display' ? (
         headerElement
