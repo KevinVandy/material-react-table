@@ -56,7 +56,15 @@ const navItems = [
       },
       {
         href: '/docs/props',
-        label: 'All Props',
+        label: 'Props',
+      },
+      {
+        href: '/docs/column-options',
+        label: 'Column Options',
+      },
+      {
+        href: '/docs/state-options',
+        label: 'State Options',
       },
     ],
   },
@@ -244,7 +252,7 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
       onClose={() => setNavOpen(false)}
       variant={isTablet ? 'temporary' : 'permanent'}
       sx={{
-        zIndex: 1,
+        zIndex: 4,
         position: 'relative',
       }}
     >

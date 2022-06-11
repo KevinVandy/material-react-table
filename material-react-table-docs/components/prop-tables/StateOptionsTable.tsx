@@ -1,28 +1,17 @@
 import React, { useMemo } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { Link, useTheme } from '@mui/material';
-import { PropRow, rootProps } from './rootProps';
+import { Link } from '@mui/material';
+import { StateRow, stateOptions } from './stateOptions';
 
 const RootPropTable = () => {
-  const theme = useTheme();
-
   const columns = useMemo(
     () =>
       [
         {
           enableClickToCopy: true,
-          header: 'PropName Name',
-          id: 'propName',
-          Cell: ({ cell }) =>
-            cell.row.original?.required ? (
-              <strong style={{ color: theme.palette.primary.dark }}>
-                <>{cell.getValue()}*</>
-              </strong>
-            ) : (
-              cell.getValue()
-            ),
+          header: 'State Name',
+          id: 'stateName',
         },
-        { header: 'Required', id: 'required', enableGlobalFilter: false },
         { header: 'Type', id: 'type', enableGlobalFilter: false },
         { header: 'Default', id: 'defaultValue', enableGlobalFilter: false },
         { header: 'Description', id: 'description', enableGlobalFilter: false },
@@ -39,33 +28,29 @@ const RootPropTable = () => {
           ),
         },
         { header: 'Source', id: 'source', enableGlobalFilter: false },
-      ] as MRT_ColumnDef<PropRow>[],
-    [theme],
+      ] as MRT_ColumnDef<StateRow>[],
+    [],
   );
 
   return (
     <MaterialReactTable
       columns={columns}
-      data={rootProps}
+      data={stateOptions}
       enableColumnOrdering
       enablePagination={false}
       enablePinning
       enableRowNumbers
       enableToolbarBottom={false}
       initialState={{
-        columnVisibility: {
-          required: false,
-        },
         isDensePadding: true,
         showGlobalFilter: true,
         sorting: [
-          { id: 'required', desc: true },
-          { id: 'propName', desc: false },
+          { id: 'stateName', desc: false },
         ],
-        columnPinning: { left: ['mrt-row-numbers', 'propName'], right: [] },
+        columnPinning: { left: ['mrt-row-numbers', 'stateName'], right: [] },
       }}
       muiSearchTextFieldProps={{
-        placeholder: 'Search All Props',
+        placeholder: 'Search All States',
         variant: 'outlined',
       }}
       positionGlobalFilter="left"
