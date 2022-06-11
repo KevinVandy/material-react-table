@@ -34,6 +34,7 @@ import {
   FilterFnOption,
   Header,
   HeaderGroup,
+  OnChangeFn,
   Overwrite,
   ReactTableGenerics,
   Row,
@@ -568,6 +569,12 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
         }: {
           tableInstance: MRT_TableInstance;
         }) => ToolbarProps);
+    onCurrentEditingCellChange?: OnChangeFn<MRT_Cell>;
+    onCurrentEditingRowChange?: OnChangeFn<MRT_Row>;
+    onCurrentFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterFn<D> }>;
+    onCurrentGlobalFilterFnChange?: OnChangeFn<MRT_FilterFn<D>>;
+    onIsDensePaddingChange?: OnChangeFn<boolean>;
+    onIsFullScreenChange?: OnChangeFn<boolean>;
     onMrtCellClick?: ({
       cell,
       event,
@@ -709,6 +716,8 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       showGlobalFilter: boolean;
       tableInstance: MRT_TableInstance<D>;
     }) => void;
+    onShowFiltersChange?: OnChangeFn<boolean>;
+    onShowGlobalFilterChange?: OnChangeFn<boolean>;
     persistentStateMode?: 'localStorage' | 'sessionStorage';
     positionActionsColumn?: 'first' | 'last';
     positionPagination?: 'bottom' | 'top' | 'both';
@@ -795,7 +804,7 @@ export default <D extends Record<string, any> = {}>({
   enablePinning = false,
   enableSelectAll = true,
   enableSorting = true,
-  enableStickyHeader = true,
+  enableStickyHeader = false,
   enableTableFooter = true,
   enableTableHead = true,
   enableToolbarBottom = true,

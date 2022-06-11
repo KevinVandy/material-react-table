@@ -141,10 +141,6 @@ const navItems = [
         href: '/docs/guides/sorting',
         label: 'Sorting',
       },
-      {
-        href: '/docs/guides/sticky-header',
-        label: 'Sticky Header',
-      },
     ],
   },
   {
@@ -201,6 +197,10 @@ const navItems = [
       {
         href: '/docs/guides/row-selection',
         label: 'Row Selection (Checkboxes)',
+      },
+      {
+        href: '/docs/guides/sticky-header',
+        label: 'Sticky Header',
       },
       {
         href: '/docs/guides/row-virtualization',

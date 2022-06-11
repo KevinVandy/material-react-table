@@ -76,6 +76,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ tableInstance }) => {
       )}
       <Box
         sx={{
+          alignItems: 'flex-start',
           display: 'flex',
           justifyContent: 'space-between',
           p: '0.5rem',

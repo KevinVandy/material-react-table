@@ -29,6 +29,8 @@ Join the [discord](https://discord.gg/5wqyRx6fnm) server to join in on the devel
 
 ### Features (All Features work and are MVP, but are still being polished)
 
+_All features can be enabled/disabled easily_
+
 - [x] Click To Copy Cell Values
 - [x] Column Actions
 - [x] Column Grouping (Group By and Aggregates)

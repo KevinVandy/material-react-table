@@ -286,14 +286,17 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         ...props.state,
       } as TableState,
     }),
-    setCurrentEditingCell,
-    setCurrentEditingRow,
-    setCurrentFilterFns,
-    setCurrentGlobalFilterFn,
-    setIsDensePadding,
-    setIsFullScreen,
-    setShowFilters,
-    setShowGlobalFilter,
+    setCurrentEditingCell:
+      props.onCurrentEditingCellChange ?? setCurrentEditingCell,
+    setCurrentEditingRow:
+      props.onCurrentEditingRowChange ?? setCurrentEditingRow,
+    setCurrentFilterFns: props.onCurrentFilterFnsChange ?? setCurrentFilterFns,
+    setCurrentGlobalFilterFn:
+      props.onCurrentGlobalFilterFnChange ?? setCurrentGlobalFilterFn,
+    setIsDensePadding: props.onIsDensePaddingChange ?? setIsDensePadding,
+    setIsFullScreen: props.onIsFullScreenChange ?? setIsFullScreen,
+    setShowFilters: props.onShowFiltersChange ?? setShowFilters,
+    setShowGlobalFilter: props.onShowGlobalFilterChange ?? setShowGlobalFilter,
   } as MRT_TableInstance;
 
   useEffect(() => {

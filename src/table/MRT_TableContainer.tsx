@@ -13,7 +13,12 @@ interface Props {
 export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
   const {
     getState,
-    options: { enableStickyHeader, muiTableContainerProps, tableId },
+    options: {
+      enableStickyHeader,
+      enableRowVirtualization,
+      muiTableContainerProps,
+      tableId,
+    },
   } = tableInstance;
 
   const { isFullScreen } = getState();
@@ -49,9 +54,10 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
       ref={tableContainerRef}
       sx={{
         maxWidth: '100%',
-        maxHeight: enableStickyHeader
-          ? `clamp(350px, calc(100vh - ${totalToolbarHeight}px), 2000px)`
-          : undefined,
+        maxHeight:
+          enableStickyHeader || enableRowVirtualization
+            ? `clamp(350px, calc(100vh - ${totalToolbarHeight}px), 9999px)`
+            : undefined,
         overflow: 'auto',
         ...tableContainerProps?.sx,
       }}
@@ -59,6 +65,7 @@ export const MRT_TableContainer: FC<Props> = ({ tableInstance }) => {
         maxHeight: isFullScreen
           ? `calc(100vh - ${totalToolbarHeight}px)`
           : undefined,
+        ...tableContainerProps?.style,
       }}
     >
       <MRT_Table

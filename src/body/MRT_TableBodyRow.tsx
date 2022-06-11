@@ -10,7 +10,11 @@ interface Props {
   tableInstance: MRT_TableInstance;
 }
 
-export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, tableInstance }) => {
+export const MRT_TableBodyRow: FC<Props> = ({
+  row,
+  rowIndex,
+  tableInstance,
+}) => {
   const {
     getIsSomeColumnsPinned,
     options: { muiTableBodyRowProps, onMrtRowClick, renderDetailPanel },

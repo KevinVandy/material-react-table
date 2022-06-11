@@ -12,6 +12,7 @@ interface Props {
 
 export const MRT_Table: FC<Props> = ({ tableContainerRef, tableInstance }) => {
   const {
+    getState,
     options: {
       enableColumnResizing,
       enableRowVirtualization,
@@ -22,6 +23,8 @@ export const MRT_Table: FC<Props> = ({ tableContainerRef, tableInstance }) => {
     },
   } = tableInstance;
 
+  const { isFullScreen } = getState();
+
   const tableProps =
     muiTableProps instanceof Function
       ? muiTableProps({ tableInstance })
@@ -29,7 +32,9 @@ export const MRT_Table: FC<Props> = ({ tableContainerRef, tableInstance }) => {
 
   return (
     <Table
-      stickyHeader={enableStickyHeader}
+      stickyHeader={
+        enableStickyHeader || enableRowVirtualization || isFullScreen
+      }
       {...tableProps}
       sx={{
         tableLayout:

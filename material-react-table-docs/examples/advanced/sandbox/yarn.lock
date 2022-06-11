@@ -474,6 +474,11 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.5.tgz#db5a11bf66bdab39569719555b0f76e138d7bd64"
   integrity sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==
 
+"@reach/observe-rect@^1.1.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@reach/observe-rect/-/observe-rect-1.2.0.tgz#d7a6013b8aafcc64c778a0ccb83355a11204d3b2"
+  integrity sha512-Ba7HmkFgfQxZqqaeIWWkNK0rEhpxVQHIoVyW1YDSkGsGIXzcaW4deC8B0pZrNSSyLTdIk7y+5olKt5+g0GmFIQ==
+
 "@react-dnd/asap@^5.0.1":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@react-dnd/asap/-/asap-5.0.2.tgz#1f81f124c1cd6f39511c11a881cfb0f715343488"
@@ -944,15 +949,16 @@ loose-envify@^1.1.0, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
-material-react-table@0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.9.1.tgz#24f55c7feb7e21fbfa0732c8784fb18edf66393e"
-  integrity sha512-TedJ3/ed9F7khraVvsJ/efyueIj79qhtLhTvRKsZ/UKoen4+M/pO4JrCn+NMiRdrR7O0qHtd/G4ZewtYOAZrJg==
+material-react-table@0.9.6:
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.9.6.tgz#b85f044461b401d6dea35c176b993cb8b993202d"
+  integrity sha512-fJ+rMZFWHsufxr1MGhd8YuZz11U0pV5jXm0QmTgCzoRCBVomH0/LUH9mQYcx4z1RiHEYqRs4Qf0WBXaxymET2A==
   dependencies:
     "@tanstack/match-sorter-utils" "^8.0.0-alpha.83"
     "@tanstack/react-table" "^8.0.0-beta.8"
     react-dnd "^16.0.1"
     react-dnd-html5-backend "^16.0.1"
+    react-virtual "^2.10.4"
 
 ms@2.1.2:
   version "2.1.2"
@@ -1079,6 +1085,13 @@ react-transition-group@^4.4.2:
     dom-helpers "^5.0.1"
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
+
+react-virtual@^2.10.4:
+  version "2.10.4"
+  resolved "https://registry.yarnpkg.com/react-virtual/-/react-virtual-2.10.4.tgz#08712f0acd79d7d6f7c4726f05651a13b24d8704"
+  integrity sha512-Ir6+oPQZTVHfa6+JL9M7cvMILstFZH/H3jqeYeKI4MSUX+rIruVwFC6nGVXw9wqAw8L0Kg2KvfXxI85OvYQdpQ==
+  dependencies:
+    "@reach/observe-rect" "^1.1.0"
 
 react@^18.1.0:
   version "18.1.0"

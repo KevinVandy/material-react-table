@@ -5,7 +5,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { MRT_ToolbarTop } from '../toolbar/MRT_ToolbarTop';
 import { MRT_ToolbarBottom } from '../toolbar/MRT_ToolbarBottom';
 import { MRT_TableContainer } from './MRT_TableContainer';
-import { MRT_TableInstance } from '..';
+import type { MRT_TableInstance } from '..';
 
 interface Props {
   tableInstance: MRT_TableInstance;
@@ -22,10 +22,8 @@ export const MRT_TablePaper: FC<Props> = ({ tableInstance }) => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       if (isFullScreen) {
-        document.body.style.overflow = 'hidden';
         document.body.style.height = '100vh';
       } else {
-        document.body.style.overflow = 'auto';
         document.body.style.height = 'auto';
       }
     }
@@ -44,8 +42,6 @@ export const MRT_TablePaper: FC<Props> = ({ tableInstance }) => {
         sx={{
           transition: 'all 0.2s ease-in-out',
           ...tablePaperProps?.sx,
-        }}
-        style={{
           height: isFullScreen ? '100vh' : undefined,
           margin: isFullScreen ? '0' : undefined,
           maxHeight: isFullScreen ? '100vh' : undefined,
