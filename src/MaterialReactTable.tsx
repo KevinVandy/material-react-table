@@ -47,7 +47,6 @@ import {
 import { Options as VirtualizerOptions } from 'react-virtual';
 import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
-import { MRT_FILTER_OPTION } from './enums';
 import { MRT_TableRoot } from './table/MRT_TableRoot';
 
 export type MRT_TableOptions<D extends Record<string, any> = {}> = Partial<
@@ -121,7 +120,7 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
       [key: string]: MRT_FilterFn;
     }>
   >;
-  setCurrentGlobalFilterFn: Dispatch<SetStateAction<MRT_FilterFn<D>>>;
+  setCurrentGlobalFilterFn: Dispatch<SetStateAction<MRT_FilterFn>>;
   setIsDensePadding: Dispatch<SetStateAction<boolean>>;
   setIsFullScreen: Dispatch<SetStateAction<boolean>>;
   setShowFilters: Dispatch<SetStateAction<boolean>>;
@@ -332,9 +331,24 @@ export type MRT_Cell<D extends Record<string, any> = {}> = Omit<
   row: MRT_Row<D>;
 };
 
-export type MRT_FilterFn<D extends Record<string, any> = {}> =
+export type MRT_FILTER_OPTION =
+  | 'between'
+  | 'contains'
+  | 'empty'
+  | 'endsWith'
+  | 'equals'
+  | 'fuzzy'
+  | 'greaterThan'
+  | 'greaterThanOrEqual'
+  | 'lessThan'
+  | 'lessThanOrEqual'
+  | 'notEmpty'
+  | 'notEquals'
+  | 'startsWith'
+  | FilterFnOption<TableGenerics>
+
+export type MRT_FilterFn =
   | FilterFn<TableGenerics>
-  | FilterFnOption<D>
   | MRT_FILTER_OPTION
   | number
   | string
@@ -571,8 +585,8 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
         }) => ToolbarProps);
     onCurrentEditingCellChange?: OnChangeFn<MRT_Cell>;
     onCurrentEditingRowChange?: OnChangeFn<MRT_Row>;
-    onCurrentFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterFn<D> }>;
-    onCurrentGlobalFilterFnChange?: OnChangeFn<MRT_FilterFn<D>>;
+    onCurrentFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterFn }>;
+    onCurrentGlobalFilterFnChange?: OnChangeFn<MRT_FilterFn>;
     onIsDensePaddingChange?: OnChangeFn<boolean>;
     onIsFullScreenChange?: OnChangeFn<boolean>;
     onMrtCellClick?: ({

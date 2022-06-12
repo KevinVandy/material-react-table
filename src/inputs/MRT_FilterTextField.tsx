@@ -15,9 +15,8 @@ import {
   TextFieldProps,
   Tooltip,
 } from '@mui/material';
-import type { MRT_Header, MRT_TableInstance } from '..';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
-import { MRT_FILTER_OPTION } from '../enums';
+import type { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
   header: MRT_Header;
@@ -110,7 +109,7 @@ export const MRT_FilterTextField: FC<Props> = ({
     column.setFilterValue(undefined);
     setCurrentFilterFns((prev) => ({
       ...prev,
-      [header.id]: MRT_FILTER_OPTION.FUZZY,
+      [header.id]: 'fuzzy',
     }));
   };
 
@@ -124,10 +123,7 @@ export const MRT_FilterTextField: FC<Props> = ({
   const filterFn = currentFilterFns?.[header.id];
   const isSelectFilter = !!columnDef.filterSelectOptions;
   const filterChipLabel =
-    !(filterFn instanceof Function) &&
-    [MRT_FILTER_OPTION.EMPTY, MRT_FILTER_OPTION.NOT_EMPTY].includes(
-      filterFn as MRT_FILTER_OPTION,
-    )
+    !(filterFn instanceof Function) && ['empty', 'notEmpty'].includes(filterFn)
       ? //@ts-ignore
         localization[
           `filter${filterFn.charAt(0).toUpperCase() + filterFn.slice(1)}`

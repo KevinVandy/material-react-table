@@ -22,10 +22,13 @@ const RootPropTable = () => {
               cell.getValue()
             ),
         },
-        { header: 'Required', id: 'required', enableGlobalFilter: false },
         { header: 'Type', id: 'type', enableGlobalFilter: false },
-        { header: 'Default', id: 'defaultValue', enableGlobalFilter: false },
-        { header: 'Description', id: 'description', enableGlobalFilter: false },
+        {
+          header: 'Default Value',
+          id: 'defaultValue',
+          enableGlobalFilter: false,
+        },
+
         {
           header: 'More Info Links',
           id: 'link',
@@ -38,6 +41,7 @@ const RootPropTable = () => {
             </Link>
           ),
         },
+        { header: 'Description', id: 'description', enableGlobalFilter: false },
         { header: 'Source', id: 'source', enableGlobalFilter: false },
       ] as MRT_ColumnDef<PropRow>[],
     [theme],
@@ -58,10 +62,7 @@ const RootPropTable = () => {
         },
         isDensePadding: true,
         showGlobalFilter: true,
-        sorting: [
-          { id: 'required', desc: true },
-          { id: 'propName', desc: false },
-        ],
+        sorting: [{ id: 'propName', desc: false }],
         columnPinning: { left: ['mrt-row-numbers', 'propName'], right: [] },
       }}
       muiSearchTextFieldProps={{

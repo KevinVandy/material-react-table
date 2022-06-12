@@ -13,8 +13,11 @@ const RootPropTable = () => {
           id: 'stateName',
         },
         { header: 'Type', id: 'type', enableGlobalFilter: false },
-        { header: 'Default', id: 'defaultValue', enableGlobalFilter: false },
-        { header: 'Description', id: 'description', enableGlobalFilter: false },
+        {
+          header: 'Default Value',
+          id: 'defaultValue',
+          enableGlobalFilter: false,
+        },
         {
           header: 'More Info Links',
           id: 'link',
@@ -27,6 +30,7 @@ const RootPropTable = () => {
             </Link>
           ),
         },
+        { header: 'Description', id: 'description', enableGlobalFilter: false },
         { header: 'Source', id: 'source', enableGlobalFilter: false },
       ] as MRT_ColumnDef<StateRow>[],
     [],
@@ -44,9 +48,7 @@ const RootPropTable = () => {
       initialState={{
         isDensePadding: true,
         showGlobalFilter: true,
-        sorting: [
-          { id: 'stateName', desc: false },
-        ],
+        sorting: [{ id: 'stateName', desc: false }],
         columnPinning: { left: ['mrt-row-numbers', 'stateName'], right: [] },
       }}
       muiSearchTextFieldProps={{

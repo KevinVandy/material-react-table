@@ -1,7 +1,11 @@
 import React, { FC, useMemo } from 'react';
 import { Menu, MenuItem } from '@mui/material';
-import type { MRT_FilterFn, MRT_Header, MRT_TableInstance } from '..';
-import { MRT_FILTER_OPTION } from '../enums';
+import type {
+  MRT_FilterFn,
+  MRT_FILTER_OPTION,
+  MRT_Header,
+  MRT_TableInstance,
+} from '..';
 import {
   between,
   contains,
@@ -51,76 +55,71 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
 
   const { columnDef } = column ?? {};
 
-  const filterOptions: {
-    option: MRT_FILTER_OPTION;
-    label: string;
-    divider: boolean;
-    fn: Function;
-  }[] = useMemo(
+  const filterOptions = useMemo(
     () =>
       [
         {
-          option: MRT_FILTER_OPTION.FUZZY,
+          option: 'fuzzy',
           label: localization.filterFuzzy,
           divider: false,
           fn: fuzzy,
         },
         {
-          option: MRT_FILTER_OPTION.CONTAINS,
+          option: 'contains',
           label: localization.filterContains,
           divider: false,
           fn: contains,
         },
         {
-          option: MRT_FILTER_OPTION.STARTS_WITH,
+          option: 'startsWith',
           label: localization.filterStartsWith,
           divider: false,
           fn: startsWith,
         },
         {
-          option: MRT_FILTER_OPTION.ENDS_WITH,
+          option: 'endsWith',
           label: localization.filterEndsWith,
           divider: true,
           fn: endsWith,
         },
         {
-          option: MRT_FILTER_OPTION.EQUALS,
+          option: 'equals',
           label: localization.filterEquals,
           divider: false,
           fn: equals,
         },
         {
-          option: MRT_FILTER_OPTION.NOT_EQUALS,
+          option: 'notEquals',
           label: localization.filterNotEquals,
           divider: true,
           fn: notEquals,
         },
         {
-          option: MRT_FILTER_OPTION.BETWEEN,
+          option: 'between',
           label: localization.filterBetween,
           divider: false,
           fn: between,
         },
         {
-          option: MRT_FILTER_OPTION.GREATER_THAN,
+          option: 'greaterThan',
           label: localization.filterGreaterThan,
           divider: false,
           fn: greaterThan,
         },
         {
-          option: MRT_FILTER_OPTION.LESS_THAN,
+          option: 'lessThan',
           label: localization.filterLessThan,
           divider: true,
           fn: lessThan,
         },
         {
-          option: MRT_FILTER_OPTION.EMPTY,
+          option: 'empty',
           label: localization.filterEmpty,
           divider: false,
           fn: empty,
         },
         {
-          option: MRT_FILTER_OPTION.NOT_EMPTY,
+          option: 'notEmpty',
           label: localization.filterNotEmpty,
           divider: false,
           fn: notEmpty,
@@ -131,24 +130,25 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
             columnDef.enabledColumnFilterOptions.includes(filterType.option)
           : (!enabledGlobalFilterOptions ||
               enabledGlobalFilterOptions.includes(filterType.option)) &&
-            [MRT_FILTER_OPTION.FUZZY, MRT_FILTER_OPTION.CONTAINS].includes(
-              filterType.option,
-            ),
-      ),
+            ['fuzzy', 'contains'].includes(filterType.option),
+      ) as Array<{
+        option: MRT_FILTER_OPTION;
+        label: string;
+        divider: boolean;
+        fn: Function;
+      }>,
     [],
   );
 
-  const handleSelectFilterType = (value: MRT_FILTER_OPTION) => {
+  const handleSelectFilterType = (value: string) => {
     if (header && column) {
       setCurrentFilterFns((prev: { [key: string]: MRT_FilterFn }) => ({
         ...prev,
         [header.id]: value,
       }));
-      if (
-        [MRT_FILTER_OPTION.EMPTY, MRT_FILTER_OPTION.NOT_EMPTY].includes(value)
-      ) {
+      if (['empty', 'notEmpty'].includes(value)) {
         column.setFilterValue(' ');
-      } else if (value === MRT_FILTER_OPTION.BETWEEN) {
+      } else if (value === 'between') {
         column.setFilterValue(['', '']);
       } else {
         column.setFilterValue('');
@@ -178,10 +178,10 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
         <MenuItem
           divider={divider}
           key={index}
-          onClick={() => handleSelectFilterType(option)}
+          onClick={() => handleSelectFilterType(option as string)}
           selected={option === filterOption || fn === filterOption}
           sx={commonMenuItemStyles}
-          value={option}
+          value={option as string}
         >
           {label}
         </MenuItem>

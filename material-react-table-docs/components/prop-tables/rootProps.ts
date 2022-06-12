@@ -1,4 +1,4 @@
-import { MaterialReactTableProps } from "material-react-table";
+import { MaterialReactTableProps } from 'material-react-table';
 
 export type PropRow = {
   defaultValue?: string;
@@ -12,26 +12,6 @@ export type PropRow = {
 };
 
 export const rootProps = [
-  {
-    propName: 'columns',
-    defaultValue: '',
-    description: '',
-    link: '',
-    linkText: '',
-    required: true,
-    source: 'TanStack Table',
-    type: 'Array<MRT_ColumnDef>',
-  },
-  {
-    propName: 'data',
-    defaultValue: '',
-    description: '',
-    link: '',
-    linkText: '',
-    required: true,
-    source: 'TanStack Table',
-    type: 'Array<Your Row Data Type>',
-  },
   {
     propName: 'aggregationFns',
     defaultValue: '',
@@ -81,6 +61,26 @@ export const rootProps = [
     required: false,
     source: '',
     type: '',
+  },
+  {
+    propName: 'columns',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: true,
+    source: 'TanStack Table',
+    type: 'Array<MRT_ColumnDef>',
+  },
+  {
+    propName: 'data',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: true,
+    source: 'TanStack Table',
+    type: 'Array<Your Row Data Type>',
   },
   {
     propName: 'debugAll',

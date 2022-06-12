@@ -5,7 +5,6 @@ import {
   Updater,
 } from '@tanstack/react-table';
 import { MRT_Column, MRT_ColumnDef, MRT_FilterFn } from '.';
-import { MRT_FILTER_OPTION } from './enums';
 import { defaultFilterFNs } from './filtersFNs';
 
 export const getAllLeafColumnDefs = (
@@ -49,7 +48,8 @@ export const createDataColumn = <D extends Record<string, any> = {}>(
     filterFn:
       currentFilterFns[column.id] instanceof Function
         ? currentFilterFns[column.id]
-        : defaultFilterFNs[currentFilterFns[column.id] as MRT_FILTER_OPTION],
+        : // @ts-ignore
+          defaultFilterFNs[currentFilterFns[column.id]],
     ...column,
   }) as any;
 

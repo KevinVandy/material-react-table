@@ -18,6 +18,7 @@ import {
   MRT_Cell,
   MRT_ColumnDef,
   MRT_FilterFn,
+  MRT_FILTER_OPTION,
   MRT_Row,
   MRT_TableInstance,
   MRT_TableState,
@@ -35,7 +36,6 @@ import {
   getAllLeafColumnDefs,
 } from '../utils';
 import { defaultFilterFNs } from '../filtersFNs';
-import { MRT_FILTER_OPTION } from '../enums';
 import { Box, Dialog, Grow } from '@mui/material';
 
 export const MRT_TableRoot = <D extends Record<string, any> = {}>(
@@ -124,16 +124,14 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         [c.id as string]:
           c.filterFn ??
           initialState?.currentFilterFns?.[c.id] ??
-          (!!c.filterSelectOptions?.length
-            ? MRT_FILTER_OPTION.EQUALS
-            : MRT_FILTER_OPTION.FUZZY),
+          (!!c.filterSelectOptions?.length ? 'equals' : 'fuzzy'),
       })),
     ),
   );
 
   const [currentGlobalFilterFn, setCurrentGlobalFilterFn] = useState<
     MRT_FILTER_OPTION | FilterFn<ReactTableGenerics> | string | number | symbol
-  >(props.globalFilterFn ?? MRT_FILTER_OPTION.FUZZY);
+  >(props.globalFilterFn ?? 'fuzzy');
 
   const table = useMemo(
     () =>
