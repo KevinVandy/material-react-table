@@ -1,16 +1,26 @@
 import React, { useMemo } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { Link } from '@mui/material';
-import { StateRow, stateOptions } from './stateOptions';
+import { Link, useTheme } from '@mui/material';
+import { ColumnOption, columnOptions } from './columnOptions';
 
-const StateOptionsTable = () => {
+const ColumnOptionsTable = () => {
+  const theme = useTheme();
+
   const columns = useMemo(
     () =>
       [
         {
           enableClickToCopy: true,
-          header: 'State Name',
-          id: 'stateName',
+          header: 'Column Option',
+          id: 'columnOption',
+          Cell: ({ cell }) =>
+            cell.row.original?.required ? (
+              <strong style={{ color: theme.palette.primary.dark }}>
+                <>{cell.getValue()}*</>
+              </strong>
+            ) : (
+              cell.getValue()
+            ),
         },
         { header: 'Type', id: 'type', enableGlobalFilter: false },
         {
@@ -31,27 +41,30 @@ const StateOptionsTable = () => {
         },
         { header: 'Description', id: 'description', enableGlobalFilter: false },
         { header: 'Source', id: 'source', enableGlobalFilter: false },
-      ] as MRT_ColumnDef<StateRow>[],
-    [],
+        // {
+
+        // }
+      ] as MRT_ColumnDef<ColumnOption>[],
+    [theme],
   );
 
   return (
     <MaterialReactTable
       columns={columns}
-      data={stateOptions}
+      data={columnOptions}
       enableColumnOrdering
       enablePagination={false}
       enablePinning
       enableRowNumbers
       enableToolbarBottom={false}
       initialState={{
-        columnPinning: { left: ['mrt-row-numbers', 'stateName'], right: [] },
         isDensePadding: true,
         showGlobalFilter: true,
-        sorting: [{ id: 'stateName', desc: false }],
+        sorting: [{ id: 'columnOption', desc: false }],
+        columnPinning: { left: ['mrt-row-numbers', 'columnOption'], right: [] },
       }}
       muiSearchTextFieldProps={{
-        placeholder: 'Search State Options',
+        placeholder: 'Search Column Options',
         sx: { minWidth: '18rem' },
         variant: 'outlined',
       }}
@@ -61,4 +74,4 @@ const StateOptionsTable = () => {
   );
 };
 
-export default StateOptionsTable;
+export default ColumnOptionsTable;

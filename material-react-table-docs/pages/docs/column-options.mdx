@@ -1,0 +1,30 @@
+import Head from 'next/head';
+import ColumnOptionsTable from '../../components/prop-tables/ColumnOptionsTable';
+
+<Head>
+  <title>Material React Table Docs - Column Options</title>
+</Head>
+
+## Column Options
+
+> Many of the column options that you can pass here are the same as the ones that you can pass to the [TanStack Table](https://tanstack.com/table/v8/docs/guide/04-column-defs) ColumnDefs
+
+Here is a list of all the column options that you can specify in a `column` definition.
+
+```jsx
+const columns = useMemo(() => [
+  {
+    header: 'Name',
+    id: 'name',
+    // All of the options you can specify here
+  }
+], [])
+
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  ...
+/>
+```
+
+<ColumnOptionsTable />

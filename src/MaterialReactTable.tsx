@@ -143,7 +143,7 @@ export type MRT_TableState<D extends Record<string, any> = {}> = TableState & {
 
 export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
   ColumnDef<D>,
-  'accessorFN' | 'header' | 'footer' | 'columns' | 'filterFn'
+  'accessorFn' | 'header' | 'footer' | 'columns' | 'filterFn'
 > & {
   Cell?: ({
     cell,
@@ -184,7 +184,7 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
         header: MRT_Header<D>;
         tableInstance: MRT_TableInstance<D>;
       }) => ReactNode);
-  accessorFN?: (row: D) => any;
+  accessorFn?: (row: D) => any;
   columns?: MRT_ColumnDef<D>[];
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;
@@ -345,7 +345,7 @@ export type MRT_FILTER_OPTION =
   | 'notEmpty'
   | 'notEquals'
   | 'startsWith'
-  | FilterFnOption<TableGenerics>
+  | FilterFnOption<TableGenerics>;
 
 export type MRT_FilterFn =
   | FilterFn<TableGenerics>

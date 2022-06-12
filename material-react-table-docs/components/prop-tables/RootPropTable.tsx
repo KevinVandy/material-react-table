@@ -36,8 +36,7 @@ const RootPropTable = () => {
           enableGlobalFilter: false,
           Cell: ({ cell }) => (
             <Link href={cell.getValue() as string} target="_blank">
-              {' '}
-              {cell.row.original?.linkText}{' '}
+              {cell.row.original?.linkText}
             </Link>
           ),
         },
@@ -67,11 +66,11 @@ const RootPropTable = () => {
       }}
       muiSearchTextFieldProps={{
         placeholder: 'Search All Props',
+        sx: { minWidth: '18rem' },
         variant: 'outlined',
       }}
       positionGlobalFilter="left"
       rowNumberMode="static"
-      tableId="root"
     />
   );
 };
