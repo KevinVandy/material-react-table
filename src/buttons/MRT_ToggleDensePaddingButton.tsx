@@ -3,11 +3,11 @@ import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
 interface Props extends IconButtonProps {
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
 export const MRT_ToggleDensePaddingButton: FC<Props> = ({
-  tableInstance,
+  instance,
   ...rest
 }) => {
   const {
@@ -18,7 +18,7 @@ export const MRT_ToggleDensePaddingButton: FC<Props> = ({
       onMrtToggleDensePadding,
     },
     setIsDensePadding,
-  } = tableInstance;
+  } = instance;
 
   const { isDensePadding } = getState();
 
@@ -26,7 +26,7 @@ export const MRT_ToggleDensePaddingButton: FC<Props> = ({
     onMrtToggleDensePadding?.({
       event,
       isDensePadding: !isDensePadding,
-      tableInstance,
+      instance,
     });
     setIsDensePadding(!isDensePadding);
   };

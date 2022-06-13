@@ -20,14 +20,14 @@ interface Props {
   anchorEl: HTMLElement | null;
   header: MRT_Header;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
 export const MRT_ColumnActionMenu: FC<Props> = ({
   anchorEl,
   header,
   setAnchorEl,
-  tableInstance,
+  instance,
 }) => {
   const {
     getState,
@@ -56,7 +56,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       localization,
     },
     setShowFilters,
-  } = tableInstance;
+  } = instance;
 
   const { column } = header;
 
@@ -249,7 +249,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             key={2}
             onSelect={handleFilterByColumn}
             setAnchorEl={setFilterMenuAnchorEl}
-            tableInstance={tableInstance}
+            instance={instance}
           />,
         ]}
       {enableGrouping &&
@@ -377,7 +377,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           isSubMenu
           key={2}
           setAnchorEl={setShowHideColumnsMenuAnchorEl}
-          tableInstance={tableInstance}
+          instance={instance}
         />,
       ]}
     </Menu>

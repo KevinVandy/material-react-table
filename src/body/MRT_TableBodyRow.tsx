@@ -7,22 +7,18 @@ import type { MRT_Row, MRT_TableInstance } from '..';
 interface Props {
   row: MRT_Row;
   rowIndex: number;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_TableBodyRow: FC<Props> = ({
-  row,
-  rowIndex,
-  tableInstance,
-}) => {
+export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, instance }) => {
   const {
     getIsSomeColumnsPinned,
     options: { muiTableBodyRowProps, onMrtRowClick, renderDetailPanel },
-  } = tableInstance;
+  } = instance;
 
   const tableRowProps =
     muiTableBodyRowProps instanceof Function
-      ? muiTableBodyRowProps({ row, tableInstance })
+      ? muiTableBodyRowProps({ row, instance })
       : muiTableBodyRowProps;
 
   return (
@@ -30,7 +26,7 @@ export const MRT_TableBodyRow: FC<Props> = ({
       <TableRow
         hover
         onClick={(event: MouseEvent<HTMLTableRowElement>) =>
-          onMrtRowClick?.({ event, row, tableInstance })
+          onMrtRowClick?.({ event, row, instance })
         }
         selected={row.getIsSelected()}
         {...tableRowProps}
@@ -54,12 +50,12 @@ export const MRT_TableBodyRow: FC<Props> = ({
             key={cell.id}
             enableHover={tableRowProps?.hover !== false}
             rowIndex={rowIndex}
-            tableInstance={tableInstance}
+            instance={instance}
           />
         ))}
       </TableRow>
       {renderDetailPanel && !row.getIsGrouped() && (
-        <MRT_TableDetailPanel row={row} tableInstance={tableInstance} />
+        <MRT_TableDetailPanel row={row} instance={instance} />
       )}
     </>
   );

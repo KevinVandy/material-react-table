@@ -23,6 +23,7 @@ const ColumnOptionsTable = () => {
             ),
         },
         { header: 'Type', id: 'type', enableGlobalFilter: false },
+        { header: 'Required', id: 'required', enableGlobalFilter: false },
         {
           header: 'Default Value',
           id: 'defaultValue',
@@ -41,9 +42,7 @@ const ColumnOptionsTable = () => {
         },
         { header: 'Description', id: 'description', enableGlobalFilter: false },
         { header: 'Source', id: 'source', enableGlobalFilter: false },
-        // {
-
-        // }
+        {},
       ] as MRT_ColumnDef<ColumnOption>[],
     [theme],
   );
@@ -58,9 +57,13 @@ const ColumnOptionsTable = () => {
       enableRowNumbers
       enableToolbarBottom={false}
       initialState={{
+        columnVisibility: { required: false },
         isDensePadding: true,
         showGlobalFilter: true,
-        sorting: [{ id: 'columnOption', desc: false }],
+        sorting: [
+          { id: 'required', desc: true },
+          { id: 'columnOption', desc: false },
+        ],
         columnPinning: { left: ['mrt-row-numbers', 'columnOption'], right: [] },
       }}
       muiSearchTextFieldProps={{

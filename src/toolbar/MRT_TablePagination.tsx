@@ -3,17 +3,17 @@ import { TablePagination } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
 interface Props {
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_TablePagination: FC<Props> = ({ tableInstance }) => {
+export const MRT_TablePagination: FC<Props> = ({ instance }) => {
   const {
     getPrePaginationRowModel,
     getState,
     setPageIndex,
     setPageSize,
     options: { muiTablePaginationProps },
-  } = tableInstance;
+  } = instance;
 
   const {
     pagination: { pageSize = 10, pageIndex = 0 },
@@ -21,7 +21,7 @@ export const MRT_TablePagination: FC<Props> = ({ tableInstance }) => {
 
   const tablePaginationProps =
     muiTablePaginationProps instanceof Function
-      ? muiTablePaginationProps({ tableInstance })
+      ? muiTablePaginationProps({ instance })
       : muiTablePaginationProps;
 
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {

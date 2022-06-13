@@ -161,7 +161,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
             Cell: ({ cell }) => (
               <MRT_ToggleRowActionMenuButton
                 row={cell.row as any}
-                tableInstance={tableInstance}
+                instance={instance}
               />
             ),
             header: props.localization?.actions,
@@ -173,14 +173,11 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         showExpandColumn &&
           createDisplayColumn(table, {
             Cell: ({ cell }) => (
-              <MRT_ExpandButton
-                row={cell.row as any}
-                tableInstance={tableInstance}
-              />
+              <MRT_ExpandButton row={cell.row as any} instance={instance} />
             ),
             Header: () =>
               props.enableExpandAll ? (
-                <MRT_ExpandAllButton tableInstance={tableInstance} />
+                <MRT_ExpandAllButton instance={instance} />
               ) : null,
             header: props.localization?.expand,
             id: 'mrt-expand',
@@ -191,14 +188,11 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         props.enableRowSelection &&
           createDisplayColumn(table, {
             Cell: ({ cell }) => (
-              <MRT_SelectCheckbox
-                row={cell.row as any}
-                tableInstance={tableInstance}
-              />
+              <MRT_SelectCheckbox row={cell.row as any} instance={instance} />
             ),
             Header: () =>
               props.enableSelectAll ? (
-                <MRT_SelectCheckbox selectAll tableInstance={tableInstance} />
+                <MRT_SelectCheckbox selectAll instance={instance} />
               ) : null,
             header: props.localization?.select,
             id: 'mrt-select',
@@ -263,7 +257,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   );
 
   //@ts-ignore
-  const tableInstance = {
+  const instance = {
     //@ts-ignore
     ...useTableInstance(table, {
       ...props,
@@ -309,7 +303,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     }
     const itemArgs: [string, string] = [
       `mrt-${tableId}-table-state`,
-      JSON.stringify(tableInstance.getState()),
+      JSON.stringify(instance.getState()),
     ];
     if (props.persistentStateMode === 'localStorage') {
       localStorage.setItem(...itemArgs);
@@ -320,7 +314,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     props.enablePersistentState,
     props.tableId,
     props.persistentStateMode,
-    tableInstance,
+    instance,
   ]);
 
   return (
@@ -335,9 +329,9 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         open={isFullScreen}
         transitionDuration={400}
       >
-        <MRT_TablePaper tableInstance={tableInstance} />
+        <MRT_TablePaper instance={instance} />
       </Dialog>
-      {!isFullScreen && <MRT_TablePaper tableInstance={tableInstance} />}
+      {!isFullScreen && <MRT_TablePaper instance={instance} />}
     </>
   );
 };

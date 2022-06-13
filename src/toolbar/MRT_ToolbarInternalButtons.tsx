@@ -9,10 +9,10 @@ import { MRT_TableInstance } from '..';
 import { MRT_SearchTextField } from '../inputs/MRT_SearchTextField';
 
 interface Props {
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_ToolbarInternalButtons: FC<Props> = ({ tableInstance }) => {
+export const MRT_ToolbarInternalButtons: FC<Props> = ({ instance }) => {
   const {
     options: {
       enableColumnFilters,
@@ -24,7 +24,7 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ tableInstance }) => {
       positionGlobalFilter,
       renderToolbarInternalActions,
     },
-  } = tableInstance;
+  } = instance;
 
   return (
     <Box
@@ -40,26 +40,24 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ tableInstance }) => {
         MRT_ToggleDensePaddingButton,
         MRT_ToggleFiltersButton,
         MRT_ToggleGlobalFilterButton,
-        tableInstance,
+        instance,
       }) ?? (
         <>
           {enableGlobalFilter && positionGlobalFilter === 'right' && (
-            <MRT_SearchTextField tableInstance={tableInstance} />
+            <MRT_SearchTextField instance={instance} />
           )}
           {enableFilters && enableGlobalFilter && (
-            <MRT_ToggleGlobalFilterButton tableInstance={tableInstance} />
+            <MRT_ToggleGlobalFilterButton instance={instance} />
           )}
           {enableFilters && enableColumnFilters && (
-            <MRT_ToggleFiltersButton tableInstance={tableInstance} />
+            <MRT_ToggleFiltersButton instance={instance} />
           )}
-          {enableHiding && (
-            <MRT_ShowHideColumnsButton tableInstance={tableInstance} />
-          )}
+          {enableHiding && <MRT_ShowHideColumnsButton instance={instance} />}
           {enableDensePaddingToggle && (
-            <MRT_ToggleDensePaddingButton tableInstance={tableInstance} />
+            <MRT_ToggleDensePaddingButton instance={instance} />
           )}
           {enableFullScreenToggle && (
-            <MRT_FullScreenToggleButton tableInstance={tableInstance} />
+            <MRT_FullScreenToggleButton instance={instance} />
           )}
         </>
       )}

@@ -3,13 +3,10 @@ import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
 interface Props extends IconButtonProps {
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_ToggleFiltersButton: FC<Props> = ({
-  tableInstance,
-  ...rest
-}) => {
+export const MRT_ToggleFiltersButton: FC<Props> = ({ instance, ...rest }) => {
   const {
     getState,
     options: {
@@ -18,7 +15,7 @@ export const MRT_ToggleFiltersButton: FC<Props> = ({
       onMrtToggleShowFilters,
     },
     setShowFilters,
-  } = tableInstance;
+  } = instance;
 
   const { showFilters } = getState();
 
@@ -26,7 +23,7 @@ export const MRT_ToggleFiltersButton: FC<Props> = ({
     onMrtToggleShowFilters?.({
       event,
       showFilters: !showFilters,
-      tableInstance,
+      instance,
     });
     setShowFilters(!showFilters);
   };

@@ -7,14 +7,14 @@ interface Props {
   anchorEl: HTMLElement | null;
   isSubMenu?: boolean;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
 export const MRT_ShowHideColumnsMenu: FC<Props> = ({
   anchorEl,
   isSubMenu,
   setAnchorEl,
-  tableInstance,
+  instance,
 }) => {
   const {
     getAllColumns,
@@ -28,7 +28,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
     getState,
     toggleAllColumnsVisible,
     options: { localization, enablePinning, enableColumnOrdering },
-  } = tableInstance;
+  } = instance;
 
   const { isDensePadding, columnOrder, columnPinning } = getState();
 
@@ -88,14 +88,14 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
           </Button>
         )}
         {!isSubMenu && enableColumnOrdering && (
-          <Button onClick={() => tableInstance.resetColumnOrder()}>
+          <Button onClick={() => instance.resetColumnOrder()}>
             {localization.resetOrder}
           </Button>
         )}
         {!isSubMenu && enablePinning && (
           <Button
             disabled={!getIsSomeColumnsPinned()}
-            onClick={() => tableInstance.resetColumnPinning(true)}
+            onClick={() => instance.resetColumnPinning(true)}
           >
             {localization.unpinAll}
           </Button>
@@ -114,7 +114,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
           column={column}
           isSubMenu={isSubMenu}
           key={`${index}-${column.id}`}
-          tableInstance={tableInstance}
+          instance={instance}
         />
       ))}
     </Menu>

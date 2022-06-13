@@ -4,23 +4,20 @@ import { MRT_TableInstance } from '..';
 
 interface Props {
   alignTo: 'bottom' | 'top';
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_LinearProgressBar: FC<Props> = ({
-  alignTo,
-  tableInstance,
-}) => {
+export const MRT_LinearProgressBar: FC<Props> = ({ alignTo, instance }) => {
   const {
     options: { muiLinearProgressProps },
     getState,
-  } = tableInstance;
+  } = instance;
 
   const { isLoading, showProgressBars } = getState();
 
   const linearProgressProps =
     muiLinearProgressProps instanceof Function
-      ? muiLinearProgressProps({ tableInstance })
+      ? muiLinearProgressProps({ instance })
       : muiLinearProgressProps;
 
   return (

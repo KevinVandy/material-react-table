@@ -4,18 +4,18 @@ import { MRT_TableHeadRow } from './MRT_TableHeadRow';
 import type { MRT_TableInstance } from '..';
 
 interface Props {
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_TableHead: FC<Props> = ({ tableInstance }) => {
+export const MRT_TableHead: FC<Props> = ({ instance }) => {
   const {
     getHeaderGroups,
     options: { muiTableHeadProps },
-  } = tableInstance;
+  } = instance;
 
   const tableHeadProps =
     muiTableHeadProps instanceof Function
-      ? muiTableHeadProps({ tableInstance })
+      ? muiTableHeadProps({ instance })
       : muiTableHeadProps;
 
   return (
@@ -24,7 +24,7 @@ export const MRT_TableHead: FC<Props> = ({ tableInstance }) => {
         <MRT_TableHeadRow
           headerGroup={headerGroup as any}
           key={headerGroup.id}
-          tableInstance={tableInstance}
+          instance={instance}
         />
       ))}
     </TableHead>

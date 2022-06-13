@@ -4,10 +4,10 @@ import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
   row: MRT_Row;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_EditActionButtons: FC<Props> = ({ row, tableInstance }) => {
+export const MRT_EditActionButtons: FC<Props> = ({ row, instance }) => {
   const {
     getState,
     options: {
@@ -16,7 +16,7 @@ export const MRT_EditActionButtons: FC<Props> = ({ row, tableInstance }) => {
       onMrtEditRowSubmit,
     },
     setCurrentEditingRow,
-  } = tableInstance;
+  } = instance;
 
   const { currentEditingRow } = getState();
 
@@ -26,7 +26,7 @@ export const MRT_EditActionButtons: FC<Props> = ({ row, tableInstance }) => {
   };
 
   const handleSave = () => {
-    onMrtEditRowSubmit?.({ row: currentEditingRow ?? row, tableInstance });
+    onMrtEditRowSubmit?.({ row: currentEditingRow ?? row, instance });
     setCurrentEditingRow(null);
   };
 

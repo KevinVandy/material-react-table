@@ -3,11 +3,11 @@ import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
 interface Props extends IconButtonProps {
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
 export const MRT_FullScreenToggleButton: FC<Props> = ({
-  tableInstance,
+  instance,
   ...rest
 }) => {
   const {
@@ -18,7 +18,7 @@ export const MRT_FullScreenToggleButton: FC<Props> = ({
       onMrtToggleFullScreen,
     },
     setIsFullScreen,
-  } = tableInstance;
+  } = instance;
 
   const { isFullScreen } = getState();
 
@@ -26,7 +26,7 @@ export const MRT_FullScreenToggleButton: FC<Props> = ({
     onMrtToggleFullScreen?.({
       event,
       isFullScreen: !isFullScreen,
-      tableInstance,
+      instance,
     });
     setIsFullScreen(!isFullScreen);
   };

@@ -1,6 +1,9 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import MaterialReactTable, { MaterialReactTableProps } from '../../src';
+import MaterialReactTable, {
+  MaterialReactTableProps,
+  MRT_ColumnDef,
+} from '../../src';
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
@@ -30,7 +33,7 @@ const columns = [
     header: 'State',
     id: 'state',
   },
-];
+] as MRT_ColumnDef[];
 
 const data = [...Array(200)].map((_) => ({
   firstName: faker.name.firstName(),

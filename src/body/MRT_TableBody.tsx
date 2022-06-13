@@ -5,14 +5,11 @@ import { MRT_TableBodyRow } from './MRT_TableBodyRow';
 import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
   tableContainerRef: RefObject<HTMLDivElement>;
 }
 
-export const MRT_TableBody: FC<Props> = ({
-  tableInstance,
-  tableContainerRef,
-}) => {
+export const MRT_TableBody: FC<Props> = ({ instance, tableContainerRef }) => {
   const {
     getPaginationRowModel,
     getPrePaginationRowModel,
@@ -23,13 +20,13 @@ export const MRT_TableBody: FC<Props> = ({
       muiTableBodyProps,
       virtualizerProps,
     },
-  } = tableInstance;
+  } = instance;
 
   const { isDensePadding } = getState();
 
   const tableBodyProps =
     muiTableBodyProps instanceof Function
-      ? muiTableBodyProps({ tableInstance })
+      ? muiTableBodyProps({ instance })
       : muiTableBodyProps;
 
   const rows = enablePagination
@@ -72,7 +69,7 @@ export const MRT_TableBody: FC<Props> = ({
               rowIndex={
                 enableRowVirtualization ? rowOrVirtualRow.index : rowIndex
               }
-              tableInstance={tableInstance}
+              instance={instance}
             />
           );
         },

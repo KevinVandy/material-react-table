@@ -4,14 +4,14 @@ import type { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
   footer: MRT_Header;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_TableFooterCell: FC<Props> = ({ footer, tableInstance }) => {
+export const MRT_TableFooterCell: FC<Props> = ({ footer, instance }) => {
   const {
     getState,
     options: { muiTableFooterCellProps, enableColumnResizing },
-  } = tableInstance;
+  } = instance;
 
   const { isDensePadding } = getState();
 
@@ -21,12 +21,12 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, tableInstance }) => {
 
   const mTableFooterCellProps =
     muiTableFooterCellProps instanceof Function
-      ? muiTableFooterCellProps({ column, tableInstance })
+      ? muiTableFooterCellProps({ column, instance })
       : muiTableFooterCellProps;
 
   const mcTableFooterCellProps =
     columnDef.muiTableFooterCellProps instanceof Function
-      ? columnDef.muiTableFooterCellProps({ column, tableInstance })
+      ? columnDef.muiTableFooterCellProps({ column, instance })
       : columnDef.muiTableFooterCellProps;
 
   const tableCellProps = {
@@ -62,7 +62,7 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, tableInstance }) => {
           : (columnDef.Footer instanceof Function
               ? columnDef.Footer?.({
                   footer,
-                  tableInstance,
+                  instance,
                 })
               : columnDef.Footer) ??
             columnDef.footer ??

@@ -5,17 +5,13 @@ import { MRT_Cell, MRT_TableInstance } from '..';
 interface Props {
   cell: MRT_Cell;
   children: ReactNode;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_CopyButton: FC<Props> = ({
-  cell,
-  children,
-  tableInstance,
-}) => {
+export const MRT_CopyButton: FC<Props> = ({ cell, children, instance }) => {
   const {
     options: { localization, muiTableBodyCellCopyButtonProps },
-  } = tableInstance;
+  } = instance;
 
   const { column } = cell;
 
@@ -31,14 +27,14 @@ export const MRT_CopyButton: FC<Props> = ({
 
   const mTableBodyCellCopyButtonProps =
     muiTableBodyCellCopyButtonProps instanceof Function
-      ? muiTableBodyCellCopyButtonProps({ cell, tableInstance })
+      ? muiTableBodyCellCopyButtonProps({ cell, instance })
       : muiTableBodyCellCopyButtonProps;
 
   const mcTableBodyCellCopyButtonProps =
     columnDef.muiTableBodyCellCopyButtonProps instanceof Function
       ? columnDef.muiTableBodyCellCopyButtonProps({
           cell,
-          tableInstance,
+          instance,
         })
       : columnDef.muiTableBodyCellCopyButtonProps;
 

@@ -10,20 +10,20 @@ interface Props {
   allColumns: MRT_Column[];
   column: MRT_Column;
   isSubMenu?: boolean;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
 export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
   allColumns,
   column,
   isSubMenu,
-  tableInstance,
+  instance,
 }) => {
   const {
     getState,
     options: { enableColumnOrdering, onMrtToggleColumnVisibility },
     setColumnOrder,
-  } = tableInstance;
+  } = instance;
 
   const { columnOrder, columnVisibility } = getState();
 
@@ -59,7 +59,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
     onMrtToggleColumnVisibility?.({
       column,
       columnVisibility,
-      tableInstance,
+      instance,
     });
   };
 
@@ -89,14 +89,11 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
             !allColumns.some((col) => col.columnDefType === 'group') && (
               <MRT_GrabHandleButton
                 ref={dragRef as Ref<HTMLButtonElement>}
-                tableInstance={tableInstance}
+                instance={instance}
               />
             )}
           {!isSubMenu && column.getCanPin() && (
-            <MRT_ColumnPinningButtons
-              column={column}
-              tableInstance={tableInstance}
-            />
+            <MRT_ColumnPinningButtons column={column} instance={instance} />
           )}
           <FormControlLabel
             componentsProps={{
@@ -125,7 +122,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
           key={`${i}-${c.id}`}
           column={c}
           isSubMenu={isSubMenu}
-          tableInstance={tableInstance}
+          instance={instance}
         />
       ))}
     </>

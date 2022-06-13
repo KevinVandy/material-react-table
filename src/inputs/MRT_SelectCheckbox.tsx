@@ -5,14 +5,10 @@ import type { MRT_Row, MRT_TableInstance } from '..';
 interface Props {
   row?: MRT_Row;
   selectAll?: boolean;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_SelectCheckbox: FC<Props> = ({
-  row,
-  selectAll,
-  tableInstance,
-}) => {
+export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, instance }) => {
   const {
     getRowModel,
     getSelectedRowModel,
@@ -24,21 +20,21 @@ export const MRT_SelectCheckbox: FC<Props> = ({
       onMrtSelectAllChange,
       selectAllMode,
     },
-  } = tableInstance;
+  } = instance;
 
   const { isDensePadding } = getState();
 
   const handleSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (selectAll) {
       if (selectAllMode === 'all') {
-        tableInstance.getToggleAllRowsSelectedHandler()(event as any);
+        instance.getToggleAllRowsSelectedHandler()(event as any);
       } else if (selectAllMode === 'page') {
-        tableInstance.getToggleAllPageRowsSelectedHandler()(event as any);
+        instance.getToggleAllPageRowsSelectedHandler()(event as any);
       }
       onMrtSelectAllChange?.({
         event,
         selectedRows: event.target.checked ? getRowModel().flatRows : [],
-        tableInstance,
+        instance,
       });
     } else if (row) {
       row?.getToggleSelectedHandler()(event as any);
@@ -50,14 +46,14 @@ export const MRT_SelectCheckbox: FC<Props> = ({
           : getSelectedRowModel().flatRows.filter(
               (selectedRow) => selectedRow.id !== row.id,
             ),
-        tableInstance,
+        instance,
       });
     }
   };
 
   const checkboxProps =
     muiSelectCheckboxProps instanceof Function
-      ? muiSelectCheckboxProps({ isSelectAll: !!selectAll, row, tableInstance })
+      ? muiSelectCheckboxProps({ isSelectAll: !!selectAll, row, instance })
       : muiSelectCheckboxProps;
 
   return (
@@ -71,13 +67,11 @@ export const MRT_SelectCheckbox: FC<Props> = ({
     >
       <Checkbox
         checked={
-          selectAll
-            ? tableInstance.getIsAllRowsSelected()
-            : row?.getIsSelected()
+          selectAll ? instance.getIsAllRowsSelected() : row?.getIsSelected()
         }
         indeterminate={
           selectAll
-            ? tableInstance.getIsSomeRowsSelected()
+            ? instance.getIsSomeRowsSelected()
             : row?.getIsSomeSelected()
         }
         inputProps={{

@@ -14,7 +14,7 @@ interface Props {
   header: MRT_Header;
   isDragging?: boolean;
   previewRef?: Ref<HTMLTableCellElement>;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
 export const MRT_TableHeadCell: FC<Props> = ({
@@ -23,7 +23,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
   header,
   isDragging,
   previewRef,
-  tableInstance,
+  instance,
 }) => {
   const {
     getState,
@@ -35,7 +35,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
       enableGrouping,
       muiTableHeadCellProps,
     },
-  } = tableInstance;
+  } = instance;
 
   const { isDensePadding } = getState();
 
@@ -45,12 +45,12 @@ export const MRT_TableHeadCell: FC<Props> = ({
 
   const mTableHeadCellProps =
     muiTableHeadCellProps instanceof Function
-      ? muiTableHeadCellProps({ column, tableInstance })
+      ? muiTableHeadCellProps({ column, instance })
       : muiTableHeadCellProps;
 
   const mcTableHeadCellProps =
     columnDef.muiTableHeadCellProps instanceof Function
-      ? columnDef.muiTableHeadCellProps({ column, tableInstance })
+      ? columnDef.muiTableHeadCellProps({ column, instance })
       : columnDef.muiTableHeadCellProps;
 
   const tableCellProps = {
@@ -61,7 +61,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
   const headerElement = ((columnDef?.Header instanceof Function
     ? columnDef?.Header?.({
         header,
-        tableInstance,
+        instance,
       })
     : columnDef?.Header) ??
     header.renderHeader() ??
@@ -70,7 +70,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
   const getIsLastLeftPinnedColumn = () => {
     return (
       column.getIsPinned() === 'left' &&
-      tableInstance.getLeftLeafHeaders().length - 1 === column.getPinnedIndex()
+      instance.getLeftLeafHeaders().length - 1 === column.getPinnedIndex()
     );
   };
 
@@ -80,9 +80,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
 
   const getTotalRight = () => {
     return (
-      (tableInstance.getRightLeafHeaders().length -
-        1 -
-        column.getPinnedIndex()) *
+      (instance.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) *
       150
     );
   };
@@ -171,17 +169,14 @@ export const MRT_TableHeadCell: FC<Props> = ({
           >
             {headerElement}
             {columnDefType === 'data' && column.getCanSort() && (
-              <MRT_TableHeadCellSortLabel
-                header={header}
-                tableInstance={tableInstance}
-              />
+              <MRT_TableHeadCellSortLabel header={header} instance={instance} />
             )}
             {columnDefType === 'data' &&
               enableColumnFilters &&
               column.getCanFilter() && (
                 <MRT_TableHeadCellFilterLabel
                   header={header}
-                  tableInstance={tableInstance}
+                  instance={instance}
                 />
               )}
           </Box>
@@ -192,7 +187,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
                 (enableGrouping && columnDef.enableGrouping !== false)) && (
                 <MRT_GrabHandleButton
                   ref={dragRef as Ref<HTMLButtonElement>}
-                  tableInstance={tableInstance}
+                  instance={instance}
                 />
               )}
             {(enableColumnActions || columnDef.enableColumnActions) &&
@@ -200,23 +195,20 @@ export const MRT_TableHeadCell: FC<Props> = ({
               columnDefType !== 'group' && (
                 <MRT_ToggleColumnActionMenuButton
                   header={header}
-                  tableInstance={tableInstance}
+                  instance={instance}
                 />
               )}
           </Box>
           {column.getCanResize() && (
             <MRT_TableHeadCellResizeHandle
               header={header}
-              tableInstance={tableInstance}
+              instance={instance}
             />
           )}
         </Box>
       )}
       {columnDefType === 'data' && column.getCanFilter() && (
-        <MRT_TableHeadCellFilterContainer
-          header={header}
-          tableInstance={tableInstance}
-        />
+        <MRT_TableHeadCellFilterContainer header={header} instance={instance} />
       )}
     </TableCell>
   );

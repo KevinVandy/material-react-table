@@ -4,19 +4,16 @@ import type { MRT_Column, MRT_TableInstance } from '..';
 
 interface Props {
   column: MRT_Column;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_ColumnPinningButtons: FC<Props> = ({
-  column,
-  tableInstance,
-}) => {
+export const MRT_ColumnPinningButtons: FC<Props> = ({ column, instance }) => {
   const {
     options: {
       icons: { PushPinIcon },
       localization,
     },
-  } = tableInstance;
+  } = instance;
 
   const handlePinColumn = (pinDirection: 'left' | 'right' | false) => {
     column.pin(pinDirection);

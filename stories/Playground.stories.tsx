@@ -205,21 +205,21 @@ MaximumFeatures.args = {
       <ShareIcon /> Share
     </MenuItem>,
   ],
-  renderToolbarCustomActions: ({ tableInstance }) => {
+  renderToolbarCustomActions: ({ instance }) => {
     const handleDeactivate = () => {
-      tableInstance.getSelectedRowModel().rows.forEach((row) => {
+      instance.getSelectedRowModel().rows.forEach((row) => {
         console.log('deactivating ' + row.original);
       });
     };
 
     const handleActivate = () => {
-      tableInstance.getSelectedRowModel().rows.forEach((row) => {
+      instance.getSelectedRowModel().rows.forEach((row) => {
         console.log('activating ' + row.original);
       });
     };
 
     const handleContact = () => {
-      tableInstance.getSelectedRowModel().rows.forEach((row) => {
+      instance.getSelectedRowModel().rows.forEach((row) => {
         console.log('contact ' + row.original);
       });
     };
@@ -228,7 +228,7 @@ MaximumFeatures.args = {
       <div style={{ display: 'flex', gap: '0.5rem' }}>
         <Button
           color="error"
-          disabled={tableInstance.getSelectedRowModel().rows.length === 0}
+          disabled={instance.getSelectedRowModel().rows.length === 0}
           onClick={handleDeactivate}
           variant="contained"
         >
@@ -236,7 +236,7 @@ MaximumFeatures.args = {
         </Button>
         <Button
           color="success"
-          disabled={tableInstance.getSelectedRowModel().rows.length === 0}
+          disabled={instance.getSelectedRowModel().rows.length === 0}
           onClick={handleActivate}
           variant="contained"
         >
@@ -244,7 +244,7 @@ MaximumFeatures.args = {
         </Button>
         <Button
           color="info"
-          disabled={tableInstance.getSelectedRowModel().rows.length === 0}
+          disabled={instance.getSelectedRowModel().rows.length === 0}
           onClick={handleContact}
           variant="contained"
         >

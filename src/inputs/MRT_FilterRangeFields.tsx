@@ -5,21 +5,17 @@ import { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
   header: MRT_Header;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_FilterRangeFields: FC<Props> = ({ header, tableInstance }) => {
+export const MRT_FilterRangeFields: FC<Props> = ({ header, instance }) => {
   const {
     options: { localization },
-  } = tableInstance;
+  } = instance;
 
   return (
     <Box sx={{ display: 'grid', gridTemplateColumns: '6fr auto 5fr' }}>
-      <MRT_FilterTextField
-        header={header}
-        inputIndex={0}
-        tableInstance={tableInstance}
-      />
+      <MRT_FilterTextField header={header} inputIndex={0} instance={instance} />
       <Box
         sx={{
           width: '100%',
@@ -29,11 +25,7 @@ export const MRT_FilterRangeFields: FC<Props> = ({ header, tableInstance }) => {
       >
         {localization.to}
       </Box>
-      <MRT_FilterTextField
-        header={header}
-        inputIndex={1}
-        tableInstance={tableInstance}
-      />
+      <MRT_FilterTextField header={header} inputIndex={1} instance={instance} />
     </Box>
   );
 };

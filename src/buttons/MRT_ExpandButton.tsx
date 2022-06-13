@@ -4,10 +4,10 @@ import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
   row: MRT_Row;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_ExpandButton: FC<Props> = ({ row, tableInstance }) => {
+export const MRT_ExpandButton: FC<Props> = ({ row, instance }) => {
   const {
     getState,
     options: {
@@ -16,13 +16,13 @@ export const MRT_ExpandButton: FC<Props> = ({ row, tableInstance }) => {
       onMrtRowExpandChange,
       renderDetailPanel,
     },
-  } = tableInstance;
+  } = instance;
 
   const { isDensePadding } = getState();
 
   const handleToggleExpand = (event: MouseEvent<HTMLButtonElement>) => {
     row.toggleExpanded();
-    onMrtRowExpandChange?.({ event, row, tableInstance });
+    onMrtRowExpandChange?.({ event, row, instance });
   };
 
   return (

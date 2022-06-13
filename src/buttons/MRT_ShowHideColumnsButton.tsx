@@ -4,19 +4,16 @@ import { MRT_ShowHideColumnsMenu } from '../menus/MRT_ShowHideColumnsMenu';
 import { MRT_TableInstance } from '..';
 
 interface Props extends IconButtonProps {
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_ShowHideColumnsButton: FC<Props> = ({
-  tableInstance,
-  ...rest
-}) => {
+export const MRT_ShowHideColumnsButton: FC<Props> = ({ instance, ...rest }) => {
   const {
     options: {
       icons: { ViewColumnIcon },
       localization,
     },
-  } = tableInstance;
+  } = instance;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -38,7 +35,7 @@ export const MRT_ShowHideColumnsButton: FC<Props> = ({
       <MRT_ShowHideColumnsMenu
         anchorEl={anchorEl}
         setAnchorEl={setAnchorEl}
-        tableInstance={tableInstance}
+        instance={instance}
       />
     </>
   );

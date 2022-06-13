@@ -17,10 +17,10 @@ import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 import { MRT_TableInstance } from '..';
 
 interface Props {
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
+export const MRT_SearchTextField: FC<Props> = ({ instance }) => {
   const {
     getState,
     setGlobalFilter,
@@ -31,7 +31,7 @@ export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
       muiSearchTextFieldProps,
       onMrtGlobalFilterValueChange,
     },
-  } = tableInstance;
+  } = instance;
 
   const { globalFilter, showGlobalFilter } = getState();
 
@@ -41,7 +41,7 @@ export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
   const handleChange = useCallback(
     debounce((event: ChangeEvent<HTMLInputElement>) => {
       setGlobalFilter(event.target.value ?? undefined);
-      onMrtGlobalFilterValueChange?.({ event, tableInstance });
+      onMrtGlobalFilterValueChange?.({ event, instance });
     }, 200),
     [],
   );
@@ -57,7 +57,7 @@ export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
 
   const textFieldProps =
     muiSearchTextFieldProps instanceof Function
-      ? muiSearchTextFieldProps({ tableInstance })
+      ? muiSearchTextFieldProps({ instance })
       : muiSearchTextFieldProps;
 
   return (
@@ -108,7 +108,7 @@ export const MRT_SearchTextField: FC<Props> = ({ tableInstance }) => {
       <MRT_FilterOptionMenu
         anchorEl={anchorEl}
         setAnchorEl={setAnchorEl}
-        tableInstance={tableInstance}
+        instance={instance}
       />
     </Collapse>
   );

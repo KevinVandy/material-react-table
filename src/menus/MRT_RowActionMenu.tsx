@@ -11,7 +11,7 @@ interface Props {
   handleEdit: () => void;
   row: MRT_Row;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
 export const MRT_RowActionMenu: FC<Props> = ({
@@ -19,7 +19,7 @@ export const MRT_RowActionMenu: FC<Props> = ({
   handleEdit,
   row,
   setAnchorEl,
-  tableInstance,
+  instance,
 }) => {
   const {
     getState,
@@ -29,7 +29,7 @@ export const MRT_RowActionMenu: FC<Props> = ({
       localization,
       renderRowActionMenuItems,
     },
-  } = tableInstance;
+  } = instance;
 
   const { isDensePadding } = getState();
 
@@ -54,7 +54,7 @@ export const MRT_RowActionMenu: FC<Props> = ({
       )}
       {renderRowActionMenuItems?.({
         row,
-        tableInstance,
+        instance,
         closeMenu: () => setAnchorEl(null),
       })}
     </Menu>

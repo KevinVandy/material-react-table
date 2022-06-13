@@ -4,14 +4,14 @@ import { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
   header: MRT_Header;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
 export const MRT_TableHeadCellResizeHandle: FC<Props> = ({
   header,
-  tableInstance,
+  instance,
 }) => {
-  const { getState } = tableInstance;
+  const { getState } = instance;
 
   const { showFilters } = getState();
 

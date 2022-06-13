@@ -20,10 +20,10 @@ export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
 });
 
 interface Props {
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_ToolbarTop: FC<Props> = ({ tableInstance }) => {
+export const MRT_ToolbarTop: FC<Props> = ({ instance }) => {
   const {
     getState,
     options: {
@@ -38,7 +38,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ tableInstance }) => {
       positionToolbarAlertBanner,
       renderToolbarCustomActions,
     },
-  } = tableInstance;
+  } = instance;
 
   const { isFullScreen, showGlobalFilter } = getState();
 
@@ -46,7 +46,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ tableInstance }) => {
 
   const toolbarProps =
     muiTableToolbarTopProps instanceof Function
-      ? muiTableToolbarTopProps({ tableInstance })
+      ? muiTableToolbarTopProps({ instance })
       : muiTableToolbarTopProps;
 
   const stackAlertBanner =
@@ -71,7 +71,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ tableInstance }) => {
       {positionToolbarAlertBanner === 'top' && (
         <MRT_ToolbarAlertBanner
           stackAlertBanner={stackAlertBanner}
-          tableInstance={tableInstance}
+          instance={instance}
         />
       )}
       <Box
@@ -87,20 +87,20 @@ export const MRT_ToolbarTop: FC<Props> = ({ tableInstance }) => {
         }}
       >
         {enableGlobalFilter && positionGlobalFilter === 'left' && (
-          <MRT_SearchTextField tableInstance={tableInstance} />
+          <MRT_SearchTextField instance={instance} />
         )}
-        {renderToolbarCustomActions?.({ tableInstance }) ?? <span />}
+        {renderToolbarCustomActions?.({ instance }) ?? <span />}
         {enableToolbarInternalActions && positionToolbarActions === 'top' && (
-          <MRT_ToolbarInternalButtons tableInstance={tableInstance} />
+          <MRT_ToolbarInternalButtons instance={instance} />
         )}
       </Box>
       <div>
         {enablePagination &&
           ['top', 'both'].includes(positionPagination ?? '') && (
-            <MRT_TablePagination tableInstance={tableInstance} />
+            <MRT_TablePagination instance={instance} />
           )}
       </div>
-      <MRT_LinearProgressBar alignTo="bottom" tableInstance={tableInstance} />
+      <MRT_LinearProgressBar alignTo="bottom" instance={instance} />
     </Toolbar>
   );
 };

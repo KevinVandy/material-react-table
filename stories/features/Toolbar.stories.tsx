@@ -106,12 +106,12 @@ export const CustomToolbarInternalActions: Story<
     enableRowSelection
     enableGrouping
     renderToolbarInternalActions={({
-      tableInstance,
+      instance,
       MRT_FullScreenToggleButton,
     }) => {
       return (
         <>
-          <MRT_FullScreenToggleButton tableInstance={tableInstance} />
+          <MRT_FullScreenToggleButton instance={instance} />
         </>
       );
     }}
@@ -123,7 +123,7 @@ export const TableTitle: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableRowSelection
-    renderToolbarCustomActions={(tableInstance) => {
+    renderToolbarCustomActions={(instance) => {
       return <Typography variant="h4">Table Title</Typography>;
     }}
   />
@@ -134,7 +134,7 @@ export const CustomToolbarActions: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableRowSelection
-    renderToolbarCustomActions={(tableInstance) => {
+    renderToolbarCustomActions={(instance) => {
       const handleCreateNewUser = () => {
         prompt('Create new user modal');
       };
@@ -159,21 +159,21 @@ export const CustomToolbarSelectionActions: Story<
     columns={columns}
     data={data}
     enableRowSelection
-    renderToolbarCustomActions={({ tableInstance }) => {
+    renderToolbarCustomActions={({ instance }) => {
       const handleDeactivate = () => {
-        tableInstance.getSelectedRowModel().flatRows.map((row) => {
+        instance.getSelectedRowModel().flatRows.map((row) => {
           alert('deactivating ' + row.original.firstName);
         });
       };
 
       const handleActivate = () => {
-        tableInstance.getSelectedRowModel().flatRows.map((row) => {
+        instance.getSelectedRowModel().flatRows.map((row) => {
           alert('activating ' + row.original.firstName);
         });
       };
 
       const handleContact = () => {
-        tableInstance.getSelectedRowModel().flatRows.map((row) => {
+        instance.getSelectedRowModel().flatRows.map((row) => {
           alert('contact ' + row.original.firstName);
         });
       };
@@ -182,7 +182,7 @@ export const CustomToolbarSelectionActions: Story<
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           <Button
             color="error"
-            disabled={tableInstance.getSelectedRowModel().flatRows.length === 0}
+            disabled={instance.getSelectedRowModel().flatRows.length === 0}
             onClick={handleDeactivate}
             variant="contained"
           >
@@ -190,7 +190,7 @@ export const CustomToolbarSelectionActions: Story<
           </Button>
           <Button
             color="success"
-            disabled={tableInstance.getSelectedRowModel().flatRows.length === 0}
+            disabled={instance.getSelectedRowModel().flatRows.length === 0}
             onClick={handleActivate}
             variant="contained"
           >
@@ -198,7 +198,7 @@ export const CustomToolbarSelectionActions: Story<
           </Button>
           <Button
             color="info"
-            disabled={tableInstance.getSelectedRowModel().flatRows.length === 0}
+            disabled={instance.getSelectedRowModel().flatRows.length === 0}
             onClick={handleContact}
             variant="contained"
           >
@@ -216,7 +216,7 @@ export const ToolbarAlertBannerBottom: Story<MaterialReactTableProps> = () => (
     data={data}
     enableRowSelection
     positionToolbarAlertBanner="bottom"
-    renderToolbarCustomActions={({ tableInstance }) => {
+    renderToolbarCustomActions={({ instance }) => {
       const handleCreateNewUser = () => {
         prompt('Create new user modal');
       };
@@ -234,9 +234,7 @@ export const ToolbarAlertBannerBottom: Story<MaterialReactTableProps> = () => (
           <Tooltip arrow title="Remove Users">
             <span>
               <IconButton
-                disabled={
-                  tableInstance.getSelectedRowModel().flatRows.length === 0
-                }
+                disabled={instance.getSelectedRowModel().flatRows.length === 0}
                 onClick={handleRemoveUsers}
               >
                 <DeleteIcon />

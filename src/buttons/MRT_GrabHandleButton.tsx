@@ -4,17 +4,17 @@ import { MRT_TableInstance } from '..';
 
 interface Props {
   ref: Ref<HTMLButtonElement>;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
 export const MRT_GrabHandleButton: FC<Props> = forwardRef(
-  ({ tableInstance }, ref) => {
+  ({ instance }, ref) => {
     const {
       options: {
         icons: { DragHandleIcon },
         localization,
       },
-    } = tableInstance;
+    } = instance;
 
     return (
       <Tooltip

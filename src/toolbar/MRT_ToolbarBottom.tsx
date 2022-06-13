@@ -8,10 +8,10 @@ import { commonToolbarStyles } from './MRT_ToolbarTop';
 import { MRT_TableInstance } from '..';
 
 interface Props {
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_ToolbarBottom: FC<Props> = ({ tableInstance }) => {
+export const MRT_ToolbarBottom: FC<Props> = ({ instance }) => {
   const {
     getState,
     options: {
@@ -24,7 +24,7 @@ export const MRT_ToolbarBottom: FC<Props> = ({ tableInstance }) => {
       positionToolbarAlertBanner,
       renderToolbarCustomActions,
     },
-  } = tableInstance;
+  } = instance;
 
   const { isFullScreen } = getState();
 
@@ -32,7 +32,7 @@ export const MRT_ToolbarBottom: FC<Props> = ({ tableInstance }) => {
 
   const toolbarProps =
     muiTableToolbarBottomProps instanceof Function
-      ? muiTableToolbarBottomProps({ tableInstance })
+      ? muiTableToolbarBottomProps({ instance })
       : muiTableToolbarBottomProps;
 
   const stackAlertBanner =
@@ -58,9 +58,9 @@ export const MRT_ToolbarBottom: FC<Props> = ({ tableInstance }) => {
         } as any)
       }
     >
-      <MRT_LinearProgressBar alignTo="top" tableInstance={tableInstance} />
+      <MRT_LinearProgressBar alignTo="top" instance={instance} />
       {positionToolbarAlertBanner === 'bottom' && (
-        <MRT_ToolbarAlertBanner tableInstance={tableInstance} />
+        <MRT_ToolbarAlertBanner instance={instance} />
       )}
       <Box
         sx={{
@@ -73,13 +73,13 @@ export const MRT_ToolbarBottom: FC<Props> = ({ tableInstance }) => {
         }}
       >
         {enableToolbarInternalActions && positionToolbarActions === 'bottom' ? (
-          <MRT_ToolbarInternalButtons tableInstance={tableInstance} />
+          <MRT_ToolbarInternalButtons instance={instance} />
         ) : (
           <span />
         )}
         {enablePagination &&
           ['bottom', 'both'].includes(positionPagination ?? '') && (
-            <MRT_TablePagination tableInstance={tableInstance} />
+            <MRT_TablePagination instance={instance} />
           )}
       </Box>
     </Toolbar>

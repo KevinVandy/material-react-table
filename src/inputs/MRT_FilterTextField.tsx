@@ -21,13 +21,13 @@ import type { MRT_Header, MRT_TableInstance } from '..';
 interface Props {
   header: MRT_Header;
   inputIndex?: number;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
 export const MRT_FilterTextField: FC<Props> = ({
   header,
   inputIndex,
-  tableInstance,
+  instance,
 }) => {
   const {
     getState,
@@ -38,7 +38,7 @@ export const MRT_FilterTextField: FC<Props> = ({
       muiTableHeadCellFilterTextFieldProps,
     },
     setCurrentFilterFns,
-  } = tableInstance;
+  } = instance;
 
   const { column } = header;
 
@@ -50,14 +50,14 @@ export const MRT_FilterTextField: FC<Props> = ({
 
   const mTableHeadCellFilterTextFieldProps =
     muiTableHeadCellFilterTextFieldProps instanceof Function
-      ? muiTableHeadCellFilterTextFieldProps({ column, tableInstance })
+      ? muiTableHeadCellFilterTextFieldProps({ column, instance })
       : muiTableHeadCellFilterTextFieldProps;
 
   const mcTableHeadCellFilterTextFieldProps =
     columnDef.muiTableHeadCellFilterTextFieldProps instanceof Function
       ? columnDef.muiTableHeadCellFilterTextFieldProps({
           column,
-          tableInstance,
+          instance,
         })
       : columnDef.muiTableHeadCellFilterTextFieldProps;
 
@@ -114,7 +114,7 @@ export const MRT_FilterTextField: FC<Props> = ({
   };
 
   if (columnDef.Filter) {
-    return <>{columnDef.Filter?.({ header, tableInstance })}</>;
+    return <>{columnDef.Filter?.({ header, instance })}</>;
   }
 
   const filterId = `mrt-${tableId}-${header.id}-filter-text-field${
@@ -288,7 +288,7 @@ export const MRT_FilterTextField: FC<Props> = ({
         anchorEl={anchorEl}
         header={header}
         setAnchorEl={setAnchorEl}
-        tableInstance={tableInstance}
+        instance={instance}
       />
     </>
   );

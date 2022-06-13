@@ -4,10 +4,10 @@ import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
   row: MRT_Row;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_TableDetailPanel: FC<Props> = ({ row, tableInstance }) => {
+export const MRT_TableDetailPanel: FC<Props> = ({ row, instance }) => {
   const {
     getVisibleLeafColumns,
     options: {
@@ -16,16 +16,16 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, tableInstance }) => {
       onMrtDetailPanelClick,
       renderDetailPanel,
     },
-  } = tableInstance;
+  } = instance;
 
   const tableRowProps =
     muiTableBodyRowProps instanceof Function
-      ? muiTableBodyRowProps({ row, tableInstance })
+      ? muiTableBodyRowProps({ row, instance })
       : muiTableBodyRowProps;
 
   const tableCellProps =
     muiTableDetailPanelProps instanceof Function
-      ? muiTableDetailPanelProps({ row, tableInstance })
+      ? muiTableDetailPanelProps({ row, instance })
       : muiTableDetailPanelProps;
 
   return (
@@ -33,7 +33,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, tableInstance }) => {
       <TableCell
         colSpan={getVisibleLeafColumns().length}
         onClick={(event: MouseEvent<HTMLTableCellElement>) =>
-          onMrtDetailPanelClick?.({ event, row, tableInstance })
+          onMrtDetailPanelClick?.({ event, row, instance })
         }
         {...tableCellProps}
         sx={{
@@ -41,13 +41,15 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, tableInstance }) => {
           pb: row.getIsExpanded() ? '1rem' : 0,
           pt: row.getIsExpanded() ? '1rem' : 0,
           transition: 'all 0.2s ease-in-out',
-          width: `${tableInstance.getTotalSize()}px`,
+          width: `${instance.getTotalSize()}px`,
           ...tableCellProps?.sx,
         }}
       >
-        <Collapse in={row.getIsExpanded()}>
-          {renderDetailPanel?.({ row, tableInstance })}
-        </Collapse>
+        {renderDetailPanel && (
+          <Collapse in={row.getIsExpanded()}>
+            {renderDetailPanel({ row, instance })}
+          </Collapse>
+        )}
       </TableCell>
     </TableRow>
   );

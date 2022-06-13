@@ -31,7 +31,7 @@ interface Props {
   header?: MRT_Header;
   onSelect?: () => void;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
 export const MRT_FilterOptionMenu: FC<Props> = ({
@@ -39,14 +39,14 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
   header,
   onSelect,
   setAnchorEl,
-  tableInstance,
+  instance,
 }) => {
   const {
     getState,
     options: { enabledGlobalFilterOptions, localization },
     setCurrentFilterFns,
     setCurrentGlobalFilterFn,
-  } = tableInstance;
+  } = instance;
 
   const { isDensePadding, currentFilterFns, currentGlobalFilterFn } =
     getState();

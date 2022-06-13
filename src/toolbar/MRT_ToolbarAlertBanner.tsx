@@ -4,25 +4,25 @@ import { MRT_TableInstance } from '..';
 
 interface Props {
   stackAlertBanner?: boolean;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
 export const MRT_ToolbarAlertBanner: FC<Props> = ({
   stackAlertBanner,
-  tableInstance,
+  instance,
 }) => {
   const {
     getPrePaginationRowModel,
     getSelectedRowModel,
     getState,
     options: { localization, muiTableToolbarAlertBannerProps },
-  } = tableInstance;
+  } = instance;
 
   const { grouping } = getState();
 
   const alertProps =
     muiTableToolbarAlertBannerProps instanceof Function
-      ? muiTableToolbarAlertBannerProps({ tableInstance })
+      ? muiTableToolbarAlertBannerProps({ instance })
       : muiTableToolbarAlertBannerProps;
 
   const selectMessage =
@@ -47,10 +47,8 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({
             {index > 0 ? localization.thenBy : ''}
             <Chip
               color="secondary"
-              label={tableInstance.getColumn(columnId).columnDef.header}
-              onDelete={() =>
-                tableInstance.getColumn(columnId).toggleGrouping()
-              }
+              label={instance.getColumn(columnId).columnDef.header}
+              onDelete={() => instance.getColumn(columnId).toggleGrouping()}
             />
           </Fragment>
         ))}

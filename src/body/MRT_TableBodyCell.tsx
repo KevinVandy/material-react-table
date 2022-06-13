@@ -10,14 +10,14 @@ interface Props {
   cell: MRT_Cell;
   enableHover?: boolean;
   rowIndex: number;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
 export const MRT_TableBodyCell: FC<Props> = ({
   cell,
   enableHover,
   rowIndex,
-  tableInstance,
+  instance,
 }) => {
   const {
     getState,
@@ -35,7 +35,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
     },
     setColumnOrder,
     setCurrentEditingCell,
-  } = tableInstance;
+  } = instance;
 
   const {
     columnOrder,
@@ -58,12 +58,12 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   const mTableCellBodyProps =
     muiTableBodyCellProps instanceof Function
-      ? muiTableBodyCellProps({ cell, tableInstance })
+      ? muiTableBodyCellProps({ cell, instance })
       : muiTableBodyCellProps;
 
   const mcTableCellBodyProps =
     columnDef.muiTableBodyCellProps instanceof Function
-      ? columnDef.muiTableBodyCellProps({ cell, tableInstance })
+      ? columnDef.muiTableBodyCellProps({ cell, instance })
       : columnDef.muiTableBodyCellProps;
 
   const tableCellProps = {
@@ -112,7 +112,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
   const getIsLastLeftPinnedColumn = () => {
     return (
       column.getIsPinned() === 'left' &&
-      tableInstance.getLeftLeafHeaders().length - 1 === column.getPinnedIndex()
+      instance.getLeftLeafHeaders().length - 1 === column.getPinnedIndex()
     );
   };
 
@@ -122,9 +122,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   const getTotalRight = () => {
     return (
-      (tableInstance.getRightLeafHeaders().length -
-        1 -
-        column.getPinnedIndex()) *
+      (instance.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) *
       150
     );
   };
@@ -132,7 +130,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
   return (
     <TableCell
       onClick={(event: MouseEvent<HTMLTableCellElement>) =>
-        onMrtCellClick?.({ event, cell, tableInstance })
+        onMrtCellClick?.({ event, cell, instance })
       }
       onDoubleClick={handleDoubleClick}
       {...tableCellProps}
@@ -202,28 +200,26 @@ export const MRT_TableBodyCell: FC<Props> = ({
           column.id === 'mrt-row-numbers' ? (
           rowIndex + 1
         ) : columnDefType === 'display' ? (
-          columnDef.Cell?.({ cell, tableInstance })
+          columnDef.Cell?.({ cell, instance })
         ) : cell.getIsPlaceholder() ||
           (row.getIsGrouped() &&
             column.id !==
               row.groupingColumnId) ? null : cell.getIsAggregated() ? (
+          columnDef.AggregatedCell?.({ cell, instance }) ??
           cell.renderAggregatedCell()
         ) : isEditing ? (
-          <MRT_EditCellTextField cell={cell} tableInstance={tableInstance} />
+          <MRT_EditCellTextField cell={cell} instance={instance} />
         ) : (enableClickToCopy || columnDef.enableClickToCopy) &&
           columnDef.enableClickToCopy !== false ? (
           <>
-            <MRT_CopyButton cell={cell} tableInstance={tableInstance}>
-              <>
-                {columnDef?.Cell?.({ cell, tableInstance }) ??
-                  cell.renderCell()}
-              </>
+            <MRT_CopyButton cell={cell} instance={instance}>
+              <>{columnDef?.Cell?.({ cell, instance }) ?? cell.renderCell()}</>
             </MRT_CopyButton>
             {row.getIsGrouped() && <> ({row.subRows?.length})</>}
           </>
         ) : (
           <>
-            {columnDef?.Cell?.({ cell, tableInstance }) ?? cell.renderCell()}
+            {columnDef?.Cell?.({ cell, instance }) ?? cell.renderCell()}
             {row.getIsGrouped() && <> ({row.subRows?.length ?? ''})</>}
           </>
         )}

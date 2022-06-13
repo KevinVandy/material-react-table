@@ -3,10 +3,10 @@ import { IconButton, Tooltip } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
 interface Props {
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
-export const MRT_ExpandAllButton: FC<Props> = ({ tableInstance }) => {
+export const MRT_ExpandAllButton: FC<Props> = ({ instance }) => {
   const {
     getIsAllRowsExpanded,
     getIsSomeRowsExpanded,
@@ -18,7 +18,7 @@ export const MRT_ExpandAllButton: FC<Props> = ({ tableInstance }) => {
       renderDetailPanel,
     },
     toggleAllRowsExpanded,
-  } = tableInstance;
+  } = instance;
 
   const { isDensePadding } = getState();
 

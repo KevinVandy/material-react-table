@@ -23,12 +23,12 @@ const RootPropTable = () => {
             ),
         },
         { header: 'Type', id: 'type', enableGlobalFilter: false },
+        { header: 'Required', id: 'required', enableGlobalFilter: false },
         {
           header: 'Default Value',
           id: 'defaultValue',
           enableGlobalFilter: false,
         },
-
         {
           header: 'More Info Links',
           id: 'link',
@@ -56,12 +56,13 @@ const RootPropTable = () => {
       enableRowNumbers
       enableToolbarBottom={false}
       initialState={{
-        columnVisibility: {
-          required: false,
-        },
+        columnVisibility: { required: false },
         isDensePadding: true,
         showGlobalFilter: true,
-        sorting: [{ id: 'propName', desc: false }],
+        sorting: [
+          { id: 'required', desc: true },
+          { id: 'propName', desc: false },
+        ],
         columnPinning: { left: ['mrt-row-numbers', 'propName'], right: [] },
       }}
       muiSearchTextFieldProps={{

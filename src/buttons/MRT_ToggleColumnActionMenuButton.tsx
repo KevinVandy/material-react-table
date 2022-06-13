@@ -5,12 +5,12 @@ import type { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
   header: MRT_Header;
-  tableInstance: MRT_TableInstance;
+  instance: MRT_TableInstance;
 }
 
 export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({
   header,
-  tableInstance,
+  instance,
 }) => {
   const {
     options: {
@@ -18,7 +18,7 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({
       localization,
       muiTableHeadCellColumnActionsButtonProps,
     },
-  } = tableInstance;
+  } = instance;
 
   const { column } = header;
 
@@ -34,14 +34,14 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({
 
   const mTableHeadCellColumnActionsButtonProps =
     muiTableHeadCellColumnActionsButtonProps instanceof Function
-      ? muiTableHeadCellColumnActionsButtonProps({ column, tableInstance })
+      ? muiTableHeadCellColumnActionsButtonProps({ column, instance })
       : muiTableHeadCellColumnActionsButtonProps;
 
   const mcTableHeadCellColumnActionsButtonProps =
     columnDef.muiTableHeadCellColumnActionsButtonProps instanceof Function
       ? columnDef.muiTableHeadCellColumnActionsButtonProps({
           column,
-          tableInstance,
+          instance,
         })
       : columnDef.muiTableHeadCellColumnActionsButtonProps;
 
@@ -84,7 +84,7 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({
         anchorEl={anchorEl}
         header={header}
         setAnchorEl={setAnchorEl}
-        tableInstance={tableInstance}
+        instance={instance}
       />
     </>
   );
