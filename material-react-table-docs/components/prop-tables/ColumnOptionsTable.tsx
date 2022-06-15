@@ -42,7 +42,6 @@ const ColumnOptionsTable = () => {
         },
         { header: 'Description', id: 'description', enableGlobalFilter: false },
         { header: 'Source', id: 'source', enableGlobalFilter: false },
-        {},
       ] as MRT_ColumnDef<ColumnOption>[],
     [theme],
   );
