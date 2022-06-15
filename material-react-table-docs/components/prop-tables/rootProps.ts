@@ -7,7 +7,7 @@ export type PropRow = {
   linkText?: string;
   propName: keyof MaterialReactTableProps;
   required?: boolean;
-  source?: 'MRT' | 'TanStack Table' | 'MUI' | '';
+  source?: 'MRT' | 'TanStack Table' | 'Material UI' | '';
   type?: string;
 };
 
@@ -1213,7 +1213,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onMrtCellClick',
+    propName: 'onHandleCellClick',
     defaultValue: '',
     description: '',
     link: '',
@@ -1223,7 +1223,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onMrtCellEditBlur',
+    propName: 'onHandleCellEditBlur',
     defaultValue: '',
     description: '',
     link: '',
@@ -1233,7 +1233,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onMrtCellEditChange',
+    propName: 'onHandleCellEditChange',
     defaultValue: '',
     description: '',
     link: '',
@@ -1243,7 +1243,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onMrtDetailPanelClick',
+    propName: 'onHandleDetailPanelClick',
     defaultValue: '',
     description: '',
     link: '',
@@ -1253,7 +1253,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onMrtEditRowSubmit',
+    propName: 'onHandleEditRowSubmit',
     defaultValue: '',
     description: '',
     link: '',
@@ -1263,7 +1263,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onMrtFilterValueChange',
+    propName: 'onHandleFilterValueChange',
     defaultValue: '',
     description: '',
     link: '',
@@ -1273,7 +1273,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onMrtGlobalFilterValueChange',
+    propName: 'onHandleGlobalFilterValueChange',
     defaultValue: '',
     description: '',
     link: '',
@@ -1283,7 +1283,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onMrtRowClick',
+    propName: 'onHandleRowClick',
     defaultValue: '',
     description: '',
     link: '',
@@ -1293,7 +1293,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onMrtRowExpandChange',
+    propName: 'onHandleRowExpandChange',
     defaultValue: '',
     description: '',
     link: '',
@@ -1303,7 +1303,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onMrtSelectAllChange',
+    propName: 'onHandleSelectAllChange',
     defaultValue: '',
     description: '',
     link: '',
@@ -1313,7 +1313,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onMrtSelectRowChange',
+    propName: 'onHandleSelectRowChange',
     defaultValue: '',
     description: '',
     link: '',
@@ -1323,7 +1323,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onMrtToggleColumnVisibility',
+    propName: 'onHandleToggleColumnVisibility',
     defaultValue: '',
     description: '',
     link: '',
@@ -1333,7 +1333,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onMrtToggleDensePadding',
+    propName: 'onHandleToggleDensePadding',
     defaultValue: '',
     description: '',
     link: '',
@@ -1343,7 +1343,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onMrtToggleFullScreen',
+    propName: 'onHandleToggleFullScreen',
     defaultValue: '',
     description: '',
     link: '',
@@ -1353,7 +1353,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onMrtToggleShowFilters',
+    propName: 'onHandleToggleShowFilters',
     defaultValue: '',
     description: '',
     link: '',
@@ -1363,7 +1363,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onMrtToggleShowGlobalFilter',
+    propName: 'onHandleToggleShowGlobalFilter',
     defaultValue: '',
     description: '',
     link: '',

@@ -91,7 +91,7 @@ const Example = () => {
         color: 'secondary',
         disabled: !isSelectAll && row?.getValue('age') < 21,
       })}
-      onMrtSelectRowChange={({ event, row, selectedRows }) => {
+      onHandleSelectRowChange={({ event, row, selectedRows }) => {
         console.log({ event, row, selectedRows });
       }}
     />

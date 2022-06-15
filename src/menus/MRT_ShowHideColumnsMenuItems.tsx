@@ -21,7 +21,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
 }) => {
   const {
     getState,
-    options: { enableColumnOrdering, onMrtToggleColumnVisibility },
+    options: { enableColumnOrdering, onHandleToggleColumnVisibility },
     setColumnOrder,
   } = instance;
 
@@ -56,7 +56,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
     } else {
       column.toggleVisibility();
     }
-    onMrtToggleColumnVisibility?.({
+    onHandleToggleColumnVisibility?.({
       column,
       columnVisibility,
       instance,

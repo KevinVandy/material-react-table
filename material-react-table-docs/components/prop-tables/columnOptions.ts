@@ -7,7 +7,7 @@ export type ColumnOption = {
   link?: string;
   linkText?: string;
   required?: boolean;
-  source?: 'MRT' | 'TanStack Table' | 'MUI' | '';
+  source?: 'MRT' | 'TanStack Table' | 'Material UI' | '';
   type?: string;
 };
 
@@ -305,12 +305,92 @@ export const columnOptions: ColumnOption[] = [
   },
   {
     columnOption: 'minSize',
-    defaultValue: 'number',
+    defaultValue: '30',
     description: '',
     link: '',
     linkText: '',
     source: 'TanStack Table',
     required: false,
-    type: 'any',
+    type: 'number',
+  },
+  {
+    columnOption: 'muiTableBodyCellCopyButtonProps',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    source: 'Material UI',
+    required: false,
+    type: 'ButtonProps | ({ instance, cell }) => ButtonProps',
+  },
+  {
+    columnOption: 'muiTableBodyCellEditTextFieldProps',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    source: 'Material UI',
+    required: false,
+    type: 'TextFieldProps | ({ instance, cell }) => TextFieldProps',
+  },
+  {
+    columnOption: 'muiTableBodyCellProps',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    source: 'Material UI',
+    required: false,
+    type: 'TableCellProps | ({ instance, cell }) => TableCellProps',
+  },
+  {
+    columnOption: 'muiTableFooterCellProps',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    source: 'Material UI',
+    required: false,
+    type: 'TableCellProps | ({ instance, column }) => TableCellProps',
+  },
+  {
+    columnOption: 'muiTableHeadCellColumnActionsButtonProps',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    source: 'Material UI',
+    required: false,
+    type: 'IconButtonProps | ({ instance, column }) => IconButtonProps',
+  },
+  {
+    columnOption: 'muiTableHeadCellFilterTextFieldProps',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    source: 'Material UI',
+    required: false,
+    type: 'TextFieldProps | ({ instance, column }) => TextFieldProps',
+  },
+  {
+    columnOption: 'muiTableHeadCellProps',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    source: 'Material UI',
+    required: false,
+    type: 'TextFieldProps | ({ instance, column }) => TextFieldProps',
+  },
+  {
+    columnOption: 'onHandleCellEditBlur',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    source: 'MRT',
+    required: false,
+    type: '({ cell, event, instance }) => void',
   },
 ];

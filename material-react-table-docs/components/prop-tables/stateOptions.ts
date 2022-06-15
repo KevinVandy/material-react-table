@@ -5,7 +5,7 @@ export type StateRow = {
   description?: string;
   link?: string;
   linkText?: string;
-  source?: 'MRT' | 'TanStack Table' | 'MUI' | '';
+  source?: 'MRT' | 'TanStack Table' | 'Material UI' | '';
   stateName: keyof MRT_TableState;
   type?: string;
 };

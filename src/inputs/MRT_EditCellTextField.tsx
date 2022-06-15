@@ -20,8 +20,8 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, instance }) => {
       tableId,
       enableEditing,
       muiTableBodyCellEditTextFieldProps,
-      onMrtCellEditBlur,
-      onMrtCellEditChange,
+      onHandleCellEditBlur,
+      onHandleCellEditChange,
     },
     setCurrentEditingCell,
     setCurrentEditingRow,
@@ -35,8 +35,8 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, instance }) => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
-    columnDef.onMrtCellEditChange?.({ event, cell, instance });
-    onMrtCellEditChange?.({ event, cell, instance });
+    columnDef.onHandleCellEditChange?.({ event, cell, instance });
+    onHandleCellEditChange?.({ event, cell, instance });
   };
 
   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
@@ -46,8 +46,8 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, instance }) => {
       setCurrentEditingRow({ ...getState().currentEditingRow } as MRT_Row);
     }
     setCurrentEditingCell(null);
-    columnDef.onMrtCellEditBlur?.({ event, cell, instance });
-    onMrtCellEditBlur?.({ event, cell, instance });
+    columnDef.onHandleCellEditBlur?.({ event, cell, instance });
+    onHandleCellEditBlur?.({ event, cell, instance });
   };
 
   const mTableBodyCellEditTextFieldProps =

@@ -29,7 +29,7 @@ export const MRT_SearchTextField: FC<Props> = ({ instance }) => {
       tableId,
       localization,
       muiSearchTextFieldProps,
-      onMrtGlobalFilterValueChange,
+      onHandleGlobalFilterValueChange,
     },
   } = instance;
 
@@ -41,7 +41,7 @@ export const MRT_SearchTextField: FC<Props> = ({ instance }) => {
   const handleChange = useCallback(
     debounce((event: ChangeEvent<HTMLInputElement>) => {
       setGlobalFilter(event.target.value ?? undefined);
-      onMrtGlobalFilterValueChange?.({ event, instance });
+      onHandleGlobalFilterValueChange?.({ event, instance });
     }, 200),
     [],
   );

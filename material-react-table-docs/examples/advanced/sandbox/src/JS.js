@@ -103,7 +103,7 @@ const Example = () => {
       enablePinning
       enableRowActions
       enableRowSelection
-      onMrtEditRowSubmit={handleSaveRow}
+      onHandleEditRowSubmit={handleSaveRow}
       renderDetailPanel={({ row }) => (
         <div
           style={{

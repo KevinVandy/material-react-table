@@ -55,7 +55,7 @@ export const EditingEnabledEditModeRowDefault: Story<
       ]}
       data={tableData}
       enableEditing
-      onMrtEditRowSubmit={handleSaveRow}
+      onHandleEditRowSubmit={handleSaveRow}
     />
   );
 };
@@ -98,7 +98,7 @@ export const EditingEnabledEditModeCell: Story<
       data={tableData}
       editingMode="cell"
       enableEditing
-      onMrtCellEditBlur={handleSaveCell}
+      onHandleCellEditBlur={handleSaveCell}
     />
   );
 };
@@ -141,7 +141,7 @@ export const EditingEnabledEditModeTable: Story<
       data={tableData}
       editingMode="table"
       enableEditing
-      onMrtCellEditBlur={handleSaveCell}
+      onHandleCellEditBlur={handleSaveCell}
     />
   );
 };
@@ -247,7 +247,7 @@ export const EditingCustomizeInput: Story<MaterialReactTableProps> = () => {
       enableRowActions
       enableEditing
       muiTableBodyCellEditTextFieldProps={{ variant: 'outlined' }}
-      onMrtEditRowSubmit={handleSaveRow}
+      onHandleEditRowSubmit={handleSaveRow}
     />
   );
 };
@@ -292,7 +292,7 @@ export const EditingWithValidation: Story<MaterialReactTableProps> = () => {
             error: !!firstNameError,
             helperText: firstNameError,
           },
-          onMrtCellEditChange: ({ event }) => {
+          onHandleCellEditChange: ({ event }) => {
             setFirstNameError(validateFirstName(event.target.value));
           },
         },
@@ -303,7 +303,7 @@ export const EditingWithValidation: Story<MaterialReactTableProps> = () => {
             error: !!lastNameError,
             helperText: lastNameError,
           },
-          onMrtCellEditChange: ({ event }) => {
+          onHandleCellEditChange: ({ event }) => {
             setLastNameError(validateLastName(event.target.value));
           },
         },
@@ -314,7 +314,7 @@ export const EditingWithValidation: Story<MaterialReactTableProps> = () => {
             error: !!phoneNumberError,
             helperText: phoneNumberError,
           },
-          onMrtCellEditChange: ({ event }) => {
+          onHandleCellEditChange: ({ event }) => {
             setPhoneNumberError(validatePhoneNumber(event.target.value));
           },
         },
@@ -322,7 +322,7 @@ export const EditingWithValidation: Story<MaterialReactTableProps> = () => {
       data={tableData}
       enableRowActions
       enableEditing
-      onMrtEditRowSubmit={handleSaveRow}
+      onHandleEditRowSubmit={handleSaveRow}
     />
   );
 };
@@ -367,7 +367,7 @@ export const EditingEnabledAsync: Story<MaterialReactTableProps> = () => {
       data={tableData}
       enableRowActions
       enableEditing
-      onMrtEditRowSubmit={handleSaveRow}
+      onHandleEditRowSubmit={handleSaveRow}
       state={{
         showProgressBars: isSaving,
       }}
