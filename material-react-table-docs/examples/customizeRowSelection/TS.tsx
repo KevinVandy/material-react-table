@@ -92,7 +92,7 @@ const Example: FC = () => {
         color: 'secondary',
         disabled: !isSelectAll && row?.getValue('age') < 21,
       })}
-      onHandleSelectRowChange={({ event, row, selectedRows }) => {
+      onRowSelectionChanged={({ event, row, selectedRows }) => {
         console.log({ event, row, selectedRows });
       }}
     />

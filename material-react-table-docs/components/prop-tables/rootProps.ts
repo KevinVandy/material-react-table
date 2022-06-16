@@ -1213,7 +1213,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onHandleCellClick',
+    propName: 'onCellClick',
     defaultValue: '',
     description: '',
     link: '',
@@ -1223,7 +1223,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onHandleCellEditBlur',
+    propName: 'onCellEditBlur',
     defaultValue: '',
     description: '',
     link: '',
@@ -1233,7 +1233,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onHandleCellEditChange',
+    propName: 'onCellEditChanged',
     defaultValue: '',
     description: '',
     link: '',
@@ -1243,7 +1243,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onHandleDetailPanelClick',
+    propName: 'onDetailPanelClick',
     defaultValue: '',
     description: '',
     link: '',
@@ -1253,7 +1253,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onHandleEditRowSubmit',
+    propName: 'onEditRowSubmit',
     defaultValue: '',
     description: '',
     link: '',
@@ -1263,7 +1263,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onHandleFilterValueChange',
+    propName: 'onColumnFilterValueChanged',
     defaultValue: '',
     description: '',
     link: '',
@@ -1273,7 +1273,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onHandleGlobalFilterValueChange',
+    propName: 'onGlobalFilterValueChanged',
     defaultValue: '',
     description: '',
     link: '',
@@ -1283,7 +1283,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onHandleRowClick',
+    propName: 'onRowClick',
     defaultValue: '',
     description: '',
     link: '',
@@ -1293,7 +1293,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onHandleRowExpandChange',
+    propName: 'onExpandChanged',
     defaultValue: '',
     description: '',
     link: '',
@@ -1303,7 +1303,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onHandleSelectAllChange',
+    propName: 'onRowSelectAllChanged',
     defaultValue: '',
     description: '',
     link: '',
@@ -1313,7 +1313,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onHandleSelectRowChange',
+    propName: 'onRowSelectionChanged',
     defaultValue: '',
     description: '',
     link: '',
@@ -1323,7 +1323,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onHandleToggleColumnVisibility',
+    propName: 'onColumnVisibilityChanged',
     defaultValue: '',
     description: '',
     link: '',
@@ -1333,7 +1333,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onHandleToggleDensePadding',
+    propName: 'onIsDensePaddingChanged',
     defaultValue: '',
     description: '',
     link: '',
@@ -1343,7 +1343,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onHandleToggleFullScreen',
+    propName: 'onIsFullScreenChanged',
     defaultValue: '',
     description: '',
     link: '',
@@ -1353,7 +1353,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onHandleToggleShowFilters',
+    propName: 'onShowFiltersChanged',
     defaultValue: '',
     description: '',
     link: '',
@@ -1363,7 +1363,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onHandleToggleShowGlobalFilter',
+    propName: 'onShowGlobalFilterChanged',
     defaultValue: '',
     description: '',
     link: '',

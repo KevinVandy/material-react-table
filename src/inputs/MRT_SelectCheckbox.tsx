@@ -16,8 +16,8 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, instance }) => {
     options: {
       localization,
       muiSelectCheckboxProps,
-      onHandleSelectRowChange,
-      onHandleSelectAllChange,
+      onRowSelectionChanged,
+      onRowSelectAllChanged,
       selectAllMode,
     },
   } = instance;
@@ -31,14 +31,14 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, instance }) => {
       } else if (selectAllMode === 'page') {
         instance.getToggleAllPageRowsSelectedHandler()(event as any);
       }
-      onHandleSelectAllChange?.({
+      onRowSelectAllChanged?.({
         event,
         selectedRows: event.target.checked ? getRowModel().flatRows : [],
         instance,
       });
     } else if (row) {
       row?.getToggleSelectedHandler()(event as any);
-      onHandleSelectRowChange?.({
+      onRowSelectionChanged?.({
         event,
         row,
         selectedRows: event.target.checked

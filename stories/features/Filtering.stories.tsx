@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react';
-import MaterialReactTable, { MaterialReactTableProps } from '../../src';
+import MaterialReactTable, {
+  MaterialReactTableProps,
+  MRT_ColumnDef,
+} from '../../src';
 import faker from '@faker-js/faker';
 import { MenuItem, TextField } from '@mui/material';
 
@@ -47,7 +50,7 @@ const data = [...Array(100)].map((_) => ({
 }));
 
 export const FilteringEnabledDefault: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} />
+  <MaterialReactTable columns={columns} data={data} manualFiltering />
 );
 
 export const FilteringEnabledAndShown: Story<MaterialReactTableProps> = () => (
@@ -187,7 +190,25 @@ export const FilteringDisabledForCertainColumns: Story<
   />
 );
 
-export const CustomFilterFunction: Story<MaterialReactTableProps> = () => (
+export const CustomFilterFunctions: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    initialState={{ showFilters: true }}
+    // filterFns={{
+    //   fuzzy: (row, columnId, value, addMeta) => {
+    //     console.log('fuzzy');
+    //   },
+    //   contains: (row, columnId, value, addMeta) => {
+    //     console.log('contains');
+    //   },
+    // }}
+  />
+);
+
+export const CustomFilterFunctionPerColumn: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable
     columns={[
       {
@@ -260,6 +281,7 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
             variant="standard"
             fullWidth
           >
+            {/*@ts-ignore*/}
             <MenuItem value={null}>All</MenuItem>
             <MenuItem value="Male">Male</MenuItem>
             <MenuItem value="Female">Female</MenuItem>
@@ -282,3 +304,24 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
     initialState={{ showFilters: true }}
   />
 );
+
+export const ManualFiltering: Story<MaterialReactTableProps> = () => {
+  const [rows, setRows] = useState(() => data);
+
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={rows}
+      manualFiltering
+      enabledColumnFilterOptions={null}
+      onColumnFilterValueChanged={({ column, event, filterValue }) => {
+        const filteredRows = data.filter((dataRow) =>
+          dataRow[column.id]
+            .toLowerCase()
+            .startsWith(filterValue.toLowerCase()),
+        );
+        setRows(filteredRows);
+      }}
+    />
+  );
+};

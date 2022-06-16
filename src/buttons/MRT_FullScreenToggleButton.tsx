@@ -15,7 +15,7 @@ export const MRT_FullScreenToggleButton: FC<Props> = ({
     options: {
       icons: { FullscreenExitIcon, FullscreenIcon },
       localization,
-      onHandleToggleFullScreen,
+      onIsFullScreenChanged,
     },
     setIsFullScreen,
   } = instance;
@@ -23,7 +23,7 @@ export const MRT_FullScreenToggleButton: FC<Props> = ({
   const { isFullScreen } = getState();
 
   const handleToggleFullScreen = (event: MouseEvent<HTMLButtonElement>) => {
-    onHandleToggleFullScreen?.({
+    onIsFullScreenChanged?.({
       event,
       isFullScreen: !isFullScreen,
       instance,

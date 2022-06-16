@@ -29,7 +29,8 @@ export const MRT_SearchTextField: FC<Props> = ({ instance }) => {
       tableId,
       localization,
       muiSearchTextFieldProps,
-      onHandleGlobalFilterValueChange,
+      onGlobalFilterValueChanged,
+      onGlobalFilterValueChangedDebounced,
     },
   } = instance;
 
@@ -38,13 +39,19 @@ export const MRT_SearchTextField: FC<Props> = ({ instance }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [searchValue, setSearchValue] = useState(globalFilter ?? '');
 
-  const handleChange = useCallback(
+  const handleChangeDebounced = useCallback(
     debounce((event: ChangeEvent<HTMLInputElement>) => {
       setGlobalFilter(event.target.value ?? undefined);
-      onHandleGlobalFilterValueChange?.({ event, instance });
-    }, 200),
+      onGlobalFilterValueChangedDebounced?.({ event, instance });
+    }, 250),
     [],
   );
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+    handleChangeDebounced(event);
+    onGlobalFilterValueChanged?.({ event, instance });
+  };
 
   const handleGlobalFilterMenuOpen = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -65,10 +72,7 @@ export const MRT_SearchTextField: FC<Props> = ({ instance }) => {
       <TextField
         id={`mrt-${tableId}-search-text-field`}
         placeholder={localization.search}
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
-          setSearchValue(event.target.value);
-          handleChange(event);
-        }}
+        onChange={handleChange}
         value={searchValue ?? ''}
         variant="standard"
         InputProps={{

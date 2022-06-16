@@ -13,7 +13,7 @@ export const MRT_EditActionButtons: FC<Props> = ({ row, instance }) => {
     options: {
       icons: { CancelIcon, SaveIcon },
       localization,
-      onHandleEditRowSubmit,
+      onEditRowSubmit,
     },
     setCurrentEditingRow,
   } = instance;
@@ -26,7 +26,7 @@ export const MRT_EditActionButtons: FC<Props> = ({ row, instance }) => {
   };
 
   const handleSave = () => {
-    onHandleEditRowSubmit?.({ row: currentEditingRow ?? row, instance });
+    onEditRowSubmit?.({ row: currentEditingRow ?? row, instance });
     setCurrentEditingRow(null);
   };
 

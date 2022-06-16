@@ -17,7 +17,7 @@ export const MRT_ToggleGlobalFilterButton: FC<Props> = ({
       tableId,
       localization,
       muiSearchTextFieldProps,
-      onHandleToggleShowGlobalFilter,
+      onShowGlobalFilterChanged,
     },
     setShowGlobalFilter,
   } = instance;
@@ -30,7 +30,7 @@ export const MRT_ToggleGlobalFilterButton: FC<Props> = ({
       : muiSearchTextFieldProps;
 
   const handleToggleSearch = (event: MouseEvent<HTMLButtonElement>) => {
-    onHandleToggleShowGlobalFilter?.({
+    onShowGlobalFilterChanged?.({
       event,
       showGlobalFilter: !showGlobalFilter,
       instance,

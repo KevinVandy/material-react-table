@@ -13,7 +13,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, instance }) => {
     options: {
       muiTableBodyRowProps,
       muiTableDetailPanelProps,
-      onHandleDetailPanelClick,
+      onDetailPanelClick,
       renderDetailPanel,
     },
   } = instance;
@@ -33,7 +33,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, instance }) => {
       <TableCell
         colSpan={getVisibleLeafColumns().length}
         onClick={(event: MouseEvent<HTMLTableCellElement>) =>
-          onHandleDetailPanelClick?.({ event, row, instance })
+          onDetailPanelClick?.({ event, row, instance })
         }
         {...tableCellProps}
         sx={{

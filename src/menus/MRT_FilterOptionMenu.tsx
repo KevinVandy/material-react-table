@@ -43,7 +43,11 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
 }) => {
   const {
     getState,
-    options: { enabledGlobalFilterOptions, localization },
+    options: {
+      enabledGlobalFilterOptions,
+      enabledColumnFilterOptions,
+      localization,
+    },
     setCurrentFilterFns,
     setCurrentGlobalFilterFn,
   } = instance;
@@ -54,6 +58,9 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
   const { column } = header ?? {};
 
   const { columnDef } = column ?? {};
+
+  const allowedColumnFilterOptions =
+    columnDef?.enabledColumnFilterOptions ?? enabledColumnFilterOptions;
 
   const filterOptions = useMemo(
     () =>
@@ -126,8 +133,8 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
         },
       ].filter((filterType) =>
         columnDef
-          ? !columnDef.enabledColumnFilterOptions ||
-            columnDef.enabledColumnFilterOptions.includes(filterType.option)
+          ? allowedColumnFilterOptions === undefined ||
+            allowedColumnFilterOptions?.includes(filterType.option)
           : (!enabledGlobalFilterOptions ||
               enabledGlobalFilterOptions.includes(filterType.option)) &&
             ['fuzzy', 'contains'].includes(filterType.option),

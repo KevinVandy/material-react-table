@@ -29,7 +29,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
       enableRowNumbers,
       muiTableBodyCellProps,
       muiTableBodyCellSkeletonProps,
-      onHandleCellClick,
+      onCellClick,
       rowNumberMode,
       tableId,
     },
@@ -130,7 +130,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
   return (
     <TableCell
       onClick={(event: MouseEvent<HTMLTableCellElement>) =>
-        onHandleCellClick?.({ event, cell, instance })
+        onCellClick?.({ event, cell, instance })
       }
       onDoubleClick={handleDoubleClick}
       {...tableCellProps}

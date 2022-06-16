@@ -119,7 +119,7 @@ const Example: FC = () => {
       enablePinning
       enableRowActions
       enableRowSelection
-      onHandleEditRowSubmit={handleSaveRow}
+      onEditRowSubmit={handleSaveRow}
       renderDetailPanel={({ row }) => (
         <div
           style={{

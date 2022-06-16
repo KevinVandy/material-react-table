@@ -12,7 +12,7 @@ export const MRT_ToggleFiltersButton: FC<Props> = ({ instance, ...rest }) => {
     options: {
       icons: { FilterListIcon, FilterListOffIcon },
       localization,
-      onHandleToggleShowFilters,
+      onShowFiltersChanged,
     },
     setShowFilters,
   } = instance;
@@ -20,7 +20,7 @@ export const MRT_ToggleFiltersButton: FC<Props> = ({ instance, ...rest }) => {
   const { showFilters } = getState();
 
   const handleToggleShowFilters = (event: MouseEvent<HTMLButtonElement>) => {
-    onHandleToggleShowFilters?.({
+    onShowFiltersChanged?.({
       event,
       showFilters: !showFilters,
       instance,

@@ -384,7 +384,7 @@ export const columnOptions: ColumnOption[] = [
     type: 'TextFieldProps | ({ instance, column }) => TextFieldProps',
   },
   {
-    columnOption: 'onHandleCellEditBlur',
+    columnOption: 'onCellEditBlur',
     defaultValue: '',
     description: '',
     link: '',

@@ -13,7 +13,7 @@ interface Props {
 export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, instance }) => {
   const {
     getIsSomeColumnsPinned,
-    options: { muiTableBodyRowProps, onHandleRowClick, renderDetailPanel },
+    options: { muiTableBodyRowProps, onRowClick, renderDetailPanel },
   } = instance;
 
   const tableRowProps =
@@ -26,7 +26,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, instance }) => {
       <TableRow
         hover
         onClick={(event: MouseEvent<HTMLTableRowElement>) =>
-          onHandleRowClick?.({ event, row, instance })
+          onRowClick?.({ event, row, instance })
         }
         selected={row.getIsSelected()}
         {...tableRowProps}

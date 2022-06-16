@@ -32,10 +32,13 @@ export const MRT_FilterTextField: FC<Props> = ({
   const {
     getState,
     options: {
+      enabledColumnFilterOptions,
       icons: { FilterListIcon, CloseIcon },
-      tableId,
       localization,
       muiTableHeadCellFilterTextFieldProps,
+      onColumnFilterValueChanged,
+      onColumnFilterValueChangedDebounced,
+      tableId,
     },
     setCurrentFilterFns,
   } = instance;
@@ -73,19 +76,44 @@ export const MRT_FilterTextField: FC<Props> = ({
   );
 
   const handleChangeDebounced = useCallback(
-    debounce(
-      (event: ChangeEvent<HTMLInputElement>) =>
-        inputIndex !== undefined
-          ? column.setFilterValue((old: [string, string]) => {
-              const newFilterValues = old ?? ['', ''];
-              newFilterValues[inputIndex] = event.target.value;
-              return newFilterValues;
-            })
-          : column.setFilterValue(event.target.value ?? undefined),
-      150,
-    ),
+    debounce((event: ChangeEvent<HTMLInputElement>) => {
+      if (inputIndex !== undefined) {
+        column.setFilterValue((old: [string, string]) => {
+          const newFilterValues = old ?? ['', ''];
+          newFilterValues[inputIndex] = event.target.value;
+          return newFilterValues;
+        });
+      } else {
+        column.setFilterValue(event.target.value ?? undefined);
+      }
+      onColumnFilterValueChangedDebounced?.({
+        column,
+        event,
+        filterValue: event.target.value,
+      });
+      columnDef.onColumnFilterValueChangedDebounced?.({
+        column,
+        event,
+        filterValue: event.target.value,
+      });
+    }, 200),
     [],
   );
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setFilterValue(event.target.value);
+    handleChangeDebounced(event);
+    onColumnFilterValueChanged?.({
+      column,
+      event,
+      filterValue: event.target.value,
+    });
+    columnDef.onColumnFilterValueChanged?.({
+      column,
+      event,
+      filterValue: event.target.value,
+    });
+  };
 
   const handleFilterMenuOpen = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -141,6 +169,9 @@ export const MRT_FilterTextField: FC<Props> = ({
       ? localization.max
       : '';
 
+  const allowedColumnFilterOptions =
+    columnDef?.enabledColumnFilterOptions ?? enabledColumnFilterOptions;
+
   return (
     <>
       <TextField
@@ -155,7 +186,9 @@ export const MRT_FilterTextField: FC<Props> = ({
           title: filterPlaceholder,
         }}
         helperText={
-          !inputIndex ? (
+          !inputIndex &&
+          (allowedColumnFilterOptions === undefined ||
+            (allowedColumnFilterOptions?.length ?? 0) > 0) ? (
             <label htmlFor={filterId}>
               {filterFn instanceof Function
                 ? localization.filterMode.replace(
@@ -192,37 +225,37 @@ export const MRT_FilterTextField: FC<Props> = ({
         placeholder={
           filterChipLabel || isSelectFilter ? undefined : filterPlaceholder
         }
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
-          setFilterValue(event.target.value);
-          handleChangeDebounced(event);
-        }}
+        onChange={handleChange}
         onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
         select={isSelectFilter}
         value={filterValue ?? ''}
         variant="standard"
         InputProps={{
-          startAdornment: !isSelectFilter && !inputIndex && (
-            <InputAdornment position="start">
-              <Tooltip arrow title={localization.changeFilterMode}>
-                <span>
-                  <IconButton
-                    aria-label={localization.changeFilterMode}
-                    onClick={handleFilterMenuOpen}
-                    size="small"
-                    sx={{ height: '1.75rem', width: '1.75rem' }}
-                  >
-                    <FilterListIcon />
-                  </IconButton>
-                </span>
-              </Tooltip>
-              {filterChipLabel && (
-                <Chip
-                  onDelete={handleClearFilterChip}
-                  label={filterChipLabel}
-                />
-              )}
-            </InputAdornment>
-          ),
+          startAdornment: !isSelectFilter &&
+            !inputIndex &&
+            (allowedColumnFilterOptions === undefined ||
+              (allowedColumnFilterOptions?.length ?? 0) > 0) && (
+              <InputAdornment position="start">
+                <Tooltip arrow title={localization.changeFilterMode}>
+                  <span>
+                    <IconButton
+                      aria-label={localization.changeFilterMode}
+                      onClick={handleFilterMenuOpen}
+                      size="small"
+                      sx={{ height: '1.75rem', width: '1.75rem' }}
+                    >
+                      <FilterListIcon />
+                    </IconButton>
+                  </span>
+                </Tooltip>
+                {filterChipLabel && (
+                  <Chip
+                    onDelete={handleClearFilterChip}
+                    label={filterChipLabel}
+                  />
+                )}
+              </InputAdornment>
+            ),
           endAdornment: !filterChipLabel && (
             <InputAdornment position="end">
               <Tooltip
