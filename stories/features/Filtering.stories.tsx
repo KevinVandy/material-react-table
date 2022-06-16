@@ -205,12 +205,11 @@ export const CustomFilterFunction: Story<MaterialReactTableProps> = () => (
       {
         header: 'Gender',
         id: 'gender',
-        filterFn: (rows, _columnIds, filterValue) =>
-          rows.filter((row) =>
-            row.values['gender']
-              .toLowerCase()
-              .startsWith(filterValue.toLowerCase()),
-          ),
+        filterFn: (row, _columnIds, filterValue) =>
+          row
+            .getValue('gender')
+            .toLowerCase()
+            .startsWith(filterValue.toLowerCase()),
       },
       {
         header: 'Address',
@@ -219,12 +218,11 @@ export const CustomFilterFunction: Story<MaterialReactTableProps> = () => (
       {
         header: 'State',
         id: 'state',
-        filterFn: (rows, _columnIds, filterValue) =>
-          rows.filter((row) =>
-            row.values['state']
-              .toLowerCase()
-              .startsWith(filterValue.toLowerCase()),
-          ),
+        filterFn: (row, _columnIds, filterValue) =>
+          row
+            .getValue('state')
+            .toLowerCase()
+            .startsWith(filterValue.toLowerCase()),
       },
     ]}
     data={data}
@@ -268,11 +266,8 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
             <MenuItem value="Other">Other</MenuItem>
           </TextField>
         ),
-        filterFn: (rows, _columnIds, filterValue) =>
-          rows.filter(
-            (row) =>
-              row.values['gender'].toLowerCase() === filterValue.toLowerCase(),
-          ),
+        filterFn: (row, _columnIds, filterValue) =>
+          row.getValue('gender').toLowerCase() === filterValue.toLowerCase(),
       },
       {
         header: 'Address',

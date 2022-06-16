@@ -4,10 +4,10 @@ import { MRT_Row } from '.';
 export const fuzzy = (
   row: MRT_Row,
   columnId: string,
-  value: string,
+  filterValue: string,
   addMeta: (item: RankingInfo) => void,
 ) => {
-  const itemRank = rankItem(row.getValue(columnId), value, {
+  const itemRank = rankItem(row.getValue(columnId), filterValue, {
     threshold: rankings.MATCHES,
   });
   addMeta(itemRank);
