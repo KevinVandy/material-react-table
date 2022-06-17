@@ -494,17 +494,17 @@
   dependencies:
     remove-accents "0.4.2"
 
-"@tanstack/react-table@^8.0.0-beta.8":
-  version "8.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.0.0-beta.8.tgz#f5992029a216e1b0eac0bb2289d6387806fb5a34"
-  integrity sha512-hffDi9NnSI2tl/l3cW0CH8ErI1aJOWzIo6of0t1KMGdfES6mDcnfYMMRjm89ffaWogqVrdkKFJfbNAwV0g/0iA==
+"@tanstack/react-table@^8.0.0-beta.9":
+  version "8.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.0.0-beta.9.tgz#cdfe51d40069cfdc50ae19d3e7bf09141f516d00"
+  integrity sha512-LajXCA9QEH/MOYI9p2KbC8iiXW/YO12pFBOj53epSLRAX7G3y4wI5euhk+URQW9TditYOcKGbNzA/mxZgqfoEw==
   dependencies:
-    "@tanstack/table-core" "8.0.0-beta.8"
+    "@tanstack/table-core" "8.0.0-beta.9"
 
-"@tanstack/table-core@8.0.0-beta.8":
-  version "8.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.0.0-beta.8.tgz#ade867e0f8f282ffba15fb465fbed2847c4a6832"
-  integrity sha512-uIl9kHsuyP09Mc5DBhCzBavRg/e2KNUnZmb7/SW6ec+l2cyC4n64c1B64rDVzIn0CaV/0ajuXB4gI3xfcGsPfg==
+"@tanstack/table-core@8.0.0-beta.9":
+  version "8.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.0.0-beta.9.tgz#59ebb34807918ff35f7ba81d513a403b6e6cdc0b"
+  integrity sha512-ymHz2mMVTBQ1eXdUQiGH5IGvPuJQY0b0yQwzfCvGUEqPfR4mOq3YUJGo61PqsjTevIWK6ti9aabA0qJeRX/Qiw==
 
 "@types/acorn@^4.0.0":
   version "4.0.6"
@@ -1988,13 +1988,13 @@ match-sorter@^6.0.2:
     "@babel/runtime" "^7.12.5"
     remove-accents "0.4.2"
 
-material-react-table@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.12.0.tgz#6c7bd85cddf8bcf18b830e6ea9d697bd4d899dff"
-  integrity sha512-gk7Db4x9R+WkVp7vbYiSRmUXMWsnflBa9sFuq/vAtK5JgkXKNhmgOzv2W2y3zTtgyAs+yJNq/bvxbCMjAsQnKQ==
+material-react-table@^0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.12.1.tgz#4fee2d5ec9138ee57254b712b47bb113cc48e2d0"
+  integrity sha512-tpjjt4dj3GFa5gXV1egQuOaThOkQ7MHAY4irk7OZIki5QA7UQjAVUsKuxwHl0rwwuW9Yv3hjYaUcHr9Q6VpJ9w==
   dependencies:
     "@tanstack/match-sorter-utils" "^8.0.0-alpha.83"
-    "@tanstack/react-table" "^8.0.0-beta.8"
+    "@tanstack/react-table" "^8.0.0-beta.9"
     react-dnd "^16.0.1"
     react-dnd-html5-backend "^16.0.1"
     react-virtual "^2.10.4"
