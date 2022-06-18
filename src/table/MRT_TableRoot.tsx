@@ -153,87 +153,104 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     [],
   );
 
-  const displayColumns = useMemo(
-    () =>
-      [
-        showActionColumn &&
-          createDisplayColumn(table, {
-            Cell: ({ cell }) => (
-              <MRT_ToggleRowActionMenuButton
-                row={cell.row as any}
-                instance={instance}
-              />
-            ),
-            header: props.localization?.actions,
-            id: 'mrt-row-actions',
-            muiTableBodyCellProps: props.muiTableBodyCellProps,
-            muiTableHeadCellProps: props.muiTableHeadCellProps,
-            size: 70,
-          }),
-        showExpandColumn &&
-          createDisplayColumn(table, {
-            Cell: ({ cell }) => (
-              <MRT_ExpandButton row={cell.row as any} instance={instance} />
-            ),
-            Header: () =>
-              props.enableExpandAll ? (
-                <MRT_ExpandAllButton instance={instance} />
-              ) : null,
-            header: props.localization?.expand,
-            id: 'mrt-expand',
-            muiTableBodyCellProps: props.muiTableBodyCellProps,
-            muiTableHeadCellProps: props.muiTableHeadCellProps,
-            size: 50,
-          }),
-        props.enableRowSelection &&
-          createDisplayColumn(table, {
-            Cell: ({ cell }) => (
-              <MRT_SelectCheckbox row={cell.row as any} instance={instance} />
-            ),
-            Header: () =>
-              props.enableSelectAll ? (
-                <MRT_SelectCheckbox selectAll instance={instance} />
-              ) : null,
-            header: props.localization?.select,
-            id: 'mrt-select',
-            muiTableBodyCellProps: props.muiTableBodyCellProps,
-            muiTableHeadCellProps: props.muiTableHeadCellProps,
-            size: 50,
-          }),
-        props.enableRowNumbers &&
-          createDisplayColumn(table, {
-            Cell: ({ cell }) => cell.row.index + 1,
-            Header: () => props.localization?.rowNumber,
-            header: props.localization?.rowNumbers,
-            id: 'mrt-row-numbers',
-            muiTableBodyCellProps: props.muiTableBodyCellProps,
-            muiTableHeadCellProps: props.muiTableHeadCellProps,
-            size: 50,
-          }),
-      ].filter(Boolean),
-    [
-      props.editingMode,
-      props.enableEditing,
-      props.enableExpandAll,
-      props.enableExpanding,
-      props.enableGrouping,
-      props.enableRowActions,
-      props.enableRowNumbers,
-      props.enableRowSelection,
-      props.enableSelectAll,
-      props.localization,
-      table,
-    ],
-  );
+  const [leadingDisplayColumns, trailingDisplayColumns] = useMemo(() => {
+    const leadingDisplayColumns = [
+      showActionColumn &&
+        createDisplayColumn(table, {
+          Cell: ({ cell }) => (
+            <MRT_ToggleRowActionMenuButton
+              row={cell.row as any}
+              instance={instance}
+            />
+          ),
+          header: props.localization?.actions,
+          id: 'mrt-row-actions',
+          muiTableBodyCellProps: props.muiTableBodyCellProps,
+          muiTableHeadCellProps: props.muiTableHeadCellProps,
+          size: 70,
+        }),
+      showExpandColumn &&
+        createDisplayColumn(table, {
+          Cell: ({ cell }) => (
+            <MRT_ExpandButton row={cell.row as any} instance={instance} />
+          ),
+          Header: () =>
+            props.enableExpandAll ? (
+              <MRT_ExpandAllButton instance={instance} />
+            ) : null,
+          header: props.localization?.expand,
+          id: 'mrt-expand',
+          muiTableBodyCellProps: props.muiTableBodyCellProps,
+          muiTableHeadCellProps: props.muiTableHeadCellProps,
+          size: 50,
+        }),
+      props.enableRowSelection &&
+        createDisplayColumn(table, {
+          Cell: ({ cell }) => (
+            <MRT_SelectCheckbox row={cell.row as any} instance={instance} />
+          ),
+          Header: () =>
+            props.enableSelectAll ? (
+              <MRT_SelectCheckbox selectAll instance={instance} />
+            ) : null,
+          header: props.localization?.select,
+          id: 'mrt-select',
+          muiTableBodyCellProps: props.muiTableBodyCellProps,
+          muiTableHeadCellProps: props.muiTableHeadCellProps,
+          size: 50,
+        }),
+      props.enableRowNumbers &&
+        createDisplayColumn(table, {
+          Cell: ({ cell }) => cell.row.index + 1,
+          Header: () => props.localization?.rowNumber,
+          header: props.localization?.rowNumbers,
+          id: 'mrt-row-numbers',
+          muiTableBodyCellProps: props.muiTableBodyCellProps,
+          muiTableHeadCellProps: props.muiTableHeadCellProps,
+          size: 50,
+        }),
+    ].filter(Boolean) as MRT_ColumnDef<D>[];
+
+    const trailingDisplayColumns = [] as MRT_ColumnDef<D>[];
+
+    if (props.enableRowActions && props.positionActionsColumn === 'last') {
+      trailingDisplayColumns.push(
+        ...leadingDisplayColumns.splice(
+          leadingDisplayColumns.findIndex(
+            (col) => col.id === 'mrt-row-actions',
+          ),
+          1,
+        ),
+      );
+    }
+
+    return [leadingDisplayColumns, trailingDisplayColumns];
+  }, [
+    props.editingMode,
+    props.enableEditing,
+    props.enableExpandAll,
+    props.enableExpanding,
+    props.enableGrouping,
+    props.enableRowActions,
+    props.enableRowNumbers,
+    props.enableRowSelection,
+    props.enableSelectAll,
+    props.localization,
+    props.muiTableBodyCellProps,
+    props.muiTableHeadCellProps,
+    props.positionActionsColumn,
+    table,
+  ]);
 
   const columns = useMemo(
     () => [
-      ...displayColumns,
+      ...leadingDisplayColumns,
       ...props.columns.map((column) =>
         column.columns
           ? createGroup(table, column as any, currentFilterFns)
           : createDataColumn(table, column as any, currentFilterFns),
       ),
+      ...trailingDisplayColumns,
     ],
     [table, props.columns, currentFilterFns],
   );
