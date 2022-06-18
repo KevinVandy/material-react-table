@@ -121,7 +121,7 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
     }>
   >;
   setCurrentGlobalFilterFn: Dispatch<SetStateAction<MRT_FilterFn>>;
-  setIsDensePadding: Dispatch<SetStateAction<boolean>>;
+  setDensity: Dispatch<SetStateAction<'comfortable' | 'compact' | 'spacious'>>;
   setIsFullScreen: Dispatch<SetStateAction<boolean>>;
   setShowFilters: Dispatch<SetStateAction<boolean>>;
   setShowGlobalFilter: Dispatch<SetStateAction<boolean>>;
@@ -132,7 +132,7 @@ export type MRT_TableState<D extends Record<string, any> = {}> = TableState & {
   currentEditingRow: MRT_Row<D> | null;
   currentFilterFns: Record<string, string | Function>;
   currentGlobalFilterFn: Record<string, string | Function>;
-  isDensePadding: boolean;
+  density: 'comfortable' | 'compact' | 'spacious';
   isLoading: boolean;
   isFullScreen: boolean;
   showFilters: boolean;
@@ -665,14 +665,14 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       event: ChangeEvent<HTMLInputElement>;
       instance: MRT_TableInstance<D>;
     }) => void;
-    onIsDensePaddingChange?: OnChangeFn<boolean>;
-    onIsDensePaddingChanged?: ({
+    onDensityChange?: OnChangeFn<boolean>;
+    onDensityChanged?: ({
       event,
-      isDensePadding,
+      density,
       instance,
     }: {
       event: MouseEvent<HTMLButtonElement>;
-      isDensePadding: boolean;
+      density: 'comfortable' | 'compact' | 'spacious';
       instance: MRT_TableInstance<D>;
     }) => void;
     onIsFullScreenChange?: OnChangeFn<boolean>;

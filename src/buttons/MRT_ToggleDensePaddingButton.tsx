@@ -13,32 +13,44 @@ export const MRT_ToggleDensePaddingButton: FC<Props> = ({
   const {
     getState,
     options: {
-      icons: { DensityMediumIcon, DensitySmallIcon },
+      icons: { DensityLargeIcon, DensityMediumIcon, DensitySmallIcon },
       localization,
-      onIsDensePaddingChanged,
+      onDensityChanged,
     },
-    setIsDensePadding,
+    setDensity,
   } = instance;
 
-  const { isDensePadding } = getState();
+  const { density } = getState();
 
   const handleToggleDensePadding = (event: MouseEvent<HTMLButtonElement>) => {
-    onIsDensePaddingChanged?.({
+    const nextDensity =
+      density === 'comfortable'
+        ? 'compact'
+        : density === 'compact'
+        ? 'spacious'
+        : 'comfortable';
+    onDensityChanged?.({
       event,
-      isDensePadding: !isDensePadding,
+      density: nextDensity,
       instance,
     });
-    setIsDensePadding(!isDensePadding);
+    setDensity(nextDensity);
   };
 
   return (
-    <Tooltip arrow title={localization.toggleDensePadding}>
+    <Tooltip arrow title={localization.toggleDensity}>
       <IconButton
-        aria-label={localization.toggleDensePadding}
+        aria-label={localization.toggleDensity}
         onClick={handleToggleDensePadding}
         {...rest}
       >
-        {isDensePadding ? <DensitySmallIcon /> : <DensityMediumIcon />}
+        {density === 'compact' ? (
+          <DensitySmallIcon />
+        ) : density === 'comfortable' ? (
+          <DensityMediumIcon />
+        ) : (
+          <DensityLargeIcon />
+        )}
       </IconButton>
     </Tooltip>
   );

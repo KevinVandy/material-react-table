@@ -4,9 +4,9 @@ import {
   CheckBox,
   ClearAll,
   Close,
+  DensityLarge,
   DensityMedium,
   DensitySmall,
-  KeyboardDoubleArrowDown,
   DragHandle,
   DynamicFeed,
   Edit,
@@ -16,8 +16,9 @@ import {
   FilterAltOff,
   FilterList,
   FilterListOff,
-  FullscreenExit,
   Fullscreen,
+  FullscreenExit,
+  KeyboardDoubleArrowDown,
   MoreHoriz,
   MoreVert,
   PushPin,
@@ -36,6 +37,7 @@ export interface MRT_Icons {
   CheckBoxIcon: any;
   ClearAllIcon: any;
   CloseIcon: any;
+  DensityLargeIcon: any;
   DensityMediumIcon: any;
   DensitySmallIcon: any;
   KeyboardDoubleArrowDownIcon: any;
@@ -68,9 +70,9 @@ export const MRT_Default_Icons: MRT_Icons = {
   CheckBoxIcon: CheckBox,
   ClearAllIcon: ClearAll,
   CloseIcon: Close,
+  DensityLargeIcon: DensityLarge,
   DensityMediumIcon: DensityMedium,
   DensitySmallIcon: DensitySmall,
-  KeyboardDoubleArrowDownIcon: KeyboardDoubleArrowDown,
   DragHandleIcon: DragHandle,
   DynamicFeedIcon: DynamicFeed,
   EditIcon: Edit,
@@ -82,6 +84,7 @@ export const MRT_Default_Icons: MRT_Icons = {
   FilterListOffIcon: FilterListOff,
   FullscreenExitIcon: FullscreenExit,
   FullscreenIcon: Fullscreen,
+  KeyboardDoubleArrowDownIcon: KeyboardDoubleArrowDown,
   MoreHorizIcon: MoreHoriz,
   MoreVertIcon: MoreVert,
   PushPinIcon: PushPin,

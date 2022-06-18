@@ -57,7 +57,7 @@ const RootPropTable = () => {
       enableToolbarBottom={false}
       initialState={{
         columnVisibility: { required: false },
-        isDensePadding: true,
+        density: 'compact',
         showGlobalFilter: true,
         sorting: [
           { id: 'required', desc: true },

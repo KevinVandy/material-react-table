@@ -41,7 +41,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
     columnOrder,
     currentEditingCell,
     currentEditingRow,
-    isDensePadding,
+    density,
     isLoading,
     showSkeletons,
   } = getState();
@@ -152,23 +152,35 @@ export const MRT_TableBodyCell: FC<Props> = ({
             ? `${column.getStart('left')}px`
             : undefined,
         overflow: 'hidden',
-        p: isDensePadding
-          ? columnDefType === 'display'
-            ? '0 0.5rem'
-            : '0.5rem'
-          : columnDefType === 'display'
-          ? '0.5rem 0.75rem'
-          : '1rem',
+        p:
+          density === 'compact'
+            ? columnDefType === 'display'
+              ? '0 0.5rem'
+              : '0.5rem'
+            : density === 'comfortable'
+            ? columnDefType === 'display'
+              ? '0.5rem 0.75rem'
+              : '1rem'
+            : columnDefType === 'display'
+            ? '1rem 1.25rem'
+            : '1.5rem',
         pl:
           column.id === 'mrt-expand'
-            ? `${row.depth + (isDensePadding ? 0.5 : 0.75)}rem`
+            ? `${
+                row.depth +
+                (density === 'compact'
+                  ? 0.5
+                  : density === 'comfortable'
+                  ? 0.75
+                  : 1.25)
+              }rem`
             : undefined,
         position: column.getIsPinned() ? 'sticky' : 'relative',
         right:
           column.getIsPinned() === 'right' ? `${getTotalRight()}px` : undefined,
         textOverflow: columnDefType !== 'display' ? 'ellipsis' : undefined,
         transition: 'all 0.2s ease-in-out',
-        whiteSpace: isDensePadding ? 'nowrap' : 'normal',
+        whiteSpace: density === 'compact' ? 'nowrap' : 'normal',
         zIndex: column.getIsPinned() ? 1 : undefined,
         '&:hover': {
           backgroundColor:

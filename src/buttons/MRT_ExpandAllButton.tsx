@@ -20,7 +20,7 @@ export const MRT_ExpandAllButton: FC<Props> = ({ instance }) => {
     toggleAllRowsExpanded,
   } = instance;
 
-  const { isDensePadding } = getState();
+  const { density } = getState();
 
   return (
     <Tooltip
@@ -34,8 +34,8 @@ export const MRT_ExpandAllButton: FC<Props> = ({ instance }) => {
         disabled={!getCanSomeRowsExpand() && !renderDetailPanel}
         onClick={() => toggleAllRowsExpanded(!getIsAllRowsExpanded())}
         sx={{
-          height: isDensePadding ? '1.75rem' : '2.25rem',
-          width: isDensePadding ? '1.75rem' : '2.25rem',
+          height: density === 'compact' ? '1.75rem' : '2.25rem',
+          width: density === 'compact' ? '1.75rem' : '2.25rem',
         }}
       >
         <KeyboardDoubleArrowDownIcon

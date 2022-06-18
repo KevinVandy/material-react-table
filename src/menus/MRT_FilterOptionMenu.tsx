@@ -52,8 +52,7 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
     setCurrentGlobalFilterFn,
   } = instance;
 
-  const { isDensePadding, currentFilterFns, currentGlobalFilterFn } =
-    getState();
+  const { density, currentFilterFns, currentGlobalFilterFn } = getState();
 
   const { column } = header ?? {};
 
@@ -178,7 +177,7 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
       MenuListProps={{
-        dense: isDensePadding,
+        dense: density === 'compact',
       }}
     >
       {filterOptions.map(({ option, label, divider, fn }, index) => (

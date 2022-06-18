@@ -18,7 +18,7 @@ export const MRT_ExpandButton: FC<Props> = ({ row, instance }) => {
     },
   } = instance;
 
-  const { isDensePadding } = getState();
+  const { density } = getState();
 
   const handleToggleExpand = (event: MouseEvent<HTMLButtonElement>) => {
     row.toggleExpanded();
@@ -37,8 +37,8 @@ export const MRT_ExpandButton: FC<Props> = ({ row, instance }) => {
         disabled={!row.getCanExpand() && !renderDetailPanel}
         onClick={handleToggleExpand}
         sx={{
-          height: isDensePadding ? '1.75rem' : '2.25rem',
-          width: isDensePadding ? '1.75rem' : '2.25rem',
+          height: density === 'compact' ? '1.75rem' : '2.25rem',
+          width: density === 'compact' ? '1.75rem' : '2.25rem',
         }}
       >
         <ExpandMoreIcon

@@ -56,7 +56,7 @@ export interface MRT_Localization {
   sortedByColumnDesc: string;
   thenBy: string;
   to: string;
-  toggleDensePadding: string;
+  toggleDensity: string;
   toggleFullScreen: string;
   toggleSelectAll: string;
   toggleSelectRow: string;
@@ -125,7 +125,7 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   sortedByColumnDesc: 'Sorted by {column} descending',
   thenBy: ', then by ',
   to: 'to',
-  toggleDensePadding: 'Toggle dense padding',
+  toggleDensity: 'Toggle density',
   toggleFullScreen: 'Toggle full screen',
   toggleSelectAll: 'Toggle select all',
   toggleSelectRow: 'Toggle select row',

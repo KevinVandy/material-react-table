@@ -134,7 +134,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'TanStack Table',
-    stateName: 'isDensePadding',
+    stateName: 'density',
     type: 'boolean',
   },
   {

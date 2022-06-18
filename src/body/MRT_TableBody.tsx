@@ -22,7 +22,7 @@ export const MRT_TableBody: FC<Props> = ({ instance, tableContainerRef }) => {
     },
   } = instance;
 
-  const { isDensePadding } = getState();
+  const { density } = getState();
 
   const tableBodyProps =
     muiTableBodyProps instanceof Function
@@ -35,7 +35,7 @@ export const MRT_TableBody: FC<Props> = ({ instance, tableContainerRef }) => {
 
   const rowVirtualizer = enableRowVirtualization
     ? useVirtual({
-        overscan: isDensePadding ? 15 : 5,
+        overscan: density === 'compact' ? 15 : 5,
         size: rows.length,
         parentRef: tableContainerRef,
         ...virtualizerProps,

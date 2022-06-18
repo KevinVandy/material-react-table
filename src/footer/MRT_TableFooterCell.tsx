@@ -13,7 +13,7 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, instance }) => {
     options: { muiTableFooterCellProps, enableColumnResizing },
   } = instance;
 
-  const { isDensePadding } = getState();
+  const { density } = getState();
 
   const { column } = footer;
 
@@ -49,7 +49,12 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, instance }) => {
         fontWeight: 'bold',
         maxWidth: `${column.getSize()}px`,
         minWidth: `${column.getSize()}px`,
-        p: isDensePadding ? '0.5rem' : '1rem',
+        p:
+          density === 'compact'
+            ? '0.5rem'
+            : density === 'comfortable'
+            ? '1rem'
+            : '1.5rem',
         transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
         width: column.getSize(),
         verticalAlign: 'text-top',

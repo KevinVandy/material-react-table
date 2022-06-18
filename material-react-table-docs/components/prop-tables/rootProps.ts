@@ -1193,7 +1193,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onIsDensePaddingChange',
+    propName: 'onDensityChange',
     defaultValue: '',
     description: '',
     link: '',
@@ -1333,7 +1333,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onIsDensePaddingChanged',
+    propName: 'onDensityChanged',
     defaultValue: '',
     description: '',
     link: '',

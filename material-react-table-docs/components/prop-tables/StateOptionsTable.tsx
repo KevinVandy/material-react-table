@@ -46,7 +46,7 @@ const StateOptionsTable = () => {
       enableToolbarBottom={false}
       initialState={{
         columnPinning: { left: ['mrt-row-numbers', 'stateName'], right: [] },
-        isDensePadding: true,
+        density: 'compact',
         showGlobalFilter: true,
         sorting: [{ id: 'stateName', desc: false }],
       }}

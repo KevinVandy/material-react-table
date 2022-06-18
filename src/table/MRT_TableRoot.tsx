@@ -102,8 +102,8 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   const [currentEditingRow, setCurrentEditingRow] = useState<MRT_Row<D> | null>(
     initialState?.currentEditingRow ?? null,
   );
-  const [isDensePadding, setIsDensePadding] = useState(
-    initialState?.isDensePadding ?? false,
+  const [density, setDensity] = useState(
+    initialState?.density ?? 'comfortable',
   );
   const [isFullScreen, setIsFullScreen] = useState(
     initialState?.isFullScreen ?? false,
@@ -288,7 +288,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         currentEditingRow,
         currentFilterFns,
         currentGlobalFilterFn,
-        isDensePadding,
+        density,
         isFullScreen,
         showFilters,
         showGlobalFilter,
@@ -302,7 +302,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     setCurrentFilterFns: props.onCurrentFilterFnsChange ?? setCurrentFilterFns,
     setCurrentGlobalFilterFn:
       props.onCurrentGlobalFilterFnChange ?? setCurrentGlobalFilterFn,
-    setIsDensePadding: props.onIsDensePaddingChange ?? setIsDensePadding,
+    setDensity: props.onDensityChange ?? setDensity,
     setIsFullScreen: props.onIsFullScreenChange ?? setIsFullScreen,
     setShowFilters: props.onShowFiltersChange ?? setShowFilters,
     setShowGlobalFilter: props.onShowGlobalFilterChange ?? setShowGlobalFilter,

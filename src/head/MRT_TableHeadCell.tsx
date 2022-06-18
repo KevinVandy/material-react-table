@@ -37,7 +37,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
     },
   } = instance;
 
-  const { isDensePadding } = getState();
+  const { density } = getState();
 
   const { column } = header;
 
@@ -111,19 +111,31 @@ export const MRT_TableHeadCell: FC<Props> = ({
             ? `${column.getStart('left')}px`
             : undefined,
         overflow: 'visible',
-        p: isDensePadding
-          ? columnDefType === 'display'
-            ? '0 0.5rem'
-            : '0.5rem'
-          : columnDefType === 'display'
-          ? '0.5rem 0.75rem'
-          : '1rem',
+        p:
+          density === 'compact'
+            ? columnDefType === 'display'
+              ? '0 0.5rem'
+              : '0.5rem'
+            : density === 'comfortable'
+            ? columnDefType === 'display'
+              ? '0.5rem 0.75rem'
+              : '1rem'
+            : columnDefType === 'display'
+            ? '1rem 1.25rem'
+            : '1.5rem',
         pb: columnDefType === 'display' ? 0 : undefined,
         position:
           column.getIsPinned() && columnDefType !== 'group'
             ? 'sticky'
             : undefined,
-        pt: columnDefType !== 'data' ? 0 : isDensePadding ? '0.25' : '.75rem',
+        pt:
+          columnDefType !== 'data'
+            ? 0
+            : density === 'compact'
+            ? '0.25'
+            : density === 'comfortable'
+            ? '.75rem'
+            : '1.25rem',
         right:
           column.getIsPinned() === 'right' ? `${getTotalRight()}px` : undefined,
         transition: `all ${enableColumnResizing ? 0 : '0.2s'} ease-in-out`,

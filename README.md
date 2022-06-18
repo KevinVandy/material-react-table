@@ -29,7 +29,7 @@ Join the [discord](https://discord.gg/5wqyRx6fnm) server to join in on the devel
 
 ### Features (All Features work and are MVP, but are still being polished)
 
-_All features can be enabled/disabled easily_
+_All features can easily be enabled/disabled_
 
 - [x] Click To Copy Cell Values
 - [x] Column Actions
@@ -41,10 +41,10 @@ _All features can be enabled/disabled easily_
 - [x] Customize Icons
 - [x] Customize Styling of internal Mui Components
 - [x] Data Editing (3 different editing modes)
-- [x] Dense Padding Toggle
+- [x] Density Toggle
 - [x] Detail Panels
 - [x] Filtering and multiple built-in filter modes
-- [x] Fullscreen mode
+- [x] Full Screen mode
 - [x] Global Filtering (Search across all columns, rank by best match)
 - [x] HeaderGroups & Footers
 - [x] Localization (i18n) support
@@ -52,6 +52,7 @@ _All features can be enabled/disabled easily_
 - [x] Pagination (supports client-side and server-side)
 - [x] Persistent State
 - [x] Row Actions
+- [x] Row Numbers
 - [x] Row Selection (checkboxes)
 - [x] SSR compatible
 - [x] Sorting

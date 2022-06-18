@@ -30,7 +30,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
     options: { localization, enablePinning, enableColumnOrdering },
   } = instance;
 
-  const { isDensePadding, columnOrder, columnPinning } = getState();
+  const { density, columnOrder, columnPinning } = getState();
 
   const hideAllColumns = () => {
     getAllLeafColumns()
@@ -68,7 +68,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
       open={!!anchorEl}
       onClose={() => setAnchorEl(null)}
       MenuListProps={{
-        dense: isDensePadding,
+        dense: density === 'compact',
       }}
     >
       <Box

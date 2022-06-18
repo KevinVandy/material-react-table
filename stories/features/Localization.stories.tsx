@@ -76,7 +76,7 @@ export const CustomSpanishLocalizationExample: Story<
         toggleSelectAll: 'Seleccionar todo',
         toggleSelectRow: 'Seleccionar fila',
         showHideColumns: 'Mostrar/Ocultar columnas',
-        toggleDensePadding: 'Alternar relleno denso',
+        toggleDensity: 'Alternar relleno denso',
         showHideFilters: 'Alternar filtros',
         toggleFullScreen: 'Alternar pantalla completa',
         showHideSearch: 'Alternar búsqueda',

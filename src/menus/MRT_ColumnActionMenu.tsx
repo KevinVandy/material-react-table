@@ -62,7 +62,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
 
   const { columnDef } = column;
 
-  const { columnSizing, columnVisibility, isDensePadding } = getState();
+  const { columnSizing, columnVisibility, density } = getState();
 
   const [filterMenuAnchorEl, setFilterMenuAnchorEl] =
     useState<null | HTMLElement>(null);
@@ -150,7 +150,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       open={!!anchorEl}
       onClose={() => setAnchorEl(null)}
       MenuListProps={{
-        dense: isDensePadding,
+        dense: density === 'compact',
       }}
     >
       {enableSorting &&
