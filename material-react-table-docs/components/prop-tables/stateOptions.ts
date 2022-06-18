@@ -135,7 +135,7 @@ export const stateOptions: StateRow[] = [
     linkText: '',
     source: 'TanStack Table',
     stateName: 'density',
-    type: 'boolean',
+    type: "'comfortable' | 'compact' | 'spacious'",
   },
   {
     defaultValue: 'false',
