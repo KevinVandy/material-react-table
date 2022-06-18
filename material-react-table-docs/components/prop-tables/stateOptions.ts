@@ -129,7 +129,7 @@ export const stateOptions: StateRow[] = [
     type: 'Array<string>',
   },
   {
-    defaultValue: 'false',
+    defaultValue: 'comfortable',
     description: '',
     link: '',
     linkText: '',
