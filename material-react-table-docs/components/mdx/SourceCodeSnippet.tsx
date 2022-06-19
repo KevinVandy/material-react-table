@@ -33,18 +33,18 @@ const ToggleFullCodeButton = styled(IconButton)({
 });
 
 export interface Props {
-  Component: FC;
+  Component?: FC;
   codeSandboxURL?: string;
+  javaScriptCode?: string;
   tableId?: string;
-  javaScriptCode: string;
   typeScriptCode: string;
 }
 
 export const SourceCodeSnippet: FC<Props> = ({
   Component,
   codeSandboxURL,
-  tableId,
   javaScriptCode,
+  tableId,
   typeScriptCode,
 }) => {
   const theme = useTheme();
@@ -67,7 +67,7 @@ export const SourceCodeSnippet: FC<Props> = ({
 
   const handleCopy = () => {
     navigator.clipboard.writeText(
-      isTypeScript ? typeScriptCode : javaScriptCode,
+      isTypeScript ? typeScriptCode : javaScriptCode ?? '',
     );
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 3000);
@@ -83,24 +83,27 @@ export const SourceCodeSnippet: FC<Props> = ({
       }}
     >
       <Divider />
-      <Box sx={{ display: 'flex' }}>
-        <LinkHeading tableId={tableId} variant="h3">
-          Demo
-        </LinkHeading>
-        {codeSandboxURL && (
-          <Button
-            href={codeSandboxURL}
-            rel="noreferrer"
-            target="_blank"
-            sx={{ height: '3rem', ml: '1rem' }}
-            variant="outlined"
-          >
-            Open Code Sandbox
-          </Button>
-        )}
-      </Box>
-
-      <Component />
+      {Component && (
+        <>
+          <Box sx={{ display: 'flex' }}>
+            <LinkHeading tableId={tableId} variant="h3">
+              Demo
+            </LinkHeading>
+            {codeSandboxURL && (
+              <Button
+                href={codeSandboxURL}
+                rel="noreferrer"
+                target="_blank"
+                sx={{ height: '3rem', ml: '1rem' }}
+                variant="outlined"
+              >
+                Open Code Sandbox
+              </Button>
+            )}
+          </Box>
+          <Component />
+        </>
+      )}
       <div>
         <div style={{ display: 'flex', gap: '1rem' }}>
           <LinkHeading tableId={tableId} variant="h4">
@@ -114,13 +117,15 @@ export const SourceCodeSnippet: FC<Props> = ({
             >
               TS
             </ToggleButton>
-            <ToggleButton
-              onClick={() => setIsTypeScript(false)}
-              value="js"
-              selected={!isTypeScript}
-            >
-              JS
-            </ToggleButton>
+            {javaScriptCode && (
+              <ToggleButton
+                onClick={() => setIsTypeScript(false)}
+                value="js"
+                selected={!isTypeScript}
+              >
+                JS
+              </ToggleButton>
+            )}
             {codeSandboxURL && (
               <ToggleButton
                 href={codeSandboxURL}
@@ -135,7 +140,7 @@ export const SourceCodeSnippet: FC<Props> = ({
         </div>
         <Highlight
           {...defaultProps}
-          code={isTypeScript ? typeScriptCode : javaScriptCode}
+          code={isTypeScript ? typeScriptCode : javaScriptCode ?? ''}
           language={isTypeScript ? 'tsx' : 'jsx'}
           theme={theme.palette.mode === 'dark' ? vsDark : vsLight}
         >
