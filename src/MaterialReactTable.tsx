@@ -294,19 +294,23 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
     column,
     event,
     filterValue,
+    instance,
   }: {
     column: MRT_Column<D>;
     event: ChangeEvent<HTMLInputElement>;
     filterValue: any;
+    instance: MRT_TableInstance<D>;
   }) => void;
   onColumnFilterValueChangedDebounced?: ({
     column,
     event,
     filterValue,
+    instance,
   }: {
     column: MRT_Column<D>;
     event: ChangeEvent<HTMLInputElement>;
     filterValue: any;
+    instance: MRT_TableInstance<D>;
   }) => void;
 };
 
@@ -382,7 +386,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     enableClickToCopy?: boolean;
     enableColumnActions?: boolean;
     enableColumnOrdering?: boolean;
-    enableDensePaddingToggle?: boolean;
+    enableDensityToggle?: boolean;
     enableEditing?: boolean;
     enableExpandAll?: boolean;
     enableFullScreenToggle?: boolean;
@@ -600,19 +604,23 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       column,
       event,
       filterValue,
+      instance,
     }: {
       column: MRT_Column<D>;
       event: ChangeEvent<HTMLInputElement>;
       filterValue: any;
+      instance: MRT_TableInstance<D>;
     }) => void;
     onColumnFilterValueChangedDebounced?: ({
       column,
       event,
       filterValue,
+      instance,
     }: {
       column: MRT_Column<D>;
       event: ChangeEvent<HTMLInputElement>;
       filterValue: any;
+      instance: MRT_TableInstance<D>;
     }) => void;
     onColumnVisibilityChanged?: ({
       column,
@@ -808,7 +816,7 @@ export default <D extends Record<string, any> = {}>({
   enableColumnFilters = true,
   enableColumnOrdering = false,
   enableColumnResizing = false,
-  enableDensePaddingToggle = true,
+  enableDensityToggle = true,
   enableExpandAll = true,
   enableFilters = true,
   enableFullScreenToggle = true,
@@ -847,7 +855,7 @@ export default <D extends Record<string, any> = {}>({
     enableColumnFilters={enableColumnFilters}
     enableColumnOrdering={enableColumnOrdering}
     enableColumnResizing={enableColumnResizing}
-    enableDensePaddingToggle={enableDensePaddingToggle}
+    enableDensityToggle={enableDensityToggle}
     enableExpandAll={enableExpandAll}
     enableFilters={enableFilters}
     enableFullScreenToggle={enableFullScreenToggle}

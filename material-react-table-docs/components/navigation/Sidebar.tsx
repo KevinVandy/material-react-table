@@ -54,9 +54,14 @@ const navItems = [
         href: '/docs/usage',
         label: 'Usage',
       },
+    ],
+  },
+  {
+    title: 'Props and Options',
+    items: [
       {
         href: '/docs/props',
-        label: 'All Props',
+        label: 'Root Props',
       },
       {
         href: '/docs/column-options',

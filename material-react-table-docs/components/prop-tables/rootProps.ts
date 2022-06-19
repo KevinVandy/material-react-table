@@ -160,7 +160,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableColumnActions',
@@ -170,7 +170,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableColumnFilters',
@@ -180,7 +180,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableColumnOrdering',
@@ -190,7 +190,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableColumnResizing',
@@ -200,17 +200,17 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
-    propName: 'enableDensePaddingToggle',
+    propName: 'enableDensityToggle',
     defaultValue: '',
     description: '',
     link: '',
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableEditing',
@@ -220,17 +220,17 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableExpandAll',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableExpanding',
@@ -240,7 +240,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableFilters',
@@ -250,7 +250,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableFullScreenToggle',
@@ -260,7 +260,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableGlobalFilter',
@@ -270,7 +270,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableGrouping',
@@ -280,7 +280,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableHiding',
@@ -290,7 +290,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableMultiRemove',
@@ -300,7 +300,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableMultiRowSelection',
@@ -310,7 +310,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableMultiSort',
@@ -320,7 +320,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enablePagination',
@@ -330,7 +330,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enablePersistentState',
@@ -340,7 +340,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enablePinning',
@@ -350,7 +350,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableRowActions',
@@ -360,7 +360,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableRowNumbers',
@@ -380,7 +380,17 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
+  },
+  {
+    propName: 'enableRowVirtualization',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: 'MRT',
+    type: 'boolean',
   },
   {
     propName: 'enableSelectAll',
@@ -390,7 +400,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableSorting',
@@ -400,7 +410,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableSortingRemoval',
@@ -410,7 +420,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableStickyHeader',
@@ -420,7 +430,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableSubRowSelection',
@@ -430,7 +440,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableTableFooter',
@@ -440,7 +450,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableTableHead',
@@ -450,7 +460,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableToolbarBottom',
@@ -460,7 +470,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableToolbarInternalActions',
@@ -470,7 +480,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enableToolbarTop',
@@ -480,7 +490,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'boolean',
   },
   {
     propName: 'enabledColumnFilterOptions',

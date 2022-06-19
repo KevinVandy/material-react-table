@@ -58,7 +58,7 @@ export const DensePaddingDisabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableDensePaddingToggle={false}
+    enableDensityToggle={false}
   />
 );
 

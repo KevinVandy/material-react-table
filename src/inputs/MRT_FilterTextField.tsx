@@ -90,11 +90,13 @@ export const MRT_FilterTextField: FC<Props> = ({
         column,
         event,
         filterValue: event.target.value,
+        instance,
       });
       columnDef.onColumnFilterValueChangedDebounced?.({
         column,
         event,
         filterValue: event.target.value,
+        instance,
       });
     }, 200),
     [],
@@ -107,11 +109,13 @@ export const MRT_FilterTextField: FC<Props> = ({
       column,
       event,
       filterValue: event.target.value,
+      instance,
     });
     columnDef.onColumnFilterValueChanged?.({
       column,
       event,
       filterValue: event.target.value,
+      instance,
     });
   };
 

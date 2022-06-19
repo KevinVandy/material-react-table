@@ -16,7 +16,7 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ instance }) => {
   const {
     options: {
       enableColumnFilters,
-      enableDensePaddingToggle,
+      enableDensityToggle,
       enableFilters,
       enableFullScreenToggle,
       enableGlobalFilter,
@@ -53,7 +53,7 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ instance }) => {
             <MRT_ToggleFiltersButton instance={instance} />
           )}
           {enableHiding && <MRT_ShowHideColumnsButton instance={instance} />}
-          {enableDensePaddingToggle && (
+          {enableDensityToggle && (
             <MRT_ToggleDensePaddingButton instance={instance} />
           )}
           {enableFullScreenToggle && (
