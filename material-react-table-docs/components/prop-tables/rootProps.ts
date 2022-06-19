@@ -164,7 +164,7 @@ export const rootProps = [
   },
   {
     propName: 'enableColumnActions',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
@@ -174,7 +174,7 @@ export const rootProps = [
   },
   {
     propName: 'enableColumnFilters',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
@@ -204,7 +204,7 @@ export const rootProps = [
   },
   {
     propName: 'enableDensityToggle',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
@@ -239,12 +239,12 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'TanStack Table',
     type: 'boolean',
   },
   {
     propName: 'enableFilters',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
@@ -254,7 +254,7 @@ export const rootProps = [
   },
   {
     propName: 'enableFullScreenToggle',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
@@ -264,7 +264,7 @@ export const rootProps = [
   },
   {
     propName: 'enableGlobalFilter',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
@@ -284,7 +284,7 @@ export const rootProps = [
   },
   {
     propName: 'enableHiding',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
@@ -324,7 +324,7 @@ export const rootProps = [
   },
   {
     propName: 'enablePagination',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
@@ -394,7 +394,7 @@ export const rootProps = [
   },
   {
     propName: 'enableSelectAll',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
@@ -404,7 +404,7 @@ export const rootProps = [
   },
   {
     propName: 'enableSorting',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
@@ -414,7 +414,7 @@ export const rootProps = [
   },
   {
     propName: 'enableSortingRemoval',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
@@ -434,7 +434,7 @@ export const rootProps = [
   },
   {
     propName: 'enableSubRowSelection',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
@@ -444,7 +444,7 @@ export const rootProps = [
   },
   {
     propName: 'enableTableFooter',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
@@ -454,7 +454,7 @@ export const rootProps = [
   },
   {
     propName: 'enableTableHead',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
@@ -464,7 +464,7 @@ export const rootProps = [
   },
   {
     propName: 'enableToolbarBottom',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
@@ -474,7 +474,7 @@ export const rootProps = [
   },
   {
     propName: 'enableToolbarInternalActions',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
@@ -484,7 +484,7 @@ export const rootProps = [
   },
   {
     propName: 'enableToolbarTop',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
