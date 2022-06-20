@@ -10,7 +10,7 @@ const ExampleTable = () => {
         <Typography>
           Wanna see the source code for this table? Check it out down below!
         </Typography>
-        <SourceCodeSnippet typeScriptCode={TS} />
+        <SourceCodeSnippet tableId="state-options" typeScriptCode={TS} />
       </Box>
     </NoSsr>
   );
