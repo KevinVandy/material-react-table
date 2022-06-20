@@ -1,7 +1,26 @@
 import Head from 'next/head';
+import SpanishExample from '../../../examples/localization-i18n-es';
 
 <Head>
   <title>Material React Table Docs - Localization (i18n) Feature Guide</title>
 </Head>
 
 ## Localization (i18n) Feature Guide
+
+### Relevant Props
+
+- localization
+
+---
+
+Material React Table has full support for localization.
+
+Some of the translations, such as the pagination component, will automatically respond to the locale of the MUI theme, so you just need to set that up correctly in your `ThemeProvider`.
+
+Most of the other translations can be specified manually in the `localization` prop.
+
+### Spanish Translation Example
+
+Here's a crude not-so-accurately translated Spanish example:
+
+<SpanishExample />

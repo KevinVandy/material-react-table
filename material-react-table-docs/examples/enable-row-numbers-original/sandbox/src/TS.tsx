@@ -28,8 +28,8 @@ const Example: FC = () => {
           id: 'state',
         },
       ] as MRT_ColumnDef<Person>[],
-    //end
     [],
+    //end
   );
 
   return (
