@@ -34,18 +34,18 @@ const ToggleFullCodeButton = styled(IconButton)({
 
 export interface Props {
   Component?: FC;
-  codeSandboxURL?: string;
+  showCodeSandboxLink?: boolean;
   javaScriptCode?: string;
-  tableId?: string;
+  tableId: string;
   typeScriptCode: string;
 }
 
 export const SourceCodeSnippet: FC<Props> = ({
   Component,
-  codeSandboxURL,
   javaScriptCode,
   tableId,
   typeScriptCode,
+  showCodeSandboxLink = true,
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery('(max-width: 720px)');
@@ -74,30 +74,43 @@ export const SourceCodeSnippet: FC<Props> = ({
   };
 
   return (
-    <div
-      style={{
+    <Box
+      sx={{
         display: 'flex',
         flexDirection: 'column',
         gap: '1rem',
-        margin: '1rem auto',
+        m: '2rem auto',
       }}
     >
       <Divider />
       {Component && (
         <>
           <Box sx={{ display: 'flex' }}>
-            <LinkHeading tableId={tableId} variant="h3">
+            <LinkHeading tableId={tableId} variant="h4">
               Demo
             </LinkHeading>
-            {codeSandboxURL && (
+            {showCodeSandboxLink && (
               <Button
-                href={codeSandboxURL}
+                href={`https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples/${tableId}/sandbox?file=/src/TS.tsx`}
                 rel="noreferrer"
                 target="_blank"
                 sx={{ height: '3rem', ml: '1rem' }}
                 variant="outlined"
               >
                 Open Code Sandbox
+              </Button>
+            )}
+            {showCodeSandboxLink && (
+              <Button
+                href={`https://github.com/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples/${tableId}/sandbox/src/${
+                  isTypeScript ? 'TS.tsx' : 'JS.js'
+                }`}
+                rel="noreferrer"
+                target="_blank"
+                sx={{ height: '3rem', ml: '1rem' }}
+                variant="outlined"
+              >
+                Open on GitHub
               </Button>
             )}
           </Box>
@@ -216,6 +229,6 @@ export const SourceCodeSnippet: FC<Props> = ({
         </Highlight>
       </div>
       <Divider />
-    </div>
+    </Box>
   );
 };

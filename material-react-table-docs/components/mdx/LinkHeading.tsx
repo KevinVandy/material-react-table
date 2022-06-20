@@ -20,7 +20,7 @@ export const LinkHeading: FC<Props> = ({ children, tableId, ...rest }) => {
 
   const [isCopied, setIsCopied] = useState(false);
 
-  const id = `${tableId ?? ''}${children
+  const id = `${tableId ? `${tableId}-` : ''}${children
     ?.toString()
     ?.toLowerCase?.()
     ?.replaceAll?.(' ', '-')}`;

@@ -10,6 +10,7 @@ const ExampleTable = () => {
       Component={Example}
       javaScriptCode={JS}
       typeScriptCode={TS}
+      tableId="remote"
     />
   );
 };
