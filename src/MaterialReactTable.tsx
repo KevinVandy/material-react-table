@@ -215,7 +215,7 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
         instance,
         cell,
       }: {
-        instance: MRT_TableInstance;
+        instance: MRT_TableInstance<D>;
         cell: MRT_Cell<D>;
       }) => ButtonProps);
   muiTableBodyCellEditTextFieldProps?:
@@ -224,7 +224,7 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
         instance,
         cell,
       }: {
-        instance: MRT_TableInstance;
+        instance: MRT_TableInstance<D>;
         cell: MRT_Cell<D>;
       }) => TextFieldProps);
   muiTableBodyCellProps?:
@@ -233,7 +233,7 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
         instance,
         cell,
       }: {
-        instance: MRT_TableInstance;
+        instance: MRT_TableInstance<D>;
         cell: MRT_Cell<D>;
       }) => TableCellProps);
   muiTableFooterCellProps?:
@@ -242,7 +242,7 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
         instance,
         column,
       }: {
-        instance: MRT_TableInstance;
+        instance: MRT_TableInstance<D>;
         column: MRT_Column<D>;
       }) => TableCellProps);
   muiTableHeadCellColumnActionsButtonProps?:
@@ -251,7 +251,7 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
         instance,
         column,
       }: {
-        instance: MRT_TableInstance;
+        instance: MRT_TableInstance<D>;
         column: MRT_Column<D>;
       }) => IconButtonProps);
   muiTableHeadCellFilterTextFieldProps?:
@@ -260,7 +260,7 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
         instance,
         column,
       }: {
-        instance: MRT_TableInstance;
+        instance: MRT_TableInstance<D>;
         column: MRT_Column<D>;
       }) => TextFieldProps);
   muiTableHeadCellProps?:
@@ -269,7 +269,7 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
         instance,
         column,
       }: {
-        instance: MRT_TableInstance;
+        instance: MRT_TableInstance<D>;
         column: MRT_Column<D>;
       }) => TableCellProps);
   onCellEditBlur?: ({
@@ -406,26 +406,38 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     enabledGlobalFilterOptions?: (MRT_FILTER_OPTION | string)[] | null;
     icons?: Partial<MRT_Icons>;
     localization?: Partial<MRT_Localization>;
+    muiExpandAllButtonProps?:
+      | IconButtonProps
+      | (({ instance }: { instance: MRT_TableInstance<D> }) => IconButtonProps);
+    muiExpandButtonProps?:
+      | IconButtonProps
+      | (({
+          instance,
+        }: {
+          instance: MRT_TableInstance<D>;
+          row: MRT_Row<D>;
+        }) => IconButtonProps);
     muiLinearProgressProps?:
       | LinearProgressProps
       | (({
           instance,
         }: {
-          instance: MRT_TableInstance;
+          instance: MRT_TableInstance<D>;
         }) => LinearProgressProps);
     muiSearchTextFieldProps?:
       | TextFieldProps
-      | (({ instance }: { instance: MRT_TableInstance }) => TextFieldProps);
+      | (({ instance }: { instance: MRT_TableInstance<D> }) => TextFieldProps);
+    muiSelectAllCheckboxProps?:
+      | CheckboxProps
+      | (({ instance }: { instance: MRT_TableInstance<D> }) => CheckboxProps);
     muiSelectCheckboxProps?:
       | CheckboxProps
       | (({
           instance,
-          isSelectAll,
           row,
         }: {
-          instance: MRT_TableInstance;
-          isSelectAll: boolean;
-          row?: MRT_Row<D>;
+          instance: MRT_TableInstance<D>;
+          row: MRT_Row<D>;
         }) => CheckboxProps);
     muiTableBodyCellCopyButtonProps?:
       | ButtonProps
@@ -433,7 +445,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
           instance,
           cell,
         }: {
-          instance: MRT_TableInstance;
+          instance: MRT_TableInstance<D>;
           cell: MRT_Cell<D>;
         }) => ButtonProps);
     muiTableBodyCellEditTextFieldProps?:
@@ -442,7 +454,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
           instance,
           cell,
         }: {
-          instance: MRT_TableInstance;
+          instance: MRT_TableInstance<D>;
           cell: MRT_Cell<D>;
         }) => TextFieldProps);
     muiTableBodyCellProps?:
@@ -451,7 +463,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
           instance,
           cell,
         }: {
-          instance: MRT_TableInstance;
+          instance: MRT_TableInstance<D>;
           cell: MRT_Cell<D>;
         }) => TableCellProps);
     muiTableBodyCellSkeletonProps?:
@@ -460,19 +472,19 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
           instance,
           cell,
         }: {
-          instance: MRT_TableInstance;
+          instance: MRT_TableInstance<D>;
           cell: MRT_Cell<D>;
         }) => SkeletonProps);
     muiTableBodyProps?:
       | TableBodyProps
-      | (({ instance }: { instance: MRT_TableInstance }) => TableBodyProps);
+      | (({ instance }: { instance: MRT_TableInstance<D> }) => TableBodyProps);
     muiTableBodyRowProps?:
       | TableRowProps
       | (({
           instance,
           row,
         }: {
-          instance: MRT_TableInstance;
+          instance: MRT_TableInstance<D>;
           row: MRT_Row<D>;
         }) => TableRowProps);
     muiTableContainerProps?:
@@ -480,7 +492,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       | (({
           instance,
         }: {
-          instance: MRT_TableInstance;
+          instance: MRT_TableInstance<D>;
         }) => TableContainerProps);
     muiTableDetailPanelProps?:
       | TableCellProps
@@ -488,7 +500,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
           instance,
           row,
         }: {
-          instance: MRT_TableInstance;
+          instance: MRT_TableInstance<D>;
           row: MRT_Row<D>;
         }) => TableCellProps);
     muiTableFooterCellProps?:
@@ -497,19 +509,19 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
           instance,
           column,
         }: {
-          instance: MRT_TableInstance;
+          instance: MRT_TableInstance<D>;
           column: MRT_Column<D>;
         }) => TableCellProps);
     muiTableFooterProps?:
       | TableFooterProps
-      | (({ instance }: { instance: MRT_TableInstance }) => TableFooterProps);
+      | (({ instance }: { instance: MRT_TableInstance<D> }) => TableFooterProps);
     muiTableFooterRowProps?:
       | TableRowProps
       | (({
           instance,
           footerGroup,
         }: {
-          instance: MRT_TableInstance;
+          instance: MRT_TableInstance<D>;
           footerGroup: MRT_HeaderGroup<D>;
         }) => TableRowProps);
     muiTableHeadCellColumnActionsButtonProps?:
@@ -518,7 +530,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
           instance,
           column,
         }: {
-          instance: MRT_TableInstance;
+          instance: MRT_TableInstance<D>;
           column: MRT_Column<D>;
         }) => IconButtonProps);
     muiTableHeadCellFilterTextFieldProps?:
@@ -527,7 +539,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
           instance,
           column,
         }: {
-          instance: MRT_TableInstance;
+          instance: MRT_TableInstance<D>;
           column: MRT_Column<D>;
         }) => TextFieldProps);
     muiTableHeadCellProps?:
@@ -536,19 +548,19 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
           instance,
           column,
         }: {
-          instance: MRT_TableInstance;
+          instance: MRT_TableInstance<D>;
           column: MRT_Column<D>;
         }) => TableCellProps);
     muiTableHeadProps?:
       | TableHeadProps
-      | (({ instance }: { instance: MRT_TableInstance }) => TableHeadProps);
+      | (({ instance }: { instance: MRT_TableInstance<D> }) => TableHeadProps);
     muiTableHeadRowProps?:
       | TableRowProps
       | (({
           instance,
           headerGroup,
         }: {
-          instance: MRT_TableInstance;
+          instance: MRT_TableInstance<D>;
           headerGroup: MRT_HeaderGroup<D>;
         }) => TableRowProps);
     muiTablePaginationProps?:
@@ -556,23 +568,23 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       | (({
           instance,
         }: {
-          instance: MRT_TableInstance;
+          instance: MRT_TableInstance<D>;
         }) => Partial<TablePaginationProps>);
     muiTablePaperProps?:
       | PaperProps
-      | (({ instance }: { instance: MRT_TableInstance }) => PaperProps);
+      | (({ instance }: { instance: MRT_TableInstance<D> }) => PaperProps);
     muiTableProps?:
       | TableProps
-      | (({ instance }: { instance: MRT_TableInstance }) => TableProps);
+      | (({ instance }: { instance: MRT_TableInstance<D> }) => TableProps);
     muiTableToolbarAlertBannerProps?:
       | AlertProps
-      | (({ instance }: { instance: MRT_TableInstance }) => AlertProps);
+      | (({ instance }: { instance: MRT_TableInstance<D> }) => AlertProps);
     muiTableToolbarBottomProps?:
       | ToolbarProps
-      | (({ instance }: { instance: MRT_TableInstance }) => ToolbarProps);
+      | (({ instance }: { instance: MRT_TableInstance<D> }) => ToolbarProps);
     muiTableToolbarTopProps?:
       | ToolbarProps
-      | (({ instance }: { instance: MRT_TableInstance }) => ToolbarProps);
+      | (({ instance }: { instance: MRT_TableInstance<D> }) => ToolbarProps);
     onCellClick?: ({
       cell,
       event,

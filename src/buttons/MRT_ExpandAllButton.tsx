@@ -15,12 +15,18 @@ export const MRT_ExpandAllButton: FC<Props> = ({ instance }) => {
     options: {
       icons: { KeyboardDoubleArrowDownIcon },
       localization,
+      muiExpandAllButtonProps,
       renderDetailPanel,
     },
     toggleAllRowsExpanded,
   } = instance;
 
   const { density } = getState();
+
+  const iconButtonProps =
+    muiExpandAllButtonProps instanceof Function
+      ? muiExpandAllButtonProps({ instance })
+      : muiExpandAllButtonProps;
 
   return (
     <Tooltip
@@ -33,9 +39,11 @@ export const MRT_ExpandAllButton: FC<Props> = ({ instance }) => {
         aria-label={localization.expandAll}
         disabled={!getCanSomeRowsExpand() && !renderDetailPanel}
         onClick={() => toggleAllRowsExpanded(!getIsAllRowsExpanded())}
+        {...iconButtonProps}
         sx={{
           height: density === 'compact' ? '1.75rem' : '2.25rem',
           width: density === 'compact' ? '1.75rem' : '2.25rem',
+          ...iconButtonProps?.sx,
         }}
       >
         <KeyboardDoubleArrowDownIcon

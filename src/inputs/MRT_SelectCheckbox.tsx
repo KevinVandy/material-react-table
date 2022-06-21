@@ -11,11 +11,13 @@ interface Props {
 export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, instance }) => {
   const {
     getRowModel,
+    getPaginationRowModel,
     getSelectedRowModel,
     getState,
     options: {
       localization,
       muiSelectCheckboxProps,
+      muiSelectAllCheckboxProps,
       onRowSelectionChanged,
       onRowSelectAllChanged,
       selectAllMode,
@@ -33,7 +35,11 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, instance }) => {
       }
       onRowSelectAllChanged?.({
         event,
-        selectedRows: event.target.checked ? getRowModel().flatRows : [],
+        selectedRows: event.target.checked
+          ? selectAllMode === 'all'
+            ? getRowModel().flatRows
+            : getPaginationRowModel().flatRows
+          : [],
         instance,
       });
     } else if (row) {
@@ -51,10 +57,13 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, instance }) => {
     }
   };
 
-  const checkboxProps =
-    muiSelectCheckboxProps instanceof Function
-      ? muiSelectCheckboxProps({ isSelectAll: !!selectAll, row, instance })
-      : muiSelectCheckboxProps;
+  const checkboxProps = selectAll
+    ? muiSelectAllCheckboxProps instanceof Function
+      ? muiSelectAllCheckboxProps({ instance })
+      : muiSelectAllCheckboxProps
+    : muiSelectCheckboxProps instanceof Function
+    ? muiSelectCheckboxProps({ row: row as MRT_Row, instance })
+    : muiSelectCheckboxProps;
 
   return (
     <Tooltip

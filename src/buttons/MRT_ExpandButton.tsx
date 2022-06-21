@@ -13,12 +13,18 @@ export const MRT_ExpandButton: FC<Props> = ({ row, instance }) => {
     options: {
       icons: { ExpandMoreIcon },
       localization,
+      muiExpandButtonProps,
       onExpandChanged,
       renderDetailPanel,
     },
   } = instance;
 
   const { density } = getState();
+
+  const iconButtonProps =
+    muiExpandButtonProps instanceof Function
+      ? muiExpandButtonProps({ instance, row })
+      : muiExpandButtonProps;
 
   const handleToggleExpand = (event: MouseEvent<HTMLButtonElement>) => {
     row.toggleExpanded();
@@ -36,9 +42,11 @@ export const MRT_ExpandButton: FC<Props> = ({ row, instance }) => {
         aria-label={localization.expand}
         disabled={!row.getCanExpand() && !renderDetailPanel}
         onClick={handleToggleExpand}
+        {...iconButtonProps}
         sx={{
           height: density === 'compact' ? '1.75rem' : '2.25rem',
           width: density === 'compact' ? '1.75rem' : '2.25rem',
+          ...iconButtonProps?.sx,
         }}
       >
         <ExpandMoreIcon

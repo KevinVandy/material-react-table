@@ -853,6 +853,16 @@ export const rootProps = [
     type: '',
   },
   {
+    propName: 'muiSelectAllCheckboxProps',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '',
+  },
+  {
     propName: 'muiSelectCheckboxProps',
     defaultValue: '',
     description: '',

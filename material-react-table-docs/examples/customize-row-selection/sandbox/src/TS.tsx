@@ -88,9 +88,9 @@ const Example: FC = () => {
       data={data}
       enableSelectAll={false}
       enableRowSelection
-      muiSelectCheckboxProps={({ isSelectAll, row }) => ({
+      muiSelectCheckboxProps={({ row }) => ({
         color: 'secondary',
-        disabled: !isSelectAll && row?.getValue('age') < 21,
+        disabled: row?.getValue('age') < 21,
       })}
       onRowSelectionChanged={({ event, row, selectedRows }) => {
         console.log({ event, row, selectedRows });
