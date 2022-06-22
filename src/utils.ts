@@ -4,7 +4,12 @@ import {
   Table,
   Updater,
 } from '@tanstack/react-table';
-import { MRT_Column, MRT_ColumnDef, MRT_FilterFn } from '.';
+import {
+  MaterialReactTableProps,
+  MRT_Column,
+  MRT_ColumnDef,
+  MRT_FilterFn,
+} from '.';
 import { defaultFilterFNs } from './filtersFNs';
 
 export const getAllLeafColumnDefs = (
@@ -74,3 +79,30 @@ export const reorderColumn = (
   );
   setColumnOrder([...columnOrder]);
 };
+
+export const getLeadingDisplayColumnIds = (
+  props: MaterialReactTableProps<any>,
+) =>
+  [
+    ((props.positionActionsColumn === 'first' && props.enableRowActions) ||
+      (props.enableEditing && props.editingMode === 'row')) &&
+      'mrt-row-actions',
+    (props.enableExpanding || props.enableGrouping) && 'mrt-expand',
+    props.enableRowSelection && 'mrt-select',
+    props.enableRowNumbers && 'mrt-row-numbers',
+  ].filter(Boolean) as string[];
+
+export const getTrailingDisplayColumnIds = (
+  props: MaterialReactTableProps<any>,
+) => [
+  ((props.positionActionsColumn === 'last' && props.enableRowActions) ||
+    (props.enableEditing && props.editingMode === 'row')) &&
+    'mrt-row-actions',
+];
+
+export const getDefaultColumnOrderIds = (props: MaterialReactTableProps<any>) =>
+  [
+    ...getLeadingDisplayColumnIds(props),
+    ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef[]).map((c) => c.id),
+    ...getTrailingDisplayColumnIds(props),
+  ].filter(Boolean) as string[];

@@ -131,6 +131,7 @@ export const RowActionsLastColumn: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableRowActions
+    initialState={{ density: 'compact' }}
     positionActionsColumn="last"
     renderRowActionMenuItems={({ row, closeMenu }) => [
       <MenuItem

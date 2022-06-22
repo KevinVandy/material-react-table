@@ -514,7 +514,11 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
         }) => TableCellProps);
     muiTableFooterProps?:
       | TableFooterProps
-      | (({ instance }: { instance: MRT_TableInstance<D> }) => TableFooterProps);
+      | (({
+          instance,
+        }: {
+          instance: MRT_TableInstance<D>;
+        }) => TableFooterProps);
     muiTableFooterRowProps?:
       | TableRowProps
       | (({
@@ -838,6 +842,7 @@ export default <D extends Record<string, any> = {}>({
   enableMultiRowSelection = true,
   enablePagination = true,
   enablePinning = false,
+  enableRowSelection = false,
   enableSelectAll = true,
   enableSorting = true,
   enableStickyHeader = false,
@@ -850,8 +855,8 @@ export default <D extends Record<string, any> = {}>({
   localization,
   persistentStateMode = 'sessionStorage',
   positionActionsColumn = 'first',
-  positionPagination = 'bottom',
   positionGlobalFilter = 'right',
+  positionPagination = 'bottom',
   positionToolbarActions = 'top',
   positionToolbarAlertBanner = 'top',
   rowNumberMode = 'original',
@@ -877,6 +882,7 @@ export default <D extends Record<string, any> = {}>({
     enableMultiRowSelection={enableMultiRowSelection}
     enablePagination={enablePagination}
     enablePinning={enablePinning}
+    enableRowSelection={enableRowSelection}
     enableSelectAll={enableSelectAll}
     enableSorting={enableSorting}
     enableStickyHeader={enableStickyHeader}

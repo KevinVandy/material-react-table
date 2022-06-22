@@ -34,6 +34,7 @@ import {
   createDisplayColumn,
   createGroup,
   getAllLeafColumnDefs,
+  getDefaultColumnOrderIds,
 } from '../utils';
 import { defaultFilterFNs } from '../filtersFNs';
 import { Box, Dialog, Grow } from '@mui/material';
@@ -48,28 +49,10 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     [props.tableId],
   );
 
-  const showActionColumn =
-    props.enableRowActions ||
-    (props.enableEditing && props.editingMode === 'row');
-
-  const showExpandColumn = props.enableExpanding || props.enableGrouping;
-
   const initialState: Partial<MRT_TableState<D>> = useMemo(() => {
     const initState = props.initialState ?? {};
-
     initState.columnOrder =
-      initState?.columnOrder ??
-      (props.enableColumnOrdering || props.enableGrouping)
-        ? ([
-            showActionColumn && 'mrt-row-actions',
-            showExpandColumn && 'mrt-expand',
-            props.enableRowSelection && 'mrt-select',
-            props.enableRowNumbers && 'mrt-row-numbers',
-            ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef[]).map(
-              (c) => c.id,
-            ),
-          ].filter(Boolean) as string[])
-        : [];
+      initState.columnOrder ?? getDefaultColumnOrderIds(props);
 
     if (!props.enablePersistentState || !props.tableId) {
       return initState;
@@ -97,6 +80,9 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     return initState;
   }, []);
 
+  const [columnOrder, setColumnOrder] = useState(
+    initialState.columnOrder ?? [],
+  );
   const [currentEditingCell, setCurrentEditingCell] =
     useState<MRT_Cell<D> | null>(initialState?.currentEditingCell ?? null);
   const [currentEditingRow, setCurrentEditingRow] = useState<MRT_Row<D> | null>(
@@ -148,14 +134,13 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         getSortedRowModel: getSortedRowModel(),
         getSubRows: (row) => (row as MRT_Row)?.subRows,
         tableId,
-        initialState,
       }) as Table<D>,
     [],
   );
 
-  const [leadingDisplayColumns, trailingDisplayColumns] = useMemo(() => {
-    const leadingDisplayColumns = [
-      showActionColumn &&
+  const displayColumns = useMemo(() => {
+    return [
+      columnOrder.includes('mrt-row-actions') &&
         createDisplayColumn(table, {
           Cell: ({ cell }) => (
             <MRT_ToggleRowActionMenuButton
@@ -169,7 +154,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
           muiTableHeadCellProps: props.muiTableHeadCellProps,
           size: 70,
         }),
-      showExpandColumn &&
+      columnOrder.includes('mrt-expand') &&
         createDisplayColumn(table, {
           Cell: ({ cell }) => (
             <MRT_ExpandButton row={cell.row as any} instance={instance} />
@@ -184,7 +169,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
           muiTableHeadCellProps: props.muiTableHeadCellProps,
           size: 50,
         }),
-      props.enableRowSelection &&
+      columnOrder.includes('mrt-select') &&
         createDisplayColumn(table, {
           Cell: ({ cell }) => (
             <MRT_SelectCheckbox row={cell.row as any} instance={instance} />
@@ -199,7 +184,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
           muiTableHeadCellProps: props.muiTableHeadCellProps,
           size: 50,
         }),
-      props.enableRowNumbers &&
+      columnOrder.includes('mrt-row-numbers') &&
         createDisplayColumn(table, {
           Cell: ({ cell }) => cell.row.index + 1,
           Header: () => props.localization?.rowNumber,
@@ -210,22 +195,8 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
           size: 50,
         }),
     ].filter(Boolean) as MRT_ColumnDef<D>[];
-
-    const trailingDisplayColumns = [] as MRT_ColumnDef<D>[];
-
-    if (props.enableRowActions && props.positionActionsColumn === 'last') {
-      trailingDisplayColumns.push(
-        ...leadingDisplayColumns.splice(
-          leadingDisplayColumns.findIndex(
-            (col) => col.id === 'mrt-row-actions',
-          ),
-          1,
-        ),
-      );
-    }
-
-    return [leadingDisplayColumns, trailingDisplayColumns];
   }, [
+    columnOrder,
     props.editingMode,
     props.enableEditing,
     props.enableExpandAll,
@@ -244,13 +215,12 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
 
   const columns = useMemo(
     () => [
-      ...leadingDisplayColumns,
+      ...displayColumns,
       ...props.columns.map((column) =>
         column.columns
           ? createGroup(table, column as any, currentFilterFns)
           : createDataColumn(table, column as any, currentFilterFns),
       ),
-      ...trailingDisplayColumns,
     ],
     [table, props.columns, currentFilterFns],
   );
@@ -277,13 +247,16 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   const instance = {
     //@ts-ignore
     ...useTableInstance(table, {
+      onColumnOrderChange: setColumnOrder,
       ...props,
       //@ts-ignore
       columns,
       data,
       //@ts-ignore
       globalFilterFn: currentGlobalFilterFn,
+      initialState,
       state: {
+        columnOrder,
         currentEditingCell,
         currentEditingRow,
         currentFilterFns,

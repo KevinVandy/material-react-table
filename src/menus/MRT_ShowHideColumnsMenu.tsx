@@ -2,6 +2,7 @@ import React, { FC, useMemo } from 'react';
 import { Button, Menu, Divider, Box } from '@mui/material';
 import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
 import type { MRT_Column, MRT_TableInstance } from '..';
+import { getDefaultColumnOrderIds } from '../utils';
 
 interface Props {
   anchorEl: HTMLElement | null;
@@ -88,7 +89,13 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
           </Button>
         )}
         {!isSubMenu && enableColumnOrdering && (
-          <Button onClick={() => instance.resetColumnOrder()}>
+          <Button
+            onClick={() =>
+              instance.setColumnOrder(
+                getDefaultColumnOrderIds(instance.options as any),
+              )
+            }
+          >
             {localization.resetOrder}
           </Button>
         )}

@@ -29,7 +29,7 @@ body:
     attributes:
       label: Your minimal, reproducible example
       description: |
-        Please add a link to a minimal reproduction.
+        Please add a link to a minimal reproduction. This can really speed up the diagnosis of the problem!
         Note:
           - Your bug may get fixed much faster if we can run your code and it doesn't have dependencies other than React.
           - To create a shareable code example for web, you can use CodeSandbox (https://codesandbox.io/s/new).
@@ -37,9 +37,9 @@ body:
           - Feel free to fork any of the official CodeSandbox examples to reproduce your issue: https://github.com/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples
           - Please read these tips for providing a minimal example: https://stackoverflow.com/help/mcve.
       placeholder: |
-        e.g. Code Sandbox, Stackblitz, Expo Snack or TypeScript playground
+        e.g. Code Sandbox, Stackblitz, etc.
     validations:
-      required: true
+      required: false
   - type: textarea
     id: steps
     attributes:
@@ -48,7 +48,7 @@ body:
       placeholder: |
         1. Go to '...' 2. Click on '....' 3. Scroll down to '....' 4. See error
     validations:
-      required: true
+      required: false
   - type: textarea
     id: expected
     attributes:
@@ -72,7 +72,7 @@ body:
   - type: textarea
     id: screenshots_or_videos
     attributes:
-      label: Screenshots or Videos
+      label: Screenshots or Videos (Optional)
       description: |
         If applicable, add screenshots or a video to help explain your problem.
         For more information on the supported file image/file types and the file size limits, please refer
