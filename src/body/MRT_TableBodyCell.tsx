@@ -30,6 +30,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
       muiTableBodyCellProps,
       muiTableBodyCellSkeletonProps,
       onCellClick,
+      onRowClick,
       rowNumberMode,
       tableId,
     },
@@ -146,7 +147,8 @@ export const MRT_TableBodyCell: FC<Props> = ({
           : getIsFirstRightPinnedColumn()
           ? `-4px 0 4px -2px ${alpha(theme.palette.common.black, 0.1)}`
           : undefined,
-        cursor: isEditable && editingMode === 'cell' ? 'pointer' : 'text',
+        cursor: (isEditable && editingMode === 'cell') ||
+          onRowClick || onCellClick ? 'pointer' : 'text',
         left:
           column.getIsPinned() === 'left'
             ? `${column.getStart('left')}px`
