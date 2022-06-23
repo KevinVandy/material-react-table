@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { alpha, Box, Toolbar, useMediaQuery } from '@mui/material';
 import { MRT_TablePagination } from './MRT_TablePagination';
-import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
 import { commonToolbarStyles } from './MRT_ToolbarTop';
@@ -15,14 +14,12 @@ export const MRT_ToolbarBottom: FC<Props> = ({ instance }) => {
   const {
     getState,
     options: {
-      enableToolbarInternalActions,
-      tableId,
       enablePagination,
       muiTableToolbarBottomProps,
       positionPagination,
-      positionToolbarActions,
       positionToolbarAlertBanner,
-      renderToolbarCustomActions,
+      renderToolbarBottomCustomActions,
+      tableId,
     },
   } = instance;
 
@@ -38,10 +35,7 @@ export const MRT_ToolbarBottom: FC<Props> = ({ instance }) => {
   const stackAlertBanner =
     isMobile ||
     (positionToolbarAlertBanner === 'bottom' &&
-      positionToolbarActions === 'bottom') ||
-    (positionToolbarAlertBanner === 'bottom' &&
-      !!renderToolbarCustomActions &&
-      positionToolbarActions === 'bottom');
+      !!renderToolbarBottomCustomActions);
 
   return (
     <Toolbar
@@ -67,20 +61,29 @@ export const MRT_ToolbarBottom: FC<Props> = ({ instance }) => {
           display: 'flex',
           justifyContent: 'space-between',
           width: '100%',
-          position: stackAlertBanner ? 'relative' : 'absolute',
-          right: 0,
-          top: 0,
         }}
       >
-        {enableToolbarInternalActions && positionToolbarActions === 'bottom' ? (
-          <MRT_ToolbarInternalButtons instance={instance} />
+        {renderToolbarBottomCustomActions ? (
+          <Box sx={{ p: '0.5rem' }}>
+            {renderToolbarBottomCustomActions({ instance })}
+          </Box>
         ) : (
           <span />
         )}
-        {enablePagination &&
-          ['bottom', 'both'].includes(positionPagination ?? '') && (
-            <MRT_TablePagination instance={instance} />
-          )}
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            position: stackAlertBanner ? 'relative' : 'absolute',
+            right: 0,
+            top: 0,
+          }}
+        >
+          {enablePagination &&
+            ['bottom', 'both'].includes(positionPagination ?? '') && (
+              <MRT_TablePagination instance={instance} position="bottom" />
+            )}
+        </Box>
       </Box>
     </Toolbar>
   );

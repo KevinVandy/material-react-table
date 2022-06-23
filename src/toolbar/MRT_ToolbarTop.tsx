@@ -15,7 +15,6 @@ export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
   overflow: 'hidden',
   p: '0 !important',
   transition: 'all 0.2s ease-in-out',
-  width: '100%',
   zIndex: 1,
 });
 
@@ -30,13 +29,12 @@ export const MRT_ToolbarTop: FC<Props> = ({ instance }) => {
       enableGlobalFilter,
       enablePagination,
       enableToolbarInternalActions,
-      tableId,
       muiTableToolbarTopProps,
-      positionPagination,
       positionGlobalFilter,
-      positionToolbarActions,
+      positionPagination,
       positionToolbarAlertBanner,
-      renderToolbarCustomActions,
+      renderToolbarTopCustomActions,
+      tableId,
     },
   } = instance;
 
@@ -52,7 +50,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ instance }) => {
   const stackAlertBanner =
     isMobile ||
     (positionToolbarAlertBanner === 'top' &&
-      (!!renderToolbarCustomActions || showGlobalFilter));
+      (!!renderToolbarTopCustomActions || showGlobalFilter));
 
   return (
     <Toolbar
@@ -77,29 +75,34 @@ export const MRT_ToolbarTop: FC<Props> = ({ instance }) => {
       <Box
         sx={{
           alignItems: 'flex-start',
+          boxSizing: 'border-box',
           display: 'flex',
           justifyContent: 'space-between',
           p: '0.5rem',
           position: stackAlertBanner ? 'relative' : 'absolute',
           right: 0,
           top: 0,
-          width: renderToolbarCustomActions ? '100%' : undefined,
+          width: '100%',
         }}
       >
         {enableGlobalFilter && positionGlobalFilter === 'left' && (
           <MRT_SearchTextField instance={instance} />
         )}
-        {renderToolbarCustomActions?.({ instance }) ?? <span />}
-        {enableToolbarInternalActions && positionToolbarActions === 'top' && (
+
+        {renderToolbarTopCustomActions?.({ instance }) ?? <span />}
+        {enableToolbarInternalActions ? (
           <MRT_ToolbarInternalButtons instance={instance} />
+        ) : (
+          enableGlobalFilter &&
+          positionGlobalFilter === 'right' && (
+            <MRT_SearchTextField instance={instance} />
+          )
         )}
       </Box>
-      <div>
-        {enablePagination &&
-          ['top', 'both'].includes(positionPagination ?? '') && (
-            <MRT_TablePagination instance={instance} />
-          )}
-      </div>
+      {enablePagination &&
+        ['top', 'both'].includes(positionPagination ?? '') && (
+          <MRT_TablePagination instance={instance} position="top" />
+        )}
       <MRT_LinearProgressBar alignTo="bottom" instance={instance} />
     </Toolbar>
   );

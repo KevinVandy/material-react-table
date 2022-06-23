@@ -762,7 +762,6 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     positionActionsColumn?: 'first' | 'last';
     positionGlobalFilter?: 'left' | 'right';
     positionPagination?: 'bottom' | 'top' | 'both';
-    positionToolbarActions?: 'bottom' | 'top';
     positionToolbarAlertBanner?: 'bottom' | 'top';
     renderDetailPanel?: ({
       row,
@@ -787,7 +786,12 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       row: MRT_Row<D>;
       instance: MRT_TableInstance<D>;
     }) => ReactNode;
-    renderToolbarCustomActions?: ({
+    renderToolbarBottomCustomActions?: ({
+      instance,
+    }: {
+      instance: MRT_TableInstance<D>;
+    }) => ReactNode;
+    renderToolbarTopCustomActions?: ({
       instance,
     }: {
       instance: MRT_TableInstance<D>;
@@ -857,7 +861,6 @@ export default <D extends Record<string, any> = {}>({
   positionActionsColumn = 'first',
   positionGlobalFilter = 'right',
   positionPagination = 'bottom',
-  positionToolbarActions = 'top',
   positionToolbarAlertBanner = 'top',
   rowNumberMode = 'original',
   selectAllMode = 'all',
@@ -897,7 +900,6 @@ export default <D extends Record<string, any> = {}>({
     positionActionsColumn={positionActionsColumn}
     positionGlobalFilter={positionGlobalFilter}
     positionPagination={positionPagination}
-    positionToolbarActions={positionToolbarActions}
     positionToolbarAlertBanner={positionToolbarAlertBanner}
     rowNumberMode={rowNumberMode}
     selectAllMode={selectAllMode}

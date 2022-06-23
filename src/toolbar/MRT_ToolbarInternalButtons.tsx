@@ -29,8 +29,8 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ instance }) => {
   return (
     <Box
       sx={{
-        display: 'flex',
         alignItems: 'center',
+        display: 'flex',
         zIndex: 3,
       }}
     >

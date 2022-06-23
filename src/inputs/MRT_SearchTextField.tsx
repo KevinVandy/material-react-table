@@ -79,16 +79,14 @@ export const MRT_SearchTextField: FC<Props> = ({ instance }) => {
           startAdornment: (
             <InputAdornment position="start">
               <Tooltip arrow title={localization.changeSearchMode}>
-                <span>
-                  <IconButton
-                    aria-label={localization.changeSearchMode}
-                    onClick={handleGlobalFilterMenuOpen}
-                    size="small"
-                    sx={{ height: '1.75rem', width: '1.75rem' }}
-                  >
-                    <SearchIcon />
-                  </IconButton>
-                </span>
+                <IconButton
+                  aria-label={localization.changeSearchMode}
+                  onClick={handleGlobalFilterMenuOpen}
+                  size="small"
+                  sx={{ height: '1.75rem', width: '1.75rem' }}
+                >
+                  <SearchIcon />
+                </IconButton>
               </Tooltip>
             </InputAdornment>
           ),
@@ -107,7 +105,6 @@ export const MRT_SearchTextField: FC<Props> = ({ instance }) => {
           ),
         }}
         {...textFieldProps}
-        sx={{ justifySelf: 'end', ...textFieldProps?.sx }}
       />
       <MRT_FilterOptionMenu
         anchorEl={anchorEl}

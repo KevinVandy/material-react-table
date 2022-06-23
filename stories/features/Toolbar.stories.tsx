@@ -86,17 +86,6 @@ export const HideToolbarInternalActions: Story<
   />
 );
 
-export const ToolbarInternalActionsOnBottom: Story<
-  MaterialReactTableProps
-> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    enableRowSelection
-    positionToolbarActions="bottom"
-  />
-);
-
 export const CustomToolbarInternalActions: Story<
   MaterialReactTableProps
 > = () => (
@@ -123,18 +112,18 @@ export const TableTitle: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableRowSelection
-    renderToolbarCustomActions={(instance) => {
+    renderToolbarTopCustomActions={(instance) => {
       return <Typography variant="h4">Table Title</Typography>;
     }}
   />
 );
 
-export const CustomToolbarActions: Story<MaterialReactTableProps> = () => (
+export const CustomToolbarTopActions: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     enableRowSelection
-    renderToolbarCustomActions={(instance) => {
+    renderToolbarTopCustomActions={(instance) => {
       const handleCreateNewUser = () => {
         prompt('Create new user modal');
       };
@@ -152,14 +141,97 @@ export const CustomToolbarActions: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const CustomToolbarSelectionActions: Story<
+export const CustomToolbarBottomActions: Story<
   MaterialReactTableProps
 > = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     enableRowSelection
-    renderToolbarCustomActions={({ instance }) => {
+    renderToolbarBottomCustomActions={(instance) => {
+      const handleCreateNewUser = () => {
+        prompt('Create new user modal');
+      };
+
+      return (
+        <div>
+          <Tooltip arrow title="Create New User">
+            <IconButton onClick={handleCreateNewUser}>
+              <AddBoxIcon />
+            </IconButton>
+          </Tooltip>
+        </div>
+      );
+    }}
+  />
+);
+
+export const CustomToolbarTopSelectionActions: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowSelection
+    renderToolbarTopCustomActions={({ instance }) => {
+      const handleDeactivate = () => {
+        instance.getSelectedRowModel().flatRows.map((row) => {
+          alert('deactivating ' + row.original.firstName);
+        });
+      };
+
+      const handleActivate = () => {
+        instance.getSelectedRowModel().flatRows.map((row) => {
+          alert('activating ' + row.original.firstName);
+        });
+      };
+
+      const handleContact = () => {
+        instance.getSelectedRowModel().flatRows.map((row) => {
+          alert('contact ' + row.original.firstName);
+        });
+      };
+
+      return (
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <Button
+            color="error"
+            disabled={instance.getSelectedRowModel().flatRows.length === 0}
+            onClick={handleDeactivate}
+            variant="contained"
+          >
+            Deactivate
+          </Button>
+          <Button
+            color="success"
+            disabled={instance.getSelectedRowModel().flatRows.length === 0}
+            onClick={handleActivate}
+            variant="contained"
+          >
+            Activate
+          </Button>
+          <Button
+            color="info"
+            disabled={instance.getSelectedRowModel().flatRows.length === 0}
+            onClick={handleContact}
+            variant="contained"
+          >
+            Contact
+          </Button>
+        </div>
+      );
+    }}
+  />
+);
+
+export const CustomToolbarBottomSelectionActions: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowSelection
+    renderToolbarBottomCustomActions={({ instance }) => {
       const handleDeactivate = () => {
         instance.getSelectedRowModel().flatRows.map((row) => {
           alert('deactivating ' + row.original.firstName);
@@ -216,7 +288,46 @@ export const ToolbarAlertBannerBottom: Story<MaterialReactTableProps> = () => (
     data={data}
     enableRowSelection
     positionToolbarAlertBanner="bottom"
-    renderToolbarCustomActions={({ instance }) => {
+    renderToolbarTopCustomActions={({ instance }) => {
+      const handleCreateNewUser = () => {
+        prompt('Create new user modal');
+      };
+      const handleRemoveUsers = () => {
+        confirm('Are you sure you want to remove the selected users?');
+      };
+
+      return (
+        <div>
+          <Tooltip arrow title="Create New User">
+            <IconButton onClick={handleCreateNewUser}>
+              <AddBoxIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip arrow title="Remove Users">
+            <span>
+              <IconButton
+                disabled={instance.getSelectedRowModel().flatRows.length === 0}
+                onClick={handleRemoveUsers}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </span>
+          </Tooltip>
+        </div>
+      );
+    }}
+  />
+);
+
+export const ToolbarAlertBannerBottomWithActionsAlsoBottom: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowSelection
+    positionToolbarAlertBanner="bottom"
+    renderToolbarBottomCustomActions={({ instance }) => {
       const handleCreateNewUser = () => {
         prompt('Create new user modal');
       };

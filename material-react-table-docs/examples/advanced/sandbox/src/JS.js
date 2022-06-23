@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import MaterialReactTable from 'material-react-table';
-import { Box, ListItemIcon, MenuItem, Typography } from '@mui/material';
+import { Box, Button, ListItemIcon, MenuItem, Typography } from '@mui/material';
 import { AccountCircle, Send } from '@mui/icons-material';
 import { makeData } from './makeData';
 
@@ -155,6 +155,54 @@ const Example = () => {
           Send Email
         </MenuItem>,
       ]}
+      renderToolbarTopCustomActions={({ instance }) => {
+        const handleDeactivate = () => {
+          instance.getSelectedRowModel().flatRows.map((row) => {
+            alert('deactivating ' + row.original.firstName);
+          });
+        };
+
+        const handleActivate = () => {
+          instance.getSelectedRowModel().flatRows.map((row) => {
+            alert('activating ' + row.original.firstName);
+          });
+        };
+
+        const handleContact = () => {
+          instance.getSelectedRowModel().flatRows.map((row) => {
+            alert('contact ' + row.original.firstName);
+          });
+        };
+
+        return (
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <Button
+              color="error"
+              disabled={instance.getSelectedRowModel().flatRows.length === 0}
+              onClick={handleDeactivate}
+              variant="contained"
+            >
+              Deactivate
+            </Button>
+            <Button
+              color="success"
+              disabled={instance.getSelectedRowModel().flatRows.length === 0}
+              onClick={handleActivate}
+              variant="contained"
+            >
+              Activate
+            </Button>
+            <Button
+              color="info"
+              disabled={instance.getSelectedRowModel().flatRows.length === 0}
+              onClick={handleContact}
+              variant="contained"
+            >
+              Contact
+            </Button>
+          </div>
+        );
+      }}
     />
   );
 };

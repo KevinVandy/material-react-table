@@ -4,19 +4,21 @@ import { MRT_TableInstance } from '..';
 
 interface Props {
   instance: MRT_TableInstance;
+  position: 'top' | 'bottom';
 }
 
-export const MRT_TablePagination: FC<Props> = ({ instance }) => {
+export const MRT_TablePagination: FC<Props> = ({ instance, position }) => {
   const {
     getPrePaginationRowModel,
     getState,
     setPageIndex,
     setPageSize,
-    options: { muiTablePaginationProps },
+    options: { muiTablePaginationProps, enableToolbarInternalActions },
   } = instance;
 
   const {
     pagination: { pageSize = 10, pageIndex = 0 },
+    showGlobalFilter,
   } = getState();
 
   const tablePaginationProps =
@@ -49,6 +51,12 @@ export const MRT_TablePagination: FC<Props> = ({ instance }) => {
       {...tablePaginationProps}
       sx={{
         m: '0 0.5rem',
+        mt:
+          position === 'top' &&
+          enableToolbarInternalActions &&
+          !showGlobalFilter
+            ? '3.5rem'
+            : undefined,
         position: 'relative',
         zIndex: 2,
         ...tablePaginationProps?.sx,
