@@ -1,14 +1,10 @@
-name: '🐛 Bug report'
+name: "🐛 Bug report"
 description: Report a reproducible bug or regression
 body:
   - type: markdown
     attributes:
       value: |
         Thank you for reporting an issue :pray:.
-
-        This issue tracker is for reporting reproducible bugs or regression's found in [material-react-table](https://github.com/KevinVandy/material-react-table)
-        If you have a question about how to achieve or implement something and are struggling, please post a question
-        inside of MRT's [Discussions tab](https://github.com/KevinVandy/material-react-table/discussions) instead of filing an issue.
 
         Before submitting a new bug/issue, please check the links below to see if there is a solution or question posted there already:
         - material-react-table's [Discussions tab](https://github.com/material/material-react-table/discussions)
@@ -17,17 +13,51 @@ body:
 
         The more information you fill in, the better the community can help you.
 
+  - type: input
+    id: library-version
+    attributes:
+      label: material-react-table version
+      description: |
+        Please let us know the exact version of material-react-table you were using when the issue occurred. If you are using an older version, check to see if your bug has already been solved in the latest version.
+      placeholder: |
+        e.g. v0.15.4
+    validations:
+      required: true
+
   - type: textarea
     id: description
     attributes:
-      label: Describe the bug
+      label: Describe the bug and steps to reproduce
       description: Provide a clear and concise description of the challenge you are running into.
     validations:
       required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: Provide a clear and concise description of what you expected to happen.
+      placeholder: |
+        As a user, I expected **_ behavior but i am seeing _**
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      options:
+        - Every time
+        - Often
+        - Sometimes
+        - Only once
+      label: How often does this bug happen?
+      description: |
+        Following the repro steps above, how easily are you able to reproduce this bug?
+        options: - Every time - Often - Sometimes - Only once
+
   - type: input
     id: link
     attributes:
-      label: Your minimal, reproducible example
+      label: Your Minimal, Reproducible Example (Optional, but Recommended)
       description: |
         Please add a link to a minimal reproduction. This can really speed up the diagnosis of the problem!
         Note:
@@ -40,35 +70,7 @@ body:
         e.g. Code Sandbox, Stackblitz, etc.
     validations:
       required: false
-  - type: textarea
-    id: steps
-    attributes:
-      label: Steps to reproduce
-      description: Describe the steps we have to take to reproduce the behavior.
-      placeholder: |
-        1. Go to '...' 2. Click on '....' 3. Scroll down to '....' 4. See error
-    validations:
-      required: false
-  - type: textarea
-    id: expected
-    attributes:
-      label: Expected behavior
-      description: Provide a clear and concise description of what you expected to happen.
-      placeholder: |
-        As a user, I expected **_ behavior but i am seeing _**
-    validations:
-      required: true
-  - type: dropdown
-    attributes:
-      options:
-        - Every time
-        - Often
-        - Sometimes
-        - Only once
-      label: How often does this bug happen?
-      description: |
-        Following the repro steps above, how easily are you able to reproduce this bug?
-        options: - Every time - Often - Sometimes - Only once
+
   - type: textarea
     id: screenshots_or_videos
     attributes:
@@ -79,23 +81,24 @@ body:
         to the following link: https://docs.github.com/en/github/writing-on-github/working-with-advanced-formatting/attaching-files
       placeholder: |
         You can drag your video or image files inside of this editor ↓
-  - type: input
-    id: library-version
+
+  - type: dropdown
     attributes:
-      label: material-react-table version
+      options:
+        - No, because I don't know how
+        - No, because I don't have time to dig into it
+        - Maybe, I'll investigate and start debugging
+        - Yes, I think I know how to fix it and will discuss it in the comments of this issue
+        - Yes, I am also opening a PR that solves the problem along side this issue
+      label: Do you intend to try to help solve this bug with your own PR?
       description: |
-        Please let us know the exact version of material-react-table you were using when the issue occurred. Please don't just put in "latest", as this is subject to change.
-      placeholder: |
-        e.g. v0.15.1
-    validations:
-      required: true
+        If you think you know the cause of the problem, the fastest way to get it fixed is to suggest a fix, or fix it yourself! It is ok if you cannot solve this yourself.
+
   - type: checkboxes
     id: agrees-to-terms
     attributes:
-      label: Terms & Code of Conduct
+      label: Terms
       description: By submitting this issue, you agree to follow our Code of Conduct and can verify that you have followed the requirements outlined above to the best of your ability.
       options:
-        - label: I agree to follow this project's Code of Conduct
-          required: true
-        - label: I understand that if my bug cannot be reliable reproduced in a debuggable environment, it will probably not be fixed and this issue may even be closed.
+        - label: I understand that if my bug cannot be reliably reproduced in a debuggable environment, it will probably not be fixed and this issue may even be closed.
           required: true
