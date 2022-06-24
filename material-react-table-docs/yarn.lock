@@ -1988,10 +1988,10 @@ match-sorter@^6.0.2:
     "@babel/runtime" "^7.12.5"
     remove-accents "0.4.2"
 
-material-react-table@^0.14.2:
-  version "0.14.2"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.14.2.tgz#340268d8e8206455c09cdf2f1644df9f605307e6"
-  integrity sha512-mzIzTd/xAl0yoKP3qNPIKJO+xK6ABg6SsALzhXtMJYsyVNX1gJnL23Ij7j2PyBb+AKRjZekF6cO3er14DlVRJA==
+material-react-table@^0.14.3:
+  version "0.14.3"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.14.3.tgz#afc794a3b43f9d237f3b0a9e964eee576d9905eb"
+  integrity sha512-eROWv2JLNmiNa1jbOM8Z0tsdOqXj8aeVrs2U/3o9HSuWCCSecyUqGKqlQaGEtfvv6f5hZ8x1lB2xk+dW4J6egQ==
   dependencies:
     "@tanstack/match-sorter-utils" "^8.0.0-alpha.83"
     "@tanstack/react-table" "^8.0.0-beta.9"

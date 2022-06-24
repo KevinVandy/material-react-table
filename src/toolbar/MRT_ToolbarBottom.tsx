@@ -47,7 +47,9 @@ export const MRT_ToolbarBottom: FC<Props> = ({ instance }) => {
           ...commonToolbarStyles({ theme }),
           bottom: isFullScreen ? '0' : undefined,
           boxShadow: `-3px 0 6px ${alpha(theme.palette.common.black, 0.1)}`,
+          left: 0,
           position: isFullScreen ? 'fixed' : 'relative',
+          right: 0,
           ...toolbarProps?.sx,
         } as any)
       }
