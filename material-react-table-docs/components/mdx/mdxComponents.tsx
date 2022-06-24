@@ -3,14 +3,18 @@ import Image from 'next/image';
 import { Blockquote } from './Blockquote';
 import { SampleCodeSnippet } from './SampleCodeSnippet';
 import { LinkHeading } from './LinkHeading';
+import Link from 'next/link';
 
 export const mdxComponents = {
   a: (props: any) => (
-    <MuiLink
-      target={!props.href.startsWith('#') ? '_blank' : undefined}
-      rel="noreferrer"
-      {...props}
-    />
+    <Link href={props.href} passHref>
+      <MuiLink
+        target={props.href.startsWith('http') ? '_blank' : undefined}
+        rel="noreferrer"
+      >
+        {props.children}
+      </MuiLink>
+    </Link>
   ),
   blockquote: (props: any) => <Blockquote {...props} />,
   code: (props: any) => <SampleCodeSnippet {...props} />,

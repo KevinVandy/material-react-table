@@ -6,6 +6,7 @@ import { styled, ThemeProvider, useMediaQuery } from '@mui/material';
 import { mdxComponents } from '../components/mdx/mdxComponents';
 import TopBar from '../components/navigation/TopBar';
 import SideBar from '../components/navigation/Sidebar';
+import BreadCrumbs from '../components/navigation/BreadCrumbs';
 import { theme } from '../styles/MuiTheme';
 import '../styles/globals.css';
 
@@ -65,6 +66,7 @@ function App({ Component, pageProps }: AppProps) {
             }}
           >
             <PageContent>
+              <BreadCrumbs />
               <Component {...pageProps} />
             </PageContent>
           </PageContainer>
