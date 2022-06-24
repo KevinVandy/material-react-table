@@ -1,9 +1,9 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import { alpha, Box, Button, darken, Stack, Typography } from '@mui/material';
 import { HomeCards } from '../components/mdx/HomeCards';
 import Summary from '../components/mdx/Summary.mdx';
 import { LinkCards } from '../components/mdx/LinkCards';
+import { StatBadges } from '../components/mdx/StatBadges';
 
 const HomePage = () => {
   return (
@@ -33,6 +33,7 @@ const HomePage = () => {
             Material React Table
           </Box>
         </Typography>
+        <StatBadges />
         <Summary />
         <Box
           sx={{
@@ -69,6 +70,16 @@ const HomePage = () => {
           >
             GitHub
           </Button>
+          <Link href="/docs/api/props" passHref>
+            <Button size="large" variant="outlined" color="primary">
+              Props
+            </Button>
+          </Link>
+          <Link href="/docs/examples/advanced" passHref>
+            <Button size="large" variant="outlined" color="primary">
+              Examples
+            </Button>
+          </Link>
         </Box>
         <HomeCards />
       </Stack>

@@ -10,7 +10,7 @@ const ExampleTable = () => {
         <Typography>
           Wanna see the source code for this table? Check it out down below!
         </Typography>
-        <SourceCodeSnippet tableId='root-props' typeScriptCode={TS} />
+        <SourceCodeSnippet tableId="root-props" typeScriptCode={TS} />
       </Box>
     </NoSsr>
   );

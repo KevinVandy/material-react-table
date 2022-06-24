@@ -1,16 +1,19 @@
 # Material React Table
 
+<a href="https://npmjs.com/package/material-react-table" target="_blank_">
+  <img alt="" src="https://badgen.net/npm/v/material-react-table" />
+</a>
 <a href="https://bundlephobia.com/result?p=material-react-table" target="_blank_">
   <img alt="" src="https://badgen.net/bundlephobia/minzip/material-react-table@latest" />
 </a>
-
 <a href="https://npmjs.com/package/material-react-table" target="_blank_">
   <img alt="" src="https://img.shields.io/npm/dm/material-react-table.svg" />
 </a>
-
 <a href="https://github.com/KevinVandy/material-react-table" target="_blank_">
   <img alt="" src="https://img.shields.io/github/stars/KevinVandy/material-react-table.svg?style=social&label=Star" />
 </a>
+
+---
 
 > This Project is based on `@tanstack/react-table` v8, which itself is still in beta, so therefore this package is also still in alpha/beta
 
@@ -30,6 +33,8 @@ View additional [storybook examples](https://www.material-react-table.dev/)
 View the [github source code](https://github.com/KevinVandy/material-react-table) and [github open issues](https://github.com/KevinVandy/material-react-table/issues)
 
 Join the [discord](https://discord.gg/5wqyRx6fnm) server to join in on the development discussion or ask questions
+
+---
 
 ### Features (All Features work and are MVP, but are still being polished)
 
@@ -65,6 +70,8 @@ _All features can easily be enabled/disabled_
 - [x] Tree Data / Expanding Sub-rows
 - [x] Virtualization (react-virtual)
 
+---
+
 ### Installation
 
 1. Install Peer Dependencies (Material UI v5)
@@ -80,3 +87,13 @@ npm install material-react-table
 ```
 
 _`@tanstack/react-table`, `react-virtual` and `react-dnd`_ are internal dependencies, so you don't need to install them yourself.
+
+---
+
+### Contributors
+
+<a href="https://github.com/kevinvandy/material-react-table/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=kevinvandy/material-react-table" />
+</a>
+
+PRs are Welcome, but please discuss in [GitHub Discussions](https://github.com/KevinVandy/material-react-table/discussions) or the [Discord Server](https://discord.gg/5wqyRx6fnm) first!

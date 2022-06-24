@@ -5,11 +5,7 @@ const TS = require('!!raw-loader!./TS.tsx').default;
 
 const ExampleTable = () => {
   return (
-    <SourceCodeSnippet
-      javaScriptCode={JS}
-      typeScriptCode={TS}
-      tableId="ssr"
-    />
+    <SourceCodeSnippet javaScriptCode={JS} typeScriptCode={TS} tableId="ssr" />
   );
 };
 
