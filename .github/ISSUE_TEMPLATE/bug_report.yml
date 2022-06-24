@@ -18,7 +18,8 @@ body:
     attributes:
       label: material-react-table version
       description: |
-        Please let us know the exact version of material-react-table you were using when the issue occurred. If you are using an older version, check to see if your bug has already been solved in the latest version. The latest version is <img alt="" src="https://badgen.net/npm/v/material-react-table" />
+        - Please let us know the exact version of material-react-table you were using when the issue occurred. If you are using an older version, check to see if your bug has already been solved in the latest version. 
+        - The latest version is <img alt="" src="https://badgen.net/npm/v/material-react-table" />
       placeholder: |
         e.g. v0.15.4
     validations:
@@ -42,18 +43,6 @@ body:
     validations:
       required: true
 
-  - type: dropdown
-    attributes:
-      options:
-        - Every time
-        - Often
-        - Sometimes
-        - Only once
-      label: How often does this bug happen?
-      description: |
-        Following the repro steps above, how easily are you able to reproduce this bug?
-        options: - Every time - Often - Sometimes - Only once
-
   - type: input
     id: link
     attributes:
@@ -61,7 +50,7 @@ body:
       description: |
         Please add a link to a minimal reproduction. This can really speed up the diagnosis of the problem!
         Note:
-          - Your bug may get fixed much faster if we can run your code and it doesn't have dependencies other than React.
+          - Your bug may get fixed much faster if we can run your code and it doesn't have dependencies other than React and the Material UI/Emotion dependencies.
           - To create a shareable code example for web, you can use CodeSandbox (https://codesandbox.io/s/new).
           - Please make sure the example is complete and runnable without prior dependencies and free of unnecessary abstractions
           - Feel free to fork any of the official CodeSandbox examples to reproduce your issue: https://github.com/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples
