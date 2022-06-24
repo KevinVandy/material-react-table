@@ -32,6 +32,10 @@ export const MRT_TableHeadCellSortLabel: FC<Props> = ({ header, instance }) => {
             ? (column.getIsSorted() as 'asc' | 'desc')
             : undefined
         }
+        sx={{
+          width: '2ch',
+          transform: 'translateX(-0.5ch)',
+        }}
       />
     </Tooltip>
   );

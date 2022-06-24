@@ -5,7 +5,7 @@ import { MRT_TableHeadCellFilterLabel } from './MRT_TableHeadCellFilterLabel';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 import { MRT_TableHeadCellResizeHandle } from './MRT_TableHeadCellResizeHandle';
 import { MRT_TableHeadCellSortLabel } from './MRT_TableHeadCellSortLabel';
-import { MRT_ToggleColumnActionMenuButton } from '../buttons/MRT_ToggleColumnActionMenuButton';
+import { MRT_TableHeadCellColumnActionsButton } from './MRT_TableHeadCellColumnActionsButton';
 import type { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
@@ -162,6 +162,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
             justifyContent:
               columnDefType === 'group' ? 'center' : 'space-between',
             opacity: isDragging ? 0.5 : 1,
+            position: 'relative',
             width: '100%',
           }}
         >
@@ -205,7 +206,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
             {(enableColumnActions || columnDef.enableColumnActions) &&
               columnDef.enableColumnActions !== false &&
               columnDefType !== 'group' && (
-                <MRT_ToggleColumnActionMenuButton
+                <MRT_TableHeadCellColumnActionsButton
                   header={header}
                   instance={instance}
                 />

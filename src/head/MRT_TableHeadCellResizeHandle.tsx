@@ -31,6 +31,7 @@ export const MRT_TableHeadCellResizeHandle: FC<Props> = ({
         height: showFilters && columnDefType === 'data' ? '4rem' : '2rem',
         opacity: 0.8,
         position: 'absolute',
+        mr: '-1rem',
         right: '1px',
         touchAction: 'none',
         transition: column.getIsResizing() ? undefined : 'all 0.2s ease-in-out',

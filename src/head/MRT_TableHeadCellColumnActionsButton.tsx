@@ -8,7 +8,7 @@ interface Props {
   instance: MRT_TableInstance;
 }
 
-export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({
+export const MRT_TableHeadCellColumnActionsButton: FC<Props> = ({
   header,
   instance,
 }) => {
@@ -66,7 +66,6 @@ export const MRT_ToggleColumnActionMenuButton: FC<Props> = ({
           {...iconButtonProps}
           sx={{
             height: '2rem',
-            mr: '2px',
             mt: '-0.2rem',
             opacity: 0.5,
             transition: 'opacity 0.2s',

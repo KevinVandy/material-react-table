@@ -72,6 +72,7 @@ export const MRT_TableHeadCellFilterLabel: FC<Props> = ({
             backgroundColor: 'transparent',
             opacity: 0.8,
           },
+          width: '1.5ch',
         }}
       >
         {showFilters && !column.getFilterValue() ? (

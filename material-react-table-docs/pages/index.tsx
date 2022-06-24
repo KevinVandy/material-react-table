@@ -75,7 +75,7 @@ const HomePage = () => {
               Props
             </Button>
           </Link>
-          <Link href="/docs/examples/advanced" passHref>
+          <Link href="/docs/examples" passHref>
             <Button size="large" variant="outlined" color="primary">
               Examples
             </Button>
