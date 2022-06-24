@@ -18,7 +18,7 @@ body:
     attributes:
       label: material-react-table version
       description: |
-        Please let us know the exact version of material-react-table you were using when the issue occurred. If you are using an older version, check to see if your bug has already been solved in the latest version.
+        Please let us know the exact version of material-react-table you were using when the issue occurred. If you are using an older version, check to see if your bug has already been solved in the latest version. The latest version is <img alt="" src="https://badgen.net/npm/v/material-react-table" />
       placeholder: |
         e.g. v0.15.4
     validations:
