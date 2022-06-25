@@ -3,6 +3,8 @@ import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { makeData, Person } from './makeData';
 import { NoSsr } from '@mui/material';
 
+const data = makeData(50_000);
+
 const Example: FC = () => {
   const columns = useMemo(
     //column definitions...
@@ -65,7 +67,7 @@ const Example: FC = () => {
     <NoSsr>
       <MaterialReactTable
         columns={columns}
-        data={makeData(50_000)}
+        data={data} //50,000 rows
         enablePagination={false}
         enableRowNumbers
         enableRowVirtualization
