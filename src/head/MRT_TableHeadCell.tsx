@@ -12,32 +12,32 @@ interface Props {
   dragRef?: Ref<HTMLButtonElement>;
   dropRef?: Ref<HTMLDivElement>;
   header: MRT_Header;
+  instance: MRT_TableInstance;
   isDragging?: boolean;
   previewRef?: Ref<HTMLTableCellElement>;
-  instance: MRT_TableInstance;
 }
 
 export const MRT_TableHeadCell: FC<Props> = ({
   dragRef,
   dropRef,
   header,
+  instance,
   isDragging,
   previewRef,
-  instance,
 }) => {
   const {
     getState,
     options: {
       enableColumnActions,
-      enableColumnFilters,
       enableColumnOrdering,
       enableColumnResizing,
       enableGrouping,
+      enableMultiSort,
       muiTableHeadCellProps,
     },
   } = instance;
 
-  const { density } = getState();
+  const { density, showFilters } = getState();
 
   const { column } = header;
 
@@ -139,7 +139,9 @@ export const MRT_TableHeadCell: FC<Props> = ({
         right:
           column.getIsPinned() === 'right' ? `${getTotalRight()}px` : undefined,
         transition: `all ${enableColumnResizing ? 0 : '0.2s'} ease-in-out`,
-        verticalAlign: 'text-top',
+        userSelect: enableMultiSort ? 'none' : undefined,
+        verticalAlign:
+          columnDefType === 'display' && showFilters ? 'center' : 'text-top',
         zIndex: column.getIsResizing()
           ? 3
           : column.getIsPinned() && columnDefType !== 'group'
@@ -167,7 +169,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
           }}
         >
           <Box
-            onClick={() => column.toggleSorting()}
+            onClick={column.getToggleSortingHandler()}
             sx={{
               alignItems: 'center',
               cursor:
@@ -184,14 +186,12 @@ export const MRT_TableHeadCell: FC<Props> = ({
             {columnDefType === 'data' && column.getCanSort() && (
               <MRT_TableHeadCellSortLabel header={header} instance={instance} />
             )}
-            {columnDefType === 'data' &&
-              enableColumnFilters &&
-              column.getCanFilter() && (
-                <MRT_TableHeadCellFilterLabel
-                  header={header}
-                  instance={instance}
-                />
-              )}
+            {columnDefType === 'data' && column.getCanFilter() && (
+              <MRT_TableHeadCellFilterLabel
+                header={header}
+                instance={instance}
+              />
+            )}
           </Box>
           <Box sx={{ whiteSpace: 'nowrap' }}>
             {columnDefType === 'data' &&

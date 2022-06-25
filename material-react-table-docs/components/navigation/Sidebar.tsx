@@ -26,7 +26,6 @@ const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
 
 const ListItemLevel2 = styled(ListItemLevel1)({
   paddingLeft: '2rem',
-  height: '2rem',
 });
 
 const ListItemLevel3 = styled(ListItemLevel2)({
