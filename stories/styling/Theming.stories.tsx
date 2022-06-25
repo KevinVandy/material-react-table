@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, { MaterialReactTableProps } from '../../src';
-import faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 import { createTheme, ThemeProvider } from '@mui/material';
 
 const meta: Meta = {
@@ -28,7 +28,7 @@ const columns = [
     id: 'address',
   },
 ];
-const data = [...Array(21)].map((_) => ({
+const data = [...Array(21)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   age: faker.datatype.number(80),

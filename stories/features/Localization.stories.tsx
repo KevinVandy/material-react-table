@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, { MaterialReactTableProps } from '../../src';
-import faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { esES } from '@mui/material/locale';
 
@@ -34,7 +34,7 @@ const columns = [
   },
 ];
 
-const data = [...Array(100)].map((_) => ({
+const data = [...Array(100)].map(() => ({
   address: faker.address.streetAddress(),
   city: faker.address.city(),
   firstName: faker.name.firstName(),

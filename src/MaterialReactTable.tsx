@@ -824,7 +824,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     rowNumberMode?: 'original' | 'static';
     selectAllMode?: 'all' | 'page';
     tableId?: string;
-    virtualizerProps?: VirtualizerOptions<HTMLDivElement>;
+    virtualizerProps?: Partial<VirtualizerOptions<HTMLDivElement>>;
   };
 
 export default <D extends Record<string, any> = {}>({

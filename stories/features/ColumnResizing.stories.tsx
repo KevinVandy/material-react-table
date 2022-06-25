@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, { MaterialReactTableProps } from '../../src';
-import faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 
 const meta: Meta = {
   title: 'Features/Column Resizing Examples',
@@ -36,13 +36,13 @@ const columns = [
   },
 ];
 
-const data = [...Array(8)].map((_) => ({
+const data = [...Array(8)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   address: faker.address.streetAddress(),
   state: faker.address.state(),
   zipCode: faker.address.zipCode(),
-  phoneNumber: faker.phone.phoneNumber(),
+  phoneNumber: faker.phone.number(),
 }));
 
 export const ColumnResizingEnabledDefaultOnEnd: Story<
@@ -160,7 +160,7 @@ export const ColumnResizingWithHeaderGroups: Story<
         ],
       },
     ]}
-    data={[...Array(5)].map((_) => ({
+    data={[...Array(5)].map(() => ({
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       age: faker.datatype.number(80),

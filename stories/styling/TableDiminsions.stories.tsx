@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, { MaterialReactTableProps } from '../../src';
-import faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 
 const meta: Meta = {
   title: 'Styling/Table Diminsions Examples',
@@ -32,12 +32,12 @@ const columns = [
   },
 ];
 
-const data = [...Array(25)].map((_) => ({
+const data = [...Array(25)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   address: faker.address.streetAddress(),
   state: faker.address.state(),
-  phoneNumber: faker.phone.phoneNumber(),
+  phoneNumber: faker.phone.number(),
 }));
 
 export const MaxWidthAndCentered: Story<MaterialReactTableProps> = () => (

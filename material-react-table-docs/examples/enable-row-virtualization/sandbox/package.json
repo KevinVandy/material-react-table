@@ -1,5 +1,5 @@
 {
-  "name": "material-react-table-example-disable-column-hiding",
+  "name": "material-react-table-example-enable-row-virtualization",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@faker-js/faker": "^7.3.0",
     "@mui/icons-material": "^5.8.2",
     "@mui/material": "^5.8.2",
     "material-react-table": "^0.14.5",

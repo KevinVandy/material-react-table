@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, { MaterialReactTableProps } from '../src';
-import faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 import { Button, MenuItem } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -46,7 +46,7 @@ Default.args = {
       id: 'address',
     },
   ],
-  data: [...Array(6)].map((_) => ({
+  data: [...Array(6)].map(() => ({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     age: faker.datatype.number(80),
@@ -75,7 +75,7 @@ MinimumFeatures.args = {
       id: 'address',
     },
   ],
-  data: [...Array(6)].map((_) => ({
+  data: [...Array(6)].map(() => ({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     age: faker.datatype.number(80),
@@ -91,21 +91,21 @@ MinimumFeatures.args = {
   muiTableBodyRowProps: { hover: false },
 } as MaterialReactTableProps<Row>;
 
-const maxFeaturesData = [...Array(250)].map((_) => ({
+const maxFeaturesData = [...Array(250)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   age: faker.datatype.number(40) + 10,
   address: faker.address.streetAddress(),
   city: faker.address.city(),
   state: faker.address.state(),
-  subRows: [...Array(faker.datatype.number(3))].map((_) => ({
+  subRows: [...Array(faker.datatype.number(3))].map(() => ({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     age: faker.datatype.number(40) + 10,
     address: faker.address.streetAddress(),
     city: faker.address.city(),
     state: faker.address.state(),
-    subRows: [...Array(faker.datatype.number(3))].map((_) => ({
+    subRows: [...Array(faker.datatype.number(3))].map(() => ({
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       age: faker.datatype.number(40) + 10,

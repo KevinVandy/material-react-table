@@ -4,7 +4,7 @@ import MaterialReactTable, {
   MaterialReactTableProps,
   MRT_ColumnDef,
 } from '../../src';
-import faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 
 const meta: Meta = {
   title: 'Features/Persistent State',
@@ -39,7 +39,7 @@ const columns: MRT_ColumnDef[] = [
   },
 ];
 
-const data = [...Array(100)].map((_) => ({
+const data = [...Array(100)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   email: faker.internet.email(),

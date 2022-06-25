@@ -4,7 +4,7 @@ import MaterialReactTable, {
   MaterialReactTableProps,
   MRT_ColumnDef,
 } from '../../src';
-import faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 import { MenuItem, TextField } from '@mui/material';
 
 const meta: Meta = {
@@ -40,7 +40,7 @@ const columns = [
   },
 ];
 
-const data = [...Array(100)].map((_) => ({
+const data = [...Array(100)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   age: faker.datatype.number(100),

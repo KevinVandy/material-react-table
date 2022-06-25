@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, { MaterialReactTableProps } from '../../src';
-import faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 import { MenuItem } from '@mui/material';
 
 const meta: Meta = {
@@ -10,12 +10,12 @@ const meta: Meta = {
 
 export default meta;
 
-const data = [...Array(10)].map((_) => ({
+const data = [...Array(10)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   address: faker.address.streetAddress(),
   state: faker.address.state(),
-  phoneNumber: faker.phone.phoneNumber(),
+  phoneNumber: faker.phone.number(),
 }));
 
 export const EditingEnabledEditModeRowDefault: Story<

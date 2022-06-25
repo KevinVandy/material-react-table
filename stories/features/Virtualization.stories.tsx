@@ -4,7 +4,7 @@ import MaterialReactTable, {
   MaterialReactTableProps,
   MRT_ColumnDef,
 } from '../../src';
-import faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 import { Typography } from '@mui/material';
 
 const meta: Meta = {
@@ -95,7 +95,7 @@ const longColumns: MRT_ColumnDef[] = [
   },
 ];
 
-const shortData = [...Array(500)].map((_) => ({
+const shortData = [...Array(500)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   email: faker.internet.email(),
@@ -104,12 +104,12 @@ const shortData = [...Array(500)].map((_) => ({
   state: faker.address.state(),
 }));
 
-const longData = [...Array(500)].map((_) => ({
+const longData = [...Array(500)].map(() => ({
   firstName: faker.name.firstName(),
   middleName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   email: faker.internet.email(),
-  phoneNumber: faker.phone.phoneNumber(),
+  phoneNumber: faker.phone.number(),
   address: faker.address.streetAddress(),
   zipCode: faker.address.zipCode(),
   city: faker.address.city(),

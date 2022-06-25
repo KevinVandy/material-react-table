@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, { MaterialReactTableProps } from '../../src';
-import faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 
 const meta: Meta = {
   title: 'Features/Full Screen Examples',
@@ -48,7 +48,7 @@ const columns = [
   },
 ];
 
-const data = [...Array(128)].map((_) => ({
+const data = [...Array(128)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   email: faker.internet.email(),

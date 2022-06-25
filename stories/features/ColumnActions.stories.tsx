@@ -4,7 +4,7 @@ import MaterialReactTable, {
   MaterialReactTableProps,
   MRT_ColumnDef,
 } from '../../src';
-import faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 
 const meta: Meta = {
   title: 'Features/Column Action Examples',
@@ -43,12 +43,12 @@ const columns: MRT_ColumnDef<Row>[] = [
   },
 ];
 
-const data: Row[] = [...Array(100)].map((_) => ({
+const data: Row[] = [...Array(100)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   address: faker.address.streetAddress(),
   state: faker.address.state(),
-  phoneNumber: faker.phone.phoneNumber(),
+  phoneNumber: faker.phone.number(),
 }));
 
 export const ColumnActionsEnabledDefault: Story<

@@ -116,6 +116,10 @@ const navItems = [
         href: '/docs/examples/remote',
         label: 'Remote Data Example',
       },
+      {
+        href: '/docs/examples/virtualized',
+        label: 'Virtualized Example',
+      },
     ],
   },
   {

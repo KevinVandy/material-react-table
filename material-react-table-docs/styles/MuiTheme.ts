@@ -18,7 +18,6 @@ export const theme = (darkTheme: boolean) =>
         fontSize: '2.5rem',
         lineHeight: '5rem',
         fontWeight: 'bold',
-        marginTop: '2rem',
       },
       h3: {
         fontSize: '2rem',
