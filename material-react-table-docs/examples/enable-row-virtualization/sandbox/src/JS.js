@@ -1,7 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import MaterialReactTable from 'material-react-table';
 import { makeData } from './makeData';
-import { NoSsr } from '@mui/material';
 
 const data = makeData(50_000);
 
@@ -62,19 +61,27 @@ const Example = () => {
     //end
   );
 
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setData(makeData(50_000));
+    setIsLoading(false);
+  }, []);
+
   return (
-    <NoSsr>
-      <MaterialReactTable
-        columns={columns}
-        data={data} //50,000 rows
-        enablePagination={false}
-        enableRowNumbers
-        enableRowVirtualization
-        enableToolbarBottom={false}
-        initialState={{ density: 'compact' }}
-        virtualizerProps={{ overscan: 50 }}
-      />
-    </NoSsr>
+    <MaterialReactTable
+      columns={columns}
+      data={data} //50,000 rows
+      enablePagination={false}
+      enableRowNumbers
+      enableRowVirtualization
+      enableToolbarBottom={false}
+      initialState={{ density: 'compact' }}
+      muiTableContainerProps={{ sx: { maxHeight: '600px' } }}
+      state={{ isLoading }}
+      virtualizerProps={{ overscan: 50 }}
+    />
   );
 };
 

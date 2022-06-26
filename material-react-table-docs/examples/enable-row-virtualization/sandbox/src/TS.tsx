@@ -1,9 +1,6 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { makeData, Person } from './makeData';
-import { NoSsr } from '@mui/material';
-
-const data = makeData(50_000);
 
 const Example: FC = () => {
   const columns = useMemo(
@@ -63,19 +60,27 @@ const Example: FC = () => {
     //end
   );
 
+  const [data, setData] = useState<Person[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setData(makeData(50_000));
+    setIsLoading(false);
+  }, []);
+
   return (
-    <NoSsr>
-      <MaterialReactTable
-        columns={columns}
-        data={data} //50,000 rows
-        enablePagination={false}
-        enableRowNumbers
-        enableRowVirtualization
-        enableToolbarBottom={false}
-        initialState={{ density: 'compact' }}
-        virtualizerProps={{ overscan: 50 }}
-      />
-    </NoSsr>
+    <MaterialReactTable
+      columns={columns}
+      data={data} //50,000 rows
+      enablePagination={false}
+      enableRowNumbers
+      enableRowVirtualization
+      enableToolbarBottom={false}
+      initialState={{ density: 'compact' }}
+      muiTableContainerProps={{ sx: { maxHeight: '600px' } }}
+      state={{ isLoading }}
+      virtualizerProps={{ overscan: 50 }}
+    />
   );
 };
 

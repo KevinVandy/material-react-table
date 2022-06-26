@@ -115,7 +115,7 @@ export const columnOptions: ColumnOption[] = [
   },
   {
     columnOption: 'enableClickToCopy',
-    defaultValue: 'true',
+    defaultValue: '',
     description: '',
     link: '',
     linkText: '',
@@ -125,7 +125,7 @@ export const columnOptions: ColumnOption[] = [
   },
   {
     columnOption: 'enableColumnActions',
-    defaultValue: 'true',
+    defaultValue: '',
     description: '',
     link: '',
     linkText: '',
@@ -135,7 +135,7 @@ export const columnOptions: ColumnOption[] = [
   },
   {
     columnOption: 'enableColumnFilter',
-    defaultValue: 'true',
+    defaultValue: '',
     description: '',
     link: '',
     linkText: '',
@@ -144,8 +144,18 @@ export const columnOptions: ColumnOption[] = [
     type: 'boolean',
   },
   {
+    columnOption: 'enableColumnFilterChangeMode',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    source: 'MRT',
+    required: false,
+    type: 'boolean',
+  },
+  {
     columnOption: 'enableColumnOrdering',
-    defaultValue: 'true',
+    defaultValue: '',
     description: '',
     link: '',
     linkText: '',
@@ -155,7 +165,7 @@ export const columnOptions: ColumnOption[] = [
   },
   {
     columnOption: 'enableEditing',
-    defaultValue: 'true',
+    defaultValue: '',
     description: '',
     link: '',
     linkText: '',
@@ -165,7 +175,7 @@ export const columnOptions: ColumnOption[] = [
   },
   {
     columnOption: 'enableGlobalFilter',
-    defaultValue: 'true',
+    defaultValue: '',
     description: '',
     link: '',
     linkText: '',
@@ -175,7 +185,7 @@ export const columnOptions: ColumnOption[] = [
   },
   {
     columnOption: 'enableGrouping',
-    defaultValue: 'true',
+    defaultValue: '',
     description: '',
     link: '',
     linkText: '',
@@ -185,7 +195,7 @@ export const columnOptions: ColumnOption[] = [
   },
   {
     columnOption: 'enableHiding',
-    defaultValue: 'true',
+    defaultValue: '',
     description: '',
     link: '',
     linkText: '',
@@ -195,7 +205,7 @@ export const columnOptions: ColumnOption[] = [
   },
   {
     columnOption: 'enableMultiSort',
-    defaultValue: 'true',
+    defaultValue: '',
     description: '',
     link: '',
     linkText: '',
@@ -205,7 +215,7 @@ export const columnOptions: ColumnOption[] = [
   },
   {
     columnOption: 'enablePinning',
-    defaultValue: 'true',
+    defaultValue: '',
     description: '',
     link: '',
     linkText: '',
@@ -215,7 +225,7 @@ export const columnOptions: ColumnOption[] = [
   },
   {
     columnOption: 'enableResizing',
-    defaultValue: 'true',
+    defaultValue: '',
     description: '',
     link: '',
     linkText: '',
@@ -225,7 +235,7 @@ export const columnOptions: ColumnOption[] = [
   },
   {
     columnOption: 'enableSorting',
-    defaultValue: 'true',
+    defaultValue: '',
     description: '',
     link: '',
     linkText: '',

@@ -205,9 +205,9 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
   columns?: MRT_ColumnDef<D>[];
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;
+  enableColumnFilterChangeMode?: boolean;
   enableColumnOrdering?: boolean;
   enableEditing?: boolean;
-  enableColumnFilterChangeMode?: boolean;
   enabledColumnFilterOptions?: (MRT_FILTER_OPTION | string)[] | null;
   filterFn?: MRT_FilterFn;
   filterSelectOptions?: (string | { text: string; value: string })[];
