@@ -19,3 +19,7 @@ const fuzzy = (rowA: MRT_Row, rowB: MRT_Row, columnId: string) => {
 export const MRT_SortingFns = {
   fuzzy,
 };
+
+export const rankGlobalFuzzy = (rowA: MRT_Row, rowB: MRT_Row) =>
+  Math.max(...Object.values(rowB.columnFiltersMeta).map((v: any) => v.rank)) -
+  Math.max(...Object.values(rowA.columnFiltersMeta).map((v: any) => v.rank));

@@ -35,26 +35,32 @@ export const MRT_ExpandAllButton: FC<Props> = ({ instance }) => {
       enterNextDelay={1000}
       title={localization.expandAll}
     >
-      <IconButton
-        aria-label={localization.expandAll}
-        disabled={!getCanSomeRowsExpand() && !renderDetailPanel}
-        onClick={() => toggleAllRowsExpanded(!getIsAllRowsExpanded())}
-        {...iconButtonProps}
-        sx={{
-          height: density === 'compact' ? '1.75rem' : '2.25rem',
-          width: density === 'compact' ? '1.75rem' : '2.25rem',
-          ...iconButtonProps?.sx,
-        }}
-      >
-        <KeyboardDoubleArrowDownIcon
-          style={{
-            transform: `rotate(${
-              getIsAllRowsExpanded() ? -180 : getIsSomeRowsExpanded() ? -90 : 0
-            }deg)`,
-            transition: 'transform 0.2s',
+      <span>
+        <IconButton
+          aria-label={localization.expandAll}
+          disabled={!getCanSomeRowsExpand() && !renderDetailPanel}
+          onClick={() => toggleAllRowsExpanded(!getIsAllRowsExpanded())}
+          {...iconButtonProps}
+          sx={{
+            height: density === 'compact' ? '1.75rem' : '2.25rem',
+            width: density === 'compact' ? '1.75rem' : '2.25rem',
+            ...iconButtonProps?.sx,
           }}
-        />
-      </IconButton>
+        >
+          <KeyboardDoubleArrowDownIcon
+            style={{
+              transform: `rotate(${
+                getIsAllRowsExpanded()
+                  ? -180
+                  : getIsSomeRowsExpanded()
+                  ? -90
+                  : 0
+              }deg)`,
+              transition: 'transform 0.2s',
+            }}
+          />
+        </IconButton>
+      </span>
     </Tooltip>
   );
 };

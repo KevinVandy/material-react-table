@@ -1,8 +1,9 @@
-import React, { FC, RefObject } from 'react';
+import React, { FC, RefObject, useMemo } from 'react';
 import { useVirtual } from 'react-virtual';
 import { TableBody } from '@mui/material';
 import { MRT_TableBodyRow } from './MRT_TableBodyRow';
 import type { MRT_Row, MRT_TableInstance } from '..';
+import { rankGlobalFuzzy } from '../sortingFns';
 
 interface Props {
   instance: MRT_TableInstance;
@@ -15,6 +16,7 @@ export const MRT_TableBody: FC<Props> = ({ instance, tableContainerRef }) => {
     getPrePaginationRowModel,
     getState,
     options: {
+      enableGlobalFilterRankedResults,
       enablePagination,
       enableRowVirtualization,
       muiTableBodyProps,
@@ -22,20 +24,38 @@ export const MRT_TableBody: FC<Props> = ({ instance, tableContainerRef }) => {
     },
   } = instance;
 
-  const { density } = getState();
+  const { density, globalFilter, pagination } = getState();
 
   const tableBodyProps =
     muiTableBodyProps instanceof Function
       ? muiTableBodyProps({ instance })
       : muiTableBodyProps;
 
-  const rows = enablePagination
-    ? getPaginationRowModel().rows
-    : getPrePaginationRowModel().rows;
+  const rows = useMemo(() => {
+    if (enableGlobalFilterRankedResults && globalFilter) {
+      const rankedRows = getPrePaginationRowModel().rows.sort((a, b) =>
+        rankGlobalFuzzy(a, b),
+      );
+      if (enablePagination) {
+        return rankedRows.slice(0, pagination.pageSize);
+      }
+      return rankedRows;
+    }
+
+    return enablePagination
+      ? getPaginationRowModel().rows
+      : getPrePaginationRowModel().rows;
+  }, [
+    enableGlobalFilterRankedResults,
+    (enableGlobalFilterRankedResults && globalFilter) || !enablePagination
+      ? getPrePaginationRowModel().rows
+      : getPaginationRowModel().rows,
+    globalFilter,
+  ]);
 
   const rowVirtualizer = enableRowVirtualization
     ? useVirtual({
-        overscan: density === 'compact' ? 15 : 5,
+        overscan: density === 'compact' ? 20 : 10,
         size: rows.length,
         parentRef: tableContainerRef,
         ...virtualizerProps,

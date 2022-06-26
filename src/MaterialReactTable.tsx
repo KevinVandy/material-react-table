@@ -88,6 +88,7 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   | 'getFlatHeaders'
   | 'getLeftLeafColumns'
   | 'getPaginationRowModel'
+  | 'getPreFilteredRowModel'
   | 'getPrePaginationRowModel'
   | 'getRightLeafColumns'
   | 'getRowModel'
@@ -104,6 +105,7 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   getFlatHeaders: () => MRT_Header<D>[];
   getLeftLeafColumns: () => MRT_Column<D>[];
   getPaginationRowModel: () => MRT_RowModel<D>;
+  getPreFilteredRowModel: () => MRT_RowModel<D>;
   getPrePaginationRowModel: () => MRT_RowModel<D>;
   getRightLeafColumns: () => MRT_Column<D>[];
   getRowModel: () => MRT_RowModel<D>;
@@ -395,6 +397,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     enableExpandAll?: boolean;
     enableFullScreenToggle?: boolean;
     enableGlobalFilterChangeMode?: boolean;
+    enableGlobalFilterRankedResults?: boolean;
     enablePagination?: boolean;
     enablePersistentState?: boolean;
     enableRowActions?: boolean;
@@ -848,9 +851,11 @@ export default <D extends Record<string, any> = {}>({
   enableFullScreenToggle = true,
   enableGlobalFilter = true,
   enableGlobalFilterChangeMode = true,
+  enableGlobalFilterRankedResults = true,
   enableGrouping = false,
   enableHiding = true,
   enableMultiRowSelection = true,
+  enableMultiSort = true,
   enablePagination = true,
   enablePinning = false,
   enableRowSelection = false,
@@ -889,9 +894,11 @@ export default <D extends Record<string, any> = {}>({
     enableFullScreenToggle={enableFullScreenToggle}
     enableGlobalFilter={enableGlobalFilter}
     enableGlobalFilterChangeMode={enableGlobalFilterChangeMode}
+    enableGlobalFilterRankedResults={enableGlobalFilterRankedResults}
     enableGrouping={enableGrouping}
     enableHiding={enableHiding}
     enableMultiRowSelection={enableMultiRowSelection}
+    enableMultiSort={enableMultiSort}
     enablePagination={enablePagination}
     enablePinning={enablePinning}
     enableRowSelection={enableRowSelection}

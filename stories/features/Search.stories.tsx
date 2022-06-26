@@ -32,7 +32,7 @@ const columns = [
   },
 ];
 
-const data = [...Array(100)].map(() => ({
+const data = [...Array(200)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   address: faker.address.streetAddress(),
@@ -42,6 +42,21 @@ const data = [...Array(100)].map(() => ({
 
 export const SearchEnabledDefault: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} />
+);
+
+export const SearchRankedResultsEnabledByDefault: Story<
+  MaterialReactTableProps
+> = () => <MaterialReactTable columns={columns} data={data} enableRowNumbers />;
+
+export const SearchDisableRankedResults: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowNumbers
+    enableGlobalFilterRankedResults={false}
+  />
 );
 
 export const ShowSearchRightBoxByDefault: Story<

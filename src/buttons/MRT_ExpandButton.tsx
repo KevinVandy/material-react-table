@@ -38,30 +38,32 @@ export const MRT_ExpandButton: FC<Props> = ({ row, instance }) => {
       enterNextDelay={1000}
       title={localization.expand}
     >
-      <IconButton
-        aria-label={localization.expand}
-        disabled={!row.getCanExpand() && !renderDetailPanel}
-        onClick={handleToggleExpand}
-        {...iconButtonProps}
-        sx={{
-          height: density === 'compact' ? '1.75rem' : '2.25rem',
-          width: density === 'compact' ? '1.75rem' : '2.25rem',
-          ...iconButtonProps?.sx,
-        }}
-      >
-        <ExpandMoreIcon
-          style={{
-            transform: `rotate(${
-              !row.getCanExpand() && !renderDetailPanel
-                ? -90
-                : row.getIsExpanded()
-                ? -180
-                : 0
-            }deg)`,
-            transition: 'transform 0.2s',
+      <span>
+        <IconButton
+          aria-label={localization.expand}
+          disabled={!row.getCanExpand() && !renderDetailPanel}
+          onClick={handleToggleExpand}
+          {...iconButtonProps}
+          sx={{
+            height: density === 'compact' ? '1.75rem' : '2.25rem',
+            width: density === 'compact' ? '1.75rem' : '2.25rem',
+            ...iconButtonProps?.sx,
           }}
-        />
-      </IconButton>
+        >
+          <ExpandMoreIcon
+            style={{
+              transform: `rotate(${
+                !row.getCanExpand() && !renderDetailPanel
+                  ? -90
+                  : row.getIsExpanded()
+                  ? -180
+                  : 0
+              }deg)`,
+              transition: 'transform 0.2s',
+            }}
+          />
+        </IconButton>
+      </span>
     </Tooltip>
   );
 };

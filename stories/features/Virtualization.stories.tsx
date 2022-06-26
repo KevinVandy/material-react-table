@@ -127,6 +127,7 @@ export const VirtualizationDisabledDefault: Story<
     columns={shortColumns}
     data={shortData}
     enablePagination={false}
+    enableRowNumbers
     enableToolbarBottom={false}
   />
 );
@@ -136,6 +137,7 @@ export const EnableRowVirtualization: Story<MaterialReactTableProps> = () => (
     columns={longColumns}
     data={longData}
     enablePagination={false}
+    enableRowNumbers
     enableRowVirtualization
     enableToolbarBottom={false}
   />
