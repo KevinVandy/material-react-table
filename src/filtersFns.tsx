@@ -133,7 +133,7 @@ export const notEmpty = (
 
 notEmpty.autoRemove = (val: any) => !val;
 
-export const defaultFilterFNs = {
+export const MRT_FilterFns = {
   between,
   contains,
   empty,

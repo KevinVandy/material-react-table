@@ -18,7 +18,7 @@ import {
   notEmpty,
   notEquals,
   startsWith,
-} from '../filtersFNs';
+} from '../filtersFns';
 
 const commonMenuItemStyles = {
   py: '6px',

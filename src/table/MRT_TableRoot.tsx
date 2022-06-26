@@ -1,18 +1,20 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
   FilterFn,
-  createTable,
-  getExpandedRowModel,
-  getPaginationRowModel,
-  useTableInstance,
-  getGroupedRowModel,
-  getSortedRowModel,
-  getCoreRowModel,
-  getFilteredRowModel,
   ReactTableGenerics,
-  getFacetedRowModel,
-  TableState,
   Table,
+  TableState,
+  createTable,
+  filterFns,
+  getCoreRowModel,
+  getExpandedRowModel,
+  getFacetedRowModel,
+  getFilteredRowModel,
+  getGroupedRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useTableInstance,
+  sortingFns,
 } from '@tanstack/react-table';
 import {
   MRT_Cell,
@@ -29,6 +31,7 @@ import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMen
 import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 import { MaterialReactTableProps } from '../MaterialReactTable';
 import { MRT_TablePaper } from './MRT_TablePaper';
+import { Box, Dialog, Grow } from '@mui/material';
 import {
   createDataColumn,
   createDisplayColumn,
@@ -36,8 +39,8 @@ import {
   getAllLeafColumnDefs,
   getDefaultColumnOrderIds,
 } from '../utils';
-import { defaultFilterFNs } from '../filtersFNs';
-import { Box, Dialog, Grow } from '@mui/material';
+import { MRT_FilterFns } from '../filtersFns';
+import { MRT_SortingFns } from '../sortingFns';
 
 export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   props: MaterialReactTableProps<D>,
@@ -123,8 +126,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     () =>
       // @ts-ignore
       createTable().setOptions({
-        //@ts-ignore
-        filterFns: defaultFilterFNs,
+        filterFns: { ...filterFns, ...MRT_FilterFns, ...props.filterFns },
         getCoreRowModel: getCoreRowModel(),
         getExpandedRowModel: getExpandedRowModel(),
         getFacetedRowModel: getFacetedRowModel(),
@@ -132,8 +134,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         getGroupedRowModel: getGroupedRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
         getSortedRowModel: getSortedRowModel(),
-        getSubRows: (row) => (row as MRT_Row)?.subRows,
-        tableId,
+        sortingFns: { ...sortingFns, ...MRT_SortingFns, ...props.sortingFns },
       }) as Table<D>,
     [],
   );
@@ -252,6 +253,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       //@ts-ignore
       columns,
       data,
+      getSubRows: (row) => (row as MRT_Row)?.subRows,
       //@ts-ignore
       globalFilterFn: currentGlobalFilterFn,
       initialState,
@@ -267,6 +269,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         showGlobalFilter,
         ...props.state,
       } as TableState,
+      tableId,
     }),
     setCurrentEditingCell:
       props.onCurrentEditingCellChange ?? setCurrentEditingCell,

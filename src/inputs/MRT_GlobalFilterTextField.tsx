@@ -20,17 +20,18 @@ interface Props {
   instance: MRT_TableInstance;
 }
 
-export const MRT_SearchTextField: FC<Props> = ({ instance }) => {
+export const MRT_GlobalFilterTextField: FC<Props> = ({ instance }) => {
   const {
     getState,
     setGlobalFilter,
     options: {
+      enableGlobalFilterChangeMode,
       icons: { SearchIcon, CloseIcon },
-      tableId,
       localization,
       muiSearchTextFieldProps,
       onGlobalFilterValueChanged,
       onGlobalFilterValueChangedDebounced,
+      tableId,
     },
   } = instance;
 
@@ -76,7 +77,7 @@ export const MRT_SearchTextField: FC<Props> = ({ instance }) => {
         value={searchValue ?? ''}
         variant="standard"
         InputProps={{
-          startAdornment: (
+          startAdornment: enableGlobalFilterChangeMode ? (
             <InputAdornment position="start">
               <Tooltip arrow title={localization.changeSearchMode}>
                 <IconButton
@@ -89,18 +90,23 @@ export const MRT_SearchTextField: FC<Props> = ({ instance }) => {
                 </IconButton>
               </Tooltip>
             </InputAdornment>
+          ) : (
+            <SearchIcon />
           ),
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton
-                aria-label={localization.clearSearch}
-                disabled={searchValue?.length === 0}
-                onClick={handleClear}
-                size="small"
-                title={localization.clearSearch}
-              >
-                <CloseIcon />
-              </IconButton>
+              <Tooltip arrow title={localization.clearSearch ?? ''}>
+                <span>
+                  <IconButton
+                    aria-label={localization.clearSearch}
+                    disabled={!searchValue?.length}
+                    onClick={handleClear}
+                    size="small"
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                </span>
+              </Tooltip>
             </InputAdornment>
           ),
         }}

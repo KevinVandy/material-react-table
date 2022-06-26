@@ -114,6 +114,43 @@ export const FilterTypes: Story<MaterialReactTableProps> = () => (
   />
 );
 
+export const FilteringChangeModeDisabled: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        id: 'firstName',
+      },
+      {
+        header: 'Last Name',
+        id: 'lastName',
+      },
+      {
+        header: 'Age',
+        id: 'age',
+        filterFn: 'between',
+      },
+      {
+        header: 'Gender',
+        id: 'gender',
+        filterSelectOptions: ['Male', 'Female', 'Other'],
+      },
+      {
+        header: 'Address',
+        id: 'address',
+      },
+      {
+        header: 'State',
+        id: 'state',
+      },
+    ]}
+    data={data}
+    enableColumnFilterChangeMode={false}
+  />
+);
+
 export const DisableSomeFilterTypesForCertainColumns: Story<
   MaterialReactTableProps
 > = () => (

@@ -10,7 +10,7 @@ import {
   MRT_ColumnDef,
   MRT_FilterFn,
 } from '.';
-import { defaultFilterFNs } from './filtersFNs';
+import { MRT_FilterFns } from './filtersFns';
 
 export const getAllLeafColumnDefs = (
   columns: MRT_ColumnDef[],
@@ -54,7 +54,7 @@ export const createDataColumn = <D extends Record<string, any> = {}>(
       currentFilterFns[column.id] instanceof Function
         ? currentFilterFns[column.id]
         : // @ts-ignore
-          defaultFilterFNs[currentFilterFns[column.id]],
+          MRT_FilterFns[currentFilterFns[column.id]],
     ...column,
   }) as any;
 

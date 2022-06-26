@@ -83,3 +83,33 @@ export const DisableSortingForSpecificColumns: Story<
 export const DisableMultiSorting: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableMultiSort={false} />
 );
+
+export const SortRanking: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        id: 'firstName',
+        sortingFn: 'fuzzy',
+      },
+      {
+        header: 'Last Name',
+        id: 'lastName',
+      },
+      {
+        header: 'Address',
+        id: 'address',
+      },
+      {
+        header: 'State',
+        id: 'state',
+      },
+      {
+        header: 'Phone Number',
+        id: 'phoneNumber',
+      },
+    ]}
+    data={data}
+    enableRowNumbers
+  />
+);

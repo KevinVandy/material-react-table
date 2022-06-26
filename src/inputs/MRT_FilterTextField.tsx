@@ -32,6 +32,7 @@ export const MRT_FilterTextField: FC<Props> = ({
   const {
     getState,
     options: {
+      enableColumnFilterChangeMode,
       enabledColumnFilterOptions,
       icons: { FilterListIcon, CloseIcon },
       localization,
@@ -176,6 +177,10 @@ export const MRT_FilterTextField: FC<Props> = ({
   const allowedColumnFilterOptions =
     columnDef?.enabledColumnFilterOptions ?? enabledColumnFilterOptions;
 
+  const allowColumnChangeMode =
+    enableColumnFilterChangeMode &&
+    columnDef.enableColumnFilterChangeMode !== false;
+
   return (
     <>
       <TextField
@@ -190,6 +195,7 @@ export const MRT_FilterTextField: FC<Props> = ({
           title: filterPlaceholder,
         }}
         helperText={
+          allowColumnChangeMode &&
           !inputIndex &&
           (allowedColumnFilterOptions === undefined ||
             (allowedColumnFilterOptions?.length ?? 0) > 0) ? (
@@ -224,7 +230,6 @@ export const MRT_FilterTextField: FC<Props> = ({
             whiteSpace: 'nowrap',
           },
         }}
-        label={isSelectFilter && !filterValue ? filterPlaceholder : undefined}
         margin="none"
         placeholder={
           filterChipLabel || isSelectFilter ? undefined : filterPlaceholder
@@ -235,10 +240,12 @@ export const MRT_FilterTextField: FC<Props> = ({
         value={filterValue ?? ''}
         variant="standard"
         InputProps={{
-          startAdornment: !isSelectFilter &&
+          startAdornment:
+            allowColumnChangeMode &&
+            !isSelectFilter &&
             !inputIndex &&
             (allowedColumnFilterOptions === undefined ||
-              (allowedColumnFilterOptions?.length ?? 0) > 0) && (
+              !!allowedColumnFilterOptions?.length) ? (
               <InputAdornment position="start">
                 <Tooltip arrow title={localization.changeFilterMode}>
                   <span>
@@ -259,6 +266,8 @@ export const MRT_FilterTextField: FC<Props> = ({
                   />
                 )}
               </InputAdornment>
+            ) : (
+              <FilterListIcon />
             ),
           endAdornment: !filterChipLabel && (
             <InputAdornment position="end">
@@ -292,7 +301,6 @@ export const MRT_FilterTextField: FC<Props> = ({
           p: 0,
           minWidth: !filterChipLabel ? '8rem' : 'auto',
           width: 'calc(100% + 0.5rem)',
-          mt: isSelectFilter && !filterValue ? '-1rem' : undefined,
           '&	.MuiSelect-icon': {
             mr: '1.5rem',
           },

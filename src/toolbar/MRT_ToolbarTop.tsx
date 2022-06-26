@@ -5,7 +5,7 @@ import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
 import { MRT_TableInstance } from '..';
-import { MRT_SearchTextField } from '../inputs/MRT_SearchTextField';
+import { MRT_GlobalFilterTextField } from '../inputs/MRT_GlobalFilterTextField';
 
 export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
   backgroundColor: lighten(theme.palette.background.default, 0.04),
@@ -86,7 +86,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ instance }) => {
         }}
       >
         {enableGlobalFilter && positionGlobalFilter === 'left' && (
-          <MRT_SearchTextField instance={instance} />
+          <MRT_GlobalFilterTextField instance={instance} />
         )}
 
         {renderToolbarTopCustomActions?.({ instance }) ?? <span />}
@@ -95,7 +95,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ instance }) => {
         ) : (
           enableGlobalFilter &&
           positionGlobalFilter === 'right' && (
-            <MRT_SearchTextField instance={instance} />
+            <MRT_GlobalFilterTextField instance={instance} />
           )
         )}
       </Box>

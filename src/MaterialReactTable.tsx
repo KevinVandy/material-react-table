@@ -38,6 +38,8 @@ import {
   Overwrite,
   ReactTableGenerics,
   Row,
+  SortingFn,
+  SortingFnOption,
   TableGenerics,
   TableInstance,
   TableState,
@@ -52,13 +54,12 @@ import { MRT_TableRoot } from './table/MRT_TableRoot';
 export type MRT_TableOptions<D extends Record<string, any> = {}> = Partial<
   Omit<
     UseTableInstanceOptions<ReactTableGenerics>,
-    'columns' | 'data' | 'initialState' | 'state' | 'expandRowsFn' | 'filterFns'
+    'columns' | 'data' | 'initialState' | 'state' | 'expandRowsFn'
   >
 > & {
   columns: MRT_ColumnDef<D>[];
   data: D[];
   expandRowsFn?: (dataRow: D) => D[];
-  filterFns?: MRT_FILTER_OPTION | FilterFn<D> | string | number | symbol;
   initialState?: Partial<MRT_TableState<D>>;
   state?: Partial<MRT_TableState<D>>;
 };
@@ -145,11 +146,12 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
   ColumnDef<D>,
   | 'accessorFn'
   | 'aggregatedCell'
-  | 'header'
-  | 'footer'
+  | 'cell'
   | 'columns'
   | 'filterFn'
-  | 'cell'
+  | 'footer'
+  | 'header'
+  | 'sortingFn'
 > & {
   AggregatedCell?: ({
     cell,
@@ -203,6 +205,7 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
   enableColumnActions?: boolean;
   enableColumnOrdering?: boolean;
   enableEditing?: boolean;
+  enableColumnFilterChangeMode?: boolean;
   enabledColumnFilterOptions?: (MRT_FILTER_OPTION | string)[] | null;
   filterFn?: MRT_FilterFn;
   filterSelectOptions?: (string | { text: string; value: string })[];
@@ -312,6 +315,7 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
     filterValue: any;
     instance: MRT_TableInstance<D>;
   }) => void;
+  sortingFn?: MRT_SortingFn;
 };
 
 export type MRT_Column<D extends Record<string, any> = {}> = Omit<
@@ -357,6 +361,10 @@ export type MRT_Cell<D extends Record<string, any> = {}> = Omit<
   row: MRT_Row<D>;
 };
 
+export type MRT_SortingOption = SortingFnOption<TableGenerics> | 'fuzzy';
+
+export type MRT_SortingFn = SortingFn<TableGenerics> | MRT_SortingOption;
+
 export type MRT_FILTER_OPTION =
   | 'between'
   | 'contains'
@@ -373,23 +381,20 @@ export type MRT_FILTER_OPTION =
   | 'startsWith'
   | FilterFnOption<TableGenerics>;
 
-export type MRT_FilterFn =
-  | FilterFn<TableGenerics>
-  | MRT_FILTER_OPTION
-  | number
-  | string
-  | symbol;
+export type MRT_FilterFn = FilterFn<TableGenerics> | MRT_FILTER_OPTION;
 
 export type MaterialReactTableProps<D extends Record<string, any> = {}> =
   MRT_TableOptions<D> & {
     editingMode?: 'table' | 'row' | 'cell';
     enableClickToCopy?: boolean;
     enableColumnActions?: boolean;
+    enableColumnFilterChangeMode?: boolean;
     enableColumnOrdering?: boolean;
     enableDensityToggle?: boolean;
     enableEditing?: boolean;
     enableExpandAll?: boolean;
     enableFullScreenToggle?: boolean;
+    enableGlobalFilterChangeMode?: boolean;
     enablePagination?: boolean;
     enablePersistentState?: boolean;
     enableRowActions?: boolean;
@@ -833,6 +838,7 @@ export default <D extends Record<string, any> = {}>({
   defaultColumn = { minSize: 40, maxSize: 1000, size: 180 },
   editingMode = 'row',
   enableColumnActions = true,
+  enableColumnFilterChangeMode = true,
   enableColumnFilters = true,
   enableColumnOrdering = false,
   enableColumnResizing = false,
@@ -841,6 +847,7 @@ export default <D extends Record<string, any> = {}>({
   enableFilters = true,
   enableFullScreenToggle = true,
   enableGlobalFilter = true,
+  enableGlobalFilterChangeMode = true,
   enableGrouping = false,
   enableHiding = true,
   enableMultiRowSelection = true,
@@ -872,6 +879,7 @@ export default <D extends Record<string, any> = {}>({
     defaultColumn={defaultColumn}
     editingMode={editingMode}
     enableColumnActions={enableColumnActions}
+    enableColumnFilterChangeMode={enableColumnFilterChangeMode}
     enableColumnFilters={enableColumnFilters}
     enableColumnOrdering={enableColumnOrdering}
     enableColumnResizing={enableColumnResizing}
@@ -880,6 +888,7 @@ export default <D extends Record<string, any> = {}>({
     enableFilters={enableFilters}
     enableFullScreenToggle={enableFullScreenToggle}
     enableGlobalFilter={enableGlobalFilter}
+    enableGlobalFilterChangeMode={enableGlobalFilterChangeMode}
     enableGrouping={enableGrouping}
     enableHiding={enableHiding}
     enableMultiRowSelection={enableMultiRowSelection}
