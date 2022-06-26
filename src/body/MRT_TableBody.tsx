@@ -24,15 +24,23 @@ export const MRT_TableBody: FC<Props> = ({ instance, tableContainerRef }) => {
     },
   } = instance;
 
-  const { density, globalFilter, pagination } = getState();
+  const { density, globalFilter, pagination, sorting } = getState();
 
   const tableBodyProps =
     muiTableBodyProps instanceof Function
       ? muiTableBodyProps({ instance })
       : muiTableBodyProps;
 
+  const getIsSomeColumnsSorted = () => {
+    return Object.values(sorting).some(Boolean);
+  };
+
   const rows = useMemo(() => {
-    if (enableGlobalFilterRankedResults && globalFilter) {
+    if (
+      enableGlobalFilterRankedResults &&
+      globalFilter &&
+      !getIsSomeColumnsSorted()
+    ) {
       const rankedRows = getPrePaginationRowModel().rows.sort((a, b) =>
         rankGlobalFuzzy(a, b),
       );
