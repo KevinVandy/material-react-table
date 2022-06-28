@@ -12,7 +12,7 @@ interface Props {
 
 export const MRT_TableBody: FC<Props> = ({ instance, tableContainerRef }) => {
   const {
-    getPaginationRowModel,
+    getRowModel,
     getPrePaginationRowModel,
     getState,
     options: {
@@ -51,13 +51,13 @@ export const MRT_TableBody: FC<Props> = ({ instance, tableContainerRef }) => {
     }
 
     return enablePagination
-      ? getPaginationRowModel().rows
+      ? getRowModel().rows
       : getPrePaginationRowModel().rows;
   }, [
     enableGlobalFilterRankedResults,
     (enableGlobalFilterRankedResults && globalFilter) || !enablePagination
       ? getPrePaginationRowModel().rows
-      : getPaginationRowModel().rows,
+      : getRowModel().rows,
     globalFilter,
   ]);
 
