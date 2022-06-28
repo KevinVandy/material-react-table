@@ -26,7 +26,7 @@ const BreadCrumbs = () => {
       {breadCrumbLinks.map((link, index) => (
         <Link key={index} href={link} passHref>
           <MuiLink color="inherit" sx={{ cursor: 'pointer' }} underline="hover">
-            {link.split('/').pop()}
+            {link.split('/').pop()?.replaceAll('-', ' ')}
           </MuiLink>
         </Link>
       ))}

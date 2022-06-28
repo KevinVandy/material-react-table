@@ -180,7 +180,7 @@ export const SourceCodeSnippet: FC<Props> = ({
                   padding: isMobile
                     ? '3rem 0.5rem 1rem 0.5rem'
                     : '0.5rem 0.25rem',
-                  whiteSpace: 'pre-wrap',
+                  overflowX: 'auto',
                 }}
               >
                 {tokens.map((line, i) => (
