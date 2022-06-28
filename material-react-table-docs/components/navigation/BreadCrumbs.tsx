@@ -24,7 +24,7 @@ const BreadCrumbs = () => {
   return (
     <MuiBreadcrumbs aria-label="breadcrumb" sx={{ pt: '1rem' }}>
       {breadCrumbLinks.map((link, index) => (
-        <Link key={index} href={link === route ? '#' : link} passHref>
+        <Link key={index} href={link} passHref>
           <MuiLink color="inherit" sx={{ cursor: 'pointer' }} underline="hover">
             {link.split('/').pop()}
           </MuiLink>
