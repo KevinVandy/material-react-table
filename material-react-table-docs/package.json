@@ -14,7 +14,7 @@
     "@mdx-js/loader": "^2.1.2",
     "@mdx-js/react": "^2.1.2",
     "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.8.5",
+    "@mui/material": "^5.8.6",
     "@next/mdx": "^12.1.6",
     "@types/mdx": "^2.0.2",
     "material-react-table": "^0.15.1",
