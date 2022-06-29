@@ -487,24 +487,24 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.1.3.tgz#6801033be7ff87a6b7cadaf5b337c9f366a3c4b0"
   integrity sha512-WiBSI6JBIhC6LRIsB2Kwh8DsGTlbBU+mLRxJmAe3LjHTdkDpwIbEOZgoXBbZilk/vlfjK8i6nKRAvIRn1XaIMw==
 
-"@tanstack/match-sorter-utils@^8.0.0-alpha.83":
-  version "8.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@tanstack/match-sorter-utils/-/match-sorter-utils-8.0.0-beta.0.tgz#2c646f2d14fd9f295194eb7831bac5a4c853c1c4"
-  integrity sha512-TUasJzK/ILJdVtnrGz4loabL5ZydC+fUvg4sOLaGQezCnIZdE1mNfclx9rbcikmtgpqKaXh40XV632P0q7cQOA==
+"@tanstack/match-sorter-utils@8.0.13":
+  version "8.0.13"
+  resolved "https://registry.yarnpkg.com/@tanstack/match-sorter-utils/-/match-sorter-utils-8.0.13.tgz#7cd88eb9865106f0364862033c2cf6ca8bcb4d68"
+  integrity sha512-Q6epW0IMteYFzbdlT1AqEYRfvkkxWGiL/IXCueAQVooSpXnULHvFecfvM5mVsMJJ9ZdU/Amugq909te1OS9TKg==
   dependencies:
     remove-accents "0.4.2"
 
-"@tanstack/react-table@^8.0.0-beta.9":
-  version "8.0.0-beta.9"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.0.0-beta.9.tgz#cdfe51d40069cfdc50ae19d3e7bf09141f516d00"
-  integrity sha512-LajXCA9QEH/MOYI9p2KbC8iiXW/YO12pFBOj53epSLRAX7G3y4wI5euhk+URQW9TditYOcKGbNzA/mxZgqfoEw==
+"@tanstack/react-table@8.0.13":
+  version "8.0.13"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.0.13.tgz#47020beeaddac0c64d215a3463fc536a9589410b"
+  integrity sha512-4arYr+cGvpLiGSeAeLSTSlzuIB884pCFGzKI/MAX8/aFz7QZvkdu9AyWt9owCs/CYuPjd9iQoSwjfe3VK4yNPg==
   dependencies:
-    "@tanstack/table-core" "8.0.0-beta.9"
+    "@tanstack/table-core" "8.0.13"
 
-"@tanstack/table-core@8.0.0-beta.9":
-  version "8.0.0-beta.9"
-  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.0.0-beta.9.tgz#59ebb34807918ff35f7ba81d513a403b6e6cdc0b"
-  integrity sha512-ymHz2mMVTBQ1eXdUQiGH5IGvPuJQY0b0yQwzfCvGUEqPfR4mOq3YUJGo61PqsjTevIWK6ti9aabA0qJeRX/Qiw==
+"@tanstack/table-core@8.0.13":
+  version "8.0.13"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.0.13.tgz#e5dc7ab9a5ca8224e128251b55749a13b81bd421"
+  integrity sha512-2G9DVpeIarsCkWNFe4ZPDDQQHK6XEqGr8C+G8eoSiPvM077LRg+oK150get3kRjbNUaHUT6RUEjc0lXNC6V83w==
 
 "@types/acorn@^4.0.0":
   version "4.0.6"
@@ -1988,13 +1988,13 @@ match-sorter@^6.0.2:
     "@babel/runtime" "^7.12.5"
     remove-accents "0.4.2"
 
-material-react-table@^0.15.1:
-  version "0.15.1"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.15.1.tgz#3048c128bf5a9c9e512613d7a79e40714943c944"
-  integrity sha512-kywuwrlVzm9N8mAX7Ih/LYhskPgVk2nB/oMbEvp6BqX6Rpdci/QCPqRSgUGxcQU/3l3APvtSYDgv+dLM4q684A==
+material-react-table@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.16.0.tgz#d43b174226ab120925bf6c205b06772b1ef5583f"
+  integrity sha512-HCBK7o7o7GzDJNB4WV1Ndcb6Pkmr+ISV3Je4Q5OLTbUSD3HR0cdMbIHJ3sPCU/IpARK4yeE8uRZzw7BbcJ6Ogw==
   dependencies:
-    "@tanstack/match-sorter-utils" "^8.0.0-alpha.83"
-    "@tanstack/react-table" "^8.0.0-beta.9"
+    "@tanstack/match-sorter-utils" "8.0.13"
+    "@tanstack/react-table" "8.0.13"
     react-dnd "^16.0.1"
     react-dnd-html5-backend "^16.0.1"
     react-virtual "^2.10.4"
