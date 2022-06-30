@@ -55,11 +55,11 @@ export interface MRT_Localization {
   sortedByColumnAsc: string;
   sortedByColumnDesc: string;
   thenBy: string;
-  to: string;
   toggleDensity: string;
   toggleFullScreen: string;
   toggleSelectAll: string;
   toggleSelectRow: string;
+  toggleVisibility: string;
   ungroupByColumn: string;
   unpin: string;
   unpinAll: string;
@@ -124,11 +124,11 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   sortedByColumnAsc: 'Sorted by {column} ascending',
   sortedByColumnDesc: 'Sorted by {column} descending',
   thenBy: ', then by ',
-  to: 'to',
   toggleDensity: 'Toggle density',
   toggleFullScreen: 'Toggle full screen',
   toggleSelectAll: 'Toggle select all',
   toggleSelectRow: 'Toggle select row',
+  toggleVisibility: 'Toggle visibility',
   ungroupByColumn: 'Ungroup by {column}',
   unpin: 'Unpin',
   unpinAll: 'Unpin all',

@@ -30,17 +30,16 @@ const Example: FC = () => {
               header: 'First Name',
               id: 'firstName',
               enableClickToCopy: false,
-              width: 60,
             },
             {
               header: 'Last Name',
               id: 'lastName',
               enableClickToCopy: false,
-              width: 60,
             },
             {
               header: 'Email',
               id: 'email',
+              size: 400,
             },
           ],
         },
@@ -51,7 +50,7 @@ const Example: FC = () => {
             {
               header: 'Job Title',
               id: 'jobTitle',
-              width: 250,
+              size: 250,
             },
             {
               header: 'Salary',

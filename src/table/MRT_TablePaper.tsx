@@ -42,6 +42,9 @@ export const MRT_TablePaper: FC<Props> = ({ instance }) => {
         sx={{
           transition: 'all 0.2s ease-in-out',
           ...tablePaperProps?.sx,
+        }}
+        style={{
+          ...tablePaperProps?.style,
           height: isFullScreen ? '100vh' : undefined,
           margin: isFullScreen ? '0' : undefined,
           maxHeight: isFullScreen ? '100vh' : undefined,

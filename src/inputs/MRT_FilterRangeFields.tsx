@@ -9,22 +9,9 @@ interface Props {
 }
 
 export const MRT_FilterRangeFields: FC<Props> = ({ header, instance }) => {
-  const {
-    options: { localization },
-  } = instance;
-
   return (
-    <Box sx={{ display: 'grid', gridTemplateColumns: '6fr auto 5fr' }}>
+    <Box sx={{ display: 'grid', gridTemplateColumns: '6fr 6fr', gap: '1rem' }}>
       <MRT_FilterTextField header={header} inputIndex={0} instance={instance} />
-      <Box
-        sx={{
-          width: '100%',
-          minWidth: '5ch',
-          textAlign: 'center',
-        }}
-      >
-        {localization.to}
-      </Box>
       <MRT_FilterTextField header={header} inputIndex={1} instance={instance} />
     </Box>
   );

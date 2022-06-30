@@ -52,6 +52,42 @@ export const ColumnPinningEnabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enablePinning />
 );
 
+export const ColumnPinningDisabledPerColumn: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        id: 'firstName',
+        enablePinning: false,
+      },
+      {
+        header: 'Last Name',
+        id: 'lastName',
+      },
+      {
+        header: 'Email Address',
+        id: 'email',
+      },
+      {
+        header: 'Address',
+        id: 'address',
+      },
+      {
+        header: 'City',
+        id: 'city',
+      },
+      {
+        header: 'State',
+        id: 'state',
+      },
+    ]}
+    data={data}
+    enablePinning
+  />
+);
+
 export const ColumnPinningWithSelect: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}

@@ -1,6 +1,13 @@
 import React, { FC, Ref } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { Box, FormControlLabel, MenuItem, Switch } from '@mui/material';
+import {
+  Box,
+  FormControlLabel,
+  MenuItem,
+  Switch,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import { MRT_ColumnPinningButtons } from '../buttons/MRT_ColumnPinningButtons';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 import { reorderColumn } from '../utils';
@@ -21,7 +28,13 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
 }) => {
   const {
     getState,
-    options: { enableColumnOrdering, onColumnVisibilityChanged },
+    options: {
+      enableColumnOrdering,
+      enableHiding,
+      enablePinning,
+      localization,
+      onColumnVisibilityChanged,
+    },
     setColumnOrder,
   } = instance;
 
@@ -85,35 +98,56 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
         >
           {columnDefType !== 'group' &&
             enableColumnOrdering &&
-            columnDef.enableColumnOrdering !== false &&
-            !allColumns.some((col) => col.columnDefType === 'group') && (
+            !allColumns.some((col) => col.columnDefType === 'group') &&
+            (columnDef.enableColumnOrdering !== false ? (
               <MRT_GrabHandleButton
                 ref={dragRef as Ref<HTMLButtonElement>}
                 instance={instance}
               />
-            )}
-          {!isSubMenu && column.getCanPin() && (
-            <MRT_ColumnPinningButtons column={column} instance={instance} />
-          )}
-          <FormControlLabel
-            componentsProps={{
-              typography: {
-                sx: {
-                  mb: 0,
-                  opacity: columnDefType !== 'display' ? 1 : 0.5,
+            ) : (
+              <Box sx={{ width: '28px' }} />
+            ))}
+          {enablePinning &&
+            !isSubMenu &&
+            (column.getCanPin() ? (
+              <MRT_ColumnPinningButtons column={column} instance={instance} />
+            ) : (
+              <Box sx={{ width: '70px' }} />
+            ))}
+          {enableHiding ? (
+            <FormControlLabel
+              componentsProps={{
+                typography: {
+                  sx: {
+                    mb: 0,
+                    opacity: columnDefType !== 'display' ? 1 : 0.5,
+                  },
                 },
-              },
-            }}
-            checked={switchChecked}
-            control={<Switch />}
-            disabled={
-              (isSubMenu && switchChecked) ||
-              !column.getCanHide() ||
-              column.getIsGrouped()
-            }
-            label={columnDef.header}
-            onChange={() => handleToggleColumnHidden(column)}
-          />
+              }}
+              checked={switchChecked}
+              control={
+                <Tooltip
+                  arrow
+                  enterDelay={1000}
+                  enterNextDelay={1000}
+                  title={localization.toggleVisibility}
+                >
+                  <Switch />
+                </Tooltip>
+              }
+              disabled={
+                (isSubMenu && switchChecked) ||
+                !column.getCanHide() ||
+                column.getIsGrouped()
+              }
+              label={columnDef.header}
+              onChange={() => handleToggleColumnHidden(column)}
+            />
+          ) : (
+            <Typography sx={{ alignSelf: 'center' }}>
+              {columnDef.header}
+            </Typography>
+          )}
         </Box>
       </MenuItem>
       {column.columns?.map((c: MRT_Column, i) => (

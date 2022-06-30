@@ -59,6 +59,28 @@ export const ColumnHidingDisabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableHiding={false} />
 );
 
+export const ColumnHidingDisabledButWithOrdering: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableHiding={false}
+    enableColumnOrdering
+  />
+);
+
+export const ColumnHidingDisabledButWithPinning: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableHiding={false}
+    enablePinning
+  />
+);
+
 export const ColumnHidingDisabledPerColumn: Story<
   MaterialReactTableProps
 > = () => (

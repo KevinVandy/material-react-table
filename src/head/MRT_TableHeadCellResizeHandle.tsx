@@ -36,7 +36,6 @@ export const MRT_TableHeadCellResizeHandle: FC<Props> = ({
         touchAction: 'none',
         transition: column.getIsResizing() ? undefined : 'all 0.2s ease-in-out',
         userSelect: 'none',
-        zIndex: 2000,
         '&:active': {
           backgroundColor: theme.palette.info.main,
           opacity: 1,

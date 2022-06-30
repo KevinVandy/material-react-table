@@ -168,7 +168,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
           id: 'mrt-expand',
           muiTableBodyCellProps: props.muiTableBodyCellProps,
           muiTableHeadCellProps: props.muiTableHeadCellProps,
-          size: 50,
+          size: 60,
         }),
       columnOrder.includes('mrt-select') &&
         createDisplayColumn(table, {
@@ -183,7 +183,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
           id: 'mrt-select',
           muiTableBodyCellProps: props.muiTableBodyCellProps,
           muiTableHeadCellProps: props.muiTableHeadCellProps,
-          size: 50,
+          size: 60,
         }),
       columnOrder.includes('mrt-row-numbers') &&
         createDisplayColumn(table, {
@@ -193,7 +193,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
           id: 'mrt-row-numbers',
           muiTableBodyCellProps: props.muiTableBodyCellProps,
           muiTableHeadCellProps: props.muiTableHeadCellProps,
-          size: 50,
+          size: 60,
         }),
     ].filter(Boolean) as MRT_ColumnDef<D>[];
   }, [

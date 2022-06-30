@@ -16,11 +16,13 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ instance }) => {
   const {
     options: {
       enableColumnFilters,
+      enableColumnOrdering,
       enableDensityToggle,
       enableFilters,
       enableFullScreenToggle,
       enableGlobalFilter,
       enableHiding,
+      enablePinning,
       positionGlobalFilter,
       renderToolbarInternalActions,
     },
@@ -52,7 +54,9 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ instance }) => {
           {enableFilters && enableColumnFilters && (
             <MRT_ToggleFiltersButton instance={instance} />
           )}
-          {enableHiding && <MRT_ShowHideColumnsButton instance={instance} />}
+          {(enableHiding || enableColumnOrdering || enablePinning) && (
+            <MRT_ShowHideColumnsButton instance={instance} />
+          )}
           {enableDensityToggle && (
             <MRT_ToggleDensePaddingButton instance={instance} />
           )}
