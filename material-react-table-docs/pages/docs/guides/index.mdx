@@ -1,20 +1,18 @@
 import Head from 'next/head';
+import TableOfContentsList from '../../../components/navigation/TableOfContentsList';
+import { routes } from '../../../components/navigation/routes';
 
 <Head>
   <title>Material React Table Docs - Guides</title>
+  <meta
+    name="description"
+    content="Material React Table Guides and Tutorials"
+  />
 </Head>
 
 ## Guides
 
-### Customization
-
-- [Customize CSS](guides/customize-css)
-- [Customize MUI](guides/customize-mui)
-- [Customize Icons](guides/customize-icons)
-- [Localization](guides/localization)
-
-### Default Feature Guides
-
-### More Feature guides
-
-### Other Advanced Guides
+<TableOfContentsList
+  items={routes.find((item) => item.href === '/docs/guides').items}
+  variant="heading"
+/>

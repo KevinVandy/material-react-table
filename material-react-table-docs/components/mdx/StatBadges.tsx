@@ -2,7 +2,14 @@ import { Box } from '@mui/material';
 
 export const StatBadges = () => {
   return (
-    <Box sx={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+    <Box
+      sx={{
+        display: 'flex',
+        gap: '1rem',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+      }}
+    >
       <a href="https://npmjs.com/package/material-react-table" target="_blank_">
         <img alt="" src="https://badgen.net/npm/v/material-react-table" />
       </a>

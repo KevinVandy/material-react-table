@@ -1,4 +1,4 @@
-import { FC, Fragment, Key } from 'react';
+import { FC, Fragment } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
@@ -7,16 +7,18 @@ import {
   Drawer,
   List,
   ListItem as MuiListItem,
+  Link as MuiLink,
   styled,
   useMediaQuery,
 } from '@mui/material';
+import { routes } from './routes';
 
 const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
   color: theme.palette.primary.dark,
   cursor: 'pointer',
   fontSize: '1rem',
   height: '2.5rem',
-  padding: '1rem',
+  padding: '0',
   transition: 'all .3s ease',
   whiteSpace: 'nowrap',
   '&:hover': {
@@ -25,18 +27,22 @@ const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
 }));
 
 const ListItemLevel2 = styled(ListItemLevel1)({
-  paddingLeft: '2rem',
+  '> a': {
+    paddingLeft: '2rem',
+  },
 });
 
 const ListItemLevel3 = styled(ListItemLevel2)({
-  paddingLeft: '3rem',
+  '> a': {
+    paddingLeft: '3rem',
+  },
 });
 
 const ListItemHeaderLevel1 = styled(MuiListItem)(({ theme }) => ({
   cursor: 'pointer',
   fontSize: '1.25rem',
   height: '2.5rem',
-  padding: '1rem',
+  padding: '0',
   whiteSpace: 'nowrap',
   '&:hover': {
     backgroundColor: alpha(theme.palette.primary.main, 0.1),
@@ -48,223 +54,20 @@ const ListItemHeaderLevel2 = styled(ListItemHeaderLevel1)(({ theme }) => ({
     theme.palette.mode === 'dark'
       ? theme.palette.grey[300]
       : theme.palette.grey[700],
-  cursor: 'default',
   fontSize: '1rem',
-  paddingLeft: '2rem',
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.primary.main, 0),
+  '> a': {
+    paddingLeft: '2rem',
   },
 }));
 
-const navItems = [
-  {
-    href: '/',
-    label: 'Home',
-  },
-  {
-    href: '/about',
-    label: 'About',
-  },
-  {
-    label: 'Getting Started',
-    items: [
-      {
-        href: '/docs/install',
-        label: 'Install',
-      },
-      {
-        href: '/docs/usage',
-        label: 'Usage',
-      },
-    ],
-  },
-  {
-    label: 'API',
-    href: '/docs/api',
-    items: [
-      {
-        href: '/docs/api/props',
-        label: 'Props',
-      },
-      {
-        href: '/docs/api/column-options',
-        label: 'Column Options',
-      },
-      {
-        href: '/docs/api/state-options',
-        label: 'State Options',
-      },
-    ],
-  },
-  {
-    label: 'Quick Examples',
-    href: '/docs/examples',
-    items: [
-      {
-        href: '/docs/examples/basic',
-        label: 'Basic Example',
-      },
-      {
-        href: '/docs/examples/minimal',
-        label: 'Minimal Example',
-      },
-      {
-        href: '/docs/examples/advanced',
-        label: 'Advanced Example',
-      },
-      {
-        href: '/docs/examples/remote',
-        label: 'Remote Data Example',
-      },
-      {
-        href: '/docs/examples/virtualized',
-        label: 'Virtualized Example',
-      },
-    ],
-  },
-  {
-    label: 'Guides',
-    href: '/docs/guides',
-    items: [
-      {
-        label: 'Customization',
-        items: [
-          {
-            href: '/docs/guides/customize-css',
-            label: 'Customize CSS',
-          },
-          {
-            href: '/docs/guides/customize-mui',
-            label: 'Customize MUI',
-          },
-          {
-            href: '/docs/guides/customize-icons',
-            label: 'Customize Icons',
-          },
-          {
-            href: '/docs/guides/localization',
-            label: 'Localization (i18n)',
-          },
-        ],
-      },
-      {
-        label: 'Default Feature Guides',
-        items: [
-          {
-            href: '/docs/guides/column-actions',
-            label: 'Column Actions',
-          },
-          {
-            href: '/docs/guides/column-hiding',
-            label: 'Column Hiding',
-          },
-          {
-            href: '/docs/guides/density-toggle',
-            label: 'Density Toggle',
-          },
-          {
-            href: '/docs/guides/filtering',
-            label: 'Filtering',
-          },
-          {
-            href: '/docs/guides/global-filtering',
-            label: 'Global Filtering (Search)',
-          },
-          {
-            href: '/docs/guides/full-screen-toggle',
-            label: 'Full Screen Toggle',
-          },
-          {
-            href: '/docs/guides/pagination',
-            label: 'Pagination',
-          },
-          {
-            href: '/docs/guides/sorting',
-            label: 'Sorting',
-          },
-        ],
-      },
-      {
-        label: 'More Feature Guides',
-        items: [
-          {
-            href: '/docs/guides/aggregation-and-grouping',
-            label: 'Aggregation and Grouping',
-          },
-          {
-            href: '/docs/guides/click-to-copy',
-            label: 'Click to Copy',
-          },
-          {
-            href: '/docs/guides/column-resizing',
-            label: 'Column Resizing',
-          },
-          {
-            href: '/docs/guides/column-ordering',
-            label: 'Column Ordering (DnD)',
-          },
-          {
-            href: '/docs/guides/column-pinning',
-            label: 'Column Pinning',
-          },
-          {
-            href: '/docs/guides/customize-toolbars',
-            label: 'Customize Toolbars',
-          },
-          {
-            href: '/docs/guides/editing',
-            label: 'Data Editing (Editable)',
-          },
-          {
-            href: '/docs/guides/detail-panel',
-            label: 'Detail Panel (Expanding)',
-          },
-          {
-            href: '/docs/guides/expanded-rows',
-            label: 'Expanded Rows (Sub-Rows)',
-          },
-          {
-            href: '/docs/guides/persistent-state',
-            label: 'Persistent State',
-          },
-          {
-            href: '/docs/guides/row-actions',
-            label: 'Row Actions (Buttons)',
-          },
-          {
-            href: '/docs/guides/row-numbers',
-            label: 'Row Numbers',
-          },
-          {
-            href: '/docs/guides/row-selection',
-            label: 'Row Selection (Checkboxes)',
-          },
-          {
-            href: '/docs/guides/sticky-header',
-            label: 'Sticky Header',
-          },
-          {
-            href: '/docs/guides/row-virtualization',
-            label: 'Row Virtualization',
-          },
-        ],
-      },
-      {
-        label: 'Other Advanced Guides',
-        items: [
-          {
-            href: '/docs/guides/table-state-management',
-            label: 'Table State Management',
-          },
-          {
-            href: '/docs/guides/typescript',
-            label: 'TypeScript Usage',
-          },
-        ],
-      },
-    ],
-  },
-];
+const MenuLink = styled(MuiLink)({
+  color: 'inherit',
+  textDecoration: 'none',
+  display: 'block',
+  padding: '0.6rem 1rem',
+  height: '100%',
+  width: '100%',
+});
 
 interface Props {
   navOpen: boolean;
@@ -305,77 +108,75 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
           },
         }}
       >
-        {navItems.map(
-          ({ href: href1, items: items1, label: label1 }, index1) => {
-            if (items1?.length) {
-              return (
-                <Fragment key={index1}>
+        {routes.map(({ href: href1, items: items1, label: label1 }) => {
+          if (items1?.length) {
+            return (
+              <Fragment key={label1}>
+                <li>
                   <Divider />
-                  <Link href={href1 ?? ''} passHref>
-                    <ListItemHeaderLevel1>{label1}</ListItemHeaderLevel1>
-                  </Link>
-                  {items1?.map(
-                    (
-                      { href: href2, label: label2, items: items2 }: any,
-                      index2,
-                    ) => {
-                      if (items2?.length) {
-                        return (
-                          <Fragment key={index2}>
-                            <Link href={href2 ?? ''} passHref>
-                              <ListItemHeaderLevel2>
-                                {label2}
-                              </ListItemHeaderLevel2>
-                            </Link>
-                            {items2?.map(
-                              ({ href: href3, label: label3 }, index3) => {
-                                return (
-                                  <Link
-                                    key={index3}
-                                    href={href3 ?? ''}
-                                    passHref
-                                  >
-                                    <ListItemLevel3
-                                      onClick={handleCloseMenu}
-                                      selected={pathname === href3}
-                                    >
-                                      {label3}
-                                    </ListItemLevel3>
-                                  </Link>
-                                );
-                              },
-                            )}
-                          </Fragment>
-                        );
-                      }
-                      return (
-                        <Link key={index2} href={href2 ?? ''} passHref>
-                          <ListItemLevel2
-                            onClick={handleCloseMenu}
-                            selected={pathname === href2}
-                          >
-                            {label2}
-                          </ListItemLevel2>
-                        </Link>
-                      );
-                    },
-                  )}
-                </Fragment>
-              );
-            } else {
-              return (
-                <Link key={index1} href={href1 ?? ''} passHref>
-                  <ListItemLevel1
-                    onClick={handleCloseMenu}
-                    selected={pathname === href1}
-                  >
-                    {label1}
-                  </ListItemLevel1>
+                </li>
+                <Link href={href1 ?? ''} passHref>
+                  <ListItemHeaderLevel1>
+                    <Link href={href1 ?? ''} passHref>
+                      <MenuLink>{label1}</MenuLink>
+                    </Link>
+                  </ListItemHeaderLevel1>
                 </Link>
-              );
-            }
-          },
-        )}
+                {items1?.map(
+                  ({ href: href2, label: label2, items: items2 }: any) => {
+                    if (items2?.length) {
+                      return (
+                        <Fragment key={label2}>
+                          <ListItemHeaderLevel2>
+                            <Link href={href2 ?? ''} passHref>
+                              <MenuLink>{label2}</MenuLink>
+                            </Link>
+                          </ListItemHeaderLevel2>
+                          {items2?.map(({ href: href3, label: label3 }) => {
+                            return (
+                              <ListItemLevel3
+                                onClick={handleCloseMenu}
+                                selected={pathname === href3}
+                                key={label3}
+                              >
+                                <Link href={href3 ?? ''} passHref>
+                                  <MenuLink>{label3}</MenuLink>
+                                </Link>
+                              </ListItemLevel3>
+                            );
+                          })}
+                        </Fragment>
+                      );
+                    }
+                    return (
+                      <ListItemLevel2
+                        onClick={handleCloseMenu}
+                        selected={pathname === href2}
+                        key={label2}
+                      >
+                        <Link href={href2 ?? ''} passHref>
+                          <MenuLink>{label2}</MenuLink>
+                        </Link>
+                      </ListItemLevel2>
+                    );
+                  },
+                )}
+              </Fragment>
+            );
+          } else {
+            return (
+              <ListItemLevel1
+                onClick={handleCloseMenu}
+                selected={pathname === href1}
+                key={label1}
+              >
+                <Link href={href1 ?? ''} passHref>
+                  <MenuLink>{label1}</MenuLink>
+                </Link>
+              </ListItemLevel1>
+            );
+          }
+        })}
       </List>
     </Drawer>
   );

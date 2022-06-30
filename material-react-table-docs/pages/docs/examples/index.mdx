@@ -1,13 +1,14 @@
 import Head from 'next/head';
+import TableOfContentsList from '../../../components/navigation/TableOfContentsList';
+import { routes } from '../../../components/navigation/routes';
 
 <Head>
   <title>Material React Table Docs - Examples</title>
+  <meta name="description" content="Material React Table examples" />
 </Head>
 
 ## Quick Examples
 
-- [Basic](examples/basic)
-- [Advanced](examples/advanced)
-- [Minimal](examples/minimal)
-- [Remote](examples/remote)
-- [Virtualized](examples/virtualized)
+<TableOfContentsList
+  items={routes.find((item) => item.href === '/docs/examples').items}
+/>

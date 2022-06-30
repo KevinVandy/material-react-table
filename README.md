@@ -59,7 +59,7 @@ _All features can easily be enabled/disabled_
 - [x] Localization (i18n) support
 - [x] Manage your own state
 - [x] Pagination (supports client-side and server-side)
-- [x] Persistent State
+- [x] Remote/Server-side sorting and filtering supported
 - [x] Row Actions
 - [x] Row Numbers
 - [x] Row Selection (checkboxes)

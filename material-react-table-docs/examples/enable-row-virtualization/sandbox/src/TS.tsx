@@ -64,8 +64,10 @@ const Example: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setData(makeData(50_000));
-    setIsLoading(false);
+    if (typeof window !== 'undefined') {
+      setData(makeData(20_000));
+      setIsLoading(false);
+    }
   }, []);
 
   return (

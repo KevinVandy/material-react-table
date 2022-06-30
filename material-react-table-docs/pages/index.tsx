@@ -41,44 +41,84 @@ const HomePage = () => {
             display: 'grid',
             gap: '1.5rem',
             gridTemplateColumns: {
-              xs: 'auto',
+              xs: '15rem',
               sm: '10rem 10rem',
+              md: '10rem 10rem 10rem 10rem',
+            },
+            '> a': {
+              display: 'block',
             },
           }}
         >
           <Link href="/docs/install" passHref>
-            <Button size="large" variant="contained">
-              Get Started
-            </Button>
+            <a>
+              <Button fullWidth size="large" variant="contained">
+                Get Started
+              </Button>
+            </a>
           </Link>
-          <Button
-            href="https://github.com/KevinVandy/material-react-table"
-            target="_blank"
-            rel="noopener noreferrer"
-            size="large"
-            sx={(theme) => ({
-              backgroundColor: alpha(theme.palette.primary.main, 0.1),
-              color: theme.palette.primary.dark,
-              '&:hover': {
-                backgroundColor: alpha(
-                  darken(theme.palette.primary.main, 0.1),
-                  0.2,
-                ),
-              },
-            })}
-            variant="contained"
-          >
-            GitHub
-          </Button>
-          <Link href="/docs/api/props" passHref>
-            <Button size="large" variant="outlined" color="primary">
-              Props
-            </Button>
+          <Link href="/docs/api" passHref>
+            <a>
+              <Button
+                fullWidth
+                size="large"
+                sx={(theme) => ({
+                  backgroundColor: alpha(theme.palette.primary.main, 0.1),
+                  color: theme.palette.primary.dark,
+                  '&:hover': {
+                    backgroundColor: alpha(
+                      darken(theme.palette.primary.main, 0.1),
+                      0.2,
+                    ),
+                  },
+                })}
+                variant="contained"
+              >
+                API
+              </Button>
+            </a>
           </Link>
           <Link href="/docs/examples" passHref>
-            <Button size="large" variant="outlined" color="primary">
-              Examples
-            </Button>
+            <a>
+              <Button
+                fullWidth
+                size="large"
+                sx={(theme) => ({
+                  backgroundColor: alpha(theme.palette.primary.main, 0.1),
+                  color: theme.palette.primary.dark,
+                  '&:hover': {
+                    backgroundColor: alpha(
+                      darken(theme.palette.primary.main, 0.1),
+                      0.2,
+                    ),
+                  },
+                })}
+                variant="contained"
+              >
+                Examples
+              </Button>
+            </a>
+          </Link>
+          <Link href="/docs/guides" passHref>
+            <a>
+              <Button
+                fullWidth
+                size="large"
+                sx={(theme) => ({
+                  backgroundColor: alpha(theme.palette.primary.main, 0.1),
+                  color: theme.palette.primary.dark,
+                  '&:hover': {
+                    backgroundColor: alpha(
+                      darken(theme.palette.primary.main, 0.1),
+                      0.2,
+                    ),
+                  },
+                })}
+                variant="contained"
+              >
+                Guides
+              </Button>
+            </a>
           </Link>
         </Box>
         <HomeCards />

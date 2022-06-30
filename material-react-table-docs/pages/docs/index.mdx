@@ -1,13 +1,15 @@
 import Head from 'next/head';
+import TableOfContentsList from '../../components/navigation/TableOfContentsList';
+import { routes } from '../../components/navigation/routes';
 
 <Head>
   <title>Material React Table Docs</title>
+  <meta
+    name="description"
+    content="Material React Table Docs. Table of contents, API reference, and guides."
+  />
 </Head>
 
 ## Docs
 
-- [Install](docs/install)
-- [Usage](docs/usage)
-- [API](docs/api)
-- [Examples](docs/examples)
-- [Guides](docs/guides)
+<TableOfContentsList items={routes} />

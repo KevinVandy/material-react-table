@@ -13,6 +13,7 @@ import {
 interface Props extends TypographyProps {
   children: ReactNode | string;
   tableId?: string;
+  href?: string;
 }
 
 export const LinkHeading: FC<Props> = ({ children, tableId, ...rest }) => {
