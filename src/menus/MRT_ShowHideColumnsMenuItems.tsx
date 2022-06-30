@@ -33,19 +33,20 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
       enableHiding,
       enablePinning,
       localization,
-      onColumnVisibilityChanged,
     },
     setColumnOrder,
   } = instance;
 
-  const { columnOrder, columnVisibility } = getState();
+  const { columnOrder } = getState();
 
   const { columnDef, columnDefType } = column;
 
   const [, dropRef] = useDrop({
     accept: 'column',
-    drop: (movingColumn: MRT_Column) =>
-      reorderColumn(movingColumn, column, columnOrder, setColumnOrder),
+    drop: (movingColumn: MRT_Column) => {
+      const newColumnOrder = reorderColumn(movingColumn, column, columnOrder);
+      setColumnOrder(newColumnOrder);
+    },
   });
 
   const [, dragRef, previewRef] = useDrag({
@@ -69,11 +70,6 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
     } else {
       column.toggleVisibility();
     }
-    onColumnVisibilityChanged?.({
-      column,
-      columnVisibility,
-      instance,
-    });
   };
 
   return (

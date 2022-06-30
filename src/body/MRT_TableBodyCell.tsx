@@ -53,8 +53,10 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   const [, dropRef] = useDrop({
     accept: 'column',
-    drop: (movingColumn: MRT_Column) =>
-      reorderColumn(movingColumn, column, columnOrder, setColumnOrder),
+    drop: (movingColumn: MRT_Column) => {
+      const newColumnOrder = reorderColumn(movingColumn, column, columnOrder);
+      setColumnOrder(newColumnOrder);
+    },
   });
 
   const mTableCellBodyProps =

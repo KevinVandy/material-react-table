@@ -310,6 +310,30 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     instance,
   ]);
 
+  useEffect(() => {
+    props?.onColumnOrderChanged?.({
+      columnOrder: instance.getState().columnOrder,
+      //@ts-ignore
+      instance,
+    });
+  }, [instance.getState().columnOrder]);
+
+  useEffect(() => {
+    props?.onColumnPinningChanged?.({
+      columnPinning: instance.getState().columnPinning,
+      //@ts-ignore
+      instance,
+    });
+  }, [instance.getState().columnPinning]);
+
+  useEffect(() => {
+    props?.onColumnVisibilityChanged?.({
+      columnPinning: instance.getState().columnVisibility,
+      //@ts-ignore
+      instance,
+    });
+  }, [instance.getState().columnVisibility]);
+
   return (
     <>
       <Dialog

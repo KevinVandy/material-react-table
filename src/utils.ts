@@ -1,9 +1,4 @@
-import {
-  ColumnDef,
-  ColumnOrderState,
-  Table,
-  Updater,
-} from '@tanstack/react-table';
+import { ColumnDef, ColumnOrderState, Table } from '@tanstack/react-table';
 import {
   MaterialReactTableProps,
   MRT_Column,
@@ -67,8 +62,7 @@ export const reorderColumn = (
   movingColumn: MRT_Column,
   receivingColumn: MRT_Column,
   columnOrder: ColumnOrderState,
-  setColumnOrder: (updater: Updater<ColumnOrderState>) => void,
-) => {
+): ColumnOrderState => {
   if (movingColumn.getCanPin()) {
     movingColumn.pin(receivingColumn.getIsPinned());
   }
@@ -77,7 +71,7 @@ export const reorderColumn = (
     0,
     columnOrder.splice(columnOrder.indexOf(movingColumn.id), 1)[0],
   );
-  setColumnOrder([...columnOrder]);
+  return [...columnOrder];
 };
 
 export const getLeadingDisplayColumnIds = (

@@ -9,12 +9,16 @@ const Example = () => {
         header: 'ID',
         id: 'id',
         enablePinning: false, //disable column pinning for this column
+        size: 50,
       },
       {
         header: 'First Name',
         id: 'firstName',
       },
-      //column definitions...
+      {
+        header: 'Middle Name',
+        id: 'middleName',
+      },
       {
         header: 'Last Name',
         id: 'lastName',
@@ -22,17 +26,17 @@ const Example = () => {
       {
         header: 'Address',
         id: 'address',
+        size: 300,
       },
       {
         header: 'City',
-        id: 'city',
+        id: 'city', //this column gets pinned to the right by default because of the initial state
       },
 
       {
         header: 'State',
-        id: 'state', //this column gets pinned by default because of the the initial state
+        id: 'state', //this column gets pinned left by default because of the the initial state
       },
-      //end
     ],
     [],
   );
@@ -42,7 +46,7 @@ const Example = () => {
       columns={columns}
       data={data}
       enablePinning
-      initialState={{ columnPinning: { left: ['state'] } }}
+      initialState={{ columnPinning: { left: ['state'], right: ['city'] } }}
     />
   );
 };

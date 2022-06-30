@@ -30,6 +30,8 @@ import {
   Cell,
   Column,
   ColumnDef,
+  ColumnOrderState,
+  ColumnPinningState,
   FilterFn,
   FilterFnOption,
   Header,
@@ -644,6 +646,20 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       column: MRT_Column<D>;
       event: ChangeEvent<HTMLInputElement>;
       filterValue: any;
+      instance: MRT_TableInstance<D>;
+    }) => void;
+    onColumnOrderChanged?: ({
+      columnOrder,
+      instance,
+    }: {
+      columnOrder: ColumnOrderState;
+      instance: MRT_TableInstance<D>;
+    }) => void;
+    onColumnPinningChanged?: ({
+      columnPinning,
+      instance,
+    }: {
+      columnPinning: ColumnPinningState;
       instance: MRT_TableInstance<D>;
     }) => void;
     onColumnVisibilityChanged?: ({

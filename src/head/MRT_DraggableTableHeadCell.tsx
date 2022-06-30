@@ -10,11 +10,7 @@ interface Props {
 }
 
 export const MRT_DraggableTableHeadCell: FC<Props> = ({ header, instance }) => {
-  const {
-    getState,
-    options: {},
-    setColumnOrder,
-  } = instance;
+  const { getState, setColumnOrder } = instance;
 
   const { columnOrder } = getState();
 
@@ -22,8 +18,10 @@ export const MRT_DraggableTableHeadCell: FC<Props> = ({ header, instance }) => {
 
   const [, dropRef] = useDrop({
     accept: 'column',
-    drop: (movingColumn: MRT_Column) =>
-      reorderColumn(movingColumn, column, columnOrder, setColumnOrder),
+    drop: (movingColumn: MRT_Column) => {
+      const newColumnOrder = reorderColumn(movingColumn, column, columnOrder);
+      setColumnOrder(newColumnOrder);
+    },
   });
 
   const [{ isDragging }, dragRef, previewRef] = useDrag({

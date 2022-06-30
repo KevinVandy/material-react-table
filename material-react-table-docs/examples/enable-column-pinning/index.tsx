@@ -10,7 +10,7 @@ const ExampleTable = () => {
       Component={Example}
       javaScriptCode={JS}
       typeScriptCode={TS}
-      tableId="enable-column-ordering"
+      tableId="enable-column-pinning"
     />
   );
 };
