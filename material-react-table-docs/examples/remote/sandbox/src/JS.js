@@ -84,6 +84,14 @@ const Example = () => {
       manualFiltering
       manualPagination
       manualSorting
+      muiTableToolbarAlertBannerProps={
+        isError
+          ? {
+              color: 'error',
+              children: 'Error loading data',
+            }
+          : undefined
+      }
       onColumnFiltersChange={setColumnFilters}
       onGlobalFilterChange={setGlobalFilter}
       onPaginationChange={setPagination}
@@ -94,6 +102,7 @@ const Example = () => {
         globalFilter,
         isLoading,
         pagination,
+        showAlertBanner: isError,
         showProgressBars: isRefetching,
         sorting,
       }}

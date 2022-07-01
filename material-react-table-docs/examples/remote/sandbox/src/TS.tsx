@@ -23,6 +23,7 @@ type User = {
 
 const Example: FC = () => {
   const [data, setData] = useState<User[]>([]);
+  const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isRefetching, setIsRefetching] = useState(false);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -52,11 +53,17 @@ const Example: FC = () => {
       url.searchParams.set('globalFilter', globalFilter ?? '');
       url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
 
-      const response = await fetch(url.href);
-      const json = (await response.json()) as UserApiResponse;
-
-      setData(json.data);
-      setRowCount(json.meta.totalRowCount);
+      try {
+        const response = await fetch(url.href);
+        const json = (await response.json()) as UserApiResponse;
+        setData(json.data);
+        setRowCount(json.meta.totalRowCount);
+      } catch (error) {
+        setIsError(true);
+        console.error(error);
+        return;
+      }
+      setIsError(false);
       setIsLoading(false);
       setIsRefetching(false);
     };
@@ -105,6 +112,14 @@ const Example: FC = () => {
       manualFiltering
       manualPagination
       manualSorting
+      muiTableToolbarAlertBannerProps={
+        isError
+          ? {
+              color: 'error',
+              children: 'Error loading data',
+            }
+          : undefined
+      }
       onColumnFiltersChange={setColumnFilters}
       onGlobalFilterChange={setGlobalFilter}
       onPaginationChange={setPagination}
@@ -115,6 +130,7 @@ const Example: FC = () => {
         globalFilter,
         isLoading,
         pagination,
+        showAlertBanner: isError,
         showProgressBars: isRefetching,
         sorting,
       }}

@@ -32,24 +32,35 @@ const Example: FC = () => {
     pageSize: 10,
   });
 
-  const { data, isLoading, isFetching, isError } = useQuery<UserApiResponse>(
-    ['table-data', columnFilters, globalFilter, pagination, sorting],
-    async () => {
-      const url = new URL('/api/data', 'https://www.material-react-table.com');
-      url.searchParams.set(
-        'start',
-        `${pagination.pageIndex * pagination.pageSize}`,
-      );
-      url.searchParams.set('size', `${pagination.pageSize}`);
-      url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
-      url.searchParams.set('globalFilter', globalFilter ?? '');
-      url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
+  const { data, isError, isFetching, isLoading, isStale } =
+    useQuery<UserApiResponse>(
+      [
+        'table-data',
+        columnFilters,
+        globalFilter,
+        pagination.pageIndex,
+        pagination.pageSize,
+        sorting,
+      ],
+      async () => {
+        const url = new URL(
+          '/api/data',
+          'https://www.material-react-table.com',
+        );
+        url.searchParams.set(
+          'start',
+          `${pagination.pageIndex * pagination.pageSize}`,
+        );
+        url.searchParams.set('size', `${pagination.pageSize}`);
+        url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
+        url.searchParams.set('globalFilter', globalFilter ?? '');
+        url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
 
-      const { data: axiosData } = await axios.get(url.href);
-      return axiosData;
-    },
-    { keepPreviousData: true },
-  );
+        const { data: axiosData } = await axios.get(url.href);
+        return axiosData;
+      },
+      { keepPreviousData: true },
+    );
 
   const columns = useMemo(
     () =>
@@ -89,9 +100,8 @@ const Example: FC = () => {
       muiTableToolbarAlertBannerProps={
         isError
           ? {
-              severity: 'error',
-              title: 'Error loading data',
-              icon: true,
+              color: 'error',
+              children: 'Error loading data',
             }
           : undefined
       }
@@ -106,7 +116,7 @@ const Example: FC = () => {
         isLoading,
         pagination,
         showAlertBanner: isError,
-        showProgressBars: isFetching,
+        showProgressBars: isFetching && isStale,
         sorting,
       }}
     />

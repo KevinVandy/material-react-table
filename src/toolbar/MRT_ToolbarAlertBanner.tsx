@@ -1,5 +1,5 @@
 import React, { FC, Fragment } from 'react';
-import { Alert, Box, Chip, Collapse } from '@mui/material';
+import { Alert, AlertTitle, Box, Chip, Collapse } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
 interface Props {
@@ -63,6 +63,7 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({
       <Alert
         color="info"
         icon={false}
+        {...alertProps}
         sx={{
           borderRadius: 0,
           fontSize: '1rem',
@@ -75,9 +76,13 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({
           zIndex: 2,
           ...alertProps?.sx,
         }}
-        {...alertProps}
       >
+        {alertProps?.title && <AlertTitle>{alertProps.title}</AlertTitle>}
         <Box sx={{ p: '0.5rem 1rem' }}>
+          {alertProps?.children}
+          {alertProps?.children && (selectMessage || groupedByMessage) && (
+            <br />
+          )}
           {selectMessage}
           {selectMessage && groupedByMessage && <br />}
           {groupedByMessage}

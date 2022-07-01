@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable from 'material-react-table';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import axios from 'axios';
 
@@ -12,8 +12,15 @@ const Example = () => {
     pageSize: 10,
   });
 
-  const { data, isLoading, isFetching, isError } = useQuery(
-    ['table-data', columnFilters, globalFilter, pagination, sorting],
+  const { data, isError, isFetching, isLoading, isStale } = useQuery(
+    [
+      'table-data',
+      columnFilters,
+      globalFilter,
+      pagination.pageIndex,
+      pagination.pageSize,
+      sorting,
+    ],
     async () => {
       const url = new URL('/api/data', 'https://www.material-react-table.com');
       url.searchParams.set(
@@ -68,9 +75,8 @@ const Example = () => {
       muiTableToolbarAlertBannerProps={
         isError
           ? {
-              severity: 'error',
-              title: 'Error loading data',
-              icon: true,
+              color: 'error',
+              children: 'Error loading data',
             }
           : undefined
       }
@@ -85,7 +91,7 @@ const Example = () => {
         isLoading,
         pagination,
         showAlertBanner: isError,
-        showProgressBars: isFetching,
+        showProgressBars: isFetching && isStale,
         sorting,
       }}
     />
