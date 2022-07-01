@@ -142,3 +142,17 @@ export const EnableRowVirtualization: Story<MaterialReactTableProps> = () => (
     enableToolbarBottom={false}
   />
 );
+
+export const EnableRowVirtualizationWithColumnResizing: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={longColumns}
+    data={longData}
+    enableColumnResizing
+    enablePagination={false}
+    enableRowNumbers
+    enableRowVirtualization
+    enableToolbarBottom={false}
+  />
+);
