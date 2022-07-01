@@ -13,7 +13,7 @@ export const MRT_TableHeadCellResizeHandle: FC<Props> = ({
 }) => {
   const { getState } = instance;
 
-  const { showFilters } = getState();
+  const { density, showFilters } = getState();
 
   const { column } = header;
 
@@ -29,13 +29,14 @@ export const MRT_TableHeadCellResizeHandle: FC<Props> = ({
         borderRightWidth: '2px',
         cursor: 'col-resize',
         height: showFilters && columnDefType === 'data' ? '4rem' : '2rem',
+        mr: density === 'compact' ? '-0.5rem' : '-1rem',
         opacity: 0.8,
         position: 'absolute',
-        mr: '-1rem',
         right: '1px',
         touchAction: 'none',
         transition: column.getIsResizing() ? undefined : 'all 0.2s ease-in-out',
         userSelect: 'none',
+        zIndex: 4,
         '&:active': {
           backgroundColor: theme.palette.info.main,
           opacity: 1,
