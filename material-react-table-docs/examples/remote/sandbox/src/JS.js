@@ -22,7 +22,7 @@ const Example = () => {
         setIsRefetching(true);
       }
 
-      const url = new URL('http://localhost:3000/api/data');
+      const url = new URL('https://material-react-table.com/api/data');
       url.searchParams.set(
         'start',
         `${pagination.pageIndex * pagination.pageSize}`,
