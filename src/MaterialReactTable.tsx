@@ -3,7 +3,6 @@ import React, {
   Dispatch,
   FC,
   FocusEvent,
-  MouseEvent,
   ReactNode,
   SetStateAction,
 } from 'react';
@@ -30,8 +29,6 @@ import {
   Cell,
   Column,
   ColumnDef,
-  ColumnOrderState,
-  ColumnPinningState,
   FilterFn,
   FilterFnOption,
   Header,
@@ -46,7 +43,6 @@ import {
   TableInstance,
   TableState,
   UseTableInstanceOptions,
-  VisibilityState,
 } from '@tanstack/react-table';
 import { Options as VirtualizerOptions } from 'react-virtual';
 import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
@@ -128,6 +124,7 @@ export type MRT_TableInstance<D extends Record<string, any> = {}> = Omit<
   setCurrentGlobalFilterFn: Dispatch<SetStateAction<MRT_FilterFn>>;
   setDensity: Dispatch<SetStateAction<'comfortable' | 'compact' | 'spacious'>>;
   setIsFullScreen: Dispatch<SetStateAction<boolean>>;
+  setShowAlertBanner: Dispatch<SetStateAction<boolean>>;
   setShowFilters: Dispatch<SetStateAction<boolean>>;
   setShowGlobalFilter: Dispatch<SetStateAction<boolean>>;
 };
@@ -140,6 +137,7 @@ export type MRT_TableState<D extends Record<string, any> = {}> = TableState & {
   density: 'comfortable' | 'compact' | 'spacious';
   isLoading: boolean;
   isFullScreen: boolean;
+  showAlertBanner: boolean;
   showFilters: boolean;
   showGlobalFilter: boolean;
   showProgressBars: boolean;
@@ -288,35 +286,13 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
     cell: MRT_Cell<D>;
     instance: MRT_TableInstance<D>;
   }) => void;
-  onCellEditChanged?: ({
+  onCellEditChange?: ({
     cell,
     event,
     instance,
   }: {
     event: ChangeEvent<HTMLInputElement>;
     cell: MRT_Cell<D>;
-    instance: MRT_TableInstance<D>;
-  }) => void;
-  onColumnFilterValueChanged?: ({
-    column,
-    event,
-    filterValue,
-    instance,
-  }: {
-    column: MRT_Column<D>;
-    event: ChangeEvent<HTMLInputElement>;
-    filterValue: any;
-    instance: MRT_TableInstance<D>;
-  }) => void;
-  onColumnFilterValueChangedDebounced?: ({
-    column,
-    event,
-    filterValue,
-    instance,
-  }: {
-    column: MRT_Column<D>;
-    event: ChangeEvent<HTMLInputElement>;
-    filterValue: any;
     instance: MRT_TableInstance<D>;
   }) => void;
   sortingFn?: MRT_SortingFn;
@@ -598,15 +574,6 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     muiTableToolbarTopProps?:
       | ToolbarProps
       | (({ instance }: { instance: MRT_TableInstance<D> }) => ToolbarProps);
-    onCellClick?: ({
-      cell,
-      event,
-      instance,
-    }: {
-      cell: MRT_Cell<D>;
-      instance: MRT_TableInstance<D>;
-      event: MouseEvent<HTMLTableCellElement>;
-    }) => void;
     onCellEditBlur?: ({
       cell,
       event,
@@ -616,7 +583,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       cell: MRT_Cell<D>;
       instance: MRT_TableInstance<D>;
     }) => void;
-    onCellEditChanged?: ({
+    onCellEditChange?: ({
       cell,
       event,
       instance,
@@ -625,64 +592,10 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       cell: MRT_Cell<D>;
       instance: MRT_TableInstance<D>;
     }) => void;
-    onColumnFilterValueChanged?: ({
-      column,
-      event,
-      filterValue,
-      instance,
-    }: {
-      column: MRT_Column<D>;
-      event: ChangeEvent<HTMLInputElement>;
-      filterValue: any;
-      instance: MRT_TableInstance<D>;
-    }) => void;
-    onColumnFilterValueChangedDebounced?: ({
-      column,
-      event,
-      filterValue,
-      instance,
-    }: {
-      column: MRT_Column<D>;
-      event: ChangeEvent<HTMLInputElement>;
-      filterValue: any;
-      instance: MRT_TableInstance<D>;
-    }) => void;
-    onColumnOrderChanged?: ({
-      columnOrder,
-      instance,
-    }: {
-      columnOrder: ColumnOrderState;
-      instance: MRT_TableInstance<D>;
-    }) => void;
-    onColumnPinningChanged?: ({
-      columnPinning,
-      instance,
-    }: {
-      columnPinning: ColumnPinningState;
-      instance: MRT_TableInstance<D>;
-    }) => void;
-    onColumnVisibilityChanged?: ({
-      column,
-      columnVisibility,
-      instance,
-    }: {
-      column: MRT_Column<D>;
-      columnVisibility: VisibilityState;
-      instance: MRT_TableInstance<D>;
-    }) => void;
     onCurrentEditingCellChange?: OnChangeFn<MRT_Cell>;
     onCurrentEditingRowChange?: OnChangeFn<MRT_Row>;
     onCurrentFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterFn }>;
     onCurrentGlobalFilterFnChange?: OnChangeFn<MRT_FilterFn>;
-    onDetailPanelClick?: ({
-      event,
-      row,
-      instance,
-    }: {
-      event: MouseEvent<HTMLTableCellElement>;
-      row: MRT_Row<D>;
-      instance: MRT_TableInstance<D>;
-    }) => void;
     onEditRowSubmit?: ({
       row,
       instance,
@@ -690,104 +603,11 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       row: MRT_Row<D>;
       instance: MRT_TableInstance<D>;
     }) => Promise<void> | void;
-    onExpandChanged?: ({
-      event,
-      row,
-    }: {
-      event: MouseEvent<HTMLButtonElement>;
-      row: MRT_Row<D>;
-      instance: MRT_TableInstance<D>;
-    }) => void;
-    onGlobalFilterValueChanged?: ({
-      event,
-      instance,
-    }: {
-      event: ChangeEvent<HTMLInputElement>;
-      instance: MRT_TableInstance<D>;
-    }) => void;
-    onGlobalFilterValueChangedDebounced?: ({
-      event,
-      instance,
-    }: {
-      event: ChangeEvent<HTMLInputElement>;
-      instance: MRT_TableInstance<D>;
-    }) => void;
     onDensityChange?: OnChangeFn<boolean>;
-    onDensityChanged?: ({
-      event,
-      density,
-      instance,
-    }: {
-      event: MouseEvent<HTMLButtonElement>;
-      density: 'comfortable' | 'compact' | 'spacious';
-      instance: MRT_TableInstance<D>;
-    }) => void;
     onIsFullScreenChange?: OnChangeFn<boolean>;
-    onIsFullScreenChanged?: ({
-      event,
-      isFullScreen,
-      instance,
-    }: {
-      event: MouseEvent<HTMLButtonElement>;
-      isFullScreen: boolean;
-      instance: MRT_TableInstance<D>;
-    }) => void;
-    onRowClick?: ({
-      event,
-      row,
-      instance,
-    }: {
-      event: MouseEvent<HTMLTableRowElement>;
-      row: MRT_Row<D>;
-      instance: MRT_TableInstance<D>;
-    }) => void;
-    onRowSelectAllChanged?: ({
-      event,
-      selectedRows,
-      instance,
-    }: {
-      event: ChangeEvent;
-      selectedRows: MRT_Row<D>[];
-      instance: MRT_TableInstance<D>;
-    }) => void;
-    onRowSelectionChanged?: ({
-      event,
-      row,
-      selectedRows,
-      instance,
-    }: {
-      event: ChangeEvent;
-      row: MRT_Row<D>;
-      selectedRows: MRT_Row<D>[];
-      instance: MRT_TableInstance<D>;
-    }) => void;
+    onShowAlertBannerChange?: OnChangeFn<boolean>;
     onShowFiltersChange?: OnChangeFn<boolean>;
-    onShowFiltersChanged?: ({
-      event,
-      instance,
-      showFilters,
-    }: {
-      event: MouseEvent<HTMLButtonElement>;
-      instance: MRT_TableInstance<D>;
-      showFilters: boolean;
-    }) => void;
     onShowGlobalFilterChange?: OnChangeFn<boolean>;
-    onShowGlobalFilterChanged?: ({
-      event,
-      instance,
-      showGlobalFilter,
-    }: {
-      event: MouseEvent<HTMLButtonElement>;
-      instance: MRT_TableInstance<D>;
-      showGlobalFilter: boolean;
-    }) => void;
-    onStateChanged?: ({
-      instance,
-      state,
-    }: {
-      instance: MRT_TableInstance<D>;
-      state: MRT_TableState<D>;
-    }) => void;
     positionActionsColumn?: 'first' | 'last';
     positionGlobalFilter?: 'left' | 'right';
     positionPagination?: 'bottom' | 'top' | 'both';

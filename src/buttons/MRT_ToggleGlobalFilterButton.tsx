@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from 'react';
+import React, { FC } from 'react';
 import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
@@ -17,7 +17,6 @@ export const MRT_ToggleGlobalFilterButton: FC<Props> = ({
       tableId,
       localization,
       muiSearchTextFieldProps,
-      onShowGlobalFilterChanged,
     },
     setShowGlobalFilter,
   } = instance;
@@ -29,12 +28,7 @@ export const MRT_ToggleGlobalFilterButton: FC<Props> = ({
       ? muiSearchTextFieldProps({ instance })
       : muiSearchTextFieldProps;
 
-  const handleToggleSearch = (event: MouseEvent<HTMLButtonElement>) => {
-    onShowGlobalFilterChanged?.({
-      event,
-      showGlobalFilter: !showGlobalFilter,
-      instance,
-    });
+  const handleToggleSearch = () => {
     setShowGlobalFilter(!showGlobalFilter);
     setTimeout(
       () =>

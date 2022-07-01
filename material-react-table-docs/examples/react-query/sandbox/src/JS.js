@@ -1,10 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import MaterialReactTable from 'material-react-table';
+import React, { useMemo, useState } from 'react';
+import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import axios from 'axios';
 
 const Example = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isRefetching, setIsRefetching] = useState(false);
   const [columnFilters, setColumnFilters] = useState([]);
   const [globalFilter, setGlobalFilter] = useState('');
   const [sorting, setSorting] = useState([]);
@@ -12,16 +11,10 @@ const Example = () => {
     pageIndex: 0,
     pageSize: 10,
   });
-  const [rowCount, setRowCount] = useState(0);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!data.length) {
-        setIsLoading(true);
-      } else {
-        setIsRefetching(true);
-      }
-
+  const { data, isLoading, isFetching, isError } = useQuery(
+    ['table-data', columnFilters, globalFilter, pagination, sorting],
+    async () => {
       const url = new URL('/api/data', 'https://www.material-react-table.com');
       url.searchParams.set(
         'start',
@@ -32,23 +25,11 @@ const Example = () => {
       url.searchParams.set('globalFilter', globalFilter ?? '');
       url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
 
-      const response = await fetch(url.href);
-      const json = await response.json();
-
-      setData(json.data);
-      setRowCount(json.meta.totalRowCount);
-      setIsLoading(false);
-      setIsRefetching(false);
-    };
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    columnFilters,
-    globalFilter,
-    pagination.pageIndex,
-    pagination.pageSize,
-    sorting,
-  ]);
+      const { data: axiosData } = await axios.get(url.href);
+      return axiosData;
+    },
+    { keepPreviousData: true },
+  );
 
   const columns = useMemo(
     () => [
@@ -79,26 +60,44 @@ const Example = () => {
   return (
     <MaterialReactTable
       columns={columns}
-      data={data}
+      data={data?.data ?? []}
       enableColumnFilterChangeMode={false}
       manualFiltering
       manualPagination
       manualSorting
+      muiTableToolbarAlertBannerProps={
+        isError
+          ? {
+              severity: 'error',
+              title: 'Error loading data',
+              icon: true,
+            }
+          : undefined
+      }
       onColumnFiltersChange={setColumnFilters}
       onGlobalFilterChange={setGlobalFilter}
       onPaginationChange={setPagination}
       onSortingChange={setSorting}
-      rowCount={rowCount}
+      rowCount={data?.meta?.totalRowCount ?? 0}
       state={{
         columnFilters,
         globalFilter,
         isLoading,
         pagination,
-        showProgressBars: isRefetching,
+        showAlertBanner: isError,
+        showProgressBars: isFetching,
         sorting,
       }}
     />
   );
 };
 
-export default Example;
+const queryClient = new QueryClient();
+
+const ExampleWithReactQueryProvider = () => (
+  <QueryClientProvider client={queryClient}>
+    <Example />
+  </QueryClientProvider>
+);
+
+export default ExampleWithReactQueryProvider;

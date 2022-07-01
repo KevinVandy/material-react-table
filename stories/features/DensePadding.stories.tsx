@@ -66,6 +66,9 @@ export const DefaultToDensePadding: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    initialState={{ pagination: { pageSize: 25 }, density: 'compact' }}
+    initialState={{
+      pagination: { pageSize: 25, pageIndex: 0 },
+      density: 'compact',
+    }}
   />
 );

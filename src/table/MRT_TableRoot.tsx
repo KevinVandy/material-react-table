@@ -73,6 +73,9 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   const [isFullScreen, setIsFullScreen] = useState(
     initialState?.isFullScreen ?? false,
   );
+  const [showAlertBanner, setShowAlertBanner] = useState(
+    props.initialState?.showAlertBanner ?? false,
+  );
   const [showFilters, setShowFilters] = useState(
     initialState?.showFilters ?? false,
   );
@@ -241,6 +244,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         currentGlobalFilterFn,
         density,
         isFullScreen,
+        showAlertBanner,
         showFilters,
         showGlobalFilter,
         ...props.state,
@@ -256,38 +260,10 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       props.onCurrentGlobalFilterFnChange ?? setCurrentGlobalFilterFn,
     setDensity: props.onDensityChange ?? setDensity,
     setIsFullScreen: props.onIsFullScreenChange ?? setIsFullScreen,
+    setShowAlertBanner: props.onShowAlertBannerChange ?? setShowAlertBanner,
     setShowFilters: props.onShowFiltersChange ?? setShowFilters,
     setShowGlobalFilter: props.onShowGlobalFilterChange ?? setShowGlobalFilter,
   } as MRT_TableInstance;
-
-  useEffect(() => {
-    //@ts-ignore
-    props.onStateChanged?.({ instance, state: instance.getState() });
-  }, [instance.getState()]);
-
-  useEffect(() => {
-    props.onColumnOrderChanged?.({
-      columnOrder: instance.getState().columnOrder,
-      //@ts-ignore
-      instance,
-    });
-  }, [instance.getState().columnOrder]);
-
-  useEffect(() => {
-    props.onColumnPinningChanged?.({
-      columnPinning: instance.getState().columnPinning,
-      //@ts-ignore
-      instance,
-    });
-  }, [instance.getState().columnPinning]);
-
-  useEffect(() => {
-    props.onColumnVisibilityChanged?.({
-      columnPinning: instance.getState().columnVisibility,
-      //@ts-ignore
-      instance,
-    });
-  }, [instance.getState().columnVisibility]);
 
   return (
     <>

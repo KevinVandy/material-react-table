@@ -56,20 +56,6 @@ export const SelectAllDisabled: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const onRowSelectionChanged: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    enableRowSelection
-    onRowSelectionChanged={({ event, row, selectedRows }) => {
-      console.log({ event, row, selectedRows });
-    }}
-    onRowSelectAllChanged={({ event, selectedRows }) => {
-      console.log({ event, selectedRows });
-    }}
-  />
-);
-
 export const SelectCheckboxSecondaryColor: Story<
   MaterialReactTableProps
 > = () => (

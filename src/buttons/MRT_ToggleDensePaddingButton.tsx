@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from 'react';
+import React, { FC } from 'react';
 import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
@@ -15,25 +15,19 @@ export const MRT_ToggleDensePaddingButton: FC<Props> = ({
     options: {
       icons: { DensityLargeIcon, DensityMediumIcon, DensitySmallIcon },
       localization,
-      onDensityChanged,
     },
     setDensity,
   } = instance;
 
   const { density } = getState();
 
-  const handleToggleDensePadding = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleToggleDensePadding = () => {
     const nextDensity =
       density === 'comfortable'
         ? 'compact'
         : density === 'compact'
         ? 'spacious'
         : 'comfortable';
-    onDensityChanged?.({
-      event,
-      density: nextDensity,
-      instance,
-    });
     setDensity(nextDensity);
   };
 

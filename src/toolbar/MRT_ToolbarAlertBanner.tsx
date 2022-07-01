@@ -18,7 +18,7 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({
     options: { localization, muiTableToolbarAlertBannerProps },
   } = instance;
 
-  const { grouping } = getState();
+  const { grouping, showAlertBanner } = getState();
 
   const alertProps =
     muiTableToolbarAlertBannerProps instanceof Function
@@ -57,7 +57,7 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({
 
   return (
     <Collapse
-      in={!!selectMessage || !!groupedByMessage}
+      in={showAlertBanner || !!selectMessage || !!groupedByMessage}
       timeout={stackAlertBanner ? 200 : 0}
     >
       <Alert

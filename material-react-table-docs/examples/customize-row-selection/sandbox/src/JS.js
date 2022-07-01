@@ -91,9 +91,6 @@ const Example = () => {
         color: 'secondary',
         disabled: !isSelectAll && row?.getValue('age') < 21,
       })}
-      onRowSelectionChanged={({ event, row, selectedRows }) => {
-        console.log({ event, row, selectedRows });
-      }}
     />
   );
 };

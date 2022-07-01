@@ -92,9 +92,6 @@ const Example: FC = () => {
         color: 'secondary',
         disabled: row?.getValue('age') < 21,
       })}
-      onRowSelectionChanged={({ event, row, selectedRows }) => {
-        console.log({ event, row, selectedRows });
-      }}
     />
   );
 };

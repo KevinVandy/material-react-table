@@ -60,6 +60,10 @@ export const routes = [
         label: 'Remote Data Example',
       },
       {
+        href: '/docs/examples/react-query',
+        label: 'React Query Example',
+      },
+      {
         href: '/docs/examples/virtualized',
         label: 'Virtualized Example',
       },

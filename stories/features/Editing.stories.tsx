@@ -292,7 +292,7 @@ export const EditingWithValidation: Story<MaterialReactTableProps> = () => {
             error: !!firstNameError,
             helperText: firstNameError,
           },
-          onCellEditChanged: ({ event }) => {
+          onCellEditChange: ({ event }) => {
             setFirstNameError(validateFirstName(event.target.value));
           },
         },
@@ -303,7 +303,7 @@ export const EditingWithValidation: Story<MaterialReactTableProps> = () => {
             error: !!lastNameError,
             helperText: lastNameError,
           },
-          onCellEditChanged: ({ event }) => {
+          onCellEditChange: ({ event }) => {
             setLastNameError(validateLastName(event.target.value));
           },
         },
@@ -314,7 +314,7 @@ export const EditingWithValidation: Story<MaterialReactTableProps> = () => {
             error: !!phoneNumberError,
             helperText: phoneNumberError,
           },
-          onCellEditChanged: ({ event }) => {
+          onCellEditChange: ({ event }) => {
             setPhoneNumberError(validatePhoneNumber(event.target.value));
           },
         },

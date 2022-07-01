@@ -29,8 +29,6 @@ export const MRT_GlobalFilterTextField: FC<Props> = ({ instance }) => {
       icons: { SearchIcon, CloseIcon },
       localization,
       muiSearchTextFieldProps,
-      onGlobalFilterValueChanged,
-      onGlobalFilterValueChangedDebounced,
       tableId,
     },
   } = instance;
@@ -43,7 +41,6 @@ export const MRT_GlobalFilterTextField: FC<Props> = ({ instance }) => {
   const handleChangeDebounced = useCallback(
     debounce((event: ChangeEvent<HTMLInputElement>) => {
       setGlobalFilter(event.target.value ?? undefined);
-      onGlobalFilterValueChangedDebounced?.({ event, instance });
     }, 250),
     [],
   );
@@ -51,7 +48,6 @@ export const MRT_GlobalFilterTextField: FC<Props> = ({ instance }) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
     handleChangeDebounced(event);
-    onGlobalFilterValueChanged?.({ event, instance });
   };
 
   const handleGlobalFilterMenuOpen = (event: MouseEvent<HTMLElement>) => {

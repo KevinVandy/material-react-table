@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, {
   MaterialReactTableProps,
@@ -6,6 +6,7 @@ import MaterialReactTable, {
 } from '../../src';
 import { faker } from '@faker-js/faker';
 import { MenuItem, TextField } from '@mui/material';
+import { ColumnFiltersState } from '@tanstack/react-table';
 
 const meta: Meta = {
   title: 'Features/Filtering Examples',
@@ -343,7 +344,27 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
 );
 
 export const ManualFiltering: Story<MaterialReactTableProps> = () => {
-  const [rows, setRows] = useState(() => data);
+  const [rows, setRows] = useState(() => [...data]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+
+  //this kind of logic would actually live on a server, not client-side
+  useEffect(() => {
+    if (!!columnFilters?.length) {
+      let filteredRows = [...data];
+      columnFilters.map((filter) => {
+        const { id: columnId, value: filterValue } = filter;
+        filteredRows = filteredRows.filter((row) => {
+          return row[columnId]
+            ?.toString()
+            ?.toLowerCase()
+            ?.includes?.((filterValue as string).toLowerCase());
+        });
+      });
+      setRows(filteredRows);
+    } else {
+      setRows([...data]);
+    }
+  }, [columnFilters]);
 
   return (
     <MaterialReactTable
@@ -351,14 +372,8 @@ export const ManualFiltering: Story<MaterialReactTableProps> = () => {
       data={rows}
       manualFiltering
       enabledColumnFilterOptions={null}
-      onColumnFilterValueChanged={({ column, event, filterValue }) => {
-        const filteredRows = data.filter((dataRow) =>
-          dataRow[column.id]
-            .toLowerCase()
-            .startsWith(filterValue.toLowerCase()),
-        );
-        setRows(filteredRows);
-      }}
+      onColumnFiltersChange={setColumnFilters}
+      state={{ columnFilters }}
     />
   );
 };

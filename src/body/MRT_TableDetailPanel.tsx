@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from 'react';
+import React, { FC } from 'react';
 import { Collapse, TableCell, TableRow } from '@mui/material';
 import type { MRT_Row, MRT_TableInstance } from '..';
 
@@ -13,7 +13,6 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, instance }) => {
     options: {
       muiTableBodyRowProps,
       muiTableDetailPanelProps,
-      onDetailPanelClick,
       renderDetailPanel,
     },
   } = instance;
@@ -32,9 +31,6 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, instance }) => {
     <TableRow {...tableRowProps}>
       <TableCell
         colSpan={getVisibleLeafColumns().length}
-        onClick={(event: MouseEvent<HTMLTableCellElement>) =>
-          onDetailPanelClick?.({ event, row, instance })
-        }
         {...tableCellProps}
         sx={{
           borderBottom: !row.getIsExpanded() ? 'none' : undefined,

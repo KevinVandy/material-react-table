@@ -37,8 +37,6 @@ export const MRT_FilterTextField: FC<Props> = ({
       icons: { FilterListIcon, CloseIcon },
       localization,
       muiTableHeadCellFilterTextFieldProps,
-      onColumnFilterValueChanged,
-      onColumnFilterValueChangedDebounced,
       tableId,
     },
     setCurrentFilterFns,
@@ -87,18 +85,6 @@ export const MRT_FilterTextField: FC<Props> = ({
       } else {
         column.setFilterValue(event.target.value ?? undefined);
       }
-      onColumnFilterValueChangedDebounced?.({
-        column,
-        event,
-        filterValue: event.target.value,
-        instance,
-      });
-      columnDef.onColumnFilterValueChangedDebounced?.({
-        column,
-        event,
-        filterValue: event.target.value,
-        instance,
-      });
     }, 200),
     [],
   );
@@ -106,18 +92,6 @@ export const MRT_FilterTextField: FC<Props> = ({
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFilterValue(event.target.value);
     handleChangeDebounced(event);
-    onColumnFilterValueChanged?.({
-      column,
-      event,
-      filterValue: event.target.value,
-      instance,
-    });
-    columnDef.onColumnFilterValueChanged?.({
-      column,
-      event,
-      filterValue: event.target.value,
-      instance,
-    });
   };
 
   const handleFilterMenuOpen = (event: MouseEvent<HTMLElement>) => {

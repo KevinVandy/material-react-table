@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from 'react';
+import React, { FC } from 'react';
 import { darken, lighten, TableRow } from '@mui/material';
 import { MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
@@ -13,7 +13,7 @@ interface Props {
 export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, instance }) => {
   const {
     getIsSomeColumnsPinned,
-    options: { muiTableBodyRowProps, onRowClick, renderDetailPanel },
+    options: { muiTableBodyRowProps, renderDetailPanel },
   } = instance;
 
   const tableRowProps =
@@ -25,9 +25,6 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, instance }) => {
     <>
       <TableRow
         hover
-        onClick={(event: MouseEvent<HTMLTableRowElement>) =>
-          onRowClick?.({ event, row, instance })
-        }
         selected={row.getIsSelected()}
         {...tableRowProps}
         sx={(theme) => ({

@@ -10,16 +10,11 @@ interface Props {
 
 export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, instance }) => {
   const {
-    getRowModel,
-    getPaginationRowModel,
-    getSelectedRowModel,
     getState,
     options: {
       localization,
       muiSelectCheckboxProps,
       muiSelectAllCheckboxProps,
-      onRowSelectionChanged,
-      onRowSelectAllChanged,
       selectAllMode,
     },
   } = instance;
@@ -33,27 +28,8 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, instance }) => {
       } else if (selectAllMode === 'page') {
         instance.getToggleAllPageRowsSelectedHandler()(event as any);
       }
-      onRowSelectAllChanged?.({
-        event,
-        selectedRows: event.target.checked
-          ? selectAllMode === 'all'
-            ? getRowModel().flatRows
-            : getPaginationRowModel().flatRows
-          : [],
-        instance,
-      });
     } else if (row) {
       row?.getToggleSelectedHandler()(event as any);
-      onRowSelectionChanged?.({
-        event,
-        row,
-        selectedRows: event.target.checked
-          ? [...getSelectedRowModel().flatRows, row]
-          : getSelectedRowModel().flatRows.filter(
-              (selectedRow) => selectedRow.id !== row.id,
-            ),
-        instance,
-      });
     }
   };
 
