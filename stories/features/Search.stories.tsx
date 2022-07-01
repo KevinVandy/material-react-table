@@ -40,6 +40,8 @@ const data = [...Array(200)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
+console.log(JSON.stringify(data, null, 2));
+
 export const SearchEnabledDefault: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} />
 );

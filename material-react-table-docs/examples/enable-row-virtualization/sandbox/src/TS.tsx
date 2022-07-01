@@ -73,7 +73,7 @@ const Example: FC = () => {
   return (
     <MaterialReactTable
       columns={columns}
-      data={data} //50,000 rows
+      data={data} //20,000 rows
       enablePagination={false}
       enableRowNumbers
       enableRowVirtualization

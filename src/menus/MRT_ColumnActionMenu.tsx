@@ -34,12 +34,14 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     toggleAllColumnsVisible,
     setColumnOrder,
     options: {
+      enableColumnFilterChangeMode,
       enableColumnFilters,
       enableColumnResizing,
       enableGrouping,
       enableHiding,
       enablePinning,
       enableSorting,
+      enabledColumnFilterOptions,
       icons: {
         ArrowRightIcon,
         ClearAllIcon,
@@ -144,6 +146,18 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     setShowHideColumnsMenuAnchorEl(event.currentTarget);
   };
 
+  const isSelectFilter = !!columnDef.filterSelectOptions;
+
+  const allowedColumnFilterOptions =
+    columnDef?.enabledColumnFilterOptions ?? enabledColumnFilterOptions;
+
+  const showFilterModeSubMenu =
+    enableColumnFilterChangeMode &&
+    columnDef.enableColumnFilterChangeMode !== false &&
+    !isSelectFilter &&
+    (allowedColumnFilterOptions === undefined ||
+      !!allowedColumnFilterOptions?.length);
+
   return (
     <Menu
       anchorEl={anchorEl}
@@ -203,7 +217,8 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           </MenuItem>,
         ]}
       {enableColumnFilters &&
-        column.getCanFilter() && [
+        column.getCanFilter() &&
+        [
           <MenuItem
             disabled={!column.getFilterValue()}
             key={0}
@@ -232,7 +247,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
                 String(columnDef.header),
               )}
             </Box>
-            {!columnDef.filterSelectOptions && (
+            {showFilterModeSubMenu && (
               <IconButton
                 onClick={handleOpenFilterModeMenu}
                 onMouseEnter={handleOpenFilterModeMenu}
@@ -243,15 +258,17 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
               </IconButton>
             )}
           </MenuItem>,
-          <MRT_FilterOptionMenu
-            anchorEl={filterMenuAnchorEl}
-            header={header}
-            key={2}
-            onSelect={handleFilterByColumn}
-            setAnchorEl={setFilterMenuAnchorEl}
-            instance={instance}
-          />,
-        ]}
+          showFilterModeSubMenu && (
+            <MRT_FilterOptionMenu
+              anchorEl={filterMenuAnchorEl}
+              header={header}
+              key={2}
+              onSelect={handleFilterByColumn}
+              setAnchorEl={setFilterMenuAnchorEl}
+              instance={instance}
+            />
+          ),
+        ].filter(Boolean)}
       {enableGrouping &&
         column.getCanGroup() && [
           <MenuItem

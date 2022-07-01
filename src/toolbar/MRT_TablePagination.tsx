@@ -13,7 +13,11 @@ export const MRT_TablePagination: FC<Props> = ({ instance, position }) => {
     getState,
     setPageIndex,
     setPageSize,
-    options: { muiTablePaginationProps, enableToolbarInternalActions },
+    options: {
+      muiTablePaginationProps,
+      enableToolbarInternalActions,
+      rowCount,
+    },
   } = instance;
 
   const {
@@ -30,8 +34,9 @@ export const MRT_TablePagination: FC<Props> = ({ instance, position }) => {
     setPageSize(+event.target.value);
   };
 
-  const showFirstLastPageButtons =
-    getPrePaginationRowModel().rows.length / pageSize > 2;
+  const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
+
+  const showFirstLastPageButtons = totalRowCount / pageSize > 2;
 
   return (
     <TablePagination
@@ -40,7 +45,7 @@ export const MRT_TablePagination: FC<Props> = ({ instance, position }) => {
         MenuProps: { MenuListProps: { disablePadding: true } },
       }}
       component="div"
-      count={getPrePaginationRowModel().rows.length}
+      count={totalRowCount}
       onPageChange={(_: any, newPage: number) => setPageIndex(newPage)}
       onRowsPerPageChange={handleChangeRowsPerPage}
       page={pageIndex}

@@ -177,9 +177,13 @@ export const MRT_FilterTextField: FC<Props> = ({
   const allowedColumnFilterOptions =
     columnDef?.enabledColumnFilterOptions ?? enabledColumnFilterOptions;
 
-  const allowColumnChangeMode =
+  const showChangeModeButton =
     enableColumnFilterChangeMode &&
-    columnDef.enableColumnFilterChangeMode !== false;
+    columnDef.enableColumnFilterChangeMode !== false &&
+    !isSelectFilter &&
+    !inputIndex &&
+    (allowedColumnFilterOptions === undefined ||
+      !!allowedColumnFilterOptions?.length);
 
   return (
     <>
@@ -195,10 +199,7 @@ export const MRT_FilterTextField: FC<Props> = ({
           title: filterPlaceholder,
         }}
         helperText={
-          allowColumnChangeMode &&
-          !inputIndex &&
-          (allowedColumnFilterOptions === undefined ||
-            (allowedColumnFilterOptions?.length ?? 0) > 0) ? (
+          showChangeModeButton ? (
             <label htmlFor={filterId}>
               {filterFn instanceof Function
                 ? localization.filterMode.replace(
@@ -240,35 +241,30 @@ export const MRT_FilterTextField: FC<Props> = ({
         value={filterValue ?? ''}
         variant="standard"
         InputProps={{
-          startAdornment:
-            allowColumnChangeMode &&
-            !isSelectFilter &&
-            !inputIndex &&
-            (allowedColumnFilterOptions === undefined ||
-              !!allowedColumnFilterOptions?.length) ? (
-              <InputAdornment position="start">
-                <Tooltip arrow title={localization.changeFilterMode}>
-                  <span>
-                    <IconButton
-                      aria-label={localization.changeFilterMode}
-                      onClick={handleFilterMenuOpen}
-                      size="small"
-                      sx={{ height: '1.75rem', width: '1.75rem' }}
-                    >
-                      <FilterListIcon />
-                    </IconButton>
-                  </span>
-                </Tooltip>
-                {filterChipLabel && (
-                  <Chip
-                    onDelete={handleClearFilterChip}
-                    label={filterChipLabel}
-                  />
-                )}
-              </InputAdornment>
-            ) : (
-              <FilterListIcon />
-            ),
+          startAdornment: showChangeModeButton ? (
+            <InputAdornment position="start">
+              <Tooltip arrow title={localization.changeFilterMode}>
+                <span>
+                  <IconButton
+                    aria-label={localization.changeFilterMode}
+                    onClick={handleFilterMenuOpen}
+                    size="small"
+                    sx={{ height: '1.75rem', width: '1.75rem' }}
+                  >
+                    <FilterListIcon />
+                  </IconButton>
+                </span>
+              </Tooltip>
+              {filterChipLabel && (
+                <Chip
+                  onDelete={handleClearFilterChip}
+                  label={filterChipLabel}
+                />
+              )}
+            </InputAdornment>
+          ) : (
+            <FilterListIcon />
+          ),
           endAdornment: !filterChipLabel && (
             <InputAdornment position="end">
               <Tooltip

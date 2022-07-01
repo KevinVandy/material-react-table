@@ -65,14 +65,14 @@ const Example = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setData(makeData(50_000));
+    setData(makeData(20_000));
     setIsLoading(false);
   }, []);
 
   return (
     <MaterialReactTable
       columns={columns}
-      data={data} //50,000 rows
+      data={data} //20,000 rows
       enablePagination={false}
       enableRowNumbers
       enableRowVirtualization

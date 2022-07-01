@@ -2,60 +2,75 @@ import React, { useEffect, useMemo, useState } from 'react';
 import MaterialReactTable from 'material-react-table';
 
 const Example = () => {
-  const [remoteData, setRemoteData] = useState([]);
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isRefetching, setIsRefetching] = useState(false);
+  const [columnFilters, setColumnFilters] = useState([]);
+  const [globalFilter, setGlobalFilter] = useState('');
+  const [sorting, setSorting] = useState([]);
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+  const [rowCount, setRowCount] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
-      const response = await fetch(
-        'https://jsonplaceholder.typicode.com/users',
+      if (!data.length) {
+        setIsLoading(true);
+      } else {
+        setIsRefetching(true);
+      }
+
+      const url = new URL('http://localhost:3000/api/data');
+      url.searchParams.set(
+        'start',
+        `${pagination.pageIndex * pagination.pageSize}`,
       );
+      url.searchParams.set('size', `${pagination.pageSize}`);
+      url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
+      url.searchParams.set('globalFilter', globalFilter ?? '');
+      url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
+
+      const response = await fetch(url);
       const json = await response.json();
-      setRemoteData(json);
+
+      setData(json.data);
+      setRowCount(json.meta.totalRowCount);
       setIsLoading(false);
+      setIsRefetching(false);
     };
     fetchData();
-  }, []);
-
-  const parsedData = useMemo(
-    () =>
-      remoteData.map((userData) => ({
-        name: userData.name,
-        username: userData.username,
-        email: userData.email,
-        address: userData.address.street,
-        city: userData.address.city,
-        zipcode: userData.address.zipcode,
-      })) ?? [],
-    [remoteData],
-  );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    columnFilters,
+    globalFilter,
+    pagination.pageIndex,
+    pagination.pageSize,
+    sorting,
+  ]);
 
   const columns = useMemo(
     () => [
       {
-        header: 'Name',
-        id: 'name',
+        header: 'First Name',
+        id: 'firstName',
       },
       {
-        header: 'Username',
-        id: 'username',
-      },
-      {
-        header: 'Email',
-        id: 'email',
+        header: 'Last Name',
+        id: 'lastName',
       },
       {
         header: 'Address',
         id: 'address',
       },
       {
-        header: 'City',
-        id: 'city',
+        header: 'State',
+        id: 'state',
       },
       {
-        header: 'Zip Code',
-        id: 'zipcode',
+        header: 'Phone Number',
+        id: 'phoneNumber',
       },
     ],
     [],
@@ -64,9 +79,23 @@ const Example = () => {
   return (
     <MaterialReactTable
       columns={columns}
-      data={parsedData}
+      data={data}
+      enableColumnFilterChangeMode={false}
+      manualFiltering
+      manualPagination
+      manualSorting
+      onColumnFiltersChange={setColumnFilters}
+      onGlobalFilterChange={setGlobalFilter}
+      onPaginationChange={setPagination}
+      onSortingChange={setSorting}
+      rowCount={rowCount}
       state={{
+        columnFilters,
+        globalFilter,
         isLoading,
+        pagination,
+        showProgressBars: isRefetching,
+        sorting,
       }}
     />
   );

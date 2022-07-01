@@ -401,7 +401,6 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
     enableGlobalFilterChangeMode?: boolean;
     enableGlobalFilterRankedResults?: boolean;
     enablePagination?: boolean;
-    enablePersistentState?: boolean;
     enableRowActions?: boolean;
     enableRowNumbers?: boolean;
     enableRowVirtualization?: boolean;
@@ -782,7 +781,6 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       instance: MRT_TableInstance<D>;
       showGlobalFilter: boolean;
     }) => void;
-    persistentStateMode?: 'localStorage' | 'sessionStorage';
     positionActionsColumn?: 'first' | 'last';
     positionGlobalFilter?: 'left' | 'right';
     positionPagination?: 'bottom' | 'top' | 'both';
@@ -845,6 +843,7 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
         IconButtonProps & { instance: MRT_TableInstance<D> }
       >;
     }) => ReactNode;
+    rowCount?: number;
     rowNumberMode?: 'original' | 'static';
     selectAllMode?: 'all' | 'page';
     tableId?: string;
@@ -885,7 +884,6 @@ export default <D extends Record<string, any> = {}>({
   enableToolbarTop = true,
   icons,
   localization,
-  persistentStateMode = 'sessionStorage',
   positionActionsColumn = 'first',
   positionGlobalFilter = 'right',
   positionPagination = 'bottom',
@@ -928,7 +926,6 @@ export default <D extends Record<string, any> = {}>({
     enableToolbarTop={enableToolbarTop}
     icons={{ ...MRT_Default_Icons, ...icons }}
     localization={{ ...MRT_DefaultLocalization_EN, ...localization }}
-    persistentStateMode={persistentStateMode}
     positionActionsColumn={positionActionsColumn}
     positionGlobalFilter={positionGlobalFilter}
     positionPagination={positionPagination}

@@ -56,30 +56,6 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     const initState = props.initialState ?? {};
     initState.columnOrder =
       initState.columnOrder ?? getDefaultColumnOrderIds(props);
-
-    if (!props.enablePersistentState || !props.tableId) {
-      return initState;
-    }
-    if (typeof window === 'undefined') {
-      if (process.env.NODE_ENV !== 'production') {
-        console.error(
-          'The MRT Persistent Table State feature is not supported if using SSR, but you can wrap your <MaterialReactTable /> in a MUI <NoSsr> tags to let it work',
-        );
-      }
-      return initState;
-    }
-    const storedState =
-      props.persistentStateMode === 'localStorage'
-        ? localStorage.getItem(`mrt-${tableId}-table-state`)
-        : props.persistentStateMode === 'sessionStorage'
-        ? sessionStorage.getItem(`mrt-${tableId}-table-state`)
-        : '{}';
-    if (storedState) {
-      const parsedState = JSON.parse(storedState);
-      if (parsedState) {
-        return { ...initState, ...parsedState };
-      }
-    }
     return initState;
   }, []);
 
@@ -283,32 +259,6 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     setShowFilters: props.onShowFiltersChange ?? setShowFilters,
     setShowGlobalFilter: props.onShowGlobalFilterChange ?? setShowGlobalFilter,
   } as MRT_TableInstance;
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || !props.enablePersistentState) {
-      return;
-    }
-    if (!props.tableId && process.env.NODE_ENV !== 'production') {
-      console.warn(
-        'a unique tableId prop is required for persistent table state to work',
-      );
-      return;
-    }
-    const itemArgs: [string, string] = [
-      `mrt-${tableId}-table-state`,
-      JSON.stringify(instance.getState()),
-    ];
-    if (props.persistentStateMode === 'localStorage') {
-      localStorage.setItem(...itemArgs);
-    } else if (props.persistentStateMode === 'sessionStorage') {
-      sessionStorage.setItem(...itemArgs);
-    }
-  }, [
-    props.enablePersistentState,
-    props.tableId,
-    props.persistentStateMode,
-    instance,
-  ]);
 
   useEffect(() => {
     props?.onColumnOrderChanged?.({

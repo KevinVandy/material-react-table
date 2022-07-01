@@ -34,22 +34,25 @@ const ToggleFullCodeButton = styled(IconButton)({
 
 export interface Props {
   Component?: FC;
-  showCodeSandboxLink?: boolean;
+  apiCode?: string;
   javaScriptCode?: string;
+  showCodeSandboxLink?: boolean;
   tableId: string;
   typeScriptCode: string;
 }
 
 export const SourceCodeSnippet: FC<Props> = ({
   Component,
+  apiCode,
   javaScriptCode,
+  showCodeSandboxLink = true,
   tableId,
   typeScriptCode,
-  showCodeSandboxLink = true,
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery('(max-width: 720px)');
   const [isTypeScript, setIsTypeScript] = useState(true);
+  const [showApiCode, setShowApiCode] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const [isFullCode, setIsFullCode] = useState(false);
 
@@ -124,27 +127,50 @@ export const SourceCodeSnippet: FC<Props> = ({
           </LinkHeading>
           <ToggleButtonGroup>
             <ToggleButton
-              onClick={() => setIsTypeScript(true)}
+              onClick={() => {
+                setIsTypeScript(true);
+                setShowApiCode(false);
+              }}
               value="ts"
-              selected={isTypeScript}
+              selected={isTypeScript && !showApiCode}
             >
               TS
             </ToggleButton>
             {javaScriptCode && (
               <ToggleButton
-                onClick={() => setIsTypeScript(false)}
+                onClick={() => {
+                  setIsTypeScript(false);
+                  setShowApiCode(false);
+                }}
                 value="js"
-                selected={!isTypeScript}
+                selected={!isTypeScript && !showApiCode}
               >
                 JS
+              </ToggleButton>
+            )}
+            {apiCode && (
+              <ToggleButton
+                onClick={() => {
+                  setShowApiCode(true);
+                }}
+                value="js"
+                selected={showApiCode}
+              >
+                API
               </ToggleButton>
             )}
           </ToggleButtonGroup>
         </div>
         <Highlight
           {...defaultProps}
-          code={isTypeScript ? typeScriptCode : javaScriptCode ?? ''}
-          language={isTypeScript ? 'tsx' : 'jsx'}
+          code={
+            showApiCode
+              ? apiCode ?? ''
+              : isTypeScript
+              ? typeScriptCode
+              : javaScriptCode ?? ''
+          }
+          language={showApiCode || isTypeScript ? 'tsx' : 'jsx'}
           theme={theme.palette.mode === 'dark' ? vsDark : vsLight}
         >
           {({ className, style, tokens, getLineProps, getTokenProps }) => (
