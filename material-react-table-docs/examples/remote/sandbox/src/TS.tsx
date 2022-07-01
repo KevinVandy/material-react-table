@@ -42,7 +42,7 @@ const Example: FC = () => {
         setIsRefetching(true);
       }
 
-      const url = new URL('https://material-react-table.com/api/data');
+      const url = new URL('/api/data', window.location.origin);
       url.searchParams.set(
         'start',
         `${pagination.pageIndex * pagination.pageSize}`,
@@ -52,7 +52,7 @@ const Example: FC = () => {
       url.searchParams.set('globalFilter', globalFilter ?? '');
       url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
 
-      const response = await fetch(url);
+      const response = await fetch(url.href);
       const json = (await response.json()) as UserApiResponse;
 
       setData(json.data);
