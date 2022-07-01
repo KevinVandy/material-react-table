@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { Link, useTheme } from '@mui/material';
+import { Link as MuiLink, useTheme } from '@mui/material';
 import { PropRow, rootProps } from './rootProps';
+import Link from 'next/link';
 
 const RootPropTable = () => {
   const theme = useTheme();
@@ -35,8 +36,17 @@ const RootPropTable = () => {
           disableFilters: true,
           enableGlobalFilter: false,
           Cell: ({ cell }) => (
-            <Link href={cell.getValue() as string} target="_blank">
-              {cell.row.original?.linkText}
+            <Link href={cell.getValue() as string} passHref>
+              <MuiLink
+                target={
+                  (cell.getValue() as string).startsWith('http')
+                    ? '_blank'
+                    : undefined
+                }
+                rel="noreferrer"
+              >
+                {cell.row.original?.linkText}
+              </MuiLink>
             </Link>
           ),
         },

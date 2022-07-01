@@ -1,4 +1,4 @@
-name: '🐛 Bug report'
+name: "🐛 Bug report"
 description: Report a reproducible bug or regression
 body:
   - type: markdown
@@ -28,8 +28,8 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: Describe the bug and steps to reproduce
-      description: Provide a clear and concise description of the challenge you are running into.
+      label: Describe the bug and the steps to reproduce it
+      description: Provide a clear and concise description of the challenge you are running into, and the steps we should take to try to reproduce your bug.
     validations:
       required: true
 
@@ -43,12 +43,12 @@ body:
     validations:
       required: true
 
-  - type: input
+  - type: textarea
     id: link
     attributes:
-      label: Your Minimal, Reproducible Example (Optional, but Recommended)
+      label: Your Minimal, Reproducible Example (Sandbox or code snippets)
       description: |
-        Please add a link to a minimal reproduction. This can really speed up the diagnosis of the problem!
+        Please add a link to a minimal reproduction. This can really speed up the diagnosis of the problem! A Code Sandbox is preferable, but simple code snippets are also acceptable here.
         Note:
           - Your bug may get fixed much faster if we can run your code and it doesn't have dependencies other than React and the Material UI/Emotion dependencies.
           - To create a shareable code example for web, you can use CodeSandbox (https://codesandbox.io/s/new).
@@ -56,9 +56,9 @@ body:
           - Feel free to fork any of the official CodeSandbox examples to reproduce your issue: https://github.com/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples
           - Please read these tips for providing a minimal example: https://stackoverflow.com/help/mcve.
       placeholder: |
-        e.g. Code Sandbox, Stackblitz, etc.
+        e.g. Code Sandbox, Stackblitz, or relevant code snippets.
     validations:
-      required: false
+      required: true
 
   - type: textarea
     id: screenshots_or_videos
@@ -81,7 +81,7 @@ body:
         - Yes, I am also opening a PR that solves the problem along side this issue
       label: Do you intend to try to help solve this bug with your own PR?
       description: |
-        If you think you know the cause of the problem, the fastest way to get it fixed is to suggest a fix, or fix it yourself! It is ok if you cannot solve this yourself.
+        If you think you know the cause of the problem, the fastest way to get it fixed is to suggest a fix, or fix it yourself! It is ok if you cannot solve this yourself and are just wanting help.
 
   - type: checkboxes
     id: agrees-to-terms

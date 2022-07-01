@@ -781,6 +781,13 @@ export type MaterialReactTableProps<D extends Record<string, any> = {}> =
       instance: MRT_TableInstance<D>;
       showGlobalFilter: boolean;
     }) => void;
+    onStateChanged?: ({
+      instance,
+      state,
+    }: {
+      instance: MRT_TableInstance<D>;
+      state: MRT_TableState<D>;
+    }) => void;
     positionActionsColumn?: 'first' | 'last';
     positionGlobalFilter?: 'left' | 'right';
     positionPagination?: 'bottom' | 'top' | 'both';

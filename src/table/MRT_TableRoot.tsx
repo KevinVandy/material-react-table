@@ -261,7 +261,12 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   } as MRT_TableInstance;
 
   useEffect(() => {
-    props?.onColumnOrderChanged?.({
+    //@ts-ignore
+    props.onStateChanged?.({ instance, state: instance.getState() });
+  }, [instance.getState()]);
+
+  useEffect(() => {
+    props.onColumnOrderChanged?.({
       columnOrder: instance.getState().columnOrder,
       //@ts-ignore
       instance,
@@ -269,7 +274,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   }, [instance.getState().columnOrder]);
 
   useEffect(() => {
-    props?.onColumnPinningChanged?.({
+    props.onColumnPinningChanged?.({
       columnPinning: instance.getState().columnPinning,
       //@ts-ignore
       instance,
@@ -277,7 +282,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   }, [instance.getState().columnPinning]);
 
   useEffect(() => {
-    props?.onColumnVisibilityChanged?.({
+    props.onColumnVisibilityChanged?.({
       columnPinning: instance.getState().columnVisibility,
       //@ts-ignore
       instance,
