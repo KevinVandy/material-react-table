@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://material-react-table.com
+
+# Sitemaps
+Sitemap: https://material-react-table.com/sitemap.xml
