@@ -26,7 +26,7 @@ const Example = () => {
       {
         accessorKey: 'state',
         enableColumnOrdering: false, //disable column ordering for this column,
-        header: 'State'
+        header: 'State',
       },
     ],
     [],

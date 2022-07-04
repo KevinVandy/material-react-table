@@ -24,7 +24,7 @@ export const LinkHeading: FC<Props> = ({ children, tableId, ...rest }) => {
   const id = `${tableId ? `${tableId}-` : ''}${children
     ?.toString()
     ?.toLowerCase?.()
-    ?.replaceAll?.(' ', '-')}`;
+    ?.replaceAll?.(' ', '-')}`?.replaceAll?.('/', '-');
 
   const href = `${pathname}#${id}`;
 

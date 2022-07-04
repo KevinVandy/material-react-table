@@ -19,5 +19,7 @@ While MRT is pre-1.0, breaking changes are subject to occur. MRT should hit 1.0 
 TanStack Table 8.1 had some breaking changes that will be reflected here in MRT v0.19.0
 
 - V0.19.0 - Data Column Definitions now need an `accessorKey` or a combination of an `id` and `accessorFn` to be used as the key for the data row.
+- V0.19.0 - {instance} was renamed to {table} across all callback functions to be inline with TanStack Table V8.1.
+- V0.18.0 - on...Changed callback props were removed as they were redundant with the on...Change callback props. Hoisting state will be the recommended way to watch for table state changes and react to them.
 
 ## Roadmap

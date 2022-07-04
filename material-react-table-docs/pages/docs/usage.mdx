@@ -8,28 +8,90 @@ import SimpleCodeSandbox from '../../examples/SimpleCodeSandbox';
 
 ## Usage
 
+### Setup
+
 In order to start using MaterialReactTable, you need to first [install](/docs/install) `material-react-table` and the necessary Material UI v5 dependencies.
 
 There are additional steps and customizations you can do for Material UI, if you have not set it up in your application already. Check out the [Material UI docs](https://mui.com/material-ui/getting-started/installation/) for more information.
 
-Once you have everything installed, you can import `material-react-table` like this:
+### Import MaterialReactTable
+
+Once you have everything installed, you can import from `material-react-table` like this:
 
 ```jsx
 import MaterialReactTable from 'material-react-table';
 ```
 
-To get started creating a basic table, all you need to do is to provide the **columns** definitions and the table **data**.
+You may also want to import some TypeScript types from 'material-react-table'.
+
+The `MRT_ColumnDef` type is especially useful for defining your columns in a type-safe way.
 
 ```jsx
-<MaterialReactTable
-  columns={columns} //must be memoized
-  data={data} //must be memoized
-/>
+import MaterialReactTable, { ColumnDefType } from 'material-react-table';
 ```
 
-> **Note:** It is very important that the columns and data definitions are _memoized_ or _stable_. Otherwise, the entire table will be re-rendered during every react re-render in your application, which can lead to performance issues.
+### Creating Columns
 
-Each column definition must have, at the very least, an `accessorKey` (or a combination of an `id` and `accessorFn`) and a `header` property. The `accessorKey`/`accessorFn` property is the key that will be used to join the data from the `data` keys. The `header` property is used to display the column header, but is also used in other places in the table. If you want to pass in custom JSX to render the header, you can pass in a `Header` property in addition to the `header` string property.
+Each column definition must have, at the very least, an `accessorKey` (or a combination of an `id` and `accessorFn`) and a `header` property. The `accessorKey`/`accessorFn` property is the key that will be used to join the data from the `data` keys. The `header` property is used to display the column header, but is also used in other places in the table.
+
+#### Method 1 - Using an accessorKey (Recommended)
+
+The simplest and most common way to define a column is to use the `accessorKey` property. It works great as long as your data is already in a flat format.
+
+The `accessorKey` must match one of the keys in your data.
+
+```jsx
+const columns = useMemo(
+  () => [
+    {
+      accessorKey: 'name', //id will be derived from `accessorKey` unless otherwise specified (Recommended)
+      header: 'Name',
+    },
+    {
+      accessorKey: 'customerAge',
+      id: 'age' //id overridden, usually not necessary to do this, but can be helpful
+      header: 'Age',
+    },
+  ] as MRT_ColumnDef<Customer>[],
+  [],
+);
+```
+
+#### Method 2 - Using an accessorFn and id
+
+To access more complicated data structures, you can use the `accessorFn` property. Here are at least 3 ways you can use it.
+
+In each case, the `id` property is now required.
+
+```jsx
+const columns = useMemo(
+  () => [
+    {
+      //simple accessorFn that works the same way as an `accessorKey`
+      accessorFn: (row) => row.username,
+      id: 'username',
+      header: 'Username',
+    },
+    {
+      //accessorFn function that combines multiple data together
+      accessorFn: (row) => `${data.firstName} ${data.lastName}`,
+      id: 'name',
+      header: 'Name',
+    },
+    {
+      //accessorFn used to access nested data
+      accessorFn: (row) => data.personalInfo.age,
+      id: 'age',
+      header: 'Age',
+    },
+  ],
+  [],
+);
+```
+
+#### Custom Header JSX Render
+
+If you want to pass in custom JSX to render the header, you can pass in a `Header` property in addition to the `header` string property.
 
 ```jsx
 const columns = useMemo(
@@ -37,25 +99,32 @@ const columns = useMemo(
     {
       accessorKey: 'name',
       header: 'Name',
+      Header: ({ header }) => (
+        <i style={{ color: 'red' }}>{header.column.columnDef.header}</i>
+      ), //arrow function
     },
     {
       accessorKey: 'age',
-      header: 'Age', 
-      Header: () => <i>Age</i>, //optional custom jsx
+      header: 'Age',
+      Header: <i style={{ color: 'red' }}>Age</i>, //plain jsx with no function
     },
   ],
   [],
 );
 ```
 
+### Creating Data/Rows
+
 Your data is an array of objects that have properties matching the accessors in your column definitions.
+
+Your data does NOT have to be created statically like this, of course. More than likely, your data is being fetched from a backend API. Check out the [Remote Data example](/docs/examples/remote) to see how you can use a remote data source.
 
 ```jsx
 const data = useMemo(
   () => [
     {
-      name: 'John',
-      age: 30,
+      name: 'John', //`accessorKey` in the column definition would be `name`
+      age: 30, //`accessorKey` in the column definition would be `age`
     },
     {
       name: 'Sara',
@@ -66,28 +135,33 @@ const data = useMemo(
 );
 ```
 
+### Simple Example
+
 Throw it all together and you have a basic table!
 
 ```jsx
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
 
 export default function App() {
   const columns = useMemo(
     () => [
       {
-        accessorKey: 'name',
+        accessorKey: 'name', //simple recommended way to define a column
         header: 'Name',
+        muiTableHeadCellProps: { sx: { color: 'green' } }, //custom props
       },
       {
-        accessorKey: 'age',
+        accessorFn: (row) => row.age, //alternate way
+        id: 'age', //id required if you use accessorFn instead of accessorKey
         header: 'Age',
-        Header: () => <i>Age</i>, //optional custom jsx
+        Header: <i style={{ color: 'red' }}>Age</i>, //optional custom markup
       },
     ],
     [],
   );
 
+  //simple data example - Check out https://www.material-react-table.com/docs/examples/remote for a more realistic example
   const data = useMemo(
     () => [
       {
@@ -105,6 +179,8 @@ export default function App() {
   return <MaterialReactTable columns={columns} data={data} />;
 }
 ```
+
+> **Note:** It is very important that the columns and data definitions are _memoized_ or _stable_. Otherwise, the entire table will be re-rendered during every react re-render in your application, which can lead to performance issues. To make a variable stable, store in useState, or wrap in useMemo, or define outside of a component so it does not get recreated on every render.
 
 This is just the default table that you get. You may want to disable some features that you don't need, or enable and customize other features that you may want. See the [minimal example](/docs/examples/minimal) and [advanced example](/docs/examples/advanced) to get a better idea for how you may want to customize your table, and visit the [props page](/docs/api/props) to see all the props that you can use to turn features on and off, and customize the look and feel of your table.
 

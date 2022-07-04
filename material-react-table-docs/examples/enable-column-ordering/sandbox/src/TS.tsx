@@ -27,7 +27,7 @@ const Example: FC = () => {
         {
           accessorKey: 'state',
           enableColumnOrdering: false, //disable column ordering for this column,
-          header: 'State'
+          header: 'State',
         },
       ] as MRT_ColumnDef<Person>[],
     [],

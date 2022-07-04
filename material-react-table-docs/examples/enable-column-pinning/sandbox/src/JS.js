@@ -30,12 +30,12 @@ const Example = () => {
       },
       {
         accessorKey: 'city', //this column gets pinned to the right by default because of the initial state,
-        header: 'City'
+        header: 'City',
       },
 
       {
         accessorKey: 'state', //this column gets pinned left by default because of the the initial state,
-        header: 'State'
+        header: 'State',
       },
     ],
     [],
