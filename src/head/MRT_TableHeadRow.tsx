@@ -6,17 +6,17 @@ import type { MRT_Header, MRT_HeaderGroup, MRT_TableInstance } from '..';
 
 interface Props {
   headerGroup: MRT_HeaderGroup;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_TableHeadRow: FC<Props> = ({ headerGroup, instance }) => {
+export const MRT_TableHeadRow: FC<Props> = ({ headerGroup, table }) => {
   const {
     options: { enableColumnOrdering, enableGrouping, muiTableHeadRowProps },
-  } = instance;
+  } = table;
 
   const tableRowProps =
     muiTableHeadRowProps instanceof Function
-      ? muiTableHeadRowProps({ headerGroup, instance })
+      ? muiTableHeadRowProps({ headerGroup, table })
       : muiTableHeadRowProps;
 
   return (
@@ -33,13 +33,13 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup, instance }) => {
           <MRT_DraggableTableHeadCell
             header={header}
             key={header.id || index}
-            instance={instance}
+            table={table}
           />
         ) : (
           <MRT_TableHeadCell
             header={header}
             key={header.id || index}
-            instance={instance}
+            table={table}
           />
         ),
       )}

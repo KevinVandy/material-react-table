@@ -23,23 +23,23 @@ interface Row {
 const columns: MRT_ColumnDef<Row>[] = [
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Address',
-    id: 'address',
+    accessorKey: 'address',
   },
   {
     header: 'State',
-    id: 'state',
+    accessorKey: 'state',
   },
   {
     header: 'Phone Number',
-    id: 'phoneNumber',
+    accessorKey: 'phoneNumber',
   },
 ];
 
@@ -70,25 +70,25 @@ export const ColumnActionsDisabledPerColumn: Story<
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
         enableColumnActions: false,
       },
       {
         header: 'State',
-        id: 'state',
+        accessorKey: 'state',
         enableColumnActions: false,
       },
       {
         header: 'Phone Number',
-        id: 'phoneNumber',
+        accessorKey: 'phoneNumber',
         enableColumnActions: false,
       },
     ]}
@@ -103,25 +103,25 @@ export const ColumnActionsEnabledPerColumn: Story<
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
         enableColumnActions: true,
       },
       {
         header: 'State',
-        id: 'state',
+        accessorKey: 'state',
         enableColumnActions: true,
       },
       {
         header: 'Phone Number',
-        id: 'phoneNumber',
+        accessorKey: 'phoneNumber',
         enableColumnActions: true,
       },
     ]}

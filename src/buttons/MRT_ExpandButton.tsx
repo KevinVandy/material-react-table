@@ -4,10 +4,10 @@ import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
   row: MRT_Row;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_ExpandButton: FC<Props> = ({ row, instance }) => {
+export const MRT_ExpandButton: FC<Props> = ({ row, table }) => {
   const {
     getState,
     options: {
@@ -16,13 +16,12 @@ export const MRT_ExpandButton: FC<Props> = ({ row, instance }) => {
       muiExpandButtonProps,
       renderDetailPanel,
     },
-  } = instance;
-
+  } = table;
   const { density } = getState();
 
   const iconButtonProps =
     muiExpandButtonProps instanceof Function
-      ? muiExpandButtonProps({ instance, row })
+      ? muiExpandButtonProps({ table, row })
       : muiExpandButtonProps;
 
   const handleToggleExpand = () => {

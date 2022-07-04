@@ -1,24 +1,6 @@
 import React, { FC, useMemo } from 'react';
 import { Menu, MenuItem } from '@mui/material';
-import type {
-  MRT_FilterFn,
-  MRT_FILTER_OPTION,
-  MRT_Header,
-  MRT_TableInstance,
-} from '..';
-import {
-  between,
-  contains,
-  empty,
-  endsWith,
-  equals,
-  fuzzy,
-  greaterThan,
-  lessThan,
-  notEmpty,
-  notEquals,
-  startsWith,
-} from '../filtersFns';
+import type { MRT_FilterOption, MRT_Header, MRT_TableInstance } from '..';
 
 const commonMenuItemStyles = {
   py: '6px',
@@ -31,7 +13,7 @@ interface Props {
   header?: MRT_Header;
   onSelect?: () => void;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
 export const MRT_FilterOptionMenu: FC<Props> = ({
@@ -39,7 +21,7 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
   header,
   onSelect,
   setAnchorEl,
-  instance,
+  table,
 }) => {
   const {
     getState,
@@ -50,12 +32,9 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
     },
     setCurrentFilterFns,
     setCurrentGlobalFilterFn,
-  } = instance;
-
-  const { density, currentFilterFns, currentGlobalFilterFn } = getState();
-
+  } = table;
+  const { currentFilterFns, currentGlobalFilterFn, density } = getState();
   const { column } = header ?? {};
-
   const { columnDef } = column ?? {};
 
   const allowedColumnFilterOptions =
@@ -68,67 +47,56 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
           option: 'fuzzy',
           label: localization.filterFuzzy,
           divider: false,
-          fn: fuzzy,
         },
         {
           option: 'contains',
           label: localization.filterContains,
           divider: false,
-          fn: contains,
         },
         {
           option: 'startsWith',
           label: localization.filterStartsWith,
           divider: false,
-          fn: startsWith,
         },
         {
           option: 'endsWith',
           label: localization.filterEndsWith,
           divider: true,
-          fn: endsWith,
         },
         {
           option: 'equals',
           label: localization.filterEquals,
           divider: false,
-          fn: equals,
         },
         {
           option: 'notEquals',
           label: localization.filterNotEquals,
           divider: true,
-          fn: notEquals,
         },
         {
           option: 'between',
           label: localization.filterBetween,
           divider: false,
-          fn: between,
         },
         {
           option: 'greaterThan',
           label: localization.filterGreaterThan,
           divider: false,
-          fn: greaterThan,
         },
         {
           option: 'lessThan',
           label: localization.filterLessThan,
           divider: true,
-          fn: lessThan,
         },
         {
           option: 'empty',
           label: localization.filterEmpty,
           divider: false,
-          fn: empty,
         },
         {
           option: 'notEmpty',
           label: localization.filterNotEmpty,
           divider: false,
-          fn: notEmpty,
         },
       ].filter((filterType) =>
         columnDef
@@ -138,7 +106,7 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
               enabledGlobalFilterOptions.includes(filterType.option)) &&
             ['fuzzy', 'contains'].includes(filterType.option),
       ) as Array<{
-        option: MRT_FILTER_OPTION;
+        option: MRT_FilterOption;
         label: string;
         divider: boolean;
         fn: Function;
@@ -146,9 +114,9 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
     [],
   );
 
-  const handleSelectFilterType = (value: string) => {
+  const handleSelectFilterType = (value: MRT_FilterOption) => {
     if (header && column) {
-      setCurrentFilterFns((prev: { [key: string]: MRT_FilterFn }) => ({
+      setCurrentFilterFns((prev: { [key: string]: any }) => ({
         ...prev,
         [header.id]: value,
       }));
@@ -180,14 +148,14 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
         dense: density === 'compact',
       }}
     >
-      {filterOptions.map(({ option, label, divider, fn }, index) => (
+      {filterOptions.map(({ option, label, divider }, index) => (
         <MenuItem
           divider={divider}
           key={index}
-          onClick={() => handleSelectFilterType(option as string)}
-          selected={option === filterOption || fn === filterOption}
+          onClick={() => handleSelectFilterType(option)}
+          selected={option === filterOption}
           sx={commonMenuItemStyles}
-          value={option as string}
+          value={option}
         >
           {label}
         </MenuItem>

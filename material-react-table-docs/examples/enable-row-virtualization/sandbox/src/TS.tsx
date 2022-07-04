@@ -9,51 +9,51 @@ const Example: FC = () => {
       [
         {
           header: 'First Name',
-          id: 'firstName',
+          accessorKey: 'firstName',
           size: 150,
         },
         {
           header: 'Middle Name',
-          id: 'middleName',
+          accessorKey: 'middleName',
           size: 150,
         },
         {
           header: 'Last Name',
-          id: 'lastName',
+          accessorKey: 'lastName',
           size: 150,
         },
         {
           header: 'Email Address',
-          id: 'email',
+          accessorKey: 'email',
           size: 300,
         },
         {
           header: 'Phone Number',
-          id: 'phoneNumber',
+          accessorKey: 'phoneNumber',
         },
         {
           header: 'Address',
-          id: 'address',
+          accessorKey: 'address',
         },
         {
           header: 'Zip Code',
-          id: 'zipCode',
+          accessorKey: 'zipCode',
         },
         {
           header: 'City',
-          id: 'city',
+          accessorKey: 'city',
         },
         {
           header: 'State',
-          id: 'state',
+          accessorKey: 'state',
         },
         {
           header: 'Country',
-          id: 'country',
+          accessorKey: 'country',
         },
         {
           header: 'Pet Name',
-          id: 'petName',
+          accessorKey: 'petName',
         },
       ] as MRT_ColumnDef<Person>[],
     [],

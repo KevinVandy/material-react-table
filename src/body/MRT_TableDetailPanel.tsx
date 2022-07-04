@@ -4,10 +4,10 @@ import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
   row: MRT_Row;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_TableDetailPanel: FC<Props> = ({ row, instance }) => {
+export const MRT_TableDetailPanel: FC<Props> = ({ row, table }) => {
   const {
     getVisibleLeafColumns,
     options: {
@@ -15,16 +15,16 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, instance }) => {
       muiTableDetailPanelProps,
       renderDetailPanel,
     },
-  } = instance;
+  } = table;
 
   const tableRowProps =
     muiTableBodyRowProps instanceof Function
-      ? muiTableBodyRowProps({ row, instance })
+      ? muiTableBodyRowProps({ row, table })
       : muiTableBodyRowProps;
 
   const tableCellProps =
     muiTableDetailPanelProps instanceof Function
-      ? muiTableDetailPanelProps({ row, instance })
+      ? muiTableDetailPanelProps({ row, table })
       : muiTableDetailPanelProps;
 
   return (
@@ -37,13 +37,13 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, instance }) => {
           pb: row.getIsExpanded() ? '1rem' : 0,
           pt: row.getIsExpanded() ? '1rem' : 0,
           transition: 'all 0.2s ease-in-out',
-          width: `${instance.getTotalSize()}px`,
+          width: `${table.getTotalSize()}px`,
           ...tableCellProps?.sx,
         }}
       >
         {renderDetailPanel && (
           <Collapse in={row.getIsExpanded()}>
-            {renderDetailPanel({ row, instance })}
+            {renderDetailPanel({ row, table })}
           </Collapse>
         )}
       </TableCell>

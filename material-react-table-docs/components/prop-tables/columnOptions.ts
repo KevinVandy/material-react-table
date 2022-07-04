@@ -20,7 +20,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: 'TanStack Table Grouping Docs',
     source: 'TanStack Table',
     required: false,
-    type: 'ReactNode | (({ cell, instance }) => ReactNode)',
+    type: 'ReactNode | (({ cell, table }) => ReactNode)',
   },
   {
     columnOption: 'Cell',
@@ -30,7 +30,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: 'ReactNode | (({ cell, instance }) => ReactNode)',
+    type: 'ReactNode | (({ cell, table }) => ReactNode)',
   },
   {
     columnOption: 'Edit',
@@ -40,7 +40,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: 'ReactNode | (({ cell, instance }) => ReactNode)',
+    type: 'ReactNode | (({ cell, table }) => ReactNode)',
   },
   {
     columnOption: 'Filter',
@@ -50,7 +50,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: 'ReactNode | (({ header, instance }) => ReactNode)',
+    type: 'ReactNode | (({ header, table }) => ReactNode)',
   },
   {
     columnOption: 'Footer',
@@ -60,7 +60,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: 'ReactNode | (({ footer, instance }) => ReactNode)',
+    type: 'ReactNode | (({ footer, table }) => ReactNode)',
   },
   {
     columnOption: 'Header',
@@ -70,7 +70,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: 'ReactNode | (({ header, instance }) => ReactNode)',
+    type: 'ReactNode | (({ header, table }) => ReactNode)',
   },
   {
     columnOption: 'accessorFn',
@@ -331,7 +331,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'Material UI',
     required: false,
-    type: 'ButtonProps | ({ instance, cell }) => ButtonProps',
+    type: 'ButtonProps | ({ table, cell }) => ButtonProps',
   },
   {
     columnOption: 'muiTableBodyCellEditTextFieldProps',
@@ -341,7 +341,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'Material UI',
     required: false,
-    type: 'TextFieldProps | ({ instance, cell }) => TextFieldProps',
+    type: 'TextFieldProps | ({ table, cell }) => TextFieldProps',
   },
   {
     columnOption: 'muiTableBodyCellProps',
@@ -351,7 +351,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'Material UI',
     required: false,
-    type: 'TableCellProps | ({ instance, cell }) => TableCellProps',
+    type: 'TableCellProps | ({ table, cell }) => TableCellProps',
   },
   {
     columnOption: 'muiTableFooterCellProps',
@@ -361,7 +361,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'Material UI',
     required: false,
-    type: 'TableCellProps | ({ instance, column }) => TableCellProps',
+    type: 'TableCellProps | ({ table, column }) => TableCellProps',
   },
   {
     columnOption: 'muiTableHeadCellColumnActionsButtonProps',
@@ -371,7 +371,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'Material UI',
     required: false,
-    type: 'IconButtonProps | ({ instance, column }) => IconButtonProps',
+    type: 'IconButtonProps | ({ table, column }) => IconButtonProps',
   },
   {
     columnOption: 'muiTableHeadCellFilterTextFieldProps',
@@ -381,7 +381,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'Material UI',
     required: false,
-    type: 'TextFieldProps | ({ instance, column }) => TextFieldProps',
+    type: 'TextFieldProps | ({ table, column }) => TextFieldProps',
   },
   {
     columnOption: 'muiTableHeadCellProps',
@@ -391,7 +391,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'Material UI',
     required: false,
-    type: 'TextFieldProps | ({ instance, column }) => TextFieldProps',
+    type: 'TextFieldProps | ({ table, column }) => TextFieldProps',
   },
   {
     columnOption: 'onCellEditBlur',
@@ -401,7 +401,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: '({ cell, event, instance }) => void',
+    type: '({ cell, event, table }) => void',
   },
   {
     columnOption: 'onCellEditChange',
@@ -411,7 +411,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: '({ cell, event, instance }) => void',
+    type: '({ cell, event, table }) => void',
   },
   {
     columnOption: 'size',

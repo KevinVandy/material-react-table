@@ -6,25 +6,25 @@ const Example = () => {
     () => [
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
         enableHiding: false,
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
         enableHiding: false,
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
       {
         header: 'City',
-        id: 'city',
+        accessorKey: 'city',
       },
       {
         header: 'State',
-        id: 'state',
+        accessorKey: 'state',
       },
     ],
     [],

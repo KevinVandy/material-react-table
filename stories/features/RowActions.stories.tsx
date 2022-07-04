@@ -21,23 +21,23 @@ export default meta;
 const columns = [
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Address',
-    id: 'address',
+    accessorKey: 'address',
   },
   {
     header: 'State',
-    id: 'state',
+    accessorKey: 'state',
   },
   {
     header: 'Phone Number',
-    id: 'phoneNumber',
+    accessorKey: 'phoneNumber',
   },
 ];
 
@@ -58,7 +58,7 @@ export const RowActionsEnabled: Story<MaterialReactTableProps> = () => (
       <MenuItem
         key={1}
         onClick={() => {
-          console.log('View Profile', row);
+          console.info('View Profile', row);
           closeMenu();
         }}
       >
@@ -67,7 +67,7 @@ export const RowActionsEnabled: Story<MaterialReactTableProps> = () => (
       <MenuItem
         key={2}
         onClick={() => {
-          console.log('Remove', row);
+          console.info('Remove', row);
           closeMenu();
         }}
       >
@@ -76,7 +76,7 @@ export const RowActionsEnabled: Story<MaterialReactTableProps> = () => (
       <MenuItem
         key={3}
         onClick={() => {
-          console.log('Share', row);
+          console.info('Share', row);
           closeMenu();
         }}
       >
@@ -98,7 +98,7 @@ export const RowActionsAndEditingEnabled: Story<
       <MenuItem
         key={1}
         onClick={() => {
-          console.log('View Profile', row);
+          console.info('View Profile', row);
           closeMenu();
         }}
       >
@@ -107,7 +107,7 @@ export const RowActionsAndEditingEnabled: Story<
       <MenuItem
         key={2}
         onClick={() => {
-          console.log('Remove', row);
+          console.info('Remove', row);
           closeMenu();
         }}
       >
@@ -116,7 +116,7 @@ export const RowActionsAndEditingEnabled: Story<
       <MenuItem
         key={3}
         onClick={() => {
-          console.log('Share', row);
+          console.info('Share', row);
           closeMenu();
         }}
       >
@@ -137,7 +137,7 @@ export const RowActionsLastColumn: Story<MaterialReactTableProps> = () => (
       <MenuItem
         key={1}
         onClick={() => {
-          console.log('View Profile', row);
+          console.info('View Profile', row);
           closeMenu();
         }}
       >
@@ -146,7 +146,7 @@ export const RowActionsLastColumn: Story<MaterialReactTableProps> = () => (
       <MenuItem
         key={2}
         onClick={() => {
-          console.log('Remove', row);
+          console.info('Remove', row);
           closeMenu();
         }}
       >
@@ -155,7 +155,7 @@ export const RowActionsLastColumn: Story<MaterialReactTableProps> = () => (
       <MenuItem
         key={3}
         onClick={() => {
-          console.log('Share', row);
+          console.info('Share', row);
           closeMenu();
         }}
       >
@@ -176,7 +176,7 @@ export const CustomRowActionButtons: Story<MaterialReactTableProps> = () => (
           variant="contained"
           color="primary"
           onClick={() => {
-            console.log('View Profile', row);
+            console.info('View Profile', row);
           }}
         >
           View
@@ -185,7 +185,7 @@ export const CustomRowActionButtons: Story<MaterialReactTableProps> = () => (
           variant="contained"
           color="error"
           onClick={() => {
-            console.log('Remove', row);
+            console.info('Remove', row);
           }}
         >
           Remove
@@ -209,7 +209,7 @@ export const CustomRowActionButtonsLastColumn: Story<
           variant="contained"
           color="primary"
           onClick={() => {
-            console.log('View Profile', row);
+            console.info('View Profile', row);
           }}
         >
           View
@@ -218,7 +218,7 @@ export const CustomRowActionButtonsLastColumn: Story<
           variant="contained"
           color="error"
           onClick={() => {
-            console.log('Remove', row);
+            console.info('Remove', row);
           }}
         >
           Remove

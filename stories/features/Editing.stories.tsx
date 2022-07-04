@@ -33,23 +33,23 @@ export const EditingEnabledEditModeRowDefault: Story<
       columns={[
         {
           header: 'First Name',
-          id: 'firstName',
+          accessorKey: 'firstName',
         },
         {
           header: 'Last Name',
-          id: 'lastName',
+          accessorKey: 'lastName',
         },
         {
           header: 'Address',
-          id: 'address',
+          accessorKey: 'address',
         },
         {
           header: 'State',
-          id: 'state',
+          accessorKey: 'state',
         },
         {
           header: 'Phone Number',
-          id: 'phoneNumber',
+          accessorKey: 'phoneNumber',
           enableEditing: false,
         },
       ]}
@@ -75,23 +75,23 @@ export const EditingEnabledEditModeCell: Story<
       columns={[
         {
           header: 'First Name',
-          id: 'firstName',
+          accessorKey: 'firstName',
         },
         {
           header: 'Last Name',
-          id: 'lastName',
+          accessorKey: 'lastName',
         },
         {
           header: 'Address',
-          id: 'address',
+          accessorKey: 'address',
         },
         {
           header: 'State',
-          id: 'state',
+          accessorKey: 'state',
         },
         {
           header: 'Phone Number',
-          id: 'phoneNumber',
+          accessorKey: 'phoneNumber',
           enableEditing: false,
         },
       ]}
@@ -119,23 +119,23 @@ export const EditingEnabledEditModeTable: Story<
       columns={[
         {
           header: 'First Name',
-          id: 'firstName',
+          accessorKey: 'firstName',
         },
         {
           header: 'Last Name',
-          id: 'lastName',
+          accessorKey: 'lastName',
         },
         {
           header: 'Address',
-          id: 'address',
+          accessorKey: 'address',
         },
         {
           header: 'State',
-          id: 'state',
+          accessorKey: 'state',
         },
         {
           header: 'Phone Number',
-          id: 'phoneNumber',
+          accessorKey: 'phoneNumber',
         },
       ]}
       data={tableData}
@@ -216,19 +216,19 @@ export const EditingCustomizeInput: Story<MaterialReactTableProps> = () => {
       columns={[
         {
           header: 'First Name',
-          id: 'firstName',
+          accessorKey: 'firstName',
         },
         {
           header: 'Last Name',
-          id: 'lastName',
+          accessorKey: 'lastName',
         },
         {
           header: 'Address',
-          id: 'address',
+          accessorKey: 'address',
         },
         {
           header: 'State',
-          id: 'state',
+          accessorKey: 'state',
           muiTableBodyCellEditTextFieldProps: () => ({
             children: usStates.map((state) => (
               <MenuItem key={state} value={state}>
@@ -240,7 +240,7 @@ export const EditingCustomizeInput: Story<MaterialReactTableProps> = () => {
         },
         {
           header: 'Phone Number',
-          id: 'phoneNumber',
+          accessorKey: 'phoneNumber',
         },
       ]}
       data={tableData}
@@ -287,7 +287,7 @@ export const EditingWithValidation: Story<MaterialReactTableProps> = () => {
       columns={[
         {
           header: 'First Name',
-          id: 'firstName',
+          accessorKey: 'firstName',
           muiTableBodyCellEditTextFieldProps: {
             error: !!firstNameError,
             helperText: firstNameError,
@@ -298,7 +298,7 @@ export const EditingWithValidation: Story<MaterialReactTableProps> = () => {
         },
         {
           header: 'Last Name',
-          id: 'lastName',
+          accessorKey: 'lastName',
           muiTableBodyCellEditTextFieldProps: {
             error: !!lastNameError,
             helperText: lastNameError,
@@ -309,7 +309,7 @@ export const EditingWithValidation: Story<MaterialReactTableProps> = () => {
         },
         {
           header: 'Phone Number',
-          id: 'phoneNumber',
+          accessorKey: 'phoneNumber',
           muiTableBodyCellEditTextFieldProps: {
             error: !!phoneNumberError,
             helperText: phoneNumberError,
@@ -345,23 +345,23 @@ export const EditingEnabledAsync: Story<MaterialReactTableProps> = () => {
       columns={[
         {
           header: 'First Name',
-          id: 'firstName',
+          accessorKey: 'firstName',
         },
         {
           header: 'Last Name',
-          id: 'lastName',
+          accessorKey: 'lastName',
         },
         {
           header: 'Address',
-          id: 'address',
+          accessorKey: 'address',
         },
         {
           header: 'State',
-          id: 'state',
+          accessorKey: 'state',
         },
         {
           header: 'Phone Number',
-          id: 'phoneNumber',
+          accessorKey: 'phoneNumber',
         },
       ]}
       data={tableData}

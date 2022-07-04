@@ -15,23 +15,23 @@ export default meta;
 const columns = [
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Gender',
-    id: 'gender',
+    accessorKey: 'gender',
   },
   {
     header: 'City',
-    id: 'city',
+    accessorKey: 'city',
   },
   {
     header: 'State',
-    id: 'state',
+    accessorKey: 'state',
   },
 ] as MRT_ColumnDef[];
 

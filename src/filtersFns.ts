@@ -1,4 +1,5 @@
 import { rankItem, rankings, RankingInfo } from '@tanstack/match-sorter-utils';
+import { filterFns } from '@tanstack/react-table';
 import { MRT_Row } from '.';
 
 export const fuzzy = (
@@ -134,6 +135,7 @@ export const notEmpty = (
 notEmpty.autoRemove = (val: any) => !val;
 
 export const MRT_FilterFns = {
+  ...filterFns,
   between,
   contains,
   empty,

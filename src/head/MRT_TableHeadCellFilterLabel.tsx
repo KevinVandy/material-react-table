@@ -4,39 +4,33 @@ import { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
   header: MRT_Header;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_TableHeadCellFilterLabel: FC<Props> = ({
-  header,
-  instance,
-}) => {
+export const MRT_TableHeadCellFilterLabel: FC<Props> = ({ header, table }) => {
   const {
     getState,
     options: {
       icons: { FilterAltIcon },
       localization,
     },
-  } = instance;
-
+  } = table;
   const { currentFilterFns } = getState();
-
   const { column } = header;
-
   const { columnDef } = column;
 
-  const filterFn = currentFilterFns?.[header.id];
-
+  const currentFilterOption = currentFilterFns?.[header.id];
   const filterTooltip = localization.filteringByColumn
     .replace('{column}', String(columnDef.header))
     .replace(
       '{filterType}',
-      filterFn instanceof Function
-        ? ''
-        : // @ts-ignore
-          localization[
-            `filter${filterFn.charAt(0).toUpperCase() + filterFn.slice(1)}`
-          ],
+      // @ts-ignore
+      localization[
+        `filter${
+          currentFilterOption.charAt(0).toUpperCase() +
+          currentFilterOption.slice(1)
+        }`
+      ],
     )
     .replace(
       '{filterValue}',
@@ -54,8 +48,8 @@ export const MRT_TableHeadCellFilterLabel: FC<Props> = ({
     <Grow
       unmountOnExit
       in={
-        (!!column.getFilterValue() && filterFn !== 'between') ||
-        (filterFn === 'between' && // @ts-ignore
+        (!!column.getFilterValue() && currentFilterOption !== 'between') ||
+        (currentFilterOption === 'between' && // @ts-ignore
           (!!column.getFilterValue()?.[0] || !!column.getFilterValue()?.[1]))
       }
     >

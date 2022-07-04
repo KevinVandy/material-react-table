@@ -4,48 +4,46 @@ import { MRT_TableInstance } from '..';
 
 interface Props {
   ref: Ref<HTMLButtonElement>;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_GrabHandleButton: FC<Props> = forwardRef(
-  ({ instance }, ref) => {
-    const {
-      options: {
-        icons: { DragHandleIcon },
-        localization,
-      },
-    } = instance;
+export const MRT_GrabHandleButton: FC<Props> = forwardRef(({ table }, ref) => {
+  const {
+    options: {
+      icons: { DragHandleIcon },
+      localization,
+    },
+  } = table;
 
-    return (
-      <Tooltip
-        arrow
-        enterDelay={1000}
-        enterNextDelay={1000}
-        placement="top"
-        title={localization.grab}
+  return (
+    <Tooltip
+      arrow
+      enterDelay={1000}
+      enterNextDelay={1000}
+      placement="top"
+      title={localization.grab}
+    >
+      <IconButton
+        disableRipple
+        ref={ref}
+        size="small"
+        sx={{
+          cursor: 'grab',
+          m: 0,
+          opacity: 0.5,
+          p: '2px',
+          transition: 'all 0.2s ease-in-out',
+          '&:hover': {
+            backgroundColor: 'transparent',
+            opacity: 1,
+          },
+          '&:active': {
+            cursor: 'grabbing',
+          },
+        }}
       >
-        <IconButton
-          disableRipple
-          ref={ref}
-          size="small"
-          sx={{
-            cursor: 'grab',
-            m: 0,
-            opacity: 0.5,
-            p: '2px',
-            transition: 'all 0.2s ease-in-out',
-            '&:hover': {
-              backgroundColor: 'transparent',
-              opacity: 1,
-            },
-            '&:active': {
-              cursor: 'grabbing',
-            },
-          }}
-        >
-          <DragHandleIcon />
-        </IconButton>
-      </Tooltip>
-    );
-  },
-);
+        <DragHandleIcon />
+      </IconButton>
+    </Tooltip>
+  );
+});

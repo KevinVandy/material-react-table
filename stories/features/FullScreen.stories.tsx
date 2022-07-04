@@ -12,37 +12,37 @@ export default meta;
 const columns = [
   {
     header: 'Employee',
-    id: 'employee',
+    accessorKey: 'employee',
     columns: [
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Email',
-        id: 'email',
+        accessorKey: 'email',
       },
     ],
   },
   {
     header: 'Job Info',
-    id: 'jobInfo',
+    accessorKey: 'jobInfo',
     columns: [
       {
         header: 'Job Title',
-        id: 'jobTitle',
+        accessorKey: 'jobTitle',
       },
       {
         header: 'Salary',
-        id: 'salary',
+        accessorKey: 'salary',
       },
       {
         header: 'Start Date',
-        id: 'startDate',
+        accessorKey: 'startDate',
       },
     ],
   },

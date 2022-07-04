@@ -15,27 +15,27 @@ export default meta;
 const columns: MRT_ColumnDef[] = [
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Email Address',
-    id: 'email',
+    accessorKey: 'email',
   },
   {
     header: 'Address',
-    id: 'address',
+    accessorKey: 'address',
   },
   {
     header: 'City',
-    id: 'city',
+    accessorKey: 'city',
   },
   {
     header: 'State',
-    id: 'state',
+    accessorKey: 'state',
   },
 ];
 
@@ -59,27 +59,27 @@ export const ColumnOrderingDisabledPerColumn: Story<
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Email Address',
-        id: 'email',
+        accessorKey: 'email',
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
       {
         header: 'City',
-        id: 'city',
+        accessorKey: 'city',
       },
       {
         header: 'State',
-        id: 'state',
+        accessorKey: 'state',
         enableColumnOrdering: false,
       },
     ]}

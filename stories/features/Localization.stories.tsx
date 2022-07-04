@@ -14,23 +14,23 @@ export default meta;
 const columns = [
   {
     header: 'Primer nombre',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Apellido',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Dirección',
-    id: 'address',
+    accessorKey: 'address',
   },
   {
     header: 'Ciudad',
-    id: 'city',
+    accessorKey: 'city',
   },
   {
     header: 'Estado',
-    id: 'state',
+    accessorKey: 'state',
   },
 ];
 

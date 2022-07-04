@@ -31,19 +31,19 @@ Default.args = {
   columns: [
     {
       header: 'First Name',
-      id: 'firstName',
+      accessorKey: 'firstName',
     },
     {
       header: 'Last Name',
-      id: 'lastName',
+      accessorKey: 'lastName',
     },
     {
       header: 'Age',
-      id: 'age',
+      accessorKey: 'age',
     },
     {
       header: 'Address',
-      id: 'address',
+      accessorKey: 'address',
     },
   ],
   data: [...Array(6)].map(() => ({
@@ -60,19 +60,19 @@ MinimumFeatures.args = {
   columns: [
     {
       header: 'First Name',
-      id: 'firstName',
+      accessorKey: 'firstName',
     },
     {
       header: 'Last Name',
-      id: 'lastName',
+      accessorKey: 'lastName',
     },
     {
       header: 'Age',
-      id: 'age',
+      accessorKey: 'age',
     },
     {
       header: 'Address',
-      id: 'address',
+      accessorKey: 'address',
     },
   ],
   data: [...Array(6)].map(() => ({
@@ -123,44 +123,44 @@ MaximumFeatures.args = {
     {
       header: 'Name',
       footer: 'Name',
-      id: 'name',
+      accessorKey: 'name',
       columns: [
         {
           header: 'First Name',
           footer: 'First Name',
-          id: 'firstName',
+          accessorKey: 'firstName',
         },
         {
           header: 'Last Name',
           footer: 'Last Name',
-          id: 'lastName',
+          accessorKey: 'lastName',
         },
       ],
     },
     {
       header: 'Info',
       footer: 'Info',
-      id: 'info',
+      accessorKey: 'info',
       columns: [
         {
           header: 'Age',
           footer: 'Age',
-          id: 'age',
+          accessorKey: 'age',
         },
         {
           header: 'Address',
           footer: 'Address',
-          id: 'address',
+          accessorKey: 'address',
         },
         {
           header: 'City',
           footer: 'City',
-          id: 'city',
+          accessorKey: 'city',
         },
         {
           header: 'State',
           footer: 'State',
-          id: 'state',
+          accessorKey: 'state',
         },
       ],
     },
@@ -180,7 +180,7 @@ MaximumFeatures.args = {
     <MenuItem
       key={1}
       onClick={() => {
-        console.log('View Profile', row);
+        console.info('View Profile', row);
         closeMenu();
       }}
     >
@@ -189,7 +189,7 @@ MaximumFeatures.args = {
     <MenuItem
       key={2}
       onClick={() => {
-        console.log('Remove', row);
+        console.info('Remove', row);
         closeMenu();
       }}
     >
@@ -198,29 +198,29 @@ MaximumFeatures.args = {
     <MenuItem
       key={3}
       onClick={() => {
-        console.log('Share', row);
+        console.info('Share', row);
         closeMenu();
       }}
     >
       <ShareIcon /> Share
     </MenuItem>,
   ],
-  renderToolbarTopCustomActions: ({ instance }) => {
+  renderToolbarTopCustomActions: ({ table }) => {
     const handleDeactivate = () => {
-      instance.getSelectedRowModel().rows.forEach((row) => {
-        console.log('deactivating ' + row.original);
+      table.getSelectedRowModel().rows.forEach((row) => {
+        console.info('deactivating ' + row.original);
       });
     };
 
     const handleActivate = () => {
-      instance.getSelectedRowModel().rows.forEach((row) => {
-        console.log('activating ' + row.original);
+      table.getSelectedRowModel().rows.forEach((row) => {
+        console.info('activating ' + row.original);
       });
     };
 
     const handleContact = () => {
-      instance.getSelectedRowModel().rows.forEach((row) => {
-        console.log('contact ' + row.original);
+      table.getSelectedRowModel().rows.forEach((row) => {
+        console.info('contact ' + row.original);
       });
     };
 
@@ -228,7 +228,7 @@ MaximumFeatures.args = {
       <div style={{ display: 'flex', gap: '0.5rem' }}>
         <Button
           color="error"
-          disabled={instance.getSelectedRowModel().rows.length === 0}
+          disabled={table.getSelectedRowModel().rows.length === 0}
           onClick={handleDeactivate}
           variant="contained"
         >
@@ -236,7 +236,7 @@ MaximumFeatures.args = {
         </Button>
         <Button
           color="success"
-          disabled={instance.getSelectedRowModel().rows.length === 0}
+          disabled={table.getSelectedRowModel().rows.length === 0}
           onClick={handleActivate}
           variant="contained"
         >
@@ -244,7 +244,7 @@ MaximumFeatures.args = {
         </Button>
         <Button
           color="info"
-          disabled={instance.getSelectedRowModel().rows.length === 0}
+          disabled={table.getSelectedRowModel().rows.length === 0}
           onClick={handleContact}
           variant="contained"
         >

@@ -7,12 +7,13 @@ import { MRT_TableHeadCellResizeHandle } from './MRT_TableHeadCellResizeHandle';
 import { MRT_TableHeadCellSortLabel } from './MRT_TableHeadCellSortLabel';
 import { MRT_TableHeadCellColumnActionsButton } from './MRT_TableHeadCellColumnActionsButton';
 import type { MRT_Header, MRT_TableInstance } from '..';
+import { flexRender } from '@tanstack/react-table';
 
 interface Props {
   dragRef?: Ref<HTMLButtonElement>;
   dropRef?: Ref<HTMLDivElement>;
   header: MRT_Header;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
   isDragging?: boolean;
   previewRef?: Ref<HTMLTableCellElement>;
 }
@@ -21,7 +22,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
   dragRef,
   dropRef,
   header,
-  instance,
+  table,
   isDragging,
   previewRef,
 }) => {
@@ -35,22 +36,20 @@ export const MRT_TableHeadCell: FC<Props> = ({
       enableMultiSort,
       muiTableHeadCellProps,
     },
-  } = instance;
-
+  } = table;
   const { density, showFilters } = getState();
-
   const { column } = header;
-
-  const { columnDef, columnDefType } = column;
+  const { columnDef } = column;
+  const { columnDefType } = columnDef;
 
   const mTableHeadCellProps =
     muiTableHeadCellProps instanceof Function
-      ? muiTableHeadCellProps({ column, instance })
+      ? muiTableHeadCellProps({ column, table })
       : muiTableHeadCellProps;
 
   const mcTableHeadCellProps =
     columnDef.muiTableHeadCellProps instanceof Function
-      ? columnDef.muiTableHeadCellProps({ column, instance })
+      ? columnDef.muiTableHeadCellProps({ column, table })
       : columnDef.muiTableHeadCellProps;
 
   const tableCellProps = {
@@ -61,16 +60,16 @@ export const MRT_TableHeadCell: FC<Props> = ({
   const headerElement = ((columnDef?.Header instanceof Function
     ? columnDef?.Header?.({
         header,
-        instance,
+        table,
       })
     : columnDef?.Header) ??
-    header.renderHeader() ??
+    flexRender(columnDef.header, header.getContext()) ??
     columnDef.header) as ReactNode;
 
   const getIsLastLeftPinnedColumn = () => {
     return (
       column.getIsPinned() === 'left' &&
-      instance.getLeftLeafHeaders().length - 1 === column.getPinnedIndex()
+      table.getLeftLeafHeaders().length - 1 === column.getPinnedIndex()
     );
   };
 
@@ -80,8 +79,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
 
   const getTotalRight = () => {
     return (
-      (instance.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) *
-      150
+      (table.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) * 150
     );
   };
 
@@ -184,13 +182,10 @@ export const MRT_TableHeadCell: FC<Props> = ({
           >
             {headerElement}
             {columnDefType === 'data' && column.getCanSort() && (
-              <MRT_TableHeadCellSortLabel header={header} instance={instance} />
+              <MRT_TableHeadCellSortLabel header={header} table={table} />
             )}
             {columnDefType === 'data' && column.getCanFilter() && (
-              <MRT_TableHeadCellFilterLabel
-                header={header}
-                instance={instance}
-              />
+              <MRT_TableHeadCellFilterLabel header={header} table={table} />
             )}
           </Box>
           <Box sx={{ whiteSpace: 'nowrap' }}>
@@ -200,7 +195,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
                 (enableGrouping && columnDef.enableGrouping !== false)) && (
                 <MRT_GrabHandleButton
                   ref={dragRef as Ref<HTMLButtonElement>}
-                  instance={instance}
+                  table={table}
                 />
               )}
             {(enableColumnActions || columnDef.enableColumnActions) &&
@@ -208,20 +203,17 @@ export const MRT_TableHeadCell: FC<Props> = ({
               columnDefType !== 'group' && (
                 <MRT_TableHeadCellColumnActionsButton
                   header={header}
-                  instance={instance}
+                  table={table}
                 />
               )}
           </Box>
           {column.getCanResize() && (
-            <MRT_TableHeadCellResizeHandle
-              header={header}
-              instance={instance}
-            />
+            <MRT_TableHeadCellResizeHandle header={header} table={table} />
           )}
         </Box>
       )}
       {columnDefType === 'data' && column.getCanFilter() && (
-        <MRT_TableHeadCellFilterContainer header={header} instance={instance} />
+        <MRT_TableHeadCellFilterContainer header={header} table={table} />
       )}
     </TableCell>
   );

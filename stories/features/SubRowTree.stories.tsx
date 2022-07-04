@@ -12,23 +12,23 @@ export default meta;
 const columns = [
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Age',
-    id: 'age',
+    accessorKey: 'age',
   },
   {
     header: 'Address',
-    id: 'address',
+    accessorKey: 'address',
   },
   {
     header: 'Phone Number',
-    id: 'phoneNumber',
+    accessorKey: 'phoneNumber',
   },
 ];
 

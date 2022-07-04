@@ -1,32 +1,31 @@
 import React, { FC } from 'react';
 import { alpha, TableCell } from '@mui/material';
 import type { MRT_Header, MRT_TableInstance } from '..';
+import { flexRender } from '@tanstack/react-table';
 
 interface Props {
   footer: MRT_Header;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_TableFooterCell: FC<Props> = ({ footer, instance }) => {
+export const MRT_TableFooterCell: FC<Props> = ({ footer, table }) => {
   const {
     getState,
     options: { muiTableFooterCellProps, enableColumnResizing },
-  } = instance;
-
+  } = table;
   const { density } = getState();
-
   const { column } = footer;
-
-  const { columnDef, columnDefType } = column;
+  const { columnDef } = column;
+  const { columnDefType } = columnDef;
 
   const mTableFooterCellProps =
     muiTableFooterCellProps instanceof Function
-      ? muiTableFooterCellProps({ column, instance })
+      ? muiTableFooterCellProps({ column, table })
       : muiTableFooterCellProps;
 
   const mcTableFooterCellProps =
     columnDef.muiTableFooterCellProps instanceof Function
-      ? columnDef.muiTableFooterCellProps({ column, instance })
+      ? columnDef.muiTableFooterCellProps({ column, table })
       : columnDef.muiTableFooterCellProps;
 
   const tableCellProps = {
@@ -67,11 +66,11 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, instance }) => {
           : (columnDef.Footer instanceof Function
               ? columnDef.Footer?.({
                   footer,
-                  instance,
+                  table,
                 })
               : columnDef.Footer) ??
             columnDef.footer ??
-            footer.renderFooter() ??
+            flexRender(columnDef.footer, footer.getContext()) ??
             null}
       </>
     </TableCell>

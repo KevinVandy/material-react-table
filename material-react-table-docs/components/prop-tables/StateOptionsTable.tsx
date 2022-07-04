@@ -10,17 +10,17 @@ const StateOptionsTable = () => {
         {
           enableClickToCopy: true,
           header: 'State Name',
-          id: 'stateName',
+          accessorKey: 'stateName',
         },
-        { header: 'Type', id: 'type', enableGlobalFilter: false },
+        { header: 'Type', accessorKey: 'type', enableGlobalFilter: false },
         {
           header: 'Default Value',
-          id: 'defaultValue',
+          accessorKey: 'defaultValue',
           enableGlobalFilter: false,
         },
         {
           header: 'More Info Links',
-          id: 'link',
+          accessorKey: 'link',
           disableFilters: true,
           enableGlobalFilter: false,
           Cell: ({ cell }) => (
@@ -29,8 +29,12 @@ const StateOptionsTable = () => {
             </Link>
           ),
         },
-        { header: 'Description', id: 'description', enableGlobalFilter: false },
-        { header: 'Source', id: 'source', enableGlobalFilter: false },
+        {
+          header: 'Description',
+          accessorKey: 'description',
+          enableGlobalFilter: false,
+        },
+        { header: 'Source', accessorKey: 'source', enableGlobalFilter: false },
       ] as MRT_ColumnDef<StateRow>[],
     [],
   );
@@ -48,7 +52,7 @@ const StateOptionsTable = () => {
         columnPinning: { left: ['mrt-row-numbers', 'stateName'], right: [] },
         density: 'compact',
         showGlobalFilter: true,
-        sorting: [{ id: 'stateName', desc: false }],
+        sorting: [{ accessorKey: 'stateName', desc: false }],
       }}
       muiSearchTextFieldProps={{
         placeholder: 'Search State Options',

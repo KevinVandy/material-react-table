@@ -16,82 +16,82 @@ export default meta;
 const shortColumns: MRT_ColumnDef[] = [
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Email Address',
-    id: 'email',
+    accessorKey: 'email',
   },
   {
     header: 'Address',
-    id: 'address',
+    accessorKey: 'address',
   },
   {
     header: 'City',
-    id: 'city',
+    accessorKey: 'city',
   },
   {
     header: 'State',
-    id: 'state',
+    accessorKey: 'state',
   },
 ];
 
 const longColumns: MRT_ColumnDef[] = [
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Middle Name',
-    id: 'middleName',
+    accessorKey: 'middleName',
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Email Address',
-    id: 'email',
+    accessorKey: 'email',
   },
   {
     header: 'Phone Number',
-    id: 'phoneNumber',
+    accessorKey: 'phoneNumber',
   },
   {
     header: 'Address',
-    id: 'address',
+    accessorKey: 'address',
   },
   {
     header: 'Zip Code',
-    id: 'zipCode',
+    accessorKey: 'zipCode',
   },
   {
     header: 'City',
-    id: 'city',
+    accessorKey: 'city',
   },
   {
     header: 'State',
-    id: 'state',
+    accessorKey: 'state',
   },
   {
     header: 'Country',
-    id: 'country',
+    accessorKey: 'country',
   },
   {
     header: 'Favorite Quote',
-    id: 'favoriteQuote',
+    accessorKey: 'favoriteQuote',
   },
   {
     header: 'Favorite Color',
-    id: 'favoriteColor',
+    accessorKey: 'favoriteColor',
   },
   {
     header: 'Pet Name',
-    id: 'petName',
+    accessorKey: 'petName',
   },
 ];
 

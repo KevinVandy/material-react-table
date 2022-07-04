@@ -5,10 +5,10 @@ import type { MRT_Row, MRT_TableInstance } from '..';
 interface Props {
   row?: MRT_Row;
   selectAll?: boolean;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, instance }) => {
+export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, table }) => {
   const {
     getState,
     options: {
@@ -17,16 +17,15 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, instance }) => {
       muiSelectAllCheckboxProps,
       selectAllMode,
     },
-  } = instance;
-
+  } = table;
   const { density } = getState();
 
   const handleSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (selectAll) {
       if (selectAllMode === 'all') {
-        instance.getToggleAllRowsSelectedHandler()(event as any);
+        table.getToggleAllRowsSelectedHandler()(event as any);
       } else if (selectAllMode === 'page') {
-        instance.getToggleAllPageRowsSelectedHandler()(event as any);
+        table.getToggleAllPageRowsSelectedHandler()(event as any);
       }
     } else if (row) {
       row?.getToggleSelectedHandler()(event as any);
@@ -35,10 +34,10 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, instance }) => {
 
   const checkboxProps = selectAll
     ? muiSelectAllCheckboxProps instanceof Function
-      ? muiSelectAllCheckboxProps({ instance })
+      ? muiSelectAllCheckboxProps({ table })
       : muiSelectAllCheckboxProps
     : muiSelectCheckboxProps instanceof Function
-    ? muiSelectCheckboxProps({ row: row as MRT_Row, instance })
+    ? muiSelectCheckboxProps({ row: row as MRT_Row, table })
     : muiSelectCheckboxProps;
 
   return (
@@ -52,12 +51,10 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, instance }) => {
     >
       <Checkbox
         checked={
-          selectAll ? instance.getIsAllRowsSelected() : row?.getIsSelected()
+          selectAll ? table.getIsAllRowsSelected() : row?.getIsSelected()
         }
         indeterminate={
-          selectAll
-            ? instance.getIsSomeRowsSelected()
-            : row?.getIsSomeSelected()
+          selectAll ? table.getIsSomeRowsSelected() : row?.getIsSomeSelected()
         }
         inputProps={{
           'aria-label': selectAll

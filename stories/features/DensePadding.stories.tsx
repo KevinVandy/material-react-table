@@ -12,31 +12,31 @@ export default meta;
 const columns = [
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Address',
-    id: 'address',
+    accessorKey: 'address',
   },
   {
     header: 'City',
-    id: 'city',
+    accessorKey: 'city',
   },
   {
     header: 'State',
-    id: 'state',
+    accessorKey: 'state',
   },
   {
     header: 'Zip Code',
-    id: 'zipCode',
+    accessorKey: 'zipCode',
   },
   {
     header: 'Phone Number',
-    id: 'phoneNumber',
+    accessorKey: 'phoneNumber',
   },
 ];
 

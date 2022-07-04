@@ -17,10 +17,10 @@ const commonIconButtonStyles = {
 
 interface Props {
   row: MRT_Row;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row, instance }) => {
+export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row, table }) => {
   const {
     getState,
     options: {
@@ -31,7 +31,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row, instance }) => {
       renderRowActions,
     },
     setCurrentEditingRow,
-  } = instance;
+  } = table;
 
   const { currentEditingRow } = getState();
 
@@ -51,9 +51,9 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row, instance }) => {
   return (
     <>
       {renderRowActions ? (
-        <>{renderRowActions({ row, instance })}</>
+        <>{renderRowActions({ row, table })}</>
       ) : row.id === currentEditingRow?.id ? (
-        <MRT_EditActionButtons row={row} instance={instance} />
+        <MRT_EditActionButtons row={row} table={table} />
       ) : !renderRowActionMenuItems && enableEditing ? (
         <Tooltip placement="right" arrow title={localization.edit}>
           <IconButton sx={commonIconButtonStyles} onClick={handleStartEditMode}>
@@ -82,7 +82,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row, instance }) => {
             handleEdit={handleStartEditMode}
             row={row}
             setAnchorEl={setAnchorEl}
-            instance={instance}
+            table={table}
           />
         </>
       ) : null}

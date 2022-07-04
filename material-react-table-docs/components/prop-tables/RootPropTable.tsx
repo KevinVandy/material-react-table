@@ -13,7 +13,7 @@ const RootPropTable = () => {
         {
           enableClickToCopy: true,
           header: 'PropName Name',
-          id: 'propName',
+          accessorKey: 'propName',
           Cell: ({ cell }) =>
             cell.row.original?.required ? (
               <strong style={{ color: theme.palette.primary.dark }}>
@@ -23,16 +23,20 @@ const RootPropTable = () => {
               cell.getValue()
             ),
         },
-        { header: 'Type', id: 'type', enableGlobalFilter: false },
-        { header: 'Required', id: 'required', enableGlobalFilter: false },
+        { header: 'Type', accessorKey: 'type', enableGlobalFilter: false },
+        {
+          header: 'Required',
+          accessorKey: 'required',
+          enableGlobalFilter: false,
+        },
         {
           header: 'Default Value',
-          id: 'defaultValue',
+          accessorKey: 'defaultValue',
           enableGlobalFilter: false,
         },
         {
           header: 'More Info Links',
-          id: 'link',
+          accessorKey: 'link',
           disableFilters: true,
           enableGlobalFilter: false,
           Cell: ({ cell }) => (
@@ -50,8 +54,12 @@ const RootPropTable = () => {
             </Link>
           ),
         },
-        { header: 'Description', id: 'description', enableGlobalFilter: false },
-        { header: 'Source', id: 'source', enableGlobalFilter: false },
+        {
+          header: 'Description',
+          accessorKey: 'description',
+          enableGlobalFilter: false,
+        },
+        { header: 'Source', accessorKey: 'source', enableGlobalFilter: false },
       ] as MRT_ColumnDef<PropRow>[],
     [theme],
   );
@@ -70,8 +78,8 @@ const RootPropTable = () => {
         density: 'compact',
         showGlobalFilter: true,
         sorting: [
-          { id: 'required', desc: true },
-          { id: 'propName', desc: false },
+          { accessorKey: 'required', desc: true },
+          { accessorKey: 'propName', desc: false },
         ],
         columnPinning: { left: ['mrt-row-numbers', 'propName'], right: [] },
       }}

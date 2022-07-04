@@ -7,16 +7,16 @@ const Example: FC = () => {
       [
         {
           header: 'ID',
-          id: 'id',
+          accessorKey: 'id',
           enableColumnActions: false,
         },
         {
           header: 'First Name',
-          id: 'firstName',
+          accessorKey: 'firstName',
         },
         {
           header: 'Last Name',
-          id: 'lastName',
+          accessorKey: 'lastName',
         },
       ] as MRT_ColumnDef[],
     [],

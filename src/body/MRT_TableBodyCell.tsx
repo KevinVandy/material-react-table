@@ -5,19 +5,20 @@ import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 import { reorderColumn } from '../utils';
 import type { MRT_Cell, MRT_Column, MRT_TableInstance } from '..';
+import { flexRender } from '@tanstack/react-table';
 
 interface Props {
   cell: MRT_Cell;
   enableHover?: boolean;
   rowIndex: number;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
 export const MRT_TableBodyCell: FC<Props> = ({
   cell,
   enableHover,
   rowIndex,
-  instance,
+  table,
 }) => {
   const {
     getState,
@@ -34,8 +35,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
     },
     setColumnOrder,
     setCurrentEditingCell,
-  } = instance;
-
+  } = table;
   const {
     columnOrder,
     currentEditingCell,
@@ -44,10 +44,9 @@ export const MRT_TableBodyCell: FC<Props> = ({
     isLoading,
     showSkeletons,
   } = getState();
-
   const { column, row } = cell;
-
-  const { columnDef, columnDefType } = column;
+  const { columnDef } = column;
+  const { columnDefType } = columnDef;
 
   const [, dropRef] = useDrop({
     accept: 'column',
@@ -59,12 +58,12 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   const mTableCellBodyProps =
     muiTableBodyCellProps instanceof Function
-      ? muiTableBodyCellProps({ cell, instance })
+      ? muiTableBodyCellProps({ cell, table })
       : muiTableBodyCellProps;
 
   const mcTableCellBodyProps =
     columnDef.muiTableBodyCellProps instanceof Function
-      ? columnDef.muiTableBodyCellProps({ cell, instance })
+      ? columnDef.muiTableBodyCellProps({ cell, table })
       : columnDef.muiTableBodyCellProps;
 
   const tableCellProps = {
@@ -113,7 +112,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
   const getIsLastLeftPinnedColumn = () => {
     return (
       column.getIsPinned() === 'left' &&
-      instance.getLeftLeafHeaders().length - 1 === column.getPinnedIndex()
+      table.getLeftLeafHeaders().length - 1 === column.getPinnedIndex()
     );
   };
 
@@ -123,8 +122,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   const getTotalRight = () => {
     return (
-      (instance.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) *
-      150
+      (table.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) * 150
     );
   };
 
@@ -210,26 +208,29 @@ export const MRT_TableBodyCell: FC<Props> = ({
           column.id === 'mrt-row-numbers' ? (
           rowIndex + 1
         ) : columnDefType === 'display' ? (
-          columnDef.Cell?.({ cell, instance })
+          columnDef.Cell?.({ cell, table })
         ) : cell.getIsPlaceholder() ||
           (row.getIsGrouped() &&
             column.id !==
               row.groupingColumnId) ? null : cell.getIsAggregated() ? (
-          columnDef.AggregatedCell?.({ cell, instance }) ??
-          cell.renderAggregatedCell()
+          columnDef.AggregatedCell?.({ cell, table }) ??
+          flexRender(cell.getValue(), cell.getContext())
         ) : isEditing ? (
-          <MRT_EditCellTextField cell={cell} instance={instance} />
+          <MRT_EditCellTextField cell={cell} table={table} />
         ) : (enableClickToCopy || columnDef.enableClickToCopy) &&
           columnDef.enableClickToCopy !== false ? (
           <>
-            <MRT_CopyButton cell={cell} instance={instance}>
-              <>{columnDef?.Cell?.({ cell, instance }) ?? cell.renderCell()}</>
+            <MRT_CopyButton cell={cell} table={table}>
+              <>
+                {columnDef?.Cell?.({ cell, table }) ??
+                  flexRender(cell.getValue(), cell.getContext())}
+              </>
             </MRT_CopyButton>
             {row.getIsGrouped() && <> ({row.subRows?.length})</>}
           </>
         ) : (
           <>
-            {columnDef?.Cell?.({ cell, instance }) ?? cell.renderCell()}
+            {columnDef?.Cell?.({ cell, table }) ?? cell.getValue()}
             {row.getIsGrouped() && <> ({row.subRows?.length ?? ''})</>}
           </>
         )}

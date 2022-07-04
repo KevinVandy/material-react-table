@@ -36,12 +36,12 @@ const columns = useMemo(
   () => [
     {
       header: 'Name',
-      id: 'name',
+      accessorKey: 'name',
     },
     {
       header: 'Age',
       Header: () => <i>Age</i>, //optional custom jsx
-      id: 'age',
+      accessorKey: 'age',
     },
   ],
   [],
@@ -77,12 +77,12 @@ export default function App() {
     () => [
       {
         header: 'Name',
-        id: 'name',
+        accessorKey: 'name',
       },
       {
         header: 'Age',
         Header: () => <i>Age</i>, //optional custom jsx
-        id: 'age',
+        accessorKey: 'age',
       },
     ],
     [],

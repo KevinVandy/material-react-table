@@ -13,19 +13,19 @@ export default meta;
 const columns = [
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Age',
-    id: 'age',
+    accessorKey: 'age',
   },
   {
     header: 'Address',
-    id: 'address',
+    accessorKey: 'address',
   },
 ];
 const data = [...Array(21)].map(() => ({

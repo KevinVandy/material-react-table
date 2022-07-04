@@ -24,37 +24,37 @@ const Example: FC = () => {
       [
         {
           header: 'Employee',
-          id: 'employee',
+          accessorKey: 'employee',
           columns: [
             {
               header: 'First Name',
-              id: 'firstName',
+              accessorKey: 'firstName',
               enableClickToCopy: false,
             },
             {
               header: 'Last Name',
-              id: 'lastName',
+              accessorKey: 'lastName',
               enableClickToCopy: false,
             },
             {
               header: 'Email',
-              id: 'email',
+              accessorKey: 'email',
               size: 400,
             },
           ],
         },
         {
           header: 'Job Info',
-          id: 'jobInfo',
+          accessorKey: 'jobInfo',
           columns: [
             {
               header: 'Job Title',
-              id: 'jobTitle',
+              accessorKey: 'jobTitle',
               size: 250,
             },
             {
               header: 'Salary',
-              id: 'salary',
+              accessorKey: 'salary',
               //custom conditional format and styling
               Cell: ({ cell }) => (
                 <Box
@@ -88,7 +88,7 @@ const Example: FC = () => {
               Header: <em>Start Date</em>, //custom header markup
               accessorFn: (row: Employee) => new Date(row.startDate), //transform data before processing so sorting works
               header: 'Start Date',
-              id: 'startDate',
+              accessorKey: 'startDate',
               muiTableHeadCellFilterTextFieldProps: {
                 type: 'date',
               },
@@ -170,21 +170,21 @@ const Example: FC = () => {
           Send Email
         </MenuItem>,
       ]}
-      renderToolbarTopCustomActions={({ instance }) => {
+      renderToolbarTopCustomActions={({ table }) => {
         const handleDeactivate = () => {
-          instance.getSelectedRowModel().flatRows.map((row) => {
+          table.getSelectedRowModel().flatRows.map((row) => {
             alert('deactivating ' + row.original.firstName);
           });
         };
 
         const handleActivate = () => {
-          instance.getSelectedRowModel().flatRows.map((row) => {
+          table.getSelectedRowModel().flatRows.map((row) => {
             alert('activating ' + row.original.firstName);
           });
         };
 
         const handleContact = () => {
-          instance.getSelectedRowModel().flatRows.map((row) => {
+          table.getSelectedRowModel().flatRows.map((row) => {
             alert('contact ' + row.original.firstName);
           });
         };
@@ -193,7 +193,7 @@ const Example: FC = () => {
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <Button
               color="error"
-              disabled={instance.getSelectedRowModel().flatRows.length === 0}
+              disabled={table.getSelectedRowModel().flatRows.length === 0}
               onClick={handleDeactivate}
               variant="contained"
             >
@@ -201,7 +201,7 @@ const Example: FC = () => {
             </Button>
             <Button
               color="success"
-              disabled={instance.getSelectedRowModel().flatRows.length === 0}
+              disabled={table.getSelectedRowModel().flatRows.length === 0}
               onClick={handleActivate}
               variant="contained"
             >
@@ -209,7 +209,7 @@ const Example: FC = () => {
             </Button>
             <Button
               color="info"
-              disabled={instance.getSelectedRowModel().flatRows.length === 0}
+              disabled={table.getSelectedRowModel().flatRows.length === 0}
               onClick={handleContact}
               variant="contained"
             >

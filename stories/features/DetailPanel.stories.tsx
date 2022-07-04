@@ -14,15 +14,15 @@ export const DetailPanelEnabled: Story<MaterialReactTableProps> = () => (
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
     ]}
     data={[...Array(5)].map(() => ({
@@ -53,15 +53,15 @@ export const DetailPanelExpandAllDisabled: Story<
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
     ]}
     data={[...Array(5)].map(() => ({

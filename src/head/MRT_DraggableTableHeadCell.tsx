@@ -6,14 +6,12 @@ import { reorderColumn } from '../utils';
 
 interface Props {
   header: MRT_Header;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_DraggableTableHeadCell: FC<Props> = ({ header, instance }) => {
-  const { getState, setColumnOrder } = instance;
-
+export const MRT_DraggableTableHeadCell: FC<Props> = ({ header, table }) => {
+  const { getState, setColumnOrder } = table;
   const { columnOrder } = getState();
-
   const { column } = header;
 
   const [, dropRef] = useDrop({
@@ -39,7 +37,7 @@ export const MRT_DraggableTableHeadCell: FC<Props> = ({ header, instance }) => {
       header={header}
       isDragging={isDragging}
       previewRef={previewRef}
-      instance={instance}
+      table={table}
     />
   );
 };

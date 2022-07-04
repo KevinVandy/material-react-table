@@ -17,27 +17,27 @@ export default meta;
 const columns = [
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Age',
-    id: 'age',
+    accessorKey: 'age',
   },
   {
     header: 'Gender',
-    id: 'gender',
+    accessorKey: 'gender',
   },
   {
     header: 'Address',
-    id: 'address',
+    accessorKey: 'address',
   },
   {
     header: 'State',
-    id: 'state',
+    accessorKey: 'state',
   },
 ];
 
@@ -79,29 +79,29 @@ export const FilterTypes: Story<MaterialReactTableProps> = () => (
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Age',
-        id: 'age',
+        accessorKey: 'age',
         filterFn: 'startsWith',
       },
       {
         header: 'Gender',
-        id: 'gender',
+        accessorKey: 'gender',
         filterSelectOptions: ['Male', 'Female', 'Other'],
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
       {
         header: 'State',
-        id: 'state',
+        accessorKey: 'state',
         filterSelectOptions: [
           { text: 'CA', value: 'California' },
           { text: 'TX', value: 'Texas' },
@@ -122,29 +122,29 @@ export const FilteringChangeModeDisabled: Story<
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Age',
-        id: 'age',
+        accessorKey: 'age',
         filterFn: 'between',
       },
       {
         header: 'Gender',
-        id: 'gender',
+        accessorKey: 'gender',
         filterSelectOptions: ['Male', 'Female', 'Other'],
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
       {
         header: 'State',
-        id: 'state',
+        accessorKey: 'state',
       },
     ]}
     data={data}
@@ -159,31 +159,31 @@ export const DisableSomeFilterTypesForCertainColumns: Story<
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
         enabledColumnFilterOptions: ['startsWith', 'endsWith'],
         filterFn: 'startsWith',
       },
       {
         header: 'Age',
-        id: 'age',
+        accessorKey: 'age',
       },
       {
         header: 'Gender',
-        id: 'gender',
+        accessorKey: 'gender',
         enabledColumnFilterOptions: ['equals', 'notEquals'],
         filterFn: 'equals',
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
       {
         header: 'State',
-        id: 'state',
+        accessorKey: 'state',
       },
     ]}
     data={data}
@@ -198,29 +198,29 @@ export const FilteringDisabledForCertainColumns: Story<
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Age',
-        id: 'age',
+        accessorKey: 'age',
         enableColumnFilter: false,
       },
       {
         header: 'Gender',
-        id: 'gender',
+        accessorKey: 'gender',
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
         enableColumnFilter: false,
       },
       {
         header: 'State',
-        id: 'state',
+        accessorKey: 'state',
       },
     ]}
     data={data}
@@ -235,10 +235,10 @@ export const CustomFilterFunctions: Story<MaterialReactTableProps> = () => (
     initialState={{ showFilters: true }}
     // filterFns={{
     //   fuzzy: (row, columnId, value, addMeta) => {
-    //     console.log('fuzzy');
+    //     console.info('fuzzy');
     //   },
     //   contains: (row, columnId, value, addMeta) => {
-    //     console.log('contains');
+    //     console.info('contains');
     //   },
     // }}
   />
@@ -251,19 +251,19 @@ export const CustomFilterFunctionPerColumn: Story<
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Age',
-        id: 'age',
+        accessorKey: 'age',
       },
       {
         header: 'Gender',
-        id: 'gender',
+        accessorKey: 'gender',
         filterFn: (row, _columnIds, filterValue) =>
           row
             .getValue('gender')
@@ -272,11 +272,11 @@ export const CustomFilterFunctionPerColumn: Story<
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
       {
         header: 'State',
-        id: 'state',
+        accessorKey: 'state',
         filterFn: (row, _columnIds, filterValue) =>
           row
             .getValue('state')
@@ -294,19 +294,19 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Age',
-        id: 'age',
+        accessorKey: 'age',
       },
       {
         header: 'Gender',
-        id: 'gender',
+        accessorKey: 'gender',
         Filter: ({ header }) => (
           <TextField
             onChange={(e) =>
@@ -331,11 +331,11 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
       {
         header: 'State',
-        id: 'state',
+        accessorKey: 'state',
       },
     ]}
     data={data}

@@ -9,10 +9,10 @@ import { MRT_TableInstance } from '..';
 import { MRT_GlobalFilterTextField } from '../inputs/MRT_GlobalFilterTextField';
 
 interface Props {
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_ToolbarInternalButtons: FC<Props> = ({ instance }) => {
+export const MRT_ToolbarInternalButtons: FC<Props> = ({ table }) => {
   const {
     options: {
       enableColumnFilters,
@@ -26,7 +26,7 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ instance }) => {
       positionGlobalFilter,
       renderToolbarInternalActions,
     },
-  } = instance;
+  } = table;
 
   return (
     <Box
@@ -42,26 +42,26 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ instance }) => {
         MRT_ToggleDensePaddingButton,
         MRT_ToggleFiltersButton,
         MRT_ToggleGlobalFilterButton,
-        instance,
+        table,
       }) ?? (
         <>
           {enableGlobalFilter && positionGlobalFilter === 'right' && (
-            <MRT_GlobalFilterTextField instance={instance} />
+            <MRT_GlobalFilterTextField table={table} />
           )}
           {enableFilters && enableGlobalFilter && (
-            <MRT_ToggleGlobalFilterButton instance={instance} />
+            <MRT_ToggleGlobalFilterButton table={table} />
           )}
           {enableFilters && enableColumnFilters && (
-            <MRT_ToggleFiltersButton instance={instance} />
+            <MRT_ToggleFiltersButton table={table} />
           )}
           {(enableHiding || enableColumnOrdering || enablePinning) && (
-            <MRT_ShowHideColumnsButton instance={instance} />
+            <MRT_ShowHideColumnsButton table={table} />
           )}
           {enableDensityToggle && (
-            <MRT_ToggleDensePaddingButton instance={instance} />
+            <MRT_ToggleDensePaddingButton table={table} />
           )}
           {enableFullScreenToggle && (
-            <MRT_FullScreenToggleButton instance={instance} />
+            <MRT_FullScreenToggleButton table={table} />
           )}
         </>
       )}

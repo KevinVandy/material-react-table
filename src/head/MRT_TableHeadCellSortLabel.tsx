@@ -4,16 +4,14 @@ import { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
   header: MRT_Header;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_TableHeadCellSortLabel: FC<Props> = ({ header, instance }) => {
+export const MRT_TableHeadCellSortLabel: FC<Props> = ({ header, table }) => {
   const {
     options: { localization },
-  } = instance;
-
+  } = table;
   const { column } = header;
-
   const { columnDef } = column;
 
   const sortTooltip = !!column.getIsSorted()

@@ -1,22 +1,23 @@
-import { ColumnDef, ColumnOrderState, Table } from '@tanstack/react-table';
+import { ColumnOrderState } from '@tanstack/react-table';
 import {
   MaterialReactTableProps,
   MRT_Column,
   MRT_ColumnDef,
-  MRT_FilterFn,
+  MRT_DefinedColumnDef,
+  MRT_FilterOption,
 } from '.';
 import { MRT_FilterFns } from './filtersFns';
 
-export const getAllLeafColumnDefs = (
-  columns: MRT_ColumnDef[],
-): MRT_ColumnDef[] => {
-  let lowestLevelColumns: MRT_ColumnDef[] = columns;
-  let currentCols: MRT_ColumnDef[] | undefined = columns;
+export const getAllLeafColumnDefs = <D extends Record<string, any> = {}>(
+  columns: MRT_ColumnDef<D>[],
+): MRT_ColumnDef<D>[] => {
+  let lowestLevelColumns: MRT_ColumnDef<D>[] = columns;
+  let currentCols: MRT_ColumnDef<D>[] | undefined = columns;
   while (!!currentCols?.length && currentCols.some((col) => col.columns)) {
-    const nextCols: MRT_ColumnDef[] = currentCols
+    const nextCols: MRT_ColumnDef<D>[] = currentCols
       .filter((col) => !!col.columns)
       .map((col) => col.columns)
-      .flat() as MRT_ColumnDef[];
+      .flat() as MRT_ColumnDef<D>[];
     if (nextCols.every((col) => !col?.columns)) {
       lowestLevelColumns = [...lowestLevelColumns, ...nextCols];
     }
@@ -25,42 +26,29 @@ export const getAllLeafColumnDefs = (
   return lowestLevelColumns.filter((col) => !col.columns);
 };
 
-export const createGroup = <D extends Record<string, any> = {}>(
-  table: Table<D>,
-  column: MRT_ColumnDef<D>,
-  currentFilterFns: { [key: string]: MRT_FilterFn },
-): ColumnDef<D> =>
-  table.createGroup({
-    ...column,
-    columns: column?.columns?.map?.((col) =>
-      col.columns
-        ? createGroup<D>(table, col, currentFilterFns)
-        : createDataColumn(table, col, currentFilterFns),
-    ),
-  } as any);
+export const prepareColumns = <D extends Record<string, any> = {}>(
+  columnDefs: MRT_ColumnDef<D>[],
+  currentFilterFns: { [key: string]: MRT_FilterOption },
+): MRT_DefinedColumnDef<D>[] =>
+  columnDefs.map((column) => {
+    if (!column.id) column.id = column.accessorKey?.toString() ?? column.header;
+    if (!column.columnDefType) column.columnDefType = 'data';
+    if (!!column.columns?.length) {
+      column.columnDefType = 'group';
+      column.columns = prepareColumns(column.columns, currentFilterFns);
+    } else if (column.columnDefType === 'data') {
+      if (!(column.filterFn instanceof Function)) {
+        //@ts-ignore
+        column.filterFn =
+          MRT_FilterFns[currentFilterFns[column.id]] ?? MRT_FilterFns.fuzzy;
+      }
+    }
+    return column;
+  }) as MRT_DefinedColumnDef<D>[];
 
-export const createDataColumn = <D extends Record<string, any> = {}>(
-  table: Table<D>,
-  column: MRT_ColumnDef<D>,
-  currentFilterFns: { [key: string]: MRT_FilterFn },
-): ColumnDef<D> => // @ts-ignore
-  table.createDataColumn(column.id, {
-    filterFn:
-      currentFilterFns[column.id] instanceof Function
-        ? currentFilterFns[column.id]
-        : // @ts-ignore
-          MRT_FilterFns[currentFilterFns[column.id]],
-    ...column,
-  }) as any;
-
-export const createDisplayColumn = <D extends Record<string, any> = {}>(
-  table: Table<D>,
-  column: Omit<MRT_ColumnDef<D>, 'header'> & { header?: string },
-): ColumnDef<D> => table.createDisplayColumn(column as ColumnDef<D>);
-
-export const reorderColumn = (
-  movingColumn: MRT_Column,
-  receivingColumn: MRT_Column,
+export const reorderColumn = <D extends Record<string, any> = {}>(
+  movingColumn: MRT_Column<D>,
+  receivingColumn: MRT_Column<D>,
   columnOrder: ColumnOrderState,
 ): ColumnOrderState => {
   if (movingColumn.getCanPin()) {
@@ -74,8 +62,8 @@ export const reorderColumn = (
   return [...columnOrder];
 };
 
-export const getLeadingDisplayColumnIds = (
-  props: MaterialReactTableProps<any>,
+export const getLeadingDisplayColumnIds = <D extends Record<string, any> = {}>(
+  props: MaterialReactTableProps<D>,
 ) =>
   [
     ((props.positionActionsColumn === 'first' && props.enableRowActions) ||
@@ -86,15 +74,17 @@ export const getLeadingDisplayColumnIds = (
     props.enableRowNumbers && 'mrt-row-numbers',
   ].filter(Boolean) as string[];
 
-export const getTrailingDisplayColumnIds = (
-  props: MaterialReactTableProps<any>,
+export const getTrailingDisplayColumnIds = <D extends Record<string, any> = {}>(
+  props: MaterialReactTableProps<D>,
 ) => [
   ((props.positionActionsColumn === 'last' && props.enableRowActions) ||
     (props.enableEditing && props.editingMode === 'row')) &&
     'mrt-row-actions',
 ];
 
-export const getDefaultColumnOrderIds = (props: MaterialReactTableProps<any>) =>
+export const getDefaultColumnOrderIds = <D extends Record<string, any> = {}>(
+  props: MaterialReactTableProps<D>,
+) =>
   [
     ...getLeadingDisplayColumnIds(props),
     ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef[]).map((c) => c.id),

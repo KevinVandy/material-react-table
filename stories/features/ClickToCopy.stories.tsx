@@ -15,27 +15,27 @@ export default meta;
 const columns: MRT_ColumnDef[] = [
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Email Address',
-    id: 'email',
+    accessorKey: 'email',
   },
   {
     header: 'Address',
-    id: 'address',
+    accessorKey: 'address',
   },
   {
     header: 'City',
-    id: 'city',
+    accessorKey: 'city',
   },
   {
     header: 'State',
-    id: 'state',
+    accessorKey: 'state',
   },
 ];
 
@@ -59,28 +59,28 @@ export const ClickToCopyEnabledPerColumn: Story<
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Email Address',
-        id: 'email',
+        accessorKey: 'email',
         enableClickToCopy: true,
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
       {
         header: 'City',
-        id: 'city',
+        accessorKey: 'city',
       },
       {
         header: 'State',
-        id: 'state',
+        accessorKey: 'state',
       },
     ]}
     data={data}
@@ -94,28 +94,28 @@ export const ClickToCopyDisabledPerColumn: Story<
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Email Address',
-        id: 'email',
+        accessorKey: 'email',
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
       {
         header: 'City',
-        id: 'city',
+        accessorKey: 'city',
         enableClickToCopy: false,
       },
       {
         header: 'State',
-        id: 'state',
+        accessorKey: 'state',
         enableClickToCopy: false,
       },
     ]}

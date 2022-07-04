@@ -12,19 +12,19 @@ export default meta;
 const columns = [
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Age',
-    id: 'age',
+    accessorKey: 'age',
   },
   {
     header: 'Address',
-    id: 'address',
+    accessorKey: 'address',
   },
 ];
 const data = [...Array(21)].map(() => ({
@@ -58,15 +58,15 @@ export const StyleMuiTableBodyCellConditionallyIn1Column: Story<
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Age',
-        id: 'age',
+        accessorKey: 'age',
         muiTableBodyCellProps: ({ cell }) => ({
           sx: {
             backgroundColor:
@@ -78,7 +78,7 @@ export const StyleMuiTableBodyCellConditionallyIn1Column: Story<
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
     ]}
     data={data}
@@ -90,21 +90,21 @@ export const CustomCellRender: Story<MaterialReactTableProps> = () => (
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
         Cell: ({ cell }) => (
           <span style={{ fontStyle: 'italic' }}>{cell.getValue()}</span>
         ),
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
         Cell: ({ cell }) => (
           <span style={{ color: 'red' }}>{cell.getValue()}</span>
         ),
       },
       {
         header: 'Age',
-        id: 'age',
+        accessorKey: 'age',
         Cell: ({ cell }) => (
           <span
             style={{
@@ -122,7 +122,7 @@ export const CustomCellRender: Story<MaterialReactTableProps> = () => (
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
     ]}
     data={data}

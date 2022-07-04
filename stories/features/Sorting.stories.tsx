@@ -12,23 +12,23 @@ export default meta;
 const columns = [
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Address',
-    id: 'address',
+    accessorKey: 'address',
   },
   {
     header: 'State',
-    id: 'state',
+    accessorKey: 'state',
   },
   {
     header: 'Phone Number',
-    id: 'phoneNumber',
+    accessorKey: 'phoneNumber',
   },
 ];
 
@@ -55,24 +55,24 @@ export const DisableSortingForSpecificColumns: Story<
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
         enableSorting: false,
       },
       {
         header: 'State',
-        id: 'state',
+        accessorKey: 'state',
       },
       {
         header: 'Phone Number',
-        id: 'phoneNumber',
+        accessorKey: 'phoneNumber',
         enableSorting: false,
       },
     ]}
@@ -89,24 +89,24 @@ export const SortRanking: Story<MaterialReactTableProps> = () => (
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
         sortingFn: 'fuzzy',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
       {
         header: 'State',
-        id: 'state',
+        accessorKey: 'state',
       },
       {
         header: 'Phone Number',
-        id: 'phoneNumber',
+        accessorKey: 'phoneNumber',
       },
     ]}
     data={data}

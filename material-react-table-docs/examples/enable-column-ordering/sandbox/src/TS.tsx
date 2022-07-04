@@ -8,25 +8,25 @@ const Example: FC = () => {
       [
         {
           header: 'First Name',
-          id: 'firstName',
+          accessorKey: 'firstName',
         },
         {
           header: 'Last Name',
-          id: 'lastName',
+          accessorKey: 'lastName',
         },
         //column definitions...
         {
           header: 'Address',
-          id: 'address',
+          accessorKey: 'address',
         },
         {
           header: 'City',
-          id: 'city',
+          accessorKey: 'city',
         },
         //end
         {
           header: 'State',
-          id: 'state',
+          accessorKey: 'state',
           enableColumnOrdering: false, //disable column ordering for this column
         },
       ] as MRT_ColumnDef<Person>[],

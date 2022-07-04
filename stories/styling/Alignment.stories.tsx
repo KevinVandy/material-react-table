@@ -12,27 +12,27 @@ export default meta;
 const columns = [
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Age',
-    id: 'age',
+    accessorKey: 'age',
   },
   {
     header: 'Address',
-    id: 'address',
+    accessorKey: 'address',
   },
   {
     header: 'State',
-    id: 'state',
+    accessorKey: 'state',
   },
   {
     header: 'Phone Number',
-    id: 'phoneNumber',
+    accessorKey: 'phoneNumber',
   },
 ];
 
@@ -60,30 +60,30 @@ export const RightAlignNumberColumn: Story<MaterialReactTableProps> = () => (
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Age',
-        id: 'age',
+        accessorKey: 'age',
         muiTableBodyCellProps: {
           align: 'right',
         },
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
       {
         header: 'State',
-        id: 'state',
+        accessorKey: 'state',
       },
       {
         header: 'Phone Number',
-        id: 'phoneNumber',
+        accessorKey: 'phoneNumber',
       },
     ]}
     data={data}

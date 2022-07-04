@@ -5,13 +5,13 @@ import type { MRT_Header, MRT_HeaderGroup, MRT_TableInstance } from '..';
 
 interface Props {
   footerGroup: MRT_HeaderGroup;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_TableFooterRow: FC<Props> = ({ footerGroup, instance }) => {
+export const MRT_TableFooterRow: FC<Props> = ({ footerGroup, table }) => {
   const {
     options: { muiTableFooterRowProps },
-  } = instance;
+  } = table;
 
   // if no content in row, skip row
   if (
@@ -26,17 +26,13 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup, instance }) => {
 
   const tableRowProps =
     muiTableFooterRowProps instanceof Function
-      ? muiTableFooterRowProps({ footerGroup, instance })
+      ? muiTableFooterRowProps({ footerGroup, table })
       : muiTableFooterRowProps;
 
   return (
     <TableRow {...tableRowProps}>
       {footerGroup.headers.map((footer: MRT_Header) => (
-        <MRT_TableFooterCell
-          footer={footer}
-          key={footer.id}
-          instance={instance}
-        />
+        <MRT_TableFooterCell footer={footer} key={footer.id} table={table} />
       ))}
     </TableRow>
   );

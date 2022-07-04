@@ -7,10 +7,10 @@ const useIsomorphicLayoutEffect =
   typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 interface Props {
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_TableContainer: FC<Props> = ({ instance }) => {
+export const MRT_TableContainer: FC<Props> = ({ table }) => {
   const {
     getState,
     options: {
@@ -19,15 +19,14 @@ export const MRT_TableContainer: FC<Props> = ({ instance }) => {
       muiTableContainerProps,
       tableId,
     },
-  } = instance;
-
+  } = table;
   const { isFullScreen } = getState();
 
   const [totalToolbarHeight, setTotalToolbarHeight] = useState(0);
 
   const tableContainerProps =
     muiTableContainerProps instanceof Function
-      ? muiTableContainerProps({ instance })
+      ? muiTableContainerProps({ table })
       : muiTableContainerProps;
 
   useIsomorphicLayoutEffect(() => {
@@ -68,7 +67,7 @@ export const MRT_TableContainer: FC<Props> = ({ instance }) => {
         ...tableContainerProps?.style,
       }}
     >
-      <MRT_Table tableContainerRef={tableContainerRef} instance={instance} />
+      <MRT_Table tableContainerRef={tableContainerRef} table={table} />
     </TableContainer>
   );
 };

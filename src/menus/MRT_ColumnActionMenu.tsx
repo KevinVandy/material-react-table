@@ -20,14 +20,14 @@ interface Props {
   anchorEl: HTMLElement | null;
   header: MRT_Header;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
 export const MRT_ColumnActionMenu: FC<Props> = ({
   anchorEl,
   header,
   setAnchorEl,
-  instance,
+  table,
 }) => {
   const {
     getState,
@@ -58,17 +58,13 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       localization,
     },
     setShowFilters,
-  } = instance;
-
+  } = table;
   const { column } = header;
-
   const { columnDef } = column;
-
   const { columnSizing, columnVisibility, density } = getState();
 
   const [filterMenuAnchorEl, setFilterMenuAnchorEl] =
     useState<null | HTMLElement>(null);
-
   const [showHideColumnsMenuAnchorEl, setShowHideColumnsMenuAnchorEl] =
     useState<null | HTMLElement>(null);
 
@@ -265,7 +261,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
               key={2}
               onSelect={handleFilterByColumn}
               setAnchorEl={setFilterMenuAnchorEl}
-              instance={instance}
+              table={table}
             />
           ),
         ].filter(Boolean)}
@@ -394,7 +390,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           isSubMenu
           key={2}
           setAnchorEl={setShowHideColumnsMenuAnchorEl}
-          instance={instance}
+          table={table}
         />,
       ]}
     </Menu>

@@ -6,25 +6,23 @@ import { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
   header: MRT_Header;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
 export const MRT_TableHeadCellFilterContainer: FC<Props> = ({
   header,
-  instance,
+  table,
 }) => {
-  const { getState } = instance;
-
+  const { getState } = table;
   const { currentFilterFns, showFilters } = getState();
-
   const { column } = header;
 
   return (
     <Collapse in={showFilters} mountOnEnter unmountOnExit>
       {currentFilterFns[column.id] === 'between' ? (
-        <MRT_FilterRangeFields header={header} instance={instance} />
+        <MRT_FilterRangeFields header={header} table={table} />
       ) : (
-        <MRT_FilterTextField header={header} instance={instance} />
+        <MRT_FilterTextField header={header} table={table} />
       )}
     </Collapse>
   );

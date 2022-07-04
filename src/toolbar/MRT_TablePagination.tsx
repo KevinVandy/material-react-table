@@ -3,11 +3,11 @@ import { TablePagination } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
 interface Props {
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
   position: 'top' | 'bottom';
 }
 
-export const MRT_TablePagination: FC<Props> = ({ instance, position }) => {
+export const MRT_TablePagination: FC<Props> = ({ table, position }) => {
   const {
     getPrePaginationRowModel,
     getState,
@@ -18,25 +18,23 @@ export const MRT_TablePagination: FC<Props> = ({ instance, position }) => {
       enableToolbarInternalActions,
       rowCount,
     },
-  } = instance;
-
+  } = table;
   const {
     pagination: { pageSize = 10, pageIndex = 0 },
     showGlobalFilter,
   } = getState();
 
+  const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
+  const showFirstLastPageButtons = totalRowCount / pageSize > 2;
+
   const tablePaginationProps =
     muiTablePaginationProps instanceof Function
-      ? muiTablePaginationProps({ instance })
+      ? muiTablePaginationProps({ table })
       : muiTablePaginationProps;
 
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     setPageSize(+event.target.value);
   };
-
-  const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
-
-  const showFirstLastPageButtons = totalRowCount / pageSize > 2;
 
   return (
     <TablePagination

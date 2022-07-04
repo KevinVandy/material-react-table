@@ -12,27 +12,27 @@ export default meta;
 const columns = [
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Address',
-    id: 'address',
+    accessorKey: 'address',
   },
   {
     header: 'State',
-    id: 'state',
+    accessorKey: 'state',
   },
   {
     header: 'Zip Code',
-    id: 'zipCode',
+    accessorKey: 'zipCode',
   },
   {
     header: 'Phone Number',
-    id: 'phoneNumber',
+    accessorKey: 'phoneNumber',
   },
 ];
 
@@ -58,28 +58,28 @@ export const ColumnResizingDisabledSomeColumns: Story<
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
       {
         header: 'State',
-        id: 'state',
+        accessorKey: 'state',
       },
       {
         header: 'Zip Code',
-        id: 'zipCode',
+        accessorKey: 'zipCode',
         enableResizing: false,
       },
       {
         header: 'Phone Number',
-        id: 'phoneNumber',
+        accessorKey: 'phoneNumber',
       },
     ]}
     data={data}
@@ -126,36 +126,36 @@ export const ColumnResizingWithHeaderGroups: Story<
     columns={[
       {
         header: 'Name',
-        id: 'name',
+        accessorKey: 'name',
         footer: 'Name',
         columns: [
           {
             header: 'First Name',
             footer: 'First Name',
-            id: 'firstName',
+            accessorKey: 'firstName',
           },
 
           {
             header: 'Last Name',
             footer: 'Last Name',
-            id: 'lastName',
+            accessorKey: 'lastName',
           },
         ],
       },
       {
         header: 'Info',
-        id: 'info',
+        accessorKey: 'info',
         footer: 'Info',
         columns: [
           {
             header: 'Age',
             footer: 'Age',
-            id: 'age',
+            accessorKey: 'age',
           },
           {
             header: 'Address',
             footer: 'Address',
-            id: 'address',
+            accessorKey: 'address',
           },
         ],
       },

@@ -12,30 +12,30 @@ export default meta;
 const columns = [
   {
     header: 'Name',
-    id: 'name',
+    accessorKey: 'name',
     columns: [
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
       },
 
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
       },
     ],
   },
   {
     header: 'Info',
-    id: 'info',
+    accessorKey: 'info',
     columns: [
       {
         header: 'Age',
-        id: 'age',
+        accessorKey: 'age',
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
     ],
   },
@@ -57,36 +57,36 @@ export const HeaderAndFooterGroups: Story<MaterialReactTableProps> = () => (
     columns={[
       {
         header: 'Name',
-        id: 'name',
+        accessorKey: 'name',
         footer: 'Name',
         columns: [
           {
             header: 'First Name',
             footer: 'First Name',
-            id: 'firstName',
+            accessorKey: 'firstName',
           },
 
           {
             header: 'Last Name',
             footer: 'Last Name',
-            id: 'lastName',
+            accessorKey: 'lastName',
           },
         ],
       },
       {
         header: 'Info',
-        id: 'info',
+        accessorKey: 'info',
         footer: 'Info',
         columns: [
           {
             header: 'Age',
             footer: 'Age',
-            id: 'age',
+            accessorKey: 'age',
           },
           {
             header: 'Address',
             footer: 'Address',
-            id: 'address',
+            accessorKey: 'address',
           },
         ],
       },

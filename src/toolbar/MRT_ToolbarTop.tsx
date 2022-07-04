@@ -19,10 +19,10 @@ export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
 });
 
 interface Props {
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_ToolbarTop: FC<Props> = ({ instance }) => {
+export const MRT_ToolbarTop: FC<Props> = ({ table }) => {
   const {
     getState,
     options: {
@@ -36,7 +36,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ instance }) => {
       renderToolbarTopCustomActions,
       tableId,
     },
-  } = instance;
+  } = table;
 
   const { isFullScreen, showGlobalFilter } = getState();
 
@@ -44,7 +44,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ instance }) => {
 
   const toolbarProps =
     muiTableToolbarTopProps instanceof Function
-      ? muiTableToolbarTopProps({ instance })
+      ? muiTableToolbarTopProps({ table })
       : muiTableToolbarTopProps;
 
   const stackAlertBanner =
@@ -69,7 +69,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ instance }) => {
       {positionToolbarAlertBanner === 'top' && (
         <MRT_ToolbarAlertBanner
           stackAlertBanner={stackAlertBanner}
-          instance={instance}
+          table={table}
         />
       )}
       <Box
@@ -86,24 +86,24 @@ export const MRT_ToolbarTop: FC<Props> = ({ instance }) => {
         }}
       >
         {enableGlobalFilter && positionGlobalFilter === 'left' && (
-          <MRT_GlobalFilterTextField instance={instance} />
+          <MRT_GlobalFilterTextField table={table} />
         )}
 
-        {renderToolbarTopCustomActions?.({ instance }) ?? <span />}
+        {renderToolbarTopCustomActions?.({ table }) ?? <span />}
         {enableToolbarInternalActions ? (
-          <MRT_ToolbarInternalButtons instance={instance} />
+          <MRT_ToolbarInternalButtons table={table} />
         ) : (
           enableGlobalFilter &&
           positionGlobalFilter === 'right' && (
-            <MRT_GlobalFilterTextField instance={instance} />
+            <MRT_GlobalFilterTextField table={table} />
           )
         )}
       </Box>
       {enablePagination &&
         ['top', 'both'].includes(positionPagination ?? '') && (
-          <MRT_TablePagination instance={instance} position="top" />
+          <MRT_TablePagination table={table} position="top" />
         )}
-      <MRT_LinearProgressBar alignTo="bottom" instance={instance} />
+      <MRT_LinearProgressBar alignTo="bottom" table={table} />
     </Toolbar>
   );
 };

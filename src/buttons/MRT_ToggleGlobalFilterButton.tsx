@@ -3,13 +3,10 @@ import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
 interface Props extends IconButtonProps {
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_ToggleGlobalFilterButton: FC<Props> = ({
-  instance,
-  ...rest
-}) => {
+export const MRT_ToggleGlobalFilterButton: FC<Props> = ({ table, ...rest }) => {
   const {
     getState,
     options: {
@@ -19,13 +16,12 @@ export const MRT_ToggleGlobalFilterButton: FC<Props> = ({
       muiSearchTextFieldProps,
     },
     setShowGlobalFilter,
-  } = instance;
-
+  } = table;
   const { showGlobalFilter } = getState();
 
   const textFieldProps =
     muiSearchTextFieldProps instanceof Function
-      ? muiSearchTextFieldProps({ instance })
+      ? muiSearchTextFieldProps({ table })
       : muiSearchTextFieldProps;
 
   const handleToggleSearch = () => {

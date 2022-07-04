@@ -6,11 +6,11 @@ import type { MRT_Row, MRT_TableInstance } from '..';
 import { rankGlobalFuzzy } from '../sortingFns';
 
 interface Props {
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
   tableContainerRef: RefObject<HTMLDivElement>;
 }
 
-export const MRT_TableBody: FC<Props> = ({ instance, tableContainerRef }) => {
+export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
   const {
     getRowModel,
     getPrePaginationRowModel,
@@ -22,13 +22,12 @@ export const MRT_TableBody: FC<Props> = ({ instance, tableContainerRef }) => {
       muiTableBodyProps,
       virtualizerProps,
     },
-  } = instance;
-
+  } = table;
   const { density, globalFilter, pagination, sorting } = getState();
 
   const tableBodyProps =
     muiTableBodyProps instanceof Function
-      ? muiTableBodyProps({ instance })
+      ? muiTableBodyProps({ table })
       : muiTableBodyProps;
 
   const getIsSomeColumnsSorted = () => {
@@ -97,7 +96,7 @@ export const MRT_TableBody: FC<Props> = ({ instance, tableContainerRef }) => {
               rowIndex={
                 enableRowVirtualization ? rowOrVirtualRow.index : rowIndex
               }
-              instance={instance}
+              table={table}
             />
           );
         },

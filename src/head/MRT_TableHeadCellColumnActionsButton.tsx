@@ -5,12 +5,12 @@ import type { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
   header: MRT_Header;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
 export const MRT_TableHeadCellColumnActionsButton: FC<Props> = ({
   header,
-  instance,
+  table,
 }) => {
   const {
     options: {
@@ -18,10 +18,8 @@ export const MRT_TableHeadCellColumnActionsButton: FC<Props> = ({
       localization,
       muiTableHeadCellColumnActionsButtonProps,
     },
-  } = instance;
-
+  } = table;
   const { column } = header;
-
   const { columnDef } = column;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -34,14 +32,14 @@ export const MRT_TableHeadCellColumnActionsButton: FC<Props> = ({
 
   const mTableHeadCellColumnActionsButtonProps =
     muiTableHeadCellColumnActionsButtonProps instanceof Function
-      ? muiTableHeadCellColumnActionsButtonProps({ column, instance })
+      ? muiTableHeadCellColumnActionsButtonProps({ column, table })
       : muiTableHeadCellColumnActionsButtonProps;
 
   const mcTableHeadCellColumnActionsButtonProps =
     columnDef.muiTableHeadCellColumnActionsButtonProps instanceof Function
       ? columnDef.muiTableHeadCellColumnActionsButtonProps({
           column,
-          instance,
+          table,
         })
       : columnDef.muiTableHeadCellColumnActionsButtonProps;
 
@@ -83,7 +81,7 @@ export const MRT_TableHeadCellColumnActionsButton: FC<Props> = ({
         anchorEl={anchorEl}
         header={header}
         setAnchorEl={setAnchorEl}
-        instance={instance}
+        table={table}
       />
     </>
   );

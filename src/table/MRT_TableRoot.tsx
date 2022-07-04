@@ -1,11 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
-  FilterFn,
-  ReactTableGenerics,
-  Table,
   TableState,
-  createTable,
-  filterFns,
   getCoreRowModel,
   getExpandedRowModel,
   getFacetedRowModel,
@@ -13,14 +8,12 @@ import {
   getGroupedRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useTableInstance,
-  sortingFns,
+  useReactTable,
 } from '@tanstack/react-table';
 import {
   MRT_Cell,
   MRT_ColumnDef,
-  MRT_FilterFn,
-  MRT_FILTER_OPTION,
+  MRT_FilterOption,
   MRT_Row,
   MRT_TableInstance,
   MRT_TableState,
@@ -33,14 +26,10 @@ import { MaterialReactTableProps } from '../MaterialReactTable';
 import { MRT_TablePaper } from './MRT_TablePaper';
 import { Box, Dialog, Grow } from '@mui/material';
 import {
-  createDataColumn,
-  createDisplayColumn,
-  createGroup,
+  prepareColumns,
   getAllLeafColumnDefs,
   getDefaultColumnOrderIds,
 } from '../utils';
-import { MRT_FilterFns } from '../filtersFns';
-import { MRT_SortingFns } from '../sortingFns';
 
 export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   props: MaterialReactTableProps<D>,
@@ -84,125 +73,112 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   );
 
   const [currentFilterFns, setCurrentFilterFns] = useState<{
-    [key: string]: MRT_FilterFn;
+    [key: string]: MRT_FilterOption;
   }>(() =>
     Object.assign(
       {},
-      ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef[]).map((c) => ({
-        [c.id as string]:
-          c.filterFn ??
-          initialState?.currentFilterFns?.[c.id] ??
-          (!!c.filterSelectOptions?.length ? 'equals' : 'fuzzy'),
-      })),
+      ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef<D>[]).map(
+        (col) => ({
+          [col.id?.toString() ?? col.accessorKey?.toString() ?? '']:
+            col.filterFn ??
+            initialState?.currentFilterFns?.[
+              col.id?.toString() ?? col.accessorKey?.toString() ?? ''
+            ] ??
+            (!!col.filterSelectOptions?.length ? 'equals' : 'fuzzy'),
+        }),
+      ),
     ),
   );
 
-  const [currentGlobalFilterFn, setCurrentGlobalFilterFn] = useState<
-    MRT_FILTER_OPTION | FilterFn<ReactTableGenerics> | string | number | symbol
-  >(props.globalFilterFn ?? 'fuzzy');
+  const [currentGlobalFilterFn, setCurrentGlobalFilterFn] =
+    useState<MRT_FilterOption>(
+      props.globalFilterFn instanceof String
+        ? (props.globalFilterFn as MRT_FilterOption)
+        : 'fuzzy',
+    );
 
-  const table = useMemo(
+  const displayColumns = useMemo(
     () =>
-      // @ts-ignore
-      createTable().setOptions({
-        filterFns: { ...filterFns, ...MRT_FilterFns, ...props.filterFns },
-        getCoreRowModel: getCoreRowModel(),
-        getExpandedRowModel: getExpandedRowModel(),
-        getFacetedRowModel: getFacetedRowModel(),
-        getFilteredRowModel: getFilteredRowModel(),
-        getGroupedRowModel: getGroupedRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
-        getSortedRowModel: getSortedRowModel(),
-        sortingFns: { ...sortingFns, ...MRT_SortingFns, ...props.sortingFns },
-      }) as Table<D>,
-    [],
+      (
+        [
+          columnOrder.includes('mrt-row-actions') && {
+            Cell: ({ cell }) => (
+              <MRT_ToggleRowActionMenuButton
+                row={cell.row as any}
+                table={table}
+              />
+            ),
+            columnDefType: 'display',
+            header: props.localization?.actions,
+            id: 'mrt-row-actions',
+            muiTableBodyCellProps: props.muiTableBodyCellProps,
+            muiTableHeadCellProps: props.muiTableHeadCellProps,
+            size: 70,
+          },
+          columnOrder.includes('mrt-expand') && {
+            Cell: ({ cell }) => (
+              <MRT_ExpandButton row={cell.row as any} table={table} />
+            ),
+            Header: () =>
+              props.enableExpandAll ? (
+                <MRT_ExpandAllButton table={table} />
+              ) : null,
+            columnDefType: 'display',
+            header: props.localization?.expand,
+            id: 'mrt-expand',
+            muiTableBodyCellProps: props.muiTableBodyCellProps,
+            muiTableHeadCellProps: props.muiTableHeadCellProps,
+            size: 60,
+          },
+          columnOrder.includes('mrt-select') && {
+            Cell: ({ cell }) => (
+              <MRT_SelectCheckbox row={cell.row as any} table={table} />
+            ),
+            Header: () =>
+              props.enableSelectAll ? (
+                <MRT_SelectCheckbox selectAll table={table} />
+              ) : null,
+            columnDefType: 'display',
+            header: props.localization?.select,
+            id: 'mrt-select',
+            muiTableBodyCellProps: props.muiTableBodyCellProps,
+            muiTableHeadCellProps: props.muiTableHeadCellProps,
+            size: 60,
+          },
+          columnOrder.includes('mrt-row-numbers') && {
+            Cell: ({ cell }) => cell.row.index + 1,
+            Header: () => props.localization?.rowNumber,
+            columnDefType: 'display',
+            header: props.localization?.rowNumbers,
+            id: 'mrt-row-numbers',
+            muiTableBodyCellProps: props.muiTableBodyCellProps,
+            muiTableHeadCellProps: props.muiTableHeadCellProps,
+            size: 60,
+          },
+        ] as MRT_ColumnDef<D>[]
+      ).filter(Boolean),
+    [
+      columnOrder,
+      props.editingMode,
+      props.enableEditing,
+      props.enableExpandAll,
+      props.enableExpanding,
+      props.enableGrouping,
+      props.enableRowActions,
+      props.enableRowNumbers,
+      props.enableRowSelection,
+      props.enableSelectAll,
+      props.localization,
+      props.muiTableBodyCellProps,
+      props.muiTableHeadCellProps,
+      props.positionActionsColumn,
+    ],
   );
 
-  const displayColumns = useMemo(() => {
-    return [
-      columnOrder.includes('mrt-row-actions') &&
-        createDisplayColumn(table, {
-          Cell: ({ cell }) => (
-            <MRT_ToggleRowActionMenuButton
-              row={cell.row as any}
-              instance={instance}
-            />
-          ),
-          header: props.localization?.actions,
-          id: 'mrt-row-actions',
-          muiTableBodyCellProps: props.muiTableBodyCellProps,
-          muiTableHeadCellProps: props.muiTableHeadCellProps,
-          size: 70,
-        }),
-      columnOrder.includes('mrt-expand') &&
-        createDisplayColumn(table, {
-          Cell: ({ cell }) => (
-            <MRT_ExpandButton row={cell.row as any} instance={instance} />
-          ),
-          Header: () =>
-            props.enableExpandAll ? (
-              <MRT_ExpandAllButton instance={instance} />
-            ) : null,
-          header: props.localization?.expand,
-          id: 'mrt-expand',
-          muiTableBodyCellProps: props.muiTableBodyCellProps,
-          muiTableHeadCellProps: props.muiTableHeadCellProps,
-          size: 60,
-        }),
-      columnOrder.includes('mrt-select') &&
-        createDisplayColumn(table, {
-          Cell: ({ cell }) => (
-            <MRT_SelectCheckbox row={cell.row as any} instance={instance} />
-          ),
-          Header: () =>
-            props.enableSelectAll ? (
-              <MRT_SelectCheckbox selectAll instance={instance} />
-            ) : null,
-          header: props.localization?.select,
-          id: 'mrt-select',
-          muiTableBodyCellProps: props.muiTableBodyCellProps,
-          muiTableHeadCellProps: props.muiTableHeadCellProps,
-          size: 60,
-        }),
-      columnOrder.includes('mrt-row-numbers') &&
-        createDisplayColumn(table, {
-          Cell: ({ cell }) => cell.row.index + 1,
-          Header: () => props.localization?.rowNumber,
-          header: props.localization?.rowNumbers,
-          id: 'mrt-row-numbers',
-          muiTableBodyCellProps: props.muiTableBodyCellProps,
-          muiTableHeadCellProps: props.muiTableHeadCellProps,
-          size: 60,
-        }),
-    ].filter(Boolean) as MRT_ColumnDef<D>[];
-  }, [
-    columnOrder,
-    props.editingMode,
-    props.enableEditing,
-    props.enableExpandAll,
-    props.enableExpanding,
-    props.enableGrouping,
-    props.enableRowActions,
-    props.enableRowNumbers,
-    props.enableRowSelection,
-    props.enableSelectAll,
-    props.localization,
-    props.muiTableBodyCellProps,
-    props.muiTableHeadCellProps,
-    props.positionActionsColumn,
-    table,
-  ]);
-
   const columns = useMemo(
-    () => [
-      ...displayColumns,
-      ...props.columns.map((column) =>
-        column.columns
-          ? createGroup(table, column as any, currentFilterFns)
-          : createDataColumn(table, column as any, currentFilterFns),
-      ),
-    ],
-    [table, props.columns, currentFilterFns],
+    () =>
+      prepareColumns([...displayColumns, ...props.columns], currentFilterFns),
+    [currentFilterFns, displayColumns, props.columns],
   );
 
   const data: D[] = useMemo(
@@ -213,8 +189,8 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
             Object.assign(
               {},
               ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef[]).map(
-                (c) => ({
-                  [c.id]: null,
+                (col) => ({
+                  [col.id ?? col.accessorKey]: null,
                 }),
               ),
             ),
@@ -224,15 +200,21 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   );
 
   //@ts-ignore
-  const instance = {
-    //@ts-ignore
-    ...useTableInstance(table, {
+  const table = {
+    ...useReactTable({
+      getCoreRowModel: getCoreRowModel(),
+      getExpandedRowModel: getExpandedRowModel(),
+      getFacetedRowModel: getFacetedRowModel(),
+      getFilteredRowModel: getFilteredRowModel(),
+      getGroupedRowModel: getGroupedRowModel(),
+      getPaginationRowModel: getPaginationRowModel(),
+      getSortedRowModel: getSortedRowModel(),
       onColumnOrderChange: setColumnOrder,
       ...props,
       //@ts-ignore
       columns,
       data,
-      getSubRows: (row) => (row as MRT_Row)?.subRows,
+      getSubRows: (row) => row?.subRows,
       //@ts-ignore
       globalFilterFn: currentGlobalFilterFn,
       initialState,
@@ -277,9 +259,9 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
         open={isFullScreen}
         transitionDuration={400}
       >
-        <MRT_TablePaper instance={instance} />
+        <MRT_TablePaper table={table} />
       </Dialog>
-      {!isFullScreen && <MRT_TablePaper instance={instance} />}
+      {!isFullScreen && <MRT_TablePaper table={table} />}
     </>
   );
 };

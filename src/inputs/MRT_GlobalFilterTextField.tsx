@@ -17,10 +17,10 @@ import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 import { MRT_TableInstance } from '..';
 
 interface Props {
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_GlobalFilterTextField: FC<Props> = ({ instance }) => {
+export const MRT_GlobalFilterTextField: FC<Props> = ({ table }) => {
   const {
     getState,
     setGlobalFilter,
@@ -31,8 +31,7 @@ export const MRT_GlobalFilterTextField: FC<Props> = ({ instance }) => {
       muiSearchTextFieldProps,
       tableId,
     },
-  } = instance;
-
+  } = table;
   const { globalFilter, showGlobalFilter } = getState();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -61,7 +60,7 @@ export const MRT_GlobalFilterTextField: FC<Props> = ({ instance }) => {
 
   const textFieldProps =
     muiSearchTextFieldProps instanceof Function
-      ? muiSearchTextFieldProps({ instance })
+      ? muiSearchTextFieldProps({ table })
       : muiSearchTextFieldProps;
 
   return (
@@ -111,7 +110,7 @@ export const MRT_GlobalFilterTextField: FC<Props> = ({ instance }) => {
       <MRT_FilterOptionMenu
         anchorEl={anchorEl}
         setAnchorEl={setAnchorEl}
-        instance={instance}
+        table={table}
       />
     </Collapse>
   );

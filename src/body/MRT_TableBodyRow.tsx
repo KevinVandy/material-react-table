@@ -7,18 +7,18 @@ import type { MRT_Row, MRT_TableInstance } from '..';
 interface Props {
   row: MRT_Row;
   rowIndex: number;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, instance }) => {
+export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
   const {
     getIsSomeColumnsPinned,
     options: { muiTableBodyRowProps, renderDetailPanel },
-  } = instance;
+  } = table;
 
   const tableRowProps =
     muiTableBodyRowProps instanceof Function
-      ? muiTableBodyRowProps({ row, instance })
+      ? muiTableBodyRowProps({ row, table })
       : muiTableBodyRowProps;
 
   return (
@@ -41,18 +41,18 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, instance }) => {
           ...(tableRowProps?.sx as any),
         })}
       >
-        {row.getVisibleCells().map((cell) => (
+        {row?.getVisibleCells()?.map?.((cell) => (
           <MRT_TableBodyCell
             cell={cell}
             key={cell.id}
             enableHover={tableRowProps?.hover !== false}
             rowIndex={rowIndex}
-            instance={instance}
+            table={table}
           />
         ))}
       </TableRow>
       {renderDetailPanel && !row.getIsGrouped() && (
-        <MRT_TableDetailPanel row={row} instance={instance} />
+        <MRT_TableDetailPanel row={row} table={table} />
       )}
     </>
   );

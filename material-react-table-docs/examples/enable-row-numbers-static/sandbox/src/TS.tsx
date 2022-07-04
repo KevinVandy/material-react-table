@@ -9,23 +9,23 @@ const Example: FC = () => {
         //column definitions...
         {
           header: 'First Name',
-          id: 'firstName',
+          accessorKey: 'firstName',
         },
         {
           header: 'Last Name',
-          id: 'lastName',
+          accessorKey: 'lastName',
         },
         {
           header: 'Address',
-          id: 'address',
+          accessorKey: 'address',
         },
         {
           header: 'City',
-          id: 'city',
+          accessorKey: 'city',
         },
         {
           header: 'State',
-          id: 'state',
+          accessorKey: 'state',
         },
         //end
       ] as MRT_ColumnDef<Person>[],

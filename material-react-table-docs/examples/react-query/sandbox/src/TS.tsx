@@ -67,23 +67,23 @@ const Example: FC = () => {
       [
         {
           header: 'First Name',
-          id: 'firstName',
+          accessorKey: 'firstName',
         },
         {
           header: 'Last Name',
-          id: 'lastName',
+          accessorKey: 'lastName',
         },
         {
           header: 'Address',
-          id: 'address',
+          accessorKey: 'address',
         },
         {
           header: 'State',
-          id: 'state',
+          accessorKey: 'state',
         },
         {
           header: 'Phone Number',
-          id: 'phoneNumber',
+          accessorKey: 'phoneNumber',
         },
       ] as MRT_ColumnDef<User>[],
     [],

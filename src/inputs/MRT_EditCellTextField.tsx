@@ -10,10 +10,10 @@ import type { MRT_Cell, MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
   cell: MRT_Cell;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_EditCellTextField: FC<Props> = ({ cell, instance }) => {
+export const MRT_EditCellTextField: FC<Props> = ({ cell, table }) => {
   const {
     getState,
     options: {
@@ -25,18 +25,16 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, instance }) => {
     },
     setCurrentEditingCell,
     setCurrentEditingRow,
-  } = instance;
+  } = table;
+  const { column, row } = cell;
+  const { columnDef } = column;
 
   const [value, setValue] = useState(cell.getValue());
 
-  const { column, row } = cell;
-
-  const { columnDef } = column;
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
-    columnDef.onCellEditChange?.({ event, cell, instance });
-    onCellEditChange?.({ event, cell, instance });
+    columnDef.onCellEditChange?.({ event, cell, table });
+    onCellEditChange?.({ event, cell, table });
   };
 
   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
@@ -46,20 +44,20 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, instance }) => {
       setCurrentEditingRow({ ...getState().currentEditingRow } as MRT_Row);
     }
     setCurrentEditingCell(null);
-    columnDef.onCellEditBlur?.({ event, cell, instance });
-    onCellEditBlur?.({ event, cell, instance });
+    columnDef.onCellEditBlur?.({ event, cell, table });
+    onCellEditBlur?.({ event, cell, table });
   };
 
   const mTableBodyCellEditTextFieldProps =
     muiTableBodyCellEditTextFieldProps instanceof Function
-      ? muiTableBodyCellEditTextFieldProps({ cell, instance })
+      ? muiTableBodyCellEditTextFieldProps({ cell, table })
       : muiTableBodyCellEditTextFieldProps;
 
   const mcTableBodyCellEditTextFieldProps =
     columnDef.muiTableBodyCellEditTextFieldProps instanceof Function
       ? columnDef.muiTableBodyCellEditTextFieldProps({
           cell,
-          instance,
+          table,
         })
       : columnDef.muiTableBodyCellEditTextFieldProps;
 
@@ -69,7 +67,7 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, instance }) => {
   };
 
   if (enableEditing && columnDef.enableEditing !== false && columnDef.Edit) {
-    return <>{columnDef.Edit?.({ cell, instance })}</>;
+    return <>{columnDef.Edit?.({ cell, table })}</>;
   }
 
   return (

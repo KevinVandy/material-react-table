@@ -7,10 +7,10 @@ import { MRT_TableInstance } from '..';
 
 interface Props {
   tableContainerRef: RefObject<HTMLDivElement>;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_Table: FC<Props> = ({ tableContainerRef, instance }) => {
+export const MRT_Table: FC<Props> = ({ tableContainerRef, table }) => {
   const {
     getState,
     options: {
@@ -21,13 +21,12 @@ export const MRT_Table: FC<Props> = ({ tableContainerRef, instance }) => {
       enableTableHead,
       muiTableProps,
     },
-  } = instance;
-
+  } = table;
   const { isFullScreen } = getState();
 
   const tableProps =
     muiTableProps instanceof Function
-      ? muiTableProps({ instance })
+      ? muiTableProps({ table })
       : muiTableProps;
 
   return (
@@ -42,12 +41,9 @@ export const MRT_Table: FC<Props> = ({ tableContainerRef, instance }) => {
         ...tableProps?.sx,
       }}
     >
-      {enableTableHead && <MRT_TableHead instance={instance} />}
-      <MRT_TableBody
-        tableContainerRef={tableContainerRef}
-        instance={instance}
-      />
-      {enableTableFooter && <MRT_TableFooter instance={instance} />}
+      {enableTableHead && <MRT_TableHead table={table} />}
+      <MRT_TableBody tableContainerRef={tableContainerRef} table={table} />
+      {enableTableFooter && <MRT_TableFooter table={table} />}
     </Table>
   );
 };

@@ -4,19 +4,18 @@ import { MRT_TableFooterRow } from './MRT_TableFooterRow';
 import type { MRT_TableInstance } from '..';
 
 interface Props {
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_TableFooter: FC<Props> = ({ instance }) => {
+export const MRT_TableFooter: FC<Props> = ({ table }) => {
   const {
     getFooterGroups,
-
     options: { muiTableFooterProps },
-  } = instance;
+  } = table;
 
   const tableFooterProps =
     muiTableFooterProps instanceof Function
-      ? muiTableFooterProps({ instance })
+      ? muiTableFooterProps({ table })
       : muiTableFooterProps;
 
   return (
@@ -25,7 +24,7 @@ export const MRT_TableFooter: FC<Props> = ({ instance }) => {
         <MRT_TableFooterRow
           footerGroup={footerGroup as any}
           key={footerGroup.id}
-          instance={instance}
+          table={table}
         />
       ))}
     </TableFooter>

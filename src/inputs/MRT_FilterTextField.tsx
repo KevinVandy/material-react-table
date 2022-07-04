@@ -21,13 +21,13 @@ import type { MRT_Header, MRT_TableInstance } from '..';
 interface Props {
   header: MRT_Header;
   inputIndex?: number;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
 export const MRT_FilterTextField: FC<Props> = ({
   header,
   inputIndex,
-  instance,
+  table,
 }) => {
   const {
     getState,
@@ -40,26 +40,23 @@ export const MRT_FilterTextField: FC<Props> = ({
       tableId,
     },
     setCurrentFilterFns,
-  } = instance;
-
+  } = table;
   const { column } = header;
-
   const { columnDef } = column;
-
   const { currentFilterFns } = getState();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const mTableHeadCellFilterTextFieldProps =
     muiTableHeadCellFilterTextFieldProps instanceof Function
-      ? muiTableHeadCellFilterTextFieldProps({ column, instance })
+      ? muiTableHeadCellFilterTextFieldProps({ column, table })
       : muiTableHeadCellFilterTextFieldProps;
 
   const mcTableHeadCellFilterTextFieldProps =
     columnDef.muiTableHeadCellFilterTextFieldProps instanceof Function
       ? columnDef.muiTableHeadCellFilterTextFieldProps({
           column,
-          instance,
+          table,
         })
       : columnDef.muiTableHeadCellFilterTextFieldProps;
 
@@ -121,21 +118,23 @@ export const MRT_FilterTextField: FC<Props> = ({
   };
 
   if (columnDef.Filter) {
-    return <>{columnDef.Filter?.({ header, instance })}</>;
+    return <>{columnDef.Filter?.({ header, table })}</>;
   }
 
   const filterId = `mrt-${tableId}-${header.id}-filter-text-field${
     inputIndex ?? ''
   }`;
-  const filterFn = currentFilterFns?.[header.id];
+  const currentFilterOption = currentFilterFns?.[header.id];
   const isSelectFilter = !!columnDef.filterSelectOptions;
-  const filterChipLabel =
-    !(filterFn instanceof Function) && ['empty', 'notEmpty'].includes(filterFn)
-      ? //@ts-ignore
-        localization[
-          `filter${filterFn.charAt(0).toUpperCase() + filterFn.slice(1)}`
-        ]
-      : '';
+  const filterChipLabel = ['empty', 'notEmpty'].includes(currentFilterOption)
+    ? //@ts-ignore
+      localization[
+        `filter${
+          currentFilterOption.charAt(0).toUpperCase() +
+          currentFilterOption.slice(1)
+        }`
+      ]
+    : '';
   const filterPlaceholder =
     inputIndex === undefined
       ? localization.filterByColumn?.replace(
@@ -175,26 +174,16 @@ export const MRT_FilterTextField: FC<Props> = ({
         helperText={
           showChangeModeButton ? (
             <label htmlFor={filterId}>
-              {filterFn instanceof Function
-                ? localization.filterMode.replace(
-                    '{filterType}',
-                    // @ts-ignore
-                    localization[
-                      `filter${
-                        filterFn.name.charAt(0).toUpperCase() +
-                        filterFn.name.slice(1)
-                      }`
-                    ] ?? '',
-                  ) ?? ''
-                : localization.filterMode.replace(
-                    '{filterType}',
-                    // @ts-ignore
-                    localization[
-                      `filter${
-                        filterFn.charAt(0).toUpperCase() + filterFn.slice(1)
-                      }`
-                    ],
-                  )}
+              {localization.filterMode.replace(
+                '{filterType}',
+                // @ts-ignore
+                localization[
+                  `filter${
+                    currentFilterOption.charAt(0).toUpperCase() +
+                    currentFilterOption.slice(1)
+                  }`
+                ],
+              )}
             </label>
           ) : null
         }
@@ -303,7 +292,7 @@ export const MRT_FilterTextField: FC<Props> = ({
         anchorEl={anchorEl}
         header={header}
         setAnchorEl={setAnchorEl}
-        instance={instance}
+        table={table}
       />
     </>
   );

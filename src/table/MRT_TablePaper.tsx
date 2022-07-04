@@ -8,15 +8,14 @@ import { MRT_TableContainer } from './MRT_TableContainer';
 import type { MRT_TableInstance } from '..';
 
 interface Props {
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_TablePaper: FC<Props> = ({ instance }) => {
+export const MRT_TablePaper: FC<Props> = ({ table }) => {
   const {
     getState,
     options: { enableToolbarBottom, enableToolbarTop, muiTablePaperProps },
-  } = instance;
-
+  } = table;
   const { isFullScreen } = getState();
 
   useEffect(() => {
@@ -31,7 +30,7 @@ export const MRT_TablePaper: FC<Props> = ({ instance }) => {
 
   const tablePaperProps =
     muiTablePaperProps instanceof Function
-      ? muiTablePaperProps({ instance })
+      ? muiTablePaperProps({ table })
       : muiTablePaperProps;
 
   return (
@@ -53,9 +52,9 @@ export const MRT_TablePaper: FC<Props> = ({ instance }) => {
           width: isFullScreen ? '100vw' : undefined,
         }}
       >
-        {enableToolbarTop && <MRT_ToolbarTop instance={instance} />}
-        <MRT_TableContainer instance={instance} />
-        {enableToolbarBottom && <MRT_ToolbarBottom instance={instance} />}
+        {enableToolbarTop && <MRT_ToolbarTop table={table} />}
+        <MRT_TableContainer table={table} />
+        {enableToolbarBottom && <MRT_ToolbarBottom table={table} />}
       </Paper>
     </DndProvider>
   );

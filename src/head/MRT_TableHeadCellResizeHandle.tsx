@@ -4,20 +4,15 @@ import { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
   header: MRT_Header;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_TableHeadCellResizeHandle: FC<Props> = ({
-  header,
-  instance,
-}) => {
-  const { getState } = instance;
-
+export const MRT_TableHeadCellResizeHandle: FC<Props> = ({ header, table }) => {
+  const { getState } = table;
   const { density, showFilters } = getState();
-
   const { column } = header;
-
-  const { columnDefType } = column;
+  const { columnDef } = column;
+  const { columnDefType } = columnDef;
 
   return (
     <Divider

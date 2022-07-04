@@ -7,10 +7,10 @@ import { commonToolbarStyles } from './MRT_ToolbarTop';
 import { MRT_TableInstance } from '..';
 
 interface Props {
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
-export const MRT_ToolbarBottom: FC<Props> = ({ instance }) => {
+export const MRT_ToolbarBottom: FC<Props> = ({ table }) => {
   const {
     getState,
     options: {
@@ -21,15 +21,14 @@ export const MRT_ToolbarBottom: FC<Props> = ({ instance }) => {
       renderToolbarBottomCustomActions,
       tableId,
     },
-  } = instance;
-
+  } = table;
   const { isFullScreen } = getState();
 
   const isMobile = useMediaQuery('(max-width:720px)');
 
   const toolbarProps =
     muiTableToolbarBottomProps instanceof Function
-      ? muiTableToolbarBottomProps({ instance })
+      ? muiTableToolbarBottomProps({ table })
       : muiTableToolbarBottomProps;
 
   const stackAlertBanner =
@@ -54,9 +53,9 @@ export const MRT_ToolbarBottom: FC<Props> = ({ instance }) => {
         } as any)
       }
     >
-      <MRT_LinearProgressBar alignTo="top" instance={instance} />
+      <MRT_LinearProgressBar alignTo="top" table={table} />
       {positionToolbarAlertBanner === 'bottom' && (
-        <MRT_ToolbarAlertBanner instance={instance} />
+        <MRT_ToolbarAlertBanner table={table} />
       )}
       <Box
         sx={{
@@ -67,7 +66,7 @@ export const MRT_ToolbarBottom: FC<Props> = ({ instance }) => {
       >
         {renderToolbarBottomCustomActions ? (
           <Box sx={{ p: '0.5rem' }}>
-            {renderToolbarBottomCustomActions({ instance })}
+            {renderToolbarBottomCustomActions({ table })}
           </Box>
         ) : (
           <span />
@@ -83,7 +82,7 @@ export const MRT_ToolbarBottom: FC<Props> = ({ instance }) => {
         >
           {enablePagination &&
             ['bottom', 'both'].includes(positionPagination ?? '') && (
-              <MRT_TablePagination instance={instance} position="bottom" />
+              <MRT_TablePagination table={table} position="bottom" />
             )}
         </Box>
       </Box>

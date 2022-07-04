@@ -8,14 +8,14 @@ interface Props {
   anchorEl: HTMLElement | null;
   isSubMenu?: boolean;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
 export const MRT_ShowHideColumnsMenu: FC<Props> = ({
   anchorEl,
   isSubMenu,
   setAnchorEl,
-  instance,
+  table,
 }) => {
   const {
     getAllColumns,
@@ -29,8 +29,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
     getState,
     toggleAllColumnsVisible,
     options: { localization, enablePinning, enableColumnOrdering },
-  } = instance;
-
+  } = table;
   const { density, columnOrder, columnPinning } = getState();
 
   const hideAllColumns = () => {
@@ -43,7 +42,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
     const columns = getAllColumns();
     if (
       columnOrder.length > 0 &&
-      !columns.some((col) => col.columnDefType === 'group')
+      !columns.some((col) => col.columnDef.columnDefType === 'group')
     ) {
       return [
         ...getLeftLeafColumns(),
@@ -91,8 +90,8 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
         {!isSubMenu && enableColumnOrdering && (
           <Button
             onClick={() =>
-              instance.setColumnOrder(
-                getDefaultColumnOrderIds(instance.options as any),
+              table.setColumnOrder(
+                getDefaultColumnOrderIds(table.options as any),
               )
             }
           >
@@ -102,7 +101,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
         {!isSubMenu && enablePinning && (
           <Button
             disabled={!getIsSomeColumnsPinned()}
-            onClick={() => instance.resetColumnPinning(true)}
+            onClick={() => table.resetColumnPinning(true)}
           >
             {localization.unpinAll}
           </Button>
@@ -121,7 +120,7 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
           column={column}
           isSubMenu={isSubMenu}
           key={`${index}-${column.id}`}
-          instance={instance}
+          table={table}
         />
       ))}
     </Menu>

@@ -15,23 +15,23 @@ export default meta;
 const columns = [
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Age',
-    id: 'age',
+    accessorKey: 'age',
   },
   {
     header: 'Address',
-    id: 'address',
+    accessorKey: 'address',
   },
   {
     header: 'Phone Number',
-    id: 'phoneNumber',
+    accessorKey: 'phoneNumber',
   },
 ];
 
@@ -94,13 +94,10 @@ export const CustomToolbarInternalActions: Story<
     data={data}
     enableRowSelection
     enableGrouping
-    renderToolbarInternalActions={({
-      instance,
-      MRT_FullScreenToggleButton,
-    }) => {
+    renderToolbarInternalActions={({ table, MRT_FullScreenToggleButton }) => {
       return (
         <>
-          <MRT_FullScreenToggleButton instance={instance} />
+          <MRT_FullScreenToggleButton table={table} />
         </>
       );
     }}
@@ -112,7 +109,7 @@ export const TableTitle: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableRowSelection
-    renderToolbarTopCustomActions={(instance) => {
+    renderToolbarTopCustomActions={(table) => {
       return <Typography variant="h4">Table Title</Typography>;
     }}
   />
@@ -123,7 +120,7 @@ export const CustomToolbarTopActions: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableRowSelection
-    renderToolbarTopCustomActions={(instance) => {
+    renderToolbarTopCustomActions={(table) => {
       const handleCreateNewUser = () => {
         prompt('Create new user modal');
       };
@@ -148,7 +145,7 @@ export const CustomToolbarBottomActions: Story<
     columns={columns}
     data={data}
     enableRowSelection
-    renderToolbarBottomCustomActions={(instance) => {
+    renderToolbarBottomCustomActions={(table) => {
       const handleCreateNewUser = () => {
         prompt('Create new user modal');
       };
@@ -173,21 +170,21 @@ export const CustomToolbarTopSelectionActions: Story<
     columns={columns}
     data={data}
     enableRowSelection
-    renderToolbarTopCustomActions={({ instance }) => {
+    renderToolbarTopCustomActions={({ table }) => {
       const handleDeactivate = () => {
-        instance.getSelectedRowModel().flatRows.map((row) => {
+        table.getSelectedRowModel().flatRows.map((row) => {
           alert('deactivating ' + row.original.firstName);
         });
       };
 
       const handleActivate = () => {
-        instance.getSelectedRowModel().flatRows.map((row) => {
+        table.getSelectedRowModel().flatRows.map((row) => {
           alert('activating ' + row.original.firstName);
         });
       };
 
       const handleContact = () => {
-        instance.getSelectedRowModel().flatRows.map((row) => {
+        table.getSelectedRowModel().flatRows.map((row) => {
           alert('contact ' + row.original.firstName);
         });
       };
@@ -196,7 +193,7 @@ export const CustomToolbarTopSelectionActions: Story<
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           <Button
             color="error"
-            disabled={instance.getSelectedRowModel().flatRows.length === 0}
+            disabled={table.getSelectedRowModel().flatRows.length === 0}
             onClick={handleDeactivate}
             variant="contained"
           >
@@ -204,7 +201,7 @@ export const CustomToolbarTopSelectionActions: Story<
           </Button>
           <Button
             color="success"
-            disabled={instance.getSelectedRowModel().flatRows.length === 0}
+            disabled={table.getSelectedRowModel().flatRows.length === 0}
             onClick={handleActivate}
             variant="contained"
           >
@@ -212,7 +209,7 @@ export const CustomToolbarTopSelectionActions: Story<
           </Button>
           <Button
             color="info"
-            disabled={instance.getSelectedRowModel().flatRows.length === 0}
+            disabled={table.getSelectedRowModel().flatRows.length === 0}
             onClick={handleContact}
             variant="contained"
           >
@@ -231,21 +228,21 @@ export const CustomToolbarBottomSelectionActions: Story<
     columns={columns}
     data={data}
     enableRowSelection
-    renderToolbarBottomCustomActions={({ instance }) => {
+    renderToolbarBottomCustomActions={({ table }) => {
       const handleDeactivate = () => {
-        instance.getSelectedRowModel().flatRows.map((row) => {
+        table.getSelectedRowModel().flatRows.map((row) => {
           alert('deactivating ' + row.original.firstName);
         });
       };
 
       const handleActivate = () => {
-        instance.getSelectedRowModel().flatRows.map((row) => {
+        table.getSelectedRowModel().flatRows.map((row) => {
           alert('activating ' + row.original.firstName);
         });
       };
 
       const handleContact = () => {
-        instance.getSelectedRowModel().flatRows.map((row) => {
+        table.getSelectedRowModel().flatRows.map((row) => {
           alert('contact ' + row.original.firstName);
         });
       };
@@ -254,7 +251,7 @@ export const CustomToolbarBottomSelectionActions: Story<
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           <Button
             color="error"
-            disabled={instance.getSelectedRowModel().flatRows.length === 0}
+            disabled={table.getSelectedRowModel().flatRows.length === 0}
             onClick={handleDeactivate}
             variant="contained"
           >
@@ -262,7 +259,7 @@ export const CustomToolbarBottomSelectionActions: Story<
           </Button>
           <Button
             color="success"
-            disabled={instance.getSelectedRowModel().flatRows.length === 0}
+            disabled={table.getSelectedRowModel().flatRows.length === 0}
             onClick={handleActivate}
             variant="contained"
           >
@@ -270,7 +267,7 @@ export const CustomToolbarBottomSelectionActions: Story<
           </Button>
           <Button
             color="info"
-            disabled={instance.getSelectedRowModel().flatRows.length === 0}
+            disabled={table.getSelectedRowModel().flatRows.length === 0}
             onClick={handleContact}
             variant="contained"
           >
@@ -288,7 +285,7 @@ export const ToolbarAlertBannerBottom: Story<MaterialReactTableProps> = () => (
     data={data}
     enableRowSelection
     positionToolbarAlertBanner="bottom"
-    renderToolbarTopCustomActions={({ instance }) => {
+    renderToolbarTopCustomActions={({ table }) => {
       const handleCreateNewUser = () => {
         prompt('Create new user modal');
       };
@@ -306,7 +303,7 @@ export const ToolbarAlertBannerBottom: Story<MaterialReactTableProps> = () => (
           <Tooltip arrow title="Remove Users">
             <span>
               <IconButton
-                disabled={instance.getSelectedRowModel().flatRows.length === 0}
+                disabled={table.getSelectedRowModel().flatRows.length === 0}
                 onClick={handleRemoveUsers}
               >
                 <DeleteIcon />
@@ -327,7 +324,7 @@ export const ToolbarAlertBannerBottomWithActionsAlsoBottom: Story<
     data={data}
     enableRowSelection
     positionToolbarAlertBanner="bottom"
-    renderToolbarBottomCustomActions={({ instance }) => {
+    renderToolbarBottomCustomActions={({ table }) => {
       const handleCreateNewUser = () => {
         prompt('Create new user modal');
       };
@@ -345,7 +342,7 @@ export const ToolbarAlertBannerBottomWithActionsAlsoBottom: Story<
           <Tooltip arrow title="Remove Users">
             <span>
               <IconButton
-                disabled={instance.getSelectedRowModel().flatRows.length === 0}
+                disabled={table.getSelectedRowModel().flatRows.length === 0}
                 onClick={handleRemoveUsers}
               >
                 <DeleteIcon />

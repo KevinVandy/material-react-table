@@ -17,14 +17,14 @@ interface Props {
   allColumns: MRT_Column[];
   column: MRT_Column;
   isSubMenu?: boolean;
-  instance: MRT_TableInstance;
+  table: MRT_TableInstance;
 }
 
 export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
   allColumns,
   column,
   isSubMenu,
-  instance,
+  table,
 }) => {
   const {
     getState,
@@ -35,11 +35,10 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
       localization,
     },
     setColumnOrder,
-  } = instance;
-
+  } = table;
   const { columnOrder } = getState();
-
-  const { columnDef, columnDefType } = column;
+  const { columnDef } = column;
+  const { columnDefType } = columnDef;
 
   const [, dropRef] = useDrop({
     accept: 'column',
@@ -94,11 +93,13 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
         >
           {columnDefType !== 'group' &&
             enableColumnOrdering &&
-            !allColumns.some((col) => col.columnDefType === 'group') &&
+            !allColumns.some(
+              (col) => col.columnDef.columnDefType === 'group',
+            ) &&
             (columnDef.enableColumnOrdering !== false ? (
               <MRT_GrabHandleButton
                 ref={dragRef as Ref<HTMLButtonElement>}
-                instance={instance}
+                table={table}
               />
             ) : (
               <Box sx={{ width: '28px' }} />
@@ -106,7 +107,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
           {enablePinning &&
             !isSubMenu &&
             (column.getCanPin() ? (
-              <MRT_ColumnPinningButtons column={column} instance={instance} />
+              <MRT_ColumnPinningButtons column={column} table={table} />
             ) : (
               <Box sx={{ width: '70px' }} />
             ))}
@@ -152,7 +153,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
           key={`${i}-${c.id}`}
           column={c}
           isSubMenu={isSubMenu}
-          instance={instance}
+          table={table}
         />
       ))}
     </>

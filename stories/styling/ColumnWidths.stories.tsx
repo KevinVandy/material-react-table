@@ -12,27 +12,27 @@ export default meta;
 const columns = [
   {
     header: 'ID',
-    id: 'id',
+    accessorKey: 'id',
     size: 50,
   },
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
     size: 300,
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
     size: 100,
   },
   {
     header: 'Age',
-    id: 'age',
+    accessorKey: 'age',
     size: 50,
   },
   {
     header: 'Address',
-    id: 'address',
+    accessorKey: 'address',
   },
 ];
 const data = [...Array(21)].map(() => ({

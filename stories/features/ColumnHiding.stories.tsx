@@ -12,31 +12,31 @@ export default meta;
 const columns = [
   {
     header: 'First Name',
-    id: 'firstName',
+    accessorKey: 'firstName',
   },
   {
     header: 'Last Name',
-    id: 'lastName',
+    accessorKey: 'lastName',
   },
   {
     header: 'Address',
-    id: 'address',
+    accessorKey: 'address',
   },
   {
     header: 'State',
-    id: 'state',
+    accessorKey: 'state',
   },
   {
     header: 'Zip',
-    id: 'zip',
+    accessorKey: 'zip',
   },
   {
     header: 'Email Address',
-    id: 'email',
+    accessorKey: 'email',
   },
   {
     header: 'Phone Number',
-    id: 'phoneNumber',
+    accessorKey: 'phoneNumber',
   },
 ];
 
@@ -88,33 +88,33 @@ export const ColumnHidingDisabledPerColumn: Story<
     columns={[
       {
         header: 'First Name',
-        id: 'firstName',
+        accessorKey: 'firstName',
         enableHiding: false,
       },
       {
         header: 'Last Name',
-        id: 'lastName',
+        accessorKey: 'lastName',
         enableHiding: false,
       },
       {
         header: 'Address',
-        id: 'address',
+        accessorKey: 'address',
       },
       {
         header: 'State',
-        id: 'state',
+        accessorKey: 'state',
       },
       {
         header: 'Zip',
-        id: 'zip',
+        accessorKey: 'zip',
       },
       {
         header: 'Email Address',
-        id: 'email',
+        accessorKey: 'email',
       },
       {
         header: 'Phone Number',
-        id: 'phoneNumber',
+        accessorKey: 'phoneNumber',
       },
     ]}
     data={data}
@@ -128,47 +128,47 @@ export const ColumnHidingWithHeaderGroups: Story<
     columns={[
       {
         header: 'Name',
-        id: 'name',
+        accessorKey: 'name',
         columns: [
           {
             header: 'First Name',
-            id: 'firstName',
+            accessorKey: 'firstName',
           },
           {
             header: 'Last Name',
-            id: 'lastName',
+            accessorKey: 'lastName',
           },
         ],
       },
       {
         header: 'Mailing Info',
-        id: 'mailingInfo',
+        accessorKey: 'mailingInfo',
         columns: [
           {
             header: 'Address',
-            id: 'address',
+            accessorKey: 'address',
           },
           {
             header: 'State',
-            id: 'state',
+            accessorKey: 'state',
           },
           {
             header: 'Zip',
-            id: 'zip',
+            accessorKey: 'zip',
           },
         ],
       },
       {
         header: 'Contact Info',
-        id: 'contactInfo',
+        accessorKey: 'contactInfo',
         columns: [
           {
             header: 'Email Address',
-            id: 'email',
+            accessorKey: 'email',
           },
           {
             header: 'Phone Number',
-            id: 'phoneNumber',
+            accessorKey: 'phoneNumber',
           },
         ],
       },
