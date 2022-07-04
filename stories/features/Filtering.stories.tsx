@@ -228,22 +228,6 @@ export const FilteringDisabledForCertainColumns: Story<
   />
 );
 
-export const CustomFilterFunctions: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    initialState={{ showFilters: true }}
-    // filterFns={{
-    //   fuzzy: (row, columnId, value, addMeta) => {
-    //     console.info('fuzzy');
-    //   },
-    //   contains: (row, columnId, value, addMeta) => {
-    //     console.info('contains');
-    //   },
-    // }}
-  />
-);
-
 export const CustomFilterFunctionPerColumn: Story<
   MaterialReactTableProps
 > = () => (

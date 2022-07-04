@@ -8,7 +8,10 @@ interface Props {
 }
 
 export const MRT_TableHeadCellResizeHandle: FC<Props> = ({ header, table }) => {
-  const { getState } = table;
+  const {
+    getState,
+    options: { columnResizeMode },
+  } = table;
   const { density, showFilters } = getState();
   const { column } = header;
   const { columnDef } = column;
@@ -41,7 +44,10 @@ export const MRT_TableHeadCellResizeHandle: FC<Props> = ({ header, table }) => {
       onTouchStart={header.getResizeHandler()}
       style={{
         transform: column.getIsResizing()
-          ? `translateX(${getState().columnSizingInfo.deltaOffset}px)`
+          ? `translateX(${
+              (getState().columnSizingInfo.deltaOffset ?? 0) /
+              (columnResizeMode === 'onChange' ? 16 : 1)
+            }px)`
           : 'none',
       }}
     />

@@ -134,7 +134,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
         right:
           column.getIsPinned() === 'right' ? `${getTotalRight()}px` : undefined,
         transition: `all ${enableColumnResizing ? 0 : '0.2s'} ease-in-out`,
-        userSelect: enableMultiSort ? 'none' : undefined,
+        userSelect: enableMultiSort && column.getCanSort() ? 'none' : undefined,
         verticalAlign:
           columnDefType === 'display' && showFilters ? 'center' : 'text-top',
         zIndex: column.getIsResizing()

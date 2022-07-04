@@ -8,6 +8,11 @@ import {
 } from '.';
 import { MRT_FilterFns } from './filtersFns';
 
+const getColumnId = <D extends Record<string, any> = {}>(
+  columnDef: MRT_ColumnDef<D>,
+): string =>
+  columnDef.id ?? columnDef.accessorKey?.toString?.() ?? columnDef.header;
+
 export const getAllLeafColumnDefs = <D extends Record<string, any> = {}>(
   columns: MRT_ColumnDef<D>[],
 ): MRT_ColumnDef<D>[] => {
@@ -31,8 +36,7 @@ export const prepareColumns = <D extends Record<string, any> = {}>(
   currentFilterFns: { [key: string]: MRT_FilterOption },
 ): MRT_DefinedColumnDef<D>[] =>
   columnDefs.map((columnDef) => {
-    if (!columnDef.id)
-      columnDef.id = columnDef.accessorKey?.toString() ?? columnDef.header;
+    if (!columnDef.id) columnDef.id = getColumnId(columnDef);
     if (process.env.NODE_ENV !== 'production' && !columnDef.id) {
       console.error(
         'Column definitions must have a valid `accessorKey` or `id` property',
@@ -93,6 +97,8 @@ export const getDefaultColumnOrderIds = <D extends Record<string, any> = {}>(
 ) =>
   [
     ...getLeadingDisplayColumnIds(props),
-    ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef[]).map((c) => c.id),
+    ...getAllLeafColumnDefs(props.columns).map((columnDef) =>
+      getColumnId(columnDef),
+    ),
     ...getTrailingDisplayColumnIds(props),
   ].filter(Boolean) as string[];

@@ -30,6 +30,7 @@ import {
   getAllLeafColumnDefs,
   getDefaultColumnOrderIds,
 } from '../utils';
+import { MRT_FilterFns } from '../filtersFns';
 
 export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   props: MaterialReactTableProps<D>,
@@ -218,7 +219,8 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       data,
       getSubRows: (row) => row?.subRows,
       //@ts-ignore
-      globalFilterFn: currentGlobalFilterFn,
+      globalFilterFn:
+        MRT_FilterFns[currentGlobalFilterFn] ?? MRT_FilterFns.fuzzy,
       initialState,
       state: {
         columnOrder,
