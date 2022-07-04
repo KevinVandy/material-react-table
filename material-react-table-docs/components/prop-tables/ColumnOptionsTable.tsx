@@ -10,9 +10,9 @@ const ColumnOptionsTable = () => {
     () =>
       [
         {
+          accessorKey: 'columnOption',
           enableClickToCopy: true,
           header: 'Column Option',
-          accessorKey: 'columnOption',
           Cell: ({ cell }) =>
             cell.row.original?.required ? (
               <strong style={{ color: theme.palette.primary.dark }}>
@@ -22,22 +22,22 @@ const ColumnOptionsTable = () => {
               cell.getValue()
             ),
         },
-        { header: 'Type', accessorKey: 'type', enableGlobalFilter: false },
+        { accessorKey: 'type', header: 'Type', enableGlobalFilter: false },
         {
-          header: 'Required',
           accessorKey: 'required',
           enableGlobalFilter: false,
+          header: 'Required',
         },
         {
-          header: 'Default Value',
           accessorKey: 'defaultValue',
           enableGlobalFilter: false,
+          header: 'Default Value',
         },
         {
-          header: 'More Info Links',
           accessorKey: 'link',
           disableFilters: true,
           enableGlobalFilter: false,
+          header: 'More Info Links',
           Cell: ({ cell }) => (
             <Link href={cell.getValue() as string} target="_blank">
               {cell.row.original?.linkText}
@@ -45,11 +45,11 @@ const ColumnOptionsTable = () => {
           ),
         },
         {
-          header: 'Description',
           accessorKey: 'description',
           enableGlobalFilter: false,
+          header: 'Description',
         },
-        { header: 'Source', accessorKey: 'source', enableGlobalFilter: false },
+        { accessorKey: 'source', header: 'Source', enableGlobalFilter: false },
       ] as MRT_ColumnDef<ColumnOption>[],
     [theme],
   );
@@ -68,8 +68,8 @@ const ColumnOptionsTable = () => {
         density: 'compact',
         showGlobalFilter: true,
         sorting: [
-          { accessorKey: 'required', desc: true },
-          { accessorKey: 'columnOption', desc: false },
+          { id: 'required', desc: true },
+          { id: 'columnOption', desc: false },
         ],
         columnPinning: { left: ['mrt-row-numbers', 'columnOption'], right: [] },
       }}

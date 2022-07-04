@@ -78,8 +78,8 @@ const RootPropTable = () => {
         density: 'compact',
         showGlobalFilter: true,
         sorting: [
-          { accessorKey: 'required', desc: true },
-          { accessorKey: 'propName', desc: false },
+          { id: 'required', desc: true },
+          { id: 'propName', desc: false },
         ],
         columnPinning: { left: ['mrt-row-numbers', 'propName'], right: [] },
       }}

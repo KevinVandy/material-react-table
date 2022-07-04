@@ -7,31 +7,31 @@ const Example: FC = () => {
       [
         //column definitions...
         {
-          header: 'First Name',
           accessorKey: 'firstName',
+          header: 'First Name',
         },
         {
-          header: 'Last Name',
           accessorKey: 'lastName',
+          header: 'Last Name',
         },
         {
-          header: 'Age',
           accessorKey: 'age',
+          header: 'Age',
         },
         {
-          header: 'Address',
           accessorKey: 'address',
+          header: 'Address',
         },
         {
-          header: 'City',
           accessorKey: 'city',
+          header: 'City',
         },
         {
-          header: 'State',
           accessorKey: 'state',
+          header: 'State',
         },
         //end
-      ] as MRT_ColumnDef[],
+      ] as MRT_ColumnDef<typeof data[0]>[],
     [],
   );
 

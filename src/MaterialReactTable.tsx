@@ -35,7 +35,6 @@ import {
   OnChangeFn,
   Row,
   SortingFn,
-  SortingFnOption,
   Table,
   TableOptions,
   TableState,
@@ -45,6 +44,9 @@ import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_TableRoot } from './table/MRT_TableRoot';
 import { MRT_FilterFns } from './filtersFns';
+import { MRT_SortingFns } from './sortingFns';
+
+type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
 
 export type MRT_TableOptions<D extends Record<string, any> = {}> = Partial<
   Omit<
@@ -206,7 +208,7 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
    *
    * @example accessorKey: 'username'
    */
-  accessorKey?: keyof D;
+  accessorKey?: LiteralUnion<string & keyof D>;
   /**
    * Specify what type of column this is. Either `data`, `display`, or `group`. Defaults to `data`.
    * Leave this blank if you are just creating a normal data column.
@@ -222,19 +224,21 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
   enableColumnFilterChangeMode?: boolean;
   enableColumnOrdering?: boolean;
   enableEditing?: boolean;
-  enabledColumnFilterOptions?: (MRT_FilterOption | string)[] | null;
+  enabledColumnFilterOptions?: MRT_FilterOption[] | null;
   filterFn?: MRT_FilterFn<D>;
   filterSelectOptions?: (string | { text: string; value: string })[];
   footer?: string;
   header: string;
   /**
    * Either an `accessorKey` or a combination of an `accessorFn` and `id` are required for a data column definition.
+   *
    * If you have also specified an `accessorFn`, MRT still needs to have a valid `id` to be able to identify the column uniquely.
+   *
    * `id` defaults to the `accessorKey` or `header` if not specified.
    *
    * @default gets set to the same value as `accessorKey` by default
    */
-  id?: string;
+  id?: LiteralUnion<string & keyof D>;
   muiTableBodyCellCopyButtonProps?:
     | ButtonProps
     | (({
@@ -330,7 +334,7 @@ export type MRT_Column<D extends Record<string, any> = {}> = Omit<
   Column<D>,
   'header' | 'footer' | 'columns' | 'columnDef' | 'filterFn'
 > & {
-  columnDef: MRT_ColumnDef<D>;
+  columnDef: MRT_DefinedColumnDef<D>;
   columns?: MRT_Column<D>[];
   filterFn?: MRT_FilterFn<D>;
   footer: string;
@@ -370,9 +374,7 @@ export type MRT_Cell<D extends Record<string, any> = {}> = Omit<
   row: MRT_Row<D>;
 };
 
-export type MRT_SortingOption<D extends Record<string, any> = {}> =
-  | SortingFnOption<D>
-  | 'fuzzy';
+export type MRT_SortingOption = keyof typeof MRT_SortingFns;
 
 export type MRT_SortingFn<D extends Record<string, any> = {}> =
   | SortingFn<D>

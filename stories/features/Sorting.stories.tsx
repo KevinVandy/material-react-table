@@ -111,5 +111,6 @@ export const SortRanking: Story<MaterialReactTableProps> = () => (
     ]}
     data={data}
     enableRowNumbers
+    initialState={{ sorting: [{ id: 'firstName', desc: false }] }}
   />
 );

@@ -6,27 +6,27 @@ const Example = () => {
   const columns = useMemo(
     () => [
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
       //column definitions...
       {
-        header: 'Address',
         accessorKey: 'address',
+        header: 'Address',
       },
       {
-        header: 'City',
         accessorKey: 'city',
+        header: 'City',
       },
       //end
       {
-        header: 'State',
         accessorKey: 'state',
-        enableColumnOrdering: false, //disable column ordering for this column
+        enableColumnOrdering: false, //disable column ordering for this column,
+        header: 'State'
       },
     ],
     [],

@@ -5,17 +5,17 @@ const Example = () => {
   const columns = useMemo(
     () => [
       {
-        header: 'ID',
         accessorKey: 'id',
         enableColumnActions: false,
+        header: 'ID',
       },
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
     ],
     [],

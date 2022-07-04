@@ -7,36 +7,36 @@ const Example: FC = () => {
     () =>
       [
         {
-          header: 'ID',
           accessorKey: 'id',
           enablePinning: false, //disable column pinning for this column
+          header: 'ID',
           size: 50,
         },
         {
-          header: 'First Name',
           accessorKey: 'firstName',
+          header: 'First Name',
         },
         {
-          header: 'Middle Name',
           accessorKey: 'middleName',
+          header: 'Middle Name',
         },
         {
-          header: 'Last Name',
           accessorKey: 'lastName',
+          header: 'Last Name',
         },
         {
-          header: 'Address',
           accessorKey: 'address',
+          header: 'Address',
           size: 300,
         },
         {
+          accessorKey: 'city', //this column gets pinned to the right by default because of the initial state,
           header: 'City',
-          accessorKey: 'city', //this column gets pinned to the right by default because of the initial state
         },
 
         {
+          accessorKey: 'state', //this column gets pinned left by default because of the the initial state,
           header: 'State',
-          accessorKey: 'state', //this column gets pinned left by default because of the the initial state
         },
       ] as MRT_ColumnDef<Person>[],
     [],

@@ -6,24 +6,24 @@ import { esES } from '@mui/material/locale';
 
 const columns = [
   {
-    header: 'Primer nombre',
     accessorKey: 'firstName',
+    header: 'Primer nombre',
   },
   {
-    header: 'Apellido',
     accessorKey: 'lastName',
+    header: 'Apellido',
   },
   {
-    header: 'Dirección',
     accessorKey: 'address',
+    header: 'Dirección',
   },
   {
-    header: 'Ciudad',
     accessorKey: 'city',
+    header: 'Ciudad',
   },
   {
-    header: 'Estado',
     accessorKey: 'state',
+    header: 'Estado',
   },
 ];
 

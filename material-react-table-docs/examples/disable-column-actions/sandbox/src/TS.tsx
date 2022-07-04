@@ -6,19 +6,19 @@ const Example: FC = () => {
     () =>
       [
         {
-          header: 'ID',
           accessorKey: 'id',
           enableColumnActions: false,
+          header: 'ID',
         },
         {
-          header: 'First Name',
           accessorKey: 'firstName',
+          header: 'First Name',
         },
         {
-          header: 'Last Name',
           accessorKey: 'lastName',
+          header: 'Last Name',
         },
-      ] as MRT_ColumnDef[],
+      ] as MRT_ColumnDef<typeof data[0]>[],
     [],
   );
 

@@ -5,7 +5,11 @@ export const routes = [
   },
   {
     href: '/about',
-    label: 'About',
+    label: 'About & FAQ',
+  },
+  {
+    href: '/changelog',
+    label: 'Changelog & Roadmap',
   },
   {
     label: 'Getting Started',

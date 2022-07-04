@@ -7,6 +7,7 @@ import {
   MRT_FilterOption,
 } from '.';
 import { MRT_FilterFns } from './filtersFns';
+import { MRT_SortingFns } from './sortingFns';
 
 const getColumnId = <D extends Record<string, any> = {}>(
   columnDef: MRT_ColumnDef<D>,
@@ -46,12 +47,15 @@ export const prepareColumns = <D extends Record<string, any> = {}>(
     if (!!columnDef.columns?.length) {
       columnDef.columnDefType = 'group';
       columnDef.columns = prepareColumns(columnDef.columns, currentFilterFns);
-    } else if (
-      columnDef.columnDefType === 'data' &&
-      Object.keys(MRT_FilterFns).includes(currentFilterFns[columnDef.id])
-    ) {
-      columnDef.filterFn =
-        MRT_FilterFns[currentFilterFns[columnDef.id]] ?? MRT_FilterFns.fuzzy;
+    } else if (columnDef.columnDefType === 'data') {
+      if (Object.keys(MRT_FilterFns).includes(currentFilterFns[columnDef.id])) {
+        columnDef.filterFn =
+          MRT_FilterFns[currentFilterFns[columnDef.id]] ?? MRT_FilterFns.fuzzy;
+      }
+      if (Object.keys(MRT_SortingFns).includes(columnDef.sortingFn as string)) {
+        // @ts-ignore
+        columnDef.sortingFn = MRT_SortingFns[columnDef.sortingFn];
+      }
     }
     return columnDef;
   }) as MRT_DefinedColumnDef<D>[];

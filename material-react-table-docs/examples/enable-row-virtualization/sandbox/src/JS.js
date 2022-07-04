@@ -9,52 +9,52 @@ const Example = () => {
     //column definitions...
     () => [
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
         size: 150,
       },
       {
-        header: 'Middle Name',
         accessorKey: 'middleName',
+        header: 'Middle Name',
         size: 150,
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
         size: 150,
       },
       {
-        header: 'Email Address',
         accessorKey: 'email',
+        header: 'Email Address',
         size: 300,
       },
       {
-        header: 'Phone Number',
         accessorKey: 'phoneNumber',
+        header: 'Phone Number',
       },
       {
-        header: 'Address',
         accessorKey: 'address',
+        header: 'Address',
       },
       {
-        header: 'Zip Code',
         accessorKey: 'zipCode',
+        header: 'Zip Code',
       },
       {
-        header: 'City',
         accessorKey: 'city',
+        header: 'City',
       },
       {
-        header: 'State',
         accessorKey: 'state',
+        header: 'State',
       },
       {
-        header: 'Country',
         accessorKey: 'country',
+        header: 'Country',
       },
       {
-        header: 'Pet Name',
         accessorKey: 'petName',
+        header: 'Pet Name',
       },
     ],
     [],

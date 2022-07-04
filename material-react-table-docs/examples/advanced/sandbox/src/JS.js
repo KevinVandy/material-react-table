@@ -8,39 +8,33 @@ const Example = () => {
   const columns = useMemo(
     () => [
       {
+        id: 'employee', //id used to define `group` column
         header: 'Employee',
-        accessorKey: 'employee',
         columns: [
           {
-            header: 'First Name',
-            accessorKey: 'firstName',
+            accessorKey: 'firstName', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
             enableClickToCopy: false,
-            width: 60,
+            header: 'First Name',
           },
           {
-            header: 'Last Name',
             accessorKey: 'lastName',
             enableClickToCopy: false,
+            header: 'Last Name',
             width: 60,
           },
           {
-            header: 'Email',
             accessorKey: 'email',
+            header: 'Email',
           },
         ],
       },
       {
+        id: 'jobInfo',
         header: 'Job Info',
-        accessorKey: 'jobInfo',
         columns: [
           {
-            header: 'Job Title',
-            accessorKey: 'jobTitle',
-            width: 250,
-          },
-          {
-            header: 'Salary',
             accessorKey: 'salary',
+            header: 'Salary',
             //custom conditional format and styling
             Cell: ({ cell }) => (
               <Box
@@ -69,14 +63,20 @@ const Example = () => {
             enableEditing: true,
           },
           {
+            accessorKey: 'jobTitle',
+            header: 'Job Title',
+            width: 250,
+          },
+          {
             Cell: ({ cell }) => cell.getValue().toLocaleDateString(), //transform data to readable format for cell render
-            Header: <em>Start Date</em>, //custom header markup
+            Header: () => <em>Start Date</em>, //custom header markup
             accessorFn: (row) => new Date(row.startDate), //transform data before processing so sorting works
-            header: 'Start Date',
             accessorKey: 'startDate',
+            header: 'Start Date',
             muiTableHeadCellFilterTextFieldProps: {
               type: 'date',
             },
+            sortingFn: 'datetime',
           },
         ],
       },
@@ -104,6 +104,7 @@ const Example = () => {
       enableRowActions
       enableRowSelection
       onEditRowSubmit={handleSaveRow}
+      positionToolbarAlertBanner="bottom"
       renderDetailPanel={({ row }) => (
         <div
           style={{

@@ -1,5 +1,5 @@
 {
-  "version": "0.18.1",
+  "version": "0.19.0",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI implementation of TanStack React Table, inspired by material-table and the MUI X DataGrid, written from the ground up in TypeScript.",
