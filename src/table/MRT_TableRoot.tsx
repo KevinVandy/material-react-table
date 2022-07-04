@@ -80,11 +80,13 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef<D>[]).map(
         (col) => ({
           [col.id?.toString() ?? col.accessorKey?.toString() ?? '']:
-            col.filterFn ??
-            initialState?.currentFilterFns?.[
-              col.id?.toString() ?? col.accessorKey?.toString() ?? ''
-            ] ??
-            (!!col.filterSelectOptions?.length ? 'equals' : 'fuzzy'),
+            col.filterFn instanceof Function
+              ? col.filterFn.name ?? 'custom'
+              : col.filterFn ??
+                initialState?.currentFilterFns?.[
+                  col.id?.toString() ?? col.accessorKey?.toString() ?? ''
+                ] ??
+                (!!col.filterSelectOptions?.length ? 'equals' : 'fuzzy'),
         }),
       ),
     ),
@@ -175,7 +177,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     ],
   );
 
-  const columns = useMemo(
+  const columnDefs = useMemo(
     () =>
       prepareColumns([...displayColumns, ...props.columns], currentFilterFns),
     [currentFilterFns, displayColumns, props.columns],
@@ -190,7 +192,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
               {},
               ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef[]).map(
                 (col) => ({
-                  [col.id ?? col.accessorKey]: null,
+                  [col.id ?? col.accessorKey ?? '']: null,
                 }),
               ),
             ),
@@ -212,7 +214,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
       onColumnOrderChange: setColumnOrder,
       ...props,
       //@ts-ignore
-      columns,
+      columns: columnDefs,
       data,
       getSubRows: (row) => row?.subRows,
       //@ts-ignore

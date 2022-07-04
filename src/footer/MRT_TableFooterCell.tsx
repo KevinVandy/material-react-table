@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { alpha, TableCell } from '@mui/material';
 import type { MRT_Header, MRT_TableInstance } from '..';
-import { flexRender } from '@tanstack/react-table';
 
 interface Props {
   footer: MRT_Header;
@@ -70,7 +69,6 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, table }) => {
                 })
               : columnDef.Footer) ??
             columnDef.footer ??
-            flexRender(columnDef.footer, footer.getContext()) ??
             null}
       </>
     </TableCell>

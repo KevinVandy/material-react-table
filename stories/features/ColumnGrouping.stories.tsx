@@ -33,7 +33,7 @@ const columns = [
     header: 'State',
     accessorKey: 'state',
   },
-] as MRT_ColumnDef[];
+] as MRT_ColumnDef<typeof data[0]>[];
 
 const data = [...Array(200)].map(() => ({
   firstName: faker.name.firstName(),
@@ -45,6 +45,40 @@ const data = [...Array(200)].map(() => ({
 
 export const ColumnGroupingEnabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableGrouping />
+);
+
+export const ColumnGroupingEnabledCustomAggregate: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        accessorKey: 'firstName',
+      },
+      {
+        header: 'Last Name',
+        accessorKey: 'lastName',
+      },
+      {
+        header: 'Gender',
+        accessorKey: 'gender',
+        AggregatedCell: ({ cell }) => (
+          <div style={{ color: 'red' }}>{cell.renderValue() as string}</div>
+        ),
+      },
+      {
+        header: 'City',
+        accessorKey: 'city',
+      },
+      {
+        header: 'State',
+        accessorKey: 'state',
+      },
+    ]}
+    data={data}
+    enableGrouping
+  />
 );
 
 export const ColumnGroupingBannerOnBottom: Story<

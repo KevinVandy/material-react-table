@@ -7,7 +7,6 @@ import { MRT_TableHeadCellResizeHandle } from './MRT_TableHeadCellResizeHandle';
 import { MRT_TableHeadCellSortLabel } from './MRT_TableHeadCellSortLabel';
 import { MRT_TableHeadCellColumnActionsButton } from './MRT_TableHeadCellColumnActionsButton';
 import type { MRT_Header, MRT_TableInstance } from '..';
-import { flexRender } from '@tanstack/react-table';
 
 interface Props {
   dragRef?: Ref<HTMLButtonElement>;
@@ -62,9 +61,7 @@ export const MRT_TableHeadCell: FC<Props> = ({
         header,
         table,
       })
-    : columnDef?.Header) ??
-    flexRender(columnDef.header, header.getContext()) ??
-    columnDef.header) as ReactNode;
+    : columnDef?.Header) ?? columnDef.header) as ReactNode;
 
   const getIsLastLeftPinnedColumn = () => {
     return (

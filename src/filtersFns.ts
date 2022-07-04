@@ -1,9 +1,8 @@
 import { rankItem, rankings, RankingInfo } from '@tanstack/match-sorter-utils';
-import { filterFns } from '@tanstack/react-table';
-import { MRT_Row } from '.';
+import { filterFns, Row } from '@tanstack/react-table';
 
-export const fuzzy = (
-  row: MRT_Row,
+export const fuzzy = <D extends Record<string, any> = {}>(
+  row: Row<D>,
   columnId: string,
   filterValue: string,
   addMeta: (item: RankingInfo) => void,
@@ -17,8 +16,8 @@ export const fuzzy = (
 
 fuzzy.autoRemove = (val: any) => !val;
 
-export const contains = (
-  row: MRT_Row,
+export const contains = <D extends Record<string, any> = {}>(
+  row: Row<D>,
   id: string,
   filterValue: string | number,
 ) =>
@@ -31,8 +30,8 @@ export const contains = (
 
 contains.autoRemove = (val: any) => !val;
 
-export const startsWith = (
-  row: MRT_Row,
+export const startsWith = <D extends Record<string, any> = {}>(
+  row: Row<D>,
   id: string,
   filterValue: string | number,
 ) =>
@@ -45,8 +44,8 @@ export const startsWith = (
 
 startsWith.autoRemove = (val: any) => !val;
 
-export const endsWith = (
-  row: MRT_Row,
+export const endsWith = <D extends Record<string, any> = {}>(
+  row: Row<D>,
   id: string,
   filterValue: string | number,
 ) =>
@@ -59,8 +58,8 @@ export const endsWith = (
 
 endsWith.autoRemove = (val: any) => !val;
 
-export const equals = (
-  row: MRT_Row,
+export const equals = <D extends Record<string, any> = {}>(
+  row: Row<D>,
   id: string,
   filterValue: string | number,
 ) =>
@@ -69,8 +68,8 @@ export const equals = (
 
 equals.autoRemove = (val: any) => !val;
 
-export const notEquals = (
-  row: MRT_Row,
+export const notEquals = <D extends Record<string, any> = {}>(
+  row: Row<D>,
   id: string,
   filterValue: string | number,
 ) =>
@@ -79,8 +78,8 @@ export const notEquals = (
 
 notEquals.autoRemove = (val: any) => !val;
 
-export const greaterThan = (
-  row: MRT_Row,
+export const greaterThan = <D extends Record<string, any> = {}>(
+  row: Row<D>,
   id: string,
   filterValue: string | number,
 ) =>
@@ -91,8 +90,8 @@ export const greaterThan = (
 
 greaterThan.autoRemove = (val: any) => !val;
 
-export const lessThan = (
-  row: MRT_Row,
+export const lessThan = <D extends Record<string, any> = {}>(
+  row: Row<D>,
   id: string,
   filterValue: string | number,
 ) =>
@@ -103,8 +102,8 @@ export const lessThan = (
 
 lessThan.autoRemove = (val: any) => !val;
 
-export const between = (
-  row: MRT_Row,
+export const between = <D extends Record<string, any> = {}>(
+  row: Row<D>,
   id: string,
   filterValues: [string | number, string | number],
 ) =>
@@ -118,16 +117,16 @@ export const between = (
 
 between.autoRemove = (val: any) => !val;
 
-export const empty = (
-  row: MRT_Row,
+export const empty = <D extends Record<string, any> = {}>(
+  row: Row<D>,
   id: string,
   _filterValue: string | number,
 ) => !row.getValue(id).toString().trim();
 
 empty.autoRemove = (val: any) => !val;
 
-export const notEmpty = (
-  row: MRT_Row,
+export const notEmpty = <D extends Record<string, any> = {}>(
+  row: Row<D>,
   id: string,
   _filterValue: string | number,
 ) => !!row.getValue(id).toString().trim();

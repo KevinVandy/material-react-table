@@ -136,13 +136,15 @@ export type MRT_TableState<D extends Record<string, any> = {}> = TableState & {
 
 export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
   ColumnDef<D>,
+  | 'accessorFn'
+  | 'accessorKey'
   | 'aggregatedCell'
   | 'cell'
   | 'columns'
-  | 'id'
   | 'filterFn'
   | 'footer'
   | 'header'
+  | 'id'
   | 'sortingFn'
 > & {
   AggregatedCell?: ({
@@ -191,7 +193,28 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
         header: MRT_Header<D>;
         table: MRT_TableInstance<D>;
       }) => ReactNode);
-  accessorKey: keyof D;
+  /**
+   * Either an `accessorKey` or a combination of an `accessorFn` and `id` are required for a data column definition.
+   * Specify a function here to point to the correct property in the data object.
+   *
+   * @example accessorFn: (row) => row.username
+   */
+  accessorFn?: (row: D) => any;
+  /**
+   * Either an `accessorKey` or a combination of an `accessorFn` and `id` are required for a data column definition.
+   * Specify which key in the row this column should use to access the correct data.
+   *
+   * @example accessorKey: 'username'
+   */
+  accessorKey?: keyof D;
+  /**
+   * Specify what type of column this is. Either `data`, `display`, or `group`. Defaults to `data`.
+   * Leave this blank if you are just creating a normal data column.
+   *
+   * @default 'data'
+   *
+   * @example columnDefType: 'display'
+   */
   columnDefType?: 'data' | 'display' | 'group';
   columns?: MRT_ColumnDef<D>[];
   enableClickToCopy?: boolean;
@@ -204,6 +227,13 @@ export type MRT_ColumnDef<D extends Record<string, any> = {}> = Omit<
   filterSelectOptions?: (string | { text: string; value: string })[];
   footer?: string;
   header: string;
+  /**
+   * Either an `accessorKey` or a combination of an `accessorFn` and `id` are required for a data column definition.
+   * If you have also specified an `accessorFn`, MRT still needs to have a valid `id` to be able to identify the column uniquely.
+   * `id` defaults to the `accessorKey` or `header` if not specified.
+   *
+   * @default gets set to the same value as `accessorKey` by default
+   */
   id?: string;
   muiTableBodyCellCopyButtonProps?:
     | ButtonProps

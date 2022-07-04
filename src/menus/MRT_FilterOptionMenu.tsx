@@ -114,21 +114,21 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
     [],
   );
 
-  const handleSelectFilterType = (value: MRT_FilterOption) => {
+  const handleSelectFilterType = (option: MRT_FilterOption) => {
     if (header && column) {
       setCurrentFilterFns((prev: { [key: string]: any }) => ({
         ...prev,
-        [header.id]: value,
+        [header.id]: option,
       }));
-      if (['empty', 'notEmpty'].includes(value)) {
+      if (['empty', 'notEmpty'].includes(option)) {
         column.setFilterValue(' ');
-      } else if (value === 'between') {
+      } else if (option === 'between') {
         column.setFilterValue(['', '']);
       } else {
         column.setFilterValue('');
       }
     } else {
-      setCurrentGlobalFilterFn(value);
+      setCurrentGlobalFilterFn(option);
     }
     setAnchorEl(null);
     onSelect?.();

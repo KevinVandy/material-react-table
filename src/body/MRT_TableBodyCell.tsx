@@ -5,7 +5,6 @@ import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 import { reorderColumn } from '../utils';
 import type { MRT_Cell, MRT_Column, MRT_TableInstance } from '..';
-import { flexRender } from '@tanstack/react-table';
 
 interface Props {
   cell: MRT_Cell;
@@ -77,7 +76,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
         ? column.getSize() / 2
         : Math.random() * (column.getSize() - column.getSize() / 3) +
           column.getSize() / 3,
-    [columnDefType, column.getSize()],
+    [],
   );
 
   const isEditable =
@@ -196,7 +195,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
       })}
     >
       <>
-        {isLoading || showSkeletons ? (
+        {cell.getIsPlaceholder() ? null : isLoading || showSkeletons ? (
           <Skeleton
             animation="wave"
             height={20}
@@ -209,29 +208,20 @@ export const MRT_TableBodyCell: FC<Props> = ({
           rowIndex + 1
         ) : columnDefType === 'display' ? (
           columnDef.Cell?.({ cell, table })
-        ) : cell.getIsPlaceholder() ||
-          (row.getIsGrouped() &&
-            column.id !==
-              row.groupingColumnId) ? null : cell.getIsAggregated() ? (
-          columnDef.AggregatedCell?.({ cell, table }) ??
-          flexRender(cell.getValue(), cell.getContext())
         ) : isEditing ? (
           <MRT_EditCellTextField cell={cell} table={table} />
         ) : (enableClickToCopy || columnDef.enableClickToCopy) &&
           columnDef.enableClickToCopy !== false ? (
           <>
             <MRT_CopyButton cell={cell} table={table}>
-              <>
-                {columnDef?.Cell?.({ cell, table }) ??
-                  flexRender(cell.getValue(), cell.getContext())}
-              </>
+              <>{columnDef?.Cell?.({ cell, table }) ?? cell.renderValue()}</>
             </MRT_CopyButton>
-            {row.getIsGrouped() && <> ({row.subRows?.length})</>}
+            {cell.getIsGrouped() && <> ({row.subRows?.length})</>}
           </>
         ) : (
           <>
-            {columnDef?.Cell?.({ cell, table }) ?? cell.getValue()}
-            {row.getIsGrouped() && <> ({row.subRows?.length ?? ''})</>}
+            {columnDef?.Cell?.({ cell, table }) ?? cell.renderValue()}
+            {cell.getIsGrouped() && <> ({row.subRows?.length ?? ''})</>}
           </>
         )}
       </>

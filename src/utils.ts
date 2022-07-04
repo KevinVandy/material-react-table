@@ -30,20 +30,26 @@ export const prepareColumns = <D extends Record<string, any> = {}>(
   columnDefs: MRT_ColumnDef<D>[],
   currentFilterFns: { [key: string]: MRT_FilterOption },
 ): MRT_DefinedColumnDef<D>[] =>
-  columnDefs.map((column) => {
-    if (!column.id) column.id = column.accessorKey?.toString() ?? column.header;
-    if (!column.columnDefType) column.columnDefType = 'data';
-    if (!!column.columns?.length) {
-      column.columnDefType = 'group';
-      column.columns = prepareColumns(column.columns, currentFilterFns);
-    } else if (column.columnDefType === 'data') {
-      if (!(column.filterFn instanceof Function)) {
-        //@ts-ignore
-        column.filterFn =
-          MRT_FilterFns[currentFilterFns[column.id]] ?? MRT_FilterFns.fuzzy;
-      }
+  columnDefs.map((columnDef) => {
+    if (!columnDef.id)
+      columnDef.id = columnDef.accessorKey?.toString() ?? columnDef.header;
+    if (process.env.NODE_ENV !== 'production' && !columnDef.id) {
+      console.error(
+        'Column definitions must have a valid `accessorKey` or `id` property',
+      );
     }
-    return column;
+    if (!columnDef.columnDefType) columnDef.columnDefType = 'data';
+    if (!!columnDef.columns?.length) {
+      columnDef.columnDefType = 'group';
+      columnDef.columns = prepareColumns(columnDef.columns, currentFilterFns);
+    } else if (
+      columnDef.columnDefType === 'data' &&
+      Object.keys(MRT_FilterFns).includes(currentFilterFns[columnDef.id])
+    ) {
+      columnDef.filterFn =
+        MRT_FilterFns[currentFilterFns[columnDef.id]] ?? MRT_FilterFns.fuzzy;
+    }
+    return columnDef;
   }) as MRT_DefinedColumnDef<D>[];
 
 export const reorderColumn = <D extends Record<string, any> = {}>(
