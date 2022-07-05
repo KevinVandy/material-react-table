@@ -547,16 +547,6 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'filterFns',
-    defaultValue: '',
-    description: '',
-    link: '',
-    linkText: '',
-    required: false,
-    source: '',
-    type: '',
-  },
-  {
     propName: 'filterFromLeafRows',
     defaultValue: '',
     description: '',

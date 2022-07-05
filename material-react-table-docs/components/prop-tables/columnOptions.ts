@@ -244,6 +244,16 @@ export const columnOptions: ColumnOption[] = [
     type: 'boolean',
   },
   {
+    columnOption: 'enabledColumnFilterOptions',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    source: 'MRT',
+    required: false,
+    type: 'Array<string>',
+  },
+  {
     columnOption: 'filterFn',
     defaultValue: 'fuzzy',
     description: '',
