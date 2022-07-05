@@ -1,4 +1,4 @@
-name: '🐛 Bug report'
+name: "🐛 Bug report"
 description: Report a reproducible bug or regression
 body:
   - type: markdown
@@ -30,16 +30,6 @@ body:
     attributes:
       label: Describe the bug and the steps to reproduce it
       description: Provide a clear and concise description of the challenge you are running into, and the steps we should take to try to reproduce your bug.
-    validations:
-      required: true
-
-  - type: textarea
-    id: expected
-    attributes:
-      label: Expected behavior
-      description: Provide a clear and concise description of what you expected to happen.
-      placeholder: |
-        As a user, I expected **_ behavior but i am seeing _**
     validations:
       required: true
 

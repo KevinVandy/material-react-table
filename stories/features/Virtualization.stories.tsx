@@ -5,40 +5,12 @@ import MaterialReactTable, {
   MRT_ColumnDef,
 } from '../../src';
 import { faker } from '@faker-js/faker';
-import { Typography } from '@mui/material';
 
 const meta: Meta = {
   title: 'Features/Virtualization',
 };
 
 export default meta;
-
-const shortColumns: MRT_ColumnDef[] = [
-  {
-    header: 'First Name',
-    accessorKey: 'firstName',
-  },
-  {
-    header: 'Last Name',
-    accessorKey: 'lastName',
-  },
-  {
-    header: 'Email Address',
-    accessorKey: 'email',
-  },
-  {
-    header: 'Address',
-    accessorKey: 'address',
-  },
-  {
-    header: 'City',
-    accessorKey: 'city',
-  },
-  {
-    header: 'State',
-    accessorKey: 'state',
-  },
-];
 
 const longColumns: MRT_ColumnDef[] = [
   {
@@ -95,15 +67,6 @@ const longColumns: MRT_ColumnDef[] = [
   },
 ];
 
-const shortData = [...Array(500)].map(() => ({
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
-  email: faker.internet.email(),
-  address: faker.address.streetAddress(),
-  city: faker.address.city(),
-  state: faker.address.state(),
-}));
-
 const longData = [...Array(500)].map(() => ({
   firstName: faker.name.firstName(),
   middleName: faker.name.firstName(),
@@ -119,18 +82,6 @@ const longData = [...Array(500)].map(() => ({
   favoriteColor: faker.internet.color(),
   petName: faker.animal.cat(),
 }));
-
-export const VirtualizationDisabledDefault: Story<
-  MaterialReactTableProps
-> = () => (
-  <MaterialReactTable
-    columns={shortColumns}
-    data={shortData}
-    enablePagination={false}
-    enableRowNumbers
-    enableToolbarBottom={false}
-  />
-);
 
 export const EnableRowVirtualization: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable

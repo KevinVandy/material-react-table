@@ -2,8 +2,8 @@ import React, { FC, RefObject, useMemo } from 'react';
 import { useVirtual } from 'react-virtual';
 import { TableBody } from '@mui/material';
 import { MRT_TableBodyRow } from './MRT_TableBodyRow';
-import type { MRT_Row, MRT_TableInstance } from '..';
 import { rankGlobalFuzzy } from '../sortingFns';
+import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
   table: MRT_TableInstance;
@@ -62,19 +62,27 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
 
   const rowVirtualizer = enableRowVirtualization
     ? useVirtual({
-        overscan: density === 'compact' ? 20 : 10,
-        size: rows.length,
+        // estimateSize: () => (density === 'compact' ? 25 : 50),
+        overscan: density === 'compact' ? 30 : 10,
         parentRef: tableContainerRef,
+        size: rows.length,
         ...virtualizerProps,
       })
     : ({} as any);
 
-  const { virtualItems: virtualRows } = rowVirtualizer;
-  const paddingTop = virtualRows?.length > 0 ? virtualRows[0].start : 0;
-  const paddingBottom =
-    virtualRows?.length > 0
-      ? rowVirtualizer.totalSize - virtualRows[virtualRows.length - 1].end
-      : 0;
+  const virtualRows = enableRowVirtualization
+    ? rowVirtualizer.virtualItems
+    : [];
+
+  let paddingTop = 0;
+  let paddingBottom = 0;
+  if (enableRowVirtualization) {
+    paddingTop = virtualRows.length > 0 ? virtualRows[0].start : 0;
+    paddingBottom =
+      virtualRows.length > 0
+        ? rowVirtualizer.totalSize - virtualRows[virtualRows.length - 1].end
+        : 0;
+  }
 
   return (
     <TableBody {...tableBodyProps}>
@@ -83,7 +91,6 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
           <td style={{ height: `${paddingTop}px` }} />
         </tr>
       )}
-      {/* @ts-ignore */}
       {(enableRowVirtualization ? virtualRows : rows).map(
         (rowOrVirtualRow: any, rowIndex: number) => {
           const row = enableRowVirtualization
