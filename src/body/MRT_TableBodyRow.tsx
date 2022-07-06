@@ -1,16 +1,22 @@
-import React, { FC } from 'react';
+import React, { Dispatch, FC, SetStateAction } from 'react';
 import { darken, lighten, TableRow } from '@mui/material';
 import { MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
-import type { MRT_Row, MRT_TableInstance } from '..';
+import type { MRT_Column, MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
   row: MRT_Row;
   rowIndex: number;
+  setCurrentHoveredColumn: Dispatch<SetStateAction<MRT_Column | null>>;
   table: MRT_TableInstance;
 }
 
-export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
+export const MRT_TableBodyRow: FC<Props> = ({
+  row,
+  rowIndex,
+  setCurrentHoveredColumn,
+  table,
+}) => {
   const {
     getIsSomeColumnsPinned,
     options: { muiTableBodyRowProps, renderDetailPanel },
@@ -47,6 +53,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
             key={cell.id}
             enableHover={tableRowProps?.hover !== false}
             rowIndex={rowIndex}
+            setCurrentHoveredColumn={setCurrentHoveredColumn}
             table={table}
           />
         ))}

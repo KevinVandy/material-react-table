@@ -1,13 +1,18 @@
 import { IconButton, Tooltip } from '@mui/material';
-import React, { FC, forwardRef, Ref } from 'react';
+import React, { DragEventHandler, FC } from 'react';
 import { MRT_TableInstance } from '..';
 
 interface Props {
-  ref: Ref<HTMLButtonElement>;
+  handleDragStart: DragEventHandler<HTMLButtonElement>;
+  handleDragEnd: DragEventHandler<HTMLButtonElement>;
   table: MRT_TableInstance;
 }
 
-export const MRT_GrabHandleButton: FC<Props> = forwardRef(({ table }, ref) => {
+export const MRT_GrabHandleButton: FC<Props> = ({
+  handleDragStart,
+  handleDragEnd,
+  table,
+}) => {
   const {
     options: {
       icons: { DragHandleIcon },
@@ -25,7 +30,9 @@ export const MRT_GrabHandleButton: FC<Props> = forwardRef(({ table }, ref) => {
     >
       <IconButton
         disableRipple
-        ref={ref}
+        draggable="true"
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
         size="small"
         sx={{
           cursor: 'grab',
@@ -46,4 +53,4 @@ export const MRT_GrabHandleButton: FC<Props> = forwardRef(({ table }, ref) => {
       </IconButton>
     </Tooltip>
   );
-});
+};

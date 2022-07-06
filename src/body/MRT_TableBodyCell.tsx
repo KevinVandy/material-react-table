@@ -1,15 +1,21 @@
-import React, { FC, MouseEvent, useMemo } from 'react';
-import { useDrop } from 'react-dnd';
+import React, {
+  Dispatch,
+  DragEvent,
+  FC,
+  MouseEvent,
+  SetStateAction,
+  useMemo,
+} from 'react';
 import { alpha, darken, lighten, Skeleton, TableCell } from '@mui/material';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
-import { reorderColumn } from '../utils';
 import type { MRT_Cell, MRT_Column, MRT_TableInstance } from '..';
 
 interface Props {
   cell: MRT_Cell;
   enableHover?: boolean;
   rowIndex: number;
+  setCurrentHoveredColumn: Dispatch<SetStateAction<MRT_Column | null>>;
   table: MRT_TableInstance;
 }
 
@@ -17,6 +23,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
   cell,
   enableHover,
   rowIndex,
+  setCurrentHoveredColumn,
   table,
 }) => {
   const {
@@ -24,7 +31,6 @@ export const MRT_TableBodyCell: FC<Props> = ({
     options: {
       editingMode,
       enableClickToCopy,
-      enableColumnOrdering,
       enableEditing,
       enableRowNumbers,
       muiTableBodyCellProps,
@@ -32,11 +38,9 @@ export const MRT_TableBodyCell: FC<Props> = ({
       rowNumberMode,
       tableId,
     },
-    setColumnOrder,
     setCurrentEditingCell,
   } = table;
   const {
-    columnOrder,
     currentEditingCell,
     currentEditingRow,
     density,
@@ -46,14 +50,6 @@ export const MRT_TableBodyCell: FC<Props> = ({
   const { column, row } = cell;
   const { columnDef } = column;
   const { columnDefType } = columnDef;
-
-  const [, dropRef] = useDrop({
-    accept: 'column',
-    drop: (movingColumn: MRT_Column) => {
-      const newColumnOrder = reorderColumn(movingColumn, column, columnOrder);
-      setColumnOrder(newColumnOrder);
-    },
-  });
 
   const mTableCellBodyProps =
     muiTableBodyCellProps instanceof Function
@@ -125,13 +121,15 @@ export const MRT_TableBodyCell: FC<Props> = ({
     );
   };
 
+  const handleDragEnter = (_e: DragEvent) => {
+    setCurrentHoveredColumn(columnDefType === 'data' ? column : null);
+  };
+
   return (
     <TableCell
       onDoubleClick={handleDoubleClick}
+      onDragEnter={handleDragEnter}
       {...tableCellProps}
-      ref={
-        columnDefType === 'data' && enableColumnOrdering ? dropRef : undefined
-      }
       sx={(theme) => ({
         backgroundColor: column.getIsPinned()
           ? alpha(lighten(theme.palette.background.default, 0.04), 0.95)

@@ -3,11 +3,11 @@
 <a href="https://npmjs.com/package/material-react-table" target="_blank_">
   <img alt="" src="https://badgen.net/npm/v/material-react-table" />
 </a>
-<a href="https://bundlephobia.com/result?p=material-react-table" target="_blank_">
-  <img alt="" src="https://badgen.net/bundlephobia/minzip/material-react-table@latest" />
-</a>
 <a href="https://npmjs.com/package/material-react-table" target="_blank_">
   <img alt="" src="https://img.shields.io/npm/dm/material-react-table.svg" />
+</a>
+<a href="https://bundlephobia.com/result?p=material-react-table" target="_blank_">
+  <img alt="" src="https://badgen.net/bundlephobia/minzip/material-react-table@latest" />
 </a>
 <a href="https://github.com/KevinVandy/material-react-table" target="_blank_">
   <img alt="" src="https://img.shields.io/github/stars/KevinVandy/material-react-table.svg?style=social&label=Star" />
@@ -15,24 +15,33 @@
 
 ---
 
-> This Project is based on `@tanstack/react-table` v8, which itself is still in beta, so therefore this package is also still in alpha/beta
+> This project is still in alpha, but is expected to enter beta by August 2022, and a stable 1.0 release shortly thereafter.
 
-- A fully featured Material UI V5 implementation of Tanstack React Table v8 (beta)
+- A fully featured Material UI V5 implementation of Tanstack React Table V8
 - Inspired by material-table and the MUI X DataGrid
-- Written from the ground up in TypeScript, Material UI, and React Table
+- Written from the ground up in TypeScript
 - All internal Material UI components are easily customizable
 
 ## This project is in alpha, but will go into beta _soon<sup>TM</sup>_, so feel free to install and explore
 
-View the [docs (alpha) site](https://www.material-react-table.com/)
+Join the [Discord](https://discord.gg/5wqyRx6fnm) server to join in on the development discussion or ask questions
 
-View a basic [example](https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples/basic/sandbox?file=/src/TS.tsx)
+View the [Docs Site](https://www.material-react-table.com/)
+
+See all [Props and Options](https://www.material-react-table.com/docs/api)
+
+---
+
+### Quick Examples
+
+ - [Basic Table](https://www.material-react-table.com/docs/examples/basic/) (See Default Features)
+ - [Minimal Table](https://www.material-react-table.com/docs/examples/minimal/) (Turn off Features)
+ - [Advanced Table](https://www.material-react-table.com/docs/examples/advanced/) (See some of the Advanced Features)
+ - [Remote Data](https://www.material-react-table.com/docs/examples/remote/) (Server-side Pagination, Sorting, and Filtering)
+ - [React Query](https://www.material-react-table.com/docs/examples/react-query/) (Server-side Pagination, Sorting, and Filtering)
+ - [Virtualized Rows](https://www.material-react-table.com/docs/examples/virtualized/) (20,000 rows at once!)
 
 View additional [storybook examples](https://www.material-react-table.dev/)
-
-View the [github source code](https://github.com/KevinVandy/material-react-table) and [github open issues](https://github.com/KevinVandy/material-react-table/issues)
-
-Join the [discord](https://discord.gg/5wqyRx6fnm) server to join in on the development discussion or ask questions
 
 ---
 
@@ -40,11 +49,13 @@ Join the [discord](https://discord.gg/5wqyRx6fnm) server to join in on the devel
 
 _All features can easily be enabled/disabled_
 
+- [x] < 35kb gzipped - [Bundlephobia](https://bundlephobia.com/package/material-react-table)
+- [x] Advanced TypeScript Generics Support (TypeScript Optional)
 - [x] Click To Copy Cell Values
 - [x] Column Actions
 - [x] Column Grouping (Group By and Aggregates)
 - [x] Column Hiding
-- [x] Column Ordering via Drag'n'Drop (react-dnd)
+- [x] Column Ordering via Drag'n'Drop
 - [x] Column Pinning
 - [x] Column Resizing (work in progress)
 - [x] Customize Icons
@@ -72,9 +83,11 @@ _All features can easily be enabled/disabled_
 
 ---
 
-### Installation
+### Getting Started
 
-1. Install Peer Dependencies (Material UI v5)
+#### Installation
+
+1. Install Peer Dependencies (Material UI V5)
 
 ```bash
 npm install @mui/material @mui/icons-material @emotion/react @emotion/styled
@@ -86,7 +99,65 @@ npm install @mui/material @mui/icons-material @emotion/react @emotion/styled
 npm install material-react-table
 ```
 
-_`@tanstack/react-table`, `react-virtual` and `react-dnd`_ are internal dependencies, so you don't need to install them yourself.
+> _`@tanstack/react-table`, `@tanstack/react-virtual`, and `@tanstack/match-sorter-utils`_ are internal dependencies, so you don't need to install them yourself.
+
+---
+
+#### Usage
+
+> Read the full usage docs [here](https://www.material-react-table.com/docs/usage/)
+
+```jsx
+import React, { useMemo } from 'react';
+import MaterialReactTable from 'material-react-table';
+
+export default function App() {
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: 'name', //simple recommended way to define a column
+        header: 'Name',
+        muiTableHeadCellProps: { sx: { color: 'green' } }, //custom props
+      },
+      {
+        accessorFn: (row) => row.age, //alternate way
+        id: 'age', //id required if you use accessorFn instead of accessorKey
+        header: 'Age',
+        Header: <i style={{ color: 'red' }}>Age</i>, //optional custom markup
+      },
+    ],
+    [],
+  );
+
+  //simple data example
+  //Check out https://www.material-react-table.com/docs/examples/remote for a more realistic example
+  const data = useMemo(
+    () => [
+      {
+        name: 'John',
+        age: 30,
+      },
+      {
+        name: 'Sara',
+        age: 25,
+      },
+    ],
+    [],
+  );
+
+  return (
+    <MaterialReactTable 
+      columns={columns} 
+      data={data} 
+      enableColumnOrdering //enable some features
+      enableRowSelection 
+      enableStickyHeader
+   />
+   );
+}
+```
+
+_Open in [Code Sandbox](https://codesandbox.io/s/simple-material-react-table-example-t5c3ji)_
 
 ---
 
@@ -97,3 +168,4 @@ _`@tanstack/react-table`, `react-virtual` and `react-dnd`_ are internal dependen
 </a>
 
 PRs are Welcome, but please discuss in [GitHub Discussions](https://github.com/KevinVandy/material-react-table/discussions) or the [Discord Server](https://discord.gg/5wqyRx6fnm) first!
+

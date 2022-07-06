@@ -1,5 +1,10 @@
-import React, { FC, Ref } from 'react';
-import { useDrag, useDrop } from 'react-dnd';
+import React, {
+  Dispatch,
+  DragEvent,
+  FC,
+  SetStateAction,
+  useState,
+} from 'react';
 import {
   Box,
   FormControlLabel,
@@ -16,12 +21,16 @@ import type { MRT_Column, MRT_TableInstance } from '..';
 interface Props {
   allColumns: MRT_Column[];
   column: MRT_Column;
+  currentHoveredColumn: MRT_Column | null;
   isSubMenu?: boolean;
+  setCurrentHoveredColumn: Dispatch<SetStateAction<MRT_Column | null>>;
   table: MRT_TableInstance;
 }
 
 export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
   allColumns,
+  currentHoveredColumn,
+  setCurrentHoveredColumn,
   column,
   isSubMenu,
   table,
@@ -40,22 +49,6 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
   const { columnDef } = column;
   const { columnDefType } = columnDef;
 
-  const [, dropRef] = useDrop({
-    accept: 'column',
-    drop: (movingColumn: MRT_Column) => {
-      const newColumnOrder = reorderColumn(movingColumn, column, columnOrder);
-      setColumnOrder(newColumnOrder);
-    },
-  });
-
-  const [, dragRef, previewRef] = useDrag({
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-    item: () => column,
-    type: 'column',
-  });
-
   const switchChecked =
     (columnDefType !== 'group' && column.getIsVisible()) ||
     (columnDefType === 'group' &&
@@ -71,41 +64,73 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
     }
   };
 
+  const menuItemRef = React.useRef<HTMLElement>(null);
+
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleDragStart = (e: DragEvent<HTMLButtonElement>) => {
+    setIsDragging(true);
+    e.dataTransfer.setDragImage(menuItemRef.current as HTMLElement, 0, 0);
+  };
+
+  const handleDragEnd = (_e: DragEvent<HTMLButtonElement>) => {
+    setIsDragging(false);
+    setCurrentHoveredColumn(null);
+    if (currentHoveredColumn) {
+      setColumnOrder(reorderColumn(column, currentHoveredColumn, columnOrder));
+    }
+  };
+
+  const handleDragEnter = (_e: DragEvent) => {
+    if (!isDragging) {
+      setCurrentHoveredColumn(column);
+    }
+  };
+
   return (
     <>
       <MenuItem
-        ref={columnDefType === 'data' ? dropRef : undefined}
-        sx={{
+        disableRipple={enableColumnOrdering}
+        ref={menuItemRef as any}
+        onDragEnter={handleDragEnter}
+        sx={(theme) => ({
           alignItems: 'center',
           justifyContent: 'flex-start',
           my: 0,
+          opacity: isDragging ? 0.5 : 1,
+          outline: isDragging
+            ? `1px dashed ${theme.palette.divider}`
+            : currentHoveredColumn?.id === column.id
+            ? `2px dashed ${theme.palette.primary.main}`
+            : 'none',
           pl: `${(column.depth + 0.5) * 2}rem`,
           py: '6px',
-        }}
+        })}
       >
         <Box
-          ref={previewRef}
           sx={{
             display: 'flex',
             flexWrap: 'nowrap',
             gap: '8px',
           }}
         >
-          {columnDefType !== 'group' &&
+          {!isSubMenu &&
+            columnDefType !== 'group' &&
             enableColumnOrdering &&
             !allColumns.some(
               (col) => col.columnDef.columnDefType === 'group',
             ) &&
             (columnDef.enableColumnOrdering !== false ? (
               <MRT_GrabHandleButton
-                ref={dragRef as Ref<HTMLButtonElement>}
+                handleDragEnd={handleDragEnd}
+                handleDragStart={handleDragStart}
                 table={table}
               />
             ) : (
               <Box sx={{ width: '28px' }} />
             ))}
-          {enablePinning &&
-            !isSubMenu &&
+          {!isSubMenu &&
+            enablePinning &&
             (column.getCanPin() ? (
               <MRT_ColumnPinningButtons column={column} table={table} />
             ) : (
@@ -150,9 +175,11 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
       {column.columns?.map((c: MRT_Column, i) => (
         <MRT_ShowHideColumnsMenuItems
           allColumns={allColumns}
-          key={`${i}-${c.id}`}
           column={c}
+          currentHoveredColumn={currentHoveredColumn}
           isSubMenu={isSubMenu}
+          key={`${i}-${c.id}`}
+          setCurrentHoveredColumn={setCurrentHoveredColumn}
           table={table}
         />
       ))}

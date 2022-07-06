@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import { Button, Menu, Divider, Box } from '@mui/material';
 import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
 import type { MRT_Column, MRT_TableInstance } from '..';
@@ -62,6 +62,9 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
     getRightLeafColumns(),
   ]) as MRT_Column[];
 
+  const [currentHoveredColumn, setCurrentHoveredColumn] =
+    useState<MRT_Column | null>(null);
+
   return (
     <Menu
       anchorEl={anchorEl}
@@ -118,8 +121,10 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
         <MRT_ShowHideColumnsMenuItems
           allColumns={allColumns}
           column={column}
+          currentHoveredColumn={currentHoveredColumn}
           isSubMenu={isSubMenu}
           key={`${index}-${column.id}`}
+          setCurrentHoveredColumn={setCurrentHoveredColumn}
           table={table}
         />
       ))}

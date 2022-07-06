@@ -49,8 +49,8 @@ export const MRT_TableContainer: FC<Props> = ({ table }) => {
 
   return (
     <TableContainer
-      {...tableContainerProps}
       ref={tableContainerRef}
+      {...tableContainerProps}
       sx={{
         maxWidth: '100%',
         maxHeight:
