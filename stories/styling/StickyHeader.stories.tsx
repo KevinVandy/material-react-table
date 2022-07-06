@@ -45,11 +45,22 @@ const data = [...Array(100)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const StickyHeaderDefault: Story<MaterialReactTableProps> = () => (
+export const StickyHeaderDisabledDefault: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     initialState={{ pagination: { pageSize: 25 } }}
+  />
+);
+
+export const EnableStickyHeader: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    initialState={{ pagination: { pageSize: 25 } }}
+    enableStickyHeader
   />
 );
 
@@ -59,14 +70,5 @@ export const StickyHeaderShorterTable: Story<MaterialReactTableProps> = () => (
     data={data}
     initialState={{ pagination: { pageSize: 25 } }}
     muiTableContainerProps={{ sx: { maxHeight: 400 } }}
-  />
-);
-
-export const StickyHeaderDisabled: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    initialState={{ pagination: { pageSize: 25 } }}
-    enableStickyHeader={false}
   />
 );
