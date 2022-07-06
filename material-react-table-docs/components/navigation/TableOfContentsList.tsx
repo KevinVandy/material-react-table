@@ -14,7 +14,7 @@ const TableOfContentsList: FC<Props> = ({ items, variant = 'list' }) => {
       <ul>
         {items.map((item, index) => (
           <li key={index}>
-            <Link href={item.href}>
+            <Link href={item.href} passHref>
               <MuiLink sx={{ cursor: 'pointer', lineHeight: '2rem' }}>
                 {item.label}
               </MuiLink>
