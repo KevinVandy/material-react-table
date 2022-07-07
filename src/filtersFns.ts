@@ -1,8 +1,8 @@
 import { rankItem, rankings, RankingInfo } from '@tanstack/match-sorter-utils';
 import { filterFns, Row } from '@tanstack/react-table';
 
-export const fuzzy = <D extends Record<string, any> = {}>(
-  row: Row<D>,
+export const fuzzy = <TData extends Record<string, any> = {}>(
+  row: Row<TData>,
   columnId: string,
   filterValue: string,
   addMeta: (item: RankingInfo) => void,
@@ -16,8 +16,8 @@ export const fuzzy = <D extends Record<string, any> = {}>(
 
 fuzzy.autoRemove = (val: any) => !val;
 
-export const contains = <D extends Record<string, any> = {}>(
-  row: Row<D>,
+export const contains = <TData extends Record<string, any> = {}>(
+  row: Row<TData>,
   id: string,
   filterValue: string | number,
 ) =>
@@ -30,8 +30,8 @@ export const contains = <D extends Record<string, any> = {}>(
 
 contains.autoRemove = (val: any) => !val;
 
-export const startsWith = <D extends Record<string, any> = {}>(
-  row: Row<D>,
+export const startsWith = <TData extends Record<string, any> = {}>(
+  row: Row<TData>,
   id: string,
   filterValue: string | number,
 ) =>
@@ -44,8 +44,8 @@ export const startsWith = <D extends Record<string, any> = {}>(
 
 startsWith.autoRemove = (val: any) => !val;
 
-export const endsWith = <D extends Record<string, any> = {}>(
-  row: Row<D>,
+export const endsWith = <TData extends Record<string, any> = {}>(
+  row: Row<TData>,
   id: string,
   filterValue: string | number,
 ) =>
@@ -58,8 +58,8 @@ export const endsWith = <D extends Record<string, any> = {}>(
 
 endsWith.autoRemove = (val: any) => !val;
 
-export const equals = <D extends Record<string, any> = {}>(
-  row: Row<D>,
+export const equals = <TData extends Record<string, any> = {}>(
+  row: Row<TData>,
   id: string,
   filterValue: string | number,
 ) =>
@@ -68,8 +68,8 @@ export const equals = <D extends Record<string, any> = {}>(
 
 equals.autoRemove = (val: any) => !val;
 
-export const notEquals = <D extends Record<string, any> = {}>(
-  row: Row<D>,
+export const notEquals = <TData extends Record<string, any> = {}>(
+  row: Row<TData>,
   id: string,
   filterValue: string | number,
 ) =>
@@ -78,8 +78,8 @@ export const notEquals = <D extends Record<string, any> = {}>(
 
 notEquals.autoRemove = (val: any) => !val;
 
-export const greaterThan = <D extends Record<string, any> = {}>(
-  row: Row<D>,
+export const greaterThan = <TData extends Record<string, any> = {}>(
+  row: Row<TData>,
   id: string,
   filterValue: string | number,
 ) =>
@@ -90,8 +90,8 @@ export const greaterThan = <D extends Record<string, any> = {}>(
 
 greaterThan.autoRemove = (val: any) => !val;
 
-export const lessThan = <D extends Record<string, any> = {}>(
-  row: Row<D>,
+export const lessThan = <TData extends Record<string, any> = {}>(
+  row: Row<TData>,
   id: string,
   filterValue: string | number,
 ) =>
@@ -102,8 +102,8 @@ export const lessThan = <D extends Record<string, any> = {}>(
 
 lessThan.autoRemove = (val: any) => !val;
 
-export const between = <D extends Record<string, any> = {}>(
-  row: Row<D>,
+export const between = <TData extends Record<string, any> = {}>(
+  row: Row<TData>,
   id: string,
   filterValues: [string | number, string | number],
 ) =>
@@ -117,16 +117,16 @@ export const between = <D extends Record<string, any> = {}>(
 
 between.autoRemove = (val: any) => !val;
 
-export const empty = <D extends Record<string, any> = {}>(
-  row: Row<D>,
+export const empty = <TData extends Record<string, any> = {}>(
+  row: Row<TData>,
   id: string,
   _filterValue: string | number,
 ) => !row.getValue(id).toString().trim();
 
 empty.autoRemove = (val: any) => !val;
 
-export const notEmpty = <D extends Record<string, any> = {}>(
-  row: Row<D>,
+export const notEmpty = <TData extends Record<string, any> = {}>(
+  row: Row<TData>,
   id: string,
   _filterValue: string | number,
 ) => !!row.getValue(id).toString().trim();

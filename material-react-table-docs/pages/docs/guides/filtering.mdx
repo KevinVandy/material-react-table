@@ -4,7 +4,7 @@ import Head from 'next/head';
   <title>Material React Table Docs - Filtering Feature Guide</title>
   <meta
     name="description"
-    content="How to use, customize, or disable filter features in Material React Table"
+    content="How to use, customize, or disable filter features (client-side or server side) in Material React Table"
   />
 </Head>
 
@@ -42,3 +42,8 @@ import Head from 'next/head';
 
 ---
 
+Filtering is one of the most powerful features of Material React Table and is enabled by default. There is a lot of flexibility and customization available here, to the point where it does not all fit in just one guide, so you may find of the advanced filtering guides useful.
+
+### Disable Filtering features
+
+Various subsets of filtering features can be disabled. If you want to disable filtering completely, you can set the `enableColumnFilters` prop to `false`, to remove all filters from each column. Alternatively, `enableColumnFilter` can be set to `false` for individual columns. `enableFilters` can be set to `false` to disable both column filters and the global search filter.

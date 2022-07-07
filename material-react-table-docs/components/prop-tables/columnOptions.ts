@@ -80,7 +80,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: 'TanStack Table ColumnDef Docs',
     source: 'TanStack Table',
     required: false,
-    type: '(row: D) => any',
+    type: '(row: TData) => any',
   },
   {
     columnOption: 'accessorKey',
@@ -91,7 +91,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: 'TanStack Table ColumnDef Docs',
     source: 'TanStack Table',
     required: false,
-    type: 'string & keyof D',
+    type: 'string & keyof TData',
   },
   {
     columnOption: 'aggregationFn',
@@ -111,7 +111,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: 'Array<MRT_ColumnDef<D>>',
+    type: 'Array<MRT_ColumnDef<TData>>',
   },
   {
     columnOption: 'enableClickToCopy',

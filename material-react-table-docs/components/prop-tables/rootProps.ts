@@ -74,7 +74,7 @@ export const rootProps = [
     linkText: '',
     required: true,
     source: 'TanStack Table',
-    type: 'Array<MRT_ColumnDef<D>>',
+    type: 'Array<MRT_ColumnDef<TData>>',
   },
   {
     propName: 'data',
@@ -84,7 +84,7 @@ export const rootProps = [
     linkText: '',
     required: true,
     source: 'TanStack Table',
-    type: 'Array<D>',
+    type: 'Array<TData>',
   },
   {
     propName: 'debugAll',

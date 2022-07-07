@@ -2954,17 +2954,17 @@
   dependencies:
     remove-accents "0.4.2"
 
-"@tanstack/react-table@8.1.3":
-  version "8.1.3"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.1.3.tgz#79d5c8a6f58350796a70fa66c30cfd25bf650d3a"
-  integrity sha512-rgGb4Sou8kuJI2NuJbDSS/wRc+TVmXZPg5+vslHZqA+tLvHvYgLHndBc6kW2fzCdInBshJEgHAnDXillYGYi+w==
+"@tanstack/react-table@8.1.4":
+  version "8.1.4"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.1.4.tgz#84fb62852afbad0fa8a5643207b529530a1c5813"
+  integrity sha512-WpPrZVbwrom2+8wZaM94OkVPfhMyzYvxyxPk2xfyFexjGorKl5erI/EnMme1EXTltsND5Jhsq/wnU6medaOQ9w==
   dependencies:
-    "@tanstack/table-core" "8.1.2"
+    "@tanstack/table-core" "8.1.4"
 
-"@tanstack/table-core@8.1.2":
-  version "8.1.2"
-  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.1.2.tgz#1e0e075a67082eb0f462771f049f6e418b71b089"
-  integrity sha512-h0e9xBC0BRVoQE8w5BVypjPc2x5+H1VcwQDLKdijoVgUpO2S0ixjY9ejZ3YAtPYkBZTukLm9+3wfF4CFUXwD/Q==
+"@tanstack/table-core@8.1.4":
+  version "8.1.4"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.1.4.tgz#799b2bc4ced5d8c4ee099ece513270c1b73f16a7"
+  integrity sha512-iSlAT2BpkBFayJBgVxqQNXOgnF2S1r8b3aS1QlRGIusc4iZP0lRr0ie0CJ7Jhp0BZ62UH10RBIoBYHVYkg8Ejw==
 
 "@types/babel__core@^7.1.7":
   version "7.1.19"
@@ -3194,7 +3194,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-dom@^18.0.5":
+"@types/react-dom@^18.0.6":
   version "18.0.6"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.0.6.tgz#36652900024842b74607a17786b6662dd1e103a1"
   integrity sha512-/5OFZgfIPSwy+YuIBP/FgJnQnsxhZhjjrnxudMddeblOouIodEQ75X14Rr4wGSG/bknL+Omy9iWlLo1u/9GzAA==
@@ -3236,7 +3236,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^18.0.14":
+"@types/react@*", "@types/react@^18.0.15":
   version "18.0.15"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.15.tgz#d355644c26832dc27f3e6cbf0c4f4603fc4ab7fe"
   integrity sha512-iz3BtLuIYH1uWdsv6wXYdhozhqj20oD4/Hk2DNXIn1kFsmp9x8d9QB6FnPhfkbhd2PgEONt9Q1x/ebkwjfFLow==

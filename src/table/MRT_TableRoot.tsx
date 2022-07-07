@@ -32,8 +32,8 @@ import {
 } from '../utils';
 import { MRT_FilterFns } from '../filtersFns';
 
-export const MRT_TableRoot = <D extends Record<string, any> = {}>(
-  props: MaterialReactTableProps<D>,
+export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
+  props: MaterialReactTableProps<TData>,
 ) => {
   const [tableId, setIdPrefix] = useState(props.tableId);
   useEffect(
@@ -42,7 +42,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     [props.tableId],
   );
 
-  const initialState: Partial<MRT_TableState<D>> = useMemo(() => {
+  const initialState: Partial<MRT_TableState<TData>> = useMemo(() => {
     const initState = props.initialState ?? {};
     initState.columnOrder =
       initState.columnOrder ?? getDefaultColumnOrderIds(props);
@@ -53,10 +53,9 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     initialState.columnOrder ?? [],
   );
   const [currentEditingCell, setCurrentEditingCell] =
-    useState<MRT_Cell<D> | null>(initialState?.currentEditingCell ?? null);
-  const [currentEditingRow, setCurrentEditingRow] = useState<MRT_Row<D> | null>(
-    initialState?.currentEditingRow ?? null,
-  );
+    useState<MRT_Cell<TData> | null>(initialState?.currentEditingCell ?? null);
+  const [currentEditingRow, setCurrentEditingRow] =
+    useState<MRT_Row<TData> | null>(initialState?.currentEditingRow ?? null);
   const [density, setDensity] = useState(
     initialState?.density ?? 'comfortable',
   );
@@ -78,7 +77,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
   }>(() =>
     Object.assign(
       {},
-      ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef<D>[]).map(
+      ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef<TData>[]).map(
         (col) => ({
           [col.id?.toString() ?? col.accessorKey?.toString() ?? '']:
             col.filterFn instanceof Function
@@ -158,7 +157,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
             muiTableHeadCellProps: props.muiTableHeadCellProps,
             size: 60,
           },
-        ] as MRT_ColumnDef<D>[]
+        ] as MRT_ColumnDef<TData>[]
       ).filter(Boolean),
     [
       columnOrder,
@@ -184,7 +183,7 @@ export const MRT_TableRoot = <D extends Record<string, any> = {}>(
     [currentFilterFns, displayColumns, props.columns],
   );
 
-  const data: D[] = useMemo(
+  const data: TData[] = useMemo(
     () =>
       (props.state?.isLoading || props.state?.showSkeletons) &&
       !props.data.length

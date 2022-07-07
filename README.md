@@ -15,14 +15,14 @@
 
 ---
 
+## About
+
 > This project is still in alpha, but is expected to enter beta by August 2022, and a stable 1.0 release shortly thereafter.
 
 - A fully featured Material UI V5 implementation of Tanstack React Table V8
 - Inspired by material-table and the MUI X DataGrid
 - Written from the ground up in TypeScript
 - All internal Material UI components are easily customizable
-
-## This project is in alpha, but will go into beta _soon<sup>TM</sup>_, so feel free to install and explore
 
 Join the [Discord](https://discord.gg/5wqyRx6fnm) server to join in on the development discussion or ask questions
 
@@ -32,7 +32,7 @@ See all [Props and Options](https://www.material-react-table.com/docs/api)
 
 ---
 
-### Quick Examples
+## Quick Examples
 
  - [Basic Table](https://www.material-react-table.com/docs/examples/basic/) (See Default Features)
  - [Minimal Table](https://www.material-react-table.com/docs/examples/minimal/) (Turn off Features)
@@ -45,7 +45,7 @@ View additional [storybook examples](https://www.material-react-table.dev/)
 
 ---
 
-### Features (All Features work and are MVP, but are still being polished)
+## Features (All Features work and are MVP, but are still being polished)
 
 _All features can easily be enabled/disabled_
 
@@ -83,9 +83,9 @@ _All features can easily be enabled/disabled_
 
 ---
 
-### Getting Started
+## Getting Started
 
-#### Installation
+### Installation
 
 1. Install Peer Dependencies (Material UI V5)
 
@@ -103,7 +103,7 @@ npm install material-react-table
 
 ---
 
-#### Usage
+### Usage
 
 > Read the full usage docs [here](https://www.material-react-table.com/docs/usage/)
 
@@ -161,7 +161,7 @@ _Open in [Code Sandbox](https://codesandbox.io/s/simple-material-react-table-exa
 
 ---
 
-### Contributors
+## Contributors
 
 <a href="https://github.com/kevinvandy/material-react-table/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=kevinvandy/material-react-table" />
