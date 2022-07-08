@@ -90,7 +90,7 @@ const Example: FC = () => {
       enableRowSelection
       muiSelectCheckboxProps={({ row }) => ({
         color: 'secondary',
-        disabled: row?.getValue('age') < 21,
+        disabled: row.getValue<number>('age') < 21,
       })}
     />
   );

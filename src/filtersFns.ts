@@ -22,7 +22,7 @@ export const contains = <TData extends Record<string, any> = {}>(
   filterValue: string | number,
 ) =>
   row
-    .getValue(id)
+    .getValue<string | number>(id)
     .toString()
     .toLowerCase()
     .trim()
@@ -36,7 +36,7 @@ export const startsWith = <TData extends Record<string, any> = {}>(
   filterValue: string | number,
 ) =>
   row
-    .getValue(id)
+    .getValue<string | number>(id)
     .toString()
     .toLowerCase()
     .trim()
@@ -50,7 +50,7 @@ export const endsWith = <TData extends Record<string, any> = {}>(
   filterValue: string | number,
 ) =>
   row
-    .getValue(id)
+    .getValue<string | number>(id)
     .toString()
     .toLowerCase()
     .trim()
@@ -63,7 +63,7 @@ export const equals = <TData extends Record<string, any> = {}>(
   id: string,
   filterValue: string | number,
 ) =>
-  row.getValue(id).toString().toLowerCase().trim() ===
+  row.getValue<string | number>(id).toString().toLowerCase().trim() ===
   filterValue.toString().toLowerCase().trim();
 
 equals.autoRemove = (val: any) => !val;
@@ -73,7 +73,7 @@ export const notEquals = <TData extends Record<string, any> = {}>(
   id: string,
   filterValue: string | number,
 ) =>
-  row.getValue(id).toString().toLowerCase().trim() !==
+  row.getValue<string | number>(id).toString().toLowerCase().trim() !==
   filterValue.toString().toLowerCase().trim();
 
 notEquals.autoRemove = (val: any) => !val;
@@ -83,9 +83,9 @@ export const greaterThan = <TData extends Record<string, any> = {}>(
   id: string,
   filterValue: string | number,
 ) =>
-  !isNaN(+filterValue) && !isNaN(+row.getValue(id))
-    ? +row.getValue(id) >= +filterValue
-    : row.getValue(id).toString().toLowerCase().trim() >
+  !isNaN(+filterValue) && !isNaN(+row.getValue<string | number>(id))
+    ? +row.getValue<string | number>(id) >= +filterValue
+    : row.getValue<string | number>(id).toString().toLowerCase().trim() >
       filterValue.toString().toLowerCase().trim();
 
 greaterThan.autoRemove = (val: any) => !val;
@@ -95,9 +95,9 @@ export const lessThan = <TData extends Record<string, any> = {}>(
   id: string,
   filterValue: string | number,
 ) =>
-  !isNaN(+filterValue) && !isNaN(+row.getValue(id))
-    ? +row.getValue(id) <= +filterValue
-    : row.getValue(id).toString().toLowerCase().trim() <
+  !isNaN(+filterValue) && !isNaN(+row.getValue<string | number>(id))
+    ? +row.getValue<string | number>(id) <= +filterValue
+    : row.getValue<string | number>(id).toString().toLowerCase().trim() <
       filterValue.toString().toLowerCase().trim();
 
 lessThan.autoRemove = (val: any) => !val;
@@ -121,7 +121,7 @@ export const empty = <TData extends Record<string, any> = {}>(
   row: Row<TData>,
   id: string,
   _filterValue: string | number,
-) => !row.getValue(id).toString().trim();
+) => !row.getValue<string | number>(id).toString().trim();
 
 empty.autoRemove = (val: any) => !val;
 
@@ -129,7 +129,7 @@ export const notEmpty = <TData extends Record<string, any> = {}>(
   row: Row<TData>,
   id: string,
   _filterValue: string | number,
-) => !!row.getValue(id).toString().trim();
+) => !!row.getValue<string | number>(id).toString().trim();
 
 notEmpty.autoRemove = (val: any) => !val;
 

@@ -14,7 +14,7 @@ const meta: Meta = {
 
 export default meta;
 
-const columns = [
+const columns: MRT_ColumnDef<typeof data[0]>[] = [
   {
     header: 'First Name',
     accessorKey: 'firstName',
@@ -250,7 +250,7 @@ export const CustomFilterFunctionPerColumn: Story<
         accessorKey: 'gender',
         filterFn: (row, _columnIds, filterValue) =>
           row
-            .getValue('gender')
+            .getValue<string>('gender')
             .toLowerCase()
             .startsWith(filterValue.toLowerCase()),
       },
@@ -263,7 +263,7 @@ export const CustomFilterFunctionPerColumn: Story<
         accessorKey: 'state',
         filterFn: (row, _columnIds, filterValue) =>
           row
-            .getValue('state')
+            .getValue<string>('state')
             .toLowerCase()
             .startsWith(filterValue.toLowerCase()),
       },
@@ -311,7 +311,8 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
           </TextField>
         ),
         filterFn: (row, _columnIds, filterValue) =>
-          row.getValue('gender').toLowerCase() === filterValue.toLowerCase(),
+          row.getValue<string>('gender').toLowerCase() ===
+          filterValue.toLowerCase(),
       },
       {
         header: 'Address',

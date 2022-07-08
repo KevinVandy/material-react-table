@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import MaterialReactTable, { MaterialReactTableProps } from '../../src';
+import MaterialReactTable, { MaterialReactTableProps, MRT_ColumnDef } from '../../src';
 import { faker } from '@faker-js/faker';
 
 const meta: Meta = {
@@ -9,10 +9,10 @@ const meta: Meta = {
 
 export default meta;
 
-const columns = [
+const columns: MRT_ColumnDef<typeof data[0]>[] = [
   {
     header: 'Name',
-    accessorKey: 'name',
+    id: 'name',
     columns: [
       {
         header: 'First Name',
@@ -27,7 +27,7 @@ const columns = [
   },
   {
     header: 'Info',
-    accessorKey: 'info',
+    id: 'info',
     columns: [
       {
         header: 'Age',
@@ -57,7 +57,7 @@ export const HeaderAndFooterGroups: Story<MaterialReactTableProps> = () => (
     columns={[
       {
         header: 'Name',
-        accessorKey: 'name',
+        id: 'name',
         footer: 'Name',
         columns: [
           {
@@ -65,7 +65,6 @@ export const HeaderAndFooterGroups: Story<MaterialReactTableProps> = () => (
             footer: 'First Name',
             accessorKey: 'firstName',
           },
-
           {
             header: 'Last Name',
             footer: 'Last Name',
@@ -75,7 +74,7 @@ export const HeaderAndFooterGroups: Story<MaterialReactTableProps> = () => (
       },
       {
         header: 'Info',
-        accessorKey: 'info',
+        id: 'info',
         footer: 'Info',
         columns: [
           {

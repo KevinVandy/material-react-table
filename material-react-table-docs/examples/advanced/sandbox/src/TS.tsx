@@ -56,10 +56,10 @@ const Example: FC = () => {
                 <Box
                   sx={(theme) => ({
                     backgroundColor:
-                      Number(cell.getValue()) < 50_000
+                      cell.getValue<number>() < 50_000
                         ? theme.palette.error.dark
-                        : Number(cell.getValue()) >= 50_000 &&
-                          Number(cell.getValue()) < 75_000
+                        : cell.getValue<number>() >= 50_000 &&
+                          cell.getValue<number>() < 75_000
                         ? theme.palette.warning.dark
                         : theme.palette.success.dark,
                     borderRadius: '0.25rem',
@@ -68,7 +68,7 @@ const Example: FC = () => {
                     p: '0.25rem',
                   })}
                 >
-                  {Number(cell.getValue())?.toLocaleString?.('en-US', {
+                  {cell.getValue<number>()?.toLocaleString?.('en-US', {
                     style: 'currency',
                     currency: 'USD',
                     minimumFractionDigits: 0,
@@ -83,10 +83,9 @@ const Example: FC = () => {
               size: 250,
             },
             {
-              Cell: ({ cell }) =>
-                (cell.getValue() as Date).toLocaleDateString(), //transform data to readable format for cell render
+              Cell: ({ cell }) => cell.getValue<Date>().toLocaleDateString(), //transform data to readable format for cell render
               Header: () => <em>Start Date</em>, //custom header markup
-              accessorFn: (row: Employee) => new Date(row.startDate), //transform data before processing so sorting works
+              accessorFn: (row) => new Date(row.startDate), //transform data before processing so sorting works
               accessorKey: 'startDate',
               header: 'Start Date',
               muiTableHeadCellFilterTextFieldProps: {
@@ -175,19 +174,19 @@ const Example: FC = () => {
       renderToolbarTopCustomActions={({ table }) => {
         const handleDeactivate = () => {
           table.getSelectedRowModel().flatRows.map((row) => {
-            alert('deactivating ' + row.original.firstName);
+            alert('deactivating ' + row.getValue('firstName'));
           });
         };
 
         const handleActivate = () => {
           table.getSelectedRowModel().flatRows.map((row) => {
-            alert('activating ' + row.original.firstName);
+            alert('activating ' + row.getValue('firstName'));
           });
         };
 
         const handleContact = () => {
           table.getSelectedRowModel().flatRows.map((row) => {
-            alert('contact ' + row.original.firstName);
+            alert('contact ' + row.getValue('firstName'));
           });
         };
 

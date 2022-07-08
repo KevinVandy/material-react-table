@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import MaterialReactTable, { MaterialReactTableProps } from '../../src';
+import MaterialReactTable, { MaterialReactTableProps, MRT_ColumnDef } from '../../src';
 import { faker } from '@faker-js/faker';
 import { Button, IconButton, Tooltip, Typography } from '@mui/material';
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -12,7 +12,7 @@ const meta: Meta = {
 
 export default meta;
 
-const columns = [
+const columns: MRT_ColumnDef<typeof data[0]>[] = [
   {
     header: 'First Name',
     accessorKey: 'firstName',

@@ -338,7 +338,7 @@ export type MRT_DefinedColumnDef<TData extends Record<string, any> = {}> = Omit<
 };
 
 export type MRT_Column<TData extends Record<string, any> = {}> = Omit<
-  Column<TData>,
+  Column<TData, unknown>,
   'header' | 'footer' | 'columns' | 'columnDef' | 'filterFn'
 > & {
   columnDef: MRT_DefinedColumnDef<TData>;
@@ -349,7 +349,7 @@ export type MRT_Column<TData extends Record<string, any> = {}> = Omit<
 };
 
 export type MRT_Header<TData extends Record<string, any> = {}> = Omit<
-  Header<TData>,
+  Header<TData, unknown>,
   'column'
 > & {
   column: MRT_Column<TData>;
@@ -374,7 +374,7 @@ export type MRT_Row<TData extends Record<string, any> = {}> = Omit<
 };
 
 export type MRT_Cell<TData extends Record<string, any> = {}> = Omit<
-  Cell<TData>,
+  Cell<TData, unknown>,
   'column' | 'row'
 > & {
   column: MRT_Column<TData>;

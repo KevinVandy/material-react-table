@@ -1,6 +1,9 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import MaterialReactTable, { MaterialReactTableProps } from '../../src';
+import MaterialReactTable, {
+  MaterialReactTableProps,
+  MRT_ColumnDef,
+} from '../../src';
 import { faker } from '@faker-js/faker';
 
 const meta: Meta = {
@@ -9,7 +12,7 @@ const meta: Meta = {
 
 export default meta;
 
-const columns = [
+const columns: MRT_ColumnDef<typeof data[0]>[] = [
   {
     header: 'First Name',
     accessorKey: 'firstName',
@@ -70,9 +73,13 @@ export const StyleMuiTableBodyCellConditionallyIn1Column: Story<
         muiTableBodyCellProps: ({ cell }) => ({
           sx: {
             backgroundColor:
-              cell.getValue() > 40 ? 'rgba(22, 184, 44, 0.5)' : undefined,
+              cell.getValue<number>() > 40
+                ? 'rgba(22, 184, 44, 0.5)'
+                : undefined,
             fontWeight:
-              cell.column.id === 'age' && cell.getValue() > 40 ? '700' : '400',
+              cell.column.id === 'age' && cell.getValue<number>() > 40
+                ? '700'
+                : '400',
           },
         }),
       },
@@ -111,7 +118,7 @@ export const CustomCellRender: Story<MaterialReactTableProps> = () => (
               fontStyle: 'italic',
               padding: '0.5rem',
               backgroundColor:
-                cell.column.id === 'age' && cell.getValue() > 40
+                cell.column.id === 'age' && cell.getValue<number>() > 40
                   ? 'rgba(22, 184, 44, 0.5)'
                   : undefined,
             }}

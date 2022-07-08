@@ -29,7 +29,7 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, table }) => {
   const { column, row } = cell;
   const { columnDef } = column;
 
-  const [value, setValue] = useState(cell.getValue());
+  const [value, setValue] = useState(cell.getValue<string>());
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);

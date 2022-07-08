@@ -1,6 +1,9 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import MaterialReactTable, { MaterialReactTableProps } from '../../src';
+import MaterialReactTable, {
+  MaterialReactTableProps,
+  MRT_ColumnDef,
+} from '../../src';
 import { faker } from '@faker-js/faker';
 
 const meta: Meta = {
@@ -14,7 +17,7 @@ const meta: Meta = {
 
 export default meta;
 
-const columns = [
+const columns: MRT_ColumnDef<typeof data[0]>[] = [
   {
     header: 'First Name',
     accessorKey: 'firstName',
@@ -51,7 +54,7 @@ export const StickyHeaderDisabledDefault: Story<
   <MaterialReactTable
     columns={columns}
     data={data}
-    initialState={{ pagination: { pageSize: 25 } }}
+    initialState={{ pagination: { pageSize: 25, pageIndex: 0 } }}
   />
 );
 
@@ -59,7 +62,7 @@ export const EnableStickyHeader: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    initialState={{ pagination: { pageSize: 25 } }}
+    initialState={{ pagination: { pageSize: 25, pageIndex: 0 } }}
     enableStickyHeader
   />
 );
@@ -68,7 +71,7 @@ export const StickyHeaderShorterTable: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    initialState={{ pagination: { pageSize: 25 } }}
+    initialState={{ pagination: { pageSize: 25, pageIndex: 0 } }}
     muiTableContainerProps={{ sx: { maxHeight: 400 } }}
   />
 );

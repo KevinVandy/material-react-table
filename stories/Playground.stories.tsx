@@ -1,6 +1,9 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import MaterialReactTable, { MaterialReactTableProps } from '../src';
+import MaterialReactTable, {
+  MaterialReactTableProps,
+  MRT_ColumnDef,
+} from '../src';
 import { faker } from '@faker-js/faker';
 import { Button, MenuItem } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -45,7 +48,7 @@ Default.args = {
       header: 'Address',
       accessorKey: 'address',
     },
-  ],
+  ] as MRT_ColumnDef<Row>[],
   data: [...Array(6)].map(() => ({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
@@ -74,7 +77,7 @@ MinimumFeatures.args = {
       header: 'Address',
       accessorKey: 'address',
     },
-  ],
+  ] as MRT_ColumnDef<Row>[],
   data: [...Array(6)].map(() => ({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
@@ -123,7 +126,7 @@ MaximumFeatures.args = {
     {
       header: 'Name',
       footer: 'Name',
-      accessorKey: 'name',
+      id: 'name',
       columns: [
         {
           header: 'First Name',
@@ -140,7 +143,7 @@ MaximumFeatures.args = {
     {
       header: 'Info',
       footer: 'Info',
-      accessorKey: 'info',
+      id: 'info',
       columns: [
         {
           header: 'Age',
