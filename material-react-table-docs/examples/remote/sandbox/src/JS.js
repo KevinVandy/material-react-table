@@ -56,6 +56,7 @@ const Example = () => {
         accessorKey: 'firstName',
         header: 'First Name',
       },
+      //column definitions...
       {
         accessorKey: 'lastName',
         header: 'Last Name',
@@ -72,6 +73,7 @@ const Example = () => {
         accessorKey: 'phoneNumber',
         header: 'Phone Number',
       },
+      //end
     ],
     [],
   );
@@ -81,6 +83,7 @@ const Example = () => {
       columns={columns}
       data={data}
       enableColumnFilterChangeMode={false}
+      initialState={{ showColumnFilters: true }}
       manualFiltering
       manualPagination
       manualSorting

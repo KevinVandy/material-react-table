@@ -12,7 +12,7 @@ export const MRT_TableHeadCellResizeHandle: FC<Props> = ({ header, table }) => {
     getState,
     options: { columnResizeMode },
   } = table;
-  const { density, showFilters } = getState();
+  const { density, showColumnFilters } = getState();
   const { column } = header;
   const { columnDef } = column;
   const { columnDefType } = columnDef;
@@ -26,7 +26,7 @@ export const MRT_TableHeadCellResizeHandle: FC<Props> = ({ header, table }) => {
         borderRadius: '2px',
         borderRightWidth: '2px',
         cursor: 'col-resize',
-        height: showFilters && columnDefType === 'data' ? '4rem' : '2rem',
+        height: showColumnFilters && columnDefType === 'data' ? '4rem' : '2rem',
         mr: density === 'compact' ? '-0.5rem' : '-1rem',
         opacity: 0.8,
         position: 'absolute',

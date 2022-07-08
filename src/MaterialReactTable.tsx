@@ -131,7 +131,7 @@ export type MRT_TableState<TData extends Record<string, any> = {}> =
     isLoading: boolean;
     isFullScreen: boolean;
     showAlertBanner: boolean;
-    showFilters: boolean;
+    showColumnFilters: boolean;
     showGlobalFilter: boolean;
     showProgressBars: boolean;
     showSkeletons: boolean;

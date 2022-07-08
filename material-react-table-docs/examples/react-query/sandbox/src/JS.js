@@ -69,6 +69,7 @@ const Example = () => {
       columns={columns}
       data={data?.data ?? []}
       enableColumnFilterChangeMode={false}
+      initialState={{ showColumnFilters: true }}
       manualFiltering
       manualPagination
       manualSorting

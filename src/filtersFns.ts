@@ -4,10 +4,10 @@ import { filterFns, Row } from '@tanstack/react-table';
 export const fuzzy = <TData extends Record<string, any> = {}>(
   row: Row<TData>,
   columnId: string,
-  filterValue: string,
+  filterValue: string | number,
   addMeta: (item: RankingInfo) => void,
 ) => {
-  const itemRank = rankItem(row.getValue(columnId), filterValue, {
+  const itemRank = rankItem(row.getValue(columnId), filterValue as string, {
     threshold: rankings.MATCHES,
   });
   addMeta(itemRank);

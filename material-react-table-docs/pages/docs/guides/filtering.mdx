@@ -2,6 +2,10 @@ import Head from 'next/head';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+import DisableExample from '../../../examples/disable-column-filters';
+import CustomizeFilterModesExample from '../../../examples/customize-filter-modes';
+import CustomizeFilterComponentsExample from '../../../examples/customize-filter-components';
+import RemoteExample from '../../../examples/remote';
 
 <Head>
   <title>Material React Table Docs - Filtering Feature Guide</title>
@@ -12,6 +16,8 @@ import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable
 </Head>
 
 ## Filtering Feature Guide
+
+Filtering is one of the most powerful features of Material React Table and is enabled by default. There is a lot of flexibility and customization available here, whether you want to customize the powerful client-side filtering already built in, or implement your own [server-side filtering](#manual-server-side-filtering), Material React Table has got you covered.
 
 ### Relevant Props
 
@@ -52,13 +58,132 @@ import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable
 ### Relevant State Options
 
 <StateOptionsTable
-  onlyProps={new Set(['columnFilters', 'currentFilterFns', 'showFilters'])}
+  onlyProps={
+    new Set(['columnFilters', 'currentFilterFns', 'showColumnFilters'])
+  }
 />
 
 ---
 
-Filtering is one of the most powerful features of Material React Table and is enabled by default. There is a lot of flexibility and customization available here, to the point where it does not all fit in just one guide, so you may find of the advanced filtering guides useful.
-
 ### Disable Filtering features
 
-Various subsets of filtering features can be disabled. If you want to disable filtering completely, you can set the `enableColumnFilters` prop to `false`, to remove all filters from each column. Alternatively, `enableColumnFilter` can be set to `false` for individual columns. `enableFilters` can be set to `false` to disable both column filters and the global search filter.
+Various subsets of filtering features can be disabled. If you want to disable filtering completely, you can set the `enableColumnFilters` prop to `false`, to remove all filters from each column. Alternatively, `enableColumnFilter` can be set to `false` for individual columns.
+
+`enableFilters` can be set to `false` to disable both column filters and the global search filter.
+
+<DisableExample />
+
+### Customize or Disable Filter Modes
+
+By default, Material React Table offers a bunch of filter modes that the user can choose from. You narrow down the available options by setting the `enabledColumnFilterOptions` prop, or a column specific `enabledColumnFilterOptions` option.
+
+```jsx
+const columns = [
+  {
+    accessorKey: 'firstName',
+    Header: 'First Name',
+    enabledColumnFilterOptions: ['fuzzy', 'contains', 'startsWith'],
+  },
+  {
+    accessorKey: 'age',
+    Header: 'Age',
+    enabledColumnFilterOptions: ['between', 'lessThan', 'greaterThan'],
+  },
+  }
+]
+```
+
+However, if you want to completely disable the ability to let a user toggle between different filter modes, you can set the `enableColumnFilterChangeMode` prop to `false`, or the column specific `enableColumnFilterChangeMode` option to `false`.
+
+```jsx
+return (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnFilterChangeMode={false}
+  />
+);
+```
+
+<CustomizeFilterModesExample />
+
+### Custom Filter Functions
+
+You can specify either a prebuilt filter function, from Material React Table, or TanStack Table, or you can even specify your own custom filter function in the `filterFn` column option.
+
+```jsx
+const columns = [
+  {
+    accessorKey: 'firstName',
+    Header: 'First Name',
+    // using a prebuilt filter function from Material React Table
+    filterFn: 'startsWith',
+  },
+  {
+    accessorKey: 'middleName',
+    Header: 'Middle Name',
+    // using a prebuilt filter function from TanStack Table
+    filterFn: 'includesStringSensitive',
+  },
+  {
+    accessorKey: 'lastName',
+    Header: 'Last Name',
+    // custom filter function
+    filterFn: (row, id, filterValue) =>
+      row.getValue(id).startsWith(filterValue),
+  },
+];
+```
+
+If you provide a custom filter function, it must have the following signature:
+
+```ts
+(row: Row<TData>, id: string, filterValue: string | number) => boolean;
+```
+
+### Manual Server-Side Filtering
+
+A very common use case when you have a lot of data is to filter the data on the server, instead of client-side. In this case you will want to set the `manualFiltering` prop to `true` and manage the `columnFilters` state yourself like so.
+
+```jsx
+// You can manage and have control over the columnFilters state yourself
+const [columnFilters, setColumnFilters] = useState([]);
+const [data, setData] = useState([]); //data will get updated after re-fetching
+
+useEffect(() => {
+  const fetchData = async () => {
+    // send api requests when columnFilters state changes
+    const filteredData = await fetch();
+    setData([...filteredData]);
+  };
+}, [columnFilters]);
+
+return (
+  <MaterialReactTable
+    columns={columns}
+    data={data} // this will already be filtered on the server
+    manualFiltering //turn off client-side filtering
+    onColumnFiltersChange={setColumnFilters} //hoist internal columnFilters state to your state
+    state={{ columnFilters }} //pass in your own managed columnFilters state
+  />
+);
+```
+
+> Specifying `manualFiltering` turns off all client-side filtering, and assumes that the `data` you pass to `<MaterialReactTable />` is already filtered.
+
+Here is the full Remote Data example showing off server-side filtering, pagination, and sorting.
+
+<RemoteExample />
+
+### Customize MUI Filter components
+
+You can customize the MUI filter components by setting the `muiTableHeadCellFilterTextFieldProps` prop or column option.
+
+You can also turn a filter textfield into a select dropdown by setting the `filterSelectOptions` prop or column option.
+
+<CustomizeFilterComponentsExample />
+
+### Custom Filter Components
+
+If you need custom filter components that are much more complex than textboxes and dropdowns, you can create and pass in your own filter components using the `Filter` column option.
+

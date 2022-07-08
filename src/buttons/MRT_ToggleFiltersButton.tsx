@@ -15,10 +15,10 @@ export const MRT_ToggleFiltersButton: FC<Props> = ({ table, ...rest }) => {
     },
     setShowFilters,
   } = table;
-  const { showFilters } = getState();
+  const { showColumnFilters } = getState();
 
   const handleToggleShowFilters = () => {
-    setShowFilters(!showFilters);
+    setShowFilters(!showColumnFilters);
   };
 
   return (
@@ -28,7 +28,7 @@ export const MRT_ToggleFiltersButton: FC<Props> = ({ table, ...rest }) => {
         onClick={handleToggleShowFilters}
         {...rest}
       >
-        {showFilters ? <FilterListOffIcon /> : <FilterListIcon />}
+        {showColumnFilters ? <FilterListOffIcon /> : <FilterListIcon />}
       </IconButton>
     </Tooltip>
   );

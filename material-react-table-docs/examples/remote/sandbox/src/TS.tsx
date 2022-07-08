@@ -84,6 +84,7 @@ const Example: FC = () => {
           accessorKey: 'firstName',
           header: 'First Name',
         },
+        //column definitions...
         {
           accessorKey: 'lastName',
           header: 'Last Name',
@@ -100,6 +101,7 @@ const Example: FC = () => {
           accessorKey: 'phoneNumber',
           header: 'Phone Number',
         },
+        //end
       ] as MRT_ColumnDef<User>[],
     [],
   );
@@ -109,6 +111,7 @@ const Example: FC = () => {
       columns={columns}
       data={data}
       enableColumnFilterChangeMode={false}
+      initialState={{ showColumnFilters: true }}
       manualFiltering
       manualPagination
       manualSorting

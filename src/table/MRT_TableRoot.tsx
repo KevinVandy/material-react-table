@@ -65,8 +65,8 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   const [showAlertBanner, setShowAlertBanner] = useState(
     props.initialState?.showAlertBanner ?? false,
   );
-  const [showFilters, setShowFilters] = useState(
-    initialState?.showFilters ?? false,
+  const [showColumnFilters, setShowFilters] = useState(
+    initialState?.showColumnFilters ?? false,
   );
   const [showGlobalFilter, setShowGlobalFilter] = useState(
     initialState?.showGlobalFilter ?? false,
@@ -230,7 +230,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
         density,
         isFullScreen,
         showAlertBanner,
-        showFilters,
+        showColumnFilters,
         showGlobalFilter,
         ...props.state,
       } as TableState,

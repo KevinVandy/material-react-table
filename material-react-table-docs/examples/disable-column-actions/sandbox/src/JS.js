@@ -22,8 +22,8 @@ const Example = () => {
   );
 
   const data = useMemo(
+    //data definitions...
     () => [
-      //data definitions...
       {
         id: 1,
         firstName: 'Dylan',
@@ -34,9 +34,9 @@ const Example = () => {
         firstName: 'Raquel',
         lastName: 'Kohler',
       },
-      //end
     ],
     [],
+    //end
   );
 
   return <MaterialReactTable columns={columns} data={data} />;

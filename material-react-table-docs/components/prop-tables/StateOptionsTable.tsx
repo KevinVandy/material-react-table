@@ -77,7 +77,7 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
         sx: { minWidth: '18rem' },
         variant: 'outlined',
       }}
-      muiTablePaperProps={{ sx: { mb: '1rem' } }}
+      muiTablePaperProps={{ sx: { mb: '1.5rem' } }}
       positionGlobalFilter="left"
       rowNumberMode="static"
     />

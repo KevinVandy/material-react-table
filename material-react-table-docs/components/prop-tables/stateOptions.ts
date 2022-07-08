@@ -188,7 +188,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateOption: 'showFilters',
+    stateOption: 'showColumnFilters',
     type: 'boolean',
   },
   {
