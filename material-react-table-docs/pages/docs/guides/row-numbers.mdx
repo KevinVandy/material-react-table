@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import OriginalExample from '../../../examples/enable-row-numbers-original';
 import StaticExample from '../../../examples/enable-row-numbers-static';
 
@@ -14,8 +15,7 @@ import StaticExample from '../../../examples/enable-row-numbers-static';
 
 ### Relevant Props
 
-- enableRowNumbers
-- rowNumberMode
+<RootPropTable onlyProps={new Set(['enableRowNumbers', 'rowNumberMode'])} />
 
 ---
 

@@ -8,7 +8,7 @@ export type Person = {
 
 export const data = [
   {
-    accessorKey: '1',
+    id: '1',
     firstName: 'Dylan',
     middleName: 'Sprouse',
     lastName: 'Murray',
@@ -17,7 +17,7 @@ export const data = [
     state: 'Kentucky',
   },
   {
-    accessorKey: '2',
+    id: '2',
     firstName: 'Raquel',
     middleName: 'Hakeem',
     lastName: 'Kohler',
@@ -26,7 +26,7 @@ export const data = [
     state: 'Ohio',
   },
   {
-    accessorKey: '3',
+    id: '3',
     firstName: 'Ervin',
     middleName: 'Kris',
     lastName: 'Reinger',
@@ -35,7 +35,7 @@ export const data = [
     state: 'West Virginia',
   },
   {
-    accessorKey: '4',
+    id: '4',
     firstName: 'Brittany',
     middleName: 'Kathryn',
     lastName: 'McCullough',
@@ -44,7 +44,7 @@ export const data = [
     state: 'Nebraska',
   },
   {
-    accessorKey: '5',
+    id: '5',
     firstName: 'Branson',
     middleName: 'John',
     lastName: 'Frami',

@@ -1,10 +1,17 @@
-import React, { useMemo } from 'react';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import React, { FC, useMemo } from 'react';
+import MaterialReactTable, {
+  MaterialReactTableProps,
+  MRT_ColumnDef,
+} from 'material-react-table';
 import { Link as MuiLink, useTheme } from '@mui/material';
 import { PropRow, rootProps } from './rootProps';
 import Link from 'next/link';
 
-const RootPropTable = () => {
+interface Props {
+  onlyProps?: Set<keyof MaterialReactTableProps>;
+}
+
+const RootPropTable: FC<Props> = ({ onlyProps }) => {
   const theme = useTheme();
 
   const columns = useMemo(
@@ -12,7 +19,7 @@ const RootPropTable = () => {
       [
         {
           enableClickToCopy: true,
-          header: 'PropName Name',
+          header: 'Prop Name',
           accessorKey: 'propName',
           Cell: ({ cell }) =>
             cell.row.original?.required ? (
@@ -64,15 +71,24 @@ const RootPropTable = () => {
     [theme],
   );
 
+  const data = useMemo(() => {
+    if (onlyProps) {
+      return rootProps.filter(({ propName }) => onlyProps.has(propName));
+    }
+    return rootProps;
+  }, [onlyProps]);
+
   return (
     <MaterialReactTable
       columns={columns}
-      data={rootProps}
-      enableColumnOrdering
+      data={data}
+      enableColumnActions={!onlyProps}
+      enableColumnOrdering={!onlyProps}
       enablePagination={false}
       enablePinning
       enableRowNumbers
       enableToolbarBottom={false}
+      enableToolbarTop={!onlyProps}
       initialState={{
         columnVisibility: { required: false },
         density: 'compact',
@@ -88,6 +104,7 @@ const RootPropTable = () => {
         sx: { minWidth: '18rem' },
         variant: 'outlined',
       }}
+      muiTablePaperProps={{ sx: { mb: '1rem' } }}
       positionGlobalFilter="left"
       rowNumberMode="static"
     />

@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import EnableExample from '../../../examples/enable-row-selection';
 import CustomizeExample from '../../../examples/customize-row-selection';
 
@@ -14,14 +15,20 @@ import CustomizeExample from '../../../examples/customize-row-selection';
 
 ### Relevant Props
 
-- enableMultiRowSelection
-- enableRowSelection
-- enableSelectAll
-- enableSubRowSelection
-- muiSelectAllCheckboxProps
-- muiSelectCheckboxProps
-- onRowSelectionChange
-- selectAllMode
+<RootPropTable
+  onlyProps={
+    new Set([
+      'enableMultiRowSelection',
+      'enableRowSelection',
+      'enableSelectAll',
+      'enableSubRowSelection',
+      'muiSelectAllCheckboxProps',
+      'muiSelectCheckboxProps',
+      'onRowSelectionChange',
+      'selectAllMode',
+    ])
+  }
+/>
 
 ---
 

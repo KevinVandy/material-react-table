@@ -1,4 +1,7 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 
 <Head>
   <title>Material React Table Docs - Filtering Feature Guide</title>
@@ -12,33 +15,45 @@ import Head from 'next/head';
 
 ### Relevant Props
 
-- enableColumnFilterChangeMode
-- enableColumnFilters
-- enabledColumnFilterOptions
-- enableFilters
-- filterFromLeafRows
-- getFilteredRowModel
-- manualFiltering
-- muiTableHeadCellFilterTextFieldProps
-- onColumnFiltersChange
-- onCurrentFilterFnsChange
-- onShowFiltersChange
+<RootPropTable
+  onlyProps={
+    new Set([
+      'enableColumnFilterChangeMode',
+      'enableColumnFilters',
+      'enabledColumnFilterOptions',
+      'enableFilters',
+      'filterFromLeafRows',
+      'getFilteredRowModel',
+      'manualFiltering',
+      'muiTableHeadCellFilterTextFieldProps',
+      'onColumnFiltersChange',
+      'onCurrentFilterFnsChange',
+      'onShowFiltersChange',
+    ])
+  }
+/>
 
 ### Relevant Column Options
 
-- Filter
-- enableColumnFilter
-- enabledColumnFilterOptions
-- enableColumnFilterChangeMode
-- filterFn
-- filterSelectOptions
-- muiTableHeadCellFilterTextFieldProps
+<ColumnOptionsTable
+  onlyProps={
+    new Set([
+      'Filter',
+      'enableColumnFilter',
+      'enabledColumnFilterOptions',
+      'enableColumnFilterChangeMode',
+      'filterFn',
+      'filterSelectOptions',
+      'muiTableHeadCellFilterTextFieldProps',
+    ])
+  }
+/>
 
 ### Relevant State Options
 
-- columnFilters
-- currentFilterFns
-- showFilters
+<StateOptionsTable
+  onlyProps={new Set(['columnFilters', 'currentFilterFns', 'showFilters'])}
+/>
 
 ---
 

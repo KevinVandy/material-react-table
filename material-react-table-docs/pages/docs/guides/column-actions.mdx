@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import DisableExample from '../../../examples/disable-column-actions';
 
 <Head>
@@ -13,13 +15,19 @@ import DisableExample from '../../../examples/disable-column-actions';
 
 ### Relevant Props
 
-- enableColumnActions
-- muiTableHeadCellColumnActionsButtonProps
+<RootPropTable
+  onlyProps={
+    new Set(['enableColumnActions', 'muiTableHeadCellColumnActionsButtonProps'])
+  }
+/>
 
 ### Relevant Column Options
 
-- enableColumnActions
-- muiTableHeadCellColumnActionsButtonProps
+<ColumnOptionsTable
+  onlyProps={
+    new Set(['enableColumnActions', 'muiTableHeadCellColumnActionsButtonProps'])
+  }
+/>
 
 ---
 

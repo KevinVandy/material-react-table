@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import DisableExample from '../../../examples/disable-density-toggle';
 
 <Head>
@@ -13,11 +15,11 @@ import DisableExample from '../../../examples/disable-density-toggle';
 
 ### Relevant Props
 
-- enableDensityToggle
+<RootPropTable onlyProps={new Set(['enableDensityToggle'])} />
 
 ### Relevant State
 
-- density
+<StateOptionsTable onlyProps={new Set(['density'])} />
 
 ---
 

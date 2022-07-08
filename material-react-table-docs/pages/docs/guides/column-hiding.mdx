@@ -1,4 +1,7 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import Example from '../../../examples/disable-column-hiding';
 
 <Head>
@@ -13,16 +16,17 @@ import Example from '../../../examples/disable-column-hiding';
 
 ### Relevant Props
 
-- enableHiding
-- onColumnVisibilityChange
+<RootPropTable
+  onlyProps={new Set(['enableHiding', 'onColumnVisibilityChange'])}
+/>
 
 ### Relevant Column Options
 
-- enableHiding
+<ColumnOptionsTable onlyProps={new Set(['enableHiding'])} />
 
 ### Relevant State
 
-- columnVisibility
+<StateOptionsTable onlyProps={new Set(['columnVisibility'])} />
 
 ---
 

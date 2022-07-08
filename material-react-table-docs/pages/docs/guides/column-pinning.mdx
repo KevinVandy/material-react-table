@@ -1,4 +1,7 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import Example from '../../../examples/enable-column-pinning';
 
 <Head>
@@ -13,16 +16,17 @@ import Example from '../../../examples/enable-column-pinning';
 
 ### Relevant Props
 
-- enablePinning
-- onColumnPinningChange
+<RootPropTable
+  onlyProps={new Set(['enablePinning', 'onColumnPinningChange'])}
+/>
 
 ### Relevant Column Options
 
-- enablePinning
+<ColumnOptionsTable onlyProps={new Set(['enablePinning'])} />
 
 ### Relevant State
 
-- pinning
+<StateOptionsTable onlyProps={new Set(['pinning'])} />
 
 ---
 

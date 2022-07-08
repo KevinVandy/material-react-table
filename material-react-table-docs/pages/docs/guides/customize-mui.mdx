@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 
 <Head>
   <title>Material React Table Docs - Customizing MUI Guide</title>
@@ -12,40 +14,54 @@ import Head from 'next/head';
 
 ### Relevant Props
 
-- muiLinearProgressProps
-- muiSearchTextFieldProps
-- muiSelectCheckboxProps
-- muiTableBodyCellCopyButtonProps
-- muiTableBodyCellEditTextFieldProps
-- muiTableBodyCellProps
-- muiTableBodyCellSkeletonProps
-- muiTableBodyProps
-- muiTableContainerProps
-- muiTableDetailPanelProps
-- muiTableFooterCellProps
-- muiTableFooterProps
-- muiTableFooterRowProps
-- muiTableHeadCellColumnActionsButtonProps
-- muiTableHeadCellFilterTextFieldProps
-- muiTableHeadCellProps
-- muiTableHeadProps
-- muiTableHeadRowProps
-- muiTablePaginationProps
-- muiTablePaperProps
-- muiTableProps
-- muiTableToolbarAlertBannerProps
-- muiTableToolbarBottomProps
-- muiTableToolbarTopProps
+<RootPropTable
+  onlyProps={
+    new Set([
+      'muiExpandAllButtonProps',
+      'muiExpandButtonProps',
+      'muiLinearProgressProps',
+      'muiSearchTextFieldProps',
+      'muiSelectCheckboxProps',
+      'muiTableBodyCellCopyButtonProps',
+      'muiTableBodyCellEditTextFieldProps',
+      'muiTableBodyCellProps',
+      'muiTableBodyCellSkeletonProps',
+      'muiTableBodyProps',
+      'muiTableContainerProps',
+      'muiTableDetailPanelProps',
+      'muiTableFooterCellProps',
+      'muiTableFooterProps',
+      'muiTableFooterRowProps',
+      'muiTableHeadCellColumnActionsButtonProps',
+      'muiTableHeadCellFilterTextFieldProps',
+      'muiTableHeadCellProps',
+      'muiTableHeadProps',
+      'muiTableHeadRowProps',
+      'muiTablePaginationProps',
+      'muiTablePaperProps',
+      'muiTableProps',
+      'muiTableToolbarAlertBannerProps',
+      'muiTableToolbarBottomProps',
+      'muiTableToolbarTopProps',
+    ])
+  }
+/>
 
 ### Relevant Column Options
 
-- muiTableBodyCellCopyButtonProps
-- muiTableBodyCellEditTextFieldProps
-- muiTableBodyCellProps
-- muiTableFooterCellProps
-- muiTableHeadCellColumnActionsButtonProps
-- muiTableHeadCellFilterTextFieldProps
-- muiTableHeadCellProps
+<ColumnOptionsTable
+  onlyProps={
+    new Set([
+      'muiTableBodyCellCopyButtonProps',
+      'muiTableBodyCellEditTextFieldProps',
+      'muiTableBodyCellProps',
+      'muiTableFooterCellProps',
+      'muiTableHeadCellColumnActionsButtonProps',
+      'muiTableHeadCellFilterTextFieldProps',
+      'muiTableHeadCellProps',
+    ])
+  }
+/>
 
 ---
 

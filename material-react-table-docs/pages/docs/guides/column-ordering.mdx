@@ -1,4 +1,7 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import Example from '../../../examples/enable-column-ordering';
 
 <Head>
@@ -13,16 +16,17 @@ import Example from '../../../examples/enable-column-ordering';
 
 ### Relevant Props
 
-- enableColumnOrdering
-- onColumnOrderChange
+<RootPropTable
+  onlyProps={new Set(['enableColumnOrdering', 'onColumnOrderChange'])}
+/>
 
 ### Relevant Column Options
 
-- enableColumnOrdering
+<ColumnOptionsTable onlyProps={new Set(['enableColumnOrdering'])} />
 
 ### Relevant State
 
-- columnOrder
+<StateOptionsTable onlyProps={new Set(['columnOrder'])} />
 
 ---
 

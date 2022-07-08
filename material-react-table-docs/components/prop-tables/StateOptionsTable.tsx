@@ -1,16 +1,23 @@
-import React, { useMemo } from 'react';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import React, { FC, useMemo } from 'react';
+import MaterialReactTable, {
+  MRT_ColumnDef,
+  MRT_TableState,
+} from 'material-react-table';
 import { Link } from '@mui/material';
 import { StateRow, stateOptions } from './stateOptions';
 
-const StateOptionsTable = () => {
+interface Props {
+  onlyProps?: Set<keyof MRT_TableState>;
+}
+
+const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
   const columns = useMemo(
     () =>
       [
         {
-          accessorKey: 'stateName',
+          accessorKey: 'stateOption',
           enableClickToCopy: true,
-          header: 'State Name',
+          header: 'State Option',
         },
         { accessorKey: 'type', header: 'Type', enableGlobalFilter: false },
         {
@@ -39,26 +46,38 @@ const StateOptionsTable = () => {
     [],
   );
 
+  const data = useMemo(() => {
+    if (onlyProps) {
+      return stateOptions.filter(({ stateOption }) =>
+        onlyProps.has(stateOption),
+      );
+    }
+    return stateOptions;
+  }, [onlyProps]);
+
   return (
     <MaterialReactTable
       columns={columns}
-      data={stateOptions}
-      enableColumnOrdering
+      data={data}
+      enableColumnActions={!onlyProps}
+      enableColumnOrdering={!onlyProps}
       enablePagination={false}
       enablePinning
       enableRowNumbers
       enableToolbarBottom={false}
+      enableToolbarTop={!onlyProps}
       initialState={{
-        columnPinning: { left: ['mrt-row-numbers', 'stateName'], right: [] },
+        columnPinning: { left: ['mrt-row-numbers', 'stateOption'], right: [] },
         density: 'compact',
         showGlobalFilter: true,
-        sorting: [{ id: 'stateName', desc: false }],
+        sorting: [{ id: 'stateOption', desc: false }],
       }}
       muiSearchTextFieldProps={{
         placeholder: 'Search State Options',
         sx: { minWidth: '18rem' },
         variant: 'outlined',
       }}
+      muiTablePaperProps={{ sx: { mb: '1rem' } }}
       positionGlobalFilter="left"
       rowNumberMode="static"
     />

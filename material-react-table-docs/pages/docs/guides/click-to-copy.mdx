@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 
 <Head>
   <title>Material React Table Docs - Click to Copy Feature Guide</title>
@@ -12,12 +14,14 @@ import Head from 'next/head';
 
 ### Relevant Props
 
-- enableClickToCopy
-- muiTableBodyCellCopyButtonProps
+<RootPropTable
+  onlyProps={new Set(['enableClickToCopy', 'muiTableBodyCellCopyButtonProps'])}
+/>
 
 ### Relevant Column Options
 
-- enableClickToCopy
-- muiTableBodyCellCopyButtonProps
+<ColumnOptionsTable
+  onlyProps={new Set(['enableClickToCopy', 'muiTableBodyCellCopyButtonProps'])}
+/>
 
 ---

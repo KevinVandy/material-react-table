@@ -1,9 +1,13 @@
-import React, { useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { Link, useTheme } from '@mui/material';
 import { ColumnOption, columnOptions } from './columnOptions';
 
-const ColumnOptionsTable = () => {
+interface Props {
+  onlyProps?: Set<keyof MRT_ColumnDef>;
+}
+
+const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
   const theme = useTheme();
 
   const columns = useMemo(
@@ -54,15 +58,26 @@ const ColumnOptionsTable = () => {
     [theme],
   );
 
+  const data = useMemo(() => {
+    if (onlyProps) {
+      return columnOptions.filter(({ columnOption }) =>
+        onlyProps.has(columnOption),
+      );
+    }
+    return columnOptions;
+  }, [onlyProps]);
+
   return (
     <MaterialReactTable
       columns={columns}
-      data={columnOptions}
-      enableColumnOrdering
+      data={data}
+      enableColumnActions={!onlyProps}
+      enableColumnOrdering={!onlyProps}
       enablePagination={false}
       enablePinning
       enableRowNumbers
       enableToolbarBottom={false}
+      enableToolbarTop={!onlyProps}
       initialState={{
         columnVisibility: { required: false },
         density: 'compact',
@@ -78,6 +93,7 @@ const ColumnOptionsTable = () => {
         sx: { minWidth: '18rem' },
         variant: 'outlined',
       }}
+      muiTablePaperProps={{ sx: { mb: '1rem' } }}
       positionGlobalFilter="left"
       rowNumberMode="static"
     />

@@ -6,7 +6,7 @@ export type StateRow = {
   link?: string;
   linkText?: string;
   source?: 'MRT' | 'TanStack Table' | 'Material UI' | '';
-  stateName: keyof MRT_TableState;
+  stateOption: keyof MRT_TableState;
   type?: string;
 };
 
@@ -17,7 +17,7 @@ export const stateOptions: StateRow[] = [
     link: 'https://tanstack.com/table/v8/docs/api/features/filters',
     linkText: 'TanStack Table Filters Docs',
     source: 'TanStack Table',
-    stateName: 'columnFilters',
+    stateOption: 'columnFilters',
     type: 'Array<{id: string, value: unknown}>',
   },
   {
@@ -26,7 +26,7 @@ export const stateOptions: StateRow[] = [
     link: 'https://tanstack.com/table/v8/docs/api/features/column-ordering',
     linkText: 'TanStack Table Column Ordering Docs',
     source: 'TanStack Table',
-    stateName: 'columnOrder',
+    stateOption: 'columnOrder',
     type: 'Array<string>',
   },
   {
@@ -35,7 +35,7 @@ export const stateOptions: StateRow[] = [
     link: 'https://tanstack.com/table/v8/docs/api/features/column-pinning',
     linkText: 'TanStack Table Column Pinning Docs',
     source: 'TanStack Table',
-    stateName: 'columnPinning',
+    stateOption: 'columnPinning',
     type: '{ left: Array<string>, right: Array<string> }',
   },
   {
@@ -44,7 +44,7 @@ export const stateOptions: StateRow[] = [
     link: 'https://tanstack.com/table/v8/docs/api/features/column-sizing',
     linkText: 'TanStack Table Column Sizing Docs',
     source: 'TanStack Table',
-    stateName: 'columnSizing',
+    stateOption: 'columnSizing',
     type: 'Record<string, number>',
   },
   {
@@ -53,7 +53,7 @@ export const stateOptions: StateRow[] = [
     link: 'https://tanstack.com/table/v8/docs/api/features/column-sizing',
     linkText: 'TanStack Table Column Sizing Docs',
     source: 'TanStack Table',
-    stateName: 'columnSizingInfo',
+    stateOption: 'columnSizingInfo',
     type: 'See TanStack Docs',
   },
   {
@@ -62,7 +62,7 @@ export const stateOptions: StateRow[] = [
     link: 'https://tanstack.com/table/v8/docs/api/features/column-visibility',
     linkText: 'TanStack Table Column Visibility Docs',
     source: 'TanStack Table',
-    stateName: 'columnVisibility',
+    stateOption: 'columnVisibility',
     type: 'Record<string, boolean>',
   },
   {
@@ -71,7 +71,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateName: 'currentEditingCell',
+    stateOption: 'currentEditingCell',
     type: 'MRT_Cell',
   },
   {
@@ -80,7 +80,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateName: 'currentEditingRow',
+    stateOption: 'currentEditingRow',
     type: 'MRT_Row',
   },
   {
@@ -89,7 +89,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateName: 'currentFilterFns',
+    stateOption: 'currentFilterFns',
     type: '{ [key: string]: MRT_FilterFn }',
   },
   {
@@ -98,7 +98,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateName: 'currentGlobalFilterFn',
+    stateOption: 'currentGlobalFilterFn',
     type: 'MRT_FilterFn',
   },
   {
@@ -107,7 +107,7 @@ export const stateOptions: StateRow[] = [
     link: 'https://tanstack.com/table/v8/docs/api/features/expanding',
     linkText: 'TanStack Table Expanding Docs',
     source: 'TanStack Table',
-    stateName: 'expanded',
+    stateOption: 'expanded',
     type: 'Record<string, boolean>',
   },
   {
@@ -116,7 +116,7 @@ export const stateOptions: StateRow[] = [
     link: 'https://tanstack.com/table/v8/docs/api/features/filters',
     linkText: 'TanStack Table Filtering Docs',
     source: 'TanStack Table',
-    stateName: 'globalFilter',
+    stateOption: 'globalFilter',
     type: 'any',
   },
   {
@@ -125,7 +125,7 @@ export const stateOptions: StateRow[] = [
     link: 'https://tanstack.com/table/v8/docs/api/features/grouping',
     linkText: 'TanStack Table Grouping Docs',
     source: 'TanStack Table',
-    stateName: 'grouping',
+    stateOption: 'grouping',
     type: 'Array<string>',
   },
   {
@@ -134,7 +134,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'TanStack Table',
-    stateName: 'density',
+    stateOption: 'density',
     type: "'comfortable' | 'compact' | 'spacious'",
   },
   {
@@ -143,7 +143,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateName: 'isFullScreen',
+    stateOption: 'isFullScreen',
     type: 'boolean',
   },
   {
@@ -152,7 +152,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateName: 'isLoading',
+    stateOption: 'isLoading',
     type: 'boolean',
   },
   {
@@ -161,7 +161,7 @@ export const stateOptions: StateRow[] = [
     link: 'https://tanstack.com/table/v8/docs/api/features/pagination',
     linkText: 'TanStack Table Pagination Docs',
     source: 'TanStack Table',
-    stateName: 'pagination',
+    stateOption: 'pagination',
     type: '{ pageIndex: number, pageSize: number } ',
   },
   {
@@ -170,7 +170,7 @@ export const stateOptions: StateRow[] = [
     link: 'https://tanstack.com/table/v8/docs/api/features/row-selection',
     linkText: 'TanStack Table Row Selection Docs',
     source: 'TanStack Table',
-    stateName: 'rowSelection',
+    stateOption: 'rowSelection',
     type: 'Record<string, boolean>',
   },
   {
@@ -179,7 +179,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateName: 'showAlertBanner',
+    stateOption: 'showAlertBanner',
     type: 'boolean',
   },
   {
@@ -188,7 +188,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateName: 'showFilters',
+    stateOption: 'showFilters',
     type: 'boolean',
   },
   {
@@ -197,7 +197,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateName: 'showGlobalFilter',
+    stateOption: 'showGlobalFilter',
     type: 'boolean',
   },
   {
@@ -206,7 +206,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateName: 'showProgressBars',
+    stateOption: 'showProgressBars',
     type: 'boolean',
   },
   {
@@ -215,7 +215,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateName: 'showSkeletons',
+    stateOption: 'showSkeletons',
     type: 'boolean',
   },
   {
@@ -224,7 +224,7 @@ export const stateOptions: StateRow[] = [
     link: 'https://tanstack.com/table/v8/docs/api/features/sorting',
     linkText: 'TanStack Table Sorting Docs',
     source: 'TanStack Table',
-    stateName: 'sorting',
+    stateOption: 'sorting',
     type: 'Array<{ id: string, desc: boolean }>',
   },
 ];

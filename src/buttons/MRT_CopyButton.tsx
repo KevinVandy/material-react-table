@@ -50,7 +50,6 @@ export const MRT_CopyButton: FC<Props> = ({ cell, children, table }) => {
       title={copied ? localization.copiedToClipboard : localization.clickToCopy}
     >
       <Button
-        aria-label={localization.clickToCopy}
         onClick={() => handleCopy(cell.getValue())}
         size="small"
         type="button"
