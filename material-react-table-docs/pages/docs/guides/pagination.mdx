@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 
 <Head>
   <title>Material React Table Docs - Pagination Feature Guide</title>
@@ -9,3 +11,30 @@ import Head from 'next/head';
 </Head>
 
 ## Pagination Feature Guide
+
+### Relevant Props
+
+<RootPropTable
+  onlyProps={
+    new Set([
+      'autoResetPagination',
+      'enablePagination',
+      'getPaginationRowModel',
+      'manualPagination',
+      'muiTablePaginationProps',
+      'onPaginationChange',
+      'pageCount',
+      'rowCount',
+      'paginateExpandedRows',
+      'positionPagination',
+    ])
+  }
+/>
+
+### Relevant State Options
+
+<StateOptionsTable onlyProps={new Set(['pagination'])} />
+
+---
+
+### Default Client-Side Pagination

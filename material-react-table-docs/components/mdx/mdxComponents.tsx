@@ -20,8 +20,12 @@ export const mdxComponents = {
   code: (props: any) => <SampleCodeSnippet {...props} />,
   h1: (props: any) => <Typography variant="h1" {...props} />,
   h2: (props: any) => <LinkHeading variant="h2" {...props} />,
-  h3: (props: any) => <LinkHeading variant="h3" {...props} />,
-  h4: (props: any) => <LinkHeading variant="h4" {...props} />,
+  h3: (props: any) => (
+    <LinkHeading variant="h3" sx={{ mt: '3rem' }} {...props} />
+  ),
+  h4: (props: any) => (
+    <LinkHeading variant="h4" sx={{ mt: '2rem' }} {...props} />
+  ),
   h5: (props: any) => <Typography variant="h5" {...props} />,
   h6: (props: any) => <Typography variant="h6" {...props} />,
   hr: (props: any) => <Divider sx={{ mb: '1rem' }} {...props} />,

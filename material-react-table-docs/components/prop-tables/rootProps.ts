@@ -1297,16 +1297,6 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onDetailPanelClick',
-    defaultValue: '',
-    description: '',
-    link: '',
-    linkText: '',
-    required: false,
-    source: '',
-    type: '',
-  },
-  {
     propName: 'onEditRowSubmit',
     defaultValue: '',
     description: '',

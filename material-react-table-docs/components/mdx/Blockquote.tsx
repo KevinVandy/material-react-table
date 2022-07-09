@@ -1,8 +1,9 @@
 import { FC } from 'react';
-import { alpha, darken, lighten, useTheme } from '@mui/material';
+import { alpha, darken, useMediaQuery, useTheme } from '@mui/material';
 
 export const Blockquote: FC<any> = (props) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery('(max-width: 720px)');
   return (
     <blockquote
       style={{
@@ -13,7 +14,7 @@ export const Blockquote: FC<any> = (props) => {
         padding: '0.5rem 1rem',
         backgroundColor: alpha(theme.palette.primary.main, 0.05),
         borderRadius: '4px',
-        margin: '3rem',
+        margin: isMobile ? '1rem' : '3rem',
       }}
       {...props}
     />
