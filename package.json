@@ -8,7 +8,8 @@
     "react-table",
     "material-ui",
     "material-table",
-    "tanstack table"
+    "tanstack table",
+    "data table"
   ],
   "repository": {
     "type": "git",
