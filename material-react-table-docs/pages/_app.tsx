@@ -10,11 +10,16 @@ import BreadCrumbs from '../components/navigation/BreadCrumbs';
 import { theme } from '../styles/MuiTheme';
 import '../styles/globals.css';
 import PageTableOfContents from '../components/navigation/PageTableOfContents';
+import { useRouter } from 'next/router';
 
 function App({ Component, pageProps }: AppProps) {
+  const { pathname } = useRouter();
   const isTablet = useMediaQuery('(max-width: 900px)');
   const isDesktop = useMediaQuery('(min-width: 1600px)');
-  const isXLDesktop = useMediaQuery('(min-width: 1800px)');
+  const isXLDesktop =
+    useMediaQuery('(min-width: 1800px)') &&
+    pathname !== '/' &&
+    pathname !== '/about';
   const [navOpen, setNavOpen] = useState(true);
   const [darkTheme, setDarkTheme] = useState(true);
 
