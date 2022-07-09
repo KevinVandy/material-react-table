@@ -1,5 +1,5 @@
 {
-  "version": "0.23.0",
+  "version": "0.23.1",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI implementation of TanStack React Table, inspired by material-table and the MUI X DataGrid, written from the ground up in TypeScript.",
@@ -68,6 +68,7 @@
     "@storybook/addon-essentials": "^6.5.9",
     "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-links": "^6.5.9",
+    "@storybook/addon-storysource": "^6.5.9",
     "@storybook/addons": "^6.5.9",
     "@storybook/react": "^6.5.9",
     "@types/react": "^18.0.15",
@@ -98,7 +99,7 @@
   },
   "dependencies": {
     "@tanstack/match-sorter-utils": "8.1.1",
-    "@tanstack/react-table": "8.2.1",
+    "@tanstack/react-table": "8.2.2",
     "react-virtual": "^2.10.4"
   }
 }

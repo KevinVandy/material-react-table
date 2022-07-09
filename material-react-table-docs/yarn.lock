@@ -463,17 +463,17 @@
   dependencies:
     remove-accents "0.4.2"
 
-"@tanstack/react-table@8.2.1":
-  version "8.2.1"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.2.1.tgz#04e6530287d342a949d86dcbbec76cfffe0e7903"
-  integrity sha512-Y7uN7VkZ+7TsmhYF+7UwvMJL244eVUN0eEaB/YeXTaasSOII44CiXN7LRl3sjQAUQY5LrVe/1/2xVkv0kVq2Yg==
+"@tanstack/react-table@8.2.2":
+  version "8.2.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.2.2.tgz#4d07be1c68ba1955d4afb04db483c5be3082e29d"
+  integrity sha512-X5odzgYciE3PUhlt2Adnc/p2PrR6lMAnUCHAwUGIiwA0TspkIjdhrgrkJf044BDIVytiofdb5fICDfZ77lcz1g==
   dependencies:
-    "@tanstack/table-core" "8.2.1"
+    "@tanstack/table-core" "8.2.2"
 
-"@tanstack/table-core@8.2.1":
-  version "8.2.1"
-  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.2.1.tgz#93d0ad071cf7ad92bde178bbefa5459379594449"
-  integrity sha512-CWFw0zM594B2SJItaruR2CuiRv4x8sZU9MxEES0Dmk/LjEPdkZVgXydBkYG+EGPS35yo/cFIvywm3YeXyaUhPA==
+"@tanstack/table-core@8.2.2":
+  version "8.2.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.2.2.tgz#e7413e077fe5e6e52a521fbc52c9dff8b15ae521"
+  integrity sha512-DQpX6S7Fob0ytfx8BzMLNAx/X4s1qxP66xZ5I2h7gHM2pCXmKMPU/dF4IMzq1lbJo7rDFlEMHffSz3knh7yX/Q==
 
 "@types/acorn@^4.0.0":
   version "4.0.6"
@@ -1988,13 +1988,13 @@ match-sorter@^6.0.2:
     "@babel/runtime" "^7.12.5"
     remove-accents "0.4.2"
 
-material-react-table@^0.23.0:
-  version "0.23.0"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.23.0.tgz#ebf7ff920bd895087f444190fd6dcc8740054749"
-  integrity sha512-8JDzRZ/gKGnAwzkoXhyVc2Z2F+Yj+QJr1llk3afbYnJahaA55ZY4a51Ldho6E/oiVpdOVq5/SkWS0hUW5rP+Yw==
+material-react-table@^0.23.1:
+  version "0.23.1"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.23.1.tgz#c4986e570ef2196198d5a1037a2bb96482fcfd44"
+  integrity sha512-qUtt1AyBHyGGNVTVzfx86mgHwgy3PP1pCIIAHSdKOF2oO4ZS+2z18nEymxxaDdYTW838uePb4cXV66TWZ4mrtw==
   dependencies:
     "@tanstack/match-sorter-utils" "8.1.1"
-    "@tanstack/react-table" "8.2.1"
+    "@tanstack/react-table" "8.2.2"
     react-virtual "^2.10.4"
 
 mdast-util-definitions@^5.0.0:

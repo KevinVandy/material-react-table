@@ -85,7 +85,10 @@ export const getLeadingDisplayColumnIds = <
     ((props.positionActionsColumn === 'first' && props.enableRowActions) ||
       (props.enableEditing && props.editingMode === 'row')) &&
       'mrt-row-actions',
-    (props.enableExpanding || props.enableGrouping) && 'mrt-expand',
+    (props.enableExpanding ||
+      props.enableGrouping ||
+      props.renderDetailPanel) &&
+      'mrt-expand',
     props.enableRowSelection && 'mrt-select',
     props.enableRowNumbers && 'mrt-row-numbers',
   ].filter(Boolean) as string[];
