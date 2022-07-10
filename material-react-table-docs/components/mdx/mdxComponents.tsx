@@ -50,7 +50,7 @@ export const mdxComponents = {
           xs: 'left',
           md: 'justify',
         },
-        m: '1.5rem 0',
+        m: '1rem 0',
       }}
       variant="body1"
       {...props}

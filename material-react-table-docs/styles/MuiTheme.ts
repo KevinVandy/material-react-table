@@ -5,7 +5,7 @@ export const theme = (darkTheme: boolean) =>
     palette: {
       mode: darkTheme ? 'dark' : 'light',
       secondary: {
-        main: 'rgb(255,65,84)',
+        main: '#D53E84',
       },
     },
     typography: {
