@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Link, Typography, useMediaQuery } from '@mui/material';
 import { useRouter } from 'next/router';
 
-const PageTableOfContents = () => {
+const MiniNav = () => {
   const { pathname } = useRouter();
   const isXLDesktop = useMediaQuery('(min-width: 1800px)');
   const [headings, setHeadings] = useState<NodeListOf<HTMLElement>>();
@@ -12,9 +12,6 @@ const PageTableOfContents = () => {
       document.querySelectorAll(isXLDesktop ? 'h2, h3, h4, h5' : 'h3, h4, h5'),
     );
   }, [isXLDesktop, pathname]);
-
-  if (pathname === '/') return null;
-  if (pathname === '/about') return null;
 
   return (
     <Box
@@ -28,7 +25,6 @@ const PageTableOfContents = () => {
     >
       <ul style={{ padding: 0 }}>
         {Array.from(headings ?? []).map((heading, index) => {
-          console.log(heading.innerText);
           if (
             !isXLDesktop &&
             ['demo', 'source code'].includes(
@@ -73,4 +69,4 @@ const PageTableOfContents = () => {
   );
 };
 
-export default PageTableOfContents;
+export default MiniNav;

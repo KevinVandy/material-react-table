@@ -1,25 +1,32 @@
 import { useState, useEffect } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { MDXProvider } from '@mdx-js/react';
-import { Box, styled, ThemeProvider, useMediaQuery } from '@mui/material';
+import { Box, ThemeProvider, useMediaQuery } from '@mui/material';
 import { mdxComponents } from '../components/mdx/mdxComponents';
 import TopBar from '../components/navigation/TopBar';
 import SideBar from '../components/navigation/Sidebar';
 import BreadCrumbs from '../components/navigation/BreadCrumbs';
+import MiniNav from '../components/navigation/MiniNav';
 import { theme } from '../styles/MuiTheme';
 import '../styles/globals.css';
-import PageTableOfContents from '../components/navigation/PageTableOfContents';
-import { useRouter } from 'next/router';
 
 function App({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
+
+  const showBreadCrumbs =
+    pathname !== '/' && pathname !== '/about' && pathname !== '/changelog';
+
+  const showMiniNav =
+    pathname.includes('/docs/guides/') ||
+    pathname.includes('/docs/usage') ||
+    pathname.includes('/docs/install');
+
   const isTablet = useMediaQuery('(max-width: 900px)');
   const isDesktop = useMediaQuery('(min-width: 1600px)');
-  const isXLDesktop =
-    useMediaQuery('(min-width: 1800px)') &&
-    pathname !== '/' &&
-    pathname !== '/about';
+  const isXLDesktop = useMediaQuery('(min-width: 1800px)') && showMiniNav;
+
   const [navOpen, setNavOpen] = useState(true);
   const [darkTheme, setDarkTheme] = useState(true);
 
@@ -71,11 +78,11 @@ function App({ Component, pageProps }: AppProps) {
                 width: '100%',
               }}
             >
-              <BreadCrumbs />
-              {!isXLDesktop && <PageTableOfContents />}
+              {showBreadCrumbs && <BreadCrumbs />}
+              {showMiniNav && !isXLDesktop && <MiniNav />}
               <Component {...pageProps} />
             </Box>
-            {isXLDesktop && <PageTableOfContents />}
+            {showMiniNav && isXLDesktop && <MiniNav />}
           </Box>
         </MDXProvider>
       </ThemeProvider>

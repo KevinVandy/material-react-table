@@ -11,7 +11,7 @@ const BreadCrumbs = () => {
     routes.shift();
     let links: string[] = [];
     for (let i = 0; i < routes.length + 1; i++) {
-      if (routes[i] && routes[i] !== '/' && routes[i] !== 'about')
+      if (routes[i] && routes[i] !== '/')
         links.push(`/${routes.slice(0, i + 1).join('/')}`);
     }
     return links;
@@ -25,7 +25,11 @@ const BreadCrumbs = () => {
     <MuiBreadcrumbs aria-label="breadcrumb" sx={{ pt: '1rem' }}>
       {breadCrumbLinks.map((link, index) => (
         <Link key={index} href={link} passHref>
-          <MuiLink color="inherit" sx={{ cursor: 'pointer' }} underline="hover">
+          <MuiLink
+            color="inherit"
+            sx={{ cursor: 'pointer', textTransform: 'capitalize' }}
+            underline="hover"
+          >
             {link.split('/').pop()?.replaceAll('-', ' ')}
           </MuiLink>
         </Link>
