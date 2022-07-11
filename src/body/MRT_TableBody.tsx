@@ -1,21 +1,16 @@
-import React, { Dispatch, FC, RefObject, SetStateAction, useMemo } from 'react';
+import React, { FC, RefObject, useMemo } from 'react';
 import { useVirtual } from 'react-virtual';
 import { TableBody } from '@mui/material';
 import { MRT_TableBodyRow } from './MRT_TableBodyRow';
 import { rankGlobalFuzzy } from '../sortingFns';
-import type { MRT_Column, MRT_Row, MRT_TableInstance } from '..';
+import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
   table: MRT_TableInstance;
-  setCurrentHoveredColumn: Dispatch<SetStateAction<MRT_Column | null>>;
   tableContainerRef: RefObject<HTMLDivElement>;
 }
 
-export const MRT_TableBody: FC<Props> = ({
-  setCurrentHoveredColumn,
-  table,
-  tableContainerRef,
-}) => {
+export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
   const {
     getRowModel,
     getPrePaginationRowModel,
@@ -108,7 +103,6 @@ export const MRT_TableBody: FC<Props> = ({
               rowIndex={
                 enableRowVirtualization ? rowOrVirtualRow.index : rowIndex
               }
-              setCurrentHoveredColumn={setCurrentHoveredColumn}
               table={table}
             />
           );

@@ -1187,6 +1187,16 @@ export const rootProps = [
     type: '',
   },
   {
+    propName: 'onCurrentDraggingColumnChange',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '',
+  },
+  {
     propName: 'onCurrentEditingCellChange',
     defaultValue: '',
     description: '',
@@ -1218,6 +1228,16 @@ export const rootProps = [
   },
   {
     propName: 'onCurrentGlobalFilterFnChange',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '',
+  },
+  {
+    propName: 'onCurrentHoveredColumnChange',
     defaultValue: '',
     description: '',
     link: '',

@@ -12,6 +12,7 @@ import {
 } from '@tanstack/react-table';
 import {
   MRT_Cell,
+  MRT_Column,
   MRT_ColumnDef,
   MRT_FilterOption,
   MRT_Row,
@@ -56,6 +57,10 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
     useState<MRT_Cell<TData> | null>(initialState?.currentEditingCell ?? null);
   const [currentEditingRow, setCurrentEditingRow] =
     useState<MRT_Row<TData> | null>(initialState?.currentEditingRow ?? null);
+  const [currentDraggingColumn, setCurrentDraggingColumn] =
+    useState<MRT_Column<TData> | null>(null);
+  const [currentHoveredColumn, setCurrentHoveredColumn] =
+    useState<MRT_Column<TData> | null>(null);
   const [density, setDensity] = useState(
     initialState?.density ?? 'comfortable',
   );
@@ -223,10 +228,12 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       initialState,
       state: {
         columnOrder,
+        currentDraggingColumn,
         currentEditingCell,
         currentEditingRow,
         currentFilterFns,
         currentGlobalFilterFn,
+        currentHoveredColumn,
         density,
         isFullScreen,
         showAlertBanner,
@@ -236,6 +243,8 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       } as TableState,
       tableId,
     }),
+    setCurrentDraggingColumn:
+      props.onCurrentDraggingColumnChange ?? setCurrentDraggingColumn,
     setCurrentEditingCell:
       props.onCurrentEditingCellChange ?? setCurrentEditingCell,
     setCurrentEditingRow:
@@ -243,6 +252,8 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
     setCurrentFilterFns: props.onCurrentFilterFnsChange ?? setCurrentFilterFns,
     setCurrentGlobalFilterFn:
       props.onCurrentGlobalFilterFnChange ?? setCurrentGlobalFilterFn,
+    setCurrentHoveredColumn:
+      props.onCurrentHoveredColumnChange ?? setCurrentHoveredColumn,
     setDensity: props.onDensityChange ?? setDensity,
     setIsFullScreen: props.onIsFullScreenChange ?? setIsFullScreen,
     setShowAlertBanner: props.onShowAlertBannerChange ?? setShowAlertBanner,

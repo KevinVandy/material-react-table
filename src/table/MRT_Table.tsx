@@ -1,9 +1,9 @@
-import React, { FC, RefObject, useState } from 'react';
+import React, { FC, RefObject } from 'react';
 import { Table } from '@mui/material';
 import { MRT_TableHead } from '../head/MRT_TableHead';
 import { MRT_TableBody } from '../body/MRT_TableBody';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
-import { MRT_Column, MRT_TableInstance } from '..';
+import { MRT_TableInstance } from '..';
 
 interface Props {
   tableContainerRef: RefObject<HTMLDivElement>;
@@ -29,9 +29,6 @@ export const MRT_Table: FC<Props> = ({ tableContainerRef, table }) => {
       ? muiTableProps({ table })
       : muiTableProps;
 
-  const [currentHoveredColumn, setCurrentHoveredColumn] =
-    useState<MRT_Column | null>(null);
-
   return (
     <Table
       stickyHeader={
@@ -44,18 +41,8 @@ export const MRT_Table: FC<Props> = ({ tableContainerRef, table }) => {
         ...tableProps?.sx,
       }}
     >
-      {enableTableHead && (
-        <MRT_TableHead
-          currentHoveredColumn={currentHoveredColumn}
-          setCurrentHoveredColumn={setCurrentHoveredColumn}
-          table={table}
-        />
-      )}
-      <MRT_TableBody
-        setCurrentHoveredColumn={setCurrentHoveredColumn}
-        tableContainerRef={tableContainerRef}
-        table={table}
-      />
+      {enableTableHead && <MRT_TableHead table={table} />}
+      <MRT_TableBody tableContainerRef={tableContainerRef} table={table} />
       {enableTableFooter && <MRT_TableFooter table={table} />}
     </Table>
   );

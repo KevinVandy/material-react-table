@@ -1,21 +1,20 @@
-import React, {
-  Dispatch,
-  DragEvent,
-  FC,
-  MouseEvent,
-  SetStateAction,
-  useMemo,
-} from 'react';
-import { alpha, darken, lighten, Skeleton, TableCell } from '@mui/material';
+import React, { DragEvent, FC, MouseEvent, useMemo } from 'react';
+import {
+  alpha,
+  darken,
+  lighten,
+  Skeleton,
+  TableCell,
+  useTheme,
+} from '@mui/material';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
-import type { MRT_Cell, MRT_Column, MRT_TableInstance } from '..';
+import type { MRT_Cell, MRT_TableInstance } from '..';
 
 interface Props {
   cell: MRT_Cell;
   enableHover?: boolean;
   rowIndex: number;
-  setCurrentHoveredColumn: Dispatch<SetStateAction<MRT_Column | null>>;
   table: MRT_TableInstance;
 }
 
@@ -23,9 +22,9 @@ export const MRT_TableBodyCell: FC<Props> = ({
   cell,
   enableHover,
   rowIndex,
-  setCurrentHoveredColumn,
   table,
 }) => {
+  const theme = useTheme();
   const {
     getState,
     options: {
@@ -39,10 +38,13 @@ export const MRT_TableBodyCell: FC<Props> = ({
       tableId,
     },
     setCurrentEditingCell,
+    setCurrentHoveredColumn,
   } = table;
   const {
+    currentDraggingColumn,
     currentEditingCell,
     currentEditingRow,
+    currentHoveredColumn,
     density,
     isLoading,
     showSkeletons,
@@ -122,8 +124,24 @@ export const MRT_TableBodyCell: FC<Props> = ({
   };
 
   const handleDragEnter = (_e: DragEvent) => {
-    setCurrentHoveredColumn(columnDefType === 'data' ? column : null);
+    if (currentDraggingColumn) {
+      setCurrentHoveredColumn(columnDefType === 'data' ? column : null);
+    }
   };
+
+  const draggingBorder =
+    currentDraggingColumn?.id === column.id
+      ? `1px dashed ${theme.palette.divider}`
+      : currentHoveredColumn?.id === column.id
+      ? `2px dashed ${theme.palette.primary.main}`
+      : undefined;
+
+  const draggingBorders = draggingBorder
+    ? {
+        borderLeft: draggingBorder,
+        borderRight: draggingBorder,
+      }
+    : undefined;
 
   return (
     <TableCell
@@ -144,6 +162,11 @@ export const MRT_TableBodyCell: FC<Props> = ({
           column.getIsPinned() === 'left'
             ? `${column.getStart('left')}px`
             : undefined,
+        opacity:
+          currentDraggingColumn?.id === column.id ||
+          currentHoveredColumn?.id === column.id
+            ? 0.5
+            : 1,
         overflow: 'hidden',
         p:
           density === 'compact'
@@ -174,7 +197,12 @@ export const MRT_TableBodyCell: FC<Props> = ({
         textOverflow: columnDefType !== 'display' ? 'ellipsis' : undefined,
         transition: 'all 0.2s ease-in-out',
         whiteSpace: density === 'compact' ? 'nowrap' : 'normal',
-        zIndex: column.getIsPinned() ? 1 : undefined,
+        zIndex:
+          currentDraggingColumn?.id === column.id
+            ? 2
+            : column.getIsPinned()
+            ? 1
+            : undefined,
         '&:hover': {
           backgroundColor:
             enableHover && enableEditing && editingMode !== 'row'
@@ -187,6 +215,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
               : undefined,
         },
         ...(tableCellProps?.sx as any),
+        ...draggingBorders,
         maxWidth: `min(${column.getSize()}px, fit-content)`,
         minWidth: `max(${column.getSize()}px, ${columnDef.minSize ?? 30}px)`,
         width: column.getSize(),

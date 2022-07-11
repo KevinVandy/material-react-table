@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react';
-import MaterialReactTable, { MaterialReactTableProps, MRT_ColumnDef } from '../../src';
+import MaterialReactTable, {
+  MaterialReactTableProps,
+  MRT_ColumnDef,
+} from '../../src';
 import { faker } from '@faker-js/faker';
 import { Button, MenuItem as MuiMenuItem, styled } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';

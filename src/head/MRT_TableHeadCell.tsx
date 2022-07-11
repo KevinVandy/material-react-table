@@ -1,34 +1,21 @@
-import React, {
-  Dispatch,
-  DragEvent,
-  FC,
-  ReactNode,
-  SetStateAction,
-  useState,
-} from 'react';
-import { Box, TableCell, Theme, alpha, lighten } from '@mui/material';
+import React, { DragEvent, FC, ReactNode } from 'react';
+import { Box, TableCell, Theme, alpha, lighten, useTheme } from '@mui/material';
 import { MRT_TableHeadCellFilterContainer } from './MRT_TableHeadCellFilterContainer';
 import { MRT_TableHeadCellFilterLabel } from './MRT_TableHeadCellFilterLabel';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 import { MRT_TableHeadCellResizeHandle } from './MRT_TableHeadCellResizeHandle';
 import { MRT_TableHeadCellSortLabel } from './MRT_TableHeadCellSortLabel';
 import { MRT_TableHeadCellColumnActionsButton } from './MRT_TableHeadCellColumnActionsButton';
-import type { MRT_Column, MRT_Header, MRT_TableInstance } from '..';
 import { reorderColumn } from '../utils';
+import type { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
-  currentHoveredColumn: MRT_Column | null;
-  setCurrentHoveredColumn: Dispatch<SetStateAction<MRT_Column | null>>;
   header: MRT_Header;
   table: MRT_TableInstance;
 }
 
-export const MRT_TableHeadCell: FC<Props> = ({
-  currentHoveredColumn,
-  setCurrentHoveredColumn,
-  header,
-  table,
-}) => {
+export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
+  const theme = useTheme();
   const {
     getState,
     options: {
@@ -40,8 +27,11 @@ export const MRT_TableHeadCell: FC<Props> = ({
       muiTableHeadCellProps,
     },
     setColumnOrder,
+    setCurrentDraggingColumn,
+    setCurrentHoveredColumn,
   } = table;
-  const { columnOrder, density } = getState();
+  const { columnOrder, density, currentDraggingColumn, currentHoveredColumn } =
+    getState();
   const { column } = header;
   const { columnDef } = column;
   const { columnDefType } = columnDef;
@@ -87,24 +77,42 @@ export const MRT_TableHeadCell: FC<Props> = ({
 
   const tableHeadCellRef = React.useRef<HTMLElement>(null);
 
-  const [isDragging, setIsDragging] = useState(false);
-
   const handleDragStart = (e: DragEvent<HTMLButtonElement>) => {
-    setIsDragging(true);
+    setCurrentDraggingColumn(column);
     e.dataTransfer.setDragImage(tableHeadCellRef.current as HTMLElement, 0, 0);
   };
 
   const handleDragEnd = (_e: DragEvent<HTMLButtonElement>) => {
-    setIsDragging(false);
+    setCurrentDraggingColumn(null);
     setCurrentHoveredColumn(null);
-    if (currentHoveredColumn) {
+    if (
+      currentHoveredColumn &&
+      currentHoveredColumn?.id !== currentDraggingColumn?.id
+    ) {
       setColumnOrder(reorderColumn(column, currentHoveredColumn, columnOrder));
     }
   };
 
   const handleDragEnter = (_e: DragEvent) => {
-    setCurrentHoveredColumn(columnDefType === 'data' ? column : null);
+    if (currentDraggingColumn) {
+      setCurrentHoveredColumn(columnDefType === 'data' ? column : null);
+    }
   };
+
+  const draggingBorder =
+    currentDraggingColumn?.id === column.id
+      ? `1px dashed ${theme.palette.divider}`
+      : currentHoveredColumn?.id === column.id
+      ? `2px dashed ${theme.palette.primary.main}`
+      : undefined;
+
+  const draggingBorders = draggingBorder
+    ? {
+        borderLeft: draggingBorder,
+        borderRight: draggingBorder,
+        borderTop: draggingBorder,
+      }
+    : undefined;
 
   return (
     <TableCell
@@ -119,11 +127,6 @@ export const MRT_TableHeadCell: FC<Props> = ({
             ? alpha(lighten(theme.palette.background.default, 0.04), 0.95)
             : 'inherit',
         backgroundImage: 'inherit',
-        border: isDragging
-          ? `2px dashed ${theme.palette.divider}`
-          : currentHoveredColumn?.id === column.id
-          ? `2px dashed ${theme.palette.primary.main}`
-          : undefined,
         boxShadow: getIsLastLeftPinnedColumn()
           ? `4px 0 4px -2px ${alpha(theme.palette.common.black, 0.1)}`
           : getIsFirstRightPinnedColumn()
@@ -135,7 +138,11 @@ export const MRT_TableHeadCell: FC<Props> = ({
             ? `${column.getStart('left')}px`
             : undefined,
         overflow: 'visible',
-        opacity: isDragging ? 0.5 : 1,
+        opacity:
+          currentDraggingColumn?.id === column.id ||
+          currentHoveredColumn?.id === column.id
+            ? 0.5
+            : 1,
         p:
           density === 'compact'
             ? columnDefType === 'display'
@@ -166,12 +173,14 @@ export const MRT_TableHeadCell: FC<Props> = ({
         transition: `all ${enableColumnResizing ? 0 : '0.2s'} ease-in-out`,
         userSelect: enableMultiSort && column.getCanSort() ? 'none' : undefined,
         verticalAlign: 'text-top',
-        zIndex: column.getIsResizing()
-          ? 3
-          : column.getIsPinned() && columnDefType !== 'group'
-          ? 2
-          : 1,
+        zIndex:
+          column.getIsResizing() || currentDraggingColumn?.id === column.id
+            ? 3
+            : column.getIsPinned() && columnDefType !== 'group'
+            ? 2
+            : 1,
         ...(tableCellProps?.sx as any),
+        ...draggingBorders,
         maxWidth: `min(${column.getSize()}px, fit-content)`,
         minWidth: `max(${column.getSize()}px, ${columnDef.minSize ?? 30}px)`,
         width: header.getSize(),
@@ -186,7 +195,6 @@ export const MRT_TableHeadCell: FC<Props> = ({
             display: 'flex',
             justifyContent:
               columnDefType === 'group' ? 'center' : 'space-between',
-            opacity: isDragging ? 0.5 : 1,
             position: 'relative',
             width: '100%',
           }}

@@ -1,26 +1,14 @@
-import React, { Dispatch, FC, SetStateAction } from 'react';
+import React, { FC } from 'react';
 import { alpha, lighten, TableRow } from '@mui/material';
 import { MRT_TableHeadCell } from './MRT_TableHeadCell';
-import type {
-  MRT_Column,
-  MRT_Header,
-  MRT_HeaderGroup,
-  MRT_TableInstance,
-} from '..';
+import type { MRT_Header, MRT_HeaderGroup, MRT_TableInstance } from '..';
 
 interface Props {
-  currentHoveredColumn: MRT_Column | null;
-  setCurrentHoveredColumn: Dispatch<SetStateAction<MRT_Column | null>>;
   headerGroup: MRT_HeaderGroup;
   table: MRT_TableInstance;
 }
 
-export const MRT_TableHeadRow: FC<Props> = ({
-  currentHoveredColumn,
-  setCurrentHoveredColumn,
-  headerGroup,
-  table,
-}) => {
+export const MRT_TableHeadRow: FC<Props> = ({ headerGroup, table }) => {
   const {
     options: { muiTableHeadRowProps },
   } = table;
@@ -41,8 +29,6 @@ export const MRT_TableHeadRow: FC<Props> = ({
     >
       {headerGroup.headers.map((header: MRT_Header, index) => (
         <MRT_TableHeadCell
-          currentHoveredColumn={currentHoveredColumn}
-          setCurrentHoveredColumn={setCurrentHoveredColumn}
           header={header}
           key={header.id || index}
           table={table}
