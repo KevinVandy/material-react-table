@@ -12,6 +12,11 @@
 <a href="https://github.com/KevinVandy/material-react-table" target="_blank_">
   <img alt="" src="https://img.shields.io/github/stars/KevinVandy/material-react-table.svg?style=social&label=Star" />
 </a>
+<a href="http://makeapullrequest.com" target="_blank_">
+  <img alt="" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" />
+</a>
+
+<img alt="Repo Views" src="https://gpvc.arturio.dev/MRT" />
 
 ---
 
