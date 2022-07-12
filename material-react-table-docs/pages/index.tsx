@@ -36,6 +36,26 @@ const HomePage = () => {
           </Box>
         </Typography>
         <StatBadges />
+        <Typography
+          sx={{
+            fontSize: '1.4rem',
+            m: '3rem',
+            mb: '2rem',
+            textAlign: 'center',
+            lineHeight: '2.5rem',
+          }}
+          variant="h2"
+        >
+          Quickly Create High Quality React Data Tables with{' '}
+          <Box
+            sx={(theme) => ({
+              color: theme.palette.primary.main,
+              display: 'inline',
+            })}
+          >
+            Material&nbsp;Design
+          </Box>
+        </Typography>
         <Summary />
         <Box
           sx={{
