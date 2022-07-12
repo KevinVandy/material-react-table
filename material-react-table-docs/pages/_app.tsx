@@ -27,13 +27,16 @@ function App({ Component, pageProps }: AppProps) {
   const isDesktop = useMediaQuery('(min-width: 1600px)');
   const isXLDesktop = useMediaQuery('(min-width: 1800px)') && showMiniNav;
 
-  const [navOpen, setNavOpen] = useState(true);
+  const [navOpen, setNavOpen] = useState(false);
   const [darkTheme, setDarkTheme] = useState(true);
 
-  useEffect(
-    () => setDarkTheme(localStorage.getItem('darkTheme') === 'true'),
-    [],
-  );
+  useEffect(() => {
+    setDarkTheme(localStorage.getItem('darkTheme') === 'true');
+    if (typeof window !== 'undefined' && pathname === '/') {
+      setNavOpen(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     document.body.style.backgroundColor = darkTheme ? '#111' : '#fff';
