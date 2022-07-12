@@ -1,5 +1,6 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import { RowSelectionState } from '@tanstack/react-table';
 
 const Example: FC = () => {
   const columns = useMemo(
@@ -58,8 +59,23 @@ const Example: FC = () => {
     ],
     [],
   );
+
+  //optionally, you can manage the row selection state yourself
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+
+  useEffect(() => {
+    //do something when the row selection changes...
+    console.info({ rowSelection });
+  });
+
   return (
-    <MaterialReactTable columns={columns} data={data} enableRowSelection />
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      enableRowSelection
+      onRowSelectionChange={setRowSelection} //connect internal row selection state to your own
+      state={{ rowSelection }}
+    />
   );
 };
 

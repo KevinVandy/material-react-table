@@ -16,8 +16,6 @@
   <img alt="" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" />
 </a>
 
-<img alt="Repo Views" src="https://gpvc.arturio.dev/MRT" />
-
 ---
 
 ## About
@@ -113,7 +111,7 @@ npm install material-react-table
 > Read the full usage docs [here](https://www.material-react-table.com/docs/usage/)
 
 ```jsx
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import MaterialReactTable from 'material-react-table';
 
 export default function App() {
@@ -150,6 +148,13 @@ export default function App() {
     [],
   );
 
+  //optionally, you can manage any/all of the table state yourself
+  const [rowSelection, setRowSelection] = useState({});
+
+  useEffect(() => {
+    //do something when the row selection changes
+  }, [rowSelection]);
+
   return (
     <MaterialReactTable 
       columns={columns} 
@@ -157,6 +162,8 @@ export default function App() {
       enableColumnOrdering //enable some features
       enableRowSelection 
       enableStickyHeader
+      onRowSelectionChange={setRowSelection} //hoist internal state to your own state (optional)
+      state={{ rowSelection }} //manage your own state, pass it back to the table (optional)
    />
    );
 }

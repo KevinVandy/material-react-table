@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import MaterialReactTable from 'material-react-table';
 
 const Example = () => {
@@ -57,8 +57,23 @@ const Example = () => {
     ],
     [],
   );
+
+  //optionally, you can manage the row selection state yourself
+  const [rowSelection, setRowSelection] = useState({});
+
+  useEffect(() => {
+    //do something when the row selection changes...
+    console.info({ rowSelection });
+  });
+
   return (
-    <MaterialReactTable columns={columns} data={data} enableRowSelection />
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      enableRowSelection
+      onRowSelectionChange={setRowSelection} //connect internal row selection state to your own
+      state={{ rowSelection }}
+    />
   );
 };
 
