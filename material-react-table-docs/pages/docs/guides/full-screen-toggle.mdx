@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 
 <Head>
   <title>Material React Table Docs - Full Screen Toggle Feature Guide</title>
@@ -9,3 +11,31 @@ import Head from 'next/head';
 </Head>
 
 ## Full Screen Toggle Feature Guide
+
+### Relevant Props
+
+<RootPropTable
+  onlyProps={new Set(['enableFullScreenToggle', 'onIsFullScreenChange'])}
+/>
+
+### Relevant State
+
+<StateOptionsTable onlyProps={new Set(['isFullScreen'])} />
+
+---
+
+
+
+### Disable Full Screen Toggle
+
+The full screen toggle button is enabled by default. You can hide it by setting the `enableFullScreenToggle` prop to `false`.
+
+```jsx
+return (
+  <MaterialTable
+    columns={columns
+    data={data}
+    enableFullScreenToggle={false}
+  />
+);
+```
