@@ -1,9 +1,10 @@
 import React, { FC, useMemo } from 'react';
+import Link from 'next/link';
 import MaterialReactTable, {
   MRT_ColumnDef,
   MRT_TableState,
 } from 'material-react-table';
-import { Link } from '@mui/material';
+import { Link as MuiLink } from '@mui/material';
 import { StateRow, stateOptions } from './stateOptions';
 
 interface Props {
@@ -26,20 +27,29 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
           header: 'Default Value',
         },
         {
+          accessorKey: 'description',
+          enableGlobalFilter: false,
+          header: 'Description',
+        },
+        {
           accessorKey: 'link',
           disableFilters: true,
           enableGlobalFilter: false,
           header: 'More Info Links',
           Cell: ({ cell }) => (
-            <Link href={cell.getValue() as string} target="_blank">
-              {cell.row.original?.linkText}
+            <Link href={cell.getValue() as string} passHref>
+              <MuiLink
+                target={
+                  (cell.getValue() as string).startsWith('http')
+                    ? '_blank'
+                    : undefined
+                }
+                rel="noreferrer"
+              >
+                {cell.row.original?.linkText}
+              </MuiLink>
             </Link>
           ),
-        },
-        {
-          accessorKey: 'description',
-          enableGlobalFilter: false,
-          header: 'Description',
         },
         { accessorKey: 'source', header: 'Source', enableGlobalFilter: false },
       ] as MRT_ColumnDef<StateRow>[],

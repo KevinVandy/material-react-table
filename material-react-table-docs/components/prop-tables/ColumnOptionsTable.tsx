@@ -1,6 +1,7 @@
 import React, { FC, useMemo } from 'react';
+import Link from 'next/link';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { Link, useTheme } from '@mui/material';
+import { Link as MuiLink, useTheme } from '@mui/material';
 import { ColumnOption, columnOptions } from './columnOptions';
 
 interface Props {
@@ -38,20 +39,29 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
           header: 'Default Value',
         },
         {
+          accessorKey: 'description',
+          enableGlobalFilter: false,
+          header: 'Description',
+        },
+        {
           accessorKey: 'link',
           disableFilters: true,
           enableGlobalFilter: false,
           header: 'More Info Links',
           Cell: ({ cell }) => (
-            <Link href={cell.getValue() as string} target="_blank">
-              {cell.row.original?.linkText}
+            <Link href={cell.getValue() as string} passHref>
+              <MuiLink
+                target={
+                  (cell.getValue() as string).startsWith('http')
+                    ? '_blank'
+                    : undefined
+                }
+                rel="noreferrer"
+              >
+                {cell.row.original?.linkText}
+              </MuiLink>
             </Link>
           ),
-        },
-        {
-          accessorKey: 'description',
-          enableGlobalFilter: false,
-          header: 'Description',
         },
         { accessorKey: 'source', header: 'Source', enableGlobalFilter: false },
       ] as MRT_ColumnDef<ColumnOption>[],

@@ -1,11 +1,11 @@
 import React, { FC, useMemo } from 'react';
+import Link from 'next/link';
 import MaterialReactTable, {
   MaterialReactTableProps,
   MRT_ColumnDef,
 } from 'material-react-table';
 import { Link as MuiLink, useTheme } from '@mui/material';
 import { PropRow, rootProps } from './rootProps';
-import Link from 'next/link';
 
 interface Props {
   onlyProps?: Set<keyof MaterialReactTableProps>;
@@ -42,6 +42,11 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
           enableGlobalFilter: false,
         },
         {
+          header: 'Description',
+          accessorKey: 'description',
+          enableGlobalFilter: false,
+        },
+        {
           header: 'More Info Links',
           accessorKey: 'link',
           disableFilters: true,
@@ -60,11 +65,6 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
               </MuiLink>
             </Link>
           ),
-        },
-        {
-          header: 'Description',
-          accessorKey: 'description',
-          enableGlobalFilter: false,
         },
         { header: 'Source', accessorKey: 'source', enableGlobalFilter: false },
       ] as MRT_ColumnDef<PropRow>[],
