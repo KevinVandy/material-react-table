@@ -83,14 +83,14 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
   };
 
   const handleDragEnd = (_e: DragEvent<HTMLButtonElement>) => {
-    setCurrentDraggingColumn(null);
-    setCurrentHoveredColumn(null);
     if (
       currentHoveredColumn &&
       currentHoveredColumn?.id !== currentDraggingColumn?.id
     ) {
       setColumnOrder(reorderColumn(column, currentHoveredColumn, columnOrder));
     }
+    setCurrentDraggingColumn(null);
+    setCurrentHoveredColumn(null);
   };
 
   const handleDragEnter = (_e: DragEvent) => {
@@ -227,8 +227,8 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
                 columnDef.enableColumnOrdering !== false) ||
                 (enableGrouping && columnDef.enableGrouping !== false)) && (
                 <MRT_GrabHandleButton
-                  handleDragStart={handleDragStart}
-                  handleDragEnd={handleDragEnd}
+                  onDragStart={handleDragStart}
+                  onDragEnd={handleDragEnd}
                   table={table}
                 />
               )}

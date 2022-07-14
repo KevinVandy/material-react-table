@@ -32,6 +32,7 @@ import {
   getDefaultColumnOrderIds,
 } from '../utils';
 import { MRT_FilterFns } from '../filtersFns';
+import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 
 export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   props: MaterialReactTableProps<TData>,
@@ -53,14 +54,18 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   const [columnOrder, setColumnOrder] = useState(
     initialState.columnOrder ?? [],
   );
+  const [currentDraggingColumn, setCurrentDraggingColumn] =
+    useState<MRT_Column<TData> | null>(null);
+  const [currentDraggingRow, setCurrentDraggingRow] =
+    useState<MRT_Row<TData> | null>(null);
   const [currentEditingCell, setCurrentEditingCell] =
     useState<MRT_Cell<TData> | null>(initialState?.currentEditingCell ?? null);
   const [currentEditingRow, setCurrentEditingRow] =
     useState<MRT_Row<TData> | null>(initialState?.currentEditingRow ?? null);
-  const [currentDraggingColumn, setCurrentDraggingColumn] =
-    useState<MRT_Column<TData> | null>(null);
   const [currentHoveredColumn, setCurrentHoveredColumn] =
     useState<MRT_Column<TData> | null>(null);
+  const [currentHoveredRow, setCurrentHoveredRow] =
+    useState<MRT_Row<TData> | null>(null);
   const [density, setDensity] = useState(
     initialState?.density ?? 'comfortable',
   );
@@ -108,6 +113,28 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
     () =>
       (
         [
+          columnOrder.includes('mrt-row-drag') && {
+            Cell: ({ cell }) => (
+              <MRT_GrabHandleButton
+                onDragStart={() => table.setCurrentDraggingRow(cell.row as any)}
+                onDragEnd={() => {
+                  props.onRowReorder?.({
+                    movingRow: table.getState().currentDraggingRow as any,
+                    targetRow: table.getState().currentHoveredRow as any,
+                  });
+                  table.setCurrentDraggingRow(null);
+                  table.setCurrentHoveredRow(null);
+                }}
+                table={table}
+              />
+            ),
+            columnDefType: 'display',
+            header: props.localization?.grab,
+            id: 'mrt-row-drag',
+            muiTableBodyCellProps: props.muiTableBodyCellProps,
+            muiTableHeadCellProps: props.muiTableHeadCellProps,
+            size: 60,
+          },
           columnOrder.includes('mrt-row-actions') && {
             Cell: ({ cell }) => (
               <MRT_ToggleRowActionMenuButton
@@ -122,7 +149,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
             muiTableHeadCellProps: props.muiTableHeadCellProps,
             size: 70,
           },
-          columnOrder.includes('mrt-expand') && {
+          columnOrder.includes('mrt-row-expand') && {
             Cell: ({ cell }) => (
               <MRT_ExpandButton row={cell.row as any} table={table} />
             ),
@@ -132,12 +159,12 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
               ) : null,
             columnDefType: 'display',
             header: props.localization?.expand,
-            id: 'mrt-expand',
+            id: 'mrt-row-expand',
             muiTableBodyCellProps: props.muiTableBodyCellProps,
             muiTableHeadCellProps: props.muiTableHeadCellProps,
             size: 60,
           },
-          columnOrder.includes('mrt-select') && {
+          columnOrder.includes('mrt-row-select') && {
             Cell: ({ cell }) => (
               <MRT_SelectCheckbox row={cell.row as any} table={table} />
             ),
@@ -147,7 +174,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
               ) : null,
             columnDefType: 'display',
             header: props.localization?.select,
-            id: 'mrt-select',
+            id: 'mrt-row-select',
             muiTableBodyCellProps: props.muiTableBodyCellProps,
             muiTableHeadCellProps: props.muiTableHeadCellProps,
             size: 60,
@@ -229,11 +256,13 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       state: {
         columnOrder,
         currentDraggingColumn,
+        currentDraggingRow,
         currentEditingCell,
         currentEditingRow,
         currentFilterFns,
         currentGlobalFilterFn,
         currentHoveredColumn,
+        currentHoveredRow,
         density,
         isFullScreen,
         showAlertBanner,
@@ -245,6 +274,8 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
     }),
     setCurrentDraggingColumn:
       props.onCurrentDraggingColumnChange ?? setCurrentDraggingColumn,
+    setCurrentDraggingRow:
+      props.onCurrentDraggingRowChange ?? setCurrentDraggingRow,
     setCurrentEditingCell:
       props.onCurrentEditingCellChange ?? setCurrentEditingCell,
     setCurrentEditingRow:
@@ -254,6 +285,8 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       props.onCurrentGlobalFilterFnChange ?? setCurrentGlobalFilterFn,
     setCurrentHoveredColumn:
       props.onCurrentHoveredColumnChange ?? setCurrentHoveredColumn,
+    setCurrentHoveredRow:
+      props.onCurrentHoveredRowChange ?? setCurrentHoveredRow,
     setDensity: props.onDensityChange ?? setDensity,
     setIsFullScreen: props.onIsFullScreenChange ?? setIsFullScreen,
     setShowAlertBanner: props.onShowAlertBannerChange ?? setShowAlertBanner,

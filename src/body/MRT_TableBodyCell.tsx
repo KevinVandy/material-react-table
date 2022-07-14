@@ -140,6 +140,10 @@ export const MRT_TableBodyCell: FC<Props> = ({
     ? {
         borderLeft: draggingBorder,
         borderRight: draggingBorder,
+        borderBottom:
+          row.index === table.getRowModel().rows.length - 1
+            ? draggingBorder
+            : undefined,
       }
     : undefined;
 
@@ -181,7 +185,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
             ? '1rem 1.25rem'
             : '1.5rem',
         pl:
-          column.id === 'mrt-expand'
+          column.id === 'mrt-row-expand'
             ? `${
                 row.depth +
                 (density === 'compact'

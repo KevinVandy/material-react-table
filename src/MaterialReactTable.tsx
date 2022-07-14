@@ -6,7 +6,7 @@ import React, {
   ReactNode,
   SetStateAction,
 } from 'react';
-import {
+import type {
   AlertProps,
   ButtonProps,
   CheckboxProps,
@@ -25,7 +25,7 @@ import {
   TextFieldProps,
   ToolbarProps,
 } from '@mui/material';
-import {
+import type {
   Cell,
   Column,
   ColumnDef,
@@ -39,7 +39,7 @@ import {
   TableOptions,
   TableState,
 } from '@tanstack/react-table';
-import { Options as VirtualizerOptions } from 'react-virtual';
+import type { Options as VirtualizerOptions } from 'react-virtual';
 import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_TableRoot } from './table/MRT_TableRoot';
@@ -107,6 +107,7 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
     localization: MRT_Localization;
   };
   setCurrentDraggingColumn: Dispatch<SetStateAction<MRT_Column<TData> | null>>;
+  setCurrentDraggingRow: Dispatch<SetStateAction<MRT_Row<TData> | null>>;
   setCurrentEditingCell: Dispatch<SetStateAction<MRT_Cell | null>>;
   setCurrentEditingRow: Dispatch<SetStateAction<MRT_Row | null>>;
   setCurrentFilterFns: Dispatch<
@@ -116,6 +117,7 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
   >;
   setCurrentGlobalFilterFn: Dispatch<SetStateAction<MRT_FilterOption>>;
   setCurrentHoveredColumn: Dispatch<SetStateAction<MRT_Column<TData> | null>>;
+  setCurrentHoveredRow: Dispatch<SetStateAction<MRT_Row | null>>;
   setDensity: Dispatch<SetStateAction<'comfortable' | 'compact' | 'spacious'>>;
   setIsFullScreen: Dispatch<SetStateAction<boolean>>;
   setShowAlertBanner: Dispatch<SetStateAction<boolean>>;
@@ -126,11 +128,13 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
 export type MRT_TableState<TData extends Record<string, any> = {}> =
   TableState & {
     currentDraggingColumn: MRT_Column<TData> | null;
+    currentDraggingRow: MRT_Row<TData> | null;
     currentEditingCell: MRT_Cell<TData> | null;
     currentEditingRow: MRT_Row<TData> | null;
     currentFilterFns: Record<string, MRT_FilterOption>;
     currentGlobalFilterFn: Record<string, MRT_FilterOption>;
     currentHoveredColumn: MRT_Column<TData> | null;
+    currentHoveredRow: MRT_Row<TData> | null;
     density: 'comfortable' | 'compact' | 'spacious';
     isFullScreen: boolean;
     isLoading: boolean;
@@ -368,12 +372,11 @@ export type MRT_HeaderGroup<TData extends Record<string, any> = {}> = Omit<
 
 export type MRT_Row<TData extends Record<string, any> = {}> = Omit<
   Row<TData>,
-  'getVisibleCells' | 'getAllCells' | 'subRows' | 'original' | '_valuesCache'
+  'getVisibleCells' | 'getAllCells' | 'subRows' | '_valuesCache'
 > & {
   getAllCells: () => MRT_Cell<TData>[];
   getVisibleCells: () => MRT_Cell<TData>[];
   subRows?: MRT_Row<TData>[];
-  original: TData;
   _valuesCache?: TData;
 };
 
@@ -397,6 +400,15 @@ export type MRT_FilterFn<TData extends Record<string, any> = {}> =
   | FilterFn<TData>
   | MRT_FilterOption;
 
+/**
+ * `columns` and `data` props are the only required props, but there are over 150 other optional props.
+ *
+ * See more info on creating columns and data on the official docs site:
+ * @link https://www.material-react-table.com/docs/usage
+ *
+ * See the full props list on the official docs site:
+ * @link https://www.material-react-table.com/docs/api/props
+ */
 export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
   MRT_TableOptions<TData> & {
     editingMode?: 'table' | 'row' | 'cell';
@@ -413,6 +425,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     enablePagination?: boolean;
     enableRowActions?: boolean;
     enableRowNumbers?: boolean;
+    enableRowOrdering?: boolean;
     enableRowVirtualization?: boolean;
     enableSelectAll?: boolean;
     enableStickyHeader?: boolean;
@@ -625,11 +638,13 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
       table: MRT_TableInstance<TData>;
     }) => void;
     onCurrentDraggingColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
+    onCurrentDraggingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
     onCurrentEditingCellChange?: OnChangeFn<MRT_Cell<TData> | null>;
     onCurrentEditingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
     onCurrentFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterOption }>;
     onCurrentGlobalFilterFnChange?: OnChangeFn<MRT_FilterOption>;
     onCurrentHoveredColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
+    onCurrentHoveredRowChange?: OnChangeFn<MRT_Row<TData> | null>;
     onEditRowSubmit?: ({
       row,
       table,
@@ -639,6 +654,13 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     }) => Promise<void> | void;
     onDensityChange?: OnChangeFn<boolean>;
     onIsFullScreenChange?: OnChangeFn<boolean>;
+    onRowReorder?: ({
+      movingRow,
+      targetRow,
+    }: {
+      movingRow: MRT_Row<TData>;
+      targetRow: MRT_Row<TData>;
+    }) => void;
     onShowAlertBannerChange?: OnChangeFn<boolean>;
     onShowFiltersChange?: OnChangeFn<boolean>;
     onShowGlobalFilterChange?: OnChangeFn<boolean>;
@@ -711,15 +733,6 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     virtualizerProps?: Partial<VirtualizerOptions<HTMLDivElement>>;
   };
 
-/**
- * `columns` and `data` props are the only required props, but there are over 150 other optional props.
- *
- * See more info on creating columns and data on the official docs site:
- * @link https://www.material-react-table.com/docs/usage
- *
- * See the full props list on the official docs site:
- * @link https://www.material-react-table.com/docs/api/props
- */
 export default <TData extends Record<string, any> = {}>({
   autoResetExpanded = false,
   columnResizeMode = 'onEnd',

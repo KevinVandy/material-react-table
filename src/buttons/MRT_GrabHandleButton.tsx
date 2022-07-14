@@ -3,14 +3,14 @@ import React, { DragEventHandler, FC } from 'react';
 import { MRT_TableInstance } from '..';
 
 interface Props {
-  handleDragStart: DragEventHandler<HTMLButtonElement>;
-  handleDragEnd: DragEventHandler<HTMLButtonElement>;
+  onDragStart: DragEventHandler<HTMLButtonElement>;
+  onDragEnd: DragEventHandler<HTMLButtonElement>;
   table: MRT_TableInstance;
 }
 
 export const MRT_GrabHandleButton: FC<Props> = ({
-  handleDragStart,
-  handleDragEnd,
+  onDragStart,
+  onDragEnd,
   table,
 }) => {
   const {
@@ -31,8 +31,8 @@ export const MRT_GrabHandleButton: FC<Props> = ({
       <IconButton
         disableRipple
         draggable="true"
-        onDragStart={handleDragStart}
-        onDragEnd={handleDragEnd}
+        onDragStart={onDragStart}
+        onDragEnd={onDragEnd}
         size="small"
         sx={{
           cursor: 'grab',

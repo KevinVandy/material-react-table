@@ -122,8 +122,8 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
             ) &&
             (columnDef.enableColumnOrdering !== false ? (
               <MRT_GrabHandleButton
-                handleDragEnd={handleDragEnd}
-                handleDragStart={handleDragStart}
+                onDragEnd={handleDragEnd}
+                onDragStart={handleDragStart}
                 table={table}
               />
             ) : (

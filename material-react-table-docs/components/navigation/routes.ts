@@ -186,6 +186,10 @@ export const routes = [
             label: 'Row Numbers',
           },
           {
+            href: '/docs/guides/row-ordering',
+            label: 'Row Ordering (DnD)',
+          },
+          {
             href: '/docs/guides/row-selection',
             label: 'Row Selection (Checkboxes)',
           },

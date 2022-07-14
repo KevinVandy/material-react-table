@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { darken, lighten, TableRow } from '@mui/material';
+import React, { DragEvent, FC } from 'react';
+import { darken, lighten, TableRow, useTheme } from '@mui/material';
 import { MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import type { MRT_Row, MRT_TableInstance } from '..';
@@ -11,19 +11,43 @@ interface Props {
 }
 
 export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
+  const theme = useTheme();
   const {
     getIsSomeColumnsPinned,
+    getState,
     options: { muiTableBodyRowProps, renderDetailPanel },
+    setCurrentHoveredRow,
   } = table;
+  const { currentDraggingRow, currentHoveredRow } = getState();
 
   const tableRowProps =
     muiTableBodyRowProps instanceof Function
       ? muiTableBodyRowProps({ row, table })
       : muiTableBodyRowProps;
 
+  const handleDragEnter = (_e: DragEvent) => {
+    if (currentDraggingRow) {
+      setCurrentHoveredRow(row);
+    }
+  };
+
+  const draggingBorder =
+    currentDraggingRow?.id === row.id
+      ? `1px dashed ${theme.palette.divider}`
+      : currentHoveredRow?.id === row.id
+      ? `2px dashed ${theme.palette.primary.main}`
+      : undefined;
+
+  const draggingBorders = draggingBorder
+    ? {
+        border: draggingBorder,
+      }
+    : undefined;
+
   return (
     <>
       <TableRow
+        onDragEnter={handleDragEnter}
         hover
         selected={row.getIsSelected()}
         {...tableRowProps}
@@ -39,6 +63,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
                 : undefined,
           },
           ...(tableRowProps?.sx as any),
+          ...draggingBorders,
         })}
       >
         {row?.getVisibleCells()?.map?.((cell) => (

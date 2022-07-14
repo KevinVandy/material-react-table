@@ -100,7 +100,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
 
   const handleGroupByColumn = () => {
     column.toggleGrouping();
-    setColumnOrder((old) => ['mrt-expand', ...old]);
+    setColumnOrder((old) => ['mrt-row-expand', ...old]);
     setAnchorEl(null);
   };
 
