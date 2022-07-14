@@ -874,7 +874,7 @@ export const rootProps = [
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: 'LinearProgressProps | ({ isTopToolbar, table }) => LinearProgressProps',
   },
   {
     propName: 'muiSearchTextFieldProps',

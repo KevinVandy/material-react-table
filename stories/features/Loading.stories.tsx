@@ -66,3 +66,14 @@ export const ReloadingExample: Story<MaterialReactTableProps> = () => (
     state={{ showProgressBars: true }}
   />
 );
+
+export const OnlyTopProgressBar: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    state={{ showProgressBars: true }}
+    muiLinearProgressProps={({ isTopToolbar }) => ({
+      sx: { display: isTopToolbar ? 'block' : 'none' },
+    })}
+  />
+);

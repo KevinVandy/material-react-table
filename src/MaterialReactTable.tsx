@@ -439,8 +439,10 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     muiLinearProgressProps?:
       | LinearProgressProps
       | (({
+          isTopToolbar,
           table,
         }: {
+          isTopToolbar: boolean;
           table: MRT_TableInstance<TData>;
         }) => LinearProgressProps);
     muiSearchTextFieldProps?:

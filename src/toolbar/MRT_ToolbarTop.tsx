@@ -103,7 +103,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ table }) => {
         ['top', 'both'].includes(positionPagination ?? '') && (
           <MRT_TablePagination table={table} position="top" />
         )}
-      <MRT_LinearProgressBar alignTo="bottom" table={table} />
+      <MRT_LinearProgressBar isTopToolbar table={table} />
     </Toolbar>
   );
 };

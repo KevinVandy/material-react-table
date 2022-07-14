@@ -53,7 +53,7 @@ export const MRT_ToolbarBottom: FC<Props> = ({ table }) => {
         } as any)
       }
     >
-      <MRT_LinearProgressBar alignTo="top" table={table} />
+      <MRT_LinearProgressBar isTopToolbar={false} table={table} />
       {positionToolbarAlertBanner === 'bottom' && (
         <MRT_ToolbarAlertBanner table={table} />
       )}

@@ -3,11 +3,11 @@ import { Collapse, LinearProgress } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
 interface Props {
-  alignTo: 'bottom' | 'top';
+  isTopToolbar: boolean;
   table: MRT_TableInstance;
 }
 
-export const MRT_LinearProgressBar: FC<Props> = ({ alignTo, table }) => {
+export const MRT_LinearProgressBar: FC<Props> = ({ isTopToolbar, table }) => {
   const {
     options: { muiLinearProgressProps },
     getState,
@@ -16,7 +16,7 @@ export const MRT_LinearProgressBar: FC<Props> = ({ alignTo, table }) => {
 
   const linearProgressProps =
     muiLinearProgressProps instanceof Function
-      ? muiLinearProgressProps({ table })
+      ? muiLinearProgressProps({ isTopToolbar, table })
       : muiLinearProgressProps;
 
   return (
@@ -25,9 +25,9 @@ export const MRT_LinearProgressBar: FC<Props> = ({ alignTo, table }) => {
       mountOnEnter
       unmountOnExit
       sx={{
-        bottom: alignTo === 'bottom' ? 0 : undefined,
+        bottom: isTopToolbar ? 0 : undefined,
         position: 'absolute',
-        top: alignTo === 'top' ? 0 : undefined,
+        top: !isTopToolbar ? 0 : undefined,
         width: '100%',
       }}
     >
