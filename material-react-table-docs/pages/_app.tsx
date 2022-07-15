@@ -23,25 +23,28 @@ function App({ Component, pageProps }: AppProps) {
     pathname.includes('/docs/usage') ||
     pathname.includes('/docs/install');
 
-  const isTablet = useMediaQuery('(max-width: 900px)');
-  const isDesktop = useMediaQuery('(min-width: 1600px)');
-  const isXLDesktop = useMediaQuery('(min-width: 1800px)') && showMiniNav;
+  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isTablet = useMediaQuery('(min-width: 900px)');
+  const isDesktop = useMediaQuery('(min-width: 1500px)');
+  const isXLDesktop = useMediaQuery('(min-width: 1800px)');
 
-  const [navOpen, setNavOpen] = useState(false);
+  const [navOpen, setNavOpen] = useState(pathname === '/' || isTablet);
   const [darkTheme, setDarkTheme] = useState(true);
 
   useEffect(() => {
     setDarkTheme(localStorage.getItem('darkTheme') === 'true');
-    if (typeof window !== 'undefined' && pathname === '/') {
-      setNavOpen(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     document.body.style.backgroundColor = darkTheme ? '#111' : '#fff';
     localStorage.setItem('darkTheme', darkTheme.toString());
   }, [darkTheme]);
+
+  useEffect(() => {
+    if (isTablet) {
+      setNavOpen(true);
+    }
+  }, [isTablet]);
 
   return (
     <>
@@ -67,8 +70,8 @@ function App({ Component, pageProps }: AppProps) {
               backgroundColor: theme.palette.background.default,
               color: theme.palette.text.primary,
               minHeight: '100vh',
-              p: `64px ${isXLDesktop ? '250px' : '32px'} 800px ${
-                (navOpen || isDesktop) && !isTablet ? '300px' : '32px'
+              p: `64px ${showMiniNav && isXLDesktop ? '250px' : '32px'} 800px ${
+                (navOpen || isDesktop) && !isMobile ? '300px' : '32px'
               }`,
               transition: 'all 200ms ease-in-out',
             })}

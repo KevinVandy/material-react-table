@@ -52,7 +52,7 @@ const TopBar: FC<Props> = ({
 }) => {
   const isMobile = useMediaQuery('(max-width: 600px)');
   const isTablet = useMediaQuery('(max-width: 900px)');
-  const isDesktop = useMediaQuery('(min-width: 1600px)');
+  const isDesktop = useMediaQuery('(min-width: 1500px)');
 
   return (
     <AppBar position="fixed">

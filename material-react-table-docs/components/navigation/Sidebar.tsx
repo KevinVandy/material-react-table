@@ -76,10 +76,10 @@ interface Props {
 
 const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
   const { pathname } = useRouter();
-  const isTablet = useMediaQuery('(max-width: 900px)');
+  const isMobile = useMediaQuery('(max-width: 900px)');
 
   const handleCloseMenu = () => {
-    if (isTablet) setTimeout(() => setNavOpen(false), 400);
+    if (isMobile) setTimeout(() => setNavOpen(false), 200);
   };
 
   return (
@@ -88,7 +88,7 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
       PaperProps={{ component: 'aside' }}
       open={navOpen}
       onClose={() => setNavOpen(false)}
-      variant={isTablet ? 'temporary' : 'permanent'}
+      variant={isMobile ? 'temporary' : 'permanent'}
       sx={{
         zIndex: 4,
         position: 'relative',
