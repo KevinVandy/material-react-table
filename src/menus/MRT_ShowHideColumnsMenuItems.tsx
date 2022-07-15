@@ -90,7 +90,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
   return (
     <>
       <MenuItem
-        disableRipple={enableColumnOrdering}
+        disableRipple
         ref={menuItemRef as any}
         onDragEnter={handleDragEnter}
         sx={(theme) => ({

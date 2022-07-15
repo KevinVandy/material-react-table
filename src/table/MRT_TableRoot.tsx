@@ -32,7 +32,6 @@ import {
   getDefaultColumnOrderIds,
 } from '../utils';
 import { MRT_FilterFns } from '../filtersFns';
-import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 
 export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   props: MaterialReactTableProps<TData>,
@@ -114,22 +113,8 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       (
         [
           columnOrder.includes('mrt-row-drag') && {
-            Cell: ({ cell }) => (
-              <MRT_GrabHandleButton
-                onDragStart={() => table.setCurrentDraggingRow(cell.row as any)}
-                onDragEnd={() => {
-                  props.onRowReorder?.({
-                    movingRow: table.getState().currentDraggingRow as any,
-                    targetRow: table.getState().currentHoveredRow as any,
-                  });
-                  table.setCurrentDraggingRow(null);
-                  table.setCurrentHoveredRow(null);
-                }}
-                table={table}
-              />
-            ),
             columnDefType: 'display',
-            header: props.localization?.grab,
+            header: props.localization?.move,
             id: 'mrt-row-drag',
             muiTableBodyCellProps: props.muiTableBodyCellProps,
             muiTableHeadCellProps: props.muiTableHeadCellProps,
@@ -200,6 +185,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       props.enableGrouping,
       props.enableRowActions,
       props.enableRowNumbers,
+      props.enableRowOrdering,
       props.enableRowSelection,
       props.enableSelectAll,
       props.localization,

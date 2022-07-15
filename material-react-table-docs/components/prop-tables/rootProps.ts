@@ -177,6 +177,16 @@ export const rootProps = [
     type: 'boolean',
   },
   {
+    propName: 'enableColumnDragging',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: 'boolean',
+  },
+  {
     propName: 'enableColumnFilterChangeMode',
     defaultValue: 'true',
     description: '',
@@ -387,6 +397,16 @@ export const rootProps = [
     type: 'boolean',
   },
   {
+    propName: 'enableRowDragging',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: 'boolean',
+  },
+  {
     propName: 'enableRowNumbers',
     defaultValue: '',
     description: '',
@@ -394,6 +414,16 @@ export const rootProps = [
     linkText: 'Row Numbers Feature Guide',
     required: false,
     source: 'MRT',
+    type: 'boolean',
+  },
+  {
+    propName: 'enableRowOrdering',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
     type: 'boolean',
   },
   {
@@ -843,7 +873,7 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'TanStack Table',
     type: '',
   },
   {
@@ -853,7 +883,7 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: '',
   },
   {
@@ -863,7 +893,7 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: '',
   },
   {
@@ -873,7 +903,7 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: 'LinearProgressProps | ({ isTopToolbar, table }) => LinearProgressProps',
   },
   {
@@ -883,7 +913,7 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: '',
   },
   {
@@ -893,7 +923,7 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: '',
   },
   {
@@ -903,7 +933,7 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: '',
   },
   {
@@ -913,7 +943,7 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: '',
   },
   {
@@ -923,7 +953,7 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: '',
   },
   {
@@ -933,7 +963,7 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: '',
   },
   {
@@ -943,7 +973,7 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: '',
   },
   {
@@ -953,7 +983,17 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
+    type: '',
+  },
+  {
+    propName: 'muiTableBodyRowDragHandleProps',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: 'Material UI',
     type: '',
   },
   {
@@ -963,7 +1003,7 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: '',
   },
   {
@@ -973,7 +1013,7 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: '',
   },
   {
@@ -983,7 +1023,7 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: '',
   },
   {
@@ -993,7 +1033,7 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: '',
   },
   {
@@ -1003,7 +1043,7 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: '',
   },
   {
@@ -1013,7 +1053,7 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: '',
   },
   {
@@ -1023,7 +1063,17 @@ export const rootProps = [
     link: '',
     linkText: '',
     required: false,
-    source: '',
+    source: 'Material UI',
+    type: '',
+  },
+  {
+    propName: 'muiTableHeadCellDragHandleProps',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: 'Material UI',
     type: '',
   },
   {
@@ -1118,6 +1168,16 @@ export const rootProps = [
   },
   {
     propName: 'muiTableToolbarTopProps',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '',
+  },
+  {
+    propName: 'onColumnDrop',
     defaultValue: '',
     description: '',
     link: '',
@@ -1328,6 +1388,16 @@ export const rootProps = [
   },
   {
     propName: 'onPaginationChange',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '',
+  },
+  {
+    propName: 'onRowDrop',
     defaultValue: '',
     description: '',
     link: '',

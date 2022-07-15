@@ -1,4 +1,4 @@
-import React, { DragEvent, FC } from 'react';
+import React, { DragEvent, FC, useRef } from 'react';
 import { darken, lighten, TableRow, useTheme } from '@mui/material';
 import { MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
@@ -15,7 +15,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
   const {
     getIsSomeColumnsPinned,
     getState,
-    options: { muiTableBodyRowProps, renderDetailPanel },
+    options: { enableRowOrdering, muiTableBodyRowProps, renderDetailPanel },
     setCurrentHoveredRow,
   } = table;
   const { currentDraggingRow, currentHoveredRow } = getState();
@@ -26,10 +26,12 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
       : muiTableBodyRowProps;
 
   const handleDragEnter = (_e: DragEvent) => {
-    if (currentDraggingRow) {
+    if (enableRowOrdering && currentDraggingRow) {
       setCurrentHoveredRow(row);
     }
   };
+
+  const rowRef = useRef<HTMLTableRowElement>(null);
 
   const draggingBorder =
     currentDraggingRow?.id === row.id
@@ -50,9 +52,15 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
         onDragEnter={handleDragEnter}
         hover
         selected={row.getIsSelected()}
+        ref={rowRef}
         {...tableRowProps}
         sx={(theme) => ({
           backgroundColor: lighten(theme.palette.background.default, 0.06),
+          opacity:
+            currentDraggingRow?.id === row.id ||
+            currentHoveredRow?.id === row.id
+              ? 0.5
+              : 1,
           transition: 'all 0.2s ease-in-out',
           '&:hover td': {
             backgroundColor:
@@ -72,6 +80,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
             key={cell.id}
             enableHover={tableRowProps?.hover !== false}
             rowIndex={rowIndex}
+            rowRef={rowRef}
             table={table}
           />
         ))}

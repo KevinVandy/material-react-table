@@ -34,6 +34,7 @@ export interface MRT_Localization {
   hideColumn: string;
   max: string;
   min: string;
+  move: string;
   pinToLeft: string;
   pinToRight: string;
   resetColumnSize: string;
@@ -102,6 +103,7 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   hideColumn: 'Hide {column} column',
   max: 'Max',
   min: 'Min',
+  move: 'Move',
   pinToLeft: 'Pin to left',
   pinToRight: 'Pin to right',
   resetColumnSize: 'Reset column size',

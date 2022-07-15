@@ -57,9 +57,12 @@ export const RowOrderingEnabled: Story<MaterialReactTableProps> = () => {
       columns={columns}
       data={data}
       enableRowOrdering
-      onRowReorder={({ movingRow, targetRow }) => {
-        data.splice(targetRow.index, 0, data.splice(movingRow.index, 1)[0]);
-        setData([...data]);
+      enableSorting={false}
+      onRowDrop={({ draggedRow, targetRow }) => {
+        if (targetRow) {
+          data.splice(targetRow.index, 0, data.splice(draggedRow.index, 1)[0]);
+          setData([...data]);
+        }
       }}
     />
   );
@@ -75,10 +78,13 @@ export const RowOrderingWithSelect: Story<MaterialReactTableProps> = () => {
       data={data}
       enableRowOrdering
       enableRowSelection
+      enableSorting={false}
       getRowId={(row) => row.email}
-      onRowReorder={({ movingRow, targetRow }) => {
-        data.splice(targetRow.index, 0, data.splice(movingRow.index, 1)[0]);
-        setData([...data]);
+      onRowDrop={({ draggedRow, targetRow }) => {
+        if (targetRow) {
+          data.splice(targetRow.index, 0, data.splice(draggedRow.index, 1)[0]);
+          setData([...data]);
+        }
       }}
     />
   );
@@ -94,9 +100,12 @@ export const RowOrderingWithPinning: Story<MaterialReactTableProps> = () => {
       data={data}
       enableRowOrdering
       enablePinning
-      onRowReorder={({ movingRow, targetRow }) => {
-        data.splice(targetRow.index, 0, data.splice(movingRow.index, 1)[0]);
-        setData([...data]);
+      enableSorting={false}
+      onRowDrop={({ draggedRow, targetRow }) => {
+        if (targetRow) {
+          data.splice(targetRow.index, 0, data.splice(draggedRow.index, 1)[0]);
+          setData([...data]);
+        }
       }}
     />
   );
@@ -113,9 +122,12 @@ export const RowAndColumnOrdering: Story<MaterialReactTableProps> = () => {
       enableColumnOrdering
       enablePinning
       enableRowOrdering
-      onRowReorder={({ movingRow, targetRow }) => {
-        data.splice(targetRow.index, 0, data.splice(movingRow.index, 1)[0]);
-        setData([...data]);
+      enableSorting={false}
+      onRowDrop={({ draggedRow, targetRow }) => {
+        if (targetRow) {
+          data.splice(targetRow.index, 0, data.splice(draggedRow.index, 1)[0]);
+          setData([...data]);
+        }
       }}
     />
   );

@@ -1,6 +1,7 @@
 import React, {
   ChangeEvent,
   Dispatch,
+  DragEvent,
   FC,
   FocusEvent,
   ReactNode,
@@ -230,6 +231,7 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
   columns?: MRT_ColumnDef<TData>[];
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;
+  enableColumnDragging?: boolean;
   enableColumnFilterChangeMode?: boolean;
   enableColumnOrdering?: boolean;
   enableEditing?: boolean;
@@ -291,6 +293,15 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
         column: MRT_Column<TData>;
       }) => TableCellProps);
   muiTableHeadCellColumnActionsButtonProps?:
+    | IconButtonProps
+    | (({
+        table,
+        column,
+      }: {
+        table: MRT_TableInstance<TData>;
+        column: MRT_Column<TData>;
+      }) => IconButtonProps);
+  muiTableHeadCellDragHandleProps?:
     | IconButtonProps
     | (({
         table,
@@ -414,6 +425,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     editingMode?: 'table' | 'row' | 'cell';
     enableClickToCopy?: boolean;
     enableColumnActions?: boolean;
+    enableColumnDragging?: boolean;
     enableColumnFilterChangeMode?: boolean;
     enableColumnOrdering?: boolean;
     enableDensityToggle?: boolean;
@@ -424,6 +436,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     enableGlobalFilterRankedResults?: boolean;
     enablePagination?: boolean;
     enableRowActions?: boolean;
+    enableRowDragging?: boolean;
     enableRowNumbers?: boolean;
     enableRowOrdering?: boolean;
     enableRowVirtualization?: boolean;
@@ -509,6 +522,15 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
           table: MRT_TableInstance<TData>;
           cell: MRT_Cell<TData>;
         }) => SkeletonProps);
+    muiTableBodyRowDragHandleProps?:
+      | IconButtonProps
+      | (({
+          table,
+          row,
+        }: {
+          table: MRT_TableInstance<TData>;
+          row: MRT_Row<TData>;
+        }) => IconButtonProps);
     muiTableBodyProps?:
       | TableBodyProps
       | (({ table }: { table: MRT_TableInstance<TData> }) => TableBodyProps);
@@ -559,6 +581,15 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
           footerGroup: MRT_HeaderGroup<TData>;
         }) => TableRowProps);
     muiTableHeadCellColumnActionsButtonProps?:
+      | IconButtonProps
+      | (({
+          table,
+          column,
+        }: {
+          table: MRT_TableInstance<TData>;
+          column: MRT_Column<TData>;
+        }) => IconButtonProps);
+    muiTableHeadCellDragHandleProps?:
       | IconButtonProps
       | (({
           table,
@@ -637,6 +668,15 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
       cell: MRT_Cell<TData>;
       table: MRT_TableInstance<TData>;
     }) => void;
+    onColumnDrop?: ({
+      event,
+      draggedColumn,
+      targetColumn,
+    }: {
+      event: DragEvent<HTMLButtonElement>;
+      draggedColumn: MRT_Column<TData>;
+      targetColumn: MRT_Column<TData> | null;
+    }) => void;
     onCurrentDraggingColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
     onCurrentDraggingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
     onCurrentEditingCellChange?: OnChangeFn<MRT_Cell<TData> | null>;
@@ -654,12 +694,14 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     }) => Promise<void> | void;
     onDensityChange?: OnChangeFn<boolean>;
     onIsFullScreenChange?: OnChangeFn<boolean>;
-    onRowReorder?: ({
-      movingRow,
+    onRowDrop?: ({
+      event,
+      draggedRow,
       targetRow,
     }: {
-      movingRow: MRT_Row<TData>;
-      targetRow: MRT_Row<TData>;
+      event: DragEvent<HTMLButtonElement>;
+      draggedRow: MRT_Row<TData>;
+      targetRow: MRT_Row<TData> | null;
     }) => void;
     onShowAlertBannerChange?: OnChangeFn<boolean>;
     onShowFiltersChange?: OnChangeFn<boolean>;

@@ -1,4 +1,4 @@
-import React, { DragEvent, FC, MouseEvent, useMemo } from 'react';
+import React, { DragEvent, FC, MouseEvent, RefObject, useMemo } from 'react';
 import {
   alpha,
   darken,
@@ -10,11 +10,13 @@ import {
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 import type { MRT_Cell, MRT_TableInstance } from '..';
+import { MRT_TableBodyRowGrabHandle } from './MRT_TableBodyRowGrabHandle';
 
 interface Props {
   cell: MRT_Cell;
   enableHover?: boolean;
   rowIndex: number;
+  rowRef: RefObject<HTMLTableRowElement>;
   table: MRT_TableInstance;
 }
 
@@ -22,6 +24,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
   cell,
   enableHover,
   rowIndex,
+  rowRef,
   table,
 }) => {
   const theme = useTheme();
@@ -30,6 +33,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
     options: {
       editingMode,
       enableClickToCopy,
+      enableColumnOrdering,
       enableEditing,
       enableRowNumbers,
       muiTableBodyCellProps,
@@ -124,7 +128,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
   };
 
   const handleDragEnter = (_e: DragEvent) => {
-    if (currentDraggingColumn) {
+    if (enableColumnOrdering && currentDraggingColumn) {
       setCurrentHoveredColumn(columnDefType === 'data' ? column : null);
     }
   };
@@ -237,6 +241,12 @@ export const MRT_TableBodyCell: FC<Props> = ({
           rowNumberMode === 'static' &&
           column.id === 'mrt-row-numbers' ? (
           rowIndex + 1
+        ) : column.id === 'mrt-row-drag' ? (
+          <MRT_TableBodyRowGrabHandle
+            cell={cell}
+            rowRef={rowRef}
+            table={table}
+          />
         ) : columnDefType === 'display' ? (
           columnDef.Cell?.({ cell, table })
         ) : isEditing ? (

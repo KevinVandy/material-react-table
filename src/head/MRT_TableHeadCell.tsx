@@ -1,12 +1,11 @@
 import React, { DragEvent, FC, ReactNode } from 'react';
 import { Box, TableCell, Theme, alpha, lighten, useTheme } from '@mui/material';
+import { MRT_TableHeadCellColumnActionsButton } from './MRT_TableHeadCellColumnActionsButton';
 import { MRT_TableHeadCellFilterContainer } from './MRT_TableHeadCellFilterContainer';
 import { MRT_TableHeadCellFilterLabel } from './MRT_TableHeadCellFilterLabel';
-import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
+import { MRT_TableHeadCellGrabHandle } from './MRT_TableHeadCellGrabHandle';
 import { MRT_TableHeadCellResizeHandle } from './MRT_TableHeadCellResizeHandle';
 import { MRT_TableHeadCellSortLabel } from './MRT_TableHeadCellSortLabel';
-import { MRT_TableHeadCellColumnActionsButton } from './MRT_TableHeadCellColumnActionsButton';
-import { reorderColumn } from '../utils';
 import type { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
@@ -20,18 +19,16 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
     getState,
     options: {
       enableColumnActions,
+      enableColumnDragging,
       enableColumnOrdering,
       enableColumnResizing,
       enableGrouping,
       enableMultiSort,
       muiTableHeadCellProps,
     },
-    setColumnOrder,
-    setCurrentDraggingColumn,
     setCurrentHoveredColumn,
   } = table;
-  const { columnOrder, density, currentDraggingColumn, currentHoveredColumn } =
-    getState();
+  const { density, currentDraggingColumn, currentHoveredColumn } = getState();
   const { column } = header;
   const { columnDef } = column;
   const { columnDefType } = columnDef;
@@ -75,29 +72,13 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
     );
   };
 
-  const tableHeadCellRef = React.useRef<HTMLElement>(null);
-
-  const handleDragStart = (e: DragEvent<HTMLButtonElement>) => {
-    setCurrentDraggingColumn(column);
-    e.dataTransfer.setDragImage(tableHeadCellRef.current as HTMLElement, 0, 0);
-  };
-
-  const handleDragEnd = (_e: DragEvent<HTMLButtonElement>) => {
-    if (
-      currentHoveredColumn &&
-      currentHoveredColumn?.id !== currentDraggingColumn?.id
-    ) {
-      setColumnOrder(reorderColumn(column, currentHoveredColumn, columnOrder));
-    }
-    setCurrentDraggingColumn(null);
-    setCurrentHoveredColumn(null);
-  };
-
   const handleDragEnter = (_e: DragEvent) => {
-    if (currentDraggingColumn) {
+    if (enableColumnOrdering && currentDraggingColumn) {
       setCurrentHoveredColumn(columnDefType === 'data' ? column : null);
     }
   };
+
+  const tableHeadCellRef = React.useRef<HTMLTableCellElement>(null);
 
   const draggingBorder =
     currentDraggingColumn?.id === column.id
@@ -223,13 +204,15 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
           </Box>
           <Box sx={{ whiteSpace: 'nowrap' }}>
             {columnDefType === 'data' &&
-              ((enableColumnOrdering &&
-                columnDef.enableColumnOrdering !== false) ||
+              ((enableColumnDragging &&
+                columnDef.enableColumnDragging !== false) ||
+                (enableColumnOrdering &&
+                  columnDef.enableColumnOrdering !== false) ||
                 (enableGrouping && columnDef.enableGrouping !== false)) && (
-                <MRT_GrabHandleButton
-                  onDragStart={handleDragStart}
-                  onDragEnd={handleDragEnd}
+                <MRT_TableHeadCellGrabHandle
+                  column={column}
                   table={table}
+                  tableHeadCellRef={tableHeadCellRef}
                 />
               )}
             {(enableColumnActions || columnDef.enableColumnActions) &&

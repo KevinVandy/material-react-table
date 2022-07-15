@@ -61,17 +61,17 @@ export const prepareColumns = <TData extends Record<string, any> = {}>(
   }) as MRT_DefinedColumnDef<TData>[];
 
 export const reorderColumn = <TData extends Record<string, any> = {}>(
-  movingColumn: MRT_Column<TData>,
+  draggedColumn: MRT_Column<TData>,
   targetColumn: MRT_Column<TData>,
   columnOrder: ColumnOrderState,
 ): ColumnOrderState => {
-  if (movingColumn.getCanPin()) {
-    movingColumn.pin(targetColumn.getIsPinned());
+  if (draggedColumn.getCanPin()) {
+    draggedColumn.pin(targetColumn.getIsPinned());
   }
   columnOrder.splice(
     columnOrder.indexOf(targetColumn.id),
     0,
-    columnOrder.splice(columnOrder.indexOf(movingColumn.id), 1)[0],
+    columnOrder.splice(columnOrder.indexOf(draggedColumn.id), 1)[0],
   );
   return [...columnOrder];
 };
@@ -82,7 +82,7 @@ export const getLeadingDisplayColumnIds = <
   props: MaterialReactTableProps<TData>,
 ) =>
   [
-    props.enableRowOrdering && 'mrt-row-drag',
+    (props.enableRowDragging || props.enableRowOrdering) && 'mrt-row-drag',
     ((props.positionActionsColumn === 'first' && props.enableRowActions) ||
       (props.enableEditing && props.editingMode === 'row')) &&
       'mrt-row-actions',

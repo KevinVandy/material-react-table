@@ -134,6 +134,16 @@ export const columnOptions: ColumnOption[] = [
     type: 'boolean',
   },
   {
+    columnOption: 'enableColumnDragging',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    source: 'MRT',
+    required: false,
+    type: 'boolean',
+  },
+  {
     columnOption: 'enableColumnFilter',
     defaultValue: '',
     description: '',
@@ -375,6 +385,16 @@ export const columnOptions: ColumnOption[] = [
   },
   {
     columnOption: 'muiTableHeadCellColumnActionsButtonProps',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    source: 'Material UI',
+    required: false,
+    type: 'IconButtonProps | ({ table, column }) => IconButtonProps',
+  },
+  {
+    columnOption: 'muiTableHeadCellDragHandleProps',
     defaultValue: '',
     description: '',
     link: '',

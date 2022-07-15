@@ -545,10 +545,10 @@
   resolved "https://registry.yarnpkg.com/@types/ms/-/ms-0.7.31.tgz#31b7ca6407128a3d2bbc27fe2d21b345397f6197"
   integrity sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==
 
-"@types/node@^18.0.3":
-  version "18.0.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.0.3.tgz#463fc47f13ec0688a33aec75d078a0541a447199"
-  integrity sha512-HzNRZtp4eepNitP+BD6k2L6DROIDG4Q0fm4x+dwfsr6LGmROENnok75VGw40628xf+iR24WeMFcHuuBDUAzzsQ==
+"@types/node@^18.0.4":
+  version "18.0.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.0.4.tgz#48aedbf35efb3af1248e4cd4d792c730290cd5d6"
+  integrity sha512-M0+G6V0Y4YV8cqzHssZpaNCqvYwlCiulmm0PwpNLF55r/+cT8Ol42CHRU1SEaYFH2rTwiiE1aYg/2g2rrtGdPA==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -1988,10 +1988,10 @@ match-sorter@^6.0.2:
     "@babel/runtime" "^7.12.5"
     remove-accents "0.4.2"
 
-material-react-table@^0.23.5:
-  version "0.23.5"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.23.5.tgz#007b7a93e9351c63206cc10945563ae5b7dbb4f1"
-  integrity sha512-cJbplMHSn1s1EUHFNgPZREyVja1Efs7GeIg6x8y/hDHntxIJVjVGeIHOLH+GIGP/nclIAKDpwuyMgFTz64kl7w==
+material-react-table@^0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.24.0.tgz#c11b78f6d40a12d7acb7347a1e1f3b3b50f36ee6"
+  integrity sha512-opcgy36NbvURBuzWzDuTOmyBO43rZhXrDS9FgCjrYsowMdv2K2JR6EX6QWUJvB88VUBIc73Q3lXm9F0CKwhP0Q==
   dependencies:
     "@tanstack/match-sorter-utils" "8.1.1"
     "@tanstack/react-table" "8.2.6"
@@ -2474,10 +2474,10 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
 
-next-sitemap@^3.1.10:
-  version "3.1.10"
-  resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-3.1.10.tgz#876d0373330874e48c86a849eab94dc1bb439e17"
-  integrity sha512-IslH1nxY5p/3+cdjFiXDFSfchUJ0R+Flvm/T/01y7xokA/hd4rnuU+Jh0ZEZ92j7zBgwPUp1KTg0B41zuSpVHw==
+next-sitemap@^3.1.11:
+  version "3.1.11"
+  resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-3.1.11.tgz#02d9cecc84e087906966a9cc800a3f0ac95772b7"
+  integrity sha512-qHq/nVzqEL3Sd5N+1ZnqoY2xN4BSmgEkIlvCjFOtMMIyl8Tr/xmVZgVau/8aZsDtxoXPKG/NzdonZssvpK4Jdw==
   dependencies:
     "@corex/deepmerge" "^4.0.29"
     minimist "^1.2.6"
