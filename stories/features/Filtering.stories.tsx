@@ -28,6 +28,16 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
     accessorKey: 'age',
   },
   {
+    Cell: ({ cell }) => cell.getValue<Date>().toLocaleDateString(), //transform data to readable format for cell render
+    accessorFn: (row) => new Date(row.birthDate), //transform data before processing so sorting works
+    accessorKey: 'birthDate',
+    header: 'Birth Date',
+    muiTableHeadCellFilterTextFieldProps: {
+      type: 'date',
+    },
+    sortingFn: 'datetime',
+  },
+  {
     header: 'Gender',
     accessorKey: 'gender',
   },
@@ -45,6 +55,7 @@ const data = [...Array(100)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   age: faker.datatype.number(100),
+  birthDate: faker.date.birthdate({min:1990, max: 2020}),
   gender: faker.name.gender(true),
   address: faker.address.streetAddress(),
   state: faker.address.state(),
