@@ -73,14 +73,15 @@ export const MRT_FilterTextField: FC<Props> = ({
 
   const handleChangeDebounced = useCallback(
     debounce((event: ChangeEvent<HTMLInputElement>) => {
+      let value = textFieldProps.type === 'date' ? new Date(event.target.value) : event.target.value
       if (inputIndex !== undefined) {
-        column.setFilterValue((old: [string, string]) => {
+        column.setFilterValue((old: [string, string | Date]) => {
           const newFilterValues = old ?? ['', ''];
-          newFilterValues[inputIndex] = event.target.value;
+          newFilterValues[inputIndex] = value;
           return newFilterValues;
         });
       } else {
-        column.setFilterValue(event.target.value ?? undefined);
+        column.setFilterValue(value ?? undefined);
       }
     }, 200),
     [],
