@@ -129,7 +129,9 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   const handleDragEnter = (_e: DragEvent) => {
     if (enableColumnOrdering && currentDraggingColumn) {
-      setCurrentHoveredColumn(columnDefType === 'data' ? column : null);
+      setCurrentHoveredColumn(
+        columnDef.enableColumnOrdering !== false ? column : null,
+      );
     }
   };
 

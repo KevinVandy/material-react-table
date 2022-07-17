@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC } from 'react';
+import React, { FC } from 'react';
 import { Checkbox, Tooltip } from '@mui/material';
 import type { MRT_Row, MRT_TableInstance } from '..';
 
@@ -20,24 +20,12 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, table }) => {
   } = table;
   const { density } = getState();
 
-  const handleSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (selectAll) {
-      if (selectAllMode === 'all') {
-        table.getToggleAllRowsSelectedHandler()(event as any);
-      } else if (selectAllMode === 'page') {
-        table.getToggleAllPageRowsSelectedHandler()(event as any);
-      }
-    } else if (row) {
-      row?.getToggleSelectedHandler()(event as any);
-    }
-  };
-
-  const checkboxProps = selectAll
+  const checkboxProps = !row
     ? muiSelectAllCheckboxProps instanceof Function
       ? muiSelectAllCheckboxProps({ table })
       : muiSelectAllCheckboxProps
     : muiSelectCheckboxProps instanceof Function
-    ? muiSelectCheckboxProps({ row: row as MRT_Row, table })
+    ? muiSelectCheckboxProps({ row, table })
     : muiSelectCheckboxProps;
 
   return (
@@ -61,12 +49,19 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, table }) => {
             ? localization.toggleSelectAll
             : localization.toggleSelectRow,
         }}
-        onChange={handleSelectChange}
+        onChange={
+          !row
+            ? selectAllMode === 'all'
+              ? table.getToggleAllRowsSelectedHandler()
+              : table.getToggleAllPageRowsSelectedHandler()
+            : row.getToggleSelectedHandler()
+        }
         size={density === 'compact' ? 'small' : 'medium'}
         {...checkboxProps}
         sx={{
-          height: density === 'compact' ? '1.75rem' : '2.25rem',
-          width: density === 'compact' ? '1.75rem' : '2.25rem',
+          height: density === 'compact' ? '1.5rem' : '2rem',
+          width: density === 'compact' ? '1.5rem' : '2rem',
+          m: '-1re.m',
           ...checkboxProps?.sx,
         }}
       />

@@ -49,19 +49,6 @@ import { MRT_SortingFns } from './sortingFns';
 
 type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
 
-export type MRT_TableOptions<TData extends Record<string, any> = {}> = Partial<
-  Omit<
-    TableOptions<TData>,
-    'columns' | 'data' | 'initialState' | 'state' | 'expandRowsFn'
-  >
-> & {
-  columns: MRT_ColumnDef<TData>[];
-  data: TData[];
-  expandRowsFn?: (dataRow: TData) => TData[];
-  initialState?: Partial<MRT_TableState<TData>>;
-  state?: Partial<MRT_TableState<TData>>;
-};
-
 export interface MRT_RowModel<TData extends Record<string, any> = {}> {
   flatRows: MRT_Row<TData>[];
   rows: MRT_Row<TData>[];
@@ -218,7 +205,7 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
    *
    * @example accessorKey: 'username'
    */
-  accessorKey?: LiteralUnion<string & keyof TData>;
+  accessorKey?: string & keyof TData;
   /**
    * Specify what type of column this is. Either `data`, `display`, or `group`. Defaults to `data`.
    * Leave this blank if you are just creating a normal data column.
@@ -411,6 +398,13 @@ export type MRT_FilterFn<TData extends Record<string, any> = {}> =
   | FilterFn<TData>
   | MRT_FilterOption;
 
+export type MRT_DisplayColumnIds =
+  | 'mrt-row-drag'
+  | 'mrt-row-actions'
+  | 'mrt-row-expand'
+  | 'mrt-row-select'
+  | 'mrt-row-numbers';
+
 /**
  * `columns` and `data` props are the only required props, but there are over 150 other optional props.
  *
@@ -421,7 +415,15 @@ export type MRT_FilterFn<TData extends Record<string, any> = {}> =
  * @link https://www.material-react-table.com/docs/api/props
  */
 export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
-  MRT_TableOptions<TData> & {
+  Omit<
+    Partial<TableOptions<TData>>,
+    'columns' | 'data' | 'initialState' | 'state' | 'expandRowsFn'
+  > & {
+    displayColumnDefOptions?: Partial<{
+      [key in MRT_DisplayColumnIds]: Partial<MRT_ColumnDef>;
+    }>;
+    columns: MRT_ColumnDef<TData>[];
+    data: TData[];
     editingMode?: 'table' | 'row' | 'cell';
     enableClickToCopy?: boolean;
     enableColumnActions?: boolean;
@@ -449,7 +451,9 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     enableToolbarTop?: boolean;
     enabledColumnFilterOptions?: (MRT_FilterOption | string)[] | null;
     enabledGlobalFilterOptions?: (MRT_FilterOption | string)[] | null;
+    expandRowsFn?: (dataRow: TData) => TData[];
     icons?: Partial<MRT_Icons>;
+    initialState?: Partial<MRT_TableState<TData>>;
     localization?: Partial<MRT_Localization>;
     muiExpandAllButtonProps?:
       | IconButtonProps
@@ -522,6 +526,9 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
           table: MRT_TableInstance<TData>;
           cell: MRT_Cell<TData>;
         }) => SkeletonProps);
+    muiTableBodyProps?:
+      | TableBodyProps
+      | (({ table }: { table: MRT_TableInstance<TData> }) => TableBodyProps);
     muiTableBodyRowDragHandleProps?:
       | IconButtonProps
       | (({
@@ -531,9 +538,6 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
           table: MRT_TableInstance<TData>;
           row: MRT_Row<TData>;
         }) => IconButtonProps);
-    muiTableBodyProps?:
-      | TableBodyProps
-      | (({ table }: { table: MRT_TableInstance<TData> }) => TableBodyProps);
     muiTableBodyRowProps?:
       | TableRowProps
       | (({
@@ -685,6 +689,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     onCurrentGlobalFilterFnChange?: OnChangeFn<MRT_FilterOption>;
     onCurrentHoveredColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
     onCurrentHoveredRowChange?: OnChangeFn<MRT_Row<TData> | null>;
+    onDensityChange?: OnChangeFn<boolean>;
     onEditRowSubmit?: ({
       row,
       table,
@@ -692,7 +697,6 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
       row: MRT_Row<TData>;
       table: MRT_TableInstance<TData>;
     }) => Promise<void> | void;
-    onDensityChange?: OnChangeFn<boolean>;
     onIsFullScreenChange?: OnChangeFn<boolean>;
     onRowDrop?: ({
       event,
@@ -738,11 +742,6 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     }: {
       table: MRT_TableInstance<TData>;
     }) => ReactNode;
-    renderToolbarTopCustomActions?: ({
-      table,
-    }: {
-      table: MRT_TableInstance<TData>;
-    }) => ReactNode;
     renderToolbarInternalActions?: ({
       table,
       MRT_ToggleGlobalFilterButton,
@@ -768,9 +767,15 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
         IconButtonProps & { table: MRT_TableInstance<TData> }
       >;
     }) => ReactNode;
+    renderToolbarTopCustomActions?: ({
+      table,
+    }: {
+      table: MRT_TableInstance<TData>;
+    }) => ReactNode;
     rowCount?: number;
     rowNumberMode?: 'original' | 'static';
     selectAllMode?: 'all' | 'page';
+    state?: Partial<MRT_TableState<TData>>;
     tableId?: string;
     virtualizerProps?: Partial<VirtualizerOptions<HTMLDivElement>>;
   };

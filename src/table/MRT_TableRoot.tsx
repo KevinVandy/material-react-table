@@ -33,6 +33,22 @@ import {
 } from '../utils';
 import { MRT_FilterFns } from '../filtersFns';
 
+const defaultDisplayColumnDefOptions = {
+  columnDefType: 'display',
+  enableClickToCopy: false,
+  enableColumnActions: false,
+  enableColumnDragging: false,
+  enableColumnFilter: false,
+  enableColumnOrdering: false,
+  enableEditing: false,
+  enableGlobalFilter: false,
+  enableGrouping: false,
+  enableHiding: false,
+  enablePinning: false,
+  enableResizing: false,
+  enableSorting: false,
+} as Partial<MRT_ColumnDef>;
+
 export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   props: MaterialReactTableProps<TData>,
 ) => {
@@ -54,17 +70,21 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
     initialState.columnOrder ?? [],
   );
   const [currentDraggingColumn, setCurrentDraggingColumn] =
-    useState<MRT_Column<TData> | null>(null);
+    useState<MRT_Column<TData> | null>(
+      initialState.currentDraggingColumn ?? null,
+    );
   const [currentDraggingRow, setCurrentDraggingRow] =
-    useState<MRT_Row<TData> | null>(null);
+    useState<MRT_Row<TData> | null>(initialState.currentDraggingRow ?? null);
   const [currentEditingCell, setCurrentEditingCell] =
-    useState<MRT_Cell<TData> | null>(initialState?.currentEditingCell ?? null);
+    useState<MRT_Cell<TData> | null>(initialState.currentEditingCell ?? null);
   const [currentEditingRow, setCurrentEditingRow] =
-    useState<MRT_Row<TData> | null>(initialState?.currentEditingRow ?? null);
+    useState<MRT_Row<TData> | null>(initialState.currentEditingRow ?? null);
   const [currentHoveredColumn, setCurrentHoveredColumn] =
-    useState<MRT_Column<TData> | null>(null);
+    useState<MRT_Column<TData> | null>(
+      initialState.currentHoveredColumn ?? null,
+    );
   const [currentHoveredRow, setCurrentHoveredRow] =
-    useState<MRT_Row<TData> | null>(null);
+    useState<MRT_Row<TData> | null>(initialState.currentHoveredRow ?? null);
   const [density, setDensity] = useState(
     initialState?.density ?? 'comfortable',
   );
@@ -80,7 +100,6 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   const [showGlobalFilter, setShowGlobalFilter] = useState(
     initialState?.showGlobalFilter ?? false,
   );
-
   const [currentFilterFns, setCurrentFilterFns] = useState<{
     [key: string]: MRT_FilterOption;
   }>(() =>
@@ -100,7 +119,6 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       ),
     ),
   );
-
   const [currentGlobalFilterFn, setCurrentGlobalFilterFn] =
     useState<MRT_FilterOption>(
       props.globalFilterFn instanceof String
@@ -113,12 +131,11 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       (
         [
           columnOrder.includes('mrt-row-drag') && {
-            columnDefType: 'display',
             header: props.localization?.move,
-            id: 'mrt-row-drag',
-            muiTableBodyCellProps: props.muiTableBodyCellProps,
-            muiTableHeadCellProps: props.muiTableHeadCellProps,
             size: 60,
+            ...defaultDisplayColumnDefOptions,
+            ...props.displayColumnDefOptions?.['mrt-row-drag'],
+            id: 'mrt-row-drag',
           },
           columnOrder.includes('mrt-row-actions') && {
             Cell: ({ cell }) => (
@@ -127,12 +144,11 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
                 table={table}
               />
             ),
-            columnDefType: 'display',
             header: props.localization?.actions,
-            id: 'mrt-row-actions',
-            muiTableBodyCellProps: props.muiTableBodyCellProps,
-            muiTableHeadCellProps: props.muiTableHeadCellProps,
             size: 70,
+            ...defaultDisplayColumnDefOptions,
+            ...props.displayColumnDefOptions?.['mrt-row-actions'],
+            id: 'mrt-row-actions',
           },
           columnOrder.includes('mrt-row-expand') && {
             Cell: ({ cell }) => (
@@ -142,12 +158,11 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
               props.enableExpandAll ? (
                 <MRT_ExpandAllButton table={table} />
               ) : null,
-            columnDefType: 'display',
             header: props.localization?.expand,
-            id: 'mrt-row-expand',
-            muiTableBodyCellProps: props.muiTableBodyCellProps,
-            muiTableHeadCellProps: props.muiTableHeadCellProps,
             size: 60,
+            ...defaultDisplayColumnDefOptions,
+            ...props.displayColumnDefOptions?.['mrt-row-expand'],
+            id: 'mrt-row-expand',
           },
           columnOrder.includes('mrt-row-select') && {
             Cell: ({ cell }) => (
@@ -157,33 +172,35 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
               props.enableSelectAll ? (
                 <MRT_SelectCheckbox selectAll table={table} />
               ) : null,
-            columnDefType: 'display',
             header: props.localization?.select,
-            id: 'mrt-row-select',
-            muiTableBodyCellProps: props.muiTableBodyCellProps,
-            muiTableHeadCellProps: props.muiTableHeadCellProps,
             size: 60,
+            ...defaultDisplayColumnDefOptions,
+            ...props.displayColumnDefOptions?.['mrt-row-select'],
+            id: 'mrt-row-select',
           },
           columnOrder.includes('mrt-row-numbers') && {
             Cell: ({ cell }) => cell.row.index + 1,
             Header: () => props.localization?.rowNumber,
-            columnDefType: 'display',
             header: props.localization?.rowNumbers,
-            id: 'mrt-row-numbers',
-            muiTableBodyCellProps: props.muiTableBodyCellProps,
-            muiTableHeadCellProps: props.muiTableHeadCellProps,
             size: 60,
+            ...defaultDisplayColumnDefOptions,
+            ...props.displayColumnDefOptions?.['mrt-row-numbers'],
+            id: 'mrt-row-numbers',
           },
         ] as MRT_ColumnDef<TData>[]
       ).filter(Boolean),
     [
       columnOrder,
+      props.displayColumnDefOptions,
       props.editingMode,
+      props.enableColumnDragging,
+      props.enableColumnOrdering,
       props.enableEditing,
       props.enableExpandAll,
       props.enableExpanding,
       props.enableGrouping,
       props.enableRowActions,
+      props.enableRowDragging,
       props.enableRowNumbers,
       props.enableRowOrdering,
       props.enableRowSelection,

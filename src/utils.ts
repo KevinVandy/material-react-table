@@ -4,6 +4,7 @@ import {
   MRT_Column,
   MRT_ColumnDef,
   MRT_DefinedColumnDef,
+  MRT_DisplayColumnIds,
   MRT_FilterOption,
 } from '.';
 import { MRT_FilterFns } from './filtersFns';
@@ -92,7 +93,7 @@ export const getLeadingDisplayColumnIds = <
       'mrt-row-expand',
     props.enableRowSelection && 'mrt-row-select',
     props.enableRowNumbers && 'mrt-row-numbers',
-  ].filter(Boolean) as string[];
+  ].filter(Boolean) as MRT_DisplayColumnIds[];
 
 export const getTrailingDisplayColumnIds = <
   TData extends Record<string, any> = {},

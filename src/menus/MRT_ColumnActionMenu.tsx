@@ -326,21 +326,22 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
             </Box>
           </MenuItem>,
         ]}
-      {enableColumnResizing && [
-        <MenuItem
-          disabled={!column.getCanResize() || !columnSizing[column.id]}
-          key={0}
-          onClick={handleResetColumnSize}
-          sx={commonMenuItemStyles}
-        >
-          <Box sx={commonListItemStyles}>
-            <ListItemIcon>
-              <RestartAltIcon />
-            </ListItemIcon>
-            {localization.resetColumnSize}
-          </Box>
-        </MenuItem>,
-      ]}
+      {enableColumnResizing &&
+        column.getCanResize() && [
+          <MenuItem
+            disabled={!columnSizing[column.id]}
+            key={0}
+            onClick={handleResetColumnSize}
+            sx={commonMenuItemStyles}
+          >
+            <Box sx={commonListItemStyles}>
+              <ListItemIcon>
+                <RestartAltIcon />
+              </ListItemIcon>
+              {localization.resetColumnSize}
+            </Box>
+          </MenuItem>,
+        ]}
       {enableHiding && [
         <MenuItem
           disabled={columnDef.enableHiding === false}

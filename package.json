@@ -1,5 +1,5 @@
 {
-  "version": "0.24.0",
+  "version": "0.25.0",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI implementation of TanStack React Table, inspired by material-table and the MUI X DataGrid, written from the ground up in TypeScript.",
@@ -31,7 +31,7 @@
   },
   "scripts": {
     "analyze": "size-limit --why",
-    "build": "tsdx build && size-limit && rm -rf material-react-table-docs/node_modules/material-react-table/dist && cp -r dist material-react-table-docs/node_modules/material-react-table/ && cp -r src material-react-table-docs/node_modules/material-react-table/ && cp -r package.json material-react-table-docs/node_modules/material-react-table/package.json",
+    "build": "tsdx build && size-limit && rm -rf material-react-table-docs/node_modules/material-react-table/dist && cp -r dist material-react-table-docs/node_modules/material-react-table/",
     "build-storybook": "build-storybook",
     "format": "prettier -w .",
     "lint": "eslint .",
@@ -75,7 +75,7 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "babel-loader": "^8.2.5",
-    "eslint": "^8.19.0",
+    "eslint": "^8.20.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.1",
     "prettier": "^2.7.1",
