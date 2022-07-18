@@ -192,6 +192,8 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
                   : undefined,
               display: 'flex',
               flexWrap: 'nowrap',
+              m: tableCellProps?.align === 'center' ? 'auto' : undefined,
+              pl: tableCellProps?.align === 'center' ? '1rem' : undefined,
               whiteSpace:
                 (columnDef.header?.length ?? 0) < 24 ? 'nowrap' : 'normal',
             }}

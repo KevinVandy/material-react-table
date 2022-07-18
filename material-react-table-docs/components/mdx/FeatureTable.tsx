@@ -8,7 +8,10 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
     header: 'Feature',
     muiTableBodyCellProps: {
       sx: (theme) => ({
-        backgroundColor: theme.palette.common.black,
+        backgroundColor:
+          theme.palette.mode === 'dark'
+            ? theme.palette.background.paper
+            : theme.palette.grey[200],
       }),
     },
   },
@@ -16,9 +19,13 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
     accessorKey: 'mrt',
     header: 'Material React Table',
     muiTableHeadCellProps: {
+      align: 'center',
       sx: (theme) => ({
         color: theme.palette.primary.main,
       }),
+    },
+    muiTableBodyCellProps: {
+      align: 'center',
     },
     Cell: ({ cell }) =>
       cell.getValue() === true ? '✅' : cell.getValue() === false ? '❌' : '⚠️',
@@ -26,12 +33,24 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
   {
     accessorKey: 'mt',
     header: 'Material Table',
+    muiTableHeadCellProps: {
+      align: 'center',
+    },
+    muiTableBodyCellProps: {
+      align: 'center',
+    },
     Cell: ({ cell }) =>
       cell.getValue() === true ? '✅' : cell.getValue() === false ? '❌' : '⚠️',
   },
   {
     accessorKey: 'muix',
     header: 'Material UI X',
+    muiTableHeadCellProps: {
+      align: 'center',
+    },
+    muiTableBodyCellProps: {
+      align: 'center',
+    },
     Cell: ({ cell }) =>
       cell.getValue() === true ? '✅' : cell.getValue() === false ? '❌' : '⚠️',
   },
@@ -233,11 +252,17 @@ const FeatureTable = () => {
       data={data}
       enablePagination={false}
       enableColumnActions={false}
+      enableStickyHeader
       enableToolbarBottom={false}
       enableToolbarTop={false}
       initialState={{
         sorting: [{ id: 'feature', desc: false }],
         density: 'compact',
+      }}
+      muiTableContainerProps={{
+        sx: {
+          maxHeight: 'min(100vh, 600px)',
+        },
       }}
     />
   );

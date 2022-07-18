@@ -58,6 +58,20 @@ export const CenteredTableBodyCells: Story<MaterialReactTableProps> = () => (
   />
 );
 
+export const CenterAllCells: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnActions={false}
+    muiTableHeadCellProps={{
+      align: 'center',
+    }}
+    muiTableBodyCellProps={{
+      align: 'center',
+    }}
+  />
+);
+
 export const RightAlignNumberColumn: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={[

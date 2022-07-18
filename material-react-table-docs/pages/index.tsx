@@ -44,6 +44,7 @@ const HomePage = () => {
             mb: '2rem',
             textAlign: 'center',
             lineHeight: '2.5rem',
+            fontWeight: 'normal',
           }}
           variant="h2"
         >
@@ -52,6 +53,7 @@ const HomePage = () => {
             sx={(theme) => ({
               color: theme.palette.primary.main,
               display: 'inline',
+              fontStyle: 'italic',
             })}
           >
             Material&nbsp;Design
