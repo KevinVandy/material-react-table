@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import { MRT_ColumnPinningButtons } from '../buttons/MRT_ColumnPinningButtons';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
-import { reorderColumn } from '../utils';
+import { reorderColumn } from '../column.utils';
 import type { MRT_Column, MRT_TableInstance } from '..';
 
 interface Props {

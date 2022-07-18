@@ -59,26 +59,26 @@ _All features can easily be enabled/disabled_
 - [x] Column Grouping (Group By and Aggregates)
 - [x] Column Hiding
 - [x] Column Ordering via Drag'n'Drop
-- [x] Column Pinning
-- [x] Column Resizing (work in progress)
+- [x] Column Pinning (Freeze Columns)
+- [x] Column Resizing
 - [x] Customize Icons
 - [x] Customize Styling of internal Mui Components
 - [x] Data Editing (3 different editing modes)
 - [x] Density Toggle
-- [x] Detail Panels
-- [x] Filtering and multiple built-in filter modes
-- [x] Full Screen mode
+- [x] Detail Panels (Expansion)
+- [x] Filtering (supports client-side and server-side)
+- [x] Full Screen Mode
 - [x] Global Filtering (Search across all columns, rank by best match)
 - [x] Header Groups & Footers
 - [x] Localization (i18n) support
 - [x] Manage your own state
 - [x] Pagination (supports client-side and server-side)
-- [x] Remote/Server-side sorting and filtering supported
-- [x] Row Actions
+- [x] Row Actions (Your Custom Action Buttons)
 - [x] Row Numbers
-- [x] Row Selection (checkboxes)
+- [x] Row Ordering via Drag'n'Drop
+- [x] Row Selection (Checkboxes)
 - [x] SSR compatible
-- [x] Sorting
+- [x] Sorting (supports client-side and server-side)
 - [x] Theming (Respects your Material UI Theme)
 - [x] Toolbars (Add your own action buttons)
 - [x] Tree Data / Expanding Sub-rows
@@ -89,6 +89,8 @@ _All features can easily be enabled/disabled_
 ## Getting Started
 
 ### Installation
+
+View the full [Installation Docs](https://www.material-react-table.com/docs/install)
 
 1. Install Peer Dependencies (Material UI V5)
 

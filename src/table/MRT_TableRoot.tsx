@@ -10,7 +10,19 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { Box, Dialog, Grow } from '@mui/material';
+import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
+import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
+import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMenuButton';
+import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
+import { MRT_TablePaper } from './MRT_TablePaper';
 import {
+  prepareColumns,
+  getAllLeafColumnDefs,
+  getDefaultColumnOrderIds,
+} from '../column.utils';
+import { MRT_FilterFns } from '../filtersFns';
+import type {
   MRT_Cell,
   MRT_Column,
   MRT_ColumnDef,
@@ -18,20 +30,8 @@ import {
   MRT_Row,
   MRT_TableInstance,
   MRT_TableState,
+  MaterialReactTableProps,
 } from '..';
-import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
-import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
-import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMenuButton';
-import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
-import { MaterialReactTableProps } from '../MaterialReactTable';
-import { MRT_TablePaper } from './MRT_TablePaper';
-import { Box, Dialog, Grow } from '@mui/material';
-import {
-  prepareColumns,
-  getAllLeafColumnDefs,
-  getDefaultColumnOrderIds,
-} from '../utils';
-import { MRT_FilterFns } from '../filtersFns';
 
 const defaultDisplayColumnDefOptions = {
   columnDefType: 'display',

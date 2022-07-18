@@ -1,12 +1,6 @@
 import React, { FC, useMemo } from 'react';
-import { Menu, MenuItem } from '@mui/material';
+import { Box, Menu, MenuItem } from '@mui/material';
 import type { MRT_FilterOption, MRT_Header, MRT_TableInstance } from '..';
-
-const commonMenuItemStyles = {
-  py: '6px',
-  my: 0,
-  alignItems: 'center',
-};
 
 interface Props {
   anchorEl: HTMLElement | null;
@@ -42,75 +36,107 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
 
   const filterOptions = useMemo(
     () =>
-      [
-        {
-          option: 'fuzzy',
-          label: localization.filterFuzzy,
-          divider: false,
-        },
-        {
-          option: 'contains',
-          label: localization.filterContains,
-          divider: false,
-        },
-        {
-          option: 'startsWith',
-          label: localization.filterStartsWith,
-          divider: false,
-        },
-        {
-          option: 'endsWith',
-          label: localization.filterEndsWith,
-          divider: true,
-        },
-        {
-          option: 'equals',
-          label: localization.filterEquals,
-          divider: false,
-        },
-        {
-          option: 'notEquals',
-          label: localization.filterNotEquals,
-          divider: true,
-        },
-        {
-          option: 'between',
-          label: localization.filterBetween,
-          divider: false,
-        },
-        {
-          option: 'greaterThan',
-          label: localization.filterGreaterThan,
-          divider: false,
-        },
-        {
-          option: 'lessThan',
-          label: localization.filterLessThan,
-          divider: true,
-        },
-        {
-          option: 'empty',
-          label: localization.filterEmpty,
-          divider: false,
-        },
-        {
-          option: 'notEmpty',
-          label: localization.filterNotEmpty,
-          divider: false,
-        },
-      ].filter((filterType) =>
+      (
+        [
+          {
+            option: 'fuzzy',
+            symbol: '≈',
+            label: localization.filterFuzzy,
+            divider: false,
+          },
+          {
+            option: 'contains',
+            symbol: '[]',
+            label: localization.filterContains,
+            divider: false,
+          },
+          {
+            option: 'startsWith',
+            symbol: 'a',
+            label: localization.filterStartsWith,
+            divider: false,
+          },
+          {
+            option: 'endsWith',
+            symbol: 'z',
+            label: localization.filterEndsWith,
+            divider: true,
+          },
+          {
+            option: 'equals',
+            symbol: '=',
+            label: localization.filterEquals,
+            divider: false,
+          },
+          {
+            option: 'notEquals',
+            symbol: '≠',
+            label: localization.filterNotEquals,
+            divider: true,
+          },
+          {
+            option: 'between',
+            symbol: '⇿',
+            label: localization.filterBetween,
+            divider: false,
+          },
+          {
+            option: 'betweenInclusive',
+            symbol: '⬌',
+            label: localization.filterBetweenInclusive,
+            divider: true,
+          },
+          {
+            option: 'greaterThan',
+            symbol: '>',
+            label: localization.filterGreaterThan,
+            divider: false,
+          },
+          {
+            option: 'greaterThanOrEqualTo',
+            symbol: '≥',
+            label: localization.filterGreaterThanOrEqualTo,
+            divider: false,
+          },
+          {
+            option: 'lessThan',
+            symbol: '<',
+            label: localization.filterLessThan,
+            divider: false,
+          },
+          {
+            option: 'lessThanOrEqualTo',
+            symbol: '≤',
+            label: localization.filterLessThanOrEqualTo,
+            divider: true,
+          },
+          {
+            option: 'empty',
+            symbol: '∅',
+            label: localization.filterEmpty,
+            divider: false,
+          },
+          {
+            option: 'notEmpty',
+            symbol: '!∅',
+            label: localization.filterNotEmpty,
+            divider: false,
+          },
+        ] as Array<{
+          divider: boolean;
+          fn: Function;
+          label: string;
+          option: MRT_FilterOption;
+          symbol?: string;
+        }>
+      ).filter((filterType) =>
         columnDef
           ? allowedColumnFilterOptions === undefined ||
             allowedColumnFilterOptions?.includes(filterType.option)
           : (!enabledGlobalFilterOptions ||
               enabledGlobalFilterOptions.includes(filterType.option)) &&
             ['fuzzy', 'contains'].includes(filterType.option),
-      ) as Array<{
-        option: MRT_FilterOption;
-        label: string;
-        divider: boolean;
-        fn: Function;
-      }>,
+      ),
     [],
   );
 
@@ -148,15 +174,22 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
         dense: density === 'compact',
       }}
     >
-      {filterOptions.map(({ option, label, divider }, index) => (
+      {filterOptions.map(({ option, label, divider, symbol }, index) => (
         <MenuItem
           divider={divider}
           key={index}
           onClick={() => handleSelectFilterType(option)}
           selected={option === filterOption}
-          sx={commonMenuItemStyles}
+          sx={{
+            py: '6px',
+            my: 0,
+            alignItems: 'center',
+            display: 'flex',
+            gap: '2ch',
+          }}
           value={option}
         >
+          <Box sx={{ fontSize: '1.25rem', width: '2ch' }}>{symbol}</Box>
           {label}
         </MenuItem>
       ))}

@@ -2,7 +2,7 @@ import React, { FC, useMemo, useState } from 'react';
 import { Button, Menu, Divider, Box } from '@mui/material';
 import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
 import type { MRT_Column, MRT_TableInstance } from '..';
-import { getDefaultColumnOrderIds } from '../utils';
+import { getDefaultColumnOrderIds } from '../column.utils';
 
 interface Props {
   anchorEl: HTMLElement | null;

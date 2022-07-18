@@ -4,17 +4,17 @@ import {
   AppBar as MuiAppBar,
   IconButton as MuiIconButton,
   styled,
-  SvgIcon,
   Toolbar as MuiToolbar,
   Tooltip,
   Typography,
   useMediaQuery,
 } from '@mui/material';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import Image from 'next/image';
+import LightModeIcon from '@mui/icons-material/LightMode';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import Image from 'next/image';
 
 const AppBar = styled(MuiAppBar)({
   zIndex: 5,
@@ -93,16 +93,7 @@ const TopBar: FC<Props> = ({
               target="_blank"
             >
               <IconButton aria-label="Github">
-                <Image
-                  alt="Github"
-                  height={30}
-                  width={30}
-                  style={{
-                    backgroundColor: '#fff',
-                    borderRadius: '50%',
-                  }}
-                  src="/github.svg"
-                />
+                <GitHubIcon fontSize="large" />
               </IconButton>
             </a>
           </Tooltip>
@@ -130,7 +121,11 @@ const TopBar: FC<Props> = ({
               aria-label="Toggle Light/Dark Mode"
               onClick={() => setDarkTheme(!darkTheme)}
             >
-              {darkTheme ? <DarkModeIcon /> : <LightModeIcon />}
+              {darkTheme ? (
+                <DarkModeIcon fontSize="large" />
+              ) : (
+                <LightModeIcon fontSize="large" />
+              )}
             </IconButton>
           </Tooltip>
         </Flex>
