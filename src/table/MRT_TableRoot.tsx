@@ -252,7 +252,6 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       columns: columnDefs,
       data,
       getSubRows: (row) => row?.subRows,
-      //@ts-ignore
       globalFilterFn:
         MRT_FilterFns[currentGlobalFilterFn] ?? MRT_FilterFns.fuzzy,
       initialState,
@@ -296,6 +295,8 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
     setShowFilters: props.onShowFiltersChange ?? setShowFilters,
     setShowGlobalFilter: props.onShowGlobalFilterChange ?? setShowGlobalFilter,
   } as MRT_TableInstance;
+
+  useEffect(() => props?.onTableInstanceChange?.(table as any), [table]);
 
   return (
     <>

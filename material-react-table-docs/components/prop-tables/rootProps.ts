@@ -1478,6 +1478,16 @@ export const rootProps = [
     type: '',
   },
   {
+    propName: 'onTableInstanceChange',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '',
+  },
+  {
     propName: 'pageCount',
     defaultValue: '',
     description: '',

@@ -55,6 +55,7 @@ Default.args = {
     age: faker.datatype.number(80),
     address: faker.address.streetAddress(),
   })),
+  onTableInstanceChange: (table) => console.log({ table }),
 } as MaterialReactTableProps<Row>;
 
 export const MinimumFeatures = Template.bind({});

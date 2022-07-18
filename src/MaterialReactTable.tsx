@@ -710,6 +710,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     onShowAlertBannerChange?: OnChangeFn<boolean>;
     onShowFiltersChange?: OnChangeFn<boolean>;
     onShowGlobalFilterChange?: OnChangeFn<boolean>;
+    onTableInstanceChange?: (table: MRT_TableInstance<TData>) => void;
     positionActionsColumn?: 'first' | 'last';
     positionGlobalFilter?: 'left' | 'right';
     positionPagination?: 'bottom' | 'top' | 'both';
