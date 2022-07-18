@@ -62,7 +62,9 @@ export const MRT_ToolbarTop: FC<Props> = ({ table }) => {
           position: isFullScreen ? 'sticky' : undefined,
           top: isFullScreen ? '0' : undefined,
           ...commonToolbarStyles({ theme }),
-          ...toolbarProps?.sx,
+          ...(toolbarProps?.sx instanceof Function
+            ? toolbarProps.sx(theme)
+            : (toolbarProps?.sx as any)),
         } as any)
       }
     >

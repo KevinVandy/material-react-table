@@ -55,8 +55,8 @@ _All features can easily be enabled/disabled_
 - [x] < 35kb gzipped - [Bundlephobia](https://bundlephobia.com/package/material-react-table)
 - [x] Advanced TypeScript Generics Support (TypeScript Optional)
 - [x] Click To Copy Cell Values
-- [x] Column Actions
-- [x] Column Grouping (Group By and Aggregates)
+- [x] Column Action Dropdown Menu
+- [x] Column/Row Grouping (Group By and Aggregates)
 - [x] Column Hiding
 - [x] Column Ordering via Drag'n'Drop
 - [x] Column Pinning (Freeze Columns)

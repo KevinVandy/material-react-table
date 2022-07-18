@@ -35,11 +35,13 @@ export const MRT_Table: FC<Props> = ({ tableContainerRef, table }) => {
         enableStickyHeader || enableRowVirtualization || isFullScreen
       }
       {...tableProps}
-      sx={{
+      sx={(theme) => ({
         tableLayout:
           enableColumnResizing || enableRowVirtualization ? 'fixed' : 'auto',
-        ...tableProps?.sx,
-      }}
+        ...(tableProps?.sx instanceof Function
+          ? tableProps.sx(theme)
+          : (tableProps?.sx as any)),
+      })}
     >
       {enableTableHead && <MRT_TableHead table={table} />}
       <MRT_TableBody tableContainerRef={tableContainerRef} table={table} />

@@ -32,14 +32,16 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, table }) => {
       <TableCell
         colSpan={getVisibleLeafColumns().length}
         {...tableCellProps}
-        sx={{
+        sx={(theme) => ({
           borderBottom: !row.getIsExpanded() ? 'none' : undefined,
           pb: row.getIsExpanded() ? '1rem' : 0,
           pt: row.getIsExpanded() ? '1rem' : 0,
           transition: 'all 0.2s ease-in-out',
           width: `${table.getTotalSize()}px`,
-          ...tableCellProps?.sx,
-        }}
+          ...(tableCellProps?.sx instanceof Function
+            ? tableCellProps.sx(theme)
+            : (tableCellProps?.sx as any)),
+        })}
       >
         {renderDetailPanel && (
           <Collapse in={row.getIsExpanded()}>

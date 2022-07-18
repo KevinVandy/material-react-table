@@ -41,7 +41,11 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
     Cell: ({ cell }) => (
       <Box sx={{ display: 'flex', alignContent: 'center', gap: '1ch' }}>
         {`${cell.getValue()} KB`}
-        <img alt={cell.getValue()} src={cell.row.original.bundlePhobiaLink} />
+        <img
+          alt={cell.getValue()}
+          loading="lazy"
+          src={cell.row.original.bundlePhobiaLink}
+        />
       </Box>
     ),
     size: 200,
@@ -59,7 +63,7 @@ const data = [
     library: 'Material React Table',
     libraryLink: '#',
     freeOrLicensed: 'Free MIT',
-    bundleSize: 35,
+    bundleSize: 36,
     bundlePhobiaLink:
       'https://badgen.net/bundlephobia/minzip/material-react-table@latest?color=blue',
     description:

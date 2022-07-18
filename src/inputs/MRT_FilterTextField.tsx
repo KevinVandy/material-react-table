@@ -73,7 +73,10 @@ export const MRT_FilterTextField: FC<Props> = ({
 
   const handleChangeDebounced = useCallback(
     debounce((event: ChangeEvent<HTMLInputElement>) => {
-      let value = textFieldProps.type === 'date' ? new Date(event.target.value) : event.target.value
+      let value =
+        textFieldProps.type === 'date'
+          ? new Date(event.target.value)
+          : event.target.value;
       if (inputIndex !== undefined) {
         column.setFilterValue((old: [string, string | Date]) => {
           const newFilterValues = old ?? ['', ''];
@@ -256,7 +259,7 @@ export const MRT_FilterTextField: FC<Props> = ({
           ),
         }}
         {...textFieldProps}
-        sx={{
+        sx={(theme) => ({
           m: '-0.25rem',
           p: 0,
           minWidth: !filterChipLabel ? '8rem' : 'auto',
@@ -264,8 +267,10 @@ export const MRT_FilterTextField: FC<Props> = ({
           '&	.MuiSelect-icon': {
             mr: '1.5rem',
           },
-          ...textFieldProps?.sx,
-        }}
+          ...(textFieldProps?.sx instanceof Function
+            ? textFieldProps.sx(theme)
+            : (textFieldProps?.sx as any)),
+        })}
       >
         {isSelectFilter && (
           <MenuItem divider disabled={!filterValue} value="">

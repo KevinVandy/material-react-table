@@ -57,7 +57,7 @@ export const rootProps = [
   },
   {
     propName: 'columnResizeMode',
-    defaultValue: 'onEnd',
+    defaultValue: "'onEnd'",
     description:
       'Determines when the columnSizing state is updated. onChange updates the state when the user is dragging the resize handle. onEnd updates the state when the user releases the resize handle.',
     link: 'https://tanstack.com/table/v8/docs/api/features/column-sizing#columnresizemode',
@@ -145,6 +145,17 @@ export const rootProps = [
     required: false,
     source: '',
     type: '',
+  },
+  {
+    propName: 'displayColumnDefOptions',
+    defaultValue: '',
+    description:
+      'Customize and override the column definition options for the built-in display columns. (Select, Expand, Row Actions, etc.)',
+    link: '',
+    linkText: '',
+    required: false,
+    source: 'MRT',
+    type: '{ [key: string]: MRT_ColumnDef<TData> }',
   },
   {
     propName: 'editingMode',

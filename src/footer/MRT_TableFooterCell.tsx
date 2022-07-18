@@ -56,7 +56,9 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, table }) => {
         transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
         width: column.getSize(),
         verticalAlign: 'text-top',
-        ...(tableCellProps?.sx as any),
+        ...(tableCellProps?.sx instanceof Function
+          ? tableCellProps.sx(theme)
+          : (tableCellProps?.sx as any)),
       })}
     >
       <>

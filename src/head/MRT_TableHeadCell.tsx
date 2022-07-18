@@ -162,7 +162,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
             : column.getIsPinned() && columnDefType !== 'group'
             ? 2
             : 1,
-        ...(tableCellProps?.sx as any),
+        ...(tableCellProps?.sx instanceof Function
+          ? tableCellProps.sx(theme)
+          : (tableCellProps?.sx as any)),
         ...draggingBorders,
         maxWidth: `min(${column.getSize()}px, fit-content)`,
         minWidth: `max(${column.getSize()}px, ${columnDef.minSize ?? 30}px)`,

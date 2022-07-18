@@ -70,7 +70,9 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
                   : `${darken(theme.palette.background.default, 0.05)}`
                 : undefined,
           },
-          ...(tableRowProps?.sx as any),
+          ...(tableRowProps?.sx instanceof Function
+            ? tableRowProps.sx(theme)
+            : (tableRowProps?.sx as any)),
           ...draggingBorders,
         })}
       >

@@ -51,15 +51,17 @@ export const MRT_TableContainer: FC<Props> = ({ table }) => {
     <TableContainer
       ref={tableContainerRef}
       {...tableContainerProps}
-      sx={{
+      sx={(theme) => ({
         maxWidth: '100%',
         maxHeight:
           enableStickyHeader || enableRowVirtualization
             ? `clamp(350px, calc(100vh - ${totalToolbarHeight}px), 9999px)`
             : undefined,
         overflow: 'auto',
-        ...tableContainerProps?.sx,
-      }}
+        ...(tableContainerProps?.sx instanceof Function
+          ? tableContainerProps.sx(theme)
+          : (tableContainerProps?.sx as any)),
+      })}
       style={{
         maxHeight: isFullScreen
           ? `calc(100vh - ${totalToolbarHeight}px)`

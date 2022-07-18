@@ -41,11 +41,13 @@ export const MRT_ExpandButton: FC<Props> = ({ row, table }) => {
           disabled={!row.getCanExpand() && !renderDetailPanel}
           onClick={handleToggleExpand}
           {...iconButtonProps}
-          sx={{
+          sx={(theme) => ({
             height: density === 'compact' ? '1.75rem' : '2.25rem',
             width: density === 'compact' ? '1.75rem' : '2.25rem',
-            ...iconButtonProps?.sx,
-          }}
+            ...(iconButtonProps?.sx instanceof Function
+              ? iconButtonProps.sx(theme)
+              : (iconButtonProps?.sx as any)),
+          })}
         >
           <ExpandMoreIcon
             style={{

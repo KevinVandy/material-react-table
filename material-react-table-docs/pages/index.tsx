@@ -6,6 +6,7 @@ import { LinkCards } from '../components/mdx/LinkCards';
 import { StatBadges } from '../components/mdx/StatBadges';
 import ComparisonTable from '../components/mdx/ComparisonTable';
 import { LinkHeading } from '../components/mdx/LinkHeading';
+import FeatureTable from '../components/mdx/FeatureTable';
 
 const HomePage = () => {
   return (
@@ -162,11 +163,24 @@ const HomePage = () => {
           textAlign: 'center',
           m: '2rem',
         }}
-        variant="h2"
+        variant="h3"
       >
         Let&apos;s Compare
       </LinkHeading>
       <ComparisonTable />
+      <LinkHeading
+        sx={{
+          textAlign: 'center',
+          m: '2rem',
+        }}
+        variant="h3"
+      >
+        Feature Comparison
+      </LinkHeading>
+      <FeatureTable />
+      <Typography variant="subtitle2" sx={{ mt: '1rem' }}>
+        *If you see any inaccuracies in this table, PRs are welcome!
+      </Typography>
       <LinkCards />
     </>
   );

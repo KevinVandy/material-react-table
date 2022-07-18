@@ -58,12 +58,14 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, table }) => {
         }
         size={density === 'compact' ? 'small' : 'medium'}
         {...checkboxProps}
-        sx={{
+        sx={(theme) => ({
           height: density === 'compact' ? '1.5rem' : '2rem',
           width: density === 'compact' ? '1.5rem' : '2rem',
           m: '-1re.m',
-          ...checkboxProps?.sx,
-        }}
+          ...(checkboxProps?.sx instanceof Function
+            ? checkboxProps.sx(theme)
+            : (checkboxProps?.sx as any)),
+        })}
       />
     </Tooltip>
   );

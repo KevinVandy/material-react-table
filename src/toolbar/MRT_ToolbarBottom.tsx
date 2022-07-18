@@ -49,7 +49,9 @@ export const MRT_ToolbarBottom: FC<Props> = ({ table }) => {
           left: 0,
           position: isFullScreen ? 'fixed' : 'relative',
           right: 0,
-          ...toolbarProps?.sx,
+          ...(toolbarProps?.sx instanceof Function
+            ? toolbarProps.sx(theme)
+            : (toolbarProps?.sx as any)),
         } as any)
       }
     >

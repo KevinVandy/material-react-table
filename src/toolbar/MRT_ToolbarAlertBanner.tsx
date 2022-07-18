@@ -63,7 +63,7 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({
         color="info"
         icon={false}
         {...alertProps}
-        sx={{
+        sx={(theme) => ({
           borderRadius: 0,
           fontSize: '1rem',
           left: 0,
@@ -73,8 +73,10 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({
           top: 0,
           width: '100%',
           zIndex: 2,
-          ...alertProps?.sx,
-        }}
+          ...(alertProps?.sx instanceof Function
+            ? alertProps.sx(theme)
+            : (alertProps?.sx as any)),
+        })}
       >
         {alertProps?.title && <AlertTitle>{alertProps.title}</AlertTitle>}
         <Box sx={{ p: '0.5rem 1rem' }}>

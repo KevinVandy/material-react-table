@@ -55,7 +55,7 @@ export const MRT_CopyButton: FC<Props> = ({ cell, children, table }) => {
         type="button"
         variant="text"
         {...buttonProps}
-        sx={{
+        sx={(theme) => ({
           backgroundColor: 'transparent',
           border: 'none',
           color: 'inherit',
@@ -67,8 +67,10 @@ export const MRT_CopyButton: FC<Props> = ({ cell, children, table }) => {
           minWidth: 'unset',
           textAlign: 'inherit',
           textTransform: 'inherit',
-          ...buttonProps?.sx,
-        }}
+          ...(buttonProps?.sx instanceof Function
+            ? buttonProps.sx(theme)
+            : (buttonProps?.sx as any)),
+        })}
       >
         {children}
       </Button>

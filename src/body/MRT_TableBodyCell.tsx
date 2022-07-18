@@ -224,7 +224,9 @@ export const MRT_TableBodyCell: FC<Props> = ({
                 : `${darken(theme.palette.background.default, 0.07)} !important`
               : undefined,
         },
-        ...(tableCellProps?.sx as any),
+        ...(tableCellProps?.sx instanceof Function
+          ? tableCellProps.sx(theme)
+          : (tableCellProps?.sx as any)),
         ...draggingBorders,
         maxWidth: `min(${column.getSize()}px, fit-content)`,
         minWidth: `max(${column.getSize()}px, ${columnDef.minSize ?? 30}px)`,

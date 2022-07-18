@@ -46,7 +46,7 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
           },
           {
             option: 'contains',
-            symbol: '[]',
+            symbol: '*',
             label: localization.filterContains,
             divider: false,
           },

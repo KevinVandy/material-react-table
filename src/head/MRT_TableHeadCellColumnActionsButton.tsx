@@ -62,7 +62,7 @@ export const MRT_TableHeadCellColumnActionsButton: FC<Props> = ({
           onClick={handleClick}
           size="small"
           {...iconButtonProps}
-          sx={{
+          sx={(theme) => ({
             height: '2rem',
             mt: '-0.2rem',
             opacity: 0.5,
@@ -71,8 +71,10 @@ export const MRT_TableHeadCellColumnActionsButton: FC<Props> = ({
             '&:hover': {
               opacity: 1,
             },
-            ...iconButtonProps.sx,
-          }}
+            ...(iconButtonProps?.sx instanceof Function
+              ? iconButtonProps.sx(theme)
+              : (iconButtonProps?.sx as any)),
+          })}
         >
           <MoreVertIcon />
         </IconButton>

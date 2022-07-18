@@ -52,7 +52,7 @@ export const MRT_TablePagination: FC<Props> = ({ table, position }) => {
       showFirstButton={showFirstLastPageButtons}
       showLastButton={showFirstLastPageButtons}
       {...tablePaginationProps}
-      sx={{
+      sx={(theme) => ({
         m: '0 0.5rem',
         mt:
           position === 'top' &&
@@ -62,8 +62,10 @@ export const MRT_TablePagination: FC<Props> = ({ table, position }) => {
             : undefined,
         position: 'relative',
         zIndex: 2,
-        ...tablePaginationProps?.sx,
-      }}
+        ...(tablePaginationProps?.sx instanceof Function
+          ? tablePaginationProps.sx(theme)
+          : (tablePaginationProps?.sx as any)),
+      })}
     />
   );
 };
