@@ -174,8 +174,8 @@ export const routes = [
             label: 'Detail Panel (Expanding)',
           },
           {
-            href: '/docs/guides/expanded-rows',
-            label: 'Expanded Rows (Sub-Rows)',
+            href: '/docs/guides/expanding-sub-rows',
+            label: 'Expanding Sub-Rows (Tree)',
           },
           {
             href: '/docs/guides/row-actions',

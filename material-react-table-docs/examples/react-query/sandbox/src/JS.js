@@ -1,6 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import MaterialReactTable from 'material-react-table';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query';
 import axios from 'axios';
 
 const Example = () => {
@@ -12,7 +16,7 @@ const Example = () => {
     pageSize: 10,
   });
 
-  const { data, isError, isFetching, isLoading, isStale } = useQuery(
+  const { data, isError, isFetching, isLoading } = useQuery(
     [
       'table-data',
       columnFilters,
@@ -92,7 +96,7 @@ const Example = () => {
         isLoading,
         pagination,
         showAlertBanner: isError,
-        showProgressBars: isFetching && isStale,
+        showProgressBars: isFetching,
         sorting,
       }}
     />

@@ -712,6 +712,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     onShowGlobalFilterChange?: OnChangeFn<boolean>;
     onTableInstanceChange?: (table: MRT_TableInstance<TData>) => void;
     positionActionsColumn?: 'first' | 'last';
+    positionExpandColumn?: 'first' | 'last';
     positionGlobalFilter?: 'left' | 'right';
     positionPagination?: 'bottom' | 'top' | 'both';
     positionToolbarAlertBanner?: 'bottom' | 'top';
@@ -816,6 +817,7 @@ export default <TData extends Record<string, any> = {}>({
   icons,
   localization,
   positionActionsColumn = 'first',
+  positionExpandColumn = 'first',
   positionGlobalFilter = 'right',
   positionPagination = 'bottom',
   positionToolbarAlertBanner = 'top',
@@ -858,6 +860,7 @@ export default <TData extends Record<string, any> = {}>({
     icons={{ ...MRT_Default_Icons, ...icons }}
     localization={{ ...MRT_DefaultLocalization_EN, ...localization }}
     positionActionsColumn={positionActionsColumn}
+    positionExpandColumn={positionExpandColumn}
     positionGlobalFilter={positionGlobalFilter}
     positionPagination={positionPagination}
     positionToolbarAlertBanner={positionToolbarAlertBanner}

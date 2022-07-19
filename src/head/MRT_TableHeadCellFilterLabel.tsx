@@ -27,8 +27,8 @@ export const MRT_TableHeadCellFilterLabel: FC<Props> = ({ header, table }) => {
       // @ts-ignore
       localization[
         `filter${
-          currentFilterOption.charAt(0).toUpperCase() +
-          currentFilterOption.slice(1)
+          currentFilterOption?.charAt(0)?.toUpperCase() +
+          currentFilterOption?.slice(1)
         }`
       ],
     )

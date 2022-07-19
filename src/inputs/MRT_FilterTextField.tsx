@@ -134,8 +134,8 @@ export const MRT_FilterTextField: FC<Props> = ({
     ? //@ts-ignore
       localization[
         `filter${
-          currentFilterOption.charAt(0).toUpperCase() +
-          currentFilterOption.slice(1)
+          currentFilterOption?.charAt(0)?.toUpperCase() +
+          currentFilterOption?.slice(1)
         }`
       ]
     : '';
@@ -183,8 +183,8 @@ export const MRT_FilterTextField: FC<Props> = ({
                 // @ts-ignore
                 localization[
                   `filter${
-                    currentFilterOption.charAt(0).toUpperCase() +
-                    currentFilterOption.slice(1)
+                    currentFilterOption?.charAt(0)?.toUpperCase() +
+                    currentFilterOption?.slice(1)
                   }`
                 ],
               )}

@@ -87,9 +87,10 @@ export const getLeadingDisplayColumnIds = <
     ((props.positionActionsColumn === 'first' && props.enableRowActions) ||
       (props.enableEditing && props.editingMode === 'row')) &&
       'mrt-row-actions',
-    (props.enableExpanding ||
-      props.enableGrouping ||
-      props.renderDetailPanel) &&
+    props.positionExpandColumn === 'first' &&
+      (props.enableExpanding ||
+        props.enableGrouping ||
+        props.renderDetailPanel) &&
       'mrt-row-expand',
     props.enableRowSelection && 'mrt-row-select',
     props.enableRowNumbers && 'mrt-row-numbers',
@@ -103,6 +104,11 @@ export const getTrailingDisplayColumnIds = <
   ((props.positionActionsColumn === 'last' && props.enableRowActions) ||
     (props.enableEditing && props.editingMode === 'row')) &&
     'mrt-row-actions',
+  props.positionExpandColumn === 'last' &&
+    (props.enableExpanding ||
+      props.enableGrouping ||
+      props.renderDetailPanel) &&
+    'mrt-row-expand',
 ];
 
 export const getDefaultColumnOrderIds = <

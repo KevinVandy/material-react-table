@@ -5,7 +5,11 @@ import type {
   PaginationState,
   SortingState,
 } from '@tanstack/react-table';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query';
 import axios from 'axios';
 
 type UserApiResponse = {
@@ -32,35 +36,31 @@ const Example: FC = () => {
     pageSize: 10,
   });
 
-  const { data, isError, isFetching, isLoading, isStale } =
-    useQuery<UserApiResponse>(
-      [
-        'table-data',
-        columnFilters,
-        globalFilter,
-        pagination.pageIndex,
-        pagination.pageSize,
-        sorting,
-      ],
-      async () => {
-        const url = new URL(
-          '/api/data',
-          'https://www.material-react-table.com',
-        );
-        url.searchParams.set(
-          'start',
-          `${pagination.pageIndex * pagination.pageSize}`,
-        );
-        url.searchParams.set('size', `${pagination.pageSize}`);
-        url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
-        url.searchParams.set('globalFilter', globalFilter ?? '');
-        url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
+  const { data, isError, isFetching, isLoading } = useQuery<UserApiResponse>(
+    [
+      'table-data',
+      columnFilters,
+      globalFilter,
+      pagination.pageIndex,
+      pagination.pageSize,
+      sorting,
+    ],
+    async () => {
+      const url = new URL('/api/data', 'https://www.material-react-table.com');
+      url.searchParams.set(
+        'start',
+        `${pagination.pageIndex * pagination.pageSize}`,
+      );
+      url.searchParams.set('size', `${pagination.pageSize}`);
+      url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
+      url.searchParams.set('globalFilter', globalFilter ?? '');
+      url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
 
-        const { data: axiosData } = await axios.get(url.href);
-        return axiosData;
-      },
-      { keepPreviousData: true },
-    );
+      const { data: axiosData } = await axios.get(url.href);
+      return axiosData;
+    },
+    { keepPreviousData: true },
+  );
 
   const columns = useMemo(
     () =>
@@ -117,7 +117,7 @@ const Example: FC = () => {
         isLoading,
         pagination,
         showAlertBanner: isError,
-        showProgressBars: isFetching && isStale,
+        showProgressBars: isFetching,
         sorting,
       }}
     />

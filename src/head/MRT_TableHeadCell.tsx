@@ -177,7 +177,12 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
             alignItems: 'flex-start',
             display: 'flex',
             justifyContent:
-              columnDefType === 'group' ? 'center' : 'space-between',
+              tableCellProps?.align === 'right'
+                ? 'flex-end'
+                : columnDefType === 'group' ||
+                  tableCellProps?.align === 'center'
+                ? 'center'
+                : 'space-between',
             position: 'relative',
             width: '100%',
           }}
@@ -193,7 +198,10 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
               display: 'flex',
               flexWrap: 'nowrap',
               m: tableCellProps?.align === 'center' ? 'auto' : undefined,
-              pl: tableCellProps?.align === 'center' ? '1rem' : undefined,
+              pl:
+                tableCellProps?.align === 'center' && column.getCanSort()
+                  ? '1rem'
+                  : undefined,
               whiteSpace:
                 (columnDef.header?.length ?? 0) < 24 ? 'nowrap' : 'normal',
             }}

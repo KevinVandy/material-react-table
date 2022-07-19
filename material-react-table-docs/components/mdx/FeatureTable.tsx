@@ -101,8 +101,8 @@ const data = [
   },
   {
     feature: 'Column Spanning',
-    mrt: true,
-    mt: true,
+    mrt: false,
+    mt: null,
     muix: true,
   },
   {
