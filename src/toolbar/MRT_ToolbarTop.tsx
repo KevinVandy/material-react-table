@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
 import { Box, lighten, Theme, Toolbar, useMediaQuery } from '@mui/material';
-import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
-import { MRT_TablePagination } from './MRT_TablePagination';
-import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
+import { MRT_GlobalFilterTextField } from '../inputs/MRT_GlobalFilterTextField';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
 import { MRT_TableInstance } from '..';
-import { MRT_GlobalFilterTextField } from '../inputs/MRT_GlobalFilterTextField';
+import { MRT_TablePagination } from './MRT_TablePagination';
+import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
+import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
 
 export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
+  alignItems: 'flex-start',
   backgroundColor: lighten(theme.palette.background.default, 0.04),
   backgroundImage: 'none',
   display: 'grid',

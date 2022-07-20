@@ -60,6 +60,10 @@ export const routes = [
         label: 'Advanced Example',
       },
       {
+        href: '/docs/examples/data-export',
+        label: 'Data Export Example',
+      },
+      {
         href: '/docs/examples/remote',
         label: 'Remote Data Example',
       },
