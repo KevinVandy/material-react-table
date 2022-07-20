@@ -64,37 +64,36 @@ const Example = () => {
       columns={columns}
       data={data}
       enableRowSelection
-      muiTableToolbarTopProps={{
-        sx: { height: { xs: '120px', lg: '100px', xl: '80px' } },
-      }}
       positionToolbarAlertBanner="bottom"
       renderToolbarTopCustomActions={({ table }) => (
-        <Box sx={{ display: 'flex', gap: '1rem', p: '0.5rem' }}>
+        <Box
+          sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}
+        >
           <Button
-            startIcon={<FileDownloadIcon />}
+            color="primary"
             //export all data that is currently in the table (ignore pagination, sorting, filtering, etc.)
             onClick={handleExportData}
-            color="primary"
+            startIcon={<FileDownloadIcon />}
             variant="contained"
           >
             Export All Data
           </Button>
           <Button
             disabled={table.getPrePaginationRowModel().rows.length === 0}
-            startIcon={<FileDownloadIcon />}
             //export all rows, including from the next page, (still respects filtering and sorting)
             onClick={() =>
               handleExportRows(table.getPrePaginationRowModel().rows)
             }
+            startIcon={<FileDownloadIcon />}
             variant="contained"
           >
             Export All Rows
           </Button>
           <Button
             disabled={table.getRowModel().rows.length === 0}
-            startIcon={<FileDownloadIcon />}
             //export all rows as seen on the screen (respects pagination, sorting, filtering, etc.)
             onClick={() => handleExportRows(table.getRowModel().rows)}
+            startIcon={<FileDownloadIcon />}
             variant="contained"
           >
             Export Page Rows
@@ -103,9 +102,9 @@ const Example = () => {
             disabled={
               !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
             }
-            startIcon={<FileDownloadIcon />}
             //only export selected rows
             onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
+            startIcon={<FileDownloadIcon />}
             variant="contained"
           >
             Export Selected Rows

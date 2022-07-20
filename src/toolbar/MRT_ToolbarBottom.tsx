@@ -31,10 +31,7 @@ export const MRT_ToolbarBottom: FC<Props> = ({ table }) => {
       ? muiTableToolbarBottomProps({ table })
       : muiTableToolbarBottomProps;
 
-  const stackAlertBanner =
-    isMobile ||
-    (positionToolbarAlertBanner === 'bottom' &&
-      !!renderToolbarBottomCustomActions);
+  const stackAlertBanner = isMobile || !!renderToolbarBottomCustomActions;
 
   return (
     <Toolbar

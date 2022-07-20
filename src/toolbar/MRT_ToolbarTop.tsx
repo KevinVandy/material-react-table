@@ -49,9 +49,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ table }) => {
       : muiTableToolbarTopProps;
 
   const stackAlertBanner =
-    isMobile ||
-    (positionToolbarAlertBanner === 'top' &&
-      (!!renderToolbarTopCustomActions || showGlobalFilter));
+    isMobile || !!renderToolbarTopCustomActions || showGlobalFilter;
 
   return (
     <Toolbar
