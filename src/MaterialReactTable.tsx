@@ -134,7 +134,7 @@ export type MRT_TableState<TData extends Record<string, any> = {}> =
   };
 
 export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
-  ColumnDef<TData>,
+  ColumnDef<TData, unknown>,
   | 'accessorFn'
   | 'accessorKey'
   | 'aggregatedCell'
@@ -215,6 +215,7 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
    * @example columnDefType: 'display'
    */
   columnDefType?: 'data' | 'display' | 'group';
+  columnFilterModeOptions?: MRT_FilterOption[] | null;
   columns?: MRT_ColumnDef<TData>[];
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;
@@ -222,7 +223,6 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
   enableColumnFilterChangeMode?: boolean;
   enableColumnOrdering?: boolean;
   enableEditing?: boolean;
-  enabledColumnFilterOptions?: MRT_FilterOption[] | null;
   filterFn?: MRT_FilterFn<TData>;
   filterSelectOptions?: (string | { text: string; value: string })[];
   /**
@@ -422,6 +422,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     displayColumnDefOptions?: Partial<{
       [key in MRT_DisplayColumnIds]: Partial<MRT_ColumnDef>;
     }>;
+    columnFilterModeOptions?: (MRT_FilterOption | string)[] | null;
     columns: MRT_ColumnDef<TData>[];
     data: TData[];
     editingMode?: 'table' | 'row' | 'cell';
@@ -449,7 +450,6 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     enableToolbarBottom?: boolean;
     enableToolbarInternalActions?: boolean;
     enableToolbarTop?: boolean;
-    enabledColumnFilterOptions?: (MRT_FilterOption | string)[] | null;
     enabledGlobalFilterOptions?: (MRT_FilterOption | string)[] | null;
     expandRowsFn?: (dataRow: TData) => TData[];
     icons?: Partial<MRT_Icons>;
@@ -788,7 +788,7 @@ export default <TData extends Record<string, any> = {}>({
   defaultColumn = { minSize: 40, maxSize: 1000, size: 180 },
   editingMode = 'row',
   enableColumnActions = true,
-  enableColumnFilterChangeMode = true,
+  enableColumnFilterChangeMode = false,
   enableColumnFilters = true,
   enableColumnOrdering = false,
   enableColumnResizing = false,
@@ -797,7 +797,7 @@ export default <TData extends Record<string, any> = {}>({
   enableFilters = true,
   enableFullScreenToggle = true,
   enableGlobalFilter = true,
-  enableGlobalFilterChangeMode = true,
+  enableGlobalFilterChangeMode = false,
   enableGlobalFilterRankedResults = true,
   enableGrouping = false,
   enableHiding = true,

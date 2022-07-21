@@ -128,12 +128,10 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
             : 1,
         p:
           density === 'compact'
-            ? columnDefType === 'display'
-              ? '0 0.5rem'
-              : '0.5rem'
+            ? '0.5rem'
             : density === 'comfortable'
             ? columnDefType === 'display'
-              ? '0.5rem 0.75rem'
+              ? '0.75rem'
               : '1rem'
             : columnDefType === 'display'
             ? '1rem 1.25rem'

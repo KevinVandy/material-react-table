@@ -41,7 +41,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       enableHiding,
       enablePinning,
       enableSorting,
-      enabledColumnFilterOptions,
+      columnFilterModeOptions,
       icons: {
         ArrowRightIcon,
         ClearAllIcon,
@@ -145,7 +145,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
   const isSelectFilter = !!columnDef.filterSelectOptions;
 
   const allowedColumnFilterOptions =
-    columnDef?.enabledColumnFilterOptions ?? enabledColumnFilterOptions;
+    columnDef?.columnFilterModeOptions ?? columnFilterModeOptions;
 
   const showFilterModeSubMenu =
     enableColumnFilterChangeMode &&

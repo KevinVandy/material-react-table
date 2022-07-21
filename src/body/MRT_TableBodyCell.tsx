@@ -35,6 +35,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
       enableClickToCopy,
       enableColumnOrdering,
       enableEditing,
+      enablePagination,
       enableRowNumbers,
       muiTableBodyCellProps,
       muiTableBodyCellSkeletonProps,
@@ -147,7 +148,12 @@ export const MRT_TableBodyCell: FC<Props> = ({
         borderLeft: draggingBorder,
         borderRight: draggingBorder,
         borderBottom:
-          row.index === table.getRowModel().rows.length - 1
+          row.index ===
+          (enablePagination
+            ? table.getRowModel()
+            : table.getPrePaginationRowModel()
+          ).rows.length -
+            1
             ? draggingBorder
             : undefined,
       }

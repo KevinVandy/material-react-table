@@ -14,10 +14,11 @@ import Head from 'next/head';
 
 ### Pre 1.0.0 breaking changes
 
-While MRT is pre-1.0, breaking changes are subject to occur. MRT should hit 1.0 before August 2022 and become stable.
+While MRT is pre-1.0, breaking changes are subject to occur. MRT should hit 1.0 by August 2022 and become stable.
 
 TanStack Table 8.1 had some breaking changes that will be reflected here in MRT v0.19.0
 
+- v0.27.0 - `enableColumnFilterChangeMode` is now false by default, but can be turned on easily by just setting it to true.
 - v0.23.0 - TanStack Table v8.2 has new `cell.getValue<>()` generics
 - v0.22.1 - `showFilters` state renamed to `showColumnFilters`
 - v0.22.0 - React DnD replaced with custom solution for drag and drop. Now lib is 16kb smaller!

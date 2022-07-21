@@ -78,7 +78,6 @@ const Example = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      enableColumnFilterChangeMode={false}
       initialState={{ showColumnFilters: true }} //show filters by default
       muiTableHeadCellFilterTextFieldProps={{
         InputProps: {

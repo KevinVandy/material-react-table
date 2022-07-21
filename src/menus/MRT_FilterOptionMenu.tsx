@@ -21,7 +21,7 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
     getState,
     options: {
       enabledGlobalFilterOptions,
-      enabledColumnFilterOptions,
+      columnFilterModeOptions,
       localization,
     },
     setCurrentFilterFns,
@@ -32,7 +32,7 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
   const { columnDef } = column ?? {};
 
   const allowedColumnFilterOptions =
-    columnDef?.enabledColumnFilterOptions ?? enabledColumnFilterOptions;
+    columnDef?.columnFilterModeOptions ?? columnFilterModeOptions;
 
   const filterOptions = useMemo(
     () =>

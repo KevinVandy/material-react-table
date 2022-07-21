@@ -70,6 +70,7 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
       columns={columns}
       data={data}
       enableColumnActions={!onlyProps}
+      enableColumnFilterChangeMode
       enableColumnOrdering={!onlyProps}
       enablePagination={false}
       enablePinning

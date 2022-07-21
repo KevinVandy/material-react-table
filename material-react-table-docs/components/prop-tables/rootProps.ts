@@ -159,17 +159,17 @@ export const rootProps = [
   },
   {
     propName: 'editingMode',
-    defaultValue: '',
+    defaultValue: "'row'",
     description: '',
     link: '',
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: "'cell' | 'row' | 'table'",
   },
   {
     propName: 'enableClickToCopy',
-    defaultValue: '',
+    defaultValue: 'false',
     description: '',
     link: '',
     linkText: '',
@@ -189,7 +189,7 @@ export const rootProps = [
   },
   {
     propName: 'enableColumnDragging',
-    defaultValue: '',
+    defaultValue: 'false',
     description: '',
     link: '',
     linkText: '',
@@ -199,7 +199,7 @@ export const rootProps = [
   },
   {
     propName: 'enableColumnFilterChangeMode',
-    defaultValue: 'true',
+    defaultValue: 'false',
     description: '',
     link: '',
     linkText: '',
@@ -558,7 +558,7 @@ export const rootProps = [
     type: 'boolean',
   },
   {
-    propName: 'enabledColumnFilterOptions',
+    propName: 'columnFilterModeOptions',
     defaultValue: '',
     description: '',
     link: '',

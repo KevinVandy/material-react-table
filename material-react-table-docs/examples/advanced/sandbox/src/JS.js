@@ -95,6 +95,7 @@ const Example = () => {
       columns={columns}
       data={employeeData}
       enableClickToCopy
+      enableColumnFilterChangeMode
       enableColumnOrdering
       enableColumnResizing
       enableEditing

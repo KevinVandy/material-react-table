@@ -12,7 +12,7 @@ const Example = () => {
       },
       {
         accessorKey: 'firstName',
-        enabledColumnFilterOptions: ['fuzzy', 'contains', 'startsWith'],
+        columnFilterModeOptions: ['fuzzy', 'contains', 'startsWith'],
         header: 'First Name',
       },
       {
@@ -27,7 +27,7 @@ const Example = () => {
       },
       {
         accessorKey: 'age',
-        enabledColumnFilterOptions: ['between', 'greaterThan', 'lessThan'],
+        columnFilterModeOptions: ['between', 'greaterThan', 'lessThan'],
         filterFn: 'between',
         header: 'Age',
       },

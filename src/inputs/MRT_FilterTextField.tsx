@@ -33,7 +33,7 @@ export const MRT_FilterTextField: FC<Props> = ({
     getState,
     options: {
       enableColumnFilterChangeMode,
-      enabledColumnFilterOptions,
+      columnFilterModeOptions,
       icons: { FilterListIcon, CloseIcon },
       localization,
       muiTableHeadCellFilterTextFieldProps,
@@ -152,7 +152,7 @@ export const MRT_FilterTextField: FC<Props> = ({
       : '';
 
   const allowedColumnFilterOptions =
-    columnDef?.enabledColumnFilterOptions ?? enabledColumnFilterOptions;
+    columnDef?.columnFilterModeOptions ?? columnFilterModeOptions;
 
   const showChangeModeButton =
     enableColumnFilterChangeMode &&
@@ -260,7 +260,6 @@ export const MRT_FilterTextField: FC<Props> = ({
         }}
         {...textFieldProps}
         sx={(theme) => ({
-          m: '-0.25rem',
           p: 0,
           minWidth: !filterChipLabel ? '8rem' : 'auto',
           width: 'calc(100% + 0.5rem)',

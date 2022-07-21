@@ -28,7 +28,7 @@ function App({ Component, pageProps }: AppProps) {
   const isDesktop = useMediaQuery('(min-width: 1500px)');
   const isXLDesktop = useMediaQuery('(min-width: 1800px)');
 
-  const [navOpen, setNavOpen] = useState(pathname === '/' || isTablet);
+  const [navOpen, setNavOpen] = useState(pathname === '/');
   const [darkTheme, setDarkTheme] = useState(true);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ function App({ Component, pageProps }: AppProps) {
   }, [darkTheme]);
 
   useEffect(() => {
-    if (isTablet) {
+    if (typeof window !== 'undefined' && isTablet) {
       setNavOpen(true);
     }
   }, [isTablet]);

@@ -85,7 +85,7 @@ export const FilteringDisabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableFilters={false} />
 );
 
-export const FilterTypes: Story<MaterialReactTableProps> = () => (
+export const DifferentFilterFunctions: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={[
       {
@@ -126,7 +126,7 @@ export const FilterTypes: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const FilteringChangeModeDisabled: Story<
+export const FilteringChangeModeEnabled: Story<
   MaterialReactTableProps
 > = () => (
   <MaterialReactTable
@@ -159,7 +159,7 @@ export const FilteringChangeModeDisabled: Story<
       },
     ]}
     data={data}
-    enableColumnFilterChangeMode={false}
+    enableColumnFilterChangeMode
   />
 );
 
@@ -175,7 +175,7 @@ export const DisableSomeFilterTypesForCertainColumns: Story<
       {
         header: 'Last Name',
         accessorKey: 'lastName',
-        enabledColumnFilterOptions: ['startsWith', 'endsWith'],
+        columnFilterModeOptions: ['startsWith', 'endsWith'],
         filterFn: 'startsWith',
       },
       {
@@ -185,7 +185,7 @@ export const DisableSomeFilterTypesForCertainColumns: Story<
       {
         header: 'Gender',
         accessorKey: 'gender',
-        enabledColumnFilterOptions: ['equals', 'notEquals'],
+        columnFilterModeOptions: ['equals', 'notEquals'],
         filterFn: 'equals',
       },
       {
@@ -367,7 +367,7 @@ export const ManualFiltering: Story<MaterialReactTableProps> = () => {
       columns={columns}
       data={rows}
       manualFiltering
-      enabledColumnFilterOptions={null}
+      columnFilterModeOptions={null}
       onColumnFiltersChange={setColumnFilters}
       state={{ columnFilters }}
     />

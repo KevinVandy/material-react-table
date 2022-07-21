@@ -43,6 +43,7 @@ export const MRT_ExpandAllButton: FC<Props> = ({ table }) => {
           sx={{
             height: density === 'compact' ? '1.75rem' : '2.25rem',
             width: density === 'compact' ? '1.75rem' : '2.25rem',
+            mt: density !== 'compact' ? '-0.25rem' : undefined,
             ...iconButtonProps?.sx,
           }}
         >

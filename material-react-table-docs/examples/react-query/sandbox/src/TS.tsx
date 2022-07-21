@@ -93,7 +93,6 @@ const Example: FC = () => {
     <MaterialReactTable
       columns={columns}
       data={data?.data ?? []}
-      enableColumnFilterChangeMode={false}
       initialState={{ showColumnFilters: true }}
       manualFiltering
       manualPagination

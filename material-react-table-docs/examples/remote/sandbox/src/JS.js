@@ -82,7 +82,6 @@ const Example = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      enableColumnFilterChangeMode={false}
       initialState={{ showColumnFilters: true }}
       manualFiltering
       manualPagination

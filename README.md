@@ -1,18 +1,18 @@
 # Material React Table
 
-<a href="https://npmjs.com/package/material-react-table" target="_blank_">
+<a href="https://npmjs.com/package/material-react-table" target="_blank">
   <img alt="" src="https://badgen.net/npm/v/material-react-table" />
 </a>
-<a href="https://npmjs.com/package/material-react-table" target="_blank_">
+<a href="https://npmjs.com/package/material-react-table" target="_blank">
   <img alt="" src="https://img.shields.io/npm/dm/material-react-table.svg" />
 </a>
-<a href="https://bundlephobia.com/result?p=material-react-table" target="_blank_">
+<a href="https://bundlephobia.com/result?p=material-react-table" target="_blank">
   <img alt="" src="https://badgen.net/bundlephobia/minzip/material-react-table@latest" />
 </a>
-<a href="https://github.com/KevinVandy/material-react-table" target="_blank_">
+<a href="https://github.com/KevinVandy/material-react-table" target="_blank">
   <img alt="" src="https://img.shields.io/github/stars/KevinVandy/material-react-table.svg?style=social&label=Star" />
 </a>
-<a href="http://makeapullrequest.com" target="_blank_">
+<a href="http://makeapullrequest.com" target="_blank">
   <img alt="" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" />
 </a>
 
@@ -40,6 +40,7 @@ See all [Props and Options](https://www.material-react-table.com/docs/api)
  - [Basic Table](https://www.material-react-table.com/docs/examples/basic/) (See Default Features)
  - [Minimal Table](https://www.material-react-table.com/docs/examples/minimal/) (Turn off Features)
  - [Advanced Table](https://www.material-react-table.com/docs/examples/advanced/) (See some of the Advanced Features)
+ - [Data Export Table](https://www.material-react-table.com/docs/examples/data-export/) (Export to CSV, Excel, etc.)
  - [Remote Data](https://www.material-react-table.com/docs/examples/remote/) (Server-side Pagination, Sorting, and Filtering)
  - [React Query](https://www.material-react-table.com/docs/examples/react-query/) (Server-side Pagination, Sorting, and Filtering)
  - [Virtualized Rows](https://www.material-react-table.com/docs/examples/virtualized/) (20,000 rows at once!)
@@ -52,7 +53,7 @@ View additional [storybook examples](https://www.material-react-table.dev/)
 
 _All features can easily be enabled/disabled_
 
-- [x] < 35kb gzipped - [Bundlephobia](https://bundlephobia.com/package/material-react-table)
+- [x] < 36kb gzipped - [Bundlephobia](https://bundlephobia.com/package/material-react-table)
 - [x] Advanced TypeScript Generics Support (TypeScript Optional)
 - [x] Click To Copy Cell Values
 - [x] Column Action Dropdown Menu
@@ -134,8 +135,6 @@ export default function App() {
     [],
   );
 
-  //simple data example
-  //Check out https://www.material-react-table.com/docs/examples/remote for a more realistic example
   const data = useMemo(
     () => [
       {

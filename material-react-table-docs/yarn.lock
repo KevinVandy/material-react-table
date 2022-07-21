@@ -265,7 +265,7 @@
   dependencies:
     "@babel/runtime" "^7.17.2"
 
-"@mui/material@^5.9.0":
+"@mui/material@^5.9.1":
   version "5.9.1"
   resolved "https://registry.yarnpkg.com/@mui/material/-/material-5.9.1.tgz#92990e6d4035792430dcf548b91db6f335aebdd3"
   integrity sha512-c09SbaMm7Rl7Df9JRkXwPWNbnfrutmHERTJC46OJ9OMAM9+HGQihIbGln1k2Xj65jb3E+G498FZFAoSrrBDvwQ==
@@ -468,10 +468,10 @@
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.0.5.tgz#70c7275a9f1fbc8e6520d895991f9bace0fd5bb8"
   integrity sha512-QOJ2gLbwlf8p0487pMey6vv8EF5X2ib1zINayaD7mb9/LibUtXmZ12uJgTqcnjgNY/4tWZn5qJnEk2ePG5AVGA==
 
-"@tanstack/react-query@^4.0.5":
-  version "4.0.5"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.0.5.tgz#4597ac03394ddfa6ad8b5e1beb6282468623d398"
-  integrity sha512-tIggVlhoFevVpY/LkZroPmrERFHN8tw4aZLtgwSArzHmMJ03WQcaNvbbHy6GERidXtaMdUz+IeQryrE7cO7WPQ==
+"@tanstack/react-query@^4.0.8":
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.0.8.tgz#4f64f9e64d3aca28a5c3845baa7555d2c8f535a0"
+  integrity sha512-BC7lWRG1ulla6HrPYgu5EeTemNLpUDRJCuWDIGeDo5eeiD5sVB9ccd4ICR///Vaj9YMCmbNZpQlLgm1OaaovWg==
   dependencies:
     "@tanstack/query-core" "^4.0.0-beta.1"
     "@types/use-sync-external-store" "^0.0.3"
@@ -1961,10 +1961,10 @@ markdown-extensions@^1.0.0:
   resolved "https://registry.yarnpkg.com/markdown-extensions/-/markdown-extensions-1.1.1.tgz#fea03b539faeaee9b4ef02a3769b455b189f7fc3"
   integrity sha512-WWC0ZuMzCyDHYCasEGs4IPvLyTGftYwh6wIEOULOF0HXcqZlhwRzrK0w2VUlxWA98xnvb/jszw4ZSkJ6ADpM6Q==
 
-material-react-table@^0.26.6:
-  version "0.26.6"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.26.6.tgz#07272d56a42a20559cb0d4b616d560db76302ad6"
-  integrity sha512-ABGidh+Y3iOIuMNbFsvtjACZXiOSzc0J6G4F0PSIKpBl/NP7ngObw8RaX50KdNWVAbrPcXrVSAzoVOD+e1FGyQ==
+material-react-table@^0.27.0:
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.27.0.tgz#45e166a451663c1f53f7a819bb0493c890568037"
+  integrity sha512-C5IRV7iwab2aHI/RvZL/S6cs9F6waNnBHuYMxO7U6bnyYKNpf6KlkkCdaFV/VxPAPeHEqO1OAwY+groL6q1+JA==
   dependencies:
     "@tanstack/match-sorter-utils" "8.1.1"
     "@tanstack/react-table" "8.2.6"
