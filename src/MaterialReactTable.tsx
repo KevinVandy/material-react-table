@@ -40,7 +40,7 @@ import type {
   TableOptions,
   TableState,
 } from '@tanstack/react-table';
-import type { Options as VirtualizerOptions } from 'react-virtual';
+import type { VirtualizerOptions } from '@tanstack/react-virtual';
 import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_TableRoot } from './table/MRT_TableRoot';
@@ -779,7 +779,9 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     selectAllMode?: 'all' | 'page';
     state?: Partial<MRT_TableState<TData>>;
     tableId?: string;
-    virtualizerProps?: Partial<VirtualizerOptions<HTMLDivElement>>;
+    virtualizerProps?: Partial<
+      VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>
+    >;
   };
 
 export default <TData extends Record<string, any> = {}>({

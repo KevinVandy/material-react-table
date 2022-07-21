@@ -1,5 +1,5 @@
 import React, { FC, RefObject, useMemo } from 'react';
-import { useVirtual } from 'react-virtual';
+import { useVirtualizer, Virtualizer } from '@tanstack/react-virtual';
 import { TableBody } from '@mui/material';
 import { MRT_TableBodyRow } from './MRT_TableBodyRow';
 import { rankGlobalFuzzy } from '../sortingFns';
@@ -60,28 +60,27 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
     globalFilter,
   ]);
 
-  const rowVirtualizer = enableRowVirtualization
-    ? useVirtual({
-        // estimateSize: () => (density === 'compact' ? 25 : 50),
+  const rowVirtualizer: Virtualizer = enableRowVirtualization
+    ? useVirtualizer({
+        estimateSize: () => (density === 'compact' ? 25 : 50),
         overscan: density === 'compact' ? 30 : 10,
-        parentRef: tableContainerRef,
-        size: rows.length,
+        getScrollElement: () => tableContainerRef.current as HTMLDivElement,
+        count: rows.length,
         ...virtualizerProps,
       })
     : ({} as any);
 
   const virtualRows = enableRowVirtualization
-    ? rowVirtualizer.virtualItems
+    ? rowVirtualizer.getVirtualItems()
     : [];
 
   let paddingTop = 0;
   let paddingBottom = 0;
   if (enableRowVirtualization) {
-    paddingTop = virtualRows.length > 0 ? virtualRows[0].start : 0;
-    paddingBottom =
-      virtualRows.length > 0
-        ? rowVirtualizer.totalSize - virtualRows[virtualRows.length - 1].end
-        : 0;
+    paddingTop = !!virtualRows.length ? virtualRows[0].start : 0;
+    paddingBottom = !!virtualRows.length
+      ? rowVirtualizer.getTotalSize() - virtualRows[virtualRows.length - 1].end
+      : 0;
   }
 
   return (
@@ -91,6 +90,7 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
           <td style={{ height: `${paddingTop}px` }} />
         </tr>
       )}
+      {/* @ts-ignore */}
       {(enableRowVirtualization ? virtualRows : rows).map(
         (rowOrVirtualRow: any, rowIndex: number) => {
           const row = enableRowVirtualization

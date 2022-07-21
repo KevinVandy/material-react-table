@@ -105,5 +105,6 @@ export const EnableRowVirtualizationWithColumnResizing: Story<
     enableRowNumbers
     enableRowVirtualization
     enableToolbarBottom={false}
+    virtualizerProps={{ enableSmoothScroll: true }}
   />
 );

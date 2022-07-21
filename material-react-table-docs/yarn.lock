@@ -484,10 +484,25 @@
   dependencies:
     "@tanstack/table-core" "8.2.6"
 
+"@tanstack/react-virtual@^3.0.0-beta.13":
+  version "3.0.0-beta.13"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-virtual/-/react-virtual-3.0.0-beta.13.tgz#4bcba7c6886e59336e2457382f68341d46746721"
+  integrity sha512-FDyKbo3ncoOR1rsEURQJ5U+inUV7YC7lcP02Tw5N7oAz/DKWm/uifvWYM7MW0eKSyNCrVPJvlDrgdg0vb7f22Q==
+  dependencies:
+    "@reach/observe-rect" "^1.1.0"
+    "@tanstack/virtual-core" "3.0.0-beta.13"
+
 "@tanstack/table-core@8.2.6":
   version "8.2.6"
   resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.2.6.tgz#7240ac14a43cc43adbe01fbc6ae4d8a2bf82541a"
   integrity sha512-yHjKksyq5ZI4GoVJgR/+X8Z1gaZdOL1om3G9M4af6yTTyRP5ZquMlU5318MBtx2NzXl4BxtENLXBWYrcz5WKSA==
+
+"@tanstack/virtual-core@3.0.0-beta.13":
+  version "3.0.0-beta.13"
+  resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.0.0-beta.13.tgz#c5029dfc633ede616306b7490728cf60586bc38f"
+  integrity sha512-T7ZwIYYeQEiq0KKYLr0GMQsr4U2VaHXzna3PgooJTh91bEFwDU7bol/1GixCDqLOs+CkjRoVjFdSIo25jgzhnw==
+  dependencies:
+    "@reach/observe-rect" "^1.1.0"
 
 "@types/acorn@^4.0.0":
   version "4.0.6"
@@ -1961,14 +1976,14 @@ markdown-extensions@^1.0.0:
   resolved "https://registry.yarnpkg.com/markdown-extensions/-/markdown-extensions-1.1.1.tgz#fea03b539faeaee9b4ef02a3769b455b189f7fc3"
   integrity sha512-WWC0ZuMzCyDHYCasEGs4IPvLyTGftYwh6wIEOULOF0HXcqZlhwRzrK0w2VUlxWA98xnvb/jszw4ZSkJ6ADpM6Q==
 
-material-react-table@^0.27.0:
-  version "0.27.0"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.27.0.tgz#45e166a451663c1f53f7a819bb0493c890568037"
-  integrity sha512-C5IRV7iwab2aHI/RvZL/S6cs9F6waNnBHuYMxO7U6bnyYKNpf6KlkkCdaFV/VxPAPeHEqO1OAwY+groL6q1+JA==
+material-react-table@^0.28.0:
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.28.0.tgz#fa17d7dec8c98d2a90bd08995dbc08a19a48c5ba"
+  integrity sha512-rvP8H+u2O9iJhXnDjWm2URpgsXJAIuAbse7WQpQS1dKkHbW8oced9bIe6WY2dNPrdTFGtQQYwEi2mwwW+g1Pig==
   dependencies:
     "@tanstack/match-sorter-utils" "8.1.1"
     "@tanstack/react-table" "8.2.6"
-    react-virtual "^2.10.4"
+    "@tanstack/react-virtual" "^3.0.0-beta.13"
 
 mdast-util-definitions@^5.0.0:
   version "5.1.1"
@@ -2720,13 +2735,6 @@ react-transition-group@^4.4.2:
     dom-helpers "^5.0.1"
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
-
-react-virtual@^2.10.4:
-  version "2.10.4"
-  resolved "https://registry.yarnpkg.com/react-virtual/-/react-virtual-2.10.4.tgz#08712f0acd79d7d6f7c4726f05651a13b24d8704"
-  integrity sha512-Ir6+oPQZTVHfa6+JL9M7cvMILstFZH/H3jqeYeKI4MSUX+rIruVwFC6nGVXw9wqAw8L0Kg2KvfXxI85OvYQdpQ==
-  dependencies:
-    "@reach/observe-rect" "^1.1.0"
 
 react@18.2.0:
   version "18.2.0"
