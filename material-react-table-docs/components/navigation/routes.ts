@@ -82,16 +82,24 @@ export const routes = [
     href: '/docs/guides',
     items: [
       {
-        label: 'Customization',
-        href: '/docs/guides#customization',
+        label: 'Fundamentals',
+        href: '/docs/guides#fundamentals',
         items: [
+          {
+            href: '/docs/guides/data-columns',
+            label: 'Create Data Columns',
+          },
+          {
+            href: '/docs/guides/display-columns',
+            label: 'Create Display Columns',
+          },
           {
             href: '/docs/guides/customize-css',
             label: 'Customize CSS',
           },
           {
             href: '/docs/guides/customize-mui',
-            label: 'Customize MUI',
+            label: 'Customize Material-UI',
           },
           {
             href: '/docs/guides/customize-icons',

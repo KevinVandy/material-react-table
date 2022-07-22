@@ -1,0 +1,102 @@
+import Head from 'next/head';
+
+<Head>
+  <title>Material React Table Docs - Data Columns</title>
+  <meta
+    name="description"
+    content="How to create data columns in Material React Table"
+  />
+</Head>
+
+## Data Columns
+
+Data Columns are the columns that are used to display data. They are the default columns that are created when you create a column with an `accessorKey` or `accessorFn`.
+
+The table can perform processing on the data of a Data Column, such as sorting, filtering, grouping, etc.
+
+The other type of column that you can make is a "Display Column", which you can learn more about in the [next section](/docs/guides/display-columns).
+
+### Accessors (Connect a column to data)
+
+Each column definition must have, at the very least, an `accessorKey` (or a combination of an `id` and `accessorFn`) and a `header` property. The `accessorKey`/`accessorFn` property is the key that will be used to join the data from the `data` keys. The `header` property is used to display the column header, but is also used in other places in the table.
+
+#### Method 1 - Using an accessorKey (Recommended)
+
+The simplest and most common way to define a column is to use the `accessorKey` property. It works great as long as your data is already in a flat format.
+
+The `accessorKey` must match one of the keys in your data, or else no data will show up in the column.
+
+By default, the `accessorKey` will double as the `id` for the column, but if you need the id of the column to be different than the accessorKey, you can use the `id` property in addition.
+
+```jsx
+const columns = useMemo(
+  () => [
+    {
+      accessorKey: 'name', //id will be derived from `accessorKey` unless otherwise specified (Recommended)
+      header: 'Name',
+    },
+    {
+      accessorKey: 'customerAge',
+      id: 'age' //id overridden, usually not necessary to do this, but can be helpful
+      header: 'Age',
+    },
+  ] as MRT_ColumnDef<Customer>[], //TypeScript type here makes the auto-complete work really well!
+  [],
+);
+```
+
+#### Method 2 - Using an accessorFn and id
+
+To access more complicated data structures, you can use the `accessorFn` property. Here are at least 3 ways you can use it.
+
+In each case, the `id` property is now required since there is no `accessorKey` for MRT to derive it from.
+
+```jsx
+const columns = useMemo(
+  () => [
+    {
+      //simple accessorFn that works the same way as an `accessorKey`
+      accessorFn: (row) => row.username,
+      id: 'username',
+      header: 'Username',
+    },
+    {
+      //accessorFn function that combines multiple data together
+      accessorFn: (row) => `${data.firstName} ${data.lastName}`,
+      id: 'name',
+      header: 'Name',
+    },
+    {
+      //accessorFn used to access nested data
+      accessorFn: (row) => data.personalInfo.age,
+      id: 'age',
+      header: 'Age',
+    },
+  ],
+  [],
+);
+```
+
+#### Custom Header JSX Render
+
+If you want to pass in custom JSX to render the header, you can pass in a `Header` property in addition to the `header` string property.
+
+```jsx
+const columns = useMemo(
+  () => [
+    {
+      accessorKey: 'name',
+      header: 'Name',
+      Header: ({ header }) => (
+        <i style={{ color: 'red' }}>{header.column.columnDef.header}</i>
+      ), //arrow function
+    },
+    {
+      accessorKey: 'age',
+      header: 'Age',
+      Header: <i style={{ color: 'red' }}>Age</i>, //plain jsx with no function
+    },
+  ],
+  [],
+);
+```

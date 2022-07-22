@@ -2,8 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import MaterialReactTable from 'material-react-table';
 import { makeData } from './makeData';
 
-const data = makeData(50_000);
-
 const Example = () => {
   const columns = useMemo(
     //column definitions...
@@ -65,8 +63,10 @@ const Example = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setData(makeData(20_000));
-    setIsLoading(false);
+    if (typeof window !== 'undefined') {
+      setData(makeData(20_000));
+      setIsLoading(false);
+    }
   }, []);
 
   return (

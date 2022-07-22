@@ -30,101 +30,16 @@ The `MRT_ColumnDef` type is especially useful for defining your columns in a typ
 import MaterialReactTable, { ColumnDefType } from 'material-react-table';
 ```
 
-### Creating Columns
-
-Each column definition must have, at the very least, an `accessorKey` (or a combination of an `id` and `accessorFn`) and a `header` property. The `accessorKey`/`accessorFn` property is the key that will be used to join the data from the `data` keys. The `header` property is used to display the column header, but is also used in other places in the table.
-
-#### Method 1 - Using an accessorKey (Recommended)
-
-The simplest and most common way to define a column is to use the `accessorKey` property. It works great as long as your data is already in a flat format.
-
-The `accessorKey` must match one of the keys in your data.
-
-```jsx
-const columns = useMemo(
-  () => [
-    {
-      accessorKey: 'name', //id will be derived from `accessorKey` unless otherwise specified (Recommended)
-      header: 'Name',
-    },
-    {
-      accessorKey: 'customerAge',
-      id: 'age' //id overridden, usually not necessary to do this, but can be helpful
-      header: 'Age',
-    },
-  ] as MRT_ColumnDef<Customer>[],
-  [],
-);
-```
-
-#### Method 2 - Using an accessorFn and id
-
-To access more complicated data structures, you can use the `accessorFn` property. Here are at least 3 ways you can use it.
-
-In each case, the `id` property is now required.
-
-```jsx
-const columns = useMemo(
-  () => [
-    {
-      //simple accessorFn that works the same way as an `accessorKey`
-      accessorFn: (row) => row.username,
-      id: 'username',
-      header: 'Username',
-    },
-    {
-      //accessorFn function that combines multiple data together
-      accessorFn: (row) => `${data.firstName} ${data.lastName}`,
-      id: 'name',
-      header: 'Name',
-    },
-    {
-      //accessorFn used to access nested data
-      accessorFn: (row) => data.personalInfo.age,
-      id: 'age',
-      header: 'Age',
-    },
-  ],
-  [],
-);
-```
-
-#### Custom Header JSX Render
-
-If you want to pass in custom JSX to render the header, you can pass in a `Header` property in addition to the `header` string property.
-
-```jsx
-const columns = useMemo(
-  () => [
-    {
-      accessorKey: 'name',
-      header: 'Name',
-      Header: ({ header }) => (
-        <i style={{ color: 'red' }}>{header.column.columnDef.header}</i>
-      ), //arrow function
-    },
-    {
-      accessorKey: 'age',
-      header: 'Age',
-      Header: <i style={{ color: 'red' }}>Age</i>, //plain jsx with no function
-    },
-  ],
-  [],
-);
-```
-
 ### Creating Data/Rows
 
-Your data is an array of objects that have properties matching the accessors in your column definitions.
-
-Your data does NOT have to be created statically like this, of course. More than likely, your data is being fetched from a backend API. Check out the [Remote Data example](/docs/examples/remote) to see how you can use a remote data source.
+Your data is an array of objects that have properties matching the accessors in your column definitions. It works best if your data is already in a flat object format like below, but it is not required.
 
 ```jsx
 const data = useMemo(
   () => [
     {
-      name: 'John', //`accessorKey` in the column definition would be `name`
-      age: 30, //`accessorKey` in the column definition would be `age`
+      name: 'John', // key "name" matches `accessorKey` in ColumnDef down below
+      age: 30, // key "age" matches `accessorKey` in ColumnDef down below
     },
     {
       name: 'Sara',
@@ -135,9 +50,33 @@ const data = useMemo(
 );
 ```
 
+Your data does NOT have to be created statically like this, of course. More than likely, your data is being fetched from a backend API. Check out the [Remote Data example](/docs/examples/remote) to see how you can use a remote data source.
+
+### Creating Columns
+
+There are a lot of different ways to define columns, depending on your needs. Let's create some basic "data" columns. That is, columns that connect to our data. Since we defined our data in a flat object format, we can simply use the `accessorKey` property to access the data.
+
+```jsx
+const columns = useMemo(
+  () => [
+    {
+      Header: 'Name',
+      accessorKey: 'name',
+    },
+    {
+      Header: 'Age',
+      accessorKey: 'age',
+    },
+  ],
+  [],
+);
+```
+
+However, if you have a more nested data structure for your data, that's fine, but you will just need to use more complicated accessors when you define your columns. You will learn more about that [here](/docs/guides/data-columns#method-2---using-an-accessorfn-and-id).
+
 ### Simple Example
 
-Throw it all together and you have a basic table!
+Throw it all together and you have a basic table! You can also play around and enable some features, either per column in the column definitions, or as props passed to `<MaterialReactTable />`.
 
 ```jsx
 import React, { useMemo } from 'react';
@@ -161,7 +100,6 @@ export default function App() {
     [],
   );
 
-  //simple data example - Check out https://www.material-react-table.com/docs/examples/remote for a more realistic example
   const data = useMemo(
     () => [
       {
@@ -176,7 +114,15 @@ export default function App() {
     [],
   );
 
-  return <MaterialReactTable columns={columns} data={data} />;
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      enableRowSelection //enable some features
+      enableColumnOrdering
+      enableGlobalFilter={false} //turn off a feature
+    />
+  );
 }
 ```
 
