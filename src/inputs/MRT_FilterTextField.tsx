@@ -6,10 +6,13 @@ import React, {
   useState,
 } from 'react';
 import {
+  Box,
+  Checkbox,
   Chip,
   debounce,
   IconButton,
   InputAdornment,
+  ListItemText,
   MenuItem,
   TextField,
   TextFieldProps,
@@ -65,9 +68,46 @@ export const MRT_FilterTextField: FC<Props> = ({
     ...mcTableHeadCellFilterTextFieldProps,
   } as TextFieldProps;
 
-  const [filterValue, setFilterValue] = useState<string>(() =>
-    inputIndex !== undefined
-      ? (column.getFilterValue() as [string, string])?.[inputIndex] ?? ''
+  const filterId = `mrt-${tableId}-${header.id}-filter-text-field${
+    inputIndex ?? ''
+  }`;
+  const currentFilterOption = currentFilterFns?.[header.id];
+  const isRangeFilter = inputIndex !== undefined;
+  const isSelectFilter = !!columnDef.filterSelectOptions;
+  const isMultiSelectFilter =
+    isSelectFilter && ['arrIncludesSome'].includes(columnDef._filterFn);
+  const filterChipLabel = ['empty', 'notEmpty'].includes(currentFilterOption)
+    ? //@ts-ignore
+      localization[
+        `filter${
+          currentFilterOption?.charAt?.(0)?.toUpperCase() +
+          currentFilterOption?.slice(1)
+        }`
+      ]
+    : '';
+  const filterPlaceholder = !isRangeFilter
+    ? localization.filterByColumn?.replace('{column}', String(columnDef.header))
+    : inputIndex === 0
+    ? localization.min
+    : inputIndex === 1
+    ? localization.max
+    : '';
+  const allowedColumnFilterOptions =
+    columnDef?.columnFilterModeOptions ?? columnFilterModeOptions;
+  const showChangeModeButton =
+    enableColumnFilterChangeMode &&
+    columnDef.enableColumnFilterChangeMode !== false &&
+    !isSelectFilter &&
+    !isRangeFilter &&
+    (allowedColumnFilterOptions === undefined ||
+      !!allowedColumnFilterOptions?.length);
+
+  const [filterValue, setFilterValue] = useState<string | string[]>(() =>
+    isMultiSelectFilter
+      ? (column.getFilterValue() as string[]) || []
+      : isRangeFilter
+      ? (column.getFilterValue() as [string, string])?.[inputIndex as number] ||
+        []
       : (column.getFilterValue() as string) ?? '',
   );
 
@@ -77,10 +117,10 @@ export const MRT_FilterTextField: FC<Props> = ({
         textFieldProps.type === 'date'
           ? new Date(event.target.value)
           : event.target.value;
-      if (inputIndex !== undefined) {
+      if (isRangeFilter) {
         column.setFilterValue((old: [string, string | Date]) => {
           const newFilterValues = old ?? ['', ''];
-          newFilterValues[inputIndex] = value;
+          newFilterValues[inputIndex as number] = value;
           return newFilterValues;
         });
       } else {
@@ -95,24 +135,25 @@ export const MRT_FilterTextField: FC<Props> = ({
     handleChangeDebounced(event);
   };
 
-  const handleFilterMenuOpen = (event: MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
   const handleClear = () => {
-    setFilterValue('');
-    if (inputIndex !== undefined) {
+    if (isMultiSelectFilter) {
+      setFilterValue([]);
+      column.setFilterValue([]);
+    } else if (isRangeFilter) {
+      setFilterValue('');
       column.setFilterValue((old: [string | undefined, string | undefined]) => {
         const newFilterValues = old ?? ['', ''];
-        newFilterValues[inputIndex] = undefined;
+        newFilterValues[inputIndex as number] = undefined;
+
         return newFilterValues;
       });
     } else {
+      setFilterValue('');
       column.setFilterValue(undefined);
     }
   };
 
-  const handleClearFilterChip = () => {
+  const handleClearEmptyFilterChip = () => {
     setFilterValue('');
     column.setFilterValue(undefined);
     setCurrentFilterFns((prev) => ({
@@ -121,46 +162,13 @@ export const MRT_FilterTextField: FC<Props> = ({
     }));
   };
 
+  const handleFilterMenuOpen = (event: MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
   if (columnDef.Filter) {
     return <>{columnDef.Filter?.({ header, table })}</>;
   }
-
-  const filterId = `mrt-${tableId}-${header.id}-filter-text-field${
-    inputIndex ?? ''
-  }`;
-  const currentFilterOption = currentFilterFns?.[header.id];
-  const isSelectFilter = !!columnDef.filterSelectOptions;
-  const filterChipLabel = ['empty', 'notEmpty'].includes(currentFilterOption)
-    ? //@ts-ignore
-      localization[
-        `filter${
-          currentFilterOption?.charAt(0)?.toUpperCase() +
-          currentFilterOption?.slice(1)
-        }`
-      ]
-    : '';
-  const filterPlaceholder =
-    inputIndex === undefined
-      ? localization.filterByColumn?.replace(
-          '{column}',
-          String(columnDef.header),
-        )
-      : inputIndex === 0
-      ? localization.min
-      : inputIndex === 1
-      ? localization.max
-      : '';
-
-  const allowedColumnFilterOptions =
-    columnDef?.columnFilterModeOptions ?? columnFilterModeOptions;
-
-  const showChangeModeButton =
-    enableColumnFilterChangeMode &&
-    columnDef.enableColumnFilterChangeMode !== false &&
-    !isSelectFilter &&
-    !inputIndex &&
-    (allowedColumnFilterOptions === undefined ||
-      !!allowedColumnFilterOptions?.length);
 
   return (
     <>
@@ -205,7 +213,7 @@ export const MRT_FilterTextField: FC<Props> = ({
         onChange={handleChange}
         onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
         select={isSelectFilter}
-        value={filterValue ?? ''}
+        value={filterValue}
         variant="standard"
         InputProps={{
           startAdornment: showChangeModeButton ? (
@@ -224,7 +232,7 @@ export const MRT_FilterTextField: FC<Props> = ({
               </Tooltip>
               {filterChipLabel && (
                 <Chip
-                  onDelete={handleClearFilterChip}
+                  onDelete={handleClearEmptyFilterChip}
                   label={filterChipLabel}
                 />
               )}
@@ -236,7 +244,6 @@ export const MRT_FilterTextField: FC<Props> = ({
             <InputAdornment position="end">
               <Tooltip
                 arrow
-                disableHoverListener={isSelectFilter}
                 placement="right"
                 title={localization.clearFilter ?? ''}
               >
@@ -258,6 +265,22 @@ export const MRT_FilterTextField: FC<Props> = ({
             </InputAdornment>
           ),
         }}
+        SelectProps={{
+          displayEmpty: true,
+          multiple: isMultiSelectFilter,
+          renderValue: isMultiSelectFilter
+            ? (selected: any) =>
+                !selected?.length ? (
+                  <Box sx={{ opacity: 0.5 }}>{filterPlaceholder}</Box>
+                ) : (
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '2px' }}>
+                    {(selected as string[])?.map((value) => (
+                      <Chip key={value} label={value} />
+                    ))}
+                  </Box>
+                )
+            : undefined,
+        }}
         {...textFieldProps}
         sx={(theme) => ({
           p: 0,
@@ -272,23 +295,31 @@ export const MRT_FilterTextField: FC<Props> = ({
         })}
       >
         {isSelectFilter && (
-          <MenuItem divider disabled={!filterValue} value="">
-            {localization.clearFilter}
+          <MenuItem divider disabled hidden value="">
+            <Box sx={{ opacity: 0.5 }}>{filterPlaceholder}</Box>
           </MenuItem>
         )}
         {columnDef?.filterSelectOptions?.map((option) => {
-          let value;
-          let text;
-          if (typeof option === 'string') {
+          let value: string;
+          let text: string;
+          if (typeof option !== 'object') {
             value = option;
             text = option;
-          } else if (typeof option === 'object') {
+          } else {
             value = option.value;
             text = option.text;
           }
           return (
             <MenuItem key={value} value={value}>
-              {text}
+              {isMultiSelectFilter && (
+                <Checkbox
+                  checked={(
+                    (column.getFilterValue() ?? []) as string[]
+                  ).includes(value)}
+                  sx={{ mr: '0.5rem' }}
+                />
+              )}
+              <ListItemText>{text}</ListItemText>
             </MenuItem>
           );
         })}

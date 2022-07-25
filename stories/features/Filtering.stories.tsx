@@ -126,6 +126,49 @@ export const DifferentFilterFunctions: Story<MaterialReactTableProps> = () => (
   />
 );
 
+export const MultiSelectFilter: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        accessorKey: 'firstName',
+      },
+      {
+        header: 'Last Name',
+        accessorKey: 'lastName',
+      },
+      {
+        header: 'Age',
+        accessorKey: 'age',
+        filterFn: 'startsWith',
+      },
+      {
+        header: 'Gender',
+        accessorKey: 'gender',
+        filterSelectOptions: ['Male', 'Female', 'Other'],
+        filterFn: 'arrIncludesSome',
+      },
+      {
+        header: 'Address',
+        accessorKey: 'address',
+      },
+      {
+        header: 'State',
+        accessorKey: 'state',
+        filterSelectOptions: [
+          { text: 'CA', value: 'California' },
+          { text: 'TX', value: 'Texas' },
+          { text: 'NY', value: 'New York' },
+          { text: 'FL', value: 'Florida' },
+        ],
+        filterFn: 'arrIncludesSome',
+      },
+    ]}
+    data={data}
+    initialState={{ showColumnFilters: true }}
+  />
+);
+
 export const FilteringChangeModeEnabled: Story<
   MaterialReactTableProps
 > = () => (
@@ -198,6 +241,7 @@ export const DisableSomeFilterTypesForCertainColumns: Story<
       },
     ]}
     data={data}
+    enableColumnFilterChangeMode
     initialState={{ showColumnFilters: true }}
   />
 );

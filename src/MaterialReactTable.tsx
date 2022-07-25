@@ -341,6 +341,7 @@ export type MRT_DefinedColumnDef<TData extends Record<string, any> = {}> = Omit<
   'id'
 > & {
   id: string;
+  _filterFn: MRT_FilterOption;
 };
 
 export type MRT_Column<TData extends Record<string, any> = {}> = Omit<
