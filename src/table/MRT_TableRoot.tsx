@@ -20,6 +20,7 @@ import {
   prepareColumns,
   getAllLeafColumnDefs,
   getDefaultColumnOrderIds,
+  getDefaultColumnFilterFn,
 } from '../column.utils';
 import { MRT_FilterFns } from '../filtersFns';
 import type {
@@ -114,7 +115,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
                 initialState?.currentFilterFns?.[
                   col.id?.toString() ?? col.accessorKey?.toString() ?? ''
                 ] ??
-                (!!col.filterSelectOptions?.length ? 'equals' : 'fuzzy'),
+                getDefaultColumnFilterFn(col),
         }),
       ),
     ),

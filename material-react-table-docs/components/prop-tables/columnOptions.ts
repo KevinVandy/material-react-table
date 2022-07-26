@@ -284,6 +284,17 @@ export const columnOptions: ColumnOption[] = [
     type: 'Array<{ text: string; value: string }>',
   },
   {
+    columnOption: 'filterVariant',
+    defaultValue: 'text',
+    description:
+      'Specify whether the filter should be a text input or a select input, or other type of pre-built input.',
+    link: '',
+    linkText: '',
+    source: 'MRT',
+    required: false,
+    type: "'text' | 'select' | 'multi-select | 'range",
+  },
+  {
     columnOption: 'header',
     defaultValue: '',
     description: '',

@@ -23,13 +23,13 @@ import type { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
   header: MRT_Header;
-  inputIndex?: number;
+  rangeFilterIndex?: number;
   table: MRT_TableInstance;
 }
 
 export const MRT_FilterTextField: FC<Props> = ({
   header,
-  inputIndex,
+  rangeFilterIndex,
   table,
 }) => {
   const {
@@ -48,11 +48,13 @@ export const MRT_FilterTextField: FC<Props> = ({
   const { columnDef } = column;
   const { currentFilterFns } = getState();
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
   const mTableHeadCellFilterTextFieldProps =
     muiTableHeadCellFilterTextFieldProps instanceof Function
-      ? muiTableHeadCellFilterTextFieldProps({ column, table })
+      ? muiTableHeadCellFilterTextFieldProps({
+          column,
+          table,
+          rangeFilterIndex,
+        })
       : muiTableHeadCellFilterTextFieldProps;
 
   const mcTableHeadCellFilterTextFieldProps =
@@ -60,6 +62,7 @@ export const MRT_FilterTextField: FC<Props> = ({
       ? columnDef.muiTableHeadCellFilterTextFieldProps({
           column,
           table,
+          rangeFilterIndex,
         })
       : columnDef.muiTableHeadCellFilterTextFieldProps;
 
@@ -68,14 +71,18 @@ export const MRT_FilterTextField: FC<Props> = ({
     ...mcTableHeadCellFilterTextFieldProps,
   } as TextFieldProps;
 
-  const filterId = `mrt-${tableId}-${header.id}-filter-text-field${
-    inputIndex ?? ''
-  }`;
+  const isRangeFilter =
+    columnDef.filterVariant === 'range' || rangeFilterIndex !== undefined;
+  const isSelectFilter = columnDef.filterVariant === 'select';
+  const isMultiSelectFilter = columnDef.filterVariant === 'multi-select';
+  const isTextboxFilter =
+    columnDef.filterVariant === 'text' ||
+    (!isSelectFilter && !isMultiSelectFilter);
+
   const currentFilterOption = currentFilterFns?.[header.id];
-  const isRangeFilter = inputIndex !== undefined;
-  const isSelectFilter = !!columnDef.filterSelectOptions;
-  const isMultiSelectFilter =
-    isSelectFilter && ['arrIncludesSome'].includes(columnDef._filterFn);
+  const filterId = `mrt-${tableId}-${header.id}-filter-text-field${
+    rangeFilterIndex ?? ''
+  }`;
   const filterChipLabel = ['empty', 'notEmpty'].includes(currentFilterOption)
     ? //@ts-ignore
       localization[
@@ -87,9 +94,9 @@ export const MRT_FilterTextField: FC<Props> = ({
     : '';
   const filterPlaceholder = !isRangeFilter
     ? localization.filterByColumn?.replace('{column}', String(columnDef.header))
-    : inputIndex === 0
+    : rangeFilterIndex === 0
     ? localization.min
-    : inputIndex === 1
+    : rangeFilterIndex === 1
     ? localization.max
     : '';
   const allowedColumnFilterOptions =
@@ -97,36 +104,40 @@ export const MRT_FilterTextField: FC<Props> = ({
   const showChangeModeButton =
     enableColumnFilterChangeMode &&
     columnDef.enableColumnFilterChangeMode !== false &&
-    !isSelectFilter &&
-    !isRangeFilter &&
+    !rangeFilterIndex &&
     (allowedColumnFilterOptions === undefined ||
       !!allowedColumnFilterOptions?.length);
 
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [filterValue, setFilterValue] = useState<string | string[]>(() =>
     isMultiSelectFilter
       ? (column.getFilterValue() as string[]) || []
       : isRangeFilter
-      ? (column.getFilterValue() as [string, string])?.[inputIndex as number] ||
-        []
+      ? (column.getFilterValue() as [string, string])?.[
+          rangeFilterIndex as number
+        ] || []
       : (column.getFilterValue() as string) ?? '',
   );
 
   const handleChangeDebounced = useCallback(
-    debounce((event: ChangeEvent<HTMLInputElement>) => {
-      let value =
-        textFieldProps.type === 'date'
-          ? new Date(event.target.value)
-          : event.target.value;
-      if (isRangeFilter) {
-        column.setFilterValue((old: [string, string | Date]) => {
-          const newFilterValues = old ?? ['', ''];
-          newFilterValues[inputIndex as number] = value;
-          return newFilterValues;
-        });
-      } else {
-        column.setFilterValue(value ?? undefined);
-      }
-    }, 200),
+    debounce(
+      (event: ChangeEvent<HTMLInputElement>) => {
+        let value =
+          textFieldProps.type === 'date'
+            ? new Date(event.target.value)
+            : event.target.value;
+        if (isRangeFilter) {
+          column.setFilterValue((old: [string, string | Date]) => {
+            const newFilterValues = old ?? ['', ''];
+            newFilterValues[rangeFilterIndex as number] = value;
+            return newFilterValues;
+          });
+        } else {
+          column.setFilterValue(value ?? undefined);
+        }
+      },
+      isTextboxFilter ? 200 : 1,
+    ),
     [],
   );
 
@@ -143,8 +154,7 @@ export const MRT_FilterTextField: FC<Props> = ({
       setFilterValue('');
       column.setFilterValue((old: [string | undefined, string | undefined]) => {
         const newFilterValues = old ?? ['', ''];
-        newFilterValues[inputIndex as number] = undefined;
-
+        newFilterValues[rangeFilterIndex as number] = undefined;
         return newFilterValues;
       });
     } else {
@@ -208,11 +218,13 @@ export const MRT_FilterTextField: FC<Props> = ({
         }}
         margin="none"
         placeholder={
-          filterChipLabel || isSelectFilter ? undefined : filterPlaceholder
+          filterChipLabel || isSelectFilter || isMultiSelectFilter
+            ? undefined
+            : filterPlaceholder
         }
         onChange={handleChange}
         onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
-        select={isSelectFilter}
+        select={isSelectFilter || isMultiSelectFilter}
         value={filterValue}
         variant="standard"
         InputProps={{
@@ -284,7 +296,7 @@ export const MRT_FilterTextField: FC<Props> = ({
         {...textFieldProps}
         sx={(theme) => ({
           p: 0,
-          minWidth: !filterChipLabel ? '8rem' : 'auto',
+          minWidth: !filterChipLabel ? '6rem' : 'auto',
           width: 'calc(100% + 0.5rem)',
           '&	.MuiSelect-icon': {
             mr: '1.5rem',
@@ -294,7 +306,7 @@ export const MRT_FilterTextField: FC<Props> = ({
             : (textFieldProps?.sx as any)),
         })}
       >
-        {isSelectFilter && (
+        {(isSelectFilter || isMultiSelectFilter) && (
           <MenuItem divider disabled hidden value="">
             <Box sx={{ opacity: 0.5 }}>{filterPlaceholder}</Box>
           </MenuItem>

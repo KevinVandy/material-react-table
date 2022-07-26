@@ -11,8 +11,8 @@ interface Props {
 export const MRT_FilterRangeFields: FC<Props> = ({ header, table }) => {
   return (
     <Box sx={{ display: 'grid', gridTemplateColumns: '6fr 6fr', gap: '1rem' }}>
-      <MRT_FilterTextField header={header} inputIndex={0} table={table} />
-      <MRT_FilterTextField header={header} inputIndex={1} table={table} />
+      <MRT_FilterTextField header={header} rangeFilterIndex={0} table={table} />
+      <MRT_FilterTextField header={header} rangeFilterIndex={1} table={table} />
     </Box>
   );
 };

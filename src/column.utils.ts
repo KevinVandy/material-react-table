@@ -125,3 +125,14 @@ export const getDefaultColumnOrderIds = <
     ),
     ...getTrailingDisplayColumnIds(props),
   ].filter(Boolean) as string[];
+
+export const getDefaultColumnFilterFn = <
+  TData extends Record<string, any> = {},
+>(
+  columnDef: MRT_ColumnDef<TData>,
+): MRT_FilterOption => {
+  if (columnDef.filterVariant === 'multi-select') return 'arrIncludesSome';
+  if (columnDef.filterVariant === 'select') return 'equals';
+  if (columnDef.filterVariant === 'range') return 'betweenInclusive';
+  return 'fuzzy';
+};

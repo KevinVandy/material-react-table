@@ -51,7 +51,7 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
   },
 ];
 
-const data = [...Array(100)].map(() => ({
+const data = [...Array(120)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   age: faker.datatype.number(100),
@@ -62,15 +62,7 @@ const data = [...Array(100)].map(() => ({
 }));
 
 export const FilteringEnabledDefault: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} manualFiltering />
-);
-
-export const FilteringEnabledAndShown: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    initialState={{ showColumnFilters: true }}
-  />
+  <MaterialReactTable columns={columns} data={data} />
 );
 
 export const ColumnFilteringDisabled: Story<MaterialReactTableProps> = () => (
@@ -85,83 +77,48 @@ export const FilteringDisabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableFilters={false} />
 );
 
-export const DifferentFilterFunctions: Story<MaterialReactTableProps> = () => (
+export const FilterFnAndFilterVariants: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={[
       {
         header: 'First Name',
         accessorKey: 'firstName',
+        filterFn: 'fuzzy', // default
       },
       {
         header: 'Last Name',
         accessorKey: 'lastName',
+        filterFn: 'contains',
       },
       {
         header: 'Age',
         accessorKey: 'age',
-        filterFn: 'startsWith',
+        filterFn: 'between',
       },
       {
         header: 'Gender',
         accessorKey: 'gender',
         filterSelectOptions: ['Male', 'Female', 'Other'],
+        filterVariant: 'select',
       },
       {
         header: 'Address',
         accessorKey: 'address',
+        filterFn: 'includesStringSensitive',
       },
       {
         header: 'State',
         accessorKey: 'state',
         filterSelectOptions: [
+          { text: 'AL', value: 'Alabama' },
+          { text: 'AZ', value: 'Arizona' },
           { text: 'CA', value: 'California' },
-          { text: 'TX', value: 'Texas' },
-          { text: 'NY', value: 'New York' },
           { text: 'FL', value: 'Florida' },
-        ],
-      },
-    ]}
-    data={data}
-    initialState={{ showColumnFilters: true }}
-  />
-);
-
-export const MultiSelectFilter: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable
-    columns={[
-      {
-        header: 'First Name',
-        accessorKey: 'firstName',
-      },
-      {
-        header: 'Last Name',
-        accessorKey: 'lastName',
-      },
-      {
-        header: 'Age',
-        accessorKey: 'age',
-        filterFn: 'startsWith',
-      },
-      {
-        header: 'Gender',
-        accessorKey: 'gender',
-        filterSelectOptions: ['Male', 'Female', 'Other'],
-        filterFn: 'arrIncludesSome',
-      },
-      {
-        header: 'Address',
-        accessorKey: 'address',
-      },
-      {
-        header: 'State',
-        accessorKey: 'state',
-        filterSelectOptions: [
-          { text: 'CA', value: 'California' },
-          { text: 'TX', value: 'Texas' },
+          { text: 'GA', value: 'Georgia' },
           { text: 'NY', value: 'New York' },
-          { text: 'FL', value: 'Florida' },
+          { text: 'TX', value: 'Texas' },
         ],
-        filterFn: 'arrIncludesSome',
+        filterVariant: 'multi-select',
       },
     ]}
     data={data}
@@ -203,6 +160,7 @@ export const FilteringChangeModeEnabled: Story<
     ]}
     data={data}
     enableColumnFilterChangeMode
+    initialState={{ showColumnFilters: true }}
   />
 );
 
@@ -353,7 +311,7 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
             }
             select
             value={header.column.getFilterValue() ?? ''}
-            margin="dense"
+            margin="none"
             placeholder="Filter"
             variant="standard"
             fullWidth

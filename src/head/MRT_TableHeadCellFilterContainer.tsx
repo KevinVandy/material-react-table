@@ -19,7 +19,9 @@ export const MRT_TableHeadCellFilterContainer: FC<Props> = ({
 
   return (
     <Collapse in={showColumnFilters} mountOnEnter unmountOnExit>
-      {currentFilterFns[column.id] === 'between' ? (
+      {['between', 'betweenInclusive', 'inNumberRange'].includes(
+        currentFilterFns[column.id],
+      ) ? (
         <MRT_FilterRangeFields header={header} table={table} />
       ) : (
         <MRT_FilterTextField header={header} table={table} />

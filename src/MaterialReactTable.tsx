@@ -225,6 +225,7 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
   enableEditing?: boolean;
   filterFn?: MRT_FilterFn<TData>;
   filterSelectOptions?: (string | { text: string; value: string })[];
+  filterVariant?: 'text' | 'select' | 'multi-select' | 'range';
   /**
    * footer must be a string. If you want custom JSX to render the footer, you can also specify a `Footer` option. (Capital F)
    */
@@ -302,9 +303,11 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
     | (({
         table,
         column,
+        rangeFilterIndex,
       }: {
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
+        rangeFilterIndex?: number;
       }) => TextFieldProps);
   muiTableHeadCellProps?:
     | TableCellProps
@@ -608,9 +611,11 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
       | (({
           table,
           column,
+          rangeFilterIndex,
         }: {
           table: MRT_TableInstance<TData>;
           column: MRT_Column<TData>;
+          rangeFilterIndex?: number;
         }) => TextFieldProps);
     muiTableHeadCellProps?:
       | TableCellProps

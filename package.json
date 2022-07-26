@@ -1,5 +1,5 @@
 {
-  "version": "0.28.0",
+  "version": "0.29.1",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -62,7 +62,7 @@
     "@emotion/styled": "^11.9.3",
     "@faker-js/faker": "^7.3.0",
     "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.9.1",
+    "@mui/material": "^5.9.2",
     "@size-limit/preset-small-lib": "^7.0.8",
     "@storybook/addon-a11y": "^6.5.9",
     "@storybook/addon-actions": "^6.5.9",

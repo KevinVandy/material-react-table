@@ -13,6 +13,9 @@ export interface MRT_Localization {
   edit: string;
   expand: string;
   expandAll: string;
+  filterArrIncludes: string;
+  filterArrIncludesAll: string;
+  filterArrIncludesSome: string;
   filterBetween: string;
   filterBetweenInclusive: string;
   filterByColumn: string;
@@ -20,15 +23,20 @@ export interface MRT_Localization {
   filterEmpty: string;
   filterEndsWith: string;
   filterEquals: string;
+  filterEqualsString: string;
   filterFuzzy: string;
   filterGreaterThan: string;
   filterGreaterThanOrEqualTo: string;
+  filterInNumberRange: string;
+  filterIncludesString: string;
+  filterIncludesStringSensitive: string;
   filterLessThan: string;
   filterLessThanOrEqualTo: string;
   filterMode: string;
   filterNotEmpty: string;
   filterNotEquals: string;
   filterStartsWith: string;
+  filterWeakEquals: string;
   filteringByColumn: string;
   grab: string;
   groupByColumn: string;
@@ -38,6 +46,7 @@ export interface MRT_Localization {
   max: string;
   min: string;
   move: string;
+  or: string;
   pinToLeft: string;
   pinToRight: string;
   resetColumnSize: string;
@@ -85,6 +94,9 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   edit: 'Edit',
   expand: 'Expand',
   expandAll: 'Expand all',
+  filterArrIncludes: 'Includes',
+  filterArrIncludesAll: 'Includes all',
+  filterArrIncludesSome: 'Includes',
   filterBetween: 'Between',
   filterBetweenInclusive: 'Between Inclusive',
   filterByColumn: 'Filter by {column}',
@@ -92,15 +104,20 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   filterEmpty: 'Empty',
   filterEndsWith: 'Ends With',
   filterEquals: 'Equals',
+  filterEqualsString: 'Equals',
   filterFuzzy: 'Fuzzy',
   filterGreaterThan: 'Greater Than',
   filterGreaterThanOrEqualTo: 'Greater Than Or Equal To',
+  filterInNumberRange: 'Between',
+  filterIncludesString: 'Contains',
+  filterIncludesStringSensitive: 'Contains',
   filterLessThan: 'Less Than',
   filterLessThanOrEqualTo: 'Less Than Or Equal To',
   filterMode: 'Filter Mode: {filterType}',
   filterNotEmpty: 'Not Empty',
   filterNotEquals: 'Not Equals',
   filterStartsWith: 'Starts With',
+  filterWeakEquals: 'Equals',
   filteringByColumn: 'Filtering by {column} - {filterType} {filterValue}',
   grab: 'Grab',
   groupByColumn: 'Group by {column}',
@@ -110,6 +127,7 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   max: 'Max',
   min: 'Min',
   move: 'Move',
+  or: 'or',
   pinToLeft: 'Pin to left',
   pinToRight: 'Pin to right',
   resetColumnSize: 'Reset column size',

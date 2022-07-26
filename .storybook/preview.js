@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider, Typography } from '@mui/material';
+import { createTheme, Link, ThemeProvider, Typography } from '@mui/material';
 import { useDarkMode } from 'storybook-dark-mode';
 
 export const parameters = {
@@ -32,20 +32,36 @@ const withThemeProvider = (Story, context) => {
   });
 
   return (
-    <ThemeProvider theme={defaultTheme} r>
+    <ThemeProvider theme={defaultTheme}>
+      <Typography
+        sx={{
+          pb: '1rem',
+          color: useDarkMode() ? '#fff' : '#666',
+        }}
+        variant="subtitle2"
+      >
+        Looking for the main docs site? Click{' '}
+        <Link
+          href="https://www.material-react-table.com"
+          target="_blank"
+          rel="noopener"
+        >
+          here.
+        </Link>
+      </Typography>
       <Typography
         variant="subtitle2"
-        style={{
-          paddingBottom: '2rem',
+        sx={{
+          pb: '2rem',
           color: useDarkMode() ? '#fff' : '#666',
         }}
       >
-        Toggle dark and light mode in the toolbar buttons above
+        Toggle dark and light mode in the toolbar buttons above.
       </Typography>
       <Story {...context} />
       <Typography
         variant="subtitle2"
-        style={{ paddingTop: '2rem', color: useDarkMode() ? '#fff' : '#666' }}
+        sx={{ pt: '2rem', color: useDarkMode() ? '#fff' : '#666' }}
       >
         View source code below in the story tab on Canvas or the Show Code
         Button in Docs
