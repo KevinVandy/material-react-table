@@ -73,18 +73,26 @@ const TopBar: FC<Props> = ({
           <Link href="/" passHref>
             <Typography
               sx={{
+                alignItems: 'center',
                 cursor: 'pointer',
+                display: 'flex',
                 fontSize: isTablet ? '1.6rem' : undefined,
+                gap: '1rem',
               }}
               variant="h1"
             >
+              {!isMobile && (
+                <Image
+                  alt="MRT logo"
+                  src="/mrt_logo.svg"
+                  height={50}
+                  width={50}
+                />
+              )}
               {isMobile ? 'MRT' : 'Material React Table'}
             </Typography>
           </Link>
         </Flex>
-        {!isMobile && (
-          <Image alt="MRT logo" src="/mrt_logo.svg" height={50} width={50} />
-        )}
         <Flex>
           <Tooltip arrow title="Github">
             <a

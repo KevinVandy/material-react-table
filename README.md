@@ -53,7 +53,7 @@ View additional [storybook examples](https://www.material-react-table.dev/)
 
 _All features can easily be enabled/disabled_
 
-- [x] < 36kb gzipped - [Bundlephobia](https://bundlephobia.com/package/material-react-table)
+- [x] < 37kb gzipped - [Bundlephobia](https://bundlephobia.com/package/material-react-table)
 - [x] Advanced TypeScript Generics Support (TypeScript Optional)
 - [x] Click To Copy Cell Values
 - [x] Column Action Dropdown Menu

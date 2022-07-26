@@ -8,6 +8,7 @@ export const StatBadges = () => {
         gap: '1rem',
         justifyContent: 'center',
         flexWrap: 'wrap',
+        mb: '1rem',
       }}
     >
       <a href="https://npmjs.com/package/material-react-table" target="_blank_">

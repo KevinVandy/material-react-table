@@ -11,7 +11,7 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
         backgroundColor:
           theme.palette.mode === 'dark'
             ? theme.palette.background.paper
-            : theme.palette.grey[200],
+            : theme.palette.grey[100],
       }),
     },
   },
@@ -258,11 +258,6 @@ const FeatureTable = () => {
       initialState={{
         sorting: [{ id: 'feature', desc: false }],
         density: 'compact',
-      }}
-      muiTableContainerProps={{
-        sx: {
-          maxHeight: 'min(100vh, 600px)',
-        },
       }}
     />
   );
