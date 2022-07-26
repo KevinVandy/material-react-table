@@ -1,5 +1,5 @@
 {
-  "version": "0.29.1",
+  "version": "0.30.0",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -100,7 +100,7 @@
   },
   "dependencies": {
     "@tanstack/match-sorter-utils": "8.1.1",
-    "@tanstack/react-table": "8.2.6",
+    "@tanstack/react-table": "8.4.0",
     "@tanstack/react-virtual": "^3.0.0-beta.13"
   }
 }

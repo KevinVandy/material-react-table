@@ -2971,12 +2971,12 @@
   dependencies:
     remove-accents "0.4.2"
 
-"@tanstack/react-table@8.2.6":
-  version "8.2.6"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.2.6.tgz#a44855d1958d9e8fa7a34280f81f08d2ef7f8d4f"
-  integrity sha512-hHEKSqRPSojhFLosSpqKMRNDX8mk/UVvFdekXHai86NAg1WaLYB51hWVg18IqFe9PCaPZNpTPNguJ7u54ed8Gg==
+"@tanstack/react-table@8.4.0":
+  version "8.4.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.4.0.tgz#08fb9c3d061602fb79b3ceef10e2a65c142ad9ed"
+  integrity sha512-w70IEaAduCnGnnw9EqPG6wrJGLgwbO7G6E/91JfpoGw8SO2LM0QixhIZXYT+ISTuAA2YnW5kVwOKyXIZBwOc1Q==
   dependencies:
-    "@tanstack/table-core" "8.2.6"
+    "@tanstack/table-core" "8.4.0"
 
 "@tanstack/react-virtual@^3.0.0-beta.13":
   version "3.0.0-beta.13"
@@ -2986,10 +2986,10 @@
     "@reach/observe-rect" "^1.1.0"
     "@tanstack/virtual-core" "3.0.0-beta.13"
 
-"@tanstack/table-core@8.2.6":
-  version "8.2.6"
-  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.2.6.tgz#7240ac14a43cc43adbe01fbc6ae4d8a2bf82541a"
-  integrity sha512-yHjKksyq5ZI4GoVJgR/+X8Z1gaZdOL1om3G9M4af6yTTyRP5ZquMlU5318MBtx2NzXl4BxtENLXBWYrcz5WKSA==
+"@tanstack/table-core@8.4.0":
+  version "8.4.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.4.0.tgz#4224b090c39d2f66b09bfa24f85b94c3a3b73899"
+  integrity sha512-ZVk1TbJ/J8T5buvPgd0nfP5627gffCPvnYRAqmvAiSPv9EYtx2x6ixQhgDeU/TJPWd04S76B/0CwDab7Cj64/A==
 
 "@tanstack/virtual-core@3.0.0-beta.13":
   version "3.0.0-beta.13"

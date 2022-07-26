@@ -40,9 +40,9 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
     header: 'Bundle Size',
     Cell: ({ cell }) => (
       <Box sx={{ display: 'flex', alignContent: 'center', gap: '1ch' }}>
-        {`${cell.getValue()} KB`}
+        {`${cell.getValue<string>()} KB`}
         <img
-          alt={cell.getValue()}
+          alt={cell.getValue<string>()}
           loading="lazy"
           src={cell.row.original.bundlePhobiaLink}
         />
