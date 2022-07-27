@@ -14,10 +14,14 @@ import {
   Box,
   Button,
 } from '@mui/material';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
-import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
-import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
+import {
+  Code,
+  GitHub,
+  ContentCopy,
+  LibraryAddCheck,
+  UnfoldMore,
+  UnfoldLess,
+} from '@mui/icons-material';
 import { LinkHeading } from './LinkHeading';
 
 const CopyButton = styled(IconButton)({
@@ -94,10 +98,11 @@ export const SourceCodeSnippet: FC<Props> = ({
             </LinkHeading>
             {showCodeSandboxLink && (
               <Button
+                startIcon={<Code />}
                 href={`https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples/${tableId}/sandbox?file=/src/TS.tsx`}
                 rel="noreferrer"
                 target="_blank"
-                sx={{ height: '3rem', ml: '1rem' }}
+                sx={{ height: '3rem', ml: '1rem', cursor: 'pointer' }}
                 variant="outlined"
               >
                 Open Code Sandbox
@@ -105,12 +110,13 @@ export const SourceCodeSnippet: FC<Props> = ({
             )}
             {showCodeSandboxLink && (
               <Button
+                startIcon={<GitHub />}
                 href={`https://github.com/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples/${tableId}/sandbox/src/${
                   isTypeScript ? 'TS.tsx' : 'JS.js'
                 }`}
                 rel="noreferrer"
                 target="_blank"
-                sx={{ height: '3rem', ml: '1rem' }}
+                sx={{ height: '3rem', ml: '1rem', cursor: 'pointer' }}
                 variant="outlined"
               >
                 Open on GitHub
@@ -182,7 +188,7 @@ export const SourceCodeSnippet: FC<Props> = ({
             >
               <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Code'}>
                 <CopyButton onClick={handleCopy}>
-                  {isCopied ? <LibraryAddCheckIcon /> : <ContentCopyIcon />}
+                  {isCopied ? <LibraryAddCheck /> : <ContentCopy />}
                 </CopyButton>
               </Tooltip>
               <Tooltip
@@ -196,7 +202,7 @@ export const SourceCodeSnippet: FC<Props> = ({
                 <ToggleFullCodeButton
                   onClick={() => setIsFullCode(!isFullCode)}
                 >
-                  {isFullCode ? <UnfoldLessIcon /> : <UnfoldMoreIcon />}
+                  {isFullCode ? <UnfoldLess /> : <UnfoldMore />}
                 </ToggleFullCodeButton>
               </Tooltip>
               <pre

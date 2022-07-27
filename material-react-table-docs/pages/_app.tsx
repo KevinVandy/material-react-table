@@ -3,7 +3,14 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { MDXProvider } from '@mdx-js/react';
-import { Box, ThemeProvider, useMediaQuery } from '@mui/material';
+import {
+  Box,
+  Button,
+  ThemeProvider,
+  Typography,
+  useMediaQuery,
+} from '@mui/material';
+import { GitHub } from '@mui/icons-material';
 import { mdxComponents } from '../components/mdx/mdxComponents';
 import TopBar from '../components/navigation/TopBar';
 import SideBar from '../components/navigation/Sidebar';
@@ -87,6 +94,63 @@ function App({ Component, pageProps }: AppProps) {
               {showBreadCrumbs && <BreadCrumbs />}
               {showMiniNav && !isXLDesktop && <MiniNav />}
               <Component {...pageProps} />
+              <Box
+                sx={{
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                }}
+              >
+                <Button
+                  color="secondary"
+                  startIcon={<GitHub />}
+                  href={`https://github.com/KevinVandy/material-react-table/tree/main/material-react-table-docs/pages${pathname}${
+                    ['/'].includes(pathname)
+                      ? 'index.tsx'
+                      : [
+                          '/docs',
+                          '/docs/api',
+                          '/docs/examples',
+                          '/docs/guides',
+                        ].includes(pathname)
+                      ? '/index.mdx'
+                      : '.mdx'
+                  }`}
+                  rel="noreferrer"
+                  target="_blank"
+                  sx={{
+                    height: '3rem',
+                    m: '3rem auto',
+                    cursor: 'pointer',
+                    textAlign: 'center',
+                  }}
+                  variant="outlined"
+                >
+                  Edit this page on GitHub
+                </Button>
+                <Typography
+                  sx={{
+                    justifyContent: 'center',
+                    display: 'flex',
+                    alignContent: 'center',
+                  }}
+                  variant="subtitle2"
+                >
+                  You can make these docs better!{' '}
+                  <a
+                    href="http://makeapullrequest.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ marginLeft: '0.5rem' }}
+                  >
+                    <img
+                      alt=""
+                      src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square"
+                    />
+                  </a>
+                </Typography>
+              </Box>
             </Box>
             {showMiniNav && isXLDesktop && <MiniNav />}
           </Box>
