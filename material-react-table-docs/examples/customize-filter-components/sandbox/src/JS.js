@@ -28,11 +28,12 @@ const Example = () => {
           { text: 'Female', value: 'Female' },
           { text: 'Other', value: 'Other' },
         ],
+        filterVariant: 'select',
       },
       {
         accessorKey: 'age',
         header: 'Age',
-        filterFn: 'between',
+        filterVariant: 'range',
       },
     ],
     [],

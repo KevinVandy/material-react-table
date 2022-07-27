@@ -1,5 +1,7 @@
 import { ColumnFiltersState, SortingState } from '@tanstack/react-table';
 
+//This is just a simple mock of a backend API where you would do server-side pagination, filtering, and sorting
+//You would most likely want way more validation and error handling than this in a real world application
 export default function handler(req, res) {
   let dbData = getData();
   const { start, size, filters, sorting, globalFilter } = req.query;

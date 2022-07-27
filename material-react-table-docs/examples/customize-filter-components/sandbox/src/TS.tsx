@@ -23,17 +23,17 @@ const Example: FC = () => {
           accessorKey: 'gender',
           header: 'Gender',
           filterFn: 'equals',
-          //automatically turns textfield into select box
           filterSelectOptions: [
             { text: 'Male', value: 'Male' },
             { text: 'Female', value: 'Female' },
             { text: 'Other', value: 'Other' },
           ],
+          filterVariant: 'select',
         },
         {
           accessorKey: 'age',
           header: 'Age',
-          filterFn: 'between',
+          filterVariant: 'range',
         },
       ] as MRT_ColumnDef<typeof data[0]>[],
     [],
@@ -81,9 +81,6 @@ const Example: FC = () => {
       data={data}
       initialState={{ showColumnFilters: true }} //show filters by default
       muiTableHeadCellFilterTextFieldProps={{
-        InputProps: {
-          startAdornment: <FilterAlt />,
-        },
         sx: { m: '0.5rem 0', width: '100%' },
         variant: 'outlined',
       }}

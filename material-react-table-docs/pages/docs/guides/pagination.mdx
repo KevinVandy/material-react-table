@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+import RemoteExample from '../../../examples/remote';
 
 <Head>
   <title>Material React Table Docs - Pagination Feature Guide</title>
@@ -11,6 +12,8 @@ import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable
 </Head>
 
 ## Pagination Feature Guide
+
+Client-side pagination is enabled by default in Material React Table. There are a number of ways to customize pagination, turn off pagination, or completely replace the built in pagination with your own manual or server-side pagination logic.
 
 ### Relevant Props
 
@@ -37,4 +40,84 @@ import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable
 
 ---
 
-### Default Client-Side Pagination
+### Disable Pagination
+
+If you simply want to disable pagination, you can set the `enablePagination` prop to `false`. This will both hide the pagination controls and disable the pagination functionality.
+
+If you only want to disable the pagination logic, but still want to show and use the pagination controls, take a look down below at the [Manual Pagination](##manual-or-server-side-pagination) docs.
+
+```jsx
+<MaterialTable columns={columns} data={data} enablePagination={false} />
+```
+
+### Customize Pagination
+
+#### Customize Pagination Behavior
+
+There are a few props that you can use to customize the pagination behavior. The first one is `autoResetPagination`. This prop is `true` by default, and causes a table to automatically reset the table back to the first page whenever sorting, filtering, or grouping occurs. This makes sense for most use cases, but if you want to disable this behavior, you can set this prop to `false`.
+
+Next there is `paginateExpandedRows`, which works in conjunction expanding features. This prop is `true` by default, and forces the table to still only render the same number of rows per page that is set as the page size, even as sub-rows become expanded. However, this does cause expanded rows to sometimes not be on the same page as their parent row, so you can turn this off to keep sub rows with their parent row on the same page.
+
+#### Customize Pagination Components
+
+### Manual or Server-Side Pagination
+
+#### Manual Pagination
+
+The default pagination features are client-side. This means you have to have all of your data fetched and stored in the table all at once. This may not be ideal for large datasets, but don't worry, Material React Table supports server-side pagination.
+
+When the `manualPagination` prop is set to `true`, Material React Table will assume that the `data` that is passed to the table already has had the pagination logic applied. Usually you would do this in your back-end logic.
+
+#### Override Page Count and Row Count
+
+If you are using manual pagination, the default page count and row count in the Material UI pagination component will be incorrect, as it is only derived from the number of rows provided in the client-side `data` prop. Luckily, you can override these values and set your own page count or row count in the `pageCount` and `rowCount` props.
+
+```jsx
+<MaterialTable
+  columns={columns}
+  data={data}
+  manualPagination
+  rowCount={data.meta.totalDBRowCount} //you can tell the pagination how many rows there are in your back-end data
+/>
+```
+
+#### Manage Pagination State
+
+For either client-side or server-side pagination, you may want to have access to the pagination state yourself. You can do this like so with `state`:
+
+```jsx
+//store pagination state in your own state
+const [pagination, setPagination] = useState({
+  pageIndex: 0,
+  pageSize: 5, //customize the default page size
+});
+
+useEffect(() => {
+  //do something when the pagination state changes
+}, [pagination.pageIndex, pagination.pageSize]);
+
+return (
+  <MaterialTable
+    columns={columns}
+    data={data}
+    onPaginationChange={setPagination} //hoist pagination state to your state when it changes internally
+    state={{ pagination }} //pass the pagination state to the table
+  />
+);
+```
+
+Alternatively, if all you care about is customizing the initial pagination state and don't need to react to its changes, like customizing the default page size or the page index, you can do that like so with `initialState`:
+
+```jsx
+<MaterialTable
+  columns={columns}
+  data={data}
+  initialState={{ pagination: { pageSize: 25, pageIndex: 2 } }}
+/>
+```
+
+Here is the full Remote Data example showing off server-side filtering, **pagination**, and sorting.
+
+<RemoteExample />
+
+View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-pagination-examples)**
