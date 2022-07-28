@@ -85,19 +85,19 @@ You can specify either a prebuilt filter function, from Material React Table or 
 const columns = [
   {
     accessorKey: 'firstName',
-    Header: 'First Name',
+    header: 'First Name',
     // using a prebuilt filter function from Material React Table
     filterFn: 'startsWith',
   },
   {
     accessorKey: 'middleName',
-    Header: 'Middle Name',
+    header: 'Middle Name',
     // using a prebuilt filter function from TanStack Table
     filterFn: 'includesStringSensitive',
   },
   {
     accessorKey: 'lastName',
-    Header: 'Last Name',
+    header: 'Last Name',
     // custom filter function
     filterFn: (row, id, filterValue) =>
       row.getValue(id).startsWith(filterValue),
@@ -135,12 +135,12 @@ You can narrow down the available filter mode options by setting the `columnFilt
 const columns = [
   {
     accessorKey: 'firstName',
-    Header: 'First Name',
+    header: 'First Name',
     columnFilterModeOptions: ['fuzzy', 'contains', 'startsWith'],
   },
   {
     accessorKey: 'age',
-    Header: 'Age',
+    header: 'Age',
     columnFilterModeOptions: ['between', 'lessThan', 'greaterThan'],
   },
   }
