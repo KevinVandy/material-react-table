@@ -92,43 +92,65 @@ export const SourceCodeSnippet: FC<Props> = ({
       <Divider />
       {Component && (
         <>
-          <Box sx={{ display: 'flex' }}>
-            <LinkHeading tableId={tableId} variant="h4">
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '1rem',
+            }}
+          >
+            <LinkHeading
+              tableId={tableId}
+              variant="h4"
+              textTransform="capitalize"
+            >
               Demo
             </LinkHeading>
             {showCodeSandboxLink && (
-              <Button
-                startIcon={<Code />}
-                href={`https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples/${tableId}/sandbox?file=/src/TS.tsx`}
-                rel="noreferrer"
-                target="_blank"
-                sx={{ height: '3rem', ml: '1rem', cursor: 'pointer' }}
-                variant="outlined"
+              <Box
+                sx={{
+                  display: { xs: 'grid', sm: 'flex' },
+                  flexWrap: 'wrap',
+                  gap: '1rem',
+                  justifyContent: { xs: 'center', sm: 'flex-start' },
+                  width: { xs: '100%', sm: 'auto' },
+                }}
               >
-                Open Code Sandbox
-              </Button>
-            )}
-            {showCodeSandboxLink && (
-              <Button
-                startIcon={<GitHub />}
-                href={`https://github.com/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples/${tableId}/sandbox/src/${
-                  isTypeScript ? 'TS.tsx' : 'JS.js'
-                }`}
-                rel="noreferrer"
-                target="_blank"
-                sx={{ height: '3rem', ml: '1rem', cursor: 'pointer' }}
-                variant="outlined"
-              >
-                Open on GitHub
-              </Button>
+                <Button
+                  startIcon={<Code />}
+                  href={`https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples/${tableId}/sandbox?file=/src/TS.tsx`}
+                  rel="noreferrer"
+                  target="_blank"
+                  sx={{ cursor: 'pointer' }}
+                  variant="outlined"
+                >
+                  Open Code Sandbox
+                </Button>
+                <Button
+                  startIcon={<GitHub />}
+                  href={`https://github.com/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples/${tableId}/sandbox/src/${
+                    isTypeScript ? 'TS.tsx' : 'JS.js'
+                  }`}
+                  rel="noreferrer"
+                  target="_blank"
+                  sx={{ cursor: 'pointer' }}
+                  variant="outlined"
+                >
+                  Open on GitHub
+                </Button>
+              </Box>
             )}
           </Box>
           <Component />
         </>
       )}
       <div>
-        <div style={{ display: 'flex', gap: '1rem' }}>
-          <LinkHeading tableId={tableId} variant="h4">
+        <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+          <LinkHeading
+            tableId={tableId}
+            textTransform="capitalize"
+            variant="h4"
+          >
             Source Code
           </LinkHeading>
           <ToggleButtonGroup>
@@ -166,7 +188,7 @@ export const SourceCodeSnippet: FC<Props> = ({
               </ToggleButton>
             )}
           </ToggleButtonGroup>
-        </div>
+        </Box>
         <Highlight
           {...defaultProps}
           code={

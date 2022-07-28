@@ -81,7 +81,6 @@ export const Example = () => {
       enableColumnFilters={false}
       enablePagination={false}
       enableSorting={false}
-      enableStickyHeader={false}
       enableToolbarBottom={false}
       enableToolbarTop={false}
       muiTableBodyRowProps={{ hover: false }}

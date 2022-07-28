@@ -12,17 +12,31 @@ const Example = () => {
         header: 'Employee',
         columns: [
           {
-            accessorKey: 'firstName', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
+            accessorFn: (row) => `${row.firstName} ${row.lastName}`, //accessorFn used to join multiple data into a single cell
+            id: 'name', //id is still required when using accessorFn instead of accessorKey
             enableClickToCopy: false,
-            header: 'First Name',
+            header: 'Name',
+            Cell: ({ cell }) => (
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '1rem',
+                }}
+              >
+                <img
+                  alt="avatar"
+                  height={30}
+                  src={cell.row.original.avatar}
+                  loading="lazy"
+                  style={{ borderRadius: '50%' }}
+                />
+                <Typography>{cell.getValue()}</Typography>
+              </Box>
+            ),
           },
           {
-            accessorKey: 'lastName',
-            enableClickToCopy: false,
-            header: 'Last Name',
-          },
-          {
-            accessorKey: 'email',
+            accessorKey: 'email', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
             header: 'Email',
             size: 400,
           },
@@ -35,6 +49,7 @@ const Example = () => {
           {
             accessorKey: 'salary',
             enableEditing: true,
+            filterVariant: 'range',
             header: 'Salary',
             //custom conditional format and styling
             Cell: ({ cell }) => (
@@ -60,14 +75,15 @@ const Example = () => {
                 })}
               </Box>
             ),
+            size: 60,
           },
           {
-            accessorKey: 'jobTitle',
+            accessorKey: 'jobTitle', //hey a simple column for once
             header: 'Job Title',
-            size: 250,
+            size: 350,
           },
           {
-            Cell: ({ cell }) => cell.getValue().toLocaleDateString(), //transform data to readable format for cell render
+            Cell: ({ cell }) => cell.getValue()?.toLocaleDateString?.(), //transform data to readable format for cell render
             Header: () => <em>Start Date</em>, //custom header markup
             accessorFn: (row) => new Date(row.startDate), //transform data before processing so sorting works
             accessorKey: 'startDate',
@@ -102,12 +118,13 @@ const Example = () => {
       enableGrouping
       enablePinning
       enableRowActions
+      enableRowNumbers
       enableRowSelection
       onEditRowSubmit={handleSaveRow}
       positionToolbarAlertBanner="bottom"
       renderDetailPanel={({ row }) => (
-        <div
-          style={{
+        <Box
+          sx={{
             display: 'flex',
             justifyContent: 'space-around',
             alignItems: 'center',
@@ -120,13 +137,13 @@ const Example = () => {
             loading="lazy"
             style={{ borderRadius: '50%' }}
           />
-          <div style={{ textAlign: 'center' }}>
+          <Box sx={{ textAlign: 'center' }}>
             <Typography variant="h4">Signature Catch Phrase:</Typography>
             <Typography variant="h1">
               &quot;{row.original.signatureCatchPhrase}&quot;
             </Typography>
-          </div>
-        </div>
+          </Box>
+        </Box>
       )}
       renderRowActionMenuItems={({ closeMenu }) => [
         <MenuItem
@@ -159,19 +176,19 @@ const Example = () => {
       renderToolbarTopCustomActions={({ table }) => {
         const handleDeactivate = () => {
           table.getSelectedRowModel().flatRows.map((row) => {
-            alert('deactivating ' + row.getValue('firstName'));
+            alert('deactivating ' + row.getValue('name'));
           });
         };
 
         const handleActivate = () => {
           table.getSelectedRowModel().flatRows.map((row) => {
-            alert('activating ' + row.getValue('firstName'));
+            alert('activating ' + row.getValue('name'));
           });
         };
 
         const handleContact = () => {
           table.getSelectedRowModel().flatRows.map((row) => {
-            alert('contact ' + row.getValue('firstName'));
+            alert('contact ' + row.getValue('name'));
           });
         };
 

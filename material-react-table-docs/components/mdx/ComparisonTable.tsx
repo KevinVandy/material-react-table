@@ -67,7 +67,7 @@ const data = [
     bundlePhobiaLink:
       'https://badgen.net/bundlephobia/minzip/material-react-table@latest?color=blue',
     description:
-      'Built on top of TanStack Table and Material UI, MRT is a batteries-included react table library that attempts to provide all the table features you need while trying to stay as highly performant and lightweight as possible. Customization is treated as a top priority to let you override any styles you need to change.',
+      'Built on top of TanStack Table V8 and Material UI V5, Material React Table is a batteries-included react table library that attempts to provide all the table features you need while trying to stay as highly performant and lightweight as possible. Customization is treated as a top priority to let you override any styles you need to change.',
   },
   {
     library: 'TanStack Table',
@@ -77,7 +77,7 @@ const data = [
     bundlePhobiaLink:
       'https://badgen.net/bundlephobia/minzip/@tanstack/react-table@latest',
     description:
-      'A lightweight Headless UI library for building powerful tables & datagrids. No CSS or Components included. You use logic from the useReactTable hook to build your own table components. No Batteries Included, but you get total control of your markup and styles. (Material React Table is built on top of TanStack Table)',
+      'TanStack Table (formerly React Table) is a lightweight Headless UI library for building powerful tables & datagrids. No CSS or Components included. You use logic from the useReactTable hook to build your own table components. No Batteries Included, but you get total control of your markup and styles. (Material React Table is built on top of TanStack Table)',
   },
   {
     library: 'Material Table',
@@ -87,7 +87,7 @@ const data = [
     bundlePhobiaLink:
       'https://badgen.net/bundlephobia/minzip/material-table?color=red',
     description:
-      'A once popular Material UI component for creating MUI tables that includes tons of features. However, it has a very large bundle size and outdated dependencies. It is mostly unmaintained now, but did recently release a version that was compatible with Material UI V5.',
+      'A once popular Material UI component for creating MUI tables that includes tons of features. However, it has a very large bundle size and outdated and insecure dependencies. It is mostly unmaintained now, but did recently release a version that was somewhat compatible with Material UI V5.',
   },
   {
     library: 'MUI X Data Grid',
