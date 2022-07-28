@@ -252,7 +252,6 @@ const FeatureTable = () => {
       data={data}
       enablePagination={false}
       enableColumnActions={false}
-      enableStickyHeader
       enableToolbarBottom={false}
       enableToolbarTop={false}
       initialState={{

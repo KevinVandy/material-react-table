@@ -78,8 +78,8 @@ const HomePage = () => {
           color="text.secondary"
           sx={{
             fontSize: {
-              xs: '1.5rem',
-              md: '2rem',
+              xs: '1.4rem',
+              md: '1.8rem',
             },
             mt: '2rem',
             mb: '1rem',
@@ -89,29 +89,34 @@ const HomePage = () => {
           }}
           variant="h2"
         >
-          Built on{' '}
-          <Box display="inline" color="secondary.main">
-            TanStack Table
-          </Box>{' '}
-          &amp;{' '}
-          <Box display="inline" color="primary.main">
-            Material UI
-          </Box>
-        </Typography>
-        <Typography color="text.secondary" m="0.5rem auto">
-          Material React Table is a fully featured{' '}
-          <Link href="https://mui.com/" passHref>
-            <MuiLink color="inherit" target="_blank" rel="noreferrer">
-              Material&nbsp;UI&nbsp;V5
-            </MuiLink>
-          </Link>{' '}
-          implementation of{' '}
+          Built with{' '}
           <Link href="https://tanstack.com/table/v8" passHref>
-            <MuiLink color="inherit" target="_blank" rel="noreferrer">
+            <MuiLink
+              color="secondary.main"
+              sx={{
+                textDecoration: 'none',
+                '&:hover': { textDecoration: 'underline' },
+              }}
+              target="_blank"
+              rel="noreferrer"
+            >
               TanStack&nbsp;Table&nbsp;V8
             </MuiLink>
+          </Link>{' '}
+          and{' '}
+          <Link href="https://mui.com/" passHref>
+            <MuiLink
+              color="primary.main"
+              sx={{
+                textDecoration: 'none',
+                '&:hover': { textDecoration: 'underline' },
+              }}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Material&nbsp;UI&nbsp;V5
+            </MuiLink>
           </Link>
-          , written from the ground up in TypeScript.
         </Typography>
         <Box
           sx={{
@@ -218,7 +223,7 @@ const HomePage = () => {
             display: 'inline',
           })}
         >
-          {`<MaterialReactTable />`}
+          &lt;MaterialReactTable&nbsp;/&gt;
         </Box>{' '}
         Right For Your Project?
       </Typography>

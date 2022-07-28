@@ -1,13 +1,13 @@
 # Material React Table
 
 <a href="https://npmjs.com/package/material-react-table" target="_blank">
-  <img alt="" src="https://badgen.net/npm/v/material-react-table" />
+  <img alt="" src="https://badgen.net/npm/v/material-react-table?color=blue" />
 </a>
 <a href="https://npmjs.com/package/material-react-table" target="_blank">
-  <img alt="" src="https://img.shields.io/npm/dm/material-react-table.svg" />
+  <img alt="" src="https://img.shields.io/npm/dm/material-react-table.svg?color=blue" />
 </a>
 <a href="https://bundlephobia.com/result?p=material-react-table" target="_blank">
-  <img alt="" src="https://badgen.net/bundlephobia/minzip/material-react-table@latest" />
+  <img alt="" src="https://badgen.net/bundlephobia/minzip/material-react-table@latest?color=blue" />
 </a>
 <a href="https://github.com/KevinVandy/material-react-table" target="_blank">
   <img alt="" src="https://img.shields.io/github/stars/KevinVandy/material-react-table.svg?style=social&label=Star" />
