@@ -18,14 +18,17 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
           accessorKey: 'columnOption',
           enableClickToCopy: true,
           header: 'Column Option',
-          Cell: ({ cell }) =>
-            cell.row.original?.required ? (
-              <strong style={{ color: theme.palette.primary.dark }}>
-                <>{cell.getValue()}*</>
-              </strong>
-            ) : (
-              cell.getValue()
-            ),
+          Cell: ({ cell }) => (
+            <span id={`${cell.getValue<string>()}-column-option`}>
+              {cell.row.original?.required ? (
+                <strong style={{ color: theme.palette.primary.dark }}>
+                  {cell.getValue<string>()}*
+                </strong>
+              ) : (
+                cell.getValue<string>()
+              )}
+            </span>
+          ),
         },
         { accessorKey: 'type', header: 'Type', enableGlobalFilter: false },
         {

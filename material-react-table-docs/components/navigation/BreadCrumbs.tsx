@@ -30,7 +30,12 @@ const BreadCrumbs = () => {
             sx={{ cursor: 'pointer', textTransform: 'capitalize' }}
             underline="hover"
           >
-            {link.split('/').pop()?.replaceAll('-', ' ')}
+            {link
+              .split('/')
+              .pop()
+              ?.replaceAll('-', ' ')
+              ?.replaceAll('css', 'CSS')
+              ?.replaceAll(' ui', ' UI')}
           </MuiLink>
         </Link>
       ))}

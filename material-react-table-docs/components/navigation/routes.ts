@@ -98,7 +98,7 @@ export const routes = [
             label: 'Customize CSS',
           },
           {
-            href: '/docs/guides/customize-mui',
+            href: '/docs/guides/customize-material-ui',
             label: 'Customize Material-UI',
           },
           {

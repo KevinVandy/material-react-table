@@ -21,14 +21,17 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
           enableClickToCopy: true,
           header: 'Prop Name',
           accessorKey: 'propName',
-          Cell: ({ cell }) =>
-            cell.row.original?.required ? (
-              <strong style={{ color: theme.palette.primary.dark }}>
-                <>{cell.getValue()}*</>
-              </strong>
-            ) : (
-              cell.getValue()
-            ),
+          Cell: ({ cell }) => (
+            <span id={`${cell.getValue<string>()}-prop`}>
+              {cell.row.original?.required ? (
+                <strong style={{ color: theme.palette.primary.dark }}>
+                  {cell.getValue<string>()}*
+                </strong>
+              ) : (
+                cell.getValue<string>()
+              )}
+            </span>
+          ),
         },
         { header: 'Type', accessorKey: 'type', enableGlobalFilter: false },
         {

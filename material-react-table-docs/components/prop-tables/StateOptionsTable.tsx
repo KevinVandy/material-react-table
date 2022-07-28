@@ -19,6 +19,11 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
           accessorKey: 'stateOption',
           enableClickToCopy: true,
           header: 'State Option',
+          Cell: ({ cell }) => (
+            <span id={`${cell.getValue<string>()}-state-option`}>
+              {cell.getValue<string>()}
+            </span>
+          ),
         },
         { accessorKey: 'type', header: 'Type', enableGlobalFilter: false },
         {
