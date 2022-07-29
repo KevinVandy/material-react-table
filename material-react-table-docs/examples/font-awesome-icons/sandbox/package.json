@@ -1,5 +1,5 @@
 {
-  "name": "material-react-table-example-enable-row-numbers-original",
+  "name": "material-react-table-example-font-awesome-icons",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -11,6 +11,9 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "@fortawesome/fontawesome-svg-core": "^6.1.2",
+    "@fortawesome/free-regular-svg-icons": "^6.1.2",
+    "@fortawesome/free-solid-svg-icons": "^6.1.2",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.0",
     "material-react-table": "^0.30.1",

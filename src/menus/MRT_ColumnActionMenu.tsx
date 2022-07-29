@@ -100,7 +100,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
 
   const handleGroupByColumn = () => {
     column.toggleGrouping();
-    setColumnOrder((old) => ['mrt-row-expand', ...old]);
+    setColumnOrder((old: any) => ['mrt-row-expand', ...old]);
     setAnchorEl(null);
   };
 
@@ -186,7 +186,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           >
             <Box sx={commonListItemStyles}>
               <ListItemIcon>
-                <SortIcon />
+                <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
               </ListItemIcon>
               {localization.sortByColumnAsc?.replace(
                 '{column}',
@@ -203,7 +203,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
           >
             <Box sx={commonListItemStyles}>
               <ListItemIcon>
-                <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
+                <SortIcon />
               </ListItemIcon>
               {localization.sortByColumnDesc?.replace(
                 '{column}',
