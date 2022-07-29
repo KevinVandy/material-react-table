@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
+import { data } from './makeData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowDownWideShort,
@@ -18,7 +19,9 @@ import {
   faSearchMinus,
   faThumbTack,
 } from '@fortawesome/free-solid-svg-icons';
-import { data } from './makeData';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from '@fortawesome/fontawesome-svg-core';
+config.autoAddCss = false;
 
 /**
  * This is just some of the icons visible in this table's feature set.

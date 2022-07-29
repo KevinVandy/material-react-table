@@ -13,7 +13,6 @@
     "@emotion/styled": "^11.9.3",
     "@faker-js/faker": "^7.3.0",
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
-    "@fortawesome/free-regular-svg-icons": "^6.1.2",
     "@fortawesome/free-solid-svg-icons": "^6.1.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mdx-js/loader": "^2.1.2",

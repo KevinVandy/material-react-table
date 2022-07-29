@@ -297,7 +297,7 @@ export const MRT_FilterTextField: FC<Props> = ({
         sx={(theme) => ({
           p: 0,
           minWidth: !filterChipLabel ? '6rem' : 'auto',
-          width: 'calc(100% + 0.5rem)',
+          width: '100%',
           '&	.MuiSelect-icon': {
             mr: '1.5rem',
           },
@@ -311,30 +311,32 @@ export const MRT_FilterTextField: FC<Props> = ({
             <Box sx={{ opacity: 0.5 }}>{filterPlaceholder}</Box>
           </MenuItem>
         )}
-        {columnDef?.filterSelectOptions?.map((option) => {
-          let value: string;
-          let text: string;
-          if (typeof option !== 'object') {
-            value = option;
-            text = option;
-          } else {
-            value = option.value;
-            text = option.text;
-          }
-          return (
-            <MenuItem key={value} value={value}>
-              {isMultiSelectFilter && (
-                <Checkbox
-                  checked={(
-                    (column.getFilterValue() ?? []) as string[]
-                  ).includes(value)}
-                  sx={{ mr: '0.5rem' }}
-                />
-              )}
-              <ListItemText>{text}</ListItemText>
-            </MenuItem>
-          );
-        })}
+        {columnDef?.filterSelectOptions?.map(
+          (option: string | { text: string; value: string }) => {
+            let value: string;
+            let text: string;
+            if (typeof option !== 'object') {
+              value = option;
+              text = option;
+            } else {
+              value = option.value;
+              text = option.text;
+            }
+            return (
+              <MenuItem key={value} value={value}>
+                {isMultiSelectFilter && (
+                  <Checkbox
+                    checked={(
+                      (column.getFilterValue() ?? []) as string[]
+                    ).includes(value)}
+                    sx={{ mr: '0.5rem' }}
+                  />
+                )}
+                <ListItemText>{text}</ListItemText>
+              </MenuItem>
+            );
+          },
+        )}
       </TextField>
       <MRT_FilterOptionMenu
         anchorEl={anchorEl}
