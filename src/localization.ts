@@ -10,6 +10,7 @@ export interface MRT_Localization {
   clickToCopy: string;
   columnActions: string;
   copiedToClipboard: string;
+  dropToGroupBy: string;
   edit: string;
   expand: string;
   expandAll: string;
@@ -91,6 +92,7 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   clickToCopy: 'Click to copy',
   columnActions: 'Column Actions',
   copiedToClipboard: 'Copied to clipboard',
+  dropToGroupBy: 'Drop to group by {column}',
   edit: 'Edit',
   expand: 'Expand',
   expandAll: 'Expand all',

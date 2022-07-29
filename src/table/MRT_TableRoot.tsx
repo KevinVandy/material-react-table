@@ -80,12 +80,12 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
     useState<MRT_Cell<TData> | null>(initialState.currentEditingCell ?? null);
   const [currentEditingRow, setCurrentEditingRow] =
     useState<MRT_Row<TData> | null>(initialState.currentEditingRow ?? null);
-  const [currentHoveredColumn, setCurrentHoveredColumn] =
-    useState<MRT_Column<TData> | null>(
-      initialState.currentHoveredColumn ?? null,
-    );
-  const [currentHoveredRow, setCurrentHoveredRow] =
-    useState<MRT_Row<TData> | null>(initialState.currentHoveredRow ?? null);
+  const [currentHoveredColumn, setCurrentHoveredColumn] = useState<
+    MRT_Column<TData> | { id: string } | null
+  >(initialState.currentHoveredColumn ?? null);
+  const [currentHoveredRow, setCurrentHoveredRow] = useState<
+    MRT_Row<TData> | { id: string } | null
+  >(initialState.currentHoveredRow ?? null);
   const [density, setDensity] = useState(
     initialState?.density ?? 'comfortable',
   );
@@ -248,11 +248,12 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       getPaginationRowModel: getPaginationRowModel(),
       getSortedRowModel: getSortedRowModel(),
       onColumnOrderChange: setColumnOrder,
+      getSubRows: (row) => row?.subRows,
       ...props,
       //@ts-ignore
       columns: columnDefs,
       data,
-      getSubRows: (row) => row?.subRows,
+
       globalFilterFn:
         //@ts-ignore
         MRT_FilterFns[currentGlobalFilterFn] ?? MRT_FilterFns.fuzzy,

@@ -55,12 +55,16 @@ export const MRT_TableHeadCellGrabHandle: FC<Props> = ({
       draggedColumn: column,
       targetColumn: currentHoveredColumn,
     });
-    if (
+    if (currentHoveredColumn?.id === 'drop-zone') {
+      column.toggleGrouping();
+    } else if (
       enableColumnOrdering &&
       currentHoveredColumn &&
       currentHoveredColumn?.id !== currentDraggingColumn?.id
     ) {
-      setColumnOrder(reorderColumn(column, currentHoveredColumn, columnOrder));
+      setColumnOrder(
+        reorderColumn(column, currentHoveredColumn as MRT_Column, columnOrder),
+      );
     }
     setCurrentDraggingColumn(null);
     setCurrentHoveredColumn(null);

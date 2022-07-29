@@ -104,8 +104,12 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
     }>
   >;
   setCurrentGlobalFilterFn: Dispatch<SetStateAction<MRT_FilterOption>>;
-  setCurrentHoveredColumn: Dispatch<SetStateAction<MRT_Column<TData> | null>>;
-  setCurrentHoveredRow: Dispatch<SetStateAction<MRT_Row | null>>;
+  setCurrentHoveredColumn: Dispatch<
+    SetStateAction<MRT_Column<TData> | { id: string } | null>
+  >;
+  setCurrentHoveredRow: Dispatch<
+    SetStateAction<MRT_Row<TData> | { id: string } | null>
+  >;
   setDensity: Dispatch<SetStateAction<'comfortable' | 'compact' | 'spacious'>>;
   setIsFullScreen: Dispatch<SetStateAction<boolean>>;
   setShowAlertBanner: Dispatch<SetStateAction<boolean>>;
@@ -121,8 +125,8 @@ export type MRT_TableState<TData extends Record<string, any> = {}> =
     currentEditingRow: MRT_Row<TData> | null;
     currentFilterFns: Record<string, MRT_FilterOption>;
     currentGlobalFilterFn: Record<string, MRT_FilterOption>;
-    currentHoveredColumn: MRT_Column<TData> | null;
-    currentHoveredRow: MRT_Row<TData> | null;
+    currentHoveredColumn: MRT_Column<TData> | { id: string } | null;
+    currentHoveredRow: MRT_Row<TData> | { id: string } | null;
     density: 'comfortable' | 'compact' | 'spacious';
     isFullScreen: boolean;
     isLoading: boolean;
@@ -689,7 +693,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     }: {
       event: DragEvent<HTMLButtonElement>;
       draggedColumn: MRT_Column<TData>;
-      targetColumn: MRT_Column<TData> | null;
+      targetColumn: MRT_Column<TData> | { id: string } | null;
     }) => void;
     onCurrentDraggingColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
     onCurrentDraggingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
@@ -715,7 +719,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     }: {
       event: DragEvent<HTMLButtonElement>;
       draggedRow: MRT_Row<TData>;
-      targetRow: MRT_Row<TData> | null;
+      targetRow: MRT_Row<TData> | { id: string } | null;
     }) => void;
     onShowAlertBannerChange?: OnChangeFn<boolean>;
     onShowFiltersChange?: OnChangeFn<boolean>;
@@ -725,7 +729,8 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     positionExpandColumn?: 'first' | 'last';
     positionGlobalFilter?: 'left' | 'right';
     positionPagination?: 'bottom' | 'top' | 'both';
-    positionToolbarAlertBanner?: 'bottom' | 'top';
+    positionToolbarAlertBanner?: 'bottom' | 'top' | 'none';
+    positionToolbarDropZone?: 'bottom' | 'top' | 'none' | 'both';
     renderDetailPanel?: ({
       row,
       table,
@@ -833,6 +838,7 @@ export default <TData extends Record<string, any> = {}>({
   positionGlobalFilter = 'right',
   positionPagination = 'bottom',
   positionToolbarAlertBanner = 'top',
+  positionToolbarDropZone = 'top',
   rowNumberMode = 'original',
   selectAllMode = 'all',
   ...rest
@@ -876,6 +882,7 @@ export default <TData extends Record<string, any> = {}>({
     positionGlobalFilter={positionGlobalFilter}
     positionPagination={positionPagination}
     positionToolbarAlertBanner={positionToolbarAlertBanner}
+    positionToolbarDropZone={positionToolbarDropZone}
     rowNumberMode={rowNumberMode}
     selectAllMode={selectAllMode}
     {...rest}

@@ -35,6 +35,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
       enableClickToCopy,
       enableColumnOrdering,
       enableEditing,
+      enableGrouping,
       enablePagination,
       enableRowNumbers,
       muiTableBodyCellProps,
@@ -129,6 +130,9 @@ export const MRT_TableBodyCell: FC<Props> = ({
   };
 
   const handleDragEnter = (_e: DragEvent) => {
+    if (enableGrouping && currentHoveredColumn?.id === 'drop-zone') {
+      setCurrentHoveredColumn(null);
+    }
     if (enableColumnOrdering && currentDraggingColumn) {
       setCurrentHoveredColumn(
         columnDef.enableColumnOrdering !== false ? column : null,

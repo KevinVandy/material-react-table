@@ -71,6 +71,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
   };
 
   const handleDragEnter = (_e: DragEvent) => {
+    if (enableGrouping && currentHoveredColumn?.id === 'drop-zone') {
+      setCurrentHoveredColumn(null);
+    }
     if (enableColumnOrdering && currentDraggingColumn) {
       setCurrentHoveredColumn(
         columnDef.enableColumnOrdering !== false ? column : null,

@@ -1568,6 +1568,16 @@ export const rootProps = [
     type: '',
   },
   {
+    propName: 'positionToolbarDropZone',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: "'bottom' | 'top' | 'both' | 'none'",
+  },
+  {
     propName: 'renderDetailPanel',
     defaultValue: '',
     description: '',

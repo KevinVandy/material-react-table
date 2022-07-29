@@ -1,5 +1,5 @@
 {
-  "version": "0.30.2",
+  "version": "0.31.0",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -49,11 +49,11 @@
   "size-limit": [
     {
       "path": "dist/material-react-table.cjs.production.min.js",
-      "limit": "40 KB"
+      "limit": "50 KB"
     },
     {
       "path": "dist/material-react-table.esm.js",
-      "limit": "40 KB"
+      "limit": "50 KB"
     }
   ],
   "devDependencies": {

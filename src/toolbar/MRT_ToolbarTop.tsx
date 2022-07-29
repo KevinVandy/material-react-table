@@ -6,6 +6,7 @@ import { MRT_TableInstance } from '..';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
+import { MRT_ToolbarDropZone } from './MRT_ToolbarDropZone';
 
 export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
   alignItems: 'flex-start',
@@ -34,6 +35,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ table }) => {
       positionGlobalFilter,
       positionPagination,
       positionToolbarAlertBanner,
+      positionToolbarDropZone,
       renderToolbarTopCustomActions,
       tableId,
     },
@@ -72,6 +74,9 @@ export const MRT_ToolbarTop: FC<Props> = ({ table }) => {
           stackAlertBanner={stackAlertBanner}
           table={table}
         />
+      )}
+      {['both', 'top'].includes(positionToolbarDropZone ?? '') && (
+        <MRT_ToolbarDropZone table={table} />
       )}
       <Box
         sx={{

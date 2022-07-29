@@ -5,6 +5,7 @@ import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
 import { commonToolbarStyles } from './MRT_ToolbarTop';
 import { MRT_TableInstance } from '..';
+import { MRT_ToolbarDropZone } from './MRT_ToolbarDropZone';
 
 interface Props {
   table: MRT_TableInstance;
@@ -18,6 +19,7 @@ export const MRT_ToolbarBottom: FC<Props> = ({ table }) => {
       muiTableToolbarBottomProps,
       positionPagination,
       positionToolbarAlertBanner,
+      positionToolbarDropZone,
       renderToolbarBottomCustomActions,
       tableId,
     },
@@ -55,6 +57,9 @@ export const MRT_ToolbarBottom: FC<Props> = ({ table }) => {
       <MRT_LinearProgressBar isTopToolbar={false} table={table} />
       {positionToolbarAlertBanner === 'bottom' && (
         <MRT_ToolbarAlertBanner table={table} />
+      )}
+      {['both', 'bottom'].includes(positionToolbarDropZone ?? '') && (
+        <MRT_ToolbarDropZone table={table} />
       )}
       <Box
         sx={{
