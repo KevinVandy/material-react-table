@@ -147,9 +147,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
         pb:
           columnDefType === 'display'
             ? 0
-            : showColumnFilters
-            ? '0.5rem'
-            : undefined,
+            : showColumnFilters || density === 'compact'
+            ? '0.4rem'
+            : '0.6rem',
         position:
           column.getIsPinned() && columnDefType !== 'group'
             ? 'sticky'

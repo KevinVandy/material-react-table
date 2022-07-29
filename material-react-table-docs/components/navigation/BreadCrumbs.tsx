@@ -35,7 +35,8 @@ const BreadCrumbs = () => {
               .pop()
               ?.replaceAll('-', ' ')
               ?.replaceAll('css', 'CSS')
-              ?.replaceAll(' ui', ' UI')}
+              ?.replaceAll(' ui', ' UI')
+              ?.replaceAll('api', 'API')}
           </MuiLink>
         </Link>
       ))}

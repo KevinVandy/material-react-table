@@ -81,15 +81,13 @@ const TopBar: FC<Props> = ({
               }}
               variant="h1"
             >
-              {!isMobile && (
-                <Image
-                  alt="MRT logo"
-                  src="/mrt_logo.svg"
-                  height={50}
-                  width={50}
-                />
-              )}
-              {isMobile ? 'MRT' : 'Material React Table'}
+              <Image
+                alt="MRT logo"
+                src="/mrt_logo.svg"
+                height={50}
+                width={50}
+              />
+              {!isMobile && 'Material React Table'}
             </Typography>
           </Link>
         </Flex>

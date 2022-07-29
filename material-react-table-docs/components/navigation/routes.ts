@@ -13,14 +13,14 @@ export const routes = [
   },
   {
     label: 'Getting Started',
-    href: '/docs',
+    href: '/docs/getting-started',
     items: [
       {
-        href: '/docs/install',
+        href: '/docs/getting-started/install',
         label: 'Install',
       },
       {
-        href: '/docs/usage',
+        href: '/docs/getting-started/usage',
         label: 'Usage',
       },
     ],
@@ -106,52 +106,18 @@ export const routes = [
             label: 'Customize Icons',
           },
           {
+            href: '/docs/guides/customize-toolbars',
+            label: 'Customize Toolbars',
+          },
+          {
             href: '/docs/guides/localization',
             label: 'Localization (i18n)',
           },
         ],
       },
       {
-        label: 'Default Feature Guides',
-        href: '/docs/guides#default-feature-guides',
-        items: [
-          {
-            href: '/docs/guides/column-actions',
-            label: 'Column Actions',
-          },
-          {
-            href: '/docs/guides/column-hiding',
-            label: 'Column Hiding',
-          },
-          {
-            href: '/docs/guides/density-toggle',
-            label: 'Density Toggle',
-          },
-          {
-            href: '/docs/guides/full-screen-toggle',
-            label: 'Full Screen Toggle',
-          },
-          {
-            href: '/docs/guides/filtering',
-            label: 'Filtering',
-          },
-          {
-            href: '/docs/guides/global-filtering',
-            label: 'Global Filtering (Search)',
-          },
-          {
-            href: '/docs/guides/pagination',
-            label: 'Pagination',
-          },
-          {
-            href: '/docs/guides/sorting',
-            label: 'Sorting',
-          },
-        ],
-      },
-      {
-        label: 'More Feature Guides',
-        href: '/docs/guides#more-feature-guides',
+        label: 'Feature Guides',
+        href: '/docs/guides#feature-guides',
         items: [
           {
             href: '/docs/guides/aggregation-and-grouping',
@@ -162,8 +128,20 @@ export const routes = [
             label: 'Click to Copy',
           },
           {
-            href: '/docs/guides/column-resizing',
-            label: 'Column Resizing',
+            href: '/docs/guides/column-actions',
+            label: 'Column Actions',
+          },
+          {
+            href: '/docs/guides/column-dragging',
+            label: 'Column Dragging',
+          },
+          {
+            href: '/docs/guides/column-filtering',
+            label: 'Column Filtering',
+          },
+          {
+            href: '/docs/guides/column-hiding',
+            label: 'Column Hiding',
           },
           {
             href: '/docs/guides/column-ordering',
@@ -174,24 +152,44 @@ export const routes = [
             label: 'Column Pinning',
           },
           {
-            href: '/docs/guides/customize-toolbars',
-            label: 'Customize Toolbars',
+            href: '/docs/guides/column-resizing',
+            label: 'Column Resizing',
           },
           {
-            href: '/docs/guides/editing',
-            label: 'Data Editing (Editable)',
+            href: '/docs/guides/density-toggle',
+            label: 'Density Toggle',
           },
           {
             href: '/docs/guides/detail-panel',
             label: 'Detail Panel (Expanding)',
           },
           {
+            href: '/docs/guides/editing',
+            label: 'Editing (Editable)',
+          },
+          {
             href: '/docs/guides/expanding-sub-rows',
             label: 'Expanding Sub-Rows (Tree)',
           },
           {
+            href: '/docs/guides/full-screen-toggle',
+            label: 'Full Screen Toggle',
+          },
+          {
+            href: '/docs/guides/global-filtering',
+            label: 'Global Filtering (Search)',
+          },
+          {
+            href: '/docs/guides/pagination',
+            label: 'Pagination',
+          },
+          {
             href: '/docs/guides/row-actions',
             label: 'Row Actions (Buttons)',
+          },
+          {
+            href: '/docs/guides/row-dragging',
+            label: 'Row Dragging',
           },
           {
             href: '/docs/guides/row-numbers',
@@ -206,12 +204,16 @@ export const routes = [
             label: 'Row Selection (Checkboxes)',
           },
           {
-            href: '/docs/guides/sticky-header',
-            label: 'Sticky Header',
-          },
-          {
             href: '/docs/guides/row-virtualization',
             label: 'Row Virtualization',
+          },
+          {
+            href: '/docs/guides/sorting',
+            label: 'Sorting',
+          },
+          {
+            href: '/docs/guides/sticky-header',
+            label: 'Sticky Header',
           },
         ],
       },

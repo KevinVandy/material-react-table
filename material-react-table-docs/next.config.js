@@ -34,4 +34,23 @@ module.exports = withMDX({
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/docs/guides/filtering',
+        destination: '/docs/guides/column-filtering',
+        permanent: true,
+      },
+      {
+        source: '/docs/install',
+        destination: '/docs/getting-started/install',
+        permanent: true,
+      },
+      {
+        source: '/docs/usage',
+        destination: '/docs/getting-started/usage',
+        permanent: true,
+      },
+    ];
+  },
 });

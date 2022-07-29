@@ -17,7 +17,7 @@ const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
   color: theme.palette.primary.dark,
   cursor: 'pointer',
   fontSize: '1rem',
-  height: '2.5rem',
+  height: '2.25rem',
   padding: '0',
   transition: 'all .3s ease',
   whiteSpace: 'nowrap',
@@ -55,6 +55,7 @@ const ListItemHeaderLevel2 = styled(ListItemHeaderLevel1)(({ theme }) => ({
       ? theme.palette.grey[300]
       : theme.palette.grey[700],
   fontSize: '1rem',
+  height: '2.25rem',
   '> a': {
     paddingLeft: '2rem',
   },

@@ -1,0 +1,17 @@
+import Head from 'next/head';
+import TableOfContentsList from '../../../components/navigation/TableOfContentsList';
+import { routes } from '../../../components/navigation/routes';
+
+<Head>
+  <title>Material React Table Docs - Getting Started</title>
+  <meta
+    name="description"
+    content="Getting Started with Material React Table"
+  />
+</Head>
+
+## Getting Started
+
+<TableOfContentsList
+  items={routes.find((item) => item.href === '/docs/getting-started').items}
+/>

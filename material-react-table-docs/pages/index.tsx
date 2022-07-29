@@ -24,7 +24,7 @@ const HomePage = () => {
           sx={{
             textAlign: 'center',
             fontSize: {
-              xs: '2rem',
+              xs: '1.8rem',
               sm: '3rem',
               md: '4rem',
               lg: '5rem',
@@ -46,10 +46,71 @@ const HomePage = () => {
           variant="h1"
         >
           Welcome To
-          <Box sx={(theme) => ({ color: theme.palette.primary.main })}>
-            Material React Table
+          <br />
+          <Box
+            sx={(theme) => ({
+              color: theme.palette.primary.main,
+              display: 'inline',
+            })}
+          >
+            Material
+          </Box>
+          &nbsp;
+          <Box
+            sx={(theme) => ({
+              color: theme.palette.secondary.main,
+              display: 'inline',
+            })}
+          >
+            React&nbsp;Table
           </Box>
         </Typography>
+        <Typography
+          color="text.secondary"
+          sx={{
+            fontSize: {
+              xs: '1.4rem',
+              sm: '1.5rem',
+              md: '2rem',
+            },
+            mt: '1rem',
+            mb: '3rem',
+            textAlign: 'center',
+            lineHeight: '2.25rem',
+            fontWeight: 'normal',
+          }}
+          variant="h2"
+        >
+          Built with{' '}
+          <Link href="https://mui.com/" passHref>
+            <MuiLink
+              color="primary.main"
+              sx={{
+                textDecoration: 'none',
+                '&:hover': { textDecoration: 'underline' },
+              }}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Material&nbsp;UI&nbsp;V5
+            </MuiLink>
+          </Link>{' '}
+          and{' '}
+          <Link href="https://tanstack.com/table/v8" passHref>
+            <MuiLink
+              color="secondary.main"
+              sx={{
+                textDecoration: 'none',
+                '&:hover': { textDecoration: 'underline' },
+              }}
+              target="_blank"
+              rel="noreferrer"
+            >
+              TanStack&nbsp;Table&nbsp;V8
+            </MuiLink>
+          </Link>
+        </Typography>
+        <StatBadges />
         <Typography
           color="text.secondary"
           sx={{
@@ -57,7 +118,7 @@ const HomePage = () => {
               xs: '1.2rem',
               md: '1.4rem',
             },
-            mb: '2rem',
+            mt: '2rem',
             textAlign: 'center',
             lineHeight: '2.25rem',
             fontWeight: 'normal',
@@ -73,51 +134,7 @@ const HomePage = () => {
             Material&nbsp;Design
           </Box>
         </Typography>
-        <StatBadges />
-        <Typography
-          color="text.secondary"
-          sx={{
-            fontSize: {
-              xs: '1.4rem',
-              md: '1.8rem',
-            },
-            mt: '2rem',
-            mb: '1rem',
-            textAlign: 'center',
-            lineHeight: '2.25rem',
-            fontWeight: 'normal',
-          }}
-          variant="h2"
-        >
-          Built with{' '}
-          <Link href="https://tanstack.com/table/v8" passHref>
-            <MuiLink
-              color="secondary.main"
-              sx={{
-                textDecoration: 'none',
-                '&:hover': { textDecoration: 'underline' },
-              }}
-              target="_blank"
-              rel="noreferrer"
-            >
-              TanStack&nbsp;Table&nbsp;V8
-            </MuiLink>
-          </Link>{' '}
-          and{' '}
-          <Link href="https://mui.com/" passHref>
-            <MuiLink
-              color="primary.main"
-              sx={{
-                textDecoration: 'none',
-                '&:hover': { textDecoration: 'underline' },
-              }}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Material&nbsp;UI&nbsp;V5
-            </MuiLink>
-          </Link>
-        </Typography>
+
         <Box
           sx={{
             m: '3rem auto',
