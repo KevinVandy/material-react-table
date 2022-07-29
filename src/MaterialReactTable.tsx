@@ -390,13 +390,17 @@ export type MRT_Cell<TData extends Record<string, any> = {}> = Omit<
   row: MRT_Row<TData>;
 };
 
-export type MRT_SortingOption = keyof typeof MRT_SortingFns;
+export type MRT_SortingOption = LiteralUnion<
+  string & keyof typeof MRT_SortingFns
+>;
 
 export type MRT_SortingFn<TData extends Record<string, any> = {}> =
   | SortingFn<TData>
   | MRT_SortingOption;
 
-export type MRT_FilterOption = keyof typeof MRT_FilterFns;
+export type MRT_FilterOption = LiteralUnion<
+  string & keyof typeof MRT_FilterFns
+>;
 
 export type MRT_FilterFn<TData extends Record<string, any> = {}> =
   | FilterFn<TData>

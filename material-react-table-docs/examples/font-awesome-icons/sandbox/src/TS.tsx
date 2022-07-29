@@ -27,7 +27,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false;
 
 /**
- * This is just some of the icons visible in this table's feature set.
+ * These are just some of the icons visible in this table's feature set.
  * If you skip customizing some icons, those particular icons will fallback the the default Material-UI icons.
  */
 const fontAwesomeIcons: Partial<MRT_Icons> = {
@@ -36,11 +36,13 @@ const fontAwesomeIcons: Partial<MRT_Icons> = {
   DensityMediumIcon: () => <FontAwesomeIcon icon={faBars} />,
   DensitySmallIcon: () => <FontAwesomeIcon icon={faBars} />,
   DragHandleIcon: () => <FontAwesomeIcon icon={faGripLines} />,
-  FilterListIcon: () => <FontAwesomeIcon icon={faFilter} />,
+  FilterListIcon: (props: any) => (
+    <FontAwesomeIcon icon={faFilter} {...props} />
+  ),
   FilterListOffIcon: () => <FontAwesomeIcon icon={faFilterCircleXmark} />,
   FullscreenExitIcon: () => <FontAwesomeIcon icon={faCompress} />,
   FullscreenIcon: () => <FontAwesomeIcon icon={faExpand} />,
-  SearchIcon: () => <FontAwesomeIcon icon={faSearch} />,
+  SearchIcon: (props: any) => <FontAwesomeIcon icon={faSearch} {...props} />,
   SearchOffIcon: () => <FontAwesomeIcon icon={faSearchMinus} />,
   ViewColumnIcon: () => <FontAwesomeIcon icon={faColumns} />,
   MoreVertIcon: () => <FontAwesomeIcon icon={faEllipsisVertical} />,

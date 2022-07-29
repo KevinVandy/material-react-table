@@ -250,7 +250,7 @@ export const MRT_FilterTextField: FC<Props> = ({
               )}
             </InputAdornment>
           ) : (
-            <FilterListIcon />
+            <FilterListIcon style={{ marginRight: '4px' }} />
           ),
           endAdornment: !filterChipLabel && (
             <InputAdornment position="end">

@@ -86,7 +86,7 @@ export const MRT_GlobalFilterTextField: FC<Props> = ({ table }) => {
               </Tooltip>
             </InputAdornment>
           ) : (
-            <SearchIcon />
+            <SearchIcon style={{ marginRight: '4px' }} />
           ),
           endAdornment: (
             <InputAdornment position="end">

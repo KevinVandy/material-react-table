@@ -286,6 +286,48 @@ export const CustomFilterFunctionPerColumn: Story<
   />
 );
 
+export const CustomFilterFns: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        accessorKey: 'firstName',
+      },
+      {
+        header: 'Last Name',
+        accessorKey: 'lastName',
+      },
+      {
+        header: 'Age',
+        accessorKey: 'age',
+      },
+      {
+        header: 'Gender',
+        accessorKey: 'gender',
+        filterFn: 'customFn',
+      },
+      {
+        header: 'Address',
+        accessorKey: 'address',
+      },
+      {
+        header: 'State',
+        accessorKey: 'state',
+        filterFn: 'customFn',
+      },
+    ]}
+    data={data}
+    initialState={{ showColumnFilters: true }}
+    filterFns={{
+      customFn: (row, _columnIds, filterValue) =>
+        row
+          .getValue<string>('state')
+          .toLowerCase()
+          .startsWith(filterValue.toLowerCase()),
+    }}
+  />
+);
+
 export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={[

@@ -28,7 +28,12 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
     },
     setCurrentHoveredColumn,
   } = table;
-  const { density, currentDraggingColumn, currentHoveredColumn } = getState();
+  const {
+    density,
+    currentDraggingColumn,
+    currentHoveredColumn,
+    showColumnFilters,
+  } = getState();
   const { column } = header;
   const { columnDef } = column;
   const { columnDefType } = columnDef;
@@ -136,7 +141,12 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
             : columnDefType === 'display'
             ? '1rem 1.25rem'
             : '1.5rem',
-        pb: columnDefType === 'display' ? 0 : undefined,
+        pb:
+          columnDefType === 'display'
+            ? 0
+            : showColumnFilters
+            ? '0.5rem'
+            : undefined,
         position:
           column.getIsPinned() && columnDefType !== 'group'
             ? 'sticky'

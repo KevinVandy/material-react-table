@@ -51,6 +51,7 @@ export const prepareColumns = <TData extends Record<string, any> = {}>(
     } else if (columnDef.columnDefType === 'data') {
       if (Object.keys(MRT_FilterFns).includes(currentFilterFns[columnDef.id])) {
         columnDef.filterFn =
+          // @ts-ignore
           MRT_FilterFns[currentFilterFns[columnDef.id]] ?? MRT_FilterFns.fuzzy;
         //@ts-ignore
         columnDef._filterFn = currentFilterFns[columnDef.id];

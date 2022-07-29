@@ -254,6 +254,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       data,
       getSubRows: (row) => row?.subRows,
       globalFilterFn:
+        //@ts-ignore
         MRT_FilterFns[currentGlobalFilterFn] ?? MRT_FilterFns.fuzzy,
       initialState,
       state: {
