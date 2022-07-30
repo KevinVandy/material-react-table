@@ -1,9 +1,10 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /api/data
 
 # Host
-Host: https://material-react-table.com
+Host: https://www.material-react-table.com
 
 # Sitemaps
-Sitemap: https://material-react-table.com/sitemap.xml
+Sitemap: https://www.material-react-table.com/sitemap.xml

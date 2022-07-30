@@ -91,7 +91,7 @@ _All features can easily be enabled/disabled_
 
 ### Installation
 
-View the full [Installation Docs](https://www.material-react-table.com/docs/install)
+View the full [Installation Docs](https://www.material-react-table.com/docs/getting-started/install)
 
 1. Install Peer Dependencies (Material UI V5)
 
@@ -111,7 +111,7 @@ npm install material-react-table
 
 ### Usage
 
-> Read the full usage docs [here](https://www.material-react-table.com/docs/usage/)
+> Read the full usage docs [here](https://www.material-react-table.com/docs/getting-started/usage/)
 
 ```jsx
 import React, { useMemo, useState, useEffect } from 'react';
@@ -181,4 +181,3 @@ _Open in [Code Sandbox](https://codesandbox.io/s/simple-material-react-table-exa
 </a>
 
 PRs are Welcome, but please discuss in [GitHub Discussions](https://github.com/KevinVandy/material-react-table/discussions) or the [Discord Server](https://discord.gg/5wqyRx6fnm) first!
-
