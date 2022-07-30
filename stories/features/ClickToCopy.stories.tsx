@@ -15,11 +15,11 @@ export default meta;
 const columns: MRT_ColumnDef<typeof data[0]>[] = [
   {
     header: 'First Name',
-    accessorKey: 'firstName',
+    accessorKey: 'name.firstName',
   },
   {
     header: 'Last Name',
-    accessorKey: 'lastName',
+    accessorKey: 'name.lastName',
   },
   {
     header: 'Email Address',
@@ -40,8 +40,10 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
 ];
 
 const data = [...Array(100)].map(() => ({
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
+  name: {
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+  },
   email: faker.internet.email(),
   address: faker.address.streetAddress(),
   city: faker.address.city(),
@@ -59,11 +61,11 @@ export const ClickToCopyEnabledPerColumn: Story<
     columns={[
       {
         header: 'First Name',
-        accessorKey: 'firstName',
+        accessorKey: 'name.firstName',
       },
       {
         header: 'Last Name',
-        accessorKey: 'lastName',
+        accessorKey: 'name.lastName',
       },
       {
         header: 'Email Address',
@@ -94,11 +96,11 @@ export const ClickToCopyDisabledPerColumn: Story<
     columns={[
       {
         header: 'First Name',
-        accessorKey: 'firstName',
+        accessorKey: 'name.firstName',
       },
       {
         header: 'Last Name',
-        accessorKey: 'lastName',
+        accessorKey: 'name.lastName',
       },
       {
         header: 'Email Address',

@@ -18,7 +18,7 @@ There are additional steps and customizations you can do for Material UI, if you
 
 Once you have everything installed, you can import from `material-react-table` like this:
 
-```jsx
+```tsx
 import MaterialReactTable from 'material-react-table';
 ```
 
@@ -26,7 +26,7 @@ You may also want to import some TypeScript types from 'material-react-table'.
 
 The `MRT_ColumnDef` type is especially useful for defining your columns in a type-safe way.
 
-```jsx
+```tsx
 import MaterialReactTable, { ColumnDefType } from 'material-react-table';
 ```
 
@@ -34,7 +34,7 @@ import MaterialReactTable, { ColumnDefType } from 'material-react-table';
 
 Your data is an array of objects that have properties matching the accessors in your column definitions. It works best if your data is already in a flat object format like below, but it is not required.
 
-```jsx
+```tsx
 const data = useMemo(
   () => [
     {
@@ -56,7 +56,7 @@ Your data does NOT have to be created statically like this, of course. More than
 
 There are a lot of different ways to define columns, depending on your needs. Let's create some basic "data" columns. That is, columns that connect to our data. Since we defined our data in a flat object format, we can simply use the `accessorKey` property to access the data.
 
-```jsx
+```tsx
 const columns = useMemo(
   () => [
     {
@@ -78,7 +78,7 @@ However, if you have a more nested data structure for your data, that's fine, bu
 
 Throw it all together and you have a basic table! You can also play around and enable some features, either per column in the column definitions, or as props passed to `<MaterialReactTable />`.
 
-```jsx
+```tsx
 import React, { useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
 

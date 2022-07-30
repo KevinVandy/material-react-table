@@ -177,7 +177,7 @@ export const MRT_FilterTextField: FC<Props> = ({
   };
 
   if (columnDef.Filter) {
-    return <>{columnDef.Filter?.({ header, table })}</>;
+    return <>{columnDef.Filter?.({ column, header, table })}</>;
   }
 
   return (

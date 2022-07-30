@@ -46,7 +46,7 @@ If you simply want to disable pagination, you can set the `enablePagination` pro
 
 If you only want to disable the pagination logic, but still want to show and use the pagination controls, take a look down below at the [Manual Pagination](##manual-or-server-side-pagination) docs.
 
-```jsx
+```tsx
 <MaterialTable columns={columns} data={data} enablePagination={false} />
 ```
 
@@ -72,7 +72,7 @@ When the `manualPagination` prop is set to `true`, Material React Table will ass
 
 If you are using manual pagination, the default page count and row count in the Material UI pagination component will be incorrect, as it is only derived from the number of rows provided in the client-side `data` prop. Luckily, you can override these values and set your own page count or row count in the `pageCount` and `rowCount` props.
 
-```jsx
+```tsx
 <MaterialTable
   columns={columns}
   data={data}
@@ -85,7 +85,7 @@ If you are using manual pagination, the default page count and row count in the 
 
 For either client-side or server-side pagination, you may want to have access to the pagination state yourself. You can do this like so with `state`:
 
-```jsx
+```tsx
 //store pagination state in your own state
 const [pagination, setPagination] = useState({
   pageIndex: 0,
@@ -108,7 +108,7 @@ return (
 
 Alternatively, if all you care about is customizing the initial pagination state and don't need to react to its changes, like customizing the default page size or the page index, you can do that like so with `initialState`:
 
-```jsx
+```tsx
 <MaterialTable
   columns={columns}
   data={data}

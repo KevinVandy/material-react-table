@@ -66,6 +66,7 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, table }) => {
           ? null
           : (columnDef.Footer instanceof Function
               ? columnDef.Footer?.({
+                  column,
                   footer,
                   table,
                 })

@@ -10,6 +10,22 @@ import {
 import { MRT_FilterFns } from './filtersFns';
 import { MRT_SortingFns } from './sortingFns';
 
+export const defaultDisplayColumnDefOptions = {
+  columnDefType: 'display',
+  enableClickToCopy: false,
+  enableColumnActions: false,
+  enableColumnDragging: false,
+  enableColumnFilter: false,
+  enableColumnOrdering: false,
+  enableEditing: false,
+  enableGlobalFilter: false,
+  enableGrouping: false,
+  enableHiding: false,
+  enablePinning: false,
+  enableResizing: false,
+  enableSorting: false,
+} as Partial<MRT_ColumnDef>;
+
 const getColumnId = <TData extends Record<string, any> = {}>(
   columnDef: MRT_ColumnDef<TData>,
 ): string =>
@@ -60,6 +76,11 @@ export const prepareColumns = <TData extends Record<string, any> = {}>(
         // @ts-ignore
         columnDef.sortingFn = MRT_SortingFns[columnDef.sortingFn];
       }
+    } else if (columnDef.columnDefType === 'display') {
+      columnDef = {
+        ...columnDef,
+        ...(defaultDisplayColumnDefOptions as MRT_ColumnDef<TData>),
+      };
     }
     return columnDef;
   }) as MRT_DefinedColumnDef<TData>[];

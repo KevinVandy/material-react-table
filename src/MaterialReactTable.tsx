@@ -30,6 +30,7 @@ import type {
   Cell,
   Column,
   ColumnDef,
+  CoreColumnDefAccessorKey,
   FilterFn,
   Header,
   HeaderGroup,
@@ -139,8 +140,6 @@ export type MRT_TableState<TData extends Record<string, any> = {}> =
 
 export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
   ColumnDef<TData, unknown>,
-  | 'accessorFn'
-  | 'accessorKey'
   | 'aggregatedCell'
   | 'cell'
   | 'columns'
@@ -152,47 +151,59 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
 > & {
   AggregatedCell?: ({
     cell,
+    column,
     table,
   }: {
     cell: MRT_Cell<TData>;
+    column: MRT_Column<TData>;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   Cell?: ({
     cell,
+    column,
     table,
   }: {
     cell: MRT_Cell<TData>;
+    column: MRT_Column<TData>;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   Edit?: ({
     cell,
+    column,
     table,
   }: {
     cell: MRT_Cell<TData>;
+    column: MRT_Column<TData>;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   Filter?: ({
+    column,
     header,
     table,
   }: {
+    column: MRT_Column<TData>;
     header: MRT_Header<TData>;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   Footer?:
     | ReactNode
     | (({
+        column,
         footer,
         table,
       }: {
+        column: MRT_Column<TData>;
         footer: MRT_Header<TData>;
         table: MRT_TableInstance<TData>;
       }) => ReactNode);
   Header?:
     | ReactNode
     | (({
+        column,
         header,
         table,
       }: {
+        column: MRT_Column<TData>;
         header: MRT_Header<TData>;
         table: MRT_TableInstance<TData>;
       }) => ReactNode);
@@ -206,10 +217,12 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
   /**
    * Either an `accessorKey` or a combination of an `accessorFn` and `id` are required for a data column definition.
    * Specify which key in the row this column should use to access the correct data.
+   * Also supports Deep Key Dot Notation.
    *
-   * @example accessorKey: 'username'
+   * @example accessorKey: 'username' //simple
+   * @example accessorKey: 'name.firstName' //deep key dot notation
    */
-  accessorKey?: string & keyof TData;
+  accessorKey?: CoreColumnDefAccessorKey<TData, unknown>['accessorKey'];
   /**
    * Specify what type of column this is. Either `data`, `display`, or `group`. Defaults to `data`.
    * Leave this blank if you are just creating a normal data column.

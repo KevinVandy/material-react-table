@@ -4,7 +4,7 @@ import Head from 'next/head';
   <title>Material React Table Docs - Data Columns</title>
   <meta
     name="description"
-    content="How to create data columns in Material React Table"
+    content="How to create data columns in Material React Table and use accessKeys and accessorFns the right way"
   />
 </Head>
 
@@ -22,18 +22,26 @@ Each column definition must have, at the very least, an `accessorKey` (or a comb
 
 #### Method 1 - Using an accessorKey (Recommended)
 
-The simplest and most common way to define a column is to use the `accessorKey` property. It works great as long as your data is already in a flat format.
+The simplest and most common way to define a column is to use the `accessorKey` property. The `accessorKey` property is the key that will be used to join the data from the `data` keys.
 
-The `accessorKey` must match one of the keys in your data, or else no data will show up in the column.
+The `accessorKey` must match one of the keys in your data, or else no data will show up in the column. The `accessorKey` also supports dot notation, so you can access nested data.
 
 By default, the `accessorKey` will double as the `id` for the column, but if you need the id of the column to be different than the accessorKey, you can use the `id` property in addition.
 
-```jsx
+```tsx
 const columns = useMemo(
   () => [
     {
-      accessorKey: 'name', //id will be derived from `accessorKey` unless otherwise specified (Recommended)
-      header: 'Name',
+      accessorKey: 'username', //normal recommended usage of an accessorKey
+      header: 'Username',
+    },
+    {
+      accessorKey: 'name.firstName', //example of dot notation used to access nested data
+      header: 'First Name',
+    },
+    {
+      accessorKey: 'name.lastName', //example of dot notation used to access nested data
+      header: 'Last Name',
     },
     {
       accessorKey: 'customerAge',
@@ -47,11 +55,11 @@ const columns = useMemo(
 
 #### Method 2 - Using an accessorFn and id
 
-To access more complicated data structures, you can use the `accessorFn` property. Here are at least 3 ways you can use it.
+You can alternatively use the `accessorFn` property. Here are at least 3 ways you can use it.
 
 In each case, the `id` property is now required since there is no `accessorKey` for MRT to derive it from.
 
-```jsx
+```tsx
 const columns = useMemo(
   () => [
     {
@@ -67,7 +75,7 @@ const columns = useMemo(
       header: 'Name',
     },
     {
-      //accessorFn used to access nested data
+      //accessorFn used to access nested data, though you could just use dot notation in an accessorKey
       accessorFn: (row) => data.personalInfo.age,
       id: 'age',
       header: 'Age',
@@ -77,18 +85,20 @@ const columns = useMemo(
 );
 ```
 
-#### Custom Header JSX Render
+### Custom Header JSX Render
 
 If you want to pass in custom JSX to render the header, you can pass in a `Header` property in addition to the `header` string property.
 
-```jsx
+> The `header` (lowercase) property is still required and still must only be a string because it is used within multiple components in the table and has string manipulation methods performed on it.
+
+```tsx
 const columns = useMemo(
   () => [
     {
       accessorKey: 'name',
       header: 'Name',
-      Header: ({ header }) => (
-        <i style={{ color: 'red' }}>{header.column.columnDef.header}</i>
+      Header: ({ column }) => (
+        <i style={{ color: 'red' }}>{column.columnDef.header}</i>
       ), //arrow function
     },
     {

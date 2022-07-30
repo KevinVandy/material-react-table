@@ -81,7 +81,7 @@ By default, Material React Table uses a `fuzzy` filtering algorithm based on the
 
 You can specify either a prebuilt filter function, from Material React Table or TanStack Table, or you can even specify _your own custom filter function_ in the `filterFn` column option.
 
-```jsx
+```tsx
 const columns = [
   {
     accessorKey: 'firstName',
@@ -119,7 +119,7 @@ This function will be used to filter 1 row at a time, and should return a `boole
 
 If you want to let the user switch between multiple different filter modes from a dropdown menu on the Filter Textfield, you can enable that with the `enableColumnFilterChangeMode` prop or column option.
 
-```jsx
+```tsx
 <MaterialReactTable
   columns={columns}
   data={data}
@@ -131,7 +131,7 @@ If you want to let the user switch between multiple different filter modes from 
 
 You can narrow down the available filter mode options by setting the `columnFilterModeOptions` prop, or a column specific `columnFilterModeOptions` option.
 
-```jsx
+```tsx
 const columns = [
   {
     accessorKey: 'firstName',
@@ -153,7 +153,7 @@ const columns = [
 
 A very common use case when you have a lot of data is to filter the data on the server, instead of client-side. In this case you will want to set the `manualFiltering` prop to `true` and manage the `columnFilters` state yourself like so.
 
-```jsx
+```tsx
 // You can manage and have control over the columnFilters state yourself
 const [columnFilters, setColumnFilters] = useState([]);
 const [data, setData] = useState([]); //data will get updated after re-fetching

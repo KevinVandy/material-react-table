@@ -98,6 +98,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
 
   const headerElement = ((columnDef?.Header instanceof Function
     ? columnDef?.Header?.({
+        column,
         header,
         table,
       })

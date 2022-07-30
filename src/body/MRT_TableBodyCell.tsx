@@ -262,20 +262,23 @@ export const MRT_TableBodyCell: FC<Props> = ({
             table={table}
           />
         ) : columnDefType === 'display' ? (
-          columnDef.Cell?.({ cell, table })
+          columnDef.Cell?.({ cell, column, table })
         ) : isEditing ? (
           <MRT_EditCellTextField cell={cell} table={table} />
         ) : (enableClickToCopy || columnDef.enableClickToCopy) &&
           columnDef.enableClickToCopy !== false ? (
           <>
             <MRT_CopyButton cell={cell} table={table}>
-              <>{columnDef?.Cell?.({ cell, table }) ?? cell.renderValue()}</>
+              <>
+                {columnDef?.Cell?.({ cell, column, table }) ??
+                  cell.renderValue()}
+              </>
             </MRT_CopyButton>
             {cell.getIsGrouped() && <> ({row.subRows?.length})</>}
           </>
         ) : (
           <>
-            {columnDef?.Cell?.({ cell, table }) ?? cell.renderValue()}
+            {columnDef?.Cell?.({ cell, column, table }) ?? cell.renderValue()}
             {cell.getIsGrouped() && <> ({row.subRows?.length ?? ''})</>}
           </>
         )}

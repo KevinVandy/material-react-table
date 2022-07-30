@@ -21,6 +21,7 @@ import {
   getAllLeafColumnDefs,
   getDefaultColumnOrderIds,
   getDefaultColumnFilterFn,
+  defaultDisplayColumnDefOptions,
 } from '../column.utils';
 import { MRT_FilterFns } from '../filtersFns';
 import type {
@@ -33,22 +34,6 @@ import type {
   MRT_TableState,
   MaterialReactTableProps,
 } from '..';
-
-const defaultDisplayColumnDefOptions = {
-  columnDefType: 'display',
-  enableClickToCopy: false,
-  enableColumnActions: false,
-  enableColumnDragging: false,
-  enableColumnFilter: false,
-  enableColumnOrdering: false,
-  enableEditing: false,
-  enableGlobalFilter: false,
-  enableGrouping: false,
-  enableHiding: false,
-  enablePinning: false,
-  enableResizing: false,
-  enableSorting: false,
-} as Partial<MRT_ColumnDef>;
 
 export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   props: MaterialReactTableProps<TData>,

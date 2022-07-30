@@ -67,7 +67,7 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, table }) => {
   };
 
   if (enableEditing && columnDef.enableEditing !== false && columnDef.Edit) {
-    return <>{columnDef.Edit?.({ cell, table })}</>;
+    return <>{columnDef.Edit?.({ cell, column, table })}</>;
   }
 
   return (
