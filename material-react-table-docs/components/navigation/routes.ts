@@ -94,12 +94,8 @@ export const routes = [
             label: 'Create Display Columns',
           },
           {
-            href: '/docs/guides/customize-css',
-            label: 'Customize CSS',
-          },
-          {
-            href: '/docs/guides/customize-material-ui',
-            label: 'Customize Material-UI',
+            href: '/docs/guides/customize-components',
+            label: 'Customize Components',
           },
           {
             href: '/docs/guides/customize-icons',

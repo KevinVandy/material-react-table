@@ -21,7 +21,6 @@ export const defaultDisplayColumnDefOptions = {
   enableGlobalFilter: false,
   enableGrouping: false,
   enableHiding: false,
-  enablePinning: false,
   enableResizing: false,
   enableSorting: false,
 } as Partial<MRT_ColumnDef>;

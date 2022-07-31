@@ -1,0 +1,177 @@
+import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
+
+<Head>
+  <title>Material React Table Docs - Customizing Components Guide</title>
+  <meta
+    name="description"
+    content="How to customize and pass props to Material UI components in Material React Table"
+  />
+</Head>
+
+## Customizing Components Guide
+
+One of the strengths of Material React Table, is that it exposes a majority of all the underlying Material UI component props used to build the table.
+
+### Material UI Props
+
+All of the props labeled `mui...Props` are props that get forwarded to Material UI components. Here is a list of all the props that are exposed in both the root props and column options.
+
+#### Relevant Props
+
+<RootPropTable
+  onlyProps={
+    new Set([
+      'muiExpandAllButtonProps',
+      'muiExpandButtonProps',
+      'muiLinearProgressProps',
+      'muiSearchTextFieldProps',
+      'muiSelectCheckboxProps',
+      'muiSelectAllCheckboxProps',
+      'muiTableBodyCellCopyButtonProps',
+      'muiTableBodyCellEditTextFieldProps',
+      'muiTableBodyCellProps',
+      'muiTableBodyCellSkeletonProps',
+      'muiTableBodyProps',
+      'muiTableBodyRowDragHandleProps',
+      'muiTableBodyRowProps',
+      'muiTableContainerProps',
+      'muiTableDetailPanelProps',
+      'muiTableFooterCellProps',
+      'muiTableFooterProps',
+      'muiTableFooterRowProps',
+      'muiTableHeadCellColumnActionsButtonProps',
+      'muiTableHeadCellDragHandleProps',
+      'muiTableHeadCellFilterTextFieldProps',
+      'muiTableHeadCellProps',
+      'muiTableHeadProps',
+      'muiTableHeadRowProps',
+      'muiTablePaginationProps',
+      'muiTablePaperProps',
+      'muiTableProps',
+      'muiTableToolbarAlertBannerProps',
+      'muiTableToolbarBottomProps',
+      'muiTableToolbarTopProps',
+    ])
+  }
+/>
+
+#### Relevant Column Options
+
+<ColumnOptionsTable
+  onlyProps={
+    new Set([
+      'muiTableBodyCellCopyButtonProps',
+      'muiTableBodyCellEditTextFieldProps',
+      'muiTableBodyCellProps',
+      'muiTableFooterCellProps',
+      'muiTableHeadCellColumnActionsButtonProps',
+      'muiTableHeadCellFilterTextFieldProps',
+      'muiTableHeadCellProps',
+    ])
+  }
+/>
+
+---
+
+### Material UI Prop Types
+
+Each prop can either be passed as an object or as a callback function where you get access to the underlying `table` instance, and any other relevant callback parameters such as `cell`, `row`, `column`, etc. This let's you easily run conditional logic on the props you pass. Let's take a look at a few examples.
+
+> All `mui...Props` props are strongly typed and you should get ts hints as you write them. API docs are available on the [Material UI website](https://material-ui.com/api/table/) for each component.
+
+#### Static Prop Objects
+
+```tsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  enableRowSelection
+  //passing the static object variant if no dynamic logic is needed
+  muiSelectCheckboxProps={{
+    color: 'secondary', //makes all checkboxes use the secondary color
+  }}
+/>
+```
+
+#### Callback Functions to Dynamically Set Prop Values
+
+```tsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  enableRowSelection
+  //passing the callback function variant. (You should get type hints for all the callback parameters available)
+  muiSelectCheckboxProps={({ row }) => ({
+    color: 'secondary',
+    disabled: row.original.isAccountLocked, //access the row data to determine if the checkbox should be disabled
+  })}
+/>
+```
+
+### Styling Material UI Components
+
+Each `mui...Prop` has multiple options for you to add styling to the component. You could simply pass `className` or `style` props to any `mui...Props` prop, but there is also the `sx` prop... Which totally rocks!
+
+> Hint: You should just use the `sx` prop for all styling instead of `className` or `style` props.
+
+#### The SX Prop
+
+The recommended way to style Material UI components in Material React Table will be the [`sx` prop](https://mui.com/system/basics/#the-sx-prop) throughout this docs site, as it is both the most simple and the most powerful way to style Material UI components as of Material UI V5. They can work and be as simple as a `style` prop, but behind the scenes, they work more like emotion styled-components by using `mui/system`.
+
+Don't Worry! `className` and `style` props will still work, but let's show off some of the more elegant syntax you can use with the `sx` prop.
+
+1. The `sx` prop can be used just a simply as a `style` prop by default
+
+```tsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  muiTableHeadCellProps={{
+    //simple styling with the `sx` prop, works just like a style prop in this example
+    sx: {
+      fontWeight: 'normal',
+      fontSize: '14px',
+    },
+  }}
+/>
+```
+
+2. The `sx` prop gets easy access to your _muiTheme_ without you having to call the theme from a `useTheme` hook.
+
+```tsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  muiTableHeadCellProps={{
+    //no useTheme hook needed, just use the `sx` prop with the theme callback
+    sx: (theme) => ({
+      color: theme.palette.text.secondary,
+    }),
+  }}
+/>
+```
+
+3. The `sx` prop gives you a much more concise way to add media queries to your styling.
+
+```tsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  muiTableHeadCellProps={{
+    //easier way to create media queries, no useMediaQuery hook needed.
+    sx: {
+      fontSize: {
+        xs: '10px',
+        sm: '11px',
+        md: '12px',
+        lg: '13px',
+        xl: '14px',
+      },
+    },
+  }}
+/>
+```
+
+There are a lot more advantages to using the `sx` prop, but that is all we will discuss in these docs. You can learn more about it the official [Material UI Docs](https://mui.com/system/basics/#the-sx-prop).
