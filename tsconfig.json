@@ -5,6 +5,8 @@
   ],
   "compilerOptions": {
     "declaration": true,
+    "declarationDir": "types",
+    "emitDeclarationOnly": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,

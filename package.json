@@ -19,50 +19,47 @@
   "bugs": {
     "url": "https://github.com/KevinVandy/material-react-table/issues"
   },
-  "main": "dist/index.js",
-  "module": "dist/material-react-table.esm.js",
+  "main": "dist/cjs/index.min.js",
+  "module": "dist/esm/material-react-table.esm.min.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
     "src"
+  ],
+  "size-limit": [
+    {
+      "path": "dist/cjs/index.min.js",
+      "limit": "50 KB"
+    },
+    {
+      "path": "dist/esm/material-react-table.esm.min.js",
+      "limit": "50 KB"
+    }
   ],
   "engines": {
     "node": ">=14"
   },
   "scripts": {
     "analyze": "size-limit --why",
-    "build": "tsdx build && size-limit && rm -rf material-react-table-docs/node_modules/material-react-table/dist && cp -r dist material-react-table-docs/node_modules/material-react-table/",
+    "build": "rm -rf dist && rollup -c && size-limit && rm -rf material-react-table-docs/node_modules/material-react-table/dist && cp -r dist material-react-table-docs/node_modules/material-react-table/",
     "build-storybook": "build-storybook",
     "format": "prettier -w .",
     "lint": "eslint .",
-    "prepare": "tsdx build",
     "size": "size-limit",
-    "start": "tsdx watch",
-    "storybook": "start-storybook -p 6006",
-    "test": "tsdx test --passWithNoTests"
+    "storybook": "start-storybook -p 6006"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint && format"
-    }
-  },
-  "size-limit": [
-    {
-      "path": "dist/material-react-table.cjs.production.min.js",
-      "limit": "50 KB"
-    },
-    {
-      "path": "dist/material-react-table.esm.js",
-      "limit": "50 KB"
-    }
-  ],
+  
   "devDependencies": {
     "@babel/core": "^7.18.9",
+    "@babel/preset-react": "^7.18.6",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@faker-js/faker": "^7.3.0",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.2",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-typescript": "^8.3.4",
     "@size-limit/preset-small-lib": "^7.0.8",
     "@storybook/addon-a11y": "^6.5.9",
     "@storybook/addon-actions": "^6.5.9",
@@ -82,9 +79,12 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
+    "rollup": "^2.77.2",
+    "rollup-plugin-dts": "^4.2.2",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-terser": "^7.0.2",
     "size-limit": "^7.0.8",
     "storybook-dark-mode": "^1.1.0",
-    "tsdx": "^0.14.1",
     "tslib": "^2.4.0",
     "typescript": "^4.7.4"
   },
