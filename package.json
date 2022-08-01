@@ -1,5 +1,5 @@
 {
-  "version": "0.31.1",
+  "version": "0.32.0",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -48,7 +48,6 @@
     "size": "size-limit",
     "storybook": "start-storybook -p 6006"
   },
-  
   "devDependencies": {
     "@babel/core": "^7.18.9",
     "@babel/preset-react": "^7.18.6",
