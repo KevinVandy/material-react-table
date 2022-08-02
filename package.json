@@ -1,5 +1,5 @@
 {
-  "version": "0.32.1",
+  "version": "0.32.2",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -49,17 +49,17 @@
     "storybook": "start-storybook -p 6006"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.9",
+    "@babel/core": "^7.18.10",
     "@babel/preset-react": "^7.18.6",
-    "@emotion/react": "^11.9.3",
-    "@emotion/styled": "^11.9.3",
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
     "@faker-js/faker": "^7.3.0",
     "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.9.2",
+    "@mui/material": "^5.9.3",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.4",
-    "@size-limit/preset-small-lib": "^7.0.8",
+    "@size-limit/preset-small-lib": "^8.0.0",
     "@storybook/addon-a11y": "^6.5.9",
     "@storybook/addon-actions": "^6.5.9",
     "@storybook/addon-essentials": "^6.5.9",
@@ -71,7 +71,7 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "babel-loader": "^8.2.5",
-    "eslint": "^8.20.0",
+    "eslint": "^8.21.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.1",
     "prettier": "^2.7.1",
@@ -82,7 +82,7 @@
     "rollup-plugin-dts": "^4.2.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-terser": "^7.0.2",
-    "size-limit": "^7.0.8",
+    "size-limit": "^8.0.0",
     "storybook-dark-mode": "^1.1.0",
     "tslib": "^2.4.0",
     "typescript": "^4.7.4"
@@ -96,7 +96,7 @@
   },
   "dependencies": {
     "@tanstack/match-sorter-utils": "8.1.1",
-    "@tanstack/react-table": "8.5.2",
+    "@tanstack/react-table": "8.5.5",
     "@tanstack/react-virtual": "^3.0.0-beta.14"
   }
 }

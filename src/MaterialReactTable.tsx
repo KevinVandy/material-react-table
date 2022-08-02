@@ -30,7 +30,7 @@ import type {
   Cell,
   Column,
   ColumnDef,
-  CoreColumnDefAccessorKey,
+  DeepKeys,
   FilterFn,
   Header,
   HeaderGroup,
@@ -222,7 +222,7 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
    * @example accessorKey: 'username' //simple
    * @example accessorKey: 'name.firstName' //deep key dot notation
    */
-  accessorKey?: CoreColumnDefAccessorKey<TData, unknown>['accessorKey'];
+  accessorKey?: DeepKeys<TData>;
   /**
    * Specify what type of column this is. Either `data`, `display`, or `group`. Defaults to `data`.
    * Leave this blank if you are just creating a normal data column.
