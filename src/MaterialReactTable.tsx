@@ -434,7 +434,7 @@ export type MRT_DisplayColumnIds =
  * `columns` and `data` props are the only required props, but there are over 150 other optional props.
  *
  * See more info on creating columns and data on the official docs site:
- * @link https://www.material-react-table.com/docs/usage
+ * @link https://www.material-react-table.com/docs/getting-started/usage
  *
  * See the full props list on the official docs site:
  * @link https://www.material-react-table.com/docs/api/props

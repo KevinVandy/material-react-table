@@ -109,6 +109,14 @@ export const routes = [
             href: '/docs/guides/localization',
             label: 'Localization (i18n)',
           },
+          {
+            href: '/docs/guides/table-event-listeners',
+            label: 'Table Event Listeners',
+          },
+          {
+            href: '/docs/guides/table-state-management',
+            label: 'Table State Management',
+          },
         ],
       },
       {
@@ -221,10 +229,7 @@ export const routes = [
             href: '/docs/guides/persistent-state',
             label: 'Persistent State',
           },
-          {
-            href: '/docs/guides/table-state-management',
-            label: 'Table State Management',
-          },
+
           {
             href: '/docs/guides/typescript',
             label: 'TypeScript Usage',

@@ -1,0 +1,32 @@
+import Head from 'next/head';
+import Example from '../../../examples/enable-column-ordering';
+
+<Head>
+  <title>Material React Table Docs - Table Event Listeners Guide</title>
+  <meta
+    name="description"
+    content="How to add event listeners such as onClicks and onChange events to components in Material React Table"
+  />
+</Head>
+
+## Table Event Listeners Guide
+
+There are a few advanced custom event listener props on the root table API, but not many. However, in this guide we will show you how to add any event listener that you need to any component within Material React Table by passing them to any of the `mui...Props` props.
+
+### Add Event Listeners to any of the Material UI Components
+
+In the [customize components docs](/docs/guides/customize-components#material-ui-prop-types), we learned how to pass any prop you need to pass to any exposed Material UI component that is in the table. The list of props that you can pass to Material UI components includes any event listener!
+
+Let's create an example of adding a row click event listener:
+
+```tsx
+<MaterialReactTable
+  data={data}
+  columns={columns}
+  muiTableBodyRowProps={({ row }) => ({
+    onClick: (event) => {
+      console.log(event, row.id);
+    },
+  })}
+/>
+```

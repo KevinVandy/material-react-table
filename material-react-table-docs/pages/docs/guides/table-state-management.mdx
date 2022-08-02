@@ -1,0 +1,25 @@
+import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import Example from '../../../examples/enable-column-ordering';
+
+<Head>
+  <title>Material React Table Docs - Table State Management Guide</title>
+  <meta
+    name="description"
+    content="How to access and manage internal state in Material React Table"
+  />
+</Head>
+
+## Table State Management Guide
+
+Material React Table does not try to hide any of its internal state from you. You can access it and manage it yourself.
+
+This is optional, of course. If you don't need access to some of the state, you do not need to do anything and it will just automatically be managed internally. See the [State Options API Docs](/docs/api/state-options) for more information on which states are available for you to manage.
+
+### Relevant Props
+
+<RootPropTable onlyProps={new Set(['initialState', 'state'])} />
+
+### Manage Individual States as Needed
+
+### Fully Manage Table State

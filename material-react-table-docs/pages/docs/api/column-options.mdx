@@ -13,19 +13,18 @@ import SourceCode from '../../../components/prop-tables/ColumnOptionsSource';
 Here is a list of all the column options that you can specify in a `column` definition.
 
 ```tsx
-const columns = useMemo(() => [
-  {
-    header: 'Name',
-    accessorKey: 'name',
-    // All of the options you can specify here
-  }
-], [])
+const columns = useMemo(
+  () => [
+    {
+      accessorKey: 'name',
+      header: 'Name',
+      // All of the options you can specify here
+    },
+  ],
+  [],
+);
 
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  ...
-/>
+return <MaterialReactTable columns={columns} data={data} />;
 ```
 
 <ColumnOptionsTable />

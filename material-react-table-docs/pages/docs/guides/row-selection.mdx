@@ -36,6 +36,49 @@ import CustomizeExample from '../../../examples/customize-row-selection';
 
 Selection checkboxes can be enabled with the `enableRowSelection` prop.
 
+#### Manage Selection State
+
+The row selection state is managed internally by default, but more than likely, you will want to have access to that state yourself. If you are not already fully managing the table state, like in [this guide](docs/guides/table-state-management#fully-manage-table-state), then here is how you can simply get access to the row selection state, specifically.
+
+```tsx
+const [rowSelection, setRowSelection] = useState({});
+
+return (
+  <MaterialReactTable
+    data={data}
+    columns={columns}
+    enableRowSelection
+    onRowSelectionChange={setRowSelection}
+    state={{ rowSelection }}
+  />
+);
+```
+
+#### Useful Row IDs
+
+By default, the `row.id` for each row in the table is simply the index of the row in the table. You can override this and tell Material React Table to use a more useful Row ID with the `getRowId` prop. For example, you may want some like this:
+
+```tsx
+<MaterialReactTable
+  data={data}
+  columns={columns}
+  enableRowSelection
+  getRowId={(row) => row.original.userId}
+/>
+```
+
+No as rows get selected, the `rowSelection` state will look like this:
+
+```tsx
+{
+  "3f25309c-8fa1-470f-811e-cdb082ab9017": true,
+  "be731030-df83-419c-b3d6-9ef04e7f4a9f": true,
+  ...
+}
+```
+
+This can be very useful when you are trying to read your selection state and do something with your data as the row selection changes.
+
 <EnableExample />
 
 ### Disable Select All
