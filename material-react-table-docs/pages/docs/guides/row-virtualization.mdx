@@ -1,7 +1,9 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import EnableExample from '../../../examples/enable-row-virtualization';
 
 <Head>
-  <title>Material React Table Docs - Row Virtualization Guide</title>
+  <title>Material React Table Docs - Row Virtualization Feature Guide</title>
   <meta
     name="description"
     content="How to virtualize rows in Material React Table to improve performance and user experience when there are a lot of rows in the table."
@@ -9,3 +11,77 @@ import Head from 'next/head';
 </Head>
 
 ## Row Virtualization Feature Guide
+
+Virtualization is useful when you have a lot of data you want to display client-side all at once, without having to use pagination. Material React Table makes this as simple as possible, thanks to [`@tanstack/react-virtual`](https://tanstack.com/virtual/v3).
+
+### Relevant Props
+
+<RootPropTable
+  onlyProps={new Set(['enableRowVirtualization', 'virtualizerProps'])}
+/>
+
+---
+
+### What is Virtualization?
+
+Virtualization, or virtual scrolling, works by only rendering the rows that are visible on the screen. This is useful for performance and user experience, as we can make it appear that there are hundreds, thousands, or tens of thousands of rows in the table all at once, but in reality, the table will only render the couple dozen rows that are visible on the screen.
+
+For more reading on the concept of virtualization, we recommend this [blog post](https://blog.logrocket.com/virtual-scrolling-core-principles-and-basic-implementation-in-react/) by LogRocket.
+
+### Does Your Table Even Need Virtualization?
+
+If your table is already paginated, you probably don't need virtualization. If your table is not rendering more than 100 rows at a time, you might not really need virtualization.
+
+There is a tiny bit of extra overhead that gets added to your table's rendering when virtualization is enabled, so don't just enable it for every table. That being said, if your table does have well over 100 rows that it is trying to render all at once without pagination, performance will be night and day once it is enabled.
+
+> If your table is not rendering more than 100 rows at a time, you might not need virtualization enabled.
+
+### Enable Row Virtualization
+
+Enabling row virtualization is as simple as setting the `enableRowVirtualization` prop to `true`. However, you will probably also want to turn off pagination, which you can do by setting `enablePagination` to `false`.
+
+```tsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  enablePagination={false}
+  enableRowVirtualization
+/>
+```
+
+> WARNING: Don't enable row virtualization conditionally. It may break React's Rule of Hooks, and/or cause other UI jumpiness.
+
+### Row Virtualization Side Effects
+
+When Row Virtualization is enabled, a CSS `table-layout: fixed` style is automatically added to the `<table>` element to prevent columns wiggling back and forth during scrolling due to body cells having variating widths.
+
+This means that you may want to manually specify the width of all of your columns in the column definitions with the `size` option, since the browser will no longer automatically make columns wider as needed.
+
+For further reading on how table-layout `fixed` vs `auto` works, we recommend this [blog post](https://css-tricks.com/almanac/properties/t/table-layout/) by CSS-Tricks.
+
+> When Row Virtualization is enabled, a CSS `table-layout: fixed` style is automatically added to the `<table>` element
+
+### Customize Virtualizer Props
+
+You can adjust some of the virtualizer props that are used internally. The most useful ones are the `overscan` and `estimateHeight` options. You may want to adjust these values if you have unusual row heights that is causing the default scrolling to act weirdly.
+
+```tsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  enablePagination={false}
+  enableRowVirtualization
+  virtualizerProps={{
+    overscan: 25, //adjust the number or rows that are rendered above and below the visible area of the table
+    estimateHeight: () => 200, //if your rows are about 200px tall, could try this
+  }}
+/>
+```
+
+See the full [virtualizer api docs](https://tanstack.com/virtual/v3/docs/api/virtualizer) for more information.
+
+### Full Row Virtualization Example
+
+Try out the performance of the table below with **20,000 rows**! Filtering, Search, and Sorting also maintain usable performance.
+
+<EnableExample />

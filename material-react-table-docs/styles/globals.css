@@ -25,11 +25,13 @@ a {
 
 ::-webkit-scrollbar {
   right: 0;
-  width: 8px;
+  width: 12px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: #999;
   border-radius: 8px;
-  width: 8px;
+  width: 12px;
+  height: 12px;
 }
