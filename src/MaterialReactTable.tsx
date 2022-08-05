@@ -812,9 +812,13 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     selectAllMode?: 'all' | 'page';
     state?: Partial<MRT_TableState<TData>>;
     tableId?: string;
-    virtualizerProps?: Partial<
-      VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>
-    >;
+    virtualizerProps?:
+      | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>
+      | (({
+          table,
+        }: {
+          table: MRT_TableInstance<TData>;
+        }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>);
   };
 
 export default <TData extends Record<string, any> = {}>({

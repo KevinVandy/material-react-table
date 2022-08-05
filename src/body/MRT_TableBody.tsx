@@ -30,15 +30,16 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
       ? muiTableBodyProps({ table })
       : muiTableBodyProps;
 
-  const getIsSomeColumnsSorted = () => {
-    return Object.values(sorting).some(Boolean);
-  };
+  const vProps =
+    virtualizerProps instanceof Function
+      ? virtualizerProps({ table })
+      : virtualizerProps;
 
   const rows = useMemo(() => {
     if (
       enableGlobalFilterRankedResults &&
       globalFilter &&
-      !getIsSomeColumnsSorted()
+      !Object.values(sorting).some(Boolean)
     ) {
       const rankedRows = getPrePaginationRowModel().rows.sort((a, b) =>
         rankGlobalFuzzy(a, b),
@@ -62,11 +63,11 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
 
   const rowVirtualizer: Virtualizer = enableRowVirtualization
     ? useVirtualizer({
-        estimateSize: () => (density === 'compact' ? 25 : 50),
-        overscan: density === 'compact' ? 30 : 10,
-        getScrollElement: () => tableContainerRef.current as HTMLDivElement,
         count: rows.length,
-        ...virtualizerProps,
+        estimateSize: () => (density === 'compact' ? 25 : 50),
+        getScrollElement: () => tableContainerRef.current as HTMLDivElement,
+        overscan: density === 'compact' ? 30 : 10,
+        ...vProps,
       })
     : ({} as any);
 
