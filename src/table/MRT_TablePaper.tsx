@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { Paper } from '@mui/material';
-import { MRT_ToolbarTop } from '../toolbar/MRT_ToolbarTop';
-import { MRT_ToolbarBottom } from '../toolbar/MRT_ToolbarBottom';
+import { MRT_TopToolbar } from '../toolbar/MRT_TopToolbar';
+import { MRT_BottomToolbar } from '../toolbar/MRT_BottomToolbar';
 import { MRT_TableContainer } from './MRT_TableContainer';
 import type { MRT_TableInstance } from '..';
 
@@ -12,7 +12,7 @@ interface Props {
 export const MRT_TablePaper: FC<Props> = ({ table }) => {
   const {
     getState,
-    options: { enableToolbarBottom, enableToolbarTop, muiTablePaperProps },
+    options: { enableBottomToolbar, enableTopToolbar, muiTablePaperProps },
   } = table;
   const { isFullScreen } = getState();
 
@@ -49,9 +49,9 @@ export const MRT_TablePaper: FC<Props> = ({ table }) => {
         width: isFullScreen ? '100vw' : undefined,
       }}
     >
-      {enableToolbarTop && <MRT_ToolbarTop table={table} />}
+      {enableTopToolbar && <MRT_TopToolbar table={table} />}
       <MRT_TableContainer table={table} />
-      {enableToolbarBottom && <MRT_ToolbarBottom table={table} />}
+      {enableBottomToolbar && <MRT_BottomToolbar table={table} />}
     </Paper>
   );
 };

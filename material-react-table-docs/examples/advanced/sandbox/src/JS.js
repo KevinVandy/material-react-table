@@ -173,7 +173,7 @@ const Example = () => {
           Send Email
         </MenuItem>,
       ]}
-      renderToolbarTopCustomActions={({ table }) => {
+      renderTopToolbarCustomActions={({ table }) => {
         const handleDeactivate = () => {
           table.getSelectedRowModel().flatRows.map((row) => {
             alert('deactivating ' + row.getValue('name'));

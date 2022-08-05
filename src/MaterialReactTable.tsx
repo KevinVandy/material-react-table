@@ -42,11 +42,12 @@ import type {
   TableState,
 } from '@tanstack/react-table';
 import type { VirtualizerOptions } from '@tanstack/react-virtual';
-import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
+import { MRT_AggregationFns } from './aggregationFns';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
-import { MRT_TableRoot } from './table/MRT_TableRoot';
-import { MRT_FilterFns } from './filtersFns';
+import { MRT_FilterFns } from './filterFns';
+import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
 import { MRT_SortingFns } from './sortingFns';
+import { MRT_TableRoot } from './table/MRT_TableRoot';
 
 type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
 
@@ -99,12 +100,12 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
   setCurrentDraggingRow: Dispatch<SetStateAction<MRT_Row<TData> | null>>;
   setCurrentEditingCell: Dispatch<SetStateAction<MRT_Cell | null>>;
   setCurrentEditingRow: Dispatch<SetStateAction<MRT_Row | null>>;
-  setCurrentFilterFns: Dispatch<
+  setColumnFilterFns: Dispatch<
     SetStateAction<{
       [key: string]: MRT_FilterOption;
     }>
   >;
-  setCurrentGlobalFilterFn: Dispatch<SetStateAction<MRT_FilterOption>>;
+  setGlobalFilterFn: Dispatch<SetStateAction<MRT_FilterOption>>;
   setCurrentHoveredColumn: Dispatch<
     SetStateAction<MRT_Column<TData> | { id: string } | null>
   >;
@@ -124,8 +125,8 @@ export type MRT_TableState<TData extends Record<string, any> = {}> =
     currentDraggingRow: MRT_Row<TData> | null;
     currentEditingCell: MRT_Cell<TData> | null;
     currentEditingRow: MRT_Row<TData> | null;
-    currentFilterFns: Record<string, MRT_FilterOption>;
-    currentGlobalFilterFn: Record<string, MRT_FilterOption>;
+    columnFilterFns: Record<string, MRT_FilterOption>;
+    globalFilterFn: Record<string, MRT_FilterOption>;
     currentHoveredColumn: MRT_Column<TData> | { id: string } | null;
     currentHoveredRow: MRT_Row<TData> | { id: string } | null;
     density: 'comfortable' | 'compact' | 'spacious';
@@ -442,7 +443,12 @@ export type MRT_DisplayColumnIds =
 export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
   Omit<
     Partial<TableOptions<TData>>,
-    'columns' | 'data' | 'initialState' | 'state' | 'expandRowsFn'
+    | 'columns'
+    | 'data'
+    | 'expandRowsFn'
+    | 'initialState'
+    | 'onStateChange'
+    | 'state'
   > & {
     displayColumnDefOptions?: Partial<{
       [key in MRT_DisplayColumnIds]: Partial<MRT_ColumnDef>;
@@ -451,6 +457,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     columns: MRT_ColumnDef<TData>[];
     data: TData[];
     editingMode?: 'table' | 'row' | 'cell';
+    enableBottomToolbar?: boolean;
     enableClickToCopy?: boolean;
     enableColumnActions?: boolean;
     enableColumnDragging?: boolean;
@@ -472,9 +479,8 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     enableStickyHeader?: boolean;
     enableTableFooter?: boolean;
     enableTableHead?: boolean;
-    enableToolbarBottom?: boolean;
     enableToolbarInternalActions?: boolean;
-    enableToolbarTop?: boolean;
+    enableTopToolbar?: boolean;
     enabledGlobalFilterOptions?: (MRT_FilterOption | string)[] | null;
     expandRowsFn?: (dataRow: TData) => TData[];
     icons?: Partial<MRT_Icons>;
@@ -572,6 +578,9 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
           table: MRT_TableInstance<TData>;
           row: MRT_Row<TData>;
         }) => TableRowProps);
+    muiTableBottomToolbarProps?:
+      | ToolbarProps
+      | (({ table }: { table: MRT_TableInstance<TData> }) => ToolbarProps);
     muiTableContainerProps?:
       | TableContainerProps
       | (({
@@ -675,10 +684,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     muiTableToolbarAlertBannerProps?:
       | AlertProps
       | (({ table }: { table: MRT_TableInstance<TData> }) => AlertProps);
-    muiTableToolbarBottomProps?:
-      | ToolbarProps
-      | (({ table }: { table: MRT_TableInstance<TData> }) => ToolbarProps);
-    muiTableToolbarTopProps?:
+    muiTableTopToolbarProps?:
       | ToolbarProps
       | (({ table }: { table: MRT_TableInstance<TData> }) => ToolbarProps);
     onCellEditBlur?: ({
@@ -737,13 +743,17 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     onShowAlertBannerChange?: OnChangeFn<boolean>;
     onShowFiltersChange?: OnChangeFn<boolean>;
     onShowGlobalFilterChange?: OnChangeFn<boolean>;
-    onTableInstanceChange?: (table: MRT_TableInstance<TData>) => void;
     positionActionsColumn?: 'first' | 'last';
     positionExpandColumn?: 'first' | 'last';
     positionGlobalFilter?: 'left' | 'right';
     positionPagination?: 'bottom' | 'top' | 'both';
     positionToolbarAlertBanner?: 'bottom' | 'top' | 'none';
     positionToolbarDropZone?: 'bottom' | 'top' | 'none' | 'both';
+    renderBottomToolbarCustomActions?: ({
+      table,
+    }: {
+      table: MRT_TableInstance<TData>;
+    }) => ReactNode;
     renderDetailPanel?: ({
       row,
       table,
@@ -765,11 +775,6 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
       table,
     }: {
       row: MRT_Row<TData>;
-      table: MRT_TableInstance<TData>;
-    }) => ReactNode;
-    renderToolbarBottomCustomActions?: ({
-      table,
-    }: {
       table: MRT_TableInstance<TData>;
     }) => ReactNode;
     renderToolbarInternalActions?: ({
@@ -797,7 +802,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
         IconButtonProps & { table: MRT_TableInstance<TData> }
       >;
     }) => ReactNode;
-    renderToolbarTopCustomActions?: ({
+    renderTopToolbarCustomActions?: ({
       table,
     }: {
       table: MRT_TableInstance<TData>;
@@ -813,10 +818,12 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
   };
 
 export default <TData extends Record<string, any> = {}>({
+  aggregationFns,
   autoResetExpanded = false,
   columnResizeMode = 'onEnd',
   defaultColumn = { minSize: 40, maxSize: 1000, size: 180 },
   editingMode = 'row',
+  enableBottomToolbar = true,
   enableColumnActions = true,
   enableColumnFilterChangeMode = false,
   enableColumnFilters = true,
@@ -841,9 +848,9 @@ export default <TData extends Record<string, any> = {}>({
   enableStickyHeader = false,
   enableTableFooter = true,
   enableTableHead = true,
-  enableToolbarBottom = true,
   enableToolbarInternalActions = true,
-  enableToolbarTop = true,
+  enableTopToolbar = true,
+  filterFns,
   icons,
   localization,
   positionActionsColumn = 'first',
@@ -854,13 +861,16 @@ export default <TData extends Record<string, any> = {}>({
   positionToolbarDropZone = 'top',
   rowNumberMode = 'original',
   selectAllMode = 'all',
+  sortingFns,
   ...rest
 }: MaterialReactTableProps<TData>) => (
   <MRT_TableRoot
+    aggregationFns={{ ...MRT_AggregationFns, ...aggregationFns }}
     autoResetExpanded={autoResetExpanded}
     columnResizeMode={columnResizeMode}
     defaultColumn={defaultColumn}
     editingMode={editingMode}
+    enableBottomToolbar={enableBottomToolbar}
     enableColumnActions={enableColumnActions}
     enableColumnFilterChangeMode={enableColumnFilterChangeMode}
     enableColumnFilters={enableColumnFilters}
@@ -885,9 +895,9 @@ export default <TData extends Record<string, any> = {}>({
     enableStickyHeader={enableStickyHeader}
     enableTableFooter={enableTableFooter}
     enableTableHead={enableTableHead}
-    enableToolbarBottom={enableToolbarBottom}
     enableToolbarInternalActions={enableToolbarInternalActions}
-    enableToolbarTop={enableToolbarTop}
+    enableTopToolbar={enableTopToolbar}
+    filterFns={{ ...MRT_FilterFns, ...filterFns }}
     icons={{ ...MRT_Default_Icons, ...icons }}
     localization={{ ...MRT_DefaultLocalization_EN, ...localization }}
     positionActionsColumn={positionActionsColumn}
@@ -898,6 +908,7 @@ export default <TData extends Record<string, any> = {}>({
     positionToolbarDropZone={positionToolbarDropZone}
     rowNumberMode={rowNumberMode}
     selectAllMode={selectAllMode}
+    sortingFns={{ ...MRT_SortingFns, ...sortingFns }}
     {...rest}
   />
 );

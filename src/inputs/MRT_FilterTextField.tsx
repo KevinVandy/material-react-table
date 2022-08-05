@@ -42,11 +42,11 @@ export const MRT_FilterTextField: FC<Props> = ({
       muiTableHeadCellFilterTextFieldProps,
       tableId,
     },
-    setCurrentFilterFns,
+    setColumnFilterFns,
   } = table;
   const { column } = header;
   const { columnDef } = column;
-  const { currentFilterFns } = getState();
+  const { columnFilterFns } = getState();
 
   const mTableHeadCellFilterTextFieldProps =
     muiTableHeadCellFilterTextFieldProps instanceof Function
@@ -79,7 +79,7 @@ export const MRT_FilterTextField: FC<Props> = ({
     columnDef.filterVariant === 'text' ||
     (!isSelectFilter && !isMultiSelectFilter);
 
-  const currentFilterOption = currentFilterFns?.[header.id];
+  const currentFilterOption = columnFilterFns?.[header.id];
   const filterId = `mrt-${tableId}-${header.id}-filter-text-field${
     rangeFilterIndex ?? ''
   }`;
@@ -166,7 +166,7 @@ export const MRT_FilterTextField: FC<Props> = ({
   const handleClearEmptyFilterChip = () => {
     setFilterValue('');
     column.setFilterValue(undefined);
-    setCurrentFilterFns((prev) => ({
+    setColumnFilterFns((prev) => ({
       ...prev,
       [header.id]: 'fuzzy',
     }));

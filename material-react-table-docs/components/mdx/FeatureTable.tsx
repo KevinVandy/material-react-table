@@ -252,8 +252,8 @@ const FeatureTable = () => {
       data={data}
       enablePagination={false}
       enableColumnActions={false}
-      enableToolbarBottom={false}
-      enableToolbarTop={false}
+      enableBottomToolbar={false}
+      enableTopToolbar={false}
       initialState={{
         sorting: [{ id: 'feature', desc: false }],
         density: 'compact',

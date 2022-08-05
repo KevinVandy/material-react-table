@@ -55,7 +55,7 @@ export const TopToolbarHidden: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableRowSelection
-    enableToolbarTop={false}
+    enableTopToolbar={false}
   />
 );
 
@@ -64,7 +64,7 @@ export const BottomToolbarHidden: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableRowSelection
-    enableToolbarBottom={false}
+    enableBottomToolbar={false}
   />
 );
 
@@ -73,8 +73,8 @@ export const NoToolbars: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableRowSelection
-    enableToolbarTop={false}
-    enableToolbarBottom={false}
+    enableTopToolbar={false}
+    enableBottomToolbar={false}
   />
 );
 
@@ -112,18 +112,18 @@ export const TableTitle: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableRowSelection
-    renderToolbarTopCustomActions={(table) => {
+    renderTopToolbarCustomActions={(table) => {
       return <Typography variant="h4">Table Title</Typography>;
     }}
   />
 );
 
-export const CustomToolbarTopActions: Story<MaterialReactTableProps> = () => (
+export const CustomTopToolbarActions: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     enableRowSelection
-    renderToolbarTopCustomActions={(table) => {
+    renderTopToolbarCustomActions={(table) => {
       const handleCreateNewUser = () => {
         prompt('Create new user modal');
       };
@@ -141,14 +141,14 @@ export const CustomToolbarTopActions: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const CustomToolbarBottomActions: Story<
+export const CustomBottomToolbarActions: Story<
   MaterialReactTableProps
 > = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     enableRowSelection
-    renderToolbarBottomCustomActions={(table) => {
+    renderBottomToolbarCustomActions={(table) => {
       const handleCreateNewUser = () => {
         prompt('Create new user modal');
       };
@@ -166,14 +166,14 @@ export const CustomToolbarBottomActions: Story<
   />
 );
 
-export const CustomToolbarTopSelectionActions: Story<
+export const CustomTopToolbarSelectionActions: Story<
   MaterialReactTableProps
 > = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     enableRowSelection
-    renderToolbarTopCustomActions={({ table }) => {
+    renderTopToolbarCustomActions={({ table }) => {
       const handleDeactivate = () => {
         table.getSelectedRowModel().flatRows.map((row) => {
           alert('deactivating ' + row.original.firstName);
@@ -224,14 +224,14 @@ export const CustomToolbarTopSelectionActions: Story<
   />
 );
 
-export const CustomToolbarBottomSelectionActions: Story<
+export const CustomBottomToolbarSelectionActions: Story<
   MaterialReactTableProps
 > = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     enableRowSelection
-    renderToolbarBottomCustomActions={({ table }) => {
+    renderBottomToolbarCustomActions={({ table }) => {
       const handleDeactivate = () => {
         table.getSelectedRowModel().flatRows.map((row) => {
           alert('deactivating ' + row.original.firstName);
@@ -288,7 +288,7 @@ export const ToolbarAlertBannerBottom: Story<MaterialReactTableProps> = () => (
     data={data}
     enableRowSelection
     positionToolbarAlertBanner="bottom"
-    renderToolbarTopCustomActions={({ table }) => {
+    renderTopToolbarCustomActions={({ table }) => {
       const handleCreateNewUser = () => {
         prompt('Create new user modal');
       };
@@ -327,7 +327,7 @@ export const ToolbarAlertBannerBottomWithActionsAlsoBottom: Story<
     data={data}
     enableRowSelection
     positionToolbarAlertBanner="bottom"
-    renderToolbarBottomCustomActions={({ table }) => {
+    renderBottomToolbarCustomActions={({ table }) => {
       const handleCreateNewUser = () => {
         prompt('Create new user modal');
       };

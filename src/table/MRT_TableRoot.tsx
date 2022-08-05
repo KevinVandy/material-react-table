@@ -23,7 +23,6 @@ import {
   getDefaultColumnFilterFn,
   defaultDisplayColumnDefOptions,
 } from '../column.utils';
-import { MRT_FilterFns } from '../filtersFns';
 import type {
   MRT_Cell,
   MRT_Column,
@@ -86,7 +85,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   const [showGlobalFilter, setShowGlobalFilter] = useState(
     initialState?.showGlobalFilter ?? false,
   );
-  const [currentFilterFns, setCurrentFilterFns] = useState<{
+  const [columnFilterFns, setColumnFilterFns] = useState<{
     [key: string]: MRT_FilterOption;
   }>(() =>
     Object.assign(
@@ -97,7 +96,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
             col.filterFn instanceof Function
               ? col.filterFn.name ?? 'custom'
               : col.filterFn ??
-                initialState?.currentFilterFns?.[
+                initialState?.columnFilterFns?.[
                   col.id?.toString() ?? col.accessorKey?.toString() ?? ''
                 ] ??
                 getDefaultColumnFilterFn(col),
@@ -105,12 +104,11 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       ),
     ),
   );
-  const [currentGlobalFilterFn, setCurrentGlobalFilterFn] =
-    useState<MRT_FilterOption>(
-      props.globalFilterFn instanceof String
-        ? (props.globalFilterFn as MRT_FilterOption)
-        : 'fuzzy',
-    );
+  const [globalFilterFn, setGlobalFilterFn] = useState<MRT_FilterOption>(
+    props.globalFilterFn instanceof String
+      ? (props.globalFilterFn as MRT_FilterOption)
+      : 'fuzzy',
+  );
 
   const displayColumns = useMemo(
     () =>
@@ -200,15 +198,20 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
 
   const columnDefs = useMemo(
     () =>
-      prepareColumns([...displayColumns, ...props.columns], currentFilterFns),
-    [currentFilterFns, displayColumns, props.columns],
+      prepareColumns(
+        [...displayColumns, ...props.columns],
+        columnFilterFns,
+        props.filterFns as any,
+        props.sortingFns as any,
+      ),
+    [columnFilterFns, displayColumns, props.columns],
   );
 
   const data: TData[] = useMemo(
     () =>
       (props.state?.isLoading || props.state?.showSkeletons) &&
       !props.data.length
-        ? [...Array(10).fill(null)].map(() =>
+        ? [...Array(5).fill(null)].map(() =>
             Object.assign(
               {},
               ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef[]).map(
@@ -238,10 +241,9 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       //@ts-ignore
       columns: columnDefs,
       data,
-
       globalFilterFn:
         //@ts-ignore
-        MRT_FilterFns[currentGlobalFilterFn] ?? MRT_FilterFns.fuzzy,
+        props.filterFns[globalFilterFn] ?? props.filterFns.fuzzy,
       initialState,
       state: {
         columnOrder,
@@ -249,8 +251,8 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
         currentDraggingRow,
         currentEditingCell,
         currentEditingRow,
-        currentFilterFns,
-        currentGlobalFilterFn,
+        columnFilterFns,
+        globalFilterFn,
         currentHoveredColumn,
         currentHoveredRow,
         density,
@@ -270,9 +272,8 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       props.onCurrentEditingCellChange ?? setCurrentEditingCell,
     setCurrentEditingRow:
       props.onCurrentEditingRowChange ?? setCurrentEditingRow,
-    setCurrentFilterFns: props.onCurrentFilterFnsChange ?? setCurrentFilterFns,
-    setCurrentGlobalFilterFn:
-      props.onCurrentGlobalFilterFnChange ?? setCurrentGlobalFilterFn,
+    setColumnFilterFns: props.onCurrentFilterFnsChange ?? setColumnFilterFns,
+    setGlobalFilterFn: props.onCurrentGlobalFilterFnChange ?? setGlobalFilterFn,
     setCurrentHoveredColumn:
       props.onCurrentHoveredColumnChange ?? setCurrentHoveredColumn,
     setCurrentHoveredRow:
@@ -283,8 +284,6 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
     setShowFilters: props.onShowFiltersChange ?? setShowFilters,
     setShowGlobalFilter: props.onShowGlobalFilterChange ?? setShowGlobalFilter,
   } as MRT_TableInstance;
-
-  useEffect(() => props?.onTableInstanceChange?.(table as any), [table]);
 
   return (
     <>

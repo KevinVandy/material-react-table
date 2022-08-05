@@ -119,10 +119,10 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
       columnFilterModeOptions,
       localization,
     },
-    setCurrentFilterFns,
-    setCurrentGlobalFilterFn,
+    setColumnFilterFns,
+    setGlobalFilterFn,
   } = table;
-  const { currentFilterFns, currentGlobalFilterFn, density } = getState();
+  const { columnFilterFns, globalFilterFn, density } = getState();
   const { column } = header ?? {};
   const { columnDef } = column ?? {};
 
@@ -144,7 +144,7 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
 
   const handleSelectFilterType = (option: MRT_FilterOption) => {
     if (header && column) {
-      setCurrentFilterFns((prev: { [key: string]: any }) => ({
+      setColumnFilterFns((prev: { [key: string]: any }) => ({
         ...prev,
         [header.id]: option,
       }));
@@ -156,15 +156,13 @@ export const MRT_FilterOptionMenu: FC<Props> = ({
         column.setFilterValue('');
       }
     } else {
-      setCurrentGlobalFilterFn(option);
+      setGlobalFilterFn(option);
     }
     setAnchorEl(null);
     onSelect?.();
   };
 
-  const filterOption = !!header
-    ? currentFilterFns[header.id]
-    : currentGlobalFilterFn;
+  const filterOption = !!header ? columnFilterFns[header.id] : globalFilterFn;
 
   return (
     <Menu

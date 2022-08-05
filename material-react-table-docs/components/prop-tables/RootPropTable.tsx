@@ -91,8 +91,8 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
       enablePagination={false}
       enablePinning
       enableRowNumbers
-      enableToolbarBottom={false}
-      enableToolbarTop={!onlyProps}
+      enableBottomToolbar={false}
+      enableTopToolbar={!onlyProps}
       initialState={{
         columnVisibility: { required: false },
         density: 'compact',

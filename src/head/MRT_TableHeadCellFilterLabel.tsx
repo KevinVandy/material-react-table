@@ -15,7 +15,7 @@ export const MRT_TableHeadCellFilterLabel: FC<Props> = ({ header, table }) => {
       localization,
     },
   } = table;
-  const { currentFilterFns } = getState();
+  const { columnFilterFns } = getState();
   const { column } = header;
   const { columnDef } = column;
 
@@ -24,7 +24,7 @@ export const MRT_TableHeadCellFilterLabel: FC<Props> = ({ header, table }) => {
     'betweenInclusive',
     'inNumberRange',
   ].includes(columnDef._filterFn);
-  const currentFilterOption = currentFilterFns?.[header.id];
+  const currentFilterOption = columnFilterFns?.[header.id];
   const filterTooltip = localization.filteringByColumn
     .replace('{column}', String(columnDef.header))
     .replace(

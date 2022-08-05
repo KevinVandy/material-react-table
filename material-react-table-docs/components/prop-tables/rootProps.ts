@@ -528,7 +528,7 @@ export const rootProps = [
     type: 'boolean',
   },
   {
-    propName: 'enableToolbarBottom',
+    propName: 'enableBottomToolbar',
     defaultValue: 'true',
     description: '',
     link: '',
@@ -548,7 +548,7 @@ export const rootProps = [
     type: 'boolean',
   },
   {
-    propName: 'enableToolbarTop',
+    propName: 'enableTopToolbar',
     defaultValue: 'true',
     description: '',
     link: '',
@@ -1178,7 +1178,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'muiTableToolbarBottomProps',
+    propName: 'muiTableBottomToolbarProps',
     defaultValue: '',
     description: '',
     link: '',
@@ -1188,7 +1188,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'muiTableToolbarTopProps',
+    propName: 'muiTableTopToolbarProps',
     defaultValue: '',
     description: '',
     link: '',
@@ -1478,26 +1478,6 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onStateChange',
-    defaultValue: '',
-    description: '',
-    link: '',
-    linkText: '',
-    required: false,
-    source: '',
-    type: '',
-  },
-  {
-    propName: 'onTableInstanceChange',
-    defaultValue: '',
-    description: '',
-    link: '',
-    linkText: '',
-    required: false,
-    source: '',
-    type: '',
-  },
-  {
     propName: 'pageCount',
     defaultValue: '',
     description: '',
@@ -1608,7 +1588,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'renderToolbarBottomCustomActions',
+    propName: 'renderBottomToolbarCustomActions',
     defaultValue: '',
     description: '',
     link: '',
@@ -1618,7 +1598,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'renderToolbarTopCustomActions',
+    propName: 'renderTopToolbarCustomActions',
     defaultValue: '',
     description: '',
     link: '',

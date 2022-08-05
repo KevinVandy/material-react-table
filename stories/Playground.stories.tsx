@@ -55,7 +55,6 @@ Default.args = {
     age: faker.datatype.number(80),
     address: faker.address.streetAddress(),
   })),
-  onTableInstanceChange: (table) => console.log({ table }),
 } as MaterialReactTableProps<Row>;
 
 export const MinimumFeatures = Template.bind({});
@@ -90,8 +89,8 @@ MinimumFeatures.args = {
   enablePagination: false,
   enableSorting: false,
   enableStickyHeader: false,
-  enableToolbarBottom: false,
-  enableToolbarTop: false,
+  enableBottomToolbar: false,
+  enableTopToolbar: false,
   muiTableBodyRowProps: { hover: false },
 } as MaterialReactTableProps<Row>;
 
@@ -209,7 +208,7 @@ MaximumFeatures.args = {
       <ShareIcon /> Share
     </MenuItem>,
   ],
-  renderToolbarTopCustomActions: ({ table }) => {
+  renderTopToolbarCustomActions: ({ table }) => {
     const handleDeactivate = () => {
       table.getSelectedRowModel().rows.forEach((row) => {
         console.info('deactivating ' + row.original);

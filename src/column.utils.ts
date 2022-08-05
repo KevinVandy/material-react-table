@@ -7,7 +7,7 @@ import {
   MRT_DisplayColumnIds,
   MRT_FilterOption,
 } from '.';
-import { MRT_FilterFns } from './filtersFns';
+import { MRT_FilterFns } from './filterFns';
 import { MRT_SortingFns } from './sortingFns';
 
 export const defaultDisplayColumnDefOptions = {
@@ -50,7 +50,10 @@ export const getAllLeafColumnDefs = <TData extends Record<string, any> = {}>(
 
 export const prepareColumns = <TData extends Record<string, any> = {}>(
   columnDefs: MRT_ColumnDef<TData>[],
-  currentFilterFns: { [key: string]: MRT_FilterOption },
+  columnFilterFns: { [key: string]: MRT_FilterOption },
+  filterFns: typeof MRT_FilterFns & MaterialReactTableProps<TData>['filterFns'],
+  sortingFns: typeof MRT_SortingFns &
+    MaterialReactTableProps<TData>['sortingFns'],
 ): MRT_DefinedColumnDef<TData>[] =>
   columnDefs.map((columnDef) => {
     if (!columnDef.id) columnDef.id = getColumnId(columnDef);
@@ -62,18 +65,23 @@ export const prepareColumns = <TData extends Record<string, any> = {}>(
     if (!columnDef.columnDefType) columnDef.columnDefType = 'data';
     if (!!columnDef.columns?.length) {
       columnDef.columnDefType = 'group';
-      columnDef.columns = prepareColumns(columnDef.columns, currentFilterFns);
+      columnDef.columns = prepareColumns(
+        columnDef.columns,
+        columnFilterFns,
+        filterFns,
+        sortingFns,
+      );
     } else if (columnDef.columnDefType === 'data') {
-      if (Object.keys(MRT_FilterFns).includes(currentFilterFns[columnDef.id])) {
+      if (Object.keys(filterFns).includes(columnFilterFns[columnDef.id])) {
         columnDef.filterFn =
           // @ts-ignore
-          MRT_FilterFns[currentFilterFns[columnDef.id]] ?? MRT_FilterFns.fuzzy;
+          filterFns[columnFilterFns[columnDef.id]] ?? filterFns.fuzzy;
         //@ts-ignore
-        columnDef._filterFn = currentFilterFns[columnDef.id];
+        columnDef._filterFn = columnFilterFns[columnDef.id];
       }
-      if (Object.keys(MRT_SortingFns).includes(columnDef.sortingFn as string)) {
+      if (Object.keys(sortingFns).includes(columnDef.sortingFn as string)) {
         // @ts-ignore
-        columnDef.sortingFn = MRT_SortingFns[columnDef.sortingFn];
+        columnDef.sortingFn = sortingFns[columnDef.sortingFn];
       }
     } else if (columnDef.columnDefType === 'display') {
       columnDef = {

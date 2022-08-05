@@ -1,5 +1,5 @@
 {
-  "version": "0.32.2",
+  "version": "0.33.0",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -60,14 +60,14 @@
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.4",
     "@size-limit/preset-small-lib": "^8.0.0",
-    "@storybook/addon-a11y": "^6.5.9",
-    "@storybook/addon-actions": "^6.5.9",
-    "@storybook/addon-essentials": "^6.5.9",
+    "@storybook/addon-a11y": "^6.5.10",
+    "@storybook/addon-actions": "^6.5.10",
+    "@storybook/addon-essentials": "^6.5.10",
     "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-links": "^6.5.9",
-    "@storybook/addon-storysource": "^6.5.9",
-    "@storybook/addons": "^6.5.9",
-    "@storybook/react": "^6.5.9",
+    "@storybook/addon-links": "^6.5.10",
+    "@storybook/addon-storysource": "^6.5.10",
+    "@storybook/addons": "^6.5.10",
+    "@storybook/react": "^6.5.10",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "babel-loader": "^8.2.5",
@@ -96,7 +96,7 @@
   },
   "dependencies": {
     "@tanstack/match-sorter-utils": "8.1.1",
-    "@tanstack/react-table": "8.5.5",
-    "@tanstack/react-virtual": "^3.0.0-beta.14"
+    "@tanstack/react-table": "8.5.10",
+    "@tanstack/react-virtual": "^3.0.0-beta.17"
   }
 }

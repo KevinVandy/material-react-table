@@ -98,7 +98,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateOption: 'currentFilterFns',
+    stateOption: 'columnFilterFns',
     type: '{ [key: string]: MRT_FilterFn }',
   },
   {
@@ -107,7 +107,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateOption: 'currentGlobalFilterFn',
+    stateOption: 'globalFilterFn',
     type: 'MRT_FilterFn',
   },
   {

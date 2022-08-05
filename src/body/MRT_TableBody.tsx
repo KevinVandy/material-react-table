@@ -44,7 +44,7 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
         rankGlobalFuzzy(a, b),
       );
       if (enablePagination) {
-        return rankedRows.slice(0, pagination.pageSize);
+        return rankedRows.slice(pagination.pageIndex, pagination.pageSize);
       }
       return rankedRows;
     }

@@ -90,7 +90,7 @@ export const EnableRowVirtualization: Story<MaterialReactTableProps> = () => (
     enablePagination={false}
     enableRowNumbers
     enableRowVirtualization
-    enableToolbarBottom={false}
+    enableBottomToolbar={false}
   />
 );
 
@@ -104,7 +104,7 @@ export const EnableRowVirtualizationWithColumnResizing: Story<
     enablePagination={false}
     enableRowNumbers
     enableRowVirtualization
-    enableToolbarBottom={false}
+    enableBottomToolbar={false}
     virtualizerProps={{ enableSmoothScroll: true }}
   />
 );

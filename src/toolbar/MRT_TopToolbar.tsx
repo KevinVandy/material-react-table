@@ -24,19 +24,19 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_ToolbarTop: FC<Props> = ({ table }) => {
+export const MRT_TopToolbar: FC<Props> = ({ table }) => {
   const {
     getState,
     options: {
       enableGlobalFilter,
       enablePagination,
       enableToolbarInternalActions,
-      muiTableToolbarTopProps,
+      muiTableTopToolbarProps,
       positionGlobalFilter,
       positionPagination,
       positionToolbarAlertBanner,
       positionToolbarDropZone,
-      renderToolbarTopCustomActions,
+      renderTopToolbarCustomActions,
       tableId,
     },
   } = table;
@@ -46,12 +46,12 @@ export const MRT_ToolbarTop: FC<Props> = ({ table }) => {
   const isMobile = useMediaQuery('(max-width:720px)');
 
   const toolbarProps =
-    muiTableToolbarTopProps instanceof Function
-      ? muiTableToolbarTopProps({ table })
-      : muiTableToolbarTopProps;
+    muiTableTopToolbarProps instanceof Function
+      ? muiTableTopToolbarProps({ table })
+      : muiTableTopToolbarProps;
 
   const stackAlertBanner =
-    isMobile || !!renderToolbarTopCustomActions || showGlobalFilter;
+    isMobile || !!renderTopToolbarCustomActions || showGlobalFilter;
 
   return (
     <Toolbar
@@ -95,7 +95,7 @@ export const MRT_ToolbarTop: FC<Props> = ({ table }) => {
           <MRT_GlobalFilterTextField table={table} />
         )}
 
-        {renderToolbarTopCustomActions?.({ table }) ?? <span />}
+        {renderTopToolbarCustomActions?.({ table }) ?? <span />}
         {enableToolbarInternalActions ? (
           <MRT_ToolbarInternalButtons table={table} />
         ) : (

@@ -80,8 +80,8 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
       enablePagination={false}
       enablePinning
       enableRowNumbers
-      enableToolbarBottom={false}
-      enableToolbarTop={!onlyProps}
+      enableBottomToolbar={false}
+      enableTopToolbar={!onlyProps}
       initialState={{
         columnPinning: { left: ['mrt-row-numbers', 'stateOption'], right: [] },
         density: 'compact',

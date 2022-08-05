@@ -3,7 +3,7 @@ import { alpha, Box, Toolbar, useMediaQuery } from '@mui/material';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
-import { commonToolbarStyles } from './MRT_ToolbarTop';
+import { commonToolbarStyles } from './MRT_TopToolbar';
 import { MRT_TableInstance } from '..';
 import { MRT_ToolbarDropZone } from './MRT_ToolbarDropZone';
 
@@ -11,16 +11,16 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_ToolbarBottom: FC<Props> = ({ table }) => {
+export const MRT_BottomToolbar: FC<Props> = ({ table }) => {
   const {
     getState,
     options: {
       enablePagination,
-      muiTableToolbarBottomProps,
+      muiTableBottomToolbarProps,
       positionPagination,
       positionToolbarAlertBanner,
       positionToolbarDropZone,
-      renderToolbarBottomCustomActions,
+      renderBottomToolbarCustomActions,
       tableId,
     },
   } = table;
@@ -29,11 +29,11 @@ export const MRT_ToolbarBottom: FC<Props> = ({ table }) => {
   const isMobile = useMediaQuery('(max-width:720px)');
 
   const toolbarProps =
-    muiTableToolbarBottomProps instanceof Function
-      ? muiTableToolbarBottomProps({ table })
-      : muiTableToolbarBottomProps;
+    muiTableBottomToolbarProps instanceof Function
+      ? muiTableBottomToolbarProps({ table })
+      : muiTableBottomToolbarProps;
 
-  const stackAlertBanner = isMobile || !!renderToolbarBottomCustomActions;
+  const stackAlertBanner = isMobile || !!renderBottomToolbarCustomActions;
 
   return (
     <Toolbar
@@ -68,9 +68,9 @@ export const MRT_ToolbarBottom: FC<Props> = ({ table }) => {
           width: '100%',
         }}
       >
-        {renderToolbarBottomCustomActions ? (
+        {renderBottomToolbarCustomActions ? (
           <Box sx={{ p: '0.5rem' }}>
-            {renderToolbarBottomCustomActions({ table })}
+            {renderBottomToolbarCustomActions({ table })}
           </Box>
         ) : (
           <span />

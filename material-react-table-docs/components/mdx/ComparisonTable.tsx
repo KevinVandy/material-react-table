@@ -118,8 +118,8 @@ const ComparisonTable = () => {
       data={data}
       enablePagination={false}
       enableColumnActions={false}
-      enableToolbarBottom={false}
-      enableToolbarTop={false}
+      enableBottomToolbar={false}
+      enableTopToolbar={false}
     />
   );
 };

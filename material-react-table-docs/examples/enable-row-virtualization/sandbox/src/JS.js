@@ -76,7 +76,7 @@ const Example = () => {
       enablePagination={false}
       enableRowNumbers
       enableRowVirtualization
-      enableToolbarBottom={false}
+      enableBottomToolbar={false}
       initialState={{ density: 'compact' }}
       muiTableContainerProps={{ sx: { maxHeight: '600px' } }}
       state={{ isLoading }}

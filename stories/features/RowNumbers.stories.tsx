@@ -70,7 +70,7 @@ export const enableRowNumbersOriginalVirtual: Story<
     data={data}
     enablePagination={false}
     enableRowNumbers
-    enableToolbarBottom={false}
+    enableBottomToolbar={false}
     rowNumberMode="original"
   />
 );
@@ -84,7 +84,7 @@ export const enableRowNumbersStaticVirtual: Story<
     enablePagination={false}
     enableRowNumbers
     enableRowVirtualization
-    enableToolbarBottom={false}
+    enableBottomToolbar={false}
     rowNumberMode="static"
   />
 );

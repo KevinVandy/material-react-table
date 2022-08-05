@@ -93,7 +93,7 @@ export const FilterFnAndFilterVariants: Story<MaterialReactTableProps> = () => (
       {
         header: 'Age',
         accessorKey: 'age',
-        filterFn: 'between',
+        filterVariant: 'range',
       },
       {
         header: 'Gender',
@@ -319,11 +319,13 @@ export const CustomFilterFns: Story<MaterialReactTableProps> = () => (
     data={data}
     initialState={{ showColumnFilters: true }}
     filterFns={{
-      customFn: (row, _columnIds, filterValue) =>
-        row
+      customFn: (row, _columnIds, filterValue) => {
+        console.info('customFn', row, _columnIds, filterValue);
+        return row
           .getValue<string>('state')
           .toLowerCase()
-          .startsWith(filterValue.toLowerCase()),
+          .startsWith(filterValue.toLowerCase());
+      },
     }}
   />
 );
