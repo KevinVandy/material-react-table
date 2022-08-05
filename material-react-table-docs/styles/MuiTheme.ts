@@ -1,9 +1,9 @@
 import { createTheme } from '@mui/material';
 
-export const theme = (darkTheme: boolean) =>
+export const theme = (isLightTheme: boolean) =>
   createTheme({
     palette: {
-      mode: darkTheme ? 'dark' : 'light',
+      mode: isLightTheme ? 'light' : 'dark',
       secondary: {
         main: 'rgb(22,178,170)',
       },

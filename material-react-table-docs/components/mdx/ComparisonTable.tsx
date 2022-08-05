@@ -93,7 +93,7 @@ const data = [
     library: 'MUI X Data Grid',
     libraryLink: 'https://mui.com/x/react-data-grid/',
     freeOrLicensed: 'Free MIT',
-    bundleSize: 88,
+    bundleSize: 91,
     bundlePhobiaLink:
       'https://badgen.net/bundlephobia/minzip/@mui/x-data-grid@latest?color=orange',
     description:
@@ -103,7 +103,7 @@ const data = [
     library: 'MUI X Data Grid Pro/Premium',
     libraryLink: 'https://mui.com/store/items/mui-x-premium/',
     freeOrLicensed: 'Paid License',
-    bundleSize: 101,
+    bundleSize: 105,
     bundlePhobiaLink:
       'https://badgen.net/bundlephobia/minzip/@mui/x-data-grid-pro?color=orange',
     description:

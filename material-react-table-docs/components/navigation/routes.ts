@@ -1,4 +1,6 @@
-export const routes = [
+type RouteItem = { href: string; label: string; items?: RouteItem[] };
+
+export const routes: Array<RouteItem> = [
   {
     href: '/',
     label: 'Home',
@@ -218,21 +220,6 @@ export const routes = [
           {
             href: '/docs/guides/sticky-header',
             label: 'Sticky Header',
-          },
-        ],
-      },
-      {
-        label: 'Other Advanced Guides',
-        href: '/docs/guides#other-advanced-guides',
-        items: [
-          {
-            href: '/docs/guides/persistent-state',
-            label: 'Persistent State',
-          },
-
-          {
-            href: '/docs/guides/typescript',
-            label: 'TypeScript Usage',
           },
         ],
       },

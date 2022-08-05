@@ -38,16 +38,16 @@ const IconButton = styled(MuiIconButton)({
 });
 
 interface Props {
-  darkTheme: boolean;
+  isLightTheme: boolean;
   navOpen: boolean;
-  setDarkTheme: (darkTheme: boolean) => void;
+  setIsLightTheme: (isLightTheme: boolean) => void;
   setNavOpen: (navOpen: boolean) => void;
 }
 
 const TopBar: FC<Props> = ({
-  darkTheme,
+  isLightTheme,
   navOpen,
-  setDarkTheme,
+  setIsLightTheme,
   setNavOpen,
 }) => {
   const isMobile = useMediaQuery('(max-width: 600px)');
@@ -125,12 +125,12 @@ const TopBar: FC<Props> = ({
           <Tooltip arrow title="Toggle Light/Dark Mode">
             <IconButton
               aria-label="Toggle Light/Dark Mode"
-              onClick={() => setDarkTheme(!darkTheme)}
+              onClick={() => setIsLightTheme(!isLightTheme)}
             >
-              {darkTheme ? (
-                <DarkModeIcon fontSize="large" />
-              ) : (
+              {isLightTheme ? (
                 <LightModeIcon fontSize="large" />
+              ) : (
+                <DarkModeIcon fontSize="large" />
               )}
             </IconButton>
           </Tooltip>
