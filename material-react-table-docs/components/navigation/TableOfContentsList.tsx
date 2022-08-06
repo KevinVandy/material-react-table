@@ -27,6 +27,7 @@ const TableOfContentsList: FC<Props> = ({
             <Link href={item.href} passHref>
               <MuiLink
                 sx={{
+                  color: isFooter ? 'text.secondary' : 'primary.main',
                   cursor: 'pointer',
                   lineHeight: isFooter ? '1rem' : '2rem',
                   fontSize: isFooter ? '0.8rem' : '1.2rem',

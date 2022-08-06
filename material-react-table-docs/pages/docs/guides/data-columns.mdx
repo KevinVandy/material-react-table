@@ -85,9 +85,9 @@ const columns = useMemo(
 );
 ```
 
-### Custom Header JSX Render
+### Custom Header Render
 
-If you want to pass in custom JSX to render the header, you can pass in a `Header` property in addition to the `header` string property.
+If you want to pass in custom JSX to render the header, you can pass in a `Header` option in addition to the `header` string property.
 
 > The `header` (lowercase) property is still required and still must only be a string because it is used within multiple components in the table and has string manipulation methods performed on it.
 
@@ -105,6 +105,30 @@ const columns = useMemo(
       accessorKey: 'age',
       header: 'Age',
       Header: <i style={{ color: 'red' }}>Age</i>, //plain jsx with no function
+    },
+  ],
+  [],
+);
+```
+
+### Custom Cell Render
+
+Similarly, the data cells in a column can have a custom JSX render with the `Cell` option.
+
+```tsx
+const columns = useMemo(
+  () => [
+    {
+      accessorKey: 'salary',
+      header: 'Salary',
+      Cell: ({ cell }) => (
+        <span>${cell.getValue<number>().toLocaleString()}</span>
+      ),
+    },
+    {
+      accessorKey: 'profileImage',
+      header: 'Profile Image',
+      Cell: ({ cell }) => <img src={cell.getValue<string>()} />,
     },
   ],
   [],

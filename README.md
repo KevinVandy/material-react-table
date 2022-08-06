@@ -43,7 +43,7 @@ See all [Props and Options](https://www.material-react-table.com/docs/api)
  - [Data Export Table](https://www.material-react-table.com/docs/examples/data-export/) (Export to CSV, Excel, etc.)
  - [Remote Data](https://www.material-react-table.com/docs/examples/remote/) (Server-side Pagination, Sorting, and Filtering)
  - [React Query](https://www.material-react-table.com/docs/examples/react-query/) (Server-side Pagination, Sorting, and Filtering)
- - [Virtualized Rows](https://www.material-react-table.com/docs/examples/virtualized/) (20,000 rows at once!)
+ - [Virtualized Rows](https://www.material-react-table.com/docs/examples/virtualized/) (10,000 rows at once!)
 
 View additional [storybook examples](https://www.material-react-table.dev/)
 

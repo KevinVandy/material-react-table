@@ -95,7 +95,7 @@ const HomePage = () => {
               Material&nbsp;UI&nbsp;V5
             </MuiLink>
           </Link>{' '}
-          and{' '}
+          and&nbsp;
           <Link href="https://tanstack.com/table/v8" passHref>
             <MuiLink
               color="secondary.main"
@@ -128,6 +128,7 @@ const HomePage = () => {
           Quickly Create High Quality React Data Tables with{' '}
           <Box
             sx={{
+              display: 'inline',
               fontStyle: 'italic',
             }}
           >
