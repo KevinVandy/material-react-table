@@ -85,8 +85,8 @@ export const prepareColumns = <TData extends Record<string, any> = {}>(
       }
     } else if (columnDef.columnDefType === 'display') {
       columnDef = {
-        ...columnDef,
         ...(defaultDisplayColumnDefOptions as MRT_ColumnDef<TData>),
+        ...columnDef,
       };
     }
     return columnDef;

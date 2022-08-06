@@ -93,3 +93,24 @@ Here is a full example and demo for customizing display columns
 <Example />
 
 ### Create your own Display Columns
+
+You don't have to use the built in Row Actions feature. You can just create your own display columns instead. It is as easy as creating a normal column, but specifying the `columnDefType` as `display`.
+
+```tsx
+const columns = [
+  {
+    id: 'sendEmail',
+    header: 'Send Email',
+    columnDefType: 'display', //turns off data column features like sorting, filtering, etc.
+    enableColumnOrdering: true, //but you can turn back any of those features on if you want like this
+    Cell: ({ row }) => (
+      <Button onClick={() => sendEmail(row.original.userId)}>Send Email</Button>
+    ),
+  },
+  {
+    id: 'name',
+    header: 'Name',
+    accessorKey: 'name',
+  },
+];
+```
