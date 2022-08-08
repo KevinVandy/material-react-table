@@ -55,6 +55,7 @@ const Example = () => {
     },
     {
       getNextPageParam: (_lastGroup, groups) => groups.length,
+      keepPreviousData: true,
       onSuccess: (data) => {
         setIsFetching(false);
         setTotalRowCount(data.pages[0].meta.totalRowCount);
