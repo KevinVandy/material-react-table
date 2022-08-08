@@ -77,6 +77,10 @@ export const routes: Array<RouteItem> = [
         href: '/docs/examples/virtualized',
         label: 'Virtualized Example',
       },
+      {
+        href: '/docs/examples/infinite-scrolling',
+        label: 'Infinite Scrolling Example',
+      },
     ],
   },
   {

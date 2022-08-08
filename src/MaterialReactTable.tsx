@@ -450,12 +450,12 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     | 'onStateChange'
     | 'state'
   > & {
-    displayColumnDefOptions?: Partial<{
-      [key in MRT_DisplayColumnIds]: Partial<MRT_ColumnDef>;
-    }>;
     columnFilterModeOptions?: (MRT_FilterOption | string)[] | null;
     columns: MRT_ColumnDef<TData>[];
     data: TData[];
+    displayColumnDefOptions?: Partial<{
+      [key in MRT_DisplayColumnIds]: Partial<MRT_ColumnDef>;
+    }>;
     editingMode?: 'table' | 'row' | 'cell';
     enableBottomToolbar?: boolean;
     enableClickToCopy?: boolean;

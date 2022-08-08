@@ -66,7 +66,7 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
         count: rows.length,
         estimateSize: () => (density === 'compact' ? 25 : 50),
         getScrollElement: () => tableContainerRef.current as HTMLDivElement,
-        overscan: density === 'compact' ? 30 : 10,
+        overscan: 10,
         ...vProps,
       })
     : ({} as any);

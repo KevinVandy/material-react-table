@@ -211,7 +211,13 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
     () =>
       (props.state?.isLoading || props.state?.showSkeletons) &&
       !props.data.length
-        ? [...Array(5).fill(null)].map(() =>
+        ? [
+            ...Array(
+              props.state?.pagination?.pageSize ||
+                initialState?.pagination?.pageSize ||
+                10,
+            ).fill(null),
+          ].map(() =>
             Object.assign(
               {},
               ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef[]).map(

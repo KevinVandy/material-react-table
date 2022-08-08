@@ -3,7 +3,7 @@ import external from 'rollup-plugin-peer-deps-external';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import { babel } from '@rollup/plugin-babel';
-import { terser } from 'rollup-plugin-terser';
+// import { terser } from 'rollup-plugin-terser';
 
 export default [
   {
@@ -28,7 +28,7 @@ export default [
       external(),
       resolve(),
       typescript(),
-      terser(),
+      // terser(),
     ],
   },
   {

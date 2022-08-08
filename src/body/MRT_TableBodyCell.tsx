@@ -1,4 +1,11 @@
-import React, { DragEvent, FC, MouseEvent, RefObject, useMemo } from 'react';
+import React, {
+  DragEvent,
+  FC,
+  MouseEvent,
+  RefObject,
+  useEffect,
+  useState,
+} from 'react';
 import {
   alpha,
   darken,
@@ -74,15 +81,6 @@ export const MRT_TableBodyCell: FC<Props> = ({
     ...mcTableCellBodyProps,
   };
 
-  const skeletonWidth = useMemo(
-    () =>
-      columnDefType === 'display'
-        ? column.getSize() / 2
-        : Math.random() * (column.getSize() - column.getSize() / 3) +
-          column.getSize() / 3,
-    [],
-  );
-
   const isEditable =
     (enableEditing || columnDef.enableEditing) &&
     columnDef.enableEditing !== false;
@@ -92,6 +90,22 @@ export const MRT_TableBodyCell: FC<Props> = ({
     (editingMode === 'table' ||
       currentEditingRow?.id === row.id ||
       currentEditingCell?.id === cell.id);
+
+  const [skeletonWidth, setSkeletonWidth] = useState(0);
+  useEffect(
+    () =>
+      setSkeletonWidth(
+        isLoading || showSkeletons
+          ? columnDefType === 'display'
+            ? column.getSize() / 2
+            : Math.round(
+                Math.random() * (column.getSize() - column.getSize() / 3) +
+                  column.getSize() / 3,
+              )
+          : 100,
+      ),
+    [isLoading, showSkeletons],
+  );
 
   const handleDoubleClick = (_event: MouseEvent<HTMLTableCellElement>) => {
     if (

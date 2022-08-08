@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useLayoutEffect, useState } from 'react';
+import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { TableContainer } from '@mui/material';
 import { MRT_Table } from './MRT_Table';
 import type { MRT_TableInstance } from '..';
@@ -45,7 +45,7 @@ export const MRT_TableContainer: FC<Props> = ({ table }) => {
     setTotalToolbarHeight(topToolbarHeight + bottomToolbarHeight);
   });
 
-  const tableContainerRef = React.useRef<HTMLDivElement>(null);
+  const tableContainerRef = useRef<HTMLDivElement>(null);
 
   return (
     <TableContainer
