@@ -70,13 +70,13 @@ const columns = useMemo(
     },
     {
       //accessorFn function that combines multiple data together
-      accessorFn: (row) => `${data.firstName} ${data.lastName}`,
+      accessorFn: (row) => `${row.firstName} ${row.lastName}`,
       id: 'name',
       header: 'Name',
     },
     {
       //accessorFn used to access nested data, though you could just use dot notation in an accessorKey
-      accessorFn: (row) => data.personalInfo.age,
+      accessorFn: (row) => row.personalInfo.age,
       id: 'age',
       header: 'Age',
     },
