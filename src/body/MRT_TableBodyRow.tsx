@@ -35,7 +35,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
 
   const draggingBorder =
     currentDraggingRow?.id === row.id
-      ? `1px dashed ${theme.palette.divider}`
+      ? `1px dashed ${theme.palette.text.secondary}`
       : currentHoveredRow?.id === row.id
       ? `2px dashed ${theme.palette.primary.main}`
       : undefined;

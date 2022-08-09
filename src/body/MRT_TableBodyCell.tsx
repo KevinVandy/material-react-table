@@ -156,7 +156,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   const draggingBorder =
     currentDraggingColumn?.id === column.id
-      ? `1px dashed ${theme.palette.divider}`
+      ? `1px dashed ${theme.palette.text.secondary}`
       : currentHoveredColumn?.id === column.id
       ? `2px dashed ${theme.palette.primary.main}`
       : undefined;
