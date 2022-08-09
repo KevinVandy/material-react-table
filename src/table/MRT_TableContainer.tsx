@@ -1,4 +1,11 @@
-import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, {
+  FC,
+  RefObject,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { TableContainer } from '@mui/material';
 import { MRT_Table } from './MRT_Table';
 import type { MRT_TableInstance } from '..';
@@ -29,6 +36,9 @@ export const MRT_TableContainer: FC<Props> = ({ table }) => {
       ? muiTableContainerProps({ table })
       : muiTableContainerProps;
 
+  const tableContainerRef =
+    tableContainerProps?.ref ?? useRef<HTMLDivElement>(null);
+
   useIsomorphicLayoutEffect(() => {
     const topToolbarHeight =
       typeof document !== 'undefined'
@@ -44,8 +54,6 @@ export const MRT_TableContainer: FC<Props> = ({ table }) => {
 
     setTotalToolbarHeight(topToolbarHeight + bottomToolbarHeight);
   });
-
-  const tableContainerRef = useRef<HTMLDivElement>(null);
 
   return (
     <TableContainer
@@ -69,7 +77,10 @@ export const MRT_TableContainer: FC<Props> = ({ table }) => {
         ...tableContainerProps?.style,
       }}
     >
-      <MRT_Table tableContainerRef={tableContainerRef} table={table} />
+      <MRT_Table
+        tableContainerRef={tableContainerRef as RefObject<HTMLDivElement>}
+        table={table}
+      />
     </TableContainer>
   );
 };

@@ -44,6 +44,7 @@ See all [Props and Options](https://www.material-react-table.com/docs/api)
  - [Remote Data](https://www.material-react-table.com/docs/examples/remote/) (Server-side Pagination, Sorting, and Filtering)
  - [React Query](https://www.material-react-table.com/docs/examples/react-query/) (Server-side Pagination, Sorting, and Filtering)
  - [Virtualized Rows](https://www.material-react-table.com/docs/examples/virtualized/) (10,000 rows at once!)
+ - [Infinite Scrolling](https://www.material-react-table.com/docs/examples/infinite-scrolling/) (Fetch data as you scroll)
 
 View additional [storybook examples](https://www.material-react-table.dev/)
 

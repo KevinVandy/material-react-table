@@ -3,19 +3,26 @@ import external from 'rollup-plugin-peer-deps-external';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import { babel } from '@rollup/plugin-babel';
-// import { terser } from 'rollup-plugin-terser';
 
 export default [
   {
+    external: [
+      '@mui/icons-material',
+      '@mui/material',
+      '@tanstack/match-sorter-utils',
+      '@tanstack/react-table',
+      '@tanstack/react-virtual',
+      'react',
+    ],
     input: './src/index.tsx',
     output: [
       {
-        file: './dist/cjs/index.min.js',
+        file: './dist/cjs/index.js',
         format: 'cjs',
         sourcemap: true,
       },
       {
-        file: './dist/esm/material-react-table.esm.min.js',
+        file: './dist/esm/material-react-table.esm.js',
         format: 'esm',
         sourcemap: true,
       },
@@ -28,7 +35,6 @@ export default [
       external(),
       resolve(),
       typescript(),
-      // terser(),
     ],
   },
   {

@@ -64,7 +64,7 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
   const rowVirtualizer: Virtualizer = enableRowVirtualization
     ? useVirtualizer({
         count: rows.length,
-        estimateSize: () => (density === 'compact' ? 25 : 50),
+        estimateSize: () => (density === 'compact' ? 20 : 50),
         getScrollElement: () => tableContainerRef.current as HTMLDivElement,
         overscan: 10,
         ...vProps,

@@ -1,5 +1,5 @@
 {
-  "version": "0.33.4",
+  "version": "0.33.5",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -19,8 +19,8 @@
   "bugs": {
     "url": "https://github.com/KevinVandy/material-react-table/issues"
   },
-  "main": "dist/cjs/index.min.js",
-  "module": "dist/esm/material-react-table.esm.min.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/material-react-table.esm.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
@@ -28,11 +28,11 @@
   ],
   "size-limit": [
     {
-      "path": "dist/cjs/index.min.js",
+      "path": "dist/cjs/index.js",
       "limit": "50 KB"
     },
     {
-      "path": "dist/esm/material-react-table.esm.min.js",
+      "path": "dist/esm/material-react-table.esm.js",
       "limit": "50 KB"
     }
   ],
@@ -81,7 +81,6 @@
     "rollup": "^2.77.2",
     "rollup-plugin-dts": "^4.2.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-terser": "^7.0.2",
     "size-limit": "^8.0.0",
     "storybook-dark-mode": "^1.1.0",
     "tslib": "^2.4.0",

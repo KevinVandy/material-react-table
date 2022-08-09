@@ -1,12 +1,18 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import MaterialReactTable from 'material-react-table';
+import { Typography } from '@mui/material';
 import {
   QueryClient,
   QueryClientProvider,
   useInfiniteQuery,
 } from '@tanstack/react-query';
 import axios from 'axios';
-import { debounce, Typography } from '@mui/material';
 
 const columns = [
   {
@@ -34,61 +40,93 @@ const columns = [
 const fetchSize = 25;
 
 const Example = () => {
+  const tableContainerRef = useRef(null); //we can get access to the underlying TableContainer element and react to its scroll events
+
   const [columnFilters, setColumnFilters] = useState([]);
-  const [globalFilter, setGlobalFilter] = useState('');
+  const [globalFilter, setGlobalFilter] = useState();
   const [sorting, setSorting] = useState([]);
+
   const [totalRowCount, setTotalRowCount] = useState(0);
-  const [isFetching, setIsFetching] = useState(false);
+  const [numRowsFetched, setNumRowsFetched] = useState(0);
 
-  const { data, fetchNextPage, isError, isLoading } = useInfiniteQuery(
-    ['table-data', columnFilters, globalFilter, sorting],
-    async () => {
-      const url = new URL('/api/data', 'https://www.material-react-table.com');
-      url.searchParams.set('start', `${flatData.length || 0}`);
-      url.searchParams.set('size', `${fetchSize}`);
-      url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
-      url.searchParams.set('globalFilter', globalFilter ?? '');
-      url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
+  const { data, fetchNextPage, isError, isLoading, remove, isFetching } =
+    useInfiniteQuery(
+      ['table-data', columnFilters, globalFilter, sorting],
+      async () => {
+        const url = new URL(
+          '/api/data',
+          'https://www.material-react-table.com',
+        );
+        url.searchParams.set('start', `${numRowsFetched}`);
+        url.searchParams.set('size', `${fetchSize}`);
+        url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
+        url.searchParams.set('globalFilter', globalFilter ?? '');
+        url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
 
-      const { data: axiosData } = await axios.get(url.href);
-      return axiosData;
-    },
-    {
-      getNextPageParam: (_lastGroup, groups) => groups.length,
-      keepPreviousData: true,
-      onSuccess: (data) => {
-        setIsFetching(false);
-        setTotalRowCount(data.pages[0].meta.totalRowCount);
+        const { data: axiosData } = await axios.get(url.href);
+        return axiosData;
       },
+      {
+        getNextPageParam: (_lastGroup, groups) => groups.length,
+        keepPreviousData: true,
+        onSuccess: (data) => {
+          setTotalRowCount(data.pages[0].meta.totalRowCount); //get and store total row count from API so we will know when to stop fetching
+          setNumRowsFetched(
+            (data?.pages.flatMap((page) => page.data) ?? []).length, //record how many rows we have fetched so far
+          );
+        },
+        refetchOnWindowFocus: false,
+      },
+    );
+
+  useEffect(() => {
+    if (columnFilters.length) {
+      remove();
+      setNumRowsFetched(0);
+    }
+  }, [columnFilters, remove]);
+
+  useEffect(() => {
+    if (sorting.length) {
+      remove();
+      setNumRowsFetched(0);
+    }
+  }, [sorting, remove]);
+
+  useEffect(() => {
+    if (globalFilter?.length) {
+      remove();
+      setNumRowsFetched(0);
+    }
+  }, [globalFilter, remove]);
+
+  //called on scroll and possibly on mount to fetch more data as the user scrolls and reaches bottom of table
+  const fetchMoreOnBottomReached = useCallback(
+    (containerRef) => {
+      if (containerRef) {
+        const { scrollHeight, scrollTop, clientHeight } = containerRef;
+        //once the user has scrolled within 100px of the bottom of the table, fetch more data if we can
+        if (
+          scrollHeight - scrollTop - clientHeight < 100 &&
+          !isFetching &&
+          numRowsFetched < totalRowCount
+        ) {
+          fetchNextPage();
+        }
+      }
     },
+    [fetchNextPage, isFetching, numRowsFetched, totalRowCount],
   );
+
+  //a check on mount to see if the table is already scrolled to the bottom and immediately needs to fetch more data
+  useEffect(() => {
+    fetchMoreOnBottomReached(tableContainerRef.current);
+  }, [fetchMoreOnBottomReached]);
 
   const flatData = useMemo(
     () => data?.pages.flatMap((page) => page.data) ?? [],
     [data],
   );
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const fetchNextPageDebounced = useCallback(
-    debounce(() => {
-      if ((flatData.length ?? 0) < totalRowCount) {
-        fetchNextPage();
-      }
-    }, 500),
-    [flatData.length, totalRowCount],
-  );
-
-  const onScroll = (event) => {
-    const { scrollHeight, scrollTop, clientHeight } = event.target;
-    if (
-      scrollHeight - scrollTop - clientHeight < 20 &&
-      !isFetching &&
-      flatData.length < totalRowCount
-    ) {
-      setIsFetching(true);
-      fetchNextPageDebounced();
-    }
-  };
 
   return (
     <MaterialReactTable
@@ -100,8 +138,11 @@ const Example = () => {
       manualFiltering
       manualSorting
       muiTableContainerProps={{
-        sx: { maxHeight: '600px' },
-        onScroll,
+        ref: tableContainerRef, //get access to the table container element
+        sx: { maxHeight: '600px' }, //give the table a max height
+        onScroll: (
+          event, //add an event listener to the table container element
+        ) => fetchMoreOnBottomReached(event.target),
       }}
       muiTableToolbarAlertBannerProps={
         isError
@@ -119,7 +160,6 @@ const Example = () => {
           Fetched {flatData.length} of {totalRowCount} total rows.
         </Typography>
       )}
-      rowCount={totalRowCount}
       state={{
         columnFilters,
         globalFilter,
@@ -127,9 +167,6 @@ const Example = () => {
         showAlertBanner: isError,
         showProgressBars: isFetching,
         sorting,
-      }}
-      virtualizerProps={{
-        overscan: 5,
       }}
     />
   );

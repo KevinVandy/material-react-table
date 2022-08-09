@@ -16,7 +16,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.0",
-    "material-react-table": "^0.33.4",
+    "material-react-table": "^0.33.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
