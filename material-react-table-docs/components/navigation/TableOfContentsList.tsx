@@ -29,8 +29,8 @@ const TableOfContentsList: FC<Props> = ({
                 sx={{
                   color: isFooter ? 'text.secondary' : 'primary.main',
                   cursor: 'pointer',
-                  lineHeight: isFooter ? '1rem' : '2rem',
-                  fontSize: isFooter ? '0.8rem' : '1.2rem',
+                  lineHeight: isFooter ? '1.6rem' : '2rem',
+                  fontSize: isFooter ? '0.9rem' : '1.2rem',
                   textDecoration: 'none',
                   '&:hover': {
                     textDecoration: 'underline',

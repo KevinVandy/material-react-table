@@ -75,16 +75,31 @@ const Footer = () => {
         }}
       >
         <Typography color="text.secondary" textAlign="center">
-          © {new Date().getFullYear()} Kevin Van Cott
+          © {new Date().getFullYear()} Kevin&nbsp;Van&nbsp;Cott
         </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '1rem',
+            flexWrap: 'wrap',
+          }}
+        >
           <Link
             color="text.secondary"
             href="https://github.com/KevinVandy/material-react-table"
             target="_blank"
             rel="noopener"
           >
-            GitHub
+            Source Code
+          </Link>
+          <Link
+            color="text.secondary"
+            href="https://github.com/KevinVandy/material-react-table/issues"
+            target="_blank"
+            rel="noopener"
+          >
+            Submit a Bug Report
           </Link>
           <Link
             color="text.secondary"
