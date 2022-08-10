@@ -16,6 +16,7 @@ While MRT is pre-1.0, breaking changes are subject to occur. MRT should hit 1.0 
 
 TanStack Table 8.1 had some breaking changes that will be reflected here in MRT v0.19.0
 
+- v0.34.0 - rolled back to react-virtual 2.0 to fix flickering issue, MRT_Internal Toolbar components are now exported from MRT instead of in params
 - v0.33.0 - `onTableInstanceChange` removed, `onStateChange` removed, `currentFilterFns` renamed to `columnFilterFns`, custom `filterFns` can be used again, renamed `ToolbarBottom` to `BottomToolbar` and `ToolbarTop` to `TopToolbar`
 - v0.31.0 - new DropZone component in toolbar for grouping while dragging a column that can be grouped
 - v0.29.0 - new `filterVariant` option on columnDef to indicate if filter is a select filter, multi-select filter, text filter, etc.

@@ -14,6 +14,8 @@ import Example from '../../../examples/disable-column-hiding';
 
 ## Column Hiding Feature Guide
 
+The Column Hiding feature is enabled by default, and allows the user to hide data columns from either the column actions menu, or the columns menu.
+
 ### Relevant Props
 
 <RootPropTable
@@ -27,8 +29,6 @@ import Example from '../../../examples/disable-column-hiding';
 ### Relevant State
 
 <StateOptionsTable onlyProps={new Set(['columnVisibility'])} />
-
-The Show/Hide columns button is enabled by default in the top toolbar internal actions area.
 
 ### Disable Column Hiding
 
@@ -44,6 +44,16 @@ If you want to hide certain columns by default, you can specify an column visibi
 
 <Example />
 
-### Customize Column Hiding
+### Hide Some Columns by Default
 
-View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-column-hiding-examples--column-hiding-with-header-groups)**
+You can easily hide columns by default by setting the `columnVisibility` `state` or `initialState` to hide the desired columns by id.
+
+```tsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  initialState={{ columnVisibility: { firstName: false } }} //hide firstName column by default
+/>
+```
+
+View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-column-hiding-examples)**
