@@ -39,7 +39,7 @@ export const mdxComponents = {
   ),
   p: (props: any) => (
     <Typography
-      className="doc-content"
+      className="DocSearch-content"
       sx={{
         textAlign: {
           xs: 'left',
