@@ -1,20 +1,20 @@
 import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
-import React, { DragEventHandler, FC } from 'react';
+import React, { DragEventHandler } from 'react';
 import { MRT_TableInstance } from '..';
 
-interface Props {
+interface Props<TData extends Record<string, any> = {}> {
   iconButtonProps?: IconButtonProps;
   onDragStart: DragEventHandler<HTMLButtonElement>;
   onDragEnd: DragEventHandler<HTMLButtonElement>;
-  table: MRT_TableInstance;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_GrabHandleButton: FC<Props> = ({
+export const MRT_GrabHandleButton = <TData extends Record<string, any> = {}>({
   iconButtonProps,
   onDragEnd,
   onDragStart,
   table,
-}) => {
+}: Props<TData>) => {
   const {
     options: {
       icons: { DragHandleIcon },

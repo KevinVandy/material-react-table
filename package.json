@@ -1,5 +1,5 @@
 {
-  "version": "0.33.6",
+  "version": "0.34.0",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -55,7 +55,7 @@
     "@emotion/styled": "^11.10.0",
     "@faker-js/faker": "^7.3.0",
     "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.9.3",
+    "@mui/material": "^5.10.0",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.4",
@@ -68,7 +68,7 @@
     "@storybook/addon-storysource": "^6.5.10",
     "@storybook/addons": "^6.5.10",
     "@storybook/react": "^6.5.10",
-    "@types/react": "^18.0.15",
+    "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "babel-loader": "^8.2.5",
     "eslint": "^8.21.0",
@@ -95,7 +95,7 @@
   },
   "dependencies": {
     "@tanstack/match-sorter-utils": "8.1.1",
-    "@tanstack/react-table": "8.5.10",
-    "@tanstack/react-virtual": "^3.0.0-beta.17"
+    "@tanstack/react-table": "8.5.11",
+    "react-virtual": "^2.10.4"
   }
 }

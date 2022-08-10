@@ -62,30 +62,29 @@ const Example: FC = () => {
     { keepPreviousData: true },
   );
 
-  const columns = useMemo(
-    () =>
-      [
-        {
-          accessorKey: 'firstName',
-          header: 'First Name',
-        },
-        {
-          accessorKey: 'lastName',
-          header: 'Last Name',
-        },
-        {
-          accessorKey: 'address',
-          header: 'Address',
-        },
-        {
-          accessorKey: 'state',
-          header: 'State',
-        },
-        {
-          accessorKey: 'phoneNumber',
-          header: 'Phone Number',
-        },
-      ] as MRT_ColumnDef<User>[],
+  const columns = useMemo<MRT_ColumnDef<User>[]>(
+    () => [
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+      {
+        accessorKey: 'address',
+        header: 'Address',
+      },
+      {
+        accessorKey: 'state',
+        header: 'State',
+      },
+      {
+        accessorKey: 'phoneNumber',
+        header: 'Phone Number',
+      },
+    ],
     [],
   );
 

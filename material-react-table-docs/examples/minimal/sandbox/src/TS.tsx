@@ -1,33 +1,40 @@
 import React, { FC, useMemo } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 
+type Person = {
+  firstName: string;
+  lastName: string;
+  address: string;
+  city: string;
+  state: string;
+};
+
 export const Example: FC = () => {
-  const columns = useMemo(
-    () =>
-      [
-        //column definitions...
-        {
-          accessorKey: 'firstName',
-          header: 'First Name',
-        },
-        {
-          accessorKey: 'lastName',
-          header: 'Last Name',
-        },
-        {
-          accessorKey: 'address',
-          header: 'Address',
-        },
-        {
-          accessorKey: 'city',
-          header: 'City',
-        },
-        {
-          accessorKey: 'state',
-          header: 'State',
-        },
-        //end
-      ] as MRT_ColumnDef<typeof data[0]>[],
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
+    () => [
+      //column definitions...
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+      {
+        accessorKey: 'address',
+        header: 'Address',
+      },
+      {
+        accessorKey: 'city',
+        header: 'City',
+      },
+      {
+        accessorKey: 'state',
+        header: 'State',
+      },
+      //end
+    ],
     [],
   );
 

@@ -32,7 +32,7 @@ type User = {
   phoneNumber: string;
 };
 
-const columns = [
+const columns: MRT_ColumnDef<User>[] = [
   {
     accessorKey: 'firstName',
     header: 'First Name',
@@ -53,7 +53,7 @@ const columns = [
     accessorKey: 'phoneNumber',
     header: 'Phone Number',
   },
-] as MRT_ColumnDef<User>[];
+];
 
 const fetchSize = 25;
 

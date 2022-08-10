@@ -2,7 +2,6 @@ import React, {
   ChangeEvent,
   Dispatch,
   DragEvent,
-  FC,
   FocusEvent,
   ReactNode,
   SetStateAction,
@@ -41,7 +40,8 @@ import type {
   TableOptions,
   TableState,
 } from '@tanstack/react-table';
-import type { VirtualizerOptions } from '@tanstack/react-virtual';
+import type { Options as VirtualizerOptions } from 'react-virtual';
+// import type { VirtualizerOptions } from '@tanstack/react-virtual';
 import { MRT_AggregationFns } from './aggregationFns';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_FilterFns } from './filterFns';
@@ -779,28 +779,8 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     }) => ReactNode;
     renderToolbarInternalActions?: ({
       table,
-      MRT_ToggleGlobalFilterButton,
-      MRT_ToggleFiltersButton,
-      MRT_ShowHideColumnsButton,
-      MRT_ToggleDensePaddingButton,
-      MRT_FullScreenToggleButton,
     }: {
       table: MRT_TableInstance<TData>;
-      MRT_ToggleGlobalFilterButton: FC<
-        IconButtonProps & { table: MRT_TableInstance<TData> }
-      >;
-      MRT_ToggleFiltersButton: FC<
-        IconButtonProps & { table: MRT_TableInstance<TData> }
-      >;
-      MRT_ShowHideColumnsButton: FC<
-        IconButtonProps & { table: MRT_TableInstance<TData> }
-      >;
-      MRT_ToggleDensePaddingButton: FC<
-        IconButtonProps & { table: MRT_TableInstance<TData> }
-      >;
-      MRT_FullScreenToggleButton: FC<
-        IconButtonProps & { table: MRT_TableInstance<TData> }
-      >;
     }) => ReactNode;
     renderTopToolbarCustomActions?: ({
       table,
@@ -813,12 +793,19 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     state?: Partial<MRT_TableState<TData>>;
     tableId?: string;
     virtualizerProps?:
-      | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>
+      | Partial<VirtualizerOptions<HTMLDivElement>>
       | (({
           table,
         }: {
           table: MRT_TableInstance<TData>;
-        }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>);
+        }) => Partial<VirtualizerOptions<HTMLDivElement>>);
+    // virtualizerProps?:
+    //   | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>
+    //   | (({
+    //       table,
+    //     }: {
+    //       table: MRT_TableInstance<TData>;
+    //     }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>);
   };
 
 export default <TData extends Record<string, any> = {}>({

@@ -1,45 +1,51 @@
 import React, { FC, useMemo } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { FilterAlt } from '@mui/icons-material';
+
+export type Person = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  age: number;
+};
 
 const Example: FC = () => {
-  const columns = useMemo(
-    () =>
-      [
-        {
-          accessorKey: 'id',
-          header: 'ID',
-          muiTableHeadCellFilterTextFieldProps: { placeholder: 'ID' },
-        },
-        {
-          accessorKey: 'firstName',
-          header: 'First Name',
-        },
-        {
-          accessorKey: 'lastName',
-          header: 'Last Name',
-        },
-        {
-          accessorKey: 'gender',
-          header: 'Gender',
-          filterFn: 'equals',
-          filterSelectOptions: [
-            { text: 'Male', value: 'Male' },
-            { text: 'Female', value: 'Female' },
-            { text: 'Other', value: 'Other' },
-          ],
-          filterVariant: 'select',
-        },
-        {
-          accessorKey: 'age',
-          header: 'Age',
-          filterVariant: 'range',
-        },
-      ] as MRT_ColumnDef<typeof data[0]>[],
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
+    () => [
+      {
+        accessorKey: 'id',
+        header: 'ID',
+        muiTableHeadCellFilterTextFieldProps: { placeholder: 'ID' },
+      },
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+      {
+        accessorKey: 'gender',
+        header: 'Gender',
+        filterFn: 'equals',
+        filterSelectOptions: [
+          { text: 'Male', value: 'Male' },
+          { text: 'Female', value: 'Female' },
+          { text: 'Other', value: 'Other' },
+        ],
+        filterVariant: 'select',
+      },
+      {
+        accessorKey: 'age',
+        header: 'Age',
+        filterVariant: 'range',
+      },
+    ],
     [],
   );
 
-  const data = useMemo(
+  const data = useMemo<Person[]>(
     //data definitions...
     () => [
       {

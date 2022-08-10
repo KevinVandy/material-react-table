@@ -9,7 +9,7 @@ import { ExportToCsv } from 'export-to-csv'; //or use your library of choice her
 import { data, Person } from './makeData';
 
 //defining columns outside of the component is fine, is stable
-const columns = [
+const columns: MRT_ColumnDef<Person>[] = [
   {
     accessorKey: 'id',
     header: 'ID',
@@ -39,7 +39,7 @@ const columns = [
     header: 'Country',
     size: 220,
   },
-] as MRT_ColumnDef<Person>[];
+];
 
 const csvOptions = {
   fieldSeparator: ',',

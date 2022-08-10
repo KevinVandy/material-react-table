@@ -2,18 +2,10 @@
 
 const nextConfig = {
   reactStrictMode: true,
-};
-
-const withMDX = require('@next/mdx')({
-  extension: /\.mdx?$/,
-  options: {
-    providerImportSource: '@mdx-js/react',
+  i18n: {
+    locales: ['en'],
+    defaultLocale: 'en',
   },
-});
-
-module.exports = withMDX({
-  ...nextConfig,
-  pageExtensions: ['js', 'ts', 'tsx', 'jsx', 'md', 'mdx'],
   async headers() {
     return [
       {
@@ -53,4 +45,16 @@ module.exports = withMDX({
       },
     ];
   },
+};
+
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/,
+  options: {
+    providerImportSource: '@mdx-js/react',
+  },
+});
+
+module.exports = withMDX({
+  ...nextConfig,
+  pageExtensions: ['js', 'ts', 'tsx', 'jsx', 'md', 'mdx'],
 });

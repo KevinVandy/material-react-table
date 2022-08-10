@@ -1,6 +1,5 @@
 import React, {
   ChangeEvent,
-  FC,
   MouseEvent,
   useCallback,
   useState,
@@ -16,11 +15,15 @@ import {
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 import { MRT_TableInstance } from '..';
 
-interface Props {
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any> = {}> {
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_GlobalFilterTextField: FC<Props> = ({ table }) => {
+export const MRT_GlobalFilterTextField = <
+  TData extends Record<string, any> = {},
+>({
+  table,
+}: Props<TData>) => {
   const {
     getState,
     setGlobalFilter,

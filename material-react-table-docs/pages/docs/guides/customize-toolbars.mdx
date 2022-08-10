@@ -11,3 +11,24 @@ import Head from 'next/head';
 </Head>
 
 ## Customizing Toolbar Layout Feature Guide
+
+This guide will show you how to hide or customize the Top and Bottom Toolbars in Material React Table.
+
+### Hide/Disable Toolbars
+
+There are `enableTopToolbar` and `enableBottomToolbar` props that you can use to show or hide the Toolbars.
+
+```tsx
+<MaterialReactTable
+  data={data}
+  columns={columns}
+  enableTopToolbar={false} //hide top toolbar
+  enableBottomToolbar={false} //hide bottom toolbar
+/>
+```
+
+### Customize Toolbar buttons
+
+#### Customize Built-In Internal Toolbar Buttons
+
+#### Add Custom Toolbar Buttons/Components

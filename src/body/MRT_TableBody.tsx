@@ -1,5 +1,6 @@
 import React, { FC, RefObject, useMemo } from 'react';
-import { useVirtualizer, Virtualizer } from '@tanstack/react-virtual';
+import { useVirtual } from 'react-virtual';
+// import { useVirtualizer, Virtualizer } from '@tanstack/react-virtual';
 import { TableBody } from '@mui/material';
 import { MRT_TableBodyRow } from './MRT_TableBodyRow';
 import { rankGlobalFuzzy } from '../sortingFns';
@@ -23,7 +24,7 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
       virtualizerProps,
     },
   } = table;
-  const { density, globalFilter, pagination, sorting } = getState();
+  const { globalFilter, pagination, sorting } = getState();
 
   const tableBodyProps =
     muiTableBodyProps instanceof Function
@@ -61,28 +62,47 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
     globalFilter,
   ]);
 
-  const rowVirtualizer: Virtualizer = enableRowVirtualization
-    ? useVirtualizer({
-        count: rows.length,
-        estimateSize: () => (density === 'compact' ? 20 : 50),
-        getScrollElement: () => tableContainerRef.current as HTMLDivElement,
-        overscan: 10,
+  const rowVirtualizer = enableRowVirtualization
+    ? useVirtual({
+        size: rows.length,
+        parentRef: tableContainerRef,
+        overscan: 15,
         ...vProps,
       })
     : ({} as any);
 
+  // const rowVirtualizer: Virtualizer = enableRowVirtualization
+  //   ? useVirtualizer({
+  //       count: rows.length,
+  //       estimateSize: () => (density === 'compact' ? 25 : 50),
+  //       getScrollElement: () => tableContainerRef.current as HTMLDivElement,
+  //       overscan: 15,
+  //       ...vProps,
+  //     })
+  //   : ({} as any);
+
   const virtualRows = enableRowVirtualization
-    ? rowVirtualizer.getVirtualItems()
+    ? rowVirtualizer.virtualItems
     : [];
+
+  // const virtualRows = enableRowVirtualization
+  //   ? rowVirtualizer.getVirtualItems()
+  //   : [];
 
   let paddingTop = 0;
   let paddingBottom = 0;
   if (enableRowVirtualization) {
     paddingTop = !!virtualRows.length ? virtualRows[0].start : 0;
     paddingBottom = !!virtualRows.length
-      ? rowVirtualizer.getTotalSize() - virtualRows[virtualRows.length - 1].end
+      ? rowVirtualizer.totalSize - virtualRows[virtualRows.length - 1].end
       : 0;
   }
+  // if (enableRowVirtualization) {
+  //   paddingTop = !!virtualRows.length ? virtualRows[0].start : 0;
+  //   paddingBottom = !!virtualRows.length
+  //     ? rowVirtualizer.getTotalSize() - virtualRows[virtualRows.length - 1].end
+  //     : 0;
+  // }
 
   return (
     <TableBody {...tableBodyProps}>
@@ -91,7 +111,6 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
           <td style={{ height: `${paddingTop}px` }} />
         </tr>
       )}
-      {/* @ts-ignore */}
       {(enableRowVirtualization ? virtualRows : rows).map(
         (rowOrVirtualRow: any, rowIndex: number) => {
           const row = enableRowVirtualization

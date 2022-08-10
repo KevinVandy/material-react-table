@@ -27,7 +27,7 @@ const HomePage = () => {
               xs: '1.8rem',
               sm: '3rem',
               md: '4rem',
-              lg: '5rem',
+              lg: '4.9rem',
             },
             fontWeight: 'bold',
             mt: '5rem',
@@ -71,7 +71,7 @@ const HomePage = () => {
             fontSize: {
               xs: '1.4rem',
               sm: '1.5rem',
-              md: '2rem',
+              md: '2.2rem',
             },
             mt: '1rem',
             mb: '3rem',
@@ -116,7 +116,7 @@ const HomePage = () => {
           sx={{
             fontSize: {
               xs: '1.2rem',
-              md: '1.4rem',
+              md: '1.5rem',
             },
             mt: '2rem',
             textAlign: 'center',

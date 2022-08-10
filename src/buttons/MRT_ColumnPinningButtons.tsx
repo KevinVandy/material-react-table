@@ -1,13 +1,18 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import type { MRT_Column, MRT_TableInstance } from '..';
 
-interface Props {
-  column: MRT_Column;
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any> = {}> {
+  column: MRT_Column<TData>;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ColumnPinningButtons: FC<Props> = ({ column, table }) => {
+export const MRT_ColumnPinningButtons = <
+  TData extends Record<string, any> = {},
+>({
+  column,
+  table,
+}: Props<TData>) => {
   const {
     options: {
       icons: { PushPinIcon },

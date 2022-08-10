@@ -4,27 +4,26 @@ import { Box, Typography } from '@mui/material';
 import { data, Person } from './makeData';
 
 const Example: FC = () => {
-  const columns = useMemo(
-    () =>
-      [
-        {
-          accessorKey: 'id',
-          header: 'ID',
-          size: 50,
-        },
-        {
-          accessorKey: 'firstName',
-          header: 'First Name',
-        },
-        {
-          accessorKey: 'middleName',
-          header: 'Middle Name',
-        },
-        {
-          accessorKey: 'lastName',
-          header: 'Last Name',
-        },
-      ] as MRT_ColumnDef<Person>[],
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
+    () => [
+      {
+        accessorKey: 'id',
+        header: 'ID',
+        size: 50,
+      },
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'middleName',
+        header: 'Middle Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+    ],
     [],
   );
 

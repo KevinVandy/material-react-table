@@ -77,32 +77,31 @@ const Example: FC = () => {
     sorting,
   ]);
 
-  const columns = useMemo(
-    () =>
-      [
-        {
-          accessorKey: 'firstName',
-          header: 'First Name',
-        },
-        //column definitions...
-        {
-          accessorKey: 'lastName',
-          header: 'Last Name',
-        },
-        {
-          accessorKey: 'address',
-          header: 'Address',
-        },
-        {
-          accessorKey: 'state',
-          header: 'State',
-        },
-        {
-          accessorKey: 'phoneNumber',
-          header: 'Phone Number',
-        },
-        //end
-      ] as MRT_ColumnDef<User>[],
+  const columns = useMemo<MRT_ColumnDef<User>[]>(
+    () => [
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      //column definitions...
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+      {
+        accessorKey: 'address',
+        header: 'Address',
+      },
+      {
+        accessorKey: 'state',
+        header: 'State',
+      },
+      {
+        accessorKey: 'phoneNumber',
+        header: 'Phone Number',
+      },
+      //end
+    ],
     [],
   );
 

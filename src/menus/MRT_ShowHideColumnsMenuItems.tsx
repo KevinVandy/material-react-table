@@ -1,8 +1,8 @@
 import React, {
   Dispatch,
   DragEvent,
-  FC,
   SetStateAction,
+  useRef,
   useState,
 } from 'react';
 import {
@@ -18,23 +18,25 @@ import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 import { reorderColumn } from '../column.utils';
 import type { MRT_Column, MRT_TableInstance } from '..';
 
-interface Props {
-  allColumns: MRT_Column[];
-  column: MRT_Column;
-  currentHoveredColumn: MRT_Column | null;
+interface Props<TData extends Record<string, any> = {}> {
+  allColumns: MRT_Column<TData>[];
+  column: MRT_Column<TData>;
+  currentHoveredColumn: MRT_Column<TData> | null;
   isSubMenu?: boolean;
-  setCurrentHoveredColumn: Dispatch<SetStateAction<MRT_Column | null>>;
-  table: MRT_TableInstance;
+  setCurrentHoveredColumn: Dispatch<SetStateAction<MRT_Column<TData> | null>>;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
+export const MRT_ShowHideColumnsMenuItems = <
+  TData extends Record<string, any> = {},
+>({
   allColumns,
   currentHoveredColumn,
   setCurrentHoveredColumn,
   column,
   isSubMenu,
   table,
-}) => {
+}: Props<TData>) => {
   const {
     getState,
     options: {
@@ -54,9 +56,9 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
     (columnDefType === 'group' &&
       column.getLeafColumns().some((col) => col.getIsVisible()));
 
-  const handleToggleColumnHidden = (column: MRT_Column) => {
+  const handleToggleColumnHidden = (column: MRT_Column<TData>) => {
     if (columnDefType === 'group') {
-      column?.columns?.forEach?.((childColumn: MRT_Column) => {
+      column?.columns?.forEach?.((childColumn: MRT_Column<TData>) => {
         childColumn.toggleVisibility(!switchChecked);
       });
     } else {
@@ -64,7 +66,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
     }
   };
 
-  const menuItemRef = React.useRef<HTMLElement>(null);
+  const menuItemRef = useRef<HTMLElement>(null);
 
   const [isDragging, setIsDragging] = useState(false);
 
@@ -172,7 +174,7 @@ export const MRT_ShowHideColumnsMenuItems: FC<Props> = ({
           )}
         </Box>
       </MenuItem>
-      {column.columns?.map((c: MRT_Column, i) => (
+      {column.columns?.map((c: MRT_Column<TData>, i) => (
         <MRT_ShowHideColumnsMenuItems
           allColumns={allColumns}
           column={c}

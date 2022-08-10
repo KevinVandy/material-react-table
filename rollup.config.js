@@ -4,16 +4,28 @@ import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import { babel } from '@rollup/plugin-babel';
 
+const externals = [
+  '@mui/icons-material',
+  '@mui/material',
+  '@tanstack/match-sorter-utils',
+  '@tanstack/react-table',
+  '@tanstack/react-virtual',
+  'react',
+];
+
+const plugins = [
+  babel({
+    exclude: 'node_modules/**',
+    presets: ['@babel/preset-react'],
+  }),
+  external(),
+  resolve(),
+  typescript(),
+];
+
 export default [
   {
-    external: [
-      '@mui/icons-material',
-      '@mui/material',
-      '@tanstack/match-sorter-utils',
-      '@tanstack/react-table',
-      '@tanstack/react-virtual',
-      'react',
-    ],
+    external: externals,
     input: './src/index.tsx',
     output: [
       {
@@ -27,15 +39,7 @@ export default [
         sourcemap: true,
       },
     ],
-    plugins: [
-      babel({
-        exclude: 'node_modules/**',
-        presets: ['@babel/preset-react'],
-      }),
-      external(),
-      resolve(),
-      typescript(),
-    ],
+    plugins,
   },
   {
     input: 'dist/esm/index.d.ts',

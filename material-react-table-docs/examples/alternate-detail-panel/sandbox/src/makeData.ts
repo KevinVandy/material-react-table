@@ -1,5 +1,7 @@
 export type Person = {
+  id: string;
   firstName: string;
+  middleName: string;
   lastName: string;
   address: string;
   city: string;
@@ -7,7 +9,7 @@ export type Person = {
   country: string;
 };
 
-export const data = [
+export const data: Person[] = [
   {
     id: '1',
     firstName: 'Dylan',

@@ -1,12 +1,18 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
-interface Props extends IconButtonProps {
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any> = {}>
+  extends IconButtonProps {
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ToggleGlobalFilterButton: FC<Props> = ({ table, ...rest }) => {
+export const MRT_ToggleGlobalFilterButton = <
+  TData extends Record<string, any> = {},
+>({
+  table,
+  ...rest
+}: Props<TData>) => {
   const {
     getState,
     options: {

@@ -1,22 +1,24 @@
-import React, { FC, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Button, Menu, Divider, Box } from '@mui/material';
 import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
 import type { MRT_Column, MRT_TableInstance } from '..';
 import { getDefaultColumnOrderIds } from '../column.utils';
 
-interface Props {
+interface Props<TData extends Record<string, any> = {}> {
   anchorEl: HTMLElement | null;
   isSubMenu?: boolean;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
-  table: MRT_TableInstance;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ShowHideColumnsMenu: FC<Props> = ({
+export const MRT_ShowHideColumnsMenu = <
+  TData extends Record<string, any> = {},
+>({
   anchorEl,
   isSubMenu,
   setAnchorEl,
   table,
-}) => {
+}: Props<TData>) => {
   const {
     getAllColumns,
     getAllLeafColumns,
@@ -60,10 +62,10 @@ export const MRT_ShowHideColumnsMenu: FC<Props> = ({
     getCenterLeafColumns(),
     getLeftLeafColumns(),
     getRightLeafColumns(),
-  ]) as MRT_Column[];
+  ]) as MRT_Column<TData>[];
 
   const [currentHoveredColumn, setCurrentHoveredColumn] =
-    useState<MRT_Column | null>(null);
+    useState<MRT_Column<TData> | null>(null);
 
   return (
     <Menu

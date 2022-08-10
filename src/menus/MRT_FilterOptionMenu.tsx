@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Box, Menu, MenuItem } from '@mui/material';
 import type { MRT_FilterOption, MRT_Header, MRT_TableInstance } from '..';
 import { MRT_Localization } from '../localization';
@@ -97,21 +97,21 @@ export const internalFilterOptions = (
   },
 ];
 
-interface Props {
+interface Props<TData extends Record<string, any> = {}> {
   anchorEl: HTMLElement | null;
   header?: MRT_Header;
   onSelect?: () => void;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
-  table: MRT_TableInstance;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_FilterOptionMenu: FC<Props> = ({
+export const MRT_FilterOptionMenu = <TData extends Record<string, any> = {}>({
   anchorEl,
   header,
   onSelect,
   setAnchorEl,
   table,
-}) => {
+}: Props<TData>) => {
   const {
     getState,
     options: {

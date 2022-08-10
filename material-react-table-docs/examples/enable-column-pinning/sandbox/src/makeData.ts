@@ -1,5 +1,7 @@
 export type Person = {
+  id: string;
   firstName: string;
+  middleName: string;
   lastName: string;
   address: string;
   city: string;

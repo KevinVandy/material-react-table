@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
-import { FilterAlt } from '@mui/icons-material';
 
 const Example = () => {
   const columns = useMemo(
@@ -22,7 +21,6 @@ const Example = () => {
         accessorKey: 'gender',
         header: 'Gender',
         filterFn: 'equals',
-        //automatically turns textfield into select box
         filterSelectOptions: [
           { text: 'Male', value: 'Male' },
           { text: 'Female', value: 'Female' },
@@ -81,9 +79,6 @@ const Example = () => {
       data={data}
       initialState={{ showColumnFilters: true }} //show filters by default
       muiTableHeadCellFilterTextFieldProps={{
-        InputProps: {
-          startAdornment: <FilterAlt />,
-        },
         sx: { m: '0.5rem 0', width: '100%' },
         variant: 'outlined',
       }}

@@ -3,6 +3,7 @@ import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, {
   MaterialReactTableProps,
   MRT_ColumnDef,
+  MRT_FullScreenToggleButton,
 } from '../../src';
 import { faker } from '@faker-js/faker';
 import { Button, IconButton, Tooltip, Typography } from '@mui/material';
@@ -97,7 +98,7 @@ export const CustomToolbarInternalActions: Story<
     data={data}
     enableRowSelection
     enableGrouping
-    renderToolbarInternalActions={({ table, MRT_FullScreenToggleButton }) => {
+    renderToolbarInternalActions={({ table }) => {
       return (
         <>
           <MRT_FullScreenToggleButton table={table} />
