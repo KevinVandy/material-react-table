@@ -18,6 +18,7 @@ const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
   cursor: 'pointer',
   fontSize: '1rem',
   height: '2.25rem',
+  lineHeight: '1rem',
   padding: '0',
   transition: 'all .3s ease',
   whiteSpace: 'nowrap',
@@ -42,6 +43,7 @@ const ListItemHeaderLevel1 = styled(MuiListItem)(({ theme }) => ({
   cursor: 'pointer',
   fontSize: '1.25rem',
   height: '2.5rem',
+  lineHeight: '1.25rem',
   padding: '0',
   whiteSpace: 'nowrap',
   '&:hover': {

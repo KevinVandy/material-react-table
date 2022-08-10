@@ -8,6 +8,7 @@ import {
   Tooltip,
   Typography,
   TypographyProps,
+  Link as MuiLink,
 } from '@mui/material';
 
 interface Props extends TypographyProps {
@@ -35,24 +36,34 @@ export const LinkHeading: FC<Props> = ({ children, tableId, ...rest }) => {
   };
 
   return (
-    <Typography id={id} {...rest}>
-      {children}{' '}
-      <Link href={href} passHref>
-        <IconButton
-          onClick={handleCopy}
-          sx={{
-            opacity: 0.2,
-            transition: 'all 0.2s ease',
-            '&:hover': {
-              opacity: 1,
-            },
-          }}
-        >
-          <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Link'}>
-            {isCopied ? <AddLinkIcon /> : <LinkIcon />}
-          </Tooltip>
-        </IconButton>
-      </Link>
-    </Typography>
+    <Link href={href} passHref>
+      <MuiLink
+        sx={{
+          color: 'inherit',
+          textDecoration: 'none',
+          '&:hover': {
+            textDecoration: 'underline',
+          },
+        }}
+      >
+        <Typography id={id} {...rest}>
+          {children}{' '}
+          <IconButton
+            onClick={handleCopy}
+            sx={{
+              opacity: 0.2,
+              transition: 'all 0.2s ease',
+              '&:hover': {
+                opacity: 1,
+              },
+            }}
+          >
+            <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Link'}>
+              {isCopied ? <AddLinkIcon /> : <LinkIcon />}
+            </Tooltip>
+          </IconButton>
+        </Typography>
+      </MuiLink>
+    </Link>
   );
 };

@@ -30,13 +30,7 @@ export const mdxComponents = {
   h6: (props: any) => <Typography variant="h6" {...props} />,
   hr: (props: any) => <Divider sx={{ mb: '1rem' }} {...props} />,
   img: (props: any) => (
-    <Image
-      alt="avatar"
-      height={200}
-      width={200}
-      objectFit="scale-down"
-      {...props}
-    />
+    <Image alt="" height={200} width={200} objectFit="scale-down" {...props} />
   ),
   li: (props: any) => (
     <li {...props}>
@@ -45,6 +39,7 @@ export const mdxComponents = {
   ),
   p: (props: any) => (
     <Typography
+      className="doc-content"
       sx={{
         textAlign: {
           xs: 'left',

@@ -7,7 +7,7 @@ import MaterialReactTable, {
 import { faker } from '@faker-js/faker';
 
 const meta: Meta = {
-  title: 'Features/Click to Copy',
+  title: 'Features/Click to Copy Examples',
 };
 
 export default meta;
