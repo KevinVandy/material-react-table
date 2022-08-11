@@ -19,11 +19,10 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
           accessorKey: 'stateOption',
           enableClickToCopy: true,
           header: 'State Option',
-          Cell: ({ cell }) => (
-            <span id={`${cell.getValue<string>()}-state-option`}>
-              {cell.getValue<string>()}
-            </span>
-          ),
+          muiTableBodyCellProps: ({ cell }) => ({
+            id: `${cell.getValue<string>()}-column-option`,
+          }),
+          Cell: ({ cell }) => cell.getValue<string>(),
         },
         { accessorKey: 'type', header: 'Type', enableGlobalFilter: false },
         {

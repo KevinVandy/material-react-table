@@ -445,6 +445,8 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     Partial<TableOptions<TData>>,
     | 'columns'
     | 'data'
+    | 'defaultColumn'
+    | 'enableRowSelection'
     | 'expandRowsFn'
     | 'initialState'
     | 'onStateChange'
@@ -453,6 +455,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     columnFilterModeOptions?: (MRT_FilterOption | string)[] | null;
     columns: MRT_ColumnDef<TData>[];
     data: TData[];
+    defaultColumn?: Partial<MRT_ColumnDef<TData>>;
     displayColumnDefOptions?: Partial<{
       [key in MRT_DisplayColumnIds]: Partial<MRT_ColumnDef>;
     }>;
@@ -474,6 +477,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     enableRowDragging?: boolean;
     enableRowNumbers?: boolean;
     enableRowOrdering?: boolean;
+    enableRowSelection?: boolean | ((row: MRT_Row<TData>) => boolean);
     enableRowVirtualization?: boolean;
     enableSelectAll?: boolean;
     enableStickyHeader?: boolean;

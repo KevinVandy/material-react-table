@@ -1,4 +1,8 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+import Example from '../../../examples/enable-column-resizing';
 
 <Head>
   <title>Material React Table Docs - Column Resizing Feature Guide</title>
@@ -9,3 +13,104 @@ import Head from 'next/head';
 </Head>
 
 ## Column Resizing Feature Guide
+
+Material React Table let's you easily change the default widths (sizes) of columns, and has a built-in column resizing draggable handle feature.
+
+### Relevant Props
+
+<RootPropTable
+  onlyProps={
+    new Set([
+      'columnResizeMode',
+      'defaultColumn',
+      'enableColumnResizing',
+      'onColumnSizingChange',
+      'onColumnSizingInfoChange',
+    ])
+  }
+/>
+
+### Relevant Column Options
+
+<ColumnOptionsTable
+  onlyProps={new Set(['enableResizing', 'maxSize', 'minSize', 'size'])}
+/>
+
+### Relevant State
+
+<StateOptionsTable onlyProps={new Set(['columnSizing', 'columnSizingInfo'])} />
+
+### Change Default Column Widths
+
+#### Column Size
+
+You can change the width of any column by setting its `size` option on the column definition. `minSize` and `maxSize` are also available.
+
+You may notice however, that the columns may be not change their size as much as you would expect. This is because the browser treats `<th>` and `<td>` elements differently with in a `<table>` element by default.
+
+You can improve this slightly by changing the table layout to `fixed` instead of the default `auto` in the `muiTableProps`.
+
+```tsx
+<MaterialReactTable
+  muiTableProps={{
+    sx: {
+      tableLayout: 'fixed',
+    },
+  }}
+/>
+```
+
+The Columns will still try to increase their width to take up the full width of the table, but the columns that do have a defined size will have their width respected more.
+
+For further reading on how table-layout `fixed` vs `auto` works, we recommend this [blog post](https://css-tricks.com/almanac/properties/t/table-layout/) by CSS-Tricks.
+
+#### Default Column
+
+By default, columns will have these size properties defined:
+
+```tsx
+defaultColumn = { minSize: 40, maxSize: 1000, size: 180 }; //units are in px
+```
+
+You can modify the default column widths by setting the `defaultColumn` prop on the table.
+
+```tsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  defaultColumn={{
+    minSize: 20, //allow columns to get smaller than default
+    maxSize: 9001, //allow columns to get larger than default
+    size: 260, //make columns wider by default
+  }}
+/>
+```
+
+### Enable Column Resizing Feature
+
+`enableColumnResizing` is the boolean prop that enables the column resizing feature.
+
+```tsx
+<MaterialReactTable columns={columns} data={data} enableColumnResizing />
+```
+
+You can disable specific columns from being resizable by setting the `enableResizing` column option to false in their respective column definition.
+
+> When Column Resizing is enabled, a CSS `table-layout: fixed` style is automatically added to the `<table>` element in order to make the browser respect the widths of the columns more.
+
+#### Column Resize Mode
+
+The default `columnResizeMode` is `onEnd`, which means that the column resizing will only occur after the user has finished dragging the column resize handle and released their mouse. You can change the `columnResizeMode` to `onChange` to make the column resizing occur immediately as the user drags the column resize handle.
+
+```tsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  enableColumnResizing
+  columnResizeMode="onChange"
+/>
+```
+
+### Column Resizing Example
+
+<Example />

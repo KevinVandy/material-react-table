@@ -49,6 +49,7 @@ export const LinkHeading: FC<Props> = ({ children, tableId, ...rest }) => {
         <Typography id={id} {...rest}>
           {children}{' '}
           <IconButton
+            aria-label="Copy link"
             onClick={handleCopy}
             sx={{
               opacity: 0.2,

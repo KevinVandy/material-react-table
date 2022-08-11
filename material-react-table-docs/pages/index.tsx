@@ -267,7 +267,7 @@ const HomePage = () => {
         Feature Comparison
       </LinkHeading>
       <FeatureTable />
-      <Typography variant="subtitle2" sx={{ mt: '1rem' }}>
+      <Typography component="p" variant="subtitle2" sx={{ mt: '1rem' }}>
         *If you see any inaccuracies in this table, PRs are welcome!
       </Typography>
       <LinkCards />

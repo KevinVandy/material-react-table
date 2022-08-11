@@ -18,17 +18,17 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
           accessorKey: 'columnOption',
           enableClickToCopy: true,
           header: 'Column Option',
-          Cell: ({ cell }) => (
-            <span id={`${cell.getValue<string>()}-column-option`}>
-              {cell.row.original?.required ? (
-                <strong style={{ color: theme.palette.primary.dark }}>
-                  {cell.getValue<string>()}*
-                </strong>
-              ) : (
-                cell.getValue<string>()
-              )}
-            </span>
-          ),
+          muiTableBodyCellProps: ({ cell }) => ({
+            id: `${cell.getValue<string>()}-column-option`,
+          }),
+          Cell: ({ cell }) =>
+            cell.row.original?.required ? (
+              <strong style={{ color: theme.palette.primary.dark }}>
+                {cell.getValue<string>()}*
+              </strong>
+            ) : (
+              cell.getValue<string>()
+            ),
         },
         { accessorKey: 'type', header: 'Type', enableGlobalFilter: false },
         {

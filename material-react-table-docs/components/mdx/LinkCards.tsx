@@ -1,4 +1,4 @@
-import { alpha, Box, Card, Typography, useTheme, Link } from '@mui/material';
+import { alpha, Box, Card, Typography, Link } from '@mui/material';
 import Image from 'next/image';
 
 const cardData = [
@@ -30,8 +30,6 @@ const cardData = [
 ];
 
 export const LinkCards = () => {
-  const theme = useTheme();
-
   return (
     <Box
       sx={{
@@ -44,14 +42,10 @@ export const LinkCards = () => {
       </Typography>
       <Box
         sx={{
-          p: '1rem 150px 3rem 150px',
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'center',
           gap: '1.5rem',
-          '@media(max-width: 900px)': {
-            p: '1rem 16px 2rem 16px',
-          },
         }}
       >
         {cardData.map((cd, index) => (

@@ -21,7 +21,7 @@ export const data: Person[] = [
   {
     firstName: 'Ervin',
     lastName: 'Reinger',
-    email: '566 Brakus Inlet',
+    email: 'ereinger@mailinator.com',
     city: 'South Linda',
   },
   {
