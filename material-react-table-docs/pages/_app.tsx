@@ -59,6 +59,11 @@ function App({ Component, pageProps }: AppProps) {
           content="Material React Table, a fully featured Material UI implementation of TanStack React Table V8. Written from the ground up in TypeScript."
         />
         <link rel="icon" href="/mrt_logo.png" />
+        <link
+          rel="preconnect"
+          href="https://1W9SWN5ZAH-dsn.algolia.net"
+          crossOrigin="true"
+        />
       </Head>
       <ThemeProvider theme={theme(isLightTheme)}>
         <MDXProvider components={mdxComponents}>
@@ -81,6 +86,7 @@ function App({ Component, pageProps }: AppProps) {
             })}
           >
             <Box
+              component="main"
               sx={{
                 maxWidth: '1200px',
                 margin: 'auto',
@@ -90,7 +96,13 @@ function App({ Component, pageProps }: AppProps) {
             >
               {showBreadCrumbs && <BreadCrumbs />}
               {showMiniNav && !isXLDesktop && <MiniNav />}
-              <Component {...pageProps} />
+              {pathname === '/' ? (
+                <Component {...pageProps} />
+              ) : (
+                <article>
+                  <Component {...pageProps} />
+                </article>
+              )}
               <Footer />
             </Box>
             {showMiniNav && isXLDesktop && <MiniNav />}

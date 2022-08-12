@@ -11,6 +11,7 @@ const externals = [
   '@tanstack/react-table',
   '@tanstack/react-virtual',
   'react',
+  'react-virtual',
 ];
 
 const plugins = [

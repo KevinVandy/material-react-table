@@ -1,7 +1,8 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import Link from 'next/link';
 import {
   AppBar as MuiAppBar,
+  Box,
   IconButton as MuiIconButton,
   styled,
   Toolbar as MuiToolbar,
@@ -15,6 +16,8 @@ import Image from 'next/image';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import docsearch from '@docsearch/js';
+import '@docsearch/css';
 
 const AppBar = styled(MuiAppBar)({
   zIndex: 5,
@@ -28,7 +31,7 @@ const Toolbar = styled(MuiToolbar)({
 const Flex = styled('div')({
   display: 'flex',
   alignItems: 'center',
-  gap: '0.5rem',
+  gap: '0.25rem',
 });
 
 const IconButton = styled(MuiIconButton)({
@@ -53,6 +56,17 @@ const TopBar: FC<Props> = ({
   const isMobile = useMediaQuery('(max-width: 600px)');
   const isTablet = useMediaQuery('(max-width: 900px)');
   const isDesktop = useMediaQuery('(min-width: 1500px)');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      docsearch({
+        appId: '1W9SWN5ZAH',
+        apiKey: '680b219eaef484622046bf76cef8544a',
+        indexName: 'material-react-table',
+        container: '#docsearch',
+      });
+    }
+  }, []);
 
   return (
     <AppBar position="fixed">
@@ -91,6 +105,10 @@ const TopBar: FC<Props> = ({
             </Typography>
           </Link>
         </Flex>
+        <Box
+          id="docsearch"
+          sx={{ display: 'grid', width: !isTablet ? '250px' : undefined }}
+        />
         <Flex>
           <Tooltip arrow title="Github">
             <a
@@ -98,8 +116,11 @@ const TopBar: FC<Props> = ({
               rel="noreferrer"
               target="_blank"
             >
-              <IconButton aria-label="Github">
-                <GitHubIcon fontSize="large" />
+              <IconButton
+                aria-label="Github"
+                size={isMobile ? 'small' : 'large'}
+              >
+                <GitHubIcon fontSize={isMobile ? 'medium' : 'large'} />
               </IconButton>
             </a>
           </Tooltip>
@@ -109,10 +130,13 @@ const TopBar: FC<Props> = ({
               rel="noreferrer"
               target="_blank"
             >
-              <IconButton aria-label="Discord">
+              <IconButton
+                aria-label="Discord"
+                size={isMobile ? 'small' : 'large'}
+              >
                 <img
                   alt="Discord"
-                  height={25}
+                  height={isMobile ? 20 : 25}
                   style={{
                     padding: '-3px',
                     borderRadius: '50%',
@@ -126,11 +150,12 @@ const TopBar: FC<Props> = ({
             <IconButton
               aria-label="Toggle Light/Dark Mode"
               onClick={() => setIsLightTheme(!isLightTheme)}
+              size={isMobile ? 'small' : 'large'}
             >
               {isLightTheme ? (
-                <LightModeIcon fontSize="large" />
+                <LightModeIcon fontSize={isMobile ? 'medium' : 'large'} />
               ) : (
-                <DarkModeIcon fontSize="large" />
+                <DarkModeIcon fontSize={isMobile ? 'medium' : 'large'} />
               )}
             </IconButton>
           </Tooltip>

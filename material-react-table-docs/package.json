@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@docsearch/js": "3",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@faker-js/faker": "^7.4.0",
