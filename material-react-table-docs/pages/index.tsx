@@ -135,7 +135,6 @@ const HomePage = () => {
             Material&nbsp;Design
           </Box>
         </Typography>
-
         <Box
           sx={{
             m: '3rem auto',

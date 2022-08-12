@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import Link from 'next/link';
 import {
   AppBar as MuiAppBar,
@@ -16,8 +16,6 @@ import Image from 'next/image';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import docsearch from '@docsearch/js';
-import '@docsearch/css';
 
 const AppBar = styled(MuiAppBar)({
   zIndex: 5,
@@ -56,17 +54,6 @@ const TopBar: FC<Props> = ({
   const isMobile = useMediaQuery('(max-width: 600px)');
   const isTablet = useMediaQuery('(max-width: 900px)');
   const isDesktop = useMediaQuery('(min-width: 1500px)');
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      docsearch({
-        appId: '1W9SWN5ZAH',
-        apiKey: '680b219eaef484622046bf76cef8544a',
-        indexName: 'material-react-table',
-        container: '#docsearch',
-      });
-    }
-  }, []);
 
   return (
     <AppBar position="fixed">
@@ -107,7 +94,10 @@ const TopBar: FC<Props> = ({
         </Flex>
         <Box
           id="docsearch"
-          sx={{ display: 'grid', width: !isTablet ? '250px' : undefined }}
+          sx={{
+            display: 'grid',
+            width: isDesktop ? '400px' : !isTablet ? '250px' : undefined,
+          }}
         />
         <Flex>
           <Tooltip arrow title="Github">

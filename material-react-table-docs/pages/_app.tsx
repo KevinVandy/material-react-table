@@ -11,13 +11,14 @@ import BreadCrumbs from '../components/navigation/BreadCrumbs';
 import MiniNav from '../components/navigation/MiniNav';
 import Footer from '../components/navigation/Footer';
 import { theme } from '../styles/MuiTheme';
+import docsearch from '@docsearch/js';
 import '../styles/globals.css';
+import '@docsearch/css';
 
 function App({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
 
   const showBreadCrumbs = pathname !== '/';
-
   const showMiniNav =
     pathname.includes('/docs/guides/') ||
     pathname.includes('/docs/usage') ||
@@ -30,6 +31,17 @@ function App({ Component, pageProps }: AppProps) {
 
   const [navOpen, setNavOpen] = useState(pathname === '/');
   const [isLightTheme, setIsLightTheme] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      docsearch({
+        appId: '1W9SWN5ZAH',
+        apiKey: '680b219eaef484622046bf76cef8544a',
+        indexName: 'material-react-table',
+        container: '#docsearch',
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -65,6 +77,28 @@ function App({ Component, pageProps }: AppProps) {
           crossOrigin="true"
         />
       </Head>
+      <style global jsx>
+        {`
+          :root {
+            --docsearch-primary-color: #1565c0;
+            --docsearch-highlight-color: #1565c0;
+            --docsearch-logo-color: #1565c0;
+            ${!isLightTheme
+              ? `--docsearch-container-background: rgba(11, 11, 11, 0.8);
+            --docsearch-footer-background: #222;
+            --docsearch-hit-background: #333;
+            --docsearch-hit-color: #fff;
+            --docsearch-hit-shadow: none;
+            --docsearch-modal-background: #222;
+            --docsearch-modal-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            --docsearch-searchbox-background: #000;
+            --docsearch-searchbox-focus-background: #000;
+            --docsearch-text-color: #fff;
+           `
+              : ''}
+          }
+        `}
+      </style>
       <ThemeProvider theme={theme(isLightTheme)}>
         <MDXProvider components={mdxComponents}>
           <TopBar
