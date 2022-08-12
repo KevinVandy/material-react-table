@@ -19,8 +19,11 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
           accessorKey: 'stateOption',
           enableClickToCopy: true,
           header: 'State Option',
-          muiTableBodyCellProps: ({ cell }) => ({
-            id: `${cell.getValue<string>()}-column-option`,
+          muiTableBodyCellCopyButtonProps: ({ cell }) => ({
+            className: 'state-option',
+            component: 'a',
+            id: `${cell.getValue<string>()}-state-option`,
+            href: `#${cell.getValue<string>()}-state-option`,
           }),
           Cell: ({ cell }) => cell.getValue<string>(),
         },
@@ -92,7 +95,10 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
         sx: { minWidth: '18rem' },
         variant: 'outlined',
       }}
-      muiTablePaperProps={{ sx: { mb: '1.5rem' } }}
+      muiTablePaperProps={{
+        sx: { mb: '1.5rem' },
+        id: onlyProps ? 'relevant-state-options-table' : 'state-options-table',
+      }}
       positionGlobalFilter="left"
       rowNumberMode="static"
     />

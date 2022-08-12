@@ -18,8 +18,11 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
           accessorKey: 'columnOption',
           enableClickToCopy: true,
           header: 'Column Option',
-          muiTableBodyCellProps: ({ cell }) => ({
+          muiTableBodyCellCopyButtonProps: ({ cell }) => ({
+            className: 'column-option',
+            component: 'a',
             id: `${cell.getValue<string>()}-column-option`,
+            href: `#${cell.getValue<string>()}-column-option`,
           }),
           Cell: ({ cell }) =>
             cell.row.original?.required ? (
@@ -107,7 +110,12 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
         sx: { minWidth: '18rem' },
         variant: 'outlined',
       }}
-      muiTablePaperProps={{ sx: { mb: '1.5rem' } }}
+      muiTablePaperProps={{
+        sx: { mb: '1.5rem' },
+        id: onlyProps
+          ? 'relevant-column-options-table'
+          : 'column-options-table',
+      }}
       positionGlobalFilter="left"
       rowNumberMode="static"
     />

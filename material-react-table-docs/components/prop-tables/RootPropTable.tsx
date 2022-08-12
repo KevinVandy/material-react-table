@@ -21,8 +21,11 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
           enableClickToCopy: true,
           header: 'Prop Name',
           accessorKey: 'propName',
-          muiTableBodyCellProps: ({ cell }) => ({
+          muiTableBodyCellCopyButtonProps: ({ cell }) => ({
+            className: 'prop',
+            component: 'a',
             id: `${cell.getValue<string>()}-prop`,
+            href: `#${cell.getValue<string>()}-prop`,
           }),
           Cell: ({ cell }) =>
             cell.row.original?.required ? (
@@ -108,7 +111,12 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
         sx: { minWidth: '18rem' },
         variant: 'outlined',
       }}
-      muiTablePaperProps={{ sx: { mb: '1.5rem' } }}
+      muiTablePaperProps={{
+        sx: { mb: '1.5rem' },
+        id: onlyProps
+          ? 'relevant-props-table'
+          : 'props-table',
+      }}
       positionGlobalFilter="left"
       rowNumberMode="static"
     />
