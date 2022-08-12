@@ -71,7 +71,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateOption: 'currentDraggingColumn',
+    stateOption: 'draggingColumn',
     type: 'MRT_Column | null',
   },
   {
@@ -80,7 +80,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateOption: 'currentEditingCell',
+    stateOption: 'editingCell',
     type: 'MRT_Cell',
   },
   {
@@ -89,7 +89,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateOption: 'currentEditingRow',
+    stateOption: 'editingRow',
     type: 'MRT_Row',
   },
   {
@@ -116,7 +116,7 @@ export const stateOptions: StateRow[] = [
     link: '',
     linkText: '',
     source: 'MRT',
-    stateOption: 'currentHoveredColumn',
+    stateOption: 'hoveredColumn',
     type: 'MRT_Column | null',
   },
   {

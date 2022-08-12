@@ -26,14 +26,10 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
       enableMultiSort,
       muiTableHeadCellProps,
     },
-    setCurrentHoveredColumn,
+    setHoveredColumn,
   } = table;
-  const {
-    density,
-    currentDraggingColumn,
-    currentHoveredColumn,
-    showColumnFilters,
-  } = getState();
+  const { density, draggingColumn, hoveredColumn, showColumnFilters } =
+    getState();
   const { column } = header;
   const { columnDef } = column;
   const { columnDefType } = columnDef;
@@ -71,20 +67,20 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
   };
 
   const handleDragEnter = (_e: DragEvent) => {
-    if (enableGrouping && currentHoveredColumn?.id === 'drop-zone') {
-      setCurrentHoveredColumn(null);
+    if (enableGrouping && hoveredColumn?.id === 'drop-zone') {
+      setHoveredColumn(null);
     }
-    if (enableColumnOrdering && currentDraggingColumn) {
-      setCurrentHoveredColumn(
+    if (enableColumnOrdering && draggingColumn) {
+      setHoveredColumn(
         columnDef.enableColumnOrdering !== false ? column : null,
       );
     }
   };
 
   const draggingBorder =
-    currentDraggingColumn?.id === column.id
+    draggingColumn?.id === column.id
       ? `1px dashed ${theme.palette.text.secondary}`
-      : currentHoveredColumn?.id === column.id
+      : hoveredColumn?.id === column.id
       ? `2px dashed ${theme.palette.primary.main}`
       : undefined;
 
@@ -131,8 +127,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
             : undefined,
         overflow: 'visible',
         opacity:
-          currentDraggingColumn?.id === column.id ||
-          currentHoveredColumn?.id === column.id
+          draggingColumn?.id === column.id || hoveredColumn?.id === column.id
             ? 0.5
             : 1,
         p:
@@ -169,7 +164,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
         userSelect: enableMultiSort && column.getCanSort() ? 'none' : undefined,
         verticalAlign: 'top',
         zIndex:
-          column.getIsResizing() || currentDraggingColumn?.id === column.id
+          column.getIsResizing() || draggingColumn?.id === column.id
             ? 3
             : column.getIsPinned() && columnDefType !== 'group'
             ? 2

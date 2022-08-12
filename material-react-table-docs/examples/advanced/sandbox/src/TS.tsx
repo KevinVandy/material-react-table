@@ -65,6 +65,7 @@ const Example: FC = () => {
             enableEditing: true,
             filterVariant: 'range',
             header: 'Salary',
+            size: 200,
             //custom conditional format and styling
             Cell: ({ cell }) => (
               <Box

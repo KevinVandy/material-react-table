@@ -21,9 +21,9 @@ import type { MRT_Column, MRT_TableInstance } from '..';
 interface Props<TData extends Record<string, any> = {}> {
   allColumns: MRT_Column<TData>[];
   column: MRT_Column<TData>;
-  currentHoveredColumn: MRT_Column<TData> | null;
+  hoveredColumn: MRT_Column<TData> | null;
   isSubMenu?: boolean;
-  setCurrentHoveredColumn: Dispatch<SetStateAction<MRT_Column<TData> | null>>;
+  setHoveredColumn: Dispatch<SetStateAction<MRT_Column<TData> | null>>;
   table: MRT_TableInstance<TData>;
 }
 
@@ -31,8 +31,8 @@ export const MRT_ShowHideColumnsMenuItems = <
   TData extends Record<string, any> = {},
 >({
   allColumns,
-  currentHoveredColumn,
-  setCurrentHoveredColumn,
+  hoveredColumn,
+  setHoveredColumn,
   column,
   isSubMenu,
   table,
@@ -77,15 +77,15 @@ export const MRT_ShowHideColumnsMenuItems = <
 
   const handleDragEnd = (_e: DragEvent<HTMLButtonElement>) => {
     setIsDragging(false);
-    setCurrentHoveredColumn(null);
-    if (currentHoveredColumn) {
-      setColumnOrder(reorderColumn(column, currentHoveredColumn, columnOrder));
+    setHoveredColumn(null);
+    if (hoveredColumn) {
+      setColumnOrder(reorderColumn(column, hoveredColumn, columnOrder));
     }
   };
 
   const handleDragEnter = (_e: DragEvent) => {
     if (!isDragging) {
-      setCurrentHoveredColumn(column);
+      setHoveredColumn(column);
     }
   };
 
@@ -102,7 +102,7 @@ export const MRT_ShowHideColumnsMenuItems = <
           opacity: isDragging ? 0.5 : 1,
           outline: isDragging
             ? `1px dashed ${theme.palette.divider}`
-            : currentHoveredColumn?.id === column.id
+            : hoveredColumn?.id === column.id
             ? `2px dashed ${theme.palette.primary.main}`
             : 'none',
           pl: `${(column.depth + 0.5) * 2}rem`,
@@ -178,10 +178,10 @@ export const MRT_ShowHideColumnsMenuItems = <
         <MRT_ShowHideColumnsMenuItems
           allColumns={allColumns}
           column={c}
-          currentHoveredColumn={currentHoveredColumn}
+          hoveredColumn={hoveredColumn}
           isSubMenu={isSubMenu}
           key={`${i}-${c.id}`}
-          setCurrentHoveredColumn={setCurrentHoveredColumn}
+          setHoveredColumn={setHoveredColumn}
           table={table}
         />
       ))}

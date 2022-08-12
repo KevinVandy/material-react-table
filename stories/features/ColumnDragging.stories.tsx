@@ -113,7 +113,7 @@ export const ColumnDraggingDisabledPerColumn: Story<
 //     columns.slice(2, 4),
 //   );
 
-//   const [currentDraggingColumn, setCurrentDraggingColumn] =
+//   const [draggingColumn, setDraggingColumn] =
 //     useState<MRT_Column<Person> | null>(null);
 
 //   return (
@@ -125,8 +125,8 @@ export const ColumnDraggingDisabledPerColumn: Story<
 //         onColumnDrop={({ event, draggedColumn }) =>
 //           setColumns2([...columns2, draggedColumn])
 //         }
-//         // onCurrentDraggingColumnChange={setCurrentDraggingColumn}
-//         // state={{ currentDraggingColumn }}
+//         // onDraggingColumnChange={setDraggingColumn}
+//         // state={{ draggingColumn }}
 //       />
 //       <MaterialReactTable
 //         columns={columns2}
@@ -135,8 +135,8 @@ export const ColumnDraggingDisabledPerColumn: Story<
 //         onColumnDrop={({ event, draggedColumn }) =>
 //           setColumns1([...columns1, draggedColumn])
 //         }
-//         // onCurrentDraggingColumnChange={setCurrentDraggingColumn}
-//         // state={{ currentDraggingColumn }}
+//         // onDraggingColumnChange={setDraggingColumn}
+//         // state={{ draggingColumn }}
 //       />
 //     </div>
 //   );

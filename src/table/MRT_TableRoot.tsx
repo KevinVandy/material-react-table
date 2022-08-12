@@ -48,43 +48,13 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
     const initState = props.initialState ?? {};
     initState.columnOrder =
       initState.columnOrder ?? getDefaultColumnOrderIds(props);
+    initState.globalFilterFn =
+      props.globalFilterFn instanceof String
+        ? (props.globalFilterFn as MRT_FilterOption)
+        : 'fuzzy';
     return initState;
   }, []);
 
-  const [columnOrder, setColumnOrder] = useState(
-    initialState.columnOrder ?? [],
-  );
-  const [currentDraggingColumn, setCurrentDraggingColumn] =
-    useState<MRT_Column<TData> | null>(
-      initialState.currentDraggingColumn ?? null,
-    );
-  const [currentDraggingRow, setCurrentDraggingRow] =
-    useState<MRT_Row<TData> | null>(initialState.currentDraggingRow ?? null);
-  const [currentEditingCell, setCurrentEditingCell] =
-    useState<MRT_Cell<TData> | null>(initialState.currentEditingCell ?? null);
-  const [currentEditingRow, setCurrentEditingRow] =
-    useState<MRT_Row<TData> | null>(initialState.currentEditingRow ?? null);
-  const [currentHoveredColumn, setCurrentHoveredColumn] = useState<
-    MRT_Column<TData> | { id: string } | null
-  >(initialState.currentHoveredColumn ?? null);
-  const [currentHoveredRow, setCurrentHoveredRow] = useState<
-    MRT_Row<TData> | { id: string } | null
-  >(initialState.currentHoveredRow ?? null);
-  const [density, setDensity] = useState(
-    initialState?.density ?? 'comfortable',
-  );
-  const [isFullScreen, setIsFullScreen] = useState(
-    initialState?.isFullScreen ?? false,
-  );
-  const [showAlertBanner, setShowAlertBanner] = useState(
-    props.initialState?.showAlertBanner ?? false,
-  );
-  const [showColumnFilters, setShowFilters] = useState(
-    initialState?.showColumnFilters ?? false,
-  );
-  const [showGlobalFilter, setShowGlobalFilter] = useState(
-    initialState?.showGlobalFilter ?? false,
-  );
   const [columnFilterFns, setColumnFilterFns] = useState<{
     [key: string]: MRT_FilterOption;
   }>(() =>
@@ -104,10 +74,43 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       ),
     ),
   );
+  const [columnOrder, setColumnOrder] = useState(
+    initialState.columnOrder ?? [],
+  );
+  const [density, setDensity] = useState(
+    initialState?.density ?? 'comfortable',
+  );
+  const [draggingColumn, setDraggingColumn] =
+    useState<MRT_Column<TData> | null>(initialState.draggingColumn ?? null);
+  const [draggingRow, setDraggingRow] = useState<MRT_Row<TData> | null>(
+    initialState.draggingRow ?? null,
+  );
+  const [editingCell, setEditingCell] = useState<MRT_Cell<TData> | null>(
+    initialState.editingCell ?? null,
+  );
+  const [editingRow, setEditingRow] = useState<MRT_Row<TData> | null>(
+    initialState.editingRow ?? null,
+  );
   const [globalFilterFn, setGlobalFilterFn] = useState<MRT_FilterOption>(
-    props.globalFilterFn instanceof String
-      ? (props.globalFilterFn as MRT_FilterOption)
-      : 'fuzzy',
+    initialState.globalFilterFn ?? 'fuzzy',
+  );
+  const [hoveredColumn, setHoveredColumn] = useState<
+    MRT_Column<TData> | { id: string } | null
+  >(initialState.hoveredColumn ?? null);
+  const [hoveredRow, setHoveredRow] = useState<
+    MRT_Row<TData> | { id: string } | null
+  >(initialState.hoveredRow ?? null);
+  const [isFullScreen, setIsFullScreen] = useState(
+    initialState?.isFullScreen ?? false,
+  );
+  const [showAlertBanner, setShowAlertBanner] = useState(
+    props.initialState?.showAlertBanner ?? false,
+  );
+  const [showColumnFilters, setShowFilters] = useState(
+    initialState?.showColumnFilters ?? false,
+  );
+  const [showGlobalFilter, setShowGlobalFilter] = useState(
+    initialState?.showGlobalFilter ?? false,
   );
 
   const displayColumns = useMemo(
@@ -190,8 +193,6 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       props.enableRowSelection,
       props.enableSelectAll,
       props.localization,
-      props.muiTableBodyCellProps,
-      props.muiTableHeadCellProps,
       props.positionActionsColumn,
     ],
   );
@@ -248,20 +249,19 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       columns: columnDefs,
       data,
       globalFilterFn:
-        //@ts-ignore
-        props.filterFns[globalFilterFn] ?? props.filterFns.fuzzy,
+        props.filterFns?.[globalFilterFn] ?? props.filterFns?.fuzzy,
       initialState,
       state: {
-        columnOrder,
-        currentDraggingColumn,
-        currentDraggingRow,
-        currentEditingCell,
-        currentEditingRow,
         columnFilterFns,
-        globalFilterFn,
-        currentHoveredColumn,
-        currentHoveredRow,
+        columnOrder,
         density,
+        draggingColumn,
+        draggingRow,
+        editingCell,
+        editingRow,
+        globalFilterFn,
+        hoveredColumn,
+        hoveredRow,
         isFullScreen,
         showAlertBanner,
         showColumnFilters,
@@ -270,21 +270,15 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       } as TableState,
       tableId,
     }),
-    setCurrentDraggingColumn:
-      props.onCurrentDraggingColumnChange ?? setCurrentDraggingColumn,
-    setCurrentDraggingRow:
-      props.onCurrentDraggingRowChange ?? setCurrentDraggingRow,
-    setCurrentEditingCell:
-      props.onCurrentEditingCellChange ?? setCurrentEditingCell,
-    setCurrentEditingRow:
-      props.onCurrentEditingRowChange ?? setCurrentEditingRow,
-    setColumnFilterFns: props.onCurrentFilterFnsChange ?? setColumnFilterFns,
-    setGlobalFilterFn: props.onCurrentGlobalFilterFnChange ?? setGlobalFilterFn,
-    setCurrentHoveredColumn:
-      props.onCurrentHoveredColumnChange ?? setCurrentHoveredColumn,
-    setCurrentHoveredRow:
-      props.onCurrentHoveredRowChange ?? setCurrentHoveredRow,
+    setColumnFilterFns: props.onFilterFnsChange ?? setColumnFilterFns,
     setDensity: props.onDensityChange ?? setDensity,
+    setDraggingColumn: props.onDraggingColumnChange ?? setDraggingColumn,
+    setDraggingRow: props.onDraggingRowChange ?? setDraggingRow,
+    setEditingCell: props.onEditingCellChange ?? setEditingCell,
+    setEditingRow: props.onEditingRowChange ?? setEditingRow,
+    setGlobalFilterFn: props.onGlobalFilterFnChange ?? setGlobalFilterFn,
+    setHoveredColumn: props.onHoveredColumnChange ?? setHoveredColumn,
+    setHoveredRow: props.onHoveredRowChange ?? setHoveredRow,
     setIsFullScreen: props.onIsFullScreenChange ?? setIsFullScreen,
     setShowAlertBanner: props.onShowAlertBannerChange ?? setShowAlertBanner,
     setShowFilters: props.onShowFiltersChange ?? setShowFilters,

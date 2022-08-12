@@ -22,12 +22,11 @@ export const MRT_TableHeadCellGrabHandle: FC<Props> = ({
       onColumnDrop,
     },
     setColumnOrder,
-    setCurrentDraggingColumn,
-    setCurrentHoveredColumn,
+    setDraggingColumn,
+    setHoveredColumn,
   } = table;
   const { columnDef } = column;
-  const { currentHoveredColumn, currentDraggingColumn, columnOrder } =
-    getState();
+  const { hoveredColumn, draggingColumn, columnOrder } = getState();
 
   const mIconButtonProps =
     muiTableHeadCellDragHandleProps instanceof Function
@@ -45,7 +44,7 @@ export const MRT_TableHeadCellGrabHandle: FC<Props> = ({
   };
 
   const handleDragStart = (e: DragEvent<HTMLButtonElement>) => {
-    setCurrentDraggingColumn(column);
+    setDraggingColumn(column);
     e.dataTransfer.setDragImage(tableHeadCellRef.current as HTMLElement, 0, 0);
   };
 
@@ -53,21 +52,21 @@ export const MRT_TableHeadCellGrabHandle: FC<Props> = ({
     onColumnDrop?.({
       event,
       draggedColumn: column,
-      targetColumn: currentHoveredColumn,
+      targetColumn: hoveredColumn,
     });
-    if (currentHoveredColumn?.id === 'drop-zone') {
+    if (hoveredColumn?.id === 'drop-zone') {
       column.toggleGrouping();
     } else if (
       enableColumnOrdering &&
-      currentHoveredColumn &&
-      currentHoveredColumn?.id !== currentDraggingColumn?.id
+      hoveredColumn &&
+      hoveredColumn?.id !== draggingColumn?.id
     ) {
       setColumnOrder(
-        reorderColumn(column, currentHoveredColumn as MRT_Column, columnOrder),
+        reorderColumn(column, hoveredColumn as MRT_Column, columnOrder),
       );
     }
-    setCurrentDraggingColumn(null);
-    setCurrentHoveredColumn(null);
+    setDraggingColumn(null);
+    setHoveredColumn(null);
   };
 
   return (

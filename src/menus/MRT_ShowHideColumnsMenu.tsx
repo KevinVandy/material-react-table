@@ -64,8 +64,9 @@ export const MRT_ShowHideColumnsMenu = <
     getRightLeafColumns(),
   ]) as MRT_Column<TData>[];
 
-  const [currentHoveredColumn, setCurrentHoveredColumn] =
-    useState<MRT_Column<TData> | null>(null);
+  const [hoveredColumn, setHoveredColumn] = useState<MRT_Column<TData> | null>(
+    null,
+  );
 
   return (
     <Menu
@@ -123,10 +124,10 @@ export const MRT_ShowHideColumnsMenu = <
         <MRT_ShowHideColumnsMenuItems
           allColumns={allColumns}
           column={column}
-          currentHoveredColumn={currentHoveredColumn}
+          hoveredColumn={hoveredColumn}
           isSubMenu={isSubMenu}
           key={`${index}-${column.id}`}
-          setCurrentHoveredColumn={setCurrentHoveredColumn}
+          setHoveredColumn={setHoveredColumn}
           table={table}
         />
       ))}

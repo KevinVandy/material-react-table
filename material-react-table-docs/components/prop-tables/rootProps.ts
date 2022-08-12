@@ -1268,7 +1268,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onCurrentDraggingColumnChange',
+    propName: 'onDraggingColumnChange',
     defaultValue: '',
     description: '',
     link: '',
@@ -1278,7 +1278,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onCurrentEditingCellChange',
+    propName: 'onEditingCellChange',
     defaultValue: '',
     description: '',
     link: '',
@@ -1288,7 +1288,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onCurrentEditingRowChange',
+    propName: 'onEditingRowChange',
     defaultValue: '',
     description: '',
     link: '',
@@ -1298,7 +1298,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onCurrentFilterFnsChange',
+    propName: 'onFilterFnsChange',
     defaultValue: '',
     description: '',
     link: '',
@@ -1308,7 +1308,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onCurrentGlobalFilterFnChange',
+    propName: 'onGlobalFilterFnChange',
     defaultValue: '',
     description: '',
     link: '',
@@ -1318,7 +1318,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onCurrentHoveredColumnChange',
+    propName: 'onHoveredColumnChange',
     defaultValue: '',
     description: '',
     link: '',

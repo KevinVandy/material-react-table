@@ -10,27 +10,23 @@ export const MRT_ToolbarDropZone: FC<Props> = ({ table }) => {
   const {
     getState,
     options: { enableGrouping, localization },
-    setCurrentHoveredColumn,
+    setHoveredColumn,
   } = table;
 
-  const { currentDraggingColumn, currentHoveredColumn } = getState();
+  const { draggingColumn, hoveredColumn } = getState();
 
   const handleDragEnter = (_event: DragEvent<HTMLDivElement>) => {
-    setCurrentHoveredColumn({ id: 'drop-zone' });
+    setHoveredColumn({ id: 'drop-zone' });
   };
 
   return (
-    <Fade
-      unmountOnExit
-      mountOnEnter
-      in={!!enableGrouping && !!currentDraggingColumn}
-    >
+    <Fade unmountOnExit mountOnEnter in={!!enableGrouping && !!draggingColumn}>
       <Box
         sx={(theme) => ({
           alignItems: 'center',
           backgroundColor: alpha(
             theme.palette.info.main,
-            currentHoveredColumn?.id === 'drop-zone' ? 0.2 : 0.1,
+            hoveredColumn?.id === 'drop-zone' ? 0.2 : 0.1,
           ),
           border: `dashed ${theme.palette.info.main} 2px`,
           display: 'flex',
@@ -45,7 +41,7 @@ export const MRT_ToolbarDropZone: FC<Props> = ({ table }) => {
         <Typography>
           {localization.dropToGroupBy.replace(
             '{column}',
-            currentDraggingColumn?.columnDef?.header ?? '',
+            draggingColumn?.columnDef?.header ?? '',
           )}
         </Typography>
       </Box>

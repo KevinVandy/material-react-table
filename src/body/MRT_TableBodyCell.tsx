@@ -50,14 +50,14 @@ export const MRT_TableBodyCell: FC<Props> = ({
       rowNumberMode,
       tableId,
     },
-    setCurrentEditingCell,
-    setCurrentHoveredColumn,
+    setEditingCell,
+    setHoveredColumn,
   } = table;
   const {
-    currentDraggingColumn,
-    currentEditingCell,
-    currentEditingRow,
-    currentHoveredColumn,
+    draggingColumn,
+    editingCell,
+    editingRow,
+    hoveredColumn,
     density,
     isLoading,
     showSkeletons,
@@ -88,8 +88,8 @@ export const MRT_TableBodyCell: FC<Props> = ({
   const isEditing =
     isEditable &&
     (editingMode === 'table' ||
-      currentEditingRow?.id === row.id ||
-      currentEditingCell?.id === cell.id);
+      editingRow?.id === row.id ||
+      editingCell?.id === cell.id);
 
   const [skeletonWidth, setSkeletonWidth] = useState(0);
   useEffect(
@@ -113,7 +113,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
       columnDef.enableEditing !== false &&
       editingMode === 'cell'
     ) {
-      setCurrentEditingCell(cell);
+      setEditingCell(cell);
       setTimeout(() => {
         const textField = document.getElementById(
           `mrt-${tableId}-edit-cell-text-field-${cell.id}`,
@@ -144,20 +144,20 @@ export const MRT_TableBodyCell: FC<Props> = ({
   };
 
   const handleDragEnter = (_e: DragEvent) => {
-    if (enableGrouping && currentHoveredColumn?.id === 'drop-zone') {
-      setCurrentHoveredColumn(null);
+    if (enableGrouping && hoveredColumn?.id === 'drop-zone') {
+      setHoveredColumn(null);
     }
-    if (enableColumnOrdering && currentDraggingColumn) {
-      setCurrentHoveredColumn(
+    if (enableColumnOrdering && draggingColumn) {
+      setHoveredColumn(
         columnDef.enableColumnOrdering !== false ? column : null,
       );
     }
   };
 
   const draggingBorder =
-    currentDraggingColumn?.id === column.id
+    draggingColumn?.id === column.id
       ? `1px dashed ${theme.palette.text.secondary}`
-      : currentHoveredColumn?.id === column.id
+      : hoveredColumn?.id === column.id
       ? `2px dashed ${theme.palette.primary.main}`
       : undefined;
 
@@ -197,8 +197,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
             ? `${column.getStart('left')}px`
             : undefined,
         opacity:
-          currentDraggingColumn?.id === column.id ||
-          currentHoveredColumn?.id === column.id
+          draggingColumn?.id === column.id || hoveredColumn?.id === column.id
             ? 0.5
             : 1,
         overflow: 'hidden',
@@ -232,7 +231,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
         transition: 'all 0.2s ease-in-out',
         whiteSpace: density === 'compact' ? 'nowrap' : 'normal',
         zIndex:
-          currentDraggingColumn?.id === column.id
+          draggingColumn?.id === column.id
             ? 2
             : column.getIsPinned()
             ? 1

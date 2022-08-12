@@ -1,9 +1,4 @@
-import React, {
-  ChangeEvent,
-  MouseEvent,
-  useCallback,
-  useState,
-} from 'react';
+import React, { ChangeEvent, MouseEvent, useCallback, useState } from 'react';
 import {
   Collapse,
   debounce,

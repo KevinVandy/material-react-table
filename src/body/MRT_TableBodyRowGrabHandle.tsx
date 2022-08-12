@@ -24,17 +24,17 @@ export const MRT_TableBodyRowGrabHandle: FC<Props> = ({
 
   const handleDragStart = (e: DragEvent<HTMLButtonElement>) => {
     e.dataTransfer.setDragImage(rowRef.current as HTMLElement, 0, 0);
-    table.setCurrentDraggingRow(cell.row as any);
+    table.setDraggingRow(cell.row as any);
   };
 
   const handleDragEnd = (event: DragEvent<HTMLButtonElement>) => {
     onRowDrop?.({
       event,
-      draggedRow: table.getState().currentDraggingRow as any,
-      targetRow: table.getState().currentHoveredRow as any,
+      draggedRow: table.getState().draggingRow as any,
+      targetRow: table.getState().hoveredRow as any,
     });
-    table.setCurrentDraggingRow(null);
-    table.setCurrentHoveredRow(null);
+    table.setDraggingRow(null);
+    table.setHoveredRow(null);
   };
 
   return (

@@ -15,18 +15,22 @@ export const MRT_EditActionButtons: FC<Props> = ({ row, table }) => {
       localization,
       onEditRowSubmit,
     },
-    setCurrentEditingRow,
+    setEditingRow,
   } = table;
-  const { currentEditingRow } = getState();
+  const { editingRow } = getState();
 
   const handleCancel = () => {
-    row._valuesCache = row.original ?? {};
-    setCurrentEditingRow(null);
+    row._valuesCache = { ...row.original };
+    setEditingRow(null);
   };
 
   const handleSave = () => {
-    onEditRowSubmit?.({ row: currentEditingRow ?? row, table });
-    setCurrentEditingRow(null);
+    onEditRowSubmit?.({
+      row: editingRow ?? row,
+      table,
+      values: editingRow?._valuesCache ?? { ...row.original },
+    });
+    setEditingRow(null);
   };
 
   return (

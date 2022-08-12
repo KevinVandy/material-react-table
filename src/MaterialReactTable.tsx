@@ -96,23 +96,21 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
     tableId: string;
     localization: MRT_Localization;
   };
-  setCurrentDraggingColumn: Dispatch<SetStateAction<MRT_Column<TData> | null>>;
-  setCurrentDraggingRow: Dispatch<SetStateAction<MRT_Row<TData> | null>>;
-  setCurrentEditingCell: Dispatch<SetStateAction<MRT_Cell | null>>;
-  setCurrentEditingRow: Dispatch<SetStateAction<MRT_Row | null>>;
   setColumnFilterFns: Dispatch<
-    SetStateAction<{
-      [key: string]: MRT_FilterOption;
-    }>
-  >;
-  setGlobalFilterFn: Dispatch<SetStateAction<MRT_FilterOption>>;
-  setCurrentHoveredColumn: Dispatch<
-    SetStateAction<MRT_Column<TData> | { id: string } | null>
-  >;
-  setCurrentHoveredRow: Dispatch<
-    SetStateAction<MRT_Row<TData> | { id: string } | null>
+    SetStateAction<{ [key: string]: MRT_FilterOption }>
   >;
   setDensity: Dispatch<SetStateAction<'comfortable' | 'compact' | 'spacious'>>;
+  setDraggingColumn: Dispatch<SetStateAction<MRT_Column<TData> | null>>;
+  setDraggingRow: Dispatch<SetStateAction<MRT_Row<TData> | null>>;
+  setEditingCell: Dispatch<SetStateAction<MRT_Cell | null>>;
+  setEditingRow: Dispatch<SetStateAction<MRT_Row | null>>;
+  setGlobalFilterFn: Dispatch<SetStateAction<MRT_FilterOption>>;
+  setHoveredColumn: Dispatch<
+    SetStateAction<MRT_Column<TData> | { id: string } | null>
+  >;
+  setHoveredRow: Dispatch<
+    SetStateAction<MRT_Row<TData> | { id: string } | null>
+  >;
   setIsFullScreen: Dispatch<SetStateAction<boolean>>;
   setShowAlertBanner: Dispatch<SetStateAction<boolean>>;
   setShowFilters: Dispatch<SetStateAction<boolean>>;
@@ -121,15 +119,15 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
 
 export type MRT_TableState<TData extends Record<string, any> = {}> =
   TableState & {
-    currentDraggingColumn: MRT_Column<TData> | null;
-    currentDraggingRow: MRT_Row<TData> | null;
-    currentEditingCell: MRT_Cell<TData> | null;
-    currentEditingRow: MRT_Row<TData> | null;
     columnFilterFns: Record<string, MRT_FilterOption>;
-    globalFilterFn: Record<string, MRT_FilterOption>;
-    currentHoveredColumn: MRT_Column<TData> | { id: string } | null;
-    currentHoveredRow: MRT_Row<TData> | { id: string } | null;
     density: 'comfortable' | 'compact' | 'spacious';
+    draggingColumn: MRT_Column<TData> | null;
+    draggingRow: MRT_Row<TData> | null;
+    editingCell: MRT_Cell<TData> | null;
+    editingRow: MRT_Row<TData> | null;
+    globalFilterFn: MRT_FilterOption;
+    hoveredColumn: MRT_Column<TData> | { id: string } | null;
+    hoveredRow: MRT_Row<TData> | { id: string } | null;
     isFullScreen: boolean;
     isLoading: boolean;
     showAlertBanner: boolean;
@@ -340,19 +338,23 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
     cell,
     event,
     table,
+    value,
   }: {
     event: FocusEvent<HTMLInputElement>;
     cell: MRT_Cell<TData>;
     table: MRT_TableInstance<TData>;
+    value: string;
   }) => void;
   onCellEditChange?: ({
     cell,
     event,
     table,
+    value,
   }: {
     event: ChangeEvent<HTMLInputElement>;
     cell: MRT_Cell<TData>;
     table: MRT_TableInstance<TData>;
+    value: string;
   }) => void;
   sortingFn?: MRT_SortingFn;
 };
@@ -397,7 +399,7 @@ export type MRT_Row<TData extends Record<string, any> = {}> = Omit<
   getAllCells: () => MRT_Cell<TData>[];
   getVisibleCells: () => MRT_Cell<TData>[];
   subRows?: MRT_Row<TData>[];
-  _valuesCache?: TData;
+  _valuesCache: Record<LiteralUnion<string & DeepKeys<TData>>, any>;
 };
 
 export type MRT_Cell<TData extends Record<string, any> = {}> = Omit<
@@ -695,19 +697,23 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
       cell,
       event,
       table,
+      value,
     }: {
       event: FocusEvent<HTMLInputElement>;
       cell: MRT_Cell<TData>;
       table: MRT_TableInstance<TData>;
+      value: string;
     }) => void;
     onCellEditChange?: ({
       cell,
       event,
       table,
+      value,
     }: {
       event: ChangeEvent<HTMLInputElement>;
       cell: MRT_Cell<TData>;
       table: MRT_TableInstance<TData>;
+      value: string;
     }) => void;
     onColumnDrop?: ({
       event,
@@ -718,22 +724,24 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
       draggedColumn: MRT_Column<TData>;
       targetColumn: MRT_Column<TData> | { id: string } | null;
     }) => void;
-    onCurrentDraggingColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
-    onCurrentDraggingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
-    onCurrentEditingCellChange?: OnChangeFn<MRT_Cell<TData> | null>;
-    onCurrentEditingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
-    onCurrentFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterOption }>;
-    onCurrentGlobalFilterFnChange?: OnChangeFn<MRT_FilterOption>;
-    onCurrentHoveredColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
-    onCurrentHoveredRowChange?: OnChangeFn<MRT_Row<TData> | null>;
     onDensityChange?: OnChangeFn<boolean>;
+    onDraggingColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
+    onDraggingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
     onEditRowSubmit?: ({
       row,
       table,
+      values,
     }: {
       row: MRT_Row<TData>;
       table: MRT_TableInstance<TData>;
+      values: Record<LiteralUnion<string & DeepKeys<TData>>, any>;
     }) => Promise<void> | void;
+    onEditingCellChange?: OnChangeFn<MRT_Cell<TData> | null>;
+    onEditingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
+    onFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterOption }>;
+    onGlobalFilterFnChange?: OnChangeFn<MRT_FilterOption>;
+    onHoveredColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
+    onHoveredRowChange?: OnChangeFn<MRT_Row<TData> | null>;
     onIsFullScreenChange?: OnChangeFn<boolean>;
     onRowDrop?: ({
       event,

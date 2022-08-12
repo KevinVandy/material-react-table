@@ -23,8 +23,8 @@ export const EditingEnabledEditModeRowDefault: Story<
 > = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow = ({ row }) => {
-    tableData[+row.index] = row._valuesCache;
+  const handleSaveRow = ({ row, values }) => {
+    tableData[row.index] = values;
     setTableData([...tableData]);
   };
 
@@ -65,8 +65,8 @@ export const EditingEnabledEditModeCell: Story<
 > = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveCell = ({ cell, event }) => {
-    tableData[+cell.row.index][cell.column.id] = event.target.value;
+  const handleSaveCell = ({ cell, value }) => {
+    tableData[+cell.row.index][cell.column.id] = value;
     setTableData([...tableData]);
   };
 
@@ -108,10 +108,10 @@ export const EditingEnabledEditModeTable: Story<
 > = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveCell = ({ cell, event }) => {
-    tableData[+cell.row.index][cell.column.id] = event.target.value;
+  const handleSaveCell = ({ cell, value }) => {
+    tableData[+cell.row.index][cell.column.id] = value;
     setTableData([...tableData]);
-    console.info('saved cell with value: ', event.target.value);
+    console.info('saved cell with value: ', value);
   };
 
   return (
@@ -149,8 +149,8 @@ export const EditingEnabledEditModeTable: Story<
 export const EditingCustomizeInput: Story<MaterialReactTableProps> = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow = ({ row }) => {
-    tableData[+row.index] = row._valuesCache;
+  const handleSaveRow = ({ row, values }) => {
+    tableData[row.index] = values;
     setTableData([...tableData]);
   };
 
@@ -260,8 +260,8 @@ export const EditingWithValidation: Story<MaterialReactTableProps> = () => {
     false,
   );
 
-  const handleSaveRow = ({ row }) => {
-    tableData[+row.index] = row._valuesCache;
+  const handleSaveRow = ({ row, values }) => {
+    tableData[row.index] = values;
     setTableData([...tableData]);
   };
 
@@ -331,10 +331,10 @@ export const EditingEnabledAsync: Story<MaterialReactTableProps> = () => {
   const [tableData, setTableData] = useState(data);
   const [isSaving, setIsSaving] = useState(false);
 
-  const handleSaveRow = ({ row }) => {
+  const handleSaveRow = ({ row, values }) => {
     setIsSaving(true);
     setTimeout(() => {
-      tableData[+row.index] = row._valuesCache;
+      tableData[row.index] = values;
       setTableData([...tableData]);
       setIsSaving(false);
     }, 1500);
@@ -370,6 +370,63 @@ export const EditingEnabledAsync: Story<MaterialReactTableProps> = () => {
       onEditRowSubmit={handleSaveRow}
       state={{
         showProgressBars: isSaving,
+      }}
+    />
+  );
+};
+
+const nestedData = [...Array(10)].map(() => ({
+  name: {
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+  },
+  address: faker.address.streetAddress(),
+  state: faker.address.state(),
+  phoneNumber: faker.phone.number(),
+}));
+
+export const EditingNestedData: Story<MaterialReactTableProps> = () => {
+  const [tableData, setTableData] = useState(() => nestedData);
+
+  return (
+    <MaterialReactTable
+      columns={[
+        {
+          header: 'First Name',
+          accessorFn: (row) => row.name.firstName,
+          id: 'firstName',
+        },
+        {
+          header: 'Last Name',
+          accessorKey: 'name.lastName',
+        },
+        {
+          header: 'Address',
+          accessorKey: 'address',
+        },
+        {
+          header: 'State',
+          accessorKey: 'state',
+        },
+        {
+          header: 'Phone Number',
+          accessorKey: 'phoneNumber',
+          enableEditing: false,
+        },
+      ]}
+      data={tableData}
+      enableEditing
+      onEditRowSubmit={({ row, values }) => {
+        tableData[row.index] = {
+          name: {
+            firstName: values.firstName,
+            lastName: values['name.lastName'],
+          },
+          address: row._valuesCache.address,
+          state: row._valuesCache.state,
+          phoneNumber: row._valuesCache.phoneNumber,
+        };
+        setTableData([...tableData]);
       }}
     />
   );

@@ -16,9 +16,9 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
     getIsSomeColumnsPinned,
     getState,
     options: { enableRowOrdering, muiTableBodyRowProps, renderDetailPanel },
-    setCurrentHoveredRow,
+    setHoveredRow,
   } = table;
-  const { currentDraggingRow, currentHoveredRow } = getState();
+  const { draggingRow, hoveredRow } = getState();
 
   const tableRowProps =
     muiTableBodyRowProps instanceof Function
@@ -26,17 +26,17 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
       : muiTableBodyRowProps;
 
   const handleDragEnter = (_e: DragEvent) => {
-    if (enableRowOrdering && currentDraggingRow) {
-      setCurrentHoveredRow(row);
+    if (enableRowOrdering && draggingRow) {
+      setHoveredRow(row);
     }
   };
 
   const rowRef = useRef<HTMLTableRowElement>(null);
 
   const draggingBorder =
-    currentDraggingRow?.id === row.id
+    draggingRow?.id === row.id
       ? `1px dashed ${theme.palette.text.secondary}`
-      : currentHoveredRow?.id === row.id
+      : hoveredRow?.id === row.id
       ? `2px dashed ${theme.palette.primary.main}`
       : undefined;
 
@@ -57,10 +57,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
         sx={(theme) => ({
           backgroundColor: lighten(theme.palette.background.default, 0.06),
           opacity:
-            currentDraggingRow?.id === row.id ||
-            currentHoveredRow?.id === row.id
-              ? 0.5
-              : 1,
+            draggingRow?.id === row.id || hoveredRow?.id === row.id ? 0.5 : 1,
           transition: 'all 0.2s ease-in-out',
           '&:hover td': {
             backgroundColor:
