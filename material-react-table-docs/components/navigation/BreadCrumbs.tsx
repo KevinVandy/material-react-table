@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import Link from 'next/link';
 import { Breadcrumbs as MuiBreadcrumbs, Link as MuiLink } from '@mui/material';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 const BreadCrumbs = () => {
   const { route } = useRouter();
@@ -21,35 +22,45 @@ const BreadCrumbs = () => {
     return null;
   }
 
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadCrumbLinks.map((link, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: link.split('/').pop()?.replaceAll('-', ' ') || '',
+      item: `https://www.material-react-table.com${link}`,
+    })),
+  };
+
   return (
-    <MuiBreadcrumbs aria-label="breadcrumb" sx={{ pt: '1rem' }}>
-      <Link href={'/'} passHref>
-        <MuiLink
-          color="inherit"
-          sx={{ cursor: 'pointer', textTransform: 'capitalize' }}
-          underline="hover"
-        >
-          {'Home'}
-        </MuiLink>
-      </Link>
-      {breadCrumbLinks.map((link, index) => (
-        <Link key={index} href={link} passHref>
-          <MuiLink
-            color="inherit"
-            sx={{ cursor: 'pointer', textTransform: 'capitalize' }}
-            underline="hover"
-          >
-            {link
-              .split('/')
-              .pop()
-              ?.replaceAll('-', ' ')
-              ?.replaceAll('css', 'CSS')
-              ?.replaceAll(' ui', ' UI')
-              ?.replaceAll('api', 'API')}
-          </MuiLink>
-        </Link>
-      ))}
-    </MuiBreadcrumbs>
+    <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </Head>
+      <MuiBreadcrumbs aria-label="breadcrumb" sx={{ pt: '1rem' }}>
+        {breadCrumbLinks.map((link, index) => (
+          <Link key={index} href={link} passHref>
+            <MuiLink
+              color="inherit"
+              sx={{ cursor: 'pointer', textTransform: 'capitalize' }}
+              underline="hover"
+            >
+              {link
+                .split('/')
+                .pop()
+                ?.replaceAll('-', ' ')
+                ?.replaceAll('css', 'CSS')
+                ?.replaceAll(' ui', ' UI')
+                ?.replaceAll('api', 'API')}
+            </MuiLink>
+          </Link>
+        ))}
+      </MuiBreadcrumbs>
+    </>
   );
 };
 
