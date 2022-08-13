@@ -1,6 +1,6 @@
 import React, { FC, useMemo, useState } from 'react';
 import MaterialReactTable, {
-  MaterialReactTableProps,
+  MRT_Cell,
   MRT_ColumnDef,
 } from 'material-react-table';
 import { data, Person } from './makeData';
@@ -26,7 +26,6 @@ const Example: FC = () => {
         accessorKey: 'city',
         header: 'City',
       },
-
       {
         accessorKey: 'state',
         header: 'State',
@@ -37,20 +36,25 @@ const Example: FC = () => {
 
   const [tableData, setTableData] = useState<Person[]>(() => data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] =
-    async ({ row, values }) => {
-      //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
-      tableData[row.index] = values;
-      //send/receive api updates here
-      setTableData([...tableData]);
-    };
+  const handleSaveCell = (cell: MRT_Cell<Person>, value: any) => {
+    //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here
+    tableData[cell.row.index][cell.column.id as keyof Person] = value;
+    //send/receive api updates here
+    setTableData([...tableData]); //re-render with new data
+  };
 
   return (
     <MaterialReactTable
       columns={columns}
       data={tableData}
-      enableEditing //default editingMode is "row"
-      onEditingRowSave={handleSaveRow}
+      editingMode="cell"
+      enableEditing
+      muiTableBodyCellEditTextFieldProps={({ cell }) => ({
+        //onBlur is more efficient, but could use onChange instead
+        onBlur: (event) => {
+          handleSaveCell(cell, event.target.value);
+        },
+      })}
     />
   );
 };

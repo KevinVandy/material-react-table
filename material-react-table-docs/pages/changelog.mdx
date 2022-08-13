@@ -16,6 +16,7 @@ While MRT is pre-1.0, breaking changes are subject to occur. MRT should hit 1.0 
 
 TanStack Table 8.1 had some breaking changes that will be reflected here in MRT v0.19.0
 
+- v0.36.0 - `onCellEditBlur` and `onCellEditChange` props removed because the already exist on `muiTableBodyCellEditTextFieldProps`. Examples given [here](/docs/guides/editing)
 - v0.35.2 - Change `onEditRowSubmit` name to `onEditingRowSave`
 - v0.35.1 - "current" prefix in some state options removed from name (i.e. `currentEditingRow` is now just `editingRow`), new editing value(s) arguments, better types for editing features
 - v0.34.0 - rolled back to react-virtual 2.0 to fix flickering issue, MRT_Internal Toolbar components are now exported from MRT instead of in params

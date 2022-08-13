@@ -65,8 +65,8 @@ export const EditingEnabledEditModeCell: Story<
 > = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveCell = ({ cell, value }) => {
-    tableData[+cell.row.index][cell.column.id] = value;
+  const handleSaveCell = (cell, value) => {
+    tableData[cell.row.index][cell.column.id] = value;
     setTableData([...tableData]);
   };
 
@@ -98,7 +98,11 @@ export const EditingEnabledEditModeCell: Story<
       data={tableData}
       editingMode="cell"
       enableEditing
-      onCellEditBlur={handleSaveCell}
+      muiTableBodyCellEditTextFieldProps={({ cell }) => ({
+        onBlur: (event) => {
+          handleSaveCell(cell, event.target.value);
+        },
+      })}
     />
   );
 };
@@ -108,7 +112,7 @@ export const EditingEnabledEditModeTable: Story<
 > = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveCell = ({ cell, value }) => {
+  const handleSaveCell = (cell, value) => {
     tableData[+cell.row.index][cell.column.id] = value;
     setTableData([...tableData]);
     console.info('saved cell with value: ', value);
@@ -141,7 +145,11 @@ export const EditingEnabledEditModeTable: Story<
       data={tableData}
       editingMode="table"
       enableEditing
-      onCellEditBlur={handleSaveCell}
+      muiTableBodyCellEditTextFieldProps={({ cell }) => ({
+        onBlur: (event) => {
+          handleSaveCell(cell, event.target.value);
+        },
+      })}
     />
   );
 };
@@ -252,80 +260,80 @@ export const EditingCustomizeInput: Story<MaterialReactTableProps> = () => {
   );
 };
 
-export const EditingWithValidation: Story<MaterialReactTableProps> = () => {
-  const [tableData, setTableData] = useState(data);
-  const [firstNameError, setFirstNameError] = useState<string | boolean>(false);
-  const [lastNameError, setLastNameError] = useState<string | boolean>(false);
-  const [phoneNumberError, setPhoneNumberError] = useState<string | boolean>(
-    false,
-  );
+// export const EditingWithValidation: Story<MaterialReactTableProps> = () => {
+//   const [tableData, setTableData] = useState(data);
+//   const [firstNameError, setFirstNameError] = useState<string | boolean>(false);
+//   const [lastNameError, setLastNameError] = useState<string | boolean>(false);
+//   const [phoneNumberError, setPhoneNumberError] = useState<string | boolean>(
+//     false,
+//   );
 
-  const handleSaveRow = ({ row, values }) => {
-    tableData[row.index] = values;
-    setTableData([...tableData]);
-  };
+//   const handleSaveRow = ({ row, values }) => {
+//     tableData[row.index] = values;
+//     setTableData([...tableData]);
+//   };
 
-  const validateFirstName = (value: string) => {
-    if (value.length === 0) return 'First name is required';
-    return false;
-  };
+//   const validateFirstName = (value: string) => {
+//     if (value.length === 0) return 'First name is required';
+//     return false;
+//   };
 
-  const validateLastName = (value: string) => {
-    if (value.length === 0) return 'Last name is required';
-    return false;
-  };
+//   const validateLastName = (value: string) => {
+//     if (value.length === 0) return 'Last name is required';
+//     return false;
+//   };
 
-  const validatePhoneNumber = (value: string) => {
-    if (value.length === 0) return 'Phone number is required';
-    if (!value.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/))
-      return 'Invalid phone number';
-    return false;
-  };
+//   const validatePhoneNumber = (value: string) => {
+//     if (value.length === 0) return 'Phone number is required';
+//     if (!value.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/))
+//       return 'Invalid phone number';
+//     return false;
+//   };
 
-  return (
-    <MaterialReactTable
-      columns={[
-        {
-          header: 'First Name',
-          accessorKey: 'firstName',
-          muiTableBodyCellEditTextFieldProps: {
-            error: !!firstNameError,
-            helperText: firstNameError,
-          },
-          onCellEditChange: ({ event }) => {
-            setFirstNameError(validateFirstName(event.target.value));
-          },
-        },
-        {
-          header: 'Last Name',
-          accessorKey: 'lastName',
-          muiTableBodyCellEditTextFieldProps: {
-            error: !!lastNameError,
-            helperText: lastNameError,
-          },
-          onCellEditChange: ({ event }) => {
-            setLastNameError(validateLastName(event.target.value));
-          },
-        },
-        {
-          header: 'Phone Number',
-          accessorKey: 'phoneNumber',
-          muiTableBodyCellEditTextFieldProps: {
-            error: !!phoneNumberError,
-            helperText: phoneNumberError,
-          },
-          onCellEditChange: ({ event }) => {
-            setPhoneNumberError(validatePhoneNumber(event.target.value));
-          },
-        },
-      ]}
-      data={tableData}
-      enableRowActions
-      enableEditing
-      onEditingRowSave={handleSaveRow}
-    />
-  );
-};
+//   return (
+//     <MaterialReactTable
+//       columns={[
+//         {
+//           header: 'First Name',
+//           accessorKey: 'firstName',
+//           muiTableBodyCellEditTextFieldProps: {
+//             error: !!firstNameError,
+//             helperText: firstNameError,
+//           },
+//           onCellEditChange: ({ event }) => {
+//             setFirstNameError(validateFirstName(event.target.value));
+//           },
+//         },
+//         {
+//           header: 'Last Name',
+//           accessorKey: 'lastName',
+//           muiTableBodyCellEditTextFieldProps: {
+//             error: !!lastNameError,
+//             helperText: lastNameError,
+//           },
+//           onCellEditChange: ({ event }) => {
+//             setLastNameError(validateLastName(event.target.value));
+//           },
+//         },
+//         {
+//           header: 'Phone Number',
+//           accessorKey: 'phoneNumber',
+//           muiTableBodyCellEditTextFieldProps: {
+//             error: !!phoneNumberError,
+//             helperText: phoneNumberError,
+//           },
+//           onCellEditChange: ({ event }) => {
+//             setPhoneNumberError(validatePhoneNumber(event.target.value));
+//           },
+//         },
+//       ]}
+//       data={tableData}
+//       enableRowActions
+//       enableEditing
+//       onEditingRowSave={handleSaveRow}
+//     />
+//   );
+// };
 
 export const EditingEnabledAsync: Story<MaterialReactTableProps> = () => {
   const [tableData, setTableData] = useState(data);

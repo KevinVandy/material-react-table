@@ -1,11 +1,4 @@
-import React, {
-  ChangeEvent,
-  Dispatch,
-  DragEvent,
-  FocusEvent,
-  ReactNode,
-  SetStateAction,
-} from 'react';
+import React, { Dispatch, DragEvent, ReactNode, SetStateAction } from 'react';
 import type {
   AlertProps,
   ButtonProps,
@@ -263,8 +256,8 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
   muiTableBodyCellCopyButtonProps?:
     | ButtonProps
     | (({
-        table,
         cell,
+        table,
       }: {
         table: MRT_TableInstance<TData>;
         cell: MRT_Cell<TData>;
@@ -272,17 +265,17 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
   muiTableBodyCellEditTextFieldProps?:
     | TextFieldProps
     | (({
-        table,
         cell,
+        table,
       }: {
-        table: MRT_TableInstance<TData>;
         cell: MRT_Cell<TData>;
+        table: MRT_TableInstance<TData>;
       }) => TextFieldProps);
   muiTableBodyCellProps?:
     | TableCellProps
     | (({
-        table,
         cell,
+        table,
       }: {
         table: MRT_TableInstance<TData>;
         cell: MRT_Cell<TData>;
@@ -334,28 +327,6 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
       }) => TableCellProps);
-  onCellEditBlur?: ({
-    cell,
-    event,
-    table,
-    value,
-  }: {
-    event: FocusEvent<HTMLInputElement>;
-    cell: MRT_Cell<TData>;
-    table: MRT_TableInstance<TData>;
-    value: string;
-  }) => void;
-  onCellEditChange?: ({
-    cell,
-    event,
-    table,
-    value,
-  }: {
-    event: ChangeEvent<HTMLInputElement>;
-    cell: MRT_Cell<TData>;
-    table: MRT_TableInstance<TData>;
-    value: string;
-  }) => void;
   sortingFn?: MRT_SortingFn;
 };
 
@@ -539,11 +510,11 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     muiTableBodyCellEditTextFieldProps?:
       | TextFieldProps
       | (({
-          table,
           cell,
+          table,
         }: {
-          table: MRT_TableInstance<TData>;
           cell: MRT_Cell<TData>;
+          table: MRT_TableInstance<TData>;
         }) => TextFieldProps);
     muiTableBodyCellProps?:
       | TableCellProps
@@ -693,28 +664,6 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     muiTableTopToolbarProps?:
       | ToolbarProps
       | (({ table }: { table: MRT_TableInstance<TData> }) => ToolbarProps);
-    onCellEditBlur?: ({
-      cell,
-      event,
-      table,
-      value,
-    }: {
-      event: FocusEvent<HTMLInputElement>;
-      cell: MRT_Cell<TData>;
-      table: MRT_TableInstance<TData>;
-      value: string;
-    }) => void;
-    onCellEditChange?: ({
-      cell,
-      event,
-      table,
-      value,
-    }: {
-      event: ChangeEvent<HTMLInputElement>;
-      cell: MRT_Cell<TData>;
-      table: MRT_TableInstance<TData>;
-      value: string;
-    }) => void;
     onColumnDrop?: ({
       event,
       draggedColumn,

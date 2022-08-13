@@ -238,7 +238,10 @@ export const MRT_TableBodyCell: FC<Props> = ({
             : undefined,
         '&:hover': {
           backgroundColor:
-            enableHover && enableEditing && editingMode !== 'row'
+            enableHover &&
+            enableEditing &&
+            columnDef.enableEditing !== false &&
+            editingMode !== 'row'
               ? theme.palette.mode === 'dark'
                 ? `${lighten(
                     theme.palette.background.default,

@@ -5,7 +5,7 @@ import React, {
   MouseEvent,
   useState,
 } from 'react';
-import { TextField } from '@mui/material';
+import { TextField, TextFieldProps } from '@mui/material';
 import type { MRT_Cell, MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
@@ -16,12 +16,7 @@ interface Props {
 export const MRT_EditCellTextField: FC<Props> = ({ cell, table }) => {
   const {
     getState,
-    options: {
-      tableId,
-      muiTableBodyCellEditTextFieldProps,
-      onCellEditBlur,
-      onCellEditChange,
-    },
+    options: { tableId, muiTableBodyCellEditTextFieldProps },
     setEditingCell,
     setEditingRow,
   } = table;
@@ -30,23 +25,6 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, table }) => {
   const { editingRow } = getState();
 
   const [value, setValue] = useState(() => cell.getValue<string>());
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-    columnDef.onCellEditChange?.({ event, cell, table, value });
-    onCellEditChange?.({ event, cell, table, value });
-  };
-
-  const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
-    if (editingRow) {
-      if (!row._valuesCache) row._valuesCache = {};
-      (row._valuesCache as Record<string, any>)[column.id] = value;
-      setEditingRow({ ...editingRow } as MRT_Row);
-    }
-    setEditingCell(null);
-    columnDef.onCellEditBlur?.({ event, cell, table, value });
-    onCellEditBlur?.({ event, cell, table, value });
-  };
 
   const mTableBodyCellEditTextFieldProps =
     muiTableBodyCellEditTextFieldProps instanceof Function
@@ -61,9 +39,24 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, table }) => {
         })
       : columnDef.muiTableBodyCellEditTextFieldProps;
 
-  const textFieldProps = {
+  const textFieldProps: TextFieldProps = {
     ...mTableBodyCellEditTextFieldProps,
     ...mcTableBodyCellEditTextFieldProps,
+  };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    textFieldProps.onChange?.(event);
+    setValue(event.target.value);
+  };
+
+  const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
+    textFieldProps.onBlur?.(event);
+    if (editingRow) {
+      if (!row._valuesCache) row._valuesCache = {};
+      (row._valuesCache as Record<string, any>)[column.id] = value;
+      setEditingRow({ ...editingRow } as MRT_Row);
+    }
+    setEditingCell(null);
   };
 
   if (columnDef.Edit) {
@@ -74,13 +67,13 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, table }) => {
     <TextField
       id={`mrt-${tableId}-edit-cell-text-field-${cell.id}`}
       margin="none"
-      onBlur={handleBlur}
-      onChange={handleChange}
       onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
       placeholder={columnDef.header}
       value={value}
       variant="standard"
       {...textFieldProps}
+      onBlur={handleBlur}
+      onChange={handleChange}
     />
   );
 };

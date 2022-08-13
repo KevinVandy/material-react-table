@@ -2,6 +2,7 @@ import Head from 'next/head';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+import EditingCellExample from '../../../examples/enable-editing-cell';
 import EditingRowExample from '../../../examples/enable-editing-row';
 
 <Head>
@@ -24,8 +25,6 @@ TODO
       'enableEditing',
       'editingMode',
       'muiTableBodyCellEditTextFieldProps',
-      'onCellEditBlur',
-      'onCellEditChange',
       'onEditingCellChange',
       'onEditingRowChange',
       'onEditingRowSave',
@@ -36,14 +35,7 @@ TODO
 ### Relevant Column Options
 
 <ColumnOptionsTable
-  onlyProps={
-    new Set([
-      'enableEditing',
-      'muiTableBodyCellEditTextFieldProps',
-      'onCellEditBlur',
-      'onCellEditChange',
-    ])
-  }
+  onlyProps={new Set(['enableEditing', 'muiTableBodyCellEditTextFieldProps'])}
 />
 
 ### Relevant State Options
@@ -54,11 +46,15 @@ TODO
 
 ### Editing Modes
 
+Material React Table currently has three supported editing modes: `row` (default), `cell` and `table`.
+
 #### Row Editing Mode
 
 <EditingRowExample />
 
 #### Cell Editing Mode
+
+<EditingCellExample />
 
 #### Table Editing Mode
 
