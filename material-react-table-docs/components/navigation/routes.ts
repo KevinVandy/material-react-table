@@ -7,7 +7,7 @@ export const routes: Array<RouteItem> = [
   },
   {
     href: '/about',
-    label: 'About & FAQ',
+    label: 'About',
   },
   {
     href: '/changelog',

@@ -2,7 +2,7 @@
 const config = {
   siteUrl: 'https://www.material-react-table.com',
   generateRobotsTxt: true,
-  changefreq: 'weekly',
+  changefreq: 'daily',
   robotsTxtOptions: {
     policies: [
       {

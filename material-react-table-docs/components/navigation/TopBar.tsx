@@ -26,12 +26,6 @@ const Toolbar = styled(MuiToolbar)({
   justifyContent: 'space-between',
 });
 
-const Flex = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.25rem',
-});
-
 const IconButton = styled(MuiIconButton)({
   color: '#fff',
   height: '3rem',
@@ -58,7 +52,7 @@ const TopBar: FC<Props> = ({
   return (
     <AppBar position="fixed">
       <Toolbar variant={isTablet ? 'dense' : 'regular'}>
-        <Flex>
+        <Box display="flex">
           {!isDesktop && (
             <IconButton
               aria-label="Open nav menu"
@@ -85,13 +79,13 @@ const TopBar: FC<Props> = ({
               <Image
                 alt="MRT logo"
                 src="/mrt_logo.svg"
-                height={50}
-                width={50}
+                height={isTablet ? 35 : 45}
+                width={isTablet ? 35 : 45}
               />
               {!isMobile && 'Material React Table'}
             </Typography>
           </Link>
-        </Flex>
+        </Box>
         <Box
           id="docsearch"
           sx={{
@@ -99,7 +93,16 @@ const TopBar: FC<Props> = ({
             width: isDesktop ? '400px' : !isTablet ? '250px' : undefined,
           }}
         />
-        <Flex>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: {
+              xs: '0.25rem',
+              sm: '0.5rem',
+            },
+          }}
+        >
           <Tooltip arrow title="Github">
             <a
               href="https://github.com/KevinVandy/material-react-table"
@@ -149,7 +152,7 @@ const TopBar: FC<Props> = ({
               )}
             </IconButton>
           </Tooltip>
-        </Flex>
+        </Box>
       </Toolbar>
     </AppBar>
   );

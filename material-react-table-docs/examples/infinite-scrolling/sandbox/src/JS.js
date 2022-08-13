@@ -46,18 +46,15 @@ const Example = () => {
   const [globalFilter, setGlobalFilter] = useState();
   const [sorting, setSorting] = useState([]);
 
-  const [totalRowCount, setTotalRowCount] = useState(0);
-  const [numRowsFetched, setNumRowsFetched] = useState(0);
-
-  const { data, fetchNextPage, isError, isLoading, remove, isFetching } =
+  const { data, fetchNextPage, isError, isFetching, isLoading } =
     useInfiniteQuery(
       ['table-data', columnFilters, globalFilter, sorting],
-      async () => {
+      async ({ pageParam = 0 }) => {
         const url = new URL(
           '/api/data',
           'https://www.material-react-table.com',
         );
-        url.searchParams.set('start', `${numRowsFetched}`);
+        url.searchParams.set('start', `${pageParam * fetchSize}`);
         url.searchParams.set('size', `${fetchSize}`);
         url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
         url.searchParams.set('globalFilter', globalFilter ?? '');
@@ -69,53 +66,58 @@ const Example = () => {
       {
         getNextPageParam: (_lastGroup, groups) => groups.length,
         keepPreviousData: true,
-        onSuccess: (data) => {
-          setTotalRowCount(data.pages[0].meta.totalRowCount); //get and store total row count from API so we will know when to stop fetching
-          setNumRowsFetched(
-            (data?.pages.flatMap((page) => page.data) ?? []).length, //record how many rows we have fetched so far
-          );
-        },
         refetchOnWindowFocus: false,
       },
     );
 
-  useEffect(() => {
-    if (columnFilters.length) {
-      remove();
-      setNumRowsFetched(0);
-    }
-  }, [columnFilters, remove]);
+  const flatData = useMemo(
+    () => data?.pages.flatMap((page) => page.data) ?? [],
+    [data],
+  );
 
-  useEffect(() => {
-    if (sorting.length) {
-      remove();
-      setNumRowsFetched(0);
-    }
-  }, [sorting, remove]);
+  const totalDBRowCount = data?.pages?.[0]?.meta?.totalRowCount ?? 0;
+  const totalFetched = flatData.length;
 
-  useEffect(() => {
-    if (globalFilter?.length) {
-      remove();
-      setNumRowsFetched(0);
-    }
-  }, [globalFilter, remove]);
+  const onSortingChange = (updater) => {
+    setSorting((prevSorting) =>
+      updater instanceof Function ? updater(prevSorting) : updater,
+    );
+    //wipe previous fetched data and start from the beginning with the new sorting
+    fetchNextPage({ pageParam: 0 });
+  };
+
+  const onColumnFiltersChange = (updater) => {
+    setColumnFilters((prevColumnFilters) =>
+      updater instanceof Function ? updater(prevColumnFilters) : updater,
+    );
+    //wipe previous fetched data and start from the beginning with the new filters
+    fetchNextPage({ pageParam: 0 });
+  };
+
+  const onGlobalFilterChange = (updater) => {
+    setGlobalFilter((prevGlobalFilter) =>
+      updater instanceof Function ? updater(prevGlobalFilter) : updater,
+    );
+    //wipe previous fetched data and start from the beginning with the new search
+    fetchNextPage({ pageParam: 0 });
+  };
 
   //called on scroll and possibly on mount to fetch more data as the user scrolls and reaches bottom of table
   const fetchMoreOnBottomReached = useCallback(
-    (containerRef) => {
-      if (containerRef) {
-        const { scrollHeight, scrollTop, clientHeight } = containerRef;
+    (containerRefElement) => {
+      if (containerRefElement) {
+        const { scrollHeight, scrollTop, clientHeight } = containerRefElement;
         //once the user has scrolled within 100px of the bottom of the table, fetch more data if we can
         if (
           scrollHeight - scrollTop - clientHeight < 100 &&
           !isFetching &&
-          numRowsFetched < totalRowCount
+          totalFetched < totalDBRowCount
         ) {
           fetchNextPage();
         }
       }
     },
-    [fetchNextPage, isFetching, numRowsFetched, totalRowCount],
+    [fetchNextPage, isFetching, totalFetched, totalDBRowCount],
   );
 
   //a check on mount to see if the table is already scrolled to the bottom and immediately needs to fetch more data
@@ -123,18 +125,13 @@ const Example = () => {
     fetchMoreOnBottomReached(tableContainerRef.current);
   }, [fetchMoreOnBottomReached]);
 
-  const flatData = useMemo(
-    () => data?.pages.flatMap((page) => page.data) ?? [],
-    [data],
-  );
-
   return (
     <MaterialReactTable
       columns={columns}
       data={flatData}
       enablePagination={false}
       enableRowNumbers
-      enableRowVirtualization
+      enableRowVirtualization //optional, but recommended if it is likely going to be more than 100 rows
       manualFiltering
       manualSorting
       muiTableContainerProps={{
@@ -152,12 +149,12 @@ const Example = () => {
             }
           : undefined
       }
-      onColumnFiltersChange={setColumnFilters}
-      onGlobalFilterChange={setGlobalFilter}
-      onSortingChange={setSorting}
+      onColumnFiltersChange={onColumnFiltersChange}
+      onGlobalFilterChange={onGlobalFilterChange}
+      onSortingChange={onSortingChange}
       renderBottomToolbarCustomActions={() => (
         <Typography>
-          Fetched {flatData.length} of {totalRowCount} total rows.
+          Fetched {totalFetched} of {totalDBRowCount} total rows.
         </Typography>
       )}
       state={{
