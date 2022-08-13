@@ -55,7 +55,7 @@ export const EditingEnabledEditModeRowDefault: Story<
       ]}
       data={tableData}
       enableEditing
-      onEditRowSubmit={handleSaveRow}
+      onEditingRowSave={handleSaveRow}
     />
   );
 };
@@ -247,7 +247,7 @@ export const EditingCustomizeInput: Story<MaterialReactTableProps> = () => {
       enableRowActions
       enableEditing
       muiTableBodyCellEditTextFieldProps={{ variant: 'outlined' }}
-      onEditRowSubmit={handleSaveRow}
+      onEditingRowSave={handleSaveRow}
     />
   );
 };
@@ -322,7 +322,7 @@ export const EditingWithValidation: Story<MaterialReactTableProps> = () => {
       data={tableData}
       enableRowActions
       enableEditing
-      onEditRowSubmit={handleSaveRow}
+      onEditingRowSave={handleSaveRow}
     />
   );
 };
@@ -367,7 +367,7 @@ export const EditingEnabledAsync: Story<MaterialReactTableProps> = () => {
       data={tableData}
       enableRowActions
       enableEditing
-      onEditRowSubmit={handleSaveRow}
+      onEditingRowSave={handleSaveRow}
       state={{
         showProgressBars: isSaving,
       }}
@@ -416,7 +416,7 @@ export const EditingNestedData: Story<MaterialReactTableProps> = () => {
       ]}
       data={tableData}
       enableEditing
-      onEditRowSubmit={({ row, values }) => {
+      onEditingRowSave={({ row, values }) => {
         tableData[row.index] = {
           name: {
             firstName: values.firstName,

@@ -1,11 +1,65 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+import EditingRowExample from '../../../examples/enable-editing-row';
 
 <Head>
-  <title>Material React Table Docs - Row (Data) Editing Feature Guide</title>
+  <title>Material React Table Docs - Editing Feature Guide</title>
   <meta
     name="description"
     content="How to enable data editing features in Material React Table"
   />
 </Head>
 
-## Row (Data) Editing Feature Guide
+## Editing Feature Guide
+
+TODO
+
+### Relevant Props
+
+<RootPropTable
+  onlyProps={
+    new Set([
+      'enableEditing',
+      'editingMode',
+      'muiTableBodyCellEditTextFieldProps',
+      'onCellEditBlur',
+      'onCellEditChange',
+      'onEditingCellChange',
+      'onEditingRowChange',
+      'onEditingRowSave',
+    ])
+  }
+/>
+
+### Relevant Column Options
+
+<ColumnOptionsTable
+  onlyProps={
+    new Set([
+      'enableEditing',
+      'muiTableBodyCellEditTextFieldProps',
+      'onCellEditBlur',
+      'onCellEditChange',
+    ])
+  }
+/>
+
+### Relevant State Options
+
+<StateOptionsTable onlyProps={new Set(['editingCell', 'editingRow'])} />
+
+### Enable Editing
+
+### Editing Modes
+
+#### Row Editing Mode
+
+<EditingRowExample />
+
+#### Cell Editing Mode
+
+#### Table Editing Mode
+
+### Editing Nested Data Structures

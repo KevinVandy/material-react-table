@@ -727,7 +727,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     onDensityChange?: OnChangeFn<boolean>;
     onDraggingColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
     onDraggingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
-    onEditRowSubmit?: ({
+    onEditingRowSave?: ({
       row,
       table,
       values,

@@ -1398,7 +1398,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'onEditRowSubmit',
+    propName: 'onEditingRowSave',
     defaultValue: '',
     description: '',
     link: '',

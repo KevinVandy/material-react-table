@@ -13,7 +13,7 @@ export const MRT_EditActionButtons: FC<Props> = ({ row, table }) => {
     options: {
       icons: { CancelIcon, SaveIcon },
       localization,
-      onEditRowSubmit,
+      onEditingRowSave,
     },
     setEditingRow,
   } = table;
@@ -25,7 +25,7 @@ export const MRT_EditActionButtons: FC<Props> = ({ row, table }) => {
   };
 
   const handleSave = () => {
-    onEditRowSubmit?.({
+    onEditingRowSave?.({
       row: editingRow ?? row,
       table,
       values: editingRow?._valuesCache ?? { ...row.original },

@@ -135,7 +135,7 @@ const Example: FC = () => {
       enableRowActions
       enableRowNumbers
       enableRowSelection
-      onEditRowSubmit={handleSaveRow}
+      onEditingRowSave={handleSaveRow}
       positionToolbarAlertBanner="bottom"
       renderDetailPanel={({ row }) => (
         <Box
