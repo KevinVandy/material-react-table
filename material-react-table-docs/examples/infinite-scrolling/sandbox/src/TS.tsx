@@ -9,11 +9,7 @@ import React, {
 } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { Typography } from '@mui/material';
-import type {
-  ColumnFiltersState,
-  SortingState,
-  Updater,
-} from '@tanstack/react-table';
+import type { ColumnFiltersState, SortingState } from '@tanstack/react-table';
 import {
   QueryClient,
   QueryClientProvider,
@@ -100,30 +96,6 @@ const Example: FC = () => {
   const totalDBRowCount = data?.pages?.[0]?.meta?.totalRowCount ?? 0;
   const totalFetched = flatData.length;
 
-  const onSortingChange = (updater: Updater<SortingState>) => {
-    setSorting((prevSorting) =>
-      updater instanceof Function ? updater(prevSorting) : updater,
-    );
-    //wipe previous fetched data and start from the beginning with the new sorting
-    fetchNextPage({ pageParam: 0 });
-  };
-
-  const onColumnFiltersChange = (updater: Updater<ColumnFiltersState>) => {
-    setColumnFilters((prevColumnFilters) =>
-      updater instanceof Function ? updater(prevColumnFilters) : updater,
-    );
-    //wipe previous fetched data and start from the beginning with the new filters
-    fetchNextPage({ pageParam: 0 });
-  };
-
-  const onGlobalFilterChange = (updater: Updater<string | undefined>) => {
-    setGlobalFilter((prevGlobalFilter) =>
-      updater instanceof Function ? updater(prevGlobalFilter) : updater,
-    );
-    //wipe previous fetched data and start from the beginning with the new search
-    fetchNextPage({ pageParam: 0 });
-  };
-
   //called on scroll and possibly on mount to fetch more data as the user scrolls and reaches bottom of table
   const fetchMoreOnBottomReached = useCallback(
     (containerRefElement?: HTMLDivElement | null) => {
@@ -171,9 +143,9 @@ const Example: FC = () => {
             }
           : undefined
       }
-      onColumnFiltersChange={onColumnFiltersChange}
-      onGlobalFilterChange={onGlobalFilterChange}
-      onSortingChange={onSortingChange}
+      onColumnFiltersChange={setColumnFilters}
+      onGlobalFilterChange={setGlobalFilter}
+      onSortingChange={setSorting}
       renderBottomToolbarCustomActions={() => (
         <Typography>
           Fetched {totalFetched} of {totalDBRowCount} total rows.
