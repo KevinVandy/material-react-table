@@ -76,6 +76,11 @@ function App({ Component, pageProps }: AppProps) {
           href="https://1W9SWN5ZAH-dsn.algolia.net"
           crossOrigin="true"
         />
+        <script
+          defer
+          data-domain="material-react-table.com"
+          src="https://plausible.io/js/plausible.js"
+        ></script>
       </Head>
       <style global jsx>
         {`
