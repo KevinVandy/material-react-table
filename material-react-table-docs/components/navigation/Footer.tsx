@@ -32,6 +32,7 @@ const Footer = () => {
             ? '/index.mdx'
             : '.mdx'
         }`}
+        onClick={() => (window as any).plausible('edit-on-github')}
         rel="noreferrer"
         target="_blank"
         sx={{

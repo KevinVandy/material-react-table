@@ -63,8 +63,11 @@ export const SourceCodeSnippet: FC<Props> = ({
   let skipCodeLine = false;
 
   useEffect(
-    () => setIsTypeScript(localStorage.getItem('isTypeScript') === 'true'),
-    [],
+    () =>
+      setIsTypeScript(
+        localStorage.getItem('isTypeScript') === 'true' || !javaScriptCode,
+      ),
+    [javaScriptCode],
   );
 
   useEffect(
@@ -119,6 +122,7 @@ export const SourceCodeSnippet: FC<Props> = ({
                 <Button
                   startIcon={<Code />}
                   href={`https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples/${tableId}/sandbox?file=/src/TS.tsx`}
+                  onClick={() => (window as any).plausible('open-code-sandbox')}
                   rel="noreferrer"
                   target="_blank"
                   sx={{ cursor: 'pointer' }}
@@ -131,6 +135,7 @@ export const SourceCodeSnippet: FC<Props> = ({
                   href={`https://github.com/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples/${tableId}/sandbox/src/${
                     isTypeScript ? 'TS.tsx' : 'JS.js'
                   }`}
+                  onClick={() => (window as any).plausible('open-on-github')}
                   rel="noreferrer"
                   target="_blank"
                   sx={{ cursor: 'pointer' }}
@@ -158,6 +163,7 @@ export const SourceCodeSnippet: FC<Props> = ({
               onClick={() => {
                 setIsTypeScript(true);
                 setShowApiCode(false);
+                (window as any).plausible('toggle-to-typescript');
               }}
               value="ts"
               selected={isTypeScript && !showApiCode}
@@ -169,6 +175,7 @@ export const SourceCodeSnippet: FC<Props> = ({
                 onClick={() => {
                   setIsTypeScript(false);
                   setShowApiCode(false);
+                  (window as any).plausible('toggle-to-javascript');
                 }}
                 value="js"
                 selected={!isTypeScript && !showApiCode}

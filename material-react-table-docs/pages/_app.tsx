@@ -15,6 +15,16 @@ import docsearch from '@docsearch/js';
 import '../styles/globals.css';
 import '@docsearch/css';
 
+if (typeof window !== 'undefined') {
+  (window as any).plausible =
+    (window as any).plausible || process.env.NODE_ENV === 'production'
+      ? function () {
+          ((window as any).plausible.q =
+            (window as any).plausible.q || []).push(arguments);
+        }
+      : () => {};
+}
+
 function App({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
 
@@ -71,16 +81,20 @@ function App({ Component, pageProps }: AppProps) {
           content="Material React Table, a fully featured Material UI implementation of TanStack React Table V8. Written from the ground up in TypeScript."
         />
         <link rel="icon" href="/mrt_logo.png" />
-        <link
-          rel="preconnect"
-          href="https://1W9SWN5ZAH-dsn.algolia.net"
-          crossOrigin="true"
-        />
-        <script
-          defer
-          data-domain="material-react-table.com"
-          src="https://plausible.io/js/plausible.js"
-        ></script>
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            <link
+              rel="preconnect"
+              href="https://1W9SWN5ZAH-dsn.algolia.net"
+              crossOrigin="true"
+            />
+            <script
+              defer
+              data-domain="material-react-table.com"
+              src="https://plausible.io/js/plausible.js"
+            />
+          </>
+        )}
       </Head>
       <style global jsx>
         {`
@@ -114,6 +128,7 @@ function App({ Component, pageProps }: AppProps) {
           />
           <SideBar navOpen={navOpen || isDesktop} setNavOpen={setNavOpen} />
           <Box
+            component="main"
             sx={(theme) => ({
               backgroundColor: theme.palette.background.default,
               color: theme.palette.text.primary,
@@ -125,7 +140,6 @@ function App({ Component, pageProps }: AppProps) {
             })}
           >
             <Box
-              component="main"
               sx={{
                 maxWidth: '1200px',
                 margin: 'auto',

@@ -87,6 +87,7 @@ const TopBar: FC<Props> = ({
           </Link>
         </Box>
         <Box
+          onClick={() => (window as any).plausible('open-search')}
           id="docsearch"
           sx={{
             display: 'grid',
@@ -142,7 +143,12 @@ const TopBar: FC<Props> = ({
           <Tooltip arrow title="Toggle Light/Dark Mode">
             <IconButton
               aria-label="Toggle Light/Dark Mode"
-              onClick={() => setIsLightTheme(!isLightTheme)}
+              onClick={() => {
+                setIsLightTheme(!isLightTheme);
+                (window as any).plausible(
+                  `toggle-theme-${isLightTheme ? 'dark' : 'light'}-mode`,
+                );
+              }}
               size={isMobile ? 'small' : 'large'}
             >
               {isLightTheme ? (
