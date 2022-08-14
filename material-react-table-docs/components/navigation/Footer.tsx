@@ -23,7 +23,7 @@ const Footer = () => {
         color="secondary"
         endIcon={<GitHub />}
         startIcon={<Edit />}
-        href={`https://github.com/KevinVandy/material-react-table/tree/main/material-react-table-docs/pages${pathname}${
+        href={`https://github.com/KevinVandy/material-react-table/edit/main/material-react-table-docs/pages${pathname}${
           ['/'].includes(pathname)
             ? 'index.tsx'
             : ['/docs', '/docs/api', '/docs/examples', '/docs/guides'].includes(
@@ -42,7 +42,7 @@ const Footer = () => {
         }}
         variant="outlined"
       >
-        Edit this page on GitHub
+        Suggest an Edit for this page on GitHub
       </Button>
       <Typography
         sx={{
