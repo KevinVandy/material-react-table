@@ -1,6 +1,6 @@
 import { Employee } from './TS';
 
-export const makeData = (): Employee[] => [
+export const data: Employee[] = [
   {
     firstName: 'Dusty',
     lastName: 'Kuvalis',

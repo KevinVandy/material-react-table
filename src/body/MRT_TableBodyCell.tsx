@@ -277,7 +277,10 @@ export const MRT_TableBodyCell: FC<Props> = ({
             rowRef={rowRef}
             table={table}
           />
-        ) : columnDefType === 'display' ? (
+        ) : columnDefType === 'display' &&
+          (column.id === 'mrt-row-select' ||
+            column.id === 'mrt-row-expand' ||
+            !row.getIsGrouped()) ? (
           columnDef.Cell?.({ cell, column, table })
         ) : isEditing ? (
           <MRT_EditCellTextField cell={cell} table={table} />
@@ -286,15 +289,20 @@ export const MRT_TableBodyCell: FC<Props> = ({
           <>
             <MRT_CopyButton cell={cell} table={table}>
               <>
-                {columnDef?.Cell?.({ cell, column, table }) ??
-                  cell.renderValue()}
+                {row.getIsGrouped() && !cell.getIsGrouped()
+                  ? null
+                  : columnDef?.Cell?.({ cell, column, table }) ??
+                    cell.renderValue()}
               </>
             </MRT_CopyButton>
             {cell.getIsGrouped() && <> ({row.subRows?.length})</>}
           </>
         ) : (
           <>
-            {columnDef?.Cell?.({ cell, column, table }) ?? cell.renderValue()}
+            {row.getIsGrouped() && !cell.getIsGrouped()
+              ? null
+              : columnDef?.Cell?.({ cell, column, table }) ??
+                cell.renderValue()}
             {cell.getIsGrouped() && <> ({row.subRows?.length ?? ''})</>}
           </>
         )}
