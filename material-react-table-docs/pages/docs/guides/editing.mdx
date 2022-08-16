@@ -90,12 +90,6 @@ To save data, you must hook up either the `onBlur`, `onChange`, etc. events your
 
 You can pass any MUI TextField Props with the `muiTableBodyCellEditTextFieldProps` prop.
 
-TODO
-
-### Use Custom Editing Components
-
-On each column definition, you can specify a custom editing component with the `Edit` option.
-
 ```tsx
 const columns = [
   {
@@ -106,6 +100,22 @@ const columns = [
       type: 'number',
       variant: 'outlined',
     },
+  },
+];
+```
+
+TODO
+
+### Use Custom Editing Components
+
+If you need to use a much more complicated Editing component than the built-in textfield, you can specify a custom editing component with the `Edit` column definition option.
+
+```tsx
+const columns = [
+  {
+    accessorKey: 'email',
+    header: 'Email',
+    Edit: ({ cell, column, table }) => <Autocomplete />,
   },
 ];
 ```
