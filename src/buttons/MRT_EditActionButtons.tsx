@@ -25,7 +25,6 @@ export const MRT_EditActionButtons = <TData extends Record<string, any> = {}>({
   const { editingRow } = getState();
 
   const handleCancel = () => {
-    row._valuesCache = { ...row.original };
     setEditingRow(null);
   };
 

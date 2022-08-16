@@ -21,11 +21,21 @@ export const MRT_EditRowModal = <TData extends Record<string, any> = {}>({
   row,
   table,
 }: Props<TData>) => {
+  const {
+    options: { localization },
+  } = table;
+
   return (
     <Dialog open={open}>
-      <DialogTitle></DialogTitle>
+      <DialogTitle textAlign="center">{localization.edit}</DialogTitle>
       <DialogContent>
-        <Stack sx={{ width: '100%', minWidth: '360px', gap: '1rem' }}>
+        <Stack
+          sx={{
+            width: '100%',
+            minWidth: { xs: '300px', sm: '360px', md: '400px' },
+            gap: '1.5rem',
+          }}
+        >
           {row
             .getVisibleCells()
             .filter((cell) => cell.column.columnDef.columnDefType === 'data')

@@ -19,7 +19,7 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
     setEditingCell,
     setEditingRow,
   } = table;
-  const { column, row } = cell;
+  const { column } = cell;
   const { columnDef } = column;
   const { editingRow } = getState();
 
@@ -51,9 +51,10 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
     textFieldProps.onBlur?.(event);
     if (editingRow) {
-      if (!row._valuesCache) row._valuesCache = {} as TData;
-      (row._valuesCache as Record<string, any>)[column.id] = value;
-      setEditingRow({ ...editingRow } as any);
+      setEditingRow({
+        ...editingRow,
+        _valuesCache: { ...editingRow._valuesCache, [column.id]: value },
+      } as any);
     }
     setEditingCell(null);
   };
@@ -65,6 +66,7 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
   return (
     <TextField
       disabled={columnDef.enableEditing === false}
+      fullWidth
       id={`mrt-${tableId}-edit-cell-text-field-${cell.id}`}
       label={showLabel ? column.columnDef.header : undefined}
       margin="none"

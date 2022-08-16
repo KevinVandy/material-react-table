@@ -242,13 +242,10 @@ export const MRT_TableBodyCell: FC<Props> = ({
             enableHover &&
             enableEditing &&
             columnDef.enableEditing !== false &&
-            editingMode !== 'row'
+            ['table', 'cell'].includes(editingMode ?? '')
               ? theme.palette.mode === 'dark'
-                ? `${lighten(
-                    theme.palette.background.default,
-                    0.13,
-                  )} !important`
-                : `${darken(theme.palette.background.default, 0.07)} !important`
+                ? `${lighten(theme.palette.background.default, 0.2)} !important`
+                : `${darken(theme.palette.background.default, 0.1)} !important`
               : undefined,
         },
         ...(tableCellProps?.sx instanceof Function
