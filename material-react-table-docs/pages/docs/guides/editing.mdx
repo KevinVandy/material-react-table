@@ -3,6 +3,7 @@ import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import EditingCellExample from '../../../examples/enable-editing-cell';
+import EditingModalExample from '../../../examples/enable-editing-modal';
 import EditingRowExample from '../../../examples/enable-editing-row';
 import EditingTableExample from '../../../examples/enable-editing-table';
 
@@ -16,7 +17,9 @@ import EditingTableExample from '../../../examples/enable-editing-table';
 
 ## Editing Feature Guide
 
-TODO
+If your tables need full CRUD functionality, you can enable editing features in Material React Table.
+
+There are 4 visually distinct editing modes to choose from, whether you want to let users [edit data in a modal](#modal-editing-mode), [inline 1 row at a time](#row-editing-mode), [1 cell at a time](#cell-editing-mode), or just always have [editing enabled for every cell](#table-editing-mode).
 
 ### Relevant Props
 
@@ -47,18 +50,70 @@ TODO
 
 ### Editing Modes
 
-Material React Table currently has three supported editing modes: `row` (default), `cell` and `table`.
+Material React Table has 4 supported editing modes: `row` (default), `modal`, `cell` and `table`. You can specify which editing mode you want to use by passing the `editingMode` prop.
 
 #### Row Editing Mode
 
+The `row` editing mode is an inline row editing mode. When edit mode is activated, the row shows the edit components in the data cells. No data is saved to the table until the user clicks the save button. Clicking the cancel button clears out any changes that were made on that row.
+
+You must provide an `onEditingRowSave` callback function prop where you will get access to the updated row data so that changes can be processed and saved. It is up to you how you handle the data.
+
 <EditingRowExample />
 
+#### Modal Editing Mode
+
+The `modal` editing mode opens up a dialog where the user can edit data for 1 row at a time, similar to the `row` editing mode. No data is saved to the table until the user clicks the save button. Clicking the cancel button clears out any changes that were made on that row.
+
+Just like the `row` editing mode, an `onEditingRowSave` callback function prop must be provided where you will get access to the updated row data so that changes can be processed and saved. It is up to you how you handle the data.
+
+<EditingModalExample />
+
 #### Cell Editing Mode
+
+The `cell` editing mode is a bit simpler visually. Uses double-click cells to activate editing mode, but only for that cell.
+
+Then there is a bit of work for you to do to wire up either the `onBlur`, `onChange`, etc. events yourself in order to save the table data. This can be done in the `muiTableBodyCellEditTextFieldProps` prop or column definition option.
 
 <EditingCellExample />
 
 #### Table Editing Mode
 
+The `table` editing mode is similar to the `cell` editing mode, but it simply has all of the data cells in the table become editable all at once.
+
+To save data, you must hook up either the `onBlur`, `onChange`, etc. events yourself. This can be done in the `muiTableBodyCellEditTextFieldProps` prop or column definition option.
+
 <EditingTableExample />
 
 ### Editing Nested Data Structures
+
+### Customizing Editing Components
+
+You can pass any MUI TextField Props with the `muiTableBodyCellEditTextFieldProps` prop.
+
+TODO
+
+### Use Custom Editing Components
+
+On each column definition, you can specify a custom editing component with the `Edit` option.
+
+```tsx
+const columns = [
+  {
+    accessor: 'age',
+    header: 'Age',
+    muiTableBodyCellEditTextFieldProps: {
+      required: true,
+      type: 'number',
+      variant: 'outlined',
+    },
+  },
+];
+```
+
+### Add Validation
+
+TODO
+
+### React-Hook-Form Example
+
+TODO
