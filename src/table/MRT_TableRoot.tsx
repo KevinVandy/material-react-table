@@ -33,6 +33,7 @@ import type {
   MRT_TableState,
   MaterialReactTableProps,
 } from '..';
+import { MRT_EditRowModal } from '../body/MRT_EditRowModal';
 
 export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   props: MaterialReactTableProps<TData>,
@@ -300,6 +301,9 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
         <MRT_TablePaper table={table} />
       </Dialog>
       {!isFullScreen && <MRT_TablePaper table={table} />}
+      {editingRow && props.editingMode === 'modal' && (
+        <MRT_EditRowModal row={editingRow as any} table={table} open />
+      )}
     </>
   );
 };

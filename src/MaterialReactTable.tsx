@@ -432,7 +432,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     displayColumnDefOptions?: Partial<{
       [key in MRT_DisplayColumnIds]: Partial<MRT_ColumnDef>;
     }>;
-    editingMode?: 'table' | 'row' | 'cell';
+    editingMode?: 'table' | 'modal' | 'row' | 'cell';
     enableBottomToolbar?: boolean;
     enableClickToCopy?: boolean;
     enableColumnActions?: boolean;

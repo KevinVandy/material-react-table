@@ -60,6 +60,49 @@ export const EditingEnabledEditModeRowDefault: Story<
   );
 };
 
+export const EditingEnabledEditModeModal: Story<
+  MaterialReactTableProps
+> = () => {
+  const [tableData, setTableData] = useState(data);
+
+  const handleSaveRow = ({ row, values }) => {
+    tableData[row.index] = values;
+    setTableData([...tableData]);
+  };
+
+  return (
+    <MaterialReactTable
+      columns={[
+        {
+          header: 'First Name',
+          accessorKey: 'firstName',
+        },
+        {
+          header: 'Last Name',
+          accessorKey: 'lastName',
+        },
+        {
+          header: 'Address',
+          accessorKey: 'address',
+        },
+        {
+          header: 'State',
+          accessorKey: 'state',
+        },
+        {
+          header: 'Phone Number',
+          accessorKey: 'phoneNumber',
+          enableEditing: false,
+        },
+      ]}
+      data={tableData}
+      enableEditing
+      editingMode="modal"
+      onEditingRowSave={handleSaveRow}
+    />
+  );
+};
+
 export const EditingEnabledEditModeCell: Story<
   MaterialReactTableProps
 > = () => {

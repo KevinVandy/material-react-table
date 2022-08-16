@@ -1,19 +1,18 @@
-import React, {
-  ChangeEvent,
-  FC,
-  FocusEvent,
-  MouseEvent,
-  useState,
-} from 'react';
+import React, { ChangeEvent, FocusEvent, MouseEvent, useState } from 'react';
 import { TextField, TextFieldProps } from '@mui/material';
-import type { MRT_Cell, MRT_Row, MRT_TableInstance } from '..';
+import type { MRT_Cell, MRT_TableInstance } from '..';
 
-interface Props {
-  cell: MRT_Cell;
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any> = {}> {
+  cell: MRT_Cell<TData>;
+  table: MRT_TableInstance<TData>;
+  showLabel?: boolean;
 }
 
-export const MRT_EditCellTextField: FC<Props> = ({ cell, table }) => {
+export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
+  cell,
+  showLabel,
+  table,
+}: Props<TData>) => {
   const {
     getState,
     options: { tableId, muiTableBodyCellEditTextFieldProps },
@@ -52,9 +51,9 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, table }) => {
   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
     textFieldProps.onBlur?.(event);
     if (editingRow) {
-      if (!row._valuesCache) row._valuesCache = {};
+      if (!row._valuesCache) row._valuesCache = {} as TData;
       (row._valuesCache as Record<string, any>)[column.id] = value;
-      setEditingRow({ ...editingRow } as MRT_Row);
+      setEditingRow({ ...editingRow } as any);
     }
     setEditingCell(null);
   };
@@ -65,7 +64,9 @@ export const MRT_EditCellTextField: FC<Props> = ({ cell, table }) => {
 
   return (
     <TextField
+      disabled={columnDef.enableEditing === false}
       id={`mrt-${tableId}-edit-cell-text-field-${cell.id}`}
+      label={showLabel ? column.columnDef.header : undefined}
       margin="none"
       onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
       placeholder={columnDef.header}

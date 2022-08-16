@@ -14,6 +14,8 @@ import Example from '../../../examples/enable-column-pinning';
 
 ## Column Pinning Feature Guide
 
+Column Pinning is a cool feature that allows users to pin (freeze) columns to the left or right of the table. Pinned columns will not scroll horizontally with the rest of the columns, so that they always stay visible to the user.
+
 ### Relevant Props
 
 <RootPropTable
@@ -26,6 +28,28 @@ import Example from '../../../examples/enable-column-pinning';
 
 ### Relevant State
 
-<StateOptionsTable onlyProps={new Set(['pinning'])} />
+<StateOptionsTable onlyProps={new Set(['columnPinning'])} />
+
+### Enable Column Pinning
+
+Column pinning can simply be enabled by setting the `enablePinning` prop to `true`.
+
+```tsx
+<MaterialReactTable data={data} columns={columns} enablePinning />
+```
+
+### Pin (Freeze) Columns By Default
+
+Columns can start out pinned in your table by setting the `pinning` states in `initialState` or `state`.
+
+```tsx
+<MaterialReactTable
+  data={data}
+  columns={columns}
+  initialState={{ pinning: { left: ['email'] } }} //pin email column to left by default
+/>
+```
+
+#### Column Pinning Example
 
 <Example />

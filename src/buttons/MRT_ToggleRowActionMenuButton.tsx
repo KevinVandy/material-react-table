@@ -24,6 +24,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row, table }) => {
   const {
     getState,
     options: {
+      editingMode,
       enableEditing,
       icons: { EditIcon, MoreHorizIcon },
       localization,
@@ -52,7 +53,7 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row, table }) => {
     <>
       {renderRowActions ? (
         <>{renderRowActions({ row, table })}</>
-      ) : row.id === editingRow?.id ? (
+      ) : row.id === editingRow?.id && editingMode === 'row' ? (
         <MRT_EditActionButtons row={row} table={table} />
       ) : !renderRowActionMenuItems && enableEditing ? (
         <Tooltip placement="right" arrow title={localization.edit}>

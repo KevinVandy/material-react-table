@@ -87,6 +87,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   const isEditing =
     isEditable &&
+    editingMode !== 'modal' &&
     (editingMode === 'table' ||
       editingRow?.id === row.id ||
       editingCell?.id === cell.id);
