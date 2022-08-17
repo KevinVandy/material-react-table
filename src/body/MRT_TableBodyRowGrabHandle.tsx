@@ -16,15 +16,16 @@ export const MRT_TableBodyRowGrabHandle: FC<Props> = ({
   const {
     options: { muiTableBodyRowDragHandleProps, onRowDrop },
   } = table;
+  const { row } = cell;
 
   const iconButtonProps =
     muiTableBodyRowDragHandleProps instanceof Function
-      ? muiTableBodyRowDragHandleProps({ row: cell.row, table })
+      ? muiTableBodyRowDragHandleProps({ row, table })
       : muiTableBodyRowDragHandleProps;
 
   const handleDragStart = (e: DragEvent<HTMLButtonElement>) => {
     e.dataTransfer.setDragImage(rowRef.current as HTMLElement, 0, 0);
-    table.setDraggingRow(cell.row as any);
+    table.setDraggingRow(row as any);
   };
 
   const handleDragEnd = (event: DragEvent<HTMLButtonElement>) => {

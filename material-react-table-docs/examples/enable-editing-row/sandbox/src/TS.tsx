@@ -49,7 +49,8 @@ const Example: FC = () => {
     <MaterialReactTable
       columns={columns}
       data={tableData}
-      enableEditing //default editingMode is "row"
+      editingMode="row"
+      enableEditing
       onEditingRowSave={handleSaveRow}
     />
   );

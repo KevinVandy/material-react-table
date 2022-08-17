@@ -66,6 +66,10 @@ export const routes: Array<RouteItem> = [
         label: 'Data Export Example',
       },
       {
+        href: '/docs/examples/editing-crud',
+        label: 'Editing (CRUD) Example',
+      },
+      {
         href: '/docs/examples/remote',
         label: 'Remote Data Example',
       },

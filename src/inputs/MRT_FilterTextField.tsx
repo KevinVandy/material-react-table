@@ -40,8 +40,8 @@ export const MRT_FilterTextField: FC<Props> = ({
       icons: { FilterListIcon, CloseIcon },
       localization,
       muiTableHeadCellFilterTextFieldProps,
-      tableId,
     },
+    refs: { filterInputRefs },
     setColumnFilterFns,
   } = table;
   const { column } = header;
@@ -80,9 +80,6 @@ export const MRT_FilterTextField: FC<Props> = ({
     (!isSelectFilter && !isMultiSelectFilter);
 
   const currentFilterOption = columnFilterFns?.[header.id];
-  const filterId = `mrt-${tableId}-${header.id}-filter-text-field${
-    rangeFilterIndex ?? ''
-  }`;
   const filterChipLabel = ['empty', 'notEmpty'].includes(currentFilterOption)
     ? //@ts-ignore
       localization[
@@ -184,7 +181,6 @@ export const MRT_FilterTextField: FC<Props> = ({
     <>
       <TextField
         fullWidth
-        id={filterId}
         inputProps={{
           disabled: !!filterChipLabel,
           sx: {
@@ -195,7 +191,7 @@ export const MRT_FilterTextField: FC<Props> = ({
         }}
         helperText={
           showChangeModeButton ? (
-            <label htmlFor={filterId}>
+            <label>
               {localization.filterMode.replace(
                 '{filterType}',
                 // @ts-ignore
@@ -294,6 +290,13 @@ export const MRT_FilterTextField: FC<Props> = ({
             : undefined,
         }}
         {...textFieldProps}
+        inputRef={(inputRef) => {
+          filterInputRefs.current[`${column.id}-${rangeFilterIndex ?? 0}`] =
+            inputRef;
+          if (textFieldProps.inputRef) {
+            textFieldProps.inputRef = inputRef;
+          }
+        }}
         sx={(theme) => ({
           p: 0,
           minWidth: !filterChipLabel ? '6rem' : 'auto',

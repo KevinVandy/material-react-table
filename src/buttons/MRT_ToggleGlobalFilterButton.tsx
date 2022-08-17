@@ -17,30 +17,17 @@ export const MRT_ToggleGlobalFilterButton = <
     getState,
     options: {
       icons: { SearchIcon, SearchOffIcon },
-      tableId,
+
       localization,
-      muiSearchTextFieldProps,
     },
+    refs: { searchInputRef },
     setShowGlobalFilter,
   } = table;
   const { showGlobalFilter } = getState();
 
-  const textFieldProps =
-    muiSearchTextFieldProps instanceof Function
-      ? muiSearchTextFieldProps({ table })
-      : muiSearchTextFieldProps;
-
   const handleToggleSearch = () => {
     setShowGlobalFilter(!showGlobalFilter);
-    setTimeout(
-      () =>
-        document
-          .getElementById(
-            textFieldProps?.id ?? `mrt-${tableId}-search-text-field`,
-          )
-          ?.focus(),
-      200,
-    );
+    queueMicrotask(() => searchInputRef.current?.focus());
   };
 
   return (

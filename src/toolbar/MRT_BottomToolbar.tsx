@@ -21,8 +21,8 @@ export const MRT_BottomToolbar: FC<Props> = ({ table }) => {
       positionToolbarAlertBanner,
       positionToolbarDropZone,
       renderBottomToolbarCustomActions,
-      tableId,
     },
+    refs: { bottomToolbarRef },
   } = table;
   const { isFullScreen } = getState();
 
@@ -37,9 +37,15 @@ export const MRT_BottomToolbar: FC<Props> = ({ table }) => {
 
   return (
     <Toolbar
-      id={`mrt-${tableId}-toolbar-bottom`}
       variant="dense"
       {...toolbarProps}
+      ref={(ref: HTMLDivElement) => {
+        bottomToolbarRef.current = ref;
+        if (toolbarProps?.ref) {
+          // @ts-ignore
+          toolbarProps.ref.current = ref;
+        }
+      }}
       sx={(theme) =>
         ({
           ...commonToolbarStyles({ theme }),

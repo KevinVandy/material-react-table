@@ -76,8 +76,8 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
         {row?.getVisibleCells()?.map?.((cell) => (
           <MRT_TableBodyCell
             cell={cell}
-            key={cell.id}
             enableHover={tableRowProps?.hover !== false}
+            key={cell.id}
             rowIndex={rowIndex}
             rowRef={rowRef}
             table={table}

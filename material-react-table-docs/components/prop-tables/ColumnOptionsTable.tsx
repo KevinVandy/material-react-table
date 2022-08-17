@@ -24,8 +24,8 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
             id: `${cell.getValue<string>()}-column-option`,
             href: `#${cell.getValue<string>()}-column-option`,
           }),
-          Cell: ({ cell }) =>
-            cell.row.original?.required ? (
+          Cell: ({ cell, row }) =>
+            row.original?.required ? (
               <strong style={{ color: theme.palette.primary.dark }}>
                 {cell.getValue<string>()}*
               </strong>
@@ -54,7 +54,7 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
           disableFilters: true,
           enableGlobalFilter: false,
           header: 'More Info Links',
-          Cell: ({ cell }) => (
+          Cell: ({ cell, row }) => (
             <Link href={cell.getValue() as string} passHref>
               <MuiLink
                 target={
@@ -64,7 +64,7 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
                 }
                 rel="noreferrer"
               >
-                {cell.row.original?.linkText}
+                {row.original?.linkText}
               </MuiLink>
             </Link>
           ),

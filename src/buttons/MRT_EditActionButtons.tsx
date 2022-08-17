@@ -20,21 +20,30 @@ export const MRT_EditActionButtons = <TData extends Record<string, any> = {}>({
       localization,
       onEditingRowSave,
     },
+    refs: { editInputRefs },
     setEditingRow,
   } = table;
   const { editingRow } = getState();
 
-  const handleCancel = () => {
-    setEditingRow(null);
-  };
+  const handleCancel = () => setEditingRow(null);
 
   const handleSave = () => {
+    //look for auto-filled input values
+    Object.values(editInputRefs?.current)?.forEach((input) => {
+      if (
+        input.value !== undefined &&
+        Object.hasOwn(editingRow?._valuesCache as object, input.name)
+      ) {
+        // @ts-ignore
+        editingRow._valuesCache[input.name] = input.value;
+      }
+    });
     onEditingRowSave?.({
+      exitEditingMode: () => setEditingRow(null),
       row: editingRow ?? row,
       table,
       values: editingRow?._valuesCache ?? { ...row.original },
     });
-    setEditingRow(null);
   };
 
   return (

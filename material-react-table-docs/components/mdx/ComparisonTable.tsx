@@ -7,9 +7,9 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
     accessorKey: 'library',
     header: 'Library',
     size: 150,
-    Cell: ({ cell }) => (
+    Cell: ({ cell, row }) => (
       <Link
-        href={cell.row.original.libraryLink}
+        href={row.original.libraryLink}
         target="_blank"
         rel="noreferrer"
         sx={(theme) => ({
@@ -38,13 +38,13 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
   {
     accessorKey: 'bundleSize',
     header: 'Bundle Size',
-    Cell: ({ cell }) => (
+    Cell: ({ cell, row }) => (
       <Box sx={{ display: 'flex', alignContent: 'center', gap: '1ch' }}>
         {`${cell.getValue<string>()} KB`}
         <img
           alt={cell.getValue<string>()}
           loading="lazy"
-          src={cell.row.original.bundlePhobiaLink}
+          src={row.original.bundlePhobiaLink}
         />
       </Box>
     ),

@@ -27,8 +27,8 @@ export const MRT_GlobalFilterTextField = <
       icons: { SearchIcon, CloseIcon },
       localization,
       muiSearchTextFieldProps,
-      tableId,
     },
+    refs: { searchInputRef },
   } = table;
   const { globalFilter, showGlobalFilter } = getState();
 
@@ -64,7 +64,6 @@ export const MRT_GlobalFilterTextField = <
   return (
     <Collapse in={showGlobalFilter} orientation="horizontal">
       <TextField
-        id={`mrt-${tableId}-search-text-field`}
         placeholder={localization.search}
         onChange={handleChange}
         value={searchValue ?? ''}
@@ -104,6 +103,12 @@ export const MRT_GlobalFilterTextField = <
           ),
         }}
         {...textFieldProps}
+        inputRef={(inputRef) => {
+          searchInputRef.current = inputRef;
+          if (textFieldProps?.inputRef) {
+            textFieldProps.inputRef = inputRef;
+          }
+        }}
       />
       <MRT_FilterOptionMenu
         anchorEl={anchorEl}

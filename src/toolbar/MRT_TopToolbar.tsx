@@ -37,8 +37,8 @@ export const MRT_TopToolbar: FC<Props> = ({ table }) => {
       positionToolbarAlertBanner,
       positionToolbarDropZone,
       renderTopToolbarCustomActions,
-      tableId,
     },
+    refs: { topToolbarRef },
   } = table;
 
   const { isFullScreen, showGlobalFilter } = getState();
@@ -55,9 +55,15 @@ export const MRT_TopToolbar: FC<Props> = ({ table }) => {
 
   return (
     <Toolbar
-      id={`mrt-${tableId}-toolbar-top`}
       variant="dense"
       {...toolbarProps}
+      ref={(ref: HTMLDivElement) => {
+        topToolbarRef.current = ref;
+        if (toolbarProps?.ref) {
+          // @ts-ignore
+          toolbarProps.ref.current = ref;
+        }
+      }}
       sx={(theme) =>
         ({
           position: isFullScreen ? 'sticky' : undefined,

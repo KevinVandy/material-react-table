@@ -1658,16 +1658,6 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'tableId',
-    defaultValue: '',
-    description: '',
-    link: '',
-    linkText: '',
-    required: false,
-    source: '',
-    type: '',
-  },
-  {
     propName: 'virtualizerProps',
     defaultValue: '',
     description: '',

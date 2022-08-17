@@ -48,8 +48,8 @@ export const MRT_TableBodyCell: FC<Props> = ({
       muiTableBodyCellProps,
       muiTableBodyCellSkeletonProps,
       rowNumberMode,
-      tableId,
     },
+    refs: { editInputRefs },
     setEditingCell,
     setHoveredColumn,
   } = table;
@@ -68,7 +68,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   const mTableCellBodyProps =
     muiTableBodyCellProps instanceof Function
-      ? muiTableBodyCellProps({ cell, table })
+      ? muiTableBodyCellProps({ cell, column, row, table })
       : muiTableBodyCellProps;
 
   const mcTableCellBodyProps =
@@ -115,15 +115,13 @@ export const MRT_TableBodyCell: FC<Props> = ({
       editingMode === 'cell'
     ) {
       setEditingCell(cell);
-      setTimeout(() => {
-        const textField = document.getElementById(
-          `mrt-${tableId}-edit-cell-text-field-${cell.id}`,
-        ) as HTMLInputElement;
+      queueMicrotask(() => {
+        const textField = editInputRefs.current[column.id];
         if (textField) {
           textField.focus();
           textField.select();
         }
-      }, 200);
+      });
     }
   };
 
@@ -279,7 +277,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
           (column.id === 'mrt-row-select' ||
             column.id === 'mrt-row-expand' ||
             !row.getIsGrouped()) ? (
-          columnDef.Cell?.({ cell, column, table })
+          columnDef.Cell?.({ cell, column, row, table })
         ) : isEditing ? (
           <MRT_EditCellTextField cell={cell} table={table} />
         ) : (enableClickToCopy || columnDef.enableClickToCopy) &&
@@ -289,7 +287,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
               <>
                 {row.getIsGrouped() && !cell.getIsGrouped()
                   ? null
-                  : columnDef?.Cell?.({ cell, column, table }) ??
+                  : columnDef?.Cell?.({ cell, column, row, table }) ??
                     cell.renderValue()}
               </>
             </MRT_CopyButton>
@@ -299,7 +297,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
           <>
             {row.getIsGrouped() && !cell.getIsGrouped()
               ? null
-              : columnDef?.Cell?.({ cell, column, table }) ??
+              : columnDef?.Cell?.({ cell, column, row, table }) ??
                 cell.renderValue()}
             {cell.getIsGrouped() && <> ({row.subRows?.length ?? ''})</>}
           </>

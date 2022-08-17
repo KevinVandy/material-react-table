@@ -15,11 +15,12 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
 }: Props<TData>) => {
   const {
     getState,
-    options: { tableId, muiTableBodyCellEditTextFieldProps },
+    options: { muiTableBodyCellEditTextFieldProps },
+    refs: { editInputRefs },
     setEditingCell,
     setEditingRow,
   } = table;
-  const { column } = cell;
+  const { column, row } = cell;
   const { columnDef } = column;
   const { editingRow } = getState();
 
@@ -27,13 +28,15 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
 
   const mTableBodyCellEditTextFieldProps =
     muiTableBodyCellEditTextFieldProps instanceof Function
-      ? muiTableBodyCellEditTextFieldProps({ cell, table })
+      ? muiTableBodyCellEditTextFieldProps({ cell, column, row, table })
       : muiTableBodyCellEditTextFieldProps;
 
   const mcTableBodyCellEditTextFieldProps =
     columnDef.muiTableBodyCellEditTextFieldProps instanceof Function
       ? columnDef.muiTableBodyCellEditTextFieldProps({
           cell,
+          column,
+          row,
           table,
         })
       : columnDef.muiTableBodyCellEditTextFieldProps;
@@ -60,21 +63,29 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
   };
 
   if (columnDef.Edit) {
-    return <>{columnDef.Edit?.({ cell, column, table })}</>;
+    return <>{columnDef.Edit?.({ cell, column, row, table })}</>;
   }
 
   return (
     <TextField
       disabled={columnDef.enableEditing === false}
       fullWidth
-      id={`mrt-${tableId}-edit-cell-text-field-${cell.id}`}
       label={showLabel ? column.columnDef.header : undefined}
       margin="none"
+      name={cell.id}
       onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
       placeholder={columnDef.header}
       value={value}
       variant="standard"
       {...textFieldProps}
+      inputRef={(inputRef) => {
+        if (inputRef) {
+          editInputRefs.current[column.id] = inputRef;
+          if (textFieldProps.inputRef) {
+            textFieldProps.inputRef = inputRef;
+          }
+        }
+      }}
       onBlur={handleBlur}
       onChange={handleChange}
     />

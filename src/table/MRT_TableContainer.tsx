@@ -3,7 +3,6 @@ import React, {
   RefObject,
   useEffect,
   useLayoutEffect,
-  useRef,
   useState,
 } from 'react';
 import { TableContainer } from '@mui/material';
@@ -24,8 +23,8 @@ export const MRT_TableContainer: FC<Props> = ({ table }) => {
       enableStickyHeader,
       enableRowVirtualization,
       muiTableContainerProps,
-      tableId,
     },
+    refs: { tableContainerRef, bottomToolbarRef, topToolbarRef },
   } = table;
   const { isFullScreen } = getState();
 
@@ -36,20 +35,15 @@ export const MRT_TableContainer: FC<Props> = ({ table }) => {
       ? muiTableContainerProps({ table })
       : muiTableContainerProps;
 
-  const tableContainerRef =
-    tableContainerProps?.ref ?? useRef<HTMLDivElement>(null);
-
   useIsomorphicLayoutEffect(() => {
     const topToolbarHeight =
       typeof document !== 'undefined'
-        ? document?.getElementById(`mrt-${tableId}-toolbar-top`)
-            ?.offsetHeight ?? 0
+        ? topToolbarRef.current?.offsetHeight ?? 0
         : 0;
 
     const bottomToolbarHeight =
       typeof document !== 'undefined'
-        ? document?.getElementById(`mrt-${tableId}-toolbar-bottom`)
-            ?.offsetHeight ?? 0
+        ? bottomToolbarRef?.current?.offsetHeight ?? 0
         : 0;
 
     setTotalToolbarHeight(topToolbarHeight + bottomToolbarHeight);
@@ -57,8 +51,14 @@ export const MRT_TableContainer: FC<Props> = ({ table }) => {
 
   return (
     <TableContainer
-      ref={tableContainerRef}
       {...tableContainerProps}
+      ref={(ref: HTMLDivElement) => {
+        tableContainerRef.current = ref;
+        if (tableContainerProps?.ref) {
+          //@ts-ignore
+          tableContainerProps.ref.current = ref;
+        }
+      }}
       sx={(theme) => ({
         maxWidth: '100%',
         maxHeight:

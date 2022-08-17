@@ -54,9 +54,9 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
         RestartAltIcon,
         VisibilityOffIcon,
       },
-      tableId,
       localization,
     },
+    refs: { filterInputRefs },
     setShowFilters,
   } = table;
   const { column } = header;
@@ -111,17 +111,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
 
   const handleFilterByColumn = () => {
     setShowFilters(true);
-    setTimeout(
-      () =>
-        document
-          .getElementById(
-            // @ts-ignore
-            header.muiTableHeadCellFilterTextFieldProps?.id ??
-              `mrt-${tableId}-${header.id}-filter-text-field`,
-          )
-          ?.focus(),
-      200,
-    );
+    queueMicrotask(() => filterInputRefs.current[`${column.id}-0`]?.focus());
     setAnchorEl(null);
   };
 

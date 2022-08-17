@@ -16,7 +16,7 @@ const Example = () => {
             id: 'name', //id is still required when using accessorFn instead of accessorKey
             enableClickToCopy: false,
             header: 'Name',
-            Cell: ({ cell }) => (
+            Cell: ({ cell, row }) => (
               <Box
                 sx={{
                   display: 'flex',
@@ -27,7 +27,7 @@ const Example = () => {
                 <img
                   alt="avatar"
                   height={30}
-                  src={cell.row.original.avatar}
+                  src={row.original.avatar}
                   loading="lazy"
                   style={{ borderRadius: '50%' }}
                 />

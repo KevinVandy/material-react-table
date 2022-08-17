@@ -1,4 +1,10 @@
-import React, { Dispatch, DragEvent, ReactNode, SetStateAction } from 'react';
+import React, {
+  Dispatch,
+  DragEvent,
+  MutableRefObject,
+  ReactNode,
+  SetStateAction,
+} from 'react';
 import type {
   AlertProps,
   ButtonProps,
@@ -86,8 +92,15 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
   getState: () => MRT_TableState<TData>;
   options: MaterialReactTableProps<TData> & {
     icons: MRT_Icons;
-    tableId: string;
     localization: MRT_Localization;
+  };
+  refs: {
+    bottomToolbarRef: MutableRefObject<HTMLDivElement>;
+    editInputRefs: MutableRefObject<Record<string, HTMLInputElement>>;
+    filterInputRefs: MutableRefObject<Record<string, HTMLInputElement>>;
+    searchInputRef: MutableRefObject<HTMLInputElement>;
+    tableContainerRef: MutableRefObject<HTMLDivElement>;
+    topToolbarRef: MutableRefObject<HTMLDivElement>;
   };
   setColumnFilterFns: Dispatch<
     SetStateAction<{ [key: string]: MRT_FilterOption }>
@@ -144,28 +157,34 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
   AggregatedCell?: ({
     cell,
     column,
+    row,
     table,
   }: {
     cell: MRT_Cell<TData>;
     column: MRT_Column<TData>;
+    row: MRT_Row<TData>;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   Cell?: ({
     cell,
     column,
+    row,
     table,
   }: {
     cell: MRT_Cell<TData>;
     column: MRT_Column<TData>;
+    row: MRT_Row<TData>;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   Edit?: ({
     cell,
     column,
+    row,
     table,
   }: {
     cell: MRT_Cell<TData>;
     column: MRT_Column<TData>;
+    row: MRT_Row<TData>;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   Filter?: ({
@@ -266,9 +285,13 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
     | TextFieldProps
     | (({
         cell,
+        column,
+        row,
         table,
       }: {
         cell: MRT_Cell<TData>;
+        column: MRT_Column<TData>;
+        row: MRT_Row<TData>;
         table: MRT_TableInstance<TData>;
       }) => TextFieldProps);
   muiTableBodyCellProps?:
@@ -398,11 +421,11 @@ export type MRT_FilterFn<TData extends Record<string, any> = {}> =
   | MRT_FilterOption;
 
 export type MRT_DisplayColumnIds =
-  | 'mrt-row-drag'
   | 'mrt-row-actions'
+  | 'mrt-row-drag'
   | 'mrt-row-expand'
-  | 'mrt-row-select'
-  | 'mrt-row-numbers';
+  | 'mrt-row-numbers'
+  | 'mrt-row-select';
 
 /**
  * `columns` and `data` props are the only required props, but there are over 150 other optional props.
@@ -501,29 +524,41 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     muiTableBodyCellCopyButtonProps?:
       | ButtonProps
       | (({
-          table,
           cell,
+          column,
+          row,
+          table,
         }: {
-          table: MRT_TableInstance<TData>;
           cell: MRT_Cell<TData>;
+          column: MRT_Column<TData>;
+          row: MRT_Row<TData>;
+          table: MRT_TableInstance<TData>;
         }) => ButtonProps);
     muiTableBodyCellEditTextFieldProps?:
       | TextFieldProps
       | (({
           cell,
+          column,
+          row,
           table,
         }: {
           cell: MRT_Cell<TData>;
+          column: MRT_Column<TData>;
+          row: MRT_Row<TData>;
           table: MRT_TableInstance<TData>;
         }) => TextFieldProps);
     muiTableBodyCellProps?:
       | TableCellProps
       | (({
-          table,
           cell,
+          column,
+          row,
+          table,
         }: {
-          table: MRT_TableInstance<TData>;
           cell: MRT_Cell<TData>;
+          column: MRT_Column<TData>;
+          row: MRT_Row<TData>;
+          table: MRT_TableInstance<TData>;
         }) => TableCellProps);
     muiTableBodyCellSkeletonProps?:
       | SkeletonProps
@@ -677,10 +712,12 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     onDraggingColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
     onDraggingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
     onEditingRowSave?: ({
+      exitEditingMode,
       row,
       table,
       values,
     }: {
+      exitEditingMode: () => void;
       row: MRT_Row<TData>;
       table: MRT_TableInstance<TData>;
       values: Record<LiteralUnion<string & DeepKeys<TData>>, any>;
@@ -752,7 +789,6 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     rowNumberMode?: 'original' | 'static';
     selectAllMode?: 'all' | 'page';
     state?: Partial<MRT_TableState<TData>>;
-    tableId?: string;
     virtualizerProps?:
       | Partial<VirtualizerOptions<HTMLDivElement>>
       | (({
@@ -774,7 +810,7 @@ export default <TData extends Record<string, any> = {}>({
   autoResetExpanded = false,
   columnResizeMode = 'onEnd',
   defaultColumn = { minSize: 40, maxSize: 1000, size: 180 },
-  editingMode = 'row',
+  editingMode = 'modal',
   enableBottomToolbar = true,
   enableColumnActions = true,
   enableColumnFilterChangeMode = false,

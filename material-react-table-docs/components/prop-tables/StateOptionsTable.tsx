@@ -43,7 +43,7 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
           disableFilters: true,
           enableGlobalFilter: false,
           header: 'More Info Links',
-          Cell: ({ cell }) => (
+          Cell: ({ cell, row }) => (
             <Link href={cell.getValue() as string} passHref>
               <MuiLink
                 target={
@@ -53,7 +53,7 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
                 }
                 rel="noreferrer"
               >
-                {cell.row.original?.linkText}
+                {row.original?.linkText}
               </MuiLink>
             </Link>
           ),

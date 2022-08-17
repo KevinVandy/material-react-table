@@ -14,6 +14,10 @@ export default meta;
 
 const columns: MRT_ColumnDef<typeof initData[0]>[] = [
   {
+    accessorKey: 'id',
+    header: 'ID',
+  },
+  {
     header: 'First Name',
     accessorKey: 'firstName',
   },
@@ -26,12 +30,8 @@ const columns: MRT_ColumnDef<typeof initData[0]>[] = [
     accessorKey: 'email',
   },
   {
-    header: 'Address',
-    accessorKey: 'address',
-  },
-  {
-    header: 'City',
-    accessorKey: 'city',
+    header: 'Age',
+    accessorKey: 'age',
   },
   {
     header: 'State',
@@ -39,12 +39,12 @@ const columns: MRT_ColumnDef<typeof initData[0]>[] = [
   },
 ];
 
-const initData = [...Array(100)].map(() => ({
+const initData = [...Array(25)].map(() => ({
+  id: faker.random.alphaNumeric(6),
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   email: faker.internet.email(),
-  address: faker.address.streetAddress(),
-  city: faker.address.city(),
+  age: faker.datatype.number(20) + 18,
   state: faker.address.state(),
 }));
 

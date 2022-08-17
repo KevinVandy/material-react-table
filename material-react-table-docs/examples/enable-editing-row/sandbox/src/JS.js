@@ -35,10 +35,9 @@ const Example = () => {
   const [tableData, setTableData] = useState(() => data);
 
   const handleSaveRow = async ({ row, values }) => {
-    //a simple values assignment only works here if you have flat data and simple accessorKeys/ids. Otherwise, see Nested Editing Data example.
+    //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
     tableData[row.index] = values;
-    //send to api here maybe
-    //then refetch and update local state here to render new updated data in the table
+    //send/receive api updates here
     setTableData([...tableData]);
   };
 
@@ -46,6 +45,7 @@ const Example = () => {
     <MaterialReactTable
       columns={columns}
       data={tableData}
+      editingMode="row"
       enableEditing
       onEditingRowSave={handleSaveRow}
     />

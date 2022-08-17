@@ -27,8 +27,8 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
             id: `${cell.getValue<string>()}-prop`,
             href: `#${cell.getValue<string>()}-prop`,
           }),
-          Cell: ({ cell }) =>
-            cell.row.original?.required ? (
+          Cell: ({ cell, row }) =>
+            row.original?.required ? (
               <strong style={{ color: theme.palette.primary.dark }}>
                 {cell.getValue<string>()}*
               </strong>
@@ -57,7 +57,7 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
           accessorKey: 'link',
           disableFilters: true,
           enableGlobalFilter: false,
-          Cell: ({ cell }) => (
+          Cell: ({ cell, row }) => (
             <Link href={cell.getValue() as string} passHref>
               <MuiLink
                 target={
@@ -67,7 +67,7 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
                 }
                 rel="noreferrer"
               >
-                {cell.row.original?.linkText}
+                {row.original?.linkText}
               </MuiLink>
             </Link>
           ),
@@ -113,9 +113,7 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
       }}
       muiTablePaperProps={{
         sx: { mb: '1.5rem' },
-        id: onlyProps
-          ? 'relevant-props-table'
-          : 'props-table',
+        id: onlyProps ? 'relevant-props-table' : 'props-table',
       }}
       positionGlobalFilter="left"
       rowNumberMode="static"

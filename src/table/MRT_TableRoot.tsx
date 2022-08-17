@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import {
   TableState,
   getCoreRowModel,
@@ -38,12 +38,12 @@ import { MRT_EditRowModal } from '../body/MRT_EditRowModal';
 export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   props: MaterialReactTableProps<TData>,
 ) => {
-  const [tableId, setIdPrefix] = useState(props.tableId);
-  useEffect(
-    () =>
-      setIdPrefix(props.tableId ?? Math.random().toString(36).substring(2, 9)),
-    [props.tableId],
-  );
+  const bottomToolbarRef = useRef<HTMLDivElement>(null);
+  const editInputRefs = useRef<Record<string, HTMLInputElement>>({});
+  const filterInputRefs = useRef<Record<string, HTMLInputElement>>({});
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const tableContainerRef = useRef<HTMLDivElement>(null);
+  const topToolbarRef = useRef<HTMLDivElement>(null);
 
   const initialState: Partial<MRT_TableState<TData>> = useMemo(() => {
     const initState = props.initialState ?? {};
@@ -126,11 +126,8 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
             id: 'mrt-row-drag',
           },
           columnOrder.includes('mrt-row-actions') && {
-            Cell: ({ cell }) => (
-              <MRT_ToggleRowActionMenuButton
-                row={cell.row as any}
-                table={table}
-              />
+            Cell: ({ row }) => (
+              <MRT_ToggleRowActionMenuButton row={row as any} table={table} />
             ),
             header: props.localization?.actions,
             size: 70,
@@ -139,8 +136,8 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
             id: 'mrt-row-actions',
           },
           columnOrder.includes('mrt-row-expand') && {
-            Cell: ({ cell }) => (
-              <MRT_ExpandButton row={cell.row as any} table={table} />
+            Cell: ({ row }) => (
+              <MRT_ExpandButton row={row as any} table={table} />
             ),
             Header: () =>
               props.enableExpandAll ? (
@@ -153,8 +150,8 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
             id: 'mrt-row-expand',
           },
           columnOrder.includes('mrt-row-select') && {
-            Cell: ({ cell }) => (
-              <MRT_SelectCheckbox row={cell.row as any} table={table} />
+            Cell: ({ row }) => (
+              <MRT_SelectCheckbox row={row as any} table={table} />
             ),
             Header: () =>
               props.enableSelectAll ? (
@@ -167,7 +164,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
             id: 'mrt-row-select',
           },
           columnOrder.includes('mrt-row-numbers') && {
-            Cell: ({ cell }) => cell.row.index + 1,
+            Cell: ({ row }) => row.index + 1,
             Header: () => props.localization?.rowNumber,
             header: props.localization?.rowNumbers,
             size: 60,
@@ -269,8 +266,15 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
         showGlobalFilter,
         ...props.state,
       } as TableState,
-      tableId,
     }),
+    refs: {
+      bottomToolbarRef,
+      editInputRefs,
+      filterInputRefs,
+      searchInputRef,
+      tableContainerRef,
+      topToolbarRef,
+    },
     setColumnFilterFns: props.onFilterFnsChange ?? setColumnFilterFns,
     setDensity: props.onDensityChange ?? setDensity,
     setDraggingColumn: props.onDraggingColumnChange ?? setDraggingColumn,

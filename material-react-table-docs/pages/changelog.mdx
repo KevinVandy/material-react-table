@@ -16,6 +16,7 @@ While MRT is pre-1.0, breaking changes are subject to occur. MRT should hit 1.0 
 
 TanStack Table 8.1 had some breaking changes that will be reflected here in MRT v0.19.0
 
+- v0.37.0 - Major Editing Feature Changes: `"modal"` is now the default `editingMode`. New required `exitEditingMode` param in `onEditingRowSave` to allow dev to exit editing mode only after validation passes. Fix auto-filled values not saving in editing row submit. `tableId` prop removed as it is now unnecessary and was being confused with an html id attribute. Major internal ref refactors to better follow React best practices and improve performance.
 - v0.36.0 - `onCellEditBlur` and `onCellEditChange` props removed because the already exist on `muiTableBodyCellEditTextFieldProps`. Examples given [here](/docs/guides/editing)
 - v0.35.2 - Change `onEditRowSubmit` name to `onEditingRowSave`
 - v0.35.1 - "current" prefix in some state options removed from name (i.e. `currentEditingRow` is now just `editingRow`), new editing value(s) arguments, better types for editing features

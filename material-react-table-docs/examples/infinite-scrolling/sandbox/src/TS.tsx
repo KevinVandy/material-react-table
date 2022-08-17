@@ -101,9 +101,9 @@ const Example: FC = () => {
     (containerRefElement?: HTMLDivElement | null) => {
       if (containerRefElement) {
         const { scrollHeight, scrollTop, clientHeight } = containerRefElement;
-        //once the user has scrolled within 100px of the bottom of the table, fetch more data if we can
+        //once the user has scrolled within 200px of the bottom of the table, fetch more data if we can
         if (
-          scrollHeight - scrollTop - clientHeight < 100 &&
+          scrollHeight - scrollTop - clientHeight < 200 &&
           !isFetching &&
           totalFetched < totalDBRowCount
         ) {

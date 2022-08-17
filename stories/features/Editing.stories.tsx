@@ -18,14 +18,15 @@ const data = [...Array(10)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const EditingEnabledEditModeRowDefault: Story<
+export const EditingEnabledEditModeModalDefault: Story<
   MaterialReactTableProps
 > = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow = ({ row, values }) => {
+  const handleSaveRow = ({ exitEditingMode, row, values }) => {
     tableData[row.index] = values;
     setTableData([...tableData]);
+    exitEditingMode();
   };
 
   return (
@@ -60,14 +61,13 @@ export const EditingEnabledEditModeRowDefault: Story<
   );
 };
 
-export const EditingEnabledEditModeModal: Story<
-  MaterialReactTableProps
-> = () => {
+export const EditingEnabledEditModeRow: Story<MaterialReactTableProps> = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow = ({ row, values }) => {
+  const handleSaveRow = ({ exitEditingMode, row, values }) => {
     tableData[row.index] = values;
     setTableData([...tableData]);
+    exitEditingMode();
   };
 
   return (
@@ -97,7 +97,7 @@ export const EditingEnabledEditModeModal: Story<
       ]}
       data={tableData}
       enableEditing
-      editingMode="modal"
+      editingMode="row"
       onEditingRowSave={handleSaveRow}
     />
   );
