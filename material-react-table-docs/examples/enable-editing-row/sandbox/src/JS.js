@@ -34,11 +34,12 @@ const Example = () => {
 
   const [tableData, setTableData] = useState(() => data);
 
-  const handleSaveRow = async ({ row, values }) => {
+  const handleSaveRow = async ({ exitEditingMode, row, values }) => {
     //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
     tableData[row.index] = values;
     //send/receive api updates here
     setTableData([...tableData]);
+    exitEditingMode(); //required to exit editing mode
   };
 
   return (
