@@ -9,6 +9,7 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
+  GroupingState,
 } from '@tanstack/react-table';
 import { Box, Dialog, Grow } from '@mui/material';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
@@ -22,6 +23,7 @@ import {
   getDefaultColumnOrderIds,
   getDefaultColumnFilterFn,
   defaultDisplayColumnDefOptions,
+  showExpandColumn,
 } from '../column.utils';
 import type {
   MRT_Cell,
@@ -95,6 +97,9 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   const [globalFilterFn, setGlobalFilterFn] = useState<MRT_FilterOption>(
     initialState.globalFilterFn ?? 'fuzzy',
   );
+  const [grouping, setGrouping] = useState<GroupingState>(
+    initialState.grouping ?? [],
+  );
   const [hoveredColumn, setHoveredColumn] = useState<
     MRT_Column<TData> | { id: string } | null
   >(initialState.hoveredColumn ?? null);
@@ -135,20 +140,21 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
             ...props.displayColumnDefOptions?.['mrt-row-actions'],
             id: 'mrt-row-actions',
           },
-          columnOrder.includes('mrt-row-expand') && {
-            Cell: ({ row }) => (
-              <MRT_ExpandButton row={row as any} table={table} />
-            ),
-            Header: () =>
-              props.enableExpandAll ? (
-                <MRT_ExpandAllButton table={table} />
-              ) : null,
-            header: props.localization?.expand,
-            size: 60,
-            ...defaultDisplayColumnDefOptions,
-            ...props.displayColumnDefOptions?.['mrt-row-expand'],
-            id: 'mrt-row-expand',
-          },
+          columnOrder.includes('mrt-row-expand') &&
+            showExpandColumn(props, grouping) && {
+              Cell: ({ row }) => (
+                <MRT_ExpandButton row={row as any} table={table} />
+              ),
+              Header: () =>
+                props.enableExpandAll ? (
+                  <MRT_ExpandAllButton table={table} />
+                ) : null,
+              header: props.localization?.expand,
+              size: 60,
+              ...defaultDisplayColumnDefOptions,
+              ...props.displayColumnDefOptions?.['mrt-row-expand'],
+              id: 'mrt-row-expand',
+            },
           columnOrder.includes('mrt-row-select') && {
             Cell: ({ row }) => (
               <MRT_SelectCheckbox row={row as any} table={table} />
@@ -176,6 +182,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       ).filter(Boolean),
     [
       columnOrder,
+      grouping,
       props.displayColumnDefOptions,
       props.editingMode,
       props.enableColumnDragging,
@@ -192,6 +199,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       props.enableSelectAll,
       props.localization,
       props.positionActionsColumn,
+      props.renderDetailPanel,
     ],
   );
 
@@ -241,6 +249,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       getPaginationRowModel: getPaginationRowModel(),
       getSortedRowModel: getSortedRowModel(),
       onColumnOrderChange: setColumnOrder,
+      onGroupingChange: setGrouping,
       getSubRows: (row) => row?.subRows,
       ...props,
       //@ts-ignore
@@ -258,6 +267,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
         editingCell,
         editingRow,
         globalFilterFn,
+        grouping,
         hoveredColumn,
         hoveredRow,
         isFullScreen,

@@ -1,4 +1,4 @@
-import { ColumnOrderState } from '@tanstack/react-table';
+import { ColumnOrderState, GroupingState } from '@tanstack/react-table';
 import {
   MaterialReactTableProps,
   MRT_Column,
@@ -107,6 +107,16 @@ export const reorderColumn = <TData extends Record<string, any> = {}>(
   return [...columnOrder];
 };
 
+export const showExpandColumn = <TData extends Record<string, any> = {}>(
+  props: MaterialReactTableProps<TData>,
+  grouping?: GroupingState,
+) =>
+  !!(
+    props.enableExpanding ||
+    (props.enableGrouping && (grouping === undefined || grouping?.length)) ||
+    props.renderDetailPanel
+  );
+
 export const getLeadingDisplayColumnIds = <
   TData extends Record<string, any> = {},
 >(
@@ -119,9 +129,7 @@ export const getLeadingDisplayColumnIds = <
         ['row', 'modal'].includes(props.editingMode ?? ''))) &&
       'mrt-row-actions',
     props.positionExpandColumn === 'first' &&
-      (props.enableExpanding ||
-        props.enableGrouping ||
-        props.renderDetailPanel) &&
+      showExpandColumn(props) &&
       'mrt-row-expand',
     props.enableRowSelection && 'mrt-row-select',
     props.enableRowNumbers && 'mrt-row-numbers',
@@ -137,9 +145,7 @@ export const getTrailingDisplayColumnIds = <
       ['row', 'modal'].includes(props.editingMode ?? ''))) &&
     'mrt-row-actions',
   props.positionExpandColumn === 'last' &&
-    (props.enableExpanding ||
-      props.enableGrouping ||
-      props.renderDetailPanel) &&
+    showExpandColumn(props) &&
     'mrt-row-expand',
 ];
 
