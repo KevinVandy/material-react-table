@@ -88,10 +88,6 @@ To save data, you must hook up either the `onBlur`, `onChange`, etc. events your
 
 <EditingTableExample />
 
-### Editing Nested Data Structures
-
-TODO
-
 ### Customizing Editing Components
 
 You can pass any MUI TextField Props with the `muiTableBodyCellEditTextFieldProps` prop.
@@ -110,7 +106,41 @@ const columns = [
 ];
 ```
 
-TODO
+#### Add Validation to Editing Components
+
+You can add validation to the editing components by using the `muiTableBodyCellEditTextFieldProps` events. You can write your validation logic and hook it up to either the `onBlur`, `onChange`, etc. events, then set the `error` and `helperText` props accordingly.
+
+```tsx
+const [validationErrors, setValidationErrors] = useState({});
+
+const columns = [
+  {
+    accessor: 'age',
+    header: 'Age',
+    muiTableBodyCellEditTextFieldProps: {
+      error: !!validationErrors.age, //highlight mui text field red error color
+      helperText: validationErrors.age, //show error message in helper text.
+      required: true,
+      type: 'number',
+      onChange: (event) => {
+        const value = event.target.value;
+        //validation logic
+        if (!value) {
+          setValidationErrors((prev) => ({ ...prev, age: 'Age is required' }));
+        } else if (value < 18) {
+          setValidationErrors({
+            ...validationErrors,
+            age: 'Age must be 18 or older',
+          });
+        } else {
+          delete validationErrors.age;
+          setValidationErrors({ ...validationErrors });
+        }
+      },
+    },
+  },
+];
+```
 
 ### Use Custom Editing Components
 
@@ -126,9 +156,25 @@ const columns = [
 ];
 ```
 
-### Add Validation
+### Customize Actions/Edit Column
 
-TODO
+You can customize the actions column in a few different ways in the `displayColumnDefOptions` prop's `'mrt-row-actions'` section.
+
+```tsx
+<MaterialReactTable
+  data={data}
+  columns={columns}
+  displayColumnDefOptions={{
+    'mrt-row-actions': {
+      header: 'Edit', //change "Actions" to "Edit"
+      //use a text button instead of a icon button
+      Cell: ({ row, table }) => (
+        <Button onClick={() => table.setEditingRow(row)}>Edit Customer</Button>
+      ),
+    },
+  }}
+/>
+```
 
 ### React-Hook-Form Example
 
