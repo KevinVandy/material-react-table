@@ -75,9 +75,7 @@ export const MRT_BottomToolbar: FC<Props> = ({ table }) => {
         }}
       >
         {renderBottomToolbarCustomActions ? (
-          <Box sx={{ p: '0.5rem' }}>
-            {renderBottomToolbarCustomActions({ table })}
-          </Box>
+          renderBottomToolbarCustomActions({ table })
         ) : (
           <span />
         )}
