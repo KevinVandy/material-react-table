@@ -55,13 +55,14 @@ const Footer = () => {
       >
         You can help make these docs better!{' '}
         <a
+          aria-label="Learn how to contribute"
           href="http://makeapullrequest.com"
           target="_blank"
           rel="noreferrer"
           style={{ marginLeft: '0.5rem' }}
         >
           <img
-            alt=""
+            alt="PRs are Welcome"
             src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square"
           />
         </a>

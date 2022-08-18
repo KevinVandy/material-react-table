@@ -3,17 +3,23 @@
 <a href="https://npmjs.com/package/material-react-table" target="_blank">
   <img alt="" src="https://badgen.net/npm/v/material-react-table?color=blue" />
 </a>
-<a href="https://npmjs.com/package/material-react-table" target="_blank">
-  <img alt="" src="https://img.shields.io/npm/dm/material-react-table.svg?color=blue" />
-</a>
 <a href="https://bundlephobia.com/result?p=material-react-table" target="_blank">
   <img alt="" src="https://badgen.net/bundlephobia/minzip/material-react-table@latest?color=blue" />
 </a>
+<a href="https://npmjs.com/package/material-react-table" target="_blank">
+  <img alt="" src="https://badgen.net/npm/dt/material-react-table?label=installs&icon=npm&color=blue" />
+</a>
 <a href="https://github.com/KevinVandy/material-react-table" target="_blank">
-  <img alt="" src="https://img.shields.io/github/stars/KevinVandy/material-react-table.svg?style=social&label=Star" />
+  <img alt="" src="https://badgen.net/github/stars/KevinVandy/material-react-table?color=blue" />
+</a>
+<a href="https://github.com/KevinVandy/material-react-table/blob/main/LICENSE" target="_blank">
+  <img alt="" src="https://badgen.net/github/license/KevinVandy/material-react-table?color=blue" />
 </a>
 <a href="http://makeapullrequest.com" target="_blank">
   <img alt="" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" />
+</a>
+<a href="https://discord.gg/5wqyRx6fnm" target="_blank">
+  <img alt="Discord" src="https://img.shields.io/discord/937072769831694406?color=7389D8&label&logo=discord&logoColor=ffffff" />
 </a>
 
 ---
@@ -29,7 +35,7 @@
 
 Join the [Discord](https://discord.gg/5wqyRx6fnm) server to join in on the development discussion or ask questions
 
-View the [Docs Site](https://www.material-react-table.com/)
+View the [Docs Website](https://www.material-react-table.com/)
 
 See all [Props and Options](https://www.material-react-table.com/docs/api)
 

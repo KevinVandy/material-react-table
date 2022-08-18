@@ -41,11 +41,17 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
     Cell: ({ cell, row }) => (
       <Box sx={{ display: 'flex', alignContent: 'center', gap: '1ch' }}>
         {`${cell.getValue<string>()} KB`}
-        <img
-          alt={cell.getValue<string>()}
-          loading="lazy"
-          src={row.original.bundlePhobiaLink}
-        />
+        <a
+          href={row.original.bundlePhobiaLink}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            alt={cell.getValue<string>()}
+            loading="lazy"
+            src={row.original.bundlePhobiaImg}
+          />
+        </a>
       </Box>
     ),
     size: 200,
@@ -64,8 +70,10 @@ const data = [
     libraryLink: '#',
     freeOrLicensed: 'Free MIT',
     bundleSize: 37,
-    bundlePhobiaLink:
+    bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/material-react-table@latest?color=blue',
+    bundlePhobiaLink:
+      'https://bundlephobia.com/package/material-react-table@latest',
     description:
       'Built on top of TanStack Table V8 and Material UI V5, Material React Table is a batteries-included react table library that attempts to provide all the table features you need while trying to stay as highly performant and lightweight as possible. Customization is treated as a top priority to let you override any styles you need to change.',
   },
@@ -74,8 +82,10 @@ const data = [
     libraryLink: 'https://tanstack.com/table',
     freeOrLicensed: 'Free MIT',
     bundleSize: 13,
-    bundlePhobiaLink:
+    bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/@tanstack/react-table@latest',
+    bundlePhobiaLink:
+      'https://bundlephobia.com/package/@tanstack/react-table@latest',
     description:
       'TanStack Table (formerly React Table) is a lightweight Headless UI library for building powerful tables & datagrids. No CSS or Components included. You use logic from the useReactTable hook to build your own table components. No Batteries Included, but you get total control of your markup and styles. (Material React Table is built on top of TanStack Table)',
   },
@@ -84,8 +94,9 @@ const data = [
     libraryLink: 'https://material-table.com',
     freeOrLicensed: 'Free MIT',
     bundleSize: 185,
-    bundlePhobiaLink:
+    bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/material-table?color=red',
+    bundlePhobiaLink: 'https://bundlephobia.com/package/material-table@latest',
     description:
       'A once popular Material UI component for creating MUI tables that includes tons of features. However, it has a very large bundle size and outdated and insecure dependencies. It is mostly unmaintained now, but did recently release a version that was somewhat compatible with Material UI V5.',
   },
@@ -94,8 +105,10 @@ const data = [
     libraryLink: 'https://mui.com/x/react-data-grid/',
     freeOrLicensed: 'Free MIT',
     bundleSize: 91,
-    bundlePhobiaLink:
+    bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/@mui/x-data-grid@latest?color=orange',
+    bundlePhobiaLink:
+      'https://bundlephobia.com/package/@mui/x-data-grid@latest',
     description:
       'Directly from Material UI. The MIT version does not include the full suite of features you might need, but it provides a high quality table that is easy to use.',
   },
@@ -104,8 +117,10 @@ const data = [
     libraryLink: 'https://mui.com/store/items/mui-x-premium/',
     freeOrLicensed: 'Paid License',
     bundleSize: 105,
-    bundlePhobiaLink:
+    bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/@mui/x-data-grid-pro?color=orange',
+    bundlePhobiaLink:
+      'https://bundlephobia.com/package/@mui/x-data-grid-pro@latest',
     description:
       'One of the best Material UI Data Grid options available. It includes the full suite of features you may need, but it requires a paid license.',
   },

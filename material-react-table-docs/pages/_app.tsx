@@ -78,9 +78,11 @@ function App({ Component, pageProps }: AppProps) {
         <title>Material React Table</title>
         <meta
           name="description"
-          content="Material React Table, a fully featured Material UI implementation of TanStack React Table V8. Written from the ground up in TypeScript."
+          content="Material React Table, a fully featured Material UI V5 implementation of TanStack React Table V8. Written from the ground up in TypeScript."
         />
         <link rel="icon" href="/mrt_logo.png" />
+        <meta property="og:image" content="/mrt_logo.png" />
+        <meta property="og:url" content={`https://www.material-react-table.com${pathname}`} />
         {process.env.NODE_ENV === 'production' && (
           <>
             <link

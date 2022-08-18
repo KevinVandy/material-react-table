@@ -49,20 +49,13 @@ const HomePage = () => {
           <br />
           <Box
             sx={(theme) => ({
-              color: theme.palette.primary.main,
+              background: `-webkit-linear-gradient(left, ${theme.palette.primary.dark}, ${theme.palette.secondary.main})`,
               display: 'inline',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
             })}
           >
-            Material
-          </Box>
-          &nbsp;
-          <Box
-            sx={(theme) => ({
-              color: theme.palette.secondary.main,
-              display: 'inline',
-            })}
-          >
-            React&nbsp;Table
+            Material&nbsp;React&nbsp;Table
           </Box>
         </Typography>
         <Typography
@@ -73,7 +66,6 @@ const HomePage = () => {
               sm: '1.5rem',
               md: '2.2rem',
             },
-            mt: '1rem',
             mb: '3rem',
             textAlign: 'center',
             lineHeight: '2.25rem',
@@ -84,15 +76,15 @@ const HomePage = () => {
           Built with{' '}
           <Link href="https://mui.com/" passHref>
             <MuiLink
-              color="primary.main"
               sx={{
+                color: (theme) => theme.palette.primary.dark,
                 textDecoration: 'none',
                 '&:hover': { textDecoration: 'underline' },
               }}
               target="_blank"
               rel="noreferrer"
             >
-              Material&nbsp;UI&nbsp;V5
+              Material&nbsp;UI&nbsp;<sup>v5</sup>
             </MuiLink>
           </Link>{' '}
           and&nbsp;
@@ -106,7 +98,7 @@ const HomePage = () => {
               target="_blank"
               rel="noreferrer"
             >
-              TanStack&nbsp;Table&nbsp;V8
+              TanStack&nbsp;Table&nbsp;<sup>v8</sup>
             </MuiLink>
           </Link>
         </Typography>
@@ -125,15 +117,8 @@ const HomePage = () => {
           }}
           variant="h2"
         >
-          Quickly Create High Quality React Data Tables with{' '}
-          <Box
-            sx={{
-              display: 'inline',
-              fontStyle: 'italic',
-            }}
-          >
-            Material&nbsp;Design
-          </Box>
+          Quickly create high quality react data tables with
+          Material&nbsp;Design
         </Typography>
         <Box
           sx={{
@@ -151,7 +136,7 @@ const HomePage = () => {
             },
           }}
         >
-          <Link href="/docs/install" passHref>
+          <Link href="/docs/getting-started/install" passHref>
             <a>
               <Button
                 endIcon={<ArrowForwardIos />}
@@ -236,8 +221,10 @@ const HomePage = () => {
         Is{' '}
         <Box
           sx={(theme) => ({
-            color: theme.palette.primary.main,
+            background: `-webkit-linear-gradient(left, ${theme.palette.primary.dark}, ${theme.palette.secondary.main})`,
             display: 'inline',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
           })}
         >
           &lt;MaterialReactTable&nbsp;/&gt;
