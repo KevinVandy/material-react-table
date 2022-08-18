@@ -18,10 +18,8 @@
 <a href="http://makeapullrequest.com" target="_blank">
   <img alt="" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" />
 </a>
-
-
 <a href="https://discord.gg/5wqyRx6fnm" target="_blank">
-  <iframe src="https://discord.com/widget?id=937072769831694406&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+  <img alt="Discord" src="https://img.shields.io/discord/937072769831694406?color=7389D8&label&logo=discord&logoColor=ffffff" />
 </a>
 
 ---
