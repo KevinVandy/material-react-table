@@ -109,8 +109,8 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
   setDensity: Dispatch<SetStateAction<'comfortable' | 'compact' | 'spacious'>>;
   setDraggingColumn: Dispatch<SetStateAction<MRT_Column<TData> | null>>;
   setDraggingRow: Dispatch<SetStateAction<MRT_Row<TData> | null>>;
-  setEditingCell: Dispatch<SetStateAction<MRT_Cell | null>>;
-  setEditingRow: Dispatch<SetStateAction<MRT_Row | null>>;
+  setEditingCell: Dispatch<SetStateAction<MRT_Cell<TData> | null>>;
+  setEditingRow: Dispatch<SetStateAction<MRT_Row<TData> | null>>;
   setGlobalFilterFn: Dispatch<SetStateAction<MRT_FilterOption>>;
   setHoveredColumn: Dispatch<
     SetStateAction<MRT_Column<TData> | { id: string } | null>

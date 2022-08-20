@@ -5,8 +5,20 @@ import MaterialReactTable, {
   MRT_ColumnDef,
   MRT_Row,
 } from 'material-react-table';
-import { Button, IconButton, MenuItem, Tooltip } from '@mui/material';
-import { Delete } from '@mui/icons-material';
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  MenuItem,
+  Stack,
+  TextField,
+  Tooltip,
+} from '@mui/material';
+import { Delete, Edit } from '@mui/icons-material';
 import { data, states } from './makeData';
 
 export type Person = {
@@ -19,15 +31,16 @@ export type Person = {
 };
 
 const Example: FC = () => {
+  const [createModalOpen, setCreateModalOpen] = useState(false);
   const [tableData, setTableData] = useState<Person[]>(() => data);
   const [validationErrors, setValidationErrors] = useState<{
     [cellId: string]: string;
   }>({});
 
-  //TODO
-  // const handleCreateNewRow = (values) => {
-  //   tableData.push(values);
-  // };
+  const handleCreateNewRow = (values: Person) => {
+    tableData.push(values);
+    setTableData([...tableData]);
+  };
 
   const handleSaveRowEdits: MaterialReactTableProps<Person>['onEditingRowSave'] =
     async ({ exitEditingMode, row, values }) => {
@@ -89,23 +102,11 @@ const Example: FC = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       {
-        id: 'delete',
-        columnDefType: 'display', //make this a display column (no sorting, filtering, etc)
-        header: 'Delete',
-        size: 80,
-        Cell: ({ row }) => (
-          <Tooltip arrow placement="right" title="Delete">
-            <IconButton color="error" onClick={() => handleDeleteRow(row)}>
-              <Delete />
-            </IconButton>
-          </Tooltip>
-        ),
-      },
-      {
         accessorKey: 'id',
         header: 'ID',
         enableColumnOrdering: false,
         enableEditing: false, //disable editing on this column
+        enableSorting: false,
         size: 80,
       },
       {
@@ -154,31 +155,112 @@ const Example: FC = () => {
         },
       },
     ],
-    [getCommonEditTextFieldProps, handleDeleteRow],
+    [getCommonEditTextFieldProps],
   );
 
   return (
-    <MaterialReactTable
-      displayColumnDefOptions={{
-        'mrt-row-actions': {
-          header: 'Edit', //change Actions column header to "Edit"
-          muiTableHeadCellProps: {
-            align: 'center',
+    <>
+      <MaterialReactTable
+        displayColumnDefOptions={{
+          'mrt-row-actions': {
+            muiTableHeadCellProps: {
+              align: 'center',
+            },
+            size: 120,
           },
-        },
-      }}
-      columns={columns}
-      data={tableData}
-      editingMode="modal"
-      enableColumnOrdering
-      enableEditing
-      onEditingRowSave={handleSaveRowEdits}
-      renderTopToolbarCustomActions={() => (
-        <Button color="secondary" variant="contained">
+        }}
+        columns={columns}
+        data={tableData}
+        editingMode="modal" //default
+        enableColumnOrdering
+        enableEditing
+        onEditingRowSave={handleSaveRowEdits}
+        renderRowActions={({ row, table }) => (
+          <Box sx={{ display: 'flex', gap: '1rem' }}>
+            <Tooltip arrow placement="left" title="Edit">
+              <IconButton onClick={() => table.setEditingRow(row)}>
+                <Edit />
+              </IconButton>
+            </Tooltip>
+            <Tooltip arrow placement="right" title="Delete">
+              <IconButton color="error" onClick={() => handleDeleteRow(row)}>
+                <Delete />
+              </IconButton>
+            </Tooltip>
+          </Box>
+        )}
+        renderTopToolbarCustomActions={() => (
+          <Button
+            color="secondary"
+            onClick={() => setCreateModalOpen(true)}
+            variant="contained"
+          >
+            Create New Account
+          </Button>
+        )}
+      />
+      <CreateNewAccountModal
+        columns={columns}
+        open={createModalOpen}
+        onClose={() => setCreateModalOpen(false)}
+        onSubmit={handleCreateNewRow}
+      />
+    </>
+  );
+};
+
+//example of creating a mui dialog modal for creating new rows
+export const CreateNewAccountModal: FC<{
+  columns: MRT_ColumnDef<Person>[];
+  onClose: () => void;
+  onSubmit: (values: Person) => void;
+  open: boolean;
+}> = ({ open, columns, onClose, onSubmit }) => {
+  const [values, setValues] = useState<any>(() =>
+    columns.reduce((acc, column) => {
+      acc[column.accessorKey ?? ''] = '';
+      return acc;
+    }, {} as any),
+  );
+
+  const handleSubmit = () => {
+    //put your validation logic here
+    onSubmit(values);
+    onClose();
+  };
+
+  return (
+    <Dialog open={open}>
+      <DialogTitle textAlign="center">Create New Account</DialogTitle>
+      <DialogContent>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <Stack
+            sx={{
+              width: '100%',
+              minWidth: { xs: '300px', sm: '360px', md: '400px' },
+              gap: '1.5rem',
+            }}
+          >
+            {columns.map((column) => (
+              <TextField
+                key={column.accessorKey}
+                label={column.header}
+                name={column.accessorKey}
+                onChange={(e) =>
+                  setValues({ ...values, [e.target.name]: e.target.value })
+                }
+              />
+            ))}
+          </Stack>
+        </form>
+      </DialogContent>
+      <DialogActions sx={{ p: '1.25rem' }}>
+        <Button onClick={onClose}>Cancel</Button>
+        <Button color="secondary" onClick={handleSubmit} variant="contained">
           Create New Account
         </Button>
-      )}
-    />
+      </DialogActions>
+    </Dialog>
   );
 };
 

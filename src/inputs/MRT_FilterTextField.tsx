@@ -299,7 +299,7 @@ export const MRT_FilterTextField: FC<Props> = ({
         }}
         sx={(theme) => ({
           p: 0,
-          minWidth: !filterChipLabel ? '6rem' : 'auto',
+          minWidth: !filterChipLabel ? '150px' : 'auto',
           width: '100%',
           '&	.MuiSelect-icon': {
             mr: '1.5rem',

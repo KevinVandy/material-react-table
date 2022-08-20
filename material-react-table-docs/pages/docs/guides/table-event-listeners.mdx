@@ -25,7 +25,7 @@ Let's create an example of adding a row click event listener:
   columns={columns}
   muiTableBodyRowProps={({ row }) => ({
     onClick: (event) => {
-      console.log(event, row.id);
+      console.info(event, row.id);
     },
   })}
 />

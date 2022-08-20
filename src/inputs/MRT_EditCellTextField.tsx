@@ -49,6 +49,15 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     textFieldProps.onChange?.(event);
     setValue(event.target.value);
+    if (textFieldProps?.select && editingRow) {
+      setEditingRow({
+        ...editingRow,
+        _valuesCache: {
+          ...editingRow._valuesCache,
+          [column.id]: event.target.value,
+        },
+      });
+    }
   };
 
   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
@@ -57,7 +66,7 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
       setEditingRow({
         ...editingRow,
         _valuesCache: { ...editingRow._valuesCache, [column.id]: value },
-      } as any);
+      });
     }
     setEditingCell(null);
   };
@@ -72,7 +81,7 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
       fullWidth
       label={showLabel ? column.columnDef.header : undefined}
       margin="none"
-      name={cell.id}
+      name={column.id}
       onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
       placeholder={columnDef.header}
       value={value}
