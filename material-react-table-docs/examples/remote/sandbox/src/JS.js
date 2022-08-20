@@ -4,6 +4,7 @@ import MaterialReactTable from 'material-react-table';
 const Example = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [isRefetching, setIsRefetching] = useState(false);
   const [columnFilters, setColumnFilters] = useState([]);
   const [globalFilter, setGlobalFilter] = useState('');
@@ -32,11 +33,18 @@ const Example = () => {
       url.searchParams.set('globalFilter', globalFilter ?? '');
       url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
 
-      const response = await fetch(url.href);
-      const json = await response.json();
+      try {
+        const response = await fetch(url.href);
+        const json = (await response.json())
+        setData(json.data);
+        setRowCount(json.meta.totalRowCount);
+      } catch (error) {
+        setIsError(true);
+        console.error(error);
+        return;
+      }
 
-      setData(json.data);
-      setRowCount(json.meta.totalRowCount);
+      setIsError(false);
       setIsLoading(false);
       setIsRefetching(false);
     };
