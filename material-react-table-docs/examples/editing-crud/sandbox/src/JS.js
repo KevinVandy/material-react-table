@@ -27,11 +27,11 @@ const Example = () => {
   };
 
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
-    tableData[row.index] = values;
-    //send/receive api updates here, then refetch or update local table data for re-render
-    setTableData([...tableData]);
     if (!Object.keys(validationErrors).length) {
-      exitEditingMode(); //only exit edit mode if row data is valid
+      tableData[row.index] = values;
+      //send/receive api updates here, then refetch or update local table data for re-render
+      setTableData([...tableData]);
+      exitEditingMode(); //required to exit editing mode and close modal
     }
   };
 
