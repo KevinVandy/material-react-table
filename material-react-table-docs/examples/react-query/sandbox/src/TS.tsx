@@ -96,7 +96,7 @@ const Example: FC = () => {
       manualFiltering
       manualPagination
       manualSorting
-      muiTableToolbarAlertBannerProps={
+      muiToolbarAlertBannerProps={
         isError
           ? {
               color: 'error',

@@ -117,7 +117,7 @@ const Example = () => {
           event, //add an event listener to the table container element
         ) => fetchMoreOnBottomReached(event.target),
       }}
-      muiTableToolbarAlertBannerProps={
+      muiToolbarAlertBannerProps={
         isError
           ? {
               color: 'error',

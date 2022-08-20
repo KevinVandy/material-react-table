@@ -290,7 +290,9 @@ export const MRT_TableBodyCell: FC<Props> = ({
           <MRT_TableBodyCellValue cell={cell} table={table} />
         )}
       </>
-      {cell.getIsGrouped() && <> ({row.subRows?.length})</>}
+      {cell.getIsGrouped() && !columnDef.GroupedCell && (
+        <> ({row.subRows?.length})</>
+      )}
     </TableCell>
   );
 };

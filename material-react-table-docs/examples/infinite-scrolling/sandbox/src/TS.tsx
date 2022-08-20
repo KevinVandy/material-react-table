@@ -135,7 +135,7 @@ const Example: FC = () => {
           event: UIEvent<HTMLDivElement>, //add an event listener to the table container element
         ) => fetchMoreOnBottomReached(event.target as HTMLDivElement),
       }}
-      muiTableToolbarAlertBannerProps={
+      muiToolbarAlertBannerProps={
         isError
           ? {
               color: 'error',

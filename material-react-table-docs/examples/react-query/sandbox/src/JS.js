@@ -76,7 +76,7 @@ const Example = () => {
       manualFiltering
       manualPagination
       manualSorting
-      muiTableToolbarAlertBannerProps={
+      muiToolbarAlertBannerProps={
         isError
           ? {
               color: 'error',

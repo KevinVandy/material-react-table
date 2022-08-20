@@ -23,8 +23,25 @@ const columns = [
     accessorKey: 'lastName',
   },
   {
+    header: 'Age',
+    accessorKey: 'age',
+    aggregationFn: 'max',
+    AggregatedCell: ({ cell, table }) => (
+      <>
+        Average by{' '}
+        {table.getColumn(cell.row.groupingColumnId ?? '').columnDef.header}:{' '}
+        <Box sx={{ color: 'success.main', fontWeight: 'bold' }}>
+          {cell.getValue<number>()}
+        </Box>
+      </>
+    ),
+  },
+  {
     header: 'Gender',
     accessorKey: 'gender',
+    GroupedCell: ({ cell }) => (
+      <Box sx={{ color: 'primary.main' }}>{cell.getValue<string>()}</Box>
+    ),
   },
   {
     header: 'State',
@@ -64,6 +81,7 @@ const columns = [
 const data = [...Array(200)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
+  age: faker.datatype.number({ min: 18, max: 65 }),
   gender: faker.name.gender(true),
   state: faker.address.state(),
   salary: Number(faker.finance.amount(10000, 100000, 0)),

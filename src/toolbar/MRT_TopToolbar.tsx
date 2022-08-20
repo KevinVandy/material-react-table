@@ -31,7 +31,7 @@ export const MRT_TopToolbar: FC<Props> = ({ table }) => {
       enableGlobalFilter,
       enablePagination,
       enableToolbarInternalActions,
-      muiTableTopToolbarProps,
+      muiTopToolbarProps,
       positionGlobalFilter,
       positionPagination,
       positionToolbarAlertBanner,
@@ -46,9 +46,9 @@ export const MRT_TopToolbar: FC<Props> = ({ table }) => {
   const isMobile = useMediaQuery('(max-width:720px)');
 
   const toolbarProps =
-    muiTableTopToolbarProps instanceof Function
-      ? muiTableTopToolbarProps({ table })
-      : muiTableTopToolbarProps;
+    muiTopToolbarProps instanceof Function
+      ? muiTopToolbarProps({ table })
+      : muiTopToolbarProps;
 
   const stackAlertBanner =
     isMobile || !!renderTopToolbarCustomActions || showGlobalFilter;

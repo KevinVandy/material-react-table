@@ -1168,7 +1168,7 @@ export const rootProps = [
     type: 'TableProps',
   },
   {
-    propName: 'muiTableToolbarAlertBannerProps',
+    propName: 'muiToolbarAlertBannerProps',
     defaultValue: '',
     description: '',
     link: '',
@@ -1178,7 +1178,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'muiTableBottomToolbarProps',
+    propName: 'muiBottomToolbarProps',
     defaultValue: '',
     description: '',
     link: '',
@@ -1188,7 +1188,7 @@ export const rootProps = [
     type: '',
   },
   {
-    propName: 'muiTableTopToolbarProps',
+    propName: 'muiTopToolbarProps',
     defaultValue: '',
     description: '',
     link: '',

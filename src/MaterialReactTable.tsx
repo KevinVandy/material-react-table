@@ -9,6 +9,7 @@ import type {
   AlertProps,
   ButtonProps,
   CheckboxProps,
+  ChipProps,
   IconButtonProps,
   LinearProgressProps,
   PaperProps,
@@ -207,6 +208,17 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
         footer: MRT_Header<TData>;
         table: MRT_TableInstance<TData>;
       }) => ReactNode);
+  GroupedCell?: ({
+    cell,
+    column,
+    row,
+    table,
+  }: {
+    cell: MRT_Cell<TData>;
+    column: MRT_Column<TData>;
+    row: MRT_Row<TData>;
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode;
   Header?:
     | ReactNode
     | (({
@@ -486,6 +498,9 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     icons?: Partial<MRT_Icons>;
     initialState?: Partial<MRT_TableState<TData>>;
     localization?: Partial<MRT_Localization>;
+    muiBottomToolbarProps?:
+      | ToolbarProps
+      | (({ table }: { table: MRT_TableInstance<TData> }) => ToolbarProps);
     muiExpandAllButtonProps?:
       | IconButtonProps
       | (({ table }: { table: MRT_TableInstance<TData> }) => IconButtonProps);
@@ -590,9 +605,6 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
           table: MRT_TableInstance<TData>;
           row: MRT_Row<TData>;
         }) => TableRowProps);
-    muiTableBottomToolbarProps?:
-      | ToolbarProps
-      | (({ table }: { table: MRT_TableInstance<TData> }) => ToolbarProps);
     muiTableContainerProps?:
       | TableContainerProps
       | (({
@@ -693,10 +705,13 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     muiTableProps?:
       | TableProps
       | (({ table }: { table: MRT_TableInstance<TData> }) => TableProps);
-    muiTableToolbarAlertBannerProps?:
+    muiToolbarAlertBannerChipProps?:
+      | ChipProps
+      | (({ table }: { table: MRT_TableInstance<TData> }) => ChipProps);
+    muiToolbarAlertBannerProps?:
       | AlertProps
       | (({ table }: { table: MRT_TableInstance<TData> }) => AlertProps);
-    muiTableTopToolbarProps?:
+    muiTopToolbarProps?:
       | ToolbarProps
       | (({ table }: { table: MRT_TableInstance<TData> }) => ToolbarProps);
     onColumnDrop?: ({
@@ -711,6 +726,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     onDensityChange?: OnChangeFn<boolean>;
     onDraggingColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
     onDraggingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
+    onEditingCellChange?: OnChangeFn<MRT_Cell<TData> | null>;
     onEditingRowSave?: ({
       exitEditingMode,
       row,
@@ -722,7 +738,6 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
       table: MRT_TableInstance<TData>;
       values: Record<LiteralUnion<string & DeepKeys<TData>>, any>;
     }) => Promise<void> | void;
-    onEditingCellChange?: OnChangeFn<MRT_Cell<TData> | null>;
     onEditingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
     onFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterOption }>;
     onGlobalFilterFnChange?: OnChangeFn<MRT_FilterOption>;

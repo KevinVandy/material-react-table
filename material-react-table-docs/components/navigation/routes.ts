@@ -62,6 +62,10 @@ export const routes: Array<RouteItem> = [
         label: 'Advanced Example',
       },
       {
+        href: '/docs/examples/aggregation-and-grouping',
+        label: 'Aggregation/Grouping Example',
+      },
+      {
         href: '/docs/examples/data-export',
         label: 'Data Export Example',
       },

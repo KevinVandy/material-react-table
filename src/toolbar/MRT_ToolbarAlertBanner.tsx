@@ -15,14 +15,23 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({
     getPrePaginationRowModel,
     getSelectedRowModel,
     getState,
-    options: { localization, muiTableToolbarAlertBannerProps },
+    options: {
+      localization,
+      muiToolbarAlertBannerProps,
+      muiToolbarAlertBannerChipProps,
+    },
   } = table;
   const { grouping, showAlertBanner } = getState();
 
   const alertProps =
-    muiTableToolbarAlertBannerProps instanceof Function
-      ? muiTableToolbarAlertBannerProps({ table })
-      : muiTableToolbarAlertBannerProps;
+    muiToolbarAlertBannerProps instanceof Function
+      ? muiToolbarAlertBannerProps({ table })
+      : muiToolbarAlertBannerProps;
+
+  const chipProps =
+    muiToolbarAlertBannerChipProps instanceof Function
+      ? muiToolbarAlertBannerChipProps({ table })
+      : muiToolbarAlertBannerChipProps;
 
   const selectMessage =
     getSelectedRowModel().rows.length > 0
@@ -45,9 +54,9 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({
           <Fragment key={`${index}-${columnId}`}>
             {index > 0 ? localization.thenBy : ''}
             <Chip
-              color="secondary"
               label={table.getColumn(columnId).columnDef.header}
               onDelete={() => table.getColumn(columnId).toggleGrouping()}
+              {...chipProps}
             />
           </Fragment>
         ))}

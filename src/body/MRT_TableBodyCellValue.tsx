@@ -21,7 +21,15 @@ export const MRT_TableBodyCellValue: FC<Props> = ({ cell, table }) => {
           })
         : row.getIsGrouped() && !cell.getIsGrouped()
         ? null
-        : columnDef?.Cell?.({ cell, column, row, table }) ?? cell.renderValue()}
+        : (cell.getIsGrouped() &&
+            columnDef.GroupedCell?.({
+              cell,
+              column,
+              row,
+              table,
+            })) ||
+          (columnDef?.Cell?.({ cell, column, row, table }) ??
+            cell.renderValue())}
     </>
   );
 };
