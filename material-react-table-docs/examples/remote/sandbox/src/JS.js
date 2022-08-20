@@ -3,8 +3,8 @@ import MaterialReactTable from 'material-react-table';
 
 const Example = () => {
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isRefetching, setIsRefetching] = useState(false);
   const [columnFilters, setColumnFilters] = useState([]);
   const [globalFilter, setGlobalFilter] = useState('');
@@ -15,6 +15,7 @@ const Example = () => {
   });
   const [rowCount, setRowCount] = useState(0);
 
+  //if you want to avoid useEffect, look at the React Query example instead
   useEffect(() => {
     const fetchData = async () => {
       if (!data.length) {
@@ -35,7 +36,7 @@ const Example = () => {
 
       try {
         const response = await fetch(url.href);
-        const json = (await response.json())
+        const json = await response.json();
         setData(json.data);
         setRowCount(json.meta.totalRowCount);
       } catch (error) {
@@ -43,7 +44,6 @@ const Example = () => {
         console.error(error);
         return;
       }
-
       setIsError(false);
       setIsLoading(false);
       setIsRefetching(false);

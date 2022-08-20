@@ -35,6 +35,7 @@ const Example: FC = () => {
   });
   const [rowCount, setRowCount] = useState(0);
 
+  //if you want to avoid useEffect, look at the React Query example instead
   useEffect(() => {
     const fetchData = async () => {
       if (!data.length) {

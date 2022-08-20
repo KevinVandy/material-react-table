@@ -43,6 +43,7 @@ See all [Props and Options](https://www.material-react-table.com/docs/api)
  - [Basic Table](https://www.material-react-table.com/docs/examples/basic/) (See Default Features)
  - [Minimal Table](https://www.material-react-table.com/docs/examples/minimal/) (Turn off Features)
  - [Advanced Table](https://www.material-react-table.com/docs/examples/advanced/) (See some of the Advanced Features)
+ - [Aggregation/Grouping](https://www.material-react-table.com/docs/examples/aggregation-and-grouping/) (Aggregation features such as Sum, Average, Count, etc.)
  - [Data Export Table](https://www.material-react-table.com/docs/examples/data-export/) (Export to CSV, Excel, etc.)
  - [Editing CRUD Table](https://www.material-react-table.com/docs/examples/editing-crud/) (Create, Edit, and Delete Rows)
  - [Remote Data](https://www.material-react-table.com/docs/examples/remote/) (Server-side Pagination, Sorting, and Filtering)
@@ -60,9 +61,9 @@ _All features can easily be enabled/disabled_
 
 - [x] < 37kb gzipped - [Bundlephobia](https://bundlephobia.com/package/material-react-table)
 - [x] Advanced TypeScript Generics Support (TypeScript Optional)
+- [x] Aggregation and Grouping (Sum, Average, Count, etc.)
 - [x] Click To Copy Cell Values
 - [x] Column Action Dropdown Menu
-- [x] Column/Row Grouping (Group By and Aggregates)
 - [x] Column Hiding
 - [x] Column Ordering via Drag'n'Drop
 - [x] Column Pinning (Freeze Columns)
