@@ -1,8 +1,8 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
 import { Box, Button, ListItemIcon, MenuItem, Typography } from '@mui/material';
 import { AccountCircle, Send } from '@mui/icons-material';
-import { makeData } from './makeData';
+import { data } from './makeData';
 
 const Example = () => {
   const columns = useMemo(
@@ -14,8 +14,8 @@ const Example = () => {
           {
             accessorFn: (row) => `${row.firstName} ${row.lastName}`, //accessorFn used to join multiple data into a single cell
             id: 'name', //id is still required when using accessorFn instead of accessorKey
-            enableClickToCopy: false,
             header: 'Name',
+            size: 250,
             Cell: ({ cell, row }) => (
               <Box
                 sx={{
@@ -37,8 +37,9 @@ const Example = () => {
           },
           {
             accessorKey: 'email', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
+            enableClickToCopy: true,
             header: 'Email',
-            size: 400,
+            size: 300,
           },
         ],
       },
@@ -48,7 +49,6 @@ const Example = () => {
         columns: [
           {
             accessorKey: 'salary',
-            enableEditing: true,
             filterVariant: 'range',
             header: 'Salary',
             size: 200,
@@ -76,7 +76,6 @@ const Example = () => {
                 })}
               </Box>
             ),
-            size: 60,
           },
           {
             accessorKey: 'jobTitle', //hey a simple column for once
@@ -84,15 +83,15 @@ const Example = () => {
             size: 350,
           },
           {
-            Cell: ({ cell }) => cell.getValue()?.toLocaleDateString?.(), //transform data to readable format for cell render
-            Header: () => <em>Start Date</em>, //custom header markup
-            accessorFn: (row) => new Date(row.startDate), //transform data before processing so sorting works
-            accessorKey: 'startDate',
+            accessorFn: (row) => new Date(row.startDate), //convert to Date for sorting and filtering
+            id: 'startDate',
             header: 'Start Date',
             muiTableHeadCellFilterTextFieldProps: {
               type: 'date',
             },
             sortingFn: 'datetime',
+            Cell: ({ cell }) => cell.getValue()?.toLocaleDateString(), //render Date as a string
+            Header: ({ column }) => <em>{column.columnDef.header}</em>, //custom header markup
           },
         ],
       },
@@ -100,28 +99,17 @@ const Example = () => {
     [],
   );
 
-  const [employeeData, setEmployeeData] = useState(() => makeData());
-
-  const handleSaveRow = ({ row }) => {
-    employeeData[+row.index] = row._valuesCache;
-    setEmployeeData([...employeeData]);
-  };
-
   return (
     <MaterialReactTable
       columns={columns}
-      data={employeeData}
-      enableClickToCopy
+      data={data}
       enableColumnFilterChangeMode
       enableColumnOrdering
       enableColumnResizing
-      enableEditing
       enableGrouping
       enablePinning
       enableRowActions
-      enableRowNumbers
       enableRowSelection
-      onEditingRowSave={handleSaveRow}
       positionToolbarAlertBanner="bottom"
       renderDetailPanel={({ row }) => (
         <Box
@@ -161,7 +149,7 @@ const Example = () => {
           View Profile
         </MenuItem>,
         <MenuItem
-          key={0}
+          key={1}
           onClick={() => {
             // Send email logic...
             closeMenu();

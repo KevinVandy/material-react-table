@@ -1,8 +1,5 @@
-import React, { FC, useMemo, useState } from 'react';
-import MaterialReactTable, {
-  MRT_ColumnDef,
-  MRT_Row,
-} from 'material-react-table';
+import React, { FC, useMemo } from 'react';
+import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { Box, Button, ListItemIcon, MenuItem, Typography } from '@mui/material';
 import { AccountCircle, Send } from '@mui/icons-material';
 import { data } from './makeData';
@@ -98,8 +95,6 @@ const Example: FC = () => {
             size: 350,
           },
           {
-            Cell: ({ cell }) => cell.getValue<Date>()?.toLocaleDateString(), //render Date as a string
-            Header: ({ column }) => <em>{column.columnDef.header}</em>, //custom header markup
             accessorFn: (row) => new Date(row.startDate), //convert to Date for sorting and filtering
             id: 'startDate',
             header: 'Start Date',
@@ -107,6 +102,8 @@ const Example: FC = () => {
               type: 'date',
             },
             sortingFn: 'datetime',
+            Cell: ({ cell }) => cell.getValue<Date>()?.toLocaleDateString(), //render Date as a string
+            Header: ({ column }) => <em>{column.columnDef.header}</em>, //custom header markup
           },
         ],
       },

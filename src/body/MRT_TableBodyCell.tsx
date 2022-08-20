@@ -18,6 +18,7 @@ import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 import type { MRT_Cell, MRT_TableInstance } from '..';
 import { MRT_TableBodyRowGrabHandle } from './MRT_TableBodyRowGrabHandle';
+import { MRT_TableBodyCellValue } from './MRT_TableBodyCellValue';
 
 interface Props {
   cell: MRT_Cell;
@@ -282,27 +283,14 @@ export const MRT_TableBodyCell: FC<Props> = ({
           <MRT_EditCellTextField cell={cell} table={table} />
         ) : (enableClickToCopy || columnDef.enableClickToCopy) &&
           columnDef.enableClickToCopy !== false ? (
-          <>
-            <MRT_CopyButton cell={cell} table={table}>
-              <>
-                {row.getIsGrouped() && !cell.getIsGrouped()
-                  ? null
-                  : columnDef?.Cell?.({ cell, column, row, table }) ??
-                    cell.renderValue()}
-              </>
-            </MRT_CopyButton>
-            {cell.getIsGrouped() && <> ({row.subRows?.length})</>}
-          </>
+          <MRT_CopyButton cell={cell} table={table}>
+            <MRT_TableBodyCellValue cell={cell} table={table} />
+          </MRT_CopyButton>
         ) : (
-          <>
-            {row.getIsGrouped() && !cell.getIsGrouped()
-              ? null
-              : columnDef?.Cell?.({ cell, column, row, table }) ??
-                cell.renderValue()}
-            {cell.getIsGrouped() && <> ({row.subRows?.length ?? ''})</>}
-          </>
+          <MRT_TableBodyCellValue cell={cell} table={table} />
         )}
       </>
+      {cell.getIsGrouped() && <> ({row.subRows?.length})</>}
     </TableCell>
   );
 };

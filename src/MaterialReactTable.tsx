@@ -769,9 +769,11 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
       table: MRT_TableInstance<TData>;
     }) => ReactNode[];
     renderRowActions?: ({
+      cell,
       row,
       table,
     }: {
+      cell: MRT_Cell<TData>;
       row: MRT_Row<TData>;
       table: MRT_TableInstance<TData>;
     }) => ReactNode;

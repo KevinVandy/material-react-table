@@ -131,8 +131,12 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
             id: 'mrt-row-drag',
           },
           columnOrder.includes('mrt-row-actions') && {
-            Cell: ({ row }) => (
-              <MRT_ToggleRowActionMenuButton row={row as any} table={table} />
+            Cell: ({ cell, row }) => (
+              <MRT_ToggleRowActionMenuButton
+                cell={cell as any}
+                row={row as any}
+                table={table}
+              />
             ),
             header: props.localization?.actions,
             size: 70,

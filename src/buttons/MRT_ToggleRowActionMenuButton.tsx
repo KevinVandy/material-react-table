@@ -2,7 +2,7 @@ import React, { FC, MouseEvent, useState } from 'react';
 import { IconButton, Tooltip } from '@mui/material';
 import { MRT_RowActionMenu } from '../menus/MRT_RowActionMenu';
 import { MRT_EditActionButtons } from './MRT_EditActionButtons';
-import type { MRT_Row, MRT_TableInstance } from '..';
+import type { MRT_Cell, MRT_Row, MRT_TableInstance } from '..';
 
 const commonIconButtonStyles = {
   height: '2rem',
@@ -16,11 +16,12 @@ const commonIconButtonStyles = {
 };
 
 interface Props {
+  cell: MRT_Cell
   row: MRT_Row;
   table: MRT_TableInstance;
 }
 
-export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row, table }) => {
+export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ cell, row, table }) => {
   const {
     getState,
     options: {
@@ -52,12 +53,16 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ row, table }) => {
   return (
     <>
       {renderRowActions ? (
-        <>{renderRowActions({ row, table })}</>
+        <>{renderRowActions({ cell, row, table })}</>
       ) : row.id === editingRow?.id && editingMode === 'row' ? (
         <MRT_EditActionButtons row={row} table={table} />
       ) : !renderRowActionMenuItems && enableEditing ? (
         <Tooltip placement="right" arrow title={localization.edit}>
-          <IconButton sx={commonIconButtonStyles} onClick={handleStartEditMode}>
+          <IconButton
+            aria-label={localization.edit}
+            sx={commonIconButtonStyles}
+            onClick={handleStartEditMode}
+          >
             <EditIcon />
           </IconButton>
         </Tooltip>

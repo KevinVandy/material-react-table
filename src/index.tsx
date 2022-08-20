@@ -6,6 +6,7 @@ import type { MRT_Icons } from './icons';
 import type { MRT_Localization } from './localization';
 export type { MRT_Localization, MRT_Icons };
 
+import { MRT_CopyButton } from './buttons/MRT_CopyButton';
 import { MRT_FullScreenToggleButton } from './buttons/MRT_FullScreenToggleButton';
 import { MRT_GlobalFilterTextField } from './inputs/MRT_GlobalFilterTextField';
 import { MRT_ShowHideColumnsButton } from './buttons/MRT_ShowHideColumnsButton';
@@ -20,4 +21,5 @@ export {
   MRT_ToggleDensePaddingButton,
   MRT_ToggleFiltersButton,
   MRT_ToggleGlobalFilterButton,
+  MRT_CopyButton,
 };

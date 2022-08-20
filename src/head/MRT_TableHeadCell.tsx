@@ -70,7 +70,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
     if (enableGrouping && hoveredColumn?.id === 'drop-zone') {
       setHoveredColumn(null);
     }
-    if (enableColumnOrdering && draggingColumn) {
+    if (enableColumnOrdering && draggingColumn && columnDefType !== 'group') {
       setHoveredColumn(
         columnDef.enableColumnOrdering !== false ? column : null,
       );
@@ -151,10 +151,8 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
             ? 'sticky'
             : undefined,
         pt:
-          columnDefType === 'group'
-            ? 0
-            : density === 'compact'
-            ? '0.25'
+          columnDefType === 'group' || density === 'compact'
+            ? '0.25rem'
             : density === 'comfortable'
             ? '.75rem'
             : '1.25rem',
