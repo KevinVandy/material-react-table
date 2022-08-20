@@ -37,7 +37,7 @@ export const MRT_GrabHandleButton = <TData extends Record<string, any> = {}>({
         onDragEnd={onDragEnd}
         size="small"
         {...iconButtonProps}
-        sx={{
+        sx={(theme) => ({
           cursor: 'grab',
           m: 0,
           opacity: 0.5,
@@ -50,8 +50,10 @@ export const MRT_GrabHandleButton = <TData extends Record<string, any> = {}>({
           '&:active': {
             cursor: 'grabbing',
           },
-          ...iconButtonProps?.sx,
-        }}
+          ...(iconButtonProps?.sx instanceof Function
+            ? iconButtonProps?.sx(theme)
+            : (iconButtonProps?.sx as any)),
+        })}
       >
         <DragHandleIcon />
       </IconButton>

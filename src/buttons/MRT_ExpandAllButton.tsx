@@ -40,12 +40,14 @@ export const MRT_ExpandAllButton: FC<Props> = ({ table }) => {
           disabled={!getCanSomeRowsExpand() && !renderDetailPanel}
           onClick={() => toggleAllRowsExpanded(!getIsAllRowsExpanded())}
           {...iconButtonProps}
-          sx={{
+          sx={(theme) => ({
             height: density === 'compact' ? '1.75rem' : '2.25rem',
             width: density === 'compact' ? '1.75rem' : '2.25rem',
             mt: density !== 'compact' ? '-0.25rem' : undefined,
-            ...iconButtonProps?.sx,
-          }}
+            ...(iconButtonProps?.sx instanceof Function
+              ? iconButtonProps?.sx(theme)
+              : (iconButtonProps?.sx as any)),
+          })}
         >
           <KeyboardDoubleArrowDownIcon
             style={{

@@ -84,7 +84,7 @@ const HomePage = () => {
               target="_blank"
               rel="noreferrer"
             >
-              Material&nbsp;UI&nbsp;<sup>v5</sup>
+              Material&nbsp;UI<sup>V5</sup>
             </MuiLink>
           </Link>{' '}
           and&nbsp;
@@ -98,7 +98,7 @@ const HomePage = () => {
               target="_blank"
               rel="noreferrer"
             >
-              TanStack&nbsp;Table&nbsp;<sup>v8</sup>
+              TanStack&nbsp;Table<sup>V8</sup>
             </MuiLink>
           </Link>
         </Typography>

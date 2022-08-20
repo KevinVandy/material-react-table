@@ -488,6 +488,16 @@ export const rootProps = [
     type: 'boolean',
   },
   {
+    propName: 'enableStickyFooter',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: 'boolean',
+  },
+  {
     propName: 'enableStickyHeader',
     defaultValue: '',
     description: '',

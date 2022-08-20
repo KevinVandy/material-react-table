@@ -5,13 +5,27 @@ import MaterialReactTable, {
   MRT_ColumnDef,
 } from '../../src';
 import { faker } from '@faker-js/faker';
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 
 const meta: Meta = {
   title: 'Features/Aggregation Examples',
 };
 
 export default meta;
+
+const data = [...Array(200)].map(() => ({
+  firstName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
+  age: faker.datatype.number({ min: 18, max: 65 }),
+  gender: faker.name.gender(true),
+  state: faker.address.state(),
+  salary: Number(faker.finance.amount(10000, 100000, 0)),
+}));
+
+const averageSalary =
+  data.reduce((acc, curr) => acc + curr.salary, 0) / data.length;
+
+const averageAge = data.reduce((acc, curr) => acc + curr.age, 0) / data.length;
 
 const columns = [
   {
@@ -34,6 +48,12 @@ const columns = [
           {cell.getValue<number>()}
         </Box>
       </>
+    ),
+    Footer: () => (
+      <Stack>
+        Average Age:
+        <Box color="warning.main">{Math.round(averageAge)}</Box>
+      </Stack>
     ),
   },
   {
@@ -75,17 +95,21 @@ const columns = [
         })}
       </>
     ),
+    Footer: () => (
+      <Stack>
+        Average Salary:
+        <Box color="warning.main">
+          {averageSalary?.toLocaleString?.('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          })}
+        </Box>
+      </Stack>
+    ),
   },
 ] as MRT_ColumnDef<typeof data[0]>[];
-
-const data = [...Array(200)].map(() => ({
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
-  age: faker.datatype.number({ min: 18, max: 65 }),
-  gender: faker.name.gender(true),
-  state: faker.address.state(),
-  salary: Number(faker.finance.amount(10000, 100000, 0)),
-}));
 
 export const Aggregation: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableGrouping />
@@ -109,6 +133,11 @@ export const AggregationGroupedAndExpandedDefault: Story<
     columns={columns}
     data={data}
     enableGrouping
-    initialState={{ expanded: true, grouping: ['state', 'gender'] }}
+    initialState={{
+      expanded: true,
+      grouping: ['state', 'gender'],
+      isFullScreen: true,
+      pagination: { pageIndex: 0, pageSize: 20 },
+    }}
   />
 );

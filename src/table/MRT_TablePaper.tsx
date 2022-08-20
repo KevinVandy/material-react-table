@@ -35,10 +35,12 @@ export const MRT_TablePaper: FC<Props> = ({ table }) => {
     <Paper
       elevation={2}
       {...tablePaperProps}
-      sx={{
+      sx={(theme) => ({
         transition: 'all 0.2s ease-in-out',
-        ...tablePaperProps?.sx,
-      }}
+        ...(tablePaperProps?.sx instanceof Function
+          ? tablePaperProps?.sx(theme)
+          : (tablePaperProps?.sx as any)),
+      })}
       style={{
         ...tablePaperProps?.style,
         height: isFullScreen ? '100vh' : undefined,

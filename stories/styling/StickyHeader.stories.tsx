@@ -71,7 +71,60 @@ export const StickyHeaderShorterTable: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    enableStickyHeader
     initialState={{ pagination: { pageSize: 25, pageIndex: 0 } }}
     muiTableContainerProps={{ sx: { maxHeight: 400 } }}
+  />
+);
+
+const columnsWithFooters: MRT_ColumnDef<typeof data[0]>[] = [
+  {
+    header: 'First Name',
+    accessorKey: 'firstName',
+    footer: 'First Name',
+  },
+  {
+    header: 'Last Name',
+    accessorKey: 'lastName',
+    footer: 'Last Name',
+  },
+  {
+    header: 'Address',
+    accessorKey: 'address',
+    footer: 'Address',
+  },
+  {
+    header: 'State',
+    accessorKey: 'state',
+    footer: 'State',
+  },
+  {
+    header: 'Phone Number',
+    accessorKey: 'phoneNumber',
+    footer: 'Phone Number',
+  },
+];
+
+export const disableStickyFooter: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columnsWithFooters}
+    data={data}
+    initialState={{ pagination: { pageSize: 25, pageIndex: 0 } }}
+    muiTableContainerProps={{ sx: { maxHeight: 400 } }}
+    enableStickyHeader
+    enableStickyFooter={false}
+    enableRowNumbers
+  />
+);
+
+export const enableStickyFooter: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columnsWithFooters}
+    data={data}
+    initialState={{ pagination: { pageSize: 25, pageIndex: 0 } }}
+    muiTableContainerProps={{ sx: { maxHeight: 400 } }}
+    enableStickyHeader
+    enableStickyFooter
+    enableRowNumbers
   />
 );

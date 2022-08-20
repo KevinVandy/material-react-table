@@ -488,6 +488,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     enableRowSelection?: boolean | ((row: MRT_Row<TData>) => boolean);
     enableRowVirtualization?: boolean;
     enableSelectAll?: boolean;
+    enableStickyFooter?: boolean;
     enableStickyHeader?: boolean;
     enableTableFooter?: boolean;
     enableTableHead?: boolean;

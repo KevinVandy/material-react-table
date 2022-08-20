@@ -1,9 +1,19 @@
 import React, { useMemo } from 'react';
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import MaterialReactTable from 'material-react-table';
 import { data } from './makeData';
 
 const Example = () => {
+  const averageSalary = useMemo(
+    () => data.reduce((acc, curr) => acc + curr.salary, 0) / data.length,
+    [],
+  );
+
+  const maxAge = useMemo(
+    () => data.reduce((acc, curr) => Math.max(acc, curr.age), 0),
+    [],
+  );
+
   const columns = useMemo(
     () => [
       {
@@ -30,6 +40,12 @@ const Example = () => {
               {cell.getValue()}
             </Box>
           </>
+        ),
+        Footer: () => (
+          <Stack>
+            Max Age:
+            <Box color="warning.main">{Math.round(maxAge)}</Box>
+          </Stack>
         ),
       },
       {
@@ -76,9 +92,22 @@ const Example = () => {
             })}
           </>
         ),
+        Footer: () => (
+          <Stack>
+            Average Salary:
+            <Box color="warning.main">
+              {averageSalary?.toLocaleString?.('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+              })}
+            </Box>
+          </Stack>
+        ),
       },
     ],
-    [],
+    [averageSalary, maxAge],
   );
 
   return (
@@ -86,12 +115,17 @@ const Example = () => {
       columns={columns}
       data={data}
       enableGrouping
+      enableStickyHeader
+      enableStickyFooter
       initialState={{
+        density: 'compact',
         expanded: true, //expand all groups by default
         grouping: ['state'], //an array of columns to group by by default (can be multiple)
+        pagination: { pageIndex: 0, pageSize: 20 },
         sorting: [{ id: 'state', desc: false }], //sort by state by default
       }}
       muiToolbarAlertBannerChipProps={{ color: 'primary' }}
+      muiTableContainerProps={{ sx: { maxHeight: 700 } }}
     />
   );
 };
