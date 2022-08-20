@@ -1,4 +1,10 @@
-import React, { ChangeEvent, FocusEvent, MouseEvent, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FocusEvent,
+  KeyboardEvent,
+  MouseEvent,
+  useState,
+} from 'react';
 import { TextField, TextFieldProps } from '@mui/material';
 import type { MRT_Cell, MRT_TableInstance } from '..';
 
@@ -46,29 +52,34 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
     ...mcTableBodyCellEditTextFieldProps,
   };
 
+  const saveRow = (newValue: string) => {
+    if (editingRow) {
+      setEditingRow({
+        ...editingRow,
+        _valuesCache: { ...editingRow._valuesCache, [column.id]: newValue },
+      });
+    }
+  };
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     textFieldProps.onChange?.(event);
     setValue(event.target.value);
-    if (textFieldProps?.select && editingRow) {
-      setEditingRow({
-        ...editingRow,
-        _valuesCache: {
-          ...editingRow._valuesCache,
-          [column.id]: event.target.value,
-        },
-      });
+    if (textFieldProps?.select) {
+      saveRow(event.target.value);
     }
   };
 
   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
     textFieldProps.onBlur?.(event);
-    if (editingRow) {
-      setEditingRow({
-        ...editingRow,
-        _valuesCache: { ...editingRow._valuesCache, [column.id]: value },
-      });
-    }
+    saveRow(value);
     setEditingCell(null);
+  };
+
+  const handleEnterKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    textFieldProps.onKeyDown?.(event);
+    if (event.key === 'Enter') {
+      editInputRefs.current[column.id]?.blur();
+    }
   };
 
   if (columnDef.Edit) {
@@ -79,14 +90,6 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
     <TextField
       disabled={columnDef.enableEditing === false}
       fullWidth
-      label={showLabel ? column.columnDef.header : undefined}
-      margin="none"
-      name={column.id}
-      onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
-      placeholder={columnDef.header}
-      value={value}
-      variant="standard"
-      {...textFieldProps}
       inputRef={(inputRef) => {
         if (inputRef) {
           editInputRefs.current[column.id] = inputRef;
@@ -95,8 +98,17 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
           }
         }
       }}
+      label={showLabel ? column.columnDef.header : undefined}
+      margin="none"
+      name={column.id}
+      onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
+      placeholder={columnDef.header}
+      value={value}
+      variant="standard"
+      {...textFieldProps}
       onBlur={handleBlur}
       onChange={handleChange}
+      onKeyDown={handleEnterKeyDown}
     />
   );
 };
