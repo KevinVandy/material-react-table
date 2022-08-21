@@ -12,8 +12,8 @@ export const MRT_TableBodyCellValue: FC<Props> = ({ cell, table }) => {
 
   return (
     <>
-      {cell.getIsAggregated() && column.columnDef.aggregationFn
-        ? columnDef.AggregatedCell?.({
+      {cell.getIsAggregated() && columnDef.AggregatedCell
+        ? columnDef.AggregatedCell({
             cell,
             column,
             row,
@@ -21,15 +21,14 @@ export const MRT_TableBodyCellValue: FC<Props> = ({ cell, table }) => {
           })
         : row.getIsGrouped() && !cell.getIsGrouped()
         ? null
-        : (cell.getIsGrouped() &&
-            columnDef.GroupedCell?.({
-              cell,
-              column,
-              row,
-              table,
-            })) ||
-          (columnDef?.Cell?.({ cell, column, row, table }) ??
-            cell.renderValue())}
+        : cell.getIsGrouped() && columnDef.GroupedCell
+        ? columnDef.GroupedCell({
+            cell,
+            column,
+            row,
+            table,
+          })
+        : columnDef?.Cell?.({ cell, column, row, table }) ?? cell.renderValue()}
     </>
   );
 };

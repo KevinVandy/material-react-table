@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import Link from 'next/link';
+import { usePlausible } from 'next-plausible'
 import {
   AppBar as MuiAppBar,
   Box,
@@ -45,6 +46,7 @@ const TopBar: FC<Props> = ({
   setIsLightTheme,
   setNavOpen,
 }) => {
+  const plausible = usePlausible()
   const isMobile = useMediaQuery('(max-width: 600px)');
   const isTablet = useMediaQuery('(max-width: 900px)');
   const isDesktop = useMediaQuery('(min-width: 1500px)');
@@ -87,7 +89,7 @@ const TopBar: FC<Props> = ({
           </Link>
         </Box>
         <Box
-          onClick={() => (window as any).plausible('open-search')}
+          onClick={() => plausible('open-search')}
           id="docsearch"
           sx={{
             display: 'grid',
@@ -145,7 +147,7 @@ const TopBar: FC<Props> = ({
               aria-label="Toggle Light/Dark Mode"
               onClick={() => {
                 setIsLightTheme(!isLightTheme);
-                (window as any).plausible(
+                plausible(
                   `toggle-theme-${isLightTheme ? 'dark' : 'light'}-mode`,
                 );
               }}

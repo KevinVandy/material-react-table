@@ -2181,10 +2181,10 @@ markdown-extensions@^1.0.0:
   resolved "https://registry.yarnpkg.com/markdown-extensions/-/markdown-extensions-1.1.1.tgz#fea03b539faeaee9b4ef02a3769b455b189f7fc3"
   integrity sha512-WWC0ZuMzCyDHYCasEGs4IPvLyTGftYwh6wIEOULOF0HXcqZlhwRzrK0w2VUlxWA98xnvb/jszw4ZSkJ6ADpM6Q==
 
-material-react-table@^0.38.3:
-  version "0.38.3"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.38.3.tgz#a3edeacb041eb2307f6dcaf35568bcf5e2f58d05"
-  integrity sha512-Iop8K0XGaGJj4TgcQMXeN2VYkqvHlvCzwis6+1AZefSDw1WTmvX4uEl7daU5ei31R9f14x4xqE/laH1bYTPe4Q==
+material-react-table@^0.38.4:
+  version "0.38.4"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.38.4.tgz#e54740c50539e786dd043b48a7b410bb6feed8cf"
+  integrity sha512-A6pn50gMVYI0j+y51aZdfJ6yJseKdhhs1xbn9x5AVAJW8gaI26FWPXsmEfqWSBFT7oGU2CXekWc3SqeL193VIw==
   dependencies:
     "@tanstack/match-sorter-utils" "8.1.1"
     "@tanstack/react-table" "8.5.11"
@@ -2655,6 +2655,11 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
+
+next-plausible@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/next-plausible/-/next-plausible-3.2.0.tgz#d801346253e0c1cf64a02b9fc3a42050455cbc47"
+  integrity sha512-OlYcLXBG3kKd/fKMpm8SZ5IkUKSFm1/8t7cv6e5bewIqlpdZpdWuSrjbdJpbmutb2KPLXHzilKp09zmDGjy9KQ==
 
 next-sitemap@^3.1.20:
   version "3.1.20"

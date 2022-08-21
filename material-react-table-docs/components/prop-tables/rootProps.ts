@@ -1178,6 +1178,16 @@ export const rootProps = [
     type: 'TableProps',
   },
   {
+    propName: 'muiToolbarAlertBannerChipProps',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '',
+  },
+  {
     propName: 'muiToolbarAlertBannerProps',
     defaultValue: '',
     description: '',

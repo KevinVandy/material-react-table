@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import PlausibleProvider from 'next-plausible';
 import { useRouter } from 'next/router';
 import { MDXProvider } from '@mdx-js/react';
 import { Box, ThemeProvider, useMediaQuery } from '@mui/material';
@@ -14,16 +15,6 @@ import { theme } from '../styles/MuiTheme';
 import docsearch from '@docsearch/js';
 import '../styles/globals.css';
 import '@docsearch/css';
-
-if (typeof window !== 'undefined') {
-  (window as any).plausible =
-    (window as any).plausible || process.env.NODE_ENV === 'production'
-      ? function () {
-          ((window as any).plausible.q =
-            (window as any).plausible.q || []).push(arguments);
-        }
-      : () => {};
-}
 
 function App({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
@@ -82,20 +73,16 @@ function App({ Component, pageProps }: AppProps) {
         />
         <link rel="icon" href="/mrt_logo.png" />
         <meta property="og:image" content="/mrt_logo.png" />
-        <meta property="og:url" content={`https://www.material-react-table.com${pathname}`} />
+        <meta
+          property="og:url"
+          content={`https://www.material-react-table.com${pathname}`}
+        />
         {process.env.NODE_ENV === 'production' && (
-          <>
-            <link
-              rel="preconnect"
-              href="https://1W9SWN5ZAH-dsn.algolia.net"
-              crossOrigin="true"
-            />
-            <script
-              defer
-              data-domain="material-react-table.com"
-              src="https://plausible.io/js/plausible.js"
-            />
-          </>
+          <link
+            rel="preconnect"
+            href="https://1W9SWN5ZAH-dsn.algolia.net"
+            crossOrigin="true"
+          />
         )}
       </Head>
       <style global jsx>
@@ -120,50 +107,55 @@ function App({ Component, pageProps }: AppProps) {
           }
         `}
       </style>
-      <ThemeProvider theme={theme(isLightTheme)}>
-        <MDXProvider components={mdxComponents}>
-          <TopBar
-            isLightTheme={isLightTheme}
-            navOpen={navOpen || isDesktop}
-            setIsLightTheme={setIsLightTheme}
-            setNavOpen={setNavOpen}
-          />
-          <SideBar navOpen={navOpen || isDesktop} setNavOpen={setNavOpen} />
-          <Box
-            component="main"
-            sx={(theme) => ({
-              backgroundColor: theme.palette.background.default,
-              color: theme.palette.text.primary,
-              minHeight: '100vh',
-              p: `64px ${showMiniNav && isXLDesktop ? '250px' : '32px'} 0 ${
-                (navOpen || isDesktop) && !isMobile ? '300px' : '32px'
-              }`,
-              transition: 'all 200ms ease-in-out',
-            })}
-          >
+      <PlausibleProvider
+        domain="material-react-table.com"
+        enabled={process.env.NODE_ENV === 'production'}
+      >
+        <ThemeProvider theme={theme(isLightTheme)}>
+          <MDXProvider components={mdxComponents}>
+            <TopBar
+              isLightTheme={isLightTheme}
+              navOpen={navOpen || isDesktop}
+              setIsLightTheme={setIsLightTheme}
+              setNavOpen={setNavOpen}
+            />
+            <SideBar navOpen={navOpen || isDesktop} setNavOpen={setNavOpen} />
             <Box
-              sx={{
-                maxWidth: '1200px',
-                margin: 'auto',
+              component="main"
+              sx={(theme) => ({
+                backgroundColor: theme.palette.background.default,
+                color: theme.palette.text.primary,
+                minHeight: '100vh',
+                p: `64px ${showMiniNav && isXLDesktop ? '250px' : '32px'} 0 ${
+                  (navOpen || isDesktop) && !isMobile ? '300px' : '32px'
+                }`,
                 transition: 'all 200ms ease-in-out',
-                width: '100%',
-              }}
+              })}
             >
-              {showBreadCrumbs && <BreadCrumbs />}
-              {showMiniNav && !isXLDesktop && <MiniNav />}
-              {pathname === '/' ? (
-                <Component {...pageProps} />
-              ) : (
-                <article>
+              <Box
+                sx={{
+                  maxWidth: '1200px',
+                  margin: 'auto',
+                  transition: 'all 200ms ease-in-out',
+                  width: '100%',
+                }}
+              >
+                {showBreadCrumbs && <BreadCrumbs />}
+                {showMiniNav && !isXLDesktop && <MiniNav />}
+                {pathname === '/' ? (
                   <Component {...pageProps} />
-                </article>
-              )}
-              <Footer />
+                ) : (
+                  <article>
+                    <Component {...pageProps} />
+                  </article>
+                )}
+                <Footer />
+              </Box>
+              {showMiniNav && isXLDesktop && <MiniNav />}
             </Box>
-            {showMiniNav && isXLDesktop && <MiniNav />}
-          </Box>
-        </MDXProvider>
-      </ThemeProvider>
+          </MDXProvider>
+        </ThemeProvider>
+      </PlausibleProvider>
     </>
   );
 }
