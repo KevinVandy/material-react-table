@@ -8,9 +8,15 @@ interface Props {
   row: MRT_Row;
   rowIndex: number;
   table: MRT_TableInstance;
+  virtualRow?: any;
 }
 
-export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
+export const MRT_TableBodyRow: FC<Props> = ({
+  row,
+  rowIndex,
+  table,
+  virtualRow,
+}) => {
   const theme = useTheme();
   const {
     getIsSomeColumnsPinned,
@@ -31,7 +37,7 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
     }
   };
 
-  const rowRef = useRef<HTMLTableRowElement>(null);
+  const rowRef = useRef<HTMLTableRowElement | null>(null);
 
   const draggingBorder =
     draggingRow?.id === row.id
@@ -52,7 +58,12 @@ export const MRT_TableBodyRow: FC<Props> = ({ row, rowIndex, table }) => {
         onDragEnter={handleDragEnter}
         hover
         selected={row.getIsSelected()}
-        ref={rowRef}
+        ref={(node) => {
+          rowRef.current = node;
+          if (virtualRow?.measureRef) {
+            virtualRow.measureRef = node;
+          }
+        }}
         {...tableRowProps}
         sx={(theme) => ({
           backgroundColor: lighten(theme.palette.background.default, 0.06),

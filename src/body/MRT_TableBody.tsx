@@ -124,6 +124,7 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
                 enableRowVirtualization ? rowOrVirtualRow.index : rowIndex
               }
               table={table}
+              virtualRow={enableRowVirtualization ? rowOrVirtualRow : null}
             />
           );
         },
