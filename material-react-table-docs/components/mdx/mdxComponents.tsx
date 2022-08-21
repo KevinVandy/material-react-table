@@ -1,5 +1,4 @@
 import { Typography, Link as MuiLink, Divider } from '@mui/material';
-import Image from 'next/image';
 import { Blockquote } from './Blockquote';
 import { SampleCodeSnippet } from './SampleCodeSnippet';
 import { LinkHeading } from './LinkHeading';
@@ -29,17 +28,14 @@ export const mdxComponents = {
   h5: (props: any) => <Typography variant="h5" {...props} />,
   h6: (props: any) => <Typography variant="h6" {...props} />,
   hr: (props: any) => <Divider sx={{ mb: '1rem' }} {...props} />,
-  img: (props: any) => (
-    <Image alt="" height={200} width={200} objectFit="scale-down" {...props} />
-  ),
   li: (props: any) => (
-    <li {...props}>
+    <li className="docsearch-content" {...props}>
       <Typography variant="body1">{props.children}</Typography>
     </li>
   ),
   p: (props: any) => (
     <Typography
-      className="DocSearch-content"
+      className="docsearch-content"
       sx={{
         textAlign: {
           xs: 'left',

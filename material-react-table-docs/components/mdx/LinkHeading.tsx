@@ -46,7 +46,11 @@ export const LinkHeading: FC<Props> = ({ children, tableId, ...rest }) => {
           },
         }}
       >
-        <Typography id={id} {...rest}>
+        <Typography
+          className={id.includes('relevant') ? 'relevant' : undefined}
+          id={id}
+          {...rest}
+        >
           {children}{' '}
           <IconButton
             aria-label="Copy link"
