@@ -1,16 +1,16 @@
 import React, { useMemo } from 'react';
 import { Box, Menu, MenuItem } from '@mui/material';
-import type { MRT_FilterOption, MRT_Header, MRT_TableInstance } from '..';
+import type {
+  MRT_FilterOption,
+  MRT_Header,
+  MRT_InternalFilterOption,
+  MRT_TableInstance,
+} from '..';
 import { MRT_Localization } from '../localization';
 
-export const internalFilterOptions = (
+export const mrtFilterOptions = (
   localization: MRT_Localization,
-): {
-  option: string;
-  symbol: string;
-  label: string;
-  divider: boolean;
-}[] => [
+): MRT_InternalFilterOption[] => [
   {
     option: 'fuzzy',
     symbol: '≈',
@@ -118,31 +118,33 @@ export const MRT_FilterOptionMenu = <TData extends Record<string, any> = {}>({
       enabledGlobalFilterOptions,
       columnFilterModeOptions,
       localization,
+      renderColumnFilterModeMenuItems,
+      renderGlobalFilterModeMenuItems,
     },
     setColumnFilterFns,
     setGlobalFilterFn,
   } = table;
-  const { columnFilterFns, globalFilterFn, density } = getState();
+  const { globalFilterFn, density } = getState();
   const { column } = header ?? {};
   const { columnDef } = column ?? {};
 
   const allowedColumnFilterOptions =
     columnDef?.columnFilterModeOptions ?? columnFilterModeOptions;
 
-  const filterOptions = useMemo(
+  const internalFilterOptions = useMemo(
     () =>
-      internalFilterOptions(localization).filter((filterOption) =>
+      mrtFilterOptions(localization).filter((filterOption) =>
         columnDef
           ? allowedColumnFilterOptions === undefined ||
             allowedColumnFilterOptions?.includes(filterOption.option)
           : (!enabledGlobalFilterOptions ||
               enabledGlobalFilterOptions.includes(filterOption.option)) &&
-            ['fuzzy', 'contains'].includes(filterOption.option),
+            ['fuzzy', 'contains', 'startsWith'].includes(filterOption.option),
       ),
     [],
   );
 
-  const handleSelectFilterType = (option: MRT_FilterOption) => {
+  const handleSelectFilterMode = (option: MRT_FilterOption) => {
     if (header && column) {
       setColumnFilterFns((prev: { [key: string]: any }) => ({
         ...prev,
@@ -162,7 +164,8 @@ export const MRT_FilterOptionMenu = <TData extends Record<string, any> = {}>({
     onSelect?.();
   };
 
-  const filterOption = !!header ? columnFilterFns[header.id] : globalFilterFn;
+  const filterOption =
+    !!header && columnDef ? columnDef._filterFn : globalFilterFn;
 
   return (
     <Menu
@@ -174,25 +177,39 @@ export const MRT_FilterOptionMenu = <TData extends Record<string, any> = {}>({
         dense: density === 'compact',
       }}
     >
-      {filterOptions.map(({ option, label, divider, symbol }, index) => (
-        <MenuItem
-          divider={divider}
-          key={index}
-          onClick={() => handleSelectFilterType(option as MRT_FilterOption)}
-          selected={option === filterOption}
-          sx={{
-            py: '6px',
-            my: 0,
-            alignItems: 'center',
-            display: 'flex',
-            gap: '2ch',
-          }}
-          value={option}
-        >
-          <Box sx={{ fontSize: '1.25rem', width: '2ch' }}>{symbol}</Box>
-          {label}
-        </MenuItem>
-      ))}
+      {(header && column
+        ? renderColumnFilterModeMenuItems?.({
+            column: column as any,
+            internalFilterOptions,
+            onSelectFilterMode: handleSelectFilterMode,
+            table,
+          })
+        : renderGlobalFilterModeMenuItems?.({
+            internalFilterOptions,
+            onSelectFilterMode: handleSelectFilterMode,
+            table,
+          })) ??
+        internalFilterOptions.map(
+          ({ option, label, divider, symbol }, index) => (
+            <MenuItem
+              divider={divider}
+              key={index}
+              onClick={() => handleSelectFilterMode(option as MRT_FilterOption)}
+              selected={option === filterOption}
+              sx={{
+                alignItems: 'center',
+                display: 'flex',
+                gap: '2ch',
+                my: 0,
+                py: '6px',
+              }}
+              value={option}
+            >
+              <Box sx={{ fontSize: '1.25rem', width: '2ch' }}>{symbol}</Box>
+              {label}
+            </MenuItem>
+          ),
+        )}
     </Menu>
   );
 };

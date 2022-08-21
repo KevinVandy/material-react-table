@@ -33,9 +33,8 @@ export const MRT_FilterTextField: FC<Props> = ({
   table,
 }) => {
   const {
-    getState,
     options: {
-      enableColumnFilterChangeMode,
+      enableColumnFilterModes,
       columnFilterModeOptions,
       icons: { FilterListIcon, CloseIcon },
       localization,
@@ -46,7 +45,6 @@ export const MRT_FilterTextField: FC<Props> = ({
   } = table;
   const { column } = header;
   const { columnDef } = column;
-  const { columnFilterFns } = getState();
 
   const mTableHeadCellFilterTextFieldProps =
     muiTableHeadCellFilterTextFieldProps instanceof Function
@@ -78,8 +76,7 @@ export const MRT_FilterTextField: FC<Props> = ({
   const isTextboxFilter =
     columnDef.filterVariant === 'text' ||
     (!isSelectFilter && !isMultiSelectFilter);
-
-  const currentFilterOption = columnFilterFns?.[header.id];
+  const currentFilterOption = columnDef._filterFn;
   const filterChipLabel = ['empty', 'notEmpty'].includes(currentFilterOption)
     ? //@ts-ignore
       localization[
@@ -99,8 +96,8 @@ export const MRT_FilterTextField: FC<Props> = ({
   const allowedColumnFilterOptions =
     columnDef?.columnFilterModeOptions ?? columnFilterModeOptions;
   const showChangeModeButton =
-    enableColumnFilterChangeMode &&
-    columnDef.enableColumnFilterChangeMode !== false &&
+    enableColumnFilterModes &&
+    columnDef.enableColumnFilterModes !== false &&
     !rangeFilterIndex &&
     (allowedColumnFilterOptions === undefined ||
       !!allowedColumnFilterOptions?.length);
@@ -299,7 +296,7 @@ export const MRT_FilterTextField: FC<Props> = ({
         }}
         sx={(theme) => ({
           p: 0,
-          minWidth: !filterChipLabel ? '150px' : 'auto',
+          minWidth: !filterChipLabel ? '120px' : 'auto',
           width: '100%',
           '&	.MuiSelect-icon': {
             mr: '1.5rem',

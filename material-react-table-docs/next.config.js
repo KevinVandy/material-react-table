@@ -57,9 +57,8 @@ const withMDX = require('@next/mdx')({
 const { withPlausibleProxy } = require('next-plausible');
 
 module.exports = {
-  ...withPlausibleProxy()({}),
+  ...withPlausibleProxy()({ ...nextConfig }),
   ...withMDX({
     pageExtensions: ['js', 'ts', 'tsx', 'jsx', 'md', 'mdx'],
   }),
-  ...nextConfig,
 };

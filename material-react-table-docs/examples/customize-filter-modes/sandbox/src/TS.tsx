@@ -7,7 +7,7 @@ const Example: FC = () => {
       [
         {
           accessorKey: 'id',
-          enableColumnFilterChangeMode: false, //disable changing filter mode for this column
+          enableColumnFilterModes: false, //disable changing filter mode for this column
           filterFn: 'equals', //set filter mode to equals
           header: 'ID',
         },
@@ -18,7 +18,7 @@ const Example: FC = () => {
         },
         {
           accessorKey: 'middleName',
-          enableColumnFilterChangeMode: false, //disable changing filter mode for this column
+          enableColumnFilterModes: false, //disable changing filter mode for this column
           filterFn: 'startsWith', //even though changing the mode is disabled, you can still set the default filter mode
           header: 'Middle Name',
         },
@@ -76,7 +76,7 @@ const Example: FC = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      enableColumnFilterChangeMode //enable changing filter mode for all columns unless explicitly disabled in a column def
+      enableColumnFilterModes //enable changing filter mode for all columns unless explicitly disabled in a column def
       initialState={{ showColumnFilters: true }} //show filters by default
     />
   );

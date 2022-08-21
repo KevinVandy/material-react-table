@@ -23,7 +23,7 @@ export const MRT_GlobalFilterTextField = <
     getState,
     setGlobalFilter,
     options: {
-      enableGlobalFilterChangeMode,
+      enableGlobalFilterModes,
       icons: { SearchIcon, CloseIcon },
       localization,
       muiSearchTextFieldProps,
@@ -69,7 +69,7 @@ export const MRT_GlobalFilterTextField = <
         value={searchValue ?? ''}
         variant="standard"
         InputProps={{
-          startAdornment: enableGlobalFilterChangeMode ? (
+          startAdornment: enableGlobalFilterModes ? (
             <InputAdornment position="start">
               <Tooltip arrow title={localization.changeSearchMode}>
                 <IconButton

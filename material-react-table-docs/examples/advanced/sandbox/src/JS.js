@@ -103,7 +103,7 @@ const Example = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      enableColumnFilterChangeMode
+      enableColumnFilterModes
       enableColumnOrdering
       enableColumnResizing
       enableGrouping

@@ -198,7 +198,7 @@ export const rootProps = [
     type: 'boolean',
   },
   {
-    propName: 'enableColumnFilterChangeMode',
+    propName: 'enableColumnFilterModes',
     defaultValue: 'false',
     description: '',
     link: '',
@@ -308,7 +308,7 @@ export const rootProps = [
     type: 'boolean',
   },
   {
-    propName: 'enableGlobalFilterChangeMode',
+    propName: 'enableGlobalFilterModes',
     defaultValue: 'true',
     description: '',
     link: '',

@@ -14,13 +14,14 @@ export const MRT_TableHeadCellFilterContainer: FC<Props> = ({
   table,
 }) => {
   const { getState } = table;
-  const { columnFilterFns, showColumnFilters } = getState();
+  const { showColumnFilters } = getState();
   const { column } = header;
+  const { columnDef } = column;
 
   return (
     <Collapse in={showColumnFilters} mountOnEnter unmountOnExit>
       {['between', 'betweenInclusive', 'inNumberRange'].includes(
-        columnFilterFns[column.id],
+        columnDef._filterFn,
       ) ? (
         <MRT_FilterRangeFields header={header} table={table} />
       ) : (

@@ -88,7 +88,7 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
       columns={columns}
       data={data}
       enableColumnActions={!onlyProps}
-      enableColumnFilterChangeMode
+      enableColumnFilterModes
       enableColumnOrdering={!onlyProps}
       enablePagination={false}
       enablePinning

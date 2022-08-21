@@ -159,7 +159,7 @@ export const FilteringChangeModeEnabled: Story<
       },
     ]}
     data={data}
-    enableColumnFilterChangeMode
+    enableColumnFilterModes
     initialState={{ showColumnFilters: true }}
   />
 );
@@ -199,7 +199,7 @@ export const DisableSomeFilterTypesForCertainColumns: Story<
       },
     ]}
     data={data}
-    enableColumnFilterChangeMode
+    enableColumnFilterModes
     initialState={{ showColumnFilters: true }}
   />
 );

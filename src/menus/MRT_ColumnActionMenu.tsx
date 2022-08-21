@@ -34,7 +34,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     toggleAllColumnsVisible,
     setColumnOrder,
     options: {
-      enableColumnFilterChangeMode,
+      enableColumnFilterModes,
       enableColumnFilters,
       enableColumnResizing,
       enableGrouping,
@@ -138,8 +138,8 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     columnDef?.columnFilterModeOptions ?? columnFilterModeOptions;
 
   const showFilterModeSubMenu =
-    enableColumnFilterChangeMode &&
-    columnDef.enableColumnFilterChangeMode !== false &&
+    enableColumnFilterModes &&
+    columnDef.enableColumnFilterModes !== false &&
     !isSelectFilter &&
     (allowedColumnFilterOptions === undefined ||
       !!allowedColumnFilterOptions?.length);

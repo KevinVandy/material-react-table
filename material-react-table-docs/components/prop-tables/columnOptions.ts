@@ -165,7 +165,7 @@ export const columnOptions: ColumnOption[] = [
     type: 'boolean',
   },
   {
-    columnOption: 'enableColumnFilterChangeMode',
+    columnOption: 'enableColumnFilterModes',
     defaultValue: '',
     description: '',
     link: '',

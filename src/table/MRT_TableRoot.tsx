@@ -24,6 +24,7 @@ import {
   getDefaultColumnFilterFn,
   defaultDisplayColumnDefOptions,
   showExpandColumn,
+  getColumnId,
 } from '../column.utils';
 import type {
   MRT_Cell,
@@ -65,13 +66,11 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       {},
       ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef<TData>[]).map(
         (col) => ({
-          [col.id?.toString() ?? col.accessorKey?.toString() ?? '']:
+          [getColumnId(col)]:
             col.filterFn instanceof Function
               ? col.filterFn.name ?? 'custom'
               : col.filterFn ??
-                initialState?.columnFilterFns?.[
-                  col.id?.toString() ?? col.accessorKey?.toString() ?? ''
-                ] ??
+                initialState?.columnFilterFns?.[getColumnId(col)] ??
                 getDefaultColumnFilterFn(col),
         }),
       ),

@@ -25,7 +25,7 @@ export const defaultDisplayColumnDefOptions = {
   enableSorting: false,
 } as Partial<MRT_ColumnDef>;
 
-const getColumnId = <TData extends Record<string, any> = {}>(
+export const getColumnId = <TData extends Record<string, any> = {}>(
   columnDef: MRT_ColumnDef<TData>,
 ): string =>
   columnDef.id ?? columnDef.accessorKey?.toString?.() ?? columnDef.header;

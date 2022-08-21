@@ -6,7 +6,7 @@ const Example = () => {
     () => [
       {
         accessorKey: 'id',
-        enableColumnFilterChangeMode: false, //disable changing filter mode
+        enableColumnFilterModes: false, //disable changing filter mode
         filterFn: 'equals', //set filter mode to equals
         header: 'ID',
       },
@@ -17,7 +17,7 @@ const Example = () => {
       },
       {
         accessorKey: 'middleName',
-        enableColumnFilterChangeMode: false, //disable changing filter mode
+        enableColumnFilterModes: false, //disable changing filter mode
         filterFn: 'startsWith', //even though changing the mode is disabled, you can still set the default filter mode
         header: 'Middle Name',
       },
