@@ -29,7 +29,7 @@ The `accessorKey` must match one of the keys in your data, or else no data will 
 By default, the `accessorKey` will double as the `id` for the column, but if you need the id of the column to be different than the accessorKey, you can use the `id` property in addition.
 
 ```tsx
-const columns = useMemo(
+const columns = useMemo<MRT_ColumnDef<Customer>[]>( //TS helps with the autocomplete while writing columns
   () => [
     {
       accessorKey: 'username', //normal recommended usage of an accessorKey
@@ -48,7 +48,7 @@ const columns = useMemo(
       id: 'age' //id overridden, usually not necessary to do this, but can be helpful
       header: 'Age',
     },
-  ] as MRT_ColumnDef<Customer>[], //TypeScript type here makes the auto-complete work really well!
+  ],
   [],
 );
 ```
@@ -134,3 +134,77 @@ const columns = useMemo(
   [],
 );
 ```
+
+> See the [Customize Components Guide](/docs/guides/customize-components) for more ways to style and customize header and cell components
+
+### Enable or Disable Features Per Column
+
+In the same way that you can pass props to the main `<MaterialReactTable />` component to enable or disable features, you can also specify options on the column definitions to enable or disable features on a per-column basis.
+
+```tsx
+const columns = useMemo(
+  () => [
+    {
+      accessorKey: 'salary',
+      header: 'Salary',
+      enableClickToCopy: true, //enable click to copy on this column
+    },
+    {
+      accessorKey: 'profileImage',
+      header: 'Profile Image',
+      enableSorting: false, //disable sorting on this column
+    },
+  ],
+  [],
+);
+```
+
+> See all the column options you can use in the [Column Options API Reference](/docs/api/column-options)
+
+### Set Column Widths
+
+This is also covered in the [Column Resizing Guide](/docs/guides/column-resizing), but we'll also quickly cover it here.
+
+Setting a CSS (sx or style) width prop will NOT work! Material React Table (really TanStack Table) keep track and set the widths of each column internally.
+
+You CAN, however, change the default width of any column by setting its `size` option on the column definition. `minSize` and `maxSize` are also available to set the minimum and maximum width of the column during resizing.
+
+```tsx
+const columns = [
+  {
+    accessorKey: 'id',
+    header: 'ID',
+    size: 50, //small column
+  },
+  {
+    accessorKey: 'username',
+    header: 'Username',
+    minSize: 100, //min size enforced during resizing
+    maxSize: 200, //max size enforced during resizing
+    size: 180, //medium column
+  },
+  {
+    accessorKey: 'email',
+    header: 'Email',
+    size: 300, //large column
+  },
+];
+```
+
+You may notice however, that the columns may be not change their size as much as you would expect. This is because the browser treats `<th>` and `<td>` elements differently with in a `<table>` element by default.
+
+You can improve this slightly by changing the table layout to `fixed` instead of the default `auto` in the `muiTableProps`.
+
+```tsx
+<MaterialReactTable
+  muiTableProps={{
+    sx: {
+      tableLayout: 'fixed',
+    },
+  }}
+/>
+```
+
+The Columns will still try to increase their width to take up the full width of the table, but the columns that do have a defined size will have their width respected more.
+
+For further reading on how table-layout `fixed` vs `auto` works, we recommend this [blog post](https://css-tricks.com/almanac/properties/t/table-layout/) by CSS-Tricks.

@@ -18,21 +18,20 @@ One of the strengths of Material React Table, is that it exposes a majority of a
 
 Also down below, you will learn [how to customize and use a MUI Theme](#material-ui-theme) to customize colors, typography, or an other default CSS that is used by Material React Table.
 
-### Material UI Props
+### Relevant Props
 
 All of the props labeled `mui...Props` are props that get forwarded to Material UI components. Here is a list of all the props that are exposed in both the root props and column options.
-
-#### Relevant Props
 
 <RootPropTable
   onlyProps={
     new Set([
+      'muiBottomToolbarProps',
       'muiExpandAllButtonProps',
       'muiExpandButtonProps',
       'muiLinearProgressProps',
       'muiSearchTextFieldProps',
-      'muiSelectCheckboxProps',
       'muiSelectAllCheckboxProps',
+      'muiSelectCheckboxProps',
       'muiTableBodyCellCopyButtonProps',
       'muiTableBodyCellEditTextFieldProps',
       'muiTableBodyCellProps',
@@ -54,14 +53,16 @@ All of the props labeled `mui...Props` are props that get forwarded to Material 
       'muiTablePaginationProps',
       'muiTablePaperProps',
       'muiTableProps',
+      'muiToolbarAlertBannerChipProps',
       'muiToolbarAlertBannerProps',
-      'muiBottomToolbarProps',
       'muiTopToolbarProps',
     ])
   }
 />
 
-#### Relevant Column Options
+### Relevant Column Options
+
+Some of the column options expose the same props as above, but on a per column basis.
 
 <ColumnOptionsTable
   onlyProps={
@@ -77,7 +78,7 @@ All of the props labeled `mui...Props` are props that get forwarded to Material 
   }
 />
 
-### Material UI Prop Types
+### Material UI Props and Types
 
 Each prop can either be passed as an object or as a callback function where you get access to the underlying `table` instance, and any other relevant callback parameters such as `cell`, `row`, `column`, etc. This let's you easily run conditional logic on the props you pass. Let's take a look at a few examples.
 
