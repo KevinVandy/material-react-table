@@ -109,7 +109,8 @@ export const MRT_TableBodyCell: FC<Props> = ({
     [isLoading, showSkeletons],
   );
 
-  const handleDoubleClick = (_event: MouseEvent<HTMLTableCellElement>) => {
+  const handleDoubleClick = (event: MouseEvent<HTMLTableCellElement>) => {
+    tableCellProps?.onDoubleClick?.(event);
     if (
       (enableEditing || columnDef.enableEditing) &&
       columnDef.enableEditing !== false &&
@@ -143,7 +144,8 @@ export const MRT_TableBodyCell: FC<Props> = ({
     );
   };
 
-  const handleDragEnter = (_e: DragEvent) => {
+  const handleDragEnter = (e: DragEvent<HTMLTableCellElement>) => {
+    tableCellProps?.onDragEnter?.(e);
     if (enableGrouping && hoveredColumn?.id === 'drop-zone') {
       setHoveredColumn(null);
     }
@@ -179,9 +181,9 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   return (
     <TableCell
-      onDoubleClick={handleDoubleClick}
-      onDragEnter={handleDragEnter}
       {...tableCellProps}
+      onDragEnter={handleDragEnter}
+      onDoubleClick={handleDoubleClick}
       sx={(theme) => ({
         backgroundColor: column.getIsPinned()
           ? alpha(lighten(theme.palette.background.default, 0.04), 0.95)
