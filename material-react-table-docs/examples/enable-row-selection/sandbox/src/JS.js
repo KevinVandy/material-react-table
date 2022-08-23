@@ -61,7 +61,7 @@ const Example = () => {
   useEffect(() => {
     //do something when the row selection changes...
     console.info({ rowSelection });
-  });
+  }, [rowSelection]);
 
   return (
     <MaterialReactTable
