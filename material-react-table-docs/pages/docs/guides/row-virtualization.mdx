@@ -17,7 +17,13 @@ Virtualization is useful when you have a lot of data you want to display client-
 ### Relevant Props
 
 <RootPropTable
-  onlyProps={new Set(['enableRowVirtualization', 'virtualizerProps'])}
+  onlyProps={
+    new Set([
+      'enableRowVirtualization',
+      'virtualizerProps',
+      'virtualizerInstanceRef',
+    ])
+  }
 />
 
 ### What is Virtualization?

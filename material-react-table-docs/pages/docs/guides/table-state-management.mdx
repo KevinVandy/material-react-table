@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
-// import Example from '../../../examples/fully-managed-state';
+import RowSelectionExample from '../../../examples/enable-row-selection';
 
 <Head>
   <title>Table State Management Guide - Material React Table Docs</title>
@@ -12,12 +12,42 @@ import RootPropTable from '../../../components/prop-tables/RootPropTable';
 
 ## Table State Management Guide
 
-Material React Table does not try to hide any of its internal state from you. You can access it and manage it yourself.
+Material React Table does not try to hide any of its internal state from you. You can access it and manage it yourself if you need to, or you can simply read from the internal state
 
 This is optional, of course. If you don't need access to some of the state, you do not need to do anything and it will just automatically be managed internally. See the [State Options API Docs](/docs/api/state-options) for more information on which states are available for you to manage.
 
 ### Relevant Props
 
-<RootPropTable onlyProps={new Set(['initialState', 'state'])} />
+<RootPropTable
+  onlyProps={new Set(['initialState', 'state', 'tableInstanceRef'])}
+/>
+
+### Access the Underlying Table Instance Reference
+
+Before jumping in and managing a bunch of state yourself, you should first see if you actually need to.
+
+### Populate Initial State
+
+If all you care is setting parts of the initial or default state when the table mounts, then you may be able to specify that state in the `initialState` prop and not have to worry about managing the state yourself.
+
+For example, let's say you don't need access to the `showColumnFilters` state, but you want to set the default value to `true` when the table mounts. You can do that with the `initialState` prop:
+
+```tsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  initialState={{
+    showColumnFilters: true,
+  }}
+/>
+```
 
 ### Manage Individual States as Needed
+
+It is pretty common to need to manage certain state yourself, so that you can react to changes in that state, or have easy access to it when sending it to an API.
+
+Here is an example of how you might manage the `rowSelection` state yourself:
+
+<RowSelectionExample />
+
+### Add Side Effects in Set State Callbacks
