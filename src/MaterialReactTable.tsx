@@ -40,7 +40,7 @@ import type {
   TableOptions,
   TableState,
 } from '@tanstack/react-table';
-import type { Options as VirtualizerOptions } from 'react-virtual';
+import type { Options as VirtualizerOptions, VirtualItem } from 'react-virtual';
 // import type { VirtualizerOptions } from '@tanstack/react-virtual';
 import { MRT_AggregationFns } from './aggregationFns';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
@@ -841,6 +841,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     rowNumberMode?: 'original' | 'static';
     selectAllMode?: 'all' | 'page';
     state?: Partial<MRT_TableState<TData>>;
+    tableInstanceRef?: MutableRefObject<MRT_TableInstance<TData> | null>;
     virtualizerProps?:
       | Partial<VirtualizerOptions<HTMLDivElement>>
       | (({
@@ -855,7 +856,16 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     //     }: {
     //       table: MRT_TableInstance<TData>;
     //     }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>);
+    virtualizerInstanceRef?: MutableRefObject<Virtualizer | null>;
   };
+
+export type Virtualizer = {
+  virtualItems: VirtualItem[];
+  totalSize: number;
+  scrollToOffset: (index: number, options?: any | undefined) => void;
+  scrollToIndex: (index: number, options?: any | undefined) => void;
+  measure: () => void;
+};
 
 export default <TData extends Record<string, any> = {}>({
   aggregationFns,
@@ -865,7 +875,6 @@ export default <TData extends Record<string, any> = {}>({
   editingMode = 'modal',
   enableBottomToolbar = true,
   enableColumnActions = true,
-  enableColumnFilterModes = false,
   enableColumnFilters = true,
   enableColumnOrdering = false,
   enableColumnResizing = false,
@@ -874,7 +883,6 @@ export default <TData extends Record<string, any> = {}>({
   enableFilters = true,
   enableFullScreenToggle = true,
   enableGlobalFilter = true,
-  enableGlobalFilterModes = false,
   enableGlobalFilterRankedResults = true,
   enableGrouping = false,
   enableHiding = true,

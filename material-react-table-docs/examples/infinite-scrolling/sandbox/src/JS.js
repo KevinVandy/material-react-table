@@ -41,6 +41,7 @@ const fetchSize = 25;
 
 const Example = () => {
   const tableContainerRef = useRef(null); //we can get access to the underlying TableContainer element and react to its scroll events
+  const virtualizerInstanceRef = useRef < Virtualizer > null; //we can get access to the underlying Virtualizer instance and call its scrollToIndex method
 
   const [columnFilters, setColumnFilters] = useState([]);
   const [globalFilter, setGlobalFilter] = useState();
@@ -96,6 +97,13 @@ const Example = () => {
     [fetchNextPage, isFetching, totalFetched, totalDBRowCount],
   );
 
+  //scroll to top of table when sorting or filters change
+  useEffect(() => {
+    if (virtualizerInstanceRef.current) {
+      virtualizerInstanceRef.current.scrollToIndex(0);
+    }
+  }, [sorting, columnFilters, globalFilter]);
+
   //a check on mount to see if the table is already scrolled to the bottom and immediately needs to fetch more data
   useEffect(() => {
     fetchMoreOnBottomReached(tableContainerRef.current);
@@ -141,6 +149,7 @@ const Example = () => {
         showProgressBars: isFetching,
         sorting,
       }}
+      virtualizerInstanceRef={virtualizerInstanceRef} //get access to the virtualizer instance
     />
   );
 };

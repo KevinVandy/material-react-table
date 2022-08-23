@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, {
   MaterialReactTableProps,
   MRT_ColumnDef,
+  MRT_TableInstance,
 } from '../../src';
 import { faker } from '@faker-js/faker';
+import { Button } from '@mui/material';
 
 const meta: Meta = {
   title: 'Features/Selection Examples',
@@ -69,3 +71,25 @@ export const SelectCheckboxSecondaryColor: Story<
     muiSelectCheckboxProps={{ color: 'secondary' }}
   />
 );
+
+export const SelectionWithInstanceRef: Story<MaterialReactTableProps> = () => {
+  const tableInstanceRef = useRef<MRT_TableInstance<typeof data[0]>>(null);
+
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      enableRowSelection
+      tableInstanceRef={tableInstanceRef}
+      renderTopToolbarCustomActions={() => (
+        <Button
+          onClick={() =>
+            console.info(tableInstanceRef.current?.getSelectedRowModel().rows)
+          }
+        >
+          Log Selected Rows
+        </Button>
+      )}
+    />
+  );
+};

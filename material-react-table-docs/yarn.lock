@@ -2181,10 +2181,10 @@ markdown-extensions@^1.0.0:
   resolved "https://registry.yarnpkg.com/markdown-extensions/-/markdown-extensions-1.1.1.tgz#fea03b539faeaee9b4ef02a3769b455b189f7fc3"
   integrity sha512-WWC0ZuMzCyDHYCasEGs4IPvLyTGftYwh6wIEOULOF0HXcqZlhwRzrK0w2VUlxWA98xnvb/jszw4ZSkJ6ADpM6Q==
 
-material-react-table@^0.39.0:
-  version "0.39.0"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.39.0.tgz#9420eaa93ea2c5769163393daeaeeca7cf4c7c65"
-  integrity sha512-KvaiedcdQAFc9AkKVtocqYHLvQYaRcowVt+cxI4yU2CL2RBXgnquD27UQQcgq1hxOq3DMpYAwyjd7pTS0iRnUg==
+material-react-table@^0.40.1:
+  version "0.40.1"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.40.1.tgz#e05c0027ea4bd6be7bd181725b9b09dc4d8137d5"
+  integrity sha512-QlpQ+8+6w7CiZozJ/2lQ/HSvQAebUzgbOdYVJAcY8qoxGAJqnLpzrar8fa8lzObluuY8VROkSw56W3jd4fDnSA==
   dependencies:
     "@tanstack/match-sorter-utils" "8.1.1"
     "@tanstack/react-table" "8.5.11"

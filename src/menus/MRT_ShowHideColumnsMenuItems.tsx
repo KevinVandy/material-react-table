@@ -84,7 +84,7 @@ export const MRT_ShowHideColumnsMenuItems = <
   };
 
   const handleDragEnter = (_e: DragEvent) => {
-    if (!isDragging) {
+    if (!isDragging && columnDef.enableColumnOrdering !== false) {
       setHoveredColumn(column);
     }
   };

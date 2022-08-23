@@ -54,6 +54,10 @@ const Example = () => {
         accessorKey: 'petName',
         header: 'Pet Name',
       },
+      {
+        accessorKey: 'age',
+        header: 'Age',
+      },
     ],
     [],
     //end

@@ -47,6 +47,17 @@ export const ColumnGroupingEnabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableGrouping />
 );
 
+export const ColumnGroupingNoDragHandles: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableGrouping
+    enableColumnDragging={false}
+  />
+);
+
 export const ColumnGroupingEnabledDropZoneBottom: Story<
   MaterialReactTableProps
 > = () => (

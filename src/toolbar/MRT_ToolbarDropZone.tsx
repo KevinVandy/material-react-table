@@ -13,14 +13,22 @@ export const MRT_ToolbarDropZone: FC<Props> = ({ table }) => {
     setHoveredColumn,
   } = table;
 
-  const { draggingColumn, hoveredColumn } = getState();
+  const { draggingColumn, hoveredColumn, grouping } = getState();
 
   const handleDragEnter = (_event: DragEvent<HTMLDivElement>) => {
     setHoveredColumn({ id: 'drop-zone' });
   };
 
   return (
-    <Fade unmountOnExit mountOnEnter in={!!enableGrouping && !!draggingColumn}>
+    <Fade
+      unmountOnExit
+      mountOnEnter
+      in={
+        !!enableGrouping &&
+        !!draggingColumn &&
+        !grouping.includes(draggingColumn.id)
+      }
+    >
       <Box
         sx={(theme) => ({
           alignItems: 'center',

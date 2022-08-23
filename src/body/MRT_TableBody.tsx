@@ -1,5 +1,5 @@
-import React, { FC, RefObject, useMemo } from 'react';
-import { useVirtual } from 'react-virtual';
+import React, { FC, RefObject, useEffect, useMemo } from 'react';
+import { useVirtual } from 'react-virtual'; //stuck on v2 for now
 // import { useVirtualizer, Virtualizer } from '@tanstack/react-virtual';
 import { TableBody } from '@mui/material';
 import { MRT_TableBodyRow } from './MRT_TableBodyRow';
@@ -22,6 +22,7 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
       enableRowVirtualization,
       muiTableBodyProps,
       virtualizerProps,
+      virtualizerInstanceRef,
     },
   } = table;
   const { globalFilter, pagination, sorting } = getState();
@@ -62,7 +63,7 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
     globalFilter,
   ]);
 
-  const rowVirtualizer = enableRowVirtualization
+  const virtualizer = enableRowVirtualization
     ? useVirtual({
         size: rows.length,
         parentRef: tableContainerRef,
@@ -71,7 +72,13 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
       })
     : ({} as any);
 
-  // const rowVirtualizer: Virtualizer = enableRowVirtualization
+  useEffect(() => {
+    if (virtualizerInstanceRef) {
+      virtualizerInstanceRef.current = virtualizer;
+    }
+  }, [virtualizer]);
+
+  // const virtualizer: Virtualizer = enableRowVirtualization
   //   ? useVirtualizer({
   //       count: rows.length,
   //       estimateSize: () => (density === 'compact' ? 25 : 50),
@@ -81,12 +88,10 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
   //     })
   //   : ({} as any);
 
-  const virtualRows = enableRowVirtualization
-    ? rowVirtualizer.virtualItems
-    : [];
+  const virtualRows = enableRowVirtualization ? virtualizer.virtualItems : [];
 
   // const virtualRows = enableRowVirtualization
-  //   ? rowVirtualizer.getVirtualItems()
+  //   ? virtualizer.getVirtualItems()
   //   : [];
 
   let paddingTop = 0;
@@ -94,13 +99,13 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
   if (enableRowVirtualization) {
     paddingTop = !!virtualRows.length ? virtualRows[0].start : 0;
     paddingBottom = !!virtualRows.length
-      ? rowVirtualizer.totalSize - virtualRows[virtualRows.length - 1].end
+      ? virtualizer.totalSize - virtualRows[virtualRows.length - 1].end
       : 0;
   }
   // if (enableRowVirtualization) {
   //   paddingTop = !!virtualRows.length ? virtualRows[0].start : 0;
   //   paddingBottom = !!virtualRows.length
-  //     ? rowVirtualizer.getTotalSize() - virtualRows[virtualRows.length - 1].end
+  //     ? virtualizer.getTotalSize() - virtualRows[virtualRows.length - 1].end
   //     : 0;
   // }
 

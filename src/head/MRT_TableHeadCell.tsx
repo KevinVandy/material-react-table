@@ -28,8 +28,13 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
     },
     setHoveredColumn,
   } = table;
-  const { density, draggingColumn, hoveredColumn, showColumnFilters } =
-    getState();
+  const {
+    density,
+    draggingColumn,
+    grouping,
+    hoveredColumn,
+    showColumnFilters,
+  } = getState();
   const { column } = header;
   const { columnDef } = column;
   const { columnDefType } = columnDef;
@@ -221,17 +226,20 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
           </Box>
           {columnDefType !== 'group' && (
             <Box sx={{ whiteSpace: 'nowrap' }}>
-              {((enableColumnDragging &&
-                columnDef.enableColumnDragging !== false) ||
-                (enableColumnOrdering &&
-                  columnDef.enableColumnOrdering !== false) ||
-                (enableGrouping && columnDef.enableGrouping !== false)) && (
-                <MRT_TableHeadCellGrabHandle
-                  column={column}
-                  table={table}
-                  tableHeadCellRef={tableHeadCellRef}
-                />
-              )}
+              {enableColumnDragging !== false &&
+                columnDef.enableColumnDragging !== false &&
+                (enableColumnDragging ||
+                  (enableColumnOrdering &&
+                    columnDef.enableColumnOrdering !== false) ||
+                  (enableGrouping &&
+                    columnDef.enableGrouping !== false &&
+                    !grouping.includes(column.id))) && (
+                  <MRT_TableHeadCellGrabHandle
+                    column={column}
+                    table={table}
+                    tableHeadCellRef={tableHeadCellRef}
+                  />
+                )}
               {(enableColumnActions || columnDef.enableColumnActions) &&
                 columnDef.enableColumnActions !== false && (
                   <MRT_TableHeadCellColumnActionsButton

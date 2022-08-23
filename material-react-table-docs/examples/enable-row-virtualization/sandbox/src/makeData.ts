@@ -12,6 +12,7 @@ export type Person = {
   state: string;
   country: string;
   petName: string;
+  age: number;
 };
 
 export const makeData = (numberOfRows: number) =>
@@ -27,4 +28,5 @@ export const makeData = (numberOfRows: number) =>
     state: faker.address.state(),
     country: faker.address.country(),
     petName: faker.animal.cat(),
+    age: faker.datatype.float({ min: 0, max: 100 }),
   }));

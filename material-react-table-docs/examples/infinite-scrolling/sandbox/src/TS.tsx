@@ -7,7 +7,10 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, {
+  MRT_ColumnDef,
+  Virtualizer,
+} from 'material-react-table';
 import { Typography } from '@mui/material';
 import type { ColumnFiltersState, SortingState } from '@tanstack/react-table';
 import {
@@ -59,6 +62,7 @@ const fetchSize = 25;
 
 const Example: FC = () => {
   const tableContainerRef = useRef<HTMLDivElement>(null); //we can get access to the underlying TableContainer element and react to its scroll events
+  const virtualizerInstanceRef = useRef<Virtualizer>(null); //we can get access to the underlying Virtualizer instance and call its scrollToIndex method
 
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState<string>();
@@ -114,6 +118,13 @@ const Example: FC = () => {
     [fetchNextPage, isFetching, totalFetched, totalDBRowCount],
   );
 
+  //scroll to top of table when sorting or filters change
+  useEffect(() => {
+    if (virtualizerInstanceRef.current) {
+      virtualizerInstanceRef.current.scrollToIndex(0);
+    }
+  }, [sorting, columnFilters, globalFilter]);
+
   //a check on mount to see if the table is already scrolled to the bottom and immediately needs to fetch more data
   useEffect(() => {
     fetchMoreOnBottomReached(tableContainerRef.current);
@@ -159,6 +170,7 @@ const Example: FC = () => {
         showProgressBars: isFetching,
         sorting,
       }}
+      virtualizerInstanceRef={virtualizerInstanceRef} //get access to the virtualizer instance
     />
   );
 };

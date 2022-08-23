@@ -11,7 +11,7 @@ export type PropRow = {
   type?: string;
 };
 
-export const rootProps = [
+export const rootProps: PropRow[] = [
   {
     propName: 'aggregationFns',
     defaultValue: '',
@@ -45,7 +45,7 @@ export const rootProps = [
     type: 'boolean',
   },
   {
-    propName: 'autoResetPagination',
+    propName: 'autoResetPageIndex',
     defaultValue: '',
     description:
       'If set to true, pagination will be reset to the first page when page-altering state changes eg. data is updated, filters change, grouping changes, etc.',
@@ -799,16 +799,6 @@ export const rootProps = [
   },
   {
     propName: 'isMultiSortEvent',
-    defaultValue: '',
-    description: '',
-    link: '',
-    linkText: '',
-    required: false,
-    source: '',
-    type: '',
-  },
-  {
-    propName: 'key',
     defaultValue: '',
     description: '',
     link: '',
@@ -1678,6 +1668,16 @@ export const rootProps = [
     type: '',
   },
   {
+    propName: 'tableInstanceRef',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '',
+  },
+  {
     propName: 'virtualizerProps',
     defaultValue: '',
     description: '',
@@ -1687,4 +1687,14 @@ export const rootProps = [
     source: '',
     type: '',
   },
-] as PropRow[];
+  {
+    propName: 'virtualizerInstanceRef',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '',
+  },
+];

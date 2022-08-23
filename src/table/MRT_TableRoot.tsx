@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   TableState,
   getCoreRowModel,
@@ -134,7 +134,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
               <MRT_ToggleRowActionMenuButton
                 cell={cell as any}
                 row={row as any}
-                table={table}
+                table={table as any}
               />
             ),
             header: props.localization?.actions,
@@ -146,11 +146,11 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
           columnOrder.includes('mrt-row-expand') &&
             showExpandColumn(props, grouping) && {
               Cell: ({ row }) => (
-                <MRT_ExpandButton row={row as any} table={table} />
+                <MRT_ExpandButton row={row as any} table={table as any} />
               ),
               Header: () =>
                 props.enableExpandAll ? (
-                  <MRT_ExpandAllButton table={table} />
+                  <MRT_ExpandAllButton table={table as any} />
                 ) : null,
               header: props.localization?.expand,
               size: 60,
@@ -160,11 +160,11 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
             },
           columnOrder.includes('mrt-row-select') && {
             Cell: ({ row }) => (
-              <MRT_SelectCheckbox row={row as any} table={table} />
+              <MRT_SelectCheckbox row={row as any} table={table as any} />
             ),
             Header: () =>
               props.enableSelectAll ? (
-                <MRT_SelectCheckbox selectAll table={table} />
+                <MRT_SelectCheckbox selectAll table={table as any} />
               ) : null,
             header: props.localization?.select,
             size: 60,
@@ -301,7 +301,13 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
     setShowAlertBanner: props.onShowAlertBannerChange ?? setShowAlertBanner,
     setShowFilters: props.onShowFiltersChange ?? setShowFilters,
     setShowGlobalFilter: props.onShowGlobalFilterChange ?? setShowGlobalFilter,
-  } as MRT_TableInstance;
+  } as MRT_TableInstance<TData>;
+
+  useEffect(() => {
+    if (props.tableInstanceRef) {
+      props.tableInstanceRef.current = table;
+    }
+  }, [table]);
 
   return (
     <>
@@ -315,9 +321,9 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
         open={isFullScreen}
         transitionDuration={400}
       >
-        <MRT_TablePaper table={table} />
+        <MRT_TablePaper table={table as any} />
       </Dialog>
-      {!isFullScreen && <MRT_TablePaper table={table} />}
+      {!isFullScreen && <MRT_TablePaper table={table as any} />}
       {editingRow && props.editingMode === 'modal' && (
         <MRT_EditRowModal row={editingRow as any} table={table} open />
       )}
