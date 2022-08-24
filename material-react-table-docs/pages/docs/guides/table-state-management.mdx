@@ -12,9 +12,9 @@ import RowSelectionExample from '../../../examples/enable-row-selection';
 
 ## Table State Management Guide
 
-Material React Table does not try to hide any of its internal state from you. You can access it and manage it yourself if you need to, or you can simply read from the internal state
+Material React Table does not try to hide any of its internal state from you. You store your own reference to the entire table instance wherever you need to, initialize state with custom initial values, or manage individual states yourself as you discover the need to have access to them.
 
-This is optional, of course. If you don't need access to some of the state, you do not need to do anything and it will just automatically be managed internally. See the [State Options API Docs](/docs/api/state-options) for more information on which states are available for you to manage.
+This is all optional, of course. If you don't need access to some of the state, you do not need to do anything and it will just automatically be managed internally. See the [State Options API Docs](/docs/api/state-options) for more information on which states are available for you to manage.
 
 ### Relevant Props
 
@@ -25,6 +25,62 @@ This is optional, of course. If you don't need access to some of the state, you 
 ### Access the Underlying Table Instance Reference
 
 Before jumping in and managing a bunch of state yourself, you should first see if you actually need to.
+
+You can store a reference to the underlying table instance by using the `tableInstanceRef` prop. This is a mutable ref object that will be populated with the table instance once the table has been initialized internally. This reference can be very useful, especially if you need it for components that are rendered outside of `<MaterialReactTable />`.
+
+```tsx
+//must initialize with null to make TS happy
+const tableInstanceRef = useRef<MRT_TableInstance<YourDataType>>(null);
+
+const someEventHandler = (event) => {
+  console.info(tableInstanceRef.current?.getRowModel().rows); //example - get access to all page rows in the table
+  console.info(tableInstanceRef.current?.getExpandedRowModel()); //example - get access to all selected rows in the table
+  console.info(tableInstanceRef.current?.getState().sorting); //example - get access to the current sorting state
+};
+
+return (
+  <div>
+    <ExternalButton onClick={someEventHandler}>
+      Export or Something
+    </ExternalButton>
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      tableInstanceRef={tableInstanceRef}
+    />
+  </div>
+);
+```
+
+The table instance is the same object that you will also see as a provided parameter in many of the other callback functions throughout Material React Table, such as all the `render...` props or the `Cell` or `Header` render overrides in the column definition options.
+
+```tsx
+const tableInstanceRef = useRef(null);
+
+const columns = useMemo(
+  () => [
+    {
+      Header: 'Name',
+      accessor: 'name',
+      Cell: ({ cell, table }) => <span>{cell.getValue()}</span>,
+      //The `table` parameter from the Cell option params and the `tableInstanceRef.current` are the same object
+    },
+  ],
+  [],
+);
+
+return (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    tableInstanceRef={tableInstanceRef}
+    renderTopToolbarCustomActions={({ table }) => {
+      //The `table` parameter and the `tableInstanceRef.current` are the same object
+      return <Button>Button</Button>;
+    }}
+  />
+);
+```
 
 ### Populate Initial State
 
@@ -42,12 +98,64 @@ For example, let's say you don't need access to the `showColumnFilters` state, b
 />
 ```
 
+> Note: If you use both `initialState` and `state`, the state initializer in `state` prop will take precedence and overwrite the same state values in `initialState`. So just use either `initialState` or `state`, not both for the same state.
+
 ### Manage Individual States as Needed
 
 It is pretty common to need to manage certain state yourself, so that you can react to changes in that state, or have easy access to it when sending it to an API.
 
-Here is an example of how you might manage the `rowSelection` state yourself:
+You can pass in any state that you are managing yourself to the `state` prop, and it will be used instead of the internal state. Each state property option also has a corresponding `on[StateName]Change` callback that you can use set/update your managed state as it changes internally in the table.
+
+For example, let's say you need to store the pagination state in a place where you can easily access it in order to use it in parameters for an API call.
+
+```tsx
+const [pagination, setPagination] = useState({
+  pageIndex: 0,
+  pageSize: 15, //set different default page size by initializing the state here
+});
+
+//see example at bottom of page for alternatives to useEffect here
+useEffect(() => {
+  //do something when the pagination state changes
+}, [paginationState]);
+
+return (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    state={{ pagination }}
+    onPaginationChange={setPagination}
+  />
+);
+```
+
+Here is another full example for how you might manage the `rowSelection` state yourself:
 
 <RowSelectionExample />
 
 ### Add Side Effects in Set State Callbacks
+
+In React 18 and beyond, it is becoming more discouraged to use `useEffect` to react to state changes, because in React Strict Mode (and maybe future versions of React), the useEffect hook may run twice per render. Instead, more event driven functions are recommended to be used. Here is an example for how that looks here. The callback signature for the `on[StateName]Change` functions is a bit strange, so pay attention to the example below.
+
+```tsx
+const [pagination, setPagination] = useState({
+  pageIndex: 0,
+  pageSize: 15,
+});
+
+const handlePaginationChange = (updater: Updater<PaginationState>) => {//Updater is a type from @tanstack/react-table
+  //TanStack Table requires this strange syntax since updater can be a function to update the state or the new state itself
+  setPagination((prevPagination) => updater instanceOf Function ? updater(prevPagination) : updater);
+
+  //put more code for your side effects here, guaranteed to only run once, even in React Strict Mode
+}
+
+return (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    state={{ pagination }}
+    onPaginationChange={handlePaginationChange}
+  />
+);
+```
