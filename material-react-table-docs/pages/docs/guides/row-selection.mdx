@@ -61,7 +61,7 @@ By default, the `row.id` for each row in the table is simply the index of the ro
   data={data}
   columns={columns}
   enableRowSelection
-  getRowId={(row) => row.original.userId}
+  getRowId={(originalRow) => originalRow.userId}
 />
 ```
 
