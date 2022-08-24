@@ -90,6 +90,8 @@ const Example = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
+      enableRowSelection
+      getRowId={(row) => row.phoneNumber}
       initialState={{ showColumnFilters: true }}
       manualFiltering
       manualPagination
