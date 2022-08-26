@@ -49,7 +49,8 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({
     setAnchorEl(event.currentTarget);
   };
 
-  const handleStartEditMode = () => {
+  const handleStartEditMode = (event: MouseEvent) => {
+    event.stopPropagation();
     setEditingRow({ ...row });
     setAnchorEl(null);
   };

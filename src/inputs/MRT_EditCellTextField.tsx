@@ -2,7 +2,6 @@ import React, {
   ChangeEvent,
   FocusEvent,
   KeyboardEvent,
-  MouseEvent,
   useState,
 } from 'react';
 import { TextField, TextFieldProps } from '@mui/material';
@@ -101,11 +100,14 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
       label={showLabel ? column.columnDef.header : undefined}
       margin="none"
       name={column.id}
-      onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
       placeholder={columnDef.header}
       value={value}
       variant="standard"
       {...textFieldProps}
+      onClick={(e) => {
+        e.stopPropagation();
+        textFieldProps?.onClick?.(e);
+      }}
       onBlur={handleBlur}
       onChange={handleChange}
       onKeyDown={handleEnterKeyDown}

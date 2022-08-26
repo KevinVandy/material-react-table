@@ -37,6 +37,10 @@ export const MRT_GrabHandleButton = <TData extends Record<string, any> = {}>({
         onDragEnd={onDragEnd}
         size="small"
         {...iconButtonProps}
+        onClick={(e) => {
+          e.stopPropagation();
+          iconButtonProps?.onClick?.(e);
+        }}
         sx={(theme) => ({
           cursor: 'grab',
           m: 0,

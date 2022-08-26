@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { MouseEvent, ReactNode, useState } from 'react';
 import { Button, Tooltip } from '@mui/material';
 import { MRT_Cell, MRT_TableInstance } from '..';
 
@@ -21,7 +21,8 @@ export const MRT_CopyButton = <TData extends Record<string, any> = {}>({
 
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = (text: unknown) => {
+  const handleCopy = (event: MouseEvent, text: unknown) => {
+    event.stopPropagation();
     navigator.clipboard.writeText(text as string);
     setCopied(true);
     setTimeout(() => setCopied(false), 4000);
@@ -54,7 +55,7 @@ export const MRT_CopyButton = <TData extends Record<string, any> = {}>({
       title={copied ? localization.copiedToClipboard : localization.clickToCopy}
     >
       <Button
-        onClick={() => handleCopy(cell.getValue())}
+        onClick={(e) => handleCopy(e, cell.getValue())}
         size="small"
         type="button"
         variant="text"

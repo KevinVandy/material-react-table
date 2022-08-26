@@ -47,7 +47,10 @@ export const MRT_EditActionButtons = <TData extends Record<string, any> = {}>({
   };
 
   return (
-    <Box sx={{ display: 'flex', gap: '0.75rem' }}>
+    <Box
+      onClick={(e) => e.stopPropagation()}
+      sx={{ display: 'flex', gap: '0.75rem' }}
+    >
       {variant === 'icon' ? (
         <>
           <Tooltip arrow title={localization.cancel}>

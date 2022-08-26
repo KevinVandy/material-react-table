@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEvent } from 'react';
 import { Box, ListItemIcon, Menu, MenuItem } from '@mui/material';
 import type { MRT_Row, MRT_TableInstance } from '..';
 import {
@@ -8,7 +8,7 @@ import {
 
 interface Props {
   anchorEl: HTMLElement | null;
-  handleEdit: () => void;
+  handleEdit: (event: MouseEvent) => void;
   row: MRT_Row;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
   table: MRT_TableInstance;

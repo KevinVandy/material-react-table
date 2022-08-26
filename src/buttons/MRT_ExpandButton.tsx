@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEvent } from 'react';
 import { IconButton, Tooltip } from '@mui/material';
 import type { MRT_Row, MRT_TableInstance } from '..';
 
@@ -24,8 +24,10 @@ export const MRT_ExpandButton: FC<Props> = ({ row, table }) => {
       ? muiExpandButtonProps({ table, row })
       : muiExpandButtonProps;
 
-  const handleToggleExpand = () => {
+  const handleToggleExpand = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     row.toggleExpanded();
+    iconButtonProps?.onClick?.(event);
   };
 
   return (
@@ -39,8 +41,8 @@ export const MRT_ExpandButton: FC<Props> = ({ row, table }) => {
         <IconButton
           aria-label={localization.expand}
           disabled={!row.getCanExpand() && !renderDetailPanel}
-          onClick={handleToggleExpand}
           {...iconButtonProps}
+          onClick={handleToggleExpand}
           sx={(theme) => ({
             height: density === 'compact' ? '1.75rem' : '2.25rem',
             width: density === 'compact' ? '1.75rem' : '2.25rem',

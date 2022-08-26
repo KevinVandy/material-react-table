@@ -58,6 +58,10 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, table }) => {
         }
         size={density === 'compact' ? 'small' : 'medium'}
         {...checkboxProps}
+        onClick={(e) => {
+          e.stopPropagation();
+          checkboxProps?.onClick?.(e);
+        }}
         sx={(theme) => ({
           height: density === 'compact' ? '1.75rem' : '2.5rem',
           width: density === 'compact' ? '1.75rem' : '2.5rem',
