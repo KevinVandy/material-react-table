@@ -24,9 +24,9 @@ Filtering is one of the most powerful features of Material React Table and is en
 <RootPropTable
   onlyProps={
     new Set([
+      'columnFilterModeOptions',
       'enableColumnFilterModes',
       'enableColumnFilters',
-      'columnFilterModeOptions',
       'enableFilters',
       'filterFromLeafRows',
       'getFilteredRowModel',
@@ -35,6 +35,8 @@ Filtering is one of the most powerful features of Material React Table and is en
       'onColumnFiltersChange',
       'onFilterFnsChange',
       'onShowFiltersChange',
+      'filterFns',
+      'renderColumnFilterModeMenuItems',
     ])
   }
 />
@@ -70,6 +72,8 @@ Various subsets of filtering features can be disabled. If you want to disable fi
 <DisableExample />
 
 ### Custom Filter Functions
+
+#### Custom Filter Functions Per Column
 
 By default, Material React Table uses a `fuzzy` filtering algorithm based on the popular `match-sorter` [library from Kent C. Dodds](https://www.npmjs.com/package/match-sorter). However, Material React Table also comes with numerous other filter functions that you can specify per column in the `filterFn` column options.
 
@@ -109,11 +113,37 @@ If you provide a custom filter function, it must have the following signature:
 
 This function will be used to filter 1 row at a time, and should return a `boolean` indicating whether or not that row passes the filter.
 
+#### Add Custom Filter Functions
+
+You can add custom filter functions to the `filterFns` prop. These will be available to all columns to use. The `filterFn` prop on a column will override any filter function with the same name in the `filterFns` prop.
+
+```tsx
+const columns = [
+  {
+    accessorKey: 'name',
+    header: 'Name',
+    filterFn: 'customFilterFn',
+  },
+];
+
+return (
+  <MaterialReactTable
+    data={data}
+    columns={columns}
+    filterFns={{
+      customFilterFn: (row, id, filterValue) => {
+        return row.customField === value;
+      },
+    }}
+  />
+);
+```
+
 ### Filter Modes
 
-#### Enable Column Filter Change Mode
+#### Enable Column Filter Modes (Filter Switching)
 
-If you want to let the user switch between multiple different filter modes from a dropdown menu on the Filter Textfield, you can enable that with the `enableColumnFilterModes` prop or column option.
+If you want to let the user switch between multiple different filter modes from a dropdown menu on the Filter Textfield, you can enable that with the `enableColumnFilterModes` prop or column option. This will enable the filter icon in the filter text field to open a dropdown menu with the available filter modes when clicked.
 
 ```tsx
 <MaterialReactTable columns={columns} data={data} enableColumnFilterModes />
@@ -137,6 +167,42 @@ const columns = [
   },
   }
 ]
+```
+
+#### Render Custom Filter Mode Menu
+
+You can also render custom menu items in the filter mode dropdown menu by setting the `renderColumnFilterModeMenuItems` prop or column option. This option is a function that takes in the column and returns an array of `MenuItem` components. This is useful if you want to add custom filter modes that are not included in Material React Table, or if you just want to render the menu in your own custom way
+
+```tsx
+const columns = [
+  {
+    accessorKey: 'firstName',
+    header: 'First Name',
+    renderColumnFilterModeMenuItems: ({ column, onSelectFilterMode }) => [
+      <MenuItem
+        key="startsWith"
+        onClick={() => onSelectFilterMode('startsWith')}
+      >
+        Start With
+      </MenuItem>,
+      <MenuItem
+        key="endsWith"
+        onClick={() => onSelectFilterMode('yourCustomFilterFn')}
+      >
+        Your Custom Filter Fn
+      </MenuItem>,
+    ],
+  },
+];
+
+return (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnFilterModes
+    // renderColumnFilterModeMenuItems could go here if you want to apply to all columns
+  />
+);
 ```
 
 <CustomizeFilterModesExample />

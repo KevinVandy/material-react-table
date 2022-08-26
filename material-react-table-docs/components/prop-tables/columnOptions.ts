@@ -485,4 +485,14 @@ export const columnOptions: ColumnOption[] = [
     required: false,
     type: 'false | 1 | -1',
   },
+  {
+    columnOption: 'renderColumnFilterModeMenuItems',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    source: 'MRT',
+    required: false,
+    type: '',
+  },
 ];
