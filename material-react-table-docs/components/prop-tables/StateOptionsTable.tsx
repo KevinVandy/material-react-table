@@ -1,10 +1,10 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import MaterialReactTable, {
   MRT_ColumnDef,
   MRT_TableState,
 } from 'material-react-table';
-import { Link as MuiLink } from '@mui/material';
+import { Link as MuiLink, useMediaQuery } from '@mui/material';
 import { StateRow, stateOptions } from './stateOptions';
 
 interface Props {
@@ -12,6 +12,8 @@ interface Props {
 }
 
 const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
+  const isDesktop = useMediaQuery('(min-width: 1200px)');
+
   const columns = useMemo(
     () =>
       [
@@ -63,6 +65,21 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
     [],
   );
 
+  const [columnPinning, setColumnPinning] = useState({});
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (isDesktop) {
+        setColumnPinning({
+          left: ['mrt-row-numbers', 'stateOption'],
+          right: ['link'],
+        });
+      } else {
+        setColumnPinning({});
+      }
+    }
+  }, [isDesktop]);
+
   const data = useMemo(() => {
     if (onlyProps) {
       return stateOptions.filter(({ stateOption }) =>
@@ -85,7 +102,6 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
       enableBottomToolbar={false}
       enableTopToolbar={!onlyProps}
       initialState={{
-        columnPinning: { left: ['mrt-row-numbers', 'stateOption'], right: [] },
         density: 'compact',
         showGlobalFilter: true,
         sorting: [{ id: 'stateOption', desc: false }],
@@ -101,6 +117,7 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
       }}
       positionGlobalFilter="left"
       rowNumberMode="static"
+      state={{ columnPinning }}
     />
   );
 };

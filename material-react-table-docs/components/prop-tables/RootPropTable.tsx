@@ -1,10 +1,10 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import MaterialReactTable, {
   MaterialReactTableProps,
   MRT_ColumnDef,
 } from 'material-react-table';
-import { Link as MuiLink, useTheme } from '@mui/material';
+import { Link as MuiLink, useMediaQuery, useTheme } from '@mui/material';
 import { PropRow, rootProps } from './rootProps';
 
 interface Props {
@@ -13,6 +13,7 @@ interface Props {
 
 const RootPropTable: FC<Props> = ({ onlyProps }) => {
   const theme = useTheme();
+  const isDesktop = useMediaQuery('(min-width: 1200px)');
 
   const columns = useMemo(
     () =>
@@ -77,6 +78,21 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
     [theme],
   );
 
+  const [columnPinning, setColumnPinning] = useState({});
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (isDesktop) {
+        setColumnPinning({
+          left: ['mrt-row-numbers', 'propName'],
+          right: ['link'],
+        });
+      } else {
+        setColumnPinning({});
+      }
+    }
+  }, [isDesktop]);
+
   const data = useMemo(() => {
     if (onlyProps) {
       return rootProps.filter(({ propName }) => onlyProps.has(propName));
@@ -104,7 +120,6 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
           { id: 'required', desc: true },
           { id: 'propName', desc: false },
         ],
-        columnPinning: { left: ['mrt-row-numbers', 'propName'], right: [] },
       }}
       muiSearchTextFieldProps={{
         placeholder: 'Search All Props',
@@ -117,6 +132,7 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
       }}
       positionGlobalFilter="left"
       rowNumberMode="static"
+      state={{ columnPinning }}
     />
   );
 };

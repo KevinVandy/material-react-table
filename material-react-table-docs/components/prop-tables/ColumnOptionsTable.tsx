@@ -1,7 +1,7 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { Link as MuiLink, useTheme } from '@mui/material';
+import { Link as MuiLink, useMediaQuery, useTheme } from '@mui/material';
 import { ColumnOption, columnOptions } from './columnOptions';
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
 
 const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
   const theme = useTheme();
+  const isDesktop = useMediaQuery('(min-width: 1200px)');
 
   const columns = useMemo(
     () =>
@@ -74,6 +75,21 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
     [theme],
   );
 
+  const [columnPinning, setColumnPinning] = useState({});
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (isDesktop) {
+        setColumnPinning({
+          left: ['mrt-row-numbers', 'columnOption'],
+          right: ['link'],
+        });
+      } else {
+        setColumnPinning({});
+      }
+    }
+  }, [isDesktop]);
+
   const data = useMemo(() => {
     if (onlyProps) {
       return columnOptions.filter(({ columnOption }) =>
@@ -103,7 +119,6 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
           { id: 'required', desc: true },
           { id: 'columnOption', desc: false },
         ],
-        columnPinning: { left: ['mrt-row-numbers', 'columnOption'], right: [] },
       }}
       muiSearchTextFieldProps={{
         placeholder: 'Search Column Options',
@@ -118,6 +133,7 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
       }}
       positionGlobalFilter="left"
       rowNumberMode="static"
+      state={{ columnPinning }}
     />
   );
 };
