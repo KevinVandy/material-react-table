@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import { usePlausible } from 'next-plausible'
+import { usePlausible } from 'next-plausible';
 import {
   AppBar as MuiAppBar,
   Box,
@@ -46,7 +46,7 @@ const TopBar: FC<Props> = ({
   setIsLightTheme,
   setNavOpen,
 }) => {
-  const plausible = usePlausible()
+  const plausible = usePlausible();
   const isMobile = useMediaQuery('(max-width: 600px)');
   const isTablet = useMediaQuery('(max-width: 900px)');
   const isDesktop = useMediaQuery('(min-width: 1500px)');

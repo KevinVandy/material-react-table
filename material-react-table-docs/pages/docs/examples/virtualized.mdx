@@ -7,7 +7,10 @@ import Example from '../../../examples/enable-row-virtualization';
     name="description"
     content="An example of a Material React Table with virtualization enabled to achieve higher performance when rendering large data sets"
   />
-  <meta property="og:title" content="Virtualization in Material React Table Example" />
+  <meta
+    property="og:title"
+    content="Virtualization in Material React Table Example"
+  />
   <meta
     property="og:description"
     content="Learn how to enable virtualization features in Material React Table"
@@ -21,6 +24,8 @@ Material React Table has a built-in row virtualization feature [(via `@tanstack/
 Try out the performance of the table below with **10,000 rows**! Filtering, Search, and Sorting also maintain usable performance.
 
 Also be sure to check out the full [row virtualization feature guide docs](/docs/guides/row-virtualization).
+
+> NOTE: You should only enable row virtualization if you have a large number of rows. Depending on the size of the table, if you are rendering less than a couple dozen rows at a time, you will actually just be adding extra overhead to the table renders. Virtualization only becomes necessary when you have over 100 rows or so at the same time with no pagination.
 
 <Example />
 

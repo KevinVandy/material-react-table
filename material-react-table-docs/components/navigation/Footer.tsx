@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { usePlausible } from 'next-plausible'
+import { usePlausible } from 'next-plausible';
 import { Box, Button, Divider, Link, Paper, Typography } from '@mui/material';
 import { Edit, GitHub } from '@mui/icons-material';
 import TableOfContentsList from './TableOfContentsList';
@@ -8,7 +8,7 @@ import { routes } from './routes';
 
 const Footer = () => {
   const { pathname } = useRouter();
-  const plausible = usePlausible()
+  const plausible = usePlausible();
 
   return (
     <Box

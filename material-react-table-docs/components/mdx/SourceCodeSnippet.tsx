@@ -23,7 +23,7 @@ import {
   UnfoldLess,
 } from '@mui/icons-material';
 import { LinkHeading } from './LinkHeading';
-import { usePlausible } from 'next-plausible'
+import { usePlausible } from 'next-plausible';
 
 const CopyButton = styled(IconButton)({
   position: 'absolute',
@@ -54,7 +54,7 @@ export const SourceCodeSnippet: FC<Props> = ({
   tableId,
   typeScriptCode,
 }) => {
-  const plausible = usePlausible()
+  const plausible = usePlausible();
   const theme = useTheme();
   const isMobile = useMediaQuery('(max-width: 720px)');
   const [isTypeScript, setIsTypeScript] = useState(true);

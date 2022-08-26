@@ -16,12 +16,16 @@ const commonIconButtonStyles = {
 };
 
 interface Props {
-  cell: MRT_Cell
+  cell: MRT_Cell;
   row: MRT_Row;
   table: MRT_TableInstance;
 }
 
-export const MRT_ToggleRowActionMenuButton: FC<Props> = ({ cell, row, table }) => {
+export const MRT_ToggleRowActionMenuButton: FC<Props> = ({
+  cell,
+  row,
+  table,
+}) => {
   const {
     getState,
     options: {
