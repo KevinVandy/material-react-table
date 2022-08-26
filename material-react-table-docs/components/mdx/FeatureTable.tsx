@@ -106,6 +106,12 @@ const data = [
     muix: true,
   },
   {
+    feature: 'Column Virtualization',
+    mrt: false,
+    mt: null,
+    muix: true,
+  },
+  {
     feature: 'Custom Icons',
     mrt: true,
     mt: true,
