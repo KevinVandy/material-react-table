@@ -1,4 +1,4 @@
-import React, { FC, RefObject, useEffect, useMemo } from 'react';
+import React, { FC, RefObject, useMemo } from 'react';
 import { useVirtual } from 'react-virtual'; //stuck on v2 for now
 // import { useVirtualizer, Virtualizer } from '@tanstack/react-virtual';
 import { TableBody } from '@mui/material';
@@ -20,9 +20,11 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
       enableGlobalFilterRankedResults,
       enablePagination,
       enableRowVirtualization,
+      manualFiltering,
+      manualSorting,
       muiTableBodyProps,
-      virtualizerProps,
       virtualizerInstanceRef,
+      virtualizerProps,
     },
   } = table;
   const { globalFilter, pagination, sorting } = getState();
@@ -41,6 +43,8 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
     if (
       enableGlobalFilterRankedResults &&
       globalFilter &&
+      !manualFiltering &&
+      !manualSorting &&
       !Object.values(sorting).some(Boolean)
     ) {
       const rankedRows = getPrePaginationRowModel().rows.sort((a, b) =>
@@ -72,11 +76,9 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
       })
     : ({} as any);
 
-  useEffect(() => {
-    if (virtualizerInstanceRef) {
-      virtualizerInstanceRef.current = virtualizer;
-    }
-  }, [virtualizer]);
+  if (virtualizerInstanceRef) {
+    virtualizerInstanceRef.current = virtualizer;
+  }
 
   // const virtualizer: Virtualizer = enableRowVirtualization
   //   ? useVirtualizer({

@@ -486,6 +486,16 @@ export const columnOptions: ColumnOption[] = [
     type: 'false | 1 | -1',
   },
   {
+    columnOption: 'renderColumnActionsMenuItems',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    source: 'MRT',
+    required: false,
+    type: '',
+  },
+  {
     columnOption: 'renderColumnFilterModeMenuItems',
     defaultValue: '',
     description: '',

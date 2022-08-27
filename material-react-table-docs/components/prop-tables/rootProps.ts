@@ -1548,6 +1548,16 @@ export const rootProps: PropRow[] = [
     type: "'bottom' | 'top' | 'both' | 'none'",
   },
   {
+    propName: 'renderColumnActionsMenuItems',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '',
+  },
+  {
     propName: 'renderColumnFilterModeMenuItems',
     defaultValue: '',
     description: '',

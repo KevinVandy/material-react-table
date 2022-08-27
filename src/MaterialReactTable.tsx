@@ -362,6 +362,15 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
       }) => TableCellProps);
+  renderColumnActionsMenuItems?: ({
+    closeMenu,
+    column,
+    table,
+  }: {
+    closeMenu: () => void;
+    column: MRT_Column<TData>;
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode[];
   renderColumnFilterModeMenuItems?: ({
     column,
     internalFilterOptions,
@@ -372,7 +381,7 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
     internalFilterOptions: MRT_InternalFilterOption[];
     onSelectFilterMode: (filterMode: MRT_FilterOption) => void;
     table: MRT_TableInstance<TData>;
-  }) => ReactNode;
+  }) => ReactNode[];
   sortingFn?: MRT_SortingFn;
 };
 
@@ -786,6 +795,15 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     }: {
       table: MRT_TableInstance<TData>;
     }) => ReactNode;
+    renderColumnActionsMenuItems?: ({
+      column,
+      closeMenu,
+      table,
+    }: {
+      column: MRT_Column<TData>;
+      closeMenu: () => void;
+      table: MRT_TableInstance<TData>;
+    }) => ReactNode[];
     renderColumnFilterModeMenuItems?: ({
       column,
       internalFilterOptions,
@@ -796,7 +814,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
       internalFilterOptions: MRT_InternalFilterOption[];
       onSelectFilterMode: (filterMode: MRT_FilterOption) => void;
       table: MRT_TableInstance<TData>;
-    }) => ReactNode;
+    }) => ReactNode[];
     renderDetailPanel?: ({
       row,
       table,

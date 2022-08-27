@@ -34,6 +34,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
     toggleAllColumnsVisible,
     setColumnOrder,
     options: {
+      columnFilterModeOptions,
       enableColumnFilterModes,
       enableColumnFilters,
       enableColumnResizing,
@@ -41,7 +42,6 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
       enableHiding,
       enablePinning,
       enableSorting,
-      columnFilterModeOptions,
       icons: {
         ArrowRightIcon,
         ClearAllIcon,
@@ -55,6 +55,7 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
         VisibilityOffIcon,
       },
       localization,
+      renderColumnActionsMenuItems,
     },
     refs: { filterInputRefs },
     setShowFilters,
@@ -153,55 +154,67 @@ export const MRT_ColumnActionMenu: FC<Props> = ({
         dense: density === 'compact',
       }}
     >
-      {enableSorting &&
-        column.getCanSort() && [
-          <MenuItem
-            disabled={!column.getIsSorted()}
-            key={0}
-            onClick={handleClearSort}
-            sx={commonMenuItemStyles}
-          >
-            <Box sx={commonListItemStyles}>
-              <ListItemIcon>
-                <ClearAllIcon />
-              </ListItemIcon>
-              {localization.clearSort}
-            </Box>
-          </MenuItem>,
-          <MenuItem
-            disabled={column.getIsSorted() === 'asc'}
-            key={1}
-            onClick={handleSortAsc}
-            sx={commonMenuItemStyles}
-          >
-            <Box sx={commonListItemStyles}>
-              <ListItemIcon>
-                <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
-              </ListItemIcon>
-              {localization.sortByColumnAsc?.replace(
-                '{column}',
-                String(columnDef.header),
-              )}
-            </Box>
-          </MenuItem>,
-          <MenuItem
-            divider={enableColumnFilters || enableGrouping || enableHiding}
-            key={2}
-            disabled={column.getIsSorted() === 'desc'}
-            onClick={handleSortDesc}
-            sx={commonMenuItemStyles}
-          >
-            <Box sx={commonListItemStyles}>
-              <ListItemIcon>
-                <SortIcon />
-              </ListItemIcon>
-              {localization.sortByColumnDesc?.replace(
-                '{column}',
-                String(columnDef.header),
-              )}
-            </Box>
-          </MenuItem>,
-        ]}
+      {columnDef.renderColumnActionsMenuItems?.({
+        closeMenu: () => setAnchorEl(null),
+        column,
+        table,
+      }) ??
+        renderColumnActionsMenuItems?.({
+          closeMenu: () => setAnchorEl(null),
+          column,
+          table,
+        }) ??
+        (enableSorting &&
+          column.getCanSort() && [
+            <MenuItem
+              disabled={!column.getIsSorted()}
+              key={0}
+              onClick={handleClearSort}
+              sx={commonMenuItemStyles}
+            >
+              <Box sx={commonListItemStyles}>
+                <ListItemIcon>
+                  <ClearAllIcon />
+                </ListItemIcon>
+                {localization.clearSort}
+              </Box>
+            </MenuItem>,
+            <MenuItem
+              disabled={column.getIsSorted() === 'asc'}
+              key={1}
+              onClick={handleSortAsc}
+              sx={commonMenuItemStyles}
+            >
+              <Box sx={commonListItemStyles}>
+                <ListItemIcon>
+                  <SortIcon
+                    style={{ transform: 'rotate(180deg) scaleX(-1)' }}
+                  />
+                </ListItemIcon>
+                {localization.sortByColumnAsc?.replace(
+                  '{column}',
+                  String(columnDef.header),
+                )}
+              </Box>
+            </MenuItem>,
+            <MenuItem
+              divider={enableColumnFilters || enableGrouping || enableHiding}
+              key={2}
+              disabled={column.getIsSorted() === 'desc'}
+              onClick={handleSortDesc}
+              sx={commonMenuItemStyles}
+            >
+              <Box sx={commonListItemStyles}>
+                <ListItemIcon>
+                  <SortIcon />
+                </ListItemIcon>
+                {localization.sortByColumnDesc?.replace(
+                  '{column}',
+                  String(columnDef.header),
+                )}
+              </Box>
+            </MenuItem>,
+          ])}
       {enableColumnFilters &&
         column.getCanFilter() &&
         [

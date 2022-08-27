@@ -19,7 +19,11 @@ By default, Material React Table renders a column actions button for each column
 
 <RootPropTable
   onlyProps={
-    new Set(['enableColumnActions', 'muiTableHeadCellColumnActionsButtonProps'])
+    new Set([
+      'enableColumnActions',
+      'muiTableHeadCellColumnActionsButtonProps',
+      'renderColumnActionsMenuItems',
+    ])
   }
 />
 
@@ -27,7 +31,11 @@ By default, Material React Table renders a column actions button for each column
 
 <ColumnOptionsTable
   onlyProps={
-    new Set(['enableColumnActions', 'muiTableHeadCellColumnActionsButtonProps'])
+    new Set([
+      'enableColumnActions',
+      'muiTableHeadCellColumnActionsButtonProps',
+      'renderColumnActionsMenuItems',
+    ])
   }
 />
 
@@ -45,6 +53,45 @@ In this demo, we disable the column actions button for the 'id' column.
 
 <DisableExample />
 
-### Customize Column Actions
+### Custom Column Actions Menu
+
+If you do not like the default column actions menu items that Material React Table generates, you can provide your own custom menu items with the `renderColumnActionsMenuItems` prop. x of the column in the table.
+
+```tsx
+const columns = [
+  {
+    accessorKey: 'salary',
+    header: 'Salary',
+    renderColumnActionsMenuItems: ({ closeMenu, column, table }) => {
+      return [
+        <MenuItem
+          onClick={() => {
+            // do something
+            closeMenu();
+          }}
+        >
+          Custom Menu Item 1
+        </MenuItem>,
+        <MenuItem
+          onClick={() => {
+            // do something
+            closeMenu();
+          }}
+        >
+          Custom Menu Item 2
+        </MenuItem>,
+      ];
+    },
+  },
+];
+
+return (
+  <MaterialReactTable
+    data={data}
+    columns={columns}
+    //renderColumnActionsMenuItems could go here if you want to apply it to all columns
+  />
+);
+```
 
 View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-column-action-examples)**

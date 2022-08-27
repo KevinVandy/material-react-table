@@ -167,10 +167,11 @@ export const SourceCodeSnippet: FC<Props> = ({
                 setShowApiCode(false);
                 plausible('toggle-to-typescript');
               }}
-              value="ts"
               selected={isTypeScript && !showApiCode}
+              sx={{ textTransform: 'none' }}
+              value="ts"
             >
-              TS
+              {isMobile ? 'TS' : 'TypeScript'}
             </ToggleButton>
             {javaScriptCode && (
               <ToggleButton
@@ -179,10 +180,11 @@ export const SourceCodeSnippet: FC<Props> = ({
                   setShowApiCode(false);
                   plausible('toggle-to-javascript');
                 }}
-                value="js"
                 selected={!isTypeScript && !showApiCode}
+                sx={{ textTransform: 'none' }}
+                value="js"
               >
-                JS
+                {isMobile ? 'JS' : 'JavaScript'}
               </ToggleButton>
             )}
             {apiCode && (

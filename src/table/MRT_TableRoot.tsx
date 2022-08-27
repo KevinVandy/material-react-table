@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import {
   TableState,
   getCoreRowModel,
@@ -303,11 +303,9 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
     setShowGlobalFilter: props.onShowGlobalFilterChange ?? setShowGlobalFilter,
   } as MRT_TableInstance<TData>;
 
-  useEffect(() => {
-    if (props.tableInstanceRef) {
-      props.tableInstanceRef.current = table;
-    }
-  }, [table]);
+  if (props.tableInstanceRef) {
+    props.tableInstanceRef.current = table;
+  }
 
   return (
     <>

@@ -1,11 +1,11 @@
-import { createTheme } from '@mui/material';
+import { createTheme, darken } from '@mui/material';
 
 export const theme = (isLightTheme: boolean) =>
   createTheme({
     palette: {
       mode: isLightTheme ? 'light' : 'dark',
       secondary: {
-        main: 'rgb(22,178,170)',
+        main: isLightTheme ? darken('rgb(20,184,166)', 0.1) : 'rgb(20,184,166)',
       },
     },
     typography: {
