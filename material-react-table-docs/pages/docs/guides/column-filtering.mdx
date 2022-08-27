@@ -3,6 +3,7 @@ import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import DisableExample from '../../../examples/disable-column-filters';
+import CustomizeFilterVariantsExample from '../../../examples/customize-filter-variants';
 import CustomizeFilterModesExample from '../../../examples/customize-filter-modes';
 import CustomizeFilterComponentsExample from '../../../examples/customize-filter-components';
 import RemoteExample from '../../../examples/remote';
@@ -11,7 +12,7 @@ import RemoteExample from '../../../examples/remote';
   <title>Column Filtering Feature Guide - Material React Table Docs</title>
   <meta
     name="description"
-    content="How to use, customize, or disable filter features (client-side or server side) in Material React Table"
+    content="How to use, customize, or disable filter features, client-side or server side, in Material React Table"
   />
 </Head>
 
@@ -47,12 +48,14 @@ Filtering is one of the most powerful features of Material React Table and is en
   onlyProps={
     new Set([
       'Filter',
-      'enableColumnFilter',
       'columnFilterModeOptions',
+      'enableColumnFilter',
       'enableColumnFilterModes',
       'filterFn',
       'filterSelectOptions',
+      'filterVariant',
       'muiTableHeadCellFilterTextFieldProps',
+      'renderColumnFilterModeMenuItems',
     ])
   }
 />
@@ -71,7 +74,20 @@ Various subsets of filtering features can be disabled. If you want to disable fi
 
 <DisableExample />
 
+### Filter Variants
+
+Material React Table has some built in filter variants for advanced filtering. These can be specified on a per-column basis using the `filterVariant` option. The following variants are available:
+
+- `'text'` - shows the default text field
+- `'select'` - shows a select dropdown with the options specified in `filterSelectOptions`
+- `'multi-select'` - shows a select dropdown with the options specified in `filterSelectOptions` and allows multiple selections with checkboxes
+- `'range` - shows min and max text fields for filtering a range of values
+
+<CustomizeFilterVariantsExample />
+
 ### Custom Filter Functions
+
+You can specify either a pre-built filterFn that comes with Material React Table, or pass in your own custom filter functions.
 
 #### Custom Filter Functions Per Column
 

@@ -334,14 +334,14 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.3.0.tgz#ea89004119dc42db2e1dba0f97d553f7372f6fcb"
   integrity sha512-AHPmaAx+RYfZz0eYu6Gviiagpmiyw98ySSlQvCUhVGDRtDFe4DBS0x1bSjdF3gqUDYOczB+yYvBTtEylYSdRhg==
 
-"@eslint/eslintrc@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-1.3.0.tgz#29f92c30bb3e771e4a2048c95fa6855392dfac4f"
-  integrity sha512-UWW0TMTmk2d7hLcWD1/e2g5HDM/HQ3csaLSqXCfqwh4uNDuNqlaKWXmEsL4Cs41Z0KnILNvwbHAah3C2yt06kw==
+"@eslint/eslintrc@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-1.3.1.tgz#de0807bfeffc37b964a7d0400e0c348ce5a2543d"
+  integrity sha512-OhSY22oQQdw3zgPOOwdoj01l/Dzl1Z+xyUP33tkSN+aqyEhymJCcPHyXt+ylW8FSe0TfRC2VG+ROQOapD0aZSQ==
   dependencies:
     ajv "^6.12.4"
     debug "^4.3.2"
-    espree "^9.3.2"
+    espree "^9.4.0"
     globals "^13.15.0"
     ignore "^5.2.0"
     import-fresh "^3.2.1"
@@ -393,6 +393,11 @@
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/gitignore-to-minimatch/-/gitignore-to-minimatch-1.0.2.tgz#316b0a63b91c10e53f242efb4ace5c3b34e8728d"
   integrity sha512-rSqmMJDdLFUsyxR6FMtD00nfQKKLFb1kv+qBbOVKqErvloEIJLo5bDTJTQNTYgeyp78JsA7u/NPi5jT1GR/MuA==
+
+"@humanwhocodes/module-importer@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@humanwhocodes/module-importer/-/module-importer-1.0.1.tgz#af5b2691a22b44be847b0ca81641c5fb6ad0172c"
+  integrity sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==
 
 "@humanwhocodes/object-schema@^1.2.1":
   version "1.2.1"
@@ -663,17 +668,17 @@
   dependencies:
     remove-accents "0.4.2"
 
-"@tanstack/query-core@^4.0.0-beta.1":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.1.0.tgz#1d8aea0dad49e17de7b64da5ebac59904198bd31"
-  integrity sha512-edUYXcUp9nZjj28ZNDbM71l8dPqXv5B/Mct6GN6fuSozD9dTl5Nw0QAU7esBALcu4YBIKFs/+etKh5hsE4Snsw==
+"@tanstack/query-core@4.2.3":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.2.3.tgz#52d75430c9662cc85c160761c1421de483c7791f"
+  integrity sha512-zdt5lYWs1dZaA3IxJbCgtAfHZJScRZONpiLL7YkeOkrme5MfjQqTpjq7LYbzpyuwPOh2Jx68le0PLl57JFv5hQ==
 
-"@tanstack/react-query@^4.2.1":
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.2.1.tgz#1f00f03573b35a353e62fa64f904bbb0286a1808"
-  integrity sha512-w02oTOYpoxoBzD/onAGRQNeLAvggLn7WZjS811cT05WAE/4Q3br0PTp388M7tnmyYGbgOOhFq0MkhH0wIfAKqA==
+"@tanstack/react-query@^4.2.3":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.2.3.tgz#782fd0f84553ba6219f1137a12ea28ab8cd3a3f3"
+  integrity sha512-JLaMOxoJTkiAu7QpevRCt2uI/0vd3E8K/rSlCuRgWlcW5DeJDFpDS5kfzmLO5MOcD97fgsJRrDbxDORxR1FdJA==
   dependencies:
-    "@tanstack/query-core" "^4.0.0-beta.1"
+    "@tanstack/query-core" "4.2.3"
     "@types/use-sync-external-store" "^0.0.3"
     use-sync-external-store "^1.2.0"
 
@@ -1484,14 +1489,15 @@ eslint-visitor-keys@^3.3.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-3.3.0.tgz#f6480fa6b1f30efe2d1968aa8ac745b862469826"
   integrity sha512-mQ+suqKJVyeuwGYHAdjMFqjCyfl8+Ldnxuyp3ldiMBFKkvytrXUZWaiPCEav8qDHKty44bD+qV1IP4T+w+xXRA==
 
-eslint@8.22.0:
-  version "8.22.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.22.0.tgz#78fcb044196dfa7eef30a9d65944f6f980402c48"
-  integrity sha512-ci4t0sz6vSRKdmkOGmprBo6fmI4PrphDFMy5JEq/fNS0gQkJM3rLmrqcp8ipMcdobH3KtUP40KniAE9W19S4wA==
+eslint@8.23.0:
+  version "8.23.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.23.0.tgz#a184918d288820179c6041bb3ddcc99ce6eea040"
+  integrity sha512-pBG/XOn0MsJcKcTRLr27S5HpzQo4kLr+HjLQIyK4EiCsijDl/TB+h5uEuJU6bQ8Edvwz1XWOjpaP2qgnXGpTcA==
   dependencies:
-    "@eslint/eslintrc" "^1.3.0"
+    "@eslint/eslintrc" "^1.3.1"
     "@humanwhocodes/config-array" "^0.10.4"
     "@humanwhocodes/gitignore-to-minimatch" "^1.0.2"
+    "@humanwhocodes/module-importer" "^1.0.1"
     ajv "^6.10.0"
     chalk "^4.0.0"
     cross-spawn "^7.0.2"
@@ -1501,7 +1507,7 @@ eslint@8.22.0:
     eslint-scope "^7.1.1"
     eslint-utils "^3.0.0"
     eslint-visitor-keys "^3.3.0"
-    espree "^9.3.3"
+    espree "^9.4.0"
     esquery "^1.4.0"
     esutils "^2.0.2"
     fast-deep-equal "^3.1.3"
@@ -1527,12 +1533,11 @@ eslint@8.22.0:
     strip-ansi "^6.0.1"
     strip-json-comments "^3.1.0"
     text-table "^0.2.0"
-    v8-compile-cache "^2.0.3"
 
-espree@^9.3.2, espree@^9.3.3:
-  version "9.3.3"
-  resolved "https://registry.yarnpkg.com/espree/-/espree-9.3.3.tgz#2dd37c4162bb05f433ad3c1a52ddf8a49dc08e9d"
-  integrity sha512-ORs1Rt/uQTqUKjDdGCyrtYxbazf5umATSf/K4qxjmZHORR6HJk+2s/2Pqe+Kk49HHINC/xNIrGfgh8sZcll0ng==
+espree@^9.4.0:
+  version "9.4.0"
+  resolved "https://registry.yarnpkg.com/espree/-/espree-9.4.0.tgz#cd4bc3d6e9336c433265fc0aa016fc1aaf182f8a"
+  integrity sha512-DQmnRpLj7f6TgN/NYb0MTzJXL+vJF9h3pHy4JhCIs3zwcgez8xmGg3sXHcEO97BrmO2OSvCwMdfdlyl+E9KjOw==
   dependencies:
     acorn "^8.8.0"
     acorn-jsx "^5.3.2"
@@ -2192,10 +2197,10 @@ markdown-extensions@^1.0.0:
   resolved "https://registry.yarnpkg.com/markdown-extensions/-/markdown-extensions-1.1.1.tgz#fea03b539faeaee9b4ef02a3769b455b189f7fc3"
   integrity sha512-WWC0ZuMzCyDHYCasEGs4IPvLyTGftYwh6wIEOULOF0HXcqZlhwRzrK0w2VUlxWA98xnvb/jszw4ZSkJ6ADpM6Q==
 
-material-react-table@^0.40.5:
-  version "0.40.5"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.40.5.tgz#4cf647f52913c4c586d175f7863ead247e037239"
-  integrity sha512-smA3KJtJ9d852EFfQ6+FFQJIkoljwYJb2bZdkA2XqYc4QzvWl9u9adn1C07WllMWa0RJ+a0xwcnUHTNENiKZzw==
+material-react-table@^0.40.6:
+  version "0.40.6"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-0.40.6.tgz#c7be706373efe60012df3a64abb5e178de0cabaa"
+  integrity sha512-1HZEqX8wC6swlK6e3BLhvtymFWQhGt4DBnubGasQo6gQs4FjTFpUbrgwGVxVN76yMCZ2iZPuF/imDDwDNaSAwg==
   dependencies:
     "@tanstack/match-sorter-utils" "8.1.1"
     "@tanstack/react-table" "8.5.11"
@@ -2667,10 +2672,10 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
 
-next-plausible@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/next-plausible/-/next-plausible-3.2.0.tgz#d801346253e0c1cf64a02b9fc3a42050455cbc47"
-  integrity sha512-OlYcLXBG3kKd/fKMpm8SZ5IkUKSFm1/8t7cv6e5bewIqlpdZpdWuSrjbdJpbmutb2KPLXHzilKp09zmDGjy9KQ==
+next-plausible@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/next-plausible/-/next-plausible-3.3.1.tgz#76834f874dd5798e399ccdd86cfc8cece1675ab9"
+  integrity sha512-OXCgruP/n9dZ7q8OqIy4q6GHGvr60IoUzd+yvjoSySOrdtVBQZwpDSG7EZ821krZaj+foow022Mm8o202zYQSQ==
 
 next-sitemap@^3.1.21:
   version "3.1.21"
@@ -3421,11 +3426,6 @@ uvu@^0.5.0:
     diff "^5.0.0"
     kleur "^4.0.3"
     sade "^1.7.3"
-
-v8-compile-cache@^2.0.3:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.3.0.tgz#2de19618c66dc247dcfb6f99338035d8245a2cee"
-  integrity sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==
 
 vfile-location@^4.0.0:
   version "4.0.1"

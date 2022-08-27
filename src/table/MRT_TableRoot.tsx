@@ -189,6 +189,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       props.displayColumnDefOptions,
       props.editingMode,
       props.enableColumnDragging,
+      props.enableColumnFilterModes,
       props.enableColumnOrdering,
       props.enableEditing,
       props.enableExpandAll,

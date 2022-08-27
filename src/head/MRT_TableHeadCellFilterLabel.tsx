@@ -9,13 +9,11 @@ interface Props {
 
 export const MRT_TableHeadCellFilterLabel: FC<Props> = ({ header, table }) => {
   const {
-    getState,
     options: {
       icons: { FilterAltIcon },
       localization,
     },
   } = table;
-  const { columnFilterFns } = getState();
   const { column } = header;
   const { columnDef } = column;
 
@@ -24,7 +22,7 @@ export const MRT_TableHeadCellFilterLabel: FC<Props> = ({ header, table }) => {
     'betweenInclusive',
     'inNumberRange',
   ].includes(columnDef._filterFn);
-  const currentFilterOption = columnFilterFns?.[header.id];
+  const currentFilterOption = columnDef._filterFn;
   const filterTooltip = localization.filteringByColumn
     .replace('{column}', String(columnDef.header))
     .replace(

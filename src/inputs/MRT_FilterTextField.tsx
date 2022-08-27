@@ -12,7 +12,6 @@ import {
   debounce,
   IconButton,
   InputAdornment,
-  ListItemText,
   MenuItem,
   TextField,
   TextFieldProps,
@@ -323,7 +322,16 @@ export const MRT_FilterTextField: FC<Props> = ({
               text = option.text;
             }
             return (
-              <MenuItem key={value} value={value}>
+              <MenuItem
+                key={value}
+                sx={{
+                  display: 'flex',
+                  m: 0,
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                }}
+                value={value}
+              >
                 {isMultiSelectFilter && (
                   <Checkbox
                     checked={(
@@ -332,7 +340,7 @@ export const MRT_FilterTextField: FC<Props> = ({
                     sx={{ mr: '0.5rem' }}
                   />
                 )}
-                <ListItemText>{text}</ListItemText>
+                {text}
               </MenuItem>
             );
           },
