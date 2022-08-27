@@ -1,75 +1,51 @@
 import React, { FC, useMemo } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import { MenuItem } from '@mui/material';
+import { data, Person } from './makeData';
 
 const Example: FC = () => {
-  const columns = useMemo(
-    () =>
-      [
-        {
-          accessorKey: 'id',
-          enableColumnFilterModes: false, //disable changing filter mode for this column
-          filterFn: 'equals', //set filter mode to equals
-          header: 'ID',
-        },
-        {
-          accessorKey: 'firstName',
-          columnFilterModeOptions: ['fuzzy', 'contains', 'startsWith'],
-          header: 'First Name',
-        },
-        {
-          accessorKey: 'middleName',
-          enableColumnFilterModes: false, //disable changing filter mode for this column
-          filterFn: 'startsWith', //even though changing the mode is disabled, you can still set the default filter mode
-          header: 'Middle Name',
-        },
-        {
-          accessorKey: 'lastName', //normal
-          header: 'Last Name',
-        },
-        {
-          accessorKey: 'age',
-          columnFilterModeOptions: ['between', 'greaterThan', 'lessThan'],
-          filterFn: 'between',
-          header: 'Age',
-        },
-      ] as MRT_ColumnDef<typeof data[0]>[],
-    [],
-  );
-
-  const data = useMemo(
-    //data definitions...
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       {
-        id: 1,
-        firstName: 'Hugh',
-        middleName: 'Jay',
-        lastName: 'Mungus',
-        age: 42,
+        accessorKey: 'id',
+        enableColumnFilterModes: false, //disable changing filter mode for this column
+        filterFn: 'equals', //set filter mode to equals
+        header: 'ID',
       },
       {
-        id: 2,
-        firstName: 'Leroy',
-        middleName: 'Leroy',
-        lastName: 'Jenkins',
-        age: 51,
+        accessorKey: 'firstName', //normal, all filter modes are enabled
+        header: 'First Name',
       },
       {
-        id: 3,
-        firstName: 'Candice',
-        middleName: 'Denise',
-        lastName: 'Nutella',
-        age: 27,
+        accessorKey: 'middleName',
+        enableColumnFilterModes: false, //disable changing filter mode for this column
+        filterFn: 'startsWith', //even though changing the mode is disabled, you can still set the default filter mode
+        header: 'Middle Name',
       },
       {
-        id: 4,
-        firstName: 'Micah',
-        middleName: 'Henry',
-        lastName: 'Johnson',
-        age: 32,
+        accessorKey: 'lastName',
+        header: 'Last Name',
+        //if you don't want to use the default filter modes, you can provide your own and render your own menu
+        renderColumnFilterModeMenuItems: ({ onSelectFilterMode }) => [
+          <MenuItem key="0" onClick={() => onSelectFilterMode('contains')}>
+            <div>Contains</div>
+          </MenuItem>,
+          <MenuItem
+            key="1"
+            onClick={() => onSelectFilterMode('customFilterFn')}
+          >
+            <div>Custom Filter Fn</div>
+          </MenuItem>,
+        ],
+      },
+      {
+        accessorKey: 'age',
+        columnFilterModeOptions: ['between', 'greaterThan', 'lessThan'], //only allow these filter modes
+        filterFn: 'between',
+        header: 'Age',
       },
     ],
     [],
-    //end
   );
 
   return (
@@ -78,6 +54,16 @@ const Example: FC = () => {
       data={data}
       enableColumnFilterModes //enable changing filter mode for all columns unless explicitly disabled in a column def
       initialState={{ showColumnFilters: true }} //show filters by default
+      filterFns={{
+        customFilterFn: (row, id, filterValue) => {
+          return row.getValue(id) === filterValue;
+        },
+      }}
+      localization={
+        {
+          filterCustomFilterFn: 'Custom Filter Fn',
+        } as any
+      }
     />
   );
 };

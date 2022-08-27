@@ -99,7 +99,7 @@ export const mrtFilterOptions = (
 
 interface Props<TData extends Record<string, any> = {}> {
   anchorEl: HTMLElement | null;
-  header?: MRT_Header;
+  header?: MRT_Header<TData>;
   onSelect?: () => void;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
   table: MRT_TableInstance<TData>;
@@ -177,8 +177,14 @@ export const MRT_FilterOptionMenu = <TData extends Record<string, any> = {}>({
         dense: density === 'compact',
       }}
     >
-      {(header && column
-        ? renderColumnFilterModeMenuItems?.({
+      {(header && column && columnDef
+        ? columnDef.renderColumnFilterModeMenuItems?.({
+            column: column as any,
+            internalFilterOptions,
+            onSelectFilterMode: handleSelectFilterMode,
+            table,
+          }) ??
+          renderColumnFilterModeMenuItems?.({
             column: column as any,
             internalFilterOptions,
             onSelectFilterMode: handleSelectFilterMode,

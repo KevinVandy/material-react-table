@@ -363,12 +363,16 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
         column: MRT_Column<TData>;
       }) => TableCellProps);
   renderColumnFilterModeMenuItems?: ({
-    table,
     column,
+    internalFilterOptions,
+    onSelectFilterMode,
+    table,
   }: {
-    table: MRT_TableInstance<TData>;
     column: MRT_Column<TData>;
-  }) => ReactNode[];
+    internalFilterOptions: MRT_InternalFilterOption[];
+    onSelectFilterMode: (filterMode: MRT_FilterOption) => void;
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode;
   sortingFn?: MRT_SortingFn;
 };
 
