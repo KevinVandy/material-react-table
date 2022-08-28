@@ -231,7 +231,7 @@ export const routes: Array<RouteItem> = [
           },
           {
             href: '/docs/guides/sticky-header',
-            label: 'Sticky Header',
+            label: 'Sticky Header/Footer',
           },
         ],
       },
