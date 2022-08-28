@@ -169,6 +169,16 @@ const Footer = () => {
             />
           </Box>
           <Box>
+            <Typography>Examples</Typography>
+            <TableOfContentsList
+              items={
+                routes.find((item) => item.href === '/docs/examples')?.items ??
+                []
+              }
+              isFooter
+            />
+          </Box>
+          <Box>
             <Typography>Fundamental Guides</Typography>
             <TableOfContentsList
               items={
@@ -188,16 +198,6 @@ const Footer = () => {
                   routes.find((item) => item.href === '/docs/guides')?.items ??
                   []
                 ).find((item) => item.label === 'Feature Guides')?.items ?? []
-              }
-              isFooter
-            />
-          </Box>
-          <Box>
-            <Typography>Examples</Typography>
-            <TableOfContentsList
-              items={
-                routes.find((item) => item.href === '/docs/examples')?.items ??
-                []
               }
               isFooter
             />

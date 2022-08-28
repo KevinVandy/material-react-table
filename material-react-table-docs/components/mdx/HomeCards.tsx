@@ -31,11 +31,12 @@ export const HomeCards = () => {
         <Card
           key={index}
           sx={(theme) => ({
-            backgroundColor: alpha(theme.palette.primary.main, 0.1),
-            p: '1rem',
-            display: 'flex',
             alignItems: 'center',
+            backgroundColor: alpha(theme.palette.primary.main, 0.1),
+            display: 'flex',
             gap: '1.5rem',
+            fontSize: '1.2rem',
+            p: '1rem',
           })}
           variant="outlined"
         >

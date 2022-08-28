@@ -62,6 +62,7 @@ export const SampleCodeSnippet: FC<any> = (props) => {
               whiteSpace: 'pre-wrap',
               padding: '1rem 2.5rem 0 1rem',
               minHeight: '3rem',
+              ...props?.style,
             }}
           >
             {tokens.map((line, i) => (

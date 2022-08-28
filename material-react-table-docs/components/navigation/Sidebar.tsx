@@ -119,7 +119,7 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
                   <Divider />
                 </li>
                 <Link href={href1 ?? ''} passHref>
-                  <ListItemHeaderLevel1>
+                  <ListItemHeaderLevel1 selected={pathname === href1}>
                     <Link href={href1 ?? ''} passHref>
                       <MenuLink>{label1}</MenuLink>
                     </Link>
@@ -130,7 +130,7 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
                     if (items2?.length) {
                       return (
                         <Fragment key={label2}>
-                          <ListItemHeaderLevel2>
+                          <ListItemHeaderLevel2 selected={pathname === href2}>
                             <Link href={href2 ?? ''} passHref>
                               <MenuLink>{label2}</MenuLink>
                             </Link>

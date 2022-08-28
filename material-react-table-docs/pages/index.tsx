@@ -15,11 +15,12 @@ import { StatBadges } from '../components/mdx/StatBadges';
 import ComparisonTable from '../components/mdx/ComparisonTable';
 import { LinkHeading } from '../components/mdx/LinkHeading';
 import FeatureTable from '../components/mdx/FeatureTable';
+import { SampleCodeSnippet } from '../components/mdx/SampleCodeSnippet';
 
 const HomePage = () => {
   return (
     <>
-      <Stack sx={{ maxWidth: '80ch', m: 'auto' }}>
+      <Stack sx={{ maxWidth: '95ch', m: 'auto' }}>
         <Typography
           sx={{
             textAlign: 'center',
@@ -27,7 +28,7 @@ const HomePage = () => {
               xs: '1.8rem',
               sm: '3rem',
               md: '4rem',
-              lg: '4.9rem',
+              lg: '6rem',
             },
             fontWeight: 'bold',
             mt: '5rem',
@@ -41,6 +42,7 @@ const HomePage = () => {
               sm: '4rem',
               md: '5rem',
               lg: '6rem',
+              xl: '7rem',
             },
           }}
           variant="h1"
@@ -62,9 +64,10 @@ const HomePage = () => {
           color="text.secondary"
           sx={{
             fontSize: {
-              xs: '1.4rem',
+              xs: '1.2rem',
               sm: '1.5rem',
               md: '2.2rem',
+              lg: '2.75rem',
             },
             mb: '3rem',
             textAlign: 'center',
@@ -109,11 +112,18 @@ const HomePage = () => {
             fontSize: {
               xs: '1.2rem',
               md: '1.5rem',
+              lg: '2rem',
             },
+            fontStyle: 'italic',
             mt: '2rem',
             textAlign: 'center',
-            lineHeight: '2.25rem',
+            lineHeight: {
+              xs: '1.5rem',
+              md: '2rem',
+              lg: '2.5rem',
+            },
             fontWeight: 'normal',
+            textTransform: 'capitalize',
           }}
           variant="h2"
         >
@@ -123,13 +133,17 @@ const HomePage = () => {
         <Box
           sx={{
             m: '3rem auto',
+            mb: '1rem',
             display: 'grid',
             gap: '1.5rem',
+            width: '100%',
+            justifyContent: 'center',
             gridTemplateColumns: {
               xs: '15rem',
               sm: '14rem 14rem',
               md: '16rem 16rem',
               lg: '12rem 11rem 11rem 11rem',
+              xl: '1fr 1fr 1fr 1fr',
             },
             '> a': {
               display: 'block',
@@ -215,9 +229,25 @@ const HomePage = () => {
             </a>
           </Link>
         </Box>
+        <Box>
+          <SampleCodeSnippet
+            className="language-bash"
+            style={{ paddingBottom: '1rem' }}
+          >
+            npm i material-react-table @mui/material @mui/icons-material
+            @emotion/react @emotion/styled
+          </SampleCodeSnippet>
+        </Box>
         <HomeCards />
       </Stack>
-      <Typography sx={{ textAlign: 'center', mt: '5rem' }} variant="h3">
+      <Typography
+        sx={{
+          textAlign: 'center',
+          mt: '5rem',
+          fontSize: { xs: '1.5rem', md: '2rem', xl: '2.5rem' },
+        }}
+        variant="h3"
+      >
         Is{' '}
         <Box
           sx={(theme) => ({

@@ -8,7 +8,10 @@ export const StatBadges = () => {
         gap: '1rem',
         justifyContent: 'center',
         flexWrap: 'wrap',
-        mb: '1rem',
+        m: {
+          xs: 0,
+          md: '1rem',
+        },
       }}
     >
       <a
