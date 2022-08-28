@@ -135,6 +135,36 @@ const columns = useMemo(
 );
 ```
 
+### Custom Footer Render
+
+If you want to pass in custom JSX to render the footer, you can pass in a `Footer` option. If no custom markup is needed, you can just use the `footer` string property.
+
+The footer cells can be a good place to put totals or other summary information.
+
+```tsx
+const columns = useMemo(
+  () => [
+    {
+      accessorKey: 'name',
+      header: 'Name',
+      footer: 'Name', //simple string header
+    },
+    {
+      accessorKey: 'age',
+      header: 'Age',
+      //Custom footer markup for a aggregation calculation
+      Footer: () => (
+        <Stack>
+          Max Age:
+          <Box color="warning.main">{Math.round(maxAge)}</Box>
+        </Stack>
+      ),
+    },
+  ],
+  [],
+);
+```
+
 > See the [Customize Components Guide](/docs/guides/customize-components) for more ways to style and customize header and cell components
 
 ### Enable or Disable Features Per Column

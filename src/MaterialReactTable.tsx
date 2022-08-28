@@ -236,7 +236,7 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
    *
    * @example accessorFn: (row) => row.username
    */
-  accessorFn?: (row: TData) => any;
+  accessorFn?: (originalRow: TData) => any;
   /**
    * Either an `accessorKey` or a combination of an `accessorFn` and `id` are required for a data column definition.
    * Specify which key in the row this column should use to access the correct data.
