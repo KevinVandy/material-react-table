@@ -115,8 +115,8 @@ export const MRT_FilterOptionMenu = <TData extends Record<string, any> = {}>({
   const {
     getState,
     options: {
-      enabledGlobalFilterOptions,
       columnFilterModeOptions,
+      globalFilterModeOptions,
       localization,
       renderColumnFilterModeMenuItems,
       renderGlobalFilterModeMenuItems,
@@ -137,8 +137,8 @@ export const MRT_FilterOptionMenu = <TData extends Record<string, any> = {}>({
         columnDef
           ? allowedColumnFilterOptions === undefined ||
             allowedColumnFilterOptions?.includes(filterOption.option)
-          : (!enabledGlobalFilterOptions ||
-              enabledGlobalFilterOptions.includes(filterOption.option)) &&
+          : (!globalFilterModeOptions ||
+              globalFilterModeOptions.includes(filterOption.option)) &&
             ['fuzzy', 'contains', 'startsWith'].includes(filterOption.option),
       ),
     [],

@@ -1,5 +1,5 @@
 {
-  "version": "0.40.6",
+  "version": "0.40.7",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",

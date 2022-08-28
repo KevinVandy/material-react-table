@@ -1,9 +1,4 @@
-import React, {
-  ChangeEvent,
-  FocusEvent,
-  KeyboardEvent,
-  useState,
-} from 'react';
+import React, { ChangeEvent, FocusEvent, KeyboardEvent, useState } from 'react';
 import { TextField, TextFieldProps } from '@mui/material';
 import type { MRT_Cell, MRT_TableInstance } from '..';
 

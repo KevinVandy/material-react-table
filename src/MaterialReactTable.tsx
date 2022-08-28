@@ -521,7 +521,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     enableTableHead?: boolean;
     enableToolbarInternalActions?: boolean;
     enableTopToolbar?: boolean;
-    enabledGlobalFilterOptions?: (MRT_FilterOption | string)[] | null;
+    globalFilterModeOptions?: (MRT_FilterOption | string)[] | null;
     expandRowsFn?: (dataRow: TData) => TData[];
     icons?: Partial<MRT_Icons>;
     initialState?: Partial<MRT_TableState<TData>>;

@@ -34,7 +34,7 @@ const tableInstanceRef = useRef<MRT_TableInstance<YourDataType>>(null);
 
 const someEventHandler = (event) => {
   console.info(tableInstanceRef.current?.getRowModel().rows); //example - get access to all page rows in the table
-  console.info(tableInstanceRef.current?.getExpandedRowModel()); //example - get access to all selected rows in the table
+  console.info(tableInstanceRef.current?.getSelectedRowModel()); //example - get access to all selected rows in the table
   console.info(tableInstanceRef.current?.getState().sorting); //example - get access to the current sorting state
 };
 

@@ -1,4 +1,7 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 
 <Head>
   <title>
@@ -11,3 +14,154 @@ import Head from 'next/head';
 </Head>
 
 ## Global Filtering (Search) Feature Guide
+
+Material React Table has a powerful built-in global filtering (search) feature that uses a fuzzy matching algorithm and ranks/sorts the results based on how closely rows match the search query. In this guide we'll cover how to use, customize, or disable the global filter and search features to fit your needs.
+
+### Relevant Props
+
+<RootPropTable
+  onlyProps={
+    new Set([
+      'enableGlobalFilter',
+      'enableGlobalFilterModes',
+      'enableGlobalFilterRankedResults',
+      'getColumnCanGlobalFilter',
+      'globalFilterFn',
+      'globalFilterModeOptions',
+      'muiSearchTextFieldProps',
+      'onGlobalFilterChange',
+      'onGlobalFilterFnChange',
+      'onShowGlobalFilterChange',
+      'positionGlobalFilter',
+      'renderGlobalFilterModeMenuItems',
+    ])
+  }
+/>
+
+### Relevant Column Options
+
+<ColumnOptionsTable onlyProps={new Set(['enableGlobalFilter'])} />
+
+### Relevant State Options
+
+<StateOptionsTable
+  onlyProps={new Set(['globalFilter', 'globalFilterFn', 'showGlobalFilter'])}
+/>
+
+### Disable Global Filtering
+
+You can either disable the global filter feature entirely, or disable it for specific columns.
+
+#### Disable Global Filtering per Column
+
+If you simply want to not include a column as one of the columns that the global filter scans through during filtering, you can set the `enableGlobalFilter` option to `false` for that column.
+
+```tsx
+const columns = [
+  {
+    accessorKey: 'id',
+    header: 'Id',
+    enableGlobalFilter: false, // don't scan this column during global filtering
+  },
+  {
+    accessorKey: 'name',
+    header: 'Name',
+  },
+];
+```
+
+#### Disable Global Filter Feature
+
+You can disable the global filtering feature and hide the search icon by setting the `enableGlobalFilter` prop to `false`.
+
+```tsx
+<MaterialTable
+  columns={columns}
+  data={data}
+  enableGlobalFilter={false} //disable search feature
+/>
+```
+
+### Client-Side Global Filtering
+
+Client-side filtering (and global filtering) is enabled by default. This means that the search box will scan through all columns and try to find matches for the search term.
+
+### Global Filter Function
+
+You can use any of the built-in `filterFns` or any of the custom filter functions that you have defined in the `filterFns` prop, just like you would with the column filters.
+
+The default global filter function is set to `fuzzy`, which is a filtering algorithm based on the popular `match-sorter` [library from Kent C. Dodds](https://www.npmjs.com/package/match-sorter), though you can change the global filter function by setting the `globalFilterFn` prop.
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  filterFns={{
+    myCustomFilterFn: (row, id, filterValue) =>
+      row.getValue(id).startsWith(filterValue),
+  }}
+  globalFilterFn="myCustomFilterFn" //set the global filter function to myCustomFilterFn
+/>
+```
+
+### Ranked Results
+
+If you keep the default `fuzzy` filterFn option as the global filter function, you get an extra ranked results feature enabled by default. This means that when a user searches with the searchbox, the results will be sorted by the closest match first instead of the order the data was defined in.
+
+If you don't want ranked results to be enabled, but you still want fuzzy matching, you can set the `enableGlobalFilterRankedResults` prop to `false`.
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  enableGlobalFilterRankedResults={false} //preserve the order of the data when fuzzy match searching
+/>
+```
+
+### Global Filter Modes
+
+Similar to the column filter modes, you can enable the user to be able to choose between multiple different filter modes for the global filter with the `enableGlobalFilterModes` prop. You can then customize which filter modes are available in the dropdown by setting the `globalFilterModeOptions` prop, or by rendering your own custom menu items with the `renderGlobalFilterModeMenuItems` prop.
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  enableGlobalFilterModes //enable the user to choose between multiple search filter modes
+  globalFilterModeOptions={['fuzzy', 'startsWith']} //only allow the user to choose between fuzzy and startsWith filter modes
+/>
+```
+
+### Customize Global Filter Position
+
+You can customize the position of the global filter (search box) in the top toolbar by setting the `positionGlobalFilter` prop to `left` or `right`. It is shown on the right by default.
+
+#### Show Search Field by Default
+
+Also, if you want to show the search text box by default and not hide it behind the search icon, you can set the `showGlobalFilter` state to `true` in the `initialState`.
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  positionGlobalFilter="left" //show the global filter on the left side of the top toolbar
+  initialState={{
+    showGlobalFilter: true, //show the global filter by default
+  }}
+/>
+```
+
+### Customize the Search Text Field
+
+You can customize the search text field by passing in props to the `muiSearchTextFieldProps` prop. This is useful if you want to customize the placeholder text, add styles, or any other text field props.
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  muiSearchTextFieldProps={{
+    placeholder: 'Search all users',
+    sx: { minWidth: '300px' },
+    variant: 'outlined',
+  }}
+/>
+```

@@ -578,7 +578,7 @@ export const rootProps: PropRow[] = [
     type: '',
   },
   {
-    propName: 'enabledGlobalFilterOptions',
+    propName: 'globalFilterModeOptions',
     defaultValue: '',
     description: '',
     link: '',

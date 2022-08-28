@@ -97,7 +97,7 @@ By default, Material React Table uses a `fuzzy` filtering algorithm based on the
 
 You can specify either a prebuilt filter function, from Material React Table or TanStack Table, or you can even specify _your own custom filter function_ in the `filterFn` column option.
 
-```tsx
+```jsx
 const columns = [
   {
     accessorKey: 'firstName',
@@ -133,7 +133,7 @@ This function will be used to filter 1 row at a time, and should return a `boole
 
 You can add custom filter functions to the `filterFns` prop. These will be available to all columns to use. The `filterFn` prop on a column will override any filter function with the same name in the `filterFns` prop.
 
-```tsx
+```jsx
 const columns = [
   {
     accessorKey: 'name',
