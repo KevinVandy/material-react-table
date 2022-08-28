@@ -75,7 +75,7 @@ return (
   <MaterialReactTable
     data={data}
     columns={columns}
-    renderToolbarInternalActions={({ table }) => ({
+    renderToolbarInternalActions={({ table }) => (
       <>
         {/* add your own custom print button or something */}
         <IconButton onClick={() => showPrintPreview(true)}>
@@ -85,7 +85,7 @@ return (
         <MRT_ShowHideColumnsButton table={table} />
         <MRT_FullScreenToggleButton table={table} />
       </>
-    })}
+    )}
   />
 );
 ```
