@@ -1,4 +1,8 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+import RemoteExample from '../../../examples/remote';
 
 <Head>
   <title>Sorting Feature Guide - Material React Table Docs</title>
@@ -9,3 +13,150 @@ import Head from 'next/head';
 </Head>
 
 ## Sorting Feature Guide
+
+Material React Table supports almost any sorting scenario you may have. Client-side sorting is enabled by default, but you can opt to implement your own server-side sorting logic, or even replace the default client-side sorting with your own implementation.
+
+### Relevant Props
+
+<RootPropTable
+  onlyProps={
+    new Set([
+      'enableGlobalFilterRankedResults',
+      'enableMultiSort',
+      'enableSorting',
+      'getSortedRowModel',
+      'isMultiSortEvent',
+      'manualSorting',
+      'maxMultiSortColCount',
+      'onSortingChange',
+      'sortDescFirst',
+      'sortingFns',
+    ])
+  }
+/>
+
+### Relevant Column Options
+
+<ColumnOptionsTable
+  onlyProps={
+    new Set([
+      'enableMultiSort',
+      'enableSorting',
+      'invertSorting',
+      'sortDescFirst',
+      'sortUndefined',
+      'sortingFn',
+    ])
+  }
+/>
+
+### Relevant State Options
+
+<StateOptionsTable onlyProps={new Set(['sorting'])} />
+
+### Disable Sorting
+
+Sorting can be disabled globally by setting the `enableSorting` prop to `false`. This will disable sorting for all columns. You can also disable sorting for individual columns by setting the `enableSorting` column option to `false`.
+
+```tsx
+const columns = [
+  {
+    accessorKey: 'name',
+    header: 'Name',
+    enableSorting: false, // disable sorting for this column
+  },
+];
+
+return (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableSorting={false} //disable sorting for all columns
+  />
+);
+```
+
+### Default Sorting Features
+
+Client-side sorting is enabled by default. When sorting is toggled on for a column, the table will be sorted by an [`alphanumeric` sorting algorithm](https://tanstack.com/table/v8/docs/api/features/sorting#sorting-functions) by default.
+
+#### Multi-Sorting
+
+Multi-sorting is also enabled by default, which means a user can sort by multiple columns at once. This can be accomplished by clicking on a column header while holding down the `shift` key. The table will then be sorted by the previously sorted column, and then by the newly clicked column. You can limit the number of columns that can be sorted at once by setting the `maxMultiSortColCount` prop, or you can disable multi-sorting entirely by setting the `enableMultiSort` prop to `false`.
+
+#### Sort Direction
+
+By default, columns with `string` datatypes will sort alphabetically in ascending order, but columns with `number` datatypes will sort numerically in descending order. You can change the default sort direction per column by specifying the `sortDescFirst` column option to either `true` or `false`. You can also change the default sort direction globally by setting the `sortDescFirst` prop to either `true` or `false`.
+
+### Sorting Functions
+
+By default, Material React Table will use an `alphanumeric` sorting function for all columns.
+
+There are 6 built-in sorting functions that you can choose from: ` alphanumeric`, `alphanumericCaseSensitive`, `text`, `textCaseSensitive`, `datetime`, and `basic`. You can learn more about these built-in sorting function in the [TanStack Table Sorting API docs](https://tanstack.com/table/v8/docs/api/features/sorting#sorting-functions).
+
+#### Add Custom Sorting Functions
+
+If none of these sorting functions meet your needs, you can add your own custom sorting functions by specifying more sorting functions in the `sortingFns` prop.
+
+```tsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  sortingFns={{
+    //will add a new sorting function to the list of other sorting functions already available
+    myCustomSortingFn: (rowA, rowB, columnId) => // your custom sorting logic
+  }}
+/>
+```
+
+#### Change Sorting Function Per Column
+
+You can now choose a sorting function for each column by either passing a string value of the built-in sorting function names to the `sortingFn` column option, or by passing a custom sorting function to the `sortingFn` column option.
+
+```tsx
+const columns = [
+  {
+    accessorKey: 'name',
+    header: 'Name',
+    sortingFn: 'textCaseSensitive', //use the built-in textCaseSensitive sorting function instead of the default alphanumeric sorting function
+  },
+  {
+    accessorKey: 'age',
+    header: 'Age',
+    //use your own custom sorting function instead of any of the built-in sorting functions
+    sortingFn: (rowA, rowB, columnId) => // your custom sorting logic
+  },
+];
+```
+
+### Manual Server-Side Sorting
+
+If you are working with large data sets, you may want to let your back-end apis handle all of the sorting and pagination processing instead of doing it client-side. You can do this by setting the `manualSorting` prop to `true`. This will disable the default client-side sorting and pagination features, and will allow you to implement your own sorting and pagination logic.
+
+> When `manualSorting` is set to `true`, Material React Table assumes that your `data` is already sorted by the time you are passing it to the table.
+
+If you need to sort your data in a back-end api, then you will also probably need access to the internal `sorting` state from the table. You can do this by managing the `sorting` state yourself, and then passing it to the table via the `state` prop. You can also pass a callback function to the `onSortingChange` prop, which will be called whenever the `sorting` state changes internally in the table
+
+```tsx
+const [sorting, setSorting] = useState({});
+
+useEffect(() => {
+  //do something with the sorting state when it changes
+}, [sorting]);
+
+return (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    manualSorting
+    state={{ sorting }}
+    onSortingChange={setSorting}
+  />
+);
+```
+
+#### Remote Sorting Example
+
+Here is the full Remote Data example showing how to implement server-side sorting, filtering, and pagination with Material React Table.
+
+<RemoteExample />

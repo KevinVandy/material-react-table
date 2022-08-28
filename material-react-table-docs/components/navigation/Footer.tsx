@@ -91,6 +91,14 @@ const Footer = () => {
         >
           <Link
             color="text.secondary"
+            href="https://www.npmjs.com/package/material-react-table"
+            target="_blank"
+            rel="noopener"
+          >
+            NPM
+          </Link>
+          <Link
+            color="text.secondary"
             href="https://github.com/KevinVandy/material-react-table"
             target="_blank"
             rel="noopener"
