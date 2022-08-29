@@ -1,5 +1,9 @@
 # Material React Table
 
+__Built with [Material UI <sup>V5</sup>](https://mui.com) and [TanStack Table <sup>V8</sup>](https://tanstack.com/table/v8)__
+
+_Quickly Create React Data Tables with Material Design_
+
 <a href="https://npmjs.com/package/material-react-table" target="_blank">
   <img alt="" src="https://badgen.net/npm/v/material-react-table?color=blue" />
 </a>
@@ -19,8 +23,6 @@
   <img alt="" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" />
 </a>
 
----
-
 ## About
 
 > This project is still in alpha, but is expected to enter beta by August 2022, and a stable 1.0 release shortly thereafter.
@@ -36,12 +38,10 @@ View the [Docs Website](https://www.material-react-table.com/)
 
 See all [Props and Options](https://www.material-react-table.com/docs/api)
 
----
-
 ## Quick Examples
 
  - [Basic Table](https://www.material-react-table.com/docs/examples/basic/) (See Default Features)
- - [Minimal Table](https://www.material-react-table.com/docs/examples/minimal/) (Turn off Features)
+ - [Minimal Table](https://www.material-react-table.com/docs/examples/minimal/) (Turn off Features like Pagination, Sorting, Filtering, and Toolbars)
  - [Advanced Table](https://www.material-react-table.com/docs/examples/advanced/) (See some of the Advanced Features)
  - [Aggregation/Grouping](https://www.material-react-table.com/docs/examples/aggregation-and-grouping/) (Aggregation features such as Sum, Average, Count, etc.)
  - [Data Export Table](https://www.material-react-table.com/docs/examples/data-export/) (Export to CSV, Excel, etc.)
@@ -52,8 +52,6 @@ See all [Props and Options](https://www.material-react-table.com/docs/api)
  - [Infinite Scrolling](https://www.material-react-table.com/docs/examples/infinite-scrolling/) (Fetch data as you scroll)
 
 View additional [storybook examples](https://www.material-react-table.dev/)
-
----
 
 ## Features (All Features work and are MVP, but are still being polished)
 
@@ -91,8 +89,6 @@ _All features can easily be enabled/disabled_
 - [x] Tree Data / Expanding Sub-rows
 - [x] Virtualization (react-virtual)
 
----
-
 ## Getting Started
 
 ### Installation
@@ -113,13 +109,11 @@ npm install material-react-table
 
 > _`@tanstack/react-table`, `@tanstack/react-virtual`, and `@tanstack/match-sorter-utils`_ are internal dependencies, so you don't need to install them yourself.
 
----
-
 ### Usage
 
 > Read the full usage docs [here](https://www.material-react-table.com/docs/getting-started/usage/)
 
-```tsx
+```jsx
 import React, { useMemo, useState, useEffect } from 'react';
 import MaterialReactTable from 'material-react-table';
 
@@ -177,8 +171,6 @@ export default function App() {
 ```
 
 _Open in [Code Sandbox](https://codesandbox.io/s/simple-material-react-table-example-t5c3ji)_
-
----
 
 ## Contributors
 
