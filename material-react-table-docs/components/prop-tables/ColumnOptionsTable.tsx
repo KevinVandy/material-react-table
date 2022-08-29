@@ -1,7 +1,12 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { Link as MuiLink, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Link as MuiLink,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { ColumnOption, columnOptions } from './columnOptions';
 
 interface Props {
@@ -70,7 +75,6 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
             </Link>
           ),
         },
-        { accessorKey: 'source', header: 'Source', enableGlobalFilter: false },
       ] as MRT_ColumnDef<ColumnOption>[],
     [theme],
   );
@@ -81,7 +85,7 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
     if (typeof window !== 'undefined') {
       if (isDesktop) {
         setColumnPinning({
-          left: ['mrt-row-numbers', 'columnOption'],
+          left: ['mrt-row-numbers', 'mrt-row-expand', 'columnOption'],
           right: ['link'],
         });
       } else {
@@ -112,7 +116,7 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
       enableBottomToolbar={false}
       enableTopToolbar={!onlyProps}
       initialState={{
-        columnVisibility: { required: false },
+        columnVisibility: { required: false, description: false },
         density: 'compact',
         showGlobalFilter: true,
         sorting: [
@@ -132,6 +136,11 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
           : 'column-options-table',
       }}
       positionGlobalFilter="left"
+      renderDetailPanel={({ row }) => (
+        <Typography>
+          {row.original.description ?? 'No Description Provided... Yet...'}
+        </Typography>
+      )}
       rowNumberMode="static"
       state={{ columnPinning }}
     />

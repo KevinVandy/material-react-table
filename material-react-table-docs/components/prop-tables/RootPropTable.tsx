@@ -4,7 +4,7 @@ import MaterialReactTable, {
   MaterialReactTableProps,
   MRT_ColumnDef,
 } from 'material-react-table';
-import { Link as MuiLink, useMediaQuery, useTheme } from '@mui/material';
+import { Link as MuiLink, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { PropRow, rootProps } from './rootProps';
 
 interface Props {
@@ -73,7 +73,6 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
             </Link>
           ),
         },
-        { header: 'Source', accessorKey: 'source', enableGlobalFilter: false },
       ] as MRT_ColumnDef<PropRow>[],
     [theme],
   );
@@ -113,7 +112,7 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
       enableBottomToolbar={false}
       enableTopToolbar={!onlyProps}
       initialState={{
-        columnVisibility: { required: false },
+        columnVisibility: { required: false, description: false },
         density: 'compact',
         showGlobalFilter: true,
         sorting: [
@@ -131,6 +130,11 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
         id: onlyProps ? 'relevant-props-table' : 'props-table',
       }}
       positionGlobalFilter="left"
+      renderDetailPanel={({ row }) => (
+        <Typography>
+          {row.original.description ?? 'No Description Provided... Yet...'}
+        </Typography>
+      )}
       rowNumberMode="static"
       state={{ columnPinning }}
     />

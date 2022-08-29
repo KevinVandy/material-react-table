@@ -139,9 +139,9 @@ export const columnOptions: ColumnOption[] = [
   {
     columnOption: 'enableColumnActions',
     defaultValue: '',
-    description: '',
-    link: '',
-    linkText: '',
+    description: 'Enable or disable column actions for this column.',
+    link: '/docs/guides/column-actions#disable-or-hide-column-actions-buttons',
+    linkText: 'MRT Column Actions Docs',
     source: 'MRT',
     required: false,
     type: 'boolean',
@@ -149,7 +149,7 @@ export const columnOptions: ColumnOption[] = [
   {
     columnOption: 'enableColumnDragging',
     defaultValue: '',
-    description: '',
+    description: 'Enable or disable column dragging for this column.',
     link: '',
     linkText: '',
     source: 'MRT',
@@ -159,9 +159,10 @@ export const columnOptions: ColumnOption[] = [
   {
     columnOption: 'enableColumnFilter',
     defaultValue: '',
-    description: '',
-    link: '',
-    linkText: '',
+    description:
+      'Enable or disable column filtering for this column. Filter will not be shown if disabled.',
+    link: '/docs/guides/column-filtering#disable-filtering-features',
+    linkText: 'MRT Column Filtering Docs',
     source: 'TanStack Table',
     required: false,
     type: 'boolean',
@@ -169,9 +170,9 @@ export const columnOptions: ColumnOption[] = [
   {
     columnOption: 'enableColumnFilterModes',
     defaultValue: '',
-    description: '',
-    link: '',
-    linkText: '',
+    description: 'Enable column filtering modes for this column.',
+    link: '/docs/guides/column-filtering#enable-column-filter-modes-(filter-switching)',
+    linkText: 'MRT Column Filtering Docs',
     source: 'MRT',
     required: false,
     type: 'boolean',

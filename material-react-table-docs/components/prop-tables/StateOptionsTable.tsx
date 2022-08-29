@@ -4,7 +4,7 @@ import MaterialReactTable, {
   MRT_ColumnDef,
   MRT_TableState,
 } from 'material-react-table';
-import { Link as MuiLink, useMediaQuery } from '@mui/material';
+import { Link as MuiLink, Typography, useMediaQuery } from '@mui/material';
 import { StateRow, stateOptions } from './stateOptions';
 
 interface Props {
@@ -60,7 +60,6 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
             </Link>
           ),
         },
-        { accessorKey: 'source', header: 'Source', enableGlobalFilter: false },
       ] as MRT_ColumnDef<StateRow>[],
     [],
   );
@@ -102,6 +101,7 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
       enableBottomToolbar={false}
       enableTopToolbar={!onlyProps}
       initialState={{
+        columnVisibility: { description: false },
         density: 'compact',
         showGlobalFilter: true,
         sorting: [{ id: 'stateOption', desc: false }],
@@ -116,6 +116,11 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
         id: onlyProps ? 'relevant-state-options-table' : 'state-options-table',
       }}
       positionGlobalFilter="left"
+      renderDetailPanel={({ row }) => (
+        <Typography>
+          {row.original.description ?? 'No Description Provided... Yet...'}
+        </Typography>
+      )}
       rowNumberMode="static"
       state={{ columnPinning }}
     />
