@@ -51,7 +51,8 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
         rankGlobalFuzzy(a, b),
       );
       if (enablePagination) {
-        return rankedRows.slice(pagination.pageIndex, pagination.pageSize);
+        const start = pagination.pageIndex * pagination.pageSize;
+        return rankedRows.slice(start, start + pagination.pageSize);
       }
       return rankedRows;
     }
@@ -65,6 +66,8 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
       ? getPrePaginationRowModel().rows
       : getRowModel().rows,
     globalFilter,
+    pagination.pageIndex,
+    pagination.pageSize,
   ]);
 
   const virtualizer = enableRowVirtualization
