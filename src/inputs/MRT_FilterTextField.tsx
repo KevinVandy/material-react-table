@@ -278,9 +278,24 @@ export const MRT_FilterTextField: FC<Props> = ({
                   <Box sx={{ opacity: 0.5 }}>{filterPlaceholder}</Box>
                 ) : (
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '2px' }}>
-                    {(selected as string[])?.map((value) => (
-                      <Chip key={value} label={value} />
-                    ))}
+                    {(selected as string[])?.map((value) => {
+                      const selectedValue = columnDef.filterSelectOptions?.find(
+                        (option) =>
+                          option instanceof Object
+                            ? option.value === value
+                            : option === value,
+                      );
+                      return (
+                        <Chip
+                          key={value}
+                          label={
+                            selectedValue instanceof Object
+                              ? selectedValue.text
+                              : selectedValue
+                          }
+                        />
+                      );
+                    })}
                   </Box>
                 )
             : undefined,

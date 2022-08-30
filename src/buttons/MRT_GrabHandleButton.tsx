@@ -28,7 +28,7 @@ export const MRT_GrabHandleButton = <TData extends Record<string, any> = {}>({
       enterDelay={1000}
       enterNextDelay={1000}
       placement="top"
-      title={localization.move}
+      title={iconButtonProps?.title ?? localization.move}
     >
       <IconButton
         disableRipple
@@ -58,6 +58,7 @@ export const MRT_GrabHandleButton = <TData extends Record<string, any> = {}>({
             ? iconButtonProps?.sx(theme)
             : (iconButtonProps?.sx as any)),
         })}
+        title={undefined}
       >
         <DragHandleIcon />
       </IconButton>

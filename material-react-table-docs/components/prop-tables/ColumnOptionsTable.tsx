@@ -3,6 +3,7 @@ import Link from 'next/link';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import {
   Link as MuiLink,
+  Tooltip,
   Typography,
   useMediaQuery,
   useTheme,
@@ -24,7 +25,7 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
           accessorKey: 'columnOption',
           enableClickToCopy: true,
           header: 'Column Option',
-          muiTableBodyCellCopyButtonProps: ({ cell }) => ({
+          muiTableBodyCellCopyButtonProps: ({ cell, row }) => ({
             className: 'column-option',
             // component: 'a',
             id: `${cell.getValue<string>()}-column-option`,

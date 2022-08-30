@@ -34,11 +34,12 @@ export const MRT_ToggleDensePaddingButton = <
   };
 
   return (
-    <Tooltip arrow title={localization.toggleDensity}>
+    <Tooltip arrow title={rest?.title ?? localization.toggleDensity}>
       <IconButton
         aria-label={localization.toggleDensity}
         onClick={handleToggleDensePadding}
         {...rest}
+        title={undefined}
       >
         {density === 'compact' ? (
           <DensitySmallIcon />

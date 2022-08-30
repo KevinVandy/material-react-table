@@ -37,6 +37,8 @@ export const MRT_CopyButton = <TData extends Record<string, any> = {}>({
     columnDef.muiTableBodyCellCopyButtonProps instanceof Function
       ? columnDef.muiTableBodyCellCopyButtonProps({
           cell,
+          column,
+          row,
           table,
         })
       : columnDef.muiTableBodyCellCopyButtonProps;
@@ -52,7 +54,10 @@ export const MRT_CopyButton = <TData extends Record<string, any> = {}>({
       enterDelay={1000}
       enterNextDelay={1000}
       placement="top"
-      title={copied ? localization.copiedToClipboard : localization.clickToCopy}
+      title={
+        buttonProps?.title ??
+        (copied ? localization.copiedToClipboard : localization.clickToCopy)
+      }
     >
       <Button
         onClick={(e) => handleCopy(e, cell.getValue())}
@@ -76,6 +81,7 @@ export const MRT_CopyButton = <TData extends Record<string, any> = {}>({
             ? buttonProps.sx(theme)
             : (buttonProps?.sx as any)),
         })}
+        title={undefined}
       >
         {children}
       </Button>

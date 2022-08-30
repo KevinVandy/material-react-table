@@ -31,8 +31,8 @@ export const MRT_ToggleGlobalFilterButton = <
   };
 
   return (
-    <Tooltip arrow title={localization.showHideSearch}>
-      <IconButton onClick={handleToggleSearch} {...rest}>
+    <Tooltip arrow title={rest?.title ?? localization.showHideSearch}>
+      <IconButton onClick={handleToggleSearch} {...rest} title={undefined}>
         {showGlobalFilter ? <SearchOffIcon /> : <SearchIcon />}
       </IconButton>
     </Tooltip>

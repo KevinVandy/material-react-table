@@ -55,7 +55,7 @@ export const MRT_TableHeadCellColumnActionsButton: FC<Props> = ({
         enterDelay={1000}
         enterNextDelay={1000}
         placement="top"
-        title={localization.columnActions}
+        title={iconButtonProps?.title ?? localization.columnActions}
       >
         <IconButton
           aria-label={localization.columnActions}
@@ -75,6 +75,7 @@ export const MRT_TableHeadCellColumnActionsButton: FC<Props> = ({
               ? iconButtonProps.sx(theme)
               : (iconButtonProps?.sx as any)),
           })}
+          title={undefined}
         >
           <MoreVertIcon />
         </IconButton>

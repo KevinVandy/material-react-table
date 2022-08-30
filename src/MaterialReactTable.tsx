@@ -288,10 +288,14 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
     | ButtonProps
     | (({
         cell,
+        column,
+        row,
         table,
       }: {
-        table: MRT_TableInstance<TData>;
         cell: MRT_Cell<TData>;
+        column: MRT_Column<TData>;
+        row: MRT_Row<TData>;
+        table: MRT_TableInstance<TData>;
       }) => ButtonProps);
   muiTableBodyCellEditTextFieldProps?:
     | TextFieldProps

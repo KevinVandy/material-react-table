@@ -35,7 +35,7 @@ export const MRT_ExpandButton: FC<Props> = ({ row, table }) => {
       arrow
       enterDelay={1000}
       enterNextDelay={1000}
-      title={localization.expand}
+      title={iconButtonProps?.title ?? localization.expand}
     >
       <span>
         <IconButton
@@ -50,6 +50,7 @@ export const MRT_ExpandButton: FC<Props> = ({ row, table }) => {
               ? iconButtonProps.sx(theme)
               : (iconButtonProps?.sx as any)),
           })}
+          title={undefined}
         >
           <ExpandMoreIcon
             style={{

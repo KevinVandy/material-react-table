@@ -376,7 +376,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: 'Material UI Button API',
     source: 'Material UI',
     required: false,
-    type: 'ButtonProps | ({ cell, table }) => ButtonProps',
+    type: 'ButtonProps | ({ cell, column, row, table }) => ButtonProps',
   },
   {
     columnOption: 'muiTableBodyCellEditTextFieldProps',
