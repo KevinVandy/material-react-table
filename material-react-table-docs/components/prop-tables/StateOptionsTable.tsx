@@ -23,9 +23,9 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
           header: 'State Option',
           muiTableBodyCellCopyButtonProps: ({ cell }) => ({
             className: 'state-option',
-            component: 'a',
+            // component: 'a',
             id: `${cell.getValue<string>()}-state-option`,
-            href: `#${cell.getValue<string>()}-state-option`,
+            // href: `#${cell.getValue<string>()}-state-option`,
           }),
           Cell: ({ cell }) => cell.getValue<string>(),
         },
@@ -70,7 +70,7 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
     if (typeof window !== 'undefined') {
       if (isDesktop) {
         setColumnPinning({
-          left: ['mrt-row-numbers', 'stateOption'],
+          left: ['mrt-row-expand', 'mrt-row-numbers', 'stateOption'],
           right: ['link'],
         });
       } else {
@@ -92,6 +92,14 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
     <MaterialReactTable
       columns={columns}
       data={data}
+      displayColumnDefOptions={{
+        'mrt-row-numbers': {
+          size: 10,
+        },
+        'mrt-row-expand': {
+          size: 10,
+        },
+      }}
       enableColumnActions={!onlyProps}
       enableColumnFilterModes
       enableColumnOrdering={!onlyProps}
@@ -117,8 +125,10 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
       }}
       positionGlobalFilter="left"
       renderDetailPanel={({ row }) => (
-        <Typography>
-          {row.original.description ?? 'No Description Provided... Yet...'}
+        <Typography
+          color={row.original.description ? 'secondary.main' : 'text.secondary'}
+        >
+          {row.original.description || 'No Description Provided... Yet...'}
         </Typography>
       )}
       rowNumberMode="static"

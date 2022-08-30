@@ -4,7 +4,12 @@ import MaterialReactTable, {
   MaterialReactTableProps,
   MRT_ColumnDef,
 } from 'material-react-table';
-import { Link as MuiLink, Typography, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Link as MuiLink,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { PropRow, rootProps } from './rootProps';
 
 interface Props {
@@ -24,9 +29,9 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
           accessorKey: 'propName',
           muiTableBodyCellCopyButtonProps: ({ cell }) => ({
             className: 'prop',
-            component: 'a',
+            // component: 'a',
             id: `${cell.getValue<string>()}-prop`,
-            href: `#${cell.getValue<string>()}-prop`,
+            // href: `#${cell.getValue<string>()}-prop`,
           }),
           Cell: ({ cell, row }) =>
             row.original?.required ? (
@@ -83,7 +88,7 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
     if (typeof window !== 'undefined') {
       if (isDesktop) {
         setColumnPinning({
-          left: ['mrt-row-numbers', 'propName'],
+          left: ['mrt-row-expand', 'mrt-row-numbers', 'propName'],
           right: ['link'],
         });
       } else {
@@ -103,6 +108,14 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
     <MaterialReactTable
       columns={columns}
       data={data}
+      displayColumnDefOptions={{
+        'mrt-row-numbers': {
+          size: 10,
+        },
+        'mrt-row-expand': {
+          size: 10,
+        },
+      }}
       enableColumnActions={!onlyProps}
       enableColumnFilterModes
       enableColumnOrdering={!onlyProps}
@@ -131,8 +144,10 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
       }}
       positionGlobalFilter="left"
       renderDetailPanel={({ row }) => (
-        <Typography>
-          {row.original.description ?? 'No Description Provided... Yet...'}
+        <Typography
+          color={row.original.description ? 'secondary.main' : 'text.secondary'}
+        >
+          {row.original.description || 'No Description Provided... Yet...'}
         </Typography>
       )}
       rowNumberMode="static"

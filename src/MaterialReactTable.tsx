@@ -264,7 +264,7 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
   enableColumnOrdering?: boolean;
   enableEditing?: boolean;
   filterFn?: MRT_FilterFn<TData>;
-  filterSelectOptions?: (string | { text: string; value: string })[];
+  filterSelectOptions?: (string | { text: string; value: any })[];
   filterVariant?: 'text' | 'select' | 'multi-select' | 'range';
   /**
    * footer must be a string. If you want custom JSX to render the footer, you can also specify a `Footer` option. (Capital F)
