@@ -147,6 +147,16 @@ export const rootProps: PropRow[] = [
     type: '',
   },
   {
+    propName: 'defaultDisplayColumn',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '',
+  },
+  {
     propName: 'displayColumnDefOptions',
     defaultValue: '',
     description:

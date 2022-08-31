@@ -391,8 +391,9 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
 
 export type MRT_DefinedColumnDef<TData extends Record<string, any> = {}> = Omit<
   MRT_ColumnDef<TData>,
-  'id'
+  'id' | 'defaultDisplayColumn'
 > & {
+  defaultDisplayColumn: Partial<MRT_ColumnDef<TData>>;
   id: string;
   _filterFn: MRT_FilterOption;
 };
@@ -495,6 +496,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     columns: MRT_ColumnDef<TData>[];
     data: TData[];
     defaultColumn?: Partial<MRT_ColumnDef<TData>>;
+    defaultDisplayColumn?: Partial<MRT_ColumnDef<TData>>;
     displayColumnDefOptions?: Partial<{
       [key in MRT_DisplayColumnIds]: Partial<MRT_ColumnDef>;
     }>;
@@ -898,6 +900,7 @@ export default <TData extends Record<string, any> = {}>({
   autoResetExpanded = false,
   columnResizeMode = 'onEnd',
   defaultColumn = { minSize: 40, maxSize: 1000, size: 180 },
+  defaultDisplayColumn,
   editingMode = 'modal',
   enableBottomToolbar = true,
   enableColumnActions = true,
@@ -943,6 +946,21 @@ export default <TData extends Record<string, any> = {}>({
     autoResetExpanded={autoResetExpanded}
     columnResizeMode={columnResizeMode}
     defaultColumn={defaultColumn}
+    defaultDisplayColumn={{
+      columnDefType: 'display',
+      enableClickToCopy: false,
+      enableColumnActions: false,
+      enableColumnDragging: false,
+      enableColumnFilter: false,
+      enableColumnOrdering: false,
+      enableEditing: false,
+      enableGlobalFilter: false,
+      enableGrouping: false,
+      enableHiding: false,
+      enableResizing: false,
+      enableSorting: false,
+      ...defaultDisplayColumn,
+    }}
     editingMode={editingMode}
     enableBottomToolbar={enableBottomToolbar}
     enableColumnActions={enableColumnActions}

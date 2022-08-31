@@ -1,9 +1,5 @@
 # Material React Table
 
-__Built with [Material UI <sup>V5</sup>](https://mui.com) and [TanStack Table <sup>V8</sup>](https://tanstack.com/table/v8)__
-
-_Quickly Create React Data Tables with Material Design_
-
 <a href="https://npmjs.com/package/material-react-table" target="_blank">
   <img alt="" src="https://badgen.net/npm/v/material-react-table?color=blue" />
 </a>
@@ -25,12 +21,9 @@ _Quickly Create React Data Tables with Material Design_
 
 ## About
 
-> This project is still in alpha, but is expected to enter beta by August 2022, and a stable 1.0 release shortly thereafter.
+__Built with [Material UI <sup>V5</sup>](https://mui.com) and [TanStack Table <sup>V8</sup>](https://tanstack.com/table/v8)__
 
-- A fully featured Material UI V5 implementation of Tanstack React Table V8
-- Inspired by material-table and the MUI X DataGrid
-- Written from the ground up in TypeScript
-- All internal Material UI components are easily customizable
+_Quickly Create React Data Tables with Material Design_
 
 Join the [Discord](https://discord.gg/5wqyRx6fnm) server to join in on the development discussion or ask questions
 
@@ -114,7 +107,7 @@ npm install material-react-table
 > Read the full usage docs [here](https://www.material-react-table.com/docs/getting-started/usage/)
 
 ```jsx
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useRef, useState, useEffect } from 'react';
 import MaterialReactTable from 'material-react-table';
 
 export default function App() {
@@ -129,7 +122,7 @@ export default function App() {
         accessorFn: (row) => row.age, //alternate way
         id: 'age', //id required if you use accessorFn instead of accessorKey
         header: 'Age',
-        Header: <i style={{ color: 'red' }}>Age</i>, //optional custom markup
+        Header: <i>Age</i>, //optional custom markup
       },
     ],
     [],
@@ -156,15 +149,24 @@ export default function App() {
     //do something when the row selection changes
   }, [rowSelection]);
 
+  //Or, optionally, you can get a reference to the underlying table instance
+  const tableInstanceRef = useRef(null);
+
+  const someEventHandler = () => {
+    //read the table state during an event from the table instance ref
+    console.log(tableInstanceRef.current.getState().sorting);
+  }
+
   return (
     <MaterialReactTable 
       columns={columns} 
       data={data} 
       enableColumnOrdering //enable some features
       enableRowSelection 
-      enableStickyHeader
+      enablePagination={false} //disable a default feature
       onRowSelectionChange={setRowSelection} //hoist internal state to your own state (optional)
       state={{ rowSelection }} //manage your own state, pass it back to the table (optional)
+      tableInstanceRef={tableInstanceRef} //get a reference to the underlying table instance (optional)
    />
    );
 }
@@ -178,4 +180,4 @@ _Open in [Code Sandbox](https://codesandbox.io/s/simple-material-react-table-exa
   <img src="https://contrib.rocks/image?repo=kevinvandy/material-react-table" />
 </a>
 
-PRs are Welcome, but please discuss in [GitHub Discussions](https://github.com/KevinVandy/material-react-table/discussions) or the [Discord Server](https://discord.gg/5wqyRx6fnm) first!
+PRs are Welcome, but please discuss in [GitHub Discussions](https://github.com/KevinVandy/material-react-table/discussions) or the [Discord Server](https://discord.gg/5wqyRx6fnm) first if it is a large change!

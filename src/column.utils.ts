@@ -10,21 +10,6 @@ import {
 import { MRT_FilterFns } from './filterFns';
 import { MRT_SortingFns } from './sortingFns';
 
-export const defaultDisplayColumnDefOptions = {
-  columnDefType: 'display',
-  enableClickToCopy: false,
-  enableColumnActions: false,
-  enableColumnDragging: false,
-  enableColumnFilter: false,
-  enableColumnOrdering: false,
-  enableEditing: false,
-  enableGlobalFilter: false,
-  enableGrouping: false,
-  enableHiding: false,
-  enableResizing: false,
-  enableSorting: false,
-} as Partial<MRT_ColumnDef>;
-
 export const getColumnId = <TData extends Record<string, any> = {}>(
   columnDef: MRT_ColumnDef<TData>,
 ): string =>
@@ -48,13 +33,20 @@ export const getAllLeafColumnDefs = <TData extends Record<string, any> = {}>(
   return lowestLevelColumns.filter((col) => !col.columns);
 };
 
-export const prepareColumns = <TData extends Record<string, any> = {}>(
-  columnDefs: MRT_ColumnDef<TData>[],
-  columnFilterFns: { [key: string]: MRT_FilterOption },
-  filterFns: typeof MRT_FilterFns & MaterialReactTableProps<TData>['filterFns'],
+export const prepareColumns = <TData extends Record<string, any> = {}>({
+  columnDefs,
+  columnFilterFns,
+  defaultDisplayColumn,
+  filterFns,
+  sortingFns,
+}: {
+  columnDefs: MRT_ColumnDef<TData>[];
+  columnFilterFns: { [key: string]: MRT_FilterOption };
+  defaultDisplayColumn: Partial<MRT_ColumnDef<TData>>;
+  filterFns: typeof MRT_FilterFns & MaterialReactTableProps<TData>['filterFns'];
   sortingFns: typeof MRT_SortingFns &
-    MaterialReactTableProps<TData>['sortingFns'],
-): MRT_DefinedColumnDef<TData>[] =>
+    MaterialReactTableProps<TData>['sortingFns'];
+}): MRT_DefinedColumnDef<TData>[] =>
   columnDefs.map((columnDef) => {
     if (!columnDef.id) columnDef.id = getColumnId(columnDef);
     if (process.env.NODE_ENV !== 'production' && !columnDef.id) {
@@ -65,12 +57,13 @@ export const prepareColumns = <TData extends Record<string, any> = {}>(
     if (!columnDef.columnDefType) columnDef.columnDefType = 'data';
     if (!!columnDef.columns?.length) {
       columnDef.columnDefType = 'group';
-      columnDef.columns = prepareColumns(
-        columnDef.columns,
+      columnDef.columns = prepareColumns({
+        columnDefs: columnDef.columns,
         columnFilterFns,
+        defaultDisplayColumn,
         filterFns,
         sortingFns,
-      );
+      });
     } else if (columnDef.columnDefType === 'data') {
       if (Object.keys(filterFns).includes(columnFilterFns[columnDef.id])) {
         columnDef.filterFn =
@@ -84,7 +77,7 @@ export const prepareColumns = <TData extends Record<string, any> = {}>(
       }
     } else if (columnDef.columnDefType === 'display') {
       columnDef = {
-        ...(defaultDisplayColumnDefOptions as MRT_ColumnDef<TData>),
+        ...(defaultDisplayColumn as MRT_ColumnDef<TData>),
         ...columnDef,
       };
     }
