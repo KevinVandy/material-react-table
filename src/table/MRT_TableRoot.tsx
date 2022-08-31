@@ -211,11 +211,16 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
     () =>
       prepareColumns(
         [...displayColumns, ...props.columns],
-        columnFilterFns,
+        props.state?.columnFilterFns ?? columnFilterFns,
         props.filterFns as any,
         props.sortingFns as any,
       ),
-    [columnFilterFns, displayColumns, props.columns],
+    [
+      columnFilterFns,
+      displayColumns,
+      props.columns,
+      props.state?.columnFilterFns,
+    ],
   );
 
   const data: TData[] = useMemo(
