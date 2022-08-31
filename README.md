@@ -21,6 +21,8 @@
 
 ## About
 
+> Now in Beta!
+
 __Built with [Material UI <sup>V5</sup>](https://mui.com) and [TanStack Table <sup>V8</sup>](https://tanstack.com/table/v8)__
 
 _Quickly Create React Data Tables with Material Design_
