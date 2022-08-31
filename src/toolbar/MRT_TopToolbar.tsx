@@ -100,10 +100,14 @@ export const MRT_TopToolbar: FC<Props> = ({ table }) => {
         {enableGlobalFilter && positionGlobalFilter === 'left' && (
           <MRT_GlobalFilterTextField table={table} />
         )}
-
         {renderTopToolbarCustomActions?.({ table }) ?? <span />}
         {enableToolbarInternalActions ? (
-          <MRT_ToolbarInternalButtons table={table} />
+          <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+            {enableGlobalFilter && positionGlobalFilter === 'right' && (
+              <MRT_GlobalFilterTextField table={table} />
+            )}
+            <MRT_ToolbarInternalButtons table={table} />
+          </Box>
         ) : (
           enableGlobalFilter &&
           positionGlobalFilter === 'right' && (

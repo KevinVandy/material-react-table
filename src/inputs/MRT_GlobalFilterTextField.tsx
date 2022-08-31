@@ -62,7 +62,12 @@ export const MRT_GlobalFilterTextField = <
       : muiSearchTextFieldProps;
 
   return (
-    <Collapse in={showGlobalFilter} orientation="horizontal">
+    <Collapse
+      in={showGlobalFilter}
+      orientation="horizontal"
+      unmountOnExit
+      mountOnEnter
+    >
       <TextField
         placeholder={localization.search}
         onChange={handleChange}

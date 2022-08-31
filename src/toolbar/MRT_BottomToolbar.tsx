@@ -69,8 +69,11 @@ export const MRT_BottomToolbar: FC<Props> = ({ table }) => {
       )}
       <Box
         sx={{
+          alignItems: 'flex-start',
+          boxSizing: 'border-box',
           display: 'flex',
           justifyContent: 'space-between',
+          p: '0.5rem',
           width: '100%',
         }}
       >
