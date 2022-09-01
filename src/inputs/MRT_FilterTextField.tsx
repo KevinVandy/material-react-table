@@ -1,11 +1,3 @@
-import React, {
-  ChangeEvent,
-  FC,
-  MouseEvent,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
 import {
   Box,
   Checkbox,
@@ -18,8 +10,16 @@ import {
   TextFieldProps,
   Tooltip,
 } from '@mui/material';
-import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
+import React, {
+  ChangeEvent,
+  FC,
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import type { MRT_Header, MRT_TableInstance } from '..';
+import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 
 interface Props {
   header: MRT_Header;
@@ -171,8 +171,8 @@ export const MRT_FilterTextField: FC<Props> = ({
   };
 
   useEffect(() => {
-    setFilterValue(isMultiSelectFilter ? [] : '');
-  }, [columnDef._filterFn, isMultiSelectFilter]);
+    handleClear();
+  }, [columnDef._filterFn]);
 
   if (columnDef.Filter) {
     return <>{columnDef.Filter?.({ column, header, table })}</>;
