@@ -1,3 +1,11 @@
+import React, {
+  ChangeEvent,
+  FC,
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import {
   Box,
   Checkbox,
@@ -10,14 +18,6 @@ import {
   TextFieldProps,
   Tooltip,
 } from '@mui/material';
-import React, {
-  ChangeEvent,
-  FC,
-  MouseEvent,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
 import type { MRT_Header, MRT_TableInstance } from '..';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 
