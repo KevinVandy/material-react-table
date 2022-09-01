@@ -171,8 +171,8 @@ export const MRT_FilterTextField: FC<Props> = ({
   };
 
   useEffect(() => {
-    setFilterValue('');
-  }, [columnDef._filterFn]);
+    setFilterValue(isMultiSelectFilter ? [] : '');
+  }, [columnDef._filterFn, isMultiSelectFilter]);
 
   if (columnDef.Filter) {
     return <>{columnDef.Filter?.({ column, header, table })}</>;
