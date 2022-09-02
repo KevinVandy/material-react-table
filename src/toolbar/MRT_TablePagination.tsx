@@ -58,7 +58,7 @@ export const MRT_TablePagination: FC<Props> = ({ table, position }) => {
           enableToolbarInternalActions &&
           !showGlobalFilter
             ? '3.5rem'
-            : '-0.25rem',
+            : undefined,
         position: 'relative',
         zIndex: 2,
         ...(tablePaginationProps?.sx instanceof Function

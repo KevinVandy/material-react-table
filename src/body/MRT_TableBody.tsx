@@ -1,4 +1,4 @@
-import React, { FC, RefObject, useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 import { useVirtual } from 'react-virtual'; //stuck on v2 for now
 // import { useVirtualizer, Virtualizer } from '@tanstack/react-virtual';
 import { TableBody } from '@mui/material';
@@ -8,10 +8,9 @@ import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
   table: MRT_TableInstance;
-  tableContainerRef: RefObject<HTMLDivElement>;
 }
 
-export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
+export const MRT_TableBody: FC<Props> = ({ table }) => {
   const {
     getRowModel,
     getPrePaginationRowModel,
@@ -26,6 +25,7 @@ export const MRT_TableBody: FC<Props> = ({ table, tableContainerRef }) => {
       virtualizerInstanceRef,
       virtualizerProps,
     },
+    refs: { tableContainerRef },
   } = table;
   const { globalFilter, pagination, sorting } = getState();
 

@@ -313,7 +313,12 @@ export const MRT_FilterTextField: FC<Props> = ({
         }}
         sx={(theme) => ({
           p: 0,
-          minWidth: !filterChipLabel ? '120px' : 'auto',
+          minWidth:
+            columnDef.filterVariant === 'range'
+              ? '90px'
+              : !filterChipLabel
+              ? '120px'
+              : 'auto',
           width: '100%',
           '&	.MuiSelect-icon': {
             mr: '1.5rem',

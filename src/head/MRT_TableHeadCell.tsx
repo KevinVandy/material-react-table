@@ -67,7 +67,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
 
   const getTotalRight = () => {
     return (
-      (table.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) * 150
+      (table.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) * 180
     );
   };
 
