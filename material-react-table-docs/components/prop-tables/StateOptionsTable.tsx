@@ -5,6 +5,7 @@ import MaterialReactTable, {
   MRT_TableState,
 } from 'material-react-table';
 import { Link as MuiLink, Typography, useMediaQuery } from '@mui/material';
+import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
 import { StateRow, stateOptions } from './stateOptions';
 
 interface Props {
@@ -29,11 +30,45 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
           }),
           Cell: ({ cell }) => cell.getValue<string>(),
         },
-        { accessorKey: 'type', header: 'Type', enableGlobalFilter: false },
+        {
+          accessorKey: 'type',
+          header: 'Type',
+          enableGlobalFilter: false,
+          Cell: ({ cell }) => (
+            <SampleCodeSnippet
+              className="language-js"
+              enableCopyButton={false}
+              style={{
+                backgroundColor: 'transparent',
+                fontSize: '0.9rem',
+                margin: 0,
+                padding: 0,
+                minHeight: 'unset',
+              }}
+            >
+              {cell.getValue<string>()}
+            </SampleCodeSnippet>
+          ),
+        },
         {
           accessorKey: 'defaultValue',
           enableGlobalFilter: false,
           header: 'Default Value',
+          Cell: ({ cell }) => (
+            <SampleCodeSnippet
+              className="language-js"
+              enableCopyButton={false}
+              style={{
+                backgroundColor: 'transparent',
+                fontSize: '0.9rem',
+                margin: 0,
+                padding: 0,
+                minHeight: 'unset',
+              }}
+            >
+              {cell.getValue<string>()}
+            </SampleCodeSnippet>
+          ),
         },
         {
           accessorKey: 'description',

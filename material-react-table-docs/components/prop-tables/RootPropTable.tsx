@@ -10,6 +10,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
 import { PropRow, rootProps } from './rootProps';
 
 interface Props {
@@ -42,7 +43,26 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
               cell.getValue<string>()
             ),
         },
-        { header: 'Type', accessorKey: 'type', enableGlobalFilter: false },
+        {
+          header: 'Type',
+          accessorKey: 'type',
+          enableGlobalFilter: false,
+          Cell: ({ cell }) => (
+            <SampleCodeSnippet
+              className="language-js"
+              enableCopyButton={false}
+              style={{
+                backgroundColor: 'transparent',
+                fontSize: '0.9rem',
+                margin: 0,
+                padding: 0,
+                minHeight: 'unset',
+              }}
+            >
+              {cell.getValue<string>()}
+            </SampleCodeSnippet>
+          ),
+        },
         {
           header: 'Required',
           accessorKey: 'required',
@@ -52,6 +72,21 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
           header: 'Default Value',
           accessorKey: 'defaultValue',
           enableGlobalFilter: false,
+          Cell: ({ cell }) => (
+            <SampleCodeSnippet
+              className="language-js"
+              enableCopyButton={false}
+              style={{
+                backgroundColor: 'transparent',
+                fontSize: '0.9rem',
+                margin: 0,
+                padding: 0,
+                minHeight: 'unset',
+              }}
+            >
+              {cell.getValue<string>()}
+            </SampleCodeSnippet>
+          ),
         },
         {
           header: 'Description',
@@ -66,6 +101,15 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
           Cell: ({ cell, row }) => (
             <Link href={cell.getValue() as string} passHref>
               <MuiLink
+                color={
+                  row.original.source === 'MRT'
+                    ? 'text.primary'
+                    : row.original.source === 'Material UI'
+                    ? 'primary.main'
+                    : row.original.source === 'TanStack Table'
+                    ? 'secondary.main'
+                    : undefined
+                }
                 target={
                   (cell.getValue() as string).startsWith('http')
                     ? '_blank'

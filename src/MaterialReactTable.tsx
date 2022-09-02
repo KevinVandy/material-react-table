@@ -541,6 +541,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     muiExpandButtonProps?:
       | IconButtonProps
       | (({
+          row,
           table,
         }: {
           table: MRT_TableInstance<TData>;
@@ -612,11 +613,15 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     muiTableBodyCellSkeletonProps?:
       | SkeletonProps
       | (({
-          table,
           cell,
+          column,
+          row,
+          table,
         }: {
-          table: MRT_TableInstance<TData>;
           cell: MRT_Cell<TData>;
+          column: MRT_Column<TData>;
+          row: MRT_Row<TData>;
+          table: MRT_TableInstance<TData>;
         }) => SkeletonProps);
     muiTableBodyProps?:
       | TableBodyProps

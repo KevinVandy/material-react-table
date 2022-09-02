@@ -3,11 +3,11 @@ import Link from 'next/link';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import {
   Link as MuiLink,
-  Tooltip,
   Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
 import { ColumnOption, columnOptions } from './columnOptions';
 
 interface Props {
@@ -40,7 +40,26 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
               cell.getValue<string>()
             ),
         },
-        { accessorKey: 'type', header: 'Type', enableGlobalFilter: false },
+        {
+          accessorKey: 'type',
+          header: 'Type',
+          enableGlobalFilter: false,
+          Cell: ({ cell }) => (
+            <SampleCodeSnippet
+              className="language-js"
+              enableCopyButton={false}
+              style={{
+                backgroundColor: 'transparent',
+                fontSize: '0.9rem',
+                margin: 0,
+                padding: 0,
+                minHeight: 'unset',
+              }}
+            >
+              {cell.getValue<string>()}
+            </SampleCodeSnippet>
+          ),
+        },
         {
           accessorKey: 'required',
           enableGlobalFilter: false,
@@ -50,6 +69,21 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
           accessorKey: 'defaultValue',
           enableGlobalFilter: false,
           header: 'Default Value',
+          Cell: ({ cell }) => (
+            <SampleCodeSnippet
+              className="language-js"
+              enableCopyButton={false}
+              style={{
+                backgroundColor: 'transparent',
+                fontSize: '0.9rem',
+                margin: 0,
+                padding: 0,
+                minHeight: 'unset',
+              }}
+            >
+              {cell.getValue<string>()}
+            </SampleCodeSnippet>
+          ),
         },
         {
           accessorKey: 'description',

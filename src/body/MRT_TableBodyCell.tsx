@@ -82,6 +82,11 @@ export const MRT_TableBodyCell: FC<Props> = ({
     ...mcTableCellBodyProps,
   };
 
+  const skeletonProps =
+    muiTableBodyCellSkeletonProps instanceof Function
+      ? muiTableBodyCellSkeletonProps({ cell, column, row, table })
+      : muiTableBodyCellSkeletonProps;
+
   const isEditable =
     (enableEditing || columnDef.enableEditing) &&
     columnDef.enableEditing !== false;
@@ -264,7 +269,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
             animation="wave"
             height={20}
             width={skeletonWidth}
-            {...muiTableBodyCellSkeletonProps}
+            {...skeletonProps}
           />
         ) : enableRowNumbers &&
           rowNumberMode === 'static' &&
