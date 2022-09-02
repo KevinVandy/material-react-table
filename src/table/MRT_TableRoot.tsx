@@ -321,13 +321,13 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
         disablePortal
         fullScreen
         keepMounted={false}
-        onClose={() => setIsFullScreen(false)}
-        open={isFullScreen}
+        onClose={() => table.setIsFullScreen(false)}
+        open={table.getState().isFullScreen}
         transitionDuration={400}
       >
         <MRT_TablePaper table={table as any} />
       </Dialog>
-      {!isFullScreen && <MRT_TablePaper table={table as any} />}
+      {!table.getState().isFullScreen && <MRT_TablePaper table={table as any} />}
       {editingRow && props.editingMode === 'modal' && (
         <MRT_EditRowModal row={editingRow as any} table={table} open />
       )}
