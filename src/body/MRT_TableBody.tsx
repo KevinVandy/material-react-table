@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react';
 import { useVirtual } from 'react-virtual'; //stuck on v2 for now
 // import { useVirtualizer, Virtualizer } from '@tanstack/react-virtual';
-import { TableBody } from '@mui/material';
+import { Box, TableBody, TableCell, TableRow } from '@mui/material';
 import { MRT_TableBodyRow } from './MRT_TableBodyRow';
 import { rankGlobalFuzzy } from '../sortingFns';
 import type { MRT_Row, MRT_TableInstance } from '..';
@@ -19,6 +19,7 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
       enableGlobalFilterRankedResults,
       enablePagination,
       enableRowVirtualization,
+      localization,
       manualFiltering,
       manualSorting,
       muiTableBodyProps,
@@ -27,7 +28,7 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
     },
     refs: { tableContainerRef },
   } = table;
-  const { globalFilter, pagination, sorting } = getState();
+  const { columnFilters, globalFilter, pagination, sorting } = getState();
 
   const tableBodyProps =
     muiTableBodyProps instanceof Function
@@ -116,33 +117,54 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
 
   return (
     <TableBody {...tableBodyProps}>
-      {enableRowVirtualization && paddingTop > 0 && (
-        <tr>
-          <td style={{ height: `${paddingTop}px` }} />
-        </tr>
-      )}
-      {(enableRowVirtualization ? virtualRows : rows).map(
-        (rowOrVirtualRow: any, rowIndex: number) => {
-          const row = enableRowVirtualization
-            ? (rows[rowOrVirtualRow.index] as MRT_Row)
-            : (rowOrVirtualRow as MRT_Row);
-          return (
-            <MRT_TableBodyRow
-              key={row.id}
-              row={row}
-              rowIndex={
-                enableRowVirtualization ? rowOrVirtualRow.index : rowIndex
-              }
-              table={table}
-              virtualRow={enableRowVirtualization ? rowOrVirtualRow : null}
-            />
-          );
-        },
-      )}
-      {enableRowVirtualization && paddingBottom > 0 && (
-        <tr>
-          <td style={{ height: `${paddingBottom}px` }} />
-        </tr>
+      {!rows.length ? (
+        <TableRow>
+          <TableCell colSpan={table.getVisibleLeafColumns().length}>
+            <Box
+              sx={{
+                maxWidth: '100vw',
+                py: '2rem',
+                textAlign: 'center',
+                width: '100%',
+              }}
+            >
+              {globalFilter || columnFilters.length
+                ? localization.noResultsFound
+                : localization.noRecordsToDisplay}
+            </Box>
+          </TableCell>
+        </TableRow>
+      ) : (
+        <>
+          {enableRowVirtualization && paddingTop > 0 && (
+            <tr>
+              <td style={{ height: `${paddingTop}px` }} />
+            </tr>
+          )}
+          {(enableRowVirtualization ? virtualRows : rows).map(
+            (rowOrVirtualRow: any, rowIndex: number) => {
+              const row = enableRowVirtualization
+                ? (rows[rowOrVirtualRow.index] as MRT_Row)
+                : (rowOrVirtualRow as MRT_Row);
+              return (
+                <MRT_TableBodyRow
+                  key={row.id}
+                  row={row}
+                  rowIndex={
+                    enableRowVirtualization ? rowOrVirtualRow.index : rowIndex
+                  }
+                  table={table}
+                  virtualRow={enableRowVirtualization ? rowOrVirtualRow : null}
+                />
+              );
+            },
+          )}
+          {enableRowVirtualization && paddingBottom > 0 && (
+            <tr>
+              <td style={{ height: `${paddingBottom}px` }} />
+            </tr>
+          )}
+        </>
       )}
     </TableBody>
   );

@@ -126,7 +126,7 @@ export const stateOptions: StateRow[] = [
     linkText: 'TanStack Table Expanding Docs',
     source: 'TanStack Table',
     stateOption: 'expanded',
-    type: 'Record<string, boolean>',
+    type: 'Record<string, boolean> | boolean',
   },
   {
     defaultValue: '',
