@@ -1,11 +1,12 @@
 import React, { DragEvent, FC, ReactNode } from 'react';
-import { Box, TableCell, Theme, alpha, lighten, useTheme } from '@mui/material';
+import { Box, TableCell, Theme, useTheme } from '@mui/material';
 import { MRT_TableHeadCellColumnActionsButton } from './MRT_TableHeadCellColumnActionsButton';
 import { MRT_TableHeadCellFilterContainer } from './MRT_TableHeadCellFilterContainer';
 import { MRT_TableHeadCellFilterLabel } from './MRT_TableHeadCellFilterLabel';
 import { MRT_TableHeadCellGrabHandle } from './MRT_TableHeadCellGrabHandle';
 import { MRT_TableHeadCellResizeHandle } from './MRT_TableHeadCellResizeHandle';
 import { MRT_TableHeadCellSortLabel } from './MRT_TableHeadCellSortLabel';
+import { getCommonCellStyles } from '../column.utils';
 import type { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
@@ -21,7 +22,6 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
       enableColumnActions,
       enableColumnDragging,
       enableColumnOrdering,
-      enableColumnResizing,
       enableGrouping,
       enableMultiSort,
       muiTableHeadCellProps,
@@ -52,23 +52,6 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
   const tableCellProps = {
     ...mTableHeadCellProps,
     ...mcTableHeadCellProps,
-  };
-
-  const getIsLastLeftPinnedColumn = () => {
-    return (
-      column.getIsPinned() === 'left' &&
-      table.getLeftLeafHeaders().length - 1 === column.getPinnedIndex()
-    );
-  };
-
-  const getIsFirstRightPinnedColumn = () => {
-    return column.getIsPinned() === 'right' && column.getPinnedIndex() === 0;
-  };
-
-  const getTotalRight = () => {
-    return (
-      (table.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) * 160
-    );
   };
 
   const handleDragEnter = (_e: DragEvent) => {
@@ -115,26 +98,8 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
       ref={tableHeadCellRef}
       {...tableCellProps}
       sx={(theme: Theme) => ({
-        backgroundColor:
-          column.getIsPinned() && columnDefType !== 'group'
-            ? alpha(lighten(theme.palette.background.default, 0.04), 0.95)
-            : 'inherit',
-        backgroundImage: 'inherit',
-        boxShadow: getIsLastLeftPinnedColumn()
-          ? `-4px 0 8px -6px ${alpha(theme.palette.common.black, 0.2)} inset`
-          : getIsFirstRightPinnedColumn()
-          ? `4px 0 8px -6px ${alpha(theme.palette.common.black, 0.2)} inset`
-          : undefined,
         fontWeight: 'bold',
-        left:
-          column.getIsPinned() === 'left'
-            ? `${column.getStart('left')}px`
-            : undefined,
         overflow: 'visible',
-        opacity:
-          draggingColumn?.id === column.id || hoveredColumn?.id === column.id
-            ? 0.5
-            : 1,
         p:
           density === 'compact'
             ? '0.5rem'
@@ -151,19 +116,12 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
             : showColumnFilters || density === 'compact'
             ? '0.4rem'
             : '0.6rem',
-        position:
-          column.getIsPinned() && columnDefType !== 'group'
-            ? 'sticky'
-            : undefined,
         pt:
           columnDefType === 'group' || density === 'compact'
             ? '0.25rem'
             : density === 'comfortable'
             ? '.75rem'
             : '1.25rem',
-        right:
-          column.getIsPinned() === 'right' ? `${getTotalRight()}px` : undefined,
-        transition: `all ${enableColumnResizing ? 0 : '0.2s'} ease-in-out`,
         userSelect: enableMultiSort && column.getCanSort() ? 'none' : undefined,
         verticalAlign: 'top',
         zIndex:
@@ -172,13 +130,14 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
             : column.getIsPinned() && columnDefType !== 'group'
             ? 2
             : 1,
-        ...(tableCellProps?.sx instanceof Function
-          ? tableCellProps.sx(theme)
-          : (tableCellProps?.sx as any)),
+        ...getCommonCellStyles({
+          column,
+          header,
+          table,
+          tableCellProps,
+          theme,
+        }),
         ...draggingBorders,
-        maxWidth: `min(${column.getSize()}px, fit-content)`,
-        minWidth: `max(${column.getSize()}px, ${columnDef.minSize ?? 30}px)`,
-        width: header.getSize(),
       })}
     >
       {header.isPlaceholder ? null : (

@@ -62,14 +62,17 @@ export const MRT_BottomToolbar: FC<Props> = ({ table }) => {
     >
       <MRT_LinearProgressBar isTopToolbar={false} table={table} />
       {positionToolbarAlertBanner === 'bottom' && (
-        <MRT_ToolbarAlertBanner table={table} />
+        <MRT_ToolbarAlertBanner
+          stackAlertBanner={stackAlertBanner}
+          table={table}
+        />
       )}
       {['both', 'bottom'].includes(positionToolbarDropZone ?? '') && (
         <MRT_ToolbarDropZone table={table} />
       )}
       <Box
         sx={{
-          alignItems: 'flex-start',
+          alignItems: 'center',
           boxSizing: 'border-box',
           display: 'flex',
           justifyContent: 'space-between',

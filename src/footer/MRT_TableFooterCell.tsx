@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { alpha, TableCell } from '@mui/material';
+import { TableCell } from '@mui/material';
+import { getCommonCellStyles } from '../column.utils';
 import type { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
 export const MRT_TableFooterCell: FC<Props> = ({ footer, table }) => {
   const {
     getState,
-    options: { muiTableFooterCellProps, enableColumnResizing },
+    options: { muiTableFooterCellProps },
   } = table;
   const { density } = getState();
   const { column } = footer;
@@ -39,26 +40,15 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, table }) => {
       variant="head"
       {...tableCellProps}
       sx={(theme) => ({
-        backgroundColor: theme.palette.background.default,
-        backgroundImage: `linear-gradient(${alpha(
-          theme.palette.common.white,
-          0.05,
-        )},${alpha(theme.palette.common.white, 0.05)})`,
         fontWeight: 'bold',
-        maxWidth: `${column.getSize()}px`,
-        minWidth: `${column.getSize()}px`,
         p:
           density === 'compact'
             ? '0.5rem'
             : density === 'comfortable'
             ? '1rem'
             : '1.5rem',
-        transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
-        width: column.getSize(),
-        verticalAlign: 'text-top',
-        ...(tableCellProps?.sx instanceof Function
-          ? tableCellProps.sx(theme)
-          : (tableCellProps?.sx as any)),
+        verticalAlign: 'top',
+        ...getCommonCellStyles({ column, table, theme, tableCellProps }),
       })}
     >
       <>

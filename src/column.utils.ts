@@ -1,4 +1,5 @@
 import { ColumnOrderState, GroupingState } from '@tanstack/react-table';
+import { alpha, lighten, TableCellProps, Theme } from '@mui/material';
 import {
   MaterialReactTableProps,
   MRT_Column,
@@ -6,6 +7,8 @@ import {
   MRT_DefinedColumnDef,
   MRT_DisplayColumnIds,
   MRT_FilterOption,
+  MRT_Header,
+  MRT_TableInstance,
 } from '.';
 import { MRT_FilterFns } from './filterFns';
 import { MRT_SortingFns } from './sortingFns';
@@ -165,3 +168,72 @@ export const getDefaultColumnFilterFn = <
   if (columnDef.filterVariant === 'range') return 'betweenInclusive';
   return 'fuzzy';
 };
+
+export const getIsLastLeftPinnedColumn = (
+  table: MRT_TableInstance,
+  column: MRT_Column,
+) => {
+  return (
+    column.getIsPinned() === 'left' &&
+    table.getLeftLeafHeaders().length - 1 === column.getPinnedIndex()
+  );
+};
+
+export const getIsFirstRightPinnedColumn = (column: MRT_Column) => {
+  return column.getIsPinned() === 'right' && column.getPinnedIndex() === 0;
+};
+
+export const getTotalRight = (table: MRT_TableInstance, column: MRT_Column) => {
+  return (
+    (table.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) * 160
+  );
+};
+
+export const getCommonCellStyles = ({
+  column,
+  header,
+  table,
+  tableCellProps,
+  theme,
+}: {
+  column: MRT_Column;
+  header?: MRT_Header;
+  table: MRT_TableInstance;
+  tableCellProps: TableCellProps;
+  theme: Theme;
+}) => ({
+  backgroundColor:
+    column.getIsPinned() && column.columnDef.columnDefType !== 'group'
+      ? alpha(lighten(theme.palette.background.default, 0.04), 0.95)
+      : 'inherit',
+  backgroundImage: 'inherit',
+  boxShadow: getIsLastLeftPinnedColumn(table, column)
+    ? `-4px 0 8px -6px ${alpha(theme.palette.common.black, 0.2)} inset`
+    : getIsFirstRightPinnedColumn(column)
+    ? `4px 0 8px -6px ${alpha(theme.palette.common.black, 0.2)} inset`
+    : undefined,
+  left:
+    column.getIsPinned() === 'left'
+      ? `${column.getStart('left')}px`
+      : undefined,
+  opacity:
+    table.getState().draggingColumn?.id === column.id ||
+    table.getState().hoveredColumn?.id === column.id
+      ? 0.5
+      : 1,
+  position:
+    column.getIsPinned() && column.columnDef.columnDefType !== 'group'
+      ? 'sticky'
+      : undefined,
+  right:
+    column.getIsPinned() === 'right'
+      ? `${getTotalRight(table, column)}px`
+      : undefined,
+  transition: `all ${column.getIsResizing() ? 0 : '0.2s'} ease-in-out`,
+  ...(tableCellProps?.sx instanceof Function
+    ? tableCellProps.sx(theme)
+    : (tableCellProps?.sx as any)),
+  maxWidth: `min(${column.getSize()}px, fit-content)`,
+  minWidth: `max(${column.getSize()}px, ${column.columnDef.minSize ?? 30}px)`,
+  width: header?.getSize() ?? column.getSize(),
+});

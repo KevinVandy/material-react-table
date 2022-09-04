@@ -3,7 +3,7 @@ import { Alert, AlertTitle, Box, Chip, Collapse } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
 interface Props {
-  stackAlertBanner?: boolean;
+  stackAlertBanner: boolean;
   table: MRT_TableInstance;
 }
 
@@ -19,6 +19,7 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({
       localization,
       muiToolbarAlertBannerProps,
       muiToolbarAlertBannerChipProps,
+      positionToolbarAlertBanner,
     },
   } = table;
   const { grouping, showAlertBanner } = getState();
@@ -78,6 +79,11 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({
           left: 0,
           p: 0,
           position: 'relative',
+          mb: stackAlertBanner
+            ? 0
+            : positionToolbarAlertBanner === 'bottom'
+            ? '-1rem'
+            : undefined,
           right: 0,
           top: 0,
           width: '100%',
