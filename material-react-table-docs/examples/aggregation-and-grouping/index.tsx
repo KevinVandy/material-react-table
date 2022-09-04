@@ -10,7 +10,7 @@ const ExampleTable = () => {
       Component={Example}
       javaScriptCode={JS}
       typeScriptCode={TS}
-      tableId="aggregate-and-grouping"
+      tableId="aggregation-and-grouping"
     />
   );
 };

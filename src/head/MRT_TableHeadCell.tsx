@@ -67,7 +67,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
 
   const getTotalRight = () => {
     return (
-      (table.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) * 180
+      (table.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) * 160
     );
   };
 
@@ -121,9 +121,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
             : 'inherit',
         backgroundImage: 'inherit',
         boxShadow: getIsLastLeftPinnedColumn()
-          ? `4px 0 4px -2px ${alpha(theme.palette.common.black, 0.1)}`
+          ? `-4px 0 8px -6px ${alpha(theme.palette.common.black, 0.2)} inset`
           : getIsFirstRightPinnedColumn()
-          ? `-4px 0 4px -2px ${alpha(theme.palette.common.black, 0.1)}`
+          ? `4px 0 8px -6px ${alpha(theme.palette.common.black, 0.2)} inset`
           : undefined,
         fontWeight: 'bold',
         left:
