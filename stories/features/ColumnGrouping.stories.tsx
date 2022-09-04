@@ -38,7 +38,7 @@ const columns = [
 const data = [...Array(200)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
-  gender: faker.name.gender(true),
+  gender: faker.name.sex(true),
   city: faker.address.city(),
   state: faker.address.state(),
 }));

@@ -7,6 +7,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
 import { ColumnOption, columnOptions } from './columnOptions';
 
 interface Props {
@@ -24,11 +25,11 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
           accessorKey: 'columnOption',
           enableClickToCopy: true,
           header: 'Column Option',
-          muiTableBodyCellCopyButtonProps: ({ cell }) => ({
+          muiTableBodyCellCopyButtonProps: ({ cell, row }) => ({
             className: 'column-option',
-            component: 'a',
+            // component: 'a',
             id: `${cell.getValue<string>()}-column-option`,
-            href: `#${cell.getValue<string>()}-column-option`,
+            // href: `#${cell.getValue<string>()}-column-option`,
           }),
           Cell: ({ cell, row }) =>
             row.original?.required ? (
@@ -39,7 +40,26 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
               cell.getValue<string>()
             ),
         },
-        { accessorKey: 'type', header: 'Type', enableGlobalFilter: false },
+        {
+          accessorKey: 'type',
+          header: 'Type',
+          enableGlobalFilter: false,
+          Cell: ({ cell }) => (
+            <SampleCodeSnippet
+              className="language-js"
+              enableCopyButton={false}
+              style={{
+                backgroundColor: 'transparent',
+                fontSize: '0.9rem',
+                margin: 0,
+                padding: 0,
+                minHeight: 'unset',
+              }}
+            >
+              {cell.getValue<string>()}
+            </SampleCodeSnippet>
+          ),
+        },
         {
           accessorKey: 'required',
           enableGlobalFilter: false,
@@ -49,6 +69,21 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
           accessorKey: 'defaultValue',
           enableGlobalFilter: false,
           header: 'Default Value',
+          Cell: ({ cell }) => (
+            <SampleCodeSnippet
+              className="language-js"
+              enableCopyButton={false}
+              style={{
+                backgroundColor: 'transparent',
+                fontSize: '0.9rem',
+                margin: 0,
+                padding: 0,
+                minHeight: 'unset',
+              }}
+            >
+              {cell.getValue<string>()}
+            </SampleCodeSnippet>
+          ),
         },
         {
           accessorKey: 'description',
@@ -85,7 +120,7 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
     if (typeof window !== 'undefined') {
       if (isDesktop) {
         setColumnPinning({
-          left: ['mrt-row-numbers', 'mrt-row-expand', 'columnOption'],
+          left: ['mrt-row-expand', 'mrt-row-numbers', 'columnOption'],
           right: ['link'],
         });
       } else {
@@ -107,6 +142,14 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
     <MaterialReactTable
       columns={columns}
       data={data}
+      displayColumnDefOptions={{
+        'mrt-row-numbers': {
+          size: 10,
+        },
+        'mrt-row-expand': {
+          size: 10,
+        },
+      }}
       enableColumnActions={!onlyProps}
       enableColumnFilterModes
       enableColumnOrdering={!onlyProps}
@@ -137,8 +180,10 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
       }}
       positionGlobalFilter="left"
       renderDetailPanel={({ row }) => (
-        <Typography>
-          {row.original.description ?? 'No Description Provided... Yet...'}
+        <Typography
+          color={row.original.description ? 'secondary.main' : 'text.secondary'}
+        >
+          {row.original.description || 'No Description Provided... Yet...'}
         </Typography>
       )}
       rowNumberMode="static"

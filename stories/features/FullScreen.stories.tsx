@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, {
   MaterialReactTableProps,
@@ -81,3 +81,16 @@ export const DefaultFullScreenOn: Story<MaterialReactTableProps> = () => (
     initialState={{ isFullScreen: true }}
   />
 );
+
+export const ControlledFullScreen: Story<MaterialReactTableProps> = () => {
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      onIsFullScreenChange={setIsFullScreen}
+      state={{ isFullScreen }}
+    />
+  );
+};

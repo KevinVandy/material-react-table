@@ -28,11 +28,12 @@ export const MRT_FullScreenToggleButton = <
   };
 
   return (
-    <Tooltip arrow title={localization.toggleFullScreen}>
+    <Tooltip arrow title={rest?.title ?? localization.toggleFullScreen}>
       <IconButton
         aria-label={localization.showHideFilters}
         onClick={handleToggleFullScreen}
         {...rest}
+        title={undefined}
       >
         {isFullScreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
       </IconButton>

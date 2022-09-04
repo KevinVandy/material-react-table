@@ -1,4 +1,4 @@
-import React, { FC, RefObject } from 'react';
+import React, { FC } from 'react';
 import { Table } from '@mui/material';
 import { MRT_TableHead } from '../head/MRT_TableHead';
 import { MRT_TableBody } from '../body/MRT_TableBody';
@@ -6,11 +6,10 @@ import { MRT_TableFooter } from '../footer/MRT_TableFooter';
 import { MRT_TableInstance } from '..';
 
 interface Props {
-  tableContainerRef: RefObject<HTMLDivElement>;
   table: MRT_TableInstance;
 }
 
-export const MRT_Table: FC<Props> = ({ tableContainerRef, table }) => {
+export const MRT_Table: FC<Props> = ({ table }) => {
   const {
     getState,
     options: {
@@ -44,7 +43,7 @@ export const MRT_Table: FC<Props> = ({ tableContainerRef, table }) => {
       })}
     >
       {enableTableHead && <MRT_TableHead table={table} />}
-      <MRT_TableBody tableContainerRef={tableContainerRef} table={table} />
+      <MRT_TableBody table={table} />
       {enableTableFooter && <MRT_TableFooter table={table} />}
     </Table>
   );

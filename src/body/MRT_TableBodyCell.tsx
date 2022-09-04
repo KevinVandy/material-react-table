@@ -82,6 +82,11 @@ export const MRT_TableBodyCell: FC<Props> = ({
     ...mcTableCellBodyProps,
   };
 
+  const skeletonProps =
+    muiTableBodyCellSkeletonProps instanceof Function
+      ? muiTableBodyCellSkeletonProps({ cell, column, row, table })
+      : muiTableBodyCellSkeletonProps;
+
   const isEditable =
     (enableEditing || columnDef.enableEditing) &&
     columnDef.enableEditing !== false;
@@ -140,7 +145,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   const getTotalRight = () => {
     return (
-      (table.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) * 150
+      (table.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) * 160
     );
   };
 
@@ -189,9 +194,9 @@ export const MRT_TableBodyCell: FC<Props> = ({
           ? alpha(lighten(theme.palette.background.default, 0.04), 0.95)
           : undefined,
         boxShadow: getIsLastLeftPinnedColumn()
-          ? `4px 0 4px -2px ${alpha(theme.palette.common.black, 0.1)}`
+          ? `-4px 0 8px -6px ${alpha(theme.palette.common.black, 0.2)} inset`
           : getIsFirstRightPinnedColumn()
-          ? `-4px 0 4px -2px ${alpha(theme.palette.common.black, 0.1)}`
+          ? `4px 0 8px -6px ${alpha(theme.palette.common.black, 0.2)} inset`
           : undefined,
         cursor: isEditable && editingMode === 'cell' ? 'pointer' : 'text',
         left:
@@ -233,11 +238,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
         transition: 'all 0.2s ease-in-out',
         whiteSpace: density === 'compact' ? 'nowrap' : 'normal',
         zIndex:
-          draggingColumn?.id === column.id
-            ? 2
-            : column.getIsPinned()
-            ? 1
-            : undefined,
+          draggingColumn?.id === column.id ? 2 : column.getIsPinned() ? 1 : 0,
         '&:hover': {
           backgroundColor:
             enableHover &&
@@ -264,7 +265,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
             animation="wave"
             height={20}
             width={skeletonWidth}
-            {...muiTableBodyCellSkeletonProps}
+            {...skeletonProps}
           />
         ) : enableRowNumbers &&
           rowNumberMode === 'static' &&

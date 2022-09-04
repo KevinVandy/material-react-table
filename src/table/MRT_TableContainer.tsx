@@ -1,10 +1,4 @@
-import React, {
-  FC,
-  RefObject,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from 'react';
+import React, { FC, useEffect, useLayoutEffect, useState } from 'react';
 import { TableContainer } from '@mui/material';
 import { MRT_Table } from './MRT_Table';
 import type { MRT_TableInstance } from '..';
@@ -77,10 +71,7 @@ export const MRT_TableContainer: FC<Props> = ({ table }) => {
         ...tableContainerProps?.style,
       }}
     >
-      <MRT_Table
-        tableContainerRef={tableContainerRef as RefObject<HTMLDivElement>}
-        table={table}
-      />
+      <MRT_Table table={table} />
     </TableContainer>
   );
 };

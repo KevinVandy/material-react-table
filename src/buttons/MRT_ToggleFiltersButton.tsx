@@ -28,11 +28,12 @@ export const MRT_ToggleFiltersButton = <
   };
 
   return (
-    <Tooltip arrow title={localization.showHideFilters}>
+    <Tooltip arrow title={rest?.title ?? localization.showHideFilters}>
       <IconButton
         aria-label={localization.showHideFilters}
         onClick={handleToggleShowFilters}
         {...rest}
+        title={undefined}
       >
         {showColumnFilters ? <FilterListOffIcon /> : <FilterListIcon />}
       </IconButton>

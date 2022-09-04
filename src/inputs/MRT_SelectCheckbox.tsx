@@ -34,7 +34,10 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, table }) => {
       enterDelay={1000}
       enterNextDelay={1000}
       title={
-        selectAll ? localization.toggleSelectAll : localization.toggleSelectRow
+        checkboxProps?.title ??
+        (selectAll
+          ? localization.toggleSelectAll
+          : localization.toggleSelectRow)
       }
     >
       <Checkbox
@@ -70,6 +73,7 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, table }) => {
             ? checkboxProps.sx(theme)
             : (checkboxProps?.sx as any)),
         })}
+        title={undefined}
       />
     </Tooltip>
   );

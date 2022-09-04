@@ -46,15 +46,17 @@ export const SampleCodeSnippet: FC<any> = (props) => {
         <div
           style={{
             position: 'relative',
-            margin: '2rem auto',
+            margin: props.enableCopyButton !== false ? '2rem auto' : 0,
             fontSize: '1.2em',
           }}
         >
-          <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Code'}>
-            <CopyButton onClick={handleCopy}>
-              {isCopied ? <LibraryAddCheckIcon /> : <ContentCopyIcon />}
-            </CopyButton>
-          </Tooltip>
+          {props.enableCopyButton !== false && (
+            <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Code'}>
+              <CopyButton onClick={handleCopy}>
+                {isCopied ? <LibraryAddCheckIcon /> : <ContentCopyIcon />}
+              </CopyButton>
+            </Tooltip>
+          )}
           <pre
             className={className}
             style={{

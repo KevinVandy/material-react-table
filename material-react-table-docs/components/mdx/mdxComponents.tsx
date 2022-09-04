@@ -25,7 +25,9 @@ export const mdxComponents = {
   h4: (props: any) => (
     <LinkHeading variant="h4" sx={{ mt: '2rem' }} {...props} />
   ),
-  h5: (props: any) => <Typography variant="h5" {...props} />,
+  h5: (props: any) => (
+    <LinkHeading variant="h5" sx={{ mt: '2rem' }} {...props} />
+  ),
   h6: (props: any) => <Typography variant="h6" {...props} />,
   hr: (props: any) => <Divider sx={{ mb: '1rem' }} {...props} />,
   li: (props: any) => (

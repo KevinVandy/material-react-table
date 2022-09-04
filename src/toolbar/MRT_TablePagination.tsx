@@ -53,7 +53,6 @@ export const MRT_TablePagination: FC<Props> = ({ table, position }) => {
       showLastButton={showFirstLastPageButtons}
       {...tablePaginationProps}
       sx={(theme) => ({
-        m: '0 0.5rem',
         mt:
           position === 'top' &&
           enableToolbarInternalActions &&

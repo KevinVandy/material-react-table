@@ -32,7 +32,7 @@ export const MRT_ExpandAllButton: FC<Props> = ({ table }) => {
       arrow
       enterDelay={1000}
       enterNextDelay={1000}
-      title={localization.expandAll}
+      title={iconButtonProps?.title ?? localization.expandAll}
     >
       <span>
         <IconButton
@@ -48,6 +48,7 @@ export const MRT_ExpandAllButton: FC<Props> = ({ table }) => {
               ? iconButtonProps?.sx(theme)
               : (iconButtonProps?.sx as any)),
           })}
+          title={undefined}
         >
           <KeyboardDoubleArrowDownIcon
             style={{

@@ -61,6 +61,20 @@ const HomePage = () => {
           </Box>
         </Typography>
         <Typography
+          sx={(theme) => ({
+            textAlign: 'center',
+            background: `-webkit-linear-gradient(left, ${theme.palette.error.main}, ${theme.palette.warning.main})`,
+            display: 'inline',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            transform: 'translateY(-1rem)',
+            width: '8rem',
+            margin: 'auto',
+          })}
+        >
+          Now in Beta!
+        </Typography>
+        <Typography
           color="text.secondary"
           sx={{
             fontSize: {

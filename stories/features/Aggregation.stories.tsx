@@ -17,7 +17,7 @@ const data = [...Array(200)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   age: faker.datatype.number({ min: 18, max: 65 }),
-  gender: faker.name.gender(true),
+  gender: faker.name.sex(true),
   state: faker.address.state(),
   salary: Number(faker.finance.amount(10000, 100000, 0)),
 }));

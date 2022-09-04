@@ -4,7 +4,13 @@ import MaterialReactTable, {
   MaterialReactTableProps,
   MRT_ColumnDef,
 } from 'material-react-table';
-import { Link as MuiLink, Typography, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Link as MuiLink,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
+import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
 import { PropRow, rootProps } from './rootProps';
 
 interface Props {
@@ -24,9 +30,9 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
           accessorKey: 'propName',
           muiTableBodyCellCopyButtonProps: ({ cell }) => ({
             className: 'prop',
-            component: 'a',
+            // component: 'a',
             id: `${cell.getValue<string>()}-prop`,
-            href: `#${cell.getValue<string>()}-prop`,
+            // href: `#${cell.getValue<string>()}-prop`,
           }),
           Cell: ({ cell, row }) =>
             row.original?.required ? (
@@ -37,7 +43,26 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
               cell.getValue<string>()
             ),
         },
-        { header: 'Type', accessorKey: 'type', enableGlobalFilter: false },
+        {
+          header: 'Type',
+          accessorKey: 'type',
+          enableGlobalFilter: false,
+          Cell: ({ cell }) => (
+            <SampleCodeSnippet
+              className="language-js"
+              enableCopyButton={false}
+              style={{
+                backgroundColor: 'transparent',
+                fontSize: '0.9rem',
+                margin: 0,
+                padding: 0,
+                minHeight: 'unset',
+              }}
+            >
+              {cell.getValue<string>()}
+            </SampleCodeSnippet>
+          ),
+        },
         {
           header: 'Required',
           accessorKey: 'required',
@@ -47,6 +72,21 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
           header: 'Default Value',
           accessorKey: 'defaultValue',
           enableGlobalFilter: false,
+          Cell: ({ cell }) => (
+            <SampleCodeSnippet
+              className="language-js"
+              enableCopyButton={false}
+              style={{
+                backgroundColor: 'transparent',
+                fontSize: '0.9rem',
+                margin: 0,
+                padding: 0,
+                minHeight: 'unset',
+              }}
+            >
+              {cell.getValue<string>()}
+            </SampleCodeSnippet>
+          ),
         },
         {
           header: 'Description',
@@ -61,6 +101,15 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
           Cell: ({ cell, row }) => (
             <Link href={cell.getValue() as string} passHref>
               <MuiLink
+                color={
+                  row.original.source === 'MRT'
+                    ? 'text.primary'
+                    : row.original.source === 'Material UI'
+                    ? 'primary.main'
+                    : row.original.source === 'TanStack Table'
+                    ? 'secondary.main'
+                    : undefined
+                }
                 target={
                   (cell.getValue() as string).startsWith('http')
                     ? '_blank'
@@ -83,7 +132,7 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
     if (typeof window !== 'undefined') {
       if (isDesktop) {
         setColumnPinning({
-          left: ['mrt-row-numbers', 'propName'],
+          left: ['mrt-row-expand', 'mrt-row-numbers', 'propName'],
           right: ['link'],
         });
       } else {
@@ -103,6 +152,14 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
     <MaterialReactTable
       columns={columns}
       data={data}
+      displayColumnDefOptions={{
+        'mrt-row-numbers': {
+          size: 10,
+        },
+        'mrt-row-expand': {
+          size: 10,
+        },
+      }}
       enableColumnActions={!onlyProps}
       enableColumnFilterModes
       enableColumnOrdering={!onlyProps}
@@ -131,8 +188,10 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
       }}
       positionGlobalFilter="left"
       renderDetailPanel={({ row }) => (
-        <Typography>
-          {row.original.description ?? 'No Description Provided... Yet...'}
+        <Typography
+          color={row.original.description ? 'secondary.main' : 'text.secondary'}
+        >
+          {row.original.description || 'No Description Provided... Yet...'}
         </Typography>
       )}
       rowNumberMode="static"

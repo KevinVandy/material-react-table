@@ -29,11 +29,12 @@ export const MRT_ShowHideColumnsButton = <
 
   return (
     <>
-      <Tooltip arrow title={localization.showHideColumns}>
+      <Tooltip arrow title={rest?.title ?? localization.showHideColumns}>
         <IconButton
           aria-label={localization.showHideColumns}
           onClick={handleClick}
           {...rest}
+          title={undefined}
         >
           <ViewColumnIcon />
         </IconButton>

@@ -3,6 +3,7 @@ import React, {
   FC,
   MouseEvent,
   useCallback,
+  useEffect,
   useState,
 } from 'react';
 import {
@@ -17,8 +18,8 @@ import {
   TextFieldProps,
   Tooltip,
 } from '@mui/material';
-import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 import type { MRT_Header, MRT_TableInstance } from '..';
+import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 
 interface Props {
   header: MRT_Header;
@@ -169,6 +170,10 @@ export const MRT_FilterTextField: FC<Props> = ({
     setAnchorEl(event.currentTarget);
   };
 
+  useEffect(() => {
+    handleClear();
+  }, [columnDef._filterFn]);
+
   if (columnDef.Filter) {
     return <>{columnDef.Filter?.({ column, header, table })}</>;
   }
@@ -241,9 +246,7 @@ export const MRT_FilterTextField: FC<Props> = ({
                 />
               )}
             </InputAdornment>
-          ) : (
-            <FilterListIcon style={{ marginRight: '4px' }} />
-          ),
+          ) : null,
           endAdornment: !filterChipLabel && (
             <InputAdornment position="end">
               <Tooltip
@@ -278,9 +281,24 @@ export const MRT_FilterTextField: FC<Props> = ({
                   <Box sx={{ opacity: 0.5 }}>{filterPlaceholder}</Box>
                 ) : (
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '2px' }}>
-                    {(selected as string[])?.map((value) => (
-                      <Chip key={value} label={value} />
-                    ))}
+                    {(selected as string[])?.map((value) => {
+                      const selectedValue = columnDef.filterSelectOptions?.find(
+                        (option) =>
+                          option instanceof Object
+                            ? option.value === value
+                            : option === value,
+                      );
+                      return (
+                        <Chip
+                          key={value}
+                          label={
+                            selectedValue instanceof Object
+                              ? selectedValue.text
+                              : selectedValue
+                          }
+                        />
+                      );
+                    })}
                   </Box>
                 )
             : undefined,
@@ -295,7 +313,12 @@ export const MRT_FilterTextField: FC<Props> = ({
         }}
         sx={(theme) => ({
           p: 0,
-          minWidth: !filterChipLabel ? '120px' : 'auto',
+          minWidth:
+            columnDef.filterVariant === 'range'
+              ? '90px'
+              : !filterChipLabel
+              ? '120px'
+              : 'auto',
           width: '100%',
           '&	.MuiSelect-icon': {
             mr: '1.5rem',

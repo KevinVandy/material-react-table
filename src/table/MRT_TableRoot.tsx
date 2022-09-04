@@ -22,7 +22,6 @@ import {
   getAllLeafColumnDefs,
   getDefaultColumnOrderIds,
   getDefaultColumnFilterFn,
-  defaultDisplayColumnDefOptions,
   showExpandColumn,
   getColumnId,
 } from '../column.utils';
@@ -125,7 +124,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
           columnOrder.includes('mrt-row-drag') && {
             header: props.localization?.move,
             size: 60,
-            ...defaultDisplayColumnDefOptions,
+            ...props.defaultDisplayColumn,
             ...props.displayColumnDefOptions?.['mrt-row-drag'],
             id: 'mrt-row-drag',
           },
@@ -139,7 +138,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
             ),
             header: props.localization?.actions,
             size: 70,
-            ...defaultDisplayColumnDefOptions,
+            ...props.defaultDisplayColumn,
             ...props.displayColumnDefOptions?.['mrt-row-actions'],
             id: 'mrt-row-actions',
           },
@@ -154,7 +153,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
                 ) : null,
               header: props.localization?.expand,
               size: 60,
-              ...defaultDisplayColumnDefOptions,
+              ...props.defaultDisplayColumn,
               ...props.displayColumnDefOptions?.['mrt-row-expand'],
               id: 'mrt-row-expand',
             },
@@ -168,7 +167,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
               ) : null,
             header: props.localization?.select,
             size: 60,
-            ...defaultDisplayColumnDefOptions,
+            ...props.defaultDisplayColumn,
             ...props.displayColumnDefOptions?.['mrt-row-select'],
             id: 'mrt-row-select',
           },
@@ -177,7 +176,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
             Header: () => props.localization?.rowNumber,
             header: props.localization?.rowNumbers,
             size: 60,
-            ...defaultDisplayColumnDefOptions,
+            ...props.defaultDisplayColumn,
             ...props.displayColumnDefOptions?.['mrt-row-numbers'],
             id: 'mrt-row-numbers',
           },
@@ -209,13 +208,19 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
 
   const columnDefs = useMemo(
     () =>
-      prepareColumns(
-        [...displayColumns, ...props.columns],
-        columnFilterFns,
-        props.filterFns as any,
-        props.sortingFns as any,
-      ),
-    [columnFilterFns, displayColumns, props.columns],
+      prepareColumns({
+        columnDefs: [...displayColumns, ...props.columns],
+        columnFilterFns: props.state?.columnFilterFns ?? columnFilterFns,
+        defaultDisplayColumn: props.defaultDisplayColumn ?? {},
+        filterFns: props.filterFns as any,
+        sortingFns: props.sortingFns as any,
+      }),
+    [
+      columnFilterFns,
+      displayColumns,
+      props.columns,
+      props.state?.columnFilterFns,
+    ],
   );
 
   const data: TData[] = useMemo(
@@ -316,13 +321,15 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
         disablePortal
         fullScreen
         keepMounted={false}
-        onClose={() => setIsFullScreen(false)}
-        open={isFullScreen}
+        onClose={() => table.setIsFullScreen(false)}
+        open={table.getState().isFullScreen}
         transitionDuration={400}
       >
         <MRT_TablePaper table={table as any} />
       </Dialog>
-      {!isFullScreen && <MRT_TablePaper table={table as any} />}
+      {!table.getState().isFullScreen && (
+        <MRT_TablePaper table={table as any} />
+      )}
       {editingRow && props.editingMode === 'modal' && (
         <MRT_EditRowModal row={editingRow as any} table={table} open />
       )}

@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { Box } from '@mui/material';
 import { MRT_FullScreenToggleButton } from '../buttons/MRT_FullScreenToggleButton';
-import { MRT_GlobalFilterTextField } from '../inputs/MRT_GlobalFilterTextField';
 import { MRT_ShowHideColumnsButton } from '../buttons/MRT_ShowHideColumnsButton';
 import { MRT_ToggleDensePaddingButton } from '../buttons/MRT_ToggleDensePaddingButton';
 import { MRT_ToggleFiltersButton } from '../buttons/MRT_ToggleFiltersButton';
@@ -23,7 +22,7 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ table }) => {
       enableGlobalFilter,
       enableHiding,
       enablePinning,
-      positionGlobalFilter,
+      initialState,
       renderToolbarInternalActions,
     },
   } = table;
@@ -40,12 +39,11 @@ export const MRT_ToolbarInternalButtons: FC<Props> = ({ table }) => {
         table,
       }) ?? (
         <>
-          {enableGlobalFilter && positionGlobalFilter === 'right' && (
-            <MRT_GlobalFilterTextField table={table} />
-          )}
-          {enableFilters && enableGlobalFilter && (
-            <MRT_ToggleGlobalFilterButton table={table} />
-          )}
+          {enableFilters &&
+            enableGlobalFilter &&
+            !initialState?.showGlobalFilter && (
+              <MRT_ToggleGlobalFilterButton table={table} />
+            )}
           {enableFilters && enableColumnFilters && (
             <MRT_ToggleFiltersButton table={table} />
           )}
