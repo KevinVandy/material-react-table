@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react';
 import { useVirtual } from 'react-virtual'; //stuck on v2 for now
 // import { useVirtualizer, Virtualizer } from '@tanstack/react-virtual';
-import { Box, TableBody, TableCell, TableRow } from '@mui/material';
+import { TableBody, Typography } from '@mui/material';
 import { MRT_TableBodyRow } from './MRT_TableBodyRow';
 import { rankGlobalFuzzy } from '../sortingFns';
 import type { MRT_Row, MRT_TableInstance } from '..';
@@ -26,7 +26,7 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
       virtualizerInstanceRef,
       virtualizerProps,
     },
-    refs: { tableContainerRef },
+    refs: { tableContainerRef, tablePaperRef },
   } = table;
   const { columnFilters, globalFilter, pagination, sorting } = getState();
 
@@ -118,11 +118,13 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
   return (
     <TableBody {...tableBodyProps}>
       {!rows.length ? (
-        <TableRow>
-          <TableCell colSpan={table.getVisibleLeafColumns().length}>
-            <Box
+        <tr>
+          <td colSpan={table.getVisibleLeafColumns().length}>
+            <Typography
               sx={{
-                maxWidth: '100vw',
+                color: 'text.secondary',
+                fontStyle: 'italic',
+                maxWidth: `min(100vw, ${tablePaperRef.current?.clientWidth}px)`,
                 py: '2rem',
                 textAlign: 'center',
                 width: '100%',
@@ -131,9 +133,9 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
               {globalFilter || columnFilters.length
                 ? localization.noResultsFound
                 : localization.noRecordsToDisplay}
-            </Box>
-          </TableCell>
-        </TableRow>
+            </Typography>
+          </td>
+        </tr>
       ) : (
         <>
           {enableRowVirtualization && paddingTop > 0 && (

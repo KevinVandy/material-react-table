@@ -13,6 +13,7 @@ export const MRT_TablePaper: FC<Props> = ({ table }) => {
   const {
     getState,
     options: { enableBottomToolbar, enableTopToolbar, muiTablePaperProps },
+    refs: { tablePaperRef },
   } = table;
   const { isFullScreen } = getState();
 
@@ -35,6 +36,13 @@ export const MRT_TablePaper: FC<Props> = ({ table }) => {
     <Paper
       elevation={2}
       {...tablePaperProps}
+      ref={(ref: HTMLDivElement) => {
+        tablePaperRef.current = ref;
+        if (tablePaperProps?.ref) {
+          //@ts-ignore
+          tablePaperProps.ref.current = ref;
+        }
+      }}
       sx={(theme) => ({
         transition: 'all 0.2s ease-in-out',
         ...(tablePaperProps?.sx instanceof Function

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, {
   MaterialReactTableProps,
   MRT_ColumnDef,
+  MRT_Row,
 } from '../../src';
 import { faker } from '@faker-js/faker';
 
@@ -12,7 +13,16 @@ const meta: Meta = {
 
 export default meta;
 
-const columns: MRT_ColumnDef<typeof initData[0]>[] = [
+type Person = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: string;
+  city: string;
+  state: string;
+};
+
+const columns: MRT_ColumnDef<Person>[] = [
   {
     header: 'First Name',
     accessorKey: 'firstName',
@@ -49,7 +59,7 @@ const initData = [...Array(100)].map(() => ({
 }));
 
 export const RowOrderingEnabled: Story<MaterialReactTableProps> = () => {
-  const [data, setData] = React.useState(() => initData);
+  const [data, setData] = useState(() => initData);
 
   return (
     <MaterialReactTable
@@ -58,18 +68,27 @@ export const RowOrderingEnabled: Story<MaterialReactTableProps> = () => {
       data={data}
       enableRowOrdering
       enableSorting={false}
-      onRowDrop={({ draggedRow, targetRow }) => {
-        if (targetRow) {
-          data.splice(targetRow.index, 0, data.splice(draggedRow.index, 1)[0]);
-          setData([...data]);
-        }
-      }}
+      muiTableBodyRowDragHandleProps={({ table }) => ({
+        onDragEnd: () => {
+          const { draggingRow, hoveredRow } = table.getState();
+          if (hoveredRow && draggingRow) {
+            data.splice(
+              (hoveredRow as MRT_Row<Person>).index,
+              0,
+              data.splice(draggingRow.index, 1)[0],
+            );
+            setData([...data]);
+          }
+        },
+      })}
     />
   );
 };
 
 export const RowOrderingWithSelect: Story<MaterialReactTableProps> = () => {
-  const [data, setData] = React.useState(() => initData);
+  const [data, setData] = useState(() => initData);
+  const [draggingRow, setDraggingRow] = useState<MRT_Row<Person> | null>(null);
+  const [hoveredRow, setHoveredRow] = useState<MRT_Row<Person> | null>(null);
 
   return (
     <MaterialReactTable
@@ -80,18 +99,32 @@ export const RowOrderingWithSelect: Story<MaterialReactTableProps> = () => {
       enableRowSelection
       enableSorting={false}
       getRowId={(row) => row.email}
-      onRowDrop={({ draggedRow, targetRow }) => {
-        if (targetRow) {
-          data.splice(targetRow.index, 0, data.splice(draggedRow.index, 1)[0]);
-          setData([...data]);
-        }
+      muiTableBodyRowDragHandleProps={{
+        onDragEnd: () => {
+          if (hoveredRow && draggingRow) {
+            data.splice(
+              hoveredRow.index,
+              0,
+              data.splice(draggingRow.index, 1)[0],
+            );
+            setData([...data]);
+          }
+        },
+      }}
+      onDraggingRowChange={setDraggingRow}
+      onHoveredRowChange={setHoveredRow}
+      state={{
+        draggingRow,
+        hoveredRow,
       }}
     />
   );
 };
 
 export const RowOrderingWithPinning: Story<MaterialReactTableProps> = () => {
-  const [data, setData] = React.useState(() => initData);
+  const [data, setData] = useState(() => initData);
+  const [draggingRow, setDraggingRow] = useState<MRT_Row<Person> | null>(null);
+  const [hoveredRow, setHoveredRow] = useState<MRT_Row<Person> | null>(null);
 
   return (
     <MaterialReactTable
@@ -101,18 +134,32 @@ export const RowOrderingWithPinning: Story<MaterialReactTableProps> = () => {
       enableRowOrdering
       enablePinning
       enableSorting={false}
-      onRowDrop={({ draggedRow, targetRow }) => {
-        if (targetRow) {
-          data.splice(targetRow.index, 0, data.splice(draggedRow.index, 1)[0]);
-          setData([...data]);
-        }
+      muiTableBodyRowDragHandleProps={{
+        onDragEnd: () => {
+          if (hoveredRow && draggingRow) {
+            data.splice(
+              hoveredRow.index,
+              0,
+              data.splice(draggingRow.index, 1)[0],
+            );
+            setData([...data]);
+          }
+        },
+      }}
+      onDraggingRowChange={setDraggingRow}
+      onHoveredRowChange={setHoveredRow}
+      state={{
+        draggingRow,
+        hoveredRow,
       }}
     />
   );
 };
 
 export const RowAndColumnOrdering: Story<MaterialReactTableProps> = () => {
-  const [data, setData] = React.useState(() => initData);
+  const [data, setData] = useState(() => initData);
+  const [draggingRow, setDraggingRow] = useState<MRT_Row<Person> | null>(null);
+  const [hoveredRow, setHoveredRow] = useState<MRT_Row<Person> | null>(null);
 
   return (
     <MaterialReactTable
@@ -123,11 +170,23 @@ export const RowAndColumnOrdering: Story<MaterialReactTableProps> = () => {
       enablePinning
       enableRowOrdering
       enableSorting={false}
-      onRowDrop={({ draggedRow, targetRow }) => {
-        if (targetRow) {
-          data.splice(targetRow.index, 0, data.splice(draggedRow.index, 1)[0]);
-          setData([...data]);
-        }
+      muiTableBodyRowDragHandleProps={{
+        onDragEnd: () => {
+          if (hoveredRow && draggingRow) {
+            data.splice(
+              hoveredRow.index,
+              0,
+              data.splice(draggingRow.index, 1)[0],
+            );
+            setData([...data]);
+          }
+        },
+      }}
+      onDraggingRowChange={setDraggingRow}
+      onHoveredRowChange={setHoveredRow}
+      state={{
+        draggingRow,
+        hoveredRow,
       }}
     />
   );
