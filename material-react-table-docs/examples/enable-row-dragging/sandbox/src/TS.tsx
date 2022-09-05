@@ -4,8 +4,8 @@ import MaterialReactTable, {
   MRT_ColumnDef,
   MRT_Row,
 } from 'material-react-table';
-import { data, Person } from './makeData';
 import { Box, Typography } from '@mui/material';
+import { data, Person } from './makeData';
 
 const Example: FC = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
@@ -50,7 +50,14 @@ const Example: FC = () => {
   };
 
   return (
-    <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+    <Box
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: { xs: 'auto', lg: '1fr 1fr' },
+        gap: '1rem',
+        overflow: 'auto',
+      }}
+    >
       <MaterialReactTable
         {...commonTableProps}
         data={data1}

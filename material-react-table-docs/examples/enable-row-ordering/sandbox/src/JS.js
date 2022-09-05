@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import MaterialReactTable from 'material-react-table';
-import { data } from './makeData';
+import { data as initData } from './makeData';
 
 const Example = () => {
   const columns = useMemo(
@@ -15,28 +15,36 @@ const Example = () => {
         header: 'Last Name',
       },
       {
-        accessorKey: 'address',
-        header: 'Address',
-      },
-      {
         accessorKey: 'city',
         header: 'City',
       },
-      {
-        accessorKey: 'state',
-        header: 'State',
-      },
     ],
-    //end
     [],
+    //end
   );
+
+  const [data, setData] = useState(() => initData);
 
   return (
     <MaterialReactTable
+      autoResetPageIndex={false}
       columns={columns}
       data={data}
-      enableRowNumbers
-      rowNumberMode="original" //default
+      enableRowOrdering
+      enableSorting={false}
+      muiTableBodyRowDragHandleProps={({ table }) => ({
+        onDragEnd: () => {
+          const { draggingRow, hoveredRow } = table.getState();
+          if (hoveredRow && draggingRow) {
+            data.splice(
+              hoveredRow.index,
+              0,
+              data.splice(draggingRow.index, 1)[0],
+            );
+            setData([...data]);
+          }
+        },
+      })}
     />
   );
 };

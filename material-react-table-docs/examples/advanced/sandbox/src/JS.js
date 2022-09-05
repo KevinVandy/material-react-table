@@ -105,7 +105,6 @@ const Example = () => {
       data={data}
       enableColumnFilterModes
       enableColumnOrdering
-      enableColumnResizing
       enableGrouping
       enablePinning
       enableRowActions
