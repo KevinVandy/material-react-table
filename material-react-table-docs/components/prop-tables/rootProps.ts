@@ -69,21 +69,19 @@ export const rootProps: PropRow[] = [
   {
     propName: 'columns',
     defaultValue: '',
-    description: 'The array of column defs to use for the table.    ',
-    link: 'https://tanstack.com/table/v8/docs/api/core/table#columns',
-    linkText: 'TanStack Table Core Table Docs',
+    description: 'The array of column defs to use for the table.',
+    link: '/docs/api/column-options',
+    linkText: 'Column Options API Reference',
     required: true,
-    source: 'TanStack Table',
+    source: 'MRT',
     type: 'Array<MRT_ColumnDef<TData>>',
   },
   {
     propName: 'data',
     defaultValue: '',
-    description: `The data for the table to display. This is array should match the type you provided to table.setRowType<...>, but in theory could be an array of anything. It's common for each item in the array to be an object of key/values but this is not required. Columns can access this data via string/index or a functional accessor to return anything they want.
-
-    When the data option changes reference (compared via Object.is), the table will reprocess the data. Any other data processing that relies on the core data model (such as grouping, sorting, filtering, etc) will also be reprocessed.`,
-    link: 'https://tanstack.com/table/v8/docs/api/core/table#data',
-    linkText: 'TanStack Table Core Table Docs',
+    description: `The data for the table to display. This array should match the type you provided to table.setRowType<...>, but in theory could be an array of anything. It's common for each item in the array to be an object of key/values but this is not required. Columns can access this data via string/index or a functional accessor to return anything they want. When the data option changes reference (compared via Object.is), the table will reprocess the data. Any other data processing that relies on the core data model (such as grouping, sorting, filtering, etc) will also be reprocessed.`,
+    link: '/docs/getting-started/usage#creating-data-rows',
+    linkText: 'Usage Docs',
     required: true,
     source: 'TanStack Table',
     type: 'Array<TData>',
@@ -91,7 +89,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'debugAll',
     defaultValue: 'false',
-    description: 'Set this option to true to output all debugging information to the console.',
+    description:
+      'Set this option to true to output all debugging information to the console.',
     link: 'https://tanstack.com/table/v8/docs/api/core/table#debugall',
     linkText: 'TanStack Table Core Table Docs',
     required: false,
@@ -101,7 +100,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'debugColumns',
     defaultValue: 'false',
-    description: 'Set this option to true to output column debugging information to the console.',
+    description:
+      'Set this option to true to output column debugging information to the console.',
     link: 'https://tanstack.com/table/v8/docs/api/core/table#debugcolumns',
     linkText: 'TanStack Table Core Table Docs',
     required: false,
@@ -111,7 +111,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'debugHeaders',
     defaultValue: 'false',
-    description: 'Set this option to true to output header debugging information to the console.',
+    description:
+      'Set this option to true to output header debugging information to the console.',
     link: 'https://tanstack.com/table/v8/docs/api/core/table#debugheaders',
     linkText: 'TanStack Table Core Table Docs',
     required: false,
@@ -121,7 +122,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'debugRows',
     defaultValue: 'false',
-    description: 'Set this option to true to output row debugging information to the console.',
+    description:
+      'Set this option to true to output row debugging information to the console.',
     link: 'https://tanstack.com/table/v8/docs/api/core/table#debugrows',
     linkText: 'TanStack Table Core Table Docs',
     required: false,
@@ -131,7 +133,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'debugTable',
     defaultValue: 'false',
-    description: 'Set this option to true to output table debugging information to the console.',
+    description:
+      'Set this option to true to output table debugging information to the console.',
     link: 'https://tanstack.com/table/v8/docs/api/core/table#debugcolumns',
     linkText: 'TanStack Table Core Table Docs',
     required: false,
@@ -141,7 +144,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'defaultColumn',
     defaultValue: '',
-    description: 'Default column options to use for all column defs supplied to the table. This is useful for providing default cell/header/footer renderers, sorting/filtering/grouping options, etc.',
+    description:
+      'Default column options to use for all column defs supplied to the table. This is useful for providing default cell/header/footer renderers, sorting/filtering/grouping options, etc.',
     link: 'https://tanstack.com/table/v8/docs/api/core/table#defaultcolumn',
     linkText: '',
     required: false,
@@ -632,12 +636,10 @@ export const rootProps: PropRow[] = [
   {
     propName: 'getCoreRowModel',
     defaultValue: '',
-    description: `This required option is a factory for a function that computes and returns the core row model for the table. It is called once per table and should return a new function which will calculate and return the row model for the table.
-
-    A default implementation is provided via any table adapter's { getCoreRowModel } export.`,
+    description: `Material React Table uses the default core row model function from TanStack Table, but you can override its implementation here. It is called once per table and should return a new function which will calculate and return the row model for the table.`,
     link: 'https://tanstack.com/table/v8/docs/api/core/table#getcorerowmodel',
     linkText: 'TanStack Table Core Table Docs',
-    required: true, //?
+    required: false,
     source: 'TanStack Table',
     type: '(table: Table<TData>) => () => RowModel<TData>',
   },
@@ -654,7 +656,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'getFacetedMinMaxValues',
     defaultValue: '',
-    description: 'A function that computes and returns a min/max tuple derived from column.getFacetedRowModel. Useful for displaying faceted result values.',
+    description:
+      'A function that computes and returns a min/max tuple derived from column.getFacetedRowModel. Useful for displaying faceted result values.',
     link: 'https://tanstack.com/table/v8/docs/api/features/filters#getfacetedminmaxvalues',
     linkText: 'TanStack Table Filters Docs',
     required: false,
