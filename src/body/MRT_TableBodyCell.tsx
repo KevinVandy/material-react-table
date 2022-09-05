@@ -6,19 +6,13 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import {
-  alpha,
-  darken,
-  lighten,
-  Skeleton,
-  TableCell,
-  useTheme,
-} from '@mui/material';
+import { darken, lighten, Skeleton, TableCell, useTheme } from '@mui/material';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
-import type { MRT_Cell, MRT_TableInstance } from '..';
 import { MRT_TableBodyRowGrabHandle } from './MRT_TableBodyRowGrabHandle';
 import { MRT_TableBodyCellValue } from './MRT_TableBodyCellValue';
+import { getCommonCellStyles } from '../column.utils';
+import type { MRT_Cell, MRT_TableInstance } from '..';
 
 interface Props {
   cell: MRT_Cell;
@@ -132,23 +126,6 @@ export const MRT_TableBodyCell: FC<Props> = ({
     }
   };
 
-  const getIsLastLeftPinnedColumn = () => {
-    return (
-      column.getIsPinned() === 'left' &&
-      table.getLeftLeafHeaders().length - 1 === column.getPinnedIndex()
-    );
-  };
-
-  const getIsFirstRightPinnedColumn = () => {
-    return column.getIsPinned() === 'right' && column.getPinnedIndex() === 0;
-  };
-
-  const getTotalRight = () => {
-    return (
-      (table.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) * 160
-    );
-  };
-
   const handleDragEnter = (e: DragEvent<HTMLTableCellElement>) => {
     tableCellProps?.onDragEnter?.(e);
     if (enableGrouping && hoveredColumn?.id === 'drop-zone') {
@@ -190,23 +167,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
       onDragEnter={handleDragEnter}
       onDoubleClick={handleDoubleClick}
       sx={(theme) => ({
-        backgroundColor: column.getIsPinned()
-          ? alpha(lighten(theme.palette.background.default, 0.04), 0.95)
-          : undefined,
-        boxShadow: getIsLastLeftPinnedColumn()
-          ? `-4px 0 8px -6px ${alpha(theme.palette.common.black, 0.2)} inset`
-          : getIsFirstRightPinnedColumn()
-          ? `4px 0 8px -6px ${alpha(theme.palette.common.black, 0.2)} inset`
-          : undefined,
         cursor: isEditable && editingMode === 'cell' ? 'pointer' : 'text',
-        left:
-          column.getIsPinned() === 'left'
-            ? `${column.getStart('left')}px`
-            : undefined,
-        opacity:
-          draggingColumn?.id === column.id || hoveredColumn?.id === column.id
-            ? 0.5
-            : 1,
         overflow: 'hidden',
         p:
           density === 'compact'
@@ -231,11 +192,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
                   : 1.25)
               }rem`
             : undefined,
-        position: column.getIsPinned() ? 'sticky' : 'relative',
-        right:
-          column.getIsPinned() === 'right' ? `${getTotalRight()}px` : undefined,
         textOverflow: columnDefType !== 'display' ? 'ellipsis' : undefined,
-        transition: 'all 0.2s ease-in-out',
         whiteSpace: density === 'compact' ? 'nowrap' : 'normal',
         zIndex:
           draggingColumn?.id === column.id ? 2 : column.getIsPinned() ? 1 : 0,
@@ -250,13 +207,8 @@ export const MRT_TableBodyCell: FC<Props> = ({
                 : `${darken(theme.palette.background.default, 0.1)} !important`
               : undefined,
         },
-        ...(tableCellProps?.sx instanceof Function
-          ? tableCellProps.sx(theme)
-          : (tableCellProps?.sx as any)),
+        ...getCommonCellStyles({ column, table, theme, tableCellProps }),
         ...draggingBorders,
-        maxWidth: `min(${column.getSize()}px, fit-content)`,
-        minWidth: `max(${column.getSize()}px, ${columnDef.minSize ?? 30}px)`,
-        width: column.getSize(),
       })}
     >
       <>

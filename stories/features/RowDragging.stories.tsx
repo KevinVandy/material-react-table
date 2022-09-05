@@ -57,7 +57,6 @@ export const RowDraggingEnabled: Story<MaterialReactTableProps> = () => {
       columns={columns}
       data={data}
       enableRowDragging
-      onRowDrop={({ event, draggedRow }) => console.info({ event, draggedRow })}
     />
   );
 };

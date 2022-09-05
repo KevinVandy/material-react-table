@@ -14,7 +14,7 @@ export const MRT_TableBodyRowGrabHandle: FC<Props> = ({
   table,
 }) => {
   const {
-    options: { muiTableBodyRowDragHandleProps, onRowDrop },
+    options: { muiTableBodyRowDragHandleProps },
   } = table;
   const { row } = cell;
 
@@ -23,17 +23,14 @@ export const MRT_TableBodyRowGrabHandle: FC<Props> = ({
       ? muiTableBodyRowDragHandleProps({ row, table })
       : muiTableBodyRowDragHandleProps;
 
-  const handleDragStart = (e: DragEvent<HTMLButtonElement>) => {
-    e.dataTransfer.setDragImage(rowRef.current as HTMLElement, 0, 0);
+  const handleDragStart = (event: DragEvent<HTMLButtonElement>) => {
+    iconButtonProps?.onDragStart?.(event);
+    event.dataTransfer.setDragImage(rowRef.current as HTMLElement, 0, 0);
     table.setDraggingRow(row as any);
   };
 
   const handleDragEnd = (event: DragEvent<HTMLButtonElement>) => {
-    onRowDrop?.({
-      event,
-      draggedRow: table.getState().draggingRow as any,
-      targetRow: table.getState().hoveredRow as any,
-    });
+    iconButtonProps?.onDragEnd?.(event);
     table.setDraggingRow(null);
     table.setHoveredRow(null);
   };

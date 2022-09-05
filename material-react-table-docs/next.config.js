@@ -43,6 +43,26 @@ const nextConfig = {
         destination: '/docs/getting-started/usage',
         permanent: true,
       },
+      {
+        source: '/docs/guides/column-ordering',
+        destination: '/docs/guides/column-ordering-dnd',
+        permanent: true,
+      },
+      {
+        source: '/docs/guides/column-dragging',
+        destination: '/docs/guides/column-ordering-dnd',
+        permanent: true,
+      },
+      {
+        source: '/docs/guides/row-dragging',
+        destination: '/docs/guides/row-ordering-dnd',
+        permanent: true,
+      },
+      {
+        source: '/docs/guides/row-ordering',
+        destination: '/docs/guides/row-ordering-dnd',
+        permanent: true,
+      },
     ];
   },
 };

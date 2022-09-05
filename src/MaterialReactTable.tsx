@@ -1,6 +1,5 @@
 import React, {
   Dispatch,
-  DragEvent,
   MutableRefObject,
   ReactNode,
   SetStateAction,
@@ -101,6 +100,7 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
     filterInputRefs: MutableRefObject<Record<string, HTMLInputElement>>;
     searchInputRef: MutableRefObject<HTMLInputElement>;
     tableContainerRef: MutableRefObject<HTMLDivElement>;
+    tablePaperRef: MutableRefObject<HTMLDivElement>;
     topToolbarRef: MutableRefObject<HTMLDivElement>;
   };
   setColumnFilterFns: Dispatch<
@@ -753,15 +753,6 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     muiTopToolbarProps?:
       | ToolbarProps
       | (({ table }: { table: MRT_TableInstance<TData> }) => ToolbarProps);
-    onColumnDrop?: ({
-      event,
-      draggedColumn,
-      targetColumn,
-    }: {
-      event: DragEvent<HTMLButtonElement>;
-      draggedColumn: MRT_Column<TData>;
-      targetColumn: MRT_Column<TData> | { id: string } | null;
-    }) => void;
     onDensityChange?: OnChangeFn<boolean>;
     onDraggingColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
     onDraggingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
@@ -783,15 +774,6 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     onHoveredColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
     onHoveredRowChange?: OnChangeFn<MRT_Row<TData> | null>;
     onIsFullScreenChange?: OnChangeFn<boolean>;
-    onRowDrop?: ({
-      event,
-      draggedRow,
-      targetRow,
-    }: {
-      event: DragEvent<HTMLButtonElement>;
-      draggedRow: MRT_Row<TData>;
-      targetRow: MRT_Row<TData> | { id: string } | null;
-    }) => void;
     onShowAlertBannerChange?: OnChangeFn<boolean>;
     onShowFiltersChange?: OnChangeFn<boolean>;
     onShowGlobalFilterChange?: OnChangeFn<boolean>;

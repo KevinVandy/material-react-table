@@ -16,11 +16,7 @@ export const MRT_TableHeadCellGrabHandle: FC<Props> = ({
 }) => {
   const {
     getState,
-    options: {
-      enableColumnOrdering,
-      muiTableHeadCellDragHandleProps,
-      onColumnDrop,
-    },
+    options: { enableColumnOrdering, muiTableHeadCellDragHandleProps },
     setColumnOrder,
     setDraggingColumn,
     setHoveredColumn,
@@ -43,17 +39,14 @@ export const MRT_TableHeadCellGrabHandle: FC<Props> = ({
     ...mcIconButtonProps,
   };
 
-  const handleDragStart = (e: DragEvent<HTMLButtonElement>) => {
+  const handleDragStart = (event: DragEvent<HTMLButtonElement>) => {
+    iconButtonProps?.onDragStart?.(event);
     setDraggingColumn(column);
-    e.dataTransfer.setDragImage(tableHeadCellRef.current as HTMLElement, 0, 0);
+    event.dataTransfer.setDragImage(tableHeadCellRef.current as HTMLElement, 0, 0);
   };
 
   const handleDragEnd = (event: DragEvent<HTMLButtonElement>) => {
-    onColumnDrop?.({
-      event,
-      draggedColumn: column,
-      targetColumn: hoveredColumn,
-    });
+    iconButtonProps?.onDragEnd?.(event);
     if (hoveredColumn?.id === 'drop-zone') {
       column.toggleGrouping();
     } else if (

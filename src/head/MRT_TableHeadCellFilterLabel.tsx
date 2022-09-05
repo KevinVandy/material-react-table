@@ -17,11 +17,11 @@ export const MRT_TableHeadCellFilterLabel: FC<Props> = ({ header, table }) => {
   const { column } = header;
   const { columnDef } = column;
 
-  const isRangeFilter = [
-    'between',
-    'betweenInclusive',
-    'inNumberRange',
-  ].includes(columnDef._filterFn);
+  const isRangeFilter =
+    columnDef.filterVariant === 'range' ||
+    ['between', 'betweenInclusive', 'inNumberRange'].includes(
+      columnDef._filterFn,
+    );
   const currentFilterOption = columnDef._filterFn;
   const filterTooltip = localization.filteringByColumn
     .replace('{column}', String(columnDef.header))
@@ -51,8 +51,8 @@ export const MRT_TableHeadCellFilterLabel: FC<Props> = ({ header, table }) => {
     <Grow
       unmountOnExit
       in={
-        (!!column.getFilterValue() && isRangeFilter) ||
-        (!isRangeFilter && // @ts-ignore
+        (!!column.getFilterValue() && !isRangeFilter) ||
+        (isRangeFilter && // @ts-ignore
           (!!column.getFilterValue()?.[0] || !!column.getFilterValue()?.[1]))
       }
     >

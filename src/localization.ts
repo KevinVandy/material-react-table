@@ -47,6 +47,8 @@ export interface MRT_Localization {
   max: string;
   min: string;
   move: string;
+  noRecordsToDisplay: string;
+  noResultsFound: string;
   or: string;
   pinToLeft: string;
   pinToRight: string;
@@ -129,6 +131,8 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   max: 'Max',
   min: 'Min',
   move: 'Move',
+  noRecordsToDisplay: 'No records to display',
+  noResultsFound: 'No results found',
   or: 'or',
   pinToLeft: 'Pin to left',
   pinToRight: 'Pin to right',

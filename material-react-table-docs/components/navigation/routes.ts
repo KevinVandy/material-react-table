@@ -150,10 +150,6 @@ export const routes: Array<RouteItem> = [
             label: 'Column Actions',
           },
           {
-            href: '/docs/guides/column-dragging',
-            label: 'Column Dragging',
-          },
-          {
             href: '/docs/guides/column-filtering',
             label: 'Column Filtering',
           },
@@ -162,7 +158,7 @@ export const routes: Array<RouteItem> = [
             label: 'Column Hiding',
           },
           {
-            href: '/docs/guides/column-ordering',
+            href: '/docs/guides/column-ordering-dnd',
             label: 'Column Ordering (DnD)',
           },
           {
@@ -206,15 +202,11 @@ export const routes: Array<RouteItem> = [
             label: 'Row Actions (Buttons)',
           },
           {
-            href: '/docs/guides/row-dragging',
-            label: 'Row Dragging',
-          },
-          {
             href: '/docs/guides/row-numbers',
             label: 'Row Numbers',
           },
           {
-            href: '/docs/guides/row-ordering',
+            href: '/docs/guides/row-ordering-dnd',
             label: 'Row Ordering (DnD)',
           },
           {
