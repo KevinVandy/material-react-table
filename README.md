@@ -48,9 +48,11 @@ See all [Props and Options](https://www.material-react-table.com/docs/api)
 
 View additional [storybook examples](https://www.material-react-table.dev/)
 
-## Features (All Features work and are MVP, but are still being polished)
+## Features
 
 _All features can easily be enabled/disabled_
+
+_**Fully Fleshed out [Docs](https://www.material-react-table.com/docs/guides#guides) are available for all features**_
 
 - [x] < 37kb gzipped - [Bundlephobia](https://bundlephobia.com/package/material-react-table)
 - [x] Advanced TypeScript Generics Support (TypeScript Optional)
@@ -63,7 +65,7 @@ _All features can easily be enabled/disabled_
 - [x] Column Resizing
 - [x] Customize Icons
 - [x] Customize Styling of internal Mui Components
-- [x] Data Editing (3 different editing modes)
+- [x] Data Editing (4 different editing modes)
 - [x] Density Toggle
 - [x] Detail Panels (Expansion)
 - [x] Filtering (supports client-side and server-side)
@@ -71,7 +73,7 @@ _All features can easily be enabled/disabled_
 - [x] Global Filtering (Search across all columns, rank by best match)
 - [x] Header Groups & Footers
 - [x] Localization (i18n) support
-- [x] Manage your own state
+- [x] Manage your own state or let the table manage it internally for you
 - [x] Pagination (supports client-side and server-side)
 - [x] Row Actions (Your Custom Action Buttons)
 - [x] Row Numbers
@@ -112,33 +114,31 @@ npm install material-react-table
 import React, { useMemo, useRef, useState, useEffect } from 'react';
 import MaterialReactTable from 'material-react-table';
 
+const data = [
+  {
+    name: 'John',
+    age: 30,
+  },
+  {
+    name: 'Sara',
+    age: 25,
+  },
+]
+
 export default function App() {
   const columns = useMemo(
     () => [
       {
         accessorKey: 'name', //simple recommended way to define a column
         header: 'Name',
-        muiTableHeadCellProps: { sx: { color: 'green' } }, //custom props
+        muiTableHeadCellProps: { sx: { color: 'green' } }, //optional custom props
+        Cell: ({ cell}) => <span>{cell.getValue()}</span>, //optional custom cell render
       },
       {
         accessorFn: (row) => row.age, //alternate way
         id: 'age', //id required if you use accessorFn instead of accessorKey
         header: 'Age',
-        Header: <i>Age</i>, //optional custom markup
-      },
-    ],
-    [],
-  );
-
-  const data = useMemo(
-    () => [
-      {
-        name: 'John',
-        age: 30,
-      },
-      {
-        name: 'Sara',
-        age: 25,
+        Header: () => <i>Age</i>, //optional custom header render
       },
     ],
     [],
@@ -170,7 +170,7 @@ export default function App() {
       state={{ rowSelection }} //manage your own state, pass it back to the table (optional)
       tableInstanceRef={tableInstanceRef} //get a reference to the underlying table instance (optional)
    />
-   );
+  );
 }
 ```
 
