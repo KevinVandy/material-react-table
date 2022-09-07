@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { Paper } from '@mui/material';
 import { MRT_TopToolbar } from '../toolbar/MRT_TopToolbar';
 import { MRT_BottomToolbar } from '../toolbar/MRT_BottomToolbar';
@@ -16,16 +16,6 @@ export const MRT_TablePaper: FC<Props> = ({ table }) => {
     refs: { tablePaperRef },
   } = table;
   const { isFullScreen } = getState();
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if (isFullScreen) {
-        document.body.style.height = '100vh';
-      } else {
-        document.body.style.height = 'auto';
-      }
-    }
-  }, [isFullScreen]);
 
   const tablePaperProps =
     muiTablePaperProps instanceof Function
@@ -51,12 +41,16 @@ export const MRT_TablePaper: FC<Props> = ({ table }) => {
       })}
       style={{
         ...tablePaperProps?.style,
-        height: isFullScreen ? '100vh' : undefined,
-        margin: isFullScreen ? '0' : undefined,
-        maxHeight: isFullScreen ? '100vh' : undefined,
-        maxWidth: isFullScreen ? '100vw' : undefined,
-        padding: isFullScreen ? '0' : undefined,
-        width: isFullScreen ? '100vw' : undefined,
+        ...(isFullScreen
+          ? {
+              height: '100vh',
+              margin: 0,
+              maxHeight: '100vh',
+              maxWidth: '100vw',
+              padding: 0,
+              width: '100vw',
+            }
+          : {}),
       }}
     >
       {enableTopToolbar && <MRT_TopToolbar table={table} />}

@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   TableState,
   getCoreRowModel,
@@ -314,6 +314,24 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   if (props.tableInstanceRef) {
     props.tableInstanceRef.current = table;
   }
+
+  const initialBodyHeight = useRef<string>();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      initialBodyHeight.current = document.body.style.height;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (table.getState().isFullScreen) {
+        document.body.style.height = '100vh';
+      } else {
+        document.body.style.height = initialBodyHeight.current as string;
+      }
+    }
+  }, [table.getState().isFullScreen]);
 
   return (
     <>
