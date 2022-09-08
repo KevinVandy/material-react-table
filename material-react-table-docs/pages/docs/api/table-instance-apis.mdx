@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import TableInstanceAPIsTable from '../../../components/prop-tables/TableInstanceAPIsTable';
 
 <Head>
   <title>Table Instance APIs - Material React Table Docs</title>
@@ -26,162 +27,28 @@ You can access this table instance yourself by either setting up a `tableInstanc
 const tableInstanceRef = useRef(null);
 
 const someEventHandler = () => {
-  const table = tableInstanceRef.current;
-  table. // call any of the table instance methods here
+  tableInstanceRef.current. //call any of the table instance methods here
 };
+
+const columns = useMemo(() => [
+  {
+    accessor: 'name',
+    header: 'Name',
+    Cell: ({ cell, table }) => <span onClick={() => table.{/* or maybe here */}}></span>,
+  },
+]);
 
 return (
   <MaterialTable
     columns={columns}
     data={data}
+    //all callback props have access to the table instance when used like this
+    renderTopToolbarCustomActions={({ table }) => (
+      <Button onClick={() => table.{/* or maybe here */}}>Click Me</Button>
+    )}
     tableInstanceRef={tableInstanceRef}
   />
 );
 ```
 
-- \_features
-- options
-- initialState
-- \_queue
-- reset
-- setOptions
-- getState
-- setState
-- \_getRowId
-- getCoreRowModel
-- getRowModel
-- getRow
-- \_getDefaultColumnDef
-- \_getColumnDefs
-- getAllColumns
-- getAllFlatColumns
-- \_getAllFlatColumnsById
-- getAllLeafColumns
-- getColumn
-- getHeaderGroups
-- getCenterHeaderGroups
-- getLeftHeaderGroups
-- getRightHeaderGroups
-- getFooterGroups
-- getLeftFooterGroups
-- getCenterFooterGroups
-- getRightFooterGroups
-- getFlatHeaders
-- getLeftFlatHeaders
-- getCenterFlatHeaders
-- getRightFlatHeaders
-- getCenterLeafHeaders
-- getLeftLeafHeaders
-- getRightLeafHeaders
-- getLeafHeaders
-- getVisibleFlatColumns
-- getVisibleLeafColumns
-- getLeftVisibleLeafColumns
-- getRightVisibleLeafColumns
-- getCenterVisibleLeafColumns
-- setColumnVisibility
-- resetColumnVisibility
-- toggleAllColumnsVisible
-- getIsAllColumnsVisible
-- getIsSomeColumnsVisible
-- getToggleAllColumnsVisibilityHandler
-- setColumnOrder
-- resetColumnOrder
-- \_getOrderColumnsFn
-- setColumnPinning
-- resetColumnPinning
-- getIsSomeColumnsPinned
-- getLeftLeafColumns
-- getRightLeafColumns
-- getCenterLeafColumns
-- getGlobalAutoFilterFn
-- getGlobalFilterFn
-- setColumnFilters
-- setGlobalFilter
-- resetGlobalFilter
-- resetColumnFilters
-- getPreFilteredRowModel
-- getFilteredRowModel
-- \_getGlobalFacetedRowModel
-- getGlobalFacetedRowModel
-- \_getGlobalFacetedUniqueValues
-- getGlobalFacetedUniqueValues
-- \_getGlobalFacetedMinMaxValues
-- getGlobalFacetedMinMaxValues
-- setSorting
-- resetSorting
-- getPreSortedRowModel
-- getSortedRowModel
-- setGrouping
-- resetGrouping
-- getPreGroupedRowModel
-- getGroupedRowModel
-- \_autoResetExpanded
-- setExpanded
-- toggleAllRowsExpanded
-- resetExpanded
-- getCanSomeRowsExpand
-- getToggleAllRowsExpandedHandler
-- getIsSomeRowsExpanded
-- getIsAllRowsExpanded
-- getExpandedDepth
-- getPreExpandedRowModel
-- getExpandedRowModel
-- \_autoResetPageIndex
-- setPagination
-- resetPagination
-- setPageIndex
-- resetPageIndex
-- resetPageSize
-- setPageSize
-- setPageCount
-- getPageOptions
-- getCanPreviousPage
-- getCanNextPage
-- previousPage
-- nextPage
-- getPrePaginationRowModel
-- getPaginationRowModel
-- getPageCount
-- setRowSelection
-- resetRowSelection
-- toggleAllRowsSelected
-- toggleAllPageRowsSelected
-- getPreSelectedRowModel
-- getSelectedRowModel
-- getFilteredSelectedRowModel
-- getGroupedSelectedRowModel
-- getIsAllRowsSelected
-- getIsAllPageRowsSelected
-- getIsSomeRowsSelected
-- getIsSomePageRowsSelected
-- getToggleAllRowsSelectedHandler
-- getToggleAllPageRowsSelectedHandler
-- setColumnSizing
-- setColumnSizingInfo
-- resetColumnSizing
-- resetHeaderSizeInfo
-- getTotalSize
-- getLeftTotalSize
-- getCenterTotalSize
-- getRightTotalSize
-- \_getPaginationRowModel
-- \_getExpandedRowModel
-- \_getSortedRowModel
-- \_getGroupedRowModel
-- \_getFilteredRowModel
-- \_getCoreRowModel
-- refs
-- setColumnFilterFns
-- setDensity
-- setDraggingColumn
-- setDraggingRow
-- setEditingCell
-- setEditingRow
-- setGlobalFilterFn
-- setHoveredColumn
-- setHoveredRow
-- setIsFullScreen
-- setShowAlertBanner
-- setShowFilters
-- setShowGlobalFilter
+<TableInstanceAPIsTable />
