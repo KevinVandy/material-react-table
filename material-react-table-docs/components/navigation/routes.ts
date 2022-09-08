@@ -43,6 +43,10 @@ export const routes: Array<RouteItem> = [
         href: '/docs/api/state-options',
         label: 'State Options',
       },
+      {
+        href: '/docs/api/table-instance-apis',
+        label: 'Table Instance APIs',
+      },
     ],
   },
   {

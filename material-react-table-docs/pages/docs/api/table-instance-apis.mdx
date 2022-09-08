@@ -1,0 +1,187 @@
+import Head from 'next/head';
+
+<Head>
+  <title>Table Instance APIs - Material React Table Docs</title>
+  <meta
+    name="description"
+    content="All the table instance methods and objects that can be accessed from the table instance in Material React Table"
+  />
+  <meta
+    property="og:title"
+    content="Material React Table Table Instance API Reference"
+  />
+  <meta
+    property="og:description"
+    content="A reference of all the table instance api methods and objects that can be used in Material React Table"
+  />
+</Head>
+
+## Table Instance API
+
+Internally, Material React Table uses the `useReactTable` hook from TanStack Table to create a table instance that handles a majority of all the logic, events, and state for the table.
+
+You can access this table instance yourself by either setting up a `tableInstanceRef`, or by consuming a `table` param from many of the callback functions in many of the props.
+
+```jsx
+const tableInstanceRef = useRef(null);
+
+const someEventHandler = () => {
+  const table = tableInstanceRef.current;
+  table. // call any of the table instance methods here
+};
+
+return (
+  <MaterialTable
+    columns={columns}
+    data={data}
+    tableInstanceRef={tableInstanceRef}
+  />
+);
+```
+
+- \_features
+- options
+- initialState
+- \_queue
+- reset
+- setOptions
+- getState
+- setState
+- \_getRowId
+- getCoreRowModel
+- getRowModel
+- getRow
+- \_getDefaultColumnDef
+- \_getColumnDefs
+- getAllColumns
+- getAllFlatColumns
+- \_getAllFlatColumnsById
+- getAllLeafColumns
+- getColumn
+- getHeaderGroups
+- getCenterHeaderGroups
+- getLeftHeaderGroups
+- getRightHeaderGroups
+- getFooterGroups
+- getLeftFooterGroups
+- getCenterFooterGroups
+- getRightFooterGroups
+- getFlatHeaders
+- getLeftFlatHeaders
+- getCenterFlatHeaders
+- getRightFlatHeaders
+- getCenterLeafHeaders
+- getLeftLeafHeaders
+- getRightLeafHeaders
+- getLeafHeaders
+- getVisibleFlatColumns
+- getVisibleLeafColumns
+- getLeftVisibleLeafColumns
+- getRightVisibleLeafColumns
+- getCenterVisibleLeafColumns
+- setColumnVisibility
+- resetColumnVisibility
+- toggleAllColumnsVisible
+- getIsAllColumnsVisible
+- getIsSomeColumnsVisible
+- getToggleAllColumnsVisibilityHandler
+- setColumnOrder
+- resetColumnOrder
+- \_getOrderColumnsFn
+- setColumnPinning
+- resetColumnPinning
+- getIsSomeColumnsPinned
+- getLeftLeafColumns
+- getRightLeafColumns
+- getCenterLeafColumns
+- getGlobalAutoFilterFn
+- getGlobalFilterFn
+- setColumnFilters
+- setGlobalFilter
+- resetGlobalFilter
+- resetColumnFilters
+- getPreFilteredRowModel
+- getFilteredRowModel
+- \_getGlobalFacetedRowModel
+- getGlobalFacetedRowModel
+- \_getGlobalFacetedUniqueValues
+- getGlobalFacetedUniqueValues
+- \_getGlobalFacetedMinMaxValues
+- getGlobalFacetedMinMaxValues
+- setSorting
+- resetSorting
+- getPreSortedRowModel
+- getSortedRowModel
+- setGrouping
+- resetGrouping
+- getPreGroupedRowModel
+- getGroupedRowModel
+- \_autoResetExpanded
+- setExpanded
+- toggleAllRowsExpanded
+- resetExpanded
+- getCanSomeRowsExpand
+- getToggleAllRowsExpandedHandler
+- getIsSomeRowsExpanded
+- getIsAllRowsExpanded
+- getExpandedDepth
+- getPreExpandedRowModel
+- getExpandedRowModel
+- \_autoResetPageIndex
+- setPagination
+- resetPagination
+- setPageIndex
+- resetPageIndex
+- resetPageSize
+- setPageSize
+- setPageCount
+- getPageOptions
+- getCanPreviousPage
+- getCanNextPage
+- previousPage
+- nextPage
+- getPrePaginationRowModel
+- getPaginationRowModel
+- getPageCount
+- setRowSelection
+- resetRowSelection
+- toggleAllRowsSelected
+- toggleAllPageRowsSelected
+- getPreSelectedRowModel
+- getSelectedRowModel
+- getFilteredSelectedRowModel
+- getGroupedSelectedRowModel
+- getIsAllRowsSelected
+- getIsAllPageRowsSelected
+- getIsSomeRowsSelected
+- getIsSomePageRowsSelected
+- getToggleAllRowsSelectedHandler
+- getToggleAllPageRowsSelectedHandler
+- setColumnSizing
+- setColumnSizingInfo
+- resetColumnSizing
+- resetHeaderSizeInfo
+- getTotalSize
+- getLeftTotalSize
+- getCenterTotalSize
+- getRightTotalSize
+- \_getPaginationRowModel
+- \_getExpandedRowModel
+- \_getSortedRowModel
+- \_getGroupedRowModel
+- \_getFilteredRowModel
+- \_getCoreRowModel
+- refs
+- setColumnFilterFns
+- setDensity
+- setDraggingColumn
+- setDraggingRow
+- setEditingCell
+- setEditingRow
+- setGlobalFilterFn
+- setHoveredColumn
+- setHoveredRow
+- setIsFullScreen
+- setShowAlertBanner
+- setShowFilters
+- setShowGlobalFilter
