@@ -6,7 +6,7 @@ import MaterialReactTable, {
   MRT_FullScreenToggleButton,
 } from '../../src';
 import { faker } from '@faker-js/faker';
-import { Button, IconButton, Tooltip, Typography } from '@mui/material';
+import { Box, Button, IconButton, Tooltip, Typography } from '@mui/material';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -356,5 +356,25 @@ export const ToolbarAlertBannerBottomWithActionsAlsoBottom: Story<
         </div>
       );
     }}
+  />
+);
+
+export const renderCustomTopToolbar: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    renderTopToolbar={({ table }) => (
+      <Box sx={{ p: '2rem' }}>Custom Top Toolbar</Box>
+    )}
+  />
+);
+
+export const renderCustomBottomToolbar: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    renderBottomToolbar={({ table }) => (
+      <Box sx={{ p: '2rem' }}>Custom Bottom Toolbar</Box>
+    )}
   />
 );
