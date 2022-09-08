@@ -119,6 +119,7 @@ export const MRT_GlobalFilterTextField = <
         anchorEl={anchorEl}
         setAnchorEl={setAnchorEl}
         table={table}
+        onSelect={handleClear}
       />
     </Collapse>
   );

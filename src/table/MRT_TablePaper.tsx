@@ -12,7 +12,13 @@ interface Props {
 export const MRT_TablePaper: FC<Props> = ({ table }) => {
   const {
     getState,
-    options: { enableBottomToolbar, enableTopToolbar, muiTablePaperProps },
+    options: {
+      enableBottomToolbar,
+      enableTopToolbar,
+      muiTablePaperProps,
+      renderBottomToolbar,
+      renderTopToolbar,
+    },
     refs: { tablePaperRef },
   } = table;
   const { isFullScreen } = getState();
@@ -53,9 +59,13 @@ export const MRT_TablePaper: FC<Props> = ({ table }) => {
           : {}),
       }}
     >
-      {enableTopToolbar && <MRT_TopToolbar table={table} />}
+      {(enableTopToolbar && renderTopToolbar?.({ table })) ?? (
+        <MRT_TopToolbar table={table} />
+      )}
       <MRT_TableContainer table={table} />
-      {enableBottomToolbar && <MRT_BottomToolbar table={table} />}
+      {(enableBottomToolbar && renderBottomToolbar?.({ table })) ?? (
+        <MRT_BottomToolbar table={table} />
+      )}
     </Paper>
   );
 };

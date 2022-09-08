@@ -1555,6 +1555,16 @@ export const rootProps: PropRow[] = [
     type: "'bottom' | 'top' | 'both' | 'none'",
   },
   {
+    propName: 'renderBottomToolbar',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '',
+  },
+  {
     propName: 'renderColumnActionsMenuItems',
     defaultValue: '',
     description: '',
@@ -1616,6 +1626,16 @@ export const rootProps: PropRow[] = [
   },
   {
     propName: 'renderBottomToolbarCustomActions',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '',
+  },
+  {
+    propName: 'renderTopToolbar',
     defaultValue: '',
     description: '',
     link: '',

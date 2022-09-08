@@ -3,7 +3,6 @@ import React, {
   FC,
   MouseEvent,
   useCallback,
-  useEffect,
   useState,
 } from 'react';
 import {
@@ -169,10 +168,6 @@ export const MRT_FilterTextField: FC<Props> = ({
   const handleFilterMenuOpen = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
-  useEffect(() => {
-    handleClear();
-  }, [columnDef._filterFn]);
 
   if (columnDef.Filter) {
     return <>{columnDef.Filter?.({ column, header, table })}</>;
@@ -374,6 +369,7 @@ export const MRT_FilterTextField: FC<Props> = ({
         header={header}
         setAnchorEl={setAnchorEl}
         table={table}
+        setFilterValue={setFilterValue}
       />
     </>
   );

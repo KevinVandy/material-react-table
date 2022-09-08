@@ -102,6 +102,7 @@ interface Props<TData extends Record<string, any> = {}> {
   header?: MRT_Header<TData>;
   onSelect?: () => void;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
+  setFilterValue?: (filterValue: any) => void;
   table: MRT_TableInstance<TData>;
 }
 
@@ -110,6 +111,7 @@ export const MRT_FilterOptionMenu = <TData extends Record<string, any> = {}>({
   header,
   onSelect,
   setAnchorEl,
+  setFilterValue,
   table,
 }: Props<TData>) => {
   const {
@@ -152,10 +154,25 @@ export const MRT_FilterOptionMenu = <TData extends Record<string, any> = {}>({
       }));
       if (['empty', 'notEmpty'].includes(option as string)) {
         column.setFilterValue(' ');
-      } else if (option === 'between') {
+      } else if (
+        columnDef?.filterVariant === 'multi-select' ||
+        ['arrIncludesSome', 'arrIncludesAll', 'arrIncludes'].includes(
+          option as string,
+        )
+      ) {
+        column.setFilterValue([]);
+        setFilterValue?.([]);
+      } else if (
+        columnDef?.filterVariant === 'range' ||
+        ['between', 'betweenInclusive', 'inNumberRange'].includes(
+          option as MRT_FilterOption,
+        )
+      ) {
         column.setFilterValue(['', '']);
+        setFilterValue?.('');
       } else {
         column.setFilterValue('');
+        setFilterValue?.('');
       }
     } else {
       setGlobalFilterFn(option);
