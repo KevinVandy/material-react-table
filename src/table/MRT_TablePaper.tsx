@@ -59,13 +59,15 @@ export const MRT_TablePaper: FC<Props> = ({ table }) => {
           : {}),
       }}
     >
-      {(enableTopToolbar && renderTopToolbar?.({ table })) ?? (
-        <MRT_TopToolbar table={table} />
-      )}
+      {enableTopToolbar &&
+        (renderTopToolbar instanceof Function
+          ? renderTopToolbar({ table })
+          : renderTopToolbar ?? <MRT_TopToolbar table={table} />)}
       <MRT_TableContainer table={table} />
-      {(enableBottomToolbar && renderBottomToolbar?.({ table })) ?? (
-        <MRT_BottomToolbar table={table} />
-      )}
+      {enableBottomToolbar &&
+        (renderBottomToolbar instanceof Function
+          ? renderBottomToolbar({ table })
+          : renderBottomToolbar ?? <MRT_BottomToolbar table={table} />)}
     </Paper>
   );
 };

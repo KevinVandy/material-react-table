@@ -867,11 +867,9 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     positionPagination?: 'bottom' | 'top' | 'both';
     positionToolbarAlertBanner?: 'bottom' | 'top' | 'none';
     positionToolbarDropZone?: 'bottom' | 'top' | 'none' | 'both';
-    renderBottomToolbar?: ({
-      table,
-    }: {
-      table: MRT_TableInstance<TData>;
-    }) => ReactNode | ReactNode[];
+    renderBottomToolbar?:
+      | ReactNode
+      | (({ table }: { table: MRT_TableInstance<TData> }) => ReactNode);
     renderBottomToolbarCustomActions?: ({
       table,
     }: {
@@ -936,11 +934,9 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     }: {
       table: MRT_TableInstance<TData>;
     }) => ReactNode;
-    renderTopToolbar?: ({
-      table,
-    }: {
-      table: MRT_TableInstance<TData>;
-    }) => ReactNode | ReactNode[];
+    renderTopToolbar?:
+      | ReactNode
+      | (({ table }: { table: MRT_TableInstance<TData> }) => ReactNode);
     renderTopToolbarCustomActions?: ({
       table,
     }: {

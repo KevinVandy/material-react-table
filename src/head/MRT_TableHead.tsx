@@ -10,7 +10,7 @@ interface Props {
 export const MRT_TableHead: FC<Props> = ({ table }) => {
   const {
     getHeaderGroups,
-    options: { muiTableHeadProps },
+    options: { enableStickyHeader, muiTableHeadProps },
   } = table;
 
   const tableHeadProps =
@@ -19,7 +19,15 @@ export const MRT_TableHead: FC<Props> = ({ table }) => {
       : muiTableHeadProps;
 
   return (
-    <TableHead {...tableHeadProps}>
+    <TableHead
+      {...tableHeadProps}
+      sx={(theme) => ({
+        opacity: enableStickyHeader ? 0.95 : undefined,
+        ...(tableHeadProps?.sx instanceof Function
+          ? tableHeadProps?.sx(theme)
+          : (tableHeadProps?.sx as any)),
+      })}
+    >
       {getHeaderGroups().map((headerGroup) => (
         <MRT_TableHeadRow
           headerGroup={headerGroup as any}
