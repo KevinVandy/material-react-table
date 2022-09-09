@@ -34,11 +34,12 @@ import type {
   MRT_TableInstance,
   MRT_TableState,
   MaterialReactTableProps,
+  MRT_Localization,
 } from '..';
 import { MRT_EditRowModal } from '../body/MRT_EditRowModal';
 
 export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
-  props: MaterialReactTableProps<TData>,
+  props: MaterialReactTableProps<TData> & { localization: MRT_Localization },
 ) => {
   const bottomToolbarRef = useRef<HTMLDivElement>(null);
   const editInputRefs = useRef<Record<string, HTMLInputElement>>({});
@@ -123,7 +124,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       (
         [
           columnOrder.includes('mrt-row-drag') && {
-            header: props.localization?.move,
+            header: props.localization.move,
             size: 60,
             ...props.defaultDisplayColumn,
             ...props.displayColumnDefOptions?.['mrt-row-drag'],
@@ -137,7 +138,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
                 table={table as any}
               />
             ),
-            header: props.localization?.actions,
+            header: props.localization.actions,
             size: 70,
             ...props.defaultDisplayColumn,
             ...props.displayColumnDefOptions?.['mrt-row-actions'],
@@ -152,7 +153,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
                 props.enableExpandAll ? (
                   <MRT_ExpandAllButton table={table as any} />
                 ) : null,
-              header: props.localization?.expand,
+              header: props.localization.expand,
               size: 60,
               ...props.defaultDisplayColumn,
               ...props.displayColumnDefOptions?.['mrt-row-expand'],
@@ -166,7 +167,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
               props.enableSelectAll ? (
                 <MRT_SelectCheckbox selectAll table={table as any} />
               ) : null,
-            header: props.localization?.select,
+            header: props.localization.select,
             size: 60,
             ...props.defaultDisplayColumn,
             ...props.displayColumnDefOptions?.['mrt-row-select'],
@@ -174,8 +175,8 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
           },
           columnOrder.includes('mrt-row-numbers') && {
             Cell: ({ row }) => row.index + 1,
-            Header: () => props.localization?.rowNumber,
-            header: props.localization?.rowNumbers,
+            Header: () => props.localization.rowNumber,
+            header: props.localization.rowNumbers,
             size: 60,
             ...props.defaultDisplayColumn,
             ...props.displayColumnDefOptions?.['mrt-row-numbers'],

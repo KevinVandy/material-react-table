@@ -79,6 +79,7 @@
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
     "rollup": "^2.79.0",
+    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-dts": "^4.2.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "size-limit": "^8.0.1",

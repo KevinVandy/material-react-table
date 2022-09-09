@@ -1,13 +1,16 @@
-import React, { ChangeEvent, FC } from 'react';
+import React, { ChangeEvent } from 'react';
 import { TablePagination } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
-interface Props {
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any> = {}> {
+  table: MRT_TableInstance<TData>;
   position: 'top' | 'bottom';
 }
 
-export const MRT_TablePagination: FC<Props> = ({ table, position }) => {
+export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
+  table,
+  position,
+}: Props<TData>) => {
   const {
     getPrePaginationRowModel,
     getState,

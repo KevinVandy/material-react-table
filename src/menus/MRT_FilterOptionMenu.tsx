@@ -4,9 +4,9 @@ import type {
   MRT_FilterOption,
   MRT_Header,
   MRT_InternalFilterOption,
+  MRT_Localization,
   MRT_TableInstance,
 } from '..';
-import { MRT_Localization } from '../localization';
 
 export const mrtFilterOptions = (
   localization: MRT_Localization,

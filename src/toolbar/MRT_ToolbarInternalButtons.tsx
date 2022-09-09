@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import { MRT_FullScreenToggleButton } from '../buttons/MRT_FullScreenToggleButton';
 import { MRT_ShowHideColumnsButton } from '../buttons/MRT_ShowHideColumnsButton';
@@ -7,11 +7,15 @@ import { MRT_ToggleFiltersButton } from '../buttons/MRT_ToggleFiltersButton';
 import { MRT_ToggleGlobalFilterButton } from '../buttons/MRT_ToggleGlobalFilterButton';
 import type { MRT_TableInstance } from '..';
 
-interface Props {
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any> = {}> {
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ToolbarInternalButtons: FC<Props> = ({ table }) => {
+export const MRT_ToolbarInternalButtons = <
+  TData extends Record<string, any> = {},
+>({
+  table,
+}: Props<TData>) => {
   const {
     options: {
       enableColumnFilters,

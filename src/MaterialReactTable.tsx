@@ -44,11 +44,95 @@ import type { Options as VirtualizerOptions, VirtualItem } from 'react-virtual';
 import { MRT_AggregationFns } from './aggregationFns';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_FilterFns } from './filterFns';
-import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
+import { MRT_Localization_EN } from './_locales/en';
 import { MRT_SortingFns } from './sortingFns';
 import { MRT_TableRoot } from './table/MRT_TableRoot';
 
 type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
+
+export interface MRT_Localization {
+  actions: string;
+  and: string;
+  cancel: string;
+  changeFilterMode: string;
+  changeSearchMode: string;
+  clearFilter: string;
+  clearSearch: string;
+  clearSort: string;
+  clickToCopy: string;
+  columnActions: string;
+  copiedToClipboard: string;
+  dropToGroupBy: string;
+  edit: string;
+  expand: string;
+  expandAll: string;
+  filterArrIncludes: string;
+  filterArrIncludesAll: string;
+  filterArrIncludesSome: string;
+  filterBetween: string;
+  filterBetweenInclusive: string;
+  filterByColumn: string;
+  filterContains: string;
+  filterEmpty: string;
+  filterEndsWith: string;
+  filterEquals: string;
+  filterEqualsString: string;
+  filterFuzzy: string;
+  filterGreaterThan: string;
+  filterGreaterThanOrEqualTo: string;
+  filterInNumberRange: string;
+  filterIncludesString: string;
+  filterIncludesStringSensitive: string;
+  filterLessThan: string;
+  filterLessThanOrEqualTo: string;
+  filterMode: string;
+  filterNotEmpty: string;
+  filterNotEquals: string;
+  filterStartsWith: string;
+  filterWeakEquals: string;
+  filteringByColumn: string;
+  grab: string;
+  groupByColumn: string;
+  groupedBy: string;
+  hideAll: string;
+  hideColumn: string;
+  max: string;
+  min: string;
+  move: string;
+  noRecordsToDisplay: string;
+  noResultsFound: string;
+  or: string;
+  pinToLeft: string;
+  pinToRight: string;
+  resetColumnSize: string;
+  resetOrder: string;
+  rowActions: string;
+  rowNumber: string;
+  rowNumbers: string;
+  save: string;
+  search: string;
+  select: string;
+  selectedCountOfRowCountRowsSelected: string;
+  showAll: string;
+  showAllColumns: string;
+  showHideColumns: string;
+  showHideFilters: string;
+  showHideSearch: string;
+  sortByColumnAsc: string;
+  sortByColumnDesc: string;
+  sortedByColumnAsc: string;
+  sortedByColumnDesc: string;
+  thenBy: string;
+  toggleDensity: string;
+  toggleFullScreen: string;
+  toggleSelectAll: string;
+  toggleSelectRow: string;
+  toggleVisibility: string;
+  ungroupByColumn: string;
+  unpin: string;
+  unpinAll: string;
+  unsorted: string;
+}
 
 export interface MRT_RowModel<TData extends Record<string, any> = {}> {
   flatRows: MRT_Row<TData>[];
@@ -986,7 +1070,7 @@ export default <TData extends Record<string, any> = {}>({
     enableTopToolbar={enableTopToolbar}
     filterFns={{ ...MRT_FilterFns, ...filterFns }}
     icons={{ ...MRT_Default_Icons, ...icons }}
-    localization={{ ...MRT_DefaultLocalization_EN, ...localization }}
+    localization={{ ...MRT_Localization_EN, ...localization }}
     positionActionsColumn={positionActionsColumn}
     positionExpandColumn={positionExpandColumn}
     positionGlobalFilter={positionGlobalFilter}
