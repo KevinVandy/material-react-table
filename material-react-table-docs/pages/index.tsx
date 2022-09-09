@@ -142,7 +142,7 @@ const HomePage = () => {
           }}
           variant="h3"
         >
-          Quickly create high quality react data tables with
+          Quickly create high-quality React data tables with
           Material&nbsp;Design
         </Typography>
         <Box
