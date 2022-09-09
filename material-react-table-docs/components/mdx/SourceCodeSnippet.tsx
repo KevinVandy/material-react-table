@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import vsDark from 'prism-react-renderer/themes/vsDark';
-import vsLight from 'prism-react-renderer/themes/github';
+import darkCodeTheme from 'prism-react-renderer/themes/vsDark';
+import lightCodeTheme from 'prism-react-renderer/themes/vsLight';
 import {
   ToggleButton,
   ToggleButtonGroup,
@@ -13,6 +13,7 @@ import {
   useMediaQuery,
   Box,
   Button,
+  Paper,
 } from '@mui/material';
 import {
   Code,
@@ -200,98 +201,102 @@ export const SourceCodeSnippet: FC<Props> = ({
             )}
           </ToggleButtonGroup>
         </Box>
-        <Highlight
-          {...defaultProps}
-          code={
-            showApiCode
-              ? apiCode ?? ''
-              : isTypeScript
-              ? typeScriptCode
-              : javaScriptCode ?? ''
-          }
-          language={showApiCode || isTypeScript ? 'tsx' : 'jsx'}
-          theme={theme.palette.mode === 'dark' ? vsDark : vsLight}
-        >
-          {({ className, style, tokens, getLineProps, getTokenProps }) => (
-            <div
-              style={{
-                position: 'relative',
-                fontSize: isMobile ? '1em' : '1.2em',
-              }}
-            >
-              <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Code'}>
-                <CopyButton onClick={handleCopy}>
-                  {isCopied ? <LibraryAddCheck /> : <ContentCopy />}
-                </CopyButton>
-              </Tooltip>
-              <Tooltip
-                arrow
-                title={
-                  isFullCode
-                    ? 'Hide columns and data definitions'
-                    : 'Show columns and data definitions'
-                }
-              >
-                <ToggleFullCodeButton
-                  onClick={() => setIsFullCode(!isFullCode)}
-                >
-                  {isFullCode ? <UnfoldLess /> : <UnfoldMore />}
-                </ToggleFullCodeButton>
-              </Tooltip>
-              <pre
-                className={className}
+        <Paper>
+          <Highlight
+            {...defaultProps}
+            code={
+              showApiCode
+                ? apiCode ?? ''
+                : isTypeScript
+                ? typeScriptCode
+                : javaScriptCode ?? ''
+            }
+            language={showApiCode || isTypeScript ? 'tsx' : 'jsx'}
+            theme={
+              theme.palette.mode === 'dark' ? darkCodeTheme : lightCodeTheme
+            }
+          >
+            {({ className, style, tokens, getLineProps, getTokenProps }) => (
+              <div
                 style={{
-                  ...style,
-                  padding: isMobile
-                    ? '3rem 0.5rem 1rem 0.5rem'
-                    : '0.5rem 0.25rem',
-                  overflowX: 'auto',
+                  position: 'relative',
+                  fontSize: isMobile ? '1em' : '1.2em',
                 }}
               >
-                {tokens.map((line, i) => (
-                  <div
-                    key={i}
-                    {...getLineProps({ line, key: i })}
-                    style={{
-                      ...style,
-                      display: !isFullCode && skipCodeLine ? 'none' : 'block',
-                    }}
+                <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Code'}>
+                  <CopyButton onClick={handleCopy}>
+                    {isCopied ? <LibraryAddCheck /> : <ContentCopy />}
+                  </CopyButton>
+                </Tooltip>
+                <Tooltip
+                  arrow
+                  title={
+                    isFullCode
+                      ? 'Hide columns and data definitions'
+                      : 'Show columns and data definitions'
+                  }
+                >
+                  <ToggleFullCodeButton
+                    onClick={() => setIsFullCode(!isFullCode)}
                   >
-                    {!isMobile && (
-                      <span
-                        style={{
-                          paddingRight: '2ch',
-                          paddingLeft: `${4 - String(i + 1).length}ch`,
-                          color: theme.palette.text.secondary,
-                          userSelect: 'none',
-                        }}
-                      >
-                        {i + 1}
-                      </span>
-                    )}
-                    {line.map((token, key) => {
-                      if (
-                        token.content === '//column definitions...' ||
-                        token.content === '//data definitions...'
-                      ) {
-                        skipCodeLine = true;
-                        if (isFullCode) {
+                    {isFullCode ? <UnfoldLess /> : <UnfoldMore />}
+                  </ToggleFullCodeButton>
+                </Tooltip>
+                <pre
+                  className={className}
+                  style={{
+                    ...style,
+                    padding: isMobile
+                      ? '3rem 0.5rem 1rem 0.5rem'
+                      : '0.5rem 0.25rem',
+                    overflowX: 'auto',
+                  }}
+                >
+                  {tokens.map((line, i) => (
+                    <div
+                      key={i}
+                      {...getLineProps({ line, key: i })}
+                      style={{
+                        ...style,
+                        display: !isFullCode && skipCodeLine ? 'none' : 'block',
+                      }}
+                    >
+                      {!isMobile && (
+                        <span
+                          style={{
+                            paddingRight: '2ch',
+                            paddingLeft: `${4 - String(i + 1).length}ch`,
+                            color: theme.palette.text.secondary,
+                            userSelect: 'none',
+                          }}
+                        >
+                          {i + 1}
+                        </span>
+                      )}
+                      {line.map((token, key) => {
+                        if (
+                          token.content === '//column definitions...' ||
+                          token.content === '//data definitions...'
+                        ) {
+                          skipCodeLine = true;
+                          if (isFullCode) {
+                            return null;
+                          }
+                        } else if (token.content === '//end') {
+                          skipCodeLine = false;
                           return null;
                         }
-                      } else if (token.content === '//end') {
-                        skipCodeLine = false;
-                        return null;
-                      }
-                      return (
-                        <span key={key} {...getTokenProps({ token, key })} />
-                      );
-                    })}
-                  </div>
-                ))}
-              </pre>
-            </div>
-          )}
-        </Highlight>
+                        return (
+                          <span key={key} {...getTokenProps({ token, key })} />
+                        );
+                      })}
+                    </div>
+                  ))}
+                </pre>
+              </div>
+            )}
+          </Highlight>
+        </Paper>
       </div>
       <Divider />
     </Box>

@@ -1,8 +1,15 @@
 import { FC, useState } from 'react';
-import { useTheme, Tooltip, IconButton, styled, alpha } from '@mui/material';
+import {
+  useTheme,
+  Tooltip,
+  IconButton,
+  styled,
+  alpha,
+  Paper,
+} from '@mui/material';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import vsDark from 'prism-react-renderer/themes/vsDark';
-import vsLight from 'prism-react-renderer/themes/github';
+import darkCodeTheme from 'prism-react-renderer/themes/vsDark';
+import lightCodeTheme from 'prism-react-renderer/themes/vsLight';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 
@@ -36,47 +43,55 @@ export const SampleCodeSnippet: FC<any> = (props) => {
   }
 
   return (
-    <Highlight
-      {...defaultProps}
-      code={props.children}
-      language={props.className.replace(/language-/, '')}
-      theme={theme.palette.mode === 'dark' ? vsDark : vsLight}
+    <Paper
+      sx={{
+        boxShadow: props.enableCopyButton === false ? 'none' : undefined,
+        backgroundImage: 'none',
+        backgroundColor: 'transparent',
+      }}
     >
-      {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <div
-          style={{
-            position: 'relative',
-            margin: props.enableCopyButton !== false ? '2rem auto' : 0,
-            fontSize: '1.2em',
-          }}
-        >
-          {props.enableCopyButton !== false && (
-            <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Code'}>
-              <CopyButton onClick={handleCopy}>
-                {isCopied ? <LibraryAddCheckIcon /> : <ContentCopyIcon />}
-              </CopyButton>
-            </Tooltip>
-          )}
-          <pre
-            className={className}
+      <Highlight
+        {...defaultProps}
+        code={props.children}
+        language={props.className.replace(/language-/, '')}
+        theme={theme.palette.mode === 'dark' ? darkCodeTheme : lightCodeTheme}
+      >
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <div
             style={{
-              ...style,
-              whiteSpace: 'pre-wrap',
-              padding: '1rem 2.5rem 0 1rem',
-              minHeight: '3rem',
-              ...props?.style,
+              position: 'relative',
+              margin: props.enableCopyButton !== false ? '2rem auto' : 0,
+              fontSize: '1.2em',
             }}
           >
-            {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({ line, key: i })}>
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token, key })} />
-                ))}
-              </div>
-            ))}
-          </pre>
-        </div>
-      )}
-    </Highlight>
+            {props.enableCopyButton !== false && (
+              <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Code'}>
+                <CopyButton onClick={handleCopy}>
+                  {isCopied ? <LibraryAddCheckIcon /> : <ContentCopyIcon />}
+                </CopyButton>
+              </Tooltip>
+            )}
+            <pre
+              className={className}
+              style={{
+                ...style,
+                minHeight: '3rem',
+                overflowX: 'auto',
+                padding: '1rem 2.5rem 0 1rem',
+                ...props?.style,
+              }}
+            >
+              {tokens.map((line, i) => (
+                <div key={i} {...getLineProps({ line, key: i })}>
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token, key })} />
+                  ))}
+                </div>
+              ))}
+            </pre>
+          </div>
+        )}
+      </Highlight>
+    </Paper>
   );
 };
