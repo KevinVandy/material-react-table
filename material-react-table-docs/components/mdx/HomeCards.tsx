@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const cardData = [
   {
-    text: 'High quality and performant modern table features with a minimal amount of effort',
+    text: 'High-quality and performant modern table features with a minimal amount of effort',
     image: '/quality.svg',
     alt: 'Quality',
   },
@@ -18,7 +18,7 @@ const cardData = [
     alt: 'Easy Opt-out',
   },
   {
-    text: 'Efficient bundle size ( < 37kb minzipped including dependencies)',
+    text: 'Efficient bundle size ( < 37kb minzipped, including dependencies)',
     image: '/efficient.svg',
     alt: 'Efficient',
   },
