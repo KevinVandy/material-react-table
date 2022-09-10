@@ -1,4 +1,10 @@
-import React, { ChangeEvent, MouseEvent, useCallback, useState } from 'react';
+import React, {
+  ChangeEvent,
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import {
   Collapse,
   debounce,
@@ -32,6 +38,11 @@ export const MRT_GlobalFilterTextField = <
   } = table;
   const { globalFilter, showGlobalFilter } = getState();
 
+  const textFieldProps =
+    muiSearchTextFieldProps instanceof Function
+      ? muiSearchTextFieldProps({ table })
+      : muiSearchTextFieldProps;
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [searchValue, setSearchValue] = useState(globalFilter ?? '');
 
@@ -56,10 +67,11 @@ export const MRT_GlobalFilterTextField = <
     setGlobalFilter(undefined);
   };
 
-  const textFieldProps =
-    muiSearchTextFieldProps instanceof Function
-      ? muiSearchTextFieldProps({ table })
-      : muiSearchTextFieldProps;
+  useEffect(() => {
+    if (globalFilter === undefined) {
+      handleClear();
+    }
+  }, [globalFilter]);
 
   return (
     <Collapse

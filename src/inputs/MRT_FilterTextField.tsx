@@ -3,6 +3,7 @@ import React, {
   FC,
   MouseEvent,
   useCallback,
+  useEffect,
   useState,
 } from 'react';
 import {
@@ -169,6 +170,12 @@ export const MRT_FilterTextField: FC<Props> = ({
     setAnchorEl(event.currentTarget);
   };
 
+  useEffect(() => {
+    if (column.getFilterValue() === undefined) {
+      handleClear();
+    }
+  }, [column.getFilterValue()]);
+
   if (columnDef.Filter) {
     return <>{columnDef.Filter?.({ column, header, table })}</>;
   }
@@ -315,7 +322,7 @@ export const MRT_FilterTextField: FC<Props> = ({
               ? '120px'
               : 'auto',
           width: '100%',
-          '&	.MuiSelect-icon': {
+          '& .MuiSelect-icon': {
             mr: '1.5rem',
           },
           ...(textFieldProps?.sx instanceof Function
