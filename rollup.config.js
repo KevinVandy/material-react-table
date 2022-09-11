@@ -44,12 +44,12 @@ export default [
     input: `./src/_locales/${locale}.ts`,
     output: [
       {
-        file: `./dist/${locale}.cjs`,
+        file: `./locales/${locale}.cjs`,
         format: 'cjs',
         sourcemap: true,
       },
       {
-        file: `./dist/${locale}.esm.js`,
+        file: `./locales/${locale}.esm.js`,
         format: 'esm',
         sourcemap: true,
       },
@@ -60,7 +60,7 @@ export default [
         targets: [
           ...['cjs', 'esm'].map((format) => ({
             src: `./dist/esm/_locales/${locale}.d.ts`,
-            dest: './dist',
+            dest: './locales',
             rename: () => `${locale}.${format}.d.ts`,
           })),
         ],

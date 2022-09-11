@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-beta.13",
+  "version": "1.0.0-beta.14",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -24,6 +24,7 @@
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
+    "locales",
     "src"
   ],
   "size-limit": [
@@ -41,7 +42,7 @@
   },
   "scripts": {
     "analyze": "size-limit --why",
-    "build": "rm -rf dist && rollup -c && size-limit && rm -rf material-react-table-docs/node_modules/material-react-table/dist && cp -r dist material-react-table-docs/node_modules/material-react-table/",
+    "build": "rm -rf dist locales && rollup -c && size-limit && rm -rf material-react-table-docs/node_modules/material-react-table && cp -r dist material-react-table-docs/node_modules/material-react-table/ && cp -r locales material-react-table-docs/node_modules/material-react-table/ && cp -r src material-react-table-docs/node_modules/material-react-table/ && cp -r package.json material-react-table-docs/node_modules/material-react-table/",
     "build-storybook": "build-storybook",
     "format": "prettier -w .",
     "lint": "eslint .",
