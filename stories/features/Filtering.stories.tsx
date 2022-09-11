@@ -16,6 +16,12 @@ export default meta;
 
 const columns: MRT_ColumnDef<typeof data[0]>[] = [
   {
+    header: 'Is Active',
+    accessorKey: 'isActive',
+    Cell: ({ cell }) => (cell.getValue() ? 'Yes' : 'No'),
+    size: 60,
+  },
+  {
     header: 'First Name',
     accessorKey: 'firstName',
   },
@@ -52,11 +58,12 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
 ];
 
 const data = [...Array(120)].map(() => ({
+  isActive: faker.datatype.boolean(),
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   age: faker.datatype.number(100),
   birthDate: faker.date.birthdate({ min: 1990, max: 2020 }),
-  gender: faker.name.sex(true),
+  gender: faker.name.sex(),
   address: faker.address.streetAddress(),
   state: faker.address.state(),
 }));
@@ -80,6 +87,14 @@ export const FilteringDisabled: Story<MaterialReactTableProps> = () => (
 export const FilterFnAndFilterVariants: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={[
+      {
+        header: 'Is Active',
+        accessorFn: (originalRow) => (originalRow.isActive ? 'true' : 'false'),
+        id: 'isActive',
+        filterVariant: 'checkbox',
+        Cell: ({ cell }) => (cell.getValue() === 'true' ? 'Yes' : 'No'),
+        size: 200,
+      },
       {
         header: 'First Name',
         accessorKey: 'firstName',

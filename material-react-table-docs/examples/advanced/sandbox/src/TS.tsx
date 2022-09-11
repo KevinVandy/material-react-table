@@ -1,7 +1,27 @@
 import React, { FC, useMemo } from 'react';
+
+//MRT Imports
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { Box, Button, ListItemIcon, MenuItem, Typography } from '@mui/material';
+
+//Material-UI Imports
+import {
+  Box,
+  Button,
+  ListItemIcon,
+  MenuItem,
+  Typography,
+  TextField,
+} from '@mui/material';
+
+//Date Picker Imports
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
+//Icons Imports
 import { AccountCircle, Send } from '@mui/icons-material';
+
+//Mock Data
 import { data } from './makeData';
 
 export type Employee = {
@@ -98,12 +118,29 @@ const Example: FC = () => {
             accessorFn: (row) => new Date(row.startDate), //convert to Date for sorting and filtering
             id: 'startDate',
             header: 'Start Date',
-            muiTableHeadCellFilterTextFieldProps: {
-              type: 'date',
-            },
+            filterFn: 'lessThanOrEqualTo',
             sortingFn: 'datetime',
             Cell: ({ cell }) => cell.getValue<Date>()?.toLocaleDateString(), //render Date as a string
             Header: ({ column }) => <em>{column.columnDef.header}</em>, //custom header markup
+            //Custom Date Picker Filter from @mui/x-date-pickers
+            Filter: ({ column }) => (
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  onChange={(newValue) => {
+                    column.setFilterValue(newValue);
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      helperText={'Filter Mode: Lesss Than'}
+                      sx={{ minWidth: '120px' }}
+                      variant="standard"
+                    />
+                  )}
+                  value={column.getFilterValue()}
+                />
+              </LocalizationProvider>
+            ),
           },
         ],
       },
@@ -121,6 +158,7 @@ const Example: FC = () => {
       enablePinning
       enableRowActions
       enableRowSelection
+      initialState={{ showColumnFilters: true }}
       positionToolbarAlertBanner="bottom"
       renderDetailPanel={({ row }) => (
         <Box

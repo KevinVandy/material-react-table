@@ -1105,6 +1105,16 @@ export const rootProps: PropRow[] = [
     type: '',
   },
   {
+    propName: 'muiTableHeadCellFilterCheckboxProps',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '',
+  },
+  {
     propName: 'muiTableHeadCellFilterTextFieldProps',
     defaultValue: '',
     description: '',

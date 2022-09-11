@@ -429,6 +429,16 @@ export const columnOptions: ColumnOption[] = [
     type: 'IconButtonProps | ({ column, table }) => IconButtonProps',
   },
   {
+    columnOption: 'muiTableHeadCellFilterCheckboxProps',
+    defaultValue: '',
+    description: '',
+    link: 'https://mui.com/material-ui/api/checkbox/#props',
+    linkText: 'Material UI Checkbox Props',
+    source: 'Material UI',
+    required: false,
+    type: 'Checkbox | ({ column, table }) => CheckboxProps',
+  },
+  {
     columnOption: 'muiTableHeadCellFilterTextFieldProps',
     defaultValue: '',
     description: '',

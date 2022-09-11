@@ -3,6 +3,7 @@ import { Collapse } from '@mui/material';
 import { MRT_FilterRangeFields } from '../inputs/MRT_FilterRangeFields';
 import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
 import { MRT_Header, MRT_TableInstance } from '..';
+import { MRT_FilterCheckbox } from '../inputs/MRT_FilterCheckbox';
 
 interface Props {
   header: MRT_Header;
@@ -20,9 +21,12 @@ export const MRT_TableHeadCellFilterContainer: FC<Props> = ({
 
   return (
     <Collapse in={showColumnFilters} mountOnEnter unmountOnExit>
-      {['between', 'betweenInclusive', 'inNumberRange'].includes(
-        columnDef._filterFn,
-      ) ? (
+      {columnDef.filterVariant === 'checkbox' ? (
+        <MRT_FilterCheckbox column={column} table={table} />
+      ) : columnDef.filterVariant === 'range' ||
+        ['between', 'betweenInclusive', 'inNumberRange'].includes(
+          columnDef._filterFn,
+        ) ? (
         <MRT_FilterRangeFields header={header} table={table} />
       ) : (
         <MRT_FilterTextField header={header} table={table} />
