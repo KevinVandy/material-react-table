@@ -54,11 +54,11 @@ return (
     columns={columns}
     data={data}
     //or in callback props like this
-    muiTableBodyCells={{
-      sx: ({ cell, column }) => ({
+    muiTableBodyCells={({ column }) => ({
+      sx:
         boxShadow: column.getIsPinned() ? '0 0 0 2px red' : 'none',
       }),
-    }}
+    }
   />
 );
 ```

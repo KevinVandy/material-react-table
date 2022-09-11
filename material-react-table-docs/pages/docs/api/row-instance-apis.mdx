@@ -49,10 +49,10 @@ return (
     columns={columns}
     data={data}
     //or a row instance in callback props like this
-    muiSelectCheckboxProps={{
-      disabled: (row) => row.original.isAccountActive === false,
-    }}
-    renderDetailPanel={(row) => (
+    muiSelectCheckboxProps={({ row }) => ({
+      disabled: row.original.isAccountActive === false,
+    })}
+    renderDetailPanel={({ row }) => (
       <div>
         <span>First Name: {row.original.firstName}</span>
         <span>Last Name: {row.original.lastName}</span>
