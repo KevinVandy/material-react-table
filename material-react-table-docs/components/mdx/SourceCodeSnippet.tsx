@@ -201,7 +201,7 @@ export const SourceCodeSnippet: FC<Props> = ({
             )}
           </ToggleButtonGroup>
         </Box>
-        <Paper>
+        <Paper elevation={3}>
           <Highlight
             {...defaultProps}
             code={

@@ -1,4 +1,9 @@
-type RouteItem = { href: string; label: string; items?: RouteItem[] };
+type RouteItem = {
+  href: string;
+  label: string;
+  items?: RouteItem[];
+  divider?: boolean;
+};
 
 export const routes: Array<RouteItem> = [
   {
@@ -32,20 +37,44 @@ export const routes: Array<RouteItem> = [
     href: '/docs/api',
     items: [
       {
-        href: '/docs/api/props',
-        label: 'Props',
+        label: 'Props and Options',
+        href: '/docs/api#props-and-options',
+        items: [
+          {
+            href: '/docs/api/props',
+            label: 'Props',
+          },
+          {
+            href: '/docs/api/column-options',
+            label: 'Column Options',
+          },
+          {
+            href: '/docs/api/state-options',
+            label: 'State Options',
+          },
+        ],
       },
       {
-        href: '/docs/api/column-options',
-        label: 'Column Options',
-      },
-      {
-        href: '/docs/api/state-options',
-        label: 'State Options',
-      },
-      {
-        href: '/docs/api/table-instance-apis',
-        label: 'Table Instance APIs',
+        label: 'Instance APIs',
+        href: '/docs/api#instance-apis',
+        items: [
+          {
+            href: '/docs/api/table-instance-apis',
+            label: 'Table Instance APIs',
+          },
+          {
+            href: '/docs/api/column-instance-apis',
+            label: 'Column Instance APIs',
+          },
+          {
+            href: '/docs/api/row-instance-apis',
+            label: 'Row Instance APIs',
+          },
+          {
+            href: '/docs/api/cell-instance-apis',
+            label: 'Cell Instance APIs',
+          },
+        ],
       },
     ],
   },

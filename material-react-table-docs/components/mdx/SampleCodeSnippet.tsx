@@ -44,6 +44,7 @@ export const SampleCodeSnippet: FC<any> = (props) => {
 
   return (
     <Paper
+      elevation={3}
       sx={{
         boxShadow: props.enableCopyButton === false ? 'none' : undefined,
         backgroundImage: 'none',

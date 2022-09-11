@@ -2,29 +2,29 @@ import React, { FC, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import MaterialReactTable, {
   MRT_ColumnDef,
-  MRT_TableInstance,
+  MRT_Column,
 } from 'material-react-table';
 import { Link as MuiLink, Typography, useMediaQuery } from '@mui/material';
 import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
-import { TableInstanceAPI, tableInstanceAPIs } from './tableInstanceAPIs';
+import { ColumnInstanceAPI, columnInstanceAPIs } from './columnInstanceAPIs';
 
 interface Props {
-  onlyProps?: Set<keyof MRT_TableInstance>;
+  onlyProps?: Set<keyof MRT_Column>;
 }
 
-const TableInstanceAPIsTable: FC<Props> = ({ onlyProps }) => {
+const ColumnInstanceAPIsTable: FC<Props> = ({ onlyProps }) => {
   const isDesktop = useMediaQuery('(min-width: 1200px)');
 
   const columns = useMemo(
     () =>
       [
         {
-          accessorKey: 'tableInstanceAPI',
+          accessorKey: 'columnInstanceAPI',
           enableClickToCopy: true,
           header: 'State Option',
           muiTableBodyCellCopyButtonProps: ({ cell }) => ({
-            className: 'table-instance-api',
-            id: `${cell.getValue<string>()}-table-instance-api`,
+            className: 'column-instance-api',
+            id: `${cell.getValue<string>()}-column-instance-api`,
           }),
           Cell: ({ cell }) => cell.getValue<string>(),
         },
@@ -68,7 +68,7 @@ const TableInstanceAPIsTable: FC<Props> = ({ onlyProps }) => {
             </Link>
           ),
         },
-      ] as MRT_ColumnDef<TableInstanceAPI>[],
+      ] as MRT_ColumnDef<ColumnInstanceAPI>[],
     [],
   );
 
@@ -78,7 +78,7 @@ const TableInstanceAPIsTable: FC<Props> = ({ onlyProps }) => {
     if (typeof window !== 'undefined') {
       if (isDesktop) {
         setColumnPinning({
-          left: ['mrt-row-expand', 'mrt-row-numbers', 'tableInstanceAPI'],
+          left: ['mrt-row-expand', 'mrt-row-numbers', 'columnInstanceAPI'],
           right: ['link'],
         });
       } else {
@@ -89,11 +89,11 @@ const TableInstanceAPIsTable: FC<Props> = ({ onlyProps }) => {
 
   const data = useMemo(() => {
     if (onlyProps) {
-      return tableInstanceAPIs.filter(({ tableInstanceAPI }) =>
-        onlyProps.has(tableInstanceAPI),
+      return columnInstanceAPIs.filter(({ columnInstanceAPI }) =>
+        onlyProps.has(columnInstanceAPI),
       );
     }
-    return tableInstanceAPIs;
+    return columnInstanceAPIs;
   }, [onlyProps]);
 
   return (
@@ -120,18 +120,18 @@ const TableInstanceAPIsTable: FC<Props> = ({ onlyProps }) => {
         columnVisibility: { description: false },
         density: 'compact',
         showGlobalFilter: true,
-        sorting: [{ id: 'tableInstanceAPI', desc: false }],
+        sorting: [{ id: 'columnInstanceAPI', desc: false }],
       }}
       muiSearchTextFieldProps={{
-        placeholder: 'Search Table APIs',
+        placeholder: 'Search Column APIs',
         sx: { minWidth: '18rem' },
         variant: 'outlined',
       }}
       muiTablePaperProps={{
         sx: { mb: '1.5rem' },
         id: onlyProps
-          ? 'relevant-table-instance-apis-table'
-          : 'table-instance-apis-table',
+          ? 'relevant-column-instance-apis-table'
+          : 'column-instance-apis-table',
       }}
       positionGlobalFilter="left"
       renderDetailPanel={({ row }) => (
@@ -147,4 +147,4 @@ const TableInstanceAPIsTable: FC<Props> = ({ onlyProps }) => {
   );
 };
 
-export default TableInstanceAPIsTable;
+export default ColumnInstanceAPIsTable;

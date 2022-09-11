@@ -70,6 +70,7 @@ const Footer = () => {
         </a>
       </Typography>
       <Paper
+        elevation={3}
         sx={{
           borderRadius: '8px',
           borderBottomLeftRadius: '0',
@@ -163,7 +164,19 @@ const Footer = () => {
             />
             <TableOfContentsList
               items={
-                routes.find((item) => item.href === '/docs/api')?.items ?? []
+                routes
+                  .find((item) => item.href === '/docs/api')
+                  ?.items?.find((item) => item.label === 'Props and Options')
+                  ?.items ?? []
+              }
+              isFooter
+            />
+            <TableOfContentsList
+              items={
+                routes
+                  .find((item) => item.href === '/docs/api')
+                  ?.items?.find((item) => item.label === 'Instance APIs')
+                  ?.items ?? []
               }
               isFooter
             />

@@ -1,0 +1,70 @@
+import Head from 'next/head';
+import ColumnInstanceAPIsTable from '../../../components/prop-tables/ColumnInstanceAPIsTable';
+import SourceCode from '../../../components/prop-tables/ColumnInstanceAPIsSource';
+
+<Head>
+  <title>Column Instance APIs - Material React Table Docs</title>
+  <meta
+    name="description"
+    content="All the column instance methods and objects that can be accessed from a column instance in Material React Table"
+  />
+  <meta
+    property="og:title"
+    content="Material React Table Column Instance API Reference"
+  />
+  <meta
+    property="og:description"
+    content="A reference of all the column instance api methods and objects that can be used in Material React Table"
+  />
+</Head>
+
+## Column Instance APIs
+
+Each column has a `column` instance object associated with it that can be accessed in callback props and other places in the table.
+
+You can access and use a `column` instance in quite a few places, but here are some of the most common:
+
+```jsx
+const columns = [
+  {
+    accessorKey: 'username',
+    header: 'Username',
+    //you can access a column instance in many callback functions in a column definition like this
+    muiTableHeadCellProps: ({ column }) => ({
+      sx: {
+        color: column.getIsSorted() ? 'red' : 'black',
+      },
+    }),
+    //or in the component override callbacks
+    Header: ({ column }) => <div>{column.columnDef.header}</div>,
+    Cell: ({ cell, column }) => (
+      <Box
+        sx={{
+          backgroundColor: column.getIsGrouped() ? 'green' : 'white',
+        }}
+      >
+        {cell.getValue()}
+      </Box>
+    ),
+  },
+];
+
+return (
+  <MaterialTable
+    columns={columns}
+    data={data}
+    //or in callback props like this
+    muiTableBodyCells={{
+      sx: ({ cell, column }) => ({
+        boxShadow: column.getIsPinned() ? '0 0 0 2px red' : 'none',
+      }),
+    }}
+  />
+);
+```
+
+> NOTE: These are NOT [column options](/docs/api/column-options) for Material React Table. These are just static methods on a column instance that you can use.
+
+<ColumnInstanceAPIsTable />
+
+<SourceCode />
