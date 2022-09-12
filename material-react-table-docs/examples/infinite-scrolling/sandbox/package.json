@@ -15,7 +15,7 @@
     "@mui/material": "^5.9.0",
     "@tanstack/react-query": "^4.0.5",
     "axios": "^0.27.2",
-    "material-react-table": "^1.0.0-beta.15",
+    "material-react-table": "^1.0.0-beta.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

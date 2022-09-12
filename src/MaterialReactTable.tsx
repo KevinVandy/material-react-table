@@ -1038,7 +1038,7 @@ export default <TData extends Record<string, any> = {}>({
   positionToolbarAlertBanner = 'top',
   positionToolbarDropZone = 'top',
   rowNumberMode = 'original',
-  selectAllMode = 'all',
+  selectAllMode = 'page',
   sortingFns,
   ...rest
 }: MaterialReactTableProps<TData>) => (

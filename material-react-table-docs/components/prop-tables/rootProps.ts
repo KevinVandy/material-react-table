@@ -1696,13 +1696,13 @@ export const rootProps: PropRow[] = [
   },
   {
     propName: 'selectAllMode',
-    defaultValue: '',
+    defaultValue: 'page',
     description: '',
     link: '',
     linkText: '',
     required: false,
     source: '',
-    type: '',
+    type: `'all' | 'page'`,
   },
   {
     propName: 'sortDescFirst',

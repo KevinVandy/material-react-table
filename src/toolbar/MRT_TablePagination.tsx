@@ -56,6 +56,25 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
       showLastButton={showFirstLastPageButtons}
       {...tablePaginationProps}
       sx={(theme) => ({
+        '& .MuiTablePagination-toolbar': {
+          display: 'flex',
+          alignItems: 'center',
+        },
+        '& .MuiTablePagination-selectLabel': {
+          m: '0 -1px',
+        },
+        '&. MuiInputBase-root': {
+          m: '0 1px',
+        },
+        '& . MuiTablePagination-select': {
+          m: '0 1px',
+        },
+        '& .MuiTablePagination-displayedRows': {
+          m: '0 1px',
+        },
+        '& .MuiTablePagination-actions': {
+          m: '0 1px',
+        },
         mt:
           position === 'top' &&
           enableToolbarInternalActions &&

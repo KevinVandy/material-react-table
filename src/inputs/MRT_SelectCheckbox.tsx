@@ -42,10 +42,19 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, table }) => {
     >
       <Checkbox
         checked={
-          selectAll ? table.getIsAllRowsSelected() : row?.getIsSelected()
+          selectAll
+            ? selectAllMode === 'page'
+              ? table.getIsAllPageRowsSelected()
+              : table.getIsAllRowsSelected()
+            : row?.getIsSelected()
         }
         indeterminate={
-          selectAll ? table.getIsSomeRowsSelected() : row?.getIsSomeSelected()
+          selectAll
+            ? table.getIsSomeRowsSelected() &&
+              !(selectAllMode === 'page'
+                ? table.getIsAllPageRowsSelected()
+                : table.getIsAllRowsSelected())
+            : row?.getIsSomeSelected()
         }
         inputProps={{
           'aria-label': selectAll
