@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
 
 <Head>
   <title>Row Actions Feature Guide - Material React Table Docs</title>
@@ -9,3 +10,57 @@ import Head from 'next/head';
 </Head>
 
 ## Row Actions Feature Guide
+
+The Row Actions feature is simply a pre-built [Display Column](/docs/guides/display-columns) feature that adds a column as a place to store either a row action menu, or other row action buttons.
+
+Using the built-in Row Actions column is optional, as you can just simply create your own display columns, but this feature has some built-in conveniences that make it easy to add row actions to your table.
+
+### Relevant Props
+
+<RootPropTable
+  onlyProps={
+    new Set([
+      'displayColumnDefOptions',
+      'enableRowActions',
+      'renderRowActionMenuItems',
+      'renderRowActions',
+      'positionActionsColumn',
+    ])
+  }
+/>
+
+### Add Row Actions Menu Items
+
+### Add Row Action Buttons
+
+### Customize Row Actions Column
+
+You can customize all column def options for the row actions column, including the column width, header text, and more using the `displayColumnDefOptions` prop.
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  displayColumnDefOptions={{
+    'mrt-row-actions': {
+      header: 'Change Account Settings', //change header text
+      size: 300, //make actions column wider
+    },
+  }}
+  renderRowActions={({ table }) => (
+    <Box>
+      <Button>Button 1</Button>
+      <Button>Button 2</Button>
+      <Button>Button 3</Button>
+    </Box>
+  )}
+/>
+```
+
+### Position Row Actions Column
+
+You can position the row actions column to the left or right (first or last column) of the table using the `positionActionsColumn` prop. The default is as the first column.
+
+```jsx
+<MaterialTable columns={columns} data={data} positionActionsColumn="last" />
+```

@@ -58,6 +58,21 @@ Next there is `paginateExpandedRows`, which works in conjunction expanding featu
 
 #### Customize Pagination Components
 
+You can customize the pagination component with the `muiTablePaginationProps` prop to change things like the `rowsPerPageOptions` or whether or not to show the first and last page buttons, and more.
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  muiTablePaginationProps={{
+    rowsPerPageOptions: [5, 10],
+    showFirstLastPageButtons: false,
+  }}
+/>
+```
+
+View all table pagination options that you can tweak in the [Material UI Table Pagination API Docs](https://mui.com/material-ui/api/table-pagination/#props).
+
 ### Manual or Server-Side Pagination
 
 #### Manual Pagination

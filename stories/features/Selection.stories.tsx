@@ -52,6 +52,15 @@ export const SelectAllModeAll: Story<MaterialReactTableProps> = () => (
   />
 );
 
+export const SelectAllModePage: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowSelection
+    selectAllMode="page"
+  />
+);
+
 export const SelectAllDisabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}

@@ -180,7 +180,7 @@ export const routes: Array<RouteItem> = [
           },
           {
             href: '/docs/guides/column-actions',
-            label: 'Column Actions',
+            label: 'Column Actions (Menu)',
           },
           {
             href: '/docs/guides/column-filtering',
@@ -196,7 +196,7 @@ export const routes: Array<RouteItem> = [
           },
           {
             href: '/docs/guides/column-pinning',
-            label: 'Column Pinning',
+            label: 'Column Pinning (Freezing)',
           },
           {
             href: '/docs/guides/column-resizing',
