@@ -114,6 +114,7 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
           mt: '64px',
           p: 0,
           pb: '10rem',
+          scrollPaddingTop: '20%',
           transition: 'all .2s',
           width: navOpen ? '280px' : 0,
           '@media (max-width: 900px)': {
