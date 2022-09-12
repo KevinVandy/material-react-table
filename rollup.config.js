@@ -44,7 +44,7 @@ export default [
     input: `./src/_locales/${locale}.ts`,
     output: [
       {
-        file: `./locales/${locale}.cjs`,
+        file: `./locales/${locale}.js`,
         format: 'cjs',
         sourcemap: true,
       },
@@ -61,7 +61,8 @@ export default [
           ...['cjs', 'esm'].map((format) => ({
             src: `./dist/esm/_locales/${locale}.d.ts`,
             dest: './locales',
-            rename: () => `${locale}.${format}.d.ts`,
+            rename: () =>
+              format === 'esm' ? `${locale}.${format}.d.ts` : `${locale}.d.ts`,
           })),
         ],
       }),
