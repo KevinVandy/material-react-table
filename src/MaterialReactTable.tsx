@@ -91,6 +91,10 @@ export interface MRT_Localization {
   filterStartsWith: string;
   filterWeakEquals: string;
   filteringByColumn: string;
+  goToFirstPage: string;
+  goToLastPage: string;
+  goToNextPage: string;
+  goToPreviousPage: string;
   grab: string;
   groupByColumn: string;
   groupedBy: string;
@@ -101,6 +105,7 @@ export interface MRT_Localization {
   move: string;
   noRecordsToDisplay: string;
   noResultsFound: string;
+  of: string;
   or: string;
   pinToLeft: string;
   pinToRight: string;
@@ -109,6 +114,7 @@ export interface MRT_Localization {
   rowActions: string;
   rowNumber: string;
   rowNumbers: string;
+  rowsPerPage: string;
   save: string;
   search: string;
   select: string;
