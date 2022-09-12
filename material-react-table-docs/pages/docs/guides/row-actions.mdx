@@ -29,11 +29,49 @@ Using the built-in Row Actions column is optional, as you can just simply create
   }
 />
 
-### Add Row Actions Menu Items
+### Enable Row Actions
 
-### Add Row Action Buttons
+You can enable the Row Actions feature by setting the `enableRowActions` prop to `true`.
+
+Then you can add your row action components with either the `renderRowActions` or `renderRowActionMenuItems` props.
+
+#### Add Row Actions Menu Items
+
+If you want to embed all of your row actions into a single menu, then you can use the `renderRowActionMenuItems` prop.
+
+```jsx
+<MaterialReactTable
+  enableRowActions
+  renderRowActionMenuItems={(row, index) => [
+      <MenuItem onClick={() => console.info('Edit')}>Edit</MenuItem>,
+      <MenuItem onClick={() => console.info('Delete')}>Delete</MenuItem>
+    ]
+  )}
+/>
+```
+
+#### Add Row Action Buttons
+
+If you want to add row action buttons, then you can use the `renderRowActions` prop.
+
+```jsx
+<MaterialReactTable
+  enableRowActions
+  renderRowActions={(row, index) => [
+      <IconButton onClick={() => console.info('Edit')}>
+        <EditIcon />
+      </IconButton>,
+      <IconButton onClick={() => console.info('Delete')}>
+        <DeleteIcon />
+      </IconButton>
+    ]
+  )}
+/>
+```
 
 ### Customize Row Actions Column
+
+#### Change Row Actions Display Column Options
 
 You can customize all column def options for the row actions column, including the column width, header text, and more using the `displayColumnDefOptions` prop.
 
@@ -57,7 +95,7 @@ You can customize all column def options for the row actions column, including t
 />
 ```
 
-### Position Row Actions Column
+#### Position Row Actions Column
 
 You can position the row actions column to the left or right (first or last column) of the table using the `positionActionsColumn` prop. The default is as the first column.
 
