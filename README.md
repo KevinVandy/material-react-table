@@ -21,7 +21,7 @@
 
 ## About
 
-> Now in Beta!
+> Version 1.0 released 2022-09-13 🎉
 
 __Built with [Material UI <sup>V5</sup>](https://mui.com) and [TanStack Table <sup>V8</sup>](https://tanstack.com/table/v8)__
 

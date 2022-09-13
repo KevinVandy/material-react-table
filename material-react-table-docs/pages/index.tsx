@@ -82,11 +82,11 @@ const HomePage = () => {
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             transform: 'translateY(-1rem)',
-            width: '8rem',
+            // width: '8rem',
             margin: 'auto',
           })}
         >
-          Now in Beta!
+          v1.0 Released September 13, 2022 🎉
         </Typography>
         <Typography
           color="text.secondary"
