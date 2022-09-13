@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import SpanishExample from '../../../examples/localization-i18n-es';
+import LocaleExamples from '../../../components/mdx/LocaleExamples';
 
 <Head>
   <title>Localization/i18n Guide - Material React Table Docs</title>
@@ -12,21 +13,29 @@ import SpanishExample from '../../../examples/localization-i18n-es';
 
 ## Localization (i18n) Guide
 
-You can use the `localization` prop to customize any of the default text (strings) in the Material React Table. The primary purpose of this is to support translations (i18n) into other languages, but nothing is stopping you from customizing any of the internal text to your liking here.
+Material React Table has full support for localization (i18n). Some locales are included by default, but if your language is not yet supported, you can still easily add your own custom translations to the `localization` prop.
 
-> **Are you interested in contributing some official translations that can be included in MRT by default?** <br /><br />Please contact us on [GitHub](https://github.com/KevinVandy/material-react-table) or the [Discord server](https://discord.gg/5wqyRx6fnm) to get in touch. We want to include dozens of languages and locales that can simply be imported from 'material-react-table'!
+> **Are you interested in contributing some official translations that can be included in MRT by default?** <br /><br />Please contact us on [GitHub](https://github.com/KevinVandy/material-react-table) or the [Discord server](https://discord.gg/5wqyRx6fnm) to get in touch. We want to include dozens of languages and locales that can simply be imported from 'material-react-table/locales'!
 
 ### Relevant Props
 
 <RootPropTable onlyProps={new Set(['localization'])} />
 
-Material React Table has full support for localization.
+### Built-in Locales
 
-Some of the translations, such as the pagination component, will automatically respond to the locale of the MUI theme, so you just need to set that up correctly in your `ThemeProvider`.
+The following locales are included and can be imported from `'material-react-table/locales/'`:
 
-Most of the other translations can be specified manually in the `localization` prop.
+`en`, `pt-BR`
 
-### Spanish Translation Example
+> If your language is not yet supported, please consider making a PR to add it to the library! See [here on GitHub](https://github.com/KevinVandy/material-react-table/tree/main/src/_locales).
+
+#### Built-in Locale Examples
+
+Scroll and find your language below to see an example of how to use it.
+
+<LocaleExamples />
+
+### Custom Non-Built-In Translations
 
 Here's a crude not-so-accurately translated Spanish example:
 

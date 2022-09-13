@@ -61,7 +61,7 @@ export const MRT_ExpandButton: FC<Props> = ({ row, table }) => {
                   ? -180
                   : 0
               }deg)`,
-              transition: 'transform 0.2s',
+              transition: 'transform 0.1s',
             }}
           />
         </IconButton>

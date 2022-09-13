@@ -69,7 +69,7 @@ export const MRT_TableBodyRow: FC<Props> = ({
           backgroundColor: lighten(theme.palette.background.default, 0.06),
           opacity:
             draggingRow?.id === row.id || hoveredRow?.id === row.id ? 0.5 : 1,
-          transition: 'all 0.2s ease-in-out',
+          transition: 'all 0.1s ease-in-out',
           '&:hover td': {
             backgroundColor:
               tableRowProps?.hover !== false && getIsSomeColumnsPinned()

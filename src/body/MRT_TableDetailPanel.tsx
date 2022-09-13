@@ -36,7 +36,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, table }) => {
           borderBottom: !row.getIsExpanded() ? 'none' : undefined,
           pb: row.getIsExpanded() ? '1rem' : 0,
           pt: row.getIsExpanded() ? '1rem' : 0,
-          transition: 'all 0.2s ease-in-out',
+          transition: 'all 0.1s ease-in-out',
           width: `${table.getTotalSize()}px`,
           ...(tableCellProps?.sx instanceof Function
             ? tableCellProps.sx(theme)

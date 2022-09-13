@@ -42,7 +42,11 @@ export const MRT_TableHeadCellGrabHandle: FC<Props> = ({
   const handleDragStart = (event: DragEvent<HTMLButtonElement>) => {
     iconButtonProps?.onDragStart?.(event);
     setDraggingColumn(column);
-    event.dataTransfer.setDragImage(tableHeadCellRef.current as HTMLElement, 0, 0);
+    event.dataTransfer.setDragImage(
+      tableHeadCellRef.current as HTMLElement,
+      0,
+      0,
+    );
   };
 
   const handleDragEnd = (event: DragEvent<HTMLButtonElement>) => {

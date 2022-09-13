@@ -129,14 +129,14 @@ function App({ Component, pageProps }: AppProps) {
                 p: `64px ${showMiniNav && isXLDesktop ? '250px' : '32px'} 0 ${
                   (navOpen || isDesktop) && !isMobile ? '300px' : '32px'
                 }`,
-                transition: 'all 200ms ease-in-out',
+                transition: 'all 100ms ease-in-out',
               })}
             >
               <Box
                 sx={{
                   maxWidth: '1200px',
                   margin: 'auto',
-                  transition: 'all 200ms ease-in-out',
+                  transition: 'all 100ms ease-in-out',
                   width: '100%',
                 }}
               >

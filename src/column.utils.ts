@@ -233,7 +233,7 @@ export const getCommonCellStyles = ({
     column.getIsPinned() === 'right'
       ? `${getTotalRight(table, column)}px`
       : undefined,
-  transition: `all ${column.getIsResizing() ? 0 : '0.2s'} ease-in-out`,
+  transition: `all ${column.getIsResizing() ? 0 : '0.1s'} ease-in-out`,
   ...(tableCellProps?.sx instanceof Function
     ? tableCellProps.sx(theme)
     : (tableCellProps?.sx as any)),
@@ -241,3 +241,24 @@ export const getCommonCellStyles = ({
   minWidth: `max(${column.getSize()}px, ${column.columnDef.minSize ?? 30}px)`,
   width: header?.getSize() ?? column.getSize(),
 });
+
+export const MRT_DefaultColumn = {
+  minSize: 40,
+  maxSize: 1000,
+  size: 180,
+};
+
+export const MRT_DefaultDisplayColumn: Partial<MRT_ColumnDef> = {
+  columnDefType: 'display',
+  enableClickToCopy: false,
+  enableColumnActions: false,
+  enableColumnDragging: false,
+  enableColumnFilter: false,
+  enableColumnOrdering: false,
+  enableEditing: false,
+  enableGlobalFilter: false,
+  enableGrouping: false,
+  enableHiding: false,
+  enableResizing: false,
+  enableSorting: false,
+};

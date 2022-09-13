@@ -3,6 +3,7 @@ import React, {
   MutableRefObject,
   ReactNode,
   SetStateAction,
+  useMemo,
 } from 'react';
 import type {
   AlertProps,
@@ -47,6 +48,7 @@ import { MRT_FilterFns } from './filterFns';
 import { MRT_Localization_EN } from './_locales/en';
 import { MRT_SortingFns } from './sortingFns';
 import { MRT_TableRoot } from './table/MRT_TableRoot';
+import { MRT_DefaultColumn, MRT_DefaultDisplayColumn } from './column.utils';
 
 type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
 
@@ -1002,11 +1004,11 @@ export type Virtualizer = {
   measure: () => void;
 };
 
-export default <TData extends Record<string, any> = {}>({
+const MaterialReactTable = <TData extends Record<string, any> = {}>({
   aggregationFns,
   autoResetExpanded = false,
   columnResizeMode = 'onEnd',
-  defaultColumn = { minSize: 40, maxSize: 1000, size: 180 },
+  defaultColumn,
   defaultDisplayColumn,
   editingMode = 'modal',
   enableBottomToolbar = true,
@@ -1047,65 +1049,81 @@ export default <TData extends Record<string, any> = {}>({
   selectAllMode = 'page',
   sortingFns,
   ...rest
-}: MaterialReactTableProps<TData>) => (
-  <MRT_TableRoot
-    aggregationFns={{ ...MRT_AggregationFns, ...aggregationFns }}
-    autoResetExpanded={autoResetExpanded}
-    columnResizeMode={columnResizeMode}
-    defaultColumn={defaultColumn}
-    defaultDisplayColumn={{
-      columnDefType: 'display',
-      enableClickToCopy: false,
-      enableColumnActions: false,
-      enableColumnDragging: false,
-      enableColumnFilter: false,
-      enableColumnOrdering: false,
-      enableEditing: false,
-      enableGlobalFilter: false,
-      enableGrouping: false,
-      enableHiding: false,
-      enableResizing: false,
-      enableSorting: false,
+}: MaterialReactTableProps<TData>) => {
+  const _icons = useMemo(() => ({ ...MRT_Default_Icons, ...icons }), []);
+  const _localization = useMemo(
+    () => ({
+      ...MRT_Localization_EN,
+      ...localization,
+    }),
+    [],
+  );
+  const _aggregationFns = useMemo(
+    () => ({ ...MRT_AggregationFns, ...aggregationFns }),
+    [],
+  );
+  const _filterFns = useMemo(() => ({ ...MRT_FilterFns, ...filterFns }), []);
+  const _sortingFns = useMemo(() => ({ ...MRT_SortingFns, ...sortingFns }), []);
+  const _defaultColumn = useMemo<Partial<MRT_ColumnDef<TData>>>(
+    () => ({ ...MRT_DefaultColumn, ...defaultColumn }),
+    [],
+  );
+  const _defaultDisplayColumn = useMemo<Partial<MRT_ColumnDef<TData>>>(
+    () => ({
+      ...(MRT_DefaultDisplayColumn as Partial<MRT_ColumnDef<TData>>),
       ...defaultDisplayColumn,
-    }}
-    editingMode={editingMode}
-    enableBottomToolbar={enableBottomToolbar}
-    enableColumnActions={enableColumnActions}
-    enableColumnFilters={enableColumnFilters}
-    enableColumnOrdering={enableColumnOrdering}
-    enableColumnResizing={enableColumnResizing}
-    enableDensityToggle={enableDensityToggle}
-    enableExpandAll={enableExpandAll}
-    enableFilters={enableFilters}
-    enableFullScreenToggle={enableFullScreenToggle}
-    enableGlobalFilter={enableGlobalFilter}
-    enableGlobalFilterRankedResults={enableGlobalFilterRankedResults}
-    enableGrouping={enableGrouping}
-    enableHiding={enableHiding}
-    enableMultiRowSelection={enableMultiRowSelection}
-    enableMultiSort={enableMultiSort}
-    enablePagination={enablePagination}
-    enablePinning={enablePinning}
-    enableRowSelection={enableRowSelection}
-    enableSelectAll={enableSelectAll}
-    enableSorting={enableSorting}
-    enableStickyHeader={enableStickyHeader}
-    enableTableFooter={enableTableFooter}
-    enableTableHead={enableTableHead}
-    enableToolbarInternalActions={enableToolbarInternalActions}
-    enableTopToolbar={enableTopToolbar}
-    filterFns={{ ...MRT_FilterFns, ...filterFns }}
-    icons={{ ...MRT_Default_Icons, ...icons }}
-    localization={{ ...MRT_Localization_EN, ...localization }}
-    positionActionsColumn={positionActionsColumn}
-    positionExpandColumn={positionExpandColumn}
-    positionGlobalFilter={positionGlobalFilter}
-    positionPagination={positionPagination}
-    positionToolbarAlertBanner={positionToolbarAlertBanner}
-    positionToolbarDropZone={positionToolbarDropZone}
-    rowNumberMode={rowNumberMode}
-    selectAllMode={selectAllMode}
-    sortingFns={{ ...MRT_SortingFns, ...sortingFns }}
-    {...rest}
-  />
-);
+    }),
+    [],
+  );
+
+  return (
+    <MRT_TableRoot
+      aggregationFns={_aggregationFns}
+      autoResetExpanded={autoResetExpanded}
+      columnResizeMode={columnResizeMode}
+      defaultColumn={_defaultColumn}
+      defaultDisplayColumn={_defaultDisplayColumn}
+      editingMode={editingMode}
+      enableBottomToolbar={enableBottomToolbar}
+      enableColumnActions={enableColumnActions}
+      enableColumnFilters={enableColumnFilters}
+      enableColumnOrdering={enableColumnOrdering}
+      enableColumnResizing={enableColumnResizing}
+      enableDensityToggle={enableDensityToggle}
+      enableExpandAll={enableExpandAll}
+      enableFilters={enableFilters}
+      enableFullScreenToggle={enableFullScreenToggle}
+      enableGlobalFilter={enableGlobalFilter}
+      enableGlobalFilterRankedResults={enableGlobalFilterRankedResults}
+      enableGrouping={enableGrouping}
+      enableHiding={enableHiding}
+      enableMultiRowSelection={enableMultiRowSelection}
+      enableMultiSort={enableMultiSort}
+      enablePagination={enablePagination}
+      enablePinning={enablePinning}
+      enableRowSelection={enableRowSelection}
+      enableSelectAll={enableSelectAll}
+      enableSorting={enableSorting}
+      enableStickyHeader={enableStickyHeader}
+      enableTableFooter={enableTableFooter}
+      enableTableHead={enableTableHead}
+      enableToolbarInternalActions={enableToolbarInternalActions}
+      enableTopToolbar={enableTopToolbar}
+      filterFns={_filterFns}
+      icons={_icons}
+      localization={_localization}
+      positionActionsColumn={positionActionsColumn}
+      positionExpandColumn={positionExpandColumn}
+      positionGlobalFilter={positionGlobalFilter}
+      positionPagination={positionPagination}
+      positionToolbarAlertBanner={positionToolbarAlertBanner}
+      positionToolbarDropZone={positionToolbarDropZone}
+      rowNumberMode={rowNumberMode}
+      selectAllMode={selectAllMode}
+      sortingFns={_sortingFns}
+      {...rest}
+    />
+  );
+};
+
+export default MaterialReactTable;

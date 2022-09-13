@@ -40,7 +40,7 @@ export const MRT_TablePaper: FC<Props> = ({ table }) => {
         }
       }}
       sx={(theme) => ({
-        transition: 'all 0.2s ease-in-out',
+        transition: 'all 0.1s ease-in-out',
         ...(tablePaperProps?.sx instanceof Function
           ? tablePaperProps?.sx(theme)
           : (tablePaperProps?.sx as any)),
