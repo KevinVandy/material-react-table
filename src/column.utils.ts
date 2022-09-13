@@ -208,7 +208,7 @@ export const getCommonCellStyles = ({
 }) => ({
   backgroundColor:
     column.getIsPinned() && column.columnDef.columnDefType !== 'group'
-      ? alpha(lighten(theme.palette.background.default, 0.04), 0.95)
+      ? alpha(lighten(theme.palette.background.default, 0.04), 0.97)
       : 'inherit',
   backgroundImage: 'inherit',
   boxShadow: getIsLastLeftPinnedColumn(table, column)

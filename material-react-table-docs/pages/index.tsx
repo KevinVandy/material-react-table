@@ -39,8 +39,8 @@ const HomePage = () => {
               lg: '2rem',
             },
             lineHeight: {
-              xs: '3rem',
-              sm: '4rem',
+              xs: '2.5rem',
+              sm: '3.5rem',
               md: '5rem',
               lg: '5.5rem',
               xl: '6rem',
@@ -59,7 +59,19 @@ const HomePage = () => {
             })}
           >
             Material&nbsp;React&nbsp;Table
-            <sup style={{ fontSize: '2rem' }}>V1</sup>
+            <Box
+              component="sup"
+              sx={{
+                fontSize: {
+                  xs: '1rem',
+                  sm: '1.2rem',
+                  md: '1.5rem',
+                  lg: '2.5rem',
+                },
+              }}
+            >
+              V1
+            </Box>
           </Box>
         </Typography>
         <Typography
@@ -69,7 +81,7 @@ const HomePage = () => {
             display: 'inline',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            transform: 'translateY(-1.5rem)',
+            transform: 'translateY(-1rem)',
             width: '8rem',
             margin: 'auto',
           })}
@@ -126,14 +138,14 @@ const HomePage = () => {
           color="text.secondary"
           sx={{
             fontSize: {
-              xs: '1.2rem',
-              md: '1.5rem',
-              lg: '1.7rem',
+              xs: '1.1rem',
+              md: '1.4rem',
+              lg: '1.5rem',
             },
             mt: '2rem',
             textAlign: 'center',
             lineHeight: {
-              xs: '1.5rem',
+              xs: '1.8rem',
               md: '2rem',
               lg: '2.5rem',
             },

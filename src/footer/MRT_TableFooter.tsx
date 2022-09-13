@@ -29,7 +29,7 @@ export const MRT_TableFooter: FC<Props> = ({ table }) => {
       sx={(theme) => ({
         backgroundColor: lighten(theme.palette.background.default, 0.06),
         bottom: stickFooter ? 0 : undefined,
-        opacity: stickFooter ? 0.95 : undefined,
+        opacity: stickFooter ? 0.97 : undefined,
         outline: stickFooter
           ? theme.palette.mode === 'light'
             ? `1px solid ${theme.palette.grey[300]}`

@@ -1,13 +1,18 @@
 import React, { FC } from 'react';
-import { TableSortLabel, Tooltip } from '@mui/material';
+import { TableCellProps, TableSortLabel, Tooltip } from '@mui/material';
 import { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
   header: MRT_Header;
   table: MRT_TableInstance;
+  tableCellProps?: TableCellProps;
 }
 
-export const MRT_TableHeadCellSortLabel: FC<Props> = ({ header, table }) => {
+export const MRT_TableHeadCellSortLabel: FC<Props> = ({
+  header,
+  table,
+  tableCellProps,
+}) => {
   const {
     options: { localization },
   } = table;
@@ -32,7 +37,10 @@ export const MRT_TableHeadCellSortLabel: FC<Props> = ({ header, table }) => {
         }
         sx={{
           width: '2ch',
-          transform: 'translateX(-0.5ch)',
+          transform:
+            tableCellProps?.align !== 'right'
+              ? 'translateX(-0.5ch)'
+              : undefined,
         }}
       />
     </Tooltip>

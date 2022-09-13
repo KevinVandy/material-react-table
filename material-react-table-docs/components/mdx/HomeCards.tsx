@@ -1,4 +1,4 @@
-import { alpha, Card, CardContent, Stack } from '@mui/material';
+import { alpha, Card, CardContent, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 
 const cardData = [
@@ -35,13 +35,23 @@ export const HomeCards = () => {
             backgroundColor: alpha(theme.palette.primary.main, 0.1),
             display: 'flex',
             gap: '1.5rem',
-            fontSize: '1.2rem',
             p: '1rem',
           })}
           variant="outlined"
         >
           <Image src={cd.image} alt={cd.text} height={50} width={50} />
-          <CardContent>{cd.text}</CardContent>
+          <Typography
+            sx={{
+              fontSize: {
+                xs: '0.875rem',
+                sm: '1rem',
+                md: '1.1rem',
+                lg: '1.2rem',
+              },
+            }}
+          >
+            {cd.text}
+          </Typography>
         </Card>
       ))}
     </Stack>

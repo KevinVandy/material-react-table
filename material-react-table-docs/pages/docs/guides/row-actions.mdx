@@ -57,14 +57,15 @@ If you want to add row action buttons, then you can use the `renderRowActions` p
 ```jsx
 <MaterialReactTable
   enableRowActions
-  renderRowActions={(row, index) => [
+  renderRowActions={(row, index) => (
+    <Box>
       <IconButton onClick={() => console.info('Edit')}>
         <EditIcon />
-      </IconButton>,
+      </IconButton>
       <IconButton onClick={() => console.info('Delete')}>
         <DeleteIcon />
       </IconButton>
-    ]
+    </Box>
   )}
 />
 ```

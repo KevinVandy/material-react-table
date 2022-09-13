@@ -62,11 +62,11 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, table }) => {
             : localization.toggleSelectRow,
         }}
         onChange={
-          !row
-            ? selectAllMode === 'all'
-              ? table.getToggleAllRowsSelectedHandler()
-              : table.getToggleAllPageRowsSelectedHandler()
-            : row.getToggleSelectedHandler()
+          row
+            ? row.getToggleSelectedHandler()
+            : selectAllMode === 'all'
+            ? table.getToggleAllRowsSelectedHandler()
+            : table.getToggleAllPageRowsSelectedHandler()
         }
         size={density === 'compact' ? 'small' : 'medium'}
         {...checkboxProps}
