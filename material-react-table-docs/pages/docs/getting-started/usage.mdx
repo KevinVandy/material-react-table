@@ -12,7 +12,7 @@ Here is a brief overview of how to use Material React Table. This is a very simp
 
 ### Setup
 
-In order to start using MaterialReactTable, you need to first [install](/docs/install) `material-react-table` and the necessary Material UI v5 dependencies.
+To start using MaterialReactTable, you first need to [install](/docs/install) `material-react-table` and the necessary Material UI v5 dependencies.
 
 There are additional steps and customizations you can do for Material UI, if you have not set it up in your application already. Check out the [Material UI docs](https://mui.com/material-ui/getting-started/installation/) for more information.
 
@@ -34,7 +34,7 @@ import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 
 ### Creating Data/Rows
 
-Your data must be an array of objects that have properties matching the accessors in your column definitions. The objects themselves can theoretically be in any shape, but it will be easier to set up your columns if your data is already in a flat object format like below, but it is not required.
+Your data must be an array of objects that have properties matching the accessors in your column definitions. The objects themselves can theoretically be in any shape, but it will be easier to set up your columns if your data is already in a flat object format like the example below, but it is not required.
 
 ```jsx
 //recommended flat structure for data, but not required (nested data is fine, but takes more setup in column definitions)
@@ -76,7 +76,7 @@ Your data does NOT have to be created statically like this, of course. More than
 
 ### Creating Columns
 
-There are a lot of different ways to define columns, depending on your needs. Let's create some basic "data" columns. That is, columns that connect to our data. Since we defined our data in a flat object format, we can simply use the `accessorKey` property to access the data.
+There are several different ways to define columns, depending on your needs. Let's create some basic "data" columns. That is, columns that connect to our data. Since we defined our data in a flat object format, we can simply use the `accessorKey` property to access the data.
 
 ```jsx
 //simple column definitions pointing to flat data
@@ -115,11 +115,11 @@ const columns = useMemo(
 );
 ```
 
-If you have a more nested data structure for your data, that's fine, but you will just need to use more complicated accessors when you define your columns. You will learn more about that [here](/docs/guides/data-columns#method-2---using-an-accessorfn-and-id).
+If you have a more nested data structure for your data, that's okay, but you will need to use more complicated accessors when you define your columns. You can learn more about that [here](/docs/guides/data-columns#method-2---using-an-accessorfn-and-id).
 
 ### Simple Example
 
-Throw it all together and you have a basic table! You can also play around and enable some features, either per column in the column definitions, or as props passed to `<MaterialReactTable />`.
+Put it all together, and you have a basic table! You can also play around and enable some features, either per column in the column definitions, or as props passed to `<MaterialReactTable />`.
 
 ```jsx
 import React, { useMemo } from 'react';
@@ -167,7 +167,7 @@ export default function App() {
 }
 ```
 
-> **Note:** It is very important that the columns and data definitions are _memoized_ or _stable_. Otherwise, the entire table will be re-rendered during every react re-render in your application, which can lead to performance issues. To make a variable stable, store in `useState`, or wrap in `useMemo`, or define outside of a component so it does not get recreated on every render.
+> **Note:** It is very important that the columns and data definitions are _memoized_ or _stable_. Otherwise, the entire table will be re-rendered during every react re-render in your application, which can lead to performance issues. To make a variable stable, store it in `useState`, wrap it in `useMemo`, or define it outside of a component so it does not get recreated on every render.
 
 ### Live Code Sandbox Example
 
@@ -175,6 +175,6 @@ export default function App() {
 
 ### Next Steps
 
-There are so many ways to customize the behavior and look and feel of your Material React Table. View some of the [examples](/docs/examples) to see how you can customize your table, and visit the [props page](/docs/api/props) to see all the props that you can use to turn features on and off, and customize the look and feel of your table.
+There are numerous ways you can customize the behavior and look and feel of your Material React Table. View some of the [examples](/docs/examples) to see how you can customize your table, and visit the [props page](/docs/api/props) to see all the props that you can use to turn features on and off and customize the look and feel of your table.
 
-Also be sure to check out both the [Fundamental Guides](/docs/guides#fundamentals) and the [Advanced Feature Guides](/docs/guides#feature-guides) to learn more about all the different features that you can toggle on and off, or customize.
+Also, be sure to check out both the [Fundamental Guides](/docs/guides#fundamentals) and the [Advanced Feature Guides](/docs/guides#feature-guides) to learn more about  the different features you can toggle on and off, or customize.
