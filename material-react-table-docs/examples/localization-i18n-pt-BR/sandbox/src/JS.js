@@ -18,6 +18,7 @@ const columns = [
   {
     accessorKey: 'lastName',
     header: 'Sobrenome',
+    enableClickToCopy: true,
   },
   {
     accessorKey: 'age',

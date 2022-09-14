@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
-import SpanishExample from '../../../examples/localization-i18n-es';
 import LocaleExamples from '../../../components/mdx/LocaleExamples';
 
 <Head>
@@ -25,7 +24,7 @@ Material React Table has full support for localization (i18n). Some locales are 
 
 The following locales are included and can be imported from `'material-react-table/locales/'`:
 
-`en`, `pt-BR`
+`en` (default), `es`, `pt-BR`
 
 > If your language is not yet supported, please consider making a PR to add it to the library! See [here on GitHub](https://github.com/KevinVandy/material-react-table/tree/main/src/_locales).
 
@@ -37,8 +36,27 @@ Scroll and find your language below to see an example of how to use it.
 
 ### Custom Non-Built-In Translations
 
-Here's a crude not-so-accurately translated Spanish example:
+If you want to use a language that is not included in the library, you can still easily add your own custom translations to the `localization` prop.
 
-<SpanishExample />
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  localization={{
+    actions: 'Ações',
+    and: 'e',
+    cancel: 'Cancelar',
+    changeFilterMode: 'Alterar o modo de filtro',
+    changeSearchMode: 'Alterar o modo de pesquisa',
+    clearFilter: 'Limpar filtros',
+    clearSearch: 'Limpar pesquisa',
+    clearSort: 'Limpar classificações',
+    clickToCopy: 'Clique para copiar',
+    // ... and many more - see link below for full list of translation keys
+  }}
+/>
+```
 
-_If you are willing and able to contribute accurate translations, please consider making a PR and they will be included as an extra import in this library_
+For a full list of all available translation keys, see the [here](https://github.com/KevinVandy/material-react-table/blob/main/src/_locales/en.ts)
+
+If you end up fully translating MRT into another language that is not yet supported, please consider making a PR to add it to the library so that everyone can use it!

@@ -9,11 +9,14 @@ const PT_BR_Table = dynamic(
     ssr: false,
   },
 );
+const ES_Table = dynamic(() => import('../../examples/localization-i18n-es'), {
+  ssr: false,
+});
 
-const supportedLocales = ['pt-BR', 'es'];
+const supportedLocales = ['es', 'pt-BR'];
 
 const LocaleExamples = () => {
-  const [currentLocale, setCurrentLocale] = useState('pt-BR');
+  const [currentLocale, setCurrentLocale] = useState('es');
 
   return (
     <>
@@ -36,7 +39,7 @@ const LocaleExamples = () => {
           <Suspense fallback={<Skeleton height="500px" width="100%" />}>
             {currentLocale === 'en' && <></>}
             {currentLocale === 'pt-BR' && <PT_BR_Table />}
-            {currentLocale === 'es' && <Box padding="3rem">Coming Soon</Box>}
+            {currentLocale === 'es' && <ES_Table />}
           </Suspense>
         </div>
       )}

@@ -18,6 +18,7 @@ const columns: MRT_ColumnDef<Person>[] = [
   {
     accessorKey: 'lastName',
     header: 'Sobrenome',
+    enableClickToCopy: true,
   },
   {
     accessorKey: 'age',
