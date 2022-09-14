@@ -23,6 +23,8 @@ export const MRT_TableHead: FC<Props> = ({ table }) => {
       {...tableHeadProps}
       sx={(theme) => ({
         opacity: enableStickyHeader ? 0.97 : undefined,
+        position: enableStickyHeader ? 'sticky' : undefined,
+        zIndex: enableStickyHeader ? 2 : undefined,
         ...(tableHeadProps?.sx instanceof Function
           ? tableHeadProps?.sx(theme)
           : (tableHeadProps?.sx as any)),

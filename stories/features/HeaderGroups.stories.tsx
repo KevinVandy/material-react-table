@@ -44,7 +44,7 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
   },
 ];
 
-const data = [...Array(5)].map(() => ({
+const data = [...Array(55)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   age: faker.datatype.number(80),
@@ -53,6 +53,12 @@ const data = [...Array(5)].map(() => ({
 
 export const HeaderGroups: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} />
+);
+
+export const HeaderGroupsWithStickyHeader: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable columns={columns} data={data} enableStickyHeader />
 );
 
 export const HeaderAndFooterGroups: Story<MaterialReactTableProps> = () => (

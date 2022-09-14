@@ -5,7 +5,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import { babel } from '@rollup/plugin-babel';
 
-const supportedLocales = ['en', 'es', 'pt-BR'];
+const supportedLocales = ['en', 'es', 'pl', 'pt-BR'];
 
 export default [
   {
