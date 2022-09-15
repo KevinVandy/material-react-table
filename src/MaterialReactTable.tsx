@@ -50,6 +50,8 @@ import { MRT_SortingFns } from './sortingFns';
 import { MRT_TableRoot } from './table/MRT_TableRoot';
 import { MRT_DefaultColumn, MRT_DefaultDisplayColumn } from './column.utils';
 
+type DensityState = 'comfortable' | 'compact' | 'spacious';
+
 type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
 
 export interface MRT_Localization {
@@ -198,7 +200,7 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
   setColumnFilterFns: Dispatch<
     SetStateAction<{ [key: string]: MRT_FilterOption }>
   >;
-  setDensity: Dispatch<SetStateAction<'comfortable' | 'compact' | 'spacious'>>;
+  setDensity: Dispatch<SetStateAction<DensityState>>;
   setDraggingColumn: Dispatch<SetStateAction<MRT_Column<TData> | null>>;
   setDraggingRow: Dispatch<SetStateAction<MRT_Row<TData> | null>>;
   setEditingCell: Dispatch<SetStateAction<MRT_Cell<TData> | null>>;
@@ -219,7 +221,7 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
 export type MRT_TableState<TData extends Record<string, any> = {}> =
   TableState & {
     columnFilterFns: Record<string, MRT_FilterOption>;
-    density: 'comfortable' | 'compact' | 'spacious';
+    density: DensityState;
     draggingColumn: MRT_Column<TData> | null;
     draggingRow: MRT_Row<TData> | null;
     editingCell: MRT_Cell<TData> | null;
@@ -869,7 +871,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     muiTopToolbarProps?:
       | ToolbarProps
       | (({ table }: { table: MRT_TableInstance<TData> }) => ToolbarProps);
-    onDensityChange?: OnChangeFn<boolean>;
+    onDensityChange?: OnChangeFn<DensityState>;
     onDraggingColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
     onDraggingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
     onEditingCellChange?: OnChangeFn<MRT_Cell<TData> | null>;
