@@ -3,6 +3,9 @@ import dynamic from 'next/dynamic';
 import { Box, Skeleton, Tab, Tabs } from '@mui/material';
 
 //Locale Examples
+const CS_Table = dynamic(() => import('../../examples/localization-i18n-cs'), {
+  ssr: false,
+});
 const ES_Table = dynamic(() => import('../../examples/localization-i18n-es'), {
   ssr: false,
 });
@@ -16,7 +19,7 @@ const PT_BR_Table = dynamic(
   },
 );
 
-const supportedLocales = ['es', 'pl', 'pt-BR'];
+const supportedLocales = ['cs', 'es', 'pl', 'pt-BR'];
 
 const LocaleExamples = () => {
   const [currentLocale, setCurrentLocale] = useState('es');
@@ -40,6 +43,7 @@ const LocaleExamples = () => {
       {typeof window !== 'undefined' && (
         <div style={{ minHeight: '1500px' }} lang={currentLocale}>
           <Suspense fallback={<Skeleton height="500px" width="100%" />}>
+            {currentLocale === 'cs' && <CS_Table />}
             {currentLocale === 'es' && <ES_Table />}
             {currentLocale === 'pl' && <PL_Table />}
             {currentLocale === 'pt-BR' && <PT_BR_Table />}

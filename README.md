@@ -27,6 +27,8 @@ __Built with [Material UI <sup>V5</sup>](https://mui.com) and [TanStack Table <s
 
 _Quickly Create React Data Tables with Material Design_
 
+_Full [Localization (i18n)](https://www.material-react-table.com/docs/guides/localization) Support!_
+
 Join the [Discord](https://discord.gg/5wqyRx6fnm) server to join in on the development discussion or ask questions
 
 View the [Docs Website](https://www.material-react-table.com/)
