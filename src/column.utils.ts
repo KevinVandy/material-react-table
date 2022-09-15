@@ -21,19 +21,18 @@ export const getColumnId = <TData extends Record<string, any> = {}>(
 export const getAllLeafColumnDefs = <TData extends Record<string, any> = {}>(
   columns: MRT_ColumnDef<TData>[],
 ): MRT_ColumnDef<TData>[] => {
-  let lowestLevelColumns: MRT_ColumnDef<TData>[] = columns;
-  let currentCols: MRT_ColumnDef<TData>[] | undefined = columns;
-  while (!!currentCols?.length && currentCols.some((col) => col.columns)) {
-    const nextCols: MRT_ColumnDef<TData>[] = currentCols
-      .filter((col) => !!col.columns)
-      .map((col) => col.columns)
-      .flat() as MRT_ColumnDef<TData>[];
-    if (nextCols.every((col) => !col?.columns)) {
-      lowestLevelColumns = [...lowestLevelColumns, ...nextCols];
-    }
-    currentCols = nextCols;
-  }
-  return lowestLevelColumns.filter((col) => !col.columns);
+  const allLeafColumnDefs: MRT_ColumnDef<TData>[] = [];
+  const getLeafColumns = (cols: MRT_ColumnDef<TData>[]) => {
+    cols.forEach((col) => {
+      if (col.columns) {
+        getLeafColumns(col.columns);
+      } else {
+        allLeafColumnDefs.push(col);
+      }
+    });
+  };
+  getLeafColumns(columns);
+  return allLeafColumnDefs;
 };
 
 export const prepareColumns = <TData extends Record<string, any> = {}>({
