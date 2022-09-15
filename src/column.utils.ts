@@ -119,9 +119,10 @@ export const getLeadingDisplayColumnIds = <
 ) =>
   [
     (props.enableRowDragging || props.enableRowOrdering) && 'mrt-row-drag',
-    ((props.positionActionsColumn === 'first' && props.enableRowActions) ||
-      (props.enableEditing &&
-        ['row', 'modal'].includes(props.editingMode ?? ''))) &&
+    props.positionActionsColumn === 'first' &&
+      (props.enableRowActions ||
+        (props.enableEditing &&
+          ['row', 'modal'].includes(props.editingMode ?? ''))) &&
       'mrt-row-actions',
     props.positionExpandColumn === 'first' &&
       showExpandColumn(props) &&
@@ -135,9 +136,10 @@ export const getTrailingDisplayColumnIds = <
 >(
   props: MaterialReactTableProps<TData>,
 ) => [
-  ((props.positionActionsColumn === 'last' && props.enableRowActions) ||
-    (props.enableEditing &&
-      ['row', 'modal'].includes(props.editingMode ?? ''))) &&
+  props.positionActionsColumn === 'last' &&
+    (props.enableRowActions ||
+      (props.enableEditing &&
+        ['row', 'modal'].includes(props.editingMode ?? ''))) &&
     'mrt-row-actions',
   props.positionExpandColumn === 'last' &&
     showExpandColumn(props) &&
