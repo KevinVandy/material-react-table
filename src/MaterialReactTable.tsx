@@ -50,6 +50,10 @@ import { MRT_SortingFns } from './sortingFns';
 import { MRT_TableRoot } from './table/MRT_TableRoot';
 import { MRT_DefaultColumn, MRT_DefaultDisplayColumn } from './column.utils';
 
+/**
+ * Most of this file is just TypeScript types
+ */
+
 type DensityState = 'comfortable' | 'compact' | 'spacious';
 
 type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
@@ -602,9 +606,31 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     | 'state'
   > & {
     columnFilterModeOptions?: (MRT_FilterOption | string)[] | null;
+    /**
+     * The columns to display in the table. `accessorKey`s or `accessorFn`s must match keys in the `data` prop.
+     *
+     * See more info on creating columns on the official docs site:
+     * @link https://www.material-react-table.com/docs/guides/data-columns
+     * @link https://www.material-react-table.com/docs/guides/display-columns
+     *
+     * See all Columns Options on the official docs site:
+     * @link https://www.material-react-table.com/docs/api/column-options
+     */
     columns: MRT_ColumnDef<TData>[];
+    /**
+     * Pass your data as an array of objects. Objects can theoretically be any shape, but it's best to keep them consistent.
+     *
+     * See the usage guide for more info on creating columns and data:
+     * @link https://www.material-react-table.com/docs/getting-started/usage
+     */
     data: TData[];
+    /**
+     * Instead of specifying a bunch of the same options for each column, you can just change an option in the `defaultColumn` prop to change a default option for all columns.
+     */
     defaultColumn?: Partial<MRT_ColumnDef<TData>>;
+    /**
+     * Change the default options for display columns.
+     */
     defaultDisplayColumn?: Partial<MRT_ColumnDef<TData>>;
     displayColumnDefOptions?: Partial<{
       [key in MRT_DisplayColumnIds]: Partial<MRT_ColumnDef>;
