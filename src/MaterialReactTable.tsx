@@ -54,7 +54,7 @@ import { MRT_DefaultColumn, MRT_DefaultDisplayColumn } from './column.utils';
  * Most of this file is just TypeScript types
  */
 
-type DensityState = 'comfortable' | 'compact' | 'spacious';
+export type DensityState = 'comfortable' | 'compact' | 'spacious';
 
 type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
 
