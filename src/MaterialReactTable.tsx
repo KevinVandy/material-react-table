@@ -666,6 +666,12 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     expandRowsFn?: (dataRow: TData) => TData[];
     icons?: Partial<MRT_Icons>;
     initialState?: Partial<MRT_TableState<TData>>;
+    /**
+     * Pass in either a locale imported from `material-react-table/locales/*` or a custom locale object.
+     * 
+     * See the localization (i18n) guide for more info:
+     * @link https://www.material-react-table.com/docs/guides/localization
+     */
     localization?: Partial<MRT_Localization>;
     muiBottomToolbarProps?:
       | ToolbarProps
