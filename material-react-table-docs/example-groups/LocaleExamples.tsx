@@ -21,8 +21,11 @@ const PT_BR_Table = dynamic(
     suspense: true,
   },
 );
+const RU_Table = dynamic(() => import('../examples/localization-i18n-ru'), {
+  suspense: true,
+});
 
-const supportedLocales = ['cs', 'de', 'es', 'pl', 'pt-BR'];
+const supportedLocales = ['cs', 'de', 'es', 'pl', 'pt-BR', 'ru'];
 
 const LocaleExamples = () => {
   const [currentLocale, setCurrentLocale] = useState('es');
@@ -52,6 +55,7 @@ const LocaleExamples = () => {
           {currentLocale === 'es' && <ES_Table />}
           {currentLocale === 'pl' && <PL_Table />}
           {currentLocale === 'pt-BR' && <PT_BR_Table />}
+          {currentLocale === 'ru' && <RU_Table />}
         </Suspense>
       </div>
     </>
