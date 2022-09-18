@@ -70,6 +70,32 @@ export const SelectAllDisabled: Story<MaterialReactTableProps> = () => (
   />
 );
 
+export const SingleSelectionRadio: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowSelection
+    enableMultiRowSelection={false}
+  />
+);
+
+export const SingleSelectionRadioWithRowClick: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowSelection
+    enableMultiRowSelection={false}
+    muiTableBodyRowProps={({ row }) => ({
+      onClick: row.getToggleSelectedHandler(),
+      sx: {
+        cursor: 'pointer',
+      },
+    })}
+  />
+);
+
 export const SelectCheckboxSecondaryColor: Story<
   MaterialReactTableProps
 > = () => (

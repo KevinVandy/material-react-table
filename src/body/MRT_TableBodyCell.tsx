@@ -168,7 +168,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
       onDragEnter={handleDragEnter}
       onDoubleClick={handleDoubleClick}
       sx={(theme) => ({
-        cursor: isEditable && editingMode === 'cell' ? 'pointer' : 'text',
+        cursor: isEditable && editingMode === 'cell' ? 'pointer' : 'inherit',
         overflow: 'hidden',
         p:
           density === 'compact'

@@ -157,6 +157,10 @@ export const routes: Array<RouteItem> = [
             label: 'Localization (i18n)',
           },
           {
+            href: '/docs/guides/memoize-components',
+            label: 'Memoize Components',
+          },
+          {
             href: '/docs/guides/table-event-listeners',
             label: 'Table Event Listeners',
           },

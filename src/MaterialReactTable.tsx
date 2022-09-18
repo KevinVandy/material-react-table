@@ -13,6 +13,7 @@ import type {
   IconButtonProps,
   LinearProgressProps,
   PaperProps,
+  RadioProps,
   SkeletonProps,
   TableBodyProps,
   TableCellProps,
@@ -705,14 +706,14 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
       | CheckboxProps
       | (({ table }: { table: MRT_TableInstance<TData> }) => CheckboxProps);
     muiSelectCheckboxProps?:
-      | CheckboxProps
+      | (CheckboxProps | RadioProps)
       | (({
           table,
           row,
         }: {
           table: MRT_TableInstance<TData>;
           row: MRT_Row<TData>;
-        }) => CheckboxProps);
+        }) => CheckboxProps | RadioProps);
     muiTableBodyCellCopyButtonProps?:
       | ButtonProps
       | (({

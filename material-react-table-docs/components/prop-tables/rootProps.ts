@@ -365,8 +365,9 @@ export const rootProps: PropRow[] = [
   },
   {
     propName: 'enableMultiRowSelection',
-    defaultValue: '',
-    description: '',
+    defaultValue: 'true',
+    description:
+      'If true, the user can select multiple rows at once with a checkbox. If false, the user can only select one row at a time with a radio button.',
     link: '',
     linkText: '',
     required: false,
