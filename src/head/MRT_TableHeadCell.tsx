@@ -145,9 +145,11 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
           sx={{
             alignItems: 'flex-start',
             display: 'flex',
+            flexDirection:
+              tableCellProps?.align === 'right' ? 'row-reverse' : 'row',
             justifyContent:
               tableCellProps?.align === 'right'
-                ? 'flex-end'
+                ? 'flex-start'
                 : columnDefType === 'group' ||
                   tableCellProps?.align === 'center'
                 ? 'center'
@@ -165,6 +167,8 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
                   ? 'pointer'
                   : undefined,
               display: 'flex',
+              flexDirection:
+                tableCellProps?.align === 'right' ? 'row-reverse' : 'row',
               flexWrap: 'nowrap',
               m: tableCellProps?.align === 'center' ? 'auto' : undefined,
               pl:
@@ -177,7 +181,11 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
           >
             {headerElement}
             {column.getCanSort() && (
-              <MRT_TableHeadCellSortLabel header={header} table={table} />
+              <MRT_TableHeadCellSortLabel
+                header={header}
+                table={table}
+                tableCellProps={tableCellProps}
+              />
             )}
             {column.getCanFilter() && (
               <MRT_TableHeadCellFilterLabel header={header} table={table} />

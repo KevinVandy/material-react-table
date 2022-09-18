@@ -99,14 +99,14 @@ export const CustomCellRender: Story<MaterialReactTableProps> = () => (
         header: 'First Name',
         accessorKey: 'firstName',
         Cell: ({ cell }) => (
-          <span style={{ fontStyle: 'italic' }}>{cell.getValue()}</span>
+          <span style={{ fontStyle: 'italic' }}>{cell.getValue<string>()}</span>
         ),
       },
       {
         header: 'Last Name',
         accessorKey: 'lastName',
         Cell: ({ cell }) => (
-          <span style={{ color: 'red' }}>{cell.getValue()}</span>
+          <span style={{ color: 'red' }}>{cell.getValue<string>()}</span>
         ),
       },
       {
@@ -123,7 +123,7 @@ export const CustomCellRender: Story<MaterialReactTableProps> = () => (
                   : undefined,
             }}
           >
-            {cell.getValue()}
+            {cell.getValue<string>()}
           </span>
         ),
       },

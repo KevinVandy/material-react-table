@@ -32,7 +32,7 @@ export const MRT_TableHeadCellResizeHandle: FC<Props> = ({ header, table }) => {
         position: 'absolute',
         right: '1px',
         touchAction: 'none',
-        transition: column.getIsResizing() ? undefined : 'all 0.2s ease-in-out',
+        transition: column.getIsResizing() ? undefined : 'all 0.1s ease-in-out',
         userSelect: 'none',
         zIndex: 4,
         '&:active': {

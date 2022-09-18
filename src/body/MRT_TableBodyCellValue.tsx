@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC } from 'react';
 import { MRT_Cell, MRT_TableInstance } from '..';
 
 interface Props {
@@ -6,7 +6,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-const _MRT_TableBodyCellValue: FC<Props> = ({ cell, table }) => {
+export const MRT_TableBodyCellValue: FC<Props> = ({ cell, table }) => {
   const { column, row } = cell;
   const { columnDef } = column;
 
@@ -32,8 +32,3 @@ const _MRT_TableBodyCellValue: FC<Props> = ({ cell, table }) => {
     </>
   );
 };
-
-export const MRT_TableBodyCellValue = memo(
-  _MRT_TableBodyCellValue,
-  (prev, next) => prev.cell.getValue() === next.cell.getValue(),
-);

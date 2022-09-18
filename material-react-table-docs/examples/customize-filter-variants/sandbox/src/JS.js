@@ -6,6 +6,15 @@ const Example = () => {
   const columns = useMemo(
     () => [
       {
+        header: 'Account Status',
+        accessorFn: (originalRow) => (originalRow.isActive ? 'true' : 'false'), //must be strings
+        id: 'isActive',
+        filterVariant: 'checkbox',
+        Cell: ({ cell }) =>
+          cell.getValue() === 'true' ? 'Active' : 'Inactive',
+        size: 220,
+      },
+      {
         accessorKey: 'name',
         header: 'Name',
         filterVariant: 'text', // default

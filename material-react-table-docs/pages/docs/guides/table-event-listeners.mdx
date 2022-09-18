@@ -11,7 +11,9 @@ import Example from '../../../examples/enable-column-ordering';
 
 ## Table Event Listeners Guide
 
-There are a few advanced custom event listener props on the root table API, but not many. However, in this guide we will show you how to add any event listener that you need to any component within Material React Table by passing them to any of the `mui...Props` props.
+You can pretty much add ANY event listener to ANY component in Material React Table!
+
+You can do this by passing props to any of the `mui...Props` props. This guide gives a few examples of the most common use cases, but there are limitless possibilities.
 
 ### Add Event Listeners to any of the Material UI Components
 
@@ -21,11 +23,14 @@ Here are a few common examples of some useful event listeners you may want to ad
 
 #### Add an onClick to a Table Row
 
-```tsx
+```jsx
 <MaterialReactTable
   muiTableBodyRowProps={({ row }) => ({
     onClick: (event) => {
       console.info(event, row.id);
+    },
+    sx: {
+      cursor: 'pointer', //you might want to change the cursor too when adding an onClick
     },
   })}
 />
@@ -33,7 +38,7 @@ Here are a few common examples of some useful event listeners you may want to ad
 
 #### Add an onDoubleClick to a Table Cell
 
-```tsx
+```jsx
 <MaterialReactTable
   muiTableBodyCellProps={({ cell }) => ({
     onDoubleClick: (event) => {
@@ -45,7 +50,7 @@ Here are a few common examples of some useful event listeners you may want to ad
 
 #### Add an onBlur to an Edit TextField
 
-```tsx
+```jsx
 //add to every edit text field
 <MaterialReactTable
   muiTableBodyCellEditTextFieldProps={({ cell }) => ({
@@ -56,7 +61,7 @@ Here are a few common examples of some useful event listeners you may want to ad
 />
 ```
 
-```tsx
+```jsx
 //or add to just edit text fields in a specific column
 const columns = [
   {
@@ -75,7 +80,7 @@ const columns = [
 
 > Warning: Be Careful when using onChange, as it can trigger re-renders with every key-stroke, which can lead to performance issues
 
-```tsx
+```jsx
 //add to every edit text field
 <MaterialReactTable
   muiTableBodyCellEditTextFieldProps={({ cell }) => ({
@@ -86,7 +91,7 @@ const columns = [
 />
 ```
 
-```tsx
+```jsx
 //or add to just edit text fields in a specific column
 const columns = [
   {

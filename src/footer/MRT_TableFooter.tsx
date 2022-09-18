@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { TableFooter } from '@mui/material';
+import { lighten, TableFooter } from '@mui/material';
 import { MRT_TableFooterRow } from './MRT_TableFooterRow';
 import type { MRT_TableInstance } from '..';
 
@@ -27,14 +27,15 @@ export const MRT_TableFooter: FC<Props> = ({ table }) => {
     <TableFooter
       {...tableFooterProps}
       sx={(theme) => ({
-        position: stickFooter ? 'sticky' : undefined,
+        backgroundColor: lighten(theme.palette.background.default, 0.06),
         bottom: stickFooter ? 0 : undefined,
-        opacity: stickFooter ? 0.95 : undefined,
+        opacity: stickFooter ? 0.97 : undefined,
         outline: stickFooter
           ? theme.palette.mode === 'light'
             ? `1px solid ${theme.palette.grey[300]}`
             : `1px solid ${theme.palette.grey[700]}`
           : undefined,
+        position: stickFooter ? 'sticky' : undefined,
         ...(tableFooterProps?.sx instanceof Function
           ? tableFooterProps?.sx(theme)
           : (tableFooterProps?.sx as any)),

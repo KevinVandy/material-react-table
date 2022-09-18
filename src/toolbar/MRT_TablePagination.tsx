@@ -1,13 +1,16 @@
-import React, { ChangeEvent, FC } from 'react';
+import React, { ChangeEvent } from 'react';
 import { TablePagination } from '@mui/material';
 import { MRT_TableInstance } from '..';
 
-interface Props {
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any> = {}> {
   position: 'top' | 'bottom';
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TablePagination: FC<Props> = ({ table, position }) => {
+export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
+  table,
+  position,
+}: Props<TData>) => {
   const {
     getPrePaginationRowModel,
     getState,
@@ -16,6 +19,7 @@ export const MRT_TablePagination: FC<Props> = ({ table, position }) => {
     options: {
       muiTablePaginationProps,
       enableToolbarInternalActions,
+      localization,
       rowCount,
     },
   } = table;
@@ -38,12 +42,21 @@ export const MRT_TablePagination: FC<Props> = ({ table, position }) => {
 
   return (
     <TablePagination
-      SelectProps={{
-        sx: { m: '0 1rem 0 1ch' },
-        MenuProps: { MenuListProps: { disablePadding: true } },
-      }}
       component="div"
       count={totalRowCount}
+      getItemAriaLabel={(type) =>
+        type === 'first'
+          ? localization.goToFirstPage
+          : type === 'last'
+          ? localization.goToLastPage
+          : type === 'next'
+          ? localization.goToNextPage
+          : localization.goToPreviousPage
+      }
+      labelDisplayedRows={({ from, to, count }) =>
+        `${from}-${to} ${localization.of} ${count}`
+      }
+      labelRowsPerPage={localization.rowsPerPage}
       onPageChange={(_: any, newPage: number) => setPageIndex(newPage)}
       onRowsPerPageChange={handleChangeRowsPerPage}
       page={pageIndex}
@@ -52,7 +65,31 @@ export const MRT_TablePagination: FC<Props> = ({ table, position }) => {
       showFirstButton={showFirstLastPageButtons}
       showLastButton={showFirstLastPageButtons}
       {...tablePaginationProps}
+      SelectProps={{
+        sx: { m: '0 1rem 0 1ch' },
+        MenuProps: { MenuListProps: { disablePadding: true }, sx: { m: 0 } },
+        ...tablePaginationProps?.SelectProps,
+      }}
       sx={(theme) => ({
+        '& .MuiTablePagination-toolbar': {
+          display: 'flex',
+          alignItems: 'center',
+        },
+        '& .MuiTablePagination-selectLabel': {
+          m: '0 -1px',
+        },
+        '&. MuiInputBase-root': {
+          m: '0 1px',
+        },
+        '& . MuiTablePagination-select': {
+          m: '0 1px',
+        },
+        '& .MuiTablePagination-displayedRows': {
+          m: '0 1px',
+        },
+        '& .MuiTablePagination-actions': {
+          m: '0 1px',
+        },
         mt:
           position === 'top' &&
           enableToolbarInternalActions &&

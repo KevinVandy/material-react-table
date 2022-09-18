@@ -21,19 +21,18 @@ export const getColumnId = <TData extends Record<string, any> = {}>(
 export const getAllLeafColumnDefs = <TData extends Record<string, any> = {}>(
   columns: MRT_ColumnDef<TData>[],
 ): MRT_ColumnDef<TData>[] => {
-  let lowestLevelColumns: MRT_ColumnDef<TData>[] = columns;
-  let currentCols: MRT_ColumnDef<TData>[] | undefined = columns;
-  while (!!currentCols?.length && currentCols.some((col) => col.columns)) {
-    const nextCols: MRT_ColumnDef<TData>[] = currentCols
-      .filter((col) => !!col.columns)
-      .map((col) => col.columns)
-      .flat() as MRT_ColumnDef<TData>[];
-    if (nextCols.every((col) => !col?.columns)) {
-      lowestLevelColumns = [...lowestLevelColumns, ...nextCols];
-    }
-    currentCols = nextCols;
-  }
-  return lowestLevelColumns.filter((col) => !col.columns);
+  const allLeafColumnDefs: MRT_ColumnDef<TData>[] = [];
+  const getLeafColumns = (cols: MRT_ColumnDef<TData>[]) => {
+    cols.forEach((col) => {
+      if (col.columns) {
+        getLeafColumns(col.columns);
+      } else {
+        allLeafColumnDefs.push(col);
+      }
+    });
+  };
+  getLeafColumns(columns);
+  return allLeafColumnDefs;
 };
 
 export const prepareColumns = <TData extends Record<string, any> = {}>({
@@ -120,9 +119,10 @@ export const getLeadingDisplayColumnIds = <
 ) =>
   [
     (props.enableRowDragging || props.enableRowOrdering) && 'mrt-row-drag',
-    ((props.positionActionsColumn === 'first' && props.enableRowActions) ||
-      (props.enableEditing &&
-        ['row', 'modal'].includes(props.editingMode ?? ''))) &&
+    props.positionActionsColumn === 'first' &&
+      (props.enableRowActions ||
+        (props.enableEditing &&
+          ['row', 'modal'].includes(props.editingMode ?? ''))) &&
       'mrt-row-actions',
     props.positionExpandColumn === 'first' &&
       showExpandColumn(props) &&
@@ -136,9 +136,10 @@ export const getTrailingDisplayColumnIds = <
 >(
   props: MaterialReactTableProps<TData>,
 ) => [
-  ((props.positionActionsColumn === 'last' && props.enableRowActions) ||
-    (props.enableEditing &&
-      ['row', 'modal'].includes(props.editingMode ?? ''))) &&
+  props.positionActionsColumn === 'last' &&
+    (props.enableRowActions ||
+      (props.enableEditing &&
+        ['row', 'modal'].includes(props.editingMode ?? ''))) &&
     'mrt-row-actions',
   props.positionExpandColumn === 'last' &&
     showExpandColumn(props) &&
@@ -164,8 +165,12 @@ export const getDefaultColumnFilterFn = <
   columnDef: MRT_ColumnDef<TData>,
 ): MRT_FilterOption => {
   if (columnDef.filterVariant === 'multi-select') return 'arrIncludesSome';
-  if (columnDef.filterVariant === 'select') return 'equals';
   if (columnDef.filterVariant === 'range') return 'betweenInclusive';
+  if (
+    columnDef.filterVariant === 'select' ||
+    columnDef.filterVariant === 'checkbox'
+  )
+    return 'equals';
   return 'fuzzy';
 };
 
@@ -204,7 +209,7 @@ export const getCommonCellStyles = ({
 }) => ({
   backgroundColor:
     column.getIsPinned() && column.columnDef.columnDefType !== 'group'
-      ? alpha(lighten(theme.palette.background.default, 0.04), 0.95)
+      ? alpha(lighten(theme.palette.background.default, 0.04), 0.97)
       : 'inherit',
   backgroundImage: 'inherit',
   boxShadow: getIsLastLeftPinnedColumn(table, column)
@@ -229,7 +234,7 @@ export const getCommonCellStyles = ({
     column.getIsPinned() === 'right'
       ? `${getTotalRight(table, column)}px`
       : undefined,
-  transition: `all ${column.getIsResizing() ? 0 : '0.2s'} ease-in-out`,
+  transition: `all ${column.getIsResizing() ? 0 : '0.1s'} ease-in-out`,
   ...(tableCellProps?.sx instanceof Function
     ? tableCellProps.sx(theme)
     : (tableCellProps?.sx as any)),
@@ -237,3 +242,24 @@ export const getCommonCellStyles = ({
   minWidth: `max(${column.getSize()}px, ${column.columnDef.minSize ?? 30}px)`,
   width: header?.getSize() ?? column.getSize(),
 });
+
+export const MRT_DefaultColumn = {
+  minSize: 40,
+  maxSize: 1000,
+  size: 180,
+};
+
+export const MRT_DefaultDisplayColumn: Partial<MRT_ColumnDef> = {
+  columnDefType: 'display',
+  enableClickToCopy: false,
+  enableColumnActions: false,
+  enableColumnDragging: false,
+  enableColumnFilter: false,
+  enableColumnOrdering: false,
+  enableEditing: false,
+  enableGlobalFilter: false,
+  enableGrouping: false,
+  enableHiding: false,
+  enableResizing: false,
+  enableSorting: false,
+};

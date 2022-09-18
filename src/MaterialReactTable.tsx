@@ -3,6 +3,7 @@ import React, {
   MutableRefObject,
   ReactNode,
   SetStateAction,
+  useMemo,
 } from 'react';
 import type {
   AlertProps,
@@ -44,11 +45,108 @@ import type { Options as VirtualizerOptions, VirtualItem } from 'react-virtual';
 import { MRT_AggregationFns } from './aggregationFns';
 import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_FilterFns } from './filterFns';
-import { MRT_Localization, MRT_DefaultLocalization_EN } from './localization';
+import { MRT_Localization_EN } from './_locales/en';
 import { MRT_SortingFns } from './sortingFns';
 import { MRT_TableRoot } from './table/MRT_TableRoot';
+import { MRT_DefaultColumn, MRT_DefaultDisplayColumn } from './column.utils';
+
+/**
+ * Most of this file is just TypeScript types
+ */
+
+export type DensityState = 'comfortable' | 'compact' | 'spacious';
 
 type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
+
+export interface MRT_Localization {
+  actions: string;
+  and: string;
+  cancel: string;
+  changeFilterMode: string;
+  changeSearchMode: string;
+  clearFilter: string;
+  clearSearch: string;
+  clearSort: string;
+  clickToCopy: string;
+  columnActions: string;
+  copiedToClipboard: string;
+  dropToGroupBy: string;
+  edit: string;
+  expand: string;
+  expandAll: string;
+  filterArrIncludes: string;
+  filterArrIncludesAll: string;
+  filterArrIncludesSome: string;
+  filterBetween: string;
+  filterBetweenInclusive: string;
+  filterByColumn: string;
+  filterContains: string;
+  filterEmpty: string;
+  filterEndsWith: string;
+  filterEquals: string;
+  filterEqualsString: string;
+  filterFuzzy: string;
+  filterGreaterThan: string;
+  filterGreaterThanOrEqualTo: string;
+  filterInNumberRange: string;
+  filterIncludesString: string;
+  filterIncludesStringSensitive: string;
+  filterLessThan: string;
+  filterLessThanOrEqualTo: string;
+  filterMode: string;
+  filterNotEmpty: string;
+  filterNotEquals: string;
+  filterStartsWith: string;
+  filterWeakEquals: string;
+  filteringByColumn: string;
+  goToFirstPage: string;
+  goToLastPage: string;
+  goToNextPage: string;
+  goToPreviousPage: string;
+  grab: string;
+  groupByColumn: string;
+  groupedBy: string;
+  hideAll: string;
+  hideColumn: string;
+  max: string;
+  min: string;
+  move: string;
+  noRecordsToDisplay: string;
+  noResultsFound: string;
+  of: string;
+  or: string;
+  pinToLeft: string;
+  pinToRight: string;
+  resetColumnSize: string;
+  resetOrder: string;
+  rowActions: string;
+  rowNumber: string;
+  rowNumbers: string;
+  rowsPerPage: string;
+  save: string;
+  search: string;
+  select: string;
+  selectedCountOfRowCountRowsSelected: string;
+  showAll: string;
+  showAllColumns: string;
+  showHideColumns: string;
+  showHideFilters: string;
+  showHideSearch: string;
+  sortByColumnAsc: string;
+  sortByColumnDesc: string;
+  sortedByColumnAsc: string;
+  sortedByColumnDesc: string;
+  thenBy: string;
+  toggleDensity: string;
+  toggleFullScreen: string;
+  toggleSelectAll: string;
+  toggleSelectRow: string;
+  toggleVisibility: string;
+  ungroupByColumn: string;
+  unpin: string;
+  unpinAll: string;
+  unsorted: string;
+}
 
 export interface MRT_RowModel<TData extends Record<string, any> = {}> {
   flatRows: MRT_Row<TData>[];
@@ -106,7 +204,7 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
   setColumnFilterFns: Dispatch<
     SetStateAction<{ [key: string]: MRT_FilterOption }>
   >;
-  setDensity: Dispatch<SetStateAction<'comfortable' | 'compact' | 'spacious'>>;
+  setDensity: Dispatch<SetStateAction<DensityState>>;
   setDraggingColumn: Dispatch<SetStateAction<MRT_Column<TData> | null>>;
   setDraggingRow: Dispatch<SetStateAction<MRT_Row<TData> | null>>;
   setEditingCell: Dispatch<SetStateAction<MRT_Cell<TData> | null>>;
@@ -127,7 +225,7 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
 export type MRT_TableState<TData extends Record<string, any> = {}> =
   TableState & {
     columnFilterFns: Record<string, MRT_FilterOption>;
-    density: 'comfortable' | 'compact' | 'spacious';
+    density: DensityState;
     draggingColumn: MRT_Column<TData> | null;
     draggingRow: MRT_Row<TData> | null;
     editingCell: MRT_Cell<TData> | null;
@@ -191,10 +289,12 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
   Filter?: ({
     column,
     header,
+    rangeFilterIndex,
     table,
   }: {
     column: MRT_Column<TData>;
     header: MRT_Header<TData>;
+    rangeFilterIndex?: number;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   Footer?:
@@ -265,7 +365,7 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
   enableEditing?: boolean;
   filterFn?: MRT_FilterFn<TData>;
   filterSelectOptions?: (string | { text: string; value: any })[];
-  filterVariant?: 'text' | 'select' | 'multi-select' | 'range';
+  filterVariant?: 'text' | 'select' | 'multi-select' | 'range' | 'checkbox';
   /**
    * footer must be a string. If you want custom JSX to render the footer, you can also specify a `Footer` option. (Capital F)
    */
@@ -314,10 +414,14 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
     | TableCellProps
     | (({
         cell,
+        column,
+        row,
         table,
       }: {
-        table: MRT_TableInstance<TData>;
         cell: MRT_Cell<TData>;
+        column: MRT_Column<TData>;
+        row: MRT_Row<TData>;
+        table: MRT_TableInstance<TData>;
       }) => TableCellProps);
   muiTableFooterCellProps?:
     | TableCellProps
@@ -346,6 +450,15 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
       }) => IconButtonProps);
+  muiTableHeadCellFilterCheckboxProps?:
+    | CheckboxProps
+    | (({
+        column,
+        table,
+      }: {
+        column: MRT_Column<TData>;
+        table: MRT_TableInstance<TData>;
+      }) => CheckboxProps);
   muiTableHeadCellFilterTextFieldProps?:
     | TextFieldProps
     | (({
@@ -493,9 +606,31 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     | 'state'
   > & {
     columnFilterModeOptions?: (MRT_FilterOption | string)[] | null;
+    /**
+     * The columns to display in the table. `accessorKey`s or `accessorFn`s must match keys in the `data` prop.
+     *
+     * See more info on creating columns on the official docs site:
+     * @link https://www.material-react-table.com/docs/guides/data-columns
+     * @link https://www.material-react-table.com/docs/guides/display-columns
+     *
+     * See all Columns Options on the official docs site:
+     * @link https://www.material-react-table.com/docs/api/column-options
+     */
     columns: MRT_ColumnDef<TData>[];
+    /**
+     * Pass your data as an array of objects. Objects can theoretically be any shape, but it's best to keep them consistent.
+     *
+     * See the usage guide for more info on creating columns and data:
+     * @link https://www.material-react-table.com/docs/getting-started/usage
+     */
     data: TData[];
+    /**
+     * Instead of specifying a bunch of the same options for each column, you can just change an option in the `defaultColumn` prop to change a default option for all columns.
+     */
     defaultColumn?: Partial<MRT_ColumnDef<TData>>;
+    /**
+     * Change the default options for display columns.
+     */
     defaultDisplayColumn?: Partial<MRT_ColumnDef<TData>>;
     displayColumnDefOptions?: Partial<{
       [key in MRT_DisplayColumnIds]: Partial<MRT_ColumnDef>;
@@ -531,6 +666,12 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     expandRowsFn?: (dataRow: TData) => TData[];
     icons?: Partial<MRT_Icons>;
     initialState?: Partial<MRT_TableState<TData>>;
+    /**
+     * Pass in either a locale imported from `material-react-table/locales/*` or a custom locale object.
+     * 
+     * See the localization (i18n) guide for more info:
+     * @link https://www.material-react-table.com/docs/guides/localization
+     */
     localization?: Partial<MRT_Localization>;
     muiBottomToolbarProps?:
       | ToolbarProps
@@ -699,6 +840,15 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
           table: MRT_TableInstance<TData>;
           column: MRT_Column<TData>;
         }) => IconButtonProps);
+    muiTableHeadCellFilterCheckboxProps?:
+      | CheckboxProps
+      | (({
+          column,
+          table,
+        }: {
+          column: MRT_Column<TData>;
+          table: MRT_TableInstance<TData>;
+        }) => CheckboxProps);
     muiTableHeadCellFilterTextFieldProps?:
       | TextFieldProps
       | (({
@@ -753,7 +903,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     muiTopToolbarProps?:
       | ToolbarProps
       | (({ table }: { table: MRT_TableInstance<TData> }) => ToolbarProps);
-    onDensityChange?: OnChangeFn<boolean>;
+    onDensityChange?: OnChangeFn<DensityState>;
     onDraggingColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
     onDraggingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
     onEditingCellChange?: OnChangeFn<MRT_Cell<TData> | null>;
@@ -783,6 +933,9 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     positionPagination?: 'bottom' | 'top' | 'both';
     positionToolbarAlertBanner?: 'bottom' | 'top' | 'none';
     positionToolbarDropZone?: 'bottom' | 'top' | 'none' | 'both';
+    renderBottomToolbar?:
+      | ReactNode
+      | (({ table }: { table: MRT_TableInstance<TData> }) => ReactNode);
     renderBottomToolbarCustomActions?: ({
       table,
     }: {
@@ -847,6 +1000,9 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     }: {
       table: MRT_TableInstance<TData>;
     }) => ReactNode;
+    renderTopToolbar?:
+      | ReactNode
+      | (({ table }: { table: MRT_TableInstance<TData> }) => ReactNode);
     renderTopToolbarCustomActions?: ({
       table,
     }: {
@@ -882,11 +1038,11 @@ export type Virtualizer = {
   measure: () => void;
 };
 
-export default <TData extends Record<string, any> = {}>({
+const MaterialReactTable = <TData extends Record<string, any> = {}>({
   aggregationFns,
   autoResetExpanded = false,
   columnResizeMode = 'onEnd',
-  defaultColumn = { minSize: 40, maxSize: 1000, size: 180 },
+  defaultColumn,
   defaultDisplayColumn,
   editingMode = 'modal',
   enableBottomToolbar = true,
@@ -924,68 +1080,84 @@ export default <TData extends Record<string, any> = {}>({
   positionToolbarAlertBanner = 'top',
   positionToolbarDropZone = 'top',
   rowNumberMode = 'original',
-  selectAllMode = 'all',
+  selectAllMode = 'page',
   sortingFns,
   ...rest
-}: MaterialReactTableProps<TData>) => (
-  <MRT_TableRoot
-    aggregationFns={{ ...MRT_AggregationFns, ...aggregationFns }}
-    autoResetExpanded={autoResetExpanded}
-    columnResizeMode={columnResizeMode}
-    defaultColumn={defaultColumn}
-    defaultDisplayColumn={{
-      columnDefType: 'display',
-      enableClickToCopy: false,
-      enableColumnActions: false,
-      enableColumnDragging: false,
-      enableColumnFilter: false,
-      enableColumnOrdering: false,
-      enableEditing: false,
-      enableGlobalFilter: false,
-      enableGrouping: false,
-      enableHiding: false,
-      enableResizing: false,
-      enableSorting: false,
+}: MaterialReactTableProps<TData>) => {
+  const _icons = useMemo(() => ({ ...MRT_Default_Icons, ...icons }), []);
+  const _localization = useMemo(
+    () => ({
+      ...MRT_Localization_EN,
+      ...localization,
+    }),
+    [],
+  );
+  const _aggregationFns = useMemo(
+    () => ({ ...MRT_AggregationFns, ...aggregationFns }),
+    [],
+  );
+  const _filterFns = useMemo(() => ({ ...MRT_FilterFns, ...filterFns }), []);
+  const _sortingFns = useMemo(() => ({ ...MRT_SortingFns, ...sortingFns }), []);
+  const _defaultColumn = useMemo<Partial<MRT_ColumnDef<TData>>>(
+    () => ({ ...MRT_DefaultColumn, ...defaultColumn }),
+    [],
+  );
+  const _defaultDisplayColumn = useMemo<Partial<MRT_ColumnDef<TData>>>(
+    () => ({
+      ...(MRT_DefaultDisplayColumn as Partial<MRT_ColumnDef<TData>>),
       ...defaultDisplayColumn,
-    }}
-    editingMode={editingMode}
-    enableBottomToolbar={enableBottomToolbar}
-    enableColumnActions={enableColumnActions}
-    enableColumnFilters={enableColumnFilters}
-    enableColumnOrdering={enableColumnOrdering}
-    enableColumnResizing={enableColumnResizing}
-    enableDensityToggle={enableDensityToggle}
-    enableExpandAll={enableExpandAll}
-    enableFilters={enableFilters}
-    enableFullScreenToggle={enableFullScreenToggle}
-    enableGlobalFilter={enableGlobalFilter}
-    enableGlobalFilterRankedResults={enableGlobalFilterRankedResults}
-    enableGrouping={enableGrouping}
-    enableHiding={enableHiding}
-    enableMultiRowSelection={enableMultiRowSelection}
-    enableMultiSort={enableMultiSort}
-    enablePagination={enablePagination}
-    enablePinning={enablePinning}
-    enableRowSelection={enableRowSelection}
-    enableSelectAll={enableSelectAll}
-    enableSorting={enableSorting}
-    enableStickyHeader={enableStickyHeader}
-    enableTableFooter={enableTableFooter}
-    enableTableHead={enableTableHead}
-    enableToolbarInternalActions={enableToolbarInternalActions}
-    enableTopToolbar={enableTopToolbar}
-    filterFns={{ ...MRT_FilterFns, ...filterFns }}
-    icons={{ ...MRT_Default_Icons, ...icons }}
-    localization={{ ...MRT_DefaultLocalization_EN, ...localization }}
-    positionActionsColumn={positionActionsColumn}
-    positionExpandColumn={positionExpandColumn}
-    positionGlobalFilter={positionGlobalFilter}
-    positionPagination={positionPagination}
-    positionToolbarAlertBanner={positionToolbarAlertBanner}
-    positionToolbarDropZone={positionToolbarDropZone}
-    rowNumberMode={rowNumberMode}
-    selectAllMode={selectAllMode}
-    sortingFns={{ ...MRT_SortingFns, ...sortingFns }}
-    {...rest}
-  />
-);
+    }),
+    [],
+  );
+
+  return (
+    <MRT_TableRoot
+      aggregationFns={_aggregationFns}
+      autoResetExpanded={autoResetExpanded}
+      columnResizeMode={columnResizeMode}
+      defaultColumn={_defaultColumn}
+      defaultDisplayColumn={_defaultDisplayColumn}
+      editingMode={editingMode}
+      enableBottomToolbar={enableBottomToolbar}
+      enableColumnActions={enableColumnActions}
+      enableColumnFilters={enableColumnFilters}
+      enableColumnOrdering={enableColumnOrdering}
+      enableColumnResizing={enableColumnResizing}
+      enableDensityToggle={enableDensityToggle}
+      enableExpandAll={enableExpandAll}
+      enableFilters={enableFilters}
+      enableFullScreenToggle={enableFullScreenToggle}
+      enableGlobalFilter={enableGlobalFilter}
+      enableGlobalFilterRankedResults={enableGlobalFilterRankedResults}
+      enableGrouping={enableGrouping}
+      enableHiding={enableHiding}
+      enableMultiRowSelection={enableMultiRowSelection}
+      enableMultiSort={enableMultiSort}
+      enablePagination={enablePagination}
+      enablePinning={enablePinning}
+      enableRowSelection={enableRowSelection}
+      enableSelectAll={enableSelectAll}
+      enableSorting={enableSorting}
+      enableStickyHeader={enableStickyHeader}
+      enableTableFooter={enableTableFooter}
+      enableTableHead={enableTableHead}
+      enableToolbarInternalActions={enableToolbarInternalActions}
+      enableTopToolbar={enableTopToolbar}
+      filterFns={_filterFns}
+      icons={_icons}
+      localization={_localization}
+      positionActionsColumn={positionActionsColumn}
+      positionExpandColumn={positionExpandColumn}
+      positionGlobalFilter={positionGlobalFilter}
+      positionPagination={positionPagination}
+      positionToolbarAlertBanner={positionToolbarAlertBanner}
+      positionToolbarDropZone={positionToolbarDropZone}
+      rowNumberMode={rowNumberMode}
+      selectAllMode={selectAllMode}
+      sortingFns={_sortingFns}
+      {...rest}
+    />
+  );
+};
+
+export default MaterialReactTable;

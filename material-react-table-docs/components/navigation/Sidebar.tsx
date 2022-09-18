@@ -1,4 +1,4 @@
-import { FC, Fragment } from 'react';
+import { FC, Fragment, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
@@ -14,11 +14,14 @@ import {
 import { routes } from './routes';
 
 const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
-  color: theme.palette.primary.dark,
+  color:
+    theme.palette.mode === 'dark'
+      ? theme.palette.primary.main
+      : theme.palette.primary.dark,
   cursor: 'pointer',
-  fontSize: '1rem',
-  height: '2.25rem',
-  lineHeight: '1rem',
+  fontSize: '0.9rem',
+  height: '2rem',
+  lineHeight: '0.75rem',
   padding: '0',
   transition: 'all .3s ease',
   whiteSpace: 'nowrap',
@@ -57,7 +60,8 @@ const ListItemHeaderLevel2 = styled(ListItemHeaderLevel1)(({ theme }) => ({
       ? theme.palette.grey[300]
       : theme.palette.grey[700],
   fontSize: '1rem',
-  height: '2.25rem',
+  height: '2rem',
+  lineHeight: '0.75rem',
   '> a': {
     paddingLeft: '2rem',
   },
@@ -85,6 +89,12 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
     if (isMobile) setTimeout(() => setNavOpen(false), 200);
   };
 
+  const selectedItemRef = useCallback((node, selected) => {
+    if (node && selected) {
+      node.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
   return (
     <Drawer
       // @ts-ignore
@@ -104,6 +114,7 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
           mt: '64px',
           p: 0,
           pb: '10rem',
+          scrollPaddingTop: '20%',
           transition: 'all .2s',
           width: navOpen ? '280px' : 0,
           '@media (max-width: 900px)': {
@@ -111,75 +122,113 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
           },
         }}
       >
-        {routes.map(({ href: href1, items: items1, label: label1 }) => {
-          if (items1?.length) {
-            return (
-              <Fragment key={label1}>
-                <li>
-                  <Divider />
-                </li>
-                <Link href={href1 ?? ''} passHref>
-                  <ListItemHeaderLevel1 selected={pathname === href1}>
-                    <Link href={href1 ?? ''} passHref>
-                      <MenuLink>{label1}</MenuLink>
-                    </Link>
-                  </ListItemHeaderLevel1>
-                </Link>
-                {items1?.map(
-                  ({ href: href2, label: label2, items: items2 }: any) => {
-                    if (items2?.length) {
+        {routes.map(
+          ({
+            href: href1,
+            items: items1,
+            label: label1,
+            divider: divider1,
+          }) => {
+            if (items1?.length) {
+              return (
+                <Fragment key={label1}>
+                  <li>
+                    <Divider />
+                  </li>
+                  <Link href={href1 ?? ''} passHref>
+                    <ListItemHeaderLevel1
+                      divider={divider1}
+                      selected={pathname === href1}
+                      ref={(node) => selectedItemRef(node, pathname === href1)}
+                    >
+                      <Link href={href1 ?? ''} passHref>
+                        <MenuLink>{label1}</MenuLink>
+                      </Link>
+                    </ListItemHeaderLevel1>
+                  </Link>
+                  {items1?.map(
+                    ({
+                      href: href2,
+                      label: label2,
+                      items: items2,
+                      divider: divider2,
+                    }: any) => {
+                      if (items2?.length) {
+                        return (
+                          <Fragment key={label2}>
+                            <ListItemHeaderLevel2
+                              divider={divider2}
+                              selected={pathname === href2}
+                              ref={(node) =>
+                                selectedItemRef(node, pathname === href2)
+                              }
+                            >
+                              <Link href={href2 ?? ''} passHref>
+                                <MenuLink>{label2}</MenuLink>
+                              </Link>
+                            </ListItemHeaderLevel2>
+                            {items2?.map(
+                              ({
+                                href: href3,
+                                label: label3,
+                                divider: divider3,
+                              }) => {
+                                return (
+                                  <ListItemLevel3
+                                    divider={divider3}
+                                    onClick={handleCloseMenu}
+                                    selected={pathname === href3}
+                                    ref={(node) =>
+                                      selectedItemRef(node, pathname === href3)
+                                    }
+                                    key={label3}
+                                  >
+                                    <Link href={href3 ?? ''} passHref>
+                                      <MenuLink>{label3}</MenuLink>
+                                    </Link>
+                                  </ListItemLevel3>
+                                );
+                              },
+                            )}
+                          </Fragment>
+                        );
+                      }
                       return (
-                        <Fragment key={label2}>
-                          <ListItemHeaderLevel2 selected={pathname === href2}>
-                            <Link href={href2 ?? ''} passHref>
-                              <MenuLink>{label2}</MenuLink>
-                            </Link>
-                          </ListItemHeaderLevel2>
-                          {items2?.map(({ href: href3, label: label3 }) => {
-                            return (
-                              <ListItemLevel3
-                                onClick={handleCloseMenu}
-                                selected={pathname === href3}
-                                key={label3}
-                              >
-                                <Link href={href3 ?? ''} passHref>
-                                  <MenuLink>{label3}</MenuLink>
-                                </Link>
-                              </ListItemLevel3>
-                            );
-                          })}
-                        </Fragment>
+                        <ListItemLevel2
+                          divider={divider2}
+                          onClick={handleCloseMenu}
+                          selected={pathname === href2}
+                          ref={(node) =>
+                            selectedItemRef(node, pathname === href2)
+                          }
+                          key={label2}
+                        >
+                          <Link href={href2 ?? ''} passHref>
+                            <MenuLink>{label2}</MenuLink>
+                          </Link>
+                        </ListItemLevel2>
                       );
-                    }
-                    return (
-                      <ListItemLevel2
-                        onClick={handleCloseMenu}
-                        selected={pathname === href2}
-                        key={label2}
-                      >
-                        <Link href={href2 ?? ''} passHref>
-                          <MenuLink>{label2}</MenuLink>
-                        </Link>
-                      </ListItemLevel2>
-                    );
-                  },
-                )}
-              </Fragment>
-            );
-          } else {
-            return (
-              <ListItemLevel1
-                onClick={handleCloseMenu}
-                selected={pathname === href1}
-                key={label1}
-              >
-                <Link href={href1 ?? ''} passHref>
-                  <MenuLink>{label1}</MenuLink>
-                </Link>
-              </ListItemLevel1>
-            );
-          }
-        })}
+                    },
+                  )}
+                </Fragment>
+              );
+            } else {
+              return (
+                <ListItemLevel1
+                  divider={divider1}
+                  onClick={handleCloseMenu}
+                  selected={pathname === href1}
+                  ref={(node) => selectedItemRef(node, pathname === href1)}
+                  key={label1}
+                >
+                  <Link href={href1 ?? ''} passHref>
+                    <MenuLink>{label1}</MenuLink>
+                  </Link>
+                </ListItemLevel1>
+              );
+            }
+          },
+        )}
       </List>
     </Drawer>
   );

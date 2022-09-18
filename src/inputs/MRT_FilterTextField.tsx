@@ -118,10 +118,12 @@ export const MRT_FilterTextField: FC<Props> = ({
       (event: ChangeEvent<HTMLInputElement>) => {
         let value =
           textFieldProps.type === 'date'
-            ? new Date(event.target.value)
+            ? event.target.valueAsDate
+            : textFieldProps.type === 'number'
+            ? event.target.valueAsNumber
             : event.target.value;
         if (isRangeFilter) {
-          column.setFilterValue((old: [string, string | Date]) => {
+          column.setFilterValue((old: Array<string | Date | number | null>) => {
             const newFilterValues = old ?? ['', ''];
             newFilterValues[rangeFilterIndex as number] = value;
             return newFilterValues;
@@ -171,11 +173,15 @@ export const MRT_FilterTextField: FC<Props> = ({
   };
 
   useEffect(() => {
-    handleClear();
-  }, [columnDef._filterFn]);
+    if (column.getFilterValue() === undefined) {
+      handleClear();
+    }
+  }, [column.getFilterValue()]);
 
   if (columnDef.Filter) {
-    return <>{columnDef.Filter?.({ column, header, table })}</>;
+    return (
+      <>{columnDef.Filter?.({ column, header, rangeFilterIndex, table })}</>
+    );
   }
 
   return (
@@ -208,7 +214,7 @@ export const MRT_FilterTextField: FC<Props> = ({
         }
         FormHelperTextProps={{
           sx: {
-            fontSize: '0.6rem',
+            fontSize: '0.75rem',
             lineHeight: '0.8rem',
             whiteSpace: 'nowrap',
           },
@@ -313,14 +319,13 @@ export const MRT_FilterTextField: FC<Props> = ({
         }}
         sx={(theme) => ({
           p: 0,
-          minWidth:
-            columnDef.filterVariant === 'range'
-              ? '90px'
-              : !filterChipLabel
-              ? '120px'
-              : 'auto',
+          minWidth: isRangeFilter
+            ? '100px'
+            : !filterChipLabel
+            ? '120px'
+            : 'auto',
           width: '100%',
-          '&	.MuiSelect-icon': {
+          '& .MuiSelect-icon': {
             mr: '1.5rem',
           },
           ...(textFieldProps?.sx instanceof Function
@@ -374,6 +379,7 @@ export const MRT_FilterTextField: FC<Props> = ({
         header={header}
         setAnchorEl={setAnchorEl}
         table={table}
+        setFilterValue={setFilterValue}
       />
     </>
   );

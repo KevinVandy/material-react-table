@@ -75,7 +75,7 @@ export const Contributors = () => {
                   )}`,
                   '& img': {
                     transform: 'scale(1.01)',
-                    transition: 'transform 0.2s ease-in-out',
+                    transition: 'transform 0.1s ease-in-out',
                   },
                 },
               })}

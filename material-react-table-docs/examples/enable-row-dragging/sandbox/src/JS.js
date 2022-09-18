@@ -36,7 +36,7 @@ const Example = () => {
     enableFullScreenToggle: false,
     muiTableContainerProps: {
       sx: {
-        minHeight: '400px',
+        minHeight: '320px',
       },
     },
     onDraggingRowChange: setDraggingRow,
@@ -50,11 +50,15 @@ const Example = () => {
         gridTemplateColumns: { xs: 'auto', lg: '1fr 1fr' },
         gap: '1rem',
         overflow: 'auto',
+        p: '4px',
       }}
     >
       <MaterialReactTable
         {...commonTableProps}
         data={data1}
+        defaultColumn={{
+          size: 100,
+        }}
         getRowId={(originalRow) => `table-1-${originalRow.firstName}`}
         muiTableBodyRowDragHandleProps={{
           onDragEnd: () => {

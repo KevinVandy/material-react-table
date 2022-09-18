@@ -23,7 +23,7 @@ export const MRT_ToggleGlobalFilterButton = <
     refs: { searchInputRef },
     setShowGlobalFilter,
   } = table;
-  const { showGlobalFilter } = getState();
+  const { globalFilter, showGlobalFilter } = getState();
 
   const handleToggleSearch = () => {
     setShowGlobalFilter(!showGlobalFilter);
@@ -32,7 +32,12 @@ export const MRT_ToggleGlobalFilterButton = <
 
   return (
     <Tooltip arrow title={rest?.title ?? localization.showHideSearch}>
-      <IconButton onClick={handleToggleSearch} {...rest} title={undefined}>
+      <IconButton
+        disabled={!!globalFilter}
+        onClick={handleToggleSearch}
+        {...rest}
+        title={undefined}
+      >
         {showGlobalFilter ? <SearchOffIcon /> : <SearchIcon />}
       </IconButton>
     </Tooltip>

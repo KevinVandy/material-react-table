@@ -20,6 +20,7 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({
       muiToolbarAlertBannerProps,
       muiToolbarAlertBannerChipProps,
       positionToolbarAlertBanner,
+      rowCount,
     },
   } = table;
   const { grouping, showAlertBanner } = getState();
@@ -43,7 +44,7 @@ export const MRT_ToolbarAlertBanner: FC<Props> = ({
           )
           ?.replace(
             '{rowCount}',
-            getPrePaginationRowModel().rows.length.toString(),
+            (rowCount ?? getPrePaginationRowModel().rows.length).toString(),
           )
       : null;
 

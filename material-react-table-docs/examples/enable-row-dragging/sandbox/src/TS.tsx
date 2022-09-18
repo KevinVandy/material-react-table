@@ -42,7 +42,7 @@ const Example: FC = () => {
     enableFullScreenToggle: false,
     muiTableContainerProps: {
       sx: {
-        minHeight: '400px',
+        minHeight: '320px',
       },
     },
     onDraggingRowChange: setDraggingRow,
@@ -56,6 +56,7 @@ const Example: FC = () => {
         gridTemplateColumns: { xs: 'auto', lg: '1fr 1fr' },
         gap: '1rem',
         overflow: 'auto',
+        p: '4px',
       }}
     >
       <MaterialReactTable
@@ -80,7 +81,7 @@ const Example: FC = () => {
           },
         }}
         renderTopToolbarCustomActions={() => (
-          <Typography color="success.main" variant="h4">
+          <Typography color="success.main" component="span" variant="h4">
             Nice List
           </Typography>
         )}
@@ -88,6 +89,9 @@ const Example: FC = () => {
       <MaterialReactTable
         {...commonTableProps}
         data={data2}
+        defaultColumn={{
+          size: 100,
+        }}
         getRowId={(originalRow) => `table-2-${originalRow.firstName}`}
         muiTableBodyRowDragHandleProps={{
           onDragEnd: () => {
@@ -107,7 +111,7 @@ const Example: FC = () => {
           },
         }}
         renderTopToolbarCustomActions={() => (
-          <Typography color="error.main" variant="h4">
+          <Typography color="error.main" component="span" variant="h4">
             Naughty List
           </Typography>
         )}

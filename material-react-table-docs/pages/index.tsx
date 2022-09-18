@@ -28,7 +28,8 @@ const HomePage = () => {
               xs: '1.8rem',
               sm: '3rem',
               md: '4rem',
-              lg: '6rem',
+              lg: '4.5rem',
+              xl: '5rem',
             },
             fontWeight: 'bold',
             mt: '5rem',
@@ -38,11 +39,11 @@ const HomePage = () => {
               lg: '2rem',
             },
             lineHeight: {
-              xs: '3rem',
-              sm: '4rem',
+              xs: '2.5rem',
+              sm: '3.5rem',
               md: '5rem',
-              lg: '6rem',
-              xl: '7rem',
+              lg: '5.5rem',
+              xl: '6rem',
             },
           }}
           variant="h1"
@@ -58,6 +59,19 @@ const HomePage = () => {
             })}
           >
             Material&nbsp;React&nbsp;Table
+            <Box
+              component="sup"
+              sx={{
+                fontSize: {
+                  xs: '1rem',
+                  sm: '1.2rem',
+                  md: '1.5rem',
+                  lg: '2.5rem',
+                },
+              }}
+            >
+              V1
+            </Box>
           </Box>
         </Typography>
         <Typography
@@ -68,11 +82,11 @@ const HomePage = () => {
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             transform: 'translateY(-1rem)',
-            width: '8rem',
+            // width: '8rem',
             margin: 'auto',
           })}
         >
-          Now in Beta!
+          v1.0 Released September 13, 2022 🎉
         </Typography>
         <Typography
           color="text.secondary"
@@ -81,7 +95,7 @@ const HomePage = () => {
               xs: '1.2rem',
               sm: '1.5rem',
               md: '2.2rem',
-              lg: '2.75rem',
+              lg: '2.25rem',
             },
             mb: '3rem',
             textAlign: 'center',
@@ -124,24 +138,23 @@ const HomePage = () => {
           color="text.secondary"
           sx={{
             fontSize: {
-              xs: '1.2rem',
-              md: '1.5rem',
-              lg: '2rem',
+              xs: '1.1rem',
+              md: '1.4rem',
+              lg: '1.5rem',
             },
-            fontStyle: 'italic',
             mt: '2rem',
             textAlign: 'center',
             lineHeight: {
-              xs: '1.5rem',
+              xs: '1.8rem',
               md: '2rem',
               lg: '2.5rem',
             },
             fontWeight: 'normal',
             textTransform: 'capitalize',
           }}
-          variant="h2"
+          variant="h3"
         >
-          Quickly create high quality react data tables with
+          Quickly create high-quality React data tables with
           Material&nbsp;Design
         </Typography>
         <Box

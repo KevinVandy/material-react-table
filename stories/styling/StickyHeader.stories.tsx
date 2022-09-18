@@ -72,6 +72,8 @@ export const StickyHeaderShorterTable: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableStickyHeader
+    enableRowSelection
+    enablePinning
     initialState={{ pagination: { pageSize: 25, pageIndex: 0 } }}
     muiTableContainerProps={{ sx: { maxHeight: 400 } }}
   />

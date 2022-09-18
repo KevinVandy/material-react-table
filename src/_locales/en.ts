@@ -1,88 +1,6 @@
-export interface MRT_Localization {
-  actions: string;
-  and: string;
-  cancel: string;
-  changeFilterMode: string;
-  changeSearchMode: string;
-  clearFilter: string;
-  clearSearch: string;
-  clearSort: string;
-  clickToCopy: string;
-  columnActions: string;
-  copiedToClipboard: string;
-  dropToGroupBy: string;
-  edit: string;
-  expand: string;
-  expandAll: string;
-  filterArrIncludes: string;
-  filterArrIncludesAll: string;
-  filterArrIncludesSome: string;
-  filterBetween: string;
-  filterBetweenInclusive: string;
-  filterByColumn: string;
-  filterContains: string;
-  filterEmpty: string;
-  filterEndsWith: string;
-  filterEquals: string;
-  filterEqualsString: string;
-  filterFuzzy: string;
-  filterGreaterThan: string;
-  filterGreaterThanOrEqualTo: string;
-  filterInNumberRange: string;
-  filterIncludesString: string;
-  filterIncludesStringSensitive: string;
-  filterLessThan: string;
-  filterLessThanOrEqualTo: string;
-  filterMode: string;
-  filterNotEmpty: string;
-  filterNotEquals: string;
-  filterStartsWith: string;
-  filterWeakEquals: string;
-  filteringByColumn: string;
-  grab: string;
-  groupByColumn: string;
-  groupedBy: string;
-  hideAll: string;
-  hideColumn: string;
-  max: string;
-  min: string;
-  move: string;
-  noRecordsToDisplay: string;
-  noResultsFound: string;
-  or: string;
-  pinToLeft: string;
-  pinToRight: string;
-  resetColumnSize: string;
-  resetOrder: string;
-  rowActions: string;
-  rowNumber: string;
-  rowNumbers: string;
-  save: string;
-  search: string;
-  select: string;
-  selectedCountOfRowCountRowsSelected: string;
-  showAll: string;
-  showAllColumns: string;
-  showHideColumns: string;
-  showHideFilters: string;
-  showHideSearch: string;
-  sortByColumnAsc: string;
-  sortByColumnDesc: string;
-  sortedByColumnAsc: string;
-  sortedByColumnDesc: string;
-  thenBy: string;
-  toggleDensity: string;
-  toggleFullScreen: string;
-  toggleSelectAll: string;
-  toggleSelectRow: string;
-  toggleVisibility: string;
-  ungroupByColumn: string;
-  unpin: string;
-  unpinAll: string;
-  unsorted: string;
-}
+import { MRT_Localization } from '../MaterialReactTable';
 
-export const MRT_DefaultLocalization_EN: MRT_Localization = {
+export const MRT_Localization_EN: MRT_Localization = {
   actions: 'Actions',
   and: 'and',
   cancel: 'Cancel',
@@ -123,6 +41,10 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   filterStartsWith: 'Starts With',
   filterWeakEquals: 'Equals',
   filteringByColumn: 'Filtering by {column} - {filterType} {filterValue}',
+  goToFirstPage: 'Go to first page',
+  goToLastPage: 'Go to last page',
+  goToNextPage: 'Go to next page',
+  goToPreviousPage: 'Go to previous page',
   grab: 'Grab',
   groupByColumn: 'Group by {column}',
   groupedBy: 'Grouped by ',
@@ -133,6 +55,7 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   move: 'Move',
   noRecordsToDisplay: 'No records to display',
   noResultsFound: 'No results found',
+  of: 'of',
   or: 'or',
   pinToLeft: 'Pin to left',
   pinToRight: 'Pin to right',
@@ -141,6 +64,7 @@ export const MRT_DefaultLocalization_EN: MRT_Localization = {
   rowActions: 'Row Actions',
   rowNumber: '#',
   rowNumbers: 'Row Numbers',
+  rowsPerPage: 'Rows per page',
   save: 'Save',
   search: 'Search',
   selectedCountOfRowCountRowsSelected:

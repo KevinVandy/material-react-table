@@ -32,9 +32,10 @@ export const MRT_EditRowModal = <TData extends Record<string, any> = {}>({
         <form onSubmit={(e) => e.preventDefault()}>
           <Stack
             sx={{
-              width: '100%',
-              minWidth: { xs: '300px', sm: '360px', md: '400px' },
               gap: '1.5rem',
+              minWidth: { xs: '300px', sm: '360px', md: '400px' },
+              pt: '1rem',
+              width: '100%',
             }}
           >
             {row

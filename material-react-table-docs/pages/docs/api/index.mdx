@@ -1,11 +1,14 @@
 import Head from 'next/head';
+import TableOfContentsList from '../../../components/navigation/TableOfContentsList';
+import { routes } from '../../../components/navigation/routes';
 
 <Head>
   <title>API Reference - Material React Table Docs</title>
 </Head>
 
-## API (Props and Options)
+## API Reference
 
-- [Props](api/props)
-- [Column Options](api/column-options)
-- [State Options](api/state-options)
+<TableOfContentsList
+  items={routes.find((item) => item.href === '/docs/api').items}
+  variant="heading"
+/>

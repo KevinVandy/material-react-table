@@ -8,7 +8,7 @@ const commonIconButtonStyles = {
   height: '2rem',
   ml: '10px',
   opacity: 0.5,
-  transition: 'opacity 0.2s',
+  transition: 'opacity 0.1s',
   width: '2rem',
   '&:hover': {
     opacity: 1,

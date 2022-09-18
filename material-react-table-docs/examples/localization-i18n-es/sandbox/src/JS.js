@@ -1,10 +1,16 @@
 import React from 'react';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { data, Person } from './makeData';
-import { createTheme, ThemeProvider, useTheme } from '@mui/material';
-import { esES } from '@mui/material/locale';
+
+//Import Material React Table and its Types
+import MaterialReactTable from 'material-react-table';
+
+//Import Material React Table Translations
+import { MRT_Localization_ES } from 'material-react-table/locales/es';
+
+//mock data
+import { data } from './makeData';
 
 const columns = [
+  //column definitions...
   {
     accessorKey: 'firstName',
     header: 'Primer nombre',
@@ -12,78 +18,45 @@ const columns = [
   {
     accessorKey: 'lastName',
     header: 'Apellido',
+    enableClickToCopy: true,
   },
   {
-    accessorKey: 'address',
-    header: 'Dirección',
+    accessorKey: 'age',
+    header: 'Años',
   },
-  {
-    accessorKey: 'city',
-    header: 'Ciudad',
-  },
-  {
-    accessorKey: 'state',
-    header: 'Estado',
-  },
+  //end
 ];
 
 const Example = () => {
-  const theme = useTheme();
-
   return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      enableColumnFilterModes
+      enableColumnOrdering
+      enableEditing
+      enablePinning
+      enableRowActions
+      enableRowSelection
+      enableSelectAll={false}
+      initialState={{ showColumnFilters: true, showGlobalFilter: true }}
+      localization={MRT_Localization_ES}
+    />
+  );
+};
+
+//App.tsx or similar
+import { createTheme, ThemeProvider, useTheme } from '@mui/material';
+import { esES } from '@mui/material/locale';
+
+const ExampleWithThemeProvider = () => {
+  const theme = useTheme(); //replace with your theme/createTheme
+  return (
+    //Setting Material UI locale as best practice to result in better accessibility
     <ThemeProvider theme={createTheme(theme, esES)}>
-      <MaterialReactTable
-        columns={columns}
-        data={data}
-        enableColumnOrdering
-        enableEditing
-        enablePinning
-        enableRowActions
-        enableRowSelection
-        localization={{
-          actions: 'Acciones',
-          cancel: 'Cancelar',
-          changeFilterMode: 'Cambia el modo de filtro',
-          clearFilter: 'Filtro claro',
-          clearSearch: 'Borrar búsqueda',
-          clearSort: 'Ordenar claro',
-          columnActions: 'Acciones de columna',
-          edit: 'Editar',
-          expand: 'Expandir',
-          expandAll: 'Expandir todo',
-          filterByColumn: 'Filtrar por {column}',
-          filterMode: 'Modo de filtro: {filterType}',
-          grab: 'Agarrar',
-          groupByColumn: 'Agrupar por {column}',
-          groupedBy: 'Agrupados por ',
-          hideAll: 'Ocultar todo',
-          hideColumn: 'Ocultar columna de {column}',
-          rowActions: 'Acciones de fila',
-          pinToLeft: 'Alfile a la izquierda',
-          pinToRight: 'Alfile a la derecha',
-          save: 'Salvar',
-          search: 'Búsqueda',
-          selectedCountOfRowCountRowsSelected:
-            '{selectedCount} de {rowCount} fila(s) seleccionadas',
-          showAll: 'Mostrar todo',
-          showAllColumns: 'Mostrar todas las columnas',
-          showHideColumns: 'Mostrar/Ocultar columnas',
-          showHideFilters: 'Alternar filtros',
-          showHideSearch: 'Alternar búsqueda',
-          sortByColumnAsc: 'Ordenar por {column} ascendente',
-          sortByColumnDesc: 'Ordenar por {column} descendiendo',
-          thenBy: ', entonces por ',
-          toggleDensity: 'Alternar relleno denso',
-          toggleFullScreen: 'Alternar pantalla completa',
-          toggleSelectAll: 'Seleccionar todo',
-          toggleSelectRow: 'Seleccionar fila',
-          ungroupByColumn: 'Desagrupar por {column}',
-          unpin: 'Quitar pasador',
-          unsorted: 'Sin clasificar',
-        }}
-      />
+      <Example />
     </ThemeProvider>
   );
 };
 
-export default Example;
+export default ExampleWithThemeProvider;

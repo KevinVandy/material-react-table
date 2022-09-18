@@ -10,16 +10,31 @@ interface Props {
 export const MRT_TableHead: FC<Props> = ({ table }) => {
   const {
     getHeaderGroups,
-    options: { muiTableHeadProps },
+    getState,
+    options: { enableStickyHeader, muiTableHeadProps, enableRowVirtualization },
   } = table;
+  const { isFullScreen } = getState();
 
   const tableHeadProps =
     muiTableHeadProps instanceof Function
       ? muiTableHeadProps({ table })
       : muiTableHeadProps;
 
+  const stickyHeader =
+    enableStickyHeader || enableRowVirtualization || isFullScreen;
+
   return (
-    <TableHead {...tableHeadProps}>
+    <TableHead
+      {...tableHeadProps}
+      sx={(theme) => ({
+        opacity: 0.97,
+        position: stickyHeader ? 'sticky' : undefined,
+        zIndex: stickyHeader ? 2 : undefined,
+        ...(tableHeadProps?.sx instanceof Function
+          ? tableHeadProps?.sx(theme)
+          : (tableHeadProps?.sx as any)),
+      })}
+    >
       {getHeaderGroups().map((headerGroup) => (
         <MRT_TableHeadRow
           headerGroup={headerGroup as any}

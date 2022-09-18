@@ -69,13 +69,13 @@ const data = [
     library: 'Material React Table',
     libraryLink: '#',
     freeOrLicensed: 'Free MIT',
-    bundleSize: 37,
+    bundleSize: 38,
     bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/material-react-table@latest?color=blue',
     bundlePhobiaLink:
       'https://bundlephobia.com/package/material-react-table@latest',
     description:
-      'Built on top of TanStack Table V8 and Material UI V5, Material React Table is a batteries-included react table library that attempts to provide all the table features you need while trying to stay as highly performant and lightweight as possible. Customization is treated as a top priority to let you override any styles you need to change. Initially Built in 2022, so it is still somewhat new.',
+      'Built on top of TanStack Table V8 and Material UI V5, Material React Table (MRT) is a batteries-included React table library that attempts to provide all the table features you need while trying to stay as highly performant and lightweight as possible. Customization is treated as a top priority to let you override any styles you need to change. Initially built in 2022, so it is still somewhat new.',
   },
   {
     library: 'TanStack Table (React Table)',
@@ -87,7 +87,7 @@ const data = [
     bundlePhobiaLink:
       'https://bundlephobia.com/package/@tanstack/react-table@latest',
     description:
-      'TanStack Table (formerly React Table) is a lightweight Headless UI library for building powerful tables & datagrids. No CSS or Components included. You use logic from the useReactTable hook to build your own table components. No Batteries Included, but you get total control of your markup and styles. (Material React Table is built on top of TanStack Table)',
+      'TanStack Table (formerly React Table) is a lightweight Headless UI library for building powerful tables and datagrids. No CSS or components included. You use logic from the useReactTable hook to build your own table components. No batteries included, but you get total control of your markup and styles (Material React Table is built on top of TanStack Table).',
   },
   {
     library: 'Material Table',
@@ -98,10 +98,10 @@ const data = [
       'https://badgen.net/bundlephobia/minzip/material-table?color=red',
     bundlePhobiaLink: 'https://bundlephobia.com/package/material-table@latest',
     description:
-      'A once popular Material UI table library, originally built in 2018, for creating MUI tables that includes tons of features. However, it has a very large bundle size and contains outdated and insecure dependencies. It is mostly unmaintained now, but did recently release a version that was somewhat compatible with Material UI V5.',
+      'Material Table is a once-popular Material UI table library originally built in 2018 for creating MUI tables that includes tons of features. However, it has a very large bundle size and contains outdated and insecure dependencies. It is mostly unmaintained now but did recently release a version that was somewhat compatible with Material UI V5.',
   },
   {
-    library: 'Mui Datatables',
+    library: 'MUI Datatables',
     libraryLink: 'https://github.com/gregnb/mui-datatables',
     freeOrLicensed: 'Free MIT',
     bundleSize: 95,
@@ -109,19 +109,19 @@ const data = [
       'https://badgen.net/bundlephobia/minzip/mui-datatables?color=orange',
     bundlePhobiaLink: 'https://bundlephobia.com/package/mui-datatables@latest',
     description:
-      'A solid Material UI based table library that was originally built in 2017. It has a lot of features and is very customizable. However, it is not as lightweight as MRT and has a lot of dependencies. The library appears to still be kept up to date occasionally. Some of the UI layouts in Mui Datatables were inspiration for Material React Table.',
+      'MUI Datatables is a solid Material UI-based table library that was originally built in 2017. It has a lot of features and is very customizable. However, it is not as lightweight as MRT and has a lot of dependencies. The library appears to still be kept up to date occasionally. Some of the UI layouts in MUI Datatables served as inspiration for Material React Table.',
   },
   {
     library: 'MUI X Data Grid MIT/Pro/Premium',
     libraryLink: 'https://mui.com/store/items/mui-x-premium/',
     freeOrLicensed: 'MIT or Paid License',
-    bundleSize: 105,
+    bundleSize: 110,
     bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/@mui/x-data-grid-pro?color=orange',
     bundlePhobiaLink:
       'https://bundlephobia.com/package/@mui/x-data-grid-pro@latest',
     description:
-      'One of the best Material UI Data Grid options available and it comes directly from MUI. It includes the full suite of features you may need, but it requires a paid license for many of the advanced features.',
+      'MUI X Data Grid MIT/Pro/Premium is one of the best Material UI Data Grid options available and it comes directly from MUI. It includes the full suite of features you may need but requires a paid license for many of the advanced features.',
   },
   {
     library: 'AG Grid Community/Enterprise',
@@ -133,7 +133,7 @@ const data = [
     bundlePhobiaLink:
       'https://bundlephobia.com/package/ag-grid-enterprise@latest',
     description:
-      'Arguably the best table library of all time, but many of the advanced features require an expensive paid license. It appears to have a very large bundle size, though this is a bit misleading because it is tree-shakable, and includes a lot of the UI components in the bundle. It is not built on top of Material UI, but it does follow Material Design, so it is definitely relevant to this comparison.',
+      'AG Grid Community/Enterprise is arguably the best table library of all time, but many of the advanced features require an expensive paid license. It appears to have a very large bundle size, although this is a bit misleading because it is tree-shakable and includes a lot of the UI components in the bundle. It is not built on top of Material UI, but it does follow Material Design, so it is definitely relevant to this comparison.',
   },
 ];
 

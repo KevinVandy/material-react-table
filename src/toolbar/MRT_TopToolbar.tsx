@@ -13,10 +13,11 @@ export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
   backgroundColor: lighten(theme.palette.background.default, 0.04),
   backgroundImage: 'none',
   display: 'grid',
+  flexWrap: 'wrap-reverse',
   minHeight: '3.5rem',
   overflow: 'hidden',
   p: '0 !important',
-  transition: 'all 0.2s ease-in-out',
+  transition: 'all 0.1s ease-in-out',
   zIndex: 1,
 });
 

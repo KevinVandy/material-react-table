@@ -10,12 +10,56 @@ import Head from 'next/head';
 
 ## Changelog
 
-### Pre 1.0.0 breaking changes
+### V1
 
-While MRT is pre-1.0, breaking changes are subject to occur. MRT should hit 1.0 by August 2022 and become stable.
+#### v1.0.11 (2022-09-17)
 
-TanStack Table 8.1 had some breaking changes that will be reflected here in MRT v0.19.0
+- Fixed Sticky Header with pinned columns in full screen mode
 
+#### v1.0.10 (2022-09-17)
+
+- Added ru translations that can be imported from `'material-react-table/locales/ru'`
+
+#### v1.0.9 (2022-09-17)
+
+- Added de translations that can be imported from `'material-react-table/locales/de'`
+
+#### v1.0.8 (2022-09-16)
+
+- Update es translations
+
+#### v1.0.7 (2022-09-15)
+
+- Remove unnecessary memo that was causing issues with aggregated cells not updating
+
+#### v1.0.6 (2022-09-15)
+
+- Fixed Actions Column sometimes forced to be first column
+
+#### v1.0.5 (2022-09-15)
+
+- Fixed Mixed Header Groups levels not created with correct column order state
+
+#### v1.0.4 (2022-09-14)
+
+- Added cs translations that can be imported from `'material-react-table/locales/cs'`
+
+#### v1.0.3 (2022-09-14)
+
+- Fixed sticky header z-index issue with select checkboxes and expand buttons
+- Added pl translations that can be imported from `'material-react-table/locales/pl'`
+
+#### v1.0.2 (2022-09-13)
+
+- Added es translations that can be imported from `'material-react-table/locales/es'`
+
+#### v1.0.1 (2022-09-13)
+
+- Initial Stable Release
+
+### Pre 1.0 breaking changes
+
+- v1.0.0-beta.16 - `selectAllMode` default value changed to `"page"`
 - v1.0.0-beta.6 - `onColumnDrop` and `onRowDrop` props removed, since they can easily be hooked up manually in `muiTableBodyRowCellDragHandleProps`
 - v0.41.0 - Filter start icon will no longer be shown if `enableColumnFilterModes` is not enabled
 - v0.40.7 - `enabledGlobalFilterOptions` renamed to `globalFilterModeOptions`
@@ -43,6 +87,10 @@ TanStack Table 8.1 had some breaking changes that will be reflected here in MRT 
 
 ## Roadmap
 
-A beta release is slated to be released by August 2022, and a stable release should follow shortly thereafter.
+### V1 (2022)
 
-Most development now remains in fully fleshing out the docs and solving edge cases. Filtering and Aggregation could still see a lot of improvements in the near future.
+The main focus for additional releases for V1 will be adding more locales and improving the documentation.
+
+### V2
+
+No work has started on V2 yet, but the main focus will be to take advantage of React 18 concurrent mode features to improve performance.

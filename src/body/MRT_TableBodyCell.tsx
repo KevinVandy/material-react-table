@@ -68,7 +68,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   const mcTableCellBodyProps =
     columnDef.muiTableBodyCellProps instanceof Function
-      ? columnDef.muiTableBodyCellProps({ cell, table })
+      ? columnDef.muiTableBodyCellProps({ cell, column, row, table })
       : columnDef.muiTableBodyCellProps;
 
   const tableCellProps = {

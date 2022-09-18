@@ -89,6 +89,9 @@ export const RightAlignNumberColumn: Story<MaterialReactTableProps> = () => (
         muiTableBodyCellProps: {
           align: 'right',
         },
+        muiTableHeadCellProps: {
+          align: 'right',
+        },
       },
       {
         header: 'Address',

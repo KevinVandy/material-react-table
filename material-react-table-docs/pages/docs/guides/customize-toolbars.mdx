@@ -31,8 +31,10 @@ This guide will show you how to hide or customize the Top and Bottom Toolbars in
       'positionPagination',
       'positionToolbarAlertBanner',
       'positionToolbarDropZone',
+      'renderBottomToolbar',
       'renderBottomToolbarCustomActions',
       'renderToolbarInternalActions',
+      'renderTopToolbar',
       'renderTopToolbarCustomActions',
     ])
   }
@@ -184,4 +186,46 @@ However, you can re-purpose this alert banner to show your own custom messages t
     showProgressBars: isFetching,
   }}
 />
+```
+
+### Override with Custom Toolbar Components
+
+If you want to completely override the default toolbar components, you can do so by passing in your own custom components to the `renderTopToolbar` and `renderBottomToolbar` props.
+
+The drawback to this approach is that you will not get all the automatic features of the default toolbar components, such as the automatic alert banner, progress bars, etc. You will have to implement all of that yourself if you still want those features.
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  renderTopToolbar={({ table }) => <Box></Box>}
+  renderBottomToolbar={({ table }) => <Box></Box>}
+/>
+```
+
+#### Import MRT Components for Custom Toolbars
+
+If you are using a custom toolbar, you can still import some of the built-in MRT components to use in your custom toolbar. For example, you can import all of the built-in internal toolbar icon buttons components and use them in your custom toolbar.
+
+```jsx
+import MaterialReactTable, {
+  MRT_ShowHideColumnsButton, // import the built-in show/hide columns button
+  MRT_FullScreenToggleButton, // import the built-in full screen toggle button
+} from 'material-react-table';
+//...
+return (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    renderTopToolbar={({ table }) => (
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Typography>Custom Toolbar</Typography>
+        <Box>
+          <MRT_ShowHideColumnsButton table={table} />
+          <MRT_FullScreenToggleButton table={table} />
+        </Box>
+      </Box>
+    )}
+  />
+);
 ```

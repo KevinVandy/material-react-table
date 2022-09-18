@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { Paper } from '@mui/material';
 import { MRT_TopToolbar } from '../toolbar/MRT_TopToolbar';
 import { MRT_BottomToolbar } from '../toolbar/MRT_BottomToolbar';
@@ -12,20 +12,16 @@ interface Props {
 export const MRT_TablePaper: FC<Props> = ({ table }) => {
   const {
     getState,
-    options: { enableBottomToolbar, enableTopToolbar, muiTablePaperProps },
+    options: {
+      enableBottomToolbar,
+      enableTopToolbar,
+      muiTablePaperProps,
+      renderBottomToolbar,
+      renderTopToolbar,
+    },
     refs: { tablePaperRef },
   } = table;
   const { isFullScreen } = getState();
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if (isFullScreen) {
-        document.body.style.height = '100vh';
-      } else {
-        document.body.style.height = 'auto';
-      }
-    }
-  }, [isFullScreen]);
 
   const tablePaperProps =
     muiTablePaperProps instanceof Function
@@ -44,24 +40,34 @@ export const MRT_TablePaper: FC<Props> = ({ table }) => {
         }
       }}
       sx={(theme) => ({
-        transition: 'all 0.2s ease-in-out',
+        transition: 'all 0.1s ease-in-out',
         ...(tablePaperProps?.sx instanceof Function
           ? tablePaperProps?.sx(theme)
           : (tablePaperProps?.sx as any)),
       })}
       style={{
         ...tablePaperProps?.style,
-        height: isFullScreen ? '100vh' : undefined,
-        margin: isFullScreen ? '0' : undefined,
-        maxHeight: isFullScreen ? '100vh' : undefined,
-        maxWidth: isFullScreen ? '100vw' : undefined,
-        padding: isFullScreen ? '0' : undefined,
-        width: isFullScreen ? '100vw' : undefined,
+        ...(isFullScreen
+          ? {
+              height: '100vh',
+              margin: 0,
+              maxHeight: '100vh',
+              maxWidth: '100vw',
+              padding: 0,
+              width: '100vw',
+            }
+          : {}),
       }}
     >
-      {enableTopToolbar && <MRT_TopToolbar table={table} />}
+      {enableTopToolbar &&
+        (renderTopToolbar instanceof Function
+          ? renderTopToolbar({ table })
+          : renderTopToolbar ?? <MRT_TopToolbar table={table} />)}
       <MRT_TableContainer table={table} />
-      {enableBottomToolbar && <MRT_BottomToolbar table={table} />}
+      {enableBottomToolbar &&
+        (renderBottomToolbar instanceof Function
+          ? renderBottomToolbar({ table })
+          : renderBottomToolbar ?? <MRT_BottomToolbar table={table} />)}
     </Paper>
   );
 };
