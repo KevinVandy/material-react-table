@@ -1,6 +1,7 @@
 import React, {
   DragEvent,
   FC,
+  memo,
   MouseEvent,
   RefObject,
   useEffect,
@@ -251,3 +252,8 @@ export const MRT_TableBodyCell: FC<Props> = ({
     </TableCell>
   );
 };
+
+export const Memo_MRT_TableBodyCell = memo(
+  MRT_TableBodyCell,
+  (prev, next) => next.cell === prev.cell,
+);

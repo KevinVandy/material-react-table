@@ -1,8 +1,8 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import { useVirtual } from 'react-virtual'; //stuck on v2 for now
 // import { useVirtualizer, Virtualizer } from '@tanstack/react-virtual';
 import { TableBody, Typography } from '@mui/material';
-import { MRT_TableBodyRow } from './MRT_TableBodyRow';
+import { Memo_MRT_TableBodyRow, MRT_TableBodyRow } from './MRT_TableBodyRow';
 import { rankGlobalFuzzy } from '../sortingFns';
 import type { MRT_Row, MRT_TableInstance } from '..';
 
@@ -22,6 +22,7 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
       localization,
       manualFiltering,
       manualSorting,
+      memoMode,
       muiTableBodyProps,
       virtualizerInstanceRef,
       virtualizerProps,
@@ -148,16 +149,19 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
               const row = enableRowVirtualization
                 ? (rows[rowOrVirtualRow.index] as MRT_Row)
                 : (rowOrVirtualRow as MRT_Row);
-              return (
-                <MRT_TableBodyRow
-                  key={row.id}
-                  row={row}
-                  rowIndex={
-                    enableRowVirtualization ? rowOrVirtualRow.index : rowIndex
-                  }
-                  table={table}
-                  virtualRow={enableRowVirtualization ? rowOrVirtualRow : null}
-                />
+              const props = {
+                key: row.id,
+                row,
+                rowIndex: enableRowVirtualization
+                  ? rowOrVirtualRow.index
+                  : rowIndex,
+                table,
+                virturalRow: enableRowVirtualization ? rowOrVirtualRow : null,
+              };
+              return memoMode === 'row' ? (
+                <Memo_MRT_TableBodyRow {...props} />
+              ) : (
+                <MRT_TableBodyRow {...props} />
               );
             },
           )}
@@ -171,3 +175,5 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
     </TableBody>
   );
 };
+
+export const Memo_MRT_TableBody = memo(MRT_TableBody, () => true);

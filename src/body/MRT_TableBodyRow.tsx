@@ -1,6 +1,6 @@
-import React, { DragEvent, FC, useRef } from 'react';
+import React, { DragEvent, FC, memo, useRef } from 'react';
 import { darken, lighten, TableRow, useTheme } from '@mui/material';
-import { MRT_TableBodyCell } from './MRT_TableBodyCell';
+import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import type { MRT_Row, MRT_TableInstance } from '..';
 
@@ -21,7 +21,12 @@ export const MRT_TableBodyRow: FC<Props> = ({
   const {
     getIsSomeColumnsPinned,
     getState,
-    options: { enableRowOrdering, muiTableBodyRowProps, renderDetailPanel },
+    options: {
+      enableRowOrdering,
+      memoMode,
+      muiTableBodyRowProps,
+      renderDetailPanel,
+    },
     setHoveredRow,
   } = table;
   const { draggingRow, hoveredRow } = getState();
@@ -69,7 +74,7 @@ export const MRT_TableBodyRow: FC<Props> = ({
           backgroundColor: lighten(theme.palette.background.default, 0.06),
           opacity:
             draggingRow?.id === row.id || hoveredRow?.id === row.id ? 0.5 : 1,
-          transition: 'all 0.1s ease-in-out',
+          transition: 'all 150ms ease-in-out',
           '&:hover td': {
             backgroundColor:
               tableRowProps?.hover !== false && getIsSomeColumnsPinned()
@@ -84,16 +89,21 @@ export const MRT_TableBodyRow: FC<Props> = ({
           ...draggingBorders,
         })}
       >
-        {row?.getVisibleCells()?.map?.((cell) => (
-          <MRT_TableBodyCell
-            cell={cell}
-            enableHover={tableRowProps?.hover !== false}
-            key={cell.id}
-            rowIndex={rowIndex}
-            rowRef={rowRef}
-            table={table}
-          />
-        ))}
+        {row?.getVisibleCells()?.map?.((cell) => {
+          const props = {
+            cell,
+            enableHover: tableRowProps?.hover !== false,
+            key: cell.id,
+            rowIndex,
+            rowRef,
+            table,
+          };
+          return memoMode === 'cell' ? (
+            <Memo_MRT_TableBodyCell {...props} />
+          ) : (
+            <MRT_TableBodyCell {...props} />
+          );
+        })}
       </TableRow>
       {renderDetailPanel && !row.getIsGrouped() && (
         <MRT_TableDetailPanel row={row} table={table} />
@@ -101,3 +111,8 @@ export const MRT_TableBodyRow: FC<Props> = ({
     </>
   );
 };
+
+export const Memo_MRT_TableBodyRow = memo(
+  MRT_TableBodyRow,
+  (prev, next) => prev.row === next.row,
+);

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Table } from '@mui/material';
 import { MRT_TableHead } from '../head/MRT_TableHead';
-import { MRT_TableBody } from '../body/MRT_TableBody';
+import { Memo_MRT_TableBody, MRT_TableBody } from '../body/MRT_TableBody';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
 import { MRT_TableInstance } from '..';
 
@@ -18,6 +18,7 @@ export const MRT_Table: FC<Props> = ({ table }) => {
       enableStickyHeader,
       enableTableFooter,
       enableTableHead,
+      memoMode,
       muiTableProps,
     },
   } = table;
@@ -43,7 +44,11 @@ export const MRT_Table: FC<Props> = ({ table }) => {
       })}
     >
       {enableTableHead && <MRT_TableHead table={table} />}
-      <MRT_TableBody table={table} />
+      {memoMode === 'table-body' ? (
+        <Memo_MRT_TableBody table={table} />
+      ) : (
+        <MRT_TableBody table={table} />
+      )}
       {enableTableFooter && <MRT_TableFooter table={table} />}
     </Table>
   );

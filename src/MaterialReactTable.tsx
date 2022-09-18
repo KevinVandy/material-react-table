@@ -668,11 +668,12 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     initialState?: Partial<MRT_TableState<TData>>;
     /**
      * Pass in either a locale imported from `material-react-table/locales/*` or a custom locale object.
-     * 
+     *
      * See the localization (i18n) guide for more info:
      * @link https://www.material-react-table.com/docs/guides/localization
      */
     localization?: Partial<MRT_Localization>;
+    memoMode?: 'cell' | 'row' | 'table-body' | 'none';
     muiBottomToolbarProps?:
       | ToolbarProps
       | (({ table }: { table: MRT_TableInstance<TData> }) => ToolbarProps);
