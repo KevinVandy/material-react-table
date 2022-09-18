@@ -138,7 +138,7 @@ If you are working with large data sets, you may want to let your back-end apis 
 If you need to sort your data in a back-end api, then you will also probably need access to the internal `sorting` state from the table. You can do this by managing the `sorting` state yourself, and then passing it to the table via the `state` prop. You can also pass a callback function to the `onSortingChange` prop, which will be called whenever the `sorting` state changes internally in the table
 
 ```tsx
-const [sorting, setSorting] = useState({});
+const [sorting, setSorting] = useState([]);
 
 useEffect(() => {
   //do something with the sorting state when it changes
