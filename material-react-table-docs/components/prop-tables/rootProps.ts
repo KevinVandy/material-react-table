@@ -15,7 +15,7 @@ export const rootProps: PropRow[] = [
   {
     propName: 'aggregationFns',
     defaultValue: '',
-    description: `This option allows you to define custom aggregation functions that can be referenced in a column's aggegationFn option by their key`,
+    description: `This option allows you to define custom aggregation functions that can be referenced in a column's aggregationFn option by their key`,
     link: 'https://tanstack.com/table/v8/docs/api/features/grouping#aggregationfns',
     linkText: 'TanStack Table Grouping Docs',
     required: false,
@@ -696,7 +696,7 @@ export const rootProps: PropRow[] = [
     linkText: 'TanStack Table Filters Docs',
     required: false,
     source: 'TanStack Table',
-    type: 'getFacetedRowModel = () => RowModel<TData>',
+    type: '() => RowModel<TData>',
   },
   {
     propName: 'getGroupedRowModel',
@@ -814,28 +814,19 @@ export const rootProps: PropRow[] = [
   {
     propName: 'initialState',
     defaultValue: '',
-    description: 'Use this option to optionally pass initial state to the table. This state will be used when resetting various table states either automatically by the table (eg. options.autoResetPagination) or via functions like table.resetRowSelection(). Most reset function allow you optionally pass a flag to reset to a blank/default state instead of the initial state. Table state will not be reset when this object changes, which also means that the initial state object does not need to be stable.',
-    link: 'https://tanstack.com/table/v8/docs/api/core/table#initialstate',
-    linkText: 'TanStack Table Core Docs',
+    description:
+      'Use this option to optionally pass initial state to the table. This state will be used when resetting various table states either automatically by the table (eg. options.autoResetPagination) or via functions like table.resetRowSelection(). Most reset function allow you optionally pass a flag to reset to a blank/default state instead of the initial state. Table state will not be reset when this object changes, which also means that the initial state object does not need to be stable.',
+    link: '/docs/guides/table-state-management#populate-initial-state',
+    linkText: 'Table State Management Guide',
     required: false,
-    source: 'TanStack Table',
-    type: `Partial<
-    VisibilityTableState &
-    ColumnOrderTableState &
-    ColumnPinningTableState &
-    FiltersTableState &
-    SortingTableState &
-    ExpandedTableState &
-    GroupingTableState &
-    ColumnSizingTableState &
-    PaginationTableState &
-    RowSelectionTableState
-  >`,
+    source: 'MRT',
+    type: `Partial<MRT_TableState<TData>>`,
   },
   {
     propName: 'isMultiSortEvent',
     defaultValue: '',
-    description: 'Pass a custom function that will be used to determine if a multi-sort event should be triggered. It is passed the event from the sort toggle handler and should return true if the event should trigger a multi-sort.',
+    description:
+      'Pass a custom function that will be used to determine if a multi-sort event should be triggered. It is passed the event from the sort toggle handler and should return true if the event should trigger a multi-sort.',
     link: 'https://tanstack.com/table/v8/docs/api/features/sorting#ismultisortevent',
     linkText: 'TanStack Table Sorting Docs',
     required: false,
@@ -846,16 +837,17 @@ export const rootProps: PropRow[] = [
     propName: 'localization',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: '/docs/guides/localization#localization-(i18n)-guide',
+    linkText: 'Localization (i18n) Guide',
     required: false,
-    source: '',
-    type: '',
+    source: 'MRT',
+    type: 'MRT_Localization',
   },
   {
     propName: 'manualExpanding',
     defaultValue: '',
-    description: 'Enables manual row expansion. If this is set to true, getExpandedRowModel will not be used to expand rows and you would be expected to perform the expansion in your own data model. This is useful if you are doing server-side expansion.',
+    description:
+      'Enables manual row expansion. If this is set to true, getExpandedRowModel will not be used to expand rows and you would be expected to perform the expansion in your own data model. This is useful if you are doing server-side expansion.',
     link: 'https://tanstack.com/table/v8/docs/api/features/expanding#manualexpanding',
     linkText: 'TanStack Table Expanding Docs',
     required: false,
@@ -865,7 +857,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'manualFiltering',
     defaultValue: '',
-    description: 'Disables the getFilteredRowModel from being used to filter data. This may be useful if your table needs to dynamically support both client-side and server-side filtering.',
+    description:
+      'Disables the getFilteredRowModel from being used to filter data. This may be useful if your table needs to dynamically support both client-side and server-side filtering.',
     link: 'https://tanstack.com/table/v8/docs/api/features/filters#manualfiltering',
     linkText: 'TanStack Table Filters Docs',
     required: false,
@@ -875,7 +868,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'manualGrouping',
     defaultValue: '',
-    description: 'Enables manual grouping. If this option is set to true, the table will not automatically group rows using getGroupedRowModel() and instead will expect you to manually group the rows before passing them to the table. This is useful if you are doing server-side grouping and aggregation.',
+    description:
+      'Enables manual grouping. If this option is set to true, the table will not automatically group rows using getGroupedRowModel() and instead will expect you to manually group the rows before passing them to the table. This is useful if you are doing server-side grouping and aggregation.',
     link: 'https://tanstack.com/table/v8/docs/api/features/grouping#manualgrouping',
     linkText: 'TanStack Table Grouping Docs',
     required: false,
@@ -885,7 +879,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'manualPagination',
     defaultValue: '',
-    description: 'Enables manual pagination. If this option is set to true, the table will not automatically paginate rows using getPaginationRowModel() and instead will expect you to manually paginate the rows before passing them to the table. This is useful if you are doing server-side pagination and aggregation.',
+    description:
+      'Enables manual pagination. If this option is set to true, the table will not automatically paginate rows using getPaginationRowModel() and instead will expect you to manually paginate the rows before passing them to the table. This is useful if you are doing server-side pagination and aggregation.',
     link: 'https://tanstack.com/table/v8/docs/api/features/pagination#manualpagination',
     linkText: 'TanStack Table Pagination Docs',
     required: false,
@@ -895,7 +890,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'manualSorting',
     defaultValue: '',
-    description: 'Enables manual sorting for the table. If this is true, you will be expected to sort your data before it is passed to the table. This is useful if you are doing server-side sorting.',
+    description:
+      'Enables manual sorting for the table. If this is true, you will be expected to sort your data before it is passed to the table. This is useful if you are doing server-side sorting.',
     link: 'https://tanstack.com/table/v8/docs/api/features/sorting#manualsorting',
     linkText: 'TanStack Table Sorting Docs',
     required: false,
@@ -917,7 +913,7 @@ export const rootProps: PropRow[] = [
     defaultValue: '',
     description: '',
     link: '/docs/guides/memoize-components',
-    linkText: '',
+    linkText: 'Memoize Components Guide',
     required: false,
     source: 'MRT',
     type: `'cell' | 'row' | 'table-body'`,
@@ -925,7 +921,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'mergeOptions',
     defaultValue: '',
-    description: 'This option is used to optionally implement the merging of table options. Some framework like solid-js use proxies to track reactivity and usage, so merging reactive objects needs to be handled carefully. This option inverts control of this process to the adapter.',
+    description:
+      'This option is used to optionally implement the merging of table options. Some framework like solid-js use proxies to track reactivity and usage, so merging reactive objects needs to be handled carefully. This option inverts control of this process to the adapter.',
     link: 'https://tanstack.com/table/v8/docs/api/core/table#mergeoptions',
     linkText: 'TanStack Table Core Docs',
     required: false,
@@ -935,7 +932,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'meta',
     defaultValue: '',
-    description: 'You can pass any object to options.meta and access it anywhere the table is available via table.options.meta This type is global to all tables.',
+    description:
+      'You can pass any object to options.meta and access it anywhere the table is available via table.options.meta This type is global to all tables.',
     link: 'https://tanstack.com/table/v8/docs/api/core/table#meta',
     linkText: 'TanStack Table Core Docs',
     required: false,
@@ -1096,8 +1094,8 @@ export const rootProps: PropRow[] = [
     propName: 'muiTableFooterCellProps',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: 'https://mui.com/material-ui/api/table-cell/#props',
+    linkText: 'Material UI TableCell Props',
     required: false,
     source: 'Material UI',
     type: 'TableCellProps| ({table, column}) => TableCellProps',
@@ -1116,8 +1114,8 @@ export const rootProps: PropRow[] = [
     propName: 'muiTableFooterRowProps',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: 'https://mui.com/material-ui/api/table-row/#props',
+    linkText: 'Material UI TableRow Props',
     required: false,
     source: 'Material UI',
     type: 'TableRowProps | ({table, footerGroup}) => TableRowProps',
@@ -1126,8 +1124,8 @@ export const rootProps: PropRow[] = [
     propName: 'muiTableHeadCellColumnActionsButtonProps',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: 'https://mui.com/material-ui/api/icon-button/#props',
+    linkText: 'Material UI IconButton Props',
     required: false,
     source: 'Material UI',
     type: 'IconButtonProps | (({table, column}) => IconButtonProps);',
@@ -1136,8 +1134,8 @@ export const rootProps: PropRow[] = [
     propName: 'muiTableHeadCellDragHandleProps',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: 'https://mui.com/material-ui/api/icon-button/#props',
+    linkText: 'Material UI IconButton Props',
     required: false,
     source: 'Material UI',
     type: 'IconButtonProps | ({table, column}) => IconButtonProps',
@@ -1146,70 +1144,70 @@ export const rootProps: PropRow[] = [
     propName: 'muiTableHeadCellFilterCheckboxProps',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: 'https://mui.com/material-ui/api/checkbox/#props',
+    linkText: 'Material UI Checkbox Props',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: 'CheckboxProps | ({ column, table}) => CheckboxProps',
   },
   {
     propName: 'muiTableHeadCellFilterTextFieldProps',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: 'https://mui.com/material-ui/api/text-field/#props',
+    linkText: 'Material UI TextField Props',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: 'TextFieldProps | ({ table, column, rangeFilterIndex}) => TextFieldProps',
   },
   {
     propName: 'muiTableHeadCellProps',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: 'https://mui.com/material-ui/api/table-cell/#props',
+    linkText: 'Material UI TableCell Props',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: 'TableCellProps | ({ table, column}) => TableCellProps',
   },
   {
     propName: 'muiTableHeadProps',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: 'https://mui.com/material-ui/api/table-head/#props',
+    linkText: 'Material UI TableHead Props',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: 'TableHeadProps | ({ table }) => TableHeadProps',
   },
   {
     propName: 'muiTableHeadRowProps',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: 'https://mui.com/material-ui/api/table-row/#props',
+    linkText: 'Material UI TableRow Props',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: 'TableRowProps | ({ table, headerGroup}) => TableRowProps',
   },
   {
     propName: 'muiTablePaginationProps',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: 'https://mui.com/material-ui/api/table-pagination/#props',
+    linkText: 'Material UI TablePagination Props',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: 'Partial<TablePaginationProps> | ({ table }) => Partial<TablePaginationProps>',
   },
   {
     propName: 'muiTablePaperProps',
     defaultValue: '',
     description: '',
-    link: 'https://mui.com/material-ui/api/paper/',
+    link: 'https://mui.com/material-ui/api/paper/#props',
     linkText: 'MUI Paper API Docs',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: 'PaperProps | ({ table }} => PaperProps',
   },
   {
@@ -1226,46 +1224,47 @@ export const rootProps: PropRow[] = [
     propName: 'muiToolbarAlertBannerChipProps',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: 'https://mui.com/material-ui/api/chip/#props',
+    linkText: 'Material UI Chip Props',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: 'ChipProps| ({ table }} => ChipProps',
   },
   {
     propName: 'muiToolbarAlertBannerProps',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: 'https://mui.com/material-ui/api/alert/#props',
+    linkText: 'Material UI Alert Props',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: 'AlertProps | ({ table }) => AlertProps',
   },
   {
     propName: 'muiBottomToolbarProps',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: 'https://mui.com/material-ui/api/toolbar/#props',
+    linkText: 'Material UI Toolbar Props',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: 'ToolbarProps | ({ table }) => ToolbarProps',
   },
   {
     propName: 'muiTopToolbarProps',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: 'https://mui.com/material-ui/api/toolbar/#props',
+    linkText: 'Material UI Toolbar Props',
     required: false,
-    source: '',
+    source: 'Material UI',
     type: 'ToolbarProps | ({ table }) => ToolbarProps',
   },
   {
     propName: 'onColumnFiltersChange',
     defaultValue: '',
-    description: 'If provided, this function will be called with an updaterFn when state.columnFilters changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
+    description:
+      'If provided, this function will be called with an updaterFn when state.columnFilters changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
     link: 'https://tanstack.com/table/v8/docs/api/features/filters#oncolumnfilterschange',
     linkText: 'TanStack Table Filter Docs',
     required: false,
@@ -1274,7 +1273,8 @@ export const rootProps: PropRow[] = [
   },
   {
     propName: 'onColumnOrderChange',
-    defaultValue: 'If provided, this function will be called with an updaterFn when state.columnOrder changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
+    defaultValue:
+      'If provided, this function will be called with an updaterFn when state.columnOrder changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
     description: '',
     link: 'https://tanstack.com/table/v8/docs/api/features/column-ordering#oncolumnorderchange',
     linkText: 'TanStack Table Column Ordering Docs',
@@ -1285,7 +1285,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'onColumnPinningChange',
     defaultValue: '',
-    description: 'If provided, this function will be called with an updaterFn when state.columnPinning changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
+    description:
+      'If provided, this function will be called with an updaterFn when state.columnPinning changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
     link: 'https://tanstack.com/table/v8/docs/api/features/column-pinning#oncolumnpinningchange',
     linkText: 'TanStack Table Column Pinning Docs',
     required: false,
@@ -1295,7 +1296,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'onColumnSizingChange',
     defaultValue: '',
-    description: 'This optional function will be called when the columnSizing state changes. If you provide this function, you will be responsible for maintaining its state yourself. You can pass this state back to the table via the state.columnSizing table option.',
+    description:
+      'This optional function will be called when the columnSizing state changes. If you provide this function, you will be responsible for maintaining its state yourself. You can pass this state back to the table via the state.columnSizing table option.',
     link: 'https://tanstack.com/table/v8/docs/api/features/column-sizing#oncolumnsizingchange',
     linkText: 'TanStack Table Column Sizing Docs',
     required: false,
@@ -1305,7 +1307,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'onColumnSizingInfoChange',
     defaultValue: '',
-    description: 'This optional function will be called when the columnSizingInfo state changes. If you provide this function, you will be responsible for maintaining its state yourself. You can pass this state back to the table via the state.columnSizingInfo table option.',
+    description:
+      'This optional function will be called when the columnSizingInfo state changes. If you provide this function, you will be responsible for maintaining its state yourself. You can pass this state back to the table via the state.columnSizingInfo table option.',
     link: 'https://tanstack.com/table/v8/docs/api/features/column-sizing#oncolumnsizinginfochange',
     linkText: 'TanStack Table Column Sizing Docs',
     required: false,
@@ -1315,7 +1318,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'onColumnVisibilityChange',
     defaultValue: '',
-    description: 'If provided, this function will be called with an updaterFn when state.columnVisibility changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
+    description:
+      'If provided, this function will be called with an updaterFn when state.columnVisibility changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
     link: 'https://tanstack.com/table/v8/docs/api/features/column-visibility#oncolumnvisibilitychange',
     linkText: 'TanStack Table Column Visibility Docs',
     required: false,
@@ -1375,7 +1379,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'onGlobalFilterFnChange',
     defaultValue: '',
-    description: 'If provided, this function will be called with an updaterFn when state.globalFilter changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
+    description:
+      'If provided, this function will be called with an updaterFn when state.globalFilter changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
     link: 'https://tanstack.com/table/v8/docs/api/features/filters#onglobalfilterchange',
     linkText: 'TanStack Table Filters Docs',
     required: false,
@@ -1405,7 +1410,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'onExpandedChange',
     defaultValue: '',
-    description: 'This function is called when the expanded table state changes. If a function is provided, you will be responsible for managing this state on your own. To pass the managed state back to the table, use the tableOptions.state.expanded option.',
+    description:
+      'This function is called when the expanded table state changes. If a function is provided, you will be responsible for managing this state on your own. To pass the managed state back to the table, use the tableOptions.state.expanded option.',
     link: 'https://tanstack.com/table/v8/docs/api/features/expanding#onexpandedchange',
     linkText: 'TanStack Table Expanding Docs',
     required: false,
@@ -1415,7 +1421,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'onGlobalFilterChange',
     defaultValue: '',
-    description: 'If provided, this function will be called with an updaterFn when state.globalFilter changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
+    description:
+      'If provided, this function will be called with an updaterFn when state.globalFilter changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
     link: 'https://tanstack.com/table/v8/docs/api/features/filters#onglobalfilterchange',
     linkText: 'TanStack Table Filters Docs',
     required: false,
@@ -1425,7 +1432,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'onGroupingChange',
     defaultValue: '',
-    description: 'If this function is provided, it will be called when the grouping state changes and you will be expected to manage the state yourself. You can pass the managed state back to the table via the tableOptions.state.grouping option.',
+    description:
+      'If this function is provided, it will be called when the grouping state changes and you will be expected to manage the state yourself. You can pass the managed state back to the table via the tableOptions.state.grouping option.',
     link: 'https://tanstack.com/table/v8/docs/api/features/grouping#ongroupingchange',
     linkText: 'TanStack Table Grouping Docs',
     required: false,
@@ -1465,7 +1473,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'onPaginationChange',
     defaultValue: '',
-    description: 'If this function is provided, it will be called when the pagination state changes and you will be expected to manage the state yourself. You can pass the managed state back to the table via the tableOptions.state.pagination option.',
+    description:
+      'If this function is provided, it will be called when the pagination state changes and you will be expected to manage the state yourself. You can pass the managed state back to the table via the tableOptions.state.pagination option.',
     link: 'https://tanstack.com/table/v8/docs/api/features/pagination#onpaginationchange',
     linkText: 'TanStack Table Pagination Docs',
     required: false,
@@ -1475,7 +1484,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'onRowSelectionChange',
     defaultValue: '',
-    description: 'If provided, this function will be called with an updaterFn when state.rowSelection changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
+    description:
+      'If provided, this function will be called with an updaterFn when state.rowSelection changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
     link: 'https://tanstack.com/table/v8/docs/api/features/row-selection#onrowselectionchange',
     linkText: 'TanStack Table Row Selection Docs',
     required: false,
@@ -1515,7 +1525,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'onSortingChange',
     defaultValue: '',
-    description: 'If provided, this function will be called with an updaterFn when state.sorting changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
+    description:
+      'If provided, this function will be called with an updaterFn when state.sorting changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
     link: 'https://tanstack.com/table/v8/docs/api/features/sorting#onsortingchange',
     linkText: 'TanStack Table Sorting Docs',
     required: false,
@@ -1525,7 +1536,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'pageCount',
     defaultValue: '',
-    description: 'When manually controlling pagination, you should supply a total pageCount value to the table if you know it. If you do not know how many pages there are, you can set this to -1.',
+    description:
+      'When manually controlling pagination, you should supply a total pageCount value to the table if you know it. If you do not know how many pages there are, you can set this to -1.',
     link: 'https://tanstack.com/table/v8/docs/api/features/pagination#pagecount',
     linkText: 'TanStack Table Pagination Docs',
     required: false,
@@ -1535,7 +1547,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'paginateExpandedRows',
     defaultValue: '',
-    description: "If true expanded rows will be paginated along with the rest of the table (which means expanded rows may span multiple pages). If false expanded rows will not be considered for pagination (which means expanded rows will always render on their parents page. This also means more rows will be rendered than the set page size)",
+    description:
+      'If true expanded rows will be paginated along with the rest of the table (which means expanded rows may span multiple pages). If false expanded rows will not be considered for pagination (which means expanded rows will always render on their parents page. This also means more rows will be rendered than the set page size)',
     link: 'https://tanstack.com/table/v8/docs/api/features/expanding#paginateexpandedrows',
     linkText: 'TanStack Table Expanding Docs',
     required: false,
@@ -1630,7 +1643,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: '',
-    type: '({ column, internalFilterOptions, onSelectFilterMode, table }) => ReactNode[]'
+    type: '({ column, internalFilterOptions, onSelectFilterMode, table }) => ReactNode[]',
   },
   {
     propName: 'renderDetailPanel',
@@ -1650,7 +1663,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: '',
-    type: "({ internalFilterOptions, onSelectFilterMode, table }) => ReactNode[]",
+    type: '({ internalFilterOptions, onSelectFilterMode, table }) => ReactNode[]',
   },
   {
     propName: 'renderRowActionMenuItems',
@@ -1680,7 +1693,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: '',
-    type: '({ table }) => ReactNode', 
+    type: '({ table }) => ReactNode',
   },
   {
     propName: 'renderTopToolbar',
@@ -1745,7 +1758,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'sortDescFirst',
     defaultValue: '',
-    description: 'Set to true for sorting toggles on this column to start in the descending direction.',
+    description:
+      'Set to true for sorting toggles on this column to start in the descending direction.',
     link: 'https://tanstack.com/table/v8/docs/api/features/sorting#sortdescfirst',
     linkText: 'TanStack Table Sorting Docs',
     required: false,
@@ -1755,7 +1769,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'sortingFns',
     defaultValue: '',
-    description: "This option allows you to define custom sorting functions that can be referenced in a column's sortingFn option by their key. Example:",
+    description:
+      "This option allows you to define custom sorting functions that can be referenced in a column's sortingFn option by their key. Example:",
     link: 'https://tanstack.com/table/v8/docs/api/features/sorting#sortingfns',
     linkText: 'TanStack Table Sorting Docs',
     required: false,
@@ -1766,11 +1781,11 @@ export const rootProps: PropRow[] = [
     propName: 'state',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: '/docs/guides/table-state-management#manage-individual-states-as-needed',
+    linkText: 'Table State Management Guide',
     required: false,
-    source: '',
-    type: '',
+    source: 'MRT',
+    type: 'Partial<MRT_TableState<TData>>',
   },
   {
     propName: 'tableInstanceRef',
