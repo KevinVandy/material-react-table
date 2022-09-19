@@ -668,7 +668,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'getFacetedRowModel',
     defaultValue: '',
-    description: 'Returns the row model with all other column filters applied, excluding its own filter. Useful for displaying faceted result counts.',
+    description:
+      'Returns the row model with all other column filters applied, excluding its own filter. Useful for displaying faceted result counts.',
     link: 'https://tanstack.com/table/v8/docs/api/features/filters#getfacetedrowmodel',
     linkText: 'TanStack Table Filters Docs',
     required: false,
@@ -678,7 +679,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'getFacetedUniqueValues',
     defaultValue: '',
-    description: 'A function that computes and returns a Map of unique values and their occurrences derived from column.getFacetedRowModel. Useful for displaying faceted result values.',
+    description:
+      'A function that computes and returns a Map of unique values and their occurrences derived from column.getFacetedRowModel. Useful for displaying faceted result values.',
     link: 'https://tanstack.com/table/v8/docs/api/features/filters#getfaceteduniquevalues',
     linkText: 'TanStack Table Filters Docs',
     required: false,
@@ -688,7 +690,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'getFilteredRowModel',
     defaultValue: '',
-    description: 'Returns the row model with all other column filters applied, excluding its own filter. Useful for displaying faceted result counts.',
+    description:
+      'Returns the row model with all other column filters applied, excluding its own filter. Useful for displaying faceted result counts.',
     link: 'https://tanstack.com/table/v8/docs/api/features/filters#getfilteredrowmodel',
     linkText: 'TanStack Table Filters Docs',
     required: false,
@@ -698,7 +701,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'getGroupedRowModel',
     defaultValue: '',
-    description: 'Returns the row model after grouping has taken place, but no further.',
+    description:
+      'Returns the row model after grouping has taken place, but no further.',
     link: 'https://tanstack.com/table/v8/docs/api/features/grouping#getgroupedrowmodel',
     linkText: 'TanStack Table Grouping Docs',
     required: false,
@@ -708,7 +712,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'getIsRowExpanded',
     defaultValue: '',
-    description: 'If provided, allows you to override the default behavior of determining whether a row is currently expanded.',
+    description:
+      'If provided, allows you to override the default behavior of determining whether a row is currently expanded.',
     link: 'https://tanstack.com/table/v8/docs/api/features/expanding#getisrowexpanded',
     linkText: 'TanStack Table Expanding Docs',
     required: false,
@@ -728,7 +733,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'getRowCanExpand',
     defaultValue: '',
-    description: 'If provided, allows you to override the default behavior of determining whether a row can be expanded.',
+    description:
+      'If provided, allows you to override the default behavior of determining whether a row can be expanded.',
     link: 'https://tanstack.com/table/v8/docs/api/features/expanding#getrowcanexpand',
     linkText: 'TanStack Table Expanding Docs',
     required: false,
@@ -752,7 +758,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'getSortedRowModel',
     defaultValue: '',
-    description: 'This function is used to retrieve the sorted row model. If using server-side sorting, this function is not required. To use client-side sorting, pass the exported getSortedRowModel() from your adapter to your table or implement your own.',
+    description:
+      'This function is used to retrieve the sorted row model. If using server-side sorting, this function is not required. To use client-side sorting, pass the exported getSortedRowModel() from your adapter to your table or implement your own.',
     link: 'https://tanstack.com/table/v8/docs/api/features/sorting#getsortedrowmodel',
     linkText: 'TanStack Table Sorting Docs',
     required: false,
@@ -762,7 +769,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'getSubRows',
     defaultValue: '',
-    description: 'This optional function is used to access the sub rows for any given row. If you are using nested rows, you will need to use this function to return the sub rows object (or undefined) from the row.',
+    description:
+      'This optional function is used to access the sub rows for any given row. If you are using nested rows, you will need to use this function to return the sub rows object (or undefined) from the row.',
     link: 'https://tanstack.com/table/v8/docs/api/core/table#getsubrows',
     linkText: 'TanStack Table Core Table Docs',
     required: false,
@@ -785,7 +793,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'groupedColumnMode',
     defaultValue: 'reorder',
-    description: 'Grouping columns are automatically reordered by default to the start of the columns list. If you would rather remove them or leave them as-is, set the appropriate mode here.',
+    description:
+      'Grouping columns are automatically reordered by default to the start of the columns list. If you would rather remove them or leave them as-is, set the appropriate mode here.',
     link: 'https://tanstack.com/table/v8/docs/api/features/grouping#groupedcolumnmode',
     linkText: 'TanStack Table Grouping Docs',
     required: false,
@@ -891,6 +900,16 @@ export const rootProps: PropRow[] = [
     required: false,
     source: '',
     type: '',
+  },
+  {
+    propName: 'memoMode',
+    defaultValue: '',
+    description: '',
+    link: '/docs/guides/memoize-components',
+    linkText: '',
+    required: false,
+    source: 'MRT',
+    type: `'cell' | 'row' | 'table-body'`,
   },
   {
     propName: 'mergeOptions',

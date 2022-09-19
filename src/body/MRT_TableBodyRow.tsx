@@ -29,7 +29,8 @@ export const MRT_TableBodyRow: FC<Props> = ({
     },
     setHoveredRow,
   } = table;
-  const { draggingRow, hoveredRow } = getState();
+  const { draggingColumn, draggingRow, editingCell, editingRow, hoveredRow } =
+    getState();
 
   const tableRowProps =
     muiTableBodyRowProps instanceof Function
@@ -98,7 +99,12 @@ export const MRT_TableBodyRow: FC<Props> = ({
             rowRef,
             table,
           };
-          return memoMode === 'cell' ? (
+          return memoMode === 'cell' &&
+            cell.column.columnDef.columnDefType === 'data' &&
+            !draggingColumn &&
+            !draggingRow &&
+            editingCell?.id !== cell.id &&
+            editingRow?.id !== row.id ? (
             <Memo_MRT_TableBodyCell {...props} />
           ) : (
             <MRT_TableBodyCell {...props} />

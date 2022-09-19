@@ -62,13 +62,16 @@ export const NoMemos: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    editingMode="row"
     enableColumnOrdering
     enableEditing
     enableGrouping
     enablePinning
     enableRowNumbers
+    enableRowOrdering
+    enableRowSelection
+    enableStickyHeader
     initialState={{ pagination: { pageSize: 100, pageIndex: 0 } }}
-    memoMode="none"
   />
 );
 
@@ -76,11 +79,15 @@ export const MemoCells: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    editingMode="row"
     enableColumnOrdering
     enableEditing
     enableGrouping
     enablePinning
     enableRowNumbers
+    enableRowOrdering
+    enableRowSelection
+    enableStickyHeader
     initialState={{ pagination: { pageSize: 100, pageIndex: 0 } }}
     memoMode="cell"
   />
@@ -90,11 +97,15 @@ export const MemoRows: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    editingMode="row"
     enableColumnOrdering
     enableEditing
     enableGrouping
     enablePinning
     enableRowNumbers
+    enableRowOrdering
+    enableRowSelection
+    enableRowVirtualization
     initialState={{ pagination: { pageSize: 100, pageIndex: 0 } }}
     memoMode="row"
   />
@@ -106,6 +117,7 @@ export const MemoTableBody: Story<MaterialReactTableProps> = () => (
     data={data}
     enableColumnOrdering
     enableEditing
+    enableRowSelection
     enableGrouping
     enablePinning
     enableRowNumbers

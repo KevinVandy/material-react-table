@@ -156,7 +156,7 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
                   ? rowOrVirtualRow.index
                   : rowIndex,
                 table,
-                virturalRow: enableRowVirtualization ? rowOrVirtualRow : null,
+                virtualRow: enableRowVirtualization ? rowOrVirtualRow : null,
               };
               return memoMode === 'row' ? (
                 <Memo_MRT_TableBodyRow {...props} />

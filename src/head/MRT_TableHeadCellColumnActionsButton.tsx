@@ -80,12 +80,14 @@ export const MRT_TableHeadCellColumnActionsButton: FC<Props> = ({
           <MoreVertIcon />
         </IconButton>
       </Tooltip>
-      <MRT_ColumnActionMenu
-        anchorEl={anchorEl}
-        header={header}
-        setAnchorEl={setAnchorEl}
-        table={table}
-      />
+      {anchorEl && (
+        <MRT_ColumnActionMenu
+          anchorEl={anchorEl}
+          header={header}
+          setAnchorEl={setAnchorEl}
+          table={table}
+        />
+      )}
     </>
   );
 };

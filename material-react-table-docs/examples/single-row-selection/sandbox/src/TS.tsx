@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { RowSelectionState } from '@tanstack/react-table';
 
@@ -69,6 +69,7 @@ const Example: FC = () => {
       enableRowSelection
       getRowId={(row) => row.userId} //give each row a more useful id
       muiTableBodyRowProps={({ row }) => ({
+        //add onClick to row to select upon clicking anywhere in the row
         onClick: row.getToggleSelectedHandler(),
         sx: { cursor: 'pointer' },
       })}
