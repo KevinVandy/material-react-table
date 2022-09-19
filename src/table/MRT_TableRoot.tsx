@@ -164,7 +164,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
               <MRT_SelectCheckbox row={row as any} table={table as any} />
             ),
             Header: () =>
-              props.enableSelectAll ? (
+              props.enableSelectAll && props.enableMultiRowSelection ? (
                 <MRT_SelectCheckbox selectAll table={table as any} />
               ) : null,
             header: props.localization.select,

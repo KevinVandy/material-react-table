@@ -13,6 +13,7 @@ import type {
   IconButtonProps,
   LinearProgressProps,
   PaperProps,
+  RadioProps,
   SkeletonProps,
   TableBodyProps,
   TableCellProps,
@@ -668,11 +669,18 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     initialState?: Partial<MRT_TableState<TData>>;
     /**
      * Pass in either a locale imported from `material-react-table/locales/*` or a custom locale object.
-     * 
+     *
      * See the localization (i18n) guide for more info:
      * @link https://www.material-react-table.com/docs/guides/localization
      */
     localization?: Partial<MRT_Localization>;
+    /**
+     * Memoize cells, rows, or the entire table body to potentially improve render performance.
+     * 
+     * @warning This will break some dynamic rendering features. See the memoization guide for more info:
+     * @link https://www.material-react-table.com/docs/guides/memoize-components
+     */
+    memoMode?: 'cell' | 'row' | 'table-body';
     muiBottomToolbarProps?:
       | ToolbarProps
       | (({ table }: { table: MRT_TableInstance<TData> }) => ToolbarProps);
@@ -704,14 +712,14 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
       | CheckboxProps
       | (({ table }: { table: MRT_TableInstance<TData> }) => CheckboxProps);
     muiSelectCheckboxProps?:
-      | CheckboxProps
+      | (CheckboxProps | RadioProps)
       | (({
           table,
           row,
         }: {
           table: MRT_TableInstance<TData>;
           row: MRT_Row<TData>;
-        }) => CheckboxProps);
+        }) => CheckboxProps | RadioProps);
     muiTableBodyCellCopyButtonProps?:
       | ButtonProps
       | (({

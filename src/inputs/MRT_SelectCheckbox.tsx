@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { Checkbox, Tooltip } from '@mui/material';
+import React, { FC, MouseEvent } from 'react';
+import { Checkbox, Tooltip, Radio, Theme } from '@mui/material';
 import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
@@ -13,6 +13,7 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, table }) => {
     getState,
     options: {
       localization,
+      enableMultiRowSelection,
       muiSelectCheckboxProps,
       muiSelectAllCheckboxProps,
       selectAllMode,
@@ -28,6 +29,39 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, table }) => {
     ? muiSelectCheckboxProps({ row, table })
     : muiSelectCheckboxProps;
 
+  const commonProps = {
+    checked: selectAll
+      ? selectAllMode === 'page'
+        ? table.getIsAllPageRowsSelected()
+        : table.getIsAllRowsSelected()
+      : row?.getIsSelected(),
+    inputProps: {
+      'aria-label': selectAll
+        ? localization.toggleSelectAll
+        : localization.toggleSelectRow,
+    },
+    onChange: row
+      ? row.getToggleSelectedHandler()
+      : selectAllMode === 'all'
+      ? table.getToggleAllRowsSelectedHandler()
+      : table.getToggleAllPageRowsSelectedHandler(),
+    size: (density === 'compact' ? 'small' : 'medium') as 'small' | 'medium',
+    ...checkboxProps,
+    onClick: (e: MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      checkboxProps?.onClick?.(e);
+    },
+    sx: (theme: Theme) => ({
+      height: density === 'compact' ? '1.75rem' : '2.5rem',
+      width: density === 'compact' ? '1.75rem' : '2.5rem',
+      m: density !== 'compact' ? '-0.4rem' : undefined,
+      ...(checkboxProps?.sx instanceof Function
+        ? checkboxProps.sx(theme)
+        : (checkboxProps?.sx as any)),
+    }),
+    title: undefined,
+  };
+
   return (
     <Tooltip
       arrow
@@ -40,50 +74,21 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, table }) => {
           : localization.toggleSelectRow)
       }
     >
-      <Checkbox
-        checked={
-          selectAll
-            ? selectAllMode === 'page'
-              ? table.getIsAllPageRowsSelected()
-              : table.getIsAllRowsSelected()
-            : row?.getIsSelected()
-        }
-        indeterminate={
-          selectAll
-            ? table.getIsSomeRowsSelected() &&
-              !(selectAllMode === 'page'
-                ? table.getIsAllPageRowsSelected()
-                : table.getIsAllRowsSelected())
-            : row?.getIsSomeSelected()
-        }
-        inputProps={{
-          'aria-label': selectAll
-            ? localization.toggleSelectAll
-            : localization.toggleSelectRow,
-        }}
-        onChange={
-          row
-            ? row.getToggleSelectedHandler()
-            : selectAllMode === 'all'
-            ? table.getToggleAllRowsSelectedHandler()
-            : table.getToggleAllPageRowsSelectedHandler()
-        }
-        size={density === 'compact' ? 'small' : 'medium'}
-        {...checkboxProps}
-        onClick={(e) => {
-          e.stopPropagation();
-          checkboxProps?.onClick?.(e);
-        }}
-        sx={(theme) => ({
-          height: density === 'compact' ? '1.75rem' : '2.5rem',
-          width: density === 'compact' ? '1.75rem' : '2.5rem',
-          m: density !== 'compact' ? '-0.4rem' : undefined,
-          ...(checkboxProps?.sx instanceof Function
-            ? checkboxProps.sx(theme)
-            : (checkboxProps?.sx as any)),
-        })}
-        title={undefined}
-      />
+      {enableMultiRowSelection === false ? (
+        <Radio {...commonProps} />
+      ) : (
+        <Checkbox
+          indeterminate={
+            selectAll
+              ? table.getIsSomeRowsSelected() &&
+                !(selectAllMode === 'page'
+                  ? table.getIsAllPageRowsSelected()
+                  : table.getIsAllRowsSelected())
+              : row?.getIsSomeSelected()
+          }
+          {...commonProps}
+        />
+      )}
     </Tooltip>
   );
 };

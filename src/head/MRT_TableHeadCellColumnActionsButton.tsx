@@ -66,7 +66,7 @@ export const MRT_TableHeadCellColumnActionsButton: FC<Props> = ({
             height: '2rem',
             mt: '-0.2rem',
             opacity: 0.5,
-            transition: 'opacity 0.1s',
+            transition: 'opacity 150ms',
             width: '2rem',
             '&:hover': {
               opacity: 1,
@@ -80,12 +80,14 @@ export const MRT_TableHeadCellColumnActionsButton: FC<Props> = ({
           <MoreVertIcon />
         </IconButton>
       </Tooltip>
-      <MRT_ColumnActionMenu
-        anchorEl={anchorEl}
-        header={header}
-        setAnchorEl={setAnchorEl}
-        table={table}
-      />
+      {anchorEl && (
+        <MRT_ColumnActionMenu
+          anchorEl={anchorEl}
+          header={header}
+          setAnchorEl={setAnchorEl}
+          table={table}
+        />
+      )}
     </>
   );
 };

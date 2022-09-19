@@ -78,7 +78,7 @@ export const LinkCards = () => {
                   )}`,
                   '& img': {
                     transform: 'scale(1.01)',
-                    transition: 'transform 0.1s ease-in-out',
+                    transition: 'transform 150ms ease-in-out',
                   },
                 },
               })}

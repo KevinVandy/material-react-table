@@ -105,6 +105,37 @@ export const EnableRowVirtualizationWithColumnResizing: Story<
     enableRowNumbers
     enableRowVirtualization
     enableBottomToolbar={false}
-    virtualizerProps={{ enableSmoothScroll: true }}
+  />
+);
+
+export const EnableRowVirtualizationWithMemoizedCells: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={longColumns}
+    data={longData}
+    enableBottomToolbar={false}
+    enableDensityToggle={false}
+    enablePagination={false}
+    enableRowNumbers
+    enableRowVirtualization
+    initialState={{ density: 'compact' }}
+    memoMode="cell"
+  />
+);
+
+export const EnableRowVirtualizationWithMemoizedRows: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={longColumns}
+    data={longData}
+    enableBottomToolbar={false}
+    enableDensityToggle={false}
+    enablePagination={false}
+    enableRowNumbers
+    enableRowVirtualization
+    initialState={{ density: 'compact' }}
+    memoMode="row"
   />
 );
