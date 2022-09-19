@@ -37,13 +37,6 @@ export const Example: FC = () => {
       columns={columns}
       data={data}
       //just for demo purposes
-      defaultColumn={{
-        Cell: ({ cell }) => {
-          //see how often cells are re-rendered
-          console.info('render cell', cell.id);
-          return <>{cell.getValue()}</>;
-        },
-      }}
       enableBottomToolbar={false} //no need for bottom toolbar if no pagination
       enableColumnActions={false} //no need for column actions if none of them are enabled
       enableColumnFilters={false} //filtering does not work with memoized table body
