@@ -1,10 +1,3 @@
-import React, {
-  Dispatch,
-  MutableRefObject,
-  ReactNode,
-  SetStateAction,
-  useMemo,
-} from 'react';
 import type {
   AlertProps,
   ButtonProps,
@@ -41,15 +34,22 @@ import type {
   TableOptions,
   TableState,
 } from '@tanstack/react-table';
+import React, {
+  Dispatch,
+  MutableRefObject,
+  ReactNode,
+  SetStateAction,
+  useMemo,
+} from 'react';
 import type { Options as VirtualizerOptions, VirtualItem } from 'react-virtual';
 // import type { VirtualizerOptions } from '@tanstack/react-virtual';
 import { MRT_AggregationFns } from './aggregationFns';
-import { MRT_Default_Icons, MRT_Icons } from './icons';
+import { MRT_DefaultColumn, MRT_DefaultDisplayColumn } from './column.utils';
 import { MRT_FilterFns } from './filterFns';
-import { MRT_Localization_EN } from './_locales/en';
+import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_SortingFns } from './sortingFns';
 import { MRT_TableRoot } from './table/MRT_TableRoot';
-import { MRT_DefaultColumn, MRT_DefaultDisplayColumn } from './column.utils';
+import { MRT_Localization_EN } from './_locales/en';
 
 /**
  * Most of this file is just TypeScript types
@@ -500,7 +500,7 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
     onSelectFilterMode: (filterMode: MRT_FilterOption) => void;
     table: MRT_TableInstance<TData>;
   }) => ReactNode[];
-  sortingFn?: MRT_SortingFn;
+  sortingFn?: MRT_SortingFn<TData>;
 };
 
 export type MRT_DefinedColumnDef<TData extends Record<string, any> = {}> = Omit<
@@ -676,7 +676,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     localization?: Partial<MRT_Localization>;
     /**
      * Memoize cells, rows, or the entire table body to potentially improve render performance.
-     * 
+     *
      * @warning This will break some dynamic rendering features. See the memoization guide for more info:
      * @link https://www.material-react-table.com/docs/guides/memoize-components
      */
