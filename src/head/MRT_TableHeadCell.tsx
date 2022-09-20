@@ -205,11 +205,11 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
                 tableCellProps?.align === 'right' ? 'row-reverse' : 'row',
               flexWrap: 'nowrap',
               m: tableCellProps?.align === 'center' ? 'auto' : undefined,
+              overflow: 'hidden',
               pl:
                 tableCellProps?.align === 'center' && column.getCanSort()
                   ? '1rem'
                   : undefined,
-              overflow: 'hidden',
             }}
           >
             {headerElement}
