@@ -1,5 +1,5 @@
-import React, { DragEvent, FC, ReactNode } from 'react';
-import { Box, TableCell, Theme, useTheme } from '@mui/material';
+import React, { DragEvent, FC, ReactNode, useRef, useState } from 'react';
+import { Box, TableCell, Theme, Tooltip, useTheme } from '@mui/material';
 import { MRT_TableHeadCellColumnActionsButton } from './MRT_TableHeadCellColumnActionsButton';
 import { MRT_TableHeadCellFilterContainer } from './MRT_TableHeadCellFilterContainer';
 import { MRT_TableHeadCellFilterLabel } from './MRT_TableHeadCellFilterLabel';
@@ -39,6 +39,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
   const { columnDef } = column;
   const { columnDefType } = columnDef;
 
+  const headerEl = useRef<HTMLDivElement>();
+  const [openHeaderTooltip, setOpenHeaderTooltip] = useState(false);
+
   const mTableHeadCellProps =
     muiTableHeadCellProps instanceof Function
       ? muiTableHeadCellProps({ column, table })
@@ -65,6 +68,18 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
     }
   };
 
+  const handleHeaderTooltipOpen = () => {
+    if (headerEl.current) {
+      setOpenHeaderTooltip(
+        headerEl.current.offsetWidth < headerEl.current.scrollWidth,
+      );
+    }
+  };
+
+  const handleHeaderTooltipClose = () => {
+    setOpenHeaderTooltip(false);
+  };
+
   const draggingBorder =
     draggingColumn?.id === column.id
       ? `1px dashed ${theme.palette.text.secondary}`
@@ -86,7 +101,26 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
         header,
         table,
       })
-    : columnDef?.Header) ?? columnDef.header) as ReactNode;
+    : columnDef?.Header) ?? (
+    <Tooltip
+      onClose={handleHeaderTooltipClose}
+      onOpen={handleHeaderTooltipOpen}
+      open={openHeaderTooltip}
+      title={column.columnDef.header}
+    >
+      <Box
+        ref={headerEl}
+        sx={{
+          flex: '1 1',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {columnDef.header}
+      </Box>
+    </Tooltip>
+  )) as ReactNode;
 
   const tableHeadCellRef = React.useRef<HTMLTableCellElement>(null);
 
@@ -175,8 +209,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
                 tableCellProps?.align === 'center' && column.getCanSort()
                   ? '1rem'
                   : undefined,
-              whiteSpace:
-                (columnDef.header?.length ?? 0) < 24 ? 'nowrap' : 'normal',
+              overflow: 'hidden',
             }}
           >
             {headerElement}

@@ -1,5 +1,5 @@
 import React, { FC, MouseEvent } from 'react';
-import { Grow, IconButton, Tooltip } from '@mui/material';
+import { Box, Grow, IconButton, Tooltip } from '@mui/material';
 import { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
@@ -56,7 +56,7 @@ export const MRT_TableHeadCellFilterLabel: FC<Props> = ({ header, table }) => {
           (!!column.getFilterValue()?.[0] || !!column.getFilterValue()?.[1]))
       }
     >
-      <span>
+      <Box component="span" sx={{ flex: '0 0' }}>
         <Tooltip arrow placement="top" title={filterTooltip}>
           <IconButton
             disableRipple
@@ -75,7 +75,7 @@ export const MRT_TableHeadCellFilterLabel: FC<Props> = ({ header, table }) => {
             <FilterAltIcon />
           </IconButton>
         </Tooltip>
-      </span>
+      </Box>
     </Grow>
   );
 };

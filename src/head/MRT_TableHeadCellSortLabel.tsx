@@ -36,6 +36,7 @@ export const MRT_TableHeadCellSortLabel: FC<Props> = ({
             : undefined
         }
         sx={{
+          flex: '0 0',
           width: '2ch',
           transform:
             tableCellProps?.align !== 'right'
