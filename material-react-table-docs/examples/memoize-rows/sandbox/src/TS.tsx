@@ -48,7 +48,7 @@ export const Example: FC = () => {
       enableHiding={false}
       enableStickyHeader
       initialState={{ pagination: { pageSize: 20, pageIndex: 0 } }}
-      memoMode="row"
+      memoMode="rows"
       muiTableContainerProps={{ sx: { maxHeight: '500px' } }}
       renderTopToolbarCustomActions={() => (
         <Typography component="span" variant="h4">

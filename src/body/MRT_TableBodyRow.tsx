@@ -1,10 +1,11 @@
-import React, { DragEvent, FC, memo, useRef } from 'react';
+import React, { DragEvent, FC, memo, useMemo, useRef } from 'react';
 import { darken, lighten, TableRow, useTheme } from '@mui/material';
 import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
+  numRows: number;
   row: MRT_Row;
   rowIndex: number;
   table: MRT_TableInstance;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export const MRT_TableBodyRow: FC<Props> = ({
+  numRows,
   row,
   rowIndex,
   table,
@@ -45,12 +47,15 @@ export const MRT_TableBodyRow: FC<Props> = ({
 
   const rowRef = useRef<HTMLTableRowElement | null>(null);
 
-  const draggingBorder =
-    draggingRow?.id === row.id
-      ? `1px dashed ${theme.palette.text.secondary}`
-      : hoveredRow?.id === row.id
-      ? `2px dashed ${theme.palette.primary.main}`
-      : undefined;
+  const draggingBorder = useMemo(
+    () =>
+      draggingRow?.id === row.id
+        ? `1px dashed ${theme.palette.text.secondary}`
+        : hoveredRow?.id === row.id
+        ? `2px dashed ${theme.palette.primary.main}`
+        : undefined,
+    [draggingRow, hoveredRow],
+  );
 
   const draggingBorders = draggingBorder
     ? {
@@ -90,16 +95,17 @@ export const MRT_TableBodyRow: FC<Props> = ({
           ...draggingBorders,
         })}
       >
-        {row?.getVisibleCells()?.map?.((cell) => {
+        {row.getVisibleCells().map((cell) => {
           const props = {
             cell,
             enableHover: tableRowProps?.hover !== false,
             key: cell.id,
+            numRows,
             rowIndex,
             rowRef,
             table,
           };
-          return memoMode === 'cell' &&
+          return memoMode === 'cells' &&
             cell.column.columnDef.columnDefType === 'data' &&
             !draggingColumn &&
             !draggingRow &&

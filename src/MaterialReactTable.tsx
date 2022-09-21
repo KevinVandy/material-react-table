@@ -680,7 +680,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
      * @warning This will break some dynamic rendering features. See the memoization guide for more info:
      * @link https://www.material-react-table.com/docs/guides/memoize-components
      */
-    memoMode?: 'cell' | 'row' | 'table-body';
+    memoMode?: 'cells' | 'rows' | 'table-body';
     muiBottomToolbarProps?:
       | ToolbarProps
       | (({ table }: { table: MRT_TableInstance<TData> }) => ToolbarProps);

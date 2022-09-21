@@ -151,6 +151,7 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
                 : (rowOrVirtualRow as MRT_Row);
               const props = {
                 key: row.id,
+                numRows: rows.length,
                 row,
                 rowIndex: enableRowVirtualization
                   ? rowOrVirtualRow.index
@@ -158,7 +159,7 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
                 table,
                 virtualRow: enableRowVirtualization ? rowOrVirtualRow : null,
               };
-              return memoMode === 'row' ? (
+              return memoMode === 'rows' ? (
                 <Memo_MRT_TableBodyRow {...props} />
               ) : (
                 <MRT_TableBodyRow {...props} />
@@ -176,4 +177,7 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
   );
 };
 
-export const Memo_MRT_TableBody = memo(MRT_TableBody, () => true);
+export const Memo_MRT_TableBody = memo(
+  MRT_TableBody,
+  (prev, next) => prev.table.options.data === next.table.options.data,
+);

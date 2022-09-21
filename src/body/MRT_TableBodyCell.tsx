@@ -5,6 +5,7 @@ import React, {
   MouseEvent,
   RefObject,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import { darken, lighten, Skeleton, TableCell, useTheme } from '@mui/material';
@@ -18,6 +19,7 @@ import type { MRT_Cell, MRT_TableInstance } from '..';
 interface Props {
   cell: MRT_Cell;
   enableHover?: boolean;
+  numRows: number;
   rowIndex: number;
   rowRef: RefObject<HTMLTableRowElement>;
   table: MRT_TableInstance;
@@ -26,6 +28,7 @@ interface Props {
 export const MRT_TableBodyCell: FC<Props> = ({
   cell,
   enableHover,
+  numRows,
   rowIndex,
   rowRef,
   table,
@@ -39,7 +42,6 @@ export const MRT_TableBodyCell: FC<Props> = ({
       enableColumnOrdering,
       enableEditing,
       enableGrouping,
-      enablePagination,
       enableRowNumbers,
       muiTableBodyCellProps,
       muiTableBodyCellSkeletonProps,
@@ -82,17 +84,6 @@ export const MRT_TableBodyCell: FC<Props> = ({
       ? muiTableBodyCellSkeletonProps({ cell, column, row, table })
       : muiTableBodyCellSkeletonProps;
 
-  const isEditable =
-    (enableEditing || columnDef.enableEditing) &&
-    columnDef.enableEditing !== false;
-
-  const isEditing =
-    isEditable &&
-    editingMode !== 'modal' &&
-    (editingMode === 'table' ||
-      editingRow?.id === row.id ||
-      editingCell?.id === cell.id);
-
   const [skeletonWidth, setSkeletonWidth] = useState(0);
   useEffect(
     () =>
@@ -106,8 +97,41 @@ export const MRT_TableBodyCell: FC<Props> = ({
               )
           : 100,
       ),
-    [isLoading, showSkeletons],
+    [],
   );
+
+  const draggingBorder = useMemo(
+    () =>
+      draggingColumn?.id === column.id
+        ? `1px dashed ${theme.palette.text.secondary}`
+        : hoveredColumn?.id === column.id
+        ? `2px dashed ${theme.palette.primary.main}`
+        : undefined,
+    [draggingColumn, hoveredColumn],
+  );
+
+  const draggingBorders = useMemo(
+    () =>
+      draggingBorder
+        ? {
+            borderLeft: draggingBorder,
+            borderRight: draggingBorder,
+            borderBottom: rowIndex === numRows - 1 ? draggingBorder : undefined,
+          }
+        : undefined,
+    [draggingBorder, numRows],
+  );
+
+  const isEditable =
+    (enableEditing || columnDef.enableEditing) &&
+    columnDef.enableEditing !== false;
+
+  const isEditing =
+    isEditable &&
+    editingMode !== 'modal' &&
+    (editingMode === 'table' ||
+      editingRow?.id === row.id ||
+      editingCell?.id === cell.id);
 
   const handleDoubleClick = (event: MouseEvent<HTMLTableCellElement>) => {
     tableCellProps?.onDoubleClick?.(event);
@@ -138,29 +162,6 @@ export const MRT_TableBodyCell: FC<Props> = ({
       );
     }
   };
-
-  const draggingBorder =
-    draggingColumn?.id === column.id
-      ? `1px dashed ${theme.palette.text.secondary}`
-      : hoveredColumn?.id === column.id
-      ? `2px dashed ${theme.palette.primary.main}`
-      : undefined;
-
-  const draggingBorders = draggingBorder
-    ? {
-        borderLeft: draggingBorder,
-        borderRight: draggingBorder,
-        borderBottom:
-          row.index ===
-          (enablePagination
-            ? table.getRowModel()
-            : table.getPrePaginationRowModel()
-          ).rows.length -
-            1
-            ? draggingBorder
-            : undefined,
-      }
-    : undefined;
 
   return (
     <TableCell

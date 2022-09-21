@@ -5,6 +5,7 @@ import MaterialReactTable, {
   MRT_ColumnDef,
 } from '../../src';
 import { faker } from '@faker-js/faker';
+import { Button } from '@mui/material';
 
 const meta: Meta = {
   title: 'Features/Memo Mode Examples',
@@ -12,7 +13,18 @@ const meta: Meta = {
 
 export default meta;
 
-const columns: MRT_ColumnDef<typeof data[0]>[] = [
+type Person = {
+  firstName: string;
+  lastName: string;
+  gender: string;
+  age: number;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+};
+
+const columns: MRT_ColumnDef<Person>[] = [
   {
     header: 'First Name',
     accessorKey: 'firstName',
@@ -47,81 +59,129 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
   },
 ];
 
-const data = [...Array(55)].map(() => ({
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
-  gender: faker.name.sex(),
-  age: faker.datatype.number(80),
-  address: faker.address.streetAddress(),
-  city: faker.address.city(),
-  state: faker.address.state(),
-  zipCode: faker.address.zipCode(),
-}));
+const generateData = () =>
+  [...Array(55)].map(() => ({
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    gender: faker.name.sex(),
+    age: faker.datatype.number(80),
+    address: faker.address.streetAddress(),
+    city: faker.address.city(),
+    state: faker.address.state(),
+    zipCode: faker.address.zipCode(),
+  }));
 
-export const NoMemos: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    editingMode="row"
-    enableColumnOrdering
-    enableEditing
-    enableGrouping
-    enablePinning
-    enableRowNumbers
-    enableRowOrdering
-    enableRowSelection
-    enableStickyHeader
-    initialState={{ pagination: { pageSize: 100, pageIndex: 0 } }}
-  />
-);
+export const NoMemos: Story<MaterialReactTableProps> = () => {
+  const [tableData, setTableData] = React.useState([...generateData()]);
 
-export const MemoCells: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    editingMode="row"
-    enableColumnOrdering
-    enableEditing
-    enableGrouping
-    enablePinning
-    enableRowNumbers
-    enableRowOrdering
-    enableRowSelection
-    enableStickyHeader
-    initialState={{ pagination: { pageSize: 100, pageIndex: 0 } }}
-    memoMode="cell"
-  />
-);
+  const handleRegenerateData = () => setTableData([...generateData()]);
 
-export const MemoRows: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    editingMode="row"
-    enableColumnOrdering
-    enableEditing
-    enableGrouping
-    enablePinning
-    enableRowNumbers
-    enableRowOrdering
-    enableRowSelection
-    enableRowVirtualization
-    initialState={{ pagination: { pageSize: 100, pageIndex: 0 } }}
-    memoMode="row"
-  />
-);
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={tableData}
+      editingMode="row"
+      enableColumnOrdering
+      enableEditing
+      enableGrouping
+      enablePinning
+      enableRowNumbers
+      enableRowOrdering
+      enableRowSelection
+      enableStickyHeader
+      initialState={{ pagination: { pageSize: 100, pageIndex: 0 } }}
+      renderTopToolbarCustomActions={() => (
+        <Button onClick={handleRegenerateData} variant="contained">
+          Regenerate Data
+        </Button>
+      )}
+    />
+  );
+};
 
-export const MemoTableBody: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    enableColumnOrdering
-    enableEditing
-    enableRowSelection
-    enableGrouping
-    enablePinning
-    enableRowNumbers
-    initialState={{ pagination: { pageSize: 100, pageIndex: 0 } }}
-    memoMode="table-body"
-  />
-);
+export const MemoCells: Story<MaterialReactTableProps> = () => {
+  const [tableData, setTableData] = React.useState([...generateData()]);
+
+  const handleRegenerateData = () => setTableData([...generateData()]);
+
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={tableData}
+      editingMode="row"
+      enableColumnOrdering
+      enableEditing
+      enableGrouping
+      enablePinning
+      enableRowNumbers
+      enableRowOrdering
+      enableRowSelection
+      enableStickyHeader
+      initialState={{ pagination: { pageSize: 100, pageIndex: 0 } }}
+      memoMode="cells"
+      renderTopToolbarCustomActions={() => (
+        <Button onClick={handleRegenerateData} variant="contained">
+          Regenerate Data
+        </Button>
+      )}
+    />
+  );
+};
+
+export const MemoRows: Story<MaterialReactTableProps> = () => {
+  const [tableData, setTableData] = React.useState([...generateData()]);
+
+  const handleRegenerateData = () => setTableData([...generateData()]);
+
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={tableData}
+      editingMode="row"
+      enableColumnOrdering
+      enableEditing
+      enableGrouping
+      enablePinning
+      enableRowNumbers
+      enableRowOrdering
+      enableRowSelection
+      enableStickyHeader
+      initialState={{ pagination: { pageSize: 100, pageIndex: 0 } }}
+      memoMode="rows"
+      renderTopToolbarCustomActions={() => (
+        <Button onClick={handleRegenerateData} variant="contained">
+          Regenerate Data
+        </Button>
+      )}
+    />
+  );
+};
+
+export const MemoTableBody: Story<MaterialReactTableProps> = () => {
+  const [tableData, setTableData] = React.useState([...generateData()]);
+
+  const handleRegenerateData = () => setTableData([...generateData()]);
+
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={tableData}
+      editingMode="row"
+      enableColumnOrdering
+      enableEditing
+      enableGrouping
+      enablePinning
+      enableRowNumbers
+      enableRowOrdering
+      enableRowSelection
+      enableStickyHeader
+      initialState={{ pagination: { pageSize: 100, pageIndex: 0 } }}
+      memoMode="table-body"
+      renderTopToolbarCustomActions={() => (
+        <Button onClick={handleRegenerateData} variant="contained">
+          Regenerate Data
+        </Button>
+      )}
+    />
+  );
+};
