@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Divider, Theme } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {
@@ -18,40 +18,49 @@ export const MRT_TableHeadCellResizeHandle: FC<Props> = ({ header, table }) => {
   const { columnDefType } = columnDef;
 
   return (
-    <Divider
-      flexItem
-      orientation="vertical"
+    <Box
       onDoubleClick={() => column.resetSize()}
-      sx={(theme: Theme) => ({
-        borderRadius: '2px',
-        borderRightWidth: '2px',
+      onMouseDown={header.getResizeHandler()}
+      onTouchStart={header.getResizeHandler()}
+      sx={(theme) => ({
         cursor: 'col-resize',
-        height: showColumnFilters && columnDefType === 'data' ? '4rem' : '2rem',
         mr: density === 'compact' ? '-0.5rem' : '-1rem',
-        opacity: 0.8,
         position: 'absolute',
         right: '1px',
-        touchAction: 'none',
-        transition: column.getIsResizing()
-          ? undefined
-          : 'all 150ms ease-in-out',
-        userSelect: 'none',
-        zIndex: 4,
-        '&:active': {
+        px: '4px',
+        '&:active > hr': {
           backgroundColor: theme.palette.info.main,
           opacity: 1,
         },
       })}
-      onMouseDown={header.getResizeHandler()}
-      onTouchStart={header.getResizeHandler()}
       style={{
         transform: column.getIsResizing()
           ? `translateX(${
               (getState().columnSizingInfo.deltaOffset ?? 0) /
               (columnResizeMode === 'onChange' ? 16 : 1)
             }px)`
-          : 'none',
+          : undefined,
       }}
-    />
+    >
+      <Divider
+        flexItem
+        orientation="vertical"
+        sx={{
+          borderRadius: '2px',
+          borderWidth: '2px',
+          height:
+            showColumnFilters && columnDefType === 'data'
+              ? '3.5rem'
+              : '1.75rem',
+          opacity: 0.8,
+          touchAction: 'none',
+          transition: column.getIsResizing()
+            ? undefined
+            : 'all 150ms ease-in-out',
+          userSelect: 'none',
+          zIndex: 4,
+        }}
+      />
+    </Box>
   );
 };
