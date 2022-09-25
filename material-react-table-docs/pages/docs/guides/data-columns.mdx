@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import AlignmentExample from '../../../examples/column-alignment';
 
 <Head>
   <title>Data Columns - Material React Table Docs</title>
@@ -238,3 +239,36 @@ You can improve this slightly by changing the table layout to `fixed` instead of
 The Columns will still try to increase their width to take up the full width of the table, but the columns that do have a defined size will have their width respected more.
 
 For further reading on how table-layout `fixed` vs `auto` works, we recommend this [blog post](https://css-tricks.com/almanac/properties/t/table-layout/) by CSS-Tricks.
+
+### Set Column Alignment
+
+By default, all columns are left-aligned. You can change the alignment of a column by setting the `align` option to either `"center"`, `"right"`, or `"justify"` in the `muiTableHeadCellProps` and `muiTableBodyCellProps` props/column options.
+
+```tsx
+const columns = [
+  {
+    accessorKey: 'id',
+    header: 'ID',
+    //right align the header and body cells
+    muiTableHeadCellProps: {
+      align: 'right',
+    },
+    muiTableBodyCellProps: {
+      align: 'right',
+    },
+  },
+  {
+    accessorKey: 'username',
+    header: 'Username',
+    //center align the header and body cells
+    muiTableHeadCellProps: {
+      align: 'center',
+    },
+    muiTableBodyCellProps: {
+      align: 'center',
+    },
+  },
+];
+```
+
+<AlignmentExample />

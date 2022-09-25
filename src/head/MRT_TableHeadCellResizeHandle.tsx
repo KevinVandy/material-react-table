@@ -49,10 +49,7 @@ export const MRT_TableHeadCellResizeHandle: FC<Props> = ({ header, table }) => {
           borderRadius: '2px',
           borderWidth: '2px',
           height:
-            showColumnFilters && columnDefType === 'data'
-              ? '3.5rem'
-              : '1.75rem',
-          opacity: 0.8,
+            showColumnFilters && columnDefType === 'data' ? '3.5rem' : '1.5rem',
           touchAction: 'none',
           transition: column.getIsResizing()
             ? undefined

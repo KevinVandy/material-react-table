@@ -17,7 +17,7 @@ const data = [...Array(200)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   age: faker.datatype.number({ min: 18, max: 65 }),
-  gender: faker.name.sex(true),
+  gender: faker.name.sex(),
   state: faker.address.state(),
   salary: Number(faker.finance.amount(10000, 100000, 0)),
 }));
@@ -31,10 +31,12 @@ const columns = [
   {
     header: 'First Name',
     accessorKey: 'firstName',
+    enableGrouping: false,
   },
   {
     header: 'Last Name',
     accessorKey: 'lastName',
+    enableGrouping: false,
   },
   {
     header: 'Age',
@@ -70,6 +72,7 @@ const columns = [
   {
     header: 'Salary',
     accessorKey: 'salary',
+    enableGrouping: false,
     aggregationFn: 'mean',
     AggregatedCell: ({ cell, table }) => (
       <>

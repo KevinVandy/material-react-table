@@ -1,4 +1,4 @@
-import React, { DragEvent, FC, ReactNode, useMemo } from 'react';
+import React, { DragEvent, FC, ReactNode, useMemo, useRef } from 'react';
 import { Box, TableCell, Theme, useTheme } from '@mui/material';
 import { MRT_TableHeadCellColumnActionsButton } from './MRT_TableHeadCellColumnActionsButton';
 import { MRT_TableHeadCellFilterContainer } from './MRT_TableHeadCellFilterContainer';
@@ -54,6 +54,27 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
     ...mcTableHeadCellProps,
   };
 
+  const showColumnActions =
+    (enableColumnActions || columnDef.enableColumnActions) &&
+    columnDef.enableColumnActions !== false;
+
+  const showDragHandle =
+    enableColumnDragging !== false &&
+    columnDef.enableColumnDragging !== false &&
+    (enableColumnDragging ||
+      (enableColumnOrdering && columnDef.enableColumnOrdering !== false) ||
+      (enableGrouping &&
+        columnDef.enableGrouping !== false &&
+        !grouping.includes(column.id)));
+
+  const headerPL = useMemo(() => {
+    let pl = 0;
+    if (column.getCanSort()) pl++;
+    if (showColumnActions) pl += 2;
+    if (showDragHandle) pl += 1.5;
+    return pl;
+  }, [showColumnActions, showDragHandle]);
+
   const draggingBorder = useMemo(
     () =>
       draggingColumn?.id === column.id
@@ -91,7 +112,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
       })
     : columnDef?.Header) ?? columnDef.header) as ReactNode;
 
-  const tableHeadCellRef = React.useRef<HTMLTableCellElement>(null);
+  const tableHeadCellRef = useRef<HTMLTableCellElement>(null);
 
   return (
     <TableCell
@@ -145,23 +166,24 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
     >
       {header.isPlaceholder ? null : (
         <Box
+          className="Mui-TableHeadCell-Content"
           sx={{
             alignItems: 'flex-start',
             display: 'flex',
             flexDirection:
               tableCellProps?.align === 'right' ? 'row-reverse' : 'row',
             justifyContent:
-              tableCellProps?.align === 'right'
-                ? 'flex-start'
-                : columnDefType === 'group' ||
-                  tableCellProps?.align === 'center'
+              columnDefType === 'group' || tableCellProps?.align === 'center'
                 ? 'center'
-                : 'space-between',
+                : column.getCanResize()
+                ? 'space-between'
+                : 'flex-start',
             position: 'relative',
             width: '100%',
           }}
         >
           <Box
+            className="Mui-TableHeadCell-Content-Labels"
             onClick={column.getToggleSortingHandler()}
             sx={{
               alignItems: 'center',
@@ -173,10 +195,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
               flexDirection:
                 tableCellProps?.align === 'right' ? 'row-reverse' : 'row',
               flexWrap: 'nowrap',
-              m: tableCellProps?.align === 'center' ? 'auto' : undefined,
               pl:
-                tableCellProps?.align === 'center' && column.getCanSort()
-                  ? '1rem'
+                tableCellProps?.align === 'center'
+                  ? `${headerPL}rem`
                   : undefined,
               whiteSpace:
                 (columnDef.header?.length ?? 0) < 24 ? 'nowrap' : 'normal',
@@ -195,28 +216,23 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
             )}
           </Box>
           {columnDefType !== 'group' && (
-            <Box sx={{ whiteSpace: 'nowrap' }}>
-              {enableColumnDragging !== false &&
-                columnDef.enableColumnDragging !== false &&
-                (enableColumnDragging ||
-                  (enableColumnOrdering &&
-                    columnDef.enableColumnOrdering !== false) ||
-                  (enableGrouping &&
-                    columnDef.enableGrouping !== false &&
-                    !grouping.includes(column.id))) && (
-                  <MRT_TableHeadCellGrabHandle
-                    column={column}
-                    table={table}
-                    tableHeadCellRef={tableHeadCellRef}
-                  />
-                )}
-              {(enableColumnActions || columnDef.enableColumnActions) &&
-                columnDef.enableColumnActions !== false && (
-                  <MRT_TableHeadCellColumnActionsButton
-                    header={header}
-                    table={table}
-                  />
-                )}
+            <Box
+              className="Mui-TableHeadCell-Content-Actions"
+              sx={{ whiteSpace: 'nowrap' }}
+            >
+              {showDragHandle && (
+                <MRT_TableHeadCellGrabHandle
+                  column={column}
+                  table={table}
+                  tableHeadCellRef={tableHeadCellRef}
+                />
+              )}
+              {showColumnActions && (
+                <MRT_TableHeadCellColumnActionsButton
+                  header={header}
+                  table={table}
+                />
+              )}
             </Box>
           )}
           {column.getCanResize() && (

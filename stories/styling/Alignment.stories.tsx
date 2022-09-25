@@ -48,17 +48,57 @@ const data = [...Array(25)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const CenteredTableBodyCells: Story<MaterialReactTableProps> = () => (
+export const DefaultLeft: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} />
+);
+
+export const CenterCells: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    muiTableHeadCellProps={{
+      align: 'center',
+    }}
     muiTableBodyCellProps={{
       align: 'center',
     }}
   />
 );
 
-export const CenterAllCells: Story<MaterialReactTableProps> = () => (
+export const CenterCellsWithGrabHandle: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnDragging
+    muiTableHeadCellProps={{
+      align: 'center',
+    }}
+    muiTableBodyCellProps={{
+      align: 'center',
+    }}
+  />
+);
+
+export const CenterCellsWithGrabHandleNoSorting: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnDragging
+    enableSorting={false}
+    muiTableHeadCellProps={{
+      align: 'center',
+    }}
+    muiTableBodyCellProps={{
+      align: 'center',
+    }}
+  />
+);
+
+export const CenterCellsNoColumnActions: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

@@ -32,6 +32,7 @@ export const MRT_GlobalFilterTextField = <
       enableGlobalFilterModes,
       icons: { SearchIcon, CloseIcon },
       localization,
+      manualFiltering,
       muiSearchTextFieldProps,
     },
     refs: { searchInputRef },
@@ -47,9 +48,12 @@ export const MRT_GlobalFilterTextField = <
   const [searchValue, setSearchValue] = useState(globalFilter ?? '');
 
   const handleChangeDebounced = useCallback(
-    debounce((event: ChangeEvent<HTMLInputElement>) => {
-      setGlobalFilter(event.target.value ?? undefined);
-    }, 250),
+    debounce(
+      (event: ChangeEvent<HTMLInputElement>) => {
+        setGlobalFilter(event.target.value ?? undefined);
+      },
+      manualFiltering ? 500 : 250,
+    ),
     [],
   );
 

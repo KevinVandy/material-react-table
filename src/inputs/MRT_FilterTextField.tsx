@@ -38,6 +38,7 @@ export const MRT_FilterTextField: FC<Props> = ({
       columnFilterModeOptions,
       icons: { FilterListIcon, CloseIcon },
       localization,
+      manualFiltering,
       muiTableHeadCellFilterTextFieldProps,
     },
     refs: { filterInputRefs },
@@ -132,7 +133,7 @@ export const MRT_FilterTextField: FC<Props> = ({
           column.setFilterValue(value ?? undefined);
         }
       },
-      isTextboxFilter ? 200 : 1,
+      isTextboxFilter ? (manualFiltering ? 400 : 200) : 1,
     ),
     [],
   );
