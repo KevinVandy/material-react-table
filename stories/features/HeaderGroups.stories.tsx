@@ -102,6 +102,7 @@ export const HeaderAndFooterGroups: Story<MaterialReactTableProps> = () => (
       },
     ]}
     data={data}
+    enablePinning
   />
 );
 

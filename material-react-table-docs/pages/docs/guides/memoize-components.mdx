@@ -43,7 +43,7 @@ The reason these features are incompatible with cell memoization is because thes
   columns={columns}
   data={data}
   enableDensityToggle={false} //density does not work with memoized cells
-  memoMode="cell" // memoize table cells to improve render performance, but break some features
+  memoMode="cells" // memoize table cells to improve render performance, but break some features
 />
 ```
 
@@ -74,7 +74,7 @@ The reason these features are incompatible with row memoization is because they 
   data={data}
   enableDensityToggle={false} //density does not work with memoized rows
   enableHiding={false} //column hiding does not work with memoized rows
-  memoMode="row" // memoize table rows to improve render performance, but break a lot of features
+  memoMode="rows" // memoize table rows to improve render performance, but break a lot of features
 />
 ```
 
@@ -88,15 +88,14 @@ If your table never needs to re-render and you don't use any of the dynamic feat
 
 <Box color="warning.main">
   `density toggle, column hiding, column resizing, column reordering, column
-  pinning, row expanding, row selection, filtering, pagination, searching,
-  sorting, row virtualization,`
+  pinning, row expanding, row selection, filtering (internal client-side), pagination (internal client-side), searching (internal client-side), sorting (internal client-side), row virtualization`
 </Box>
 
 None of these features will work with table body memoization because the entire table body is memoized. The table is essentially "frozen" at the first render.
 
 #### Features That Should Still Work with Table Body Memoization:
 
-<Box color="error.main">`None`</Box>
+<Box color="success.main">`manual server side sorting, pagination, filtering`</Box>
 
 ```jsx
 <MaterialReactTable

@@ -120,7 +120,7 @@ export const EnableRowVirtualizationWithMemoizedCells: Story<
     enableRowNumbers
     enableRowVirtualization
     initialState={{ density: 'compact' }}
-    memoMode="cell"
+    memoMode="cells"
   />
 );
 
@@ -136,6 +136,6 @@ export const EnableRowVirtualizationWithMemoizedRows: Story<
     enableRowNumbers
     enableRowVirtualization
     initialState={{ density: 'compact' }}
-    memoMode="row"
+    memoMode="rows"
   />
 );

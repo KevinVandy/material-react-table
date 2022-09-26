@@ -19,13 +19,13 @@ import Example from '../../../examples/enable-row-virtualization';
 
 ## Virtualized Example
 
-Material React Table has a built-in row virtualization feature [(via `@tanstack/react-virual`)](https://tanstack.com/virtual/v3) that allows you to render a large number of rows without major performance issues.
+Material React Table has a built-in row virtualization feature [(via `@tanstack/react-virual`)](https://tanstack.com/virtual/v3) that lets you to render a large number of rows without major performance issues.
 
 Try out the performance of the table below with **10,000 rows**! Filtering, Search, and Sorting also maintain usable performance.
 
-Also be sure to check out the full [row virtualization feature guide docs](/docs/guides/row-virtualization).
+Be sure to also check out the full [row virtualization feature guide docs](/docs/guides/row-virtualization).
 
-> NOTE: You should only enable row virtualization if you have a large number of rows. Depending on the size of the table, if you are rendering less than a couple dozen rows at a time, you will actually just be adding extra overhead to the table renders. Virtualization only becomes necessary when you have over 100 rows or so at the same time with no pagination.
+> NOTE: You should only enable row virtualization if you have a large number of rows. Depending on the size of the table, if you are rendering fewer than a couple dozen rows at a time, you will actually just be adding extra overhead to the table renders. Virtualization only becomes necessary when you have over 100 rows or so at the same time with no pagination.
 
 <Example />
 

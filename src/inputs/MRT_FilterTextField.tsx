@@ -38,6 +38,7 @@ export const MRT_FilterTextField: FC<Props> = ({
       columnFilterModeOptions,
       icons: { FilterListIcon, CloseIcon },
       localization,
+      manualFiltering,
       muiTableHeadCellFilterTextFieldProps,
     },
     refs: { filterInputRefs },
@@ -132,7 +133,7 @@ export const MRT_FilterTextField: FC<Props> = ({
           column.setFilterValue(value ?? undefined);
         }
       },
-      isTextboxFilter ? 200 : 1,
+      isTextboxFilter ? (manualFiltering ? 400 : 200) : 1,
     ),
     [],
   );
@@ -324,7 +325,8 @@ export const MRT_FilterTextField: FC<Props> = ({
             : !filterChipLabel
             ? '120px'
             : 'auto',
-          width: '100%',
+          width: 'calc(100% + 4px)',
+          mx: '-2px',
           '& .MuiSelect-icon': {
             mr: '1.5rem',
           },

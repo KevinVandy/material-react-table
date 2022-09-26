@@ -12,6 +12,9 @@ const DE_Table = dynamic(() => import('../examples/localization-i18n-de'), {
 const ES_Table = dynamic(() => import('../examples/localization-i18n-es'), {
   suspense: true,
 });
+const JA_Table = dynamic(() => import('../examples/localization-i18n-ja'), {
+  suspense: true,
+});
 const PL_Table = dynamic(() => import('../examples/localization-i18n-pl'), {
   suspense: true,
 });
@@ -25,7 +28,7 @@ const RU_Table = dynamic(() => import('../examples/localization-i18n-ru'), {
   suspense: true,
 });
 
-const supportedLocales = ['cs', 'de', 'es', 'pl', 'pt-BR', 'ru'];
+const supportedLocales = ['cs', 'de', 'es', 'ja', 'pl', 'pt-BR', 'ru'];
 
 const LocaleExamples = () => {
   const [currentLocale, setCurrentLocale] = useState('es');
@@ -53,6 +56,7 @@ const LocaleExamples = () => {
           {currentLocale === 'cs' && <CS_Table />}
           {currentLocale === 'de' && <DE_Table />}
           {currentLocale === 'es' && <ES_Table />}
+          {currentLocale === 'ja' && <JA_Table />}
           {currentLocale === 'pl' && <PL_Table />}
           {currentLocale === 'pt-BR' && <PT_BR_Table />}
           {currentLocale === 'ru' && <RU_Table />}

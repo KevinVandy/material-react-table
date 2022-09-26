@@ -52,7 +52,7 @@ export const Example = () => {
       enableRowSelection
       enableStickyHeader
       initialState={{ pagination: { pageSize: 20, pageIndex: 0 } }}
-      memoMode="cell"
+      memoMode="cells"
       muiTableContainerProps={{ sx: { maxHeight: '500px' } }}
       renderDetailPanel={({ row }) => <div>{row.original.firstName}</div>}
       renderTopToolbarCustomActions={() => (
