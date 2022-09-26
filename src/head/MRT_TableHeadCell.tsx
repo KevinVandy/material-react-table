@@ -85,6 +85,24 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
     return pl;
   }, [showColumnActions, showDragHandle]);
 
+  const draggingBorder = useMemo(
+    () =>
+      draggingColumn?.id === column.id
+        ? `1px dashed ${theme.palette.text.secondary}`
+        : hoveredColumn?.id === column.id
+        ? `2px dashed ${theme.palette.primary.main}`
+        : undefined,
+    [draggingColumn, hoveredColumn],
+  );
+
+  const draggingBorders = draggingBorder
+    ? {
+        borderLeft: draggingBorder,
+        borderRight: draggingBorder,
+        borderTop: draggingBorder,
+      }
+    : undefined;
+
   const handleDragEnter = (_e: DragEvent) => {
     if (enableGrouping && hoveredColumn?.id === 'drop-zone') {
       setHoveredColumn(null);
@@ -107,21 +125,6 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
   const handleHeaderTooltipClose = () => {
     setOpenHeaderTooltip(false);
   };
-
-  const draggingBorder =
-    draggingColumn?.id === column.id
-      ? `1px dashed ${theme.palette.text.secondary}`
-      : hoveredColumn?.id === column.id
-      ? `2px dashed ${theme.palette.primary.main}`
-      : undefined;
-
-  const draggingBorders = draggingBorder
-    ? {
-        borderLeft: draggingBorder,
-        borderRight: draggingBorder,
-        borderTop: draggingBorder,
-      }
-    : undefined;
 
   const headerElement = ((columnDef?.Header instanceof Function
     ? columnDef?.Header?.({
