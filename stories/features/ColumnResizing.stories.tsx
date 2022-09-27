@@ -54,6 +54,17 @@ export const ColumnResizingEnabledDefaultOnEnd: Story<
   <MaterialReactTable columns={columns} data={data} enableColumnResizing />
 );
 
+export const ColumnResizingEnabledNoColumnActions: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnResizing
+    enableColumnActions={false}
+  />
+);
+
 export const ColumnResizingDisabledSomeColumns: Story<
   MaterialReactTableProps
 > = () => (
@@ -94,10 +105,22 @@ export const ColumnResizingEnabledOnChange: Story<
   MaterialReactTableProps
 > = () => (
   <MaterialReactTable
+    columnResizeMode="onChange"
     columns={columns}
     data={data}
     enableColumnResizing
+  />
+);
+
+export const ColumnResizingEnabledOnChangeNoActions: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
     columnResizeMode="onChange"
+    columns={columns}
+    data={data}
+    enableColumnActions={false}
+    enableColumnResizing
   />
 );
 
@@ -129,7 +152,6 @@ export const ColumnResizingWithHeaderGroups: Story<
     columns={[
       {
         header: 'Name',
-        accessorKey: 'name',
         footer: 'Name',
         columns: [
           {
@@ -147,7 +169,6 @@ export const ColumnResizingWithHeaderGroups: Story<
       },
       {
         header: 'Info',
-        accessorKey: 'info',
         footer: 'Info',
         columns: [
           {

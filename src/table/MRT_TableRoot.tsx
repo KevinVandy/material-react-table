@@ -46,6 +46,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   const filterInputRefs = useRef<Record<string, HTMLInputElement>>({});
   const searchInputRef = useRef<HTMLInputElement>(null);
   const tableContainerRef = useRef<HTMLDivElement>(null);
+  const tableHeadCellRefs = useRef<Record<string, HTMLTableCellElement>>({});
   const tablePaperRef = useRef<HTMLDivElement>(null);
   const topToolbarRef = useRef<HTMLDivElement>(null);
 
@@ -294,6 +295,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       filterInputRefs,
       searchInputRef,
       tableContainerRef,
+      tableHeadCellRefs,
       tablePaperRef,
       topToolbarRef,
     },

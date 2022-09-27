@@ -199,6 +199,7 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
     filterInputRefs: MutableRefObject<Record<string, HTMLInputElement>>;
     searchInputRef: MutableRefObject<HTMLInputElement>;
     tableContainerRef: MutableRefObject<HTMLDivElement>;
+    tableHeadCellRefs: MutableRefObject<Record<string, HTMLTableCellElement>>;
     tablePaperRef: MutableRefObject<HTMLDivElement>;
     topToolbarRef: MutableRefObject<HTMLDivElement>;
   };

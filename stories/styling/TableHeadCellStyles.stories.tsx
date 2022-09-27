@@ -5,6 +5,7 @@ import MaterialReactTable, {
   MRT_ColumnDef,
 } from '../../src';
 import { faker } from '@faker-js/faker';
+import { Box } from '@mui/material';
 
 const meta: Meta = {
   title: 'Styling/Style Table Head Cells',
@@ -86,5 +87,35 @@ export const StyleTableHeadCellsIndividually: Story<
       },
     ]}
     data={data}
+  />
+);
+
+export const CustomHeadCellRenders: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        accessorKey: 'firstName',
+        Header: <em>First Name</em>,
+      },
+      {
+        header: 'Last Name',
+        accessorKey: 'lastName',
+        Header: () => <em>Last Name</em>,
+      },
+      {
+        header: 'Current Age',
+        accessorKey: 'age',
+        Header: ({ column }) => (
+          <Box color="primary.main">{column.columnDef.header}</Box>
+        ),
+      },
+      {
+        header: 'Address of Residence (Permanent)',
+        accessorKey: 'address',
+      },
+    ]}
+    data={data}
+    enableColumnResizing
   />
 );

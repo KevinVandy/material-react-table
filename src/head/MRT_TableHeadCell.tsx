@@ -1,12 +1,5 @@
-import React, {
-  DragEvent,
-  FC,
-  ReactNode,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import { Box, TableCell, Theme, Tooltip, useTheme } from '@mui/material';
+import React, { DragEvent, FC, ReactNode, useMemo } from 'react';
+import { Box, TableCell, Theme, useTheme } from '@mui/material';
 import { MRT_TableHeadCellColumnActionsButton } from './MRT_TableHeadCellColumnActionsButton';
 import { MRT_TableHeadCellFilterContainer } from './MRT_TableHeadCellFilterContainer';
 import { MRT_TableHeadCellFilterLabel } from './MRT_TableHeadCellFilterLabel';
@@ -33,6 +26,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
       enableMultiSort,
       muiTableHeadCellProps,
     },
+    refs: { tableHeadCellRefs },
     setHoveredColumn,
   } = table;
   const {
@@ -45,9 +39,6 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
   const { column } = header;
   const { columnDef } = column;
   const { columnDefType } = columnDef;
-
-  const headerEl = useRef<HTMLDivElement>();
-  const [openHeaderTooltip, setOpenHeaderTooltip] = useState(false);
 
   const mTableHeadCellProps =
     muiTableHeadCellProps instanceof Function
@@ -80,8 +71,8 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
   const headerPL = useMemo(() => {
     let pl = 0;
     if (column.getCanSort()) pl++;
-    if (showColumnActions) pl += 2;
-    if (showDragHandle) pl += 1.5;
+    if (showColumnActions) pl += 1.75;
+    if (showDragHandle) pl += 1.25;
     return pl;
   }, [showColumnActions, showDragHandle]);
 
@@ -114,53 +105,25 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
     }
   };
 
-  const handleHeaderTooltipOpen = () => {
-    if (headerEl.current) {
-      setOpenHeaderTooltip(
-        headerEl.current.offsetWidth < headerEl.current.scrollWidth,
-      );
-    }
-  };
-
-  const handleHeaderTooltipClose = () => {
-    setOpenHeaderTooltip(false);
-  };
-
-  const headerElement = ((columnDef?.Header instanceof Function
-    ? columnDef?.Header?.({
-        column,
-        header,
-        table,
-      })
-    : columnDef?.Header) ?? (
-    <Tooltip
-      onClose={handleHeaderTooltipClose}
-      onOpen={handleHeaderTooltipOpen}
-      open={openHeaderTooltip}
-      title={column.columnDef.header}
-    >
-      <Box
-        ref={headerEl}
-        sx={{
-          flex: '1 1',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {columnDef.header}
-      </Box>
-    </Tooltip>
-  )) as ReactNode;
-
-  const tableHeadCellRef = useRef<HTMLTableCellElement>(null);
+  const headerElement =
+    columnDef?.Header instanceof Function
+      ? columnDef?.Header?.({
+          column,
+          header,
+          table,
+        })
+      : columnDef?.Header ?? (columnDef.header as ReactNode);
 
   return (
     <TableCell
       align={columnDefType === 'group' ? 'center' : 'left'}
       colSpan={header.colSpan}
       onDragEnter={handleDragEnter}
-      ref={tableHeadCellRef}
+      ref={(node) => {
+        if (node) {
+          tableHeadCellRefs.current[column.id] = node as HTMLTableCellElement;
+        }
+      }}
       {...tableCellProps}
       sx={(theme: Theme) => ({
         fontWeight: 'bold',
@@ -235,8 +198,6 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
               display: 'flex',
               flexDirection:
                 tableCellProps?.align === 'right' ? 'row-reverse' : 'row',
-              flexWrap: 'nowrap',
-              m: tableCellProps?.align === 'center' ? 'auto' : undefined,
               overflow: 'hidden',
               pl:
                 tableCellProps?.align === 'center'
@@ -244,7 +205,17 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
                   : undefined,
             }}
           >
-            {headerElement}
+            <Box
+              sx={{
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace:
+                  (columnDef.header?.length ?? 0) < 20 ? 'nowrap' : 'normal',
+              }}
+              title={columnDef.header}
+            >
+              {headerElement}
+            </Box>
             {column.getCanSort() && (
               <MRT_TableHeadCellSortLabel
                 header={header}
@@ -265,7 +236,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
                 <MRT_TableHeadCellGrabHandle
                   column={column}
                   table={table}
-                  tableHeadCellRef={tableHeadCellRef}
+                  tableHeadCellRef={{
+                    current: tableHeadCellRefs.current[column.id],
+                  }}
                 />
               )}
               {showColumnActions && (

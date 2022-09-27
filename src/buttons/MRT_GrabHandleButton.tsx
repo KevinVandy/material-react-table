@@ -43,7 +43,7 @@ export const MRT_GrabHandleButton = <TData extends Record<string, any> = {}>({
         onDragEnd={onDragEnd}
         sx={(theme) => ({
           cursor: 'grab',
-          m: 0,
+          m: '0 -0.1rem',
           opacity: 0.5,
           p: '2px',
           transition: 'all 150ms ease-in-out',
