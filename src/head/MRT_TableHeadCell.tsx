@@ -1,5 +1,12 @@
-import React, { DragEvent, FC, ReactNode, useMemo, useRef } from 'react';
-import { Box, TableCell, Theme, useTheme } from '@mui/material';
+import React, {
+  DragEvent,
+  FC,
+  ReactNode,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { Box, TableCell, Theme, Tooltip, useTheme } from '@mui/material';
 import { MRT_TableHeadCellColumnActionsButton } from './MRT_TableHeadCellColumnActionsButton';
 import { MRT_TableHeadCellFilterContainer } from './MRT_TableHeadCellFilterContainer';
 import { MRT_TableHeadCellFilterLabel } from './MRT_TableHeadCellFilterLabel';
@@ -38,6 +45,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
   const { column } = header;
   const { columnDef } = column;
   const { columnDefType } = columnDef;
+
+  const headerEl = useRef<HTMLDivElement>();
+  const [openHeaderTooltip, setOpenHeaderTooltip] = useState(false);
 
   const mTableHeadCellProps =
     muiTableHeadCellProps instanceof Function
@@ -104,13 +114,44 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
     }
   };
 
+  const handleHeaderTooltipOpen = () => {
+    if (headerEl.current) {
+      setOpenHeaderTooltip(
+        headerEl.current.offsetWidth < headerEl.current.scrollWidth,
+      );
+    }
+  };
+
+  const handleHeaderTooltipClose = () => {
+    setOpenHeaderTooltip(false);
+  };
+
   const headerElement = ((columnDef?.Header instanceof Function
     ? columnDef?.Header?.({
         column,
         header,
         table,
       })
-    : columnDef?.Header) ?? columnDef.header) as ReactNode;
+    : columnDef?.Header) ?? (
+    <Tooltip
+      onClose={handleHeaderTooltipClose}
+      onOpen={handleHeaderTooltipOpen}
+      open={openHeaderTooltip}
+      title={column.columnDef.header}
+    >
+      <Box
+        ref={headerEl}
+        sx={{
+          flex: '1 1',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {columnDef.header}
+      </Box>
+    </Tooltip>
+  )) as ReactNode;
 
   const tableHeadCellRef = useRef<HTMLTableCellElement>(null);
 
@@ -195,12 +236,12 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
               flexDirection:
                 tableCellProps?.align === 'right' ? 'row-reverse' : 'row',
               flexWrap: 'nowrap',
+              m: tableCellProps?.align === 'center' ? 'auto' : undefined,
+              overflow: 'hidden',
               pl:
                 tableCellProps?.align === 'center'
                   ? `${headerPL}rem`
                   : undefined,
-              whiteSpace:
-                (columnDef.header?.length ?? 0) < 24 ? 'nowrap' : 'normal',
             }}
           >
             {headerElement}
