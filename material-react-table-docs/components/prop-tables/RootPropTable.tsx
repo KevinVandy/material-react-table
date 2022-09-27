@@ -162,7 +162,6 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
       }}
       enableColumnActions={!onlyProps}
       enableColumnFilterModes
-      enableColumnOrdering={!onlyProps}
       enablePagination={false}
       enablePinning
       enableRowNumbers
@@ -195,6 +194,7 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
         </Typography>
       )}
       rowNumberMode="static"
+      onColumnPinningChange={setColumnPinning}
       state={{ columnPinning }}
     />
   );

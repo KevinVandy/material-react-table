@@ -24,7 +24,12 @@ const Example = () => {
         setIsRefetching(true);
       }
 
-      const url = new URL('/api/data', 'https://www.material-react-table.com');
+      const url = new URL(
+        '/api/data',
+        process.env.NODE_ENV === 'production'
+          ? 'https://www.material-react-table.com'
+          : 'http://localhost:3000',
+      );
       url.searchParams.set(
         'start',
         `${pagination.pageIndex * pagination.pageSize}`,

@@ -152,7 +152,6 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
       }}
       enableColumnActions={!onlyProps}
       enableColumnFilterModes
-      enableColumnOrdering={!onlyProps}
       enablePagination={false}
       enablePinning
       enableRowNumbers
@@ -187,6 +186,7 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
         </Typography>
       )}
       rowNumberMode="static"
+      onColumnPinningChange={setColumnPinning}
       state={{ columnPinning }}
     />
   );

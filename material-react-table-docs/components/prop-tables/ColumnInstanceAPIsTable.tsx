@@ -110,7 +110,6 @@ const ColumnInstanceAPIsTable: FC<Props> = ({ onlyProps }) => {
       }}
       enableColumnActions={!onlyProps}
       enableColumnFilterModes
-      enableColumnOrdering={!onlyProps}
       enablePagination={false}
       enablePinning
       enableRowNumbers
@@ -142,6 +141,7 @@ const ColumnInstanceAPIsTable: FC<Props> = ({ onlyProps }) => {
         </Typography>
       )}
       rowNumberMode="static"
+      onColumnPinningChange={setColumnPinning}
       state={{ columnPinning }}
     />
   );
