@@ -2,6 +2,7 @@ import Head from 'next/head';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import EnableExample from '../../../examples/enable-row-selection';
 import SingleExample from '../../../examples/single-row-selection';
+import ManualExample from '../../../examples/manual-selection';
 import CustomizeExample from '../../../examples/customize-row-selection';
 
 <Head>
@@ -179,5 +180,11 @@ The selection checkboxes can be customized with the `muiSelectCheckboxProps` pro
 ```
 
 <CustomizeExample />
+
+### Manual Row Selection Without Checkboxes
+
+You may have a use case where you want to be able to select rows by clicking them, but you don't want to show any checkboxes or radio buttons. You can do this by implementing a row selection feature yourself, while keeping the `enableRowSelection` prop `false` so that the default selection behavior is disabled.
+
+<ManualExample />
 
 View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-selection-examples)**
