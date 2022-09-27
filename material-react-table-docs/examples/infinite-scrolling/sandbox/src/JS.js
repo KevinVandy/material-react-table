@@ -53,7 +53,9 @@ const Example = () => {
       async ({ pageParam = 0 }) => {
         const url = new URL(
           '/api/data',
-          'https://www.material-react-table.com',
+          process.env.NODE_ENV === 'production'
+            ? 'https://www.material-react-table.com'
+            : 'http://localhost:3000',
         );
         url.searchParams.set('start', `${pageParam * fetchSize}`);
         url.searchParams.set('size', `${fetchSize}`);

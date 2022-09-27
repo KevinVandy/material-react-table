@@ -206,6 +206,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
             }}
           >
             <Box
+              className="Mui-TableHeadCell-Content-Wrapper"
               sx={{
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',

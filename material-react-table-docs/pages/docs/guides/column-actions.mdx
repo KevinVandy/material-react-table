@@ -2,6 +2,7 @@ import Head from 'next/head';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import DisableExample from '../../../examples/disable-column-actions';
+import ColumnActionsSpaceExample from '../../../examples/column-actions-space';
 
 <Head>
   <title>Column Actions Feature Guide - Material React Table Docs</title>
@@ -52,6 +53,14 @@ Alternatively, if you only want to hide the column actions button in specific co
 In this demo, we disable the column actions button for the 'id' column.
 
 <DisableExample />
+
+### Justify Column Actions Button
+
+> Changed to left alignment in `v1.2.0`
+
+By default, the column actions button is left aligned right after the column header text, and any sort or filter labels that may be present. If you want to change this, you can use a CSS selector in `muiTableHeadCellProps` to change the `justify-content` property of the column header container.
+
+<ColumnActionsSpaceExample />
 
 ### Custom Column Actions Menu
 

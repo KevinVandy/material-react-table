@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, {
   MaterialReactTableProps,
@@ -7,6 +7,7 @@ import MaterialReactTable, {
 } from '../../src';
 import { faker } from '@faker-js/faker';
 import { Button } from '@mui/material';
+import { useEffect } from '@storybook/addons';
 
 const meta: Meta = {
   title: 'Features/Selection Examples',
@@ -42,6 +43,47 @@ const data = [...Array(15)].map(() => ({
 export const SelectionEnabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableRowSelection />
 );
+
+export const SelectionEnabledWithRowClick: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowSelection
+    muiTableBodyRowProps={({ row }) => ({
+      onClick: row.getToggleSelectedHandler(),
+      sx: {
+        cursor: 'pointer',
+      },
+    })}
+  />
+);
+
+export const ManualSelection: Story<MaterialReactTableProps> = () => {
+  const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
+
+  console.info(rowSelection);
+
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      muiTableBodyRowProps={({ row }) => ({
+        onClick: () =>
+          setRowSelection((prev) => ({
+            ...prev,
+            [row.id]: !prev[row.id],
+          })),
+        selected: rowSelection[row.id],
+        sx: {
+          cursor: 'pointer',
+        },
+      })}
+      state={{ rowSelection }}
+    />
+  );
+};
 
 export const SelectAllModeAll: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
