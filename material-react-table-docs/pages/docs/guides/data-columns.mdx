@@ -11,7 +11,7 @@ import AlignmentExample from '../../../examples/column-alignment';
 
 ## Data Columns
 
-Data Columns are the columns that are used to display data. They are the default columns that are created when you create a column with an `accessorKey` or `accessorFn`.
+Data Columns are used to display data and are the default columns that are created when you create a column with an `accessorKey` or `accessorFn`.
 
 The table can perform processing on the data of a Data Column, such as sorting, filtering, grouping, etc.
 
@@ -19,7 +19,7 @@ The other type of column that you can make is a "Display Column", which you can 
 
 ### Accessors (Connect a column to data)
 
-Each column definition must have, at the very least, an `accessorKey` (or a combination of an `id` and `accessorFn`) and a `header` property. The `accessorKey`/`accessorFn` property is the key that will be used to join the data from the `data` keys. The `header` property is used to display the column header, but is also used in other places in the table.
+Each column definition must have at least an `accessorKey` (or a combination of an `id` and `accessorFn`) and a `header` property. The `accessorKey`/`accessorFn` property is the key that will be used to join the data from the `data` keys. The `header` property is used to display the column header, but is also used in other places in the table.
 
 #### Method 1 - Using an accessorKey (Recommended)
 
@@ -56,7 +56,7 @@ const columns = useMemo<MRT_ColumnDef<Customer>[]>( //TS helps with the autocomp
 
 #### Method 2 - Using an accessorFn and id
 
-You can alternatively use the `accessorFn` property. Here are at least 3 ways you can use it.
+You can alternatively use the `accessorFn` property. Here are at least three ways you can use it.
 
 In each case, the `id` property is now required since there is no `accessorKey` for MRT to derive it from.
 
@@ -166,7 +166,7 @@ const columns = useMemo(
 );
 ```
 
-> See the [Customize Components Guide](/docs/guides/customize-components) for more ways to style and customize header and cell components
+> See the [Customize Components Guide](/docs/guides/customize-components) for more ways to style and customize header and cell components.
 
 ### Enable or Disable Features Per Column
 
@@ -190,13 +190,13 @@ const columns = useMemo(
 );
 ```
 
-> See all the column options you can use in the [Column Options API Reference](/docs/api/column-options)
+> See all the column options you can use in the [Column Options API Reference](/docs/api/column-options).
 
 ### Set Column Widths
 
-This is also covered in the [Column Resizing Guide](/docs/guides/column-resizing), but we'll also quickly cover it here.
+This topic is covered in detail in the [Column Resizing Guide](/docs/guides/column-resizing), but here is a brief overview.
 
-Setting a CSS (sx or style) width prop will NOT work! Material React Table (really TanStack Table) keep track and set the widths of each column internally.
+Setting a CSS (sx or style) width prop will NOT work. Material React Table (or, more accurately, TanStack Table) will keep track and set the widths of each column internally.
 
 You CAN, however, change the default width of any column by setting its `size` option on the column definition. `minSize` and `maxSize` are also available to set the minimum and maximum width of the column during resizing.
 
@@ -222,7 +222,7 @@ const columns = [
 ];
 ```
 
-You may notice however, that the columns may be not change their size as much as you would expect. This is because the browser treats `<th>` and `<td>` elements differently with in a `<table>` element by default.
+However, the column sizes might not change as much as you would expect. This is because the browser treats `<th>` and `<td>` elements differently with in a `<table>` element by default.
 
 You can improve this slightly by changing the table layout to `fixed` instead of the default `auto` in the `muiTableProps`.
 
@@ -236,9 +236,9 @@ You can improve this slightly by changing the table layout to `fixed` instead of
 />
 ```
 
-The Columns will still try to increase their width to take up the full width of the table, but the columns that do have a defined size will have their width respected more.
+The columns will still try to increase their width to take up the full width of the table, but the columns that do have a defined size will have their width respected more.
 
-For further reading on how table-layout `fixed` vs `auto` works, we recommend this [blog post](https://css-tricks.com/almanac/properties/t/table-layout/) by CSS-Tricks.
+To learn more about how table-layout `fixed` vs `auto` works, we recommend reading this [blog post](https://css-tricks.com/almanac/properties/t/table-layout/) by CSS-Tricks.
 
 ### Set Column Alignment
 
