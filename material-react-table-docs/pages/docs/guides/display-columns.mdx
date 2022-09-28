@@ -11,9 +11,9 @@ import Example from '../../../examples/customize-display-columns';
 
 ## Display Columns
 
-Display Columns are columns that are used to display non-data elements in a table. They only require an `id` and `header` in the column definition. They do not need an `accessorKey` or `accessorFn`, as they are not meant to connect to your data at all.
+Display columns are used to display non-data elements in a table. They only require an `id` and `header` in the column definition. They do not need an `accessorKey` or `accessorFn`, as they are not meant to connect to your data at all.
 
-They do not have any processing features, such as sorting, filtering, grouping, etc. enabled on them by default.
+Display columns do not have any processing features, such as sorting, filtering, grouping, etc. enabled on them by default.
 
 ### Built-in MRT Display Columns
 
@@ -25,7 +25,7 @@ Material React Table has a few built-in display columns that are created automat
 - `mrt-row-select` - created when `enableRowSelection` prop is `true`
 - `mrt-row-numbers` - created when `enableRowNumbers` prop is `true`
 
-Display columns are for the most part the same as a data column, except for not having any accessor. Also, when a display column is created internally by Material React Table, the following options are all set to false by default:
+Display columns are, for the most part, the same as a data column, except for not having any accessor. Also, when a display column is created internally by Material React Table, the following options are all set to false by default:
 
 ```tsx
 const defaultDisplayColumnDefOptions = {
@@ -49,11 +49,11 @@ All of these values are able to be overridden if needed, and you'll learn about 
 
 ### Customize Built-in MRT Display Columns
 
-It is possible to change and override the default behavior of built-in display columns. Whether you want to change the default column width, add some styles, or enable some features, such as column actions or column drag 'n drop, you can do it with the `displayColumnDefOptions` prop.
+It is possible to change and override the default behavior of built-in display columns. Whether you want to change the default column width, add some styles, or enable some features, such as column actions or column drag and drop, you can do it with the `displayColumnDefOptions` prop.
 
 #### Display Column Definition Options Prop
 
-Let's say you need to adjust the width of the Actions column to be wide enough to fit all of your action buttons. You could do that like so:
+Let's say you need to adjust the width of the Actions column to be wide enough to fit all of your action buttons. You could do that as follows:
 
 ```jsx
 <MaterialReactTable
@@ -71,7 +71,7 @@ Let's say you need to adjust the width of the Actions column to be wide enough t
 />
 ```
 
-Or maybe you want to enable a feature that is off by default for display columns, like column ordering or pinning.
+Or maybe you want to enable a feature that is off by default for display columns, such as column ordering or pinning.
 
 ```tsx
 <MaterialReactTable
@@ -88,13 +88,13 @@ Or maybe you want to enable a feature that is off by default for display columns
 />
 ```
 
-Here is a full example and demo for customizing display columns
+Here is a full example and demo for customizing display columns.
 
 <Example />
 
 ### Create your own Display Columns
 
-You don't have to use the built in Row Actions feature. You can just create your own display columns instead. It is as easy as creating a normal column, but specifying the `columnDefType` as `display`.
+You do not have to use the built in Row Actions feature. You can just create your own display columns instead. It is as easy as creating a normal column, only specifying the `columnDefType` as `display`.
 
 ```tsx
 const columns = [
