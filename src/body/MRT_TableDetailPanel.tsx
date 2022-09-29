@@ -44,7 +44,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, table }) => {
         })}
       >
         {renderDetailPanel && (
-          <Collapse in={row.getIsExpanded()}>
+          <Collapse unmountOnExit mountOnEnter in={row.getIsExpanded()}>
             {renderDetailPanel({ row, table })}
           </Collapse>
         )}

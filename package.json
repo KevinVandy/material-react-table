@@ -93,7 +93,7 @@
     "@emotion/styled": ">=11",
     "@mui/icons-material": ">=5",
     "@mui/material": ">=5",
-    "react": ">=16.8"
+    "react": ">=17.0"
   },
   "dependencies": {
     "@tanstack/match-sorter-utils": "8.1.1",
