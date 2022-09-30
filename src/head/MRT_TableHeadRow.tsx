@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { alpha, lighten, TableRow } from '@mui/material';
+import TableRow from '@mui/material/TableRow';
+import { alpha, lighten } from '@mui/material/styles';
 import { MRT_TableHeadCell } from './MRT_TableHeadCell';
 import type { MRT_Header, MRT_HeaderGroup, MRT_TableInstance } from '..';
 

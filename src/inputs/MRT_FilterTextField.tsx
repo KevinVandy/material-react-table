@@ -6,18 +6,16 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import {
-  Box,
-  Checkbox,
-  Chip,
-  debounce,
-  IconButton,
-  InputAdornment,
-  MenuItem,
-  TextField,
-  TextFieldProps,
-  Tooltip,
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import Checkbox from '@mui/material/Checkbox';
+import Chip from '@mui/material/Chip';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import MenuItem from '@mui/material/MenuItem';
+import TextField from '@mui/material/TextField';
+import Tooltip from '@mui/material/Tooltip';
+import debounce from '@mui/material/utils/debounce';
+import type { TextFieldProps } from '@mui/material/TextField';
 import type { MRT_Header, MRT_TableInstance } from '..';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 

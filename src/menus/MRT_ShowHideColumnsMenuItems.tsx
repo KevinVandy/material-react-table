@@ -5,14 +5,12 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import {
-  Box,
-  FormControlLabel,
-  MenuItem,
-  Switch,
-  Tooltip,
-  Typography,
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Switch from '@mui/material/Switch';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 import { MRT_ColumnPinningButtons } from '../buttons/MRT_ColumnPinningButtons';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 import { reorderColumn } from '../column.utils';

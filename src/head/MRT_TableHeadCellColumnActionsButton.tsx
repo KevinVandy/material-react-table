@@ -1,5 +1,6 @@
 import React, { FC, MouseEvent, useState } from 'react';
-import { IconButton, Tooltip } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
 import type { MRT_Header, MRT_TableInstance } from '..';
 

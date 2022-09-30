@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
-import { TableCellProps, TableSortLabel, Tooltip } from '@mui/material';
+import TableSortLabel from '@mui/material/TableSortLabel';
+import Tooltip from '@mui/material/Tooltip';
 import { MRT_Header, MRT_TableInstance } from '..';
+import type { TableCellProps } from '@mui/material/TableCell';
 
 interface Props {
   header: MRT_Header;

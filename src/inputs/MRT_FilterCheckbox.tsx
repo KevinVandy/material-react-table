@@ -1,10 +1,8 @@
 import React, { FC } from 'react';
-import {
-  Checkbox,
-  CheckboxProps,
-  FormControlLabel,
-  Tooltip,
-} from '@mui/material';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Tooltip from '@mui/material/Tooltip';
+import type { CheckboxProps } from '@mui/material/Checkbox';
 import type { MRT_Column, MRT_TableInstance } from '..';
 
 interface Props {

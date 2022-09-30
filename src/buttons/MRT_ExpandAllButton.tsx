@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { IconButton, Tooltip } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import { MRT_TableInstance } from '..';
 
 interface Props {

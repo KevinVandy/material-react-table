@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FocusEvent, KeyboardEvent, useState } from 'react';
-import { TextField, TextFieldProps } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import type { TextFieldProps } from '@mui/material/TextField';
 import type { MRT_Cell, MRT_TableInstance } from '..';
 
 interface Props<TData extends Record<string, any> = {}> {

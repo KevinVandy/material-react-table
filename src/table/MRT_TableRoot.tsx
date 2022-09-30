@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
-  TableState,
   getCoreRowModel,
   getExpandedRowModel,
   getFacetedRowModel,
@@ -9,14 +8,16 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  GroupingState,
 } from '@tanstack/react-table';
-import { Box, Dialog, Grow } from '@mui/material';
+import Box from '@mui/material/Box';
+import Dialog from '@mui/material/Dialog';
+import Grow from '@mui/material/Grow';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
 import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
 import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMenuButton';
 import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 import { MRT_TablePaper } from './MRT_TablePaper';
+import { MRT_EditRowModal } from '../body/MRT_EditRowModal';
 import {
   prepareColumns,
   getAllLeafColumnDefs,
@@ -25,6 +26,7 @@ import {
   showExpandColumn,
   getColumnId,
 } from '../column.utils';
+import type { GroupingState, TableState } from '@tanstack/react-table';
 import type {
   MRT_Cell,
   MRT_Column,
@@ -36,7 +38,6 @@ import type {
   MaterialReactTableProps,
   MRT_Localization,
 } from '..';
-import { MRT_EditRowModal } from '../body/MRT_EditRowModal';
 
 export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   props: MaterialReactTableProps<TData> & { localization: MRT_Localization },

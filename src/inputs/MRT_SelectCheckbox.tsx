@@ -1,5 +1,8 @@
 import React, { FC, MouseEvent } from 'react';
-import { Checkbox, Tooltip, Radio, Theme } from '@mui/material';
+import Checkbox from '@mui/material/Checkbox';
+import Tooltip from '@mui/material/Tooltip';
+import Radio from '@mui/material/Radio';
+import type { Theme } from '@mui/material/styles';
 import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {

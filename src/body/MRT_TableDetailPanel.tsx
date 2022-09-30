@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
-import { Collapse, TableCell, TableRow } from '@mui/material';
+import Collapse from '@mui/material/Collapse';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
 import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {

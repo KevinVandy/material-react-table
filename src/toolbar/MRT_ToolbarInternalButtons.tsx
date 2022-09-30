@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import Box from '@mui/material/Box';
 import { MRT_FullScreenToggleButton } from '../buttons/MRT_FullScreenToggleButton';
 import { MRT_ShowHideColumnsButton } from '../buttons/MRT_ShowHideColumnsButton';
 import { MRT_ToggleDensePaddingButton } from '../buttons/MRT_ToggleDensePaddingButton';

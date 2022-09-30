@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { Box, Divider } from '@mui/material';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 import { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {

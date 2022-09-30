@@ -1,5 +1,7 @@
 import React from 'react';
-import { Box, IconButton, Tooltip } from '@mui/material';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import type { MRT_Column, MRT_TableInstance } from '..';
 
 interface Props<TData extends Record<string, any> = {}> {

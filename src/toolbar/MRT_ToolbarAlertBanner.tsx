@@ -1,5 +1,9 @@
 import React, { FC, Fragment } from 'react';
-import { Alert, AlertTitle, Box, Chip, Collapse } from '@mui/material';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Box from '@mui/material/Box';
+import Chip from '@mui/material/Chip';
+import Collapse from '@mui/material/Collapse';
 import { MRT_TableInstance } from '..';
 
 interface Props {

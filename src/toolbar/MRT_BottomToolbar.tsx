@@ -1,5 +1,8 @@
 import React, { FC } from 'react';
-import { alpha, Box, Toolbar, useMediaQuery } from '@mui/material';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { alpha } from '@mui/material/styles';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';

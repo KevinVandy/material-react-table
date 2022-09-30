@@ -8,7 +8,9 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { darken, lighten, Skeleton, TableCell, useTheme } from '@mui/material';
+import Skeleton from '@mui/material/Skeleton';
+import TableCell from '@mui/material/TableCell';
+import { darken, lighten, useTheme } from '@mui/material/styles';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 import { MRT_TableBodyRowGrabHandle } from './MRT_TableBodyRowGrabHandle';

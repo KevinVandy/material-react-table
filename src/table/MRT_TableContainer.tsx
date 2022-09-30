@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useLayoutEffect, useState } from 'react';
-import { TableContainer } from '@mui/material';
+import TableContainer from '@mui/material/TableContainer';
 import { MRT_Table } from './MRT_Table';
 import type { MRT_TableInstance } from '..';
 

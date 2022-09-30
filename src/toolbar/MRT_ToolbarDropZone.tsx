@@ -1,5 +1,8 @@
 import React, { DragEvent, FC } from 'react';
-import { alpha, Box, Fade, Typography } from '@mui/material';
+import { alpha } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Fade from '@mui/material/Fade';
+import Typography from '@mui/material/Typography';
 import { MRT_TableInstance } from '..';
 
 interface Props {

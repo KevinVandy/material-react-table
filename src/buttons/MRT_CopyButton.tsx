@@ -1,5 +1,6 @@
 import React, { MouseEvent, ReactNode, useState } from 'react';
-import { Button, Tooltip } from '@mui/material';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
 import { MRT_Cell, MRT_TableInstance } from '..';
 
 interface Props<TData extends Record<string, any> = {}> {

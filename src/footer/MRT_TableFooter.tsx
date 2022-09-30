@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { lighten, TableFooter } from '@mui/material';
+import TableFooter from '@mui/material/TableFooter';
+import { lighten } from '@mui/material/styles';
 import { MRT_TableFooterRow } from './MRT_TableFooterRow';
 import type { MRT_TableInstance } from '..';
 

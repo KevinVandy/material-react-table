@@ -1,8 +1,12 @@
 import React, { FC, useState } from 'react';
-import { Box, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
-import type { MRT_Header, MRT_TableInstance } from '..';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import { MRT_FilterOptionMenu } from './MRT_FilterOptionMenu';
 import { MRT_ShowHideColumnsMenu } from './MRT_ShowHideColumnsMenu';
+import type { MRT_Header, MRT_TableInstance } from '..';
 
 export const commonMenuItemStyles = {
   py: '6px',

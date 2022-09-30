@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Collapse } from '@mui/material';
+import Collapse from '@mui/material/Collapse';
 import { MRT_FilterRangeFields } from '../inputs/MRT_FilterRangeFields';
 import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
 import { MRT_Header, MRT_TableInstance } from '..';

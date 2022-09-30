@@ -1,10 +1,13 @@
 import React, { FC, MouseEvent } from 'react';
-import { Box, ListItemIcon, Menu, MenuItem } from '@mui/material';
-import type { MRT_Row, MRT_TableInstance } from '..';
+import Box from '@mui/material/Box';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import {
   commonListItemStyles,
   commonMenuItemStyles,
 } from './MRT_ColumnActionMenu';
+import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
   anchorEl: HTMLElement | null;

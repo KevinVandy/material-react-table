@@ -1,7 +1,9 @@
-import { ColumnOrderState, GroupingState } from '@tanstack/react-table';
-import { alpha, lighten, TableCellProps, Theme } from '@mui/material';
+import type { ColumnOrderState, GroupingState } from '@tanstack/react-table';
 import { MRT_FilterFns } from './filterFns';
 import { MRT_SortingFns } from './sortingFns';
+import { alpha, lighten } from '@mui/material/styles';
+import type { TableCellProps } from '@mui/material/TableCell';
+import type { Theme } from '@mui/material/styles';
 import type {
   MaterialReactTableProps,
   MRT_Column,

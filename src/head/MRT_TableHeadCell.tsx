@@ -1,5 +1,7 @@
 import React, { DragEvent, FC, ReactNode, useMemo } from 'react';
-import { Box, TableCell, Theme, useTheme } from '@mui/material';
+import Box from '@mui/material/Box';
+import TableCell from '@mui/material/TableCell';
+import { useTheme } from '@mui/material/styles';
 import { MRT_TableHeadCellColumnActionsButton } from './MRT_TableHeadCellColumnActionsButton';
 import { MRT_TableHeadCellFilterContainer } from './MRT_TableHeadCellFilterContainer';
 import { MRT_TableHeadCellFilterLabel } from './MRT_TableHeadCellFilterLabel';
@@ -7,6 +9,7 @@ import { MRT_TableHeadCellGrabHandle } from './MRT_TableHeadCellGrabHandle';
 import { MRT_TableHeadCellResizeHandle } from './MRT_TableHeadCellResizeHandle';
 import { MRT_TableHeadCellSortLabel } from './MRT_TableHeadCellSortLabel';
 import { getCommonCellStyles } from '../column.utils';
+import type { Theme } from '@mui/material/styles';
 import type { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {

@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react';
-import { Box, Menu, MenuItem } from '@mui/material';
+import Box from '@mui/material/Box';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import type {
   MRT_FilterOption,
   MRT_Header,

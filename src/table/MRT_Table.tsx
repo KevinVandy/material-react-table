@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Table } from '@mui/material';
+import Table from '@mui/material/Table';
 import { MRT_TableHead } from '../head/MRT_TableHead';
 import { Memo_MRT_TableBody, MRT_TableBody } from '../body/MRT_TableBody';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';

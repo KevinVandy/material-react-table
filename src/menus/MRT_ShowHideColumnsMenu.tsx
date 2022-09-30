@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
-import { Button, Menu, Divider, Box } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import Menu from '@mui/material/Menu';
 import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
-import type { MRT_Column, MRT_TableInstance } from '..';
 import { getDefaultColumnOrderIds } from '../column.utils';
+import type { MRT_Column, MRT_TableInstance } from '..';
 
 interface Props<TData extends Record<string, any> = {}> {
   anchorEl: HTMLElement | null;

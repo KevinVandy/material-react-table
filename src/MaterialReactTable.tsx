@@ -5,27 +5,25 @@ import React, {
   SetStateAction,
   useMemo,
 } from 'react';
-import type {
-  AlertProps,
-  ButtonProps,
-  CheckboxProps,
-  ChipProps,
-  IconButtonProps,
-  LinearProgressProps,
-  PaperProps,
-  RadioProps,
-  SkeletonProps,
-  TableBodyProps,
-  TableCellProps,
-  TableContainerProps,
-  TableFooterProps,
-  TableHeadProps,
-  TablePaginationProps,
-  TableProps,
-  TableRowProps,
-  TextFieldProps,
-  ToolbarProps,
-} from '@mui/material';
+import type { AlertProps } from '@mui/material/Alert';
+import type { ButtonProps } from '@mui/material/Button';
+import type { CheckboxProps } from '@mui/material/Checkbox';
+import type { ChipProps } from '@mui/material/Chip';
+import type { IconButtonProps } from '@mui/material/IconButton';
+import type { LinearProgressProps } from '@mui/material/LinearProgress';
+import type { PaperProps } from '@mui/material/Paper';
+import type { RadioProps } from '@mui/material/Radio';
+import type { SkeletonProps } from '@mui/material/Skeleton';
+import type { TableBodyProps } from '@mui/material/TableBody';
+import type { TableCellProps } from '@mui/material/TableCell';
+import type { TableContainerProps } from '@mui/material/TableContainer';
+import type { TableFooterProps } from '@mui/material/TableFooter';
+import type { TableHeadProps } from '@mui/material/TableHead';
+import type { TablePaginationProps } from '@mui/material/TablePagination';
+import type { TableProps } from '@mui/material/Table';
+import type { TableRowProps } from '@mui/material/TableRow';
+import type { TextFieldProps } from '@mui/material/TextField';
+import type { ToolbarProps } from '@mui/material/Toolbar';
 import type {
   Cell,
   Column,

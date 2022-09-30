@@ -1,7 +1,8 @@
 import React, { FC, memo, useMemo } from 'react';
 import { useVirtual } from 'react-virtual'; //stuck on v2 for now
 // import { useVirtualizer, Virtualizer } from '@tanstack/react-virtual';
-import { TableBody, Typography } from '@mui/material';
+import TableBody from '@mui/material/TableBody';
+import Typography from '@mui/material/Typography';
 import { Memo_MRT_TableBodyRow, MRT_TableBodyRow } from './MRT_TableBodyRow';
 import { rankGlobalFuzzy } from '../sortingFns';
 import type { MRT_Row, MRT_TableInstance } from '..';

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { TableRow } from '@mui/material';
+import TableRow from '@mui/material/TableRow';
 import { MRT_TableFooterCell } from './MRT_TableFooterCell';
 import type { MRT_Header, MRT_HeaderGroup, MRT_TableInstance } from '..';
 

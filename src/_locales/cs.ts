@@ -40,7 +40,8 @@ export const MRT_Localization_CS: MRT_Localization = {
   filterNotEquals: 'Nerovná se',
   filterStartsWith: 'Začíná na',
   filterWeakEquals: 'Rovná se',
-  filteringByColumn: 'Filtrováno podle sloupce {column} - {filterType} {filterValue}',
+  filteringByColumn:
+    'Filtrováno podle sloupce {column} - {filterType} {filterValue}',
   goToFirstPage: 'První strana',
   goToLastPage: 'Poslední strana',
   goToNextPage: 'Další strana',
@@ -67,7 +68,8 @@ export const MRT_Localization_CS: MRT_Localization = {
   rowsPerPage: 'Řádek na stránce',
   save: 'Uložit',
   search: 'Hledat',
-  selectedCountOfRowCountRowsSelected: 'Vybráno {selectedCount} z {rowCount} řádek',
+  selectedCountOfRowCountRowsSelected:
+    'Vybráno {selectedCount} z {rowCount} řádek',
   select: 'Vybrat',
   showAll: 'Zobrazit vše',
   showAllColumns: 'Zobrazit všechny sloupce',

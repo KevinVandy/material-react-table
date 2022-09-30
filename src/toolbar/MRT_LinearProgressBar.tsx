@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { Collapse, LinearProgress } from '@mui/material';
+import Collapse from '@mui/material/Collapse';
+import LinearProgress from '@mui/material/LinearProgress';
 import { MRT_TableInstance } from '..';
 
 interface Props {

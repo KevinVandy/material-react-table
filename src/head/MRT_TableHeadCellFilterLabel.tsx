@@ -1,5 +1,8 @@
 import React, { FC, MouseEvent } from 'react';
-import { Box, Grow, IconButton, Tooltip } from '@mui/material';
+import Box from '@mui/material/Box';
+import Grow from '@mui/material/Grow';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import { MRT_Header, MRT_TableInstance } from '..';
 
 interface Props {

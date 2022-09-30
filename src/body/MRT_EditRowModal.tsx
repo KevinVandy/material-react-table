@@ -1,14 +1,12 @@
 import React from 'react';
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Stack,
-} from '@mui/material';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import Stack from '@mui/material/Stack';
 import { MRT_EditActionButtons } from '../buttons/MRT_EditActionButtons';
-import type { MRT_Row, MRT_TableInstance } from '..';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
+import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props<TData extends Record<string, any> = {}> {
   open: boolean;

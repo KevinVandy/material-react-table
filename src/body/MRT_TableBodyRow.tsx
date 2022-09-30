@@ -1,5 +1,6 @@
 import React, { DragEvent, FC, memo, useMemo, useRef } from 'react';
-import { darken, lighten, TableRow, useTheme } from '@mui/material';
+import TableRow from '@mui/material/TableRow';
+import { darken, lighten, useTheme } from '@mui/material/styles';
 import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import type { MRT_Row, MRT_TableInstance } from '..';
