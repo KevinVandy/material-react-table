@@ -10,12 +10,14 @@ interface Props {
 export const MRT_TableDetailPanel: FC<Props> = ({ row, table }) => {
   const {
     getVisibleLeafColumns,
+    getState,
     options: {
       muiTableBodyRowProps,
       muiTableDetailPanelProps,
       renderDetailPanel,
     },
   } = table;
+  const { isLoading } = getState();
 
   const tableRowProps =
     muiTableBodyRowProps instanceof Function
@@ -44,7 +46,11 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, table }) => {
         })}
       >
         {renderDetailPanel && (
-          <Collapse unmountOnExit mountOnEnter in={row.getIsExpanded()}>
+          <Collapse
+            in={!isLoading && row.getIsExpanded()}
+            mountOnEnter
+            unmountOnExit
+          >
             {renderDetailPanel({ row, table })}
           </Collapse>
         )}

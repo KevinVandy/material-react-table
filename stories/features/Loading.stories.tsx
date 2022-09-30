@@ -44,7 +44,27 @@ const data = [...Array(100)].map(() => ({
 }));
 
 export const LoadingExample: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={[]} state={{ isLoading: true }} />
+  <MaterialReactTable
+    columns={columns}
+    data={[]}
+    state={{ isLoading: true }}
+  />
+);
+
+export const LoadingWithDetailPanelExample: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={[]}
+    state={{ isLoading: true }}
+    renderDetailPanel={({ row }) => (
+      <div style={{ display: 'grid' }}>
+        <span>City: {row.original.firstName}</span>
+        <span>State: {row.original.state}</span>
+        <span>Address: {row.original.address}</span>
+        <span>Phone: {row.original.phoneNumber}</span>
+      </div>
+    )}
+  />
 );
 
 export const SkeletonDisplayColumns: Story<MaterialReactTableProps> = () => (
