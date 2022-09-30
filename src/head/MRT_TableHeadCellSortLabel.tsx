@@ -19,7 +19,7 @@ export const MRT_TableHeadCellSortLabel: FC<Props> = ({
   const { column } = header;
   const { columnDef } = column;
 
-  const sortTooltip = !!column.getIsSorted()
+  const sortTooltip = column.getIsSorted()
     ? column.getIsSorted() === 'desc'
       ? localization.sortedByColumnDesc.replace('{column}', columnDef.header)
       : localization.sortedByColumnAsc.replace('{column}', columnDef.header)

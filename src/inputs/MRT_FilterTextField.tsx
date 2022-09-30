@@ -117,7 +117,7 @@ export const MRT_FilterTextField: FC<Props> = ({
   const handleChangeDebounced = useCallback(
     debounce(
       (event: ChangeEvent<HTMLInputElement>) => {
-        let value =
+        const value =
           textFieldProps.type === 'date'
             ? event.target.valueAsDate
             : textFieldProps.type === 'number'

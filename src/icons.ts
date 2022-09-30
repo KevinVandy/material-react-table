@@ -1,35 +1,33 @@
-import {
-  ArrowRight,
-  Cancel,
-  CheckBox,
-  ClearAll,
-  Close,
-  DensityLarge,
-  DensityMedium,
-  DensitySmall,
-  DragHandle,
-  DynamicFeed,
-  Edit,
-  ExpandLess,
-  ExpandMore,
-  FilterAlt,
-  FilterAltOff,
-  FilterList,
-  FilterListOff,
-  Fullscreen,
-  FullscreenExit,
-  KeyboardDoubleArrowDown,
-  MoreHoriz,
-  MoreVert,
-  PushPin,
-  RestartAlt,
-  Save,
-  Search,
-  SearchOff,
-  Sort,
-  ViewColumn,
-  VisibilityOff,
-} from '@mui/icons-material';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import CancelIcon from '@mui/icons-material/Cancel';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import ClearAllIcon from '@mui/icons-material/ClearAll';
+import CloseIcon from '@mui/icons-material/Close';
+import DensityLargeIcon from '@mui/icons-material/DensityLarge';
+import DensityMediumIcon from '@mui/icons-material/DensityMedium';
+import DensitySmallIcon from '@mui/icons-material/DensitySmall';
+import DragHandleIcon from '@mui/icons-material/DragHandle';
+import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
+import EditIcon from '@mui/icons-material/Edit';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import FilterListOffIcon from '@mui/icons-material/FilterListOff';
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import PushPinIcon from '@mui/icons-material/PushPin';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import SaveIcon from '@mui/icons-material/Save';
+import SearchIcon from '@mui/icons-material/Search';
+import SearchOffIcon from '@mui/icons-material/SearchOff';
+import SortIcon from '@mui/icons-material/Sort';
+import ViewColumnIcon from '@mui/icons-material/ViewColumn';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 export interface MRT_Icons {
   ArrowRightIcon: any;
@@ -65,34 +63,34 @@ export interface MRT_Icons {
 }
 
 export const MRT_Default_Icons: MRT_Icons = {
-  ArrowRightIcon: ArrowRight,
-  CancelIcon: Cancel,
-  CheckBoxIcon: CheckBox,
-  ClearAllIcon: ClearAll,
-  CloseIcon: Close,
-  DensityLargeIcon: DensityLarge,
-  DensityMediumIcon: DensityMedium,
-  DensitySmallIcon: DensitySmall,
-  DragHandleIcon: DragHandle,
-  DynamicFeedIcon: DynamicFeed,
-  EditIcon: Edit,
-  ExpandLessIcon: ExpandLess,
-  ExpandMoreIcon: ExpandMore,
-  FilterAltIcon: FilterAlt,
-  FilterAltOffIcon: FilterAltOff,
-  FilterListIcon: FilterList,
-  FilterListOffIcon: FilterListOff,
-  FullscreenExitIcon: FullscreenExit,
-  FullscreenIcon: Fullscreen,
-  KeyboardDoubleArrowDownIcon: KeyboardDoubleArrowDown,
-  MoreHorizIcon: MoreHoriz,
-  MoreVertIcon: MoreVert,
-  PushPinIcon: PushPin,
-  RestartAltIcon: RestartAlt,
-  SaveIcon: Save,
-  SearchIcon: Search,
-  SearchOffIcon: SearchOff,
-  SortIcon: Sort,
-  ViewColumnIcon: ViewColumn,
-  VisibilityOffIcon: VisibilityOff,
+  ArrowRightIcon,
+  CancelIcon,
+  CheckBoxIcon,
+  ClearAllIcon,
+  CloseIcon,
+  DensityLargeIcon,
+  DensityMediumIcon,
+  DensitySmallIcon,
+  DragHandleIcon,
+  DynamicFeedIcon,
+  EditIcon,
+  ExpandLessIcon,
+  ExpandMoreIcon,
+  FilterAltIcon,
+  FilterAltOffIcon,
+  FilterListIcon,
+  FilterListOffIcon,
+  FullscreenExitIcon,
+  FullscreenIcon,
+  KeyboardDoubleArrowDownIcon,
+  MoreHorizIcon,
+  MoreVertIcon,
+  PushPinIcon,
+  RestartAltIcon,
+  SaveIcon,
+  SearchIcon,
+  SearchOffIcon,
+  SortIcon,
+  ViewColumnIcon,
+  VisibilityOffIcon,
 };

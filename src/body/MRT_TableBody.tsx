@@ -104,8 +104,8 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
   let paddingTop = 0;
   let paddingBottom = 0;
   if (enableRowVirtualization) {
-    paddingTop = !!virtualRows.length ? virtualRows[0].start : 0;
-    paddingBottom = !!virtualRows.length
+    paddingTop = virtualRows.length ? virtualRows[0].start : 0;
+    paddingBottom = virtualRows.length
       ? virtualizer.totalSize - virtualRows[virtualRows.length - 1].end
       : 0;
   }

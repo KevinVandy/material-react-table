@@ -10,8 +10,8 @@ const fuzzy = <TData extends Record<string, any> = {}>(
   let dir = 0;
   if (rowA.columnFiltersMeta[columnId]) {
     dir = compareItems(
-      rowA.columnFiltersMeta[columnId]! as RankingInfo,
-      rowB.columnFiltersMeta[columnId]! as RankingInfo,
+      rowA.columnFiltersMeta[columnId] as RankingInfo,
+      rowB.columnFiltersMeta[columnId] as RankingInfo,
     );
   }
   // Provide a fallback for when the item ranks are equal

@@ -1,6 +1,8 @@
 import { ColumnOrderState, GroupingState } from '@tanstack/react-table';
 import { alpha, lighten, TableCellProps, Theme } from '@mui/material';
-import {
+import { MRT_FilterFns } from './filterFns';
+import { MRT_SortingFns } from './sortingFns';
+import type {
   MaterialReactTableProps,
   MRT_Column,
   MRT_ColumnDef,
@@ -10,8 +12,6 @@ import {
   MRT_Header,
   MRT_TableInstance,
 } from '.';
-import { MRT_FilterFns } from './filterFns';
-import { MRT_SortingFns } from './sortingFns';
 
 export const getColumnId = <TData extends Record<string, any> = {}>(
   columnDef: MRT_ColumnDef<TData>,
@@ -57,7 +57,7 @@ export const prepareColumns = <TData extends Record<string, any> = {}>({
       );
     }
     if (!columnDef.columnDefType) columnDef.columnDefType = 'data';
-    if (!!columnDef.columns?.length) {
+    if (columnDef.columns?.length) {
       columnDef.columnDefType = 'group';
       columnDef.columns = prepareColumns({
         columnDefs: columnDef.columns,
