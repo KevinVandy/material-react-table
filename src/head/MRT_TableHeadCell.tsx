@@ -198,7 +198,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
               display: 'flex',
               flexDirection:
                 tableCellProps?.align === 'right' ? 'row-reverse' : 'row',
-              overflow: 'hidden',
+              overflow: columnDefType === 'data' ? 'hidden' : undefined,
               pl:
                 tableCellProps?.align === 'center'
                   ? `${headerPL}rem`
@@ -208,12 +208,12 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
             <Box
               className="Mui-TableHeadCell-Content-Wrapper"
               sx={{
-                overflow: 'hidden',
+                overflow: columnDefType === 'data' ? 'hidden' : undefined,
                 textOverflow: 'ellipsis',
                 whiteSpace:
                   (columnDef.header?.length ?? 0) < 20 ? 'nowrap' : 'normal',
               }}
-              title={columnDef.header}
+              title={columnDefType === 'data' ? columnDef.header : undefined}
             >
               {headerElement}
             </Box>

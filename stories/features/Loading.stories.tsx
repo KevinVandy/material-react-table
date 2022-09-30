@@ -43,22 +43,29 @@ const data = [...Array(100)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const LoadingExample: Story<MaterialReactTableProps> = () => (
+export const Loading: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={[]} state={{ isLoading: true }} />
+);
+
+export const LoadingWithSelection: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={[]}
+    enableRowSelection
     state={{ isLoading: true }}
   />
 );
 
-export const LoadingWithDetailPanelExample: Story<MaterialReactTableProps> = () => (
+export const LoadingWithDetailPanelExample: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable
     columns={columns}
     data={[]}
     state={{ isLoading: true }}
     renderDetailPanel={({ row }) => (
       <div style={{ display: 'grid' }}>
-        <span>City: {row.original.firstName}</span>
+        <span>City: {row.original.firstName.toString()}</span>
         <span>State: {row.original.state}</span>
         <span>Address: {row.original.address}</span>
         <span>Phone: {row.original.phoneNumber}</span>

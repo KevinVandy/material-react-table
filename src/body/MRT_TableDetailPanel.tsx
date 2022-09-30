@@ -46,12 +46,8 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, table }) => {
         })}
       >
         {renderDetailPanel && (
-          <Collapse
-            in={!isLoading && row.getIsExpanded()}
-            mountOnEnter
-            unmountOnExit
-          >
-            {renderDetailPanel({ row, table })}
+          <Collapse in={row.getIsExpanded()} mountOnEnter unmountOnExit>
+            {!isLoading && renderDetailPanel({ row, table })}
           </Collapse>
         )}
       </TableCell>

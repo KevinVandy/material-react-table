@@ -20,7 +20,7 @@ export const MRT_ExpandAllButton: FC<Props> = ({ table }) => {
     },
     toggleAllRowsExpanded,
   } = table;
-  const { density } = getState();
+  const { density, isLoading } = getState();
 
   const iconButtonProps =
     muiExpandAllButtonProps instanceof Function
@@ -37,7 +37,9 @@ export const MRT_ExpandAllButton: FC<Props> = ({ table }) => {
       <span>
         <IconButton
           aria-label={localization.expandAll}
-          disabled={!getCanSomeRowsExpand() && !renderDetailPanel}
+          disabled={
+            isLoading || (!renderDetailPanel && !getCanSomeRowsExpand())
+          }
           onClick={() => toggleAllRowsExpanded(!getIsAllRowsExpanded())}
           {...iconButtonProps}
           sx={(theme) => ({

@@ -19,7 +19,7 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, table }) => {
       selectAllMode,
     },
   } = table;
-  const { density } = getState();
+  const { density, isLoading } = getState();
 
   const checkboxProps = !row
     ? muiSelectAllCheckboxProps instanceof Function
@@ -35,6 +35,7 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, table }) => {
         ? table.getIsAllPageRowsSelected()
         : table.getIsAllRowsSelected()
       : row?.getIsSelected(),
+    disabled: isLoading,
     inputProps: {
       'aria-label': selectAll
         ? localization.toggleSelectAll
