@@ -12,7 +12,7 @@ import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable
 
 ## Customizing Toolbars Feature Guide
 
-This guide will show you how to hide or customize the Top and Bottom Toolbars in Material React Table.
+This guide shows you how to hide or customize the top and bottom toolbars in Material React Table.
 
 ### Relevant Props
 
@@ -48,7 +48,7 @@ This guide will show you how to hide or customize the Top and Bottom Toolbars in
 
 ### Hide/Disable Toolbars
 
-There are `enableTopToolbar` and `enableBottomToolbar` props that you can use to show or hide the Toolbars.
+There are `enableTopToolbar` and `enableBottomToolbar` props that you can use to show or hide the toolbars.
 
 ```tsx
 <MaterialReactTable
@@ -61,11 +61,11 @@ There are `enableTopToolbar` and `enableBottomToolbar` props that you can use to
 
 ### Customize Toolbar buttons
 
-Everything in the Toolbars is customizable. You can add your own buttons or change the order of the buttons built-in buttons.
+Everything in the toolbars is customizable. You can add your own buttons or change the order of the built-in buttons.
 
 #### Customize Built-In Internal Toolbar Button Area
 
-The `renderToolbarInternalActions` prop allows you to redefine the built-in buttons that usually reside in the top right of the top toolbar. You can put the icon buttons in a different order, and even slide in your own custom buttons. All of the built-in buttons are available to be imported from 'material-react-table'
+The `renderToolbarInternalActions` prop allows you to redefine the built-in buttons that usually reside in the top right of the top toolbar. You can reorder the icon buttons or even insert your own custom buttons. All of the built-in buttons are available to be imported from 'material-react-table'.
 
 ```tsx
 import MaterialReactTable, {
@@ -94,7 +94,7 @@ return (
 
 #### Add Custom Toolbar Buttons/Components
 
-The `renderTopToolbarCustomActions` and `renderBottomToolbarCustomActions` props allow you to add your own custom buttons or components to the top and bottom toolbar areas. These props are functions that return a ReactNode. You can add your own buttons, or whatever components you want.
+The `renderTopToolbarCustomActions` and `renderBottomToolbarCustomActions` props allow you to add your own custom buttons or components to the top and bottom toolbar areas. These props are functions that return a ReactNode. You can add your own buttons or whatever components you want.
 
 In all of these `render...` props, you get access to the underlying `table` instance that you can use to perform actions or extract data from the table.
 
@@ -143,7 +143,7 @@ The `muiTopToolbarProps`, `muiBottomToolbarProps`, `muiToolbarAlertBannerProps`,
 
 ### Customize Linear Progress Bars
 
-The progress bars that show in both the top and bottom toolbars become visible when either the `isLoading` or `showProgressBars` state options are set to `true`. You can customize the progress bars by passing in props to the `muiLinearProgressProps` prop. By default, the progress bars have an indeterminate state, but you can set the `value` prop to a number between 0 and 100 to show real progress values if your table is doing some complicated long running tasks that you want to show progress for. Visit the [MUI Linear Progress docs](https://mui.com/material-ui/react-progress/#linear) to learn more.
+The progress bars that display in both the top and bottom toolbars become visible when either the `isLoading` or `showProgressBars` state options are set to `true`. You can customize the progress bars by passing in props to the `muiLinearProgressProps` prop. By default, the progress bars have an indeterminate state, but you can set the `value` prop to a number between 0 and 100 to show real progress values if your table is doing some complicated long running tasks that you want to show progress for. Visit the [MUI Linear Progress docs](https://mui.com/material-ui/react-progress/#linear) to learn more.
 
 ```tsx
 <MaterialReactTable
@@ -164,9 +164,9 @@ The progress bars that show in both the top and bottom toolbars become visible w
 
 ### Customize Toolbar Alert Banner
 
-The Toolbar Alert Banner is an internal component used to display alerts to the user. By default, it will automatically show messages around the number of selected rows or grouping state.
+The toolbar alert banner is an internal component used to display alerts to the user. By default, it will automatically show messages around the number of selected rows or grouping state.
 
-However, you can re-purpose this alert banner to show your own custom messages too. You can force the alert banner to show by setting the `showAlertBanner` state option to `true`. You can then customize the messages and other stylings using the `muiToolbarAlertBannerProps` to create your custom message. You probably saw this in the [Remote Data](/docs/examples/remote) or [React Query](/docs/examples/react-query) examples.
+However, you can repurpose this alert banner to show your own custom messages too. You can force the alert banner to show by setting the `showAlertBanner` state option to `true`. You can then customize the messages and other stylings using the `muiToolbarAlertBannerProps` to create your custom message. You probably saw this in the [Remote Data](/docs/examples/remote) or [React Query](/docs/examples/react-query) examples.
 
 ```tsx
 <MaterialReactTable
