@@ -90,7 +90,15 @@ Client-side filtering (and global filtering) is enabled by default. This means t
 
 You can use any of the built-in `filterFns` or any of the custom filter functions that you have defined in the `filterFns` prop, just like you would with the column filters.
 
-The default global filter function is set to `fuzzy`, which is a filtering algorithm based on the popular `match-sorter` [library from Kent C. Dodds](https://www.npmjs.com/package/match-sorter), though you can change the global filter function by setting the `globalFilterFn` prop.
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  globalFilterFn="contains" //turn off fuzzy matching and use simple contains filter function
+/>
+```
+
+or a custom filter function:
 
 ```jsx
 <MaterialReactTable
@@ -103,6 +111,8 @@ The default global filter function is set to `fuzzy`, which is a filtering algor
   globalFilterFn="myCustomFilterFn" //set the global filter function to myCustomFilterFn
 />
 ```
+
+The default global filter function is set to `fuzzy`, which is a filtering algorithm based on the popular `match-sorter` [library from Kent C. Dodds](https://www.npmjs.com/package/match-sorter), though you can change the global filter function by setting the `globalFilterFn` prop.
 
 ### Ranked Results
 

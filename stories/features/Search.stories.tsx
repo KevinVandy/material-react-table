@@ -52,8 +52,35 @@ export const SearchEnabledDefault: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
+export const SearchContains: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} globalFilterFn="contains" />
+);
+
+export const CustomGlobalFilterFn: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    filterFns={{
+      myCustomFilterFn: (row, id, filterValue) =>
+        row.getValue<string>(id).startsWith(filterValue),
+    }}
+    globalFilterFn="myCustomFilterFn"
+  />
+);
+
 export const SearchGlobalFilterModes: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableGlobalFilterModes />
+);
+
+export const SearchGlobalFilterModeOptions: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableGlobalFilterModes
+    globalFilterModeOptions={['asfd', 'contains', 'fuzzy']}
+  />
 );
 
 export const SearchRankedResultsEnabledByDefault: Story<

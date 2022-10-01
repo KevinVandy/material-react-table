@@ -55,10 +55,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
     const initState = props.initialState ?? {};
     initState.columnOrder =
       initState.columnOrder ?? getDefaultColumnOrderIds(props);
-    initState.globalFilterFn =
-      props.globalFilterFn instanceof String
-        ? (props.globalFilterFn as MRT_FilterOption)
-        : 'fuzzy';
+    initState.globalFilterFn = props.globalFilterFn ?? 'fuzzy';
     return initState;
   }, []);
 
