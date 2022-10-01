@@ -14,13 +14,13 @@ import { Box } from '@mui/material';
 
 ## Customizing Components Guide
 
-One of the strengths of Material React Table, is that it exposes a majority of all the underlying Material UI component props used to build the table.
+One of the strengths of Material React Table is that it exposes a majority of all the underlying Material UI component props used to build the table.
 
-Also down below, you will learn [how to customize and use a MUI Theme](#material-ui-theme) to customize colors, typography, or an other default CSS that is used by Material React Table.
+Additionally, in one of the sections below, you will learn [how to customize and use a MUI Theme](#material-ui-theme) to customize colors, typography, or any other default CSS that is used by Material React Table.
 
 ### Relevant Props
 
-All of the props labeled `mui...Props` are props that get forwarded to Material UI components. Here is a list of all the props that are exposed in both the root props and column options.
+All props labeled `mui...Props` get forwarded to Material UI components. Here is a list of all the props that are exposed in both the root props and column options.
 
 <RootPropTable
   onlyProps={
@@ -80,7 +80,7 @@ Some of the column options expose the same props as above, but on a per column b
 
 ### Material UI Props and Types
 
-Each prop can either be passed as an object or as a callback function where you get access to the underlying `table` instance, and any other relevant callback parameters such as `cell`, `row`, `column`, etc. This let's you easily run conditional logic on the props you pass. Let's take a look at a few examples.
+Each prop can either be passed as an object or as a callback function where you get access to the underlying `table` instance and any other relevant callback parameters, such as `cell`, `row`, `column`, etc. This lets you easily run conditional logic on the props you pass. Let's take a look at a few examples.
 
 > All `mui...Props` props are strongly typed and you should get ts hints as you write them. API docs are available on the [Material UI website](https://mui.com/material-ui/api/table/) for each component.
 
@@ -115,7 +115,7 @@ Each prop can either be passed as an object or as a callback function where you 
 
 ### Styling Material UI Components
 
-Each `mui...Prop` has multiple options for you to add styling to the component. You could simply pass `className` or `style` props to any `mui...Props` prop, but there is also the `sx` prop... Which totally rocks!
+Each `mui...Prop` has multiple options for you to add styling to the component. You could simply pass `className` or `style` props to any `mui...Props` prop, but there is also the `sx` prop...which totally rocks!
 
 > Hint: You should just use the `sx` prop for all styling instead of `className` or `style` props.
 
@@ -123,7 +123,7 @@ Each `mui...Prop` has multiple options for you to add styling to the component. 
 
 The recommended way to style Material UI components in Material React Table will be the [`sx` prop](https://mui.com/system/basics/#the-sx-prop) throughout this docs site, as it is both the most simple and the most powerful way to style Material UI components as of Material UI V5. They can work and be as simple as a `style` prop, but behind the scenes, they work more like emotion styled-components by using `mui/system`.
 
-Don't Worry! `className` and `style` props will still work, but let's show off some of the more elegant syntax you can use with the `sx` prop.
+Don't worry, `className` and `style` props will still work, but let's show off some of the more elegant syntax you can use with the `sx` prop.
 
 1. The `sx` prop can be used just a simply as a `style` prop by default
 
@@ -177,7 +177,7 @@ Don't Worry! `className` and `style` props will still work, but let's show off s
 />
 ```
 
-There are a lot more advantages to using the `sx` prop, but that is all we will discuss in these docs. You can learn more about it the official [Material UI Docs](https://mui.com/system/basics/#the-sx-prop).
+There are many more advantages to using the `sx` prop, but that is all we will discuss in these docs. You can learn more about it the official [Material UI Docs](https://mui.com/system/basics/#the-sx-prop).
 
 ### Material UI Theme
 
@@ -213,11 +213,11 @@ return (
 `<MaterialReactTable />` will primarily use the following values internally from your MUI Theme by default:
 
 - `theme.palette.background.default` - used as the background color for most table components by default
-- `theme.palette.divider` - used in dividers in menus, and for the column resizing handle
+- `theme.palette.divider` - used in dividers in menus and for the column resizing handle
 - `theme.palette.info.main` - used in the Toolbar Alert Banner and the Toolbar DropZone component
-- `theme.palette.primary.main` - used as the primary color for anything colorful in the table (input fields, checkboxes, dragging borders, etc)
+- `theme.palette.primary.main` - used as the primary color for anything colorful in the table (input fields, checkboxes, dragging borders, etc.)
 
-Notice that by default, the <Box component="span" sx={{color: "secondary.main", display: 'inline'}}>secondary color</Box> isn't used at all. Remember though, that you can always override which color a component uses by passing in a `mui...Props` prop, like how we changed checkboxes to use the secondary color in the [example above](#static-prop-objects).
+Notice that by default, the <Box component="span" sx={{color: "secondary.main", display: 'inline'}}>secondary color</Box> isn't used at all. Remember though that you can always override which color a component uses by passing in a `mui...Props` prop, like how we changed checkboxes to use the secondary color in the [example above](#static-prop-objects).
 
 #### Custom MUI Theme Example
 
