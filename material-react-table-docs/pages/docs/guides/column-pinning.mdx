@@ -40,13 +40,14 @@ Column pinning can simply be enabled by setting the `enablePinning` prop to `tru
 
 ### Pin (Freeze) Columns By Default
 
-Columns can start out pinned in your table by setting the `pinning` states in `initialState` or `state`.
+Columns can start out pinned in your table by setting the `columnPinning` states in `initialState` or `state`.
 
 ```tsx
 <MaterialReactTable
   data={data}
   columns={columns}
-  initialState={{ pinning: { left: ['email'] } }} //pin email column to left by default
+  enablePinning
+  initialState={{ columnPinning: { left: ['email'] } }} //pin email column to left by default
 />
 ```
 
