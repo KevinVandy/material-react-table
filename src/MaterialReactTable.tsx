@@ -1099,7 +1099,7 @@ const MaterialReactTable = <TData extends Record<string, any> = {}>({
       ...MRT_Localization_EN,
       ...localization,
     }),
-    [],
+    [localization],
   );
   const _aggregationFns = useMemo(
     () => ({ ...MRT_AggregationFns, ...aggregationFns }),

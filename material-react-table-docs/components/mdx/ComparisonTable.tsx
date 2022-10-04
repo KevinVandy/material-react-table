@@ -69,7 +69,7 @@ const data = [
     library: 'Material React Table',
     libraryLink: '#',
     freeOrLicensed: 'Free MIT',
-    bundleSize: 38,
+    bundleSize: 40,
     bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/material-react-table@latest?color=blue',
     bundlePhobiaLink:
@@ -115,7 +115,7 @@ const data = [
     library: 'MUI X Data Grid MIT/Pro/Premium',
     libraryLink: 'https://mui.com/store/items/mui-x-premium/',
     freeOrLicensed: 'MIT or Paid License',
-    bundleSize: 110,
+    bundleSize: 111,
     bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/@mui/x-data-grid-pro?color=orange',
     bundlePhobiaLink:

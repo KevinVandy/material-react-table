@@ -67,6 +67,7 @@ export const MRT_TableHeadCellColumnActionsButton: FC<Props> = ({
             height: '2rem',
             m: '-0.2rem',
             opacity: 0.5,
+            transform: 'scale(0.85)',
             transition: 'opacity 150ms',
             width: '2rem',
             '&:hover': {
