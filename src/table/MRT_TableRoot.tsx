@@ -148,10 +148,9 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
               Cell: ({ row }) => (
                 <MRT_ExpandButton row={row as any} table={table as any} />
               ),
-              Header: () =>
-                props.enableExpandAll ? (
-                  <MRT_ExpandAllButton table={table as any} />
-                ) : null,
+              Header: props.enableExpandAll
+                ? () => <MRT_ExpandAllButton table={table as any} />
+                : null,
               header: props.localization.expand,
               size: 60,
               ...props.defaultDisplayColumn,
@@ -162,10 +161,10 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
             Cell: ({ row }) => (
               <MRT_SelectCheckbox row={row as any} table={table as any} />
             ),
-            Header: () =>
-              props.enableSelectAll && props.enableMultiRowSelection ? (
-                <MRT_SelectCheckbox selectAll table={table as any} />
-              ) : null,
+            Header:
+              props.enableSelectAll && props.enableMultiRowSelection
+                ? () => <MRT_SelectCheckbox selectAll table={table as any} />
+                : null,
             header: props.localization.select,
             size: 60,
             ...props.defaultDisplayColumn,
