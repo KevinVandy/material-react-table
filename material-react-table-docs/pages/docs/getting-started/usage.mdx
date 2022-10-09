@@ -58,7 +58,7 @@ const data = [
 #### Nested Data Example with TypeScript
 
 ```tsx
-//if you are using TypeScript, you should create a type based on the shape of your data that you can use in your column definitions
+//if you are using TypeScript, create a type based on the shape of your data that you can use in your column definitions
 interface YourDataType {
   name: {
     firstName: string;
@@ -71,7 +71,7 @@ interface YourDataType {
 const data: YourDataType[] = [
   {
     name: {
-      firstName: 'John', //accessorKey or accessorFn will need to be "person.name.firstName"
+      firstName: 'John', //accessorKey or accessorFn will need to be "name.firstName" to access this value
       lastName: 'Doe',
     },
     age: 30,
