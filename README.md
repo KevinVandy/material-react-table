@@ -33,7 +33,7 @@ Join the [Discord](https://discord.gg/5wqyRx6fnm) server to join in on the devel
 
 View the [Docs Website](https://www.material-react-table.com/)
 
-See all [Props and Options](https://www.material-react-table.com/docs/api)
+See all [Props, Options, and APIs](https://www.material-react-table.com/docs/api)
 
 ## Quick Examples
 
@@ -94,13 +94,15 @@ _**Fully Fleshed out [Docs](https://www.material-react-table.com/docs/guides#gui
 
 View the full [Installation Docs](https://www.material-react-table.com/docs/getting-started/install)
 
-1. Install Peer Dependencies (Material UI V5)
+1. Ensure that you have React 17 or later installed (MUI V5 requires React 17 or 18)
+
+2. Install Peer Dependencies (Material UI V5)
 
 ```bash
 npm install @mui/material @mui/icons-material @emotion/react @emotion/styled
 ```
 
-2. Install material-react-table
+3. Install material-react-table
 
 ```bash
 npm install material-react-table

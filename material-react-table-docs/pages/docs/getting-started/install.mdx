@@ -13,10 +13,11 @@ import Head from 'next/head';
 >
 > Just double-check that you have the following in your package.json, or use the [full install commands](<#install-with-required-peer-dependencies-(recommended)>) below.
 >
-> 1.  @mui/material (v5)
-> 2.  @mui/icons-material (v5)
-> 3.  @emotion/react (v11)
-> 4.  @emotion/styled (v11)
+> 1.  `@mui/material` (v5)
+> 2.  `@mui/icons-material` (v5)
+> 3.  `@emotion/react` (v11)
+> 4.  `@emotion/styled` (v11)
+> 5.  `react` and `react-dom` (v17 or v18) - MUI v5 requires React 17 or 18
 
 ### Quick Install
 
@@ -58,6 +59,6 @@ Yarn
 yarn add material-react-table @mui/material @mui/icons-material @emotion/react @emotion/styled
 ```
 
-> You do not need to install `@tanstack/react-table`, as `@tanstack/react-table` (React Table V8) is already an internal dependency of `material-react-table`.
+> You do not need to install `@tanstack/react-table`, as it is already an internal dependency of `material-react-table`.
 >
 > All internal dependencies: `@tanstack/match-sorter-utils`, `@tanstack/react-table`, `react-virtual`

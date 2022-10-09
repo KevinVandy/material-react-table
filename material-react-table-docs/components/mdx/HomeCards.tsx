@@ -1,4 +1,4 @@
-import { alpha, Card, CardContent, Stack, Typography } from '@mui/material';
+import { alpha, Card, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 
 const cardData = [
