@@ -68,11 +68,12 @@ export const MRT_TableHeadCellFilterLabel: FC<Props> = ({ header, table }) => {
             }}
             size="small"
             sx={{
+              height: '12px',
               m: 0,
               opacity: 0.8,
               p: '2px',
               transform: 'scale(0.66)',
-              width: '1.5ch',
+              width: '12px',
             }}
           >
             <FilterAltIcon />

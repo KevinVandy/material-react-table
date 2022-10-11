@@ -65,7 +65,7 @@ export const MRT_TableHeadCellColumnActionsButton: FC<Props> = ({
           {...iconButtonProps}
           sx={(theme) => ({
             height: '2rem',
-            m: '-0.2rem',
+            m: '-6px -3px',
             opacity: 0.5,
             transform: 'scale(0.85)',
             transition: 'opacity 150ms',

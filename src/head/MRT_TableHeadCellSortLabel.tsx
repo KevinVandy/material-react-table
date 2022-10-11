@@ -39,7 +39,7 @@ export const MRT_TableHeadCellSortLabel: FC<Props> = ({
         }
         sx={{
           flex: '0 0',
-          width: '2ch',
+          width: '2.3ch',
           transform:
             tableCellProps?.align !== 'right'
               ? 'translateX(-0.5ch)'

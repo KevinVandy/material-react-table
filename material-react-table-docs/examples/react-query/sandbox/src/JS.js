@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import MaterialReactTable from 'material-react-table';
+import { IconButton, Tooltip } from '@mui/material';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import {
   QueryClient,
   QueryClientProvider,
@@ -16,36 +18,37 @@ const Example = () => {
     pageSize: 10,
   });
 
-  const { data, isError, isFetching, isLoading } = useQuery(
-    [
-      'table-data',
-      columnFilters,
-      globalFilter,
-      pagination.pageIndex,
-      pagination.pageSize,
-      sorting,
-    ],
-    async () => {
-      const url = new URL(
-        '/api/data',
-        process.env.NODE_ENV === 'production'
-          ? 'https://www.material-react-table.com'
-          : 'http://localhost:3000',
-      );
-      url.searchParams.set(
-        'start',
-        `${pagination.pageIndex * pagination.pageSize}`,
-      );
-      url.searchParams.set('size', `${pagination.pageSize}`);
-      url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
-      url.searchParams.set('globalFilter', globalFilter ?? '');
-      url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
+  const { data, isError, isFetching, isLoading, refetch } =
+    useQuery(
+      [
+        'table-data',
+        columnFilters,
+        globalFilter,
+        pagination.pageIndex,
+        pagination.pageSize,
+        sorting,
+      ],
+      async () => {
+        const url = new URL(
+          '/api/data',
+          process.env.NODE_ENV === 'production'
+            ? 'https://www.material-react-table.com'
+            : 'http://localhost:3000',
+        );
+        url.searchParams.set(
+          'start',
+          `${pagination.pageIndex * pagination.pageSize}`,
+        );
+        url.searchParams.set('size', `${pagination.pageSize}`);
+        url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
+        url.searchParams.set('globalFilter', globalFilter ?? '');
+        url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
 
-      const { data: axiosData } = await axios.get(url.href);
-      return axiosData;
-    },
-    { keepPreviousData: true },
-  );
+        const { data: axiosData } = await axios.get(url.href);
+        return axiosData;
+      },
+      { keepPreviousData: true },
+    );
 
   const columns = useMemo(
     () => [
@@ -76,7 +79,7 @@ const Example = () => {
   return (
     <MaterialReactTable
       columns={columns}
-      data={data?.data ?? []}
+      data={data?.data ?? []} //data is undefined on first render
       initialState={{ showColumnFilters: true }}
       manualFiltering
       manualPagination
@@ -84,15 +87,22 @@ const Example = () => {
       muiToolbarAlertBannerProps={
         isError
           ? {
-              color: 'error',
-              children: 'Error loading data',
-            }
+            color: 'error',
+            children: 'Error loading data',
+          }
           : undefined
       }
       onColumnFiltersChange={setColumnFilters}
       onGlobalFilterChange={setGlobalFilter}
       onPaginationChange={setPagination}
       onSortingChange={setSorting}
+      renderTopToolbarCustomActions={() => (
+        <Tooltip arrow title="Refresh Data">
+          <IconButton onClick={() => refetch()}>
+            <RefreshIcon />
+          </IconButton>
+        </Tooltip>
+      )}
       rowCount={data?.meta?.totalRowCount ?? 0}
       state={{
         columnFilters,

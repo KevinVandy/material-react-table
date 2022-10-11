@@ -179,6 +179,10 @@ export const routes: Array<RouteItem> = [
             label: 'Aggregation and Grouping',
           },
           {
+            href: '/docs/guides/async-loading',
+            label: 'Async Loading',
+          },
+          {
             href: '/docs/guides/click-to-copy',
             label: 'Click to Copy',
           },

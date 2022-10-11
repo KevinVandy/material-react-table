@@ -1,0 +1,72 @@
+import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+import LoadingExample from '../../../examples/loading';
+import LinearProgressExample from '../../../examples/linear-progress';
+import ReactQueryExample from '../../../examples/react-query';
+
+<Head>
+  <title>Async Loading Feature Guide - Material React Table Docs</title>
+  <meta
+    name="description"
+    content="How to show loading indicators, skeletons, and progress bars in Material React Table"
+  />
+</Head>
+
+## Async Loading Feature Guide
+
+While you are fetching your data, you may want to show some loading indicators. Material React Table has some nice loading UI features built in that look better than a simple spinner.
+
+> This guide is mostly focused on the loading UI features. Also checkout the [Remote Data](/docs/examples/remote) and [React Query](/docs/examples/react-query) examples for server-side logic examples.
+
+### Relevant Props
+
+<RootPropTable
+  onlyProps={
+    new Set(['muiTableBodyCellSkeletonProps', 'muiLinearProgressProps'])
+  }
+/>
+
+### Relevant Column Options
+
+<StateOptionsTable
+  onlyProps={new Set(['isLoading', 'showSkeletons', 'showProgressBars'])}
+/>
+
+### isLoading UI
+
+Instead of coding your own spinner or loading indicator, you can simply set the `isLoading` state to `true` and Material React Table will show progress bars and cell skeletons for you.
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data ?? []} //fallback to array if data is undefined
+  state={{ isLoading: true }}
+/>
+```
+
+<LoadingExample />
+
+#### Only Show Progress Bars or Skeletons
+
+If you do not want both progress bars and cell skeletons to show, you can use the `showProgressBars` and `showSkeletons` states instead.
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data ?? []} //fallback to array if data is undefined
+  state={{ showProgressBars: true }} //or showSkeletons
+/>
+```
+
+### Customize Linear Progress Bars
+
+You can customize the linear progress bars by passing props to the `muiLinearProgressProps` prop.
+
+<LinearProgressExample />
+
+### Full Loading and Server-Side Logic Example
+
+Here is a copy of the full [React Query](/docs/examples/react-query) example.
+
+<ReactQueryExample />
