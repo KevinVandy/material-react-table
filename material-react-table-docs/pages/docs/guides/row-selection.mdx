@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import EnableExample from '../../../examples/enable-row-selection';
 import SingleExample from '../../../examples/single-row-selection';
 import ManualExample from '../../../examples/manual-selection';
@@ -33,6 +34,10 @@ Material React Table has a built-in row-selection feature and makes it easy to m
     ])
   }
 />
+
+### Relevant State
+
+<StateOptionsTable onlyProps={new Set(['rowSelection'])} />
 
 ### Enable Selection
 
