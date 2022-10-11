@@ -17,6 +17,7 @@ import {
   faGripLines,
   faSearch,
   faSearchMinus,
+  faSortDown,
   faThumbTack,
 } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -28,6 +29,7 @@ config.autoAddCss = false;
  * If you skip customizing some icons, those particular icons will fallback the the default Material-UI icons.
  */
 const fontAwesomeIcons = {
+  ArrowDownwardIcon: (props) => <FontAwesomeIcon icon={faSortDown} {...props} />,
   ClearAllIcon: () => <FontAwesomeIcon icon={faBarsStaggered} />,
   DensityLargeIcon: () => <FontAwesomeIcon icon={faGripLines} />,
   DensityMediumIcon: () => <FontAwesomeIcon icon={faBars} />,

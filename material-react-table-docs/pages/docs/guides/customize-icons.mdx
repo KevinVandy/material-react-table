@@ -24,17 +24,19 @@ If you need to, you can customize and replace some or all of the icons with your
 
 To replace a default icon, specify the icon in the `icons` prop. You should get TS hints for the name of the icons you can replace, but you can also consult [this source file](https://github.com/KevinVandy/material-react-table/blob/main/src/icons.ts) for a list of all the icons you can replace.
 
-```tsx
+```jsx
 <MaterialTable
   columns={columns}
   data={data}
   icons={{
+    //change sort icon, connect internal props so that it gets styled correctly
+    ArrowDownwardIcon: (props) =>  <FontAwesomeIcon icon={faSortDown} {...props} />,
     SearchIcon: () => <FontAwesomeIcon icon={faSearch} />,
     SortIcon: (props) => (<FontAwesomeIcon icon={faArrowDownWideShort} {...props} />), //best practice
   }}
 ```
 
-> Some icons have `style` props that get applied to them internally. So, in order to preserve the ability of those Icons to be styled with the correct paddings, margins, or rotations, you should pass in `{...props}` to your custom icon component as a best practice.
+Some icons have `style` props that get applied to them internally. So, in order to preserve the ability of those Icons to be styled with the correct paddings, margins, or rotations, you should pass in `{...props}` to your custom icon component as a best practice.
 
 ### Font Awesome Example
 

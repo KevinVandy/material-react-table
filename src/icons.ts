@@ -1,3 +1,4 @@
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
@@ -30,6 +31,7 @@ import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 export interface MRT_Icons {
+  ArrowDownwardIcon: any;
   ArrowRightIcon: any;
   CancelIcon: any;
   CheckBoxIcon: any;
@@ -63,6 +65,7 @@ export interface MRT_Icons {
 }
 
 export const MRT_Default_Icons: MRT_Icons = {
+  ArrowDownwardIcon,
   ArrowRightIcon,
   CancelIcon,
   CheckBoxIcon,

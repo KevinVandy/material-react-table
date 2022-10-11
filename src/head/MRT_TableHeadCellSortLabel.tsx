@@ -16,7 +16,10 @@ export const MRT_TableHeadCellSortLabel: FC<Props> = ({
   tableCellProps,
 }) => {
   const {
-    options: { localization },
+    options: {
+      icons: { ArrowDownwardIcon },
+      localization,
+    },
   } = table;
   const { column } = header;
   const { columnDef } = column;
@@ -45,6 +48,7 @@ export const MRT_TableHeadCellSortLabel: FC<Props> = ({
               ? 'translateX(-0.5ch)'
               : undefined,
         }}
+        IconComponent={ArrowDownwardIcon}
       />
     </Tooltip>
   );
