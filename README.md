@@ -173,7 +173,7 @@ export default function App() {
       onRowSelectionChange={setRowSelection} //hoist internal state to your own state (optional)
       state={{ rowSelection }} //manage your own state, pass it back to the table (optional)
       tableInstanceRef={tableInstanceRef} //get a reference to the underlying table instance (optional)
-   />
+    />
   );
 }
 ```
