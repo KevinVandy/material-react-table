@@ -1,6 +1,6 @@
 import { MRT_Localization } from '../MaterialReactTable';
 
-export const MRT_Localization_EN: MRT_Localization = {
+export const MRT_Localization_IT: MRT_Localization = {
   actions: 'Azioni',
   and: 'e',
   cancel: 'Cancella',
@@ -27,7 +27,7 @@ export const MRT_Localization_EN: MRT_Localization = {
   filterEndsWith: 'Finisce con',
   filterEquals: 'Uguale',
   filterEqualsString: 'Uguale',
-  filterFuzzy: 'Fuzzy',
+  filterFuzzy: 'Sfocato',
   filterGreaterThan: 'Maggiore di',
   filterGreaterThanOrEqualTo: 'Magiorre o uguale a',
   filterInNumberRange: 'Tra',
