@@ -2,7 +2,7 @@ import Head from 'next/head';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
-import Example from '../../../examples/enable-column-ordering';
+import DNDExample from '../../../examples/enable-column-ordering';
 
 <Head>
   <title>Column Ordering/DnD Feature Guide - Material React Table Docs</title>
@@ -66,12 +66,37 @@ The Column Order State is an array of string column ids, that come from the ids 
 />
 ```
 
+### Manage Column Order State
+
+If you need to manage the `columnOrder` state yourself, you can do so in the `state` prop and `onColumnOrderChange` callback, but you will also need to initialize the `columnOrder` state yourself.
+
+```jsx
+const columns = [
+  //...
+];
+
+//easy shortcut to initialize the columnOrder state as array of column ids
+const [columnOrder, setColumnOrder] = useState(
+  columns.map((c) => c.accessorKey), //array of column ids
+);
+
+return (
+  <MaterialReactTable
+    data={data}
+    columns={columns}
+    enableRowSelection
+    state={state}
+    onColumnOrderChange={onColumnOrderChange}
+  />
+);
+```
+
 ### Enable Column Ordering with Drag and Drop
 
 Material React Table has a built-in drag and drop feature to reorder columns. This feature is enabled by passing the `enableColumnOrdering` prop.
 
 The ability for a column to have a drag and drop handle can be specified by setting the `enableColumnOrdering` option on the column.
 
-<Example />
+<DNDExample />
 
 View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-column-ordering-examples)**
