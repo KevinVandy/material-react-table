@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
-import Example from '../../../examples/mui-theme';
+import ThemeExample from '../../../examples/mui-theme';
+import CustomizeStylesExample from '../../../examples/customize-table-styles';
 import { Box } from '@mui/material';
 
 <Head>
@@ -86,7 +87,7 @@ Each prop can either be passed as an object or as a callback function where you 
 
 #### Static Prop Objects
 
-```tsx
+```jsx
 <MaterialReactTable
   columns={columns}
   data={data}
@@ -100,7 +101,7 @@ Each prop can either be passed as an object or as a callback function where you 
 
 #### Callback Functions to Dynamically Set Prop Values
 
-```tsx
+```jsx
 <MaterialReactTable
   columns={columns}
   data={data}
@@ -127,7 +128,7 @@ Don't worry, `className` and `style` props will still work, but let's show off s
 
 1. The `sx` prop can be used just a simply as a `style` prop by default
 
-```tsx
+```jsx
 <MaterialReactTable
   columns={columns}
   data={data}
@@ -143,7 +144,7 @@ Don't worry, `className` and `style` props will still work, but let's show off s
 
 2. The `sx` prop gets easy access to your _muiTheme_ without you having to call the theme from a `useTheme` hook.
 
-```tsx
+```jsx
 <MaterialReactTable
   columns={columns}
   data={data}
@@ -158,7 +159,7 @@ Don't worry, `className` and `style` props will still work, but let's show off s
 
 3. The `sx` prop gives you a much more concise way to add media queries to your styling.
 
-```tsx
+```jsx
 <MaterialReactTable
   columns={columns}
   data={data}
@@ -183,7 +184,7 @@ There are many more advantages to using the `sx` prop, but that is all we will d
 
 Material React Table respects your MUI Theme. If you have already set up Material UI and a global MUI Theme, you should already be set. But if you have not, you should visit the offical [Material UI Theming Docs](https://mui.com/material-ui/customization/theming/) to learn how to set that up.
 
-```tsx
+```jsx
 function App() {
   //Have you setup your Mui Theme globally in your app root?
   return (
@@ -198,7 +199,7 @@ function App() {
 
 Thanks to Material UI allowing you to [nest multiple Theme Providers](https://mui.com/material-ui/customization/theming/#nesting-the-theme), you can change your MUI Theme just for the `<MaterialReactTable />` component by wrapping a `<ThemeProvider theme={createTheme(...)}>` around just your table. The values in this theme will only effect the `<MaterialReactTable />` component, and not the rest of your site. It will also inherit values from your global theme, so you don't have to redefine everything again. You can just tweak the values you want to change.
 
-```tsx
+```jsx
 import { createTheme, ThemeProvider } from '@mui/material';
 //in one of your normal components
 return (
@@ -223,6 +224,70 @@ Notice that by default, the <Box component="span" sx={{color: "secondary.main", 
 
 A common use case for this could be if you want to switch your primary and secondary colors, just for this table. Let's take a look at an example that does that, along with some other styling tweaks, so that we can make an ugly table.
 
-<Example />
+<ThemeExample />
 
 ### Customize Table Paper Styling
+
+You can customize both the props and the styles of the internal `<Paper />` component that wraps the table by passing in a `muiTablePaperProps` prop. This is useful if you want to change the elevation of the paper, or add a border radius, or any other styling you want to do to the paper.
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  muiTablePaperProps={{
+    elevation: 0, //change the mui box shadow
+    //customize paper styles
+    sx: {
+      borderRadius: '0',
+      border: '1px dashed #e0e0e0',
+    },
+  }}
+/>
+```
+
+### Customize Table Body, Rows, Columns, and Cells
+
+#### Stripe Rows Example
+
+If you need to style many of the rows or columns in a consistent manner, it usually makes sense to style the `<TableBody />` component itself. For example if you want to stripe the rows, you can do something like this:
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  muiTableBodyProps={{
+    sx: {
+      //stripe the rows, make odd rows a darker color
+      '& tr:nth-of-type(odd)': {
+        backgroundColor: '#f5f5f5',
+      },
+    },
+  }}
+/>
+```
+
+#### Stripe Columns Example
+
+Similarly, if you want to stripe the columns, you can do something like this:
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  muiTableBodyProps={{
+    sx: {
+      //stripe the rows, make odd rows a darker color
+      '& td:nth-of-type(odd)': {
+        backgroundColor: '#f5f5f5',
+      },
+    },
+  }}
+  muiTableBodyCellProps={{
+    sx: {
+      borderRight: '2px solid #e0e0e0', //add a border between columns
+    },
+  }}
+/>
+```
+
+<CustomizeStylesExample />
