@@ -52,7 +52,7 @@ If you only want to disable the pagination logic, but still want to show and use
 
 #### Customize Pagination Behavior
 
-There are a few props that you can use to customize the pagination behavior. The first one is `autoResetPagination`. This prop is `true` by default, and causes a table to automatically reset the table back to the first page whenever sorting, filtering, or grouping occurs. This makes sense for most use cases, but if you want to disable this behavior, you can set this prop to `false`.
+There are a few props that you can use to customize the pagination behavior. The first one is `autoResetPageIndex`. This prop is `true` by default, and causes a table to automatically reset the table back to the first page whenever sorting, filtering, or grouping occurs. This makes sense for most use cases, but if you want to disable this behavior, you can set this prop to `false`.
 
 Next there is `paginateExpandedRows`, which works in conjunction expanding features. This prop is `true` by default, and forces the table to still only render the same number of rows per page that is set as the page size, even as sub-rows become expanded. However, this does cause expanded rows to sometimes not be on the same page as their parent row, so you can turn this off to keep sub rows with their parent row on the same page.
 
