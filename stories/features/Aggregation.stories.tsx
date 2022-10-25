@@ -6,6 +6,7 @@ import MaterialReactTable, {
 } from '../../src';
 import { faker } from '@faker-js/faker';
 import { Box, Stack } from '@mui/material';
+import { aggregationFns } from '@tanstack/react-table';
 
 const meta: Meta = {
   title: 'Features/Aggregation Examples',
@@ -44,7 +45,7 @@ const columns = [
     aggregationFn: 'max',
     AggregatedCell: ({ cell, table }) => (
       <>
-        Average by{' '}
+        Max by{' '}
         {table.getColumn(cell.row.groupingColumnId ?? '').columnDef.header}:{' '}
         <Box sx={{ color: 'success.main', fontWeight: 'bold' }}>
           {cell.getValue<number>()}
@@ -134,6 +135,126 @@ export const AggregationGroupedAndExpandedDefault: Story<
 > = () => (
   <MaterialReactTable
     columns={columns}
+    data={data}
+    enableGrouping
+    initialState={{
+      expanded: true,
+      grouping: ['state', 'gender'],
+      isFullScreen: true,
+      pagination: { pageIndex: 0, pageSize: 20 },
+    }}
+  />
+);
+
+export const MultiAggregationPerColumn: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        accessorKey: 'firstName',
+        enableGrouping: false,
+      },
+      {
+        header: 'Last Name',
+        accessorKey: 'lastName',
+        enableGrouping: false,
+      },
+      {
+        header: 'Age',
+        accessorKey: 'age',
+        //manually set multiple aggregation functions
+        aggregationFn: (columnId, leafRows, childRows) => [
+          aggregationFns.min(columnId, leafRows, childRows),
+          aggregationFns.max(columnId, leafRows, childRows),
+        ],
+        AggregatedCell: ({ cell, table }) => (
+          <>
+            Min by{' '}
+            {table.getColumn(cell.row.groupingColumnId ?? '').columnDef.header}:{' '}
+            <Box sx={{ color: 'success.main', fontWeight: 'bold' }}>
+              {cell.getValue<[number, number]>()[0]}
+            </Box>
+            <br />
+            Max by{' '}
+            {
+              table.getColumn(cell.row.groupingColumnId ?? '').columnDef.header
+            }:{' '}
+            <Box sx={{ color: 'success.main', fontWeight: 'bold' }}>
+              {cell.getValue<[number, number]>()[1]}
+            </Box>
+          </>
+        ),
+        Footer: () => (
+          <Stack>
+            Average Age:
+            <Box color="warning.main">{Math.round(averageAge)}</Box>
+          </Stack>
+        ),
+      },
+      {
+        header: 'Gender',
+        accessorKey: 'gender',
+        GroupedCell: ({ cell }) => (
+          <Box sx={{ color: 'primary.main' }}>{cell.getValue<string>()}</Box>
+        ),
+      },
+      {
+        header: 'State',
+        accessorKey: 'state',
+      },
+      {
+        header: 'Salary',
+        accessorKey: 'salary',
+        enableGrouping: false,
+        aggregationFn: ['count', 'mean'], //multiple aggregation functions
+        AggregatedCell: ({ cell, table }) => (
+          <>
+            Count:{' '}
+            <Box sx={{ color: 'success.main', fontWeight: 'bold' }}>
+              {cell.getValue<[number, number]>()?.[0]}
+            </Box>
+            <br />
+            Average by{' '}
+            {
+              table.getColumn(cell.row.groupingColumnId ?? '').columnDef.header
+            }:{' '}
+            <Box sx={{ color: 'success.main', fontWeight: 'bold' }}>
+              {cell
+                .getValue<[number, number]>()?.[1]
+                ?.toLocaleString?.('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                })}
+            </Box>
+          </>
+        ),
+        Cell: ({ cell }) => (
+          <>
+            {cell.getValue<number>()?.toLocaleString?.('en-US', {
+              style: 'currency',
+              currency: 'USD',
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            })}
+          </>
+        ),
+        Footer: () => (
+          <Stack>
+            Average Salary:
+            <Box color="warning.main">
+              {averageSalary?.toLocaleString?.('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+              })}
+            </Box>
+          </Stack>
+        ),
+      },
+    ]}
     data={data}
     enableGrouping
     initialState={{

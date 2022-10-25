@@ -25,6 +25,7 @@ import type { TableRowProps } from '@mui/material/TableRow';
 import type { TextFieldProps } from '@mui/material/TextField';
 import type { ToolbarProps } from '@mui/material/Toolbar';
 import type {
+  AggregationFn,
   Cell,
   Column,
   ColumnDef,
@@ -245,6 +246,7 @@ export type MRT_TableState<TData extends Record<string, any> = {}> =
 export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
   ColumnDef<TData, unknown>,
   | 'aggregatedCell'
+  | 'aggregationFn'
   | 'cell'
   | 'columns'
   | 'filterFn'
@@ -346,6 +348,7 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
    * @example accessorKey: 'name.firstName' //deep key dot notation
    */
   accessorKey?: DeepKeys<TData>;
+  aggregationFn?: MRT_AggregationFn<TData> | Array<MRT_AggregationFn<TData>>;
   /**
    * Specify what type of column this is. Either `data`, `display`, or `group`. Defaults to `data`.
    * Leave this blank if you are just creating a normal data column.
@@ -553,6 +556,12 @@ export type MRT_Cell<TData extends Record<string, any> = {}> = Omit<
   column: MRT_Column<TData>;
   row: MRT_Row<TData>;
 };
+
+export type MRT_AggregationOption = string & keyof typeof MRT_AggregationFns;
+
+export type MRT_AggregationFn<TData extends Record<string, any> = {}> =
+  | AggregationFn<TData>
+  | MRT_AggregationOption;
 
 export type MRT_SortingOption = LiteralUnion<
   string & keyof typeof MRT_SortingFns

@@ -209,6 +209,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   const columnDefs = useMemo(
     () =>
       prepareColumns({
+        aggregationFns: props.aggregationFns as any,
         columnDefs: [...displayColumns, ...props.columns],
         columnFilterFns: props.state?.columnFilterFns ?? columnFilterFns,
         defaultDisplayColumn: props.defaultDisplayColumn ?? {},

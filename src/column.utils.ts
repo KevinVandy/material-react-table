@@ -1,4 +1,9 @@
-import type { ColumnOrderState, GroupingState } from '@tanstack/react-table';
+import type {
+  ColumnOrderState,
+  GroupingState,
+  Row,
+} from '@tanstack/react-table';
+import { MRT_AggregationFns } from './aggregationFns';
 import { MRT_FilterFns } from './filterFns';
 import { MRT_SortingFns } from './sortingFns';
 import { alpha, lighten } from '@mui/material/styles';
@@ -38,12 +43,15 @@ export const getAllLeafColumnDefs = <TData extends Record<string, any> = {}>(
 };
 
 export const prepareColumns = <TData extends Record<string, any> = {}>({
+  aggregationFns,
   columnDefs,
   columnFilterFns,
   defaultDisplayColumn,
   filterFns,
   sortingFns,
 }: {
+  aggregationFns: typeof MRT_AggregationFns &
+    MaterialReactTableProps<TData>['aggregationFns'];
   columnDefs: MRT_ColumnDef<TData>[];
   columnFilterFns: { [key: string]: MRT_FilterOption };
   defaultDisplayColumn: Partial<MRT_ColumnDef<TData>>;
@@ -52,16 +60,21 @@ export const prepareColumns = <TData extends Record<string, any> = {}>({
     MaterialReactTableProps<TData>['sortingFns'];
 }): MRT_DefinedColumnDef<TData>[] =>
   columnDefs.map((columnDef) => {
+    //assign columnId
     if (!columnDef.id) columnDef.id = getColumnId(columnDef);
     if (process.env.NODE_ENV !== 'production' && !columnDef.id) {
       console.error(
         'Column definitions must have a valid `accessorKey` or `id` property',
       );
     }
+
+    //assign columnDefType
     if (!columnDef.columnDefType) columnDef.columnDefType = 'data';
     if (columnDef.columns?.length) {
       columnDef.columnDefType = 'group';
+      //recursively prepare columns if this is a group column
       columnDef.columns = prepareColumns({
+        aggregationFns,
         columnDefs: columnDef.columns,
         columnFilterFns,
         defaultDisplayColumn,
@@ -69,12 +82,28 @@ export const prepareColumns = <TData extends Record<string, any> = {}>({
         sortingFns,
       });
     } else if (columnDef.columnDefType === 'data') {
+      //assign aggregationFns if multiple aggregationFns are provided
+      if (Array.isArray(columnDef.aggregationFn)) {
+        const aggFns = columnDef.aggregationFn as string[];
+        columnDef.aggregationFn = (
+          columnId: string,
+          leafRows: Row<TData>[],
+          childRows: Row<TData>[],
+        ) =>
+          aggFns.map((fn) =>
+            aggregationFns[fn]?.(columnId, leafRows, childRows),
+          );
+      }
+
+      //assign filterFns
       if (Object.keys(filterFns).includes(columnFilterFns[columnDef.id])) {
         columnDef.filterFn =
           filterFns[columnFilterFns[columnDef.id]] ?? filterFns.fuzzy;
         (columnDef as MRT_DefinedColumnDef)._filterFn =
           columnFilterFns[columnDef.id];
       }
+
+      //assign sortingFns
       if (Object.keys(sortingFns).includes(columnDef.sortingFn as string)) {
         // @ts-ignore
         columnDef.sortingFn = sortingFns[columnDef.sortingFn];
