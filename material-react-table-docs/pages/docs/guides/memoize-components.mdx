@@ -22,13 +22,13 @@ However, memoizing these components will **BREAK** some features!
 
 ### Memoizing Table Cells
 
-Memoizing table cells can make a small, but positive impact on render performance, and it is only incompatible with a few of the dynamic features of Material React Table.
+Memoizing table cells can make a small but positive impact on render performance, and it is only incompatible with a few of the dynamic features of Material React Table.
 
 #### Cell Memoization Breaks the Following Features:
 
 <Box color="warning.main">`density toggle, column resizing`</Box>
 
-The reason these features are incompatible with cell memoization is because these features depend on table cells being re-rendered.
+These features are incompatible with cell memoization because they depend on table cells being re-rendered.
 
 #### Features That Should Still Work with Cell Memoization:
 
@@ -60,7 +60,7 @@ Memoizing entire table rows can make an even more positive impact on render perf
   pinning, row expanding, row selection`
 </Box>
 
-The reason these features are incompatible with row memoization is because they require the entire row or cells to be re-rendered in order to update the UI.
+These features are incompatible with row memoization because they require the entire row or cells to be re-rendered in order to update the UI.
 
 #### Features That Should Still Work with Row Memoization:
 
