@@ -12,9 +12,9 @@ import RowSelectionExample from '../../../examples/enable-row-selection';
 
 ## Table State Management Guide
 
-Material React Table does not try to hide any of its internal state from you. You can store your own reference to the entire table instance wherever you need to, initialize state with custom initial values, or manage individual states yourself as you discover the need to have access to them.
+Material React Table does not try to hide any of its internal states from you. You can store your own reference to the entire table instance wherever you need to, initialize states with custom initial values, or manage individual states yourself as you discover the need to have access to them.
 
-This is all optional, of course. If you don't need access to some of the state, you do not need to do anything and it will just automatically be managed internally. See the [State Options API Docs](/docs/api/state-options) for more information on which states are available for you to manage.
+This is all optional, of course. If you don't need access to some of the states, you do not need to do anything and it will just automatically be managed internally. See the [State Options API Docs](/docs/api/state-options) for more information on which states are available for you to manage.
 
 ### Relevant Props
 
@@ -24,7 +24,7 @@ This is all optional, of course. If you don't need access to some of the state, 
 
 ### Access the Underlying Table Instance Reference
 
-Before jumping in and managing a bunch of state yourself, you should first see if you actually need to.
+Before jumping in and managing a bunch of states yourself, you should first see if you actually need to.
 
 You can store a reference to the underlying table instance by using the `tableInstanceRef` prop. This is a mutable ref object that will be populated with the table instance once the table has been initialized internally. This reference can be very useful, especially if you need it for components that are rendered outside of `<MaterialReactTable />`.
 
@@ -84,7 +84,7 @@ return (
 
 ### Populate Initial State
 
-If all you care is setting parts of the initial or default state when the table mounts, then you may be able to specify that state in the `initialState` prop and not have to worry about managing the state yourself.
+If all you care about is setting parts of the initial or default state when the table mounts, then you may be able to specify that state in the `initialState` prop and not have to worry about managing the state yourself.
 
 For example, let's say you don't need access to the `showColumnFilters` state, but you want to set the default value to `true` when the table mounts. You can do that with the `initialState` prop:
 
@@ -103,7 +103,7 @@ For example, let's say you don't need access to the `showColumnFilters` state, b
 
 ### Manage Individual States as Needed
 
-It is pretty common to need to manage certain state yourself, so that you can react to changes in that state, or have easy access to it when sending it to an API.
+It is pretty common to need to manage certain states yourself, so that you can react to changes in that state, or have easy access to it when sending it to an API.
 
 You can pass in any state that you are managing yourself to the `state` prop, and it will be used instead of the internal state. Each state property option also has a corresponding `on[StateName]Change` callback that you can use set/update your managed state as it changes internally in the table.
 
@@ -136,7 +136,7 @@ Here is another full example for how you might manage the `rowSelection` state y
 
 ### Add Side Effects in Set State Callbacks
 
-In React 18 and beyond, it is becoming more discouraged to use `useEffect` to react to state changes, because in React Strict Mode (and maybe future versions of React), the useEffect hook may run twice per render. Instead, more event driven functions are recommended to be used. Here is an example for how that looks here. The callback signature for the `on[StateName]Change` functions is a bit strange, so pay attention to the example below.
+In React 18 and beyond, it is becoming more discouraged to use `useEffect` to React to state changes, because in React Strict Mode (and maybe future versions of React), the useEffect hook may run twice per render. Instead, more event driven functions are recommended to be used. Here is an example for how that looks. The callback signature for the `on[StateName]Change` functions is a bit strange, so pay attention to the example below.
 
 ```tsx
 const [pagination, setPagination] = useState({
