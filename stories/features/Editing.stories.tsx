@@ -10,7 +10,7 @@ const meta: Meta = {
 
 export default meta;
 
-const data = [...Array(10)].map(() => ({
+const data = [...Array(100)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   address: faker.address.streetAddress(),
@@ -479,6 +479,51 @@ export const EditingNestedData: Story<MaterialReactTableProps> = () => {
         };
         setTableData([...tableData]);
       }}
+    />
+  );
+};
+
+export const EditingEnabledEditModeTableWithGroupedRows: Story<
+  MaterialReactTableProps
+> = () => {
+  const [tableData, setTableData] = useState(data);
+
+  const handleSaveRow = ({ exitEditingMode, row, values }) => {
+    tableData[row.index] = values;
+    setTableData([...tableData]);
+    exitEditingMode();
+  };
+
+  return (
+    <MaterialReactTable
+      columns={[
+        {
+          header: 'First Name',
+          accessorKey: 'firstName',
+        },
+        {
+          header: 'Last Name',
+          accessorKey: 'lastName',
+        },
+        {
+          header: 'Address',
+          accessorKey: 'address',
+        },
+        {
+          header: 'State',
+          accessorKey: 'state',
+        },
+        {
+          header: 'Phone Number',
+          accessorKey: 'phoneNumber',
+          enableEditing: false,
+        },
+      ]}
+      data={tableData}
+      enableEditing
+      enableGrouping
+      editingMode="table"
+      onEditingRowSave={handleSaveRow}
     />
   );
 };

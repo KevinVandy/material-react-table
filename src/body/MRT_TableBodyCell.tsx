@@ -133,7 +133,8 @@ export const MRT_TableBodyCell: FC<Props> = ({
     editingMode !== 'modal' &&
     (editingMode === 'table' ||
       editingRow?.id === row.id ||
-      editingCell?.id === cell.id);
+      editingCell?.id === cell.id) &&
+    !row.getIsGrouped();
 
   const handleDoubleClick = (event: MouseEvent<HTMLTableCellElement>) => {
     tableCellProps?.onDoubleClick?.(event);
