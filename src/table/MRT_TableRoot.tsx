@@ -297,7 +297,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       tablePaperRef,
       topToolbarRef,
     },
-    setColumnFilterFns: props.onFilterFnsChange ?? setColumnFilterFns,
+    setColumnFilterFns: props.onColumnFilterFnsChange ?? setColumnFilterFns,
     setDensity: props.onDensityChange ?? setDensity,
     setDraggingColumn: props.onDraggingColumnChange ?? setDraggingColumn,
     setDraggingRow: props.onDraggingRowChange ?? setDraggingRow,

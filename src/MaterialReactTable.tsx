@@ -245,6 +245,7 @@ export type MRT_TableState<TData extends Record<string, any> = {}> =
 
 export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
   ColumnDef<TData, unknown>,
+  | 'accessorKey'
   | 'aggregatedCell'
   | 'aggregationFn'
   | 'cell'
@@ -937,7 +938,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
       values: Record<LiteralUnion<string & DeepKeys<TData>>, any>;
     }) => Promise<void> | void;
     onEditingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
-    onFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterOption }>;
+    onColumnFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterOption }>;
     onGlobalFilterFnChange?: OnChangeFn<MRT_FilterOption>;
     onHoveredColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
     onHoveredRowChange?: OnChangeFn<MRT_Row<TData> | null>;
