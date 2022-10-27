@@ -51,7 +51,7 @@ Material React Table has built-in grouping and aggregation features. There are o
 
 ### Enable Grouping
 
-To enable grouping, set the `enableGrouping` prop to `true`. This will both add a drag handle button so columns can be dragged to the dropzone to be grouped, and will add an entry column actions menu to group or ungroup a column.
+To enable grouping, set the `enableGrouping` prop to `true`. This will both add a drag handle button so that columns can be dragged to the dropzone to be grouped and will add an entry column actions menu to group or ungroup a column.
 
 ```jsx
 <MaterialReactTable columns={columns} data={data} enableGrouping />
@@ -103,7 +103,7 @@ If you want columns to be grouped by default, you can set the `grouping` state i
 
 ### Expand Grouped Rows by Default
 
-In addition to grouping columns by default, you may also want those grouped rows to be expanded and visible by default too. You can do this by setting the `expanded` state to `true` in either the `initialState` or `state` prop.
+In addition to grouping columns by default, you may also want those grouped rows to be expanded and visible by default, too. You can do this by setting the `expanded` state to `true` in either the `initialState` or `state` prop.
 
 ```jsx
 <MaterialReactTable
@@ -167,7 +167,7 @@ return (
 
 #### Custom Aggregation Functions
 
-If none of those pre-built aggregation functions work for you, you can also pass in a custom aggregation function. The aggregation function will be passed an array of values from the column that you are aggregating. It should return a single value that will be displayed in the aggregated cell.
+If none of these pre-built aggregation functions work for you, you can also pass in a custom aggregation function. The aggregation function will be passed in an array of values from the column that you are aggregating. It should return a single value that will be displayed in the aggregated cell.
 
 If you are specifying a custom aggregation function, it must implement the following type:
 
@@ -211,7 +211,7 @@ There are a few custom cell render overrides that you should be aware of when us
 
 #### AggregatedCell Column Option
 
-"Aggregation Cells" are cells in an aggregated row (not a normal data row) that can display aggregates (avg, sum, etc) of the data in a group. The cell that the table is grouped on, however, is not an Aggregate Cell, but rather a [GroupedCell](#groupedcell-column-option).
+"Aggregation Cells" are cells in an aggregated row (not a normal data row) that can display aggregates (avg, sum, etc.) of the data in a group. The cell that the table is grouped on, however, is not an Aggregate Cell, but rather a [GroupedCell](#groupedcell-column-option).
 
 You can specify the custom render for these cells with the `AggregatedCell` render option on a column definition.
 
@@ -228,7 +228,7 @@ const columns = [
 
 #### GroupedCell Column Option
 
-"Grouped Cells" are cells in a grouped row (not a normal data row) that by default display the value that the rows are grouped on, and the number of rows in the group. You can override the default render for these cells with the `GroupedCell` render option on a column definition.
+"Grouped Cells" are cells in a grouped row (not a normal data row) that by default display the value that the rows are grouped on and the number of rows in the group. You can override the default render for these cells with the `GroupedCell` render option on a column definition.
 
 ```jsx
 const columns = [
