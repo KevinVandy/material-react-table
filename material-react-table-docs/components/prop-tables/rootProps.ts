@@ -1367,7 +1367,7 @@ export const rootProps: PropRow[] = [
     type: 'OnChangeFn<MRT_Row<TData> | null>',
   },
   {
-    propName: 'onFilterFnsChange',
+    propName: 'onColumnFilterFnsChange',
     defaultValue: '',
     description: '',
     link: '',

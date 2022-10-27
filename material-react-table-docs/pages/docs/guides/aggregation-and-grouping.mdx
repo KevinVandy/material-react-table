@@ -3,6 +3,7 @@ import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import AggregationExample from '../../../examples/aggregation-and-grouping';
+import AggregationMultiExample from '../../../examples/aggregation-multi';
 
 <Head>
   <title>
@@ -244,6 +245,32 @@ const columns = [
 
 <AggregationExample />
 
+### Multiple Aggregations Per column
+
+> New in v1.3!
+
+You may want to calculate more than one aggregation per column. This is now easier if you are upgraded to at least v1.3.0. You can now specify an array of `aggregationFn`s, and then reference the aggregation results from an array in the `AggregatedCell` render option.
+
+```jsx
+const columns = [
+  {
+    header: 'Salary',
+    accessorKey: 'salary',
+    aggregationFn: ['count', 'mean'], //multiple aggregation functions
+    AggregatedCell: ({ cell, table }) => (
+      <div>
+        {/*get the count from the first aggregation*/}
+        <div>Count: {cell.getValue()[0]}</div>
+        {/*get the average from the second aggregation*/}
+        <div>Average Salary: {cell.getValue()[1]}</div>
+      </div>
+    ),
+  },
+];
+```
+
+<AggregationMultiExample />
+
 ### Manual Grouping
 
-TODO
+Manual Grouping means that the `data` that you pass to the table is already grouped and aggregated, and you do not want Material React Table to do any of the grouping or aggregation for you. This is useful if you are using a backend API to do the grouping and aggregation for you, and you just want to display the results. However, you will need to put your data in the specific format that the `expanding` features understand.
