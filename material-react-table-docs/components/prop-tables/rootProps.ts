@@ -1626,6 +1626,16 @@ export const rootProps: PropRow[] = [
     type: 'ReactNode | ({ table }) => ReactNode',
   },
   {
+    propName: 'renderCustomNoData',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '({ table }) => ReactNode',
+  },
+  {
     propName: 'renderColumnActionsMenuItems',
     defaultValue: '',
     description: '',

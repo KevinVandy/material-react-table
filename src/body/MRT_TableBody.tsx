@@ -27,6 +27,7 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
       muiTableBodyProps,
       virtualizerInstanceRef,
       virtualizerProps,
+      renderCustomNoData,
     },
     refs: { tableContainerRef, tablePaperRef },
   } = table;
@@ -120,24 +121,28 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
   return (
     <TableBody {...tableBodyProps}>
       {!rows.length ? (
-        <tr>
-          <td colSpan={table.getVisibleLeafColumns().length}>
-            <Typography
-              sx={{
-                color: 'text.secondary',
-                fontStyle: 'italic',
-                maxWidth: `min(100vw, ${tablePaperRef.current?.clientWidth}px)`,
-                py: '2rem',
-                textAlign: 'center',
-                width: '100%',
-              }}
-            >
-              {globalFilter || columnFilters.length
-                ? localization.noResultsFound
-                : localization.noRecordsToDisplay}
-            </Typography>
-          </td>
-        </tr>
+        renderCustomNoData ? (
+          renderCustomNoData({ table })
+        ) : (
+          <tr>
+            <td colSpan={table.getVisibleLeafColumns().length}>
+              <Typography
+                sx={{
+                  color: 'text.secondary',
+                  fontStyle: 'italic',
+                  maxWidth: `min(100vw, ${tablePaperRef.current?.clientWidth}px)`,
+                  py: '2rem',
+                  textAlign: 'center',
+                  width: '100%',
+                }}
+              >
+                {globalFilter || columnFilters.length
+                  ? localization.noResultsFound
+                  : localization.noRecordsToDisplay}
+              </Typography>
+            </td>
+          </tr>
+        )
       ) : (
         <>
           {enableRowVirtualization && paddingTop > 0 && (

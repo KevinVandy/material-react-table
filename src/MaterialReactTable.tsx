@@ -952,6 +952,11 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     positionPagination?: 'bottom' | 'top' | 'both';
     positionToolbarAlertBanner?: 'bottom' | 'top' | 'none';
     positionToolbarDropZone?: 'bottom' | 'top' | 'none' | 'both';
+    renderCustomNoData?: ({
+      table,
+    }: {
+      table: MRT_TableInstance<TData>;
+    }) => ReactNode;
     renderBottomToolbar?:
       | ReactNode
       | (({ table }: { table: MRT_TableInstance<TData> }) => ReactNode);

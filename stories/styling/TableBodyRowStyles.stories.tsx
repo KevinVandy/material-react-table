@@ -5,6 +5,7 @@ import MaterialReactTable, {
   MRT_ColumnDef,
 } from '../../src';
 import { faker } from '@faker-js/faker';
+import { Box, Typography } from '@mui/material';
 
 const meta: Meta = {
   title: 'Styling/Style Table Body Rows',
@@ -90,5 +91,21 @@ export const ConditionallyStyleMuiTableRow: Story<
         fontStyle: 'italic',
       },
     })}
+  />
+);
+
+export const renderCustomNoData: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={[]}
+    renderCustomNoData={({ table }) => (
+      <tr>
+        <td colSpan={table.getVisibleLeafColumns().length}>
+          <Box p={2}>
+            <Typography>🧐 Hmmm there's no data here ∅</Typography>
+          </Box>
+        </td>
+      </tr>
+    )}
   />
 );
