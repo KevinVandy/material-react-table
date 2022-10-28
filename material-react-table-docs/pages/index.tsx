@@ -75,20 +75,6 @@ const HomePage = () => {
           </Box>
         </Typography>
         <Typography
-          sx={(theme) => ({
-            textAlign: 'center',
-            background: `-webkit-linear-gradient(left, ${theme.palette.error.main}, ${theme.palette.warning.main})`,
-            display: 'inline',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            transform: 'translateY(-1rem)',
-            // width: '8rem',
-            margin: 'auto',
-          })}
-        >
-          v1.0 Released September 13, 2022 🎉
-        </Typography>
-        <Typography
           color="text.secondary"
           sx={{
             fontSize: {

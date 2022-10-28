@@ -143,6 +143,13 @@ export const rowInstanceAPIs: RowInstanceAPI[] = [
     linkText: '',
   },
   {
+    rowInstanceAPI: 'getUniqueValues',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
     rowInstanceAPI: 'getValue',
     type: '',
     description: '',
