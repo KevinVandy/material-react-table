@@ -148,7 +148,7 @@ export const MRT_TableBodyCell: FC<Props> = ({
         const textField = editInputRefs.current[column.id];
         if (textField) {
           textField.focus();
-          textField.select();
+          textField.select?.();
         }
       });
     }
