@@ -130,7 +130,7 @@ export const ColumnHidingWithHeaderGroups: Story<
     columns={[
       {
         header: 'Name',
-        accessorKey: 'name',
+        id: 'name',
         columns: [
           {
             header: 'First Name',
@@ -144,7 +144,7 @@ export const ColumnHidingWithHeaderGroups: Story<
       },
       {
         header: 'Mailing Info',
-        accessorKey: 'mailingInfo',
+        id: 'mailingInfo',
         columns: [
           {
             header: 'Address',
@@ -162,7 +162,7 @@ export const ColumnHidingWithHeaderGroups: Story<
       },
       {
         header: 'Contact Info',
-        accessorKey: 'contactInfo',
+        id: 'contactInfo',
         columns: [
           {
             header: 'Email Address',

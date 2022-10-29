@@ -7,7 +7,6 @@ import MaterialReactTable, {
 } from '../../src';
 import { faker } from '@faker-js/faker';
 import { Button } from '@mui/material';
-import { useEffect } from '@storybook/addons';
 
 const meta: Meta = {
   title: 'Features/Selection Examples',

@@ -21,7 +21,7 @@ body:
         - Please let us know the exact version of material-react-table you were using when the issue occurred. If you are using an older version, check to see if your bug has already been solved in the latest version. 
         - The latest version is <img alt="" src="https://badgen.net/npm/v/material-react-table" />
       placeholder: |
-        e.g. v0.15.4
+        e.g. v1.3.4
     validations:
       required: true
 
@@ -36,15 +36,9 @@ body:
   - type: textarea
     id: link
     attributes:
-      label: Your Minimal, Reproducible Example - Sandbox (Recommended) or code snippets
+      label: Minimal, Reproducible Example - (Optional, but Recommended)
       description: |
-        Please add a link to a minimal reproduction. This can really speed up the diagnosis of the problem! A Code Sandbox is preferable, but simple code snippets are also acceptable here.
-        Note:
-          - Your bug may get fixed much faster if we can run your code and it doesn't have dependencies other than React and the Material UI/Emotion dependencies.
-          - To create a shareable code example for web, you can use CodeSandbox (https://codesandbox.io/s/new).
-          - Please make sure the example is complete and runnable without prior dependencies and free of unnecessary abstractions
-          - Feel free to fork any of the official CodeSandbox examples to reproduce your issue: https://github.com/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples
-          - Please read these tips for providing a minimal example: https://stackoverflow.com/help/mcve.
+        Please add a link to a minimal reproduction. This can really speed up the diagnosis of the problem! A Code Sandbox is preferable, but simple code snippets are also acceptable here. Feel free to fork any of the official CodeSandbox examples: https://github.com/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples
       placeholder: |
         e.g. Code Sandbox, Stackblitz, or relevant code snippets.
     validations:
@@ -56,8 +50,6 @@ body:
       label: Screenshots or Videos (Optional)
       description: |
         If applicable, add screenshots or a video to help explain your problem.
-        For more information on the supported file image/file types and the file size limits, please refer
-        to the following link: https://docs.github.com/en/github/writing-on-github/working-with-advanced-formatting/attaching-files
       placeholder: |
         You can drag your video or image files inside of this editor ↓
 
@@ -80,4 +72,6 @@ body:
       description: By submitting this issue, you agree to follow our Code of Conduct and can verify that you have followed the requirements outlined above to the best of your ability.
       options:
         - label: I understand that if my bug cannot be reliably reproduced in a debuggable environment, it will probably not be fixed and this issue may even be closed.
+          required: true
+        - label: I have verified I am using the correct peer dependency versions for my version of material-react-table listed in the [installation instructions](https://www.material-react-table.com/docs/getting-started/install#installation).
           required: true

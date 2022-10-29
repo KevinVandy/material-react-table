@@ -103,7 +103,7 @@
   },
   "dependencies": {
     "@tanstack/match-sorter-utils": "8.5.14",
-    "@tanstack/react-table": "8.5.18",
+    "@tanstack/react-table": "8.5.19",
     "react-virtual": "^2.10.4"
   }
 }
