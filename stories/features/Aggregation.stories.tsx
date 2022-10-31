@@ -14,7 +14,7 @@ const meta: Meta = {
 
 export default meta;
 
-const data = [...Array(200)].map(() => ({
+const data = [...Array(2000)].map(() => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   age: faker.datatype.number({ min: 18, max: 65 }),

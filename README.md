@@ -21,13 +21,9 @@
 
 ## About
 
-> Version 1.0 released 2022-09-13 🎉
-
 __Built with [Material UI <sup>V5</sup>](https://mui.com) and [TanStack Table <sup>V8</sup>](https://tanstack.com/table/v8)__
 
 _Quickly Create React Data Tables with Material Design_
-
-_Full [Localization (i18n)](https://www.material-react-table.com/docs/guides/localization) Support!_
 
 Join the [Discord](https://discord.gg/5wqyRx6fnm) server to join in on the development discussion or ask questions
 
