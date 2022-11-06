@@ -1,10 +1,3 @@
-import React, {
-  Dispatch,
-  MutableRefObject,
-  ReactNode,
-  SetStateAction,
-  useMemo,
-} from 'react';
 import type { AlertProps } from '@mui/material/Alert';
 import type { ButtonProps } from '@mui/material/Button';
 import type { CheckboxProps } from '@mui/material/Checkbox';
@@ -14,13 +7,13 @@ import type { LinearProgressProps } from '@mui/material/LinearProgress';
 import type { PaperProps } from '@mui/material/Paper';
 import type { RadioProps } from '@mui/material/Radio';
 import type { SkeletonProps } from '@mui/material/Skeleton';
+import type { TableProps } from '@mui/material/Table';
 import type { TableBodyProps } from '@mui/material/TableBody';
 import type { TableCellProps } from '@mui/material/TableCell';
 import type { TableContainerProps } from '@mui/material/TableContainer';
 import type { TableFooterProps } from '@mui/material/TableFooter';
 import type { TableHeadProps } from '@mui/material/TableHead';
 import type { TablePaginationProps } from '@mui/material/TablePagination';
-import type { TableProps } from '@mui/material/Table';
 import type { TableRowProps } from '@mui/material/TableRow';
 import type { TextFieldProps } from '@mui/material/TextField';
 import type { ToolbarProps } from '@mui/material/Toolbar';
@@ -40,6 +33,13 @@ import type {
   TableOptions,
   TableState,
 } from '@tanstack/react-table';
+import React, {
+  Dispatch,
+  MutableRefObject,
+  ReactNode,
+  SetStateAction,
+  useMemo,
+} from 'react';
 import type { Options as VirtualizerOptions, VirtualItem } from 'react-virtual';
 // import type { VirtualizerOptions } from '@tanstack/react-virtual';
 import { MRT_AggregationFns } from './aggregationFns';
@@ -49,6 +49,7 @@ import { MRT_Default_Icons, MRT_Icons } from './icons';
 import { MRT_SortingFns } from './sortingFns';
 import { MRT_TableRoot } from './table/MRT_TableRoot';
 import { MRT_Localization_EN } from './_locales/en';
+import { MRT_Localization_FA } from './_locales/fa';
 
 /**
  * Most of this file is just TypeScript types
@@ -1107,6 +1108,7 @@ const MaterialReactTable = <TData extends Record<string, any> = {}>({
   const _localization = useMemo(
     () => ({
       ...MRT_Localization_EN,
+      ...MRT_Localization_FA,
       ...localization,
     }),
     [localization],
