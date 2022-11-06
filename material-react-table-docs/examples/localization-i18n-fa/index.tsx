@@ -10,7 +10,7 @@ const ExampleTable = () => {
       Component={Example}
       javaScriptCode={JS}
       typeScriptCode={TS}
-      tableId="localization-i18n-ja"
+      tableId="localization-i18n-fa"
     />
   );
 };

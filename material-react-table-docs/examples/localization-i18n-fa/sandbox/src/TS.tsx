@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 //Import Material React Table and its Types
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
@@ -47,13 +47,14 @@ const Example: FC = () => {
 
 //App.tsx or similar
 import { createTheme, ThemeProvider, useTheme } from '@mui/material';
-import { jaJP } from '@mui/material/locale';
+import { faIR } from '@mui/material/locale';
 
 const ExampleWithThemeProvider: FC = () => {
   const theme = useTheme(); //replace with your theme/createTheme
+
   return (
     //Setting Material UI locale as best practice to result in better accessibility
-    <ThemeProvider theme={createTheme(theme, jaJP)}>
+    <ThemeProvider theme={createTheme({ ...theme, direction: 'rtl' }, faIR)}>
       <Example />
     </ThemeProvider>
   );

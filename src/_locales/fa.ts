@@ -24,7 +24,7 @@ export const MRT_Localization_FA: MRT_Localization = {
   filterByColumn: 'فیلتر توسط {column}',
   filterContains: 'شامل',
   filterEmpty: 'خالی',
-  filterEndsWith: 'ENDS WITH',
+  filterEndsWith: 'به پایان می رسد با',
   filterEquals: 'مساوی',
   filterEqualsString: 'مساوی',
   filterFuzzy: 'درهم',
