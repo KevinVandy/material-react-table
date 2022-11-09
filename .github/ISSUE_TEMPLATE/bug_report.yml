@@ -28,7 +28,7 @@ body:
   - type: input
     id: react-library-version
     attributes:
-      label: material-react-table version
+      label: react & react-dom versions
       description: Material-UI v5 requires React and React-Dom v17 or higher
       placeholder: |
         e.g. v17.0.2
