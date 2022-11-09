@@ -4,7 +4,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thank you for reporting an issue :pray:.
+        Thank you for reporting an issue :pray:
 
         Before submitting a new bug/issue, please check the links below to see if there is a solution or question posted there already:
         - material-react-table's [Discussions tab](https://github.com/material/material-react-table/discussions)
@@ -14,7 +14,7 @@ body:
         The more information you fill in, the better the community can help you.
 
   - type: input
-    id: library-version
+    id: mrt-library-version
     attributes:
       label: material-react-table version
       description: |
@@ -22,6 +22,16 @@ body:
         - The latest version is <img alt="" src="https://badgen.net/npm/v/material-react-table" />
       placeholder: |
         e.g. v1.3.4
+    validations:
+      required: true
+
+  - type: input
+    id: react-library-version
+    attributes:
+      label: material-react-table version
+      description: Material-UI v5 requires React and React-Dom v17 or higher
+      placeholder: |
+        e.g. v17.0.2
     validations:
       required: true
 
@@ -72,6 +82,4 @@ body:
       description: By submitting this issue, you agree to follow our Code of Conduct and can verify that you have followed the requirements outlined above to the best of your ability.
       options:
         - label: I understand that if my bug cannot be reliably reproduced in a debuggable environment, it will probably not be fixed and this issue may even be closed.
-          required: true
-        - label: I have verified I am using the correct peer dependency versions for my version of material-react-table listed in the [installation instructions](https://www.material-react-table.com/docs/getting-started/install#installation).
           required: true

@@ -611,6 +611,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     | 'defaultColumn'
     | 'enableRowSelection'
     | 'expandRowsFn'
+    | 'getRowId'
     | 'globalFilterFn'
     | 'initialState'
     | 'onStateChange'
@@ -674,6 +675,11 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     enableToolbarInternalActions?: boolean;
     enableTopToolbar?: boolean;
     expandRowsFn?: (dataRow: TData) => TData[];
+    getRowId?: (
+      originalRow: MRT_Row<TData>,
+      index: number,
+      parentRow: MRT_Row<TData>,
+    ) => string;
     globalFilterFn?: MRT_FilterOption;
     globalFilterModeOptions?: MRT_FilterOption[] | null;
     icons?: Partial<MRT_Icons>;

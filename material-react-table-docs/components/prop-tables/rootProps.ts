@@ -171,7 +171,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: '',
-    type: "'cell' | 'row' | 'table'",
+    type: "'modal' | 'cell' | 'row' | 'table'",
   },
   {
     propName: 'enableClickToCopy',
@@ -749,11 +749,7 @@ export const rootProps: PropRow[] = [
     linkText: 'TanStack Table Core Table Docs',
     required: false,
     source: 'TanStack Table',
-    type: `(
-      originalRow: TData,
-      index: number,
-      parent?: Row<TData>
-    ) => string`,
+    type: `(originalRow: TData, index: number, parent?: MRT_Row<TData>) => string`,
   },
   {
     propName: 'getSortedRowModel',
@@ -775,10 +771,7 @@ export const rootProps: PropRow[] = [
     linkText: 'TanStack Table Core Table Docs',
     required: false,
     source: 'TanStack Table',
-    type: `(
-      originalRow: TData,
-      index: number
-    ) => undefined | TData[]`,
+    type: `(originalRow: TData, index: number) => undefined | TData[]`,
   },
   {
     propName: 'globalFilterFn',
@@ -1273,9 +1266,9 @@ export const rootProps: PropRow[] = [
   },
   {
     propName: 'onColumnOrderChange',
-    defaultValue:
+    defaultValue: '',
+    description:
       'If provided, this function will be called with an updaterFn when state.columnOrder changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
-    description: '',
     link: 'https://tanstack.com/table/v8/docs/api/features/column-ordering#oncolumnorderchange',
     linkText: 'TanStack Table Column Ordering Docs',
     required: false,
@@ -1531,7 +1524,7 @@ export const rootProps: PropRow[] = [
     linkText: 'TanStack Table Sorting Docs',
     required: false,
     source: 'TanStack Table',
-    type: ' OnChangeFn<SortingState>',
+    type: 'OnChangeFn<SortingState>',
   },
   {
     propName: 'pageCount',

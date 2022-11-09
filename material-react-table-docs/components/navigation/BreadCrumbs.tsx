@@ -1,10 +1,10 @@
-import React, { useMemo } from 'react';
+import  { FC, useMemo } from 'react';
 import Link from 'next/link';
 import { Breadcrumbs as MuiBreadcrumbs, Link as MuiLink } from '@mui/material';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
-const BreadCrumbs = () => {
+const BreadCrumbs: FC = () => {
   const { route } = useRouter();
 
   const breadCrumbLinks = useMemo(() => {
