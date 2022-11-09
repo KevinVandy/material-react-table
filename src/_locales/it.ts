@@ -42,7 +42,7 @@ export const MRT_Localization_IT: MRT_Localization = {
   filterWeakEquals: 'Uguale',
   filteringByColumn: 'Filtrando da {column} - {filterType} {filterValue}',
   goToFirstPage: 'Vai alla prima pagina',
-  goToLastPage: 'Vai all\'ultima pagina',
+  goToLastPage: "Vai all'ultima pagina",
   goToNextPage: 'Vai alla pagina successiva',
   goToPreviousPage: 'Vai alla pagina precedente',
   grab: 'Prendi',

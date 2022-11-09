@@ -68,11 +68,7 @@ const Example = () => {
         ),
         //customize normal cell render on normal non-aggregated rows
         Cell: ({ cell }) => (
-          <>
-            {cell
-              .getValue()
-              ?.toLocaleString?.('en-US', localeStringOptions)}
-          </>
+          <>{cell.getValue()?.toLocaleString?.('en-US', localeStringOptions)}</>
         ),
       },
     ],

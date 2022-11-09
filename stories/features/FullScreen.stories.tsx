@@ -91,8 +91,8 @@ export const ControlledFullScreen: Story<MaterialReactTableProps> = () => {
       data={data}
       onIsFullScreenChange={setIsFullScreen}
       state={{ isFullScreen }}
-      muiTableBodyCellProps={({cell}) => ({
-        title: cell.getValue<string>()
+      muiTableBodyCellProps={({ cell }) => ({
+        title: cell.getValue<string>(),
       })}
     />
   );

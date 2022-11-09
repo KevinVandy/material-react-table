@@ -18,37 +18,36 @@ const Example = () => {
     pageSize: 10,
   });
 
-  const { data, isError, isFetching, isLoading, refetch } =
-    useQuery(
-      [
-        'table-data',
-        columnFilters,
-        globalFilter,
-        pagination.pageIndex,
-        pagination.pageSize,
-        sorting,
-      ],
-      async () => {
-        const url = new URL(
-          '/api/data',
-          process.env.NODE_ENV === 'production'
-            ? 'https://www.material-react-table.com'
-            : 'http://localhost:3000',
-        );
-        url.searchParams.set(
-          'start',
-          `${pagination.pageIndex * pagination.pageSize}`,
-        );
-        url.searchParams.set('size', `${pagination.pageSize}`);
-        url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
-        url.searchParams.set('globalFilter', globalFilter ?? '');
-        url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
+  const { data, isError, isFetching, isLoading, refetch } = useQuery(
+    [
+      'table-data',
+      columnFilters,
+      globalFilter,
+      pagination.pageIndex,
+      pagination.pageSize,
+      sorting,
+    ],
+    async () => {
+      const url = new URL(
+        '/api/data',
+        process.env.NODE_ENV === 'production'
+          ? 'https://www.material-react-table.com'
+          : 'http://localhost:3000',
+      );
+      url.searchParams.set(
+        'start',
+        `${pagination.pageIndex * pagination.pageSize}`,
+      );
+      url.searchParams.set('size', `${pagination.pageSize}`);
+      url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
+      url.searchParams.set('globalFilter', globalFilter ?? '');
+      url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
 
-        const { data: axiosData } = await axios.get(url.href);
-        return axiosData;
-      },
-      { keepPreviousData: true },
-    );
+      const { data: axiosData } = await axios.get(url.href);
+      return axiosData;
+    },
+    { keepPreviousData: true },
+  );
 
   const columns = useMemo(
     () => [
@@ -87,9 +86,9 @@ const Example = () => {
       muiToolbarAlertBannerProps={
         isError
           ? {
-            color: 'error',
-            children: 'Error loading data',
-          }
+              color: 'error',
+              children: 'Error loading data',
+            }
           : undefined
       }
       onColumnFiltersChange={setColumnFilters}
