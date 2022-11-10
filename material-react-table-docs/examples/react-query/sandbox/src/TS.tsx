@@ -12,7 +12,6 @@ import {
   QueryClientProvider,
   useQuery,
 } from '@tanstack/react-query';
-import axios from 'axios';
 
 type UserApiResponse = {
   data: Array<User>;
@@ -64,8 +63,9 @@ const Example: FC = () => {
         url.searchParams.set('globalFilter', globalFilter ?? '');
         url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
 
-        const { data: axiosData } = await axios.get(url.href);
-        return axiosData;
+        const response = await fetch(url.href);
+        const json = (await response.json()) as UserApiResponse;
+        return json;
       },
       { keepPreviousData: true },
     );

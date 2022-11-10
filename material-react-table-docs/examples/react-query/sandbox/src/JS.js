@@ -7,7 +7,6 @@ import {
   QueryClientProvider,
   useQuery,
 } from '@tanstack/react-query';
-import axios from 'axios';
 
 const Example = () => {
   const [columnFilters, setColumnFilters] = useState([]);
@@ -43,8 +42,9 @@ const Example = () => {
       url.searchParams.set('globalFilter', globalFilter ?? '');
       url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
 
-      const { data: axiosData } = await axios.get(url.href);
-      return axiosData;
+      const response = await fetch(url.href);
+      const json = (await response.json())
+      return json;
     },
     { keepPreviousData: true },
   );
@@ -86,9 +86,9 @@ const Example = () => {
       muiToolbarAlertBannerProps={
         isError
           ? {
-              color: 'error',
-              children: 'Error loading data',
-            }
+            color: 'error',
+            children: 'Error loading data',
+          }
           : undefined
       }
       onColumnFiltersChange={setColumnFilters}
