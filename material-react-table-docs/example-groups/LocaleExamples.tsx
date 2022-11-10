@@ -24,6 +24,9 @@ const JA_Table = dynamic(() => import('../examples/localization-i18n-ja'), {
 const PL_Table = dynamic(() => import('../examples/localization-i18n-pl'), {
   suspense: true,
 });
+const PT_Table = dynamic(() => import('../examples/localization-i18n-pt'), {
+  suspense: true,
+});
 const PT_BR_Table = dynamic(
   () => import('../examples/localization-i18n-pt-BR'),
   {
@@ -31,6 +34,9 @@ const PT_BR_Table = dynamic(
   },
 );
 const RU_Table = dynamic(() => import('../examples/localization-i18n-ru'), {
+  suspense: true,
+});
+const TR_Table = dynamic(() => import('../examples/localization-i18n-tr'), {
   suspense: true,
 });
 
@@ -42,8 +48,10 @@ const supportedLocales = [
   'it',
   'ja',
   'pl',
+  'pt',
   'pt-BR',
   'ru',
+  'tr',
 ];
 
 const LocaleExamples = () => {
@@ -76,8 +84,10 @@ const LocaleExamples = () => {
           {currentLocale === 'it' && <IT_Table />}
           {currentLocale === 'ja' && <JA_Table />}
           {currentLocale === 'pl' && <PL_Table />}
+          {currentLocale === 'pt' && <PT_Table />}
           {currentLocale === 'pt-BR' && <PT_BR_Table />}
           {currentLocale === 'ru' && <RU_Table />}
+          {currentLocale === 'tr' && <TR_Table />}
         </Suspense>
       </div>
     </>

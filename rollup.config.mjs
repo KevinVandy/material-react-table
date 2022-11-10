@@ -14,8 +14,10 @@ const supportedLocales = [
   'it',
   'ja',
   'pl',
+  'pt',
   'pt-BR',
   'ru',
+  'tr',
 ];
 
 export default [
