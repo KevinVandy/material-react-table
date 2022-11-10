@@ -22,10 +22,14 @@ type User = {
 };
 
 const Example: FC = () => {
+  //data and fetching state
   const [data, setData] = useState<User[]>([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isRefetching, setIsRefetching] = useState(false);
+  const [rowCount, setRowCount] = useState(0);
+
+  //table state
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState('');
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -33,7 +37,6 @@ const Example: FC = () => {
     pageIndex: 0,
     pageSize: 10,
   });
-  const [rowCount, setRowCount] = useState(0);
 
   //if you want to avoid useEffect, look at the React Query example instead
   useEffect(() => {

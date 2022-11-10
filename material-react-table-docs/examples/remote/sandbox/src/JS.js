@@ -2,10 +2,14 @@ import React, { useEffect, useMemo, useState } from 'react';
 import MaterialReactTable from 'material-react-table';
 
 const Example = () => {
+  //data and fetching state
   const [data, setData] = useState([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isRefetching, setIsRefetching] = useState(false);
+  const [rowCount, setRowCount] = useState(0);
+
+  //table state
   const [columnFilters, setColumnFilters] = useState([]);
   const [globalFilter, setGlobalFilter] = useState('');
   const [sorting, setSorting] = useState([]);
@@ -13,7 +17,6 @@ const Example = () => {
     pageIndex: 0,
     pageSize: 10,
   });
-  const [rowCount, setRowCount] = useState(0);
 
   //if you want to avoid useEffect, look at the React Query example instead
   useEffect(() => {
@@ -104,9 +107,9 @@ const Example = () => {
       muiToolbarAlertBannerProps={
         isError
           ? {
-              color: 'error',
-              children: 'Error loading data',
-            }
+            color: 'error',
+            children: 'Error loading data',
+          }
           : undefined
       }
       onColumnFiltersChange={setColumnFilters}
