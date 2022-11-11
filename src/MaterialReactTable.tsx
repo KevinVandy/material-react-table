@@ -676,7 +676,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     enableTopToolbar?: boolean;
     expandRowsFn?: (dataRow: TData) => TData[];
     getRowId?: (
-      originalRow: MRT_Row<TData>,
+      originalRow: TData,
       index: number,
       parentRow: MRT_Row<TData>,
     ) => string;
