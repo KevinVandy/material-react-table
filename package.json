@@ -1,5 +1,5 @@
 {
-  "version": "1.3.6",
+  "version": "1.3.7",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -52,16 +52,16 @@
     "storybook": "start-storybook -p 6006"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.6",
+    "@babel/core": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@faker-js/faker": "^7.5.0",
     "@mui/icons-material": "^5.10.6",
-    "@mui/material": "^5.10.10",
-    "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-node-resolve": "^14.1.0",
-    "@rollup/plugin-typescript": "^8.5.0",
+    "@mui/material": "^5.10.13",
+    "@rollup/plugin-babel": "^6.0.2",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^9.0.2",
     "@size-limit/preset-small-lib": "^8.1.0",
     "@storybook/addon-a11y": "^6.5.12",
     "@storybook/addon-actions": "^6.5.12",
@@ -73,12 +73,12 @@
     "@storybook/builder-webpack5": "^6.4.22",
     "@storybook/manager-webpack5": "^6.4.22",
     "@storybook/react": "^6.5.12",
-    "@types/react": "^18.0.21",
+    "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.6",
-    "@typescript-eslint/eslint-plugin": "^5.40.1",
-    "@typescript-eslint/parser": "^5.40.1",
-    "babel-loader": "^8.2.5",
-    "eslint": "^8.26.0",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "babel-loader": "^9.1.0",
+    "eslint": "^8.27.0",
     "eslint-plugin-mui-path-imports": "^0.0.3",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
@@ -86,13 +86,13 @@
     "react-is": "^18.2.0",
     "rollup": "^2.79.1",
     "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-dts": "^4.2.2",
+    "rollup-plugin-dts": "^5.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "size-limit": "^8.1.0",
     "storybook-dark-mode": "^1.1.2",
-    "tslib": "^2.4.0",
+    "tslib": "^2.4.1",
     "typescript": "^4.8.4",
-    "webpack": "^5.0.0"
+    "webpack": "^5.75.0"
   },
   "peerDependencies": {
     "@emotion/react": ">=11",
@@ -103,7 +103,7 @@
   },
   "dependencies": {
     "@tanstack/match-sorter-utils": "8.5.14",
-    "@tanstack/react-table": "8.5.22",
+    "@tanstack/react-table": "8.5.24",
     "react-virtual": "^2.10.4"
   }
 }

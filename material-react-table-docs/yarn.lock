@@ -723,17 +723,17 @@
     "@tanstack/query-core" "4.13.0"
     use-sync-external-store "^1.2.0"
 
-"@tanstack/react-table@8.5.22":
-  version "8.5.22"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.5.22.tgz#8a5250ac6437ca7c16e683cde65a065c0f573e24"
-  integrity sha512-01XaxQTxcI+w7g+i/YRblxdAikM9G7L1S7LwqaiD/gkKmNUs+g2BXw4GfIcuzzE75Q5t0BXlyqM7MyxxBuvQXA==
+"@tanstack/react-table@8.5.24":
+  version "8.5.24"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.5.24.tgz#9bd6965fdea21f34094d4db30a36485750591a60"
+  integrity sha512-PFHFuCpotQ9DqljBFVhjRh/7juzOibk/il9RGmaJYOHnyZ9+uOCUt/fxkzIF08WFem402l07GhMXNWblHvwIvA==
   dependencies:
-    "@tanstack/table-core" "8.5.22"
+    "@tanstack/table-core" "8.5.24"
 
-"@tanstack/table-core@8.5.22":
-  version "8.5.22"
-  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.5.22.tgz#ba381db5f7f47558aba6e75cc94ee32a691defeb"
-  integrity sha512-D3wDbVXl3Bi5PdGfle6DijhLzZxrvMyZsE1dSHH0xBsqEbu7Pkxn5EEd6CA9tGsCgXIEP1s4Yfy1cZ9xnMz1sQ==
+"@tanstack/table-core@8.5.24":
+  version "8.5.24"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.5.24.tgz#4fba7a5b9048faeb94e21ea4c1267788034d33c3"
+  integrity sha512-2DVcYNsPWSyQBoHGN6TnA31DGkiOcBlJnP7lateXS/EEp13uoKc2mfLx7inHqu//mxm1nHtF7yA9JnF8sa/5iA==
 
 "@types/acorn@^4.0.0":
   version "4.0.6"
@@ -2240,13 +2240,13 @@ markdown-extensions@^1.0.0:
   resolved "https://registry.yarnpkg.com/markdown-extensions/-/markdown-extensions-1.1.1.tgz#fea03b539faeaee9b4ef02a3769b455b189f7fc3"
   integrity sha512-WWC0ZuMzCyDHYCasEGs4IPvLyTGftYwh6wIEOULOF0HXcqZlhwRzrK0w2VUlxWA98xnvb/jszw4ZSkJ6ADpM6Q==
 
-material-react-table@^1.3.6:
-  version "1.3.6"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-1.3.6.tgz#8a4ec6da9aa88fb2de15ff359ecd040c947f8343"
-  integrity sha512-oJGgVvs1a5aZ6dpNxeCHSKAVbptEkdQFWVHu1sJTes1yx8SP1bu5OcmyFkaoJbmq426L/IOJXDiXqQWIE6Kd8g==
+material-react-table@^1.3.7:
+  version "1.3.7"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-1.3.7.tgz#a53e639f290f596bd31e87c83fe0e4e3233c366a"
+  integrity sha512-GsNKMPFEefcVUdxA7WumX+ARj7VV0KEmQHME6xO1dc66+YZv/qINuZaKEqXEeM96Ym3iqDACZRGe7qjDJ5xRfQ==
   dependencies:
     "@tanstack/match-sorter-utils" "8.5.14"
-    "@tanstack/react-table" "8.5.22"
+    "@tanstack/react-table" "8.5.24"
     react-virtual "^2.10.4"
 
 mdast-util-definitions@^5.0.0:

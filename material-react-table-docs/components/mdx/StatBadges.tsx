@@ -26,7 +26,7 @@ export const StatBadges = () => {
       </a>
       <a
         aria-label="Number of Downloads"
-        href="https://npmjs.com/package/material-react-table"
+        href="https://npmtrends.com/material-react-table"
         target="_blank_"
       >
         <img

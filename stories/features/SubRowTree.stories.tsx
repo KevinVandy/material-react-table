@@ -79,6 +79,19 @@ export const SubRowTreeDisableExpandAll: Story<
   />
 );
 
+export const SubRowTreeFilterFromLeafRows: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableExpanding
+    enableMultiRowSelection={false}
+    enablePagination={false}
+    filterFromLeafRows
+  />
+);
+
 export const SubRowTreeWithSelection: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}

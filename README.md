@@ -3,7 +3,7 @@
 <a href="https://npmjs.com/package/material-react-table" target="_blank">
   <img alt="" src="https://badgen.net/npm/v/material-react-table?color=blue" />
 </a>
-<a href="https://npmjs.com/package/material-react-table" target="_blank">
+<a href="https://npmtrends.com/material-react-tablee" target="_blank">
   <img alt="" src="https://badgen.net/npm/dt/material-react-table?label=installs&icon=npm&color=blue" />
 </a>
 <a href="https://bundlephobia.com/result?p=material-react-table" target="_blank">
