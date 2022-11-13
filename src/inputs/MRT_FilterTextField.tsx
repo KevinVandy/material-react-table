@@ -4,6 +4,7 @@ import React, {
   MouseEvent,
   useCallback,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import Box from '@mui/material/Box';
@@ -171,10 +172,13 @@ export const MRT_FilterTextField: FC<Props> = ({
     setAnchorEl(event.currentTarget);
   };
 
+  const isMounted = useRef(false);
+
   useEffect(() => {
-    if (column.getFilterValue() === undefined) {
+    if (isMounted.current && column.getFilterValue() === undefined) {
       handleClear();
     }
+    isMounted.current = true;
   }, [column.getFilterValue()]);
 
   if (columnDef.Filter) {
