@@ -1,5 +1,5 @@
 {
-  "version": "1.3.8",
+  "version": "1.3.9",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -44,10 +44,10 @@
     "analyze": "size-limit --why",
     "build": "rm -rf dist locales && rollup -c && size-limit && rm -rf material-react-table-docs/node_modules/material-react-table && mkdir material-react-table-docs/node_modules/material-react-table && cp -r dist material-react-table-docs/node_modules/material-react-table/dist && cp -r locales material-react-table-docs/node_modules/material-react-table/ && cp -r src material-react-table-docs/node_modules/material-react-table/ && cp -r package.json material-react-table-docs/node_modules/material-react-table/",
     "build-storybook": "build-storybook",
+    "dev": "start-storybook -p 6006",
     "format": "prettier -w .",
     "lint": "eslint .",
     "size": "size-limit",
-    "dev": "start-storybook -p 6006",
     "start": "start-storybook -p 6006",
     "storybook": "start-storybook -p 6006"
   },
@@ -99,11 +99,12 @@
     "@emotion/styled": ">=11",
     "@mui/icons-material": ">=5",
     "@mui/material": ">=5",
-    "react": ">=17.0"
+    "react": ">=17.0",
+    "react-dom": ">=17.0"
   },
   "dependencies": {
     "@tanstack/match-sorter-utils": "8.5.14",
-    "@tanstack/react-table": "8.5.24",
+    "@tanstack/react-table": "8.5.27",
     "react-virtual": "^2.10.4"
   }
 }
