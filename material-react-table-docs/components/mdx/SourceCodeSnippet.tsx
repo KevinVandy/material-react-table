@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect } from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import darkCodeTheme from 'prism-react-renderer/themes/vsDark';
 import lightCodeTheme from 'prism-react-renderer/themes/vsLight';
@@ -15,14 +15,14 @@ import {
   Button,
   Paper,
 } from '@mui/material';
-import {
-  Code,
-  GitHub,
-  ContentCopy,
-  LibraryAddCheck,
-  UnfoldMore,
-  UnfoldLess,
-} from '@mui/icons-material';
+import CodeIcon from '@mui/icons-material/Code';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LaunchIcon from '@mui/icons-material/Launch';
+import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
+import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
+import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 import { LinkHeading } from './LinkHeading';
 import { usePlausible } from 'next-plausible';
 
@@ -123,25 +123,42 @@ export const SourceCodeSnippet: FC<Props> = ({
                 }}
               >
                 <Button
-                  startIcon={<Code />}
+                  color="success"
+                  endIcon={<LaunchIcon />}
+                  href={`https://stackblitz.com/github/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples/${tableId}/sandbox?file=src/TS.tsx`}
+                  onClick={() => plausible('open-stackblitz')}
+                  rel="noreferrer"
+                  startIcon={<ElectricBoltIcon />}
+                  sx={{ cursor: 'pointer' }}
+                  target="_blank"
+                  variant="outlined"
+                >
+                  Open Stackblitz
+                </Button>
+                <Button
+                  color="warning"
+                  endIcon={<LaunchIcon />}
                   href={`https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples/${tableId}/sandbox?file=/src/TS.tsx`}
                   onClick={() => plausible('open-code-sandbox')}
                   rel="noreferrer"
-                  target="_blank"
+                  startIcon={<CodeIcon />}
                   sx={{ cursor: 'pointer' }}
+                  target="_blank"
                   variant="outlined"
                 >
                   Open Code Sandbox
                 </Button>
                 <Button
-                  startIcon={<GitHub />}
+                  color="info"
+                  endIcon={<LaunchIcon />}
                   href={`https://github.com/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples/${tableId}/sandbox/src/${
                     isTypeScript ? 'TS.tsx' : 'JS.js'
                   }`}
                   onClick={() => plausible('open-on-github')}
                   rel="noreferrer"
-                  target="_blank"
+                  startIcon={<GitHubIcon />}
                   sx={{ cursor: 'pointer' }}
+                  target="_blank"
                   variant="outlined"
                 >
                   Open on GitHub
@@ -225,7 +242,7 @@ export const SourceCodeSnippet: FC<Props> = ({
               >
                 <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Code'}>
                   <CopyButton onClick={handleCopy}>
-                    {isCopied ? <LibraryAddCheck /> : <ContentCopy />}
+                    {isCopied ? <LibraryAddCheckIcon /> : <ContentCopyIcon />}
                   </CopyButton>
                 </Tooltip>
                 <Tooltip
@@ -239,7 +256,7 @@ export const SourceCodeSnippet: FC<Props> = ({
                   <ToggleFullCodeButton
                     onClick={() => setIsFullCode(!isFullCode)}
                   >
-                    {isFullCode ? <UnfoldLess /> : <UnfoldMore />}
+                    {isFullCode ? <UnfoldLessIcon /> : <UnfoldMoreIcon />}
                   </ToggleFullCodeButton>
                 </Tooltip>
                 <pre

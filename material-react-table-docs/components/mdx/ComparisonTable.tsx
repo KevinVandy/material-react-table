@@ -115,7 +115,7 @@ const data = [
     library: 'MUI X Data Grid MIT/Pro/Premium',
     libraryLink: 'https://mui.com/store/items/mui-x-premium/',
     freeOrLicensed: 'MIT or Paid License',
-    bundleSize: 111,
+    bundleSize: 112,
     bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/@mui/x-data-grid-pro?color=orange',
     bundlePhobiaLink:
@@ -127,7 +127,7 @@ const data = [
     library: 'AG Grid Community/Enterprise',
     libraryLink: 'https://www.ag-grid.com/license-pricing',
     freeOrLicensed: 'MIT or Paid License',
-    bundleSize: 260,
+    bundleSize: 280,
     bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/ag-grid-enterprise?color=red',
     bundlePhobiaLink:

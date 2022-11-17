@@ -12,6 +12,9 @@ export const StatBadges = () => {
           xs: 0,
           md: '1rem',
         },
+        '& img': {
+          imageRendering: 'pixelated',
+        }
       }}
     >
       <a
@@ -46,7 +49,7 @@ export const StatBadges = () => {
       </a>
       <a
         aria-label="GitHub Stars"
-        href="https://github.com/KevinVandy/material-react-table"
+        href="https://star-history.com/#kevinvandy/material-react-table&Date"
         target="_blank_"
       >
         <img

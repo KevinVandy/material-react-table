@@ -6,14 +6,6 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
     id: 'feature',
     accessorKey: 'feature',
     header: 'Feature',
-    muiTableBodyCellProps: {
-      sx: (theme) => ({
-        backgroundColor:
-          theme.palette.mode === 'dark'
-            ? theme.palette.background.paper
-            : theme.palette.grey[100],
-      }),
-    },
   },
   {
     accessorKey: 'mrt',
@@ -260,9 +252,11 @@ const FeatureTable = () => {
       enableColumnActions={false}
       enableBottomToolbar={false}
       enableTopToolbar={false}
+      enablePinning
       initialState={{
         sorting: [{ id: 'feature', desc: false }],
         density: 'compact',
+        columnPinning: { left: ['feature'] },
       }}
     />
   );
