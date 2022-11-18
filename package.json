@@ -15,6 +15,13 @@
     "type": "git",
     "url": "https://github.com/KevinVandy/material-react-table"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/kevinvandy"
+  },
   "homepage": "https://www.material-react-table.com/",
   "bugs": {
     "url": "https://github.com/KevinVandy/material-react-table/issues"
