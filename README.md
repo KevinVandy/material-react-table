@@ -27,7 +27,7 @@
 
 A good table library should offer you powerful features, with an easy way to customize them, or even opt out and turn them off. It should also offer a bunch of advanced features to take your tables to the next level, but without sacrificing too bundle size bloat. MRT attempts to find that happy balance.
 
-MRT is built on top of [TanStack Table's](https://tanstack.com/table/v8) efficient and powerful react hooks to bring 
+MRT is built on top of [TanStack Table's](https://tanstack.com/table/v8) react hooks to build upon it's high performance and flexibility.
 
 ## Learn More
 
@@ -109,7 +109,7 @@ npm install @mui/material @mui/icons-material @emotion/react @emotion/styled
 npm install material-react-table
 ```
 
-> _`@tanstack/react-table`, `@tanstack/react-virtual`, and `@tanstack/match-sorter-utils`_ are internal dependencies, so you don't need to install them yourself.
+> _`@tanstack/react-table`, `@tanstack/react-virtual`, and `@tanstack/match-sorter-utils`_ are internal dependencies, so you do NOT need to install them yourself.
 
 ### Usage
 
