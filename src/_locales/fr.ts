@@ -1,6 +1,6 @@
 import { MRT_Localization } from '../MaterialReactTable';
 
-export const MRT_Localization_EN: MRT_Localization = {
+export const MRT_Localization_FR: MRT_Localization = {
   actions: 'Actions',
   and: 'et',
   cancel: 'Annuler',
