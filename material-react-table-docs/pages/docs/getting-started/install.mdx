@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { FAQs } from '../../../components/mdx/FAQs';
 
 <Head>
   <title>Installation - Material React Table Docs</title>
@@ -59,6 +60,41 @@ Yarn
 yarn add material-react-table @mui/material @mui/icons-material @emotion/react @emotion/styled
 ```
 
-> You do not need to install `@tanstack/react-table`, as it is already an internal dependency of `material-react-table`.
+> You do NOT need to install `@tanstack/react-table`, as it is already an internal dependency of `material-react-table`.
 >
 > All internal dependencies: `@tanstack/match-sorter-utils`, `@tanstack/react-table`, `react-virtual`
+
+### FAQs
+
+<FAQs
+  faqStructuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Why is React 17 or 18 required for Material React Table?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '<p>React 17 or later is required by Material UI v5 itself. Some event listeners on MUI TextField components will not work with React 16.x.</p>',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: "Should I install '@tanstack/react-table' in my package.json for Material React Table?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "<p><b>No</b>, you do not need to install TanStack Table in your project manually, as the latest TanStack Table version automatically gets installed under the hood by MRT itself as an internal dependency. You can import types and functions from '@tanstack/react-table' too.</p>",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is TypeScript required to use Material React Table?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '<p><b>No</b>, TypeScript is <b>not required</b> to use Material React Table, but it is a whole lot easier to use Material React Table with TypeScript, <b>especially when defining columns</b>. If you do use TypeScript, try to keep the latest TypeScript version installed, or at least <b>TS version 4.8</b> or higher.</p>',
+        },
+      },
+    ],
+  }}
+/>
