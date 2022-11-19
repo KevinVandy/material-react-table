@@ -119,7 +119,7 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
 
   return (
     <TableBody {...tableBodyProps}>
-      {!rows.length ? (
+      {tableBodyProps?.children ?? !rows.length ? (
         <tr>
           <td colSpan={table.getVisibleLeafColumns().length}>
             <Typography

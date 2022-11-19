@@ -11,6 +11,7 @@ import {
   styled,
   useMediaQuery,
 } from '@mui/material';
+import LaunchIcon from '@mui/icons-material/Launch';
 import { routes } from './routes';
 
 const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
@@ -128,6 +129,7 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
             items: items1,
             label: label1,
             divider: divider1,
+            external: external1,
           }) => {
             if (items1?.length) {
               return (
@@ -152,6 +154,7 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
                       label: label2,
                       items: items2,
                       divider: divider2,
+                      external: external2,
                     }: any) => {
                       if (items2?.length) {
                         return (
@@ -172,6 +175,7 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
                                 href: href3,
                                 label: label3,
                                 divider: divider3,
+                                external: external3,
                               }) => {
                                 return (
                                   <ListItemLevel3
@@ -184,7 +188,20 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
                                     key={label3}
                                   >
                                     <Link href={href3 ?? ''} passHref>
-                                      <MenuLink>{label3}</MenuLink>
+                                      <MenuLink
+                                        target={
+                                          external3 ? '_blank' : undefined
+                                        }
+                                        rel="noopener"
+                                      >
+                                        {label3}{' '}
+                                        {external3 && (
+                                          <LaunchIcon
+                                            fontSize="small"
+                                            sx={{ m: '-0.25rem 1px' }}
+                                          />
+                                        )}
+                                      </MenuLink>
                                     </Link>
                                   </ListItemLevel3>
                                 );
@@ -204,7 +221,18 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
                           key={label2}
                         >
                           <Link href={href2 ?? ''} passHref>
-                            <MenuLink>{label2}</MenuLink>
+                            <MenuLink
+                              target={external2 ? '_blank' : undefined}
+                              rel="noopener"
+                            >
+                              {label2}{' '}
+                              {external2 && (
+                                <LaunchIcon
+                                  fontSize="small"
+                                  sx={{ m: '-0.25rem 1px' }}
+                                />
+                              )}
+                            </MenuLink>
                           </Link>
                         </ListItemLevel2>
                       );
@@ -222,7 +250,18 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
                   key={label1}
                 >
                   <Link href={href1 ?? ''} passHref>
-                    <MenuLink>{label1}</MenuLink>
+                    <MenuLink
+                      target={external1 ? '_blank' : undefined}
+                      rel="noopener"
+                    >
+                      {label1}{' '}
+                      {external1 && (
+                        <LaunchIcon
+                          fontSize="small"
+                          sx={{ m: '-0.25rem 1px' }}
+                        />
+                      )}
+                    </MenuLink>
                   </Link>
                 </ListItemLevel1>
               );

@@ -3,6 +3,7 @@ type RouteItem = {
   label: string;
   items?: RouteItem[];
   divider?: boolean;
+  external?: boolean;
 };
 
 export const routes: Array<RouteItem> = [
@@ -12,7 +13,7 @@ export const routes: Array<RouteItem> = [
   },
   {
     href: '/about',
-    label: 'About & FAQ',
+    label: 'About',
   },
   {
     href: '/changelog',
@@ -121,6 +122,11 @@ export const routes: Array<RouteItem> = [
       {
         href: '/docs/examples/infinite-scrolling',
         label: 'Infinite Scrolling Example',
+      },
+      {
+        href: 'https://www.material-react-table.dev',
+        label: 'Extra Storybook Examples',
+        external: true,
       },
     ],
   },
@@ -267,6 +273,37 @@ export const routes: Array<RouteItem> = [
             label: 'Sticky Header/Footer',
           },
         ],
+      },
+    ],
+  },
+  // {
+  //   label: 'Blog',
+  //   href: '/blog',
+  //   items: [
+  //     {
+  //       href: '/blog',
+  //       label: 'Blog',
+  //     },
+  //   ],
+  // },
+  {
+    label: 'Other',
+    href: '#',
+    items: [
+      {
+        href: 'https://discord.gg/5wqyRx6fnm',
+        label: 'Discord',
+        external: true,
+      },
+      {
+        href: 'https://www.github.com/kevinvandy/material-react-table',
+        label: 'GitHub',
+        external: true,
+      },
+      {
+        href: 'https://www.npmjs.com/package/material-react-table',
+        label: 'NPM',
+        external: true,
       },
     ],
   },

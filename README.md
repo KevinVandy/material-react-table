@@ -21,17 +21,21 @@
 
 ## About
 
-__Built with [Material UI <sup>V5</sup>](https://mui.com) and [TanStack Table <sup>V8</sup>](https://tanstack.com/table/v8)__
+### __Built with [Material UI <sup>V5</sup>](https://mui.com) and [TanStack Table <sup>V8</sup>](https://tanstack.com/table/v8)__
 
-_Quickly Create React Data Tables with Material Design_
+### _Quickly Create React Data Tables with Material Design_
 
-Join the [Discord](https://discord.gg/5wqyRx6fnm) server to join in on the development discussion or ask questions
+A good table library should offer you powerful features, with an easy way to customize them, or even opt out and turn them off. It should also offer a bunch of advanced features to take your tables to the next level, but without sacrificing too bundle size bloat. MRT attempts to find that happy balance.
 
-View the [Docs Website](https://www.material-react-table.com/)
+MRT is built on top of [TanStack Table's](https://tanstack.com/table/v8) efficient and powerful react hooks to bring 
 
-See all [Props, Options, and APIs](https://www.material-react-table.com/docs/api)
+## Learn More
 
-## Quick Examples
+- Join the [Discord](https://discord.gg/5wqyRx6fnm) server to join in on the development discussion or ask questions
+- View the [Docs Website](https://www.material-react-table.com/)
+- See all [Props, Options, and APIs](https://www.material-react-table.com/docs/api)
+
+### Quick Examples
 
  - [Basic Table](https://www.material-react-table.com/docs/examples/basic/) (See Default Features)
  - [Minimal Table](https://www.material-react-table.com/docs/examples/minimal/) (Turn off Features like Pagination, Sorting, Filtering, and Toolbars)
@@ -40,9 +44,10 @@ See all [Props, Options, and APIs](https://www.material-react-table.com/docs/api
  - [Data Export Table](https://www.material-react-table.com/docs/examples/data-export/) (Export to CSV, Excel, etc.)
  - [Editing CRUD Table](https://www.material-react-table.com/docs/examples/editing-crud/) (Create, Edit, and Delete Rows)
  - [Remote Data](https://www.material-react-table.com/docs/examples/remote/) (Server-side Pagination, Sorting, and Filtering)
- - [React Query](https://www.material-react-table.com/docs/examples/react-query/) (Server-side Pagination, Sorting, and Filtering)
+ - [React Query](https://www.material-react-table.com/docs/examples/react-query/) (Server-side Pagination, Sorting, and Filtering, simplified)
  - [Virtualized Rows](https://www.material-react-table.com/docs/examples/virtualized/) (10,000 rows at once!)
  - [Infinite Scrolling](https://www.material-react-table.com/docs/examples/infinite-scrolling/) (Fetch data as you scroll)
+ - [Localization (i18n)](https://www.material-react-table.com/docs/guides/localization#built-in-locale-examples) (Over a dozen languages built-in)
 
 View additional [storybook examples](https://www.material-react-table.dev/)
 

@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react';
+import { Suspense, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Box, Skeleton, Tab, Tabs } from '@mui/material';
 
@@ -13,6 +13,9 @@ const ES_Table = dynamic(() => import('../examples/localization-i18n-es'), {
   suspense: true,
 });
 const FA_Table = dynamic(() => import('../examples/localization-i18n-fa'), {
+  suspense: true,
+});
+const FR_Table = dynamic(() => import('../examples/localization-i18n-fr'), {
   suspense: true,
 });
 const IT_Table = dynamic(() => import('../examples/localization-i18n-it'), {
@@ -45,6 +48,7 @@ const supportedLocales = [
   'de',
   'es',
   'fa',
+  'fr',
   'it',
   'ja',
   'pl',
@@ -81,6 +85,7 @@ const LocaleExamples = () => {
           {currentLocale === 'de' && <DE_Table />}
           {currentLocale === 'es' && <ES_Table />}
           {currentLocale === 'fa' && <FA_Table />}
+          {currentLocale === 'fr' && <FR_Table />}
           {currentLocale === 'it' && <IT_Table />}
           {currentLocale === 'ja' && <JA_Table />}
           {currentLocale === 'pl' && <PL_Table />}

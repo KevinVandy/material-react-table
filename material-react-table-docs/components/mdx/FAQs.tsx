@@ -37,7 +37,7 @@ export const FAQs: FC<Props> = ({ faqStructuredData }) => {
         />
       </Head>
       {faqStructuredData.mainEntity.map((faq, index) => (
-        <Accordion elevation={4} defaultExpanded key={index}>
+        <Accordion elevation={4} key={index}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography variant="h4">{faq.name}</Typography>
           </AccordionSummary>
