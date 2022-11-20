@@ -11,7 +11,12 @@ export const MRT_TableHead: FC<Props> = ({ table }) => {
   const {
     getHeaderGroups,
     getState,
-    options: { enableStickyHeader, muiTableHeadProps, enableRowVirtualization },
+    options: {
+      enableRowVirtualization,
+      enableStickyHeader,
+      layoutMode,
+      muiTableHeadProps,
+    },
   } = table;
   const { isFullScreen } = getState();
 
@@ -25,6 +30,7 @@ export const MRT_TableHead: FC<Props> = ({ table }) => {
 
   return (
     <TableHead
+      component={layoutMode === 'grid' ? 'div' : 'thead'}
       {...tableHeadProps}
       sx={(theme) => ({
         opacity: 0.97,

@@ -684,6 +684,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     globalFilterModeOptions?: MRT_FilterOption[] | null;
     icons?: Partial<MRT_Icons>;
     initialState?: Partial<MRT_TableState<TData>>;
+    layoutMode?: 'semantic' | 'grid';
     /**
      * Pass in either a locale imported from `material-react-table/locales/*` or a custom locale object.
      *
@@ -1097,6 +1098,7 @@ const MaterialReactTable = <TData extends Record<string, any> = {}>({
   enableTopToolbar = true,
   filterFns,
   icons,
+  layoutMode = "semantic",
   localization,
   positionActionsColumn = 'first',
   positionExpandColumn = 'first',
@@ -1170,6 +1172,7 @@ const MaterialReactTable = <TData extends Record<string, any> = {}>({
       enableTopToolbar={enableTopToolbar}
       filterFns={_filterFns}
       icons={_icons}
+      layoutMode={layoutMode}
       localization={_localization}
       positionActionsColumn={positionActionsColumn}
       positionExpandColumn={positionExpandColumn}

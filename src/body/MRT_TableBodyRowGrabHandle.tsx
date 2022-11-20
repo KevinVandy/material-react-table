@@ -4,7 +4,7 @@ import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 
 interface Props {
   cell: MRT_Cell;
-  rowRef: RefObject<HTMLTableRowElement>;
+  rowRef: RefObject<HTMLDivElement | HTMLTableRowElement>;
   table: MRT_TableInstance;
 }
 

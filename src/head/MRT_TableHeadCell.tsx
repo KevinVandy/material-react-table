@@ -27,6 +27,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
       enableColumnOrdering,
       enableGrouping,
       enableMultiSort,
+      layoutMode,
       muiTableHeadCellProps,
     },
     refs: { tableHeadCellRefs },
@@ -120,6 +121,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
   return (
     <TableCell
       align={columnDefType === 'group' ? 'center' : 'left'}
+      component={layoutMode === 'grid' ? 'div' : 'td'}
       colSpan={header.colSpan}
       onDragEnter={handleDragEnter}
       ref={(node) => {

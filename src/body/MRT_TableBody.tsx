@@ -20,6 +20,7 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
       enableGlobalFilterRankedResults,
       enablePagination,
       enableRowVirtualization,
+      layoutMode,
       localization,
       manualFiltering,
       manualSorting,
@@ -118,7 +119,10 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
   // }
 
   return (
-    <TableBody {...tableBodyProps}>
+    <TableBody
+      component={layoutMode === 'grid' ? 'div' : 'tbody'}
+      {...tableBodyProps}
+    >
       {tableBodyProps?.children ?? !rows.length ? (
         <tr>
           <td colSpan={table.getVisibleLeafColumns().length}>

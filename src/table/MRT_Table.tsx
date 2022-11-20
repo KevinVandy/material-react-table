@@ -18,6 +18,7 @@ export const MRT_Table: FC<Props> = ({ table }) => {
       enableStickyHeader,
       enableTableFooter,
       enableTableHead,
+      layoutMode,
       memoMode,
       muiTableProps,
     },
@@ -31,6 +32,7 @@ export const MRT_Table: FC<Props> = ({ table }) => {
 
   return (
     <Table
+      component={layoutMode === 'grid' ? 'div' : 'table'}
       stickyHeader={
         enableStickyHeader || enableRowVirtualization || isFullScreen
       }

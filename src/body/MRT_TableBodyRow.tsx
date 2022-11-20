@@ -26,6 +26,7 @@ export const MRT_TableBodyRow: FC<Props> = ({
     getState,
     options: {
       enableRowOrdering,
+      layoutMode,
       memoMode,
       muiTableBodyRowProps,
       renderDetailPanel,
@@ -46,7 +47,7 @@ export const MRT_TableBodyRow: FC<Props> = ({
     }
   };
 
-  const rowRef = useRef<HTMLTableRowElement | null>(null);
+  const rowRef = useRef<HTMLDivElement | HTMLTableRowElement | null>(null);
 
   const draggingBorder = useMemo(
     () =>
@@ -67,10 +68,11 @@ export const MRT_TableBodyRow: FC<Props> = ({
   return (
     <>
       <TableRow
+        component={layoutMode === 'grid' ? 'div' : 'tr'}
         onDragEnter={handleDragEnter}
         hover
         selected={row.getIsSelected()}
-        ref={(node) => {
+        ref={(node: any) => {
           rowRef.current = node;
           if (virtualRow?.measureRef) {
             virtualRow.measureRef = node;

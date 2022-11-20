@@ -11,7 +11,7 @@ interface Props {
 
 export const MRT_TableHeadRow: FC<Props> = ({ headerGroup, table }) => {
   const {
-    options: { muiTableHeadRowProps },
+    options: { layoutMode, muiTableHeadRowProps },
   } = table;
 
   const tableRowProps =
@@ -21,6 +21,7 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup, table }) => {
 
   return (
     <TableRow
+      component={layoutMode === 'grid' ? 'div' : 'tbody'}
       {...tableRowProps}
       sx={(theme) => ({
         boxShadow: `4px 0 8px ${alpha(theme.palette.common.black, 0.1)}`,
