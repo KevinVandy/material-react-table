@@ -45,6 +45,58 @@ export const DetailPanelEnabled: Story<MaterialReactTableProps> = () => (
   />
 );
 
+export const DetailPanelEnabledConditional: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        accessorKey: 'firstName',
+      },
+      {
+        header: 'Last Name',
+        accessorKey: 'lastName',
+      },
+      {
+        header: 'Age',
+        accessorKey: 'age',
+      },
+      {
+        header: 'Address',
+        accessorKey: 'address',
+      },
+    ]}
+    data={[...Array(10)].map(() => ({
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      age: faker.datatype.number(100) + 5,
+      address: faker.address.streetAddress(),
+      city: faker.address.city(),
+      state: faker.address.state(),
+      zipCode: faker.address.zipCode(),
+      phone: faker.phone.number(),
+    }))}
+    muiExpandButtonProps={({ row }) => ({
+      sx: {
+        display: row.original.age > 50 ? 'block' : 'none',
+      },
+    })}
+    renderDetailPanel={({ row }) =>
+      row.original.age > 50 ? (
+        <div style={{ display: 'grid' }}>
+          <span>City: {row.original.city}</span>
+          <span>State: {row.original.state}</span>
+          <span>Zip: {row.original.zipCode}</span>
+          <span>Phone: {row.original.phone}</span>
+        </div>
+      ) : (
+        'Not Enabled'
+      )
+    }
+  />
+);
+
 export const DetailPanelExpandColumnLast: Story<
   MaterialReactTableProps
 > = () => (
