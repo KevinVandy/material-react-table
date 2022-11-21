@@ -122,6 +122,12 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
     <TableBody
       component={layoutMode === 'grid' ? 'div' : 'tbody'}
       {...tableBodyProps}
+      sx={(theme) => ({
+        display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
+        ...(tableBodyProps?.sx instanceof Function
+          ? tableBodyProps?.sx(theme)
+          : (tableBodyProps?.sx as any)),
+      })}
     >
       {tableBodyProps?.children ?? !rows.length ? (
         <tr>

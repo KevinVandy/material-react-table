@@ -44,9 +44,32 @@ const data = [...Array(100)].map(() => ({
 }));
 
 export const DefaultSemantic: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} layoutMode="semantic" />
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    layoutMode="semantic"
+    enableRowSelection
+    enableColumnOrdering
+  />
 );
 
 export const Grid: Story<MaterialReactTableProps> = () => (
-  <MaterialReactTable columns={columns} data={data} layoutMode="grid" />
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    layoutMode="grid"
+    enableRowSelection
+    enableColumnOrdering
+  />
+);
+
+export const GridWithResizing: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    layoutMode="grid"
+    enableRowSelection
+    enableColumnOrdering
+    enableColumnResizing
+  />
 );

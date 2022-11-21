@@ -81,6 +81,7 @@ export const MRT_TableBodyRow: FC<Props> = ({
         {...tableRowProps}
         sx={(theme) => ({
           backgroundColor: lighten(theme.palette.background.default, 0.06),
+          display: layoutMode === 'grid' ? 'flex' : 'table-row',
           opacity:
             draggingRow?.id === row.id || hoveredRow?.id === row.id ? 0.5 : 1,
           transition: 'all 150ms ease-in-out',

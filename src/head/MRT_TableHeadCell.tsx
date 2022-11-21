@@ -131,6 +131,7 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
       }}
       {...tableCellProps}
       sx={(theme: Theme) => ({
+        display: layoutMode === 'grid' ? 'flex' : 'table-cell',
         fontWeight: 'bold',
         overflow: 'visible',
         p:
