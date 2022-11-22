@@ -79,7 +79,7 @@ export const DetailPanelEnabledConditional: Story<
     }))}
     muiExpandButtonProps={({ row }) => ({
       sx: {
-        display: row.original.age > 50 ? 'block' : 'none',
+        display: row.original.age > 50 ? 'flex' : 'none',
       },
     })}
     renderDetailPanel={({ row }) =>
