@@ -165,7 +165,7 @@ export const stateOptions: StateRow[] = [
     type: 'Array<string>',
   },
   {
-    defaultValue: 'comfortable',
+    defaultValue: "'comfortable'",
     description: '',
     link: '',
     linkText: '',

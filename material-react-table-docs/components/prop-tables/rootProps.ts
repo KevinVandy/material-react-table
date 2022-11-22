@@ -1740,7 +1740,7 @@ export const rootProps: PropRow[] = [
   },
   {
     propName: 'selectAllMode',
-    defaultValue: 'page',
+    defaultValue: "'page'",
     description: '',
     link: '',
     linkText: '',
