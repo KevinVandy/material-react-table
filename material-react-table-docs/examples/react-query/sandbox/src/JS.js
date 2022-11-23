@@ -43,7 +43,7 @@ const Example = () => {
       url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
 
       const response = await fetch(url.href);
-      const json = (await response.json())
+      const json = await response.json();
       return json;
     },
     { keepPreviousData: true },
@@ -86,9 +86,9 @@ const Example = () => {
       muiToolbarAlertBannerProps={
         isError
           ? {
-            color: 'error',
-            children: 'Error loading data',
-          }
+              color: 'error',
+              children: 'Error loading data',
+            }
           : undefined
       }
       onColumnFiltersChange={setColumnFilters}

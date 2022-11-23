@@ -1,5 +1,5 @@
-import { MRT_Localization } from '../MaterialReactTable';
-// Vietnamese language support
+import type { MRT_Localization } from '../MaterialReactTable';
+
 export const MRT_Localization_VI: MRT_Localization = {
   actions: 'Thao tác',
   and: 'và',

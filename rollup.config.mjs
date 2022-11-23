@@ -19,6 +19,7 @@ const supportedLocales = [
   'pt-BR',
   'ru',
   'tr',
+  'vi',
 ];
 
 export default [

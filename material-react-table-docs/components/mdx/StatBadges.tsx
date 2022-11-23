@@ -14,7 +14,7 @@ export const StatBadges = () => {
         },
         '& img': {
           imageRendering: 'pixelated',
-        }
+        },
       }}
     >
       <a
