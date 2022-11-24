@@ -33,7 +33,12 @@ export const MRT_ShowHideColumnsMenu = <
     getRightLeafColumns,
     getState,
     toggleAllColumnsVisible,
-    options: { localization, enablePinning, enableColumnOrdering },
+    options: {
+      enableColumnOrdering,
+      enableHiding,
+      enablePinning,
+      localization,
+    },
   } = table;
   const { density, columnOrder, columnPinning } = getState();
 
@@ -88,7 +93,7 @@ export const MRT_ShowHideColumnsMenu = <
           pt: 0,
         }}
       >
-        {!isSubMenu && (
+        {!isSubMenu && enableHiding && (
           <Button
             disabled={!getIsSomeColumnsVisible()}
             onClick={hideAllColumns}
@@ -115,12 +120,14 @@ export const MRT_ShowHideColumnsMenu = <
             {localization.unpinAll}
           </Button>
         )}
-        <Button
-          disabled={getIsAllColumnsVisible()}
-          onClick={() => toggleAllColumnsVisible(true)}
-        >
-          {localization.showAll}
-        </Button>
+        {enableHiding && (
+          <Button
+            disabled={getIsAllColumnsVisible()}
+            onClick={() => toggleAllColumnsVisible(true)}
+          >
+            {localization.showAll}
+          </Button>
+        )}
       </Box>
       <Divider />
       {allColumns.map((column, index) => (
