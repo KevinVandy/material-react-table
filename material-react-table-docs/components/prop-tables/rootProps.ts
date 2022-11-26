@@ -892,6 +892,17 @@ export const rootProps: PropRow[] = [
     type: 'boolean',
   },
   {
+    propName: 'maxLeafRowFilterDepth',
+    defaultValue: '100',
+    description:
+      'Set a maximum number leaf row depth that will be filtered. Preserve child rows of filtered rows by setting this to "0"',
+    link: 'https://tanstack.com/table/v8/docs/api/features/filters#maxleafrowfilterdepth',
+    linkText: 'TanStack Table Filtering Docs',
+    required: false,
+    source: 'TanStack Table',
+    type: 'number',
+  },
+  {
     propName: 'maxMultiSortColCount',
     defaultValue: '',
     description: 'Set a maximum number of columns that can be multi-sorted.',

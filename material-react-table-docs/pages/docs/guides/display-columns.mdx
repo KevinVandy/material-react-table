@@ -25,7 +25,7 @@ Material React Table has a few built-in display columns that are created automat
 - `mrt-row-select` - created when `enableRowSelection` prop is `true`
 - `mrt-row-numbers` - created when `enableRowNumbers` prop is `true`
 
-Display columns are, for the most part, the same as a data column, except for not having any accessor. Also, when a display column is created internally by Material React Table, the following options are all set to false by default:
+Display columns are, for the most part, the same as a data column, except they do not have an accessor to access data. When a display column is created internally by Material React Table, the following options are all set to false by default:
 
 ```tsx
 const defaultDisplayColumnDefOptions = {
@@ -39,7 +39,6 @@ const defaultDisplayColumnDefOptions = {
   enableGlobalFilter: false,
   enableGrouping: false,
   enableHiding: false,
-  enablePinning: false,
   enableResizing: false,
   enableSorting: false,
 } as Partial<MRT_ColumnDef>;

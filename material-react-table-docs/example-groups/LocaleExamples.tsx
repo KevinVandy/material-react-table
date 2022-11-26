@@ -9,6 +9,9 @@ const CS_Table = dynamic(() => import('../examples/localization-i18n-cs'), {
 const DE_Table = dynamic(() => import('../examples/localization-i18n-de'), {
   suspense: true,
 });
+const EN_Table = dynamic(() => import('../examples/localization-i18n-en'), {
+  suspense: true,
+});
 const ES_Table = dynamic(() => import('../examples/localization-i18n-es'), {
   suspense: true,
 });
@@ -36,16 +39,23 @@ const PT_BR_Table = dynamic(
     suspense: true,
   },
 );
+const RO_Table = dynamic(() => import('../examples/localization-i18n-ro'), {
+  suspense: true,
+});
 const RU_Table = dynamic(() => import('../examples/localization-i18n-ru'), {
   suspense: true,
 });
 const TR_Table = dynamic(() => import('../examples/localization-i18n-tr'), {
   suspense: true,
 });
+const VI_Table = dynamic(() => import('../examples/localization-i18n-vi'), {
+  suspense: true,
+});
 
 const supportedLocales = [
   'cs',
   'de',
+  'en',
   'es',
   'fa',
   'fr',
@@ -54,8 +64,10 @@ const supportedLocales = [
   'pl',
   'pt',
   'pt-BR',
+  'ro',
   'ru',
   'tr',
+  'vi',
 ];
 
 const LocaleExamples = () => {
@@ -73,7 +85,7 @@ const LocaleExamples = () => {
           variant="scrollable"
         >
           {supportedLocales.map((locale) => (
-            <Tab label={locale} key={locale} value={locale} />
+            <Tab label={locale} key={locale} value={locale} sx={{width: '2rem'}} />
           ))}
         </Tabs>
       </Box>
@@ -83,6 +95,7 @@ const LocaleExamples = () => {
         >
           {currentLocale === 'cs' && <CS_Table />}
           {currentLocale === 'de' && <DE_Table />}
+          {currentLocale === 'en' && <EN_Table />}
           {currentLocale === 'es' && <ES_Table />}
           {currentLocale === 'fa' && <FA_Table />}
           {currentLocale === 'fr' && <FR_Table />}
@@ -91,8 +104,10 @@ const LocaleExamples = () => {
           {currentLocale === 'pl' && <PL_Table />}
           {currentLocale === 'pt' && <PT_Table />}
           {currentLocale === 'pt-BR' && <PT_BR_Table />}
+          {currentLocale === 'ro' && <RO_Table />}
           {currentLocale === 'ru' && <RU_Table />}
           {currentLocale === 'tr' && <TR_Table />}
+          {currentLocale === 'vi' && <VI_Table />}
         </Suspense>
       </div>
     </>

@@ -68,11 +68,13 @@ export const StyleCustomStripedRows: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    muiTableBodyRowProps={({ row }) => ({
-      sx: {
-        backgroundColor: row.index % 2 === 0 ? 'rgba(52, 54, 245, 0.08)' : '',
-      },
-    })}
+    muiTableBodyProps={{
+      sx: (theme) => ({
+        '& tr:nth-of-type(odd)': {
+          backgroundColor: 'limegreen',
+        },
+      }),
+    }}
     muiTableBodyCellProps={{ sx: { border: 'none' } }}
   />
 );

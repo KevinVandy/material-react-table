@@ -107,9 +107,9 @@ const Example = () => {
       muiToolbarAlertBannerProps={
         isError
           ? {
-            color: 'error',
-            children: 'Error loading data',
-          }
+              color: 'error',
+              children: 'Error loading data',
+            }
           : undefined
       }
       onColumnFiltersChange={setColumnFilters}

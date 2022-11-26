@@ -1,5 +1,5 @@
 {
-  "version": "1.3.10",
+  "version": "1.3.16",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -14,9 +14,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/KevinVandy/material-react-table"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
   },
   "funding": {
     "type": "github",
@@ -64,8 +61,8 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@faker-js/faker": "^7.6.0",
-    "@mui/icons-material": "^5.10.14",
-    "@mui/material": "^5.10.14",
+    "@mui/icons-material": "^5.10.15",
+    "@mui/material": "^5.10.15",
     "@rollup/plugin-babel": "^6.0.2",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^9.0.2",
@@ -82,12 +79,12 @@
     "@storybook/react": "^6.5.13",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
-    "@typescript-eslint/eslint-plugin": "^5.43.0",
-    "@typescript-eslint/parser": "^5.43.0",
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "@typescript-eslint/parser": "^5.44.0",
     "babel-loader": "^9.1.0",
     "eslint": "^8.28.0",
-    "eslint-plugin-mui-path-imports": "^0.0.3",
-    "prettier": "^2.7.1",
+    "eslint-plugin-mui-path-imports": "^0.0.5",
+    "prettier": "^2.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
@@ -110,8 +107,11 @@
     "react-dom": ">=17.0"
   },
   "dependencies": {
-    "@tanstack/match-sorter-utils": "8.5.14",
-    "@tanstack/react-table": "8.5.30",
+    "@tanstack/match-sorter-utils": "8.7.0",
+    "@tanstack/react-table": "8.7.0",
     "react-virtual": "^2.10.4"
+  },
+  "resolutions": {
+    "enhanced-resolve": "5.10.0"
   }
 }

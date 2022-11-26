@@ -703,10 +703,10 @@
   dependencies:
     tslib "^2.4.0"
 
-"@tanstack/match-sorter-utils@8.5.14":
-  version "8.5.14"
-  resolved "https://registry.yarnpkg.com/@tanstack/match-sorter-utils/-/match-sorter-utils-8.5.14.tgz#12efcd536abe491d09521e0242bc4d51442f8a8a"
-  integrity sha512-lVNhzTcOJ2bZ4IU+PeCPQ36vowBHvviJb2ZfdRFX5uhy7G0jM8N34zAMbmS5ZmVH8D2B7oU82OWo0e/5ZFzQrw==
+"@tanstack/match-sorter-utils@8.7.0":
+  version "8.7.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/match-sorter-utils/-/match-sorter-utils-8.7.0.tgz#60b09a6d3d7974d5f86f1318053c1bd5a85fb0be"
+  integrity sha512-OgfIPMHTfuw9JGcXCCoEHWFP/eSP2eyhCYwkrFnWBM3NbUPAgOlFP11DbM7cozDRVB0XbPr1tD4pLAtWKlVUVg==
   dependencies:
     remove-accents "0.4.2"
 
@@ -723,17 +723,17 @@
     "@tanstack/query-core" "4.13.0"
     use-sync-external-store "^1.2.0"
 
-"@tanstack/react-table@8.5.24":
-  version "8.5.24"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.5.24.tgz#9bd6965fdea21f34094d4db30a36485750591a60"
-  integrity sha512-PFHFuCpotQ9DqljBFVhjRh/7juzOibk/il9RGmaJYOHnyZ9+uOCUt/fxkzIF08WFem402l07GhMXNWblHvwIvA==
+"@tanstack/react-table@8.7.0":
+  version "8.7.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.7.0.tgz#853fae74db6bf49738d0f18e4d507b00262fc09c"
+  integrity sha512-VJ+9rsymDLaSU35rWOfX0bwNXnpW1i+T14wi+sHx8lxwAsfg6IY1Yw7FPfGADvUFP5eQn2t4nlohAJd+IoEj/Q==
   dependencies:
-    "@tanstack/table-core" "8.5.24"
+    "@tanstack/table-core" "8.7.0"
 
-"@tanstack/table-core@8.5.24":
-  version "8.5.24"
-  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.5.24.tgz#4fba7a5b9048faeb94e21ea4c1267788034d33c3"
-  integrity sha512-2DVcYNsPWSyQBoHGN6TnA31DGkiOcBlJnP7lateXS/EEp13uoKc2mfLx7inHqu//mxm1nHtF7yA9JnF8sa/5iA==
+"@tanstack/table-core@8.7.0":
+  version "8.7.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.7.0.tgz#046e376cd536cd53727a91a880345f92d3ec5859"
+  integrity sha512-DRiRbOAmDHapzUBd4/C4Yy+FTug4fdGp5sdZWWfCq4wxRoaXQraQgbzmK23a3QcbwLFtLeNezPkZrqbJWuX+VA==
 
 "@types/acorn@^4.0.0":
   version "4.0.6"
@@ -2240,13 +2240,13 @@ markdown-extensions@^1.0.0:
   resolved "https://registry.yarnpkg.com/markdown-extensions/-/markdown-extensions-1.1.1.tgz#fea03b539faeaee9b4ef02a3769b455b189f7fc3"
   integrity sha512-WWC0ZuMzCyDHYCasEGs4IPvLyTGftYwh6wIEOULOF0HXcqZlhwRzrK0w2VUlxWA98xnvb/jszw4ZSkJ6ADpM6Q==
 
-material-react-table@^1.3.8:
-  version "1.3.8"
-  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-1.3.8.tgz#1a3295a2929b262b8472584e04d31ebb60e79db2"
-  integrity sha512-2jx91h583HQaRCDWHHNS2ey4IdRk0Yiq55MrPPjr/pr11MZjz28+VRWgwW8aDeCktGQhYsEKcnPn1Xg31QSKsg==
+material-react-table@^1.3.16:
+  version "1.3.16"
+  resolved "https://registry.yarnpkg.com/material-react-table/-/material-react-table-1.3.16.tgz#2fc7096a7420311dac4225a1f48ce31460daa8ea"
+  integrity sha512-TgsOJqcRElJ9BdLbRAQrRDYIOK5PW2NzG1M26wGZwj1ncRzI2MuDjvw834c8KXYRvhXYgeFD3L9KSN6UdvwMZw==
   dependencies:
-    "@tanstack/match-sorter-utils" "8.5.14"
-    "@tanstack/react-table" "8.5.24"
+    "@tanstack/match-sorter-utils" "8.7.0"
+    "@tanstack/react-table" "8.7.0"
     react-virtual "^2.10.4"
 
 mdast-util-definitions@^5.0.0:
