@@ -38,7 +38,6 @@ export const MRT_ShowHideColumnsMenu = <
       enableHiding,
       enablePinning,
       localization,
-      columns,
     },
   } = table;
   const { density, columnOrder, columnPinning } = getState();
@@ -65,7 +64,6 @@ export const MRT_ShowHideColumnsMenu = <
     }
     return columns;
   }, [
-    columns,
     columnOrder,
     columnPinning,
     getAllColumns(),

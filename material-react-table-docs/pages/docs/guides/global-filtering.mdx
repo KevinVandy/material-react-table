@@ -2,6 +2,7 @@ import Head from 'next/head';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+import RemoteExample from '../../../examples/remote';
 
 <Head>
   <title>
@@ -28,6 +29,7 @@ Material React Table has a powerful built-in global filtering (search) feature t
       'getColumnCanGlobalFilter',
       'globalFilterFn',
       'globalFilterModeOptions',
+      'manualFiltering',
       'muiSearchTextFieldProps',
       'onGlobalFilterChange',
       'onGlobalFilterFnChange',
@@ -175,3 +177,39 @@ You can customize the search text field by passing in props to the `muiSearchTex
   }}
 />
 ```
+
+### Manual Server-Side Global Filtering
+
+A very common use case when you have a lot of data is to filter the data on the server, instead of client-side. In this case you will want to set the `manualFiltering` prop to `true` and manage the `globalFilter` state yourself like so. (Can work in conjuntion with [manual column filtering](https://www.material-react-table.com/docs/guides/column-filtering#manual-server-side-column-filtering))
+
+```tsx
+// You can manage and have control over the columnFilters state yourself
+const [globalFilter, setGlobalFilter] = useState('');
+const [data, setData] = useState([]); //data will get updated after re-fetching
+
+useEffect(() => {
+  const fetchData = async () => {
+    // send api requests when columnFilters state changes
+    const filteredData = await fetch();
+    setData([...filteredData]);
+  };
+}, [globalFilter]);
+
+return (
+  <MaterialReactTable
+    columns={columns}
+    data={data} // this will already be filtered on the server
+    manualFiltering //turn off client-side filtering
+    onGlobalFilterChange={setGlobalFilter} //hoist internal global state to your state
+    state={{ globalFilter }} //pass in your own managed globalFilter state
+  />
+);
+```
+
+> Specifying `manualFiltering` turns off all client-side filtering, and assumes that the `data` you pass to `<MaterialReactTable />` is already filtered.
+
+Here is the full Remote Data example showing off server-side **filtering**, pagination, and sorting.
+
+<RemoteExample />
+
+View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-search-examples)**

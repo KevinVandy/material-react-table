@@ -140,11 +140,11 @@ export const routes: Array<RouteItem> = [
         items: [
           {
             href: '/docs/guides/data-columns',
-            label: 'Create Data Columns',
+            label: 'Data (Accessor) Columns',
           },
           {
             href: '/docs/guides/display-columns',
-            label: 'Create Display Columns',
+            label: 'Display (Built-in) Columns',
           },
           {
             href: '/docs/guides/customize-components',
