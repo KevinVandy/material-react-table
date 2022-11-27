@@ -582,7 +582,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: '',
-    type: '(MRT_FilterOption | string)[] | null',
+    type: 'Array<MRT_FilterOption | string> | null',
   },
   {
     propName: 'globalFilterModeOptions',
@@ -592,7 +592,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: '',
-    type: '(MRT_FilterOption | string)[] | null',
+    type: 'Array<MRT_FilterOption | string> | null',
   },
   {
     propName: 'expandRowsFn',
@@ -616,12 +616,12 @@ export const rootProps: PropRow[] = [
   },
   {
     propName: 'filterFromLeafRows',
-    defaultValue: '',
+    defaultValue: 'false',
     description: '',
-    link: '',
-    linkText: '',
+    link: 'https://tanstack.com/table/v8/docs/api/features/filters#filterfromleafrows',
+    linkText: 'TanStack Filtering Docs',
     required: false,
-    source: '',
+    source: 'TanStack Table',
     type: 'boolean',
   },
   {
