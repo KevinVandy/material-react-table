@@ -2,6 +2,7 @@ import Head from 'next/head';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+import CustomizeComponentExample from '../../../examples/customize-global-filter-component';
 import RemoteExample from '../../../examples/remote';
 
 <Head>
@@ -143,13 +144,13 @@ Similar to the column filter modes, you can enable the user to be able to choose
 />
 ```
 
-### Customize Global Filter Position
-
-You can customize the position of the global filter (search box) in the top toolbar by setting the `positionGlobalFilter` prop to `left` or `right`. It is shown on the right by default.
-
 #### Show Search Field by Default
 
 Also, if you want to show the search text box by default and not hide it behind the search icon, you can set the `showGlobalFilter` state to `true` in the `initialState`.
+
+### Customize Global Filter Position
+
+You can customize the position of the global filter (search box) in the top toolbar by setting the `positionGlobalFilter` prop to `left` or `right`. It is shown on the right by default.
 
 ```jsx
 <MaterialReactTable
@@ -177,6 +178,8 @@ You can customize the search text field by passing in props to the `muiSearchTex
   }}
 />
 ```
+
+<CustomizeComponentExample />
 
 ### Manual Server-Side Global Filtering
 
