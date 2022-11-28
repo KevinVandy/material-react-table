@@ -31,6 +31,7 @@ export const MRT_TableHead: FC<Props> = ({ table }) => {
   return (
     <TableHead
       component={layoutMode === 'grid' ? 'div' : 'thead'}
+      role="rowgroup"
       {...tableHeadProps}
       sx={(theme) => ({
         opacity: 0.97,

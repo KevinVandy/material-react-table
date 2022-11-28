@@ -248,6 +248,7 @@ export const getCommonCellStyles = ({
     : getIsFirstRightPinnedColumn(column)
     ? `4px 0 8px -6px ${alpha(theme.palette.common.black, 0.2)} inset`
     : undefined,
+  display: table.options.layoutMode === 'grid' ? 'flex' : 'table-cell',
   left:
     column.getIsPinned() === 'left'
       ? `${column.getStart('left')}px`
@@ -269,6 +270,10 @@ export const getCommonCellStyles = ({
   ...(tableCellProps?.sx instanceof Function
     ? tableCellProps.sx(theme)
     : (tableCellProps?.sx as any)),
+  flex:
+    table.options.layoutMode === 'grid'
+      ? `${column.getSize()} 0 auto`
+      : undefined,
   maxWidth: `min(${column.getSize()}px, fit-content)`,
   minWidth: `max(${column.getSize()}px, ${column.columnDef.minSize ?? 30}px)`,
   width: header?.getSize() ?? column.getSize(),

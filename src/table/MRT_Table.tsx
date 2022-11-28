@@ -33,6 +33,7 @@ export const MRT_Table: FC<Props> = ({ table }) => {
   return (
     <Table
       component={layoutMode === 'grid' ? 'div' : 'table'}
+      role="grid"
       stickyHeader={
         enableStickyHeader || enableRowVirtualization || isFullScreen
       }

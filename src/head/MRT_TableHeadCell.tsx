@@ -129,9 +129,10 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
           tableHeadCellRefs.current[column.id] = node as HTMLTableCellElement;
         }
       }}
+      role="columnheader"
       {...tableCellProps}
       sx={(theme: Theme) => ({
-        display: layoutMode === 'grid' ? 'flex' : 'table-cell',
+        flexDirection: layoutMode === 'grid' ? 'column' : undefined,
         fontWeight: 'bold',
         overflow: 'visible',
         p:

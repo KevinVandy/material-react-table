@@ -170,12 +170,13 @@ export const MRT_TableBodyCell: FC<Props> = ({
   return (
     <TableCell
       component={layoutMode === 'grid' ? 'div' : 'td'}
+      role="gridcell"
       {...tableCellProps}
       onDragEnter={handleDragEnter}
       onDoubleClick={handleDoubleClick}
       sx={(theme) => ({
+        alignItems: layoutMode === 'grid' ? 'center' : undefined,
         cursor: isEditable && editingMode === 'cell' ? 'pointer' : 'inherit',
-        display: layoutMode === 'grid' ? 'flex' : 'table-cell',
         overflow: 'hidden',
         p:
           density === 'compact'

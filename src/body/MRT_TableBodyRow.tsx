@@ -69,15 +69,16 @@ export const MRT_TableBodyRow: FC<Props> = ({
     <>
       <TableRow
         component={layoutMode === 'grid' ? 'div' : 'tr'}
-        onDragEnter={handleDragEnter}
         hover
+        onDragEnter={handleDragEnter}
         selected={row.getIsSelected()}
-        ref={(node: any) => {
+        ref={(node: HTMLTableRowElement | HTMLDivElement) => {
           rowRef.current = node;
           if (virtualRow?.measureRef) {
             virtualRow.measureRef = node;
           }
         }}
+        role="row"
         {...tableRowProps}
         sx={(theme) => ({
           backgroundColor: lighten(theme.palette.background.default, 0.06),

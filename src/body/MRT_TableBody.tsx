@@ -121,6 +121,7 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
   return (
     <TableBody
       component={layoutMode === 'grid' ? 'div' : 'tbody'}
+      role="rowgroup"
       {...tableBodyProps}
       sx={(theme) => ({
         display: layoutMode === 'grid' ? 'grid' : 'table-row-group',

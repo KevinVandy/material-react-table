@@ -21,7 +21,8 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup, table }) => {
 
   return (
     <TableRow
-      component={layoutMode === 'grid' ? 'div' : 'tbody'}
+      component={layoutMode === 'grid' ? 'div' : 'tr'}
+      role="row"
       {...tableRowProps}
       sx={(theme) => ({
         boxShadow: `4px 0 8px ${alpha(theme.palette.common.black, 0.1)}`,
@@ -32,12 +33,8 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup, table }) => {
           : (tableRowProps?.sx as any)),
       })}
     >
-      {headerGroup.headers.map((header: MRT_Header, index) => (
-        <MRT_TableHeadCell
-          header={header}
-          key={header.id || index}
-          table={table}
-        />
+      {headerGroup.headers.map((header: MRT_Header) => (
+        <MRT_TableHeadCell header={header} key={header.id} table={table} />
       ))}
     </TableRow>
   );
