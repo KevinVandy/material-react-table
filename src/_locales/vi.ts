@@ -12,6 +12,8 @@ export const MRT_Localization_VI: MRT_Localization = {
   clickToCopy: 'Nhấn vào để sao chép',
   columnActions: 'Lựa chọn',
   copiedToClipboard: 'Sao chép vào bảng tạm',
+  collapse: 'Thu gọn',
+  collapseAll: 'Thu gọn tất cả',
   dropToGroupBy: 'Gộp dữ liệu theo {column}',
   edit: 'Chỉnh sửa',
   expand: 'Mở rộng',

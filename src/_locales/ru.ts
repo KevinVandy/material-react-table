@@ -12,6 +12,8 @@ export const MRT_Localization_RU: MRT_Localization = {
   clickToCopy: 'Нажмите, чтобы скопировать',
   columnActions: 'Действие колонки',
   copiedToClipboard: 'Скопировано в буфер обмена',
+  collapse: 'Свернуть',
+  collapseAll: 'Свернуть все',
   dropToGroupBy: 'Добавить в группу к {column}',
   edit: 'Редактировать',
   expand: 'Раскрыть',

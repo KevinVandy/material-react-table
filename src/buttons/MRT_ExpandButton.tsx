@@ -25,6 +25,9 @@ export const MRT_ExpandButton: FC<Props> = ({ row, table }) => {
       ? muiExpandButtonProps({ table, row })
       : muiExpandButtonProps;
 
+  const canExpand = row.getCanExpand();
+  const isExpanded = row.getIsExpanded();
+
   const handleToggleExpand = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     row.toggleExpanded();
@@ -34,14 +37,19 @@ export const MRT_ExpandButton: FC<Props> = ({ row, table }) => {
   return (
     <Tooltip
       arrow
+      disableHoverListener={!canExpand && !renderDetailPanel}
       enterDelay={1000}
       enterNextDelay={1000}
-      title={iconButtonProps?.title ?? localization.expand}
+      title={
+        iconButtonProps?.title ?? isExpanded
+          ? localization.collapse
+          : localization.expand
+      }
     >
       <span>
         <IconButton
           aria-label={localization.expand}
-          disabled={!row.getCanExpand() && !renderDetailPanel}
+          disabled={!canExpand && !renderDetailPanel}
           {...iconButtonProps}
           onClick={handleToggleExpand}
           sx={(theme) => ({
@@ -56,11 +64,7 @@ export const MRT_ExpandButton: FC<Props> = ({ row, table }) => {
           <ExpandMoreIcon
             style={{
               transform: `rotate(${
-                !row.getCanExpand() && !renderDetailPanel
-                  ? -90
-                  : row.getIsExpanded()
-                  ? -180
-                  : 0
+                !canExpand && !renderDetailPanel ? -90 : isExpanded ? -180 : 0
               }deg)`,
               transition: 'transform 150ms',
             }}

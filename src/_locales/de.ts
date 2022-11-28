@@ -12,6 +12,8 @@ export const MRT_Localization_DE: MRT_Localization = {
   clickToCopy: 'Kopieren',
   columnActions: 'Spalten-Aktionen',
   copiedToClipboard: 'In die Zwischenablage kopiert',
+  collapse: 'Einklappen',
+  collapseAll: 'Alle einklappen',
   dropToGroupBy: 'Ablegen zum Gruppieren nach {column}',
   edit: 'Editieren',
   expand: 'Erweitern',

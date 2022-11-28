@@ -10,6 +10,8 @@ export const MRT_Localization_ES: MRT_Localization = {
   clearSearch: 'Borrar búsqueda',
   clearSort: 'Borrar ordenamiento',
   clickToCopy: 'Haga click para copiar',
+  collapse: 'Colapsar',
+  collapseAll: 'Colapsar todo',
   columnActions: 'Columna de acciones',
   copiedToClipboard: 'Copiado al portapapeles',
   dropToGroupBy: 'Soltar para agrupar por {column}',

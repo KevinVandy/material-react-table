@@ -68,6 +68,8 @@ export interface MRT_Localization {
   clearSearch: string;
   clearSort: string;
   clickToCopy: string;
+  collapse: string;
+  collapseAll: string;
   columnActions: string;
   copiedToClipboard: string;
   dropToGroupBy: string;

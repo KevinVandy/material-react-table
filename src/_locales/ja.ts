@@ -10,6 +10,8 @@ export const MRT_Localization_JA: MRT_Localization = {
   clearSearch: 'リセット',
   clearSort: '並べ替えを解除',
   clickToCopy: 'クリックでコピー',
+  collapse: '折りたたむ',
+  collapseAll: 'すべて折りたたむ',
   columnActions: '操作',
   copiedToClipboard: 'クリップボードにコピーしました',
   dropToGroupBy: 'ドロップで{column}をグループ化',
