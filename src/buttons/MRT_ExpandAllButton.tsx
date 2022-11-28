@@ -28,12 +28,18 @@ export const MRT_ExpandAllButton: FC<Props> = ({ table }) => {
       ? muiExpandAllButtonProps({ table })
       : muiExpandAllButtonProps;
 
+  const isAllRowsExpanded = getIsAllRowsExpanded();
+
   return (
     <Tooltip
       arrow
       enterDelay={1000}
       enterNextDelay={1000}
-      title={iconButtonProps?.title ?? localization.expandAll}
+      title={
+        iconButtonProps?.title ?? isAllRowsExpanded
+          ? localization.collapseAll
+          : localization.expandAll
+      }
     >
       <span>
         <IconButton
@@ -41,7 +47,7 @@ export const MRT_ExpandAllButton: FC<Props> = ({ table }) => {
           disabled={
             isLoading || (!renderDetailPanel && !getCanSomeRowsExpand())
           }
-          onClick={() => toggleAllRowsExpanded(!getIsAllRowsExpanded())}
+          onClick={() => toggleAllRowsExpanded(!isAllRowsExpanded)}
           {...iconButtonProps}
           sx={(theme) => ({
             height: density === 'compact' ? '1.75rem' : '2.25rem',
@@ -56,11 +62,7 @@ export const MRT_ExpandAllButton: FC<Props> = ({ table }) => {
           <KeyboardDoubleArrowDownIcon
             style={{
               transform: `rotate(${
-                getIsAllRowsExpanded()
-                  ? -180
-                  : getIsSomeRowsExpanded()
-                  ? -90
-                  : 0
+                isAllRowsExpanded ? -180 : getIsSomeRowsExpanded() ? -90 : 0
               }deg)`,
               transition: 'transform 150ms',
             }}

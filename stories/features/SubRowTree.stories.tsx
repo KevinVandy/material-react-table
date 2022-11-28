@@ -86,9 +86,49 @@ export const SubRowTreeFilterFromLeafRows: Story<
     columns={columns}
     data={data}
     enableExpanding
-    enableMultiRowSelection={false}
     enablePagination={false}
     filterFromLeafRows
+    initialState={{ showColumnFilters: true, expanded: true }}
+  />
+);
+
+export const SubRowTreeMaxLeafRowFilterDepth0: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableExpanding
+    enablePagination={false}
+    maxLeafRowFilterDepth={0}
+    initialState={{ showColumnFilters: true, expanded: true }}
+  />
+);
+
+export const SubRowTreeMaxLeafRowFilterDepth1: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableExpanding
+    enablePagination={false}
+    maxLeafRowFilterDepth={1}
+    initialState={{ showColumnFilters: true, expanded: true }}
+  />
+);
+
+export const SubRowTreeMaxLeafRowFilterDepthAndFilterFromLeafRows: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableExpanding
+    enablePagination={false}
+    filterFromLeafRows
+    maxLeafRowFilterDepth={0}
+    initialState={{ showColumnFilters: true, expanded: true }}
   />
 );
 

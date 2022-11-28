@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
 
 export const data = [
@@ -22,6 +22,13 @@ export const data = [
             address: '1234 Brakus Inlet',
             city: 'South Linda',
             state: 'West Virginia',
+          },
+          {
+            firstName: 'Jordan',
+            lastName: 'Clarkson',
+            address: '4882 Palm Rd',
+            city: 'San Francisco',
+            state: 'California',
           },
         ],
       },
@@ -88,10 +95,11 @@ const Example = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
+      enableExpandAll={false} //hide expand all double arrow in column header
       enableExpanding
-      enableExpandAll={false}
+      filterFromLeafRows //apply filtering to all rows instead of just parent rows
       initialState={{ expanded: true }} //expand all rows by default
-      paginateExpandedRows={false}
+      paginateExpandedRows={false} //When rows are expanded, do not count sub-rows as number of rows on the page towards pagination
     />
   );
 };

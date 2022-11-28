@@ -20,7 +20,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: '(({ cell, column, row, table }) => ReactNode)',
+    type: '({ cell, column, row, table }) => ReactNode',
   },
   {
     columnOption: 'Cell',
@@ -31,7 +31,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: 'MRT Data Columns Docs',
     source: 'MRT',
     required: false,
-    type: '(({ cell, column, row, table }) => ReactNode)',
+    type: '({ cell, column, row, table }) => ReactNode',
   },
   {
     columnOption: 'Edit',
@@ -41,7 +41,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: 'MRT Editing Docs',
     source: 'MRT',
     required: false,
-    type: '(({ cell, column, row, table }) => ReactNode)',
+    type: '({ cell, column, row, table }) => ReactNode',
   },
   {
     columnOption: 'Filter',
@@ -51,7 +51,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: 'MRT Column Filtering Docs',
     source: 'MRT',
     required: false,
-    type: '(({ column, header, table }) => ReactNode)',
+    type: '({ column, header, table }) => ReactNode',
   },
   {
     columnOption: 'Footer',
@@ -61,7 +61,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: 'MRT Data Columns Docs',
     source: 'MRT',
     required: false,
-    type: 'ReactNode | (({ column, footer, table }) => ReactNode)',
+    type: 'ReactNode | ({ column, footer, table }) => ReactNode',
   },
   {
     columnOption: 'GroupedCell',
@@ -71,7 +71,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: '(({ cell, column, row, table }) => ReactNode)',
+    type: '({ cell, column, row, table }) => ReactNode',
   },
   {
     columnOption: 'Header',
@@ -306,7 +306,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: "'text' | 'select' | 'multi-select | 'range",
+    type: "'text' | 'select' | 'multi-select' | 'range'"
   },
   {
     columnOption: 'header',

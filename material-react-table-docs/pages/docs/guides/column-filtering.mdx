@@ -29,14 +29,18 @@ Filtering is one of the most powerful features of Material React Table and is en
       'enableColumnFilterModes',
       'enableColumnFilters',
       'enableFilters',
+      'filterFns',
       'filterFromLeafRows',
+      'getFacetedMinMaxValues',
+      'getFacetedRowModel',
+      'getFacetedUniqueValues',
       'getFilteredRowModel',
       'manualFiltering',
+      'maxLeafRowFilterDepth',
       'muiTableHeadCellFilterTextFieldProps',
-      'onColumnFiltersChange',
       'onColumnFilterFnsChange',
+      'onColumnFiltersChange',
       'onShowFiltersChange',
-      'filterFns',
       'renderColumnFilterModeMenuItems',
     ])
   }
@@ -196,7 +200,7 @@ const columns = [
 
 You can also render custom menu items in the filter mode dropdown menu by setting the `renderColumnFilterModeMenuItems` prop or column option. This option is a function that takes in the column and returns an array of `MenuItem` components. This is useful if you want to add custom filter modes that are not included in Material React Table, or if you just want to render the menu in your own custom way
 
-```tsx
+```jsx
 const columns = [
   {
     accessorKey: 'firstName',
@@ -230,9 +234,15 @@ return (
 
 <CustomizeFilterModesExample />
 
+### Expanded Leaf Row Filtering Options
+
+If you are using the filtering features along-side either the [grouping](/docs/guides/aggregation-and-grouping) or [expanding](/docs/guides/expanding-sub-rows) features, then there are a few behaviors and customizations you should be aware of.
+
+Check out the [Expanded Leaf Row Filtering Behavior docs](/docs/guides/expanding-sub-rows#expanded-leaf-row-filtering-behavior) to learn more about the `filterFromLeafRows` and `maxLeafRowFilterDepth` props.
+
 ### Manual Server-Side Column Filtering
 
-A very common use case when you have a lot of data is to filter the data on the server, instead of client-side. In this case you will want to set the `manualFiltering` prop to `true` and manage the `columnFilters` state yourself like so. (Can work in conjuntion with [manual global filtering](https://www.material-react-table.com/docs/guides/global-filtering#manual-server-side-global-filtering))
+A very common use case when you have a lot of data is to filter the data on the server, instead of client-side. In this case you will want to set the `manualFiltering` prop to `true` and manage the `columnFilters` state yourself like so. (Can work in conjunction with [manual global filtering](https://www.material-react-table.com/docs/guides/global-filtering#manual-server-side-global-filtering))
 
 ```tsx
 // You can manage and have control over the columnFilters state yourself
@@ -274,6 +284,6 @@ You can also turn a filter textfield into a select dropdown by setting the `filt
 
 ### Custom Filter Components
 
-If you need custom filter components that are much more complex than textboxes and dropdowns, you can create and pass in your own filter components using the `Filter` column option.
+If you need custom filter components that are much more complex than text-boxes and dropdowns, you can create and pass in your own filter components using the `Filter` column option.
 
 View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-filtering-examples)**

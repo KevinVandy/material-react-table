@@ -12,6 +12,8 @@ export const MRT_Localization_TR: MRT_Localization = {
   clickToCopy: 'Kopyala',
   columnActions: 'Sütun İşlemleri',
   copiedToClipboard: 'Panoya Kopyalandı',
+  collapse: 'Daralt',
+  collapseAll: 'Tümünü Daralt',
   dropToGroupBy: '{column} İle Gruplandırmak İçin Bırakın',
   edit: 'Düzenle',
   expand: 'Genişlet',
