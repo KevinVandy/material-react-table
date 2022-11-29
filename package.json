@@ -1,117 +1,26 @@
 {
-  "version": "1.3.16",
-  "license": "MIT",
-  "name": "material-react-table",
-  "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
-  "author": "Kevin Vandy",
-  "keywords": [
-    "react-table",
-    "material-ui",
-    "material-table",
-    "tanstack table",
-    "data table"
+  "name": "material-tanstack-table",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/KevinVandy/material-react-table"
-  },
-  "funding": {
-    "type": "github",
-    "url": "https://github.com/sponsors/kevinvandy"
-  },
-  "homepage": "https://www.material-react-table.com/",
-  "bugs": {
-    "url": "https://github.com/KevinVandy/material-react-table/issues"
-  },
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/material-react-table.esm.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "locales",
-    "src"
-  ],
-  "size-limit": [
-    {
-      "path": "dist/cjs/index.js",
-      "limit": "50 KB"
-    },
-    {
-      "path": "dist/esm/material-react-table.esm.js",
-      "limit": "50 KB"
-    }
-  ],
-  "engines": {
-    "node": ">=14"
-  },
   "scripts": {
-    "analyze": "size-limit --why",
-    "build": "rm -rf dist locales && rollup -c && size-limit && rm -rf material-react-table-docs/node_modules/material-react-table && mkdir material-react-table-docs/node_modules/material-react-table && cp -r dist material-react-table-docs/node_modules/material-react-table/dist && cp -r locales material-react-table-docs/node_modules/material-react-table/ && cp -r src material-react-table-docs/node_modules/material-react-table/ && cp -r package.json material-react-table-docs/node_modules/material-react-table/",
-    "build-storybook": "build-storybook",
-    "dev": "start-storybook -p 6006",
-    "format": "prettier -w .",
-    "lint": "eslint .",
-    "size": "size-limit",
-    "start": "start-storybook -p 6006",
-    "storybook": "start-storybook -p 6006"
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "docs-dev": "turbo run docs-dev",
+    "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
+    "lint": "turbo run lint",
+    "storybook": "turbo run storybook"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.2",
-    "@babel/preset-react": "^7.18.6",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@faker-js/faker": "^7.6.0",
-    "@mui/icons-material": "^5.10.15",
-    "@mui/material": "^5.10.15",
-    "@rollup/plugin-babel": "^6.0.2",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-typescript": "^9.0.2",
-    "@size-limit/preset-small-lib": "^8.1.0",
-    "@storybook/addon-a11y": "^6.5.13",
-    "@storybook/addon-actions": "^6.5.13",
-    "@storybook/addon-essentials": "^6.5.13",
-    "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-links": "^6.5.13",
-    "@storybook/addon-storysource": "^6.5.13",
-    "@storybook/addons": "^6.5.13",
-    "@storybook/builder-webpack5": "^6.5.13",
-    "@storybook/manager-webpack5": "^6.5.13",
-    "@storybook/react": "^6.5.13",
-    "@types/react": "^18.0.25",
-    "@types/react-dom": "^18.0.9",
-    "@typescript-eslint/eslint-plugin": "^5.44.0",
-    "@typescript-eslint/parser": "^5.44.0",
-    "babel-loader": "^9.1.0",
-    "eslint": "^8.28.0",
-    "eslint-plugin-mui-path-imports": "^0.0.5",
-    "prettier": "^2.8.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-is": "^18.2.0",
-    "rollup": "^2.79.1",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-dts": "^5.0.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "size-limit": "^8.1.0",
-    "storybook-dark-mode": "^1.1.2",
-    "tslib": "^2.4.1",
-    "typescript": "^4.9.3",
-    "webpack": "^5.75.0"
+    "prettier": "latest",
+    "turbo": "1.6.1"
   },
-  "peerDependencies": {
-    "@emotion/react": ">=11",
-    "@emotion/styled": ">=11",
-    "@mui/icons-material": ">=5",
-    "@mui/material": ">=5",
-    "react": ">=17.0",
-    "react-dom": ">=17.0"
+  "engines": {
+    "node": ">=14.0.0"
   },
-  "dependencies": {
-    "@tanstack/match-sorter-utils": "8.7.0",
-    "@tanstack/react-table": "8.7.0",
-    "react-virtual": "^2.10.4"
-  },
-  "resolutions": {
-    "enhanced-resolve": "5.10.0"
-  }
+  "dependencies": {},
+  "packageManager": "pnpm@7.13.2"
 }
