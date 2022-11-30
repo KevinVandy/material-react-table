@@ -59,6 +59,7 @@ export const LinkCards = () => {
             <Card
               elevation={4}
               sx={(theme) => ({
+                alignItems: 'center',
                 borderRadius: '0.5rem',
                 color: theme.palette.primary.dark,
                 cursor: 'pointer',
@@ -69,7 +70,6 @@ export const LinkCards = () => {
                 gap: '1rem',
                 justifyContent: 'center',
                 p: '1rem',
-                textAlign: 'center',
                 width: '10rem',
                 '&:hover': {
                   boxShadow: `1px 4px 8px ${alpha(
@@ -88,7 +88,6 @@ export const LinkCards = () => {
                 alt={cd.text}
                 width={60}
                 height={60}
-                objectFit="scale-down"
               />
               <Typography>{cd.text}</Typography>
             </Card>

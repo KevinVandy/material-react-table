@@ -55,6 +55,7 @@ export const Contributors = () => {
             <Card
               elevation={4}
               sx={(theme) => ({
+                alignItems: 'center',
                 borderRadius: '0.5rem',
                 color: theme.palette.primary.dark,
                 cursor: 'pointer',
@@ -83,9 +84,8 @@ export const Contributors = () => {
               <Image
                 src={cd.image}
                 alt={cd.name}
-                width={190}
-                height={190}
-                objectFit="scale-down"
+                width={170}
+                height={170}
                 style={{ borderRadius: '4px' }}
               />
               <Typography variant="body1">{cd.name}</Typography>
