@@ -67,7 +67,7 @@ const TopBar: FC<Props> = ({
               )}
             </IconButton>
           )}
-          <Link href="/" passHref>
+          <Link href="/" passHref legacyBehavior>
             <Typography
               sx={{
                 alignItems: 'center',

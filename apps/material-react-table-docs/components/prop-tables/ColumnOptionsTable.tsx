@@ -96,7 +96,7 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
           enableGlobalFilter: false,
           header: 'More Info Links',
           Cell: ({ cell, row }) => (
-            <Link href={cell.getValue() as string} passHref>
+            <Link href={cell.getValue() as string} passHref legacyBehavior>
               <MuiLink
                 target={
                   (cell.getValue() as string).startsWith('http')

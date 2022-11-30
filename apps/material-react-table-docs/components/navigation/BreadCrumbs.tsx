@@ -33,35 +33,33 @@ const BreadCrumbs: FC = () => {
     })),
   };
 
-  return (
-    <>
-      <Head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-      </Head>
-      <MuiBreadcrumbs aria-label="breadcrumb" sx={{ pt: '1rem' }}>
-        {breadCrumbLinks.map((link, index) => (
-          <Link key={index} href={link} passHref>
-            <MuiLink
-              color="inherit"
-              sx={{ cursor: 'pointer', textTransform: 'capitalize' }}
-              underline="hover"
-            >
-              {link
-                .split('/')
-                .pop()
-                ?.replaceAll('-', ' ')
-                ?.replaceAll('css', 'CSS')
-                ?.replaceAll(' ui', ' UI')
-                ?.replaceAll('api', 'API')}
-            </MuiLink>
-          </Link>
-        ))}
-      </MuiBreadcrumbs>
-    </>
-  );
+  return <>
+    <Head>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+    </Head>
+    <MuiBreadcrumbs aria-label="breadcrumb" sx={{ pt: '1rem' }}>
+      {breadCrumbLinks.map((link, index) => (
+        <Link key={index} href={link} passHref legacyBehavior>
+          <MuiLink
+            color="inherit"
+            sx={{ cursor: 'pointer', textTransform: 'capitalize' }}
+            underline="hover"
+          >
+            {link
+              .split('/')
+              .pop()
+              ?.replaceAll('-', ' ')
+              ?.replaceAll('css', 'CSS')
+              ?.replaceAll(' ui', ' UI')
+              ?.replaceAll('api', 'API')}
+          </MuiLink>
+        </Link>
+      ))}
+    </MuiBreadcrumbs>
+  </>;
 };
 
 export default BreadCrumbs;

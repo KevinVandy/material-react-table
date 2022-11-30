@@ -99,7 +99,7 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
           disableFilters: true,
           enableGlobalFilter: false,
           Cell: ({ cell, row }) => (
-            <Link href={cell.getValue() as string} passHref>
+            <Link href={cell.getValue() as string} passHref legacyBehavior>
               <MuiLink
                 color={
                   row.original.source === 'MRT'

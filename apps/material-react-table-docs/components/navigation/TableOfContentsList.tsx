@@ -24,7 +24,7 @@ const TableOfContentsList: FC<Props> = ({
       >
         {items.map((item, index) => (
           <li key={index}>
-            <Link href={item.href} passHref>
+            <Link href={item.href} passHref legacyBehavior>
               <MuiLink
                 sx={{
                   color: isFooter ? 'text.secondary' : 'primary.main',

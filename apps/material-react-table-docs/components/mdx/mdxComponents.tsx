@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export const mdxComponents = {
   a: (props: any) => (
-    <Link href={props.href} passHref>
+    <Link href={props.href} passHref legacyBehavior>
       <MuiLink
         target={props.href.startsWith('http') ? '_blank' : undefined}
         rel="noreferrer"

@@ -91,7 +91,7 @@ const HomePage = () => {
           variant="h2"
         >
           Built with{' '}
-          <Link href="https://mui.com/" passHref>
+          <Link href="https://mui.com/" passHref legacyBehavior>
             <MuiLink
               sx={{
                 color: (theme) => theme.palette.primary.dark,
@@ -105,7 +105,7 @@ const HomePage = () => {
             </MuiLink>
           </Link>{' '}
           and&nbsp;
-          <Link href="https://tanstack.com/table/v8" passHref>
+          <Link href="https://tanstack.com/table/v8" passHref legacyBehavior>
             <MuiLink
               color="secondary.main"
               sx={{
@@ -164,82 +164,74 @@ const HomePage = () => {
           }}
         >
           <Link href="/docs/getting-started/install" passHref>
-            <a>
-              <Button
-                endIcon={<ArrowForwardIos />}
-                fullWidth
-                size="large"
-                variant="contained"
-              >
-                Get Started
-              </Button>
-            </a>
+            <Button
+              endIcon={<ArrowForwardIos />}
+              fullWidth
+              size="large"
+              variant="contained"
+            >
+              Get Started
+            </Button>
           </Link>
           <Link href="/docs/api" passHref>
-            <a>
-              <Button
-                endIcon={<ArrowForwardIos />}
-                fullWidth
-                size="large"
-                sx={(theme) => ({
-                  backgroundColor: alpha(theme.palette.primary.main, 0.1),
-                  color: theme.palette.primary.dark,
-                  '&:hover': {
-                    backgroundColor: alpha(
-                      darken(theme.palette.primary.main, 0.1),
-                      0.2,
-                    ),
-                  },
-                })}
-                variant="contained"
-              >
-                API
-              </Button>
-            </a>
+            <Button
+              endIcon={<ArrowForwardIos />}
+              fullWidth
+              size="large"
+              sx={(theme) => ({
+                backgroundColor: alpha(theme.palette.primary.main, 0.1),
+                color: theme.palette.primary.dark,
+                '&:hover': {
+                  backgroundColor: alpha(
+                    darken(theme.palette.primary.main, 0.1),
+                    0.2,
+                  ),
+                },
+              })}
+              variant="contained"
+            >
+              API
+            </Button>
           </Link>
           <Link href="/docs/examples" passHref>
-            <a>
-              <Button
-                endIcon={<ArrowForwardIos />}
-                fullWidth
-                size="large"
-                sx={(theme) => ({
-                  backgroundColor: alpha(theme.palette.primary.main, 0.1),
-                  color: theme.palette.primary.dark,
-                  '&:hover': {
-                    backgroundColor: alpha(
-                      darken(theme.palette.primary.main, 0.1),
-                      0.2,
-                    ),
-                  },
-                })}
-                variant="contained"
-              >
-                Examples
-              </Button>
-            </a>
+            <Button
+              endIcon={<ArrowForwardIos />}
+              fullWidth
+              size="large"
+              sx={(theme) => ({
+                backgroundColor: alpha(theme.palette.primary.main, 0.1),
+                color: theme.palette.primary.dark,
+                '&:hover': {
+                  backgroundColor: alpha(
+                    darken(theme.palette.primary.main, 0.1),
+                    0.2,
+                  ),
+                },
+              })}
+              variant="contained"
+            >
+              Examples
+            </Button>
           </Link>
           <Link href="/docs/guides" passHref>
-            <a>
-              <Button
-                endIcon={<ArrowForwardIos />}
-                fullWidth
-                size="large"
-                sx={(theme) => ({
-                  backgroundColor: alpha(theme.palette.primary.main, 0.1),
-                  color: theme.palette.primary.dark,
-                  '&:hover': {
-                    backgroundColor: alpha(
-                      darken(theme.palette.primary.main, 0.1),
-                      0.2,
-                    ),
-                  },
-                })}
-                variant="contained"
-              >
-                Guides
-              </Button>
-            </a>
+            <Button
+              endIcon={<ArrowForwardIos />}
+              fullWidth
+              size="large"
+              sx={(theme) => ({
+                backgroundColor: alpha(theme.palette.primary.main, 0.1),
+                color: theme.palette.primary.dark,
+                '&:hover': {
+                  backgroundColor: alpha(
+                    darken(theme.palette.primary.main, 0.1),
+                    0.2,
+                  ),
+                },
+              })}
+              variant="contained"
+            >
+              Guides
+            </Button>
           </Link>
         </Box>
         <Box>

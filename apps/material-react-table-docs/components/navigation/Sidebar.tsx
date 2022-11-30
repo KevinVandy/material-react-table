@@ -137,13 +137,13 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
                   <li>
                     <Divider />
                   </li>
-                  <Link href={href1 ?? ''} passHref>
+                  <Link href={href1 ?? ''} passHref legacyBehavior>
                     <ListItemHeaderLevel1
                       divider={divider1}
                       selected={pathname === href1}
                       ref={(node) => selectedItemRef(node, pathname === href1)}
                     >
-                      <Link href={href1 ?? ''} passHref>
+                      <Link href={href1 ?? ''} passHref legacyBehavior>
                         <MenuLink>{label1}</MenuLink>
                       </Link>
                     </ListItemHeaderLevel1>
@@ -166,7 +166,7 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
                                 selectedItemRef(node, pathname === href2)
                               }
                             >
-                              <Link href={href2 ?? ''} passHref>
+                              <Link href={href2 ?? ''} passHref legacyBehavior>
                                 <MenuLink>{label2}</MenuLink>
                               </Link>
                             </ListItemHeaderLevel2>
@@ -187,7 +187,7 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
                                     }
                                     key={label3}
                                   >
-                                    <Link href={href3 ?? ''} passHref>
+                                    <Link href={href3 ?? ''} passHref legacyBehavior>
                                       <MenuLink
                                         target={
                                           external3 ? '_blank' : undefined
@@ -220,7 +220,7 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
                           }
                           key={label2}
                         >
-                          <Link href={href2 ?? ''} passHref>
+                          <Link href={href2 ?? ''} passHref legacyBehavior>
                             <MenuLink
                               target={external2 ? '_blank' : undefined}
                               rel="noopener"
@@ -249,7 +249,7 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
                   ref={(node) => selectedItemRef(node, pathname === href1)}
                   key={label1}
                 >
-                  <Link href={href1 ?? ''} passHref>
+                  <Link href={href1 ?? ''} passHref legacyBehavior>
                     <MenuLink
                       target={external1 ? '_blank' : undefined}
                       rel="noopener"

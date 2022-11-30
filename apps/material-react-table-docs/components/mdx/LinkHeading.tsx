@@ -36,7 +36,7 @@ export const LinkHeading: FC<Props> = ({ children, tableId, ...rest }) => {
   };
 
   return (
-    <Link href={href} passHref>
+    <Link href={href} passHref legacyBehavior>
       <MuiLink
         sx={{
           color: 'inherit',
