@@ -5,12 +5,12 @@ importers:
   .:
     specifiers:
       prettier: latest
-      turbo: 1.6.3
+      turbo: latest
     devDependencies:
       prettier: 2.8.0
       turbo: 1.6.3
 
-  apps/material-react-table-docs:
+  apps/docs:
     specifiers:
       '@docsearch/js': 3.3.0
       '@emotion/react': ^11.10.5
@@ -79,6 +79,77 @@ importers:
       raw-loader: 4.0.2
       typescript: 4.9.3
 
+  apps/storybook:
+    specifiers:
+      '@babel/core': ^7.20.5
+      '@babel/preset-react': ^7.18.6
+      '@emotion/react': ^11.10.5
+      '@emotion/styled': ^11.10.5
+      '@faker-js/faker': ^7.6.0
+      '@mui/icons-material': ^5.10.16
+      '@mui/material': ^5.10.16
+      '@storybook/addon-a11y': ^6.5.13
+      '@storybook/addon-actions': ^6.5.13
+      '@storybook/addon-essentials': ^6.5.13
+      '@storybook/addon-info': ^5.3.21
+      '@storybook/addon-links': ^6.5.13
+      '@storybook/addon-storysource': ^6.5.13
+      '@storybook/addons': ^6.5.13
+      '@storybook/builder-webpack5': ^6.5.13
+      '@storybook/manager-webpack5': ^6.5.13
+      '@storybook/react': ^6.5.13
+      '@tanstack/react-table': ^8.7.0
+      '@types/node': ^18.11.9
+      '@types/react': ^18.0.25
+      '@types/react-dom': ^18.0.9
+      '@typescript-eslint/eslint-plugin': ^5.45.0
+      '@typescript-eslint/parser': ^5.45.0
+      babel-loader: ^9.1.0
+      eslint: ^8.28.0
+      material-react-table: workspace:*
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      react-is: ^18.2.0
+      storybook-dark-mode: ^1.1.2
+      tslib: ^2.4.1
+      typescript: ^4.9.3
+      webpack: ^5.75.0
+    dependencies:
+      '@emotion/react': 11.10.5_hebjedjhazelsvuzebr6t7ng24
+      '@emotion/styled': 11.10.5_5tjec44ezuvlpkchcqgxkxryqi
+      '@faker-js/faker': 7.6.0
+      '@mui/icons-material': 5.10.16_ge2ne5gh5gcqikeclw577gsblu
+      '@mui/material': 5.10.16_thp4wrxo45nyllusrnt46mid4u
+      '@tanstack/react-table': 8.7.0_biqbaboplfbrettd7655fr4n2y
+      material-react-table: link:../../packages/material-react-table
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-is: 18.2.0
+    devDependencies:
+      '@babel/core': 7.20.5
+      '@babel/preset-react': 7.18.6_@babel+core@7.20.5
+      '@storybook/addon-a11y': 6.5.13_biqbaboplfbrettd7655fr4n2y
+      '@storybook/addon-actions': 6.5.13_biqbaboplfbrettd7655fr4n2y
+      '@storybook/addon-essentials': 6.5.13_tisl5yypintgksfuycoalhwds4
+      '@storybook/addon-info': 5.3.21_2zx2umvpluuhvlq44va5bta2da
+      '@storybook/addon-links': 6.5.13_biqbaboplfbrettd7655fr4n2y
+      '@storybook/addon-storysource': 6.5.13_biqbaboplfbrettd7655fr4n2y
+      '@storybook/addons': 6.5.13_biqbaboplfbrettd7655fr4n2y
+      '@storybook/builder-webpack5': 6.5.13_gpshdmfc4w665ax2rx6w5ydgtu
+      '@storybook/manager-webpack5': 6.5.13_gpshdmfc4w665ax2rx6w5ydgtu
+      '@storybook/react': 6.5.13_muqndrurhpv5u6wszxsbzc64fe
+      '@types/node': 18.11.9
+      '@types/react': 18.0.25
+      '@types/react-dom': 18.0.9
+      '@typescript-eslint/eslint-plugin': 5.45.0_czs5uoqkd3podpy6vgtsxfc7au
+      '@typescript-eslint/parser': 5.45.0_hsf322ms6xhhd4b5ne6lb74y4a
+      babel-loader: 9.1.0_ztqwsvkb6z73luspkai6ilstpu
+      eslint: 8.28.0
+      storybook-dark-mode: 1.1.2_biqbaboplfbrettd7655fr4n2y
+      tslib: 2.4.1
+      typescript: 4.9.3
+      webpack: 5.75.0
+
   packages/material-react-table:
     specifiers:
       '@babel/core': ^7.20.5
@@ -92,16 +163,6 @@ importers:
       '@rollup/plugin-node-resolve': ^15.0.1
       '@rollup/plugin-typescript': ^10.0.1
       '@size-limit/preset-small-lib': ^8.1.0
-      '@storybook/addon-a11y': ^6.5.13
-      '@storybook/addon-actions': ^6.5.13
-      '@storybook/addon-essentials': ^6.5.13
-      '@storybook/addon-info': ^5.3.21
-      '@storybook/addon-links': ^6.5.13
-      '@storybook/addon-storysource': ^6.5.13
-      '@storybook/addons': ^6.5.13
-      '@storybook/builder-webpack5': ^6.5.13
-      '@storybook/manager-webpack5': ^6.5.13
-      '@storybook/react': ^6.5.13
       '@tanstack/match-sorter-utils': 8.7.0
       '@tanstack/react-table': 8.7.0
       '@types/node': ^18.11.9
@@ -122,7 +183,6 @@ importers:
       rollup-plugin-dts: ^5.0.0
       rollup-plugin-peer-deps-external: ^2.2.4
       size-limit: ^8.1.0
-      storybook-dark-mode: ^1.1.2
       tslib: ^2.4.1
       typescript: ^4.9.3
       webpack: ^5.75.0
@@ -142,16 +202,6 @@ importers:
       '@rollup/plugin-node-resolve': 15.0.1_rollup@2.79.1
       '@rollup/plugin-typescript': 10.0.1_aalyefftcnrin63wtgzqkmrdqa
       '@size-limit/preset-small-lib': 8.1.0_size-limit@8.1.0
-      '@storybook/addon-a11y': 6.5.13_biqbaboplfbrettd7655fr4n2y
-      '@storybook/addon-actions': 6.5.13_biqbaboplfbrettd7655fr4n2y
-      '@storybook/addon-essentials': 6.5.13_tisl5yypintgksfuycoalhwds4
-      '@storybook/addon-info': 5.3.21_2zx2umvpluuhvlq44va5bta2da
-      '@storybook/addon-links': 6.5.13_biqbaboplfbrettd7655fr4n2y
-      '@storybook/addon-storysource': 6.5.13_biqbaboplfbrettd7655fr4n2y
-      '@storybook/addons': 6.5.13_biqbaboplfbrettd7655fr4n2y
-      '@storybook/builder-webpack5': 6.5.13_gpshdmfc4w665ax2rx6w5ydgtu
-      '@storybook/manager-webpack5': 6.5.13_gpshdmfc4w665ax2rx6w5ydgtu
-      '@storybook/react': 6.5.13_muqndrurhpv5u6wszxsbzc64fe
       '@types/node': 18.11.9
       '@types/react': 18.0.25
       '@types/react-dom': 18.0.9
@@ -169,7 +219,6 @@ importers:
       rollup-plugin-dts: 5.0.0_k35zwyycrckt5xfsejji7kbwn4
       rollup-plugin-peer-deps-external: 2.2.4_rollup@2.79.1
       size-limit: 8.1.0
-      storybook-dark-mode: 1.1.2_biqbaboplfbrettd7655fr4n2y
       tslib: 2.4.1
       typescript: 4.9.3
       webpack: 5.75.0
@@ -773,7 +822,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.12.9
-      '@babel/helper-plugin-utils': 7.10.4
+      '@babel/helper-plugin-utils': 7.20.2
       '@babel/plugin-syntax-object-rest-spread': 7.8.3_@babel+core@7.12.9
       '@babel/plugin-transform-parameters': 7.20.5_@babel+core@7.12.9
     dev: true
