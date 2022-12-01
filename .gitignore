@@ -16,9 +16,10 @@ build
 # mrt
 *.log
 .cache
+/dist
 dist
 storybook-static
-/locales
+# locales
 
 # misc
 .DS_Store
