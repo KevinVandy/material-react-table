@@ -945,6 +945,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
       table: MRT_TableInstance<TData>;
       values: Record<LiteralUnion<string & DeepKeys<TData>>, any>;
     }) => Promise<void> | void;
+    onEditingRowCancel?: OnChangeFn<MRT_Row<TData> | null>;
     onEditingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
     onColumnFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterOption }>;
     onGlobalFilterFnChange?: OnChangeFn<MRT_FilterOption>;
