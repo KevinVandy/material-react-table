@@ -1,0 +1,40 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "lint": {
+      "outputs": []
+    },
+    "docs:build": {
+      "outputs": [
+        "dist/**",
+        "build/**"
+      ]
+    },
+    "docs:dev": {
+      "cache": false
+    },
+    "docs:sitemap": {
+      "cache": false
+    },
+    "docs:start": {
+      "cache": false
+    },
+    "lib:build": {
+      "outputs": [
+        "dist/**",
+        "locales/**"
+      ]
+    },
+    "storybook": {
+      "cache": false
+    },
+    "storybook:build": {
+      "outputs": [
+        "storybook-static/**"
+      ]
+    },
+    "storybook:dev": {
+      "cache": false
+    }
+  }
+}

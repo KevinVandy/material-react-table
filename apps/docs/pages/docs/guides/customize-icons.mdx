@@ -1,0 +1,45 @@
+import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import Example from '../../../examples/font-awesome-icons';
+
+<Head>
+  <title>Customize Icons Feature Guide - Material React Table Docs</title>
+  <meta
+    name="description"
+    content="How to use custom icons such as from Font Awesome in Material React Table"
+  />
+</Head>
+
+## Customizing Icons Feature Guide
+
+Material React Table uses [Material Icons](https://mui.com/material-ui/material-icons) by default for all of its internal icons.
+
+If you need to, you can customize and replace some or all of the icons with your own custom icons. You can either use other Material Icons or icons from a completely different library.
+
+### Relevant Props
+
+<RootPropTable onlyProps={new Set(['icons'])} />
+
+### Replace with Custom Icons
+
+To replace a default icon, specify the icon in the `icons` prop. You should get TS hints for the name of the icons you can replace, but you can also consult [this source file](https://github.com/KevinVandy/material-react-table/blob/main/packages/material-react-table/src/icons.ts) for a list of all the icons you can replace.
+
+```jsx
+<MaterialTable
+  columns={columns}
+  data={data}
+  icons={{
+    //change sort icon, connect internal props so that it gets styled correctly
+    ArrowDownwardIcon: (props) =>  <FontAwesomeIcon icon={faSortDown} {...props} />,
+    SearchIcon: () => <FontAwesomeIcon icon={faSearch} />,
+    SortIcon: (props) => (<FontAwesomeIcon icon={faArrowDownWideShort} {...props} />), //best practice
+  }}
+```
+
+Some icons have `style` props that get applied to them internally. So, in order to preserve the ability of those Icons to be styled with the correct paddings, margins, or rotations, you should pass in `{...props}` to your custom icon component as a best practice.
+
+### Font Awesome Example
+
+Here is an example where we use icons from a completely different library, [Font Awesome](https://fontawesome.com/).
+
+<Example />

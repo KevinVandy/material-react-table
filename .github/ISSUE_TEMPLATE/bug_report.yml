@@ -48,7 +48,7 @@ body:
     attributes:
       label: Minimal, Reproducible Example - (Optional, but Recommended)
       description: |
-        Please add a link to a minimal reproduction. This can really speed up the diagnosis of the problem! A Code Sandbox is preferable, but simple code snippets are also acceptable here. Feel free to fork any of the official CodeSandbox examples: https://github.com/KevinVandy/material-react-table/tree/main/material-react-table-docs/examples
+        Please add a link to a minimal reproduction. This can really speed up the diagnosis of the problem! A Code Sandbox is preferable, but simple code snippets are also acceptable here. Feel free to fork any of the official CodeSandbox examples: https://github.com/KevinVandy/material-react-table/tree/main/apps/docs/examples
       placeholder: |
         e.g. Code Sandbox, Stackblitz, or relevant code snippets.
     validations:
