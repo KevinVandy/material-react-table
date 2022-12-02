@@ -306,7 +306,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: "'text' | 'select' | 'multi-select' | 'range'"
+    type: "'text' | 'select' | 'multi-select' | 'range'",
   },
   {
     columnOption: 'header',

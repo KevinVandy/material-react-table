@@ -187,7 +187,11 @@ const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
                                     }
                                     key={label3}
                                   >
-                                    <Link href={href3 ?? ''} passHref legacyBehavior>
+                                    <Link
+                                      href={href3 ?? ''}
+                                      passHref
+                                      legacyBehavior
+                                    >
                                       <MenuLink
                                         target={
                                           external3 ? '_blank' : undefined

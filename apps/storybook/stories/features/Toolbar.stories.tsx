@@ -363,9 +363,7 @@ export const renderCustomTopToolbar: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    renderTopToolbar={() => (
-      <Box sx={{ p: '2rem' }}>Custom Top Toolbar</Box>
-    )}
+    renderTopToolbar={() => <Box sx={{ p: '2rem' }}>Custom Top Toolbar</Box>}
   />
 );
 

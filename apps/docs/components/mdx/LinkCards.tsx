@@ -83,12 +83,7 @@ export const LinkCards = () => {
                 },
               })}
             >
-              <Image
-                src={cd.image}
-                alt={cd.text}
-                width={60}
-                height={60}
-              />
+              <Image src={cd.image} alt={cd.text} width={60} height={60} />
               <Typography>{cd.text}</Typography>
             </Card>
           </Link>

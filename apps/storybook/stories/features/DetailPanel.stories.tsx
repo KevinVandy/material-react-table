@@ -1,6 +1,8 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import MaterialReactTable, { MaterialReactTableProps } from 'material-react-table';
+import MaterialReactTable, {
+  MaterialReactTableProps,
+} from 'material-react-table';
 import { faker } from '@faker-js/faker';
 
 const meta: Meta = {

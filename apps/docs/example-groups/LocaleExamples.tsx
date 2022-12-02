@@ -85,7 +85,12 @@ const LocaleExamples = () => {
           variant="scrollable"
         >
           {supportedLocales.map((locale) => (
-            <Tab label={locale} key={locale} value={locale} sx={{width: '2rem'}} />
+            <Tab
+              label={locale}
+              key={locale}
+              value={locale}
+              sx={{ width: '2rem' }}
+            />
           ))}
         </Tabs>
       </Box>
