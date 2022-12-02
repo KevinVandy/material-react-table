@@ -827,6 +827,16 @@ export const rootProps: PropRow[] = [
     type: '(e: unknown) => boolean',
   },
   {
+    propName: 'layoutMode',
+    defaultValue: 'semantic',
+    description: '',
+    link: '/docs/guides/',
+    linkText: 'TODO',
+    required: false,
+    source: 'MRT',
+    type: "'semantic' | 'grid'",
+  },
+  {
     propName: 'localization',
     defaultValue: '',
     description: '',

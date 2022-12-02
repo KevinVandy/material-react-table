@@ -13,8 +13,6 @@
   "ignorePatterns": [
     "dist/",
     "locales/",
-    "material-react-table-docs/",
-    "node_modules/",
-    "stories/"
+    "node_modules/"
   ]
 }

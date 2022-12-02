@@ -15,7 +15,8 @@
     "lib:build": "cp README.md packages/material-react-table/README.md && turbo run lib:build",
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
     "lint": "turbo run lint",
-    "storybook": "turbo run storybook"
+    "storybook": "turbo run storybook",
+    "storybook:dev": "turbo run storybook"
   },
   "devDependencies": {
     "prettier": "latest",
