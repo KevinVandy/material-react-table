@@ -1475,6 +1475,16 @@ export const rootProps: PropRow[] = [
     type: '({ exitEditingMode, row, table, values}) => Promise<void> | void',
   },
   {
+    propName: 'onEditingRowCancel',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: 'MRT',
+    type: 'OnChangeFn<MRT_Row<TData> | null>',
+  },
+  {
     propName: 'onPaginationChange',
     defaultValue: '',
     description:

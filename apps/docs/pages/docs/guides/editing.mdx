@@ -32,6 +32,7 @@ There are 4 visually distinct editing modes to choose from, whether you want to 
       'onEditingCellChange',
       'onEditingRowChange',
       'onEditingRowSave',
+      'onEditingRowCancel',
     ])
   }
 />
@@ -69,6 +70,8 @@ The `row` editing mode is an inline row editing mode. When edit mode is activate
 You must provide an `onEditingRowSave` callback function prop where you will get access to the updated row data so that changes can be processed and saved. It is up to you how you handle the data. This function has a `exitEditingMode` parameter that must be called in order to exit editing mode upon save. The reason for this is so that you can perform validation checks before letting the modal close.
 
 > The `onEditingRowSave` callback function prop includes a `exitEditingMode` parameter that must be called in order to exit editing mode upon save. The reason for this is so that you can perform validation checks before letting the modal close.
+
+If you are implementing validation, you may need to use `onEditingRowCancel` to clear the validation error state.  This is demonstrated in the [Editing (Crud)](/docs/examples/editing-crud) example.
 
 <EditingRowExample />
 

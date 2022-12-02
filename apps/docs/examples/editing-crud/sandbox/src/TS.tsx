@@ -52,6 +52,12 @@ const Example: FC = () => {
       }
     };
 
+  const handleCancelRowEdits =
+    async () => {
+      //Clear validation errors
+      setValidationErrors({});
+    };
+
   const handleDeleteRow = useCallback(
     (row: MRT_Row<Person>) => {
       if (
@@ -175,6 +181,7 @@ const Example: FC = () => {
         enableColumnOrdering
         enableEditing
         onEditingRowSave={handleSaveRowEdits}
+        onEditingRowCancel={handleCancelRowEdits}
         renderRowActions={({ row, table }) => (
           <Box sx={{ display: 'flex', gap: '1rem' }}>
             <Tooltip arrow placement="left" title="Edit">
