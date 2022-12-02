@@ -1,5 +1,5 @@
 {
-  "name": "material-tanstack-table",
+  "name": "material-react-table-turborepo",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -16,11 +16,12 @@
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
     "lint": "turbo run lint",
     "storybook": "turbo run storybook",
+    "storybook:build": "turbo run storybook:build",
     "storybook:dev": "turbo run storybook"
   },
   "devDependencies": {
-    "prettier": "latest",
-    "turbo": "latest"
+    "prettier": "^2.8.0",
+    "turbo": "^1.6.3"
   },
   "engines": {
     "node": ">=14.0.0"

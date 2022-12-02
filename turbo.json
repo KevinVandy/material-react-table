@@ -26,7 +26,15 @@
       ]
     },
     "storybook": {
-      "outputs": []
+      "cache": false
+    },
+    "storybook:build": {
+      "outputs": [
+        "storybook-static/**"
+      ]
+    },
+    "storybook:dev": {
+      "cache": false
     }
   }
 }

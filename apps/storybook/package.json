@@ -2,7 +2,8 @@
   "name": "material-react-table-storybook",
   "private": true,
   "scripts": {
-    "build-storybook": "build-storybook",
+    "storybook:build": "build-storybook",
+    "storybook:dev": "start-storybook -p 6006",
     "storybook": "start-storybook -p 6006"
   },
   "devDependencies": {
@@ -21,12 +22,9 @@
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
-    "@typescript-eslint/eslint-plugin": "^5.45.0",
-    "@typescript-eslint/parser": "^5.45.0",
     "babel-loader": "^9.1.0",
     "eslint": "^8.28.0",
     "storybook-dark-mode": "^1.1.2",
-    "tslib": "^2.4.1",
     "typescript": "^4.9.3",
     "webpack": "^5.75.0"
   },

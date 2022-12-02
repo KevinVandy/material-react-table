@@ -4,8 +4,8 @@ importers:
 
   .:
     specifiers:
-      prettier: latest
-      turbo: latest
+      prettier: ^2.8.0
+      turbo: ^1.6.3
     devDependencies:
       prettier: 2.8.0
       turbo: 1.6.3
@@ -26,6 +26,7 @@ importers:
       '@mui/x-date-pickers': ^5.0.9
       '@next/mdx': ^13.0.5
       '@tanstack/react-query': ^4.18.0
+      '@tanstack/react-table': ^8.7.0
       '@types/mdx': ^2.0.3
       '@types/node': ^18.11.9
       '@types/react': ^18.0.25
@@ -59,6 +60,7 @@ importers:
       '@mui/x-date-pickers': 5.0.9_edqowxdtwfthf2hfmfirfut5oa
       '@next/mdx': 13.0.6_wuv4qx5dshjptmdbtsqqkih5iu
       '@tanstack/react-query': 4.19.0_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-table': 8.7.0_biqbaboplfbrettd7655fr4n2y
       '@types/mdx': 2.0.3
       axios: 1.2.0
       dayjs: 1.11.6
@@ -102,8 +104,6 @@ importers:
       '@types/node': ^18.11.9
       '@types/react': ^18.0.25
       '@types/react-dom': ^18.0.9
-      '@typescript-eslint/eslint-plugin': ^5.45.0
-      '@typescript-eslint/parser': ^5.45.0
       babel-loader: ^9.1.0
       eslint: ^8.28.0
       material-react-table: workspace:*
@@ -111,7 +111,6 @@ importers:
       react-dom: ^18.2.0
       react-is: ^18.2.0
       storybook-dark-mode: ^1.1.2
-      tslib: ^2.4.1
       typescript: ^4.9.3
       webpack: ^5.75.0
     dependencies:
@@ -141,12 +140,9 @@ importers:
       '@types/node': 18.11.10
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.9
-      '@typescript-eslint/eslint-plugin': 5.45.0_czs5uoqkd3podpy6vgtsxfc7au
-      '@typescript-eslint/parser': 5.45.0_hsf322ms6xhhd4b5ne6lb74y4a
       babel-loader: 9.1.0_ztqwsvkb6z73luspkai6ilstpu
       eslint: 8.28.0
       storybook-dark-mode: 1.1.2_biqbaboplfbrettd7655fr4n2y
-      tslib: 2.4.1
       typescript: 4.9.3
       webpack: 5.75.0
 
@@ -170,7 +166,6 @@ importers:
       '@types/react-dom': ^18.0.9
       '@typescript-eslint/eslint-plugin': ^5.45.0
       '@typescript-eslint/parser': ^5.45.0
-      babel-loader: ^9.1.0
       eslint: ^8.28.0
       eslint-plugin-mui-path-imports: ^0.0.5
       react: ^18.2.0
@@ -184,7 +179,6 @@ importers:
       size-limit: ^8.1.0
       tslib: ^2.4.1
       typescript: ^4.9.3
-      webpack: ^5.75.0
     dependencies:
       '@tanstack/match-sorter-utils': 8.7.0
       '@tanstack/react-table': 8.7.0_biqbaboplfbrettd7655fr4n2y
@@ -206,7 +200,6 @@ importers:
       '@types/react-dom': 18.0.9
       '@typescript-eslint/eslint-plugin': 5.45.0_czs5uoqkd3podpy6vgtsxfc7au
       '@typescript-eslint/parser': 5.45.0_hsf322ms6xhhd4b5ne6lb74y4a
-      babel-loader: 9.1.0_ztqwsvkb6z73luspkai6ilstpu
       eslint: 8.28.0
       eslint-plugin-mui-path-imports: 0.0.5_eslint@8.28.0
       react: 18.2.0
@@ -219,7 +212,6 @@ importers:
       size-limit: 8.1.0
       tslib: 2.4.1
       typescript: 4.9.3
-      webpack: 5.75.0
 
 packages:
 
