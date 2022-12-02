@@ -69,7 +69,7 @@ export const StyleCustomStripedRows: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     muiTableBodyProps={{
-      sx: (theme) => ({
+      sx: () => ({
         '& tr:nth-of-type(odd)': {
           backgroundColor: 'limegreen',
         },

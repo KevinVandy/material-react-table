@@ -2,11 +2,11 @@
   "name": "material-react-table-docs",
   "private": true,
   "scripts": {
-    "docs-build": "next build",
-    "docs-dev": "next dev",
+    "docs:build": "next build",
+    "docs:dev": "next dev",
     "lint": "next lint",
-    "sitemap": "next-sitemap --config ./next-sitemap.config.cjs",
-    "start": "next start"
+    "docs:sitemap": "next-sitemap --config ./next-sitemap.config.cjs",
+    "docs:start": "next start"
   },
   "dependencies": {
     "@docsearch/js": "3.3.0",

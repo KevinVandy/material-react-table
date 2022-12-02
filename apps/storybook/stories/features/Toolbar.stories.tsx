@@ -113,7 +113,7 @@ export const TableTitle: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableRowSelection
-    renderTopToolbarCustomActions={(table) => {
+    renderTopToolbarCustomActions={() => {
       return <Typography variant="h4">Table Title</Typography>;
     }}
   />
@@ -124,7 +124,7 @@ export const CustomTopToolbarActions: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableRowSelection
-    renderTopToolbarCustomActions={(table) => {
+    renderTopToolbarCustomActions={() => {
       const handleCreateNewUser = () => {
         prompt('Create new user modal');
       };
@@ -149,7 +149,7 @@ export const CustomBottomToolbarActions: Story<
     columns={columns}
     data={data}
     enableRowSelection
-    renderBottomToolbarCustomActions={(table) => {
+    renderBottomToolbarCustomActions={() => {
       const handleCreateNewUser = () => {
         prompt('Create new user modal');
       };
@@ -363,7 +363,7 @@ export const renderCustomTopToolbar: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    renderTopToolbar={({ table }) => (
+    renderTopToolbar={() => (
       <Box sx={{ p: '2rem' }}>Custom Top Toolbar</Box>
     )}
   />
@@ -373,7 +373,7 @@ export const renderCustomBottomToolbar: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    renderBottomToolbar={({ table }) => (
+    renderBottomToolbar={() => (
       <Box sx={{ p: '2rem' }}>Custom Bottom Toolbar</Box>
     )}
   />

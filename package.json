@@ -7,9 +7,12 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
     "dev": "turbo run dev --parallel",
-    "docs-dev": "turbo run docs-dev",
+    "docs:build": "turbo run docs:build",
+    "docs:dev": "turbo run docs:dev",
+    "docs:sitemap": "turbo run docs:sitemap",
+    "docs:start": "turbo run docs:start",
+    "lib:build": "cp README.md packages/material-react-table/README.md && turbo run lib:build",
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
     "lint": "turbo run lint",
     "storybook": "turbo run storybook"

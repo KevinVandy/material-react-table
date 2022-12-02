@@ -75,7 +75,7 @@ export default [
       copy({
         targets: [
           ...['cjs', 'esm'].map((format) => ({
-            src: `./dist/esm/_locales/${locale}.d.ts`,
+            src: `./dist/esm/types/_locales/${locale}.d.ts`,
             dest: './locales',
             rename: () =>
               format === 'esm' ? `${locale}.${format}.d.ts` : `${locale}.d.ts`,

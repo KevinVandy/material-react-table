@@ -17,6 +17,7 @@
     ],
     "module": "esnext",
     "moduleResolution": "node",
+    "noImplicitAny": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,

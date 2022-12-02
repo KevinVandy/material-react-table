@@ -49,7 +49,7 @@ const initData = [...Array(25)].map(() => ({
 }));
 
 export const RowDraggingEnabled: Story<MaterialReactTableProps> = () => {
-  const [data, setData] = React.useState(() => initData);
+  const [data, _setData] = React.useState(() => initData);
 
   return (
     <MaterialReactTable
