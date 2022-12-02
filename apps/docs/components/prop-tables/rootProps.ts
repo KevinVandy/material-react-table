@@ -1482,7 +1482,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: 'MRT',
-    type: 'OnChangeFn<MRT_Row<TData> | null>',
+    type: '({ row, table }) => void',
   },
   {
     propName: 'onPaginationChange',

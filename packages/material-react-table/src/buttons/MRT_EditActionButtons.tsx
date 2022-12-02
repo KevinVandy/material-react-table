@@ -22,7 +22,7 @@ export const MRT_EditActionButtons = <TData extends Record<string, any> = {}>({
       icons: { CancelIcon, SaveIcon },
       localization,
       onEditingRowSave,
-      onEditingRowCancel
+      onEditingRowCancel,
     },
     refs: { editInputRefs },
     setEditingRow,
@@ -30,9 +30,9 @@ export const MRT_EditActionButtons = <TData extends Record<string, any> = {}>({
   const { editingRow } = getState();
 
   const handleCancel = () => {
-    onEditingRowCancel?.(row);
+    onEditingRowCancel?.({ row, table });
     setEditingRow(null);
-  }
+  };
 
   const handleSave = () => {
     //look for auto-filled input values

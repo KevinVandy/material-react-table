@@ -935,6 +935,13 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     onDraggingColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
     onDraggingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
     onEditingCellChange?: OnChangeFn<MRT_Cell<TData> | null>;
+    onEditingRowCancel?: ({
+      row,
+      table,
+    }: {
+      row: MRT_Row<TData>;
+      table: MRT_TableInstance<TData>;
+    }) => void;
     onEditingRowSave?: ({
       exitEditingMode,
       row,
@@ -946,7 +953,6 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
       table: MRT_TableInstance<TData>;
       values: Record<LiteralUnion<string & DeepKeys<TData>>, any>;
     }) => Promise<void> | void;
-    onEditingRowCancel?: OnChangeFn<MRT_Row<TData> | null>;
     onEditingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
     onColumnFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterOption }>;
     onGlobalFilterFnChange?: OnChangeFn<MRT_FilterOption>;
@@ -1101,7 +1107,7 @@ const MaterialReactTable = <TData extends Record<string, any> = {}>({
   enableTopToolbar = true,
   filterFns,
   icons,
-  layoutMode = "semantic",
+  layoutMode = 'semantic',
   localization,
   positionActionsColumn = 'first',
   positionExpandColumn = 'first',

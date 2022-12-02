@@ -52,11 +52,9 @@ const Example: FC = () => {
       }
     };
 
-  const handleCancelRowEdits =
-    async () => {
-      //Clear validation errors
-      setValidationErrors({});
-    };
+  const handleCancelRowEdits = () => {
+    setValidationErrors({});
+  };
 
   const handleDeleteRow = useCallback(
     (row: MRT_Row<Person>) => {

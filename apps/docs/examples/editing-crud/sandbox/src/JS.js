@@ -35,6 +35,10 @@ const Example = () => {
     }
   };
 
+  const handleCancelRowEdits = () => {
+    setValidationErrors({});
+  };
+
   const handleDeleteRow = useCallback(
     (row) => {
       if (
@@ -156,6 +160,7 @@ const Example = () => {
         enableColumnOrdering
         enableEditing
         onEditingRowSave={handleSaveRowEdits}
+        onEditingRowCancel={handleCancelRowEdits}
         renderRowActions={({ row, table }) => (
           <Box sx={{ display: 'flex', gap: '1rem' }}>
             <Tooltip arrow placement="left" title="Edit">
