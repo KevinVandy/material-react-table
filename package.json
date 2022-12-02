@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "dev": "turbo run dev --parallel",
-    "docs:build": "turbo run docs:build",
+    "docs:build": "turbo run lib:build && turbo run docs:build",
     "docs:dev": "turbo run docs:dev",
     "docs:sitemap": "turbo run docs:sitemap",
     "docs:start": "turbo run docs:start",
