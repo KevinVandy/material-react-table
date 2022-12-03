@@ -2,9 +2,11 @@
   "name": "material-react-table-storybook",
   "private": true,
   "scripts": {
+    "build": "build-storybook",
+    "dev": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook",
-    "storybook:dev": "start-storybook -p 6006",
-    "storybook": "start-storybook -p 6006"
+    "storybook:dev": "start-storybook -p 6006"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
