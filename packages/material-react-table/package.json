@@ -45,6 +45,7 @@
     "node": ">=14"
   },
   "scripts": {
+    "build": "rm -rf dist locales && rollup -c && size-limit",
     "lib:build": "rm -rf dist locales && rollup -c && size-limit",
     "lint": "eslint .",
     "size": "size-limit"

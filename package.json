@@ -7,6 +7,7 @@
     "packages/*"
   ],
   "scripts": {
+    "build": "turbo run build --parallel",
     "dev": "turbo run dev --parallel",
     "docs:build": "turbo run lib:build && turbo run docs:build",
     "docs:dev": "turbo run docs:dev",

@@ -2,6 +2,7 @@
   "name": "material-react-table-docs",
   "private": true,
   "scripts": {
+    "build": "next build",
     "docs:build": "next build",
     "docs:dev": "next dev",
     "lint": "next lint",
