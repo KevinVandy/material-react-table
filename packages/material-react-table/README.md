@@ -188,3 +188,5 @@ _Open in [Code Sandbox](https://codesandbox.io/s/simple-material-react-table-exa
 </a>
 
 PRs are Welcome, but please discuss in [GitHub Discussions](https://github.com/KevinVandy/material-react-table/discussions) or the [Discord Server](https://discord.gg/5wqyRx6fnm) first if it is a large change!
+
+Read the [Contributing Guide](https://github.com/KevinVandy/material-react-table/blob/main/CONTRIBUTING.md) to learn how to run this project locally.

@@ -26,18 +26,16 @@ pnpm i
 
 #### Build the Library
 
+Compile `material-react-table` first so that locales are properly available to the docs site.
+
 ```bash
 pnpm lib:build
 ```
 
-#### Run the Storybook for Local Development
+#### Run the Docs and Storybook for Local Development
 
 ```bash
-pnpm storybook:dev
+pnpm dev
 ```
 
-#### Run the Docs Site for Local Development
-
-```bash
-pnpm docs:dev
-```
+The Docs site will open on `port 3000` and the Storybook site will open on `port 6006`.
