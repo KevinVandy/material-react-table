@@ -47,7 +47,9 @@ export const MRT_TableContainer: FC<Props> = ({ table }) => {
     <TableContainer
       {...tableContainerProps}
       ref={(ref: HTMLDivElement) => {
-        tableContainerRef.current = ref;
+        if (ref) {
+          tableContainerRef.current = ref;
+        }
         if (tableContainerProps?.ref) {
           //@ts-ignore
           tableContainerProps.ref.current = ref;

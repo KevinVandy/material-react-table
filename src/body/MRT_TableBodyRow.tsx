@@ -4,6 +4,7 @@ import { darken, lighten, useTheme } from '@mui/material/styles';
 import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import type { MRT_Row, MRT_TableInstance } from '..';
+import { Virtualizer } from '@tanstack/react-virtual';
 
 interface Props {
   numRows: number;
@@ -11,6 +12,7 @@ interface Props {
   rowIndex: number;
   table: MRT_TableInstance;
   virtualRow?: any;
+  virtualizer?: Virtualizer<any, any>;
 }
 
 export const MRT_TableBodyRow: FC<Props> = ({
@@ -19,6 +21,7 @@ export const MRT_TableBodyRow: FC<Props> = ({
   rowIndex,
   table,
   virtualRow,
+  virtualizer,
 }) => {
   const theme = useTheme();
   const {
@@ -67,17 +70,27 @@ export const MRT_TableBodyRow: FC<Props> = ({
   return (
     <>
       <TableRow
+        data-index={virtualRow.index}
         onDragEnter={handleDragEnter}
         hover
         selected={row.getIsSelected()}
         ref={(node) => {
           rowRef.current = node;
+
+          if (node) {
+            virtualizer?.measureElement(node);
+          }
+
           if (virtualRow?.measureRef) {
             virtualRow.measureRef = node;
           }
         }}
         {...tableRowProps}
         sx={(theme) => ({
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          transform: `translateY(${virtualRow.start}px)`,
           backgroundColor: lighten(theme.palette.background.default, 0.06),
           opacity:
             draggingRow?.id === row.id || hoveredRow?.id === row.id ? 0.5 : 1,

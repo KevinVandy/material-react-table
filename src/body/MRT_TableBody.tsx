@@ -1,6 +1,5 @@
 import React, { FC, memo, useMemo } from 'react';
-import { useVirtual } from 'react-virtual'; //stuck on v2 for now
-// import { useVirtualizer, Virtualizer } from '@tanstack/react-virtual';
+import { useVirtualizer, Virtualizer } from '@tanstack/react-virtual';
 import TableBody from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';
 import { Memo_MRT_TableBodyRow, MRT_TableBodyRow } from './MRT_TableBodyRow';
@@ -25,8 +24,6 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
       manualSorting,
       memoMode,
       muiTableBodyProps,
-      virtualizerInstanceRef,
-      virtualizerProps,
     },
     refs: { tableContainerRef, tablePaperRef },
   } = table;
@@ -36,11 +33,6 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
     muiTableBodyProps instanceof Function
       ? muiTableBodyProps({ table })
       : muiTableBodyProps;
-
-  const vProps =
-    virtualizerProps instanceof Function
-      ? virtualizerProps({ table })
-      : virtualizerProps;
 
   const rows = useMemo(() => {
     if (
@@ -73,52 +65,31 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
     pagination.pageSize,
   ]);
 
-  const virtualizer = enableRowVirtualization
-    ? useVirtual({
-        size: rows.length,
-        parentRef: tableContainerRef,
-        overscan: 15,
-        ...vProps,
+  const virtualizer: Virtualizer<any, any> = enableRowVirtualization
+    ? useVirtualizer({
+        getScrollElement: () => tableContainerRef?.current as HTMLDivElement,
+        count: rows.length,
+        estimateSize: () => 120,
+        measureElement: (element) => element?.getBoundingClientRect().height,
+        overscan: 12,
       })
     : ({} as any);
 
-  if (virtualizerInstanceRef) {
-    virtualizerInstanceRef.current = virtualizer;
-  }
-
-  // const virtualizer: Virtualizer = enableRowVirtualization
-  //   ? useVirtualizer({
-  //       count: rows.length,
-  //       estimateSize: () => (density === 'compact' ? 25 : 50),
-  //       getScrollElement: () => tableContainerRef.current as HTMLDivElement,
-  //       overscan: 15,
-  //       ...vProps,
-  //     })
-  //   : ({} as any);
-
-  const virtualRows = enableRowVirtualization ? virtualizer.virtualItems : [];
-
-  // const virtualRows = enableRowVirtualization
-  //   ? virtualizer.getVirtualItems()
-  //   : [];
-
-  let paddingTop = 0;
-  let paddingBottom = 0;
-  if (enableRowVirtualization) {
-    paddingTop = virtualRows.length ? virtualRows[0].start : 0;
-    paddingBottom = virtualRows.length
-      ? virtualizer.totalSize - virtualRows[virtualRows.length - 1].end
-      : 0;
-  }
-  // if (enableRowVirtualization) {
-  //   paddingTop = !!virtualRows.length ? virtualRows[0].start : 0;
-  //   paddingBottom = !!virtualRows.length
-  //     ? virtualizer.getTotalSize() - virtualRows[virtualRows.length - 1].end
-  //     : 0;
-  // }
+  const virtualRows = enableRowVirtualization
+    ? virtualizer.getVirtualItems()
+    : [];
 
   return (
-    <TableBody {...tableBodyProps}>
+    <TableBody
+      sx={{
+        height: enableRowVirtualization
+          ? `${virtualizer.getTotalSize()}px`
+          : 'inherit',
+        width: '100%',
+        position: 'relative',
+      }}
+      {...tableBodyProps}
+    >
       {!rows.length ? (
         <tr>
           <td colSpan={table.getVisibleLeafColumns().length}>
@@ -140,11 +111,6 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
         </tr>
       ) : (
         <>
-          {enableRowVirtualization && paddingTop > 0 && (
-            <tr>
-              <td style={{ height: `${paddingTop}px` }} />
-            </tr>
-          )}
           {(enableRowVirtualization ? virtualRows : rows).map(
             (rowOrVirtualRow: any, rowIndex: number) => {
               const row = enableRowVirtualization
@@ -159,6 +125,7 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
                   : rowIndex,
                 table,
                 virtualRow: enableRowVirtualization ? rowOrVirtualRow : null,
+                virtualizer,
               };
               return memoMode === 'rows' ? (
                 <Memo_MRT_TableBodyRow {...props} />
@@ -166,11 +133,6 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
                 <MRT_TableBodyRow {...props} />
               );
             },
-          )}
-          {enableRowVirtualization && paddingBottom > 0 && (
-            <tr>
-              <td style={{ height: `${paddingBottom}px` }} />
-            </tr>
           )}
         </>
       )}
