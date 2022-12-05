@@ -71,8 +71,6 @@ You must provide an `onEditingRowSave` callback function prop where you will get
 
 > The `onEditingRowSave` callback function prop includes a `exitEditingMode` parameter that must be called in order to exit editing mode upon save. The reason for this is so that you can perform validation checks before letting the modal close.
 
-If you are implementing validation, you may need to use `onEditingRowCancel` to clear the validation error state.  This is demonstrated in the [Editing (Crud)](/docs/examples/editing-crud) example.
-
 <EditingRowExample />
 
 #### Cell Editing Mode
@@ -112,6 +110,8 @@ const columns = [
 #### Add Validation to Editing Components
 
 You can add validation to the editing components by using the `muiTableBodyCellEditTextFieldProps` events. You can write your validation logic and hook it up to either the `onBlur`, `onChange`, etc. events, then set the `error` and `helperText` props accordingly.
+
+If you are implementing validation, you may also need to use the `onEditingRowCancel` prop to clear the validation error state.
 
 ```tsx
 const [validationErrors, setValidationErrors] = useState({});

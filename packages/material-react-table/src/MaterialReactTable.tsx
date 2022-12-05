@@ -361,7 +361,9 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
    * @example columnDefType: 'display'
    */
   columnDefType?: 'data' | 'display' | 'group';
-  columnFilterModeOptions?: MRT_FilterOption[] | null;
+  columnFilterModeOptions?: Array<
+    LiteralUnion<string & MRT_FilterOption>
+  > | null;
   columns?: MRT_ColumnDef<TData>[];
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;
@@ -619,7 +621,9 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     | 'onStateChange'
     | 'state'
   > & {
-    columnFilterModeOptions?: (MRT_FilterOption | string)[] | null;
+    columnFilterModeOptions?: Array<
+      LiteralUnion<string & MRT_FilterOption>
+    > | null;
     /**
      * The columns to display in the table. `accessorKey`s or `accessorFn`s must match keys in the `data` prop.
      *
