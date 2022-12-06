@@ -30,12 +30,12 @@ export const MRT_TableHead: FC<Props> = ({ table }) => {
 
   return (
     <TableHead
-      component={layoutMode === 'grid' ? 'div' : 'thead'}
-      role="rowgroup"
       {...tableHeadProps}
       sx={(theme) => ({
+        display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
         opacity: 0.97,
-        position: stickyHeader ? 'sticky' : undefined,
+        position: stickyHeader ? 'sticky' : 'relative',
+        top: stickyHeader && layoutMode === 'grid' ? 0 : undefined,
         zIndex: stickyHeader ? 2 : undefined,
         ...(tableHeadProps?.sx instanceof Function
           ? tableHeadProps?.sx(theme)

@@ -318,7 +318,8 @@ export const rootProps: PropRow[] = [
   {
     propName: 'enableFullScreenToggle',
     defaultValue: 'true',
-    description: 'Enable or disable the full screen toggle feature. Disabling will also hide the full screen toggle button.',
+    description:
+      'Enable or disable the full screen toggle feature. Disabling will also hide the full screen toggle button.',
     link: '/docs/guides/full-screen-toggle',
     linkText: 'MRT Full Screen Toggle Docs',
     required: false,

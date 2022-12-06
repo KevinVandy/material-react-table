@@ -32,13 +32,12 @@ export const MRT_Table: FC<Props> = ({ table }) => {
 
   return (
     <Table
-      component={layoutMode === 'grid' ? 'div' : 'table'}
-      role="grid"
       stickyHeader={
         enableStickyHeader || enableRowVirtualization || isFullScreen
       }
       {...tableProps}
       sx={(theme) => ({
+        display: layoutMode === 'grid' ? 'grid' : 'table',
         tableLayout:
           enableColumnResizing || enableRowVirtualization ? 'fixed' : 'auto',
         ...(tableProps?.sx instanceof Function

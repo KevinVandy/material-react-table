@@ -121,7 +121,6 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
   return (
     <TableCell
       align={columnDefType === 'group' ? 'center' : 'left'}
-      component={layoutMode === 'grid' ? 'div' : 'td'}
       colSpan={header.colSpan}
       onDragEnter={handleDragEnter}
       ref={(node) => {
@@ -129,7 +128,6 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
           tableHeadCellRefs.current[column.id] = node as HTMLTableCellElement;
         }
       }}
-      role="columnheader"
       {...tableCellProps}
       sx={(theme: Theme) => ({
         flexDirection: layoutMode === 'grid' ? 'column' : undefined,

@@ -120,8 +120,6 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
 
   return (
     <TableBody
-      component={layoutMode === 'grid' ? 'div' : 'tbody'}
-      role="rowgroup"
       {...tableBodyProps}
       sx={(theme) => ({
         display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
@@ -131,13 +129,18 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
       })}
     >
       {tableBodyProps?.children ?? !rows.length ? (
-        <tr>
-          <td colSpan={table.getVisibleLeafColumns().length}>
+        <tr style={{ display: layoutMode === 'grid' ? 'grid' : 'table-row' }}>
+          <td
+            colSpan={table.getVisibleLeafColumns().length}
+            style={{ display: layoutMode === 'grid' ? 'grid' : 'table-cell' }}
+          >
             <Typography
               sx={{
                 color: 'text.secondary',
                 fontStyle: 'italic',
-                maxWidth: `min(100vw, ${tablePaperRef.current?.clientWidth}px)`,
+                maxWidth: `min(100vw, ${
+                  tablePaperRef.current?.clientWidth ?? 360
+                }px)`,
                 py: '2rem',
                 textAlign: 'center',
                 width: '100%',

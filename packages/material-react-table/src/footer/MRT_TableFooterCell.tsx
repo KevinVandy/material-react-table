@@ -11,7 +11,7 @@ interface Props {
 export const MRT_TableFooterCell: FC<Props> = ({ footer, table }) => {
   const {
     getState,
-    options: { muiTableFooterCellProps },
+    options: { layoutMode, muiTableFooterCellProps },
   } = table;
   const { density } = getState();
   const { column } = footer;
@@ -40,7 +40,9 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, table }) => {
       variant="head"
       {...tableCellProps}
       sx={(theme) => ({
+        display: layoutMode === 'grid' ? 'grid' : 'table-cell',
         fontWeight: 'bold',
+        justifyContent: columnDefType === 'group' ? 'center' : undefined,
         p:
           density === 'compact'
             ? '0.5rem'

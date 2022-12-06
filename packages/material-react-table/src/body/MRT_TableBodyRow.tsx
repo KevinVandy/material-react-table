@@ -47,7 +47,7 @@ export const MRT_TableBodyRow: FC<Props> = ({
     }
   };
 
-  const rowRef = useRef<HTMLDivElement | HTMLTableRowElement | null>(null);
+  const rowRef = useRef<HTMLTableRowElement | null>(null);
 
   const draggingBorder = useMemo(
     () =>
@@ -68,17 +68,15 @@ export const MRT_TableBodyRow: FC<Props> = ({
   return (
     <>
       <TableRow
-        component={layoutMode === 'grid' ? 'div' : 'tr'}
         hover
         onDragEnter={handleDragEnter}
         selected={row.getIsSelected()}
-        ref={(node: HTMLTableRowElement | HTMLDivElement) => {
+        ref={(node: HTMLTableRowElement) => {
           rowRef.current = node;
           if (virtualRow?.measureRef) {
             virtualRow.measureRef = node;
           }
         }}
-        role="row"
         {...tableRowProps}
         sx={(theme) => ({
           backgroundColor: lighten(theme.palette.background.default, 0.06),

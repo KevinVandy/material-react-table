@@ -23,7 +23,7 @@ interface Props {
   enableHover?: boolean;
   numRows: number;
   rowIndex: number;
-  rowRef: RefObject<HTMLDivElement | HTMLTableRowElement>;
+  rowRef: RefObject<HTMLTableRowElement>;
   table: MRT_TableInstance;
 }
 
@@ -169,8 +169,6 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   return (
     <TableCell
-      component={layoutMode === 'grid' ? 'div' : 'td'}
-      role="gridcell"
       {...tableCellProps}
       onDragEnter={handleDragEnter}
       onDoubleClick={handleDoubleClick}

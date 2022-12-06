@@ -12,7 +12,7 @@ export const MRT_TableFooter: FC<Props> = ({ table }) => {
   const {
     getFooterGroups,
     getState,
-    options: { enableStickyFooter, muiTableFooterProps },
+    options: { enableStickyFooter, layoutMode, muiTableFooterProps },
   } = table;
   const { isFullScreen } = getState();
 
@@ -30,6 +30,7 @@ export const MRT_TableFooter: FC<Props> = ({ table }) => {
       sx={(theme) => ({
         backgroundColor: lighten(theme.palette.background.default, 0.06),
         bottom: stickFooter ? 0 : undefined,
+        display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
         opacity: stickFooter ? 0.97 : undefined,
         outline: stickFooter
           ? theme.palette.mode === 'light'

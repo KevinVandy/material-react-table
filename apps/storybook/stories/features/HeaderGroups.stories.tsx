@@ -60,7 +60,12 @@ export const HeaderGroups: Story<MaterialReactTableProps> = () => (
 export const HeaderGroupsWithStickyHeader: Story<
   MaterialReactTableProps
 > = () => (
-  <MaterialReactTable columns={columns} data={data} enableStickyHeader />
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableStickyHeader
+    initialState={{ pagination: { pageIndex: 0, pageSize: 25 } }}
+  />
 );
 
 export const HeaderAndFooterGroups: Story<MaterialReactTableProps> = () => (

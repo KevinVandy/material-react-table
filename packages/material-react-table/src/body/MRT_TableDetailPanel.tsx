@@ -14,6 +14,7 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, table }) => {
     getVisibleLeafColumns,
     getState,
     options: {
+      layoutMode,
       muiTableBodyRowProps,
       muiTableDetailPanelProps,
       renderDetailPanel,
@@ -32,7 +33,12 @@ export const MRT_TableDetailPanel: FC<Props> = ({ row, table }) => {
       : muiTableDetailPanelProps;
 
   return (
-    <TableRow {...tableRowProps}>
+    <TableRow
+      sx={{
+        display: layoutMode === 'grid' ? 'flex' : 'table-row',
+      }}
+      {...tableRowProps}
+    >
       <TableCell
         colSpan={getVisibleLeafColumns().length}
         {...tableCellProps}

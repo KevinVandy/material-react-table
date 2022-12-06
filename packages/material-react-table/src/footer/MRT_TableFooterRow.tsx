@@ -10,7 +10,7 @@ interface Props {
 
 export const MRT_TableFooterRow: FC<Props> = ({ footerGroup, table }) => {
   const {
-    options: { muiTableFooterRowProps },
+    options: { layoutMode, muiTableFooterRowProps },
   } = table;
 
   // if no content in row, skip row
@@ -30,7 +30,15 @@ export const MRT_TableFooterRow: FC<Props> = ({ footerGroup, table }) => {
       : muiTableFooterRowProps;
 
   return (
-    <TableRow {...tableRowProps}>
+    <TableRow
+      {...tableRowProps}
+      sx={(theme) => ({
+        display: layoutMode === 'grid' ? 'flex' : 'table-row',
+        ...(tableRowProps?.sx instanceof Function
+          ? tableRowProps?.sx(theme)
+          : (tableRowProps?.sx as any)),
+      })}
+    >
       {footerGroup.headers.map((footer: MRT_Header) => (
         <MRT_TableFooterCell footer={footer} key={footer.id} table={table} />
       ))}

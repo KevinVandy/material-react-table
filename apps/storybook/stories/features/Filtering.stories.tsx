@@ -19,7 +19,7 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
     header: 'Is Active',
     accessorKey: 'isActive',
     Cell: ({ cell }) => (cell.getValue() ? 'Yes' : 'No'),
-    size: 60,
+    size: 110,
   },
   {
     header: 'First Name',
