@@ -4,7 +4,6 @@
   "scripts": {
     "build": "build-storybook",
     "dev": "start-storybook -p 6006",
-    "lib:dev": "start-storybook -p 6006",
     "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook",
     "storybook:dev": "start-storybook -p 6006"

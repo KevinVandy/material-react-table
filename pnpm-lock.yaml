@@ -162,6 +162,7 @@ importers:
       '@size-limit/preset-small-lib': ^8.1.0
       '@tanstack/match-sorter-utils': 8.7.0
       '@tanstack/react-table': 8.7.0
+      '@tanstack/react-virtual': ^3.0.0-beta.29
       '@types/node': ^18.11.9
       '@types/react': ^18.0.25
       '@types/react-dom': ^18.0.9
@@ -172,7 +173,6 @@ importers:
       react: ^18.2.0
       react-dom: ^18.2.0
       react-is: ^18.2.0
-      react-virtual: ^2.10.4
       rollup: ^2.79.1
       rollup-plugin-copy: ^3.4.0
       rollup-plugin-dts: ^5.0.0
@@ -183,7 +183,7 @@ importers:
     dependencies:
       '@tanstack/match-sorter-utils': 8.7.0
       '@tanstack/react-table': 8.7.0_biqbaboplfbrettd7655fr4n2y
-      react-virtual: 2.10.4_react@18.2.0
+      '@tanstack/react-virtual': 3.0.0-beta.29_react@18.2.0
     devDependencies:
       '@babel/core': 7.20.5
       '@babel/preset-react': 7.18.6_@babel+core@7.20.5
@@ -2919,10 +2919,6 @@ packages:
   /@popperjs/core/2.11.6:
     resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
 
-  /@reach/observe-rect/1.2.0:
-    resolution: {integrity: sha512-Ba7HmkFgfQxZqqaeIWWkNK0rEhpxVQHIoVyW1YDSkGsGIXzcaW4deC8B0pZrNSSyLTdIk7y+5olKt5+g0GmFIQ==}
-    dev: false
-
   /@reach/router/1.3.4_yicqvriqha7ppr6zyvk5y4bjya:
     resolution: {integrity: sha512-+mtn9wjlB9NN2CNnnC/BRYtwdKBfSyyasPYraNAyvaV1occr/5NnB4CVzjEZipNHwYebQwcndGUmpFzxAUoqSA==}
     peerDependencies:
@@ -4698,9 +4694,22 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
+  /@tanstack/react-virtual/3.0.0-beta.29_react@18.2.0:
+    resolution: {integrity: sha512-Vwjh/h9J4W6qtlQ7nPmhT6bXueS4mDMXJxJM2lRU6KPGwlWezKp/3NI4ZLAgDqZIxDOkeXq9iERsNxyB7MKHNg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@tanstack/virtual-core': 3.0.0-beta.29
+      react: 18.2.0
+    dev: false
+
   /@tanstack/table-core/8.7.0:
     resolution: {integrity: sha512-DRiRbOAmDHapzUBd4/C4Yy+FTug4fdGp5sdZWWfCq4wxRoaXQraQgbzmK23a3QcbwLFtLeNezPkZrqbJWuX+VA==}
     engines: {node: '>=12'}
+    dev: false
+
+  /@tanstack/virtual-core/3.0.0-beta.29:
+    resolution: {integrity: sha512-fMAX6g2apCdNIWCB5lHo9qxFCn5Qig9rSrplofWfONfuIrnzLGH7H0Y7gUg37KC55BfPhwprjuZXg4B5bMI2fg==}
     dev: false
 
   /@types/acorn/4.0.6:
@@ -12615,15 +12624,6 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-
-  /react-virtual/2.10.4_react@18.2.0:
-    resolution: {integrity: sha512-Ir6+oPQZTVHfa6+JL9M7cvMILstFZH/H3jqeYeKI4MSUX+rIruVwFC6nGVXw9wqAw8L0Kg2KvfXxI85OvYQdpQ==}
-    peerDependencies:
-      react: ^16.6.3 || ^17.0.0
-    dependencies:
-      '@reach/observe-rect': 1.2.0
-      react: 18.2.0
-    dev: false
 
   /react/16.14.0:
     resolution: {integrity: sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==}

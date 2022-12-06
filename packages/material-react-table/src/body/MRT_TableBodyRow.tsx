@@ -3,17 +3,20 @@ import TableRow from '@mui/material/TableRow';
 import { darken, lighten, useTheme } from '@mui/material/styles';
 import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
+import type { VirtualItem } from '@tanstack/react-virtual';
 import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
+  measureElement?: (element: HTMLTableRowElement) => void;
   numRows: number;
   row: MRT_Row;
   rowIndex: number;
   table: MRT_TableInstance;
-  virtualRow?: any;
+  virtualRow?: VirtualItem;
 }
 
 export const MRT_TableBodyRow: FC<Props> = ({
+  measureElement,
   numRows,
   row,
   rowIndex,
@@ -68,13 +71,14 @@ export const MRT_TableBodyRow: FC<Props> = ({
   return (
     <>
       <TableRow
+        data-index={virtualRow?.index}
         hover
         onDragEnter={handleDragEnter}
         selected={row.getIsSelected()}
         ref={(node: HTMLTableRowElement) => {
-          rowRef.current = node;
-          if (virtualRow?.measureRef) {
-            virtualRow.measureRef = node;
+          if (node) {
+            rowRef.current = node;
+            measureElement?.(node);
           }
         }}
         {...tableRowProps}
@@ -83,7 +87,12 @@ export const MRT_TableBodyRow: FC<Props> = ({
           display: layoutMode === 'grid' ? 'flex' : 'table-row',
           opacity:
             draggingRow?.id === row.id || hoveredRow?.id === row.id ? 0.5 : 1,
-          transition: 'all 150ms ease-in-out',
+          position: virtualRow ? 'absolute' : undefined,
+          top: virtualRow ? 0 : undefined,
+          transform: virtualRow
+            ? `translateY(${virtualRow?.start}px)`
+            : undefined,
+          transition: virtualRow ? 'none' : 'all 150ms ease-in-out',
           '&:hover td': {
             backgroundColor:
               tableRowProps?.hover !== false && getIsSomeColumnsPinned()

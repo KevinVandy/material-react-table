@@ -40,8 +40,7 @@ import type {
   TableOptions,
   TableState,
 } from '@tanstack/react-table';
-import type { Options as VirtualizerOptions, VirtualItem } from 'react-virtual';
-// import type { VirtualizerOptions } from '@tanstack/react-virtual';
+import type { VirtualizerOptions, Virtualizer } from '@tanstack/react-virtual';
 import { MRT_AggregationFns } from './aggregationFns';
 import { MRT_DefaultColumn, MRT_DefaultDisplayColumn } from './column.utils';
 import { MRT_FilterFns } from './filterFns';
@@ -1053,29 +1052,17 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     state?: Partial<MRT_TableState<TData>>;
     tableInstanceRef?: MutableRefObject<MRT_TableInstance<TData> | null>;
     virtualizerProps?:
-      | Partial<VirtualizerOptions<HTMLDivElement>>
+      | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>
       | (({
           table,
         }: {
           table: MRT_TableInstance<TData>;
-        }) => Partial<VirtualizerOptions<HTMLDivElement>>);
-    // virtualizerProps?:
-    //   | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>
-    //   | (({
-    //       table,
-    //     }: {
-    //       table: MRT_TableInstance<TData>;
-    //     }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>);
-    virtualizerInstanceRef?: MutableRefObject<Virtualizer | null>;
+        }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>);
+    virtualizerInstanceRef?: MutableRefObject<Virtualizer<
+      HTMLDivElement,
+      HTMLTableRowElement
+    > | null>;
   };
-
-export type Virtualizer = {
-  virtualItems: VirtualItem[];
-  totalSize: number;
-  scrollToOffset: (index: number, options?: any | undefined) => void;
-  scrollToIndex: (index: number, options?: any | undefined) => void;
-  measure: () => void;
-};
 
 const MaterialReactTable = <TData extends Record<string, any> = {}>({
   aggregationFns,
@@ -1149,6 +1136,8 @@ const MaterialReactTable = <TData extends Record<string, any> = {}>({
     }),
     [],
   );
+
+  if (rest.enableRowVirtualization) layoutMode = 'grid';
 
   return (
     <MRT_TableRoot

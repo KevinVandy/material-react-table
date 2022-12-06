@@ -2,7 +2,7 @@
 
 ## Suggesting New Features or Bug Fixes
 
-Before making large PRs, you may want to discuss your proposals in either the [Discord Contributing Channel](https://discord.gg/5wqyRx6fnm), the [GitHub Discussions](https://github.com/KevinVandy/material-react-table/discussions) page, or the [GitHub Issues](https://github.com/KevinVandy/material-react-table/issues) page. 
+Before making large PRs, you may want to discuss your proposals in either the [Discord Contributing Channel](https://discord.gg/5wqyRx6fnm), the [GitHub Discussions](https://github.com/KevinVandy/material-react-table/discussions) page, or the [GitHub Issues](https://github.com/KevinVandy/material-react-table/issues) page.
 
 ## Running the project locally
 
@@ -24,18 +24,26 @@ pnpm i
 
 ### 3. Run the project(s)
 
-#### Build the Library
+#### Run the Storybook for Local Development
 
-Compile `material-react-table` first so that locales are properly available to the docs site.
+```bash
+pnpm storybook
+```
+
+The Storybook site will open on `port 6006` by default.
+
+#### Run the Docs for Local Development
+
+```bash
+pnpm docs:dev
+```
+
+The Docs site will open on `port 3000` by default.
+
+#### Build the Library
 
 ```bash
 pnpm lib:build
 ```
 
-#### Run the Docs and Storybook for Local Development
-
-```bash
-pnpm dev
-```
-
-The Docs site will open on `port 3000` and the Storybook site will open on `port 6006`.
+> Note: If you are contributing a new locale and are trying to test it in the docs site, you will need to run `pnpm lib:build` and then `pnpm docs:dev` before it can be imported.

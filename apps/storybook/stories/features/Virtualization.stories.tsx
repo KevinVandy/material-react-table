@@ -54,10 +54,6 @@ const longColumns: MRT_ColumnDef[] = [
     accessorKey: 'country',
   },
   {
-    header: 'Favorite Quote',
-    accessorKey: 'favoriteQuote',
-  },
-  {
     header: 'Favorite Color',
     accessorKey: 'favoriteColor',
   },
@@ -83,9 +79,58 @@ const longData = [...Array(500)].map(() => ({
   petName: faker.animal.cat(),
 }));
 
-export const EnableRowVirtualization: Story<MaterialReactTableProps> = () => (
+export const EnableRowVirtualizationDense: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable
     columns={longColumns}
+    data={longData}
+    enablePagination={false}
+    enableRowNumbers
+    enableRowVirtualization
+    enableBottomToolbar={false}
+    initialState={{ density: 'compact' }}
+  />
+);
+
+export const EnableRowVirtualizationComfortable: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={longColumns}
+    data={longData}
+    enablePagination={false}
+    enableRowNumbers
+    enableRowVirtualization
+    enableBottomToolbar={false}
+  />
+);
+
+export const EnableRowVirtualizationSpacious: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={longColumns}
+    data={longData}
+    enablePagination={false}
+    enableRowNumbers
+    enableRowVirtualization
+    enableBottomToolbar={false}
+    initialState={{ density: 'spacious' }}
+  />
+);
+
+export const EnableRowVirtualizationTallContent: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      ...longColumns,
+      {
+        header: 'Favorite Quote',
+        accessorKey: 'favoriteQuote',
+      },
+    ]}
     data={longData}
     enablePagination={false}
     enableRowNumbers

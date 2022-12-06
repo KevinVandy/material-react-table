@@ -49,3 +49,7 @@ const data = [...Array(21)].map(() => ({
 export const CustomWidths: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
+
+export const CustomWidthsGrid: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable columns={columns} data={data} layoutMode="grid" />
+);

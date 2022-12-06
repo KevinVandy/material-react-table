@@ -46,7 +46,9 @@
   },
   "scripts": {
     "build": "rm -rf dist locales && rollup -c && size-limit",
+    "dev": "rm -rf dist locales && rollup -c -w",
     "lib:build": "rm -rf dist locales && rollup -c && size-limit",
+    "lib:dev": "rm -rf dist locales && rollup -c -w",
     "lint": "eslint .",
     "size": "size-limit"
   },
@@ -90,6 +92,6 @@
   "dependencies": {
     "@tanstack/match-sorter-utils": "8.7.0",
     "@tanstack/react-table": "8.7.0",
-    "react-virtual": "^2.10.4"
+    "@tanstack/react-virtual": "^3.0.0-beta.29"
   }
 }
