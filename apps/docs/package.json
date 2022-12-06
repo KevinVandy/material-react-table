@@ -26,6 +26,7 @@
     "@next/mdx": "^13.0.5",
     "@tanstack/react-query": "^4.18.0",
     "@tanstack/react-table": "^8.7.0",
+    "@tanstack/react-virtual": "^3.0.0-beta.29",
     "@types/mdx": "^2.0.3",
     "axios": "^1.2.0",
     "dayjs": "^1.11.6",

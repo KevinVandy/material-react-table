@@ -29,6 +29,7 @@ importers:
       '@next/mdx': ^13.0.5
       '@tanstack/react-query': ^4.18.0
       '@tanstack/react-table': ^8.7.0
+      '@tanstack/react-virtual': ^3.0.0-beta.29
       '@types/mdx': ^2.0.3
       '@types/node': ^18.11.9
       '@types/react': ^18.0.25
@@ -63,6 +64,7 @@ importers:
       '@next/mdx': 13.0.6_wuv4qx5dshjptmdbtsqqkih5iu
       '@tanstack/react-query': 4.19.0_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-table': 8.7.0_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-virtual': 3.0.0-beta.29_react@18.2.0
       '@types/mdx': 2.0.3
       axios: 1.2.0
       dayjs: 1.11.6
