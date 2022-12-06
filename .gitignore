@@ -19,7 +19,6 @@ build
 /dist
 dist
 storybook-static
-locales
 
 # misc
 .DS_Store
