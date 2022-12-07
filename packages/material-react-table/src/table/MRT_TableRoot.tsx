@@ -338,7 +338,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
     <>
       <Dialog
         PaperComponent={Box}
-        TransitionComponent={Grow}
+        TransitionComponent={!props.enableRowVirtualization ? Grow : undefined}
         disablePortal
         fullScreen
         keepMounted={false}

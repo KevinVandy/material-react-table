@@ -93,6 +93,7 @@ export const MRT_TableBodyRow: FC<Props> = ({
             ? `translateY(${virtualRow?.start}px)`
             : undefined,
           transition: virtualRow ? 'none' : 'all 150ms ease-in-out',
+          width: '100%',
           '&:hover td': {
             backgroundColor:
               tableRowProps?.hover !== false && getIsSomeColumnsPinned()

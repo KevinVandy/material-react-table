@@ -831,7 +831,7 @@ export const rootProps: PropRow[] = [
   },
   {
     propName: 'layoutMode',
-    defaultValue: 'semantic',
+    defaultValue: "'semantic'",
     description: '',
     link: '/docs/guides/',
     linkText: 'TODO',

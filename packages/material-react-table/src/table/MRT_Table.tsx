@@ -38,8 +38,7 @@ export const MRT_Table: FC<Props> = ({ table }) => {
       {...tableProps}
       sx={(theme) => ({
         display: layoutMode === 'grid' ? 'grid' : 'table',
-        tableLayout:
-          enableColumnResizing || enableRowVirtualization ? 'fixed' : 'auto',
+        tableLayout: enableColumnResizing ? 'fixed' : 'auto',
         ...(tableProps?.sx instanceof Function
           ? tableProps.sx(theme)
           : (tableProps?.sx as any)),

@@ -184,3 +184,33 @@ export const EnableRowVirtualizationWithMemoizedRows: Story<
     memoMode="rows"
   />
 );
+
+export const EnableRowVirtualizationStickyFooter: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        footer: 'First Name',
+        accessorKey: 'firstName',
+      },
+      {
+        header: 'Middle Name',
+        footer: 'Middle Name',
+        accessorKey: 'middleName',
+      },
+      {
+        header: 'Last Name',
+        footer: 'Last Name',
+        accessorKey: 'lastName',
+      },
+    ]}
+    data={longData}
+    enablePagination={false}
+    enableRowNumbers
+    enableRowVirtualization
+    enableBottomToolbar={false}
+    enableStickyFooter
+  />
+);
