@@ -9,7 +9,7 @@ export const MRT_Localization_NL: MRT_Localization = {
   clearFilter: 'Maak filter leeg',
   clearSearch: 'Maak zoekbalk leeg',
   clearSort: 'Maak sorteren leeg',
-  clickToCopy: 'Klik om te kopiÃ«ren',
+  clickToCopy: 'Klik om te kopiëren',
   collapse: 'Samenvouwen',
   collapseAll: 'Alles samenvouwen',
   columnActions: 'Kolom acties',
