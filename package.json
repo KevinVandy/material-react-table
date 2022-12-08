@@ -1,5 +1,5 @@
 {
-  "name": "material-react-table-turborepo",
+  "name": "material-react-table-docs",
   "private": true,
   "workspaces": [
     "apps/*",
