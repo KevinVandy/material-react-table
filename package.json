@@ -16,6 +16,7 @@
     "lib:dev": "turbo run lib:dev",
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
     "lint": "turbo run lint",
+    "start": "turbo run start --parallel",
     "storybook": "turbo run storybook",
     "storybook:build": "turbo run storybook:build",
     "storybook:dev": "turbo run storybook"

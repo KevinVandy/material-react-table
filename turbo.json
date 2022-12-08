@@ -43,6 +43,9 @@
     "lib:dev": {
       "cache": false
     },
+    "start": {
+      "cache": false
+    },
     "storybook": {
       "cache": false
     },
