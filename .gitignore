@@ -12,6 +12,7 @@ coverage
 .next/
 out/
 build
+locales
 
 # mrt
 *.log

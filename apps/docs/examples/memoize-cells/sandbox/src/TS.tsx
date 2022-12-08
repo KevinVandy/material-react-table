@@ -40,7 +40,7 @@ export const Example: FC = () => {
       defaultColumn={{
         Cell: ({ cell }) => {
           //see how often cells are re-rendered
-          console.info('render cell', cell.id);
+          // console.info('render cell', cell.id);
           return <>{cell.getValue()}</>;
         },
       }}
