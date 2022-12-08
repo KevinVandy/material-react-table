@@ -1,5 +1,5 @@
 {
-  "name": "material-react-table-docs",
+  "name": "material-react-table-turbo",
   "private": true,
   "workspaces": [
     "apps/*",
