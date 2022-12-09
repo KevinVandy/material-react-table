@@ -31,8 +31,8 @@ export default [
       '@mui/material',
       '@tanstack/match-sorter-utils',
       '@tanstack/react-table',
+      '@tanstack/react-virtual',
       'react',
-      'react-virtual',
     ],
     input: './src/index.tsx',
     output: [
