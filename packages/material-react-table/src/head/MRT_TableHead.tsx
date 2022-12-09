@@ -11,12 +11,7 @@ export const MRT_TableHead: FC<Props> = ({ table }) => {
   const {
     getHeaderGroups,
     getState,
-    options: {
-      enableRowVirtualization,
-      enableStickyHeader,
-      layoutMode,
-      muiTableHeadProps,
-    },
+    options: { enableStickyHeader, layoutMode, muiTableHeadProps },
   } = table;
   const { isFullScreen } = getState();
 
@@ -25,8 +20,7 @@ export const MRT_TableHead: FC<Props> = ({ table }) => {
       ? muiTableHeadProps({ table })
       : muiTableHeadProps;
 
-  const stickyHeader =
-    enableStickyHeader || enableRowVirtualization || isFullScreen;
+  const stickyHeader = enableStickyHeader || isFullScreen;
 
   return (
     <TableHead

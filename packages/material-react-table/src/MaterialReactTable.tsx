@@ -689,6 +689,9 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     globalFilterModeOptions?: MRT_FilterOption[] | null;
     icons?: Partial<MRT_Icons>;
     initialState?: Partial<MRT_TableState<TData>>;
+    /**
+     * Changes which kind of CSS layout is used to render the table. `semantic` uses default semantic HTML elements, while `grid` adds CSS grid and flexbox styles
+     */
     layoutMode?: 'semantic' | 'grid';
     /**
      * Pass in either a locale imported from `material-react-table/locales/*` or a custom locale object.
@@ -1137,7 +1140,10 @@ const MaterialReactTable = <TData extends Record<string, any> = {}>({
     [],
   );
 
-  if (rest.enableRowVirtualization) layoutMode = 'grid';
+  if (rest.enableRowVirtualization) {
+    layoutMode = 'grid';
+    enableStickyHeader = true;
+  }
 
   return (
     <MRT_TableRoot

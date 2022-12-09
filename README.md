@@ -87,7 +87,7 @@ _**Fully Fleshed out [Docs](https://www.material-react-table.com/docs/guides#gui
 - [x] Theming (Respects your Material UI Theme)
 - [x] Toolbars (Add your own action buttons)
 - [x] Tree Data / Expanding Sub-rows
-- [x] Virtualization (react-virtual)
+- [x] Virtualization (@tanstack/react-virtual)
 
 ## Getting Started
 

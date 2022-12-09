@@ -14,7 +14,6 @@ export const MRT_Table: FC<Props> = ({ table }) => {
     getState,
     options: {
       enableColumnResizing,
-      enableRowVirtualization,
       enableStickyHeader,
       enableTableFooter,
       enableTableHead,
@@ -32,9 +31,7 @@ export const MRT_Table: FC<Props> = ({ table }) => {
 
   return (
     <Table
-      stickyHeader={
-        enableStickyHeader || enableRowVirtualization || isFullScreen
-      }
+      stickyHeader={enableStickyHeader || isFullScreen}
       {...tableProps}
       sx={(theme) => ({
         display: layoutMode === 'grid' ? 'grid' : 'table',
