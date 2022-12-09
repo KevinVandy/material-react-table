@@ -25,7 +25,7 @@ const Footer = () => {
         color="secondary"
         endIcon={<GitHub />}
         startIcon={<Edit />}
-        href={`https://github.com/KevinVandy/material-react-table/edit/main/apps/docs/pages${pathname}${
+        href={`https://github.com/KevinVandy/material-react-table/edit/main/apps/material-react-table-docs/pages${pathname}${
           ['/'].includes(pathname)
             ? 'index.tsx'
             : ['/docs', '/docs/api', '/docs/examples', '/docs/guides'].includes(

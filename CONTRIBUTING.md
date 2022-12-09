@@ -9,8 +9,8 @@ Before making large PRs, you may want to discuss your proposals in either the [D
 This project uses PNPM and a TurboRepo with 3 projects.
 
 - The library itself in `/packages/material-react-table`
-- The docs site in `/apps/docs`
-- The storybook site used for local development in `/apps/storybook`
+- The docs site in `/apps/material-react-table-docs`
+- The storybook site used for local development in `/apps/material-react-table-storybook`
 
 ### 1. Fork and Clone the project
 
@@ -40,10 +40,10 @@ pnpm docs:dev
 
 The Docs site will open on `port 3000` by default.
 
+> Note: If you are contributing a new locale and are trying to test it in the docs site, you will need to run `pnpm lib:build` and then `pnpm docs:dev` before it can be imported.
+
 #### Build the Library
 
 ```bash
 pnpm lib:build
 ```
-
-> Note: If you are contributing a new locale and are trying to test it in the docs site, you will need to run `pnpm lib:build` and then `pnpm docs:dev` before it can be imported.
