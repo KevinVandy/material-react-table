@@ -131,7 +131,12 @@ export const MRT_TableBodyRow: FC<Props> = ({
         })}
       </TableRow>
       {renderDetailPanel && !row.getIsGrouped() && (
-        <MRT_TableDetailPanel row={row} table={table} />
+        <MRT_TableDetailPanel
+          parentRowRef={rowRef}
+          row={row}
+          table={table}
+          virtualRow={virtualRow}
+        />
       )}
     </>
   );

@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Box from '@mui/material/Box';
@@ -6,15 +6,15 @@ import Chip from '@mui/material/Chip';
 import Collapse from '@mui/material/Collapse';
 import { MRT_TableInstance } from '..';
 
-interface Props {
+interface Props<TData extends Record<string, any> = {}> {
   stackAlertBanner: boolean;
-  table: MRT_TableInstance;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ToolbarAlertBanner: FC<Props> = ({
+export const MRT_ToolbarAlertBanner = <TData extends Record<string, any> = {}>({
   stackAlertBanner,
   table,
-}) => {
+}: Props<TData>) => {
   const {
     getPrePaginationRowModel,
     getSelectedRowModel,

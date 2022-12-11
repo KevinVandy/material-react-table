@@ -10,8 +10,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     string
   >;
 
-  console.log(req.query);
-
   const parsedColumnFilters = JSON.parse(filters) as ColumnFiltersState;
   if (!!parsedColumnFilters?.length) {
     parsedColumnFilters.map((filter) => {

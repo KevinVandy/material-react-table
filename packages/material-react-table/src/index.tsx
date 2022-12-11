@@ -14,6 +14,8 @@ import { MRT_TablePagination } from './toolbar/MRT_TablePagination';
 import { MRT_ToggleDensePaddingButton } from './buttons/MRT_ToggleDensePaddingButton';
 import { MRT_ToggleFiltersButton } from './buttons/MRT_ToggleFiltersButton';
 import { MRT_ToggleGlobalFilterButton } from './buttons/MRT_ToggleGlobalFilterButton';
+import { MRT_ToolbarAlertBanner } from './toolbar/MRT_ToolbarAlertBanner';
+import { MRT_ToolbarDropZone } from './toolbar/MRT_ToolbarDropZone';
 import { MRT_ToolbarInternalButtons } from './toolbar/MRT_ToolbarInternalButtons';
 
 export {
@@ -26,5 +28,7 @@ export {
   MRT_ToggleDensePaddingButton,
   MRT_ToggleFiltersButton,
   MRT_ToggleGlobalFilterButton,
+  MRT_ToolbarAlertBanner,
+  MRT_ToolbarDropZone,
   MRT_ToolbarInternalButtons,
 };

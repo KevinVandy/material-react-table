@@ -1085,7 +1085,7 @@ export const rootProps: PropRow[] = [
     linkText: 'Material UI TableRow Props',
     required: false,
     source: 'Material UI',
-    type: 'TableRowProps | ({ row, table }) => TableRowProps',
+    type: 'TableRowProps | ({ isDetailPanel, row, table }) => TableRowProps',
   },
   {
     propName: 'muiTableContainerProps',
@@ -1101,11 +1101,11 @@ export const rootProps: PropRow[] = [
     propName: 'muiTableDetailPanelProps',
     defaultValue: '',
     description: '',
-    link: 'https://mui.com/material-ui/api/table-row/#props',
-    linkText: 'Material UI TableRow Props',
+    link: 'https://mui.com/material-ui/api/table-cell/#props',
+    linkText: 'Material UI TableCell Props',
     required: false,
     source: 'Material UI',
-    type: 'TableRowProps | ({ row, table }) => TableRowProps',
+    type: 'TableCellProps | ({ row, table }) => TableCellProps',
   },
   {
     propName: 'muiTableFooterCellProps',

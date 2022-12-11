@@ -93,12 +93,11 @@ const Example = () => {
       enablePagination={false}
       enableRowNumbers
       enableRowVirtualization
-      initialState={{ density: 'compact' }}
       muiTableContainerProps={{ sx: { maxHeight: '600px' } }}
       onSortingChange={setSorting}
       state={{ isLoading, sorting }}
       virtualizerInstanceRef={virtualizerInstanceRef} //optional
-      virtualizerProps={{ overscan: 20 }} //optionally customize the virtualizer
+      virtualizerProps={{ overscan: 8 }} //optionally customize the virtualizer
     />
   );
 };

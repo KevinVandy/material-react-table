@@ -153,6 +153,20 @@ export const EnableRowVirtualizationWithColumnResizing: Story<
   />
 );
 
+export const EnableRowVirtualizationWithDetailPanel: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={longColumns}
+    data={longData.slice(0, 100)}
+    enablePagination={false}
+    enableRowNumbers
+    enableRowVirtualization
+    enableBottomToolbar={false}
+    renderDetailPanel={() => <div>Detail Panel</div>}
+  />
+);
+
 export const EnableRowVirtualizationWithMemoizedCells: Story<
   MaterialReactTableProps
 > = () => (

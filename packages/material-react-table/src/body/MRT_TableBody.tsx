@@ -87,7 +87,7 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
           density === 'compact' ? 37 : density === 'comfortable' ? 58 : 73,
         getScrollElement: () => tableContainerRef.current,
         measureElement: (element) => element?.getBoundingClientRect().height,
-        overscan: 10,
+        overscan: 4,
         ...vProps,
       })
     : undefined;

@@ -1,15 +1,17 @@
-import React, { DragEvent, FC } from 'react';
+import React, { DragEvent } from 'react';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import { MRT_TableInstance } from '..';
 
-interface Props {
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any> = {}> {
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ToolbarDropZone: FC<Props> = ({ table }) => {
+export const MRT_ToolbarDropZone = <TData extends Record<string, any> = {}>({
+  table,
+}: Props<TData>) => {
   const {
     getState,
     options: { enableGrouping, localization },

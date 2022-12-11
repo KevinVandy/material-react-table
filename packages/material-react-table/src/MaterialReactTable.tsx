@@ -813,11 +813,13 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     muiTableBodyRowProps?:
       | TableRowProps
       | (({
-          table,
+          isDetailPanel = false,
           row,
+          table,
         }: {
-          table: MRT_TableInstance<TData>;
+          isDetailPanel?: boolean;
           row: MRT_Row<TData>;
+          table: MRT_TableInstance<TData>;
         }) => TableRowProps);
     muiTableContainerProps?:
       | TableContainerProps
