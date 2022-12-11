@@ -79,6 +79,24 @@ export const StyleCustomStripedRows: Story<MaterialReactTableProps> = () => (
   />
 );
 
+export const StyleCustomStripedRowsDetailPanel: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    muiTableBodyProps={{
+      sx: () => ({
+        '& tr:nth-child(4n+3)': {
+          backgroundColor: 'limegreen',
+        },
+      }),
+    }}
+    muiTableBodyCellProps={{ sx: { border: 'none' } }}
+    renderDetailPanel={() => <div>Detail Panel</div>}
+  />
+);
+
 export const ConditionallyStyleMuiTableRow: Story<
   MaterialReactTableProps
 > = () => (
