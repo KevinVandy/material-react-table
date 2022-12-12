@@ -104,63 +104,65 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
       sx={(theme) => ({
         display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
         height: virtualizer ? `${virtualizer.getTotalSize()}px` : 'inherit',
+        minHeight: !rows.length ? '100px' : undefined,
         position: 'relative',
         ...(tableBodyProps?.sx instanceof Function
           ? tableBodyProps?.sx(theme)
           : (tableBodyProps?.sx as any)),
       })}
     >
-      {tableBodyProps?.children ?? !rows.length ? (
-        <tr style={{ display: layoutMode === 'grid' ? 'grid' : 'table-row' }}>
-          <td
-            colSpan={table.getVisibleLeafColumns().length}
-            style={{ display: layoutMode === 'grid' ? 'grid' : 'table-cell' }}
-          >
-            <Typography
-              sx={{
-                color: 'text.secondary',
-                fontStyle: 'italic',
-                maxWidth: `min(100vw, ${
-                  tablePaperRef.current?.clientWidth ?? 360
-                }px)`,
-                py: '2rem',
-                textAlign: 'center',
-                width: '100%',
-              }}
+      {tableBodyProps?.children ??
+        (!rows.length ? (
+          <tr style={{ display: layoutMode === 'grid' ? 'grid' : 'table-row' }}>
+            <td
+              colSpan={table.getVisibleLeafColumns().length}
+              style={{ display: layoutMode === 'grid' ? 'grid' : 'table-cell' }}
             >
-              {globalFilter || columnFilters.length
-                ? localization.noResultsFound
-                : localization.noRecordsToDisplay}
-            </Typography>
-          </td>
-        </tr>
-      ) : (
-        <>
-          {(virtualRows ?? rows).map((rowOrVirtualRow, rowIndex) => {
-            const row = virtualizer
-              ? rows[rowOrVirtualRow.index]
-              : (rowOrVirtualRow as MRT_Row);
-            const props = {
-              key: row.id,
-              measureElement: virtualizer
-                ? virtualizer.measureElement
-                : undefined,
-              numRows: rows.length,
-              row,
-              rowIndex: virtualizer ? rowOrVirtualRow.index : rowIndex,
-              table,
-              virtualRow: virtualizer
-                ? (rowOrVirtualRow as VirtualItem)
-                : undefined,
-            };
-            return memoMode === 'rows' ? (
-              <Memo_MRT_TableBodyRow {...props} />
-            ) : (
-              <MRT_TableBodyRow {...props} />
-            );
-          })}
-        </>
-      )}
+              <Typography
+                sx={{
+                  color: 'text.secondary',
+                  fontStyle: 'italic',
+                  maxWidth: `min(100vw, ${
+                    tablePaperRef.current?.clientWidth ?? 360
+                  }px)`,
+                  py: '2rem',
+                  textAlign: 'center',
+                  width: '100%',
+                }}
+              >
+                {globalFilter || columnFilters.length
+                  ? localization.noResultsFound
+                  : localization.noRecordsToDisplay}
+              </Typography>
+            </td>
+          </tr>
+        ) : (
+          <>
+            {(virtualRows ?? rows).map((rowOrVirtualRow, rowIndex) => {
+              const row = virtualizer
+                ? rows[rowOrVirtualRow.index]
+                : (rowOrVirtualRow as MRT_Row);
+              const props = {
+                key: row.id,
+                measureElement: virtualizer
+                  ? virtualizer.measureElement
+                  : undefined,
+                numRows: rows.length,
+                row,
+                rowIndex: virtualizer ? rowOrVirtualRow.index : rowIndex,
+                table,
+                virtualRow: virtualizer
+                  ? (rowOrVirtualRow as VirtualItem)
+                  : undefined,
+              };
+              return memoMode === 'rows' ? (
+                <Memo_MRT_TableBodyRow {...props} />
+              ) : (
+                <MRT_TableBodyRow {...props} />
+              );
+            })}
+          </>
+        ))}
     </TableBody>
   );
 };

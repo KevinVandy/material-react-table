@@ -12,6 +12,11 @@ import Head from 'next/head';
 
 ### V1
 
+#### v1.4.2 (2022-12-11)
+
+- Fix custom `muiTableBodyProps.children` not being rendered
+- Give TableBody a default minHeight of 100px when no rows are present
+
 #### v1.4.1 (2022-12-11)
 
 - Fixed row virtualization with detail panels to make it usable
@@ -54,7 +59,6 @@ import Head from 'next/head';
 
 - Added fr translations that can be imported from `'material-react-table/locales/fr'`
 - Upgraded to latest TanStack Table 8.5.30 for better TypeScript performance
-- Allow TableBody children override for custom empty table components
 
 #### v1.3.9 (2022-11-14)
 
