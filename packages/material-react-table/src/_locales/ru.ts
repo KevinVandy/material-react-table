@@ -34,7 +34,7 @@ export const MRT_Localization_RU: MRT_Localization = {
   filterGreaterThanOrEqualTo: 'Больше или равно',
   filterInNumberRange: 'Между',
   filterIncludesString: 'Содержит',
-  filterIncludesStringSensitive: 'Содержит (регистрозависисый)',
+  filterIncludesStringSensitive: 'Содержит (регистрозависимый)',
   filterLessThan: 'Меньше чем',
   filterLessThanOrEqualTo: 'Меньше или равно',
   filterMode: 'Режим фильтра: {filterType}',
