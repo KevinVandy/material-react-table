@@ -163,7 +163,7 @@ export const MultiAggregationPerColumn: Story<MaterialReactTableProps> = () => (
         header: 'Age',
         accessorKey: 'age',
         //manually set multiple aggregation functions
-        aggregationFn: (columnId, leafRows, childRows) => [
+        aggregationFn: (columnId, leafRows: any, childRows: any) => [
           aggregationFns.min(columnId, leafRows, childRows),
           aggregationFns.max(columnId, leafRows, childRows),
         ],

@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
-import debounce from '@mui/material/utils/debounce';
+import { debounce } from '@mui/material/utils';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 import { MRT_TableInstance } from '..';
 

@@ -102,10 +102,15 @@ export const SelectAllModePage: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const SelectAllDisabled: Story<MaterialReactTableProps> = () => (
+export const SelectAllDisabledCustomHeader: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    displayColumnDefOptions={{
+      'mrt-row-select': { header: 'Your Custom Header' },
+    }}
     enableRowSelection
     enableSelectAll={false}
   />

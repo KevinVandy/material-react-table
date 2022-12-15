@@ -15,7 +15,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
-import debounce from '@mui/material/utils/debounce';
+import { debounce } from '@mui/material/utils';
 import type { TextFieldProps } from '@mui/material/TextField';
 import type { MRT_Header, MRT_TableInstance } from '..';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
@@ -87,7 +87,8 @@ export const MRT_FilterTextField: FC<Props> = ({
       ]
     : '';
   const filterPlaceholder = !isRangeFilter
-    ? localization.filterByColumn?.replace('{column}', String(columnDef.header))
+    ? textFieldProps?.placeholder ??
+      localization.filterByColumn?.replace('{column}', String(columnDef.header))
     : rangeFilterIndex === 0
     ? localization.min
     : rangeFilterIndex === 1
