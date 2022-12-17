@@ -1,18 +1,11 @@
 import React, { FC, useMemo } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-
-type Person = {
-  firstName: string;
-  lastName: string;
-  address: string;
-  city: string;
-  state: string;
-};
+import { data, Person } from './makeData';
 
 export const Example: FC = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
+    //column definitions...
     () => [
-      //column definitions...
       {
         accessorKey: 'firstName',
         header: 'First Name',
@@ -33,52 +26,9 @@ export const Example: FC = () => {
         accessorKey: 'state',
         header: 'State',
       },
-      //end
     ],
     [],
-  );
-
-  const data = useMemo(
-    () => [
-      //data definitions...
-      {
-        firstName: 'Dylan',
-        lastName: 'Murray',
-        address: '261 Erdman Ford',
-        city: 'East Daphne',
-        state: 'Kentucky',
-      },
-      {
-        firstName: 'Raquel',
-        lastName: 'Kohler',
-        address: '769 Dominic Grove',
-        city: 'Columbus',
-        state: 'Ohio',
-      },
-      {
-        firstName: 'Ervin',
-        lastName: 'Reinger',
-        address: '566 Brakus Inlet',
-        city: 'South Linda',
-        state: 'West Virginia',
-      },
-      {
-        firstName: 'Brittany',
-        lastName: 'McCullough',
-        address: '722 Emie Stream',
-        city: 'Lincoln',
-        state: 'Nebraska',
-      },
-      {
-        firstName: 'Branson',
-        lastName: 'Frami',
-        address: '32188 Larkin Turnpike',
-        city: 'Charleston',
-        state: 'South Carolina',
-      },
-      //end
-    ],
-    [],
+    //end
   );
 
   return (

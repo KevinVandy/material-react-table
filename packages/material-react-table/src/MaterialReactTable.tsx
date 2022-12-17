@@ -972,8 +972,8 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     onShowGlobalFilterChange?: OnChangeFn<boolean>;
     positionActionsColumn?: 'first' | 'last';
     positionExpandColumn?: 'first' | 'last';
-    positionGlobalFilter?: 'left' | 'right';
-    positionPagination?: 'bottom' | 'top' | 'both';
+    positionGlobalFilter?: 'left' | 'right' | 'none';
+    positionPagination?: 'bottom' | 'top' | 'both' | 'none';
     positionToolbarAlertBanner?: 'bottom' | 'top' | 'none';
     positionToolbarDropZone?: 'bottom' | 'top' | 'none' | 'both';
     renderBottomToolbar?:

@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+import DisableExample from '../../../examples/minimal';
+import CustomTopToolbarExample from '../../../examples/custom-top-toolbar';
 
 <Head>
   <title>Customizing Toolbars Feature Guide - Material React Table Docs</title>
@@ -58,6 +60,10 @@ There are `enableTopToolbar` and `enableBottomToolbar` props that you can use to
   enableBottomToolbar={false} //hide bottom toolbar
 />
 ```
+
+#### No Toolbars Example
+
+<DisableExample />
 
 ### Customize Toolbar buttons
 
@@ -120,6 +126,10 @@ In all of these `render...` props, you get access to the underlying `table` inst
   )}
 />
 ```
+
+#### Full Custom Top Toolbar Example
+
+<CustomTopToolbarExample />
 
 ### Position Toolbar Areas
 
