@@ -3,13 +3,13 @@ import TablePagination from '@mui/material/TablePagination';
 import { MRT_TableInstance } from '..';
 
 interface Props<TData extends Record<string, any> = {}> {
-  position: 'top' | 'bottom';
+  position?: 'top' | 'bottom';
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
   table,
-  position,
+  position = 'bottom',
 }: Props<TData>) => {
   const {
     getPrePaginationRowModel,
