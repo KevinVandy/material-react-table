@@ -53,7 +53,7 @@ export const CustomTableBody: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     muiTableBodyProps={{
-      children: 'Custom Table Body'
+      children: 'Custom Table Body',
     }}
   />
 );

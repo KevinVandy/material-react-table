@@ -49,17 +49,25 @@ There are 4 visually distinct editing modes to choose from, whether you want to 
 
 ### Enable Editing
 
+To enable editing, first you just need to set the `enableEditing` prop to `true`.
+
+```jsx
+<MaterialTable columns={columns} data={data} enableEditing={true} />
+```
+
+However, this is just the start. You will need to hook up logic and event listeners, but it depends on which editing mode you want to use.
+
 ### Editing Modes
 
-Material React Table has 4 supported editing modes: `modal` (default), `row`, `cell` and `table`. You can specify which editing mode you want to use by passing the `editingMode` prop.
+Material React Table has 4 supported editing modes: `"modal"` (default), `"row"`, `"cell"` and `"table"`. You can specify which editing mode you want to use by passing the `editingMode` prop.
 
 #### Modal Editing Mode
 
-The `modal` editing mode opens up a dialog where the user can edit data for 1 row at a time. No data is saved to the table until the user clicks the save button. Clicking the cancel button clears out any changes that were made on that row.
+The `"modal"` editing mode opens up a dialog where the user can edit data for 1 row at a time. No data is saved to the table until the user clicks the save button. Clicking the cancel button clears out any changes that were made on that row.
 
 An `onEditingRowSave` callback function prop must be provided where you will get access to the updated row data so that changes can be processed and saved. It is up to you how you handle the data. This function has a `exitEditingMode` parameter that must be called in order to exit editing mode upon save. The reason for this is so that you can perform validation checks before letting the modal close.
 
-> The `onEditingRowSave` callback function prop includes a `exitEditingMode` parameter that must be called in order to exit editing mode upon save. The reason for this is so that you can perform validation checks before letting the modal close.
+> The `onEditingRowSave` callback function prop includes an `exitEditingMode` parameter that must be called in order to exit editing mode upon save. The reason for this is so that you can perform validation checks before letting the modal close.
 
 <EditingModalExample />
 
@@ -69,7 +77,7 @@ The `row` editing mode is an inline row editing mode. When edit mode is activate
 
 You must provide an `onEditingRowSave` callback function prop where you will get access to the updated row data so that changes can be processed and saved. It is up to you how you handle the data. This function has a `exitEditingMode` parameter that must be called in order to exit editing mode upon save. The reason for this is so that you can perform validation checks before letting the modal close.
 
-> The `onEditingRowSave` callback function prop includes a `exitEditingMode` parameter that must be called in order to exit editing mode upon save. The reason for this is so that you can perform validation checks before letting the modal close.
+> The `onEditingRowSave` callback function prop includes an `exitEditingMode` parameter that must be called in order to exit editing mode upon save. The reason for this is so that you can perform validation checks before letting the modal close.
 
 <EditingRowExample />
 

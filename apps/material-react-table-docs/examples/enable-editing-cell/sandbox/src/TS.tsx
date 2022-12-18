@@ -3,6 +3,7 @@ import MaterialReactTable, {
   MRT_Cell,
   MRT_ColumnDef,
 } from 'material-react-table';
+import { Typography } from '@mui/material';
 import { data, Person } from './makeData';
 
 const Example: FC = () => {
@@ -55,6 +56,11 @@ const Example: FC = () => {
           handleSaveCell(cell, event.target.value);
         },
       })}
+      renderBottomToolbarCustomActions={() => (
+        <Typography sx={{ fontStyle: 'italic', p: '0 1rem' }} variant="body2">
+          Double-Click a Cell to Edit
+        </Typography>
+      )}
     />
   );
 };

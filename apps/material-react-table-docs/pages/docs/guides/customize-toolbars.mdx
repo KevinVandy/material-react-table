@@ -6,16 +6,16 @@ import CustomTopToolbarExample from '../../../examples/custom-top-toolbar';
 import ExternalExample from '../../../examples/external-toolbar';
 
 <Head>
-  <title>Customizing Toolbars Feature Guide - Material React Table Docs</title>
+  <title>Toolbar Customization Guide - Material React Table Docs</title>
   <meta
     name="description"
     content="How to customize the Toolbars, add buttons to toolbars, or customize progress bars and alert banners in Material React Table"
   />
 </Head>
 
-## Customizing Toolbars Feature Guide
+## Toolbar Customization Guide
 
-This guide shows you how to hide or customize the top and bottom toolbars in Material React Table.
+This guide shows you how to [hide](#hide-or-disable-toolbars), [customize](#customize-toolbar-buttons), or [override](#override-with-custom-toolbar-components) the top and bottom toolbars in Material React Table.
 
 ### Relevant Props
 
@@ -49,7 +49,7 @@ This guide shows you how to hide or customize the top and bottom toolbars in Mat
   onlyProps={new Set(['showAlertBanner', 'showProgressBars'])}
 />
 
-### Hide/Disable Toolbars
+### Hide or Disable Toolbars
 
 There are `enableTopToolbar` and `enableBottomToolbar` props that you can use to show or hide the toolbars.
 
@@ -247,6 +247,6 @@ You may want to separate out your own toolbar functionality away from the main t
 
 You can import import the MRT Internal Toolbar button components and use them in your custom toolbar, just like you can when customizing the built-in toolbar, BUT there are some extra re-render hacks that you hve to do to make the icon buttons work properly. See the example below:
 
-> Passing the `tableInstanceRef` as a prop for the `table` prop that MRT_* components need also requires some weird re-render hacks to make the icon buttons work properly, because refs do not trigger re-renders in React.
+> Passing the `tableInstanceRef` as a prop for the `table` prop that MRT\_\* components need also requires some weird re-render hacks to make the icon buttons work properly, because refs do not trigger re-renders in React.
 
 <ExternalExample />

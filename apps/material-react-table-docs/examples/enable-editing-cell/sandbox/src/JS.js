@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import MaterialReactTable from 'material-react-table';
+import { Typography } from '@mui/material';
 import { data } from './makeData';
 
 const Example = () => {
@@ -52,6 +53,11 @@ const Example = () => {
           handleSaveCell(cell, event.target.value);
         },
       })}
+      renderBottomToolbarCustomActions={() => (
+        <Typography sx={{ fontStyle: 'italic', p: '0 1rem' }} variant="body2">
+          Double-Click a Cell to Edit
+        </Typography>
+      )}
     />
   );
 };

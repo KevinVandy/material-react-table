@@ -148,15 +148,11 @@ export const routes: Array<RouteItem> = [
           },
           {
             href: '/docs/guides/customize-components',
-            label: 'Customize Components',
+            label: 'Customize (Style) Components',
           },
           {
             href: '/docs/guides/customize-icons',
-            label: 'Customize Icons',
-          },
-          {
-            href: '/docs/guides/customize-toolbars',
-            label: 'Customize Toolbars',
+            label: 'Custom Icons',
           },
           {
             href: '/docs/guides/localization',
@@ -168,11 +164,15 @@ export const routes: Array<RouteItem> = [
           },
           {
             href: '/docs/guides/table-event-listeners',
-            label: 'Table Event Listeners',
+            label: 'Event Listeners',
           },
           {
             href: '/docs/guides/table-state-management',
-            label: 'Table State Management',
+            label: 'State Management',
+          },
+          {
+            href: '/docs/guides/customize-toolbars',
+            label: 'Toolbar Customization',
           },
         ],
       },
