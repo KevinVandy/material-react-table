@@ -16,24 +16,29 @@ import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 import { MRT_TableBodyRowGrabHandle } from './MRT_TableBodyRowGrabHandle';
 import { MRT_TableBodyCellValue } from './MRT_TableBodyCellValue';
 import { getCommonCellStyles } from '../column.utils';
+import type { VirtualItem } from '@tanstack/react-virtual';
 import type { MRT_Cell, MRT_TableInstance } from '..';
 
 interface Props {
   cell: MRT_Cell;
   enableHover?: boolean;
+  measureElement?: (element: HTMLTableCellElement) => void;
   numRows: number;
   rowIndex: number;
   rowRef: RefObject<HTMLTableRowElement>;
   table: MRT_TableInstance;
+  virtualCell?: VirtualItem;
 }
 
 export const MRT_TableBodyCell: FC<Props> = ({
   cell,
   enableHover,
+  measureElement,
   numRows,
   rowIndex,
   rowRef,
   table,
+  virtualCell,
 }) => {
   const theme = useTheme();
   const {
@@ -169,6 +174,12 @@ export const MRT_TableBodyCell: FC<Props> = ({
 
   return (
     <TableCell
+      data-index={virtualCell?.index}
+      ref={(node: HTMLTableCellElement) => {
+        if (node) {
+          measureElement?.(node);
+        }
+      }}
       {...tableCellProps}
       onDragEnter={handleDragEnter}
       onDoubleClick={handleDoubleClick}
@@ -214,7 +225,12 @@ export const MRT_TableBodyCell: FC<Props> = ({
                 : `${darken(theme.palette.background.default, 0.1)} !important`
               : undefined,
         },
-        ...getCommonCellStyles({ column, table, theme, tableCellProps }),
+        ...getCommonCellStyles({
+          column,
+          table,
+          theme,
+          tableCellProps,
+        }),
         ...draggingBorders,
       })}
     >

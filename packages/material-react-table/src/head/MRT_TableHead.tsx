@@ -1,13 +1,22 @@
 import React, { FC } from 'react';
 import TableHead from '@mui/material/TableHead';
 import { MRT_TableHeadRow } from './MRT_TableHeadRow';
+import type { VirtualItem } from '@tanstack/react-virtual';
 import type { MRT_TableInstance } from '..';
 
 interface Props {
   table: MRT_TableInstance;
+  virtualColumns?: VirtualItem[];
+  virtualPaddingLeft?: number;
+  virtualPaddingRight?: number;
 }
 
-export const MRT_TableHead: FC<Props> = ({ table }) => {
+export const MRT_TableHead: FC<Props> = ({
+  table,
+  virtualColumns,
+  virtualPaddingLeft,
+  virtualPaddingRight,
+}) => {
   const {
     getHeaderGroups,
     getState,
@@ -41,6 +50,9 @@ export const MRT_TableHead: FC<Props> = ({ table }) => {
           headerGroup={headerGroup as any}
           key={headerGroup.id}
           table={table}
+          virtualColumns={virtualColumns}
+          virtualPaddingLeft={virtualPaddingLeft}
+          virtualPaddingRight={virtualPaddingRight}
         />
       ))}
     </TableHead>

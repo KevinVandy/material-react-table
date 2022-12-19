@@ -78,10 +78,8 @@ const Example = () => {
   }, []);
 
   useEffect(() => {
-    if (virtualizerInstanceRef.current) {
-      //scroll to the top of the table when the sorting changes
-      virtualizerInstanceRef.current.scrollToIndex(0);
-    }
+    //scroll to the top of the table when the sorting changes
+    virtualizerInstanceRef.current?.scrollToIndex(0);
   }, [sorting]);
 
   return (

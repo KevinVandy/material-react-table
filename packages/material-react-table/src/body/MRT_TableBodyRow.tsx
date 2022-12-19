@@ -3,24 +3,32 @@ import TableRow from '@mui/material/TableRow';
 import { darken, lighten, useTheme } from '@mui/material/styles';
 import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
-import type { VirtualItem } from '@tanstack/react-virtual';
-import type { MRT_Row, MRT_TableInstance } from '..';
+import type { VirtualItem, Virtualizer } from '@tanstack/react-virtual';
+import type { MRT_Cell, MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
+  columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
   measureElement?: (element: HTMLTableRowElement) => void;
   numRows: number;
   row: MRT_Row;
   rowIndex: number;
   table: MRT_TableInstance;
+  virtualColumns?: VirtualItem[];
+  virtualPaddingLeft?: number;
+  virtualPaddingRight?: number;
   virtualRow?: VirtualItem;
 }
 
 export const MRT_TableBodyRow: FC<Props> = ({
+  columnVirtualizer,
   measureElement,
   numRows,
   row,
   rowIndex,
   table,
+  virtualColumns,
+  virtualPaddingLeft,
+  virtualPaddingRight,
   virtualRow,
 }) => {
   const theme = useTheme();
@@ -108,15 +116,25 @@ export const MRT_TableBodyRow: FC<Props> = ({
           ...draggingBorders,
         })}
       >
-        {row.getVisibleCells().map((cell) => {
+        {virtualPaddingLeft ? (
+          <td style={{ display: 'flex', width: virtualPaddingLeft }} />
+        ) : null}
+        {(virtualColumns ?? row.getVisibleCells()).map((cellOrVirtualCell) => {
+          const cell = columnVirtualizer
+            ? row.getVisibleCells()[(cellOrVirtualCell as VirtualItem).index]
+            : (cellOrVirtualCell as MRT_Cell);
           const props = {
             cell,
             enableHover: tableRowProps?.hover !== false,
             key: cell.id,
+            measureElement: columnVirtualizer?.measureElement,
             numRows,
             rowIndex,
             rowRef,
             table,
+            virtualCell: columnVirtualizer
+              ? (cellOrVirtualCell as VirtualItem)
+              : undefined,
           };
           return memoMode === 'cells' &&
             cell.column.columnDef.columnDefType === 'data' &&
@@ -129,6 +147,9 @@ export const MRT_TableBodyRow: FC<Props> = ({
             <MRT_TableBodyCell {...props} />
           );
         })}
+        {virtualPaddingRight ? (
+          <td style={{ display: 'flex', width: virtualPaddingRight }} />
+        ) : null}
       </TableRow>
       {renderDetailPanel && !row.getIsGrouped() && (
         <MRT_TableDetailPanel

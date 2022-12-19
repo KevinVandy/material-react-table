@@ -17,7 +17,10 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
+export const MRT_TableHeadCell: FC<Props> = ({
+  header,
+  table,
+}) => {
   const theme = useTheme();
   const {
     getState,
@@ -123,9 +126,9 @@ export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
       align={columnDefType === 'group' ? 'center' : 'left'}
       colSpan={header.colSpan}
       onDragEnter={handleDragEnter}
-      ref={(node) => {
+      ref={(node: HTMLTableCellElement) => {
         if (node) {
-          tableHeadCellRefs.current[column.id] = node as HTMLTableCellElement;
+          tableHeadCellRefs.current[column.id] = node;
         }
       }}
       {...tableCellProps}

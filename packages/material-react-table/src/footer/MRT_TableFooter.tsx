@@ -2,13 +2,22 @@ import React, { FC } from 'react';
 import TableFooter from '@mui/material/TableFooter';
 import { lighten } from '@mui/material/styles';
 import { MRT_TableFooterRow } from './MRT_TableFooterRow';
+import type { VirtualItem } from '@tanstack/react-virtual';
 import type { MRT_TableInstance } from '..';
 
 interface Props {
   table: MRT_TableInstance;
+  virtualColumns?: VirtualItem[];
+  virtualPaddingLeft?: number;
+  virtualPaddingRight?: number;
 }
 
-export const MRT_TableFooter: FC<Props> = ({ table }) => {
+export const MRT_TableFooter: FC<Props> = ({
+  table,
+  virtualColumns,
+  virtualPaddingLeft,
+  virtualPaddingRight,
+}) => {
   const {
     getFooterGroups,
     getState,
@@ -48,6 +57,9 @@ export const MRT_TableFooter: FC<Props> = ({ table }) => {
           footerGroup={footerGroup as any}
           key={footerGroup.id}
           table={table}
+          virtualColumns={virtualColumns}
+          virtualPaddingLeft={virtualPaddingLeft}
+          virtualPaddingRight={virtualPaddingRight}
         />
       ))}
     </TableFooter>

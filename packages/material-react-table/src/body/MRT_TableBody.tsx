@@ -11,10 +11,20 @@ import { rankGlobalFuzzy } from '../sortingFns';
 import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
+  columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
   table: MRT_TableInstance;
+  virtualColumns?: VirtualItem[];
+  virtualPaddingLeft?: number;
+  virtualPaddingRight?: number;
 }
 
-export const MRT_TableBody: FC<Props> = ({ table }) => {
+export const MRT_TableBody: FC<Props> = ({
+  columnVirtualizer,
+  table,
+  virtualColumns,
+  virtualPaddingLeft,
+  virtualPaddingRight,
+}) => {
   const {
     getRowModel,
     getPrePaginationRowModel,
@@ -29,6 +39,8 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
       manualSorting,
       memoMode,
       muiTableBodyProps,
+      rowVirtualizerInstanceRef,
+      rowVirtualizerProps,
       virtualizerInstanceRef,
       virtualizerProps,
     },
@@ -42,10 +54,15 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
       ? muiTableBodyProps({ table })
       : muiTableBodyProps;
 
-  const vProps =
+  const vProps_old =
     virtualizerProps instanceof Function
       ? virtualizerProps({ table })
       : virtualizerProps;
+
+  const vProps =
+    rowVirtualizerProps instanceof Function
+      ? rowVirtualizerProps({ table })
+      : rowVirtualizerProps;
 
   const rows = useMemo(() => {
     if (
@@ -78,7 +95,7 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
     pagination.pageSize,
   ]);
 
-  const virtualizer:
+  const rowVirtualizer:
     | Virtualizer<HTMLDivElement, HTMLTableRowElement>
     | undefined = enableRowVirtualization
     ? useVirtualizer({
@@ -88,22 +105,32 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
         getScrollElement: () => tableContainerRef.current,
         measureElement: (element) => element?.getBoundingClientRect().height,
         overscan: 4,
+        ...vProps_old,
         ...vProps,
       })
     : undefined;
 
-  if (virtualizerInstanceRef && virtualizer) {
-    virtualizerInstanceRef.current = virtualizer;
+  if (rowVirtualizerInstanceRef && rowVirtualizer) {
+    rowVirtualizerInstanceRef.current = rowVirtualizer;
   }
 
-  const virtualRows = virtualizer ? virtualizer.getVirtualItems() : undefined;
+  //deprecated
+  if (virtualizerInstanceRef && rowVirtualizer) {
+    virtualizerInstanceRef.current = rowVirtualizer;
+  }
+
+  const virtualRows = rowVirtualizer
+    ? rowVirtualizer.getVirtualItems()
+    : undefined;
 
   return (
     <TableBody
       {...tableBodyProps}
       sx={(theme) => ({
         display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
-        height: virtualizer ? `${virtualizer.getTotalSize()}px` : 'inherit',
+        height: rowVirtualizer
+          ? `${rowVirtualizer.getTotalSize()}px`
+          : 'inherit',
         minHeight: !rows.length ? '100px' : undefined,
         position: 'relative',
         ...(tableBodyProps?.sx instanceof Function
@@ -139,19 +166,21 @@ export const MRT_TableBody: FC<Props> = ({ table }) => {
         ) : (
           <>
             {(virtualRows ?? rows).map((rowOrVirtualRow, rowIndex) => {
-              const row = virtualizer
+              const row = rowVirtualizer
                 ? rows[rowOrVirtualRow.index]
                 : (rowOrVirtualRow as MRT_Row);
               const props = {
+                columnVirtualizer,
                 key: row.id,
-                measureElement: virtualizer
-                  ? virtualizer.measureElement
-                  : undefined,
+                measureElement: rowVirtualizer?.measureElement,
                 numRows: rows.length,
                 row,
-                rowIndex: virtualizer ? rowOrVirtualRow.index : rowIndex,
+                rowIndex: rowVirtualizer ? rowOrVirtualRow.index : rowIndex,
                 table,
-                virtualRow: virtualizer
+                virtualColumns,
+                virtualPaddingLeft,
+                virtualPaddingRight,
+                virtualRow: rowVirtualizer
                   ? (rowOrVirtualRow as VirtualItem)
                   : undefined,
               };

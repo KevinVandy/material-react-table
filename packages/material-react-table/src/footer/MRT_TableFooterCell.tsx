@@ -8,7 +8,10 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_TableFooterCell: FC<Props> = ({ footer, table }) => {
+export const MRT_TableFooterCell: FC<Props> = ({
+  footer,
+  table,
+}) => {
   const {
     getState,
     options: { layoutMode, muiTableFooterCellProps },
@@ -51,7 +54,12 @@ export const MRT_TableFooterCell: FC<Props> = ({ footer, table }) => {
             : '1.5rem',
         verticalAlign: 'top',
         zIndex: column.getIsPinned() && columnDefType !== 'group' ? 2 : 1,
-        ...getCommonCellStyles({ column, table, theme, tableCellProps }),
+        ...getCommonCellStyles({
+          column,
+          table,
+          theme,
+          tableCellProps,
+        }),
       })}
     >
       <>

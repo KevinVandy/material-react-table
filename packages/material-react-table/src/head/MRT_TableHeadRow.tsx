@@ -2,14 +2,24 @@ import React, { FC } from 'react';
 import TableRow from '@mui/material/TableRow';
 import { alpha, lighten } from '@mui/material/styles';
 import { MRT_TableHeadCell } from './MRT_TableHeadCell';
+import type { VirtualItem } from '@tanstack/react-virtual';
 import type { MRT_Header, MRT_HeaderGroup, MRT_TableInstance } from '..';
 
 interface Props {
   headerGroup: MRT_HeaderGroup;
   table: MRT_TableInstance;
+  virtualColumns?: VirtualItem[];
+  virtualPaddingLeft?: number;
+  virtualPaddingRight?: number;
 }
 
-export const MRT_TableHeadRow: FC<Props> = ({ headerGroup, table }) => {
+export const MRT_TableHeadRow: FC<Props> = ({
+  headerGroup,
+  table,
+  virtualColumns,
+  virtualPaddingLeft,
+  virtualPaddingRight,
+}) => {
   const {
     options: { layoutMode, muiTableHeadRowProps },
   } = table;
@@ -32,9 +42,25 @@ export const MRT_TableHeadRow: FC<Props> = ({ headerGroup, table }) => {
           : (tableRowProps?.sx as any)),
       })}
     >
-      {headerGroup.headers.map((header: MRT_Header) => (
-        <MRT_TableHeadCell header={header} key={header.id} table={table} />
-      ))}
+      {virtualPaddingLeft ? (
+        <th style={{ display: 'flex', width: virtualPaddingLeft }} />
+      ) : null}
+      {(virtualColumns ?? headerGroup.headers).map((headerOrVirtualHeader) => {
+        const header = virtualColumns
+          ? headerGroup.headers[headerOrVirtualHeader.index]
+          : (headerOrVirtualHeader as MRT_Header);
+
+        return (
+          <MRT_TableHeadCell
+            header={header}
+            key={header.id}
+            table={table}
+          />
+        );
+      })}
+      {virtualPaddingRight ? (
+        <th style={{ display: 'flex', width: virtualPaddingRight }} />
+      ) : null}
     </TableRow>
   );
 };

@@ -659,6 +659,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     enableColumnDragging?: boolean;
     enableColumnFilterModes?: boolean;
     enableColumnOrdering?: boolean;
+    enableColumnVirtualization?: boolean;
     enableDensityToggle?: boolean;
     enableEditing?: boolean;
     enableExpandAll?: boolean;
@@ -1055,18 +1056,39 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     rowNumberMode?: 'original' | 'static';
     selectAllMode?: 'all' | 'page';
     state?: Partial<MRT_TableState<TData>>;
-    tableInstanceRef?: MutableRefObject<MRT_TableInstance<TData> | null>;
-    virtualizerProps?:
+    columnVirtualizerInstanceRef?: MutableRefObject<Virtualizer<
+      HTMLDivElement,
+      HTMLTableCellElement
+    > | null>;
+    columnVirtualizerProps?:
+      | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableCellElement>>
+      | (({
+          table,
+        }: {
+          table: MRT_TableInstance<TData>;
+        }) => Partial<
+          VirtualizerOptions<HTMLDivElement, HTMLTableCellElement>
+        >);
+    rowVirtualizerInstanceRef?: MutableRefObject<Virtualizer<
+      HTMLDivElement,
+      HTMLTableRowElement
+    > | null>;
+    rowVirtualizerProps?:
       | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>
       | (({
           table,
         }: {
           table: MRT_TableInstance<TData>;
         }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>);
-    virtualizerInstanceRef?: MutableRefObject<Virtualizer<
-      HTMLDivElement,
-      HTMLTableRowElement
-    > | null>;
+    tableInstanceRef?: MutableRefObject<MRT_TableInstance<TData> | null>;
+    /**
+     * @deprecated Use `rowVirtualizerInstanceRef` instead
+     */
+    virtualizerInstanceRef?: any;
+    /**
+     * @deprecated Use `rowVirtualizerProps` instead
+     */
+    virtualizerProps?: any;
   };
 
 const MaterialReactTable = <TData extends Record<string, any> = {}>({
@@ -1142,7 +1164,7 @@ const MaterialReactTable = <TData extends Record<string, any> = {}>({
     [],
   );
 
-  if (rest.enableRowVirtualization) {
+  if (rest.enableRowVirtualization || rest.enableColumnVirtualization) {
     layoutMode = 'grid';
     enableStickyHeader = true;
   }
