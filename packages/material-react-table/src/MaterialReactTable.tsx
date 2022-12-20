@@ -1127,6 +1127,10 @@ const MaterialReactTable = <TData extends Record<string, any> = {}>({
   icons,
   layoutMode = 'semantic',
   localization,
+  manualFiltering,
+  manualGrouping,
+  manualPagination,
+  manualSorting,
   positionActionsColumn = 'first',
   positionExpandColumn = 'first',
   positionGlobalFilter = 'right',
@@ -1169,6 +1173,13 @@ const MaterialReactTable = <TData extends Record<string, any> = {}>({
     enableStickyHeader = true;
   }
 
+  if (!rest.data?.length) {
+    manualFiltering = true;
+    manualGrouping = true;
+    manualPagination = true;
+    manualSorting = true;
+  }
+
   return (
     <MRT_TableRoot
       aggregationFns={_aggregationFns}
@@ -1206,6 +1217,10 @@ const MaterialReactTable = <TData extends Record<string, any> = {}>({
       icons={_icons}
       layoutMode={layoutMode}
       localization={_localization}
+      manualFiltering={manualFiltering}
+      manualGrouping={manualGrouping}
+      manualPagination={manualPagination}
+      manualSorting={manualSorting}
       positionActionsColumn={positionActionsColumn}
       positionExpandColumn={positionExpandColumn}
       positionGlobalFilter={positionGlobalFilter}

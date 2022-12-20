@@ -239,7 +239,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
               {},
               ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef[]).map(
                 (col) => ({
-                  [col.id ?? col.accessorKey ?? '']: null,
+                  [getColumnId(col)]: null,
                 }),
               ),
             ),
