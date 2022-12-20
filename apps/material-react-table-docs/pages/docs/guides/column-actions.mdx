@@ -14,7 +14,7 @@ import ColumnActionsSpaceExample from '../../../examples/column-actions-space';
 
 ## Column Actions Feature Guide
 
-By default, Material React Table renders a column actions button for each column header. It contains a dropdown menu to help your users use the other features of the table. All of these actions can be triggered in some other way other than from this dropdown menu, so this serves as a UI/UX alternative to make sure your users can find many of the table features easily.
+By default, Material React Table renders a column actions button for each column header. It contains a drop-down menu to help your users use the other features of the table. All of these actions can be triggered in some other way other than from this drop-down menu, so this serves as a UI/UX alternative to make sure your users can find many of the table features easily.
 
 ### Relevant Props
 
@@ -48,9 +48,9 @@ You can set the `enableColumnActions` prop to `false` in the table to disable th
 <MaterialReactTable data={data} columns={columns} enableColumnActions={false} />
 ```
 
-Alternatively, if you only want to hide the column actions button in specific columns, you can set the `enableColumnActions` property the desired column definition to `false` instead.
+Alternatively, if you only want to hide the column actions button in specific columns, you can set the `enableColumnActions` property for the desired column definition to `false` instead.
 
-In this demo, we disable the column actions button for the 'id' column.
+In this demo, we disable the column actions button for the 'ID' column.
 
 <DisableExample />
 
@@ -58,7 +58,7 @@ In this demo, we disable the column actions button for the 'id' column.
 
 > Changed to left alignment in `v1.2.0`
 
-By default, the column actions button is left aligned right after the column header text, and any sort or filter labels that may be present. If you want to change this, you can use a CSS selector in `muiTableHeadCellProps` to change the `justify-content` property of the column header container.
+By default, the column actions button is left aligned directly after the column header text and any sort or filter labels that may be present. If you want to change this, you can use a CSS selector in `muiTableHeadCellProps` to change the `justify-content` property of the column header container.
 
 <ColumnActionsSpaceExample />
 

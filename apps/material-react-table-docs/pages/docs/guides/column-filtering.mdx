@@ -18,7 +18,7 @@ import RemoteExample from '../../../examples/remote';
 
 ## Column Filtering Feature Guide
 
-Filtering is one of the most powerful features of Material React Table and is enabled by default. There is a lot of flexibility and customization available here, whether you want to customize the powerful client-side filtering already built in, or implement your own [server-side filtering](#manual-server-side-column-filtering), Material React Table has got you covered.
+Filtering is one of the most powerful features of Material React Table and is enabled by default. There is a lot of flexibility and customization available here. Whether you want to customize the powerful client-side filtering already built in or implement your own [server-side filtering](#manual-server-side-column-filtering), Material React Table has got you covered.
 
 ### Relevant Props
 
@@ -72,7 +72,7 @@ Filtering is one of the most powerful features of Material React Table and is en
 
 ### Disable Filtering Features
 
-Various subsets of filtering features can be disabled. If you want to disable filtering completely, you can set the `enableColumnFilters` prop to `false`, to remove all filters from each column. Alternatively, `enableColumnFilter` can be set to `false` for individual columns.
+Various subsets of filtering features can be disabled. If you want to disable filtering completely, you can set the `enableColumnFilters` prop to `false` to remove all filters from each column. Alternatively, `enableColumnFilter` can be set to `false` for individual columns.
 
 `enableFilters` can be set to `false` to disable both column filters and the global search filter.
 
@@ -80,7 +80,7 @@ Various subsets of filtering features can be disabled. If you want to disable fi
 
 ### Filter Variants
 
-Material React Table has some built in filter variants for advanced filtering. These can be specified on a per-column basis using the `filterVariant` option. The following variants are available:
+Material React Table has several built-in filter variants for advanced filtering. These can be specified on a per-column basis using the `filterVariant` option. The following variants are available:
 
 - `'text'` - shows the default text field
 - `'select'` - shows a select dropdown with the options specified in `filterSelectOptions`
@@ -92,7 +92,7 @@ Material React Table has some built in filter variants for advanced filtering. T
 
 ### Custom Filter Functions
 
-You can specify either a pre-built filterFn that comes with Material React Table, or pass in your own custom filter functions.
+You can specify either a pre-built filterFn that comes with Material React Table or pass in your own custom filter functions.
 
 #### Custom Filter Functions Per Column
 
@@ -100,13 +100,13 @@ By default, Material React Table uses a `fuzzy` filtering algorithm based on the
 
 ##### Pre-built MRT Filter Functions
 
-> Prebuilt filter functions from Material React table include `between`, `betweenInclusive`, `contains`, `empty`, `endsWith`, `equals`, `fuzzy`, `greaterThan`, `greaterThanOrEqualTo`, `lessThan`, `lessThanOrEqualTo`, `notEmpty`, `notEquals`, and `startsWith`. View these algorithms [here](https://github.com/KevinVandy/material-react-table/blob/main/packages/material-react-table/src/filterFns.ts)
+> Pre-built filter functions from Material React table include `between`, `betweenInclusive`, `contains`, `empty`, `endsWith`, `equals`, `fuzzy`, `greaterThan`, `greaterThanOrEqualTo`, `lessThan`, `lessThanOrEqualTo`, `notEmpty`, `notEquals`, and `startsWith`. View these algorithms [here](https://github.com/KevinVandy/material-react-table/blob/main/packages/material-react-table/src/filterFns.ts)
 
 ##### Pre-built TanStack Table Filter Functions
 
-> Prebuilt filter functions from TanStack Table include `includesString`, `includesStringSensitive`, `equalsString`, `equalsStringSensitive`, `arrIncludes`, `arrIncludesAll`, `arrIncludesSome`, `weakEquals`, and `inNumberRange`. View more information about these algorithms in the [TanStack Table Filter docs](https://tanstack.com/table/v8/docs/api/features/filters#filter-functions).
+> Pre-built filter functions from TanStack Table include `includesString`, `includesStringSensitive`, `equalsString`, `equalsStringSensitive`, `arrIncludes`, `arrIncludesAll`, `arrIncludesSome`, `weakEquals`, and `inNumberRange`. View more information about these algorithms in the [TanStack Table Filter docs](https://tanstack.com/table/v8/docs/api/features/filters#filter-functions).
 
-You can specify either a prebuilt filter function, from Material React Table or TanStack Table, or you can even specify _your own custom filter function_ in the `filterFn` column option.
+You can specify either a pre-built filter function, from Material React Table or TanStack Table, or you can even specify _your own custom filter function_ in the `filterFn` column option.
 
 ```jsx
 const columns = [
@@ -138,7 +138,7 @@ If you provide a custom filter function, it must have the following signature:
 (row: Row<TData>, id: string, filterValue: string | number) => boolean;
 ```
 
-This function will be used to filter 1 row at a time, and should return a `boolean` indicating whether or not that row passes the filter.
+This function will be used to filter 1 row at a time and should return a `boolean` indicating whether or not that row passes the filter.
 
 #### Add Custom Filter Functions
 
@@ -170,7 +170,7 @@ return (
 
 #### Enable Column Filter Modes (Filter Switching)
 
-If you want to let the user switch between multiple different filter modes from a dropdown menu on the Filter Textfield, you can enable that with the `enableColumnFilterModes` prop or column option. This will enable the filter icon in the filter text field to open a dropdown menu with the available filter modes when clicked.
+If you want to let the user switch between multiple different filter modes from a drop-down menu on the Filter Textfield, you can enable that with the `enableColumnFilterModes` prop or column option. This will enable the filter icon in the filter text field to open a drop-down menu with the available filter modes when clicked.
 
 ```tsx
 <MaterialReactTable columns={columns} data={data} enableColumnFilterModes />
@@ -178,7 +178,7 @@ If you want to let the user switch between multiple different filter modes from 
 
 #### Customize Filter Modes
 
-You can narrow down the available filter mode options by setting the `columnFilterModeOptions` prop, or a column specific `columnFilterModeOptions` option.
+You can narrow down the available filter mode options by setting the `columnFilterModeOptions` prop or a column specific `columnFilterModeOptions` option.
 
 ```tsx
 const columns = [
@@ -198,7 +198,7 @@ const columns = [
 
 #### Render Custom Filter Mode Menu
 
-You can also render custom menu items in the filter mode dropdown menu by setting the `renderColumnFilterModeMenuItems` prop or column option. This option is a function that takes in the column and returns an array of `MenuItem` components. This is useful if you want to add custom filter modes that are not included in Material React Table, or if you just want to render the menu in your own custom way
+You can also render custom menu items in the filter mode drop-down menu by setting the `renderColumnFilterModeMenuItems` prop or column option. This option is a function that takes in the column and returns an array of `MenuItem` components. This is useful if you want to add custom filter modes that are not included in Material React Table, or if you just want to render the menu in your own custom way
 
 ```jsx
 const columns = [
@@ -242,7 +242,7 @@ Check out the [Expanded Leaf Row Filtering Behavior docs](/docs/guides/expanding
 
 ### Manual Server-Side Column Filtering
 
-A very common use case when you have a lot of data is to filter the data on the server, instead of client-side. In this case you will want to set the `manualFiltering` prop to `true` and manage the `columnFilters` state yourself like so. (Can work in conjunction with [manual global filtering](https://www.material-react-table.com/docs/guides/global-filtering#manual-server-side-global-filtering))
+A very common use case when you have a lot of data is to filter the data on the server, instead of client-side. In this case, you will want to set the `manualFiltering` prop to `true` and manage the `columnFilters` state yourself like so (can work in conjunction with [manual global filtering](https://www.material-react-table.com/docs/guides/global-filtering#manual-server-side-global-filtering)).
 
 ```tsx
 // You can manage and have control over the columnFilters state yourself
@@ -268,9 +268,9 @@ return (
 );
 ```
 
-> Specifying `manualFiltering` turns off all client-side filtering, and assumes that the `data` you pass to `<MaterialReactTable />` is already filtered.
+> Specifying `manualFiltering` turns off all client-side filtering and assumes that the `data` you pass to `<MaterialReactTable />` is already filtered.
 
-Here is the full Remote Data example showing off server-side **filtering**, pagination, and sorting.
+Here is the full Remote Data example featuring server-side **filtering**, pagination, and sorting.
 
 <RemoteExample />
 
