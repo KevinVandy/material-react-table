@@ -266,7 +266,10 @@ export const getCommonCellStyles = ({
     column.getIsPinned() === 'right'
       ? `${getTotalRight(table, column)}px`
       : undefined,
-  transition: `all ${column.getIsResizing() ? 0 : '150ms'} ease-in-out`,
+  transition:
+    table.options.enableColumnVirtualization || column.getIsResizing()
+      ? 'none'
+      : `all 150ms ease-in-out`,
   ...(tableCellProps?.sx instanceof Function
     ? tableCellProps.sx(theme)
     : (tableCellProps?.sx as any)),

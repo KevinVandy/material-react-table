@@ -8,10 +8,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_TableFooterCell: FC<Props> = ({
-  footer,
-  table,
-}) => {
+export const MRT_TableFooterCell: FC<Props> = ({ footer, table }) => {
   const {
     getState,
     options: { layoutMode, muiTableFooterCellProps },

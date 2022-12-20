@@ -1138,7 +1138,7 @@ const MaterialReactTable = <TData extends Record<string, any> = {}>({
   sortingFns,
   ...rest
 }: MaterialReactTableProps<TData>) => {
-  const _icons = useMemo(() => ({ ...MRT_Default_Icons, ...icons }), []);
+  const _icons = useMemo(() => ({ ...MRT_Default_Icons, ...icons }), [icons]);
   const _localization = useMemo(
     () => ({
       ...MRT_Localization_EN,
@@ -1154,14 +1154,14 @@ const MaterialReactTable = <TData extends Record<string, any> = {}>({
   const _sortingFns = useMemo(() => ({ ...MRT_SortingFns, ...sortingFns }), []);
   const _defaultColumn = useMemo<Partial<MRT_ColumnDef<TData>>>(
     () => ({ ...MRT_DefaultColumn, ...defaultColumn }),
-    [],
+    [defaultColumn],
   );
   const _defaultDisplayColumn = useMemo<Partial<MRT_ColumnDef<TData>>>(
     () => ({
       ...(MRT_DefaultDisplayColumn as Partial<MRT_ColumnDef<TData>>),
       ...defaultDisplayColumn,
     }),
-    [],
+    [defaultDisplayColumn],
   );
 
   if (rest.enableRowVirtualization || rest.enableColumnVirtualization) {

@@ -51,11 +51,7 @@ export const MRT_TableHeadRow: FC<Props> = ({
           : (headerOrVirtualHeader as MRT_Header);
 
         return (
-          <MRT_TableHeadCell
-            header={header}
-            key={header.id}
-            table={table}
-          />
+          <MRT_TableHeadCell header={header} key={header.id} table={table} />
         );
       })}
       {virtualPaddingRight ? (

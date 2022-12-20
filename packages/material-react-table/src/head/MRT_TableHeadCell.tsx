@@ -17,10 +17,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_TableHeadCell: FC<Props> = ({
-  header,
-  table,
-}) => {
+export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
   const theme = useTheme();
   const {
     getState,

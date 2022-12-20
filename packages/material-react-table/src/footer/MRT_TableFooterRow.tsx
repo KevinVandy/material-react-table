@@ -59,11 +59,7 @@ export const MRT_TableFooterRow: FC<Props> = ({
           : (footerOrVirtualFooter as MRT_Header);
 
         return (
-          <MRT_TableFooterCell
-            footer={footer}
-            key={footer.id}
-            table={table}
-          />
+          <MRT_TableFooterCell footer={footer} key={footer.id} table={table} />
         );
       })}
       {virtualPaddingRight ? (
