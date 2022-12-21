@@ -99,7 +99,7 @@ const data = [
   },
   {
     feature: 'Column Virtualization',
-    mrt: false,
+    mrt: true,
     mt: null,
     muix: true,
   },

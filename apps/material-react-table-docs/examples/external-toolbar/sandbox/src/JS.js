@@ -45,7 +45,7 @@ const Example = () => {
   //we need a table instance ref to pass as a prop to the MRT Toolbar buttons
   const tableInstanceRef = useRef(null);
 
-  //we will also need some weird re-render hacks to force the MRT_ components to re-render since ref changes don't trigger a re-render
+  //we will also need some weird re-render hacks to force the MRT_ components to re-render since ref changes do not trigger a re-render
   const rerender = useReducer(() => ({}), {})[1];
 
   //we need to manage the state that should trigger the MRT_ components in our custom toolbar to re-render

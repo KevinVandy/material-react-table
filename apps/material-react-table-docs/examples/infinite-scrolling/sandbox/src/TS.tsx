@@ -59,7 +59,7 @@ const fetchSize = 25;
 
 const Example: FC = () => {
   const tableContainerRef = useRef<HTMLDivElement>(null); //we can get access to the underlying TableContainer element and react to its scroll events
-  const virtualizerInstanceRef =
+  const rowVirtualizerInstanceRef =
     useRef<Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null); //we can get access to the underlying Virtualizer instance and call its scrollToIndex method
 
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -121,8 +121,8 @@ const Example: FC = () => {
 
   //scroll to top of table when sorting or filters change
   useEffect(() => {
-    if (virtualizerInstanceRef.current) {
-      virtualizerInstanceRef.current.scrollToIndex(0);
+    if (rowVirtualizerInstanceRef.current) {
+      rowVirtualizerInstanceRef.current.scrollToIndex(0);
     }
   }, [sorting, columnFilters, globalFilter]);
 
@@ -171,7 +171,8 @@ const Example: FC = () => {
         showProgressBars: isFetching,
         sorting,
       }}
-      virtualizerInstanceRef={virtualizerInstanceRef} //get access to the virtualizer instance
+      rowVirtualizerInstanceRef={rowVirtualizerInstanceRef} //get access to the virtualizer instance
+      rowVirtualizerProps={{ overscan: 10 }}
     />
   );
 };

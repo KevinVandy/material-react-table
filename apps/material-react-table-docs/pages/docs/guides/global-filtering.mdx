@@ -64,7 +64,7 @@ const columns = [
   {
     accessorKey: 'id',
     header: 'Id',
-    enableGlobalFilter: false, // don't scan this column during global filtering
+    enableGlobalFilter: false, // do not scan this column during global filtering
   },
   {
     accessorKey: 'name',
@@ -121,7 +121,7 @@ The default global filter function is set to `fuzzy`, which is a filtering algor
 
 If you keep the default `fuzzy` filterFn option as the global filter function, you get an extra ranked results feature enabled by default. This means that when a user searches with the searchbox, the results will be sorted by the closest match first instead of the order the data was defined in.
 
-If you don't want ranked results to be enabled, but you still want fuzzy matching, you can set the `enableGlobalFilterRankedResults` prop to `false`.
+If you do not want ranked results to be enabled, but you still want fuzzy matching, you can set the `enableGlobalFilterRankedResults` prop to `false`.
 
 ```jsx
 <MaterialReactTable

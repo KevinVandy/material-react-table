@@ -5,14 +5,11 @@ export type Person = {
   middleName: string;
   lastName: string;
   email: string;
-  phoneNumber: string;
   address: string;
   zipCode: string;
   city: string;
   state: string;
   country: string;
-  petName: string;
-  age: number;
 };
 
 export const makeData = (numberOfRows: number) =>
@@ -21,12 +18,9 @@ export const makeData = (numberOfRows: number) =>
     middleName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     email: faker.internet.email(),
-    phoneNumber: faker.phone.number(),
     address: faker.address.streetAddress(),
     zipCode: faker.address.zipCode(),
     city: faker.address.city(),
     state: faker.address.state(),
     country: faker.address.country(),
-    petName: faker.animal.cat(),
-    age: faker.datatype.float({ min: 0, max: 100 }),
   }));

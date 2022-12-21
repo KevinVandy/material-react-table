@@ -151,7 +151,8 @@ const Example = () => {
         showProgressBars: isFetching,
         sorting,
       }}
-      virtualizerInstanceRef={virtualizerInstanceRef} //get access to the virtualizer instance
+      rowVirtualizerInstanceRef={rowVirtualizerInstanceRef} //get access to the virtualizer instance
+      rowVirtualizerProps={{ overscan: 10 }}
     />
   );
 };

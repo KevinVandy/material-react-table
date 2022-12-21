@@ -1,0 +1,157 @@
+import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import EnableRowExample from '../../../examples/enable-row-virtualization';
+import EnableColumnExample from '../../../examples/enable-column-virtualization';
+
+<Head>
+  <title>Virtualization Feature Guide - Material React Table Docs</title>
+  <meta
+    name="description"
+    content="How to virtualize rows and columns in Material React Table to improve performance and user experience when there are a lot of rows or a lot of columns in the table."
+  />
+</Head>
+
+## Virtualization Feature Guide
+
+> MRT v1.4 and v1.5 have major virtualization upgrades after switching to `@tanstack/react-virtual` v3.0!
+
+Virtualization is useful when you have a lot of data you want to display client-side all at once, without having to use pagination. Material React Table makes this as simple as possible, thanks to [`@tanstack/react-virtual`](https://tanstack.com/virtual/v3) with both [row virtualization](#enable-row-virtualization) and [column virtualization](#enable-column-virtualization) support.
+
+> NOTE: You should only enable row virtualization if you have a large number of rows. Depending on the size of the table, if you are rendering less than a couple dozen rows at a time, you will actually just be adding extra overhead to the table renders. Virtualization only becomes necessary when you have over 50 rows or so at the same time with no pagination.
+
+### Relevant Props
+
+<RootPropTable
+  onlyProps={
+    new Set([
+      'columnVirtualizerInstanceRef',
+      'columnVirtualizerProps',
+      'enableColumnVirtualization',
+      'enableRowVirtualization',
+      'rowVirtualizerInstanceRef',
+      'rowVirtualizerProps',
+    ])
+  }
+/>
+
+### What is Virtualization?
+
+Virtualization, or virtual scrolling, works by only rendering the rows or columns that are visible on the screen. This is useful for performance and user experience, as we can make it appear that there are hundreds, thousands, or even tens of thousands of rows in the table all at once, but in reality, the table will only render the couple dozen rows that are visible on the screen, or the handful of columns that are visible on the screen.
+
+For more reading on the concept of virtualization, we recommend this [blog post](https://blog.logrocket.com/virtual-scrolling-core-principles-and-basic-implementation-in-react/) by LogRocket.
+
+### Does Your Table Even Need Virtualization?
+
+If your table is paginated or you are not going to render more than 50 rows at once, you probably do not need row virtualization.
+
+If your table does not have over 12 columns, you probably do not need column virtualization.
+
+There is a tiny bit of extra overhead that gets added to your table's rendering when virtualization is enabled, so do not just enable it for every table. That being said, if your table does have well over 100 rows that it is trying to render all at once without pagination, performance will be night and day once it is enabled.
+
+### Enable Row Virtualization
+
+Enabling row virtualization is as simple as setting the `enableRowVirtualization` prop to `true`. However, you will probably also want to turn off pagination, which you can do by setting `enablePagination` to `false`.
+
+```tsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  enablePagination={false}
+  enableRowVirtualization
+/>
+```
+
+Take a look at the example below with 10,000 rows!
+
+<EnableRowExample />
+
+### Enable Column Virtualization
+
+> New in MRT v1.5!
+
+Enabling column virtualization is also as simple as setting the `enableColumnVirtualization` prop to `true`.
+
+```tsx
+<MaterialReactTable columns={columns} data={data} enableColumnVirtualization />
+```
+
+Take a look at the example below with 500 columns!
+
+<EnableColumnExample />
+
+> WARNING: Don't enable row or column virtualization conditionally. It may break React's Rule of Hooks, and/or cause other UI jumpiness.
+
+### Virtualization Side Effects
+
+When either Row or Column Virtualization is enabled, a few other props automatically get set internally.
+
+#### `layoutMode` Prop
+
+In MRT Versions 1.3 and earlier, a CSS `table-layout: fixed` style was automatically added to the `<table>` element to prevent columns wiggling back and forth during scrolling due to body cells having variating widths.
+
+But now in MRT Versions 1.4 and later, the `layoutMode` prop is automatically set to the `'grid'` value when either row or column virtualization is enabled, which means that all of the table markup will use CSS Grid and Flexbox instead of the traditional semantic styles that usually come with table tags. This is necessary to make the virtualization work properly with decent performance.
+
+#### `enableStickyHeader` Prop
+
+The `enableStickyHeader` prop is automatically set to `true` when row virtualization is enabled. This keeps the table header sticky and visible while scrolling and adds a default max-height of 100vh to the table container.
+
+### Customize Virtualizer Props
+
+You can adjust some of the virtualizer props that are used internally with the `rowVirtualizerProps` and `columnVirtualizerProps` props. The most useful virtualizer props are the `overscan` and `estimateSize` options. You may want to adjust these values if you have unusual row heights or column widths that are causing the default scrolling to act weirdly.
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  enableColumnVirtualization
+  enablePagination={false}
+  enableRowVirtualization
+  columnVirtualizerProps={{
+    overscan: 5, //adjust the number of columns that are rendered to the left and right of the visible area of the table
+    estimateSize: () => 400, //if your columns are wider or , try tweaking this value to make scrollbar size more accurate
+  }}
+  rowVirtualizerProps={{
+    overscan: 10, //adjust the number or rows that are rendered above and below the visible area of the table
+    estimateSize: () => 100, //if your rows are taller than normal, try tweaking this value to make scrollbar size more accurate
+  }}
+/>
+```
+
+See the official TanStack [Virtualizer Options API Docs](https://tanstack.com/virtual/v3/docs/api/virtualizer#optional-options) for more information.
+
+> MRT v1.4 upgraded from `react-virtual` v2 to `@tanstack/react-virtual` v3.0, which has some breaking changes and virtualizer option name changes. TypeScript hints should help you with any prop name changes, but you can also view the official [TanStack Virtual Docs](https://tanstack.com/virtual/v3/docs/api/virtualizer#optional-options) for guidance.
+
+### Access Underlying Virtualizer Instances
+
+In a similar way that you can [access the underlying table instance](/docs/guides/table-state-management#access-the-underlying-table-instance-reference), you can also access the underlying virtualizer instances. This can be useful for accessing methods like the `scrollToIndex` method, which can be used to programmatically scroll to a specific row or column.
+
+```tsx
+const columnVirtualizerInstanceRef = useRef<Virtualizer>(null);
+const rowVirtualizerInstanceRef = useRef<Virtualizer>(null);
+
+useEffect(() => {
+  if (rowVirtualizerInstanceRef.current) {
+    //scroll to the top of the table when sorting changes
+    rowVirtualizerInstanceRef.current.scrollToIndex(0);
+  }
+}, [sorting]);
+
+return (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnVirtualization
+    enableRowVirtualization
+    rowVirtualizerInstanceRef={rowVirtualizerInstanceRef}
+    columnVirtualizerInstanceRef={columnVirtualizerInstanceRef}
+  />
+);
+```
+
+See the official TanStack [Virtualizer Instance API Docs](https://tanstack.com/virtual/v3/docs/api/virtualizer#virtualizer-instance) for more information.
+
+### Full Row and Column Virtualization Example
+
+Try out the performance of the [fully virtualized example](/docs/examples/virtualized) with **10,000 rows** and over a dozen columns! Filtering, Search, and Sorting also maintain usable performance.
+
+View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-virtualization)**

@@ -206,7 +206,7 @@ export const routes: Array<RouteItem> = [
           },
           {
             href: '/docs/guides/column-ordering-dnd',
-            label: 'Column Ordering (DnD)',
+            label: 'Column Ordering and Dragging',
           },
           {
             href: '/docs/guides/column-pinning',
@@ -254,15 +254,11 @@ export const routes: Array<RouteItem> = [
           },
           {
             href: '/docs/guides/row-ordering-dnd',
-            label: 'Row Ordering (DnD)',
+            label: 'Row Ordering and Dragging',
           },
           {
             href: '/docs/guides/row-selection',
             label: 'Row Selection (Checkboxes)',
-          },
-          {
-            href: '/docs/guides/row-virtualization',
-            label: 'Row Virtualization',
           },
           {
             href: '/docs/guides/sorting',
@@ -271,6 +267,10 @@ export const routes: Array<RouteItem> = [
           {
             href: '/docs/guides/sticky-header',
             label: 'Sticky Header/Footer',
+          },
+          {
+            href: '/docs/guides/virtualization',
+            label: 'Virtualization (Large Data)',
           },
         ],
       },

@@ -7,7 +7,7 @@ export type PropRow = {
   linkText?: string;
   propName: keyof MaterialReactTableProps;
   required?: boolean;
-  source?: 'MRT' | 'TanStack Table' | 'Material UI' | '';
+  source?: 'MRT' | 'TanStack Table' | 'TanStack Virtual' | 'Material UI' | '';
   type?: string;
 };
 
@@ -86,6 +86,26 @@ export const rootProps: PropRow[] = [
     required: true,
     source: 'MRT',
     type: 'Array<MRT_ColumnDef<TData>>',
+  },
+  {
+    propName: 'columnVirtualizerProps',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: 'MRT',
+    type: 'Partial<VirtualizerOptions<HTMLDivElement, HTMLTableCellElement>>',
+  },
+  {
+    propName: 'columnVirtualizerInstanceRef',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: 'MRT',
+    type: 'MutableRefObject<Virtualizer | null>',
   },
   {
     propName: 'data',
@@ -251,6 +271,16 @@ export const rootProps: PropRow[] = [
     description: '',
     link: '/docs/guides/column-ordering-dnd',
     linkText: 'MRT Column Ordering DnD Docs',
+    required: false,
+    source: 'MRT',
+    type: 'boolean',
+  },
+  {
+    propName: 'enableColumnVirtualization',
+    defaultValue: '',
+    description: '',
+    link: '/docs/guides/virtualization#enable-column-virtualization',
+    linkText: 'MRT Virtualization Docs',
     required: false,
     source: 'MRT',
     type: 'boolean',
@@ -481,8 +511,8 @@ export const rootProps: PropRow[] = [
     propName: 'enableRowVirtualization',
     defaultValue: '',
     description: '',
-    link: '',
-    linkText: '',
+    link: '/docs/guides/virtualization#enable-row-virtualization',
+    linkText: 'MRT Virtualization Docs',
     required: false,
     source: 'MRT',
     type: 'boolean',
@@ -1825,20 +1855,20 @@ export const rootProps: PropRow[] = [
     type: 'MutableRefObject<MRT_TableInstance<TData> | null>',
   },
   {
-    propName: 'virtualizerProps',
+    propName: 'rowVirtualizerProps',
     defaultValue: '',
     description: '',
     link: '',
     linkText: '',
     required: false,
-    source: 'MRT',
-    type: 'Partial<VirtualizerOptions<HTMLDivElement>>',
+    source: 'TanStack Table',
+    type: 'Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>',
   },
   {
-    propName: 'virtualizerInstanceRef',
+    propName: 'rowVirtualizerInstanceRef',
     defaultValue: '',
     description: '',
-    link: '',
+    link: '/docs/guides/virtualization',
     linkText: '',
     required: false,
     source: 'MRT',

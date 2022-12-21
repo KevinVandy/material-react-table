@@ -12,9 +12,12 @@ import Head from 'next/head';
 
 ### V1
 
-#### v1.5.0 (Beta)
+#### v1.5.0 (2022-12-20)
 
-- New column virtualization feature
+- New column virtualization feature that can be enabled with the `enableColumnVirtualization` prop and customized with the `columnVirtualizationProps` and `columnVirtualizerInstanceRef` props
+- Deprecated (renamed) `virtualizerInstanceRef` prop in favor of `rowVirtualizerInstanceRef`
+- Deprecated (renamed) `virtualizationProps` prop in favor of `rowVirtualizationProps`
+- Fixed crashes with empty nested data and initial filter, sorting, grouping, and pagination states
 
 #### v1.4.3 (2022-12-15)
 
@@ -75,7 +78,7 @@ import Head from 'next/head';
 
 #### v1.3.8 (2022-11-13)
 
-- Fix filter textfield calling clear method on mount which sometimes caused additional data fetches.
+- Fix filter textfield calling clear method on mount which sometimes caused additional data fetches
 
 #### v1.3.7 (2022-11-12)
 

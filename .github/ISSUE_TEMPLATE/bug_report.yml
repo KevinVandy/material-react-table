@@ -66,8 +66,8 @@ body:
   - type: dropdown
     attributes:
       options:
-        - No, because I don't know how
-        - No, because I don't have time to dig into it
+        - No, because I do not know how
+        - No, because I do not have time to dig into it
         - Maybe, I'll investigate and start debugging
         - Yes, I think I know how to fix it and will discuss it in the comments of this issue
         - Yes, I am also opening a PR that solves the problem along side this issue

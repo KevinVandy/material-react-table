@@ -13,12 +13,12 @@ const cardData = [
     alt: 'Customizable',
   },
   {
-    text: "Easy to opt out of features or UI that you don't need",
+    text: "Easy to opt out of features or UI that you do not need",
     image: '/opt-out.svg',
     alt: 'Easy Opt-out',
   },
   {
-    text: 'Efficient bundle size (40kb minzipped, including dependencies)',
+    text: 'Efficient bundle size (41kb minzipped, including dependencies)',
     image: '/efficient.svg',
     alt: 'Efficient',
   },

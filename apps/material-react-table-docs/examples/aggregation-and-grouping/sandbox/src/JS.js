@@ -19,7 +19,7 @@ const Example = () => {
       {
         header: 'First Name',
         accessorKey: 'firstName',
-        enableGrouping: false, //don't let this column be grouped
+        enableGrouping: false, //do not let this column be grouped
       },
       {
         header: 'Last Name',

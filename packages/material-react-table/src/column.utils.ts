@@ -258,9 +258,7 @@ export const getCommonCellStyles = ({
     column.getIsPinned() === 'left' &&
     column.getPinnedIndex() === 0
       ? `-${
-          column.getSize() *
-          (table.getState().columnPinning.left?.length ?? 1) *
-          1.2
+          column.getSize() * (table.getState().columnPinning.left?.length ?? 1)
         }px`
       : undefined,
   mr:

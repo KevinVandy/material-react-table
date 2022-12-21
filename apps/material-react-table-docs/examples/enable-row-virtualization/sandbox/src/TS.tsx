@@ -29,10 +29,6 @@ const Example: FC = () => {
         size: 300,
       },
       {
-        accessorKey: 'phoneNumber',
-        header: 'Phone Number',
-      },
-      {
         accessorKey: 'address',
         header: 'Address',
       },
@@ -52,21 +48,13 @@ const Example: FC = () => {
         accessorKey: 'country',
         header: 'Country',
       },
-      {
-        accessorKey: 'petName',
-        header: 'Pet Name',
-      },
-      {
-        accessorKey: 'age',
-        header: 'Age',
-      },
     ],
     [],
     //end
   );
 
   //optionally access the underlying virtualizer instance
-  const virtualizerInstanceRef =
+  const rowVirtualizerInstanceRef =
     useRef<Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
   const [data, setData] = useState<Person[]>([]);
@@ -82,7 +70,7 @@ const Example: FC = () => {
 
   useEffect(() => {
     //scroll to the top of the table when the sorting changes
-    virtualizerInstanceRef.current?.scrollToIndex(0);
+    rowVirtualizerInstanceRef.current?.scrollToIndex(0);
   }, [sorting]);
 
   return (
@@ -97,10 +85,13 @@ const Example: FC = () => {
       muiTableContainerProps={{ sx: { maxHeight: '600px' } }}
       onSortingChange={setSorting}
       state={{ isLoading, sorting }}
-      virtualizerInstanceRef={virtualizerInstanceRef} //optional
-      virtualizerProps={{ overscan: 8 }} //optionally customize the virtualizer
+      rowVirtualizerInstanceRef={rowVirtualizerInstanceRef} //optional
+      rowVirtualizerProps={{ overscan: 8 }} //optionally customize the virtualizer
     />
   );
 };
+
+//virtualizerInstanceRef was renamed to rowVirtualizerInstanceRef in v1.5.0
+//virtualizerProps was renamed to rowVirtualizerProps in v1.5.0
 
 export default Example;

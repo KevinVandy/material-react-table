@@ -47,6 +47,7 @@ export const MRT_Table: FC<Props> = ({ table }) => {
 
   //get first 16 column widths and average them
   const averageColumnWidth = useMemo(() => {
+    if (!enableColumnVirtualization) return 0;
     const columnsWidths =
       table
         .getRowModel()

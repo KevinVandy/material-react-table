@@ -78,14 +78,14 @@ return <MaterialReactTable columns={columns} data={data} enableGrouping />;
 
 #### Hide Drag Buttons for Grouping
 
-If you don't want the drag buttons that come with the grouping feature, you can independently disable them without disabling the grouping feature entirely by setting the `enableColumnDragging` prop to `false`.
+If you do not want the drag buttons that come with the grouping feature, you can independently disable them without disabling the grouping feature entirely by setting the `enableColumnDragging` prop to `false`.
 
 ```jsx
 <MaterialReactTable
   columns={columns}
   data={data}
   enableGrouping
-  enableColumnDragging={false} //don't show drag handle buttons, but still show grouping options in column actions menu
+  enableColumnDragging={false} //do not show drag handle buttons, but still show grouping options in column actions menu
 />
 ```
 
@@ -199,7 +199,7 @@ const columns = [
   {
     accessorKey: 'score',
     header: 'Score',
-    Footer: () => <div>Average Score: {averageScore}</div>, //don't do calculations in render, do them in useMemo hook and pass them in here
+    Footer: () => <div>Average Score: {averageScore}</div>, //do not do calculations in render, do them in useMemo hook and pass them in here
   },
 ];
 ```

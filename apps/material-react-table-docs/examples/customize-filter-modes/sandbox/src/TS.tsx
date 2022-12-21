@@ -25,7 +25,7 @@ const Example: FC = () => {
       {
         accessorKey: 'lastName',
         header: 'Last Name',
-        //if you don't want to use the default filter modes, you can provide your own and render your own menu
+        //if you do not want to use the default filter modes, you can provide your own and render your own menu
         renderColumnFilterModeMenuItems: ({ onSelectFilterMode }) => [
           <MenuItem key="0" onClick={() => onSelectFilterMode('contains')}>
             <div>Contains</div>

@@ -46,6 +46,11 @@ const nextConfig = {
         destination: '/docs/guides/row-ordering-dnd',
         permanent: true,
       },
+      {
+        source: '/docs/guides/row-virtualization',
+        destination: '/docs/guides/virtualization',
+        permanent: true,
+      },
     ];
   },
 };
