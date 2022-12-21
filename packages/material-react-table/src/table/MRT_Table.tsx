@@ -52,25 +52,23 @@ export const MRT_Table: FC<Props> = ({ table }) => {
         .getRowModel()
         .rows[0]?.getCenterVisibleCells()
         ?.slice(0, 16)
-        ?.map((cell) => cell.column.getSize() * 1.25) ?? [];
+        ?.map((cell) => cell.column.getSize() * 1.2) ?? [];
     return columnsWidths.reduce((a, b) => a + b, 0) / columnsWidths.length;
   }, [table.getRowModel().rows, columnPinning, columnVisibility]);
 
-  const pinnedColumnIndexes = useMemo(
+  const [leftPinnedIndexes, rightPinnedIndexes] = useMemo(
     () =>
       enableColumnVirtualization && enablePinning
         ? [
-            ...table.getLeftFlatHeaders().map((h) => h.column.getPinnedIndex()),
-            ...table
-              .getRightFlatHeaders()
+            table.getLeftLeafColumns().map((c) => c.getPinnedIndex()),
+            table
+              .getRightLeafColumns()
               .map(
-                (h) =>
-                  table.getVisibleFlatColumns().length -
-                  h.column.getPinnedIndex() -
-                  1,
+                (c) =>
+                  table.getVisibleLeafColumns().length - c.getPinnedIndex() - 1,
               ),
           ]
-        : [],
+        : [[], []],
     [columnPinning, enableColumnVirtualization, enablePinning],
   );
 
@@ -78,21 +76,20 @@ export const MRT_Table: FC<Props> = ({ table }) => {
     | Virtualizer<HTMLDivElement, HTMLTableCellElement>
     | undefined = enableColumnVirtualization
     ? useVirtualizer({
-        count: table.getRowModel().rows[0].getVisibleCells().length,
+        count: table.getVisibleLeafColumns().length,
         estimateSize: () => averageColumnWidth,
         getScrollElement: () => tableContainerRef.current,
         horizontal: true,
-        measureElement: (element) => element?.getBoundingClientRect().width,
         overscan: 3,
         rangeExtractor: useCallback(
-          (range: Range) =>
-            [
-              ...new Set([
-                ...pinnedColumnIndexes,
-                ...defaultRangeExtractor(range),
-              ]),
-            ].sort((a, b) => a - b),
-          [pinnedColumnIndexes],
+          (range: Range) => [
+            ...new Set([
+              ...leftPinnedIndexes,
+              ...defaultRangeExtractor(range),
+              ...rightPinnedIndexes,
+            ]),
+          ],
+          [leftPinnedIndexes, rightPinnedIndexes],
         ),
         ...vProps,
       })
@@ -110,13 +107,11 @@ export const MRT_Table: FC<Props> = ({ table }) => {
   let virtualPaddingRight: number | undefined;
 
   if (columnVirtualizer && virtualColumns?.length) {
-    virtualPaddingLeft = virtualColumns?.length
-      ? virtualColumns[0]?.start || 0
-      : 0;
-    virtualPaddingRight = virtualColumns?.length
-      ? columnVirtualizer.getTotalSize() -
-        (virtualColumns[virtualColumns.length - 1]?.end || 0)
-      : 0;
+    virtualPaddingLeft = virtualColumns[leftPinnedIndexes.length]?.start ?? 0;
+    virtualPaddingRight =
+      columnVirtualizer.getTotalSize() -
+      (virtualColumns[virtualColumns.length - 1 - rightPinnedIndexes.length]
+        ?.end ?? 0);
   }
 
   const props = {

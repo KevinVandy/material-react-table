@@ -221,7 +221,7 @@ export const getIsFirstRightPinnedColumn = (column: MRT_Column) => {
 
 export const getTotalRight = (table: MRT_TableInstance, column: MRT_Column) => {
   return (
-    (table.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) * 160
+    (table.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) * 200
   );
 };
 
@@ -252,6 +252,26 @@ export const getCommonCellStyles = ({
   left:
     column.getIsPinned() === 'left'
       ? `${column.getStart('left')}px`
+      : undefined,
+  ml:
+    table.options.enableColumnVirtualization &&
+    column.getIsPinned() === 'left' &&
+    column.getPinnedIndex() === 0
+      ? `-${
+          column.getSize() *
+          (table.getState().columnPinning.left?.length ?? 1) *
+          1.2
+        }px`
+      : undefined,
+  mr:
+    table.options.enableColumnVirtualization &&
+    column.getIsPinned() === 'right' &&
+    column.getPinnedIndex() === table.getVisibleLeafColumns().length - 1
+      ? `-${
+          column.getSize() *
+          (table.getState().columnPinning.right?.length ?? 1) *
+          1.2
+        }px`
       : undefined,
   opacity:
     table.getState().draggingColumn?.id === column.id ||

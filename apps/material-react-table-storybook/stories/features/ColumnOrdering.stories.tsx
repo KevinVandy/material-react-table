@@ -105,3 +105,12 @@ export const ColumnOrderingWithPinning: Story<MaterialReactTableProps> = () => (
     enablePinning
   />
 );
+
+export const ColumnOrderingNoDragHandles: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnDragging={false}
+    enableColumnOrdering
+  />
+);
