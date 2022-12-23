@@ -47,6 +47,7 @@ export const MRT_TableFooter: FC<Props> = ({
             : `1px solid ${theme.palette.grey[700]}`
           : undefined,
         position: stickFooter ? 'sticky' : undefined,
+        zIndex: stickFooter ? 1 : undefined,
         ...(tableFooterProps?.sx instanceof Function
           ? tableFooterProps?.sx(theme)
           : (tableFooterProps?.sx as any)),
