@@ -45,10 +45,10 @@
     "node": ">=14"
   },
   "scripts": {
-    "build": "rm -rf dist locales && rollup -c && size-limit",
-    "dev": "rm -rf dist locales && rollup -c -w",
-    "lib:build": "rm -rf dist locales && rollup -c && size-limit",
-    "lib:dev": "rm -rf dist locales && rollup -c -w",
+    "build": "rm -rf dist && rollup -c && size-limit",
+    "dev": "rm -rf dist && rollup -c -w",
+    "lib:build": "rm -rf dist && rollup -c && size-limit",
+    "lib:dev": "rm -rf dist && rollup -c -w",
     "lint": "eslint .",
     "size": "size-limit"
   },

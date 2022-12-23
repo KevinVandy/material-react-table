@@ -54,6 +54,12 @@ const TR_Table = dynamic(() => import('../examples/localization-i18n-tr'), {
 const VI_Table = dynamic(() => import('../examples/localization-i18n-vi'), {
   suspense: true,
 });
+const ZH_HANS_Table = dynamic( () => import('../examples/localization-i18n-zh-hans'), {
+  suspense: true,
+});
+const ZH_HANT_Table = dynamic( () => import('../examples/localization-i18n-zh-hant'), {
+  suspense: true,
+});
 
 const supportedLocales = [
   'cs',
@@ -72,6 +78,8 @@ const supportedLocales = [
   'ru',
   'tr',
   'vi',
+  'zh-hans',
+  'zh-hant',
 ];
 
 const LocaleExamples = () => {
@@ -118,6 +126,8 @@ const LocaleExamples = () => {
           {currentLocale === 'ru' && <RU_Table />}
           {currentLocale === 'tr' && <TR_Table />}
           {currentLocale === 'vi' && <VI_Table />}
+          {currentLocale === 'zh-hans' && <ZH_HANS_Table />}
+          {currentLocale === 'zh-hant' && <ZH_HANT_Table />}
         </Suspense>
       </div>
     </>

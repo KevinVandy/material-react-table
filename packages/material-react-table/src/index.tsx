@@ -17,6 +17,7 @@ import { MRT_ToggleGlobalFilterButton } from './buttons/MRT_ToggleGlobalFilterBu
 import { MRT_ToolbarAlertBanner } from './toolbar/MRT_ToolbarAlertBanner';
 import { MRT_ToolbarDropZone } from './toolbar/MRT_ToolbarDropZone';
 import { MRT_ToolbarInternalButtons } from './toolbar/MRT_ToolbarInternalButtons';
+import { MRT_ToggleRowActionMenuButton } from './buttons/MRT_ToggleRowActionMenuButton';
 
 export {
   MRT_CopyButton,
@@ -31,4 +32,5 @@ export {
   MRT_ToolbarAlertBanner,
   MRT_ToolbarDropZone,
   MRT_ToolbarInternalButtons,
+  MRT_ToggleRowActionMenuButton,
 };

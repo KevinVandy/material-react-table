@@ -1170,7 +1170,14 @@ const MaterialReactTable = <TData extends Record<string, any> = {}>({
 
   if (rest.enableRowVirtualization || rest.enableColumnVirtualization) {
     layoutMode = 'grid';
+  }
+
+  if (rest.enableRowVirtualization) {
     enableStickyHeader = true;
+  }
+
+  if (enablePagination === false && manualPagination === undefined) {
+    manualPagination = true;
   }
 
   if (!rest.data?.length) {

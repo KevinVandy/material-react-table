@@ -22,6 +22,8 @@ const supportedLocales = [
   'ru',
   'tr',
   'vi',
+  'zh-Hans',
+  'zh-Hant',
 ];
 
 export default [

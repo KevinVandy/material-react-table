@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent, useState } from 'react';
+import React, { MouseEvent, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { MRT_RowActionMenu } from '../menus/MRT_RowActionMenu';
@@ -16,17 +16,19 @@ const commonIconButtonStyles = {
   },
 };
 
-interface Props {
-  cell: MRT_Cell;
-  row: MRT_Row;
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any> = {}> {
+  cell: MRT_Cell<TData>;
+  row: MRT_Row<TData>;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ToggleRowActionMenuButton: FC<Props> = ({
+export const MRT_ToggleRowActionMenuButton = <
+  TData extends Record<string, any> = {},
+>({
   cell,
   row,
   table,
-}) => {
+}: Props<TData>) => {
   const {
     getState,
     options: {
@@ -92,9 +94,9 @@ export const MRT_ToggleRowActionMenuButton: FC<Props> = ({
           <MRT_RowActionMenu
             anchorEl={anchorEl}
             handleEdit={handleStartEditMode}
-            row={row}
+            row={row as any}
             setAnchorEl={setAnchorEl}
-            table={table}
+            table={table as any}
           />
         </>
       ) : null}

@@ -81,10 +81,7 @@ export const MRT_TableBody: FC<Props> = ({
       }
       return rankedRows;
     }
-
-    return enablePagination
-      ? getRowModel().rows
-      : getPrePaginationRowModel().rows;
+    return getRowModel().rows;
   }, [
     enableGlobalFilterRankedResults,
     (enableGlobalFilterRankedResults && globalFilter) || !enablePagination
