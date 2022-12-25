@@ -222,6 +222,7 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
   setShowAlertBanner: Dispatch<SetStateAction<boolean>>;
   setShowFilters: Dispatch<SetStateAction<boolean>>;
   setShowGlobalFilter: Dispatch<SetStateAction<boolean>>;
+  setShowToolbarDropZone: Dispatch<SetStateAction<boolean>>;
 };
 
 export type MRT_TableState<TData extends Record<string, any> = {}> =
@@ -242,6 +243,7 @@ export type MRT_TableState<TData extends Record<string, any> = {}> =
     showGlobalFilter: boolean;
     showProgressBars: boolean;
     showSkeletons: boolean;
+    showToolbarDropZone: boolean;
   };
 
 export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
@@ -971,6 +973,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     onShowAlertBannerChange?: OnChangeFn<boolean>;
     onShowFiltersChange?: OnChangeFn<boolean>;
     onShowGlobalFilterChange?: OnChangeFn<boolean>;
+    onShowToolbarDropZoneChange?: OnChangeFn<boolean>;
     positionActionsColumn?: 'first' | 'last';
     positionExpandColumn?: 'first' | 'last';
     positionGlobalFilter?: 'left' | 'right' | 'none';

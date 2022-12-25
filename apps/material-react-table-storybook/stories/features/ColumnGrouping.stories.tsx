@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, {
   MaterialReactTableProps,
+  MRT_Column,
   MRT_ColumnDef,
 } from 'material-react-table';
 import { faker } from '@faker-js/faker';
@@ -11,6 +12,14 @@ const meta: Meta = {
 };
 
 export default meta;
+
+interface Person {
+  firstName: string;
+  lastName: string;
+  gender: string;
+  city: string;
+  state: string;
+}
 
 const columns = [
   {
@@ -33,7 +42,7 @@ const columns = [
     header: 'State',
     accessorKey: 'state',
   },
-] as MRT_ColumnDef<typeof data[0]>[];
+] as MRT_ColumnDef<Person>[];
 
 const data = [...Array(200)].map(() => ({
   firstName: faker.name.firstName(),
@@ -115,7 +124,7 @@ export const ColumnGroupingBannerOnBottom: Story<
 );
 
 export const GroupingColumnsSetState: Story<MaterialReactTableProps> = () => {
-  const [columns, setColumns] = useState<MRT_ColumnDef[]>([]);
+  const [columns, setColumns] = useState<MRT_ColumnDef<any>[]>([]);
   const [data, setData] = useState<any>([]);
 
   useEffect(() => {
@@ -199,6 +208,32 @@ export const GroupingColumnsSetState: Story<MaterialReactTableProps> = () => {
       data={data}
       enableGrouping
       state={{ columnOrder: columns.map((c) => c.accessorKey as string) }}
+    />
+  );
+};
+
+export const ColumnGroupingDropZoneAlwaysVisible: Story<
+  MaterialReactTableProps
+> = () => {
+  const [draggingColumn, setDraggingColumn] =
+    useState<MRT_Column<Person> | null>(null);
+
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      enableGrouping
+      localization={
+        !draggingColumn
+          ? { dropToGroupBy: 'Drag a column here to group by it' }
+          : undefined
+      }
+      muiTopToolbarProps={{ sx: { '& .Mui-ToolbarDropZone': {
+        border: '1px solid red',
+      } } }}
+      onDraggingColumnChange={setDraggingColumn}
+      positionToolbarAlertBanner="bottom"
+      state={{ draggingColumn, showToolbarDropZone: true }}
     />
   );
 };

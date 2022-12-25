@@ -117,6 +117,9 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   const [showGlobalFilter, setShowGlobalFilter] = useState(
     initialState?.showGlobalFilter ?? false,
   );
+  const [showToolbarDropZone, setShowToolbarDropZone] = useState(
+    initialState?.showToolbarDropZone ?? false,
+  );
 
   const displayColumns = useMemo(
     () =>
@@ -284,6 +287,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
         showAlertBanner,
         showColumnFilters,
         showGlobalFilter,
+        showToolbarDropZone,
         ...props.state,
       } as TableState,
     }),
@@ -310,6 +314,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
     setShowAlertBanner: props.onShowAlertBannerChange ?? setShowAlertBanner,
     setShowFilters: props.onShowFiltersChange ?? setShowFilters,
     setShowGlobalFilter: props.onShowGlobalFilterChange ?? setShowGlobalFilter,
+    setShowToolbarDropZone: props.onShowToolbarDropZoneChange ?? setShowToolbarDropZone,
   } as MRT_TableInstance<TData>;
 
   if (props.tableInstanceRef) {

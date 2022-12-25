@@ -35,7 +35,7 @@ const withThemeProvider = (Story, context) => {
     <ThemeProvider theme={defaultTheme}>
       <Typography
         sx={{
-          pb: '1rem',
+          pb: '0.5rem',
           color: useDarkMode() ? '#fff' : '#666',
         }}
         variant="subtitle2"
@@ -52,20 +52,14 @@ const withThemeProvider = (Story, context) => {
       <Typography
         variant="subtitle2"
         sx={{
-          pb: '2rem',
+          pb: '1rem',
           color: useDarkMode() ? '#fff' : '#666',
         }}
       >
-        Toggle dark and light mode in the toolbar buttons above.
+        View source code below in the story tab on Canvas or the Show Code
+        Button in Docs. Toggle dark and light mode in the toolbar buttons above.
       </Typography>
       <Story {...context} />
-      <Typography
-        variant="subtitle2"
-        sx={{ pt: '2rem', color: useDarkMode() ? '#fff' : '#666' }}
-      >
-        View source code below in the story tab on Canvas or the Show Code
-        Button in Docs
-      </Typography>
     </ThemeProvider>
   );
 };

@@ -1580,6 +1580,16 @@ export const rootProps: PropRow[] = [
     type: 'OnChangeFn<boolean>',
   },
   {
+    propName: 'onShowToolbarDropZoneChange',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: 'MRT',
+    type: 'OnChangeFn<boolean>',
+  },
+  {
     propName: 'onSortingChange',
     defaultValue: '',
     description:

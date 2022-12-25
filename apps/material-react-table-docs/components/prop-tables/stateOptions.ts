@@ -255,6 +255,15 @@ export const stateOptions: StateRow[] = [
     type: 'boolean',
   },
   {
+    defaultValue: 'false',
+    description: '',
+    link: '',
+    linkText: '',
+    source: 'MRT',
+    stateOption: 'showToolbarDropZone',
+    type: 'boolean',
+  },
+  {
     defaultValue: '[]',
     description: '',
     link: 'https://tanstack.com/table/v8/docs/api/features/sorting',

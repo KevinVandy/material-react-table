@@ -41,11 +41,13 @@ export const MRT_ShowHideColumnsButton = <
           <ViewColumnIcon />
         </IconButton>
       </Tooltip>
-      <MRT_ShowHideColumnsMenu
-        anchorEl={anchorEl}
-        setAnchorEl={setAnchorEl}
-        table={table}
-      />
+      {anchorEl && (
+        <MRT_ShowHideColumnsMenu
+          anchorEl={anchorEl}
+          setAnchorEl={setAnchorEl}
+          table={table}
+        />
+      )}
     </>
   );
 };

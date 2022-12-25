@@ -1,4 +1,4 @@
-import React, { DragEvent } from 'react';
+import React, { DragEvent, useEffect } from 'react';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
@@ -16,25 +16,30 @@ export const MRT_ToolbarDropZone = <TData extends Record<string, any> = {}>({
     getState,
     options: { enableGrouping, localization },
     setHoveredColumn,
+    setShowToolbarDropZone,
   } = table;
 
-  const { draggingColumn, hoveredColumn, grouping } = getState();
+  const { draggingColumn, hoveredColumn, grouping, showToolbarDropZone } =
+    getState();
 
   const handleDragEnter = (_event: DragEvent<HTMLDivElement>) => {
     setHoveredColumn({ id: 'drop-zone' });
   };
 
-  return (
-    <Fade
-      unmountOnExit
-      mountOnEnter
-      in={
+  useEffect(() => {
+    if (table.options.state?.showToolbarDropZone !== undefined) {
+      setShowToolbarDropZone(
         !!enableGrouping &&
-        !!draggingColumn &&
-        !grouping.includes(draggingColumn.id)
-      }
-    >
+          !!draggingColumn &&
+          !grouping.includes(draggingColumn.id),
+      );
+    }
+  }, [enableGrouping, draggingColumn, grouping]);
+
+  return (
+    <Fade in={showToolbarDropZone}>
       <Box
+        className="Mui-ToolbarDropZone"
         sx={(theme) => ({
           alignItems: 'center',
           backgroundColor: alpha(
