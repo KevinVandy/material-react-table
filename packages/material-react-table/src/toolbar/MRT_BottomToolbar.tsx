@@ -5,10 +5,10 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { alpha } from '@mui/material/styles';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
+import { MRT_ToolbarDropZone } from './MRT_ToolbarDropZone';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
 import { commonToolbarStyles } from './MRT_TopToolbar';
-import { MRT_TableInstance } from '..';
-import { MRT_ToolbarDropZone } from './MRT_ToolbarDropZone';
+import type { MRT_TableInstance } from '..';
 
 interface Props {
   table: MRT_TableInstance;

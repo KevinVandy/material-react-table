@@ -3,13 +3,13 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "next dev --port 3000",
     "docs:build": "next build",
-    "docs:dev": "next dev",
+    "docs:dev": "next dev --port 3000",
     "docs:sitemap": "next-sitemap --config ./next-sitemap.config.cjs",
-    "docs:start": "next start",
+    "docs:start": "next start --port 4000",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start --port 4000"
   },
   "dependencies": {
     "@docsearch/js": "3.3.0",

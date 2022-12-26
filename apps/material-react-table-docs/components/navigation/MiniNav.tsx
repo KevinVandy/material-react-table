@@ -9,7 +9,7 @@ const MiniNav = () => {
 
   useEffect(() => {
     setHeadings(
-      document.querySelectorAll(isXLDesktop ? 'h2, h3, h4, h5' : 'h3, h4, h5'),
+      document.querySelectorAll(isXLDesktop ? 'h2, h3, h4, h5' : 'h3'),
     );
   }, [isXLDesktop, pathname]);
 
@@ -23,7 +23,16 @@ const MiniNav = () => {
         maxWidth: isXLDesktop ? '250px' : '500px',
       }}
     >
-      <ul style={{ padding: 0 }}>
+      <Typography component="span" variant="h6">
+        On This Page
+      </Typography>
+      <ul
+        style={{
+          padding: 0,
+          maxHeight: isXLDesktop ? 'calc(100vh - 9rem)' : undefined,
+          overflowY: isXLDesktop ? 'auto' : undefined,
+        }}
+      >
         {Array.from(headings ?? []).map((heading, index) => {
           if (
             !isXLDesktop &&

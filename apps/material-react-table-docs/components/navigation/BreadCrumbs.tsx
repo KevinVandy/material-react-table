@@ -22,13 +22,20 @@ const BreadCrumbs: FC = () => {
     return null;
   }
 
+  if (breadCrumbLinks.length === 1) {
+    breadCrumbLinks.unshift('/');
+  }
+
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: breadCrumbLinks.map((link, index) => ({
       '@type': 'ListItem',
       position: index + 1,
-      name: link.split('/').pop()?.replaceAll('-', ' ') || '',
+      name:
+        link === '/'
+          ? 'Home'
+          : link.split('/').pop()?.replaceAll('-', ' ') || '',
       item: `https://www.material-react-table.com${link}`,
     })),
   };
@@ -49,13 +56,15 @@ const BreadCrumbs: FC = () => {
               sx={{ cursor: 'pointer', textTransform: 'capitalize' }}
               underline="hover"
             >
-              {link
-                .split('/')
-                .pop()
-                ?.replaceAll('-', ' ')
-                ?.replaceAll('css', 'CSS')
-                ?.replaceAll(' ui', ' UI')
-                ?.replaceAll('api', 'API')}
+              {link === '/'
+                ? 'Home'
+                : link
+                    .split('/')
+                    .pop()
+                    ?.replaceAll('-', ' ')
+                    ?.replaceAll('css', 'CSS')
+                    ?.replaceAll(' ui', ' UI')
+                    ?.replaceAll('api', 'API')}
             </MuiLink>
           </Link>
         ))}
