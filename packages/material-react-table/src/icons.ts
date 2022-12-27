@@ -1,7 +1,6 @@
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import CancelIcon from '@mui/icons-material/Cancel';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import CloseIcon from '@mui/icons-material/Close';
 import DensityLargeIcon from '@mui/icons-material/DensityLarge';
@@ -13,7 +12,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import FilterListOffIcon from '@mui/icons-material/FilterListOff';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
@@ -34,7 +32,6 @@ export interface MRT_Icons {
   ArrowDownwardIcon: any;
   ArrowRightIcon: any;
   CancelIcon: any;
-  CheckBoxIcon: any;
   ClearAllIcon: any;
   CloseIcon: any;
   DensityLargeIcon: any;
@@ -47,7 +44,6 @@ export interface MRT_Icons {
   ExpandLessIcon: any;
   ExpandMoreIcon: any;
   FilterAltIcon: any;
-  FilterAltOffIcon: any;
   FilterListIcon: any;
   FilterListOffIcon: any;
   FullscreenExitIcon: any;
@@ -68,7 +64,6 @@ export const MRT_Default_Icons: MRT_Icons = {
   ArrowDownwardIcon,
   ArrowRightIcon,
   CancelIcon,
-  CheckBoxIcon,
   ClearAllIcon,
   CloseIcon,
   DensityLargeIcon,
@@ -80,7 +75,6 @@ export const MRT_Default_Icons: MRT_Icons = {
   ExpandLessIcon,
   ExpandMoreIcon,
   FilterAltIcon,
-  FilterAltOffIcon,
   FilterListIcon,
   FilterListOffIcon,
   FullscreenExitIcon,
