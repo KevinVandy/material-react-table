@@ -100,6 +100,7 @@ export const EditingEnabledEditModeRow: Story<MaterialReactTableProps> = () => {
       data={tableData}
       enableEditing
       editingMode="row"
+      disableTableDuringEdit={true}
       onEditingRowSave={handleSaveRow}
     />
   );

@@ -40,6 +40,7 @@ export const MRT_TableBodyRow: FC<Props> = ({
       layoutMode,
       memoMode,
       muiTableBodyRowProps,
+      enableRowHover,
       renderDetailPanel,
     },
     setHoveredRow,
@@ -47,6 +48,7 @@ export const MRT_TableBodyRow: FC<Props> = ({
   const { draggingColumn, draggingRow, editingCell, editingRow, hoveredRow } =
     getState();
 
+  const disableTableDuringEdit = table.options?.disableTableDuringEdit && table.options?.editingMode === "row"
   const tableRowProps =
     muiTableBodyRowProps instanceof Function
       ? muiTableBodyRowProps({ row, table })
@@ -80,7 +82,7 @@ export const MRT_TableBodyRow: FC<Props> = ({
     <>
       <TableRow
         data-index={virtualRow?.index}
-        hover
+        hover={enableRowHover && !editingRow}
         onDragEnter={handleDragEnter}
         selected={row.getIsSelected()}
         ref={(node: HTMLTableRowElement) => {
@@ -95,13 +97,16 @@ export const MRT_TableBodyRow: FC<Props> = ({
           display: layoutMode === 'grid' ? 'flex' : 'table-row',
           opacity:
             draggingRow?.id === row.id || hoveredRow?.id === row.id ? 0.5 : 1,
-          position: virtualRow ? 'absolute' : undefined,
+          position: virtualRow ? 'absolute' : 'relative', 
+          borderTop: disableTableDuringEdit && editingRow?.id === row.id ? `1px solid ${theme.palette.divider}` : 'inherit',
+          borderBottom: disableTableDuringEdit && editingRow?.id === row.id ? `1px solid ${theme.palette.divider}` : 'inherit',
           top: virtualRow ? 0 : undefined,
           transform: virtualRow
             ? `translateY(${virtualRow?.start}px)`
             : undefined,
-          transition: virtualRow ? 'none' : 'all 150ms ease-in-out',
+          transition: virtualRow ? 'none' : editingRow?.id === row.id ? 'none' : 'all 150ms ease-in-out',
           width: '100%',
+          zIndex: disableTableDuringEdit && editingRow?.id === row.id ? 100 : 0,
           '&:hover td': {
             backgroundColor:
               tableRowProps?.hover !== false && getIsSomeColumnsPinned()
@@ -119,6 +124,9 @@ export const MRT_TableBodyRow: FC<Props> = ({
         {virtualPaddingLeft ? (
           <td style={{ display: 'flex', width: virtualPaddingLeft }} />
         ) : null}
+         {disableTableDuringEdit && editingRow && editingRow?.id !== row.id ?
+          <div style={{backgroundColor: theme.palette.background.default, opacity: 0.9, width: '100%', height: '100%', zIndex: 10, position: 'absolute'}}></div>
+         : null}
         {(virtualColumns ?? row.getVisibleCells()).map((cellOrVirtualCell) => {
           const cell = columnVirtualizer
             ? row.getVisibleCells()[(cellOrVirtualCell as VirtualItem).index]

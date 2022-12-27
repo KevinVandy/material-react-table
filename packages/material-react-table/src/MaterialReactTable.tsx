@@ -672,6 +672,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     enableRowNumbers?: boolean;
     enableRowOrdering?: boolean;
     enableRowSelection?: boolean | ((row: MRT_Row<TData>) => boolean);
+    enableRowHover?: boolean;
     enableRowVirtualization?: boolean;
     enableSelectAll?: boolean;
     enableStickyFooter?: boolean;
@@ -680,6 +681,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
     enableTableHead?: boolean;
     enableToolbarInternalActions?: boolean;
     enableTopToolbar?: boolean;
+    disableTableDuringEdit?: boolean;
     expandRowsFn?: (dataRow: TData) => TData[];
     getRowId?: (
       originalRow: TData,
@@ -1139,6 +1141,8 @@ const MaterialReactTable = <TData extends Record<string, any> = {}>({
   positionToolbarDropZone = 'top',
   rowNumberMode = 'original',
   selectAllMode = 'page',
+  enableRowHover = true,
+  disableTableDuringEdit = false,
   sortingFns,
   ...rest
 }: MaterialReactTableProps<TData>) => {
@@ -1211,8 +1215,10 @@ const MaterialReactTable = <TData extends Record<string, any> = {}>({
       enableStickyHeader={enableStickyHeader}
       enableTableFooter={enableTableFooter}
       enableTableHead={enableTableHead}
+      enableRowHover={enableRowHover}
       enableToolbarInternalActions={enableToolbarInternalActions}
       enableTopToolbar={enableTopToolbar}
+      disableTableDuringEdit={disableTableDuringEdit}
       filterFns={_filterFns}
       icons={_icons}
       layoutMode={layoutMode}
