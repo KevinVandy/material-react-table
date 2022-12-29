@@ -165,7 +165,9 @@ export const MRT_FilterTextField: FC<Props> = ({
     column.setFilterValue(undefined);
     setColumnFilterFns((prev) => ({
       ...prev,
-      [header.id]: 'fuzzy',
+      [header.id]: columnDef.columnFilterModeOptions?.[0]
+        ?? columnFilterModeOptions?.[0] 
+        ?? 'fuzzy',
     }));
   };
 
