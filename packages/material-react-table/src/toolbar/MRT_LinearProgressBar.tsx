@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Collapse from '@mui/material/Collapse';
 import LinearProgress from '@mui/material/LinearProgress';
-import { MRT_TableInstance } from '..';
+import type { MRT_TableInstance } from '..';
 
 interface Props {
   isTopToolbar: boolean;

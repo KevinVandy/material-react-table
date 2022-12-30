@@ -9,7 +9,7 @@ import Table from '@mui/material/Table';
 import { MRT_TableHead } from '../head/MRT_TableHead';
 import { Memo_MRT_TableBody, MRT_TableBody } from '../body/MRT_TableBody';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
-import { MRT_TableInstance } from '..';
+import type { MRT_TableInstance } from '..';
 
 interface Props {
   table: MRT_TableInstance;

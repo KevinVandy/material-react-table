@@ -3,7 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import type { IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { MRT_ShowHideColumnsMenu } from '../menus/MRT_ShowHideColumnsMenu';
-import { MRT_TableInstance } from '..';
+import type { MRT_TableInstance } from '..';
 
 interface Props<TData extends Record<string, any> = {}>
   extends IconButtonProps {

@@ -3,7 +3,7 @@ import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
-import { MRT_TableInstance } from '..';
+import type { MRT_TableInstance } from '..';
 
 interface Props<TData extends Record<string, any> = {}> {
   table: MRT_TableInstance<TData>;

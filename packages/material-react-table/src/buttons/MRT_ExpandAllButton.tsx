@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import { MRT_TableInstance } from '..';
+import type { MRT_TableInstance } from '..';
 
 interface Props {
   table: MRT_TableInstance;
