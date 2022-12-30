@@ -5,7 +5,7 @@ import MaterialReactTable, {
   MRT_ColumnDef,
 } from 'material-react-table';
 import { faker } from '@faker-js/faker';
-import { MenuItem, TextField } from '@mui/material';
+import { Box, Button, MenuItem, TextField } from '@mui/material';
 import { ColumnFiltersState } from '@tanstack/react-table';
 
 const meta: Meta = {
@@ -32,6 +32,7 @@ const columns: MRT_ColumnDef<typeof data[0]>[] = [
   {
     header: 'Age',
     accessorKey: 'age',
+    filterVariant: 'range',
   },
   {
     Cell: ({ cell }) => cell.getValue<Date>().toLocaleDateString(), //transform data to readable format for cell render
@@ -191,7 +192,12 @@ export const DisableSomeFilterTypesForCertainColumns: Story<
       {
         header: 'Last Name',
         accessorKey: 'lastName',
-        columnFilterModeOptions: ['startsWith', 'endsWith', 'empty', 'notEmpty'],
+        columnFilterModeOptions: [
+          'startsWith',
+          'endsWith',
+          'empty',
+          'notEmpty',
+        ],
         filterFn: 'startsWith',
       },
       {
@@ -434,3 +440,38 @@ export const ManualFiltering: Story<MaterialReactTableProps> = () => {
     />
   );
 };
+
+export const ExternalSetFilterValue: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    initialState={{ showColumnFilters: true }}
+    renderTopToolbarCustomActions={({ table }) => (
+      <Box>
+        <Button
+          onClick={() =>
+            table.setColumnFilters((prev) => [
+              ...prev,
+              { id: 'firstName', value: 'Joe' },
+            ])
+          }
+        >
+          Find Joes
+        </Button>
+        <Button
+          onClick={() =>
+            table.setColumnFilters((prev) => [
+              ...prev,
+              { id: 'age', value: [18, 25] },
+            ])
+          }
+        >
+          Find 18-25 Age Range
+        </Button>
+        <Button onClick={() => table.resetColumnFilters()}>
+          Reset Filters
+        </Button>
+      </Box>
+    )}
+  />
+);

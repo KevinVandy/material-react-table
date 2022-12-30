@@ -165,9 +165,10 @@ export const MRT_FilterTextField: FC<Props> = ({
     column.setFilterValue(undefined);
     setColumnFilterFns((prev) => ({
       ...prev,
-      [header.id]: columnDef.columnFilterModeOptions?.[0]
-        ?? columnFilterModeOptions?.[0]
-        ?? 'fuzzy',
+      [header.id]:
+        columnDef.columnFilterModeOptions?.[0] ??
+        columnFilterModeOptions?.[0] ??
+        'fuzzy',
     }));
   };
 
@@ -178,12 +179,14 @@ export const MRT_FilterTextField: FC<Props> = ({
   const isMounted = useRef(false);
 
   useEffect(() => {
-    const filterValue = column.getFilterValue();
     if (isMounted.current) {
+      const filterValue = column.getFilterValue();
       if (filterValue === undefined) {
         handleClear();
+      } else if (isRangeFilter && rangeFilterIndex !== undefined) {
+        setFilterValue((filterValue as [string, string])[rangeFilterIndex]);
       } else {
-        setFilterValue(column.getFilterValue() as string | string[]);
+        setFilterValue(filterValue as string);
       }
     }
 
@@ -275,7 +278,7 @@ export const MRT_FilterTextField: FC<Props> = ({
                 <span>
                   <IconButton
                     aria-label={localization.clearFilter}
-                    disabled={!filterValue?.length}
+                    disabled={!filterValue?.toString()?.length}
                     onClick={handleClear}
                     size="small"
                     sx={{
