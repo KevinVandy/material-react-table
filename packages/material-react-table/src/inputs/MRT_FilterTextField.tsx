@@ -166,7 +166,7 @@ export const MRT_FilterTextField: FC<Props> = ({
     setColumnFilterFns((prev) => ({
       ...prev,
       [header.id]: columnDef.columnFilterModeOptions?.[0]
-        ?? columnFilterModeOptions?.[0] 
+        ?? columnFilterModeOptions?.[0]
         ?? 'fuzzy',
     }));
   };
@@ -178,9 +178,15 @@ export const MRT_FilterTextField: FC<Props> = ({
   const isMounted = useRef(false);
 
   useEffect(() => {
-    if (isMounted.current && column.getFilterValue() === undefined) {
-      handleClear();
+    const filterValue = column.getFilterValue();
+    if (isMounted.current) {
+      if (filterValue === undefined) {
+        handleClear();
+      } else {
+        setFilterValue(column.getFilterValue() as string | string[]);
+      }
     }
+
     isMounted.current = true;
   }, [column.getFilterValue()]);
 
