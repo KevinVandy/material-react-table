@@ -191,7 +191,7 @@ export const DisableSomeFilterTypesForCertainColumns: Story<
       {
         header: 'Last Name',
         accessorKey: 'lastName',
-        columnFilterModeOptions: ['startsWith', 'endsWith'],
+        columnFilterModeOptions: ['startsWith', 'endsWith', 'empty', 'notEmpty'],
         filterFn: 'startsWith',
       },
       {

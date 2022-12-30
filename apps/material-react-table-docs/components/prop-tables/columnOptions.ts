@@ -229,7 +229,7 @@ export const columnOptions: ColumnOption[] = [
   },
   {
     columnOption: 'enableMultiSort',
-    defaultValue: '',
+    defaultValue: 'true',
     description: '',
     link: '',
     linkText: '',
