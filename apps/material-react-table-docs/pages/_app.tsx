@@ -73,6 +73,10 @@ function App({ Component, pageProps }: AppProps) {
           name="description"
           content="Material React Table, a fully featured Material UI V5 implementation of TanStack React Table V8. Written from the ground up in TypeScript."
         />
+        <link
+          rel="canonical"
+          href={`https://www.material-react-table.com${pathname}`}
+        />
         <link rel="icon" href="/mrt_logo.png" />
         <meta property="og:image" content="/mrt_logo.png" />
         <meta

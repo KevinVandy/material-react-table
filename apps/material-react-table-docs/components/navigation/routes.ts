@@ -281,7 +281,7 @@ export const routes: Array<RouteItem> = [
     href: '/blog',
     items: [
       {
-        href: '/blog/the-best-data-grid-table-libraries-for-material-ui-in-2023',
+        href: '/blog/the-best-react-data-grid-table-libraries-with-material-design-in-2023',
         label: 'The Best Data Grid Libraries...',
       },
     ],
