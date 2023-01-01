@@ -16,8 +16,10 @@ export const theme = (isLightTheme: boolean) =>
       },
       h2: {
         fontSize: '2.5rem',
-        lineHeight: '5rem',
+        lineHeight: '3.5rem',
         fontWeight: 'bold',
+        marginTop: '1.5rem',
+        marginBottom: '1.5rem',
       },
       h3: {
         fontSize: '2rem',

@@ -189,7 +189,6 @@ export const MRT_FilterTextField: FC<Props> = ({
         setFilterValue(filterValue as string);
       }
     }
-
     isMounted.current = true;
   }, [column.getFilterValue()]);
 

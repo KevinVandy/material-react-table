@@ -276,16 +276,16 @@ export const routes: Array<RouteItem> = [
       },
     ],
   },
-  // {
-  //   label: 'Blog',
-  //   href: '/blog',
-  //   items: [
-  //     {
-  //       href: '/blog',
-  //       label: 'Blog',
-  //     },
-  //   ],
-  // },
+  {
+    label: 'Blog',
+    href: '/blog',
+    items: [
+      {
+        href: '/blog/the-best-data-grid-table-libraries-for-material-ui-in-2023',
+        label: 'The Best Data Grid Libraries...',
+      },
+    ],
+  },
   {
     label: 'Other',
     href: '#',

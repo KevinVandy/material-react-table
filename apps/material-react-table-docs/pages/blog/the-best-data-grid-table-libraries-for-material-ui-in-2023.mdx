@@ -1,0 +1,94 @@
+import Head from 'next/head';
+import { BlogAuthor } from '../../components/mdx/BlogAuthor';
+
+<Head>
+  <title>
+    The Best Data Grid/Table Libraries for React with Material Design in 2023 -
+    MRT Blog
+  </title>
+  <meta name="description" content="" />
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline:
+          'The Best Data Grid/Table Libraries for React with Material Design in 2023',
+        about: ['React', 'Material UI', 'Data Grid Libraries', 'NPM'],
+        image: [],
+        datePublished: '2023-01-01',
+        dateModified: '2023-01-01',
+        author: [
+          {
+            '@type': 'Person',
+            name: 'Kevin Van Cott',
+            url: 'https://www.kevinvancott.dev/',
+          },
+        ],
+      }),
+    }}
+  />
+</Head>
+
+## The Best Data Grid/Table Libraries for React with Material Design in 2023
+
+<BlogAuthor publishDate="2023/01/01" />
+
+If you are using a component library like Material UI in your project, you probably chose to do so that you could rapidly build out your UI without having to worry so much about the intricate styling details. You need to build features quickly, but you also need to deliver software that is high quality and easy to use. MUI has tons of components that let you build out your UI quickly, but when it comes to tables or heavily featured data grid components, they may still feel rather low-level and primitive.
+
+Yes, you can build your own high quality and fully featured data grids yourself with just the stock MUI Table components, but there are also quite a few dedicated 3rd party data grid and table libraries out there that can help you build out your tables and grids even faster. Let's take a look at some of the best data grid/table libraries that work best with Material UI in 2023 and beyond.
+
+### Recommended Data Grid/Table Libraries for MUI in 2023
+
+Here are the top 3 data grid/table libraries that I recommend for MUI in 2023. They are all well maintained, well documented, and have active communities that you can get help from if you run into any issues.
+
+#### 1. MUI X DataGrid (MIT or Pro/Premium)
+
+The MUI X DataGrid package comes directly from MUI, so you are guaranteed to at least get a solid feature-rich that integrates perfectly with the rest of your MUI components. It is very well maintained, and you can get pretty good support from the MUI team if you run into any issues.
+
+It has just about every table feature that you might need, but one caveat is that the some of the features are only available in either the paid Pro or Premium versions. There is a free MIT version, of course, but be aware of the vender lock-in that you might get yourself into if you choose to use this library. If you are building a commercial product, paying for a library like this might be worth it, but take a look at the other options first to see if they will work for you.
+
+#### 2. AG Grid (MIT or Enterprise)
+
+AG Grid is potentially the greatest data grid/table library out there. It has just about every feature that you might need, and then some!
+
+Seriously, AG Grid is not just a data grid, but also built to potentially be an full blown Excel Spreadsheet replacement if you enable all of the features.
+
+The "AG" in AG Grid stands for "Agnostic Grid", which means that the library works in multiple JavaScript Frameworks besides React. On the same note though, AG Grid does not use Material UI under the hood like all of the other libraries on this list. However, it does stick very close to Material Design, so it will not stick out too far from the rest of the components in your MUI project.
+
+AG Grid is also in a similar situation as MUI X DataGrid, where some of the features are only available in the paid Enterprise version. However, the free version is still really feature rich and will take you very far in most projects. AG Grid is also one of the few high quality projects out there where it is probably worth every penny to pay for the Enterprise version if you really need it.
+
+Be aware, though, that AG Grid is a pretty large library that also comes with a large bundle size. It is definitely not the lightest weight option out there. It really is designed for use cases where you need all the powerful features that it has to offer.
+
+#### 3. Material React Table (Free MIT)
+
+Finally, on this list is Material React Table. This is a relatively new library that was first released in September of 2022. Unlike the 2 previously mentioned libraries, Material React Table is 100% free to use with the MIT license. It is also built directly on top of Material UI v5 and exclusively uses MUI components under the hood, so it will fit right in with the rest of your MUI project. Also almost all of the Material UI components that are used internally have their props exposed for you to customize and style, so you should not run into many problems where you cannot customize something that you need to.
+
+The main advantage of this project is that it is also built on top of TanStack Table v8 (formerly known as React Table) and TanStack Virtual v3 (formerly known as React Virtual), which are powerful headless UI libraries for efficiently rendering react table components with virtualization. This also means the the APIs to customize the behavior of the table are standardized with TanStack Table's comprehensive API. Compared to other data grid/table libraries, Material React Table is very customizable and flexible.
+
+Despite being free to use, Material React Table still offers almost every data grid/table feature that you might need. A lot of the features are implemented in a very light-weight way. The bundle size of Material React Table is only around 42 KB, which is much smaller than the other libraries listed here, which range from about 100-300 KB.
+
+### Honorable Mentions That You Probably Should Not Use Anymore
+
+There are a couple mui data grid/table libraries that used to be popular, but are no longer being maintained. They were great for their time, but you should probably not start new projects with these in 2023.
+
+#### Do Not Use Material Table
+
+Material-Table is a library I used to use a lot. It was awesome. Unfortunately, the maintainer does not seem to be active on GitHub anymore, and the project is no longer being actively maintained. It went a couple of years without getting any updates, and there are some glaring NPM security warnings that you will receive if you install this in your project.
+
+However, there is now a community fork called @material-table/core that is still alive. It is a fork of the original project with some versions that are compatible with MUI v5. It is awesome that this exists as this gives an option to developers who just need to upgrade their existing projects to MUI v5, but I still would not recommend starting new projects with this as there are now better options out there.
+
+#### Do Not Use MUI Datatables
+
+MUI-Datatables is a library that is overall good, visually well designed, and even still relatively well maintained to stay up to date with MUI v5. However, it lacks good documentation and can be hard to figure out how to use. It no longer has a documentation site, so the API section in the README is the only documentation that you get. It is also worth noting that at the time of writing, there are almost 600 open and unresolved issues in the GitHub repo, and non of the issues seem to get any attention from the maintainer. Overall, I would not recommend starting new projects with this library in 2023.
+
+### What if These Libraries Are Not Customizable Enough?
+
+The libraries listed above are all great options for building out data tables with many of the features you need very quickly, but it is possible down the road that you might run into situations where they are not customizable enough for your needs. If this happens, you will probably need to build your own data grid/table components from scratch. This is not as hard as it sounds, especially with libraries like TanStack Table.
+
+Using a combination of TanStack Table and the Material UI Table components can take you a long way. TanStack Table's hooks can take care of all of the sorting, filtering, pagination, and grouping logic for you so that you can focus on customizing the UI to your needs. This is a similar approach to what the Material React Table library already does, but it is always great to be in control of your own code as much as possible.
+
+### Conclusion
+
+In 2023, the Material UI ecosystem is more mature than ever. You have a lot of options when it comes to building data grids and tables. I suggest seeing if Material React Table works for you, but if not, take a look at whether or not AG Grid's powerful features are worth it to you and fit your use case.
