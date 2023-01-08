@@ -25,11 +25,9 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
           accessorKey: 'columnOption',
           enableClickToCopy: true,
           header: 'Column Option',
-          muiTableBodyCellCopyButtonProps: ({ cell, row }) => ({
+          muiTableBodyCellCopyButtonProps: ({ cell }) => ({
             className: 'column-option',
-            // component: 'a',
             id: `${cell.getValue<string>()}-column-option`,
-            // href: `#${cell.getValue<string>()}-column-option`,
           }),
           Cell: ({ cell, row }) =>
             row.original?.required ? (
@@ -46,7 +44,7 @@ const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
           enableGlobalFilter: false,
           Cell: ({ cell }) => (
             <SampleCodeSnippet
-              className="language-js"
+              className="language-ts"
               enableCopyButton={false}
               style={{
                 backgroundColor: 'transparent',

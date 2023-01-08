@@ -30,9 +30,7 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
           accessorKey: 'propName',
           muiTableBodyCellCopyButtonProps: ({ cell }) => ({
             className: 'prop',
-            // component: 'a',
             id: `${cell.getValue<string>()}-prop`,
-            // href: `#${cell.getValue<string>()}-prop`,
           }),
           Cell: ({ cell, row }) =>
             row.original?.required ? (
@@ -49,7 +47,7 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
           enableGlobalFilter: false,
           Cell: ({ cell }) => (
             <SampleCodeSnippet
-              className="language-js"
+              className="language-ts"
               enableCopyButton={false}
               style={{
                 backgroundColor: 'transparent',

@@ -34,7 +34,7 @@ const TableInstanceAPIsTable: FC<Props> = ({ onlyProps }) => {
           enableGlobalFilter: false,
           Cell: ({ cell }) => (
             <SampleCodeSnippet
-              className="language-js"
+              className="language-ts"
               enableCopyButton={false}
               style={{
                 backgroundColor: 'transparent',

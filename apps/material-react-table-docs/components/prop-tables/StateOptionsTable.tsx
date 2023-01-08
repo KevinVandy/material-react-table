@@ -24,9 +24,7 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
           header: 'State Option',
           muiTableBodyCellCopyButtonProps: ({ cell }) => ({
             className: 'state-option',
-            // component: 'a',
             id: `${cell.getValue<string>()}-state-option`,
-            // href: `#${cell.getValue<string>()}-state-option`,
           }),
           Cell: ({ cell }) => cell.getValue<string>(),
         },
@@ -36,7 +34,7 @@ const StateOptionsTable: FC<Props> = ({ onlyProps }) => {
           enableGlobalFilter: false,
           Cell: ({ cell }) => (
             <SampleCodeSnippet
-              className="language-js"
+              className="language-ts"
               enableCopyButton={false}
               style={{
                 backgroundColor: 'transparent',
