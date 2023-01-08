@@ -1,4 +1,4 @@
-type RouteItem = {
+export type RouteItem = {
   href: string;
   label: string;
   items?: RouteItem[];
