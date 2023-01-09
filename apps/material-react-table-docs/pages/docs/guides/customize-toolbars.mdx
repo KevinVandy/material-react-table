@@ -245,7 +245,7 @@ return (
 
 You may want to separate out your own toolbar functionality away from the main table component. MRT lets you do this and still connect your custom components to the table instance using the `tableInstanceRef` prop.
 
-You can import import the MRT Internal Toolbar button components and use them in your custom toolbar, just like you can when customizing the built-in toolbar, BUT there are some extra re-render hacks that you hve to do to make the icon buttons work properly. See the example below:
+You can import import the MRT Internal Toolbar button components and use them in your custom toolbar, just like you can when customizing the built-in toolbar, BUT there are some extra re-render hacks that you have to do to make the icon buttons work properly. See the example below:
 
 > Passing the `tableInstanceRef` as a prop for the `table` prop that MRT\_\* components need also requires some weird re-render hacks to make the icon buttons work properly, because refs do not trigger re-renders in React.
 
