@@ -36,6 +36,7 @@ export const MRT_TableBody: FC<Props> = ({
       layoutMode,
       localization,
       manualFiltering,
+      manualPagination,
       manualSorting,
       memoMode,
       muiTableBodyProps,
@@ -75,7 +76,7 @@ export const MRT_TableBody: FC<Props> = ({
       const rankedRows = getPrePaginationRowModel().rows.sort((a, b) =>
         rankGlobalFuzzy(a, b),
       );
-      if (enablePagination) {
+      if (enablePagination  && !manualPagination) {
         const start = pagination.pageIndex * pagination.pageSize;
         return rankedRows.slice(start, start + pagination.pageSize);
       }
