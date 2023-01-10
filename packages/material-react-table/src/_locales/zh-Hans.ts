@@ -83,7 +83,7 @@ export const MRT_Localization_ZH_HANS: MRT_Localization = {
   sortedByColumnDesc: '已按 {column} 倒序排序',
   thenBy: '，然后以',
   toggleDensity: '切换密度',
-  toggleFullScreen: '切换full screen',
+  toggleFullScreen: '切换全萤幕',
   toggleSelectAll: '切换选择全部',
   toggleSelectRow: '切换选择横列',
   toggleVisibility: '切换可见度',
