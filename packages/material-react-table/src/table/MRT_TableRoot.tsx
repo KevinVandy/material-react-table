@@ -32,11 +32,11 @@ import type {
   MRT_Column,
   MRT_ColumnDef,
   MRT_FilterOption,
+  MRT_Localization,
   MRT_Row,
   MRT_TableInstance,
   MRT_TableState,
   MaterialReactTableProps,
-  MRT_Localization,
 } from '..';
 
 export const MRT_TableRoot = <TData extends Record<string, any> = {}>(

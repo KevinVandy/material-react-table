@@ -172,7 +172,7 @@ const Example: FC = () => {
         sorting,
       }}
       rowVirtualizerInstanceRef={rowVirtualizerInstanceRef} //get access to the virtualizer instance
-      rowVirtualizerProps={{ overscan: 10 }}
+      rowVirtualizerProps={{ overscan: 4 }}
     />
   );
 };
