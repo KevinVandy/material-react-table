@@ -42,11 +42,13 @@ export const MRT_BottomToolbar: FC<Props> = ({ table }) => {
     <Toolbar
       variant="dense"
       {...toolbarProps}
-      ref={(ref: HTMLDivElement) => {
-        bottomToolbarRef.current = ref;
-        if (toolbarProps?.ref) {
-          // @ts-ignore
-          toolbarProps.ref.current = ref;
+      ref={(node: HTMLDivElement) => {
+        if (node) {
+          bottomToolbarRef.current = node;
+          if (toolbarProps?.ref) {
+            // @ts-ignore
+            toolbarProps.ref.current = node;
+          }
         }
       }}
       sx={(theme) =>
