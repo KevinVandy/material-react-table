@@ -28,6 +28,9 @@ export const MRT_TablePaper: FC<Props> = ({ table }) => {
       ? muiTablePaperProps({ table })
       : muiTablePaperProps;
 
+  const MRT_TopToolbarNode = <MRT_TopToolbar table={table} />;
+  const MRT_BottomToolbarNode = <MRT_BottomToolbar table={table} />;
+
   return (
     <Paper
       elevation={2}
@@ -61,13 +64,13 @@ export const MRT_TablePaper: FC<Props> = ({ table }) => {
     >
       {enableTopToolbar &&
         (renderTopToolbar instanceof Function
-          ? renderTopToolbar({ table })
-          : renderTopToolbar ?? <MRT_TopToolbar table={table} />)}
+          ? renderTopToolbar({ table, MRT_TopToolbarNode })
+          : renderTopToolbar ?? MRT_TopToolbarNode)}
       <MRT_TableContainer table={table} />
       {enableBottomToolbar &&
         (renderBottomToolbar instanceof Function
-          ? renderBottomToolbar({ table })
-          : renderBottomToolbar ?? <MRT_BottomToolbar table={table} />)}
+          ? renderBottomToolbar({ table, MRT_BottomToolbarNode})
+          : renderBottomToolbar ?? MRT_BottomToolbarNode)}
     </Paper>
   );
 };
