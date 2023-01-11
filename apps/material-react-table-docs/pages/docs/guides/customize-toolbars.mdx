@@ -203,8 +203,29 @@ However, you can repurpose this alert banner to show your own custom messages to
 
 If you want to completely override the default toolbar components, you can do so by passing in your own custom components to the `renderTopToolbar` and `renderBottomToolbar` props.
 
-The drawback to this approach is that you will not get all the automatic features of the default toolbar components, such as the automatic alert banner, progress bars, etc. You will have to implement all of that yourself if you still want those features.
+Unless you add the provided `MRT_TopToolbarNode` or `MRT_BottomToolbarNode` to your new component, respectively, you will not get all the automatic features of the default toolbar components, such as the automatic alert banner, progress bars, etc. You will have to implement all of that yourself if you still want those features.
 
+##### Custom component with the default toolbars
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  renderTopToolbar={({ table, MRT_TopToolbarNode }) => (
+    <Box>
+      <Box>My Special Top toolbar</Box>
+      { MRT_TopToolbarNode }
+    </Box>
+  )}
+  renderBottomToolbar={({ table, MRT_BottomToolbarNode }) => (
+    <Box>
+      <Box>My Special Bottom Toolbar</Box>
+      { MRT_BottomToolbarNode }
+    </Box>
+  )}
+/>
+```
+
+##### Custom component without the default toolbars
 ```jsx
 <MaterialReactTable
   columns={columns}
