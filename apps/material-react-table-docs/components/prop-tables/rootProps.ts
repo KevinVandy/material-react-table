@@ -1690,7 +1690,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: '',
-    type: 'ReactNode | ({ table }) => ReactNode',
+    type: 'ReactNode | ({ table, MRT_BottomToolbarNode }) => ReactNode',
   },
   {
     propName: 'renderColumnActionsMenuItems',
@@ -1770,7 +1770,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: '',
-    type: 'ReactNode | ({ table }) => ReactNode',
+    type: 'ReactNode | ({ table, MRT_TopToolbarNode }) => ReactNode',
   },
   {
     propName: 'renderTopToolbarCustomActions',
