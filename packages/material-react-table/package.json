@@ -1,7 +1,7 @@
 {
-  "version": "1.5.7",
+  "version": "1.6.0-alpha",
   "license": "MIT",
-  "name": "material-react-table",
+  "name": "duckboy81-material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
   "author": "Kevin Vandy",
   "keywords": [
@@ -45,10 +45,10 @@
     "node": ">=14"
   },
   "scripts": {
-    "build": "rm -rf dist && rollup -c && size-limit",
-    "dev": "rm -rf dist && rollup -c -w",
-    "lib:build": "rm -rf dist && rollup -c && size-limit",
-    "lib:dev": "rm -rf dist && rollup -c -w",
+    "build": "rollup -c && size-limit",
+    "dev": "rollup -c -w",
+    "lib:build": "rollup -c && size-limit",
+    "lib:dev": "rollup -c -w",
     "lint": "eslint .",
     "size": "size-limit"
   },

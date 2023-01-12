@@ -12,7 +12,7 @@
     "docs:dev": "turbo run docs:dev",
     "docs:sitemap": "turbo run docs:sitemap",
     "docs:start": "turbo run docs:start",
-    "lib:build": "cp README.md packages/material-react-table/README.md && turbo run lib:build",
+    "lib:build": "turbo run lib:build",
     "lib:dev": "turbo run lib:dev",
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
     "lint": "turbo run lint",
