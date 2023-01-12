@@ -1,14 +1,19 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Collapse from '@mui/material/Collapse';
 import LinearProgress from '@mui/material/LinearProgress';
 import type { MRT_TableInstance } from '..';
 
-interface Props {
+interface Props<TData extends Record<string, any> = {}> {
   isTopToolbar: boolean;
-  table: MRT_TableInstance;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_LinearProgressBar: FC<Props> = ({ isTopToolbar, table }) => {
+export const MRT_LinearProgressBar = <
+  TData extends Record<string, any> = {},
+  >({
+      isTopToolbar,
+      table,
+    }: Props<TData>) => {
   const {
     options: { muiLinearProgressProps },
     getState,
