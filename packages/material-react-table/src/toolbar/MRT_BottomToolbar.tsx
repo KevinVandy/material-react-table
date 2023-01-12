@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -10,11 +10,15 @@ import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
 import { commonToolbarStyles } from './MRT_TopToolbar';
 import type { MRT_TableInstance } from '..';
 
-interface Props {
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any> = {}> {
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_BottomToolbar: FC<Props> = ({ table }) => {
+export const MRT_BottomToolbar = <
+  TData extends Record<string, any> = {},
+  >({
+      table,
+    }: Props<TData>) => {
   const {
     getState,
     options: {

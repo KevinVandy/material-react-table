@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -25,11 +25,15 @@ export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
   zIndex: 1,
 });
 
-interface Props {
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any> = {}> {
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TopToolbar: FC<Props> = ({ table }) => {
+export const MRT_TopToolbar = <
+  TData extends Record<string, any> = {},
+>({
+  table,
+}: Props<TData>) => {
   const {
     getState,
     options: {

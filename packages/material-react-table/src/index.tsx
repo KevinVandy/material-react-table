@@ -18,6 +18,8 @@ import { MRT_ToolbarAlertBanner } from './toolbar/MRT_ToolbarAlertBanner';
 import { MRT_ToolbarDropZone } from './toolbar/MRT_ToolbarDropZone';
 import { MRT_ToolbarInternalButtons } from './toolbar/MRT_ToolbarInternalButtons';
 import { MRT_ToggleRowActionMenuButton } from './buttons/MRT_ToggleRowActionMenuButton';
+import { MRT_TopToolbar } from './toolbar/MRT_TopToolbar';
+import { MRT_BottomToolbar } from './toolbar/MRT_BottomToolbar';
 
 export {
   MRT_CopyButton,
@@ -33,4 +35,6 @@ export {
   MRT_ToolbarDropZone,
   MRT_ToolbarInternalButtons,
   MRT_ToggleRowActionMenuButton,
+  MRT_TopToolbar,
+  MRT_BottomToolbar,
 };
