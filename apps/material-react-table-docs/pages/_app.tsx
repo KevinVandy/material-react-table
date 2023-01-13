@@ -4,14 +4,14 @@ import Head from 'next/head';
 import PlausibleProvider from 'next-plausible';
 import { useRouter } from 'next/router';
 import { MDXProvider } from '@mdx-js/react';
-import { Box, ThemeProvider, useMediaQuery } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
+import { ThemeContextProvider } from '../styles/ThemeContext';
 import { mdxComponents } from '../components/mdx/mdxComponents';
 import TopBar from '../components/navigation/TopBar';
 import SideBar from '../components/navigation/Sidebar';
 import BreadCrumbs from '../components/navigation/BreadCrumbs';
 import MiniNav from '../components/navigation/MiniNav';
 import Footer from '../components/navigation/Footer';
-import { theme } from '../styles/MuiTheme';
 import docsearch from '@docsearch/js';
 import '../styles/globals.css';
 import '@docsearch/css';
@@ -33,7 +33,6 @@ function App({ Component, pageProps }: AppProps) {
   const isXLDesktop = useMediaQuery('(min-width: 1800px)');
 
   const [navOpen, setNavOpen] = useState(pathname === '/');
-  const [isLightTheme, setIsLightTheme] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -45,19 +44,6 @@ function App({ Component, pageProps }: AppProps) {
       });
     }
   }, []);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setIsLightTheme(localStorage.getItem('isLightTheme') === 'true');
-    }
-  }, []);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      document.body.style.backgroundColor = isLightTheme ? '#fff' : '#111';
-      localStorage.setItem('isLightTheme', isLightTheme.toString());
-    }
-  }, [isLightTheme]);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && isTablet) {
@@ -91,40 +77,13 @@ function App({ Component, pageProps }: AppProps) {
           />
         )}
       </Head>
-      <style global jsx>
-        {`
-          :root {
-            --docsearch-primary-color: #1565c0;
-            --docsearch-highlight-color: #1565c0;
-            --docsearch-logo-color: #1565c0;
-            ${!isLightTheme
-              ? `--docsearch-container-background: rgba(11, 11, 11, 0.8);
-            --docsearch-footer-background: #222;
-            --docsearch-hit-background: #333;
-            --docsearch-hit-color: #fff;
-            --docsearch-hit-shadow: none;
-            --docsearch-modal-background: #222;
-            --docsearch-modal-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            --docsearch-searchbox-background: #000;
-            --docsearch-searchbox-focus-background: #000;
-            --docsearch-text-color: #fff;
-           `
-              : ''}
-          }
-        `}
-      </style>
       <PlausibleProvider
         domain="material-react-table.com"
         enabled={process.env.NODE_ENV === 'production'}
       >
-        <ThemeProvider theme={theme(isLightTheme)}>
+        <ThemeContextProvider>
           <MDXProvider components={mdxComponents}>
-            <TopBar
-              isLightTheme={isLightTheme}
-              navOpen={navOpen || isDesktop}
-              setIsLightTheme={setIsLightTheme}
-              setNavOpen={setNavOpen}
-            />
+            <TopBar navOpen={navOpen || isDesktop} setNavOpen={setNavOpen} />
             <SideBar navOpen={navOpen || isDesktop} setNavOpen={setNavOpen} />
             <Box
               component="main"
@@ -160,7 +119,7 @@ function App({ Component, pageProps }: AppProps) {
               {showMiniNav && isXLDesktop && <MiniNav />}
             </Box>
           </MDXProvider>
-        </ThemeProvider>
+        </ThemeContextProvider>
       </PlausibleProvider>
     </>
   );

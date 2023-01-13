@@ -14,6 +14,10 @@ import {
   Box,
   Button,
   Paper,
+  Select,
+  MenuItem,
+  TextField,
+  rgbToHex,
 } from '@mui/material';
 import CodeIcon from '@mui/icons-material/Code';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -25,6 +29,7 @@ import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 import { LinkHeading } from './LinkHeading';
 import { usePlausible } from 'next-plausible';
+import { useThemeContext } from '../../styles/ThemeContext';
 
 const CopyButton = styled(IconButton)({
   position: 'absolute',
@@ -42,7 +47,6 @@ export interface Props {
   Component?: FC;
   apiCode?: string;
   javaScriptCode?: string;
-  showCodeSandboxLink?: boolean;
   tableId: string;
   typeScriptCode: string;
 }
@@ -51,12 +55,19 @@ export const SourceCodeSnippet: FC<Props> = ({
   Component,
   apiCode,
   javaScriptCode,
-  showCodeSandboxLink = true,
   tableId,
   typeScriptCode,
 }) => {
   const plausible = usePlausible();
   const theme = useTheme();
+  const {
+    isLightTheme,
+    setIsLightTheme,
+    secondaryColor,
+    setSecondaryColor,
+    primaryColor,
+    setPrimaryColor,
+  } = useThemeContext();
   const isMobile = useMediaQuery('(max-width: 720px)');
   const [isTypeScript, setIsTypeScript] = useState(true);
   const [showApiCode, setShowApiCode] = useState(false);
@@ -112,14 +123,22 @@ export const SourceCodeSnippet: FC<Props> = ({
             >
               Demo
             </LinkHeading>
-            {showCodeSandboxLink && (
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                flexGrow: 1,
+                flexWrap: 'wrap',
+                gap: '2rem',
+              }}
+            >
               <Box
                 sx={{
                   display: { xs: 'grid', sm: 'flex' },
                   flexWrap: 'wrap',
                   gap: '1rem',
-                  justifyContent: { xs: 'center', sm: 'flex-start' },
-                  width: { xs: '100%', sm: 'auto' },
+                  justifyContent: { xs: 'center', lg: 'flex-start' },
+                  width: { xs: '100%', lg: 'auto' },
                 }}
               >
                 <Button
@@ -164,7 +183,41 @@ export const SourceCodeSnippet: FC<Props> = ({
                   Open on GitHub
                 </Button>
               </Box>
-            )}
+              <Box
+                sx={{
+                  display: 'flex',
+                  width: 'auto',
+                  gap: '1rem',
+                  justifyContent: { xs: 'center', xl: 'flex-end' },
+                  flexGrow: 1,
+                }}
+              >
+                <TextField
+                  label="Primary"
+                  type="color"
+                  value={rgbToHex(primaryColor ?? '#4dabf5')}
+                  onChange={(e) => setPrimaryColor(e.target.value)}
+                  sx={{ minWidth: '60px' }}
+                  variant="standard"
+                />
+                <TextField
+                  label="Secondary"
+                  type="color"
+                  value={rgbToHex(secondaryColor)}
+                  onChange={(e) => setSecondaryColor(e.target.value)}
+                  sx={{ minWidth: '60px' }}
+                  variant="standard"
+                />
+                <Select
+                  value={isLightTheme ? 'light' : 'dark'}
+                  onChange={(e) => setIsLightTheme(e.target.value === 'light')}
+                  variant="standard"
+                >
+                  <MenuItem value="light">Light</MenuItem>
+                  <MenuItem value="dark">Dark</MenuItem>
+                </Select>
+              </Box>
+            </Box>
           </Box>
           <Component />
         </>

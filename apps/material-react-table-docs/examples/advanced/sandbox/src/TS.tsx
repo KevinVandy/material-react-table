@@ -234,7 +234,7 @@ const Example: FC = () => {
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <Button
               color="error"
-              disabled={table.getSelectedRowModel().flatRows.length === 0}
+              disabled={!table.getIsSomeRowsSelected()}
               onClick={handleDeactivate}
               variant="contained"
             >
@@ -242,7 +242,7 @@ const Example: FC = () => {
             </Button>
             <Button
               color="success"
-              disabled={table.getSelectedRowModel().flatRows.length === 0}
+              disabled={!table.getIsSomeRowsSelected()}
               onClick={handleActivate}
               variant="contained"
             >
@@ -250,7 +250,7 @@ const Example: FC = () => {
             </Button>
             <Button
               color="info"
-              disabled={table.getSelectedRowModel().flatRows.length === 0}
+              disabled={!table.getIsSomeRowsSelected()}
               onClick={handleContact}
               variant="contained"
             >
