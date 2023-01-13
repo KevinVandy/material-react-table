@@ -196,7 +196,10 @@ export const SourceCodeSnippet: FC<Props> = ({
                   label="Primary"
                   type="color"
                   value={rgbToHex(primaryColor ?? '#4dabf5')}
-                  onChange={(e) => setPrimaryColor(e.target.value)}
+                  onChange={(e) => {
+                    setPrimaryColor(e.target.value);
+                    plausible('change-primary-color');
+                  }}
                   sx={{ minWidth: '60px' }}
                   variant="standard"
                 />
@@ -204,13 +207,23 @@ export const SourceCodeSnippet: FC<Props> = ({
                   label="Secondary"
                   type="color"
                   value={rgbToHex(secondaryColor)}
-                  onChange={(e) => setSecondaryColor(e.target.value)}
+                  onChange={(e) => {
+                    setSecondaryColor(e.target.value);
+                    plausible('change-secondary-color');
+                  }}
                   sx={{ minWidth: '60px' }}
                   variant="standard"
                 />
                 <Select
                   value={isLightTheme ? 'light' : 'dark'}
-                  onChange={(e) => setIsLightTheme(e.target.value === 'light')}
+                  onChange={(e) => {
+                    setIsLightTheme(e.target.value === 'light');
+                    plausible(
+                      `toggle-theme-${
+                        e.target.value === 'light' ? 'light' : 'dark'
+                      }-mode`,
+                    );
+                  }}
                   variant="standard"
                 >
                   <MenuItem value="light">Light</MenuItem>

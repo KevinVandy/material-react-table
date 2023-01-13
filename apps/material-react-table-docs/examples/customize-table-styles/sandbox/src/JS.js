@@ -1,13 +1,14 @@
 import React, { useMemo } from 'react';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable from 'material-react-table';
 import { data } from './makeData';
+import { darken } from '@mui/material';
 
 const Example = () => {
   const columns = useMemo(
+    //column definitions...
     () => [
       {
         accessorKey: 'id',
-        enablePinning: false, //disable column pinning for this column
         header: 'ID',
         size: 50,
       },
@@ -29,24 +30,37 @@ const Example = () => {
         size: 300,
       },
       {
-        accessorKey: 'city', //this column gets pinned to the right by default because of the initial state,
+        accessorKey: 'city',
         header: 'City',
       },
 
       {
-        accessorKey: 'state', //this column gets pinned left by default because of the the initial state,
+        accessorKey: 'state',
         header: 'State',
       },
     ],
     [],
+    //end
   );
 
   return (
     <MaterialReactTable
       columns={columns}
       data={data}
-      enablePinning
-      initialState={{ columnPinning: { left: ['state'], right: ['city'] } }}
+      muiTablePaperProps={{
+        elevation: 0,
+        sx: {
+          borderRadius: '0',
+          border: '1px dashed #e0e0e0',
+        },
+      }}
+      muiTableBodyProps={{
+        sx: (theme) => ({
+          '& tr:nth-of-type(odd)': {
+            backgroundColor: darken(theme.palette.background.default, 0.1),
+          },
+        }),
+      }}
     />
   );
 };
