@@ -196,10 +196,8 @@ export const SourceCodeSnippet: FC<Props> = ({
                   label="Primary"
                   type="color"
                   value={rgbToHex(primaryColor ?? '#4dabf5')}
-                  onChange={(e) => {
-                    setPrimaryColor(e.target.value);
-                    plausible('change-primary-color');
-                  }}
+                  onChange={(e) => setPrimaryColor(e.target.value)}
+                  onClick={() => plausible('change-primary-color')}
                   sx={{ minWidth: '60px' }}
                   variant="standard"
                 />
@@ -207,10 +205,8 @@ export const SourceCodeSnippet: FC<Props> = ({
                   label="Secondary"
                   type="color"
                   value={rgbToHex(secondaryColor)}
-                  onChange={(e) => {
-                    setSecondaryColor(e.target.value);
-                    plausible('change-secondary-color');
-                  }}
+                  onChange={(e) => setSecondaryColor(e.target.value)}
+                  onClick={() => plausible('change-secondary-color')}
                   sx={{ minWidth: '60px' }}
                   variant="standard"
                 />
