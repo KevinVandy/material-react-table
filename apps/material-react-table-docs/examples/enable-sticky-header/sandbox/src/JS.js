@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
-import { ContentCopy } from '@mui/icons-material';
 import { data } from './makeData';
 
 const Example = () => {
@@ -9,30 +8,36 @@ const Example = () => {
       {
         accessorKey: 'firstName',
         header: 'First Name',
+        footer: 'First Name',
       },
       {
         accessorKey: 'lastName',
         header: 'Last Name',
+        footer: 'Last Name',
       },
       {
         accessorKey: 'email',
         header: 'Email',
-        enableClickToCopy: true,
-        muiTableBodyCellCopyButtonProps: {
-          fullWidth: true,
-          startIcon: <ContentCopy />,
-          sx: { justifyContent: 'flex-start' },
-        },
+        footer: 'Email',
       },
       {
         accessorKey: 'city',
         header: 'City',
+        footer: 'City',
       },
     ],
     [],
   );
 
-  return <MaterialReactTable columns={columns} data={data} />;
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      enableStickyHeader
+      enableStickyFooter
+      muiTableContainerProps={{ sx: { maxHeight: '300px' } }}
+    />
+  );
 };
 
 export default Example;

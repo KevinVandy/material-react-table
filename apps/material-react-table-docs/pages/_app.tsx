@@ -12,9 +12,7 @@ import SideBar from '../components/navigation/Sidebar';
 import BreadCrumbs from '../components/navigation/BreadCrumbs';
 import MiniNav from '../components/navigation/MiniNav';
 import Footer from '../components/navigation/Footer';
-import docsearch from '@docsearch/js';
 import '../styles/globals.css';
-import '@docsearch/css';
 
 function App({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
@@ -33,17 +31,6 @@ function App({ Component, pageProps }: AppProps) {
   const isXLDesktop = useMediaQuery('(min-width: 1800px)');
 
   const [navOpen, setNavOpen] = useState(pathname === '/');
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      docsearch({
-        appId: '1W9SWN5ZAH',
-        apiKey: '680b219eaef484622046bf76cef8544a',
-        indexName: 'material-react-table',
-        container: '#docsearch',
-      });
-    }
-  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && isTablet) {

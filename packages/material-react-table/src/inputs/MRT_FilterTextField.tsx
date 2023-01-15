@@ -242,7 +242,7 @@ export const MRT_FilterTextField: FC<Props> = ({
         onChange={handleChange}
         onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
         select={isSelectFilter || isMultiSelectFilter}
-        value={filterValue}
+        value={filterValue ?? ''}
         variant="standard"
         InputProps={{
           startAdornment: showChangeModeButton ? (

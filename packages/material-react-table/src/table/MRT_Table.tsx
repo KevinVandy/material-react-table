@@ -127,6 +127,7 @@ export const MRT_Table: FC<Props> = ({ table }) => {
       stickyHeader={enableStickyHeader || isFullScreen}
       {...tableProps}
       sx={(theme) => ({
+        borderCollapse: 'separate',
         display: layoutMode === 'grid' ? 'grid' : 'table',
         tableLayout:
           layoutMode !== 'grid' && enableColumnResizing ? 'fixed' : undefined,
