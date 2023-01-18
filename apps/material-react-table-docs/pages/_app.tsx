@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import PlausibleProvider from 'next-plausible';
@@ -26,17 +26,10 @@ function App({ Component, pageProps }: AppProps) {
     pathname === '/changelog';
 
   const isMobile = useMediaQuery('(max-width: 900px)');
-  const isTablet = useMediaQuery('(min-width: 900px)');
   const isDesktop = useMediaQuery('(min-width: 1500px)');
   const isXLDesktop = useMediaQuery('(min-width: 1800px)');
 
-  const [navOpen, setNavOpen] = useState(pathname === '/');
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && isTablet) {
-      setNavOpen(true);
-    }
-  }, [isTablet]);
+  const [navOpen, setNavOpen] = useState(false);
 
   return (
     <>
