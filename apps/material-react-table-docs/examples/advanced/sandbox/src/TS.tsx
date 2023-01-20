@@ -132,7 +132,7 @@ const Example: FC = () => {
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      helperText={'Filter Mode: Lesss Than'}
+                      helperText={'Filter Mode: Less Than'}
                       sx={{ minWidth: '120px' }}
                       variant="standard"
                     />
