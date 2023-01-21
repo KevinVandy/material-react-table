@@ -40,16 +40,16 @@ const fetchSize = 25;
 
 const Example = () => {
   const tableContainerRef = useRef(null); //we can get access to the underlying TableContainer element and react to its scroll events
-  const virtualizerInstanceRef = useRef < Virtualizer > null; //we can get access to the underlying Virtualizer instance and call its scrollToIndex method
+  const virtualizerInstanceRef = useRef(null); //we can get access to the underlying Virtualizer instance and call its scrollToIndex method
 
   const [columnFilters, setColumnFilters] = useState([]);
   const [globalFilter, setGlobalFilter] = useState();
   const [sorting, setSorting] = useState([]);
 
   const { data, fetchNextPage, isError, isFetching, isLoading } =
-    useInfiniteQuery(
-      ['table-data', columnFilters, globalFilter, sorting],
-      async ({ pageParam = 0 }) => {
+    useInfiniteQuery({
+      queryKey: ['table-data', columnFilters, globalFilter, sorting],
+      queryFn: async ({ pageParam = 0 }) => {
         const url = new URL(
           '/api/data',
           process.env.NODE_ENV === 'production'
@@ -66,12 +66,10 @@ const Example = () => {
         const json = await response.json();
         return json;
       },
-      {
-        getNextPageParam: (_lastGroup, groups) => groups.length,
-        keepPreviousData: true,
-        refetchOnWindowFocus: false,
-      },
-    );
+      getNextPageParam: (_lastGroup, groups) => groups.length,
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    });
 
   const flatData = useMemo(
     () => data?.pages.flatMap((page) => page.data) ?? [],

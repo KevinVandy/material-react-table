@@ -17,37 +17,37 @@ const Example = () => {
     pageSize: 10,
   });
 
-  const { data, isError, isFetching, isLoading, refetch } = useQuery(
-    [
+  const { data, isError, isFetching, isLoading, refetch } = useQuery({
+    queryKey: [
       'table-data',
-      columnFilters,
-      globalFilter,
-      pagination.pageIndex,
-      pagination.pageSize,
-      sorting,
+      columnFilters, //refetch when columnFilters changes
+      globalFilter, //refetch when globalFilter changes
+      pagination.pageIndex, //refetch when pagination.pageIndex changes
+      pagination.pageSize, //refetch when pagination.pageSize changes
+      sorting, //refetch when sorting changes
     ],
-    async () => {
-      const url = new URL(
+    queryFn: async () => {
+      const fetchURL = new URL(
         '/api/data',
         process.env.NODE_ENV === 'production'
           ? 'https://www.material-react-table.com'
           : 'http://localhost:3000',
       );
-      url.searchParams.set(
+      fetchURL.searchParams.set(
         'start',
         `${pagination.pageIndex * pagination.pageSize}`,
       );
-      url.searchParams.set('size', `${pagination.pageSize}`);
-      url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
-      url.searchParams.set('globalFilter', globalFilter ?? '');
-      url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
+      fetchURL.searchParams.set('size', `${pagination.pageSize}`);
+      fetchURL.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
+      fetchURL.searchParams.set('globalFilter', globalFilter ?? '');
+      fetchURL.searchParams.set('sorting', JSON.stringify(sorting ?? []));
 
-      const response = await fetch(url.href);
+      const response = await fetch(fetchURL.href);
       const json = await response.json();
       return json;
     },
-    { keepPreviousData: true },
-  );
+    keepPreviousData: true,
+  });
 
   const columns = useMemo(
     () => [
