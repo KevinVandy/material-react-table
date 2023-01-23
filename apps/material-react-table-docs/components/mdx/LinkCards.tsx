@@ -33,12 +33,12 @@ export const LinkCards = () => {
   return (
     <Box
       sx={{
-        mt: '4rem',
+        mt: '2rem',
         textAlign: 'center',
       }}
     >
       <Typography sx={{ p: '1rem' }} variant="h3">
-        Important Links
+        Useful Links
       </Typography>
       <Box
         sx={{

@@ -35,12 +35,10 @@ export const MRT_TableHeadCellResizeHandle: FC<Props> = ({ header, table }) => {
         },
       })}
       style={{
-        transform: column.getIsResizing()
-          ? `translateX(${
-              (getState().columnSizingInfo.deltaOffset ?? 0) /
-              (columnResizeMode === 'onChange' ? 16 : 1)
-            }px)`
-          : undefined,
+        transform:
+          column.getIsResizing() && columnResizeMode === 'onEnd'
+            ? `translateX(${getState().columnSizingInfo.deltaOffset ?? 0}px)`
+            : undefined,
       }}
     >
       <Divider

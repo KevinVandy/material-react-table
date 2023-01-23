@@ -69,7 +69,7 @@ const data = [
     library: 'Material React Table',
     libraryLink: '#',
     freeOrLicensed: 'Free MIT',
-    bundleSize: 41,
+    bundleSize: 42,
     bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/material-react-table@latest?color=blue',
     bundlePhobiaLink:
@@ -109,7 +109,7 @@ const data = [
       'https://badgen.net/bundlephobia/minzip/mui-datatables?color=orange',
     bundlePhobiaLink: 'https://bundlephobia.com/package/mui-datatables@latest',
     description:
-      'MUI Datatables is a solid Material UI-based table library that was originally built in 2017. It has a lot of features and is very customizable. However, it is not as lightweight as MRT and has a lot of dependencies. The library appears to still be kept up to date occasionally. Some of the UI layouts in MUI Datatables served as inspiration for Material React Table.',
+      'MUI Datatables is a solid Material UI-based table library that was originally built in 2017. It has a lot of features and is very customizable. However, it is not as lightweight as MRT and has a lot of dependencies. The library appears to still be kept up to date occasionally, but its documentation site is no longer available. Some of the UI layouts in MUI Datatables served as inspiration for Material React Table.',
   },
   {
     library: 'MUI X Data Grid MIT/Pro/Premium',
@@ -127,7 +127,7 @@ const data = [
     library: 'AG Grid Community/Enterprise',
     libraryLink: 'https://www.ag-grid.com/license-pricing',
     freeOrLicensed: 'MIT or Paid License',
-    bundleSize: 280,
+    bundleSize: 270,
     bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/ag-grid-enterprise?color=red',
     bundlePhobiaLink:

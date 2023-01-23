@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import TableRow from '@mui/material/TableRow';
+import { lighten } from '@mui/material/styles';
 import { MRT_TableFooterCell } from './MRT_TableFooterCell';
 import { VirtualItem } from '@tanstack/react-virtual';
 import type { MRT_Header, MRT_HeaderGroup, MRT_TableInstance } from '..';
@@ -43,6 +44,7 @@ export const MRT_TableFooterRow: FC<Props> = ({
     <TableRow
       {...tableRowProps}
       sx={(theme) => ({
+        backgroundColor: lighten(theme.palette.background.default, 0.04),
         display: layoutMode === 'grid' ? 'flex' : 'table-row',
         width: '100%',
         ...(tableRowProps?.sx instanceof Function

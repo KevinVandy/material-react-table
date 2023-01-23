@@ -12,6 +12,7 @@ import { ArrowForwardIos } from '@mui/icons-material';
 import { HomeCards } from '../components/mdx/HomeCards';
 import { LinkCards } from '../components/mdx/LinkCards';
 import { StatBadges } from '../components/mdx/StatBadges';
+import { GuideCard } from '../components/mdx/GuideCard';
 import ComparisonTable from '../components/mdx/ComparisonTable';
 import { LinkHeading } from '../components/mdx/LinkHeading';
 import FeatureTable from '../components/mdx/FeatureTable';
@@ -120,29 +121,6 @@ const HomePage = () => {
           </Link>
         </Typography>
         <StatBadges />
-        <Typography
-          color="text.secondary"
-          sx={{
-            fontSize: {
-              xs: '1.1rem',
-              md: '1.4rem',
-              lg: '1.5rem',
-            },
-            mt: '2rem',
-            textAlign: 'center',
-            lineHeight: {
-              xs: '1.8rem',
-              md: '2rem',
-              lg: '2.5rem',
-            },
-            fontWeight: 'normal',
-            textTransform: 'capitalize',
-          }}
-          variant="h3"
-        >
-          Quickly create high-quality React data tables with
-          Material&nbsp;Design
-        </Typography>
         <Box
           sx={{
             m: '3rem auto',
@@ -244,6 +222,32 @@ const HomePage = () => {
           </SampleCodeSnippet>
         </Box>
         <HomeCards />
+        <Typography my="2rem" textAlign="center" variant="h3">
+          Popular Docs
+        </Typography>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr 1fr 1fr',
+            gap: '1rem',
+          }}
+        >
+          <GuideCard title="Props" href="/docs/api/props" />
+          <GuideCard title="Basic Example" href="docs/examples/basic" />
+          <GuideCard title="Advanced Example" href="docs/examples/advanced" />
+          <GuideCard
+            title="Fetching Example"
+            href="docs/examples/react-query"
+          />
+          <GuideCard title="Localization" href="docs/guides/localization" />
+          <GuideCard title="Create Columns" href="docs/guides/data-columns" />
+          <GuideCard
+            title="Column Filtering"
+            href="docs/guides/column-filtering"
+          />
+          <GuideCard title="Selection" href="docs/guides/row-selection" />
+        </Box>
+        <LinkCards />
       </Stack>
       <Typography
         sx={{
@@ -291,7 +295,6 @@ const HomePage = () => {
       <Typography component="p" variant="subtitle2" sx={{ mt: '1rem' }}>
         *If you see any inaccuracies in this table, PRs are welcome!
       </Typography>
-      <LinkCards />
     </>
   );
 };

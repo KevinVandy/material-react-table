@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const cardData = [
   {
-    text: 'High-quality and performant modern table features with a minimal amount of effort',
+    text: 'High-quality and performant modern data grid features with a minimal amount of effort',
     image: '/quality.svg',
     alt: 'Quality',
   },
@@ -48,6 +48,7 @@ export const HomeCards = () => {
                 md: '1.1rem',
                 lg: '1.2rem',
               },
+              fontWeight: 'bold',
             }}
           >
             {cd.text}

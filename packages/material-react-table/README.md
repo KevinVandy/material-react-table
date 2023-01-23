@@ -21,13 +21,21 @@
 
 ## About
 
-### __Built with [Material UI <sup>V5</sup>](https://mui.com) and [TanStack Table <sup>V8</sup>](https://tanstack.com/table/v8)__
-
 ### _Quickly Create React Data Tables with Material Design_
 
-A good table library should offer you powerful features, with an easy way to customize them, or even opt out and turn them off. It should also offer a bunch of advanced features to take your tables to the next level, but without sacrificing too bundle size bloat. MRT attempts to find that happy balance.
+### __Built with [Material UI <sup>V5</sup>](https://mui.com) and [TanStack Table <sup>V8</sup>](https://tanstack.com/table/v8)__
 
-MRT is built on top of [TanStack Table's](https://tanstack.com/table/v8) react hooks to build upon it's high performance and flexibility.
+<br />
+<div style="display:flex;align-items:center;">
+<img src="https://material-react-table.com/mrt_logo.svg" alt="MRT" height="40"/>
+=
+<img src="https://mui.com/static/logo.png" height="40">
+🤝
+<img src="https://react-table-v7.tanstack.com/_next/static/images/logo-light-66d4dd9109004332c863391e6d1cb309.svg" height="40">
+</div>
+<br />
+
+MRT is built with Material-UI components on top of [TanStack Table's](https://tanstack.com/table/v8) comprehensive and powerful react hooks api.
 
 ## Learn More
 

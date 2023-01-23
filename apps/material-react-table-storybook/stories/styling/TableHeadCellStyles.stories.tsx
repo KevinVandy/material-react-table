@@ -13,7 +13,7 @@ const meta: Meta = {
 
 export default meta;
 
-const columns: MRT_ColumnDef<typeof data[0]>[] = [
+const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
     header: 'First Name',
     accessorKey: 'firstName',
@@ -47,11 +47,11 @@ export const StyleAllMuiTableHeadCell: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     muiTableHeadCellProps={{
-      sx: {
-        backgroundColor: 'rgba(52, 210, 235, 0.1)',
+      sx: (theme) => ({
+        background: 'rgba(52, 210, 235, 0.1)',
         borderRight: '1px solid rgba(224,224,224,1)',
-        color: '#fff',
-      },
+        color: theme.palette.text.primary,
+      }),
     }}
   />
 );

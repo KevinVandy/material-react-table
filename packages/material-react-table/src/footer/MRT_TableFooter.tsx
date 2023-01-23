@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import TableFooter from '@mui/material/TableFooter';
-import { lighten } from '@mui/material/styles';
 import { MRT_TableFooterRow } from './MRT_TableFooterRow';
 import type { VirtualItem } from '@tanstack/react-virtual';
 import type { MRT_TableInstance } from '..';
@@ -37,7 +36,6 @@ export const MRT_TableFooter: FC<Props> = ({
     <TableFooter
       {...tableFooterProps}
       sx={(theme) => ({
-        backgroundColor: lighten(theme.palette.background.default, 0.06),
         bottom: stickFooter ? 0 : undefined,
         display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
         opacity: stickFooter ? 0.97 : undefined,

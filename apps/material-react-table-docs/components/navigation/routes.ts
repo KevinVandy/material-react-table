@@ -109,7 +109,7 @@ export const routes: Array<RouteItem> = [
       },
       {
         href: '/docs/examples/remote',
-        label: 'Remote Data Example',
+        label: 'Remote Data Fetching Example',
       },
       {
         href: '/docs/examples/react-query',

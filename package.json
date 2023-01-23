@@ -9,6 +9,7 @@
     "build": "turbo run build --parallel",
     "dev": "turbo run dev --parallel",
     "docs:build": "turbo run lib:build && turbo run docs:build --no-cache --force",
+    "docs:build-local": "turbo run docs:build --no-cache --force",
     "docs:dev": "turbo run docs:dev",
     "docs:sitemap": "turbo run docs:sitemap",
     "docs:start": "turbo run docs:start",
