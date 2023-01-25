@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { alpha, Card, CardContent, Typography } from '@mui/material';
 import Link from 'next/link';
 
@@ -7,7 +7,7 @@ interface Props {
   href: string;
 }
 
-export const GuideCard = ({ href, title }) => {
+export const GuideCard: FC<Props> = ({ href, title }) => {
   return (
     <Link href={href}>
       <Card

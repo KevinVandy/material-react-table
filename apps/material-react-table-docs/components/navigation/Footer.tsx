@@ -1,7 +1,14 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { usePlausible } from 'next-plausible';
-import { Box, Button, Divider, Link, Paper, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Divider,
+  Link as MuiLink,
+  Paper,
+  Typography,
+} from '@mui/material';
 import { Edit, GitHub } from '@mui/icons-material';
 import TableOfContentsList from './TableOfContentsList';
 import { routes } from './routes';
@@ -69,6 +76,39 @@ const Footer = () => {
           />
         </a>
       </Typography>
+      <Typography
+        variant="subtitle1"
+        sx={{
+          mt: '2rem',
+          textAlign: 'center',
+        }}
+      >
+        Using{' '}
+        <MuiLink color="secondary" href="https://mantine.dev/" target="_blank" rel="noreferrer">
+          Mantine
+        </MuiLink>{' '}
+        instead of Material-UI?
+        <br />
+        Check out{' '}
+        <MuiLink
+          href="https://mantine-react-table.com"
+          target="_blank"
+          rel="noreferrer"
+          sx={(theme) => ({
+            background: `-webkit-linear-gradient(left, ${theme.palette.secondary.main}, ${theme.palette.primary.dark})`,
+            display: 'inline',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            textDecoration: 'none',
+            '&:hover': {
+              textDecoration: 'underline',
+              textDecorationColor: theme.palette.secondary.main,
+            },
+          })}
+        >
+          Mantine&nbsp;React&nbsp;Table
+        </MuiLink>
+      </Typography>
       <Paper
         elevation={3}
         sx={{
@@ -90,46 +130,46 @@ const Footer = () => {
             flexWrap: 'wrap',
           }}
         >
-          <Link
+          <MuiLink
             color="text.secondary"
             href="https://www.npmjs.com/package/material-react-table"
             target="_blank"
             rel="noopener"
           >
             NPM
-          </Link>
-          <Link
+          </MuiLink>
+          <MuiLink
             color="text.secondary"
             href="https://github.com/KevinVandy/material-react-table"
             target="_blank"
             rel="noopener"
           >
             Source Code
-          </Link>
-          <Link
+          </MuiLink>
+          <MuiLink
             color="text.secondary"
             href="https://github.com/KevinVandy/material-react-table/issues"
             target="_blank"
             rel="noopener"
           >
             Submit a Bug Report
-          </Link>
-          <Link
+          </MuiLink>
+          <MuiLink
             color="text.secondary"
             href="https://discord.gg/5wqyRx6fnm"
             target="_blank"
             rel="noopener"
           >
             Join&nbsp;the&nbsp;Discord!
-          </Link>
-          <Link
+          </MuiLink>
+          <MuiLink
             color="text.secondary"
             href="https://twitter.com/ThomasVanCott"
             target="_blank"
             rel="noopener"
           >
             Twitter
-          </Link>
+          </MuiLink>
         </Box>
         <Divider sx={{ m: '2rem 0' }} />
         <Box
