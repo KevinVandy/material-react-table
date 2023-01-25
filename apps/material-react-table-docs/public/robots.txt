@@ -2,7 +2,6 @@
 User-agent: *
 Allow: /
 Disallow: /api/data
-Disallow: /_next/*
 Disallow: /proxy
 
 # Host

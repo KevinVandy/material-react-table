@@ -9,7 +9,7 @@ const config = {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/data', '/_next', '/proxy'],
+        disallow: ['/api/data', '/proxy'],
       },
     ],
   },
