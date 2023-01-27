@@ -31,7 +31,7 @@ const Example: FC = () => {
           header: 'State',
         },
         //end
-      ] as MRT_ColumnDef<typeof data[0]>[],
+      ] as MRT_ColumnDef<(typeof data)[0]>[],
     [],
   );
 

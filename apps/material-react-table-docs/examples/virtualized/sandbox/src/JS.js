@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import MaterialReactTable from 'material-react-table';
-import { makeData, } from './makeData';
+import { makeData } from './makeData';
 
 const Example = () => {
   const columns = useMemo(

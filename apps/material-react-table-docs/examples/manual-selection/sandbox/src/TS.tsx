@@ -26,7 +26,7 @@ const data = [
 ];
 
 const Example: FC = () => {
-  const columns = useMemo<MRT_ColumnDef<typeof data[0]>[]>(
+  const columns = useMemo<MRT_ColumnDef<(typeof data)[0]>[]>(
     //column definitions...
     () => [
       {

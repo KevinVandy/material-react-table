@@ -24,7 +24,7 @@ const Example: FC = () => {
           header: 'Last Name',
         },
         //end
-      ] as MRT_ColumnDef<typeof data[0]>[],
+      ] as MRT_ColumnDef<(typeof data)[0]>[],
     [],
   );
 

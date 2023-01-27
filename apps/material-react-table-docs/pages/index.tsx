@@ -229,9 +229,9 @@ const HomePage = () => {
           sx={{
             display: 'grid',
             gridTemplateColumns: {
-              md:'1fr 1fr 1fr 1fr',
-              sm: '1fr 1fr'
-            } ,
+              md: '1fr 1fr 1fr 1fr',
+              sm: '1fr 1fr',
+            },
             gap: '1rem',
           }}
         >

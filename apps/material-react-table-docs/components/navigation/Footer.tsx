@@ -84,7 +84,12 @@ const Footer = () => {
         }}
       >
         Using{' '}
-        <MuiLink color="secondary" href="https://mantine.dev/" target="_blank" rel="noreferrer">
+        <MuiLink
+          color="secondary"
+          href="https://mantine.dev/"
+          target="_blank"
+          rel="noreferrer"
+        >
           Mantine
         </MuiLink>{' '}
         instead of Material-UI?

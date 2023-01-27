@@ -14,11 +14,9 @@ interface Props<TData extends Record<string, any> = {}> {
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_BottomToolbar = <
-  TData extends Record<string, any> = {},
-  >({
-      table,
-    }: Props<TData>) => {
+export const MRT_BottomToolbar = <TData extends Record<string, any> = {}>({
+  table,
+}: Props<TData>) => {
   const {
     getState,
     options: {

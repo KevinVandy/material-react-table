@@ -228,9 +228,13 @@ export const ColumnGroupingDropZoneAlwaysVisible: Story<
           ? { dropToGroupBy: 'Drag a column here to group by it' }
           : undefined
       }
-      muiTopToolbarProps={{ sx: { '& .Mui-ToolbarDropZone': {
-        border: '1px solid red',
-      } } }}
+      muiTopToolbarProps={{
+        sx: {
+          '& .Mui-ToolbarDropZone': {
+            border: '1px solid red',
+          },
+        },
+      }}
       onDraggingColumnChange={setDraggingColumn}
       positionToolbarAlertBanner="bottom"
       state={{ draggingColumn, showToolbarDropZone: true }}

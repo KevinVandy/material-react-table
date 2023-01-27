@@ -113,7 +113,7 @@ const columns = [
       </Stack>
     ),
   },
-] as MRT_ColumnDef<typeof data[0]>[];
+] as MRT_ColumnDef<(typeof data)[0]>[];
 
 export const Aggregation: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableGrouping />

@@ -1,7 +1,7 @@
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import React from 'react';
 
-const columns: MRT_ColumnDef<typeof data[0]>[] = [
+const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
     id: 'feature',
     accessorKey: 'feature',

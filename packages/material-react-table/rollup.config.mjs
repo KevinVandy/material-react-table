@@ -7,6 +7,7 @@ import { babel } from '@rollup/plugin-babel';
 
 const supportedLocales = [
   'cs',
+  'da',
   'de',
   'en',
   'es',

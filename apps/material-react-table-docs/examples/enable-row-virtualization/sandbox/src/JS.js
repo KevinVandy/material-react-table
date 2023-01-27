@@ -52,8 +52,7 @@ const Example = () => {
   );
 
   //optionally access the underlying virtualizer instance
-  const rowVirtualizerInstanceRef =
-    useRef(null);
+  const rowVirtualizerInstanceRef = useRef(null);
 
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

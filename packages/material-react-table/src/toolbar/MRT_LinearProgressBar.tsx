@@ -8,12 +8,10 @@ interface Props<TData extends Record<string, any> = {}> {
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_LinearProgressBar = <
-  TData extends Record<string, any> = {},
-  >({
-      isTopToolbar,
-      table,
-    }: Props<TData>) => {
+export const MRT_LinearProgressBar = <TData extends Record<string, any> = {}>({
+  isTopToolbar,
+  table,
+}: Props<TData>) => {
   const {
     options: { muiLinearProgressProps },
     getState,

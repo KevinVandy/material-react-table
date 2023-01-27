@@ -27,7 +27,7 @@ const Example: FC = () => {
           accessorKey: 'state',
           header: 'State',
         },
-      ] as MRT_ColumnDef<typeof data[0]>[],
+      ] as MRT_ColumnDef<(typeof data)[0]>[],
     [],
   );
 

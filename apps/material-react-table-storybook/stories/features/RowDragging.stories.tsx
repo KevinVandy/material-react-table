@@ -12,7 +12,7 @@ const meta: Meta = {
 
 export default meta;
 
-const columns: MRT_ColumnDef<typeof initData[0]>[] = [
+const columns: MRT_ColumnDef<(typeof initData)[0]>[] = [
   {
     accessorKey: 'id',
     header: 'ID',

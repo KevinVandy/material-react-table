@@ -12,7 +12,7 @@ const meta: Meta = {
 
 export default meta;
 
-const columns: MRT_ColumnDef<typeof data[0]>[] = [
+const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
     header: 'First Name',
     accessorKey: 'firstName',
@@ -106,7 +106,9 @@ export const ColumnOrderingWithPinning: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const ColumnOrderingNoDragHandles: Story<MaterialReactTableProps> = () => (
+export const ColumnOrderingNoDragHandles: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

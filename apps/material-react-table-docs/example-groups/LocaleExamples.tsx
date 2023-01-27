@@ -6,6 +6,9 @@ import { Box, Skeleton, Tab, Tabs } from '@mui/material';
 const CS_Table = dynamic(() => import('../examples/localization-i18n-cs'), {
   suspense: true,
 });
+const DA_Table = dynamic(() => import('../examples/localization-i18n-da'), {
+  suspense: true,
+});
 const DE_Table = dynamic(() => import('../examples/localization-i18n-de'), {
   suspense: true,
 });
@@ -54,15 +57,22 @@ const TR_Table = dynamic(() => import('../examples/localization-i18n-tr'), {
 const VI_Table = dynamic(() => import('../examples/localization-i18n-vi'), {
   suspense: true,
 });
-const ZH_HANS_Table = dynamic( () => import('../examples/localization-i18n-zh-hans'), {
-  suspense: true,
-});
-const ZH_HANT_Table = dynamic( () => import('../examples/localization-i18n-zh-hant'), {
-  suspense: true,
-});
+const ZH_HANS_Table = dynamic(
+  () => import('../examples/localization-i18n-zh-hans'),
+  {
+    suspense: true,
+  },
+);
+const ZH_HANT_Table = dynamic(
+  () => import('../examples/localization-i18n-zh-hant'),
+  {
+    suspense: true,
+  },
+);
 
 const supportedLocales = [
   'cs',
+  'da',
   'de',
   'en',
   'es',
@@ -111,6 +121,7 @@ const LocaleExamples = () => {
           fallback={<Skeleton animation="wave" height="600px" width="100%" />}
         >
           {currentLocale === 'cs' && <CS_Table />}
+          {currentLocale === 'da' && <DA_Table />}
           {currentLocale === 'de' && <DE_Table />}
           {currentLocale === 'en' && <EN_Table />}
           {currentLocale === 'es' && <ES_Table />}

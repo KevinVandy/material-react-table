@@ -14,7 +14,7 @@ const meta: Meta = {
 
 export default meta;
 
-const columns: MRT_ColumnDef<typeof data[0]>[] = [
+const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
     header: 'First Name',
     accessorKey: 'firstName',
@@ -154,7 +154,7 @@ export const SelectCheckboxSecondaryColor: Story<
 );
 
 export const SelectionWithInstanceRef: Story<MaterialReactTableProps> = () => {
-  const tableInstanceRef = useRef<MRT_TableInstance<typeof data[0]>>(null);
+  const tableInstanceRef = useRef<MRT_TableInstance<(typeof data)[0]>>(null);
 
   return (
     <MaterialReactTable

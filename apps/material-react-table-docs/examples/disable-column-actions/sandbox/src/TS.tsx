@@ -18,7 +18,7 @@ const Example: FC = () => {
           accessorKey: 'lastName',
           header: 'Last Name',
         },
-      ] as MRT_ColumnDef<typeof data[0]>[],
+      ] as MRT_ColumnDef<(typeof data)[0]>[],
     [],
   );
 

@@ -13,7 +13,7 @@ const cardData = [
     alt: 'Customizable',
   },
   {
-    text: "Easy to opt out of features or UI that you do not need",
+    text: 'Easy to opt out of features or UI that you do not need',
     image: '/opt-out.svg',
     alt: 'Easy Opt-out',
   },

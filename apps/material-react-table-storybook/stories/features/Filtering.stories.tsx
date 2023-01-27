@@ -14,7 +14,7 @@ const meta: Meta = {
 
 export default meta;
 
-const columns: MRT_ColumnDef<typeof data[0]>[] = [
+const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
     header: 'Is Active',
     accessorKey: 'isActive',

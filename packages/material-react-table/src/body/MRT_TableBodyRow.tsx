@@ -165,5 +165,5 @@ export const MRT_TableBodyRow: FC<Props> = ({
 
 export const Memo_MRT_TableBodyRow = memo(
   MRT_TableBodyRow,
-  (prev, next) => (prev.row === next.row && prev.rowIndex === next.rowIndex),
+  (prev, next) => prev.row === next.row && prev.rowIndex === next.rowIndex,
 );

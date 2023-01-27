@@ -69,8 +69,7 @@ export const MRT_Localization_ZH_HANS: MRT_Localization = {
   rowsPerPage: '每页横列数目',
   save: '储存',
   search: '搜寻',
-  selectedCountOfRowCountRowsSelected:
-    '已选择横列：{selectedCount}/{rowCount}',
+  selectedCountOfRowCountRowsSelected: '已选择横列：{selectedCount}/{rowCount}',
   select: '选择',
   showAll: '显示全部',
   showAllColumns: '显示全部栏位',

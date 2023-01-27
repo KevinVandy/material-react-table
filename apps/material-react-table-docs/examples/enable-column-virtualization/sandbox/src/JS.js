@@ -4,8 +4,7 @@ import { fakeColumns, fakeData } from './makeData';
 
 const Example = () => {
   //optionally access the underlying virtualizer instance
-  const columnVirtualizerInstanceRef =
-    useRef(null);
+  const columnVirtualizerInstanceRef = useRef(null);
 
   return (
     <MaterialReactTable
