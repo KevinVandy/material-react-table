@@ -1,5 +1,7 @@
 # Material React Table
 
+View [Documentation](https://www.material-react-table.com/)
+
 <a href="https://npmjs.com/package/material-react-table" target="_blank">
   <img alt="" src="https://badgen.net/npm/v/material-react-table?color=blue" />
 </a>
@@ -27,11 +29,11 @@
 
 <br />
 <div style="display:flex;align-items:center;">
-<img src="https://material-react-table.com/mrt_logo.svg" alt="MRT" height="40"/>
+<img src="https://material-react-table.com/mrt_logo.svg" alt="MRT" height="24"/>
 =
-<img src="https://mui.com/static/logo.png" height="40">
+<img src="https://mui.com/static/logo.png" height="24">
 🤝
-<img src="https://react-table-v7.tanstack.com/_next/static/images/logo-light-66d4dd9109004332c863391e6d1cb309.svg" height="40">
+<img src="https://react-table-v7.tanstack.com/_next/static/images/logo-light-66d4dd9109004332c863391e6d1cb309.svg" height="24">
 </div>
 <br />
 
