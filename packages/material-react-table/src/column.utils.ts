@@ -300,12 +300,13 @@ export const getCommonCellStyles = ({
 });
 
 export const MRT_DefaultColumn = {
+  filterVariant: 'text',
   minSize: 40,
   maxSize: 1000,
   size: 180,
-};
+} as const;
 
-export const MRT_DefaultDisplayColumn: Partial<MRT_ColumnDef> = {
+export const MRT_DefaultDisplayColumn = {
   columnDefType: 'display',
   enableClickToCopy: false,
   enableColumnActions: false,
@@ -318,4 +319,4 @@ export const MRT_DefaultDisplayColumn: Partial<MRT_ColumnDef> = {
   enableHiding: false,
   enableResizing: false,
   enableSorting: false,
-};
+} as const;

@@ -85,6 +85,16 @@ export const FilteringDisabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableFilters={false} />
 );
 
+export const FilterHighlightingDisabled: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableFilterMatchHighlighting={false}
+  />
+);
+
 export const FilterFnAndFilterVariants: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={[

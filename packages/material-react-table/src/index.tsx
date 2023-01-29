@@ -6,6 +6,7 @@ import type { MRT_Icons } from './icons';
 export type { MRT_Icons };
 
 import { MRT_CopyButton } from './buttons/MRT_CopyButton';
+import { MRT_EditActionButtons } from './buttons/MRT_EditActionButtons';
 import { MRT_FilterOptionMenu } from './menus/MRT_FilterOptionMenu';
 import { MRT_FullScreenToggleButton } from './buttons/MRT_FullScreenToggleButton';
 import { MRT_GlobalFilterTextField } from './inputs/MRT_GlobalFilterTextField';
@@ -23,6 +24,7 @@ import { MRT_BottomToolbar } from './toolbar/MRT_BottomToolbar';
 
 export {
   MRT_CopyButton,
+  MRT_EditActionButtons,
   MRT_FilterOptionMenu,
   MRT_FullScreenToggleButton,
   MRT_GlobalFilterTextField,

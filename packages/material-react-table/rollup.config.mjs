@@ -35,6 +35,7 @@ export default [
       '@tanstack/match-sorter-utils',
       '@tanstack/react-table',
       '@tanstack/react-virtual',
+      'highlight-words',
       'react',
     ],
     input: './src/index.tsx',

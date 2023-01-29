@@ -38,10 +38,10 @@ export const Example: FC = () => {
       data={data}
       //just for demo purposes
       defaultColumn={{
-        Cell: ({ cell }) => {
+        Cell: ({ renderedCellValue }) => {
           //see how often cells are re-rendered
           // console.info('render cell', cell.id);
-          return <>{cell.getValue()}</>;
+          return <>{renderedCellValue}</>;
         },
       }}
       editingMode="row"

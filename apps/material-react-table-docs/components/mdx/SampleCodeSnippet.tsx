@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { CSSProperties, FC, useState } from 'react';
 import {
   useTheme,
   Tooltip,
@@ -19,7 +19,12 @@ const CopyButton = styled(IconButton)({
   right: '0.25rem',
 });
 
-export const SampleCodeSnippet: FC<any> = (props) => {
+export const SampleCodeSnippet: FC<{
+  children: string;
+  className?: string;
+  enableCopyButton?: boolean;
+  style?: CSSProperties;
+}> = (props) => {
   const theme = useTheme();
   const [isCopied, setIsCopied] = useState(false);
 
@@ -54,7 +59,7 @@ export const SampleCodeSnippet: FC<any> = (props) => {
       <Highlight
         {...defaultProps}
         code={props.children}
-        language={props.className.replace(/language-/, '')}
+        language={props.className?.replace?.(/language-/, '') as any}
         theme={theme.palette.mode === 'dark' ? darkCodeTheme : lightCodeTheme}
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (

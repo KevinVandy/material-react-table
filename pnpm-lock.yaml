@@ -168,6 +168,7 @@ importers:
       '@typescript-eslint/parser': ^5.48.1
       eslint: ^8.31.0
       eslint-plugin-mui-path-imports: ^0.0.9
+      highlight-words: 1.2.1
       react: ^18.2.0
       react-dom: ^18.2.0
       react-is: ^18.2.0
@@ -182,6 +183,7 @@ importers:
       '@tanstack/match-sorter-utils': 8.7.6
       '@tanstack/react-table': 8.7.8_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-virtual': 3.0.0-beta.30_react@18.2.0
+      highlight-words: 1.2.1
     devDependencies:
       '@babel/core': 7.20.12
       '@babel/preset-react': 7.18.6_@babel+core@7.20.12
@@ -9237,6 +9239,11 @@ packages:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
     dev: true
+
+  /highlight-words/1.2.1:
+    resolution: {integrity: sha512-FtF50tuaaYathtSPFk5FwGf0Zex5iqNsTx/OsVM6mdsB3xqs5nM+PAoPWs/gIUxGF3/Qqu2v86sAUenTh6oL3Q==}
+    engines: {node: '>= 12', npm: '>= 6'}
+    dev: false
 
   /highlight.js/10.7.3:
     resolution: {integrity: sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==}

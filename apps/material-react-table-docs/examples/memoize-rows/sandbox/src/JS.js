@@ -38,10 +38,10 @@ export const Example = () => {
       data={data}
       //just for demo purposes
       defaultColumn={{
-        Cell: ({ cell }) => {
+        Cell: ({ renderedCellValue }) => {
           //see how often cells are re-rendered
           // console.info('render cell', cell.id);
-          return <>{cell.getValue()}</>;
+          return <>{renderedCellValue}</>;
         },
       }}
       enableDensityToggle={false} //density toggle is not compatible with memoization

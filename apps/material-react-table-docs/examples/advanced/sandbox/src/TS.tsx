@@ -47,7 +47,7 @@ const Example: FC = () => {
             id: 'name', //id is still required when using accessorFn instead of accessorKey
             header: 'Name',
             size: 250,
-            Cell: ({ cell, row }) => (
+            Cell: ({ renderedCellValue, row }) => (
               <Box
                 sx={{
                   display: 'flex',
@@ -62,7 +62,8 @@ const Example: FC = () => {
                   loading="lazy"
                   style={{ borderRadius: '50%' }}
                 />
-                <Typography>{cell.getValue<string>()}</Typography>
+                {/* using renderedCellValue instead of cell.getValue() preserves filter match highlighting */}
+                <span>{renderedCellValue}</span>
               </Box>
             ),
           },
@@ -86,6 +87,7 @@ const Example: FC = () => {
             //custom conditional format and styling
             Cell: ({ cell }) => (
               <Box
+                component="span"
                 sx={(theme) => ({
                   backgroundColor:
                     cell.getValue<number>() < 50_000

@@ -15,60 +15,58 @@ interface Props {
 const ColumnInstanceAPIsTable: FC<Props> = ({ onlyProps }) => {
   const isDesktop = useMediaQuery('(min-width: 1200px)');
 
-  const columns = useMemo(
-    () =>
-      [
-        {
-          accessorKey: 'columnInstanceAPI',
-          enableClickToCopy: true,
-          header: 'State Option',
-          muiTableBodyCellCopyButtonProps: ({ cell }) => ({
-            className: 'column-instance-api',
-            id: `${cell.getValue<string>()}-column-instance-api`,
-          }),
-          Cell: ({ cell }) => cell.getValue<string>(),
-        },
-        {
-          accessorKey: 'type',
-          header: 'Type',
-          enableGlobalFilter: false,
-          Cell: ({ cell }) => (
-            <SampleCodeSnippet
-              className="language-ts"
-              enableCopyButton={false}
-              style={{
-                backgroundColor: 'transparent',
-                fontSize: '0.9rem',
-                margin: 0,
-                padding: 0,
-                minHeight: 'unset',
-              }}
+  const columns = useMemo<MRT_ColumnDef<ColumnInstanceAPI>[]>(
+    () => [
+      {
+        accessorKey: 'columnInstanceAPI',
+        enableClickToCopy: true,
+        header: 'State Option',
+        muiTableBodyCellCopyButtonProps: ({ cell }) => ({
+          className: 'column-instance-api',
+          id: `${cell.getValue<string>()}-column-instance-api`,
+        }),
+      },
+      {
+        accessorKey: 'type',
+        header: 'Type',
+        enableGlobalFilter: false,
+        Cell: ({ cell }) => (
+          <SampleCodeSnippet
+            className="language-ts"
+            enableCopyButton={false}
+            style={{
+              backgroundColor: 'transparent',
+              fontSize: '0.9rem',
+              margin: 0,
+              padding: 0,
+              minHeight: 'unset',
+            }}
+          >
+            {cell.getValue<string>()}
+          </SampleCodeSnippet>
+        ),
+      },
+      {
+        accessorKey: 'link',
+        disableFilters: true,
+        enableGlobalFilter: false,
+        header: 'More Info Links',
+        Cell: ({ cell, row }) => (
+          <Link href={cell.getValue<string>()} passHref legacyBehavior>
+            <MuiLink
+              target={
+                cell.getValue<string>().startsWith('http')
+                  ? '_blank'
+                  : undefined
+              }
+              rel="noreferrer"
             >
-              {cell.getValue<string>()}
-            </SampleCodeSnippet>
-          ),
-        },
-        {
-          accessorKey: 'link',
-          disableFilters: true,
-          enableGlobalFilter: false,
-          header: 'More Info Links',
-          Cell: ({ cell, row }) => (
-            <Link href={cell.getValue() as string} passHref legacyBehavior>
-              <MuiLink
-                target={
-                  (cell.getValue() as string).startsWith('http')
-                    ? '_blank'
-                    : undefined
-                }
-                rel="noreferrer"
-              >
-                {row.original?.linkText}
-              </MuiLink>
-            </Link>
-          ),
-        },
-      ] as MRT_ColumnDef<ColumnInstanceAPI>[],
+              {row.original?.linkText}
+            </MuiLink>
+          </Link>
+        ),
+      },
+    ],
     [],
   );
 

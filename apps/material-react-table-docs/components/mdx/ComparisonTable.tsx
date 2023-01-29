@@ -69,7 +69,7 @@ const data = [
     library: 'Material React Table',
     libraryLink: '#',
     freeOrLicensed: 'Free MIT',
-    bundleSize: 42,
+    bundleSize: 43,
     bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/material-react-table@latest?color=blue',
     bundlePhobiaLink:

@@ -232,6 +232,7 @@ export const ColumnGroupingDropZoneAlwaysVisible: Story<
         sx: {
           '& .Mui-ToolbarDropZone': {
             border: '1px solid red',
+            zIndex: '2 !important',
           },
         },
       }}

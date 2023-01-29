@@ -336,6 +336,17 @@ export const rootProps: PropRow[] = [
     type: 'boolean',
   },
   {
+    propName: 'enableFilterMatchHighlighting',
+    defaultValue: 'true',
+    description:
+      'Enable or disable highlighting text that matches the filter in the table cells.',
+    link: '/docs/guides/column-filtering#filter-match-highlighting',
+    linkText: 'MRT Column Filtering Docs',
+    required: false,
+    source: 'MRT',
+    type: 'boolean',
+  },
+  {
     propName: 'enableFilters',
     defaultValue: 'true',
     description: 'Enable or disable both the global and column filters.',

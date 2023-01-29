@@ -46,17 +46,19 @@ export const MRT_ToolbarDropZone = <TData extends Record<string, any> = {}>({
             theme.palette.info.main,
             hoveredColumn?.id === 'drop-zone' ? 0.2 : 0.1,
           ),
+          backdropFilter: 'blur(4px)',
+          boxSizing: 'border-box',
           border: `dashed ${theme.palette.info.main} 2px`,
           display: 'flex',
           justifyContent: 'center',
-          height: 'calc(100% - 4px)',
+          height: '100%',
           position: 'absolute',
-          width: 'calc(100% - 4px)',
-          zIndex: 2,
+          width: '100%',
+          zIndex: 4,
         })}
         onDragEnter={handleDragEnter}
       >
-        <Typography>
+        <Typography fontStyle="italic">
           {localization.dropToGroupBy.replace(
             '{column}',
             draggingColumn?.columnDef?.header ?? '',

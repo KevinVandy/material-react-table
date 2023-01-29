@@ -14,7 +14,7 @@ import CustomizeExample from '../../../examples/customize-row-selection';
   />
 </Head>
 
-## Selection Feature Guide
+## Row Selection Feature Guide
 
 Material React Table has a built-in row-selection feature and makes it easy to manage the selection state yourself. This guide will walk you through how to enable row selection and how to customize the selection behavior.
 
@@ -41,7 +41,7 @@ Material React Table has a built-in row-selection feature and makes it easy to m
 
 <StateOptionsTable onlyProps={new Set(['rowSelection'])} />
 
-### Enable Selection
+### Enable Row Selection
 
 Selection checkboxes can be enabled with the `enableRowSelection` prop.
 
@@ -49,11 +49,11 @@ Selection checkboxes can be enabled with the `enableRowSelection` prop.
 <MaterialReactTable columns={columns} data={data} enableRowSelection />
 ```
 
-### Access Selection State
+### Access Row Selection State
 
 There a couple of ways to access the selection state. You can either manage the selection state yourself or read it from the table instance.
 
-#### Manage Selection State
+#### Manage Row Selection State
 
 The row selection state is managed internally by default, but more than likely, you will want to have access to that state yourself. Here is how you can simply get access to the row selection state, specifically.
 
@@ -71,7 +71,7 @@ return (
 );
 ```
 
-#### Read Selection State from Table Instance
+#### Read Row Selection State from Table Instance
 
 Alternatively, you can read the selection state from the `tableInstanceRef` ref like so:
 

@@ -51,7 +51,9 @@ const data = [...Array(6)].map(() => ({
   state: faker.address.state(),
 }));
 
-export const CenterAlignInGridLayoutMode: Story<MaterialReactTableProps> = () => {
+export const CenterAlignInGridLayoutMode: Story<
+  MaterialReactTableProps
+> = () => {
   return (
     <MaterialReactTable
       columns={columns}
@@ -67,7 +69,9 @@ export const CenterAlignInGridLayoutMode: Story<MaterialReactTableProps> = () =>
   );
 };
 
-export const RightAlignInGridLayoutMode: Story<MaterialReactTableProps> = () => {
+export const RightAlignInGridLayoutMode: Story<
+  MaterialReactTableProps
+> = () => {
   return (
     <MaterialReactTable
       columns={columns}

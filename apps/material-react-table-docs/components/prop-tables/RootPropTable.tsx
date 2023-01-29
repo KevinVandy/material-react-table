@@ -21,106 +21,105 @@ const RootPropTable: FC<Props> = ({ onlyProps }) => {
   const theme = useTheme();
   const isDesktop = useMediaQuery('(min-width: 1200px)');
 
-  const columns = useMemo(
-    () =>
-      [
-        {
-          enableClickToCopy: true,
-          header: 'Prop Name',
-          accessorKey: 'propName',
-          muiTableBodyCellCopyButtonProps: ({ cell }) => ({
-            className: 'prop',
-            id: `${cell.getValue<string>()}-prop`,
-          }),
-          Cell: ({ cell, row }) =>
-            row.original?.required ? (
-              <strong style={{ color: theme.palette.primary.dark }}>
-                {cell.getValue<string>()}*
-              </strong>
-            ) : (
-              cell.getValue<string>()
-            ),
-        },
-        {
-          header: 'Type',
-          accessorKey: 'type',
-          enableGlobalFilter: false,
-          Cell: ({ cell }) => (
-            <SampleCodeSnippet
-              className="language-ts"
-              enableCopyButton={false}
-              style={{
-                backgroundColor: 'transparent',
-                fontSize: '0.9rem',
-                margin: 0,
-                padding: 0,
-                minHeight: 'unset',
-              }}
+  const columns = useMemo<MRT_ColumnDef<PropRow>[]>(
+    () => [
+      {
+        enableClickToCopy: true,
+        header: 'Prop Name',
+        accessorKey: 'propName',
+        muiTableBodyCellCopyButtonProps: ({ cell }) => ({
+          className: 'prop',
+          id: `${cell.getValue<string>()}-prop`,
+        }),
+        Cell: ({ renderedCellValue, row }) =>
+          row.original?.required ? (
+            <strong style={{ color: theme.palette.primary.dark }}>
+              {renderedCellValue}*
+            </strong>
+          ) : (
+            renderedCellValue
+          ),
+      },
+      {
+        header: 'Type',
+        accessorKey: 'type',
+        enableGlobalFilter: false,
+        Cell: ({ cell }) => (
+          <SampleCodeSnippet
+            className="language-ts"
+            enableCopyButton={false}
+            style={{
+              backgroundColor: 'transparent',
+              fontSize: '0.9rem',
+              margin: 0,
+              padding: 0,
+              minHeight: 'unset',
+            }}
+          >
+            {cell.getValue<string>()}
+          </SampleCodeSnippet>
+        ),
+      },
+      {
+        header: 'Required',
+        accessorKey: 'required',
+        enableGlobalFilter: false,
+      },
+      {
+        header: 'Default Value',
+        accessorKey: 'defaultValue',
+        enableGlobalFilter: false,
+        Cell: ({ cell }) => (
+          <SampleCodeSnippet
+            className="language-js"
+            enableCopyButton={false}
+            style={{
+              backgroundColor: 'transparent',
+              fontSize: '0.9rem',
+              margin: 0,
+              padding: 0,
+              minHeight: 'unset',
+            }}
+          >
+            {cell.getValue<string>()}
+          </SampleCodeSnippet>
+        ),
+      },
+      {
+        header: 'Description',
+        accessorKey: 'description',
+        enableGlobalFilter: false,
+      },
+      {
+        header: 'More Info Links',
+        accessorKey: 'link',
+        disableFilters: true,
+        enableGlobalFilter: false,
+        Cell: ({ cell, row }) => (
+          <Link href={cell.getValue<string>()} passHref legacyBehavior>
+            <MuiLink
+              color={
+                row.original.source === 'MRT'
+                  ? 'text.primary'
+                  : row.original.source === 'Material UI'
+                  ? 'primary.main'
+                  : row.original.source === 'TanStack Table'
+                  ? 'secondary.main'
+                  : undefined
+              }
+              target={
+                cell.getValue<string>().startsWith('http')
+                  ? '_blank'
+                  : undefined
+              }
+              rel="noreferrer"
             >
-              {cell.getValue<string>()}
-            </SampleCodeSnippet>
-          ),
-        },
-        {
-          header: 'Required',
-          accessorKey: 'required',
-          enableGlobalFilter: false,
-        },
-        {
-          header: 'Default Value',
-          accessorKey: 'defaultValue',
-          enableGlobalFilter: false,
-          Cell: ({ cell }) => (
-            <SampleCodeSnippet
-              className="language-js"
-              enableCopyButton={false}
-              style={{
-                backgroundColor: 'transparent',
-                fontSize: '0.9rem',
-                margin: 0,
-                padding: 0,
-                minHeight: 'unset',
-              }}
-            >
-              {cell.getValue<string>()}
-            </SampleCodeSnippet>
-          ),
-        },
-        {
-          header: 'Description',
-          accessorKey: 'description',
-          enableGlobalFilter: false,
-        },
-        {
-          header: 'More Info Links',
-          accessorKey: 'link',
-          disableFilters: true,
-          enableGlobalFilter: false,
-          Cell: ({ cell, row }) => (
-            <Link href={cell.getValue() as string} passHref legacyBehavior>
-              <MuiLink
-                color={
-                  row.original.source === 'MRT'
-                    ? 'text.primary'
-                    : row.original.source === 'Material UI'
-                    ? 'primary.main'
-                    : row.original.source === 'TanStack Table'
-                    ? 'secondary.main'
-                    : undefined
-                }
-                target={
-                  (cell.getValue() as string).startsWith('http')
-                    ? '_blank'
-                    : undefined
-                }
-                rel="noreferrer"
-              >
-                {row.original?.linkText}
-              </MuiLink>
-            </Link>
-          ),
-        },
-      ] as MRT_ColumnDef<PropRow>[],
+              {row.original?.linkText}
+            </MuiLink>
+          </Link>
+        ),
+      },
+    ],
     [theme],
   );
 

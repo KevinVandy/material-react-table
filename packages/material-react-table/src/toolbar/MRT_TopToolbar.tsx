@@ -5,11 +5,11 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { lighten } from '@mui/material/styles';
 import { MRT_GlobalFilterTextField } from '../inputs/MRT_GlobalFilterTextField';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
-import type { MRT_TableInstance } from '..';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
 import { MRT_ToolbarDropZone } from './MRT_ToolbarDropZone';
+import type { MRT_TableInstance } from '..';
 import type { Theme } from '@mui/material/styles';
 
 export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
@@ -102,6 +102,7 @@ export const MRT_TopToolbar = <TData extends Record<string, any> = {}>({
           right: 0,
           top: 0,
           width: '100%',
+          zIndex: 2,
         }}
       >
         {enableGlobalFilter && positionGlobalFilter === 'left' && (

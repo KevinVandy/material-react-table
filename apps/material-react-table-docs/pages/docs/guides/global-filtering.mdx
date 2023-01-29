@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Box from '@mui/material/Box';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
@@ -27,6 +28,7 @@ Material React Table has a powerful built-in global filtering (search) feature t
       'enableGlobalFilter',
       'enableGlobalFilterModes',
       'enableGlobalFilterRankedResults',
+      'enableFilterMatchHighlighting',
       'getColumnCanGlobalFilter',
       'globalFilterFn',
       'globalFilterModeOptions',
@@ -82,6 +84,36 @@ You can disable the global filtering feature and hide the search icon by setting
   columns={columns}
   data={data}
   enableGlobalFilter={false} //disable search feature
+/>
+```
+
+### Filter Match Highlighting
+
+> New in v1.6
+
+Filter Match Highlighting is a new featured enabled by default that will highlight text in the table body cells that matches the current search query with a shade of the <Box component="span" color="warning.main">`theme.palette.warning.main`</Box> color.
+
+If you are using a custom `Cell` render override for a column, you will need to use the `renderedCellValue` prop instead of `cell.getValue()` in order to preserve the filter match highlighting.
+
+```jsx
+const columns = [
+  {
+    accessorKey: 'name',
+    header: 'Name',
+    Cell: ({ renderedCellValue }) => <span>{renderedCellValue}</span>, // use renderedCellValue instead of cell.getValue()
+  },
+];
+```
+
+#### Disable Filter Match Highlighting
+
+Filter Match Highlighting can be disabled by setting the `enableFilterMatchHighlighting` prop to `false`.
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  enableFilterMatchHighlighting={false}
 />
 ```
 
