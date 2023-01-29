@@ -31,7 +31,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: 'MRT Data Columns Docs',
     source: 'MRT',
     required: false,
-    type: '({ cell, column, row, table }) => ReactNode',
+    type: '({ cell, column, renderedCellValue, row, table }) => ReactNode',
   },
   {
     columnOption: 'Edit',
