@@ -102,7 +102,6 @@ export const MRT_TopToolbar = <TData extends Record<string, any> = {}>({
           right: 0,
           top: 0,
           width: '100%',
-          zIndex: 2,
         }}
       >
         {enableGlobalFilter && positionGlobalFilter === 'left' && (
