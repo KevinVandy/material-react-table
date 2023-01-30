@@ -56,7 +56,7 @@ const Example = () => {
   );
 
   //optionally, you can manage the row selection state yourself
-  const [rowSelection, setRowSelection] = useState < RowSelectionState > {};
+  const [rowSelection, setRowSelection] = useState({});
 
   useEffect(() => {
     //do something when the row selection changes...
