@@ -32,13 +32,15 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, table }) => {
     ? muiSelectCheckboxProps({ row, table })
     : muiSelectCheckboxProps;
 
+  const allRowsSelected = selectAll
+    ? selectAllMode === 'page'
+      ? table.getIsAllPageRowsSelected()
+      : table.getIsAllRowsSelected()
+    : undefined;
+
   const commonProps = {
-    checked: selectAll
-      ? selectAllMode === 'page'
-        ? table.getIsAllPageRowsSelected()
-        : table.getIsAllRowsSelected()
-      : row?.getIsSelected(),
-    disabled: isLoading,
+    checked: selectAll ? allRowsSelected : row?.getIsSelected(),
+    disabled: isLoading || (row && !row.getCanSelect()),
     inputProps: {
       'aria-label': selectAll
         ? localization.toggleSelectAll
@@ -84,10 +86,7 @@ export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, table }) => {
         <Checkbox
           indeterminate={
             selectAll
-              ? table.getIsSomeRowsSelected() &&
-                !(selectAllMode === 'page'
-                  ? table.getIsAllPageRowsSelected()
-                  : table.getIsAllRowsSelected())
+              ? table.getIsSomeRowsSelected() && !allRowsSelected
               : row?.getIsSomeSelected()
           }
           {...commonProps}

@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  experimental: {
-    transpilePackages: ['material-react-table'],
-  },
+  transpilePackages: ['material-react-table'],
   reactStrictMode: true,
   i18n: {
     locales: ['en'],

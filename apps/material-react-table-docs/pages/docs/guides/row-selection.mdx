@@ -49,6 +49,18 @@ Selection checkboxes can be enabled with the `enableRowSelection` prop.
 <MaterialReactTable columns={columns} data={data} enableRowSelection />
 ```
 
+#### Enable Row Selection Conditionally Per Row
+
+You can also enable row selection conditionally per row with the same `enableRowSelection` prop, but with a callback function instead of a boolean.
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  enableRowSelection={(row) => row.original.age > 18} //disable row selection for rows with age <= 18
+/>
+```
+
 ### Access Row Selection State
 
 There a couple of ways to access the selection state. You can either manage the selection state yourself or read it from the table instance.

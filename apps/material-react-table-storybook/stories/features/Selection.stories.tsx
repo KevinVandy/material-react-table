@@ -43,6 +43,16 @@ export const SelectionEnabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableRowSelection />
 );
 
+export const SelectionEnabledConditionally: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowSelection={(row) => row.original.age >= 21}
+  />
+);
+
 export const SelectionEnabledWithRowClick: Story<
   MaterialReactTableProps
 > = () => (
@@ -89,6 +99,17 @@ export const SelectAllModeAll: Story<MaterialReactTableProps> = () => (
     columns={columns}
     data={data}
     enableRowSelection
+    selectAllMode="all"
+  />
+);
+
+export const SelectAllModeAllConditionally: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowSelection={(row) => row.original.age >= 21}
     selectAllMode="all"
   />
 );
