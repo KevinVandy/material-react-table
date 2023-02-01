@@ -14,7 +14,7 @@
     "@faker-js/faker": "^7.6.0",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.4",
-    "material-react-table": "^1.6.2",
+    "material-react-table": "^1.6.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
