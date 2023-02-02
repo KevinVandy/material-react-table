@@ -1,6 +1,6 @@
-import React, { DragEvent, FC, memo, useMemo, useRef } from 'react';
+import React, { DragEvent, FC, memo, useRef } from 'react';
 import TableRow from '@mui/material/TableRow';
-import { darken, lighten, useTheme } from '@mui/material/styles';
+import { darken, lighten } from '@mui/material/styles';
 import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import type { VirtualItem, Virtualizer } from '@tanstack/react-virtual';
@@ -31,7 +31,6 @@ export const MRT_TableBodyRow: FC<Props> = ({
   virtualPaddingRight,
   virtualRow,
 }) => {
-  const theme = useTheme();
   const {
     getIsSomeColumnsPinned,
     getState,
@@ -59,22 +58,6 @@ export const MRT_TableBodyRow: FC<Props> = ({
   };
 
   const rowRef = useRef<HTMLTableRowElement | null>(null);
-
-  const draggingBorder = useMemo(
-    () =>
-      draggingRow?.id === row.id
-        ? `1px dashed ${theme.palette.text.secondary}`
-        : hoveredRow?.id === row.id
-        ? `2px dashed ${theme.palette.primary.main}`
-        : undefined,
-    [draggingRow, hoveredRow],
-  );
-
-  const draggingBorders = draggingBorder
-    ? {
-        border: draggingBorder,
-      }
-    : undefined;
 
   return (
     <>
@@ -113,7 +96,6 @@ export const MRT_TableBodyRow: FC<Props> = ({
           ...(tableRowProps?.sx instanceof Function
             ? tableRowProps.sx(theme)
             : (tableRowProps?.sx as any)),
-          ...draggingBorders,
         })}
       >
         {virtualPaddingLeft ? (

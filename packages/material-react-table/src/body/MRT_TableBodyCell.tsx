@@ -15,7 +15,11 @@ import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 import { MRT_TableBodyRowGrabHandle } from './MRT_TableBodyRowGrabHandle';
 import { MRT_TableBodyCellValue } from './MRT_TableBodyCellValue';
-import { getCommonCellStyles } from '../column.utils';
+import {
+  getCommonCellStyles,
+  getIsFirstColumn,
+  getIsLastColumn,
+} from '../column.utils';
 import type { VirtualItem } from '@tanstack/react-virtual';
 import type { MRT_Cell, MRT_TableInstance } from '..';
 
@@ -61,9 +65,11 @@ export const MRT_TableBodyCell: FC<Props> = ({
   } = table;
   const {
     draggingColumn,
+    draggingRow,
     editingCell,
     editingRow,
     hoveredColumn,
+    hoveredRow,
     density,
     isLoading,
     showSkeletons,
@@ -108,27 +114,44 @@ export const MRT_TableBodyCell: FC<Props> = ({
     [],
   );
 
-  const draggingBorder = useMemo(
-    () =>
-      draggingColumn?.id === column.id
-        ? `1px dashed ${theme.palette.text.secondary}`
-        : hoveredColumn?.id === column.id
-        ? `2px dashed ${theme.palette.primary.main}`
-        : undefined,
-    [draggingColumn, hoveredColumn],
-  );
+  const draggingBorders = useMemo(() => {
+    const isDraggingColumn = draggingColumn?.id === column.id;
+    const isHoveredColumn = hoveredColumn?.id === column.id;
+    const isDraggingRow = draggingRow?.id === row.id;
+    const isHoveredRow = hoveredRow?.id === row.id;
+    const isFirstColumn = getIsFirstColumn(column, table);
+    const isLastColumn = getIsLastColumn(column, table);
+    const isLastRow = rowIndex === numRows - 1;
 
-  const draggingBorders = useMemo(
-    () =>
-      draggingBorder
-        ? {
-            borderLeft: draggingBorder,
-            borderRight: draggingBorder,
-            borderBottom: rowIndex === numRows - 1 ? draggingBorder : undefined,
-          }
-        : undefined,
-    [draggingBorder, numRows],
-  );
+    const borderStyle =
+      isDraggingColumn || isDraggingRow
+        ? `1px dashed ${theme.palette.text.secondary} !important`
+        : isHoveredColumn || isHoveredRow
+        ? `2px dashed ${theme.palette.primary.main} !important`
+        : undefined;
+
+    return borderStyle
+      ? {
+          borderLeft:
+            isDraggingColumn ||
+            isHoveredColumn ||
+            ((isDraggingRow || isHoveredRow) && isFirstColumn)
+              ? borderStyle
+              : undefined,
+          borderRight:
+            isDraggingColumn ||
+            isHoveredColumn ||
+            ((isDraggingRow || isHoveredRow) && isLastColumn)
+              ? borderStyle
+              : undefined,
+          borderBottom:
+            isDraggingRow || isHoveredRow || isLastRow
+              ? borderStyle
+              : undefined,
+          borderTop: isDraggingRow || isHoveredRow ? borderStyle : undefined,
+        }
+      : undefined;
+  }, [draggingColumn, draggingRow, hoveredColumn, hoveredRow, rowIndex]);
 
   const isEditable =
     (enableEditing || columnDef.enableEditing) &&

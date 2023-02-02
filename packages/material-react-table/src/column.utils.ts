@@ -205,6 +205,21 @@ export const getDefaultColumnFilterFn = <
   return 'fuzzy';
 };
 
+export const getIsFirstColumn = (
+  column: MRT_Column,
+  table: MRT_TableInstance,
+) => {
+  return table.getVisibleLeafColumns()[0].id === column.id;
+};
+
+export const getIsLastColumn = (
+  column: MRT_Column,
+  table: MRT_TableInstance,
+) => {
+  const columns = table.getVisibleLeafColumns();
+  return columns[columns.length - 1].id === column.id;
+};
+
 export const getIsLastLeftPinnedColumn = (
   table: MRT_TableInstance,
   column: MRT_Column,
