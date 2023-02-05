@@ -54,6 +54,9 @@ const RU_Table = dynamic(() => import('../examples/localization-i18n-ru'), {
 const TR_Table = dynamic(() => import('../examples/localization-i18n-tr'), {
   suspense: true,
 });
+const UK_Table = dynamic(() => import('../examples/localization-i18n-uk'), {
+  suspense: true,
+});
 const VI_Table = dynamic(() => import('../examples/localization-i18n-vi'), {
   suspense: true,
 });
