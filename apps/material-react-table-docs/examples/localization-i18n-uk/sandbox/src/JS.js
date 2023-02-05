@@ -13,7 +13,7 @@ const columns = [
   //column definitions...
   {
     accessorKey: 'firstName',
-    header: 'Ім\'я',
+    header: "Ім'я",
   },
   {
     accessorKey: 'lastName',

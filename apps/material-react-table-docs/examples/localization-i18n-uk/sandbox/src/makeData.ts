@@ -6,18 +6,18 @@ export type Person = {
 
 export const data: Person[] = [
   {
-    firstName: 'Іван',
-    lastName: 'Багряний',
+    firstName: 'Kevin',
+    lastName: 'Vandy',
     age: 26,
   },
   {
-    firstName: 'Валерій',
-    lastName: 'Залужний',
+    firstName: 'Tanner',
+    lastName: 'Linsey',
     age: 28,
   },
   {
-    firstName: 'Григорій',
-    lastName: 'Степанець',
+    firstName: 'Theodore',
+    lastName: 'Browne',
     age: 33,
   },
 ];
