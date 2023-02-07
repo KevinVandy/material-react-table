@@ -64,6 +64,29 @@ yarn add material-react-table @mui/material @mui/icons-material @emotion/react @
 >
 > All internal dependencies: `@tanstack/match-sorter-utils`, `@tanstack/react-table`, `@tanstack/react-virtual`, and `highlight-words`
 
+### Common Errors
+
+If you get an error like this:
+
+```bash
+"Error: Element type is invalid: expected a string (for built-in components)
+or a class/function (for composite components) but got: undefined.
+You likely forgot to export your component from the file it's defined in,
+or you might have mixed up default and named imports.
+```
+
+You probably do not have the correct version of Material UI installed. Make sure all material ui packages are at least v5
+
+If you are using an older version of `webpack` or `create-react-app` and get an error like this:
+
+```bash
+./node_modules/@tanstack/virtual-core/build/lib/index.esm.js 147:92
+Module parse failed: Unexpected token (147:92)
+File was processed with these loaders:
+```
+
+Then try upgrading either `webpack` or `react-scripts` to the latest versions.
+
 ### FAQs
 
 <FAQs
