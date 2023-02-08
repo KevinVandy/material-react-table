@@ -1,4 +1,4 @@
-import React, { FC, memo, useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 import {
   useVirtualizer,
   Virtualizer,
@@ -18,13 +18,13 @@ interface Props {
   virtualPaddingRight?: number;
 }
 
-export const MRT_TableBody: FC<Props> = ({
+export const MRT_TableBody = ({
   columnVirtualizer,
   table,
   virtualColumns,
   virtualPaddingLeft,
   virtualPaddingRight,
-}) => {
+}: Props) => {
   const {
     getRowModel,
     getPrePaginationRowModel,

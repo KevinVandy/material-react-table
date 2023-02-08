@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Tooltip from '@mui/material/Tooltip';
 import { MRT_Header, MRT_TableInstance } from '..';
@@ -10,11 +10,11 @@ interface Props {
   tableCellProps?: TableCellProps;
 }
 
-export const MRT_TableHeadCellSortLabel: FC<Props> = ({
+export const MRT_TableHeadCellSortLabel = ({
   header,
   table,
   tableCellProps,
-}) => {
+}: Props) => {
   const {
     options: {
       icons: { ArrowDownwardIcon },

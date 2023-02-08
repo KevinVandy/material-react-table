@@ -1,6 +1,5 @@
 import React, {
   ChangeEvent,
-  FC,
   MouseEvent,
   useCallback,
   useEffect,
@@ -26,11 +25,11 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_FilterTextField: FC<Props> = ({
+export const MRT_FilterTextField = ({
   header,
   rangeFilterIndex,
   table,
-}) => {
+}: Props) => {
   const {
     options: {
       enableColumnFilterModes,

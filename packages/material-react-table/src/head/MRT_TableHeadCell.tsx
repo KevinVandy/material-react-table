@@ -1,4 +1,4 @@
-import React, { DragEvent, FC, ReactNode, useMemo } from 'react';
+import React, { DragEvent, ReactNode, useMemo } from 'react';
 import Box from '@mui/material/Box';
 import TableCell from '@mui/material/TableCell';
 import { useTheme } from '@mui/material/styles';
@@ -17,7 +17,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_TableHeadCell: FC<Props> = ({ header, table }) => {
+export const MRT_TableHeadCell = ({ header, table }: Props) => {
   const theme = useTheme();
   const {
     getState,

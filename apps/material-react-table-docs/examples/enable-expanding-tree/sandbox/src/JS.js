@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
 
 export const data = [

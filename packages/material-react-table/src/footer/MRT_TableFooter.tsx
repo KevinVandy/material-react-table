@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import TableFooter from '@mui/material/TableFooter';
 import { MRT_TableFooterRow } from './MRT_TableFooterRow';
 import type { VirtualItem } from '@tanstack/react-virtual';
@@ -11,12 +11,12 @@ interface Props {
   virtualPaddingRight?: number;
 }
 
-export const MRT_TableFooter: FC<Props> = ({
+export const MRT_TableFooter = ({
   table,
   virtualColumns,
   virtualPaddingLeft,
   virtualPaddingRight,
-}) => {
+}: Props) => {
   const {
     getFooterGroups,
     getState,

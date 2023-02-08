@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { RowSelectionState } from '@tanstack/react-table';
 
@@ -24,7 +24,7 @@ const data = [
   //end
 ];
 
-const Example: FC = () => {
+const Example = () => {
   const columns = useMemo(
     //column definitions...
     () =>

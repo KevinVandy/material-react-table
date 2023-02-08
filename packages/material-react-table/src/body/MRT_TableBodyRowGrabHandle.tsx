@@ -1,4 +1,4 @@
-import React, { DragEvent, FC, RefObject } from 'react';
+import React, { DragEvent, RefObject } from 'react';
 import { MRT_Cell, MRT_TableInstance } from '..';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 
@@ -8,11 +8,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_TableBodyRowGrabHandle: FC<Props> = ({
-  cell,
-  rowRef,
-  table,
-}) => {
+export const MRT_TableBodyRowGrabHandle = ({ cell, rowRef, table }: Props) => {
   const {
     options: { muiTableBodyRowDragHandleProps },
   } = table;

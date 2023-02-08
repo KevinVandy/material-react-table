@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Tooltip from '@mui/material/Tooltip';
@@ -10,7 +10,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_FilterCheckbox: FC<Props> = ({ column, table }) => {
+export const MRT_FilterCheckbox = ({ column, table }: Props) => {
   const {
     getState,
     options: { localization, muiTableHeadCellFilterCheckboxProps },

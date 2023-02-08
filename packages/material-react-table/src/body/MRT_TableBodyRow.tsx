@@ -1,4 +1,4 @@
-import React, { DragEvent, FC, memo, useRef } from 'react';
+import React, { DragEvent, memo, useRef } from 'react';
 import TableRow from '@mui/material/TableRow';
 import { darken, lighten } from '@mui/material/styles';
 import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
@@ -19,7 +19,7 @@ interface Props {
   virtualRow?: VirtualItem;
 }
 
-export const MRT_TableBodyRow: FC<Props> = ({
+export const MRT_TableBodyRow = ({
   columnVirtualizer,
   measureElement,
   numRows,
@@ -30,7 +30,7 @@ export const MRT_TableBodyRow: FC<Props> = ({
   virtualPaddingLeft,
   virtualPaddingRight,
   virtualRow,
-}) => {
+}: Props) => {
   const {
     getIsSomeColumnsPinned,
     getState,

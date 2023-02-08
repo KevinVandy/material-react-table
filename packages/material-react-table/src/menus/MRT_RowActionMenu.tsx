@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from 'react';
+import React, { MouseEvent } from 'react';
 import Box from '@mui/material/Box';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu from '@mui/material/Menu';
@@ -17,13 +17,13 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_RowActionMenu: FC<Props> = ({
+export const MRT_RowActionMenu = ({
   anchorEl,
   handleEdit,
   row,
   setAnchorEl,
   table,
-}) => {
+}: Props) => {
   const {
     getState,
     options: {

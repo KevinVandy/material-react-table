@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 
 type Person = {
@@ -60,7 +60,7 @@ const data: Person[] = [
   },
 ];
 
-const Example: FC = () => {
+const Example = () => {
   //should be memoized or stable
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [

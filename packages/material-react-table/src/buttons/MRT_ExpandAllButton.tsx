@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import type { MRT_TableInstance } from '..';
@@ -7,7 +7,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_ExpandAllButton: FC<Props> = ({ table }) => {
+export const MRT_ExpandAllButton = ({ table }: Props) => {
   const {
     getIsAllRowsExpanded,
     getIsSomeRowsExpanded,

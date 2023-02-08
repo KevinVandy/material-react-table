@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from 'react';
+import React, { MouseEvent } from 'react';
 import Box from '@mui/material/Box';
 import Grow from '@mui/material/Grow';
 import IconButton from '@mui/material/IconButton';
@@ -10,7 +10,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_TableHeadCellFilterLabel: FC<Props> = ({ header, table }) => {
+export const MRT_TableHeadCellFilterLabel = ({ header, table }: Props) => {
   const {
     options: {
       icons: { FilterAltIcon },

@@ -1,13 +1,13 @@
 import type { MRT_Localization } from '../MaterialReactTable';
 
-export const MRT_Localization_EN: MRT_Localization = {
+export const MRT_Localization_SV: MRT_Localization = {
   actions: 'Åtgärder',
   and: 'och',
   cancel: 'Avbryt',
   changeFilterMode: 'Ändra filterläge',
   changeSearchMode: 'Ändra sökläge',
   clearFilter: 'Rensa filter',
-  clearSearch: Rensa sök',
+  clearSearch: 'Rensa sök',
   clearSort: 'Rensa sortering',
   clickToCopy: 'Klicka för att kopiera',
   collapse: 'Stäng',
@@ -26,7 +26,7 @@ export const MRT_Localization_EN: MRT_Localization = {
   filterByColumn: 'Filtrera efter {column}',
   filterContains: 'Innehåller',
   filterEmpty: 'Tom',
-  filterEndsWith: 'Slutar med,
+  filterEndsWith: 'Slutar med',
   filterEquals: 'Lika med',
   filterEqualsString: 'Lika med',
   filterFuzzy: 'Fuzzy',

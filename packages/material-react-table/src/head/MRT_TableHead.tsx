@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import TableHead from '@mui/material/TableHead';
 import { MRT_TableHeadRow } from './MRT_TableHeadRow';
 import type { VirtualItem } from '@tanstack/react-virtual';
@@ -11,12 +11,12 @@ interface Props {
   virtualPaddingRight?: number;
 }
 
-export const MRT_TableHead: FC<Props> = ({
+export const MRT_TableHead = ({
   table,
   virtualColumns,
   virtualPaddingLeft,
   virtualPaddingRight,
-}) => {
+}: Props) => {
   const {
     getHeaderGroups,
     getState,

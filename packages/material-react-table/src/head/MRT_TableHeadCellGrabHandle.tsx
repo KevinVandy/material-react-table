@@ -1,4 +1,4 @@
-import React, { DragEvent, FC, RefObject } from 'react';
+import React, { DragEvent, RefObject } from 'react';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 import { reorderColumn } from '../column.utils';
 import type { MRT_Column, MRT_TableInstance } from '..';
@@ -9,11 +9,11 @@ interface Props {
   tableHeadCellRef: RefObject<HTMLTableCellElement>;
 }
 
-export const MRT_TableHeadCellGrabHandle: FC<Props> = ({
+export const MRT_TableHeadCellGrabHandle = ({
   column,
   table,
   tableHeadCellRef,
-}) => {
+}: Props) => {
   const {
     getState,
     options: { enableColumnOrdering, muiTableHeadCellDragHandleProps },

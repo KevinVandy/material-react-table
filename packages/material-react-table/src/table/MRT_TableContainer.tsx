@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import TableContainer from '@mui/material/TableContainer';
 import { MRT_Table } from './MRT_Table';
 import type { MRT_TableInstance } from '..';
@@ -10,7 +10,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_TableContainer: FC<Props> = ({ table }) => {
+export const MRT_TableContainer = ({ table }: Props) => {
   const {
     getState,
     options: { enableStickyHeader, muiTableContainerProps },

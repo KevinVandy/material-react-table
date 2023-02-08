@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import MaterialReactTable, {
   MRT_ColumnDef,
   MRT_Row,
@@ -53,7 +53,7 @@ const csvOptions = {
 
 const csvExporter = new ExportToCsv(csvOptions);
 
-const Example: FC = () => {
+const Example = () => {
   const handleExportRows = (rows: MRT_Row<Person>[]) => {
     csvExporter.generateCsv(rows.map((row) => row.original));
   };

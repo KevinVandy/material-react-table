@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Collapse from '@mui/material/Collapse';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
@@ -13,12 +13,12 @@ interface Props {
   virtualRow?: VirtualItem;
 }
 
-export const MRT_TableDetailPanel: FC<Props> = ({
+export const MRT_TableDetailPanel = ({
   parentRowRef,
   row,
   table,
   virtualRow,
-}) => {
+}: Props) => {
   const {
     getVisibleLeafColumns,
     getState,

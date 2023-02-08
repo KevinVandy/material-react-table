@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import type {
   ColumnFiltersState,
@@ -21,7 +21,7 @@ type User = {
   phoneNumber: string;
 };
 
-const Example: FC = () => {
+const Example = () => {
   //data and fetching state
   const [data, setData] = useState<User[]>([]);
   const [isError, setIsError] = useState(false);

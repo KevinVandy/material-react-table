@@ -1,11 +1,11 @@
-import React, { FC, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import MaterialReactTable, {
   MRT_ColumnDef,
   MRT_Row,
 } from 'material-react-table';
 import { data as initData, Person } from './makeData';
 
-const Example: FC = () => {
+const Example = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
     //column definitions...
     () => [

@@ -1,5 +1,4 @@
 import React, {
-  FC,
   UIEvent,
   useCallback,
   useEffect,
@@ -57,7 +56,7 @@ const columns: MRT_ColumnDef<User>[] = [
 
 const fetchSize = 25;
 
-const Example: FC = () => {
+const Example = () => {
   const tableContainerRef = useRef<HTMLDivElement>(null); //we can get access to the underlying TableContainer element and react to its scroll events
   const rowVirtualizerInstanceRef =
     useRef<Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null); //we can get access to the underlying Virtualizer instance and call its scrollToIndex method

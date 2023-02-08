@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { Drawer, List, useMediaQuery } from '@mui/material';
 import SideBarItems from './SidebarItems';
 import { routes } from './routes';
@@ -8,7 +7,7 @@ interface Props {
   setNavOpen: (navOpen: boolean) => void;
 }
 
-const SideBar: FC<Props> = ({ navOpen, setNavOpen }) => {
+const SideBar = ({ navOpen, setNavOpen }: Props) => {
   const isMobile = useMediaQuery('(max-width: 900px)');
 
   return (

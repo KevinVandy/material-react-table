@@ -1,4 +1,4 @@
-import { FC, ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import LinkIcon from '@mui/icons-material/Link';
@@ -17,7 +17,7 @@ interface Props extends TypographyProps {
   href?: string;
 }
 
-export const LinkHeading: FC<Props> = ({ children, tableId, ...rest }) => {
+export const LinkHeading = ({ children, tableId, ...rest }: Props) => {
   const { pathname } = useRouter();
 
   const [isCopied, setIsCopied] = useState(false);

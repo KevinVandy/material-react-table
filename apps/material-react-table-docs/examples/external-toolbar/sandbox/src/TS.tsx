@@ -1,4 +1,4 @@
-import React, { FC, useReducer, useRef, useState } from 'react';
+import React, { useReducer, useRef, useState } from 'react';
 import MaterialReactTable, {
   DensityState,
   MRT_ColumnDef,
@@ -49,7 +49,7 @@ const columns: MRT_ColumnDef<Person>[] = [
 ];
 //end
 
-const Example: FC = () => {
+const Example = () => {
   //we need a table instance ref to pass as a prop to the MRT Toolbar buttons
   const tableInstanceRef = useRef<MRT_TableInstance<Person>>(null);
 

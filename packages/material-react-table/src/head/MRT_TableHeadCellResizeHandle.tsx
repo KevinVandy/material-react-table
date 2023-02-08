@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import { MRT_Header, MRT_TableInstance } from '..';
@@ -8,7 +8,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_TableHeadCellResizeHandle: FC<Props> = ({ header, table }) => {
+export const MRT_TableHeadCellResizeHandle = ({ header, table }: Props) => {
   const {
     getState,
     options: { columnResizeMode },

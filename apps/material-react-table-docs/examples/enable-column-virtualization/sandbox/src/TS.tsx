@@ -1,9 +1,9 @@
-import React, { FC, useRef } from 'react';
+import React, { useRef } from 'react';
 import MaterialReactTable from 'material-react-table';
 import type { Virtualizer } from '@tanstack/react-virtual';
 import { fakeColumns, fakeData } from './makeData';
 
-const Example: FC = () => {
+const Example = () => {
   //optionally access the underlying virtualizer instance
   const columnVirtualizerInstanceRef =
     useRef<Virtualizer<HTMLDivElement, HTMLTableCellElement>>(null);

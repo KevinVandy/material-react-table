@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import MaterialReactTable, {
   MaterialReactTableProps,
@@ -17,7 +17,7 @@ interface Props {
   onlyProps?: Set<keyof MaterialReactTableProps>;
 }
 
-const RootPropTable: FC<Props> = ({ onlyProps }) => {
+const RootPropTable = ({ onlyProps }: Props) => {
   const theme = useTheme();
   const isDesktop = useMediaQuery('(min-width: 1200px)');
 

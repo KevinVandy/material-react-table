@@ -51,6 +51,9 @@ const RO_Table = dynamic(() => import('../examples/localization-i18n-ro'), {
 const RU_Table = dynamic(() => import('../examples/localization-i18n-ru'), {
   suspense: true,
 });
+const SV_Table = dynamic(() => import('../examples/localization-i18n-sv'), {
+  suspense: true,
+});
 const TR_Table = dynamic(() => import('../examples/localization-i18n-tr'), {
   suspense: true,
 });
@@ -89,6 +92,7 @@ const supportedLocales = [
   'pt-BR',
   'ro',
   'ru',
+  'sv',
   'tr',
   'uk',
   'vi',
@@ -139,6 +143,7 @@ const LocaleExamples = () => {
           {currentLocale === 'pt-BR' && <PT_BR_Table />}
           {currentLocale === 'ro' && <RO_Table />}
           {currentLocale === 'ru' && <RU_Table />}
+          {currentLocale === 'sv' && <SV_Table />}
           {currentLocale === 'tr' && <TR_Table />}
           {currentLocale === 'uk' && <UK_Table />}
           {currentLocale === 'vi' && <VI_Table />}

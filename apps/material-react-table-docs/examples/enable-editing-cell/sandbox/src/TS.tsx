@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import MaterialReactTable, {
   MRT_Cell,
   MRT_ColumnDef,
@@ -6,7 +6,7 @@ import MaterialReactTable, {
 import { Typography } from '@mui/material';
 import { data, Person } from './makeData';
 
-const Example: FC = () => {
+const Example = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       //column definitions...

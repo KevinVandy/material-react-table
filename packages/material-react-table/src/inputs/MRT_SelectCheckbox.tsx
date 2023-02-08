@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from 'react';
+import React, { MouseEvent } from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import Tooltip from '@mui/material/Tooltip';
 import Radio from '@mui/material/Radio';
@@ -11,7 +11,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_SelectCheckbox: FC<Props> = ({ row, selectAll, table }) => {
+export const MRT_SelectCheckbox = ({ row, selectAll, table }: Props) => {
   const {
     getState,
     options: {

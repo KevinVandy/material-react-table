@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import { MRT_FilterTextField } from './MRT_FilterTextField';
 import { MRT_Header, MRT_TableInstance } from '..';
@@ -8,7 +8,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_FilterRangeFields: FC<Props> = ({ header, table }) => {
+export const MRT_FilterRangeFields = ({ header, table }: Props) => {
   return (
     <Box sx={{ display: 'grid', gridTemplateColumns: '6fr 6fr', gap: '1rem' }}>
       <MRT_FilterTextField header={header} rangeFilterIndex={0} table={table} />

@@ -1,9 +1,9 @@
-import React, { FC, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Box, Stack } from '@mui/material';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { data, Person } from './makeData';
 
-const Example: FC = () => {
+const Example = () => {
   const averageSalary = useMemo(
     () => data.reduce((acc, curr) => acc + curr.salary, 0) / data.length,
     [],

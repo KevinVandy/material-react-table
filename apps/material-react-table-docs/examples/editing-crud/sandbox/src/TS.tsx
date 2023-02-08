@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import MaterialReactTable, {
   MaterialReactTableProps,
   MRT_Cell,
@@ -30,7 +30,7 @@ export type Person = {
   state: string;
 };
 
-const Example: FC = () => {
+const Example = () => {
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [tableData, setTableData] = useState<Person[]>(() => data);
   const [validationErrors, setValidationErrors] = useState<{
@@ -214,13 +214,20 @@ const Example: FC = () => {
   );
 };
 
-//example of creating a mui dialog modal for creating new rows
-export const CreateNewAccountModal: FC<{
+interface CreateModalProps {
   columns: MRT_ColumnDef<Person>[];
   onClose: () => void;
   onSubmit: (values: Person) => void;
   open: boolean;
-}> = ({ open, columns, onClose, onSubmit }) => {
+}
+
+//example of creating a mui dialog modal for creating new rows
+export const CreateNewAccountModal = ({
+  open,
+  columns,
+  onClose,
+  onSubmit,
+}: CreateModalProps) => {
   const [values, setValues] = useState<any>(() =>
     columns.reduce((acc, column) => {
       acc[column.accessorKey ?? ''] = '';

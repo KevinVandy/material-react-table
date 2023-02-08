@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import MaterialReactTable, {
   MRT_ColumnDef,
   MRT_ToggleDensePaddingButton,
@@ -8,7 +8,7 @@ import { Box, Button, IconButton } from '@mui/material';
 import PrintIcon from '@mui/icons-material/Print';
 import { data, Person } from './makeData';
 
-const Example: FC = () => {
+const Example = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
     //column definitions...
     () => [

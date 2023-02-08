@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import Image from 'next/image';
 import { Box, Link, Stack, Typography } from '@mui/material';
 
@@ -9,12 +8,12 @@ interface Props {
   publishDate: string;
 }
 
-export const BlogAuthor: FC<Props> = ({
+export const BlogAuthor = ({
   author = 'Kevin Van Cott',
   authorImage = '/contributors/kevinvancott.jpg',
   authorLink = 'https://www.kevinvancott.dev',
   publishDate,
-}) => {
+}: Props) => {
   return (
     <Stack>
       <Box

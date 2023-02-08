@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import {
@@ -14,7 +14,7 @@ interface Props {
   onlyProps?: Set<keyof MRT_ColumnDef>;
 }
 
-const ColumnOptionsTable: FC<Props> = ({ onlyProps }) => {
+const ColumnOptionsTable = ({ onlyProps }: Props) => {
   const theme = useTheme();
   const isDesktop = useMediaQuery('(min-width: 1200px)');
 

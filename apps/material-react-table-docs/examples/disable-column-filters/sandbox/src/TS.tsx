@@ -1,7 +1,7 @@
-import React, { FC, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 
-const Example: FC = () => {
+const Example = () => {
   const columns = useMemo(
     () =>
       [

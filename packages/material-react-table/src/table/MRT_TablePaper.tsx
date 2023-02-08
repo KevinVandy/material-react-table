@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Paper from '@mui/material/Paper';
 import { MRT_TopToolbar } from '../toolbar/MRT_TopToolbar';
 import { MRT_BottomToolbar } from '../toolbar/MRT_BottomToolbar';
@@ -9,7 +9,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_TablePaper: FC<Props> = ({ table }) => {
+export const MRT_TablePaper = ({ table }: Props) => {
   const {
     getState,
     options: {

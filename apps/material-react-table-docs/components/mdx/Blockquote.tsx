@@ -1,7 +1,6 @@
-import { FC } from 'react';
 import { alpha, darken, useMediaQuery, useTheme } from '@mui/material';
 
-export const Blockquote: FC<any> = (props) => {
+export const Blockquote = (props) => {
   const theme = useTheme();
   const isMobile = useMediaQuery('(max-width: 720px)');
   return (

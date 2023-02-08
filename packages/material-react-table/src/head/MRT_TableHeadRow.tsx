@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import TableRow from '@mui/material/TableRow';
 import { alpha, lighten } from '@mui/material/styles';
 import { MRT_TableHeadCell } from './MRT_TableHeadCell';
@@ -13,13 +13,13 @@ interface Props {
   virtualPaddingRight?: number;
 }
 
-export const MRT_TableHeadRow: FC<Props> = ({
+export const MRT_TableHeadRow = ({
   headerGroup,
   table,
   virtualColumns,
   virtualPaddingLeft,
   virtualPaddingRight,
-}) => {
+}: Props) => {
   const {
     options: { layoutMode, muiTableHeadRowProps },
   } = table;

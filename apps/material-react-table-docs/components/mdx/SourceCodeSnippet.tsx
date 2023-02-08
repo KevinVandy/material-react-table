@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import darkCodeTheme from 'prism-react-renderer/themes/vsDark';
 import lightCodeTheme from 'prism-react-renderer/themes/vsLight';
@@ -44,20 +44,20 @@ const ToggleFullCodeButton = styled(IconButton)({
 });
 
 export interface Props {
-  Component?: FC;
+  Component?: any;
   apiCode?: string;
   javaScriptCode?: string;
   tableId: string;
   typeScriptCode: string;
 }
 
-export const SourceCodeSnippet: FC<Props> = ({
+export const SourceCodeSnippet = ({
   Component,
   apiCode,
   javaScriptCode,
   tableId,
   typeScriptCode,
-}) => {
+}: Props) => {
   const plausible = usePlausible();
   const theme = useTheme();
   const {

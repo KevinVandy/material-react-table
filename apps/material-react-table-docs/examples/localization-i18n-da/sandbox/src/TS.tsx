@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 
 //Import Material React Table and its Types
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
@@ -27,7 +27,7 @@ const columns: MRT_ColumnDef<Person>[] = [
   //end
 ];
 
-const Example: FC = () => {
+const Example = () => {
   return (
     <MaterialReactTable
       columns={columns}
@@ -49,7 +49,7 @@ const Example: FC = () => {
 import { createTheme, ThemeProvider, useTheme } from '@mui/material';
 import { daDK } from '@mui/material/locale';
 
-const ExampleWithThemeProvider: FC = () => {
+const ExampleWithThemeProvider = () => {
   const theme = useTheme(); //replace with your theme/createTheme
   return (
     //Setting Material UI locale as best practice to result in better accessibility

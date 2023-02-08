@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import { darken, lighten } from '@mui/material/styles';
 import highlightWords from 'highlight-words';
@@ -11,7 +11,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_TableBodyCellValue: FC<Props> = ({ cell, table }) => {
+export const MRT_TableBodyCellValue = ({ cell, table }: Props) => {
   const {
     getState,
     options: { enableFilterMatchHighlighting },

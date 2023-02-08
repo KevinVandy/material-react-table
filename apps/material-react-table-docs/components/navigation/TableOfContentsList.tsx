@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { Box, Link as MuiLink, Typography } from '@mui/material';
+import { Box, Link as MuiLink } from '@mui/material';
 import { LinkHeading } from '../mdx/LinkHeading';
 
 interface Props {
@@ -9,11 +9,11 @@ interface Props {
   variant?: 'list' | 'heading';
 }
 
-const TableOfContentsList: FC<Props> = ({
+const TableOfContentsList = ({
   items,
   isFooter = false,
   variant = 'list',
-}) => {
+}: Props) => {
   if (variant === 'list') {
     return (
       <ul

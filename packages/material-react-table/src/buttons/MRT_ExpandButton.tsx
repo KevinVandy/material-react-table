@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from 'react';
+import React, { MouseEvent } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import type { MRT_Row, MRT_TableInstance } from '..';
@@ -8,7 +8,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_ExpandButton: FC<Props> = ({ row, table }) => {
+export const MRT_ExpandButton = ({ row, table }: Props) => {
   const {
     getState,
     options: {

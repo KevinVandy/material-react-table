@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { usePlausible } from 'next-plausible';
 import {
@@ -41,7 +41,7 @@ interface Props {
   setNavOpen: (navOpen: boolean) => void;
 }
 
-const TopBar: FC<Props> = ({ navOpen, setNavOpen }) => {
+const TopBar = ({ navOpen, setNavOpen }: Props) => {
   const plausible = usePlausible();
   const isMobile = useMediaQuery('(max-width: 600px)');
   const isTablet = useMediaQuery('(max-width: 900px)');

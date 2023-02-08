@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -27,12 +27,12 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_ColumnActionMenu: FC<Props> = ({
+export const MRT_ColumnActionMenu = ({
   anchorEl,
   header,
   setAnchorEl,
   table,
-}) => {
+}: Props) => {
   const {
     getState,
     toggleAllColumnsVisible,

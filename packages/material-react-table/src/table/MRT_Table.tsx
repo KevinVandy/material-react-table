@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import {
   defaultRangeExtractor,
   Range,
@@ -15,7 +15,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_Table: FC<Props> = ({ table }) => {
+export const MRT_Table = ({ table }: Props) => {
   const {
     getState,
     options: {

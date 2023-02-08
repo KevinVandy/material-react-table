@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 //MRT Imports
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
@@ -35,7 +35,7 @@ export type Employee = {
   avatar: string;
 };
 
-const Example: FC = () => {
+const Example = () => {
   const columns = useMemo<MRT_ColumnDef<Employee>[]>(
     () => [
       {

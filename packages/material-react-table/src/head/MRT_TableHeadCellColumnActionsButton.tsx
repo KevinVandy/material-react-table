@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent, useState } from 'react';
+import React, { MouseEvent, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
@@ -9,10 +9,10 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_TableHeadCellColumnActionsButton: FC<Props> = ({
+export const MRT_TableHeadCellColumnActionsButton = ({
   header,
   table,
-}) => {
+}: Props) => {
   const {
     options: {
       icons: { MoreVertIcon },

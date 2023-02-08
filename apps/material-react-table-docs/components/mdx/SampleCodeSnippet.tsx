@@ -1,4 +1,4 @@
-import { CSSProperties, FC, useState } from 'react';
+import { CSSProperties, useState } from 'react';
 import {
   useTheme,
   Tooltip,
@@ -19,12 +19,14 @@ const CopyButton = styled(IconButton)({
   right: '0.25rem',
 });
 
-export const SampleCodeSnippet: FC<{
+interface Props {
   children: string;
   className?: string;
   enableCopyButton?: boolean;
   style?: CSSProperties;
-}> = (props) => {
+}
+
+export const SampleCodeSnippet = (props: Props) => {
   const theme = useTheme();
   const [isCopied, setIsCopied] = useState(false);
 

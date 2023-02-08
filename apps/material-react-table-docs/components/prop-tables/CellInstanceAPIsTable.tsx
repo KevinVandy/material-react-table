@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import MaterialReactTable, {
   MRT_ColumnDef,
@@ -12,7 +12,7 @@ interface Props {
   onlyProps?: Set<keyof MRT_Cell>;
 }
 
-const CellInstanceAPIsTable: FC<Props> = ({ onlyProps }) => {
+const CellInstanceAPIsTable = ({ onlyProps }: Props) => {
   const isDesktop = useMediaQuery('(min-width: 1200px)');
 
   const columns = useMemo<MRT_ColumnDef<CellInstanceAPI>[]>(

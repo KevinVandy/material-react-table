@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Collapse from '@mui/material/Collapse';
 import { MRT_FilterRangeFields } from '../inputs/MRT_FilterRangeFields';
 import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
@@ -10,10 +10,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_TableHeadCellFilterContainer: FC<Props> = ({
-  header,
-  table,
-}) => {
+export const MRT_TableHeadCellFilterContainer = ({ header, table }: Props) => {
   const { getState } = table;
   const { showColumnFilters } = getState();
   const { column } = header;

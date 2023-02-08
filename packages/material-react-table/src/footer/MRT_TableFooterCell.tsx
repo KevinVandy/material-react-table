@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import TableCell from '@mui/material/TableCell';
 import { getCommonCellStyles } from '../column.utils';
 import type { MRT_Header, MRT_TableInstance } from '..';
@@ -8,7 +8,7 @@ interface Props {
   table: MRT_TableInstance;
 }
 
-export const MRT_TableFooterCell: FC<Props> = ({ footer, table }) => {
+export const MRT_TableFooterCell = ({ footer, table }: Props) => {
   const {
     getState,
     options: { layoutMode, muiTableFooterCellProps },

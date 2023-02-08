@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
 import { createTheme, ThemeProvider, useTheme } from '@mui/material';
 
@@ -75,7 +75,7 @@ const data = [
 ];
 //end
 
-const Example: FC = () => {
+const Example = () => {
   const globalTheme = useTheme(); //(optional) if you already have a theme defined in your app root, you can import here
 
   const tableTheme = useMemo(
