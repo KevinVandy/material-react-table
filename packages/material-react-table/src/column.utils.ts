@@ -263,7 +263,7 @@ export const getCommonCellStyles = ({
   display: table.options.layoutMode === 'grid' ? 'flex' : 'table-cell',
   flex:
     table.options.layoutMode === 'grid'
-      ? `var(--col-${column.id}-size) 0 auto`
+      ? `var(--col-${column.id.replaceAll('.', '_')}-size) 0 auto`
       : undefined,
   left:
     column.getIsPinned() === 'left'
@@ -307,10 +307,11 @@ export const getCommonCellStyles = ({
   ...(tableCellProps?.sx instanceof Function
     ? tableCellProps.sx(theme)
     : (tableCellProps?.sx as any)),
-  minWidth: `max(calc(var(--col-${column.id}-size) * 1px), ${
-    column.columnDef.minSize ?? 30
-  }px)`,
-  width: `calc(var(--col-${column.id}-size) * 1px)`,
+  minWidth: `max(calc(var(--col-${column.id.replaceAll(
+    '.',
+    '_',
+  )}-size) * 1px), ${column.columnDef.minSize ?? 30}px)`,
+  width: `calc(var(--col-${column.id.replaceAll('.', '_')}-size) * 1px)`,
 });
 
 export const MRT_DefaultColumn = {

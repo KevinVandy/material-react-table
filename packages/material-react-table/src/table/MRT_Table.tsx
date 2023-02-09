@@ -53,6 +53,16 @@ export const MRT_Table = ({ table }: Props) => {
       ? columnVirtualizerProps({ table })
       : columnVirtualizerProps;
 
+  const columnSizeVars = useMemo(() => {
+    const headers = getFlatHeaders();
+    const colSizes: { [key: string]: number } = {};
+    for (let i = 0; i < headers.length; i++) {
+      const h = headers[i];
+      colSizes[`--col-${h.column.id}-size`.replaceAll('.', '_')] = h.getSize();
+    }
+    return colSizes;
+  }, [columns, columnSizing, columnSizingInfo]);
+
   //get first 16 column widths and average them
   const averageColumnWidth = useMemo(() => {
     if (!enableColumnVirtualization) return 0;
@@ -129,16 +139,6 @@ export const MRT_Table = ({ table }: Props) => {
     virtualPaddingLeft,
     virtualPaddingRight,
   };
-
-  const columnSizeVars = useMemo(() => {
-    const headers = getFlatHeaders();
-    const colSizes: { [key: string]: number } = {};
-    for (let i = 0; i < headers.length; i++) {
-      const h = headers[i];
-      colSizes[`--col-${h.column.id}-size`] = h.getSize();
-    }
-    return colSizes;
-  }, [columns, columnSizing, columnSizingInfo]);
 
   return (
     <Table
