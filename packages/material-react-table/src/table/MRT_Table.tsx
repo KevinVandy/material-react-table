@@ -58,7 +58,9 @@ export const MRT_Table = ({ table }: Props) => {
     const colSizes: { [key: string]: number } = {};
     for (let i = 0; i < headers.length; i++) {
       const h = headers[i];
-      colSizes[`--col-${h.column.id}-size`.replaceAll('.', '_')] = h.getSize();
+      colSizes[
+        `--col-${h.column.id}-size`.replaceAll('.', '_').replaceAll(' ', '_')
+      ] = h.getSize();
     }
     return colSizes;
   }, [columns, columnSizing, columnSizingInfo]);
