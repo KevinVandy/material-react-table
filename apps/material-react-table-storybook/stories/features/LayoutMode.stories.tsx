@@ -63,6 +63,26 @@ export const Grid: Story<MaterialReactTableProps> = () => (
   />
 );
 
+export const GridNoGrow: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns.slice(0, 2)}
+    data={data}
+    layoutMode="grid"
+    enableRowSelection
+    enableColumnOrdering
+    muiTableHeadCellProps={{
+      sx: {
+        flex: '0 0 auto',
+      },
+    }}
+    muiTableBodyCellProps={{
+      sx: {
+        flex: '0 0 auto',
+      },
+    }}
+  />
+);
+
 export const GridWithResizing: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}
@@ -71,5 +91,26 @@ export const GridWithResizing: Story<MaterialReactTableProps> = () => (
     enableRowSelection
     enableColumnOrdering
     enableColumnResizing
+  />
+);
+
+export const GridNoGrowWithResizing: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns.slice(0, 2)}
+    data={data}
+    layoutMode="grid"
+    enableRowSelection
+    enableColumnOrdering
+    enableColumnResizing
+    muiTableHeadCellProps={{
+      sx: {
+        flex: '0 0 auto',
+      },
+    }}
+    muiTableBodyCellProps={{
+      sx: {
+        flex: '0 0 auto',
+      },
+    }}
   />
 );

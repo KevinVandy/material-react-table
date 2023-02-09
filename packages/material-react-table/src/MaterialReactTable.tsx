@@ -911,7 +911,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
 const MaterialReactTable = <TData extends Record<string, any> = {}>({
   aggregationFns,
   autoResetExpanded = false,
-  columnResizeMode = 'onEnd',
+  columnResizeMode = 'onChange',
   defaultColumn,
   defaultDisplayColumn,
   editingMode = 'modal',

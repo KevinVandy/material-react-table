@@ -68,7 +68,7 @@ export const rootProps: PropRow[] = [
   },
   {
     propName: 'columnResizeMode',
-    defaultValue: "'onEnd'",
+    defaultValue: "'onChange'",
     description:
       'Determines when the columnSizing state is updated. onChange updates the state when the user is dragging the resize handle. onEnd updates the state when the user releases the resize handle.',
     link: '/docs/guides/column-resizing#column-resize-mode',

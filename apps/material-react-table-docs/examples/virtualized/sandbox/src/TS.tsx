@@ -16,7 +16,7 @@ const Example = () => {
       {
         accessorKey: 'middleName',
         header: 'Middle Name',
-        size: 150,
+        size: 170,
       },
       {
         accessorKey: 'lastName',
@@ -109,7 +109,9 @@ const Example = () => {
     <MaterialReactTable
       columns={columns}
       data={data} //10,000 rows
+      defaultDisplayColumn={{ enableResizing: true }}
       enableBottomToolbar={false}
+      enableColumnResizing
       enableColumnVirtualization
       enableGlobalFilterModes
       enablePagination={false}

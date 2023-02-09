@@ -17,8 +17,10 @@ interface Props {
 
 export const MRT_Table = ({ table }: Props) => {
   const {
+    getFlatHeaders,
     getState,
     options: {
+      columns,
       columnVirtualizerInstanceRef,
       columnVirtualizerProps,
       enableColumnResizing,
@@ -33,7 +35,13 @@ export const MRT_Table = ({ table }: Props) => {
     },
     refs: { tableContainerRef },
   } = table;
-  const { isFullScreen, columnPinning, columnVisibility } = getState();
+  const {
+    columnPinning,
+    columnSizing,
+    columnSizingInfo,
+    columnVisibility,
+    isFullScreen,
+  } = getState();
 
   const tableProps =
     muiTableProps instanceof Function
@@ -122,6 +130,16 @@ export const MRT_Table = ({ table }: Props) => {
     virtualPaddingRight,
   };
 
+  const columnSizeVars = useMemo(() => {
+    const headers = getFlatHeaders();
+    const colSizes: { [key: string]: number } = {};
+    for (let i = 0; i < headers.length; i++) {
+      const h = headers[i];
+      colSizes[`--col-${h.column.id}-size`] = h.getSize();
+    }
+    return colSizes;
+  }, [columns, columnSizing, columnSizingInfo]);
+
   return (
     <Table
       stickyHeader={enableStickyHeader || isFullScreen}
@@ -135,9 +153,10 @@ export const MRT_Table = ({ table }: Props) => {
           ? tableProps.sx(theme)
           : (tableProps?.sx as any)),
       })}
+      style={{ ...columnSizeVars, ...tableProps?.style }}
     >
       {enableTableHead && <MRT_TableHead {...props} />}
-      {memoMode === 'table-body' ? (
+      {memoMode === 'table-body' || columnSizingInfo.isResizingColumn ? (
         <Memo_MRT_TableBody columnVirtualizer={columnVirtualizer} {...props} />
       ) : (
         <MRT_TableBody columnVirtualizer={columnVirtualizer} {...props} />

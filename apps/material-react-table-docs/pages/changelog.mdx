@@ -12,6 +12,13 @@ import Head from 'next/head';
 
 ### V1
 
+#### v1.7.0 (2023-02-08) "The Column Resizing Update"
+
+- Column Resizing performance improvements by switching to CSS vars for column widths and memoizing the table body during resizing by default
+- `columnResizeMode` now defaults to `"onChange"` instead of `"onEnd"`
+- Allow for column sizes to not grow if flex grow is disabled when layoutMode is `"grid"`
+- Get rid of table row hover transition time for better UI.
+
 #### v1.6.6 (2023-02-07)
 
 - Added sv translations that can be imported from `'material-react-table/locales/sv'`
@@ -37,7 +44,7 @@ import Head from 'next/head';
 
 - Fix alert banner z-index issue
 
-#### v1.6.0 (2023-01-29)
+#### v1.6.0 (2023-01-29) "The Filter Match Highlighting Update"
 
 - Added new Filter Match Highlighting feature that is enabled by default, but can be disabled with the `enableFilterMatchHighlighting` prop
 - Added import for the `MRT_EditActionButtons` component for better custom row actions
@@ -96,7 +103,7 @@ import Head from 'next/head';
 - Fixed sticky footer z-index issue when using column pinning
 - Added zh-Hans and zh-Hant translations that can be imported from `'material-react-table/locales/zh-Hans'` and `'material-react-table/locales/zh-Hant'` respectively
 
-#### v1.5.0 (2022-12-20)
+#### v1.5.0 (2022-12-20) "The Column Virtualization Upgrade"
 
 - New column virtualization feature that can be enabled with the `enableColumnVirtualization` prop and customized with the `columnVirtualizationProps` and `columnVirtualizerInstanceRef` props
 - Deprecated (renamed) `virtualizerInstanceRef` prop in favor of `rowVirtualizerInstanceRef`
@@ -120,7 +127,7 @@ import Head from 'next/head';
 - Lowered default row virtualization `overscan` default count from `10` to `4`
 - Added imports for `MRT_ToolbarAlertBanner` and `MRT_ToolbarDropZone` components for custom toolbars
 
-#### v1.4.0 (2022-12-08)
+#### v1.4.0 (2022-12-08) "The Row Virtualization Upgrade"
 
 - Upgrade to TanStack Virtual v3 for better virtualization performance and bug fixes - (small breaking changes if using advanced virtualized customization features)
 - New `layoutMode` prop to allow for either `"semantic"` or `"grid"` (flex) CSS layouts for table components
@@ -194,11 +201,11 @@ import Head from 'next/head';
 - it locale fix
 - Upgraded to latest TanStack Table v8.5.21
 
-#### v1.3.0 (2022-10-28)
+#### v1.3.0 (2022-10-28) "The Multi-Aggregation Update"
 
 - Added Multi-Aggregation Per Column Feature
 - renamed `onFilterFnsChange` to `onColumnFilterFnsChange` **(breaking change)**
-- fixed grouped rows should not show edit textfields when in `"table"` editing mode
+- fixed grouped rows should not show edit text fields when in `"table"` editing mode
 - Upgraded to latest TanStack Table v8.5.18
 
 #### v1.2.10 (2022-10-17)
@@ -243,7 +250,7 @@ import Head from 'next/head';
 
 - Disable detail panel render while `isLoading` is true
 
-#### v1.2.0 (2022-09-27)
+#### v1.2.0 (2022-09-27) "The Header Cell Update"
 
 - New Header default ellipsis behavior when column width is smaller than header string
 - Column Actions and Column Grab Handles now left-align by default
@@ -254,7 +261,7 @@ import Head from 'next/head';
 - footer z-index fix during fullscreen mode
 - bigger resize handle accessibility
 
-#### v1.1.0 (2022-09-20)
+#### v1.1.0 (2022-09-20) "The Memo Update"
 
 - New memoMode prop to enable memoizing cells, rows, or the entire table body
 - Radio Buttons now show instead of checkboxes when enableMultiRowSelection={false}
@@ -302,7 +309,7 @@ import Head from 'next/head';
 
 - Added es translations that can be imported from `'material-react-table/locales/es'`
 
-#### v1.0.1 (2022-09-13)
+#### v1.0.1 (2022-09-13) "The OG Release"
 
 - Initial Stable Release
 

@@ -114,6 +114,7 @@ const Example = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
+      enableColumnResizing
       enableGrouping
       enableStickyHeader
       enableStickyFooter

@@ -44,7 +44,7 @@ const Example = () => {
         size: 150, //default size is usually 180
       }}
       enableColumnResizing
-      columnResizeMode="onChange" //default is "onEnd"
+      columnResizeMode="onChange" //default
     />
   );
 };

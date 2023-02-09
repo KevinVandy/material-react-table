@@ -240,6 +240,10 @@ The columns will still try to increase their width to take up the full width of 
 
 To learn more about how table-layout `fixed` vs `auto` works, we recommend reading this [blog post](https://css-tricks.com/almanac/properties/t/table-layout/) by CSS-Tricks.
 
+#### Disable Column Growing
+
+By default, columns grow to fill the width of the table. However, you can disable this behavior by setting the `flexGrow` css for the table head and body cells to `0` when the `layoutMode` prop is also set to `"grid"`. This is covered in more detail in the [Column Resizing Guide](/docs/guides/column-resizing#disable-column-growing).
+
 ### Set Column Alignment
 
 By default, all columns are left-aligned. You can change the alignment of a column by setting the `align` option to either `"center"`, `"right"`, or `"justify"` in the `muiTableHeadCellProps` and `muiTableBodyCellProps` props/column options.

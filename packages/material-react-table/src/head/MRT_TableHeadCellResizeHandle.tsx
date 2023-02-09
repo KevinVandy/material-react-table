@@ -12,6 +12,7 @@ export const MRT_TableHeadCellResizeHandle = ({ header, table }: Props) => {
   const {
     getState,
     options: { columnResizeMode },
+    setColumnSizingInfo,
   } = table;
   const { density, showColumnFilters } = getState();
   const { column } = header;
@@ -20,7 +21,13 @@ export const MRT_TableHeadCellResizeHandle = ({ header, table }: Props) => {
 
   return (
     <Box
-      onDoubleClick={() => column.resetSize()}
+      onDoubleClick={() => {
+        setColumnSizingInfo((old) => ({
+          ...old,
+          isResizingColumn: false,
+        }));
+        column.resetSize();
+      }}
       onMouseDown={header.getResizeHandler()}
       onTouchStart={header.getResizeHandler()}
       sx={(theme) => ({

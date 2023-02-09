@@ -14,7 +14,7 @@ const Example = () => {
       {
         accessorKey: 'middleName',
         header: 'Middle Name',
-        size: 150,
+        size: 170,
       },
       {
         accessorKey: 'lastName',
@@ -106,6 +106,7 @@ const Example = () => {
       columns={columns}
       data={data} //10,000 rows
       enableBottomToolbar={false}
+      enableColumnResizing
       enableColumnVirtualization
       enableGlobalFilterModes
       enablePagination={false}
