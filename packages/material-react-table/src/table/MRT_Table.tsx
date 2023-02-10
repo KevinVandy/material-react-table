@@ -9,6 +9,7 @@ import Table from '@mui/material/Table';
 import { MRT_TableHead } from '../head/MRT_TableHead';
 import { Memo_MRT_TableBody, MRT_TableBody } from '../body/MRT_TableBody';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
+import { parseCSSVarId } from '../column.utils';
 import type { MRT_TableInstance } from '..';
 
 interface Props {
@@ -58,9 +59,7 @@ export const MRT_Table = ({ table }: Props) => {
     const colSizes: { [key: string]: number } = {};
     for (let i = 0; i < headers.length; i++) {
       const h = headers[i];
-      colSizes[
-        `--col-${h.column.id}-size`.replaceAll('.', '_').replaceAll(' ', '_')
-      ] = h.getSize();
+      colSizes[`--col-${parseCSSVarId(h.column.id)}-size`] = h.getSize();
     }
     return colSizes;
   }, [columns, columnSizing, columnSizingInfo]);

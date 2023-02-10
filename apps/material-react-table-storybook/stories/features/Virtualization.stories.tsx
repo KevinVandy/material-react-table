@@ -380,6 +380,7 @@ export const MaxVirtualization: Story<MaterialReactTableProps> = () => (
     columns={fakeColumns}
     data={fakeData}
     enableBottomToolbar={false}
+    enableColumnResizing
     enableColumnVirtualization
     enablePagination={false}
     enablePinning

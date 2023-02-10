@@ -42,7 +42,7 @@ If you want to embed all of your row actions into a single menu, then you can us
 ```jsx
 <MaterialReactTable
   enableRowActions
-  renderRowActionMenuItems={(row, index) => [
+  renderRowActionMenuItems={({ row }) => [
       <MenuItem onClick={() => console.info('Edit')}>Edit</MenuItem>,
       <MenuItem onClick={() => console.info('Delete')}>Delete</MenuItem>
     ]
@@ -57,7 +57,7 @@ If you want to add row action buttons, then you can use the `renderRowActions` p
 ```jsx
 <MaterialReactTable
   enableRowActions
-  renderRowActions={(row, index) => (
+  renderRowActions={({ row }) => (
     <Box>
       <IconButton onClick={() => console.info('Edit')}>
         <EditIcon />
@@ -101,5 +101,9 @@ You can customize all column def options for the row actions column, including t
 You can position the row actions column to the left or right (first or last column) of the table using the `positionActionsColumn` prop. The default is as the first column.
 
 ```jsx
-<MaterialReactTable columns={columns} data={data} positionActionsColumn="last" />
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  positionActionsColumn="last"
+/>
 ```

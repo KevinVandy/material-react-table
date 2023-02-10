@@ -263,9 +263,7 @@ export const getCommonCellStyles = ({
   display: table.options.layoutMode === 'grid' ? 'flex' : 'table-cell',
   flex:
     table.options.layoutMode === 'grid'
-      ? `var(--col-${column.id
-          .replaceAll('.', '_')
-          .replaceAll(' ', '_')}-size) 0 auto`
+      ? `var(--col-${parseCSSVarId(column.id)}-size) 0 auto`
       : undefined,
   left:
     column.getIsPinned() === 'left'
@@ -302,19 +300,16 @@ export const getCommonCellStyles = ({
     column.getIsPinned() === 'right'
       ? `${getTotalRight(table, column)}px`
       : undefined,
-  transition:
-    table.options.enableColumnVirtualization || column.getIsResizing()
-      ? 'none'
-      : `padding 150ms ease-in-out`,
+  transition: table.options.enableColumnVirtualization
+    ? 'none'
+    : `padding 150ms ease-in-out`,
   ...(tableCellProps?.sx instanceof Function
     ? tableCellProps.sx(theme)
     : (tableCellProps?.sx as any)),
-  minWidth: `max(calc(var(--col-${column.id
-    .replaceAll('.', '_')
-    .replaceAll(' ', '_')}-size) * 1px), ${column.columnDef.minSize ?? 30}px)`,
-  width: `calc(var(--col-${column.id
-    .replaceAll('.', '_')
-    .replaceAll(' ', '_')}-size) * 1px)`,
+  minWidth: `max(calc(var(--col-${parseCSSVarId(column.id)}-size) * 1px), ${
+    column.columnDef.minSize ?? 30
+  }px)`,
+  width: `calc(var(--col-${parseCSSVarId(column.id)}-size) * 1px)`,
 });
 
 export const MRT_DefaultColumn = {
@@ -338,3 +333,6 @@ export const MRT_DefaultDisplayColumn = {
   enableResizing: false,
   enableSorting: false,
 } as const;
+
+export const parseCSSVarId = (id: string) =>
+  id.replaceAll('.', '_').replaceAll(' ', '_').replaceAll('+', '_');
