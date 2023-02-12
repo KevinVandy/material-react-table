@@ -241,6 +241,24 @@ const columns = [
 ];
 ```
 
+#### PlaceholderCell Column Option
+
+> New in v1.7.4
+
+"Placeholder Cells" are cells that are usually meant to be empty in grouped rows and columns. They are simply rendered with a value of `null` by default, but you can override the default render for these cells with the `PlaceholderCell` render option on a column definition.
+
+```jsx
+const columns = [
+  {
+    accessorKey: 'team',
+    header: 'Team',
+    PlaceholderCell: ({ cell, row }) => (
+      <div>{row.original.someOtherRowValue}</div>
+    ),
+  },
+];
+```
+
 ### Aggregation/Grouping Example
 
 <AggregationExample />

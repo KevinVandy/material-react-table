@@ -304,6 +304,12 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
         header: MRT_Header<TData>;
         table: MRT_TableInstance<TData>;
       }) => ReactNode);
+  PlaceholderCell?: (props: {
+    cell: MRT_Cell<TData>;
+    column: MRT_Column<TData>;
+    row: MRT_Row<TData>;
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode;
   /**
    * Either an `accessorKey` or a combination of an `accessorFn` and `id` are required for a data column definition.
    * Specify a function here to point to the correct property in the data object.

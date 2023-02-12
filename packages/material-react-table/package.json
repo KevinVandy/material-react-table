@@ -1,5 +1,5 @@
 {
-  "version": "1.7.3",
+  "version": "1.7.4",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -46,7 +46,6 @@
   },
   "scripts": {
     "build": "rm -rf dist && rollup -c && size-limit",
-    "dev": "rm -rf dist && rollup -c -w",
     "lib:build": "rm -rf dist && rollup -c && size-limit",
     "lib:dev": "rm -rf dist && rollup -c -w",
     "lint": "eslint .",
@@ -58,17 +57,17 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",
-    "@mui/material": "^5.11.4",
+    "@mui/material": "^5.11.8",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^11.0.0",
-    "@size-limit/preset-small-lib": "^8.1.0",
-    "@types/node": "^18.11.18",
-    "@types/react": "^18.0.26",
+    "@size-limit/preset-small-lib": "^8.1.2",
+    "@types/node": "^18.13.0",
+    "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.10",
-    "@typescript-eslint/eslint-plugin": "^5.48.1",
-    "@typescript-eslint/parser": "^5.48.1",
-    "eslint": "^8.31.0",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
+    "eslint": "^8.34.0",
     "eslint-plugin-mui-path-imports": "^0.0.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -77,9 +76,9 @@
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-dts": "^5.1.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "size-limit": "^8.1.0",
-    "tslib": "^2.4.1",
-    "typescript": "^4.9.4"
+    "size-limit": "^8.1.2",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.5"
   },
   "peerDependencies": {
     "@emotion/react": ">=11",
@@ -92,7 +91,7 @@
   "dependencies": {
     "@tanstack/match-sorter-utils": "8.7.6",
     "@tanstack/react-table": "8.7.9",
-    "@tanstack/react-virtual": "3.0.0-beta.30",
+    "@tanstack/react-virtual": "3.0.0-beta.47",
     "highlight-words": "1.2.1"
   }
 }

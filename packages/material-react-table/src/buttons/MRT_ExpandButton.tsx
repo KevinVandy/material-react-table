@@ -61,14 +61,16 @@ export const MRT_ExpandButton = ({ row, table }: Props) => {
           })}
           title={undefined}
         >
-          <ExpandMoreIcon
-            style={{
-              transform: `rotate(${
-                !canExpand && !renderDetailPanel ? -90 : isExpanded ? -180 : 0
-              }deg)`,
-              transition: 'transform 150ms',
-            }}
-          />
+          {iconButtonProps?.children ?? (
+            <ExpandMoreIcon
+              style={{
+                transform: `rotate(${
+                  !canExpand && !renderDetailPanel ? -90 : isExpanded ? -180 : 0
+                }deg)`,
+                transition: 'transform 150ms',
+              }}
+            />
+          )}
         </IconButton>
       </span>
     </Tooltip>

@@ -67,7 +67,7 @@ export const MRT_TableHeadCellColumnActionsButton = ({
             height: '2rem',
             m: '-8px -4px',
             opacity: 0.5,
-            transform: 'scale(0.85)',
+            transform: 'scale(0.85) translateX(-4px)',
             transition: 'opacity 150ms',
             width: '2rem',
             '&:hover': {

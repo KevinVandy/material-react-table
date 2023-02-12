@@ -59,14 +59,16 @@ export const MRT_ExpandAllButton = ({ table }: Props) => {
           })}
           title={undefined}
         >
-          <KeyboardDoubleArrowDownIcon
-            style={{
-              transform: `rotate(${
-                isAllRowsExpanded ? -180 : getIsSomeRowsExpanded() ? -90 : 0
-              }deg)`,
-              transition: 'transform 150ms',
-            }}
-          />
+          {iconButtonProps?.children ?? (
+            <KeyboardDoubleArrowDownIcon
+              style={{
+                transform: `rotate(${
+                  isAllRowsExpanded ? -180 : getIsSomeRowsExpanded() ? -90 : 0
+                }deg)`,
+                transition: 'transform 150ms',
+              }}
+            />
+          )}
         </IconButton>
       </span>
     </Tooltip>

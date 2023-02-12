@@ -9,7 +9,6 @@ import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import DragHandleIcon from '@mui/icons-material/DragHandle';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import EditIcon from '@mui/icons-material/Edit';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterListIcon from '@mui/icons-material/FilterList';
@@ -41,7 +40,6 @@ export interface MRT_Icons {
   DragHandleIcon: any;
   DynamicFeedIcon: any;
   EditIcon: any;
-  ExpandLessIcon: any;
   ExpandMoreIcon: any;
   FilterAltIcon: any;
   FilterListIcon: any;
@@ -72,7 +70,6 @@ export const MRT_Default_Icons: MRT_Icons = {
   DragHandleIcon,
   DynamicFeedIcon,
   EditIcon,
-  ExpandLessIcon,
   ExpandMoreIcon,
   FilterAltIcon,
   FilterListIcon,

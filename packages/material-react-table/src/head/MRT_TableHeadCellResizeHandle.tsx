@@ -14,10 +14,8 @@ export const MRT_TableHeadCellResizeHandle = ({ header, table }: Props) => {
     options: { columnResizeMode },
     setColumnSizingInfo,
   } = table;
-  const { density, showColumnFilters } = getState();
+  const { density } = getState();
   const { column } = header;
-  const { columnDef } = column;
-  const { columnDefType } = columnDef;
 
   return (
     <Box
@@ -54,8 +52,7 @@ export const MRT_TableHeadCellResizeHandle = ({ header, table }: Props) => {
         sx={{
           borderRadius: '2px',
           borderWidth: '2px',
-          height:
-            showColumnFilters && columnDefType === 'data' ? '3.5rem' : '1.5rem',
+          height: '24px',
           touchAction: 'none',
           transition: column.getIsResizing()
             ? undefined

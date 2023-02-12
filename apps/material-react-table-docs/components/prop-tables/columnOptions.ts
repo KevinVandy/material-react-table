@@ -84,6 +84,16 @@ export const columnOptions: ColumnOption[] = [
     type: 'ReactNode | (({ column, header, table }) => ReactNode)',
   },
   {
+    columnOption: 'PlaceholderCell',
+    defaultValue: '',
+    description: 'Define a custom cell render for a placeholder cell.',
+    link: '',
+    linkText: '',
+    source: 'MRT',
+    required: false,
+    type: '({ cell, column, row, table }) => ReactNode',
+  },
+  {
     columnOption: 'accessorFn',
     defaultValue: '',
     description:
