@@ -53,6 +53,7 @@ function App({ Component, pageProps }: AppProps) {
           <link
             rel="preconnect"
             href="https://1W9SWN5ZAH-dsn.algolia.net"
+            // @ts-ignore
             crossOrigin="true"
           />
         )}
