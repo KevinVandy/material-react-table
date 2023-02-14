@@ -50,12 +50,18 @@ function App({ Component, pageProps }: AppProps) {
           content={`https://www.material-react-table.com${pathname}`}
         />
         {process.env.NODE_ENV === 'production' && (
-          <link
-            rel="preconnect"
-            href="https://1W9SWN5ZAH-dsn.algolia.net"
-            // @ts-ignore
-            crossOrigin="true"
-          />
+          <>
+            <link
+              rel="preconnect"
+              href="https://1W9SWN5ZAH-dsn.algolia.net"
+              crossOrigin="anonymous"
+            />
+            <script
+              async
+              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1076638783489959"
+              crossOrigin="anonymous"
+            />
+          </>
         )}
       </Head>
       <PlausibleProvider
