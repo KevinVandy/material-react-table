@@ -92,3 +92,18 @@ export const CustomizePaginationComponents: Story<
     }}
   />
 );
+
+export const RotateIcons: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    muiTablePaginationProps={{
+      backIconButtonProps: {
+        style: { transform: 'rotate(180deg)' },
+      },
+      nextIconButtonProps: {
+        style: { transform: 'rotate(180deg)' },
+      },
+    }}
+  />
+);
