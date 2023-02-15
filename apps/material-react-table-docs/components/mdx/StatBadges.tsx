@@ -60,7 +60,7 @@ export const StatBadges = () => {
       <a
         href="https://github.com/KevinVandy/material-react-table/blob/main/LICENSE"
         target="_blank"
-        rel="noreferrer"
+        rel="noopener"
       >
         <img
           alt=""

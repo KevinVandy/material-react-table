@@ -11,7 +11,7 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
       <Link
         href={row.original.libraryLink}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener"
         sx={(theme) => ({
           color:
             cell.getValue() === 'Material React Table'
@@ -44,7 +44,7 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
         <a
           href={row.original.bundlePhobiaLink}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener"
         >
           <img
             alt={cell.getValue<string>()}
@@ -137,7 +137,7 @@ const data = [
   },
 ];
 
-const ComparisonTable = () => {
+export const ComparisonTable = () => {
   return (
     <MaterialReactTable
       columns={columns}
@@ -149,5 +149,3 @@ const ComparisonTable = () => {
     />
   );
 };
-
-export default ComparisonTable;

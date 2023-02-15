@@ -146,7 +146,7 @@ export const SourceCodeSnippet = ({
                   endIcon={<LaunchIcon />}
                   href={`https://stackblitz.com/github/KevinVandy/material-react-table/tree/main/apps/material-react-table-docs/examples/${tableId}/sandbox?file=src/TS.tsx`}
                   onClick={() => plausible('open-stackblitz')}
-                  rel="noreferrer"
+                  rel="noopener"
                   startIcon={<ElectricBoltIcon />}
                   sx={{ cursor: 'pointer' }}
                   target="_blank"
@@ -159,7 +159,7 @@ export const SourceCodeSnippet = ({
                   endIcon={<LaunchIcon />}
                   href={`https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/main/apps/material-react-table-docs/examples/${tableId}/sandbox?file=/src/TS.tsx`}
                   onClick={() => plausible('open-code-sandbox')}
-                  rel="noreferrer"
+                  rel="noopener"
                   startIcon={<CodeIcon />}
                   sx={{ cursor: 'pointer' }}
                   target="_blank"
@@ -174,7 +174,7 @@ export const SourceCodeSnippet = ({
                     isTypeScript ? 'TS.tsx' : 'JS.js'
                   }`}
                   onClick={() => plausible('open-on-github')}
-                  rel="noreferrer"
+                  rel="noopener"
                   startIcon={<GitHubIcon />}
                   sx={{ cursor: 'pointer' }}
                   target="_blank"

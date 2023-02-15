@@ -1,5 +1,5 @@
 import { Drawer, List, useMediaQuery } from '@mui/material';
-import SideBarItems from './SidebarItems';
+import { SideBarItems } from './SidebarItems';
 import { routes } from './routes';
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
   setNavOpen: (navOpen: boolean) => void;
 }
 
-const SideBar = ({ navOpen, setNavOpen }: Props) => {
+export const SideBar = ({ navOpen, setNavOpen }: Props) => {
   const isMobile = useMediaQuery('(max-width: 900px)');
 
   return (
@@ -42,5 +42,3 @@ const SideBar = ({ navOpen, setNavOpen }: Props) => {
     </Drawer>
   );
 };
-
-export default SideBar;

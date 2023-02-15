@@ -13,10 +13,11 @@ import { HomeCards } from '../components/mdx/HomeCards';
 import { LinkCards } from '../components/mdx/LinkCards';
 import { StatBadges } from '../components/mdx/StatBadges';
 import { GuideCard } from '../components/mdx/GuideCard';
-import ComparisonTable from '../components/mdx/ComparisonTable';
+import {ComparisonTable} from '../components/mdx/ComparisonTable';
 import { LinkHeading } from '../components/mdx/LinkHeading';
-import FeatureTable from '../components/mdx/FeatureTable';
+import {FeatureTable} from '../components/mdx/FeatureTable';
 import { SampleCodeSnippet } from '../components/mdx/SampleCodeSnippet';
+import Image from 'next/image';
 
 const HomePage = () => {
   return (
@@ -34,11 +35,7 @@ const HomePage = () => {
             },
             fontWeight: 'bold',
             mt: '5rem',
-            mb: {
-              xs: '1rem',
-              md: '1.5rem',
-              lg: '2rem',
-            },
+            mb: "1rem",
             lineHeight: {
               xs: '2.5rem',
               sm: '3.5rem',
@@ -84,7 +81,7 @@ const HomePage = () => {
               md: '2.2rem',
               lg: '2.25rem',
             },
-            mb: '3rem',
+            mb: '1rem',
             textAlign: 'center',
             lineHeight: '2.25rem',
             fontWeight: 'normal',
@@ -100,7 +97,7 @@ const HomePage = () => {
                 '&:hover': { textDecoration: 'underline' },
               }}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener"
             >
               Material&nbsp;UI<sup>V5</sup>
             </MuiLink>
@@ -114,12 +111,20 @@ const HomePage = () => {
                 '&:hover': { textDecoration: 'underline' },
               }}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener"
             >
               TanStack&nbsp;Table<sup>V8</sup>
             </MuiLink>
           </Link>
         </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'center', m: '2rem auto' }}>
+          <Image
+            alt="Mui + React Table"
+            src={`/banner.png`}
+            height={60}
+            width={305}
+          />
+        </Box>
         <StatBadges />
         <Box
           sx={{

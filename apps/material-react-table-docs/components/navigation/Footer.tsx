@@ -13,7 +13,7 @@ import { Edit, GitHub } from '@mui/icons-material';
 import TableOfContentsList from './TableOfContentsList';
 import { routes } from './routes';
 
-const Footer = () => {
+export const Footer = () => {
   const { pathname } = useRouter();
   const plausible = usePlausible();
 
@@ -42,7 +42,7 @@ const Footer = () => {
             : '.mdx'
         }`}
         onClick={() => plausible('edit-on-github')}
-        rel="noreferrer"
+        rel="noopener"
         target="_blank"
         sx={{
           height: '3rem',
@@ -67,7 +67,7 @@ const Footer = () => {
           aria-label="Learn how to contribute"
           href="http://makeapullrequest.com"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener"
           style={{ marginLeft: '0.5rem' }}
         >
           <img
@@ -88,7 +88,7 @@ const Footer = () => {
           color="secondary"
           href="https://mantine.dev/"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener"
         >
           Mantine
         </MuiLink>{' '}
@@ -98,7 +98,6 @@ const Footer = () => {
         <MuiLink
           href="https://mantine-react-table.com"
           target="_blank"
-          rel="noreferrer"
           sx={(theme) => ({
             background: `-webkit-linear-gradient(left, ${theme.palette.secondary.main}, ${theme.palette.primary.dark})`,
             display: 'inline',
@@ -265,5 +264,3 @@ const Footer = () => {
     </Box>
   );
 };
-
-export default Footer;

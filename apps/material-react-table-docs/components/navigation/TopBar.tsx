@@ -41,7 +41,7 @@ interface Props {
   setNavOpen: (navOpen: boolean) => void;
 }
 
-const TopBar = ({ navOpen, setNavOpen }: Props) => {
+export const TopBar = ({ navOpen, setNavOpen }: Props) => {
   const plausible = usePlausible();
   const isMobile = useMediaQuery('(max-width: 600px)');
   const isTablet = useMediaQuery('(max-width: 900px)');
@@ -141,7 +141,7 @@ const TopBar = ({ navOpen, setNavOpen }: Props) => {
             <Tooltip arrow title="Github">
               <a
                 href="https://github.com/KevinVandy/material-react-table"
-                rel="noreferrer"
+                rel="noopener"
                 target="_blank"
               >
                 <IconButton
@@ -155,7 +155,7 @@ const TopBar = ({ navOpen, setNavOpen }: Props) => {
             <Tooltip arrow title="Discord">
               <a
                 href="https://discord.gg/5wqyRx6fnm"
-                rel="noreferrer"
+                rel="noopener"
                 target="_blank"
               >
                 <IconButton
@@ -198,5 +198,3 @@ const TopBar = ({ navOpen, setNavOpen }: Props) => {
     </>
   );
 };
-
-export default TopBar;

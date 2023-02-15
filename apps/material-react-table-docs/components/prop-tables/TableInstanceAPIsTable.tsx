@@ -59,7 +59,7 @@ const TableInstanceAPIsTable = ({ onlyProps }: Props) => {
                   ? '_blank'
                   : undefined
               }
-              rel="noreferrer"
+              rel="noopener"
             >
               {row.original?.linkText}
             </MuiLink>

@@ -7,11 +7,11 @@ import { MDXProvider } from '@mdx-js/react';
 import { Box, useMediaQuery } from '@mui/material';
 import { ThemeContextProvider } from '../styles/ThemeContext';
 import { mdxComponents } from '../components/mdx/mdxComponents';
-import TopBar from '../components/navigation/TopBar';
-import SideBar from '../components/navigation/Sidebar';
-import BreadCrumbs from '../components/navigation/BreadCrumbs';
-import MiniNav from '../components/navigation/MiniNav';
-import Footer from '../components/navigation/Footer';
+import { TopBar } from '../components/navigation/TopBar';
+import { SideBar } from '../components/navigation/Sidebar';
+import { BreadCrumbs } from '../components/navigation/BreadCrumbs';
+import { MiniNav } from '../components/navigation/MiniNav';
+import { Footer } from '../components/navigation/Footer';
 import '../styles/globals.css';
 
 function App({ Component, pageProps }: AppProps) {

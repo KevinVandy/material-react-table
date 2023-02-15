@@ -4,7 +4,7 @@ import { Breadcrumbs as MuiBreadcrumbs, Link as MuiLink } from '@mui/material';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
-const BreadCrumbs = () => {
+export const BreadCrumbs = () => {
   const { route } = useRouter();
 
   const breadCrumbLinks = useMemo(() => {
@@ -72,5 +72,3 @@ const BreadCrumbs = () => {
     </>
   );
 };
-
-export default BreadCrumbs;

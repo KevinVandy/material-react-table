@@ -9,7 +9,7 @@ export const mdxComponents = {
     <Link href={props.href} passHref legacyBehavior>
       <MuiLink
         target={props.href.startsWith('http') ? '_blank' : undefined}
-        rel="noreferrer"
+        rel="noopener"
       >
         {props.children}
       </MuiLink>

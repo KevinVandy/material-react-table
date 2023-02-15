@@ -11,7 +11,7 @@ interface Props {
   setNavOpen: (navOpen: boolean) => void;
 }
 
-const SideBarItems = ({ depth = 1, routes, setNavOpen }: Props) => {
+export const SideBarItems = ({ depth = 1, routes, setNavOpen }: Props) => {
   const { pathname } = useRouter();
   const isMobile = useMediaQuery('(max-width: 900px)');
 
@@ -77,5 +77,3 @@ const SideBarItems = ({ depth = 1, routes, setNavOpen }: Props) => {
     </>
   );
 };
-
-export default SideBarItems;
