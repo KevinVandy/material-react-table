@@ -27,11 +27,7 @@ View [Documentation](https://www.material-react-table.com/)
 
 ### __Built with [Material UI <sup>V5</sup>](https://mui.com) and [TanStack Table <sup>V8</sup>](https://tanstack.com/table/v8)__
 
-<br />
-<img src="https://material-react-table.com/mrt_banner.png" alt="MRT" height="30"/>
-<br />
-
-MRT is built with Material-UI components on top of [TanStack Table's](https://tanstack.com/table/v8) comprehensive and powerful react hooks api.
+<img src="https://material-react-table.com/banner.png" alt="MRT" height="50"/>
 
 ## Learn More
 
