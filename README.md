@@ -138,7 +138,7 @@ export default function App() {
         accessorKey: 'name', //simple recommended way to define a column
         header: 'Name',
         muiTableHeadCellProps: { sx: { color: 'green' } }, //optional custom props
-        Cell: ({ cell}) => <span>{cell.getValue()}</span>, //optional custom cell render
+        Cell: ({ cell }) => <span>{cell.getValue()}</span>, //optional custom cell render
       },
       {
         accessorFn: (row) => row.age, //alternate way

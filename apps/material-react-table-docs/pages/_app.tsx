@@ -58,8 +58,7 @@ function App({ Component, pageProps }: AppProps) {
             />
             <script
               async
-              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1076638783489959"
-              crossOrigin="anonymous"
+              src="https://media.ethicalads.io/media/client/ethicalads.min.js"
             />
           </>
         )}
@@ -100,6 +99,12 @@ function App({ Component, pageProps }: AppProps) {
                   <article>
                     <Component {...pageProps} />
                   </article>
+                )}
+                {process.env.NODE_ENV === 'production' && (
+                  <div
+                    data-ea-publisher="material-react-tablecom"
+                    data-ea-type="image"
+                  />
                 )}
                 <Footer />
               </Box>
