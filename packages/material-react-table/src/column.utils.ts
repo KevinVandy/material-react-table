@@ -340,4 +340,4 @@ export const MRT_DefaultDisplayColumn = {
 } as const;
 
 export const parseCSSVarId = (id: string) =>
-  id.replaceAll('.', '_').replaceAll(' ', '_').replaceAll('+', '_');
+  id.replaceAll('.', '_').replaceAll(' ', '_').replaceAll('+', '_').replaceAll('(', '_').replaceAll(')', '_');
