@@ -12,6 +12,7 @@ import {
 import { Edit, GitHub } from '@mui/icons-material';
 import TableOfContentsList from './TableOfContentsList';
 import { routes } from './routes';
+import { EthicalAd } from '../mdx/EthicalAd';
 
 export const Footer = () => {
   const { pathname } = useRouter();
@@ -25,9 +26,10 @@ export const Footer = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        marginTop: '100px',
+        marginTop: '50px',
       }}
     >
+      
       <Button
         color="secondary"
         endIcon={<GitHub />}
@@ -46,7 +48,7 @@ export const Footer = () => {
         target="_blank"
         sx={{
           height: '3rem',
-          m: '3rem auto',
+          m: '2rem auto',
           cursor: 'pointer',
           textAlign: 'center',
         }}
@@ -113,13 +115,14 @@ export const Footer = () => {
           Mantine&nbsp;React&nbsp;Table
         </MuiLink>
       </Typography>
+      <EthicalAd id="footer" text />
       <Paper
         elevation={3}
         sx={{
           borderRadius: '8px',
           borderBottomLeftRadius: '0',
           borderBottomRightRadius: '0',
-          mt: '100px',
+          mt: '50px',
           p: '1.5rem',
         }}
       >

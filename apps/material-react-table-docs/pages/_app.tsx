@@ -100,12 +100,6 @@ function App({ Component, pageProps }: AppProps) {
                     <Component {...pageProps} />
                   </article>
                 )}
-                {process.env.NODE_ENV === 'production' && (
-                  <div
-                    data-ea-publisher="material-react-tablecom"
-                    data-ea-type="image"
-                  />
-                )}
                 <Footer />
               </Box>
               {showMiniNav && isXLDesktop && <MiniNav />}

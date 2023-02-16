@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Box, Link, Typography, useMediaQuery } from '@mui/material';
 import { useRouter } from 'next/router';
+import { EthicalAd } from '../mdx/EthicalAd';
 
 export const MiniNav = () => {
   const { pathname } = useRouter();
   const isXLDesktop = useMediaQuery('(min-width: 1800px)');
+  const isMounted = useRef(false);
   const [headings, setHeadings] = useState<NodeListOf<HTMLElement>>();
 
   useEffect(() => {
     setHeadings(
       document.querySelectorAll(isXLDesktop ? 'h2, h3, h4, h5' : 'h3'),
     );
+    if (typeof window === 'undefined') return;
+    if (isMounted.current && isXLDesktop) {
+      (window as any).ethicalads?.load?.();
+    }
+    isMounted.current = true;
   }, [isXLDesktop, pathname]);
 
   return (
@@ -23,7 +30,7 @@ export const MiniNav = () => {
         maxWidth: isXLDesktop ? '250px' : '500px',
       }}
     >
-      <Typography component="span" variant="h6">
+      <Typography component="div" variant="h6">
         On This Page
       </Typography>
       <ul
@@ -74,6 +81,7 @@ export const MiniNav = () => {
           );
         })}
       </ul>
+      {isXLDesktop && <EthicalAd id="mini-nav" vertical text />}
     </Box>
   );
 };

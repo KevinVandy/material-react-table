@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@mui/material';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { theme } from './MuiTheme';
 
 const ThemeContext = createContext<{
@@ -12,6 +12,7 @@ const ThemeContext = createContext<{
 }>({} as any);
 
 export const ThemeContextProvider = ({ children }) => {
+  const isMounted = useRef(false);
   const [isLightTheme, setIsLightTheme] = useState(false);
   const [primaryColor, setPrimaryColor] = useState<string | undefined>();
   const [secondaryColor, setSecondaryColor] =
@@ -28,6 +29,14 @@ export const ThemeContextProvider = ({ children }) => {
       document.body.style.backgroundColor = isLightTheme ? '#fff' : '#111';
       localStorage.setItem('isLightTheme', isLightTheme.toString());
     }
+  }, [isLightTheme]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (isMounted.current) {
+      (window as any).ethicalads?.load?.();
+    }
+    isMounted.current = true;
   }, [isLightTheme]);
 
   return (
