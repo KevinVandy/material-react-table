@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Box, Link, Typography, useMediaQuery } from '@mui/material';
+import { Box, Link, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useRouter } from 'next/router';
 import { EthicalAd } from '../mdx/EthicalAd';
 
 export const MiniNav = () => {
   const { pathname } = useRouter();
+  const theme = useTheme();
   const isXLDesktop = useMediaQuery('(min-width: 1800px)');
   const isMounted = useRef(false);
   const [headings, setHeadings] = useState<NodeListOf<HTMLElement>>();
@@ -18,7 +19,7 @@ export const MiniNav = () => {
       (window as any).ethicalads?.load?.();
     }
     isMounted.current = true;
-  }, [isXLDesktop, pathname]);
+  }, [isXLDesktop, pathname, theme.palette.mode]);
 
   return (
     <Box
@@ -81,7 +82,7 @@ export const MiniNav = () => {
           );
         })}
       </ul>
-      {isXLDesktop && <EthicalAd id="mini-nav" vertical text />}
+      {isXLDesktop && <EthicalAd id="mini-nav" vertical />}
     </Box>
   );
 };

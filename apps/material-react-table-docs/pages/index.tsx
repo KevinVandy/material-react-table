@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   alpha,
   Box,
@@ -13,11 +14,11 @@ import { HomeCards } from '../components/mdx/HomeCards';
 import { LinkCards } from '../components/mdx/LinkCards';
 import { StatBadges } from '../components/mdx/StatBadges';
 import { GuideCard } from '../components/mdx/GuideCard';
-import {ComparisonTable} from '../components/mdx/ComparisonTable';
+import { ComparisonTable } from '../components/mdx/ComparisonTable';
 import { LinkHeading } from '../components/mdx/LinkHeading';
-import {FeatureTable} from '../components/mdx/FeatureTable';
+import { FeatureTable } from '../components/mdx/FeatureTable';
 import { SampleCodeSnippet } from '../components/mdx/SampleCodeSnippet';
-import Image from 'next/image';
+import { Contributors } from '../components/mdx/Contributors';
 
 const HomePage = () => {
   return (
@@ -35,13 +36,13 @@ const HomePage = () => {
             },
             fontWeight: 'bold',
             mt: '5rem',
-            mb: "1rem",
+            mb: '0.5rem',
             lineHeight: {
               xs: '2.5rem',
               sm: '3.5rem',
-              md: '5rem',
-              lg: '5.5rem',
-              xl: '6rem',
+              md: '4rem',
+              lg: '5rem',
+              xl: '5.25rem',
             },
           }}
           variant="h1"
@@ -303,6 +304,10 @@ const HomePage = () => {
       <Typography component="p" variant="subtitle2" sx={{ mt: '1rem' }}>
         *If you see any inaccuracies in this table, PRs are welcome!
       </Typography>
+      <LinkHeading mt="4rem" textAlign="center" variant="h3">
+        Maintainers and Contributors
+      </LinkHeading>
+      <Contributors />
     </>
   );
 };

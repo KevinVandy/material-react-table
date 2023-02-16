@@ -1,4 +1,4 @@
-import { alpha, Box, Card, Typography, useTheme, Link } from '@mui/material';
+import { alpha, Box, Card, Typography, Link } from '@mui/material';
 import Image from 'next/image';
 
 const cardData = [
@@ -23,12 +23,10 @@ const cardData = [
 ];
 
 export const Contributors = () => {
-  const theme = useTheme();
-
   return (
     <Box
       sx={{
-        mt: '4rem',
+        mt: '2rem',
         textAlign: 'center',
       }}
     >
@@ -94,6 +92,15 @@ export const Contributors = () => {
           </Link>
         ))}
       </Box>
+      <div style={{ textAlign: 'center' }}>
+        <a
+          href="https://github.com/kevinvandy/material-react-table/graphs/contributors"
+          target="_blank"
+          rel="noopener"
+        >
+          <img alt="GitHub Contributors" src="https://contrib.rocks/image?repo=kevinvandy/material-react-table" />
+        </a>
+      </div>
     </Box>
   );
 };
