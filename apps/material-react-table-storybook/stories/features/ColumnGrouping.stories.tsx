@@ -242,3 +242,16 @@ export const ColumnGroupingDropZoneAlwaysVisible: Story<
     />
   );
 };
+
+export const GroupingStateManaged: Story<MaterialReactTableProps> = () => {
+  const [grouping, setGrouping] = useState<string[]>([]);
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      enableGrouping
+      state={{ grouping }}
+      onGroupingChange={setGrouping}
+    />
+  );
+};

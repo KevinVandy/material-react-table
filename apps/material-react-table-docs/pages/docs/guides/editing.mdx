@@ -26,13 +26,13 @@ There are four visually distinct editing modes to choose from, whether you want 
 <RootPropTable
   onlyProps={
     new Set([
-      'enableEditing',
       'editingMode',
+      'enableEditing',
       'muiTableBodyCellEditTextFieldProps',
       'onEditingCellChange',
+      'onEditingRowCancel',
       'onEditingRowChange',
       'onEditingRowSave',
-      'onEditingRowCancel',
     ])
   }
 />
@@ -40,7 +40,14 @@ There are four visually distinct editing modes to choose from, whether you want 
 ### Relevant Column Options
 
 <ColumnOptionsTable
-  onlyProps={new Set(['enableEditing', 'muiTableBodyCellEditTextFieldProps'])}
+  onlyProps={
+    new Set([
+      'editSelectOptions',
+      'editVariant',
+      'enableEditing',
+      'muiTableBodyCellEditTextFieldProps',
+    ])
+  }
 />
 
 ### Relevant State Options

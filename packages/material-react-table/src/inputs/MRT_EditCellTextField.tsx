@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FocusEvent, KeyboardEvent, useState } from 'react';
 import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
 import type { TextFieldProps } from '@mui/material/TextField';
 import type { MRT_Cell, MRT_TableInstance } from '..';
 
@@ -47,6 +48,8 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
     ...mcTableBodyCellEditTextFieldProps,
   };
 
+  const isSelectEdit = columnDef.editVariant === 'select';
+
   const saveRow = (newValue: string) => {
     if (editingRow) {
       setEditingRow({
@@ -83,7 +86,11 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
 
   return (
     <TextField
-      disabled={columnDef.enableEditing === false}
+      disabled={
+        (columnDef.enableEditing instanceof Function
+          ? columnDef.enableEditing(row)
+          : columnDef.enableEditing) === false
+      }
       fullWidth
       inputRef={(inputRef) => {
         if (inputRef) {
@@ -97,6 +104,7 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
       margin="none"
       name={column.id}
       placeholder={columnDef.header}
+      select={isSelectEdit}
       value={value}
       variant="standard"
       {...textFieldProps}
@@ -107,6 +115,34 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
       onBlur={handleBlur}
       onChange={handleChange}
       onKeyDown={handleEnterKeyDown}
-    />
+    >
+      {columnDef?.editSelectOptions?.map(
+        (option: string | { text: string; value: string }) => {
+          let value: string;
+          let text: string;
+          if (typeof option !== 'object') {
+            value = option;
+            text = option;
+          } else {
+            value = option.value;
+            text = option.text;
+          }
+          return (
+            <MenuItem
+              key={value}
+              sx={{
+                display: 'flex',
+                m: 0,
+                alignItems: 'center',
+                gap: '0.5rem',
+              }}
+              value={value}
+            >
+              {text}
+            </MenuItem>
+          );
+        },
+      )}
+    </TextField>
   );
 };

@@ -313,7 +313,7 @@ export const rootProps: PropRow[] = [
     linkText: 'MRT Editing Docs',
     required: false,
     source: 'MRT',
-    type: 'boolean',
+    type: 'boolean | (row: MRT_Row) => boolean',
   },
   {
     propName: 'enableExpandAll',
@@ -516,7 +516,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: '',
-    type: 'boolean',
+    type: 'boolean | (row: MRT_Row) => boolean',
   },
   {
     propName: 'enableRowVirtualization',
@@ -1506,7 +1506,7 @@ export const rootProps: PropRow[] = [
     linkText: 'MRT Density Toggle Docs',
     required: false,
     source: 'MRT',
-    type: 'OnChangeFn<DensityState>',
+    type: 'OnChangeFn<MRT_DensityState>',
   },
   {
     propName: 'onIsFullScreenChange',

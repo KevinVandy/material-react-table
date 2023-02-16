@@ -2,11 +2,11 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, {
   MaterialReactTableProps,
+  MRT_AggregationFns,
   MRT_ColumnDef,
 } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 import { Box, Stack } from '@mui/material';
-import { aggregationFns } from '@tanstack/react-table';
 
 const meta: Meta = {
   title: 'Features/Aggregation Examples',
@@ -164,8 +164,8 @@ export const MultiAggregationPerColumn: Story<MaterialReactTableProps> = () => (
         accessorKey: 'age',
         //manually set multiple aggregation functions
         aggregationFn: (columnId, leafRows: any, childRows: any) => [
-          aggregationFns.min(columnId, leafRows, childRows),
-          aggregationFns.max(columnId, leafRows, childRows),
+          MRT_AggregationFns.min(columnId, leafRows, childRows),
+          MRT_AggregationFns.max(columnId, leafRows, childRows),
         ],
         AggregatedCell: ({ cell, table }) => (
           <>

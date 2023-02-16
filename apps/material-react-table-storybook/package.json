@@ -36,7 +36,6 @@
     "@faker-js/faker": "^7.6.0",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.8",
-    "@tanstack/react-table": "8.7.9",
     "material-react-table": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

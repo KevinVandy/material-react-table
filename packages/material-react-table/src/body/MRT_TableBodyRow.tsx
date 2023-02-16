@@ -3,20 +3,25 @@ import TableRow from '@mui/material/TableRow';
 import { darken, lighten } from '@mui/material/styles';
 import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
-import type { VirtualItem, Virtualizer } from '@tanstack/react-virtual';
-import type { MRT_Cell, MRT_Row, MRT_TableInstance } from '..';
+import type {
+  MRT_Cell,
+  MRT_Row,
+  MRT_TableInstance,
+  MRT_VirtualItem,
+  MRT_Virtualizer,
+} from '..';
 
 interface Props {
-  columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
+  columnVirtualizer?: MRT_Virtualizer<HTMLDivElement, HTMLTableCellElement>;
   measureElement?: (element: HTMLTableRowElement) => void;
   numRows: number;
   row: MRT_Row;
   rowIndex: number;
   table: MRT_TableInstance;
-  virtualColumns?: VirtualItem[];
+  virtualColumns?: MRT_VirtualItem[];
   virtualPaddingLeft?: number;
   virtualPaddingRight?: number;
-  virtualRow?: VirtualItem;
+  virtualRow?: MRT_VirtualItem;
 }
 
 export const MRT_TableBodyRow = ({
@@ -103,7 +108,9 @@ export const MRT_TableBodyRow = ({
         ) : null}
         {(virtualColumns ?? row.getVisibleCells()).map((cellOrVirtualCell) => {
           const cell = columnVirtualizer
-            ? row.getVisibleCells()[(cellOrVirtualCell as VirtualItem).index]
+            ? row.getVisibleCells()[
+                (cellOrVirtualCell as MRT_VirtualItem).index
+              ]
             : (cellOrVirtualCell as MRT_Cell);
           const props = {
             cell,
@@ -115,7 +122,7 @@ export const MRT_TableBodyRow = ({
             rowRef,
             table,
             virtualCell: columnVirtualizer
-              ? (cellOrVirtualCell as VirtualItem)
+              ? (cellOrVirtualCell as MRT_VirtualItem)
               : undefined,
           };
           return memoMode === 'cells' &&

@@ -27,11 +27,9 @@ View [Documentation](https://www.material-react-table.com/)
 
 ### __Built with [Material UI <sup>V5</sup>](https://mui.com) and [TanStack Table <sup>V8</sup>](https://tanstack.com/table/v8)__
 
-<br />
-<img src="https://material-react-table.com/mrt_banner.png" alt="MRT" height="30"/>
-<br />
+<img src="https://material-react-table.com/banner.png" alt="MRT" height="50"/>
 
-MRT is built with Material-UI components on top of [TanStack Table's](https://tanstack.com/table/v8) comprehensive and powerful react hooks api.
+> Want to use Mantine instead of Material UI? Check out [Mantine React Table](https://www.mantine-react-table.com)
 
 ## Learn More
 
@@ -142,7 +140,7 @@ export default function App() {
         accessorKey: 'name', //simple recommended way to define a column
         header: 'Name',
         muiTableHeadCellProps: { sx: { color: 'green' } }, //optional custom props
-        Cell: ({ cell}) => <span>{cell.getValue()}</span>, //optional custom cell render
+        Cell: ({ cell }) => <span>{cell.getValue()}</span>, //optional custom cell render
       },
       {
         accessorFn: (row) => row.age, //alternate way

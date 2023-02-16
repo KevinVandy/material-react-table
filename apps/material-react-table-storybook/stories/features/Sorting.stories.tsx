@@ -3,6 +3,7 @@ import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, {
   MaterialReactTableProps,
   MRT_ColumnDef,
+  MRT_SortingState,
 } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 
@@ -117,3 +118,15 @@ export const SortRanking: Story<MaterialReactTableProps> = () => (
     initialState={{ sorting: [{ id: 'firstName', desc: false }] }}
   />
 );
+
+export const SortingStateManaged: Story<MaterialReactTableProps> = () => {
+  const [sorting, setSorting] = React.useState<MRT_SortingState>([]);
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      state={{ sorting }}
+      onSortingChange={setSorting}
+    />
+  );
+};

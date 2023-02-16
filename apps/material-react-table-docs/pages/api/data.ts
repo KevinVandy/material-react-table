@@ -1,5 +1,8 @@
+import type {
+  MRT_ColumnFiltersState,
+  MRT_SortingState,
+} from 'material-react-table';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { ColumnFiltersState, SortingState } from '@tanstack/react-table';
 
 //This is just a simple mock of a backend API where you would do server-side pagination, filtering, and sorting
 //You would most likely want way more validation and error handling than this in a real world application
@@ -10,7 +13,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     string
   >;
 
-  const parsedColumnFilters = JSON.parse(filters) as ColumnFiltersState;
+  const parsedColumnFilters = JSON.parse(filters) as MRT_ColumnFiltersState;
   if (!!parsedColumnFilters?.length) {
     parsedColumnFilters.map((filter) => {
       const { id: columnId, value: filterValue } = filter;
@@ -34,7 +37,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     );
   }
 
-  const parsedSorting = JSON.parse(sorting) as SortingState;
+  const parsedSorting = JSON.parse(sorting) as MRT_SortingState;
   if (!!parsedSorting?.length) {
     const sort = parsedSorting[0];
     const { id, desc } = sort;

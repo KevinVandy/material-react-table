@@ -1,6 +1,6 @@
 import React, { useReducer, useRef, useState } from 'react';
 import MaterialReactTable, {
-  DensityState,
+  MRT_DensityState,
   MRT_ColumnDef,
   MRT_FullScreenToggleButton,
   MRT_GlobalFilterTextField,
@@ -10,12 +10,10 @@ import MaterialReactTable, {
   MRT_ToggleDensePaddingButton,
   MRT_ToggleFiltersButton,
   MRT_ToolbarAlertBanner,
+  MRT_VisibilityState,
+  MRT_PaginationState,
+  MRT_RowSelectionState,
 } from 'material-react-table';
-import type {
-  PaginationState,
-  RowSelectionState,
-  VisibilityState,
-} from '@tanstack/react-table';
 import {
   alpha,
   Box,
@@ -57,13 +55,15 @@ const Example = () => {
   const rerender = useReducer(() => ({}), {})[1];
 
   //we need to manage the state that should trigger the MRT_ components in our custom toolbar to re-render
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-  const [density, setDensity] = useState<DensityState>('comfortable');
-  const [pagination, setPagination] = useState<PaginationState>({
+  const [columnVisibility, setColumnVisibility] = useState<MRT_VisibilityState>(
+    {},
+  );
+  const [density, setDensity] = useState<MRT_DensityState>('comfortable');
+  const [pagination, setPagination] = useState<MRT_PaginationState>({
     pageIndex: 0,
     pageSize: 5,
   });
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+  const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
   const [showColumnFilters, setShowColumnFilters] = useState(false);
 
   return (

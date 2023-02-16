@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, {
   MaterialReactTableProps,
   MRT_ColumnDef,
+  MRT_ColumnOrderState,
 } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 
@@ -116,3 +117,23 @@ export const ColumnOrderingNoDragHandles: Story<
     enableColumnOrdering
   />
 );
+
+export const ColumnOrderingStateManaged: Story<
+  MaterialReactTableProps
+> = () => {
+  const [columnOrder, setColumnOrder] = useState<MRT_ColumnOrderState>([
+    'mrt-row-select',
+    ...columns.map((c) => c.accessorKey as string),
+  ]);
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      defaultDisplayColumn={{ enableColumnOrdering: true, enableHiding: true }}
+      enableColumnOrdering
+      enableRowSelection
+      state={{ columnOrder }}
+      onColumnOrderChange={setColumnOrder}
+    />
+  );
+};

@@ -12,25 +12,37 @@ import Head from 'next/head';
 
 ### Version 1
 
+#### v1.8.0 (2023-02-16)
+
+- Allow `enableEditing` prop and column options to be enabled conditionally per row `(row) => boolean`
+- Add `editVariant` and `editSelectOptions` column options to make it easier to create edit dropdowns
+- Add `enableFilterMatchHighlighting` as a column option to enable/disable filter match highlighting on a per column basis
+- Fixed issue with column resizing vars when `"("` or `")"` are in accessor keys
+- Fixed issue with column filter modes onChange resetting column filters too often
+- Fixed issue with manually managed grouping state not auto-showing the built-in mrt-expand-row column
+- Re-export all State types from TanStack Table so that they can be imported from `material-react-table` instead of `@tanstack/react-table`
+- Re-export all Virtualizer types from TanStack Virtual so that they can be imported from `material-react-table` instead of `@tanstack/react-virtual`
+- Export all MRT sortingFns, filterFns, and aggregationFns from 'material-react-table' so that they can be imported from `material-react-table` instead of `@tanstack/react-table`
+
 #### v1.7.4 (2023-02-12)
 
 - Upgrade to TanStack Virtual v3 beta 47
-- Fix issue nested grouped columns and column re-ordering sizes
+- Fixed issue with nested grouped columns and column re-ordering sizes
 - Added new `PlaceholderCell` cell render override as a column option
 - Touched up the cell resize handle styling
 - Allow expand button props to override children for custom icons
 
 #### v1.7.3 (2023-02-10)
 
-- Fix issue with column resizing css vars when `"+"` are in accessor keys
+- Fixed issue with column resizing css vars when `"+"` are in accessor keys
 
 #### v1.7.2 (2023-02-09)
 
-- Fix issue with column resizing css vars when spaces are in accessor keys
+- Fixed issue with column resizing css vars when spaces are in accessor keys
 
 #### v1.7.1 (2023-02-08)
 
-- Fix issue with column resizing css vars when using nested accessor keys with dot notation
+- Fixed issue with column resizing css vars when using nested accessor keys with dot notation
 
 #### v1.7.0 (2023-02-08) "The Column Resizing Update"
 
@@ -49,7 +61,7 @@ import Head from 'next/head';
 
 #### v1.6.4 (2023-02-01)
 
-- Fix row dragging borders not showing in semantic layout mode
+- Fixed row dragging borders not showing in semantic layout mode
 
 #### v1.6.3 (2023-02-01)
 
@@ -62,7 +74,7 @@ import Head from 'next/head';
 
 #### v1.6.1 (2023-01-30)
 
-- Fix alert banner z-index issue
+- Fixed alert banner z-index issue
 
 #### v1.6.0 (2023-01-29) "The Filter Match Highlighting Update"
 
@@ -81,7 +93,7 @@ import Head from 'next/head';
 
 #### v1.5.10 (2023-01-23)
 
-- Fix small resize handle drift issue when resizing columns
+- Fixed small resize handle drift issue when resizing columns
 - Adjust TableFooterRow background color to match TableHeadRow background color by default
 
 #### v1.5.9 (2023-01-15)
@@ -94,8 +106,8 @@ import Head from 'next/head';
 
 #### v1.5.7 (2023-01-10)
 
-- Fix issue with memoized rows not sorting correctly with row virtualization enabled
-- Fix issue with exiting full screen causing virtualized rows to disappear
+- Fixed issue with memoized rows not sorting correctly with row virtualization enabled
+- Fixed issue with exiting full screen causing virtualized rows to disappear
 
 #### v1.5.6 (2023-01-10)
 
@@ -103,16 +115,16 @@ import Head from 'next/head';
 
 #### v1.5.5 (2023-01-10)
 
-- Fix global filtering with manual pagination when on page 2 or greater
+- Fixed global filtering with manual pagination when on page 2 or greater
 - Upgrade to latest TanStack Table v8.7.6 for various bug fixes
 
 #### v1.5.4 (2022-12-30)
 
-- Fix filter text field value not updating from external state change and fix filter clear icon button being disabled when value is not a string
+- Fixed filter text field value not updating from external state change and fix filter clear icon button being disabled when value is not a string
 
 #### v1.5.3 (2022-12-29)
 
-- Fix empty and not empty filter chip clearing defaulting back to only available filter modes
+- Fixed empty and not empty filter chip clearing defaulting back to only available filter modes
 
 #### v1.5.2 (2022-12-24)
 
@@ -132,12 +144,12 @@ import Head from 'next/head';
 
 #### v1.4.3 (2022-12-15)
 
-- Fix MUI debounce import when `@mui/material v5.11.0` is installed
-- Fix select placeholder when muiTableBodyCellEditTextFieldProps.placeholder is set
+- Fixed MUI debounce import when `@mui/material v5.11.0` is installed
+- Fixed select placeholder when muiTableBodyCellEditTextFieldProps.placeholder is set
 
 #### v1.4.2 (2022-12-11)
 
-- Fix custom `muiTableBodyProps.children` not being rendered
+- Fixed custom `muiTableBodyProps.children` not being rendered
 - Give TableBody a default minHeight of 100px when no rows are present
 
 #### v1.4.1 (2022-12-11)
@@ -189,7 +201,7 @@ import Head from 'next/head';
 
 #### v1.3.8 (2022-11-13)
 
-- Fix filter textfield calling clear method on mount which sometimes caused additional data fetches
+- Fixed filter textfield calling clear method on mount which sometimes caused additional data fetches
 
 #### v1.3.7 (2022-11-12)
 
@@ -197,7 +209,7 @@ import Head from 'next/head';
 
 #### v1.3.6 (2022-11-10)
 
-- Fix getRowId prop type
+- Fixed getRowId prop type
 
 #### v1.3.5 (2022-11-10)
 
@@ -238,11 +250,11 @@ import Head from 'next/head';
 
 #### v1.2.8 (2022-10-11)
 
-- Fix some minor spacing issues in Table Head Cell icon buttons
+- Fixed some minor spacing issues in Table Head Cell icon buttons
 
 #### v1.2.7 (2022-10-05)
 
-- Fix select and expand column headers sometimes not showing correctly
+- Fixed select and expand column headers sometimes not showing correctly
 
 #### v1.2.6 (2022-10-03)
 
@@ -264,7 +276,7 @@ import Head from 'next/head';
 #### v1.2.2 (2022-09-29)
 
 - Disable more display columns and detail panel stuff while `isLoading` is true
-- Fix overflow issues with expand all button and select all checkbox
+- Fixed overflow issues with expand all button and select all checkbox
 
 #### v1.2.1 (2022-09-29)
 
@@ -285,7 +297,7 @@ import Head from 'next/head';
 
 - New memoMode prop to enable memoizing cells, rows, or the entire table body
 - Radio Buttons now show instead of checkboxes when enableMultiRowSelection={false}
-- Fix dragging column bottom-border sometimes showing on wrong row
+- Fixed dragging column bottom-border sometimes showing on wrong row
 - Various Render Performance Improvements
 
 #### v1.0.11 (2022-09-17)
@@ -344,7 +356,7 @@ import Head from 'next/head';
 - v0.38.3 - New `enableStickyFooter` prop useful for aggregation features
 - v0.38.0 - New `GroupedColumn` cell render column def option, new `muiToolbarAlertBannerChipProps`, renamed `muiTableToolbarAlertBannerProps` to `muiToolbarAlertBannerProps`, `muiTableTopToolbarProps` to `muiTopToolbarProps`, `muiTableBottomToolbarProps` to `muiBottomToolbarProps`
 - v0.37.2 - Aggregation cell renders enabled, `AggregatedCell` needed to render aggregated cell.
-- v0.37.0 - Major Editing Feature Changes: `"modal"` is now the default `editingMode`. New required `exitEditingMode` param in `onEditingRowSave` to allow dev to exit editing mode only after validation passes. Fix auto-filled values not saving in editing row submit. `tableId` prop removed as it is now unnecessary and was being confused with an html id attribute. Major internal ref refactors to better follow React best practices and improve performance.
+- v0.37.0 - Major Editing Feature Changes: `"modal"` is now the default `editingMode`. New required `exitEditingMode` param in `onEditingRowSave` to allow dev to exit editing mode only after validation passes. Fixed auto-filled values not saving in editing row submit. `tableId` prop removed as it is now unnecessary and was being confused with an html id attribute. Major internal ref refactors to better follow React best practices and improve performance.
 - v0.36.0 - `onCellEditBlur` and `onCellEditChange` props removed because the already exist on `muiTableBodyCellEditTextFieldProps`. Examples given [here](/docs/guides/editing)
 - v0.35.2 - Change `onEditRowSubmit` name to `onEditingRowSave`
 - v0.35.1 - "current" prefix in some state options removed from name (i.e. `currentEditingRow` is now just `editingRow`), new editing value(s) arguments, better types for editing features

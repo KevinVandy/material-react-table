@@ -44,16 +44,18 @@ export const MRT_RowActionMenu = ({
         dense: density === 'compact',
       }}
     >
-      {enableEditing && (
-        <MenuItem onClick={handleEdit} sx={commonMenuItemStyles}>
-          <Box sx={commonListItemStyles}>
-            <ListItemIcon>
-              <EditIcon />
-            </ListItemIcon>
-            {localization.edit}
-          </Box>
-        </MenuItem>
-      )}
+      {enableEditing instanceof Function
+        ? enableEditing(row)
+        : enableEditing && (
+            <MenuItem onClick={handleEdit} sx={commonMenuItemStyles}>
+              <Box sx={commonListItemStyles}>
+                <ListItemIcon>
+                  <EditIcon />
+                </ListItemIcon>
+                {localization.edit}
+              </Box>
+            </MenuItem>
+          )}
       {renderRowActionMenuItems?.({
         row,
         table,

@@ -26,8 +26,7 @@ import {
   showExpandColumn,
   getColumnId,
 } from '../column.utils';
-import type { GroupingState, TableState } from '@tanstack/react-table';
-import type {
+import {
   MRT_Cell,
   MRT_Column,
   MRT_ColumnDef,
@@ -37,11 +36,14 @@ import type {
   MRT_TableInstance,
   MRT_TableState,
   MaterialReactTableProps,
+  MRT_DensityState,
+  MRT_ColumnOrderState,
+  MRT_GroupingState,
 } from '..';
 
-export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
+export const MRT_TableRoot: any = <TData extends Record<string, any> = {}>(
   props: MaterialReactTableProps<TData> & { localization: MRT_Localization },
-) => {
+): JSX.Element => {
   const bottomToolbarRef = useRef<HTMLDivElement>(null);
   const editInputRefs = useRef<Record<string, HTMLInputElement>>({});
   const filterInputRefs = useRef<Record<string, HTMLInputElement>>({});
@@ -76,10 +78,10 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       ),
     ),
   );
-  const [columnOrder, setColumnOrder] = useState(
+  const [columnOrder, setColumnOrder] = useState<MRT_ColumnOrderState>(
     initialState.columnOrder ?? [],
   );
-  const [density, setDensity] = useState(
+  const [density, setDensity] = useState<MRT_DensityState>(
     initialState?.density ?? 'comfortable',
   );
   const [draggingColumn, setDraggingColumn] =
@@ -96,7 +98,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   const [globalFilterFn, setGlobalFilterFn] = useState<MRT_FilterOption>(
     initialState.globalFilterFn ?? 'fuzzy',
   );
-  const [grouping, setGrouping] = useState<GroupingState>(
+  const [grouping, setGrouping] = useState<MRT_GroupingState>(
     initialState.grouping ?? [],
   );
   const [hoveredColumn, setHoveredColumn] = useState<
@@ -105,19 +107,19 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
   const [hoveredRow, setHoveredRow] = useState<
     MRT_Row<TData> | { id: string } | null
   >(initialState.hoveredRow ?? null);
-  const [isFullScreen, setIsFullScreen] = useState(
+  const [isFullScreen, setIsFullScreen] = useState<boolean>(
     initialState?.isFullScreen ?? false,
   );
-  const [showAlertBanner, setShowAlertBanner] = useState(
+  const [showAlertBanner, setShowAlertBanner] = useState<boolean>(
     props.initialState?.showAlertBanner ?? false,
   );
-  const [showColumnFilters, setShowFilters] = useState(
+  const [showColumnFilters, setShowFilters] = useState<boolean>(
     initialState?.showColumnFilters ?? false,
   );
-  const [showGlobalFilter, setShowGlobalFilter] = useState(
+  const [showGlobalFilter, setShowGlobalFilter] = useState<boolean>(
     initialState?.showGlobalFilter ?? false,
   );
-  const [showToolbarDropZone, setShowToolbarDropZone] = useState(
+  const [showToolbarDropZone, setShowToolbarDropZone] = useState<boolean>(
     initialState?.showToolbarDropZone ?? false,
   );
 
@@ -125,14 +127,18 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
     () =>
       (
         [
-          columnOrder.includes('mrt-row-drag') && {
+          (props.state?.columnOrder ?? columnOrder).includes(
+            'mrt-row-drag',
+          ) && {
             header: props.localization.move,
             size: 60,
             ...props.defaultDisplayColumn,
             ...props.displayColumnDefOptions?.['mrt-row-drag'],
             id: 'mrt-row-drag',
           },
-          columnOrder.includes('mrt-row-actions') && {
+          (props.state?.columnOrder ?? columnOrder).includes(
+            'mrt-row-actions',
+          ) && {
             Cell: ({ cell, row }) => (
               <MRT_ToggleRowActionMenuButton
                 cell={cell as any}
@@ -146,8 +152,10 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
             ...props.displayColumnDefOptions?.['mrt-row-actions'],
             id: 'mrt-row-actions',
           },
-          columnOrder.includes('mrt-row-expand') &&
-            showExpandColumn(props, grouping) && {
+          (props.state?.columnOrder ?? columnOrder).includes(
+            'mrt-row-expand',
+          ) &&
+            showExpandColumn(props, props.state?.grouping ?? grouping) && {
               Cell: ({ row }) => (
                 <MRT_ExpandButton row={row as any} table={table as any} />
               ),
@@ -160,7 +168,9 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
               ...props.displayColumnDefOptions?.['mrt-row-expand'],
               id: 'mrt-row-expand',
             },
-          columnOrder.includes('mrt-row-select') && {
+          (props.state?.columnOrder ?? columnOrder).includes(
+            'mrt-row-select',
+          ) && {
             Cell: ({ row }) => (
               <MRT_SelectCheckbox row={row as any} table={table as any} />
             ),
@@ -174,7 +184,9 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
             ...props.displayColumnDefOptions?.['mrt-row-select'],
             id: 'mrt-row-select',
           },
-          columnOrder.includes('mrt-row-numbers') && {
+          (props.state?.columnOrder ?? columnOrder).includes(
+            'mrt-row-numbers',
+          ) && {
             Cell: ({ row }) => row.index + 1,
             Header: () => props.localization.rowNumber,
             header: props.localization.rowNumbers,
@@ -206,6 +218,8 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
       props.localization,
       props.positionActionsColumn,
       props.renderDetailPanel,
+      props.state?.columnOrder,
+      props.state?.grouping,
     ],
   );
 
@@ -289,7 +303,7 @@ export const MRT_TableRoot = <TData extends Record<string, any> = {}>(
         showGlobalFilter,
         showToolbarDropZone,
         ...props.state,
-      } as TableState,
+      },
     }),
     refs: {
       bottomToolbarRef,

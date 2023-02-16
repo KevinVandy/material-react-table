@@ -41,11 +41,7 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
     Cell: ({ cell, row }) => (
       <Box sx={{ display: 'flex', alignContent: 'center', gap: '1ch' }}>
         {`${cell.getValue<string>()} KB`}
-        <a
-          href={row.original.bundlePhobiaLink}
-          target="_blank"
-          rel="noopener"
-        >
+        <a href={row.original.bundlePhobiaLink} target="_blank" rel="noopener">
           <img
             alt={cell.getValue<string>()}
             loading="lazy"

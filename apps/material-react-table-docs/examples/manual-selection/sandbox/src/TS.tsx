@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { RowSelectionState } from '@tanstack/react-table';
+import MaterialReactTable, {
+  MRT_ColumnDef,
+  MRT_RowSelectionState,
+} from 'material-react-table';
 
 const data = [
   //data definitions...
@@ -57,7 +59,7 @@ const Example = () => {
     [], //end
   );
 
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+  const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
 
   return (
     <MaterialReactTable

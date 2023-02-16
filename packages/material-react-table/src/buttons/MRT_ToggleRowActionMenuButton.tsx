@@ -64,7 +64,10 @@ export const MRT_ToggleRowActionMenuButton = <
         <>{renderRowActions({ cell, row, table })}</>
       ) : row.id === editingRow?.id && editingMode === 'row' ? (
         <MRT_EditActionButtons row={row} table={table} />
-      ) : !renderRowActionMenuItems && enableEditing ? (
+      ) : !renderRowActionMenuItems &&
+        (enableEditing instanceof Function
+          ? enableEditing(row)
+          : enableEditing) ? (
         <Tooltip placement="right" arrow title={localization.edit}>
           <IconButton
             aria-label={localization.edit}

@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { RowSelectionState } from '@tanstack/react-table';
+import MaterialReactTable, {
+  MRT_ColumnDef,
+  MRT_RowSelectionState,
+} from 'material-react-table';
 
 const data = [
   {
@@ -58,7 +60,7 @@ const Example = () => {
   );
 
   //optionally, you can manage the row selection state yourself
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+  const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
 
   useEffect(() => {
     //do something when the row selection changes...

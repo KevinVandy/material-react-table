@@ -234,7 +234,9 @@ export const ColumnResizingWithHeaderGroupsGrid: Story<
   />
 );
 
-export const ColumnResizingLayoutGridNoFlexGrow: Story<MaterialReactTableProps> = () => (
+export const ColumnResizingLayoutGridNoFlexGrow: Story<
+  MaterialReactTableProps
+> = () => (
   <MaterialReactTable
     columns={columns.slice(0, 3)}
     data={data}

@@ -29,6 +29,8 @@ View [Documentation](https://www.material-react-table.com/)
 
 <img src="https://material-react-table.com/banner.png" alt="MRT" height="50"/>
 
+> Want to use Mantine instead of Material UI? Check out [Mantine React Table](https://www.mantine-react-table.com)
+
 ## Learn More
 
 - Join the [Discord](https://discord.gg/5wqyRx6fnm) server to join in on the development discussion or ask questions

@@ -98,7 +98,10 @@ export const Contributors = () => {
           target="_blank"
           rel="noopener"
         >
-          <img alt="GitHub Contributors" src="https://contrib.rocks/image?repo=kevinvandy/material-react-table" />
+          <img
+            alt="GitHub Contributors"
+            src="https://contrib.rocks/image?repo=kevinvandy/material-react-table"
+          />
         </a>
       </div>
     </Box>

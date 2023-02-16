@@ -1,19 +1,20 @@
 import React, { memo, useMemo } from 'react';
-import {
-  useVirtualizer,
-  Virtualizer,
-  VirtualItem,
-} from '@tanstack/react-virtual';
+import { useVirtualizer } from '@tanstack/react-virtual';
 import TableBody from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';
 import { Memo_MRT_TableBodyRow, MRT_TableBodyRow } from './MRT_TableBodyRow';
 import { rankGlobalFuzzy } from '../sortingFns';
-import type { MRT_Row, MRT_TableInstance } from '..';
+import type {
+  MRT_Row,
+  MRT_TableInstance,
+  MRT_VirtualItem,
+  MRT_Virtualizer,
+} from '..';
 
 interface Props {
-  columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
+  columnVirtualizer?: MRT_Virtualizer<HTMLDivElement, HTMLTableCellElement>;
   table: MRT_TableInstance;
-  virtualColumns?: VirtualItem[];
+  virtualColumns?: MRT_VirtualItem[];
   virtualPaddingLeft?: number;
   virtualPaddingRight?: number;
 }
@@ -116,7 +117,7 @@ export const MRT_TableBody = ({
   ]);
 
   const rowVirtualizer:
-    | Virtualizer<HTMLDivElement, HTMLTableRowElement>
+    | MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>
     | undefined = enableRowVirtualization
     ? useVirtualizer({
         count: rows.length,
@@ -201,7 +202,7 @@ export const MRT_TableBody = ({
                 virtualPaddingLeft,
                 virtualPaddingRight,
                 virtualRow: rowVirtualizer
-                  ? (rowOrVirtualRow as VirtualItem)
+                  ? (rowOrVirtualRow as MRT_VirtualItem)
                   : undefined,
               };
               return memoMode === 'rows' ? (

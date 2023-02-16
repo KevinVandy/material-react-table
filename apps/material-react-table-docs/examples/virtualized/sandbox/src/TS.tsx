@@ -1,7 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import type { SortingState } from '@tanstack/react-table';
-import type { Virtualizer } from '@tanstack/react-virtual';
+import MaterialReactTable, {
+  MRT_ColumnDef,
+  MRT_SortingState,
+  MRT_Virtualizer,
+} from 'material-react-table';
 import { makeData, Person } from './makeData';
 
 const Example = () => {
@@ -87,11 +89,11 @@ const Example = () => {
 
   //optionally access the underlying virtualizer instance
   const rowVirtualizerInstanceRef =
-    useRef<Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
+    useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
   const [data, setData] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<MRT_SortingState>([]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

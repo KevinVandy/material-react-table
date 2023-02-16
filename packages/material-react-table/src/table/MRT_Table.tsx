@@ -3,14 +3,13 @@ import {
   defaultRangeExtractor,
   Range,
   useVirtualizer,
-  Virtualizer,
 } from '@tanstack/react-virtual';
 import Table from '@mui/material/Table';
 import { MRT_TableHead } from '../head/MRT_TableHead';
 import { Memo_MRT_TableBody, MRT_TableBody } from '../body/MRT_TableBody';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
 import { parseCSSVarId } from '../column.utils';
-import type { MRT_TableInstance } from '..';
+import type { MRT_TableInstance, MRT_Virtualizer } from '..';
 
 interface Props {
   table: MRT_TableInstance;
@@ -95,7 +94,7 @@ export const MRT_Table = ({ table }: Props) => {
   );
 
   const columnVirtualizer:
-    | Virtualizer<HTMLDivElement, HTMLTableCellElement>
+    | MRT_Virtualizer<HTMLDivElement, HTMLTableCellElement>
     | undefined = enableColumnVirtualization
     ? useVirtualizer({
         count: table.getVisibleLeafColumns().length,

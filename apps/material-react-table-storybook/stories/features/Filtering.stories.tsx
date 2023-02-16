@@ -3,10 +3,10 @@ import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, {
   MaterialReactTableProps,
   MRT_ColumnDef,
+  MRT_ColumnFiltersState,
 } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 import { Box, Button, MenuItem, TextField } from '@mui/material';
-import { ColumnFiltersState } from '@tanstack/react-table';
 
 const meta: Meta = {
   title: 'Features/Filtering Examples',
@@ -418,7 +418,9 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
 
 export const ManualFiltering: Story<MaterialReactTableProps> = () => {
   const [rows, setRows] = useState(() => [...data]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
+    [],
+  );
 
   //this kind of logic would actually live on a server, not client-side
   useEffect(() => {

@@ -29,7 +29,6 @@ export const Footer = () => {
         marginTop: '50px',
       }}
     >
-      
       <Button
         color="secondary"
         endIcon={<GitHub />}

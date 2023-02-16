@@ -6,10 +6,13 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, {
+  MRT_ColumnDef,
+  MRT_ColumnFiltersState,
+  MRT_SortingState,
+  MRT_Virtualizer,
+} from 'material-react-table';
 import { Typography } from '@mui/material';
-import type { ColumnFiltersState, SortingState } from '@tanstack/react-table';
-import type { Virtualizer } from '@tanstack/react-virtual';
 import {
   QueryClient,
   QueryClientProvider,
@@ -59,11 +62,13 @@ const fetchSize = 25;
 const Example = () => {
   const tableContainerRef = useRef<HTMLDivElement>(null); //we can get access to the underlying TableContainer element and react to its scroll events
   const rowVirtualizerInstanceRef =
-    useRef<Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null); //we can get access to the underlying Virtualizer instance and call its scrollToIndex method
+    useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null); //we can get access to the underlying Virtualizer instance and call its scrollToIndex method
 
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
+    [],
+  );
   const [globalFilter, setGlobalFilter] = useState<string>();
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<MRT_SortingState>([]);
 
   const { data, fetchNextPage, isError, isFetching, isLoading } =
     useInfiniteQuery<UserApiResponse>({
