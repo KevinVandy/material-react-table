@@ -30,6 +30,7 @@ import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 import { LinkHeading } from './LinkHeading';
 import { usePlausible } from 'next-plausible';
 import { useThemeContext } from '../../styles/ThemeContext';
+import { EthicalAd } from './EthicalAd';
 
 const CopyButton = styled(IconButton)({
   position: 'absolute',
@@ -232,7 +233,9 @@ export const SourceCodeSnippet = ({
         </>
       )}
       <div>
-        <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+        <Box
+          sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', width: '100%' }}
+        >
           <LinkHeading
             tableId={tableId}
             textTransform="capitalize"
@@ -240,45 +243,61 @@ export const SourceCodeSnippet = ({
           >
             Source Code
           </LinkHeading>
-          <ToggleButtonGroup>
-            <ToggleButton
-              onClick={() => {
-                setIsTypeScript(true);
-                setShowApiCode(false);
-                plausible('toggle-to-typescript');
-              }}
-              selected={isTypeScript && !showApiCode}
-              sx={{ textTransform: 'none' }}
-              value="ts"
-            >
-              {isMobile ? 'TS' : 'TypeScript'}
-            </ToggleButton>
-            {javaScriptCode && (
-              <ToggleButton
-                onClick={() => {
-                  setIsTypeScript(false);
-                  setShowApiCode(false);
-                  plausible('toggle-to-javascript');
-                }}
-                selected={!isTypeScript && !showApiCode}
-                sx={{ textTransform: 'none' }}
-                value="js"
-              >
-                {isMobile ? 'JS' : 'JavaScript'}
-              </ToggleButton>
-            )}
-            {apiCode && (
-              <ToggleButton
-                onClick={() => {
-                  setShowApiCode(true);
-                }}
-                value="js"
-                selected={showApiCode}
-              >
-                API
-              </ToggleButton>
-            )}
-          </ToggleButtonGroup>
+          <Box
+            sx={{
+              display: 'flex',
+              flexGrow: 1,
+              gap: '1rem',
+              justifyContent: 'space-between',
+              flexWrap: {
+                xs: 'wrap',
+                md: 'nowrap',
+              },
+            }}
+          >
+            <span>
+              <ToggleButtonGroup>
+                <ToggleButton
+                  onClick={() => {
+                    setIsTypeScript(true);
+                    setShowApiCode(false);
+                    plausible('toggle-to-typescript');
+                  }}
+                  selected={isTypeScript && !showApiCode}
+                  sx={{ textTransform: 'none' }}
+                  value="ts"
+                >
+                  {isMobile ? 'TS' : 'TypeScript'}
+                </ToggleButton>
+                {javaScriptCode && (
+                  <ToggleButton
+                    onClick={() => {
+                      setIsTypeScript(false);
+                      setShowApiCode(false);
+                      plausible('toggle-to-javascript');
+                    }}
+                    selected={!isTypeScript && !showApiCode}
+                    sx={{ textTransform: 'none' }}
+                    value="js"
+                  >
+                    {isMobile ? 'JS' : 'JavaScript'}
+                  </ToggleButton>
+                )}
+                {apiCode && (
+                  <ToggleButton
+                    onClick={() => {
+                      setShowApiCode(true);
+                    }}
+                    value="js"
+                    selected={showApiCode}
+                  >
+                    API
+                  </ToggleButton>
+                )}
+              </ToggleButtonGroup>
+            </span>
+            {!isMobile && <EthicalAd id={`demo-${tableId}`} compact text />}
+          </Box>
         </Box>
         <Paper elevation={3}>
           <Highlight

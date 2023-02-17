@@ -1,4 +1,3 @@
-import React from 'react';
 import { useRouter } from 'next/router';
 import { usePlausible } from 'next-plausible';
 import {

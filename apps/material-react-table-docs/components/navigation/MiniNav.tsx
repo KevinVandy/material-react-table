@@ -1,25 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Box, Link, Typography, useMediaQuery, useTheme } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Link, Typography, useMediaQuery } from '@mui/material';
 import { useRouter } from 'next/router';
 import { EthicalAd } from '../mdx/EthicalAd';
 
 export const MiniNav = () => {
   const { pathname } = useRouter();
-  const theme = useTheme();
   const isXLDesktop = useMediaQuery('(min-width: 1800px)');
-  const isMounted = useRef(false);
+  
   const [headings, setHeadings] = useState<NodeListOf<HTMLElement>>();
 
   useEffect(() => {
     setHeadings(
       document.querySelectorAll(isXLDesktop ? 'h2, h3, h4, h5' : 'h3'),
     );
-    if (typeof window === 'undefined') return;
-    if (isMounted.current && isXLDesktop) {
-      (window as any).ethicalads?.load?.();
-    }
-    isMounted.current = true;
-  }, [isXLDesktop, pathname, theme.palette.mode]);
+  }, [isXLDesktop, pathname]);
 
   return (
     <Box

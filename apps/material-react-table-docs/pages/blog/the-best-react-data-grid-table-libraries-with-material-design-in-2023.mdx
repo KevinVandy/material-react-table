@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import { BlogAuthor } from '../../components/mdx/BlogAuthor';
+import { EthicalAd } from '../../components/mdx/EthicalAd';
 
 <Head>
   <title>
@@ -71,6 +72,8 @@ The [MUI X DataGrid](https://mui.com/x/react-data-grid/) package comes directly 
 
 It has just about every table feature you might need, but one caveat is that some of the features are only available in either the paid Pro or Premium versions. There is a free MIT version, of course, but be aware of the vender lock-in you might get yourself into if you choose to use this library. If you are building a commercial product, paying for a library like this might be worth it, but take a look at the other options first to see if they will work for you.
 
+<EthicalAd id="blog" />
+
 #### 2. AG Grid (MIT or Enterprise)
 
 <Image
@@ -92,6 +95,8 @@ AG Grid is also in a similar situation as MUI X DataGrid, where some of the feat
 
 Be aware, however, that AG Grid is a fairly large library that also comes with a large bundle size. It is definitely not the most lightweight option out there. It really is designed for use cases where you need all the powerful features that it has to offer.
 
+<EthicalAd id="blog" />
+
 #### 3. Material React Table (Free MIT)
 
 > Note: I am the author of Material React Table.
@@ -110,6 +115,8 @@ The final library on this list is [Material React Table](https://www.material-re
 The main advantage of this project is that it is also built on top of [TanStack Table v8](https://tanstack.com/table/v8) (formerly known as React Table) and [TanStack Virtual v3](https://tanstack.com/virtual/v3) (formerly known as React Virtual), which are powerful headless UI libraries for efficiently rendering react table components with virtualization. This also means the the APIs to customize the behavior of the table are standardized with TanStack Table's comprehensive API. Compared to other data grid/table libraries, Material React Table is very customizable and flexible.
 
 Despite being free to use, Material React Table still offers almost every data grid/table feature you might need. A lot of the features are implemented in a very lightweight way. The bundle size of Material React Table is only around 42 KB, which is much smaller than the other libraries listed here, which range from about 100-300 KB.
+
+<EthicalAd id="blog" />
 
 ### Honorable Mentions That You Probably Should Not Use Anymore
 

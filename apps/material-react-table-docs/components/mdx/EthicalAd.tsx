@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
 import { Box, useTheme } from '@mui/material';
 
 interface Props {
+  compact?: boolean;
   id: string;
   sticky?: boolean;
-  vertical?: boolean;
   text?: boolean;
+  vertical?: boolean;
 }
 
-export const EthicalAd = ({ id, sticky, text, vertical }: Props) => {
+export const EthicalAd = ({ compact, id, sticky, text, vertical }: Props) => {
   const theme = useTheme();
 
   if (process.env.NODE_ENV === 'development') return null;
@@ -17,12 +17,17 @@ export const EthicalAd = ({ id, sticky, text, vertical }: Props) => {
     <Box
       className={`${theme.palette.mode} ${
         vertical ? 'vertical' : 'horizontal'
-      } raised`}
+      } raised bordered`}
       data-ea-publisher="material-react-tablecom"
       data-ea-type={text ? 'text' : 'image'}
       id={id}
       data-ea-style={sticky ? 'stickybox' : undefined}
-      sx={{ display: 'block', textAlign: 'center', m: '1rem auto' }}
+      sx={{
+        display: 'flex !important',
+        justifyContent: 'center',
+        textAlign: 'center',
+        m: compact ? '-14px -4px' : '1rem auto',
+      }}
       suppressHydrationWarning
     />
   );

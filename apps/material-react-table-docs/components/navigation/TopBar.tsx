@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { usePlausible } from 'next-plausible';
 import {
   AppBar as MuiAppBar,
@@ -10,6 +11,7 @@ import {
   Tooltip,
   Typography,
   useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -42,10 +44,14 @@ interface Props {
 }
 
 export const TopBar = ({ navOpen, setNavOpen }: Props) => {
+  const isMounted = useRef(false);
+  const { pathname } = useRouter();
   const plausible = usePlausible();
+  const theme = useTheme();
   const isMobile = useMediaQuery('(max-width: 600px)');
   const isTablet = useMediaQuery('(max-width: 900px)');
   const isDesktop = useMediaQuery('(min-width: 1500px)');
+  const isXLDesktop = useMediaQuery('(min-width: 1800px)');
 
   const { isLightTheme, setIsLightTheme } = useThemeContext();
 
@@ -59,6 +65,25 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
       });
     }
   }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (isMounted.current && isXLDesktop) {
+      try {
+        (window as any).ethicalads?.load?.();
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    isMounted.current = true;
+  }, [
+    isXLDesktop,
+    isTablet,
+    isDesktop,
+    isMobile,
+    pathname,
+    theme.palette.mode,
+  ]);
 
   return (
     <>
