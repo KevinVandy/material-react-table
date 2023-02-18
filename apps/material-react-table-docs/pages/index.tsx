@@ -123,7 +123,7 @@ const HomePage = () => {
             alt="Mui + React Table"
             src={`/banner.png`}
             height={60}
-            width={305}
+            width={253}
           />
         </Box>
         <StatBadges />
