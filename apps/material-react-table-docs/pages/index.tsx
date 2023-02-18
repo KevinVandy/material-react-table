@@ -124,7 +124,6 @@ const HomePage = () => {
             src={`/banner.png`}
             height={72}
             width={304}
-            quality={100}
           />
         </Box>
         <StatBadges />
