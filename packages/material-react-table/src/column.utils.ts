@@ -1,8 +1,4 @@
-import type {
-  ColumnOrderState,
-  GroupingState,
-  Row,
-} from '@tanstack/react-table';
+import type { Row } from '@tanstack/react-table';
 import { MRT_AggregationFns } from './aggregationFns';
 import { MRT_FilterFns } from './filterFns';
 import { MRT_SortingFns } from './sortingFns';
@@ -13,9 +9,11 @@ import type {
   MaterialReactTableProps,
   MRT_Column,
   MRT_ColumnDef,
+  MRT_ColumnOrderState,
   MRT_DefinedColumnDef,
   MRT_DisplayColumnIds,
   MRT_FilterOption,
+  MRT_GroupingState,
   MRT_Header,
   MRT_TableInstance,
 } from '.';
@@ -120,8 +118,8 @@ export const prepareColumns = <TData extends Record<string, any> = {}>({
 export const reorderColumn = <TData extends Record<string, any> = {}>(
   draggedColumn: MRT_Column<TData>,
   targetColumn: MRT_Column<TData>,
-  columnOrder: ColumnOrderState,
-): ColumnOrderState => {
+  columnOrder: MRT_ColumnOrderState,
+): MRT_ColumnOrderState => {
   if (draggedColumn.getCanPin()) {
     draggedColumn.pin(targetColumn.getIsPinned());
   }
@@ -135,7 +133,7 @@ export const reorderColumn = <TData extends Record<string, any> = {}>(
 
 export const showExpandColumn = <TData extends Record<string, any> = {}>(
   props: MaterialReactTableProps<TData>,
-  grouping?: GroupingState,
+  grouping?: MRT_GroupingState,
 ) =>
   !!(
     props.enableExpanding ||

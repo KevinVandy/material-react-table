@@ -296,7 +296,7 @@ export const SourceCodeSnippet = ({
                 )}
               </ToggleButtonGroup>
             </span>
-            {!isMobile && <EthicalAd id={`demo-${tableId}`} compact text />}
+            {!isMobile && <EthicalAd id="demo" compact text />}
           </Box>
         </Box>
         <Paper elevation={3}>

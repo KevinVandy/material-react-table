@@ -148,7 +148,7 @@ const [pagination, setPagination] = useState({
 
 const handlePaginationChange = (updater: Updater<PaginationState>) => {//Updater is a type from @tanstack/react-table
   //TanStack Table requires this strange syntax since updater can be a function to update the state or the new state itself
-  setPagination((prevPagination) => updater instanceOf Function ? updater(prevPagination) : updater);
+  setPagination((prevPagination) => updater instanceof Function ? updater(prevPagination) : updater);
 
   //put more code for your side effects here, guaranteed to only run once, even in React Strict Mode
 }
