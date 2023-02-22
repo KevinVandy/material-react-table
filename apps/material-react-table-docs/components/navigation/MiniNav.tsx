@@ -6,7 +6,7 @@ import { EthicalAd } from '../mdx/EthicalAd';
 export const MiniNav = () => {
   const { pathname } = useRouter();
   const isXLDesktop = useMediaQuery('(min-width: 1800px)');
-  
+
   const [headings, setHeadings] = useState<NodeListOf<HTMLElement>>();
 
   useEffect(() => {

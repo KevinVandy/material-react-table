@@ -8,14 +8,12 @@ interface Props {
   header: MRT_Header;
   table: MRT_TableInstance;
   tableCellProps?: TableCellProps;
-  onClick?: React.MouseEventHandler<HTMLSpanElement> | undefined;
 }
 
 export const MRT_TableHeadCellSortLabel = ({
   header,
   table,
   tableCellProps,
-  onClick,
 }: Props) => {
   const {
     options: {
@@ -53,7 +51,7 @@ export const MRT_TableHeadCellSortLabel = ({
         IconComponent={ArrowDownwardIcon}
         onClick={(e) => {
           e.stopPropagation();
-          onClick?.(e);
+          header.column.getToggleSortingHandler()?.(e);
         }}
       />
     </Tooltip>
