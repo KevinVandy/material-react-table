@@ -227,6 +227,7 @@ export const MRT_TableHeadCell = ({ header, table }: Props) => {
                 header={header}
                 table={table}
                 tableCellProps={tableCellProps}
+                onClick={column.getToggleSortingHandler()}
               />
             )}
             {column.getCanFilter() && (
