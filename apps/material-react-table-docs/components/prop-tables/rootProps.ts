@@ -1895,4 +1895,14 @@ export const rootProps: PropRow[] = [
     source: 'MRT',
     type: 'MutableRefObject<Virtualizer | null>',
   },
+  {
+    propName: 'tableFeatures',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: 'Array<(table: MRT_TableInstance<any>) => any>',
+  },
 ];
