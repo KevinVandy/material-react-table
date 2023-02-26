@@ -332,6 +332,12 @@ export const MRT_TableRoot: any = <TData extends Record<string, any> = {}>(
       props.onShowToolbarDropZoneChange ?? setShowToolbarDropZone,
   } as MRT_TableInstance<TData>;
 
+  if (props.tableFeatures) {
+    props.tableFeatures.forEach(feature => {
+      Object.assign(table, feature(table));
+    });
+  }
+
   if (props.tableInstanceRef) {
     props.tableInstanceRef.current = table;
   }

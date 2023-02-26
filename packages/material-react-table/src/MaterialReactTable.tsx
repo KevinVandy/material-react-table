@@ -567,6 +567,11 @@ export type MRT_DisplayColumnIds =
   | 'mrt-row-numbers'
   | 'mrt-row-select';
 
+export type MRT_CreateTableFeature<
+  TData extends Record<string, any> = {},
+  TFeature = any,
+> = (table: MRT_TableInstance<TData>) => TFeature;
+
 /**
  * `columns` and `data` props are the only required props, but there are over 150 other optional props.
  *
@@ -949,6 +954,10 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
      * @deprecated Use `rowVirtualizerProps` instead
      */
     virtualizerProps?: any;
+    /**
+     * Sequence of features important any dependent feature must be defined first
+     */
+    tableFeatures?: Array<MRT_CreateTableFeature<TData>>;
   };
 
 const MaterialReactTable = <TData extends Record<string, any> = {}>({
