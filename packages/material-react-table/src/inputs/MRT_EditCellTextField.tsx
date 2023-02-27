@@ -116,33 +116,34 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
       onChange={handleChange}
       onKeyDown={handleEnterKeyDown}
     >
-      {columnDef?.editSelectOptions?.map(
-        (option: string | { text: string; value: string }) => {
-          let value: string;
-          let text: string;
-          if (typeof option !== 'object') {
-            value = option;
-            text = option;
-          } else {
-            value = option.value;
-            text = option.text;
-          }
-          return (
-            <MenuItem
-              key={value}
-              sx={{
-                display: 'flex',
-                m: 0,
-                alignItems: 'center',
-                gap: '0.5rem',
-              }}
-              value={value}
-            >
-              {text}
-            </MenuItem>
-          );
-        },
-      )}
+      {textFieldProps.children ??
+        columnDef?.editSelectOptions?.map(
+          (option: string | { text: string; value: string }) => {
+            let value: string;
+            let text: string;
+            if (typeof option !== 'object') {
+              value = option;
+              text = option;
+            } else {
+              value = option.value;
+              text = option.text;
+            }
+            return (
+              <MenuItem
+                key={value}
+                sx={{
+                  display: 'flex',
+                  m: 0,
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                }}
+                value={value}
+              >
+                {text}
+              </MenuItem>
+            );
+          },
+        )}
     </TextField>
   );
 };

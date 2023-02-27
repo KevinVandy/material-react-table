@@ -349,41 +349,42 @@ export const MRT_FilterTextField = ({
             <Box sx={{ opacity: 0.5 }}>{filterPlaceholder}</Box>
           </MenuItem>
         )}
-        {columnDef?.filterSelectOptions?.map(
-          (option: string | { text: string; value: string }) => {
-            let value: string;
-            let text: string;
-            if (typeof option !== 'object') {
-              value = option;
-              text = option;
-            } else {
-              value = option.value;
-              text = option.text;
-            }
-            return (
-              <MenuItem
-                key={value}
-                sx={{
-                  display: 'flex',
-                  m: 0,
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                }}
-                value={value}
-              >
-                {isMultiSelectFilter && (
-                  <Checkbox
-                    checked={(
-                      (column.getFilterValue() ?? []) as string[]
-                    ).includes(value)}
-                    sx={{ mr: '0.5rem' }}
-                  />
-                )}
-                {text}
-              </MenuItem>
-            );
-          },
-        )}
+        {textFieldProps.children ??
+          columnDef?.filterSelectOptions?.map(
+            (option: string | { text: string; value: string }) => {
+              let value: string;
+              let text: string;
+              if (typeof option !== 'object') {
+                value = option;
+                text = option;
+              } else {
+                value = option.value;
+                text = option.text;
+              }
+              return (
+                <MenuItem
+                  key={value}
+                  sx={{
+                    display: 'flex',
+                    m: 0,
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                  }}
+                  value={value}
+                >
+                  {isMultiSelectFilter && (
+                    <Checkbox
+                      checked={(
+                        (column.getFilterValue() ?? []) as string[]
+                      ).includes(value)}
+                      sx={{ mr: '0.5rem' }}
+                    />
+                  )}
+                  {text}
+                </MenuItem>
+              );
+            },
+          )}
       </TextField>
       <MRT_FilterOptionMenu
         anchorEl={anchorEl}
