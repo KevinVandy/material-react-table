@@ -3,13 +3,14 @@ import Collapse from '@mui/material/Collapse';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { lighten } from '@mui/material/styles';
-import type { MRT_Row, MRT_TableInstance, MRT_VirtualItem } from '..';
+import type { VirtualItem } from '@tanstack/react-virtual';
+import type { MRT_Row, MRT_TableInstance } from '..';
 
 interface Props {
   parentRowRef: React.RefObject<HTMLTableRowElement>;
   row: MRT_Row;
   table: MRT_TableInstance;
-  virtualRow?: MRT_VirtualItem;
+  virtualRow?: VirtualItem;
 }
 
 export const MRT_TableDetailPanel = ({

@@ -165,7 +165,10 @@ export const MRT_FilterOptionMenu = <TData extends Record<string, any> = {}>({
           option as string,
         )
       ) {
-        if ((currentFilterValue as Array<any>)?.length) {
+        if (
+          currentFilterValue instanceof String ||
+          (currentFilterValue as Array<any>)?.length
+        ) {
           column.setFilterValue([]);
           setFilterValue?.([]);
         }
@@ -175,8 +178,10 @@ export const MRT_FilterOptionMenu = <TData extends Record<string, any> = {}>({
           option as MRT_FilterOption,
         )
       ) {
-        column.setFilterValue(['', '']);
-        setFilterValue?.('');
+        if (!(currentFilterValue as Array<any>)?.every((v) => v === '')) {
+          column.setFilterValue(['', '']);
+          setFilterValue?.('');
+        }
       } else {
         if (
           !['', undefined].includes(currentFilterValue as string | undefined)

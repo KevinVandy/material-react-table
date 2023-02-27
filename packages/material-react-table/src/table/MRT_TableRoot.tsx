@@ -333,7 +333,7 @@ export const MRT_TableRoot: any = <TData extends Record<string, any> = {}>(
   } as MRT_TableInstance<TData>;
 
   if (props.tableFeatures) {
-    props.tableFeatures.forEach(feature => {
+    props.tableFeatures.forEach((feature) => {
       Object.assign(table, feature(table));
     });
   }

@@ -1898,11 +1898,12 @@ export const rootProps: PropRow[] = [
   {
     propName: 'tableFeatures',
     defaultValue: '',
-    description: '',
+    description:
+      'An advanced prop to customize functionality of the table instance.',
     link: '',
     linkText: '',
     required: false,
     source: '',
-    type: 'Array<(table: MRT_TableInstance<any>) => any>',
+    type: 'Array<MRT_CreateTableFeature<TData>>',
   },
 ];

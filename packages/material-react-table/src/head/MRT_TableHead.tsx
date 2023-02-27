@@ -1,11 +1,12 @@
 import React from 'react';
 import TableHead from '@mui/material/TableHead';
 import { MRT_TableHeadRow } from './MRT_TableHeadRow';
-import type { MRT_TableInstance, MRT_VirtualItem } from '..';
+import type { VirtualItem } from '@tanstack/react-virtual';
+import type { MRT_TableInstance } from '..';
 
 interface Props {
   table: MRT_TableInstance;
-  virtualColumns?: MRT_VirtualItem[];
+  virtualColumns?: VirtualItem[];
   virtualPaddingLeft?: number;
   virtualPaddingRight?: number;
 }

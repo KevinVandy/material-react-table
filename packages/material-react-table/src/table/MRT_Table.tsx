@@ -3,13 +3,14 @@ import {
   defaultRangeExtractor,
   Range,
   useVirtualizer,
+  Virtualizer,
 } from '@tanstack/react-virtual';
 import Table from '@mui/material/Table';
 import { MRT_TableHead } from '../head/MRT_TableHead';
 import { Memo_MRT_TableBody, MRT_TableBody } from '../body/MRT_TableBody';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
 import { parseCSSVarId } from '../column.utils';
-import type { MRT_TableInstance, MRT_Virtualizer } from '..';
+import type { MRT_TableInstance } from '..';
 
 interface Props {
   table: MRT_TableInstance;
@@ -63,7 +64,7 @@ export const MRT_Table = ({ table }: Props) => {
       colSizes[`--col-${parseCSSVarId(header.column.id)}-size`] = colSize;
     }
     return colSizes;
-  }, [columns, columnSizing, columnSizingInfo]);
+  }, [columns, columnSizing, columnSizingInfo, columnVisibility]);
 
   //get first 16 column widths and average them
   const averageColumnWidth = useMemo(() => {
@@ -94,7 +95,7 @@ export const MRT_Table = ({ table }: Props) => {
   );
 
   const columnVirtualizer:
-    | MRT_Virtualizer<HTMLDivElement, HTMLTableCellElement>
+    | Virtualizer<HTMLDivElement, HTMLTableCellElement>
     | undefined = enableColumnVirtualization
     ? useVirtualizer({
         count: table.getVisibleLeafColumns().length,

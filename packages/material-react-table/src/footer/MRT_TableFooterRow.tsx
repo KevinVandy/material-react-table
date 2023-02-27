@@ -2,17 +2,13 @@ import React from 'react';
 import TableRow from '@mui/material/TableRow';
 import { lighten } from '@mui/material/styles';
 import { MRT_TableFooterCell } from './MRT_TableFooterCell';
-import type {
-  MRT_Header,
-  MRT_HeaderGroup,
-  MRT_TableInstance,
-  MRT_VirtualItem,
-} from '..';
+import { VirtualItem } from '@tanstack/react-virtual';
+import type { MRT_Header, MRT_HeaderGroup, MRT_TableInstance } from '..';
 
 interface Props {
   footerGroup: MRT_HeaderGroup;
   table: MRT_TableInstance;
-  virtualColumns?: MRT_VirtualItem[];
+  virtualColumns?: VirtualItem[];
   virtualPaddingLeft?: number;
   virtualPaddingRight?: number;
 }

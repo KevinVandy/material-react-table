@@ -19,7 +19,8 @@ import {
   getIsFirstColumn,
   getIsLastColumn,
 } from '../column.utils';
-import type { MRT_Cell, MRT_TableInstance, MRT_VirtualItem } from '..';
+import type { VirtualItem } from '@tanstack/react-virtual';
+import type { MRT_Cell, MRT_TableInstance } from '..';
 
 interface Props {
   cell: MRT_Cell;
@@ -29,7 +30,7 @@ interface Props {
   rowIndex: number;
   rowRef: RefObject<HTMLTableRowElement>;
   table: MRT_TableInstance;
-  virtualCell?: MRT_VirtualItem;
+  virtualCell?: VirtualItem;
 }
 
 export const MRT_TableBodyCell = ({
