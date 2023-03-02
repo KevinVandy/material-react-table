@@ -59,9 +59,9 @@ export const MRT_Table = ({ table }: Props) => {
     const colSizes: { [key: string]: number } = {};
     for (let i = 0; i < headers.length; i++) {
       const header = headers[i];
-      const colSize = header.getSize();
-      colSizes[`--header-${parseCSSVarId(header.id)}-size`] = colSize;
-      colSizes[`--col-${parseCSSVarId(header.column.id)}-size`] = colSize;
+      colSizes[`--header-${parseCSSVarId(header.id)}-size`] = header.getSize();
+      colSizes[`--col-${parseCSSVarId(header.column.id)}-size`] =
+        header.column.getSize();
     }
     return colSizes;
   }, [columns, columnSizing, columnSizingInfo, columnVisibility]);
