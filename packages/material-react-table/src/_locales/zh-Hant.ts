@@ -66,7 +66,7 @@ export const MRT_Localization_ZH_HANT: MRT_Localization = {
   rowActions: '橫列動作',
   rowNumber: '#',
   rowNumbers: '橫列編號',
-  rowsPerPage: '每頁數量',
+  rowsPerPage: '每頁橫列數量',
   save: '儲存',
   search: '搜尋',
   selectedCountOfRowCountRowsSelected: '已選擇橫列：{selectedCount}/{rowCount}',
