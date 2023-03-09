@@ -264,7 +264,9 @@ export const getCommonCellStyles = ({
   display: table.options.layoutMode === 'grid' ? 'flex' : 'table-cell',
   flex:
     table.options.layoutMode === 'grid'
-      ? `var(--col-${parseCSSVarId(header?.id ?? column.id)}-size) 0 auto`
+      ? `var(--${header ? 'header' : 'col'}-${parseCSSVarId(
+          header?.id ?? column.id,
+        )}-size) 0 auto`
       : undefined,
   left:
     column.getIsPinned() === 'left'
@@ -337,10 +339,4 @@ export const MRT_DefaultDisplayColumn = {
   enableSorting: false,
 } as const;
 
-export const parseCSSVarId = (id: string) =>
-  id
-    .replaceAll('.', '_')
-    .replaceAll(' ', '_')
-    .replaceAll('+', '_')
-    .replaceAll('(', '_')
-    .replaceAll(')', '_');
+export const parseCSSVarId = (id: string) => id.replace(/[^a-zA-Z0-9]/g, '_');

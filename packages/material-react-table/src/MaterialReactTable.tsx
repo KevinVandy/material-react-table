@@ -49,7 +49,8 @@ import type {
   Table,
   TableOptions,
   TableState,
-  VisibilityState,
+  Updater,
+  VisibilityState
 } from '@tanstack/react-table';
 import type {
   VirtualizerOptions,
@@ -87,6 +88,7 @@ export type {
   PaginationState as MRT_PaginationState,
   RowSelectionState as MRT_RowSelectionState,
   SortingState as MRT_SortingState,
+  Updater as MRT_Updater,
   VirtualItem as MRT_VirtualItem,
   Virtualizer as MRT_Virtualizer,
   VirtualizerOptions as MRT_VirtualizerOptions,
@@ -841,7 +843,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
             headerGroup: MRT_HeaderGroup<TData>;
           }) => TableRowProps);
       muiTablePaginationProps?:
-        | Partial<TablePaginationProps>
+        | Partial<Omit<TablePaginationProps, 'rowsPerPage'>>
         | ((props: {
             table: MRT_TableInstance<TData>;
           }) => Partial<TablePaginationProps>);

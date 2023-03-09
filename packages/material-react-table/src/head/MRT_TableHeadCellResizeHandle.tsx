@@ -19,6 +19,7 @@ export const MRT_TableHeadCellResizeHandle = ({ header, table }: Props) => {
 
   return (
     <Box
+      className="Mui-TableHeadCell-ResizeHandle-Wrapper"
       onDoubleClick={() => {
         setColumnSizingInfo((old) => ({
           ...old,
@@ -47,6 +48,7 @@ export const MRT_TableHeadCellResizeHandle = ({ header, table }: Props) => {
       }}
     >
       <Divider
+        className="Mui-TableHeadCell-ResizeHandle-Divider"
         flexItem
         orientation="vertical"
         sx={{

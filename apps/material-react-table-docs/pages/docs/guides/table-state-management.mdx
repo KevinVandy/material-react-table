@@ -146,7 +146,7 @@ const [pagination, setPagination] = useState({
   pageSize: 15,
 });
 
-const handlePaginationChange = (updater: Updater<PaginationState>) => {//Updater is a type from @tanstack/react-table
+const handlePaginationChange = (updater: MRT_Updater<PaginationState>) => {//MRT_Updater is a type from @tanstack/react-table
   //TanStack Table requires this strange syntax since updater can be a function to update the state or the new state itself
   setPagination((prevPagination) => updater instanceof Function ? updater(prevPagination) : updater);
 
