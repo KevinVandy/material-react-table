@@ -54,6 +54,17 @@ export const ClickToCopyEnabled: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} enableClickToCopy />
 );
 
+export const ClickToCopyEnabledWithColumnResizing: Story<
+  MaterialReactTableProps
+> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableClickToCopy
+    enableColumnResizing
+  />
+);
+
 export const ClickToCopyEnabledPerColumn: Story<
   MaterialReactTableProps
 > = () => (

@@ -156,9 +156,7 @@ export const MRT_FilterOptionMenu = <TData extends Record<string, any> = {}>({
         [header.id]: option,
       }));
       if (['empty', 'notEmpty'].includes(option as string)) {
-        if (currentFilterValue !== ' ') {
-          column.setFilterValue(' ');
-        }
+        column.setFilterValue(' ');
       } else if (
         columnDef?.filterVariant === 'multi-select' ||
         ['arrIncludesSome', 'arrIncludesAll', 'arrIncludes'].includes(

@@ -34,6 +34,7 @@ const Example = () => {
       data={data}
       enableColumnFilterModes
       enableColumnOrdering
+      enableColumnResizing
       enableEditing
       enablePinning
       enableRowActions
@@ -55,7 +56,9 @@ const ExampleWithThemeProvider = () => {
   return (
     //Setting Material UI locale as best practice to result in better accessibility
     <ThemeProvider theme={createTheme({ ...theme, direction: 'rtl' }, faIR)}>
-      <Example />
+      <div style={{ direction: 'rtl' }}>
+        <Example />
+      </div>
     </ThemeProvider>
   );
 };

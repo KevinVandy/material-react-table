@@ -98,8 +98,9 @@ export const MRT_ShowHideColumnsMenuItems = <
           justifyContent: 'flex-start',
           my: 0,
           opacity: isDragging ? 0.5 : 1,
+          outlineOffset: '-2px',
           outline: isDragging
-            ? `1px dashed ${theme.palette.divider}`
+            ? `2px dashed ${theme.palette.divider}`
             : hoveredColumn?.id === column.id
             ? `2px dashed ${theme.palette.primary.main}`
             : 'none',

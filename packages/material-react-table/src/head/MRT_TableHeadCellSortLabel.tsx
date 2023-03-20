@@ -1,4 +1,5 @@
 import React from 'react';
+import Badge from '@mui/material/Badge';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Tooltip from '@mui/material/Tooltip';
 import { MRT_Header, MRT_TableInstance } from '..';
@@ -16,6 +17,7 @@ export const MRT_TableHeadCellSortLabel = ({
   tableCellProps,
 }: Props) => {
   const {
+    getState,
     options: {
       icons: { ArrowDownwardIcon },
       localization,
@@ -23,6 +25,7 @@ export const MRT_TableHeadCellSortLabel = ({
   } = table;
   const { column } = header;
   const { columnDef } = column;
+  const { sorting } = getState();
 
   const sortTooltip = column.getIsSorted()
     ? column.getIsSorted() === 'desc'
@@ -32,28 +35,33 @@ export const MRT_TableHeadCellSortLabel = ({
 
   return (
     <Tooltip arrow placement="top" title={sortTooltip}>
-      <TableSortLabel
-        aria-label={sortTooltip}
-        active={!!column.getIsSorted()}
-        direction={
-          column.getIsSorted()
-            ? (column.getIsSorted() as 'asc' | 'desc')
-            : undefined
-        }
-        sx={{
-          flex: '0 0',
-          width: '2.3ch',
-          transform:
-            tableCellProps?.align !== 'right'
-              ? 'translateX(-0.5ch)'
-              : undefined,
-        }}
-        IconComponent={ArrowDownwardIcon}
-        onClick={(e) => {
-          e.stopPropagation();
-          header.column.getToggleSortingHandler()?.(e);
-        }}
-      />
+      <Badge
+        badgeContent={sorting.length > 1 ? column.getSortIndex() + 1 : 0}
+        overlap="circular"
+      >
+        <TableSortLabel
+          aria-label={sortTooltip}
+          active={!!column.getIsSorted()}
+          direction={
+            column.getIsSorted()
+              ? (column.getIsSorted() as 'asc' | 'desc')
+              : undefined
+          }
+          sx={{
+            flex: '0 0',
+            width: '2.4ch',
+            transform:
+              tableCellProps?.align !== 'right'
+                ? 'translateX(-0.5ch)'
+                : undefined,
+          }}
+          IconComponent={ArrowDownwardIcon}
+          onClick={(e) => {
+            e.stopPropagation();
+            header.column.getToggleSortingHandler()?.(e);
+          }}
+        />
+      </Badge>
     </Tooltip>
   );
 };

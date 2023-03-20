@@ -52,6 +52,20 @@ export const DefaultLeft: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
+export const RightCells: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    muiTableHeadCellProps={{
+      align: 'right',
+    }}
+    muiTableBodyCellProps={{
+      align: 'right',
+    }}
+    enableColumnResizing
+  />
+);
+
 export const CenterCells: Story<MaterialReactTableProps> = () => (
   <MaterialReactTable
     columns={columns}

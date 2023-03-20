@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import Skeleton from '@mui/material/Skeleton';
 import TableCell from '@mui/material/TableCell';
-import { darken, lighten, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 import { MRT_TableBodyRowGrabHandle } from './MRT_TableBodyRowGrabHandle';
@@ -24,7 +24,6 @@ import type { MRT_Cell, MRT_TableInstance } from '..';
 
 interface Props {
   cell: MRT_Cell;
-  enableHover?: boolean;
   measureElement?: (element: HTMLTableCellElement) => void;
   numRows: number;
   rowIndex: number;
@@ -35,7 +34,6 @@ interface Props {
 
 export const MRT_TableBodyCell = ({
   cell,
-  enableHover,
   measureElement,
   numRows,
   rowIndex,
@@ -237,14 +235,11 @@ export const MRT_TableBodyCell = ({
         zIndex:
           draggingColumn?.id === column.id ? 2 : column.getIsPinned() ? 1 : 0,
         '&:hover': {
-          backgroundColor:
-            enableHover &&
-            isEditable &&
-            ['table', 'cell'].includes(editingMode ?? '')
-              ? theme.palette.mode === 'dark'
-                ? `${lighten(theme.palette.background.default, 0.2)} !important`
-                : `${darken(theme.palette.background.default, 0.1)} !important`
-              : undefined,
+          outline: ['table', 'cell'].includes(editingMode ?? '')
+            ? `1px solid ${theme.palette.text.secondary}`
+            : undefined,
+          outlineOffset: '-1px',
+          textOverflow: 'clip',
         },
         ...getCommonCellStyles({
           column,
@@ -296,10 +291,10 @@ export const MRT_TableBodyCell = ({
         ) : (
           <MRT_TableBodyCellValue cell={cell} table={table} />
         )}
+        {cell.getIsGrouped() && !columnDef.GroupedCell && (
+          <> ({row.subRows?.length})</>
+        )}
       </>
-      {cell.getIsGrouped() && !columnDef.GroupedCell && (
-        <> ({row.subRows?.length})</>
-      )}
     </TableCell>
   );
 };

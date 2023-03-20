@@ -51,6 +51,18 @@ const RO_Table = dynamic(() => import('../examples/localization-i18n-ro'), {
 const RU_Table = dynamic(() => import('../examples/localization-i18n-ru'), {
   suspense: true,
 });
+const SR_Cyrl_RS_Table = dynamic(
+  () => import('../examples/localization-i18n-sr-Cyrl-RS'),
+  {
+    suspense: true,
+  },
+);
+const SR_Latn_RS_Table = dynamic(
+  () => import('../examples/localization-i18n-sr-Latn-RS'),
+  {
+    suspense: true,
+  },
+);
 const SV_Table = dynamic(() => import('../examples/localization-i18n-sv'), {
   suspense: true,
 });
@@ -92,12 +104,14 @@ const supportedLocales = [
   'pt-BR',
   'ro',
   'ru',
+  'sr-Cyrl-RS',
+  'sr-Latn-RS',
   'sv',
   'tr',
   'uk',
   'vi',
-  'zh-hans',
-  'zh-hant',
+  'zh-Hans',
+  'zh-Hant',
 ];
 
 const LocaleExamples = () => {
@@ -143,12 +157,14 @@ const LocaleExamples = () => {
           {currentLocale === 'pt-BR' && <PT_BR_Table />}
           {currentLocale === 'ro' && <RO_Table />}
           {currentLocale === 'ru' && <RU_Table />}
+          {currentLocale === 'sr-Cyrl-RS' && <SR_Cyrl_RS_Table />}
+          {currentLocale === 'sr-Latn-RS' && <SR_Latn_RS_Table />}
           {currentLocale === 'sv' && <SV_Table />}
           {currentLocale === 'tr' && <TR_Table />}
           {currentLocale === 'uk' && <UK_Table />}
           {currentLocale === 'vi' && <VI_Table />}
-          {currentLocale === 'zh-hans' && <ZH_HANS_Table />}
-          {currentLocale === 'zh-hant' && <ZH_HANT_Table />}
+          {currentLocale === 'zh-Hans' && <ZH_HANS_Table />}
+          {currentLocale === 'zh-Hant' && <ZH_HANT_Table />}
         </Suspense>
       </div>
     </>

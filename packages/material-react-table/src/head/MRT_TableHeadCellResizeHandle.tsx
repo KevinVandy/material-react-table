@@ -31,7 +31,7 @@ export const MRT_TableHeadCellResizeHandle = ({ header, table }: Props) => {
       onTouchStart={header.getResizeHandler()}
       sx={(theme) => ({
         cursor: 'col-resize',
-        mr: density === 'compact' ? '-0.5rem' : '-1rem',
+        mr: density === 'compact' ? '-0.75rem' : '-1rem',
         position: 'absolute',
         right: '1px',
         px: '4px',

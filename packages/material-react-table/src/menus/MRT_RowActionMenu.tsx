@@ -39,6 +39,7 @@ export const MRT_RowActionMenu = ({
     <Menu
       anchorEl={anchorEl}
       open={!!anchorEl}
+      onClick={(event) => event.stopPropagation()}
       onClose={() => setAnchorEl(null)}
       MenuListProps={{
         dense: density === 'compact',

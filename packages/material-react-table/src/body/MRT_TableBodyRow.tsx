@@ -32,7 +32,6 @@ export const MRT_TableBodyRow = ({
   virtualRow,
 }: Props) => {
   const {
-    getIsSomeColumnsPinned,
     getState,
     options: {
       enableRowOrdering,
@@ -63,7 +62,6 @@ export const MRT_TableBodyRow = ({
     <>
       <TableRow
         data-index={virtualRow?.index}
-        hover
         onDragEnter={handleDragEnter}
         selected={row.getIsSelected()}
         ref={(node: HTMLTableRowElement) => {
@@ -87,7 +85,7 @@ export const MRT_TableBodyRow = ({
           width: '100%',
           '&:hover td': {
             backgroundColor:
-              tableRowProps?.hover !== false && getIsSomeColumnsPinned()
+              tableRowProps?.hover !== false
                 ? theme.palette.mode === 'dark'
                   ? `${lighten(theme.palette.background.default, 0.12)}`
                   : `${darken(theme.palette.background.default, 0.05)}`
@@ -107,7 +105,6 @@ export const MRT_TableBodyRow = ({
             : (cellOrVirtualCell as MRT_Cell);
           const props = {
             cell,
-            enableHover: tableRowProps?.hover !== false,
             key: cell.id,
             measureElement: columnVirtualizer?.measureElement,
             numRows,
