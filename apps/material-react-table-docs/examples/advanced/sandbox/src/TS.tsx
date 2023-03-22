@@ -132,14 +132,13 @@ const Example = () => {
                   onChange={(newValue) => {
                     column.setFilterValue(newValue);
                   }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      helperText={'Filter Mode: Less Than'}
-                      sx={{ minWidth: '120px' }}
-                      variant="standard"
-                    />
-                  )}
+                  slotProps={{
+                    textField: {
+                      helperText: 'Filter Mode: Less Than',
+                      sx: { minWidth: '120px' },
+                      variant: 'standard',
+                    },
+                  }}
                   value={column.getFilterValue()}
                 />
               </LocalizationProvider>
