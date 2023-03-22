@@ -23,8 +23,8 @@
     "storybook:dev": "turbo run storybook"
   },
   "devDependencies": {
-    "prettier": "^2.8.4",
-    "turbo": "^1.7.4"
+    "prettier": "^2.8.6",
+    "turbo": "^1.8.5"
   },
   "engines": {
     "node": ">=14.0.0"

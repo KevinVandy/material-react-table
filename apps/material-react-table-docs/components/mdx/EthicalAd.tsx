@@ -18,6 +18,7 @@ export const EthicalAd = ({ compact, id, sticky, text, vertical }: Props) => {
       className={`${theme.palette.mode} ${
         vertical ? 'vertical' : 'horizontal'
       } raised bordered`}
+      data-ea-keywords="javascript|typescript|react|opensource|frontend|accessibility|material"
       data-ea-publisher="material-react-tablecom"
       data-ea-type={text ? 'text' : 'image'}
       id={id}
@@ -26,7 +27,7 @@ export const EthicalAd = ({ compact, id, sticky, text, vertical }: Props) => {
         display: 'flex !important',
         justifyContent: 'center',
         textAlign: 'center',
-        m: compact ? '-14px -4px' : '1rem auto',
+        m: compact ? '-13px' : '1rem auto',
       }}
       suppressHydrationWarning
     />
