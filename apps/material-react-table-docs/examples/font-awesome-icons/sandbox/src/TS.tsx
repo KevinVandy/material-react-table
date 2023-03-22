@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import MaterialReactTable, {
-  MRT_ColumnDef,
-  MRT_Icons,
+  type MRT_ColumnDef,
+  type MRT_Icons,
 } from 'material-react-table';
-import { data, Person } from './makeData';
+import { data, type Person } from './makeData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowDownWideShort,

@@ -149,7 +149,7 @@ export const MRT_FilterTextField = ({
     } else if (isRangeFilter) {
       setFilterValue('');
       column.setFilterValue((old: [string | undefined, string | undefined]) => {
-        const newFilterValues = old ?? ['', ''];
+        const newFilterValues = (Array.isArray(old) && old) || ['', ''];
         newFilterValues[rangeFilterIndex as number] = undefined;
         return newFilterValues;
       });

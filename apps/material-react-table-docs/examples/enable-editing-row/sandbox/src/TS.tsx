@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import MaterialReactTable, {
-  MaterialReactTableProps,
-  MRT_ColumnDef,
+  type MaterialReactTableProps,
+  type MRT_ColumnDef,
 } from 'material-react-table';
-import { data, Person } from './makeData';
+import { data, type Person } from './makeData';
 
 const Example = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(

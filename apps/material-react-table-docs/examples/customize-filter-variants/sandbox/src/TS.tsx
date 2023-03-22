@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import { citiesList, data, Person, usStateList } from './makeData';
 
 const Example = () => {

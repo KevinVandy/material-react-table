@@ -1,7 +1,5 @@
 import React, { useReducer, useRef, useState } from 'react';
 import MaterialReactTable, {
-  MRT_DensityState,
-  MRT_ColumnDef,
   MRT_FullScreenToggleButton,
   MRT_GlobalFilterTextField,
   MRT_ShowHideColumnsButton,
@@ -10,9 +8,11 @@ import MaterialReactTable, {
   MRT_ToggleDensePaddingButton,
   MRT_ToggleFiltersButton,
   MRT_ToolbarAlertBanner,
-  MRT_VisibilityState,
-  MRT_PaginationState,
-  MRT_RowSelectionState,
+  type MRT_ColumnDef,
+  type MRT_DensityState,
+  type MRT_PaginationState,
+  type MRT_RowSelectionState,
+  type MRT_VisibilityState,
 } from 'material-react-table';
 import {
   alpha,
@@ -24,7 +24,7 @@ import {
   Typography,
 } from '@mui/material';
 import PrintIcon from '@mui/icons-material/Print';
-import { data, Person } from './makeData';
+import { data, type Person } from './makeData';
 
 //column definitions...
 const columns: MRT_ColumnDef<Person>[] = [

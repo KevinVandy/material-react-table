@@ -1,5 +1,5 @@
 import { rankItem, rankings, RankingInfo } from '@tanstack/match-sorter-utils';
-import { filterFns, Row } from '@tanstack/react-table';
+import { filterFns, type Row } from '@tanstack/react-table';
 
 const fuzzy = <TData extends Record<string, any> = {}>(
   row: Row<TData>,

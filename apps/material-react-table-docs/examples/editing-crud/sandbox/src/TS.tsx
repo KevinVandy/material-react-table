@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import MaterialReactTable, {
-  MaterialReactTableProps,
-  MRT_Cell,
-  MRT_ColumnDef,
-  MRT_Row,
+  type MaterialReactTableProps,
+  type MRT_Cell,
+  type MRT_ColumnDef,
+  type MRT_Row,
 } from 'material-react-table';
 import {
   Box,

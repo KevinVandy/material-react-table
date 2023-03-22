@@ -1,12 +1,12 @@
 import React from 'react';
 import MaterialReactTable, {
-  MRT_ColumnDef,
-  MRT_Row,
+  type MRT_ColumnDef,
+  type MRT_Row,
 } from 'material-react-table';
 import { Box, Button } from '@mui/material';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { ExportToCsv } from 'export-to-csv'; //or use your library of choice here
-import { data, Person } from './makeData';
+import { data, type Person } from './makeData';
 
 //defining columns outside of the component is fine, is stable
 const columns: MRT_ColumnDef<Person>[] = [

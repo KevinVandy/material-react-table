@@ -70,7 +70,8 @@ const Example = () => {
         columns: [
           {
             accessorKey: 'salary',
-            filterVariant: 'range',
+            // filterVariant: 'range', //if not using filter modes feature, use this instead of filterFn
+            filterFn: 'between',
             header: 'Salary',
             size: 200,
             //custom conditional format and styling

@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
 import {
   defaultRangeExtractor,
-  Range,
   useVirtualizer,
-  Virtualizer,
+  type Range,
+  type Virtualizer,
 } from '@tanstack/react-virtual';
 import Table from '@mui/material/Table';
 import { MRT_TableHead } from '../head/MRT_TableHead';

@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, {
-  MaterialReactTableProps,
-  MRT_ColumnDef,
+  type MaterialReactTableProps,
+  type MRT_ColumnDef,
 } from 'material-react-table';
 
 const meta: Meta = {

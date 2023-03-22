@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Box } from '@mui/material';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { data, Person } from './makeData';
+import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import { data, type Person } from './makeData';
 
 const localeStringOptions = {
   style: 'currency',

@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import MaterialReactTable, {
-  MRT_ColumnDef,
-  MRT_TableInstance,
+  type MRT_ColumnDef,
+  type MRT_TableInstance,
 } from 'material-react-table';
 import { Link as MuiLink, Typography, useMediaQuery } from '@mui/material';
 import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
-import { TableInstanceAPI, tableInstanceAPIs } from './tableInstanceAPIs';
+import { type TableInstanceAPI, tableInstanceAPIs } from './tableInstanceAPIs';
 
 interface Props {
   onlyProps?: Set<keyof MRT_TableInstance>;

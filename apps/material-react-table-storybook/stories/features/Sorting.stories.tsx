@@ -1,9 +1,9 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, {
-  MaterialReactTableProps,
-  MRT_ColumnDef,
-  MRT_SortingState,
+  type MaterialReactTableProps,
+  type MRT_ColumnDef,
+  type MRT_SortingState,
 } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 

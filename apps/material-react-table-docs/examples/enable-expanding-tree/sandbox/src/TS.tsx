@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 
 export type Person = {
   firstName: string;

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import {
   Link as MuiLink,
   Typography,
@@ -8,7 +8,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
-import { ColumnOption, columnOptions } from './columnOptions';
+import { type ColumnOption, columnOptions } from './columnOptions';
 
 interface Props {
   onlyProps?: Set<keyof MRT_ColumnDef>;

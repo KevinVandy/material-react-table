@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { data, Person } from './makeData';
+import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import { data, type Person } from './makeData';
 import { Button } from '@mui/material';
 
 const Example = () => {

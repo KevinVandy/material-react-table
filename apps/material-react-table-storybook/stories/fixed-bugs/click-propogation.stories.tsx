@@ -1,14 +1,14 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, {
-  MaterialReactTableProps,
-  MRT_ColumnDef,
+  type MaterialReactTableProps,
+  type MRT_ColumnDef,
 } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 import { MenuItem } from '@mui/material';
 
 const meta: Meta = {
-  title: 'Fixed Bugs/Click Propogation',
+  title: 'Fixed Bugs/Click Propagation',
 };
 
 export default meta;

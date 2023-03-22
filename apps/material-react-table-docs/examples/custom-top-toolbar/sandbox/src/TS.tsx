@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import MaterialReactTable, {
-  MRT_ColumnDef,
+  type MRT_ColumnDef,
   MRT_ToggleDensePaddingButton,
   MRT_FullScreenToggleButton,
 } from 'material-react-table';
 import { Box, Button, IconButton } from '@mui/material';
 import PrintIcon from '@mui/icons-material/Print';
-import { data, Person } from './makeData';
+import { data, type Person } from './makeData';
 
 const Example = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(

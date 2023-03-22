@@ -1,4 +1,4 @@
-import { MRT_ColumnDef } from 'material-react-table';
+import { type MRT_ColumnDef } from 'material-react-table';
 
 export type ColumnOption = {
   columnOption: keyof MRT_ColumnDef;

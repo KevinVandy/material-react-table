@@ -7,10 +7,10 @@ import React, {
   useState,
 } from 'react';
 import MaterialReactTable, {
-  MRT_ColumnDef,
-  MRT_ColumnFiltersState,
-  MRT_SortingState,
-  MRT_Virtualizer,
+  type MRT_ColumnDef,
+  type MRT_ColumnFiltersState,
+  type MRT_SortingState,
+  type MRT_Virtualizer,
 } from 'material-react-table';
 import { Typography } from '@mui/material';
 import {

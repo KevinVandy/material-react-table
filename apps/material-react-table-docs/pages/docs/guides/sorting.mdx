@@ -2,6 +2,7 @@ import Head from 'next/head';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+import MultiSortingExample from '../../../examples/multi-sorting';
 import RemoteExample from '../../../examples/remote';
 
 <Head>
@@ -76,17 +77,52 @@ return (
 );
 ```
 
+### Initial/Default Sorting
+
+You can sort by a column or multiple columns by default by setting the `sorting` state option in either the `initialState` or `state` props.
+
+```tsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  initialState={{
+    sorting: [
+      {
+        id: 'age', //sort by age by default on page load
+        desc: true,
+      },
+      {
+        id: 'lastName', //then sort by lastName if age is the same
+        desc: true,
+      },
+    ],
+  }}
+/>
+```
+
 ### Default Sorting Features
 
 Client-side sorting is enabled by default. When sorting is toggled on for a column, the table will be sorted by an [`alphanumeric` sorting algorithm](https://tanstack.com/table/v8/docs/api/features/sorting#sorting-functions) by default.
 
 #### Multi-Sorting
 
-Multi-sorting is also enabled by default, which means a user can sort by multiple columns at once. This can be accomplished by clicking on a column header while holding down the `shift` key. The table will then be sorted by the previously sorted column, and then by the newly clicked column. You can limit the number of columns that can be sorted at once by setting the `maxMultiSortColCount` prop, or you can disable multi-sorting entirely by setting the `enableMultiSort` prop to `false`.
+Multi-sorting is also enabled by default, which means a user can sort by multiple columns at once. This can be accomplished by clicking on a column header while holding down the `shift` key. The table will then be sorted by the previously sorted column, and then by the newly clicked column. Or if you want multi-sorting to be the default click behavior without the need to hold `shift`, you can set the `isMultiSortEvent` prop to `() => true`.
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  isMultiSortEvent={() => true} //multi-sorting will be the default click behavior without the need to hold shift
+/>
+```
+
+You can limit the number of columns that can be sorted at once by setting the `maxMultiSortColCount` prop, or you can disable multi-sorting entirely by setting the `enableMultiSort` prop to `false`.
 
 #### Sort Direction
 
 By default, columns with `string` datatypes will sort alphabetically in ascending order, but columns with `number` datatypes will sort numerically in descending order. You can change the default sort direction per column by specifying the `sortDescFirst` column option to either `true` or `false`. You can also change the default sort direction globally by setting the `sortDescFirst` prop to either `true` or `false`.
+
+<MultiSortingExample />
 
 ### Sorting Functions
 

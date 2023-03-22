@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 //MRT Imports
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 
 //Material-UI Imports
 import {
@@ -81,7 +81,8 @@ const Example = () => {
         columns: [
           {
             accessorKey: 'salary',
-            filterVariant: 'range',
+            // filterVariant: 'range', //if not using filter modes feature, use this instead of filterFn
+            filterFn: 'between',
             header: 'Salary',
             size: 200,
             //custom conditional format and styling

@@ -1,6 +1,6 @@
 import React, { DragEvent, memo, useRef } from 'react';
 import TableRow from '@mui/material/TableRow';
-import { darken, lighten } from '@mui/material/styles';
+import { alpha, darken, lighten } from '@mui/material/styles';
 import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import type { VirtualItem, Virtualizer } from '@tanstack/react-virtual';
@@ -86,7 +86,9 @@ export const MRT_TableBodyRow = ({
           '&:hover td': {
             backgroundColor:
               tableRowProps?.hover !== false
-                ? theme.palette.mode === 'dark'
+                ? row.getIsSelected()
+                  ? `${alpha(theme.palette.primary.main, 0.2)}`
+                  : theme.palette.mode === 'dark'
                   ? `${lighten(theme.palette.background.default, 0.12)}`
                   : `${darken(theme.palette.background.default, 0.05)}`
                 : undefined,

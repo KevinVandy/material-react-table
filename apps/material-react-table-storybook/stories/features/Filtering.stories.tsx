@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Meta, Story } from '@storybook/react';
 import MaterialReactTable, {
-  MaterialReactTableProps,
-  MRT_ColumnDef,
-  MRT_ColumnFiltersState,
+  type MaterialReactTableProps,
+  type MRT_ColumnDef,
+  type MRT_ColumnFiltersState,
 } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 import { Box, Button, MenuItem, TextField } from '@mui/material';
@@ -522,5 +522,46 @@ export const ExternalSetFilterValue: Story<MaterialReactTableProps> = () => (
         </Button>
       </Box>
     )}
+  />
+);
+
+export const InitialFilters: Story<MaterialReactTableProps> = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        accessorKey: 'firstName',
+      },
+      {
+        header: 'Last Name',
+        accessorKey: 'lastName',
+      },
+      {
+        header: 'Age',
+        accessorKey: 'age',
+        filterFn: 'between',
+      },
+      {
+        header: 'Gender',
+        accessorKey: 'gender',
+        filterSelectOptions: ['Male', 'Female', 'Other'],
+      },
+      {
+        header: 'Address',
+        accessorKey: 'address',
+      },
+      {
+        header: 'State',
+        accessorKey: 'state',
+      },
+    ]}
+    data={data}
+    enableColumnFilterModes
+    initialState={{
+      columnFilters: [
+        { id: 'firstName', value: 'Jo' },
+        { id: 'age', value: [18, 100] },
+      ],
+    }}
   />
 );

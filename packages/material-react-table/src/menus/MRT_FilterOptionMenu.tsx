@@ -99,6 +99,10 @@ export const mrtFilterOptions = (
   },
 ];
 
+const rangeModes = ['between', 'betweenInclusive', 'inNumberRange'];
+const emptyModes = ['empty', 'notEmpty'];
+const arrModes = ['arrIncludesSome', 'arrIncludesAll', 'arrIncludes'];
+
 interface Props<TData extends Record<string, any> = {}> {
   anchorEl: HTMLElement | null;
   header?: MRT_Header<TData>;
@@ -150,46 +154,66 @@ export const MRT_FilterOptionMenu = <TData extends Record<string, any> = {}>({
   );
 
   const handleSelectFilterMode = (option: MRT_FilterOption) => {
-    if (header && column) {
+    const prevFilterMode = columnDef?._filterFn ?? '';
+    if (!header || !column) {
+      // global filter mode
+      setGlobalFilterFn(option);
+    } else if (option !== prevFilterMode) {
+      // column filter mode
       setColumnFilterFns((prev: { [key: string]: any }) => ({
         ...prev,
         [header.id]: option,
       }));
-      if (['empty', 'notEmpty'].includes(option as string)) {
-        column.setFilterValue(' ');
+
+      // reset filter value and/or perform new filter render
+      if (emptyModes.includes(option)) {
+        // will now be empty/notEmpty filter mode
+        if (
+          currentFilterValue !== ' ' &&
+          !emptyModes.includes(prevFilterMode)
+        ) {
+          column.setFilterValue(' ');
+        } else if (currentFilterValue) {
+          column.setFilterValue(currentFilterValue); // perform new filter render
+        }
       } else if (
         columnDef?.filterVariant === 'multi-select' ||
-        ['arrIncludesSome', 'arrIncludesAll', 'arrIncludes'].includes(
-          option as string,
-        )
+        arrModes.includes(option as string)
       ) {
+        // will now be array filter mode
         if (
           currentFilterValue instanceof String ||
           (currentFilterValue as Array<any>)?.length
         ) {
           column.setFilterValue([]);
           setFilterValue?.([]);
+        } else if (currentFilterValue) {
+          column.setFilterValue(currentFilterValue); // perform new filter render
         }
       } else if (
         columnDef?.filterVariant === 'range' ||
-        ['between', 'betweenInclusive', 'inNumberRange'].includes(
-          option as MRT_FilterOption,
-        )
+        rangeModes.includes(option as MRT_FilterOption)
       ) {
-        if (!(currentFilterValue as Array<any>)?.every((v) => v === '')) {
+        // will now be range filter mode
+        if (
+          !Array.isArray(currentFilterValue) ||
+          (!(currentFilterValue as Array<any>)?.every((v) => v === '') &&
+            !rangeModes.includes(prevFilterMode))
+        ) {
           column.setFilterValue(['', '']);
           setFilterValue?.('');
+        } else {
+          column.setFilterValue(currentFilterValue); // perform new filter render
         }
       } else {
-        if (
-          !['', undefined].includes(currentFilterValue as string | undefined)
-        ) {
+        // will now be single value filter mode
+        if (Array.isArray(currentFilterValue)) {
           column.setFilterValue('');
           setFilterValue?.('');
+        } else {
+          column.setFilterValue(currentFilterValue); // perform new filter render
         }
       }
-    } else {
-      setGlobalFilterFn(option);
     }
     setAnchorEl(null);
     onSelect?.();

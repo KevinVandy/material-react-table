@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import MaterialReactTable, {
-  MRT_ColumnDef,
-  MRT_ColumnFiltersState,
-  MRT_PaginationState,
-  MRT_SortingState,
+  type MRT_ColumnDef,
+  type MRT_ColumnFiltersState,
+  type MRT_PaginationState,
+  type MRT_SortingState,
 } from 'material-react-table';
 import { IconButton, Tooltip } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';

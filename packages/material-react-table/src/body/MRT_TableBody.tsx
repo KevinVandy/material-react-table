@@ -1,8 +1,8 @@
 import React, { memo, useMemo } from 'react';
 import {
   useVirtualizer,
-  VirtualItem,
-  Virtualizer,
+  type VirtualItem,
+  type Virtualizer,
 } from '@tanstack/react-virtual';
 import TableBody from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';

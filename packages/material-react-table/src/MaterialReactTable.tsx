@@ -50,7 +50,7 @@ import type {
   TableOptions,
   TableState,
   Updater,
-  VisibilityState
+  VisibilityState,
 } from '@tanstack/react-table';
 import type {
   VirtualizerOptions,

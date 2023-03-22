@@ -26,7 +26,7 @@ import {
   showExpandColumn,
   getColumnId,
 } from '../column.utils';
-import {
+import type {
   MRT_Cell,
   MRT_Column,
   MRT_ColumnDef,

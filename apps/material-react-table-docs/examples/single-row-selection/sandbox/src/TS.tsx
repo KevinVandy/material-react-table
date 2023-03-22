@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import MaterialReactTable, {
-  MRT_ColumnDef,
-  MRT_RowSelectionState,
+  type MRT_ColumnDef,
+  type MRT_RowSelectionState,
 } from 'material-react-table';
 
 const data = [

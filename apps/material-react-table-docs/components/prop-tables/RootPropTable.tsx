@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import MaterialReactTable, {
-  MaterialReactTableProps,
-  MRT_ColumnDef,
+  type MaterialReactTableProps,
+  type MRT_ColumnDef,
 } from 'material-react-table';
 import {
   Link as MuiLink,
@@ -11,7 +11,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
-import { PropRow, rootProps } from './rootProps';
+import { type PropRow, rootProps } from './rootProps';
 
 interface Props {
   onlyProps?: Set<keyof MaterialReactTableProps>;

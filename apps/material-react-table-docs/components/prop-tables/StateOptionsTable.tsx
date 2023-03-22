@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import MaterialReactTable, {
-  MRT_ColumnDef,
-  MRT_TableState,
+  type MRT_ColumnDef,
+  type MRT_TableState,
 } from 'material-react-table';
 import { Link as MuiLink, Typography, useMediaQuery } from '@mui/material';
 import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
-import { StateRow, stateOptions } from './stateOptions';
+import { type StateRow, stateOptions } from './stateOptions';
 
 interface Props {
   onlyProps?: Set<keyof MRT_TableState>;
