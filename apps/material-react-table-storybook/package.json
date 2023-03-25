@@ -2,11 +2,11 @@
   "name": "material-react-table-storybook",
   "private": true,
   "scripts": {
-    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider build-storybook",
-    "dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
-    "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
-    "storybook:build": "cross-env NODE_OPTIONS=--openssl-legacy-provider build-storybook",
-    "storybook:dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006"
+    "build": "build-storybook",
+    "dev": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006",
+    "storybook:build": "build-storybook",
+    "storybook:dev": "start-storybook -p 6006"
   },
   "devDependencies": {
     "@babel/core": "^7.21.3",
@@ -21,15 +21,15 @@
     "@storybook/builder-webpack5": "^6.5.16",
     "@storybook/manager-webpack5": "^6.5.16",
     "@storybook/react": "^6.5.16",
-    "@types/node": "^18.15.5",
-    "@types/react": "^18.0.28",
+    "@types/node": "^18.15.9",
+    "@types/react": "^18.0.29",
     "@types/react-dom": "^18.0.11",
     "babel-loader": "^9.1.2",
-    "cross-env": "^7.0.3",
     "eslint": "^8.36.0",
+    "react-docgen-typescript-plugin": "^1.0.5",
     "storybook-dark-mode": "^2.1.1",
-    "typescript": "^4.9.5",
-    "webpack": "^5.76.2"
+    "typescript": "^5.0.2",
+    "webpack": "^5.76.3"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -43,7 +43,6 @@
     "react-is": "^18.2.0"
   },
   "resolutions": {
-    "enhanced-resolve": "5.10.0",
-    "@storybook/react-docgen-typescript-plugin": "1.0.6--canary.9.cd77847.0"
+    "enhanced-resolve": "5.10.0"
   }
 }

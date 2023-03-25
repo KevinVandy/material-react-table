@@ -62,8 +62,8 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^11.0.0",
     "@size-limit/preset-small-lib": "^8.2.4",
-    "@types/node": "^18.15.5",
-    "@types/react": "^18.0.28",
+    "@types/node": "^18.15.9",
+    "@types/react": "^18.0.29",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
@@ -91,7 +91,7 @@
   "dependencies": {
     "@tanstack/match-sorter-utils": "8.7.6",
     "@tanstack/react-table": "8.7.9",
-    "@tanstack/react-virtual": "3.0.0-beta.47",
+    "@tanstack/react-virtual": "3.0.0-beta.54",
     "highlight-words": "1.2.1"
   }
 }

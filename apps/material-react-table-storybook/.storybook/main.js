@@ -12,7 +12,7 @@ module.exports = {
   },
   typescript: {
     check: true,
-    reactDocgen: 'react-docgen-typescript',
+    reactDocgen: 'react-docgen-typescript-plugin',
     reactDocgenTypescriptOptions: {
       compilerOptions: {
         allowSyntheticDefaultImports: false,
