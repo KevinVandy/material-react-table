@@ -1,5 +1,5 @@
 {
-  "version": "1.9.1",
+  "version": "1.9.2",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -62,7 +62,7 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^11.0.0",
     "@size-limit/preset-small-lib": "^8.2.4",
-    "@types/node": "^18.15.9",
+    "@types/node": "^18.15.10",
     "@types/react": "^18.0.29",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
@@ -89,8 +89,8 @@
     "react-dom": ">=17.0"
   },
   "dependencies": {
-    "@tanstack/match-sorter-utils": "8.7.6",
-    "@tanstack/react-table": "8.7.9",
+    "@tanstack/match-sorter-utils": "8.8.4",
+    "@tanstack/react-table": "8.8.4",
     "@tanstack/react-virtual": "3.0.0-beta.54",
     "highlight-words": "1.2.1"
   }

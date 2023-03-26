@@ -122,6 +122,20 @@ export const rowInstanceAPIs: RowInstanceAPI[] = [
     linkText: '',
   },
   {
+    rowInstanceAPI: 'getParentRow',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
+    rowInstanceAPI: 'getParentRows',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
     rowInstanceAPI: 'getRightVisibleCells',
     type: '',
     description: '',
@@ -180,6 +194,13 @@ export const rowInstanceAPIs: RowInstanceAPI[] = [
   },
   {
     rowInstanceAPI: 'originalSubRows',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
+    rowInstanceAPI: 'parentId',
     type: '',
     description: '',
     link: '',

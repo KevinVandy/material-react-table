@@ -12,6 +12,13 @@ import Head from 'next/head';
 
 ### Version 1 (Latest)
 
+#### v1.9.2 (2023-03-26)
+
+- Upgraded to latest TanStack Table `v8.4.4` for new `row.getParentRow` APIs and various select all bug fixes
+- Upgraded to latest TanStack Virtual `v3.0.0-beta.54` for various bug fixes
+- Fixed issues with filter match highlighting highlighting cells that had global filtering turned off
+- Filter highlighting now uses `exactMatch` for non `"fuzzy"` filter modes
+
 #### v1.9.1 (2023-03-21)
 
 - gave hovered selected rows a better primary shade color
