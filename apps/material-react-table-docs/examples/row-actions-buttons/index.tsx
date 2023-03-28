@@ -10,7 +10,7 @@ const ExampleTable = () => {
       Component={Example}
       javaScriptCode={JS}
       typeScriptCode={TS}
-      tableId="row-actions-menu-items"
+      tableId="row-actions-buttons"
     />
   );
 };
