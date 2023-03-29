@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import MenuItemsExample from '../../../examples/row-actions-menu-items';
+import ButtonsExample from '../../../examples/row-actions-buttons';
 
 <Head>
   <title>Row Actions Feature Guide - Material React Table Docs</title>
@@ -43,12 +45,17 @@ If you want to embed all of your row actions into a single menu, then you can us
 <MaterialReactTable
   enableRowActions
   renderRowActionMenuItems={({ row }) => [
-      <MenuItem onClick={() => console.info('Edit')}>Edit</MenuItem>,
-      <MenuItem onClick={() => console.info('Delete')}>Delete</MenuItem>
-    ]
-  )}
+    <MenuItem key="edit" onClick={() => console.info('Edit')}>
+      Edit
+    </MenuItem>,
+    <MenuItem key="delete" onClick={() => console.info('Delete')}>
+      Delete
+    </MenuItem>,
+  ]}
 />
 ```
+
+<MenuItemsExample />
 
 #### Add Row Action Buttons
 
@@ -69,6 +76,8 @@ If you want to add row action buttons, then you can use the `renderRowActions` p
   )}
 />
 ```
+
+<ButtonsExample />
 
 ### Customize Row Actions Column
 
