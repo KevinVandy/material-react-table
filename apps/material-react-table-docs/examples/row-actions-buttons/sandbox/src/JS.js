@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import MaterialReactTable from 'material-react-table';
-import { data } from './makeData';
 import { Box, IconButton } from '@mui/material';
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import { data as initialData } from './makeData';
 
 export const Example = () => {
   const columns = useMemo(
@@ -33,17 +33,40 @@ export const Example = () => {
     //end
   );
 
+  const [data, setData] = useState(initialData);
+
   return (
     <MaterialReactTable
       columns={columns}
       data={data}
       enableRowActions
-      renderRowActions={({ row }) => (
-        <Box>
-          <IconButton onClick={() => console.info('Edit')}>
+      renderRowActions={({ row, table }) => (
+        <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: '8px' }}>
+          <IconButton
+            color="primary"
+            onClick={() =>
+              window.open(
+                `mailto:kevinvandy@mailinator.com?subject=Hello ${row.original.firstName}!`,
+              )
+            }
+          >
+            <EmailIcon />
+          </IconButton>
+          <IconButton
+            color="secondary"
+            onClick={() => {
+              table.setEditingRow(row);
+            }}
+          >
             <EditIcon />
           </IconButton>
-          <IconButton onClick={() => console.info('Delete')}>
+          <IconButton
+            color="error"
+            onClick={() => {
+              data.splice(row.index, 1); //assuming simple data table
+              setData([...data]);
+            }}
+          >
             <DeleteIcon />
           </IconButton>
         </Box>
