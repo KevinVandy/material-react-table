@@ -850,7 +850,7 @@ export const tableInstanceAPIs: TableInstanceAPI[] = [
     linkText: '',
   },
   {
-    tableInstanceAPI: 'setShowFilters',
+    tableInstanceAPI: 'setShowColumnFilters',
     type: '',
     description: '',
     link: '',

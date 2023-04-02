@@ -59,7 +59,10 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
       labelRowsPerPage={localization.rowsPerPage}
       onPageChange={(_: any, newPage: number) => setPageIndex(newPage)}
       onRowsPerPageChange={handleChangeRowsPerPage}
-      page={pageIndex}
+      page={Math.max(
+        Math.min(pageIndex, Math.ceil(totalRowCount / pageSize) - 1),
+        0,
+      )}
       rowsPerPage={pageSize}
       rowsPerPageOptions={[5, 10, 15, 20, 25, 30, 50, 100]}
       showFirstButton={showFirstLastPageButtons}

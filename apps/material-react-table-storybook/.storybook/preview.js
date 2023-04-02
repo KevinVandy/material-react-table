@@ -56,8 +56,13 @@ const withThemeProvider = (Story, context) => {
           color: useDarkMode() ? '#fff' : '#666',
         }}
       >
-        View source code below in the story tab on Canvas or the Show Code
-        Button in Docs. Toggle dark and light mode in the toolbar buttons above.
+        View Source code for these examples (until storybook bugs get fixed){' '}
+        <Link
+          href="https://github.com/KevinVandy/material-react-table/tree/main/apps/material-react-table-storybook/stories/features"
+          target="_blank"
+        >
+          here
+        </Link>
       </Typography>
       <Story {...context} />
     </ThemeProvider>

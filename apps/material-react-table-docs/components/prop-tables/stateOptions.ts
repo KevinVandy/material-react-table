@@ -13,7 +13,8 @@ export type StateRow = {
 export const stateOptions: StateRow[] = [
   {
     defaultValue: '{}',
-    description: '',
+    description:
+      'an array of objects with id and value properties, representing the current filter values for each column',
     link: 'https://tanstack.com/table/v8/docs/api/features/filters',
     linkText: 'TanStack Table Filters Docs',
     source: 'TanStack Table',
@@ -22,7 +23,8 @@ export const stateOptions: StateRow[] = [
   },
   {
     defaultValue: '[]',
-    description: '',
+    description:
+      'an array of strings representing the current order of the table columns',
     link: 'https://tanstack.com/table/v8/docs/api/features/column-ordering',
     linkText: 'TanStack Table Column Ordering Docs',
     source: 'TanStack Table',
@@ -31,7 +33,8 @@ export const stateOptions: StateRow[] = [
   },
   {
     defaultValue: '{ left: [], right: [] }',
-    description: '',
+    description:
+      'an object with left and right properties, each of which is an array of strings representing the columns that are pinned to the left or right side of the table',
     link: 'https://tanstack.com/table/v8/docs/api/features/column-pinning',
     linkText: 'TanStack Table Column Pinning Docs',
     source: 'TanStack Table',
@@ -40,7 +43,8 @@ export const stateOptions: StateRow[] = [
   },
   {
     defaultValue: '{}',
-    description: '',
+    description:
+      'an object mapping column IDs to their current width in pixels',
     link: 'https://tanstack.com/table/v8/docs/api/features/column-sizing',
     linkText: 'TanStack Table Column Sizing Docs',
     source: 'TanStack Table',
@@ -49,7 +53,7 @@ export const stateOptions: StateRow[] = [
   },
   {
     defaultValue: '{}',
-    description: '',
+    description: 'an object containing information about column sizing',
     link: 'https://tanstack.com/table/v8/docs/api/features/column-sizing',
     linkText: 'TanStack Table Column Sizing Docs',
     source: 'TanStack Table',
@@ -58,7 +62,8 @@ export const stateOptions: StateRow[] = [
   },
   {
     defaultValue: '{}',
-    description: '',
+    description:
+      'an object mapping column IDs to a boolean indicating whether the column is currently visible',
     link: 'https://tanstack.com/table/v8/docs/api/features/column-visibility',
     linkText: 'TanStack Table Column Visibility Docs',
     source: 'TanStack Table',
@@ -67,7 +72,7 @@ export const stateOptions: StateRow[] = [
   },
   {
     defaultValue: '',
-    description: '',
+    description: 'a variable representing the currently dragged column',
     link: '',
     linkText: '',
     source: 'MRT',
@@ -76,7 +81,7 @@ export const stateOptions: StateRow[] = [
   },
   {
     defaultValue: '',
-    description: '',
+    description: 'a variable representing the currently dragged row',
     link: '',
     linkText: '',
     source: 'MRT',
@@ -85,7 +90,7 @@ export const stateOptions: StateRow[] = [
   },
   {
     defaultValue: '',
-    description: '',
+    description: 'a variable representing the currently editing cell',
     link: '',
     linkText: '',
     source: 'MRT',
@@ -94,7 +99,7 @@ export const stateOptions: StateRow[] = [
   },
   {
     defaultValue: '',
-    description: '',
+    description: 'a variable representing the currently editing row',
     link: '',
     linkText: '',
     source: 'MRT',

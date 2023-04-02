@@ -3,6 +3,7 @@ import React, {
   MouseEvent,
   useCallback,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import Collapse from '@mui/material/Collapse';
@@ -42,6 +43,7 @@ export const MRT_GlobalFilterTextField = <
       ? muiSearchTextFieldProps({ table })
       : muiSearchTextFieldProps;
 
+  const isMounted = useRef(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [searchValue, setSearchValue] = useState(globalFilter ?? '');
 
@@ -70,9 +72,14 @@ export const MRT_GlobalFilterTextField = <
   };
 
   useEffect(() => {
-    if (globalFilter === undefined) {
-      handleClear();
+    if (isMounted.current) {
+      if (globalFilter === undefined) {
+        handleClear();
+      } else {
+        setSearchValue(globalFilter);
+      }
     }
+    isMounted.current = true;
   }, [globalFilter]);
 
   return (

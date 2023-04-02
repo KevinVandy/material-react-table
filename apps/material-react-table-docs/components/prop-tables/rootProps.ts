@@ -1571,7 +1571,7 @@ export const rootProps: PropRow[] = [
     type: 'OnChangeFn<boolean>',
   },
   {
-    propName: 'onShowFiltersChange',
+    propName: 'onShowColumnFiltersChange',
     defaultValue: '',
     description: '',
     link: '',

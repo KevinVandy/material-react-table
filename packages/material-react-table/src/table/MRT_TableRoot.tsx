@@ -113,7 +113,7 @@ export const MRT_TableRoot: any = <TData extends Record<string, any> = {}>(
   const [showAlertBanner, setShowAlertBanner] = useState<boolean>(
     props.initialState?.showAlertBanner ?? false,
   );
-  const [showColumnFilters, setShowFilters] = useState<boolean>(
+  const [showColumnFilters, setShowColumnFilters] = useState<boolean>(
     initialState?.showColumnFilters ?? false,
   );
   const [showGlobalFilter, setShowGlobalFilter] = useState<boolean>(
@@ -326,7 +326,8 @@ export const MRT_TableRoot: any = <TData extends Record<string, any> = {}>(
     setHoveredRow: props.onHoveredRowChange ?? setHoveredRow,
     setIsFullScreen: props.onIsFullScreenChange ?? setIsFullScreen,
     setShowAlertBanner: props.onShowAlertBannerChange ?? setShowAlertBanner,
-    setShowFilters: props.onShowFiltersChange ?? setShowFilters,
+    setShowColumnFilters:
+      props.onShowColumnFiltersChange ?? setShowColumnFilters,
     setShowGlobalFilter: props.onShowGlobalFilterChange ?? setShowGlobalFilter,
     setShowToolbarDropZone:
       props.onShowToolbarDropZoneChange ?? setShowToolbarDropZone,
@@ -359,6 +360,17 @@ export const MRT_TableRoot: any = <TData extends Record<string, any> = {}>(
       }
     }
   }, [table.getState().isFullScreen]);
+
+  //if page index is out of bounds, set it to the last page
+  useEffect(() => {
+    const { pageIndex, pageSize } = table.getState().pagination;
+    const totalRowCount =
+      props.rowCount ?? table.getPrePaginationRowModel().rows.length;
+    const firstVisibleRowIndex = pageIndex * pageSize;
+    if (firstVisibleRowIndex > totalRowCount) {
+      table.setPageIndex(Math.floor(totalRowCount / pageSize));
+    }
+  }, [props.rowCount, table.getPrePaginationRowModel().rows.length]);
 
   return (
     <>

@@ -6,7 +6,10 @@ import MaterialReactTable, {
 } from 'material-react-table';
 import { Link as MuiLink, Typography, useMediaQuery } from '@mui/material';
 import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
-import { type ColumnInstanceAPI, columnInstanceAPIs } from './columnInstanceAPIs';
+import {
+  type ColumnInstanceAPI,
+  columnInstanceAPIs,
+} from './columnInstanceAPIs';
 
 interface Props {
   onlyProps?: Set<keyof MRT_Column>;

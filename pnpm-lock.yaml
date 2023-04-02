@@ -155,7 +155,7 @@ importers:
       '@rollup/plugin-typescript': ^11.0.0
       '@size-limit/preset-small-lib': ^8.2.4
       '@tanstack/match-sorter-utils': 8.8.4
-      '@tanstack/react-table': 8.8.4
+      '@tanstack/react-table': 8.8.5
       '@tanstack/react-virtual': 3.0.0-beta.54
       '@types/node': ^18.15.10
       '@types/react': ^18.0.29
@@ -177,7 +177,7 @@ importers:
       typescript: ^5.0.2
     dependencies:
       '@tanstack/match-sorter-utils': 8.8.4
-      '@tanstack/react-table': 8.8.4_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-table': 8.8.5_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-virtual': 3.0.0-beta.54_react@18.2.0
       highlight-words: 1.2.1
     devDependencies:
@@ -4877,14 +4877,14 @@ packages:
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
-  /@tanstack/react-table/8.8.4_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-5w2AoBnDBJYuUa80sLOqelcG/eJdGwIPFBRnEiU3RCAEeZ1QIhYse/0vzhTY8VAcTXa2sjWhXNDWci4VlktNmg==}
+  /@tanstack/react-table/8.8.5_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-g/t21E/ICHvaCOJOhsDNr5QaB/6aDQEHFbx/YliwwU/CJThMqG+dS28vnToIBV/5MBgpeXoGRi2waDJVJlZrtg==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=16'
       react-dom: '>=16'
     dependencies:
-      '@tanstack/table-core': 8.8.4
+      '@tanstack/table-core': 8.8.5
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -4898,8 +4898,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@tanstack/table-core/8.8.4:
-    resolution: {integrity: sha512-4gq0A/Qz/JFuclxPd1UnNi5P57vbVF10mPK743Iuv2ORLLgF/O/XkaYjYDGw5SHMof8CgiT/nfdJdlgHsOfRIg==}
+  /@tanstack/table-core/8.8.5:
+    resolution: {integrity: sha512-Xnwa1qxpgvSW7ozLiexmKp2PIYcLBiY/IizbdGriYCL6OOHuZ9baRhrrH51zjyz+61ly6K59rmt6AI/3RR+97Q==}
     engines: {node: '>=12'}
     dev: false
 

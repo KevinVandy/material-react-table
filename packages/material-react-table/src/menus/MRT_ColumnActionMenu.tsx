@@ -63,7 +63,7 @@ export const MRT_ColumnActionMenu = ({
     },
     refs: { filterInputRefs },
     setColumnSizingInfo,
-    setShowFilters,
+    setShowColumnFilters,
   } = table;
   const { column } = header;
   const { columnDef } = column;
@@ -117,7 +117,7 @@ export const MRT_ColumnActionMenu = ({
   };
 
   const handleFilterByColumn = () => {
-    setShowFilters(true);
+    setShowColumnFilters(true);
     queueMicrotask(() => filterInputRefs.current[`${column.id}-0`]?.focus());
     setAnchorEl(null);
   };

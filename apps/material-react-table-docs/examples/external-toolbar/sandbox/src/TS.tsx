@@ -147,7 +147,7 @@ const Example = () => {
           );
           queueMicrotask(rerender); //hack to rerender after state update
         }}
-        onShowFiltersChange={(updater) => {
+        onShowColumnFiltersChange={(updater) => {
           setShowColumnFilters((prev) =>
             updater instanceof Function ? updater(prev) : updater,
           );

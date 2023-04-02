@@ -12,9 +12,16 @@ import Head from 'next/head';
 
 ### Version 1 (Latest)
 
+#### v1.9.3 (2023-04-02)
+
+- Upgraded to latest TanStack Table `v8.8.5` for new `getCanSomeRowsExpand` bugfix
+- Fixed issue where page index could be out of bounds after the number of rows in the table decreases. Table now goes to the last page automatically when this happens.
+- Fixed issue where global filter textbox would not initialize from external state properly
+- Fixed typo in `onShowColumnFiltersChange` prop name (renamed from `onShowFiltersChanged`)
+
 #### v1.9.2 (2023-03-26)
 
-- Upgraded to latest TanStack Table `v8.4.4` for new `row.getParentRow` APIs and various select all bug fixes
+- Upgraded to latest TanStack Table `v8.8.4` for new `row.getParentRow` APIs and various select all bug fixes
 - Upgraded to latest TanStack Virtual `v3.0.0-beta.54` for various bug fixes
 - Fixed issues with filter match highlighting highlighting cells that had global filtering turned off
 - Filter highlighting now uses `exactMatch` for non `"fuzzy"` filter modes
@@ -416,7 +423,7 @@ import Head from 'next/head';
 - v0.28.0 - `virtualizerProps` has slightly differently named options, as MRT upgraded to `@tanstack/react-virtual` `v3`.
 - v0.27.0 - `enableColumnFilterModes` is now false by default, but can be turned on easily by just setting it to true.
 - v0.23.0 - TanStack Table v8.2 has new `cell.getValue<>()` generics
-- v0.22.1 - `showFilters` state renamed to `showColumnFilters`
+- v0.22.1 - `showColumnFilters` state renamed to `showColumnFilters`
 - v0.22.0 - React DnD replaced with custom solution for drag and drop. Now lib is 16kb smaller!
 - V0.19.0 - Data Column Definitions now need an `accessorKey` or a combination of an `id` and `accessorFn` to be used as the key for the data row.
 - V0.19.0 - `instance` was renamed to `table` across all callback functions to be inline with TanStack Table V8.1.

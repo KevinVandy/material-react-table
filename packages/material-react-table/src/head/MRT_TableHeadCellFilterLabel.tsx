@@ -17,7 +17,7 @@ export const MRT_TableHeadCellFilterLabel = ({ header, table }: Props) => {
       localization,
     },
     refs: { filterInputRefs },
-    setShowFilters,
+    setShowColumnFilters,
   } = table;
   const { column } = header;
   const { columnDef } = column;
@@ -66,7 +66,7 @@ export const MRT_TableHeadCellFilterLabel = ({ header, table }: Props) => {
           <IconButton
             disableRipple
             onClick={(event: MouseEvent<HTMLButtonElement>) => {
-              setShowFilters(true);
+              setShowColumnFilters(true);
               queueMicrotask(() => {
                 filterInputRefs.current[`${column.id}-0`]?.focus();
                 filterInputRefs.current[`${column.id}-0`]?.select();

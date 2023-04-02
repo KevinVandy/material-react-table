@@ -59,7 +59,7 @@ _All features can easily be enabled/disabled_
 
 _**Fully Fleshed out [Docs](https://www.material-react-table.com/docs/guides#guides) are available for all features**_
 
-- [x] < 43kb gzipped - [Bundlephobia](https://bundlephobia.com/package/material-react-table)
+- [x] < 45kb gzipped - [Bundlephobia](https://bundlephobia.com/package/material-react-table)
 - [x] Advanced TypeScript Generics Support (TypeScript Optional)
 - [x] Aggregation and Grouping (Sum, Average, Count, etc.)
 - [x] Click To Copy Cell Values
