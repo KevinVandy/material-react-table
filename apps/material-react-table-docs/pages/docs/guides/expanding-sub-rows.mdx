@@ -4,6 +4,7 @@ import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTab
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import EnableExample from '../../../examples/enable-expanding-tree';
 import ExpandedExample from '../../../examples/expanding-tree-expanded';
+import ExpandedRootExample from '../../../examples/expanding-tree-root-expanded';
 
 <Head>
   <title>
@@ -160,3 +161,9 @@ For example, you may want all rows to be expanded by default. To do this, you ca
 ```
 
 <ExpandedExample />
+
+### Expand Root Rows Only By Default
+
+Here is a slightly more complex initial expanded state example where all the root rows are expanded by default, but none of the sub rows themselves are expanded by default. We just need to find all of the root row ids and set their key in the `expanded` `initialState` option to `true`.
+
+<ExpandedRootExample />
