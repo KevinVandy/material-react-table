@@ -9,16 +9,16 @@ const cardData = [
     href: 'https://github.com/KevinVandy',
   },
   {
-    name: 'Ryan Kholousi',
-    role: 'UI/UX Designer',
-    image: '/contributors/ryankholousi.jpeg',
-    href: 'https://www.linkedin.com/in/ryan-kholousi-66322979/',
-  },
-  {
     name: 'Daniel Humphrey',
     role: 'UI/UX, Technical Writer',
     image: '/contributors/danielhumphrey.jpeg',
     href: 'https://www.linkedin.com/in/daniel-humphrey-35945514a/',
+  },
+  {
+    name: 'Ryan Kholousi',
+    role: 'UI/UX Designer',
+    image: '/contributors/ryankholousi.jpeg',
+    href: 'https://www.linkedin.com/in/ryan-kholousi-66322979/',
   },
 ];
 

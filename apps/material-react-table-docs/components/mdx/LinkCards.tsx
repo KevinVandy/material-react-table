@@ -65,12 +65,12 @@ export const LinkCards = () => {
                 cursor: 'pointer',
                 display: 'flex',
                 flexDirection: 'column',
-                minHeight: '100px',
+                minHeight: '90px',
                 fontWeight: 'bold',
                 gap: '1rem',
                 justifyContent: 'center',
                 p: '1rem',
-                width: '10rem',
+                width: '9.5rem',
                 '&:hover': {
                   boxShadow: `1px 4px 8px ${alpha(
                     theme.palette.primary.dark,

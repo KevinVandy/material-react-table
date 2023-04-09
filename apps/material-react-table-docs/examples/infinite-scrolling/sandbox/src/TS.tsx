@@ -123,8 +123,11 @@ const Example = () => {
 
   //scroll to top of table when sorting or filters change
   useEffect(() => {
-    if (rowVirtualizerInstanceRef.current) {
-      rowVirtualizerInstanceRef.current.scrollToIndex(0);
+    //scroll to the top of the table when the sorting changes
+    try {
+      rowVirtualizerInstanceRef.current?.scrollToIndex?.(0);
+    } catch (error) {
+      console.error(error);
     }
   }, [sorting, columnFilters, globalFilter]);
 

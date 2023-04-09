@@ -29,7 +29,7 @@ export const SideBarItems = ({ depth = 1, routes, setNavOpen }: Props) => {
     <>
       {routes.map(({ href, items, label, divider, external }) => (
         <Fragment key={label}>
-          <Link href={href ?? ''} passHref legacyBehavior>
+          <Link href={href} target={external ? '_blank' : undefined}>
             <ListItemButton
               divider={divider}
               selected={pathname === href}

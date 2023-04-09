@@ -20,7 +20,15 @@ export const GuideCard = ({ href, title }: Props) => {
         })}
       >
         <CardContent>
-          <Typography textAlign="center" component="h4" variant="h5">
+          <Typography
+            component="h4"
+            variant="h5"
+            sx={{
+              whiteSpace: 'nowrap',
+              textAlign: 'center',
+              fontSize: '1.2rem',
+            }}
+          >
             {title}
           </Typography>
         </CardContent>
