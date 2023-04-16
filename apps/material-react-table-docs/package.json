@@ -2,14 +2,15 @@
   "name": "material-react-table-docs",
   "private": true,
   "scripts": {
-    "build": "next build",
-    "dev": "next dev --port 3000",
+    "build": "pnpm docs:build",
+    "dev": "pnpm docs:dev",
     "docs:build": "next build",
     "docs:dev": "next dev --port 3000",
     "docs:sitemap": "next-sitemap --config ./next-sitemap.config.cjs",
     "docs:start": "next start --port 4000",
     "lint": "next lint",
-    "start": "next start --port 4000"
+    "start": "pnpm docs:start",
+    "sitemap": "pnpm docs:sitemap"
   },
   "dependencies": {
     "@docsearch/js": "3.3.3",

@@ -14,12 +14,14 @@
     "docs:sitemap": "turbo run docs:sitemap",
     "docs:start": "turbo run docs:start",
     "lib:build": "cp README.md packages/material-react-table/README.md && turbo run lib:build",
+    "lib:build-locales": "turbo run lib:build-locales",
+    "lib:build-no-locales": "turbo run lib:build-no-locales",
     "lib:dev": "turbo run lib:dev",
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
     "lint": "turbo run lint",
     "start": "turbo run start --parallel",
     "storybook": "turbo run storybook",
-    "storybook:build": "turbo run storybook:build",
+    "storybook:build": "turbo run lib:build-no-locales && turbo run storybook:build",
     "storybook:dev": "turbo run storybook"
   },
   "devDependencies": {

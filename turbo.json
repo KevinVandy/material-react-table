@@ -40,6 +40,16 @@
         "locales/**"
       ]
     },
+    "lib:build-locales": {
+      "outputs": [
+        "locales/**"
+      ]
+    },
+    "lib:build-no-locales": {
+      "outputs": [
+        "dist/**"
+      ]
+    },
     "lib:dev": {
       "cache": false
     },

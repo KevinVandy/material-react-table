@@ -45,9 +45,12 @@
     "node": ">=14"
   },
   "scripts": {
-    "build": "rm -rf dist && rollup -c && size-limit",
-    "lib:build": "rm -rf dist && rollup -c && size-limit",
-    "lib:dev": "rm -rf dist && rollup -c -w",
+    "build": "pnpm lib:build",
+    "build-locales": "pnpm lib:build-locales",
+    "build-no-locales": "pnpm lib:build-no-locales",
+    "lib:build": "rm -rf dist && pnpm build-no-locales && pnpm build-locales",
+    "lib:build-locales": "rm -rf dist && rollup --config rollup-locales.config.mjs",
+    "lib:build-no-locales": "rm -rf dist && rollup --config rollup.config.mjs && size-limit",
     "lint": "eslint .",
     "size": "size-limit"
   },

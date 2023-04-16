@@ -2,9 +2,9 @@
   "name": "material-react-table-storybook",
   "private": true,
   "scripts": {
-    "build": "storybook build",
-    "dev": "storybook dev -p 6006",
-    "storybook": "storybook dev -p 6006",
+    "build": "pnpm storybook:build",
+    "dev": "pnpm storybook:dev",
+    "storybook": "pnpm storybook:dev",
     "storybook:build": "storybook build",
     "storybook:dev": "storybook dev -p 6006"
   },
