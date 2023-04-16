@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -37,11 +37,11 @@ const data = [...Array(21)].map(() => ({
   address: faker.address.streetAddress(),
 }));
 
-export const DefaultTableBodyRowStyles: Story<MaterialReactTableProps> = () => (
+export const DefaultTableBodyRowStyles = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
-export const DisableRowHoverEffect: Story<MaterialReactTableProps> = () => (
+export const DisableRowHoverEffect = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -51,7 +51,7 @@ export const DisableRowHoverEffect: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const StyleMuiTableBodyRow: Story<MaterialReactTableProps> = () => (
+export const StyleMuiTableBodyRow = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -64,7 +64,7 @@ export const StyleMuiTableBodyRow: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const StyleCustomStripedRows: Story<MaterialReactTableProps> = () => (
+export const StyleCustomStripedRows = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -79,9 +79,7 @@ export const StyleCustomStripedRows: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const StyleCustomStripedRowsDetailPanel: Story<
-  MaterialReactTableProps
-> = () => (
+export const StyleCustomStripedRowsDetailPanel = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -97,9 +95,7 @@ export const StyleCustomStripedRowsDetailPanel: Story<
   />
 );
 
-export const ConditionallyStyleMuiTableRow: Story<
-  MaterialReactTableProps
-> = () => (
+export const ConditionallyStyleMuiTableRow = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

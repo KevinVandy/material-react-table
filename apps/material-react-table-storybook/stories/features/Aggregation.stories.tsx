@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   MRT_AggregationFns,
@@ -115,13 +115,11 @@ const columns = [
   },
 ] as MRT_ColumnDef<(typeof data)[0]>[];
 
-export const Aggregation: Story<MaterialReactTableProps> = () => (
+export const Aggregation = () => (
   <MaterialReactTable columns={columns} data={data} enableGrouping />
 );
 
-export const AggregationExpandedDefault: Story<
-  MaterialReactTableProps
-> = () => (
+export const AggregationExpandedDefault = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -130,9 +128,7 @@ export const AggregationExpandedDefault: Story<
   />
 );
 
-export const AggregationGroupedAndExpandedDefault: Story<
-  MaterialReactTableProps
-> = () => (
+export const AggregationGroupedAndExpandedDefault = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -146,7 +142,7 @@ export const AggregationGroupedAndExpandedDefault: Story<
   />
 );
 
-export const MultiAggregationPerColumn: Story<MaterialReactTableProps> = () => (
+export const MultiAggregationPerColumn = () => (
   <MaterialReactTable
     columns={[
       {

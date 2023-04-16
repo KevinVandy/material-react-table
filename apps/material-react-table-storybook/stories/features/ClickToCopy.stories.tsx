@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -50,13 +50,11 @@ const data = [...Array(100)].map(() => ({
   state: faker.address.state(),
 }));
 
-export const ClickToCopyEnabled: Story<MaterialReactTableProps> = () => (
+export const ClickToCopyEnabled = () => (
   <MaterialReactTable columns={columns} data={data} enableClickToCopy />
 );
 
-export const ClickToCopyEnabledWithColumnResizing: Story<
-  MaterialReactTableProps
-> = () => (
+export const ClickToCopyEnabledWithColumnResizing = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -65,9 +63,7 @@ export const ClickToCopyEnabledWithColumnResizing: Story<
   />
 );
 
-export const ClickToCopyEnabledPerColumn: Story<
-  MaterialReactTableProps
-> = () => (
+export const ClickToCopyEnabledPerColumn = () => (
   <MaterialReactTable
     columns={[
       {
@@ -100,9 +96,7 @@ export const ClickToCopyEnabledPerColumn: Story<
   />
 );
 
-export const ClickToCopyDisabledPerColumn: Story<
-  MaterialReactTableProps
-> = () => (
+export const ClickToCopyDisabledPerColumn = () => (
   <MaterialReactTable
     columns={[
       {

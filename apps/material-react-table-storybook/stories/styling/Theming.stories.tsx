@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -39,11 +39,11 @@ const data = [...Array(21)].map(() => ({
   address: faker.address.streetAddress(),
 }));
 
-export const DefaultTheme: Story<MaterialReactTableProps> = () => (
+export const DefaultTheme = () => (
   <MaterialReactTable columns={columns} data={data} enableRowSelection />
 );
 
-export const CustomLightTheme: Story<MaterialReactTableProps> = () => {
+export const CustomLightTheme = () => {
   const theme = createTheme({
     palette: {
       primary: {
@@ -64,7 +64,7 @@ export const CustomLightTheme: Story<MaterialReactTableProps> = () => {
   );
 };
 
-export const CustomDarkTheme: Story<MaterialReactTableProps> = () => {
+export const CustomDarkTheme = () => {
   const theme = createTheme({
     palette: {
       mode: 'dark',

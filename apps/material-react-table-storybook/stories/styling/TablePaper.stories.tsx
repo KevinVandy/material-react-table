@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -43,7 +43,7 @@ const data = [...Array(25)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const NoBoxShadow: Story<MaterialReactTableProps> = () => (
+export const NoBoxShadow = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -57,13 +57,11 @@ const data = [...Array(100)].map(() => ({
   state: faker.address.state(),
 }));
 
-export const ColumnDraggingEnabled: Story<MaterialReactTableProps> = () => (
+export const ColumnDraggingEnabled = () => (
   <MaterialReactTable columns={columns} data={data} enableColumnDragging />
 );
 
-export const ColumnDraggingDisabledPerColumn: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnDraggingDisabledPerColumn = () => (
   <MaterialReactTable
     columns={[
       {

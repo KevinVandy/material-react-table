@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -53,17 +53,15 @@ const data = [...Array(100)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const ColumnHidingEnabledDefault: Story<
-  MaterialReactTableProps
-> = () => <MaterialReactTable columns={columns} data={data} />;
+export const ColumnHidingEnabledDefault = () => (
+  <MaterialReactTable columns={columns} data={data} />
+);
 
-export const ColumnHidingDisabled: Story<MaterialReactTableProps> = () => (
+export const ColumnHidingDisabled = () => (
   <MaterialReactTable columns={columns} data={data} enableHiding={false} />
 );
 
-export const ColumnHidingDisabledButWithOrdering: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnHidingDisabledButWithOrdering = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -72,9 +70,7 @@ export const ColumnHidingDisabledButWithOrdering: Story<
   />
 );
 
-export const ColumnHidingDisabledButWithPinning: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnHidingDisabledButWithPinning = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -83,9 +79,7 @@ export const ColumnHidingDisabledButWithPinning: Story<
   />
 );
 
-export const ColumnHidingDisabledPerColumn: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnHidingDisabledPerColumn = () => (
   <MaterialReactTable
     columns={[
       {
@@ -123,9 +117,7 @@ export const ColumnHidingDisabledPerColumn: Story<
   />
 );
 
-export const ColumnHidingWithHeaderGroups: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnHidingWithHeaderGroups = () => (
   <MaterialReactTable
     columns={[
       {

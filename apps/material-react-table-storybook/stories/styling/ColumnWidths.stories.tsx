@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -46,10 +46,10 @@ const data = [...Array(21)].map(() => ({
   address: faker.address.streetAddress(),
 }));
 
-export const CustomWidths: Story<MaterialReactTableProps> = () => (
+export const CustomWidths = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
-export const CustomWidthsGrid: Story<MaterialReactTableProps> = () => (
+export const CustomWidthsGrid = () => (
   <MaterialReactTable columns={columns} data={data} layoutMode="grid" />
 );

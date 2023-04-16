@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -21,9 +21,7 @@ type Person = {
   state: string;
 };
 
-export const NestedLoadingDataWithInitialExpanded: Story<
-  MaterialReactTableProps
-> = () => {
+export const NestedLoadingDataWithInitialExpanded = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       //column definitions...
@@ -64,9 +62,7 @@ export const NestedLoadingDataWithInitialExpanded: Story<
   );
 };
 
-export const NestedLoadingDataWithInitialFilter: Story<
-  MaterialReactTableProps
-> = () => {
+export const NestedLoadingDataWithInitialFilter = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       //column definitions...
@@ -107,9 +103,7 @@ export const NestedLoadingDataWithInitialFilter: Story<
   );
 };
 
-export const NestedLoadingDataWithInitialGroup: Story<
-  MaterialReactTableProps
-> = () => {
+export const NestedLoadingDataWithInitialGroup = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       //column definitions...
@@ -150,9 +144,7 @@ export const NestedLoadingDataWithInitialGroup: Story<
   );
 };
 
-export const NestedLoadingDataWithInitialPage: Story<
-  MaterialReactTableProps
-> = () => {
+export const NestedLoadingDataWithInitialPage = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       //column definitions...
@@ -193,9 +185,7 @@ export const NestedLoadingDataWithInitialPage: Story<
   );
 };
 
-export const NestedLoadingDataWithInitialSort: Story<
-  MaterialReactTableProps
-> = () => {
+export const NestedLoadingDataWithInitialSort = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       //column definitions...

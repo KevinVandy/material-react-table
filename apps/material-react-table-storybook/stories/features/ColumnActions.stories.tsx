@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -51,11 +51,11 @@ const data: Row[] = [...Array(100)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const ColumnActionsEnabledDefault: Story<
-  MaterialReactTableProps
-> = () => <MaterialReactTable columns={columns} data={data} />;
+export const ColumnActionsEnabledDefault = () => (
+  <MaterialReactTable columns={columns} data={data} />
+);
 
-export const ColumnActionsDisabled: Story<MaterialReactTableProps> = () => (
+export const ColumnActionsDisabled = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -63,9 +63,7 @@ export const ColumnActionsDisabled: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const ColumnActionsDisabledPerColumn: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnActionsDisabledPerColumn = () => (
   <MaterialReactTable
     columns={[
       {
@@ -96,9 +94,7 @@ export const ColumnActionsDisabledPerColumn: Story<
   />
 );
 
-export const ColumnActionsEnabledPerColumn: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnActionsEnabledPerColumn = () => (
   <MaterialReactTable
     columns={[
       {

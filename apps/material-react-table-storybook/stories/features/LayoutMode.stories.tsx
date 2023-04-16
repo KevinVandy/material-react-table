@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -43,7 +43,7 @@ const data = [...Array(100)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const DefaultSemantic: Story<MaterialReactTableProps> = () => (
+export const DefaultSemantic = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -53,7 +53,7 @@ export const DefaultSemantic: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const Grid: Story<MaterialReactTableProps> = () => (
+export const Grid = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -63,7 +63,7 @@ export const Grid: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const GridNoGrow: Story<MaterialReactTableProps> = () => (
+export const GridNoGrow = () => (
   <MaterialReactTable
     columns={columns.slice(0, 2)}
     data={data}
@@ -83,7 +83,7 @@ export const GridNoGrow: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const GridWithResizing: Story<MaterialReactTableProps> = () => (
+export const GridWithResizing = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -94,7 +94,7 @@ export const GridWithResizing: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const GridNoGrowWithResizing: Story<MaterialReactTableProps> = () => (
+export const GridNoGrowWithResizing = () => (
   <MaterialReactTable
     columns={columns.slice(0, 2)}
     data={data}

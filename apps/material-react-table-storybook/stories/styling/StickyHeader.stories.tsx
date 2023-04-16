@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -48,9 +48,7 @@ const data = [...Array(100)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const StickyHeaderDisabledDefault: Story<
-  MaterialReactTableProps
-> = () => (
+export const StickyHeaderDisabledDefault = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -58,7 +56,7 @@ export const StickyHeaderDisabledDefault: Story<
   />
 );
 
-export const EnableStickyHeader: Story<MaterialReactTableProps> = () => (
+export const EnableStickyHeader = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -67,7 +65,7 @@ export const EnableStickyHeader: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const StickyHeaderShorterTable: Story<MaterialReactTableProps> = () => (
+export const StickyHeaderShorterTable = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -107,7 +105,7 @@ const columnsWithFooters: MRT_ColumnDef<(typeof data)[0]>[] = [
   },
 ];
 
-export const disableStickyFooter: Story<MaterialReactTableProps> = () => (
+export const disableStickyFooter = () => (
   <MaterialReactTable
     columns={columnsWithFooters}
     data={data}
@@ -119,7 +117,7 @@ export const disableStickyFooter: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const enableStickyFooter: Story<MaterialReactTableProps> = () => (
+export const enableStickyFooter = () => (
   <MaterialReactTable
     columns={columnsWithFooters}
     data={data}

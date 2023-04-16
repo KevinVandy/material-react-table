@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -43,7 +43,7 @@ const data = [...Array(25)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const MaxWidthAndCentered: Story<MaterialReactTableProps> = () => (
+export const MaxWidthAndCentered = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -56,7 +56,7 @@ export const MaxWidthAndCentered: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const maxHeight: Story<MaterialReactTableProps> = () => (
+export const maxHeight = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -68,7 +68,7 @@ export const maxHeight: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const minHeight: Story<MaterialReactTableProps> = () => (
+export const minHeight = () => (
   <MaterialReactTable
     columns={columns}
     data={data.slice(0, 5)}
@@ -80,7 +80,7 @@ export const minHeight: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const minHeightParent: Story<MaterialReactTableProps> = () => (
+export const minHeightParent = () => (
   <div style={{ height: '700px' }}>
     <MaterialReactTable
       columns={columns}

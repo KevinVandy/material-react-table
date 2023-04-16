@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -53,11 +53,11 @@ const data = [...Array(25)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const DensePaddingToggleEnabledDefault: Story<
-  MaterialReactTableProps
-> = () => <MaterialReactTable columns={columns} data={data} />;
+export const DensePaddingToggleEnabledDefault = () => (
+  <MaterialReactTable columns={columns} data={data} />
+);
 
-export const DensePaddingDisabled: Story<MaterialReactTableProps> = () => (
+export const DensePaddingDisabled = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -65,7 +65,7 @@ export const DensePaddingDisabled: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const DefaultToDensePadding: Story<MaterialReactTableProps> = () => (
+export const DefaultToDensePadding = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

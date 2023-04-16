@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -53,13 +53,11 @@ const data = [...Array(55)].map(() => ({
   state: faker.address.state(),
 }));
 
-export const HeaderGroups: Story<MaterialReactTableProps> = () => (
+export const HeaderGroups = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
-export const HeaderGroupsWithStickyHeader: Story<
-  MaterialReactTableProps
-> = () => (
+export const HeaderGroupsWithStickyHeader = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -68,7 +66,7 @@ export const HeaderGroupsWithStickyHeader: Story<
   />
 );
 
-export const HeaderAndFooterGroups: Story<MaterialReactTableProps> = () => (
+export const HeaderAndFooterGroups = () => (
   <MaterialReactTable
     columns={[
       {
@@ -111,23 +109,19 @@ export const HeaderAndFooterGroups: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const HeaderGroupsWithColumnOrdering: Story<
-  MaterialReactTableProps
-> = () => (
+export const HeaderGroupsWithColumnOrdering = () => (
   <MaterialReactTable columns={columns} data={data} enableColumnOrdering />
 );
 
-export const HeaderGroupsWithColumnPinning: Story<
-  MaterialReactTableProps
-> = () => <MaterialReactTable columns={columns} data={data} enablePinning />;
+export const HeaderGroupsWithColumnPinning = () => (
+  <MaterialReactTable columns={columns} data={data} enablePinning />
+);
 
-export const HeaderGroupsWithColumResizing: Story<
-  MaterialReactTableProps
-> = () => (
+export const HeaderGroupsWithColumResizing = () => (
   <MaterialReactTable columns={columns} data={data} enableColumnResizing />
 );
 
-export const MixedHeaderGroups: Story<MaterialReactTableProps> = () => {
+export const MixedHeaderGroups = () => {
   return (
     <MaterialReactTable
       columns={[
@@ -163,7 +157,7 @@ export const MixedHeaderGroups: Story<MaterialReactTableProps> = () => {
   );
 };
 
-export const DeepMixedHeaderGroups: Story<MaterialReactTableProps> = () => {
+export const DeepMixedHeaderGroups = () => {
   return (
     <MaterialReactTable
       columns={[

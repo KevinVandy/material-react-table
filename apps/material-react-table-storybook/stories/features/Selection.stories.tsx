@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -39,13 +39,11 @@ const data = [...Array(15)].map(() => ({
   address: faker.address.streetAddress(),
 }));
 
-export const SelectionEnabled: Story<MaterialReactTableProps> = () => (
+export const SelectionEnabled = () => (
   <MaterialReactTable columns={columns} data={data} enableRowSelection />
 );
 
-export const SelectionEnabledConditionally: Story<
-  MaterialReactTableProps
-> = () => (
+export const SelectionEnabledConditionally = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -53,9 +51,7 @@ export const SelectionEnabledConditionally: Story<
   />
 );
 
-export const SelectionEnabledWithRowClick: Story<
-  MaterialReactTableProps
-> = () => (
+export const SelectionEnabledWithRowClick = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -69,7 +65,7 @@ export const SelectionEnabledWithRowClick: Story<
   />
 );
 
-export const ManualSelection: Story<MaterialReactTableProps> = () => {
+export const ManualSelection = () => {
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
 
   console.info(rowSelection);
@@ -94,7 +90,7 @@ export const ManualSelection: Story<MaterialReactTableProps> = () => {
   );
 };
 
-export const SelectAllModeAll: Story<MaterialReactTableProps> = () => (
+export const SelectAllModeAll = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -103,9 +99,7 @@ export const SelectAllModeAll: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const SelectAllModeAllConditionally: Story<
-  MaterialReactTableProps
-> = () => (
+export const SelectAllModeAllConditionally = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -114,7 +108,7 @@ export const SelectAllModeAllConditionally: Story<
   />
 );
 
-export const SelectAllModePage: Story<MaterialReactTableProps> = () => (
+export const SelectAllModePage = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -123,9 +117,7 @@ export const SelectAllModePage: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const SelectAllDisabledCustomHeader: Story<
-  MaterialReactTableProps
-> = () => (
+export const SelectAllDisabledCustomHeader = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -137,7 +129,7 @@ export const SelectAllDisabledCustomHeader: Story<
   />
 );
 
-export const SingleSelectionRadio: Story<MaterialReactTableProps> = () => (
+export const SingleSelectionRadio = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -146,9 +138,7 @@ export const SingleSelectionRadio: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const SingleSelectionRadioWithRowClick: Story<
-  MaterialReactTableProps
-> = () => (
+export const SingleSelectionRadioWithRowClick = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -163,9 +153,7 @@ export const SingleSelectionRadioWithRowClick: Story<
   />
 );
 
-export const SelectCheckboxSecondaryColor: Story<
-  MaterialReactTableProps
-> = () => (
+export const SelectCheckboxSecondaryColor = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -174,7 +162,7 @@ export const SelectCheckboxSecondaryColor: Story<
   />
 );
 
-export const SelectionWithInstanceRef: Story<MaterialReactTableProps> = () => {
+export const SelectionWithInstanceRef = () => {
   const tableInstanceRef = useRef<MRT_TableInstance<(typeof data)[0]>>(null);
 
   return (

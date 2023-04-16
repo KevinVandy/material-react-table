@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -48,15 +48,11 @@ const data = [...Array(88)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const ColumnResizingEnabledDefaultOnChange: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnResizingEnabledDefaultOnChange = () => (
   <MaterialReactTable columns={columns} data={data} enableColumnResizing />
 );
 
-export const ColumnResizingEnabledNoColumnActions: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnResizingEnabledNoColumnActions = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -65,9 +61,7 @@ export const ColumnResizingEnabledNoColumnActions: Story<
   />
 );
 
-export const ColumnResizingDisabledSomeColumns: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnResizingDisabledSomeColumns = () => (
   <MaterialReactTable
     columns={[
       {
@@ -101,9 +95,7 @@ export const ColumnResizingDisabledSomeColumns: Story<
   />
 );
 
-export const ColumnResizingEnabledOnEnd: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnResizingEnabledOnEnd = () => (
   <MaterialReactTable
     columnResizeMode="onEnd"
     columns={columns}
@@ -112,9 +104,7 @@ export const ColumnResizingEnabledOnEnd: Story<
   />
 );
 
-export const ColumnResizingCustomDefaultWidths: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnResizingCustomDefaultWidths = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -123,7 +113,7 @@ export const ColumnResizingCustomDefaultWidths: Story<
   />
 );
 
-export const ColumnResizingWithPinning: Story<MaterialReactTableProps> = () => (
+export const ColumnResizingWithPinning = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -133,9 +123,7 @@ export const ColumnResizingWithPinning: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const ColumnResizingWithHeaderGroups: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnResizingWithHeaderGroups = () => (
   <MaterialReactTable
     columns={[
       {
@@ -183,9 +171,7 @@ export const ColumnResizingWithHeaderGroups: Story<
   />
 );
 
-export const ColumnResizingWithHeaderGroupsGrid: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnResizingWithHeaderGroupsGrid = () => (
   <MaterialReactTable
     columns={[
       {
@@ -234,9 +220,7 @@ export const ColumnResizingWithHeaderGroupsGrid: Story<
   />
 );
 
-export const ColumnResizingLayoutGridNoFlexGrow: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnResizingLayoutGridNoFlexGrow = () => (
   <MaterialReactTable
     columns={columns.slice(0, 3)}
     data={data}

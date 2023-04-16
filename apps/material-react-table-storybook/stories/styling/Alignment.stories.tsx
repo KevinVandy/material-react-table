@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -48,11 +48,11 @@ const data = [...Array(25)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const DefaultLeft: Story<MaterialReactTableProps> = () => (
+export const DefaultLeft = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
-export const RightCells: Story<MaterialReactTableProps> = () => (
+export const RightCells = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -66,7 +66,7 @@ export const RightCells: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const CenterCells: Story<MaterialReactTableProps> = () => (
+export const CenterCells = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -79,7 +79,7 @@ export const CenterCells: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const CenterCellsWithGrabHandle: Story<MaterialReactTableProps> = () => (
+export const CenterCellsWithGrabHandle = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -93,9 +93,7 @@ export const CenterCellsWithGrabHandle: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const CenterCellsWithGrabHandleNoSorting: Story<
-  MaterialReactTableProps
-> = () => (
+export const CenterCellsWithGrabHandleNoSorting = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -110,9 +108,7 @@ export const CenterCellsWithGrabHandleNoSorting: Story<
   />
 );
 
-export const CenterCellsNoColumnActions: Story<
-  MaterialReactTableProps
-> = () => (
+export const CenterCellsNoColumnActions = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -126,7 +122,7 @@ export const CenterCellsNoColumnActions: Story<
   />
 );
 
-export const RightAlignNumberColumn: Story<MaterialReactTableProps> = () => (
+export const RightAlignNumberColumn = () => (
   <MaterialReactTable
     columns={[
       {

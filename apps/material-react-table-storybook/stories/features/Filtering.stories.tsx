@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -69,11 +69,11 @@ const data = [...Array(120)].map(() => ({
   state: faker.address.state(),
 }));
 
-export const FilteringEnabledDefault: Story<MaterialReactTableProps> = () => (
+export const FilteringEnabledDefault = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
-export const ColumnFilteringDisabled: Story<MaterialReactTableProps> = () => (
+export const ColumnFilteringDisabled = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -81,13 +81,11 @@ export const ColumnFilteringDisabled: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const FilteringDisabled: Story<MaterialReactTableProps> = () => (
+export const FilteringDisabled = () => (
   <MaterialReactTable columns={columns} data={data} enableFilters={false} />
 );
 
-export const FilterHighlightingDisabled: Story<
-  MaterialReactTableProps
-> = () => (
+export const FilterHighlightingDisabled = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -95,7 +93,7 @@ export const FilterHighlightingDisabled: Story<
   />
 );
 
-export const FilterFnAndFilterVariants: Story<MaterialReactTableProps> = () => (
+export const FilterFnAndFilterVariants = () => (
   <MaterialReactTable
     columns={[
       {
@@ -152,9 +150,7 @@ export const FilterFnAndFilterVariants: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const FilteringChangeModeEnabled: Story<
-  MaterialReactTableProps
-> = () => (
+export const FilteringChangeModeEnabled = () => (
   <MaterialReactTable
     columns={[
       {
@@ -190,9 +186,7 @@ export const FilteringChangeModeEnabled: Story<
   />
 );
 
-export const FilteringChangeModeEnabledHidden: Story<
-  MaterialReactTableProps
-> = () => (
+export const FilteringChangeModeEnabledHidden = () => (
   <MaterialReactTable
     columns={[
       {
@@ -227,9 +221,7 @@ export const FilteringChangeModeEnabledHidden: Story<
   />
 );
 
-export const DisableSomeFilterTypesForCertainColumns: Story<
-  MaterialReactTableProps
-> = () => (
+export const DisableSomeFilterTypesForCertainColumns = () => (
   <MaterialReactTable
     columns={[
       {
@@ -272,9 +264,7 @@ export const DisableSomeFilterTypesForCertainColumns: Story<
   />
 );
 
-export const FilteringDisabledForCertainColumns: Story<
-  MaterialReactTableProps
-> = () => (
+export const FilteringDisabledForCertainColumns = () => (
   <MaterialReactTable
     columns={[
       {
@@ -309,9 +299,7 @@ export const FilteringDisabledForCertainColumns: Story<
   />
 );
 
-export const CustomFilterFunctionPerColumn: Story<
-  MaterialReactTableProps
-> = () => (
+export const CustomFilterFunctionPerColumn = () => (
   <MaterialReactTable
     columns={[
       {
@@ -354,7 +342,7 @@ export const CustomFilterFunctionPerColumn: Story<
   />
 );
 
-export const CustomFilterFns: Story<MaterialReactTableProps> = () => (
+export const CustomFilterFns = () => (
   <MaterialReactTable
     columns={[
       {
@@ -398,7 +386,7 @@ export const CustomFilterFns: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
+export const CustomFilterComponent = () => (
   <MaterialReactTable
     columns={[
       {
@@ -453,7 +441,7 @@ export const CustomFilterComponent: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const ManualFiltering: Story<MaterialReactTableProps> = () => {
+export const ManualFiltering = () => {
   const [rows, setRows] = useState(() => [...data]);
   const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
     [],
@@ -490,7 +478,7 @@ export const ManualFiltering: Story<MaterialReactTableProps> = () => {
   );
 };
 
-export const ExternalSetFilterValue: Story<MaterialReactTableProps> = () => (
+export const ExternalSetFilterValue = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -525,7 +513,7 @@ export const ExternalSetFilterValue: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const InitialFilters: Story<MaterialReactTableProps> = () => (
+export const InitialFilters = () => (
   <MaterialReactTable
     columns={[
       {

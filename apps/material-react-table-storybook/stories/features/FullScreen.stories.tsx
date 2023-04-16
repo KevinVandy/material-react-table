@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -62,11 +62,11 @@ const data = [...Array(128)].map(() => ({
   avatar: faker.image.avatar(),
 }));
 
-export const FullScreenToggleEnabledDefault: Story<
-  MaterialReactTableProps
-> = () => <MaterialReactTable columns={columns} data={data} />;
+export const FullScreenToggleEnabledDefault = () => (
+  <MaterialReactTable columns={columns} data={data} />
+);
 
-export const DisableFullScreenToggle: Story<MaterialReactTableProps> = () => (
+export const DisableFullScreenToggle = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -74,7 +74,7 @@ export const DisableFullScreenToggle: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const DefaultFullScreenOn: Story<MaterialReactTableProps> = () => (
+export const DefaultFullScreenOn = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -82,7 +82,7 @@ export const DefaultFullScreenOn: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const ControlledFullScreen: Story<MaterialReactTableProps> = () => {
+export const ControlledFullScreen = () => {
   const [isFullScreen, setIsFullScreen] = useState(false);
 
   return (

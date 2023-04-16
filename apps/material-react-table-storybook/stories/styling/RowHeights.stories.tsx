@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -48,7 +48,7 @@ const data = [...Array(25)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const SetRowHeight: Story<MaterialReactTableProps> = () => (
+export const SetRowHeight = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

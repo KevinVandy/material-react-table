@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -59,7 +59,7 @@ const data = [...Array(66)].map(() => ({
   states: [faker.address.state(), faker.address.state(), faker.address.state()],
 }));
 
-export const NullColumn: Story<MaterialReactTableProps> = () => {
+export const NullColumn = () => {
   return (
     <MaterialReactTable
       columns={columns}

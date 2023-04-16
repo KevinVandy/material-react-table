@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -43,11 +43,11 @@ const data = [...Array(100)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const Loading: Story<MaterialReactTableProps> = () => (
+export const Loading = () => (
   <MaterialReactTable columns={columns} data={[]} state={{ isLoading: true }} />
 );
 
-export const LoadingWithSelection: Story<MaterialReactTableProps> = () => (
+export const LoadingWithSelection = () => (
   <MaterialReactTable
     columns={columns}
     data={[]}
@@ -56,9 +56,7 @@ export const LoadingWithSelection: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const LoadingWithDetailPanelExample: Story<
-  MaterialReactTableProps
-> = () => (
+export const LoadingWithDetailPanelExample = () => (
   <MaterialReactTable
     columns={columns}
     data={[]}
@@ -74,7 +72,7 @@ export const LoadingWithDetailPanelExample: Story<
   />
 );
 
-export const SkeletonDisplayColumns: Story<MaterialReactTableProps> = () => (
+export const SkeletonDisplayColumns = () => (
   <MaterialReactTable
     columns={columns}
     data={[]}
@@ -86,7 +84,7 @@ export const SkeletonDisplayColumns: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const ReloadingExample: Story<MaterialReactTableProps> = () => (
+export const ReloadingExample = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -94,7 +92,7 @@ export const ReloadingExample: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const OnlyTopProgressBar: Story<MaterialReactTableProps> = () => (
+export const OnlyTopProgressBar = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

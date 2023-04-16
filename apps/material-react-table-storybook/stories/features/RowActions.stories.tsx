@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -52,7 +52,7 @@ const data = [...Array(10)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const RowActionsEnabled: Story<MaterialReactTableProps> = () => (
+export const RowActionsEnabled = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -89,9 +89,7 @@ export const RowActionsEnabled: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const RowActionsAndEditingEnabled: Story<
-  MaterialReactTableProps
-> = () => (
+export const RowActionsAndEditingEnabled = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -129,7 +127,7 @@ export const RowActionsAndEditingEnabled: Story<
   />
 );
 
-export const RowActionsLastColumn: Story<MaterialReactTableProps> = () => (
+export const RowActionsLastColumn = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -168,7 +166,7 @@ export const RowActionsLastColumn: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const CustomRowActionButtons: Story<MaterialReactTableProps> = () => (
+export const CustomRowActionButtons = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -198,9 +196,7 @@ export const CustomRowActionButtons: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const CustomRowActionButtonsLastColumn: Story<
-  MaterialReactTableProps
-> = () => (
+export const CustomRowActionButtonsLastColumn = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

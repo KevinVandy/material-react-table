@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -51,9 +51,7 @@ const data = [...Array(6)].map(() => ({
   state: faker.address.state(),
 }));
 
-export const CenterAlignInGridLayoutMode: Story<
-  MaterialReactTableProps
-> = () => {
+export const CenterAlignInGridLayoutMode = () => {
   return (
     <MaterialReactTable
       columns={columns}
@@ -69,9 +67,7 @@ export const CenterAlignInGridLayoutMode: Story<
   );
 };
 
-export const RightAlignInGridLayoutMode: Story<
-  MaterialReactTableProps
-> = () => {
+export const RightAlignInGridLayoutMode = () => {
   return (
     <MaterialReactTable
       columns={columns}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -58,7 +58,7 @@ const initData = [...Array(100)].map(() => ({
   state: faker.address.state(),
 }));
 
-export const RowOrderingEnabled: Story<MaterialReactTableProps> = () => {
+export const RowOrderingEnabled = () => {
   const [data, setData] = useState(() => initData);
 
   return (
@@ -85,7 +85,7 @@ export const RowOrderingEnabled: Story<MaterialReactTableProps> = () => {
   );
 };
 
-export const RowOrderingWithSelect: Story<MaterialReactTableProps> = () => {
+export const RowOrderingWithSelect = () => {
   const [data, setData] = useState(() => initData);
   const [draggingRow, setDraggingRow] = useState<MRT_Row<Person> | null>(null);
   const [hoveredRow, setHoveredRow] = useState<MRT_Row<Person> | null>(null);
@@ -121,7 +121,7 @@ export const RowOrderingWithSelect: Story<MaterialReactTableProps> = () => {
   );
 };
 
-export const RowOrderingWithPinning: Story<MaterialReactTableProps> = () => {
+export const RowOrderingWithPinning = () => {
   const [data, setData] = useState(() => initData);
   const [draggingRow, setDraggingRow] = useState<MRT_Row<Person> | null>(null);
   const [hoveredRow, setHoveredRow] = useState<MRT_Row<Person> | null>(null);
@@ -156,7 +156,7 @@ export const RowOrderingWithPinning: Story<MaterialReactTableProps> = () => {
   );
 };
 
-export const RowAndColumnOrdering: Story<MaterialReactTableProps> = () => {
+export const RowAndColumnOrdering = () => {
   const [data, setData] = useState(() => initData);
   const [draggingRow, setDraggingRow] = useState<MRT_Row<Person> | null>(null);
   const [hoveredRow, setHoveredRow] = useState<MRT_Row<Person> | null>(null);

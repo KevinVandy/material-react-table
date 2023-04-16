@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -44,17 +44,15 @@ const data = [...Array(100)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const SortingEnabledDefault: Story<MaterialReactTableProps> = () => (
+export const SortingEnabledDefault = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
-export const DisableSorting: Story<MaterialReactTableProps> = () => (
+export const DisableSorting = () => (
   <MaterialReactTable columns={columns} data={data} enableSorting={false} />
 );
 
-export const DisableSortingForSpecificColumns: Story<
-  MaterialReactTableProps
-> = () => (
+export const DisableSortingForSpecificColumns = () => (
   <MaterialReactTable
     columns={[
       {
@@ -84,11 +82,11 @@ export const DisableSortingForSpecificColumns: Story<
   />
 );
 
-export const DisableMultiSorting: Story<MaterialReactTableProps> = () => (
+export const DisableMultiSorting = () => (
   <MaterialReactTable columns={columns} data={data} enableMultiSort={false} />
 );
 
-export const SortRanking: Story<MaterialReactTableProps> = () => (
+export const SortRanking = () => (
   <MaterialReactTable
     columns={[
       {
@@ -119,7 +117,7 @@ export const SortRanking: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const SortingStateManaged: Story<MaterialReactTableProps> = () => {
+export const SortingStateManaged = () => {
   const [sorting, setSorting] = React.useState<MRT_SortingState>([]);
   return (
     <MaterialReactTable

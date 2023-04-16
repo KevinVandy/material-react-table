@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -43,7 +43,7 @@ const data = [...Array(100)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const enableRowNumbersOriginal: Story<MaterialReactTableProps> = () => (
+export const enableRowNumbersOriginal = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -52,7 +52,7 @@ export const enableRowNumbersOriginal: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const enableRowNumbersStatic: Story<MaterialReactTableProps> = () => (
+export const enableRowNumbersStatic = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -62,9 +62,7 @@ export const enableRowNumbersStatic: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const enableRowNumbersOriginalVirtual: Story<
-  MaterialReactTableProps
-> = () => (
+export const enableRowNumbersOriginalVirtual = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -75,9 +73,7 @@ export const enableRowNumbersOriginalVirtual: Story<
   />
 );
 
-export const enableRowNumbersStaticVirtual: Story<
-  MaterialReactTableProps
-> = () => (
+export const enableRowNumbersStaticVirtual = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

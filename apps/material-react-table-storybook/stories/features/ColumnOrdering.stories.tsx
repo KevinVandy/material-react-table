@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -49,13 +49,11 @@ const data = [...Array(100)].map(() => ({
   state: faker.address.state(),
 }));
 
-export const ColumnOrderingEnabled: Story<MaterialReactTableProps> = () => (
+export const ColumnOrderingEnabled = () => (
   <MaterialReactTable columns={columns} data={data} enableColumnOrdering />
 );
 
-export const ColumnOrderingDisabledPerColumn: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnOrderingDisabledPerColumn = () => (
   <MaterialReactTable
     columns={[
       {
@@ -89,7 +87,7 @@ export const ColumnOrderingDisabledPerColumn: Story<
   />
 );
 
-export const ColumnOrderingWithSelect: Story<MaterialReactTableProps> = () => (
+export const ColumnOrderingWithSelect = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -98,7 +96,7 @@ export const ColumnOrderingWithSelect: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const ColumnOrderingWithPinning: Story<MaterialReactTableProps> = () => (
+export const ColumnOrderingWithPinning = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -107,9 +105,7 @@ export const ColumnOrderingWithPinning: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const ColumnOrderingNoDragHandles: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnOrderingNoDragHandles = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -118,9 +114,7 @@ export const ColumnOrderingNoDragHandles: Story<
   />
 );
 
-export const ColumnOrderingStateManaged: Story<
-  MaterialReactTableProps
-> = () => {
+export const ColumnOrderingStateManaged = () => {
   const [columnOrder, setColumnOrder] = useState<MRT_ColumnOrderState>([
     'mrt-row-select',
     ...columns.map((c) => c.accessorKey as string),

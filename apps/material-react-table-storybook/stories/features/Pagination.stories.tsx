@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -37,17 +37,15 @@ const data = [...Array(21)].map(() => ({
   address: faker.address.streetAddress(),
 }));
 
-export const PaginationEnabledDefault: Story<MaterialReactTableProps> = () => (
+export const PaginationEnabledDefault = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
-export const PaginationDisabledOrOverriden: Story<
-  MaterialReactTableProps
-> = () => (
+export const PaginationDisabledOrOverriden = () => (
   <MaterialReactTable columns={columns} data={data} enablePagination={false} />
 );
 
-export const PaginationPositionBottom: Story<MaterialReactTableProps> = () => (
+export const PaginationPositionBottom = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -55,19 +53,15 @@ export const PaginationPositionBottom: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const PaginationPositionTop: Story<MaterialReactTableProps> = () => (
+export const PaginationPositionTop = () => (
   <MaterialReactTable columns={columns} data={data} positionPagination="top" />
 );
 
-export const PaginationPositionTopAndBottom: Story<
-  MaterialReactTableProps
-> = () => (
+export const PaginationPositionTopAndBottom = () => (
   <MaterialReactTable columns={columns} data={data} positionPagination="both" />
 );
 
-export const PaginationPositionTopAndBottomNoInternalActions: Story<
-  MaterialReactTableProps
-> = () => (
+export const PaginationPositionTopAndBottomNoInternalActions = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -76,9 +70,7 @@ export const PaginationPositionTopAndBottomNoInternalActions: Story<
   />
 );
 
-export const CustomizePaginationComponents: Story<
-  MaterialReactTableProps
-> = () => (
+export const CustomizePaginationComponents = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -93,7 +85,7 @@ export const CustomizePaginationComponents: Story<
   />
 );
 
-export const RotateIcons: Story<MaterialReactTableProps> = () => (
+export const RotateIcons = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

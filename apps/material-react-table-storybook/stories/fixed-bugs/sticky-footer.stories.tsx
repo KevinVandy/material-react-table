@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
 } from 'material-react-table';
@@ -132,9 +132,7 @@ const mockColumns: any = [
   },
 ];
 
-export const PinnedColumnsWithStickyFooter: Story<
-  MaterialReactTableProps
-> = () => {
+export const PinnedColumnsWithStickyFooter = () => {
   return (
     <MaterialReactTable
       columns={mockColumns}

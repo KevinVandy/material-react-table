@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -38,11 +38,11 @@ const data = [...Array(21)].map(() => ({
   address: faker.address.streetAddress(),
 }));
 
-export const DefaultTableHeadCellStyles: Story<
-  MaterialReactTableProps
-> = () => <MaterialReactTable columns={columns} data={data} />;
+export const DefaultTableHeadCellStyles = () => (
+  <MaterialReactTable columns={columns} data={data} />
+);
 
-export const StyleAllMuiTableHeadCell: Story<MaterialReactTableProps> = () => (
+export const StyleAllMuiTableHeadCell = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -56,9 +56,7 @@ export const StyleAllMuiTableHeadCell: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const StyleTableHeadCellsIndividually: Story<
-  MaterialReactTableProps
-> = () => (
+export const StyleTableHeadCellsIndividually = () => (
   <MaterialReactTable
     columns={[
       {
@@ -90,7 +88,7 @@ export const StyleTableHeadCellsIndividually: Story<
   />
 );
 
-export const CustomHeadCellRenders: Story<MaterialReactTableProps> = () => (
+export const CustomHeadCellRenders = () => (
   <MaterialReactTable
     columns={[
       {

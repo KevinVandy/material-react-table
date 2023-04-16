@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -48,11 +48,11 @@ const data = [...Array(100)].map(() => ({
   state: faker.address.state(),
 }));
 
-export const ColumnPinningEnabled: Story<MaterialReactTableProps> = () => (
+export const ColumnPinningEnabled = () => (
   <MaterialReactTable columns={columns} data={data} enablePinning />
 );
 
-export const ColumnPinningInitial: Story<MaterialReactTableProps> = () => (
+export const ColumnPinningInitial = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -61,9 +61,7 @@ export const ColumnPinningInitial: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const ColumnPinningDisabledPerColumn: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnPinningDisabledPerColumn = () => (
   <MaterialReactTable
     columns={[
       {
@@ -97,7 +95,7 @@ export const ColumnPinningDisabledPerColumn: Story<
   />
 );
 
-export const ColumnPinningWithSelect: Story<MaterialReactTableProps> = () => (
+export const ColumnPinningWithSelect = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -106,9 +104,7 @@ export const ColumnPinningWithSelect: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const ColumnPinningWithDetailPanel: Story<
-  MaterialReactTableProps
-> = () => (
+export const ColumnPinningWithDetailPanel = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

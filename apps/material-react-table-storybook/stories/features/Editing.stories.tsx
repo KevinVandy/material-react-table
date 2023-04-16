@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
 } from 'material-react-table';
@@ -77,9 +77,7 @@ const data = [...Array(100)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const EditingEnabledEditModeModalDefault: Story<
-  MaterialReactTableProps
-> = () => {
+export const EditingEnabledEditModeModalDefault = () => {
   const [tableData, setTableData] = useState(data);
 
   const handleSaveRow = ({ exitEditingMode, row, values }) => {
@@ -120,7 +118,7 @@ export const EditingEnabledEditModeModalDefault: Story<
   );
 };
 
-export const EditingEnabledEditModeRow: Story<MaterialReactTableProps> = () => {
+export const EditingEnabledEditModeRow = () => {
   const [tableData, setTableData] = useState(data);
 
   const handleSaveRow = ({ exitEditingMode, row, values }) => {
@@ -162,9 +160,7 @@ export const EditingEnabledEditModeRow: Story<MaterialReactTableProps> = () => {
   );
 };
 
-export const EditingEnabledEditModeCell: Story<
-  MaterialReactTableProps
-> = () => {
+export const EditingEnabledEditModeCell = () => {
   const [tableData, setTableData] = useState(data);
 
   const handleSaveCell = (cell, value) => {
@@ -209,9 +205,7 @@ export const EditingEnabledEditModeCell: Story<
   );
 };
 
-export const EditingEnabledEditModeTable: Story<
-  MaterialReactTableProps
-> = () => {
+export const EditingEnabledEditModeTable = () => {
   const [tableData, setTableData] = useState(data);
 
   const handleSaveCell = (cell, value) => {
@@ -256,7 +250,7 @@ export const EditingEnabledEditModeTable: Story<
   );
 };
 
-export const EditSelectVariant: Story<MaterialReactTableProps> = () => {
+export const EditSelectVariant = () => {
   const [tableData, setTableData] = useState(data);
 
   const handleSaveRow = ({ row, values }) => {
@@ -299,9 +293,7 @@ export const EditSelectVariant: Story<MaterialReactTableProps> = () => {
   );
 };
 
-export const EditSelectVariantAlternate: Story<
-  MaterialReactTableProps
-> = () => {
+export const EditSelectVariantAlternate = () => {
   const [tableData, setTableData] = useState(data);
 
   const handleSaveRow = ({ row, values }) => {
@@ -390,7 +382,7 @@ export const EditSelectVariantAlternate: Story<
   );
 };
 
-export const EditingCustomizeInput: Story<MaterialReactTableProps> = () => {
+export const EditingCustomizeInput = () => {
   const [tableData, setTableData] = useState(data);
 
   const handleSaveRow = ({ row, values }) => {
@@ -496,7 +488,7 @@ export const EditingCustomizeInput: Story<MaterialReactTableProps> = () => {
   );
 };
 
-// export const EditingWithValidation: Story<MaterialReactTableProps> = () => {
+// export const EditingWithValidation = () => {
 //   const [tableData, setTableData] = useState(data);
 //   const [firstNameError, setFirstNameError] = useState<string | boolean>(false);
 //   const [lastNameError, setLastNameError] = useState<string | boolean>(false);
@@ -571,7 +563,7 @@ export const EditingCustomizeInput: Story<MaterialReactTableProps> = () => {
 //   );
 // };
 
-export const EditingEnabledAsync: Story<MaterialReactTableProps> = () => {
+export const EditingEnabledAsync = () => {
   const [tableData, setTableData] = useState(data);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -629,7 +621,7 @@ const nestedData = [...Array(10)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const EditingNestedData: Story<MaterialReactTableProps> = () => {
+export const EditingNestedData = () => {
   const [tableData, setTableData] = useState(() => nestedData);
 
   return (
@@ -676,9 +668,7 @@ export const EditingNestedData: Story<MaterialReactTableProps> = () => {
   );
 };
 
-export const EditingEnabledEditModeTableWithGroupedRows: Story<
-  MaterialReactTableProps
-> = () => {
+export const EditingEnabledEditModeTableWithGroupedRows = () => {
   const [tableData, setTableData] = useState(data);
 
   const handleSaveRow = ({ exitEditingMode, row, values }) => {
@@ -721,9 +711,7 @@ export const EditingEnabledEditModeTableWithGroupedRows: Story<
   );
 };
 
-export const EnableEditingConditionally: Story<
-  MaterialReactTableProps
-> = () => {
+export const EnableEditingConditionally = () => {
   const [tableData, setTableData] = useState(data);
 
   const handleSaveRow = ({ exitEditingMode, row, values }) => {
@@ -765,9 +753,7 @@ export const EnableEditingConditionally: Story<
   );
 };
 
-export const EnableEditingConditionallyCell: Story<
-  MaterialReactTableProps
-> = () => {
+export const EnableEditingConditionallyCell = () => {
   const [tableData, setTableData] = useState(data);
 
   const handleSaveRow = ({ exitEditingMode, row, values }) => {
@@ -809,9 +795,7 @@ export const EnableEditingConditionallyCell: Story<
   );
 };
 
-export const EnableEditingConditionallyTable: Story<
-  MaterialReactTableProps
-> = () => {
+export const EnableEditingConditionallyTable = () => {
   const [tableData, setTableData] = useState(data);
 
   const handleSaveRow = ({ exitEditingMode, row, values }) => {

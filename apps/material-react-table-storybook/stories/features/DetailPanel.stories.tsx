@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
 } from 'material-react-table';
@@ -11,7 +11,7 @@ const meta: Meta = {
 
 export default meta;
 
-export const DetailPanelEnabled: Story<MaterialReactTableProps> = () => (
+export const DetailPanelEnabled = () => (
   <MaterialReactTable
     columns={[
       {
@@ -47,9 +47,7 @@ export const DetailPanelEnabled: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const DetailPanelEnabledConditional: Story<
-  MaterialReactTableProps
-> = () => (
+export const DetailPanelEnabledConditional = () => (
   <MaterialReactTable
     columns={[
       {
@@ -99,9 +97,7 @@ export const DetailPanelEnabledConditional: Story<
   />
 );
 
-export const DetailPanelExpandColumnLast: Story<
-  MaterialReactTableProps
-> = () => (
+export const DetailPanelExpandColumnLast = () => (
   <MaterialReactTable
     columns={[
       {
@@ -148,9 +144,7 @@ export const DetailPanelExpandColumnLast: Story<
   />
 );
 
-export const DetailPanelExpandedByDefault: Story<
-  MaterialReactTableProps
-> = () => (
+export const DetailPanelExpandedByDefault = () => (
   <MaterialReactTable
     columns={[
       {
@@ -187,9 +181,7 @@ export const DetailPanelExpandedByDefault: Story<
   />
 );
 
-export const DetailPanelExpandAllDisabled: Story<
-  MaterialReactTableProps
-> = () => (
+export const DetailPanelExpandAllDisabled = () => (
   <MaterialReactTable
     columns={[
       {

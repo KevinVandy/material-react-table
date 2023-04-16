@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -48,15 +48,15 @@ const data = [...Array(200)].map(() => ({
   age: +faker.datatype.float({ min: 0, max: 100 }),
 }));
 
-export const SearchEnabledDefault: Story<MaterialReactTableProps> = () => (
+export const SearchEnabledDefault = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
-export const SearchContains: Story<MaterialReactTableProps> = () => (
+export const SearchContains = () => (
   <MaterialReactTable columns={columns} data={data} globalFilterFn="contains" />
 );
 
-export const CustomGlobalFilterFn: Story<MaterialReactTableProps> = () => (
+export const CustomGlobalFilterFn = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -68,13 +68,11 @@ export const CustomGlobalFilterFn: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const SearchGlobalFilterModes: Story<MaterialReactTableProps> = () => (
+export const SearchGlobalFilterModes = () => (
   <MaterialReactTable columns={columns} data={data} enableGlobalFilterModes />
 );
 
-export const SearchGlobalFilterModeOptions: Story<
-  MaterialReactTableProps
-> = () => (
+export const SearchGlobalFilterModeOptions = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -83,13 +81,11 @@ export const SearchGlobalFilterModeOptions: Story<
   />
 );
 
-export const SearchRankedResultsEnabledByDefault: Story<
-  MaterialReactTableProps
-> = () => <MaterialReactTable columns={columns} data={data} enableRowNumbers />;
+export const SearchRankedResultsEnabledByDefault = () => (
+  <MaterialReactTable columns={columns} data={data} enableRowNumbers />
+);
 
-export const SearchDisableRankedResults: Story<
-  MaterialReactTableProps
-> = () => (
+export const SearchDisableRankedResults = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -98,9 +94,7 @@ export const SearchDisableRankedResults: Story<
   />
 );
 
-export const ShowSearchRightBoxByDefault: Story<
-  MaterialReactTableProps
-> = () => (
+export const ShowSearchRightBoxByDefault = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -108,9 +102,7 @@ export const ShowSearchRightBoxByDefault: Story<
   />
 );
 
-export const ShowSearchBoxLeftByDefault: Story<
-  MaterialReactTableProps
-> = () => (
+export const ShowSearchBoxLeftByDefault = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -119,9 +111,7 @@ export const ShowSearchBoxLeftByDefault: Story<
   />
 );
 
-export const ShowSearchBoxLeftByDefaultWithSelection: Story<
-  MaterialReactTableProps
-> = () => (
+export const ShowSearchBoxLeftByDefaultWithSelection = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -131,7 +121,7 @@ export const ShowSearchBoxLeftByDefaultWithSelection: Story<
   />
 );
 
-export const JustASearchBox: Story<MaterialReactTableProps> = () => (
+export const JustASearchBox = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -140,7 +130,7 @@ export const JustASearchBox: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const SearchDisabled: Story<MaterialReactTableProps> = () => (
+export const SearchDisabled = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -148,7 +138,7 @@ export const SearchDisabled: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const CustomizeSearchTextBox: Story<MaterialReactTableProps> = () => (
+export const CustomizeSearchTextBox = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

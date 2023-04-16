@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -47,11 +47,11 @@ const data = [...Array(5)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
-export const ToolbarEnabledDefault: Story<MaterialReactTableProps> = () => (
+export const ToolbarEnabledDefault = () => (
   <MaterialReactTable columns={columns} data={data} enableRowSelection />
 );
 
-export const TopToolbarHidden: Story<MaterialReactTableProps> = () => (
+export const TopToolbarHidden = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -60,7 +60,7 @@ export const TopToolbarHidden: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const BottomToolbarHidden: Story<MaterialReactTableProps> = () => (
+export const BottomToolbarHidden = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -69,7 +69,7 @@ export const BottomToolbarHidden: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const NoToolbars: Story<MaterialReactTableProps> = () => (
+export const NoToolbars = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -79,9 +79,7 @@ export const NoToolbars: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const HideToolbarInternalActions: Story<
-  MaterialReactTableProps
-> = () => (
+export const HideToolbarInternalActions = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -90,9 +88,7 @@ export const HideToolbarInternalActions: Story<
   />
 );
 
-export const CustomToolbarInternalActions: Story<
-  MaterialReactTableProps
-> = () => (
+export const CustomToolbarInternalActions = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -108,7 +104,7 @@ export const CustomToolbarInternalActions: Story<
   />
 );
 
-export const TableTitle: Story<MaterialReactTableProps> = () => (
+export const TableTitle = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -119,7 +115,7 @@ export const TableTitle: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const CustomTopToolbarActions: Story<MaterialReactTableProps> = () => (
+export const CustomTopToolbarActions = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -142,9 +138,7 @@ export const CustomTopToolbarActions: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const CustomBottomToolbarActions: Story<
-  MaterialReactTableProps
-> = () => (
+export const CustomBottomToolbarActions = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -167,9 +161,7 @@ export const CustomBottomToolbarActions: Story<
   />
 );
 
-export const CustomTopToolbarSelectionActions: Story<
-  MaterialReactTableProps
-> = () => (
+export const CustomTopToolbarSelectionActions = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -225,9 +217,7 @@ export const CustomTopToolbarSelectionActions: Story<
   />
 );
 
-export const CustomBottomToolbarSelectionActions: Story<
-  MaterialReactTableProps
-> = () => (
+export const CustomBottomToolbarSelectionActions = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -283,7 +273,7 @@ export const CustomBottomToolbarSelectionActions: Story<
   />
 );
 
-export const ToolbarAlertBannerBottom: Story<MaterialReactTableProps> = () => (
+export const ToolbarAlertBannerBottom = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -320,9 +310,7 @@ export const ToolbarAlertBannerBottom: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const ToolbarAlertBannerBottomWithActionsAlsoBottom: Story<
-  MaterialReactTableProps
-> = () => (
+export const ToolbarAlertBannerBottomWithActionsAlsoBottom = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -359,7 +347,7 @@ export const ToolbarAlertBannerBottomWithActionsAlsoBottom: Story<
   />
 );
 
-export const renderCustomTopToolbar: Story<MaterialReactTableProps> = () => (
+export const renderCustomTopToolbar = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -367,7 +355,7 @@ export const renderCustomTopToolbar: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const renderCustomBottomToolbar: Story<MaterialReactTableProps> = () => (
+export const renderCustomBottomToolbar = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

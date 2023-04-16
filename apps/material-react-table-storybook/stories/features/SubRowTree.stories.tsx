@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+ import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   type MRT_ColumnDef,
@@ -64,13 +64,11 @@ const data = [...Array(5)].map(() => ({
   })),
 }));
 
-export const SubRowTreeEnabledDefault: Story<MaterialReactTableProps> = () => (
+export const SubRowTreeEnabledDefault = () => (
   <MaterialReactTable columns={columns} data={data} enableExpanding />
 );
 
-export const SubRowTreeDisableExpandAll: Story<
-  MaterialReactTableProps
-> = () => (
+export const SubRowTreeDisableExpandAll = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -79,9 +77,7 @@ export const SubRowTreeDisableExpandAll: Story<
   />
 );
 
-export const SubRowTreeFilterFromLeafRows: Story<
-  MaterialReactTableProps
-> = () => (
+export const SubRowTreeFilterFromLeafRows = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -92,9 +88,7 @@ export const SubRowTreeFilterFromLeafRows: Story<
   />
 );
 
-export const SubRowTreeMaxLeafRowFilterDepth0: Story<
-  MaterialReactTableProps
-> = () => (
+export const SubRowTreeMaxLeafRowFilterDepth0 = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -105,9 +99,7 @@ export const SubRowTreeMaxLeafRowFilterDepth0: Story<
   />
 );
 
-export const SubRowTreeMaxLeafRowFilterDepth1: Story<
-  MaterialReactTableProps
-> = () => (
+export const SubRowTreeMaxLeafRowFilterDepth1 = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -118,9 +110,7 @@ export const SubRowTreeMaxLeafRowFilterDepth1: Story<
   />
 );
 
-export const SubRowTreeMaxLeafRowFilterDepthAndFilterFromLeafRows: Story<
-  MaterialReactTableProps
-> = () => (
+export const SubRowTreeMaxLeafRowFilterDepthAndFilterFromLeafRows = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -132,7 +122,7 @@ export const SubRowTreeMaxLeafRowFilterDepthAndFilterFromLeafRows: Story<
   />
 );
 
-export const SubRowTreeWithSelection: Story<MaterialReactTableProps> = () => (
+export const SubRowTreeWithSelection = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -142,9 +132,7 @@ export const SubRowTreeWithSelection: Story<MaterialReactTableProps> = () => (
   />
 );
 
-export const SubRowTreeWithSelectionNoSubRowSelection: Story<
-  MaterialReactTableProps
-> = () => (
+export const SubRowTreeWithSelectionNoSubRowSelection = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -155,9 +143,7 @@ export const SubRowTreeWithSelectionNoSubRowSelection: Story<
   />
 );
 
-export const SubRowTreeWithSingleSelection: Story<
-  MaterialReactTableProps
-> = () => (
+export const SubRowTreeWithSingleSelection = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
