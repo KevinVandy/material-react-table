@@ -1,5 +1,5 @@
 import React from 'react';
- import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
   MRT_AggregationFns,

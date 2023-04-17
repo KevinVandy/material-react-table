@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
- import { Meta } from '@storybook/react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Meta } from '@storybook/react';
 import MaterialReactTable, {
-  type MaterialReactTableProps,
   type MRT_Column,
   type MRT_ColumnDef,
 } from 'material-react-table';
@@ -252,6 +251,32 @@ export const GroupingStateManaged = () => {
       enableGrouping
       state={{ grouping }}
       onGroupingChange={setGrouping}
+    />
+  );
+};
+
+export const GroupingAndDraggingWithSomeDisabledGrouping = () => {
+  const _columns = useMemo<MRT_ColumnDef<Person>[]>(
+    () => [
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+        enableGrouping: false,
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+    ],
+    [],
+  );
+
+  return (
+    <MaterialReactTable
+      columns={_columns}
+      data={data}
+      enableColumnDragging
+      enableGrouping
     />
   );
 };

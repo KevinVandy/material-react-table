@@ -1,7 +1,6 @@
 import React from 'react';
- import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import MaterialReactTable, {
-  type MaterialReactTableProps,
   type MRT_ColumnDef,
   MRT_FullScreenToggleButton,
 } from 'material-react-table';

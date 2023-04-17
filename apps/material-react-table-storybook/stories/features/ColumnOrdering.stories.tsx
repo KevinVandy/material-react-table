@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
- import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import MaterialReactTable, {
-  type MaterialReactTableProps,
   type MRT_ColumnDef,
   MRT_ColumnOrderState,
 } from 'material-react-table';

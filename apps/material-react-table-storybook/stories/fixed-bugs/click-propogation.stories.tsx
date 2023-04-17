@@ -1,11 +1,8 @@
 import React from 'react';
- import { Meta } from '@storybook/react';
-import MaterialReactTable, {
-  type MaterialReactTableProps,
-  type MRT_ColumnDef,
-} from 'material-react-table';
+import { Meta } from '@storybook/react';
+import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import { faker } from '@faker-js/faker';
-import { MenuItem } from '@mui/material';
+import { Button, MenuItem } from '@mui/material';
 
 const meta: Meta = {
   title: 'Fixed Bugs/Click Propagation',
@@ -52,16 +49,33 @@ const data = [...Array(6)].map(() => ({
   state: faker.address.state(),
 }));
 
-export const RowClickAndRowActions = () => {
+export const RowClickAndRowMenuActions = () => {
   return (
     <MaterialReactTable
       columns={columns}
       data={data}
       enableRowActions
       enableEditing
-      renderRowActionMenuItems={() => [
-        <MenuItem onClick={(event) => event.stopPropagation()}>Test</MenuItem>,
-      ]}
+      renderRowActionMenuItems={() => [<MenuItem>Test</MenuItem>]}
+      muiTableBodyRowProps={{
+        onClick: () => {
+          alert('row click');
+        },
+      }}
+    />
+  );
+};
+
+export const RowClickAndRowButtonActions = () => {
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      enableRowActions
+      enableEditing
+      renderRowActions={() => (
+        <Button onClick={(e) => e.stopPropagation()}>Test</Button>
+      )}
       muiTableBodyRowProps={{
         onClick: () => {
           alert('row click');

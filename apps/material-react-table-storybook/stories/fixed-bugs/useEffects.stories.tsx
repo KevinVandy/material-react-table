@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, {
-  type MaterialReactTableProps,
   type MRT_ColumnDef,
   type MRT_ColumnFiltersState,
 } from 'material-react-table';
