@@ -2,6 +2,7 @@ import React from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 import { faker } from '@faker-js/faker';
+import { Typography } from '@mui/material';
 
 const meta: Meta = {
   title: 'Styling/Custom Table Body Examples',
@@ -52,5 +53,15 @@ export const CustomTableBody = () => (
     muiTableBodyProps={{
       children: 'Custom Table Body',
     }}
+  />
+);
+
+export const CustomEmptyRowsJSX = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={[]}
+    renderEmptyRowsFallback={() => (
+      <Typography>OMG THERE ARE NO ROWS 😳</Typography>
+    )}
   />
 );

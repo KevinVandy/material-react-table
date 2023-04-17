@@ -1744,6 +1744,16 @@ export const rootProps: PropRow[] = [
     type: '({ internalFilterOptions, onSelectFilterMode, table }) => ReactNode[]',
   },
   {
+    propName: 'renderEmptyRowsFallback',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '({ table }) => ReactNode',
+  },
+  {
     propName: 'renderRowActionMenuItems',
     defaultValue: '',
     description: '',

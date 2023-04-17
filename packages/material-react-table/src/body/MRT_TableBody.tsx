@@ -42,6 +42,7 @@ export const MRT_TableBody = ({
       manualSorting,
       memoMode,
       muiTableBodyProps,
+      renderEmptyRowsFallback,
       rowVirtualizerInstanceRef,
       rowVirtualizerProps,
       virtualizerInstanceRef,
@@ -163,24 +164,28 @@ export const MRT_TableBody = ({
           <tr style={{ display: layoutMode === 'grid' ? 'grid' : 'table-row' }}>
             <td
               colSpan={table.getVisibleLeafColumns().length}
-              style={{ display: layoutMode === 'grid' ? 'grid' : 'table-cell' }}
+              style={{
+                display: layoutMode === 'grid' ? 'grid' : 'table-cell',
+              }}
             >
-              <Typography
-                sx={{
-                  color: 'text.secondary',
-                  fontStyle: 'italic',
-                  maxWidth: `min(100vw, ${
-                    tablePaperRef.current?.clientWidth ?? 360
-                  }px)`,
-                  py: '2rem',
-                  textAlign: 'center',
-                  width: '100%',
-                }}
-              >
-                {globalFilter || columnFilters.length
-                  ? localization.noResultsFound
-                  : localization.noRecordsToDisplay}
-              </Typography>
+              {renderEmptyRowsFallback?.({ table }) ?? (
+                <Typography
+                  sx={{
+                    color: 'text.secondary',
+                    fontStyle: 'italic',
+                    maxWidth: `min(100vw, ${
+                      tablePaperRef.current?.clientWidth ?? 360
+                    }px)`,
+                    py: '2rem',
+                    textAlign: 'center',
+                    width: '100%',
+                  }}
+                >
+                  {globalFilter || columnFilters.length
+                    ? localization.noResultsFound
+                    : localization.noRecordsToDisplay}
+                </Typography>
+              )}
             </td>
           </tr>
         ) : (

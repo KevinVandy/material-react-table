@@ -12,6 +12,14 @@ import Head from 'next/head';
 
 ### Version 1 (Latest)
 
+#### v1.10.0 (2023-04-16)
+
+- New highly requested `renderEmptyRowsFallback` prop for rendering custom JSX when there are no rows to display
+- Added `staticRowIndex` param to `muiTableBodyRowProps` to make styling striped virtual rows easier
+- Now allowing table head, body, and footer cell widths to be specified in `sx` prop when `enableColumnRisizing` is disabled. BUT YOU SHOULD STILL USE THE `size` COLUMN OPTION INSTEAD!
+- Fixed issue with "Reset Order" button not always being accurate when position props === "last"
+- Fixed issue with draggable columns with grouping disabled still being allowed to be dragged to dropzone.
+
 #### v1.9.4 (2023-04-15)
 
 - Fixed row actions and row menu actions async memo issues

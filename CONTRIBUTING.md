@@ -28,10 +28,16 @@ pnpm i
 
 ### 3. Run the project(s)
 
+#### Run the Library for Local Development
+
+```bash
+pnpm lib:dev
+```
+
 #### Run the Storybook for Local Development
 
 ```bash
-pnpm storybook
+pnpm storybook:dev
 ```
 
 The Storybook site will open on `port 6006` by default.
@@ -44,9 +50,9 @@ pnpm docs:dev
 
 The Docs site will open on `port 3000` by default.
 
-> Note: If you are contributing a new locale and are trying to test it in the docs site, you will need to run `pnpm lib:build` and then `pnpm docs:dev` before it can be imported.
+> Note: If you are contributing a new locale and are trying to test it in the docs site, you will need to run `pnpm lib:build-locales` and then `pnpm docs:dev` before it can be imported.
 
-#### Build the Library
+#### Fully Build the Library
 
 ```bash
 pnpm lib:build

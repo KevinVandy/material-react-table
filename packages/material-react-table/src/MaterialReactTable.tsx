@@ -776,6 +776,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
         | ((props: {
             isDetailPanel?: boolean;
             row: MRT_Row<TData>;
+            staticRowIndex: number;
             table: MRT_TableInstance<TData>;
           }) => TableRowProps);
       muiTableContainerProps?:
@@ -918,6 +919,9 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
         onSelectFilterMode: (filterMode: MRT_FilterOption) => void;
         table: MRT_TableInstance<TData>;
       }) => ReactNode[];
+      renderEmptyRowsFallback?: (props: {
+        table: MRT_TableInstance<TData>;
+      }) => ReactNode;
       renderRowActionMenuItems?: (props: {
         closeMenu: () => void;
         row: MRT_Row<TData>;

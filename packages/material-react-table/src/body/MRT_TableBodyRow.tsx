@@ -47,7 +47,7 @@ export const MRT_TableBodyRow = ({
 
   const tableRowProps =
     muiTableBodyRowProps instanceof Function
-      ? muiTableBodyRowProps({ row, table })
+      ? muiTableBodyRowProps({ row, staticRowIndex: rowIndex, table })
       : muiTableBodyRowProps;
 
   const handleDragEnter = (_e: DragEvent) => {
@@ -136,6 +136,7 @@ export const MRT_TableBodyRow = ({
         <MRT_TableDetailPanel
           parentRowRef={rowRef}
           row={row}
+          rowIndex={rowIndex}
           table={table}
           virtualRow={virtualRow}
         />
