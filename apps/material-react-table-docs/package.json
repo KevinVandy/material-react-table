@@ -1,7 +1,6 @@
 {
   "name": "material-react-table-docs",
   "private": true,
-  "type": "module",
   "scripts": {
     "build": "pnpm docs:build",
     "dev": "pnpm docs:dev",
