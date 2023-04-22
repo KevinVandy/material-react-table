@@ -8,6 +8,7 @@ const supportedLocales = [
   'en',
   'es',
   'fa',
+  'fi',
   'fr',
   'it',
   'ja',
