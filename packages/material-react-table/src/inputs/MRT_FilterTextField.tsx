@@ -344,11 +344,6 @@ export const MRT_FilterTextField = ({
             : (textFieldProps?.sx as any)),
         })}
       >
-        {(isSelectFilter || isMultiSelectFilter) && (
-          <MenuItem divider disabled hidden value="">
-            <Box sx={{ opacity: 0.5 }}>{filterPlaceholder}</Box>
-          </MenuItem>
-        )}
         {textFieldProps.children ??
           columnDef?.filterSelectOptions?.map(
             (option: string | { text: string; value: string }) => {
