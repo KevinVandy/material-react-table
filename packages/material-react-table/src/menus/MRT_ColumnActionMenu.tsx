@@ -229,6 +229,7 @@ export const MRT_ColumnActionMenu = ({
             </Box>
           </MenuItem>,
           <MenuItem
+            disabled={showColumnFilters && !enableColumnFilterModes}
             divider={enableGrouping || enableHiding}
             key={1}
             onClick={getState().showColumnFilters ? handleOpenFilterModeMenu : handleFilterByColumn}
