@@ -10,7 +10,7 @@ export const BreadCrumbs = () => {
   const breadCrumbLinks = useMemo(() => {
     const routes = route.split('/');
     routes.shift();
-    let links: string[] = [];
+    const links: string[] = [];
     for (let i = 0; i < routes.length + 1; i++) {
       if (routes[i] && routes[i] !== '/')
         links.push(`/${routes.slice(0, i + 1).join('/')}`);

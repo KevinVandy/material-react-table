@@ -12,6 +12,15 @@ import Head from 'next/head';
 
 ### Version 1 (Latest)
 
+#### v1.11.0 (2023-04-24)
+
+- Removed Column Actions Submenu for "Show all Columns" Menu Item (was complicated unnecessary UI)
+- Disabled Column Actions Filter By Menu Item when columns are already visible
+- Fixed column resizing causing extra horizontal scrollbar to appear when dense padding is enabled
+- Fixed column header min-size being too big for columns with less than 5 characters
+- Added id translations that can be imported from `'material-react-table/locales/id'`
+- Added fi translations that can be imported from `'material-react-table/locales/fi'`
+
 #### v1.10.0 (2023-04-16)
 
 - New highly requested `renderEmptyRowsFallback` prop for rendering custom JSX when there are no rows to display
@@ -68,7 +77,7 @@ import Head from 'next/head';
 
 #### v1.8.3 (2023-02-27)
 
-- Add back support for custom edit and filter textfield children
+- Added back support for custom edit and filter textfield children
 
 #### v1.8.2 (2023-02-26)
 
@@ -83,8 +92,8 @@ import Head from 'next/head';
 #### v1.8.0 (2023-02-16)
 
 - Allow `enableEditing` prop and column options to be enabled conditionally per row `(row) => boolean`
-- Add `editVariant` and `editSelectOptions` column options to make it easier to create edit dropdowns
-- Add `enableFilterMatchHighlighting` as a column option to enable/disable filter match highlighting on a per column basis
+- Added `editVariant` and `editSelectOptions` column options to make it easier to create edit dropdowns
+- Added `enableFilterMatchHighlighting` as a column option to enable/disable filter match highlighting on a per column basis
 - Fixed issue with column resizing vars when `"("` or `")"` are in accessor keys
 - Fixed issue with column filter modes onChange resetting column filters too often
 - Fixed issue with manually managed grouping state not auto-showing the built-in mrt-expand-row column
@@ -166,11 +175,11 @@ import Head from 'next/head';
 
 #### v1.5.9 (2023-01-15)
 
-- Add table border-collapse 'separate' to fix row borders not showing in Firefox
+- Added table border-collapse 'separate' to fix row borders not showing in Firefox
 
 #### v1.5.8 (2023-01-12)
 
-- Add imports for bottom and top toolbar components for custom toolbar rendering
+- Added imports for bottom and top toolbar components for custom toolbar rendering
 
 #### v1.5.7 (2023-01-10)
 

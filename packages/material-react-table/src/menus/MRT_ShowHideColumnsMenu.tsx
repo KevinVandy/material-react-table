@@ -18,7 +18,6 @@ export const MRT_ShowHideColumnsMenu = <
   TData extends Record<string, any> = {},
 >({
   anchorEl,
-  isSubMenu,
   setAnchorEl,
   table,
 }: Props<TData>) => {
@@ -88,12 +87,12 @@ export const MRT_ShowHideColumnsMenu = <
       <Box
         sx={{
           display: 'flex',
-          justifyContent: isSubMenu ? 'center' : 'space-between',
+          justifyContent: 'space-between',
           p: '0.5rem',
           pt: 0,
         }}
       >
-        {!isSubMenu && enableHiding && (
+        {enableHiding && (
           <Button
             disabled={!getIsSomeColumnsVisible()}
             onClick={hideAllColumns}
@@ -101,7 +100,7 @@ export const MRT_ShowHideColumnsMenu = <
             {localization.hideAll}
           </Button>
         )}
-        {!isSubMenu && enableColumnOrdering && (
+        {enableColumnOrdering && (
           <Button
             onClick={() =>
               table.setColumnOrder(
@@ -112,7 +111,7 @@ export const MRT_ShowHideColumnsMenu = <
             {localization.resetOrder}
           </Button>
         )}
-        {!isSubMenu && enablePinning && (
+        {enablePinning && (
           <Button
             disabled={!getIsSomeColumnsPinned()}
             onClick={() => table.resetColumnPinning(true)}
@@ -135,7 +134,6 @@ export const MRT_ShowHideColumnsMenu = <
           allColumns={allColumns}
           column={column}
           hoveredColumn={hoveredColumn}
-          isSubMenu={isSubMenu}
           key={`${index}-${column.id}`}
           setHoveredColumn={setHoveredColumn}
           table={table}

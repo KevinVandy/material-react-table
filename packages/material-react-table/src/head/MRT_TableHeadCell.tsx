@@ -177,7 +177,7 @@ export const MRT_TableHeadCell = ({ header, table }: Props) => {
         <Box
           className="Mui-TableHeadCell-Content"
           sx={{
-            alignItems: 'flex-start',
+            alignItems: 'center',
             display: 'flex',
             flexDirection:
               tableCellProps?.align === 'right' ? 'row-reverse' : 'row',
@@ -213,7 +213,7 @@ export const MRT_TableHeadCell = ({ header, table }: Props) => {
             <Box
               className="Mui-TableHeadCell-Content-Wrapper"
               sx={{
-                minWidth: '5ch',
+                minWidth: `${Math.min(columnDef.header.length, 5)}ch`,
                 overflow: columnDefType === 'data' ? 'hidden' : undefined,
                 textOverflow: 'ellipsis',
                 whiteSpace:

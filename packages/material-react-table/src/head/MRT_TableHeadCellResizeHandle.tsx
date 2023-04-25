@@ -33,7 +33,7 @@ export const MRT_TableHeadCellResizeHandle = ({ header, table }: Props) => {
         cursor: 'col-resize',
         mr: density === 'compact' ? '-0.75rem' : '-1rem',
         position: 'absolute',
-        right: '1px',
+        right: '4px',
         px: '4px',
         '&:active > hr': {
           backgroundColor: theme.palette.info.main,

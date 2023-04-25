@@ -8,12 +8,13 @@ import ES_Table from '../examples/localization-i18n-es';
 import FA_Table from '../examples/localization-i18n-fa';
 import FI_Table from '../examples/localization-i18n-fi';
 import FR_Table from '../examples/localization-i18n-fr';
+import ID_Table from '../examples/localization-i18n-id';
 import IT_Table from '../examples/localization-i18n-it';
 import JA_Table from '../examples/localization-i18n-ja';
 import NL_Table from '../examples/localization-i18n-nl';
 import PL_Table from '../examples/localization-i18n-pl';
-import PT_Table from '../examples/localization-i18n-pt';
 import PT_BR_Table from '../examples/localization-i18n-pt-BR';
+import PT_Table from '../examples/localization-i18n-pt';
 import RO_Table from '../examples/localization-i18n-ro';
 import RU_Table from '../examples/localization-i18n-ru';
 import SR_Cyrl_RS_Table from '../examples/localization-i18n-sr-Cyrl-RS';
@@ -34,6 +35,7 @@ const supportedLocales = [
   'fa',
   'fi',
   'fr',
+  'id',
   'it',
   'ja',
   'nl',
@@ -84,6 +86,7 @@ const LocaleExamples = () => {
       {currentLocale === 'fa' && <FA_Table />}
       {currentLocale === 'fi' && <FI_Table />}
       {currentLocale === 'fr' && <FR_Table />}
+      {currentLocale === 'id' && <ID_Table />}
       {currentLocale === 'it' && <IT_Table />}
       {currentLocale === 'ja' && <JA_Table />}
       {currentLocale === 'nl' && <NL_Table />}

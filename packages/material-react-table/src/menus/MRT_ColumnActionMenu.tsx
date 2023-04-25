@@ -5,7 +5,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { MRT_FilterOptionMenu } from './MRT_FilterOptionMenu';
-import { MRT_ShowHideColumnsMenu } from './MRT_ShowHideColumnsMenu';
 import type { MRT_Header, MRT_TableInstance } from '..';
 
 export const commonMenuItemStyles = {
@@ -67,11 +66,10 @@ export const MRT_ColumnActionMenu = ({
   } = table;
   const { column } = header;
   const { columnDef } = column;
-  const { columnSizing, columnVisibility, density } = getState();
+  const { columnSizing, columnVisibility, density, showColumnFilters } =
+    getState();
 
   const [filterMenuAnchorEl, setFilterMenuAnchorEl] =
-    useState<null | HTMLElement>(null);
-  const [showHideColumnsMenuAnchorEl, setShowHideColumnsMenuAnchorEl] =
     useState<null | HTMLElement>(null);
 
   const handleClearSort = () => {
@@ -130,13 +128,6 @@ export const MRT_ColumnActionMenu = ({
   const handleOpenFilterModeMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation();
     setFilterMenuAnchorEl(event.currentTarget);
-  };
-
-  const handleOpenShowHideColumnsMenu = (
-    event: React.MouseEvent<HTMLElement>,
-  ) => {
-    event.stopPropagation();
-    setShowHideColumnsMenuAnchorEl(event.currentTarget);
   };
 
   const isSelectFilter = !!columnDef.filterSelectOptions;
@@ -238,9 +229,10 @@ export const MRT_ColumnActionMenu = ({
             </Box>
           </MenuItem>,
           <MenuItem
+            disabled={showColumnFilters && !enableColumnFilterModes}
             divider={enableGrouping || enableHiding}
             key={1}
-            onClick={getState().showColumnFilters ? handleOpenFilterModeMenu : handleFilterByColumn}
+            onClick={handleFilterByColumn}
             sx={commonMenuItemStyles}
           >
             <Box sx={commonListItemStyles}>
@@ -386,22 +378,7 @@ export const MRT_ColumnActionMenu = ({
               String(columnDef.header),
             )}
           </Box>
-          <IconButton
-            onClick={handleOpenShowHideColumnsMenu}
-            onMouseEnter={handleOpenShowHideColumnsMenu}
-            size="small"
-            sx={{ p: 0 }}
-          >
-            <ArrowRightIcon />
-          </IconButton>
         </MenuItem>,
-        <MRT_ShowHideColumnsMenu
-          anchorEl={showHideColumnsMenuAnchorEl}
-          isSubMenu
-          key={2}
-          setAnchorEl={setShowHideColumnsMenuAnchorEl}
-          table={table}
-        />,
       ]}
     </Menu>
   );
