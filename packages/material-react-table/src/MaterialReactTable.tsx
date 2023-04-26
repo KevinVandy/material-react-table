@@ -844,10 +844,10 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
             headerGroup: MRT_HeaderGroup<TData>;
           }) => TableRowProps);
       muiTablePaginationProps?:
-        | Partial<Omit<TablePaginationProps, 'rowsPerPage'>>
+        | Partial<TablePaginationProps>
         | ((props: {
             table: MRT_TableInstance<TData>;
-          }) => Partial<Omit<TablePaginationProps, 'rowsPerPage'>>);
+          }) => Partial<TablePaginationProps>);
       muiTablePaperProps?:
         | PaperProps
         | ((props: { table: MRT_TableInstance<TData> }) => PaperProps);
