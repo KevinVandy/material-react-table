@@ -1,4 +1,4 @@
-import { MRT_TableState } from 'material-react-table';
+import { TRT_TableState } from 'material-react-table';
 
 export type StateRow = {
   defaultValue?: string;
@@ -6,7 +6,7 @@ export type StateRow = {
   link?: string;
   linkText?: string;
   source?: 'MRT' | 'TanStack Table' | 'Material UI' | '';
-  stateOption: keyof MRT_TableState;
+  stateOption: keyof TRT_TableState;
   type?: string;
 };
 
@@ -77,7 +77,7 @@ export const stateOptions: StateRow[] = [
     linkText: '',
     source: 'MRT',
     stateOption: 'draggingColumn',
-    type: 'MRT_Column | null',
+    type: 'TRT_Column | null',
   },
   {
     defaultValue: '',
@@ -86,7 +86,7 @@ export const stateOptions: StateRow[] = [
     linkText: '',
     source: 'MRT',
     stateOption: 'draggingRow',
-    type: 'MRT_Row | null',
+    type: 'TRT_Row | null',
   },
   {
     defaultValue: '',
@@ -95,7 +95,7 @@ export const stateOptions: StateRow[] = [
     linkText: '',
     source: 'MRT',
     stateOption: 'editingCell',
-    type: 'MRT_Cell',
+    type: 'TRT_Cell',
   },
   {
     defaultValue: '',
@@ -104,7 +104,7 @@ export const stateOptions: StateRow[] = [
     linkText: '',
     source: 'MRT',
     stateOption: 'editingRow',
-    type: 'MRT_Row',
+    type: 'TRT_Row',
   },
   {
     defaultValue: '',
@@ -113,7 +113,7 @@ export const stateOptions: StateRow[] = [
     linkText: '',
     source: 'MRT',
     stateOption: 'columnFilterFns',
-    type: '{ [key: string]: MRT_FilterFn }',
+    type: '{ [key: string]: TRT_FilterFn }',
   },
   {
     defaultValue: '',
@@ -122,7 +122,7 @@ export const stateOptions: StateRow[] = [
     linkText: '',
     source: 'MRT',
     stateOption: 'globalFilterFn',
-    type: 'MRT_FilterFn',
+    type: 'TRT_FilterFn',
   },
   {
     defaultValue: '',
@@ -131,7 +131,7 @@ export const stateOptions: StateRow[] = [
     linkText: '',
     source: 'MRT',
     stateOption: 'hoveredColumn',
-    type: 'MRT_Column | null',
+    type: 'TRT_Column | null',
   },
   {
     defaultValue: '',
@@ -140,7 +140,7 @@ export const stateOptions: StateRow[] = [
     linkText: '',
     source: 'MRT',
     stateOption: 'hoveredRow',
-    type: 'MRT_Row | null',
+    type: 'TRT_Row | null',
   },
   {
     defaultValue: '{}',

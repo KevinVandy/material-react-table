@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  type MRT_RowSelectionState,
+  type TRT_ColumnDef,
+  type TRT_RowSelectionState,
 } from 'material-react-table';
 
 const data = [
@@ -28,7 +28,7 @@ const data = [
 ];
 
 const Example = () => {
-  const columns = useMemo<MRT_ColumnDef<(typeof data)[0]>[]>(
+  const columns = useMemo<TRT_ColumnDef<(typeof data)[0]>[]>(
     //column definitions...
     () => [
       {
@@ -59,7 +59,7 @@ const Example = () => {
     [], //end
   );
 
-  const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
+  const [rowSelection, setRowSelection] = useState<TRT_RowSelectionState>({});
 
   return (
     <MaterialReactTable

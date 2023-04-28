@@ -1,13 +1,13 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  type MRT_SortingState,
-  type MRT_Virtualizer,
+  type TRT_ColumnDef,
+  type TRT_SortingState,
+  type TRT_Virtualizer,
 } from 'material-react-table';
 import { makeData, type Person } from './makeData';
 
 const Example = () => {
-  const columns = useMemo<MRT_ColumnDef<Person>[]>(
+  const columns = useMemo<TRT_ColumnDef<Person>[]>(
     //column definitions...
     () => [
       {
@@ -57,11 +57,11 @@ const Example = () => {
 
   //optionally access the underlying virtualizer instance
   const rowVirtualizerInstanceRef =
-    useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
+    useRef<TRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
   const [data, setData] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [sorting, setSorting] = useState<MRT_SortingState>([]);
+  const [sorting, setSorting] = useState<TRT_SortingState>([]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

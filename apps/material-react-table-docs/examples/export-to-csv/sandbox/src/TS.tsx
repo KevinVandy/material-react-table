@@ -1,7 +1,7 @@
 import React from 'react';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  type MRT_Row,
+  type TRT_ColumnDef,
+  type TRT_Row,
 } from 'material-react-table';
 import { Box, Button } from '@mui/material';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
@@ -9,7 +9,7 @@ import { ExportToCsv } from 'export-to-csv'; //or use your library of choice her
 import { data, type Person } from './makeData';
 
 //defining columns outside of the component is fine, is stable
-const columns: MRT_ColumnDef<Person>[] = [
+const columns: TRT_ColumnDef<Person>[] = [
   {
     accessorKey: 'id',
     header: 'ID',
@@ -54,7 +54,7 @@ const csvOptions = {
 const csvExporter = new ExportToCsv(csvOptions);
 
 const Example = () => {
-  const handleExportRows = (rows: MRT_Row<Person>[]) => {
+  const handleExportRows = (rows: TRT_Row<Person>[]) => {
     csvExporter.generateCsv(rows.map((row) => row.original));
   };
 

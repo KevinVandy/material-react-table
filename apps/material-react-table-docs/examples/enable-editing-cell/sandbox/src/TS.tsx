@@ -1,13 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import MaterialReactTable, {
-  type MRT_Cell,
-  type MRT_ColumnDef,
+  type TRT_Cell,
+  type TRT_ColumnDef,
 } from 'material-react-table';
 import { Typography } from '@mui/material';
 import { data, type Person } from './makeData';
 
 const Example = () => {
-  const columns = useMemo<MRT_ColumnDef<Person>[]>(
+  const columns = useMemo<TRT_ColumnDef<Person>[]>(
     () => [
       //column definitions...
       {
@@ -37,7 +37,7 @@ const Example = () => {
 
   const [tableData, setTableData] = useState<Person[]>(() => data);
 
-  const handleSaveCell = (cell: MRT_Cell<Person>, value: any) => {
+  const handleSaveCell = (cell: TRT_Cell<Person>, value: any) => {
     //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here
     tableData[cell.row.index][cell.column.id as keyof Person] = value;
     //send/receive api updates here

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, { type TRT_ColumnDef } from 'material-react-table';
 import {
   Link as MuiLink,
   Typography,
@@ -11,14 +11,14 @@ import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
 import { type ColumnOption, columnOptions } from './columnOptions';
 
 interface Props {
-  onlyProps?: Set<keyof MRT_ColumnDef>;
+  onlyProps?: Set<keyof TRT_ColumnDef>;
 }
 
 const ColumnOptionsTable = ({ onlyProps }: Props) => {
   const theme = useTheme();
   const isDesktop = useMediaQuery('(min-width: 1200px)');
 
-  const columns = useMemo<MRT_ColumnDef<ColumnOption>[]>(
+  const columns = useMemo<TRT_ColumnDef<ColumnOption>[]>(
     () => [
       {
         accessorKey: 'columnOption',

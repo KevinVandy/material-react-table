@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, {
-  type MRT_Column,
-  type MRT_ColumnDef,
+  type TRT_Column,
+  type TRT_ColumnDef,
 } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 
@@ -41,7 +41,7 @@ const columns = [
     header: 'State',
     accessorKey: 'state',
   },
-] as MRT_ColumnDef<Person>[];
+] as TRT_ColumnDef<Person>[];
 
 const data = [...Array(200)].map(() => ({
   firstName: faker.name.firstName(),
@@ -125,7 +125,7 @@ export const ColumnGroupingBannerOnBottom = () => (
 );
 
 export const GroupingColumnsSetState = () => {
-  const [columns, setColumns] = useState<MRT_ColumnDef<any>[]>([]);
+  const [columns, setColumns] = useState<TRT_ColumnDef<any>[]>([]);
   const [data, setData] = useState<any>([]);
 
   useEffect(() => {
@@ -215,7 +215,7 @@ export const GroupingColumnsSetState = () => {
 
 export const ColumnGroupingDropZoneAlwaysVisible = () => {
   const [draggingColumn, setDraggingColumn] =
-    useState<MRT_Column<Person> | null>(null);
+    useState<TRT_Column<Person> | null>(null);
 
   return (
     <MaterialReactTable
@@ -256,7 +256,7 @@ export const GroupingStateManaged = () => {
 };
 
 export const GroupingAndDraggingWithSomeDisabledGrouping = () => {
-  const _columns = useMemo<MRT_ColumnDef<Person>[]>(
+  const _columns = useMemo<TRT_ColumnDef<Person>[]>(
     () => [
       {
         accessorKey: 'firstName',

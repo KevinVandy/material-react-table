@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, { type TRT_ColumnDef } from 'material-react-table';
 import { createTheme, ThemeProvider, useTheme } from '@mui/material';
 
 type Person = {
@@ -11,7 +11,7 @@ type Person = {
 };
 
 //column definitions...
-const columns: MRT_ColumnDef<Person>[] = [
+const columns: TRT_ColumnDef<Person>[] = [
   {
     accessorKey: 'firstName',
     header: 'First Name',

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  type MRT_Icons,
+  type TRT_ColumnDef,
+  type TRT_Icons,
 } from 'material-react-table';
 import { data, type Person } from './makeData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -31,7 +31,7 @@ config.autoAddCss = false;
  * These are just some of the icons visible in this table's feature set.
  * If you skip customizing some icons, those particular icons will fallback the the default Material-UI icons.
  */
-const fontAwesomeIcons: Partial<MRT_Icons> = {
+const fontAwesomeIcons: Partial<TRT_Icons> = {
   ArrowDownwardIcon: (props: any) => (
     <FontAwesomeIcon icon={faSortDown} {...props} />
   ),
@@ -87,7 +87,7 @@ const Example = () => {
           accessorKey: 'state',
           header: 'State',
         },
-      ] as MRT_ColumnDef<Person>[],
+      ] as TRT_ColumnDef<Person>[],
     [], //end
   );
 

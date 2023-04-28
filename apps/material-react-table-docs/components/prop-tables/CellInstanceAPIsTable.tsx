@@ -1,21 +1,21 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  type MRT_Cell,
+  type TRT_ColumnDef,
+  type TRT_Cell,
 } from 'material-react-table';
 import { Link as MuiLink, Typography, useMediaQuery } from '@mui/material';
 import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
 import { type CellInstanceAPI, cellInstanceAPIs } from './cellInstanceAPIs';
 
 interface Props {
-  onlyProps?: Set<keyof MRT_Cell>;
+  onlyProps?: Set<keyof TRT_Cell>;
 }
 
 const CellInstanceAPIsTable = ({ onlyProps }: Props) => {
   const isDesktop = useMediaQuery('(min-width: 1200px)');
 
-  const columns = useMemo<MRT_ColumnDef<CellInstanceAPI>[]>(
+  const columns = useMemo<TRT_ColumnDef<CellInstanceAPI>[]>(
     () => [
       {
         accessorKey: 'cellInstanceAPI',

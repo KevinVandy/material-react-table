@@ -43,8 +43,8 @@ function App({ Component, pageProps }: AppProps) {
           rel="canonical"
           href={`https://www.material-react-table.com${pathname}`}
         />
-        <link rel="icon" href="/mrt_logo.png" />
-        <meta property="og:image" content="/mrt_logo.png" />
+        <link rel="icon" href="/TRT_logo.png" />
+        <meta property="og:image" content="/TRT_logo.png" />
         <meta
           property="og:url"
           content={`https://www.material-react-table.com${pathname}`}

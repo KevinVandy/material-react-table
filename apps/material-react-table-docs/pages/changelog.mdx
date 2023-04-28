@@ -67,8 +67,8 @@ import Head from 'next/head';
 - Used more comprehensive regex to create css vars for column resizing from column ids/accessorKeys
 - Fixed more column resizing issues with nested column groups
 - Added official css classNames for column resizing elements
-- Added exports for `MRT_ExpandButton` and `MRT_GrabHandleButton` components
-- Exported `MRT_Updater` type so it does not have to be imported from `@tanstack/react-table`
+- Added exports for `TRT_ExpandButton` and `TRT_GrabHandleButton` components
+- Exported `TRT_Updater` type so it does not have to be imported from `@tanstack/react-table`
 - zh locale row vs column translation tweaks
 
 #### v1.8.4 (2023-03-02)
@@ -156,7 +156,7 @@ import Head from 'next/head';
 #### v1.6.0 (2023-01-29) "The Filter Match Highlighting Update"
 
 - Added new Filter Match Highlighting feature that is enabled by default, but can be disabled with the `enableFilterMatchHighlighting` prop
-- Added import for the `MRT_EditActionButtons` component for better custom row actions
+- Added import for the `TRT_EditActionButtons` component for better custom row actions
 - Cleaned up Toolbar DropZone styling
 
 #### v1.5.12 (2023-01-27)
@@ -234,7 +234,7 @@ import Head from 'next/head';
 - Fixed row virtualization with detail panels to make it usable
 - Added classNames to Detail Panel Rows and Cells to make them easier to target with CSS
 - Lowered default row virtualization `overscan` default count from `10` to `4`
-- Added imports for `MRT_ToolbarAlertBanner` and `MRT_ToolbarDropZone` components for custom toolbars
+- Added imports for `TRT_ToolbarAlertBanner` and `TRT_ToolbarDropZone` components for custom toolbars
 
 #### v1.4.0 (2022-12-08) "The Row Virtualization Upgrade"
 
@@ -437,7 +437,7 @@ import Head from 'next/head';
 - v0.36.0 - `onCellEditBlur` and `onCellEditChange` props removed because the already exist on `muiTableBodyCellEditTextFieldProps`. Examples given [here](/docs/guides/editing)
 - v0.35.2 - Change `onEditRowSubmit` name to `onEditingRowSave`
 - v0.35.1 - "current" prefix in some state options removed from name (i.e. `currentEditingRow` is now just `editingRow`), new editing value(s) arguments, better types for editing features
-- v0.34.0 - rolled back to react-virtual 2.0 to fix flickering issue, MRT_Internal Toolbar components are now exported from MRT instead of in params
+- v0.34.0 - rolled back to react-virtual 2.0 to fix flickering issue, TRT_Internal Toolbar components are now exported from MRT instead of in params
 - v0.33.0 - `onTableInstanceChange` removed, `onStateChange` removed, `currentFilterFns` renamed to `columnFilterFns`, custom `filterFns` can be used again, renamed `ToolbarBottom` to `BottomToolbar` and `ToolbarTop` to `TopToolbar`
 - v0.31.0 - new DropZone component in toolbar for grouping while dragging a column that can be grouped
 - v0.29.0 - new `filterVariant` option on columnDef to indicate if filter is a select filter, multi-select filter, text filter, etc.

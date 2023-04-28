@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import MaterialReactTable, {
   type MaterialReactTableProps,
-  type MRT_ColumnDef,
+  type TRT_ColumnDef,
 } from 'material-react-table';
 import {
   Link as MuiLink,
@@ -21,7 +21,7 @@ const RootPropTable = ({ onlyProps }: Props) => {
   const theme = useTheme();
   const isDesktop = useMediaQuery('(min-width: 1200px)');
 
-  const columns = useMemo<MRT_ColumnDef<PropRow>[]>(
+  const columns = useMemo<TRT_ColumnDef<PropRow>[]>(
     () => [
       {
         enableClickToCopy: true,

@@ -1,12 +1,12 @@
 import React, { useMemo, useState } from 'react';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  type MRT_Row,
+  type TRT_ColumnDef,
+  type TRT_Row,
 } from 'material-react-table';
 import { data as initData, Person } from './makeData';
 
 const Example = () => {
-  const columns = useMemo<MRT_ColumnDef<Person>[]>(
+  const columns = useMemo<TRT_ColumnDef<Person>[]>(
     //column definitions...
     () => [
       {
@@ -40,7 +40,7 @@ const Example = () => {
           const { draggingRow, hoveredRow } = table.getState();
           if (hoveredRow && draggingRow) {
             data.splice(
-              (hoveredRow as MRT_Row<Person>).index,
+              (hoveredRow as TRT_Row<Person>).index,
               0,
               data.splice(draggingRow.index, 1)[0],
             );

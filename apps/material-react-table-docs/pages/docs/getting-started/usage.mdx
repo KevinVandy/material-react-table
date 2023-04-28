@@ -29,11 +29,11 @@ Once you have everything installed, you can import from `material-react-table` l
 import MaterialReactTable from 'material-react-table';
 ```
 
-If you are using TypeScript, you may also want to import some TypeScript types from `'material-react-table'` to take advantage of the advanced strong type checking and autocompletion features. The `MRT_ColumnDef` type is especially useful for defining your columns in a type-safe way.
+If you are using TypeScript, you may also want to import some TypeScript types from `'material-react-table'` to take advantage of the advanced strong type checking and autocompletion features. The `TRT_ColumnDef` type is especially useful for defining your columns in a type-safe way.
 
 ```tsx
 import MaterialReactTable from 'material-react-table';
-import type { MRT_ColumnDef } from 'material-react-table'; // If using TypeScript (optional, but recommended)
+import type { TRT_ColumnDef } from 'material-react-table'; // If using TypeScript (optional, but recommended)
 ```
 
 ### Creating Data/Rows
@@ -118,8 +118,8 @@ const columns = useMemo(
 
 ```tsx
 //a more complex example with nested data
-//if using TypeScript, you can use the MRT_ColumnDef type to strongly type your columns (Recommended)
-const columns = useMemo<MRT_ColumnDef<YourDataType>[]>(
+//if using TypeScript, you can use the TRT_ColumnDef type to strongly type your columns (Recommended)
+const columns = useMemo<TRT_ColumnDef<YourDataType>[]>(
   () => [
     {
       header: 'First Name',
@@ -146,7 +146,7 @@ Put it all together, and you have a basic table! You can also play around and en
 ```tsx
 import React, { useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
-import type { MRT_ColumnDef } from 'material-react-table'; // If using TypeScript (optional, but recommended)
+import type { TRT_ColumnDef } from 'material-react-table'; // If using TypeScript (optional, but recommended)
 
 //If using TypeScript, define the shape of your data (optional, but recommended)
 interface Person {
@@ -168,7 +168,7 @@ const data: Person[] = [
 
 export default function App() {
   //column definitions - strongly typed if you are using TypeScript (optional, but recommended)
-  const columns = useMemo<MRT_ColumnDef<Person>[]>(
+  const columns = useMemo<TRT_ColumnDef<Person>[]>(
     () => [
       {
         accessorKey: 'name', //simple recommended way to define a column

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta } from '@storybook/react';
-import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, { type TRT_ColumnDef } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 
 const meta: Meta = {
@@ -9,7 +9,7 @@ const meta: Meta = {
 
 export default meta;
 
-const columns: MRT_ColumnDef<(typeof initData)[0]>[] = [
+const columns: TRT_ColumnDef<(typeof initData)[0]>[] = [
   {
     accessorKey: 'id',
     header: 'ID',

@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  type MRT_Column,
+  type TRT_ColumnDef,
+  type TRT_Column,
 } from 'material-react-table';
 import { Link as MuiLink, Typography, useMediaQuery } from '@mui/material';
 import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
@@ -12,13 +12,13 @@ import {
 } from './columnInstanceAPIs';
 
 interface Props {
-  onlyProps?: Set<keyof MRT_Column>;
+  onlyProps?: Set<keyof TRT_Column>;
 }
 
 const ColumnInstanceAPIsTable = ({ onlyProps }: Props) => {
   const isDesktop = useMediaQuery('(min-width: 1200px)');
 
-  const columns = useMemo<MRT_ColumnDef<ColumnInstanceAPI>[]>(
+  const columns = useMemo<TRT_ColumnDef<ColumnInstanceAPI>[]>(
     () => [
       {
         accessorKey: 'columnInstanceAPI',

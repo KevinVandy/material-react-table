@@ -4,7 +4,7 @@ import React from 'react';
 import MaterialReactTable from 'material-react-table';
 
 //Import Material React Table Translations
-import { MRT_Localization_TR } from 'material-react-table/locales/tr';
+import { TRT_Localization_TR } from 'material-react-table/locales/tr';
 
 //mock data
 import { data } from './makeData';
@@ -40,7 +40,7 @@ const Example = () => {
       enableRowSelection
       enableSelectAll={false}
       initialState={{ showColumnFilters: true, showGlobalFilter: true }}
-      localization={MRT_Localization_TR}
+      localization={TRT_Localization_TR}
     />
   );
 };

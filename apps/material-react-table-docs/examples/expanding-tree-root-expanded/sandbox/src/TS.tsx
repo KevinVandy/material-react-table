@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import MaterialReactTable, {
-  type MRT_ExpandedState,
-  type MRT_ColumnDef,
+  type TRT_ExpandedState,
+  type TRT_ColumnDef,
 } from 'material-react-table';
 import { Button } from '@mui/material';
 
@@ -93,7 +93,7 @@ export const data: Person[] = [
 //end
 
 const Example = () => {
-  const columns = useMemo<MRT_ColumnDef<Person>[]>(
+  const columns = useMemo<TRT_ColumnDef<Person>[]>(
     //column definitions...
     () => [
       {
@@ -124,7 +124,7 @@ const Example = () => {
     //end
   );
 
-  const initialExpandedRootRows = useMemo<MRT_ExpandedState>(
+  const initialExpandedRootRows = useMemo<TRT_ExpandedState>(
     () =>
       data
         .map((originalRow) => originalRow.id) //get all the root row ids, use recursion for additional levels

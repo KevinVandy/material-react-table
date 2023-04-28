@@ -1,8 +1,8 @@
 import React from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  type MRT_SortingState,
+  type TRT_ColumnDef,
+  type TRT_SortingState,
 } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 
@@ -12,7 +12,7 @@ const meta: Meta = {
 
 export default meta;
 
-const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
+const columns: TRT_ColumnDef<(typeof data)[0]>[] = [
   {
     header: 'First Name',
     accessorKey: 'firstName',
@@ -117,7 +117,7 @@ export const SortRanking = () => (
 );
 
 export const SortingStateManaged = () => {
-  const [sorting, setSorting] = React.useState<MRT_SortingState>([]);
+  const [sorting, setSorting] = React.useState<TRT_SortingState>([]);
   return (
     <MaterialReactTable
       columns={columns}

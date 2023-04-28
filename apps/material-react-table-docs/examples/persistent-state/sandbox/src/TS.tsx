@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '@mui/material';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  type MRT_ColumnFiltersState,
-  type MRT_DensityState,
-  type MRT_SortingState,
-  type MRT_VisibilityState,
+  type TRT_ColumnDef,
+  type TRT_ColumnFiltersState,
+  type TRT_DensityState,
+  type TRT_SortingState,
+  type TRT_VisibilityState,
 } from 'material-react-table';
 import { data, type Person } from './makeData';
 
 //column definitions...
-const columns: MRT_ColumnDef<Person>[] = [
+const columns: TRT_ColumnDef<Person>[] = [
   {
     accessorKey: 'firstName',
     header: 'First Name',
@@ -37,35 +37,35 @@ const columns: MRT_ColumnDef<Person>[] = [
 const Example = () => {
   const isFirstRender = useRef(true);
 
-  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
+  const [columnFilters, setColumnFilters] = useState<TRT_ColumnFiltersState>(
     [],
   );
-  const [columnVisibility, setColumnVisibility] = useState<MRT_VisibilityState>(
+  const [columnVisibility, setColumnVisibility] = useState<TRT_VisibilityState>(
     {},
   );
-  const [density, setDensity] = useState<MRT_DensityState>('comfortable');
+  const [density, setDensity] = useState<TRT_DensityState>('comfortable');
   const [globalFilter, setGlobalFilter] = useState<string | undefined>(
     undefined,
   );
   const [showGlobalFilter, setShowGlobalFilter] = useState(false);
   const [showColumnFilters, setShowColumnFilters] = useState(false);
-  const [sorting, setSorting] = useState<MRT_SortingState>([]);
+  const [sorting, setSorting] = useState<TRT_SortingState>([]);
 
   //load state from local storage
   useEffect(() => {
-    const columnFilters = sessionStorage.getItem('mrt_columnFilters_table_1');
+    const columnFilters = sessionStorage.getItem('TRT_columnFilters_table_1');
     const columnVisibility = sessionStorage.getItem(
-      'mrt_columnVisibility_table_1',
+      'TRT_columnVisibility_table_1',
     );
-    const density = sessionStorage.getItem('mrt_density_table_1');
-    const globalFilter = sessionStorage.getItem('mrt_globalFilter_table_1');
+    const density = sessionStorage.getItem('TRT_density_table_1');
+    const globalFilter = sessionStorage.getItem('TRT_globalFilter_table_1');
     const showGlobalFilter = sessionStorage.getItem(
-      'mrt_showGlobalFilter_table_1',
+      'TRT_showGlobalFilter_table_1',
     );
     const showColumnFilters = sessionStorage.getItem(
-      'mrt_showColumnFilters_table_1',
+      'TRT_showColumnFilters_table_1',
     );
-    const sorting = sessionStorage.getItem('mrt_sorting_table_1');
+    const sorting = sessionStorage.getItem('TRT_sorting_table_1');
 
     if (columnFilters) {
       setColumnFilters(JSON.parse(columnFilters));
@@ -95,7 +95,7 @@ const Example = () => {
   useEffect(() => {
     if (isFirstRender.current) return;
     sessionStorage.setItem(
-      'mrt_columnFilters_table_1',
+      'TRT_columnFilters_table_1',
       JSON.stringify(columnFilters),
     );
   }, [columnFilters]);
@@ -103,20 +103,20 @@ const Example = () => {
   useEffect(() => {
     if (isFirstRender.current) return;
     sessionStorage.setItem(
-      'mrt_columnVisibility_table_1',
+      'TRT_columnVisibility_table_1',
       JSON.stringify(columnVisibility),
     );
   }, [columnVisibility]);
 
   useEffect(() => {
     if (isFirstRender.current) return;
-    sessionStorage.setItem('mrt_density_table_1', JSON.stringify(density));
+    sessionStorage.setItem('TRT_density_table_1', JSON.stringify(density));
   }, [density]);
 
   useEffect(() => {
     if (isFirstRender.current) return;
     sessionStorage.setItem(
-      'mrt_globalFilter_table_1',
+      'TRT_globalFilter_table_1',
       JSON.stringify(globalFilter ?? ''),
     );
   }, [globalFilter]);
@@ -124,7 +124,7 @@ const Example = () => {
   useEffect(() => {
     if (isFirstRender.current) return;
     sessionStorage.setItem(
-      'mrt_showGlobalFilter_table_1',
+      'TRT_showGlobalFilter_table_1',
       JSON.stringify(showGlobalFilter),
     );
   }, [showGlobalFilter]);
@@ -132,24 +132,24 @@ const Example = () => {
   useEffect(() => {
     if (isFirstRender.current) return;
     sessionStorage.setItem(
-      'mrt_showColumnFilters_table_1',
+      'TRT_showColumnFilters_table_1',
       JSON.stringify(showColumnFilters),
     );
   }, [showColumnFilters]);
 
   useEffect(() => {
     if (isFirstRender.current) return;
-    sessionStorage.setItem('mrt_sorting_table_1', JSON.stringify(sorting));
+    sessionStorage.setItem('TRT_sorting_table_1', JSON.stringify(sorting));
   }, [sorting]);
 
   const resetState = () => {
-    sessionStorage.removeItem('mrt_columnFilters_table_1');
-    sessionStorage.removeItem('mrt_columnVisibility_table_1');
-    sessionStorage.removeItem('mrt_density_table_1');
-    sessionStorage.removeItem('mrt_globalFilter_table_1');
-    sessionStorage.removeItem('mrt_showGlobalFilter_table_1');
-    sessionStorage.removeItem('mrt_showColumnFilters_table_1');
-    sessionStorage.removeItem('mrt_sorting_table_1');
+    sessionStorage.removeItem('TRT_columnFilters_table_1');
+    sessionStorage.removeItem('TRT_columnVisibility_table_1');
+    sessionStorage.removeItem('TRT_density_table_1');
+    sessionStorage.removeItem('TRT_globalFilter_table_1');
+    sessionStorage.removeItem('TRT_showGlobalFilter_table_1');
+    sessionStorage.removeItem('TRT_showColumnFilters_table_1');
+    sessionStorage.removeItem('TRT_sorting_table_1');
     window.location.reload();
   };
 

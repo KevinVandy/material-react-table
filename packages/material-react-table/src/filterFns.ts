@@ -164,7 +164,7 @@ const notEmpty = <TData extends Record<string, any> = {}>(
 
 notEmpty.autoRemove = (val: any) => !val;
 
-export const MRT_FilterFns = {
+export const TRT_FilterFns = {
   ...filterFns,
   between,
   betweenInclusive,

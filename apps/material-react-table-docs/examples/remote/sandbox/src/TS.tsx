@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  type MRT_ColumnFiltersState,
-  type MRT_PaginationState,
-  type MRT_SortingState,
+  type TRT_ColumnDef,
+  type TRT_ColumnFiltersState,
+  type TRT_PaginationState,
+  type TRT_SortingState,
 } from 'material-react-table';
 
 type UserApiResponse = {
@@ -30,12 +30,12 @@ const Example = () => {
   const [rowCount, setRowCount] = useState(0);
 
   //table state
-  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
+  const [columnFilters, setColumnFilters] = useState<TRT_ColumnFiltersState>(
     [],
   );
   const [globalFilter, setGlobalFilter] = useState('');
-  const [sorting, setSorting] = useState<MRT_SortingState>([]);
-  const [pagination, setPagination] = useState<MRT_PaginationState>({
+  const [sorting, setSorting] = useState<TRT_SortingState>([]);
+  const [pagination, setPagination] = useState<TRT_PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   });
@@ -88,7 +88,7 @@ const Example = () => {
     sorting,
   ]);
 
-  const columns = useMemo<MRT_ColumnDef<User>[]>(
+  const columns = useMemo<TRT_ColumnDef<User>[]>(
     () => [
       {
         accessorKey: 'firstName',

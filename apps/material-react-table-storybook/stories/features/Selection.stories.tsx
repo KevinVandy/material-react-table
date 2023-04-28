@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  type MRT_TableInstance,
+  type TRT_ColumnDef,
+  type TRT_TableInstance,
 } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 import { Button } from '@mui/material';
@@ -13,7 +13,7 @@ const meta: Meta = {
 
 export default meta;
 
-const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
+const columns: TRT_ColumnDef<(typeof data)[0]>[] = [
   {
     header: 'First Name',
     accessorKey: 'firstName',
@@ -162,7 +162,7 @@ export const SelectCheckboxSecondaryColor = () => (
 );
 
 export const SelectionWithInstanceRef = () => {
-  const tableInstanceRef = useRef<MRT_TableInstance<(typeof data)[0]>>(null);
+  const tableInstanceRef = useRef<TRT_TableInstance<(typeof data)[0]>>(null);
 
   return (
     <MaterialReactTable

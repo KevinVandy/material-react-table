@@ -64,7 +64,7 @@ export const rootProps: PropRow[] = [
     linkText: 'MRT Column Filtering Docs',
     required: false,
     source: 'MRT',
-    type: 'Array<MRT_FilterOption | string> | null',
+    type: 'Array<TRT_FilterOption | string> | null',
   },
   {
     propName: 'columnResizeMode',
@@ -85,7 +85,7 @@ export const rootProps: PropRow[] = [
     linkText: 'MRT Column Options API Reference',
     required: true,
     source: 'MRT',
-    type: 'Array<MRT_ColumnDef<TData>>',
+    type: 'Array<TRT_ColumnDef<TData>>',
   },
   {
     propName: 'columnVirtualizerProps',
@@ -181,7 +181,7 @@ export const rootProps: PropRow[] = [
     linkText: 'TanStack Table Core Table Docs',
     required: false,
     source: 'TanStack Table',
-    type: 'Partial<MRT_ColumnDef<TData>>',
+    type: 'Partial<TRT_ColumnDef<TData>>',
   },
   {
     propName: 'displayColumnDefOptions',
@@ -192,7 +192,7 @@ export const rootProps: PropRow[] = [
     linkText: 'MRT Display Columns Docs',
     required: false,
     source: 'MRT',
-    type: '{ [key: string]: MRT_ColumnDef<TData> }',
+    type: '{ [key: string]: TRT_ColumnDef<TData> }',
   },
   {
     propName: 'editingMode',
@@ -313,7 +313,7 @@ export const rootProps: PropRow[] = [
     linkText: 'MRT Editing Docs',
     required: false,
     source: 'MRT',
-    type: 'boolean | (row: MRT_Row) => boolean',
+    type: 'boolean | (row: TRT_Row) => boolean',
   },
   {
     propName: 'enableExpandAll',
@@ -516,7 +516,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: '',
-    type: 'boolean | (row: MRT_Row) => boolean',
+    type: 'boolean | (row: TRT_Row) => boolean',
   },
   {
     propName: 'enableRowVirtualization',
@@ -636,7 +636,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: '',
-    type: 'Array<MRT_FilterOption | string> | null',
+    type: 'Array<TRT_FilterOption | string> | null',
   },
   {
     propName: 'expandRowsFn',
@@ -696,7 +696,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: 'MRT',
-    type: '() => MRT_RowModel<TData>',
+    type: '() => TRT_RowModel<TData>',
   },
   {
     propName: 'getFacetedMinMaxValues',
@@ -772,7 +772,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: '',
-    type: '() => MRT_RowModel<TData>',
+    type: '() => TRT_RowModel<TData>',
   },
   {
     propName: 'getRowCanExpand',
@@ -793,7 +793,7 @@ export const rootProps: PropRow[] = [
     linkText: 'TanStack Table Core Table Docs',
     required: false,
     source: 'TanStack Table',
-    type: `(originalRow: TData, index: number, parent?: MRT_Row<TData>) => string`,
+    type: `(originalRow: TData, index: number, parent?: TRT_Row<TData>) => string`,
   },
   {
     propName: 'getSortedRowModel',
@@ -825,7 +825,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: 'MRT',
-    type: 'MRT_FilterOption',
+    type: 'TRT_FilterOption',
   },
   {
     propName: 'groupedColumnMode',
@@ -846,7 +846,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: 'MRT',
-    type: 'Partial<MRT_Icons>;',
+    type: 'Partial<TRT_Icons>;',
   },
   {
     propName: 'initialState',
@@ -857,7 +857,7 @@ export const rootProps: PropRow[] = [
     linkText: 'Table State Management Guide',
     required: false,
     source: 'MRT',
-    type: `Partial<MRT_TableState<TData>>`,
+    type: `Partial<TRT_TableState<TData>>`,
   },
   {
     propName: 'isMultiSortEvent',
@@ -888,7 +888,7 @@ export const rootProps: PropRow[] = [
     linkText: 'Localization (i18n) Guide',
     required: false,
     source: 'MRT',
-    type: 'MRT_Localization',
+    type: 'TRT_Localization',
   },
   {
     propName: 'manualExpanding',
@@ -1392,7 +1392,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: 'MRT',
-    type: 'OnChangeFn<MRT_Column<TData> | null>',
+    type: 'OnChangeFn<TRT_Column<TData> | null>',
   },
   {
     propName: 'onDraggingRowChange',
@@ -1402,7 +1402,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: '',
-    type: 'OnChangeFn<MRT_Row<TData> | null>',
+    type: 'OnChangeFn<TRT_Row<TData> | null>',
   },
   {
     propName: 'onEditingCellChange',
@@ -1412,7 +1412,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: 'MRT',
-    type: 'OnChangeFn<MRT_Cell<TData> | null>',
+    type: 'OnChangeFn<TRT_Cell<TData> | null>',
   },
   {
     propName: 'onEditingRowChange',
@@ -1422,7 +1422,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: 'MRT',
-    type: 'OnChangeFn<MRT_Row<TData> | null>',
+    type: 'OnChangeFn<TRT_Row<TData> | null>',
   },
   {
     propName: 'onColumnFilterFnsChange',
@@ -1432,7 +1432,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: 'MRT',
-    type: 'OnChangeFn<{ [key: string]: MRT_FilterOption }>',
+    type: 'OnChangeFn<{ [key: string]: TRT_FilterOption }>',
   },
   {
     propName: 'onGlobalFilterFnChange',
@@ -1453,7 +1453,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: 'MRT',
-    type: 'OnChangeFn<MRT_Column<TData> | null>',
+    type: 'OnChangeFn<TRT_Column<TData> | null>',
   },
   {
     propName: 'onHoveredRowChange',
@@ -1463,7 +1463,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: 'MRT',
-    type: 'OnChangeFn<MRT_Row<TData> | null>',
+    type: 'OnChangeFn<TRT_Row<TData> | null>',
   },
   {
     propName: 'onExpandedChange',
@@ -1506,7 +1506,7 @@ export const rootProps: PropRow[] = [
     linkText: 'MRT Density Toggle Docs',
     required: false,
     source: 'MRT',
-    type: 'OnChangeFn<MRT_DensityState>',
+    type: 'OnChangeFn<TRT_DensityState>',
   },
   {
     propName: 'onIsFullScreenChange',
@@ -1873,7 +1873,7 @@ export const rootProps: PropRow[] = [
     linkText: 'Table State Management Guide',
     required: false,
     source: 'MRT',
-    type: 'Partial<MRT_TableState<TData>>',
+    type: 'Partial<TRT_TableState<TData>>',
   },
   {
     propName: 'tableInstanceRef',
@@ -1883,7 +1883,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: 'MRT',
-    type: 'MutableRefObject<MRT_TableInstance<TData> | null>',
+    type: 'MutableRefObject<TRT_TableInstance<TData> | null>',
   },
   {
     propName: 'rowVirtualizerProps',
@@ -1914,6 +1914,6 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: '',
-    type: 'Array<MRT_CreateTableFeature<TData>>',
+    type: 'Array<TRT_CreateTableFeature<TData>>',
   },
 ];

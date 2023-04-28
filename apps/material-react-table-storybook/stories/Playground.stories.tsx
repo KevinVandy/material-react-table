@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta } from '@storybook/react';
-import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, { type TRT_ColumnDef } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 
 const meta: Meta = {
@@ -41,7 +41,7 @@ Default.args = {
       header: 'Address',
       accessorKey: 'address',
     },
-  ] as MRT_ColumnDef<Person>[],
+  ] as TRT_ColumnDef<Person>[],
   data: [...Array(6)].map(() => ({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),

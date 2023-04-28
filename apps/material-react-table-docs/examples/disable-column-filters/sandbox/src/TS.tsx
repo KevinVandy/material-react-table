@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, { type TRT_ColumnDef } from 'material-react-table';
 
 const Example = () => {
   const columns = useMemo(
@@ -24,7 +24,7 @@ const Example = () => {
           header: 'Last Name',
         },
         //end
-      ] as MRT_ColumnDef<(typeof data)[0]>[],
+      ] as TRT_ColumnDef<(typeof data)[0]>[],
     [],
   );
 

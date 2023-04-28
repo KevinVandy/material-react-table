@@ -1,7 +1,7 @@
-import { type MRT_ColumnDef } from 'material-react-table';
+import { type TRT_ColumnDef } from 'material-react-table';
 
 export type ColumnOption = {
-  columnOption: keyof MRT_ColumnDef;
+  columnOption: keyof TRT_ColumnDef;
   defaultValue?: string;
   description?: string;
   link?: string;
@@ -134,7 +134,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: 'Array<MRT_ColumnDef<TData>>',
+    type: 'Array<TRT_ColumnDef<TData>>',
   },
   {
     columnOption: 'editSelectOptions',
@@ -325,7 +325,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: 'MRT_FilterFn',
+    type: 'TRT_FilterFn',
   },
   {
     columnOption: 'filterSelectOptions',

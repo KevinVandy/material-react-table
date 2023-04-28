@@ -1,33 +1,33 @@
-import { MRT_AggregationFns } from './aggregationFns';
-import { MRT_FilterFns } from './filterFns';
-import { MRT_SortingFns } from './sortingFns';
+import { TRT_AggregationFns } from './aggregationFns';
+import { TRT_FilterFns } from './filterFns';
+import { TRT_SortingFns } from './sortingFns';
 import { alpha, lighten } from '@mui/material/styles';
 import type { Row } from '@tanstack/react-table';
 import type { TableCellProps } from '@mui/material/TableCell';
 import type { Theme } from '@mui/material/styles';
 import type {
   MaterialReactTableProps,
-  MRT_Column,
-  MRT_ColumnDef,
-  MRT_ColumnOrderState,
-  MRT_DefinedColumnDef,
-  MRT_DisplayColumnIds,
-  MRT_FilterOption,
-  MRT_GroupingState,
-  MRT_Header,
-  MRT_TableInstance,
+  TRT_Column,
+  TRT_ColumnDef,
+  TRT_ColumnOrderState,
+  TRT_DefinedColumnDef,
+  TRT_DisplayColumnIds,
+  TRT_FilterOption,
+  TRT_GroupingState,
+  TRT_Header,
+  TRT_TableInstance,
 } from '.';
 
 export const getColumnId = <TData extends Record<string, any> = {}>(
-  columnDef: MRT_ColumnDef<TData>,
+  columnDef: TRT_ColumnDef<TData>,
 ): string =>
   columnDef.id ?? columnDef.accessorKey?.toString?.() ?? columnDef.header;
 
 export const getAllLeafColumnDefs = <TData extends Record<string, any> = {}>(
-  columns: MRT_ColumnDef<TData>[],
-): MRT_ColumnDef<TData>[] => {
-  const allLeafColumnDefs: MRT_ColumnDef<TData>[] = [];
-  const getLeafColumns = (cols: MRT_ColumnDef<TData>[]) => {
+  columns: TRT_ColumnDef<TData>[],
+): TRT_ColumnDef<TData>[] => {
+  const allLeafColumnDefs: TRT_ColumnDef<TData>[] = [];
+  const getLeafColumns = (cols: TRT_ColumnDef<TData>[]) => {
     cols.forEach((col) => {
       if (col.columns) {
         getLeafColumns(col.columns);
@@ -48,15 +48,15 @@ export const prepareColumns = <TData extends Record<string, any> = {}>({
   filterFns,
   sortingFns,
 }: {
-  aggregationFns: typeof MRT_AggregationFns &
+  aggregationFns: typeof TRT_AggregationFns &
     MaterialReactTableProps<TData>['aggregationFns'];
-  columnDefs: MRT_ColumnDef<TData>[];
-  columnFilterFns: { [key: string]: MRT_FilterOption };
-  defaultDisplayColumn: Partial<MRT_ColumnDef<TData>>;
-  filterFns: typeof MRT_FilterFns & MaterialReactTableProps<TData>['filterFns'];
-  sortingFns: typeof MRT_SortingFns &
+  columnDefs: TRT_ColumnDef<TData>[];
+  columnFilterFns: { [key: string]: TRT_FilterOption };
+  defaultDisplayColumn: Partial<TRT_ColumnDef<TData>>;
+  filterFns: typeof TRT_FilterFns & MaterialReactTableProps<TData>['filterFns'];
+  sortingFns: typeof TRT_SortingFns &
     MaterialReactTableProps<TData>['sortingFns'];
-}): MRT_DefinedColumnDef<TData>[] =>
+}): TRT_DefinedColumnDef<TData>[] =>
   columnDefs.map((columnDef) => {
     //assign columnId
     if (!columnDef.id) columnDef.id = getColumnId(columnDef);
@@ -97,7 +97,7 @@ export const prepareColumns = <TData extends Record<string, any> = {}>({
       if (Object.keys(filterFns).includes(columnFilterFns[columnDef.id])) {
         columnDef.filterFn =
           filterFns[columnFilterFns[columnDef.id]] ?? filterFns.fuzzy;
-        (columnDef as MRT_DefinedColumnDef)._filterFn =
+        (columnDef as TRT_DefinedColumnDef)._filterFn =
           columnFilterFns[columnDef.id];
       }
 
@@ -108,18 +108,18 @@ export const prepareColumns = <TData extends Record<string, any> = {}>({
       }
     } else if (columnDef.columnDefType === 'display') {
       columnDef = {
-        ...(defaultDisplayColumn as MRT_ColumnDef<TData>),
+        ...(defaultDisplayColumn as TRT_ColumnDef<TData>),
         ...columnDef,
       };
     }
     return columnDef;
-  }) as MRT_DefinedColumnDef<TData>[];
+  }) as TRT_DefinedColumnDef<TData>[];
 
 export const reorderColumn = <TData extends Record<string, any> = {}>(
-  draggedColumn: MRT_Column<TData>,
-  targetColumn: MRT_Column<TData>,
-  columnOrder: MRT_ColumnOrderState,
-): MRT_ColumnOrderState => {
+  draggedColumn: TRT_Column<TData>,
+  targetColumn: TRT_Column<TData>,
+  columnOrder: TRT_ColumnOrderState,
+): TRT_ColumnOrderState => {
   if (draggedColumn.getCanPin()) {
     draggedColumn.pin(targetColumn.getIsPinned());
   }
@@ -133,7 +133,7 @@ export const reorderColumn = <TData extends Record<string, any> = {}>(
 
 export const showExpandColumn = <TData extends Record<string, any> = {}>(
   props: MaterialReactTableProps<TData>,
-  grouping?: MRT_GroupingState,
+  grouping?: TRT_GroupingState,
 ) =>
   !!(
     props.enableExpanding ||
@@ -158,7 +158,7 @@ export const getLeadingDisplayColumnIds = <
       'mrt-row-expand',
     props.enableRowSelection && 'mrt-row-select',
     props.enableRowNumbers && 'mrt-row-numbers',
-  ].filter(Boolean) as MRT_DisplayColumnIds[];
+  ].filter(Boolean) as TRT_DisplayColumnIds[];
 
 export const getTrailingDisplayColumnIds = <
   TData extends Record<string, any> = {},
@@ -174,7 +174,7 @@ export const getTrailingDisplayColumnIds = <
     props.positionExpandColumn === 'last' &&
       showExpandColumn(props) &&
       'mrt-row-expand',
-  ].filter(Boolean) as MRT_DisplayColumnIds[];
+  ].filter(Boolean) as TRT_DisplayColumnIds[];
 
 export const getDefaultColumnOrderIds = <
   TData extends Record<string, any> = {},
@@ -196,8 +196,8 @@ export const getDefaultColumnOrderIds = <
 export const getDefaultColumnFilterFn = <
   TData extends Record<string, any> = {},
 >(
-  columnDef: MRT_ColumnDef<TData>,
-): MRT_FilterOption => {
+  columnDef: TRT_ColumnDef<TData>,
+): TRT_FilterOption => {
   if (columnDef.filterVariant === 'multi-select') return 'arrIncludesSome';
   if (columnDef.filterVariant === 'range') return 'betweenInclusive';
   if (
@@ -209,23 +209,23 @@ export const getDefaultColumnFilterFn = <
 };
 
 export const getIsFirstColumn = (
-  column: MRT_Column,
-  table: MRT_TableInstance,
+  column: TRT_Column,
+  table: TRT_TableInstance,
 ) => {
   return table.getVisibleLeafColumns()[0].id === column.id;
 };
 
 export const getIsLastColumn = (
-  column: MRT_Column,
-  table: MRT_TableInstance,
+  column: TRT_Column,
+  table: TRT_TableInstance,
 ) => {
   const columns = table.getVisibleLeafColumns();
   return columns[columns.length - 1].id === column.id;
 };
 
 export const getIsLastLeftPinnedColumn = (
-  table: MRT_TableInstance,
-  column: MRT_Column,
+  table: TRT_TableInstance,
+  column: TRT_Column,
 ) => {
   return (
     column.getIsPinned() === 'left' &&
@@ -233,11 +233,11 @@ export const getIsLastLeftPinnedColumn = (
   );
 };
 
-export const getIsFirstRightPinnedColumn = (column: MRT_Column) => {
+export const getIsFirstRightPinnedColumn = (column: TRT_Column) => {
   return column.getIsPinned() === 'right' && column.getPinnedIndex() === 0;
 };
 
-export const getTotalRight = (table: MRT_TableInstance, column: MRT_Column) => {
+export const getTotalRight = (table: TRT_TableInstance, column: TRT_Column) => {
   return (
     (table.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) * 200
   );
@@ -250,9 +250,9 @@ export const getCommonCellStyles = ({
   tableCellProps,
   theme,
 }: {
-  column: MRT_Column;
-  header?: MRT_Header;
-  table: MRT_TableInstance;
+  column: TRT_Column;
+  header?: TRT_Header;
+  table: TRT_TableInstance;
   tableCellProps: TableCellProps;
   theme: Theme;
 }) => {
@@ -329,14 +329,14 @@ export const getCommonCellStyles = ({
   };
 };
 
-export const MRT_DefaultColumn = {
+export const TRT_DefaultColumn = {
   filterVariant: 'text',
   minSize: 40,
   maxSize: 1000,
   size: 180,
 } as const;
 
-export const MRT_DefaultDisplayColumn = {
+export const TRT_DefaultDisplayColumn = {
   columnDefType: 'display',
   enableClickToCopy: false,
   enableColumnActions: false,

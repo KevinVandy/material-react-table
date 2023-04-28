@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta } from '@storybook/react';
-import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, { type TRT_ColumnDef } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 
 const meta: Meta = {
@@ -17,7 +17,7 @@ interface Row {
   phoneNumber: string;
 }
 
-const columns: MRT_ColumnDef<Row>[] = [
+const columns: TRT_ColumnDef<Row>[] = [
   {
     header: 'First Name',
     accessorKey: 'firstName',

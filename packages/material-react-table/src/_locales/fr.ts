@@ -1,6 +1,6 @@
-import type { MRT_Localization } from '../MaterialReactTable';
+import type { TRT_Localization } from '../MaterialReactTable';
 
-export const MRT_Localization_FR: MRT_Localization = {
+export const TRT_Localization_FR: TRT_Localization = {
   actions: 'Actions',
   and: 'et',
   cancel: 'Annuler',

@@ -2,8 +2,8 @@ import React from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
-  MRT_AggregationFns,
-  type MRT_ColumnDef,
+  TRT_AggregationFns,
+  type TRT_ColumnDef,
 } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 import { Box, Stack } from '@mui/material';
@@ -113,7 +113,7 @@ const columns = [
       </Stack>
     ),
   },
-] as MRT_ColumnDef<(typeof data)[0]>[];
+] as TRT_ColumnDef<(typeof data)[0]>[];
 
 export const Aggregation = () => (
   <MaterialReactTable columns={columns} data={data} enableGrouping />
@@ -160,8 +160,8 @@ export const MultiAggregationPerColumn = () => (
         accessorKey: 'age',
         //manually set multiple aggregation functions
         aggregationFn: (columnId, leafRows: any, childRows: any) => [
-          MRT_AggregationFns.min(columnId, leafRows, childRows),
-          MRT_AggregationFns.max(columnId, leafRows, childRows),
+          TRT_AggregationFns.min(columnId, leafRows, childRows),
+          TRT_AggregationFns.max(columnId, leafRows, childRows),
         ],
         AggregatedCell: ({ cell, table }) => (
           <>

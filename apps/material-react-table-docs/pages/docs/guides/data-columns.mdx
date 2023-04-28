@@ -30,7 +30,7 @@ The `accessorKey` must match one of the keys in your data, or else no data will 
 By default, the `accessorKey` will double as the `id` for the column, but if you need the id of the column to be different than the accessorKey, you can use the `id` property in addition.
 
 ```tsx
-const columns = useMemo<MRT_ColumnDef<Customer>[]>( //TS helps with the autocomplete while writing columns
+const columns = useMemo<TRT_ColumnDef<Customer>[]>( //TS helps with the autocomplete while writing columns
   () => [
     {
       accessorKey: 'username', //normal recommended usage of an accessorKey

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, { type TRT_ColumnDef } from 'material-react-table';
 
 type Person = {
   name: {
@@ -62,7 +62,7 @@ const data: Person[] = [
 
 const Example = () => {
   //should be memoized or stable
-  const columns = useMemo<MRT_ColumnDef<Person>[]>(
+  const columns = useMemo<TRT_ColumnDef<Person>[]>(
     () => [
       {
         accessorKey: 'name.firstName', //access nested data with dot notation

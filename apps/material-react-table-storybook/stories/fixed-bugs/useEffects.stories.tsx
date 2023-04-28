@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  type MRT_ColumnFiltersState,
+  type TRT_ColumnDef,
+  type TRT_ColumnFiltersState,
 } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 import { Box, Button, MenuItem } from '@mui/material';
@@ -22,7 +22,7 @@ const data = [...Array(100)].map(() => ({
 }));
 
 export const FilterModesRefetch = () => {
-  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
+  const [columnFilters, setColumnFilters] = useState<TRT_ColumnFiltersState>(
     [],
   );
 
@@ -30,7 +30,7 @@ export const FilterModesRefetch = () => {
     console.log('refetch', columnFilters);
   }, [columnFilters]);
 
-  const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
+  const columns: TRT_ColumnDef<(typeof data)[0]>[] = [
     {
       header: 'First Name',
       accessorKey: 'firstName',
@@ -74,7 +74,7 @@ export const FilterOptionsAsync = () => {
     }, 2000);
   }, []);
 
-  const columns = useMemo<MRT_ColumnDef<(typeof data)[0]>[]>(
+  const columns = useMemo<TRT_ColumnDef<(typeof data)[0]>[]>(
     () => [
       {
         header: 'First Name',
@@ -121,7 +121,7 @@ export const EditOptionsAsync = () => {
     }, 2000);
   }, []);
 
-  const columns = useMemo<MRT_ColumnDef<(typeof data)[0]>[]>(
+  const columns = useMemo<TRT_ColumnDef<(typeof data)[0]>[]>(
     () => [
       {
         header: 'First Name',
@@ -168,7 +168,7 @@ export const RenderRowActionsAsync = () => {
     }, 2000);
   }, []);
 
-  const columns = useMemo<MRT_ColumnDef<(typeof data)[0]>[]>(
+  const columns = useMemo<TRT_ColumnDef<(typeof data)[0]>[]>(
     () => [
       {
         header: 'First Name',
@@ -221,7 +221,7 @@ export const renderRowActionMenuItemsAsync = () => {
     }, 2000);
   }, []);
 
-  const columns = useMemo<MRT_ColumnDef<(typeof data)[0]>[]>(
+  const columns = useMemo<TRT_ColumnDef<(typeof data)[0]>[]>(
     () => [
       {
         header: 'First Name',

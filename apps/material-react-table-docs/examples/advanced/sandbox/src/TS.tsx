@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 //MRT Imports
-import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, { type TRT_ColumnDef } from 'material-react-table';
 
 //Material-UI Imports
 import {
@@ -36,7 +36,7 @@ export type Employee = {
 };
 
 const Example = () => {
-  const columns = useMemo<MRT_ColumnDef<Employee>[]>(
+  const columns = useMemo<TRT_ColumnDef<Employee>[]>(
     () => [
       {
         id: 'employee', //id used to define `group` column

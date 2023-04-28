@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  MRT_ColumnOrderState,
+  type TRT_ColumnDef,
+  TRT_ColumnOrderState,
 } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 
@@ -12,7 +12,7 @@ const meta: Meta = {
 
 export default meta;
 
-const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
+const columns: TRT_ColumnDef<(typeof data)[0]>[] = [
   {
     header: 'First Name',
     accessorKey: 'firstName',
@@ -114,7 +114,7 @@ export const ColumnOrderingNoDragHandles = () => (
 );
 
 export const ColumnOrderingStateManaged = () => {
-  const [columnOrder, setColumnOrder] = useState<MRT_ColumnOrderState>([
+  const [columnOrder, setColumnOrder] = useState<TRT_ColumnOrderState>([
     'mrt-row-select',
     ...columns.map((c) => c.accessorKey as string),
   ]);

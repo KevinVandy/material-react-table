@@ -1,6 +1,6 @@
-import { MRT_Localization } from '../MaterialReactTable';
+import { TRT_Localization } from '../MaterialReactTable';
 
-export const MRT_Localization_RO: MRT_Localization = {
+export const TRT_Localization_RO: TRT_Localization = {
   actions: 'Acțiuni',
   and: 'și',
   cancel: 'Anulează',

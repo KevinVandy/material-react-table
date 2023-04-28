@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, { type TRT_ColumnDef } from 'material-react-table';
 import { Box, Typography } from '@mui/material';
 import { data, type Person } from './makeData';
 
@@ -24,7 +24,7 @@ const Example = () => {
           accessorKey: 'lastName',
           header: 'Last Name',
         },
-      ] as MRT_ColumnDef<Person>[],
+      ] as TRT_ColumnDef<Person>[],
     [],
   );
 

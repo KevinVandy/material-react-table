@@ -76,8 +76,8 @@ The `renderToolbarInternalActions` prop allows you to redefine the built-in butt
 
 ```tsx
 import MaterialReactTable, {
-  MRT_ShowHideColumnsButton,
-  MRT_FullScreenToggleButton,
+  TRT_ShowHideColumnsButton,
+  TRT_FullScreenToggleButton,
 } from 'material-react-table';
 //...
 return (
@@ -91,8 +91,8 @@ return (
           <PrintIcon />
         </IconButton>
         {/* built-in buttons (must pass in table prop for them to work!) */}
-        <MRT_ShowHideColumnsButton table={table} />
-        <MRT_FullScreenToggleButton table={table} />
+        <TRT_ShowHideColumnsButton table={table} />
+        <TRT_FullScreenToggleButton table={table} />
       </>
     )}
   />
@@ -220,8 +220,8 @@ If you are using a custom toolbar, you can still import some of the built-in MRT
 
 ```jsx
 import MaterialReactTable, {
-  MRT_ShowHideColumnsButton, // import the built-in show/hide columns button
-  MRT_FullScreenToggleButton, // import the built-in full screen toggle button
+  TRT_ShowHideColumnsButton, // import the built-in show/hide columns button
+  TRT_FullScreenToggleButton, // import the built-in full screen toggle button
 } from 'material-react-table';
 //...
 return (
@@ -232,8 +232,8 @@ return (
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography>Custom Toolbar</Typography>
         <Box>
-          <MRT_ShowHideColumnsButton table={table} />
-          <MRT_FullScreenToggleButton table={table} />
+          <TRT_ShowHideColumnsButton table={table} />
+          <TRT_FullScreenToggleButton table={table} />
         </Box>
       </Box>
     )}

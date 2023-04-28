@@ -7,10 +7,10 @@ import React, {
   useState,
 } from 'react';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  type MRT_ColumnFiltersState,
-  type MRT_SortingState,
-  type MRT_Virtualizer,
+  type TRT_ColumnDef,
+  type TRT_ColumnFiltersState,
+  type TRT_SortingState,
+  type TRT_Virtualizer,
 } from 'material-react-table';
 import { Typography } from '@mui/material';
 import {
@@ -34,7 +34,7 @@ type User = {
   phoneNumber: string;
 };
 
-const columns: MRT_ColumnDef<User>[] = [
+const columns: TRT_ColumnDef<User>[] = [
   {
     accessorKey: 'firstName',
     header: 'First Name',
@@ -62,13 +62,13 @@ const fetchSize = 25;
 const Example = () => {
   const tableContainerRef = useRef<HTMLDivElement>(null); //we can get access to the underlying TableContainer element and react to its scroll events
   const rowVirtualizerInstanceRef =
-    useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null); //we can get access to the underlying Virtualizer instance and call its scrollToIndex method
+    useRef<TRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null); //we can get access to the underlying Virtualizer instance and call its scrollToIndex method
 
-  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
+  const [columnFilters, setColumnFilters] = useState<TRT_ColumnFiltersState>(
     [],
   );
   const [globalFilter, setGlobalFilter] = useState<string>();
-  const [sorting, setSorting] = useState<MRT_SortingState>([]);
+  const [sorting, setSorting] = useState<TRT_SortingState>([]);
 
   const { data, fetchNextPage, isError, isFetching, isLoading } =
     useInfiniteQuery<UserApiResponse>({

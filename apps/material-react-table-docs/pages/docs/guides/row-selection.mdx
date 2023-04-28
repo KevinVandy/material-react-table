@@ -88,7 +88,7 @@ return (
 Alternatively, you can read the selection state from the `tableInstanceRef` ref like so:
 
 ```tsx
-const tableInstanceRef = useRef<MRT_TableInstance<YouDataType>>(null); //ts
+const tableInstanceRef = useRef<TRT_TableInstance<YouDataType>>(null); //ts
 
 const someEventHandler = () => {
   const rowSelection = tableInstanceRef.current.getState().rowSelection;

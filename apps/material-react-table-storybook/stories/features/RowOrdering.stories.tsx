@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  type MRT_Row,
+  type TRT_ColumnDef,
+  type TRT_Row,
 } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 
@@ -21,7 +21,7 @@ type Person = {
   state: string;
 };
 
-const columns: MRT_ColumnDef<Person>[] = [
+const columns: TRT_ColumnDef<Person>[] = [
   {
     header: 'First Name',
     accessorKey: 'firstName',
@@ -72,7 +72,7 @@ export const RowOrderingEnabled = () => {
           const { draggingRow, hoveredRow } = table.getState();
           if (hoveredRow && draggingRow) {
             data.splice(
-              (hoveredRow as MRT_Row<Person>).index,
+              (hoveredRow as TRT_Row<Person>).index,
               0,
               data.splice(draggingRow.index, 1)[0],
             );
@@ -86,8 +86,8 @@ export const RowOrderingEnabled = () => {
 
 export const RowOrderingWithSelect = () => {
   const [data, setData] = useState(() => initData);
-  const [draggingRow, setDraggingRow] = useState<MRT_Row<Person> | null>(null);
-  const [hoveredRow, setHoveredRow] = useState<MRT_Row<Person> | null>(null);
+  const [draggingRow, setDraggingRow] = useState<TRT_Row<Person> | null>(null);
+  const [hoveredRow, setHoveredRow] = useState<TRT_Row<Person> | null>(null);
 
   return (
     <MaterialReactTable
@@ -122,8 +122,8 @@ export const RowOrderingWithSelect = () => {
 
 export const RowOrderingWithPinning = () => {
   const [data, setData] = useState(() => initData);
-  const [draggingRow, setDraggingRow] = useState<MRT_Row<Person> | null>(null);
-  const [hoveredRow, setHoveredRow] = useState<MRT_Row<Person> | null>(null);
+  const [draggingRow, setDraggingRow] = useState<TRT_Row<Person> | null>(null);
+  const [hoveredRow, setHoveredRow] = useState<TRT_Row<Person> | null>(null);
 
   return (
     <MaterialReactTable
@@ -157,8 +157,8 @@ export const RowOrderingWithPinning = () => {
 
 export const RowAndColumnOrdering = () => {
   const [data, setData] = useState(() => initData);
-  const [draggingRow, setDraggingRow] = useState<MRT_Row<Person> | null>(null);
-  const [hoveredRow, setHoveredRow] = useState<MRT_Row<Person> | null>(null);
+  const [draggingRow, setDraggingRow] = useState<TRT_Row<Person> | null>(null);
+  const [hoveredRow, setHoveredRow] = useState<TRT_Row<Person> | null>(null);
 
   return (
     <MaterialReactTable

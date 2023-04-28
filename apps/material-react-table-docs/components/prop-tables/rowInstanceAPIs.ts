@@ -1,7 +1,7 @@
-import { MRT_Row } from 'material-react-table';
+import { TRT_Row } from 'material-react-table';
 
 export interface RowInstanceAPI {
-  rowInstanceAPI: keyof MRT_Row;
+  rowInstanceAPI: keyof TRT_Row;
   link: string;
   linkText: string;
   description: string;

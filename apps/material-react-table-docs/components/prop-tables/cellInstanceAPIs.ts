@@ -1,7 +1,7 @@
-import { MRT_Cell } from 'material-react-table';
+import { TRT_Cell } from 'material-react-table';
 
 export interface CellInstanceAPI {
-  cellInstanceAPI: keyof MRT_Cell;
+  cellInstanceAPI: keyof TRT_Cell;
   link?: string;
   linkText?: string;
   description?: string;

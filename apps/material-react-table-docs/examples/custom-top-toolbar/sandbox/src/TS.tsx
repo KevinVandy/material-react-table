@@ -1,15 +1,15 @@
 import React, { useMemo } from 'react';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  MRT_ToggleDensePaddingButton,
-  MRT_FullScreenToggleButton,
+  type TRT_ColumnDef,
+  TRT_ToggleDensePaddingButton,
+  TRT_FullScreenToggleButton,
 } from 'material-react-table';
 import { Box, Button, IconButton } from '@mui/material';
 import PrintIcon from '@mui/icons-material/Print';
 import { data, type Person } from './makeData';
 
 const Example = () => {
-  const columns = useMemo<MRT_ColumnDef<Person>[]>(
+  const columns = useMemo<TRT_ColumnDef<Person>[]>(
     //column definitions...
     () => [
       {
@@ -75,8 +75,8 @@ const Example = () => {
             <PrintIcon />
           </IconButton>
           {/* along-side built-in buttons in whatever order you want them */}
-          <MRT_ToggleDensePaddingButton table={table} />
-          <MRT_FullScreenToggleButton table={table} />
+          <TRT_ToggleDensePaddingButton table={table} />
+          <TRT_FullScreenToggleButton table={table} />
         </Box>
       )}
     />

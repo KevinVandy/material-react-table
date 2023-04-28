@@ -1,6 +1,6 @@
 import type {
-  MRT_ColumnFiltersState,
-  MRT_SortingState,
+  TRT_ColumnFiltersState,
+  TRT_SortingState,
 } from 'material-react-table';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -13,7 +13,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     string
   >;
 
-  const parsedColumnFilters = JSON.parse(filters) as MRT_ColumnFiltersState;
+  const parsedColumnFilters = JSON.parse(filters) as TRT_ColumnFiltersState;
   if (!!parsedColumnFilters?.length) {
     parsedColumnFilters.map((filter) => {
       const { id: columnId, value: filterValue } = filter;
@@ -37,7 +37,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     );
   }
 
-  const parsedSorting = JSON.parse(sorting) as MRT_SortingState;
+  const parsedSorting = JSON.parse(sorting) as TRT_SortingState;
   if (!!parsedSorting?.length) {
     const sort = parsedSorting[0];
     const { id, desc } = sort;

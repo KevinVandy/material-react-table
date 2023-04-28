@@ -2,45 +2,45 @@ import MaterialReactTable from './MaterialReactTable';
 export default MaterialReactTable;
 export * from './MaterialReactTable';
 
-import type { MRT_Icons } from './icons';
-export type { MRT_Icons };
+import type { TRT_Icons } from './icons';
+export type { TRT_Icons };
 
-import { MRT_BottomToolbar } from './toolbar/MRT_BottomToolbar';
-import { MRT_CopyButton } from './buttons/MRT_CopyButton';
-import { MRT_EditActionButtons } from './buttons/MRT_EditActionButtons';
-import { MRT_ExpandButton } from './buttons/MRT_ExpandButton';
-import { MRT_FilterOptionMenu } from './menus/MRT_FilterOptionMenu';
-import { MRT_FullScreenToggleButton } from './buttons/MRT_FullScreenToggleButton';
-import { MRT_GrabHandleButton } from './buttons/MRT_GrabHandleButton';
-import { MRT_GlobalFilterTextField } from './inputs/MRT_GlobalFilterTextField';
-import { MRT_ShowHideColumnsButton } from './buttons/MRT_ShowHideColumnsButton';
-import { MRT_TablePagination } from './toolbar/MRT_TablePagination';
-import { MRT_ToggleDensePaddingButton } from './buttons/MRT_ToggleDensePaddingButton';
-import { MRT_ToggleFiltersButton } from './buttons/MRT_ToggleFiltersButton';
-import { MRT_ToggleGlobalFilterButton } from './buttons/MRT_ToggleGlobalFilterButton';
-import { MRT_ToggleRowActionMenuButton } from './buttons/MRT_ToggleRowActionMenuButton';
-import { MRT_ToolbarAlertBanner } from './toolbar/MRT_ToolbarAlertBanner';
-import { MRT_ToolbarDropZone } from './toolbar/MRT_ToolbarDropZone';
-import { MRT_ToolbarInternalButtons } from './toolbar/MRT_ToolbarInternalButtons';
-import { MRT_TopToolbar } from './toolbar/MRT_TopToolbar';
+import { TRT_BottomToolbar } from './toolbar/TRT_BottomToolbar';
+import { TRT_CopyButton } from './buttons/TRT_CopyButton';
+import { TRT_EditActionButtons } from './buttons/TRT_EditActionButtons';
+import { TRT_ExpandButton } from './buttons/TRT_ExpandButton';
+import { TRT_FilterOptionMenu } from './menus/TRT_FilterOptionMenu';
+import { TRT_FullScreenToggleButton } from './buttons/TRT_FullScreenToggleButton';
+import { TRT_GrabHandleButton } from './buttons/TRT_GrabHandleButton';
+import { TRT_GlobalFilterTextField } from './inputs/TRT_GlobalFilterTextField';
+import { TRT_ShowHideColumnsButton } from './buttons/TRT_ShowHideColumnsButton';
+import { TRT_TablePagination } from './toolbar/TRT_TablePagination';
+import { TRT_ToggleDensePaddingButton } from './buttons/TRT_ToggleDensePaddingButton';
+import { TRT_ToggleFiltersButton } from './buttons/TRT_ToggleFiltersButton';
+import { TRT_ToggleGlobalFilterButton } from './buttons/TRT_ToggleGlobalFilterButton';
+import { TRT_ToggleRowActionMenuButton } from './buttons/TRT_ToggleRowActionMenuButton';
+import { TRT_ToolbarAlertBanner } from './toolbar/TRT_ToolbarAlertBanner';
+import { TRT_ToolbarDropZone } from './toolbar/TRT_ToolbarDropZone';
+import { TRT_ToolbarInternalButtons } from './toolbar/TRT_ToolbarInternalButtons';
+import { TRT_TopToolbar } from './toolbar/TRT_TopToolbar';
 
 export {
-  MRT_BottomToolbar,
-  MRT_CopyButton,
-  MRT_EditActionButtons,
-  MRT_ExpandButton,
-  MRT_FilterOptionMenu,
-  MRT_FullScreenToggleButton,
-  MRT_GrabHandleButton,
-  MRT_GlobalFilterTextField,
-  MRT_ShowHideColumnsButton,
-  MRT_TablePagination,
-  MRT_ToggleDensePaddingButton,
-  MRT_ToggleFiltersButton,
-  MRT_ToggleGlobalFilterButton,
-  MRT_ToggleRowActionMenuButton,
-  MRT_ToolbarAlertBanner,
-  MRT_ToolbarDropZone,
-  MRT_ToolbarInternalButtons,
-  MRT_TopToolbar,
+  TRT_BottomToolbar,
+  TRT_CopyButton,
+  TRT_EditActionButtons,
+  TRT_ExpandButton,
+  TRT_FilterOptionMenu,
+  TRT_FullScreenToggleButton,
+  TRT_GrabHandleButton,
+  TRT_GlobalFilterTextField,
+  TRT_ShowHideColumnsButton,
+  TRT_TablePagination,
+  TRT_ToggleDensePaddingButton,
+  TRT_ToggleFiltersButton,
+  TRT_ToggleGlobalFilterButton,
+  TRT_ToggleRowActionMenuButton,
+  TRT_ToolbarAlertBanner,
+  TRT_ToolbarDropZone,
+  TRT_ToolbarInternalButtons,
+  TRT_TopToolbar,
 };

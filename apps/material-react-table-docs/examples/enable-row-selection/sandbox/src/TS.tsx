@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  type MRT_RowSelectionState,
+  type TRT_ColumnDef,
+  type TRT_RowSelectionState,
 } from 'material-react-table';
 
 const data = [
@@ -55,12 +55,12 @@ const Example = () => {
           accessorKey: 'state',
           header: 'State',
         },
-      ] as MRT_ColumnDef<(typeof data)[0]>[],
+      ] as TRT_ColumnDef<(typeof data)[0]>[],
     [], //end
   );
 
   //optionally, you can manage the row selection state yourself
-  const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
+  const [rowSelection, setRowSelection] = useState<TRT_RowSelectionState>({});
 
   useEffect(() => {
     //do something when the row selection changes...

@@ -137,7 +137,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
               >
                 <Image
                   alt="MRT logo"
-                  src="/mrt_logo.svg"
+                  src="/TRT_logo.svg"
                   height={isTablet ? 35 : 45}
                   width={isTablet ? 35 : 45}
                 />

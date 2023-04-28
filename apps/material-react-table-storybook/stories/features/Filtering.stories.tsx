@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, {
-  type MRT_ColumnDef,
-  type MRT_ColumnFiltersState,
+  type TRT_ColumnDef,
+  type TRT_ColumnFiltersState,
 } from 'material-react-table';
 import { faker } from '@faker-js/faker';
 import { Box, Button, MenuItem, TextField } from '@mui/material';
@@ -13,7 +13,7 @@ const meta: Meta = {
 
 export default meta;
 
-const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
+const columns: TRT_ColumnDef<(typeof data)[0]>[] = [
   {
     header: 'Is Active',
     accessorKey: 'isActive',
@@ -442,7 +442,7 @@ export const CustomFilterComponent = () => (
 
 export const ManualFiltering = () => {
   const [rows, setRows] = useState(() => [...data]);
-  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
+  const [columnFilters, setColumnFilters] = useState<TRT_ColumnFiltersState>(
     [],
   );
 

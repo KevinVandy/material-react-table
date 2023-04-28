@@ -1,18 +1,18 @@
 import React, { useReducer, useRef, useState } from 'react';
 import MaterialReactTable, {
-  MRT_FullScreenToggleButton,
-  MRT_GlobalFilterTextField,
-  MRT_ShowHideColumnsButton,
-  MRT_TableInstance,
-  MRT_TablePagination,
-  MRT_ToggleDensePaddingButton,
-  MRT_ToggleFiltersButton,
-  MRT_ToolbarAlertBanner,
-  type MRT_ColumnDef,
-  type MRT_DensityState,
-  type MRT_PaginationState,
-  type MRT_RowSelectionState,
-  type MRT_VisibilityState,
+  TRT_FullScreenToggleButton,
+  TRT_GlobalFilterTextField,
+  TRT_ShowHideColumnsButton,
+  TRT_TableInstance,
+  TRT_TablePagination,
+  TRT_ToggleDensePaddingButton,
+  TRT_ToggleFiltersButton,
+  TRT_ToolbarAlertBanner,
+  type TRT_ColumnDef,
+  type TRT_DensityState,
+  type TRT_PaginationState,
+  type TRT_RowSelectionState,
+  type TRT_VisibilityState,
 } from 'material-react-table';
 import {
   alpha,
@@ -27,7 +27,7 @@ import PrintIcon from '@mui/icons-material/Print';
 import { data, type Person } from './makeData';
 
 //column definitions...
-const columns: MRT_ColumnDef<Person>[] = [
+const columns: TRT_ColumnDef<Person>[] = [
   {
     accessorKey: 'firstName',
     header: 'First Name',
@@ -49,21 +49,21 @@ const columns: MRT_ColumnDef<Person>[] = [
 
 const Example = () => {
   //we need a table instance ref to pass as a prop to the MRT Toolbar buttons
-  const tableInstanceRef = useRef<MRT_TableInstance<Person>>(null);
+  const tableInstanceRef = useRef<TRT_TableInstance<Person>>(null);
 
-  //we will also need some weird re-render hacks to force the MRT_ components to re-render since ref changes do not trigger a re-render
+  //we will also need some weird re-render hacks to force the TRT_ components to re-render since ref changes do not trigger a re-render
   const rerender = useReducer(() => ({}), {})[1];
 
-  //we need to manage the state that should trigger the MRT_ components in our custom toolbar to re-render
-  const [columnVisibility, setColumnVisibility] = useState<MRT_VisibilityState>(
+  //we need to manage the state that should trigger the TRT_ components in our custom toolbar to re-render
+  const [columnVisibility, setColumnVisibility] = useState<TRT_VisibilityState>(
     {},
   );
-  const [density, setDensity] = useState<MRT_DensityState>('comfortable');
-  const [pagination, setPagination] = useState<MRT_PaginationState>({
+  const [density, setDensity] = useState<TRT_DensityState>('comfortable');
+  const [pagination, setPagination] = useState<TRT_PaginationState>({
     pageIndex: 0,
     pageSize: 5,
   });
-  const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
+  const [rowSelection, setRowSelection] = useState<TRT_RowSelectionState>({});
   const [showColumnFilters, setShowColumnFilters] = useState(false);
 
   return (
@@ -95,17 +95,17 @@ const Example = () => {
               Crete New Account
             </Button>
           </Box>
-          <MRT_GlobalFilterTextField table={tableInstanceRef.current} />
+          <TRT_GlobalFilterTextField table={tableInstanceRef.current} />
           <Box>
-            <MRT_ToggleFiltersButton table={tableInstanceRef.current} />
-            <MRT_ShowHideColumnsButton table={tableInstanceRef.current} />
-            <MRT_ToggleDensePaddingButton table={tableInstanceRef.current} />
+            <TRT_ToggleFiltersButton table={tableInstanceRef.current} />
+            <TRT_ShowHideColumnsButton table={tableInstanceRef.current} />
+            <TRT_ToggleDensePaddingButton table={tableInstanceRef.current} />
             <Tooltip arrow title="Print">
               <IconButton onClick={() => window.print()}>
                 <PrintIcon />
               </IconButton>
             </Tooltip>
-            <MRT_FullScreenToggleButton table={tableInstanceRef.current} />
+            <TRT_FullScreenToggleButton table={tableInstanceRef.current} />
           </Box>
         </Toolbar>
       )}
@@ -171,9 +171,9 @@ const Example = () => {
             flexDirection: 'column',
           }}
         >
-          <MRT_TablePagination table={tableInstanceRef.current} />
+          <TRT_TablePagination table={tableInstanceRef.current} />
           <Box sx={{ display: 'grid', width: '100%' }}>
-            <MRT_ToolbarAlertBanner
+            <TRT_ToolbarAlertBanner
               stackAlertBanner
               table={tableInstanceRef.current}
             />

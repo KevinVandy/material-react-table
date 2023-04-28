@@ -95,7 +95,7 @@ const [pagination, setPagination] = useState({
   pageSize: 15,
 });
 
-const handlePaginationChange = (updater: MRT_Updater<PaginationState>) => {
+const handlePaginationChange = (updater: TRT_Updater<PaginationState>) => {
   //call the setState as normal, but need to check if using an updater callback with a previous state
   setPagination((prevPagination) =>
     updater instanceof Function ? updater(prevPagination) : updater,
@@ -119,7 +119,7 @@ You can store a reference to the underlying table instance by using the `tableIn
 
 ```tsx
 //must initialize with null to make TS happy
-const tableInstanceRef = useRef<MRT_TableInstance<YourDataType>>(null);
+const tableInstanceRef = useRef<TRT_TableInstance<YourDataType>>(null);
 
 const someEventHandler = (event) => {
   console.info(tableInstanceRef.current?.getRowModel().rows); //example - get access to all page rows in the table

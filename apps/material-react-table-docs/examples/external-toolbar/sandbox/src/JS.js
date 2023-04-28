@@ -1,12 +1,12 @@
 import React, { useReducer, useRef, useState } from 'react';
 import MaterialReactTable, {
-  MRT_FullScreenToggleButton,
-  MRT_GlobalFilterTextField,
-  MRT_ShowHideColumnsButton,
-  MRT_TablePagination,
-  MRT_ToggleDensePaddingButton,
-  MRT_ToggleFiltersButton,
-  MRT_ToolbarAlertBanner,
+  TRT_FullScreenToggleButton,
+  TRT_GlobalFilterTextField,
+  TRT_ShowHideColumnsButton,
+  TRT_TablePagination,
+  TRT_ToggleDensePaddingButton,
+  TRT_ToggleFiltersButton,
+  TRT_ToolbarAlertBanner,
 } from 'material-react-table';
 import {
   alpha,
@@ -45,10 +45,10 @@ const Example = () => {
   //we need a table instance ref to pass as a prop to the MRT Toolbar buttons
   const tableInstanceRef = useRef(null);
 
-  //we will also need some weird re-render hacks to force the MRT_ components to re-render since ref changes do not trigger a re-render
+  //we will also need some weird re-render hacks to force the TRT_ components to re-render since ref changes do not trigger a re-render
   const rerender = useReducer(() => ({}), {})[1];
 
-  //we need to manage the state that should trigger the MRT_ components in our custom toolbar to re-render
+  //we need to manage the state that should trigger the TRT_ components in our custom toolbar to re-render
   const [columnVisibility, setColumnVisibility] = useState({});
   const [density, setDensity] = useState('comfortable');
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 5 });
@@ -84,17 +84,17 @@ const Example = () => {
               Crete New Account
             </Button>
           </Box>
-          <MRT_GlobalFilterTextField table={tableInstanceRef.current} />
+          <TRT_GlobalFilterTextField table={tableInstanceRef.current} />
           <Box>
-            <MRT_ToggleFiltersButton table={tableInstanceRef.current} />
-            <MRT_ShowHideColumnsButton table={tableInstanceRef.current} />
-            <MRT_ToggleDensePaddingButton table={tableInstanceRef.current} />
+            <TRT_ToggleFiltersButton table={tableInstanceRef.current} />
+            <TRT_ShowHideColumnsButton table={tableInstanceRef.current} />
+            <TRT_ToggleDensePaddingButton table={tableInstanceRef.current} />
             <Tooltip arrow title="Print">
               <IconButton onClick={() => window.print()}>
                 <PrintIcon />
               </IconButton>
             </Tooltip>
-            <MRT_FullScreenToggleButton table={tableInstanceRef.current} />
+            <TRT_FullScreenToggleButton table={tableInstanceRef.current} />
           </Box>
         </Toolbar>
       )}
@@ -160,9 +160,9 @@ const Example = () => {
             flexDirection: 'column',
           }}
         >
-          <MRT_TablePagination table={tableInstanceRef.current} />
+          <TRT_TablePagination table={tableInstanceRef.current} />
           <Box sx={{ display: 'grid', width: '100%' }}>
-            <MRT_ToolbarAlertBanner
+            <TRT_ToolbarAlertBanner
               stackAlertBanner
               table={tableInstanceRef.current}
             />

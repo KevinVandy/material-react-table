@@ -1,15 +1,15 @@
 import React from 'react';
 
 //Import Material React Table and its Types
-import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import MaterialReactTable, { type TRT_ColumnDef } from 'material-react-table';
 
 //Import Material React Table Translations
-import { MRT_Localization_PT_BR } from 'material-react-table/locales/pt-BR';
+import { TRT_Localization_PT_BR } from 'material-react-table/locales/pt-BR';
 
 //mock data
 import { data, type Person } from './makeData';
 
-const columns: MRT_ColumnDef<Person>[] = [
+const columns: TRT_ColumnDef<Person>[] = [
   //column definitions...
   {
     accessorKey: 'firstName',
@@ -40,7 +40,7 @@ const Example = () => {
       enableRowSelection
       enableSelectAll={false}
       initialState={{ showColumnFilters: true, showGlobalFilter: true }}
-      localization={MRT_Localization_PT_BR}
+      localization={TRT_Localization_PT_BR}
     />
   );
 };
