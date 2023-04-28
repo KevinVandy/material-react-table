@@ -4,16 +4,16 @@ import RowSelectionExample from '../../../examples/enable-row-selection';
 import PersistentStateExample from '../../../examples/persistent-state';
 
 <Head>
-  <title>State Management Guide - Material React Table Docs</title>
+  <title>State Management Guide - TailwindCSS React Table Docs</title>
   <meta
     name="description"
-    content="How to access and manage internal state in Material React Table"
+    content="How to access and manage internal state in TailwindCSS React Table"
   />
 </Head>
 
 ## State Management Guide
 
-Material React Table does not try to hide any of its internal state from you. You can initialize state with custom initial values, manage individual states yourself as you discover the need to have access to them, or store your own reference to the entire table instance wherever you need to.
+TailwindCSS React Table does not try to hide any of its internal state from you. You can initialize state with custom initial values, manage individual states yourself as you discover the need to have access to them, or store your own reference to the entire table instance wherever you need to.
 
 This is all optional, of course. If you do not need access to any of the state, you do not need to do anything and it will just automatically be managed internally.
 
@@ -141,7 +141,7 @@ return (
 );
 ```
 
-The table instance is the same object that you will also see as a provided parameter in many of the other callback functions throughout Material React Table, such as all the `render...` props or the `Cell` or `Header` render overrides in the column definition options.
+The table instance is the same object that you will also see as a provided parameter in many of the other callback functions throughout TailwindCSS React Table, such as all the `render...` props or the `Cell` or `Header` render overrides in the column definition options.
 
 ```jsx
 const tableInstanceRef = useRef(null);
@@ -173,6 +173,6 @@ return (
 
 ### Persistent State
 
-Persistent state is not a built-in feature of Material React Table, but it is an easy feature to implement yourself using the above patterns with the `state` prop and the `on[StateName]Change` callbacks. Here is an example of how you might implement persistent state using `sessionStorage`:
+Persistent state is not a built-in feature of TailwindCSS React Table, but it is an easy feature to implement yourself using the above patterns with the `state` prop and the `on[StateName]Change` callbacks. Here is an example of how you might implement persistent state using `sessionStorage`:
 
 <PersistentStateExample />

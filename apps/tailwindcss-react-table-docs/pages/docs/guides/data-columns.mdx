@@ -2,10 +2,10 @@ import Head from 'next/head';
 import AlignmentExample from '../../../examples/column-alignment';
 
 <Head>
-  <title>{'Data (Accessor) Columns - Material React Table Docs'}</title>
+  <title>{'Data (Accessor) Columns - TailwindCSS React Table Docs'}</title>
   <meta
     name="description"
-    content="How to create data columns in Material React Table and use accessKeys and accessorFns the right way"
+    content="How to create data columns in TailwindCSS React Table and use accessKeys and accessorFns the right way"
   />
 </Head>
 
@@ -196,7 +196,7 @@ const columns = useMemo(
 
 This topic is covered in detail in the [Column Resizing Guide](/docs/guides/column-resizing), but here is a brief overview.
 
-Setting a CSS (sx or style) width prop will NOT work. Material React Table (or, more accurately, TanStack Table) will keep track and set the widths of each column internally.
+Setting a CSS (sx or style) width prop will NOT work. TailwindCSS React Table (or, more accurately, TanStack Table) will keep track and set the widths of each column internally.
 
 You CAN, however, change the default width of any column by setting its `size` option on the column definition. `minSize` and `maxSize` are also available to set the minimum and maximum width of the column during resizing.
 

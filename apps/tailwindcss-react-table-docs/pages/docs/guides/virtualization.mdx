@@ -4,10 +4,10 @@ import EnableRowExample from '../../../examples/enable-row-virtualization';
 import EnableColumnExample from '../../../examples/enable-column-virtualization';
 
 <Head>
-  <title>Virtualization Feature Guide - Material React Table Docs</title>
+  <title>Virtualization Feature Guide - TailwindCSS React Table Docs</title>
   <meta
     name="description"
-    content="How to virtualize rows and columns in Material React Table to improve performance and user experience when there are a lot of rows or a lot of columns in the table."
+    content="How to virtualize rows and columns in TailwindCSS React Table to improve performance and user experience when there are a lot of rows or a lot of columns in the table."
   />
 </Head>
 
@@ -15,7 +15,7 @@ import EnableColumnExample from '../../../examples/enable-column-virtualization'
 
 > MRT v1.4 and v1.5 have major virtualization upgrades after switching to `@tanstack/react-virtual` v3.0!
 
-Virtualization is useful when you have a lot of data you want to display client-side all at once, without having to use pagination. Material React Table makes this as simple as possible, thanks to [`@tanstack/react-virtual`](https://tanstack.com/virtual/v3) with both [row virtualization](#enable-row-virtualization) and [column virtualization](#enable-column-virtualization) support.
+Virtualization is useful when you have a lot of data you want to display client-side all at once, without having to use pagination. TailwindCSS React Table makes this as simple as possible, thanks to [`@tanstack/react-virtual`](https://tanstack.com/virtual/v3) with both [row virtualization](#enable-row-virtualization) and [column virtualization](#enable-column-virtualization) support.
 
 > NOTE: You should only enable row virtualization if you have a large number of rows. Depending on the size of the table, if you are rendering less than a couple dozen rows at a time, you will actually just be adding extra overhead to the table renders. Virtualization only becomes necessary when you have over 50 rows or so at the same time with no pagination.
 

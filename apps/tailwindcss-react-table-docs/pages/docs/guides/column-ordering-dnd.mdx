@@ -5,16 +5,18 @@ import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable
 import DNDExample from '../../../examples/enable-column-ordering';
 
 <Head>
-  <title>Column Ordering/DnD Feature Guide - Material React Table Docs</title>
+  <title>
+    Column Ordering/DnD Feature Guide - TailwindCSS React Table Docs
+  </title>
   <meta
     name="description"
-    content="How to use and customize the column ordering and drag and drop features of Material React Table"
+    content="How to use and customize the column ordering and drag and drop features of TailwindCSS React Table"
   />
 </Head>
 
 ## Column Ordering (DnD) Feature Guide
 
-Whether you just want to change the default column order in your table or let columns be reordered by dragging and dropping, Material React Table has a simple API for this.
+Whether you just want to change the default column order in your table or let columns be reordered by dragging and dropping, TailwindCSS React Table has a simple API for this.
 
 ### Relevant Props
 
@@ -44,7 +46,7 @@ Whether you just want to change the default column order in your table or let co
 
 ### Change the Default Column Order
 
-By Default, Material React Table will order the columns in the order they are defined in the `columns` prop. And Display Columns such as Actions, Selection, Expansion, etc., get added to either the beginning or the end of the table. You can customize all of this by defining your own `columnOrder` State and passing it either to the `initialState` or `state` props.
+By Default, TailwindCSS React Table will order the columns in the order they are defined in the `columns` prop. And Display Columns such as Actions, Selection, Expansion, etc., get added to either the beginning or the end of the table. You can customize all of this by defining your own `columnOrder` State and passing it either to the `initialState` or `state` props.
 
 The Column Order State is an array of string column ids, that come from the ids or accessorKeys that you defined in your column definitions.
 
@@ -93,7 +95,7 @@ return (
 
 ### Enable Column Ordering with Drag and Drop
 
-Material React Table has a built-in drag and drop feature to reorder columns. This feature is enabled by passing the `enableColumnOrdering` prop.
+TailwindCSS React Table has a built-in drag and drop feature to reorder columns. This feature is enabled by passing the `enableColumnOrdering` prop.
 
 The ability for a column to have a drag and drop handle can be specified by setting the `enableColumnOrdering` option on the column.
 

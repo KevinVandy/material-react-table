@@ -8,17 +8,19 @@ import ExpandedRootExample from '../../../examples/expanding-tree-root-expanded'
 
 <Head>
   <title>
-    {'Expanding Sub-Rows/Tree Data Feature Guide - Material React Table Docs'}
+    {
+      'Expanding Sub-Rows/Tree Data Feature Guide - TailwindCSS React Table Docs'
+    }
   </title>
   <meta
     name="description"
-    content="How to add expanding sub-rows or tree data features in Material React Table"
+    content="How to add expanding sub-rows or tree data features in TailwindCSS React Table"
   />
 </Head>
 
 ## Expanding Sub-Rows (Tree Data) Feature Guide
 
-Material React Table has support for expanding sub-rows or tree data. This feature is useful for displaying hierarchical data. The sub-rows can be expanded and collapsed by clicking on the expand/collapse icon.
+TailwindCSS React Table has support for expanding sub-rows or tree data. This feature is useful for displaying hierarchical data. The sub-rows can be expanded and collapsed by clicking on the expand/collapse icon.
 
 > NOTE: This feature is for expanding rows of the same data type. If you want to add expansion of more data for the same row, check out the [Detail Panel Feature Guide](/docs/guides/detail-panel).
 
@@ -57,7 +59,7 @@ Material React Table has support for expanding sub-rows or tree data. This featu
 
 To enable expanding sub-rows, you must first set the `enableExpanding` prop to `true`.
 
-However, your data must also be formatted in a way to allow for expanding rows that are in some way related to each other. By default, Material React Table will look for a special `subRows` property on each row of your data and treat any array of rows that it finds as the sub-rows for that row. You can customize or override this behavior by passing a custom `getSubRows` prop.
+However, your data must also be formatted in a way to allow for expanding rows that are in some way related to each other. By default, TailwindCSS React Table will look for a special `subRows` property on each row of your data and treat any array of rows that it finds as the sub-rows for that row. You can customize or override this behavior by passing a custom `getSubRows` prop.
 
 ```jsx
 const data = [
@@ -87,7 +89,7 @@ return (
 
 ### Expand All Rows Button
 
-By default, Material React Table will show the expand all button in the expand column header. You can disable this by setting the `enableExpandAll` prop to `false`.
+By default, TailwindCSS React Table will show the expand all button in the expand column header. You can disable this by setting the `enableExpandAll` prop to `false`.
 
 ```jsx
 <TailwindCSSReactTable
@@ -100,7 +102,7 @@ By default, Material React Table will show the expand all button in the expand c
 
 ### Expanded Rows Pagination Behavior
 
-By default, Material React Table will treat expanded sub-rows the same as any other row when it comes to pagination. This means that some expanded rows may be on the next page. You can change this behavior by setting the `paginateExpandedRows` prop to `false`.
+By default, TailwindCSS React Table will treat expanded sub-rows the same as any other row when it comes to pagination. This means that some expanded rows may be on the next page. You can change this behavior by setting the `paginateExpandedRows` prop to `false`.
 
 ```jsx
 <TailwindCSSReactTable

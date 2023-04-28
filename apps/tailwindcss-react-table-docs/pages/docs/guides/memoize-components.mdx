@@ -5,16 +5,16 @@ import MemoizeTableBodyExample from '../../../examples/memoize-table-body';
 import Box from '@mui/material/Box';
 
 <Head>
-  <title>Memoize Components Guide - Material React Table Docs</title>
+  <title>Memoize Components Guide - TailwindCSS React Table Docs</title>
   <meta
     name="description"
-    content="How to memoize certain table components in Material React Table in order to improve render performance."
+    content="How to memoize certain table components in TailwindCSS React Table in order to improve render performance."
   />
 </Head>
 
 ## Memoize Components Guide
 
-As of version 1.1, Material React Table has introduced a new `memoMode` prop that will allow you to either memoize table cells, table rows, or the entire table body in order to improve render performance on large tables.
+As of version 1.1, TailwindCSS React Table has introduced a new `memoMode` prop that will allow you to either memoize table cells, table rows, or the entire table body in order to improve render performance on large tables.
 
 However, memoizing these components will **BREAK** some features!
 
@@ -22,7 +22,7 @@ However, memoizing these components will **BREAK** some features!
 
 ### Memoizing Table Cells
 
-Memoizing table cells can make a small but positive impact on render performance, and it is only incompatible with a few of the dynamic features of Material React Table.
+Memoizing table cells can make a small but positive impact on render performance, and it is only incompatible with a few of the dynamic features of TailwindCSS React Table.
 
 #### Cell Memoization Breaks the Following Features:
 
@@ -51,7 +51,7 @@ These features are incompatible with cell memoization because they depend on tab
 
 ### Memoizing Table Rows
 
-Memoizing entire table rows can make an even more positive impact on render performance, but it is incompatible with a lot of the dynamic features of Material React Table.
+Memoizing entire table rows can make an even more positive impact on render performance, but it is incompatible with a lot of the dynamic features of TailwindCSS React Table.
 
 #### Row Memoization Breaks the Following Features:
 
@@ -82,7 +82,7 @@ These features are incompatible with row memoization because they require the en
 
 ### Memoizing Table Body
 
-If your table never needs to re-render and you do not use any of the dynamic features of Material React Table, you can memoize the entire table body to massively improve render performance.
+If your table never needs to re-render and you do not use any of the dynamic features of TailwindCSS React Table, you can memoize the entire table body to massively improve render performance.
 
 #### Table Body Memoization Breaks the Following Features:
 

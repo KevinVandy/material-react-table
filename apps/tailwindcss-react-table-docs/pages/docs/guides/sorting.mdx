@@ -6,16 +6,16 @@ import MultiSortingExample from '../../../examples/multi-sorting';
 import RemoteExample from '../../../examples/remote';
 
 <Head>
-  <title>Sorting Feature Guide - Material React Table Docs</title>
+  <title>Sorting Feature Guide - TailwindCSS React Table Docs</title>
   <meta
     name="description"
-    content="How to use, customize, or disable sorting features in Material React Table"
+    content="How to use, customize, or disable sorting features in TailwindCSS React Table"
   />
 </Head>
 
 ## Sorting Feature Guide
 
-Material React Table supports almost any sorting scenario you may have. Client-side sorting is enabled by default, but you can opt to implement your own server-side sorting logic, or even replace the default client-side sorting with your own implementation.
+TailwindCSS React Table supports almost any sorting scenario you may have. Client-side sorting is enabled by default, but you can opt to implement your own server-side sorting logic, or even replace the default client-side sorting with your own implementation.
 
 ### Relevant Props
 
@@ -126,7 +126,7 @@ By default, columns with `string` datatypes will sort alphabetically in ascendin
 
 ### Sorting Functions
 
-By default, Material React Table will use an `alphanumeric` sorting function for all columns.
+By default, TailwindCSS React Table will use an `alphanumeric` sorting function for all columns.
 
 There are 6 built-in sorting functions that you can choose from: ` alphanumeric`, `alphanumericCaseSensitive`, `text`, `textCaseSensitive`, `datetime`, and `basic`. You can learn more about these built-in sorting function in the [TanStack Table Sorting API docs](https://tanstack.com/table/v8/docs/api/features/sorting#sorting-functions).
 
@@ -169,7 +169,7 @@ const columns = [
 
 If you are working with large data sets, you may want to let your back-end apis handle all of the sorting and pagination processing instead of doing it client-side. You can do this by setting the `manualSorting` prop to `true`. This will disable the default client-side sorting and pagination features, and will allow you to implement your own sorting and pagination logic.
 
-> When `manualSorting` is set to `true`, Material React Table assumes that your `data` is already sorted by the time you are passing it to the table.
+> When `manualSorting` is set to `true`, TailwindCSS React Table assumes that your `data` is already sorted by the time you are passing it to the table.
 
 If you need to sort your data in a back-end api, then you will also probably need access to the internal `sorting` state from the table. You can do this by managing the `sorting` state yourself, and then passing it to the table via the `state` prop. You can also pass a callback function to the `onSortingChange` prop, which will be called whenever the `sorting` state changes internally in the table
 
@@ -193,7 +193,7 @@ return (
 
 #### Remote Sorting Example
 
-Here is the full Remote Data example showing how to implement server-side sorting, filtering, and pagination with Material React Table.
+Here is the full Remote Data example showing how to implement server-side sorting, filtering, and pagination with TailwindCSS React Table.
 
 <RemoteExample />
 

@@ -10,7 +10,7 @@ const columns: TRT_ColumnDef<(typeof data)[0]>[] = [
   },
   {
     accessorKey: 'mrt',
-    header: 'Material React Table',
+    header: 'TailwindCSS React Table',
     muiTableHeadCellProps: {
       align: 'center',
       sx: (theme) => ({

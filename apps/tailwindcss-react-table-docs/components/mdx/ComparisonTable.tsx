@@ -15,7 +15,7 @@ const columns: TRT_ColumnDef<(typeof data)[0]>[] = [
         rel="noopener"
         sx={(theme) => ({
           color:
-            cell.getValue() === 'Material React Table'
+            cell.getValue() === 'TailwindCSS React Table'
               ? theme.palette.primary.main
               : cell.getValue() === 'TanStack Table (React Table)'
               ? theme.palette.secondary.light
@@ -63,7 +63,7 @@ const columns: TRT_ColumnDef<(typeof data)[0]>[] = [
 
 const data = [
   {
-    library: 'Material React Table',
+    library: 'TailwindCSS React Table',
     libraryLink: '#',
     freeOrLicensed: 'Free MIT',
     bundleSize: 45,
@@ -72,7 +72,7 @@ const data = [
     bundlePhobiaLink:
       'https://bundlephobia.com/package/tailwindcss-react-table@latest',
     description:
-      'Built on top of TanStack Table V8 and Material UI V5, Material React Table (MRT) is a batteries-included React table library that attempts to provide all the table features you need while trying to stay as highly performant and lightweight as possible. Customization is treated as a top priority to let you override any styles you need to change. Initially built in 2022, so it is still somewhat new.',
+      'Built on top of TanStack Table V8 and Material UI V5, TailwindCSS React Table (MRT) is a batteries-included React table library that attempts to provide all the table features you need while trying to stay as highly performant and lightweight as possible. Customization is treated as a top priority to let you override any styles you need to change. Initially built in 2022, so it is still somewhat new.',
   },
   {
     library: 'TanStack Table (React Table)',
@@ -84,7 +84,7 @@ const data = [
     bundlePhobiaLink:
       'https://bundlephobia.com/package/@tanstack/react-table@latest',
     description:
-      'TanStack Table (formerly React Table) is a lightweight Headless UI library for building powerful tables and datagrids. No CSS or components included. You use logic from the useReactTable hook to build your own table components. No batteries included, but you get total control of your markup and styles (Material React Table is built on top of TanStack Table).',
+      'TanStack Table (formerly React Table) is a lightweight Headless UI library for building powerful tables and datagrids. No CSS or components included. You use logic from the useReactTable hook to build your own table components. No batteries included, but you get total control of your markup and styles (TailwindCSS React Table is built on top of TanStack Table).',
   },
   {
     library: 'Material Table',
@@ -106,7 +106,7 @@ const data = [
       'https://badgen.net/bundlephobia/minzip/mui-datatables?color=orange',
     bundlePhobiaLink: 'https://bundlephobia.com/package/mui-datatables@latest',
     description:
-      'MUI Datatables is a solid Material UI-based table library that was originally built in 2017. It has a lot of features and is very customizable. However, it is not as lightweight as MRT and has a lot of dependencies. The library appears to still be kept up to date occasionally, but its documentation site is no longer available. Some of the UI layouts in MUI Datatables served as inspiration for Material React Table.',
+      'MUI Datatables is a solid Material UI-based table library that was originally built in 2017. It has a lot of features and is very customizable. However, it is not as lightweight as MRT and has a lot of dependencies. The library appears to still be kept up to date occasionally, but its documentation site is no longer available. Some of the UI layouts in MUI Datatables served as inspiration for TailwindCSS React Table.',
   },
   {
     library: 'MUI X Data Grid MIT/Pro/Premium',

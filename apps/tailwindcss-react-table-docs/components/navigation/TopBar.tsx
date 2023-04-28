@@ -141,7 +141,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
                   height={isTablet ? 35 : 45}
                   width={isTablet ? 35 : 45}
                 />
-                {!isMobile && 'Material React Table'}
+                {!isMobile && 'TailwindCSS React Table'}
               </Typography>
             </Link>
           </Box>

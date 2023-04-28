@@ -681,7 +681,7 @@ export const rootProps: PropRow[] = [
   {
     propName: 'getCoreRowModel',
     defaultValue: '',
-    description: `Material React Table uses the default core row model function from TanStack Table, but you can override its implementation here. It is called once per table and should return a new function which will calculate and return the row model for the table.`,
+    description: `TailwindCSS React Table uses the default core row model function from TanStack Table, but you can override its implementation here. It is called once per table and should return a new function which will calculate and return the row model for the table.`,
     link: 'https://tanstack.com/table/v8/docs/api/core/table#getcorerowmodel',
     linkText: 'TanStack Table Core Table Docs',
     required: false,

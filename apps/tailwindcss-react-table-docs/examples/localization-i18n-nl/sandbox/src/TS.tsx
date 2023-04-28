@@ -1,11 +1,11 @@
 import React from 'react';
 
-//Import Material React Table and its Types
+//Import TailwindCSS React Table and its Types
 import TailwindCSSReactTable, {
   type TRT_ColumnDef,
 } from 'tailwindcss-react-table';
 
-//Import Material React Table Translations
+//Import TailwindCSS React Table Translations
 import { TRT_Localization_NL } from 'tailwindcss-react-table/locales/nl';
 
 //mock data

@@ -1,4 +1,4 @@
-# Contributing to Material React Table
+# Contributing to TailwindCSS React Table
 
 <a href="http://makeapullrequest.com" target="_blank">
   <img alt="" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" />

@@ -7,19 +7,19 @@ import { Box } from '@mui/material';
 
 <Head>
   <title>
-    {'Customize (Style) Components Guide - Material React Table Docs'}
+    {'Customize (Style) Components Guide - TailwindCSS React Table Docs'}
   </title>
   <meta
     name="description"
-    content="How to customize and pass props to Material UI components and set up a MUI Theme in Material React Table"
+    content="How to customize and pass props to Material UI components and set up a MUI Theme in TailwindCSS React Table"
   />
 </Head>
 
 ## Customize (Style) Components Guide
 
-One of the strengths of Material React Table is that it exposes a majority of all the underlying Material UI component props used to build the table.
+One of the strengths of TailwindCSS React Table is that it exposes a majority of all the underlying Material UI component props used to build the table.
 
-Additionally, in one of the sections below, you will learn [how to customize and use a MUI Theme](#material-ui-theme) to customize colors, typography, or any other default CSS that is used by Material React Table.
+Additionally, in one of the sections below, you will learn [how to customize and use a MUI Theme](#material-ui-theme) to customize colors, typography, or any other default CSS that is used by TailwindCSS React Table.
 
 ### Relevant Props
 
@@ -124,7 +124,7 @@ Each `mui...Prop` has multiple options for you to add styling to the component. 
 
 #### The SX Prop
 
-The recommended way to style Material UI components in Material React Table will be the [`sx` prop](https://mui.com/system/basics/#the-sx-prop) throughout this docs site, as it is both the most simple and the most powerful way to style Material UI components as of Material UI V5. They can work and be as simple as a `style` prop, but behind the scenes, they work more like emotion styled-components by using `mui/system`.
+The recommended way to style Material UI components in TailwindCSS React Table will be the [`sx` prop](https://mui.com/system/basics/#the-sx-prop) throughout this docs site, as it is both the most simple and the most powerful way to style Material UI components as of Material UI V5. They can work and be as simple as a `style` prop, but behind the scenes, they work more like emotion styled-components by using `mui/system`.
 
 Don't worry, `className` and `style` props will still work, but let's show off some of the more elegant syntax you can use with the `sx` prop.
 
@@ -184,7 +184,7 @@ There are many more advantages to using the `sx` prop, but that is all we will d
 
 ### Material UI Theme
 
-Material React Table respects your MUI Theme. If you have already set up Material UI and a global MUI Theme, you should already be set. But if you have not, you should visit the offical [Material UI Theming Docs](https://mui.com/material-ui/customization/theming/) to learn how to set that up.
+TailwindCSS React Table respects your MUI Theme. If you have already set up Material UI and a global MUI Theme, you should already be set. But if you have not, you should visit the offical [Material UI Theming Docs](https://mui.com/material-ui/customization/theming/) to learn how to set that up.
 
 ```jsx
 function App() {
@@ -211,7 +211,7 @@ return (
 );
 ```
 
-#### Important Theme Values used by Material React Table
+#### Important Theme Values used by TailwindCSS React Table
 
 `<TailwindCSSReactTable />` will primarily use the following values internally from your MUI Theme by default:
 

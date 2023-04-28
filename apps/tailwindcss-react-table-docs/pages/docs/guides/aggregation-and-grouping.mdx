@@ -7,17 +7,17 @@ import AggregationMultiExample from '../../../examples/aggregation-multi';
 
 <Head>
   <title>
-    {'Aggregation and Grouping Feature Guide - Material React Table Docs'}
+    {'Aggregation and Grouping Feature Guide - TailwindCSS React Table Docs'}
   </title>
   <meta
     name="description"
-    content="How to use and customize the aggregation and grouping features of Material React Table"
+    content="How to use and customize the aggregation and grouping features of TailwindCSS React Table"
   />
 </Head>
 
 ## Aggregation and Grouping Feature Guide
 
-Material React Table has built-in grouping and aggregation features. There are options for both automatic client-side grouping and aggregation, as well as manual server-side grouping and aggregation. This guide will walk you through the different options and how to use and customize them.
+TailwindCSS React Table has built-in grouping and aggregation features. There are options for both automatic client-side grouping and aggregation, as well as manual server-side grouping and aggregation. This guide will walk you through the different options and how to use and customize them.
 
 ### Relevant Props
 
@@ -120,7 +120,7 @@ In addition to grouping columns by default, you may also want those grouped rows
 
 ### Aggregation on Grouped Rows
 
-One of the cool features of Material React Table is that it can automatically aggregate the data in grouped rows. To enable this, you must specify both an `aggregationFn` and an `AggregatedCell` render option on a column definition.
+One of the cool features of TailwindCSS React Table is that it can automatically aggregate the data in grouped rows. To enable this, you must specify both an `aggregationFn` and an `AggregatedCell` render option on a column definition.
 
 #### Built-in Aggregation Functions
 
@@ -181,7 +181,7 @@ export type AggregationFn<TData extends AnyData> = (
 
 ### Aggregation on All Rows in Footer
 
-Material React Table does not automatically aggregate all rows for you to calculate totals for the entire table. However, it is still easy enough to do this manually and add in your custom calculations into the `footer` or `Footer` of a column definition. It is recommended that you do any necessary aggregation calculations on your data in a useMemo hook before passing it to the columns footer in your columns definition.
+TailwindCSS React Table does not automatically aggregate all rows for you to calculate totals for the entire table. However, it is still easy enough to do this manually and add in your custom calculations into the `footer` or `Footer` of a column definition. It is recommended that you do any necessary aggregation calculations on your data in a useMemo hook before passing it to the columns footer in your columns definition.
 
 ```jsx
 //calculate the total points for all players in the table in a useMemo hook
@@ -291,4 +291,4 @@ const columns = [
 
 ### Manual Grouping
 
-Manual Grouping means that the `data` that you pass to the table is already grouped and aggregated, and you do not want Material React Table to do any of the grouping or aggregation for you. This is useful if you are using a backend API to do the grouping and aggregation for you, and you just want to display the results. However, you will need to put your data in the specific format that the `expanding` features understand.
+Manual Grouping means that the `data` that you pass to the table is already grouped and aggregated, and you do not want TailwindCSS React Table to do any of the grouping or aggregation for you. This is useful if you are using a backend API to do the grouping and aggregation for you, and you just want to display the results. However, you will need to put your data in the specific format that the `expanding` features understand.
