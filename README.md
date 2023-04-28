@@ -1,4 +1,4 @@
-# Material React Table
+# <s>Material</s> TailwindCSS React Table
 
 View [Documentation](https://www.material-react-table.com/)
 
