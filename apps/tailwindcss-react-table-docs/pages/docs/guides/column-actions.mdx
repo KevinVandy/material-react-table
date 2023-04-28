@@ -1,0 +1,110 @@
+import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
+import DisableExample from '../../../examples/disable-column-actions';
+import ColumnActionsSpaceExample from '../../../examples/column-actions-space';
+
+<Head>
+  <title>Column Actions Feature Guide - Material React Table Docs</title>
+  <meta
+    name="description"
+    content="How to use, customize, or disable column the action button and menu features of Material React Table"
+  />
+</Head>
+
+## Column Actions Feature Guide
+
+By default, Material React Table renders a column actions button for each column header. It contains a drop-down menu to help your users use the other features of the table. All of these actions can be triggered in some other way other than from this drop-down menu, so this serves as a UI/UX alternative to make sure your users can find many of the table features easily.
+
+### Relevant Props
+
+<RootPropTable
+  onlyProps={
+    new Set([
+      'enableColumnActions',
+      'muiTableHeadCellColumnActionsButtonProps',
+      'renderColumnActionsMenuItems',
+    ])
+  }
+/>
+
+### Relevant Column Options
+
+<ColumnOptionsTable
+  onlyProps={
+    new Set([
+      'enableColumnActions',
+      'muiTableHeadCellColumnActionsButtonProps',
+      'renderColumnActionsMenuItems',
+    ])
+  }
+/>
+
+### Disable or Hide Column Actions Buttons
+
+You can set the `enableColumnActions` prop to `false` in the table to disable this feature and hide the button in each column header completely.
+
+```tsx
+<TailwindCSSReactTable
+  data={data}
+  columns={columns}
+  enableColumnActions={false}
+/>
+```
+
+Alternatively, if you only want to hide the column actions button in specific columns, you can set the `enableColumnActions` property for the desired column definition to `false` instead.
+
+In this demo, we disable the column actions button for the 'ID' column.
+
+<DisableExample />
+
+### Justify Column Actions Button
+
+> Changed to left alignment in `v1.2.0`
+
+By default, the column actions button is left aligned directly after the column header text and any sort or filter labels that may be present. If you want to change this, you can use a CSS selector in `muiTableHeadCellProps` to change the `justify-content` property of the column header container.
+
+<ColumnActionsSpaceExample />
+
+### Custom Column Actions Menu
+
+If you do not like the default column actions menu items that Material React Table generates, you can provide your own custom menu items with the `renderColumnActionsMenuItems` prop. x of the column in the table.
+
+```tsx
+const columns = [
+  {
+    accessorKey: 'salary',
+    header: 'Salary',
+    renderColumnActionsMenuItems: ({ closeMenu, column, table }) => {
+      return [
+        <MenuItem
+          onClick={() => {
+            // do something
+            closeMenu();
+          }}
+        >
+          Custom Menu Item 1
+        </MenuItem>,
+        <MenuItem
+          onClick={() => {
+            // do something
+            closeMenu();
+          }}
+        >
+          Custom Menu Item 2
+        </MenuItem>,
+      ];
+    },
+  },
+];
+
+return (
+  <TailwindCSSReactTable
+    data={data}
+    columns={columns}
+    //renderColumnActionsMenuItems could go here if you want to apply it to all columns
+  />
+);
+```
+
+View Extra Storybook **[Examples](https://www.tailwindcss-react-table.dev/?path=/story/features-column-action-examples)**

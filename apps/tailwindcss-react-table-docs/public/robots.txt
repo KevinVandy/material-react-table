@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /api/data
+Disallow: /proxy
+
+# Host
+Host: https://www.tailwindcss-react-table.com
+
+# Sitemaps
+Sitemap: https://www.tailwindcss-react-table.com/sitemap.xml

@@ -1,0 +1,54 @@
+import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+import DisableExample from '../../../examples/disable-density-toggle';
+
+<Head>
+  <title>Density Toggle Feature Guide - Material React Table Docs</title>
+  <meta
+    name="description"
+    content="How to use, customize, or disable the density toggle button feature of Material React Table"
+  />
+</Head>
+
+## Density Toggle Feature Guide
+
+Material React Table includes a density toggle button in the top toolbar by default that lets you toggle between three different density levels. This is a great feature to include to help with accessibility for different user preferences, but it can also easily be disabled if desired.
+
+### Relevant Props
+
+<RootPropTable
+  onlyProps={new Set(['enableDensityToggle', 'onDensityChange'])}
+/>
+
+### Relevant State
+
+<StateOptionsTable onlyProps={new Set(['density'])} />
+
+### Default Density
+
+By default, Material React Table will render with a medium `comfortable` density.
+
+A density toggle is shown by default to let a user change the density to cycle through `spacious`, `comfortable`, and `compact` densities.
+
+> When a `compact` density is set, whitespace is set to `nowrap` by default to keep the rows as short in height as possible. This can be overridden in the `muiTableBodyCellProps` styles or sx prop.
+
+#### Change Default Density
+
+If you want to change the default density, you can set it in either the `initialState` prop or the `state` prop.
+
+```tsx
+<TailwindCSSReactTable
+  data={data}
+  columns={columns}
+  initialState={{ density: 'compact' }}
+/>
+```
+
+### Disable or Hide the Density Toggle
+
+You can change the default density and disable the density toggle itself if you want.
+
+In this example, the density toggle is disabled and a `compact` density is set by default in the `initialState` prop.
+
+<DisableExample />

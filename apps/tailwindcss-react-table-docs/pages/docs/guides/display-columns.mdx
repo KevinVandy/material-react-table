@@ -1,0 +1,115 @@
+import Head from 'next/head';
+import Example from '../../../examples/customize-display-columns';
+
+<Head>
+  <title>{'Display (Built-in) Columns - Material React Table Docs'}</title>
+  <meta
+    name="description"
+    content="How to create or edit display columns in Material React Table"
+  />
+</Head>
+
+## Display (Built-in) Columns
+
+Display columns are used to display non-data elements in a table. They only require an `id` and `header` in the column definition. They do not need an `accessorKey` or `accessorFn`, as they are not meant to connect to your data at all.
+
+Display columns do not have any processing features, such as sorting, filtering, grouping, etc. enabled on them by default.
+
+### Built-in MRT Display Columns
+
+Material React Table has a few built-in display columns that are created automatically when certain features are enabled.
+
+- `mrt-row-drag` - created when `enableRowDragging` or `enableRowOrdering` prop are `true`
+- `mrt-row-actions` - created when `enableRowActions` (or sometimes when `enableEditing`) props are `true`
+- `mrt-row-expand` - created when `enableExpanding`, `enableGrouping`, or `renderDetailPanel` props are `true`
+- `mrt-row-select` - created when `enableRowSelection` prop is `true`
+- `mrt-row-numbers` - created when `enableRowNumbers` prop is `true`
+
+Display columns are, for the most part, the same as a data column, except they do not have an accessor to access data. When a display column is created internally by Material React Table, the following options are all set to false by default:
+
+```tsx
+const defaultDisplayColumnDefOptions = {
+  columnDefType: 'display',
+  enableClickToCopy: false,
+  enableColumnActions: false,
+  enableColumnDragging: false,
+  enableColumnFilter: false,
+  enableColumnOrdering: false,
+  enableEditing: false,
+  enableGlobalFilter: false,
+  enableGrouping: false,
+  enableHiding: false,
+  enableResizing: false,
+  enableSorting: false,
+} as Partial<TRT_ColumnDef>;
+```
+
+All of these values are able to be overridden if needed, and you'll learn about that in the next section down below.
+
+### Customize Built-in MRT Display Columns
+
+It is possible to change and override the default behavior of built-in display columns. Whether you want to change the default column width, add some styles, or enable some features, such as column actions or column drag and drop, you can do it with the `displayColumnDefOptions` prop.
+
+#### Display Column Definition Options Prop
+
+Let's say you need to adjust the width of the Actions column to be wide enough to fit all of your action buttons. You could do that as follows:
+
+```jsx
+<TailwindCSSReactTable
+  columns={columns}
+  data={data}
+  displayColumnDefOptions={{ 'mrt-row-actions': { size: 300 } }} //change width of actions column to 300px
+  enableRowActions
+  renderRowActions={({ row }) => (
+    <div>
+      <Button>Action 1</Button>
+      <Button>Action 2</Button>
+      <Button>Action 3</Button>
+    </div>
+  )}
+/>
+```
+
+Or maybe you want to enable a feature that is off by default for display columns, such as column ordering or pinning.
+
+```tsx
+<TailwindCSSReactTable
+  columns={columns}
+  data={data}
+  displayColumnDefOptions={{
+    'mrt-row-numbers': {
+      enableOrdering: true,
+      enablePinning: true,
+      enableColumnActions: true,
+    },
+  }}
+  enableRowNumbers
+/>
+```
+
+Here is a full example and demo for customizing display columns.
+
+<Example />
+
+### Create your own Display Columns
+
+You do not have to use the built in Row Actions feature. You can just create your own display columns instead. It is as easy as creating a normal column, only specifying the `columnDefType` as `display`.
+
+```tsx
+const columns = [
+  {
+    id: 'sendEmail',
+    header: 'Send Email',
+    columnDefType: 'display', //turns off data column features like sorting, filtering, etc.
+    enableColumnOrdering: true, //but you can turn back any of those features on if you want like this
+    Cell: ({ row }) => (
+      <Button onClick={() => sendEmail(row.original.userId)}>Send Email</Button>
+    ),
+  },
+  {
+    id: 'name',
+    header: 'Name',
+    accessorKey: 'name',
+  },
+];
+```

@@ -7,19 +7,19 @@ body:
         Thank you for reporting an issue :pray:
 
         Before submitting a new bug/issue, please check the links below to see if there is a solution or question posted there already:
-        - material-react-table's [Discussions tab](https://github.com/material/material-react-table/discussions)
-        - material-react-table's [Open Issues](https://github.com/KevinVandy/material-react-table/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
-        - material-react-table's [Closed Issues](https://github.com/KevinVandy/material-react-table/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
+        - tailwindcss-react-table's [Discussions tab](https://github.com/material/tailwindcss-react-table/discussions)
+        - tailwindcss-react-table's [Open Issues](https://github.com/KevinVandy/tailwindcss-react-table/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
+        - tailwindcss-react-table's [Closed Issues](https://github.com/KevinVandy/tailwindcss-react-table/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
 
         The more information you fill in, the better the community can help you.
 
   - type: input
     id: mrt-library-version
     attributes:
-      label: material-react-table version
+      label: tailwindcss-react-table version
       description: |
-        - Please let us know the exact version of material-react-table you were using when the issue occurred. If you are using an older version, check to see if your bug has already been solved in the latest version. 
-        - The latest version is <img alt="" src="https://badgen.net/npm/v/material-react-table" />
+        - Please let us know the exact version of tailwindcss-react-table you were using when the issue occurred. If you are using an older version, check to see if your bug has already been solved in the latest version. 
+        - The latest version is <img alt="" src="https://badgen.net/npm/v/tailwindcss-react-table" />
       placeholder: |
         e.g. v1.3.4
     validations:
@@ -48,7 +48,7 @@ body:
     attributes:
       label: Minimal, Reproducible Example - (Optional, but Recommended)
       description: |
-        Please add a link to a minimal reproduction. This can really speed up the diagnosis of the problem! A Code Sandbox is preferable, but simple code snippets are also acceptable here. Feel free to fork any of the official CodeSandbox examples: https://github.com/KevinVandy/material-react-table/tree/main/apps/material-react-table-docs/examples
+        Please add a link to a minimal reproduction. This can really speed up the diagnosis of the problem! A Code Sandbox is preferable, but simple code snippets are also acceptable here. Feel free to fork any of the official CodeSandbox examples: https://github.com/KevinVandy/tailwindcss-react-table/tree/main/apps/tailwindcss-react-table-docs/examples
       placeholder: |
         e.g. Code Sandbox, Stackblitz, or relevant code snippets.
     validations:

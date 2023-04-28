@@ -1,0 +1,210 @@
+import Head from 'next/head';
+import SimpleCodeSandbox from '../../../examples/SimpleCodeSandbox';
+
+<Head>
+  <title>Usage - Material React Table Docs</title>
+  <meta
+    name="description"
+    content="A brief overview of how to use tailwindcss-react-table and create columns and data"
+  />
+</Head>
+
+## Usage
+
+Here is a brief overview of how to use Material React Table. This is a very simple example, and will not cover all features of the library, but it is a great starting point.
+
+### Setup
+
+To start using TailwindCSSReactTable, you first need to [install](/docs/getting-started/install) `tailwindcss-react-table` and the necessary Material UI v5 dependencies.
+
+There are additional steps and customizations you can do for Material UI, if you have not set it up in your application already. Check out the [Material UI docs](https://mui.com/material-ui/getting-started/installation/) for more information.
+
+If you need to change the colors of the table components, advanced [Material UI Theming](https://mui.com/material-ui/customization/default-theme/) is covered in the [Customize Components](/docs/guides/customize-components#material-ui-theme) guide.
+
+### Import TailwindCSSReactTable
+
+Once you have everything installed, you can import from `tailwindcss-react-table` like this:
+
+```tsx
+import TailwindCSSReactTable from 'tailwindcss-react-table';
+```
+
+If you are using TypeScript, you may also want to import some TypeScript types from `'tailwindcss-react-table'` to take advantage of the advanced strong type checking and autocompletion features. The `TRT_ColumnDef` type is especially useful for defining your columns in a type-safe way.
+
+```tsx
+import TailwindCSSReactTable from 'tailwindcss-react-table';
+import type { TRT_ColumnDef } from 'tailwindcss-react-table'; // If using TypeScript (optional, but recommended)
+```
+
+### Creating Data/Rows
+
+Your data must be an array of objects that have properties matching the accessors in your column definitions. The objects themselves can theoretically be in any shape, but it will be easier to set up your columns if your data is already in a flat object format like the example below, but it is not required.
+
+If you are using TypeScript, remember to define a type for your data, as it can be used as a generic for your Column Definitions later for much better type safety.
+
+#### Simple Data Example
+
+```jsx
+//recommended flat structure for data, but not required (nested data is fine, but takes more setup in column definitions)
+const data = [
+  {
+    name: 'John', // key "name" matches `accessorKey` in ColumnDef down below
+    age: 30, // key "age" matches `accessorKey` in ColumnDef down below
+  },
+  {
+    name: 'Sara',
+    age: 25,
+  },
+];
+```
+
+#### Nested Data Example with TypeScript
+
+```tsx
+//if you are using TypeScript, create a type based on the shape of your data that you can use in your column definitions
+interface YourDataType {
+  name: {
+    firstName: string;
+    lastName: string;
+  };
+  age: number;
+}
+
+//a more complex example with nested data
+const data: YourDataType[] = [
+  {
+    name: {
+      firstName: 'John', //accessorKey or accessorFn will need to be "name.firstName" to access this value
+      lastName: 'Doe',
+    },
+    age: 30,
+  },
+  {
+    name: {
+      firstName: 'Sara',
+      lastName: 'Smith',
+    },
+    age: 25,
+  },
+];
+```
+
+Your data does NOT have to be created statically like this, of course. More than likely, your data is being fetched from a backend API. Check out the [Remote Data example](/docs/examples/remote) to see how you can use a remote data source.
+
+### Creating Columns
+
+There are several different ways to define columns, depending on your needs. Let's create some basic "data" columns. That is, columns that connect to our data. Since we defined our data in a flat object format, we can simply use the `accessorKey` property to access the data.
+
+#### Simple Column Definition Example
+
+```jsx
+//simple column definitions pointing to flat data
+const columns = useMemo(
+  () => [
+    {
+      header: 'Name',
+      accessorKey: 'name', //simple accessorKey pointing to flat data
+    },
+    {
+      header: 'Age',
+      accessorKey: 'age', //simple accessorKey pointing to flat data
+    },
+  ],
+  [],
+);
+```
+
+#### Nested Column Definition Example with TypeScript
+
+```tsx
+//a more complex example with nested data
+//if using TypeScript, you can use the TRT_ColumnDef type to strongly type your columns (Recommended)
+const columns = useMemo<TRT_ColumnDef<YourDataType>[]>(
+  () => [
+    {
+      header: 'First Name',
+      accessorKey: 'name.firstName', //using accessorKey dot notation to access nested data
+    },
+    {
+      header: 'Last Name',
+      accessorFn: (originalRow) => originalRow.name.lastName, //alternative to accessorKey, using accessorFn
+      id: 'lastName',
+    },
+    {
+      header: 'Age',
+      accessorKey: 'age',
+    },
+  ],
+  [],
+);
+```
+
+### Full Simple Example
+
+Put it all together, and you have a basic table! You can also play around and enable some features, either per column in the column definitions, or as props passed to `<TailwindCSSReactTable />`.
+
+```tsx
+import React, { useMemo } from 'react';
+import TailwindCSSReactTable from 'tailwindcss-react-table';
+import type { TRT_ColumnDef } from 'tailwindcss-react-table'; // If using TypeScript (optional, but recommended)
+
+//If using TypeScript, define the shape of your data (optional, but recommended)
+interface Person {
+  name: string;
+  age: number;
+}
+
+//mock data - strongly typed if you are using TypeScript (optional, but recommended)
+const data: Person[] = [
+  {
+    name: 'John',
+    age: 30,
+  },
+  {
+    name: 'Sara',
+    age: 25,
+  },
+];
+
+export default function App() {
+  //column definitions - strongly typed if you are using TypeScript (optional, but recommended)
+  const columns = useMemo<TRT_ColumnDef<Person>[]>(
+    () => [
+      {
+        accessorKey: 'name', //simple recommended way to define a column
+        header: 'Name',
+        muiTableHeadCellProps: { sx: { color: 'green' } }, //custom props
+      },
+      {
+        accessorFn: (originalRow) => originalRow.age, //alternate way
+        id: 'age', //id required if you use accessorFn instead of accessorKey
+        header: 'Age',
+        Header: <i style={{ color: 'red' }}>Age</i>, //optional custom markup
+      },
+    ],
+    [],
+  );
+
+  return (
+    <TailwindCSSReactTable
+      columns={columns}
+      data={data}
+      enableRowSelection //enable some features
+      enableColumnOrdering
+      enableGlobalFilter={false} //turn off a feature
+    />
+  );
+}
+```
+
+> **Note:** It is very important that the columns and data definitions are _memoized_ or _stable_. Otherwise, the entire table will be re-rendered during every react re-render in your application, which can lead to performance issues. To make a variable stable, store it in `useState`, wrap it in `useMemo`, or define it outside of a component so it does not get recreated on every render.
+
+### Live Code Sandbox Example
+
+<SimpleCodeSandbox />
+
+### Next Steps
+
+There are numerous ways you can customize the behavior and look and feel of your Material React Table. View some of the [examples](/docs/examples) to see how you can customize your table, and visit the [props page](/docs/api/props) to see all the props that you can use to turn features on and off and customize the look and feel of your table.
+
+Also, be sure to check out all the [Fundamental Guides](/docs/guides#fundamentals) and any of the [Advanced Feature Guides](/docs/guides#feature-guides) you may be interested in to learn more about the different features you can toggle on and off, or customize.

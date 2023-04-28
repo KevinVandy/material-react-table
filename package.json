@@ -1,5 +1,5 @@
 {
-  "name": "material-react-table-turbo",
+  "name": "tailwindcss-react-table-turbo",
   "private": true,
   "workspaces": [
     "apps/*",
@@ -13,7 +13,7 @@
     "docs:dev": "turbo run docs:dev",
     "docs:sitemap": "turbo run docs:sitemap",
     "docs:start": "turbo run docs:start",
-    "lib:build": "cp README.md packages/material-react-table/README.md && turbo run lib:build",
+    "lib:build": "cp README.md packages/tailwindcss-react-table/README.md && turbo run lib:build",
     "lib:build-locales": "turbo run lib:build-locales",
     "lib:build-no-locales": "turbo run lib:build-no-locales",
     "lib:dev": "turbo run lib:dev",

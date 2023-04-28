@@ -1,0 +1,45 @@
+import React, { useMemo } from 'react';
+import TailwindCSSReactTable, {
+  type TRT_ColumnDef,
+} from 'tailwindcss-react-table';
+import { data, type Person } from './makeData';
+
+const Example = () => {
+  const columns = useMemo<TRT_ColumnDef<Person>[]>(
+    () => [
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+        footer: 'First Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+        footer: 'Last Name',
+      },
+      {
+        accessorKey: 'email',
+        header: 'Email',
+        footer: 'Email',
+      },
+      {
+        accessorKey: 'city',
+        header: 'City',
+        footer: 'City',
+      },
+    ],
+    [],
+  );
+
+  return (
+    <TailwindCSSReactTable
+      columns={columns}
+      data={data}
+      enableStickyHeader
+      enableStickyFooter
+      muiTableContainerProps={{ sx: { maxHeight: '300px' } }}
+    />
+  );
+};
+
+export default Example;

@@ -6,15 +6,15 @@
 
 ## Suggesting New Features or Bug Fixes
 
-Before making large PRs, you may want to discuss your proposals in either the [Discord Contributing Channel](https://discord.gg/5wqyRx6fnm), the [GitHub Discussions](https://github.com/KevinVandy/material-react-table/discussions) page, or the [GitHub Issues](https://github.com/KevinVandy/material-react-table/issues) page.
+Before making large PRs, you may want to discuss your proposals in either the [Discord Contributing Channel](https://discord.gg/5wqyRx6fnm), the [GitHub Discussions](https://github.com/KevinVandy/tailwindcss-react-table/discussions) page, or the [GitHub Issues](https://github.com/KevinVandy/tailwindcss-react-table/issues) page.
 
 ## Running the project locally
 
 This project uses PNPM and a TurboRepo with 3 projects.
 
-- The library itself in `/packages/material-react-table`
-- The docs site in `/apps/material-react-table-docs`
-- The storybook site used for local development in `/apps/material-react-table-storybook`
+- The library itself in `/packages/tailwindcss-react-table`
+- The docs site in `/apps/tailwindcss-react-table-docs`
+- The storybook site used for local development in `/apps/tailwindcss-react-table-storybook`
 
 ### 1. Fork and Clone the project
 

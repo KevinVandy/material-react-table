@@ -1,0 +1,58 @@
+import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+import Example from '../../../examples/enable-column-pinning';
+
+<Head>
+  <title>Column Pinning Feature Guide - Material React Table Docs</title>
+  <meta
+    name="description"
+    content="How to use and customize the column pinning features of Material React Table"
+  />
+</Head>
+
+## Column Pinning Feature Guide
+
+Column pinning is a cool feature that lets users pin (freeze) columns to the left or right of the table. Pinned columns will not scroll horizontally with the rest of the columns so that they always stay visible to the user.
+
+### Relevant Props
+
+<RootPropTable
+  onlyProps={new Set(['enablePinning', 'onColumnPinningChange'])}
+/>
+
+### Relevant Column Options
+
+<ColumnOptionsTable onlyProps={new Set(['enablePinning'])} />
+
+### Relevant State
+
+<StateOptionsTable onlyProps={new Set(['columnPinning'])} />
+
+### Enable Column Pinning
+
+Column pinning can simply be enabled by setting the `enablePinning` prop to `true`.
+
+```tsx
+<TailwindCSSReactTable data={data} columns={columns} enablePinning />
+```
+
+### Pin (Freeze) Columns By Default
+
+Columns can start out pinned in your table by setting the `columnPinning` states in `initialState` or `state`.
+
+```tsx
+<TailwindCSSReactTable
+  data={data}
+  columns={columns}
+  enablePinning
+  initialState={{ columnPinning: { left: ['email'] } }} //pin email column to left by default
+/>
+```
+
+#### Column Pinning Example
+
+<Example />
+
+View Extra Storybook **[Examples](https://www.tailwindcss-react-table.dev/?path=/story/features-column-pinning-examples)**

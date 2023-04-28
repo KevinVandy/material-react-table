@@ -1,0 +1,59 @@
+import Head from 'next/head';
+import TableInstanceAPIsTable from '../../../components/prop-tables/TableInstanceAPIsTable';
+import SourceCode from '../../../components/prop-tables/TableInstanceAPIsSource';
+
+<Head>
+  <title>Table Instance APIs - Material React Table Docs</title>
+  <meta
+    name="description"
+    content="All the table instance methods and objects that can be accessed from the table instance in Material React Table"
+  />
+  <meta
+    property="og:title"
+    content="Material React Table Table Instance API Reference"
+  />
+  <meta
+    property="og:description"
+    content="A reference of all the table instance api methods and objects that can be used in Material React Table"
+  />
+</Head>
+
+## Table Instance APIs
+
+Internally, Material React Table uses the `useReactTable` hook from TanStack Table to create a table instance that handles a majority of the logic and events and the state for the table.
+
+You can access this table instance yourself by either setting up a `tableInstanceRef` or by consuming a `table` param from many of the callback functions in many of the props.
+
+```jsx
+const tableInstanceRef = useRef(null);
+
+const someEventHandler = () => {
+  tableInstanceRef.current. //call any of the table instance methods here
+};
+
+const columns = useMemo(() => [
+  {
+    accessor: 'name',
+    header: 'Name',
+    Cell: ({ cell, table }) => <span onClick={() => table.{/* or maybe here */}}></span>,
+  },
+]);
+
+return (
+  <TailwindCSSReactTable
+    columns={columns}
+    data={data}
+    //all callback props have access to the table instance when used like this
+    renderTopToolbarCustomActions={({ table }) => (
+      <Button onClick={() => table.{/* or maybe here */}}>Click Me</Button>
+    )}
+    tableInstanceRef={tableInstanceRef}
+  />
+);
+```
+
+> NOTE: These are NOT the [props](/docs/api/props) for Material React Table. These are just static methods on a table instance that you can use.
+
+<TableInstanceAPIsTable />
+
+<SourceCode />

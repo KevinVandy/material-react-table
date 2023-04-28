@@ -1,0 +1,252 @@
+import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+import DisableExample from '../../../examples/minimal';
+import CustomTopToolbarExample from '../../../examples/custom-top-toolbar';
+import ExternalExample from '../../../examples/external-toolbar';
+
+<Head>
+  <title>Toolbar Customization Guide - Material React Table Docs</title>
+  <meta
+    name="description"
+    content="How to customize the Toolbars, add buttons to toolbars, or customize progress bars and alert banners in Material React Table"
+  />
+</Head>
+
+## Toolbar Customization Guide
+
+This guide shows you how to [hide](#hide-or-disable-toolbars), [customize](#customize-toolbar-buttons), or [override](#override-with-custom-toolbar-components) the top and bottom toolbars in Material React Table.
+
+### Relevant Props
+
+<RootPropTable
+  onlyProps={
+    new Set([
+      'enableBottomToolbar',
+      'enableToolbarInternalActions',
+      'enableTopToolbar',
+      'muiBottomToolbarProps',
+      'muiLinearProgressProps',
+      'muiToolbarAlertBannerChipProps',
+      'muiToolbarAlertBannerProps',
+      'muiTopToolbarProps',
+      'positionGlobalFilter',
+      'positionPagination',
+      'positionToolbarAlertBanner',
+      'positionToolbarDropZone',
+      'renderBottomToolbar',
+      'renderBottomToolbarCustomActions',
+      'renderToolbarInternalActions',
+      'renderTopToolbar',
+      'renderTopToolbarCustomActions',
+    ])
+  }
+/>
+
+### Relevant State
+
+<StateOptionsTable
+  onlyProps={new Set(['showAlertBanner', 'showProgressBars'])}
+/>
+
+### Hide or Disable Toolbars
+
+There are `enableTopToolbar` and `enableBottomToolbar` props that you can use to show or hide the toolbars.
+
+```tsx
+<TailwindCSSReactTable
+  data={data}
+  columns={columns}
+  enableTopToolbar={false} //hide top toolbar
+  enableBottomToolbar={false} //hide bottom toolbar
+/>
+```
+
+#### No Toolbars Example
+
+<DisableExample />
+
+### Customize Toolbar buttons
+
+Everything in the toolbars is customizable. You can add your own buttons or change the order of the built-in buttons.
+
+#### Customize Built-In Internal Toolbar Button Area
+
+The `renderToolbarInternalActions` prop allows you to redefine the built-in buttons that usually reside in the top right of the top toolbar. You can reorder the icon buttons or even insert your own custom buttons. All of the built-in buttons are available to be imported from 'tailwindcss-react-table'.
+
+```tsx
+import TailwindCSSReactTable, {
+  TRT_ShowHideColumnsButton,
+  TRT_FullScreenToggleButton,
+} from 'tailwindcss-react-table';
+//...
+return (
+  <TailwindCSSReactTable
+    data={data}
+    columns={columns}
+    renderToolbarInternalActions={({ table }) => (
+      <>
+        {/* add your own custom print button or something */}
+        <IconButton onClick={() => showPrintPreview(true)}>
+          <PrintIcon />
+        </IconButton>
+        {/* built-in buttons (must pass in table prop for them to work!) */}
+        <TRT_ShowHideColumnsButton table={table} />
+        <TRT_FullScreenToggleButton table={table} />
+      </>
+    )}
+  />
+);
+```
+
+#### Add Custom Toolbar Buttons/Components
+
+The `renderTopToolbarCustomActions` and `renderBottomToolbarCustomActions` props allow you to add your own custom buttons or components to the top and bottom toolbar areas. These props are functions that return a ReactNode. You can add your own buttons or whatever components you want.
+
+In all of these `render...` props, you get access to the underlying `table` instance that you can use to perform actions or extract data from the table.
+
+```tsx
+<TailwindCSSReactTable
+  data={data}
+  columns={columns}
+  enableRowSelection
+  //Simply adding a table title to the top-left of the top toolbar
+  renderTopToolbarCustomActions={() => (
+    <Typography variant="h3">Customer's Table</Typography>
+  )}
+  //Adding a custom button to the bottom toolbar
+  renderBottomToolbarCustomActions={({ table }) => (
+    <Button
+      variant="contained"
+      color="primary"
+      //extract all selected rows from the table instance and do something with them
+      onClick={() => handleDownloadRows(table.getSelectedRowModel().rows)}
+    >
+      Download Selected Rows
+    </Button>
+  )}
+/>
+```
+
+#### Full Custom Top Toolbar Example
+
+<CustomTopToolbarExample />
+
+### Position Toolbar Areas
+
+The `positionToolbarAlertBanner`, `positionGlobalFilter`, `positionPagination`, and `positionToolbarDropZone` props allow you to swap the default position of certain areas of the toolbars. Experiment moving them around until you find a layout that works for you.
+
+```tsx
+<TailwindCSSReactTable
+  data={data}
+  columns={columns}
+  //if rendering top toolbar buttons, sometimes you want alerts to be at the bottom
+  positionToolbarAlertBanner="bottom"
+  positionGlobalFilter="left" //move the search box to the left of the top toolbar
+  positionPagination="top"
+  renderTopToolbarCustomActions={() => <Box>...</Box>}
+/>
+```
+
+### Customize Toolbar Props and Styles
+
+The `muiTopToolbarProps`, `muiBottomToolbarProps`, `muiToolbarAlertBannerProps`, and `muiToolbarAlertBannerChipProps` props allow you to customize the props and styles of the underlying MUI components that make up the toolbar components. Remember that you can pass CSS overrides to their `sx` or `style` props. Some have found this useful for forcing `position: absolute` on alerts, etc.
+
+### Customize Linear Progress Bars
+
+The progress bars that display in both the top and bottom toolbars become visible when either the `isLoading` or `showProgressBars` state options are set to `true`. You can customize the progress bars by passing in props to the `muiLinearProgressProps` prop. By default, the progress bars have an indeterminate state, but you can set the `value` prop to a number between 0 and 100 to show real progress values if your table is doing some complicated long running tasks that you want to show progress for. Visit the [MUI Linear Progress docs](https://mui.com/material-ui/react-progress/#linear) to learn more.
+
+```tsx
+<TailwindCSSReactTable
+  data={data}
+  columns={columns}
+  muiLinearProgressProps={({ isTopToolbar }) => ({
+    color: 'secondary',
+    sx: { display: isTopToolbar ? 'block' : 'none' }, //only show top toolbar progress bar
+    value: fetchProgress, //show precise real progress value if you so desire
+    variant: 'determinate',
+  })}
+  state={{
+    isLoading,
+    showProgressBars,
+  }}
+/>
+```
+
+### Customize Toolbar Alert Banner
+
+The toolbar alert banner is an internal component used to display alerts to the user. By default, it will automatically show messages around the number of selected rows or grouping state.
+
+However, you can repurpose this alert banner to show your own custom messages too. You can force the alert banner to show by setting the `showAlertBanner` state option to `true`. You can then customize the messages and other stylings using the `muiToolbarAlertBannerProps` to create your custom message. You probably saw this in the [Remote Data](/docs/examples/remote) or [React Query](/docs/examples/react-query) examples.
+
+```tsx
+<TailwindCSSReactTable
+  columns={columns}
+  data={data}
+  //show a custom error message if there was an error fetching data in the top toolbar
+  muiToolbarAlertBannerProps={
+    isError
+      ? {
+          color: 'error',
+          children: 'Network Error. Could not fetch data.',
+        }
+      : undefined
+  }
+  state={{
+    showAlertBanner: isError,
+    showProgressBars: isFetching,
+  }}
+/>
+```
+
+### Override with Custom Toolbar Components
+
+If you want to completely override the default toolbar components, you can do so by passing in your own custom components to the `renderTopToolbar` and `renderBottomToolbar` props.
+
+The drawback to this approach is that you will not get all the automatic features of the default toolbar components, such as the automatic alert banner, progress bars, etc. You will have to implement all of that yourself if you still want those features.
+
+```jsx
+<TailwindCSSReactTable
+  columns={columns}
+  data={data}
+  renderTopToolbar={({ table }) => <Box></Box>}
+  renderBottomToolbar={({ table }) => <Box></Box>}
+/>
+```
+
+#### Import MRT Components for Custom Toolbars
+
+If you are using a custom toolbar, you can still import some of the built-in MRT components to use in your custom toolbar. For example, you can import all of the built-in internal toolbar icon buttons components and use them in your custom toolbar.
+
+```jsx
+import TailwindCSSReactTable, {
+  TRT_ShowHideColumnsButton, // import the built-in show/hide columns button
+  TRT_FullScreenToggleButton, // import the built-in full screen toggle button
+} from 'tailwindcss-react-table';
+//...
+return (
+  <TailwindCSSReactTable
+    columns={columns}
+    data={data}
+    renderTopToolbar={({ table }) => (
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Typography>Custom Toolbar</Typography>
+        <Box>
+          <TRT_ShowHideColumnsButton table={table} />
+          <TRT_FullScreenToggleButton table={table} />
+        </Box>
+      </Box>
+    )}
+  />
+);
+```
+
+### Create Your Own External Toolbar Component
+
+You may want to separate out your own toolbar functionality away from the main table component. MRT lets you do this and still connect your custom components to the table instance using the `tableInstanceRef` prop.
+
+You can import import the MRT Internal Toolbar button components and use them in your custom toolbar, just like you can when customizing the built-in toolbar, BUT there are some extra re-render hacks that you have to do to make the icon buttons work properly. See the example below:
+
+> Passing the `tableInstanceRef` as a prop for the `table` prop that MRT\_\* components need also requires some weird re-render hacks to make the icon buttons work properly, because refs do not trigger re-renders in React.
+
+<ExternalExample />

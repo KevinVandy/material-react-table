@@ -1,0 +1,60 @@
+import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import LocaleExamples from '../../../example-groups/LocaleExamples';
+
+<Head>
+  <title>Localization/i18n Guide - Material React Table Docs</title>
+  <meta
+    name="description"
+    content="How to customize localization and translations (i18n) in Material React Table"
+  />
+</Head>
+
+## Localization (i18n) Guide
+
+Material React Table has full support for localization (i18n). Some locales are included by default, but if your language is not yet supported, you can still easily add your own custom translations to the `localization` prop.
+
+### Relevant Props
+
+<RootPropTable onlyProps={new Set(['localization'])} />
+
+### Built-in Locales
+
+The following locales are included and can be imported from `'tailwindcss-react-table/locales/'`:
+
+`cs`, `da`, `de`, `en`, `es`, `fa`, `fi`, `fr`, `id`, `it`, `nl`, `ja`, `pl`, `pt`, `pt-BR`, `ro`, `ru`, `sr-Cryl-RS`, `sr-Latn-RS`, `sv`, `tr`, `uk`, `vi`, `zh-Hans`, `zh-Hant`
+
+> If your language is not yet supported, please consider making a PR to add it to the library! See [here on GitHub](https://github.com/KevinVandy/tailwindcss-react-table/tree/main/packages/tailwindcss-react-table/src/_locales).
+
+#### Built-in Locale Examples
+
+Scroll and find your language below to see an example of how to use it.
+
+<LocaleExamples />
+
+### Custom Non-Built-In Translations
+
+If you want to use a language that is not included in the library, you can still easily add your own custom translations to the `localization` prop.
+
+```jsx
+<TailwindCSSReactTable
+  columns={columns}
+  data={data}
+  localization={{
+    actions: 'Ações',
+    and: 'e',
+    cancel: 'Cancelar',
+    changeFilterMode: 'Alterar o modo de filtro',
+    changeSearchMode: 'Alterar o modo de pesquisa',
+    clearFilter: 'Limpar filtros',
+    clearSearch: 'Limpar pesquisa',
+    clearSort: 'Limpar classificações',
+    clickToCopy: 'Clique para copiar',
+    // ... and many more - see link below for full list of translation keys
+  }}
+/>
+```
+
+For a full list of all available translation keys, see [here](https://github.com/KevinVandy/tailwindcss-react-table/blob/main/packages/tailwindcss-react-table/src/_locales/en.ts)
+
+If you end up fully translating MRT into another language that is not yet supported, please consider making a PR to add it to the library so that everyone can use it!

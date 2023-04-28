@@ -1,0 +1,76 @@
+import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
+import Example from '../../../examples/enable-click-to-copy';
+
+<Head>
+  <title>Click to Copy Feature Guide - Material React Table Docs</title>
+  <meta
+    name="description"
+    content="How to use and customize the click to copy features of Material React Table"
+  />
+</Head>
+
+## Click to Copy Feature Guide
+
+Material React Table has an easy-to-implement feature that allows a user to copy a cell's value to the clipboard.
+
+### Relevant Props
+
+<RootPropTable
+  onlyProps={new Set(['enableClickToCopy', 'muiTableBodyCellCopyButtonProps'])}
+/>
+
+### Relevant Column Options
+
+<ColumnOptionsTable
+  onlyProps={new Set(['enableClickToCopy', 'muiTableBodyCellCopyButtonProps'])}
+/>
+
+### Enable Click to Copy Per Column
+
+Most likely, there will just be a couple columns that you want to enable click to copy for. You can do this by setting the `enableClickToCopy` option to `true` per column on the column definition.
+
+```tsx
+const columns = [
+  //...
+  {
+    accessorKey: 'email',
+    header: 'Email',
+    enableClickToCopy: true,
+  },
+  //...
+];
+
+return <TailwindCSSReactTable columns={columns} data={data} />;
+```
+
+### Enable Click to Copy For All Cells
+
+Alternatively, you can enable click to copy globally by setting the `enableClickToCopy` prop to `true`. You could then opt out per column by setting the `enableClickToCopy` option to `false` on the column definition.
+
+```tsx
+<TailwindCSSReactTable columns={columns} data={data} enableClickToCopy />
+```
+
+### Customize Copy Buttons
+
+The click to copy feature is built on top of the Material UI Button component. You can customize the copy button by passing in the `muiTableBodyCellCopyButtonProps` prop or as a column option in a column definition.
+
+```tsx
+<TailwindCSSReactTable
+  columns={columns}
+  data={data}
+  enableClickToCopy
+  muiTableBodyCellCopyButtonProps={{
+    sx: { width: '100%' },
+    startIcon: <ContentCopy />,
+  }}
+/>
+```
+
+### Click to Copy Example
+
+<Example />
+
+View Extra Storybook **[Examples](https://www.tailwindcss-react-table.dev/?path=/story/features-click-to-copy-examples)**

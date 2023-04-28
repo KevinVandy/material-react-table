@@ -5,4 +5,4 @@ types
 *.json
 .next
 *.md
-apps/material-react-table-docs/.next
+apps/tailwindcss-react-table-docs/.next

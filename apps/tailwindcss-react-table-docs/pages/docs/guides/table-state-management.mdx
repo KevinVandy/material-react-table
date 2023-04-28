@@ -1,0 +1,178 @@
+import Head from 'next/head';
+import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import RowSelectionExample from '../../../examples/enable-row-selection';
+import PersistentStateExample from '../../../examples/persistent-state';
+
+<Head>
+  <title>State Management Guide - Material React Table Docs</title>
+  <meta
+    name="description"
+    content="How to access and manage internal state in Material React Table"
+  />
+</Head>
+
+## State Management Guide
+
+Material React Table does not try to hide any of its internal state from you. You can initialize state with custom initial values, manage individual states yourself as you discover the need to have access to them, or store your own reference to the entire table instance wherever you need to.
+
+This is all optional, of course. If you do not need access to any of the state, you do not need to do anything and it will just automatically be managed internally.
+
+See the [State Options API Docs](/docs/api/state-options) for more information on which states are available for you to manage.
+
+### Relevant Props
+
+<RootPropTable
+  onlyProps={new Set(['initialState', 'state', 'tableInstanceRef'])}
+/>
+
+### Populate Initial State
+
+If all you care about is setting parts of the initial or default state when the table mounts, then you may be able to specify that state in the `initialState` prop and not have to worry about managing the state yourself.
+
+For example, let's say you do not need access to the `showColumnFilters` state, but you want to set the default value to `true` when the table mounts. You can do that with the `initialState` prop:
+
+```tsx
+<TailwindCSSReactTable
+  columns={columns}
+  data={data}
+  initialState={{
+    density: 'compact', //set default density to compact
+    expanded: true, //expand all rows by default
+    pagination: { pageIndex: 0, pageSize: 15 }, //set different default page size
+    showColumnFilters: true, //show filters by default
+    sorting: [{ id: 'name', desc: false }], //sort by name ascending by default
+  }}
+/>
+```
+
+> Note: If you use both `initialState` and `state`, the state initializer in `state` prop will take precedence and overwrite the same state values in `initialState`. So just use either `initialState` or `state`, not both for the same states.
+
+### Manage Individual States as Needed
+
+It is pretty common to need to manage certain state yourself, so that you can react to changes in that state, or have easy access to it when sending it to an API.
+
+You can pass in any state that you are managing yourself to the `state` prop, and it will be used instead of the internal state. Each state property option also has a corresponding `on[StateName]Change` callback that you can use set/update your managed state as it changes internally in the table.
+
+For example, let's say you need to store the pagination, sorting, and row selection states in a place where you can easily access it in order to use it in parameters for an API call.
+
+```jsx
+const [pagination, setPagination] = useState({
+  pageIndex: 0,
+  pageSize: 15, //set different default page size by initializing the state here
+});
+const [rowSelection, setRowSelection] = useState({});
+const [sorting, setSorting] = useState([{ id: 'name', desc: false }]);
+
+//see example at bottom of page for alternatives to useEffect here
+useEffect(() => {
+  //do something when the pagination state changes
+}, [pagination]);
+
+return (
+  <TailwindCSSReactTable
+    columns={columns}
+    data={data}
+    getRowId={(originalRow) => row.username}
+    onPaginationChange={setPagination}
+    onRowSelectionChange={setRowSelection}
+    onSortingChange={setSorting}
+    state={{ pagination, rowSelection, sorting }} //must pass states back down if using their on[StateName]Change callbacks
+  />
+);
+```
+
+Here is another full example for how you might manage the `rowSelection` state yourself:
+
+<RowSelectionExample />
+
+### Add Side Effects in Set State Callbacks
+
+In React 18 and beyond, it is becoming more discouraged to use `useEffect` to react to state changes, because in React Strict Mode (and maybe future versions of React), the useEffect hook may run twice per render. Instead, more event driven functions are recommended to be used. Here is an example for how that looks here. The callback signature for the `on[StateName]Change` functions is a bit strange, so pay attention to the example below.
+
+```tsx
+const [pagination, setPagination] = useState({
+  pageIndex: 0,
+  pageSize: 15,
+});
+
+const handlePaginationChange = (updater: TRT_Updater<PaginationState>) => {
+  //call the setState as normal, but need to check if using an updater callback with a previous state
+  setPagination((prevPagination) =>
+    updater instanceof Function ? updater(prevPagination) : updater,
+  );
+  //put more code for your side effects here, guaranteed to only run once, even in React Strict Mode
+};
+
+return (
+  <TailwindCSSReactTable
+    columns={columns}
+    data={data}
+    state={{ pagination }}
+    onPaginationChange={handlePaginationChange}
+  />
+);
+```
+
+### Access the Underlying Table Instance Reference
+
+You can store a reference to the underlying table instance by using the `tableInstanceRef` prop. This is a mutable ref object that will be populated with the table instance once the table has been initialized internally. This reference can be very useful, especially if you need it for components that are rendered outside of `<TailwindCSSReactTable />`.
+
+```tsx
+//must initialize with null to make TS happy
+const tableInstanceRef = useRef<TRT_TableInstance<YourDataType>>(null);
+
+const someEventHandler = (event) => {
+  console.info(tableInstanceRef.current?.getRowModel().rows); //example - get access to all page rows in the table
+  console.info(tableInstanceRef.current?.getSelectedRowModel()); //example - get access to all selected rows in the table
+  console.info(tableInstanceRef.current?.getState().sorting); //example - get access to the current sorting state
+};
+
+return (
+  <div>
+    <ExternalButton onClick={someEventHandler}>
+      Export or Something
+    </ExternalButton>
+    <TailwindCSSReactTable
+      columns={columns}
+      data={data}
+      tableInstanceRef={tableInstanceRef}
+    />
+  </div>
+);
+```
+
+The table instance is the same object that you will also see as a provided parameter in many of the other callback functions throughout Material React Table, such as all the `render...` props or the `Cell` or `Header` render overrides in the column definition options.
+
+```jsx
+const tableInstanceRef = useRef(null);
+
+const columns = useMemo(
+  () => [
+    {
+      Header: 'Name',
+      accessor: 'name',
+      Cell: ({ cell, table }) => <span>{cell.getValue()}</span>,
+      //The `table` parameter from the Cell option params and the `tableInstanceRef.current` are the same object
+    },
+  ],
+  [],
+);
+
+return (
+  <TailwindCSSReactTable
+    columns={columns}
+    data={data}
+    tableInstanceRef={tableInstanceRef}
+    renderTopToolbarCustomActions={({ table }) => {
+      //The `table` parameter and the `tableInstanceRef.current` are the same object
+      return <Button>Button</Button>;
+    }}
+  />
+);
+```
+
+### Persistent State
+
+Persistent state is not a built-in feature of Material React Table, but it is an easy feature to implement yourself using the above patterns with the `state` prop and the `on[StateName]Change` callbacks. Here is an example of how you might implement persistent state using `sessionStorage`:
+
+<PersistentStateExample />

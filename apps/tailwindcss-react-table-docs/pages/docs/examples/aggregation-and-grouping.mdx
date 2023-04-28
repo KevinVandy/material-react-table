@@ -1,0 +1,30 @@
+import Head from 'next/head';
+import Example from '../../../examples/aggregation-and-grouping';
+
+<Head>
+  <title>Aggregation and Grouping Example - Material React Table Docs</title>
+  <meta
+    name="description"
+    content="A Material React Table example demonstrating aggregation and grouping. See how you can group rows by a column and aggregate the values of other columns."
+  />
+  <meta
+    property="og:title"
+    content="Aggregation and Grouping Material React Table Example"
+  />
+  <meta
+    property="og:description"
+    content="Learn how to take advantage of advanced MRT features, suc as pagination, filtering, sorting, selection, detail panels, column ordering, pinning, custom toolbars, and more"
+  />
+</Head>
+
+## Aggregation and Grouping Example
+
+Grouping and Aggregation features are usually hard to implement, but MRT (thanks to [TanStack Table](https://tanstack.com/table/v8/docs/api/features/grouping)) makes it easy. Once enabled, simply click the vertical ellipses (⋮) icon for the column you want to group by and select **Group by (column name)**.
+
+You can group by a single column or multiple columns at a time. Then, you can run aggregations on grouped columns to calculate totals, averages, max, min, etc.
+
+The Grouping and Aggregation features work hand in hand with the Expanding and Sorting features. Try grouping by various columns in the example below and sorting by the aggregated columns, such as "age" or "salary".
+
+<Example />
+
+View Extra Storybook **[Examples](https://www.tailwindcss-react-table.dev/?path=/story/features-aggregation-examples)**

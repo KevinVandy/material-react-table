@@ -1,0 +1,30 @@
+import Head from 'next/head';
+import Example from '../../../examples/infinite-scrolling';
+
+<Head>
+  <title>Infinite Scrolling Example - Material React Table Docs</title>
+  <meta
+    name="description"
+    content="An example of Material React Table which shows how to implement an infinite scrolling table that fetches data from a remote server as the user scrolls down the table with the useInfiniteQuery hook from react-query"
+  />
+  <meta
+    property="og:title"
+    content="Infinite Scrolling Material React Table Example"
+  />
+  <meta
+    property="og:description"
+    content="Learn how to stream rows on scroll with infinite scrolling in Material React Table"
+  />
+</Head>
+
+## Infinite Scrolling Example
+
+An infinite scrolling table is a table that streams data from a remote server as the user scrolls down the table. This works great with large datasets, just like our [Virtualized Example](/docs/examples/virtualized), except here we do not fetch all of the data at once upfront. Instead, we just fetch data a little bit at a time, as it becomes necessary.
+
+Using a library like [`@tanstack/react-query`](https://tanstack.com/query/v4) makes it easy to implement an infinite scrolling table in Material React Table with the `useInfiniteQuery` hook.
+
+Enabling the virtualization feature is actually optional here but is encouraged if the table will be expected to render more than 100 rows at a time.
+
+<Example />
+
+View Extra Storybook **[Examples](https://www.tailwindcss-react-table.dev/?path=/story/prop-playground--default)**

@@ -1,0 +1,123 @@
+import Head from 'next/head';
+import { FAQs } from '../../../components/mdx/FAQs';
+
+<Head>
+  <title>Installation - Material React Table Docs</title>
+  <meta name="description" content="How to install Material React Table" />
+</Head>
+
+## Installation
+
+> `tailwindcss-react-table` requires **Material UI V5** packages as dependencies in your project.
+>
+> If you are already using Material UI, you probably already have most of these peer dependencies installed.
+>
+> Just double-check that you have the following in your package.json, or use the [full install commands](<#install-with-required-peer-dependencies-(recommended)>) below.
+>
+> 1.  `@mui/material` (v5)
+> 2.  `@mui/icons-material` (v5)
+> 3.  `@emotion/react` (v11)
+> 4.  `@emotion/styled` (v11)
+> 5.  `react` and `react-dom` (v17 or v18) - MUI v5 requires React 17 or 18
+
+### Quick Install
+
+NPM
+
+```bash
+npm install tailwindcss-react-table
+```
+
+PNPM
+
+```bash
+pnpm add tailwindcss-react-table
+```
+
+Yarn
+
+```bash
+yarn add tailwindcss-react-table
+```
+
+### Install With Required Peer Dependencies (Recommended)
+
+NPM
+
+```bash
+npm install tailwindcss-react-table @mui/material @mui/icons-material @emotion/react @emotion/styled
+```
+
+PNPM
+
+```bash
+pnpm add tailwindcss-react-table @mui/material @mui/icons-material @emotion/react @emotion/styled
+```
+
+Yarn
+
+```bash
+yarn add tailwindcss-react-table @mui/material @mui/icons-material @emotion/react @emotion/styled
+```
+
+> You do NOT need to install `@tanstack/react-table`, as it is already an internal dependency of `tailwindcss-react-table`, and must use an exact version already specified internally.
+>
+> All internal dependencies: `@tanstack/match-sorter-utils`, `@tanstack/react-table`, `@tanstack/react-virtual`, and `highlight-words`
+
+### Common Errors
+
+If you get an error like this:
+
+```bash
+"Error: Element type is invalid: expected a string (for built-in components)
+or a class/function (for composite components) but got: undefined.
+You likely forgot to export your component from the file it's defined in,
+or you might have mixed up default and named imports.
+```
+
+You probably do not have the correct version of Material UI installed. Make sure all material ui packages are at least v5
+
+If you are using an older version of `webpack` or `create-react-app` and get an error like this:
+
+```bash
+./node_modules/@tanstack/virtual-core/build/lib/index.esm.js 147:92
+Module parse failed: Unexpected token (147:92)
+File was processed with these loaders:
+```
+
+Then try upgrading either `webpack` or `react-scripts` to the latest versions.
+
+### FAQs
+
+<FAQs
+  faqStructuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Why is React 17 or 18 required for Material React Table?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '<p>React 17 or later is required by Material UI v5 itself. Some event listeners on MUI TextField components will not work with React 16.x.</p>',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: "Should I install '@tanstack/react-table' in my package.json for Material React Table?",
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: "<p><b>No</b>, you do not need to install TanStack Table in your project manually, as the latest TanStack Table version automatically gets installed under the hood by MRT itself as an internal dependency. You can import types and functions from '@tanstack/react-table' too.</p>",
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is TypeScript required to use Material React Table?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '<p><b>No</b>, TypeScript is <b>not required</b> to use Material React Table, but it is a whole lot easier to use Material React Table with TypeScript, <b>especially when defining columns</b>. If you do use TypeScript, try to keep the latest TypeScript version installed, or at least <b>TS version 4.8</b> or higher.</p>',
+        },
+      },
+    ],
+  }}
+/>
