@@ -32,7 +32,7 @@ export const Footer = () => {
         color="secondary"
         endIcon={<GitHub />}
         startIcon={<Edit />}
-        href={`https://github.com/KevinVandy/tailwindcss-react-table/edit/main/apps/tailwindcss-react-table-docs/pages${pathname}${
+        href={`https://github.com/jonatasge/tailwindcss-react-table/edit/main/apps/tailwindcss-react-table-docs/pages${pathname}${
           ['/'].includes(pathname)
             ? 'index.tsx'
             : ['/docs', '/docs/api', '/docs/examples', '/docs/guides'].includes(
@@ -145,7 +145,7 @@ export const Footer = () => {
           </MuiLink>
           <MuiLink
             color="text.secondary"
-            href="https://github.com/KevinVandy/tailwindcss-react-table"
+            href="https://github.com/jonatasge/tailwindcss-react-table"
             target="_blank"
             rel="noopener"
           >
@@ -153,7 +153,7 @@ export const Footer = () => {
           </MuiLink>
           <MuiLink
             color="text.secondary"
-            href="https://github.com/KevinVandy/tailwindcss-react-table/issues"
+            href="https://github.com/jonatasge/tailwindcss-react-table/issues"
             target="_blank"
             rel="noopener"
           >

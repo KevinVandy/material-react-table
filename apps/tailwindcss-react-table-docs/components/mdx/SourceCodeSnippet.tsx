@@ -145,7 +145,7 @@ export const SourceCodeSnippet = ({
                 <Button
                   color="success"
                   endIcon={<LaunchIcon />}
-                  href={`https://stackblitz.com/github/KevinVandy/tailwindcss-react-table/tree/main/apps/tailwindcss-react-table-docs/examples/${tableId}/sandbox?file=src/TS.tsx`}
+                  href={`https://stackblitz.com/github/jonatasge/tailwindcss-react-table/tree/main/apps/tailwindcss-react-table-docs/examples/${tableId}/sandbox?file=src/TS.tsx`}
                   onClick={() => plausible('open-stackblitz')}
                   rel="noopener"
                   startIcon={<ElectricBoltIcon />}
@@ -158,7 +158,7 @@ export const SourceCodeSnippet = ({
                 <Button
                   color="warning"
                   endIcon={<LaunchIcon />}
-                  href={`https://codesandbox.io/s/github/KevinVandy/tailwindcss-react-table/tree/main/apps/tailwindcss-react-table-docs/examples/${tableId}/sandbox?file=/src/TS.tsx`}
+                  href={`https://codesandbox.io/s/github/jonatasge/tailwindcss-react-table/tree/main/apps/tailwindcss-react-table-docs/examples/${tableId}/sandbox?file=/src/TS.tsx`}
                   onClick={() => plausible('open-code-sandbox')}
                   rel="noopener"
                   startIcon={<CodeIcon />}
@@ -171,7 +171,7 @@ export const SourceCodeSnippet = ({
                 <Button
                   color="info"
                   endIcon={<LaunchIcon />}
-                  href={`https://github.com/KevinVandy/tailwindcss-react-table/tree/main/apps/tailwindcss-react-table-docs/examples/${tableId}/sandbox/src/${
+                  href={`https://github.com/jonatasge/tailwindcss-react-table/tree/main/apps/tailwindcss-react-table-docs/examples/${tableId}/sandbox/src/${
                     isTypeScript ? 'TS.tsx' : 'JS.js'
                   }`}
                   onClick={() => plausible('open-on-github')}

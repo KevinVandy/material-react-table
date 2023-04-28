@@ -296,7 +296,7 @@ export const routes: Array<RouteItem> = [
         external: true,
       },
       {
-        href: 'https://www.github.com/kevinvandy/tailwindcss-react-table',
+        href: 'https://www.github.com/jonatasge/tailwindcss-react-table',
         label: 'GitHub',
         external: true,
       },

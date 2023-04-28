@@ -11,11 +11,11 @@ View [Documentation](https://www.tailwindcss-react-table.com/)
 <a href="https://bundlephobia.com/result?p=tailwindcss-react-table" target="_blank">
   <img alt="" src="https://badgen.net/bundlephobia/minzip/tailwindcss-react-table@latest?color=blue" />
 </a>
-<a href="https://star-history.com/#kevinvandy/tailwindcss-react-table&Date" target="_blank">
-  <img alt="" src="https://badgen.net/github/stars/KevinVandy/tailwindcss-react-table?color=blue" />
+<a href="https://star-history.com/#jonatasge/tailwindcss-react-table&Date" target="_blank">
+  <img alt="" src="https://badgen.net/github/stars/jonatasge/tailwindcss-react-table?color=blue" />
 </a>
-<a href="https://github.com/KevinVandy/tailwindcss-react-table/blob/main/LICENSE" target="_blank">
-  <img alt="" src="https://badgen.net/github/license/KevinVandy/tailwindcss-react-table?color=blue" />
+<a href="https://github.com/jonatasge/tailwindcss-react-table/blob/main/LICENSE" target="_blank">
+  <img alt="" src="https://badgen.net/github/license/jonatasge/tailwindcss-react-table?color=blue" />
 </a>
 <a href="http://makeapullrequest.com" target="_blank">
   <img alt="" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" />
@@ -186,12 +186,12 @@ _Open in [Code Sandbox](https://codesandbox.io/s/simple-tailwindcss-react-table-
 
 ## Contributors
 
-<a href="https://github.com/kevinvandy/tailwindcss-react-table/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=kevinvandy/tailwindcss-react-table" />
+<a href="https://github.com/jonatasge/tailwindcss-react-table/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=jonatasge/tailwindcss-react-table" />
 </a>
 
-PRs are Welcome, but please discuss in [GitHub Discussions](https://github.com/KevinVandy/tailwindcss-react-table/discussions) or the [Discord Server](https://discord.gg/5wqyRx6fnm) first if it is a large change!
+PRs are Welcome, but please discuss in [GitHub Discussions](https://github.com/jonatasge/tailwindcss-react-table/discussions) or the [Discord Server](https://discord.gg/5wqyRx6fnm) first if it is a large change!
 
-Read the [Contributing Guide](https://github.com/KevinVandy/tailwindcss-react-table/blob/main/CONTRIBUTING.md) to learn how to run this project locally.
+Read the [Contributing Guide](https://github.com/jonatasge/tailwindcss-react-table/blob/main/CONTRIBUTING.md) to learn how to run this project locally.
 
 <!-- Use the FORCE, Luke! -->

@@ -10,12 +10,12 @@ const cardData = [
   {
     text: 'Source Code',
     image: '/source-code.svg',
-    href: 'https://github.com/kevinvandy/tailwindcss-react-table',
+    href: 'https://github.com/jonatasge/tailwindcss-react-table',
   },
   {
     text: 'GitHub Issues',
     image: '/github-issues.svg',
-    href: 'https://github.com/kevinvandy/tailwindcss-react-table/issues',
+    href: 'https://github.com/jonatasge/tailwindcss-react-table/issues',
   },
   {
     text: 'Discord',

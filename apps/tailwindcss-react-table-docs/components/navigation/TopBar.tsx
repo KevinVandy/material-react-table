@@ -165,7 +165,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
           >
             <Tooltip arrow title="Github">
               <a
-                href="https://github.com/KevinVandy/tailwindcss-react-table"
+                href="https://github.com/jonatasge/tailwindcss-react-table"
                 rel="noopener"
                 target="_blank"
               >

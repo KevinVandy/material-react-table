@@ -6,7 +6,7 @@
 
 ## Suggesting New Features or Bug Fixes
 
-Before making large PRs, you may want to discuss your proposals in either the [Discord Contributing Channel](https://discord.gg/5wqyRx6fnm), the [GitHub Discussions](https://github.com/KevinVandy/tailwindcss-react-table/discussions) page, or the [GitHub Issues](https://github.com/KevinVandy/tailwindcss-react-table/issues) page.
+Before making large PRs, you may want to discuss your proposals in either the [Discord Contributing Channel](https://discord.gg/5wqyRx6fnm), the [GitHub Discussions](https://github.com/jonatasge/tailwindcss-react-table/discussions) page, or the [GitHub Issues](https://github.com/jonatasge/tailwindcss-react-table/issues) page.
 
 ## Running the project locally
 

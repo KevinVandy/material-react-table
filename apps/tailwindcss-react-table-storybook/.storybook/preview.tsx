@@ -62,7 +62,7 @@ const preview: Preview = {
           >
             View Source code for these examples in the code tab below or{' '}
             <Link
-              href="https://github.com/KevinVandy/tailwindcss-react-table/tree/main/apps/tailwindcss-react-table-storybook/stories/features"
+              href="https://github.com/jonatasge/tailwindcss-react-table/tree/main/apps/tailwindcss-react-table-storybook/stories/features"
               target="_blank"
             >
               here on GitHub.

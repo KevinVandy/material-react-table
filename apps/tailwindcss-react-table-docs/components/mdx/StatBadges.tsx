@@ -49,22 +49,22 @@ export const StatBadges = () => {
       </a>
       <a
         aria-label="GitHub Stars"
-        href="https://star-history.com/#kevinvandy/tailwindcss-react-table&Date"
+        href="https://star-history.com/#jonatasge/tailwindcss-react-table&Date"
         target="_blank_"
       >
         <img
           alt="GitHub Stars"
-          src="https://badgen.net/github/stars/KevinVandy/tailwindcss-react-table?color=blue"
+          src="https://badgen.net/github/stars/jonatasge/tailwindcss-react-table?color=blue"
         />
       </a>
       <a
-        href="https://github.com/KevinVandy/tailwindcss-react-table/blob/main/LICENSE"
+        href="https://github.com/jonatasge/tailwindcss-react-table/blob/main/LICENSE"
         target="_blank"
         rel="noopener"
       >
         <img
           alt=""
-          src="https://badgen.net/github/license/KevinVandy/tailwindcss-react-table?color=blue"
+          src="https://badgen.net/github/license/jonatasge/tailwindcss-react-table?color=blue"
         />
       </a>
     </Box>

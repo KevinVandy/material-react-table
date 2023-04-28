@@ -52,7 +52,7 @@ export const Example = () => {
             color="primary"
             onClick={() =>
               window.open(
-                `mailto:kevinvandy@mailinator.com?subject=Hello ${row.original.firstName}!`,
+                `mailto:jonatasge@mailinator.com?subject=Hello ${row.original.firstName}!`,
               )
             }
           >
