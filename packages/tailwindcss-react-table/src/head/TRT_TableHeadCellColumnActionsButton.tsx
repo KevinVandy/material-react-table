@@ -2,7 +2,7 @@ import React, { MouseEvent, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { TRT_ColumnActionMenu } from '../menus/TRT_ColumnActionMenu';
-import type { TRT_Header, TRT_TableInstance } from '..';
+import type { TRT_Header, TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props {
   header: TRT_Header;
@@ -17,7 +17,7 @@ export const TRT_TableHeadCellColumnActionsButton = ({
     options: {
       icons: { MoreVertIcon },
       localization,
-      muiTableHeadCellColumnActionsButtonProps,
+      tableHeadCellColumnActionsButtonProps,
     },
   } = table;
   const { column } = header;
@@ -32,17 +32,17 @@ export const TRT_TableHeadCellColumnActionsButton = ({
   };
 
   const mTableHeadCellColumnActionsButtonProps =
-    muiTableHeadCellColumnActionsButtonProps instanceof Function
-      ? muiTableHeadCellColumnActionsButtonProps({ column, table })
-      : muiTableHeadCellColumnActionsButtonProps;
+    tableHeadCellColumnActionsButtonProps instanceof Function
+      ? tableHeadCellColumnActionsButtonProps({ column, table })
+      : tableHeadCellColumnActionsButtonProps;
 
   const mcTableHeadCellColumnActionsButtonProps =
-    columnDef.muiTableHeadCellColumnActionsButtonProps instanceof Function
-      ? columnDef.muiTableHeadCellColumnActionsButtonProps({
+    columnDef.tableHeadCellColumnActionsButtonProps instanceof Function
+      ? columnDef.tableHeadCellColumnActionsButtonProps({
           column,
           table,
         })
-      : columnDef.muiTableHeadCellColumnActionsButtonProps;
+      : columnDef.tableHeadCellColumnActionsButtonProps;
 
   const iconButtonProps = {
     ...mTableHeadCellColumnActionsButtonProps,

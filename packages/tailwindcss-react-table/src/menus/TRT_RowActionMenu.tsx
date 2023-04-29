@@ -7,7 +7,7 @@ import {
   commonListItemStyles,
   commonMenuItemStyles,
 } from './TRT_ColumnActionMenu';
-import type { TRT_Row, TRT_TableInstance } from '..';
+import type { TRT_Row, TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props {
   anchorEl: HTMLElement | null;

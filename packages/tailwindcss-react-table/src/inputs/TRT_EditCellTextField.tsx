@@ -2,7 +2,7 @@ import React, { ChangeEvent, FocusEvent, KeyboardEvent, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import type { TextFieldProps } from '@mui/material/TextField';
-import type { TRT_Cell, TRT_TableInstance } from '..';
+import type { TRT_Cell, TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props<TData extends Record<string, any> = {}> {
   cell: TRT_Cell<TData>;
@@ -17,7 +17,7 @@ export const TRT_EditCellTextField = <TData extends Record<string, any> = {}>({
 }: Props<TData>) => {
   const {
     getState,
-    options: { muiTableBodyCellEditTextFieldProps },
+    options: { tableBodyCellEditTextFieldProps },
     refs: { editInputRefs },
     setEditingCell,
     setEditingRow,
@@ -29,19 +29,19 @@ export const TRT_EditCellTextField = <TData extends Record<string, any> = {}>({
   const [value, setValue] = useState(() => cell.getValue<string>());
 
   const mTableBodyCellEditTextFieldProps =
-    muiTableBodyCellEditTextFieldProps instanceof Function
-      ? muiTableBodyCellEditTextFieldProps({ cell, column, row, table })
-      : muiTableBodyCellEditTextFieldProps;
+    tableBodyCellEditTextFieldProps instanceof Function
+      ? tableBodyCellEditTextFieldProps({ cell, column, row, table })
+      : tableBodyCellEditTextFieldProps;
 
   const mcTableBodyCellEditTextFieldProps =
-    columnDef.muiTableBodyCellEditTextFieldProps instanceof Function
-      ? columnDef.muiTableBodyCellEditTextFieldProps({
+    columnDef.tableBodyCellEditTextFieldProps instanceof Function
+      ? columnDef.tableBodyCellEditTextFieldProps({
           cell,
           column,
           row,
           table,
         })
-      : columnDef.muiTableBodyCellEditTextFieldProps;
+      : columnDef.tableBodyCellEditTextFieldProps;
 
   const textFieldProps: TextFieldProps = {
     ...mTableBodyCellEditTextFieldProps,

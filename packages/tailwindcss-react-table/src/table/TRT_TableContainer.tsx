@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import TableContainer from '@mui/material/TableContainer';
 import { TRT_Table } from './TRT_Table';
-import type { TRT_TableInstance } from '..';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 const useIsomorphicLayoutEffect =
   typeof window !== 'undefined' ? useLayoutEffect : useEffect;
@@ -13,17 +13,20 @@ interface Props {
 export const TRT_TableContainer = ({ table }: Props) => {
   const {
     getState,
-    options: { enableStickyHeader, muiTableContainerProps },
+    options: { enableStickyHeader },
     refs: { tableContainerRef, bottomToolbarRef, topToolbarRef },
   } = table;
   const { isFullScreen } = getState();
 
   const [totalToolbarHeight, setTotalToolbarHeight] = useState(0);
 
-  const tableContainerProps =
-    muiTableContainerProps instanceof Function
-      ? muiTableContainerProps({ table })
-      : muiTableContainerProps;
+  let {
+    options: { tableContainerProps },
+  } = table;
+  tableContainerProps =
+    tableContainerProps instanceof Function
+      ? tableContainerProps({ table })
+      : tableContainerProps;
 
   useIsomorphicLayoutEffect(() => {
     const topToolbarHeight =

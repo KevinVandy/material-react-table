@@ -1,7 +1,7 @@
 import React, { DragEvent, RefObject } from 'react';
 import { TRT_GrabHandleButton } from '../buttons/TRT_GrabHandleButton';
 import { reorderColumn } from '../column.utils';
-import type { TRT_Column, TRT_TableInstance } from '..';
+import type { TRT_Column, TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props {
   column: TRT_Column;
@@ -16,7 +16,7 @@ export const TRT_TableHeadCellGrabHandle = ({
 }: Props) => {
   const {
     getState,
-    options: { enableColumnOrdering, muiTableHeadCellDragHandleProps },
+    options: { enableColumnOrdering, tableHeadCellDragHandleProps },
     setColumnOrder,
     setDraggingColumn,
     setHoveredColumn,
@@ -25,14 +25,14 @@ export const TRT_TableHeadCellGrabHandle = ({
   const { hoveredColumn, draggingColumn, columnOrder } = getState();
 
   const mIconButtonProps =
-    muiTableHeadCellDragHandleProps instanceof Function
-      ? muiTableHeadCellDragHandleProps({ column, table })
-      : muiTableHeadCellDragHandleProps;
+    tableHeadCellDragHandleProps instanceof Function
+      ? tableHeadCellDragHandleProps({ column, table })
+      : tableHeadCellDragHandleProps;
 
   const mcIconButtonProps =
-    columnDef.muiTableHeadCellDragHandleProps instanceof Function
-      ? columnDef.muiTableHeadCellDragHandleProps({ column, table })
-      : columnDef.muiTableHeadCellDragHandleProps;
+    columnDef.tableHeadCellDragHandleProps instanceof Function
+      ? columnDef.tableHeadCellDragHandleProps({ column, table })
+      : columnDef.tableHeadCellDragHandleProps;
 
   const iconButtonProps = {
     ...mIconButtonProps,

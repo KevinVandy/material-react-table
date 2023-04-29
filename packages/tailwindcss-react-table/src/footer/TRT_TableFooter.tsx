@@ -2,7 +2,7 @@ import React from 'react';
 import TableFooter from '@mui/material/TableFooter';
 import { TRT_TableFooterRow } from './TRT_TableFooterRow';
 import type { VirtualItem } from '@tanstack/react-virtual';
-import type { TRT_TableInstance } from '..';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props {
   table: TRT_TableInstance;
@@ -20,14 +20,17 @@ export const TRT_TableFooter = ({
   const {
     getFooterGroups,
     getState,
-    options: { enableStickyFooter, layoutMode, muiTableFooterProps },
+    options: { enableStickyFooter, layoutMode },
   } = table;
   const { isFullScreen } = getState();
 
-  const tableFooterProps =
-    muiTableFooterProps instanceof Function
-      ? muiTableFooterProps({ table })
-      : muiTableFooterProps;
+  let {
+    options: { tableFooterProps },
+  } = table;
+  tableFooterProps =
+    tableFooterProps instanceof Function
+      ? tableFooterProps({ table })
+      : tableFooterProps;
 
   const stickFooter =
     (isFullScreen || enableStickyFooter) && enableStickyFooter !== false;

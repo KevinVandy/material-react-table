@@ -1,5 +1,5 @@
 import React, { DragEvent, RefObject } from 'react';
-import { TRT_Cell, TRT_TableInstance } from '..';
+import { TRT_Cell, TRT_TableInstance } from '../TailwindCSSReactTable.d';
 import { TRT_GrabHandleButton } from '../buttons/TRT_GrabHandleButton';
 
 interface Props {
@@ -10,14 +10,14 @@ interface Props {
 
 export const TRT_TableBodyRowGrabHandle = ({ cell, rowRef, table }: Props) => {
   const {
-    options: { muiTableBodyRowDragHandleProps },
+    options: { tableBodyRowDragHandleProps },
   } = table;
   const { row } = cell;
 
   const iconButtonProps =
-    muiTableBodyRowDragHandleProps instanceof Function
-      ? muiTableBodyRowDragHandleProps({ row, table })
-      : muiTableBodyRowDragHandleProps;
+    tableBodyRowDragHandleProps instanceof Function
+      ? tableBodyRowDragHandleProps({ row, table })
+      : tableBodyRowDragHandleProps;
 
   const handleDragStart = (event: DragEvent<HTMLButtonElement>) => {
     iconButtonProps?.onDragStart?.(event);

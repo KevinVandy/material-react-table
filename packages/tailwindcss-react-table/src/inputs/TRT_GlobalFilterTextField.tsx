@@ -13,7 +13,7 @@ import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
 import { debounce } from '@mui/material/utils';
 import { TRT_FilterOptionMenu } from '../menus/TRT_FilterOptionMenu';
-import type { TRT_TableInstance } from '..';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props<TData extends Record<string, any> = {}> {
   table: TRT_TableInstance<TData>;
@@ -32,16 +32,16 @@ export const TRT_GlobalFilterTextField = <
       icons: { SearchIcon, CloseIcon },
       localization,
       manualFiltering,
-      muiSearchTextFieldProps,
+      searchTextFieldProps,
     },
     refs: { searchInputRef },
   } = table;
   const { globalFilter, showGlobalFilter } = getState();
 
   const textFieldProps =
-    muiSearchTextFieldProps instanceof Function
-      ? muiSearchTextFieldProps({ table })
-      : muiSearchTextFieldProps;
+    searchTextFieldProps instanceof Function
+      ? searchTextFieldProps({ table })
+      : searchTextFieldProps;
 
   const isMounted = useRef(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

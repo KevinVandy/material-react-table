@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import { darken, lighten } from '@mui/material/styles';
 import highlightWords from 'highlight-words';
-import type { TRT_Cell, TRT_TableInstance } from '..';
+import type { TRT_Cell, TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 const allowedTypes = ['string', 'number'];
 

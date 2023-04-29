@@ -8,7 +8,7 @@ import { TRT_ToolbarAlertBanner } from './TRT_ToolbarAlertBanner';
 import { TRT_ToolbarDropZone } from './TRT_ToolbarDropZone';
 import { TRT_LinearProgressBar } from './TRT_LinearProgressBar';
 import { commonToolbarStyles } from './TRT_TopToolbar';
-import type { TRT_TableInstance } from '..';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props<TData extends Record<string, any> = {}> {
   table: TRT_TableInstance<TData>;
@@ -21,7 +21,7 @@ export const TRT_BottomToolbar = <TData extends Record<string, any> = {}>({
     getState,
     options: {
       enablePagination,
-      muiBottomToolbarProps,
+      bottomToolbarProps,
       positionPagination,
       positionToolbarAlertBanner,
       positionToolbarDropZone,
@@ -34,9 +34,9 @@ export const TRT_BottomToolbar = <TData extends Record<string, any> = {}>({
   const isMobile = useMediaQuery('(max-width:720px)');
 
   const toolbarProps =
-    muiBottomToolbarProps instanceof Function
-      ? muiBottomToolbarProps({ table })
-      : muiBottomToolbarProps;
+    bottomToolbarProps instanceof Function
+      ? bottomToolbarProps({ table })
+      : bottomToolbarProps;
 
   const stackAlertBanner = isMobile || !!renderBottomToolbarCustomActions;
 

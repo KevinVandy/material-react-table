@@ -3,7 +3,7 @@ import Paper from '@mui/material/Paper';
 import { TRT_TopToolbar } from '../toolbar/TRT_TopToolbar';
 import { TRT_BottomToolbar } from '../toolbar/TRT_BottomToolbar';
 import { TRT_TableContainer } from './TRT_TableContainer';
-import type { TRT_TableInstance } from '..';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props {
   table: TRT_TableInstance;
@@ -15,7 +15,6 @@ export const TRT_TablePaper = ({ table }: Props) => {
     options: {
       enableBottomToolbar,
       enableTopToolbar,
-      muiTablePaperProps,
       renderBottomToolbar,
       renderTopToolbar,
     },
@@ -23,10 +22,13 @@ export const TRT_TablePaper = ({ table }: Props) => {
   } = table;
   const { isFullScreen } = getState();
 
-  const tablePaperProps =
-    muiTablePaperProps instanceof Function
-      ? muiTablePaperProps({ table })
-      : muiTablePaperProps;
+  let {
+    options: { tablePaperProps },
+  } = table;
+  tablePaperProps =
+    tablePaperProps instanceof Function
+      ? tablePaperProps({ table })
+      : tablePaperProps;
 
   return (
     <Paper

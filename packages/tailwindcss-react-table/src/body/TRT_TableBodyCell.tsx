@@ -20,7 +20,7 @@ import {
   getIsLastColumn,
 } from '../column.utils';
 import type { VirtualItem } from '@tanstack/react-virtual';
-import type { TRT_Cell, TRT_TableInstance } from '..';
+import type { TRT_Cell, TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props {
   cell: TRT_Cell;
@@ -52,8 +52,8 @@ export const TRT_TableBodyCell = ({
       enableGrouping,
       enableRowNumbers,
       layoutMode,
-      muiTableBodyCellProps,
-      muiTableBodyCellSkeletonProps,
+      tableBodyCellProps,
+      tableBodyCellSkeletonProps,
       rowNumberMode,
     },
     refs: { editInputRefs },
@@ -76,14 +76,14 @@ export const TRT_TableBodyCell = ({
   const { columnDefType } = columnDef;
 
   const mTableCellBodyProps =
-    muiTableBodyCellProps instanceof Function
-      ? muiTableBodyCellProps({ cell, column, row, table })
-      : muiTableBodyCellProps;
+    tableBodyCellProps instanceof Function
+      ? tableBodyCellProps({ cell, column, row, table })
+      : tableBodyCellProps;
 
   const mcTableCellBodyProps =
-    columnDef.muiTableBodyCellProps instanceof Function
-      ? columnDef.muiTableBodyCellProps({ cell, column, row, table })
-      : columnDef.muiTableBodyCellProps;
+    columnDef.tableBodyCellProps instanceof Function
+      ? columnDef.tableBodyCellProps({ cell, column, row, table })
+      : columnDef.tableBodyCellProps;
 
   const tableCellProps = {
     ...mTableCellBodyProps,
@@ -91,9 +91,9 @@ export const TRT_TableBodyCell = ({
   };
 
   const skeletonProps =
-    muiTableBodyCellSkeletonProps instanceof Function
-      ? muiTableBodyCellSkeletonProps({ cell, column, row, table })
-      : muiTableBodyCellSkeletonProps;
+    tableBodyCellSkeletonProps instanceof Function
+      ? tableBodyCellSkeletonProps({ cell, column, row, table })
+      : tableBodyCellSkeletonProps;
 
   const [skeletonWidth, setSkeletonWidth] = useState(0);
   useEffect(

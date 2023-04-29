@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import TablePagination from '@mui/material/TablePagination';
-import type { TRT_TableInstance } from '..';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props<TData extends Record<string, any> = {}> {
   position?: 'top' | 'bottom';
@@ -16,12 +16,7 @@ export const TRT_TablePagination = <TData extends Record<string, any> = {}>({
     getState,
     setPageIndex,
     setPageSize,
-    options: {
-      muiTablePaginationProps,
-      enableToolbarInternalActions,
-      localization,
-      rowCount,
-    },
+    options: { enableToolbarInternalActions, localization, rowCount },
   } = table;
   const {
     pagination: { pageSize = 10, pageIndex = 0 },
@@ -31,10 +26,13 @@ export const TRT_TablePagination = <TData extends Record<string, any> = {}>({
   const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
   const showFirstLastPageButtons = totalRowCount / pageSize > 2;
 
-  const tablePaginationProps =
-    muiTablePaginationProps instanceof Function
-      ? muiTablePaginationProps({ table })
-      : muiTablePaginationProps;
+  let {
+    options: { tablePaginationProps },
+  } = table;
+  tablePaginationProps =
+    tablePaginationProps instanceof Function
+      ? tablePaginationProps({ table })
+      : tablePaginationProps;
 
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     setPageSize(+event.target.value);

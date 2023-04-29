@@ -17,7 +17,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { debounce } from '@mui/material/utils';
 import { TRT_FilterOptionMenu } from '../menus/TRT_FilterOptionMenu';
 import type { TextFieldProps } from '@mui/material/TextField';
-import type { TRT_Header, TRT_TableInstance } from '..';
+import type { TRT_Header, TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props {
   header: TRT_Header;
@@ -37,7 +37,7 @@ export const TRT_FilterTextField = ({
       icons: { FilterListIcon, CloseIcon },
       localization,
       manualFiltering,
-      muiTableHeadCellFilterTextFieldProps,
+      tableHeadCellFilterTextFieldProps,
     },
     refs: { filterInputRefs },
     setColumnFilterFns,
@@ -46,22 +46,22 @@ export const TRT_FilterTextField = ({
   const { columnDef } = column;
 
   const mTableHeadCellFilterTextFieldProps =
-    muiTableHeadCellFilterTextFieldProps instanceof Function
-      ? muiTableHeadCellFilterTextFieldProps({
+    tableHeadCellFilterTextFieldProps instanceof Function
+      ? tableHeadCellFilterTextFieldProps({
           column,
           table,
           rangeFilterIndex,
         })
-      : muiTableHeadCellFilterTextFieldProps;
+      : tableHeadCellFilterTextFieldProps;
 
   const mcTableHeadCellFilterTextFieldProps =
-    columnDef.muiTableHeadCellFilterTextFieldProps instanceof Function
-      ? columnDef.muiTableHeadCellFilterTextFieldProps({
+    columnDef.tableHeadCellFilterTextFieldProps instanceof Function
+      ? columnDef.tableHeadCellFilterTextFieldProps({
           column,
           table,
           rangeFilterIndex,
         })
-      : columnDef.muiTableHeadCellFilterTextFieldProps;
+      : columnDef.tableHeadCellFilterTextFieldProps;
 
   const textFieldProps = {
     ...mTableHeadCellFilterTextFieldProps,

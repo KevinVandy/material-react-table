@@ -1,7 +1,7 @@
 import React from 'react';
 import TableCell from '@mui/material/TableCell';
 import { getCommonCellStyles } from '../column.utils';
-import type { TRT_Header, TRT_TableInstance } from '..';
+import type { TRT_Header, TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props {
   footer: TRT_Header;
@@ -11,7 +11,7 @@ interface Props {
 export const TRT_TableFooterCell = ({ footer, table }: Props) => {
   const {
     getState,
-    options: { layoutMode, muiTableFooterCellProps },
+    options: { layoutMode, tableFooterCellProps },
   } = table;
   const { density } = getState();
   const { column } = footer;
@@ -19,14 +19,14 @@ export const TRT_TableFooterCell = ({ footer, table }: Props) => {
   const { columnDefType } = columnDef;
 
   const mTableFooterCellProps =
-    muiTableFooterCellProps instanceof Function
-      ? muiTableFooterCellProps({ column, table })
-      : muiTableFooterCellProps;
+    tableFooterCellProps instanceof Function
+      ? tableFooterCellProps({ column, table })
+      : tableFooterCellProps;
 
   const mcTableFooterCellProps =
-    columnDef.muiTableFooterCellProps instanceof Function
-      ? columnDef.muiTableFooterCellProps({ column, table })
-      : columnDef.muiTableFooterCellProps;
+    columnDef.tableFooterCellProps instanceof Function
+      ? columnDef.tableFooterCellProps({ column, table })
+      : columnDef.tableFooterCellProps;
 
   const tableCellProps = {
     ...mTableFooterCellProps,

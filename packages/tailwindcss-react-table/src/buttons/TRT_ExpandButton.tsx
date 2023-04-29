@@ -1,7 +1,7 @@
 import React, { MouseEvent } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import type { TRT_Row, TRT_TableInstance } from '..';
+import type { TRT_Row, TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props<TData extends Record<string, any> = {}> {
   row: TRT_Row<TData>;
@@ -17,16 +17,16 @@ export const TRT_ExpandButton = <TData extends Record<string, any> = {}>({
     options: {
       icons: { ExpandMoreIcon },
       localization,
-      muiExpandButtonProps,
+      expandButtonProps,
       renderDetailPanel,
     },
   } = table;
   const { density } = getState();
 
   const iconButtonProps =
-    muiExpandButtonProps instanceof Function
-      ? muiExpandButtonProps({ table, row })
-      : muiExpandButtonProps;
+    expandButtonProps instanceof Function
+      ? expandButtonProps({ table, row })
+      : expandButtonProps;
 
   const canExpand = row.getCanExpand();
   const isExpanded = row.getIsExpanded();

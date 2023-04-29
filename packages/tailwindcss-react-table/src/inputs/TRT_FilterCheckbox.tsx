@@ -3,7 +3,7 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Tooltip from '@mui/material/Tooltip';
 import type { CheckboxProps } from '@mui/material/Checkbox';
-import type { TRT_Column, TRT_TableInstance } from '..';
+import type { TRT_Column, TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props {
   column: TRT_Column;
@@ -13,26 +13,26 @@ interface Props {
 export const TRT_FilterCheckbox = ({ column, table }: Props) => {
   const {
     getState,
-    options: { localization, muiTableHeadCellFilterCheckboxProps },
+    options: { localization, tableHeadCellFilterCheckboxProps },
   } = table;
   const { density } = getState();
   const { columnDef } = column;
 
   const mTableHeadCellFilterCheckboxProps =
-    muiTableHeadCellFilterCheckboxProps instanceof Function
-      ? muiTableHeadCellFilterCheckboxProps({
+    tableHeadCellFilterCheckboxProps instanceof Function
+      ? tableHeadCellFilterCheckboxProps({
           column,
           table,
         })
-      : muiTableHeadCellFilterCheckboxProps;
+      : tableHeadCellFilterCheckboxProps;
 
   const mcTableHeadCellFilterCheckboxProps =
-    columnDef.muiTableHeadCellFilterCheckboxProps instanceof Function
-      ? columnDef.muiTableHeadCellFilterCheckboxProps({
+    columnDef.tableHeadCellFilterCheckboxProps instanceof Function
+      ? columnDef.tableHeadCellFilterCheckboxProps({
           column,
           table,
         })
-      : columnDef.muiTableHeadCellFilterCheckboxProps;
+      : columnDef.tableHeadCellFilterCheckboxProps;
 
   const checkboxProps = {
     ...mTableHeadCellFilterCheckboxProps,

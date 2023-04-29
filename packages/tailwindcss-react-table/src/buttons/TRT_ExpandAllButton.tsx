@@ -1,7 +1,7 @@
 import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import type { TRT_TableInstance } from '..';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props {
   table: TRT_TableInstance;
@@ -16,7 +16,7 @@ export const TRT_ExpandAllButton = ({ table }: Props) => {
     options: {
       icons: { KeyboardDoubleArrowDownIcon },
       localization,
-      muiExpandAllButtonProps,
+      expandAllButtonProps,
       renderDetailPanel,
     },
     toggleAllRowsExpanded,
@@ -24,9 +24,9 @@ export const TRT_ExpandAllButton = ({ table }: Props) => {
   const { density, isLoading } = getState();
 
   const iconButtonProps =
-    muiExpandAllButtonProps instanceof Function
-      ? muiExpandAllButtonProps({ table })
-      : muiExpandAllButtonProps;
+    expandAllButtonProps instanceof Function
+      ? expandAllButtonProps({ table })
+      : expandAllButtonProps;
 
   const isAllRowsExpanded = getIsAllRowsExpanded();
 

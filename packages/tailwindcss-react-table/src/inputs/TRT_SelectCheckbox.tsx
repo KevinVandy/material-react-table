@@ -3,7 +3,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Tooltip from '@mui/material/Tooltip';
 import Radio from '@mui/material/Radio';
 import type { Theme } from '@mui/material/styles';
-import type { TRT_Row, TRT_TableInstance } from '..';
+import type { TRT_Row, TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props {
   row?: TRT_Row;
@@ -17,20 +17,20 @@ export const TRT_SelectCheckbox = ({ row, selectAll, table }: Props) => {
     options: {
       localization,
       enableMultiRowSelection,
-      muiSelectCheckboxProps,
-      muiSelectAllCheckboxProps,
+      selectCheckboxProps,
+      selectAllCheckboxProps,
       selectAllMode,
     },
   } = table;
   const { density, isLoading } = getState();
 
   const checkboxProps = !row
-    ? muiSelectAllCheckboxProps instanceof Function
-      ? muiSelectAllCheckboxProps({ table })
-      : muiSelectAllCheckboxProps
-    : muiSelectCheckboxProps instanceof Function
-    ? muiSelectCheckboxProps({ row, table })
-    : muiSelectCheckboxProps;
+    ? selectAllCheckboxProps instanceof Function
+      ? selectAllCheckboxProps({ table })
+      : selectAllCheckboxProps
+    : selectCheckboxProps instanceof Function
+    ? selectCheckboxProps({ row, table })
+    : selectCheckboxProps;
 
   const allRowsSelected = selectAll
     ? selectAllMode === 'page'

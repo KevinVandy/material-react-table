@@ -4,7 +4,11 @@ import { alpha, darken, lighten } from '@mui/material/styles';
 import { Memo_TRT_TableBodyCell, TRT_TableBodyCell } from './TRT_TableBodyCell';
 import { TRT_TableDetailPanel } from './TRT_TableDetailPanel';
 import type { VirtualItem, Virtualizer } from '@tanstack/react-virtual';
-import type { TRT_Cell, TRT_Row, TRT_TableInstance } from '..';
+import type {
+  TRT_Cell,
+  TRT_Row,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.d';
 
 interface Props {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
@@ -37,7 +41,7 @@ export const TRT_TableBodyRow = ({
       enableRowOrdering,
       layoutMode,
       memoMode,
-      muiTableBodyRowProps,
+      tableBodyRowProps,
       renderDetailPanel,
     },
     setHoveredRow,
@@ -46,9 +50,9 @@ export const TRT_TableBodyRow = ({
     getState();
 
   const tableRowProps =
-    muiTableBodyRowProps instanceof Function
-      ? muiTableBodyRowProps({ row, staticRowIndex: rowIndex, table })
-      : muiTableBodyRowProps;
+    tableBodyRowProps instanceof Function
+      ? tableBodyRowProps({ row, staticRowIndex: rowIndex, table })
+      : tableBodyRowProps;
 
   const handleDragEnter = (_e: DragEvent) => {
     if (enableRowOrdering && draggingRow) {

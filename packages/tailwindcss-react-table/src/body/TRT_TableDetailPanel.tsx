@@ -4,7 +4,7 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { lighten } from '@mui/material/styles';
 import type { VirtualItem } from '@tanstack/react-virtual';
-import type { TRT_Row, TRT_TableInstance } from '..';
+import type { TRT_Row, TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props {
   parentRowRef: React.RefObject<HTMLTableRowElement>;
@@ -26,27 +26,27 @@ export const TRT_TableDetailPanel = ({
     getState,
     options: {
       layoutMode,
-      muiTableBodyRowProps,
-      muiTableDetailPanelProps,
+      tableBodyRowProps,
+      tableDetailPanelProps,
       renderDetailPanel,
     },
   } = table;
   const { isLoading } = getState();
 
   const tableRowProps =
-    muiTableBodyRowProps instanceof Function
-      ? muiTableBodyRowProps({
+    tableBodyRowProps instanceof Function
+      ? tableBodyRowProps({
           isDetailPanel: true,
           row,
           staticRowIndex: rowIndex,
           table,
         })
-      : muiTableBodyRowProps;
+      : tableBodyRowProps;
 
   const tableCellProps =
-    muiTableDetailPanelProps instanceof Function
-      ? muiTableDetailPanelProps({ row, table })
-      : muiTableDetailPanelProps;
+    tableDetailPanelProps instanceof Function
+      ? tableDetailPanelProps({ row, table })
+      : tableDetailPanelProps;
 
   return (
     <TableRow

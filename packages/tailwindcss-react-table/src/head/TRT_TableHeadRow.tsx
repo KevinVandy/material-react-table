@@ -3,7 +3,11 @@ import TableRow from '@mui/material/TableRow';
 import { alpha, lighten } from '@mui/material/styles';
 import { TRT_TableHeadCell } from './TRT_TableHeadCell';
 import type { VirtualItem } from '@tanstack/react-virtual';
-import type { TRT_Header, TRT_HeaderGroup, TRT_TableInstance } from '..';
+import type {
+  TRT_Header,
+  TRT_HeaderGroup,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.d';
 
 interface Props {
   headerGroup: TRT_HeaderGroup;
@@ -21,13 +25,13 @@ export const TRT_TableHeadRow = ({
   virtualPaddingRight,
 }: Props) => {
   const {
-    options: { layoutMode, muiTableHeadRowProps },
+    options: { layoutMode, tableHeadRowProps },
   } = table;
 
   const tableRowProps =
-    muiTableHeadRowProps instanceof Function
-      ? muiTableHeadRowProps({ headerGroup, table })
-      : muiTableHeadRowProps;
+    tableHeadRowProps instanceof Function
+      ? tableHeadRowProps({ headerGroup, table })
+      : tableHeadRowProps;
 
   return (
     <TableRow

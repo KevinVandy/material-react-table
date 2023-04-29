@@ -3,7 +3,11 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { TRT_RowActionMenu } from '../menus/TRT_RowActionMenu';
 import { TRT_EditActionButtons } from './TRT_EditActionButtons';
-import type { TRT_Cell, TRT_Row, TRT_TableInstance } from '..';
+import type {
+  TRT_Cell,
+  TRT_Row,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.d';
 
 const commonIconButtonStyles = {
   height: '2rem',

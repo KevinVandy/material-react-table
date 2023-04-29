@@ -9,7 +9,7 @@ import { TRT_TablePagination } from './TRT_TablePagination';
 import { TRT_ToolbarAlertBanner } from './TRT_ToolbarAlertBanner';
 import { TRT_ToolbarInternalButtons } from './TRT_ToolbarInternalButtons';
 import { TRT_ToolbarDropZone } from './TRT_ToolbarDropZone';
-import type { TRT_TableInstance } from '..';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
 import type { Theme } from '@mui/material/styles';
 
 export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
@@ -38,7 +38,7 @@ export const TRT_TopToolbar = <TData extends Record<string, any> = {}>({
       enableGlobalFilter,
       enablePagination,
       enableToolbarInternalActions,
-      muiTopToolbarProps,
+      topToolbarProps,
       positionGlobalFilter,
       positionPagination,
       positionToolbarAlertBanner,
@@ -53,9 +53,9 @@ export const TRT_TopToolbar = <TData extends Record<string, any> = {}>({
   const isMobile = useMediaQuery('(max-width:720px)');
 
   const toolbarProps =
-    muiTopToolbarProps instanceof Function
-      ? muiTopToolbarProps({ table })
-      : muiTopToolbarProps;
+    topToolbarProps instanceof Function
+      ? topToolbarProps({ table })
+      : topToolbarProps;
 
   const stackAlertBanner =
     isMobile || !!renderTopToolbarCustomActions || showGlobalFilter;

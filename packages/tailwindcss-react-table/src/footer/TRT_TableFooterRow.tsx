@@ -3,7 +3,11 @@ import TableRow from '@mui/material/TableRow';
 import { lighten } from '@mui/material/styles';
 import { TRT_TableFooterCell } from './TRT_TableFooterCell';
 import type { VirtualItem } from '@tanstack/react-virtual';
-import type { TRT_Header, TRT_HeaderGroup, TRT_TableInstance } from '..';
+import type {
+  TRT_Header,
+  TRT_HeaderGroup,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.d';
 
 interface Props {
   footerGroup: TRT_HeaderGroup;
@@ -21,7 +25,7 @@ export const TRT_TableFooterRow = ({
   virtualPaddingRight,
 }: Props) => {
   const {
-    options: { layoutMode, muiTableFooterRowProps },
+    options: { layoutMode, tableFooterRowProps },
   } = table;
 
   // if no content in row, skip row
@@ -36,9 +40,9 @@ export const TRT_TableFooterRow = ({
     return null;
 
   const tableRowProps =
-    muiTableFooterRowProps instanceof Function
-      ? muiTableFooterRowProps({ footerGroup, table })
-      : muiTableFooterRowProps;
+    tableFooterRowProps instanceof Function
+      ? tableFooterRowProps({ footerGroup, table })
+      : tableFooterRowProps;
 
   return (
     <TableRow

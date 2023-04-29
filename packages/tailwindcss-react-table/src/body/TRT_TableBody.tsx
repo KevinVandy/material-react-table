@@ -8,7 +8,7 @@ import TableBody from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';
 import { Memo_TRT_TableBodyRow, TRT_TableBodyRow } from './TRT_TableBodyRow';
 import { rankGlobalFuzzy } from '../sortingFns';
-import type { TRT_Row, TRT_TableInstance } from '..';
+import type { TRT_Row, TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
@@ -41,7 +41,6 @@ export const TRT_TableBody = ({
       manualPagination,
       manualSorting,
       memoMode,
-      muiTableBodyProps,
       renderEmptyRowsFallback,
       rowVirtualizerInstanceRef,
       rowVirtualizerProps,
@@ -60,10 +59,13 @@ export const TRT_TableBody = ({
     sorting,
   } = getState();
 
-  const tableBodyProps =
-    muiTableBodyProps instanceof Function
-      ? muiTableBodyProps({ table })
-      : muiTableBodyProps;
+  let {
+    options: { tableBodyProps },
+  } = table;
+  tableBodyProps =
+    tableBodyProps instanceof Function
+      ? tableBodyProps({ table })
+      : tableBodyProps;
 
   const vProps_old =
     virtualizerProps instanceof Function

@@ -3,7 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import type { IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { TRT_ShowHideColumnsMenu } from '../menus/TRT_ShowHideColumnsMenu';
-import type { TRT_TableInstance } from '..';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props<TData extends Record<string, any> = {}>
   extends IconButtonProps {

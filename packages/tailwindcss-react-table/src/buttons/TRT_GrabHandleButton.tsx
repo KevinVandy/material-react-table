@@ -2,7 +2,7 @@ import React, { DragEventHandler } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import type { IconButtonProps } from '@mui/material/IconButton';
-import type { TRT_TableInstance } from '..';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props<TData extends Record<string, any> = {}> {
   iconButtonProps?: IconButtonProps;

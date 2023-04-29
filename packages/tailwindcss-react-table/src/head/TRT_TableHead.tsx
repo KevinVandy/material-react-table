@@ -2,7 +2,7 @@ import React from 'react';
 import TableHead from '@mui/material/TableHead';
 import { TRT_TableHeadRow } from './TRT_TableHeadRow';
 import type { VirtualItem } from '@tanstack/react-virtual';
-import type { TRT_TableInstance } from '..';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props {
   table: TRT_TableInstance;
@@ -20,14 +20,17 @@ export const TRT_TableHead = ({
   const {
     getHeaderGroups,
     getState,
-    options: { enableStickyHeader, layoutMode, muiTableHeadProps },
+    options: { enableStickyHeader, layoutMode },
   } = table;
   const { isFullScreen } = getState();
 
-  const tableHeadProps =
-    muiTableHeadProps instanceof Function
-      ? muiTableHeadProps({ table })
-      : muiTableHeadProps;
+  let {
+    options: { tableHeadProps },
+  } = table;
+  tableHeadProps =
+    tableHeadProps instanceof Function
+      ? tableHeadProps({ table })
+      : tableHeadProps;
 
   const stickyHeader = enableStickyHeader || isFullScreen;
 

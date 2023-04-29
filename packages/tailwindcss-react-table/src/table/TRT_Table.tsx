@@ -10,7 +10,7 @@ import { TRT_TableHead } from '../head/TRT_TableHead';
 import { Memo_TRT_TableBody, TRT_TableBody } from '../body/TRT_TableBody';
 import { TRT_TableFooter } from '../footer/TRT_TableFooter';
 import { parseCSSVarId } from '../column.utils';
-import type { TRT_TableInstance } from '..';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props {
   table: TRT_TableInstance;
@@ -32,7 +32,6 @@ export const TRT_Table = ({ table }: Props) => {
       enableTableHead,
       layoutMode,
       memoMode,
-      muiTableProps,
     },
     refs: { tableContainerRef },
   } = table;
@@ -44,10 +43,11 @@ export const TRT_Table = ({ table }: Props) => {
     isFullScreen,
   } = getState();
 
-  const tableProps =
-    muiTableProps instanceof Function
-      ? muiTableProps({ table })
-      : muiTableProps;
+  let {
+    options: { tableProps },
+  } = table;
+  tableProps =
+    tableProps instanceof Function ? tableProps({ table }) : tableProps;
 
   const vProps =
     columnVirtualizerProps instanceof Function

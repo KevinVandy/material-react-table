@@ -5,7 +5,7 @@ import { TRT_ShowHideColumnsButton } from '../buttons/TRT_ShowHideColumnsButton'
 import { TRT_ToggleDensePaddingButton } from '../buttons/TRT_ToggleDensePaddingButton';
 import { TRT_ToggleFiltersButton } from '../buttons/TRT_ToggleFiltersButton';
 import { TRT_ToggleGlobalFilterButton } from '../buttons/TRT_ToggleGlobalFilterButton';
-import type { TRT_TableInstance } from '..';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props<TData extends Record<string, any> = {}> {
   table: TRT_TableInstance<TData>;

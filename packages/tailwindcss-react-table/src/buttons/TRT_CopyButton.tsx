@@ -1,7 +1,7 @@
 import React, { MouseEvent, ReactNode, useState } from 'react';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
-import { TRT_Cell, TRT_TableInstance } from '..';
+import { TRT_Cell, TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props<TData extends Record<string, any> = {}> {
   cell: TRT_Cell<TData>;
@@ -15,7 +15,7 @@ export const TRT_CopyButton = <TData extends Record<string, any> = {}>({
   table,
 }: Props<TData>) => {
   const {
-    options: { localization, muiTableBodyCellCopyButtonProps },
+    options: { localization, tableBodyCellCopyButtonProps },
   } = table;
   const { column, row } = cell;
   const { columnDef } = column;
@@ -30,19 +30,19 @@ export const TRT_CopyButton = <TData extends Record<string, any> = {}>({
   };
 
   const mTableBodyCellCopyButtonProps =
-    muiTableBodyCellCopyButtonProps instanceof Function
-      ? muiTableBodyCellCopyButtonProps({ cell, column, row, table })
-      : muiTableBodyCellCopyButtonProps;
+    tableBodyCellCopyButtonProps instanceof Function
+      ? tableBodyCellCopyButtonProps({ cell, column, row, table })
+      : tableBodyCellCopyButtonProps;
 
   const mcTableBodyCellCopyButtonProps =
-    columnDef.muiTableBodyCellCopyButtonProps instanceof Function
-      ? columnDef.muiTableBodyCellCopyButtonProps({
+    columnDef.tableBodyCellCopyButtonProps instanceof Function
+      ? columnDef.tableBodyCellCopyButtonProps({
           cell,
           column,
           row,
           table,
         })
-      : columnDef.muiTableBodyCellCopyButtonProps;
+      : columnDef.tableBodyCellCopyButtonProps;
 
   const buttonProps = {
     ...mTableBodyCellCopyButtonProps,

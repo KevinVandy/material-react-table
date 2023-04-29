@@ -4,7 +4,7 @@ import AlertTitle from '@mui/material/AlertTitle';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Collapse from '@mui/material/Collapse';
-import type { TRT_TableInstance } from '..';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props<TData extends Record<string, any> = {}> {
   stackAlertBanner: boolean;
@@ -21,8 +21,8 @@ export const TRT_ToolbarAlertBanner = <TData extends Record<string, any> = {}>({
     getState,
     options: {
       localization,
-      muiToolbarAlertBannerProps,
-      muiToolbarAlertBannerChipProps,
+      toolbarAlertBannerProps,
+      toolbarAlertBannerChipProps,
       positionToolbarAlertBanner,
       rowCount,
     },
@@ -30,14 +30,14 @@ export const TRT_ToolbarAlertBanner = <TData extends Record<string, any> = {}>({
   const { grouping, showAlertBanner } = getState();
 
   const alertProps =
-    muiToolbarAlertBannerProps instanceof Function
-      ? muiToolbarAlertBannerProps({ table })
-      : muiToolbarAlertBannerProps;
+    toolbarAlertBannerProps instanceof Function
+      ? toolbarAlertBannerProps({ table })
+      : toolbarAlertBannerProps;
 
   const chipProps =
-    muiToolbarAlertBannerChipProps instanceof Function
-      ? muiToolbarAlertBannerChipProps({ table })
-      : muiToolbarAlertBannerChipProps;
+    toolbarAlertBannerChipProps instanceof Function
+      ? toolbarAlertBannerChipProps({ table })
+      : toolbarAlertBannerChipProps;
 
   const selectMessage =
     getSelectedRowModel().rows.length > 0

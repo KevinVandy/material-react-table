@@ -10,7 +10,7 @@ import { TRT_TableHeadCellResizeHandle } from './TRT_TableHeadCellResizeHandle';
 import { TRT_TableHeadCellSortLabel } from './TRT_TableHeadCellSortLabel';
 import { getCommonCellStyles } from '../column.utils';
 import type { Theme } from '@mui/material/styles';
-import type { TRT_Header, TRT_TableInstance } from '..';
+import type { TRT_Header, TRT_TableInstance } from '../TailwindCSSReactTable.d';
 
 interface Props {
   header: TRT_Header;
@@ -28,7 +28,7 @@ export const TRT_TableHeadCell = ({ header, table }: Props) => {
       enableGrouping,
       enableMultiSort,
       layoutMode,
-      muiTableHeadCellProps,
+      tableHeadCellProps,
     },
     refs: { tableHeadCellRefs },
     setHoveredColumn,
@@ -45,14 +45,14 @@ export const TRT_TableHeadCell = ({ header, table }: Props) => {
   const { columnDefType } = columnDef;
 
   const mTableHeadCellProps =
-    muiTableHeadCellProps instanceof Function
-      ? muiTableHeadCellProps({ column, table })
-      : muiTableHeadCellProps;
+    tableHeadCellProps instanceof Function
+      ? tableHeadCellProps({ column, table })
+      : tableHeadCellProps;
 
   const mcTableHeadCellProps =
-    columnDef.muiTableHeadCellProps instanceof Function
-      ? columnDef.muiTableHeadCellProps({ column, table })
-      : columnDef.muiTableHeadCellProps;
+    columnDef.tableHeadCellProps instanceof Function
+      ? columnDef.tableHeadCellProps({ column, table })
+      : columnDef.tableHeadCellProps;
 
   const tableCellProps = {
     ...mTableHeadCellProps,

@@ -2,7 +2,7 @@ import React from 'react';
 import Badge from '@mui/material/Badge';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Tooltip from '@mui/material/Tooltip';
-import { TRT_Header, TRT_TableInstance } from '..';
+import { TRT_Header, TRT_TableInstance } from '../TailwindCSSReactTable.d';
 import type { TableCellProps } from '@mui/material/TableCell';
 
 interface Props {
