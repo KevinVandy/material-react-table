@@ -1,7 +1,8 @@
 import React from 'react';
 import { MoreHorizIcon } from './MoreHorizIcon';
+import { SvgIconProps } from './SvgIcon';
 
-export const MoreVertIcon = (props: JSX.IntrinsicElements['svg']) => (
+export const MoreVertIcon = (props: SvgIconProps) => (
   <MoreHorizIcon
     data-testid="MoreVertIcon"
     style={{ transform: 'rotate(90deg)' }}

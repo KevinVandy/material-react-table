@@ -1,13 +1,8 @@
 import React from 'react';
+import { SvgIcon, SvgIconProps } from './SvgIcon';
 
-export const DensityLargeIcon = (props: JSX.IntrinsicElements['svg']) => (
-  <svg
-    aria-hidden="true"
-    data-testid="DensityLargeIcon"
-    focusable="false"
-    viewBox="0 0 24 24"
-    {...props}
-  >
+export const DensityLargeIcon = (props: SvgIconProps) => (
+  <SvgIcon data-testid="DensityLargeIcon" {...props}>
     <path d="M3 3h18v2H3zm0 16h18v2H3z"></path>
-  </svg>
+  </SvgIcon>
 );
