@@ -35,7 +35,12 @@ export const MRT_TableDetailPanel = ({
 
   const tableRowProps =
     muiTableBodyRowProps instanceof Function
-      ? muiTableBodyRowProps({ isDetailPanel: true, row, staticRowIndex: rowIndex, table })
+      ? muiTableBodyRowProps({
+          isDetailPanel: true,
+          row,
+          staticRowIndex: rowIndex,
+          table,
+        })
       : muiTableBodyRowProps;
 
   const tableCellProps =

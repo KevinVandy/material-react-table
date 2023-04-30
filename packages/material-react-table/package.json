@@ -1,5 +1,5 @@
 {
-  "version": "1.11.0",
+  "version": "1.11.1",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -50,7 +50,7 @@
     "build-no-locales": "pnpm lib:build-no-locales",
     "dev": "pnpm lib:dev",
     "lib:build": "rm -rf dist && pnpm build-no-locales && pnpm build-locales",
-    "lib:build-locales": "rm -rf locales && rollup -c rollup-locales.config.mjs",
+    "lib:build-locales": "export NODE_OPTIONS=--max_old_space_size=8096 && rm -rf locales && rollup -c rollup-locales.config.mjs",
     "lib:build-no-locales": "rm -rf dist && rollup -c rollup.config.mjs && size-limit",
     "lib:dev": "rollup -c rollup.config.mjs --watch",
     "lint": "eslint .",

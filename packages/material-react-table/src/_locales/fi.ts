@@ -42,7 +42,8 @@ export const MRT_Localization_FI: MRT_Localization = {
   filterNotEquals: 'Ei ole yhtä kuin',
   filterStartsWith: 'Alkaa',
   filterWeakEquals: 'On yhtä kuin',
-  filteringByColumn: 'Suodatetaan sarakkeen {column} mukaan - {filterType} {filterValue}',
+  filteringByColumn:
+    'Suodatetaan sarakkeen {column} mukaan - {filterType} {filterValue}',
   goToFirstPage: 'Siirry ensimmäiselle sivulle',
   goToLastPage: 'Siirry viimeiselle sivulle',
   goToNextPage: 'Siirry seuraavalle sivulle',

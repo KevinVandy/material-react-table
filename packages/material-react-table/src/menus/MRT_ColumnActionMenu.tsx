@@ -232,7 +232,11 @@ export const MRT_ColumnActionMenu = ({
             disabled={showColumnFilters && !enableColumnFilterModes}
             divider={enableGrouping || enableHiding}
             key={1}
-            onClick={getState().showColumnFilters ? handleOpenFilterModeMenu : handleFilterByColumn}
+            onClick={
+              showColumnFilters
+                ? handleOpenFilterModeMenu
+                : handleFilterByColumn
+            }
             sx={commonMenuItemStyles}
           >
             <Box sx={commonListItemStyles}>
