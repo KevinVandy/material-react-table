@@ -213,7 +213,7 @@ export const MRT_TableHeadCell = ({ header, table }: Props) => {
             <Box
               className="Mui-TableHeadCell-Content-Wrapper"
               sx={{
-                minWidth: `${Math.min(columnDef.header.length, 5)}ch`,
+                minWidth: `${Math.min(columnDef.header?.length ?? 0, 5)}ch`,
                 overflow: columnDefType === 'data' ? 'hidden' : undefined,
                 textOverflow: 'ellipsis',
                 whiteSpace:
