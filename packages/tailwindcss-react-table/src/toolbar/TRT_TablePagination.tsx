@@ -99,9 +99,9 @@ export const TRT_TablePagination = <TData extends Record<string, any> = {}>({
             : undefined,
         position: 'relative',
         zIndex: 2,
-        ...(tablePaginationProps?.sx instanceof Function
-          ? tablePaginationProps.sx(theme)
-          : (tablePaginationProps?.sx as any)),
+        ...((tablePaginationProps as any)?.sx instanceof Function
+          ? (tablePaginationProps as any).sx(theme)
+          : ((tablePaginationProps as any)?.sx as any)),
       })}
     />
   );
