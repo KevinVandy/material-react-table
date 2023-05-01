@@ -256,7 +256,14 @@ export type TRT_TableState<TData extends Record<string, any> = {}> = Prettify<
   }
 >;
 
-export type TRT_ColumnDef<TData extends Record<string, any> = {}> =
+export type TRT_ColumnDef<
+  TData extends Record<string, any> = {},
+  ButtonProps = any,
+  CheckboxProps = any,
+  IconButtonProps = any,
+  TableCellProps = any,
+  TextFieldProps = any,
+> =
   // Prettify<
   Omit<
     ColumnDef<TData, unknown>,
