@@ -1,5 +1,5 @@
 import React from 'react';
-import { MoreHorizIcon } from './MoreHorizIcon';
+import { MoreHorizIcon } from './MoreHoriz';
 import { SvgIconProps } from './SvgIcon';
 
 export const MoreVertIcon = (props: SvgIconProps) => (

@@ -25,6 +25,10 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "ES6"
+    "target": "ES6",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@fake/*": ["./src/_fake_/*"],
+    }
   }
 }
