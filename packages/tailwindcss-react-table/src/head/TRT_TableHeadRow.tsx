@@ -7,7 +7,7 @@ import type {
   TRT_Header,
   TRT_HeaderGroup,
   TRT_TableInstance,
-} from '../TailwindCSSReactTable.d';
+} from '../TailwindCSSReactTable.types';
 
 interface Props {
   headerGroup: TRT_HeaderGroup;

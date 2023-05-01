@@ -8,7 +8,7 @@ import { TRT_ToolbarAlertBanner } from './TRT_ToolbarAlertBanner';
 import { TRT_ToolbarDropZone } from './TRT_ToolbarDropZone';
 import { TRT_LinearProgressBar } from './TRT_LinearProgressBar';
 import { commonToolbarStyles } from './TRT_TopToolbar';
-import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.types';
 
 interface Props<TData extends Record<string, any> = {}> {
   table: TRT_TableInstance<TData>;

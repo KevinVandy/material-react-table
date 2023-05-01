@@ -39,7 +39,7 @@ import type {
   TRT_DensityState,
   TRT_ColumnOrderState,
   TRT_GroupingState,
-} from '../TailwindCSSReactTable.d';
+} from '../TailwindCSSReactTable.types';
 
 export const TRT_TableRoot: any = <TData extends Record<string, any> = {}>(
   props: TailwindCSSReactTableProps<TData> & { localization: TRT_Localization },

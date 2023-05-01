@@ -8,7 +8,10 @@ import TableBody from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';
 import { Memo_TRT_TableBodyRow, TRT_TableBodyRow } from './TRT_TableBodyRow';
 import { rankGlobalFuzzy } from '../sortingFns';
-import type { TRT_Row, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type {
+  TRT_Row,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.types';
 
 interface Props {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;

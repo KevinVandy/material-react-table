@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import TablePagination from '@mui/material/TablePagination';
-import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.types';
 
 interface Props<TData extends Record<string, any> = {}> {
   position?: 'top' | 'bottom';

@@ -1,7 +1,7 @@
 import React, { MouseEvent, ReactNode, useState } from 'react';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
-import { TRT_Cell, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import { TRT_Cell, TRT_TableInstance } from '../TailwindCSSReactTable.types';
 
 interface Props<TData extends Record<string, any> = {}> {
   cell: TRT_Cell<TData>;

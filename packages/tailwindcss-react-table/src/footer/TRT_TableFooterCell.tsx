@@ -1,7 +1,10 @@
 import React from 'react';
 import TableCell from '@mui/material/TableCell';
 import { getCommonCellStyles } from '../column.utils';
-import type { TRT_Header, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type {
+  TRT_Header,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.types';
 
 interface Props {
   footer: TRT_Header;

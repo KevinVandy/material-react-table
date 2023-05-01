@@ -17,7 +17,10 @@ import Tooltip from '@mui/material/Tooltip';
 import { debounce } from '@mui/material/utils';
 import { TRT_FilterOptionMenu } from '../menus/TRT_FilterOptionMenu';
 import type { TextFieldProps } from '@mui/material/TextField';
-import type { TRT_Header, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type {
+  TRT_Header,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.types';
 
 interface Props {
   header: TRT_Header;

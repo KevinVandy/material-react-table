@@ -10,7 +10,10 @@ import { TRT_TableHeadCellResizeHandle } from './TRT_TableHeadCellResizeHandle';
 import { TRT_TableHeadCellSortLabel } from './TRT_TableHeadCellSortLabel';
 import { getCommonCellStyles } from '../column.utils';
 import type { Theme } from '@mui/material/styles';
-import type { TRT_Header, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type {
+  TRT_Header,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.types';
 
 interface Props {
   header: TRT_Header;

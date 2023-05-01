@@ -20,7 +20,10 @@ import {
   getIsLastColumn,
 } from '../column.utils';
 import type { VirtualItem } from '@tanstack/react-virtual';
-import type { TRT_Cell, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type {
+  TRT_Cell,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.types';
 
 interface Props {
   cell: TRT_Cell;

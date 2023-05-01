@@ -3,7 +3,7 @@ import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
-import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.types';
 
 interface Props<TData extends Record<string, any> = {}> {
   table: TRT_TableInstance<TData>;

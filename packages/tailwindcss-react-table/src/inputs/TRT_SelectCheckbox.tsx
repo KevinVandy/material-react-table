@@ -3,7 +3,10 @@ import Checkbox from '@mui/material/Checkbox';
 import Tooltip from '@mui/material/Tooltip';
 import Radio from '@mui/material/Radio';
 import type { Theme } from '@mui/material/styles';
-import type { TRT_Row, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type {
+  TRT_Row,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.types';
 
 interface Props {
   row?: TRT_Row;

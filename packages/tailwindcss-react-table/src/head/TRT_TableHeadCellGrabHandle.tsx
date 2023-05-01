@@ -1,7 +1,10 @@
 import React, { DragEvent, RefObject } from 'react';
 import { TRT_GrabHandleButton } from '../buttons/TRT_GrabHandleButton';
 import { reorderColumn } from '../column.utils';
-import type { TRT_Column, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type {
+  TRT_Column,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.types';
 
 interface Props {
   column: TRT_Column;

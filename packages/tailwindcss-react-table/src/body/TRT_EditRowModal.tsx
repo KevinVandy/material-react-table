@@ -6,7 +6,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Stack from '@mui/material/Stack';
 import { TRT_EditActionButtons } from '../buttons/TRT_EditActionButtons';
 import { TRT_EditCellTextField } from '../inputs/TRT_EditCellTextField';
-import type { TRT_Row, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type {
+  TRT_Row,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.types';
 
 interface Props<TData extends Record<string, any> = {}> {
   open: boolean;

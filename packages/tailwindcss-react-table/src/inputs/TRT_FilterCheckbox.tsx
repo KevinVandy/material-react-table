@@ -3,7 +3,10 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Tooltip from '@mui/material/Tooltip';
 import type { CheckboxProps } from '@mui/material/Checkbox';
-import type { TRT_Column, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type {
+  TRT_Column,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.types';
 
 interface Props {
   column: TRT_Column;

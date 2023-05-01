@@ -10,7 +10,7 @@ import { TRT_TableHead } from '../head/TRT_TableHead';
 import { Memo_TRT_TableBody, TRT_TableBody } from '../body/TRT_TableBody';
 import { TRT_TableFooter } from '../footer/TRT_TableFooter';
 import { parseCSSVarId } from '../column.utils';
-import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.types';
 
 interface Props {
   table: TRT_TableInstance;

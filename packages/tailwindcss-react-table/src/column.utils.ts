@@ -16,7 +16,7 @@ import type {
   TRT_GroupingState,
   TRT_Header,
   TRT_TableInstance,
-} from './TailwindCSSReactTable.d';
+} from './TailwindCSSReactTable.types';
 
 export const getColumnId = <TData extends Record<string, any> = {}>(
   columnDef: TRT_ColumnDef<TData>,

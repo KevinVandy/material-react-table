@@ -3,7 +3,7 @@ import Paper from '@mui/material/Paper';
 import { TRT_TopToolbar } from '../toolbar/TRT_TopToolbar';
 import { TRT_BottomToolbar } from '../toolbar/TRT_BottomToolbar';
 import { TRT_TableContainer } from './TRT_TableContainer';
-import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.types';
 
 interface Props {
   table: TRT_TableInstance;

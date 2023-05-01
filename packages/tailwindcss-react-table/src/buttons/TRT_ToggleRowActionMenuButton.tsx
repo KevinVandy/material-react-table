@@ -7,7 +7,7 @@ import type {
   TRT_Cell,
   TRT_Row,
   TRT_TableInstance,
-} from '../TailwindCSSReactTable.d';
+} from '../TailwindCSSReactTable.types';
 
 const commonIconButtonStyles = {
   height: '2rem',

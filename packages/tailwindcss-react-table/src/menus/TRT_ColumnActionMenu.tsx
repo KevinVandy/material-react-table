@@ -5,7 +5,10 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { TRT_FilterOptionMenu } from './TRT_FilterOptionMenu';
-import type { TRT_Header, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type {
+  TRT_Header,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.types';
 
 export const commonMenuItemStyles = {
   py: '6px',

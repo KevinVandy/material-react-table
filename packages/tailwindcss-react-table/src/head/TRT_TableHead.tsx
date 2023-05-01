@@ -2,7 +2,7 @@ import React from 'react';
 import TableHead from '@mui/material/TableHead';
 import { TRT_TableHeadRow } from './TRT_TableHeadRow';
 import type { VirtualItem } from '@tanstack/react-virtual';
-import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.types';
 
 interface Props {
   table: TRT_TableInstance;

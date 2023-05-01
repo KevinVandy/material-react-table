@@ -2,7 +2,7 @@ import React from 'react';
 import Collapse from '@mui/material/Collapse';
 import { TRT_FilterRangeFields } from '../inputs/TRT_FilterRangeFields';
 import { TRT_FilterTextField } from '../inputs/TRT_FilterTextField';
-import { TRT_Header, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import { TRT_Header, TRT_TableInstance } from '../TailwindCSSReactTable.types';
 import { TRT_FilterCheckbox } from '../inputs/TRT_FilterCheckbox';
 
 interface Props {

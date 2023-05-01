@@ -9,7 +9,7 @@ import { TRT_TablePagination } from './TRT_TablePagination';
 import { TRT_ToolbarAlertBanner } from './TRT_ToolbarAlertBanner';
 import { TRT_ToolbarInternalButtons } from './TRT_ToolbarInternalButtons';
 import { TRT_ToolbarDropZone } from './TRT_ToolbarDropZone';
-import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.types';
 import type { Theme } from '@mui/material/styles';
 
 export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({

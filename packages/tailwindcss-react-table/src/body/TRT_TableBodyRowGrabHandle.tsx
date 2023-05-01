@@ -1,5 +1,5 @@
 import React, { DragEvent, RefObject } from 'react';
-import { TRT_Cell, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import { TRT_Cell, TRT_TableInstance } from '../TailwindCSSReactTable.types';
 import { TRT_GrabHandleButton } from '../buttons/TRT_GrabHandleButton';
 
 interface Props {

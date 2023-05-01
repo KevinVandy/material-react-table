@@ -5,7 +5,10 @@ import Divider from '@mui/material/Divider';
 import Menu from '@mui/material/Menu';
 import { TRT_ShowHideColumnsMenuItems } from './TRT_ShowHideColumnsMenuItems';
 import { getDefaultColumnOrderIds } from '../column.utils';
-import type { TRT_Column, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type {
+  TRT_Column,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.types';
 
 interface Props<TData extends Record<string, any> = {}> {
   anchorEl: HTMLElement | null;

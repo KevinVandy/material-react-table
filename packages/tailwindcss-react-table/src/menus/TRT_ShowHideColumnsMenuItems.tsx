@@ -14,7 +14,10 @@ import Typography from '@mui/material/Typography';
 import { TRT_ColumnPinningButtons } from '../buttons/TRT_ColumnPinningButtons';
 import { TRT_GrabHandleButton } from '../buttons/TRT_GrabHandleButton';
 import { reorderColumn } from '../column.utils';
-import type { TRT_Column, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type {
+  TRT_Column,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.types';
 
 interface Props<TData extends Record<string, any> = {}> {
   allColumns: TRT_Column<TData>[];

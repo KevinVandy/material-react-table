@@ -1,7 +1,7 @@
 import React from 'react';
 import Collapse from '@mui/material/Collapse';
 import LinearProgress from '@mui/material/LinearProgress';
-import type { TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type { TRT_TableInstance } from '../TailwindCSSReactTable.types';
 
 interface Props<TData extends Record<string, any> = {}> {
   isTopToolbar: boolean;

@@ -8,7 +8,7 @@ import type {
   TRT_InternalFilterOption,
   TRT_Localization,
   TRT_TableInstance,
-} from '../TailwindCSSReactTable.d';
+} from '../TailwindCSSReactTable.types';
 
 export const mrtFilterOptions = (
   localization: TRT_Localization,

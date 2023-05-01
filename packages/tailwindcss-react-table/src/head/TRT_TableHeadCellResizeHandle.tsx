@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
-import { TRT_Header, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import { TRT_Header, TRT_TableInstance } from '../TailwindCSSReactTable.types';
 
 interface Props {
   header: TRT_Header;

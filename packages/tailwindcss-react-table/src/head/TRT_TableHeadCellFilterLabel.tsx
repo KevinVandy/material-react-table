@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Grow from '@mui/material/Grow';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import { TRT_Header, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import { TRT_Header, TRT_TableInstance } from '../TailwindCSSReactTable.types';
 
 interface Props {
   header: TRT_Header;

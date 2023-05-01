@@ -1,4 +1,4 @@
-import { TRT_Localization } from '../TailwindCSSReactTable.d';
+import { TRT_Localization } from '../TailwindCSSReactTable.types';
 
 export const TRT_Localization_RO: TRT_Localization = {
   actions: 'Acțiuni',

@@ -7,7 +7,7 @@ import { TRT_Default_Icons } from './icons';
 import { TRT_SortingFns } from './sortingFns';
 import { TRT_TableRoot } from './table/TRT_TableRoot';
 
-import { TailwindCSSReactTableProps } from './TailwindCSSReactTable.d';
+import { TailwindCSSReactTableProps } from './TailwindCSSReactTable.types';
 
 export { TRT_AggregationFns, TRT_FilterFns, TRT_SortingFns };
 

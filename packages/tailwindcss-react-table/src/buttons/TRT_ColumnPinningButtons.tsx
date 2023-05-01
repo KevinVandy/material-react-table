@@ -2,7 +2,10 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import type { TRT_Column, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type {
+  TRT_Column,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.types';
 
 interface Props<TData extends Record<string, any> = {}> {
   column: TRT_Column<TData>;

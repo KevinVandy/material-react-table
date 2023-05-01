@@ -8,7 +8,7 @@ import type {
   TRT_Cell,
   TRT_Row,
   TRT_TableInstance,
-} from '../TailwindCSSReactTable.d';
+} from '../TailwindCSSReactTable.types';
 
 interface Props {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;

@@ -2,7 +2,10 @@ import React, { ChangeEvent, FocusEvent, KeyboardEvent, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import type { TextFieldProps } from '@mui/material/TextField';
-import type { TRT_Cell, TRT_TableInstance } from '../TailwindCSSReactTable.d';
+import type {
+  TRT_Cell,
+  TRT_TableInstance,
+} from '../TailwindCSSReactTable.types';
 
 interface Props<TData extends Record<string, any> = {}> {
   cell: TRT_Cell<TData>;
