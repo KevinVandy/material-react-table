@@ -17,6 +17,7 @@ import PT_BR_Table from '../examples/localization-i18n-pt-BR';
 import PT_Table from '../examples/localization-i18n-pt';
 import RO_Table from '../examples/localization-i18n-ro';
 import RU_Table from '../examples/localization-i18n-ru';
+import SK_Table from '../examples/localization-i18n-sk';
 import SR_Cyrl_RS_Table from '../examples/localization-i18n-sr-Cyrl-RS';
 import SR_Latn_RS_Table from '../examples/localization-i18n-sr-Latn-RS';
 import SV_Table from '../examples/localization-i18n-sv';
@@ -44,6 +45,7 @@ const supportedLocales = [
   'pt-BR',
   'ro',
   'ru',
+  'sk',
   'sr-Cyrl-RS',
   'sr-Latn-RS',
   'sv',
@@ -95,6 +97,7 @@ const LocaleExamples = () => {
       {currentLocale === 'pt-BR' && <PT_BR_Table />}
       {currentLocale === 'ro' && <RO_Table />}
       {currentLocale === 'ru' && <RU_Table />}
+      {currentLocale === 'sk' && <SK_Table />}
       {currentLocale === 'sr-Cyrl-RS' && <SR_Cyrl_RS_Table />}
       {currentLocale === 'sr-Latn-RS' && <SR_Latn_RS_Table />}
       {currentLocale === 'sv' && <SV_Table />}

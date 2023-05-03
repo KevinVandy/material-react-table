@@ -8,7 +8,7 @@ export const MRT_Localization_CS: MRT_Localization = {
   changeSearchMode: 'Změnit režim hledání',
   clearFilter: 'Vyčistit filtr',
   clearSearch: 'Vyčistit hledání',
-  clearSort: 'vyčistit řazení',
+  clearSort: 'Vyčistit řazení',
   clickToCopy: 'Kliknutím zkopírovat',
   collapse: 'Sbalit',
   collapseAll: 'Sbalit vše',
