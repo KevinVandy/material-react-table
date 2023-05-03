@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-import Highlight, { defaultProps } from 'prism-react-renderer';
-import darkCodeTheme from 'prism-react-renderer/themes/vsDark';
-import lightCodeTheme from 'prism-react-renderer/themes/vsLight';
+import { Highlight, themes } from 'prism-react-renderer';
 import {
   ToggleButton,
   ToggleButtonGroup,
@@ -301,7 +299,6 @@ export const SourceCodeSnippet = ({
         </Box>
         <Paper elevation={3}>
           <Highlight
-            {...defaultProps}
             code={
               showApiCode
                 ? apiCode ?? ''
@@ -311,7 +308,7 @@ export const SourceCodeSnippet = ({
             }
             language={showApiCode || isTypeScript ? 'tsx' : 'jsx'}
             theme={
-              theme.palette.mode === 'dark' ? darkCodeTheme : lightCodeTheme
+              theme.palette.mode === 'dark' ? themes.nightOwl : themes.github
             }
           >
             {({ className, style, tokens, getLineProps, getTokenProps }) => (

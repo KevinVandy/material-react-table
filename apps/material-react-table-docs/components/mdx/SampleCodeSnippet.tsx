@@ -7,9 +7,7 @@ import {
   alpha,
   Paper,
 } from '@mui/material';
-import Highlight, { defaultProps } from 'prism-react-renderer';
-import darkCodeTheme from 'prism-react-renderer/themes/vsDark';
-import lightCodeTheme from 'prism-react-renderer/themes/vsLight';
+import  { Highlight, themes } from 'prism-react-renderer';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 
@@ -59,10 +57,9 @@ export const SampleCodeSnippet = (props: Props) => {
       }}
     >
       <Highlight
-        {...defaultProps}
         code={props.children}
         language={props.className?.replace?.(/language-/, '') as any}
-        theme={theme.palette.mode === 'dark' ? darkCodeTheme : lightCodeTheme}
+        theme={theme.palette.mode === 'dark' ? themes.nightOwl : themes.github}
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <div
