@@ -16,7 +16,7 @@ import CustomizeExample from '../../../examples/customize-row-selection';
 
 ## Row Selection Feature Guide
 
-Material React Table has a built-in row-selection feature and makes it easy to manage the selection state yourself. This guide will walk you through how to enable row selection and how to customize the selection behavior.
+Material React Table has a built-in row selection feature and makes it easy to manage the selection state yourself. This guide demonstrates how to enable row selection and customize the selection behavior.
 
 ### Relevant Props
 
@@ -63,11 +63,11 @@ You can also enable row selection conditionally per row with the same `enableRow
 
 ### Access Row Selection State
 
-There a couple of ways to access the selection state. You can either manage the selection state yourself or read it from the table instance.
+There are two ways to access the selection state. You can either manage the selection state yourself or read it from the table instance.
 
 #### Manage Row Selection State
 
-The row selection state is managed internally by default, but more than likely, you will want to have access to that state yourself. Here is how you can simply get access to the row selection state, specifically.
+The row selection state is managed internally by default, but you will more than likely want to have access to that state yourself. Here is how you can simply get access to the row selection state, specifically:
 
 ```tsx
 const [rowSelection, setRowSelection] = useState({});
@@ -85,7 +85,7 @@ return (
 
 #### Read Row Selection State from Table Instance
 
-Alternatively, you can read the selection state from the `tableInstanceRef` ref like so:
+Alternatively, you can read the selection state from the `tableInstanceRef` ref as follows:
 
 ```tsx
 const tableInstanceRef = useRef<MRT_TableInstance<YouDataType>>(null); //ts
@@ -111,7 +111,7 @@ return (
 
 #### Useful Row IDs
 
-By default, the `row.id` for each row in the table is simply the index of the row in the table. You can override this and tell Material React Table to use a more useful Row ID with the `getRowId` prop. For example, you may want some like this:
+By default, the `row.id` for each row in the table is simply the index of the row in the table. You can override this and instruct Material React Table to use a more useful Row ID with the `getRowId` prop. For example, you may want something like this:
 
 ```jsx
 <MaterialReactTable
@@ -122,7 +122,7 @@ By default, the `row.id` for each row in the table is simply the index of the ro
 />
 ```
 
-Now as rows get selected, the `rowSelection` state will look like this:
+As rows get selected, the `rowSelection` state will look like this:
 
 ```tsx
 {
@@ -185,7 +185,7 @@ By default, the `enableMultiRowSelection` prop is set to `true`, which means tha
 
 ### Customize Select Checkboxes or Radio Buttons
 
-The selection checkboxes can be customized with the `muiSelectCheckboxProps` prop. Any prop that can be passed to a Mui Checkbox component can be specified here. For example, you may want to use a different color for the checkbox, or use some logic to disable certain rows from being selected.
+The selection checkboxes can be customized with the `muiSelectCheckboxProps` prop. Any prop that can be passed to a Mui Checkbox component can be specified here. For example, you may want to use a different color for the checkbox or use some logic to disable certain rows from being selected.
 
 ```tsx
 <MaterialReactTable
@@ -202,7 +202,7 @@ The selection checkboxes can be customized with the `muiSelectCheckboxProps` pro
 
 ### Manual Row Selection Without Checkboxes
 
-You may have a use case where you want to be able to select rows by clicking them, but you do not want to show any checkboxes or radio buttons. You can do this by implementing a row selection feature yourself, while keeping the `enableRowSelection` prop `false` so that the default selection behavior is disabled.
+You may have a use case where you want to be able to select rows by clicking them, but you do not want to show any checkboxes or radio buttons. You can do this by implementing a row selection feature yourself while keeping the `enableRowSelection` prop `false` so that the default selection behavior is disabled.
 
 <ManualExample />
 
