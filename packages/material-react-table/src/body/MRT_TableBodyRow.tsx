@@ -1,6 +1,6 @@
 import React, { DragEvent, memo, useRef } from 'react';
 import TableRow from '@mui/material/TableRow';
-import { alpha, darken, lighten } from '@mui/material/styles';
+import { type Theme, alpha, darken, lighten } from '@mui/material/styles';
 import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import type { VirtualItem, Virtualizer } from '@tanstack/react-virtual';
@@ -71,17 +71,15 @@ export const MRT_TableBodyRow = ({
           }
         }}
         {...tableRowProps}
-        sx={(theme) => ({
+        sx={(theme: Theme) => ({
           backgroundColor: lighten(theme.palette.background.default, 0.06),
+          boxSizing: 'border-box',
           display: layoutMode === 'grid' ? 'flex' : 'table-row',
           opacity:
             draggingRow?.id === row.id || hoveredRow?.id === row.id ? 0.5 : 1,
           position: virtualRow ? 'absolute' : undefined,
-          top: virtualRow ? 0 : undefined,
-          transform: virtualRow
-            ? `translateY(${virtualRow?.start}px)`
-            : undefined,
           transition: virtualRow ? 'none' : 'all 150ms ease-in-out',
+          top: virtualRow ? 0 : undefined,
           width: '100%',
           '&:hover td': {
             backgroundColor:
@@ -97,6 +95,12 @@ export const MRT_TableBodyRow = ({
             ? tableRowProps.sx(theme)
             : (tableRowProps?.sx as any)),
         })}
+        style={{
+          transform: virtualRow
+            ? `translateY(${virtualRow?.start}px)`
+            : undefined,
+          ...tableRowProps?.style,
+        }}
       >
         {virtualPaddingLeft ? (
           <td style={{ display: 'flex', width: virtualPaddingLeft }} />
