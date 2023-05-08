@@ -12,6 +12,11 @@ import Head from 'next/head';
 
 ### Version 1 (Latest)
 
+#### v1.11.3 (2023-05-07)
+
+- Removed internal `measureElement` virtualizer option to prevent firefox from crashing with virtualization enabled
+- Improved row virtualization performance by moving translateY to row style instead of sx to create less emotion css classes
+
 #### v1.11.2 (2023-05-03)
 
 - Upgrade to TanStack Table v8.9.1 for new `getGroupingValue` column option, and median aggregation function bug fix
