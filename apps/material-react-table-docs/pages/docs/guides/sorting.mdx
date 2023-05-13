@@ -15,7 +15,7 @@ import RemoteExample from '../../../examples/remote';
 
 ## Sorting Feature Guide
 
-Material React Table supports almost any sorting scenario you may have. Client-side sorting is enabled by default, but you can opt to implement your own server-side sorting logic, or even replace the default client-side sorting with your own implementation.
+Material React Table supports almost any sorting scenario you may have. Client-side sorting is enabled by default, but you can opt to implement your own server-side sorting logic or even replace the default client-side sorting with your own implementation.
 
 ### Relevant Props
 
@@ -106,7 +106,7 @@ Client-side sorting is enabled by default. When sorting is toggled on for a colu
 
 #### Multi-Sorting
 
-Multi-sorting is also enabled by default, which means a user can sort by multiple columns at once. This can be accomplished by clicking on a column header while holding down the `shift` key. The table will then be sorted by the previously sorted column, and then by the newly clicked column. Or if you want multi-sorting to be the default click behavior without the need to hold `shift`, you can set the `isMultiSortEvent` prop to `() => true`.
+Multi-sorting is also enabled by default, which means you can sort by multiple columns at once. You can do this by clicking on a column header while holding down the `shift` key. The table will then be sorted by the previously sorted column, followed by the newly clicked column. Alternatively, if you want multi-sorting to be the default click behavior without the need to hold `shift`, you can set the `isMultiSortEvent` prop to `() => true`.
 
 ```jsx
 <MaterialReactTable
@@ -128,7 +128,7 @@ By default, columns with `string` datatypes will sort alphabetically in ascendin
 
 By default, Material React Table will use an `alphanumeric` sorting function for all columns.
 
-There are 6 built-in sorting functions that you can choose from: ` alphanumeric`, `alphanumericCaseSensitive`, `text`, `textCaseSensitive`, `datetime`, and `basic`. You can learn more about these built-in sorting function in the [TanStack Table Sorting API docs](https://tanstack.com/table/v8/docs/api/features/sorting#sorting-functions).
+There are six built-in sorting functions you can choose from: ` alphanumeric`, `alphanumericCaseSensitive`, `text`, `textCaseSensitive`, `datetime`, and `basic`. You can learn more about these built-in sorting functions in the [TanStack Table Sorting API docs](https://tanstack.com/table/v8/docs/api/features/sorting#sorting-functions).
 
 #### Add Custom Sorting Functions
 
@@ -147,7 +147,7 @@ If none of these sorting functions meet your needs, you can add your own custom 
 
 #### Change Sorting Function Per Column
 
-You can now choose a sorting function for each column by either passing a string value of the built-in sorting function names to the `sortingFn` column option, or by passing a custom sorting function to the `sortingFn` column option.
+You can now choose a sorting function for each column by either passing a string value of the built-in sorting function names to the `sortingFn` column option or by passing a custom sorting function to the `sortingFn` column option.
 
 ```tsx
 const columns = [
@@ -167,11 +167,11 @@ const columns = [
 
 ### Manual Server-Side Sorting
 
-If you are working with large data sets, you may want to let your back-end apis handle all of the sorting and pagination processing instead of doing it client-side. You can do this by setting the `manualSorting` prop to `true`. This will disable the default client-side sorting and pagination features, and will allow you to implement your own sorting and pagination logic.
+If you are working with large data sets, you may want to let your back-end APIs handle all of the sorting and pagination processing instead of doing it client-side. You can do this by setting the `manualSorting` prop to `true`. This will disable the default client-side sorting and pagination features and will let you implement your own sorting and pagination logic.
 
 > When `manualSorting` is set to `true`, Material React Table assumes that your `data` is already sorted by the time you are passing it to the table.
 
-If you need to sort your data in a back-end api, then you will also probably need access to the internal `sorting` state from the table. You can do this by managing the `sorting` state yourself, and then passing it to the table via the `state` prop. You can also pass a callback function to the `onSortingChange` prop, which will be called whenever the `sorting` state changes internally in the table
+If you need to sort your data in a back-end API, then you will also probably need access to the internal `sorting` state from the table. You can do this by managing the `sorting` state yourself and then passing it to the table via the `state` prop. You can also pass a callback function to the `onSortingChange` prop, which will be called whenever the `sorting` state changes internally in the table
 
 ```tsx
 const [sorting, setSorting] = useState([]);
