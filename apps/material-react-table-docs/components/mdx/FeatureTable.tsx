@@ -160,7 +160,7 @@ const data = [
     feature: 'Header Groups and Footers',
     mrt: true,
     mt: false,
-    muix: false,
+    muix: true,
   },
   {
     feature: 'Localization (i18n)',
@@ -196,7 +196,7 @@ const data = [
     feature: 'Row Ordering (DnD)',
     mrt: true,
     mt: false,
-    muix: false,
+    muix: true,
   },
   {
     feature: 'Row Selection',
