@@ -125,6 +125,7 @@ export const MRT_TableBody = ({
           density === 'compact' ? 37 : density === 'comfortable' ? 58 : 73,
         getScrollElement: () => tableContainerRef.current,
         measureElement:
+          typeof window !== 'undefined' &&
           navigator.userAgent.indexOf('Firefox') === -1
             ? (element) => element?.getBoundingClientRect().height
             : undefined,
