@@ -124,6 +124,10 @@ export const MRT_TableBody = ({
         estimateSize: () =>
           density === 'compact' ? 37 : density === 'comfortable' ? 58 : 73,
         getScrollElement: () => tableContainerRef.current,
+        measureElement:
+          navigator.userAgent.indexOf('Firefox') === -1
+            ? (element) => element?.getBoundingClientRect().height
+            : undefined,
         overscan: 4,
         ...vProps_old,
         ...vProps,
