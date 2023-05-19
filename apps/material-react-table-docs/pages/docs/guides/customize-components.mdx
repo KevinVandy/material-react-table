@@ -9,7 +9,7 @@ import { Box } from '@mui/material';
   <title>{'Customize (Style) Components Guide - Material React Table Docs'}</title>
   <meta
     name="description"
-    content="How to customize and pass props to Material UI components and set up a MUI Theme in Material React Table"
+    content="How to customize and pass props to Material UI components and set up a Material UI Theme in Material React Table"
   />
 </Head>
 
@@ -17,7 +17,7 @@ import { Box } from '@mui/material';
 
 One of the strengths of Material React Table is that it exposes a majority of all the underlying Material UI component props used to build the table.
 
-Additionally, in one of the sections below, you will learn [how to customize and use a MUI Theme](#material-ui-theme) to customize colors, typography, or any other default CSS that is used by Material React Table.
+Additionally, in one of the sections below, you will learn [how to customize and use a Material UI Theme](#material-ui-theme) to customize colors, typography, or any other default CSS that is used by Material React Table.
 
 ### Relevant Props
 
@@ -182,7 +182,7 @@ There are many more advantages to using the `sx` prop, but that is all we will d
 
 ### Material UI Theme
 
-Material React Table respects your MUI Theme. If you have already set up Material UI and a global MUI Theme, you should already be set. But if you have not, you should visit the offical [Material UI Theming Docs](https://mui.com/material-ui/customization/theming/) to learn how to set that up.
+Material React Table respects your Material UI Theme. If you have already set up Material UI and a global Material UI Theme, you should already be set. But if you have not, you should visit the offical [Material UI Theming Docs](https://mui.com/material-ui/customization/theming/) to learn how to set that up.
 
 ```jsx
 function App() {
@@ -197,7 +197,7 @@ function App() {
 
 #### Customize Theme Just for your Table
 
-Thanks to Material UI allowing you to [nest multiple Theme Providers](https://mui.com/material-ui/customization/theming/#nesting-the-theme), you can change your MUI Theme just for the `<MaterialReactTable />` component by wrapping a `<ThemeProvider theme={createTheme(...)}>` around just your table. The values in this theme will only effect the `<MaterialReactTable />` component, and not the rest of your site. It will also inherit values from your global theme, so you do not have to redefine everything again. You can just tweak the values you want to change.
+Thanks to Material UI allowing you to [nest multiple Theme Providers](https://mui.com/material-ui/customization/theming/#nesting-the-theme), you can change your Material UI Theme just for the `<MaterialReactTable />` component by wrapping a `<ThemeProvider theme={createTheme(...)}>` around just your table. The values in this theme will only effect the `<MaterialReactTable />` component, and not the rest of your site. It will also inherit values from your global theme, so you do not have to redefine everything again. You can just tweak the values you want to change.
 
 ```jsx
 import { createTheme, ThemeProvider } from '@mui/material';
@@ -211,7 +211,7 @@ return (
 
 #### Important Theme Values used by Material React Table
 
-`<MaterialReactTable />` will primarily use the following values internally from your MUI Theme by default:
+`<MaterialReactTable />` will primarily use the following values internally from your Material UI Theme by default:
 
 - `theme.palette.background.default` - used as the background color for most table components by default
 - `theme.palette.divider` - used in dividers in menus and for the column resizing handle
@@ -220,7 +220,7 @@ return (
 
 Notice that by default, the <Box component="span" sx={{color: "secondary.main", display: 'inline'}}>secondary color</Box> isn't used at all. Remember though that you can always override which color a component uses by passing in a `mui...Props` prop, like how we changed checkboxes to use the secondary color in the [example above](#static-prop-objects).
 
-#### Custom MUI Theme Example
+#### Custom Material UI Theme Example
 
 A common use case for this could be if you want to switch your primary and secondary colors, just for this table. Let's take a look at an example that does that, along with some other styling tweaks, so that we can make an ugly table.
 
