@@ -92,7 +92,7 @@ export const Footer = () => {
         >
           Mantine
         </MuiLink>{' '}
-        instead of Material-UI?
+        instead of Material UI?
         <br />
         Check out{' '}
         <MuiLink
