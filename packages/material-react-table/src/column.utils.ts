@@ -238,9 +238,10 @@ export const getIsFirstRightPinnedColumn = (column: MRT_Column) => {
 };
 
 export const getTotalRight = (table: MRT_TableInstance, column: MRT_Column) => {
-  return (
-    (table.getRightLeafHeaders().length - 1 - column.getPinnedIndex()) * 200
-  );
+  return table
+    .getRightLeafHeaders()
+    .slice(column.getPinnedIndex() + 1)
+    .reduce((acc, col) => acc + col.getSize(), 0);
 };
 
 export const getCommonCellStyles = ({

@@ -11,9 +11,10 @@ import { MRT_EditActionButtons } from './buttons/MRT_EditActionButtons';
 import { MRT_ExpandButton } from './buttons/MRT_ExpandButton';
 import { MRT_FilterOptionMenu } from './menus/MRT_FilterOptionMenu';
 import { MRT_FullScreenToggleButton } from './buttons/MRT_FullScreenToggleButton';
-import { MRT_GrabHandleButton } from './buttons/MRT_GrabHandleButton';
 import { MRT_GlobalFilterTextField } from './inputs/MRT_GlobalFilterTextField';
+import { MRT_GrabHandleButton } from './buttons/MRT_GrabHandleButton';
 import { MRT_ShowHideColumnsButton } from './buttons/MRT_ShowHideColumnsButton';
+import { MRT_TableHeadCellFilterContainer } from './head/MRT_TableHeadCellFilterContainer';
 import { MRT_TablePagination } from './toolbar/MRT_TablePagination';
 import { MRT_ToggleDensePaddingButton } from './buttons/MRT_ToggleDensePaddingButton';
 import { MRT_ToggleFiltersButton } from './buttons/MRT_ToggleFiltersButton';
@@ -31,9 +32,10 @@ export {
   MRT_ExpandButton,
   MRT_FilterOptionMenu,
   MRT_FullScreenToggleButton,
-  MRT_GrabHandleButton,
   MRT_GlobalFilterTextField,
+  MRT_GrabHandleButton,
   MRT_ShowHideColumnsButton,
+  MRT_TableHeadCellFilterContainer,
   MRT_TablePagination,
   MRT_ToggleDensePaddingButton,
   MRT_ToggleFiltersButton,

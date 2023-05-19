@@ -45,6 +45,7 @@ export const MRT_ColumnActionMenu = ({
       enableHiding,
       enablePinning,
       enableSorting,
+      enableSortingRemoval,
       icons: {
         ArrowRightIcon,
         ClearAllIcon,
@@ -162,20 +163,23 @@ export const MRT_ColumnActionMenu = ({
           table,
         }) ??
         (enableSorting &&
-          column.getCanSort() && [
-            <MenuItem
-              disabled={!column.getIsSorted()}
-              key={0}
-              onClick={handleClearSort}
-              sx={commonMenuItemStyles}
-            >
-              <Box sx={commonListItemStyles}>
-                <ListItemIcon>
-                  <ClearAllIcon />
-                </ListItemIcon>
-                {localization.clearSort}
-              </Box>
-            </MenuItem>,
+          column.getCanSort() &&
+          [
+            enableSortingRemoval !== false && (
+              <MenuItem
+                disabled={!column.getIsSorted()}
+                key={0}
+                onClick={handleClearSort}
+                sx={commonMenuItemStyles}
+              >
+                <Box sx={commonListItemStyles}>
+                  <ListItemIcon>
+                    <ClearAllIcon />
+                  </ListItemIcon>
+                  {localization.clearSort}
+                </Box>
+              </MenuItem>
+            ),
             <MenuItem
               disabled={column.getIsSorted() === 'asc'}
               key={1}
@@ -211,7 +215,7 @@ export const MRT_ColumnActionMenu = ({
                 )}
               </Box>
             </MenuItem>,
-          ])}
+          ].filter(Boolean))}
       {enableColumnFilters &&
         column.getCanFilter() &&
         [

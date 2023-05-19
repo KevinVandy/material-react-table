@@ -8,6 +8,7 @@ import ES_Table from '../examples/localization-i18n-es';
 import FA_Table from '../examples/localization-i18n-fa';
 import FI_Table from '../examples/localization-i18n-fi';
 import FR_Table from '../examples/localization-i18n-fr';
+import HU_Table from '../examples/localization-i18n-hu';
 import ID_Table from '../examples/localization-i18n-id';
 import IT_Table from '../examples/localization-i18n-it';
 import JA_Table from '../examples/localization-i18n-ja';
@@ -36,6 +37,7 @@ const supportedLocales = [
   'fa',
   'fi',
   'fr',
+  'hu',
   'id',
   'it',
   'ja',
@@ -88,6 +90,7 @@ const LocaleExamples = () => {
       {currentLocale === 'fa' && <FA_Table />}
       {currentLocale === 'fi' && <FI_Table />}
       {currentLocale === 'fr' && <FR_Table />}
+      {currentLocale === 'hu' && <HU_Table />}
       {currentLocale === 'id' && <ID_Table />}
       {currentLocale === 'it' && <IT_Table />}
       {currentLocale === 'ja' && <JA_Table />}

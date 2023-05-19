@@ -25,6 +25,7 @@ Material React Table supports almost any sorting scenario you may have. Client-s
       'enableGlobalFilterRankedResults',
       'enableMultiSort',
       'enableSorting',
+      'enableSortingRemoval',
       'getSortedRowModel',
       'isMultiSortEvent',
       'manualSorting',
@@ -117,6 +118,18 @@ Multi-sorting is also enabled by default, which means you can sort by multiple c
 ```
 
 You can limit the number of columns that can be sorted at once by setting the `maxMultiSortColCount` prop, or you can disable multi-sorting entirely by setting the `enableMultiSort` prop to `false`.
+
+#### Sorting Removal
+
+By default, users can remove a sort on a column by clicking through the sort direction options or selecting "Clear Sort" from the column actions menu. You can disable this feature by setting the `enableSortingRemoval` prop to `false`.
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  enableSortingRemoval={false} //users will not be able to remove a sort on a column
+/>
+```
 
 #### Sort Direction
 

@@ -10,6 +10,7 @@ const supportedLocales = [
   'fa',
   'fi',
   'fr',
+  'hu',
   'id',
   'it',
   'ja',

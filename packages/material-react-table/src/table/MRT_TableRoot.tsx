@@ -39,6 +39,7 @@ import type {
   MRT_DensityState,
   MRT_ColumnOrderState,
   MRT_GroupingState,
+  MRT_FilterFnsState,
 } from '..';
 
 export const MRT_TableRoot: any = <TData extends Record<string, any> = {}>(
@@ -61,22 +62,21 @@ export const MRT_TableRoot: any = <TData extends Record<string, any> = {}>(
     return initState;
   }, []);
 
-  const [columnFilterFns, setColumnFilterFns] = useState<{
-    [key: string]: MRT_FilterOption;
-  }>(() =>
-    Object.assign(
-      {},
-      ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef<TData>[]).map(
-        (col) => ({
-          [getColumnId(col)]:
-            col.filterFn instanceof Function
-              ? col.filterFn.name ?? 'custom'
-              : col.filterFn ??
-                initialState?.columnFilterFns?.[getColumnId(col)] ??
-                getDefaultColumnFilterFn(col),
-        }),
+  const [columnFilterFns, setColumnFilterFns] = useState<MRT_FilterFnsState>(
+    () =>
+      Object.assign(
+        {},
+        ...getAllLeafColumnDefs(props.columns as MRT_ColumnDef<TData>[]).map(
+          (col) => ({
+            [getColumnId(col)]:
+              col.filterFn instanceof Function
+                ? col.filterFn.name ?? 'custom'
+                : col.filterFn ??
+                  initialState?.columnFilterFns?.[getColumnId(col)] ??
+                  getDefaultColumnFilterFn(col),
+          }),
+        ),
       ),
-    ),
   );
   const [columnOrder, setColumnOrder] = useState<MRT_ColumnOrderState>(
     initialState.columnOrder ?? [],

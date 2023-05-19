@@ -77,6 +77,8 @@ type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
 
 export type MRT_DensityState = 'comfortable' | 'compact' | 'spacious';
 
+export type MRT_FilterFnsState = Record<string, MRT_FilterOption>;
+
 export type {
   ColumnFiltersState as MRT_ColumnFiltersState,
   ColumnOrderState as MRT_ColumnOrderState,
@@ -245,9 +247,7 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> =
         tablePaperRef: MutableRefObject<HTMLDivElement>;
         topToolbarRef: MutableRefObject<HTMLDivElement>;
       };
-      setColumnFilterFns: Dispatch<
-        SetStateAction<{ [key: string]: MRT_FilterOption }>
-      >;
+      setColumnFilterFns: Dispatch<SetStateAction<MRT_FilterFnsState>>;
       setDensity: Dispatch<SetStateAction<MRT_DensityState>>;
       setDraggingColumn: Dispatch<SetStateAction<MRT_Column<TData> | null>>;
       setDraggingRow: Dispatch<SetStateAction<MRT_Row<TData> | null>>;
@@ -270,7 +270,7 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> =
 
 export type MRT_TableState<TData extends Record<string, any> = {}> = Prettify<
   TableState & {
-    columnFilterFns: Record<string, MRT_FilterOption>;
+    columnFilterFns: MRT_FilterFnsState;
     density: MRT_DensityState;
     draggingColumn: MRT_Column<TData> | null;
     draggingRow: MRT_Row<TData> | null;

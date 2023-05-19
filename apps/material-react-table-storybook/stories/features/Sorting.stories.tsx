@@ -85,6 +85,14 @@ export const DisableMultiSorting = () => (
   <MaterialReactTable columns={columns} data={data} enableMultiSort={false} />
 );
 
+export const DisableSortingRemoval = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableSortingRemoval={false}
+  />
+);
+
 export const SortRanking = () => (
   <MaterialReactTable
     columns={[
