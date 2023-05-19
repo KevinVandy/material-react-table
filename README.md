@@ -98,7 +98,7 @@ _**Fully Fleshed out [Docs](https://www.material-react-table.com/docs/guides#gui
 
 View the full [Installation Docs](https://www.material-react-table.com/docs/getting-started/install)
 
-1. Ensure that you have React 17 or later installed (MUI V5 requires React 17 or 18)
+1. Ensure that you have React 17 or later installed (Material UI V5 requires React 17 or 18)
 
 2. Install Peer Dependencies (Material UI V5)
 

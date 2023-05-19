@@ -93,7 +93,7 @@ const data = [
       'https://badgen.net/bundlephobia/minzip/material-table?color=red',
     bundlePhobiaLink: 'https://bundlephobia.com/package/material-table@latest',
     description:
-      'Material Table is a once-popular Material UI table library originally built in 2018 for creating MUI tables that includes tons of features. However, it has a very large bundle size and contains outdated and insecure dependencies. It is mostly unmaintained now but did recently release a version that was somewhat compatible with Material UI V5.',
+      'Material Table is a once-popular Material UI table library originally built in 2018 for creating Material UI tables that includes tons of features. However, it has a very large bundle size and contains outdated and insecure dependencies. It is mostly unmaintained now but did recently release a version that was somewhat compatible with Material UI V5.',
   },
   {
     library: 'MUI Datatables',

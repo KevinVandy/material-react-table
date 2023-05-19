@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 //MRT Imports
 import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
 
-//Material-UI Imports
+//Material UI Imports
 import {
   Box,
   Button,

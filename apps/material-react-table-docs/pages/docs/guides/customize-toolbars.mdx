@@ -150,11 +150,11 @@ The `positionToolbarAlertBanner`, `positionGlobalFilter`, `positionPagination`, 
 
 ### Customize Toolbar Props and Styles
 
-The `muiTopToolbarProps`, `muiBottomToolbarProps`, `muiToolbarAlertBannerProps`, and `muiToolbarAlertBannerChipProps` props allow you to customize the props and styles of the underlying MUI components that make up the toolbar components. Remember that you can pass CSS overrides to their `sx` or `style` props. Some have found this useful for forcing `position: absolute` on alerts, etc.
+The `muiTopToolbarProps`, `muiBottomToolbarProps`, `muiToolbarAlertBannerProps`, and `muiToolbarAlertBannerChipProps` props allow you to customize the props and styles of the underlying Material UI components that make up the toolbar components. Remember that you can pass CSS overrides to their `sx` or `style` props. Some have found this useful for forcing `position: absolute` on alerts, etc.
 
 ### Customize Linear Progress Bars
 
-The progress bars that display in both the top and bottom toolbars become visible when either the `isLoading` or `showProgressBars` state options are set to `true`. You can customize the progress bars by passing in props to the `muiLinearProgressProps` prop. By default, the progress bars have an indeterminate state, but you can set the `value` prop to a number between 0 and 100 to show real progress values if your table is doing some complicated long running tasks that you want to show progress for. Visit the [MUI Linear Progress docs](https://mui.com/material-ui/react-progress/#linear) to learn more.
+The progress bars that display in both the top and bottom toolbars become visible when either the `isLoading` or `showProgressBars` state options are set to `true`. You can customize the progress bars by passing in props to the `muiLinearProgressProps` prop. By default, the progress bars have an indeterminate state, but you can set the `value` prop to a number between 0 and 100 to show real progress values if your table is doing some complicated long running tasks that you want to show progress for. Visit the [Material UI Linear Progress docs](https://mui.com/material-ui/react-progress/#linear) to learn more.
 
 ```tsx
 <MaterialReactTable

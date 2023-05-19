@@ -29,7 +29,7 @@ config.autoAddCss = false;
 
 /**
  * These are just some of the icons visible in this table's feature set.
- * If you skip customizing some icons, those particular icons will fallback the the default Material-UI icons.
+ * If you skip customizing some icons, those particular icons will fallback the the default Material UI icons.
  */
 const fontAwesomeIcons: Partial<MRT_Icons> = {
   ArrowDownwardIcon: (props: any) => (
