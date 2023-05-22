@@ -135,17 +135,17 @@ In all of these `render...` props, you get access to the underlying `table` inst
 ### Position Toolbar Areas
 
 The `positionToolbarAlertBanner`, `positionGlobalFilter`, `positionPagination`, and `positionToolbarDropZone` props allow you to swap the default position of certain areas of the toolbars. Experiment moving them around until you find a layout that works for you.
-You can set the property of to toolbars, `positionToolbarAlertBanner` and `positionToolbarDropZone` to `none` if you need completely hide it.
+
+The props `positionToolbarAlertBanner` and `positionToolbarDropZone` can be set to `none` if you need completely hide them.
 
 ```tsx
 <MaterialReactTable
   data={data}
   columns={columns}
   //if rendering top toolbar buttons, sometimes you want alerts to be at the bottom
-  //or it can be set to none to hide it
   positionToolbarAlertBanner="bottom"
   positionGlobalFilter="left" //move the search box to the left of the top toolbar
-  positionPagination="top" //Hide the pagination toolbar
+  positionPagination="top"
   renderTopToolbarCustomActions={() => <Box>...</Box>}
 />
 ```
