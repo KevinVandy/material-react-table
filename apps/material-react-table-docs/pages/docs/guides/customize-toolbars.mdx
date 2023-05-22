@@ -142,9 +142,10 @@ You can set the property of to toolbars, `positionToolbarAlertBanner` and `posit
   data={data}
   columns={columns}
   //if rendering top toolbar buttons, sometimes you want alerts to be at the bottom
+  //or it can be set to none to hide it
   positionToolbarAlertBanner="bottom"
   positionGlobalFilter="left" //move the search box to the left of the top toolbar
-  positionPagination="none" //Hide the pagination toolbar
+  positionPagination="top" //Hide the pagination toolbar
   renderTopToolbarCustomActions={() => <Box>...</Box>}
 />
 ```
