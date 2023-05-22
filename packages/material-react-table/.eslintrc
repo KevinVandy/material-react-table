@@ -6,8 +6,8 @@
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-unused-vars": "off",
-    "mui-path-imports/mui-path-imports": "error"
+    "@typescript-eslint/no-unused-vars": "warn",
+    "mui-path-imports/mui-path-imports": "warn"
   },
   "root": true,
   "ignorePatterns": [

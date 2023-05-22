@@ -1,22 +1,30 @@
 {
   "include": [
     "src",
-    "@types/node"
+    "@types/node",
+    "stories"
   ],
   "compilerOptions": {
+    "useDefineForClassFields": true,
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
     "declaration": true,
     "declarationDir": "types",
     "emitDeclarationOnly": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "jsx": "react",
-    "lib": [
-      "dom",
-      "esnext"
-    ],
-    "module": "esnext",
-    "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
@@ -26,5 +34,10 @@
     "sourceMap": true,
     "strict": true,
     "target": "ES6"
-  }
+  },
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

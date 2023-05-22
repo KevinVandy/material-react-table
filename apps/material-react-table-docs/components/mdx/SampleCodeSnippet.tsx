@@ -7,7 +7,7 @@ import {
   alpha,
   Paper,
 } from '@mui/material';
-import  { Highlight, themes } from 'prism-react-renderer';
+import { Highlight, themes } from 'prism-react-renderer';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 
