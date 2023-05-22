@@ -136,6 +136,8 @@ In all of these `render...` props, you get access to the underlying `table` inst
 
 The `positionToolbarAlertBanner`, `positionGlobalFilter`, `positionPagination`, and `positionToolbarDropZone` props allow you to swap the default position of certain areas of the toolbars. Experiment moving them around until you find a layout that works for you.
 
+The props `positionToolbarAlertBanner` and `positionToolbarDropZone` can be set to `none` if you need completely hide them.
+
 ```tsx
 <MaterialReactTable
   data={data}
@@ -175,9 +177,11 @@ The progress bars that display in both the top and bottom toolbars become visibl
 
 ### Customize Toolbar Alert Banner
 
-The toolbar alert banner is an internal component used to display alerts to the user. By default, it will automatically show messages around the number of selected rows or grouping state.
+The toolbar alert banner is an internal component used to display alerts to the user. By default, it will automatically show messages around the number of row(s) selected or grouping state.
 
-However, you can repurpose this alert banner to show your own custom messages too. You can force the alert banner to show by setting the `showAlertBanner` state option to `true`. You can then customize the messages and other stylings using the `muiToolbarAlertBannerProps` to create your custom message. You probably saw this in the [Remote Data](/docs/examples/remote) or [React Query](/docs/examples/react-query) examples.
+However, you can repurpose this alert banner to show your own custom messages too. You can force the alert banner to show by setting the `showAlertBanner` state option to `true`.
+By setting the `showAlertBanner` to `false`, you can hide the alert banner completely, which can be useful in overriding the default state when there are row(s) selected or grouped.
+You can then customize the messages and other stylings using the `muiToolbarAlertBannerProps` to create your custom message. You probably saw this in the [Remote Data](/docs/examples/remote) or [React Query](/docs/examples/react-query) examples.
 
 ```tsx
 <MaterialReactTable
