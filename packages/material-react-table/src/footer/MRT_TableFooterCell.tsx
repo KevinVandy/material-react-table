@@ -1,4 +1,3 @@
-import React from 'react';
 import TableCell from '@mui/material/TableCell';
 import { getCommonCellStyles } from '../column.utils';
 import type { MRT_Header, MRT_TableInstance } from '..';

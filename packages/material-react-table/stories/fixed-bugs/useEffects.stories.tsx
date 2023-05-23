@@ -1,11 +1,13 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MRT_ColumnDef,
   type MRT_ColumnFiltersState,
 } from '../../src';
 import { faker } from '@faker-js/faker';
-import { Box, Button, MenuItem } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
 
 const meta: Meta = {
   title: 'Fixed Bugs/useEffects',
@@ -199,7 +201,7 @@ export const RenderRowActionsAsync = () => {
       columns={columns}
       data={data}
       enableRowActions
-      renderRowActions={({ row }) => (
+      renderRowActions={() => (
         <Box sx={{ display: 'flex', gap: '1rem', whiteSpace: 'nowrap' }}>
           {rowActions.map((action) => (
             <Button key={action} type="button">
@@ -252,7 +254,7 @@ export const renderRowActionMenuItemsAsync = () => {
       columns={columns}
       data={data}
       enableRowActions
-      renderRowActionMenuItems={({ row }) =>
+      renderRowActionMenuItems={() =>
         rowActions.map((action) => [<MenuItem key={action}>{action}</MenuItem>])
       }
     />

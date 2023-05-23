@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Collapse from '@mui/material/Collapse';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';

@@ -1,8 +1,7 @@
-import React from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, { type MRT_ColumnDef } from '../../src';
 import { faker } from '@faker-js/faker';
-import { Button } from '@mui/material';
+import Button from "@mui/material/Button";
 
 const meta: Meta = {
   title: 'Styling/Styling Display Columns',

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MRT_ColumnDef,
@@ -125,7 +125,7 @@ export const SortRanking = () => (
 );
 
 export const SortingStateManaged = () => {
-  const [sorting, setSorting] = React.useState<MRT_SortingState>([]);
+  const [sorting, setSorting] = useState<MRT_SortingState>([]);
   return (
     <MaterialReactTable
       columns={columns}

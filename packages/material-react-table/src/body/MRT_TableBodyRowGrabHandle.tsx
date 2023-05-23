@@ -1,4 +1,4 @@
-import React, { DragEvent, RefObject } from 'react';
+import { DragEvent, RefObject } from 'react';
 import { MRT_Cell, MRT_TableInstance } from '..';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 

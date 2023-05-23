@@ -1,4 +1,3 @@
-import React from 'react';
 import TableFooter from '@mui/material/TableFooter';
 import { MRT_TableFooterRow } from './MRT_TableFooterRow';
 import type { VirtualItem } from '@tanstack/react-virtual';

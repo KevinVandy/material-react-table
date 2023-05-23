@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, { type MRT_ColumnDef } from '../../src';
 import { faker } from '@faker-js/faker';
@@ -46,7 +46,7 @@ const initData = [...Array(25)].map(() => ({
 }));
 
 export const RowDraggingEnabled = () => {
-  const [data, _setData] = React.useState(() => initData);
+  const [data, _setData] = useState(() => initData);
 
   return (
     <MaterialReactTable

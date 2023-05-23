@@ -1,4 +1,4 @@
-import React, { DragEvent, RefObject } from 'react';
+import { DragEvent, RefObject } from 'react';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 import { reorderColumn } from '../column.utils';
 import type { MRT_Column, MRT_TableInstance } from '..';

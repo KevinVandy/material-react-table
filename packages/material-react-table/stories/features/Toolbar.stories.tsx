@@ -1,11 +1,14 @@
-import React from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MRT_ColumnDef,
   MRT_FullScreenToggleButton,
 } from '../../src';
 import { faker } from '@faker-js/faker';
-import { Box, Button, IconButton, Tooltip, Typography } from '@mui/material';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import DeleteIcon from '@mui/icons-material/Delete';
 

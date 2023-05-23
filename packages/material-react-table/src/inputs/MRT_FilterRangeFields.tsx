@@ -1,4 +1,3 @@
-import React from 'react';
 import Box from '@mui/material/Box';
 import { MRT_FilterTextField } from './MRT_FilterTextField';
 import { MRT_Header, MRT_TableInstance } from '..';

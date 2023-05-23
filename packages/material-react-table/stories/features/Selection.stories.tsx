@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MRT_ColumnDef,

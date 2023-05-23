@@ -1,8 +1,7 @@
-import React from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, { type MRT_ColumnDef } from '../../src';
 import { faker } from '@faker-js/faker';
-import { Box } from '@mui/material';
+import Box from "@mui/material/Box";
 
 const meta: Meta = {
   title: 'Styling/Style Table Head Cells',

@@ -1,8 +1,9 @@
-import React from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, { type MRT_ColumnDef } from '../../src';
 import { faker } from '@faker-js/faker';
-import { Button, MenuItem as MuiMenuItem, styled } from '@mui/material';
+import Button from "@mui/material/Button";
+import MuiMenuItem from "@mui/material/MenuItem";
+import { styled } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShareIcon from '@mui/icons-material/Share';

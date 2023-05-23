@@ -1,4 +1,4 @@
-import React, { DragEvent, ReactNode, useMemo } from 'react';
+import { DragEvent, ReactNode, useMemo } from 'react';
 import Box from '@mui/material/Box';
 import TableCell from '@mui/material/TableCell';
 import { useTheme } from '@mui/material/styles';

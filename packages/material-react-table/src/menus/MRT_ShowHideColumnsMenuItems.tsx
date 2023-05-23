@@ -1,10 +1,4 @@
-import React, {
-  Dispatch,
-  DragEvent,
-  SetStateAction,
-  useRef,
-  useState,
-} from 'react';
+import { Dispatch, DragEvent, SetStateAction, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import MenuItem from '@mui/material/MenuItem';

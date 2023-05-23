@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import { MouseEvent } from 'react';
 import Box from '@mui/material/Box';
 import Grow from '@mui/material/Grow';
 import IconButton from '@mui/material/IconButton';

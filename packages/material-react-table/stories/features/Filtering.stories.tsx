@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MRT_ColumnDef,
   type MRT_ColumnFiltersState,
 } from '../../src';
 import { faker } from '@faker-js/faker';
-import { Box, Button, MenuItem, TextField } from '@mui/material';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
 
 const meta: Meta = {
   title: 'Features/Filtering Examples',
@@ -448,12 +451,12 @@ export const ManualFiltering = () => {
 
   //this kind of logic would actually live on a server, not client-side
   useEffect(() => {
-    if (!!columnFilters?.length) {
+    if (columnFilters?.length) {
       let filteredRows = [...data];
       columnFilters.map((filter) => {
         const { id: columnId, value: filterValue } = filter;
         filteredRows = filteredRows.filter((row) => {
-          return row[columnId]
+          return row[columnId as keyof typeof row]
             ?.toString()
             ?.toLowerCase()
             ?.includes?.((filterValue as string).toLowerCase());

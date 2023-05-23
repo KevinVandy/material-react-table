@@ -1,4 +1,3 @@
-import React from 'react';
 import Collapse from '@mui/material/Collapse';
 import LinearProgress from '@mui/material/LinearProgress';
 import type { MRT_TableInstance } from '..';

@@ -1,4 +1,3 @@
-import React from 'react';
 import Collapse from '@mui/material/Collapse';
 import { MRT_FilterRangeFields } from '../inputs/MRT_FilterRangeFields';
 import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';

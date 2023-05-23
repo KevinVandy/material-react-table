@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import { darken, lighten } from '@mui/material/styles';
 import highlightWords from 'highlight-words';

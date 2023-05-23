@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import TablePagination from '@mui/material/TablePagination';
 import type { MRT_TableInstance } from '..';
 

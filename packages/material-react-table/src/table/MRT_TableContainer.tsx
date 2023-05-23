@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import TableContainer from '@mui/material/TableContainer';
 import { MRT_Table } from './MRT_Table';
 import type { MRT_TableInstance } from '..';

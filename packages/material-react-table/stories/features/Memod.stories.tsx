@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, { type MRT_ColumnDef } from '../../src';
 import { faker } from '@faker-js/faker';
@@ -69,7 +69,7 @@ const generateData = () =>
   }));
 
 export const NoMemos = () => {
-  const [tableData, setTableData] = React.useState([...generateData()]);
+  const [tableData, setTableData] = useState([...generateData()]);
 
   const handleRegenerateData = () => setTableData([...generateData()]);
 
@@ -97,7 +97,7 @@ export const NoMemos = () => {
 };
 
 export const MemoCells = () => {
-  const [tableData, setTableData] = React.useState([...generateData()]);
+  const [tableData, setTableData] = useState([...generateData()]);
 
   const handleRegenerateData = () => setTableData([...generateData()]);
 
@@ -126,7 +126,7 @@ export const MemoCells = () => {
 };
 
 export const MemoRows = () => {
-  const [tableData, setTableData] = React.useState([...generateData()]);
+  const [tableData, setTableData] = useState([...generateData()]);
 
   const handleRegenerateData = () => setTableData([...generateData()]);
 
@@ -155,7 +155,7 @@ export const MemoRows = () => {
 };
 
 export const MemoTableBody = () => {
-  const [tableData, setTableData] = React.useState([...generateData()]);
+  const [tableData, setTableData] = useState([...generateData()]);
 
   const handleRegenerateData = () => setTableData([...generateData()]);
 

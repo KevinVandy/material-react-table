@@ -1,4 +1,3 @@
-import React from 'react';
 import { Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MaterialReactTableProps,
@@ -26,6 +25,7 @@ interface Person {
   address: string;
 }
 
+// @ts-ignore
 Default.args = {
   columns: [
     {

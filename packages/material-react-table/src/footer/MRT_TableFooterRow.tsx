@@ -1,4 +1,3 @@
-import React from 'react';
 import TableRow from '@mui/material/TableRow';
 import { lighten } from '@mui/material/styles';
 import { MRT_TableFooterCell } from './MRT_TableFooterCell';
