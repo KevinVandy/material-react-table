@@ -123,12 +123,13 @@ export const reorderColumn = <TData extends Record<string, any> = {}>(
   if (draggedColumn.getCanPin()) {
     draggedColumn.pin(targetColumn.getIsPinned());
   }
-  columnOrder.splice(
-    columnOrder.indexOf(targetColumn.id),
+  let newColumnOrder = [...columnOrder];
+  newColumnOrder.splice(
+    newColumnOrder.indexOf(targetColumn.id),
     0,
-    columnOrder.splice(columnOrder.indexOf(draggedColumn.id), 1)[0],
+    newColumnOrder.splice(newColumnOrder.indexOf(draggedColumn.id), 1)[0],
   );
-  return [...columnOrder];
+  return newColumnOrder;
 };
 
 export const showExpandColumn = <TData extends Record<string, any> = {}>(
