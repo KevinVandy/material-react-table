@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 import MaterialReactTable, { type MRT_ColumnDef } from '../../src';
 import { faker } from '@faker-js/faker';
-import Typography from "@mui/material/Typography";
+import Typography from '@mui/material/Typography';
 
 const meta: Meta = {
   title: 'Styling/Custom Table Body Examples',
@@ -37,8 +37,8 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
 ];
 
 const data = [...Array(25)].map(() => ({
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
   age: faker.datatype.number({ min: 20, max: 60 }),
   address: faker.address.streetAddress(),
   state: faker.address.state(),

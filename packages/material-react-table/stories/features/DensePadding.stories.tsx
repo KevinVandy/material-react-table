@@ -40,8 +40,8 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
 ];
 
 const data = [...Array(25)].map(() => ({
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
   address: faker.address.streetAddress(),
   city: faker.address.city(),
   state: faker.address.state(),

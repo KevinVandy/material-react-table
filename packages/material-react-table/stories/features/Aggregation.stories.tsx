@@ -14,10 +14,10 @@ const meta: Meta = {
 export default meta;
 
 const data = [...Array(2000)].map(() => ({
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
   age: faker.datatype.number({ min: 18, max: 65 }),
-  gender: faker.name.sex(),
+  gender: faker.person.sex(),
   state: faker.address.state(),
   salary: Number(faker.finance.amount(10000, 100000, 0)),
 }));

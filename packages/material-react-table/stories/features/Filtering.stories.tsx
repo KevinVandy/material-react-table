@@ -5,10 +5,10 @@ import MaterialReactTable, {
   type MRT_ColumnFiltersState,
 } from '../../src';
 import { faker } from '@faker-js/faker';
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
-import TextField from "@mui/material/TextField";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+import TextField from '@mui/material/TextField';
 
 const meta: Meta = {
   title: 'Features/Filtering Examples',
@@ -62,11 +62,11 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
 
 const data = [...Array(120)].map(() => ({
   isActive: faker.datatype.boolean(),
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
   age: faker.datatype.number(100),
   birthDate: faker.date.birthdate({ min: 1990, max: 2020 }),
-  gender: faker.name.sex(),
+  gender: faker.person.sex(),
   address: faker.address.streetAddress(),
   state: faker.address.state(),
 }));

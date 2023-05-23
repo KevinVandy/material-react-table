@@ -71,9 +71,9 @@ const longColumns: MRT_ColumnDef[] = [
 ];
 
 const longData = [...Array(500)].map(() => ({
-  firstName: faker.name.firstName(),
-  middleName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
+  firstName: faker.person.firstName(),
+  middleName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
   email: faker.internet.email(),
   phoneNumber: faker.phone.number(),
   address: faker.address.streetAddress(),
@@ -335,7 +335,7 @@ const fakeColumns = [...Array(500)].map((_, i) => {
 
 const fakeData = [...Array(500)].map(() => ({
   ...Object.fromEntries(
-    fakeColumns.map((col) => [col.accessorKey, faker.name.firstName()]),
+    fakeColumns.map((col) => [col.accessorKey, faker.person.firstName()]),
   ),
 }));
 

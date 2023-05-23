@@ -32,26 +32,26 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
 ];
 
 const data = [...Array(5)].map(() => ({
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
   age: faker.datatype.number(80),
   address: faker.address.streetAddress(),
   phoneNumber: faker.phone.number(),
   subRows: [...Array(faker.datatype.number(4))].map(() => ({
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
     age: faker.datatype.number(80),
     address: faker.address.streetAddress(),
     phoneNumber: faker.phone.number(),
     subRows: [...Array(3)].map(() => ({
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
       age: faker.datatype.number(80),
       address: faker.address.streetAddress(),
       phoneNumber: faker.phone.number(),
       subRows: [...Array(2)].map(() => ({
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
+        firstName: faker.person.firstName(),
+        lastName: faker.person.lastName(),
         age: faker.datatype.number(80),
         address: faker.address.streetAddress(),
         phoneNumber: faker.phone.number(),

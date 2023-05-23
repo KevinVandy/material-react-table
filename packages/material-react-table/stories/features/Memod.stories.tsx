@@ -58,9 +58,9 @@ const columns: MRT_ColumnDef<Person>[] = [
 
 const generateData = () =>
   [...Array(55)].map(() => ({
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    gender: faker.name.sex(),
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+    gender: faker.person.sex(),
     age: faker.datatype.number(80),
     address: faker.address.streetAddress(),
     city: faker.address.city(),

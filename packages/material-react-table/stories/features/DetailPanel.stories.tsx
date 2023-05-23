@@ -25,8 +25,8 @@ export const DetailPanelEnabled = () => (
       },
     ]}
     data={[...Array(5)].map(() => ({
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
       address: faker.address.streetAddress(),
       city: faker.address.city(),
       state: faker.address.state(),
@@ -65,8 +65,8 @@ export const DetailPanelEnabledConditional = () => (
       },
     ]}
     data={[...Array(10)].map(() => ({
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
       age: faker.datatype.number(100) + 5,
       address: faker.address.streetAddress(),
       city: faker.address.city(),
@@ -111,8 +111,8 @@ export const DetailPanelExpandColumnLast = () => (
       },
     ]}
     data={[...Array(5)].map(() => ({
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
       address: faker.address.streetAddress(),
       city: faker.address.city(),
       state: faker.address.state(),
@@ -158,8 +158,8 @@ export const DetailPanelExpandedByDefault = () => (
       },
     ]}
     data={[...Array(5)].map(() => ({
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
       address: faker.address.streetAddress(),
       city: faker.address.city(),
       state: faker.address.state(),
@@ -195,8 +195,8 @@ export const DetailPanelExpandAllDisabled = () => (
       },
     ]}
     data={[...Array(5)].map(() => ({
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
       address: faker.address.streetAddress(),
       city: faker.address.city(),
       state: faker.address.state(),

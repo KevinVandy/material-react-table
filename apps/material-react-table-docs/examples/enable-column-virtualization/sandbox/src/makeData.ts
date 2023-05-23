@@ -9,6 +9,6 @@ export const fakeColumns = [...Array(500)].map((_, i) => {
 
 export const fakeData = [...Array(10)].map(() => ({
   ...Object.fromEntries(
-    fakeColumns.map((col) => [col.accessorKey, faker.name.firstName()]),
+    fakeColumns.map((col) => [col.accessorKey, faker.person.firstName()]),
   ),
 }));

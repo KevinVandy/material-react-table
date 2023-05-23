@@ -1,9 +1,9 @@
 import { Meta } from '@storybook/react';
 import MaterialReactTable, { type MRT_ColumnDef } from '../../src';
 import { faker } from '@faker-js/faker';
-import Button from "@mui/material/Button";
-import MuiMenuItem from "@mui/material/MenuItem";
-import { styled } from "@mui/material";
+import Button from '@mui/material/Button';
+import MuiMenuItem from '@mui/material/MenuItem';
+import { styled } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShareIcon from '@mui/icons-material/Share';
@@ -43,8 +43,8 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
 ];
 
 const data = [...Array(10)].map(() => ({
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
   address: faker.address.streetAddress(),
   state: faker.address.state(),
   phoneNumber: faker.phone.number(),

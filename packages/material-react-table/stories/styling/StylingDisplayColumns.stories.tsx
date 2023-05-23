@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 import MaterialReactTable, { type MRT_ColumnDef } from '../../src';
 import { faker } from '@faker-js/faker';
-import Button from "@mui/material/Button";
+import Button from '@mui/material/Button';
 
 const meta: Meta = {
   title: 'Styling/Styling Display Columns',
@@ -28,8 +28,8 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   },
 ];
 const data = [...Array(21)].map(() => ({
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
   age: faker.datatype.number(80),
   address: faker.address.streetAddress(),
 }));

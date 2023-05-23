@@ -14,9 +14,9 @@ export type Person = {
 
 export const makeData = (numberOfRows: number) =>
   [...Array(numberOfRows).fill(null)].map(() => ({
-    firstName: faker.name.firstName(),
-    middleName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
+    firstName: faker.person.firstName(),
+    middleName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
     email: faker.internet.email(),
     address: faker.address.streetAddress(),
     zipCode: faker.address.zipCode(),

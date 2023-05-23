@@ -49,10 +49,10 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
 ];
 
 const data = [...Array(128)].map(() => ({
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
   email: faker.internet.email(),
-  jobTitle: faker.name.jobTitle(),
+  jobTitle: faker.person.jobTitle(),
   salary: +faker.finance.amount(0, 150000, 0) + 20000,
   startDate: faker.date.past(8).toLocaleDateString(),
   signatureCatchPhrase: faker.company.catchPhrase(),

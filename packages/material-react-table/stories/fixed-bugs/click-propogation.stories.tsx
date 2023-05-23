@@ -1,8 +1,8 @@
 import { Meta } from '@storybook/react';
 import MaterialReactTable, { type MRT_ColumnDef } from '../../src';
 import { faker } from '@faker-js/faker';
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
 
 const meta: Meta = {
   title: 'Fixed Bugs/Click Propagation',
@@ -42,8 +42,8 @@ const columns: MRT_ColumnDef<Person>[] = [
 ];
 
 const data = [...Array(6)].map(() => ({
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
   address: faker.address.streetAddress(),
   city: faker.address.city(),
   state: faker.address.state(),
