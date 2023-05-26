@@ -35,7 +35,9 @@ export default [
       }),
       external(),
       resolve(),
-      typescript(),
+      typescript({
+        rootDir: './src',
+      }),
     ],
   },
   {
