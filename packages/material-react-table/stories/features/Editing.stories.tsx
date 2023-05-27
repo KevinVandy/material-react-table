@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Meta } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import MaterialReactTable, {
-  MRT_Cell,
+  type MRT_Cell,
   type MaterialReactTableProps,
 } from '../../src';
 import { faker } from '@faker-js/faker';

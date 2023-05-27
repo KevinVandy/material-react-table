@@ -1,4 +1,4 @@
-import { MaterialReactTableProps } from 'material-react-table';
+import { type MaterialReactTableProps } from 'material-react-table';
 
 export type PropRow = {
   defaultValue?: string;

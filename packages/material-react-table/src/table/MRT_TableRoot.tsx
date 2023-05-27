@@ -26,21 +26,21 @@ import {
   showExpandColumn,
   getColumnId,
 } from '../column.utils';
-import type {
-  MRT_Cell,
-  MRT_Column,
-  MRT_ColumnDef,
-  MRT_FilterOption,
-  MRT_Localization,
-  MRT_Row,
-  MRT_TableInstance,
-  MRT_TableState,
-  MaterialReactTableProps,
-  MRT_DensityState,
-  MRT_ColumnOrderState,
-  MRT_GroupingState,
-  MRT_FilterFnsState,
-} from '..';
+import {
+  type MRT_Cell,
+  type MRT_Column,
+  type MRT_ColumnDef,
+  type MRT_FilterOption,
+  type MRT_Localization,
+  type MRT_Row,
+  type MRT_TableInstance,
+  type MRT_TableState,
+  type MaterialReactTableProps,
+  type MRT_DensityState,
+  type MRT_ColumnOrderState,
+  type MRT_GroupingState,
+  type MRT_FilterFnsState,
+} from '../types';
 
 export const MRT_TableRoot: any = <TData extends Record<string, any> = {}>(
   props: MaterialReactTableProps<TData> & { localization: MRT_Localization },

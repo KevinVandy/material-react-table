@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import type { Preview } from '@storybook/react';
+import { Preview } from '@storybook/react';
 import { useDarkMode } from 'storybook-dark-mode';
 import { createTheme, Link, ThemeProvider, Typography } from '@mui/material';
 

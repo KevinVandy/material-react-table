@@ -8,8 +8,8 @@ import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
 import { MRT_ToolbarDropZone } from './MRT_ToolbarDropZone';
-import type { MRT_TableInstance } from '..';
-import type { Theme } from '@mui/material/styles';
+import { type MRT_TableInstance } from '../types';
+import { type Theme } from '@mui/material/styles';
 
 export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
   alignItems: 'flex-start',

@@ -1,4 +1,4 @@
-import { MRT_Localization } from '../MaterialReactTable';
+import { type MRT_Localization } from '../types';
 
 export const MRT_Localization_RO: MRT_Localization = {
   actions: 'Acțiuni',

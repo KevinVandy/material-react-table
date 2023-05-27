@@ -1,6 +1,6 @@
 import TableCell from '@mui/material/TableCell';
 import { getCommonCellStyles } from '../column.utils';
-import type { MRT_Header, MRT_TableInstance } from '..';
+import { type MRT_Header, type MRT_TableInstance } from '../types';
 
 interface Props {
   footer: MRT_Header;

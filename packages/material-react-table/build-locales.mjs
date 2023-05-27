@@ -69,4 +69,5 @@ async function run() {
   }
 }
 
+// eslint-disable-next-line
 run().catch((error) => console.error(error));

@@ -1,9 +1,9 @@
-import { MouseEvent, useState } from 'react';
+import { type MouseEvent, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { MRT_RowActionMenu } from '../menus/MRT_RowActionMenu';
 import { MRT_EditActionButtons } from './MRT_EditActionButtons';
-import type { MRT_Cell, MRT_Row, MRT_TableInstance } from '..';
+import { type MRT_Cell, type MRT_Row, type MRT_TableInstance } from '../types';
 
 const commonIconButtonStyles = {
   height: '2rem',

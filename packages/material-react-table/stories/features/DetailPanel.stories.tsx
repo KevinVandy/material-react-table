@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import MaterialReactTable from '../../src';
 import { faker } from '@faker-js/faker';
 

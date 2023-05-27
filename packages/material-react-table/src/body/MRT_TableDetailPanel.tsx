@@ -3,8 +3,8 @@ import Collapse from '@mui/material/Collapse';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { lighten } from '@mui/material/styles';
-import type { VirtualItem } from '@tanstack/react-virtual';
-import type { MRT_Row, MRT_TableInstance } from '..';
+import { type VirtualItem } from '@tanstack/react-virtual';
+import { type MRT_Row, type MRT_TableInstance } from '../types';
 
 interface Props {
   parentRowRef: React.RefObject<HTMLTableRowElement>;

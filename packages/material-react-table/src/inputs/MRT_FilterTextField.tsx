@@ -1,6 +1,6 @@
 import {
-  ChangeEvent,
-  MouseEvent,
+  type ChangeEvent,
+  type MouseEvent,
   useCallback,
   useEffect,
   useRef,
@@ -16,8 +16,8 @@ import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
 import { debounce } from '@mui/material/utils';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
-import type { TextFieldProps } from '@mui/material/TextField';
-import type { MRT_Header, MRT_TableInstance } from '..';
+import { type TextFieldProps } from '@mui/material/TextField';
+import { type MRT_Header, type MRT_TableInstance } from '../types';
 
 interface Props {
   header: MRT_Header;

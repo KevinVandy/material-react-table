@@ -2,13 +2,13 @@ import { useMemo } from 'react';
 import Box from '@mui/material/Box';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import type {
-  MRT_FilterOption,
-  MRT_Header,
-  MRT_InternalFilterOption,
-  MRT_Localization,
-  MRT_TableInstance,
-} from '..';
+import {
+  type MRT_FilterOption,
+  type MRT_Header,
+  type MRT_InternalFilterOption,
+  type MRT_Localization,
+  type MRT_TableInstance,
+} from '../types';
 
 export const mrtFilterOptions = (
   localization: MRT_Localization,

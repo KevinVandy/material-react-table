@@ -1,8 +1,8 @@
-import { MouseEvent, useState } from 'react';
+import { type MouseEvent, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
-import type { MRT_Header, MRT_TableInstance } from '..';
+import { type MRT_Header, type MRT_TableInstance } from '../types';
 
 interface Props {
   header: MRT_Header;

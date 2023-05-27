@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { type ReactNode, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import LinkIcon from '@mui/icons-material/Link';
@@ -7,7 +7,7 @@ import {
   IconButton,
   Tooltip,
   Typography,
-  TypographyProps,
+  type TypographyProps,
   Link as MuiLink,
 } from '@mui/material';
 

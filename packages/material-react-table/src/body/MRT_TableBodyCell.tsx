@@ -1,8 +1,8 @@
 import {
-  DragEvent,
+  type DragEvent,
   memo,
-  MouseEvent,
-  RefObject,
+  type MouseEvent,
+  type RefObject,
   useEffect,
   useMemo,
   useState,
@@ -19,8 +19,8 @@ import {
   getIsFirstColumn,
   getIsLastColumn,
 } from '../column.utils';
-import type { VirtualItem } from '@tanstack/react-virtual';
-import type { MRT_Cell, MRT_TableInstance } from '..';
+import { type VirtualItem } from '@tanstack/react-virtual';
+import { type MRT_Cell, type MRT_TableInstance } from '../types';
 
 interface Props {
   cell: MRT_Cell;

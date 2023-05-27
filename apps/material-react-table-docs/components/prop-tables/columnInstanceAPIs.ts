@@ -1,4 +1,4 @@
-import { MRT_Column } from 'material-react-table';
+import { type MRT_Column } from 'material-react-table';
 
 export interface ColumnInstanceAPI {
   columnInstanceAPI: keyof MRT_Column;

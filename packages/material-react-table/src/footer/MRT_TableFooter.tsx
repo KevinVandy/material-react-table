@@ -1,7 +1,7 @@
 import TableFooter from '@mui/material/TableFooter';
 import { MRT_TableFooterRow } from './MRT_TableFooterRow';
-import type { VirtualItem } from '@tanstack/react-virtual';
-import type { MRT_TableInstance } from '..';
+import { type VirtualItem } from '@tanstack/react-virtual';
+import { type MRT_TableInstance } from '../types';
 
 interface Props {
   table: MRT_TableInstance;

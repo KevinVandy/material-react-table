@@ -1,8 +1,8 @@
 import Badge from '@mui/material/Badge';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Tooltip from '@mui/material/Tooltip';
-import { MRT_Header, MRT_TableInstance } from '..';
-import type { TableCellProps } from '@mui/material/TableCell';
+import { type MRT_Header, type MRT_TableInstance } from '../types';
+import { type TableCellProps } from '@mui/material/TableCell';
 
 interface Props {
   header: MRT_Header;

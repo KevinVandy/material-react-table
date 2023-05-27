@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import type { MRT_Column, MRT_TableInstance } from '..';
+import { type MRT_Column, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any> = {}> {
   column: MRT_Column<TData>;

@@ -1,7 +1,7 @@
 import Collapse from '@mui/material/Collapse';
 import { MRT_FilterRangeFields } from '../inputs/MRT_FilterRangeFields';
 import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
-import { MRT_Header, MRT_TableInstance } from '..';
+import { type MRT_Header, type MRT_TableInstance } from '../types';
 import { MRT_FilterCheckbox } from '../inputs/MRT_FilterCheckbox';
 
 interface Props {

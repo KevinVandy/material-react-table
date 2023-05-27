@@ -1,9 +1,5 @@
-import MaterialReactTable from './MaterialReactTable';
-export default MaterialReactTable;
 export * from './MaterialReactTable';
-
-import type { MRT_Icons } from './icons';
-export type { MRT_Icons };
+export * from './types';
 
 import { MRT_BottomToolbar } from './toolbar/MRT_BottomToolbar';
 import { MRT_CopyButton } from './buttons/MRT_CopyButton';
@@ -46,3 +42,9 @@ export {
   MRT_ToolbarInternalButtons,
   MRT_TopToolbar,
 };
+
+/**
+ * @deprecated Use named exports instead of default export (will be removed in v2)
+ * @example import { MaterialReactTable } from 'material-react-table';
+ */
+export { default } from './MaterialReactTable';

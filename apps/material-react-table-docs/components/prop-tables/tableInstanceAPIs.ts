@@ -1,4 +1,4 @@
-import type { MRT_TableInstance } from 'material-react-table';
+import { type MRT_TableInstance } from 'material-react-table';
 
 export interface TableInstanceAPI {
   tableInstanceAPI: keyof MRT_TableInstance;

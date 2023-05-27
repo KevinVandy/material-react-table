@@ -1,5 +1,5 @@
-import { DragEvent, RefObject } from 'react';
-import { MRT_Cell, MRT_TableInstance } from '..';
+import { type DragEvent, type RefObject } from 'react';
+import { type MRT_Cell, type MRT_TableInstance } from '../types';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 
 interface Props {

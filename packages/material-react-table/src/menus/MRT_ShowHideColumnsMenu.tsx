@@ -5,7 +5,7 @@ import Divider from '@mui/material/Divider';
 import Menu from '@mui/material/Menu';
 import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
 import { getDefaultColumnOrderIds } from '../column.utils';
-import type { MRT_Column, MRT_TableInstance } from '..';
+import { type MRT_Column, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any> = {}> {
   anchorEl: HTMLElement | null;

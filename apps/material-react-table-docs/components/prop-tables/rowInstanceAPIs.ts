@@ -1,4 +1,4 @@
-import { MRT_Row } from 'material-react-table';
+import { type MRT_Row } from 'material-react-table';
 
 export interface RowInstanceAPI {
   rowInstanceAPI: keyof MRT_Row;

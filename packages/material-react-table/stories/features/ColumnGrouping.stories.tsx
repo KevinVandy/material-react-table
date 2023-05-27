@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Meta } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import MaterialReactTable, {
   type MRT_Column,
   type MRT_ColumnDef,

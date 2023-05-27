@@ -1,8 +1,8 @@
-import { ChangeEvent, FocusEvent, KeyboardEvent, useState } from 'react';
+import { type ChangeEvent, type FocusEvent, type KeyboardEvent, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import type { TextFieldProps } from '@mui/material/TextField';
-import type { MRT_Cell, MRT_TableInstance } from '..';
+import { type TextFieldProps } from '@mui/material/TextField';
+import { type MRT_Cell, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any> = {}> {
   cell: MRT_Cell<TData>;

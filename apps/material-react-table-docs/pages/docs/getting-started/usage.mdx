@@ -33,7 +33,7 @@ If you are using TypeScript, you may also want to import some TypeScript types f
 
 ```tsx
 import MaterialReactTable from 'material-react-table';
-import type { MRT_ColumnDef } from 'material-react-table'; // If using TypeScript (optional, but recommended)
+import { MRT_ColumnDef } from 'material-react-table'; // If using TypeScript (optional, but recommended)
 ```
 
 ### Creating Data/Rows
@@ -146,7 +146,7 @@ Put it all together, and you have a basic table! You can also play around and en
 ```tsx
 import React, { useMemo } from 'react';
 import MaterialReactTable from 'material-react-table';
-import type { MRT_ColumnDef } from 'material-react-table'; // If using TypeScript (optional, but recommended)
+import { MRT_ColumnDef } from 'material-react-table'; // If using TypeScript (optional, but recommended)
 
 //If using TypeScript, define the shape of your data (optional, but recommended)
 interface Person {

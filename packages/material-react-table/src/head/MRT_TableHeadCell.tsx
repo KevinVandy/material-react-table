@@ -1,4 +1,4 @@
-import { DragEvent, ReactNode, useMemo } from 'react';
+import { type DragEvent, type ReactNode, useMemo } from 'react';
 import Box from '@mui/material/Box';
 import TableCell from '@mui/material/TableCell';
 import { useTheme } from '@mui/material/styles';
@@ -9,8 +9,8 @@ import { MRT_TableHeadCellGrabHandle } from './MRT_TableHeadCellGrabHandle';
 import { MRT_TableHeadCellResizeHandle } from './MRT_TableHeadCellResizeHandle';
 import { MRT_TableHeadCellSortLabel } from './MRT_TableHeadCellSortLabel';
 import { getCommonCellStyles } from '../column.utils';
-import type { Theme } from '@mui/material/styles';
-import type { MRT_Header, MRT_TableInstance } from '..';
+import { type Theme } from '@mui/material/styles';
+import { type MRT_Header, type MRT_TableInstance } from '../types';
 
 interface Props {
   header: MRT_Header;

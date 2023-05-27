@@ -1,10 +1,10 @@
-import { DragEvent, memo, useRef } from 'react';
+import { type DragEvent, memo, useRef } from 'react';
 import TableRow from '@mui/material/TableRow';
 import { type Theme, alpha, darken, lighten } from '@mui/material/styles';
 import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
-import type { VirtualItem, Virtualizer } from '@tanstack/react-virtual';
-import type { MRT_Cell, MRT_Row, MRT_TableInstance } from '..';
+import { type VirtualItem, type Virtualizer } from '@tanstack/react-virtual';
+import { type MRT_Cell, type MRT_Row, type MRT_TableInstance } from '../types';
 
 interface Props {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;

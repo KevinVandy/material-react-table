@@ -1,4 +1,4 @@
-import type { MRT_Localization } from '../MaterialReactTable';
+import { type MRT_Localization } from '../types';
 
 export const MRT_Localization_ZH_HANS: MRT_Localization = {
   actions: '动作',

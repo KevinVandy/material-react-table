@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { alpha, ListItemButton, useMediaQuery, Box } from '@mui/material';
 import LaunchIcon from '@mui/icons-material/Launch';
-import { RouteItem } from './routes';
+import { type RouteItem } from './routes';
 
 interface Props {
   depth?: number;

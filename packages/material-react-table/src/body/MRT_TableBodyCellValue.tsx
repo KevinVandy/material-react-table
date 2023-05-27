@@ -1,8 +1,8 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import { darken, lighten } from '@mui/material/styles';
 import highlightWords from 'highlight-words';
-import type { MRT_Cell, MRT_TableInstance } from '..';
+import { type MRT_Cell, type MRT_TableInstance } from '../types';
 
 const allowedTypes = ['string', 'number'];
 

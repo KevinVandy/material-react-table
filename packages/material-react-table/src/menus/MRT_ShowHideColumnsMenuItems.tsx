@@ -1,4 +1,4 @@
-import { Dispatch, DragEvent, SetStateAction, useRef, useState } from 'react';
+import { type Dispatch, type DragEvent, type SetStateAction, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { MRT_ColumnPinningButtons } from '../buttons/MRT_ColumnPinningButtons';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 import { reorderColumn } from '../column.utils';
-import type { MRT_Column, MRT_TableInstance } from '..';
+import { type MRT_Column, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any> = {}> {
   allColumns: MRT_Column<TData>[];
