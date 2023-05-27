@@ -10,11 +10,10 @@ Before making large PRs, you may want to discuss your proposals in either the [D
 
 ## Running the project locally
 
-This project uses PNPM and a TurboRepo with 3 projects.
+This project uses PNPM and a TurboRepo with 2 projects.
 
-- The library itself in `/packages/material-react-table`
+- The library itself in `/packages/material-react-table` which also contains a storybook site for local development
 - The docs site in `/apps/material-react-table-docs`
-- The storybook site used for local development in `/apps/material-react-table-storybook`
 
 ### 1. Fork and Clone the project
 
@@ -28,16 +27,10 @@ pnpm i
 
 ### 3. Run the project(s)
 
-#### Run the Library for Local Development
-
-```bash
-pnpm lib:dev
-```
-
 #### Run the Storybook for Local Development
 
 ```bash
-pnpm storybook:dev
+pnpm storybook
 ```
 
 The Storybook site will open on `port 6006` by default.
@@ -57,3 +50,5 @@ The Docs site will open on `port 3000` by default.
 ```bash
 pnpm lib:build
 ```
+
+> Note: After building the library, if you are running the docs site locally, it will use the compiled output of the dist folder. This can be annoying if you are trying to test changes to the library in the docs site itself. Just delete the `/dist` folder to test lib changes in the docs site.
