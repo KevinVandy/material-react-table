@@ -1,7 +1,7 @@
+import { alpha, lighten } from '@mui/material/styles';
 import { type MRT_AggregationFns } from './aggregationFns';
 import { type MRT_FilterFns } from './filterFns';
 import { type MRT_SortingFns } from './sortingFns';
-import { alpha, lighten } from '@mui/material/styles';
 import { type Row } from '@tanstack/react-table';
 import { type TableCellProps } from '@mui/material/TableCell';
 import { type Theme } from '@mui/material/styles';

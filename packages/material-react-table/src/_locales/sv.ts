@@ -1,4 +1,4 @@
-import { type MRT_Localization } from '../types';
+import { type MRT_Localization } from '..';
 
 export const MRT_Localization_SV: MRT_Localization = {
   actions: 'Åtgärder',

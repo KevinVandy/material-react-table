@@ -36,7 +36,11 @@ async function build(locale) {
   const bundle = await rollup({
     input: `./src/_locales/${locale}.ts`,
     plugins: [
-      typescript({ declaration: false, declarationDir: undefined }),
+      typescript({
+        declaration: false,
+        declarationDir: undefined,
+        rootDir: './src',
+      }),
       copy({
         targets: [
           ...['cjs', 'esm'].map((format) => ({
