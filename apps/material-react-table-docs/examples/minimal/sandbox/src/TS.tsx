@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
 import { data, type Person } from './makeData';
 
 export const Example = () => {
@@ -42,6 +42,21 @@ export const Example = () => {
       enableBottomToolbar={false}
       enableTopToolbar={false}
       muiTableBodyRowProps={{ hover: false }}
+      muiTableProps={{
+        sx: {
+          border: '1px solid rgba(81, 81, 81, 1)',
+        },
+      }}
+      muiTableHeadCellProps={{
+        sx: {
+          border: '1px solid rgba(81, 81, 81, 1)',
+        },
+      }}
+      muiTableBodyCellProps={{
+        sx: {
+          border: '1px solid rgba(81, 81, 81, 1)',
+        },
+      }}
     />
   );
 };

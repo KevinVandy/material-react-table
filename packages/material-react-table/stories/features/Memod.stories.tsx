@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { type Meta } from '@storybook/react';
-import MaterialReactTable, { type MRT_ColumnDef } from '../../src';
+import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
 import { faker } from '@faker-js/faker';
 import Button from '@mui/material/Button';
 

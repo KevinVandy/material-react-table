@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '@mui/material';
-import MaterialReactTable from 'material-react-table';
+import { MaterialReactTable } from 'material-react-table';
 import { data } from './makeData';
 
 //column definitions...

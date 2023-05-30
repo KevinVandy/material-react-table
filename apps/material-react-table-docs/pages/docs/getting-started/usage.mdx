@@ -26,13 +26,17 @@ If you need to change the colors of the table components, advanced [Material UI 
 Once you have everything installed, you can import from `material-react-table` like this:
 
 ```tsx
-import MaterialReactTable from 'material-react-table';
+import MaterialReactTable from 'material-react-table'; // pre-v1.12.0
+//or
+import { MaterialReactTable } from 'material-react-table'; // v1.12.0 and above (recommended)
 ```
+
+> As of v1.12.0, MaterialReactTable is recommended to be imported from a named export (with curly braces) instead of the default export. The default export will still work, but it is deprecated and will be removed in a future version. This is comply with rollup bundling best practices.
 
 If you are using TypeScript, you may also want to import some TypeScript types from `'material-react-table'` to take advantage of the advanced strong type checking and autocompletion features. The `MRT_ColumnDef` type is especially useful for defining your columns in a type-safe way.
 
 ```tsx
-import MaterialReactTable from 'material-react-table';
+import { MaterialReactTable } from 'material-react-table';
 import { type MRT_ColumnDef } from 'material-react-table'; // If using TypeScript (optional, but recommended)
 ```
 
@@ -145,7 +149,7 @@ Put it all together, and you have a basic table! You can also play around and en
 
 ```tsx
 import React, { useMemo } from 'react';
-import MaterialReactTable from 'material-react-table';
+import { MaterialReactTable } from 'material-react-table';
 import { MRT_ColumnDef } from 'material-react-table'; // If using TypeScript (optional, but recommended)
 
 //If using TypeScript, define the shape of your data (optional, but recommended)

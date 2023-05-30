@@ -1,4 +1,4 @@
-import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import MaterialReactTable from 'material-react-table';
+import { MaterialReactTable } from 'material-react-table';
 import { fakeColumns, fakeData } from './makeData';
 
 const Example = () => {

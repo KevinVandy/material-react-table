@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Box, Button } from '@mui/material';
-import MaterialReactTable from 'material-react-table';
+import { MaterialReactTable } from 'material-react-table';
 import { data } from './makeData';
 
 const Example = () => {

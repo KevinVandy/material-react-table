@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import MaterialReactTable, {
+import {
+  MaterialReactTable,
   type MRT_ColumnDef,
   type MRT_SortingState,
   type MRT_Virtualizer,

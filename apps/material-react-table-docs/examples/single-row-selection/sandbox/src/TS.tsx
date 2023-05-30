@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import MaterialReactTable, {
+import {
+  MaterialReactTable,
   type MRT_ColumnDef,
   type MRT_RowSelectionState,
 } from 'material-react-table';

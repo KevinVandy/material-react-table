@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { type Meta } from '@storybook/react';
-import MaterialReactTable, {
+import {
+  MaterialReactTable,
   type MRT_Cell,
   type MaterialReactTableProps,
 } from '../../src';

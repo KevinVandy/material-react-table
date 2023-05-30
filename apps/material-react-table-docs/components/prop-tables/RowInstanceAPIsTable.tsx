@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import MaterialReactTable, {
+import {
+  MaterialReactTable,
   type MRT_ColumnDef,
   type MRT_Row,
 } from 'material-react-table';

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { type Meta } from '@storybook/react';
-import MaterialReactTable, { type MRT_ColumnDef } from '../../src';
+import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
 
 const meta: Meta = {
   title: 'Fixed Bugs/Loading Data',

@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import MaterialReactTable, {
+import {
+  MaterialReactTable,
   type MRT_ColumnDef,
   type MRT_Icons,
 } from 'material-react-table';

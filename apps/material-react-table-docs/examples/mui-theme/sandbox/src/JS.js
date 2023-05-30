@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import MaterialReactTable from 'material-react-table';
+import { MaterialReactTable } from 'material-react-table';
 import { createTheme, ThemeProvider, useTheme } from '@mui/material';
 
 //column definitions...

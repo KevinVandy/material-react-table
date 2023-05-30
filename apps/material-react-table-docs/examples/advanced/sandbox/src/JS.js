@@ -1,16 +1,11 @@
 import React, { useMemo } from 'react';
 
 //MRT Imports
-import MaterialReactTable from 'material-react-table';
+//import MaterialReactTable from 'material-react-table'; //default import deprecated
+import { MaterialReactTable } from 'material-react-table';
 
 //Material UI Imports
-import {
-  Box,
-  Button,
-  ListItemIcon,
-  MenuItem,
-  Typography,
-} from '@mui/material';
+import { Box, Button, ListItemIcon, MenuItem, Typography } from '@mui/material';
 
 //Date Picker Imports
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';

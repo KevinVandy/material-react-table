@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import MaterialReactTable, {
+import {
+  MaterialReactTable,
   type MRT_ColumnDef,
   type MRT_ColumnFiltersState,
   type MRT_PaginationState,

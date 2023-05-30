@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
 import { Box, IconButton } from '@mui/material';
 import {
   Edit as EditIcon,

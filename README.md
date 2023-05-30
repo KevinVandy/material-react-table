@@ -120,7 +120,7 @@ npm install material-react-table
 
 ```jsx
 import React, { useMemo, useRef, useState, useEffect } from 'react';
-import MaterialReactTable from 'material-react-table';
+import { MaterialReactTable } from 'material-react-table';
 
 const data = [
   {

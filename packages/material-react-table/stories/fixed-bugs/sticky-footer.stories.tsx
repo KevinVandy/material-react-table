@@ -1,5 +1,5 @@
 import { type Meta } from '@storybook/react';
-import MaterialReactTable from '../../src';
+import { MaterialReactTable } from '../../src';
 
 const meta: Meta = {
   title: 'Fixed Bugs/sticky-footer',

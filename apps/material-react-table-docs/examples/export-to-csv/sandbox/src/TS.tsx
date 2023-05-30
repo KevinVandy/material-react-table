@@ -1,5 +1,6 @@
 import React from 'react';
-import MaterialReactTable, {
+import {
+  MaterialReactTable,
   type MRT_ColumnDef,
   type MRT_Row,
 } from 'material-react-table';

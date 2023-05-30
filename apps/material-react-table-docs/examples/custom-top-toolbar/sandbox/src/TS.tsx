@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import MaterialReactTable, {
+import {
+  MaterialReactTable,
   type MRT_ColumnDef,
   MRT_ToggleDensePaddingButton,
   MRT_FullScreenToggleButton,

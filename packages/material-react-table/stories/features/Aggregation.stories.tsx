@@ -1,5 +1,6 @@
 import { type Meta } from '@storybook/react';
-import MaterialReactTable, {
+import {
+  MaterialReactTable,
   MRT_AggregationFns,
   type MRT_ColumnDef,
 } from '../../src';

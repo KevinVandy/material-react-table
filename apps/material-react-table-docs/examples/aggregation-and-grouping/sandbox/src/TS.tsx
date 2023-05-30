@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Box, Stack } from '@mui/material';
-import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
 import { data, type Person } from './makeData';
 
 const Example = () => {

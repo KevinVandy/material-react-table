@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import MaterialReactTable from 'material-react-table';
+import { MaterialReactTable } from 'material-react-table';
 import { Box, Typography } from '@mui/material';
 import { data } from './makeData';
 

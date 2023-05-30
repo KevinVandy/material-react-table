@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
-import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
 
+//example data type
 type Person = {
   name: {
     firstName: string;
@@ -67,22 +68,27 @@ const Example = () => {
       {
         accessorKey: 'name.firstName', //access nested data with dot notation
         header: 'First Name',
+        size: 150,
       },
       {
         accessorKey: 'name.lastName',
         header: 'Last Name',
+        size: 150,
       },
       {
         accessorKey: 'address', //normal accessorKey
         header: 'Address',
+        size: 200
       },
       {
         accessorKey: 'city',
         header: 'City',
+        size: 150,
       },
       {
         accessorKey: 'state',
         header: 'State',
+        size: 150
       },
     ],
     [],

@@ -1,5 +1,5 @@
 import React from 'react';
-import MaterialReactTable, { type MRT_ColumnDef } from 'material-react-table';
+import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
 import { data, type Person } from './makeData';
 import { Button } from '@mui/material';
 

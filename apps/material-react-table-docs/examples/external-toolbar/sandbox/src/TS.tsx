@@ -1,5 +1,6 @@
 import React, { useReducer, useRef, useState } from 'react';
-import MaterialReactTable, {
+import {
+  MaterialReactTable,
   MRT_FullScreenToggleButton,
   MRT_GlobalFilterTextField,
   MRT_ShowHideColumnsButton,

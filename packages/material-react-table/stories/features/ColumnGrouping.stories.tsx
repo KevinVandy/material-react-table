@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { type Meta } from '@storybook/react';
-import MaterialReactTable, {
+import {
+  MaterialReactTable,
   type MRT_Column,
   type MRT_ColumnDef,
 } from '../../src';
