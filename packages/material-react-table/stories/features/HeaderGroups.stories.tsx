@@ -195,11 +195,19 @@ export const DeepMixedHeaderGroups = () => {
   );
 };
 
-export const HeaderGroupsWithVirtualization = () => (
+export const HeaderGroupsWithRowVirtualization = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     enableRowVirtualization
     enablePagination={false}
+  />
+);
+
+export const HeaderGroupsWithColumnVirtualization = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnVirtualization
   />
 );

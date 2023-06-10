@@ -62,7 +62,7 @@ const preview: Preview = {
           >
             View Source code for these examples in the code tab below or{' '}
             <Link
-              href="https://github.com/KevinVandy/material-react-table/tree/main/apps/material-react-table-storybook/stories/features"
+              href="https://github.com/KevinVandy/material-react-table/tree/main/packages/material-react-table/stories/features"
               target="_blank"
             >
               here on GitHub.
