@@ -40,13 +40,13 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   },
 ];
 
-const data = [...Array(55)].map(() => ({
+const data = [...Array(555)].map(() => ({
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
   age: faker.datatype.number(80),
-  address: faker.address.streetAddress(),
-  city: faker.address.city(),
-  state: faker.address.state(),
+  address: faker.location.streetAddress(),
+  city: faker.location.city(),
+  state: faker.location.state(),
 }));
 
 export const HeaderGroups = () => (
@@ -194,3 +194,12 @@ export const DeepMixedHeaderGroups = () => {
     />
   );
 };
+
+export const HeaderGroupsWithVirtualization = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowVirtualization
+    enablePagination={false}
+  />
+);

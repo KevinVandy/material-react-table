@@ -68,8 +68,8 @@ const data = [...Array(120)].map(() => ({
   age: faker.datatype.number(100),
   birthDate: faker.date.birthdate({ min: 1990, max: 2020 }),
   gender: faker.person.sex(),
-  address: faker.address.streetAddress(),
-  state: faker.address.state(),
+  address: faker.location.streetAddress(),
+  state: faker.location.state(),
 }));
 
 export const FilteringEnabledDefault = () => (

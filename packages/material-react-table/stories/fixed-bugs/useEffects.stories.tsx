@@ -19,8 +19,8 @@ export default meta;
 const data = [...Array(100)].map(() => ({
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  address: faker.address.streetAddress(),
-  state: faker.address.state(),
+  address: faker.location.streetAddress(),
+  state: faker.location.state(),
   phoneNumber: faker.phone.number(),
 }));
 

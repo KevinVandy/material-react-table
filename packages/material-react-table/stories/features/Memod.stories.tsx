@@ -62,10 +62,10 @@ const generateData = () =>
     lastName: faker.person.lastName(),
     gender: faker.person.sex(),
     age: faker.datatype.number(80),
-    address: faker.address.streetAddress(),
-    city: faker.address.city(),
-    state: faker.address.state(),
-    zipCode: faker.address.zipCode(),
+    address: faker.location.streetAddress(),
+    city: faker.location.city(),
+    state: faker.location.state(),
+    zipCode: faker.location.zipCode(),
   }));
 
 export const NoMemos = () => {

@@ -82,8 +82,8 @@ type Person = {
 const data: Person[] = [...Array(100)].map(() => ({
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  address: faker.address.streetAddress(),
-  state: faker.address.state(),
+  address: faker.location.streetAddress(),
+  state: faker.location.state(),
   phoneNumber: faker.phone.number(),
 }));
 
@@ -648,8 +648,8 @@ const nestedData = [...Array(10)].map(() => ({
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
   },
-  address: faker.address.streetAddress(),
-  state: faker.address.state(),
+  address: faker.location.streetAddress(),
+  state: faker.location.state(),
   phoneNumber: faker.phone.number(),
 }));
 

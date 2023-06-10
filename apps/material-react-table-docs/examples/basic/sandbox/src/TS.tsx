@@ -78,7 +78,7 @@ const Example = () => {
       {
         accessorKey: 'address', //normal accessorKey
         header: 'Address',
-        size: 200
+        size: 200,
       },
       {
         accessorKey: 'city',
@@ -88,7 +88,7 @@ const Example = () => {
       {
         accessorKey: 'state',
         header: 'State',
-        size: 150
+        size: 150,
       },
     ],
     [],

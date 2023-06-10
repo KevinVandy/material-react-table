@@ -46,7 +46,7 @@ const data = [...Array(5)].map(() => ({
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
   age: faker.datatype.number(80),
-  address: faker.address.streetAddress(),
+  address: faker.location.streetAddress(),
   phoneNumber: faker.phone.number(),
 }));
 

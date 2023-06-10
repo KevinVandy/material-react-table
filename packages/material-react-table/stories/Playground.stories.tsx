@@ -50,6 +50,6 @@ Default.args = {
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
     age: faker.datatype.number(80),
-    address: faker.address.streetAddress(),
+    address: faker.location.streetAddress(),
   })),
 } as MaterialReactTableProps<Person>;

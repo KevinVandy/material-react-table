@@ -48,8 +48,8 @@ const data = [...Array(200)].map(() => ({
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
   gender: faker.person.sex(),
-  city: faker.address.city(),
-  state: faker.address.state(),
+  city: faker.location.city(),
+  state: faker.location.state(),
 }));
 
 export const ColumnGroupingEnabled = () => (

@@ -27,10 +27,10 @@ export const DetailPanelEnabled = () => (
     data={[...Array(5)].map(() => ({
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      address: faker.address.streetAddress(),
-      city: faker.address.city(),
-      state: faker.address.state(),
-      zipCode: faker.address.zipCode(),
+      address: faker.location.streetAddress(),
+      city: faker.location.city(),
+      state: faker.location.state(),
+      zipCode: faker.location.zipCode(),
       phone: faker.phone.number(),
     }))}
     renderDetailPanel={({ row }) => (
@@ -68,10 +68,10 @@ export const DetailPanelEnabledConditional = () => (
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
       age: faker.datatype.number(100) + 5,
-      address: faker.address.streetAddress(),
-      city: faker.address.city(),
-      state: faker.address.state(),
-      zipCode: faker.address.zipCode(),
+      address: faker.location.streetAddress(),
+      city: faker.location.city(),
+      state: faker.location.state(),
+      zipCode: faker.location.zipCode(),
       phone: faker.phone.number(),
     }))}
     muiExpandButtonProps={({ row }) => ({
@@ -113,10 +113,10 @@ export const DetailPanelExpandColumnLast = () => (
     data={[...Array(5)].map(() => ({
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      address: faker.address.streetAddress(),
-      city: faker.address.city(),
-      state: faker.address.state(),
-      zipCode: faker.address.zipCode(),
+      address: faker.location.streetAddress(),
+      city: faker.location.city(),
+      state: faker.location.state(),
+      zipCode: faker.location.zipCode(),
       phone: faker.phone.number(),
     }))}
     displayColumnDefOptions={{
@@ -160,10 +160,10 @@ export const DetailPanelExpandedByDefault = () => (
     data={[...Array(5)].map(() => ({
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      address: faker.address.streetAddress(),
-      city: faker.address.city(),
-      state: faker.address.state(),
-      zipCode: faker.address.zipCode(),
+      address: faker.location.streetAddress(),
+      city: faker.location.city(),
+      state: faker.location.state(),
+      zipCode: faker.location.zipCode(),
       phone: faker.phone.number(),
     }))}
     initialState={{ expanded: true }}
@@ -197,10 +197,10 @@ export const DetailPanelExpandAllDisabled = () => (
     data={[...Array(5)].map(() => ({
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      address: faker.address.streetAddress(),
-      city: faker.address.city(),
-      state: faker.address.state(),
-      zipCode: faker.address.zipCode(),
+      address: faker.location.streetAddress(),
+      city: faker.location.city(),
+      state: faker.location.state(),
+      zipCode: faker.location.zipCode(),
       phone: faker.phone.number(),
     }))}
     enableExpandAll={false}

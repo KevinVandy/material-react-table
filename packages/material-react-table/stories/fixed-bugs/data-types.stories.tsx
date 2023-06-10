@@ -49,10 +49,14 @@ const columns: MRT_ColumnDef<Person>[] = [
 const data = [...Array(66)].map(() => ({
   firstName: Math.random() > 0.5 ? faker.person.firstName() : null,
   lastName: faker.person.lastName(),
-  address: faker.address.streetAddress(),
-  city: faker.address.city(),
-  state: faker.address.state(),
-  states: [faker.address.state(), faker.address.state(), faker.address.state()],
+  address: faker.location.streetAddress(),
+  city: faker.location.city(),
+  state: faker.location.state(),
+  states: [
+    faker.location.state(),
+    faker.location.state(),
+    faker.location.state(),
+  ],
 }));
 
 export const NullColumn = () => {

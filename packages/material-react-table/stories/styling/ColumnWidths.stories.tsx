@@ -39,7 +39,7 @@ const data = [...Array(21)].map(() => ({
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
   age: faker.datatype.number(80),
-  address: faker.address.streetAddress(),
+  address: faker.location.streetAddress(),
 }));
 
 export const CustomWidths = () => (
@@ -48,4 +48,12 @@ export const CustomWidths = () => (
 
 export const CustomWidthsGrid = () => (
   <MaterialReactTable columns={columns} data={data} layoutMode="grid" />
+);
+
+export const SmallWidths = () => (
+  <MaterialReactTable
+    columns={columns.map((c) => ({ ...c, size: 10, minSize: 10 }))}
+    data={data}
+    layoutMode="grid"
+  />
 );

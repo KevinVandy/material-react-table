@@ -36,7 +36,7 @@ const data = [...Array(15)].map(() => ({
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
   age: faker.datatype.number(80),
-  address: faker.address.streetAddress(),
+  address: faker.location.streetAddress(),
 }));
 
 export const SelectionEnabled = () => (

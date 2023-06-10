@@ -42,8 +42,8 @@ const columns: MRT_ColumnDef<Row>[] = [
 const data: Row[] = [...Array(100)].map(() => ({
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  address: faker.address.streetAddress(),
-  state: faker.address.state(),
+  address: faker.location.streetAddress(),
+  state: faker.location.state(),
   phoneNumber: faker.phone.number(),
 }));
 

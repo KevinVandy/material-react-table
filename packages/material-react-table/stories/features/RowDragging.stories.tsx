@@ -42,7 +42,7 @@ const initData = [...Array(25)].map(() => ({
   lastName: faker.person.lastName(),
   email: faker.internet.email(),
   age: faker.datatype.number(20) + 18,
-  state: faker.address.state(),
+  state: faker.location.state(),
 }));
 
 export const RowDraggingEnabled = () => {
