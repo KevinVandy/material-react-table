@@ -200,7 +200,6 @@ export const MRT_TableBody = ({
                 : (rowOrVirtualRow as MRT_Row);
               const props = {
                 columnVirtualizer,
-                key: row.id,
                 measureElement: rowVirtualizer?.measureElement,
                 numRows: rows.length,
                 row,
@@ -214,9 +213,9 @@ export const MRT_TableBody = ({
                   : undefined,
               };
               return memoMode === 'rows' ? (
-                <Memo_MRT_TableBodyRow {...props} />
+                <Memo_MRT_TableBodyRow key={row.id} {...props} />
               ) : (
-                <MRT_TableBodyRow {...props} />
+                <MRT_TableBodyRow key={row.id} {...props} />
               );
             })}
           </>

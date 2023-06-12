@@ -111,7 +111,6 @@ export const MRT_TableBodyRow = ({
             : (cellOrVirtualCell as MRT_Cell);
           const props = {
             cell,
-            key: cell.id,
             measureElement: columnVirtualizer?.measureElement,
             numRows,
             rowIndex,
@@ -127,9 +126,9 @@ export const MRT_TableBodyRow = ({
             !draggingRow &&
             editingCell?.id !== cell.id &&
             editingRow?.id !== row.id ? (
-            <Memo_MRT_TableBodyCell {...props} />
+            <Memo_MRT_TableBodyCell key={cell.id} {...props} />
           ) : (
-            <MRT_TableBodyCell {...props} />
+            <MRT_TableBodyCell key={cell.id} {...props} />
           );
         })}
         {virtualPaddingRight ? (
