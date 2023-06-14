@@ -153,6 +153,41 @@ export const FilterFnAndFilterVariants = () => (
   />
 );
 
+export const FilterFnAndFilterVariantsFaceted = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        accessorKey: 'firstName',
+        filterFn: 'fuzzy', // default
+      },
+      {
+        header: 'Last Name',
+        accessorKey: 'lastName',
+        filterVariant: 'select',
+      },
+      {
+        header: 'Age',
+        accessorKey: 'age',
+        filterVariant: 'range-slider',
+      },
+      {
+        header: 'Gender',
+        accessorKey: 'gender',
+        filterVariant: 'select',
+      },
+      {
+        header: 'State',
+        accessorKey: 'state',
+        filterVariant: 'multi-select',
+      },
+    ]}
+    data={data}
+    enableFacetedValues
+    initialState={{ showColumnFilters: true }}
+  />
+);
+
 export const FilteringChangeModeEnabled = () => (
   <MaterialReactTable
     columns={[

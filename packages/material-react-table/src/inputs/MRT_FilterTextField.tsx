@@ -5,6 +5,7 @@ import {
   useEffect,
   useRef,
   useState,
+  useMemo,
 } from 'react';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
@@ -101,6 +102,24 @@ export const MRT_FilterTextField = ({
     !rangeFilterIndex &&
     (allowedColumnFilterOptions === undefined ||
       !!allowedColumnFilterOptions?.length);
+
+  const facetedUniqueValues = column.getFacetedUniqueValues();
+
+  const filterSelectOptions = useMemo(
+    () =>
+      columnDef.filterSelectOptions ??
+      ((isSelectFilter || isMultiSelectFilter) && facetedUniqueValues
+        ? Array.from(facetedUniqueValues.keys()).sort((a, b) =>
+            a.localeCompare(b),
+          )
+        : undefined),
+    [
+      columnDef.filterSelectOptions,
+      facetedUniqueValues,
+      isMultiSelectFilter,
+      isSelectFilter,
+    ],
+  );
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [filterValue, setFilterValue] = useState<string | string[]>(() =>
@@ -298,7 +317,7 @@ export const MRT_FilterTextField = ({
                 ) : (
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '2px' }}>
                     {(selected as string[])?.map((value) => {
-                      const selectedValue = columnDef.filterSelectOptions?.find(
+                      const selectedValue = filterSelectOptions?.find(
                         (option) =>
                           option instanceof Object
                             ? option.value === value
@@ -350,7 +369,7 @@ export const MRT_FilterTextField = ({
           </MenuItem>
         )}
         {textFieldProps.children ??
-          columnDef?.filterSelectOptions?.map(
+          filterSelectOptions?.map(
             (option: string | { text: string; value: string }) => {
               let value: string;
               let text: string;
@@ -380,7 +399,9 @@ export const MRT_FilterTextField = ({
                       sx={{ mr: '0.5rem' }}
                     />
                   )}
-                  {text}
+                  {text}{' '}
+                  {!columnDef.filterSelectOptions &&
+                    `(${facetedUniqueValues.get(value)})`}
                 </MenuItem>
               );
             },

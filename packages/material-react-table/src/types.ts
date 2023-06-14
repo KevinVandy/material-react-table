@@ -13,13 +13,14 @@ import { type LinearProgressProps } from '@mui/material/LinearProgress';
 import { type PaperProps } from '@mui/material/Paper';
 import { type RadioProps } from '@mui/material/Radio';
 import { type SkeletonProps } from '@mui/material/Skeleton';
-import { type TableProps } from '@mui/material/Table';
+import { type SliderProps } from '@mui/material';
 import { type TableBodyProps } from '@mui/material/TableBody';
 import { type TableCellProps } from '@mui/material/TableCell';
 import { type TableContainerProps } from '@mui/material/TableContainer';
 import { type TableFooterProps } from '@mui/material/TableFooter';
 import { type TableHeadProps } from '@mui/material/TableHead';
 import { type TablePaginationProps } from '@mui/material/TablePagination';
+import { type TableProps } from '@mui/material/Table';
 import { type TableRowProps } from '@mui/material/TableRow';
 import { type TextFieldProps } from '@mui/material/TextField';
 import { type ToolbarProps } from '@mui/material/Toolbar';
@@ -389,7 +390,13 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> =
     enableFilterMatchHighlighting?: boolean;
     filterFn?: MRT_FilterFn<TData>;
     filterSelectOptions?: (string | { text: string; value: any })[];
-    filterVariant?: 'text' | 'select' | 'multi-select' | 'range' | 'checkbox';
+    filterVariant?:
+      | 'checkbox'
+      | 'multi-select'
+      | 'range'
+      | 'range-slider'
+      | 'select'
+      | 'text';
     /**
      * footer must be a string. If you want custom JSX to render the footer, you can also specify a `Footer` option. (Capital F)
      */
@@ -462,6 +469,12 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> =
           table: MRT_TableInstance<TData>;
           column: MRT_Column<TData>;
           rangeFilterIndex?: number;
+        }) => TextFieldProps);
+    muiTableHeadCellFilterSliderProps?:
+      | SliderProps
+      | ((props: {
+          table: MRT_TableInstance<TData>;
+          column: MRT_Column<TData>;
         }) => TextFieldProps);
     muiTableHeadCellProps?:
       | TableCellProps
@@ -646,6 +659,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
       enableDensityToggle?: boolean;
       enableEditing?: boolean | ((row: MRT_Row<TData>) => boolean);
       enableExpandAll?: boolean;
+      enableFacetedValues?: boolean;
       enableFilterMatchHighlighting?: boolean;
       enableFullScreenToggle?: boolean;
       enableGlobalFilterModes?: boolean;
@@ -819,6 +833,12 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
             table: MRT_TableInstance<TData>;
             column: MRT_Column<TData>;
             rangeFilterIndex?: number;
+          }) => TextFieldProps);
+      muiTableHeadCellFilterSliderProps?:
+        | SliderProps
+        | ((props: {
+            table: MRT_TableInstance<TData>;
+            column: MRT_Column<TData>;
           }) => TextFieldProps);
       muiTableHeadCellProps?:
         | TableCellProps

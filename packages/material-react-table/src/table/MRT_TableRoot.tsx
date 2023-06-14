@@ -2,7 +2,9 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   getCoreRowModel,
   getExpandedRowModel,
+  getFacetedMinMaxValues,
   getFacetedRowModel,
+  getFacetedUniqueValues,
   getFilteredRowModel,
   getGroupedRowModel,
   getPaginationRowModel,
@@ -271,12 +273,31 @@ export const MRT_TableRoot: any = <TData extends Record<string, any> = {}>(
   const table = {
     ...useReactTable({
       getCoreRowModel: getCoreRowModel(),
-      getExpandedRowModel: getExpandedRowModel(),
-      getFacetedRowModel: getFacetedRowModel(),
-      getFilteredRowModel: getFilteredRowModel(),
-      getGroupedRowModel: getGroupedRowModel(),
-      getPaginationRowModel: getPaginationRowModel(),
-      getSortedRowModel: getSortedRowModel(),
+      getExpandedRowModel: props.enableExpanding
+        ? getExpandedRowModel()
+        : undefined,
+      getFacetedMinMaxValues: props.enableFacetedValues
+        ? getFacetedMinMaxValues()
+        : undefined,
+      getFacetedRowModel: props.enableFacetedValues
+        ? getFacetedRowModel()
+        : undefined,
+      getFacetedUniqueValues: props.enableFacetedValues
+        ? getFacetedUniqueValues()
+        : undefined,
+      getFilteredRowModel:
+        props.enableColumnFilters ||
+        props.enableGlobalFilter ||
+        props.enableFilters
+          ? getFilteredRowModel()
+          : undefined,
+      getGroupedRowModel: props.enableGrouping
+        ? getGroupedRowModel()
+        : undefined,
+      getPaginationRowModel: props.enablePagination
+        ? getPaginationRowModel()
+        : undefined,
+      getSortedRowModel: props.enableSorting ? getSortedRowModel() : undefined,
       onColumnOrderChange: setColumnOrder,
       onGroupingChange: setGrouping,
       getSubRows: (row) => row?.subRows,
