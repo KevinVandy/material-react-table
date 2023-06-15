@@ -113,6 +113,7 @@ export const SourceCodeSnippet = ({
               display: 'flex',
               flexWrap: 'wrap',
               gap: '1rem',
+              alignItems: 'center',
             }}
           >
             <LinkHeading

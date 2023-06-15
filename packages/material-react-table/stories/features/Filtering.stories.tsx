@@ -66,8 +66,8 @@ const data = [...Array(120)].map(() => ({
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
   age: faker.datatype.number(100),
-  birthDate: faker.date.birthdate({ min: 1990, max: 2020 }),
-  gender: faker.person.sex(),
+  birthDate: faker.date.birthdate({ min: 1980, max: 2020 }),
+  gender: Math.random() < 0.8 ? faker.person.sex() : faker.person.gender(),
   address: faker.location.streetAddress(),
   state: faker.location.state(),
 }));
@@ -219,6 +219,42 @@ export const FilteringChangeModeEnabled = () => (
       },
     ]}
     data={data}
+    enableColumnFilterModes
+    initialState={{ showColumnFilters: true }}
+  />
+);
+
+export const FilteringChangeModeEnabledFaceted = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        accessorKey: 'firstName',
+        filterFn: 'fuzzy', // default
+      },
+      {
+        header: 'Last Name',
+        accessorKey: 'lastName',
+        filterVariant: 'select',
+      },
+      {
+        header: 'Age',
+        accessorKey: 'age',
+        filterVariant: 'range-slider',
+      },
+      {
+        header: 'Gender',
+        accessorKey: 'gender',
+        filterVariant: 'select',
+      },
+      {
+        header: 'State',
+        accessorKey: 'state',
+        filterVariant: 'multi-select',
+      },
+    ]}
+    data={data}
+    enableFacetedValues
     enableColumnFilterModes
     initialState={{ showColumnFilters: true }}
   />

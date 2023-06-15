@@ -26,7 +26,7 @@ export const SideBar = ({ navOpen, setNavOpen }: Props) => {
         sx={{
           overflow: 'visible',
           overflowY: navOpen ? 'overlay' : 'hidden',
-          mt: '64px',
+          mt: '49px',
           p: 0,
           pb: '10rem',
           scrollPaddingTop: '20%',

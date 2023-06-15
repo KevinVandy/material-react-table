@@ -60,7 +60,7 @@ const generateData = () =>
   [...Array(55)].map(() => ({
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
-    gender: faker.person.sex(),
+    gender: Math.random() < 0.9 ? faker.person.sex() : faker.person.gender(),
     age: faker.datatype.number(80),
     address: faker.location.streetAddress(),
     city: faker.location.city(),

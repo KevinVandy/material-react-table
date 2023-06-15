@@ -137,8 +137,15 @@ export const MRT_FilterOptionMenu = <TData extends Record<string, any> = {}>({
   const { columnDef } = column ?? {};
   const currentFilterValue = column?.getFilterValue();
 
-  const allowedColumnFilterOptions =
+  let allowedColumnFilterOptions =
     columnDef?.columnFilterModeOptions ?? columnFilterModeOptions;
+
+  if (columnDef?.filterVariant === 'range-slider') {
+    allowedColumnFilterOptions = [
+      ...rangeModes,
+      ...(allowedColumnFilterOptions ?? []),
+    ].filter((option) => rangeModes.includes(option));
+  }
 
   const internalFilterOptions = useMemo(
     () =>

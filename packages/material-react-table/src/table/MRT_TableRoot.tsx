@@ -273,9 +273,10 @@ export const MRT_TableRoot: any = <TData extends Record<string, any> = {}>(
   const table = {
     ...useReactTable({
       getCoreRowModel: getCoreRowModel(),
-      getExpandedRowModel: props.enableExpanding
-        ? getExpandedRowModel()
-        : undefined,
+      getExpandedRowModel:
+        props.enableExpanding || props.enableGrouping
+          ? getExpandedRowModel()
+          : undefined,
       getFacetedMinMaxValues: props.enableFacetedValues
         ? getFacetedMinMaxValues()
         : undefined,

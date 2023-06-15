@@ -24,7 +24,7 @@ export const MaterialReactTable = <TData extends Record<string, any> = {}>({
   enableColumnResizing = false,
   enableDensityToggle = true,
   enableExpandAll = true,
-  enableExpanding = false,
+  enableExpanding,
   enableFilterMatchHighlighting = true,
   enableFilters = true,
   enableFullScreenToggle = true,
@@ -95,10 +95,6 @@ export const MaterialReactTable = <TData extends Record<string, any> = {}>({
 
   if (rest.enableRowVirtualization) {
     enableStickyHeader = true;
-  }
-
-  if (enableGrouping) {
-    enableExpanding = true;
   }
 
   if (enablePagination === false && manualPagination === undefined) {

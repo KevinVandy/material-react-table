@@ -19,32 +19,32 @@ export const theme = ({
     },
     typography: {
       h1: {
-        fontSize: '2rem',
+        fontSize: '1.8rem',
         lineHeight: '3rem',
         paddingLeft: '1rem',
       },
       h2: {
-        fontSize: '2.5rem',
+        fontSize: '2rem',
         lineHeight: '3.5rem',
         fontWeight: 'bold',
         marginTop: '1.5rem',
         marginBottom: '1.5rem',
       },
       h3: {
-        fontSize: '2rem',
+        fontSize: '1.5rem',
         lineHeight: '3rem',
         marginBottom: '1rem',
       },
       h4: {
-        fontSize: '1.5rem',
+        fontSize: '1.25rem',
         lineHeight: '2rem',
       },
       h5: {
-        fontSize: '1.25rem',
+        fontSize: '1.1rem',
         lineHeight: '3rem',
       },
       h6: {
-        fontSize: '1.1rem',
+        fontSize: '1rem',
         lineHeight: '3rem',
       },
       subtitle1: {

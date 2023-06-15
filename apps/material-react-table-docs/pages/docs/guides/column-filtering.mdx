@@ -7,6 +7,7 @@ import DisableExample from '../../../examples/disable-column-filters';
 import CustomizeFilterVariantsExample from '../../../examples/customize-filter-variants';
 import CustomizeFilterModesExample from '../../../examples/customize-filter-modes';
 import CustomizeFilterComponentsExample from '../../../examples/customize-filter-components';
+import EnableColumnFacetValuesExample from '../../../examples/enable-filter-facet-values';
 import RemoteExample from '../../../examples/remote';
 
 <Head>
@@ -29,6 +30,7 @@ Filtering is one of the most powerful features of Material React Table and is en
       'columnFilterModeOptions',
       'enableColumnFilterModes',
       'enableColumnFilters',
+      'enableFacetedValues',
       'enableFilterMatchHighlighting',
       'enableFilters',
       'filterFns',
@@ -39,6 +41,8 @@ Filtering is one of the most powerful features of Material React Table and is en
       'getFilteredRowModel',
       'manualFiltering',
       'maxLeafRowFilterDepth',
+      'muiTableHeadCellFilterCheckboxProps',
+      'muiTableHeadCellFilterSliderProps',
       'muiTableHeadCellFilterTextFieldProps',
       'onColumnFilterFnsChange',
       'onColumnFiltersChange',
@@ -61,6 +65,8 @@ Filtering is one of the most powerful features of Material React Table and is en
       'filterFn',
       'filterSelectOptions',
       'filterVariant',
+      'muiTableHeadCellFilterCheckboxProps',
+      'muiTableHeadCellFilterSliderProps',
       'muiTableHeadCellFilterTextFieldProps',
       'renderColumnFilterModeMenuItems',
     ])
@@ -118,10 +124,42 @@ Material React Table has several built-in filter variants for advanced filtering
 - `'text'` - shows the default text field
 - `'select'` - shows a select dropdown with the options specified in `filterSelectOptions`
 - `'multi-select'` - shows a select dropdown with the options specified in `filterSelectOptions` and allows multiple selections with checkboxes
-- `'range` - shows min and max text fields for filtering a range of values
+- `'range'` - shows min and max text fields for filtering a range of values
+- `'range-slider'` - shows a slider for filtering a range of values
 - `'checkbox'` - shows a checkbox for filtering by `'true'` or `'false'` values (Strings)
 
 <CustomizeFilterVariantsExample />
+
+#### Faceted Values for Filter Variants
+
+> New in v1.13
+
+Faceted values are a list of unique values for a column that gets generated under the hood from table data when the `enableFacetedValues` prop is set to `true`. These values can be used to populate the select dropdowns for the `'select'` and `'multi-select'` filter variants, or the min and max values for the `'range-slider'` variant. This means that you no longer need to manually specify the `filterSelectOptions` prop for these variants manually, especially if you are using client-side filtering.
+
+<EnableColumnFacetValuesExample />
+
+#### Custom Faceted Values
+
+If you are using server-side pagination and filtering, you can still customize the faceted values output with the `getFacetedUniqueValues` and `getFacetedMinMaxValues` props.
+
+```tsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  enableFacetedValues={true}
+  //if using server-side pagination and filtering
+  getFacetedMinMaxValues={(table) => {
+    //fetch min and max values from server
+    return [minValue, maxValue];
+  }
+  //if using server-side filtering
+  getFacetedUniqueValues={(table) => {
+    const uniqueValueMap = new Map<string, number>();
+    //fetch unique values from server, ideally including the count of each unique value
+    return uniqueValueMap;
+  }}
+/>
+```
 
 ### Custom Filter Functions
 
@@ -225,8 +263,7 @@ const columns = [
     header: 'Age',
     columnFilterModeOptions: ['between', 'lessThan', 'greaterThan'],
   },
-  }
-]
+];
 ```
 
 #### Render Custom Filter Mode Menu

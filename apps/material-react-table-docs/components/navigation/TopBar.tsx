@@ -110,7 +110,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
         `}
       </style>
       <AppBar position="fixed">
-        <Toolbar variant={isTablet ? 'dense' : 'regular'}>
+        <Toolbar variant="dense">
           <Box display="flex">
             {!isDesktop && (
               <IconButton
@@ -171,7 +171,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
               >
                 <IconButton
                   aria-label="Github"
-                  size={isMobile ? 'small' : 'large'}
+                  size={isMobile ? 'small' : 'medium'}
                 >
                   <GitHubIcon fontSize={isMobile ? 'medium' : 'large'} />
                 </IconButton>
@@ -185,7 +185,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
               >
                 <IconButton
                   aria-label="Discord"
-                  size={isMobile ? 'small' : 'large'}
+                  size={isMobile ? 'small' : 'medium'}
                 >
                   <img
                     alt="Discord"
@@ -208,7 +208,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
                     `toggle-theme-${isLightTheme ? 'dark' : 'light'}-mode`,
                   );
                 }}
-                size={isMobile ? 'small' : 'large'}
+                size={isMobile ? 'small' : 'medium'}
               >
                 {isLightTheme ? (
                   <LightModeIcon fontSize={isMobile ? 'medium' : 'large'} />

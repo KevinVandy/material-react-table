@@ -336,6 +336,17 @@ export const rootProps: PropRow[] = [
     type: 'boolean',
   },
   {
+    propName: 'enableFacetedValues',
+    defaultValue: 'true',
+    description:
+      'Enable or disable the calculation of faceted values. Facet values are a list of all unique values in a column. These are useful for advanced filtering components with selection, autocomplete, etc.',
+    link: 'https://tanstack.com/table/v8/docs/api/features/filters#enablefilters',
+    linkText: 'TanStack Filters Docs',
+    required: false,
+    source: 'TanStack Table',
+    type: 'boolean',
+  },
+  {
     propName: 'enableFilterMatchHighlighting',
     defaultValue: 'true',
     description:
@@ -1207,6 +1218,16 @@ export const rootProps: PropRow[] = [
     required: false,
     source: 'Material UI',
     type: 'CheckboxProps | ({ column, table}) => CheckboxProps',
+  },
+  {
+    propName: 'muiTableHeadCellFilterSliderProps',
+    defaultValue: '',
+    description: '',
+    link: 'https://mui.com/material-ui/api/slider/#props',
+    linkText: 'Material UI Slider Props',
+    required: false,
+    source: 'Material UI',
+    type: 'SliderProps | ({ column, table}) => SliderProps',
   },
   {
     propName: 'muiTableHeadCellFilterTextFieldProps',

@@ -47,7 +47,7 @@ const columns = [
 const data = [...Array(200)].map(() => ({
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  gender: faker.person.sex(),
+  gender: Math.random() < 0.9 ? faker.person.sex() : faker.person.gender(),
   city: faker.location.city(),
   state: faker.location.state(),
 }));

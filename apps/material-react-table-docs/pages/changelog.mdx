@@ -12,12 +12,18 @@ import Head from 'next/head';
 
 ### Version 1 (Latest)
 
+#### v1.13.0 (2023-06-14) - The Faceted Values Update
+
+- Added new `'range-slider'` filter variant using the MUI `Slider` component
+- Added the `enableFacetedValues` prop to allow for generating faceted values from the data under the hood
+- Small performance improvements by only using certain row models under the hood when certain features are enabled (e.g. no `getSortedRowModel()` when sorting is disabled)
+
 #### v1.12.1 (2023-06-12)
 
 - Fixed new Next.js key prop warning in console
 - Upgraded to latest TanStack Table v8.9.2
 
-#### v1.12.0 (2023-05-29)
+#### v1.12.0 (2023-05-29) - The Comply with Rollup Update
 
 - Added `MaterialReactTable` as a named export and gave a deprecation warning for the default export (will still work but will be removed in v2). This was done in order to comply with rollup bundling best practices.
 
@@ -49,7 +55,7 @@ import Head from 'next/head';
 - update it and nl locales grammar
 - tweaked how column actions "filter by" menu menu item behaves
 
-#### v1.11.0 (2023-04-24)
+#### v1.11.0 (2023-04-24) - The Less Ugly Column Actions Update
 
 - Removed Column Actions Submenu for "Show all Columns" Menu Item (was complicated unnecessary UI)
 - Disabled Column Actions Filter By Menu Item when columns are already visible
@@ -58,7 +64,7 @@ import Head from 'next/head';
 - Added id translations that can be imported from `'material-react-table/locales/id'`
 - Added fi translations that can be imported from `'material-react-table/locales/fi'`
 
-#### v1.10.0 (2023-04-16)
+#### v1.10.0 (2023-04-16) - The Empty Data Message Update
 
 - New highly requested `renderEmptyRowsFallback` prop for rendering custom JSX when there are no rows to display
 - Added `staticRowIndex` param to `muiTableBodyRowProps` to make styling striped virtual rows easier
@@ -89,7 +95,7 @@ import Head from 'next/head';
 - gave hovered selected rows a better primary shade color
 - fixed several logic bugs with filter mode switching
 
-#### v1.9.0 (2023-03-20)
+#### v1.9.0 (2023-03-20) - The Multi-Sort Badge Update
 
 - added new multi-sort badge number to sort label
 - added new Serbian locales
@@ -126,7 +132,7 @@ import Head from 'next/head';
 
 - Fixed sorting button accessibility issue
 
-#### v1.8.0 (2023-02-16)
+#### v1.8.0 (2023-02-16) - The Edit Dropdowns Update
 
 - Allow `enableEditing` prop and column options to be enabled conditionally per row `(row) => boolean`
 - Added `editVariant` and `editSelectOptions` column options to make it easier to create edit dropdowns
