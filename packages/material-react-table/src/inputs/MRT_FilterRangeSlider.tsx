@@ -45,10 +45,21 @@ export const MRT_FilterRangeSlider = ({ header, table }: Props) => {
     ...mcTableHeadCellFilterTextFieldProps,
   } as SliderProps;
 
-  const [min, max] =
+  let [min, max] =
     sliderProps.min !== undefined && sliderProps.max !== undefined
       ? [sliderProps.min, sliderProps.max]
       : column.getFacetedMinMaxValues() ?? [0, 0];
+
+  // column.getFacetedMinMaxValues() seems to return an array of arrays for the min value
+  // under some conditions, so check for that and take the first array value if that happens.
+  // To be a bit defensive, implement the same check for max, just in case.
+  if (Array.isArray(min)) {
+    min = min[0]
+  }
+  if (Array.isArray(max)) {
+    max = max[0]
+  }
+
   const [filterValues, setFilterValues] = useState([min, max]);
   const columnFilterValue = column.getFilterValue();
 
