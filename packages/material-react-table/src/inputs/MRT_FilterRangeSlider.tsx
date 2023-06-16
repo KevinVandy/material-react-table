@@ -78,7 +78,7 @@ export const MRT_FilterRangeSlider = ({ header, table }: Props) => {
       }
     }
     isMounted.current = true;
-  }, [column.getFilterValue()]);
+  }, [columnFilterValue, min, max]);
 
   return (
     <Stack>
