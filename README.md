@@ -59,7 +59,7 @@ _All features can easily be enabled/disabled_
 
 _**Fully Fleshed out [Docs](https://www.material-react-table.com/docs/guides#guides) are available for all features**_
 
-- [x] < 45kb gzipped - [Bundlephobia](https://bundlephobia.com/package/material-react-table)
+- [x] < 47kb gzipped - [Bundlephobia](https://bundlephobia.com/package/material-react-table)
 - [x] Advanced TypeScript Generics Support (TypeScript Optional)
 - [x] Aggregation and Grouping (Sum, Average, Count, etc.)
 - [x] Click To Copy Cell Values
@@ -73,6 +73,7 @@ _**Fully Fleshed out [Docs](https://www.material-react-table.com/docs/guides#gui
 - [x] Data Editing (4 different editing modes)
 - [x] Density Toggle
 - [x] Detail Panels (Expansion)
+- [x] Faceted Value Generation for Filter Options
 - [x] Filtering (supports client-side and server-side)
 - [x] Filter Match Highlighting
 - [x] Full Screen Mode

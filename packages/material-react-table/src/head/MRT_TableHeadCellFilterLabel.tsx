@@ -23,7 +23,7 @@ export const MRT_TableHeadCellFilterLabel = ({ header, table }: Props) => {
   const { columnDef } = column;
 
   const isRangeFilter =
-    columnDef.filterVariant === 'range' ||
+    ['range', 'ranger-slider'].includes(columnDef.filterVariant ?? '') ||
     ['between', 'betweenInclusive', 'inNumberRange'].includes(
       columnDef._filterFn,
     );

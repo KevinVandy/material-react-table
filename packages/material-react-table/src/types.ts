@@ -485,6 +485,7 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> =
     renderColumnActionsMenuItems?: (props: {
       closeMenu: () => void;
       column: MRT_Column<TData>;
+      internalColumnMenuItems: ReactNode[];
       table: MRT_TableInstance<TData>;
     }) => ReactNode[];
     renderColumnFilterModeMenuItems?: (props: {
@@ -914,6 +915,7 @@ export type MaterialReactTableProps<TData extends Record<string, any> = {}> =
       renderColumnActionsMenuItems?: (props: {
         column: MRT_Column<TData>;
         closeMenu: () => void;
+        internalColumnMenuItems: ReactNode[];
         table: MRT_TableInstance<TData>;
       }) => ReactNode[];
       renderColumnFilterModeMenuItems?: (props: {

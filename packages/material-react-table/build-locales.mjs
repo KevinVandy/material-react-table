@@ -16,6 +16,7 @@ const supportedLocales = [
   'it',
   'ja',
   'nl',
+  'no',
   'pl',
   'pt',
   'pt-BR',

@@ -2,6 +2,7 @@ import Head from 'next/head';
 import RootPropTable from '../../../components/prop-tables/RootPropTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import DisableExample from '../../../examples/disable-column-actions';
+import CustomColumnActionsExample from '../../../examples/custom-column-actions';
 import ColumnActionsSpaceExample from '../../../examples/column-actions-space';
 
 <Head>
@@ -54,6 +55,26 @@ In this demo, we disable the column actions button for the 'ID' column.
 
 <DisableExample />
 
+### Custom Column Actions Menu
+
+If you do not like the default column actions menu items that Material React Table generates, you can provide your own custom menu items with the `renderColumnActionsMenuItems` prop or column option. You can choose whether or not to include the internal menu items by using the `internalColumnMenuItems` parameter.
+
+```tsx
+<MaterialReactTable
+  data={data}
+  columns={columns}
+  renderColumnActionsMenuItems={({ internalColumnMenuItems }) => {
+    return [
+      ...internalColumnMenuItems, //optionally include the internal menu items above or below your custom menu items
+      <MenuItem key="custom-menu-item-1">Custom Menu Item 1</MenuItem>,
+      <MenuItem key="custom-menu-item-2">Custom Menu Item 2</MenuItem>,
+    ];
+  }}
+/>
+```
+
+<CustomColumnActionsExample />
+
 ### Justify Column Actions Button
 
 > Changed to left alignment in `v1.2.0`
@@ -61,46 +82,5 @@ In this demo, we disable the column actions button for the 'ID' column.
 By default, the column actions button is left aligned directly after the column header text and any sort or filter labels that may be present. If you want to change this, you can use a CSS selector in `muiTableHeadCellProps` to change the `justify-content` property of the column header container.
 
 <ColumnActionsSpaceExample />
-
-### Custom Column Actions Menu
-
-If you do not like the default column actions menu items that Material React Table generates, you can provide your own custom menu items with the `renderColumnActionsMenuItems` prop. x of the column in the table.
-
-```tsx
-const columns = [
-  {
-    accessorKey: 'salary',
-    header: 'Salary',
-    renderColumnActionsMenuItems: ({ closeMenu, column, table }) => {
-      return [
-        <MenuItem
-          onClick={() => {
-            // do something
-            closeMenu();
-          }}
-        >
-          Custom Menu Item 1
-        </MenuItem>,
-        <MenuItem
-          onClick={() => {
-            // do something
-            closeMenu();
-          }}
-        >
-          Custom Menu Item 2
-        </MenuItem>,
-      ];
-    },
-  },
-];
-
-return (
-  <MaterialReactTable
-    data={data}
-    columns={columns}
-    //renderColumnActionsMenuItems could go here if you want to apply it to all columns
-  />
-);
-```
 
 View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-column-action-examples)**

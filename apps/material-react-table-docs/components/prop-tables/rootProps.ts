@@ -1732,7 +1732,7 @@ export const rootProps: PropRow[] = [
     linkText: '',
     required: false,
     source: '',
-    type: '({ closeMenu, column, table }) => ReactNode[]',
+    type: '({ closeMenu, column, internalColumnMenuItems, table }) => ReactNode[]',
   },
   {
     propName: 'renderColumnFilterModeMenuItems',

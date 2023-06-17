@@ -1,4 +1,6 @@
-import { FormHelperText, Slider, SliderProps, Stack } from '@mui/material';
+import Slider, { type SliderProps } from '@mui/material/Slider';
+import Stack from '@mui/material/Stack';
+import FormHelperText from '@mui/material/FormHelperText';
 import { type MRT_TableInstance, type MRT_Header } from '../types';
 import { useEffect, useRef, useState } from 'react';
 
@@ -48,17 +50,13 @@ export const MRT_FilterRangeSlider = ({ header, table }: Props) => {
   let [min, max] =
     sliderProps.min !== undefined && sliderProps.max !== undefined
       ? [sliderProps.min, sliderProps.max]
-      : column.getFacetedMinMaxValues() ?? [0, 0];
+      : column.getFacetedMinMaxValues() ?? [0, 1];
 
-  // column.getFacetedMinMaxValues() seems to return an array of arrays for the min value
-  // under some conditions, so check for that and take the first array value if that happens.
-  // To be a bit defensive, implement the same check for max, just in case.
-  if (Array.isArray(min)) {
-    min = min[0]
-  }
-  if (Array.isArray(max)) {
-    max = max[0]
-  }
+  //fix potential TanStack Table bugs where min or max is an array
+  if (Array.isArray(min)) min = min[0];
+  if (Array.isArray(max)) max = max[0];
+  if (min === null) min = 0;
+  if (max === null) max = 1;
 
   const [filterValues, setFilterValues] = useState([min, max]);
   const columnFilterValue = column.getFilterValue();
@@ -70,11 +68,7 @@ export const MRT_FilterRangeSlider = ({ header, table }: Props) => {
       if (columnFilterValue === undefined) {
         setFilterValues([min, max]);
       } else if (Array.isArray(columnFilterValue)) {
-        if (columnFilterValue[0] <= min && columnFilterValue[1] >= max) {
-          column.setFilterValue(undefined);
-        } else {
-          setFilterValues(columnFilterValue);
-        }
+        setFilterValues(columnFilterValue);
       }
     }
     isMounted.current = true;
@@ -86,11 +80,18 @@ export const MRT_FilterRangeSlider = ({ header, table }: Props) => {
         disableSwap
         min={min}
         max={max}
-        onChange={(_event, value) => {
-          setFilterValues(value as [number, number]);
+        onChange={(_event, values) => {
+          setFilterValues(values as [number, number]);
         }}
         onChangeCommitted={(_event, value) => {
-          column.setFilterValue(value as [number, number]);
+          if (Array.isArray(value)) {
+            if (value[0] <= min && value[1] >= max) {
+              //if the user has selected the entire range, remove the filter
+              column.setFilterValue(undefined);
+            } else {
+              column.setFilterValue(value as [number, number]);
+            }
+          }
         }}
         value={filterValues}
         valueLabelDisplay="auto"

@@ -371,6 +371,7 @@ export const MRT_FilterTextField = ({
         {textFieldProps.children ??
           filterSelectOptions?.map(
             (option: string | { text: string; value: string }) => {
+              if (!option) return '';
               let value: string;
               let text: string;
               if (typeof option !== 'object') {

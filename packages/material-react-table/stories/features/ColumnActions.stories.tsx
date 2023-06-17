@@ -1,6 +1,8 @@
 import { type Meta } from '@storybook/react';
 import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
 import { faker } from '@faker-js/faker';
+import Divider from '@mui/material/Divider';
+import MenuItem from '@mui/material/MenuItem';
 
 const meta: Meta = {
   title: 'Features/Column Action Examples',
@@ -119,5 +121,61 @@ export const ColumnActionsEnabledPerColumn = () => (
     ]}
     data={data}
     enableColumnActions={false}
+  />
+);
+
+export const CustomColumnActions = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    renderColumnActionsMenuItems={() => [
+      <MenuItem key={1}>Item 1</MenuItem>,
+      <MenuItem key={2}>Item 2</MenuItem>,
+    ]}
+  />
+);
+
+export const CustomColumnActionsPerColumn = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        header: 'First Name',
+        accessorKey: 'firstName',
+        renderColumnActionsMenuItems: () => [
+          <MenuItem key={1}>Item 1</MenuItem>,
+          <MenuItem key={2}>Item 2</MenuItem>,
+        ],
+      },
+      {
+        header: 'Last Name',
+        accessorKey: 'lastName',
+        renderColumnActionsMenuItems: () => [
+          <MenuItem key={1}>Item 2</MenuItem>,
+          <MenuItem key={3}>Item 3</MenuItem>,
+        ],
+      },
+      {
+        header: 'Address',
+        accessorKey: 'address',
+        enableColumnActions: true,
+        renderColumnActionsMenuItems: ({ internalColumnMenuItems }) => [
+          ...internalColumnMenuItems,
+          <Divider key={3332} />,
+          <MenuItem key={3333}>Item 1</MenuItem>,
+          <MenuItem key={3334}>Item 2</MenuItem>,
+        ],
+      },
+      {
+        header: 'State',
+        accessorKey: 'state',
+        enableColumnActions: true,
+      },
+      {
+        header: 'Phone Number',
+        accessorKey: 'phoneNumber',
+        enableColumnActions: true,
+      },
+    ]}
+    data={data}
   />
 );

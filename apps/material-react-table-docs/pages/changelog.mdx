@@ -12,7 +12,15 @@ import Head from 'next/head';
 
 ### Version 1 (Latest)
 
-#### v1.13.1 (2023-06-15) - The Faceted Values Update
+#### v1.14.0 (2023-06-17) - The Custom Column Actions Update
+
+- Added no translations that can be imported from `'material-react-table/locales/no'`
+- Added new `internalColumnMenuItems` param in the `renderColumnActionsMenuItems` prop/column option for rendering custom column actions menu items
+- Fixed `renderColumnActionsMenuItems` prop not replacing all default column actions menu items
+- Fixed "Clear Filter" menu item not being disabled when no filter is applied for range filters
+- Fixed issues with faceted values not being re-calculated when data changes in filter components
+
+#### v1.13.1 (2023-06-15)
 
 - Fixed issue with `getFacetedMinMaxValues` sometimes returning the wrong data type for the min/max values for range-slider filters
 

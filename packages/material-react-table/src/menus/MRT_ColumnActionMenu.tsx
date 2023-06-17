@@ -70,6 +70,7 @@ export const MRT_ColumnActionMenu = ({
   const { columnDef } = column;
   const { columnSizing, columnVisibility, density, showColumnFilters } =
     getState();
+  const columnFilterValue = column.getFilterValue();
 
   const [filterMenuAnchorEl, setFilterMenuAnchorEl] =
     useState<null | HTMLElement>(null);
@@ -144,85 +145,68 @@ export const MRT_ColumnActionMenu = ({
     (allowedColumnFilterOptions === undefined ||
       !!allowedColumnFilterOptions?.length);
 
-  return (
-    <Menu
-      anchorEl={anchorEl}
-      open={!!anchorEl}
-      onClose={() => setAnchorEl(null)}
-      MenuListProps={{
-        dense: density === 'compact',
-      }}
-    >
-      {columnDef.renderColumnActionsMenuItems?.({
-        closeMenu: () => setAnchorEl(null),
-        column,
-        table,
-      }) ??
-        renderColumnActionsMenuItems?.({
-          closeMenu: () => setAnchorEl(null),
-          column,
-          table,
-        }) ??
-        (enableSorting &&
-          column.getCanSort() &&
-          [
-            enableSortingRemoval !== false && (
-              <MenuItem
-                disabled={!column.getIsSorted()}
-                key={0}
-                onClick={handleClearSort}
-                sx={commonMenuItemStyles}
-              >
-                <Box sx={commonListItemStyles}>
-                  <ListItemIcon>
-                    <ClearAllIcon />
-                  </ListItemIcon>
-                  {localization.clearSort}
-                </Box>
-              </MenuItem>
-            ),
+  const internalColumnMenuItems = [
+    ...(enableSorting && column.getCanSort()
+      ? [
+          enableSortingRemoval !== false && (
             <MenuItem
-              disabled={column.getIsSorted() === 'asc'}
-              key={1}
-              onClick={handleSortAsc}
+              disabled={!column.getIsSorted()}
+              key={0}
+              onClick={handleClearSort}
               sx={commonMenuItemStyles}
             >
               <Box sx={commonListItemStyles}>
                 <ListItemIcon>
-                  <SortIcon
-                    style={{ transform: 'rotate(180deg) scaleX(-1)' }}
-                  />
+                  <ClearAllIcon />
                 </ListItemIcon>
-                {localization.sortByColumnAsc?.replace(
-                  '{column}',
-                  String(columnDef.header),
-                )}
+                {localization.clearSort}
               </Box>
-            </MenuItem>,
-            <MenuItem
-              divider={enableColumnFilters || enableGrouping || enableHiding}
-              key={2}
-              disabled={column.getIsSorted() === 'desc'}
-              onClick={handleSortDesc}
-              sx={commonMenuItemStyles}
-            >
-              <Box sx={commonListItemStyles}>
-                <ListItemIcon>
-                  <SortIcon />
-                </ListItemIcon>
-                {localization.sortByColumnDesc?.replace(
-                  '{column}',
-                  String(columnDef.header),
-                )}
-              </Box>
-            </MenuItem>,
-          ].filter(Boolean))}
-      {enableColumnFilters &&
-        column.getCanFilter() &&
-        [
+            </MenuItem>
+          ),
           <MenuItem
-            disabled={!column.getFilterValue()}
-            key={0}
+            disabled={column.getIsSorted() === 'asc'}
+            key={1}
+            onClick={handleSortAsc}
+            sx={commonMenuItemStyles}
+          >
+            <Box sx={commonListItemStyles}>
+              <ListItemIcon>
+                <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
+              </ListItemIcon>
+              {localization.sortByColumnAsc?.replace(
+                '{column}',
+                String(columnDef.header),
+              )}
+            </Box>
+          </MenuItem>,
+          <MenuItem
+            divider={enableColumnFilters || enableGrouping || enableHiding}
+            key={2}
+            disabled={column.getIsSorted() === 'desc'}
+            onClick={handleSortDesc}
+            sx={commonMenuItemStyles}
+          >
+            <Box sx={commonListItemStyles}>
+              <ListItemIcon>
+                <SortIcon />
+              </ListItemIcon>
+              {localization.sortByColumnDesc?.replace(
+                '{column}',
+                String(columnDef.header),
+              )}
+            </Box>
+          </MenuItem>,
+        ]
+      : []),
+    ...(enableColumnFilters && column.getCanFilter()
+      ? [
+          <MenuItem
+            disabled={
+              !columnFilterValue ||
+              (Array.isArray(columnFilterValue) &&
+                !columnFilterValue.filter((value) => value).length)
+            }
+            key={3}
             onClick={handleClearFilter}
             sx={commonMenuItemStyles}
           >
@@ -236,7 +220,7 @@ export const MRT_ColumnActionMenu = ({
           <MenuItem
             disabled={showColumnFilters && !enableColumnFilterModes}
             divider={enableGrouping || enableHiding}
-            key={1}
+            key={4}
             onClick={
               showColumnFilters
                 ? handleOpenFilterModeMenu
@@ -268,18 +252,19 @@ export const MRT_ColumnActionMenu = ({
             <MRT_FilterOptionMenu
               anchorEl={filterMenuAnchorEl}
               header={header}
-              key={2}
+              key={5}
               onSelect={handleFilterByColumn}
               setAnchorEl={setFilterMenuAnchorEl}
               table={table}
             />
           ),
-        ].filter(Boolean)}
-      {enableGrouping &&
-        column.getCanGroup() && [
+        ]
+      : []),
+    ...(enableGrouping && column.getCanGroup()
+      ? [
           <MenuItem
             divider={enablePinning}
-            key={0}
+            key={6}
             onClick={handleGroupByColumn}
             sx={commonMenuItemStyles}
           >
@@ -292,12 +277,13 @@ export const MRT_ColumnActionMenu = ({
               ]?.replace('{column}', String(columnDef.header))}
             </Box>
           </MenuItem>,
-        ]}
-      {enablePinning &&
-        column.getCanPin() && [
+        ]
+      : []),
+    ...(enablePinning && column.getCanPin()
+      ? [
           <MenuItem
             disabled={column.getIsPinned() === 'left' || !column.getCanPin()}
-            key={0}
+            key={7}
             onClick={() => handlePinColumn('left')}
             sx={commonMenuItemStyles}
           >
@@ -310,7 +296,7 @@ export const MRT_ColumnActionMenu = ({
           </MenuItem>,
           <MenuItem
             disabled={column.getIsPinned() === 'right' || !column.getCanPin()}
-            key={1}
+            key={8}
             onClick={() => handlePinColumn('right')}
             sx={commonMenuItemStyles}
           >
@@ -324,7 +310,7 @@ export const MRT_ColumnActionMenu = ({
           <MenuItem
             disabled={!column.getIsPinned()}
             divider={enableHiding}
-            key={2}
+            key={9}
             onClick={() => handlePinColumn(false)}
             sx={commonMenuItemStyles}
           >
@@ -335,12 +321,13 @@ export const MRT_ColumnActionMenu = ({
               {localization.unpin}
             </Box>
           </MenuItem>,
-        ]}
-      {enableColumnResizing &&
-        column.getCanResize() && [
+        ]
+      : []),
+    ...(enableColumnResizing && column.getCanResize()
+      ? [
           <MenuItem
             disabled={!columnSizing[column.id]}
-            key={0}
+            key={10}
             onClick={handleResetColumnSize}
             sx={commonMenuItemStyles}
           >
@@ -351,44 +338,71 @@ export const MRT_ColumnActionMenu = ({
               {localization.resetColumnSize}
             </Box>
           </MenuItem>,
-        ]}
-      {enableHiding && [
-        <MenuItem
-          disabled={!column.getCanHide()}
-          key={0}
-          onClick={handleHideColumn}
-          sx={commonMenuItemStyles}
-        >
-          <Box sx={commonListItemStyles}>
-            <ListItemIcon>
-              <VisibilityOffIcon />
-            </ListItemIcon>
-            {localization.hideColumn?.replace(
-              '{column}',
-              String(columnDef.header),
-            )}
-          </Box>
-        </MenuItem>,
-        <MenuItem
-          disabled={
-            !Object.values(columnVisibility).filter((visible) => !visible)
-              .length
-          }
-          key={1}
-          onClick={handleShowAllColumns}
-          sx={commonMenuItemStyles}
-        >
-          <Box sx={commonListItemStyles}>
-            <ListItemIcon>
-              <ViewColumnIcon />
-            </ListItemIcon>
-            {localization.showAllColumns?.replace(
-              '{column}',
-              String(columnDef.header),
-            )}
-          </Box>
-        </MenuItem>,
-      ]}
+        ]
+      : []),
+    ...(enableHiding
+      ? [
+          <MenuItem
+            disabled={!column.getCanHide()}
+            key={11}
+            onClick={handleHideColumn}
+            sx={commonMenuItemStyles}
+          >
+            <Box sx={commonListItemStyles}>
+              <ListItemIcon>
+                <VisibilityOffIcon />
+              </ListItemIcon>
+              {localization.hideColumn?.replace(
+                '{column}',
+                String(columnDef.header),
+              )}
+            </Box>
+          </MenuItem>,
+          <MenuItem
+            disabled={
+              !Object.values(columnVisibility).filter((visible) => !visible)
+                .length
+            }
+            key={12}
+            onClick={handleShowAllColumns}
+            sx={commonMenuItemStyles}
+          >
+            <Box sx={commonListItemStyles}>
+              <ListItemIcon>
+                <ViewColumnIcon />
+              </ListItemIcon>
+              {localization.showAllColumns?.replace(
+                '{column}',
+                String(columnDef.header),
+              )}
+            </Box>
+          </MenuItem>,
+        ]
+      : []),
+  ].filter(Boolean);
+
+  return (
+    <Menu
+      anchorEl={anchorEl}
+      open={!!anchorEl}
+      onClose={() => setAnchorEl(null)}
+      MenuListProps={{
+        dense: density === 'compact',
+      }}
+    >
+      {columnDef.renderColumnActionsMenuItems?.({
+        closeMenu: () => setAnchorEl(null),
+        column,
+        internalColumnMenuItems,
+        table,
+      }) ??
+        renderColumnActionsMenuItems?.({
+          closeMenu: () => setAnchorEl(null),
+          column,
+          internalColumnMenuItems,
+          table,
+        }) ??
+        internalColumnMenuItems}
     </Menu>
   );
 };

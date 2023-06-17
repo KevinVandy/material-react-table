@@ -13,6 +13,7 @@ import ID_Table from '../examples/localization-i18n-id';
 import IT_Table from '../examples/localization-i18n-it';
 import JA_Table from '../examples/localization-i18n-ja';
 import NL_Table from '../examples/localization-i18n-nl';
+import NO_Table from '../examples/localization-i18n-no';
 import PL_Table from '../examples/localization-i18n-pl';
 import PT_BR_Table from '../examples/localization-i18n-pt-BR';
 import PT_Table from '../examples/localization-i18n-pt';
@@ -42,6 +43,7 @@ const supportedLocales = [
   'it',
   'ja',
   'nl',
+  'no',
   'pl',
   'pt',
   'pt-BR',
@@ -95,6 +97,7 @@ const LocaleExamples = () => {
       {currentLocale === 'it' && <IT_Table />}
       {currentLocale === 'ja' && <JA_Table />}
       {currentLocale === 'nl' && <NL_Table />}
+      {currentLocale === 'no' && <NO_Table />}
       {currentLocale === 'pl' && <PL_Table />}
       {currentLocale === 'pt' && <PT_Table />}
       {currentLocale === 'pt-BR' && <PT_BR_Table />}

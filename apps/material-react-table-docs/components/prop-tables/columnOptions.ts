@@ -565,9 +565,9 @@ export const columnOptions: ColumnOption[] = [
     description: '',
     link: '',
     linkText: '',
-    source: 'MRT',
     required: false,
-    type: '',
+    source: '',
+    type: '({ closeMenu, column, internalColumnMenuItems, table }) => ReactNode[]',
   },
   {
     columnOption: 'renderColumnFilterModeMenuItems',

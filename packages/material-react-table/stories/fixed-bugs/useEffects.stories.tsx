@@ -16,10 +16,22 @@ const meta: Meta = {
 
 export default meta;
 
-const data = [...Array(100)].map(() => ({
+interface Person {
+  firstName: string;
+  lastName: string;
+  age: number;
+  address: string;
+  gender: string;
+  state: string;
+  phoneNumber: string;
+}
+
+const data: Person[] = [...Array(100)].map(() => ({
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
+  age: faker.number.int(100),
   address: faker.location.streetAddress(),
+  gender: Math.random() < 0.9 ? faker.person.sex() : faker.person.gender(),
   state: faker.location.state(),
   phoneNumber: faker.phone.number(),
 }));
@@ -33,7 +45,7 @@ export const FilterModesRefetch = () => {
     console.log('refetch', columnFilters);
   }, [columnFilters]);
 
-  const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
+  const columns: MRT_ColumnDef<Person>[] = [
     {
       header: 'First Name',
       accessorKey: 'firstName',
@@ -77,7 +89,7 @@ export const FilterOptionsAsync = () => {
     }, 2000);
   }, []);
 
-  const columns = useMemo<MRT_ColumnDef<(typeof data)[0]>[]>(
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       {
         header: 'First Name',
@@ -124,7 +136,7 @@ export const EditOptionsAsync = () => {
     }, 2000);
   }, []);
 
-  const columns = useMemo<MRT_ColumnDef<(typeof data)[0]>[]>(
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       {
         header: 'First Name',
@@ -171,7 +183,7 @@ export const RenderRowActionsAsync = () => {
     }, 2000);
   }, []);
 
-  const columns = useMemo<MRT_ColumnDef<(typeof data)[0]>[]>(
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       {
         header: 'First Name',
@@ -224,7 +236,7 @@ export const renderRowActionMenuItemsAsync = () => {
     }, 2000);
   }, []);
 
-  const columns = useMemo<MRT_ColumnDef<(typeof data)[0]>[]>(
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       {
         header: 'First Name',
@@ -258,6 +270,56 @@ export const renderRowActionMenuItemsAsync = () => {
       renderRowActionMenuItems={() =>
         rowActions.map((action) => [<MenuItem key={action}>{action}</MenuItem>])
       }
+    />
+  );
+};
+
+export const DelayedFacetedValues = () => {
+  const [tableData, setTableData] = useState<Person[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTableData(data);
+      setIsLoading(false);
+    }, 2000);
+  }, []);
+
+  return (
+    <MaterialReactTable
+      columns={[
+        {
+          header: 'First Name',
+          accessorKey: 'firstName',
+          filterFn: 'fuzzy', // default
+        },
+        {
+          header: 'Last Name',
+          accessorKey: 'lastName',
+          filterVariant: 'select',
+        },
+        {
+          header: 'Age',
+          accessorKey: 'age',
+          filterVariant: 'range-slider',
+        },
+        {
+          header: 'Gender',
+          accessorKey: 'gender',
+          filterVariant: 'select',
+        },
+        {
+          header: 'State',
+          accessorKey: 'state',
+          filterVariant: 'multi-select',
+        },
+      ]}
+      data={tableData}
+      enableFacetedValues
+      initialState={{ showColumnFilters: true }}
+      state={{
+        isLoading,
+      }}
     />
   );
 };
