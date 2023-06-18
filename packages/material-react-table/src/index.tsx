@@ -1,4 +1,5 @@
 export * from './MaterialReactTable';
+export * from './useMaterialReactTable';
 export * from './types';
 
 import { MRT_BottomToolbar } from './toolbar/MRT_BottomToolbar';
@@ -43,8 +44,3 @@ export {
   MRT_TopToolbar,
 };
 
-/**
- * @deprecated Use named exports instead of default export (will be removed in v2)
- * @example import { MaterialReactTable } from 'material-react-table';
- */
-export { default } from './MaterialReactTable';

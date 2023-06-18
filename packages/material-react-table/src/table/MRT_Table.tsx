@@ -11,6 +11,7 @@ import { Memo_MRT_TableBody, MRT_TableBody } from '../body/MRT_TableBody';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
 import { parseCSSVarId } from '../column.utils';
 import { type MRT_TableInstance } from '../types';
+import { MRT_EditRowModal } from '../body/MRT_EditRowModal';
 
 interface Props {
   table: MRT_TableInstance;
@@ -21,9 +22,10 @@ export const MRT_Table = ({ table }: Props) => {
     getFlatHeaders,
     getState,
     options: {
-      columns,
       columnVirtualizerInstanceRef,
       columnVirtualizerProps,
+      columns,
+      editingMode,
       enableColumnResizing,
       enableColumnVirtualization,
       enablePinning,
@@ -41,6 +43,7 @@ export const MRT_Table = ({ table }: Props) => {
     columnSizing,
     columnSizingInfo,
     columnVisibility,
+    editingRow,
     isFullScreen,
   } = getState();
 
@@ -144,27 +147,35 @@ export const MRT_Table = ({ table }: Props) => {
   };
 
   return (
-    <Table
-      stickyHeader={enableStickyHeader || isFullScreen}
-      {...tableProps}
-      sx={(theme) => ({
-        borderCollapse: 'separate',
-        display: layoutMode === 'grid' ? 'grid' : 'table',
-        tableLayout:
-          layoutMode !== 'grid' && enableColumnResizing ? 'fixed' : undefined,
-        ...(tableProps?.sx instanceof Function
-          ? tableProps.sx(theme)
-          : (tableProps?.sx as any)),
-      })}
-      style={{ ...columnSizeVars, ...tableProps?.style }}
-    >
-      {enableTableHead && <MRT_TableHead {...props} />}
-      {memoMode === 'table-body' || columnSizingInfo.isResizingColumn ? (
-        <Memo_MRT_TableBody columnVirtualizer={columnVirtualizer} {...props} />
-      ) : (
-        <MRT_TableBody columnVirtualizer={columnVirtualizer} {...props} />
+    <>
+      <Table
+        stickyHeader={enableStickyHeader || isFullScreen}
+        {...tableProps}
+        sx={(theme) => ({
+          borderCollapse: 'separate',
+          display: layoutMode === 'grid' ? 'grid' : 'table',
+          tableLayout:
+            layoutMode !== 'grid' && enableColumnResizing ? 'fixed' : undefined,
+          ...(tableProps?.sx instanceof Function
+            ? tableProps.sx(theme)
+            : (tableProps?.sx as any)),
+        })}
+        style={{ ...columnSizeVars, ...tableProps?.style }}
+      >
+        {enableTableHead && <MRT_TableHead {...props} />}
+        {memoMode === 'table-body' || columnSizingInfo.isResizingColumn ? (
+          <Memo_MRT_TableBody
+            columnVirtualizer={columnVirtualizer}
+            {...props}
+          />
+        ) : (
+          <MRT_TableBody columnVirtualizer={columnVirtualizer} {...props} />
+        )}
+        {enableTableFooter && <MRT_TableFooter {...props} />}
+      </Table>
+      {editingRow && editingMode === 'modal' && (
+        <MRT_EditRowModal row={editingRow as any} table={table} open />
       )}
-      {enableTableFooter && <MRT_TableFooter {...props} />}
-    </Table>
+    </>
   );
 };

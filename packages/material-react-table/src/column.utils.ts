@@ -6,7 +6,7 @@ import { type Row } from '@tanstack/react-table';
 import { type TableCellProps } from '@mui/material/TableCell';
 import { type Theme } from '@mui/material/styles';
 import {
-  type MaterialReactTableProps,
+  type MaterialReactTableOptions,
   type MRT_Column,
   type MRT_ColumnDef,
   type MRT_ColumnOrderState,
@@ -49,13 +49,14 @@ export const prepareColumns = <TData extends Record<string, any> = {}>({
   sortingFns,
 }: {
   aggregationFns: typeof MRT_AggregationFns &
-    MaterialReactTableProps<TData>['aggregationFns'];
+    MaterialReactTableOptions<TData>['aggregationFns'];
   columnDefs: MRT_ColumnDef<TData>[];
   columnFilterFns: { [key: string]: MRT_FilterOption };
   defaultDisplayColumn: Partial<MRT_ColumnDef<TData>>;
-  filterFns: typeof MRT_FilterFns & MaterialReactTableProps<TData>['filterFns'];
+  filterFns: typeof MRT_FilterFns &
+    MaterialReactTableOptions<TData>['filterFns'];
   sortingFns: typeof MRT_SortingFns &
-    MaterialReactTableProps<TData>['sortingFns'];
+    MaterialReactTableOptions<TData>['sortingFns'];
 }): MRT_DefinedColumnDef<TData>[] =>
   columnDefs.map((columnDef) => {
     //assign columnId
@@ -133,7 +134,7 @@ export const reorderColumn = <TData extends Record<string, any> = {}>(
 };
 
 export const showExpandColumn = <TData extends Record<string, any> = {}>(
-  props: MaterialReactTableProps<TData>,
+  props: MaterialReactTableOptions<TData>,
   grouping?: MRT_GroupingState,
 ) =>
   !!(
@@ -145,7 +146,7 @@ export const showExpandColumn = <TData extends Record<string, any> = {}>(
 export const getLeadingDisplayColumnIds = <
   TData extends Record<string, any> = {},
 >(
-  props: MaterialReactTableProps<TData>,
+  props: MaterialReactTableOptions<TData>,
 ) =>
   [
     (props.enableRowDragging || props.enableRowOrdering) && 'mrt-row-drag',
@@ -164,7 +165,7 @@ export const getLeadingDisplayColumnIds = <
 export const getTrailingDisplayColumnIds = <
   TData extends Record<string, any> = {},
 >(
-  props: MaterialReactTableProps<TData>,
+  props: MaterialReactTableOptions<TData>,
 ) =>
   [
     props.positionActionsColumn === 'last' &&
@@ -180,7 +181,7 @@ export const getTrailingDisplayColumnIds = <
 export const getDefaultColumnOrderIds = <
   TData extends Record<string, any> = {},
 >(
-  props: MaterialReactTableProps<TData>,
+  props: MaterialReactTableOptions<TData>,
 ) => {
   const leadingDisplayCols: string[] = getLeadingDisplayColumnIds(props);
   const trailingDisplayCols: string[] = getTrailingDisplayColumnIds(props);

@@ -3,7 +3,7 @@ import { type Meta } from '@storybook/react';
 import {
   MaterialReactTable,
   type MRT_Cell,
-  type MaterialReactTableProps,
+  type MaterialReactTableOptions,
 } from '../../src';
 import { faker } from '@faker-js/faker';
 import MenuItem from '@mui/material/MenuItem';
@@ -90,7 +90,7 @@ const data: Person[] = [...Array(100)].map(() => ({
 export const EditingEnabledEditModeModalDefault = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
     exitEditingMode,
     row,
     values,
@@ -135,7 +135,7 @@ export const EditingEnabledEditModeModalDefault = () => {
 export const EditingEnabledEditModeRow = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
     exitEditingMode,
     row,
     values,
@@ -273,7 +273,7 @@ export const EditingEnabledEditModeTable = () => {
 export const EditSelectVariant = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
     row,
     values,
   }) => {
@@ -319,7 +319,7 @@ export const EditSelectVariant = () => {
 export const EditSelectVariantAlternate = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
     row,
     values,
   }) => {
@@ -411,7 +411,7 @@ export const EditSelectVariantAlternate = () => {
 export const EditingCustomizeInput = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
     row,
     values,
   }) => {
@@ -596,7 +596,7 @@ export const EditingEnabledAsync = () => {
   const [tableData, setTableData] = useState(data);
   const [isSaving, setIsSaving] = useState(false);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
     row,
     values,
   }) => {
@@ -703,7 +703,7 @@ export const EditingNestedData = () => {
 export const EditingEnabledEditModeTableWithGroupedRows = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
     exitEditingMode,
     row,
     values,
@@ -750,7 +750,7 @@ export const EditingEnabledEditModeTableWithGroupedRows = () => {
 export const EnableEditingConditionally = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
     exitEditingMode,
     row,
     values,
@@ -796,7 +796,7 @@ export const EnableEditingConditionally = () => {
 export const EnableEditingConditionallyCell = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
     exitEditingMode,
     row,
     values,
@@ -842,7 +842,7 @@ export const EnableEditingConditionallyCell = () => {
 export const EnableEditingConditionallyTable = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
     exitEditingMode,
     row,
     values,
