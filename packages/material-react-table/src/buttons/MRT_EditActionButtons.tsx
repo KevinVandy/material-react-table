@@ -4,13 +4,13 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any> = {}> {
+interface Props<TData extends Record<string, any>> {
   row: MRT_Row<TData>;
   table: MRT_TableInstance<TData>;
   variant?: 'icon' | 'text';
 }
 
-export const MRT_EditActionButtons = <TData extends Record<string, any> = {}>({
+export const MRT_EditActionButtons = <TData extends Record<string, any>>({
   row,
   table,
   variant = 'icon',

@@ -20,19 +20,19 @@ export const commonListItemStyles = {
   alignItems: 'center',
 };
 
-interface Props {
+interface Props<TData extends Record<string, any>> {
   anchorEl: HTMLElement | null;
-  header: MRT_Header;
+  header: MRT_Header<TData>;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
-  table: MRT_TableInstance;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ColumnActionMenu = ({
+export const MRT_ColumnActionMenu = <TData extends Record<string, any>>({
   anchorEl,
   header,
   setAnchorEl,
   table,
-}: Props) => {
+}: Props<TData>) => {
   const {
     getState,
     toggleAllColumnsVisible,

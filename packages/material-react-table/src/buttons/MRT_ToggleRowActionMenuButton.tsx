@@ -16,14 +16,14 @@ const commonIconButtonStyles = {
   },
 };
 
-interface Props<TData extends Record<string, any> = {}> {
+interface Props<TData extends Record<string, any>> {
   cell: MRT_Cell<TData>;
   row: MRT_Row<TData>;
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_ToggleRowActionMenuButton = <
-  TData extends Record<string, any> = {},
+  TData extends Record<string, any>,
 >({
   cell,
   row,
@@ -97,9 +97,9 @@ export const MRT_ToggleRowActionMenuButton = <
           <MRT_RowActionMenu
             anchorEl={anchorEl}
             handleEdit={handleStartEditMode}
-            row={row as any}
+            row={row}
             setAnchorEl={setAnchorEl}
-            table={table as any}
+            table={table}
           />
         </>
       ) : null}

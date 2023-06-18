@@ -4,14 +4,14 @@ import Tooltip from '@mui/material/Tooltip';
 import { type IconButtonProps } from '@mui/material/IconButton';
 import { type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any> = {}> {
+interface Props<TData extends Record<string, any>> {
   iconButtonProps?: IconButtonProps;
   onDragStart: DragEventHandler<HTMLButtonElement>;
   onDragEnd: DragEventHandler<HTMLButtonElement>;
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_GrabHandleButton = <TData extends Record<string, any> = {}>({
+export const MRT_GrabHandleButton = <TData extends Record<string, any>>({
   iconButtonProps,
   onDragEnd,
   onDragStart,

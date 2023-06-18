@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { type RefObject } from 'react';
 import Collapse from '@mui/material/Collapse';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
@@ -6,21 +6,21 @@ import { lighten } from '@mui/material/styles';
 import { type VirtualItem } from '@tanstack/react-virtual';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
 
-interface Props {
-  parentRowRef: React.RefObject<HTMLTableRowElement>;
-  row: MRT_Row;
+interface Props<TData extends Record<string, any>> {
+  parentRowRef: RefObject<HTMLTableRowElement>;
+  row: MRT_Row<TData>;
   rowIndex: number;
-  table: MRT_TableInstance;
+  table: MRT_TableInstance<TData>;
   virtualRow?: VirtualItem;
 }
 
-export const MRT_TableDetailPanel = ({
+export const MRT_TableDetailPanel = <TData extends Record<string, any>>({
   parentRowRef,
   row,
   rowIndex,
   table,
   virtualRow,
-}: Props) => {
+}: Props<TData>) => {
   const {
     getVisibleLeafColumns,
     getState,

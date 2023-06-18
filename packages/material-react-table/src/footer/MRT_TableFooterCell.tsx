@@ -2,12 +2,15 @@ import TableCell from '@mui/material/TableCell';
 import { getCommonCellStyles } from '../column.utils';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
 
-interface Props {
-  footer: MRT_Header;
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any>> {
+  footer: MRT_Header<TData>;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TableFooterCell = ({ footer, table }: Props) => {
+export const MRT_TableFooterCell = <TData extends Record<string, any>>({
+  footer,
+  table,
+}: Props<TData>) => {
   const {
     getState,
     options: { layoutMode, muiTableFooterCellProps },

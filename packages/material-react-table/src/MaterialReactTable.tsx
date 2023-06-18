@@ -8,29 +8,25 @@ import {
 } from './types';
 import { useMaterialReactTable } from './useMaterialReactTable';
 
-type PropsWithTable<TData extends Record<string, any> = {}> = {
+type TableInstanceProp<TData extends Record<string, any>> = {
   table: MRT_TableInstance<TData>;
 };
 
-type PropsWithoutTable<TData extends Record<string, any> = {}> =
-  MaterialReactTableOptions<TData>;
+type Props<TData extends Record<string, any>> =
+  | TableInstanceProp<TData>
+  | MaterialReactTableOptions<TData>;
 
-type Props<TData extends Record<string, any> = {}> =
-  | PropsWithTable<TData>
-  | PropsWithoutTable<TData>;
-
-function isPropsWithTable<TData extends Record<string, any> = {}>(
+const isTableInstanceProp = <TData extends Record<string, any>>(
   props: Props<TData>,
-): props is PropsWithTable<TData> {
-  return (props as PropsWithTable<TData>).table !== undefined;
-}
+): props is TableInstanceProp<TData> =>
+  (props as TableInstanceProp<TData>).table !== undefined;
 
-export const MaterialReactTable = <TData extends Record<string, any> = {}>(
+export const MaterialReactTable = <TData extends Record<string, any>>(
   props: Props<TData>,
 ) => {
   let table: MRT_TableInstance<TData>;
 
-  if (isPropsWithTable(props)) {
+  if (isTableInstanceProp(props)) {
     table = props.table;
   } else {
     table = useMaterialReactTable(props);

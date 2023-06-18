@@ -5,13 +5,17 @@ import Radio from '@mui/material/Radio';
 import { type Theme } from '@mui/material/styles';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
 
-interface Props {
-  row?: MRT_Row;
+interface Props<TData extends Record<string, any>> {
+  row?: MRT_Row<TData>;
   selectAll?: boolean;
-  table: MRT_TableInstance;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_SelectCheckbox = ({ row, selectAll, table }: Props) => {
+export const MRT_SelectCheckbox = <TData extends Record<string, any>>({
+  row,
+  selectAll,
+  table,
+}: Props<TData>) => {
   const {
     getState,
     options: {

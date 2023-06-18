@@ -90,15 +90,12 @@ const data: Person[] = [...Array(100)].map(() => ({
 export const EditingEnabledEditModeModalDefault = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
-    exitEditingMode,
-    row,
-    values,
-  }) => {
-    tableData[row.index] = values;
-    setTableData([...tableData]);
-    exitEditingMode();
-  };
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] =
+    ({ exitEditingMode, row, values }) => {
+      tableData[row.index] = values;
+      setTableData([...tableData]);
+      exitEditingMode();
+    };
 
   return (
     <MaterialReactTable
@@ -135,15 +132,12 @@ export const EditingEnabledEditModeModalDefault = () => {
 export const EditingEnabledEditModeRow = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
-    exitEditingMode,
-    row,
-    values,
-  }) => {
-    tableData[row.index] = values;
-    setTableData([...tableData]);
-    exitEditingMode();
-  };
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] =
+    ({ exitEditingMode, row, values }) => {
+      tableData[row.index] = values;
+      setTableData([...tableData]);
+      exitEditingMode();
+    };
 
   return (
     <MaterialReactTable
@@ -273,13 +267,11 @@ export const EditingEnabledEditModeTable = () => {
 export const EditSelectVariant = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
-    row,
-    values,
-  }) => {
-    tableData[+row.index] = values;
-    setTableData([...tableData]);
-  };
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] =
+    ({ row, values }) => {
+      tableData[+row.index] = values;
+      setTableData([...tableData]);
+    };
 
   return (
     <MaterialReactTable
@@ -319,13 +311,11 @@ export const EditSelectVariant = () => {
 export const EditSelectVariantAlternate = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
-    row,
-    values,
-  }) => {
-    tableData[row.index] = values;
-    setTableData([...tableData]);
-  };
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] =
+    ({ row, values }) => {
+      tableData[row.index] = values;
+      setTableData([...tableData]);
+    };
 
   return (
     <MaterialReactTable
@@ -411,13 +401,11 @@ export const EditSelectVariantAlternate = () => {
 export const EditingCustomizeInput = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
-    row,
-    values,
-  }) => {
-    tableData[row.index] = values;
-    setTableData([...tableData]);
-  };
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] =
+    ({ row, values }) => {
+      tableData[row.index] = values;
+      setTableData([...tableData]);
+    };
 
   const usStates = [
     'Alabama',
@@ -596,17 +584,15 @@ export const EditingEnabledAsync = () => {
   const [tableData, setTableData] = useState(data);
   const [isSaving, setIsSaving] = useState(false);
 
-  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
-    row,
-    values,
-  }) => {
-    setIsSaving(true);
-    setTimeout(() => {
-      tableData[row.index] = values;
-      setTableData([...tableData]);
-      setIsSaving(false);
-    }, 1500);
-  };
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] =
+    ({ row, values }) => {
+      setIsSaving(true);
+      setTimeout(() => {
+        tableData[row.index] = values;
+        setTableData([...tableData]);
+        setIsSaving(false);
+      }, 1500);
+    };
 
   return (
     <MaterialReactTable
@@ -703,15 +689,12 @@ export const EditingNestedData = () => {
 export const EditingEnabledEditModeTableWithGroupedRows = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
-    exitEditingMode,
-    row,
-    values,
-  }) => {
-    tableData[row.index] = values;
-    setTableData([...tableData]);
-    exitEditingMode();
-  };
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] =
+    ({ exitEditingMode, row, values }) => {
+      tableData[row.index] = values;
+      setTableData([...tableData]);
+      exitEditingMode();
+    };
 
   return (
     <MaterialReactTable
@@ -750,15 +733,12 @@ export const EditingEnabledEditModeTableWithGroupedRows = () => {
 export const EnableEditingConditionally = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
-    exitEditingMode,
-    row,
-    values,
-  }) => {
-    tableData[row.index] = values;
-    setTableData([...tableData]);
-    exitEditingMode();
-  };
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] =
+    ({ exitEditingMode, row, values }) => {
+      tableData[row.index] = values;
+      setTableData([...tableData]);
+      exitEditingMode();
+    };
 
   return (
     <MaterialReactTable
@@ -796,15 +776,12 @@ export const EnableEditingConditionally = () => {
 export const EnableEditingConditionallyCell = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
-    exitEditingMode,
-    row,
-    values,
-  }) => {
-    tableData[row.index] = values;
-    setTableData([...tableData]);
-    exitEditingMode();
-  };
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] =
+    ({ exitEditingMode, row, values }) => {
+      tableData[row.index] = values;
+      setTableData([...tableData]);
+      exitEditingMode();
+    };
 
   return (
     <MaterialReactTable
@@ -842,15 +819,12 @@ export const EnableEditingConditionallyCell = () => {
 export const EnableEditingConditionallyTable = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] = ({
-    exitEditingMode,
-    row,
-    values,
-  }) => {
-    tableData[row.index] = values;
-    setTableData([...tableData]);
-    exitEditingMode();
-  };
+  const handleSaveRow: MaterialReactTableOptions<Person>['onEditingRowSave'] =
+    ({ exitEditingMode, row, values }) => {
+      tableData[row.index] = values;
+      setTableData([...tableData]);
+      exitEditingMode();
+    };
 
   return (
     <MaterialReactTable

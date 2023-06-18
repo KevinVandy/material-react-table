@@ -9,21 +9,21 @@ import {
 } from './MRT_ColumnActionMenu';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
 
-interface Props {
+interface Props<TData extends Record<string, any>> {
   anchorEl: HTMLElement | null;
   handleEdit: (event: MouseEvent) => void;
-  row: MRT_Row;
+  row: MRT_Row<TData>;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
-  table: MRT_TableInstance;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_RowActionMenu = ({
+export const MRT_RowActionMenu = <TData extends Record<string, any>>({
   anchorEl,
   handleEdit,
   row,
   setAnchorEl,
   table,
-}: Props) => {
+}: Props<TData>) => {
   const {
     getState,
     options: {

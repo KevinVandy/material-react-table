@@ -180,13 +180,13 @@ export interface MRT_Localization {
   unsorted: string;
 }
 
-export interface MRT_RowModel<TData extends Record<string, any> = {}> {
+export interface MRT_RowModel<TData extends Record<string, any>> {
   flatRows: MRT_Row<TData>[];
   rows: MRT_Row<TData>[];
   rowsById: { [key: string]: MRT_Row<TData> };
 }
 
-export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
+export type MRT_TableInstance<TData extends Record<string, any>> = Omit<
   Table<TData>,
   | 'getAllColumns'
   | 'getAllFlatColumns'
@@ -254,28 +254,27 @@ export type MRT_TableInstance<TData extends Record<string, any> = {}> = Omit<
   setShowToolbarDropZone: Dispatch<SetStateAction<boolean>>;
 };
 
-export type MRT_TableState<TData extends Record<string, any> = {}> =
-  TableState & {
-    columnFilterFns: MRT_FilterFnsState;
-    density: MRT_DensityState;
-    draggingColumn: MRT_Column<TData> | null;
-    draggingRow: MRT_Row<TData> | null;
-    editingCell: MRT_Cell<TData> | null;
-    editingRow: MRT_Row<TData> | null;
-    globalFilterFn: MRT_FilterOption;
-    hoveredColumn: MRT_Column<TData> | { id: string } | null;
-    hoveredRow: MRT_Row<TData> | { id: string } | null;
-    isFullScreen: boolean;
-    isLoading: boolean;
-    showAlertBanner: boolean;
-    showColumnFilters: boolean;
-    showGlobalFilter: boolean;
-    showProgressBars: boolean;
-    showSkeletons: boolean;
-    showToolbarDropZone: boolean;
-  };
+export type MRT_TableState<TData extends Record<string, any>> = TableState & {
+  columnFilterFns: MRT_FilterFnsState;
+  density: MRT_DensityState;
+  draggingColumn: MRT_Column<TData> | null;
+  draggingRow: MRT_Row<TData> | null;
+  editingCell: MRT_Cell<TData> | null;
+  editingRow: MRT_Row<TData> | null;
+  globalFilterFn: MRT_FilterOption;
+  hoveredColumn: MRT_Column<TData> | { id: string } | null;
+  hoveredRow: MRT_Row<TData> | { id: string } | null;
+  isFullScreen: boolean;
+  isLoading: boolean;
+  showAlertBanner: boolean;
+  showColumnFilters: boolean;
+  showGlobalFilter: boolean;
+  showProgressBars: boolean;
+  showSkeletons: boolean;
+  showToolbarDropZone: boolean;
+};
 
-export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
+export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
   ColumnDef<TData, unknown>,
   | 'accessorKey'
   | 'aggregatedCell'
@@ -486,9 +485,8 @@ export type MRT_ColumnDef<TData extends Record<string, any> = {}> = Omit<
   }) => ReactNode[];
   sortingFn?: MRT_SortingFn<TData>;
 };
-// >
 
-export type MRT_DefinedColumnDef<TData extends Record<string, any> = {}> = Omit<
+export type MRT_DefinedColumnDef<TData extends Record<string, any>> = Omit<
   MRT_ColumnDef<TData>,
   'id' | 'defaultDisplayColumn'
 > & {
@@ -496,9 +494,8 @@ export type MRT_DefinedColumnDef<TData extends Record<string, any> = {}> = Omit<
   id: string;
   _filterFn: MRT_FilterOption;
 };
-// >
 
-export type MRT_Column<TData extends Record<string, any> = {}> = Omit<
+export type MRT_Column<TData extends Record<string, any>> = Omit<
   Column<TData, unknown>,
   'header' | 'footer' | 'columns' | 'columnDef' | 'filterFn'
 > & {
@@ -509,20 +506,21 @@ export type MRT_Column<TData extends Record<string, any> = {}> = Omit<
   header: string;
 };
 
-export type MRT_Header<TData extends Record<string, any> = {}> = Omit<
+export type MRT_Header<TData extends Record<string, any>> = Omit<
   Header<TData, unknown>,
   'column'
 > & {
   column: MRT_Column<TData>;
 };
 
-export type MRT_HeaderGroup<TData extends Record<string, any> = {}> =
-  //  Prettify<
-  Omit<HeaderGroup<TData>, 'headers'> & {
-    headers: MRT_Header<TData>[];
-  };
+export type MRT_HeaderGroup<TData extends Record<string, any>> = Omit<
+  HeaderGroup<TData>,
+  'headers'
+> & {
+  headers: MRT_Header<TData>[];
+};
 
-export type MRT_Row<TData extends Record<string, any> = {}> = Omit<
+export type MRT_Row<TData extends Record<string, any>> = Omit<
   Row<TData>,
   'getVisibleCells' | 'getAllCells' | 'subRows' | '_valuesCache'
 > & {
@@ -532,7 +530,7 @@ export type MRT_Row<TData extends Record<string, any> = {}> = Omit<
   _valuesCache: Record<LiteralUnion<string & DeepKeys<TData>>, any>;
 };
 
-export type MRT_Cell<TData extends Record<string, any> = {}> = Omit<
+export type MRT_Cell<TData extends Record<string, any>> = Omit<
   Cell<TData, unknown>,
   'column' | 'row'
 > & {
@@ -542,7 +540,7 @@ export type MRT_Cell<TData extends Record<string, any> = {}> = Omit<
 
 export type MRT_AggregationOption = string & keyof typeof MRT_AggregationFns;
 
-export type MRT_AggregationFn<TData extends Record<string, any> = {}> =
+export type MRT_AggregationFn<TData extends Record<string, any>> =
   | AggregationFn<TData>
   | MRT_AggregationOption;
 
@@ -550,7 +548,7 @@ export type MRT_SortingOption = LiteralUnion<
   string & keyof typeof MRT_SortingFns
 >;
 
-export type MRT_SortingFn<TData extends Record<string, any> = {}> =
+export type MRT_SortingFn<TData extends Record<string, any>> =
   | SortingFn<TData>
   | MRT_SortingOption;
 
@@ -558,7 +556,7 @@ export type MRT_FilterOption = LiteralUnion<
   string & keyof typeof MRT_FilterFns
 >;
 
-export type MRT_FilterFn<TData extends Record<string, any> = {}> =
+export type MRT_FilterFn<TData extends Record<string, any>> =
   | FilterFn<TData>
   | MRT_FilterOption;
 
@@ -585,383 +583,380 @@ export type MRT_DisplayColumnIds =
  * See the full props list on the official docs site:
  * @link https://www.material-react-table.com/docs/api/props
  */
-export type MaterialReactTableOptions<TData extends Record<string, any> = {}> =
-  Omit<
-    Partial<TableOptions<TData>>,
-    | 'columns'
-    | 'data'
-    | 'defaultColumn'
-    | 'enableRowSelection'
-    | 'expandRowsFn'
-    | 'getRowId'
-    | 'globalFilterFn'
-    | 'initialState'
-    | 'onStateChange'
-    | 'state'
-  > & {
-    columnFilterModeOptions?: Array<
-      LiteralUnion<string & MRT_FilterOption>
-    > | null;
-    /**
-     * The columns to display in the table. `accessorKey`s or `accessorFn`s must match keys in the `data` prop.
-     *
-     * See more info on creating columns on the official docs site:
-     * @link https://www.material-react-table.com/docs/guides/data-columns
-     * @link https://www.material-react-table.com/docs/guides/display-columns
-     *
-     * See all Columns Options on the official docs site:
-     * @link https://www.material-react-table.com/docs/api/column-options
-     */
-    columns: MRT_ColumnDef<TData>[];
-    columnVirtualizerInstanceRef?: MutableRefObject<Virtualizer<
-      HTMLDivElement,
-      HTMLTableCellElement
-    > | null>;
-    columnVirtualizerProps?:
-      | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableCellElement>>
-      | ((props: {
-          table: MRT_TableInstance<TData>;
-        }) => Partial<
-          VirtualizerOptions<HTMLDivElement, HTMLTableCellElement>
-        >);
-    /**
-     * Pass your data as an array of objects. Objects can theoretically be any shape, but it's best to keep them consistent.
-     *
-     * See the usage guide for more info on creating columns and data:
-     * @link https://www.material-react-table.com/docs/getting-started/usage
-     */
-    data: TData[];
-    /**
-     * Instead of specifying a bunch of the same options for each column, you can just change an option in the `defaultColumn` prop to change a default option for all columns.
-     */
-    defaultColumn?: Partial<MRT_ColumnDef<TData>>;
-    /**
-     * Change the default options for display columns.
-     */
-    defaultDisplayColumn?: Partial<MRT_ColumnDef<TData>>;
-    displayColumnDefOptions?: Partial<{
-      [key in MRT_DisplayColumnIds]: Partial<MRT_ColumnDef>;
-    }>;
-    editingMode?: 'table' | 'modal' | 'row' | 'cell';
-    enableBottomToolbar?: boolean;
-    enableClickToCopy?: boolean;
-    enableColumnActions?: boolean;
-    enableColumnDragging?: boolean;
-    enableColumnFilterModes?: boolean;
-    enableColumnOrdering?: boolean;
-    enableColumnVirtualization?: boolean;
-    enableDensityToggle?: boolean;
-    enableEditing?: boolean | ((row: MRT_Row<TData>) => boolean);
-    enableExpandAll?: boolean;
-    enableFacetedValues?: boolean;
-    enableFilterMatchHighlighting?: boolean;
-    enableFullScreenToggle?: boolean;
-    enableGlobalFilterModes?: boolean;
-    enableGlobalFilterRankedResults?: boolean;
-    enablePagination?: boolean;
-    enableRowActions?: boolean;
-    enableRowDragging?: boolean;
-    enableRowNumbers?: boolean;
-    enableRowOrdering?: boolean;
-    enableRowSelection?: boolean | ((row: MRT_Row<TData>) => boolean);
-    enableRowVirtualization?: boolean;
-    enableSelectAll?: boolean;
-    enableStickyFooter?: boolean;
-    enableStickyHeader?: boolean;
-    enableTableFooter?: boolean;
-    enableTableHead?: boolean;
-    enableToolbarInternalActions?: boolean;
-    enableTopToolbar?: boolean;
-    expandRowsFn?: (dataRow: TData) => TData[];
-    getRowId?: (
-      originalRow: TData,
-      index: number,
-      parentRow: MRT_Row<TData>,
-    ) => string;
-    globalFilterFn?: MRT_FilterOption;
-    globalFilterModeOptions?: MRT_FilterOption[] | null;
-    icons?: Partial<MRT_Icons>;
-    initialState?: Partial<MRT_TableState<TData>>;
-    /**
-     * Changes which kind of CSS layout is used to render the table. `semantic` uses default semantic HTML elements, while `grid` adds CSS grid and flexbox styles
-     */
-    layoutMode?: 'semantic' | 'grid';
-    /**
-     * Pass in either a locale imported from `material-react-table/locales/*` or a custom locale object.
-     *
-     * See the localization (i18n) guide for more info:
-     * @link https://www.material-react-table.com/docs/guides/localization
-     */
-    localization?: Partial<MRT_Localization>;
-    /**
-     * Memoize cells, rows, or the entire table body to potentially improve render performance.
-     *
-     * @warning This will break some dynamic rendering features. See the memoization guide for more info:
-     * @link https://www.material-react-table.com/docs/guides/memoize-components
-     */
-    memoMode?: 'cells' | 'rows' | 'table-body';
-    muiBottomToolbarProps?:
-      | ToolbarProps
-      | ((props: { table: MRT_TableInstance<TData> }) => ToolbarProps);
-    muiExpandAllButtonProps?:
-      | IconButtonProps
-      | ((props: { table: MRT_TableInstance<TData> }) => IconButtonProps);
-    muiExpandButtonProps?:
-      | IconButtonProps
-      | ((props: {
-          table: MRT_TableInstance<TData>;
-          row: MRT_Row<TData>;
-        }) => IconButtonProps);
-    muiLinearProgressProps?:
-      | LinearProgressProps
-      | ((props: {
-          isTopToolbar: boolean;
-          table: MRT_TableInstance<TData>;
-        }) => LinearProgressProps);
-    muiSearchTextFieldProps?:
-      | TextFieldProps
-      | ((props: { table: MRT_TableInstance<TData> }) => TextFieldProps);
-    muiSelectAllCheckboxProps?:
-      | CheckboxProps
-      | ((props: { table: MRT_TableInstance<TData> }) => CheckboxProps);
-    muiSelectCheckboxProps?:
-      | (CheckboxProps | RadioProps)
-      | ((props: {
-          table: MRT_TableInstance<TData>;
-          row: MRT_Row<TData>;
-        }) => CheckboxProps | RadioProps);
-    muiTableBodyCellCopyButtonProps?:
-      | ButtonProps
-      | ((props: {
-          cell: MRT_Cell<TData>;
-          column: MRT_Column<TData>;
-          row: MRT_Row<TData>;
-          table: MRT_TableInstance<TData>;
-        }) => ButtonProps);
-    muiTableBodyCellEditTextFieldProps?:
-      | TextFieldProps
-      | ((props: {
-          cell: MRT_Cell<TData>;
-          column: MRT_Column<TData>;
-          row: MRT_Row<TData>;
-          table: MRT_TableInstance<TData>;
-        }) => TextFieldProps);
-    muiTableBodyCellProps?:
-      | TableCellProps
-      | ((props: {
-          cell: MRT_Cell<TData>;
-          column: MRT_Column<TData>;
-          row: MRT_Row<TData>;
-          table: MRT_TableInstance<TData>;
-        }) => TableCellProps);
-    muiTableBodyCellSkeletonProps?:
-      | SkeletonProps
-      | ((props: {
-          cell: MRT_Cell<TData>;
-          column: MRT_Column<TData>;
-          row: MRT_Row<TData>;
-          table: MRT_TableInstance<TData>;
-        }) => SkeletonProps);
-    muiTableBodyProps?:
-      | TableBodyProps
-      | ((props: { table: MRT_TableInstance<TData> }) => TableBodyProps);
-    muiTableBodyRowDragHandleProps?:
-      | IconButtonProps
-      | ((props: {
-          table: MRT_TableInstance<TData>;
-          row: MRT_Row<TData>;
-        }) => IconButtonProps);
-    muiTableBodyRowProps?:
-      | TableRowProps
-      | ((props: {
-          isDetailPanel?: boolean;
-          row: MRT_Row<TData>;
-          staticRowIndex: number;
-          table: MRT_TableInstance<TData>;
-        }) => TableRowProps);
-    muiTableContainerProps?:
-      | TableContainerProps
-      | ((props: { table: MRT_TableInstance<TData> }) => TableContainerProps);
-    muiTableDetailPanelProps?:
-      | TableCellProps
-      | ((props: {
-          table: MRT_TableInstance<TData>;
-          row: MRT_Row<TData>;
-        }) => TableCellProps);
-    muiTableFooterCellProps?:
-      | TableCellProps
-      | ((props: {
-          table: MRT_TableInstance<TData>;
-          column: MRT_Column<TData>;
-        }) => TableCellProps);
-    muiTableFooterProps?:
-      | TableFooterProps
-      | ((props: { table: MRT_TableInstance<TData> }) => TableFooterProps);
-    muiTableFooterRowProps?:
-      | TableRowProps
-      | ((props: {
-          table: MRT_TableInstance<TData>;
-          footerGroup: MRT_HeaderGroup<TData>;
-        }) => TableRowProps);
-    muiTableHeadCellColumnActionsButtonProps?:
-      | IconButtonProps
-      | ((props: {
-          table: MRT_TableInstance<TData>;
-          column: MRT_Column<TData>;
-        }) => IconButtonProps);
-    muiTableHeadCellDragHandleProps?:
-      | IconButtonProps
-      | ((props: {
-          table: MRT_TableInstance<TData>;
-          column: MRT_Column<TData>;
-        }) => IconButtonProps);
-    muiTableHeadCellFilterCheckboxProps?:
-      | CheckboxProps
-      | ((props: {
-          column: MRT_Column<TData>;
-          table: MRT_TableInstance<TData>;
-        }) => CheckboxProps);
-    muiTableHeadCellFilterTextFieldProps?:
-      | TextFieldProps
-      | ((props: {
-          table: MRT_TableInstance<TData>;
-          column: MRT_Column<TData>;
-          rangeFilterIndex?: number;
-        }) => TextFieldProps);
-    muiTableHeadCellFilterSliderProps?:
-      | SliderProps
-      | ((props: {
-          table: MRT_TableInstance<TData>;
-          column: MRT_Column<TData>;
-        }) => TextFieldProps);
-    muiTableHeadCellProps?:
-      | TableCellProps
-      | ((props: {
-          table: MRT_TableInstance<TData>;
-          column: MRT_Column<TData>;
-        }) => TableCellProps);
-    muiTableHeadProps?:
-      | TableHeadProps
-      | ((props: { table: MRT_TableInstance<TData> }) => TableHeadProps);
-    muiTableHeadRowProps?:
-      | TableRowProps
-      | ((props: {
-          table: MRT_TableInstance<TData>;
-          headerGroup: MRT_HeaderGroup<TData>;
-        }) => TableRowProps);
-    muiTablePaginationProps?:
-      | Partial<Omit<TablePaginationProps, 'rowsPerPage'>>
-      | ((props: {
-          table: MRT_TableInstance<TData>;
-        }) => Partial<Omit<TablePaginationProps, 'rowsPerPage'>>);
-    muiTablePaperProps?:
-      | PaperProps
-      | ((props: { table: MRT_TableInstance<TData> }) => PaperProps);
-    muiTableProps?:
-      | TableProps
-      | ((props: { table: MRT_TableInstance<TData> }) => TableProps);
-    muiToolbarAlertBannerChipProps?:
-      | ChipProps
-      | ((props: { table: MRT_TableInstance<TData> }) => ChipProps);
-    muiToolbarAlertBannerProps?:
-      | AlertProps
-      | ((props: { table: MRT_TableInstance<TData> }) => AlertProps);
-    muiTopToolbarProps?:
-      | ToolbarProps
-      | ((props: { table: MRT_TableInstance<TData> }) => ToolbarProps);
-    onDensityChange?: OnChangeFn<MRT_DensityState>;
-    onDraggingColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
-    onDraggingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
-    onEditingCellChange?: OnChangeFn<MRT_Cell<TData> | null>;
-    onEditingRowCancel?: (props: {
-      row: MRT_Row<TData>;
-      table: MRT_TableInstance<TData>;
-    }) => void;
-    onEditingRowSave?: (props: {
-      exitEditingMode: () => void;
-      row: MRT_Row<TData>;
-      table: MRT_TableInstance<TData>;
-      values: Record<LiteralUnion<string & DeepKeys<TData>>, any>;
-    }) => Promise<void> | void;
-    onEditingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
-    onColumnFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterOption }>;
-    onGlobalFilterFnChange?: OnChangeFn<MRT_FilterOption>;
-    onHoveredColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
-    onHoveredRowChange?: OnChangeFn<MRT_Row<TData> | null>;
-    onIsFullScreenChange?: OnChangeFn<boolean>;
-    onShowAlertBannerChange?: OnChangeFn<boolean>;
-    onShowColumnFiltersChange?: OnChangeFn<boolean>;
-    onShowGlobalFilterChange?: OnChangeFn<boolean>;
-    onShowToolbarDropZoneChange?: OnChangeFn<boolean>;
-    positionActionsColumn?: 'first' | 'last';
-    positionExpandColumn?: 'first' | 'last';
-    positionGlobalFilter?: 'left' | 'right' | 'none';
-    positionPagination?: 'bottom' | 'top' | 'both' | 'none';
-    positionToolbarAlertBanner?: 'bottom' | 'top' | 'none';
-    positionToolbarDropZone?: 'bottom' | 'top' | 'none' | 'both';
-    renderBottomToolbar?:
-      | ReactNode
-      | ((props: { table: MRT_TableInstance<TData> }) => ReactNode);
-    renderBottomToolbarCustomActions?: (props: {
-      table: MRT_TableInstance<TData>;
-    }) => ReactNode;
-    renderColumnActionsMenuItems?: (props: {
-      column: MRT_Column<TData>;
-      closeMenu: () => void;
-      internalColumnMenuItems: ReactNode[];
-      table: MRT_TableInstance<TData>;
-    }) => ReactNode[];
-    renderColumnFilterModeMenuItems?: (props: {
-      column: MRT_Column<TData>;
-      internalFilterOptions: MRT_InternalFilterOption[];
-      onSelectFilterMode: (filterMode: MRT_FilterOption) => void;
-      table: MRT_TableInstance<TData>;
-    }) => ReactNode[];
-    renderDetailPanel?: (props: {
-      row: MRT_Row<TData>;
-      table: MRT_TableInstance<TData>;
-    }) => ReactNode;
-    renderGlobalFilterModeMenuItems?: (props: {
-      internalFilterOptions: MRT_InternalFilterOption[];
-      onSelectFilterMode: (filterMode: MRT_FilterOption) => void;
-      table: MRT_TableInstance<TData>;
-    }) => ReactNode[];
-    renderEmptyRowsFallback?: (props: {
-      table: MRT_TableInstance<TData>;
-    }) => ReactNode;
-    renderRowActionMenuItems?: (props: {
-      closeMenu: () => void;
-      row: MRT_Row<TData>;
-      table: MRT_TableInstance<TData>;
-    }) => ReactNode[];
-    renderRowActions?: (props: {
-      cell: MRT_Cell<TData>;
-      row: MRT_Row<TData>;
-      table: MRT_TableInstance<TData>;
-    }) => ReactNode;
-    renderToolbarInternalActions?: (props: {
-      table: MRT_TableInstance<TData>;
-    }) => ReactNode;
-    renderTopToolbar?:
-      | ReactNode
-      | ((props: { table: MRT_TableInstance<TData> }) => ReactNode);
-    renderTopToolbarCustomActions?: (props: {
-      table: MRT_TableInstance<TData>;
-    }) => ReactNode;
-    rowCount?: number;
-    rowNumberMode?: 'original' | 'static';
-    rowVirtualizerInstanceRef?: MutableRefObject<Virtualizer<
-      HTMLDivElement,
-      HTMLTableRowElement
-    > | null>;
-    rowVirtualizerProps?:
-      | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>
-      | ((props: {
-          table: MRT_TableInstance<TData>;
-        }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>);
-    selectAllMode?: 'all' | 'page';
-    /**
-     * Manage state externally any way you want, then pass it back into MRT.
-     */
-    state?: Partial<MRT_TableState<TData>>;
-  };
+export type MaterialReactTableOptions<TData extends Record<string, any>> = Omit<
+  Partial<TableOptions<TData>>,
+  | 'columns'
+  | 'data'
+  | 'defaultColumn'
+  | 'enableRowSelection'
+  | 'expandRowsFn'
+  | 'getRowId'
+  | 'globalFilterFn'
+  | 'initialState'
+  | 'onStateChange'
+  | 'state'
+> & {
+  columnFilterModeOptions?: Array<
+    LiteralUnion<string & MRT_FilterOption>
+  > | null;
+  /**
+   * The columns to display in the table. `accessorKey`s or `accessorFn`s must match keys in the `data` prop.
+   *
+   * See more info on creating columns on the official docs site:
+   * @link https://www.material-react-table.com/docs/guides/data-columns
+   * @link https://www.material-react-table.com/docs/guides/display-columns
+   *
+   * See all Columns Options on the official docs site:
+   * @link https://www.material-react-table.com/docs/api/column-options
+   */
+  columns: MRT_ColumnDef<TData>[];
+  columnVirtualizerInstanceRef?: MutableRefObject<Virtualizer<
+    HTMLDivElement,
+    HTMLTableCellElement
+  > | null>;
+  columnVirtualizerProps?:
+    | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableCellElement>>
+    | ((props: {
+        table: MRT_TableInstance<TData>;
+      }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableCellElement>>);
+  /**
+   * Pass your data as an array of objects. Objects can theoretically be any shape, but it's best to keep them consistent.
+   *
+   * See the usage guide for more info on creating columns and data:
+   * @link https://www.material-react-table.com/docs/getting-started/usage
+   */
+  data: TData[];
+  /**
+   * Instead of specifying a bunch of the same options for each column, you can just change an option in the `defaultColumn` prop to change a default option for all columns.
+   */
+  defaultColumn?: Partial<MRT_ColumnDef<TData>>;
+  /**
+   * Change the default options for display columns.
+   */
+  defaultDisplayColumn?: Partial<MRT_ColumnDef<TData>>;
+  displayColumnDefOptions?: Partial<{
+    [key in MRT_DisplayColumnIds]: Partial<MRT_ColumnDef<TData>>;
+  }>;
+  editingMode?: 'table' | 'modal' | 'row' | 'cell';
+  enableBottomToolbar?: boolean;
+  enableClickToCopy?: boolean;
+  enableColumnActions?: boolean;
+  enableColumnDragging?: boolean;
+  enableColumnFilterModes?: boolean;
+  enableColumnOrdering?: boolean;
+  enableColumnVirtualization?: boolean;
+  enableDensityToggle?: boolean;
+  enableEditing?: boolean | ((row: MRT_Row<TData>) => boolean);
+  enableExpandAll?: boolean;
+  enableFacetedValues?: boolean;
+  enableFilterMatchHighlighting?: boolean;
+  enableFullScreenToggle?: boolean;
+  enableGlobalFilterModes?: boolean;
+  enableGlobalFilterRankedResults?: boolean;
+  enablePagination?: boolean;
+  enableRowActions?: boolean;
+  enableRowDragging?: boolean;
+  enableRowNumbers?: boolean;
+  enableRowOrdering?: boolean;
+  enableRowSelection?: boolean | ((row: MRT_Row<TData>) => boolean);
+  enableRowVirtualization?: boolean;
+  enableSelectAll?: boolean;
+  enableStickyFooter?: boolean;
+  enableStickyHeader?: boolean;
+  enableTableFooter?: boolean;
+  enableTableHead?: boolean;
+  enableToolbarInternalActions?: boolean;
+  enableTopToolbar?: boolean;
+  expandRowsFn?: (dataRow: TData) => TData[];
+  getRowId?: (
+    originalRow: TData,
+    index: number,
+    parentRow: MRT_Row<TData>,
+  ) => string;
+  globalFilterFn?: MRT_FilterOption;
+  globalFilterModeOptions?: MRT_FilterOption[] | null;
+  icons?: Partial<MRT_Icons>;
+  initialState?: Partial<MRT_TableState<TData>>;
+  /**
+   * Changes which kind of CSS layout is used to render the table. `semantic` uses default semantic HTML elements, while `grid` adds CSS grid and flexbox styles
+   */
+  layoutMode?: 'semantic' | 'grid';
+  /**
+   * Pass in either a locale imported from `material-react-table/locales/*` or a custom locale object.
+   *
+   * See the localization (i18n) guide for more info:
+   * @link https://www.material-react-table.com/docs/guides/localization
+   */
+  localization?: Partial<MRT_Localization>;
+  /**
+   * Memoize cells, rows, or the entire table body to potentially improve render performance.
+   *
+   * @warning This will break some dynamic rendering features. See the memoization guide for more info:
+   * @link https://www.material-react-table.com/docs/guides/memoize-components
+   */
+  memoMode?: 'cells' | 'rows' | 'table-body';
+  muiBottomToolbarProps?:
+    | ToolbarProps
+    | ((props: { table: MRT_TableInstance<TData> }) => ToolbarProps);
+  muiExpandAllButtonProps?:
+    | IconButtonProps
+    | ((props: { table: MRT_TableInstance<TData> }) => IconButtonProps);
+  muiExpandButtonProps?:
+    | IconButtonProps
+    | ((props: {
+        table: MRT_TableInstance<TData>;
+        row: MRT_Row<TData>;
+      }) => IconButtonProps);
+  muiLinearProgressProps?:
+    | LinearProgressProps
+    | ((props: {
+        isTopToolbar: boolean;
+        table: MRT_TableInstance<TData>;
+      }) => LinearProgressProps);
+  muiSearchTextFieldProps?:
+    | TextFieldProps
+    | ((props: { table: MRT_TableInstance<TData> }) => TextFieldProps);
+  muiSelectAllCheckboxProps?:
+    | CheckboxProps
+    | ((props: { table: MRT_TableInstance<TData> }) => CheckboxProps);
+  muiSelectCheckboxProps?:
+    | (CheckboxProps | RadioProps)
+    | ((props: {
+        table: MRT_TableInstance<TData>;
+        row: MRT_Row<TData>;
+      }) => CheckboxProps | RadioProps);
+  muiTableBodyCellCopyButtonProps?:
+    | ButtonProps
+    | ((props: {
+        cell: MRT_Cell<TData>;
+        column: MRT_Column<TData>;
+        row: MRT_Row<TData>;
+        table: MRT_TableInstance<TData>;
+      }) => ButtonProps);
+  muiTableBodyCellEditTextFieldProps?:
+    | TextFieldProps
+    | ((props: {
+        cell: MRT_Cell<TData>;
+        column: MRT_Column<TData>;
+        row: MRT_Row<TData>;
+        table: MRT_TableInstance<TData>;
+      }) => TextFieldProps);
+  muiTableBodyCellProps?:
+    | TableCellProps
+    | ((props: {
+        cell: MRT_Cell<TData>;
+        column: MRT_Column<TData>;
+        row: MRT_Row<TData>;
+        table: MRT_TableInstance<TData>;
+      }) => TableCellProps);
+  muiTableBodyCellSkeletonProps?:
+    | SkeletonProps
+    | ((props: {
+        cell: MRT_Cell<TData>;
+        column: MRT_Column<TData>;
+        row: MRT_Row<TData>;
+        table: MRT_TableInstance<TData>;
+      }) => SkeletonProps);
+  muiTableBodyProps?:
+    | TableBodyProps
+    | ((props: { table: MRT_TableInstance<TData> }) => TableBodyProps);
+  muiTableBodyRowDragHandleProps?:
+    | IconButtonProps
+    | ((props: {
+        table: MRT_TableInstance<TData>;
+        row: MRT_Row<TData>;
+      }) => IconButtonProps);
+  muiTableBodyRowProps?:
+    | TableRowProps
+    | ((props: {
+        isDetailPanel?: boolean;
+        row: MRT_Row<TData>;
+        staticRowIndex: number;
+        table: MRT_TableInstance<TData>;
+      }) => TableRowProps);
+  muiTableContainerProps?:
+    | TableContainerProps
+    | ((props: { table: MRT_TableInstance<TData> }) => TableContainerProps);
+  muiTableDetailPanelProps?:
+    | TableCellProps
+    | ((props: {
+        table: MRT_TableInstance<TData>;
+        row: MRT_Row<TData>;
+      }) => TableCellProps);
+  muiTableFooterCellProps?:
+    | TableCellProps
+    | ((props: {
+        table: MRT_TableInstance<TData>;
+        column: MRT_Column<TData>;
+      }) => TableCellProps);
+  muiTableFooterProps?:
+    | TableFooterProps
+    | ((props: { table: MRT_TableInstance<TData> }) => TableFooterProps);
+  muiTableFooterRowProps?:
+    | TableRowProps
+    | ((props: {
+        table: MRT_TableInstance<TData>;
+        footerGroup: MRT_HeaderGroup<TData>;
+      }) => TableRowProps);
+  muiTableHeadCellColumnActionsButtonProps?:
+    | IconButtonProps
+    | ((props: {
+        table: MRT_TableInstance<TData>;
+        column: MRT_Column<TData>;
+      }) => IconButtonProps);
+  muiTableHeadCellDragHandleProps?:
+    | IconButtonProps
+    | ((props: {
+        table: MRT_TableInstance<TData>;
+        column: MRT_Column<TData>;
+      }) => IconButtonProps);
+  muiTableHeadCellFilterCheckboxProps?:
+    | CheckboxProps
+    | ((props: {
+        column: MRT_Column<TData>;
+        table: MRT_TableInstance<TData>;
+      }) => CheckboxProps);
+  muiTableHeadCellFilterTextFieldProps?:
+    | TextFieldProps
+    | ((props: {
+        table: MRT_TableInstance<TData>;
+        column: MRT_Column<TData>;
+        rangeFilterIndex?: number;
+      }) => TextFieldProps);
+  muiTableHeadCellFilterSliderProps?:
+    | SliderProps
+    | ((props: {
+        table: MRT_TableInstance<TData>;
+        column: MRT_Column<TData>;
+      }) => TextFieldProps);
+  muiTableHeadCellProps?:
+    | TableCellProps
+    | ((props: {
+        table: MRT_TableInstance<TData>;
+        column: MRT_Column<TData>;
+      }) => TableCellProps);
+  muiTableHeadProps?:
+    | TableHeadProps
+    | ((props: { table: MRT_TableInstance<TData> }) => TableHeadProps);
+  muiTableHeadRowProps?:
+    | TableRowProps
+    | ((props: {
+        table: MRT_TableInstance<TData>;
+        headerGroup: MRT_HeaderGroup<TData>;
+      }) => TableRowProps);
+  muiTablePaginationProps?:
+    | Partial<Omit<TablePaginationProps, 'rowsPerPage'>>
+    | ((props: {
+        table: MRT_TableInstance<TData>;
+      }) => Partial<Omit<TablePaginationProps, 'rowsPerPage'>>);
+  muiTablePaperProps?:
+    | PaperProps
+    | ((props: { table: MRT_TableInstance<TData> }) => PaperProps);
+  muiTableProps?:
+    | TableProps
+    | ((props: { table: MRT_TableInstance<TData> }) => TableProps);
+  muiToolbarAlertBannerChipProps?:
+    | ChipProps
+    | ((props: { table: MRT_TableInstance<TData> }) => ChipProps);
+  muiToolbarAlertBannerProps?:
+    | AlertProps
+    | ((props: { table: MRT_TableInstance<TData> }) => AlertProps);
+  muiTopToolbarProps?:
+    | ToolbarProps
+    | ((props: { table: MRT_TableInstance<TData> }) => ToolbarProps);
+  onDensityChange?: OnChangeFn<MRT_DensityState>;
+  onDraggingColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
+  onDraggingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
+  onEditingCellChange?: OnChangeFn<MRT_Cell<TData> | null>;
+  onEditingRowCancel?: (props: {
+    row: MRT_Row<TData>;
+    table: MRT_TableInstance<TData>;
+  }) => void;
+  onEditingRowSave?: (props: {
+    exitEditingMode: () => void;
+    row: MRT_Row<TData>;
+    table: MRT_TableInstance<TData>;
+    values: Record<LiteralUnion<string & DeepKeys<TData>>, any>;
+  }) => Promise<void> | void;
+  onEditingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
+  onColumnFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterOption }>;
+  onGlobalFilterFnChange?: OnChangeFn<MRT_FilterOption>;
+  onHoveredColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
+  onHoveredRowChange?: OnChangeFn<MRT_Row<TData> | null>;
+  onIsFullScreenChange?: OnChangeFn<boolean>;
+  onShowAlertBannerChange?: OnChangeFn<boolean>;
+  onShowColumnFiltersChange?: OnChangeFn<boolean>;
+  onShowGlobalFilterChange?: OnChangeFn<boolean>;
+  onShowToolbarDropZoneChange?: OnChangeFn<boolean>;
+  positionActionsColumn?: 'first' | 'last';
+  positionExpandColumn?: 'first' | 'last';
+  positionGlobalFilter?: 'left' | 'right' | 'none';
+  positionPagination?: 'bottom' | 'top' | 'both' | 'none';
+  positionToolbarAlertBanner?: 'bottom' | 'top' | 'none';
+  positionToolbarDropZone?: 'bottom' | 'top' | 'none' | 'both';
+  renderBottomToolbar?:
+    | ReactNode
+    | ((props: { table: MRT_TableInstance<TData> }) => ReactNode);
+  renderBottomToolbarCustomActions?: (props: {
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode;
+  renderColumnActionsMenuItems?: (props: {
+    column: MRT_Column<TData>;
+    closeMenu: () => void;
+    internalColumnMenuItems: ReactNode[];
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode[];
+  renderColumnFilterModeMenuItems?: (props: {
+    column: MRT_Column<TData>;
+    internalFilterOptions: MRT_InternalFilterOption[];
+    onSelectFilterMode: (filterMode: MRT_FilterOption) => void;
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode[];
+  renderDetailPanel?: (props: {
+    row: MRT_Row<TData>;
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode;
+  renderGlobalFilterModeMenuItems?: (props: {
+    internalFilterOptions: MRT_InternalFilterOption[];
+    onSelectFilterMode: (filterMode: MRT_FilterOption) => void;
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode[];
+  renderEmptyRowsFallback?: (props: {
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode;
+  renderRowActionMenuItems?: (props: {
+    closeMenu: () => void;
+    row: MRT_Row<TData>;
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode[];
+  renderRowActions?: (props: {
+    cell: MRT_Cell<TData>;
+    row: MRT_Row<TData>;
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode;
+  renderToolbarInternalActions?: (props: {
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode;
+  renderTopToolbar?:
+    | ReactNode
+    | ((props: { table: MRT_TableInstance<TData> }) => ReactNode);
+  renderTopToolbarCustomActions?: (props: {
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode;
+  rowCount?: number;
+  rowNumberMode?: 'original' | 'static';
+  rowVirtualizerInstanceRef?: MutableRefObject<Virtualizer<
+    HTMLDivElement,
+    HTMLTableRowElement
+  > | null>;
+  rowVirtualizerProps?:
+    | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>
+    | ((props: {
+        table: MRT_TableInstance<TData>;
+      }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>);
+  selectAllMode?: 'all' | 'page';
+  /**
+   * Manage state externally any way you want, then pass it back into MRT.
+   */
+  state?: Partial<MRT_TableState<TData>>;
+};

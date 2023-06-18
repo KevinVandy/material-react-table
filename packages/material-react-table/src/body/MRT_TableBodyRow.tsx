@@ -6,20 +6,20 @@ import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import { type VirtualItem, type Virtualizer } from '@tanstack/react-virtual';
 import { type MRT_Cell, type MRT_Row, type MRT_TableInstance } from '../types';
 
-interface Props {
+interface Props<TData extends Record<string, any>> {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
   measureElement?: (element: HTMLTableRowElement) => void;
   numRows: number;
-  row: MRT_Row;
+  row: MRT_Row<TData>;
   rowIndex: number;
-  table: MRT_TableInstance;
+  table: MRT_TableInstance<TData>;
   virtualColumns?: VirtualItem[];
   virtualPaddingLeft?: number;
   virtualPaddingRight?: number;
   virtualRow?: VirtualItem;
 }
 
-export const MRT_TableBodyRow = ({
+export const MRT_TableBodyRow = <TData extends Record<string, any>>({
   columnVirtualizer,
   measureElement,
   numRows,
@@ -30,7 +30,7 @@ export const MRT_TableBodyRow = ({
   virtualPaddingLeft,
   virtualPaddingRight,
   virtualRow,
-}: Props) => {
+}: Props<TData>) => {
   const {
     getState,
     options: {
@@ -108,7 +108,7 @@ export const MRT_TableBodyRow = ({
         {(virtualColumns ?? row.getVisibleCells()).map((cellOrVirtualCell) => {
           const cell = columnVirtualizer
             ? row.getVisibleCells()[(cellOrVirtualCell as VirtualItem).index]
-            : (cellOrVirtualCell as MRT_Cell);
+            : (cellOrVirtualCell as MRT_Cell<TData>);
           const props = {
             cell,
             measureElement: columnVirtualizer?.measureElement,
@@ -151,4 +151,4 @@ export const MRT_TableBodyRow = ({
 export const Memo_MRT_TableBodyRow = memo(
   MRT_TableBodyRow,
   (prev, next) => prev.row === next.row && prev.rowIndex === next.rowIndex,
-);
+) as typeof MRT_TableBodyRow;

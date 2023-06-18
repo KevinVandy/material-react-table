@@ -6,12 +6,12 @@ import Chip from '@mui/material/Chip';
 import Collapse from '@mui/material/Collapse';
 import { type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any> = {}> {
+interface Props<TData extends Record<string, any>> {
   stackAlertBanner: boolean;
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ToolbarAlertBanner = <TData extends Record<string, any> = {}>({
+export const MRT_ToolbarAlertBanner = <TData extends Record<string, any>>({
   stackAlertBanner,
   table,
 }: Props<TData>) => {

@@ -6,11 +6,13 @@ import { type MRT_TableInstance } from '../types';
 const useIsomorphicLayoutEffect =
   typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
-interface Props {
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any>> {
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TableContainer = ({ table }: Props) => {
+export const MRT_TableContainer = <TData extends Record<string, any>>({
+  table,
+}: Props<TData>) => {
   const {
     getState,
     options: { enableStickyHeader, muiTableContainerProps },

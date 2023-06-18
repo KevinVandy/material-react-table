@@ -9,13 +9,13 @@ import MenuItem from '@mui/material/MenuItem';
 import { type TextFieldProps } from '@mui/material/TextField';
 import { type MRT_Cell, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any> = {}> {
+interface Props<TData extends Record<string, any>> {
   cell: MRT_Cell<TData>;
   table: MRT_TableInstance<TData>;
   showLabel?: boolean;
 }
 
-export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
+export const MRT_EditCellTextField = <TData extends Record<string, any>>({
   cell,
   showLabel,
   table,

@@ -5,7 +5,7 @@ import {
   type MaterialReactTableOptions,
 } from './types';
 
-export const useMaterialReactTable = <TData extends Record<string, any> = {}>(
+export const useMaterialReactTable = <TData extends Record<string, any>>(
   tableOptions: MaterialReactTableOptions<TData>,
 ): MRT_TableInstance<TData> => {
   const parsedTableOptions = useTableOptions(tableOptions);

@@ -11,13 +11,15 @@ import { Memo_MRT_TableBody, MRT_TableBody } from '../body/MRT_TableBody';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
 import { parseCSSVarId } from '../column.utils';
 import { type MRT_TableInstance } from '../types';
-import { MRT_EditRowModal } from '../body/MRT_EditRowModal';
+import { MRT_EditRowModal } from './MRT_EditRowModal';
 
-interface Props {
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any>> {
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_Table = ({ table }: Props) => {
+export const MRT_Table = <TData extends Record<string, any>>({
+  table,
+}: Props<TData>) => {
   const {
     getFlatHeaders,
     getState,

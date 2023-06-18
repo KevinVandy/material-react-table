@@ -103,7 +103,7 @@ const rangeModes = ['between', 'betweenInclusive', 'inNumberRange'];
 const emptyModes = ['empty', 'notEmpty'];
 const arrModes = ['arrIncludesSome', 'arrIncludesAll', 'arrIncludes'];
 
-interface Props<TData extends Record<string, any> = {}> {
+interface Props<TData extends Record<string, any>> {
   anchorEl: HTMLElement | null;
   header?: MRT_Header<TData>;
   onSelect?: () => void;
@@ -112,7 +112,7 @@ interface Props<TData extends Record<string, any> = {}> {
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_FilterOptionMenu = <TData extends Record<string, any> = {}>({
+export const MRT_FilterOptionMenu = <TData extends Record<string, any>>({
   anchorEl,
   header,
   onSelect,

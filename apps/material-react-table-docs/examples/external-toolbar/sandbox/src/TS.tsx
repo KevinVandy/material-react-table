@@ -1,18 +1,18 @@
 import React, { useReducer, useRef, useState } from 'react';
 import {
-  MaterialReactTable,
   MRT_FullScreenToggleButton,
   MRT_GlobalFilterTextField,
   MRT_ShowHideColumnsButton,
-  MRT_TableInstance,
   MRT_TablePagination,
   MRT_ToggleDensePaddingButton,
   MRT_ToggleFiltersButton,
   MRT_ToolbarAlertBanner,
+  MaterialReactTable,
   type MRT_ColumnDef,
   type MRT_DensityState,
   type MRT_PaginationState,
   type MRT_RowSelectionState,
+  type MRT_TableInstance,
   type MRT_VisibilityState,
 } from 'material-react-table';
 import {
@@ -161,7 +161,7 @@ const Example = () => {
           pagination,
           showColumnFilters,
         }}
-        tableInstanceRef={tableInstanceRef} //get access to the underlying table instance ref
+        // tableInstanceRef={tableInstanceRef} //get access to the underlying table instance ref
       />
       {/* Our Custom Bottom Toolbar */}
       {tableInstanceRef.current && (

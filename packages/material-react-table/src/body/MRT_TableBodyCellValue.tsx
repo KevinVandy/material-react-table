@@ -6,12 +6,15 @@ import { type MRT_Cell, type MRT_TableInstance } from '../types';
 
 const allowedTypes = ['string', 'number'];
 
-interface Props {
-  cell: MRT_Cell;
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any>> {
+  cell: MRT_Cell<TData>;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TableBodyCellValue = ({ cell, table }: Props) => {
+export const MRT_TableBodyCellValue = <TData extends Record<string, any>>({
+  cell,
+  table,
+}: Props<TData>) => {
   const {
     getState,
     options: { enableFilterMatchHighlighting },

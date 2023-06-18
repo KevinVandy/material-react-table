@@ -12,12 +12,15 @@ import { getCommonCellStyles } from '../column.utils';
 import { type Theme } from '@mui/material/styles';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
 
-interface Props {
-  header: MRT_Header;
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any>> {
+  header: MRT_Header<TData>;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TableHeadCell = ({ header, table }: Props) => {
+export const MRT_TableHeadCell = <TData extends Record<string, any>>({
+  header,
+  table,
+}: Props<TData>) => {
   const theme = useTheme();
   const {
     getState,

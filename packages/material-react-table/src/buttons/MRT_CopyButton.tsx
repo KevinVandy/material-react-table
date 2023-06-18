@@ -3,13 +3,13 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import { type MRT_Cell, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any> = {}> {
+interface Props<TData extends Record<string, any>> {
   cell: MRT_Cell<TData>;
   children: ReactNode;
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_CopyButton = <TData extends Record<string, any> = {}>({
+export const MRT_CopyButton = <TData extends Record<string, any>>({
   cell,
   children,
   table,

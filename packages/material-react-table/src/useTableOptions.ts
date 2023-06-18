@@ -7,11 +7,11 @@ import { MRT_Default_Icons } from './icons';
 import { MRT_Localization_EN } from './_locales/en';
 import { type MRT_Localization, type MaterialReactTableOptions } from './types';
 
-export const useTableOptions: <TData extends Record<string, any> = {}>(
+export const useTableOptions: <TData extends Record<string, any>>(
   tableOptions: MaterialReactTableOptions<TData>,
 ) => MaterialReactTableOptions<TData> & {
   localization: MRT_Localization;
-} = <TData extends Record<string, any> = {}>({
+} = <TData extends Record<string, any>>({
   aggregationFns,
   autoResetExpanded = false,
   columnResizeMode = 'onChange',

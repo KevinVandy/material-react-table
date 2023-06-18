@@ -39,13 +39,11 @@ import { MRT_ExpandButton } from './buttons/MRT_ExpandButton';
 import { MRT_ToggleRowActionMenuButton } from './buttons/MRT_ToggleRowActionMenuButton';
 import { MRT_SelectCheckbox } from './inputs/MRT_SelectCheckbox';
 
-export const useMaterialReactTableInstance: <
-  TData extends Record<string, any> = {},
->(
+export const useMaterialReactTableInstance: <TData extends Record<string, any>>(
   tableOptions: MaterialReactTableOptions<TData> & {
     localization: MRT_Localization;
   },
-) => MRT_TableInstance<TData> = <TData extends Record<string, any> = {}>(
+) => MRT_TableInstance<TData> = <TData extends Record<string, any>>(
   tableOptions: MaterialReactTableOptions<TData> & {
     localization: MRT_Localization;
   },
@@ -266,7 +264,7 @@ export const useMaterialReactTableInstance: <
             Object.assign(
               {},
               ...getAllLeafColumnDefs(
-                tableOptions.columns as MRT_ColumnDef[],
+                tableOptions.columns as MRT_ColumnDef<TData>[],
               ).map((col) => ({
                 [getColumnId(col)]: null,
               })),

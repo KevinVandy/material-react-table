@@ -2,12 +2,12 @@ import Collapse from '@mui/material/Collapse';
 import LinearProgress from '@mui/material/LinearProgress';
 import { type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any> = {}> {
+interface Props<TData extends Record<string, any>> {
   isTopToolbar: boolean;
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_LinearProgressBar = <TData extends Record<string, any> = {}>({
+export const MRT_LinearProgressBar = <TData extends Record<string, any>>({
   isTopToolbar,
   table,
 }: Props<TData>) => {
