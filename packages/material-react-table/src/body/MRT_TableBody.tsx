@@ -45,8 +45,6 @@ export const MRT_TableBody = ({
       renderEmptyRowsFallback,
       rowVirtualizerInstanceRef,
       rowVirtualizerProps,
-      virtualizerInstanceRef,
-      virtualizerProps,
     },
     refs: { tableContainerRef, tablePaperRef },
   } = table;
@@ -64,11 +62,6 @@ export const MRT_TableBody = ({
     muiTableBodyProps instanceof Function
       ? muiTableBodyProps({ table })
       : muiTableBodyProps;
-
-  const vProps_old =
-    virtualizerProps instanceof Function
-      ? virtualizerProps({ table })
-      : virtualizerProps;
 
   const vProps =
     rowVirtualizerProps instanceof Function
@@ -130,18 +123,12 @@ export const MRT_TableBody = ({
             ? (element) => element?.getBoundingClientRect().height
             : undefined,
         overscan: 4,
-        ...vProps_old,
         ...vProps,
       })
     : undefined;
 
   if (rowVirtualizerInstanceRef && rowVirtualizer) {
     rowVirtualizerInstanceRef.current = rowVirtualizer;
-  }
-
-  //deprecated
-  if (virtualizerInstanceRef && rowVirtualizer) {
-    virtualizerInstanceRef.current = rowVirtualizer;
   }
 
   const virtualRows = rowVirtualizer
