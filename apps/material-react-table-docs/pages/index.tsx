@@ -73,6 +73,35 @@ const HomePage = () => {
             </Box>
           </Box>
         </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            margin: 'auto',
+            alignItems: 'center',
+            gap: '4px',
+          }}
+        >
+          👀
+          <Link href="/changelog#version-2-roadmap-(july-2023)">
+            <MuiLink
+              sx={(theme) => ({
+                textAlign: 'center',
+                background: `-webkit-linear-gradient(left, ${theme.palette.error.main}, ${theme.palette.warning.main})`,
+                display: 'inline',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                margin: 'auto',
+                textDecoration: 'none',
+                '&:hover': {
+                  textDecoration: 'underline',
+                },
+              })}
+            >
+              V2.0 Coming Soon (July 2023)
+            </MuiLink>
+          </Link>
+          👀
+        </Box>
         <Typography
           color="text.secondary"
           sx={{

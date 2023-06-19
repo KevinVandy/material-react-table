@@ -73,6 +73,7 @@ _**Fully Fleshed out [Docs](https://www.material-react-table.com/docs/guides#gui
 - [x] Data Editing (4 different editing modes)
 - [x] Density Toggle
 - [x] Detail Panels (Expansion)
+- [x] Faceted Value Generation for Filter Options
 - [x] Filtering (supports client-side and server-side)
 - [x] Filter Match Highlighting
 - [x] Full Screen Mode
