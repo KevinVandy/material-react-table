@@ -1,12 +1,27 @@
 import Head from 'next/head';
 
 <Head>
-  <title>Changelog and Roadmap - Material React Table Docs</title>
+  <title>V1 Changelog and Roadmap - Material React Table Docs</title>
   <meta
     name="description"
-    content="Material React Table Changelog and Roadmap for future development"
+    content="Material React Table V1 Changelog and Roadmap for future development"
   />
 </Head>
+
+## Roadmap
+
+### Version 1 Roadmap (2022-2023)
+
+As of June 2023, most feature development is complete for MRT Version 1. MRT Version 2 is actively being developed. Some V1 bugs may still get fixed.
+
+### Version 2 Roadmap (July 2023)
+
+Version 2 should be released by July 2023. Some features and changes will include:
+
+- Support for mostly keeping all of your MRT V1 code the same, but some props will be renamed for more conciseness and consistency.
+- New `useMaterialReactTable` hook to replace `tableInstanceRef`. The full table instance will be available to you to build around more than just the MRT components.
+- All internal MRT Components will be exported from MRT for you to optionally build up your own table UI for advanced use cases. Custom Toolbars will be much easier to build with a smaller bundle size too.
+- New built-in Date Filters, and other advanced filtering and editing variants.
 
 ## Changelog
 
@@ -504,20 +519,6 @@ import Head from 'next/head';
 - V0.19.0 - Data Column Definitions now need an `accessorKey` or a combination of an `id` and `accessorFn` to be used as the key for the data row.
 - V0.19.0 - `instance` was renamed to `table` across all callback functions to be inline with TanStack Table V8.1.
 - V0.18.0 - on...Changed callback props were removed as they were redundant with the on...Change callback props. Hoisting state will be the recommended way to watch for table state changes and react to them.
-
-## Roadmap
-
-### Version 1 Roadmap (2022-2023)
-
-Most of the features that will ever be added in Version 1 have been added. They will continue to be polished, and bugs will continue to be fixed.
-
-One area of focus, however, will be improving the editing features. There is still some room for improvement and quality of life improvements that can be made.
-
-Another large feature that could be added is a "row pinning" feature. It would allow users to pin rows to the top of the table, and would be useful for things like "favorites" or "pinned" rows. It would work very similarly to the "column pinning" feature that is already in the table.
-
-### Version 2 Roadmap (2023)
-
-Version 2 will probably not come out until Material UI v6 is released. It will be developed while Material UI v6 is in alpha, and will be released when Material UI v6 is released.
 
 <br />
 <br />
