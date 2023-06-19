@@ -16,7 +16,7 @@ export const MRT_FilterRangeSlider = <TData extends Record<string, any>>({
   const {
     options: {
       localization,
-      muiTableHeadCellFilterSliderProps,
+      muiFilterSliderProps,
       enableColumnFilterModes,
     },
     refs: { filterInputRefs },
@@ -30,20 +30,20 @@ export const MRT_FilterRangeSlider = <TData extends Record<string, any>>({
     enableColumnFilterModes && columnDef.enableColumnFilterModes !== false;
 
   const mTableHeadCellFilterTextFieldProps =
-    muiTableHeadCellFilterSliderProps instanceof Function
-      ? muiTableHeadCellFilterSliderProps({
+    muiFilterSliderProps instanceof Function
+      ? muiFilterSliderProps({
           column,
           table,
         })
-      : muiTableHeadCellFilterSliderProps;
+      : muiFilterSliderProps;
 
   const mcTableHeadCellFilterTextFieldProps =
-    columnDef.muiTableHeadCellFilterSliderProps instanceof Function
-      ? columnDef.muiTableHeadCellFilterSliderProps({
+    columnDef.muiFilterSliderProps instanceof Function
+      ? columnDef.muiFilterSliderProps({
           column,
           table,
         })
-      : columnDef.muiTableHeadCellFilterSliderProps;
+      : columnDef.muiFilterSliderProps;
 
   const sliderProps = {
     ...mTableHeadCellFilterTextFieldProps,

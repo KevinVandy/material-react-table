@@ -22,7 +22,7 @@ const RowInstanceAPIsTable = ({ onlyProps }: Props) => {
         accessorKey: 'rowInstanceAPI',
         enableClickToCopy: true,
         header: 'State Option',
-        muiTableBodyCellCopyButtonProps: ({ cell }) => ({
+        muiCopyButtonProps: ({ cell }) => ({
           className: 'row-instance-api',
           id: `${cell.getValue<string>()}-row-instance-api`,
         }),

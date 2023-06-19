@@ -22,7 +22,7 @@ const StateOptionsTable = ({ onlyProps }: Props) => {
         accessorKey: 'stateOption',
         enableClickToCopy: true,
         header: 'State Option',
-        muiTableBodyCellCopyButtonProps: ({ cell }) => ({
+        muiCopyButtonProps: ({ cell }) => ({
           className: 'state-option',
           id: `${cell.getValue<string>()}-state-option`,
         }),

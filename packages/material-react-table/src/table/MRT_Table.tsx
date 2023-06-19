@@ -25,7 +25,7 @@ export const MRT_Table = <TData extends Record<string, any>>({
     getState,
     options: {
       columnVirtualizerInstanceRef,
-      columnVirtualizerProps,
+      columnVirtualizerOptions,
       columns,
       editingMode,
       enableColumnResizing,
@@ -55,9 +55,9 @@ export const MRT_Table = <TData extends Record<string, any>>({
       : muiTableProps;
 
   const vProps =
-    columnVirtualizerProps instanceof Function
-      ? columnVirtualizerProps({ table })
-      : columnVirtualizerProps;
+    columnVirtualizerOptions instanceof Function
+      ? columnVirtualizerOptions({ table })
+      : columnVirtualizerOptions;
 
   const columnSizeVars = useMemo(() => {
     const headers = getFlatHeaders();

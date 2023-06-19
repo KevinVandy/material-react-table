@@ -68,7 +68,7 @@ export const RowOrderingEnabled = () => {
       data={data}
       enableRowOrdering
       enableSorting={false}
-      muiTableBodyRowDragHandleProps={({ table }) => ({
+      muiRowDragHandleProps={({ table }) => ({
         onDragEnd: () => {
           const { draggingRow, hoveredRow } = table.getState();
           if (hoveredRow && draggingRow) {
@@ -99,7 +99,7 @@ export const RowOrderingWithSelect = () => {
       enableRowSelection
       enableSorting={false}
       getRowId={(row) => row.email}
-      muiTableBodyRowDragHandleProps={{
+      muiRowDragHandleProps={{
         onDragEnd: () => {
           if (hoveredRow && draggingRow) {
             data.splice(
@@ -134,7 +134,7 @@ export const RowOrderingWithPinning = () => {
       enableRowOrdering
       enablePinning
       enableSorting={false}
-      muiTableBodyRowDragHandleProps={{
+      muiRowDragHandleProps={{
         onDragEnd: () => {
           if (hoveredRow && draggingRow) {
             data.splice(
@@ -170,7 +170,7 @@ export const RowAndColumnOrdering = () => {
       enablePinning
       enableRowOrdering
       enableSorting={false}
-      muiTableBodyRowDragHandleProps={{
+      muiRowDragHandleProps={{
         onDragEnd: () => {
           if (hoveredRow && draggingRow) {
             data.splice(

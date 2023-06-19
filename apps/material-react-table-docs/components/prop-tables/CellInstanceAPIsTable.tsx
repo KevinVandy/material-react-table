@@ -22,7 +22,7 @@ const CellInstanceAPIsTable = ({ onlyProps }: Props) => {
         accessorKey: 'cellInstanceAPI',
         enableClickToCopy: true,
         header: 'State Option',
-        muiTableBodyCellCopyButtonProps: ({ cell }) => ({
+        muiCopyButtonProps: ({ cell }) => ({
           className: 'cell-instance-api',
           id: `${cell.getValue<string>()}-cell-instance-api`,
         }),

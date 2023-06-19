@@ -28,7 +28,7 @@ const RootPropTable = ({ onlyProps }: Props) => {
         enableClickToCopy: true,
         header: 'Prop Name',
         accessorKey: 'propName',
-        muiTableBodyCellCopyButtonProps: ({ cell }) => ({
+        muiCopyButtonProps: ({ cell }) => ({
           className: 'prop',
           id: `${cell.getValue<string>()}-prop`,
         }),

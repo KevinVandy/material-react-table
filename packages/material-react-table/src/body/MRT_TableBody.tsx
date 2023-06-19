@@ -44,7 +44,7 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
       muiTableBodyProps,
       renderEmptyRowsFallback,
       rowVirtualizerInstanceRef,
-      rowVirtualizerProps,
+      rowVirtualizerOptions,
     },
     refs: { tableContainerRef, tablePaperRef },
   } = table;
@@ -64,9 +64,9 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
       : muiTableBodyProps;
 
   const vProps =
-    rowVirtualizerProps instanceof Function
-      ? rowVirtualizerProps({ table })
-      : rowVirtualizerProps;
+    rowVirtualizerOptions instanceof Function
+      ? rowVirtualizerOptions({ table })
+      : rowVirtualizerOptions;
 
   const shouldRankResults = useMemo(
     () =>

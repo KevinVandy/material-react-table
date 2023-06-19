@@ -19,7 +19,7 @@ export const MRT_TableHeadCellColumnActionsButton = <
     options: {
       icons: { MoreVertIcon },
       localization,
-      muiTableHeadCellColumnActionsButtonProps,
+      muiColumnActionsButtonProps,
     },
   } = table;
   const { column } = header;
@@ -34,17 +34,17 @@ export const MRT_TableHeadCellColumnActionsButton = <
   };
 
   const mTableHeadCellColumnActionsButtonProps =
-    muiTableHeadCellColumnActionsButtonProps instanceof Function
-      ? muiTableHeadCellColumnActionsButtonProps({ column, table })
-      : muiTableHeadCellColumnActionsButtonProps;
+    muiColumnActionsButtonProps instanceof Function
+      ? muiColumnActionsButtonProps({ column, table })
+      : muiColumnActionsButtonProps;
 
   const mcTableHeadCellColumnActionsButtonProps =
-    columnDef.muiTableHeadCellColumnActionsButtonProps instanceof Function
-      ? columnDef.muiTableHeadCellColumnActionsButtonProps({
+    columnDef.muiColumnActionsButtonProps instanceof Function
+      ? columnDef.muiColumnActionsButtonProps({
           column,
           table,
         })
-      : columnDef.muiTableHeadCellColumnActionsButtonProps;
+      : columnDef.muiColumnActionsButtonProps;
 
   const iconButtonProps = {
     ...mTableHeadCellColumnActionsButtonProps,

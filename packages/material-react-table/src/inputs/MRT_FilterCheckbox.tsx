@@ -15,26 +15,26 @@ export const MRT_FilterCheckbox = <TData extends Record<string, any>>({
 }: Props<TData>) => {
   const {
     getState,
-    options: { localization, muiTableHeadCellFilterCheckboxProps },
+    options: { localization, muiFilterCheckboxProps },
   } = table;
   const { density } = getState();
   const { columnDef } = column;
 
   const mTableHeadCellFilterCheckboxProps =
-    muiTableHeadCellFilterCheckboxProps instanceof Function
-      ? muiTableHeadCellFilterCheckboxProps({
+    muiFilterCheckboxProps instanceof Function
+      ? muiFilterCheckboxProps({
           column,
           table,
         })
-      : muiTableHeadCellFilterCheckboxProps;
+      : muiFilterCheckboxProps;
 
   const mcTableHeadCellFilterCheckboxProps =
-    columnDef.muiTableHeadCellFilterCheckboxProps instanceof Function
-      ? columnDef.muiTableHeadCellFilterCheckboxProps({
+    columnDef.muiFilterCheckboxProps instanceof Function
+      ? columnDef.muiFilterCheckboxProps({
           column,
           table,
         })
-      : columnDef.muiTableHeadCellFilterCheckboxProps;
+      : columnDef.muiFilterCheckboxProps;
 
   const checkboxProps = {
     ...mTableHeadCellFilterCheckboxProps,

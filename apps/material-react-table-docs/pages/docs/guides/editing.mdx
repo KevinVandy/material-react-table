@@ -28,7 +28,7 @@ There are four visually distinct editing modes to choose from, whether you want 
     new Set([
       'editingMode',
       'enableEditing',
-      'muiTableBodyCellEditTextFieldProps',
+      'muiEditTextFieldProps',
       'onEditingCellChange',
       'onEditingRowCancel',
       'onEditingRowChange',
@@ -45,7 +45,7 @@ There are four visually distinct editing modes to choose from, whether you want 
       'editSelectOptions',
       'editVariant',
       'enableEditing',
-      'muiTableBodyCellEditTextFieldProps',
+      'muiEditTextFieldProps',
     ])
   }
 />
@@ -92,7 +92,7 @@ You must provide an `onEditingRowSave` callback function prop where you will get
 
 The `cell` editing mode is a bit simpler visually. Uses double-click cells to activate editing mode, but only for that cell.
 
-Then there is a bit of work for you to do to wire up either the `onBlur`, `onChange`, etc., events yourself in order to save the table data. This can be done in the `muiTableBodyCellEditTextFieldProps` prop or column definition option.
+Then there is a bit of work for you to do to wire up either the `onBlur`, `onChange`, etc., events yourself in order to save the table data. This can be done in the `muiEditTextFieldProps` prop or column definition option.
 
 <EditingCellExample />
 
@@ -100,20 +100,20 @@ Then there is a bit of work for you to do to wire up either the `onBlur`, `onCha
 
 The `table` editing mode is similar to the `cell` editing mode, but it simply has all of the data cells in the table become editable all at once.
 
-To save data, you must hook up the `onBlur`, `onChange`, etc., events yourself. This can be done in the `muiTableBodyCellEditTextFieldProps` prop or column definition option.
+To save data, you must hook up the `onBlur`, `onChange`, etc., events yourself. This can be done in the `muiEditTextFieldProps` prop or column definition option.
 
 <EditingTableExample />
 
 ### Customizing Editing Components
 
-You can pass any Material UI TextField Props with the `muiTableBodyCellEditTextFieldProps` prop.
+You can pass any Material UI TextField Props with the `muiEditTextFieldProps` prop.
 
 ```tsx
 const columns = [
   {
     accessor: 'age',
     header: 'Age',
-    muiTableBodyCellEditTextFieldProps: {
+    muiEditTextFieldProps: {
       required: true,
       type: 'number',
       variant: 'outlined',
@@ -124,7 +124,7 @@ const columns = [
 
 #### Add Validation to Editing Components
 
-You can add validation to the editing components by using the `muiTableBodyCellEditTextFieldProps` events. You can write your validation logic and hook it up to the `onBlur`, `onChange`, etc., events, then set the `error` and `helperText` props accordingly.
+You can add validation to the editing components by using the `muiEditTextFieldProps` events. You can write your validation logic and hook it up to the `onBlur`, `onChange`, etc., events, then set the `error` and `helperText` props accordingly.
 
 If you are implementing validation, you may also need to use the `onEditingRowCancel` prop to clear the validation error state.
 
@@ -135,7 +135,7 @@ const columns = [
   {
     accessor: 'age',
     header: 'Age',
-    muiTableBodyCellEditTextFieldProps: {
+    muiEditTextFieldProps: {
       error: !!validationErrors.age, //highlight mui text field red error color
       helperText: validationErrors.age, //show error message in helper text.
       required: true,

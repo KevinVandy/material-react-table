@@ -16,7 +16,7 @@ export const MRT_TableHeadCellGrabHandle = <TData extends Record<string, any>>({
 }: Props<TData>) => {
   const {
     getState,
-    options: { enableColumnOrdering, muiTableHeadCellDragHandleProps },
+    options: { enableColumnOrdering, muiColumnDragHandleProps },
     setColumnOrder,
     setDraggingColumn,
     setHoveredColumn,
@@ -25,14 +25,14 @@ export const MRT_TableHeadCellGrabHandle = <TData extends Record<string, any>>({
   const { hoveredColumn, draggingColumn, columnOrder } = getState();
 
   const mIconButtonProps =
-    muiTableHeadCellDragHandleProps instanceof Function
-      ? muiTableHeadCellDragHandleProps({ column, table })
-      : muiTableHeadCellDragHandleProps;
+    muiColumnDragHandleProps instanceof Function
+      ? muiColumnDragHandleProps({ column, table })
+      : muiColumnDragHandleProps;
 
   const mcIconButtonProps =
-    columnDef.muiTableHeadCellDragHandleProps instanceof Function
-      ? columnDef.muiTableHeadCellDragHandleProps({ column, table })
-      : columnDef.muiTableHeadCellDragHandleProps;
+    columnDef.muiColumnDragHandleProps instanceof Function
+      ? columnDef.muiColumnDragHandleProps({ column, table })
+      : columnDef.muiColumnDragHandleProps;
 
   const iconButtonProps = {
     ...mIconButtonProps,

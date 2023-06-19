@@ -27,7 +27,7 @@ export const MRT_TableDetailPanel = <TData extends Record<string, any>>({
     options: {
       layoutMode,
       muiTableBodyRowProps,
-      muiTableDetailPanelProps,
+      muiDetailPanelProps,
       renderDetailPanel,
     },
   } = table;
@@ -44,9 +44,9 @@ export const MRT_TableDetailPanel = <TData extends Record<string, any>>({
       : muiTableBodyRowProps;
 
   const tableCellProps =
-    muiTableDetailPanelProps instanceof Function
-      ? muiTableDetailPanelProps({ row, table })
-      : muiTableDetailPanelProps;
+    muiDetailPanelProps instanceof Function
+      ? muiDetailPanelProps({ row, table })
+      : muiDetailPanelProps;
 
   return (
     <TableRow

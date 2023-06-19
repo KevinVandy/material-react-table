@@ -10,7 +10,7 @@ const Example = () => {
   return (
     <MaterialReactTable
       columnVirtualizerInstanceRef={columnVirtualizerInstanceRef} //optional
-      columnVirtualizerProps={{ overscan: 4 }} //optionally customize the virtualizer
+      columnVirtualizerOptions={{ overscan: 4 }} //optionally customize the virtualizer
       columns={fakeColumns} //500 columns
       data={fakeData}
       enableColumnVirtualization

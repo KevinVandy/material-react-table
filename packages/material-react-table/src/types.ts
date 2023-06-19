@@ -404,7 +404,7 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
    * @default gets set to the same value as `accessorKey` by default
    */
   id?: LiteralUnion<string & keyof TData>;
-  muiTableBodyCellCopyButtonProps?:
+  muiCopyButtonProps?:
     | ButtonProps
     | ((props: {
         cell: MRT_Cell<TData>;
@@ -412,7 +412,7 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
         row: MRT_Row<TData>;
         table: MRT_TableInstance<TData>;
       }) => ButtonProps);
-  muiTableBodyCellEditTextFieldProps?:
+  muiEditTextFieldProps?:
     | TextFieldProps
     | ((props: {
         cell: MRT_Cell<TData>;
@@ -434,32 +434,32 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
       }) => TableCellProps);
-  muiTableHeadCellColumnActionsButtonProps?:
+  muiColumnActionsButtonProps?:
     | IconButtonProps
     | ((props: {
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
       }) => IconButtonProps);
-  muiTableHeadCellDragHandleProps?:
+  muiColumnDragHandleProps?:
     | IconButtonProps
     | ((props: {
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
       }) => IconButtonProps);
-  muiTableHeadCellFilterCheckboxProps?:
+  muiFilterCheckboxProps?:
     | CheckboxProps
     | ((props: {
         column: MRT_Column<TData>;
         table: MRT_TableInstance<TData>;
       }) => CheckboxProps);
-  muiTableHeadCellFilterTextFieldProps?:
+  muiFilterTextFieldProps?:
     | TextFieldProps
     | ((props: {
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
         rangeFilterIndex?: number;
       }) => TextFieldProps);
-  muiTableHeadCellFilterSliderProps?:
+  muiFilterSliderProps?:
     | SliderProps
     | ((props: {
         table: MRT_TableInstance<TData>;
@@ -614,7 +614,7 @@ export type MaterialReactTableOptions<TData extends Record<string, any>> = Omit<
     HTMLDivElement,
     HTMLTableCellElement
   > | null>;
-  columnVirtualizerProps?:
+  columnVirtualizerOptions?:
     | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableCellElement>>
     | ((props: {
         table: MRT_TableInstance<TData>;
@@ -725,7 +725,7 @@ export type MaterialReactTableOptions<TData extends Record<string, any>> = Omit<
         table: MRT_TableInstance<TData>;
         row: MRT_Row<TData>;
       }) => CheckboxProps | RadioProps);
-  muiTableBodyCellCopyButtonProps?:
+  muiCopyButtonProps?:
     | ButtonProps
     | ((props: {
         cell: MRT_Cell<TData>;
@@ -733,7 +733,7 @@ export type MaterialReactTableOptions<TData extends Record<string, any>> = Omit<
         row: MRT_Row<TData>;
         table: MRT_TableInstance<TData>;
       }) => ButtonProps);
-  muiTableBodyCellEditTextFieldProps?:
+  muiEditTextFieldProps?:
     | TextFieldProps
     | ((props: {
         cell: MRT_Cell<TData>;
@@ -749,7 +749,7 @@ export type MaterialReactTableOptions<TData extends Record<string, any>> = Omit<
         row: MRT_Row<TData>;
         table: MRT_TableInstance<TData>;
       }) => TableCellProps);
-  muiTableBodyCellSkeletonProps?:
+  muiSkeletonProps?:
     | SkeletonProps
     | ((props: {
         cell: MRT_Cell<TData>;
@@ -760,7 +760,7 @@ export type MaterialReactTableOptions<TData extends Record<string, any>> = Omit<
   muiTableBodyProps?:
     | TableBodyProps
     | ((props: { table: MRT_TableInstance<TData> }) => TableBodyProps);
-  muiTableBodyRowDragHandleProps?:
+  muiRowDragHandleProps?:
     | IconButtonProps
     | ((props: {
         table: MRT_TableInstance<TData>;
@@ -777,7 +777,7 @@ export type MaterialReactTableOptions<TData extends Record<string, any>> = Omit<
   muiTableContainerProps?:
     | TableContainerProps
     | ((props: { table: MRT_TableInstance<TData> }) => TableContainerProps);
-  muiTableDetailPanelProps?:
+  muiDetailPanelProps?:
     | TableCellProps
     | ((props: {
         table: MRT_TableInstance<TData>;
@@ -798,32 +798,32 @@ export type MaterialReactTableOptions<TData extends Record<string, any>> = Omit<
         table: MRT_TableInstance<TData>;
         footerGroup: MRT_HeaderGroup<TData>;
       }) => TableRowProps);
-  muiTableHeadCellColumnActionsButtonProps?:
+  muiColumnActionsButtonProps?:
     | IconButtonProps
     | ((props: {
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
       }) => IconButtonProps);
-  muiTableHeadCellDragHandleProps?:
+  muiColumnDragHandleProps?:
     | IconButtonProps
     | ((props: {
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
       }) => IconButtonProps);
-  muiTableHeadCellFilterCheckboxProps?:
+  muiFilterCheckboxProps?:
     | CheckboxProps
     | ((props: {
         column: MRT_Column<TData>;
         table: MRT_TableInstance<TData>;
       }) => CheckboxProps);
-  muiTableHeadCellFilterTextFieldProps?:
+  muiFilterTextFieldProps?:
     | TextFieldProps
     | ((props: {
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
         rangeFilterIndex?: number;
       }) => TextFieldProps);
-  muiTableHeadCellFilterSliderProps?:
+  muiFilterSliderProps?:
     | SliderProps
     | ((props: {
         table: MRT_TableInstance<TData>;
@@ -949,7 +949,7 @@ export type MaterialReactTableOptions<TData extends Record<string, any>> = Omit<
     HTMLDivElement,
     HTMLTableRowElement
   > | null>;
-  rowVirtualizerProps?:
+  rowVirtualizerOptions?:
     | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>
     | ((props: {
         table: MRT_TableInstance<TData>;

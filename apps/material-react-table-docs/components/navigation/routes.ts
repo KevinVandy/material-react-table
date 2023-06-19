@@ -20,6 +20,10 @@ export const routes: Array<RouteItem> = [
     label: 'Changelog & Roadmap',
   },
   {
+    href: '/migrating-to-v2',
+    label: 'Migrating to v2',
+  },
+  {
     label: 'Getting Started',
     href: '/docs/getting-started',
     items: [

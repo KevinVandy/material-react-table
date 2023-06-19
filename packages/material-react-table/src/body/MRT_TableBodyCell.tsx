@@ -53,7 +53,7 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
       enableRowNumbers,
       layoutMode,
       muiTableBodyCellProps,
-      muiTableBodyCellSkeletonProps,
+      muiSkeletonProps,
       rowNumberMode,
     },
     refs: { editInputRefs },
@@ -91,9 +91,9 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
   };
 
   const skeletonProps =
-    muiTableBodyCellSkeletonProps instanceof Function
-      ? muiTableBodyCellSkeletonProps({ cell, column, row, table })
-      : muiTableBodyCellSkeletonProps;
+    muiSkeletonProps instanceof Function
+      ? muiSkeletonProps({ cell, column, row, table })
+      : muiSkeletonProps;
 
   const [skeletonWidth, setSkeletonWidth] = useState(0);
   useEffect(

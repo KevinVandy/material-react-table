@@ -32,7 +32,7 @@ const Example = () => {
       data={data}
       enableRowOrdering
       enableSorting={false}
-      muiTableBodyRowDragHandleProps={({ table }) => ({
+      muiRowDragHandleProps={({ table }) => ({
         onDragEnd: () => {
           const { draggingRow, hoveredRow } = table.getState();
           if (hoveredRow && draggingRow) {

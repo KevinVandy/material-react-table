@@ -88,7 +88,7 @@ export const rootProps: PropRow[] = [
     type: 'Array<MRT_ColumnDef<TData>>',
   },
   {
-    propName: 'columnVirtualizerProps',
+    propName: 'columnVirtualizerOptions',
     defaultValue: '',
     description: '',
     link: '',
@@ -1070,7 +1070,7 @@ export const rootProps: PropRow[] = [
     type: 'CheckboxProps | ({ row, table }) => CheckboxProps',
   },
   {
-    propName: 'muiTableBodyCellCopyButtonProps',
+    propName: 'muiCopyButtonProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/button/#props',
@@ -1080,7 +1080,7 @@ export const rootProps: PropRow[] = [
     type: 'ButtonProps | ({ cell, column, row, table }) => ButtonProps',
   },
   {
-    propName: 'muiTableBodyCellEditTextFieldProps',
+    propName: 'muiEditTextFieldProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/text-field/#props',
@@ -1100,7 +1100,7 @@ export const rootProps: PropRow[] = [
     type: 'TableCellProps | ({ cell, column, row, table }) => TableCellProps',
   },
   {
-    propName: 'muiTableBodyCellSkeletonProps',
+    propName: 'muiSkeletonProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/skeleton/#props',
@@ -1120,7 +1120,7 @@ export const rootProps: PropRow[] = [
     type: 'TableBodyProps | ({ table }) => TableBodyProps',
   },
   {
-    propName: 'muiTableBodyRowDragHandleProps',
+    propName: 'muiRowDragHandleProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/icon-button/#props',
@@ -1150,7 +1150,7 @@ export const rootProps: PropRow[] = [
     type: 'TableContainerProps | ({ table }) => TableContainerProps',
   },
   {
-    propName: 'muiTableDetailPanelProps',
+    propName: 'muiDetailPanelProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/table-cell/#props',
@@ -1190,7 +1190,7 @@ export const rootProps: PropRow[] = [
     type: 'TableRowProps | ({table, footerGroup}) => TableRowProps',
   },
   {
-    propName: 'muiTableHeadCellColumnActionsButtonProps',
+    propName: 'muiColumnActionsButtonProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/icon-button/#props',
@@ -1200,7 +1200,7 @@ export const rootProps: PropRow[] = [
     type: 'IconButtonProps | (({table, column}) => IconButtonProps);',
   },
   {
-    propName: 'muiTableHeadCellDragHandleProps',
+    propName: 'muiColumnDragHandleProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/icon-button/#props',
@@ -1210,7 +1210,7 @@ export const rootProps: PropRow[] = [
     type: 'IconButtonProps | ({table, column}) => IconButtonProps',
   },
   {
-    propName: 'muiTableHeadCellFilterCheckboxProps',
+    propName: 'muiFilterCheckboxProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/checkbox/#props',
@@ -1220,7 +1220,7 @@ export const rootProps: PropRow[] = [
     type: 'CheckboxProps | ({ column, table}) => CheckboxProps',
   },
   {
-    propName: 'muiTableHeadCellFilterSliderProps',
+    propName: 'muiFilterSliderProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/slider/#props',
@@ -1230,7 +1230,7 @@ export const rootProps: PropRow[] = [
     type: 'SliderProps | ({ column, table}) => SliderProps',
   },
   {
-    propName: 'muiTableHeadCellFilterTextFieldProps',
+    propName: 'muiFilterTextFieldProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/text-field/#props',
@@ -1907,7 +1907,7 @@ export const rootProps: PropRow[] = [
     type: 'MutableRefObject<MRT_TableInstance<TData> | null>',
   },
   {
-    propName: 'rowVirtualizerProps',
+    propName: 'rowVirtualizerOptions',
     defaultValue: '',
     description: '',
     link: '',

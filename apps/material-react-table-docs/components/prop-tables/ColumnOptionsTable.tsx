@@ -24,7 +24,7 @@ const ColumnOptionsTable = ({ onlyProps }: Props) => {
         accessorKey: 'columnOption',
         enableClickToCopy: true,
         header: 'Column Option',
-        muiTableBodyCellCopyButtonProps: ({ cell }) => ({
+        muiCopyButtonProps: ({ cell }) => ({
           className: 'column-option',
           id: `${cell.getValue<string>()}-column-option`,
         }),

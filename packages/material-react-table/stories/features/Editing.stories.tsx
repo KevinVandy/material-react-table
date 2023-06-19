@@ -209,7 +209,7 @@ export const EditingEnabledEditModeCell = () => {
       data={tableData}
       editingMode="cell"
       enableEditing
-      muiTableBodyCellEditTextFieldProps={({ cell }) => ({
+      muiEditTextFieldProps={({ cell }) => ({
         onBlur: (event) => {
           handleSaveCell(cell, event.target.value);
         },
@@ -255,7 +255,7 @@ export const EditingEnabledEditModeTable = () => {
       data={tableData}
       editingMode="table"
       enableEditing
-      muiTableBodyCellEditTextFieldProps={({ cell }) => ({
+      muiEditTextFieldProps={({ cell }) => ({
         onBlur: (event) => {
           handleSaveCell(cell, event.target.value);
         },
@@ -302,7 +302,7 @@ export const EditSelectVariant = () => {
       data={tableData}
       enableRowActions
       enableEditing
-      muiTableBodyCellEditTextFieldProps={{ variant: 'outlined' }}
+      muiEditTextFieldProps={{ variant: 'outlined' }}
       onEditingRowSave={handleSaveRow}
     />
   );
@@ -392,7 +392,7 @@ export const EditSelectVariantAlternate = () => {
       enableRowActions
       enableEditing
       editingMode="row"
-      muiTableBodyCellEditTextFieldProps={{ variant: 'outlined' }}
+      muiEditTextFieldProps={{ variant: 'outlined' }}
       onEditingRowSave={handleSaveRow}
     />
   );
@@ -482,7 +482,7 @@ export const EditingCustomizeInput = () => {
         {
           header: 'State',
           accessorKey: 'state',
-          muiTableBodyCellEditTextFieldProps: () => ({
+          muiEditTextFieldProps: () => ({
             children: usStates.map((state) => (
               <MenuItem key={state} value={state}>
                 {state}
@@ -499,7 +499,7 @@ export const EditingCustomizeInput = () => {
       data={tableData}
       enableRowActions
       enableEditing
-      muiTableBodyCellEditTextFieldProps={{ variant: 'outlined' }}
+      muiEditTextFieldProps={{ variant: 'outlined' }}
       onEditingRowSave={handleSaveRow}
     />
   );
@@ -541,7 +541,7 @@ export const EditingCustomizeInput = () => {
 //         {
 //           header: 'First Name',
 //           accessorKey: 'firstName',
-//           muiTableBodyCellEditTextFieldProps: {
+//           muiEditTextFieldProps: {
 //             error: !!firstNameError,
 //             helperText: firstNameError,
 //           },
@@ -552,7 +552,7 @@ export const EditingCustomizeInput = () => {
 //         {
 //           header: 'Last Name',
 //           accessorKey: 'lastName',
-//           muiTableBodyCellEditTextFieldProps: {
+//           muiEditTextFieldProps: {
 //             error: !!lastNameError,
 //             helperText: lastNameError,
 //           },
@@ -563,7 +563,7 @@ export const EditingCustomizeInput = () => {
 //         {
 //           header: 'Phone Number',
 //           accessorKey: 'phoneNumber',
-//           muiTableBodyCellEditTextFieldProps: {
+//           muiEditTextFieldProps: {
 //             error: !!phoneNumberError,
 //             helperText: phoneNumberError,
 //           },

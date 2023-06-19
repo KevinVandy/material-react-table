@@ -38,7 +38,7 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
       icons: { FilterListIcon, CloseIcon },
       localization,
       manualFiltering,
-      muiTableHeadCellFilterTextFieldProps,
+      muiFilterTextFieldProps,
     },
     refs: { filterInputRefs },
     setColumnFilterFns,
@@ -47,22 +47,22 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
   const { columnDef } = column;
 
   const mTableHeadCellFilterTextFieldProps =
-    muiTableHeadCellFilterTextFieldProps instanceof Function
-      ? muiTableHeadCellFilterTextFieldProps({
+    muiFilterTextFieldProps instanceof Function
+      ? muiFilterTextFieldProps({
           column,
           table,
           rangeFilterIndex,
         })
-      : muiTableHeadCellFilterTextFieldProps;
+      : muiFilterTextFieldProps;
 
   const mcTableHeadCellFilterTextFieldProps =
-    columnDef.muiTableHeadCellFilterTextFieldProps instanceof Function
-      ? columnDef.muiTableHeadCellFilterTextFieldProps({
+    columnDef.muiFilterTextFieldProps instanceof Function
+      ? columnDef.muiFilterTextFieldProps({
           column,
           table,
           rangeFilterIndex,
         })
-      : columnDef.muiTableHeadCellFilterTextFieldProps;
+      : columnDef.muiFilterTextFieldProps;
 
   const textFieldProps = {
     ...mTableHeadCellFilterTextFieldProps,

@@ -74,7 +74,7 @@ const Example = () => {
   const getCommonEditTextFieldProps = useCallback(
     (
       cell: MRT_Cell<Person>,
-    ): MRT_ColumnDef<Person>['muiTableBodyCellEditTextFieldProps'] => {
+    ): MRT_ColumnDef<Person>['muiEditTextFieldProps'] => {
       return {
         error: !!validationErrors[cell.id],
         helperText: validationErrors[cell.id],
@@ -118,7 +118,7 @@ const Example = () => {
         accessorKey: 'firstName',
         header: 'First Name',
         size: 140,
-        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+        muiEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
         }),
       },
@@ -126,14 +126,14 @@ const Example = () => {
         accessorKey: 'lastName',
         header: 'Last Name',
         size: 140,
-        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+        muiEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
         }),
       },
       {
         accessorKey: 'email',
         header: 'Email',
-        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+        muiEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
           type: 'email',
         }),
@@ -142,7 +142,7 @@ const Example = () => {
         accessorKey: 'age',
         header: 'Age',
         size: 80,
-        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+        muiEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
           type: 'number',
         }),
@@ -150,7 +150,7 @@ const Example = () => {
       {
         accessorKey: 'state',
         header: 'State',
-        muiTableBodyCellEditTextFieldProps: {
+        muiEditTextFieldProps: {
           select: true, //change to select for a dropdown
           children: states.map((state) => (
             <MenuItem key={state} value={state}>
