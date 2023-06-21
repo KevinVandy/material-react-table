@@ -46,7 +46,7 @@ export interface Props {
   Component?: any;
   apiCode?: string;
   javaScriptCode?: string;
-  propsCode?: string;
+  legacyCode?: string;
   tableId: string;
   typeScriptCode: string;
 }
@@ -55,7 +55,7 @@ export const SourceCodeSnippet = ({
   Component,
   apiCode,
   javaScriptCode,
-  propsCode,
+  legacyCode,
   tableId,
   typeScriptCode,
 }: Props) => {
@@ -70,7 +70,7 @@ export const SourceCodeSnippet = ({
     setPrimaryColor,
   } = useThemeContext();
   const isMobile = useMediaQuery('(max-width: 720px)');
-  const [codeTab, setCodeTab] = useState<'ts' | 'js' | 'props' | 'api'>('ts');
+  const [codeTab, setCodeTab] = useState<'ts' | 'js' | 'legacy' | 'api'>('ts');
   const [isCopied, setIsCopied] = useState(false);
   const [isFullCode, setIsFullCode] = useState(false);
 
@@ -80,8 +80,8 @@ export const SourceCodeSnippet = ({
         ? typeScriptCode
         : codeTab === 'js'
         ? javaScriptCode
-        : codeTab === 'props'
-        ? propsCode
+        : codeTab === 'legacy'
+        ? legacyCode
         : apiCode) ?? '',
     );
     setIsCopied(true);
@@ -169,7 +169,7 @@ export const SourceCodeSnippet = ({
                       ? 'TS.tsx'
                       : codeTab === 'js'
                       ? 'JS.js'
-                      : codeTab === 'props'
+                      : codeTab === 'legacy'
                       ? 'Props.tsx'
                       : 'API.ts'
                   }`}
@@ -280,16 +280,16 @@ export const SourceCodeSnippet = ({
                     {isMobile ? 'JS' : 'JavaScript'}
                   </ToggleButton>
                 )}
-                {propsCode && (
+                {legacyCode && (
                   <ToggleButton
                     value="js"
                     onClick={() => {
-                      setCodeTab('props');
+                      setCodeTab('legacy');
                     }}
-                    selected={codeTab === 'props'}
+                    selected={codeTab === 'legacy'}
                     sx={{ textTransform: 'none' }}
                   >
-                    {isMobile ? 'Props' : 'Legacy Props API'}
+                    {isMobile ? 'Legacy' : 'Legacy Props API'}
                   </ToggleButton>
                 )}
                 {apiCode && (
@@ -315,8 +315,8 @@ export const SourceCodeSnippet = ({
                 ? typeScriptCode
                 : codeTab === 'js'
                 ? javaScriptCode
-                : codeTab === 'props'
-                ? propsCode
+                : codeTab === 'legacy'
+                ? legacyCode
                 : apiCode) ?? ''
             }
             language={codeTab !== 'js' ? 'tsx' : 'jsx'}
