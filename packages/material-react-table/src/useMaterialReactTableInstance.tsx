@@ -28,7 +28,7 @@ import {
   type MRT_Row,
   type MRT_TableInstance,
   type MRT_TableState,
-  type MaterialReactTableOptions,
+  type MRT_TableOptions,
   type MRT_DensityState,
   type MRT_ColumnOrderState,
   type MRT_GroupingState,
@@ -40,11 +40,11 @@ import { MRT_ToggleRowActionMenuButton } from './buttons/MRT_ToggleRowActionMenu
 import { MRT_SelectCheckbox } from './inputs/MRT_SelectCheckbox';
 
 export const useMaterialReactTableInstance: <TData extends Record<string, any>>(
-  tableOptions: MaterialReactTableOptions<TData> & {
+  tableOptions: MRT_TableOptions<TData> & {
     localization: MRT_Localization;
   },
 ) => MRT_TableInstance<TData> = <TData extends Record<string, any>>(
-  tableOptions: MaterialReactTableOptions<TData> & {
+  tableOptions: MRT_TableOptions<TData> & {
     localization: MRT_Localization;
   },
 ) => {
@@ -371,24 +371,6 @@ export const useMaterialReactTableInstance: <TData extends Record<string, any>>(
     setShowToolbarDropZone:
       tableOptions.onShowToolbarDropZoneChange ?? setShowToolbarDropZone,
   } as MRT_TableInstance<TData>;
-
-  const initialBodyHeight = useRef<string>();
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      initialBodyHeight.current = document.body.style.height;
-    }
-  }, []);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if (table.getState().isFullScreen) {
-        document.body.style.height = '100vh';
-      } else {
-        document.body.style.height = initialBodyHeight.current as string;
-      }
-    }
-  }, [table.getState().isFullScreen]);
 
   //if page index is out of bounds, set it to the last page
   useEffect(() => {

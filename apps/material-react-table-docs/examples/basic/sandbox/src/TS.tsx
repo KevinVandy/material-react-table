@@ -1,5 +1,9 @@
 import React, { useMemo } from 'react';
-import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+  type MRT_ColumnDef,
+} from 'material-react-table';
 
 //example data type
 type Person = {
@@ -94,7 +98,12 @@ const Example = () => {
     [],
   );
 
-  return <MaterialReactTable columns={columns} data={data} />;
+  const table = useMaterialReactTable({
+    columns,
+    data,
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

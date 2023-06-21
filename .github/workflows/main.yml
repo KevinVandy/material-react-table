@@ -1,0 +1,27 @@
+name: Upgrade Example Versions
+
+on:
+  push:
+    branches:
+      - 'v2'
+    paths:
+      - 'packages/material-react-table/package.json'
+
+jobs:
+  run-example-upgrades:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: run-sh-script
+        run: sh upgrade-examples.sh
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'KevinVandy'
+          git config --global user.email 'kevinvandy@users.noreply.github.com'
+          git add -A
+          git commit -m "Upgrade Examples" || exit 0  # in case no changes present
+          git push origin ${{ github.head_ref }}

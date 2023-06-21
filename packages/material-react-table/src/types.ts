@@ -220,7 +220,7 @@ export type MRT_TableInstance<TData extends Record<string, any>> = Omit<
   getRowModel: () => MRT_RowModel<TData>;
   getSelectedRowModel: () => MRT_RowModel<TData>;
   getState: () => MRT_TableState<TData>;
-  options: MaterialReactTableOptions<TData> & {
+  options: MRT_TableOptions<TData> & {
     icons: MRT_Icons;
     localization: MRT_Localization;
   };
@@ -583,7 +583,7 @@ export type MRT_DisplayColumnIds =
  * See the full props list on the official docs site:
  * @link https://www.material-react-table.com/docs/api/props
  */
-export type MaterialReactTableOptions<TData extends Record<string, any>> = Omit<
+export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
   Partial<TableOptions<TData>>,
   | 'columns'
   | 'data'

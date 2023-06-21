@@ -5,11 +5,11 @@ import { MRT_SortingFns } from './sortingFns';
 import { MRT_DefaultColumn, MRT_DefaultDisplayColumn } from './column.utils';
 import { MRT_Default_Icons } from './icons';
 import { MRT_Localization_EN } from './_locales/en';
-import { type MRT_Localization, type MaterialReactTableOptions } from './types';
+import { type MRT_Localization, type MRT_TableOptions } from './types';
 
 export const useTableOptions: <TData extends Record<string, any>>(
-  tableOptions: MaterialReactTableOptions<TData>,
-) => MaterialReactTableOptions<TData> & {
+  tableOptions: MRT_TableOptions<TData>,
+) => MRT_TableOptions<TData> & {
   localization: MRT_Localization;
 } = <TData extends Record<string, any>>({
   aggregationFns,
@@ -63,7 +63,7 @@ export const useTableOptions: <TData extends Record<string, any>>(
   selectAllMode = 'page',
   sortingFns,
   ...rest
-}: MaterialReactTableOptions<TData>) => {
+}: MRT_TableOptions<TData>) => {
   const _icons = useMemo(() => ({ ...MRT_Default_Icons, ...icons }), [icons]);
   const _localization = useMemo(
     () => ({

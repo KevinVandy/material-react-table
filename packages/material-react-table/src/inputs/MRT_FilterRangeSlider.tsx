@@ -14,11 +14,7 @@ export const MRT_FilterRangeSlider = <TData extends Record<string, any>>({
   table,
 }: Props<TData>) => {
   const {
-    options: {
-      localization,
-      muiFilterSliderProps,
-      enableColumnFilterModes,
-    },
+    options: { localization, muiFilterSliderProps, enableColumnFilterModes },
     refs: { filterInputRefs },
   } = table;
   const { column } = header;
