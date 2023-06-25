@@ -141,12 +141,12 @@ export const MRT_FilterOptionMenu = <TData extends Record<string, any>>({
   let allowedColumnFilterOptions =
     columnDef?.columnFilterModeOptions ?? columnFilterModeOptions;
 
-    if (rangeVariants.includes(columnDef?.filterVariant as string)) {
-      allowedColumnFilterOptions = [
-        ...rangeModes,
-        ...(allowedColumnFilterOptions ?? []),
-      ].filter((option) => rangeModes.includes(option));
-    }
+  if (rangeVariants.includes(columnDef?.filterVariant as string)) {
+    allowedColumnFilterOptions = [
+      ...rangeModes,
+      ...(allowedColumnFilterOptions ?? []),
+    ].filter((option) => rangeModes.includes(option));
+  }
 
   const internalFilterOptions = useMemo(
     () =>

@@ -2,7 +2,10 @@ import React, { useMemo } from 'react';
 
 //MRT Imports
 //import MaterialReactTable from 'material-react-table'; //default import deprecated
-import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 
 //Material UI Imports
 import { Box, Button, ListItemIcon, MenuItem, Typography } from '@mui/material';
