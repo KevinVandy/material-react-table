@@ -25,7 +25,7 @@ export const MRT_FilterRangeSlider = <TData extends Record<string, any>>({
   const showChangeModeButton =
     enableColumnFilterModes && columnDef.enableColumnFilterModes !== false;
 
-  const mTableHeadCellFilterTextFieldProps =
+  const mFilterSliderProps =
     muiFilterSliderProps instanceof Function
       ? muiFilterSliderProps({
           column,
@@ -33,7 +33,7 @@ export const MRT_FilterRangeSlider = <TData extends Record<string, any>>({
         })
       : muiFilterSliderProps;
 
-  const mcTableHeadCellFilterTextFieldProps =
+  const mcFilterSliderProps =
     columnDef.muiFilterSliderProps instanceof Function
       ? columnDef.muiFilterSliderProps({
           column,
@@ -42,8 +42,8 @@ export const MRT_FilterRangeSlider = <TData extends Record<string, any>>({
       : columnDef.muiFilterSliderProps;
 
   const sliderProps = {
-    ...mTableHeadCellFilterTextFieldProps,
-    ...mcTableHeadCellFilterTextFieldProps,
+    ...mFilterSliderProps,
+    ...mcFilterSliderProps,
   } as SliderProps;
 
   let [min, max] =

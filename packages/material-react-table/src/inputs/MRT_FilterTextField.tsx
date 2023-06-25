@@ -109,9 +109,9 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
     () =>
       columnDef.filterSelectOptions ??
       ((isSelectFilter || isMultiSelectFilter) && facetedUniqueValues
-        ? Array.from(facetedUniqueValues.keys()).sort((a, b) =>
-            a.localeCompare(b),
-          )
+        ? Array.from(facetedUniqueValues.keys())
+            .filter((value) => value !== null && value !== undefined)
+            .sort((a, b) => a.localeCompare(b))
         : undefined),
     [
       columnDef.filterSelectOptions,

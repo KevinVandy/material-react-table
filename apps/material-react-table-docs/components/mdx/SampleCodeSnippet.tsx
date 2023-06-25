@@ -22,6 +22,7 @@ interface Props {
   className?: string;
   enableCopyButton?: boolean;
   style?: CSSProperties;
+  margin?: string;
 }
 
 export const SampleCodeSnippet = (props: Props) => {
@@ -65,8 +66,11 @@ export const SampleCodeSnippet = (props: Props) => {
           <div
             style={{
               position: 'relative',
-              margin: props.enableCopyButton !== false ? '2rem auto' : 0,
-              fontSize: '1.2em',
+              margin:
+                props.margin ?? props.enableCopyButton !== false
+                  ? '2rem auto'
+                  : 0,
+              fontSize: '1.1em',
             }}
           >
             {props.enableCopyButton !== false && (

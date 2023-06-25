@@ -3,7 +3,7 @@ name: Upgrade Example Versions
 on:
   push:
     branches:
-      - 'v2'
+      - 'main'
     paths:
       - 'packages/material-react-table/package.json'
 

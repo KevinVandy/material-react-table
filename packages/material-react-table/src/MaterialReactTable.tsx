@@ -22,6 +22,7 @@ const isTableInstanceProp = <TData extends Record<string, any>>(
 export const MaterialReactTable = <TData extends Record<string, any>>(
   props: Props<TData>,
 ) => {
+  'use client';
   let table: MRT_TableInstance<TData>;
 
   if (isTableInstanceProp(props)) {

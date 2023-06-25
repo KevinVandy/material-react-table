@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { InstallCommand } from '../components/mdx/InstallCommand';
 
 <Head>
   <title>
@@ -14,6 +15,10 @@ import Head from 'next/head';
 
 ### Breaking Changes
 
+- `@mui/x-date-pickers` is now a required peer dependency. Install it with
+
+<InstallCommand packagesString="@mui/x-date-pickers" />
+
 - `MaterialReactTable` is now a named export instead of a default export. Use curly braces to import it.
 
 ```diff
@@ -22,6 +27,23 @@ import Head from 'next/head';
 ```
 
 - There is no longer a `tableInstanceRef` prop. It has been replaced by the `useMaterialReactTable` hook, which is way easier to use. See below for more details.
+
+#### Renamed Props/Options
+
+- `virtualizerInstanceRef` split into `columnVirtualizerRef` and `rowVirtualizerRef`
+- `virtualizerProps` split into `columnVirtualizerOptions` and `rowVirtualizerOptions`
+- `columnVirtualizerProps` -> `columnVirtualizerOptions`
+- `rowVirtualizerProps` -> `rowVirtualizerOptions`
+- `muiTableBodyCellCopyButtonProps` -> `muiCopyButtonProps`
+- `muiTableBodyCellEditTextFieldProps` -> `muiEditTextFieldProps`
+- `muiTableBodyCellSkeletonProps` -> `muiSkeletonProps`
+- `muiTableBodyRowDragHandleProps` -> `muiRowDragHandleProps`
+- `muiTableDetailPanelProps` -> `muiDetailPanelProps`
+- `muiTableHeadCellColumnActionsButtonProps` -> `muiColumnActionsButtonProps`
+- `muiTableHeadCellDragHandleProps` -> `muiColumnDragHandleProps`
+- `muiTableHeadCellFilterCheckboxProps` -> `muiFilterCheckboxProps`
+- `muiTableHeadCellFilterTextFieldProps` -> `muiFilterTextFieldProps`
+- `muiTableHeadCellFilterSliderProps` -> `muiFilterSliderProps`
 
 ### useMaterialReactTable
 
@@ -33,12 +55,15 @@ For example, here is a classic example for how to use Material React Table in V1
 import { MaterialReactTable } from 'material-react-table';
 
 export const MyTableComponent = () => {
+  const tableInstanceRef = useRef();
+
   return (
     //Defining table options as props to <MaterialReactTable /> still works (as long as you don't also pass in a table prop)
     <MaterialReactTable
       columns={columns}
       data={data}
       enableRowSelection //table options as props
+      tableInstanceRef={tableInstanceRef}
     />
   );
 };
@@ -94,20 +119,3 @@ export const MyTableComponent = () => {
   );
 };
 ```
-
-### Renamed Props/Options
-
-- `virtualizerInstanceRef` split into `columnVirtualizerRef` and `rowVirtualizerRef`
-- `virtualizerProps` split into `columnVirtualizerOptions` and `rowVirtualizerOptions`
-- `columnVirtualizerProps` -> `columnVirtualizerOptions`
-- `rowVirtualizerProps` -> `rowVirtualizerOptions`
-- `muiTableBodyCellCopyButtonProps` -> `muiCopyButtonProps`
-- `muiTableBodyCellEditTextFieldProps` -> `muiEditTextFieldProps`
-- `muiTableBodyCellSkeletonProps` -> `muiSkeletonProps`
-- `muiTableBodyRowDragHandleProps` -> `muiRowDragHandleProps`
-- `muiTableDetailPanelProps` -> `muiDetailPanelProps`
-- `muiTableHeadCellColumnActionsButtonProps` -> `muiColumnActionsButtonProps`
-- `muiTableHeadCellDragHandleProps` -> `muiColumnDragHandleProps`
-- `muiTableHeadCellFilterCheckboxProps` -> `muiFilterCheckboxProps`
-- `muiTableHeadCellFilterTextFieldProps` -> `muiFilterTextFieldProps`
-- `muiTableHeadCellFilterSliderProps` -> `muiFilterSliderProps`

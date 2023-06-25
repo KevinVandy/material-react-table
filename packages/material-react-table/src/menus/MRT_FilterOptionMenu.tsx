@@ -102,6 +102,7 @@ export const mrtFilterOptions = (
 const rangeModes = ['between', 'betweenInclusive', 'inNumberRange'];
 const emptyModes = ['empty', 'notEmpty'];
 const arrModes = ['arrIncludesSome', 'arrIncludesAll', 'arrIncludes'];
+const rangeVariants = ['range-slider', 'date-range', 'range'];
 
 interface Props<TData extends Record<string, any>> {
   anchorEl: HTMLElement | null;
@@ -140,12 +141,12 @@ export const MRT_FilterOptionMenu = <TData extends Record<string, any>>({
   let allowedColumnFilterOptions =
     columnDef?.columnFilterModeOptions ?? columnFilterModeOptions;
 
-  if (columnDef?.filterVariant === 'range-slider') {
-    allowedColumnFilterOptions = [
-      ...rangeModes,
-      ...(allowedColumnFilterOptions ?? []),
-    ].filter((option) => rangeModes.includes(option));
-  }
+    if (rangeVariants.includes(columnDef?.filterVariant as string)) {
+      allowedColumnFilterOptions = [
+        ...rangeModes,
+        ...(allowedColumnFilterOptions ?? []),
+      ].filter((option) => rangeModes.includes(option));
+    }
 
   const internalFilterOptions = useMemo(
     () =>
