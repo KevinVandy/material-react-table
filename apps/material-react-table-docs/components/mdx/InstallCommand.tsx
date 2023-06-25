@@ -1,5 +1,5 @@
-import { Tab, Tabs } from '@mui/material';
 import React, { useState } from 'react';
+import { Tab, Tabs } from '@mui/material';
 import { SampleCodeSnippet } from './SampleCodeSnippet';
 
 type Tab = 'npm' | 'pnpm' | 'yarn';
@@ -7,15 +7,20 @@ type Tab = 'npm' | 'pnpm' | 'yarn';
 const defaultPackagesString =
   'material-react-table @mui/material @mui/x-date-pickers @mui/icons-material @emotion/react @emotion/styled';
 
-export const InstallCommand = ({ packagesString = defaultPackagesString }) => {
+export const InstallCommand = ({
+  packagesString = defaultPackagesString,
+  ...rest
+}) => {
   const [tab, setTab] = useState<Tab>('npm');
 
   return (
     <>
       <Tabs
-        sx={{ m: 0 }}
+        textColor="secondary"
+        indicatorColor="secondary"
         value={tab}
         onChange={(_e, newValue) => setTab(newValue)}
+        {...rest}
       >
         <Tab label="NPM" value="npm" />
         <Tab label="PNPM" value="pnpm" />

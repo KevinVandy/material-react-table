@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import EnableRowExample from '../../../examples/enable-row-virtualization';
 import EnableColumnExample from '../../../examples/enable-column-virtualization';
 
@@ -21,8 +21,8 @@ Virtualization is useful when you have a lot of data you want to display client-
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'columnVirtualizerInstanceRef',
       'columnVirtualizerOptions',

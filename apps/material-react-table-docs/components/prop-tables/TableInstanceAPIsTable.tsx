@@ -10,10 +10,10 @@ import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
 import { type TableInstanceAPI, tableInstanceAPIs } from './tableInstanceAPIs';
 
 interface Props {
-  onlyProps?: Set<keyof MRT_TableInstance>;
+  onlyOptions?: Set<keyof MRT_TableInstance<TableInstanceAPI>>;
 }
 
-const TableInstanceAPIsTable = ({ onlyProps }: Props) => {
+const TableInstanceAPIsTable = ({ onlyOptions }: Props) => {
   const isDesktop = useMediaQuery('(min-width: 1200px)');
 
   const columns = useMemo<MRT_ColumnDef<TableInstanceAPI>[]>(
@@ -87,13 +87,13 @@ const TableInstanceAPIsTable = ({ onlyProps }: Props) => {
   }, [isDesktop]);
 
   const data = useMemo(() => {
-    if (onlyProps) {
+    if (onlyOptions) {
       return tableInstanceAPIs.filter(({ tableInstanceAPI }) =>
-        onlyProps.has(tableInstanceAPI),
+        onlyOptions.has(tableInstanceAPI),
       );
     }
     return tableInstanceAPIs;
-  }, [onlyProps]);
+  }, [onlyOptions]);
 
   return (
     <MaterialReactTable
@@ -107,13 +107,13 @@ const TableInstanceAPIsTable = ({ onlyProps }: Props) => {
           size: 10,
         },
       }}
-      enableColumnActions={!onlyProps}
+      enableColumnActions={!onlyOptions}
       enableColumnFilterModes
       enablePagination={false}
       enablePinning
       enableRowNumbers
       enableBottomToolbar={false}
-      enableTopToolbar={!onlyProps}
+      enableTopToolbar={!onlyOptions}
       initialState={{
         columnVisibility: { description: false },
         density: 'compact',
@@ -127,7 +127,7 @@ const TableInstanceAPIsTable = ({ onlyProps }: Props) => {
       }}
       muiTablePaperProps={{
         sx: { mb: '1.5rem' },
-        id: onlyProps
+        id: onlyOptions
           ? 'relevant-table-instance-apis-table'
           : 'table-instance-apis-table',
       }}

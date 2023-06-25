@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import DNDExample from '../../../examples/enable-column-ordering';
@@ -18,8 +18,8 @@ Whether you just want to change the default column order in your table or let co
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'enableColumnDragging',
       'enableColumnOrdering',
@@ -33,13 +33,13 @@ Whether you just want to change the default column order in your table or let co
 ### Relevant Column Options
 
 <ColumnOptionsTable
-  onlyProps={new Set(['enableColumnDragging', 'enableColumnOrdering'])}
+  onlyOptions={new Set(['enableColumnDragging', 'enableColumnOrdering'])}
 />
 
 ### Relevant State
 
 <StateOptionsTable
-  onlyProps={new Set(['columnOrder', 'draggingColumn', 'hoveredColumn'])}
+  onlyOptions={new Set(['columnOrder', 'draggingColumn', 'hoveredColumn'])}
 />
 
 ### Change the Default Column Order

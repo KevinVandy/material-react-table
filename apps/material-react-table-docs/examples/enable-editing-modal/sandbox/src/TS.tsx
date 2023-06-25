@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import {
   MaterialReactTable,
-  type MaterialReactTableProps,
+  type MRT_TableOptions,
   type MRT_ColumnDef,
 } from 'material-react-table';
 import { data, type Person } from './makeData';
@@ -38,7 +38,7 @@ const Example = () => {
 
   const [tableData, setTableData] = useState<Person[]>(() => data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] =
+  const handleSaveRow: MRT_TableOptions<Person>['onEditingRowSave'] =
     async ({ exitEditingMode, row, values }) => {
       //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
       tableData[row.index] = values;

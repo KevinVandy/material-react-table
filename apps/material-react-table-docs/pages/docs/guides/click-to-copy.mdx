@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import Example from '../../../examples/enable-click-to-copy';
 
@@ -17,14 +17,14 @@ Material React Table has an easy-to-implement feature that allows a user to copy
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={new Set(['enableClickToCopy', 'muiCopyButtonProps'])}
+<TableOptionsTable
+  onlyOptions={new Set(['enableClickToCopy', 'muiCopyButtonProps'])}
 />
 
 ### Relevant Column Options
 
 <ColumnOptionsTable
-  onlyProps={new Set(['enableClickToCopy', 'muiCopyButtonProps'])}
+  onlyOptions={new Set(['enableClickToCopy', 'muiCopyButtonProps'])}
 />
 
 ### Enable Click to Copy Per Column

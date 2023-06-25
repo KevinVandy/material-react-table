@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Box from '@mui/material/Box';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import CustomizeComponentExample from '../../../examples/customize-global-filter-component';
@@ -22,8 +22,8 @@ Material React Table has a powerful built-in global filtering (search) feature t
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'enableGlobalFilter',
       'enableGlobalFilterModes',
@@ -46,13 +46,13 @@ Material React Table has a powerful built-in global filtering (search) feature t
 ### Relevant Column Options
 
 <ColumnOptionsTable
-  onlyProps={new Set(['enableGlobalFilter', 'enableFilterMatchHighlighting'])}
+  onlyOptions={new Set(['enableGlobalFilter', 'enableFilterMatchHighlighting'])}
 />
 
 ### Relevant State Options
 
 <StateOptionsTable
-  onlyProps={new Set(['globalFilter', 'globalFilterFn', 'showGlobalFilter'])}
+  onlyOptions={new Set(['globalFilter', 'globalFilterFn', 'showGlobalFilter'])}
 />
 
 ### Disable Global Filtering

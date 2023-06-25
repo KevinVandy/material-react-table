@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import MenuItemsExample from '../../../examples/row-actions-menu-items';
 import ButtonsExample from '../../../examples/row-actions-buttons';
 
@@ -19,8 +19,8 @@ Using the built-in Row Actions column is optional, as you can simply create your
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'displayColumnDefOptions',
       'enableRowActions',

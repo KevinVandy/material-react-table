@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import EnableOrderingExample from '../../../examples/enable-row-ordering';
 import EnableDraggingExample from '../../../examples/enable-row-dragging';
@@ -20,8 +20,8 @@ Material React Table has exposed all the APIs necessary to enable rich row drag-
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'enableRowOrdering',
       'muiRowDragHandleProps',
@@ -33,7 +33,7 @@ Material React Table has exposed all the APIs necessary to enable rich row drag-
 
 ### Relevant State
 
-<StateOptionsTable onlyProps={new Set(['draggingRow', 'hoveredRow'])} />
+<StateOptionsTable onlyOptions={new Set(['draggingRow', 'hoveredRow'])} />
 
 ### Enable Row Ordering
 

@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import EnableExample from '../../../examples/enable-row-selection';
 import SingleExample from '../../../examples/single-row-selection';
@@ -20,8 +20,8 @@ Material React Table has a built-in row selection feature and makes it easy to m
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'enableMultiRowSelection',
       'enableRowSelection',
@@ -39,7 +39,7 @@ Material React Table has a built-in row selection feature and makes it easy to m
 
 ### Relevant State
 
-<StateOptionsTable onlyProps={new Set(['rowSelection'])} />
+<StateOptionsTable onlyOptions={new Set(['rowSelection'])} />
 
 ### Enable Row Selection
 

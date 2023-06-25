@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import RowSelectionExample from '../../../examples/enable-row-selection';
 import PersistentStateExample from '../../../examples/persistent-state';
 
@@ -21,8 +21,8 @@ See the [State Options API Docs](/docs/api/state-options) for more information o
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={new Set(['initialState', 'state', 'tableInstanceRef'])}
+<TableOptionsTable
+  onlyOptions={new Set(['initialState', 'state', 'tableInstanceRef'])}
 />
 
 ### Populate Initial State

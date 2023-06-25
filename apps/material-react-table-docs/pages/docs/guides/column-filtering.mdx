@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Box from '@mui/material/Box';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import DisableExample from '../../../examples/disable-column-filters';
@@ -24,8 +24,8 @@ Filtering is one of the most powerful features of Material React Table and is en
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'columnFilterModeOptions',
       'enableColumnFilterModes',
@@ -55,7 +55,7 @@ Filtering is one of the most powerful features of Material React Table and is en
 ### Relevant Column Options
 
 <ColumnOptionsTable
-  onlyProps={
+  onlyOptions={
     new Set([
       'Filter',
       'columnFilterModeOptions',
@@ -76,7 +76,7 @@ Filtering is one of the most powerful features of Material React Table and is en
 ### Relevant State Options
 
 <StateOptionsTable
-  onlyProps={new Set(['columnFilters', 'columnFilterFns', 'showColumnFilters'])}
+  onlyOptions={new Set(['columnFilters', 'columnFilterFns', 'showColumnFilters'])}
 />
 
 ### Disable Filtering Features

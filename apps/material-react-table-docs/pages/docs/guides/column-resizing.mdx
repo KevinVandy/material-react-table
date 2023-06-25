@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import Example from '../../../examples/enable-column-resizing';
@@ -21,8 +21,8 @@ Material React Table lets you easily change the default widths (sizes) of column
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'columnResizeMode',
       'defaultColumn',
@@ -36,12 +36,12 @@ Material React Table lets you easily change the default widths (sizes) of column
 ### Relevant Column Options
 
 <ColumnOptionsTable
-  onlyProps={new Set(['enableResizing', 'maxSize', 'minSize', 'size'])}
+  onlyOptions={new Set(['enableResizing', 'maxSize', 'minSize', 'size'])}
 />
 
 ### Relevant State
 
-<StateOptionsTable onlyProps={new Set(['columnSizing', 'columnSizingInfo'])} />
+<StateOptionsTable onlyOptions={new Set(['columnSizing', 'columnSizingInfo'])} />
 
 ### Change Default Column Widths
 

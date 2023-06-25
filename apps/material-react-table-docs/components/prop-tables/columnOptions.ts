@@ -1,7 +1,7 @@
 import { type MRT_ColumnDef } from 'material-react-table';
 
 export type ColumnOption = {
-  columnOption: keyof MRT_ColumnDef;
+  columnOption: keyof MRT_ColumnDef<ColumnOption>;
   defaultValue?: string;
   description?: string;
   link?: string;

@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import MultiSortingExample from '../../../examples/multi-sorting';
@@ -19,8 +19,8 @@ Material React Table supports almost any sorting scenario you may have. Client-s
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'enableGlobalFilterRankedResults',
       'enableMultiSort',
@@ -40,7 +40,7 @@ Material React Table supports almost any sorting scenario you may have. Client-s
 ### Relevant Column Options
 
 <ColumnOptionsTable
-  onlyProps={
+  onlyOptions={
     new Set([
       'enableMultiSort',
       'enableSorting',
@@ -54,7 +54,7 @@ Material React Table supports almost any sorting scenario you may have. Client-s
 
 ### Relevant State Options
 
-<StateOptionsTable onlyProps={new Set(['sorting'])} />
+<StateOptionsTable onlyOptions={new Set(['sorting'])} />
 
 ### Disable Sorting
 

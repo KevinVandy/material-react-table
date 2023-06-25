@@ -1,7 +1,7 @@
 import { type MRT_Row } from 'material-react-table';
 
 export interface RowInstanceAPI {
-  rowInstanceAPI: keyof MRT_Row;
+  rowInstanceAPI: keyof MRT_Row<RowInstanceAPI>;
   link: string;
   linkText: string;
   description: string;

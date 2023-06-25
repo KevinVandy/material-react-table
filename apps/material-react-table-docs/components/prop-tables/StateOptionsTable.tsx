@@ -7,16 +7,16 @@ import {
 } from 'material-react-table';
 import { Link as MuiLink, Typography, useMediaQuery } from '@mui/material';
 import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
-import { type StateRow, stateOptions } from './stateOptions';
+import { type StateOption, stateOptions } from './stateOptions';
 
 interface Props {
-  onlyProps?: Set<keyof MRT_TableState>;
+  onlyOptions?: Set<keyof MRT_TableState<StateOption>>;
 }
 
-const StateOptionsTable = ({ onlyProps }: Props) => {
+const StateOptionsTable = ({ onlyOptions }: Props) => {
   const isDesktop = useMediaQuery('(min-width: 1200px)');
 
-  const columns = useMemo<MRT_ColumnDef<StateRow>[]>(
+  const columns = useMemo<MRT_ColumnDef<StateOption>[]>(
     () => [
       {
         accessorKey: 'stateOption',
@@ -112,13 +112,13 @@ const StateOptionsTable = ({ onlyProps }: Props) => {
   }, [isDesktop]);
 
   const data = useMemo(() => {
-    if (onlyProps) {
+    if (onlyOptions) {
       return stateOptions.filter(({ stateOption }) =>
-        onlyProps.has(stateOption),
+        onlyOptions.has(stateOption),
       );
     }
     return stateOptions;
-  }, [onlyProps]);
+  }, [onlyOptions]);
 
   return (
     <MaterialReactTable
@@ -132,13 +132,13 @@ const StateOptionsTable = ({ onlyProps }: Props) => {
           size: 10,
         },
       }}
-      enableColumnActions={!onlyProps}
+      enableColumnActions={!onlyOptions}
       enableColumnFilterModes
       enablePagination={false}
       enablePinning
       enableRowNumbers
       enableBottomToolbar={false}
-      enableTopToolbar={!onlyProps}
+      enableTopToolbar={!onlyOptions}
       initialState={{
         columnVisibility: { description: false },
         density: 'compact',
@@ -152,7 +152,7 @@ const StateOptionsTable = ({ onlyProps }: Props) => {
       }}
       muiTablePaperProps={{
         sx: { mb: '1.5rem' },
-        id: onlyProps ? 'relevant-state-options-table' : 'state-options-table',
+        id: onlyOptions ? 'relevant-state-options-table' : 'state-options-table',
       }}
       positionGlobalFilter="left"
       renderDetailPanel={({ row }) => (

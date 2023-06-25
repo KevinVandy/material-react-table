@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 
 <Head>
@@ -14,13 +14,13 @@ import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={new Set(['enableFullScreenToggle', 'onIsFullScreenChange'])}
+<TableOptionsTable
+  onlyOptions={new Set(['enableFullScreenToggle', 'onIsFullScreenChange'])}
 />
 
 ### Relevant State
 
-<StateOptionsTable onlyProps={new Set(['isFullScreen'])} />
+<StateOptionsTable onlyOptions={new Set(['isFullScreen'])} />
 
 ### Disable Full Screen Toggle
 

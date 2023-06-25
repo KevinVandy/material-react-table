@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import Example from '../../../examples/enable-column-pinning';
@@ -18,17 +18,17 @@ Column pinning is a cool feature that lets users pin (freeze) columns to the lef
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={new Set(['enablePinning', 'onColumnPinningChange'])}
+<TableOptionsTable
+  onlyOptions={new Set(['enablePinning', 'onColumnPinningChange'])}
 />
 
 ### Relevant Column Options
 
-<ColumnOptionsTable onlyProps={new Set(['enablePinning'])} />
+<ColumnOptionsTable onlyOptions={new Set(['enablePinning'])} />
 
 ### Relevant State
 
-<StateOptionsTable onlyProps={new Set(['columnPinning'])} />
+<StateOptionsTable onlyOptions={new Set(['columnPinning'])} />
 
 ### Enable Column Pinning
 

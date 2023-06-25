@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import AggregationExample from '../../../examples/aggregation-and-grouping';
@@ -21,8 +21,8 @@ Material React Table has built-in grouping and aggregation features. There are o
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'aggregationFns',
       'enableExpandAll',
@@ -41,14 +41,14 @@ Material React Table has built-in grouping and aggregation features. There are o
 ### Relevant Column Options
 
 <ColumnOptionsTable
-  onlyProps={
+  onlyOptions={
     new Set(['AggregatedCell', 'Footer', 'GroupedCell', 'enableGrouping'])
   }
 />
 
 ### Relevant State
 
-<StateOptionsTable onlyProps={new Set(['grouping', 'expanded'])} />
+<StateOptionsTable onlyOptions={new Set(['grouping', 'expanded'])} />
 
 ### Enable Grouping
 

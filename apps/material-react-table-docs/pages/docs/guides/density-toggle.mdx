@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import DisableExample from '../../../examples/disable-density-toggle';
 
@@ -17,13 +17,13 @@ Material React Table includes a density toggle button in the top toolbar by defa
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={new Set(['enableDensityToggle', 'onDensityChange'])}
+<TableOptionsTable
+  onlyOptions={new Set(['enableDensityToggle', 'onDensityChange'])}
 />
 
 ### Relevant State
 
-<StateOptionsTable onlyProps={new Set(['density'])} />
+<StateOptionsTable onlyOptions={new Set(['density'])} />
 
 ### Default Density
 

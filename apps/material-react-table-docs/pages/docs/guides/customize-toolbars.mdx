@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import DisableExample from '../../../examples/minimal';
 import CustomTopToolbarExample from '../../../examples/custom-top-toolbar';
@@ -19,8 +19,8 @@ This guide shows you how to [hide](#hide-or-disable-toolbars), [customize](#cust
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'enableBottomToolbar',
       'enableToolbarInternalActions',
@@ -46,7 +46,7 @@ This guide shows you how to [hide](#hide-or-disable-toolbars), [customize](#cust
 ### Relevant State
 
 <StateOptionsTable
-  onlyProps={new Set(['showAlertBanner', 'showProgressBars'])}
+  onlyOptions={new Set(['showAlertBanner', 'showProgressBars'])}
 />
 
 ### Hide or Disable Toolbars

@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import Example from '../../../examples/enable-detail-panel';
 import AlternateExample from '../../../examples/alternate-detail-panel';
@@ -22,8 +22,8 @@ If you are looking for how to expand multiple rows from a tree data structure, s
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'displayColumnDefOptions',
       'positionExpandColumn',
@@ -34,7 +34,7 @@ If you are looking for how to expand multiple rows from a tree data structure, s
 
 ### Relevant State
 
-<StateOptionsTable onlyProps={new Set(['expanded'])} />
+<StateOptionsTable onlyOptions={new Set(['expanded'])} />
 
 ### Render Detail Panel
 

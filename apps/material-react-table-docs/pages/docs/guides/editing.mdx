@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import EditingCellExample from '../../../examples/enable-editing-cell';
@@ -23,8 +23,8 @@ There are four visually distinct editing modes to choose from, whether you want 
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'editingMode',
       'enableEditing',
@@ -40,7 +40,7 @@ There are four visually distinct editing modes to choose from, whether you want 
 ### Relevant Column Options
 
 <ColumnOptionsTable
-  onlyProps={
+  onlyOptions={
     new Set([
       'editSelectOptions',
       'editVariant',
@@ -52,7 +52,7 @@ There are four visually distinct editing modes to choose from, whether you want 
 
 ### Relevant State Options
 
-<StateOptionsTable onlyProps={new Set(['editingCell', 'editingRow'])} />
+<StateOptionsTable onlyOptions={new Set(['editingCell', 'editingRow'])} />
 
 ### Enable Editing
 

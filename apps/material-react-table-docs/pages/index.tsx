@@ -23,7 +23,7 @@ import { InstallCommand } from '../components/mdx/InstallCommand';
 const HomePage = () => {
   return (
     <>
-      <Stack sx={{ maxWidth: '95ch', m: 'auto' }}>
+      <Stack sx={{ maxWidth: '100ch', m: 'auto' }}>
         <Typography
           sx={{
             textAlign: 'center',
@@ -248,7 +248,7 @@ const HomePage = () => {
           </Link>
         </Box>
         <Box>
-          <InstallCommand />
+          <InstallCommand centered />
         </Box>
         <HomeCards />
         <Typography my="2rem" textAlign="center" variant="h3">

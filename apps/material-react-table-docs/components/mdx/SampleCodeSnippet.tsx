@@ -70,7 +70,7 @@ export const SampleCodeSnippet = (props: Props) => {
                 props.margin ?? props.enableCopyButton !== false
                   ? '2rem auto'
                   : 0,
-              fontSize: '1.1em',
+              fontSize: '11pt',
             }}
           >
             {props.enableCopyButton !== false && (

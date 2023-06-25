@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import EnableExample from '../../../examples/enable-sticky-header';
 
 <Head>
@@ -16,8 +16,8 @@ The sticky header and footer feature allows you to keep the header and footer of
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={new Set(['enableStickyHeader', 'enableStickyFooter'])}
+<TableOptionsTable
+  onlyOptions={new Set(['enableStickyHeader', 'enableStickyFooter'])}
 />
 
 ### Enable Sticky Header

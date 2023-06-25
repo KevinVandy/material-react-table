@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import {
   MaterialReactTable,
-  type MaterialReactTableProps,
+  type MRT_TableOptions,
   type MRT_Cell,
   type MRT_ColumnDef,
   type MRT_Row,
@@ -43,7 +43,7 @@ const Example = () => {
     setTableData([...tableData]);
   };
 
-  const handleSaveRowEdits: MaterialReactTableProps<Person>['onEditingRowSave'] =
+  const handleSaveRowEdits: MRT_TableOptions<Person>['onEditingRowSave'] =
     async ({ exitEditingMode, row, values }) => {
       if (!Object.keys(validationErrors).length) {
         tableData[row.index] = values;

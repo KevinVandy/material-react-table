@@ -23,10 +23,10 @@ import { InstallCommand } from '../components/mdx/InstallCommand';
 
 ```diff
 - import MaterialReactTable from 'material-react-table'
-+ import { MaterialReactTable } from 'material-react-table'
++ import { MaterialReactTable, useMaterialReactTable } from 'material-react-table'
 ```
 
-- There is no longer a `tableInstanceRef` prop. It has been replaced by the `useMaterialReactTable` hook, which is way easier to use. See below for more details.
+- There is no longer a `tableInstanceRef` prop. It has been replaced by the `useMaterialReactTable` hook, which is way easier to use. It will also be recommended that all table options should be passed to the new `useMaterialReactTable` hook instead as props to the `<MaterialReactTable />` component. See [below](#usematerialreacttable) for more details.
 
 #### Renamed Props/Options
 
@@ -47,7 +47,7 @@ import { InstallCommand } from '../components/mdx/InstallCommand';
 
 ### useMaterialReactTable
 
-Passing all table options as props to `<MaterialReactTable />` will still work., but there is a new and better way to define table options with the `useMaterialReactTable` hook.
+Passing all table options as props to `<MaterialReactTable />` will still work, but there is a new and better way to define table options with the `useMaterialReactTable` hook.
 
 For example, here is a classic example for how to use Material React Table in V1 (still works in V2):
 
@@ -55,7 +55,7 @@ For example, here is a classic example for how to use Material React Table in V1
 import { MaterialReactTable } from 'material-react-table';
 
 export const MyTableComponent = () => {
-  const tableInstanceRef = useRef();
+  // const tableInstanceRef = useRef(); //deprecated
 
   return (
     //Defining table options as props to <MaterialReactTable /> still works (as long as you don't also pass in a table prop)
@@ -63,7 +63,7 @@ export const MyTableComponent = () => {
       columns={columns}
       data={data}
       enableRowSelection //table options as props
-      tableInstanceRef={tableInstanceRef}
+      // tableInstanceRef={tableInstanceRef} //deprecated
     />
   );
 };

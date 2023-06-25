@@ -46,8 +46,8 @@ export const routes: Array<RouteItem> = [
         href: '/docs/api#props-and-options',
         items: [
           {
-            href: '/docs/api/props',
-            label: 'Props',
+            href: '/docs/api/table-options',
+            label: 'Table Options (Props)',
           },
           {
             href: '/docs/api/column-options',
