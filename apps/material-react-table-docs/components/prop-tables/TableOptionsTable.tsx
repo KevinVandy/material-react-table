@@ -141,7 +141,9 @@ const TableOptionsTable = ({ onlyOptions }: Props) => {
 
   const data = useMemo(() => {
     if (onlyOptions) {
-      return tableOptions.filter(({ tableOption }) => onlyOptions.has(tableOption));
+      return tableOptions.filter(({ tableOption }) =>
+        onlyOptions.has(tableOption),
+      );
     }
     return tableOptions;
   }, [onlyOptions]);

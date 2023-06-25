@@ -1915,5 +1915,5 @@ export const tableOptions: TableOption[] = [
     required: false,
     source: 'MRT',
     type: 'MutableRefObject<Virtualizer | null>',
-  }
+  },
 ];

@@ -152,7 +152,9 @@ const StateOptionsTable = ({ onlyOptions }: Props) => {
       }}
       muiTablePaperProps={{
         sx: { mb: '1.5rem' },
-        id: onlyOptions ? 'relevant-state-options-table' : 'state-options-table',
+        id: onlyOptions
+          ? 'relevant-state-options-table'
+          : 'state-options-table',
       }}
       positionGlobalFilter="left"
       renderDetailPanel={({ row }) => (
