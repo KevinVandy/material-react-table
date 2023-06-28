@@ -190,6 +190,7 @@ export const MRT_TableBodyCell = ({
     }
   };
 
+
   return (
     <TableCell
       data-index={virtualCell?.index}
@@ -253,7 +254,7 @@ export const MRT_TableBodyCell = ({
       <>
         {cell.getIsPlaceholder() ? (
           columnDef.PlaceholderCell?.({ cell, column, row, table }) ?? null
-        ) : isLoading || showSkeletons ? (
+        ) : isLoading || showSkeletons || row.original.showSkeletons  ? (
           <Skeleton
             animation="wave"
             height={20}
