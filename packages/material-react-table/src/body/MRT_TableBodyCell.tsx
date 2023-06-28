@@ -253,7 +253,7 @@ export const MRT_TableBodyCell = ({
       <>
         {cell.getIsPlaceholder() ? (
           columnDef.PlaceholderCell?.({ cell, column, row, table }) ?? null
-        ) : isLoading || showSkeletons ? (
+        ) : isLoading || (showSkeletons && (showSkeletons[row.index] || typeof showSkeletons === 'boolean'))  ? (
           <Skeleton
             animation="wave"
             height={20}
