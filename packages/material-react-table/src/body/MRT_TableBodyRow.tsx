@@ -5,6 +5,7 @@ import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import { type VirtualItem, type Virtualizer } from '@tanstack/react-virtual';
 import { type MRT_Cell, type MRT_Row, type MRT_TableInstance } from '../types';
+import {MRT_TableHeadCell} from "../head/MRT_TableHeadCell";
 
 interface Props {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
@@ -102,13 +103,11 @@ export const MRT_TableBodyRow = ({
           ...tableRowProps?.style,
         }}
       >
-        {virtualPaddingLeft ? (
-          <td style={{ display: 'flex', width: virtualPaddingLeft }} />
-        ) : null}
-        {(virtualColumns ?? row.getVisibleCells()).map((cellOrVirtualCell) => {
+        {(virtualColumns ?? row.getVisibleCells()).map((cellOrVirtualCell, idx) => {
           const cell = columnVirtualizer
             ? row.getVisibleCells()[(cellOrVirtualCell as VirtualItem).index]
             : (cellOrVirtualCell as MRT_Cell);
+
           const props = {
             cell,
             measureElement: columnVirtualizer?.measureElement,
@@ -120,7 +119,7 @@ export const MRT_TableBodyRow = ({
               ? (cellOrVirtualCell as VirtualItem)
               : undefined,
           };
-          return memoMode === 'cells' &&
+          const renderedCell = memoMode === 'cells' &&
             cell.column.columnDef.columnDefType === 'data' &&
             !draggingColumn &&
             !draggingRow &&
@@ -130,6 +129,15 @@ export const MRT_TableBodyRow = ({
           ) : (
             <MRT_TableBodyCell key={cell.id} {...props} />
           );
+
+          if (idx === (table.getLeftLeafColumns().length - 1) && virtualColumns) {
+            return [
+              renderedCell,
+              <th key="vp_left" style={{ display: 'flex', width: virtualPaddingLeft }} />,
+            ]
+          } else {
+            return renderedCell;
+          }
         })}
         {virtualPaddingRight ? (
           <td style={{ display: 'flex', width: virtualPaddingRight }} />

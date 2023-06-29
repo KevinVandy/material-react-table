@@ -45,17 +45,20 @@ export const MRT_TableHeadRow = ({
           : (tableRowProps?.sx as any)),
       })}
     >
-      {virtualPaddingLeft ? (
-        <th style={{ display: 'flex', width: virtualPaddingLeft }} />
-      ) : null}
-      {(virtualColumns ?? headerGroup.headers).map((headerOrVirtualHeader) => {
+      {(virtualColumns ?? headerGroup.headers).map((headerOrVirtualHeader, idx) => {
         const header = virtualColumns
           ? headerGroup.headers[headerOrVirtualHeader.index]
           : (headerOrVirtualHeader as MRT_Header);
 
-        return (
-          <MRT_TableHeadCell header={header} key={header.id} table={table} />
-        );
+        const renderedCell = <MRT_TableHeadCell header={header} key={header.id} table={table} />;
+        if (idx === (table.getLeftLeafColumns().length - 1) && virtualColumns) {
+            return [
+                renderedCell,
+                <th key="vp_left"  style={{ display: 'flex', width: virtualPaddingLeft }} />,
+            ]
+        } else {
+            return renderedCell;
+        }
       })}
       {virtualPaddingRight ? (
         <th style={{ display: 'flex', width: virtualPaddingRight }} />

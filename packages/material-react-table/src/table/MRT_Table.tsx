@@ -129,7 +129,8 @@ export const MRT_Table = ({ table }: Props) => {
   let virtualPaddingRight: number | undefined;
 
   if (columnVirtualizer && virtualColumns?.length) {
-    virtualPaddingLeft = virtualColumns[leftPinnedIndexes.length]?.start ?? 0;
+    virtualPaddingLeft = Math.max(0, (virtualColumns[leftPinnedIndexes.length]?.start ?? 0) -
+        (virtualColumns[leftPinnedIndexes.length - 1]?.end ?? 0));
     virtualPaddingRight =
       columnVirtualizer.getTotalSize() -
       (virtualColumns[virtualColumns.length - 1 - rightPinnedIndexes.length]
