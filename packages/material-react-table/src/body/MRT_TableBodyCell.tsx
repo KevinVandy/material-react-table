@@ -253,7 +253,7 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
       <>
         {cell.getIsPlaceholder() ? (
           columnDef.PlaceholderCell?.({ cell, column, row, table }) ?? null
-        ) : isLoading || showSkeletons ? (
+        ) : (isLoading || showSkeletons) && cell.getValue() === null ? (
           <Skeleton
             animation="wave"
             height={20}
