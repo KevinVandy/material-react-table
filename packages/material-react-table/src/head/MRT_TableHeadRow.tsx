@@ -45,23 +45,31 @@ export const MRT_TableHeadRow = ({
           : (tableRowProps?.sx as any)),
       })}
     >
-      {(virtualColumns ?? headerGroup.headers).map((headerOrVirtualHeader, idx) => {
+      {(virtualPaddingLeft && table.getLeftLeafColumns().length === 0) ? (
+          <td style={{ display: 'flex', width: virtualPaddingRight }} />
+      ) : null}
+      {(virtualColumns ?? headerGroup.headers).map((headerOrVirtualHeader) => {
         const header = virtualColumns
           ? headerGroup.headers[headerOrVirtualHeader.index]
           : (headerOrVirtualHeader as MRT_Header);
 
         const renderedCell = <MRT_TableHeadCell header={header} key={header.id} table={table} />;
-        if (idx === (table.getLeftLeafColumns().length - 1) && virtualColumns) {
+        if (virtualPaddingLeft && headerOrVirtualHeader.index === (table.getLeftLeafColumns().length - 1)) {
             return [
                 renderedCell,
                 <th key="vp_left"  style={{ display: 'flex', width: virtualPaddingLeft }} />,
+            ]
+        } else if (virtualPaddingRight && headerOrVirtualHeader.index === (table.getVisibleLeafColumns().length - table.getRightLeafColumns().length)) {
+            return [
+                <th key="vp_right"  style={{ display: 'flex', width: virtualPaddingRight }} />,
+                renderedCell
             ]
         } else {
             return renderedCell;
         }
       })}
-      {virtualPaddingRight ? (
-        <th style={{ display: 'flex', width: virtualPaddingRight }} />
+      {(virtualPaddingRight && table.getRightLeafColumns().length === 0) ? (
+          <td style={{ display: 'flex', width: virtualPaddingRight }} />
       ) : null}
     </TableRow>
   );

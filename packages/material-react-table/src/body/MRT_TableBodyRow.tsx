@@ -103,7 +103,10 @@ export const MRT_TableBodyRow = ({
           ...tableRowProps?.style,
         }}
       >
-        {(virtualColumns ?? row.getVisibleCells()).map((cellOrVirtualCell, idx) => {
+        {(virtualPaddingLeft && table.getLeftLeafColumns().length === 0) ? (
+            <td style={{ display: 'flex', width: virtualPaddingRight }} />
+        ) : null}
+        {(virtualColumns ?? row.getVisibleCells()).map((cellOrVirtualCell) => {
           const cell = columnVirtualizer
             ? row.getVisibleCells()[(cellOrVirtualCell as VirtualItem).index]
             : (cellOrVirtualCell as MRT_Cell);
@@ -130,16 +133,21 @@ export const MRT_TableBodyRow = ({
             <MRT_TableBodyCell key={cell.id} {...props} />
           );
 
-          if (idx === (table.getLeftLeafColumns().length - 1) && virtualColumns) {
+          if (virtualPaddingLeft && (cellOrVirtualCell as VirtualItem).index === (table.getLeftLeafColumns().length - 1)) {
             return [
               renderedCell,
               <th key="vp_left" style={{ display: 'flex', width: virtualPaddingLeft }} />,
+            ]
+          } else if (virtualPaddingRight && (cellOrVirtualCell as VirtualItem).index === (table.getVisibleLeafColumns().length - table.getRightLeafColumns().length)) {
+            return [
+              <th key="vp_right"  style={{ display: 'flex', width: virtualPaddingRight }} />,
+              renderedCell
             ]
           } else {
             return renderedCell;
           }
         })}
-        {virtualPaddingRight ? (
+        {(virtualPaddingRight && table.getRightLeafColumns().length === 0) ? (
           <td style={{ display: 'flex', width: virtualPaddingRight }} />
         ) : null}
       </TableRow>

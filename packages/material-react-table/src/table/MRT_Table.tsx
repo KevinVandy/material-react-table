@@ -130,11 +130,11 @@ export const MRT_Table = ({ table }: Props) => {
 
   if (columnVirtualizer && virtualColumns?.length) {
     virtualPaddingLeft = Math.max(0, (virtualColumns[leftPinnedIndexes.length]?.start ?? 0) -
-        (virtualColumns[leftPinnedIndexes.length - 1]?.end ?? 0));
-    virtualPaddingRight =
-      columnVirtualizer.getTotalSize() -
-      (virtualColumns[virtualColumns.length - 1 - rightPinnedIndexes.length]
-        ?.end ?? 0);
+        (leftPinnedIndexes.length === 0 ? 0 : (virtualColumns[leftPinnedIndexes.length - 1]?.end ?? 0)));
+    virtualPaddingRight = Math.max(0,
+      (columnVirtualizer.getTotalSize() - (virtualColumns[virtualColumns.length - 1 - rightPinnedIndexes.length]?.end ?? 0)) -
+        (rightPinnedIndexes.length === 0 ? 0 :
+            (columnVirtualizer.getTotalSize() - (virtualColumns[virtualColumns.length - rightPinnedIndexes.length]?.start ?? 0))));
   }
 
   const props = {
