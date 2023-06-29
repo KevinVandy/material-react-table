@@ -260,6 +260,15 @@ export const stateOptions: StateRow[] = [
     type: 'boolean',
   },
   {
+    defaultValue: '{}',
+    description: 'Record of rows that are still loading (very usable for managing skeleton in lazy load combined with rowVirtualization)',
+    link: '',
+    linkText: '',
+    source: 'MRT',
+    stateOption: 'loadingRows',
+    type: 'Record<number, boolean>',
+  },
+  {
     defaultValue: 'false',
     description: '',
     link: '',
