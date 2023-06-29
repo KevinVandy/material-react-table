@@ -279,6 +279,7 @@ export type MRT_TableState<TData extends Record<string, any> = {}> = Prettify<
     showGlobalFilter: boolean;
     showProgressBars: boolean;
     showSkeletons: boolean;
+    loadingRows: Record<number, boolean>;
     showToolbarDropZone: boolean;
   }
 >;

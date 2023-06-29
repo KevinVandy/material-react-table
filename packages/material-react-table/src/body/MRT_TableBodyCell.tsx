@@ -70,6 +70,7 @@ export const MRT_TableBodyCell = ({
     density,
     isLoading,
     showSkeletons,
+    loadingRows
   } = getState();
   const { column, row } = cell;
   const { columnDef } = column;
@@ -253,7 +254,7 @@ export const MRT_TableBodyCell = ({
       <>
         {cell.getIsPlaceholder() ? (
           columnDef.PlaceholderCell?.({ cell, column, row, table }) ?? null
-        ) : isLoading || showSkeletons ? (
+        ) : isLoading || showSkeletons || (loadingRows && loadingRows[row.index]) ? (
           <Skeleton
             animation="wave"
             height={20}
