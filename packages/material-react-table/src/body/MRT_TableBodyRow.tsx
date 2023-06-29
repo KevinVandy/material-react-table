@@ -5,7 +5,6 @@ import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import { type VirtualItem, type Virtualizer } from '@tanstack/react-virtual';
 import { type MRT_Cell, type MRT_Row, type MRT_TableInstance } from '../types';
-import {MRT_TableHeadCell} from "../head/MRT_TableHeadCell";
 
 interface Props {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
