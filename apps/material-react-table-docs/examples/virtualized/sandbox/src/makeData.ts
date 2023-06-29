@@ -39,7 +39,7 @@ export const makeData = (numberOfRows: number) =>
         style: 'currency',
         currency: 'USD',
       }),
-    dateOfBirth: faker.date.past().toDateString(),
-    dateOfJoining: faker.date.past().toDateString(),
+    dateOfBirth: faker.date.past({ years: 50 }).toDateString(),
+    dateOfJoining: faker.date.past({ years: 20 }).toDateString(),
     isActive: faker.datatype.boolean() ? 'Active' : 'Inactive',
   }));

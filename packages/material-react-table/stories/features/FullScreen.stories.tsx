@@ -54,7 +54,7 @@ const data = [...Array(128)].map(() => ({
   email: faker.internet.email(),
   jobTitle: faker.person.jobTitle(),
   salary: +faker.finance.amount(0, 150000, 0) + 20000,
-  startDate: faker.date.past(8).toLocaleDateString(),
+  startDate: faker.date.past({ years: 8 }).toLocaleDateString(),
   signatureCatchPhrase: faker.company.catchPhrase(),
   avatar: faker.image.avatar(),
 }));

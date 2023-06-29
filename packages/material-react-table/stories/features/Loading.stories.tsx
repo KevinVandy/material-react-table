@@ -8,7 +8,15 @@ const meta: Meta = {
 
 export default meta;
 
-const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
+interface Person {
+  firstName: string | null;
+  lastName: string | null;
+  address: string | null;
+  state: string | null;
+  phoneNumber: string | null;
+}
+
+const columns: MRT_ColumnDef<Person>[] = [
   {
     header: 'First Name',
     accessorKey: 'firstName',
@@ -39,8 +47,24 @@ const data = [...Array(100)].map(() => ({
   phoneNumber: faker.phone.number(),
 }));
 
+const blankData = [...Array(100)].map(() => ({
+  firstName: null,
+  lastName: null,
+  address: null,
+  state: null,
+  phoneNumber: null,
+}));
+
 export const Loading = () => (
   <MaterialReactTable columns={columns} data={[]} state={{ isLoading: true }} />
+);
+
+export const LoadingWithSomeData = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={[...data.slice(0, 5), ...blankData]}
+    state={{ isLoading: true }}
+  />
 );
 
 export const LoadingWithSelection = () => (
@@ -59,7 +83,7 @@ export const LoadingWithDetailPanelExample = () => (
     state={{ isLoading: true }}
     renderDetailPanel={({ row }) => (
       <div style={{ display: 'grid' }}>
-        <span>City: {row.original.firstName.toString()}</span>
+        <span>City: {row.original.firstName?.toString()}</span>
         <span>State: {row.original.state}</span>
         <span>Address: {row.original.address}</span>
         <span>Phone: {row.original.phoneNumber}</span>
