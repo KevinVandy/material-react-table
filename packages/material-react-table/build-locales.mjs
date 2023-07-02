@@ -35,7 +35,7 @@ const supportedLocales = [
 
 async function build(locale) {
   const bundle = await rollup({
-    input: `./src/_locales/${locale}.ts`,
+    input: `./src/locales/${locale}.ts`,
     plugins: [
       typescript({
         declaration: false,
@@ -45,7 +45,7 @@ async function build(locale) {
       copy({
         targets: [
           ...['cjs', 'esm'].map((format) => ({
-            src: `./dist/esm/types/_locales/${locale}.d.ts`,
+            src: `./dist/esm/types/locales/${locale}.d.ts`,
             dest: './locales',
             rename: () =>
               format === 'esm' ? `${locale}.${format}.d.ts` : `${locale}.d.ts`,

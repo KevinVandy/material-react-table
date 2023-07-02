@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import {
   getCoreRowModel,
   getExpandedRowModel,
@@ -12,41 +12,33 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
-  prepareColumns,
   getAllLeafColumnDefs,
-  getDefaultColumnOrderIds,
-  getDefaultColumnFilterFn,
   getColumnId,
-  showExpandColumn,
-} from './column.utils';
+  getDefaultColumnFilterFn,
+  getDefaultColumnOrderIds,
+  prepareColumns,
+} from '../column.utils';
+import { useMRT_DisplayColumns } from './useMRT_DisplayColumns';
+import { useMRT_Effects } from './useMRT_Effects';
 import {
   type MRT_Cell,
   type MRT_Column,
   type MRT_ColumnDef,
+  type MRT_ColumnOrderState,
+  type MRT_DefinedTableOptions,
+  type MRT_DensityState,
+  type MRT_FilterFnsState,
   type MRT_FilterOption,
-  type MRT_Localization,
+  type MRT_GroupingState,
   type MRT_Row,
   type MRT_TableInstance,
   type MRT_TableState,
-  type MRT_TableOptions,
-  type MRT_DensityState,
-  type MRT_ColumnOrderState,
-  type MRT_GroupingState,
-  type MRT_FilterFnsState,
-} from './types';
-import { MRT_ExpandAllButton } from './buttons/MRT_ExpandAllButton';
-import { MRT_ExpandButton } from './buttons/MRT_ExpandButton';
-import { MRT_ToggleRowActionMenuButton } from './buttons/MRT_ToggleRowActionMenuButton';
-import { MRT_SelectCheckbox } from './inputs/MRT_SelectCheckbox';
+} from '../types';
 
-export const useMaterialReactTableInstance: <TData extends Record<string, any>>(
-  tableOptions: MRT_TableOptions<TData> & {
-    localization: MRT_Localization;
-  },
+export const useMRT_TableInstance: <TData extends Record<string, any>>(
+  tableOptions: MRT_DefinedTableOptions<TData>,
 ) => MRT_TableInstance<TData> = <TData extends Record<string, any>>(
-  tableOptions: MRT_TableOptions<TData> & {
-    localization: MRT_Localization;
-  },
+  tableOptions: MRT_DefinedTableOptions<TData>,
 ) => {
   const bottomToolbarRef = useRef<HTMLDivElement>(null);
   const editInputRefs = useRef<Record<string, HTMLInputElement>>({});
@@ -126,111 +118,11 @@ export const useMaterialReactTableInstance: <TData extends Record<string, any>>(
     initialState?.showToolbarDropZone ?? false,
   );
 
-  const displayColumns = useMemo(
-    () =>
-      (
-        [
-          (tableOptions.state?.columnOrder ?? columnOrder).includes(
-            'mrt-row-drag',
-          ) && {
-            header: tableOptions.localization.move,
-            size: 60,
-            ...tableOptions.defaultDisplayColumn,
-            ...tableOptions.displayColumnDefOptions?.['mrt-row-drag'],
-            id: 'mrt-row-drag',
-          },
-          (tableOptions.state?.columnOrder ?? columnOrder).includes(
-            'mrt-row-actions',
-          ) && {
-            Cell: ({ cell, row }) => (
-              <MRT_ToggleRowActionMenuButton
-                cell={cell as any}
-                row={row as any}
-                table={table as any}
-              />
-            ),
-            header: tableOptions.localization.actions,
-            size: 70,
-            ...tableOptions.defaultDisplayColumn,
-            ...tableOptions.displayColumnDefOptions?.['mrt-row-actions'],
-            id: 'mrt-row-actions',
-          },
-          (tableOptions.state?.columnOrder ?? columnOrder).includes(
-            'mrt-row-expand',
-          ) &&
-            showExpandColumn(
-              tableOptions,
-              tableOptions.state?.grouping ?? grouping,
-            ) && {
-              Cell: ({ row }) => (
-                <MRT_ExpandButton row={row as any} table={table as any} />
-              ),
-              Header: tableOptions.enableExpandAll
-                ? () => <MRT_ExpandAllButton table={table as any} />
-                : null,
-              header: tableOptions.localization.expand,
-              size: 60,
-              ...tableOptions.defaultDisplayColumn,
-              ...tableOptions.displayColumnDefOptions?.['mrt-row-expand'],
-              id: 'mrt-row-expand',
-            },
-          (tableOptions.state?.columnOrder ?? columnOrder).includes(
-            'mrt-row-select',
-          ) && {
-            Cell: ({ row }) => (
-              <MRT_SelectCheckbox row={row as any} table={table as any} />
-            ),
-            Header:
-              tableOptions.enableSelectAll &&
-              tableOptions.enableMultiRowSelection
-                ? () => <MRT_SelectCheckbox selectAll table={table as any} />
-                : null,
-            header: tableOptions.localization.select,
-            size: 60,
-            ...tableOptions.defaultDisplayColumn,
-            ...tableOptions.displayColumnDefOptions?.['mrt-row-select'],
-            id: 'mrt-row-select',
-          },
-          (tableOptions.state?.columnOrder ?? columnOrder).includes(
-            'mrt-row-numbers',
-          ) && {
-            Cell: ({ row }) => row.index + 1,
-            Header: () => tableOptions.localization.rowNumber,
-            header: tableOptions.localization.rowNumbers,
-            size: 60,
-            ...tableOptions.defaultDisplayColumn,
-            ...tableOptions.displayColumnDefOptions?.['mrt-row-numbers'],
-            id: 'mrt-row-numbers',
-          },
-        ] as MRT_ColumnDef<TData>[]
-      ).filter(Boolean),
-    [
-      columnOrder,
-      grouping,
-      tableOptions.displayColumnDefOptions,
-      tableOptions.editingMode,
-      tableOptions.enableColumnDragging,
-      tableOptions.enableColumnFilterModes,
-      tableOptions.enableColumnOrdering,
-      tableOptions.enableEditing,
-      tableOptions.enableExpandAll,
-      tableOptions.enableExpanding,
-      tableOptions.enableGrouping,
-      tableOptions.enableRowActions,
-      tableOptions.enableRowDragging,
-      tableOptions.enableRowNumbers,
-      tableOptions.enableRowOrdering,
-      tableOptions.enableRowSelection,
-      tableOptions.enableSelectAll,
-      tableOptions.localization,
-      tableOptions.positionActionsColumn,
-      tableOptions.renderDetailPanel,
-      tableOptions.renderRowActionMenuItems,
-      tableOptions.renderRowActions,
-      tableOptions.state?.columnOrder,
-      tableOptions.state?.grouping,
-    ],
-  );
+  const displayColumns = useMRT_DisplayColumns({
+    tableOptions,
+    columnOrder,
+    grouping,
+  });
 
   const columnDefs = useMemo(
     () =>
@@ -263,9 +155,7 @@ export const useMaterialReactTableInstance: <TData extends Record<string, any>>(
           ].map(() =>
             Object.assign(
               {},
-              ...getAllLeafColumnDefs(
-                tableOptions.columns as MRT_ColumnDef<TData>[],
-              ).map((col) => ({
+              ...getAllLeafColumnDefs(tableOptions.columns).map((col) => ({
                 [getColumnId(col)]: null,
               })),
             ),
@@ -372,16 +262,7 @@ export const useMaterialReactTableInstance: <TData extends Record<string, any>>(
       tableOptions.onShowToolbarDropZoneChange ?? setShowToolbarDropZone,
   } as MRT_TableInstance<TData>;
 
-  //if page index is out of bounds, set it to the last page
-  useEffect(() => {
-    const { pageIndex, pageSize } = table.getState().pagination;
-    const totalRowCount =
-      tableOptions.rowCount ?? table.getPrePaginationRowModel().rows.length;
-    const firstVisibleRowIndex = pageIndex * pageSize;
-    if (firstVisibleRowIndex > totalRowCount) {
-      table.setPageIndex(Math.floor(totalRowCount / pageSize));
-    }
-  }, [tableOptions.rowCount, table.getPrePaginationRowModel().rows.length]);
+  useMRT_Effects(table);
 
   return table;
 };

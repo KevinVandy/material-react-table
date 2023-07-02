@@ -1,17 +1,15 @@
 import { useMemo } from 'react';
-import { MRT_AggregationFns } from './aggregationFns';
-import { MRT_FilterFns } from './filterFns';
-import { MRT_SortingFns } from './sortingFns';
-import { MRT_DefaultColumn, MRT_DefaultDisplayColumn } from './column.utils';
-import { MRT_Default_Icons } from './icons';
-import { MRT_Localization_EN } from './_locales/en';
-import { type MRT_Localization, type MRT_TableOptions } from './types';
+import { MRT_AggregationFns } from '../aggregationFns';
+import { MRT_FilterFns } from '../filterFns';
+import { MRT_SortingFns } from '../sortingFns';
+import { MRT_DefaultColumn, MRT_DefaultDisplayColumn } from '../column.utils';
+import { MRT_Localization_EN } from '../locales/en';
+import { MRT_Default_Icons } from '../icons';
+import { type MRT_DefinedTableOptions, type MRT_TableOptions } from '../types';
 
-export const useTableOptions: <TData extends Record<string, any>>(
+export const useMRT_TableOptions: <TData extends Record<string, any>>(
   tableOptions: MRT_TableOptions<TData>,
-) => MRT_TableOptions<TData> & {
-  localization: MRT_Localization;
-} = <TData extends Record<string, any>>({
+) => MRT_DefinedTableOptions<TData> = <TData extends Record<string, any>>({
   aggregationFns,
   autoResetExpanded = false,
   columnResizeMode = 'onChange',

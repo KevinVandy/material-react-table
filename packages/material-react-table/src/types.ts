@@ -195,6 +195,7 @@ export type MRT_TableInstance<TData extends Record<string, any>> = Omit<
   | 'getColumn'
   | 'getExpandedRowModel'
   | 'getFlatHeaders'
+  | 'getHeaderGroups'
   | 'getLeftLeafColumns'
   | 'getPaginationRowModel'
   | 'getPreFilteredRowModel'
@@ -212,6 +213,7 @@ export type MRT_TableInstance<TData extends Record<string, any>> = Omit<
   getColumn: (columnId: string) => MRT_Column<TData>;
   getExpandedRowModel: () => MRT_RowModel<TData>;
   getFlatHeaders: () => MRT_Header<TData>[];
+  getHeaderGroups: () => MRT_HeaderGroup<TData>[];
   getLeftLeafColumns: () => MRT_Column<TData>[];
   getPaginationRowModel: () => MRT_RowModel<TData>;
   getPreFilteredRowModel: () => MRT_RowModel<TData>;
@@ -220,10 +222,7 @@ export type MRT_TableInstance<TData extends Record<string, any>> = Omit<
   getRowModel: () => MRT_RowModel<TData>;
   getSelectedRowModel: () => MRT_RowModel<TData>;
   getState: () => MRT_TableState<TData>;
-  options: MRT_TableOptions<TData> & {
-    icons: MRT_Icons;
-    localization: MRT_Localization;
-  };
+  options: MRT_DefinedTableOptions<TData>;
   refs: {
     bottomToolbarRef: MutableRefObject<HTMLDivElement>;
     editInputRefs: MutableRefObject<Record<string, HTMLInputElement>>;
@@ -253,6 +252,12 @@ export type MRT_TableInstance<TData extends Record<string, any>> = Omit<
   setShowGlobalFilter: Dispatch<SetStateAction<boolean>>;
   setShowToolbarDropZone: Dispatch<SetStateAction<boolean>>;
 };
+
+export type MRT_DefinedTableOptions<TData extends Record<string, any>> =
+  MRT_TableOptions<TData> & {
+    localization: MRT_Localization;
+    icons: MRT_Icons;
+  };
 
 export type MRT_TableState<TData extends Record<string, any>> = TableState & {
   columnFilterFns: MRT_FilterFnsState;

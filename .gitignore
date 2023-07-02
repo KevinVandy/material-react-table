@@ -12,7 +12,7 @@ coverage
 .next/
 out/
 build
-locales
+packages/material-react-table/locales
 
 # mrt
 *.log

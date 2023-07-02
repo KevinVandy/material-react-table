@@ -245,6 +245,31 @@ export const getTotalRight = <TData extends Record<string, any>>(
     .reduce((acc, col) => acc + col.getSize(), 0);
 };
 
+export const getCanRankRows = <TData extends Record<string, any>>(
+  table: MRT_TableInstance<TData>,
+) => {
+  const { options, getState } = table;
+  const {
+    manualExpanding,
+    manualFiltering,
+    manualGrouping,
+    manualSorting,
+    enableGlobalFilterRankedResults,
+  } = options;
+  const { globalFilterFn, expanded } = getState();
+
+  return (
+    !manualExpanding &&
+    !manualFiltering &&
+    !manualGrouping &&
+    !manualSorting &&
+    enableGlobalFilterRankedResults &&
+    globalFilterFn === 'fuzzy' &&
+    expanded !== true &&
+    !Object.values(expanded).some(Boolean)
+  );
+};
+
 export const getCommonCellStyles = <TData extends Record<string, any>>({
   column,
   header,
