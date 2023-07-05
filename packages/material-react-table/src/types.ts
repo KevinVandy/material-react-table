@@ -4,26 +4,63 @@ import {
   type ReactNode,
   type SetStateAction,
 } from 'react';
-import { type AlertProps } from '@mui/material/Alert';
-import { type ButtonProps } from '@mui/material/Button';
-import { type CheckboxProps } from '@mui/material/Checkbox';
-import { type ChipProps } from '@mui/material/Chip';
-import { type IconButtonProps } from '@mui/material/IconButton';
-import { type LinearProgressProps } from '@mui/material/LinearProgress';
-import { type PaperProps } from '@mui/material/Paper';
-import { type RadioProps } from '@mui/material/Radio';
-import { type SkeletonProps } from '@mui/material/Skeleton';
-import { type SliderProps } from '@mui/material';
-import { type TableBodyProps } from '@mui/material/TableBody';
-import { type TableCellProps } from '@mui/material/TableCell';
-import { type TableContainerProps } from '@mui/material/TableContainer';
-import { type TableFooterProps } from '@mui/material/TableFooter';
-import { type TableHeadProps } from '@mui/material/TableHead';
-import { type TablePaginationProps } from '@mui/material/TablePagination';
-import { type TableProps } from '@mui/material/Table';
-import { type TableRowProps } from '@mui/material/TableRow';
-import { type TextFieldProps } from '@mui/material/TextField';
+import {
+  type AlertProps,
+  type ButtonProps,
+  type CheckboxProps,
+  type TagProps,
+  type IconButtonProps,
+  type ProgressProps,
+  type PopoverProps,
+  type TooltipProps,
+  type RadioProps,
+  type RadioGroupProps,
+  type SkeletonProps,
+  type SliderProps,
+  type SliderTrackProps,
+  type SliderThumbProps,
+  type SliderMarkProps,
+  type TableProps,
+  type TableHeadProps,
+  type TableBodyProps,
+  type TableFooterProps,
+  type TableRowProps,
+  type TableColumnHeaderProps,
+  type TableCellProps,
+  type TableCaptionProps,
+  type TableContainerProps,
+  type TextProps,
+  type FlexProps,
+  type NumberInputProps,
+  type NumberInputFieldProps,
+  type NumberInputStepperProps,
+  type NumberIncrementStepperProps,
+  type NumberDecrementStepperProps,
+  type SelectProps,
+} from '@chakra-ui/react';
 import { type ToolbarProps } from '@mui/material/Toolbar';
+// Chakra-ui types
+// import { type AlertProps } from '@mui/material/Alert';
+// import { type ButtonProps } from '@mui/material/Button';
+// import { type CheckboxProps } from '@mui/material/Checkbox';
+// import { type ChipProps } from '@mui/material/Chip';
+// import { type IconButtonProps } from '@mui/material/IconButton';
+// import { type LinearProgressProps } from '@mui/material/LinearProgress';
+// import { type PaperProps } from '@mui/material/Paper';
+// import { type RadioProps } from '@mui/material/Radio';
+// import { type SkeletonProps } from '@mui/material/Skeleton';
+// import { type SliderProps } from '@mui/material';
+// import { type TableBodyProps } from '@mui/material/TableBody';
+// import { type TableCellProps } from '@mui/material/TableCell';
+// import { type TableContainerProps } from '@mui/material/TableContainer';
+// import { type TableFooterProps } from '@mui/material/TableFooter';
+// import { type TableHeadProps } from '@mui/material/TableHead';
+// import { type TablePaginationProps } from '@mui/material/TablePagination';
+// import { type TableProps } from '@mui/material/Table';
+// import { type TableRowProps } from '@mui/material/TableRow';
+// import { type TextFieldProps } from '@mui/material/TextField';
+// import { type ToolbarProps } from '@mui/material/Toolbar';
+// ==========================
 import {
   type AggregationFn,
   type Cell,
@@ -418,13 +455,13 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
         table: MRT_TableInstance<TData>;
       }) => ButtonProps);
   muiEditTextFieldProps?:
-    | TextFieldProps
+    | TextProps
     | ((props: {
         cell: MRT_Cell<TData>;
         column: MRT_Column<TData>;
         row: MRT_Row<TData>;
         table: MRT_TableInstance<TData>;
-      }) => TextFieldProps);
+      }) => TextProps);
   muiTableBodyCellProps?:
     | TableCellProps
     | ((props: {
@@ -458,18 +495,18 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
         table: MRT_TableInstance<TData>;
       }) => CheckboxProps);
   muiFilterTextFieldProps?:
-    | TextFieldProps
+    | TextProps
     | ((props: {
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
         rangeFilterIndex?: number;
-      }) => TextFieldProps);
+      }) => TextProps);
   muiFilterSliderProps?:
     | SliderProps
     | ((props: {
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
-      }) => TextFieldProps);
+      }) => TextProps);
   muiTableHeadCellProps?:
     | TableCellProps
     | ((props: {
@@ -713,14 +750,14 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
         row: MRT_Row<TData>;
       }) => IconButtonProps);
   muiLinearProgressProps?:
-    | LinearProgressProps
+    | ProgressProps
     | ((props: {
         isTopToolbar: boolean;
         table: MRT_TableInstance<TData>;
-      }) => LinearProgressProps);
+      }) => ProgressProps);
   muiSearchTextFieldProps?:
-    | TextFieldProps
-    | ((props: { table: MRT_TableInstance<TData> }) => TextFieldProps);
+    | TextProps
+    | ((props: { table: MRT_TableInstance<TData> }) => TextProps);
   muiSelectAllCheckboxProps?:
     | CheckboxProps
     | ((props: { table: MRT_TableInstance<TData> }) => CheckboxProps);
@@ -739,13 +776,13 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
         table: MRT_TableInstance<TData>;
       }) => ButtonProps);
   muiEditTextFieldProps?:
-    | TextFieldProps
+    | TextProps
     | ((props: {
         cell: MRT_Cell<TData>;
         column: MRT_Column<TData>;
         row: MRT_Row<TData>;
         table: MRT_TableInstance<TData>;
-      }) => TextFieldProps);
+      }) => TextProps);
   muiTableBodyCellProps?:
     | TableCellProps
     | ((props: {
@@ -822,18 +859,18 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
         table: MRT_TableInstance<TData>;
       }) => CheckboxProps);
   muiFilterTextFieldProps?:
-    | TextFieldProps
+    | TextProps
     | ((props: {
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
         rangeFilterIndex?: number;
-      }) => TextFieldProps);
+      }) => TextProps);
   muiFilterSliderProps?:
     | SliderProps
     | ((props: {
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
-      }) => TextFieldProps);
+      }) => TextProps);
   muiTableHeadCellProps?:
     | TableCellProps
     | ((props: {

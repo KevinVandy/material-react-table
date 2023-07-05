@@ -34,21 +34,21 @@ export const MRT_TableFooter = <TData extends Record<string, any>>({
   return (
     <TableFooter
       {...tableFooterProps}
-      sx={(theme) => ({
-        bottom: stickFooter ? 0 : undefined,
-        display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
-        opacity: stickFooter ? 0.97 : undefined,
-        outline: stickFooter
-          ? theme.palette.mode === 'light'
-            ? `1px solid ${theme.palette.grey[300]}`
-            : `1px solid ${theme.palette.grey[700]}`
-          : undefined,
-        position: stickFooter ? 'sticky' : undefined,
-        zIndex: stickFooter ? 1 : undefined,
-        ...(tableFooterProps?.sx instanceof Function
-          ? tableFooterProps?.sx(theme)
-          : (tableFooterProps?.sx as any)),
-      })}
+      // sx={(theme) => ({
+      //   bottom: stickFooter ? 0 : undefined,
+      //   display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
+      //   opacity: stickFooter ? 0.97 : undefined,
+      //   outline: stickFooter
+      //     ? theme.palette.mode === 'light'
+      //       ? `1px solid ${theme.palette.grey[300]}`
+      //       : `1px solid ${theme.palette.grey[700]}`
+      //     : undefined,
+      //   position: stickFooter ? 'sticky' : undefined,
+      //   zIndex: stickFooter ? 1 : undefined,
+      //   ...(tableFooterProps?.sx instanceof Function
+      //     ? tableFooterProps?.sx(theme)
+      //     : (tableFooterProps?.sx as any)),
+      // })}
     >
       {getFooterGroups().map((footerGroup) => (
         <MRT_TableFooterRow

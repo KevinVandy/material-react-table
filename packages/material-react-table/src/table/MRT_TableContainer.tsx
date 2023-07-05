@@ -44,25 +44,25 @@ export const MRT_TableContainer = <TData extends Record<string, any>>({
   return (
     <TableContainer
       {...tableContainerProps}
-      ref={(node: HTMLDivElement) => {
-        if (node) {
-          tableContainerRef.current = node;
-          if (tableContainerProps?.ref) {
-            //@ts-ignore
-            tableContainerProps.ref.current = node;
-          }
-        }
-      }}
-      sx={(theme) => ({
-        maxWidth: '100%',
-        maxHeight: enableStickyHeader
-          ? `clamp(350px, calc(100vh - ${totalToolbarHeight}px), 9999px)`
-          : undefined,
-        overflow: 'auto',
-        ...(tableContainerProps?.sx instanceof Function
-          ? tableContainerProps.sx(theme)
-          : (tableContainerProps?.sx as any)),
-      })}
+      // ref={(node: HTMLDivElement) => {
+      //   if (node) {
+      //     tableContainerRef.current = node;
+      //     if (tableContainerProps?.ref) {
+      //       //@ts-ignore
+      //       tableContainerProps.ref.current = node;
+      //     }
+      //   }
+      // }}
+      // sx={(theme) => ({
+      //   maxWidth: '100%',
+      //   maxHeight: enableStickyHeader
+      //     ? `clamp(350px, calc(100vh - ${totalToolbarHeight}px), 9999px)`
+      //     : undefined,
+      //   overflow: 'auto',
+      //   ...(tableContainerProps?.sx instanceof Function
+      //     ? tableContainerProps.sx(theme)
+      //     : (tableContainerProps?.sx as any)),
+      // })}
       style={{
         maxHeight: isFullScreen
           ? `calc(100vh - ${totalToolbarHeight}px)`
