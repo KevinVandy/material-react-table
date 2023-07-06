@@ -280,6 +280,12 @@ export type MRT_TableState<TData extends Record<string, any> = {}> = Prettify<
     showProgressBars: boolean;
     showSkeletons: boolean;
     showToolbarDropZone: boolean;
+    ColumnsHeader: ReactNode
+    | ((props: {
+        column: MRT_Column<TData>;
+        header: MRT_Header<TData>;
+        table: MRT_TableInstance<TData>;
+      }) => ReactNode);
   }
 >;
 

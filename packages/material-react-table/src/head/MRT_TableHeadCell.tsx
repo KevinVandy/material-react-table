@@ -39,6 +39,7 @@ export const MRT_TableHeadCell = ({ header, table }: Props) => {
     grouping,
     hoveredColumn,
     showColumnFilters,
+    ColumnsHeader
   } = getState();
   const { column } = header;
   const { columnDef } = column;
@@ -109,6 +110,9 @@ export const MRT_TableHeadCell = ({ header, table }: Props) => {
     }
   };
 
+
+  const headerFromTable = ColumnsHeader instanceof Function && ColumnsHeader({column, header, table})
+
   const headerElement =
     columnDef?.Header instanceof Function
       ? columnDef?.Header?.({
@@ -116,7 +120,7 @@ export const MRT_TableHeadCell = ({ header, table }: Props) => {
           header,
           table,
         })
-      : columnDef?.Header ?? (columnDef.header as ReactNode);
+      : columnDef?.Header ?? headerFromTable ?? (columnDef.header as ReactNode);
 
   return (
     <TableCell
