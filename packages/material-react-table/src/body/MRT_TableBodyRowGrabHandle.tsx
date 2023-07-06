@@ -2,22 +2,26 @@ import { type DragEvent, type RefObject } from 'react';
 import { type MRT_Cell, type MRT_TableInstance } from '../types';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 
-interface Props {
-  cell: MRT_Cell;
+interface Props<TData extends Record<string, any>> {
+  cell: MRT_Cell<TData>;
   rowRef: RefObject<HTMLTableRowElement>;
-  table: MRT_TableInstance;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TableBodyRowGrabHandle = ({ cell, rowRef, table }: Props) => {
+export const MRT_TableBodyRowGrabHandle = <TData extends Record<string, any>>({
+  cell,
+  rowRef,
+  table,
+}: Props<TData>) => {
   const {
-    options: { muiTableBodyRowDragHandleProps },
+    options: { muiRowDragHandleProps },
   } = table;
   const { row } = cell;
 
   const iconButtonProps =
-    muiTableBodyRowDragHandleProps instanceof Function
-      ? muiTableBodyRowDragHandleProps({ row, table })
-      : muiTableBodyRowDragHandleProps;
+    muiRowDragHandleProps instanceof Function
+      ? muiRowDragHandleProps({ row, table })
+      : muiRowDragHandleProps;
 
   const handleDragStart = (event: DragEvent<HTMLButtonElement>) => {
     iconButtonProps?.onDragStart?.(event);

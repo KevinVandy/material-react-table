@@ -3,19 +3,19 @@ import { MRT_TableFooterRow } from './MRT_TableFooterRow';
 import { type VirtualItem } from '@tanstack/react-virtual';
 import { type MRT_TableInstance } from '../types';
 
-interface Props {
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any>> {
+  table: MRT_TableInstance<TData>;
   virtualColumns?: VirtualItem[];
   virtualPaddingLeft?: number;
   virtualPaddingRight?: number;
 }
 
-export const MRT_TableFooter = ({
+export const MRT_TableFooter = <TData extends Record<string, any>>({
   table,
   virtualColumns,
   virtualPaddingLeft,
   virtualPaddingRight,
-}: Props) => {
+}: Props<TData>) => {
   const {
     getFooterGroups,
     getState,

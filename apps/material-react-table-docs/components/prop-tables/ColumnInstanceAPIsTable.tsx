@@ -13,10 +13,10 @@ import {
 } from './columnInstanceAPIs';
 
 interface Props {
-  onlyProps?: Set<keyof MRT_Column>;
+  onlyOptions?: Set<keyof MRT_Column<ColumnInstanceAPI>>;
 }
 
-const ColumnInstanceAPIsTable = ({ onlyProps }: Props) => {
+const ColumnInstanceAPIsTable = ({ onlyOptions }: Props) => {
   const isDesktop = useMediaQuery('(min-width: 1200px)');
 
   const columns = useMemo<MRT_ColumnDef<ColumnInstanceAPI>[]>(
@@ -25,7 +25,7 @@ const ColumnInstanceAPIsTable = ({ onlyProps }: Props) => {
         accessorKey: 'columnInstanceAPI',
         enableClickToCopy: true,
         header: 'State Option',
-        muiTableBodyCellCopyButtonProps: ({ cell }) => ({
+        muiCopyButtonProps: ({ cell }) => ({
           className: 'column-instance-api',
           id: `${cell.getValue<string>()}-column-instance-api`,
         }),
@@ -90,13 +90,13 @@ const ColumnInstanceAPIsTable = ({ onlyProps }: Props) => {
   }, [isDesktop]);
 
   const data = useMemo(() => {
-    if (onlyProps) {
+    if (onlyOptions) {
       return columnInstanceAPIs.filter(({ columnInstanceAPI }) =>
-        onlyProps.has(columnInstanceAPI),
+        onlyOptions.has(columnInstanceAPI),
       );
     }
     return columnInstanceAPIs;
-  }, [onlyProps]);
+  }, [onlyOptions]);
 
   return (
     <MaterialReactTable
@@ -110,13 +110,13 @@ const ColumnInstanceAPIsTable = ({ onlyProps }: Props) => {
           size: 10,
         },
       }}
-      enableColumnActions={!onlyProps}
+      enableColumnActions={!onlyOptions}
       enableColumnFilterModes
       enablePagination={false}
       enablePinning
       enableRowNumbers
       enableBottomToolbar={false}
-      enableTopToolbar={!onlyProps}
+      enableTopToolbar={!onlyOptions}
       initialState={{
         columnVisibility: { description: false },
         density: 'compact',
@@ -130,7 +130,7 @@ const ColumnInstanceAPIsTable = ({ onlyProps }: Props) => {
       }}
       muiTablePaperProps={{
         sx: { mb: '1.5rem' },
-        id: onlyProps
+        id: onlyOptions
           ? 'relevant-column-instance-apis-table'
           : 'column-instance-apis-table',
       }}

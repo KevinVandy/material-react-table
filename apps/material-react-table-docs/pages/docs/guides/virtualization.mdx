@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import EnableRowExample from '../../../examples/enable-row-virtualization';
 import EnableColumnExample from '../../../examples/enable-column-virtualization';
 
@@ -21,15 +21,15 @@ Virtualization is useful when you have a lot of data you want to display client-
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'columnVirtualizerInstanceRef',
-      'columnVirtualizerProps',
+      'columnVirtualizerOptions',
       'enableColumnVirtualization',
       'enableRowVirtualization',
       'rowVirtualizerInstanceRef',
-      'rowVirtualizerProps',
+      'rowVirtualizerOptions',
     ])
   }
 />
@@ -97,7 +97,7 @@ The `enableStickyHeader` prop is automatically set to `true` when row virtualiza
 
 ### Customize Virtualizer Props
 
-You can adjust some of the virtualizer props that are used internally with the `rowVirtualizerProps` and `columnVirtualizerProps` props. The most useful virtualizer props are the `overscan` and `estimateSize` options. You may want to adjust these values if you have unusual row heights or column widths that are causing the default scrolling to behave strangely.
+You can adjust some of the virtualizer props that are used internally with the `rowVirtualizerOptions` and `columnVirtualizerOptions` props. The most useful virtualizer props are the `overscan` and `estimateSize` options. You may want to adjust these values if you have unusual row heights or column widths that are causing the default scrolling to behave strangely.
 
 ```jsx
 <MaterialReactTable
@@ -106,11 +106,11 @@ You can adjust some of the virtualizer props that are used internally with the `
   enableColumnVirtualization
   enablePagination={false}
   enableRowVirtualization
-  columnVirtualizerProps={{
+  columnVirtualizerOptions={{
     overscan: 5, //adjust the number of columns that are rendered to the left and right of the visible area of the table
     estimateSize: () => 400, //if your columns are wider or , try tweaking this value to make scrollbar size more accurate
   }}
-  rowVirtualizerProps={{
+  rowVirtualizerOptions={{
     overscan: 10, //adjust the number or rows that are rendered above and below the visible area of the table
     estimateSize: () => 100, //if your rows are taller than normal, try tweaking this value to make scrollbar size more accurate
   }}

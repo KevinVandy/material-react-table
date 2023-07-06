@@ -16,7 +16,7 @@ import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 import { reorderColumn } from '../column.utils';
 import { type MRT_Column, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any> = {}> {
+interface Props<TData extends Record<string, any>> {
   allColumns: MRT_Column<TData>[];
   column: MRT_Column<TData>;
   hoveredColumn: MRT_Column<TData> | null;
@@ -25,7 +25,7 @@ interface Props<TData extends Record<string, any> = {}> {
 }
 
 export const MRT_ShowHideColumnsMenuItems = <
-  TData extends Record<string, any> = {},
+  TData extends Record<string, any>,
 >({
   allColumns,
   hoveredColumn,

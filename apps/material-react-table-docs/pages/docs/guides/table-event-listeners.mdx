@@ -53,7 +53,7 @@ Here are a few common examples of some useful event listeners you might want to 
 ```jsx
 //add to every edit text field
 <MaterialReactTable
-  muiTableBodyCellEditTextFieldProps={({ cell }) => ({
+  muiEditTextFieldProps={({ cell }) => ({
     onBlur: (event) => {
       console.info(event, cell.id);
     },
@@ -67,7 +67,7 @@ const columns = [
   {
     accessorKey: 'name',
     header: 'Name',
-    muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+    muiEditTextFieldProps: ({ cell }) => ({
       onBlur: (event) => {
         console.info(event);
       },
@@ -83,7 +83,7 @@ const columns = [
 ```jsx
 //add to every edit text field
 <MaterialReactTable
-  muiTableBodyCellEditTextFieldProps={({ cell }) => ({
+  muiEditTextFieldProps={({ cell }) => ({
     onChange: (event) => {
       console.info(event, cell.id);
     },
@@ -97,7 +97,7 @@ const columns = [
   {
     accessorKey: 'name',
     header: 'Name',
-    muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+    muiEditTextFieldProps: ({ cell }) => ({
       onChange: (event) => {
         console.info(event);
       },

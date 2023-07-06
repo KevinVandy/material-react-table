@@ -10,21 +10,21 @@ import { Memo_MRT_TableBodyRow, MRT_TableBodyRow } from './MRT_TableBodyRow';
 import { rankGlobalFuzzy } from '../sortingFns';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
 
-interface Props {
+interface Props<TData extends Record<string, any>> {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
-  table: MRT_TableInstance;
+  table: MRT_TableInstance<TData>;
   virtualColumns?: VirtualItem[];
   virtualPaddingLeft?: number;
   virtualPaddingRight?: number;
 }
 
-export const MRT_TableBody = ({
+export const MRT_TableBody = <TData extends Record<string, any>>({
   columnVirtualizer,
   table,
   virtualColumns,
   virtualPaddingLeft,
   virtualPaddingRight,
-}: Props) => {
+}: Props<TData>) => {
   const {
     getRowModel,
     getPrePaginationRowModel,
@@ -44,9 +44,7 @@ export const MRT_TableBody = ({
       muiTableBodyProps,
       renderEmptyRowsFallback,
       rowVirtualizerInstanceRef,
-      rowVirtualizerProps,
-      virtualizerInstanceRef,
-      virtualizerProps,
+      rowVirtualizerOptions,
     },
     refs: { tableContainerRef, tablePaperRef },
   } = table;
@@ -65,15 +63,10 @@ export const MRT_TableBody = ({
       ? muiTableBodyProps({ table })
       : muiTableBodyProps;
 
-  const vProps_old =
-    virtualizerProps instanceof Function
-      ? virtualizerProps({ table })
-      : virtualizerProps;
-
   const vProps =
-    rowVirtualizerProps instanceof Function
-      ? rowVirtualizerProps({ table })
-      : rowVirtualizerProps;
+    rowVirtualizerOptions instanceof Function
+      ? rowVirtualizerOptions({ table })
+      : rowVirtualizerOptions;
 
   const shouldRankResults = useMemo(
     () =>
@@ -130,18 +123,12 @@ export const MRT_TableBody = ({
             ? (element) => element?.getBoundingClientRect().height
             : undefined,
         overscan: 4,
-        ...vProps_old,
         ...vProps,
       })
     : undefined;
 
   if (rowVirtualizerInstanceRef && rowVirtualizer) {
     rowVirtualizerInstanceRef.current = rowVirtualizer;
-  }
-
-  //deprecated
-  if (virtualizerInstanceRef && rowVirtualizer) {
-    virtualizerInstanceRef.current = rowVirtualizer;
   }
 
   const virtualRows = rowVirtualizer
@@ -197,7 +184,7 @@ export const MRT_TableBody = ({
             {(virtualRows ?? rows).map((rowOrVirtualRow, rowIndex) => {
               const row = rowVirtualizer
                 ? rows[rowOrVirtualRow.index]
-                : (rowOrVirtualRow as MRT_Row);
+                : (rowOrVirtualRow as MRT_Row<TData>);
               const props = {
                 columnVirtualizer,
                 measureElement: rowVirtualizer?.measureElement,
@@ -227,4 +214,4 @@ export const MRT_TableBody = ({
 export const Memo_MRT_TableBody = memo(
   MRT_TableBody,
   (prev, next) => prev.table.options.data === next.table.options.data,
-);
+) as typeof MRT_TableBody;

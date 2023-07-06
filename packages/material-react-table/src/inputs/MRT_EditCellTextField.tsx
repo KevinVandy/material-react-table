@@ -9,20 +9,20 @@ import MenuItem from '@mui/material/MenuItem';
 import { type TextFieldProps } from '@mui/material/TextField';
 import { type MRT_Cell, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any> = {}> {
+interface Props<TData extends Record<string, any>> {
   cell: MRT_Cell<TData>;
   table: MRT_TableInstance<TData>;
   showLabel?: boolean;
 }
 
-export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
+export const MRT_EditCellTextField = <TData extends Record<string, any>>({
   cell,
   showLabel,
   table,
 }: Props<TData>) => {
   const {
     getState,
-    options: { muiTableBodyCellEditTextFieldProps },
+    options: { muiEditTextFieldProps },
     refs: { editInputRefs },
     setEditingCell,
     setEditingRow,
@@ -34,19 +34,19 @@ export const MRT_EditCellTextField = <TData extends Record<string, any> = {}>({
   const [value, setValue] = useState(() => cell.getValue<string>());
 
   const mTableBodyCellEditTextFieldProps =
-    muiTableBodyCellEditTextFieldProps instanceof Function
-      ? muiTableBodyCellEditTextFieldProps({ cell, column, row, table })
-      : muiTableBodyCellEditTextFieldProps;
+    muiEditTextFieldProps instanceof Function
+      ? muiEditTextFieldProps({ cell, column, row, table })
+      : muiEditTextFieldProps;
 
   const mcTableBodyCellEditTextFieldProps =
-    columnDef.muiTableBodyCellEditTextFieldProps instanceof Function
-      ? columnDef.muiTableBodyCellEditTextFieldProps({
+    columnDef.muiEditTextFieldProps instanceof Function
+      ? columnDef.muiEditTextFieldProps({
           cell,
           column,
           row,
           table,
         })
-      : columnDef.muiTableBodyCellEditTextFieldProps;
+      : columnDef.muiEditTextFieldProps;
 
   const textFieldProps: TextFieldProps = {
     ...mTableBodyCellEditTextFieldProps,

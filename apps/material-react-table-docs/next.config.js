@@ -49,6 +49,11 @@ const nextConfig = {
         destination: '/docs/guides/virtualization',
         permanent: true,
       },
+      {
+        source: '/docs/api/props',
+        destination: '/docs/api/table-options',
+        permanent: true,
+      },
     ];
   },
 };

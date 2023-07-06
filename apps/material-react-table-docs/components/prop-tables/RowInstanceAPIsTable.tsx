@@ -10,10 +10,10 @@ import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
 import { type RowInstanceAPI, rowInstanceAPIs } from './rowInstanceAPIs';
 
 interface Props {
-  onlyProps?: Set<keyof MRT_Row>;
+  onlyOptions?: Set<keyof MRT_Row<RowInstanceAPI>>;
 }
 
-const RowInstanceAPIsTable = ({ onlyProps }: Props) => {
+const RowInstanceAPIsTable = ({ onlyOptions }: Props) => {
   const isDesktop = useMediaQuery('(min-width: 1200px)');
 
   const columns = useMemo<MRT_ColumnDef<RowInstanceAPI>[]>(
@@ -22,7 +22,7 @@ const RowInstanceAPIsTable = ({ onlyProps }: Props) => {
         accessorKey: 'rowInstanceAPI',
         enableClickToCopy: true,
         header: 'State Option',
-        muiTableBodyCellCopyButtonProps: ({ cell }) => ({
+        muiCopyButtonProps: ({ cell }) => ({
           className: 'row-instance-api',
           id: `${cell.getValue<string>()}-row-instance-api`,
         }),
@@ -87,13 +87,13 @@ const RowInstanceAPIsTable = ({ onlyProps }: Props) => {
   }, [isDesktop]);
 
   const data = useMemo(() => {
-    if (onlyProps) {
+    if (onlyOptions) {
       return rowInstanceAPIs.filter(({ rowInstanceAPI }) =>
-        onlyProps.has(rowInstanceAPI),
+        onlyOptions.has(rowInstanceAPI),
       );
     }
     return rowInstanceAPIs;
-  }, [onlyProps]);
+  }, [onlyOptions]);
 
   return (
     <MaterialReactTable
@@ -107,13 +107,13 @@ const RowInstanceAPIsTable = ({ onlyProps }: Props) => {
           size: 10,
         },
       }}
-      enableColumnActions={!onlyProps}
+      enableColumnActions={!onlyOptions}
       enableColumnFilterModes
       enablePagination={false}
       enablePinning
       enableRowNumbers
       enableBottomToolbar={false}
-      enableTopToolbar={!onlyProps}
+      enableTopToolbar={!onlyOptions}
       initialState={{
         columnVisibility: { description: false },
         density: 'compact',
@@ -127,7 +127,7 @@ const RowInstanceAPIsTable = ({ onlyProps }: Props) => {
       }}
       muiTablePaperProps={{
         sx: { mb: '1.5rem' },
-        id: onlyProps
+        id: onlyOptions
           ? 'relevant-row-instance-apis-table'
           : 'row-instance-apis-table',
       }}

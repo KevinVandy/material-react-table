@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import Example from '../../../examples/disable-column-hiding';
@@ -18,17 +18,17 @@ The column hiding feature is enabled by default and allows the user to hide data
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={new Set(['enableHiding', 'onColumnVisibilityChange'])}
+<TableOptionsTable
+  onlyOptions={new Set(['enableHiding', 'onColumnVisibilityChange'])}
 />
 
 ### Relevant Column Options
 
-<ColumnOptionsTable onlyProps={new Set(['enableHiding'])} />
+<ColumnOptionsTable onlyOptions={new Set(['enableHiding'])} />
 
 ### Relevant State
 
-<StateOptionsTable onlyProps={new Set(['columnVisibility'])} />
+<StateOptionsTable onlyOptions={new Set(['columnVisibility'])} />
 
 ### Hide Some Columns by Default
 

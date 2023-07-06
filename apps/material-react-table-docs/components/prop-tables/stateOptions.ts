@@ -1,16 +1,16 @@
 import { type MRT_TableState } from 'material-react-table';
 
-export type StateRow = {
+export type StateOption = {
   defaultValue?: string;
   description?: string;
   link?: string;
   linkText?: string;
   source?: 'MRT' | 'TanStack Table' | 'Material UI' | '';
-  stateOption: keyof MRT_TableState;
+  stateOption: keyof MRT_TableState<StateOption>;
   type?: string;
 };
 
-export const stateOptions: StateRow[] = [
+export const stateOptions: StateOption[] = [
   {
     defaultValue: '{}',
     description:

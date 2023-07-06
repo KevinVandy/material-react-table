@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import {
   MaterialReactTable,
-  type MaterialReactTableProps,
+  type MRT_TableOptions,
   type MRT_ColumnDef,
 } from 'material-react-table';
 import {
@@ -12,23 +12,23 @@ import {
   useTheme,
 } from '@mui/material';
 import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
-import { type PropRow, rootProps } from './rootProps';
+import { type TableOption, tableOptions } from './tableOptions';
 
 interface Props {
-  onlyProps?: Set<keyof MaterialReactTableProps>;
+  onlyOptions?: Set<keyof MRT_TableOptions<TableOption>>;
 }
 
-const RootPropTable = ({ onlyProps }: Props) => {
+const TableOptionsTable = ({ onlyOptions }: Props) => {
   const theme = useTheme();
   const isDesktop = useMediaQuery('(min-width: 1200px)');
 
-  const columns = useMemo<MRT_ColumnDef<PropRow>[]>(
+  const columns = useMemo<MRT_ColumnDef<TableOption>[]>(
     () => [
       {
         enableClickToCopy: true,
         header: 'Prop Name',
-        accessorKey: 'propName',
-        muiTableBodyCellCopyButtonProps: ({ cell }) => ({
+        accessorKey: 'tableOption',
+        muiCopyButtonProps: ({ cell }) => ({
           className: 'prop',
           id: `${cell.getValue<string>()}-prop`,
         }),
@@ -130,7 +130,7 @@ const RootPropTable = ({ onlyProps }: Props) => {
     if (typeof window !== 'undefined') {
       if (isDesktop) {
         setColumnPinning({
-          left: ['mrt-row-expand', 'mrt-row-numbers', 'propName'],
+          left: ['mrt-row-expand', 'mrt-row-numbers', 'tableOption'],
           right: ['link'],
         });
       } else {
@@ -140,11 +140,13 @@ const RootPropTable = ({ onlyProps }: Props) => {
   }, [isDesktop]);
 
   const data = useMemo(() => {
-    if (onlyProps) {
-      return rootProps.filter(({ propName }) => onlyProps.has(propName));
+    if (onlyOptions) {
+      return tableOptions.filter(({ tableOption }) =>
+        onlyOptions.has(tableOption),
+      );
     }
-    return rootProps;
-  }, [onlyProps]);
+    return tableOptions;
+  }, [onlyOptions]);
 
   return (
     <MaterialReactTable
@@ -158,20 +160,20 @@ const RootPropTable = ({ onlyProps }: Props) => {
           size: 10,
         },
       }}
-      enableColumnActions={!onlyProps}
+      enableColumnActions={!onlyOptions}
       enableColumnFilterModes
       enablePagination={false}
       enablePinning
       enableRowNumbers
       enableBottomToolbar={false}
-      enableTopToolbar={!onlyProps}
+      enableTopToolbar={!onlyOptions}
       initialState={{
         columnVisibility: { required: false, description: false },
         density: 'compact',
         showGlobalFilter: true,
         sorting: [
           { id: 'required', desc: true },
-          { id: 'propName', desc: false },
+          { id: 'tableOption', desc: false },
         ],
       }}
       muiSearchTextFieldProps={{
@@ -181,7 +183,7 @@ const RootPropTable = ({ onlyProps }: Props) => {
       }}
       muiTablePaperProps={{
         sx: { mb: '1.5rem' },
-        id: onlyProps ? 'relevant-props-table' : 'props-table',
+        id: onlyOptions ? 'relevant-props-table' : 'props-table',
       }}
       positionGlobalFilter="left"
       renderDetailPanel={({ row }) => (
@@ -198,4 +200,4 @@ const RootPropTable = ({ onlyProps }: Props) => {
   );
 };
 
-export default RootPropTable;
+export default TableOptionsTable;

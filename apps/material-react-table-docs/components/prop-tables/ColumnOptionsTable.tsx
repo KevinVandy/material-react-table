@@ -11,10 +11,10 @@ import { SampleCodeSnippet } from '../mdx/SampleCodeSnippet';
 import { type ColumnOption, columnOptions } from './columnOptions';
 
 interface Props {
-  onlyProps?: Set<keyof MRT_ColumnDef>;
+  onlyOptions?: Set<keyof MRT_ColumnDef<ColumnOption>>;
 }
 
-const ColumnOptionsTable = ({ onlyProps }: Props) => {
+const ColumnOptionsTable = ({ onlyOptions }: Props) => {
   const theme = useTheme();
   const isDesktop = useMediaQuery('(min-width: 1200px)');
 
@@ -24,7 +24,7 @@ const ColumnOptionsTable = ({ onlyProps }: Props) => {
         accessorKey: 'columnOption',
         enableClickToCopy: true,
         header: 'Column Option',
-        muiTableBodyCellCopyButtonProps: ({ cell }) => ({
+        muiCopyButtonProps: ({ cell }) => ({
           className: 'column-option',
           id: `${cell.getValue<string>()}-column-option`,
         }),
@@ -127,13 +127,13 @@ const ColumnOptionsTable = ({ onlyProps }: Props) => {
   }, [isDesktop]);
 
   const data = useMemo(() => {
-    if (onlyProps) {
+    if (onlyOptions) {
       return columnOptions.filter(({ columnOption }) =>
-        onlyProps.has(columnOption),
+        onlyOptions.has(columnOption),
       );
     }
     return columnOptions;
-  }, [onlyProps]);
+  }, [onlyOptions]);
 
   return (
     <MaterialReactTable
@@ -147,13 +147,13 @@ const ColumnOptionsTable = ({ onlyProps }: Props) => {
           size: 10,
         },
       }}
-      enableColumnActions={!onlyProps}
+      enableColumnActions={!onlyOptions}
       enableColumnFilterModes
       enablePagination={false}
       enablePinning
       enableRowNumbers
       enableBottomToolbar={false}
-      enableTopToolbar={!onlyProps}
+      enableTopToolbar={!onlyOptions}
       initialState={{
         columnVisibility: { required: false, description: false },
         density: 'compact',
@@ -170,7 +170,7 @@ const ColumnOptionsTable = ({ onlyProps }: Props) => {
       }}
       muiTablePaperProps={{
         sx: { mb: '1.5rem' },
-        id: onlyProps
+        id: onlyOptions
           ? 'relevant-column-options-table'
           : 'column-options-table',
       }}

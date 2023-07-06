@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import RemoteExample from '../../../examples/remote';
 
@@ -17,8 +17,8 @@ Client-side pagination is enabled by default in Material React Table. There are 
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'autoResetPagination',
       'enablePagination',
@@ -36,7 +36,7 @@ Client-side pagination is enabled by default in Material React Table. There are 
 
 ### Relevant State Options
 
-<StateOptionsTable onlyProps={new Set(['pagination'])} />
+<StateOptionsTable onlyOptions={new Set(['pagination'])} />
 
 ### Disable Pagination
 

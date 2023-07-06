@@ -20,6 +20,10 @@ export const routes: Array<RouteItem> = [
     label: 'Changelog & Roadmap',
   },
   {
+    href: '/migrating-to-v2',
+    label: 'Migrating to v2',
+  },
+  {
     label: 'Getting Started',
     href: '/docs/getting-started',
     items: [
@@ -42,8 +46,8 @@ export const routes: Array<RouteItem> = [
         href: '/docs/api#props-and-options',
         items: [
           {
-            href: '/docs/api/props',
-            label: 'Props',
+            href: '/docs/api/table-options',
+            label: 'Table Options (Props)',
           },
           {
             href: '/docs/api/column-options',

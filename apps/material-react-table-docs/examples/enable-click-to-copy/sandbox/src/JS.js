@@ -18,7 +18,7 @@ const Example = () => {
         accessorKey: 'email',
         header: 'Email',
         enableClickToCopy: true,
-        muiTableBodyCellCopyButtonProps: {
+        muiCopyButtonProps: {
           fullWidth: true,
           startIcon: <ContentCopy />,
           sx: { justifyContent: 'flex-start' },

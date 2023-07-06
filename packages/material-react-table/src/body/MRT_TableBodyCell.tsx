@@ -1,6 +1,6 @@
 import {
-  type DragEvent,
   memo,
+  type DragEvent,
   type MouseEvent,
   type RefObject,
   useEffect,
@@ -22,17 +22,17 @@ import {
 import { type VirtualItem } from '@tanstack/react-virtual';
 import { type MRT_Cell, type MRT_TableInstance } from '../types';
 
-interface Props {
-  cell: MRT_Cell;
+interface Props<TData extends Record<string, any>> {
+  cell: MRT_Cell<TData>;
   measureElement?: (element: HTMLTableCellElement) => void;
   numRows: number;
   rowIndex: number;
   rowRef: RefObject<HTMLTableRowElement>;
-  table: MRT_TableInstance;
+  table: MRT_TableInstance<TData>;
   virtualCell?: VirtualItem;
 }
 
-export const MRT_TableBodyCell = ({
+export const MRT_TableBodyCell = <TData extends Record<string, any>>({
   cell,
   measureElement,
   numRows,
@@ -40,7 +40,7 @@ export const MRT_TableBodyCell = ({
   rowRef,
   table,
   virtualCell,
-}: Props) => {
+}: Props<TData>) => {
   const theme = useTheme();
   const {
     getState,
@@ -53,7 +53,7 @@ export const MRT_TableBodyCell = ({
       enableRowNumbers,
       layoutMode,
       muiTableBodyCellProps,
-      muiTableBodyCellSkeletonProps,
+      muiSkeletonProps,
       rowNumberMode,
     },
     refs: { editInputRefs },
@@ -91,9 +91,9 @@ export const MRT_TableBodyCell = ({
   };
 
   const skeletonProps =
-    muiTableBodyCellSkeletonProps instanceof Function
-      ? muiTableBodyCellSkeletonProps({ cell, column, row, table })
-      : muiTableBodyCellSkeletonProps;
+    muiSkeletonProps instanceof Function
+      ? muiSkeletonProps({ cell, column, row, table })
+      : muiSkeletonProps;
 
   const [skeletonWidth, setSkeletonWidth] = useState(0);
   useEffect(
@@ -302,4 +302,4 @@ export const MRT_TableBodyCell = ({
 export const Memo_MRT_TableBodyCell = memo(
   MRT_TableBodyCell,
   (prev, next) => next.cell === prev.cell,
-);
+) as typeof MRT_TableBodyCell;

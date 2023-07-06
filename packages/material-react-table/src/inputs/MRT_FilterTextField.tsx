@@ -20,17 +20,17 @@ import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 import { type TextFieldProps } from '@mui/material/TextField';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
 
-interface Props {
-  header: MRT_Header;
+interface Props<TData extends Record<string, any>> {
+  header: MRT_Header<TData>;
   rangeFilterIndex?: number;
-  table: MRT_TableInstance;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_FilterTextField = ({
+export const MRT_FilterTextField = <TData extends Record<string, any>>({
   header,
   rangeFilterIndex,
   table,
-}: Props) => {
+}: Props<TData>) => {
   const {
     options: {
       enableColumnFilterModes,
@@ -38,7 +38,7 @@ export const MRT_FilterTextField = ({
       icons: { FilterListIcon, CloseIcon },
       localization,
       manualFiltering,
-      muiTableHeadCellFilterTextFieldProps,
+      muiFilterTextFieldProps,
     },
     refs: { filterInputRefs },
     setColumnFilterFns,
@@ -47,22 +47,22 @@ export const MRT_FilterTextField = ({
   const { columnDef } = column;
 
   const mTableHeadCellFilterTextFieldProps =
-    muiTableHeadCellFilterTextFieldProps instanceof Function
-      ? muiTableHeadCellFilterTextFieldProps({
+    muiFilterTextFieldProps instanceof Function
+      ? muiFilterTextFieldProps({
           column,
           table,
           rangeFilterIndex,
         })
-      : muiTableHeadCellFilterTextFieldProps;
+      : muiFilterTextFieldProps;
 
   const mcTableHeadCellFilterTextFieldProps =
-    columnDef.muiTableHeadCellFilterTextFieldProps instanceof Function
-      ? columnDef.muiTableHeadCellFilterTextFieldProps({
+    columnDef.muiFilterTextFieldProps instanceof Function
+      ? columnDef.muiFilterTextFieldProps({
           column,
           table,
           rangeFilterIndex,
         })
-      : columnDef.muiTableHeadCellFilterTextFieldProps;
+      : columnDef.muiFilterTextFieldProps;
 
   const textFieldProps = {
     ...mTableHeadCellFilterTextFieldProps,
@@ -109,9 +109,9 @@ export const MRT_FilterTextField = ({
     () =>
       columnDef.filterSelectOptions ??
       ((isSelectFilter || isMultiSelectFilter) && facetedUniqueValues
-        ? Array.from(facetedUniqueValues.keys()).sort((a, b) =>
-            a.localeCompare(b),
-          )
+        ? Array.from(facetedUniqueValues.keys())
+            .filter((value) => value !== null && value !== undefined)
+            .sort((a, b) => a.localeCompare(b))
         : undefined),
     [
       columnDef.filterSelectOptions,

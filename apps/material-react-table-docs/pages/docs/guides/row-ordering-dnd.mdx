@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import EnableOrderingExample from '../../../examples/enable-row-ordering';
 import EnableDraggingExample from '../../../examples/enable-row-dragging';
@@ -20,11 +20,11 @@ Material React Table has exposed all the APIs necessary to enable rich row drag-
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'enableRowOrdering',
-      'muiTableBodyRowDragHandleProps',
+      'muiRowDragHandleProps',
       'onDraggingRowChange',
       'onHoveredRowChange',
     ])
@@ -33,11 +33,11 @@ Material React Table has exposed all the APIs necessary to enable rich row drag-
 
 ### Relevant State
 
-<StateOptionsTable onlyProps={new Set(['draggingRow', 'hoveredRow'])} />
+<StateOptionsTable onlyOptions={new Set(['draggingRow', 'hoveredRow'])} />
 
 ### Enable Row Ordering
 
-A common use for row drag and drop is to allow users to reorder rows in a table. This can be done by setting the `enableRowOrdering` prop to `true`, then setting up an `onDragEnd` event handler on the `muiTableBodyRowDragHandleProps` prop.
+A common use for row drag and drop is to allow users to reorder rows in a table. This can be done by setting the `enableRowOrdering` prop to `true`, then setting up an `onDragEnd` event handler on the `muiRowDragHandleProps` prop.
 
 ```jsx
 <MaterialReactTable
@@ -45,7 +45,7 @@ A common use for row drag and drop is to allow users to reorder rows in a table.
   data={data}
   enableRowOrdering
   enableSorting={false} //usually you do not want to sort when re-ordering
-  muiTableBodyRowDragHandleProps={{
+  muiRowDragHandleProps={{
     onDragEnd: (event, data) => {
       //data re-ordering logic here
     },
@@ -57,7 +57,7 @@ A common use for row drag and drop is to allow users to reorder rows in a table.
 
 ### Drag and Drop Rows to Other UI or Tables
 
-The drag-and-drop features are not limited to just internally within the same table. You can also use them to drag rows to other UI elements in your application or even to other tables. This can be done by setting the `enableRowDragging` prop to `true` and setting up an `onDragEnd` event handler on the `muiTableBodyRowDragHandleProps` prop to perform whatever logic you want to happen when a row is dropped.
+The drag-and-drop features are not limited to just internally within the same table. You can also use them to drag rows to other UI elements in your application or even to other tables. This can be done by setting the `enableRowDragging` prop to `true` and setting up an `onDragEnd` event handler on the `muiRowDragHandleProps` prop to perform whatever logic you want to happen when a row is dropped.
 
 <EnableDraggingExample />
 

@@ -47,7 +47,7 @@ return (
     columns={columns}
     data={data}
     //or in callback props like this
-    muiTableBodyCellEditTextFieldProps={({ cell }) => ({
+    muiEditTextFieldProps={({ cell }) => ({
       disabled: cell.getValue() === 'admin',
     })}
   />

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Box from '@mui/material/Box';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import DisableExample from '../../../examples/disable-column-filters';
@@ -24,8 +24,8 @@ Filtering is one of the most powerful features of Material React Table and is en
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'columnFilterModeOptions',
       'enableColumnFilterModes',
@@ -41,9 +41,9 @@ Filtering is one of the most powerful features of Material React Table and is en
       'getFilteredRowModel',
       'manualFiltering',
       'maxLeafRowFilterDepth',
-      'muiTableHeadCellFilterCheckboxProps',
-      'muiTableHeadCellFilterSliderProps',
-      'muiTableHeadCellFilterTextFieldProps',
+      'muiFilterCheckboxProps',
+      'muiFilterSliderProps',
+      'muiFilterTextFieldProps',
       'onColumnFilterFnsChange',
       'onColumnFiltersChange',
       'onShowColumnFiltersChange',
@@ -55,7 +55,7 @@ Filtering is one of the most powerful features of Material React Table and is en
 ### Relevant Column Options
 
 <ColumnOptionsTable
-  onlyProps={
+  onlyOptions={
     new Set([
       'Filter',
       'columnFilterModeOptions',
@@ -65,9 +65,9 @@ Filtering is one of the most powerful features of Material React Table and is en
       'filterFn',
       'filterSelectOptions',
       'filterVariant',
-      'muiTableHeadCellFilterCheckboxProps',
-      'muiTableHeadCellFilterSliderProps',
-      'muiTableHeadCellFilterTextFieldProps',
+      'muiFilterCheckboxProps',
+      'muiFilterSliderProps',
+      'muiFilterTextFieldProps',
       'renderColumnFilterModeMenuItems',
     ])
   }
@@ -76,7 +76,7 @@ Filtering is one of the most powerful features of Material React Table and is en
 ### Relevant State Options
 
 <StateOptionsTable
-  onlyProps={new Set(['columnFilters', 'columnFilterFns', 'showColumnFilters'])}
+  onlyOptions={new Set(['columnFilters', 'columnFilterFns', 'showColumnFilters'])}
 />
 
 ### Disable Filtering Features
@@ -122,8 +122,8 @@ This feature can be disabled by setting the `enableFilterMatchHighlighting` prop
 Material React Table has several built-in filter variants for advanced filtering. These can be specified on a per-column basis using the `filterVariant` option. The following variants are available:
 
 - `'text'` - shows the default text field
-- `'select'` - shows a select dropdown with the options specified in `filterSelectOptions`
-- `'multi-select'` - shows a select dropdown with the options specified in `filterSelectOptions` and allows multiple selections with checkboxes
+- `'select'` - shows a select dropdown with the options from faceted values or specified in `filterSelectOptions`
+- `'multi-select'` - shows a select dropdown with the options from faceted values or specified in `filterSelectOptions` and allows multiple selections with checkboxes
 - `'range'` - shows min and max text fields for filtering a range of values
 - `'range-slider'` - shows a slider for filtering a range of values
 - `'checkbox'` - shows a checkbox for filtering by `'true'` or `'false'` values (Strings)
@@ -151,7 +151,7 @@ If you are using server-side pagination and filtering, you can still customize t
   getFacetedMinMaxValues={(table) => {
     //fetch min and max values from server
     return [minValue, maxValue];
-  }
+  }}
   //if using server-side filtering
   getFacetedUniqueValues={(table) => {
     const uniqueValueMap = new Map<string, number>();
@@ -346,7 +346,7 @@ Here is the full Remote Data example featuring server-side **filtering**, pagina
 
 ### Customize Material UI Filter components
 
-You can customize the Material UI filter components by setting the `muiTableHeadCellFilterTextFieldProps` prop or column option.
+You can customize the Material UI filter components by setting the `muiFilterTextFieldProps` prop or column option.
 
 You can also turn a filter textfield into a select dropdown by setting the `filterSelectOptions` prop or column option.
 

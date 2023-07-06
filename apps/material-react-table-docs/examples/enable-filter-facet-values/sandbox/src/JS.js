@@ -21,7 +21,7 @@ const Example = () => {
           }),
         filterVariant: 'range-slider',
         filterFn: 'betweenInclusive', // default (or between)
-        muiTableHeadCellFilterSliderProps: {
+        muiFilterSliderProps: {
           //no need to specify min/max/step if using faceted values
           marks: true,
           step: 5_000,

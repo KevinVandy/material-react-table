@@ -4,18 +4,17 @@ import FormHelperText from '@mui/material/FormHelperText';
 import { type MRT_TableInstance, type MRT_Header } from '../types';
 import { useEffect, useRef, useState } from 'react';
 
-interface Props {
-  header: MRT_Header;
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any>> {
+  header: MRT_Header<TData>;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_FilterRangeSlider = ({ header, table }: Props) => {
+export const MRT_FilterRangeSlider = <TData extends Record<string, any>>({
+  header,
+  table,
+}: Props<TData>) => {
   const {
-    options: {
-      localization,
-      muiTableHeadCellFilterSliderProps,
-      enableColumnFilterModes,
-    },
+    options: { localization, muiFilterSliderProps, enableColumnFilterModes },
     refs: { filterInputRefs },
   } = table;
   const { column } = header;
@@ -26,25 +25,25 @@ export const MRT_FilterRangeSlider = ({ header, table }: Props) => {
   const showChangeModeButton =
     enableColumnFilterModes && columnDef.enableColumnFilterModes !== false;
 
-  const mTableHeadCellFilterTextFieldProps =
-    muiTableHeadCellFilterSliderProps instanceof Function
-      ? muiTableHeadCellFilterSliderProps({
+  const mFilterSliderProps =
+    muiFilterSliderProps instanceof Function
+      ? muiFilterSliderProps({
           column,
           table,
         })
-      : muiTableHeadCellFilterSliderProps;
+      : muiFilterSliderProps;
 
-  const mcTableHeadCellFilterTextFieldProps =
-    columnDef.muiTableHeadCellFilterSliderProps instanceof Function
-      ? columnDef.muiTableHeadCellFilterSliderProps({
+  const mcFilterSliderProps =
+    columnDef.muiFilterSliderProps instanceof Function
+      ? columnDef.muiFilterSliderProps({
           column,
           table,
         })
-      : columnDef.muiTableHeadCellFilterSliderProps;
+      : columnDef.muiFilterSliderProps;
 
   const sliderProps = {
-    ...mTableHeadCellFilterTextFieldProps,
-    ...mcTableHeadCellFilterTextFieldProps,
+    ...mFilterSliderProps,
+    ...mcFilterSliderProps,
   } as SliderProps;
 
   let [min, max] =

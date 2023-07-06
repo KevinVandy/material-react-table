@@ -6,13 +6,11 @@ import { MRT_ToggleFiltersButton } from '../buttons/MRT_ToggleFiltersButton';
 import { MRT_ToggleGlobalFilterButton } from '../buttons/MRT_ToggleGlobalFilterButton';
 import { type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any> = {}> {
+interface Props<TData extends Record<string, any>> {
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ToolbarInternalButtons = <
-  TData extends Record<string, any> = {},
->({
+export const MRT_ToolbarInternalButtons = <TData extends Record<string, any>>({
   table,
 }: Props<TData>) => {
   const {

@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import ThemeExample from '../../../examples/mui-theme';
 import CustomizeStylesExample from '../../../examples/customize-table-styles';
@@ -23,8 +23,8 @@ Additionally, in one of the sections below, you will learn [how to customize and
 
 All props labeled `mui...Props` get forwarded to Material UI components. Here is a list of all the props that are exposed in both the root props and column options.
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'muiBottomToolbarProps',
       'muiExpandAllButtonProps',
@@ -33,21 +33,21 @@ All props labeled `mui...Props` get forwarded to Material UI components. Here is
       'muiSearchTextFieldProps',
       'muiSelectAllCheckboxProps',
       'muiSelectCheckboxProps',
-      'muiTableBodyCellCopyButtonProps',
-      'muiTableBodyCellEditTextFieldProps',
+      'muiCopyButtonProps',
+      'muiEditTextFieldProps',
       'muiTableBodyCellProps',
-      'muiTableBodyCellSkeletonProps',
+      'muiSkeletonProps',
       'muiTableBodyProps',
-      'muiTableBodyRowDragHandleProps',
+      'muiRowDragHandleProps',
       'muiTableBodyRowProps',
       'muiTableContainerProps',
-      'muiTableDetailPanelProps',
+      'muiDetailPanelProps',
       'muiTableFooterCellProps',
       'muiTableFooterProps',
       'muiTableFooterRowProps',
-      'muiTableHeadCellColumnActionsButtonProps',
-      'muiTableHeadCellDragHandleProps',
-      'muiTableHeadCellFilterTextFieldProps',
+      'muiColumnActionsButtonProps',
+      'muiColumnDragHandleProps',
+      'muiFilterTextFieldProps',
       'muiTableHeadCellProps',
       'muiTableHeadProps',
       'muiTableHeadRowProps',
@@ -66,14 +66,14 @@ All props labeled `mui...Props` get forwarded to Material UI components. Here is
 Some of the column options expose the same props as above, but on a per column basis.
 
 <ColumnOptionsTable
-  onlyProps={
+  onlyOptions={
     new Set([
-      'muiTableBodyCellCopyButtonProps',
-      'muiTableBodyCellEditTextFieldProps',
+      'muiCopyButtonProps',
+      'muiEditTextFieldProps',
       'muiTableBodyCellProps',
       'muiTableFooterCellProps',
-      'muiTableHeadCellColumnActionsButtonProps',
-      'muiTableHeadCellFilterTextFieldProps',
+      'muiColumnActionsButtonProps',
+      'muiFilterTextFieldProps',
       'muiTableHeadCellProps',
     ])
   }

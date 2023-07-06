@@ -5,12 +5,17 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
 
-interface Props {
-  header: MRT_Header;
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any>> {
+  header: MRT_Header<TData>;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TableHeadCellFilterLabel = ({ header, table }: Props) => {
+export const MRT_TableHeadCellFilterLabel = <
+  TData extends Record<string, any>,
+>({
+  header,
+  table,
+}: Props<TData>) => {
   const {
     options: {
       icons: { FilterAltIcon },

@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import {
   MaterialReactTable,
-  type MaterialReactTableProps,
+  type MRT_TableOptions,
   type MRT_Cell,
   type MRT_ColumnDef,
   type MRT_Row,
@@ -43,7 +43,7 @@ const Example = () => {
     setTableData([...tableData]);
   };
 
-  const handleSaveRowEdits: MaterialReactTableProps<Person>['onEditingRowSave'] =
+  const handleSaveRowEdits: MRT_TableOptions<Person>['onEditingRowSave'] =
     async ({ exitEditingMode, row, values }) => {
       if (!Object.keys(validationErrors).length) {
         tableData[row.index] = values;
@@ -74,7 +74,7 @@ const Example = () => {
   const getCommonEditTextFieldProps = useCallback(
     (
       cell: MRT_Cell<Person>,
-    ): MRT_ColumnDef<Person>['muiTableBodyCellEditTextFieldProps'] => {
+    ): MRT_ColumnDef<Person>['muiEditTextFieldProps'] => {
       return {
         error: !!validationErrors[cell.id],
         helperText: validationErrors[cell.id],
@@ -118,7 +118,7 @@ const Example = () => {
         accessorKey: 'firstName',
         header: 'First Name',
         size: 140,
-        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+        muiEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
         }),
       },
@@ -126,14 +126,14 @@ const Example = () => {
         accessorKey: 'lastName',
         header: 'Last Name',
         size: 140,
-        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+        muiEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
         }),
       },
       {
         accessorKey: 'email',
         header: 'Email',
-        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+        muiEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
           type: 'email',
         }),
@@ -142,7 +142,7 @@ const Example = () => {
         accessorKey: 'age',
         header: 'Age',
         size: 80,
-        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+        muiEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
           type: 'number',
         }),
@@ -150,7 +150,7 @@ const Example = () => {
       {
         accessorKey: 'state',
         header: 'State',
-        muiTableBodyCellEditTextFieldProps: {
+        muiEditTextFieldProps: {
           select: true, //change to select for a dropdown
           children: states.map((state) => (
             <MenuItem key={state} value={state}>

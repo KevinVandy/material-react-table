@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { SourceCodeSnippet } from '../mdx/SourceCodeSnippet';
-const TS = require('!!raw-loader!./RootPropTable.tsx').default;
+const TS = require('!!raw-loader!./TableOptionsTable.tsx').default;
 
 const ExampleTable = () => {
   return (

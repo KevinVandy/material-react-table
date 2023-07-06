@@ -1,7 +1,7 @@
 import { type Meta } from '@storybook/react';
 import {
   MaterialReactTable,
-  type MaterialReactTableProps,
+  type MRT_TableOptions,
   type MRT_ColumnDef,
 } from '../src';
 import { faker } from '@faker-js/faker';
@@ -13,7 +13,7 @@ const meta: Meta = {
 
 export default meta;
 
-const Template = (args: MaterialReactTableProps<Person>) => (
+const Template = (args: MRT_TableOptions<Person>) => (
   <MaterialReactTable {...args} />
 );
 
@@ -52,4 +52,4 @@ Default.args = {
     age: faker.datatype.number(80),
     address: faker.location.streetAddress(),
   })),
-} as MaterialReactTableProps<Person>;
+} as MRT_TableOptions<Person>;

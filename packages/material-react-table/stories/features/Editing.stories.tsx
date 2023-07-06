@@ -3,7 +3,7 @@ import { type Meta } from '@storybook/react';
 import {
   MaterialReactTable,
   type MRT_Cell,
-  type MaterialReactTableProps,
+  type MRT_TableOptions,
 } from '../../src';
 import { faker } from '@faker-js/faker';
 import MenuItem from '@mui/material/MenuItem';
@@ -90,7 +90,7 @@ const data: Person[] = [...Array(100)].map(() => ({
 export const EditingEnabledEditModeModalDefault = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MRT_TableOptions<Person>['onEditingRowSave'] = ({
     exitEditingMode,
     row,
     values,
@@ -135,7 +135,7 @@ export const EditingEnabledEditModeModalDefault = () => {
 export const EditingEnabledEditModeRow = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MRT_TableOptions<Person>['onEditingRowSave'] = ({
     exitEditingMode,
     row,
     values,
@@ -215,7 +215,7 @@ export const EditingEnabledEditModeCell = () => {
       data={tableData}
       editingMode="cell"
       enableEditing
-      muiTableBodyCellEditTextFieldProps={({ cell }) => ({
+      muiEditTextFieldProps={({ cell }) => ({
         onBlur: (event) => {
           handleSaveCell(cell, event.target.value);
         },
@@ -261,7 +261,7 @@ export const EditingEnabledEditModeTable = () => {
       data={tableData}
       editingMode="table"
       enableEditing
-      muiTableBodyCellEditTextFieldProps={({ cell }) => ({
+      muiEditTextFieldProps={({ cell }) => ({
         onBlur: (event) => {
           handleSaveCell(cell, event.target.value);
         },
@@ -273,7 +273,7 @@ export const EditingEnabledEditModeTable = () => {
 export const EditSelectVariant = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MRT_TableOptions<Person>['onEditingRowSave'] = ({
     row,
     values,
   }) => {
@@ -310,7 +310,7 @@ export const EditSelectVariant = () => {
       data={tableData}
       enableRowActions
       enableEditing
-      muiTableBodyCellEditTextFieldProps={{ variant: 'outlined' }}
+      muiEditTextFieldProps={{ variant: 'outlined' }}
       onEditingRowSave={handleSaveRow}
     />
   );
@@ -319,7 +319,7 @@ export const EditSelectVariant = () => {
 export const EditSelectVariantAlternate = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MRT_TableOptions<Person>['onEditingRowSave'] = ({
     row,
     values,
   }) => {
@@ -402,7 +402,7 @@ export const EditSelectVariantAlternate = () => {
       enableRowActions
       enableEditing
       editingMode="row"
-      muiTableBodyCellEditTextFieldProps={{ variant: 'outlined' }}
+      muiEditTextFieldProps={{ variant: 'outlined' }}
       onEditingRowSave={handleSaveRow}
     />
   );
@@ -411,7 +411,7 @@ export const EditSelectVariantAlternate = () => {
 export const EditingCustomizeInput = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MRT_TableOptions<Person>['onEditingRowSave'] = ({
     row,
     values,
   }) => {
@@ -494,7 +494,7 @@ export const EditingCustomizeInput = () => {
         {
           header: 'State',
           accessorKey: 'state',
-          muiTableBodyCellEditTextFieldProps: () => ({
+          muiEditTextFieldProps: () => ({
             children: usStates.map((state) => (
               <MenuItem key={state} value={state}>
                 {state}
@@ -511,7 +511,7 @@ export const EditingCustomizeInput = () => {
       data={tableData}
       enableRowActions
       enableEditing
-      muiTableBodyCellEditTextFieldProps={{ variant: 'outlined' }}
+      muiEditTextFieldProps={{ variant: 'outlined' }}
       onEditingRowSave={handleSaveRow}
     />
   );
@@ -553,7 +553,7 @@ export const EditingCustomizeInput = () => {
 //         {
 //           header: 'First Name',
 //           accessorKey: 'firstName',
-//           muiTableBodyCellEditTextFieldProps: {
+//           muiEditTextFieldProps: {
 //             error: !!firstNameError,
 //             helperText: firstNameError,
 //           },
@@ -564,7 +564,7 @@ export const EditingCustomizeInput = () => {
 //         {
 //           header: 'Last Name',
 //           accessorKey: 'lastName',
-//           muiTableBodyCellEditTextFieldProps: {
+//           muiEditTextFieldProps: {
 //             error: !!lastNameError,
 //             helperText: lastNameError,
 //           },
@@ -575,7 +575,7 @@ export const EditingCustomizeInput = () => {
 //         {
 //           header: 'Phone Number',
 //           accessorKey: 'phoneNumber',
-//           muiTableBodyCellEditTextFieldProps: {
+//           muiEditTextFieldProps: {
 //             error: !!phoneNumberError,
 //             helperText: phoneNumberError,
 //           },
@@ -596,7 +596,7 @@ export const EditingEnabledAsync = () => {
   const [tableData, setTableData] = useState(data);
   const [isSaving, setIsSaving] = useState(false);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MRT_TableOptions<Person>['onEditingRowSave'] = ({
     row,
     values,
   }) => {
@@ -703,7 +703,7 @@ export const EditingNestedData = () => {
 export const EditingEnabledEditModeTableWithGroupedRows = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MRT_TableOptions<Person>['onEditingRowSave'] = ({
     exitEditingMode,
     row,
     values,
@@ -750,7 +750,7 @@ export const EditingEnabledEditModeTableWithGroupedRows = () => {
 export const EnableEditingConditionally = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MRT_TableOptions<Person>['onEditingRowSave'] = ({
     exitEditingMode,
     row,
     values,
@@ -796,7 +796,7 @@ export const EnableEditingConditionally = () => {
 export const EnableEditingConditionallyCell = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MRT_TableOptions<Person>['onEditingRowSave'] = ({
     exitEditingMode,
     row,
     values,
@@ -842,7 +842,7 @@ export const EnableEditingConditionallyCell = () => {
 export const EnableEditingConditionallyTable = () => {
   const [tableData, setTableData] = useState(data);
 
-  const handleSaveRow: MaterialReactTableProps<Person>['onEditingRowSave'] = ({
+  const handleSaveRow: MRT_TableOptions<Person>['onEditingRowSave'] = ({
     exitEditingMode,
     row,
     values,

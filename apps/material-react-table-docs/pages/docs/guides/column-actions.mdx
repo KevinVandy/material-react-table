@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import DisableExample from '../../../examples/disable-column-actions';
 import CustomColumnActionsExample from '../../../examples/custom-column-actions';
@@ -19,11 +19,11 @@ By default, Material React Table renders a column actions button for each column
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'enableColumnActions',
-      'muiTableHeadCellColumnActionsButtonProps',
+      'muiColumnActionsButtonProps',
       'renderColumnActionsMenuItems',
     ])
   }
@@ -32,10 +32,10 @@ By default, Material React Table renders a column actions button for each column
 ### Relevant Column Options
 
 <ColumnOptionsTable
-  onlyProps={
+  onlyOptions={
     new Set([
       'enableColumnActions',
-      'muiTableHeadCellColumnActionsButtonProps',
+      'muiColumnActionsButtonProps',
       'renderColumnActionsMenuItems',
     ])
   }

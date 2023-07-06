@@ -4,17 +4,17 @@ import Tooltip from '@mui/material/Tooltip';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
 import { type TableCellProps } from '@mui/material/TableCell';
 
-interface Props {
-  header: MRT_Header;
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any>> {
+  header: MRT_Header<TData>;
+  table: MRT_TableInstance<TData>;
   tableCellProps?: TableCellProps;
 }
 
-export const MRT_TableHeadCellSortLabel = ({
+export const MRT_TableHeadCellSortLabel = <TData extends Record<string, any>>({
   header,
   table,
   tableCellProps,
-}: Props) => {
+}: Props<TData>) => {
   const {
     getState,
     options: {

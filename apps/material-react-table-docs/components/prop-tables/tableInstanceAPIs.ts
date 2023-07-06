@@ -1,7 +1,7 @@
 import { type MRT_TableInstance } from 'material-react-table';
 
 export interface TableInstanceAPI {
-  tableInstanceAPI: keyof MRT_TableInstance;
+  tableInstanceAPI: keyof MRT_TableInstance<TableInstanceAPI>;
   link: string;
   linkText: string;
   description: string;

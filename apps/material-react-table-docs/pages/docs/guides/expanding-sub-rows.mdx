@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import EnableExample from '../../../examples/enable-expanding-tree';
@@ -24,8 +24,8 @@ Material React Table has support for expanding sub-rows or tree data. This featu
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
+<TableOptionsTable
+  onlyOptions={
     new Set([
       'autoResetExpanded',
       'data',
@@ -51,7 +51,7 @@ Material React Table has support for expanding sub-rows or tree data. This featu
 
 ### Relevant State Options
 
-<StateOptionsTable onlyProps={new Set(['expanded'])} />
+<StateOptionsTable onlyOptions={new Set(['expanded'])} />
 
 ### Enable Expanding Sub-Rows
 

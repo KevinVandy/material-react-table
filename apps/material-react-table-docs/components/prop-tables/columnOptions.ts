@@ -1,7 +1,7 @@
 import { type MRT_ColumnDef } from 'material-react-table';
 
 export type ColumnOption = {
-  columnOption: keyof MRT_ColumnDef;
+  columnOption: keyof MRT_ColumnDef<ColumnOption>;
   defaultValue?: string;
   description?: string;
   link?: string;
@@ -420,7 +420,7 @@ export const columnOptions: ColumnOption[] = [
     type: 'number',
   },
   {
-    columnOption: 'muiTableBodyCellCopyButtonProps',
+    columnOption: 'muiCopyButtonProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/button/#props',
@@ -430,7 +430,7 @@ export const columnOptions: ColumnOption[] = [
     type: 'ButtonProps | ({ cell, column, row, table }) => ButtonProps',
   },
   {
-    columnOption: 'muiTableBodyCellEditTextFieldProps',
+    columnOption: 'muiEditTextFieldProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/text-field/#props',
@@ -460,7 +460,7 @@ export const columnOptions: ColumnOption[] = [
     type: 'TableCellProps | ({ column, table }) => TableCellProps',
   },
   {
-    columnOption: 'muiTableHeadCellColumnActionsButtonProps',
+    columnOption: 'muiColumnActionsButtonProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/icon-button/#props',
@@ -470,7 +470,7 @@ export const columnOptions: ColumnOption[] = [
     type: 'IconButtonProps | ({ column, table }) => IconButtonProps',
   },
   {
-    columnOption: 'muiTableHeadCellDragHandleProps',
+    columnOption: 'muiColumnDragHandleProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/icon-button/#props',
@@ -480,7 +480,7 @@ export const columnOptions: ColumnOption[] = [
     type: 'IconButtonProps | ({ column, table }) => IconButtonProps',
   },
   {
-    columnOption: 'muiTableHeadCellFilterCheckboxProps',
+    columnOption: 'muiFilterCheckboxProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/checkbox/#props',
@@ -490,7 +490,7 @@ export const columnOptions: ColumnOption[] = [
     type: 'Checkbox | ({ column, table }) => CheckboxProps',
   },
   {
-    columnOption: 'muiTableHeadCellFilterSliderProps',
+    columnOption: 'muiFilterSliderProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/slider/#props',
@@ -500,7 +500,7 @@ export const columnOptions: ColumnOption[] = [
     type: 'SliderProps | ({ column, table}) => SliderProps',
   },
   {
-    columnOption: 'muiTableHeadCellFilterTextFieldProps',
+    columnOption: 'muiFilterTextFieldProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/text-field/#props',

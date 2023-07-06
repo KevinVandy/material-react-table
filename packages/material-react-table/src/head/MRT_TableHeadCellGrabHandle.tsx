@@ -3,20 +3,20 @@ import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 import { reorderColumn } from '../column.utils';
 import { type MRT_Column, type MRT_TableInstance } from '../types';
 
-interface Props {
-  column: MRT_Column;
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any>> {
+  column: MRT_Column<TData>;
+  table: MRT_TableInstance<TData>;
   tableHeadCellRef: RefObject<HTMLTableCellElement>;
 }
 
-export const MRT_TableHeadCellGrabHandle = ({
+export const MRT_TableHeadCellGrabHandle = <TData extends Record<string, any>>({
   column,
   table,
   tableHeadCellRef,
-}: Props) => {
+}: Props<TData>) => {
   const {
     getState,
-    options: { enableColumnOrdering, muiTableHeadCellDragHandleProps },
+    options: { enableColumnOrdering, muiColumnDragHandleProps },
     setColumnOrder,
     setDraggingColumn,
     setHoveredColumn,
@@ -25,14 +25,14 @@ export const MRT_TableHeadCellGrabHandle = ({
   const { hoveredColumn, draggingColumn, columnOrder } = getState();
 
   const mIconButtonProps =
-    muiTableHeadCellDragHandleProps instanceof Function
-      ? muiTableHeadCellDragHandleProps({ column, table })
-      : muiTableHeadCellDragHandleProps;
+    muiColumnDragHandleProps instanceof Function
+      ? muiColumnDragHandleProps({ column, table })
+      : muiColumnDragHandleProps;
 
   const mcIconButtonProps =
-    columnDef.muiTableHeadCellDragHandleProps instanceof Function
-      ? columnDef.muiTableHeadCellDragHandleProps({ column, table })
-      : columnDef.muiTableHeadCellDragHandleProps;
+    columnDef.muiColumnDragHandleProps instanceof Function
+      ? columnDef.muiColumnDragHandleProps({ column, table })
+      : columnDef.muiColumnDragHandleProps;
 
   const iconButtonProps = {
     ...mIconButtonProps,
@@ -59,7 +59,7 @@ export const MRT_TableHeadCellGrabHandle = ({
       hoveredColumn?.id !== draggingColumn?.id
     ) {
       setColumnOrder(
-        reorderColumn(column, hoveredColumn as MRT_Column, columnOrder),
+        reorderColumn(column, hoveredColumn as MRT_Column<TData>, columnOrder),
       );
     }
     setDraggingColumn(null);

@@ -4,20 +4,22 @@ import Tooltip from '@mui/material/Tooltip';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
 
-interface Props {
-  header: MRT_Header;
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any>> {
+  header: MRT_Header<TData>;
+  table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TableHeadCellColumnActionsButton = ({
+export const MRT_TableHeadCellColumnActionsButton = <
+  TData extends Record<string, any>,
+>({
   header,
   table,
-}: Props) => {
+}: Props<TData>) => {
   const {
     options: {
       icons: { MoreVertIcon },
       localization,
-      muiTableHeadCellColumnActionsButtonProps,
+      muiColumnActionsButtonProps,
     },
   } = table;
   const { column } = header;
@@ -32,17 +34,17 @@ export const MRT_TableHeadCellColumnActionsButton = ({
   };
 
   const mTableHeadCellColumnActionsButtonProps =
-    muiTableHeadCellColumnActionsButtonProps instanceof Function
-      ? muiTableHeadCellColumnActionsButtonProps({ column, table })
-      : muiTableHeadCellColumnActionsButtonProps;
+    muiColumnActionsButtonProps instanceof Function
+      ? muiColumnActionsButtonProps({ column, table })
+      : muiColumnActionsButtonProps;
 
   const mcTableHeadCellColumnActionsButtonProps =
-    columnDef.muiTableHeadCellColumnActionsButtonProps instanceof Function
-      ? columnDef.muiTableHeadCellColumnActionsButtonProps({
+    columnDef.muiColumnActionsButtonProps instanceof Function
+      ? columnDef.muiColumnActionsButtonProps({
           column,
           table,
         })
-      : columnDef.muiTableHeadCellColumnActionsButtonProps;
+      : columnDef.muiColumnActionsButtonProps;
 
   const iconButtonProps = {
     ...mTableHeadCellColumnActionsButtonProps,

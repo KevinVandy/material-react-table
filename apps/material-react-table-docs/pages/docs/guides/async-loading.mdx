@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import RootPropTable from '../../../components/prop-tables/RootPropTable';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import LoadingExample from '../../../examples/loading';
 import LinearProgressExample from '../../../examples/linear-progress';
@@ -21,16 +21,16 @@ While you are fetching your data, you may want to show some loading indicators. 
 
 ### Relevant Props
 
-<RootPropTable
-  onlyProps={
-    new Set(['muiTableBodyCellSkeletonProps', 'muiLinearProgressProps'])
+<TableOptionsTable
+  onlyOptions={
+    new Set(['muiSkeletonProps', 'muiLinearProgressProps'])
   }
 />
 
 ### Relevant State Options
 
 <StateOptionsTable
-  onlyProps={new Set(['isLoading', 'showSkeletons', 'showProgressBars'])}
+  onlyOptions={new Set(['isLoading', 'showSkeletons', 'showProgressBars'])}
 />
 
 ### isLoading UI

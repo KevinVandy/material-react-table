@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import {
   MaterialReactTable,
-  type MaterialReactTableProps,
+  type MRT_TableOptions,
   type MRT_ColumnDef,
   type MRT_Row,
 } from 'material-react-table';
@@ -35,7 +35,7 @@ const Example = () => {
   const [draggingRow, setDraggingRow] = useState<MRT_Row<Person> | null>(null);
   const [hoveredTable, setHoveredTable] = useState<string | null>(null);
 
-  const commonTableProps: Partial<MaterialReactTableProps<Person>> & {
+  const commonTableProps: Partial<MRT_TableOptions<Person>> & {
     columns: MRT_ColumnDef<Person>[];
   } = {
     columns,
@@ -64,7 +64,7 @@ const Example = () => {
         {...commonTableProps}
         data={data1}
         getRowId={(originalRow) => `table-1-${originalRow.firstName}`}
-        muiTableBodyRowDragHandleProps={{
+        muiRowDragHandleProps={{
           onDragEnd: () => {
             if (hoveredTable === 'table-2') {
               setData2((data2) => [...data2, draggingRow!.original]);
@@ -94,7 +94,7 @@ const Example = () => {
           size: 100,
         }}
         getRowId={(originalRow) => `table-2-${originalRow.firstName}`}
-        muiTableBodyRowDragHandleProps={{
+        muiRowDragHandleProps={{
           onDragEnd: () => {
             if (hoveredTable === 'table-1') {
               setData1((data1) => [...data1, draggingRow!.original]);

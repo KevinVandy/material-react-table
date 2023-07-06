@@ -15,7 +15,7 @@ const Example = () => {
       {
         accessorKey: 'id',
         header: 'ID',
-        muiTableHeadCellFilterTextFieldProps: { placeholder: 'ID' },
+        muiFilterTextFieldProps: { placeholder: 'ID' },
       },
       {
         accessorKey: 'firstName',
@@ -86,7 +86,7 @@ const Example = () => {
       columns={columns}
       data={data}
       initialState={{ showColumnFilters: true }} //show filters by default
-      muiTableHeadCellFilterTextFieldProps={{
+      muiFilterTextFieldProps={{
         sx: { m: '0.5rem 0', width: '100%' },
         variant: 'outlined',
       }}

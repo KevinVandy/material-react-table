@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { FAQs } from '../../../components/mdx/FAQs';
+import { InstallCommand } from '../../../components/mdx/InstallCommand';
 
 <Head>
   <title>Installation - Material React Table Docs</title>
@@ -15,50 +16,19 @@ import { FAQs } from '../../../components/mdx/FAQs';
 > Just double-check that you have the following in your package.json, or use the [full install commands](<#install-with-required-peer-dependencies-(recommended)>) below.
 >
 > 1.  `@mui/material` (v5)
-> 2.  `@mui/icons-material` (v5)
-> 3.  `@emotion/react` (v11)
-> 4.  `@emotion/styled` (v11)
-> 5.  `react` and `react-dom` (v17 or v18) - Material UI v5 requires React 17 or 18
+> 2.  `@mui/x-date-pickers` (v6) - (New in MRT v2)
+> 3.  `@mui/icons-material` (v5)
+> 4.  `@emotion/react` (v11)
+> 5.  `@emotion/styled` (v11)
+> 6.  `react` and `react-dom` (v18) - (MRT v2 will eventually use React 18 concurrent mode)
 
 ### Quick Install
 
-NPM
-
-```bash
-npm install material-react-table
-```
-
-PNPM
-
-```bash
-pnpm add material-react-table
-```
-
-Yarn
-
-```bash
-yarn add material-react-table
-```
+<InstallCommand packagesString="material-react-table" />
 
 ### Install With Required Peer Dependencies (Recommended)
 
-NPM
-
-```bash
-npm install material-react-table @mui/material @mui/icons-material @emotion/react @emotion/styled
-```
-
-PNPM
-
-```bash
-pnpm add material-react-table @mui/material @mui/icons-material @emotion/react @emotion/styled
-```
-
-Yarn
-
-```bash
-yarn add material-react-table @mui/material @mui/icons-material @emotion/react @emotion/styled
-```
+<InstallCommand />
 
 > You do NOT need to install `@tanstack/react-table`, as it is already an internal dependency of `material-react-table`, and must use an exact version already specified internally.
 >
@@ -75,7 +45,14 @@ You likely forgot to export your component from the file it's defined in,
 or you might have mixed up default and named imports.
 ```
 
-You probably do not have the correct version of Material UI installed. Make sure all material ui packages are at least v5
+You might be trying to import `MaterialReactTable` from the default export still, which is no longer supported in v2. Make sure you are importing the named export instead:
+
+```diff
+- import MaterialReactTable from 'material-react-table'
++ import { MaterialReactTable } from 'material-react-table'
+```
+
+Or you probably do not have the correct version of Material UI installed. Make sure all material ui packages are at least v5.11 or higher.
 
 If you are using an older version of `webpack` or `create-react-app` and get an error like this:
 

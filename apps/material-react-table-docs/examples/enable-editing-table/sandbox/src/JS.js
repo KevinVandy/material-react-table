@@ -46,7 +46,7 @@ const Example = () => {
       data={tableData}
       editingMode="table"
       enableEditing
-      muiTableBodyCellEditTextFieldProps={({ cell }) => ({
+      muiEditTextFieldProps={({ cell }) => ({
         //onBlur is more efficient, but could use onChange instead
         onBlur: (event) => {
           handleSaveCell(cell, event.target.value);

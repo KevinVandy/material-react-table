@@ -17,13 +17,13 @@ import { GuideCard } from '../components/mdx/GuideCard';
 import { ComparisonTable } from '../components/mdx/ComparisonTable';
 import { LinkHeading } from '../components/mdx/LinkHeading';
 import { FeatureTable } from '../components/mdx/FeatureTable';
-import { SampleCodeSnippet } from '../components/mdx/SampleCodeSnippet';
 import { Contributors } from '../components/mdx/Contributors';
+import { InstallCommand } from '../components/mdx/InstallCommand';
 
 const HomePage = () => {
   return (
     <>
-      <Stack sx={{ maxWidth: '95ch', m: 'auto' }}>
+      <Stack sx={{ maxWidth: '100ch', m: 'auto' }}>
         <Typography
           sx={{
             textAlign: 'center',
@@ -248,13 +248,7 @@ const HomePage = () => {
           </Link>
         </Box>
         <Box>
-          <SampleCodeSnippet
-            className="language-bash"
-            style={{ paddingBottom: '1rem' }}
-          >
-            npm i material-react-table @mui/material @mui/icons-material
-            @emotion/react @emotion/styled
-          </SampleCodeSnippet>
+          <InstallCommand centered />
         </Box>
         <HomeCards />
         <Typography my="2rem" textAlign="center" variant="h3">

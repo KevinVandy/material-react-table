@@ -153,7 +153,7 @@ const Example = () => {
         sorting,
       }}
       rowVirtualizerInstanceRef={rowVirtualizerInstanceRef} //get access to the virtualizer instance
-      rowVirtualizerProps={{ overscan: 4 }}
+      rowVirtualizerOptions={{ overscan: 4 }}
     />
   );
 };

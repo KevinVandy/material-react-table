@@ -7,13 +7,13 @@ import { MRT_EditActionButtons } from '../buttons/MRT_EditActionButtons';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any> = {}> {
+interface Props<TData extends Record<string, any>> {
   open: boolean;
   row: MRT_Row<TData>;
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_EditRowModal = <TData extends Record<string, any> = {}>({
+export const MRT_EditRowModal = <TData extends Record<string, any>>({
   open,
   row,
   table,

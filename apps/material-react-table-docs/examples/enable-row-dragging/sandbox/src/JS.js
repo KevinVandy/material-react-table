@@ -60,7 +60,7 @@ const Example = () => {
           size: 100,
         }}
         getRowId={(originalRow) => `table-1-${originalRow.firstName}`}
-        muiTableBodyRowDragHandleProps={{
+        muiRowDragHandleProps={{
           onDragEnd: () => {
             if (hoveredTable === 'table-2') {
               setData2((data2) => [...data2, draggingRow.original]);
@@ -87,7 +87,7 @@ const Example = () => {
         {...commonTableProps}
         data={data2}
         getRowId={(originalRow) => `table-2-${originalRow.firstName}`}
-        muiTableBodyRowDragHandleProps={{
+        muiRowDragHandleProps={{
           onDragEnd: () => {
             if (hoveredTable === 'table-1') {
               setData1((data1) => [...data1, draggingRow.original]);

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Change directory to the example directory
-cd /path/to/example
+cd apps/material-react-table-docs/examples
 
 # Loop through each file in the example directory
 for file in *; do
@@ -20,10 +20,10 @@ for file in *; do
       cd sandbox
 
       ## Update dependency versions
-      ncu -u
+      npx npm-check-updates -u
 
       # Run npm install
-      npm install --package-lock-only
+      npm install --package-lock-only --force
 
       echo "  - npm install completed"
       

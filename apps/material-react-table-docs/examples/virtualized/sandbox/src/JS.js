@@ -121,13 +121,13 @@ const Example = () => {
       onSortingChange={setSorting}
       state={{ isLoading, sorting }}
       rowVirtualizerInstanceRef={rowVirtualizerInstanceRef} //optional
-      rowVirtualizerProps={{ overscan: 5 }} //optionally customize the row virtualizer
-      columnVirtualizerProps={{ overscan: 2 }} //optionally customize the column virtualizer
+      rowVirtualizerOptions={{ overscan: 5 }} //optionally customize the row virtualizer
+      columnVirtualizerOptions={{ overscan: 2 }} //optionally customize the column virtualizer
     />
   );
 };
 
 //virtualizerInstanceRef was renamed to rowVirtualizerInstanceRef in v1.5.0
-//virtualizerProps was renamed to rowVirtualizerProps in v1.5.0
+//virtualizerProps was renamed to rowVirtualizerOptions in v1.5.0
 
 export default Example;

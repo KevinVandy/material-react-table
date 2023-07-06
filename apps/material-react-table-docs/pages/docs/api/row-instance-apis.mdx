@@ -30,7 +30,7 @@ const columns = [
     accessorKey: 'salary',
     header: 'Salary',
     //you can access a row instance in column definition option callbacks like this
-    muiTableBodyCellEditTextFieldProps: ({ row }) => ({
+    muiEditTextFieldProps: ({ row }) => ({
       disabled: row.original.employmentStatus === 'Retired',
     }),
     //or in the component override callbacks like this

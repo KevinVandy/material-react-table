@@ -8,21 +8,21 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props {
-  headerGroup: MRT_HeaderGroup;
-  table: MRT_TableInstance;
+interface Props<TData extends Record<string, any>> {
+  headerGroup: MRT_HeaderGroup<TData>;
+  table: MRT_TableInstance<TData>;
   virtualColumns?: VirtualItem[];
   virtualPaddingLeft?: number;
   virtualPaddingRight?: number;
 }
 
-export const MRT_TableHeadRow = ({
+export const MRT_TableHeadRow = <TData extends Record<string, any>>({
   headerGroup,
   table,
   virtualColumns,
   virtualPaddingLeft,
   virtualPaddingRight,
-}: Props) => {
+}: Props<TData>) => {
   const {
     options: { layoutMode, muiTableHeadRowProps },
   } = table;
@@ -51,7 +51,7 @@ export const MRT_TableHeadRow = ({
       {(virtualColumns ?? headerGroup.headers).map((headerOrVirtualHeader) => {
         const header = virtualColumns
           ? headerGroup.headers[headerOrVirtualHeader.index]
-          : (headerOrVirtualHeader as MRT_Header);
+          : (headerOrVirtualHeader as MRT_Header<TData>);
 
         return (
           <MRT_TableHeadCell header={header} key={header.id} table={table} />

@@ -25,34 +25,28 @@ Internally, Material React Table uses the `useReactTable` hook from TanStack Tab
 You can access this table instance yourself by either setting up a `tableInstanceRef` or by consuming a `table` param from many of the callback functions in many of the props.
 
 ```jsx
-const tableInstanceRef = useRef(null);
-
-const someEventHandler = () => {
-  tableInstanceRef.current. //call any of the table instance methods here
-};
-
 const columns = useMemo(() => [
   {
     accessor: 'name',
     header: 'Name',
     Cell: ({ cell, table }) => <span onClick={() => table.{/* or maybe here */}}></span>,
   },
-]);
+], []);
 
-return (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    //all callback props have access to the table instance when used like this
-    renderTopToolbarCustomActions={({ table }) => (
-      <Button onClick={() => table.{/* or maybe here */}}>Click Me</Button>
-    )}
-    tableInstanceRef={tableInstanceRef}
-  />
-);
+const table = useMaterialReactTable({
+  columns,
+  data,
+  renderTopToolbarCustomActions: ({ table }) => <Button onClick={() => table{/* or maybe here */}}>Click Me</Button>,
+});
+
+const someEventHandler = () => {
+  table. //call any of the table instance methods here
+};
+
+return <MaterialReactTable table={table} />;
 ```
 
-> NOTE: These are NOT the [props](/docs/api/props) for Material React Table. These are just static methods on a table instance that you can use.
+> NOTE: These are NOT the [table options](/docs/api/table-options) for Material React Table. These are just static methods on a table instance that you can use.
 
 <TableInstanceAPIsTable />
 

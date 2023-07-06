@@ -1,5 +1,8 @@
 import React, { useMemo } from 'react';
-import { MaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 
 //nested data is ok, see accessorKeys in ColumnDef below
 const data = [
@@ -83,7 +86,12 @@ const Example = () => {
     [],
   );
 
-  return <MaterialReactTable columns={columns} data={data} />;
+  const table = useMaterialReactTable({
+    columns,
+    data,
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

@@ -1,5 +1,9 @@
 import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
+import {
+  MaterialReactTable,
+  type MRT_ColumnDef,
+  useMaterialReactTable,
+} from '../../src';
 import { faker } from '@faker-js/faker';
 
 const meta: Meta = {
@@ -8,7 +12,18 @@ const meta: Meta = {
 
 export default meta;
 
-const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
+interface Person {
+  name: {
+    firstName: string;
+    lastName: string;
+  };
+  email: string;
+  address: string;
+  city: string;
+  state: string;
+}
+
+const columns: MRT_ColumnDef<Person>[] = [
   {
     header: 'First Name',
     accessorKey: 'name.firstName',
@@ -35,7 +50,7 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   },
 ];
 
-const data = [...Array(100)].map(() => ({
+const data: Person[] = [...Array(100)].map(() => ({
   name: {
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
@@ -46,22 +61,29 @@ const data = [...Array(100)].map(() => ({
   state: faker.location.state(),
 }));
 
-export const ClickToCopyEnabled = () => (
-  <MaterialReactTable columns={columns} data={data} enableClickToCopy />
-);
+export const ClickToCopyEnabled = () => {
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableClickToCopy: true,
+  });
+  return <MaterialReactTable table={table} />;
+};
 
-export const ClickToCopyEnabledWithColumnResizing = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    enableClickToCopy
-    enableColumnResizing
-  />
-);
+export const ClickToCopyEnabledWithColumnResizing = () => {
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableClickToCopy: true,
+    enableColumnResizing: true,
+  });
 
-export const ClickToCopyEnabledPerColumn = () => (
-  <MaterialReactTable
-    columns={[
+  return <MaterialReactTable table={table} />;
+};
+
+export const ClickToCopyEnabledPerColumn = () => {
+  const table = useMaterialReactTable({
+    columns: [
       {
         header: 'First Name',
         accessorKey: 'name.firstName',
@@ -87,14 +109,16 @@ export const ClickToCopyEnabledPerColumn = () => (
         header: 'State',
         accessorKey: 'state',
       },
-    ]}
-    data={data}
-  />
-);
+    ],
+    data,
+  });
 
-export const ClickToCopyDisabledPerColumn = () => (
-  <MaterialReactTable
-    columns={[
+  return <MaterialReactTable table={table} />;
+};
+
+export const ClickToCopyDisabledPerColumn = () => {
+  const table = useMaterialReactTable({
+    columns: [
       {
         header: 'First Name',
         accessorKey: 'name.firstName',
@@ -106,6 +130,7 @@ export const ClickToCopyDisabledPerColumn = () => (
       {
         header: 'Email Address',
         accessorKey: 'email',
+        enableClickToCopy: false,
       },
       {
         header: 'Address',
@@ -114,15 +139,14 @@ export const ClickToCopyDisabledPerColumn = () => (
       {
         header: 'City',
         accessorKey: 'city',
-        enableClickToCopy: false,
       },
       {
         header: 'State',
         accessorKey: 'state',
-        enableClickToCopy: false,
       },
-    ]}
-    data={data}
-    enableClickToCopy
-  />
-);
+    ],
+    data,
+  });
+
+  return <MaterialReactTable table={table} />;
+};

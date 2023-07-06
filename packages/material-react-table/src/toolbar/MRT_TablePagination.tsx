@@ -2,12 +2,12 @@ import { type ChangeEvent } from 'react';
 import TablePagination from '@mui/material/TablePagination';
 import { type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any> = {}> {
+interface Props<TData extends Record<string, any>> {
   position?: 'top' | 'bottom';
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
+export const MRT_TablePagination = <TData extends Record<string, any>>({
   table,
   position = 'bottom',
 }: Props<TData>) => {

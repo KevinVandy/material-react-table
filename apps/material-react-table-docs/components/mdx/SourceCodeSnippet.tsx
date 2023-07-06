@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Highlight, themes } from 'prism-react-renderer';
 import {
   ToggleButton,
@@ -46,6 +46,7 @@ export interface Props {
   Component?: any;
   apiCode?: string;
   javaScriptCode?: string;
+  legacyCode?: string;
   tableId: string;
   typeScriptCode: string;
 }
@@ -54,6 +55,7 @@ export const SourceCodeSnippet = ({
   Component,
   apiCode,
   javaScriptCode,
+  legacyCode,
   tableId,
   typeScriptCode,
 }: Props) => {
@@ -68,33 +70,25 @@ export const SourceCodeSnippet = ({
     setPrimaryColor,
   } = useThemeContext();
   const isMobile = useMediaQuery('(max-width: 720px)');
-  const [isTypeScript, setIsTypeScript] = useState(true);
-  const [showApiCode, setShowApiCode] = useState(false);
+  const [codeTab, setCodeTab] = useState<'ts' | 'js' | 'legacy' | 'api'>('ts');
   const [isCopied, setIsCopied] = useState(false);
   const [isFullCode, setIsFullCode] = useState(false);
 
-  let skipCodeLine = false;
-
-  useEffect(
-    () =>
-      setIsTypeScript(
-        localStorage.getItem('isTypeScript') === 'true' || !javaScriptCode,
-      ),
-    [javaScriptCode],
-  );
-
-  useEffect(
-    () => localStorage.setItem('isTypeScript', isTypeScript.toString()),
-    [isTypeScript],
-  );
-
   const handleCopy = () => {
     navigator.clipboard.writeText(
-      isTypeScript ? typeScriptCode : javaScriptCode ?? '',
+      (codeTab === 'ts'
+        ? typeScriptCode
+        : codeTab === 'js'
+        ? javaScriptCode
+        : codeTab === 'legacy'
+        ? legacyCode
+        : apiCode) ?? '',
     );
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 3000);
   };
+
+  let skipCodeLine = false;
 
   return (
     <Box
@@ -171,7 +165,13 @@ export const SourceCodeSnippet = ({
                   color="info"
                   endIcon={<LaunchIcon />}
                   href={`https://github.com/KevinVandy/material-react-table/tree/main/apps/material-react-table-docs/examples/${tableId}/sandbox/src/${
-                    isTypeScript ? 'TS.tsx' : 'JS.js'
+                    codeTab === 'ts'
+                      ? 'TS.tsx'
+                      : codeTab === 'js'
+                      ? 'JS.js'
+                      : codeTab === 'legacy'
+                      ? 'Props.tsx'
+                      : 'API.ts'
                   }`}
                   onClick={() => plausible('open-on-github')}
                   rel="noopener"
@@ -258,11 +258,10 @@ export const SourceCodeSnippet = ({
               <ToggleButtonGroup>
                 <ToggleButton
                   onClick={() => {
-                    setIsTypeScript(true);
-                    setShowApiCode(false);
+                    setCodeTab('ts');
                     plausible('toggle-to-typescript');
                   }}
-                  selected={isTypeScript && !showApiCode}
+                  selected={codeTab === 'ts'}
                   sx={{ textTransform: 'none' }}
                   value="ts"
                 >
@@ -271,26 +270,37 @@ export const SourceCodeSnippet = ({
                 {javaScriptCode && (
                   <ToggleButton
                     onClick={() => {
-                      setIsTypeScript(false);
-                      setShowApiCode(false);
+                      setCodeTab('js');
                       plausible('toggle-to-javascript');
                     }}
-                    selected={!isTypeScript && !showApiCode}
+                    selected={codeTab === 'js'}
                     sx={{ textTransform: 'none' }}
                     value="js"
                   >
                     {isMobile ? 'JS' : 'JavaScript'}
                   </ToggleButton>
                 )}
+                {legacyCode && (
+                  <ToggleButton
+                    value="js"
+                    onClick={() => {
+                      setCodeTab('legacy');
+                    }}
+                    selected={codeTab === 'legacy'}
+                    sx={{ textTransform: 'none' }}
+                  >
+                    {isMobile ? 'Legacy' : 'Legacy Props API'}
+                  </ToggleButton>
+                )}
                 {apiCode && (
                   <ToggleButton
                     onClick={() => {
-                      setShowApiCode(true);
+                      setCodeTab('api');
                     }}
                     value="js"
-                    selected={showApiCode}
+                    selected={codeTab === 'api'}
                   >
-                    API
+                    {isMobile ? 'API' : 'Back-end API'}
                   </ToggleButton>
                 )}
               </ToggleButtonGroup>
@@ -301,13 +311,15 @@ export const SourceCodeSnippet = ({
         <Paper elevation={3}>
           <Highlight
             code={
-              showApiCode
-                ? apiCode ?? ''
-                : isTypeScript
+              (codeTab === 'ts'
                 ? typeScriptCode
-                : javaScriptCode ?? ''
+                : codeTab === 'js'
+                ? javaScriptCode
+                : codeTab === 'legacy'
+                ? legacyCode
+                : apiCode) ?? ''
             }
-            language={showApiCode || isTypeScript ? 'tsx' : 'jsx'}
+            language={codeTab !== 'js' ? 'tsx' : 'jsx'}
             theme={
               theme.palette.mode === 'dark' ? themes.nightOwl : themes.github
             }

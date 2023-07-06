@@ -1,0 +1,121 @@
+import Head from 'next/head';
+import { InstallCommand } from '../components/mdx/InstallCommand';
+
+<Head>
+  <title>
+    Migrating to Material React Table V2 - Material React Table Docs
+  </title>
+  <meta
+    name="description"
+    content="Migrating to Material React Table V2 from V1"
+  />
+</Head>
+
+## Migrating to Material React Table V2 from V1
+
+### Breaking Changes
+
+- `@mui/x-date-pickers` is now a required peer dependency. Install it with
+
+<InstallCommand packagesString="@mui/x-date-pickers" />
+
+- `MaterialReactTable` is now a named export instead of a default export. Use curly braces to import it.
+
+```diff
+- import MaterialReactTable from 'material-react-table'
++ import { MaterialReactTable, useMaterialReactTable } from 'material-react-table'
+```
+
+- There is no longer a `tableInstanceRef` prop. It has been replaced by the `useMaterialReactTable` hook, which is way easier to use. It will also be recommended that all table options should be passed to the new `useMaterialReactTable` hook instead as props to the `<MaterialReactTable />` component. See [below](#usematerialreacttable) for more details.
+
+#### Renamed Props/Options
+
+- `virtualizerInstanceRef` split into `columnVirtualizerRef` and `rowVirtualizerRef`
+- `virtualizerProps` split into `columnVirtualizerOptions` and `rowVirtualizerOptions`
+- `columnVirtualizerProps` -> `columnVirtualizerOptions`
+- `rowVirtualizerProps` -> `rowVirtualizerOptions`
+- `muiTableBodyCellCopyButtonProps` -> `muiCopyButtonProps`
+- `muiTableBodyCellEditTextFieldProps` -> `muiEditTextFieldProps`
+- `muiTableBodyCellSkeletonProps` -> `muiSkeletonProps`
+- `muiTableBodyRowDragHandleProps` -> `muiRowDragHandleProps`
+- `muiTableDetailPanelProps` -> `muiDetailPanelProps`
+- `muiTableHeadCellColumnActionsButtonProps` -> `muiColumnActionsButtonProps`
+- `muiTableHeadCellDragHandleProps` -> `muiColumnDragHandleProps`
+- `muiTableHeadCellFilterCheckboxProps` -> `muiFilterCheckboxProps`
+- `muiTableHeadCellFilterTextFieldProps` -> `muiFilterTextFieldProps`
+- `muiTableHeadCellFilterSliderProps` -> `muiFilterSliderProps`
+
+### useMaterialReactTable
+
+Passing all table options as props to `<MaterialReactTable />` will still work, but there is a new and better way to define table options with the `useMaterialReactTable` hook.
+
+For example, here is a classic example for how to use Material React Table in V1 (still works in V2):
+
+```jsx
+import { MaterialReactTable } from 'material-react-table';
+
+export const MyTableComponent = () => {
+  // const tableInstanceRef = useRef(); //deprecated
+
+  return (
+    //Defining table options as props to <MaterialReactTable /> still works (as long as you don't also pass in a table prop)
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      enableRowSelection //table options as props
+      // tableInstanceRef={tableInstanceRef} //deprecated
+    />
+  );
+};
+```
+
+But now, you can define all table options in the `useMaterialReactTable`.
+
+```jsx
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
+
+export const MyTableComponent = () => {
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableRowSelection: true, //table options as options to this hook
+  });
+
+  return (
+    <MaterialReactTable
+      table={table} //only pass in table instead of all table options
+    />
+  );
+};
+```
+
+### Why is useMaterialReactTable Better?
+
+There are a few reasons why having full access to the `table` instance is better than having MRT create it under the hood for you.
+
+1. No more need for a confusing `tableInstanceRef` prop that doesn't properly cause re-renders when the table instance changes. Now any component that consumes the `table` instance will properly re-render when the table instance changes.
+
+2. Allows for you to not need to use all of Material React Table's components. For example, if you only want to use the `Table` component with no TableContainer or Toolbars, you can simply import a different component from Material React Table.
+
+```jsx
+import { MRT_Table, useMaterialReactTable } from 'material-react-table';
+
+export const MyTableComponent = () => {
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableRowSelection: true,
+  });
+
+  const selectedRows = table.getSelectedRowModel().rows;
+  console.log(selectedRows);
+
+  return (
+    //this internal sub-component does not include the Paper, TableContainer, or Toolbars (lighter weight)
+    <MRT_Table table={table} />
+  );
+};
+```
