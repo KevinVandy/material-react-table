@@ -272,8 +272,7 @@ export type MRT_TableState<TData extends Record<string, any>> = TableState & {
   showProgressBars: boolean;
   showSkeletons: boolean;
   showToolbarDropZone: boolean;
-  ColumnsHeader: ReactNode
-    | ((props: {
+  ColumnsHeader: ((props: {
         column: MRT_Column<TData>;
         header: MRT_Header<TData>;
         table: MRT_TableInstance<TData>;
