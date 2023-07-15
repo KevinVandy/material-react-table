@@ -25,7 +25,6 @@ import {
   type MRT_Row,
 } from './types';
 
-
 export const getColumnId = <TData extends Record<string, any>>(
   columnDef: MRT_ColumnDef<TData>,
 ): string =>

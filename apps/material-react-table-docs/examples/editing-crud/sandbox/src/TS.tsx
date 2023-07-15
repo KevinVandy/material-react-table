@@ -219,7 +219,7 @@ const Example = () => {
           </IconButton>
         </Tooltip>
         <Tooltip title="Delete">
-          <IconButton color='error' onClick={() => openDeleteConfirmModal(row)}>
+          <IconButton color="error" onClick={() => openDeleteConfirmModal(row)}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
