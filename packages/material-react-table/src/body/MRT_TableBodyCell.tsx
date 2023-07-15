@@ -45,7 +45,8 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
   const {
     getState,
     options: {
-      editingMode,
+      createDisplayMode,
+      editDisplayMode,
       enableClickToCopy,
       enableColumnOrdering,
       enableEditing,
@@ -61,6 +62,7 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
     setHoveredColumn,
   } = table;
   const {
+    creatingRow,
     draggingColumn,
     draggingRow,
     editingCell,
@@ -95,21 +97,16 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
       ? muiSkeletonProps({ cell, column, row, table })
       : muiSkeletonProps;
 
-  const [skeletonWidth, setSkeletonWidth] = useState(0);
-  useEffect(
-    () =>
-      setSkeletonWidth(
-        isLoading || showSkeletons
-          ? columnDefType === 'display'
-            ? column.getSize() / 2
-            : Math.round(
-                Math.random() * (column.getSize() - column.getSize() / 3) +
-                  column.getSize() / 3,
-              )
-          : 100,
-      ),
-    [],
-  );
+  const [skeletonWidth, setSkeletonWidth] = useState(100);
+  useEffect(() => {
+    if ((!isLoading && !showSkeletons) || skeletonWidth !== 100) return;
+    const size = column.getSize();
+    setSkeletonWidth(
+      columnDefType === 'display'
+        ? size / 2
+        : Math.round(Math.random() * (size - size / 3) + size / 3),
+    );
+  }, [isLoading, showSkeletons]);
 
   const draggingBorders = useMemo(() => {
     const isDraggingColumn = draggingColumn?.id === column.id;
@@ -158,15 +155,18 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
 
   const isEditing =
     isEditable &&
-    editingMode !== 'modal' &&
-    (editingMode === 'table' ||
+    !['modal', 'custom'].includes(editDisplayMode as string) &&
+    (editDisplayMode === 'table' ||
       editingRow?.id === row.id ||
       editingCell?.id === cell.id) &&
     !row.getIsGrouped();
 
+  const isCreating =
+    isEditable && createDisplayMode === 'row' && creatingRow?.id === row.id;
+
   const handleDoubleClick = (event: MouseEvent<HTMLTableCellElement>) => {
     tableCellProps?.onDoubleClick?.(event);
-    if (isEditable && editingMode === 'cell') {
+    if (isEditable && editDisplayMode === 'cell') {
       setEditingCell(cell);
       queueMicrotask(() => {
         const textField = editInputRefs.current[column.id];
@@ -203,7 +203,8 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
       onDoubleClick={handleDoubleClick}
       sx={(theme) => ({
         alignItems: layoutMode === 'grid' ? 'center' : undefined,
-        cursor: isEditable && editingMode === 'cell' ? 'pointer' : 'inherit',
+        cursor:
+          isEditable && editDisplayMode === 'cell' ? 'pointer' : 'inherit',
         justifyContent:
           layoutMode === 'grid' ? tableCellProps.align : undefined,
         overflow: 'hidden',
@@ -235,7 +236,7 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
         zIndex:
           draggingColumn?.id === column.id ? 2 : column.getIsPinned() ? 1 : 0,
         '&:hover': {
-          outline: ['table', 'cell'].includes(editingMode ?? '')
+          outline: ['table', 'cell'].includes(editDisplayMode ?? '')
             ? `1px solid ${theme.palette.text.secondary}`
             : undefined,
           outlineOffset: '-1px',
@@ -265,11 +266,7 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
           column.id === 'mrt-row-numbers' ? (
           rowIndex + 1
         ) : column.id === 'mrt-row-drag' ? (
-          <MRT_TableBodyRowGrabHandle
-            cell={cell}
-            rowRef={rowRef}
-            table={table}
-          />
+          <MRT_TableBodyRowGrabHandle row={row} rowRef={rowRef} table={table} />
         ) : columnDefType === 'display' &&
           (column.id === 'mrt-row-select' ||
             column.id === 'mrt-row-expand' ||
@@ -281,7 +278,7 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
             row,
             table,
           })
-        ) : isEditing ? (
+        ) : isCreating || isEditing ? (
           <MRT_EditCellTextField cell={cell} table={table} />
         ) : (enableClickToCopy || columnDef.enableClickToCopy) &&
           columnDef.enableClickToCopy !== false ? (

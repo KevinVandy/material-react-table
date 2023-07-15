@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import {
   MaterialReactTable,
   MRT_ToggleDensePaddingButton,
-  MRT_FullScreenToggleButton,
+  MRT_ToggleFullScreenButton,
 } from 'material-react-table';
 import { Box, Button, IconButton } from '@mui/material';
 import PrintIcon from '@mui/icons-material/Print';
@@ -76,7 +76,7 @@ const Example = () => {
           </IconButton>
           {/* along-side built-in buttons in whatever order you want them */}
           <MRT_ToggleDensePaddingButton table={table} />
-          <MRT_FullScreenToggleButton table={table} />
+          <MRT_ToggleFullScreenButton table={table} />
         </Box>
       )}
     />

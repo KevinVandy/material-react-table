@@ -156,7 +156,7 @@ const Example = () => {
         }}
         columns={columns}
         data={tableData}
-        editingMode="modal" //default
+        editDisplayMode="modal" //default
         enableColumnOrdering
         enableEditing
         onEditingRowSave={handleSaveRowEdits}

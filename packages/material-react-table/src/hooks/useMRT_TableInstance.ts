@@ -12,6 +12,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
+  createRow,
   getAllLeafColumnDefs,
   getColumnId,
   getDefaultColumnFilterFn,
@@ -27,12 +28,13 @@ import {
   type MRT_ColumnOrderState,
   type MRT_DefinedTableOptions,
   type MRT_DensityState,
-  type MRT_FilterFnsState,
+  type MRT_ColumnFilterFnsState,
   type MRT_FilterOption,
   type MRT_GroupingState,
   type MRT_Row,
   type MRT_TableInstance,
   type MRT_TableState,
+  type MRT_Updater,
 } from '../types';
 
 export const useMRT_TableInstance: <TData extends Record<string, any>>(
@@ -57,8 +59,11 @@ export const useMRT_TableInstance: <TData extends Record<string, any>>(
     return initState;
   }, []);
 
-  const [columnFilterFns, setColumnFilterFns] = useState<MRT_FilterFnsState>(
-    () =>
+  const [creatingRow, _setCreatingRow] = useState<MRT_Row<TData> | null>(
+    initialState.creatingRow ?? null,
+  );
+  const [columnFilterFns, setColumnFilterFns] =
+    useState<MRT_ColumnFilterFnsState>(() =>
       Object.assign(
         {},
         ...getAllLeafColumnDefs(
@@ -72,7 +77,7 @@ export const useMRT_TableInstance: <TData extends Record<string, any>>(
                 getDefaultColumnFilterFn(col),
         })),
       ),
-  );
+    );
   const [columnOrder, setColumnOrder] = useState<MRT_ColumnOrderState>(
     initialState.columnOrder ?? [],
   );
@@ -119,9 +124,10 @@ export const useMRT_TableInstance: <TData extends Record<string, any>>(
   );
 
   const displayColumns = useMRT_DisplayColumns({
-    tableOptions,
     columnOrder,
+    creatingRow,
     grouping,
+    tableOptions,
   });
 
   const columnDefs = useMemo(
@@ -169,98 +175,115 @@ export const useMRT_TableInstance: <TData extends Record<string, any>>(
   );
 
   //@ts-ignore
-  const table = {
-    ...useReactTable({
-      getCoreRowModel: getCoreRowModel(),
-      getExpandedRowModel:
-        tableOptions.enableExpanding || tableOptions.enableGrouping
-          ? getExpandedRowModel()
-          : undefined,
-      getFacetedMinMaxValues: tableOptions.enableFacetedValues
-        ? getFacetedMinMaxValues()
+  const table = useReactTable({
+    getCoreRowModel: getCoreRowModel(),
+    getExpandedRowModel:
+      tableOptions.enableExpanding || tableOptions.enableGrouping
+        ? getExpandedRowModel()
         : undefined,
-      getFacetedRowModel: tableOptions.enableFacetedValues
-        ? getFacetedRowModel()
+    getFacetedMinMaxValues: tableOptions.enableFacetedValues
+      ? getFacetedMinMaxValues()
+      : undefined,
+    getFacetedRowModel: tableOptions.enableFacetedValues
+      ? getFacetedRowModel()
+      : undefined,
+    getFacetedUniqueValues: tableOptions.enableFacetedValues
+      ? getFacetedUniqueValues()
+      : undefined,
+    getFilteredRowModel:
+      tableOptions.enableColumnFilters ||
+      tableOptions.enableGlobalFilter ||
+      tableOptions.enableFilters
+        ? getFilteredRowModel()
         : undefined,
-      getFacetedUniqueValues: tableOptions.enableFacetedValues
-        ? getFacetedUniqueValues()
-        : undefined,
-      getFilteredRowModel:
-        tableOptions.enableColumnFilters ||
-        tableOptions.enableGlobalFilter ||
-        tableOptions.enableFilters
-          ? getFilteredRowModel()
-          : undefined,
-      getGroupedRowModel: tableOptions.enableGrouping
-        ? getGroupedRowModel()
-        : undefined,
-      getPaginationRowModel: tableOptions.enablePagination
-        ? getPaginationRowModel()
-        : undefined,
-      getSortedRowModel: tableOptions.enableSorting
-        ? getSortedRowModel()
-        : undefined,
-      onColumnOrderChange: setColumnOrder,
-      onGroupingChange: setGrouping,
-      getSubRows: (row) => row?.subRows,
-      ...tableOptions,
-      //@ts-ignore
-      columns: columnDefs,
-      data,
-      globalFilterFn:
-        tableOptions.filterFns?.[globalFilterFn] ??
-        tableOptions.filterFns?.fuzzy,
-      initialState,
-      state: {
-        columnFilterFns,
-        columnOrder,
-        density,
-        draggingColumn,
-        draggingRow,
-        editingCell,
-        editingRow,
-        globalFilterFn,
-        grouping,
-        hoveredColumn,
-        hoveredRow,
-        isFullScreen,
-        showAlertBanner,
-        showColumnFilters,
-        showGlobalFilter,
-        showToolbarDropZone,
-        ...tableOptions.state,
-      },
-    }),
-    refs: {
-      bottomToolbarRef,
-      editInputRefs,
-      filterInputRefs,
-      searchInputRef,
-      tableContainerRef,
-      tableHeadCellRefs,
-      tablePaperRef,
-      topToolbarRef,
+    getGroupedRowModel: tableOptions.enableGrouping
+      ? getGroupedRowModel()
+      : undefined,
+    getPaginationRowModel: tableOptions.enablePagination
+      ? getPaginationRowModel()
+      : undefined,
+    getSortedRowModel: tableOptions.enableSorting
+      ? getSortedRowModel()
+      : undefined,
+    onColumnOrderChange: setColumnOrder,
+    onGroupingChange: setGrouping,
+    getSubRows: (row) => row?.subRows,
+    ...tableOptions,
+    //@ts-ignore
+    columns: columnDefs,
+    data,
+    globalFilterFn: tableOptions.filterFns?.[globalFilterFn ?? 'fuzzy'],
+    initialState,
+    state: {
+      creatingRow,
+      columnFilterFns,
+      columnOrder,
+      density,
+      draggingColumn,
+      draggingRow,
+      editingCell,
+      editingRow,
+      globalFilterFn,
+      grouping,
+      hoveredColumn,
+      hoveredRow,
+      isFullScreen,
+      showAlertBanner,
+      showColumnFilters,
+      showGlobalFilter,
+      showToolbarDropZone,
+      ...tableOptions.state,
     },
-    setColumnFilterFns:
-      tableOptions.onColumnFilterFnsChange ?? setColumnFilterFns,
-    setDensity: tableOptions.onDensityChange ?? setDensity,
-    setDraggingColumn: tableOptions.onDraggingColumnChange ?? setDraggingColumn,
-    setDraggingRow: tableOptions.onDraggingRowChange ?? setDraggingRow,
-    setEditingCell: tableOptions.onEditingCellChange ?? setEditingCell,
-    setEditingRow: tableOptions.onEditingRowChange ?? setEditingRow,
-    setGlobalFilterFn: tableOptions.onGlobalFilterFnChange ?? setGlobalFilterFn,
-    setHoveredColumn: tableOptions.onHoveredColumnChange ?? setHoveredColumn,
-    setHoveredRow: tableOptions.onHoveredRowChange ?? setHoveredRow,
-    setIsFullScreen: tableOptions.onIsFullScreenChange ?? setIsFullScreen,
-    setShowAlertBanner:
-      tableOptions.onShowAlertBannerChange ?? setShowAlertBanner,
-    setShowColumnFilters:
-      tableOptions.onShowColumnFiltersChange ?? setShowColumnFilters,
-    setShowGlobalFilter:
-      tableOptions.onShowGlobalFilterChange ?? setShowGlobalFilter,
-    setShowToolbarDropZone:
-      tableOptions.onShowToolbarDropZoneChange ?? setShowToolbarDropZone,
-  } as MRT_TableInstance<TData>;
+  }) as MRT_TableInstance<TData>;
+
+  // @ts-ignore
+  table.refs = {
+    // @ts-ignore
+    bottomToolbarRef,
+    editInputRefs,
+    filterInputRefs,
+    // @ts-ignore
+    searchInputRef,
+    // @ts-ignore
+    tableContainerRef,
+    tableHeadCellRefs,
+    // @ts-ignore
+    tablePaperRef,
+    // @ts-ignore
+    topToolbarRef,
+  };
+
+  const setCreatingRow = (row: MRT_Updater<MRT_Row<TData> | null | true>) => {
+    if (row === true) {
+      table.setCreatingRow(createRow(table));
+    } else {
+      _setCreatingRow(row as MRT_Row<TData> | null);
+    }
+  };
+
+  table.setCreatingRow = setCreatingRow;
+  table.setColumnFilterFns =
+    tableOptions.onColumnFilterFnsChange ?? setColumnFilterFns;
+  table.setDensity = tableOptions.onDensityChange ?? setDensity;
+  table.setDraggingColumn =
+    tableOptions.onDraggingColumnChange ?? setDraggingColumn;
+  table.setDraggingRow = tableOptions.onDraggingRowChange ?? setDraggingRow;
+  table.setEditingCell = tableOptions.onEditingCellChange ?? setEditingCell;
+  table.setEditingRow = tableOptions.onEditingRowChange ?? setEditingRow;
+  table.setGlobalFilterFn =
+    tableOptions.onGlobalFilterFnChange ?? setGlobalFilterFn;
+  table.setHoveredColumn =
+    tableOptions.onHoveredColumnChange ?? setHoveredColumn;
+  table.setHoveredRow = tableOptions.onHoveredRowChange ?? setHoveredRow;
+  table.setIsFullScreen = tableOptions.onIsFullScreenChange ?? setIsFullScreen;
+  table.setShowAlertBanner =
+    tableOptions.onShowAlertBannerChange ?? setShowAlertBanner;
+  table.setShowColumnFilters =
+    tableOptions.onShowColumnFiltersChange ?? setShowColumnFilters;
+  table.setShowGlobalFilter =
+    tableOptions.onShowGlobalFilterChange ?? setShowGlobalFilter;
+  table.setShowToolbarDropZone =
+    tableOptions.onShowToolbarDropZoneChange ?? setShowToolbarDropZone;
 
   useMRT_Effects(table);
 

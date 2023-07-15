@@ -32,7 +32,8 @@ export const MRT_ToggleRowActionMenuButton = <
   const {
     getState,
     options: {
-      editingMode,
+      createDisplayMode,
+      editDisplayMode,
       enableEditing,
       icons: { EditIcon, MoreHorizIcon },
       localization,
@@ -42,7 +43,14 @@ export const MRT_ToggleRowActionMenuButton = <
     setEditingRow,
   } = table;
 
-  const { editingRow } = getState();
+  const { creatingRow, editingRow } = getState();
+
+  const isCreating = creatingRow?.id === row.id;
+  const isEditing = editingRow?.id === row.id;
+
+  const showEditActionButtons =
+    (isCreating && createDisplayMode === 'row') ||
+    (isEditing && editDisplayMode === 'row');
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -60,9 +68,9 @@ export const MRT_ToggleRowActionMenuButton = <
 
   return (
     <>
-      {renderRowActions ? (
+      {renderRowActions && !showEditActionButtons ? (
         renderRowActions({ cell, row, table })
-      ) : row.id === editingRow?.id && editingMode === 'row' ? (
+      ) : showEditActionButtons ? (
         <MRT_EditActionButtons row={row} table={table} />
       ) : !renderRowActionMenuItems &&
         (enableEditing instanceof Function

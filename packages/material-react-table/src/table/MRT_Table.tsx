@@ -9,9 +9,9 @@ import Table from '@mui/material/Table';
 import { MRT_TableHead } from '../head/MRT_TableHead';
 import { Memo_MRT_TableBody, MRT_TableBody } from '../body/MRT_TableBody';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
+import { MRT_EditRowModal } from '../modals/MRT_EditRowModal';
 import { parseCSSVarId } from '../column.utils';
 import { type MRT_TableInstance } from '../types';
-import { MRT_EditRowModal } from './MRT_EditRowModal';
 
 interface Props<TData extends Record<string, any>> {
   table: MRT_TableInstance<TData>;
@@ -24,10 +24,11 @@ export const MRT_Table = <TData extends Record<string, any>>({
     getFlatHeaders,
     getState,
     options: {
+      createDisplayMode,
       columnVirtualizerInstanceRef,
       columnVirtualizerOptions,
       columns,
-      editingMode,
+      editDisplayMode,
       enableColumnResizing,
       enableColumnVirtualization,
       enablePinning,
@@ -41,6 +42,7 @@ export const MRT_Table = <TData extends Record<string, any>>({
     refs: { tableContainerRef },
   } = table;
   const {
+    creatingRow,
     columnPinning,
     columnSizing,
     columnSizingInfo,
@@ -148,6 +150,9 @@ export const MRT_Table = <TData extends Record<string, any>>({
     virtualPaddingRight,
   };
 
+  const createModalOpen = createDisplayMode === 'modal' && creatingRow;
+  const editModalOpen = editDisplayMode === 'modal' && editingRow;
+
   return (
     <>
       <Table
@@ -175,8 +180,8 @@ export const MRT_Table = <TData extends Record<string, any>>({
         )}
         {enableTableFooter && <MRT_TableFooter {...props} />}
       </Table>
-      {editingRow && editingMode === 'modal' && (
-        <MRT_EditRowModal row={editingRow as any} table={table} open />
+      {(createModalOpen || editModalOpen) && (
+        <MRT_EditRowModal open table={table} />
       )}
     </>
   );

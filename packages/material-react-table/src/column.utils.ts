@@ -1,8 +1,14 @@
+import { type ReactNode } from 'react';
+import {
+  type Row,
+  type Renderable,
+  flexRender as _flexRender,
+  createRow as _createRow,
+} from '@tanstack/react-table';
 import { alpha, lighten } from '@mui/material/styles';
 import { type MRT_AggregationFns } from './aggregationFns';
 import { type MRT_FilterFns } from './filterFns';
 import { type MRT_SortingFns } from './sortingFns';
-import { type Row } from '@tanstack/react-table';
 import { type TableCellProps } from '@mui/material/TableCell';
 import { type Theme } from '@mui/material/styles';
 import {
@@ -16,7 +22,9 @@ import {
   type MRT_GroupingState,
   type MRT_Header,
   type MRT_TableInstance,
+  type MRT_Row,
 } from './types';
+
 
 export const getColumnId = <TData extends Record<string, any>>(
   columnDef: MRT_ColumnDef<TData>,
@@ -149,7 +157,7 @@ export const getLeadingDisplayColumnIds = <TData extends Record<string, any>>(
     props.positionActionsColumn === 'first' &&
       (props.enableRowActions ||
         (props.enableEditing &&
-          ['row', 'modal'].includes(props.editingMode ?? ''))) &&
+          ['row', 'modal'].includes(props.editDisplayMode ?? ''))) &&
       'mrt-row-actions',
     props.positionExpandColumn === 'first' &&
       showExpandColumn(props) &&
@@ -165,7 +173,7 @@ export const getTrailingDisplayColumnIds = <TData extends Record<string, any>>(
     props.positionActionsColumn === 'last' &&
       (props.enableRowActions ||
         (props.enableEditing &&
-          ['row', 'modal'].includes(props.editingMode ?? ''))) &&
+          ['row', 'modal'].includes(props.editDisplayMode ?? ''))) &&
       'mrt-row-actions',
     props.positionExpandColumn === 'last' &&
       showExpandColumn(props) &&
@@ -379,3 +387,26 @@ export const MRT_DefaultDisplayColumn = {
 } as const;
 
 export const parseCSSVarId = (id: string) => id.replace(/[^a-zA-Z0-9]/g, '_');
+
+export const flexRender = _flexRender as (
+  Comp: Renderable<any>,
+  props: any,
+) => ReactNode | JSX.Element;
+
+export const createRow = <TData extends Record<string, any>>(
+  table: MRT_TableInstance<TData>,
+  originalRow?: TData,
+): MRT_Row<TData> =>
+  _createRow(
+    table as any,
+    'mrt-row-create',
+    originalRow ??
+      Object.assign(
+        {},
+        ...getAllLeafColumnDefs(table.options.columns).map((col) => ({
+          [getColumnId(col)]: '',
+        })),
+      ),
+    -1,
+    0,
+  ) as MRT_Row<TData>;

@@ -77,7 +77,7 @@ export const NoMemos = () => {
     <MaterialReactTable
       columns={columns}
       data={tableData}
-      editingMode="row"
+      editDisplayMode="row"
       enableColumnOrdering
       enableEditing
       enableGrouping
@@ -105,7 +105,7 @@ export const MemoCells = () => {
     <MaterialReactTable
       columns={columns}
       data={tableData}
-      editingMode="row"
+      editDisplayMode="row"
       enableColumnOrdering
       enableEditing
       enableGrouping
@@ -134,7 +134,7 @@ export const MemoRows = () => {
     <MaterialReactTable
       columns={columns}
       data={tableData}
-      editingMode="row"
+      editDisplayMode="row"
       enableColumnOrdering
       enableEditing
       enableGrouping
@@ -163,7 +163,7 @@ export const MemoTableBody = () => {
     <MaterialReactTable
       columns={columns}
       data={tableData}
-      editingMode="row"
+      editDisplayMode="row"
       enableColumnOrdering
       enableEditing
       enableGrouping

@@ -44,7 +44,7 @@ export const Example = () => {
           return <>{renderedCellValue}</>;
         },
       }}
-      editingMode="row"
+      editDisplayMode="row"
       enableColumnOrdering
       enableDensityToggle={false} //density toggle is not compatible with memoization
       enableEditing

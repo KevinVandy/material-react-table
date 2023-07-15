@@ -1,6 +1,6 @@
 import React, { useReducer, useRef, useState } from 'react';
 import {
-  MRT_FullScreenToggleButton,
+  MRT_ToggleFullScreenButton,
   MRT_GlobalFilterTextField,
   MRT_ShowHideColumnsButton,
   MRT_TablePagination,
@@ -106,7 +106,7 @@ const Example = () => {
                 <PrintIcon />
               </IconButton>
             </Tooltip>
-            <MRT_FullScreenToggleButton table={tableInstanceRef.current} />
+            <MRT_ToggleFullScreenButton table={tableInstanceRef.current} />
           </Box>
         </Toolbar>
       )}

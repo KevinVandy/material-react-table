@@ -2,18 +2,20 @@ import {
   type Dispatch,
   type MutableRefObject,
   type ReactNode,
+  type RefObject,
   type SetStateAction,
 } from 'react';
 import { type AlertProps } from '@mui/material/Alert';
 import { type ButtonProps } from '@mui/material/Button';
 import { type CheckboxProps } from '@mui/material/Checkbox';
 import { type ChipProps } from '@mui/material/Chip';
+import { type DialogProps } from '@mui/material/Dialog';
 import { type IconButtonProps } from '@mui/material/IconButton';
 import { type LinearProgressProps } from '@mui/material/LinearProgress';
 import { type PaperProps } from '@mui/material/Paper';
 import { type RadioProps } from '@mui/material/Radio';
 import { type SkeletonProps } from '@mui/material/Skeleton';
-import { type SliderProps } from '@mui/material';
+import { type SliderProps } from '@mui/material/Slider';
 import { type TableBodyProps } from '@mui/material/TableBody';
 import { type TableCellProps } from '@mui/material/TableCell';
 import { type TableContainerProps } from '@mui/material/TableContainer';
@@ -68,7 +70,7 @@ type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
 
 export type MRT_DensityState = 'comfortable' | 'compact' | 'spacious';
 
-export type MRT_FilterFnsState = Record<string, MRT_FilterOption>;
+export type MRT_ColumnFilterFnsState = Record<string, MRT_FilterOption>;
 
 export type {
   ColumnFiltersState as MRT_ColumnFiltersState,
@@ -98,6 +100,7 @@ export interface MRT_Localization {
   clearSearch: string;
   clearSort: string;
   clickToCopy: string;
+  create?: string;
   collapse: string;
   collapseAll: string;
   columnActions: string;
@@ -233,7 +236,8 @@ export type MRT_TableInstance<TData extends Record<string, any>> = Omit<
     tablePaperRef: MutableRefObject<HTMLDivElement>;
     topToolbarRef: MutableRefObject<HTMLDivElement>;
   };
-  setColumnFilterFns: Dispatch<SetStateAction<MRT_FilterFnsState>>;
+  setCreatingRow: Dispatch<SetStateAction<MRT_Row<TData> | null | true>>;
+  setColumnFilterFns: Dispatch<SetStateAction<MRT_ColumnFilterFnsState>>;
   setDensity: Dispatch<SetStateAction<MRT_DensityState>>;
   setDraggingColumn: Dispatch<SetStateAction<MRT_Column<TData> | null>>;
   setDraggingRow: Dispatch<SetStateAction<MRT_Row<TData> | null>>;
@@ -260,7 +264,8 @@ export type MRT_DefinedTableOptions<TData extends Record<string, any>> =
   };
 
 export type MRT_TableState<TData extends Record<string, any>> = TableState & {
-  columnFilterFns: MRT_FilterFnsState;
+  columnFilterFns: MRT_ColumnFilterFnsState;
+  creatingRow: MRT_Row<TData> | null;
   density: MRT_DensityState;
   draggingColumn: MRT_Column<TData> | null;
   draggingRow: MRT_Row<TData> | null;
@@ -271,6 +276,7 @@ export type MRT_TableState<TData extends Record<string, any>> = TableState & {
   hoveredRow: MRT_Row<TData> | { id: string } | null;
   isFullScreen: boolean;
   isLoading: boolean;
+  isSaving: boolean;
   showAlertBanner: boolean;
   showColumnFilters: boolean;
   showGlobalFilter: boolean;
@@ -303,6 +309,7 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
     renderedCellValue: number | string | ReactNode;
     column: MRT_Column<TData>;
     row: MRT_Row<TData>;
+    rowRef?: RefObject<HTMLTableRowElement>;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   Edit?: (props: {
@@ -642,7 +649,11 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
   displayColumnDefOptions?: Partial<{
     [key in MRT_DisplayColumnIds]: Partial<MRT_ColumnDef<TData>>;
   }>;
-  editingMode?: 'table' | 'modal' | 'row' | 'cell';
+  createDisplayMode?: 'modal' | 'row' | 'custom';
+  editDisplayMode?: 'modal' | 'row' | 'cell' | 'table' | 'custom';
+  columnFilterDisplayMode?: 'subheader' | 'popover' | 'custom';
+  paginationDisplayMode?: 'default' | 'pages' | 'custom';
+  selectDisplayMode?: 'checkbox' | 'radio' | 'switch';
   enableBottomToolbar?: boolean;
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;
@@ -834,6 +845,18 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
       }) => TextFieldProps);
+  muiCreateRowModalProps?:
+    | DialogProps
+    | ((props: {
+        row: MRT_Row<TData>;
+        table: MRT_TableInstance<TData>;
+      }) => DialogProps);
+  muiEditRowModalProps?:
+    | DialogProps
+    | ((props: {
+        row: MRT_Row<TData>;
+        table: MRT_TableInstance<TData>;
+      }) => DialogProps);
   muiTableHeadCellProps?:
     | TableCellProps
     | ((props: {
@@ -869,6 +892,18 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
   muiTopToolbarProps?:
     | ToolbarProps
     | ((props: { table: MRT_TableInstance<TData> }) => ToolbarProps);
+  onCreatingRowCancel?: (props: {
+    row: MRT_Row<TData>;
+    table: MRT_TableInstance<TData>;
+  }) => void;
+  onCreatingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
+  onCreatingRowSave?: (props: {
+    exitCreatingMode: () => void;
+    row: MRT_Row<TData>;
+    table: MRT_TableInstance<TData>;
+    values: Record<LiteralUnion<string & DeepKeys<TData>>, any>;
+  }) => void;
+  onColumnFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterOption }>;
   onDensityChange?: OnChangeFn<MRT_DensityState>;
   onDraggingColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
   onDraggingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
@@ -877,17 +912,16 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
     row: MRT_Row<TData>;
     table: MRT_TableInstance<TData>;
   }) => void;
+  onEditingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
   onEditingRowSave?: (props: {
     exitEditingMode: () => void;
     row: MRT_Row<TData>;
     table: MRT_TableInstance<TData>;
     values: Record<LiteralUnion<string & DeepKeys<TData>>, any>;
   }) => Promise<void> | void;
-  onEditingRowChange?: OnChangeFn<MRT_Row<TData> | null>;
-  onColumnFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterOption }>;
   onGlobalFilterFnChange?: OnChangeFn<MRT_FilterOption>;
-  onHoveredColumnChange?: OnChangeFn<MRT_Column<TData> | null>;
-  onHoveredRowChange?: OnChangeFn<MRT_Row<TData> | null>;
+  onHoveredColumnChange?: OnChangeFn<MRT_Column<TData> | { id: string } | null>;
+  onHoveredRowChange?: OnChangeFn<MRT_Row<TData> | { id: string } | null>;
   onIsFullScreenChange?: OnChangeFn<boolean>;
   onShowAlertBannerChange?: OnChangeFn<boolean>;
   onShowColumnFiltersChange?: OnChangeFn<boolean>;
@@ -903,6 +937,16 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
     | ReactNode
     | ((props: { table: MRT_TableInstance<TData> }) => ReactNode);
   renderBottomToolbarCustomActions?: (props: {
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode;
+  renderCreateRowModalContent?: (props: {
+    internalEditComponents: ReactNode[];
+    row: MRT_Row<TData>;
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode;
+  renderEditRowModalContent?: (props: {
+    internalEditComponents: ReactNode[];
+    row: MRT_Row<TData>;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   renderColumnActionsMenuItems?: (props: {

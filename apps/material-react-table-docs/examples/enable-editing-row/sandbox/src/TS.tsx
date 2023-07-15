@@ -54,7 +54,7 @@ const Example = () => {
     <MaterialReactTable
       columns={columns}
       data={tableData}
-      editingMode="row"
+      editDisplayMode="row"
       enableEditing
       onEditingRowSave={handleSaveRow}
     />

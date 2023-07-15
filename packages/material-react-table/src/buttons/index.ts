@@ -3,7 +3,7 @@ export * from './MRT_CopyButton';
 export * from './MRT_EditActionButtons';
 export * from './MRT_ExpandAllButton';
 export * from './MRT_ExpandButton';
-export * from './MRT_FullScreenToggleButton';
+export * from './MRT_ToggleFullScreenButton';
 export * from './MRT_GrabHandleButton';
 export * from './MRT_ShowHideColumnsButton';
 export * from './MRT_ToggleDensePaddingButton';

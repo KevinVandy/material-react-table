@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { MRT_FullScreenToggleButton } from '../buttons/MRT_FullScreenToggleButton';
+import { MRT_ToggleFullScreenButton } from '../buttons/MRT_ToggleFullScreenButton';
 import { MRT_ShowHideColumnsButton } from '../buttons/MRT_ShowHideColumnsButton';
 import { MRT_ToggleDensePaddingButton } from '../buttons/MRT_ToggleDensePaddingButton';
 import { MRT_ToggleFiltersButton } from '../buttons/MRT_ToggleFiltersButton';
@@ -55,7 +55,7 @@ export const MRT_ToolbarInternalButtons = <TData extends Record<string, any>>({
             <MRT_ToggleDensePaddingButton table={table} />
           )}
           {enableFullScreenToggle && (
-            <MRT_FullScreenToggleButton table={table} />
+            <MRT_ToggleFullScreenButton table={table} />
           )}
         </>
       )}

@@ -1,5 +1,6 @@
-import { useMemo } from 'react';
+import { type RefObject, useMemo } from 'react';
 import { showExpandColumn } from '../column.utils';
+import { MRT_TableBodyRowGrabHandle } from '../body';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
 import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
 import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMenuButton';
@@ -9,15 +10,18 @@ import {
   type MRT_ColumnOrderState,
   type MRT_GroupingState,
   type MRT_DefinedTableOptions,
+  type MRT_Row,
 } from '../types';
 
 interface Params<TData extends Record<string, any>> {
+  creatingRow: MRT_Row<TData> | null;
   columnOrder: MRT_ColumnOrderState;
   grouping: MRT_GroupingState;
   tableOptions: MRT_DefinedTableOptions<TData>;
 }
 
 export const useMRT_DisplayColumns = <TData extends Record<string, any>>({
+  creatingRow,
   columnOrder,
   grouping,
   tableOptions,
@@ -29,15 +33,23 @@ export const useMRT_DisplayColumns = <TData extends Record<string, any>>({
           (tableOptions.state?.columnOrder ?? columnOrder).includes(
             'mrt-row-drag',
           ) && {
+            Cell: ({ row, rowRef, table }) => (
+              <MRT_TableBodyRowGrabHandle
+                row={row}
+                rowRef={rowRef as RefObject<HTMLTableRowElement>}
+                table={table}
+              />
+            ),
             header: tableOptions.localization.move,
             size: 60,
             ...tableOptions.defaultDisplayColumn,
             ...tableOptions.displayColumnDefOptions?.['mrt-row-drag'],
             id: 'mrt-row-drag',
           },
-          (tableOptions.state?.columnOrder ?? columnOrder).includes(
+          ((tableOptions.state?.columnOrder ?? columnOrder).includes(
             'mrt-row-actions',
-          ) && {
+          ) ||
+            (creatingRow && tableOptions.createDisplayMode === 'row')) && {
             Cell: ({ cell, row, table }) => (
               <MRT_ToggleRowActionMenuButton
                 cell={cell}
@@ -104,7 +116,7 @@ export const useMRT_DisplayColumns = <TData extends Record<string, any>>({
       columnOrder,
       grouping,
       tableOptions.displayColumnDefOptions,
-      tableOptions.editingMode,
+      tableOptions.editDisplayMode,
       tableOptions.enableColumnDragging,
       tableOptions.enableColumnFilterModes,
       tableOptions.enableColumnOrdering,

@@ -1,12 +1,17 @@
-import { Person } from './TS';
+export type User = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  state: string;
+};
 
-export const data: Person[] = [
+export const fakeData: User[] = [
   {
     id: '9s41rp',
     firstName: 'Kelvin',
     lastName: 'Langosh',
     email: 'Jerod14@hotmail.com',
-    age: 19,
     state: 'Ohio',
   },
   {
@@ -14,7 +19,6 @@ export const data: Person[] = [
     firstName: 'Molly',
     lastName: 'Purdy',
     email: 'Hugh.Dach79@hotmail.com',
-    age: 37,
     state: 'Rhode Island',
   },
   {
@@ -22,7 +26,6 @@ export const data: Person[] = [
     firstName: 'Henry',
     lastName: 'Lynch',
     email: 'Camden.Macejkovic@yahoo.com',
-    age: 20,
     state: 'California',
   },
   {
@@ -30,7 +33,6 @@ export const data: Person[] = [
     firstName: 'Glenda',
     lastName: 'Douglas',
     email: 'Eric0@yahoo.com',
-    age: 38,
     state: 'Montana',
   },
   {
@@ -38,7 +40,6 @@ export const data: Person[] = [
     firstName: 'Leone',
     lastName: 'Williamson',
     email: 'Ericka_Mueller52@yahoo.com',
-    age: 19,
     state: 'Colorado',
   },
   {
@@ -46,7 +47,6 @@ export const data: Person[] = [
     firstName: 'Mckenna',
     lastName: 'Friesen',
     email: 'Veda_Feeney@yahoo.com',
-    age: 34,
     state: 'New York',
   },
   {
@@ -54,7 +54,6 @@ export const data: Person[] = [
     firstName: 'Wyman',
     lastName: 'Jast',
     email: 'Melvin.Pacocha@yahoo.com',
-    age: 23,
     state: 'Montana',
   },
   {
@@ -62,13 +61,12 @@ export const data: Person[] = [
     firstName: 'Janick',
     lastName: 'Willms',
     email: 'Delfina12@gmail.com',
-    age: 25,
     state: 'Nebraska',
   },
 ];
 
 //50 us states array
-export const states = [
+export const usStates = [
   'Alabama',
   'Alaska',
   'Arizona',

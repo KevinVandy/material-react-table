@@ -45,7 +45,7 @@ const Example = () => {
     <MaterialReactTable
       columns={columns}
       data={tableData}
-      editingMode="cell"
+      editDisplayMode="cell"
       enableEditing
       muiEditTextFieldProps={({ cell }) => ({
         //onBlur is more efficient, but could use onChange instead

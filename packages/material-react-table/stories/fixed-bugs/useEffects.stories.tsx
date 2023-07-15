@@ -169,7 +169,7 @@ export const EditOptionsAsync = () => {
       columns={columns}
       data={data}
       enableEditing
-      editingMode="row"
+      editDisplayMode="row"
     />
   );
 };

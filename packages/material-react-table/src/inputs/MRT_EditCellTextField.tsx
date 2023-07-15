@@ -12,24 +12,27 @@ import { type MRT_Cell, type MRT_TableInstance } from '../types';
 interface Props<TData extends Record<string, any>> {
   cell: MRT_Cell<TData>;
   table: MRT_TableInstance<TData>;
-  showLabel?: boolean;
 }
 
 export const MRT_EditCellTextField = <TData extends Record<string, any>>({
   cell,
-  showLabel,
   table,
 }: Props<TData>) => {
   const {
     getState,
-    options: { muiEditTextFieldProps },
+    options: { createDisplayMode, editDisplayMode, muiEditTextFieldProps },
     refs: { editInputRefs },
     setEditingCell,
     setEditingRow,
+    setCreatingRow,
   } = table;
   const { column, row } = cell;
   const { columnDef } = column;
-  const { editingRow } = getState();
+  const { creatingRow, editingRow } = getState();
+
+  const isCreating = creatingRow?.id === row.id;
+  const isEditing = editingRow?.id === row.id;
+  const isSelectEdit = columnDef.editVariant === 'select';
 
   const [value, setValue] = useState(() => cell.getValue<string>());
 
@@ -53,14 +56,13 @@ export const MRT_EditCellTextField = <TData extends Record<string, any>>({
     ...mcTableBodyCellEditTextFieldProps,
   };
 
-  const isSelectEdit = columnDef.editVariant === 'select';
-
-  const saveRow = (newValue: string) => {
-    if (editingRow) {
-      setEditingRow({
-        ...editingRow,
-        _valuesCache: { ...editingRow._valuesCache, [column.id]: newValue },
-      });
+  const saveInputValueToRowCache = (newValue: string) => {
+    //@ts-ignore
+    row._valuesCache[column.id] = newValue;
+    if (isCreating) {
+      setCreatingRow({ ...row });
+    } else if (isEditing) {
+      setEditingRow({ ...row });
     }
   };
 
@@ -68,13 +70,13 @@ export const MRT_EditCellTextField = <TData extends Record<string, any>>({
     textFieldProps.onChange?.(event);
     setValue(event.target.value);
     if (textFieldProps?.select) {
-      saveRow(event.target.value);
+      saveInputValueToRowCache(event.target.value);
     }
   };
 
   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
     textFieldProps.onBlur?.(event);
-    saveRow(value);
+    saveInputValueToRowCache(value);
     setEditingCell(null);
   };
 
@@ -105,10 +107,22 @@ export const MRT_EditCellTextField = <TData extends Record<string, any>>({
           }
         }
       }}
-      label={showLabel ? column.columnDef.header : undefined}
+      label={
+        ['modal', 'custom'].includes(
+          (isCreating ? createDisplayMode : editDisplayMode) as string,
+        )
+          ? column.columnDef.header
+          : undefined
+      }
       margin="none"
       name={column.id}
-      placeholder={columnDef.header}
+      placeholder={
+        !['modal', 'custom'].includes(
+          (isCreating ? createDisplayMode : editDisplayMode) as string,
+        )
+          ? columnDef.header
+          : undefined
+      }
       select={isSelectEdit}
       value={value}
       variant="standard"

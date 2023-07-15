@@ -172,7 +172,7 @@ export const EditingEnabledEditModeRow = () => {
       ]}
       data={tableData}
       enableEditing
-      editingMode="row"
+      editDisplayMode="row"
       onEditingRowSave={handleSaveRow}
     />
   );
@@ -213,7 +213,7 @@ export const EditingEnabledEditModeCell = () => {
         },
       ]}
       data={tableData}
-      editingMode="cell"
+      editDisplayMode="cell"
       enableEditing
       muiEditTextFieldProps={({ cell }) => ({
         onBlur: (event) => {
@@ -259,7 +259,7 @@ export const EditingEnabledEditModeTable = () => {
         },
       ]}
       data={tableData}
-      editingMode="table"
+      editDisplayMode="table"
       enableEditing
       muiEditTextFieldProps={({ cell }) => ({
         onBlur: (event) => {
@@ -401,7 +401,7 @@ export const EditSelectVariantAlternate = () => {
       data={tableData}
       enableRowActions
       enableEditing
-      editingMode="row"
+      editDisplayMode="row"
       muiEditTextFieldProps={{ variant: 'outlined' }}
       onEditingRowSave={handleSaveRow}
     />
@@ -741,7 +741,7 @@ export const EditingEnabledEditModeTableWithGroupedRows = () => {
       data={tableData}
       enableEditing
       enableGrouping
-      editingMode="table"
+      editDisplayMode="table"
       onEditingRowSave={handleSaveRow}
     />
   );
@@ -787,7 +787,7 @@ export const EnableEditingConditionally = () => {
       ]}
       data={tableData}
       enableEditing={(row) => row.index % 2 === 0}
-      editingMode="row"
+      editDisplayMode="row"
       onEditingRowSave={handleSaveRow}
     />
   );
@@ -833,7 +833,7 @@ export const EnableEditingConditionallyCell = () => {
       ]}
       data={tableData}
       enableEditing={(row) => row.index % 2 === 0}
-      editingMode="cell"
+      editDisplayMode="cell"
       onEditingRowSave={handleSaveRow}
     />
   );
@@ -879,7 +879,7 @@ export const EnableEditingConditionallyTable = () => {
       ]}
       data={tableData}
       enableEditing={(row) => row.index % 2 === 0}
-      editingMode="table"
+      editDisplayMode="table"
       onEditingRowSave={handleSaveRow}
     />
   );

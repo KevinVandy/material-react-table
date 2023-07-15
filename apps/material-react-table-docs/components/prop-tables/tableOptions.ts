@@ -195,7 +195,7 @@ export const tableOptions: TableOption[] = [
     type: '{ [key: string]: MRT_ColumnDef<TData> }',
   },
   {
-    tableOption: 'editingMode',
+    tableOption: 'editDisplayMode',
     defaultValue: "'modal'",
     description:
       'You can choose between 4 different built-in editing modes. Edit a row in a modal, or a row inline, just 1 cell at a time, or always have all cells editable.',

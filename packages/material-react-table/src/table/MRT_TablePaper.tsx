@@ -41,7 +41,8 @@ export const MRT_TablePaper = <TData extends Record<string, any>>({
         }
       }}
       sx={(theme) => ({
-        transition: 'all 150ms ease-in-out',
+        overflow: 'hidden',
+        transition: 'all 100ms ease-in-out',
         ...(tablePaperProps?.sx instanceof Function
           ? tablePaperProps?.sx(theme)
           : (tablePaperProps?.sx as any)),
@@ -50,12 +51,18 @@ export const MRT_TablePaper = <TData extends Record<string, any>>({
         ...tablePaperProps?.style,
         ...(isFullScreen
           ? {
+              bottom: 0,
               height: '100vh',
+              left: 0,
               margin: 0,
               maxHeight: '100vh',
               maxWidth: '100vw',
               padding: 0,
+              position: 'fixed',
+              right: 0,
+              top: 0,
               width: '100vw',
+              zIndex: 10,
             }
           : {}),
       }}
