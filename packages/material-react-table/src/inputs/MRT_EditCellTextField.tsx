@@ -82,7 +82,7 @@ export const MRT_EditCellTextField = <TData extends Record<string, any>>({
 
   const handleEnterKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     textFieldProps.onKeyDown?.(event);
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && !event.shiftKey) {
       editInputRefs.current[column.id]?.blur();
     }
   };
