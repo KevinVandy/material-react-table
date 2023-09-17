@@ -22,8 +22,7 @@ const Example = () => {
   const [validationErrors, setValidationErrors] = useState({});
 
   const handleCreateNewRow = (values) => {
-    tableData.push(values);
-    setTableData([...tableData]);
+    setTableData([...tableData, values]);
   };
 
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
