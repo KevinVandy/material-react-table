@@ -40,7 +40,7 @@ export const MRT_ExpandButton = <TData extends Record<string, any>>({
   return (
     <Tooltip
       arrow
-      disableHoverListener={!canExpand && !renderDetailPanel}
+      disableHoverListener={!canExpand || (canExpand && !renderDetailPanel)}
       enterDelay={1000}
       enterNextDelay={1000}
       title={
@@ -52,7 +52,7 @@ export const MRT_ExpandButton = <TData extends Record<string, any>>({
       <span>
         <IconButton
           aria-label={localization.expand}
-          disabled={!canExpand && !renderDetailPanel}
+          disabled={!canExpand || (canExpand && !renderDetailPanel)}
           {...iconButtonProps}
           onClick={handleToggleExpand}
           sx={(theme) => ({
@@ -68,7 +68,7 @@ export const MRT_ExpandButton = <TData extends Record<string, any>>({
             <ExpandMoreIcon
               style={{
                 transform: `rotate(${
-                  !canExpand && !renderDetailPanel ? -90 : isExpanded ? -180 : 0
+                  !canExpand || (canExpand && !renderDetailPanel) ? -90 : isExpanded ? -180 : 0
                 }deg)`,
                 transition: 'transform 150ms',
               }}
