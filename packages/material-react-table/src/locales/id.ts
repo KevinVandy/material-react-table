@@ -91,5 +91,4 @@ export const MRT_Localization_ID: MRT_Localization = {
   ungroupByColumn: 'Batalkan pengelompokan berdasarkan {column}',
   unpin: 'Lepaskan sematan',
   unpinAll: 'Lepaskan semua sematan',
-  unsorted: 'Tidak diurutkan',
 };

@@ -90,5 +90,4 @@ export const MRT_Localization_ES: MRT_Localization = {
   ungroupByColumn: 'Desagrupar por {column}',
   unpin: 'Desanclar',
   unpinAll: 'Desanclar todo',
-  unsorted: 'Sin ordenar',
 };

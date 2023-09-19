@@ -90,5 +90,4 @@ export const MRT_Localization_SR_LATN_RS: MRT_Localization = {
   ungroupByColumn: 'Odgrupiši po {column}',
   unpin: 'Otkači',
   unpinAll: 'Otkači sve',
-  unsorted: 'Nesortirano',
 };

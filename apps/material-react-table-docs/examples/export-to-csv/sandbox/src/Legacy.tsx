@@ -1,13 +1,15 @@
 import {
   MaterialReactTable,
-  useMaterialReactTable,
+  type MRT_ColumnDef,
+  type MRT_Row,
 } from 'material-react-table';
 import { Box, Button } from '@mui/material';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { mkConfig, generateCsv, download } from 'export-to-csv'; //or use your library of choice here
-import { data } from './makeData';
+import { data, type Person } from './makeData';
 
-const columns = [
+//defining columns outside of the component is fine, is stable
+const columns: MRT_ColumnDef<Person>[] = [
   {
     accessorKey: 'id',
     header: 'ID',
@@ -46,7 +48,7 @@ const csvConfig = mkConfig({
 });
 
 const Example = () => {
-  const handleExportRows = (rows) => {
+  const handleExportRows = (rows: MRT_Row<Person>[]) => {
     const rowData = rows.map((row) => row.original);
     const csv = generateCsv(csvConfig)(rowData);
     download(csvConfig)(csv);
@@ -57,15 +59,16 @@ const Example = () => {
     download(csvConfig)(csv);
   };
 
-  const table = useMaterialReactTable({
-    columns,
-    data,
-    enableRowSelection: true,
-    columnFilterDisplayMode: 'popover',
-    paginationDisplayMode: 'pages',
-    positionToolbarAlertBanner: 'bottom',
-    renderTopToolbarCustomActions: ({ table }) => (
-      <Box
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      enableRowSelection
+      columnFilterDisplayMode="popover"
+      paginationDisplayMode="pages"
+      positionToolbarAlertBanner="bottom"
+      renderTopToolbarCustomActions={({ table }) => (
+        <Box
         sx={{
           display: 'flex',
           gap: '16px',
@@ -109,10 +112,9 @@ const Example = () => {
           Export Selected Rows
         </Button>
       </Box>
-    ),
-  });
-
-  return <MaterialReactTable table={table} />;
+      )}
+    />
+  );
 };
 
 export default Example;

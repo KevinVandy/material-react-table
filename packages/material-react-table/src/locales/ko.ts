@@ -90,5 +90,4 @@ export const MRT_Localization_KO: MRT_Localization = {
   ungroupByColumn: '{column} 그룹 해제',
   unpin: '고정 해제',
   unpinAll: '전체 고정 해제',
-  unsorted: '정렬되지 않음',
 };

@@ -90,5 +90,4 @@ export const MRT_Localization_IT: MRT_Localization = {
   ungroupByColumn: 'Rimuovi gruppo {column}',
   unpin: 'Sblocca',
   unpinAll: 'Sblocca tutto',
-  unsorted: 'Non ordinato',
 };

@@ -90,5 +90,4 @@ export const MRT_Localization_JA: MRT_Localization = {
   ungroupByColumn: '{column}のグループ解除',
   unpin: '固定を解除',
   unpinAll: 'すべての固定を解除',
-  unsorted: '並べ替える',
 };

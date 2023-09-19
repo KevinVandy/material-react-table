@@ -3,11 +3,14 @@ import copy from 'rollup-plugin-copy';
 import typescript from '@rollup/plugin-typescript';
 
 const supportedLocales = [
+  'ar',
+  'bg',
   'cs',
   'da',
   'de',
   'en',
   'es',
+  'et',
   'fa',
   'fi',
   'fr',
@@ -15,6 +18,7 @@ const supportedLocales = [
   'id',
   'it',
   'ja',
+  'ko',
   'nl',
   'no',
   'pl',

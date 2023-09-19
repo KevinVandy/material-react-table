@@ -90,5 +90,4 @@ export const MRT_Localization_BG: MRT_Localization = {
   ungroupByColumn: 'Разгрупиране по {column}',
   unpin: 'Откачи',
   unpinAll: 'Откачи всички',
-  unsorted: 'Неподредено',
 };

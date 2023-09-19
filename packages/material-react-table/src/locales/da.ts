@@ -90,5 +90,4 @@ export const MRT_Localization_DA: MRT_Localization = {
   ungroupByColumn: 'Fjern gruppering efter {column}',
   unpin: 'Frigør',
   unpinAll: 'Frigør alt',
-  unsorted: 'Usorteret',
 };

@@ -90,5 +90,4 @@ export const MRT_Localization_FA: MRT_Localization = {
   ungroupByColumn: 'لغو گروه بندی توسط {column}',
   unpin: 'پین کردن',
   unpinAll: 'از پین در آوردن ',
-  unsorted: '  مرتب نشده ',
 };

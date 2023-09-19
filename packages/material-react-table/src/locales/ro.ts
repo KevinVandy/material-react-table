@@ -90,5 +90,4 @@ export const MRT_Localization_RO: MRT_Localization = {
   ungroupByColumn: 'Degrupează după {column}',
   unpin: 'Deblocare',
   unpinAll: 'Deblocare',
-  unsorted: 'Nesortat',
 };

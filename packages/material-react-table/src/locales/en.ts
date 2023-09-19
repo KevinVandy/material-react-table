@@ -14,6 +14,7 @@ export const MRT_Localization_EN: MRT_Localization = {
   collapseAll: 'Collapse all',
   columnActions: 'Column Actions',
   copiedToClipboard: 'Copied to clipboard',
+
   dropToGroupBy: 'Drop to group by {column}',
   edit: 'Edit',
   expand: 'Expand',
@@ -90,5 +91,4 @@ export const MRT_Localization_EN: MRT_Localization = {
   ungroupByColumn: 'Ungroup by {column}',
   unpin: 'Unpin',
   unpinAll: 'Unpin all',
-  unsorted: 'Unsorted',
 };

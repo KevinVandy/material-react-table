@@ -88,7 +88,7 @@ export const MRT_Localization_NO: MRT_Localization = {
   toggleVisibility: 'Synlighet',
   unpin: 'Løsne',
   unpinAll: 'Løsne alle',
-  unsorted: 'Usortert',
+
   ungroupByColumn: 'Oppgrupper etter {column}',
   selectedCountOfRowCountRowsSelected: '{selected} av {count} rader valgt',
 };

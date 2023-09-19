@@ -30,7 +30,9 @@ export const MRT_TableHeadCellSortLabel = <TData extends Record<string, any>>({
     ? column.getIsSorted() === 'desc'
       ? localization.sortedByColumnDesc.replace('{column}', columnDef.header)
       : localization.sortedByColumnAsc.replace('{column}', columnDef.header)
-    : localization.unsorted;
+    : column.getNextSortingOrder() === 'desc'
+    ? localization.sortByColumnDesc.replace('{column}', columnDef.header)
+    : localization.sortByColumnAsc.replace('{column}', columnDef.header);
 
   return (
     <Tooltip arrow placement="top" title={sortTooltip}>

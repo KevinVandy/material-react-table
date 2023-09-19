@@ -171,7 +171,7 @@ export const routes: Array<RouteItem> = [
             label: 'Event Listeners (onClicks)',
           },
           {
-            href: '/docs/guides/table-state-management',
+            href: '/docs/guides/state-management',
             label: 'State Management',
           },
           {

@@ -90,5 +90,4 @@ export const MRT_Localization_NL: MRT_Localization = {
   ungroupByColumn: 'Stop groeperen op {column}',
   unpin: 'Losmaken',
   unpinAll: 'Alles losmaken',
-  unsorted: 'Ongesorteerd',
 };

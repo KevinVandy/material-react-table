@@ -8,7 +8,7 @@ export const MRT_Localization_CS: MRT_Localization = {
   changeSearchMode: 'Změnit režim hledání',
   clearFilter: 'Vyčistit filtr',
   clearSearch: 'Vyčistit hledání',
-  clearSort: 'Vyčistit řazení',
+  clearSort: 'vyčistit řazení',
   clickToCopy: 'Kliknutím zkopírovat',
   collapse: 'Sbalit',
   collapseAll: 'Sbalit vše',
@@ -91,5 +91,4 @@ export const MRT_Localization_CS: MRT_Localization = {
   ungroupByColumn: 'Neseskupovat podle sloupce {column}',
   unpin: 'Odepnout',
   unpinAll: 'Odepnout vše',
-  unsorted: 'Neseřazeno',
 };

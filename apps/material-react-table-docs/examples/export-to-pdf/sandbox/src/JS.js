@@ -1,10 +1,8 @@
-import {
-  MaterialReactTable,
-  useMaterialReactTable,
-} from 'material-react-table';
-import { Box, Button } from '@mui/material';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
-import { mkConfig, generateCsv, download } from 'export-to-csv'; //or use your library of choice here
+import { MantineReactTable, useMantineReactTable } from 'mantine-react-table';
+import { Box, Button } from '@mantine/core';
+import { IconDownload } from '@tabler/icons-react';
+import { jsPDF } from 'jspdf'; //or use your library of choice here
+import autoTable from 'jspdf-autotable';
 import { data } from './makeData';
 
 const columns = [
@@ -39,25 +37,21 @@ const columns = [
   },
 ];
 
-const csvConfig = mkConfig({
-  fieldSeparator: ',',
-  decimalSeparator: '.',
-  useKeysAsHeaders: true,
-});
-
 const Example = () => {
   const handleExportRows = (rows) => {
-    const rowData = rows.map((row) => row.original);
-    const csv = generateCsv(csvConfig)(rowData);
-    download(csvConfig)(csv);
+    const doc = new jsPDF();
+    const tableData = rows.map((row) => Object.values(row.original));
+    const tableHeaders = columns.map((c) => c.header);
+
+    autoTable(doc, {
+      head: [tableHeaders],
+      body: tableData,
+    });
+
+    doc.save('mrt-pdf-example.pdf');
   };
 
-  const handleExportData = () => {
-    const csv = generateCsv(csvConfig)(data);
-    download(csvConfig)(csv);
-  };
-
-  const table = useMaterialReactTable({
+  const table = useMantineReactTable({
     columns,
     data,
     enableRowSelection: true,
@@ -74,19 +68,13 @@ const Example = () => {
         }}
       >
         <Button
-          //export all data that is currently in the table (ignore pagination, sorting, filtering, etc.)
-          onClick={handleExportData}
-          startIcon={<FileDownloadIcon />}
-        >
-          Export All Data
-        </Button>
-        <Button
           disabled={table.getPrePaginationRowModel().rows.length === 0}
           //export all rows, including from the next page, (still respects filtering and sorting)
           onClick={() =>
             handleExportRows(table.getPrePaginationRowModel().rows)
           }
-          startIcon={<FileDownloadIcon />}
+          leftIcon={<IconDownload />}
+          variant="filled"
         >
           Export All Rows
         </Button>
@@ -94,7 +82,8 @@ const Example = () => {
           disabled={table.getRowModel().rows.length === 0}
           //export all rows as seen on the screen (respects pagination, sorting, filtering, etc.)
           onClick={() => handleExportRows(table.getRowModel().rows)}
-          startIcon={<FileDownloadIcon />}
+          leftIcon={<IconDownload />}
+          variant="filled"
         >
           Export Page Rows
         </Button>
@@ -104,7 +93,8 @@ const Example = () => {
           }
           //only export selected rows
           onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
-          startIcon={<FileDownloadIcon />}
+          leftIcon={<IconDownload />}
+          variant="filled"
         >
           Export Selected Rows
         </Button>
@@ -112,7 +102,7 @@ const Example = () => {
     ),
   });
 
-  return <MaterialReactTable table={table} />;
+  return <MantineReactTable table={table} />;
 };
 
 export default Example;

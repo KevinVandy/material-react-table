@@ -54,6 +54,11 @@ const nextConfig = {
         destination: '/docs/api/table-options',
         permanent: true,
       },
+      {
+        source: '/docs/guides/table-state-management',
+        destination: '/docs/guides/state-management',
+        permanent: true,
+      },
     ];
   },
 };

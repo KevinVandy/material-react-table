@@ -65,8 +65,15 @@ import { type MRT_SortingFns } from './sortingFns';
 import { type MRT_Icons } from './icons';
 
 export type { MRT_Icons };
+export type LiteralUnion<T extends U, U = string> =
+  | T
+  | (U & Record<never, never>);
 
-type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
+export type Prettify<T> = { [K in keyof T]: T[K] } & unknown;
+
+export type Xor<A, B> =
+  | Prettify<A & { [k in keyof B]?: never }>
+  | Prettify<B & { [k in keyof A]?: never }>;
 
 export type MRT_DensityState = 'comfortable' | 'compact' | 'spacious';
 
@@ -180,7 +187,6 @@ export interface MRT_Localization {
   ungroupByColumn: string;
   unpin: string;
   unpinAll: string;
-  unsorted: string;
 }
 
 export interface MRT_RowModel<TData extends Record<string, any>> {
@@ -365,7 +371,7 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
    * @example accessorKey: 'username' //simple
    * @example accessorKey: 'name.firstName' //deep key dot notation
    */
-  accessorKey?: DeepKeys<TData>;
+  accessorKey?: (string & {}) | DeepKeys<TData>;
   aggregationFn?: MRT_AggregationFn<TData> | Array<MRT_AggregationFn<TData>>;
   /**
    * Specify what type of column this is. Either `data`, `display`, or `group`. Defaults to `data`.
