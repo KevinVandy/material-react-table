@@ -30,6 +30,8 @@
     "@types/mdx": "^2.0.7",
     "dayjs": "^1.11.9",
     "export-to-csv": "^1.0.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.6.0",
     "material-react-table": "workspace:*",
     "next": "13.4.19",
     "next-sitemap": "^4.2.3",
