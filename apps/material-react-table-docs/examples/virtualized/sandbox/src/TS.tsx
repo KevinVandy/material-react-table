@@ -122,7 +122,7 @@ const Example = () => {
       enableColumnVirtualization
       enableGlobalFilterModes
       enablePagination={false}
-      enablePinning
+      enableColumnPinning
       enableRowNumbers
       enableRowVirtualization
       muiTableContainerProps={{ sx: { maxHeight: '600px' } }}

@@ -67,7 +67,7 @@ export const StickyHeaderShorterTable = () => (
     data={data}
     enableStickyHeader
     enableRowSelection
-    enablePinning
+    enableColumnPinning
     initialState={{ pagination: { pageSize: 25, pageIndex: 0 } }}
     muiTableContainerProps={{ sx: { maxHeight: 400 } }}
   />

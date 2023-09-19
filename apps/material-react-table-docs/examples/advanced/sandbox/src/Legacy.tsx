@@ -150,7 +150,7 @@ const Example = () => {
       enableColumnFilterModes
       enableColumnOrdering
       enableGrouping
-      enablePinning
+      enableColumnPinning
       enableRowActions
       enableRowSelection
       initialState={{ showColumnFilters: true }}

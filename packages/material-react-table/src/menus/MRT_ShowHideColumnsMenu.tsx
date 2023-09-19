@@ -33,7 +33,7 @@ export const MRT_ShowHideColumnsMenu = <TData extends Record<string, any>>({
     options: {
       enableColumnOrdering,
       enableHiding,
-      enablePinning,
+      enableColumnPinning,
       localization,
     },
   } = table;
@@ -109,7 +109,7 @@ export const MRT_ShowHideColumnsMenu = <TData extends Record<string, any>>({
             {localization.resetOrder}
           </Button>
         )}
-        {enablePinning && (
+        {enableColumnPinning && (
           <Button
             disabled={!getIsSomeColumnsPinned()}
             onClick={() => table.resetColumnPinning(true)}

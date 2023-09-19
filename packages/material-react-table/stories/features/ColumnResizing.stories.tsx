@@ -114,7 +114,7 @@ export const ColumnResizingWithPinning = () => (
     columns={columns}
     data={data}
     enableColumnResizing
-    enablePinning
+    enableColumnPinning
     initialState={{ columnPinning: { left: ['firstName', 'lastName'] } }}
   />
 );

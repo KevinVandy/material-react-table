@@ -38,7 +38,7 @@ export const MRT_ShowHideColumnsMenuItems = <
     options: {
       enableColumnOrdering,
       enableHiding,
-      enablePinning,
+      enableColumnPinning,
       localization,
     },
     setColumnOrder,
@@ -127,7 +127,7 @@ export const MRT_ShowHideColumnsMenuItems = <
             ) : (
               <Box sx={{ width: '28px' }} />
             ))}
-          {enablePinning &&
+          {enableColumnPinning &&
             (column.getCanPin() ? (
               <MRT_ColumnPinningButtons column={column} table={table} />
             ) : (

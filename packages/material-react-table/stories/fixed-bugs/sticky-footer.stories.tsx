@@ -134,7 +134,7 @@ export const PinnedColumnsWithStickyFooter = () => {
     <MaterialReactTable
       columns={mockColumns}
       data={mockData}
-      enablePinning
+      enableColumnPinning
       enableStickyHeader
       enableStickyFooter
       muiTableContainerProps={{

@@ -44,7 +44,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any>>({
       enableColumnResizing,
       enableGrouping,
       enableHiding,
-      enablePinning,
+      enableColumnPinning,
       enableSorting,
       enableSortingRemoval,
       icons: {
@@ -263,7 +263,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any>>({
     ...(enableGrouping && column.getCanGroup()
       ? [
           <MenuItem
-            divider={enablePinning}
+            divider={enableColumnPinning}
             key={6}
             onClick={handleGroupByColumn}
             sx={commonMenuItemStyles}
@@ -279,7 +279,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any>>({
           </MenuItem>,
         ]
       : []),
-    ...(enablePinning && column.getCanPin()
+    ...(enableColumnPinning && column.getCanPin()
       ? [
           <MenuItem
             disabled={column.getIsPinned() === 'left' || !column.getCanPin()}

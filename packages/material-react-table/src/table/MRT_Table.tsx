@@ -31,7 +31,7 @@ export const MRT_Table = <TData extends Record<string, any>>({
       editDisplayMode,
       enableColumnResizing,
       enableColumnVirtualization,
-      enablePinning,
+      enableColumnPinning,
       enableStickyHeader,
       enableTableFooter,
       enableTableHead,
@@ -87,7 +87,7 @@ export const MRT_Table = <TData extends Record<string, any>>({
 
   const [leftPinnedIndexes, rightPinnedIndexes] = useMemo(
     () =>
-      enableColumnVirtualization && enablePinning
+      enableColumnVirtualization && enableColumnPinning
         ? [
             table.getLeftLeafColumns().map((c) => c.getPinnedIndex()),
             table
@@ -98,7 +98,7 @@ export const MRT_Table = <TData extends Record<string, any>>({
               ),
           ]
         : [[], []],
-    [columnPinning, enableColumnVirtualization, enablePinning],
+    [columnPinning, enableColumnVirtualization, enableColumnPinning],
   );
 
   const columnVirtualizer:

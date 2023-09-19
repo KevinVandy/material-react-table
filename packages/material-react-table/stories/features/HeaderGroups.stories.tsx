@@ -101,7 +101,7 @@ export const HeaderAndFooterGroups = () => (
       },
     ]}
     data={data}
-    enablePinning
+    enableColumnPinning
   />
 );
 
@@ -110,7 +110,7 @@ export const HeaderGroupsWithColumnOrdering = () => (
 );
 
 export const HeaderGroupsWithColumnPinning = () => (
-  <MaterialReactTable columns={columns} data={data} enablePinning />
+  <MaterialReactTable columns={columns} data={data} enableColumnPinning />
 );
 
 export const HeaderGroupsWithColumResizing = () => (

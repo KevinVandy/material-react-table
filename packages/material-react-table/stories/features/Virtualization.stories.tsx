@@ -233,7 +233,7 @@ export const EnableColumnVirtualizationWithPinning = () => (
     columns={longColumns}
     data={longData.slice(0, 10)}
     enableColumnVirtualization
-    enablePinning
+    enableColumnPinning
     enableRowNumbers
   />
 );
@@ -319,7 +319,7 @@ export const RowAndColumnVirtualizationWithFeatures = () => (
     enableColumnResizing
     enableColumnVirtualization
     enablePagination={false}
-    enablePinning
+    enableColumnPinning
     enableRowNumbers
     enableRowSelection
     enableRowVirtualization
@@ -347,7 +347,7 @@ export const MaxVirtualization = () => (
     enableColumnResizing
     enableColumnVirtualization
     enablePagination={false}
-    enablePinning
+    enableColumnPinning
     enableRowNumbers
     enableRowVirtualization
     muiTableContainerProps={{ sx: { maxHeight: 500 } }}

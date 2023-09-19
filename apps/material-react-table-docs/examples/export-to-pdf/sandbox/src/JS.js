@@ -1,9 +1,12 @@
-import { MantineReactTable, useMantineReactTable } from 'mantine-react-table';
-import { Box, Button } from '@mantine/core';
-import { IconDownload } from '@tabler/icons-react';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
+import { Box, Button } from '@mui/material';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { jsPDF } from 'jspdf'; //or use your library of choice here
 import autoTable from 'jspdf-autotable';
-import { data } from './makeData';
+import { data} from './makeData';
 
 const columns = [
   {
@@ -51,7 +54,7 @@ const Example = () => {
     doc.save('mrt-pdf-example.pdf');
   };
 
-  const table = useMantineReactTable({
+  const table = useMaterialReactTable({
     columns,
     data,
     enableRowSelection: true,
@@ -73,8 +76,7 @@ const Example = () => {
           onClick={() =>
             handleExportRows(table.getPrePaginationRowModel().rows)
           }
-          leftIcon={<IconDownload />}
-          variant="filled"
+          startIcon={<FileDownloadIcon />}
         >
           Export All Rows
         </Button>
@@ -82,8 +84,7 @@ const Example = () => {
           disabled={table.getRowModel().rows.length === 0}
           //export all rows as seen on the screen (respects pagination, sorting, filtering, etc.)
           onClick={() => handleExportRows(table.getRowModel().rows)}
-          leftIcon={<IconDownload />}
-          variant="filled"
+          startIcon={<FileDownloadIcon />}
         >
           Export Page Rows
         </Button>
@@ -93,8 +94,7 @@ const Example = () => {
           }
           //only export selected rows
           onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
-          leftIcon={<IconDownload />}
-          variant="filled"
+          startIcon={<FileDownloadIcon />}
         >
           Export Selected Rows
         </Button>
@@ -102,7 +102,7 @@ const Example = () => {
     ),
   });
 
-  return <MantineReactTable table={table} />;
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

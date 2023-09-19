@@ -81,7 +81,7 @@ export const NoMemos = () => {
       enableColumnOrdering
       enableEditing
       enableGrouping
-      enablePinning
+      enableColumnPinning
       enableRowNumbers
       enableRowOrdering
       enableRowSelection
@@ -109,7 +109,7 @@ export const MemoCells = () => {
       enableColumnOrdering
       enableEditing
       enableGrouping
-      enablePinning
+      enableColumnPinning
       enableRowNumbers
       enableRowOrdering
       enableRowSelection
@@ -138,7 +138,7 @@ export const MemoRows = () => {
       enableColumnOrdering
       enableEditing
       enableGrouping
-      enablePinning
+      enableColumnPinning
       enableRowNumbers
       enableRowOrdering
       enableRowSelection
@@ -167,7 +167,7 @@ export const MemoTableBody = () => {
       enableColumnOrdering
       enableEditing
       enableGrouping
-      enablePinning
+      enableColumnPinning
       enableRowNumbers
       enableRowOrdering
       enableRowSelection

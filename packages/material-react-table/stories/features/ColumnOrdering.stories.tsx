@@ -101,7 +101,7 @@ export const ColumnOrderingWithPinning = () => (
     columns={columns}
     data={data}
     enableColumnOrdering
-    enablePinning
+    enableColumnPinning
   />
 );
 

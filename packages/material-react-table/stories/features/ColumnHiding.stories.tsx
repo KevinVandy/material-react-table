@@ -71,7 +71,7 @@ export const ColumnHidingDisabledButWithPinning = () => (
     columns={columns}
     data={data}
     enableHiding={false}
-    enablePinning
+    enableColumnPinning
   />
 );
 

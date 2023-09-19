@@ -22,7 +22,7 @@ export const MRT_ToolbarInternalButtons = <TData extends Record<string, any>>({
       enableFullScreenToggle,
       enableGlobalFilter,
       enableHiding,
-      enablePinning,
+      enableColumnPinning,
       initialState,
       renderToolbarInternalActions,
     },
@@ -48,7 +48,7 @@ export const MRT_ToolbarInternalButtons = <TData extends Record<string, any>>({
           {enableFilters && enableColumnFilters && (
             <MRT_ToggleFiltersButton table={table} />
           )}
-          {(enableHiding || enableColumnOrdering || enablePinning) && (
+          {(enableHiding || enableColumnOrdering || enableColumnPinning) && (
             <MRT_ShowHideColumnsButton table={table} />
           )}
           {enableDensityToggle && (

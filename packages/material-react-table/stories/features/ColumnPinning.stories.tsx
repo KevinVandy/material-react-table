@@ -45,14 +45,14 @@ const data = [...Array(100)].map(() => ({
 }));
 
 export const ColumnPinningEnabled = () => (
-  <MaterialReactTable columns={columns} data={data} enablePinning />
+  <MaterialReactTable columns={columns} data={data} enableColumnPinning />
 );
 
 export const ColumnPinningInitial = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enablePinning
+    enableColumnPinning
     initialState={{ columnPinning: { left: ['email'], right: ['state'] } }}
   />
 );
@@ -87,7 +87,7 @@ export const ColumnPinningDisabledPerColumn = () => (
       },
     ]}
     data={data}
-    enablePinning
+    enableColumnPinning
   />
 );
 
@@ -95,7 +95,7 @@ export const ColumnPinningWithSelect = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enablePinning
+    enableColumnPinning
     enableRowSelection
   />
 );
@@ -104,7 +104,7 @@ export const ColumnPinningWithDetailPanel = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enablePinning
+    enableColumnPinning
     enableExpanding
     renderDetailPanel={({ row: _row }) => <h1>Hi</h1>}
   />

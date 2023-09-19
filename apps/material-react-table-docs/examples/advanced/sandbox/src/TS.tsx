@@ -153,7 +153,7 @@ const Example = () => {
     enableColumnFilterModes: true,
     enableColumnOrdering: true,
     enableGrouping: true,
-    enablePinning: true,
+    enableColumnPinning: true,
     enableRowActions: true,
     enableRowSelection: true,
     initialState: { showColumnFilters: true },
