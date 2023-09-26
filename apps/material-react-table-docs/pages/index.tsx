@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import {
   alpha,
   Box,
@@ -23,7 +22,7 @@ import { InstallCommand } from '../components/mdx/InstallCommand';
 const HomePage = () => {
   return (
     <>
-      <Stack sx={{ maxWidth: '100ch', m: 'auto' }}>
+      <Stack sx={{ maxWidth: '1200px', m: 'auto' }}>
         <Typography
           sx={{
             textAlign: 'center',
@@ -69,7 +68,7 @@ const HomePage = () => {
                 },
               }}
             >
-              V1
+              V2
             </Box>
           </Box>
         </Typography>
@@ -97,7 +96,7 @@ const HomePage = () => {
                 },
               })}
             >
-              V2.0 Coming Soon (July 2023)
+              V2.0 Still in Alpha, but now installable!
             </MuiLink>
           </Link>
           👀
@@ -147,19 +146,10 @@ const HomePage = () => {
             </MuiLink>
           </Link>
         </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'center', m: '2rem auto' }}>
-          <Image
-            alt="Mui + React Table"
-            src={`/banner.png`}
-            height={72}
-            width={304}
-          />
-        </Box>
         <StatBadges />
         <Box
           sx={{
-            m: '3rem auto',
-            mb: '1rem',
+            m: '1rem auto',
             display: 'grid',
             gap: '1.5rem',
             width: '100%',
