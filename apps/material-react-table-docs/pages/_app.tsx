@@ -64,7 +64,7 @@ function App({ Component, pageProps }: AppProps) {
         )}
       </Head>
       <PlausibleProvider
-        domain="material-react-table.com"
+        domain="v2.material-react-table.com"
         enabled={process.env.NODE_ENV === 'production'}
       >
         <ThemeContextProvider>
