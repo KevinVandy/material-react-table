@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import TableContainer from '@mui/material/TableContainer';
 import { MRT_Table } from './MRT_Table';
+import { MRT_EditRowModal } from '../modals';
 import { type MRT_TableInstance } from '../types';
 
 const useIsomorphicLayoutEffect =
@@ -15,10 +16,19 @@ export const MRT_TableContainer = <TData extends Record<string, any>>({
 }: Props<TData>) => {
   const {
     getState,
-    options: { enableStickyHeader, muiTableContainerProps },
+    options: {
+      createDisplayMode,
+      editDisplayMode,
+      enableStickyHeader,
+      muiTableContainerProps,
+    },
     refs: { tableContainerRef, bottomToolbarRef, topToolbarRef },
   } = table;
-  const { isFullScreen } = getState();
+  const {
+    isFullScreen,
+    creatingRow,
+    editingRow,
+  } = getState();
 
   const [totalToolbarHeight, setTotalToolbarHeight] = useState(0);
 
@@ -40,6 +50,9 @@ export const MRT_TableContainer = <TData extends Record<string, any>>({
 
     setTotalToolbarHeight(topToolbarHeight + bottomToolbarHeight);
   });
+
+  const createModalOpen = createDisplayMode === 'modal' && creatingRow;
+  const editModalOpen = editDisplayMode === 'modal' && editingRow;
 
   return (
     <TableContainer
@@ -71,6 +84,9 @@ export const MRT_TableContainer = <TData extends Record<string, any>>({
       }}
     >
       <MRT_Table table={table} />
+      {(createModalOpen || editModalOpen) && (
+        <MRT_EditRowModal open table={table} />
+      )}
     </TableContainer>
   );
 };

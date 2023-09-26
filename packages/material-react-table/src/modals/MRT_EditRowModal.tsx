@@ -63,7 +63,7 @@ export const MRT_EditRowModal = <TData extends Record<string, any>>({
     <Dialog
       fullWidth
       maxWidth="xs"
-      onClose={() => {
+      onClose={(event, reason) => {
         if (creatingRow) {
           onCreatingRowCancel?.({ row, table });
           setCreatingRow(null);
@@ -71,6 +71,8 @@ export const MRT_EditRowModal = <TData extends Record<string, any>>({
           onEditingRowCancel?.({ row, table });
           setEditingRow(null);
         }
+        row._valuesCache = {} as any; //reset values cache
+        dialogProps.onClose?.(event, reason);
       }}
       open={open}
       {...dialogProps}
