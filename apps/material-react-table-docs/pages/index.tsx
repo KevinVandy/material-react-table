@@ -82,7 +82,11 @@ const HomePage = () => {
           }}
         >
           👀
-          <Link href="/changelog#version-2-roadmap-(july-2023)">
+          <Link
+            target="_blank"
+            rel="noopener"
+            href="https://v2.material-react-table.com"
+          >
             <MuiLink
               sx={(theme) => ({
                 textAlign: 'center',
@@ -94,10 +98,11 @@ const HomePage = () => {
                 textDecoration: 'none',
                 '&:hover': {
                   textDecoration: 'underline',
+                  textDecorationColor: theme.palette.primary.main,
                 },
               })}
             >
-              V2.0 Coming Soon (July 2023)
+              Try the new version 2 alpha!
             </MuiLink>
           </Link>
           👀
