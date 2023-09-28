@@ -15,15 +15,15 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@mui/icons-material": "^5.14.9",
-    "@mui/material": "^5.14.10",
-    "material-react-table": "^1.14.0",
+    "@mui/icons-material": "^5.14.11",
+    "@mui/material": "^5.14.11",
+    "material-react-table": "^1.15.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.22",
-    "@types/react-dom": "^18.2.7",
+    "@types/react": "^18.2.23",
+    "@types/react-dom": "^18.2.8",
     "@vitejs/plugin-react": "^4.1.0",
     "typescript": "^5.2.2",
     "vite": "^4.4.9"
