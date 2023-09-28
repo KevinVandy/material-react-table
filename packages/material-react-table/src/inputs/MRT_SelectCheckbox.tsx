@@ -1,9 +1,10 @@
 import { type MouseEvent } from 'react';
-import Checkbox from '@mui/material/Checkbox';
+import Checkbox, { type CheckboxProps } from '@mui/material/Checkbox';
 import Tooltip from '@mui/material/Tooltip';
-import Radio from '@mui/material/Radio';
+import Radio, { type RadioProps } from '@mui/material/Radio';
 import { type Theme } from '@mui/material/styles';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   row?: MRT_Row<TData>;
@@ -29,12 +30,8 @@ export const MRT_SelectCheckbox = <TData extends Record<string, any>>({
   const { density, isLoading } = getState();
 
   const checkboxProps = !row
-    ? muiSelectAllCheckboxProps instanceof Function
-      ? muiSelectAllCheckboxProps({ table })
-      : muiSelectAllCheckboxProps
-    : muiSelectCheckboxProps instanceof Function
-    ? muiSelectCheckboxProps({ row, table })
-    : muiSelectCheckboxProps;
+    ? parseFromValuesOrFunc(muiSelectAllCheckboxProps, { table })
+    : parseFromValuesOrFunc(muiSelectCheckboxProps, { row, table });
 
   const allRowsSelected = selectAll
     ? selectAllMode === 'page'
@@ -65,12 +62,10 @@ export const MRT_SelectCheckbox = <TData extends Record<string, any>>({
       height: density === 'compact' ? '1.75rem' : '2.5rem',
       width: density === 'compact' ? '1.75rem' : '2.5rem',
       m: density !== 'compact' ? '-0.4rem' : undefined,
-      ...(checkboxProps?.sx instanceof Function
-        ? checkboxProps.sx(theme)
-        : (checkboxProps?.sx as any)),
+      ...parseFromValuesOrFunc(checkboxProps?.sx, theme),
     }),
     title: undefined,
-  };
+  } as CheckboxProps | RadioProps;
 
   return (
     <Tooltip

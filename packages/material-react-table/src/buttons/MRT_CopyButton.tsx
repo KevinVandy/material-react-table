@@ -2,6 +2,7 @@ import { type MouseEvent, type ReactNode, useState } from 'react';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import { type MRT_Cell, type MRT_TableInstance } from '../types';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   cell: MRT_Cell<TData>;
@@ -29,24 +30,19 @@ export const MRT_CopyButton = <TData extends Record<string, any>>({
     setTimeout(() => setCopied(false), 4000);
   };
 
-  const mTableBodyCellCopyButtonProps =
-    muiCopyButtonProps instanceof Function
-      ? muiCopyButtonProps({ cell, column, row, table })
-      : muiCopyButtonProps;
-
-  const mcTableBodyCellCopyButtonProps =
-    columnDef.muiCopyButtonProps instanceof Function
-      ? columnDef.muiCopyButtonProps({
-          cell,
-          column,
-          row,
-          table,
-        })
-      : columnDef.muiCopyButtonProps;
-
   const buttonProps = {
-    ...mTableBodyCellCopyButtonProps,
-    ...mcTableBodyCellCopyButtonProps,
+    ...parseFromValuesOrFunc(muiCopyButtonProps, {
+      cell,
+      column,
+      row,
+      table,
+    }),
+    ...parseFromValuesOrFunc(columnDef.muiCopyButtonProps, {
+      cell,
+      column,
+      row,
+      table,
+    }),
   };
 
   return (
@@ -78,9 +74,7 @@ export const MRT_CopyButton = <TData extends Record<string, any>>({
           minWidth: 'unset',
           textAlign: 'inherit',
           textTransform: 'inherit',
-          ...(buttonProps?.sx instanceof Function
-            ? buttonProps.sx(theme)
-            : (buttonProps?.sx as any)),
+          ...(parseFromValuesOrFunc(buttonProps?.sx, theme) as any),
         })}
         title={undefined}
       >

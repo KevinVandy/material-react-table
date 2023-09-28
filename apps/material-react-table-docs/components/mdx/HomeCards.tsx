@@ -51,8 +51,8 @@ export const HomeCards = () => {
               />
             </Box>
             <Typography>
-              Combine TanStack Table&apos;s Extensive API With Material UI&apos;s
-              Awesome Pre-Built Components!
+              Combine TanStack Table&apos;s Extensive API With Material
+              UI&apos;s Awesome Pre-Built Components!
             </Typography>
           </Card>
           <Card sx={{ p: '1rem' }}>
@@ -137,8 +137,8 @@ export const HomeCards = () => {
             Powerful Features
           </Typography>
           <Typography>
-            Material React Table has most of the features you would expect from a
-            modern table library including{' '}
+            Material React Table has most of the features you would expect from
+            a modern table library including{' '}
             <AnchorLink href="/docs/guides/pagination">Pagination</AnchorLink>,{' '}
             <AnchorLink href="/docs/guides/sorting">Sorting</AnchorLink>,{' '}
             <AnchorLink href="/docs/guides/column-filtering">
@@ -163,8 +163,8 @@ export const HomeCards = () => {
             , etc.
           </Typography>
           <Typography>
-            However, Material React Table also has advanced features that you may
-            not find in other table libraries such as{' '}
+            However, Material React Table also has advanced features that you
+            may not find in other table libraries such as{' '}
             <AnchorLink href="/docs/guides/virtualization">
               Virtualization
             </AnchorLink>

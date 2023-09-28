@@ -1,6 +1,7 @@
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { type MRT_TableInstance } from '../types';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   table: MRT_TableInstance<TData>;
@@ -24,10 +25,9 @@ export const MRT_ExpandAllButton = <TData extends Record<string, any>>({
   } = table;
   const { density, isLoading } = getState();
 
-  const iconButtonProps =
-    muiExpandAllButtonProps instanceof Function
-      ? muiExpandAllButtonProps({ table })
-      : muiExpandAllButtonProps;
+  const iconButtonProps = parseFromValuesOrFunc(muiExpandAllButtonProps, {
+    table,
+  });
 
   const isAllRowsExpanded = getIsAllRowsExpanded();
 
@@ -54,9 +54,7 @@ export const MRT_ExpandAllButton = <TData extends Record<string, any>>({
             height: density === 'compact' ? '1.75rem' : '2.25rem',
             width: density === 'compact' ? '1.75rem' : '2.25rem',
             mt: density !== 'compact' ? '-0.25rem' : undefined,
-            ...(iconButtonProps?.sx instanceof Function
-              ? iconButtonProps?.sx(theme)
-              : (iconButtonProps?.sx as any)),
+            ...(parseFromValuesOrFunc(iconButtonProps?.sx, theme) as any),
           })}
           title={undefined}
         >

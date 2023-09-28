@@ -2,6 +2,7 @@ import TableFooter from '@mui/material/TableFooter';
 import { MRT_TableFooterRow } from './MRT_TableFooterRow';
 import { type VirtualItem } from '@tanstack/react-virtual';
 import { type MRT_TableInstance } from '../types';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   table: MRT_TableInstance<TData>;
@@ -23,10 +24,7 @@ export const MRT_TableFooter = <TData extends Record<string, any>>({
   } = table;
   const { isFullScreen } = getState();
 
-  const tableFooterProps =
-    muiTableFooterProps instanceof Function
-      ? muiTableFooterProps({ table })
-      : muiTableFooterProps;
+  const tableFooterProps = parseFromValuesOrFunc(muiTableFooterProps, { table });
 
   const stickFooter =
     (isFullScreen || enableStickyFooter) && enableStickyFooter !== false;
@@ -45,9 +43,7 @@ export const MRT_TableFooter = <TData extends Record<string, any>>({
           : undefined,
         position: stickFooter ? 'sticky' : undefined,
         zIndex: stickFooter ? 1 : undefined,
-        ...(tableFooterProps?.sx instanceof Function
-          ? tableFooterProps?.sx(theme)
-          : (tableFooterProps?.sx as any)),
+        ...(parseFromValuesOrFunc(tableFooterProps?.sx, theme) as any),
       })}
     >
       {getFooterGroups().map((footerGroup) => (

@@ -482,7 +482,7 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
     | ((props: {
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
-      }) => TextFieldProps);
+      }) => SliderProps);
   muiTableHeadCellProps?:
     | TableCellProps
     | ((props: {
@@ -850,7 +850,7 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
     | ((props: {
         table: MRT_TableInstance<TData>;
         column: MRT_Column<TData>;
-      }) => TextFieldProps);
+      }) => SliderProps);
   muiCreateRowModalProps?:
     | DialogProps
     | ((props: {

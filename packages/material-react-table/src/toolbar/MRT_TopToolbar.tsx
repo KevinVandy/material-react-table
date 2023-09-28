@@ -10,6 +10,7 @@ import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
 import { MRT_ToolbarDropZone } from './MRT_ToolbarDropZone';
 import { type MRT_TableInstance } from '../types';
 import { type Theme } from '@mui/material/styles';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
   alignItems: 'flex-start',
@@ -51,10 +52,7 @@ export const MRT_TopToolbar = <TData extends Record<string, any>>({
 
   const isMobile = useMediaQuery('(max-width:720px)');
 
-  const toolbarProps =
-    muiTopToolbarProps instanceof Function
-      ? muiTopToolbarProps({ table })
-      : muiTopToolbarProps;
+  const toolbarProps = parseFromValuesOrFunc(muiTopToolbarProps, { table });
 
   const stackAlertBanner =
     isMobile || !!renderTopToolbarCustomActions || showGlobalFilter;
@@ -70,16 +68,12 @@ export const MRT_TopToolbar = <TData extends Record<string, any>>({
           toolbarProps.ref.current = ref;
         }
       }}
-      sx={(theme) =>
-        ({
-          position: isFullScreen ? 'sticky' : undefined,
-          top: isFullScreen ? '0' : undefined,
-          ...commonToolbarStyles({ theme }),
-          ...(toolbarProps?.sx instanceof Function
-            ? toolbarProps.sx(theme)
-            : (toolbarProps?.sx as any)),
-        } as any)
-      }
+      sx={(theme) => ({
+        position: isFullScreen ? 'sticky' : undefined,
+        top: isFullScreen ? '0' : undefined,
+        ...commonToolbarStyles({ theme }),
+        ...(parseFromValuesOrFunc(toolbarProps?.sx, theme) as any),
+      })}
     >
       {positionToolbarAlertBanner === 'top' && (
         <MRT_ToolbarAlertBanner

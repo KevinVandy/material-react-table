@@ -2,6 +2,7 @@ import { type MouseEvent, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -33,22 +34,15 @@ export const MRT_TableHeadCellColumnActionsButton = <
     setAnchorEl(event.currentTarget);
   };
 
-  const mTableHeadCellColumnActionsButtonProps =
-    muiColumnActionsButtonProps instanceof Function
-      ? muiColumnActionsButtonProps({ column, table })
-      : muiColumnActionsButtonProps;
-
-  const mcTableHeadCellColumnActionsButtonProps =
-    columnDef.muiColumnActionsButtonProps instanceof Function
-      ? columnDef.muiColumnActionsButtonProps({
-          column,
-          table,
-        })
-      : columnDef.muiColumnActionsButtonProps;
-
   const iconButtonProps = {
-    ...mTableHeadCellColumnActionsButtonProps,
-    ...mcTableHeadCellColumnActionsButtonProps,
+    ...parseFromValuesOrFunc(muiColumnActionsButtonProps, {
+      column,
+      table,
+    }),
+    ...parseFromValuesOrFunc(columnDef.muiColumnActionsButtonProps, {
+      column,
+      table,
+    }),
   };
 
   return (
@@ -75,9 +69,7 @@ export const MRT_TableHeadCellColumnActionsButton = <
             '&:hover': {
               opacity: 1,
             },
-            ...(iconButtonProps?.sx instanceof Function
-              ? iconButtonProps.sx(theme)
-              : (iconButtonProps?.sx as any)),
+            ...(parseFromValuesOrFunc(iconButtonProps?.sx, theme) as any),
           })}
           title={undefined}
         >

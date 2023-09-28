@@ -1,8 +1,9 @@
-import Slider, { type SliderProps } from '@mui/material/Slider';
+import Slider from '@mui/material/Slider';
 import Stack from '@mui/material/Stack';
 import FormHelperText from '@mui/material/FormHelperText';
 import { type MRT_TableInstance, type MRT_Header } from '../types';
 import { useEffect, useRef, useState } from 'react';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   header: MRT_Header<TData>;
@@ -25,26 +26,10 @@ export const MRT_FilterRangeSlider = <TData extends Record<string, any>>({
   const showChangeModeButton =
     enableColumnFilterModes && columnDef.enableColumnFilterModes !== false;
 
-  const mFilterSliderProps =
-    muiFilterSliderProps instanceof Function
-      ? muiFilterSliderProps({
-          column,
-          table,
-        })
-      : muiFilterSliderProps;
-
-  const mcFilterSliderProps =
-    columnDef.muiFilterSliderProps instanceof Function
-      ? columnDef.muiFilterSliderProps({
-          column,
-          table,
-        })
-      : columnDef.muiFilterSliderProps;
-
   const sliderProps = {
-    ...mFilterSliderProps,
-    ...mcFilterSliderProps,
-  } as SliderProps;
+    ...parseFromValuesOrFunc(muiFilterSliderProps, { column, table }),
+    ...parseFromValuesOrFunc(columnDef.muiFilterSliderProps, { column, table }),
+  };
 
   let [min, max] =
     sliderProps.min !== undefined && sliderProps.max !== undefined
@@ -114,9 +99,7 @@ export const MRT_FilterRangeSlider = <TData extends Record<string, any>>({
           mt: !showChangeModeButton ? '10px' : '6px',
           px: '4px',
           width: 'calc(100% - 8px)',
-          ...(sliderProps?.sx instanceof Function
-            ? sliderProps.sx(theme)
-            : (sliderProps?.sx as any)),
+          ...(parseFromValuesOrFunc(sliderProps?.sx, theme) as any),
         })}
       />
       {showChangeModeButton ? (

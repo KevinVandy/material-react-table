@@ -7,6 +7,7 @@ import {
   type MRT_HeaderGroup,
   type MRT_TableInstance,
 } from '../types';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   headerGroup: MRT_HeaderGroup<TData>;
@@ -27,10 +28,10 @@ export const MRT_TableHeadRow = <TData extends Record<string, any>>({
     options: { layoutMode, muiTableHeadRowProps },
   } = table;
 
-  const tableRowProps =
-    muiTableHeadRowProps instanceof Function
-      ? muiTableHeadRowProps({ headerGroup, table })
-      : muiTableHeadRowProps;
+  const tableRowProps = parseFromValuesOrFunc(muiTableHeadRowProps, {
+    headerGroup,
+    table,
+  });
 
   return (
     <TableRow
@@ -40,9 +41,7 @@ export const MRT_TableHeadRow = <TData extends Record<string, any>>({
         boxShadow: `4px 0 8px ${alpha(theme.palette.common.black, 0.1)}`,
         display: layoutMode === 'grid' ? 'flex' : 'table-row',
         top: 0,
-        ...(tableRowProps?.sx instanceof Function
-          ? tableRowProps?.sx(theme)
-          : (tableRowProps?.sx as any)),
+        ...(parseFromValuesOrFunc(tableRowProps?.sx, theme) as any),
       })}
     >
       {virtualPaddingLeft ? (

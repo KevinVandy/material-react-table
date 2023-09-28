@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Collapse from '@mui/material/Collapse';
 import { type MRT_TableInstance } from '../types';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   stackAlertBanner: boolean;
@@ -29,15 +30,13 @@ export const MRT_ToolbarAlertBanner = <TData extends Record<string, any>>({
   } = table;
   const { grouping, showAlertBanner } = getState();
 
-  const alertProps =
-    muiToolbarAlertBannerProps instanceof Function
-      ? muiToolbarAlertBannerProps({ table })
-      : muiToolbarAlertBannerProps;
+  const alertProps = parseFromValuesOrFunc(muiToolbarAlertBannerProps, {
+    table,
+  });
 
-  const chipProps =
-    muiToolbarAlertBannerChipProps instanceof Function
-      ? muiToolbarAlertBannerChipProps({ table })
-      : muiToolbarAlertBannerChipProps;
+  const chipProps = parseFromValuesOrFunc(muiToolbarAlertBannerChipProps, {
+    table,
+  });
 
   const selectMessage =
     getSelectedRowModel().rows.length > 0
@@ -93,9 +92,7 @@ export const MRT_ToolbarAlertBanner = <TData extends Record<string, any>>({
           top: 0,
           width: '100%',
           zIndex: 2,
-          ...(alertProps?.sx instanceof Function
-            ? alertProps.sx(theme)
-            : (alertProps?.sx as any)),
+          ...(parseFromValuesOrFunc(alertProps?.sx, theme) as any),
         })}
       >
         {alertProps?.title && <AlertTitle>{alertProps.title}</AlertTitle>}

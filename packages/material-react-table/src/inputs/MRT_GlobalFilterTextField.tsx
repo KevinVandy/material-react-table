@@ -14,6 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { debounce } from '@mui/material/utils';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 import { type MRT_TableInstance } from '../types';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   table: MRT_TableInstance<TData>;
@@ -36,10 +37,9 @@ export const MRT_GlobalFilterTextField = <TData extends Record<string, any>>({
   } = table;
   const { globalFilter, showGlobalFilter } = getState();
 
-  const textFieldProps =
-    muiSearchTextFieldProps instanceof Function
-      ? muiSearchTextFieldProps({ table })
-      : muiSearchTextFieldProps;
+  const textFieldProps = parseFromValuesOrFunc(muiSearchTextFieldProps, {
+    table,
+  });
 
   const isMounted = useRef(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

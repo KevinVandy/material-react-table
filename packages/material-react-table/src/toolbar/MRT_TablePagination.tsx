@@ -1,6 +1,7 @@
 import { type ChangeEvent } from 'react';
 import TablePagination from '@mui/material/TablePagination';
 import { type MRT_TableInstance } from '../types';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   position?: 'top' | 'bottom';
@@ -31,10 +32,9 @@ export const MRT_TablePagination = <TData extends Record<string, any>>({
   const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
   const showFirstLastPageButtons = totalRowCount / pageSize > 2;
 
-  const tablePaginationProps =
-    muiTablePaginationProps instanceof Function
-      ? muiTablePaginationProps({ table })
-      : muiTablePaginationProps;
+  const tablePaginationProps = parseFromValuesOrFunc(muiTablePaginationProps, {
+    table,
+  });
 
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     setPageSize(+event.target.value);
@@ -101,9 +101,7 @@ export const MRT_TablePagination = <TData extends Record<string, any>>({
             : undefined,
         position: 'relative',
         zIndex: 2,
-        ...(tablePaginationProps?.sx instanceof Function
-          ? tablePaginationProps.sx(theme)
-          : (tablePaginationProps?.sx as any)),
+        ...(parseFromValuesOrFunc(tablePaginationProps?.sx, theme) as any),
       })}
     />
   );

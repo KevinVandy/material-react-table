@@ -94,8 +94,8 @@ export const prepareColumns = <TData extends Record<string, any>>({
           leafRows: Row<TData>[],
           childRows: Row<TData>[],
         ) =>
-          aggFns.map((fn) =>
-            aggregationFns[fn]?.(columnId, leafRows, childRows),
+          aggFns.map(
+            (fn) => aggregationFns[fn]?.(columnId, leafRows, childRows),
           );
       }
 
@@ -356,9 +356,7 @@ export const getCommonCellStyles = <TData extends Record<string, any>>({
       ? 'none'
       : `padding 150ms ease-in-out`,
     ...(!table.options.enableColumnResizing && widthStyles), //let devs pass in width styles if column resizing is disabled
-    ...(tableCellProps?.sx instanceof Function
-      ? tableCellProps.sx(theme)
-      : (tableCellProps?.sx as any)),
+    ...(parseFromValuesOrFunc(tableCellProps?.sx, theme) as any),
     ...(table.options.enableColumnResizing && widthStyles), //don't let devs pass in width styles if column resizing is enabled
   };
 };
@@ -384,6 +382,11 @@ export const MRT_DefaultDisplayColumn = {
   enableResizing: false,
   enableSorting: false,
 } as const;
+
+export const parseFromValuesOrFunc = <T, U>(
+  fn: T | ((arg: U) => T) | undefined,
+  arg: U,
+): T | undefined => (fn instanceof Function ? fn(arg) : fn);
 
 export const parseCSSVarId = (id: string) => id.replace(/[^a-zA-Z0-9]/g, '_');
 

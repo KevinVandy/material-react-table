@@ -18,6 +18,7 @@ import {
   getCommonCellStyles,
   getIsFirstColumn,
   getIsLastColumn,
+  parseFromValuesOrFunc,
 } from '../column.utils';
 import { type VirtualItem } from '@tanstack/react-virtual';
 import { type MRT_Cell, type MRT_TableInstance } from '../types';
@@ -77,25 +78,27 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
   const { columnDef } = column;
   const { columnDefType } = columnDef;
 
-  const mTableCellBodyProps =
-    muiTableBodyCellProps instanceof Function
-      ? muiTableBodyCellProps({ cell, column, row, table })
-      : muiTableBodyCellProps;
-
-  const mcTableCellBodyProps =
-    columnDef.muiTableBodyCellProps instanceof Function
-      ? columnDef.muiTableBodyCellProps({ cell, column, row, table })
-      : columnDef.muiTableBodyCellProps;
-
   const tableCellProps = {
-    ...mTableCellBodyProps,
-    ...mcTableCellBodyProps,
+    ...parseFromValuesOrFunc(muiTableBodyCellProps, {
+      cell,
+      column,
+      row,
+      table,
+    }),
+    ...parseFromValuesOrFunc(columnDef.muiTableBodyCellProps, {
+      cell,
+      column,
+      row,
+      table,
+    }),
   };
 
-  const skeletonProps =
-    muiSkeletonProps instanceof Function
-      ? muiSkeletonProps({ cell, column, row, table })
-      : muiSkeletonProps;
+  const skeletonProps = parseFromValuesOrFunc(muiSkeletonProps, {
+    cell,
+    column,
+    row,
+    table,
+  });
 
   const [skeletonWidth, setSkeletonWidth] = useState(100);
   useEffect(() => {
@@ -148,10 +151,8 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
   }, [draggingColumn, draggingRow, hoveredColumn, hoveredRow, rowIndex]);
 
   const isEditable =
-    (enableEditing instanceof Function ? enableEditing(row) : enableEditing) &&
-    (columnDef.enableEditing instanceof Function
-      ? columnDef.enableEditing(row)
-      : columnDef.enableEditing) !== false;
+    parseFromValuesOrFunc(enableEditing, row) &&
+    parseFromValuesOrFunc(columnDef.enableEditing, row) !== false;
 
   const isEditing =
     isEditable &&

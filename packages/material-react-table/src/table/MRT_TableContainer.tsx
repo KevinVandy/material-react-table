@@ -3,6 +3,7 @@ import TableContainer from '@mui/material/TableContainer';
 import { MRT_Table } from './MRT_Table';
 import { MRT_EditRowModal } from '../modals';
 import { type MRT_TableInstance } from '../types';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 const useIsomorphicLayoutEffect =
   typeof window !== 'undefined' ? useLayoutEffect : useEffect;
@@ -24,18 +25,13 @@ export const MRT_TableContainer = <TData extends Record<string, any>>({
     },
     refs: { tableContainerRef, bottomToolbarRef, topToolbarRef },
   } = table;
-  const {
-    isFullScreen,
-    creatingRow,
-    editingRow,
-  } = getState();
+  const { isFullScreen, creatingRow, editingRow } = getState();
 
   const [totalToolbarHeight, setTotalToolbarHeight] = useState(0);
 
-  const tableContainerProps =
-    muiTableContainerProps instanceof Function
-      ? muiTableContainerProps({ table })
-      : muiTableContainerProps;
+  const tableContainerProps = parseFromValuesOrFunc(muiTableContainerProps, {
+    table,
+  });
 
   useIsomorphicLayoutEffect(() => {
     const topToolbarHeight =
@@ -72,9 +68,7 @@ export const MRT_TableContainer = <TData extends Record<string, any>>({
           ? `clamp(350px, calc(100vh - ${totalToolbarHeight}px), 9999px)`
           : undefined,
         overflow: 'auto',
-        ...(tableContainerProps?.sx instanceof Function
-          ? tableContainerProps.sx(theme)
-          : (tableContainerProps?.sx as any)),
+        ...(parseFromValuesOrFunc(tableContainerProps?.sx, theme) as any),
       })}
       style={{
         maxHeight: isFullScreen

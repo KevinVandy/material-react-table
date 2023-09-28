@@ -2,6 +2,7 @@ import TableHead from '@mui/material/TableHead';
 import { MRT_TableHeadRow } from './MRT_TableHeadRow';
 import { type VirtualItem } from '@tanstack/react-virtual';
 import { type MRT_TableInstance } from '../types';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   table: MRT_TableInstance<TData>;
@@ -23,10 +24,7 @@ export const MRT_TableHead = <TData extends Record<string, any>>({
   } = table;
   const { isFullScreen } = getState();
 
-  const tableHeadProps =
-    muiTableHeadProps instanceof Function
-      ? muiTableHeadProps({ table })
-      : muiTableHeadProps;
+  const tableHeadProps = parseFromValuesOrFunc(muiTableHeadProps, { table });
 
   const stickyHeader = enableStickyHeader || isFullScreen;
 
@@ -39,9 +37,7 @@ export const MRT_TableHead = <TData extends Record<string, any>>({
         position: stickyHeader ? 'sticky' : 'relative',
         top: stickyHeader && layoutMode === 'grid' ? 0 : undefined,
         zIndex: stickyHeader ? 2 : undefined,
-        ...(tableHeadProps?.sx instanceof Function
-          ? tableHeadProps?.sx(theme)
-          : (tableHeadProps?.sx as any)),
+        ...(parseFromValuesOrFunc(tableHeadProps?.sx, theme) as any),
       })}
     >
       {getHeaderGroups().map((headerGroup) => (

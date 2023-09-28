@@ -7,6 +7,7 @@ import {
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { type TextFieldProps } from '@mui/material/TextField';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_Cell, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -36,24 +37,19 @@ export const MRT_EditCellTextField = <TData extends Record<string, any>>({
 
   const [value, setValue] = useState(() => cell.getValue<string>());
 
-  const mTableBodyCellEditTextFieldProps =
-    muiEditTextFieldProps instanceof Function
-      ? muiEditTextFieldProps({ cell, column, row, table })
-      : muiEditTextFieldProps;
-
-  const mcTableBodyCellEditTextFieldProps =
-    columnDef.muiEditTextFieldProps instanceof Function
-      ? columnDef.muiEditTextFieldProps({
-          cell,
-          column,
-          row,
-          table,
-        })
-      : columnDef.muiEditTextFieldProps;
-
   const textFieldProps: TextFieldProps = {
-    ...mTableBodyCellEditTextFieldProps,
-    ...mcTableBodyCellEditTextFieldProps,
+    ...parseFromValuesOrFunc(muiEditTextFieldProps, {
+      cell,
+      column,
+      row,
+      table,
+    }),
+    ...parseFromValuesOrFunc(columnDef.muiEditTextFieldProps, {
+      cell,
+      column,
+      row,
+      table,
+    }),
   };
 
   const saveInputValueToRowCache = (newValue: string) => {
@@ -93,11 +89,7 @@ export const MRT_EditCellTextField = <TData extends Record<string, any>>({
 
   return (
     <TextField
-      disabled={
-        (columnDef.enableEditing instanceof Function
-          ? columnDef.enableEditing(row)
-          : columnDef.enableEditing) === false
-      }
+      disabled={parseFromValuesOrFunc(columnDef.enableEditing, row) === false}
       fullWidth
       inputRef={(inputRef) => {
         if (inputRef) {

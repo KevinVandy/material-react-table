@@ -3,6 +3,7 @@ import { MRT_TopToolbar } from '../toolbar/MRT_TopToolbar';
 import { MRT_BottomToolbar } from '../toolbar/MRT_BottomToolbar';
 import { MRT_TableContainer } from './MRT_TableContainer';
 import { type MRT_TableInstance } from '../types';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   table: MRT_TableInstance<TData>;
@@ -24,10 +25,7 @@ export const MRT_TablePaper = <TData extends Record<string, any>>({
   } = table;
   const { isFullScreen } = getState();
 
-  const tablePaperProps =
-    muiTablePaperProps instanceof Function
-      ? muiTablePaperProps({ table })
-      : muiTablePaperProps;
+  const tablePaperProps = parseFromValuesOrFunc(muiTablePaperProps, { table });
 
   return (
     <Paper
@@ -43,9 +41,7 @@ export const MRT_TablePaper = <TData extends Record<string, any>>({
       sx={(theme) => ({
         overflow: 'hidden',
         transition: 'all 100ms ease-in-out',
-        ...(tablePaperProps?.sx instanceof Function
-          ? tablePaperProps?.sx(theme)
-          : (tablePaperProps?.sx as any)),
+        ...(parseFromValuesOrFunc(tablePaperProps?.sx, theme) as any),
       })}
       style={{
         ...tablePaperProps?.style,
@@ -68,14 +64,14 @@ export const MRT_TablePaper = <TData extends Record<string, any>>({
       }}
     >
       {enableTopToolbar &&
-        (renderTopToolbar instanceof Function
-          ? renderTopToolbar({ table })
-          : renderTopToolbar ?? <MRT_TopToolbar table={table} />)}
+        (parseFromValuesOrFunc(renderTopToolbar, { table }) ?? (
+          <MRT_TopToolbar table={table} />
+        ))}
       <MRT_TableContainer table={table} />
       {enableBottomToolbar &&
-        (renderBottomToolbar instanceof Function
-          ? renderBottomToolbar({ table })
-          : renderBottomToolbar ?? <MRT_BottomToolbar table={table} />)}
+        (parseFromValuesOrFunc(renderBottomToolbar, { table }) ?? (
+          <MRT_BottomToolbar table={table} />
+        ))}
     </Paper>
   );
 };

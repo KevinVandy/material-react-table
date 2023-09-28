@@ -1,4 +1,4 @@
-import { type DragEvent, type ReactNode, useMemo } from 'react';
+import { type DragEvent, useMemo } from 'react';
 import Box from '@mui/material/Box';
 import TableCell from '@mui/material/TableCell';
 import { useTheme } from '@mui/material/styles';
@@ -10,6 +10,7 @@ import { MRT_TableHeadCellResizeHandle } from './MRT_TableHeadCellResizeHandle';
 import { MRT_TableHeadCellSortLabel } from './MRT_TableHeadCellSortLabel';
 import { getCommonCellStyles } from '../column.utils';
 import { type Theme } from '@mui/material/styles';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -47,19 +48,9 @@ export const MRT_TableHeadCell = <TData extends Record<string, any>>({
   const { columnDef } = column;
   const { columnDefType } = columnDef;
 
-  const mTableHeadCellProps =
-    muiTableHeadCellProps instanceof Function
-      ? muiTableHeadCellProps({ column, table })
-      : muiTableHeadCellProps;
-
-  const mcTableHeadCellProps =
-    columnDef.muiTableHeadCellProps instanceof Function
-      ? columnDef.muiTableHeadCellProps({ column, table })
-      : columnDef.muiTableHeadCellProps;
-
   const tableCellProps = {
-    ...mTableHeadCellProps,
-    ...mcTableHeadCellProps,
+    ...parseFromValuesOrFunc(muiTableHeadCellProps, { column, table }),
+    ...parseFromValuesOrFunc(columnDef.muiTableHeadCellProps, { column, table }),
   };
 
   const showColumnActions =
@@ -113,13 +104,11 @@ export const MRT_TableHeadCell = <TData extends Record<string, any>>({
   };
 
   const headerElement =
-    columnDef?.Header instanceof Function
-      ? columnDef?.Header?.({
-          column,
-          header,
-          table,
-        })
-      : columnDef?.Header ?? (columnDef.header as ReactNode);
+    parseFromValuesOrFunc(columnDef.Header, {
+      column,
+      header,
+      table,
+    }) ?? columnDef.header;
 
   return (
     <TableCell

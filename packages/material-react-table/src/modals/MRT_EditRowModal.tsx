@@ -6,6 +6,7 @@ import Stack from '@mui/material/Stack';
 import { MRT_EditActionButtons } from '../buttons/MRT_EditActionButtons';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   open: boolean;
@@ -33,19 +34,10 @@ export const MRT_EditRowModal = <TData extends Record<string, any>>({
   const { creatingRow, editingRow } = getState();
   const row = (creatingRow ?? editingRow) as MRT_Row<TData>;
 
-  const createModalProps =
-    muiCreateRowModalProps instanceof Function
-      ? muiCreateRowModalProps({ row, table })
-      : muiCreateRowModalProps;
-
-  const editModalProps =
-    muiEditRowModalProps instanceof Function
-      ? muiEditRowModalProps({ row, table })
-      : muiEditRowModalProps;
-
   const dialogProps = {
-    ...editModalProps,
-    ...(creatingRow && createModalProps),
+    ...parseFromValuesOrFunc(muiEditRowModalProps, { row, table }),
+    ...(creatingRow &&
+      parseFromValuesOrFunc(muiCreateRowModalProps, { row, table })),
   };
 
   const internalEditComponents = row

@@ -4,6 +4,7 @@ import { type Theme, alpha, darken, lighten } from '@mui/material/styles';
 import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import { type VirtualItem, type Virtualizer } from '@tanstack/react-virtual';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_Cell, type MRT_Row, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -45,10 +46,11 @@ export const MRT_TableBodyRow = <TData extends Record<string, any>>({
   const { draggingColumn, draggingRow, editingCell, editingRow, hoveredRow } =
     getState();
 
-  const tableRowProps =
-    muiTableBodyRowProps instanceof Function
-      ? muiTableBodyRowProps({ row, staticRowIndex: rowIndex, table })
-      : muiTableBodyRowProps;
+  const tableRowProps = parseFromValuesOrFunc(muiTableBodyRowProps, {
+    row,
+    staticRowIndex: rowIndex,
+    table,
+  });
 
   const handleDragEnter = (_e: DragEvent) => {
     if (enableRowOrdering && draggingRow) {
@@ -91,9 +93,7 @@ export const MRT_TableBodyRow = <TData extends Record<string, any>>({
                   : `${darken(theme.palette.background.default, 0.05)}`
                 : undefined,
           },
-          ...(tableRowProps?.sx instanceof Function
-            ? tableRowProps.sx(theme)
-            : (tableRowProps?.sx as any)),
+          ...(parseFromValuesOrFunc(tableRowProps?.sx, theme) as any),
         })}
         style={{
           transform: virtualRow

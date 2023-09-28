@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import { Memo_MRT_TableBodyRow, MRT_TableBodyRow } from './MRT_TableBodyRow';
 import { rankGlobalFuzzy } from '../sortingFns';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
@@ -58,15 +59,10 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
     sorting,
   } = getState();
 
-  const tableBodyProps =
-    muiTableBodyProps instanceof Function
-      ? muiTableBodyProps({ table })
-      : muiTableBodyProps;
-
-  const vProps =
-    rowVirtualizerOptions instanceof Function
-      ? rowVirtualizerOptions({ table })
-      : rowVirtualizerOptions;
+  const tableBodyProps = parseFromValuesOrFunc(muiTableBodyProps, { table });
+  const rowVirtualizerProps = parseFromValuesOrFunc(rowVirtualizerOptions, {
+    table,
+  });
 
   const shouldRankResults = useMemo(
     () =>
@@ -123,7 +119,7 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
             ? (element) => element?.getBoundingClientRect().height
             : undefined,
         overscan: 4,
-        ...vProps,
+        ...rowVirtualizerProps,
       })
     : undefined;
 
@@ -145,9 +141,7 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
           : 'inherit',
         minHeight: !rows.length ? '100px' : undefined,
         position: 'relative',
-        ...(tableBodyProps?.sx instanceof Function
-          ? tableBodyProps?.sx(theme)
-          : (tableBodyProps?.sx as any)),
+        ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
       })}
     >
       {tableBodyProps?.children ??

@@ -8,6 +8,7 @@ import {
   commonMenuItemStyles,
 } from './MRT_ColumnActionMenu';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   anchorEl: HTMLElement | null;
@@ -45,18 +46,16 @@ export const MRT_RowActionMenu = <TData extends Record<string, any>>({
         dense: density === 'compact',
       }}
     >
-      {enableEditing instanceof Function
-        ? enableEditing(row)
-        : enableEditing && (
-            <MenuItem onClick={handleEdit} sx={commonMenuItemStyles}>
-              <Box sx={commonListItemStyles}>
-                <ListItemIcon>
-                  <EditIcon />
-                </ListItemIcon>
-                {localization.edit}
-              </Box>
-            </MenuItem>
-          )}
+      {parseFromValuesOrFunc(enableEditing, row) && (
+        <MenuItem onClick={handleEdit} sx={commonMenuItemStyles}>
+          <Box sx={commonListItemStyles}>
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
+            {localization.edit}
+          </Box>
+        </MenuItem>
+      )}
       {renderRowActionMenuItems?.({
         row,
         table,

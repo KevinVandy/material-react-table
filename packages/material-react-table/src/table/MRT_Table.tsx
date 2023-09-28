@@ -9,7 +9,7 @@ import Table from '@mui/material/Table';
 import { MRT_TableHead } from '../head/MRT_TableHead';
 import { Memo_MRT_TableBody, MRT_TableBody } from '../body/MRT_TableBody';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
-import { parseCSSVarId } from '../column.utils';
+import { parseCSSVarId, parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -46,15 +46,12 @@ export const MRT_Table = <TData extends Record<string, any>>({
     isFullScreen,
   } = getState();
 
-  const tableProps =
-    muiTableProps instanceof Function
-      ? muiTableProps({ table })
-      : muiTableProps;
+  const tableProps = parseFromValuesOrFunc(muiTableProps, { table });
 
-  const vProps =
-    columnVirtualizerOptions instanceof Function
-      ? columnVirtualizerOptions({ table })
-      : columnVirtualizerOptions;
+  const columnVirtualizerProps = parseFromValuesOrFunc(
+    columnVirtualizerOptions,
+    { table },
+  );
 
   const columnSizeVars = useMemo(() => {
     const headers = getFlatHeaders();
@@ -115,7 +112,7 @@ export const MRT_Table = <TData extends Record<string, any>>({
           ],
           [leftPinnedIndexes, rightPinnedIndexes],
         ),
-        ...vProps,
+        ...columnVirtualizerProps,
       })
     : undefined;
 
@@ -155,9 +152,7 @@ export const MRT_Table = <TData extends Record<string, any>>({
           display: layoutMode === 'grid' ? 'grid' : 'table',
           tableLayout:
             layoutMode !== 'grid' && enableColumnResizing ? 'fixed' : undefined,
-          ...(tableProps?.sx instanceof Function
-            ? tableProps.sx(theme)
-            : (tableProps?.sx as any)),
+          ...(parseFromValuesOrFunc(tableProps?.sx, theme) as any),
         })}
         style={{ ...columnSizeVars, ...tableProps?.style }}
       >

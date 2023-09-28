@@ -19,6 +19,7 @@ import { debounce } from '@mui/material/utils';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 import { type TextFieldProps } from '@mui/material/TextField';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   header: MRT_Header<TData>;
@@ -46,28 +47,13 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
   const { column } = header;
   const { columnDef } = column;
 
-  const mTableHeadCellFilterTextFieldProps =
-    muiFilterTextFieldProps instanceof Function
-      ? muiFilterTextFieldProps({
-          column,
-          table,
-          rangeFilterIndex,
-        })
-      : muiFilterTextFieldProps;
-
-  const mcTableHeadCellFilterTextFieldProps =
-    columnDef.muiFilterTextFieldProps instanceof Function
-      ? columnDef.muiFilterTextFieldProps({
-          column,
-          table,
-          rangeFilterIndex,
-        })
-      : columnDef.muiFilterTextFieldProps;
-
-  const textFieldProps = {
-    ...mTableHeadCellFilterTextFieldProps,
-    ...mcTableHeadCellFilterTextFieldProps,
-  } as TextFieldProps;
+  const textFieldProps: TextFieldProps = {
+    ...parseFromValuesOrFunc(muiFilterTextFieldProps, { column, table }),
+    ...parseFromValuesOrFunc(columnDef.muiFilterTextFieldProps, {
+      column,
+      table,
+    }),
+  };
 
   const isRangeFilter =
     columnDef.filterVariant === 'range' || rangeFilterIndex !== undefined;
@@ -358,9 +344,7 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
           '& .MuiSelect-icon': {
             mr: '1.5rem',
           },
-          ...(textFieldProps?.sx instanceof Function
-            ? textFieldProps.sx(theme)
-            : (textFieldProps?.sx as any)),
+          ...(parseFromValuesOrFunc(textFieldProps?.sx, theme) as any),
         })}
       >
         {(isSelectFilter || isMultiSelectFilter) && (

@@ -4,6 +4,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { MRT_RowActionMenu } from '../menus/MRT_RowActionMenu';
 import { MRT_EditActionButtons } from './MRT_EditActionButtons';
 import { type MRT_Cell, type MRT_Row, type MRT_TableInstance } from '../types';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 const commonIconButtonStyles = {
   height: '2rem',
@@ -73,9 +74,7 @@ export const MRT_ToggleRowActionMenuButton = <
       ) : showEditActionButtons ? (
         <MRT_EditActionButtons row={row} table={table} />
       ) : !renderRowActionMenuItems &&
-        (enableEditing instanceof Function
-          ? enableEditing(row)
-          : enableEditing) ? (
+        parseFromValuesOrFunc(enableEditing, row) ? (
         <Tooltip placement="right" arrow title={localization.edit}>
           <IconButton
             aria-label={localization.edit}

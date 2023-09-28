@@ -1,8 +1,8 @@
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Tooltip from '@mui/material/Tooltip';
-import { type CheckboxProps } from '@mui/material/Checkbox';
 import { type MRT_Column, type MRT_TableInstance } from '../types';
+import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   column: MRT_Column<TData>;
@@ -20,26 +20,16 @@ export const MRT_FilterCheckbox = <TData extends Record<string, any>>({
   const { density } = getState();
   const { columnDef } = column;
 
-  const mTableHeadCellFilterCheckboxProps =
-    muiFilterCheckboxProps instanceof Function
-      ? muiFilterCheckboxProps({
-          column,
-          table,
-        })
-      : muiFilterCheckboxProps;
-
-  const mcTableHeadCellFilterCheckboxProps =
-    columnDef.muiFilterCheckboxProps instanceof Function
-      ? columnDef.muiFilterCheckboxProps({
-          column,
-          table,
-        })
-      : columnDef.muiFilterCheckboxProps;
-
   const checkboxProps = {
-    ...mTableHeadCellFilterCheckboxProps,
-    ...mcTableHeadCellFilterCheckboxProps,
-  } as CheckboxProps;
+    ...parseFromValuesOrFunc(muiFilterCheckboxProps, {
+      column,
+      table,
+    }),
+    ...parseFromValuesOrFunc(columnDef.muiFilterCheckboxProps, {
+      column,
+      table,
+    }),
+  };
 
   const filterLabel = localization.filterByColumn?.replace(
     '{column}',
@@ -80,9 +70,7 @@ export const MRT_FilterCheckbox = <TData extends Record<string, any>>({
             sx={(theme) => ({
               height: '2.5rem',
               width: '2.5rem',
-              ...(checkboxProps?.sx instanceof Function
-                ? checkboxProps.sx(theme)
-                : (checkboxProps?.sx as any)),
+              ...(parseFromValuesOrFunc(checkboxProps?.sx, theme) as any),
             })}
           />
         }

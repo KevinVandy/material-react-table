@@ -4,6 +4,7 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { lighten } from '@mui/material/styles';
 import { type VirtualItem } from '@tanstack/react-virtual';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -33,20 +34,17 @@ export const MRT_TableDetailPanel = <TData extends Record<string, any>>({
   } = table;
   const { isLoading } = getState();
 
-  const tableRowProps =
-    muiTableBodyRowProps instanceof Function
-      ? muiTableBodyRowProps({
-          isDetailPanel: true,
-          row,
-          staticRowIndex: rowIndex,
-          table,
-        })
-      : muiTableBodyRowProps;
+  const tableRowProps = parseFromValuesOrFunc(muiTableBodyRowProps, {
+    isDetailPanel: true,
+    row,
+    staticRowIndex: rowIndex,
+    table,
+  });
 
-  const tableCellProps =
-    muiDetailPanelProps instanceof Function
-      ? muiDetailPanelProps({ row, table })
-      : muiDetailPanelProps;
+  const tableCellProps = parseFromValuesOrFunc(muiDetailPanelProps, {
+    row,
+    table,
+  });
 
   return (
     <TableRow
@@ -63,9 +61,7 @@ export const MRT_TableDetailPanel = <TData extends Record<string, any>>({
           : undefined,
         width: '100%',
         zIndex: virtualRow ? 2 : undefined,
-        ...(tableRowProps?.sx instanceof Function
-          ? tableRowProps.sx(theme)
-          : (tableRowProps?.sx as any)),
+        ...(parseFromValuesOrFunc(tableRowProps?.sx, theme) as any),
       })}
     >
       <TableCell
@@ -82,9 +78,7 @@ export const MRT_TableDetailPanel = <TData extends Record<string, any>>({
           pt: row.getIsExpanded() ? '1rem' : 0,
           transition: 'all 150ms ease-in-out',
           width: `${table.getTotalSize()}px`,
-          ...(tableCellProps?.sx instanceof Function
-            ? tableCellProps.sx(theme)
-            : (tableCellProps?.sx as any)),
+          ...(parseFromValuesOrFunc(tableCellProps?.sx, theme) as any),
         })}
       >
         {renderDetailPanel && (
