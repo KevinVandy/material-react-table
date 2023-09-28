@@ -215,15 +215,21 @@ export const getIsFirstColumn = <TData extends Record<string, any>>(
   column: MRT_Column<TData>,
   table: MRT_TableInstance<TData>,
 ) => {
-  return table.getVisibleLeafColumns()[0].id === column.id;
+  const leftColumns = table.getLeftVisibleLeafColumns();
+  return leftColumns.length
+    ? leftColumns[0].id === column.id
+    : table.getVisibleLeafColumns()[0].id === column.id;
 };
 
 export const getIsLastColumn = <TData extends Record<string, any>>(
   column: MRT_Column<TData>,
   table: MRT_TableInstance<TData>,
 ) => {
+  const rightColumns = table.getRightVisibleLeafColumns();
   const columns = table.getVisibleLeafColumns();
-  return columns[columns.length - 1].id === column.id;
+  return rightColumns.length
+    ? rightColumns[rightColumns.length - 1].id === column.id
+    : columns[columns.length - 1].id === column.id;
 };
 
 export const getIsLastLeftPinnedColumn = <TData extends Record<string, any>>(
