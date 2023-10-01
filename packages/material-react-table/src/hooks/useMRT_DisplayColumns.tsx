@@ -1,5 +1,6 @@
 import { type RefObject, useMemo } from 'react';
 import { showExpandColumn } from '../column.utils';
+import { MRT_TableBodyRowPinButton } from '../body/MRT_TableBodyRowPinButton';
 import { MRT_TableBodyRowGrabHandle } from '../body';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
 import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
@@ -30,6 +31,18 @@ export const useMRT_DisplayColumns = <TData extends Record<string, any>>({
     () =>
       (
         [
+          (tableOptions.state?.columnOrder ?? columnOrder).includes(
+            'mrt-row-pin',
+          ) && {
+            Cell: ({ row, table }) => (
+              <MRT_TableBodyRowPinButton row={row} table={table} />
+            ),
+            header: tableOptions.localization.pin,
+            size: 60,
+            ...tableOptions.defaultDisplayColumn,
+            ...tableOptions.displayColumnDefOptions?.['mrt-row-pin'],
+            id: 'mrt-row-pin',
+          },
           (tableOptions.state?.columnOrder ?? columnOrder).includes(
             'mrt-row-drag',
           ) && {

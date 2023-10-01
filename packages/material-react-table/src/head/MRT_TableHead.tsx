@@ -21,6 +21,7 @@ export const MRT_TableHead = <TData extends Record<string, any>>({
     getHeaderGroups,
     getState,
     options: { enableStickyHeader, layoutMode, muiTableHeadProps },
+    refs: { tableHeadRef },
   } = table;
   const { isFullScreen } = getState();
 
@@ -39,6 +40,13 @@ export const MRT_TableHead = <TData extends Record<string, any>>({
         zIndex: stickyHeader ? 2 : undefined,
         ...(parseFromValuesOrFunc(tableHeadProps?.sx, theme) as any),
       })}
+      ref={(ref: HTMLTableSectionElement) => {
+        tableHeadRef.current = ref;
+        if (tableHeadProps?.ref) {
+          // @ts-ignore
+          tableHeadProps.ref.current = ref;
+        }
+      }}
     >
       {getHeaderGroups().map((headerGroup) => (
         <MRT_TableHeadRow

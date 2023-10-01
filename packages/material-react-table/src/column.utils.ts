@@ -152,6 +152,9 @@ export const getLeadingDisplayColumnIds = <TData extends Record<string, any>>(
   props: MRT_TableOptions<TData>,
 ) =>
   [
+    props.enableRowPinning &&
+      !props.rowPinningDisplayMode?.startsWith('select') &&
+      'mrt-row-pin',
     (props.enableRowDragging || props.enableRowOrdering) && 'mrt-row-drag',
     props.positionActionsColumn === 'first' &&
       (props.enableRowActions ||

@@ -82,7 +82,7 @@ export const MRT_EditRowModal = <TData extends Record<string, any>>({
         })) ?? (
         <>
           <DialogTitle sx={{ textAlign: 'center' }}>
-            {(creatingRow && localization.create) || localization.edit}
+            {localization.edit}
           </DialogTitle>
           <DialogContent>
             <form onSubmit={(e) => e.preventDefault()}>

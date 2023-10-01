@@ -107,7 +107,6 @@ export interface MRT_Localization {
   clearSearch: string;
   clearSort: string;
   clickToCopy: string;
-  create?: string;
   collapse: string;
   collapseAll: string;
   columnActions: string;
@@ -130,9 +129,10 @@ export interface MRT_Localization {
   filterFuzzy: string;
   filterGreaterThan: string;
   filterGreaterThanOrEqualTo: string;
-  filterInNumberRange: string;
   filterIncludesString: string;
   filterIncludesStringSensitive: string;
+  filteringByColumn: string;
+  filterInNumberRange: string;
   filterLessThan: string;
   filterLessThanOrEqualTo: string;
   filterMode: string;
@@ -140,7 +140,6 @@ export interface MRT_Localization {
   filterNotEquals: string;
   filterStartsWith: string;
   filterWeakEquals: string;
-  filteringByColumn: string;
   goToFirstPage: string;
   goToLastPage: string;
   goToNextPage: string;
@@ -157,6 +156,7 @@ export interface MRT_Localization {
   noResultsFound: string;
   of: string;
   or: string;
+  pin?: string;
   pinToLeft: string;
   pinToRight: string;
   resetColumnSize: string;
@@ -200,7 +200,9 @@ export type MRT_TableInstance<TData extends Record<string, any>> = Omit<
   | 'getAllColumns'
   | 'getAllFlatColumns'
   | 'getAllLeafColumns'
+  | 'getBottomRows'
   | 'getCenterLeafColumns'
+  | 'getCenterRows'
   | 'getColumn'
   | 'getExpandedRowModel'
   | 'getFlatHeaders'
@@ -213,12 +215,15 @@ export type MRT_TableInstance<TData extends Record<string, any>> = Omit<
   | 'getRowModel'
   | 'getSelectedRowModel'
   | 'getState'
+  | 'getTopRows'
   | 'options'
 > & {
   getAllColumns: () => MRT_Column<TData>[];
   getAllFlatColumns: () => MRT_Column<TData>[];
   getAllLeafColumns: () => MRT_Column<TData>[];
+  getBottomRows: () => MRT_Row<TData>[];
   getCenterLeafColumns: () => MRT_Column<TData>[];
+  getCenterRows: () => MRT_Row<TData>[];
   getColumn: (columnId: string) => MRT_Column<TData>;
   getExpandedRowModel: () => MRT_RowModel<TData>;
   getFlatHeaders: () => MRT_Header<TData>[];
@@ -231,6 +236,7 @@ export type MRT_TableInstance<TData extends Record<string, any>> = Omit<
   getRowModel: () => MRT_RowModel<TData>;
   getSelectedRowModel: () => MRT_RowModel<TData>;
   getState: () => MRT_TableState<TData>;
+  getTopRows: () => MRT_Row<TData>[];
   options: MRT_DefinedTableOptions<TData>;
   refs: {
     bottomToolbarRef: MutableRefObject<HTMLDivElement>;
@@ -241,6 +247,8 @@ export type MRT_TableInstance<TData extends Record<string, any>> = Omit<
     tableHeadCellRefs: MutableRefObject<Record<string, HTMLTableCellElement>>;
     tablePaperRef: MutableRefObject<HTMLDivElement>;
     topToolbarRef: MutableRefObject<HTMLDivElement>;
+    tableHeadRef: MutableRefObject<HTMLTableSectionElement>;
+    tableFooterRef: MutableRefObject<HTMLTableSectionElement>;
   };
   setCreatingRow: Dispatch<SetStateAction<MRT_Row<TData> | null | true>>;
   setColumnFilterFns: Dispatch<SetStateAction<MRT_ColumnFilterFnsState>>;
@@ -579,10 +587,10 @@ export type MRT_FilterFn<TData extends Record<string, any>> =
   | MRT_FilterOption;
 
 export type MRT_InternalFilterOption = {
+  divider: boolean;
+  label: string;
   option: string;
   symbol: string;
-  label: string;
-  divider: boolean;
 };
 
 export type MRT_DisplayColumnIds =
@@ -590,7 +598,8 @@ export type MRT_DisplayColumnIds =
   | 'mrt-row-drag'
   | 'mrt-row-expand'
   | 'mrt-row-numbers'
-  | 'mrt-row-select';
+  | 'mrt-row-select'
+  | 'mrt-row-pin';
 
 /**
  * `columns` and `data` props are the only required props, but there are over 170 other optional props.
@@ -660,6 +669,14 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
   columnFilterDisplayMode?: 'subheader' | 'popover' | 'custom';
   paginationDisplayMode?: 'default' | 'pages' | 'custom';
   selectDisplayMode?: 'checkbox' | 'radio' | 'switch';
+  rowPinningDisplayMode?:
+    | 'sticky'
+    | 'top'
+    | 'bottom'
+    | 'top-and-bottom'
+    | 'select-sticky'
+    | 'select-top'
+    | 'select-bottom';
   enableBottomToolbar?: boolean;
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;

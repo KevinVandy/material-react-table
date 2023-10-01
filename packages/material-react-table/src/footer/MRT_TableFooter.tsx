@@ -21,10 +21,13 @@ export const MRT_TableFooter = <TData extends Record<string, any>>({
     getFooterGroups,
     getState,
     options: { enableStickyFooter, layoutMode, muiTableFooterProps },
+    refs: { tableFooterRef },
   } = table;
   const { isFullScreen } = getState();
 
-  const tableFooterProps = parseFromValuesOrFunc(muiTableFooterProps, { table });
+  const tableFooterProps = parseFromValuesOrFunc(muiTableFooterProps, {
+    table,
+  });
 
   const stickFooter =
     (isFullScreen || enableStickyFooter) && enableStickyFooter !== false;
@@ -45,6 +48,13 @@ export const MRT_TableFooter = <TData extends Record<string, any>>({
         zIndex: stickFooter ? 1 : undefined,
         ...(parseFromValuesOrFunc(tableFooterProps?.sx, theme) as any),
       })}
+      ref={(ref: HTMLTableSectionElement) => {
+        tableFooterRef.current = ref;
+        if (tableFooterProps?.ref) {
+          // @ts-ignore
+          tableFooterProps.ref.current = ref;
+        }
+      }}
     >
       {getFooterGroups().map((footerGroup) => (
         <MRT_TableFooterRow

@@ -50,6 +50,8 @@ export const useMRT_TableInstance: <TData extends Record<string, any>>(
   const tableHeadCellRefs = useRef<Record<string, HTMLTableCellElement>>({});
   const tablePaperRef = useRef<HTMLDivElement>(null);
   const topToolbarRef = useRef<HTMLDivElement>(null);
+  const tableHeadRef = useRef<HTMLTableSectionElement>(null);
+  const tableFooterRef = useRef<HTMLTableSectionElement>(null);
 
   const initialState: Partial<MRT_TableState<TData>> = useMemo(() => {
     const initState = tableOptions.initialState ?? {};
@@ -251,6 +253,10 @@ export const useMRT_TableInstance: <TData extends Record<string, any>>(
     tablePaperRef,
     // @ts-ignore
     topToolbarRef,
+    // @ts-ignore
+    tableFooterRef,
+    // @ts-ignore
+    tableHeadRef,
   };
 
   const setCreatingRow = (row: MRT_Updater<MRT_Row<TData> | null | true>) => {

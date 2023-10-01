@@ -233,7 +233,8 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
               }rem`
             : undefined,
         textOverflow: columnDefType !== 'display' ? 'ellipsis' : undefined,
-        whiteSpace: density === 'compact' ? 'nowrap' : 'normal',
+        whiteSpace:
+          row.getIsPinned() || density === 'compact' ? 'nowrap' : 'normal',
         zIndex:
           draggingColumn?.id === column.id ? 2 : column.getIsPinned() ? 1 : 0,
         '&:hover': {

@@ -22,6 +22,8 @@ export const MRT_SelectCheckbox = <TData extends Record<string, any>>({
     options: {
       localization,
       enableMultiRowSelection,
+      rowPinningDisplayMode,
+      enableRowPinning,
       muiSelectCheckboxProps,
       muiSelectAllCheckboxProps,
       selectAllMode,
@@ -47,11 +49,27 @@ export const MRT_SelectCheckbox = <TData extends Record<string, any>>({
         ? localization.toggleSelectAll
         : localization.toggleSelectRow,
     },
-    onChange: row
-      ? row.getToggleSelectedHandler()
-      : selectAllMode === 'all'
-      ? table.getToggleAllRowsSelectedHandler()
-      : table.getToggleAllPageRowsSelectedHandler(),
+    onChange: (event) => {
+      event.stopPropagation();
+      row
+        ? row.getToggleSelectedHandler()(event)
+        : selectAllMode === 'all'
+        ? table.getToggleAllRowsSelectedHandler()(event)
+        : table.getToggleAllPageRowsSelectedHandler()(event);
+      if (enableRowPinning && rowPinningDisplayMode?.includes('select')) {
+        if (row) {
+          row.pin(
+            !row.getIsPinned() && event.target.checked
+              ? rowPinningDisplayMode?.includes('bottom')
+                ? 'bottom'
+                : 'top'
+              : false,
+          );
+        } else {
+          table.setRowPinning({ bottom: [], top: [] });
+        }
+      }
+    },
     size: (density === 'compact' ? 'small' : 'medium') as 'small' | 'medium',
     ...checkboxProps,
     onClick: (e: MouseEvent<HTMLButtonElement>) => {
@@ -62,6 +80,7 @@ export const MRT_SelectCheckbox = <TData extends Record<string, any>>({
       height: density === 'compact' ? '1.75rem' : '2.5rem',
       width: density === 'compact' ? '1.75rem' : '2.5rem',
       m: density !== 'compact' ? '-0.4rem' : undefined,
+      zIndex: 0,
       ...parseFromValuesOrFunc(checkboxProps?.sx, theme),
     }),
     title: undefined,
