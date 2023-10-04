@@ -39,7 +39,6 @@ export const MRT_TablePaper = <TData extends Record<string, any>>({
         }
       }}
       style={{
-        ...tablePaperProps?.style,
         ...(isFullScreen
           ? {
               bottom: 0,
@@ -56,6 +55,7 @@ export const MRT_TablePaper = <TData extends Record<string, any>>({
               zIndex: 10,
             }
           : {}),
+        ...tablePaperProps?.style,
       }}
       sx={(theme) => ({
         overflow: 'hidden',
