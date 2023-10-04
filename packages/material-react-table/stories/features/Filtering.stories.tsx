@@ -87,9 +87,9 @@ export const PopoverDisplayMode = () => (
 export const PopoverDisplayModeNoSorting = () => (
   <MaterialReactTable
     columnFilterDisplayMode="popover"
-    enableSorting={false}
     columns={columns}
     data={data}
+    enableSorting={false}
   />
 );
 

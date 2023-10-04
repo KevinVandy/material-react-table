@@ -119,12 +119,8 @@ export const MRT_TableHeadCellFilterLabel = <
       <Popover
         anchorEl={anchorEl}
         anchorOrigin={{
+          horizontal: 'center',
           vertical: 'top',
-          horizontal: 'center',
-        }}
-        transformOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
         }}
         onClose={(event) => {
           //@ts-ignore
@@ -132,6 +128,10 @@ export const MRT_TableHeadCellFilterLabel = <
           setAnchorEl(null);
         }}
         open={!!anchorEl}
+        transformOrigin={{
+          horizontal: 'center',
+          vertical: 'bottom',
+        }}
       >
         <Box sx={{ p: '1rem' }}>
           <MRT_TableHeadCellFilterContainer header={header} table={table} />
