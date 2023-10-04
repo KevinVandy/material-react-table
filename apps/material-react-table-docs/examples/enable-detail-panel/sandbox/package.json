@@ -12,15 +12,15 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.14.11",
-    "@mui/material": "^5.14.11",
+    "@mui/icons-material": "^5.14.12",
+    "@mui/material": "^5.14.12",
     "material-react-table": "^1.15.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.24",
-    "@types/react-dom": "^18.2.8",
+    "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.10",
     "@vitejs/plugin-react": "^4.1.0",
     "typescript": "^5.2.2",
     "vite": "^4.4.10"
