@@ -70,7 +70,7 @@ export const MRT_Localization_FR: MRT_Localization = {
   save: 'Sauvegarder',
   search: 'Rechercher',
   selectedCountOfRowCountRowsSelected:
-    '{selectedCount} de {rowCount} ligne(s) sélectionnée(s)',
+    '{selectedCount} sur {rowCount} ligne(s)',
   select: 'Sélectionner',
   showAll: 'Afficher tous',
   showAllColumns: 'Afficher toutes les colonnes',
