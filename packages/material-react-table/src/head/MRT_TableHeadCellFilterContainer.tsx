@@ -16,13 +16,20 @@ export const MRT_TableHeadCellFilterContainer = <
   header,
   table,
 }: Props<TData>) => {
-  const { getState } = table;
+  const {
+    getState,
+    options: { columnFilterDisplayMode },
+  } = table;
   const { showColumnFilters } = getState();
   const { column } = header;
   const { columnDef } = column;
 
   return (
-    <Collapse in={showColumnFilters} mountOnEnter unmountOnExit>
+    <Collapse
+      in={showColumnFilters || columnFilterDisplayMode === 'popover'}
+      mountOnEnter
+      unmountOnExit
+    >
       {columnDef.filterVariant === 'checkbox' ? (
         <MRT_FilterCheckbox column={column} table={table} />
       ) : columnDef.filterVariant === 'range-slider' ? (

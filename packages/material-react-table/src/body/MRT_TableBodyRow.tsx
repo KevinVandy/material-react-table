@@ -148,7 +148,7 @@ export const MRT_TableBodyRow = <TData extends Record<string, any>>({
             0.06,
           )} !important`,
           bottom:
-            bottomPinnedIndex !== undefined && isPinned
+            !virtualRow && bottomPinnedIndex !== undefined && isPinned
               ? `${
                   bottomPinnedIndex * rowHeight +
                   (enableStickyFooter ? tableFooterHeight - 1 : 0)

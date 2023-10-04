@@ -76,6 +76,23 @@ export const FilteringEnabledDefault = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
+export const PopoverDisplayMode = () => (
+  <MaterialReactTable
+    columnFilterDisplayMode="popover"
+    columns={columns}
+    data={data}
+  />
+);
+
+export const PopoverDisplayModeNoSorting = () => (
+  <MaterialReactTable
+    columnFilterDisplayMode="popover"
+    enableSorting={false}
+    columns={columns}
+    data={data}
+  />
+);
+
 export const ColumnFilteringDisabled = () => (
   <MaterialReactTable
     columns={columns}

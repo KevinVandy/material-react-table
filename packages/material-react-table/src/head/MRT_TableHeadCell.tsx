@@ -26,6 +26,7 @@ export const MRT_TableHeadCell = <TData extends Record<string, any>>({
   const {
     getState,
     options: {
+      columnFilterDisplayMode,
       enableColumnActions,
       enableColumnDragging,
       enableColumnOrdering,
@@ -50,7 +51,10 @@ export const MRT_TableHeadCell = <TData extends Record<string, any>>({
 
   const tableCellProps = {
     ...parseFromValuesOrFunc(muiTableHeadCellProps, { column, table }),
-    ...parseFromValuesOrFunc(columnDef.muiTableHeadCellProps, { column, table }),
+    ...parseFromValuesOrFunc(columnDef.muiTableHeadCellProps, {
+      column,
+      table,
+    }),
   };
 
   const showColumnActions =
@@ -256,7 +260,7 @@ export const MRT_TableHeadCell = <TData extends Record<string, any>>({
           )}
         </Box>
       )}
-      {column.getCanFilter() && (
+      {columnFilterDisplayMode === 'subheader' && column.getCanFilter() && (
         <MRT_TableHeadCellFilterContainer header={header} table={table} />
       )}
     </TableCell>
