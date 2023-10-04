@@ -90,5 +90,4 @@ export const MRT_Localization_SR_CYRL_RS: MRT_Localization = {
   ungroupByColumn: 'Одгрупиши по {column}',
   unpin: 'Откачи',
   unpinAll: 'Откачи све',
-  unsorted: 'Несортирано',
 };

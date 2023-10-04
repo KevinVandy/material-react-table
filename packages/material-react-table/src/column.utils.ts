@@ -1,18 +1,17 @@
 import { type ReactNode } from 'react';
 import {
-  type Row,
-  type Renderable,
-  flexRender as _flexRender,
   createRow as _createRow,
+  flexRender as _flexRender,
+  type Renderable,
+  type Row,
 } from '@tanstack/react-table';
+import { type TableCellProps } from '@mui/material/TableCell';
 import { alpha, lighten } from '@mui/material/styles';
+import { type Theme } from '@mui/material/styles';
 import { type MRT_AggregationFns } from './aggregationFns';
 import { type MRT_FilterFns } from './filterFns';
 import { type MRT_SortingFns } from './sortingFns';
-import { type TableCellProps } from '@mui/material/TableCell';
-import { type Theme } from '@mui/material/styles';
 import {
-  type MRT_TableOptions,
   type MRT_Column,
   type MRT_ColumnDef,
   type MRT_ColumnOrderState,
@@ -21,8 +20,9 @@ import {
   type MRT_FilterOption,
   type MRT_GroupingState,
   type MRT_Header,
-  type MRT_TableInstance,
   type MRT_Row,
+  type MRT_TableInstance,
+  type MRT_TableOptions,
 } from './types';
 
 export const getColumnId = <TData extends Record<string, any>>(
@@ -94,8 +94,8 @@ export const prepareColumns = <TData extends Record<string, any>>({
           leafRows: Row<TData>[],
           childRows: Row<TData>[],
         ) =>
-          aggFns.map((fn) =>
-            aggregationFns[fn]?.(columnId, leafRows, childRows),
+          aggFns.map(
+            (fn) => aggregationFns[fn]?.(columnId, leafRows, childRows),
           );
       }
 
@@ -152,11 +152,14 @@ export const getLeadingDisplayColumnIds = <TData extends Record<string, any>>(
   props: MRT_TableOptions<TData>,
 ) =>
   [
+    props.enableRowPinning &&
+      !props.rowPinningDisplayMode?.startsWith('select') &&
+      'mrt-row-pin',
     (props.enableRowDragging || props.enableRowOrdering) && 'mrt-row-drag',
     props.positionActionsColumn === 'first' &&
       (props.enableRowActions ||
         (props.enableEditing &&
-          ['row', 'modal'].includes(props.editDisplayMode ?? ''))) &&
+          ['modal', 'row'].includes(props.editDisplayMode ?? ''))) &&
       'mrt-row-actions',
     props.positionExpandColumn === 'first' &&
       showExpandColumn(props) &&
@@ -172,7 +175,7 @@ export const getTrailingDisplayColumnIds = <TData extends Record<string, any>>(
     props.positionActionsColumn === 'last' &&
       (props.enableRowActions ||
         (props.enableEditing &&
-          ['row', 'modal'].includes(props.editDisplayMode ?? ''))) &&
+          ['modal', 'row'].includes(props.editDisplayMode ?? ''))) &&
       'mrt-row-actions',
     props.positionExpandColumn === 'last' &&
       showExpandColumn(props) &&
@@ -215,15 +218,21 @@ export const getIsFirstColumn = <TData extends Record<string, any>>(
   column: MRT_Column<TData>,
   table: MRT_TableInstance<TData>,
 ) => {
-  return table.getVisibleLeafColumns()[0].id === column.id;
+  const leftColumns = table.getLeftVisibleLeafColumns();
+  return leftColumns.length
+    ? leftColumns[0].id === column.id
+    : table.getVisibleLeafColumns()[0].id === column.id;
 };
 
 export const getIsLastColumn = <TData extends Record<string, any>>(
   column: MRT_Column<TData>,
   table: MRT_TableInstance<TData>,
 ) => {
+  const rightColumns = table.getRightVisibleLeafColumns();
   const columns = table.getVisibleLeafColumns();
-  return columns[columns.length - 1].id === column.id;
+  return rightColumns.length
+    ? rightColumns[rightColumns.length - 1].id === column.id
+    : columns[columns.length - 1].id === column.id;
 };
 
 export const getIsLastLeftPinnedColumn = <TData extends Record<string, any>>(
@@ -255,15 +264,15 @@ export const getTotalRight = <TData extends Record<string, any>>(
 export const getCanRankRows = <TData extends Record<string, any>>(
   table: MRT_TableInstance<TData>,
 ) => {
-  const { options, getState } = table;
+  const { getState, options } = table;
   const {
+    enableGlobalFilterRankedResults,
     manualExpanding,
     manualFiltering,
     manualGrouping,
     manualSorting,
-    enableGlobalFilterRankedResults,
   } = options;
-  const { globalFilterFn, expanded } = getState();
+  const { expanded, globalFilterFn } = getState();
 
   return (
     !manualExpanding &&
@@ -356,17 +365,15 @@ export const getCommonCellStyles = <TData extends Record<string, any>>({
       ? 'none'
       : `padding 150ms ease-in-out`,
     ...(!table.options.enableColumnResizing && widthStyles), //let devs pass in width styles if column resizing is disabled
-    ...(tableCellProps?.sx instanceof Function
-      ? tableCellProps.sx(theme)
-      : (tableCellProps?.sx as any)),
+    ...(parseFromValuesOrFunc(tableCellProps?.sx, theme) as any),
     ...(table.options.enableColumnResizing && widthStyles), //don't let devs pass in width styles if column resizing is enabled
   };
 };
 
 export const MRT_DefaultColumn = {
   filterVariant: 'text',
-  minSize: 40,
   maxSize: 1000,
+  minSize: 40,
   size: 180,
 } as const;
 
@@ -385,12 +392,17 @@ export const MRT_DefaultDisplayColumn = {
   enableSorting: false,
 } as const;
 
+export const parseFromValuesOrFunc = <T, U>(
+  fn: ((arg: U) => T) | T | undefined,
+  arg: U,
+): T | undefined => (fn instanceof Function ? fn(arg) : fn);
+
 export const parseCSSVarId = (id: string) => id.replace(/[^a-zA-Z0-9]/g, '_');
 
 export const flexRender = _flexRender as (
   Comp: Renderable<any>,
   props: any,
-) => ReactNode | JSX.Element;
+) => JSX.Element | ReactNode;
 
 export const createRow = <TData extends Record<string, any>>(
   table: MRT_TableInstance<TData>,

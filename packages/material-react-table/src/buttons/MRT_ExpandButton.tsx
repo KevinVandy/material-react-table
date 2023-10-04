@@ -1,6 +1,7 @@
 import { type MouseEvent } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -23,10 +24,10 @@ export const MRT_ExpandButton = <TData extends Record<string, any>>({
   } = table;
   const { density } = getState();
 
-  const iconButtonProps =
-    muiExpandButtonProps instanceof Function
-      ? muiExpandButtonProps({ table, row })
-      : muiExpandButtonProps;
+  const iconButtonProps = parseFromValuesOrFunc(muiExpandButtonProps, {
+    row,
+    table,
+  });
 
   const canExpand = row.getCanExpand();
   const isExpanded = row.getIsExpanded();
@@ -58,9 +59,7 @@ export const MRT_ExpandButton = <TData extends Record<string, any>>({
           sx={(theme) => ({
             height: density === 'compact' ? '1.75rem' : '2.25rem',
             width: density === 'compact' ? '1.75rem' : '2.25rem',
-            ...(iconButtonProps?.sx instanceof Function
-              ? iconButtonProps.sx(theme)
-              : (iconButtonProps?.sx as any)),
+            ...(parseFromValuesOrFunc(iconButtonProps?.sx, theme) as any),
           })}
           title={undefined}
         >

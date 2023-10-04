@@ -1,6 +1,6 @@
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Styling/Style Table Body Rows',
@@ -10,27 +10,27 @@ export default meta;
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
-    header: 'First Name',
     accessorKey: 'firstName',
+    header: 'First Name',
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
+    header: 'Last Name',
   },
   {
-    header: 'Age',
     accessorKey: 'age',
+    header: 'Age',
   },
   {
-    header: 'Address',
     accessorKey: 'address',
+    header: 'Address',
   },
 ];
 const data = [...Array(21)].map(() => ({
+  address: faker.location.streetAddress(),
+  age: faker.datatype.number(80),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  age: faker.datatype.number(80),
-  address: faker.location.streetAddress(),
 }));
 
 export const DefaultTableBodyRowStyles = () => (
@@ -64,6 +64,7 @@ export const StyleCustomStripedRows = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    muiTableBodyCellProps={{ sx: { border: 'none' } }}
     muiTableBodyProps={{
       sx: () => ({
         '& tr:nth-of-type(odd)': {
@@ -71,7 +72,6 @@ export const StyleCustomStripedRows = () => (
         },
       }),
     }}
-    muiTableBodyCellProps={{ sx: { border: 'none' } }}
   />
 );
 
@@ -79,6 +79,7 @@ export const StyleCustomStripedRowsDetailPanel = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    muiTableBodyCellProps={{ sx: { border: 'none' } }}
     muiTableBodyProps={{
       sx: () => ({
         '& tr:nth-child(4n+3)': {
@@ -86,7 +87,6 @@ export const StyleCustomStripedRowsDetailPanel = () => (
         },
       }),
     }}
-    muiTableBodyCellProps={{ sx: { border: 'none' } }}
     renderDetailPanel={() => <div>Detail Panel</div>}
   />
 );

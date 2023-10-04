@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import { MRT_AggregationFns } from '../aggregationFns';
-import { MRT_FilterFns } from '../filterFns';
-import { MRT_SortingFns } from '../sortingFns';
 import { MRT_DefaultColumn, MRT_DefaultDisplayColumn } from '../column.utils';
-import { MRT_Localization_EN } from '../locales/en';
+import { MRT_FilterFns } from '../filterFns';
 import { MRT_Default_Icons } from '../icons';
+import { MRT_Localization_EN } from '../locales/en';
+import { MRT_SortingFns } from '../sortingFns';
 import { type MRT_DefinedTableOptions, type MRT_TableOptions } from '../types';
 
 export const useMRT_TableOptions: <TData extends Record<string, any>>(
@@ -22,6 +22,7 @@ export const useMRT_TableOptions: <TData extends Record<string, any>>(
   enableColumnActions = true,
   enableColumnFilters = true,
   enableColumnOrdering = false,
+  enableColumnPinning = false,
   enableColumnResizing = false,
   enableDensityToggle = true,
   enableExpandAll = true,
@@ -36,7 +37,7 @@ export const useMRT_TableOptions: <TData extends Record<string, any>>(
   enableMultiRowSelection = true,
   enableMultiSort = true,
   enablePagination = true,
-  enablePinning = false,
+  enableRowPinning = false,
   enableRowSelection = false,
   enableSelectAll = true,
   enableSorting = true,
@@ -61,6 +62,7 @@ export const useMRT_TableOptions: <TData extends Record<string, any>>(
   positionToolbarAlertBanner = 'top',
   positionToolbarDropZone = 'top',
   rowNumberMode = 'static',
+  rowPinningDisplayMode = 'sticky',
   selectAllMode = 'page',
   sortingFns,
   ...rest
@@ -123,6 +125,7 @@ export const useMRT_TableOptions: <TData extends Record<string, any>>(
     enableColumnActions,
     enableColumnFilters,
     enableColumnOrdering,
+    enableColumnPinning,
     enableColumnResizing,
     enableDensityToggle,
     enableExpandAll,
@@ -137,7 +140,7 @@ export const useMRT_TableOptions: <TData extends Record<string, any>>(
     enableMultiRowSelection,
     enableMultiSort,
     enablePagination,
-    enablePinning,
+    enableRowPinning,
     enableRowSelection,
     enableSelectAll,
     enableSorting,
@@ -162,6 +165,7 @@ export const useMRT_TableOptions: <TData extends Record<string, any>>(
     positionToolbarAlertBanner,
     positionToolbarDropZone,
     rowNumberMode,
+    rowPinningDisplayMode,
     selectAllMode,
     sortingFns: _sortingFns,
     ...rest,

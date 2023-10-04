@@ -97,7 +97,7 @@ const Example = () => {
       columns={columns}
       data={data}
       enableColumnOrdering
-      enablePinning
+      enableColumnPinning
       icons={fontAwesomeIcons}
     />
   );

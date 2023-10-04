@@ -1,7 +1,7 @@
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
+import { ThemeProvider, createTheme } from '@mui/material';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
-import { createTheme, ThemeProvider } from '@mui/material';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Styling/Theming',
@@ -11,28 +11,28 @@ export default meta;
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
-    header: 'First Name',
     accessorKey: 'firstName',
+    header: 'First Name',
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
+    header: 'Last Name',
   },
   {
-    header: 'Age',
     accessorKey: 'age',
+    header: 'Age',
   },
   {
-    header: 'Address',
     accessorKey: 'address',
+    header: 'Address',
   },
 ];
 
 const data = [...Array(21)].map(() => ({
+  address: faker.location.streetAddress(),
+  age: faker.datatype.number(80),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  age: faker.datatype.number(80),
-  address: faker.location.streetAddress(),
 }));
 
 export const DefaultTheme = () => (
@@ -42,11 +42,11 @@ export const DefaultTheme = () => (
 export const CustomLightTheme = () => {
   const theme = createTheme({
     palette: {
-      primary: {
-        main: '#ff9800',
-      },
       background: {
         default: '#ffffef',
+      },
+      primary: {
+        main: '#ff9800',
       },
       secondary: {
         main: '#00bcd4',

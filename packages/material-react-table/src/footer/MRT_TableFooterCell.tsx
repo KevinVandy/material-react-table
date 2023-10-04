@@ -1,5 +1,5 @@
 import TableCell from '@mui/material/TableCell';
-import { getCommonCellStyles } from '../column.utils';
+import { getCommonCellStyles, parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -20,19 +20,12 @@ export const MRT_TableFooterCell = <TData extends Record<string, any>>({
   const { columnDef } = column;
   const { columnDefType } = columnDef;
 
-  const mTableFooterCellProps =
-    muiTableFooterCellProps instanceof Function
-      ? muiTableFooterCellProps({ column, table })
-      : muiTableFooterCellProps;
-
-  const mcTableFooterCellProps =
-    columnDef.muiTableFooterCellProps instanceof Function
-      ? columnDef.muiTableFooterCellProps({ column, table })
-      : columnDef.muiTableFooterCellProps;
-
   const tableCellProps = {
-    ...mTableFooterCellProps,
-    ...mcTableFooterCellProps,
+    ...parseFromValuesOrFunc(muiTableFooterCellProps, { column, table }),
+    ...parseFromValuesOrFunc(columnDef.muiTableFooterCellProps, {
+      column,
+      table,
+    }),
   };
 
   return (
@@ -56,21 +49,15 @@ export const MRT_TableFooterCell = <TData extends Record<string, any>>({
         ...getCommonCellStyles({
           column,
           table,
-          theme,
           tableCellProps,
+          theme,
         }),
       })}
     >
       <>
         {footer.isPlaceholder
           ? null
-          : (columnDef.Footer instanceof Function
-              ? columnDef.Footer?.({
-                  column,
-                  footer,
-                  table,
-                })
-              : columnDef.Footer) ??
+          : parseFromValuesOrFunc(columnDef.Footer, { column, footer, table }) ??
             columnDef.footer ??
             null}
       </>

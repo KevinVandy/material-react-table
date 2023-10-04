@@ -470,7 +470,7 @@ export const tableOptions: TableOption[] = [
     type: 'boolean',
   },
   {
-    tableOption: 'enablePinning',
+    tableOption: 'enableColumnPinning',
     defaultValue: '',
     description: '',
     link: '',
@@ -511,6 +511,16 @@ export const tableOptions: TableOption[] = [
   },
   {
     tableOption: 'enableRowOrdering',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: 'boolean',
+  },
+  {
+    tableOption: 'enableRowPinning',
     defaultValue: '',
     description: '',
     link: '',

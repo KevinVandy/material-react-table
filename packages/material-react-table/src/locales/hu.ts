@@ -90,5 +90,4 @@ export const MRT_Localization_HU: MRT_Localization = {
   ungroupByColumn: 'Csoportosítás megszüntetése: {column}',
   unpin: 'Feloldás',
   unpinAll: 'Minden feloldása',
-  unsorted: 'Nincs rendezés',
 };

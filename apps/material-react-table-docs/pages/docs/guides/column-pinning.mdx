@@ -19,12 +19,12 @@ Column pinning is a cool feature that lets users pin (freeze) columns to the lef
 ### Relevant Props
 
 <TableOptionsTable
-  onlyOptions={new Set(['enablePinning', 'onColumnPinningChange'])}
+  onlyOptions={new Set(['enableColumnPinning', 'onColumnPinningChange'])}
 />
 
 ### Relevant Column Options
 
-<ColumnOptionsTable onlyOptions={new Set(['enablePinning'])} />
+<ColumnOptionsTable onlyOptions={new Set(['enableColumnPinning'])} />
 
 ### Relevant State
 
@@ -32,10 +32,10 @@ Column pinning is a cool feature that lets users pin (freeze) columns to the lef
 
 ### Enable Column Pinning
 
-Column pinning can simply be enabled by setting the `enablePinning` prop to `true`.
+Column pinning can simply be enabled by setting the `enableColumnPinning` prop to `true`.
 
 ```tsx
-<MaterialReactTable data={data} columns={columns} enablePinning />
+<MaterialReactTable data={data} columns={columns} enableColumnPinning />
 ```
 
 ### Pin (Freeze) Columns By Default
@@ -46,7 +46,7 @@ Columns can start out pinned in your table by setting the `columnPinning` states
 <MaterialReactTable
   data={data}
   columns={columns}
-  enablePinning
+  enableColumnPinning
   initialState={{ columnPinning: { left: ['email'] } }} //pin email column to left by default
 />
 ```

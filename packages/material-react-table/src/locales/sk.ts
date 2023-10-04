@@ -91,5 +91,4 @@ export const MRT_Localization_SK: MRT_Localization = {
   ungroupByColumn: 'Nezoskupovať podľa stĺpca {column}',
   unpin: 'Odopnúť',
   unpinAll: 'Odopnúť všetko',
-  unsorted: 'Nezradené',
 };

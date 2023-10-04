@@ -1,6 +1,6 @@
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Features/Loading Examples',
@@ -9,50 +9,50 @@ const meta: Meta = {
 export default meta;
 
 interface Person {
-  firstName: string | null;
-  lastName: string | null;
-  address: string | null;
-  state: string | null;
-  phoneNumber: string | null;
+  address: null | string;
+  firstName: null | string;
+  lastName: null | string;
+  phoneNumber: null | string;
+  state: null | string;
 }
 
 const columns: MRT_ColumnDef<Person>[] = [
   {
-    header: 'First Name',
     accessorKey: 'firstName',
+    header: 'First Name',
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
+    header: 'Last Name',
   },
   {
-    header: 'Address',
     accessorKey: 'address',
+    header: 'Address',
   },
   {
-    header: 'State',
     accessorKey: 'state',
+    header: 'State',
   },
   {
-    header: 'Phone Number',
     accessorKey: 'phoneNumber',
+    header: 'Phone Number',
   },
 ];
 
 const data = [...Array(100)].map(() => ({
+  address: faker.location.streetAddress(),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  address: faker.location.streetAddress(),
-  state: faker.location.state(),
   phoneNumber: faker.phone.number(),
+  state: faker.location.state(),
 }));
 
 const blankData = [...Array(100)].map(() => ({
+  address: null,
   firstName: null,
   lastName: null,
-  address: null,
-  state: null,
   phoneNumber: null,
+  state: null,
 }));
 
 export const Loading = () => (
@@ -80,7 +80,6 @@ export const LoadingWithDetailPanelExample = () => (
   <MaterialReactTable
     columns={columns}
     data={[]}
-    state={{ isLoading: true }}
     renderDetailPanel={({ row }) => (
       <div style={{ display: 'grid' }}>
         <span>City: {row.original.firstName?.toString()}</span>
@@ -89,6 +88,7 @@ export const LoadingWithDetailPanelExample = () => (
         <span>Phone: {row.original.phoneNumber}</span>
       </div>
     )}
+    state={{ isLoading: true }}
   />
 );
 
@@ -96,10 +96,10 @@ export const SkeletonDisplayColumns = () => (
   <MaterialReactTable
     columns={columns}
     data={[]}
-    enableRowSelection
-    enableRowNumbers
     enableExpanding
     enableRowActions
+    enableRowNumbers
+    enableRowSelection
     state={{ showSkeletons: true }}
   />
 );
@@ -116,9 +116,9 @@ export const OnlyTopProgressBar = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    state={{ showProgressBars: true }}
     muiLinearProgressProps={({ isTopToolbar }) => ({
       sx: { display: isTopToolbar ? 'block' : 'none' },
     })}
+    state={{ showProgressBars: true }}
   />
 );

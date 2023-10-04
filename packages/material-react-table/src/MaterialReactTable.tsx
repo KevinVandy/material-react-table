@@ -1,28 +1,26 @@
-import { useMaterialReactTable } from './useMaterialReactTable';
 import { MRT_TablePaper } from './table/MRT_TablePaper';
-import { type MRT_TableOptions, type MRT_TableInstance } from './types';
+import {
+  type MRT_TableInstance,
+  type MRT_TableOptions,
+  type Xor,
+} from './types';
+import { useMaterialReactTable } from './useMaterialReactTable';
 
-type Prettify<T> = { [K in keyof T]: T[K] } & unknown;
-
-type Xor<A, B> =
-  | Prettify<A & { [k in keyof B]?: never }>
-  | Prettify<B & { [k in keyof A]?: never }>;
-
-type TableInstanceProp<TData extends Record<string, any>> = {
+type TableInstanceProp<TData extends Record<string, any> = {}> = {
   table: MRT_TableInstance<TData>;
 };
 
-type Props<TData extends Record<string, any>> = Xor<
+type Props<TData extends Record<string, any> = {}> = Xor<
   TableInstanceProp<TData>,
   MRT_TableOptions<TData>
 >;
 
-const isTableInstanceProp = <TData extends Record<string, any>>(
+const isTableInstanceProp = <TData extends Record<string, any> = {}>(
   props: Props<TData>,
 ): props is TableInstanceProp<TData> =>
   (props as TableInstanceProp<TData>).table !== undefined;
 
-export const MaterialReactTable = <TData extends Record<string, any>>(
+export const MaterialReactTable = <TData extends Record<string, any> = {}>(
   props: Props<TData>,
 ) => {
   let table: MRT_TableInstance<TData>;
@@ -33,5 +31,5 @@ export const MaterialReactTable = <TData extends Record<string, any>>(
     table = useMaterialReactTable(props);
   }
 
-  return <MRT_TablePaper table={table as any} />;
+  return <MRT_TablePaper table={table} />;
 };

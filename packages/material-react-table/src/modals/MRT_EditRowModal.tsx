@@ -4,6 +4,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Stack from '@mui/material/Stack';
 import { MRT_EditActionButtons } from '../buttons/MRT_EditActionButtons';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
 
@@ -20,32 +21,23 @@ export const MRT_EditRowModal = <TData extends Record<string, any>>({
     getState,
     options: {
       localization,
-      onEditingRowCancel,
-      onCreatingRowCancel,
-      renderEditRowModalContent,
-      renderCreateRowModalContent,
       muiCreateRowModalProps,
       muiEditRowModalProps,
+      onCreatingRowCancel,
+      onEditingRowCancel,
+      renderCreateRowModalContent,
+      renderEditRowModalContent,
     },
-    setEditingRow,
     setCreatingRow,
+    setEditingRow,
   } = table;
   const { creatingRow, editingRow } = getState();
   const row = (creatingRow ?? editingRow) as MRT_Row<TData>;
 
-  const createModalProps =
-    muiCreateRowModalProps instanceof Function
-      ? muiCreateRowModalProps({ row, table })
-      : muiCreateRowModalProps;
-
-  const editModalProps =
-    muiEditRowModalProps instanceof Function
-      ? muiEditRowModalProps({ row, table })
-      : muiEditRowModalProps;
-
   const dialogProps = {
-    ...editModalProps,
-    ...(creatingRow && createModalProps),
+    ...parseFromValuesOrFunc(muiEditRowModalProps, { row, table }),
+    ...(creatingRow &&
+      parseFromValuesOrFunc(muiCreateRowModalProps, { row, table })),
   };
 
   const internalEditComponents = row
@@ -63,7 +55,7 @@ export const MRT_EditRowModal = <TData extends Record<string, any>>({
     <Dialog
       fullWidth
       maxWidth="xs"
-      onClose={() => {
+      onClose={(event, reason) => {
         if (creatingRow) {
           onCreatingRowCancel?.({ row, table });
           setCreatingRow(null);
@@ -71,24 +63,26 @@ export const MRT_EditRowModal = <TData extends Record<string, any>>({
           onEditingRowCancel?.({ row, table });
           setEditingRow(null);
         }
+        row._valuesCache = {} as any; //reset values cache
+        dialogProps.onClose?.(event, reason);
       }}
       open={open}
       {...dialogProps}
     >
       {((creatingRow &&
         renderCreateRowModalContent?.({
+          internalEditComponents,
           row,
           table,
-          internalEditComponents,
         })) ||
         renderEditRowModalContent?.({
+          internalEditComponents,
           row,
           table,
-          internalEditComponents,
         })) ?? (
         <>
           <DialogTitle sx={{ textAlign: 'center' }}>
-            {(creatingRow && localization.create) || localization.edit}
+            {localization.edit}
           </DialogTitle>
           <DialogContent>
             <form onSubmit={(e) => e.preventDefault()}>

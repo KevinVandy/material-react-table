@@ -1,6 +1,6 @@
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Features/Column Resizing Examples',
@@ -10,38 +10,38 @@ export default meta;
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
-    header: 'First Name',
     accessorKey: 'firstName',
+    header: 'First Name',
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
+    header: 'Last Name',
   },
   {
-    header: 'Address',
     accessorKey: 'address',
+    header: 'Address',
   },
   {
-    header: 'State',
     accessorKey: 'state',
+    header: 'State',
   },
   {
-    header: 'Zip Code',
     accessorKey: 'zipCode',
+    header: 'Zip Code',
   },
   {
-    header: 'Phone Number',
     accessorKey: 'phoneNumber',
+    header: 'Phone Number',
   },
 ];
 
 const data = [...Array(88)].map(() => ({
+  address: faker.location.streetAddress(),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  address: faker.location.streetAddress(),
+  phoneNumber: faker.phone.number(),
   state: faker.location.state(),
   zipCode: faker.location.zipCode(),
-  phoneNumber: faker.phone.number(),
 }));
 
 export const ColumnResizingEnabledDefaultOnChange = () => (
@@ -52,8 +52,8 @@ export const ColumnResizingEnabledNoColumnActions = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableColumnResizing
     enableColumnActions={false}
+    enableColumnResizing
   />
 );
 
@@ -61,29 +61,29 @@ export const ColumnResizingDisabledSomeColumns = () => (
   <MaterialReactTable
     columns={[
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
       {
-        header: 'Address',
         accessorKey: 'address',
+        header: 'Address',
       },
       {
-        header: 'State',
         accessorKey: 'state',
+        header: 'State',
       },
       {
-        header: 'Zip Code',
         accessorKey: 'zipCode',
         enableResizing: false,
+        header: 'Zip Code',
       },
       {
-        header: 'Phone Number',
         accessorKey: 'phoneNumber',
+        header: 'Phone Number',
       },
     ]}
     data={data}
@@ -104,8 +104,8 @@ export const ColumnResizingCustomDefaultWidths = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    defaultColumn={{ maxSize: 300, minSize: 100, size: 150 }}
     enableColumnResizing
-    defaultColumn={{ size: 150, minSize: 100, maxSize: 300 }}
   />
 );
 
@@ -113,8 +113,8 @@ export const ColumnResizingWithPinning = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    enableColumnPinning
     enableColumnResizing
-    enablePinning
     initialState={{ columnPinning: { left: ['firstName', 'lastName'] } }}
   />
 );
@@ -123,44 +123,44 @@ export const ColumnResizingWithHeaderGroups = () => (
   <MaterialReactTable
     columns={[
       {
-        header: 'Name',
-        footer: 'Name',
         columns: [
           {
-            header: 'First Name',
-            footer: 'First Name',
             accessorKey: 'firstName',
+            footer: 'First Name',
+            header: 'First Name',
           },
 
           {
-            header: 'Last Name',
-            footer: 'Last Name',
             accessorKey: 'lastName',
+            footer: 'Last Name',
+            header: 'Last Name',
           },
         ],
+        footer: 'Name',
+        header: 'Name',
       },
       {
-        header: 'Info',
-        footer: 'Info',
         columns: [
           {
-            header: 'Age',
-            footer: 'Age',
             accessorKey: 'age',
+            footer: 'Age',
+            header: 'Age',
           },
           {
-            header: 'Address',
-            footer: 'Address',
             accessorKey: 'address',
+            footer: 'Address',
+            header: 'Address',
           },
         ],
+        footer: 'Info',
+        header: 'Info',
       },
     ]}
     data={[...Array(5)].map(() => ({
+      address: faker.location.streetAddress(),
+      age: faker.datatype.number(80),
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      age: faker.datatype.number(80),
-      address: faker.location.streetAddress(),
     }))}
     enableColumnResizing
     enableRowSelection
@@ -171,44 +171,44 @@ export const ColumnResizingWithHeaderGroupsGrid = () => (
   <MaterialReactTable
     columns={[
       {
-        header: 'Name',
-        footer: 'Name',
         columns: [
           {
-            header: 'First Name',
-            footer: 'First Name',
             accessorKey: 'firstName',
+            footer: 'First Name',
+            header: 'First Name',
           },
 
           {
-            header: 'Last Name',
-            footer: 'Last Name',
             accessorKey: 'lastName',
+            footer: 'Last Name',
+            header: 'Last Name',
           },
         ],
+        footer: 'Name',
+        header: 'Name',
       },
       {
-        header: 'Info',
-        footer: 'Info',
         columns: [
           {
-            header: 'Age',
-            footer: 'Age',
             accessorKey: 'age',
+            footer: 'Age',
+            header: 'Age',
           },
           {
-            header: 'Address',
-            footer: 'Address',
             accessorKey: 'address',
+            footer: 'Address',
+            header: 'Address',
           },
         ],
+        footer: 'Info',
+        header: 'Info',
       },
     ]}
     data={[...Array(5)].map(() => ({
+      address: faker.location.streetAddress(),
+      age: faker.datatype.number(80),
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      age: faker.datatype.number(80),
-      address: faker.location.streetAddress(),
     }))}
     enableColumnResizing
     enableRowSelection
@@ -220,15 +220,15 @@ export const ColumnResizingLayoutGridNoFlexGrow = () => (
   <MaterialReactTable
     columns={columns.slice(0, 3)}
     data={data}
-    layoutMode="grid"
-    enableRowSelection
     enableColumnResizing
-    muiTableHeadCellProps={{
+    enableRowSelection
+    layoutMode="grid"
+    muiTableBodyCellProps={{
       sx: {
         flex: '0 0 auto',
       },
     }}
-    muiTableBodyCellProps={{
+    muiTableHeadCellProps={{
       sx: {
         flex: '0 0 auto',
       },

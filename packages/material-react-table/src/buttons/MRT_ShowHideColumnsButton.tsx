@@ -20,7 +20,7 @@ export const MRT_ShowHideColumnsButton = <TData extends Record<string, any>>({
     },
   } = table;
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);

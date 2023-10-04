@@ -1,8 +1,8 @@
 import Box from '@mui/material/Box';
-import { MRT_ToggleFullScreenButton } from '../buttons/MRT_ToggleFullScreenButton';
 import { MRT_ShowHideColumnsButton } from '../buttons/MRT_ShowHideColumnsButton';
 import { MRT_ToggleDensePaddingButton } from '../buttons/MRT_ToggleDensePaddingButton';
 import { MRT_ToggleFiltersButton } from '../buttons/MRT_ToggleFiltersButton';
+import { MRT_ToggleFullScreenButton } from '../buttons/MRT_ToggleFullScreenButton';
 import { MRT_ToggleGlobalFilterButton } from '../buttons/MRT_ToggleGlobalFilterButton';
 import { type MRT_TableInstance } from '../types';
 
@@ -15,14 +15,15 @@ export const MRT_ToolbarInternalButtons = <TData extends Record<string, any>>({
 }: Props<TData>) => {
   const {
     options: {
+      columnFilterDisplayMode,
       enableColumnFilters,
       enableColumnOrdering,
+      enableColumnPinning,
       enableDensityToggle,
       enableFilters,
       enableFullScreenToggle,
       enableGlobalFilter,
       enableHiding,
-      enablePinning,
       initialState,
       renderToolbarInternalActions,
     },
@@ -45,10 +46,12 @@ export const MRT_ToolbarInternalButtons = <TData extends Record<string, any>>({
             !initialState?.showGlobalFilter && (
               <MRT_ToggleGlobalFilterButton table={table} />
             )}
-          {enableFilters && enableColumnFilters && (
-            <MRT_ToggleFiltersButton table={table} />
-          )}
-          {(enableHiding || enableColumnOrdering || enablePinning) && (
+          {enableFilters &&
+            enableColumnFilters &&
+            columnFilterDisplayMode !== 'popover' && (
+              <MRT_ToggleFiltersButton table={table} />
+            )}
+          {(enableHiding || enableColumnOrdering || enableColumnPinning) && (
             <MRT_ShowHideColumnsButton table={table} />
           )}
           {enableDensityToggle && (

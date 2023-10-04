@@ -1,6 +1,6 @@
 import { type DragEvent, type RefObject } from 'react';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
-import { reorderColumn } from '../column.utils';
+import { parseFromValuesOrFunc, reorderColumn } from '../column.utils';
 import { type MRT_Column, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -22,21 +22,14 @@ export const MRT_TableHeadCellGrabHandle = <TData extends Record<string, any>>({
     setHoveredColumn,
   } = table;
   const { columnDef } = column;
-  const { hoveredColumn, draggingColumn, columnOrder } = getState();
-
-  const mIconButtonProps =
-    muiColumnDragHandleProps instanceof Function
-      ? muiColumnDragHandleProps({ column, table })
-      : muiColumnDragHandleProps;
-
-  const mcIconButtonProps =
-    columnDef.muiColumnDragHandleProps instanceof Function
-      ? columnDef.muiColumnDragHandleProps({ column, table })
-      : columnDef.muiColumnDragHandleProps;
+  const { columnOrder, draggingColumn, hoveredColumn } = getState();
 
   const iconButtonProps = {
-    ...mIconButtonProps,
-    ...mcIconButtonProps,
+    ...parseFromValuesOrFunc(muiColumnDragHandleProps, { column, table }),
+    ...parseFromValuesOrFunc(columnDef.muiColumnDragHandleProps, {
+      column,
+      table,
+    }),
   };
 
   const handleDragStart = (event: DragEvent<HTMLButtonElement>) => {
@@ -69,8 +62,8 @@ export const MRT_TableHeadCellGrabHandle = <TData extends Record<string, any>>({
   return (
     <MRT_GrabHandleButton
       iconButtonProps={iconButtonProps}
-      onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
+      onDragStart={handleDragStart}
       table={table}
     />
   );

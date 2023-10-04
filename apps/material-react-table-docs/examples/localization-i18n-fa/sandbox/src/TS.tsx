@@ -36,7 +36,7 @@ const Example = () => {
       enableColumnOrdering
       enableColumnResizing
       enableEditing
-      enablePinning
+      enableColumnPinning
       enableRowActions
       enableRowSelection
       enableSelectAll={false}

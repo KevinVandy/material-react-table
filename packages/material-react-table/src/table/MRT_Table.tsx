@@ -1,16 +1,15 @@
 import { useCallback, useMemo } from 'react';
 import {
-  defaultRangeExtractor,
-  useVirtualizer,
   type Range,
   type Virtualizer,
+  defaultRangeExtractor,
+  useVirtualizer,
 } from '@tanstack/react-virtual';
 import Table from '@mui/material/Table';
-import { MRT_TableHead } from '../head/MRT_TableHead';
-import { Memo_MRT_TableBody, MRT_TableBody } from '../body/MRT_TableBody';
+import { MRT_TableBody, Memo_MRT_TableBody } from '../body/MRT_TableBody';
+import { parseCSSVarId, parseFromValuesOrFunc } from '../column.utils';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
-import { MRT_EditRowModal } from '../modals/MRT_EditRowModal';
-import { parseCSSVarId } from '../column.utils';
+import { MRT_TableHead } from '../head/MRT_TableHead';
 import { type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -24,14 +23,12 @@ export const MRT_Table = <TData extends Record<string, any>>({
     getFlatHeaders,
     getState,
     options: {
-      createDisplayMode,
       columnVirtualizerInstanceRef,
       columnVirtualizerOptions,
       columns,
-      editDisplayMode,
+      enableColumnPinning,
       enableColumnResizing,
       enableColumnVirtualization,
-      enablePinning,
       enableStickyHeader,
       enableTableFooter,
       enableTableHead,
@@ -42,24 +39,19 @@ export const MRT_Table = <TData extends Record<string, any>>({
     refs: { tableContainerRef },
   } = table;
   const {
-    creatingRow,
     columnPinning,
     columnSizing,
     columnSizingInfo,
     columnVisibility,
-    editingRow,
     isFullScreen,
   } = getState();
 
-  const tableProps =
-    muiTableProps instanceof Function
-      ? muiTableProps({ table })
-      : muiTableProps;
+  const tableProps = parseFromValuesOrFunc(muiTableProps, { table });
 
-  const vProps =
-    columnVirtualizerOptions instanceof Function
-      ? columnVirtualizerOptions({ table })
-      : columnVirtualizerOptions;
+  const columnVirtualizerProps = parseFromValuesOrFunc(
+    columnVirtualizerOptions,
+    { table },
+  );
 
   const columnSizeVars = useMemo(() => {
     const headers = getFlatHeaders();
@@ -87,7 +79,7 @@ export const MRT_Table = <TData extends Record<string, any>>({
 
   const [leftPinnedIndexes, rightPinnedIndexes] = useMemo(
     () =>
-      enableColumnVirtualization && enablePinning
+      enableColumnVirtualization && enableColumnPinning
         ? [
             table.getLeftLeafColumns().map((c) => c.getPinnedIndex()),
             table
@@ -98,7 +90,7 @@ export const MRT_Table = <TData extends Record<string, any>>({
               ),
           ]
         : [[], []],
-    [columnPinning, enableColumnVirtualization, enablePinning],
+    [columnPinning, enableColumnVirtualization, enableColumnPinning],
   );
 
   const columnVirtualizer:
@@ -120,7 +112,7 @@ export const MRT_Table = <TData extends Record<string, any>>({
           ],
           [leftPinnedIndexes, rightPinnedIndexes],
         ),
-        ...vProps,
+        ...columnVirtualizerProps,
       })
     : undefined;
 
@@ -150,24 +142,19 @@ export const MRT_Table = <TData extends Record<string, any>>({
     virtualPaddingRight,
   };
 
-  const createModalOpen = createDisplayMode === 'modal' && creatingRow;
-  const editModalOpen = editDisplayMode === 'modal' && editingRow;
-
   return (
     <>
       <Table
         stickyHeader={enableStickyHeader || isFullScreen}
         {...tableProps}
+        style={{ ...columnSizeVars, ...tableProps?.style }}
         sx={(theme) => ({
           borderCollapse: 'separate',
           display: layoutMode === 'grid' ? 'grid' : 'table',
           tableLayout:
             layoutMode !== 'grid' && enableColumnResizing ? 'fixed' : undefined,
-          ...(tableProps?.sx instanceof Function
-            ? tableProps.sx(theme)
-            : (tableProps?.sx as any)),
+          ...(parseFromValuesOrFunc(tableProps?.sx, theme) as any),
         })}
-        style={{ ...columnSizeVars, ...tableProps?.style }}
       >
         {enableTableHead && <MRT_TableHead {...props} />}
         {memoMode === 'table-body' || columnSizingInfo.isResizingColumn ? (
@@ -180,9 +167,6 @@ export const MRT_Table = <TData extends Record<string, any>>({
         )}
         {enableTableFooter && <MRT_TableFooter {...props} />}
       </Table>
-      {(createModalOpen || editModalOpen) && (
-        <MRT_EditRowModal open table={table} />
-      )}
     </>
   );
 };

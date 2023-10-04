@@ -7,7 +7,7 @@ const Example = () => {
     () => [
       {
         accessorKey: 'id',
-        enablePinning: false, //disable column pinning for this column
+        enableColumnPinning: false, //disable column pinning for this column
         header: 'ID',
         size: 50,
       },
@@ -45,7 +45,7 @@ const Example = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      enablePinning
+      enableColumnPinning
       initialState={{ columnPinning: { left: ['state'], right: ['city'] } }}
     />
   );

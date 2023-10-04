@@ -29,15 +29,15 @@ export const MRT_ShowHideColumnsMenu = <TData extends Record<string, any>>({
     getLeftLeafColumns,
     getRightLeafColumns,
     getState,
-    toggleAllColumnsVisible,
     options: {
       enableColumnOrdering,
+      enableColumnPinning,
       enableHiding,
-      enablePinning,
       localization,
     },
+    toggleAllColumnsVisible,
   } = table;
-  const { density, columnOrder, columnPinning } = getState();
+  const { columnOrder, columnPinning, density } = getState();
 
   const hideAllColumns = () => {
     getAllLeafColumns()
@@ -75,12 +75,12 @@ export const MRT_ShowHideColumnsMenu = <TData extends Record<string, any>>({
 
   return (
     <Menu
-      anchorEl={anchorEl}
-      open={!!anchorEl}
-      onClose={() => setAnchorEl(null)}
       MenuListProps={{
         dense: density === 'compact',
       }}
+      anchorEl={anchorEl}
+      onClose={() => setAnchorEl(null)}
+      open={!!anchorEl}
     >
       <Box
         sx={{
@@ -109,7 +109,7 @@ export const MRT_ShowHideColumnsMenu = <TData extends Record<string, any>>({
             {localization.resetOrder}
           </Button>
         )}
-        {enablePinning && (
+        {enableColumnPinning && (
           <Button
             disabled={!getIsSomeColumnsPinned()}
             onClick={() => table.resetColumnPinning(true)}

@@ -1,4 +1,4 @@
-import { compareItems, type RankingInfo } from '@tanstack/match-sorter-utils';
+import { type RankingInfo, compareItems } from '@tanstack/match-sorter-utils';
 import { type Row, sortingFns } from '@tanstack/react-table';
 import { type MRT_Row } from './types';
 

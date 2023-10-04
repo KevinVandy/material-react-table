@@ -1,8 +1,8 @@
 import Badge from '@mui/material/Badge';
+import { type TableCellProps } from '@mui/material/TableCell';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Tooltip from '@mui/material/Tooltip';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
-import { type TableCellProps } from '@mui/material/TableCell';
 
 interface Props<TData extends Record<string, any>> {
   header: MRT_Header<TData>;
@@ -30,7 +30,9 @@ export const MRT_TableHeadCellSortLabel = <TData extends Record<string, any>>({
     ? column.getIsSorted() === 'desc'
       ? localization.sortedByColumnDesc.replace('{column}', columnDef.header)
       : localization.sortedByColumnAsc.replace('{column}', columnDef.header)
-    : localization.unsorted;
+    : column.getNextSortingOrder() === 'desc'
+    ? localization.sortByColumnDesc.replace('{column}', columnDef.header)
+    : localization.sortByColumnAsc.replace('{column}', columnDef.header);
 
   return (
     <Tooltip arrow placement="top" title={sortTooltip}>
@@ -39,25 +41,25 @@ export const MRT_TableHeadCellSortLabel = <TData extends Record<string, any>>({
         overlap="circular"
       >
         <TableSortLabel
-          aria-label={sortTooltip}
+          IconComponent={ArrowDownwardIcon}
           active={!!column.getIsSorted()}
+          aria-label={sortTooltip}
           direction={
             column.getIsSorted()
               ? (column.getIsSorted() as 'asc' | 'desc')
               : undefined
           }
+          onClick={(e) => {
+            e.stopPropagation();
+            header.column.getToggleSortingHandler()?.(e);
+          }}
           sx={{
             flex: '0 0',
-            width: '2.4ch',
             transform:
               tableCellProps?.align !== 'right'
                 ? 'translateX(-0.5ch)'
                 : undefined,
-          }}
-          IconComponent={ArrowDownwardIcon}
-          onClick={(e) => {
-            e.stopPropagation();
-            header.column.getToggleSortingHandler()?.(e);
+            width: '2.4ch',
           }}
         />
       </Badge>

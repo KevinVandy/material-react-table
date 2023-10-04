@@ -3,9 +3,9 @@ import {
   type MouseEvent,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
-  useMemo,
 } from 'react';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
@@ -14,10 +14,11 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
+import { type TextFieldProps } from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
 import { debounce } from '@mui/material/utils';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
-import { type TextFieldProps } from '@mui/material/TextField';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -33,9 +34,9 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
 }: Props<TData>) => {
   const {
     options: {
-      enableColumnFilterModes,
       columnFilterModeOptions,
-      icons: { FilterListIcon, CloseIcon },
+      enableColumnFilterModes,
+      icons: { CloseIcon, FilterListIcon },
       localization,
       manualFiltering,
       muiFilterTextFieldProps,
@@ -46,28 +47,13 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
   const { column } = header;
   const { columnDef } = column;
 
-  const mTableHeadCellFilterTextFieldProps =
-    muiFilterTextFieldProps instanceof Function
-      ? muiFilterTextFieldProps({
-          column,
-          table,
-          rangeFilterIndex,
-        })
-      : muiFilterTextFieldProps;
-
-  const mcTableHeadCellFilterTextFieldProps =
-    columnDef.muiFilterTextFieldProps instanceof Function
-      ? columnDef.muiFilterTextFieldProps({
-          column,
-          table,
-          rangeFilterIndex,
-        })
-      : columnDef.muiFilterTextFieldProps;
-
-  const textFieldProps = {
-    ...mTableHeadCellFilterTextFieldProps,
-    ...mcTableHeadCellFilterTextFieldProps,
-  } as TextFieldProps;
+  const textFieldProps: TextFieldProps = {
+    ...parseFromValuesOrFunc(muiFilterTextFieldProps, { column, table }),
+    ...parseFromValuesOrFunc(columnDef.muiFilterTextFieldProps, {
+      column,
+      table,
+    }),
+  };
 
   const isRangeFilter =
     columnDef.filterVariant === 'range' || rangeFilterIndex !== undefined;
@@ -121,7 +107,7 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
     ],
   );
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [filterValue, setFilterValue] = useState<string | string[]>(() =>
     isMultiSelectFilter
       ? (column.getFilterValue() as string[]) || []
@@ -142,7 +128,7 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
             ? event.target.valueAsNumber
             : event.target.value;
         if (isRangeFilter) {
-          column.setFilterValue((old: Array<string | Date | number | null>) => {
+          column.setFilterValue((old: Array<Date | null | number | string>) => {
             const newFilterValues = old ?? ['', ''];
             newFilterValues[rangeFilterIndex as number] = value;
             return newFilterValues;
@@ -216,31 +202,6 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
   return (
     <>
       <TextField
-        fullWidth
-        inputProps={{
-          disabled: !!filterChipLabel,
-          sx: {
-            textOverflow: 'ellipsis',
-            width: filterChipLabel ? 0 : undefined,
-          },
-          title: filterPlaceholder,
-        }}
-        helperText={
-          showChangeModeButton ? (
-            <label>
-              {localization.filterMode.replace(
-                '{filterType}',
-                // @ts-ignore
-                localization[
-                  `filter${
-                    currentFilterOption?.charAt(0)?.toUpperCase() +
-                    currentFilterOption?.slice(1)
-                  }`
-                ],
-              )}
-            </label>
-          ) : null
-        }
         FormHelperTextProps={{
           sx: {
             fontSize: '0.75rem',
@@ -248,40 +209,7 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
             whiteSpace: 'nowrap',
           },
         }}
-        margin="none"
-        placeholder={
-          filterChipLabel || isSelectFilter || isMultiSelectFilter
-            ? undefined
-            : filterPlaceholder
-        }
-        onChange={handleChange}
-        onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
-        select={isSelectFilter || isMultiSelectFilter}
-        value={filterValue ?? ''}
-        variant="standard"
         InputProps={{
-          startAdornment: showChangeModeButton ? (
-            <InputAdornment position="start">
-              <Tooltip arrow title={localization.changeFilterMode}>
-                <span>
-                  <IconButton
-                    aria-label={localization.changeFilterMode}
-                    onClick={handleFilterMenuOpen}
-                    size="small"
-                    sx={{ height: '1.75rem', width: '1.75rem' }}
-                  >
-                    <FilterListIcon />
-                  </IconButton>
-                </span>
-              </Tooltip>
-              {filterChipLabel && (
-                <Chip
-                  onDelete={handleClearEmptyFilterChip}
-                  label={filterChipLabel}
-                />
-              )}
-            </InputAdornment>
-          ) : null,
           endAdornment: !filterChipLabel && (
             <InputAdornment position="end">
               <Tooltip
@@ -306,6 +234,28 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
               </Tooltip>
             </InputAdornment>
           ),
+          startAdornment: showChangeModeButton ? (
+            <InputAdornment position="start">
+              <Tooltip arrow title={localization.changeFilterMode}>
+                <span>
+                  <IconButton
+                    aria-label={localization.changeFilterMode}
+                    onClick={handleFilterMenuOpen}
+                    size="small"
+                    sx={{ height: '1.75rem', width: '1.75rem' }}
+                  >
+                    <FilterListIcon />
+                  </IconButton>
+                </span>
+              </Tooltip>
+              {filterChipLabel && (
+                <Chip
+                  label={filterChipLabel}
+                  onDelete={handleClearEmptyFilterChip}
+                />
+              )}
+            </InputAdornment>
+          ) : null,
         }}
         SelectProps={{
           displayEmpty: true,
@@ -338,6 +288,42 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
                 )
             : undefined,
         }}
+        fullWidth
+        helperText={
+          showChangeModeButton ? (
+            <label>
+              {localization.filterMode.replace(
+                '{filterType}',
+                // @ts-ignore
+                localization[
+                  `filter${
+                    currentFilterOption?.charAt(0)?.toUpperCase() +
+                    currentFilterOption?.slice(1)
+                  }`
+                ],
+              )}
+            </label>
+          ) : null
+        }
+        inputProps={{
+          disabled: !!filterChipLabel,
+          sx: {
+            textOverflow: 'ellipsis',
+            width: filterChipLabel ? 0 : undefined,
+          },
+          title: filterPlaceholder,
+        }}
+        margin="none"
+        onChange={handleChange}
+        onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
+        placeholder={
+          filterChipLabel || isSelectFilter || isMultiSelectFilter
+            ? undefined
+            : filterPlaceholder
+        }
+        select={isSelectFilter || isMultiSelectFilter}
+        value={filterValue ?? ''}
+        variant="standard"
         {...textFieldProps}
         inputRef={(inputRef) => {
           filterInputRefs.current[`${column.id}-${rangeFilterIndex ?? 0}`] =
@@ -347,30 +333,28 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
           }
         }}
         sx={(theme) => ({
-          p: 0,
+          '& .MuiSelect-icon': {
+            mr: '1.5rem',
+          },
           minWidth: isRangeFilter
             ? '100px'
             : !filterChipLabel
             ? '120px'
             : 'auto',
-          width: 'calc(100% + 4px)',
           mx: '-2px',
-          '& .MuiSelect-icon': {
-            mr: '1.5rem',
-          },
-          ...(textFieldProps?.sx instanceof Function
-            ? textFieldProps.sx(theme)
-            : (textFieldProps?.sx as any)),
+          p: 0,
+          width: 'calc(100% + 4px)',
+          ...(parseFromValuesOrFunc(textFieldProps?.sx, theme) as any),
         })}
       >
         {(isSelectFilter || isMultiSelectFilter) && (
-          <MenuItem divider disabled hidden value="">
+          <MenuItem disabled divider hidden value="">
             <Box sx={{ opacity: 0.5 }}>{filterPlaceholder}</Box>
           </MenuItem>
         )}
         {textFieldProps.children ??
           filterSelectOptions?.map(
-            (option: string | { text: string; value: string }) => {
+            (option: { text: string; value: string } | string) => {
               if (!option) return '';
               let value: string;
               let text: string;
@@ -385,10 +369,10 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
                 <MenuItem
                   key={value}
                   sx={{
-                    display: 'flex',
-                    m: 0,
                     alignItems: 'center',
+                    display: 'flex',
                     gap: '0.5rem',
+                    m: 0,
                   }}
                   value={value}
                 >
@@ -412,8 +396,8 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
         anchorEl={anchorEl}
         header={header}
         setAnchorEl={setAnchorEl}
-        table={table}
         setFilterValue={setFilterValue}
+        table={table}
       />
     </>
   );

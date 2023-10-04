@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Features/Full Screen Examples',
@@ -11,52 +11,52 @@ export default meta;
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
+    columns: [
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+      {
+        accessorKey: 'email',
+        header: 'Email',
+      },
+    ],
     header: 'Employee',
     id: 'employee',
-    columns: [
-      {
-        header: 'First Name',
-        accessorKey: 'firstName',
-      },
-      {
-        header: 'Last Name',
-        accessorKey: 'lastName',
-      },
-      {
-        header: 'Email',
-        accessorKey: 'email',
-      },
-    ],
   },
   {
-    header: 'Job Info',
-    id: 'jobInfo',
     columns: [
       {
-        header: 'Job Title',
         accessorKey: 'jobTitle',
+        header: 'Job Title',
       },
       {
-        header: 'Salary',
         accessorKey: 'salary',
+        header: 'Salary',
       },
       {
-        header: 'Start Date',
         accessorKey: 'startDate',
+        header: 'Start Date',
       },
     ],
+    header: 'Job Info',
+    id: 'jobInfo',
   },
 ];
 
 const data = [...Array(128)].map(() => ({
-  firstName: faker.person.firstName(),
-  lastName: faker.person.lastName(),
-  email: faker.internet.email(),
-  jobTitle: faker.person.jobTitle(),
-  salary: +faker.finance.amount(0, 150000, 0) + 20000,
-  startDate: faker.date.past({ years: 8 }).toLocaleDateString(),
-  signatureCatchPhrase: faker.company.catchPhrase(),
   avatar: faker.image.avatar(),
+  email: faker.internet.email(),
+  firstName: faker.person.firstName(),
+  jobTitle: faker.person.jobTitle(),
+  lastName: faker.person.lastName(),
+  salary: +faker.finance.amount(0, 150000, 0) + 20000,
+  signatureCatchPhrase: faker.company.catchPhrase(),
+  startDate: faker.date.past({ years: 8 }).toLocaleDateString(),
 }));
 
 export const FullScreenToggleEnabledDefault = () => (
@@ -86,11 +86,11 @@ export const ControlledFullScreen = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      onIsFullScreenChange={setIsFullScreen}
-      state={{ isFullScreen }}
       muiTableBodyCellProps={({ cell }) => ({
         title: cell.getValue<string>(),
       })}
+      onIsFullScreenChange={setIsFullScreen}
+      state={{ isFullScreen }}
     />
   );
 };

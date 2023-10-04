@@ -9,15 +9,15 @@ import { MRT_FilterOptionMenu } from './MRT_FilterOptionMenu';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
 
 export const commonMenuItemStyles = {
-  py: '6px',
-  my: 0,
-  justifyContent: 'space-between',
   alignItems: 'center',
+  justifyContent: 'space-between',
+  my: 0,
+  py: '6px',
 };
 
 export const commonListItemStyles = {
-  display: 'flex',
   alignItems: 'center',
+  display: 'flex',
 };
 
 interface Props<TData extends Record<string, any>> {
@@ -35,36 +35,36 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any>>({
 }: Props<TData>) => {
   const {
     getState,
-    toggleAllColumnsVisible,
-    setColumnOrder,
     options: {
       columnFilterModeOptions,
       enableColumnFilterModes,
       enableColumnFilters,
+      enableColumnPinning,
       enableColumnResizing,
       enableGrouping,
       enableHiding,
-      enablePinning,
       enableSorting,
       enableSortingRemoval,
       icons: {
         ArrowRightIcon,
         ClearAllIcon,
-        ViewColumnIcon,
         DynamicFeedIcon,
         FilterListIcon,
         FilterListOffIcon,
         PushPinIcon,
-        SortIcon,
         RestartAltIcon,
+        SortIcon,
+        ViewColumnIcon,
         VisibilityOffIcon,
       },
       localization,
       renderColumnActionsMenuItems,
     },
     refs: { filterInputRefs },
+    setColumnOrder,
     setColumnSizingInfo,
     setShowColumnFilters,
+    toggleAllColumnsVisible,
   } = table;
   const { column } = header;
   const { columnDef } = column;
@@ -73,7 +73,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any>>({
   const columnFilterValue = column.getFilterValue();
 
   const [filterMenuAnchorEl, setFilterMenuAnchorEl] =
-    useState<null | HTMLElement>(null);
+    useState<HTMLElement | null>(null);
 
   const handleClearSort = () => {
     column.clearSorting();
@@ -180,9 +180,9 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any>>({
             </Box>
           </MenuItem>,
           <MenuItem
+            disabled={column.getIsSorted() === 'desc'}
             divider={enableColumnFilters || enableGrouping || enableHiding}
             key={2}
-            disabled={column.getIsSorted() === 'desc'}
             onClick={handleSortDesc}
             sx={commonMenuItemStyles}
           >
@@ -263,7 +263,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any>>({
     ...(enableGrouping && column.getCanGroup()
       ? [
           <MenuItem
-            divider={enablePinning}
+            divider={enableColumnPinning}
             key={6}
             onClick={handleGroupByColumn}
             sx={commonMenuItemStyles}
@@ -279,7 +279,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any>>({
           </MenuItem>,
         ]
       : []),
-    ...(enablePinning && column.getCanPin()
+    ...(enableColumnPinning && column.getCanPin()
       ? [
           <MenuItem
             disabled={column.getIsPinned() === 'left' || !column.getCanPin()}
@@ -383,12 +383,12 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any>>({
 
   return (
     <Menu
-      anchorEl={anchorEl}
-      open={!!anchorEl}
-      onClose={() => setAnchorEl(null)}
       MenuListProps={{
         dense: density === 'compact',
       }}
+      anchorEl={anchorEl}
+      onClose={() => setAnchorEl(null)}
+      open={!!anchorEl}
     >
       {columnDef.renderColumnActionsMenuItems?.({
         closeMenu: () => setAnchorEl(null),

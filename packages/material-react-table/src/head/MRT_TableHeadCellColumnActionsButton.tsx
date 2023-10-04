@@ -1,6 +1,7 @@
 import { type MouseEvent, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
 
@@ -17,6 +18,7 @@ export const MRT_TableHeadCellColumnActionsButton = <
 }: Props<TData>) => {
   const {
     options: {
+      columnFilterDisplayMode,
       icons: { MoreVertIcon },
       localization,
       muiColumnActionsButtonProps,
@@ -25,7 +27,7 @@ export const MRT_TableHeadCellColumnActionsButton = <
   const { column } = header;
   const { columnDef } = column;
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation();
@@ -33,22 +35,15 @@ export const MRT_TableHeadCellColumnActionsButton = <
     setAnchorEl(event.currentTarget);
   };
 
-  const mTableHeadCellColumnActionsButtonProps =
-    muiColumnActionsButtonProps instanceof Function
-      ? muiColumnActionsButtonProps({ column, table })
-      : muiColumnActionsButtonProps;
-
-  const mcTableHeadCellColumnActionsButtonProps =
-    columnDef.muiColumnActionsButtonProps instanceof Function
-      ? columnDef.muiColumnActionsButtonProps({
-          column,
-          table,
-        })
-      : columnDef.muiColumnActionsButtonProps;
-
   const iconButtonProps = {
-    ...mTableHeadCellColumnActionsButtonProps,
-    ...mcTableHeadCellColumnActionsButtonProps,
+    ...parseFromValuesOrFunc(muiColumnActionsButtonProps, {
+      column,
+      table,
+    }),
+    ...parseFromValuesOrFunc(columnDef.muiColumnActionsButtonProps, {
+      column,
+      table,
+    }),
   };
 
   return (
@@ -66,18 +61,18 @@ export const MRT_TableHeadCellColumnActionsButton = <
           size="small"
           {...iconButtonProps}
           sx={(theme) => ({
-            height: '2rem',
-            m: '-8px -4px',
-            opacity: 0.5,
-            transform: 'scale(0.85) translateX(-4px)',
-            transition: 'opacity 150ms',
-            width: '2rem',
             '&:hover': {
               opacity: 1,
             },
-            ...(iconButtonProps?.sx instanceof Function
-              ? iconButtonProps.sx(theme)
-              : (iconButtonProps?.sx as any)),
+            height: '2rem',
+            m: '-8px -4px',
+            opacity: 0.5,
+            transform: `scale(0.85) ${
+              columnFilterDisplayMode !== 'popover' ? 'translateX(-4px)' : ''
+            }`,
+            transition: 'opacity 150ms',
+            width: '2rem',
+            ...(parseFromValuesOrFunc(iconButtonProps?.sx, theme) as any),
           })}
           title={undefined}
         >

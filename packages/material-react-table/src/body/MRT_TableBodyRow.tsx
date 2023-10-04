@@ -1,15 +1,23 @@
-import { type DragEvent, memo, useRef } from 'react';
-import TableRow from '@mui/material/TableRow';
-import { type Theme, alpha, darken, lighten } from '@mui/material/styles';
-import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
-import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
+import { type DragEvent, memo, useMemo, useRef } from 'react';
 import { type VirtualItem, type Virtualizer } from '@tanstack/react-virtual';
+import TableRow from '@mui/material/TableRow';
+import {
+  type Theme,
+  alpha,
+  darken,
+  lighten,
+  useTheme,
+} from '@mui/material/styles';
+import { MRT_TableBodyCell, Memo_MRT_TableBodyCell } from './MRT_TableBodyCell';
+import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_Cell, type MRT_Row, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
   measureElement?: (element: HTMLTableRowElement) => void;
   numRows: number;
+  pinnedRowIds?: string[];
   row: MRT_Row<TData>;
   rowIndex: number;
   table: MRT_TableInstance<TData>;
@@ -23,6 +31,7 @@ export const MRT_TableBodyRow = <TData extends Record<string, any>>({
   columnVirtualizer,
   measureElement,
   numRows,
+  pinnedRowIds,
   row,
   rowIndex,
   table,
@@ -31,24 +40,70 @@ export const MRT_TableBodyRow = <TData extends Record<string, any>>({
   virtualPaddingRight,
   virtualRow,
 }: Props<TData>) => {
+  const theme = useTheme();
+
   const {
     getState,
     options: {
       enableRowOrdering,
+      enableRowPinning,
+      enableStickyFooter,
+      enableStickyHeader,
       layoutMode,
       memoMode,
       muiTableBodyRowProps,
       renderDetailPanel,
+      rowPinningDisplayMode,
     },
+    refs: { tableFooterRef, tableHeadRef },
     setHoveredRow,
   } = table;
-  const { draggingColumn, draggingRow, editingCell, editingRow, hoveredRow } =
-    getState();
+  const {
+    density,
+    draggingColumn,
+    draggingRow,
+    editingCell,
+    editingRow,
+    hoveredRow,
+    isFullScreen,
+    rowPinning,
+  } = getState();
 
-  const tableRowProps =
-    muiTableBodyRowProps instanceof Function
-      ? muiTableBodyRowProps({ row, staticRowIndex: rowIndex, table })
-      : muiTableBodyRowProps;
+  const isPinned = enableRowPinning && row.getIsPinned();
+
+  const tableRowProps = parseFromValuesOrFunc(muiTableBodyRowProps, {
+    row,
+    staticRowIndex: rowIndex,
+    table,
+  });
+
+  const [bottomPinnedIndex, topPinnedIndex] = useMemo(() => {
+    if (
+      !enableRowPinning ||
+      !rowPinningDisplayMode?.includes('sticky') ||
+      !pinnedRowIds ||
+      !row.getIsPinned()
+    )
+      return [];
+    return [
+      [...pinnedRowIds].reverse().indexOf(row.id),
+      pinnedRowIds.indexOf(row.id),
+    ];
+  }, [pinnedRowIds, rowPinning]);
+
+  const tableHeadHeight =
+    ((enableStickyHeader || isFullScreen) &&
+      tableHeadRef.current?.clientHeight) ||
+    0;
+  const tableFooterHeight =
+    (enableStickyFooter && tableFooterRef.current?.clientHeight) || 0;
+
+  const sx = parseFromValuesOrFunc(tableRowProps?.sx, theme as any);
+
+  const rowHeight =
+    // @ts-ignore
+    parseInt(tableRowProps?.style?.height ?? sx?.height, 10) ||
+    (density === 'compact' ? 37 : density === 'comfortable' ? 53 : 69);
 
   const handleDragEnter = (_e: DragEvent) => {
     if (enableRowOrdering && draggingRow) {
@@ -63,24 +118,21 @@ export const MRT_TableBodyRow = <TData extends Record<string, any>>({
       <TableRow
         data-index={virtualRow?.index}
         onDragEnter={handleDragEnter}
-        selected={row.getIsSelected()}
         ref={(node: HTMLTableRowElement) => {
           if (node) {
             rowRef.current = node;
             measureElement?.(node);
           }
         }}
+        selected={row.getIsSelected()}
         {...tableRowProps}
+        style={{
+          transform: virtualRow
+            ? `translateY(${virtualRow?.start}px)`
+            : undefined,
+          ...tableRowProps?.style,
+        }}
         sx={(theme: Theme) => ({
-          backgroundColor: lighten(theme.palette.background.default, 0.06),
-          boxSizing: 'border-box',
-          display: layoutMode === 'grid' ? 'flex' : 'table-row',
-          opacity:
-            draggingRow?.id === row.id || hoveredRow?.id === row.id ? 0.5 : 1,
-          position: virtualRow ? 'absolute' : undefined,
-          transition: virtualRow ? 'none' : 'all 150ms ease-in-out',
-          top: virtualRow ? 0 : undefined,
-          width: '100%',
           '&:hover td': {
             backgroundColor:
               tableRowProps?.hover !== false
@@ -91,16 +143,52 @@ export const MRT_TableBodyRow = <TData extends Record<string, any>>({
                   : `${darken(theme.palette.background.default, 0.05)}`
                 : undefined,
           },
-          ...(tableRowProps?.sx instanceof Function
-            ? tableRowProps.sx(theme)
-            : (tableRowProps?.sx as any)),
-        })}
-        style={{
-          transform: virtualRow
-            ? `translateY(${virtualRow?.start}px)`
+          backgroundColor: `${lighten(
+            theme.palette.background.default,
+            0.06,
+          )} !important`,
+          bottom:
+            !virtualRow && bottomPinnedIndex !== undefined && isPinned
+              ? `${
+                  bottomPinnedIndex * rowHeight +
+                  (enableStickyFooter ? tableFooterHeight - 1 : 0)
+                }px`
+              : undefined,
+          boxSizing: 'border-box',
+          display: layoutMode === 'grid' ? 'flex' : 'table-row',
+          opacity: isPinned
+            ? 0.98
+            : draggingRow?.id === row.id || hoveredRow?.id === row.id
+            ? 0.5
+            : 1,
+          position: virtualRow
+            ? 'absolute'
+            : rowPinningDisplayMode?.includes('sticky') && isPinned
+            ? 'sticky'
             : undefined,
-          ...tableRowProps?.style,
-        }}
+          td: {
+            backgroundColor: row.getIsSelected()
+              ? alpha(theme.palette.primary.main, 0.2)
+              : isPinned
+              ? alpha(theme.palette.primary.main, 0.1)
+              : undefined,
+          },
+          top: virtualRow
+            ? 0
+            : topPinnedIndex !== undefined && isPinned
+            ? `${
+                topPinnedIndex * rowHeight +
+                (enableStickyHeader || isFullScreen ? tableHeadHeight - 1 : 0)
+              }px`
+            : undefined,
+          transition: virtualRow ? 'none' : 'all 150ms ease-in-out',
+          width: '100%',
+          zIndex:
+            rowPinningDisplayMode?.includes('sticky') && isPinned
+              ? 1
+              : undefined,
+          ...(sx as any),
+        })}
       >
         {virtualPaddingLeft ? (
           <td style={{ display: 'flex', width: virtualPaddingLeft }} />

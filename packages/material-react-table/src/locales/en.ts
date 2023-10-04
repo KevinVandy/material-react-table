@@ -59,6 +59,7 @@ export const MRT_Localization_EN: MRT_Localization = {
   noResultsFound: 'No results found',
   of: 'of',
   or: 'or',
+  pin: 'Pin',
   pinToLeft: 'Pin to left',
   pinToRight: 'Pin to right',
   resetColumnSize: 'Reset column size',
@@ -90,5 +91,4 @@ export const MRT_Localization_EN: MRT_Localization = {
   ungroupByColumn: 'Ungroup by {column}',
   unpin: 'Unpin',
   unpinAll: 'Unpin all',
-  unsorted: 'Unsorted',
 };

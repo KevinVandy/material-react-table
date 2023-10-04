@@ -1,14 +1,14 @@
-import { type Meta } from '@storybook/react';
 import {
-  MaterialReactTable,
-  type MRT_TableOptions,
   type MRT_ColumnDef,
+  type MRT_TableOptions,
+  MaterialReactTable,
 } from '../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
-  title: 'Prop Playground',
   component: MaterialReactTable,
+  title: 'Prop Playground',
 };
 
 export default meta;
@@ -20,36 +20,36 @@ const Template = (args: MRT_TableOptions<Person>) => (
 export const Default = Template.bind({});
 
 interface Person {
+  address: string;
+  age: number;
   firstName: string;
   lastName: string;
-  age: number;
-  address: string;
 }
 
 // @ts-ignore
 Default.args = {
   columns: [
     {
-      header: 'First Name',
       accessorKey: 'firstName',
+      header: 'First Name',
     },
     {
-      header: 'Last Name',
       accessorKey: 'lastName',
+      header: 'Last Name',
     },
     {
-      header: 'Age',
       accessorKey: 'age',
+      header: 'Age',
     },
     {
-      header: 'Address',
       accessorKey: 'address',
+      header: 'Address',
     },
   ] as MRT_ColumnDef<Person>[],
   data: [...Array(6)].map(() => ({
+    address: faker.location.streetAddress(),
+    age: faker.datatype.number(80),
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
-    age: faker.datatype.number(80),
-    address: faker.location.streetAddress(),
   })),
 } as MRT_TableOptions<Person>;

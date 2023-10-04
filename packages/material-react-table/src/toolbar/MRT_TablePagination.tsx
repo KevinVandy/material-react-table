@@ -1,40 +1,40 @@
 import { type ChangeEvent } from 'react';
 import TablePagination from '@mui/material/TablePagination';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
-  position?: 'top' | 'bottom';
+  position?: 'bottom' | 'top';
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_TablePagination = <TData extends Record<string, any>>({
-  table,
   position = 'bottom',
+  table,
 }: Props<TData>) => {
   const {
     getPrePaginationRowModel,
     getState,
-    setPageIndex,
-    setPageSize,
     options: {
-      muiTablePaginationProps,
       enableToolbarInternalActions,
       localization,
+      muiTablePaginationProps,
       rowCount,
     },
+    setPageIndex,
+    setPageSize,
   } = table;
   const {
-    pagination: { pageSize = 10, pageIndex = 0 },
+    pagination: { pageIndex = 0, pageSize = 10 },
     showGlobalFilter,
   } = getState();
 
   const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
   const showFirstLastPageButtons = totalRowCount / pageSize > 2;
 
-  const tablePaginationProps =
-    muiTablePaginationProps instanceof Function
-      ? muiTablePaginationProps({ table })
-      : muiTablePaginationProps;
+  const tablePaginationProps = parseFromValuesOrFunc(muiTablePaginationProps, {
+    table,
+  });
 
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     setPageSize(+event.target.value);
@@ -53,7 +53,7 @@ export const MRT_TablePagination = <TData extends Record<string, any>>({
           ? localization.goToNextPage
           : localization.goToPreviousPage
       }
-      labelDisplayedRows={({ from, to, count }) =>
+      labelDisplayedRows={({ count, from, to }) =>
         `${from}-${to} ${localization.of} ${count}`
       }
       labelRowsPerPage={localization.rowsPerPage}
@@ -69,28 +69,28 @@ export const MRT_TablePagination = <TData extends Record<string, any>>({
       showLastButton={showFirstLastPageButtons}
       {...tablePaginationProps}
       SelectProps={{
-        sx: { m: '0 1rem 0 1ch' },
         MenuProps: { MenuListProps: { disablePadding: true }, sx: { m: 0 } },
+        sx: { m: '0 1rem 0 1ch' },
         ...tablePaginationProps?.SelectProps,
       }}
       sx={(theme) => ({
-        '& .MuiTablePagination-toolbar': {
-          display: 'flex',
-          alignItems: 'center',
-        },
-        '& .MuiTablePagination-selectLabel': {
-          m: '0 -1px',
-        },
-        '&. MuiInputBase-root': {
+        '& . MuiTablePagination-select': {
           m: '0 1px',
         },
-        '& . MuiTablePagination-select': {
+        '& .MuiTablePagination-actions': {
           m: '0 1px',
         },
         '& .MuiTablePagination-displayedRows': {
           m: '0 1px',
         },
-        '& .MuiTablePagination-actions': {
+        '& .MuiTablePagination-selectLabel': {
+          m: '0 -1px',
+        },
+        '& .MuiTablePagination-toolbar': {
+          alignItems: 'center',
+          display: 'flex',
+        },
+        '&. MuiInputBase-root': {
           m: '0 1px',
         },
         mt:
@@ -101,9 +101,7 @@ export const MRT_TablePagination = <TData extends Record<string, any>>({
             : undefined,
         position: 'relative',
         zIndex: 2,
-        ...(tablePaginationProps?.sx instanceof Function
-          ? tablePaginationProps.sx(theme)
-          : (tablePaginationProps?.sx as any)),
+        ...(parseFromValuesOrFunc(tablePaginationProps?.sx, theme) as any),
       })}
     />
   );

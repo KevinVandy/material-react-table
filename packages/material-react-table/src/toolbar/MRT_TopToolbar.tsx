@@ -1,15 +1,16 @@
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { lighten } from '@mui/material/styles';
-import { MRT_GlobalFilterTextField } from '../inputs/MRT_GlobalFilterTextField';
+import { type Theme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
-import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
 import { MRT_ToolbarDropZone } from './MRT_ToolbarDropZone';
+import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
+import { parseFromValuesOrFunc } from '../column.utils';
+import { MRT_GlobalFilterTextField } from '../inputs/MRT_GlobalFilterTextField';
 import { type MRT_TableInstance } from '../types';
-import { type Theme } from '@mui/material/styles';
 
 export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
   alignItems: 'flex-start',
@@ -51,10 +52,7 @@ export const MRT_TopToolbar = <TData extends Record<string, any>>({
 
   const isMobile = useMediaQuery('(max-width:720px)');
 
-  const toolbarProps =
-    muiTopToolbarProps instanceof Function
-      ? muiTopToolbarProps({ table })
-      : muiTopToolbarProps;
+  const toolbarProps = parseFromValuesOrFunc(muiTopToolbarProps, { table });
 
   const stackAlertBanner =
     isMobile || !!renderTopToolbarCustomActions || showGlobalFilter;
@@ -70,16 +68,12 @@ export const MRT_TopToolbar = <TData extends Record<string, any>>({
           toolbarProps.ref.current = ref;
         }
       }}
-      sx={(theme) =>
-        ({
-          position: isFullScreen ? 'sticky' : undefined,
-          top: isFullScreen ? '0' : undefined,
-          ...commonToolbarStyles({ theme }),
-          ...(toolbarProps?.sx instanceof Function
-            ? toolbarProps.sx(theme)
-            : (toolbarProps?.sx as any)),
-        } as any)
-      }
+      sx={(theme) => ({
+        position: isFullScreen ? 'sticky' : undefined,
+        top: isFullScreen ? '0' : undefined,
+        ...commonToolbarStyles({ theme }),
+        ...(parseFromValuesOrFunc(toolbarProps?.sx, theme) as any),
+      })}
     >
       {positionToolbarAlertBanner === 'top' && (
         <MRT_ToolbarAlertBanner
@@ -128,8 +122,8 @@ export const MRT_TopToolbar = <TData extends Record<string, any>>({
         )}
       </Box>
       {enablePagination &&
-        ['top', 'both'].includes(positionPagination ?? '') && (
-          <MRT_TablePagination table={table} position="top" />
+        ['both', 'top'].includes(positionPagination ?? '') && (
+          <MRT_TablePagination position="top" table={table} />
         )}
       <MRT_LinearProgressBar isTopToolbar table={table} />
     </Toolbar>

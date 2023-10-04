@@ -1,8 +1,9 @@
 import { type MouseEvent } from 'react';
-import Checkbox from '@mui/material/Checkbox';
+import Checkbox, { type CheckboxProps } from '@mui/material/Checkbox';
+import Radio, { type RadioProps } from '@mui/material/Radio';
 import Tooltip from '@mui/material/Tooltip';
-import Radio from '@mui/material/Radio';
 import { type Theme } from '@mui/material/styles';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -19,22 +20,20 @@ export const MRT_SelectCheckbox = <TData extends Record<string, any>>({
   const {
     getState,
     options: {
-      localization,
       enableMultiRowSelection,
-      muiSelectCheckboxProps,
+      enableRowPinning,
+      localization,
       muiSelectAllCheckboxProps,
+      muiSelectCheckboxProps,
+      rowPinningDisplayMode,
       selectAllMode,
     },
   } = table;
   const { density, isLoading } = getState();
 
   const checkboxProps = !row
-    ? muiSelectAllCheckboxProps instanceof Function
-      ? muiSelectAllCheckboxProps({ table })
-      : muiSelectAllCheckboxProps
-    : muiSelectCheckboxProps instanceof Function
-    ? muiSelectCheckboxProps({ row, table })
-    : muiSelectCheckboxProps;
+    ? parseFromValuesOrFunc(muiSelectAllCheckboxProps, { table })
+    : parseFromValuesOrFunc(muiSelectCheckboxProps, { row, table });
 
   const allRowsSelected = selectAll
     ? selectAllMode === 'page'
@@ -50,12 +49,28 @@ export const MRT_SelectCheckbox = <TData extends Record<string, any>>({
         ? localization.toggleSelectAll
         : localization.toggleSelectRow,
     },
-    onChange: row
-      ? row.getToggleSelectedHandler()
-      : selectAllMode === 'all'
-      ? table.getToggleAllRowsSelectedHandler()
-      : table.getToggleAllPageRowsSelectedHandler(),
-    size: (density === 'compact' ? 'small' : 'medium') as 'small' | 'medium',
+    onChange: (event) => {
+      event.stopPropagation();
+      row
+        ? row.getToggleSelectedHandler()(event)
+        : selectAllMode === 'all'
+        ? table.getToggleAllRowsSelectedHandler()(event)
+        : table.getToggleAllPageRowsSelectedHandler()(event);
+      if (enableRowPinning && rowPinningDisplayMode?.includes('select')) {
+        if (row) {
+          row.pin(
+            !row.getIsPinned() && event.target.checked
+              ? rowPinningDisplayMode?.includes('bottom')
+                ? 'bottom'
+                : 'top'
+              : false,
+          );
+        } else {
+          table.setRowPinning({ bottom: [], top: [] });
+        }
+      }
+    },
+    size: (density === 'compact' ? 'small' : 'medium') as 'medium' | 'small',
     ...checkboxProps,
     onClick: (e: MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
@@ -63,14 +78,13 @@ export const MRT_SelectCheckbox = <TData extends Record<string, any>>({
     },
     sx: (theme: Theme) => ({
       height: density === 'compact' ? '1.75rem' : '2.5rem',
-      width: density === 'compact' ? '1.75rem' : '2.5rem',
       m: density !== 'compact' ? '-0.4rem' : undefined,
-      ...(checkboxProps?.sx instanceof Function
-        ? checkboxProps.sx(theme)
-        : (checkboxProps?.sx as any)),
+      width: density === 'compact' ? '1.75rem' : '2.5rem',
+      zIndex: 0,
+      ...parseFromValuesOrFunc(checkboxProps?.sx, theme),
     }),
     title: undefined,
-  };
+  } as CheckboxProps | RadioProps;
 
   return (
     <Tooltip

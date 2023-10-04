@@ -1,6 +1,6 @@
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Styling/Table Alignment Examples',
@@ -10,38 +10,38 @@ export default meta;
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
-    header: 'First Name',
     accessorKey: 'firstName',
+    header: 'First Name',
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
+    header: 'Last Name',
   },
   {
-    header: 'Age',
     accessorKey: 'age',
+    header: 'Age',
   },
   {
-    header: 'Address',
     accessorKey: 'address',
+    header: 'Address',
   },
   {
-    header: 'State',
     accessorKey: 'state',
+    header: 'State',
   },
   {
-    header: 'Phone Number',
     accessorKey: 'phoneNumber',
+    header: 'Phone Number',
   },
 ];
 
 const data = [...Array(25)].map(() => ({
+  address: faker.location.streetAddress(),
+  age: faker.datatype.number({ max: 60, min: 20 }),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  age: faker.datatype.number({ min: 20, max: 60 }),
-  address: faker.location.streetAddress(),
-  state: faker.location.state(),
   phoneNumber: faker.phone.number(),
+  state: faker.location.state(),
 }));
 
 export const DefaultLeft = () => (
@@ -52,13 +52,13 @@ export const RightCells = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    muiTableHeadCellProps={{
-      align: 'right',
-    }}
+    enableColumnResizing
     muiTableBodyCellProps={{
       align: 'right',
     }}
-    enableColumnResizing
+    muiTableHeadCellProps={{
+      align: 'right',
+    }}
   />
 );
 
@@ -66,10 +66,10 @@ export const CenterCells = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    muiTableHeadCellProps={{
+    muiTableBodyCellProps={{
       align: 'center',
     }}
-    muiTableBodyCellProps={{
+    muiTableHeadCellProps={{
       align: 'center',
     }}
   />
@@ -80,10 +80,10 @@ export const CenterCellsWithGrabHandle = () => (
     columns={columns}
     data={data}
     enableColumnDragging
-    muiTableHeadCellProps={{
+    muiTableBodyCellProps={{
       align: 'center',
     }}
-    muiTableBodyCellProps={{
+    muiTableHeadCellProps={{
       align: 'center',
     }}
   />
@@ -95,10 +95,10 @@ export const CenterCellsWithGrabHandleNoSorting = () => (
     data={data}
     enableColumnDragging
     enableSorting={false}
-    muiTableHeadCellProps={{
+    muiTableBodyCellProps={{
       align: 'center',
     }}
-    muiTableBodyCellProps={{
+    muiTableHeadCellProps={{
       align: 'center',
     }}
   />
@@ -109,10 +109,10 @@ export const CenterCellsNoColumnActions = () => (
     columns={columns}
     data={data}
     enableColumnActions={false}
-    muiTableHeadCellProps={{
+    muiTableBodyCellProps={{
       align: 'center',
     }}
-    muiTableBodyCellProps={{
+    muiTableHeadCellProps={{
       align: 'center',
     }}
   />
@@ -122,16 +122,16 @@ export const RightAlignNumberColumn = () => (
   <MaterialReactTable
     columns={[
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
       {
-        header: 'Age',
         accessorKey: 'age',
+        header: 'Age',
         muiTableBodyCellProps: {
           align: 'right',
         },
@@ -140,16 +140,16 @@ export const RightAlignNumberColumn = () => (
         },
       },
       {
-        header: 'Address',
         accessorKey: 'address',
+        header: 'Address',
       },
       {
-        header: 'State',
         accessorKey: 'state',
+        header: 'State',
       },
       {
-        header: 'Phone Number',
         accessorKey: 'phoneNumber',
+        header: 'Phone Number',
       },
     ]}
     data={data}

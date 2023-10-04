@@ -12,6 +12,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
 import { debounce } from '@mui/material/utils';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 import { type MRT_TableInstance } from '../types';
 
@@ -24,25 +25,24 @@ export const MRT_GlobalFilterTextField = <TData extends Record<string, any>>({
 }: Props<TData>) => {
   const {
     getState,
-    setGlobalFilter,
     options: {
       enableGlobalFilterModes,
-      icons: { SearchIcon, CloseIcon },
+      icons: { CloseIcon, SearchIcon },
       localization,
       manualFiltering,
       muiSearchTextFieldProps,
     },
     refs: { searchInputRef },
+    setGlobalFilter,
   } = table;
   const { globalFilter, showGlobalFilter } = getState();
 
-  const textFieldProps =
-    muiSearchTextFieldProps instanceof Function
-      ? muiSearchTextFieldProps({ table })
-      : muiSearchTextFieldProps;
+  const textFieldProps = parseFromValuesOrFunc(muiSearchTextFieldProps, {
+    table,
+  });
 
   const isMounted = useRef(false);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [searchValue, setSearchValue] = useState(globalFilter ?? '');
 
   const handleChangeDebounced = useCallback(
@@ -83,32 +83,12 @@ export const MRT_GlobalFilterTextField = <TData extends Record<string, any>>({
   return (
     <Collapse
       in={showGlobalFilter}
+      mountOnEnter
       orientation="horizontal"
       unmountOnExit
-      mountOnEnter
     >
       <TextField
-        placeholder={localization.search}
-        onChange={handleChange}
-        value={searchValue ?? ''}
-        variant="standard"
         InputProps={{
-          startAdornment: enableGlobalFilterModes ? (
-            <InputAdornment position="start">
-              <Tooltip arrow title={localization.changeSearchMode}>
-                <IconButton
-                  aria-label={localization.changeSearchMode}
-                  onClick={handleGlobalFilterMenuOpen}
-                  size="small"
-                  sx={{ height: '1.75rem', width: '1.75rem' }}
-                >
-                  <SearchIcon />
-                </IconButton>
-              </Tooltip>
-            </InputAdornment>
-          ) : (
-            <SearchIcon style={{ marginRight: '4px' }} />
-          ),
           endAdornment: (
             <InputAdornment position="end">
               <Tooltip arrow title={localization.clearSearch ?? ''}>
@@ -125,7 +105,27 @@ export const MRT_GlobalFilterTextField = <TData extends Record<string, any>>({
               </Tooltip>
             </InputAdornment>
           ),
+          startAdornment: enableGlobalFilterModes ? (
+            <InputAdornment position="start">
+              <Tooltip arrow title={localization.changeSearchMode}>
+                <IconButton
+                  aria-label={localization.changeSearchMode}
+                  onClick={handleGlobalFilterMenuOpen}
+                  size="small"
+                  sx={{ height: '1.75rem', width: '1.75rem' }}
+                >
+                  <SearchIcon />
+                </IconButton>
+              </Tooltip>
+            </InputAdornment>
+          ) : (
+            <SearchIcon style={{ marginRight: '4px' }} />
+          ),
         }}
+        onChange={handleChange}
+        placeholder={localization.search}
+        value={searchValue ?? ''}
+        variant="standard"
         {...textFieldProps}
         inputRef={(inputRef) => {
           searchInputRef.current = inputRef;
@@ -136,9 +136,9 @@ export const MRT_GlobalFilterTextField = <TData extends Record<string, any>>({
       />
       <MRT_FilterOptionMenu
         anchorEl={anchorEl}
+        onSelect={handleClear}
         setAnchorEl={setAnchorEl}
         table={table}
-        onSelect={handleClear}
       />
     </Collapse>
   );

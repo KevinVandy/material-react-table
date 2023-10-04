@@ -1,3 +1,5 @@
+import { type MRT_Localization } from '..';
+
 export const MRT_Localization_BG: MRT_Localization = {
   actions: 'Действия',
   and: 'и',
@@ -88,5 +90,4 @@ export const MRT_Localization_BG: MRT_Localization = {
   ungroupByColumn: 'Разгрупиране по {column}',
   unpin: 'Откачи',
   unpinAll: 'Откачи всички',
-  unsorted: 'Неподредено',
 };

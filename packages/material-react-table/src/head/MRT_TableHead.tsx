@@ -1,6 +1,7 @@
+import { type VirtualItem } from '@tanstack/react-virtual';
 import TableHead from '@mui/material/TableHead';
 import { MRT_TableHeadRow } from './MRT_TableHeadRow';
-import { type VirtualItem } from '@tanstack/react-virtual';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -20,28 +21,31 @@ export const MRT_TableHead = <TData extends Record<string, any>>({
     getHeaderGroups,
     getState,
     options: { enableStickyHeader, layoutMode, muiTableHeadProps },
+    refs: { tableHeadRef },
   } = table;
   const { isFullScreen } = getState();
 
-  const tableHeadProps =
-    muiTableHeadProps instanceof Function
-      ? muiTableHeadProps({ table })
-      : muiTableHeadProps;
+  const tableHeadProps = parseFromValuesOrFunc(muiTableHeadProps, { table });
 
   const stickyHeader = enableStickyHeader || isFullScreen;
 
   return (
     <TableHead
       {...tableHeadProps}
+      ref={(ref: HTMLTableSectionElement) => {
+        tableHeadRef.current = ref;
+        if (tableHeadProps?.ref) {
+          // @ts-ignore
+          tableHeadProps.ref.current = ref;
+        }
+      }}
       sx={(theme) => ({
         display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
         opacity: 0.97,
         position: stickyHeader ? 'sticky' : 'relative',
         top: stickyHeader && layoutMode === 'grid' ? 0 : undefined,
         zIndex: stickyHeader ? 2 : undefined,
-        ...(tableHeadProps?.sx instanceof Function
-          ? tableHeadProps?.sx(theme)
-          : (tableHeadProps?.sx as any)),
+        ...(parseFromValuesOrFunc(tableHeadProps?.sx, theme) as any),
       })}
     >
       {getHeaderGroups().map((headerGroup) => (

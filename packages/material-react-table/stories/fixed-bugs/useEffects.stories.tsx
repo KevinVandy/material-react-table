@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
-import { type Meta } from '@storybook/react';
-import {
-  MaterialReactTable,
-  type MRT_ColumnDef,
-  type MRT_ColumnFiltersState,
-} from '../../src';
-import { faker } from '@faker-js/faker';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+import {
+  type MRT_ColumnDef,
+  type MRT_ColumnFiltersState,
+  MaterialReactTable,
+} from '../../src';
+import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Fixed Bugs/useEffects',
@@ -17,23 +17,23 @@ const meta: Meta = {
 export default meta;
 
 interface Person {
-  firstName: string;
-  lastName: string;
-  age: number;
   address: string;
+  age: number;
+  firstName: string;
   gender: string;
-  state: string;
+  lastName: string;
   phoneNumber: string;
+  state: string;
 }
 
 const data: Person[] = [...Array(100)].map(() => ({
-  firstName: faker.person.firstName(),
-  lastName: faker.person.lastName(),
-  age: faker.number.int(100),
   address: faker.location.streetAddress(),
+  age: faker.number.int(100),
+  firstName: faker.person.firstName(),
   gender: Math.random() < 0.9 ? faker.person.sex() : faker.person.gender(),
-  state: faker.location.state(),
+  lastName: faker.person.lastName(),
   phoneNumber: faker.phone.number(),
+  state: faker.location.state(),
 }));
 
 export const FilterModesRefetch = () => {
@@ -47,24 +47,24 @@ export const FilterModesRefetch = () => {
 
   const columns: MRT_ColumnDef<Person>[] = [
     {
-      header: 'First Name',
       accessorKey: 'firstName',
+      header: 'First Name',
     },
     {
-      header: 'Last Name',
       accessorKey: 'lastName',
+      header: 'Last Name',
     },
     {
-      header: 'Address',
       accessorKey: 'address',
+      header: 'Address',
     },
     {
-      header: 'State',
       accessorKey: 'state',
+      header: 'State',
     },
     {
-      header: 'Phone Number',
       accessorKey: 'phoneNumber',
+      header: 'Phone Number',
     },
   ];
 
@@ -74,8 +74,8 @@ export const FilterModesRefetch = () => {
       data={data}
       enableColumnFilterModes
       initialState={{ showColumnFilters: true }}
-      state={{ columnFilters }}
       onColumnFiltersChange={setColumnFilters}
+      state={{ columnFilters }}
     />
   );
 };
@@ -92,26 +92,26 @@ export const FilterOptionsAsync = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
       {
-        header: 'Address',
         accessorKey: 'address',
+        header: 'Address',
       },
       {
-        header: 'State',
         accessorKey: 'state',
-        filterVariant: 'select',
         filterSelectOptions: stateFilterOptions,
+        filterVariant: 'select',
+        header: 'State',
       },
       {
-        header: 'Phone Number',
         accessorKey: 'phoneNumber',
+        header: 'Phone Number',
       },
     ],
     [stateFilterOptions],
@@ -139,26 +139,26 @@ export const EditOptionsAsync = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
       {
-        header: 'Address',
         accessorKey: 'address',
+        header: 'Address',
       },
       {
-        header: 'State',
         accessorKey: 'state',
-        editVariant: 'select',
         editSelectOptions: stateEditOptions,
+        editVariant: 'select',
+        header: 'State',
       },
       {
-        header: 'Phone Number',
         accessorKey: 'phoneNumber',
+        header: 'Phone Number',
       },
     ],
     [stateEditOptions],
@@ -168,8 +168,8 @@ export const EditOptionsAsync = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      enableEditing
       editDisplayMode="row"
+      enableEditing
     />
   );
 };
@@ -186,24 +186,24 @@ export const RenderRowActionsAsync = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
       {
-        header: 'Address',
         accessorKey: 'address',
+        header: 'Address',
       },
       {
-        header: 'State',
         accessorKey: 'state',
+        header: 'State',
       },
       {
-        header: 'Phone Number',
         accessorKey: 'phoneNumber',
+        header: 'Phone Number',
       },
     ],
     [],
@@ -239,24 +239,24 @@ export const renderRowActionMenuItemsAsync = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
       {
-        header: 'Address',
         accessorKey: 'address',
+        header: 'Address',
       },
       {
-        header: 'State',
         accessorKey: 'state',
+        header: 'State',
       },
       {
-        header: 'Phone Number',
         accessorKey: 'phoneNumber',
+        header: 'Phone Number',
       },
     ],
     [],
@@ -289,29 +289,29 @@ export const DelayedFacetedValues = () => {
     <MaterialReactTable
       columns={[
         {
-          header: 'First Name',
           accessorKey: 'firstName',
           filterFn: 'fuzzy', // default
+          header: 'First Name',
         },
         {
-          header: 'Last Name',
           accessorKey: 'lastName',
           filterVariant: 'select',
+          header: 'Last Name',
         },
         {
-          header: 'Age',
           accessorKey: 'age',
           filterVariant: 'range-slider',
+          header: 'Age',
         },
         {
-          header: 'Gender',
           accessorKey: 'gender',
           filterVariant: 'select',
+          header: 'Gender',
         },
         {
-          header: 'State',
           accessorKey: 'state',
           filterVariant: 'multi-select',
+          header: 'State',
         },
       ]}
       data={tableData}

@@ -1,8 +1,8 @@
+import { useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import { type IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { type MRT_TableInstance } from '../types';
-import { useState } from 'react';
 
 interface Props<TData extends Record<string, any>> extends IconButtonProps {
   table: MRT_TableInstance<TData>;
@@ -31,8 +31,8 @@ export const MRT_ToggleFullScreenButton = <TData extends Record<string, any>>({
 
   return (
     <Tooltip
-      open={tooltipOpened}
       arrow
+      open={tooltipOpened}
       title={rest?.title ?? localization.toggleFullScreen}
     >
       <IconButton

@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
-import RowSelectionExample from '../../../examples/enable-row-selection';
 import PersistentStateExample from '../../../examples/persistent-state';
 
 <Head>
@@ -19,11 +18,9 @@ This is all optional, of course. If you do not need access to any of the state, 
 
 See the [State Options API Docs](/docs/api/state-options) for more information on which states are available for you to manage.
 
-### Relevant Props
+### Relevant Table Options
 
-<TableOptionsTable
-  onlyOptions={new Set(['initialState', 'state', 'tableInstanceRef'])}
-/>
+<TableOptionsTable onlyOptions={new Set(['initialState', 'state'])} />
 
 ### Populate Initial State
 
@@ -32,17 +29,19 @@ If all you care about is setting parts of the initial or default state when the 
 For example, let's say you do not need access to the `showColumnFilters` state, but you want to set the default value to `true` when the table mounts. You can do that with the `initialState` prop:
 
 ```tsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  initialState={{
-    density: 'compact', //set default density to compact
+const table = useMaterialReactTable({
+  columns,
+  data,
+  initialState: {
+    density: 'xs', //set default density to compact
     expanded: true, //expand all rows by default
     pagination: { pageIndex: 0, pageSize: 15 }, //set different default page size
     showColumnFilters: true, //show filters by default
     sorting: [{ id: 'name', desc: false }], //sort by name ascending by default
-  }}
-/>
+  },
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 > Note: If you use both `initialState` and `state`, the state initializer in `state` prop will take precedence and overwrite the same state values in `initialState`. So just use either `initialState` or `state`, not both for the same states.
@@ -68,26 +67,22 @@ useEffect(() => {
   //do something when the pagination state changes
 }, [pagination]);
 
-return (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    getRowId={(originalRow) => row.username}
-    onPaginationChange={setPagination}
-    onRowSelectionChange={setRowSelection}
-    onSortingChange={setSorting}
-    state={{ pagination, rowSelection, sorting }} //must pass states back down if using their on[StateName]Change callbacks
-  />
-);
+const table = useMaterialReactTable({
+  columns,
+  data,
+  getRowId: (originalRow) => row.username,
+  onPaginationChange: setPagination,
+  onRowSelectionChange: setRowSelection,
+  onSortingChange: setSorting,
+  state: { pagination, rowSelection, sorting }, //must pass states back down if using their on[StateName]Change callbacks
+});
+
+return <MaterialReactTable table={table} />;
 ```
-
-Here is another full example for how you might manage the `rowSelection` state yourself:
-
-<RowSelectionExample />
 
 ### Add Side Effects in Set State Callbacks
 
-In React 18 and beyond, it is becoming more discouraged to use `useEffect` to react to state changes, because in React Strict Mode (and maybe future versions of React), the useEffect hook may run twice per render. Instead, more event driven functions are recommended to be used. Here is an example for how that looks here. The callback signature for the `on[StateName]Change` functions is a bit strange, so pay attention to the example below.
+In React 18 and beyond, it is becoming more discouraged to use `useEffect` to react to state changes, because in React Strict Mode (and maybe future versions of React), the useEffect hook may run twice per render. Instead, more event driven functions are recommended to be used. Here is an example for how that looks here. The callback signature for the `on[StateName]Change` works just like a React setState callback from the `useState` hook. This means that you have to check if the updater is a function or not, and then call the setState function with the updater callback if it is a function.
 
 ```tsx
 const [pagination, setPagination] = useState({
@@ -98,33 +93,39 @@ const [pagination, setPagination] = useState({
 const handlePaginationChange = (updater: MRT_Updater<PaginationState>) => {
   //call the setState as normal, but need to check if using an updater callback with a previous state
   setPagination((prevPagination) =>
+    //if updater is a function, call it with the previous state, otherwise just use the updater value
     updater instanceof Function ? updater(prevPagination) : updater,
   );
   //put more code for your side effects here, guaranteed to only run once, even in React Strict Mode
 };
 
-return (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    state={{ pagination }}
-    onPaginationChange={handlePaginationChange}
-  />
-);
+const table = useMaterialReactTable({
+  columns,
+  data,
+  onPaginationChange: handlePaginationChange,
+  state: { pagination },
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
-### Access the Underlying Table Instance Reference
+### Read From the Table Instance
 
-You can store a reference to the underlying table instance by using the `tableInstanceRef` prop. This is a mutable ref object that will be populated with the table instance once the table has been initialized internally. This reference can be very useful, especially if you need it for components that are rendered outside of `<MaterialReactTable />`.
+> Note: Previously, in early MRT v1, you could use the `tableInstanceRef` prop to get access to the table instance. This is no longer necessary as the `useMaterialReactTable` hook now just returns the table instance directly.
 
-```tsx
-//must initialize with null to make TS happy
-const tableInstanceRef = useRef<MRT_TableInstance<YourDataType>>(null);
+The `useMaterialReactTable` hook returns the table instance. The `<MaterialReactTable />` needs the table instance for all of its internal logic, but you can also use it for your own purposes.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  //...
+});
 
 const someEventHandler = (event) => {
-  console.info(tableInstanceRef.current?.getRowModel().rows); //example - get access to all page rows in the table
-  console.info(tableInstanceRef.current?.getSelectedRowModel()); //example - get access to all selected rows in the table
-  console.info(tableInstanceRef.current?.getState().sorting); //example - get access to the current sorting state
+  console.info(table.getRowModel().rows); //example - get access to all page rows in the table
+  console.info(table.getSelectedRowModel()); //example - get access to all selected rows in the table
+  console.info(table.getState().sorting); //example - get access to the current sorting state without having to manage it yourself
 };
 
 return (
@@ -132,11 +133,7 @@ return (
     <ExternalButton onClick={someEventHandler}>
       Export or Something
     </ExternalButton>
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      tableInstanceRef={tableInstanceRef}
-    />
+    <MaterialReactTable table={table} />
   </div>
 );
 ```
@@ -144,31 +141,28 @@ return (
 The table instance is the same object that you will also see as a provided parameter in many of the other callback functions throughout Material React Table, such as all the `render...` props or the `Cell` or `Header` render overrides in the column definition options.
 
 ```jsx
-const tableInstanceRef = useRef(null);
-
 const columns = useMemo(
   () => [
     {
       Header: 'Name',
       accessor: 'name',
       Cell: ({ cell, table }) => <span>{cell.getValue()}</span>,
-      //The `table` parameter from the Cell option params and the `tableInstanceRef.current` are the same object
+      //The `table` parameter from the Cell option params and the `table` are the same object
     },
   ],
   [],
 );
 
-return (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    tableInstanceRef={tableInstanceRef}
-    renderTopToolbarCustomActions={({ table }) => {
-      //The `table` parameter and the `tableInstanceRef.current` are the same object
-      return <Button>Button</Button>;
-    }}
-  />
-);
+const table = useMaterialReactTable({
+  columns,
+  data,
+  renderTopToolbarCustomActions: ({ table }) => {
+    //The `table` parameter here and the table returned from the hook are the same object
+    return <Button>Button</Button>;
+  },
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 ### Persistent State

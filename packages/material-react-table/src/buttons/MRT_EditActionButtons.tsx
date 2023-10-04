@@ -1,8 +1,8 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import CircularProgress from '@mui/material/CircularProgress';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -23,8 +23,8 @@ export const MRT_EditActionButtons = <TData extends Record<string, any>>({
       localization,
       onCreatingRowCancel,
       onCreatingRowSave,
-      onEditingRowSave,
       onEditingRowCancel,
+      onEditingRowSave,
     },
     refs: { editInputRefs },
     setCreatingRow,
@@ -43,6 +43,7 @@ export const MRT_EditActionButtons = <TData extends Record<string, any>>({
       onEditingRowCancel?.({ row, table });
       setEditingRow(null);
     }
+    row._valuesCache = {} as any; //reset values cache
   };
 
   const handleSubmitRow = () => {
@@ -99,12 +100,12 @@ export const MRT_EditActionButtons = <TData extends Record<string, any>>({
         </>
       ) : (
         <>
-          <Button sx={{ minWidth: '100px' }} onClick={handleCancel}>
+          <Button onClick={handleCancel} sx={{ minWidth: '100px' }}>
             {localization.cancel}
           </Button>
           <Button
-            sx={{ minWidth: '100px' }}
             onClick={handleSubmitRow}
+            sx={{ minWidth: '100px' }}
             variant="contained"
           >
             {isSaving && <CircularProgress color="inherit" size={18} />}

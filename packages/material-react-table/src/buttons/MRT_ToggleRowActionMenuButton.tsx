@@ -1,19 +1,20 @@
 import { type MouseEvent, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import { MRT_RowActionMenu } from '../menus/MRT_RowActionMenu';
 import { MRT_EditActionButtons } from './MRT_EditActionButtons';
+import { parseFromValuesOrFunc } from '../column.utils';
+import { MRT_RowActionMenu } from '../menus/MRT_RowActionMenu';
 import { type MRT_Cell, type MRT_Row, type MRT_TableInstance } from '../types';
 
 const commonIconButtonStyles = {
+  '&:hover': {
+    opacity: 1,
+  },
   height: '2rem',
   ml: '10px',
   opacity: 0.5,
   transition: 'opacity 150ms',
   width: '2rem',
-  '&:hover': {
-    opacity: 1,
-  },
 };
 
 interface Props<TData extends Record<string, any>> {
@@ -52,7 +53,7 @@ export const MRT_ToggleRowActionMenuButton = <
     (isCreating && createDisplayMode === 'row') ||
     (isEditing && editDisplayMode === 'row');
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const handleOpenRowActionMenu = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation();
@@ -73,14 +74,12 @@ export const MRT_ToggleRowActionMenuButton = <
       ) : showEditActionButtons ? (
         <MRT_EditActionButtons row={row} table={table} />
       ) : !renderRowActionMenuItems &&
-        (enableEditing instanceof Function
-          ? enableEditing(row)
-          : enableEditing) ? (
-        <Tooltip placement="right" arrow title={localization.edit}>
+        parseFromValuesOrFunc(enableEditing, row) ? (
+        <Tooltip arrow placement="right" title={localization.edit}>
           <IconButton
             aria-label={localization.edit}
-            sx={commonIconButtonStyles}
             onClick={handleStartEditMode}
+            sx={commonIconButtonStyles}
           >
             <EditIcon />
           </IconButton>

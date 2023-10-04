@@ -1,3 +1,4 @@
+import '../styles/globals.css';
 import { useState } from 'react';
 import { type AppProps } from 'next/app';
 import Head from 'next/head';
@@ -12,7 +13,6 @@ import { SideBar } from '../components/navigation/Sidebar';
 import { BreadCrumbs } from '../components/navigation/BreadCrumbs';
 import { MiniNav } from '../components/navigation/MiniNav';
 import { Footer } from '../components/navigation/Footer';
-import '../styles/globals.css';
 
 function App({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
@@ -64,7 +64,7 @@ function App({ Component, pageProps }: AppProps) {
         )}
       </Head>
       <PlausibleProvider
-        domain="material-react-table.com"
+        domain="v2.material-react-table.com"
         enabled={process.env.NODE_ENV === 'production'}
       >
         <ThemeContextProvider>

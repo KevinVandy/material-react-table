@@ -90,5 +90,4 @@ export const MRT_Localization_TR: MRT_Localization = {
   ungroupByColumn: '{column} Sütununu Çöz',
   unpin: 'Çöz',
   unpinAll: 'Tümünü Çöz',
-  unsorted: 'Sıralanmadı',
 };

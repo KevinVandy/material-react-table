@@ -1,6 +1,8 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import TableContainer from '@mui/material/TableContainer';
 import { MRT_Table } from './MRT_Table';
+import { parseFromValuesOrFunc } from '../column.utils';
+import { MRT_EditRowModal } from '../modals';
 import { type MRT_TableInstance } from '../types';
 
 const useIsomorphicLayoutEffect =
@@ -15,17 +17,21 @@ export const MRT_TableContainer = <TData extends Record<string, any>>({
 }: Props<TData>) => {
   const {
     getState,
-    options: { enableStickyHeader, muiTableContainerProps },
-    refs: { tableContainerRef, bottomToolbarRef, topToolbarRef },
+    options: {
+      createDisplayMode,
+      editDisplayMode,
+      enableStickyHeader,
+      muiTableContainerProps,
+    },
+    refs: { bottomToolbarRef, tableContainerRef, topToolbarRef },
   } = table;
-  const { isFullScreen } = getState();
+  const { creatingRow, editingRow, isFullScreen } = getState();
 
   const [totalToolbarHeight, setTotalToolbarHeight] = useState(0);
 
-  const tableContainerProps =
-    muiTableContainerProps instanceof Function
-      ? muiTableContainerProps({ table })
-      : muiTableContainerProps;
+  const tableContainerProps = parseFromValuesOrFunc(muiTableContainerProps, {
+    table,
+  });
 
   useIsomorphicLayoutEffect(() => {
     const topToolbarHeight =
@@ -41,6 +47,9 @@ export const MRT_TableContainer = <TData extends Record<string, any>>({
     setTotalToolbarHeight(topToolbarHeight + bottomToolbarHeight);
   });
 
+  const createModalOpen = createDisplayMode === 'modal' && creatingRow;
+  const editModalOpen = editDisplayMode === 'modal' && editingRow;
+
   return (
     <TableContainer
       {...tableContainerProps}
@@ -53,24 +62,25 @@ export const MRT_TableContainer = <TData extends Record<string, any>>({
           }
         }
       }}
-      sx={(theme) => ({
-        maxWidth: '100%',
-        maxHeight: enableStickyHeader
-          ? `clamp(350px, calc(100vh - ${totalToolbarHeight}px), 9999px)`
-          : undefined,
-        overflow: 'auto',
-        ...(tableContainerProps?.sx instanceof Function
-          ? tableContainerProps.sx(theme)
-          : (tableContainerProps?.sx as any)),
-      })}
       style={{
         maxHeight: isFullScreen
           ? `calc(100vh - ${totalToolbarHeight}px)`
           : undefined,
         ...tableContainerProps?.style,
       }}
+      sx={(theme) => ({
+        maxHeight: enableStickyHeader
+          ? `clamp(350px, calc(100vh - ${totalToolbarHeight}px), 9999px)`
+          : undefined,
+        maxWidth: '100%',
+        overflow: 'auto',
+        ...(parseFromValuesOrFunc(tableContainerProps?.sx, theme) as any),
+      })}
     >
       <MRT_Table table={table} />
+      {(createModalOpen || editModalOpen) && (
+        <MRT_EditRowModal open table={table} />
+      )}
     </TableContainer>
   );
 };

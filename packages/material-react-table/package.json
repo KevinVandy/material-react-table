@@ -1,5 +1,5 @@
 {
-  "version": "1.14.0",
+  "version": "2.0.0-alpha.1",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -34,11 +34,11 @@
   "size-limit": [
     {
       "path": "dist/cjs/index.js",
-      "limit": "54 KB"
+      "limit": "59 KB"
     },
     {
       "path": "dist/esm/material-react-table.esm.js",
-      "limit": "50 KB"
+      "limit": "55 KB"
     }
   ],
   "engines": {
@@ -60,49 +60,50 @@
     "storybook:dev": "storybook dev -p 6006"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.5",
-    "@babel/preset-react": "^7.22.5",
+    "@babel/core": "^7.23.0",
+    "@babel/preset-react": "^7.22.15",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@faker-js/faker": "^8.0.2",
-    "@mui/icons-material": "^5.11.16",
-    "@mui/material": "^5.13.6",
-    "@mui/x-date-pickers": "^6.9.0",
+    "@faker-js/faker": "^8.1.0",
+    "@mui/icons-material": "^5.14.11",
+    "@mui/material": "^5.14.11",
+    "@mui/x-date-pickers": "^6.15.0",
     "@rollup/plugin-babel": "^6.0.3",
-    "@rollup/plugin-node-resolve": "^15.1.0",
-    "@rollup/plugin-typescript": "^11.1.1",
-    "@size-limit/preset-small-lib": "^8.2.6",
-    "@storybook/addon-a11y": "^7.0.23",
-    "@storybook/addon-essentials": "^7.0.23",
-    "@storybook/addon-interactions": "^7.0.23",
-    "@storybook/addon-links": "^7.0.23",
-    "@storybook/addon-storysource": "^7.0.23",
-    "@storybook/blocks": "^7.0.23",
-    "@storybook/react": "^7.0.23",
-    "@storybook/react-vite": "^7.0.23",
-    "@storybook/testing-library": "^0.2.0",
-    "@types/node": "^20.3.1",
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
-    "@typescript-eslint/eslint-plugin": "^5.60.0",
-    "@typescript-eslint/parser": "^5.60.0",
-    "@vitejs/plugin-react": "^4.0.1",
-    "eslint": "^8.43.0",
+    "@rollup/plugin-node-resolve": "^15.2.1",
+    "@rollup/plugin-typescript": "^11.1.4",
+    "@size-limit/preset-small-lib": "^9.0.0",
+    "@storybook/addon-a11y": "^7.4.5",
+    "@storybook/addon-essentials": "^7.4.5",
+    "@storybook/addon-interactions": "^7.4.5",
+    "@storybook/addon-links": "^7.4.5",
+    "@storybook/addon-storysource": "^7.4.5",
+    "@storybook/blocks": "^7.4.5",
+    "@storybook/react": "^7.4.5",
+    "@storybook/react-vite": "^7.4.5",
+    "@storybook/testing-library": "^0.2.1",
+    "@types/node": "^20.7.1",
+    "@types/react": "^18.2.23",
+    "@types/react-dom": "^18.2.8",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "@vitejs/plugin-react": "^4.1.0",
+    "eslint": "^8.50.0",
     "eslint-plugin-mui-path-imports": "^0.0.15",
+    "eslint-plugin-perfectionist": "^2.1.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
-    "rollup": "^3.25.1",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-dts": "^5.3.0",
+    "rollup": "^2.79.1",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-dts": "^6.0.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "size-limit": "^8.2.6",
-    "storybook": "^7.0.23",
-    "storybook-dark-mode": "^3.0.0",
-    "tslib": "^2.5.3",
-    "typescript": "^5.1.3",
-    "vite": "^4.3.9"
+    "size-limit": "^9.0.0",
+    "storybook": "^7.4.5",
+    "storybook-dark-mode": "^3.0.1",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9"
   },
   "peerDependencies": {
     "@emotion/react": ">=11.11",
@@ -115,8 +116,8 @@
   },
   "dependencies": {
     "@tanstack/match-sorter-utils": "8.8.4",
-    "@tanstack/react-table": "8.9.3",
-    "@tanstack/react-virtual": "3.0.0-beta.54",
+    "@tanstack/react-table": "8.10.3",
+    "@tanstack/react-virtual": "3.0.0-beta.61",
     "highlight-words": "1.2.2"
   }
 }

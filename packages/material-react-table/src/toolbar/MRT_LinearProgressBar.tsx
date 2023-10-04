@@ -1,5 +1,6 @@
 import Collapse from '@mui/material/Collapse';
 import LinearProgress from '@mui/material/LinearProgress';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -12,31 +13,31 @@ export const MRT_LinearProgressBar = <TData extends Record<string, any>>({
   table,
 }: Props<TData>) => {
   const {
-    options: { muiLinearProgressProps },
     getState,
+    options: { muiLinearProgressProps },
   } = table;
   const { isLoading, showProgressBars } = getState();
 
-  const linearProgressProps =
-    muiLinearProgressProps instanceof Function
-      ? muiLinearProgressProps({ isTopToolbar, table })
-      : muiLinearProgressProps;
+  const linearProgressProps = parseFromValuesOrFunc(muiLinearProgressProps, {
+    isTopToolbar,
+    table,
+  });
 
   return (
     <Collapse
       in={isLoading || showProgressBars}
       mountOnEnter
-      unmountOnExit
       sx={{
         bottom: isTopToolbar ? 0 : undefined,
         position: 'absolute',
         top: !isTopToolbar ? 0 : undefined,
         width: '100%',
       }}
+      unmountOnExit
     >
       <LinearProgress
-        aria-label="Loading"
         aria-busy="true"
+        aria-label="Loading"
         sx={{ position: 'relative' }}
         {...linearProgressProps}
       />

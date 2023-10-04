@@ -1,5 +1,5 @@
-import { type Meta } from '@storybook/react';
 import { MaterialReactTable } from '../../src';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Fixed Bugs/sticky-footer',
@@ -9,83 +9,83 @@ export default meta;
 
 const mockData: any = [
   {
-    no: 23,
-    name: 'Michael Jeffrey Jordan',
     firstName: 'Michael',
-    middleName: 'Jeffrey',
     lastName: 'Jordan',
+    middleName: 'Jeffrey',
+    name: 'Michael Jeffrey Jordan',
+    no: 23,
     salary: 1030000,
     total: 86760000,
   },
   {
-    no: 24,
-    name: 'Kobe Bean Bryant',
     firstName: 'Kobe',
-    middleName: 'Bean',
     lastName: 'Bryant',
+    middleName: 'Bean',
+    name: 'Kobe Bean Bryant',
+    no: 24,
     salary: 25000000,
     total: 328237108,
   },
   {
-    no: 6,
-    name: 'LeBron Raymone James',
     firstName: 'LeBron',
-    middleName: 'Raymone',
     lastName: 'James',
+    middleName: 'Raymone',
+    name: 'LeBron Raymone James',
+    no: 6,
     salary: 44474988,
     total: 431859107,
   },
   {
-    no: 23,
-    name: 'Michael Jeffrey Jordan',
     firstName: 'Michael',
-    middleName: 'Jeffrey',
     lastName: 'Jordan',
+    middleName: 'Jeffrey',
+    name: 'Michael Jeffrey Jordan',
+    no: 23,
     salary: 1030000,
     total: 86760000,
   },
   {
-    no: 24,
-    name: 'Kobe Bean Bryant',
     firstName: 'Kobe',
-    middleName: 'Bean',
     lastName: 'Bryant',
+    middleName: 'Bean',
+    name: 'Kobe Bean Bryant',
+    no: 24,
     salary: 25000000,
     total: 328237108,
   },
   {
-    no: 6,
-    name: 'LeBron Raymone James',
     firstName: 'LeBron',
-    middleName: 'Raymone',
     lastName: 'James',
+    middleName: 'Raymone',
+    name: 'LeBron Raymone James',
+    no: 6,
     salary: 44474988,
     total: 431859107,
   },
   {
-    no: 23,
-    name: 'Michael Jeffrey Jordan',
     firstName: 'Michael',
-    middleName: 'Jeffrey',
     lastName: 'Jordan',
+    middleName: 'Jeffrey',
+    name: 'Michael Jeffrey Jordan',
+    no: 23,
     salary: 1030000,
     total: 86760000,
   },
   {
-    no: 24,
-    name: 'Kobe Bean Bryant',
     firstName: 'Kobe',
-    middleName: 'Bean',
     lastName: 'Bryant',
+    middleName: 'Bean',
+    name: 'Kobe Bean Bryant',
+    no: 24,
     salary: 25000000,
     total: 328237108,
   },
   {
-    no: 6,
-    name: 'LeBron Raymone James',
     firstName: 'LeBron',
-    middleName: 'Raymone',
     lastName: 'James',
+    middleName: 'Raymone',
+    name: 'LeBron Raymone James',
+    no: 6,
     salary: 44474988,
     total: 431859107,
   },
@@ -94,10 +94,10 @@ const mockData: any = [
 const mockColumns: any = [
   {
     accessorKey: 'no',
-    header: 'No. ',
     filterVariant: 'multi-select',
-    size: 80,
     footer: 'SUM',
+    header: 'No. ',
+    size: 80,
   },
   {
     accessorKey: 'name',
@@ -119,13 +119,13 @@ const mockColumns: any = [
   },
   {
     accessorKey: 'salary',
-    header: 'SALARY',
     footer: '211514964',
+    header: 'SALARY',
   },
   {
     accessorKey: 'total',
-    header: 'TOTAL',
     footer: '2540568645',
+    header: 'TOTAL',
   },
 ];
 
@@ -134,9 +134,14 @@ export const PinnedColumnsWithStickyFooter = () => {
     <MaterialReactTable
       columns={mockColumns}
       data={mockData}
-      enablePinning
-      enableStickyHeader
+      enableColumnPinning
       enableStickyFooter
+      enableStickyHeader
+      initialState={{ columnPinning: { left: ['no', 'name', 'firstName'] } }}
+      muiTableBodyCellProps={{
+        align: 'center',
+        sx: { borderLeft: '1px solid black' },
+      }}
       muiTableContainerProps={{
         sx: { maxHeight: 300 },
       }}
@@ -144,11 +149,6 @@ export const PinnedColumnsWithStickyFooter = () => {
         align: 'center',
         sx: { borderLeft: '1px solid black' },
       }}
-      muiTableBodyCellProps={{
-        align: 'center',
-        sx: { borderLeft: '1px solid black' },
-      }}
-      initialState={{ columnPinning: { left: ['no', 'name', 'firstName'] } }}
     />
   );
 };

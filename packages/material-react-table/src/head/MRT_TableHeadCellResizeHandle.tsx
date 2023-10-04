@@ -33,23 +33,23 @@ export const MRT_TableHeadCellResizeHandle = <
       }}
       onMouseDown={header.getResizeHandler()}
       onTouchStart={header.getResizeHandler()}
-      sx={(theme) => ({
-        cursor: 'col-resize',
-        mr: density === 'compact' ? '-0.75rem' : '-1rem',
-        position: 'absolute',
-        right: '4px',
-        px: '4px',
-        '&:active > hr': {
-          backgroundColor: theme.palette.info.main,
-          opacity: 1,
-        },
-      })}
       style={{
         transform:
           column.getIsResizing() && columnResizeMode === 'onEnd'
             ? `translateX(${getState().columnSizingInfo.deltaOffset ?? 0}px)`
             : undefined,
       }}
+      sx={(theme) => ({
+        '&:active > hr': {
+          backgroundColor: theme.palette.info.main,
+          opacity: 1,
+        },
+        cursor: 'col-resize',
+        mr: density === 'compact' ? '-0.75rem' : '-1rem',
+        position: 'absolute',
+        px: '4px',
+        right: '4px',
+      })}
     >
       <Divider
         className="Mui-TableHeadCell-ResizeHandle-Divider"
