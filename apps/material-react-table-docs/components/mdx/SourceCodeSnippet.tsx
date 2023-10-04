@@ -16,6 +16,7 @@ import {
   MenuItem,
   TextField,
   rgbToHex,
+  Collapse,
 } from '@mui/material';
 import CodeIcon from '@mui/icons-material/Code';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -70,7 +71,9 @@ export const SourceCodeSnippet = ({
     setPrimaryColor,
   } = useThemeContext();
   const isMobile = useMediaQuery('(max-width: 720px)');
-  const [codeTab, setCodeTab] = useState<'ts' | 'js' | 'legacy' | 'api'>('ts');
+  const [codeTab, setCodeTab] = useState<
+    'ts' | 'js' | 'legacy' | 'api' | 'sandbox'
+  >('ts');
   const [isCopied, setIsCopied] = useState(false);
   const [isFullCode, setIsFullCode] = useState(false);
 
@@ -297,114 +300,146 @@ export const SourceCodeSnippet = ({
                     onClick={() => {
                       setCodeTab('api');
                     }}
-                    value="js"
+                    value="api"
                     selected={codeTab === 'api'}
+                    sx={{ textTransform: 'none' }}
                   >
                     {isMobile ? 'API' : 'Back-end API'}
                   </ToggleButton>
                 )}
+                <ToggleButton
+                  onClick={() => {
+                    setCodeTab('sandbox');
+                  }}
+                  value="sandbox"
+                  selected={codeTab === 'sandbox'}
+                  sx={{ textTransform: 'none' }}
+                >
+                  Sandbox
+                </ToggleButton>
               </ToggleButtonGroup>
             </span>
             {!isMobile && <EthicalAd id="demo" compact text />}
           </Box>
         </Box>
-        <Paper elevation={3}>
-          <Highlight
-            code={
-              (codeTab === 'ts'
-                ? typeScriptCode
-                : codeTab === 'js'
-                ? javaScriptCode
-                : codeTab === 'legacy'
-                ? legacyCode
-                : apiCode) ?? ''
-            }
-            language={codeTab !== 'js' ? 'tsx' : 'jsx'}
-            theme={
-              theme.palette.mode === 'dark' ? themes.nightOwl : themes.github
-            }
-          >
-            {({ className, style, tokens, getLineProps, getTokenProps }) => (
-              <div
-                style={{
-                  position: 'relative',
-                  fontSize: isMobile ? '1em' : '1.2em',
-                }}
-              >
-                <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Code'}>
-                  <CopyButton onClick={handleCopy}>
-                    {isCopied ? <LibraryAddCheckIcon /> : <ContentCopyIcon />}
-                  </CopyButton>
-                </Tooltip>
-                <Tooltip
-                  arrow
-                  title={
-                    isFullCode
-                      ? 'Hide columns and data definitions'
-                      : 'Show columns and data definitions'
-                  }
-                >
-                  <ToggleFullCodeButton
-                    onClick={() => setIsFullCode(!isFullCode)}
-                  >
-                    {isFullCode ? <UnfoldLessIcon /> : <UnfoldMoreIcon />}
-                  </ToggleFullCodeButton>
-                </Tooltip>
-                <pre
-                  className={className}
+        <Collapse unmountOnExit mountOnEnter in={codeTab === 'sandbox'}>
+          <iframe
+            src={`https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/v2/apps/material-react-table-docs/examples/${tableId}/sandbox?fontsize=14&hidenavigation=1&theme=dark&file=src/TS.tsx`}
+            style={{
+              width: '100%',
+              height: '1000px',
+              border: '0',
+              borderRadius: '4px',
+              overflow: 'hidden',
+            }}
+            title="codesandbox"
+            allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+            sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+          />
+        </Collapse>
+        {codeTab !== 'sandbox' && (
+          <Paper elevation={3}>
+            <Highlight
+              code={
+                (codeTab === 'ts'
+                  ? typeScriptCode
+                  : codeTab === 'js'
+                  ? javaScriptCode
+                  : codeTab === 'legacy'
+                  ? legacyCode
+                  : apiCode) ?? ''
+              }
+              language={codeTab !== 'js' ? 'tsx' : 'jsx'}
+              theme={
+                theme.palette.mode === 'dark' ? themes.nightOwl : themes.github
+              }
+            >
+              {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                <div
                   style={{
-                    ...style,
-                    padding: isMobile
-                      ? '3rem 0.5rem 1rem 0.5rem'
-                      : '0.5rem 0.25rem',
-                    overflowX: 'auto',
+                    position: 'relative',
+                    fontSize: isMobile ? '1em' : '1.2em',
                   }}
                 >
-                  {tokens.map((line, i) => (
-                    <div
-                      key={i}
-                      {...getLineProps({ line, key: i })}
-                      style={{
-                        ...style,
-                        display: !isFullCode && skipCodeLine ? 'none' : 'block',
-                      }}
+                  <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Code'}>
+                    <CopyButton onClick={handleCopy}>
+                      {isCopied ? <LibraryAddCheckIcon /> : <ContentCopyIcon />}
+                    </CopyButton>
+                  </Tooltip>
+                  <Tooltip
+                    arrow
+                    title={
+                      isFullCode
+                        ? 'Hide columns and data definitions'
+                        : 'Show columns and data definitions'
+                    }
+                  >
+                    <ToggleFullCodeButton
+                      onClick={() => setIsFullCode(!isFullCode)}
                     >
-                      {!isMobile && (
-                        <span
-                          style={{
-                            paddingRight: '2ch',
-                            paddingLeft: `${4 - String(i + 1).length}ch`,
-                            color: theme.palette.text.secondary,
-                            userSelect: 'none',
-                          }}
-                        >
-                          {i + 1}
-                        </span>
-                      )}
-                      {line.map((token, key) => {
-                        if (
-                          token.content === '//column definitions...' ||
-                          token.content === '//data definitions...'
-                        ) {
-                          skipCodeLine = true;
-                          if (isFullCode) {
+                      {isFullCode ? <UnfoldLessIcon /> : <UnfoldMoreIcon />}
+                    </ToggleFullCodeButton>
+                  </Tooltip>
+                  <pre
+                    className={className}
+                    style={{
+                      ...style,
+                      padding: isMobile
+                        ? '3rem 0.5rem 1rem 0.5rem'
+                        : '0.5rem 0.25rem',
+                      overflowX: 'auto',
+                    }}
+                  >
+                    {tokens.map((line, i) => (
+                      <div
+                        key={i}
+                        {...getLineProps({ line, key: i })}
+                        style={{
+                          ...style,
+                          display:
+                            !isFullCode && skipCodeLine ? 'none' : 'block',
+                        }}
+                      >
+                        {!isMobile && (
+                          <span
+                            style={{
+                              paddingRight: '2ch',
+                              paddingLeft: `${4 - String(i + 1).length}ch`,
+                              color: theme.palette.text.secondary,
+                              userSelect: 'none',
+                            }}
+                          >
+                            {i + 1}
+                          </span>
+                        )}
+                        {line.map((token, key) => {
+                          if (
+                            token.content === '//column definitions...' ||
+                            token.content === '//data definitions...'
+                          ) {
+                            skipCodeLine = true;
+                            if (isFullCode) {
+                              return null;
+                            }
+                          } else if (token.content === '//end') {
+                            skipCodeLine = false;
                             return null;
                           }
-                        } else if (token.content === '//end') {
-                          skipCodeLine = false;
-                          return null;
-                        }
-                        return (
-                          <span key={key} {...getTokenProps({ token, key })} />
-                        );
-                      })}
-                    </div>
-                  ))}
-                </pre>
-              </div>
-            )}
-          </Highlight>
-        </Paper>
+                          return (
+                            <span
+                              key={key}
+                              {...getTokenProps({ token, key })}
+                            />
+                          );
+                        })}
+                      </div>
+                    ))}
+                  </pre>
+                </div>
+              )}
+            </Highlight>
+          </Paper>
+        )}
       </div>
       <Divider />
     </Box>

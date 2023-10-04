@@ -20,7 +20,7 @@ for file in *; do
       cd sandbox
 
       ## Update dependency versions
-      npx npm-check-updates -u
+      npx npm-check-updates -u material-react-table -t greatest
 
       # Run npm install
       npm install --package-lock-only --force
