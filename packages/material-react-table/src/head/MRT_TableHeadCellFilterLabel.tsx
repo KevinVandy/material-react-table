@@ -54,13 +54,15 @@ export const MRT_TableHeadCellFilterLabel = <
           .replace('{column}', String(columnDef.header))
           .replace(
             '{filterType}',
-            // @ts-ignore
-            localization[
-              `filter${
-                currentFilterOption?.charAt(0)?.toUpperCase() +
-                currentFilterOption?.slice(1)
-              }`
-            ],
+            currentFilterOption
+              ? // @ts-ignore
+                localization[
+                  `filter${
+                    currentFilterOption?.charAt(0)?.toUpperCase() +
+                    currentFilterOption?.slice(1)
+                  }`
+                ]
+              : '',
           )
           .replace(
             '{filterValue}',
