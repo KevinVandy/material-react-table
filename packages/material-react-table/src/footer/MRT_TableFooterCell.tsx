@@ -49,8 +49,8 @@ export const MRT_TableFooterCell = <TData extends Record<string, any>>({
         ...getCommonCellStyles({
           column,
           table,
-          theme,
           tableCellProps,
+          theme,
         }),
       })}
     >

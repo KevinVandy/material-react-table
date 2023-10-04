@@ -1,13 +1,11 @@
 {
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:perfectionist/recommended-natural"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint",
-    "mui-path-imports"
-  ],
+  "plugins": ["@typescript-eslint", "mui-path-imports", "perfectionist"],
   "rules": {
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/ban-types": "off",
@@ -21,12 +19,38 @@
         "fixStyle": "inline-type-imports"
       }
     ],
-    "mui-path-imports/mui-path-imports": "warn"
+    "mui-path-imports/mui-path-imports": "warn",
+    "perfectionist/sort-imports": [
+      "error",
+      {
+        "type": "natural",
+        "order": "asc",
+        "groups": [
+          "react",
+          "tanstack",
+          "mui",
+          "mrt",
+          "siblings",
+          "sibling-type",
+          "parent",
+          "parent-type",
+          "style"
+        ],
+        "custom-groups": {
+          "value": {
+            "react": ["react", "react-*"],
+            "tanstack": "@tanstack/**",
+            "mui": "@mui/**",
+            "mrt": ["./MRT_**", "../**MRT_**"]
+          },
+          "type": {
+            "react": "react"
+          }
+        },
+        "newlines-between": "never"
+      }
+    ]
   },
   "root": true,
-  "ignorePatterns": [
-    "dist/",
-    "locales/",
-    "node_modules/"
-  ]
+  "ignorePatterns": ["dist/", "locales/", "node_modules/"]
 }

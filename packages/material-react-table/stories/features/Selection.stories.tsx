@@ -1,12 +1,12 @@
 import { useRef, useState } from 'react';
-import { type Meta } from '@storybook/react';
+import Button from '@mui/material/Button';
 import {
-  MaterialReactTable,
   type MRT_ColumnDef,
   type MRT_TableInstance,
+  MaterialReactTable,
 } from '../../src';
 import { faker } from '@faker-js/faker';
-import Button from '@mui/material/Button';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Features/Selection Examples',
@@ -16,27 +16,27 @@ export default meta;
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
-    header: 'First Name',
     accessorKey: 'firstName',
+    header: 'First Name',
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
+    header: 'Last Name',
   },
   {
-    header: 'Age',
     accessorKey: 'age',
+    header: 'Age',
   },
   {
-    header: 'Address',
     accessorKey: 'address',
+    header: 'Address',
   },
 ];
 const data = [...Array(15)].map(() => ({
+  address: faker.location.streetAddress(),
+  age: faker.datatype.number(80),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  age: faker.datatype.number(80),
-  address: faker.location.streetAddress(),
 }));
 
 export const SelectionEnabled = () => (
@@ -133,8 +133,8 @@ export const SingleSelectionRadio = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableRowSelection
     enableMultiRowSelection={false}
+    enableRowSelection
   />
 );
 
@@ -142,8 +142,8 @@ export const SingleSelectionRadioWithRowClick = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableRowSelection
     enableMultiRowSelection={false}
+    enableRowSelection
     muiTableBodyRowProps={({ row }) => ({
       onClick: row.getToggleSelectedHandler(),
       sx: {
@@ -170,7 +170,6 @@ export const SelectionWithInstanceRef = () => {
       columns={columns}
       data={data}
       enableRowSelection
-      tableInstanceRef={tableInstanceRef}
       renderTopToolbarCustomActions={() => (
         <Button
           onClick={() =>
@@ -180,6 +179,7 @@ export const SelectionWithInstanceRef = () => {
           Log Selected Rows
         </Button>
       )}
+      tableInstanceRef={tableInstanceRef}
     />
   );
 };

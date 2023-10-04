@@ -1,8 +1,8 @@
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
-import { faker } from '@faker-js/faker';
 import Divider from '@mui/material/Divider';
 import MenuItem from '@mui/material/MenuItem';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
+import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Features/Column Action Examples',
@@ -11,42 +11,42 @@ const meta: Meta = {
 export default meta;
 
 interface Row {
+  address: string;
   firstName: string;
   lastName: string;
-  address: string;
-  state: string;
   phoneNumber: string;
+  state: string;
 }
 
 const columns: MRT_ColumnDef<Row>[] = [
   {
-    header: 'First Name',
     accessorKey: 'firstName',
+    header: 'First Name',
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
+    header: 'Last Name',
   },
   {
-    header: 'Address',
     accessorKey: 'address',
+    header: 'Address',
   },
   {
-    header: 'State',
     accessorKey: 'state',
+    header: 'State',
   },
   {
-    header: 'Phone Number',
     accessorKey: 'phoneNumber',
+    header: 'Phone Number',
   },
 ];
 
 const data: Row[] = [...Array(100)].map(() => ({
+  address: faker.location.streetAddress(),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  address: faker.location.streetAddress(),
-  state: faker.location.state(),
   phoneNumber: faker.phone.number(),
+  state: faker.location.state(),
 }));
 
 export const ColumnActionsEnabledDefault = () => (
@@ -65,27 +65,27 @@ export const ColumnActionsDisabledPerColumn = () => (
   <MaterialReactTable
     columns={[
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
       {
-        header: 'Address',
         accessorKey: 'address',
         enableColumnActions: false,
+        header: 'Address',
       },
       {
-        header: 'State',
         accessorKey: 'state',
         enableColumnActions: false,
+        header: 'State',
       },
       {
-        header: 'Phone Number',
         accessorKey: 'phoneNumber',
         enableColumnActions: false,
+        header: 'Phone Number',
       },
     ]}
     data={data}
@@ -96,27 +96,27 @@ export const ColumnActionsEnabledPerColumn = () => (
   <MaterialReactTable
     columns={[
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
       {
-        header: 'Address',
         accessorKey: 'address',
         enableColumnActions: true,
+        header: 'Address',
       },
       {
-        header: 'State',
         accessorKey: 'state',
         enableColumnActions: true,
+        header: 'State',
       },
       {
-        header: 'Phone Number',
         accessorKey: 'phoneNumber',
         enableColumnActions: true,
+        header: 'Phone Number',
       },
     ]}
     data={data}
@@ -139,25 +139,25 @@ export const CustomColumnActionsPerColumn = () => (
   <MaterialReactTable
     columns={[
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
         renderColumnActionsMenuItems: () => [
           <MenuItem key={1}>Item 1</MenuItem>,
           <MenuItem key={2}>Item 2</MenuItem>,
         ],
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
         renderColumnActionsMenuItems: () => [
           <MenuItem key={1}>Item 2</MenuItem>,
           <MenuItem key={3}>Item 3</MenuItem>,
         ],
       },
       {
-        header: 'Address',
         accessorKey: 'address',
         enableColumnActions: true,
+        header: 'Address',
         renderColumnActionsMenuItems: ({ internalColumnMenuItems }) => [
           ...internalColumnMenuItems,
           <Divider key={3332} />,
@@ -166,14 +166,14 @@ export const CustomColumnActionsPerColumn = () => (
         ],
       },
       {
-        header: 'State',
         accessorKey: 'state',
         enableColumnActions: true,
+        header: 'State',
       },
       {
-        header: 'Phone Number',
         accessorKey: 'phoneNumber',
         enableColumnActions: true,
+        header: 'Phone Number',
       },
     ]}
     data={data}

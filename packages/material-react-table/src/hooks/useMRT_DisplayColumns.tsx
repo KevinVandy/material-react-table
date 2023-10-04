@@ -1,29 +1,29 @@
 import { type RefObject, useMemo } from 'react';
-import { showExpandColumn } from '../column.utils';
-import { MRT_TableBodyRowPinButton } from '../body/MRT_TableBodyRowPinButton';
 import { MRT_TableBodyRowGrabHandle } from '../body';
+import { MRT_TableBodyRowPinButton } from '../body/MRT_TableBodyRowPinButton';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
 import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
 import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMenuButton';
+import { showExpandColumn } from '../column.utils';
 import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 import {
   type MRT_ColumnDef,
   type MRT_ColumnOrderState,
-  type MRT_GroupingState,
   type MRT_DefinedTableOptions,
+  type MRT_GroupingState,
   type MRT_Row,
 } from '../types';
 
 interface Params<TData extends Record<string, any>> {
-  creatingRow: MRT_Row<TData> | null;
   columnOrder: MRT_ColumnOrderState;
+  creatingRow: MRT_Row<TData> | null;
   grouping: MRT_GroupingState;
   tableOptions: MRT_DefinedTableOptions<TData>;
 }
 
 export const useMRT_DisplayColumns = <TData extends Record<string, any>>({
-  creatingRow,
   columnOrder,
+  creatingRow,
   grouping,
   tableOptions,
 }: Params<TData>) => {

@@ -1,17 +1,17 @@
-import { type Meta } from '@storybook/react';
-import {
-  MaterialReactTable,
-  type MRT_ColumnDef,
-  MRT_ToggleFullScreenButton,
-} from '../../src';
-import { faker } from '@faker-js/faker';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import AddBoxIcon from '@mui/icons-material/AddBox';
-import DeleteIcon from '@mui/icons-material/Delete';
+import {
+  type MRT_ColumnDef,
+  MRT_ToggleFullScreenButton,
+  MaterialReactTable,
+} from '../../src';
+import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Features/Toolbar Examples',
@@ -21,32 +21,32 @@ export default meta;
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
-    header: 'First Name',
     accessorKey: 'firstName',
+    header: 'First Name',
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
+    header: 'Last Name',
   },
   {
-    header: 'Age',
     accessorKey: 'age',
+    header: 'Age',
   },
   {
-    header: 'Address',
     accessorKey: 'address',
+    header: 'Address',
   },
   {
-    header: 'Phone Number',
     accessorKey: 'phoneNumber',
+    header: 'Phone Number',
   },
 ];
 
 const data = [...Array(5)].map(() => ({
+  address: faker.location.streetAddress(),
+  age: faker.datatype.number(80),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  age: faker.datatype.number(80),
-  address: faker.location.streetAddress(),
   phoneNumber: faker.phone.number(),
 }));
 
@@ -67,8 +67,8 @@ export const BottomToolbarHidden = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableRowSelection
     enableBottomToolbar={false}
+    enableRowSelection
   />
 );
 
@@ -76,9 +76,9 @@ export const NoToolbars = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    enableBottomToolbar={false}
     enableRowSelection
     enableTopToolbar={false}
-    enableBottomToolbar={false}
   />
 );
 
@@ -95,8 +95,8 @@ export const CustomToolbarInternalActions = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableRowSelection
     enableGrouping
+    enableRowSelection
     renderToolbarInternalActions={({ table }) => {
       return (
         <>

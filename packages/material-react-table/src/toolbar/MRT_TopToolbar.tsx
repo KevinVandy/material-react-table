@@ -1,16 +1,16 @@
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { lighten } from '@mui/material/styles';
-import { MRT_GlobalFilterTextField } from '../inputs/MRT_GlobalFilterTextField';
+import { type Theme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
-import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
 import { MRT_ToolbarDropZone } from './MRT_ToolbarDropZone';
-import { type MRT_TableInstance } from '../types';
-import { type Theme } from '@mui/material/styles';
+import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { MRT_GlobalFilterTextField } from '../inputs/MRT_GlobalFilterTextField';
+import { type MRT_TableInstance } from '../types';
 
 export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
   alignItems: 'flex-start',
@@ -122,8 +122,8 @@ export const MRT_TopToolbar = <TData extends Record<string, any>>({
         )}
       </Box>
       {enablePagination &&
-        ['top', 'both'].includes(positionPagination ?? '') && (
-          <MRT_TablePagination table={table} position="top" />
+        ['both', 'top'].includes(positionPagination ?? '') && (
+          <MRT_TablePagination position="top" table={table} />
         )}
       <MRT_LinearProgressBar isTopToolbar table={table} />
     </Toolbar>

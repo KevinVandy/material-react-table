@@ -30,17 +30,17 @@ export const MRT_TableBodyRowPinButton = <TData extends Record<string, any>>({
           flexDirection: density === 'compact' ? 'row' : 'column',
         }}
       >
-        <MRT_RowPinButton row={row} table={table} pinningPosition="top" />
-        <MRT_RowPinButton row={row} table={table} pinningPosition="bottom" />
+        <MRT_RowPinButton pinningPosition="top" row={row} table={table} />
+        <MRT_RowPinButton pinningPosition="bottom" row={row} table={table} />
       </Box>
     );
   }
 
   return (
     <MRT_RowPinButton
+      pinningPosition={rowPinningDisplayMode === 'bottom' ? 'bottom' : 'top'}
       row={row}
       table={table}
-      pinningPosition={rowPinningDisplayMode === 'bottom' ? 'bottom' : 'top'}
     />
   );
 };

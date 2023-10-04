@@ -1,8 +1,8 @@
+import { type VirtualItem } from '@tanstack/react-virtual';
 import TableFooter from '@mui/material/TableFooter';
 import { MRT_TableFooterRow } from './MRT_TableFooterRow';
-import { type VirtualItem } from '@tanstack/react-virtual';
-import { type MRT_TableInstance } from '../types';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
   table: MRT_TableInstance<TData>;
@@ -35,6 +35,13 @@ export const MRT_TableFooter = <TData extends Record<string, any>>({
   return (
     <TableFooter
       {...tableFooterProps}
+      ref={(ref: HTMLTableSectionElement) => {
+        tableFooterRef.current = ref;
+        if (tableFooterProps?.ref) {
+          // @ts-ignore
+          tableFooterProps.ref.current = ref;
+        }
+      }}
       sx={(theme) => ({
         bottom: stickFooter ? 0 : undefined,
         display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
@@ -48,13 +55,6 @@ export const MRT_TableFooter = <TData extends Record<string, any>>({
         zIndex: stickFooter ? 1 : undefined,
         ...(parseFromValuesOrFunc(tableFooterProps?.sx, theme) as any),
       })}
-      ref={(ref: HTMLTableSectionElement) => {
-        tableFooterRef.current = ref;
-        if (tableFooterProps?.ref) {
-          // @ts-ignore
-          tableFooterProps.ref.current = ref;
-        }
-      }}
     >
       {getFooterGroups().map((footerGroup) => (
         <MRT_TableFooterRow

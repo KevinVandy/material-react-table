@@ -1,6 +1,6 @@
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Features/Column Hiding Examples',
@@ -10,43 +10,43 @@ export default meta;
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
-    header: 'First Name',
     accessorKey: 'firstName',
+    header: 'First Name',
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
+    header: 'Last Name',
   },
   {
-    header: 'Address',
     accessorKey: 'address',
+    header: 'Address',
   },
   {
-    header: 'State',
     accessorKey: 'state',
+    header: 'State',
   },
   {
-    header: 'Zip',
     accessorKey: 'zip',
+    header: 'Zip',
   },
   {
-    header: 'Email Address',
     accessorKey: 'email',
+    header: 'Email Address',
   },
   {
-    header: 'Phone Number',
     accessorKey: 'phoneNumber',
+    header: 'Phone Number',
   },
 ];
 
 const data = [...Array(100)].map(() => ({
+  address: faker.location.streetAddress(),
+  email: faker.internet.email(),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  address: faker.location.streetAddress(),
+  phoneNumber: faker.phone.number(),
   state: faker.location.state(),
   zip: faker.location.zipCode(),
-  email: faker.internet.email(),
-  phoneNumber: faker.phone.number(),
 }));
 
 export const ColumnHidingEnabledDefault = () => (
@@ -61,8 +61,8 @@ export const ColumnHidingDisabledButWithOrdering = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableHiding={false}
     enableColumnOrdering
+    enableHiding={false}
   />
 );
 
@@ -70,8 +70,8 @@ export const ColumnHidingDisabledButWithPinning = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableHiding={false}
     enableColumnPinning
+    enableHiding={false}
   />
 );
 
@@ -79,34 +79,34 @@ export const ColumnHidingDisabledPerColumn = () => (
   <MaterialReactTable
     columns={[
       {
-        header: 'First Name',
         accessorKey: 'firstName',
         enableHiding: false,
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
         enableHiding: false,
+        header: 'Last Name',
       },
       {
-        header: 'Address',
         accessorKey: 'address',
+        header: 'Address',
       },
       {
-        header: 'State',
         accessorKey: 'state',
+        header: 'State',
       },
       {
-        header: 'Zip',
         accessorKey: 'zip',
+        header: 'Zip',
       },
       {
-        header: 'Email Address',
         accessorKey: 'email',
+        header: 'Email Address',
       },
       {
-        header: 'Phone Number',
         accessorKey: 'phoneNumber',
+        header: 'Phone Number',
       },
     ]}
     data={data}
@@ -117,50 +117,50 @@ export const ColumnHidingWithHeaderGroups = () => (
   <MaterialReactTable
     columns={[
       {
+        columns: [
+          {
+            accessorKey: 'firstName',
+            header: 'First Name',
+          },
+          {
+            accessorKey: 'lastName',
+            header: 'Last Name',
+          },
+        ],
         header: 'Name',
         id: 'name',
-        columns: [
-          {
-            header: 'First Name',
-            accessorKey: 'firstName',
-          },
-          {
-            header: 'Last Name',
-            accessorKey: 'lastName',
-          },
-        ],
       },
       {
+        columns: [
+          {
+            accessorKey: 'address',
+            header: 'Address',
+          },
+          {
+            accessorKey: 'state',
+            header: 'State',
+          },
+          {
+            accessorKey: 'zip',
+            header: 'Zip',
+          },
+        ],
         header: 'Mailing Info',
         id: 'mailingInfo',
-        columns: [
-          {
-            header: 'Address',
-            accessorKey: 'address',
-          },
-          {
-            header: 'State',
-            accessorKey: 'state',
-          },
-          {
-            header: 'Zip',
-            accessorKey: 'zip',
-          },
-        ],
       },
       {
-        header: 'Contact Info',
-        id: 'contactInfo',
         columns: [
           {
-            header: 'Email Address',
             accessorKey: 'email',
+            header: 'Email Address',
           },
           {
-            header: 'Phone Number',
             accessorKey: 'phoneNumber',
+            header: 'Phone Number',
           },
         ],
+        header: 'Contact Info',
+        id: 'contactInfo',
       },
     ]}
     data={data}

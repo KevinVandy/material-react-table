@@ -1,8 +1,8 @@
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Tooltip from '@mui/material/Tooltip';
-import { type MRT_Column, type MRT_TableInstance } from '../types';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { type MRT_Column, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
   column: MRT_Column<TData>;
@@ -47,16 +47,12 @@ export const MRT_FilterCheckbox = <TData extends Record<string, any>>({
         control={
           <Checkbox
             checked={column.getFilterValue() === 'true'}
-            indeterminate={column.getFilterValue() === undefined}
             color={
               column.getFilterValue() === undefined ? 'default' : 'primary'
             }
+            indeterminate={column.getFilterValue() === undefined}
             size={density === 'compact' ? 'small' : 'medium'}
             {...checkboxProps}
-            onClick={(e) => {
-              e.stopPropagation();
-              checkboxProps?.onClick?.(e);
-            }}
             onChange={(e, checked) => {
               column.setFilterValue(
                 column.getFilterValue() === undefined
@@ -67,6 +63,10 @@ export const MRT_FilterCheckbox = <TData extends Record<string, any>>({
               );
               checkboxProps?.onChange?.(e, checked);
             }}
+            onClick={(e) => {
+              e.stopPropagation();
+              checkboxProps?.onClick?.(e);
+            }}
             sx={(theme) => ({
               height: '2.5rem',
               width: '2.5rem',
@@ -76,7 +76,7 @@ export const MRT_FilterCheckbox = <TData extends Record<string, any>>({
         }
         disableTypography
         label={checkboxProps.title ?? filterLabel}
-        sx={{ color: 'text.secondary', mt: '-4px', fontWeight: 'normal' }}
+        sx={{ color: 'text.secondary', fontWeight: 'normal', mt: '-4px' }}
         title={undefined}
       />
     </Tooltip>

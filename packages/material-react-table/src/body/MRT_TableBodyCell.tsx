@@ -1,26 +1,26 @@
 import {
-  memo,
   type DragEvent,
   type MouseEvent,
   type RefObject,
+  memo,
   useEffect,
   useMemo,
   useState,
 } from 'react';
+import { type VirtualItem } from '@tanstack/react-virtual';
 import Skeleton from '@mui/material/Skeleton';
 import TableCell from '@mui/material/TableCell';
 import { useTheme } from '@mui/material/styles';
-import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
-import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
-import { MRT_TableBodyRowGrabHandle } from './MRT_TableBodyRowGrabHandle';
 import { MRT_TableBodyCellValue } from './MRT_TableBodyCellValue';
+import { MRT_TableBodyRowGrabHandle } from './MRT_TableBodyRowGrabHandle';
+import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 import {
   getCommonCellStyles,
   getIsFirstColumn,
   getIsLastColumn,
   parseFromValuesOrFunc,
 } from '../column.utils';
-import { type VirtualItem } from '@tanstack/react-virtual';
+import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import { type MRT_Cell, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -54,8 +54,8 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
       enableGrouping,
       enableRowNumbers,
       layoutMode,
-      muiTableBodyCellProps,
       muiSkeletonProps,
+      muiTableBodyCellProps,
       rowNumberMode,
     },
     refs: { editInputRefs },
@@ -64,13 +64,13 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
   } = table;
   const {
     creatingRow,
+    density,
     draggingColumn,
     draggingRow,
     editingCell,
     editingRow,
     hoveredColumn,
     hoveredRow,
-    density,
     isLoading,
     showSkeletons,
   } = getState();
@@ -129,6 +129,10 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
 
     return borderStyle
       ? {
+          borderBottom:
+            isDraggingRow || isHoveredRow || isLastRow
+              ? borderStyle
+              : undefined,
           borderLeft:
             isDraggingColumn ||
             isHoveredColumn ||
@@ -139,10 +143,6 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
             isDraggingColumn ||
             isHoveredColumn ||
             ((isDraggingRow || isHoveredRow) && isLastColumn)
-              ? borderStyle
-              : undefined,
-          borderBottom:
-            isDraggingRow || isHoveredRow || isLastRow
               ? borderStyle
               : undefined,
           borderTop: isDraggingRow || isHoveredRow ? borderStyle : undefined,
@@ -156,7 +156,7 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
 
   const isEditing =
     isEditable &&
-    !['modal', 'custom'].includes(editDisplayMode as string) &&
+    !['custom', 'modal'].includes(editDisplayMode as string) &&
     (editDisplayMode === 'table' ||
       editingRow?.id === row.id ||
       editingCell?.id === cell.id) &&
@@ -200,9 +200,16 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
         }
       }}
       {...tableCellProps}
-      onDragEnter={handleDragEnter}
       onDoubleClick={handleDoubleClick}
+      onDragEnter={handleDragEnter}
       sx={(theme) => ({
+        '&:hover': {
+          outline: ['cell', 'table'].includes(editDisplayMode ?? '')
+            ? `1px solid ${theme.palette.text.secondary}`
+            : undefined,
+          outlineOffset: '-1px',
+          textOverflow: 'clip',
+        },
         alignItems: layoutMode === 'grid' ? 'center' : undefined,
         cursor:
           isEditable && editDisplayMode === 'cell' ? 'pointer' : 'inherit',
@@ -237,18 +244,11 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
           row.getIsPinned() || density === 'compact' ? 'nowrap' : 'normal',
         zIndex:
           draggingColumn?.id === column.id ? 2 : column.getIsPinned() ? 1 : 0,
-        '&:hover': {
-          outline: ['table', 'cell'].includes(editDisplayMode ?? '')
-            ? `1px solid ${theme.palette.text.secondary}`
-            : undefined,
-          outlineOffset: '-1px',
-          textOverflow: 'clip',
-        },
         ...getCommonCellStyles({
           column,
           table,
-          theme,
           tableCellProps,
+          theme,
         }),
         ...draggingBorders,
       })}
@@ -275,8 +275,8 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
             !row.getIsGrouped()) ? (
           columnDef.Cell?.({
             cell,
-            renderedCellValue: cell.renderValue() as any,
             column,
+            renderedCellValue: cell.renderValue() as any,
             row,
             table,
           })

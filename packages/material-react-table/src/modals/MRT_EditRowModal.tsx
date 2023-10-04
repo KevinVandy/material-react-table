@@ -4,9 +4,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Stack from '@mui/material/Stack';
 import { MRT_EditActionButtons } from '../buttons/MRT_EditActionButtons';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
-import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   open: boolean;
@@ -21,15 +21,15 @@ export const MRT_EditRowModal = <TData extends Record<string, any>>({
     getState,
     options: {
       localization,
-      onEditingRowCancel,
-      onCreatingRowCancel,
-      renderEditRowModalContent,
-      renderCreateRowModalContent,
       muiCreateRowModalProps,
       muiEditRowModalProps,
+      onCreatingRowCancel,
+      onEditingRowCancel,
+      renderCreateRowModalContent,
+      renderEditRowModalContent,
     },
-    setEditingRow,
     setCreatingRow,
+    setEditingRow,
   } = table;
   const { creatingRow, editingRow } = getState();
   const row = (creatingRow ?? editingRow) as MRT_Row<TData>;
@@ -71,14 +71,14 @@ export const MRT_EditRowModal = <TData extends Record<string, any>>({
     >
       {((creatingRow &&
         renderCreateRowModalContent?.({
+          internalEditComponents,
           row,
           table,
-          internalEditComponents,
         })) ||
         renderEditRowModalContent?.({
+          internalEditComponents,
           row,
           table,
-          internalEditComponents,
         })) ?? (
         <>
           <DialogTitle sx={{ textAlign: 'center' }}>

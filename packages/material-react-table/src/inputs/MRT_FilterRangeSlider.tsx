@@ -1,9 +1,9 @@
+import { useEffect, useRef, useState } from 'react';
+import FormHelperText from '@mui/material/FormHelperText';
 import Slider from '@mui/material/Slider';
 import Stack from '@mui/material/Stack';
-import FormHelperText from '@mui/material/FormHelperText';
-import { type MRT_TableInstance, type MRT_Header } from '../types';
-import { useEffect, useRef, useState } from 'react';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { type MRT_Header, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
   header: MRT_Header<TData>;
@@ -15,7 +15,7 @@ export const MRT_FilterRangeSlider = <TData extends Record<string, any>>({
   table,
 }: Props<TData>) => {
   const {
-    options: { localization, muiFilterSliderProps, enableColumnFilterModes },
+    options: { enableColumnFilterModes, localization, muiFilterSliderProps },
     refs: { filterInputRefs },
   } = table;
   const { column } = header;
@@ -62,8 +62,8 @@ export const MRT_FilterRangeSlider = <TData extends Record<string, any>>({
     <Stack>
       <Slider
         disableSwap
-        min={min}
         max={max}
+        min={min}
         onChange={(_event, values) => {
           setFilterValues(values as [number, number]);
         }}
@@ -105,9 +105,9 @@ export const MRT_FilterRangeSlider = <TData extends Record<string, any>>({
       {showChangeModeButton ? (
         <FormHelperText
           sx={{
-            m: '-3px -6px',
             fontSize: '0.75rem',
             lineHeight: '0.8rem',
+            m: '-3px -6px',
             whiteSpace: 'nowrap',
           }}
         >

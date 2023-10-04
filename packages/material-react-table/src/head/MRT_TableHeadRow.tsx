@@ -1,13 +1,13 @@
+import { type VirtualItem } from '@tanstack/react-virtual';
 import TableRow from '@mui/material/TableRow';
 import { alpha, lighten } from '@mui/material/styles';
 import { MRT_TableHeadCell } from './MRT_TableHeadCell';
-import { type VirtualItem } from '@tanstack/react-virtual';
+import { parseFromValuesOrFunc } from '../column.utils';
 import {
   type MRT_Header,
   type MRT_HeaderGroup,
   type MRT_TableInstance,
 } from '../types';
-import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   headerGroup: MRT_HeaderGroup<TData>;

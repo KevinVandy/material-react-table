@@ -7,8 +7,8 @@ import {
   commonListItemStyles,
   commonMenuItemStyles,
 } from './MRT_ColumnActionMenu';
-import { type MRT_Row, type MRT_TableInstance } from '../types';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { type MRT_Row, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
   anchorEl: HTMLElement | null;
@@ -28,8 +28,8 @@ export const MRT_RowActionMenu = <TData extends Record<string, any>>({
   const {
     getState,
     options: {
-      icons: { EditIcon },
       enableEditing,
+      icons: { EditIcon },
       localization,
       renderRowActionMenuItems,
     },
@@ -38,13 +38,13 @@ export const MRT_RowActionMenu = <TData extends Record<string, any>>({
 
   return (
     <Menu
-      anchorEl={anchorEl}
-      open={!!anchorEl}
-      onClick={(event) => event.stopPropagation()}
-      onClose={() => setAnchorEl(null)}
       MenuListProps={{
         dense: density === 'compact',
       }}
+      anchorEl={anchorEl}
+      onClick={(event) => event.stopPropagation()}
+      onClose={() => setAnchorEl(null)}
+      open={!!anchorEl}
     >
       {parseFromValuesOrFunc(enableEditing, row) && (
         <MenuItem onClick={handleEdit} sx={commonMenuItemStyles}>
@@ -57,9 +57,9 @@ export const MRT_RowActionMenu = <TData extends Record<string, any>>({
         </MenuItem>
       )}
       {renderRowActionMenuItems?.({
+        closeMenu: () => setAnchorEl(null),
         row,
         table,
-        closeMenu: () => setAnchorEl(null),
       })}
     </Menu>
   );

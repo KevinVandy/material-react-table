@@ -1,9 +1,9 @@
 import { type RefObject } from 'react';
+import { type VirtualItem } from '@tanstack/react-virtual';
 import Collapse from '@mui/material/Collapse';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { lighten } from '@mui/material/styles';
-import { type VirtualItem } from '@tanstack/react-virtual';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
 
@@ -23,12 +23,12 @@ export const MRT_TableDetailPanel = <TData extends Record<string, any>>({
   virtualRow,
 }: Props<TData>) => {
   const {
-    getVisibleLeafColumns,
     getState,
+    getVisibleLeafColumns,
     options: {
       layoutMode,
-      muiTableBodyRowProps,
       muiDetailPanelProps,
+      muiTableBodyRowProps,
       renderDetailPanel,
     },
   } = table;

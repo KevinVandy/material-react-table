@@ -2,6 +2,7 @@ import { type DragEvent, useMemo } from 'react';
 import Box from '@mui/material/Box';
 import TableCell from '@mui/material/TableCell';
 import { useTheme } from '@mui/material/styles';
+import { type Theme } from '@mui/material/styles';
 import { MRT_TableHeadCellColumnActionsButton } from './MRT_TableHeadCellColumnActionsButton';
 import { MRT_TableHeadCellFilterContainer } from './MRT_TableHeadCellFilterContainer';
 import { MRT_TableHeadCellFilterLabel } from './MRT_TableHeadCellFilterLabel';
@@ -9,7 +10,6 @@ import { MRT_TableHeadCellGrabHandle } from './MRT_TableHeadCellGrabHandle';
 import { MRT_TableHeadCellResizeHandle } from './MRT_TableHeadCellResizeHandle';
 import { MRT_TableHeadCellSortLabel } from './MRT_TableHeadCellSortLabel';
 import { getCommonCellStyles } from '../column.utils';
-import { type Theme } from '@mui/material/styles';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
 
@@ -205,14 +205,14 @@ export const MRT_TableHeadCell = <TData extends Record<string, any>>({
             <Box
               className="Mui-TableHeadCell-Content-Wrapper"
               sx={{
+                '&:hover': {
+                  textOverflow: 'clip',
+                },
                 minWidth: `${Math.min(columnDef.header?.length ?? 0, 5)}ch`,
                 overflow: columnDefType === 'data' ? 'hidden' : undefined,
                 textOverflow: 'ellipsis',
                 whiteSpace:
                   (columnDef.header?.length ?? 0) < 20 ? 'nowrap' : 'normal',
-                '&:hover': {
-                  textOverflow: 'clip',
-                },
               }}
               title={columnDefType === 'data' ? columnDef.header : undefined}
             >

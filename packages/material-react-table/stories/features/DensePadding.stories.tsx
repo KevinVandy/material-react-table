@@ -1,6 +1,6 @@
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Features/Dense Padding Examples',
@@ -10,43 +10,43 @@ export default meta;
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
-    header: 'First Name',
     accessorKey: 'firstName',
+    header: 'First Name',
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
+    header: 'Last Name',
   },
   {
-    header: 'Address',
     accessorKey: 'address',
+    header: 'Address',
   },
   {
-    header: 'City',
     accessorKey: 'city',
+    header: 'City',
   },
   {
-    header: 'State',
     accessorKey: 'state',
+    header: 'State',
   },
   {
-    header: 'Zip Code',
     accessorKey: 'zipCode',
+    header: 'Zip Code',
   },
   {
-    header: 'Phone Number',
     accessorKey: 'phoneNumber',
+    header: 'Phone Number',
   },
 ];
 
 const data = [...Array(25)].map(() => ({
-  firstName: faker.person.firstName(),
-  lastName: faker.person.lastName(),
   address: faker.location.streetAddress(),
   city: faker.location.city(),
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
+  phoneNumber: faker.phone.number(),
   state: faker.location.state(),
   zipCode: faker.location.zipCode(),
-  phoneNumber: faker.phone.number(),
 }));
 
 export const DensePaddingToggleEnabledDefault = () => (
@@ -66,8 +66,8 @@ export const DefaultToDensePadding = () => (
     columns={columns}
     data={data}
     initialState={{
-      pagination: { pageSize: 25, pageIndex: 0 },
       density: 'compact',
+      pagination: { pageIndex: 0, pageSize: 25 },
     }}
   />
 );

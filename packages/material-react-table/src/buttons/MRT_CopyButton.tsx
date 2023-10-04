@@ -1,8 +1,8 @@
 import { type MouseEvent, type ReactNode, useState } from 'react';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
-import { type MRT_Cell, type MRT_TableInstance } from '../types';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { type MRT_Cell, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
   cell: MRT_Cell<TData>;

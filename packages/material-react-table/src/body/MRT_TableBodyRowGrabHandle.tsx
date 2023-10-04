@@ -1,7 +1,7 @@
 import { type DragEvent, type RefObject } from 'react';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
-import { type MRT_Row, type MRT_TableInstance } from '../types';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { type MRT_Row, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
   row: MRT_Row<TData>;
@@ -38,8 +38,8 @@ export const MRT_TableBodyRowGrabHandle = <TData extends Record<string, any>>({
   return (
     <MRT_GrabHandleButton
       iconButtonProps={iconButtonProps}
-      onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
+      onDragStart={handleDragStart}
       table={table}
     />
   );

@@ -1,8 +1,8 @@
 import { type MouseEvent, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
 import { type MRT_Header, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -26,7 +26,7 @@ export const MRT_TableHeadCellColumnActionsButton = <
   const { column } = header;
   const { columnDef } = column;
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation();
@@ -60,15 +60,15 @@ export const MRT_TableHeadCellColumnActionsButton = <
           size="small"
           {...iconButtonProps}
           sx={(theme) => ({
+            '&:hover': {
+              opacity: 1,
+            },
             height: '2rem',
             m: '-8px -4px',
             opacity: 0.5,
             transform: 'scale(0.85) translateX(-4px)',
             transition: 'opacity 150ms',
             width: '2rem',
-            '&:hover': {
-              opacity: 1,
-            },
             ...(parseFromValuesOrFunc(iconButtonProps?.sx, theme) as any),
           })}
           title={undefined}

@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { type Meta } from '@storybook/react';
+import MenuItem from '@mui/material/MenuItem';
 import {
-  MaterialReactTable,
   type MRT_Cell,
   type MRT_TableOptions,
+  MaterialReactTable,
 } from '../../src';
 import { faker } from '@faker-js/faker';
-import MenuItem from '@mui/material/MenuItem';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Features/Editing Examples',
@@ -72,19 +72,19 @@ const usStates = [
 ];
 
 type Person = {
+  address: string;
   firstName: string;
   lastName: string;
-  address: string;
-  state: string;
   phoneNumber: string;
+  state: string;
 };
 
 const data: Person[] = [...Array(100)].map(() => ({
+  address: faker.location.streetAddress(),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  address: faker.location.streetAddress(),
-  state: faker.location.state(),
   phoneNumber: faker.phone.number(),
+  state: faker.location.state(),
 }));
 
 export const EditingEnabledEditModeModalDefault = () => {
@@ -104,25 +104,25 @@ export const EditingEnabledEditModeModalDefault = () => {
     <MaterialReactTable
       columns={[
         {
-          header: 'First Name',
           accessorKey: 'firstName',
+          header: 'First Name',
         },
         {
-          header: 'Last Name',
           accessorKey: 'lastName',
+          header: 'Last Name',
         },
         {
-          header: 'Address',
           accessorKey: 'address',
+          header: 'Address',
         },
         {
-          header: 'State',
           accessorKey: 'state',
+          header: 'State',
         },
         {
-          header: 'Phone Number',
           accessorKey: 'phoneNumber',
           enableEditing: false,
+          header: 'Phone Number',
         },
       ]}
       data={tableData}
@@ -149,30 +149,30 @@ export const EditingEnabledEditModeRow = () => {
     <MaterialReactTable
       columns={[
         {
-          header: 'First Name',
           accessorKey: 'firstName',
+          header: 'First Name',
         },
         {
-          header: 'Last Name',
           accessorKey: 'lastName',
+          header: 'Last Name',
         },
         {
-          header: 'Address',
           accessorKey: 'address',
+          header: 'Address',
         },
         {
-          header: 'State',
           accessorKey: 'state',
+          header: 'State',
         },
         {
-          header: 'Phone Number',
           accessorKey: 'phoneNumber',
           enableEditing: false,
+          header: 'Phone Number',
         },
       ]}
       data={tableData}
-      enableEditing
       editDisplayMode="row"
+      enableEditing
       onEditingRowSave={handleSaveRow}
     />
   );
@@ -191,25 +191,25 @@ export const EditingEnabledEditModeCell = () => {
     <MaterialReactTable
       columns={[
         {
-          header: 'First Name',
           accessorKey: 'firstName',
+          header: 'First Name',
         },
         {
-          header: 'Last Name',
           accessorKey: 'lastName',
+          header: 'Last Name',
         },
         {
-          header: 'Address',
           accessorKey: 'address',
+          header: 'Address',
         },
         {
-          header: 'State',
           accessorKey: 'state',
+          header: 'State',
         },
         {
-          header: 'Phone Number',
           accessorKey: 'phoneNumber',
           enableEditing: false,
+          header: 'Phone Number',
         },
       ]}
       data={tableData}
@@ -238,24 +238,24 @@ export const EditingEnabledEditModeTable = () => {
     <MaterialReactTable
       columns={[
         {
-          header: 'First Name',
           accessorKey: 'firstName',
+          header: 'First Name',
         },
         {
-          header: 'Last Name',
           accessorKey: 'lastName',
+          header: 'Last Name',
         },
         {
-          header: 'Address',
           accessorKey: 'address',
+          header: 'Address',
         },
         {
-          header: 'State',
           accessorKey: 'state',
+          header: 'State',
         },
         {
-          header: 'Phone Number',
           accessorKey: 'phoneNumber',
+          header: 'Phone Number',
         },
       ]}
       data={tableData}
@@ -285,31 +285,31 @@ export const EditSelectVariant = () => {
     <MaterialReactTable
       columns={[
         {
-          header: 'First Name',
           accessorKey: 'firstName',
+          header: 'First Name',
         },
         {
-          header: 'Last Name',
           accessorKey: 'lastName',
+          header: 'Last Name',
         },
         {
-          header: 'Address',
           accessorKey: 'address',
+          header: 'Address',
         },
         {
-          header: 'State',
           accessorKey: 'state',
-          editVariant: 'select',
           editSelectOptions: usStates,
+          editVariant: 'select',
+          header: 'State',
         },
         {
-          header: 'Phone Number',
           accessorKey: 'phoneNumber',
+          header: 'Phone Number',
         },
       ]}
       data={tableData}
-      enableRowActions
       enableEditing
+      enableRowActions
       muiEditTextFieldProps={{ variant: 'outlined' }}
       onEditingRowSave={handleSaveRow}
     />
@@ -331,77 +331,77 @@ export const EditSelectVariantAlternate = () => {
     <MaterialReactTable
       columns={[
         {
-          header: 'First Name',
           accessorKey: 'firstName',
+          header: 'First Name',
         },
         {
-          header: 'Last Name',
           accessorKey: 'lastName',
+          header: 'Last Name',
         },
         {
-          header: 'Address',
           accessorKey: 'address',
+          header: 'Address',
         },
         {
-          header: 'State',
           accessorKey: 'state',
-          editVariant: 'select',
           editSelectOptions: [
-            { value: 'Alabama', text: 'AL' },
-            { value: 'Alaska', text: 'AK' },
-            { value: 'American Samoa', text: 'AS' },
-            { value: 'Arizona', text: 'AZ' },
-            { value: 'Arkansas', text: 'AR' },
-            { value: 'California', text: 'CA' },
-            { value: 'Colorado', text: 'CO' },
-            { value: 'Connecticut', text: 'CT' },
-            { value: 'Delaware', text: 'DE' },
-            { value: 'Florida', text: 'FL' },
-            { value: 'Georgia', text: 'GA' },
-            { value: 'Guam', text: 'GU' },
-            { value: 'Hawaii', text: 'HI' },
-            { value: 'Idaho', text: 'ID' },
-            { value: 'Illinois', text: 'IL' },
-            { value: 'Indiana', text: 'IN' },
-            { value: 'Iowa', text: 'IA' },
-            { value: 'Kansas', text: 'KS' },
-            { value: 'Kentucky', text: 'KY' },
-            { value: 'Louisiana', text: 'LA' },
-            { value: 'Maine', text: 'ME' },
-            { value: 'Maryland', text: 'MD' },
-            { value: 'Massachusetts', text: 'MA' },
-            { value: 'Michigan', text: 'MI' },
-            { value: 'Minnesota', text: 'MN' },
-            { value: 'Mississippi', text: 'MS' },
-            { value: 'Missouri', text: 'MO' },
-            { value: 'Montana', text: 'MT' },
-            { value: 'Nebraska', text: 'NE' },
-            { value: 'Nevada', text: 'NV' },
-            { value: 'New Hampshire', text: 'NH' },
-            { value: 'New Jersey', text: 'NJ' },
-            { value: 'New Mexico', text: 'NM' },
-            { value: 'New York', text: 'NY' },
-            { value: 'North Carolina', text: 'NC' },
-            { value: 'North Dakota', text: 'ND' },
-            { value: 'Northern Mariana Islands', text: 'MP' },
-            { value: 'Ohio', text: 'OH' },
-            { value: 'Oklahoma', text: 'OK' },
-            { value: 'Oregon', text: 'OR' },
-            { value: 'Pennsylvania', text: 'PA' },
-            { value: 'Puerto Rico', text: 'PR' },
-            { value: 'Rhode Island', text: 'RI' },
-            { value: 'South Carolina', text: 'SC' },
+            { text: 'AL', value: 'Alabama' },
+            { text: 'AK', value: 'Alaska' },
+            { text: 'AS', value: 'American Samoa' },
+            { text: 'AZ', value: 'Arizona' },
+            { text: 'AR', value: 'Arkansas' },
+            { text: 'CA', value: 'California' },
+            { text: 'CO', value: 'Colorado' },
+            { text: 'CT', value: 'Connecticut' },
+            { text: 'DE', value: 'Delaware' },
+            { text: 'FL', value: 'Florida' },
+            { text: 'GA', value: 'Georgia' },
+            { text: 'GU', value: 'Guam' },
+            { text: 'HI', value: 'Hawaii' },
+            { text: 'ID', value: 'Idaho' },
+            { text: 'IL', value: 'Illinois' },
+            { text: 'IN', value: 'Indiana' },
+            { text: 'IA', value: 'Iowa' },
+            { text: 'KS', value: 'Kansas' },
+            { text: 'KY', value: 'Kentucky' },
+            { text: 'LA', value: 'Louisiana' },
+            { text: 'ME', value: 'Maine' },
+            { text: 'MD', value: 'Maryland' },
+            { text: 'MA', value: 'Massachusetts' },
+            { text: 'MI', value: 'Michigan' },
+            { text: 'MN', value: 'Minnesota' },
+            { text: 'MS', value: 'Mississippi' },
+            { text: 'MO', value: 'Missouri' },
+            { text: 'MT', value: 'Montana' },
+            { text: 'NE', value: 'Nebraska' },
+            { text: 'NV', value: 'Nevada' },
+            { text: 'NH', value: 'New Hampshire' },
+            { text: 'NJ', value: 'New Jersey' },
+            { text: 'NM', value: 'New Mexico' },
+            { text: 'NY', value: 'New York' },
+            { text: 'NC', value: 'North Carolina' },
+            { text: 'ND', value: 'North Dakota' },
+            { text: 'MP', value: 'Northern Mariana Islands' },
+            { text: 'OH', value: 'Ohio' },
+            { text: 'OK', value: 'Oklahoma' },
+            { text: 'OR', value: 'Oregon' },
+            { text: 'PA', value: 'Pennsylvania' },
+            { text: 'PR', value: 'Puerto Rico' },
+            { text: 'RI', value: 'Rhode Island' },
+            { text: 'SC', value: 'South Carolina' },
           ],
+          editVariant: 'select',
+          header: 'State',
         },
         {
-          header: 'Phone Number',
           accessorKey: 'phoneNumber',
+          header: 'Phone Number',
         },
       ]}
       data={tableData}
-      enableRowActions
-      enableEditing
       editDisplayMode="row"
+      enableEditing
+      enableRowActions
       muiEditTextFieldProps={{ variant: 'outlined' }}
       onEditingRowSave={handleSaveRow}
     />
@@ -480,20 +480,20 @@ export const EditingCustomizeInput = () => {
     <MaterialReactTable
       columns={[
         {
-          header: 'First Name',
           accessorKey: 'firstName',
+          header: 'First Name',
         },
         {
-          header: 'Last Name',
           accessorKey: 'lastName',
+          header: 'Last Name',
         },
         {
-          header: 'Address',
           accessorKey: 'address',
+          header: 'Address',
         },
         {
-          header: 'State',
           accessorKey: 'state',
+          header: 'State',
           muiEditTextFieldProps: () => ({
             children: usStates.map((state) => (
               <MenuItem key={state} value={state}>
@@ -504,13 +504,13 @@ export const EditingCustomizeInput = () => {
           }),
         },
         {
-          header: 'Phone Number',
           accessorKey: 'phoneNumber',
+          header: 'Phone Number',
         },
       ]}
       data={tableData}
-      enableRowActions
       enableEditing
+      enableRowActions
       muiEditTextFieldProps={{ variant: 'outlined' }}
       onEditingRowSave={handleSaveRow}
     />
@@ -612,29 +612,29 @@ export const EditingEnabledAsync = () => {
     <MaterialReactTable
       columns={[
         {
-          header: 'First Name',
           accessorKey: 'firstName',
+          header: 'First Name',
         },
         {
-          header: 'Last Name',
           accessorKey: 'lastName',
+          header: 'Last Name',
         },
         {
-          header: 'Address',
           accessorKey: 'address',
+          header: 'Address',
         },
         {
-          header: 'State',
           accessorKey: 'state',
+          header: 'State',
         },
         {
-          header: 'Phone Number',
           accessorKey: 'phoneNumber',
+          header: 'Phone Number',
         },
       ]}
       data={tableData}
-      enableRowActions
       enableEditing
+      enableRowActions
       onEditingRowSave={handleSaveRow}
       state={{
         showProgressBars: isSaving,
@@ -644,13 +644,13 @@ export const EditingEnabledAsync = () => {
 };
 
 const nestedData = [...Array(10)].map(() => ({
+  address: faker.location.streetAddress(),
   name: {
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
   },
-  address: faker.location.streetAddress(),
-  state: faker.location.state(),
   phoneNumber: faker.phone.number(),
+  state: faker.location.state(),
 }));
 
 export const EditingNestedData = () => {
@@ -660,39 +660,39 @@ export const EditingNestedData = () => {
     <MaterialReactTable
       columns={[
         {
-          header: 'First Name',
           accessorFn: (row) => row.name.firstName,
+          header: 'First Name',
           id: 'firstName',
         },
         {
-          header: 'Last Name',
           accessorKey: 'name.lastName',
+          header: 'Last Name',
         },
         {
-          header: 'Address',
           accessorKey: 'address',
+          header: 'Address',
         },
         {
-          header: 'State',
           accessorKey: 'state',
+          header: 'State',
         },
         {
-          header: 'Phone Number',
           accessorKey: 'phoneNumber',
           enableEditing: false,
+          header: 'Phone Number',
         },
       ]}
       data={tableData}
       enableEditing
       onEditingRowSave={({ row, values }) => {
         tableData[row.index] = {
+          address: row._valuesCache.address,
           name: {
             firstName: values.firstName,
             lastName: values['name.lastName'],
           },
-          address: row._valuesCache.address,
-          state: row._valuesCache.state,
           phoneNumber: row._valuesCache.phoneNumber,
+          state: row._valuesCache.state,
         };
         setTableData([...tableData]);
       }}
@@ -717,31 +717,31 @@ export const EditingEnabledEditModeTableWithGroupedRows = () => {
     <MaterialReactTable
       columns={[
         {
-          header: 'First Name',
           accessorKey: 'firstName',
+          header: 'First Name',
         },
         {
-          header: 'Last Name',
           accessorKey: 'lastName',
+          header: 'Last Name',
         },
         {
-          header: 'Address',
           accessorKey: 'address',
+          header: 'Address',
         },
         {
-          header: 'State',
           accessorKey: 'state',
+          header: 'State',
         },
         {
-          header: 'Phone Number',
           accessorKey: 'phoneNumber',
           enableEditing: false,
+          header: 'Phone Number',
         },
       ]}
       data={tableData}
+      editDisplayMode="table"
       enableEditing
       enableGrouping
-      editDisplayMode="table"
       onEditingRowSave={handleSaveRow}
     />
   );
@@ -764,30 +764,30 @@ export const EnableEditingConditionally = () => {
     <MaterialReactTable
       columns={[
         {
-          header: 'First Name',
           accessorKey: 'firstName',
+          header: 'First Name',
         },
         {
-          header: 'Last Name',
           accessorKey: 'lastName',
+          header: 'Last Name',
         },
         {
-          header: 'Address',
           accessorKey: 'address',
+          header: 'Address',
         },
         {
-          header: 'State',
           accessorKey: 'state',
+          header: 'State',
         },
         {
-          header: 'Phone Number',
           accessorKey: 'phoneNumber',
           enableEditing: (row) => row.original.state.includes('N'),
+          header: 'Phone Number',
         },
       ]}
       data={tableData}
-      enableEditing={(row) => row.index % 2 === 0}
       editDisplayMode="row"
+      enableEditing={(row) => row.index % 2 === 0}
       onEditingRowSave={handleSaveRow}
     />
   );
@@ -810,30 +810,30 @@ export const EnableEditingConditionallyCell = () => {
     <MaterialReactTable
       columns={[
         {
-          header: 'First Name',
           accessorKey: 'firstName',
+          header: 'First Name',
         },
         {
-          header: 'Last Name',
           accessorKey: 'lastName',
+          header: 'Last Name',
         },
         {
-          header: 'Address',
           accessorKey: 'address',
+          header: 'Address',
         },
         {
-          header: 'State',
           accessorKey: 'state',
+          header: 'State',
         },
         {
-          header: 'Phone Number',
           accessorKey: 'phoneNumber',
           enableEditing: (row) => row.original.state.includes('N'),
+          header: 'Phone Number',
         },
       ]}
       data={tableData}
-      enableEditing={(row) => row.index % 2 === 0}
       editDisplayMode="cell"
+      enableEditing={(row) => row.index % 2 === 0}
       onEditingRowSave={handleSaveRow}
     />
   );
@@ -856,30 +856,30 @@ export const EnableEditingConditionallyTable = () => {
     <MaterialReactTable
       columns={[
         {
-          header: 'First Name',
           accessorKey: 'firstName',
+          header: 'First Name',
         },
         {
-          header: 'Last Name',
           accessorKey: 'lastName',
+          header: 'Last Name',
         },
         {
-          header: 'Address',
           accessorKey: 'address',
+          header: 'Address',
         },
         {
-          header: 'State',
           accessorKey: 'state',
+          header: 'State',
         },
         {
-          header: 'Phone Number',
           accessorKey: 'phoneNumber',
           enableEditing: (row) => row.original.state.includes('N'),
+          header: 'Phone Number',
         },
       ]}
       data={tableData}
-      enableEditing={(row) => row.index % 2 === 0}
       editDisplayMode="table"
+      enableEditing={(row) => row.index % 2 === 0}
       onEditingRowSave={handleSaveRow}
     />
   );

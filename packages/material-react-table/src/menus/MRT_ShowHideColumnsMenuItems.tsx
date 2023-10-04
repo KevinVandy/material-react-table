@@ -28,17 +28,17 @@ export const MRT_ShowHideColumnsMenuItems = <
   TData extends Record<string, any>,
 >({
   allColumns,
+  column,
   hoveredColumn,
   setHoveredColumn,
-  column,
   table,
 }: Props<TData>) => {
   const {
     getState,
     options: {
       enableColumnOrdering,
-      enableHiding,
       enableColumnPinning,
+      enableHiding,
       localization,
     },
     setColumnOrder,
@@ -89,19 +89,19 @@ export const MRT_ShowHideColumnsMenuItems = <
     <>
       <MenuItem
         disableRipple
-        ref={menuItemRef as any}
         onDragEnter={handleDragEnter}
+        ref={menuItemRef as any}
         sx={(theme) => ({
           alignItems: 'center',
           justifyContent: 'flex-start',
           my: 0,
           opacity: isDragging ? 0.5 : 1,
-          outlineOffset: '-2px',
           outline: isDragging
             ? `2px dashed ${theme.palette.divider}`
             : hoveredColumn?.id === column.id
             ? `2px dashed ${theme.palette.primary.main}`
             : 'none',
+          outlineOffset: '-2px',
           pl: `${(column.depth + 0.5) * 2}rem`,
           py: '6px',
         })}
@@ -135,6 +135,7 @@ export const MRT_ShowHideColumnsMenuItems = <
             ))}
           {enableHiding ? (
             <FormControlLabel
+              checked={switchChecked}
               componentsProps={{
                 typography: {
                   sx: {
@@ -143,7 +144,6 @@ export const MRT_ShowHideColumnsMenuItems = <
                   },
                 },
               }}
-              checked={switchChecked}
               control={
                 <Tooltip
                   arrow

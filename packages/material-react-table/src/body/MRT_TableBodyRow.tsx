@@ -1,4 +1,5 @@
-import { type DragEvent, memo, useRef, useMemo } from 'react';
+import { type DragEvent, memo, useMemo, useRef } from 'react';
+import { type VirtualItem, type Virtualizer } from '@tanstack/react-virtual';
 import TableRow from '@mui/material/TableRow';
 import {
   type Theme,
@@ -7,9 +8,8 @@ import {
   lighten,
   useTheme,
 } from '@mui/material/styles';
-import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
+import { MRT_TableBodyCell, Memo_MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
-import { type VirtualItem, type Virtualizer } from '@tanstack/react-virtual';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_Cell, type MRT_Row, type MRT_TableInstance } from '../types';
 
@@ -50,12 +50,12 @@ export const MRT_TableBodyRow = <TData extends Record<string, any>>({
       enableStickyFooter,
       enableStickyHeader,
       layoutMode,
-      rowPinningDisplayMode,
       memoMode,
       muiTableBodyRowProps,
       renderDetailPanel,
+      rowPinningDisplayMode,
     },
-    refs: { tableHeadRef, tableFooterRef },
+    refs: { tableFooterRef, tableHeadRef },
     setHoveredRow,
   } = table;
   const {
@@ -118,20 +118,35 @@ export const MRT_TableBodyRow = <TData extends Record<string, any>>({
       <TableRow
         data-index={virtualRow?.index}
         onDragEnter={handleDragEnter}
-        selected={row.getIsSelected()}
         ref={(node: HTMLTableRowElement) => {
           if (node) {
             rowRef.current = node;
             measureElement?.(node);
           }
         }}
+        selected={row.getIsSelected()}
         {...tableRowProps}
+        style={{
+          transform: virtualRow
+            ? `translateY(${virtualRow?.start}px)`
+            : undefined,
+          ...tableRowProps?.style,
+        }}
         sx={(theme: Theme) => ({
+          '&:hover td': {
+            backgroundColor:
+              tableRowProps?.hover !== false
+                ? row.getIsSelected()
+                  ? `${alpha(theme.palette.primary.main, 0.2)}`
+                  : theme.palette.mode === 'dark'
+                  ? `${lighten(theme.palette.background.default, 0.12)}`
+                  : `${darken(theme.palette.background.default, 0.05)}`
+                : undefined,
+          },
           backgroundColor: `${lighten(
             theme.palette.background.default,
             0.06,
           )} !important`,
-          boxSizing: 'border-box',
           bottom:
             bottomPinnedIndex !== undefined && isPinned
               ? `${
@@ -139,6 +154,7 @@ export const MRT_TableBodyRow = <TData extends Record<string, any>>({
                   (enableStickyFooter ? tableFooterHeight - 1 : 0)
                 }px`
               : undefined,
+          boxSizing: 'border-box',
           display: layoutMode === 'grid' ? 'flex' : 'table-row',
           opacity: isPinned
             ? 0.98
@@ -150,7 +166,13 @@ export const MRT_TableBodyRow = <TData extends Record<string, any>>({
             : rowPinningDisplayMode?.includes('sticky') && isPinned
             ? 'sticky'
             : undefined,
-          transition: virtualRow ? 'none' : 'all 150ms ease-in-out',
+          td: {
+            backgroundColor: row.getIsSelected()
+              ? alpha(theme.palette.primary.main, 0.2)
+              : isPinned
+              ? alpha(theme.palette.primary.main, 0.1)
+              : undefined,
+          },
           top: virtualRow
             ? 0
             : topPinnedIndex !== undefined && isPinned
@@ -159,36 +181,14 @@ export const MRT_TableBodyRow = <TData extends Record<string, any>>({
                 (enableStickyHeader || isFullScreen ? tableHeadHeight - 1 : 0)
               }px`
             : undefined,
+          transition: virtualRow ? 'none' : 'all 150ms ease-in-out',
           width: '100%',
           zIndex:
             rowPinningDisplayMode?.includes('sticky') && isPinned
               ? 1
               : undefined,
-          td: {
-            backgroundColor: row.getIsSelected()
-              ? alpha(theme.palette.primary.main, 0.2)
-              : isPinned
-              ? alpha(theme.palette.primary.main, 0.1)
-              : undefined,
-          },
-          '&:hover td': {
-            backgroundColor:
-              tableRowProps?.hover !== false
-                ? row.getIsSelected()
-                  ? `${alpha(theme.palette.primary.main, 0.2)}`
-                  : theme.palette.mode === 'dark'
-                  ? `${lighten(theme.palette.background.default, 0.12)}`
-                  : `${darken(theme.palette.background.default, 0.05)}`
-                : undefined,
-          },
           ...(sx as any),
         })}
-        style={{
-          transform: virtualRow
-            ? `translateY(${virtualRow?.start}px)`
-            : undefined,
-          ...tableRowProps?.style,
-        }}
       >
         {virtualPaddingLeft ? (
           <td style={{ display: 'flex', width: virtualPaddingLeft }} />

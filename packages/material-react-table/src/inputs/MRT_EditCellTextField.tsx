@@ -4,8 +4,8 @@ import {
   type KeyboardEvent,
   useState,
 } from 'react';
-import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import TextField from '@mui/material/TextField';
 import { type TextFieldProps } from '@mui/material/TextField';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_Cell, type MRT_TableInstance } from '../types';
@@ -23,9 +23,9 @@ export const MRT_EditCellTextField = <TData extends Record<string, any>>({
     getState,
     options: { createDisplayMode, editDisplayMode, muiEditTextFieldProps },
     refs: { editInputRefs },
+    setCreatingRow,
     setEditingCell,
     setEditingRow,
-    setCreatingRow,
   } = table;
   const { column, row } = cell;
   const { columnDef } = column;
@@ -100,7 +100,7 @@ export const MRT_EditCellTextField = <TData extends Record<string, any>>({
         }
       }}
       label={
-        ['modal', 'custom'].includes(
+        ['custom', 'modal'].includes(
           (isCreating ? createDisplayMode : editDisplayMode) as string,
         )
           ? column.columnDef.header
@@ -109,7 +109,7 @@ export const MRT_EditCellTextField = <TData extends Record<string, any>>({
       margin="none"
       name={column.id}
       placeholder={
-        !['modal', 'custom'].includes(
+        !['custom', 'modal'].includes(
           (isCreating ? createDisplayMode : editDisplayMode) as string,
         )
           ? columnDef.header
@@ -119,17 +119,17 @@ export const MRT_EditCellTextField = <TData extends Record<string, any>>({
       value={value}
       variant="standard"
       {...textFieldProps}
+      onBlur={handleBlur}
+      onChange={handleChange}
       onClick={(e) => {
         e.stopPropagation();
         textFieldProps?.onClick?.(e);
       }}
-      onBlur={handleBlur}
-      onChange={handleChange}
       onKeyDown={handleEnterKeyDown}
     >
       {textFieldProps.children ??
         columnDef?.editSelectOptions?.map(
-          (option: string | { text: string; value: string }) => {
+          (option: { text: string; value: string } | string) => {
             let value: string;
             let text: string;
             if (typeof option !== 'object') {
@@ -143,10 +143,10 @@ export const MRT_EditCellTextField = <TData extends Record<string, any>>({
               <MenuItem
                 key={value}
                 sx={{
-                  display: 'flex',
-                  m: 0,
                   alignItems: 'center',
+                  display: 'flex',
                   gap: '0.5rem',
+                  m: 0,
                 }}
                 value={value}
               >

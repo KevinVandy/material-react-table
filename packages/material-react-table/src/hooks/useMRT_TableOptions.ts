@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import { MRT_AggregationFns } from '../aggregationFns';
-import { MRT_FilterFns } from '../filterFns';
-import { MRT_SortingFns } from '../sortingFns';
 import { MRT_DefaultColumn, MRT_DefaultDisplayColumn } from '../column.utils';
-import { MRT_Localization_EN } from '../locales/en';
+import { MRT_FilterFns } from '../filterFns';
 import { MRT_Default_Icons } from '../icons';
+import { MRT_Localization_EN } from '../locales/en';
+import { MRT_SortingFns } from '../sortingFns';
 import { type MRT_DefinedTableOptions, type MRT_TableOptions } from '../types';
 
 export const useMRT_TableOptions: <TData extends Record<string, any>>(

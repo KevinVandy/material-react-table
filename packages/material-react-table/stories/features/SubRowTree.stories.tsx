@@ -1,6 +1,6 @@
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Features/Sub Row Tree Examples',
@@ -10,50 +10,50 @@ export default meta;
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
-    header: 'First Name',
     accessorKey: 'firstName',
+    header: 'First Name',
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
+    header: 'Last Name',
   },
   {
-    header: 'Age',
     accessorKey: 'age',
+    header: 'Age',
   },
   {
-    header: 'Address',
     accessorKey: 'address',
+    header: 'Address',
   },
   {
-    header: 'Phone Number',
     accessorKey: 'phoneNumber',
+    header: 'Phone Number',
   },
 ];
 
 const data = [...Array(5)].map(() => ({
+  address: faker.location.streetAddress(),
+  age: faker.datatype.number(80),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  age: faker.datatype.number(80),
-  address: faker.location.streetAddress(),
   phoneNumber: faker.phone.number(),
   subRows: [...Array(faker.datatype.number(4))].map(() => ({
+    address: faker.location.streetAddress(),
+    age: faker.datatype.number(80),
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
-    age: faker.datatype.number(80),
-    address: faker.location.streetAddress(),
     phoneNumber: faker.phone.number(),
     subRows: [...Array(3)].map(() => ({
+      address: faker.location.streetAddress(),
+      age: faker.datatype.number(80),
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      age: faker.datatype.number(80),
-      address: faker.location.streetAddress(),
       phoneNumber: faker.phone.number(),
       subRows: [...Array(2)].map(() => ({
+        address: faker.location.streetAddress(),
+        age: faker.datatype.number(80),
         firstName: faker.person.firstName(),
         lastName: faker.person.lastName(),
-        age: faker.datatype.number(80),
-        address: faker.location.streetAddress(),
         phoneNumber: faker.phone.number(),
       })),
     })),
@@ -68,8 +68,8 @@ export const SubRowTreeDisableExpandAll = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableExpanding
     enableExpandAll={false}
+    enableExpanding
   />
 );
 
@@ -80,7 +80,7 @@ export const SubRowTreeFilterFromLeafRows = () => (
     enableExpanding
     enablePagination={false}
     filterFromLeafRows
-    initialState={{ showColumnFilters: true, expanded: true }}
+    initialState={{ expanded: true, showColumnFilters: true }}
   />
 );
 
@@ -90,8 +90,8 @@ export const SubRowTreeMaxLeafRowFilterDepth0 = () => (
     data={data}
     enableExpanding
     enablePagination={false}
+    initialState={{ expanded: true, showColumnFilters: true }}
     maxLeafRowFilterDepth={0}
-    initialState={{ showColumnFilters: true, expanded: true }}
   />
 );
 
@@ -101,8 +101,8 @@ export const SubRowTreeMaxLeafRowFilterDepth1 = () => (
     data={data}
     enableExpanding
     enablePagination={false}
+    initialState={{ expanded: true, showColumnFilters: true }}
     maxLeafRowFilterDepth={1}
-    initialState={{ showColumnFilters: true, expanded: true }}
   />
 );
 
@@ -113,8 +113,8 @@ export const SubRowTreeMaxLeafRowFilterDepthAndFilterFromLeafRows = () => (
     enableExpanding
     enablePagination={false}
     filterFromLeafRows
+    initialState={{ expanded: true, showColumnFilters: true }}
     maxLeafRowFilterDepth={0}
-    initialState={{ showColumnFilters: true, expanded: true }}
   />
 );
 

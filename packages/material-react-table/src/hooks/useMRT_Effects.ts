@@ -12,10 +12,10 @@ export const useMRT_Effects = <TData extends Record<string, any> = {}>(
   const {
     globalFilter,
     isFullScreen,
-    pagination,
-    sorting,
     isLoading,
+    pagination,
     showSkeletons,
+    sorting,
   } = getState();
 
   const isMounted = useRef(false);
@@ -38,8 +38,8 @@ export const useMRT_Effects = <TData extends Record<string, any> = {}>(
         if (!previousTop.current) return;
         //restore scroll position
         window.scrollTo({
-          top: -1 * (previousTop.current as number),
           behavior: 'instant',
+          top: -1 * (previousTop.current as number),
         });
       }
     }

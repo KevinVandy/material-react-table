@@ -59,12 +59,12 @@ export const MRT_TableHeadCellFilterLabel = <
 
   return (
     <Grow
-      unmountOnExit
       in={
         (!!column.getFilterValue() && !isRangeFilter) ||
         (isRangeFilter && // @ts-ignore
           (!!column.getFilterValue()?.[0] || !!column.getFilterValue()?.[1]))
       }
+      unmountOnExit
     >
       <Box component="span" sx={{ flex: '0 0' }}>
         <Tooltip arrow placement="top" title={filterTooltip}>

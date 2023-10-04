@@ -1,15 +1,15 @@
 import { memo, useMemo } from 'react';
 import {
-  useVirtualizer,
   type VirtualItem,
   type Virtualizer,
+  useVirtualizer,
 } from '@tanstack/react-virtual';
 import TableBody from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';
-import { Memo_MRT_TableBodyRow, MRT_TableBodyRow } from './MRT_TableBodyRow';
+import { MRT_TableBodyRow, Memo_MRT_TableBodyRow } from './MRT_TableBodyRow';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { rankGlobalFuzzy } from '../sortingFns';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
-import { parseFromValuesOrFunc } from '../column.utils';
 
 interface Props<TData extends Record<string, any>> {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
@@ -29,18 +29,18 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
   const {
     getBottomRows,
     getCenterRows,
+    getIsSomeRowsPinned,
     getPrePaginationRowModel,
     getRowModel,
     getState,
-    getIsSomeRowsPinned,
     getTopRows,
     options: {
       enableGlobalFilterRankedResults,
       enablePagination,
       enableRowPinning,
       enableRowVirtualization,
-      enableStickyHeader,
       enableStickyFooter,
+      enableStickyHeader,
       layoutMode,
       localization,
       manualExpanding,
@@ -55,7 +55,7 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
       rowVirtualizerInstanceRef,
       rowVirtualizerOptions,
     },
-    refs: { tableContainerRef, tablePaperRef, tableFooterRef, tableHeadRef },
+    refs: { tableContainerRef, tableFooterRef, tableHeadRef, tablePaperRef },
   } = table;
   const {
     columnFilters,
@@ -63,10 +63,10 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
     expanded,
     globalFilter,
     globalFilterFn,
-    pagination,
-    sorting,
-    rowPinning,
     isFullScreen,
+    pagination,
+    rowPinning,
+    sorting,
   } = getState();
 
   const tableBodyProps = parseFromValuesOrFunc(muiTableBodyProps, { table });
@@ -284,9 +284,9 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
           <TableBody
             {...tableBodyProps}
             sx={(theme) => ({
+              bottom: tableFooterHeight - 1,
               display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
               position: 'sticky',
-              bottom: tableFooterHeight - 1,
               zIndex: 1,
               ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
             })}

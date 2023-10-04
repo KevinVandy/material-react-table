@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { type Meta } from '@storybook/react';
 import {
-  MaterialReactTable,
   type MRT_ColumnDef,
   type MRT_SortingState,
+  MaterialReactTable,
 } from '../../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Features/Sorting Examples',
@@ -15,33 +15,33 @@ export default meta;
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
-    header: 'First Name',
     accessorKey: 'firstName',
+    header: 'First Name',
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
+    header: 'Last Name',
   },
   {
-    header: 'Address',
     accessorKey: 'address',
+    header: 'Address',
   },
   {
-    header: 'State',
     accessorKey: 'state',
+    header: 'State',
   },
   {
-    header: 'Phone Number',
     accessorKey: 'phoneNumber',
+    header: 'Phone Number',
   },
 ];
 
 const data = [...Array(100)].map(() => ({
+  address: faker.location.streetAddress(),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  address: faker.location.streetAddress(),
-  state: faker.location.state(),
   phoneNumber: faker.phone.number(),
+  state: faker.location.state(),
 }));
 
 export const SortingEnabledDefault = () => (
@@ -56,26 +56,26 @@ export const DisableSortingForSpecificColumns = () => (
   <MaterialReactTable
     columns={[
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
       {
-        header: 'Address',
         accessorKey: 'address',
         enableSorting: false,
+        header: 'Address',
       },
       {
-        header: 'State',
         accessorKey: 'state',
+        header: 'State',
       },
       {
-        header: 'Phone Number',
         accessorKey: 'phoneNumber',
         enableSorting: false,
+        header: 'Phone Number',
       },
     ]}
     data={data}
@@ -98,30 +98,30 @@ export const SortRanking = () => (
   <MaterialReactTable
     columns={[
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
         sortingFn: 'fuzzy',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
       {
-        header: 'Address',
         accessorKey: 'address',
+        header: 'Address',
       },
       {
-        header: 'State',
         accessorKey: 'state',
+        header: 'State',
       },
       {
-        header: 'Phone Number',
         accessorKey: 'phoneNumber',
+        header: 'Phone Number',
       },
     ]}
     data={data}
     enableRowNumbers
-    initialState={{ sorting: [{ id: 'firstName', desc: false }] }}
+    initialState={{ sorting: [{ desc: false, id: 'firstName' }] }}
   />
 );
 
@@ -131,8 +131,8 @@ export const SortingStateManaged = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      state={{ sorting }}
       onSortingChange={setSorting}
+      state={{ sorting }}
     />
   );
 };

@@ -13,8 +13,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import FilterListOffIcon from '@mui/icons-material/FilterListOff';
-import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -36,7 +36,6 @@ export interface MRT_Icons {
   DensityLargeIcon: any;
   DensityMediumIcon: any;
   DensitySmallIcon: any;
-  KeyboardDoubleArrowDownIcon: any;
   DragHandleIcon: any;
   DynamicFeedIcon: any;
   EditIcon: any;
@@ -46,6 +45,7 @@ export interface MRT_Icons {
   FilterListOffIcon: any;
   FullscreenExitIcon: any;
   FullscreenIcon: any;
+  KeyboardDoubleArrowDownIcon: any;
   MoreHorizIcon: any;
   MoreVertIcon: any;
   PushPinIcon: any;

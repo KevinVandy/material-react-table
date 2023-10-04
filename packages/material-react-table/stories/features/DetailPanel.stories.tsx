@@ -1,6 +1,6 @@
-import { type Meta } from '@storybook/react';
 import { MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Features/Detail Panel Examples',
@@ -12,26 +12,26 @@ export const DetailPanelEnabled = () => (
   <MaterialReactTable
     columns={[
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
       {
-        header: 'Address',
         accessorKey: 'address',
+        header: 'Address',
       },
     ]}
     data={[...Array(5)].map(() => ({
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
       address: faker.location.streetAddress(),
       city: faker.location.city(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      phone: faker.phone.number(),
       state: faker.location.state(),
       zipCode: faker.location.zipCode(),
-      phone: faker.phone.number(),
     }))}
     renderDetailPanel={({ row }) => (
       <div style={{ display: 'grid' }}>
@@ -48,31 +48,31 @@ export const DetailPanelEnabledConditional = () => (
   <MaterialReactTable
     columns={[
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
       {
-        header: 'Age',
         accessorKey: 'age',
+        header: 'Age',
       },
       {
-        header: 'Address',
         accessorKey: 'address',
+        header: 'Address',
       },
     ]}
     data={[...Array(10)].map(() => ({
+      address: faker.location.streetAddress(),
+      age: faker.datatype.number(100) + 5,
+      city: faker.location.city(),
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      age: faker.datatype.number(100) + 5,
-      address: faker.location.streetAddress(),
-      city: faker.location.city(),
+      phone: faker.phone.number(),
       state: faker.location.state(),
       zipCode: faker.location.zipCode(),
-      phone: faker.phone.number(),
     }))}
     muiExpandButtonProps={({ row }) => ({
       sx: {
@@ -98,33 +98,33 @@ export const DetailPanelExpandColumnLast = () => (
   <MaterialReactTable
     columns={[
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
       {
-        header: 'Address',
         accessorKey: 'address',
+        header: 'Address',
       },
     ]}
     data={[...Array(5)].map(() => ({
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
       address: faker.location.streetAddress(),
       city: faker.location.city(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      phone: faker.phone.number(),
       state: faker.location.state(),
       zipCode: faker.location.zipCode(),
-      phone: faker.phone.number(),
     }))}
     displayColumnDefOptions={{
       'mrt-row-expand': {
-        muiTableHeadCellProps: {
+        muiTableBodyCellProps: {
           align: 'right',
         },
-        muiTableBodyCellProps: {
+        muiTableHeadCellProps: {
           align: 'right',
         },
       },
@@ -145,26 +145,26 @@ export const DetailPanelExpandedByDefault = () => (
   <MaterialReactTable
     columns={[
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
       {
-        header: 'Address',
         accessorKey: 'address',
+        header: 'Address',
       },
     ]}
     data={[...Array(5)].map(() => ({
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
       address: faker.location.streetAddress(),
       city: faker.location.city(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      phone: faker.phone.number(),
       state: faker.location.state(),
       zipCode: faker.location.zipCode(),
-      phone: faker.phone.number(),
     }))}
     initialState={{ expanded: true }}
     renderDetailPanel={({ row }) => (
@@ -182,26 +182,26 @@ export const DetailPanelExpandAllDisabled = () => (
   <MaterialReactTable
     columns={[
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
       {
-        header: 'Address',
         accessorKey: 'address',
+        header: 'Address',
       },
     ]}
     data={[...Array(5)].map(() => ({
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
       address: faker.location.streetAddress(),
       city: faker.location.city(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      phone: faker.phone.number(),
       state: faker.location.state(),
       zipCode: faker.location.zipCode(),
-      phone: faker.phone.number(),
     }))}
     enableExpandAll={false}
     renderDetailPanel={({ row }) => (

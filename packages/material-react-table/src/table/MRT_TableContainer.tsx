@@ -1,9 +1,9 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import TableContainer from '@mui/material/TableContainer';
 import { MRT_Table } from './MRT_Table';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_EditRowModal } from '../modals';
 import { type MRT_TableInstance } from '../types';
-import { parseFromValuesOrFunc } from '../column.utils';
 
 const useIsomorphicLayoutEffect =
   typeof window !== 'undefined' ? useLayoutEffect : useEffect;
@@ -23,9 +23,9 @@ export const MRT_TableContainer = <TData extends Record<string, any>>({
       enableStickyHeader,
       muiTableContainerProps,
     },
-    refs: { tableContainerRef, bottomToolbarRef, topToolbarRef },
+    refs: { bottomToolbarRef, tableContainerRef, topToolbarRef },
   } = table;
-  const { isFullScreen, creatingRow, editingRow } = getState();
+  const { creatingRow, editingRow, isFullScreen } = getState();
 
   const [totalToolbarHeight, setTotalToolbarHeight] = useState(0);
 
@@ -62,20 +62,20 @@ export const MRT_TableContainer = <TData extends Record<string, any>>({
           }
         }
       }}
-      sx={(theme) => ({
-        maxWidth: '100%',
-        maxHeight: enableStickyHeader
-          ? `clamp(350px, calc(100vh - ${totalToolbarHeight}px), 9999px)`
-          : undefined,
-        overflow: 'auto',
-        ...(parseFromValuesOrFunc(tableContainerProps?.sx, theme) as any),
-      })}
       style={{
         maxHeight: isFullScreen
           ? `calc(100vh - ${totalToolbarHeight}px)`
           : undefined,
         ...tableContainerProps?.style,
       }}
+      sx={(theme) => ({
+        maxHeight: enableStickyHeader
+          ? `clamp(350px, calc(100vh - ${totalToolbarHeight}px), 9999px)`
+          : undefined,
+        maxWidth: '100%',
+        overflow: 'auto',
+        ...(parseFromValuesOrFunc(tableContainerProps?.sx, theme) as any),
+      })}
     >
       <MRT_Table table={table} />
       {(createModalOpen || editModalOpen) && (

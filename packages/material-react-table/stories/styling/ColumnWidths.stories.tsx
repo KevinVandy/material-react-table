@@ -1,6 +1,6 @@
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Styling/Custom Column Widths',
@@ -10,36 +10,36 @@ export default meta;
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
-    header: 'ID',
     accessorKey: 'id',
+    header: 'ID',
     size: 50,
   },
   {
-    header: 'First Name',
     accessorKey: 'firstName',
+    header: 'First Name',
     size: 300,
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
+    header: 'Last Name',
     size: 100,
   },
   {
-    header: 'Age',
     accessorKey: 'age',
+    header: 'Age',
     size: 50,
   },
   {
-    header: 'Address',
     accessorKey: 'address',
+    header: 'Address',
   },
 ];
 const data = [...Array(21)].map(() => ({
-  id: faker.datatype.number(100),
-  firstName: faker.person.firstName(),
-  lastName: faker.person.lastName(),
-  age: faker.datatype.number(80),
   address: faker.location.streetAddress(),
+  age: faker.datatype.number(80),
+  firstName: faker.person.firstName(),
+  id: faker.datatype.number(100),
+  lastName: faker.person.lastName(),
 }));
 
 export const CustomWidths = () => (
@@ -52,7 +52,7 @@ export const CustomWidthsGrid = () => (
 
 export const SmallWidths = () => (
   <MaterialReactTable
-    columns={columns.map((c) => ({ ...c, size: 10, minSize: 10 }))}
+    columns={columns.map((c) => ({ ...c, minSize: 10, size: 10 }))}
     data={data}
     layoutMode="grid"
   />

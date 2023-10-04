@@ -1,14 +1,14 @@
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { alpha } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 import { MRT_ToolbarDropZone } from './MRT_ToolbarDropZone';
-import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
 import { commonToolbarStyles } from './MRT_TopToolbar';
-import { type MRT_TableInstance } from '../types';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
   table: MRT_TableInstance<TData>;
@@ -98,8 +98,8 @@ export const MRT_BottomToolbar = <TData extends Record<string, any>>({
           }}
         >
           {enablePagination &&
-            ['bottom', 'both'].includes(positionPagination ?? '') && (
-              <MRT_TablePagination table={table} position="bottom" />
+            ['both', 'bottom'].includes(positionPagination ?? '') && (
+              <MRT_TablePagination position="bottom" table={table} />
             )}
         </Box>
       </Box>

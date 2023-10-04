@@ -22,7 +22,7 @@ export const MRT_TableHeadCellGrabHandle = <TData extends Record<string, any>>({
     setHoveredColumn,
   } = table;
   const { columnDef } = column;
-  const { hoveredColumn, draggingColumn, columnOrder } = getState();
+  const { columnOrder, draggingColumn, hoveredColumn } = getState();
 
   const iconButtonProps = {
     ...parseFromValuesOrFunc(muiColumnDragHandleProps, { column, table }),
@@ -62,8 +62,8 @@ export const MRT_TableHeadCellGrabHandle = <TData extends Record<string, any>>({
   return (
     <MRT_GrabHandleButton
       iconButtonProps={iconButtonProps}
-      onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
+      onDragStart={handleDragStart}
       table={table}
     />
   );

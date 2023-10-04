@@ -1,12 +1,12 @@
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
-import { faker } from '@faker-js/faker';
-import Button from '@mui/material/Button';
-import MuiMenuItem from '@mui/material/MenuItem';
-import { styled } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShareIcon from '@mui/icons-material/Share';
+import { styled } from '@mui/material';
+import Button from '@mui/material/Button';
+import MuiMenuItem from '@mui/material/MenuItem';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
+import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const MenuItem = styled(MuiMenuItem)({
   display: 'flex',
@@ -21,33 +21,33 @@ export default meta;
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
-    header: 'First Name',
     accessorKey: 'firstName',
+    header: 'First Name',
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
+    header: 'Last Name',
   },
   {
-    header: 'Address',
     accessorKey: 'address',
+    header: 'Address',
   },
   {
-    header: 'State',
     accessorKey: 'state',
+    header: 'State',
   },
   {
-    header: 'Phone Number',
     accessorKey: 'phoneNumber',
+    header: 'Phone Number',
   },
 ];
 
 const data = [...Array(10)].map(() => ({
+  address: faker.location.streetAddress(),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  address: faker.location.streetAddress(),
-  state: faker.location.state(),
   phoneNumber: faker.phone.number(),
+  state: faker.location.state(),
 }));
 
 export const RowActionsEnabled = () => (
@@ -55,7 +55,7 @@ export const RowActionsEnabled = () => (
     columns={columns}
     data={data}
     enableRowActions
-    renderRowActionMenuItems={({ row, closeMenu }) => [
+    renderRowActionMenuItems={({ closeMenu, row }) => [
       <MenuItem
         key={1}
         onClick={() => {
@@ -91,9 +91,9 @@ export const RowActionsAndEditingEnabled = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableRowActions
     enableEditing
-    renderRowActionMenuItems={({ row, closeMenu }) => [
+    enableRowActions
+    renderRowActionMenuItems={({ closeMenu, row }) => [
       <MenuItem
         key={1}
         onClick={() => {
@@ -132,7 +132,7 @@ export const RowActionsLastColumn = () => (
     enableRowActions
     initialState={{ density: 'compact' }}
     positionActionsColumn="last"
-    renderRowActionMenuItems={({ row, closeMenu }) => [
+    renderRowActionMenuItems={({ closeMenu, row }) => [
       <MenuItem
         key={1}
         onClick={() => {
@@ -172,20 +172,20 @@ export const CustomRowActionButtons = () => (
     renderRowActions={({ row }) => (
       <div style={{ display: 'flex', flexWrap: 'nowrap', gap: '0.5rem' }}>
         <Button
-          variant="contained"
           color="primary"
           onClick={() => {
             console.info('View Profile', row);
           }}
+          variant="contained"
         >
           View
         </Button>
         <Button
-          variant="contained"
           color="error"
           onClick={() => {
             console.info('Remove', row);
           }}
+          variant="contained"
         >
           Remove
         </Button>
@@ -203,20 +203,20 @@ export const CustomRowActionButtonsLastColumn = () => (
     renderRowActions={({ row }) => (
       <div style={{ display: 'flex', flexWrap: 'nowrap', gap: '0.5rem' }}>
         <Button
-          variant="contained"
           color="primary"
           onClick={() => {
             console.info('View Profile', row);
           }}
+          variant="contained"
         >
           View
         </Button>
         <Button
-          variant="contained"
           color="error"
           onClick={() => {
             console.info('Remove', row);
           }}
+          variant="contained"
         >
           Remove
         </Button>

@@ -1,6 +1,6 @@
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Fixed Bugs/Grid Layout',
@@ -9,10 +9,10 @@ const meta: Meta = {
 export default meta;
 
 type Person = {
-  firstName: string;
-  lastName: string;
   address: string;
   city: string;
+  firstName: string;
+  lastName: string;
   state: string;
 };
 
@@ -40,10 +40,10 @@ const columns: MRT_ColumnDef<Person>[] = [
 ];
 
 const data = [...Array(6)].map(() => ({
-  firstName: faker.person.firstName(),
-  lastName: faker.person.lastName(),
   address: faker.location.streetAddress(),
   city: faker.location.city(),
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
   state: faker.location.state(),
 }));
 
@@ -53,10 +53,10 @@ export const CenterAlignInGridLayoutMode = () => {
       columns={columns}
       data={data}
       layoutMode="grid"
-      muiTableHeadCellProps={{
+      muiTableBodyCellProps={{
         align: 'center',
       }}
-      muiTableBodyCellProps={{
+      muiTableHeadCellProps={{
         align: 'center',
       }}
     />
@@ -69,10 +69,10 @@ export const RightAlignInGridLayoutMode = () => {
       columns={columns}
       data={data}
       layoutMode="grid"
-      muiTableHeadCellProps={{
+      muiTableBodyCellProps={{
         align: 'right',
       }}
-      muiTableBodyCellProps={{
+      muiTableHeadCellProps={{
         align: 'right',
       }}
     />

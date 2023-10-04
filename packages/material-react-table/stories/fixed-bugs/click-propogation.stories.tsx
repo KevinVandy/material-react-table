@@ -1,8 +1,8 @@
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
-import { faker } from '@faker-js/faker';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
+import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Fixed Bugs/Click Propagation',
@@ -11,10 +11,10 @@ const meta: Meta = {
 export default meta;
 
 type Person = {
-  firstName: string;
-  lastName: string;
   address: string;
   city: string;
+  firstName: string;
+  lastName: string;
   state: string;
 };
 
@@ -42,10 +42,10 @@ const columns: MRT_ColumnDef<Person>[] = [
 ];
 
 const data = [...Array(6)].map(() => ({
-  firstName: faker.person.firstName(),
-  lastName: faker.person.lastName(),
   address: faker.location.streetAddress(),
   city: faker.location.city(),
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
   state: faker.location.state(),
 }));
 
@@ -54,14 +54,14 @@ export const RowClickAndRowMenuActions = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      enableRowActions
       enableEditing
-      renderRowActionMenuItems={() => [<MenuItem>Test</MenuItem>]}
+      enableRowActions
       muiTableBodyRowProps={{
         onClick: () => {
           alert('row click');
         },
       }}
+      renderRowActionMenuItems={() => [<MenuItem>Test</MenuItem>]}
     />
   );
 };
@@ -71,16 +71,16 @@ export const RowClickAndRowButtonActions = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      enableRowActions
       enableEditing
-      renderRowActions={() => (
-        <Button onClick={(e) => e.stopPropagation()}>Test</Button>
-      )}
+      enableRowActions
       muiTableBodyRowProps={{
         onClick: () => {
           alert('row click');
         },
       }}
+      renderRowActions={() => (
+        <Button onClick={(e) => e.stopPropagation()}>Test</Button>
+      )}
     />
   );
 };

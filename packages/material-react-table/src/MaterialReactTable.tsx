@@ -1,10 +1,10 @@
-import { useMaterialReactTable } from './useMaterialReactTable';
 import { MRT_TablePaper } from './table/MRT_TablePaper';
 import {
-  type MRT_TableOptions,
   type MRT_TableInstance,
+  type MRT_TableOptions,
   type Xor,
 } from './types';
+import { useMaterialReactTable } from './useMaterialReactTable';
 
 type TableInstanceProp<TData extends Record<string, any> = {}> = {
   table: MRT_TableInstance<TData>;

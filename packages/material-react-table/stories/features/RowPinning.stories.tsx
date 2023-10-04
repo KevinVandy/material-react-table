@@ -1,6 +1,6 @@
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Features/Row Pinning Examples',
@@ -10,37 +10,37 @@ export default meta;
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
-    header: 'First Name',
     accessorKey: 'firstName',
+    header: 'First Name',
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
+    header: 'Last Name',
   },
   {
-    header: 'Email Address',
     accessorKey: 'email',
+    header: 'Email Address',
   },
   {
-    header: 'Address',
     accessorKey: 'address',
+    header: 'Address',
   },
   {
-    header: 'City',
     accessorKey: 'city',
+    header: 'City',
   },
   {
-    header: 'State',
     accessorKey: 'state',
+    header: 'State',
   },
 ];
 
 const data = [...Array(50)].map(() => ({
-  firstName: faker.person.firstName(),
-  lastName: faker.person.lastName(),
-  email: faker.internet.email(),
   address: faker.location.streetAddress(),
   city: faker.location.city(),
+  email: faker.internet.email(),
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
   state: faker.location.state(),
 }));
 
@@ -52,8 +52,8 @@ export const RowPinningStickyNoPagination = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableRowPinning
     enablePagination={false}
+    enableRowPinning
     muiTableContainerProps={{
       sx: {
         maxHeight: '600px',
@@ -66,19 +66,19 @@ export const RowPinningStickyCustomRowHeight = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableRowPinning
-    rowPinningDisplayMode="sticky"
     enablePagination={false}
-    muiTableContainerProps={{
-      sx: {
-        maxHeight: '600px',
-      },
-    }}
+    enableRowPinning
     muiTableBodyRowProps={{
       sx: {
         height: '100px',
       }
     }}
+    muiTableContainerProps={{
+      sx: {
+        maxHeight: '600px',
+      },
+    }}
+    rowPinningDisplayMode="sticky"
   />
 );
 
@@ -89,12 +89,12 @@ export const RowPinningSelectStickyMode = () => (
     enablePagination={false}
     enableRowPinning
     enableRowSelection
-    rowPinningDisplayMode="select-sticky"
     muiTableContainerProps={{
       sx: {
         maxHeight: '600px',
       },
     }}
+    rowPinningDisplayMode="select-sticky"
   />
 );
 
@@ -102,14 +102,14 @@ export const RowPinningTopAndBottomMode = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableRowPinning
-    rowPinningDisplayMode="top-and-bottom"
     enablePagination={false}
+    enableRowPinning
     muiTableContainerProps={{
       sx: {
         maxHeight: '600px',
       },
     }}
+    rowPinningDisplayMode="top-and-bottom"
   />
 );
 
@@ -117,14 +117,14 @@ export const RowPinningTopMode = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableRowPinning
-    rowPinningDisplayMode="top"
     enablePagination={false}
+    enableRowPinning
     muiTableContainerProps={{
       sx: {
         maxHeight: '600px',
       },
     }}
+    rowPinningDisplayMode="top"
   />
 );
 
@@ -135,12 +135,12 @@ export const RowPinningSelectTopMode = () => (
     enablePagination={false}
     enableRowPinning
     enableRowSelection
-    rowPinningDisplayMode="select-top"
     muiTableContainerProps={{
       sx: {
         maxHeight: '600px',
       },
     }}
+    rowPinningDisplayMode="select-top"
   />
 );
 
@@ -148,14 +148,14 @@ export const RowPinningBottomMode = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableRowPinning
-    rowPinningDisplayMode="bottom"
     enablePagination={false}
+    enableRowPinning
     muiTableContainerProps={{
       sx: {
         maxHeight: '600px',
       },
     }}
+    rowPinningDisplayMode="bottom"
   />
 );
 
@@ -166,12 +166,12 @@ export const RowPinningSelectBottomMode = () => (
     enablePagination={false}
     enableRowPinning
     enableRowSelection
-    rowPinningDisplayMode="select-bottom"
     muiTableContainerProps={{
       sx: {
         maxHeight: '600px',
       },
     }}
+    rowPinningDisplayMode="select-bottom"
   />
 );
 
@@ -179,10 +179,10 @@ export const RowPinningWithStickyHeader = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableRowPinning
-    enableStickyHeader
-    enableStickyFooter
     enablePagination={false}
+    enableRowPinning
+    enableStickyFooter
+    enableStickyHeader
     muiTableContainerProps={{
       sx: {
         maxHeight: '600px',
@@ -195,9 +195,9 @@ export const RowPinningWithGridLayout = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    enablePagination={false}
     enableRowPinning
     layoutMode="grid"
-    enablePagination={false}
     muiTableContainerProps={{
       sx: {
         maxHeight: '600px',
@@ -210,9 +210,9 @@ export const RowPinningStickyWithVirtualization = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    enablePagination={false}
     enableRowPinning
     enableRowVirtualization
-    enablePagination={false}
     muiTableContainerProps={{
       sx: {
         maxHeight: '600px',
@@ -225,14 +225,14 @@ export const RowPinningTopWithVirtualization = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableRowPinning
-    rowPinningDisplayMode="top"
-    enableRowVirtualization
     enablePagination={false}
+    enableRowPinning
+    enableRowVirtualization
     muiTableContainerProps={{
       sx: {
         maxHeight: '600px',
       },
     }}
+    rowPinningDisplayMode="top"
   />
 );

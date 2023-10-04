@@ -1,6 +1,6 @@
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Features/Header Groups Examples',
@@ -10,42 +10,42 @@ export default meta;
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
-    header: 'Name',
-    id: 'name',
     columns: [
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
 
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
     ],
+    header: 'Name',
+    id: 'name',
   },
   {
-    header: 'Info',
-    id: 'info',
     columns: [
       {
-        header: 'Age',
         accessorKey: 'age',
+        header: 'Age',
       },
       {
-        header: 'Address',
         accessorKey: 'address',
+        header: 'Address',
       },
     ],
+    header: 'Info',
+    id: 'info',
   },
 ];
 
 const data = [...Array(555)].map(() => ({
+  address: faker.location.streetAddress(),
+  age: faker.datatype.number(80),
+  city: faker.location.city(),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  age: faker.datatype.number(80),
-  address: faker.location.streetAddress(),
-  city: faker.location.city(),
   state: faker.location.state(),
 }));
 
@@ -66,38 +66,38 @@ export const HeaderAndFooterGroups = () => (
   <MaterialReactTable
     columns={[
       {
+        columns: [
+          {
+            accessorKey: 'firstName',
+            footer: 'First Name',
+            header: 'First Name',
+          },
+          {
+            accessorKey: 'lastName',
+            footer: 'Last Name',
+            header: 'Last Name',
+          },
+        ],
+        footer: 'Name',
         header: 'Name',
         id: 'name',
-        footer: 'Name',
-        columns: [
-          {
-            header: 'First Name',
-            footer: 'First Name',
-            accessorKey: 'firstName',
-          },
-          {
-            header: 'Last Name',
-            footer: 'Last Name',
-            accessorKey: 'lastName',
-          },
-        ],
       },
       {
-        header: 'Info',
-        id: 'info',
-        footer: 'Info',
         columns: [
           {
-            header: 'Age',
-            footer: 'Age',
             accessorKey: 'age',
+            footer: 'Age',
+            header: 'Age',
           },
           {
-            header: 'Address',
-            footer: 'Address',
             accessorKey: 'address',
+            footer: 'Address',
+            header: 'Address',
           },
         ],
+        footer: 'Info',
+        header: 'Info',
+        id: 'info',
       },
     ]}
     data={data}
@@ -130,14 +130,14 @@ export const MixedHeaderGroups = () => {
           header: 'Last Name',
         },
         {
-          id: 'grouped',
-          header: 'Grouped',
           columns: [
             {
               accessorKey: 'address',
               header: 'Address',
             },
           ],
+          header: 'Grouped',
+          id: 'grouped',
         },
         {
           accessorKey: 'city',
@@ -162,12 +162,8 @@ export const DeepMixedHeaderGroups = () => {
           header: 'First Name',
         },
         {
-          id: 'grouped',
-          header: 'Grouped',
           columns: [
             {
-              header: 'Location',
-              id: 'location',
               columns: [
                 {
                   accessorKey: 'address',
@@ -182,8 +178,12 @@ export const DeepMixedHeaderGroups = () => {
                   header: 'State',
                 },
               ],
+              header: 'Location',
+              id: 'location',
             },
           ],
+          header: 'Grouped',
+          id: 'grouped',
         },
         {
           accessorKey: 'lastName',
@@ -199,8 +199,8 @@ export const HeaderGroupsWithRowVirtualization = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableRowVirtualization
     enablePagination={false}
+    enableRowVirtualization
   />
 );
 

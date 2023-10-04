@@ -1,6 +1,6 @@
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Fixed Bugs/Data Types',
@@ -9,10 +9,10 @@ const meta: Meta = {
 export default meta;
 
 type Person = {
-  firstName: string | null;
-  lastName: string;
   address: string;
   city: string;
+  firstName: null | string;
+  lastName: string;
   state: string;
   states: string[];
 };
@@ -20,8 +20,8 @@ type Person = {
 const columns: MRT_ColumnDef<Person>[] = [
   {
     accessorKey: 'firstName',
-    header: 'First Name',
     enableGlobalFilter: true,
+    header: 'First Name',
   },
   {
     accessorKey: 'lastName',
@@ -40,17 +40,17 @@ const columns: MRT_ColumnDef<Person>[] = [
     header: 'State',
   },
   {
+    Cell: ({ cell }) => cell.getValue<string[]>().join(', '),
     accessorKey: 'states',
     header: 'States',
-    Cell: ({ cell }) => cell.getValue<string[]>().join(', '),
   },
 ];
 
 const data = [...Array(66)].map(() => ({
-  firstName: Math.random() > 0.5 ? faker.person.firstName() : null,
-  lastName: faker.person.lastName(),
   address: faker.location.streetAddress(),
   city: faker.location.city(),
+  firstName: Math.random() > 0.5 ? faker.person.firstName() : null,
+  lastName: faker.person.lastName(),
   state: faker.location.state(),
   states: [
     faker.location.state(),

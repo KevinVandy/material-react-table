@@ -1,15 +1,15 @@
 import { useCallback, useMemo } from 'react';
 import {
-  defaultRangeExtractor,
-  useVirtualizer,
   type Range,
   type Virtualizer,
+  defaultRangeExtractor,
+  useVirtualizer,
 } from '@tanstack/react-virtual';
 import Table from '@mui/material/Table';
-import { MRT_TableHead } from '../head/MRT_TableHead';
-import { Memo_MRT_TableBody, MRT_TableBody } from '../body/MRT_TableBody';
-import { MRT_TableFooter } from '../footer/MRT_TableFooter';
+import { MRT_TableBody, Memo_MRT_TableBody } from '../body/MRT_TableBody';
 import { parseCSSVarId, parseFromValuesOrFunc } from '../column.utils';
+import { MRT_TableFooter } from '../footer/MRT_TableFooter';
+import { MRT_TableHead } from '../head/MRT_TableHead';
 import { type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -26,9 +26,9 @@ export const MRT_Table = <TData extends Record<string, any>>({
       columnVirtualizerInstanceRef,
       columnVirtualizerOptions,
       columns,
+      enableColumnPinning,
       enableColumnResizing,
       enableColumnVirtualization,
-      enableColumnPinning,
       enableStickyHeader,
       enableTableFooter,
       enableTableHead,
@@ -147,6 +147,7 @@ export const MRT_Table = <TData extends Record<string, any>>({
       <Table
         stickyHeader={enableStickyHeader || isFullScreen}
         {...tableProps}
+        style={{ ...columnSizeVars, ...tableProps?.style }}
         sx={(theme) => ({
           borderCollapse: 'separate',
           display: layoutMode === 'grid' ? 'grid' : 'table',
@@ -154,7 +155,6 @@ export const MRT_Table = <TData extends Record<string, any>>({
             layoutMode !== 'grid' && enableColumnResizing ? 'fixed' : undefined,
           ...(parseFromValuesOrFunc(tableProps?.sx, theme) as any),
         })}
-        style={{ ...columnSizeVars, ...tableProps?.style }}
       >
         {enableTableHead && <MRT_TableHead {...props} />}
         {memoMode === 'table-body' || columnSizingInfo.isResizingColumn ? (

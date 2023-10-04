@@ -1,54 +1,54 @@
-import { type Meta } from '@storybook/react';
-import { MaterialReactTable, type MRT_ColumnDef } from '../../src';
+import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
-  title: 'Styling/Sticky Header Examples',
   parameters: {
     status: {
       type: 'stable',
     },
   },
+  title: 'Styling/Sticky Header Examples',
 };
 
 export default meta;
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
-    header: 'First Name',
     accessorKey: 'firstName',
+    header: 'First Name',
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
+    header: 'Last Name',
   },
   {
-    header: 'Address',
     accessorKey: 'address',
+    header: 'Address',
   },
   {
-    header: 'State',
     accessorKey: 'state',
+    header: 'State',
   },
   {
-    header: 'Phone Number',
     accessorKey: 'phoneNumber',
+    header: 'Phone Number',
   },
 ];
 
 const data = [...Array(100)].map(() => ({
+  address: faker.location.streetAddress(),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
-  address: faker.location.streetAddress(),
-  state: faker.location.state(),
   phoneNumber: faker.phone.number(),
+  state: faker.location.state(),
 }));
 
 export const StickyHeaderDisabledDefault = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    initialState={{ pagination: { pageSize: 25, pageIndex: 0 } }}
+    initialState={{ pagination: { pageIndex: 0, pageSize: 25 } }}
   />
 );
 
@@ -56,8 +56,8 @@ export const EnableStickyHeader = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    initialState={{ pagination: { pageSize: 25, pageIndex: 0 } }}
     enableStickyHeader
+    initialState={{ pagination: { pageIndex: 0, pageSize: 25 } }}
   />
 );
 
@@ -65,39 +65,39 @@ export const StickyHeaderShorterTable = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableStickyHeader
-    enableRowSelection
     enableColumnPinning
-    initialState={{ pagination: { pageSize: 25, pageIndex: 0 } }}
+    enableRowSelection
+    enableStickyHeader
+    initialState={{ pagination: { pageIndex: 0, pageSize: 25 } }}
     muiTableContainerProps={{ sx: { maxHeight: 400 } }}
   />
 );
 
 const columnsWithFooters: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
-    header: 'First Name',
     accessorKey: 'firstName',
     footer: 'First Name',
+    header: 'First Name',
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
     footer: 'Last Name',
+    header: 'Last Name',
   },
   {
-    header: 'Address',
     accessorKey: 'address',
     footer: 'Address',
+    header: 'Address',
   },
   {
-    header: 'State',
     accessorKey: 'state',
     footer: 'State',
+    header: 'State',
   },
   {
-    header: 'Phone Number',
     accessorKey: 'phoneNumber',
     footer: 'Phone Number',
+    header: 'Phone Number',
   },
 ];
 
@@ -105,11 +105,11 @@ export const disableStickyFooter = () => (
   <MaterialReactTable
     columns={columnsWithFooters}
     data={data}
-    initialState={{ pagination: { pageSize: 25, pageIndex: 0 } }}
-    muiTableContainerProps={{ sx: { maxHeight: 400 } }}
-    enableStickyHeader
-    enableStickyFooter={false}
     enableRowNumbers
+    enableStickyFooter={false}
+    enableStickyHeader
+    initialState={{ pagination: { pageIndex: 0, pageSize: 25 } }}
+    muiTableContainerProps={{ sx: { maxHeight: 400 } }}
   />
 );
 
@@ -117,10 +117,10 @@ export const enableStickyFooter = () => (
   <MaterialReactTable
     columns={columnsWithFooters}
     data={data}
-    initialState={{ pagination: { pageSize: 25, pageIndex: 0 } }}
-    muiTableContainerProps={{ sx: { maxHeight: 400 } }}
-    enableStickyHeader
-    enableStickyFooter
     enableRowNumbers
+    enableStickyFooter
+    enableStickyHeader
+    initialState={{ pagination: { pageIndex: 0, pageSize: 25 } }}
+    muiTableContainerProps={{ sx: { maxHeight: 400 } }}
   />
 );

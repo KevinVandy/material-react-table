@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
-import { type Meta } from '@storybook/react';
 import {
-  MaterialReactTable,
   type MRT_Column,
   type MRT_ColumnDef,
+  MaterialReactTable,
 } from '../../src';
 import { faker } from '@faker-js/faker';
+import { type Meta } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Features/Column Grouping Examples',
@@ -14,41 +14,41 @@ const meta: Meta = {
 export default meta;
 
 interface Person {
-  firstName: string;
-  lastName: string;
-  gender: string;
   city: string;
+  firstName: string;
+  gender: string;
+  lastName: string;
   state: string;
 }
 
 const columns = [
   {
-    header: 'First Name',
     accessorKey: 'firstName',
+    header: 'First Name',
   },
   {
-    header: 'Last Name',
     accessorKey: 'lastName',
+    header: 'Last Name',
   },
   {
-    header: 'Gender',
     accessorKey: 'gender',
+    header: 'Gender',
   },
   {
-    header: 'City',
     accessorKey: 'city',
+    header: 'City',
   },
   {
-    header: 'State',
     accessorKey: 'state',
+    header: 'State',
   },
 ] as MRT_ColumnDef<Person>[];
 
 const data = [...Array(200)].map(() => ({
-  firstName: faker.person.firstName(),
-  lastName: faker.person.lastName(),
-  gender: Math.random() < 0.9 ? faker.person.sex() : faker.person.gender(),
   city: faker.location.city(),
+  firstName: faker.person.firstName(),
+  gender: Math.random() < 0.9 ? faker.person.sex() : faker.person.gender(),
+  lastName: faker.person.lastName(),
   state: faker.location.state(),
 }));
 
@@ -62,7 +62,7 @@ export const ColumnGroupingEnabledWithSelection = () => (
     data={data}
     enableGrouping
     enableRowSelection
-    initialState={{ grouping: ['state'], expanded: true }}
+    initialState={{ expanded: true, grouping: ['state'] }}
   />
 );
 
@@ -70,8 +70,8 @@ export const ColumnGroupingNoDragHandles = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableGrouping
     enableColumnDragging={false}
+    enableGrouping
   />
 );
 
@@ -88,27 +88,27 @@ export const ColumnGroupingEnabledCustomAggregate = () => (
   <MaterialReactTable
     columns={[
       {
-        header: 'First Name',
         accessorKey: 'firstName',
+        header: 'First Name',
       },
       {
-        header: 'Last Name',
         accessorKey: 'lastName',
+        header: 'Last Name',
       },
       {
-        header: 'Gender',
-        accessorKey: 'gender',
         AggregatedCell: ({ cell }) => (
           <div style={{ color: 'red' }}>{cell.renderValue() as string}</div>
         ),
+        accessorKey: 'gender',
+        header: 'Gender',
       },
       {
-        header: 'City',
         accessorKey: 'city',
+        header: 'City',
       },
       {
-        header: 'State',
         accessorKey: 'state',
+        header: 'State',
       },
     ]}
     data={data}
@@ -157,48 +157,48 @@ export const GroupingColumnsSetState = () => {
 
     setData([
       {
+        address: '261 Erdman Ford',
+        city: 'East Daphne',
         name: {
           firstName: 'John',
           lastName: 'Doe',
         },
-        address: '261 Erdman Ford',
-        city: 'East Daphne',
         state: 'Kentucky',
       },
       {
+        address: '769 Dominic Grove',
+        city: 'Columbus',
         name: {
           firstName: 'Jane',
           lastName: 'Doe',
         },
-        address: '769 Dominic Grove',
-        city: 'Columbus',
         state: 'Ohio',
       },
       {
+        address: '566 Brakus Inlet',
+        city: 'South Linda',
         name: {
           firstName: 'Joe',
           lastName: 'Doe',
         },
-        address: '566 Brakus Inlet',
-        city: 'South Linda',
         state: 'West Virginia',
       },
       {
+        address: '722 Emie Stream',
+        city: 'Lincoln',
         name: {
           firstName: 'Kevin',
           lastName: 'Vandy',
         },
-        address: '722 Emie Stream',
-        city: 'Lincoln',
         state: 'Nebraska',
       },
       {
+        address: '32188 Larkin Turnpike',
+        city: 'Charleston',
         name: {
           firstName: 'Joshua',
           lastName: 'Rolluffs',
         },
-        address: '32188 Larkin Turnpike',
-        city: 'Charleston',
         state: 'South Carolina',
       },
     ]);
@@ -250,8 +250,8 @@ export const GroupingStateManaged = () => {
       columns={columns}
       data={data}
       enableGrouping
-      state={{ grouping }}
       onGroupingChange={setGrouping}
+      state={{ grouping }}
     />
   );
 };
@@ -261,8 +261,8 @@ export const GroupingAndDraggingWithSomeDisabledGrouping = () => {
     () => [
       {
         accessorKey: 'firstName',
-        header: 'First Name',
         enableGrouping: false,
+        header: 'First Name',
       },
       {
         accessorKey: 'lastName',

@@ -1,8 +1,8 @@
 import { type ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import { darken, lighten } from '@mui/material/styles';
-import highlightWords from 'highlight-words';
 import { type MRT_Cell, type MRT_TableInstance } from '../types';
+import highlightWords from 'highlight-words';
 
 const allowedTypes = ['string', 'number'];
 
@@ -46,7 +46,7 @@ export const MRT_TableBodyCellValue = <TData extends Record<string, any>>({
   const isGroupedValue = renderedCellValue !== undefined;
 
   if (!isGroupedValue) {
-    renderedCellValue = cell.renderValue() as number | string | ReactNode;
+    renderedCellValue = cell.renderValue() as ReactNode | number | string;
   }
 
   if (
@@ -62,10 +62,10 @@ export const MRT_TableBodyCellValue = <TData extends Record<string, any>>({
         column.getCanGlobalFilter()))
   ) {
     const chunks = highlightWords?.({
-      text: renderedCellValue?.toString() as string,
-      query: (filterValue ?? globalFilter ?? '').toString(),
       matchExactly:
         (filterValue ? columnDef._filterFn : globalFilterFn) !== 'fuzzy',
+      query: (filterValue ?? globalFilter ?? '').toString(),
+      text: renderedCellValue?.toString() as string,
     });
     if (chunks?.length > 1 || chunks?.[0]?.match) {
       renderedCellValue = (
@@ -101,8 +101,8 @@ export const MRT_TableBodyCellValue = <TData extends Record<string, any>>({
   if (columnDef.Cell && !isGroupedValue) {
     renderedCellValue = columnDef.Cell({
       cell,
-      renderedCellValue,
       column,
+      renderedCellValue,
       row,
       table,
     });

@@ -1,9 +1,9 @@
 import Paper from '@mui/material/Paper';
-import { MRT_TopToolbar } from '../toolbar/MRT_TopToolbar';
-import { MRT_BottomToolbar } from '../toolbar/MRT_BottomToolbar';
 import { MRT_TableContainer } from './MRT_TableContainer';
-import { type MRT_TableInstance } from '../types';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { MRT_BottomToolbar } from '../toolbar/MRT_BottomToolbar';
+import { MRT_TopToolbar } from '../toolbar/MRT_TopToolbar';
+import { type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
   table: MRT_TableInstance<TData>;
@@ -38,11 +38,6 @@ export const MRT_TablePaper = <TData extends Record<string, any>>({
           tablePaperProps.ref.current = ref;
         }
       }}
-      sx={(theme) => ({
-        overflow: 'hidden',
-        transition: 'all 100ms ease-in-out',
-        ...(parseFromValuesOrFunc(tablePaperProps?.sx, theme) as any),
-      })}
       style={{
         ...tablePaperProps?.style,
         ...(isFullScreen
@@ -62,6 +57,11 @@ export const MRT_TablePaper = <TData extends Record<string, any>>({
             }
           : {}),
       }}
+      sx={(theme) => ({
+        overflow: 'hidden',
+        transition: 'all 100ms ease-in-out',
+        ...(parseFromValuesOrFunc(tablePaperProps?.sx, theme) as any),
+      })}
     >
       {enableTopToolbar &&
         (parseFromValuesOrFunc(renderTopToolbar, { table }) ?? (

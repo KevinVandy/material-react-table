@@ -1,10 +1,10 @@
 import { type MouseEvent } from 'react';
 import Checkbox, { type CheckboxProps } from '@mui/material/Checkbox';
-import Tooltip from '@mui/material/Tooltip';
 import Radio, { type RadioProps } from '@mui/material/Radio';
+import Tooltip from '@mui/material/Tooltip';
 import { type Theme } from '@mui/material/styles';
-import { type MRT_Row, type MRT_TableInstance } from '../types';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { type MRT_Row, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
   row?: MRT_Row<TData>;
@@ -20,12 +20,12 @@ export const MRT_SelectCheckbox = <TData extends Record<string, any>>({
   const {
     getState,
     options: {
-      localization,
       enableMultiRowSelection,
-      rowPinningDisplayMode,
       enableRowPinning,
-      muiSelectCheckboxProps,
+      localization,
       muiSelectAllCheckboxProps,
+      muiSelectCheckboxProps,
+      rowPinningDisplayMode,
       selectAllMode,
     },
   } = table;
@@ -70,7 +70,7 @@ export const MRT_SelectCheckbox = <TData extends Record<string, any>>({
         }
       }
     },
-    size: (density === 'compact' ? 'small' : 'medium') as 'small' | 'medium',
+    size: (density === 'compact' ? 'small' : 'medium') as 'medium' | 'small',
     ...checkboxProps,
     onClick: (e: MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
@@ -78,8 +78,8 @@ export const MRT_SelectCheckbox = <TData extends Record<string, any>>({
     },
     sx: (theme: Theme) => ({
       height: density === 'compact' ? '1.75rem' : '2.5rem',
-      width: density === 'compact' ? '1.75rem' : '2.5rem',
       m: density !== 'compact' ? '-0.4rem' : undefined,
+      width: density === 'compact' ? '1.75rem' : '2.5rem',
       zIndex: 0,
       ...parseFromValuesOrFunc(checkboxProps?.sx, theme),
     }),

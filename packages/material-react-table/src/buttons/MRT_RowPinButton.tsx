@@ -1,23 +1,23 @@
-import { useState, type MouseEvent } from 'react';
+import { type MouseEvent, useState } from 'react';
 import { type RowPinningPosition } from '@tanstack/react-table';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
+  pinningPosition: RowPinningPosition;
   row: MRT_Row<TData>;
   table: MRT_TableInstance<TData>;
-  pinningPosition: RowPinningPosition;
 }
 
 export const MRT_RowPinButton = <TData extends Record<string, any>>({
+  pinningPosition,
   row,
   table,
-  pinningPosition,
 }: Props<TData>) => {
   const {
     options: {
-      icons: { PushPinIcon, CloseIcon },
+      icons: { CloseIcon, PushPinIcon },
       localization,
       rowPinningDisplayMode,
     },
@@ -36,9 +36,9 @@ export const MRT_RowPinButton = <TData extends Record<string, any>>({
   return (
     <Tooltip
       arrow
-      open={tooltipOpened}
       enterDelay={1000}
       enterNextDelay={1000}
+      open={tooltipOpened}
       title={isPinned ? localization.unpin : localization.pin}
     >
       <IconButton
