@@ -1,0 +1,84 @@
+import Head from 'next/head';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+import StickyExample from '../../../examples/enable-row-pinning-sticky';
+import StaticExample from '../../../examples/enable-row-pinning-static';
+import SelectExample from '../../../examples/enable-row-pinning-select';
+
+<Head>
+  <title>Row Pinning Feature Guide - Material React Table Docs</title>
+  <meta
+    name="description"
+    content="How to add and customize row selection checkboxes in Material React Table"
+  />
+</Head>
+
+## Row Pinning Feature Guide
+
+Material React Table has a powerful row pinning feature that allows you to either pin rows to the top and bottom of the table as a user scrolls, or pin rows to the top and bottom of the table regardless of scrolling.
+
+### Relevant Props
+
+<TableOptionsTable
+  onlyOptions={
+    new Set([
+      'enableRowSelection',
+      'rowPinningDisplayMode',
+      'keepPinnedRows',
+      'onRowPinningChange',
+    ])
+  }
+/>
+
+### Relevant State
+
+<StateOptionsTable onlyOptions={new Set(['rowPinning'])} />
+
+### Row Pinning Display Modes
+
+You can enable the row pinning feature with the `enableRowPinning` prop. There are multiple display modes that you can choose from with the `rowPinningDisplayMode` prop.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableRowPinning: true,
+  rowPinningDisplayMode: 'sticky', // default
+});
+```
+
+- `sticky` - This is the default display mode. It will make rows stick to the top and bottom of the table as a user scrolls.
+- `top` - This will statically pin rows to the top of the table upon pinning.
+- `bottom` - This will statically pin rows to the bottom of the table upon pinning.
+- `top-and-bottom` - This allows the user to statically pin rows to either the top or bottom of the table.
+- `select-sticky` - This pins selected rows to the top and bottom of the table as a user scrolls. (alternative pinning UI)
+- `select-top` - This statically pins selected rows to the top of the table upon pinning. (alternative pinning UI)
+- `select-bottom` - This statically pins selected rows to the bottom of the table upon pinning. (alternative pinning UI)
+
+### Sticky Row Pinning
+
+By default, the row pinning feature will add a position sticky style to the pinned rows. This means that the pinned rows will stay in place if the row is already in view. However, the rows will stay in view as the user scrolls up or down.
+
+<StickyExample />
+
+### Static Row Pinning
+
+Some of the other row pinning modes will show pinned rows at the top or bottom of the the table regardless of scrolling. This is a simpler implementation of the row pinning feature.
+
+<StaticExample />
+
+### Alternative Selection Row Pinning UI
+
+By default, the row pinning feature adds a pinning display column with pinning buttons for each row. However, you can instead combine the row pinning feature with the row selection feature to pin selected rows.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableRowPinning: true,
+  enableRowSelection: true,
+  rowPinningDisplayMode: 'select-sticky',
+});
+```
+
+<SelectExample />

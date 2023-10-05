@@ -214,7 +214,7 @@ export const routes: Array<RouteItem> = [
           },
           {
             href: '/docs/guides/column-pinning',
-            label: 'Column Pinning (Freezing)',
+            label: 'Column Pinning (Sticky)',
           },
           {
             href: '/docs/guides/column-resizing',
@@ -259,6 +259,10 @@ export const routes: Array<RouteItem> = [
           {
             href: '/docs/guides/row-ordering-dnd',
             label: 'Row Ordering and Dragging',
+          },
+          {
+            href: '/docs/guides/row-pinning',
+            label: 'Row Pinning (Sticky)',
           },
           {
             href: '/docs/guides/row-selection',

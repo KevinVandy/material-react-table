@@ -527,8 +527,29 @@ export const tableOptions: TableOption[] = [
     linkText: '',
     required: false,
     source: '',
+    type: 'boolean | (row: MRT_Row) => boolean',
+  },
+  {
+    tableOption: 'keepPinnedRows',
+    defaultValue: 'true',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
     type: 'boolean',
   },
+  {
+    tableOption: 'rowPinningDisplayMode',
+    defaultValue: "'sticky'",
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: "'sticky' | 'top' | 'bottom' | 'top-and-bottom' | 'select-sticky' | 'select-top' | 'select-bottom'",
+  },
+
   {
     tableOption: 'enableRowSelection',
     defaultValue: '',
@@ -1579,6 +1600,17 @@ export const tableOptions: TableOption[] = [
     required: false,
     source: 'TanStack Table',
     type: 'OnChangeFn<PaginationState>',
+  },
+  {
+    tableOption: 'onRowPinningChange',
+    defaultValue: '',
+    description:
+      'If provided, this function will be called with an updaterFn when state.rowPinning changes. This overrides the default internal state management, so you will need to persist the state change either fully or partially outside of the table.',
+    link: 'https://tanstack.com/table/v8/docs/api/features/pinning#onrowpinningchange',
+    linkText: 'TanStack Table Pinning Docs',
+    required: false,
+    source: 'TanStack Table',
+    type: 'OnChangeFn<RowSelectionState>',
   },
   {
     tableOption: 'onRowSelectionChange',

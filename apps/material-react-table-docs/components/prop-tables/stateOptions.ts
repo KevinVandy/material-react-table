@@ -206,6 +206,16 @@ export const stateOptions: StateOption[] = [
     type: '{ pageIndex: number, pageSize: number } ',
   },
   {
+    defaultValue: '{ top: [], bottom: [] }',
+    description:
+      'an object with top and bottom properties, each of which is an array of strings representing the rows that are pinned to the top or bottom of the table',
+    link: 'https://tanstack.com/table/v8/docs/api/features/column-pinning',
+    linkText: 'TanStack Table Column Pinning Docs',
+    source: 'TanStack Table',
+    stateOption: 'rowPinning',
+    type: '{ top: string[], bottom: string[] }',
+  },
+  {
     defaultValue: '{}',
     description: '',
     link: 'https://tanstack.com/table/v8/docs/api/features/row-selection',
