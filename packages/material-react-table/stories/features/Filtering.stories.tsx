@@ -194,7 +194,7 @@ export const FilterFnAndFilterVariantsFaceted = () => (
       },
       {
         accessorKey: 'lastName',
-        filterVariant: 'select',
+        filterVariant: 'autocomplete',
         header: 'Last Name',
       },
       {
@@ -272,7 +272,7 @@ export const FilteringChangeModeEnabledFaceted = () => (
       },
       {
         accessorKey: 'lastName',
-        filterVariant: 'select',
+        filterVariant: 'autocomplete',
         header: 'Last Name',
       },
       {

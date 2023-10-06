@@ -52,6 +52,13 @@ export const rowInstanceAPIs: RowInstanceAPI[] = [
     linkText: '',
   },
   {
+    rowInstanceAPI: 'getCanPin',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
     rowInstanceAPI: 'getCanSelect',
     type: '',
     description: '',
@@ -73,6 +80,20 @@ export const rowInstanceAPIs: RowInstanceAPI[] = [
     linkText: '',
   },
   {
+    rowInstanceAPI: 'getGroupingValue',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
+    rowInstanceAPI: 'getIsAllParentsExpanded',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
     rowInstanceAPI: 'getIsAllSubRowsSelected',
     type: '',
     description: '',
@@ -88,6 +109,13 @@ export const rowInstanceAPIs: RowInstanceAPI[] = [
   },
   {
     rowInstanceAPI: 'getIsGrouped',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
+    rowInstanceAPI: 'getIsPinned',
     type: '',
     description: '',
     link: '',
@@ -136,6 +164,13 @@ export const rowInstanceAPIs: RowInstanceAPI[] = [
     linkText: '',
   },
   {
+    rowInstanceAPI: 'getPinnedIndex',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
     rowInstanceAPI: 'getRightVisibleCells',
     type: '',
     description: '',
@@ -177,7 +212,13 @@ export const rowInstanceAPIs: RowInstanceAPI[] = [
     link: '',
     linkText: '',
   },
-  { rowInstanceAPI: 'id', type: '', description: '', link: '', linkText: '' },
+  {
+    rowInstanceAPI: 'id',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
   {
     rowInstanceAPI: 'index',
     type: '',
@@ -201,6 +242,13 @@ export const rowInstanceAPIs: RowInstanceAPI[] = [
   },
   {
     rowInstanceAPI: 'parentId',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
+    rowInstanceAPI: 'pin',
     type: '',
     description: '',
     link: '',

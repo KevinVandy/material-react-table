@@ -31,6 +31,13 @@ export const tableInstanceAPIs: TableInstanceAPI[] = [
     linkText: '',
   },
   {
+    tableInstanceAPI: 'getBottomRows',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
     tableInstanceAPI: 'getCanNextPage',
     type: '',
     description: '',
@@ -81,6 +88,13 @@ export const tableInstanceAPIs: TableInstanceAPI[] = [
   },
   {
     tableInstanceAPI: 'getCenterLeafHeaders',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
+    tableInstanceAPI: 'getCenterRows',
     type: '',
     description: '',
     link: '',
@@ -263,6 +277,13 @@ export const tableInstanceAPIs: TableInstanceAPI[] = [
   },
   {
     tableInstanceAPI: 'getIsSomeRowsExpanded',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
+    tableInstanceAPI: 'getIsSomeRowsPinned',
     type: '',
     description: '',
     link: '',
@@ -507,6 +528,13 @@ export const tableInstanceAPIs: TableInstanceAPI[] = [
     linkText: '',
   },
   {
+    tableInstanceAPI: 'getTopRows',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
     tableInstanceAPI: 'getTotalSize',
     type: '',
     description: '',
@@ -654,6 +682,13 @@ export const tableInstanceAPIs: TableInstanceAPI[] = [
     linkText: '',
   },
   {
+    tableInstanceAPI: 'resetRowPinning',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
     tableInstanceAPI: 'resetRowSelection',
     type: '',
     description: '',
@@ -711,6 +746,13 @@ export const tableInstanceAPIs: TableInstanceAPI[] = [
   },
   {
     tableInstanceAPI: 'setColumnVisibility',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
+    tableInstanceAPI: 'setCreatingRow',
     type: '',
     description: '',
     link: '',
@@ -836,6 +878,13 @@ export const tableInstanceAPIs: TableInstanceAPI[] = [
     linkText: '',
   },
   {
+    tableInstanceAPI: 'setRowPinning',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
     tableInstanceAPI: 'setRowSelection',
     type: '',
     description: '',
@@ -858,6 +907,13 @@ export const tableInstanceAPIs: TableInstanceAPI[] = [
   },
   {
     tableInstanceAPI: 'setShowGlobalFilter',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
+    tableInstanceAPI: 'setShowToolbarDropZone',
     type: '',
     description: '',
     link: '',

@@ -1,6 +1,6 @@
+import typescript from '@rollup/plugin-typescript';
 import { rollup } from 'rollup';
 import copy from 'rollup-plugin-copy';
-import typescript from '@rollup/plugin-typescript';
 
 const supportedLocales = [
   'ar',
@@ -50,10 +50,10 @@ async function build(locale) {
       copy({
         targets: [
           ...['cjs', 'esm'].map((format) => ({
-            src: `./dist/esm/types/locales/${locale}.d.ts`,
             dest: './locales',
             rename: () =>
               format === 'esm' ? `${locale}.${format}.d.ts` : `${locale}.d.ts`,
+            src: `./dist/esm/types/locales/${locale}.d.ts`,
           })),
         ],
       }),

@@ -38,6 +38,7 @@ import {
   type Virtualizer,
   type VirtualizerOptions,
 } from '@tanstack/react-virtual';
+import { type AutocompleteProps } from '@mui/material';
 import { type AlertProps } from '@mui/material/Alert';
 import { type ButtonProps } from '@mui/material/Button';
 import { type CheckboxProps } from '@mui/material/Checkbox';
@@ -407,6 +408,7 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
   filterFn?: MRT_FilterFn<TData>;
   filterSelectOptions?: ({ text: string; value: any } | string)[];
   filterVariant?:
+    | 'autocomplete'
     | 'checkbox'
     | 'date'
     | 'date-range'
@@ -461,6 +463,12 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
         table: MRT_TableInstance<TData>;
       }) => TextFieldProps)
     | TextFieldProps;
+  muiFilterAutocompleteProps?:
+    | ((props: {
+        column: MRT_Column<TData>;
+        table: MRT_TableInstance<TData>;
+      }) => AutocompleteProps<any, any, any, any>)
+    | AutocompleteProps<any, any, any, any>;
   muiFilterCheckboxProps?:
     | ((props: {
         column: MRT_Column<TData>;
@@ -792,6 +800,12 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
         table: MRT_TableInstance<TData>;
       }) => IconButtonProps)
     | IconButtonProps;
+  muiFilterAutocompleteProps?:
+    | ((props: {
+        column: MRT_Column<TData>;
+        table: MRT_TableInstance<TData>;
+      }) => AutocompleteProps<any, any, any, any>)
+    | AutocompleteProps<any, any, any, any>;
   muiFilterCheckboxProps?:
     | ((props: {
         column: MRT_Column<TData>;
