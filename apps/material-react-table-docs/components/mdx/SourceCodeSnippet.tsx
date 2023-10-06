@@ -322,9 +322,11 @@ export const SourceCodeSnippet = ({
             {!isMobile && <EthicalAd id="demo" compact text />}
           </Box>
         </Box>
-        <Collapse unmountOnExit mountOnEnter in={codeTab === 'sandbox'}>
+        <Collapse mountOnEnter in={codeTab === 'sandbox'}>
           <iframe
-            src={`https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/v2/apps/material-react-table-docs/examples/${tableId}/sandbox?fontsize=14&hidenavigation=1&theme=dark&file=src/TS.tsx`}
+            src={`https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/v2/apps/material-react-table-docs/examples/${tableId}/sandbox?fontsize=14&hidenavigation=1&theme=${
+              isLightTheme ? 'light' : 'dark'
+            }&file=src/TS.tsx`}
             style={{
               width: '100%',
               height: '1000px',
