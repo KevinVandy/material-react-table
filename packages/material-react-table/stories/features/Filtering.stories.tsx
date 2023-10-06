@@ -40,12 +40,10 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
     Cell: ({ cell }) => cell.getValue<Date>().toLocaleDateString(), //transform data to readable format for cell render
     accessorFn: (row) => new Date(row.birthDate), //transform data before processing so sorting works
-    accessorKey: 'birthDate',
+    filterFn: 'lessThan',
+    filterVariant: 'date',
     header: 'Birth Date',
-    muiFilterTextFieldProps: {
-      type: 'date',
-    },
-    sortingFn: 'datetime',
+    id: 'birthDate',
   },
   {
     accessorKey: 'gender',
@@ -67,6 +65,7 @@ const data = [...Array(120)].map(() => ({
   birthDate: faker.date.birthdate({ max: 2020, min: 1980 }),
   firstName: faker.person.firstName(),
   gender: Math.random() < 0.8 ? faker.person.sex() : faker.person.gender(),
+  hireDate: faker.date.birthdate({ max: 2024, min: 2011 }),
   isActive: faker.datatype.boolean(),
   lastName: faker.person.lastName(),
   state: faker.location.state(),
@@ -138,6 +137,21 @@ export const FilterFnAndFilterVariants = () => (
         accessorKey: 'age',
         filterVariant: 'range',
         header: 'Age',
+      },
+      {
+        Cell: ({ cell }) => cell.getValue<Date>().toLocaleDateString(), //transform data to readable format for cell render
+        accessorFn: (row) => new Date(row.birthDate), //transform data before processing so sorting works
+        filterFn: 'lessThan',
+        filterVariant: 'date',
+        header: 'Birth Date',
+        id: 'birthDate',
+      },
+      {
+        Cell: ({ cell }) => cell.getValue<Date>().toLocaleDateString(), //transform data to readable format for cell render
+        accessorFn: (row) => new Date(row.hireDate), //transform data before processing so sorting works
+        filterVariant: 'date-range',
+        header: 'Hire Date',
+        id: 'hireDate',
       },
       {
         accessorKey: 'gender',
@@ -220,6 +234,13 @@ export const FilteringChangeModeEnabled = () => (
         accessorKey: 'age',
         filterFn: 'between',
         header: 'Age',
+      },
+      {
+        Cell: ({ cell }) => cell.getValue<Date>().toLocaleDateString(), //transform data to readable format for cell render
+        accessorFn: (row) => new Date(row.birthDate), //transform data before processing so sorting works
+        filterVariant: 'date',
+        header: 'Birth Date',
+        id: 'birthDate',
       },
       {
         accessorKey: 'gender',

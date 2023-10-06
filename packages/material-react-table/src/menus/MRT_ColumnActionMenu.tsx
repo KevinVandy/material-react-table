@@ -36,6 +36,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any>>({
   const {
     getState,
     options: {
+      columnFilterDisplayMode,
       columnFilterModeOptions,
       enableColumnFilterModes,
       enableColumnFilters,
@@ -217,37 +218,39 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any>>({
               {localization.clearFilter}
             </Box>
           </MenuItem>,
-          <MenuItem
-            disabled={showColumnFilters && !enableColumnFilterModes}
-            divider={enableGrouping || enableHiding}
-            key={4}
-            onClick={
-              showColumnFilters
-                ? handleOpenFilterModeMenu
-                : handleFilterByColumn
-            }
-            sx={commonMenuItemStyles}
-          >
-            <Box sx={commonListItemStyles}>
-              <ListItemIcon>
-                <FilterListIcon />
-              </ListItemIcon>
-              {localization.filterByColumn?.replace(
-                '{column}',
-                String(columnDef.header),
+          columnFilterDisplayMode === 'subheader' && (
+            <MenuItem
+              disabled={showColumnFilters && !enableColumnFilterModes}
+              divider={enableGrouping || enableHiding}
+              key={4}
+              onClick={
+                showColumnFilters
+                  ? handleOpenFilterModeMenu
+                  : handleFilterByColumn
+              }
+              sx={commonMenuItemStyles}
+            >
+              <Box sx={commonListItemStyles}>
+                <ListItemIcon>
+                  <FilterListIcon />
+                </ListItemIcon>
+                {localization.filterByColumn?.replace(
+                  '{column}',
+                  String(columnDef.header),
+                )}
+              </Box>
+              {showFilterModeSubMenu && (
+                <IconButton
+                  onClick={handleOpenFilterModeMenu}
+                  onMouseEnter={handleOpenFilterModeMenu}
+                  size="small"
+                  sx={{ p: 0 }}
+                >
+                  <ArrowRightIcon />
+                </IconButton>
               )}
-            </Box>
-            {showFilterModeSubMenu && (
-              <IconButton
-                onClick={handleOpenFilterModeMenu}
-                onMouseEnter={handleOpenFilterModeMenu}
-                size="small"
-                sx={{ p: 0 }}
-              >
-                <ArrowRightIcon />
-              </IconButton>
-            )}
-          </MenuItem>,
+            </MenuItem>
+          ),
           showFilterModeSubMenu && (
             <MRT_FilterOptionMenu
               anchorEl={filterMenuAnchorEl}
@@ -258,7 +261,7 @@ export const MRT_ColumnActionMenu = <TData extends Record<string, any>>({
               table={table}
             />
           ),
-        ]
+        ].filter(Boolean)
       : []),
     ...(enableGrouping && column.getCanGroup()
       ? [

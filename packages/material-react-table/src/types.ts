@@ -59,6 +59,7 @@ import { type TablePaginationProps } from '@mui/material/TablePagination';
 import { type TableRowProps } from '@mui/material/TableRow';
 import { type TextFieldProps } from '@mui/material/TextField';
 import { type ToolbarProps } from '@mui/material/Toolbar';
+import { type DatePickerProps } from '@mui/x-date-pickers';
 import { type MRT_AggregationFns } from './aggregationFns';
 import { type MRT_FilterFns } from './filterFns';
 import { type MRT_Icons } from './icons';
@@ -407,6 +408,8 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
   filterSelectOptions?: ({ text: string; value: any } | string)[];
   filterVariant?:
     | 'checkbox'
+    | 'date'
+    | 'date-range'
     | 'multi-select'
     | 'range'
     | 'range-slider'
@@ -464,6 +467,13 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
         table: MRT_TableInstance<TData>;
       }) => CheckboxProps)
     | CheckboxProps;
+  muiFilterDatePickerProps?:
+    | ((props: {
+        column: MRT_Column<TData>;
+        rangeFilterIndex?: number;
+        table: MRT_TableInstance<TData>;
+      }) => DatePickerProps<any>)
+    | DatePickerProps<any>;
   muiFilterSliderProps?:
     | ((props: {
         column: MRT_Column<TData>;
@@ -788,6 +798,13 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
         table: MRT_TableInstance<TData>;
       }) => CheckboxProps)
     | CheckboxProps;
+  muiFilterDatePickerProps?:
+    | ((props: {
+        column: MRT_Column<TData>;
+        rangeFilterIndex?: number;
+        table: MRT_TableInstance<TData>;
+      }) => DatePickerProps<any>)
+    | DatePickerProps<any>;
   muiFilterSliderProps?:
     | ((props: {
         column: MRT_Column<TData>;

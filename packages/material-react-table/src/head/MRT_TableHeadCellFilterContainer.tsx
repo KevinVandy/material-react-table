@@ -34,7 +34,7 @@ export const MRT_TableHeadCellFilterContainer = <
         <MRT_FilterCheckbox column={column} table={table} />
       ) : columnDef.filterVariant === 'range-slider' ? (
         <MRT_FilterRangeSlider header={header} table={table} />
-      ) : columnDef.filterVariant === 'range' ||
+      ) : columnDef.filterVariant?.includes('range') ||
         ['between', 'betweenInclusive', 'inNumberRange'].includes(
           columnDef._filterFn,
         ) ? (

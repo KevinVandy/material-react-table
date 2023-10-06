@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { Preview } from '@storybook/react';
 import { useDarkMode } from 'storybook-dark-mode';
 import { createTheme, Link, ThemeProvider, Typography } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 const lightTheme = createTheme({
   palette: { mode: 'light' },
@@ -37,38 +39,40 @@ const preview: Preview = {
 
       return (
         <ThemeProvider theme={defaultTheme}>
-          <Typography
-            sx={{
-              pb: '0.5rem',
-              color: useDarkMode() ? '#fff' : '#666',
-            }}
-            variant="subtitle2"
-          >
-            Looking for the main docs site? Click{' '}
-            <Link
-              href="https://www.material-react-table.com"
-              target="_blank"
-              rel="noopener"
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Typography
+              sx={{
+                pb: '0.5rem',
+                color: useDarkMode() ? '#fff' : '#666',
+              }}
+              variant="subtitle2"
             >
-              here.
-            </Link>
-          </Typography>
-          <Typography
-            variant="subtitle2"
-            sx={{
-              pb: '1rem',
-              color: useDarkMode() ? '#fff' : '#666',
-            }}
-          >
-            View Source code for these examples in the code tab below or{' '}
-            <Link
-              href="https://github.com/KevinVandy/material-react-table/tree/v2/packages/material-react-table/stories/features"
-              target="_blank"
+              Looking for the main docs site? Click{' '}
+              <Link
+                href="https://www.material-react-table.com"
+                target="_blank"
+                rel="noopener"
+              >
+                here.
+              </Link>
+            </Typography>
+            <Typography
+              variant="subtitle2"
+              sx={{
+                pb: '1rem',
+                color: useDarkMode() ? '#fff' : '#666',
+              }}
             >
-              here on GitHub.
-            </Link>
-          </Typography>
-          <Story {...context} />
+              View Source code for these examples in the code tab below or{' '}
+              <Link
+                href="https://github.com/KevinVandy/material-react-table/tree/v2/packages/material-react-table/stories/features"
+                target="_blank"
+              >
+                here on GitHub.
+              </Link>
+            </Typography>
+            <Story {...context} />
+          </LocalizationProvider>
         </ThemeProvider>
       );
     },

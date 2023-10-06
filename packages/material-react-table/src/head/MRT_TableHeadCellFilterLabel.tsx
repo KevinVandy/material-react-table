@@ -39,7 +39,7 @@ export const MRT_TableHeadCellFilterLabel = <
     (!!filterValue && !Array.isArray(filterValue));
 
   const isRangeFilter =
-    columnDef.filterVariant === 'range' ||
+    columnDef.filterVariant?.includes('range') ||
     ['between', 'betweenInclusive', 'inNumberRange'].includes(
       columnDef._filterFn,
     );
@@ -67,11 +67,11 @@ export const MRT_TableHeadCellFilterLabel = <
           .replace(
             '{filterValue}',
             `"${
-              Array.isArray(column.getFilterValue())
-                ? (column.getFilterValue() as [string, string]).join(
+              Array.isArray(filterValue)
+                ? (filterValue as [string, string]).join(
                     `" ${isRangeFilter ? localization.and : localization.or} "`,
                   )
-                : (column.getFilterValue() as string)
+                : (filterValue as string)
             }"`,
           )
           .replace('" "', '');
@@ -81,9 +81,9 @@ export const MRT_TableHeadCellFilterLabel = <
       <Grow
         in={
           columnFilterDisplayMode === 'popover' ||
-          (!!column.getFilterValue() && !isRangeFilter) ||
+          (!!filterValue && !isRangeFilter) ||
           (isRangeFilter && // @ts-ignore
-            (!!column.getFilterValue()?.[0] || !!column.getFilterValue()?.[1]))
+            (!!filterValue?.[0] || !!filterValue?.[1]))
         }
         unmountOnExit
       >

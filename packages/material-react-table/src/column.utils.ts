@@ -201,11 +201,7 @@ export const getDefaultColumnFilterFn = <TData extends Record<string, any>>(
   columnDef: MRT_ColumnDef<TData>,
 ): MRT_FilterOption => {
   if (columnDef.filterVariant === 'multi-select') return 'arrIncludesSome';
-  if (
-    columnDef.filterVariant === 'range' ||
-    columnDef.filterVariant === 'range-slider'
-  )
-    return 'betweenInclusive';
+  if (columnDef.filterVariant?.includes('range')) return 'betweenInclusive';
   if (
     columnDef.filterVariant === 'select' ||
     columnDef.filterVariant === 'checkbox'
