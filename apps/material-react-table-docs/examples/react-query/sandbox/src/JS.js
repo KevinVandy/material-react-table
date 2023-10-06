@@ -119,6 +119,7 @@ const Example = () => {
 const queryClient = new QueryClient();
 
 const ExampleWithReactQueryProvider = () => (
+  //App.tsx or AppProviders file
   <QueryClientProvider client={queryClient}>
     <Example />
   </QueryClientProvider>
