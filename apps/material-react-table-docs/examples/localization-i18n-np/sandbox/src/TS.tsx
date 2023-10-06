@@ -13,16 +13,16 @@ const columns: MRT_ColumnDef<Person>[] = [
   //column definitions...
   {
     accessorKey: 'firstName',
-    header: 'First Name',
+    header: 'नाम'
   },
   {
     accessorKey: 'lastName',
-    header: 'Last Name',
+    header: 'थर',
     enableClickToCopy: true,
   },
   {
     accessorKey: 'age',
-    header: 'Age',
+    header: 'उमेर',
   },
   //end
 ];
