@@ -1,23 +1,23 @@
 export type Person = {
   firstName: string;
   lastName: string;
-  age: number;
+  age: string;
 };
 
 export const data: Person[] = [
   {
     firstName: 'Kevin',
     lastName: 'Vandy',
-    age: 26,
+    age: "२६",
   },
   {
     firstName: 'Theodore',
     lastName: 'Browne',
-    age: 28,
+    age: "२८",
   },
   {
     firstName: 'Tanner',
     lastName: 'Linsley',
-    age: 33,
+    age: "३३",
   },
 ];
