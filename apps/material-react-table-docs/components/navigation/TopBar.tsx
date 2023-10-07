@@ -151,7 +151,12 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
             <ThemeProvider
               theme={createTheme({ ...theme, palette: { mode: 'dark' } })}
             >
-              <Select value="v1" size="small" sx={{ m: '8px', height: '2rem' }}>
+              <Select
+                onOpen={() => plausible('version-select')}
+                value="v1"
+                size="small"
+                sx={{ m: '8px', height: '2rem' }}
+              >
                 <MenuItem sx={{ m: 0 }} value="v1">
                   V1
                 </MenuItem>
