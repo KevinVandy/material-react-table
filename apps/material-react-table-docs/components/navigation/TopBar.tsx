@@ -12,6 +12,10 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
+  Select,
+  MenuItem,
+  ThemeProvider,
+  createTheme,
 } from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -111,7 +115,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
       </style>
       <AppBar position="fixed">
         <Toolbar variant="dense">
-          <Box display="flex">
+          <Box sx={{ display: 'flex' }}>
             {!isDesktop && (
               <IconButton
                 aria-label="Open nav menu"
@@ -144,6 +148,27 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
                 {!isMobile && 'Material React Table'}
               </Typography>
             </Link>
+            <ThemeProvider
+              theme={createTheme({ ...theme, palette: { mode: 'dark' } })}
+            >
+              <Select
+                value="v2"
+                size="small"
+                sx={{ m: '8px', height: '2rem' }}
+              >
+                <Link
+                  legacyBehavior
+                  href={`https://material-react-table.com/${pathname}`}
+                >
+                  <MenuItem sx={{ m: 0 }} value="v1">
+                    V1
+                  </MenuItem>
+                </Link>
+                <MenuItem sx={{ m: 0 }} value="v2">
+                  V2
+                </MenuItem>
+              </Select>
+            </ThemeProvider>
           </Box>
           <Box
             onClick={() => plausible('open-search')}

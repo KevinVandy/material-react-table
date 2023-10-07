@@ -65,7 +65,7 @@ export const HomeCards = () => {
               />{' '}
               Efficient Bundle Size
             </Typography>
-            <Typography>33-47 KB depending on components imported.</Typography>
+            <Typography>37-53 KB depending on components imported.</Typography>
             <Typography>
               Import the recommended <code>MaterialReactTable</code> component,
               or optionally import lighter weight MRT sub-components that only
