@@ -1,14 +1,22 @@
-import { type ChangeEvent } from 'react';
-import TablePagination from '@mui/material/TablePagination';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Pagination, { type PaginationProps } from '@mui/material/Pagination';
+import PaginationItem from '@mui/material/PaginationItem';
+import Select from '@mui/material/Select';
+import Typography from '@mui/material/Typography';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any>> {
+const defaultPageSizeOptions = [5, 10, 15, 20, 25, 30, 50, 100];
+
+interface Props<TData extends Record<string, any> = {}> {
   position?: 'bottom' | 'top';
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TablePagination = <TData extends Record<string, any>>({
+export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
   position = 'bottom',
   table,
 }: Props<TData>) => {
@@ -17,8 +25,10 @@ export const MRT_TablePagination = <TData extends Record<string, any>>({
     getState,
     options: {
       enableToolbarInternalActions,
+      icons: { ChevronLefIcon, ChevronRightIcon, FirstPageIcon, LastPageIcon },
       localization,
       muiTablePaginationProps,
+      paginationDisplayMode,
       rowCount,
     },
     setPageIndex,
@@ -29,80 +39,127 @@ export const MRT_TablePagination = <TData extends Record<string, any>>({
     showGlobalFilter,
   } = getState();
 
-  const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
-  const showFirstLastPageButtons = totalRowCount / pageSize > 2;
-
-  const tablePaginationProps = parseFromValuesOrFunc(muiTablePaginationProps, {
+  const paginationProps = parseFromValuesOrFunc(muiTablePaginationProps, {
     table,
   });
 
-  const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
-    setPageSize(+event.target.value);
-  };
+  const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
+  const numberOfPages = Math.ceil(totalRowCount / pageSize);
+  const showFirstLastPageButtons = numberOfPages > 2;
+  const showFirstButton =
+    showFirstLastPageButtons && paginationProps?.showFirstButton !== false;
+  const showLastButton =
+    showFirstLastPageButtons && paginationProps?.showLastButton !== false;
+  const firstRowIndex = pageIndex * pageSize;
+  const lastRowIndex = Math.min(pageIndex * pageSize + pageSize, totalRowCount);
 
   return (
-    <TablePagination
-      component="div"
-      count={totalRowCount}
-      getItemAriaLabel={(type) =>
-        type === 'first'
-          ? localization.goToFirstPage
-          : type === 'last'
-          ? localization.goToLastPage
-          : type === 'next'
-          ? localization.goToNextPage
-          : localization.goToPreviousPage
-      }
-      labelDisplayedRows={({ count, from, to }) =>
-        `${from}-${to} ${localization.of} ${count}`
-      }
-      labelRowsPerPage={localization.rowsPerPage}
-      onPageChange={(_: any, newPage: number) => setPageIndex(newPage)}
-      onRowsPerPageChange={handleChangeRowsPerPage}
-      page={Math.max(
-        Math.min(pageIndex, Math.ceil(totalRowCount / pageSize) - 1),
-        0,
-      )}
-      rowsPerPage={pageSize}
-      rowsPerPageOptions={[5, 10, 15, 20, 25, 30, 50, 100]}
-      showFirstButton={showFirstLastPageButtons}
-      showLastButton={showFirstLastPageButtons}
-      {...tablePaginationProps}
-      SelectProps={{
-        MenuProps: { MenuListProps: { disablePadding: true }, sx: { m: 0 } },
-        sx: { m: '0 1rem 0 1ch' },
-        ...tablePaginationProps?.SelectProps,
-      }}
-      sx={(theme) => ({
-        '& . MuiTablePagination-select': {
-          m: '0 1px',
-        },
-        '& .MuiTablePagination-actions': {
-          m: '0 1px',
-        },
-        '& .MuiTablePagination-displayedRows': {
-          m: '0 1px',
-        },
-        '& .MuiTablePagination-selectLabel': {
-          m: '0 -1px',
-        },
-        '& .MuiTablePagination-toolbar': {
-          alignItems: 'center',
-          display: 'flex',
-        },
-        '&. MuiInputBase-root': {
-          m: '0 1px',
-        },
+    <Box
+      sx={{
+        alignItems: 'center',
+        display: 'flex',
+        gap: '8px',
+        justifyContent: 'space-between',
         mt:
           position === 'top' &&
           enableToolbarInternalActions &&
           !showGlobalFilter
-            ? '3.5rem'
+            ? '3rem'
             : undefined,
         position: 'relative',
+        px: '4px',
+        py: '12px',
         zIndex: 2,
-        ...(parseFromValuesOrFunc(tablePaginationProps?.sx, theme) as any),
-      })}
-    />
+      }}
+    >
+      {paginationProps?.showRowsPerPage !== false && (
+        <Box sx={{ alignItems: 'center', display: 'flex', gap: '8px' }}>
+          <InputLabel htmlFor="mrt-rows-per-page" sx={{ mb: 0 }}>
+            {localization.rowsPerPage}
+          </InputLabel>
+          <Select
+            id="mrt-rows-per-page"
+            label={localization.rowsPerPage}
+            onChange={(event) => setPageSize(+event.target.value)}
+            sx={{ '&::before': { border: 'none' }, mb: 0 }}
+            value={pageSize}
+            variant="standard"
+          >
+            {defaultPageSizeOptions.map((value) => (
+              <MenuItem key={value} sx={{ m: 0 }} value={value}>
+                {value}
+              </MenuItem>
+            ))}
+          </Select>
+        </Box>
+      )}
+      {paginationDisplayMode === 'pages' ? (
+        <Pagination
+          count={numberOfPages}
+          onChange={(_e, newPageIndex) => setPageIndex(newPageIndex - 1)}
+          page={pageIndex + 1}
+          renderItem={(item) => (
+            <PaginationItem
+              slots={{
+                first: FirstPageIcon,
+                last: LastPageIcon,
+                next: ChevronRightIcon,
+                previous: ChevronLefIcon,
+              }}
+              {...item}
+            />
+          )}
+          showFirstButton={showFirstButton}
+          showLastButton={showLastButton}
+          {...(paginationProps as PaginationProps)}
+        />
+      ) : paginationDisplayMode === 'default' ? (
+        <>
+          <Typography mb="0" mx="8px" variant="body2">{`${
+            lastRowIndex === 0 ? 0 : (firstRowIndex + 1).toLocaleString()
+          }-${lastRowIndex.toLocaleString()} ${
+            localization.of
+          } ${totalRowCount.toLocaleString()}`}</Typography>
+          <Box gap="xs">
+            {showFirstButton && (
+              <IconButton
+                aria-label={localization.goToFirstPage}
+                disabled={pageIndex <= 0}
+                onClick={() => setPageIndex(0)}
+                size="small"
+              >
+                <FirstPageIcon />
+              </IconButton>
+            )}
+            <IconButton
+              aria-label={localization.goToPreviousPage}
+              disabled={pageIndex <= 0}
+              onClick={() => setPageIndex(pageIndex - 1)}
+              size="small"
+            >
+              <ChevronLefIcon />
+            </IconButton>
+            <IconButton
+              aria-label={localization.goToNextPage}
+              disabled={lastRowIndex >= totalRowCount}
+              onClick={() => setPageIndex(pageIndex + 1)}
+              size="small"
+            >
+              <ChevronRightIcon />
+            </IconButton>
+            {showLastButton && (
+              <IconButton
+                aria-label={localization.goToLastPage}
+                disabled={lastRowIndex >= totalRowCount}
+                onClick={() => setPageIndex(numberOfPages - 1)}
+                size="small"
+              >
+                <LastPageIcon />
+              </IconButton>
+            )}
+          </Box>
+        </>
+      ) : null}
+    </Box>
   );
 };

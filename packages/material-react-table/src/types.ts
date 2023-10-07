@@ -38,14 +38,15 @@ import {
   type Virtualizer,
   type VirtualizerOptions,
 } from '@tanstack/react-virtual';
-import { type AutocompleteProps } from '@mui/material';
 import { type AlertProps } from '@mui/material/Alert';
+import { type AutocompleteProps } from '@mui/material/Autocomplete';
 import { type ButtonProps } from '@mui/material/Button';
 import { type CheckboxProps } from '@mui/material/Checkbox';
 import { type ChipProps } from '@mui/material/Chip';
 import { type DialogProps } from '@mui/material/Dialog';
 import { type IconButtonProps } from '@mui/material/IconButton';
 import { type LinearProgressProps } from '@mui/material/LinearProgress';
+import { type PaginationProps } from '@mui/material/Pagination';
 import { type PaperProps } from '@mui/material/Paper';
 import { type RadioProps } from '@mui/material/Radio';
 import { type SkeletonProps } from '@mui/material/Skeleton';
@@ -56,7 +57,6 @@ import { type TableCellProps } from '@mui/material/TableCell';
 import { type TableContainerProps } from '@mui/material/TableContainer';
 import { type TableFooterProps } from '@mui/material/TableFooter';
 import { type TableHeadProps } from '@mui/material/TableHead';
-import { type TablePaginationProps } from '@mui/material/TablePagination';
 import { type TableRowProps } from '@mui/material/TableRow';
 import { type TextFieldProps } from '@mui/material/TextField';
 import { type ToolbarProps } from '@mui/material/Toolbar';
@@ -917,10 +917,18 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
       }) => TableRowProps)
     | TableRowProps;
   muiTablePaginationProps?:
-    | ((props: {
-        table: MRT_TableInstance<TData>;
-      }) => Partial<Omit<TablePaginationProps, 'rowsPerPage'>>)
-    | Partial<Omit<TablePaginationProps, 'rowsPerPage'>>;
+    | ((props: { table: MRT_TableInstance<TData> }) => Partial<
+        PaginationProps & {
+          rowsPerPageOptions?: number[];
+          showRowsPerPage?: boolean;
+        }
+      >)
+    | Partial<
+        PaginationProps & {
+          rowsPerPageOptions?: number[];
+          showRowsPerPage?: boolean;
+        }
+      >;
   muiTablePaperProps?:
     | ((props: { table: MRT_TableInstance<TData> }) => PaperProps)
     | PaperProps;

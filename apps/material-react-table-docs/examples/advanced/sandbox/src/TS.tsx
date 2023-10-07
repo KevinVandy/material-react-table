@@ -151,7 +151,14 @@ const Example = () => {
     enableRowActions: true,
     enableRowSelection: true,
     initialState: { showColumnFilters: true, showGlobalFilter: true },
+    paginationDisplayMode: 'pages',
     positionToolbarAlertBanner: 'bottom',
+    muiTablePaginationProps: {
+      color: 'secondary',
+      rowsPerPageOptions: [10, 20, 30],
+      shape: 'rounded',
+      variant: 'outlined'
+    },
     renderDetailPanel: ({ row }) => (
       <Box
         sx={{

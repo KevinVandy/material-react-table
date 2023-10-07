@@ -37,6 +37,47 @@ export const PaginationEnabledDefault = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
+export const PaginationEnabledDefaultNoRowsPerPage = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    muiTablePaginationProps={{
+      showRowsPerPage: false,
+    }}
+  />
+);
+
+export const PaginatiosPagesDisplayMode = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    paginationDisplayMode="pages"
+  />
+);
+
+export const PaginatiosPagesDisplayModeNoPagesPerRow = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    muiTablePaginationProps={{
+      showRowsPerPage: false,
+    }}
+    paginationDisplayMode="pages"
+  />
+);
+
+export const CustomPaginatiosPagesDisplayMode = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    muiTablePaginationProps={{
+      shape: 'circular',
+      variant: 'outlined',
+    }}
+    paginationDisplayMode="pages"
+  />
+);
+
 export const PaginationDisabledOrOverriden = () => (
   <MaterialReactTable columns={columns} data={data} enablePagination={false} />
 );
@@ -66,32 +107,32 @@ export const PaginationPositionTopAndBottomNoInternalActions = () => (
   />
 );
 
-export const CustomizePaginationComponents = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    initialState={{ pagination: { pageIndex: 0, pageSize: 5 } }}
-    muiTablePaginationProps={{
-      SelectProps: { native: true },
-      labelRowsPerPage: 'Number of rows visible',
-      rowsPerPageOptions: [5, 10, 20],
-      showFirstButton: false,
-      showLastButton: false,
-    }}
-  />
-);
+// export const CustomizePaginationComponents = () => (
+//   <MaterialReactTable
+//     columns={columns}
+//     data={data}
+//     initialState={{ pagination: { pageIndex: 0, pageSize: 5 } }}
+//     muiTablePaginationProps={{
+//       SelectProps: { native: true },
+//       labelRowsPerPage: 'Number of rows visible',
+//       rowsPerPageOptions: [5, 10, 20],
+//       showFirstButton: false,
+//       showLastButton: false,
+//     }}
+//   />
+// );
 
-export const RotateIcons = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    muiTablePaginationProps={{
-      backIconButtonProps: {
-        style: { transform: 'rotate(180deg)' },
-      },
-      nextIconButtonProps: {
-        style: { transform: 'rotate(180deg)' },
-      },
-    }}
-  />
-);
+// export const RotateIcons = () => (
+//   <MaterialReactTable
+//     columns={columns}
+//     data={data}
+//     muiTablePaginationProps={{
+//       backIconButtonProps: {
+//         style: { transform: 'rotate(180deg)' },
+//       },
+//       nextIconButtonProps: {
+//         style: { transform: 'rotate(180deg)' },
+//       },
+//     }}
+//   />
+// );

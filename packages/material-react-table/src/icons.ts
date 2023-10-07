@@ -1,6 +1,8 @@
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import CancelIcon from '@mui/icons-material/Cancel';
+import ChevronLefIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import CloseIcon from '@mui/icons-material/Close';
 import DensityLargeIcon from '@mui/icons-material/DensityLarge';
@@ -13,9 +15,11 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import FilterListOffIcon from '@mui/icons-material/FilterListOff';
+import FirstPageIcon from '@mui/icons-material/FirstPage';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import LastPageIcon from '@mui/icons-material/LastPage';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PushPinIcon from '@mui/icons-material/PushPin';
@@ -31,6 +35,8 @@ export interface MRT_Icons {
   ArrowDownwardIcon: any;
   ArrowRightIcon: any;
   CancelIcon: any;
+  ChevronLefIcon: any;
+  ChevronRightIcon: any;
   ClearAllIcon: any;
   CloseIcon: any;
   DensityLargeIcon: any;
@@ -43,9 +49,11 @@ export interface MRT_Icons {
   FilterAltIcon: any;
   FilterListIcon: any;
   FilterListOffIcon: any;
+  FirstPageIcon?: any;
   FullscreenExitIcon: any;
   FullscreenIcon: any;
   KeyboardDoubleArrowDownIcon: any;
+  LastPageIcon?: any;
   MoreHorizIcon: any;
   MoreVertIcon: any;
   PushPinIcon: any;
@@ -62,6 +70,8 @@ export const MRT_Default_Icons: MRT_Icons = {
   ArrowDownwardIcon,
   ArrowRightIcon,
   CancelIcon,
+  ChevronLefIcon,
+  ChevronRightIcon,
   ClearAllIcon,
   CloseIcon,
   DensityLargeIcon,
@@ -74,9 +84,11 @@ export const MRT_Default_Icons: MRT_Icons = {
   FilterAltIcon,
   FilterListIcon,
   FilterListOffIcon,
+  FirstPageIcon,
   FullscreenExitIcon,
   FullscreenIcon,
   KeyboardDoubleArrowDownIcon,
+  LastPageIcon,
   MoreHorizIcon,
   MoreVertIcon,
   PushPinIcon,
