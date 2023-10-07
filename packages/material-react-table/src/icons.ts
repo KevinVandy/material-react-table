@@ -1,7 +1,7 @@
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import CancelIcon from '@mui/icons-material/Cancel';
-import ChevronLefIcon from '@mui/icons-material/ChevronLeft';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import CloseIcon from '@mui/icons-material/Close';
@@ -35,7 +35,7 @@ export interface MRT_Icons {
   ArrowDownwardIcon: any;
   ArrowRightIcon: any;
   CancelIcon: any;
-  ChevronLefIcon: any;
+  ChevronLeftIcon: any;
   ChevronRightIcon: any;
   ClearAllIcon: any;
   CloseIcon: any;
@@ -70,7 +70,7 @@ export const MRT_Default_Icons: MRT_Icons = {
   ArrowDownwardIcon,
   ArrowRightIcon,
   CancelIcon,
-  ChevronLefIcon,
+  ChevronLeftIcon,
   ChevronRightIcon,
   ClearAllIcon,
   CloseIcon,

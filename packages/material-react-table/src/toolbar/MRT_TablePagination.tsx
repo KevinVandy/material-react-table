@@ -25,7 +25,7 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
     getState,
     options: {
       enableToolbarInternalActions,
-      icons: { ChevronLefIcon, ChevronRightIcon, FirstPageIcon, LastPageIcon },
+      icons: { ChevronLeftIcon, ChevronRightIcon, FirstPageIcon, LastPageIcon },
       localization,
       muiTablePaginationProps,
       paginationDisplayMode,
@@ -104,7 +104,7 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
                 first: FirstPageIcon,
                 last: LastPageIcon,
                 next: ChevronRightIcon,
-                previous: ChevronLefIcon,
+                previous: ChevronLeftIcon,
               }}
               {...item}
             />
@@ -137,7 +137,7 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
               onClick={() => setPageIndex(pageIndex - 1)}
               size="small"
             >
-              <ChevronLefIcon />
+              <ChevronLeftIcon />
             </IconButton>
             <IconButton
               aria-label={localization.goToNextPage}
