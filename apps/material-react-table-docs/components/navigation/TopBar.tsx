@@ -12,6 +12,10 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
+  ThemeProvider,
+  createTheme,
+  Select,
+  MenuItem,
 } from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -144,6 +148,23 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
                 {!isMobile && 'Material React Table'}
               </Typography>
             </Link>
+            <ThemeProvider
+              theme={createTheme({ ...theme, palette: { mode: 'dark' } })}
+            >
+              <Select value="v1" size="small" sx={{ m: '8px', height: '2rem' }}>
+                <MenuItem sx={{ m: 0 }} value="v1">
+                  V1
+                </MenuItem>
+                <Link
+                  legacyBehavior
+                  href={`https://v2.material-react-table.com/${pathname}`}
+                >
+                  <MenuItem sx={{ m: 0 }} value="v2">
+                    V2
+                  </MenuItem>
+                </Link>
+              </Select>
+            </ThemeProvider>
           </Box>
           <Box
             onClick={() => plausible('open-search')}

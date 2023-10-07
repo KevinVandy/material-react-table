@@ -67,6 +67,13 @@ export const StatBadges = () => {
           src="https://badgen.net/github/license/KevinVandy/material-react-table?color=blue"
         />
       </a>
+      <a
+        href="https://github.com/sponsors/kevinvandy"
+        target="_blank"
+        rel="noopener"
+      >
+        <img alt="" src="https://img.shields.io/badge/sponsor-violet" />
+      </a>
     </Box>
   );
 };
