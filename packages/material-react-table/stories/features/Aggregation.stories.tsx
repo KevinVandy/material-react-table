@@ -15,7 +15,7 @@ const meta: Meta = {
 export default meta;
 
 const data = [...Array(2000)].map(() => ({
-  age: faker.datatype.number({ max: 65, min: 18 }),
+  age: faker.number.int({ max: 65, min: 18 }),
   firstName: faker.person.firstName(),
   gender: Math.random() < 0.9 ? faker.person.sex() : faker.person.gender(),
   lastName: faker.person.lastName(),

@@ -48,7 +48,7 @@ Default.args = {
   ] as MRT_ColumnDef<Person>[],
   data: [...Array(6)].map(() => ({
     address: faker.location.streetAddress(),
-    age: faker.datatype.number(80),
+    age: faker.number.int(80),
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
   })),

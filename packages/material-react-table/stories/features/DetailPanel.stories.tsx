@@ -66,7 +66,7 @@ export const DetailPanelEnabledConditional = () => (
     ]}
     data={[...Array(10)].map(() => ({
       address: faker.location.streetAddress(),
-      age: faker.datatype.number(100) + 5,
+      age: faker.number.int(100) + 5,
       city: faker.location.city(),
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
