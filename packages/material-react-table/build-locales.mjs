@@ -71,6 +71,9 @@ async function build(locale) {
     format: 'esm',
     sourcemap: true,
   });
+
+  // eslint-disable-next-line
+  console.log(`Built ${locale} locale`);
 }
 
 async function run() {

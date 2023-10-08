@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0-alpha.4",
+  "version": "2.0.0-alpha.5",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -81,13 +81,13 @@
     "@storybook/react": "^7.4.6",
     "@storybook/react-vite": "^7.4.6",
     "@storybook/testing-library": "^0.2.2",
-    "@types/node": "^20.8.2",
+    "@types/node": "^20.8.3",
     "@types/react": "^18.2.25",
-    "@types/react-dom": "^18.2.10",
+    "@types/react-dom": "^18.2.11",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "@typescript-eslint/parser": "^6.7.4",
     "@vitejs/plugin-react": "^4.1.0",
-    "eslint": "^8.50.0",
+    "eslint": "^8.51.0",
     "eslint-plugin-mui-path-imports": "^0.0.15",
     "eslint-plugin-perfectionist": "^2.1.0",
     "prop-types": "^15.8.1",
@@ -96,7 +96,7 @@
     "react-is": "^18.2.0",
     "rollup": "^2.79.1",
     "rollup-plugin-copy": "^3.5.0",
-    "rollup-plugin-dts": "^6.0.2",
+    "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "size-limit": "^9.0.0",
     "storybook": "^7.4.6",
@@ -116,7 +116,7 @@
   },
   "dependencies": {
     "@tanstack/match-sorter-utils": "8.8.4",
-    "@tanstack/react-table": "8.10.4",
+    "@tanstack/react-table": "8.10.6",
     "@tanstack/react-virtual": "3.0.0-beta.63",
     "highlight-words": "1.2.2"
   }
