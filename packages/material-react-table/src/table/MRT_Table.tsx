@@ -2,7 +2,6 @@ import { useCallback, useMemo } from 'react';
 import {
   type Range,
   type Virtualizer,
-  defaultRangeExtractor,
   useVirtualizer,
 } from '@tanstack/react-virtual';
 import Table from '@mui/material/Table';
@@ -11,6 +10,7 @@ import { parseCSSVarId, parseFromValuesOrFunc } from '../column.utils';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
 import { MRT_TableHead } from '../head/MRT_TableHead';
 import { type MRT_TableInstance } from '../types';
+import { DraggingRangeExtractor } from '../virtualization.utils';
 
 interface Props<TData extends Record<string, any>> {
   table: MRT_TableInstance<TData>;
@@ -43,6 +43,7 @@ export const MRT_Table = <TData extends Record<string, any>>({
     columnSizing,
     columnSizingInfo,
     columnVisibility,
+    draggingColumn,
     isFullScreen,
   } = getState();
 
@@ -93,6 +94,10 @@ export const MRT_Table = <TData extends Record<string, any>>({
     [columnPinning, enableColumnVirtualization, enableColumnPinning],
   );
 
+  const draggingColumnIndex = table
+    .getVisibleLeafColumns()
+    .findIndex((c) => c.id === draggingColumn?.id);
+
   const columnVirtualizer:
     | Virtualizer<HTMLDivElement, HTMLTableCellElement>
     | undefined = enableColumnVirtualization
@@ -103,14 +108,20 @@ export const MRT_Table = <TData extends Record<string, any>>({
         horizontal: true,
         overscan: 3,
         rangeExtractor: useCallback(
-          (range: Range) => [
-            ...new Set([
-              ...leftPinnedIndexes,
-              ...defaultRangeExtractor(range),
-              ...rightPinnedIndexes,
-            ]),
-          ],
-          [leftPinnedIndexes, rightPinnedIndexes],
+          (range: Range) => {
+            const newIndexs = DraggingRangeExtractor(
+              range,
+              draggingColumnIndex,
+            );
+            return [
+              ...new Set([
+                ...leftPinnedIndexes,
+                ...newIndexs,
+                ...rightPinnedIndexes,
+              ]),
+            ];
+          },
+          [leftPinnedIndexes, rightPinnedIndexes, draggingColumnIndex],
         ),
         ...columnVirtualizerProps,
       })

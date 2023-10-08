@@ -1,5 +1,6 @@
-import { memo, useMemo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import {
+  type Range,
   type VirtualItem,
   type Virtualizer,
   useVirtualizer,
@@ -10,6 +11,7 @@ import { MRT_TableBodyRow, Memo_MRT_TableBodyRow } from './MRT_TableBodyRow';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { rankGlobalFuzzy } from '../sortingFns';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
+import { DraggingRangeExtractor } from '../virtualization.utils';
 
 interface Props<TData extends Record<string, any>> {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
@@ -60,6 +62,7 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
   const {
     columnFilters,
     density,
+    draggingRow,
     expanded,
     globalFilter,
     globalFilterFn,
@@ -146,6 +149,15 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
     rowPinning,
   ]);
 
+  const draggingRowIndex = rows.findIndex((row) => row.id === draggingRow?.id);
+
+  const rangeExtractor = useCallback(
+    (range: Range) => {
+      return DraggingRangeExtractor(range, draggingRowIndex);
+    },
+    [draggingRowIndex],
+  );
+
   const rowVirtualizer:
     | Virtualizer<HTMLDivElement, HTMLTableRowElement>
     | undefined = enableRowVirtualization
@@ -160,6 +172,7 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
             ? (element) => element?.getBoundingClientRect().height
             : undefined,
         overscan: 4,
+        rangeExtractor,
         ...rowVirtualizerProps,
       })
     : undefined;
