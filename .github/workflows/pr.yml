@@ -9,8 +9,10 @@ jobs:
   clean-pr:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source code
+      - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
