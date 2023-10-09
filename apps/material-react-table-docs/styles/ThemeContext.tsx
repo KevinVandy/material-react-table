@@ -1,6 +1,8 @@
 import { ThemeProvider } from '@mui/material';
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { theme } from './MuiTheme';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 const ThemeContext = createContext<{
   isLightTheme: boolean;
@@ -44,7 +46,9 @@ export const ThemeContextProvider = ({ children }) => {
       <ThemeProvider
         theme={theme({ isLightTheme, primaryColor, secondaryColor })}
       >
-        {children}
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          {children}
+        </LocalizationProvider>
       </ThemeProvider>
     </ThemeContext.Provider>
   );
