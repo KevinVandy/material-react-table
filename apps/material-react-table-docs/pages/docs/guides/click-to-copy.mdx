@@ -15,7 +15,7 @@ import Example from '../../../examples/enable-click-to-copy';
 
 Material React Table has an easy-to-implement feature that allows a user to copy a cell's value to the clipboard.
 
-### Relevant Props
+### Relevant Table Options
 
 <TableOptionsTable
   onlyOptions={new Set(['enableClickToCopy', 'muiCopyButtonProps'])}
@@ -41,32 +41,34 @@ const columns = [
   },
   //...
 ];
-
-return <MaterialReactTable columns={columns} data={data} />;
 ```
 
 ### Enable Click to Copy For All Cells
 
-Alternatively, you can enable click to copy globally by setting the `enableClickToCopy` prop to `true`. You could then opt out per column by setting the `enableClickToCopy` option to `false` on the column definition.
+Alternatively, you can enable click to copy globally by setting the `enableClickToCopy` table option to `true`. You could then opt out per column by setting the `enableClickToCopy` option to `false` on the column definition.
 
 ```tsx
-<MaterialReactTable columns={columns} data={data} enableClickToCopy />
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableClickToCopy: true,
+});
 ```
 
 ### Customize Copy Buttons
 
-The click to copy feature is built on top of the Material UI Button component. You can customize the copy button by passing in the `muiCopyButtonProps` prop or as a column option in a column definition.
+The click to copy feature is built on top of the Material UnstyledButton and CopyButton components. You can customize the copy button by passing in the `muiCopyButtonProps` table or column option.
 
 ```tsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableClickToCopy
-  muiCopyButtonProps={{
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableClickToCopy: true,
+  muiCopyButtonProps: {
     sx: { width: '100%' },
     startIcon: <ContentCopy />,
-  }}
-/>
+  },
+});
 ```
 
 ### Click to Copy Example
