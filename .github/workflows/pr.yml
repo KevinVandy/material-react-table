@@ -9,15 +9,13 @@ jobs:
   clean-pr:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
+      - name: Checkout source code
+        uses: actions/checkout@v3
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
         with:
-          version: 8.5.1
+          version: 8.8.0
 
       - name: Install Dependencies
         run: pnpm i
