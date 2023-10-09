@@ -71,7 +71,7 @@ export const RowPinningStickyCustomRowHeight = () => (
     muiTableBodyRowProps={{
       sx: {
         height: '100px',
-      }
+      },
     }}
     muiTableContainerProps={{
       sx: {
@@ -234,5 +234,29 @@ export const RowPinningTopWithVirtualization = () => (
       },
     }}
     rowPinningDisplayMode="top"
+  />
+);
+
+export const RowAndColumnPinning = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowPinning
+    enableColumnPinning
+    enablePagination={false}
+    initialState={{
+      columnPinning: {
+        left: ['firstName'],
+        right: ['lastName'],
+      },
+      rowPinning: {
+        top: ['3', '5'],
+      },
+    }}
+    muiTableContainerProps={{
+      sx: {
+        maxHeight: '600px',
+      },
+    }}
   />
 );

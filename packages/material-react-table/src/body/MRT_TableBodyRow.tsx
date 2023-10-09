@@ -185,7 +185,7 @@ export const MRT_TableBodyRow = <TData extends Record<string, any>>({
           width: '100%',
           zIndex:
             rowPinningDisplayMode?.includes('sticky') && isPinned
-              ? 1
+              ? 2
               : undefined,
           ...(sx as any),
         })}
