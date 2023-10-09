@@ -27,7 +27,7 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
       enableToolbarInternalActions,
       icons: { ChevronLeftIcon, ChevronRightIcon, FirstPageIcon, LastPageIcon },
       localization,
-      muiTablePaginationProps,
+      muiPaginationProps,
       paginationDisplayMode,
       rowCount,
     },
@@ -39,7 +39,7 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
     showGlobalFilter,
   } = getState();
 
-  const paginationProps = parseFromValuesOrFunc(muiTablePaginationProps, {
+  const paginationProps = parseFromValuesOrFunc(muiPaginationProps, {
     table,
   });
 

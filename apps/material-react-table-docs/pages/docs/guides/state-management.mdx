@@ -3,7 +3,7 @@ import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable
 import PersistentStateExample from '../../../examples/persistent-state';
 
 <Head>
-  <title>State Management Guide - Material React Table Docs</title>
+  <title>State Management Guide - Material React Table V2 Docs</title>
   <meta
     name="description"
     content="How to access and manage internal state in Material React Table"
@@ -11,6 +11,8 @@ import PersistentStateExample from '../../../examples/persistent-state';
 </Head>
 
 ## State Management Guide
+
+> Note: `tableInstanceRef` has been removed in MRT v2 since the `useMaterialReactTable` hook now returns the table instance directly. See the [Migration Guide](/migrating-to-v2) for more information.
 
 Material React Table does not try to hide any of its internal state from you. You can initialize state with custom initial values, manage individual states yourself as you discover the need to have access to them, or store your own reference to the entire table instance wherever you need to.
 

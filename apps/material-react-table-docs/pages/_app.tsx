@@ -34,7 +34,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Material React Table</title>
+        <title>Material React Table V2</title>
         <meta
           name="description"
           content="Material React Table, a fully featured Material UI V5 implementation of TanStack React Table V8. Written from the ground up in TypeScript."

@@ -916,7 +916,7 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
         table: MRT_TableInstance<TData>;
       }) => TableRowProps)
     | TableRowProps;
-  muiTablePaginationProps?:
+  muiPaginationProps?:
     | ((props: { table: MRT_TableInstance<TData> }) => Partial<
         PaginationProps & {
           rowsPerPageOptions?: number[];

@@ -4,7 +4,7 @@ import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable
 import RemoteExample from '../../../examples/remote';
 
 <Head>
-  <title>Pagination Feature Guide - Material React Table Docs</title>
+  <title>Pagination Feature Guide - Material React Table V2 Docs</title>
   <meta
     name="description"
     content="How to use, customize, or disable pagination features in Material React Table"
@@ -24,7 +24,7 @@ Client-side pagination is enabled by default in Material React Table. There are 
       'enablePagination',
       'getPaginationRowModel',
       'manualPagination',
-      'muiTablePaginationProps',
+      'muiPaginationProps',
       'onPaginationChange',
       'pageCount',
       'rowCount',
@@ -58,13 +58,13 @@ Next is `paginateExpandedRows`, which works in conjunction expanding features. T
 
 #### Customize Pagination Components
 
-You can customize the pagination component with the `muiTablePaginationProps` prop to change things like the `rowsPerPageOptions` or whether or not to show the first and last page buttons, and more.
+You can customize the pagination component with the `muiPaginationProps` prop to change things like the `rowsPerPageOptions` or whether or not to show the first and last page buttons, and more.
 
 ```jsx
 <MaterialReactTable
   columns={columns}
   data={data}
-  muiTablePaginationProps={{
+  muiPaginationProps={{
     rowsPerPageOptions: [5, 10],
     showFirstButton: false,
     showLastButton: false,

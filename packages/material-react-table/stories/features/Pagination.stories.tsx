@@ -41,7 +41,7 @@ export const PaginationEnabledDefaultNoRowsPerPage = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    muiTablePaginationProps={{
+    muiPaginationProps={{
       showRowsPerPage: false,
     }}
   />
@@ -59,7 +59,7 @@ export const PaginationPagesDisplayModeNoPagesPerRow = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    muiTablePaginationProps={{
+    muiPaginationProps={{
       showRowsPerPage: false,
     }}
     paginationDisplayMode="pages"
@@ -70,7 +70,7 @@ export const CustomPaginationPagesDisplayMode = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    muiTablePaginationProps={{
+    muiPaginationProps={{
       shape: 'circular',
       variant: 'outlined',
     }}
@@ -112,7 +112,7 @@ export const CustomizePaginationComponents = () => (
     columns={columns}
     data={data}
     initialState={{ pagination: { pageIndex: 0, pageSize: 5 } }}
-    muiTablePaginationProps={{
+    muiPaginationProps={{
       rowsPerPageOptions: [5, 10, 20],
       showFirstButton: false,
       showLastButton: false,
