@@ -1,6 +1,5 @@
 import { type MouseEvent, useState } from 'react';
-import IconButton from '@mui/material/IconButton';
-import { type IconButtonProps } from '@mui/material/IconButton';
+import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { MRT_ShowHideColumnsMenu } from '../menus/MRT_ShowHideColumnsMenu';
 import { type MRT_TableInstance } from '../types';

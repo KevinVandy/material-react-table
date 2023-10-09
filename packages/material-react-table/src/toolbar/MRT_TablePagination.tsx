@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_TableInstance } from '../types';
 
-const defaultPageSizeOptions = [5, 10, 15, 20, 25, 30, 50, 100];
+const defaultRowsPerPage = [5, 10, 15, 20, 25, 30, 50, 100];
 
 interface Props<TData extends Record<string, any> = {}> {
   position?: 'bottom' | 'top';
@@ -46,12 +46,17 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
   const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
   const numberOfPages = Math.ceil(totalRowCount / pageSize);
   const showFirstLastPageButtons = numberOfPages > 2;
-  const showFirstButton =
-    showFirstLastPageButtons && paginationProps?.showFirstButton !== false;
-  const showLastButton =
-    showFirstLastPageButtons && paginationProps?.showLastButton !== false;
   const firstRowIndex = pageIndex * pageSize;
   const lastRowIndex = Math.min(pageIndex * pageSize + pageSize, totalRowCount);
+
+  const {
+    showRowsPerPage = true,
+    rowsPerPageOptions = defaultRowsPerPage,
+    showFirstButton = showFirstLastPageButtons,
+    showLastButton = showFirstLastPageButtons,
+
+    ...rest
+  } = paginationProps ?? {};
 
   return (
     <Box
@@ -60,6 +65,7 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
         display: 'flex',
         gap: '8px',
         justifyContent: 'space-between',
+        justifySelf: 'flex-end',
         mt:
           position === 'top' &&
           enableToolbarInternalActions &&
@@ -72,12 +78,13 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
         zIndex: 2,
       }}
     >
-      {paginationProps?.showRowsPerPage !== false && (
+      {showRowsPerPage && (
         <Box sx={{ alignItems: 'center', display: 'flex', gap: '8px' }}>
           <InputLabel htmlFor="mrt-rows-per-page" sx={{ mb: 0 }}>
             {localization.rowsPerPage}
           </InputLabel>
           <Select
+            inputProps={{ 'aria-label': localization.rowsPerPage }}
             id="mrt-rows-per-page"
             label={localization.rowsPerPage}
             onChange={(event) => setPageSize(+event.target.value)}
@@ -85,7 +92,7 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
             value={pageSize}
             variant="standard"
           >
-            {defaultPageSizeOptions.map((value) => (
+            {rowsPerPageOptions.map((value) => (
               <MenuItem key={value} sx={{ m: 0 }} value={value}>
                 {value}
               </MenuItem>
@@ -111,11 +118,14 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
           )}
           showFirstButton={showFirstButton}
           showLastButton={showLastButton}
-          {...(paginationProps as PaginationProps)}
+          {...(rest as PaginationProps)}
         />
       ) : paginationDisplayMode === 'default' ? (
         <>
-          <Typography mb="0" mx="8px" variant="body2">{`${
+          <Typography
+            sx={{ mb: 0, mx: '4px', minWidth: '10ch' }}
+            variant="body2"
+          >{`${
             lastRowIndex === 0 ? 0 : (firstRowIndex + 1).toLocaleString()
           }-${lastRowIndex.toLocaleString()} ${
             localization.of

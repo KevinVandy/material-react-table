@@ -1,15 +1,15 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 //MRT Imports
-import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
+import {
+  MaterialReactTable,
+  MRT_GlobalFilterTextField,
+  type MRT_ColumnDef,
+  MRT_ToggleFiltersButton,
+} from 'material-react-table';
 
 //Material UI Imports
-import { Box, Button, ListItemIcon, MenuItem, Typography } from '@mui/material';
-
-//Date Picker Imports
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { Box, Button, ListItemIcon, MenuItem, Typography, lighten } from '@mui/material';
 
 //Icons Imports
 import { AccountCircle, Send } from '@mui/icons-material';
@@ -63,6 +63,7 @@ const Example = () => {
           {
             accessorKey: 'email', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
             enableClickToCopy: true,
+            filterVariant: 'autocomplete',
             header: 'Email',
             size: 300,
           },
@@ -114,28 +115,16 @@ const Example = () => {
             accessorFn: (row) => new Date(row.startDate), //convert to Date for sorting and filtering
             id: 'startDate',
             header: 'Start Date',
-            filterFn: 'lessThanOrEqualTo',
+            filterVariant: 'date',
+            filterFn: 'lessThan',
             sortingFn: 'datetime',
             Cell: ({ cell }) => cell.getValue<Date>()?.toLocaleDateString(), //render Date as a string
             Header: ({ column }) => <em>{column.columnDef.header}</em>, //custom header markup
-            //Custom Date Picker Filter from @mui/x-date-pickers
-            Filter: ({ column }) => (
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  onChange={(newValue) => {
-                    column.setFilterValue(newValue);
-                  }}
-                  slotProps={{
-                    textField: {
-                      helperText: 'Filter Mode: Less Than',
-                      sx: { minWidth: '120px' },
-                      variant: 'standard',
-                    },
-                  }}
-                  value={column.getFilterValue()}
-                />
-              </LocalizationProvider>
-            ),
+            muiFilterTextFieldProps: {
+              sx: {
+                minWidth: '250px',
+              },
+            },
           },
         ],
       },
@@ -206,7 +195,7 @@ const Example = () => {
           Send Email
         </MenuItem>,
       ]}
-      renderTopToolbarCustomActions={({ table }) => {
+      renderTopToolbar={({ table }) => {
         const handleDeactivate = () => {
           table.getSelectedRowModel().flatRows.map((row) => {
             alert('deactivating ' + row.getValue('name'));
@@ -226,36 +215,62 @@ const Example = () => {
         };
 
         return (
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
-            <Button
-              color="error"
-              disabled={!table.getIsSomeRowsSelected()}
-              onClick={handleDeactivate}
-              variant="contained"
-            >
-              Deactivate
-            </Button>
-            <Button
-              color="success"
-              disabled={!table.getIsSomeRowsSelected()}
-              onClick={handleActivate}
-              variant="contained"
-            >
-              Activate
-            </Button>
-            <Button
-              color="info"
-              disabled={!table.getIsSomeRowsSelected()}
-              onClick={handleContact}
-              variant="contained"
-            >
-              Contact
-            </Button>
-          </div>
+          <Box
+            sx={(theme) => ({
+              backgroundColor: lighten(theme.palette.background.default, 0.04),
+              display: 'flex',
+              gap: '0.5rem',
+              p: '8px',
+              justifyContent: 'space-between',
+            })}
+          >
+            <Box sx={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+              {/* import MRT sub-components */}
+              <MRT_GlobalFilterTextField table={table} />
+              <MRT_ToggleFiltersButton table={table} />
+            </Box>
+            <Box sx={{ display: 'flex', gap: '0.5rem' }}>
+              <Button
+                color="error"
+                disabled={!table.getIsSomeRowsSelected()}
+                onClick={handleDeactivate}
+                variant="contained"
+              >
+                Deactivate
+              </Button>
+              <Button
+                color="success"
+                disabled={!table.getIsSomeRowsSelected()}
+                onClick={handleActivate}
+                variant="contained"
+              >
+                Activate
+              </Button>
+              <Button
+                color="info"
+                disabled={!table.getIsSomeRowsSelected()}
+                onClick={handleContact}
+                variant="contained"
+              >
+                Contact
+              </Button>
+            </Box>
+          </Box>
         );
       }}
     />
   );
 };
 
-export default Example;
+//Date Picker Imports - these should just be in your Context Provider
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+
+const ExampleWithLocalizationProvider = () => (
+  //App.tsx or AppProviders file
+  <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <Example />
+  </LocalizationProvider>
+);
+
+export default ExampleWithLocalizationProvider;

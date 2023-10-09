@@ -28,7 +28,7 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
 ];
 const data = [...Array(21)].map(() => ({
   address: faker.location.streetAddress(),
-  age: faker.datatype.number(80),
+  age: faker.number.int(80),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
 }));
@@ -47,7 +47,7 @@ export const PaginationEnabledDefaultNoRowsPerPage = () => (
   />
 );
 
-export const PaginatiosPagesDisplayMode = () => (
+export const PaginationPagesDisplayMode = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -55,7 +55,7 @@ export const PaginatiosPagesDisplayMode = () => (
   />
 );
 
-export const PaginatiosPagesDisplayModeNoPagesPerRow = () => (
+export const PaginationPagesDisplayModeNoPagesPerRow = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -66,7 +66,7 @@ export const PaginatiosPagesDisplayModeNoPagesPerRow = () => (
   />
 );
 
-export const CustomPaginatiosPagesDisplayMode = () => (
+export const CustomPaginationPagesDisplayMode = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -107,32 +107,15 @@ export const PaginationPositionTopAndBottomNoInternalActions = () => (
   />
 );
 
-// export const CustomizePaginationComponents = () => (
-//   <MaterialReactTable
-//     columns={columns}
-//     data={data}
-//     initialState={{ pagination: { pageIndex: 0, pageSize: 5 } }}
-//     muiTablePaginationProps={{
-//       SelectProps: { native: true },
-//       labelRowsPerPage: 'Number of rows visible',
-//       rowsPerPageOptions: [5, 10, 20],
-//       showFirstButton: false,
-//       showLastButton: false,
-//     }}
-//   />
-// );
-
-// export const RotateIcons = () => (
-//   <MaterialReactTable
-//     columns={columns}
-//     data={data}
-//     muiTablePaginationProps={{
-//       backIconButtonProps: {
-//         style: { transform: 'rotate(180deg)' },
-//       },
-//       nextIconButtonProps: {
-//         style: { transform: 'rotate(180deg)' },
-//       },
-//     }}
-//   />
-// );
+export const CustomizePaginationComponents = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    initialState={{ pagination: { pageIndex: 0, pageSize: 5 } }}
+    muiTablePaginationProps={{
+      rowsPerPageOptions: [5, 10, 20],
+      showFirstButton: false,
+      showLastButton: false,
+    }}
+  />
+);

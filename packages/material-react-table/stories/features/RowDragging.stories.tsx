@@ -37,7 +37,7 @@ const columns: MRT_ColumnDef<(typeof initData)[0]>[] = [
 ];
 
 const initData = [...Array(25)].map(() => ({
-  age: faker.datatype.number(20) + 18,
+  age: faker.number.int(20) + 18,
   email: faker.internet.email(),
   firstName: faker.person.firstName(),
   id: faker.random.alphaNumeric(6),

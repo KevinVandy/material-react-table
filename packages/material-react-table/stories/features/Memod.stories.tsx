@@ -59,7 +59,7 @@ const columns: MRT_ColumnDef<Person>[] = [
 const generateData = () =>
   [...Array(55)].map(() => ({
     address: faker.location.streetAddress(),
-    age: faker.datatype.number(80),
+    age: faker.number.int(80),
     city: faker.location.city(),
     firstName: faker.person.firstName(),
     gender: Math.random() < 0.9 ? faker.person.sex() : faker.person.gender(),

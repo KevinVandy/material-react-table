@@ -117,7 +117,7 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
   );
 
   const rows = useMemo(() => {
-    let rows = [];
+    let rows: MRT_Row<TData>[] = [];
     if (!shouldRankResults) {
       rows =
         !enableRowPinning || rowPinningDisplayMode?.includes('sticky')
