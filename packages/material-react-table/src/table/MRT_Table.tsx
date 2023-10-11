@@ -150,9 +150,11 @@ export const MRT_Table = <TData extends Record<string, any>>({
         style={{ ...columnSizeVars, ...tableProps?.style }}
         sx={(theme) => ({
           borderCollapse: 'separate',
-          display: layoutMode === 'grid' ? 'grid' : 'table',
+          display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
           tableLayout:
-            layoutMode !== 'grid' && enableColumnResizing ? 'fixed' : undefined,
+            layoutMode === 'semantic' && enableColumnResizing
+              ? 'fixed'
+              : undefined,
           ...(parseFromValuesOrFunc(tableProps?.sx, theme) as any),
         })}
       >

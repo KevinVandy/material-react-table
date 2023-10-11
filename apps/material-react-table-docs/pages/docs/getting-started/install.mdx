@@ -41,11 +41,11 @@ If you get an error like this:
 ```bash
 "Error: Element type is invalid: expected a string (for built-in components)
 or a class/function (for composite components) but got: undefined.
+```
 You likely forgot to export your component from the file it's defined in,
 or you might have mixed up default and named imports.
-```
 
-You might be trying to import `MaterialReactTable` from the default export still, which is no longer supported in v2. Make sure you are importing the named export instead:
+Or You might be trying to import `MaterialReactTable` from the default export still, which is no longer supported in v2. Make sure you are importing the named export instead:
 
 ```diff
 - import MaterialReactTable from 'material-react-table'

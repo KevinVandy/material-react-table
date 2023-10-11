@@ -1,8 +1,11 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
+import Remove from '@mui/icons-material/Remove';
+import Send from '@mui/icons-material/Send';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import {
   type MRT_ColumnDef,
-  type MRT_TableInstance,
+  MRT_SelectCheckbox,
   MaterialReactTable,
 } from '../../src';
 import { faker } from '@faker-js/faker';
@@ -162,24 +165,57 @@ export const SelectCheckboxSecondaryColor = () => (
   />
 );
 
-export const SelectionWithInstanceRef = () => {
-  const tableInstanceRef = useRef<MRT_TableInstance<(typeof data)[0]>>(null);
+export const AlertBannerBottom = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowSelection
+    positionToolbarAlertBanner="bottom"
+  />
+);
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableRowSelection
-      renderTopToolbarCustomActions={() => (
-        <Button
-          onClick={() =>
-            console.info(tableInstanceRef.current?.getSelectedRowModel().rows)
-          }
+export const AlertBannerHeadOverlay = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowSelection
+    positionToolbarAlertBanner="head-overlay"
+  />
+);
+
+export const CustomAlertBannerHeadOverlay = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowSelection
+    muiToolbarAlertBannerProps={{
+      color: 'info',
+    }}
+    positionToolbarAlertBanner="head-overlay"
+    renderToolbarAlertBannerContent={({ selectedAlert, table }) => (
+      <Box
+        sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
+      >
+        <Box
+          sx={{
+            alignItems: 'center',
+            display: 'flex',
+            gap: '6px',
+            p: '4px 12px',
+            width: '100%',
+          }}
         >
-          Log Selected Rows
-        </Button>
-      )}
-      tableInstanceRef={tableInstanceRef}
-    />
-  );
-};
+          <MRT_SelectCheckbox selectAll table={table} /> {selectedAlert}{' '}
+        </Box>
+        <Box sx={{ display: 'flex', gap: '6px' }}>
+          <Button color="success" startIcon={<Send />} variant="contained">
+            Email
+          </Button>
+          <Button color="error" startIcon={<Remove />} variant="contained">
+            Remove
+          </Button>
+        </Box>
+      </Box>
+    )}
+  />
+);

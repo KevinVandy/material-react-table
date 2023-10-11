@@ -727,7 +727,7 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
   /**
    * Changes which kind of CSS layout is used to render the table. `semantic` uses default semantic HTML elements, while `grid` adds CSS grid and flexbox styles
    */
-  layoutMode?: 'grid' | 'semantic';
+  layoutMode?: 'grid' | 'grid-no-grow' | 'semantic';
   /**
    * Pass in either a locale imported from `material-react-table/locales/*` or a custom locale object.
    *
@@ -838,6 +838,19 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
         table: MRT_TableInstance<TData>;
       }) => LinearProgressProps)
     | LinearProgressProps;
+  muiPaginationProps?:
+    | ((props: { table: MRT_TableInstance<TData> }) => Partial<
+        PaginationProps & {
+          rowsPerPageOptions?: number[];
+          showRowsPerPage?: boolean;
+        }
+      >)
+    | Partial<
+        PaginationProps & {
+          rowsPerPageOptions?: number[];
+          showRowsPerPage?: boolean;
+        }
+      >;
   muiRowDragHandleProps?:
     | ((props: {
         row: MRT_Row<TData>;
@@ -916,19 +929,6 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
         table: MRT_TableInstance<TData>;
       }) => TableRowProps)
     | TableRowProps;
-  muiPaginationProps?:
-    | ((props: { table: MRT_TableInstance<TData> }) => Partial<
-        PaginationProps & {
-          rowsPerPageOptions?: number[];
-          showRowsPerPage?: boolean;
-        }
-      >)
-    | Partial<
-        PaginationProps & {
-          rowsPerPageOptions?: number[];
-          showRowsPerPage?: boolean;
-        }
-      >;
   muiTablePaperProps?:
     | ((props: { table: MRT_TableInstance<TData> }) => PaperProps)
     | PaperProps;
@@ -984,7 +984,7 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
   positionExpandColumn?: 'first' | 'last';
   positionGlobalFilter?: 'left' | 'none' | 'right';
   positionPagination?: 'both' | 'bottom' | 'none' | 'top';
-  positionToolbarAlertBanner?: 'bottom' | 'none' | 'top';
+  positionToolbarAlertBanner?: 'bottom' | 'head-overlay' | 'none' | 'top';
   positionToolbarDropZone?: 'both' | 'bottom' | 'none' | 'top';
   renderBottomToolbar?:
     | ((props: { table: MRT_TableInstance<TData> }) => ReactNode)
@@ -1034,6 +1034,11 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
   renderRowActions?: (props: {
     cell: MRT_Cell<TData>;
     row: MRT_Row<TData>;
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode;
+  renderToolbarAlertBannerContent?: (props: {
+    groupedAlert: ReactNode | null;
+    selectedAlert: ReactNode | null;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   renderToolbarInternalActions?: (props: {

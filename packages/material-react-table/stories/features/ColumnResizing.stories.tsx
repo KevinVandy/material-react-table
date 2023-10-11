@@ -167,7 +167,7 @@ export const ColumnResizingWithHeaderGroups = () => (
   />
 );
 
-export const ColumnResizingWithHeaderGroupsGrid = () => (
+export const ColumnResizingWithHeaderGroupsGridGrow = () => (
   <MaterialReactTable
     columns={[
       {
@@ -216,22 +216,12 @@ export const ColumnResizingWithHeaderGroupsGrid = () => (
   />
 );
 
-export const ColumnResizingLayoutGridNoFlexGrow = () => (
+export const ColumnResizingLayoutGridGrow = () => (
   <MaterialReactTable
     columns={columns.slice(0, 3)}
     data={data}
     enableColumnResizing
     enableRowSelection
     layoutMode="grid"
-    muiTableBodyCellProps={{
-      sx: {
-        flex: '0 0 auto',
-      },
-    }}
-    muiTableHeadCellProps={{
-      sx: {
-        flex: '0 0 auto',
-      },
-    }}
   />
 );

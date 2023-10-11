@@ -4,11 +4,13 @@ import AlertTitle from '@mui/material/AlertTitle';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Collapse from '@mui/material/Collapse';
+import Stack from '@mui/material/Stack';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { MRT_SelectCheckbox } from '../inputs';
 import { type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
-  stackAlertBanner: boolean;
+  stackAlertBanner?: boolean;
   table: MRT_TableInstance<TData>;
 }
 
@@ -21,14 +23,18 @@ export const MRT_ToolbarAlertBanner = <TData extends Record<string, any>>({
     getSelectedRowModel,
     getState,
     options: {
+      enableRowSelection,
+      enableSelectAll,
       localization,
       muiToolbarAlertBannerChipProps,
       muiToolbarAlertBannerProps,
       positionToolbarAlertBanner,
+      renderToolbarAlertBannerContent,
       rowCount,
     },
+    refs: { tablePaperRef },
   } = table;
-  const { grouping, showAlertBanner } = getState();
+  const { density, grouping, showAlertBanner } = getState();
 
   const alertProps = parseFromValuesOrFunc(muiToolbarAlertBannerProps, {
     table,
@@ -38,7 +44,7 @@ export const MRT_ToolbarAlertBanner = <TData extends Record<string, any>>({
     table,
   });
 
-  const selectMessage =
+  const selectedAlert =
     getSelectedRowModel().rows.length > 0
       ? localization.selectedCountOfRowCountRowsSelected
           ?.replace(
@@ -51,7 +57,7 @@ export const MRT_ToolbarAlertBanner = <TData extends Record<string, any>>({
           )
       : null;
 
-  const groupedByMessage =
+  const groupedAlert =
     grouping.length > 0 ? (
       <span>
         {localization.groupedBy}{' '}
@@ -70,7 +76,7 @@ export const MRT_ToolbarAlertBanner = <TData extends Record<string, any>>({
 
   return (
     <Collapse
-      in={showAlertBanner || !!selectMessage || !!groupedByMessage}
+      in={showAlertBanner || !!selectedAlert || !!groupedAlert}
       timeout={stackAlertBanner ? 200 : 0}
     >
       <Alert
@@ -78,6 +84,12 @@ export const MRT_ToolbarAlertBanner = <TData extends Record<string, any>>({
         icon={false}
         {...alertProps}
         sx={(theme) => ({
+          '& .MuiAlert-message': {
+            maxWidth: `calc(${
+              tablePaperRef.current?.clientWidth ?? 360
+            }px - 1rem)`,
+            width: '100%',
+          },
           borderRadius: 0,
           fontSize: '1rem',
           left: 0,
@@ -95,16 +107,42 @@ export const MRT_ToolbarAlertBanner = <TData extends Record<string, any>>({
           ...(parseFromValuesOrFunc(alertProps?.sx, theme) as any),
         })}
       >
-        {alertProps?.title && <AlertTitle>{alertProps.title}</AlertTitle>}
-        <Box sx={{ p: '0.5rem 1rem' }}>
-          {alertProps?.children}
-          {alertProps?.children && (selectMessage || groupedByMessage) && (
-            <br />
-          )}
-          {selectMessage}
-          {selectMessage && groupedByMessage && <br />}
-          {groupedByMessage}
-        </Box>
+        {renderToolbarAlertBannerContent?.({
+          groupedAlert,
+          selectedAlert,
+          table,
+        }) ?? (
+          <>
+            {alertProps?.title && <AlertTitle>{alertProps.title}</AlertTitle>}
+            <Stack
+              sx={{
+                p:
+                  positionToolbarAlertBanner !== 'head-overlay'
+                    ? '0.5rem 1rem'
+                    : density === 'spacious'
+                    ? '0.75rem 1.25rem'
+                    : density === 'comfortable'
+                    ? '0.5rem 0.75rem'
+                    : '0.25rem 0.5rem',
+              }}
+            >
+              {alertProps?.children}
+              {alertProps?.children && (selectedAlert || groupedAlert) && (
+                <br />
+              )}
+              <Box sx={{ display: 'flex' }}>
+                {enableRowSelection &&
+                  enableSelectAll &&
+                  positionToolbarAlertBanner === 'head-overlay' && (
+                    <MRT_SelectCheckbox selectAll table={table} />
+                  )}{' '}
+                {selectedAlert}
+              </Box>
+              {selectedAlert && groupedAlert && <br />}
+              {groupedAlert}
+            </Stack>
+          </>
+        )}
       </Alert>
     </Collapse>
   );

@@ -33,8 +33,27 @@ const data = [...Array(21)].map(() => ({
   lastName: faker.person.lastName(),
 }));
 
+const moreData = [...Array(551)].map(() => ({
+  address: faker.location.streetAddress(),
+  age: faker.number.int(80),
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
+}));
+
 export const PaginationEnabledDefault = () => (
   <MaterialReactTable columns={columns} data={data} />
+);
+
+export const PaginationEnabledDefaultMoreData = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={moreData}
+    muiTableContainerProps={{
+      sx: {
+        minHeight: '600px',
+      },
+    }}
+  />
 );
 
 export const PaginationEnabledDefaultNoRowsPerPage = () => (
@@ -73,6 +92,19 @@ export const CustomPaginationPagesDisplayMode = () => (
     muiPaginationProps={{
       shape: 'circular',
       variant: 'outlined',
+    }}
+    paginationDisplayMode="pages"
+  />
+);
+
+export const CustomPaginationPagesDisplayModeMoreData = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={moreData}
+    muiPaginationProps={{
+      shape: 'circular',
+      variant: 'outlined',
+      boundaryCount: 5,
     }}
     paginationDisplayMode="pages"
   />

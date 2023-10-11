@@ -93,8 +93,13 @@ export const useMRT_TableOptions: <TData extends Record<string, any>>(
     [defaultDisplayColumn],
   );
 
-  if (rest.enableRowVirtualization || rest.enableColumnVirtualization) {
-    layoutMode = 'grid';
+  if (layoutMode === 'semantic') {
+    if (rest.enableRowVirtualization || rest.enableColumnVirtualization) {
+      layoutMode = 'grid';
+    }
+    if (enableColumnResizing) {
+      layoutMode = 'grid-no-grow';
+    }
   }
 
   if (rest.enableRowVirtualization) {

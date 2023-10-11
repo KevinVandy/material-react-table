@@ -35,7 +35,7 @@ export const MRT_TableFooterCell = <TData extends Record<string, any>>({
       variant="head"
       {...tableCellProps}
       sx={(theme) => ({
-        display: layoutMode === 'grid' ? 'grid' : 'table-cell',
+        display: layoutMode?.startsWith('grid') ? 'grid' : 'table-cell',
         fontWeight: 'bold',
         justifyContent: columnDefType === 'group' ? 'center' : undefined,
         p:

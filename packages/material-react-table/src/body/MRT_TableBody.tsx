@@ -7,7 +7,7 @@ import {
 import TableBody from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';
 import { MRT_TableBodyRow, Memo_MRT_TableBodyRow } from './MRT_TableBodyRow';
-import { parseFromValuesOrFunc } from '../column.utils';
+import { getCanRankRows, parseFromValuesOrFunc } from '../column.utils';
 import { rankGlobalFuzzy } from '../sortingFns';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
 
@@ -62,7 +62,6 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
     density,
     expanded,
     globalFilter,
-    globalFilterFn,
     isFullScreen,
     pagination,
     rowPinning,
@@ -81,18 +80,11 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
   const tableFooterHeight =
     (enableStickyFooter && tableFooterRef.current?.clientHeight) || 0;
 
-  const shouldRankResults = useMemo(
+  const shouldRankRows = useMemo(
     () =>
-      !manualExpanding &&
-      !manualFiltering &&
-      !manualGrouping &&
-      !manualSorting &&
-      enableGlobalFilterRankedResults &&
-      globalFilter &&
-      globalFilterFn === 'fuzzy' &&
-      expanded !== true &&
+      getCanRankRows(table) &&
       !Object.values(sorting).some(Boolean) &&
-      !Object.values(expanded).some(Boolean),
+      globalFilter,
     [
       enableGlobalFilterRankedResults,
       expanded,
@@ -115,7 +107,7 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
 
   const rows = useMemo(() => {
     let rows: MRT_Row<TData>[] = [];
-    if (!shouldRankResults) {
+    if (!shouldRankRows) {
       rows =
         !enableRowPinning || rowPinningDisplayMode?.includes('sticky')
           ? getRowModel().rows
@@ -139,8 +131,8 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
 
     return rows;
   }, [
-    shouldRankResults,
-    shouldRankResults ? getPrePaginationRowModel().rows : getRowModel().rows,
+    shouldRankRows,
+    shouldRankRows ? getPrePaginationRowModel().rows : getRowModel().rows,
     pagination.pageIndex,
     pagination.pageSize,
     rowPinning,
@@ -179,7 +171,7 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
           <TableBody
             {...tableBodyProps}
             sx={(theme) => ({
-              display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
+              display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
               position: 'sticky',
               top: tableHeadHeight - 1,
               zIndex: 1,
@@ -209,7 +201,7 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
       <TableBody
         {...tableBodyProps}
         sx={(theme) => ({
-          display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
+          display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
           height: rowVirtualizer
             ? `${rowVirtualizer.getTotalSize()}px`
             : 'inherit',
@@ -221,12 +213,12 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
         {tableBodyProps?.children ??
           (!rows.length ? (
             <tr
-              style={{ display: layoutMode === 'grid' ? 'grid' : 'table-row' }}
+              style={{ display: layoutMode?.startsWith('grid') ? 'grid' : undefined }}
             >
               <td
                 colSpan={table.getVisibleLeafColumns().length}
                 style={{
-                  display: layoutMode === 'grid' ? 'grid' : 'table-cell',
+                  display: layoutMode?.startsWith('grid') ? 'grid' : 'table-cell',
                 }}
               >
                 {renderEmptyRowsFallback?.({ table }) ?? (
@@ -285,7 +277,7 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
             {...tableBodyProps}
             sx={(theme) => ({
               bottom: tableFooterHeight - 1,
-              display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
+              display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
               position: 'sticky',
               zIndex: 1,
               ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),

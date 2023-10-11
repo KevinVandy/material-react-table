@@ -37,9 +37,9 @@ export const MRT_TableHeadRow = <TData extends Record<string, any>>({
     <TableRow
       {...tableRowProps}
       sx={(theme) => ({
-        backgroundColor: lighten(theme.palette.background.default, 0.04),
+        backgroundColor: lighten(theme.palette.background.default, 0.05),
         boxShadow: `4px 0 8px ${alpha(theme.palette.common.black, 0.1)}`,
-        display: layoutMode === 'grid' ? 'flex' : 'table-row',
+        display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
         top: 0,
         ...(parseFromValuesOrFunc(tableRowProps?.sx, theme) as any),
       })}

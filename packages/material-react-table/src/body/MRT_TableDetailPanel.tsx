@@ -51,7 +51,7 @@ export const MRT_TableDetailPanel = <TData extends Record<string, any>>({
       className="Mui-TableBodyCell-DetailPanel"
       {...tableRowProps}
       sx={(theme) => ({
-        display: layoutMode === 'grid' ? 'flex' : 'table-row',
+        display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
         position: virtualRow ? 'absolute' : undefined,
         top: virtualRow
           ? `${parentRowRef.current?.getBoundingClientRect()?.height}px`
@@ -70,10 +70,10 @@ export const MRT_TableDetailPanel = <TData extends Record<string, any>>({
         {...tableCellProps}
         sx={(theme) => ({
           backgroundColor: virtualRow
-            ? lighten(theme.palette.background.default, 0.06)
+            ? lighten(theme.palette.background.default, 0.05)
             : undefined,
           borderBottom: !row.getIsExpanded() ? 'none' : undefined,
-          display: layoutMode === 'grid' ? 'flex' : 'table-cell',
+          display: layoutMode?.startsWith('grid') ? 'flex' : 'table-cell',
           pb: row.getIsExpanded() ? '1rem' : 0,
           pt: row.getIsExpanded() ? '1rem' : 0,
           transition: 'all 150ms ease-in-out',

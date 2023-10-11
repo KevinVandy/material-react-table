@@ -48,8 +48,8 @@ export const MRT_TableFooterRow = <TData extends Record<string, any>>({
     <TableRow
       {...tableRowProps}
       sx={(theme) => ({
-        backgroundColor: lighten(theme.palette.background.default, 0.04),
-        display: layoutMode === 'grid' ? 'flex' : 'table-row',
+        backgroundColor: lighten(theme.palette.background.default, 0.05),
+        display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
         width: '100%',
         ...(parseFromValuesOrFunc(tableRowProps?.sx, theme) as any),
       })}

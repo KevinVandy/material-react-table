@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type CSSProperties, type ReactNode } from 'react';
 import {
   createRow as _createRow,
   flexRender as _flexRender,
@@ -295,7 +295,10 @@ export const getCommonCellStyles = <TData extends Record<string, any>>({
   tableCellProps: TableCellProps;
   theme: Theme;
 }) => {
-  const widthStyles = {
+  const {
+    options: { layoutMode },
+  } = table;
+  const widthStyles: CSSProperties = {
     minWidth: `max(calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
       header?.id ?? column.id,
     )}-size) * 1px), ${column.columnDef.minSize ?? 30}px)`,
@@ -303,6 +306,15 @@ export const getCommonCellStyles = <TData extends Record<string, any>>({
       header?.id ?? column.id,
     )}-size) * 1px)`,
   };
+
+  if (layoutMode === 'grid') {
+    widthStyles.flex = `var(--${header ? 'header' : 'col'}-${parseCSSVarId(
+      header?.id ?? column.id,
+    )}-size) 0 auto`;
+  } else if (layoutMode === 'grid-no-grow') {
+    widthStyles.flex = '0 0 auto';
+  }
+
   return {
     backgroundColor:
       column.getIsPinned() && column.columnDef.columnDefType !== 'group'
@@ -314,13 +326,7 @@ export const getCommonCellStyles = <TData extends Record<string, any>>({
       : getIsFirstRightPinnedColumn(column)
       ? `4px 0 8px -6px ${alpha(theme.palette.common.black, 0.2)} inset`
       : undefined,
-    display: table.options.layoutMode === 'grid' ? 'flex' : 'table-cell',
-    flex:
-      table.options.layoutMode === 'grid'
-        ? `var(--${header ? 'header' : 'col'}-${parseCSSVarId(
-            header?.id ?? column.id,
-          )}-size) 0 auto`
-        : undefined,
+    display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
     left:
       column.getIsPinned() === 'left'
         ? `${column.getStart('left')}px`
