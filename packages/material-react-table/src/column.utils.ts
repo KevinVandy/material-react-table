@@ -5,6 +5,7 @@ import {
   type Renderable,
   type Row,
 } from '@tanstack/react-table';
+import { type Range, defaultRangeExtractor } from '@tanstack/react-virtual';
 import { type TableCellProps } from '@mui/material/TableCell';
 import { alpha, lighten } from '@mui/material/styles';
 import { type Theme } from '@mui/material/styles';
@@ -423,3 +424,21 @@ export const createRow = <TData extends Record<string, any>>(
     -1,
     0,
   ) as MRT_Row<TData>;
+
+  export const extraIndexRangeExtractor = (
+    range: Range,
+    draggingIndex: number,
+  ) => {
+    const newIndexs = defaultRangeExtractor(range);
+    if (
+      draggingIndex >= 0 &&
+      draggingIndex < Math.max(range.startIndex - range.overscan, 0)
+    ) {
+      newIndexs.unshift(draggingIndex);
+    }
+    if (draggingIndex >= 0 && draggingIndex > range.endIndex + range.overscan) {
+      newIndexs.push(draggingIndex);
+    }
+    return newIndexs;
+  };
+  

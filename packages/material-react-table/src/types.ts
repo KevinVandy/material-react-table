@@ -260,12 +260,8 @@ export type MRT_TableInstance<TData extends Record<string, any>> = Omit<
   setEditingCell: Dispatch<SetStateAction<MRT_Cell<TData> | null>>;
   setEditingRow: Dispatch<SetStateAction<MRT_Row<TData> | null>>;
   setGlobalFilterFn: Dispatch<SetStateAction<MRT_FilterOption>>;
-  setHoveredColumn: Dispatch<
-    SetStateAction<{ id: string } | MRT_Column<TData> | null>
-  >;
-  setHoveredRow: Dispatch<
-    SetStateAction<{ id: string } | MRT_Row<TData> | null>
-  >;
+  setHoveredColumn: Dispatch<SetStateAction<Partial<MRT_Column<TData>> | null>>;
+  setHoveredRow: Dispatch<SetStateAction<Partial<MRT_Row<TData>> | null>>;
   setIsFullScreen: Dispatch<SetStateAction<boolean>>;
   setShowAlertBanner: Dispatch<SetStateAction<boolean>>;
   setShowColumnFilters: Dispatch<SetStateAction<boolean>>;
@@ -288,8 +284,8 @@ export type MRT_TableState<TData extends Record<string, any>> = TableState & {
   editingCell: MRT_Cell<TData> | null;
   editingRow: MRT_Row<TData> | null;
   globalFilterFn: MRT_FilterOption;
-  hoveredColumn: { id: string } | MRT_Column<TData> | null;
-  hoveredRow: { id: string } | MRT_Row<TData> | null;
+  hoveredColumn: Partial<MRT_Column<TData>> | null;
+  hoveredRow: Partial<MRT_Row<TData>> | null;
   isFullScreen: boolean;
   isLoading: boolean;
   isSaving: boolean;
@@ -972,8 +968,8 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
     values: Record<LiteralUnion<string & DeepKeys<TData>>, any>;
   }) => Promise<void> | void;
   onGlobalFilterFnChange?: OnChangeFn<MRT_FilterOption>;
-  onHoveredColumnChange?: OnChangeFn<{ id: string } | MRT_Column<TData> | null>;
-  onHoveredRowChange?: OnChangeFn<{ id: string } | MRT_Row<TData> | null>;
+  onHoveredColumnChange?: OnChangeFn<Partial<MRT_Row<TData>> | null>;
+  onHoveredRowChange?: OnChangeFn<Partial<MRT_Row<TData>> | null>;
   onIsFullScreenChange?: OnChangeFn<boolean>;
   onShowAlertBannerChange?: OnChangeFn<boolean>;
   onShowColumnFiltersChange?: OnChangeFn<boolean>;
