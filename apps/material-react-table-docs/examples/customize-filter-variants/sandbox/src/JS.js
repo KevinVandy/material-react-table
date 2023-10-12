@@ -18,7 +18,14 @@ const Example = () => {
         accessorKey: 'name',
         header: 'Name',
         filterVariant: 'text', // default
-        size: 100,
+        size: 200,
+      },
+      {
+        accessorFn: (originalRow) => new Date(originalRow.hireDate), //convert to date for sorting and filtering
+        id: 'hireDate',
+        header: 'Hire Date',
+        filterVariant: 'date-range',
+        Cell: ({ cell }) => cell.getValue().toLocaleDateString(), // convert back to string for display
       },
       {
         accessorKey: 'age',
@@ -74,4 +81,15 @@ const Example = () => {
   );
 };
 
-export default Example;
+//Date Picker Imports - these should just be in your Context Provider
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+
+const ExampleWithLocalizationProvider = () => (
+  //App.tsx or AppProviders file
+  <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <Example />
+  </LocalizationProvider>
+);
+
+export default ExampleWithLocalizationProvider;

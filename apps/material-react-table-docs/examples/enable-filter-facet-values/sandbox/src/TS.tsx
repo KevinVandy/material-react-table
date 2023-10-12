@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
-import { data, Person } from './makeData';
+import { data, type Person } from './makeData';
 
 const Example = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
@@ -8,7 +8,7 @@ const Example = () => {
       {
         accessorKey: 'name',
         header: 'Name',
-        filterVariant: 'text', // default
+        filterVariant: 'autocomplete', // default
         size: 100,
       },
       {

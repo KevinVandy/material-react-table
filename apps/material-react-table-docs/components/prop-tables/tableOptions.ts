@@ -1241,6 +1241,16 @@ export const tableOptions: TableOption[] = [
     type: 'IconButtonProps | ({table, column}) => IconButtonProps',
   },
   {
+    tableOption: 'muiFilterAutocompleteProps',
+    defaultValue: '',
+    description: '',
+    link: 'https://mui.com/material-ui/api/autocomplete/#props',
+    linkText: 'MUI X DatePicker Props',
+    source: 'Material UI',
+    required: false,
+    type: 'AutocompleteProps | ({ column, rangeFilterIndex, table }) => AutocompleteProps',
+  },
+  {
     tableOption: 'muiFilterCheckboxProps',
     defaultValue: '',
     description: '',
@@ -1249,6 +1259,16 @@ export const tableOptions: TableOption[] = [
     required: false,
     source: 'Material UI',
     type: 'CheckboxProps | ({ column, table}) => CheckboxProps',
+  },
+  {
+    tableOption: 'muiFilterDatePickerProps',
+    defaultValue: '',
+    description: '',
+    link: 'https://mui.com/x/api/date-pickers/date-picker/',
+    linkText: 'MUI X DatePicker Props',
+    source: 'Material UI',
+    required: false,
+    type: 'DatePickerProps | ({ column, rangeFilterIndex, table }) => DatePickerProps',
   },
   {
     tableOption: 'muiFilterSliderProps',

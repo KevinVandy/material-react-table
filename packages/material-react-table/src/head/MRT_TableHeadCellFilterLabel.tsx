@@ -122,11 +122,13 @@ export const MRT_TableHeadCellFilterLabel = <
           horizontal: 'center',
           vertical: 'top',
         }}
+        onClick={(event) => event.stopPropagation()}
         onClose={(event) => {
           //@ts-ignore
           event.stopPropagation();
           setAnchorEl(null);
         }}
+        onKeyDown={(event) => event.key === 'Enter' && setAnchorEl(null)}
         open={!!anchorEl}
         transformOrigin={{
           horizontal: 'center',

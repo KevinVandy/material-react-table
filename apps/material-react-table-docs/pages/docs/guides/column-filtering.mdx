@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
-import DisableExample from '../../../examples/disable-column-filters';
+import AlternateExample from '../../../examples/alternate-column-filtering';
 import CustomizeFilterVariantsExample from '../../../examples/customize-filter-variants';
 import CustomizeFilterModesExample from '../../../examples/customize-filter-modes';
 import CustomizeFilterComponentsExample from '../../../examples/customize-filter-components';
@@ -11,7 +11,9 @@ import EnableColumnFacetValuesExample from '../../../examples/enable-filter-face
 import RemoteExample from '../../../examples/remote';
 
 <Head>
-  <title>Column Filtering Feature Guide - Material React Table V2 Docs</title>
+  <title>
+    {'Column Filtering Feature Guide - Material React Table V2 Docs'}
+  </title>
   <meta
     name="description"
     content="How to use, customize, or disable filter features, client-side or server side, in Material React Table"
@@ -41,7 +43,9 @@ Filtering is one of the most powerful features of Material React Table and is en
       'getFilteredRowModel',
       'manualFiltering',
       'maxLeafRowFilterDepth',
+      'muiFilterAutocompleteProps',
       'muiFilterCheckboxProps',
+      'muiFilterDatePickerProps',
       'muiFilterSliderProps',
       'muiFilterTextFieldProps',
       'onColumnFilterFnsChange',
@@ -65,7 +69,9 @@ Filtering is one of the most powerful features of Material React Table and is en
       'filterFn',
       'filterSelectOptions',
       'filterVariant',
+      'muiFilterAutocompleteProps',
       'muiFilterCheckboxProps',
+      'muiFilterDatePickerProps',
       'muiFilterSliderProps',
       'muiFilterTextFieldProps',
       'renderColumnFilterModeMenuItems',
@@ -76,7 +82,9 @@ Filtering is one of the most powerful features of Material React Table and is en
 ### Relevant State Options
 
 <StateOptionsTable
-  onlyOptions={new Set(['columnFilters', 'columnFilterFns', 'showColumnFilters'])}
+  onlyOptions={
+    new Set(['columnFilters', 'columnFilterFns', 'showColumnFilters'])
+  }
 />
 
 ### Disable Filtering Features
@@ -85,54 +93,25 @@ Various subsets of filtering features can be disabled. If you want to disable fi
 
 `enableFilters` can be set to `false` to disable both column filters and the global search filter.
 
-<DisableExample />
-
-### Filter Match Highlighting
-
-> New in v1.6
-
-Filter Match Highlighting is a new featured enabled by default that will highlight text in the table body cells that matches the current filter query with a shade of the <Box component="span" color="warning.main">`theme.palette.warning.main`</Box> color.
-
-Filter Match Highlighting will only work on columns with the default `text` filter variant. Also, if you are using a custom `Cell` render override for a column, you will need to use the `renderedCellValue` prop instead of `cell.getValue()` in order to preserve the filter match highlighting.
-
-```jsx
-const columns = [
-  {
-    accessorKey: 'name',
-    header: 'Name',
-    Cell: ({ renderedCellValue }) => <span>{renderedCellValue}</span>, // use renderedCellValue instead of cell.getValue()
-  },
-];
-```
-
-#### Disable Filter Match Highlighting
-
-This feature can be disabled by setting the `enableFilterMatchHighlighting` prop to `false`.
-
-```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableFilterMatchHighlighting={false}
-/>
-```
-
 ### Filter Variants
 
 Material React Table has several built-in filter variants for advanced filtering. These can be specified on a per-column basis using the `filterVariant` option. The following variants are available:
 
 - `'text'` - shows the default text field
-- `'select'` - shows a select dropdown with the options from faceted values or specified in `filterSelectOptions`
+- `'autocomplete'` - shows an autocomplete text field with the options from faceted values or specified in `filterSelectOptions` array.
+- `'select'` - shows a select dropdown with the options from faceted values or specified in `filterSelectOptions` array.
 - `'multi-select'` - shows a select dropdown with the options from faceted values or specified in `filterSelectOptions` and allows multiple selections with checkboxes
 - `'range'` - shows min and max text fields for filtering a range of values
 - `'range-slider'` - shows a slider for filtering a range of values
-- `'checkbox'` - shows a checkbox for filtering by `'true'` or `'false'` values (Strings)
+- `'date'` - shows a date picker for filtering by date values
+- `'date-range'` - shows a date range picker for filtering by date ranges
+- `'checkbox'` - shows a checkbox for filtering by `'true'` or `'false'` values
+
+> `'autocomplete'`, `'date'`, and `'date-range'` variants are new in v2
 
 <CustomizeFilterVariantsExample />
 
 #### Faceted Values for Filter Variants
-
-> New in v1.13
 
 Faceted values are a list of unique values for a column that gets generated under the hood from table data when the `enableFacetedValues` prop is set to `true`. These values can be used to populate the select dropdowns for the `'select'` and `'multi-select'` filter variants, or the min and max values for the `'range-slider'` variant. This means that you no longer need to manually specify the `filterSelectOptions` prop for these variants manually, especially if you are using client-side filtering.
 
@@ -160,6 +139,30 @@ If you are using server-side pagination and filtering, you can still customize t
   }}
 />
 ```
+
+### Column Filter Display Modes
+
+By default, column filters inputs show below the column header. You can switch to a more "excel-like" UI by setting the `columnFilterDisplayMode` table option to `'popover'`. This will show a filter icon in the column header that can be clicked to open a popover with the filter input.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  columnFilterDisplayMode: 'popover', //filter inputs will show in a popover (like excel)
+});
+```
+
+Alternatively, if you want to render your own column filter UI in a separate sidebar, but still want to use the built-in filtering functionality, you can set the `columnFilterDisplayMode` table option to `'custom'`.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  columnFilterDisplayMode: 'custom', //render your own column filter UI (e.g. in a sidebar)
+});
+```
+
+<AlternateExample />
 
 ### Custom Filter Functions
 
@@ -355,5 +358,33 @@ You can also turn a filter textfield into a select dropdown by setting the `filt
 ### Custom Filter Components
 
 If you need custom filter components that are much more complex than text-boxes and dropdowns, you can create and pass in your own filter components using the `Filter` column option.
+
+### Filter Match Highlighting
+
+Filter Match Highlighting is a new featured enabled by default that will highlight text in the table body cells that matches the current filter query with a shade of the <Box component="span" color="warning.main">`theme.palette.warning.main`</Box> color.
+
+Filter Match Highlighting will only work on columns with the default `text` filter variant. Also, if you are using a custom `Cell` render override for a column, you will need to use the `renderedCellValue` prop instead of `cell.getValue()` in order to preserve the filter match highlighting.
+
+```jsx
+const columns = [
+  {
+    accessorKey: 'name',
+    header: 'Name',
+    Cell: ({ renderedCellValue }) => <span>{renderedCellValue}</span>, // use renderedCellValue instead of cell.getValue()
+  },
+];
+```
+
+#### Disable Filter Match Highlighting
+
+This feature can be disabled by setting the `enableFilterMatchHighlighting` prop to `false`.
+
+```jsx
+<MaterialReactTable
+  columns={columns}
+  data={data}
+  enableFilterMatchHighlighting={false}
+/>
+```
 
 View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-filtering-examples)**

@@ -133,7 +133,7 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
         if (isRangeFilter) {
           column.setFilterValue((old: Array<Date | null | number | string>) => {
             const newFilterValues = old ?? ['', ''];
-            newFilterValues[rangeFilterIndex as number] = newValue;
+            newFilterValues[rangeFilterIndex as number] = newValue ?? undefined;
             return newFilterValues;
           });
         } else {
@@ -146,7 +146,7 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
   );
 
   const handleChange = (newValue: any) => {
-    setFilterValue(newValue?.toString() ?? '');
+    setFilterValue(newValue ?? '');
     handleChangeDebounced(newValue);
   };
 
@@ -246,7 +246,7 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
               sx={{
                 height: '2rem',
                 transform: 'scale(0.9)',
-                width: '2rem'
+                width: '2rem',
               }}
             >
               <CloseIcon />
@@ -364,6 +364,7 @@ export const MRT_FilterTextField = <TData extends Record<string, any>>({
         />
       ) : isAutocompleteFilter ? (
         <Autocomplete
+          freeSolo
           getOptionLabel={(option) => option}
           onChange={(_e, newValue) => handleChange(newValue)}
           options={dropdownOptions ?? []}
