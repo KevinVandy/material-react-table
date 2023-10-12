@@ -8,10 +8,13 @@ import {
 import TableBody from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';
 import { MRT_TableBodyRow, Memo_MRT_TableBodyRow } from './MRT_TableBodyRow';
-import { getCanRankRows, parseFromValuesOrFunc } from '../column.utils';
+import {
+  extraIndexRangeExtractor,
+  getCanRankRows,
+  parseFromValuesOrFunc,
+} from '../column.utils';
 import { rankGlobalFuzzy } from '../sortingFns';
 import { type MRT_Row, type MRT_TableInstance } from '../types';
-import { DraggingRangeExtractor } from '../virtualization.utils';
 
 interface Props<TData extends Record<string, any>> {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
@@ -141,15 +144,6 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
     rowPinning,
   ]);
 
-  const draggingRowIndex = rows.findIndex((row) => row.id === draggingRow?.id);
-
-  const rangeExtractor = useCallback(
-    (range: Range) => {
-      return DraggingRangeExtractor(range, draggingRowIndex);
-    },
-    [draggingRowIndex],
-  );
-
   const rowVirtualizer:
     | Virtualizer<HTMLDivElement, HTMLTableRowElement>
     | undefined = enableRowVirtualization
@@ -164,7 +158,12 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
             ? (element) => element?.getBoundingClientRect().height
             : undefined,
         overscan: 4,
-        rangeExtractor,
+        rangeExtractor: useCallback(
+          (range: Range) => {
+            return extraIndexRangeExtractor(range, draggingRow?.index ?? 0);
+          },
+          [draggingRow],
+        ),
         ...rowVirtualizerProps,
       })
     : undefined;
@@ -226,12 +225,16 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
         {tableBodyProps?.children ??
           (!rows.length ? (
             <tr
-              style={{ display: layoutMode?.startsWith('grid') ? 'grid' : undefined }}
+              style={{
+                display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
+              }}
             >
               <td
                 colSpan={table.getVisibleLeafColumns().length}
                 style={{
-                  display: layoutMode?.startsWith('grid') ? 'grid' : 'table-cell',
+                  display: layoutMode?.startsWith('grid')
+                    ? 'grid'
+                    : 'table-cell',
                 }}
               >
                 {renderEmptyRowsFallback?.({ table }) ?? (
