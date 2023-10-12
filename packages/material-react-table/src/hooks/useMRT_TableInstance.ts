@@ -103,12 +103,12 @@ export const useMRT_TableInstance: <TData extends Record<string, any>>(
   const [grouping, setGrouping] = useState<MRT_GroupingState>(
     initialState.grouping ?? [],
   );
-  const [hoveredColumn, setHoveredColumn] = useState<
-    { id: string } | MRT_Column<TData> | null
-  >(initialState.hoveredColumn ?? null);
-  const [hoveredRow, setHoveredRow] = useState<
-    { id: string } | MRT_Row<TData> | null
-  >(initialState.hoveredRow ?? null);
+  const [hoveredColumn, setHoveredColumn] = useState<Partial<
+    MRT_Column<TData>
+  > | null>(initialState.hoveredColumn ?? null);
+  const [hoveredRow, setHoveredRow] = useState<Partial<MRT_Row<TData>> | null>(
+    initialState.hoveredRow ?? null,
+  );
   const [isFullScreen, setIsFullScreen] = useState<boolean>(
     initialState?.isFullScreen ?? false,
   );

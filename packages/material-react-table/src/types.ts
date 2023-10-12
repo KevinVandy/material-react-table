@@ -968,7 +968,7 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
     values: Record<LiteralUnion<string & DeepKeys<TData>>, any>;
   }) => Promise<void> | void;
   onGlobalFilterFnChange?: OnChangeFn<MRT_FilterOption>;
-  onHoveredColumnChange?: OnChangeFn<Partial<MRT_Row<TData>> | null>;
+  onHoveredColumnChange?: OnChangeFn<Partial<MRT_Column<TData>> | null>;
   onHoveredRowChange?: OnChangeFn<Partial<MRT_Row<TData>> | null>;
   onIsFullScreenChange?: OnChangeFn<boolean>;
   onShowAlertBannerChange?: OnChangeFn<boolean>;
