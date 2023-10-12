@@ -241,9 +241,9 @@ export const RowAndColumnPinning = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableRowPinning
     enableColumnPinning
     enablePagination={false}
+    enableRowPinning
     initialState={{
       columnPinning: {
         left: ['firstName'],

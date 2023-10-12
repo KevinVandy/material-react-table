@@ -102,9 +102,9 @@ export const CustomPaginationPagesDisplayModeMoreData = () => (
     columns={columns}
     data={moreData}
     muiPaginationProps={{
+      boundaryCount: 5,
       shape: 'circular',
       variant: 'outlined',
-      boundaryCount: 5,
     }}
     paginationDisplayMode="pages"
   />
