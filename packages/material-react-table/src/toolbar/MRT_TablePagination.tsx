@@ -27,7 +27,7 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
       enableToolbarInternalActions,
       icons: { ChevronLeftIcon, ChevronRightIcon, FirstPageIcon, LastPageIcon },
       localization,
-      muiTablePaginationProps,
+      muiPaginationProps,
       paginationDisplayMode,
       rowCount,
     },
@@ -39,7 +39,7 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
     showGlobalFilter,
   } = getState();
 
-  const paginationProps = parseFromValuesOrFunc(muiTablePaginationProps, {
+  const paginationProps = parseFromValuesOrFunc(muiPaginationProps, {
     table,
   });
 
@@ -50,11 +50,10 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
   const lastRowIndex = Math.min(pageIndex * pageSize + pageSize, totalRowCount);
 
   const {
-    showRowsPerPage = true,
     rowsPerPageOptions = defaultRowsPerPage,
     showFirstButton = showFirstLastPageButtons,
     showLastButton = showFirstLastPageButtons,
-
+    showRowsPerPage = true,
     ...rest
   } = paginationProps ?? {};
 
@@ -84,8 +83,8 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
             {localization.rowsPerPage}
           </InputLabel>
           <Select
-            inputProps={{ 'aria-label': localization.rowsPerPage }}
             id="mrt-rows-per-page"
+            inputProps={{ 'aria-label': localization.rowsPerPage }}
             label={localization.rowsPerPage}
             onChange={(event) => setPageSize(+event.target.value)}
             sx={{ '&::before': { border: 'none' }, mb: 0 }}
@@ -123,7 +122,7 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
       ) : paginationDisplayMode === 'default' ? (
         <>
           <Typography
-            sx={{ mb: 0, mx: '4px', minWidth: '10ch' }}
+            sx={{ mb: 0, minWidth: '10ch', mx: '4px' }}
             variant="body2"
           >{`${
             lastRowIndex === 0 ? 0 : (firstRowIndex + 1).toLocaleString()

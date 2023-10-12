@@ -14,7 +14,7 @@ import { type MRT_TableInstance } from '../types';
 
 export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
   alignItems: 'flex-start',
-  backgroundColor: lighten(theme.palette.background.default, 0.04),
+  backgroundColor: lighten(theme.palette.background.default, 0.05),
   backgroundImage: 'none',
   display: 'grid',
   flexWrap: 'wrap-reverse',

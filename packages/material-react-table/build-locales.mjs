@@ -15,6 +15,7 @@ const supportedLocales = [
   'fi',
   'fr',
   'hu',
+  'hy',
   'id',
   'it',
   'ja',

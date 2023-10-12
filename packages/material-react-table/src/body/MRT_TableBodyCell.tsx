@@ -210,11 +210,11 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
           outlineOffset: '-1px',
           textOverflow: 'clip',
         },
-        alignItems: layoutMode === 'grid' ? 'center' : undefined,
+        alignItems: layoutMode?.startsWith('grid') ? 'center' : undefined,
         cursor:
           isEditable && editDisplayMode === 'cell' ? 'pointer' : 'inherit',
         justifyContent:
-          layoutMode === 'grid' ? tableCellProps.align : undefined,
+          layoutMode?.startsWith('grid') ? tableCellProps.align : undefined,
         overflow: 'hidden',
         p:
           density === 'compact'

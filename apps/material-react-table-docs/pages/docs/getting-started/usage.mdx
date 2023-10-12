@@ -2,7 +2,7 @@ import Head from 'next/head';
 import SimpleCodeSandbox from '../../../examples/SimpleCodeSandbox';
 
 <Head>
-  <title>Usage - Material React Table Docs</title>
+  <title>Usage - Material React Table V2 Docs</title>
   <meta
     name="description"
     content="A brief overview of how to use material-react-table and create columns and data"
@@ -11,7 +11,7 @@ import SimpleCodeSandbox from '../../../examples/SimpleCodeSandbox';
 
 ## Usage
 
-Here is a brief overview of how to use Material React Table. This is a very simple example, and will not cover all features of the library, but it is a great starting point.
+Here is a brief overview of how to use Material React Table. These are very simple examples and will not cover all features of the library, but should be a great starting point.
 
 ### Setup
 
@@ -21,33 +21,27 @@ There are additional steps and customizations you can do for Material UI, if you
 
 If you need to change the colors of the table components, advanced [Material UI Theming](https://mui.com/material-ui/customization/default-theme/) is covered in the [Customize Components](/docs/guides/customize-components#material-ui-theme) guide.
 
-### Import MaterialReactTable
+### Import MaterialReactTable and useMaterialReactTable
 
 Once you have everything installed, you can import from `material-react-table` like this:
 
 ```tsx
-import { MaterialReactTable } from 'material-react-table'; // v1.12.0 and above (recommended)
+import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
 ```
 
-> As of v1.12.0, MaterialReactTable is recommended to be imported from a named export (with curly braces) instead of the default export. The default export will still work, but it is deprecated and will be removed in a future version. This is comply with rollup bundling best practices.
+`MaterialReactTable` is the main component that you will use to render your table.
 
-If you are using TypeScript, you may also want to import some TypeScript types from `'material-react-table'` to take advantage of the advanced strong type checking and autocompletion features. The `MRT_ColumnDef` type is especially useful for defining your columns in a type-safe way.
-
-```tsx
-import { MaterialReactTable } from 'material-react-table';
-import { type MRT_ColumnDef } from 'material-react-table'; // If using TypeScript (optional, but recommended)
-```
+`useMaterialReactTable` is the React hook that you will use to define all the columns, data, and other options for your table.
 
 ### Creating Data/Rows
 
 Your data must be an array of objects that have properties matching the accessors in your column definitions. The objects themselves can theoretically be in any shape, but it will be easier to set up your columns if your data is already in a flat object format like the example below, but it is not required.
 
-If you are using TypeScript, remember to define a type for your data, as it can be used as a generic for your Column Definitions later for much better type safety.
-
 #### Simple Data Example
 
 ```jsx
 //recommended flat structure for data, but not required (nested data is fine, but takes more setup in column definitions)
+//must be memoized or stable (useState, useMemo, defined outside of the component, etc.)
 const data = [
   {
     name: 'John', // key "name" matches `accessorKey` in ColumnDef down below
@@ -55,37 +49,6 @@ const data = [
   },
   {
     name: 'Sara',
-    age: 25,
-  },
-];
-```
-
-#### Nested Data Example with TypeScript
-
-```tsx
-//if you are using TypeScript, create a type based on the shape of your data that you can use in your column definitions
-interface YourDataType {
-  name: {
-    firstName: string;
-    lastName: string;
-  };
-  age: number;
-}
-
-//a more complex example with nested data
-const data: YourDataType[] = [
-  {
-    name: {
-      firstName: 'John', //accessorKey or accessorFn will need to be "name.firstName" to access this value
-      lastName: 'Doe',
-    },
-    age: 30,
-  },
-  {
-    name: {
-      firstName: 'Sara',
-      lastName: 'Smith',
-    },
     age: 25,
   },
 ];
@@ -105,36 +68,12 @@ const columns = useMemo(
   () => [
     {
       header: 'Name',
-      accessorKey: 'name', //simple accessorKey pointing to flat data
+      accessorKey: 'name', //simple recommended way to define a column
+      //more column options can be added here to enable/disable features, customize look and feel, etc.
     },
     {
       header: 'Age',
-      accessorKey: 'age', //simple accessorKey pointing to flat data
-    },
-  ],
-  [],
-);
-```
-
-#### Nested Column Definition Example with TypeScript
-
-```tsx
-//a more complex example with nested data
-//if using TypeScript, you can use the MRT_ColumnDef type to strongly type your columns (Recommended)
-const columns = useMemo<MRT_ColumnDef<YourDataType>[]>(
-  () => [
-    {
-      header: 'First Name',
-      accessorKey: 'name.firstName', //using accessorKey dot notation to access nested data
-    },
-    {
-      header: 'Last Name',
-      accessorFn: (originalRow) => originalRow.name.lastName, //alternative to accessorKey, using accessorFn
-      id: 'lastName',
-    },
-    {
-      header: 'Age',
-      accessorKey: 'age',
+      accessorFn: (dataRow) => parseInt(dataRow.age), //alternate way to access data if processing logic is needed
     },
   ],
   [],
@@ -146,9 +85,12 @@ const columns = useMemo<MRT_ColumnDef<YourDataType>[]>(
 Put it all together, and you have a basic table! You can also play around and enable some features, either per column in the column definitions, or as props passed to `<MaterialReactTable />`.
 
 ```tsx
-import React, { useMemo } from 'react';
-import { MaterialReactTable } from 'material-react-table';
-import { MRT_ColumnDef } from 'material-react-table'; // If using TypeScript (optional, but recommended)
+import { useMemo } from 'react';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+  type MRT_ColumnDef, //if using TypeScript (optional, but recommended)
+} from 'material-react-table';
 
 //If using TypeScript, define the shape of your data (optional, but recommended)
 interface Person {
@@ -175,7 +117,7 @@ export default function App() {
       {
         accessorKey: 'name', //simple recommended way to define a column
         header: 'Name',
-        muiTableHeadCellProps: { sx: { color: 'green' } }, //custom props
+        muiTableHeadCellProps: { style: { color: 'green' } }, //custom props
       },
       {
         accessorFn: (originalRow) => originalRow.age, //alternate way
@@ -187,15 +129,18 @@ export default function App() {
     [],
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableRowSelection //enable some features
-      enableColumnOrdering
-      enableGlobalFilter={false} //turn off a feature
-    />
-  );
+  //pass table options to useMaterialReactTable
+  const table = useMaterialReactTable({
+    columns,
+    data, //must be memoized or stable (useState, useMemo, defined outside of this component, etc.)
+    enableRowSelection: true, //enable some features
+    enableColumnOrdering: true,
+    enableGlobalFilter: false, //turn off a feature
+  });
+
+  //note: you can also pass table options as props directly to <MaterialReactTable /> instead of using useMaterialReactTable
+  //but that is not recommended and will likely be deprecated in the future
+  return <MaterialReactTable table={table} />;
 }
 ```
 
@@ -207,6 +152,6 @@ export default function App() {
 
 ### Next Steps
 
-There are numerous ways you can customize the behavior and look and feel of your Material React Table. View some of the [examples](/docs/examples) to see how you can customize your table, and visit the [props page](/docs/api/props) to see all the props that you can use to turn features on and off and customize the look and feel of your table.
+There are numerous ways you can customize the behavior and look and feel of your Material React Table. View some of the [examples](/docs/examples) to see how you can customize your table, and visit the [props page](/docs/api/table-options) to see all the props that you can use to turn features on and off and customize the look and feel of your table.
 
 Also, be sure to check out all the [Fundamental Guides](/docs/guides#fundamentals) and any of the [Advanced Feature Guides](/docs/guides#feature-guides) you may be interested in to learn more about the different features you can toggle on and off, or customize.

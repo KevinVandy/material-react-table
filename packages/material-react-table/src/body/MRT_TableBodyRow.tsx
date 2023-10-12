@@ -145,7 +145,7 @@ export const MRT_TableBodyRow = <TData extends Record<string, any>>({
           },
           backgroundColor: `${lighten(
             theme.palette.background.default,
-            0.06,
+            0.05,
           )} !important`,
           bottom:
             !virtualRow && bottomPinnedIndex !== undefined && isPinned
@@ -155,7 +155,7 @@ export const MRT_TableBodyRow = <TData extends Record<string, any>>({
                 }px`
               : undefined,
           boxSizing: 'border-box',
-          display: layoutMode === 'grid' ? 'flex' : 'table-row',
+          display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
           opacity: isPinned
             ? 0.98
             : draggingRow?.id === row.id || hoveredRow?.id === row.id
@@ -185,7 +185,7 @@ export const MRT_TableBodyRow = <TData extends Record<string, any>>({
           width: '100%',
           zIndex:
             rowPinningDisplayMode?.includes('sticky') && isPinned
-              ? 1
+              ? 2
               : undefined,
           ...(sx as any),
         })}

@@ -33,15 +33,34 @@ const data = [...Array(21)].map(() => ({
   lastName: faker.person.lastName(),
 }));
 
+const moreData = [...Array(551)].map(() => ({
+  address: faker.location.streetAddress(),
+  age: faker.number.int(80),
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
+}));
+
 export const PaginationEnabledDefault = () => (
   <MaterialReactTable columns={columns} data={data} />
+);
+
+export const PaginationEnabledDefaultMoreData = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={moreData}
+    muiTableContainerProps={{
+      sx: {
+        minHeight: '600px',
+      },
+    }}
+  />
 );
 
 export const PaginationEnabledDefaultNoRowsPerPage = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    muiTablePaginationProps={{
+    muiPaginationProps={{
       showRowsPerPage: false,
     }}
   />
@@ -59,7 +78,7 @@ export const PaginationPagesDisplayModeNoPagesPerRow = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    muiTablePaginationProps={{
+    muiPaginationProps={{
       showRowsPerPage: false,
     }}
     paginationDisplayMode="pages"
@@ -70,7 +89,20 @@ export const CustomPaginationPagesDisplayMode = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    muiTablePaginationProps={{
+    muiPaginationProps={{
+      shape: 'circular',
+      variant: 'outlined',
+    }}
+    paginationDisplayMode="pages"
+  />
+);
+
+export const CustomPaginationPagesDisplayModeMoreData = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={moreData}
+    muiPaginationProps={{
+      boundaryCount: 5,
       shape: 'circular',
       variant: 'outlined',
     }}
@@ -112,7 +144,7 @@ export const CustomizePaginationComponents = () => (
     columns={columns}
     data={data}
     initialState={{ pagination: { pageIndex: 0, pageSize: 5 } }}
-    muiTablePaginationProps={{
+    muiPaginationProps={{
       rowsPerPageOptions: [5, 10, 20],
       showFirstButton: false,
       showLastButton: false,

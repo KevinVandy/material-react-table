@@ -4,7 +4,7 @@ import OriginalExample from '../../../examples/enable-row-numbers-original';
 import StaticExample from '../../../examples/enable-row-numbers-static';
 
 <Head>
-  <title>Row Numbers Feature Guide - Material React Table Docs</title>
+  <title>Row Numbers Feature Guide - Material React Table V2 Docs</title>
   <meta
     name="description"
     content="How to use and customize automatic row numbers in Material React Table"
@@ -13,22 +13,24 @@ import StaticExample from '../../../examples/enable-row-numbers-static';
 
 ## Row Numbers Feature Guide
 
-Material React Table has an easy-to-implement row numbers feature. There are two row number modes you can enable. You can have row numbers that are associated with the data in the table ([original mode](<#enable-row-numbers-(original-mode)>)), or you can have row numbers that are only statically part of the table ([static mode](<#enable-row-numbers-(static-mode)>)).
+Material React Table has an easy to implement row number features. There are two row number modes that you can enable. You can have row numbers that are associated with the data in the table ([original mode](<#enable-row-numbers-(original-mode)>)), or you can have row numbers that are just statically part of the table ([static mode](<#enable-row-numbers-(static-mode)>)).
 
-### Relevant Props
+### Relevant Table Options
 
-<TableOptionsTable onlyOptions={new Set(['enableRowNumbers', 'rowNumberMode'])} />
-
-### Enable Row Numbers (Original Mode)
-
-In the default rowNumberMode (`original`), the row numbers are linked to the original index of the data array. This means that when you search or filter, the same row numbers will stay with the row, though they will not be in the same order when sorted or will skip numbers when filtered.
-
-<OriginalExample />
+<TableOptionsTable
+  onlyOptions={new Set(['enableRowNumbers', 'rowNumberMode'])}
+/>
 
 ### Enable Row Numbers (Static Mode)
 
-Alternatively, if you just want row numbers to always be the same and in order, you can use the `static` row number mode.
+In the default rowNumberMode (`static`), row numbers are just a static part of the table in their own column. They act like the row numbers in an excel spreadsheet. Sorting and filtering will not affect the row numbers.
 
 <StaticExample />
+
+### Enable Row Numbers (Original Mode)
+
+Alternatively, use the `"original"` rowNumberMode to have row numbers linked to the original index of the data array. This means that when you search or filter, the same row numbers will stay with the same rows as data is sorted and filtered.
+
+<OriginalExample />
 
 View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-row-number-examples)**

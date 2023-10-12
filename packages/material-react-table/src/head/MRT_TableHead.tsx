@@ -2,6 +2,7 @@ import { type VirtualItem } from '@tanstack/react-virtual';
 import TableHead from '@mui/material/TableHead';
 import { MRT_TableHeadRow } from './MRT_TableHeadRow';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { MRT_ToolbarAlertBanner } from '../toolbar';
 import { type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
@@ -19,11 +20,17 @@ export const MRT_TableHead = <TData extends Record<string, any>>({
 }: Props<TData>) => {
   const {
     getHeaderGroups,
+    getSelectedRowModel,
     getState,
-    options: { enableStickyHeader, layoutMode, muiTableHeadProps },
+    options: {
+      enableStickyHeader,
+      layoutMode,
+      muiTableHeadProps,
+      positionToolbarAlertBanner,
+    },
     refs: { tableHeadRef },
   } = table;
-  const { isFullScreen } = getState();
+  const { isFullScreen, showAlertBanner } = getState();
 
   const tableHeadProps = parseFromValuesOrFunc(muiTableHeadProps, { table });
 
@@ -40,24 +47,39 @@ export const MRT_TableHead = <TData extends Record<string, any>>({
         }
       }}
       sx={(theme) => ({
-        display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
+        display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
         opacity: 0.97,
         position: stickyHeader ? 'sticky' : 'relative',
-        top: stickyHeader && layoutMode === 'grid' ? 0 : undefined,
+        top: stickyHeader && layoutMode?.startsWith('grid') ? 0 : undefined,
         zIndex: stickyHeader ? 2 : undefined,
         ...(parseFromValuesOrFunc(tableHeadProps?.sx, theme) as any),
       })}
     >
-      {getHeaderGroups().map((headerGroup) => (
-        <MRT_TableHeadRow
-          headerGroup={headerGroup as any}
-          key={headerGroup.id}
-          table={table}
-          virtualColumns={virtualColumns}
-          virtualPaddingLeft={virtualPaddingLeft}
-          virtualPaddingRight={virtualPaddingRight}
-        />
-      ))}
+      {positionToolbarAlertBanner === 'head-overlay' &&
+      (showAlertBanner || getSelectedRowModel().rows.length > 0) ? (
+        <tr style={{ display: layoutMode?.startsWith('grid') ? 'grid' : undefined }}>
+          <th
+            colSpan={table.getVisibleLeafColumns().length}
+            style={{
+              display: layoutMode?.startsWith('grid') ? 'grid' : 'table-cell',
+              padding: 0,
+            }}
+          >
+            <MRT_ToolbarAlertBanner table={table} />
+          </th>
+        </tr>
+      ) : (
+        getHeaderGroups().map((headerGroup) => (
+          <MRT_TableHeadRow
+            headerGroup={headerGroup as any}
+            key={headerGroup.id}
+            table={table}
+            virtualColumns={virtualColumns}
+            virtualPaddingLeft={virtualPaddingLeft}
+            virtualPaddingRight={virtualPaddingRight}
+          />
+        ))
+      )}
     </TableHead>
   );
 };

@@ -126,7 +126,7 @@ export const MRT_TableHeadCell = <TData extends Record<string, any>>({
       }}
       {...tableCellProps}
       sx={(theme: Theme) => ({
-        flexDirection: layoutMode === 'grid' ? 'column' : undefined,
+        flexDirection: layoutMode?.startsWith('grid') ? 'column' : undefined,
         fontWeight: 'bold',
         overflow: 'visible',
         p:

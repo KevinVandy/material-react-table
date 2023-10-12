@@ -153,7 +153,7 @@ const Example = () => {
     initialState: { showColumnFilters: true, showGlobalFilter: true },
     paginationDisplayMode: 'pages',
     positionToolbarAlertBanner: 'bottom',
-    muiTablePaginationProps: {
+    muiPaginationProps: {
       color: 'secondary',
       rowsPerPageOptions: [10, 20, 30],
       shape: 'rounded',

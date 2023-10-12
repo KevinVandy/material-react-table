@@ -1301,7 +1301,7 @@ export const tableOptions: TableOption[] = [
     type: 'TableRowProps | ({ table, headerGroup}) => TableRowProps',
   },
   {
-    tableOption: 'muiTablePaginationProps',
+    tableOption: 'muiPaginationProps',
     defaultValue: '',
     description: '',
     link: 'https://mui.com/material-ui/api/table-pagination/#props',

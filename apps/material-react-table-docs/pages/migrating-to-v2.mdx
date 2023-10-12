@@ -21,12 +21,31 @@ import { InstallCommand } from '../components/mdx/InstallCommand';
 4. New Column Filtering `'popover'` display mode to give a more "excel-like" filtering experience.
 5. New Date and Date Range Filter variants
 6. New Autocomplete Filter variant
+7. New Pagination UI options
 
 ### Breaking Changes
 
 - `@mui/x-date-pickers v >=6.15.0` is now a required peer dependency. Install it with:
 
 <InstallCommand packagesString="@mui/x-date-pickers" />
+
+- If you use the date picker features, you will also need to import the `LocalizationProvider` from `@mui/x-date-pickers` and wrap your app in it. See [here](https://mui.com/guides/right-to-left/#main-content) for more details.
+
+```jsx
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
+export const App = () => {
+  return (
+    <ThemeProvider theme={(theme = createTheme({}))}>
+      {/* Add this if using date filter features */}
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <MyApp />
+      </LocalizationProvider>
+    </ThemeProvider>
+  );
+};
+```
 
 - `MaterialReactTable` is now a named export instead of a default export. Use curly braces to import it.
 
@@ -45,6 +64,7 @@ import { InstallCommand } from '../components/mdx/InstallCommand';
 - `virtualizerProps` split into `columnVirtualizerOptions` and `rowVirtualizerOptions`
 - `columnVirtualizerProps` -> `columnVirtualizerOptions`
 - `rowVirtualizerProps` -> `rowVirtualizerOptions`
+- `muiTablePaginationProps` -> `muiPaginationProps`
 - `muiTableBodyCellCopyButtonProps` -> `muiCopyButtonProps`
 - `muiTableBodyCellEditTextFieldProps` -> `muiEditTextFieldProps`
 - `muiTableBodyCellSkeletonProps` -> `muiSkeletonProps`

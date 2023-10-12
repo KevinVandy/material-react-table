@@ -44,7 +44,7 @@ export const MRT_TableFooter = <TData extends Record<string, any>>({
       }}
       sx={(theme) => ({
         bottom: stickFooter ? 0 : undefined,
-        display: layoutMode === 'grid' ? 'grid' : 'table-row-group',
+        display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
         opacity: stickFooter ? 0.97 : undefined,
         outline: stickFooter
           ? theme.palette.mode === 'light'

@@ -1,0 +1,216 @@
+import Head from 'next/head';
+
+<Head>
+  <title>TypeScript - Material React Table V2 Docs</title>
+  <meta
+    name="description"
+    content="How to best use TypeScript with Material React Table"
+  />
+</Head>
+
+## TypeScript Usage
+
+TanStack Table itself is written in TypeScript, and Material React Table builds on top of its great type definitions for best in class TypeScript experience.
+
+If, however, you cannot use TypeScript in your project for some reason, checkout down below for [how to use JSDoc instead of TypeScript](#use-jsdoc-instead-of-typescript) to get the same type hints.
+
+### Is TypeScript Required?
+
+No, TypeScript is not required to use Material React Table. You can just use JavaScript and everything will work just fine, but you will be missing out on a lot of great type hints and type safety that can help you build your app faster and with less bugs.
+
+### Define You TData Type
+
+Material React Table makes use of generics to make working with your specific row data structures easier. You will see that most of the `MRT_*` types that you can use accept a `TData` generic.
+
+Let's say that the data in your table is an array of users that looks like this:
+
+```tsx
+const data: User[] = [
+  { id: 1, name: 'John', age: 23 },
+  { id: 2, name: 'Alice', age: 17 },
+  { id: 3, name: 'Bob', age: 32 },
+];
+```
+
+Then your `TData` type can be defined as:
+
+```tsx
+export type User = {
+  id: number;
+  name: string;
+  age: number;
+};
+```
+
+### Define Your Column Definitions with MRT_ColumnDef
+
+Material React Table provides you with a `MRT_ColumnDef` type that you can use to define your column definitions. It is a generic type that accepts your `TData` type as a generic.
+
+```tsx
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+  type MRT_ColumnDef, // <--- import MRT_ColumnDef
+} from '@mui/core';
+import { type User } from './types'; // <--- import your TData type from wherever you defined it
+
+// define your columns, pass User as a generic to MRT_ColumnDef
+const columns: MRT_ColumnDef<User>[] = [
+  {
+    accessorKey: 'id', //you should get type hints for all of your keys if you defined your TData type correctly
+    header: 'ID',
+    enableSorting: false, //you should get type hints for all possible column options that you can define here
+  },
+  {
+    accessorKey: 'name',
+    header: 'Name',
+  },
+  {
+    accessorFn: (originalRow) => Number(originalRow.age), //you should also get type hints for your accessorFn
+    header: 'Age',
+  },
+];
+```
+
+### Use JSDoc instead of TypeScript
+
+If you are in a situation where you are not able to install TypeScript in your project, you can technically do the same thing as up above in JavaScript using JSDoc.
+
+```jsx
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
+
+//define TData type with JSDoc
+/**
+ * @typedef {Object} User
+ * @property {number} id
+ * @property {string} name
+ * @property {number} age
+ */
+
+//import MRT_ColumnDef type with JSDoc
+/**
+ * @type {import('material-react-table').MRT_ColumnDef<User>[]}
+ */
+const columns = [
+  {
+    accessorKey: 'id', //you should get type hints for all of your keys if you defined your TData type correctly
+    header: 'ID',
+    enableSorting: false, //you should get type hints for all possible column options that you can define here
+  },
+  {
+    accessorKey: 'name',
+    header: 'Name',
+  },
+  {
+    accessorFn: (originalRow) => Number(originalRow.age), //you should also get type hints for your accessorFn
+    header: 'Age',
+  },
+];
+```
+
+### Re-Usable MRT Components
+
+If you are going to have multiple tables in your app, chances are that you will want to make a re-usable component built on top of Material React Table. This is a good idea and good practice, but here are a few suggestions to maintain type safety with some TypeScript generics.
+
+#### Re-usable Components or Options?
+
+In my opinion, instead of creating a re-usable component, it is instead actually best to define your default options and share them between all of your tables.
+
+##### Re-usable Default Options
+
+```ts
+import { type MRT_TableOptions } from 'material-react-table';
+
+//define re-useable default table options for all tables in your app
+export const getDefaultMRTOptions = <
+  TData extends Record<string, any> = {},
+>(): Partial<MRT_TableOptions<TData>> => ({
+  enableGlobalFilter: false,
+  enableRowPinning: true,
+  initialState: { showColumnFilters: true },
+  manualFiltering: true,
+  manualPagination: true,
+  manualSorting: true,
+  muiTableHeadCellProps: {
+    sx: { fontSize: '1.1rem' },
+  },
+  paginationDisplayMode: 'pages',
+  //etc...
+});
+```
+
+Then you can use these options in every new table that you create:
+
+```tsx
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+  type MRT_ColumnDef,
+} from 'material-react-table';
+import { getDefaultMRTOptions } from './utils'; //your default options
+
+interface User {
+  id: number;
+  name: string;
+  age: number;
+}
+
+const defaultMRTOptions = getDefaultMRTOptions<User>(); //get your default options
+
+export const OneOfYourTableComponents = () => {
+  const columns: MRT_ColumnDef<User>[] = [
+    //...
+  ];
+
+  const { data } = useQuery({
+    //...
+  });
+
+  const table = useMaterialReactTable({
+    ...defaultMRTOptions,
+    columns,
+    data,
+    enableGlobalFilter: true, //override default options
+    initialState: {
+      ...defaultMRTOptions.initialState,
+      showColumnFilters: false,
+    },
+    //...
+  });
+};
+```
+
+Doing it this way, you maintain 100% control of your table instance and any state that you are managing in each table component.
+
+##### Re-usable MRT Component
+
+If you still want to just create a re-usable MRT component instead, you can do that too, of course. Here is a type-safe way to do that:
+
+```tsx
+interface Props<TData extends Record<string, any> = {}>
+  extends MRT_TableOptions<TData> {
+  columns: MRT_ColumnDef<TData>[];
+  data: TData[];
+}
+
+export const CustomMRTTable = <TData extends Record<string, any> = {}>({
+  columns,
+  data,
+  ...rest
+}: Props<TData>) => {
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    //your custom table options...
+    ...rest, //accept props to override default table options
+  });
+
+  return <MaterialReactTable table={table} />;
+};
+```
+
+By using the `TData` generic correctly, you can maintain type-safety in your re-usable component that will adapt to different types of data you will have throughout your application.
+
