@@ -167,6 +167,7 @@ export const getLeadingDisplayColumnIds = <TData extends Record<string, any>>(
       'mrt-row-expand',
     props.enableRowSelection && 'mrt-row-select',
     props.enableRowNumbers && 'mrt-row-numbers',
+    props.layoutMode === 'grid-no-grow' && 'mrt-row-spacer',
   ].filter(Boolean) as MRT_DisplayColumnIds[];
 
 export const getTrailingDisplayColumnIds = <TData extends Record<string, any>>(
@@ -367,9 +368,10 @@ export const getCommonCellStyles = <TData extends Record<string, any>>({
     transition: table.options.enableColumnVirtualization
       ? 'none'
       : `padding 150ms ease-in-out`,
-    ...(!table.options.enableColumnResizing && widthStyles), //let devs pass in width styles if column resizing is disabled
+    ...widthStyles,
+    // ...(!table.options.enableColumnResizing && widthStyles), //let devs pass in width styles if column resizing is disabled
     ...(parseFromValuesOrFunc(tableCellProps?.sx, theme) as any),
-    ...(table.options.enableColumnResizing && widthStyles), //don't let devs pass in width styles if column resizing is enabled
+    // ...(table.options.enableColumnResizing && widthStyles), //don't let devs pass in width styles if column resizing is enabled
   };
 };
 
@@ -425,20 +427,19 @@ export const createRow = <TData extends Record<string, any>>(
     0,
   ) as MRT_Row<TData>;
 
-  export const extraIndexRangeExtractor = (
-    range: Range,
-    draggingIndex: number,
-  ) => {
-    const newIndexs = defaultRangeExtractor(range);
-    if (
-      draggingIndex >= 0 &&
-      draggingIndex < Math.max(range.startIndex - range.overscan, 0)
-    ) {
-      newIndexs.unshift(draggingIndex);
-    }
-    if (draggingIndex >= 0 && draggingIndex > range.endIndex + range.overscan) {
-      newIndexs.push(draggingIndex);
-    }
-    return newIndexs;
-  };
-  
+export const extraIndexRangeExtractor = (
+  range: Range,
+  draggingIndex: number,
+) => {
+  const newIndexs = defaultRangeExtractor(range);
+  if (
+    draggingIndex >= 0 &&
+    draggingIndex < Math.max(range.startIndex - range.overscan, 0)
+  ) {
+    newIndexs.unshift(draggingIndex);
+  }
+  if (draggingIndex >= 0 && draggingIndex > range.endIndex + range.overscan) {
+    newIndexs.push(draggingIndex);
+  }
+  return newIndexs;
+};

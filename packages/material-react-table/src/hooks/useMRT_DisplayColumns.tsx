@@ -14,6 +14,15 @@ import {
   type MRT_Row,
 } from '../types';
 
+const blankColProps = {
+  sx: {
+    flex: '1 0 auto',
+    minWidth: 0,
+    p: 0,
+    width: 0,
+  },
+};
+
 interface Params<TData extends Record<string, any>> {
   columnOrder: MRT_ColumnOrderState;
   creatingRow: MRT_Row<TData> | null;
@@ -122,6 +131,17 @@ export const useMRT_DisplayColumns = <TData extends Record<string, any>>({
             ...tableOptions.defaultDisplayColumn,
             ...tableOptions.displayColumnDefOptions?.['mrt-row-numbers'],
             id: 'mrt-row-numbers',
+          },
+
+          (tableOptions.state?.columnOrder ?? columnOrder).includes(
+            'mrt-row-spacer',
+          ) && {
+            columnDefType: 'display',
+            header: '',
+            id: 'spacer',
+            muiTableBodyCellProps: blankColProps,
+            muiTableFooterCellProps: blankColProps,
+            muiTableHeadCellProps: blankColProps,
           },
         ] as MRT_ColumnDef<TData>[]
       ).filter(Boolean),
