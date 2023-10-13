@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import Link from 'next/link';
+import { Typography, Link as MuiLink, Alert, AlertTitle } from '@mui/material';
 
 <Head>
   <title>V1 Changelog and Roadmap - Material React Table Docs</title>
@@ -16,12 +18,30 @@ As of June 2023, most feature development is complete for MRT Version 1. MRT Ver
 
 ### Version 2 Roadmap (July 2023)
 
-Version 2 should be released by July 2023. Some features and changes will include:
-
-- Support for mostly keeping all of your MRT V1 code the same, but some props will be renamed for more conciseness and consistency.
-- New `useMaterialReactTable` hook to replace `tableInstanceRef`. The full table instance will be available to you to build around more than just the MRT components.
-- All internal MRT Components will be exported from MRT for you to optionally build up your own table UI for advanced use cases. Custom Toolbars will be much easier to build with a smaller bundle size too.
-- New built-in Date Filters, and other advanced filtering and editing variants.
+<Alert sx={{ mt: '2rem' }} severity="info" variant="filled">
+  <AlertTitle>
+    MRT V2 is now in <b>Beta!</b>
+  </AlertTitle>
+  <Typography variant='overline'>October 13, 2023</Typography>
+  <Typography>
+    Material React Table V2 is now in beta. The library is mostly stable and
+    ready for use, but the documentation is still being updated.
+  </Typography>
+  <Typography>
+    <Link href="https://v2.material-react-table.com/migrating-to-v2" passHref>
+      <MuiLink
+        sx={{
+          textDecorationColor: (theme) => theme.palette.primary.contrastText,
+          color: (theme) => theme.palette.primary.contrastText,
+        }}
+        target="_blank"
+        rel="noopener"
+      >
+        View the V2 migration docs here
+      </MuiLink>
+    </Link>
+  </Typography>
+</Alert>
 
 ## Changelog
 

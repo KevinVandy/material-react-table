@@ -8,6 +8,8 @@ import {
   Stack,
   Typography,
   Link as MuiLink,
+  Alert,
+  AlertTitle,
 } from '@mui/material';
 import { ArrowForwardIos } from '@mui/icons-material';
 import { HomeCards } from '../components/mdx/HomeCards';
@@ -23,6 +25,34 @@ import { Contributors } from '../components/mdx/Contributors';
 const HomePage = () => {
   return (
     <>
+      <Alert sx={{ mt: '2rem' }} severity="info" variant="filled">
+        <AlertTitle>
+          MRT V2 is now in <b>Beta!</b>
+        </AlertTitle>
+        <Typography variant='overline'>October 13, 2023</Typography>
+        <Typography>
+          Material React Table V2 is now in beta. The library is mostly stable
+          and ready for use, but the documentation is still being updated.
+        </Typography>
+        <Typography>
+          <Link
+            href="https://v2.material-react-table.com/migrating-to-v2"
+            passHref
+          >
+            <MuiLink
+              sx={{
+                textDecorationColor: (theme) =>
+                  theme.palette.primary.contrastText,
+                color: (theme) => theme.palette.primary.contrastText,
+              }}
+              target="_blank"
+              rel="noopener"
+            >
+              View the V2 migration docs here
+            </MuiLink>
+          </Link>
+        </Typography>
+      </Alert>
       <Stack sx={{ maxWidth: '95ch', m: 'auto' }}>
         <Typography
           sx={{
@@ -73,40 +103,6 @@ const HomePage = () => {
             </Box>
           </Box>
         </Typography>
-        <Box
-          sx={{
-            display: 'flex',
-            margin: 'auto',
-            alignItems: 'center',
-            gap: '4px',
-          }}
-        >
-          👀
-          <Link
-            target="_blank"
-            rel="noopener"
-            href="https://v2.material-react-table.com"
-          >
-            <MuiLink
-              sx={(theme) => ({
-                textAlign: 'center',
-                background: `-webkit-linear-gradient(left, ${theme.palette.error.main}, ${theme.palette.warning.main})`,
-                display: 'inline',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                margin: 'auto',
-                textDecoration: 'none',
-                '&:hover': {
-                  textDecoration: 'underline',
-                  textDecorationColor: theme.palette.primary.main,
-                },
-              })}
-            >
-              Try the new version 2 alpha!
-            </MuiLink>
-          </Link>
-          👀
-        </Box>
         <Typography
           color="text.secondary"
           sx={{
