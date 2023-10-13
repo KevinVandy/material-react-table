@@ -28,6 +28,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import SearchIcon from '@mui/icons-material/Search';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
 import SortIcon from '@mui/icons-material/Sort';
+import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
@@ -62,6 +63,7 @@ export interface MRT_Icons {
   SearchIcon: any;
   SearchOffIcon: any;
   SortIcon: any;
+  SyncAltIcon?: any;
   ViewColumnIcon: any;
   VisibilityOffIcon: any;
 }
@@ -97,6 +99,7 @@ export const MRT_Default_Icons: MRT_Icons = {
   SearchIcon,
   SearchOffIcon,
   SortIcon,
+  SyncAltIcon,
   ViewColumnIcon,
   VisibilityOffIcon,
 };

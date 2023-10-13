@@ -103,11 +103,14 @@ export const MRT_TableHeadCellFilterLabel = <
                 });
                 event.stopPropagation();
               }}
+              size="small"
               sx={{
                 height: '16px',
-                opacity: 0.8,
+                ml: '4px',
+                opacity: isFilterActive ? 1 : 0.3,
                 p: '8px',
                 transform: 'scale(0.75)',
+                transition: 'all 150ms ease-in-out',
                 width: '16px',
               }}
             >

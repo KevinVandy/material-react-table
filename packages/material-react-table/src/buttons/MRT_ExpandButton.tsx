@@ -58,6 +58,7 @@ export const MRT_ExpandButton = <TData extends Record<string, any>>({
           onClick={handleToggleExpand}
           sx={(theme) => ({
             height: density === 'compact' ? '1.75rem' : '2.25rem',
+            opacity: !canExpand && !renderDetailPanel ? 0.3 : 1,
             width: density === 'compact' ? '1.75rem' : '2.25rem',
             ...(parseFromValuesOrFunc(iconButtonProps?.sx, theme) as any),
           })}

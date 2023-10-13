@@ -72,9 +72,9 @@ export const MRT_TableHeadCell = <TData extends Record<string, any>>({
 
   const headerPL = useMemo(() => {
     let pl = 0;
-    if (column.getCanSort()) pl++;
+    if (column.getCanSort()) pl += 1;
     if (showColumnActions) pl += 1.75;
-    if (showDragHandle) pl += 1.25;
+    if (showDragHandle) pl += 1.5;
     return pl;
   }, [showColumnActions, showDragHandle]);
 
@@ -126,6 +126,11 @@ export const MRT_TableHeadCell = <TData extends Record<string, any>>({
       }}
       {...tableCellProps}
       sx={(theme: Theme) => ({
+        '& :hover': {
+          '.MuiButtonBase-root': {
+            opacity: 1,
+          },
+        },
         flexDirection: layoutMode?.startsWith('grid') ? 'column' : undefined,
         fontWeight: 'bold',
         overflow: 'visible',
@@ -212,7 +217,7 @@ export const MRT_TableHeadCell = <TData extends Record<string, any>>({
                 '&:hover': {
                   textOverflow: 'clip',
                 },
-                minWidth: `${Math.min(columnDef.header?.length ?? 0, 5)}ch`,
+                minWidth: `${Math.min(columnDef.header?.length ?? 0, 4)}ch`,
                 overflow: columnDefType === 'data' ? 'hidden' : undefined,
                 textOverflow: 'ellipsis',
                 whiteSpace:
@@ -222,15 +227,15 @@ export const MRT_TableHeadCell = <TData extends Record<string, any>>({
             >
               {headerElement}
             </Box>
+            {column.getCanFilter() && (
+              <MRT_TableHeadCellFilterLabel header={header} table={table} />
+            )}
             {column.getCanSort() && (
               <MRT_TableHeadCellSortLabel
                 header={header}
                 table={table}
                 tableCellProps={tableCellProps}
               />
-            )}
-            {column.getCanFilter() && (
-              <MRT_TableHeadCellFilterLabel header={header} table={table} />
             )}
           </Box>
           {columnDefType !== 'group' && (

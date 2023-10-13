@@ -13,18 +13,19 @@ interface Props<TData extends Record<string, any>> {
 export const MRT_TableHeadCellSortLabel = <TData extends Record<string, any>>({
   header,
   table,
-  tableCellProps,
 }: Props<TData>) => {
   const {
     getState,
     options: {
-      icons: { ArrowDownwardIcon },
+      icons: { ArrowDownwardIcon, SyncAltIcon },
       localization,
     },
   } = table;
   const { column } = header;
   const { columnDef } = column;
   const { sorting } = getState();
+
+  const isSorted = !!column.getIsSorted();
 
   const sortTooltip = column.getIsSorted()
     ? column.getIsSorted() === 'desc'
@@ -41,13 +42,20 @@ export const MRT_TableHeadCellSortLabel = <TData extends Record<string, any>>({
         overlap="circular"
       >
         <TableSortLabel
-          IconComponent={ArrowDownwardIcon}
-          active={!!column.getIsSorted()}
+          IconComponent={
+            !isSorted
+              ? (props) => (
+                  <SyncAltIcon
+                    {...props}
+                    style={{ transform: 'rotate(-90deg) scaleX(0.8)' }}
+                  />
+                )
+              : ArrowDownwardIcon
+          }
+          active
           aria-label={sortTooltip}
           direction={
-            column.getIsSorted()
-              ? (column.getIsSorted() as 'asc' | 'desc')
-              : undefined
+            isSorted ? (column.getIsSorted() as 'asc' | 'desc') : undefined
           }
           onClick={(e) => {
             e.stopPropagation();
@@ -55,11 +63,9 @@ export const MRT_TableHeadCellSortLabel = <TData extends Record<string, any>>({
           }}
           sx={{
             flex: '0 0',
-            transform:
-              tableCellProps?.align !== 'right'
-                ? 'translateX(-0.5ch)'
-                : undefined,
-            width: '2.4ch',
+            opacity: isSorted ? 1 : 0.3,
+            transition: 'all 150ms ease-in-out',
+            width: '3ch',
           }}
         />
       </Badge>
