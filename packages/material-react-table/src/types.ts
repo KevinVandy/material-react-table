@@ -43,6 +43,7 @@ import { type AutocompleteProps } from '@mui/material/Autocomplete';
 import { type ButtonProps } from '@mui/material/Button';
 import { type CheckboxProps } from '@mui/material/Checkbox';
 import { type ChipProps } from '@mui/material/Chip';
+import { type CircularProgressProps } from '@mui/material/CircularProgress';
 import { type DialogProps } from '@mui/material/Dialog';
 import { type IconButtonProps } from '@mui/material/IconButton';
 import { type LinearProgressProps } from '@mui/material/LinearProgress';
@@ -292,6 +293,7 @@ export type MRT_TableState<TData extends Record<string, any>> = TableState & {
   showAlertBanner: boolean;
   showColumnFilters: boolean;
   showGlobalFilter: boolean;
+  showLoadingOverlay: boolean;
   showProgressBars: boolean;
   showSkeletons: boolean;
   showToolbarDropZone: boolean;
@@ -741,6 +743,9 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
   muiBottomToolbarProps?:
     | ((props: { table: MRT_TableInstance<TData> }) => ToolbarProps)
     | ToolbarProps;
+  muiCircularProgressProps?:
+    | ((props: { table: MRT_TableInstance<TData> }) => CircularProgressProps)
+    | CircularProgressProps;
   muiColumnActionsButtonProps?:
     | ((props: {
         column: MRT_Column<TData>;

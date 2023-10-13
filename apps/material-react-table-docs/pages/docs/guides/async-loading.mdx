@@ -6,7 +6,7 @@ import LinearProgressExample from '../../../examples/linear-progress';
 import ReactQueryExample from '../../../examples/react-query';
 
 <Head>
-  <title>Async Loading Feature Guide - Material React Table V2 Docs</title>
+  <title>{'Async Loading Feature Guide - Material React Table V2 Docs'}</title>
   <meta
     name="description"
     content="How to show loading indicators, skeletons, and progress bars in Material React Table"
@@ -22,15 +22,21 @@ While you are fetching your data, you may want to show some loading indicators. 
 ### Relevant Props
 
 <TableOptionsTable
-  onlyOptions={
-    new Set(['muiSkeletonProps', 'muiLinearProgressProps'])
-  }
+  onlyOptions={new Set(['muiSkeletonProps', 'muiLinearProgressProps', 'muiCircularProgressProps'])}
 />
 
 ### Relevant State Options
 
 <StateOptionsTable
-  onlyOptions={new Set(['isLoading', 'showSkeletons', 'showProgressBars'])}
+  onlyOptions={
+    new Set([
+      'isLoading',
+      'isSaving',
+      'showLoadingOverlay',
+      'showProgressBars',
+      'showSkeletons',
+    ])
+  }
 />
 
 ### isLoading UI

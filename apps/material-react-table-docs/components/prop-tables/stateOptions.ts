@@ -197,6 +197,15 @@ export const stateOptions: StateOption[] = [
     type: 'boolean',
   },
   {
+    defaultValue: 'false',
+    description: '',
+    link: '',
+    linkText: '',
+    source: 'MRT',
+    stateOption: 'isSaving',
+    type: 'boolean',
+  },
+  {
     defaultValue: '{ pageIndex: 0, pageSize: 10 }',
     description: '',
     link: 'https://tanstack.com/table/v8/docs/api/features/pagination',
@@ -240,6 +249,15 @@ export const stateOptions: StateOption[] = [
     linkText: '',
     source: 'MRT',
     stateOption: 'showColumnFilters',
+    type: 'boolean',
+  },
+  {
+    defaultValue: 'false',
+    description: '',
+    link: '',
+    linkText: '',
+    source: 'MRT',
+    stateOption: 'showLoadingOverlay',
     type: 'boolean',
   },
   {

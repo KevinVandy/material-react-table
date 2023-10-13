@@ -1,5 +1,8 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import TableContainer from '@mui/material/TableContainer';
+import { alpha, lighten } from '@mui/material/styles';
 import { MRT_Table } from './MRT_Table';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_EditRowModal } from '../modals';
@@ -21,17 +24,33 @@ export const MRT_TableContainer = <TData extends Record<string, any>>({
       createDisplayMode,
       editDisplayMode,
       enableStickyHeader,
+      localization,
+      muiCircularProgressProps,
       muiTableContainerProps,
     },
     refs: { bottomToolbarRef, tableContainerRef, topToolbarRef },
   } = table;
-  const { creatingRow, editingRow, isFullScreen } = getState();
+  const {
+    creatingRow,
+    editingRow,
+    isFullScreen,
+    isLoading,
+    showLoadingOverlay,
+  } = getState();
+
+  const loading =
+    (isLoading || showLoadingOverlay) && showLoadingOverlay !== false;
 
   const [totalToolbarHeight, setTotalToolbarHeight] = useState(0);
 
   const tableContainerProps = parseFromValuesOrFunc(muiTableContainerProps, {
     table,
   });
+
+  const circularProgressProps = parseFromValuesOrFunc(
+    muiCircularProgressProps,
+    { table },
+  );
 
   useIsomorphicLayoutEffect(() => {
     const topToolbarHeight =
@@ -52,6 +71,8 @@ export const MRT_TableContainer = <TData extends Record<string, any>>({
 
   return (
     <TableContainer
+      aria-busy={loading}
+      aria-describedby="mrt-progress"
       {...tableContainerProps}
       ref={(node: HTMLDivElement) => {
         if (node) {
@@ -74,9 +95,37 @@ export const MRT_TableContainer = <TData extends Record<string, any>>({
           : undefined,
         maxWidth: '100%',
         overflow: 'auto',
+        position: 'relative',
         ...(parseFromValuesOrFunc(tableContainerProps?.sx, theme) as any),
       })}
     >
+      {loading ? (
+        <Box
+          sx={(theme) => ({
+            alignItems: 'center',
+            backgroundColor: alpha(
+              lighten(theme.palette.background.paper, 0.05),
+              0.5,
+            ),
+            bottom: 0,
+            display: 'flex',
+            justifyContent: 'center',
+            left: 0,
+            maxHeight: '100vh',
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            width: '100%',
+            zIndex: 2,
+          })}
+        >
+          <CircularProgress
+            aria-label={localization.noRecordsToDisplay}
+            id="mrt-progress"
+            {...circularProgressProps}
+          />
+        </Box>
+      ) : null}
       <MRT_Table table={table} />
       {(createModalOpen || editModalOpen) && (
         <MRT_EditRowModal open table={table} />

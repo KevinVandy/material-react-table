@@ -40,7 +40,7 @@ const Example = () => {
     pageSize: 10,
   });
 
-  const { data, isError, isFetching, isLoading, refetch } =
+  const { data, isError, isRefetching, isLoading, refetch } =
     useQuery<UserApiResponse>({
       queryKey: [
         'table-data',
@@ -136,7 +136,7 @@ const Example = () => {
         isLoading,
         pagination,
         showAlertBanner: isError,
-        showProgressBars: isFetching,
+        showProgressBars: isRefetching,
         sorting,
       }}
     />

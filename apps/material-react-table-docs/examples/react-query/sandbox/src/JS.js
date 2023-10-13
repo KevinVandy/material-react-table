@@ -17,7 +17,7 @@ const Example = () => {
     pageSize: 10,
   });
 
-  const { data, isError, isFetching, isLoading, refetch } = useQuery({
+  const { data, isError, isRefetching, isLoading, refetch } = useQuery({
     queryKey: [
       'table-data',
       columnFilters, //refetch when columnFilters changes
@@ -109,7 +109,7 @@ const Example = () => {
         isLoading,
         pagination,
         showAlertBanner: isError,
-        showProgressBars: isFetching,
+        showProgressBars: isRefetching,
         sorting,
       }}
     />

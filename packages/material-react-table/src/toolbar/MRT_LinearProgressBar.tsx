@@ -16,7 +16,7 @@ export const MRT_LinearProgressBar = <TData extends Record<string, any>>({
     getState,
     options: { muiLinearProgressProps },
   } = table;
-  const { isLoading, showProgressBars } = getState();
+  const { showProgressBars } = getState();
 
   const linearProgressProps = parseFromValuesOrFunc(muiLinearProgressProps, {
     isTopToolbar,
@@ -25,7 +25,7 @@ export const MRT_LinearProgressBar = <TData extends Record<string, any>>({
 
   return (
     <Collapse
-      in={isLoading || showProgressBars}
+      in={showProgressBars}
       mountOnEnter
       sx={{
         bottom: isTopToolbar ? 0 : undefined,

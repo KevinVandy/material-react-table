@@ -59,6 +59,26 @@ export const Loading = () => (
   <MaterialReactTable columns={columns} data={[]} state={{ isLoading: true }} />
 );
 
+export const LoadingWithProgressBars = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={[]}
+    state={{ isLoading: true, showProgressBars: true }}
+  />
+);
+
+export const LoadingWithProgressBarsNoOverlay = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={[]}
+    state={{
+      isLoading: true,
+      showLoadingOverlay: false,
+      showProgressBars: true,
+    }}
+  />
+);
+
 export const LoadingWithSomeData = () => (
   <MaterialReactTable
     columns={columns}
