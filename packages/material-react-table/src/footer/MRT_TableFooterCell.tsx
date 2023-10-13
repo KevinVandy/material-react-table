@@ -57,7 +57,11 @@ export const MRT_TableFooterCell = <TData extends Record<string, any>>({
       <>
         {footer.isPlaceholder
           ? null
-          : parseFromValuesOrFunc(columnDef.Footer, { column, footer, table }) ??
+          : parseFromValuesOrFunc(columnDef.Footer, {
+              column,
+              footer,
+              table,
+            }) ??
             columnDef.footer ??
             null}
       </>

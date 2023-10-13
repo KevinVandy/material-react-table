@@ -39,9 +39,11 @@
         "custom-groups": {
           "value": {
             "react": ["react", "react-*"],
+            "storybook": ["@storybook/**"],
             "tanstack": "@tanstack/**",
             "mui": "@mui/**",
-            "mrt": ["./MRT_**", "../**MRT_**"]
+            "mrt": ["./MRT_**", "../**MRT_**", "../../src"],
+            "faker": "@faker/**"
           },
           "type": {
             "react": "react"

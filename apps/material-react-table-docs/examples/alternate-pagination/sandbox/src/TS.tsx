@@ -1,4 +1,7 @@
-import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 import { columns, data } from './makeData';
 
 const Example = () => {
@@ -9,7 +12,7 @@ const Example = () => {
       color: 'primary',
       shape: 'rounded',
       showRowsPerPage: false,
-      variant: 'outlined'
+      variant: 'outlined',
     },
     paginationDisplayMode: 'pages',
   });

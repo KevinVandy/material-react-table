@@ -57,7 +57,11 @@ export const MRT_TableHead = <TData extends Record<string, any>>({
     >
       {positionToolbarAlertBanner === 'head-overlay' &&
       (showAlertBanner || getSelectedRowModel().rows.length > 0) ? (
-        <tr style={{ display: layoutMode?.startsWith('grid') ? 'grid' : undefined }}>
+        <tr
+          style={{
+            display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
+          }}
+        >
           <th
             colSpan={table.getVisibleLeafColumns().length}
             style={{

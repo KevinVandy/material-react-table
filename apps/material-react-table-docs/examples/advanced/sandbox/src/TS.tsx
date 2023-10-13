@@ -157,7 +157,7 @@ const Example = () => {
       color: 'secondary',
       rowsPerPageOptions: [10, 20, 30],
       shape: 'rounded',
-      variant: 'outlined'
+      variant: 'outlined',
     },
     renderDetailPanel: ({ row }) => (
       <Box

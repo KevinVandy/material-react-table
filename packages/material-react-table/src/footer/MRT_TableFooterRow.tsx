@@ -62,9 +62,9 @@ export const MRT_TableFooterRow = <TData extends Record<string, any>>({
           ? footerGroup.headers[footerOrVirtualFooter.index]
           : (footerOrVirtualFooter as MRT_Header<TData>);
 
-        return (
+        return footer ? (
           <MRT_TableFooterCell footer={footer} key={footer.id} table={table} />
-        );
+        ) : null;
       })}
       {virtualPaddingRight ? (
         <th style={{ display: 'flex', width: virtualPaddingRight }} />

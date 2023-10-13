@@ -52,9 +52,9 @@ export const MRT_TableHeadRow = <TData extends Record<string, any>>({
           ? headerGroup.headers[headerOrVirtualHeader.index]
           : (headerOrVirtualHeader as MRT_Header<TData>);
 
-        return (
+        return header ? (
           <MRT_TableHeadCell header={header} key={header.id} table={table} />
-        );
+        ) : null;
       })}
       {virtualPaddingRight ? (
         <th style={{ display: 'flex', width: virtualPaddingRight }} />

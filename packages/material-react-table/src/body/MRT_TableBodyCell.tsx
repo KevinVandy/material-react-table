@@ -213,8 +213,9 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
         alignItems: layoutMode?.startsWith('grid') ? 'center' : undefined,
         cursor:
           isEditable && editDisplayMode === 'cell' ? 'pointer' : 'inherit',
-        justifyContent:
-          layoutMode?.startsWith('grid') ? tableCellProps.align : undefined,
+        justifyContent: layoutMode?.startsWith('grid')
+          ? tableCellProps.align
+          : undefined,
         overflow: 'hidden',
         p:
           density === 'compact'
@@ -256,7 +257,7 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
       <>
         {cell.getIsPlaceholder() ? (
           columnDef.PlaceholderCell?.({ cell, column, row, table }) ?? null
-        ) : (isLoading || showSkeletons) && cell.getValue() === null ? (
+        ) : isLoading || showSkeletons ? (
           <Skeleton
             animation="wave"
             height={20}

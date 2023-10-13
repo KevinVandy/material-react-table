@@ -9,7 +9,14 @@ import {
 } from 'material-react-table';
 
 //Material UI Imports
-import { Box, Button, ListItemIcon, MenuItem, Typography, lighten } from '@mui/material';
+import {
+  Box,
+  Button,
+  ListItemIcon,
+  MenuItem,
+  Typography,
+  lighten,
+} from '@mui/material';
 
 //Icons Imports
 import { AccountCircle, Send } from '@mui/icons-material';

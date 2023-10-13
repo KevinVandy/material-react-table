@@ -208,16 +208,18 @@ export const MRT_TableBodyRow = <TData extends Record<string, any>>({
               ? (cellOrVirtualCell as VirtualItem)
               : undefined,
           };
-          return memoMode === 'cells' &&
+          return cell ? (
+            memoMode === 'cells' &&
             cell.column.columnDef.columnDefType === 'data' &&
             !draggingColumn &&
             !draggingRow &&
             editingCell?.id !== cell.id &&
             editingRow?.id !== row.id ? (
-            <Memo_MRT_TableBodyCell key={cell.id} {...props} />
-          ) : (
-            <MRT_TableBodyCell key={cell.id} {...props} />
-          );
+              <Memo_MRT_TableBodyCell key={cell.id} {...props} />
+            ) : (
+              <MRT_TableBodyCell key={cell.id} {...props} />
+            )
+          ) : null;
         })}
         {virtualPaddingRight ? (
           <td style={{ display: 'flex', width: virtualPaddingRight }} />

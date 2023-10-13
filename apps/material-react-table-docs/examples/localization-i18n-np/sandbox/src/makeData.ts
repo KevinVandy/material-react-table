@@ -8,16 +8,16 @@ export const data: Person[] = [
   {
     firstName: 'Kevin',
     lastName: 'Vandy',
-    age: "२६",
+    age: '२६',
   },
   {
     firstName: 'Theodore',
     lastName: 'Browne',
-    age: "२८",
+    age: '२८',
   },
   {
     firstName: 'Tanner',
     lastName: 'Linsley',
-    age: "३३",
+    age: '३३',
   },
 ];

@@ -135,7 +135,7 @@ export const ColumnOrderingStateManaged = () => {
 export const ColumnOrderingEnabledWithColumnVirtualization = () => (
   <MaterialReactTable
     columnVirtualizerOptions={{
-      overscan: 0
+      overscan: 0,
     }}
     columns={columns}
     data={data}

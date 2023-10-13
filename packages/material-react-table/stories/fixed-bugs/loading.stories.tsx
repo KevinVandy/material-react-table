@@ -222,3 +222,44 @@ export const NestedLoadingDataWithInitialSort = () => {
     />
   );
 };
+
+export const AccessorKeyWhileLoading = () => {
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
+    //column definitions...
+    () => [
+      {
+        accessorFn: (row) => `${row.name.firstName} ${row.name.lastName}`,
+        header: 'Name',
+        id: 'name',
+      },
+      {
+        accessorKey: 'address',
+        header: 'Address',
+      },
+      {
+        accessorKey: 'city',
+        header: 'City',
+      },
+      {
+        accessorKey: 'state',
+        header: 'State',
+      },
+    ],
+    [],
+    //end
+  );
+
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={[]}
+      enableBottomToolbar={false}
+      enableColumnActions={false}
+      enableColumnFilters={false}
+      enablePagination={false}
+      enableSorting={false}
+      enableTopToolbar={false}
+      state={{ isLoading: true }}
+    />
+  );
+};

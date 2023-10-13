@@ -13,7 +13,7 @@ const columns: MRT_ColumnDef<Person>[] = [
   //column definitions...
   {
     accessorKey: 'firstName',
-    header: 'नाम'
+    header: 'नाम',
   },
   {
     accessorKey: 'lastName',

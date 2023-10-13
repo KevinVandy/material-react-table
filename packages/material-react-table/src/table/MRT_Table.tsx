@@ -6,7 +6,11 @@ import {
 } from '@tanstack/react-virtual';
 import Table from '@mui/material/Table';
 import { MRT_TableBody, Memo_MRT_TableBody } from '../body/MRT_TableBody';
-import { extraIndexRangeExtractor, parseCSSVarId, parseFromValuesOrFunc } from '../column.utils';
+import {
+  extraIndexRangeExtractor,
+  parseCSSVarId,
+  parseFromValuesOrFunc,
+} from '../column.utils';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
 import { MRT_TableHead } from '../head/MRT_TableHead';
 import { type MRT_TableInstance } from '../types';
