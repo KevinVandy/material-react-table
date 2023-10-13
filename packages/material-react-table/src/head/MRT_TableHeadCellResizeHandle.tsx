@@ -42,13 +42,18 @@ export const MRT_TableHeadCellResizeHandle = <
       sx={(theme) => ({
         '&:active > hr': {
           backgroundColor: theme.palette.info.main,
-          opacity: 1,
+          opacity: header.subHeaders.length ? 1 : 0,
         },
         cursor: 'col-resize',
-        mr: density === 'compact' ? '-0.75rem' : '-1rem',
+        mr:
+          density === 'compact'
+            ? '-12px'
+            : density === 'comfortable'
+            ? '-20px'
+            : '-28px',
         position: 'absolute',
         px: '4px',
-        right: '4px',
+        right: '0',
       })}
     >
       <Divider

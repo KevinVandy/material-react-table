@@ -39,6 +39,7 @@ export const MRT_TableHeadCell = <TData extends Record<string, any>>({
     setHoveredColumn,
   } = table;
   const {
+    columnSizingInfo,
     density,
     draggingColumn,
     grouping,
@@ -78,23 +79,30 @@ export const MRT_TableHeadCell = <TData extends Record<string, any>>({
     return pl;
   }, [showColumnActions, showDragHandle]);
 
-  const draggingBorder = useMemo(
-    () =>
-      draggingColumn?.id === column.id
+  const draggingBorders = useMemo(() => {
+    const borderStyle =
+      columnSizingInfo.isResizingColumn === column.id &&
+      !header.subHeaders.length
+        ? `2px solid ${theme.palette.primary.main} !important`
+        : draggingColumn?.id === column.id
         ? `1px dashed ${theme.palette.text.secondary}`
         : hoveredColumn?.id === column.id
         ? `2px dashed ${theme.palette.primary.main}`
-        : undefined,
-    [draggingColumn, hoveredColumn],
-  );
+        : undefined;
 
-  const draggingBorders = draggingBorder
-    ? {
-        borderLeft: draggingBorder,
-        borderRight: draggingBorder,
-        borderTop: draggingBorder,
-      }
-    : undefined;
+    if (columnSizingInfo.isResizingColumn === column.id) {
+      return { borderRight: borderStyle };
+    }
+    const draggingBorders = borderStyle
+      ? {
+          borderLeft: borderStyle,
+          borderRight: borderStyle,
+          borderTop: borderStyle,
+        }
+      : undefined;
+
+    return draggingBorders;
+  }, [draggingColumn, hoveredColumn, columnSizingInfo.isResizingColumn]);
 
   const handleDragEnter = (_e: DragEvent) => {
     if (enableGrouping && hoveredColumn?.id === 'drop-zone') {

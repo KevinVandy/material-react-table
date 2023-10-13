@@ -65,17 +65,7 @@ export const GridNoGrow = () => (
     data={data}
     enableColumnOrdering
     enableRowSelection
-    layoutMode="grid"
-    muiTableBodyCellProps={{
-      sx: {
-        flex: '0 0 auto',
-      },
-    }}
-    muiTableHeadCellProps={{
-      sx: {
-        flex: '0 0 auto',
-      },
-    }}
+    layoutMode="grid-no-grow"
   />
 );
 
@@ -97,16 +87,6 @@ export const GridNoGrowWithResizing = () => (
     enableColumnOrdering
     enableColumnResizing
     enableRowSelection
-    layoutMode="grid"
-    muiTableBodyCellProps={{
-      sx: {
-        flex: '0 0 auto',
-      },
-    }}
-    muiTableHeadCellProps={{
-      sx: {
-        flex: '0 0 auto',
-      },
-    }}
+    layoutMode="grid-no-grow"
   />
 );
