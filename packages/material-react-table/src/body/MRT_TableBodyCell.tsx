@@ -164,8 +164,6 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
     rowIndex,
   ]);
 
-  console.log(draggingBorders);
-
   const isEditable =
     parseFromValuesOrFunc(enableEditing, row) &&
     parseFromValuesOrFunc(columnDef.enableEditing, row) !== false;
