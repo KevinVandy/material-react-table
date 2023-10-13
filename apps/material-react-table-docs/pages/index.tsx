@@ -7,6 +7,8 @@ import {
   Stack,
   Typography,
   Link as MuiLink,
+  Alert,
+  AlertTitle,
 } from '@mui/material';
 import { ArrowForwardIos } from '@mui/icons-material';
 import { HomeCards } from '../components/mdx/HomeCards';
@@ -23,6 +25,11 @@ const HomePage = () => {
   return (
     <>
       <Stack sx={{ maxWidth: '1200px', m: 'auto' }}>
+        <Alert sx={{ mt: '2rem' }} severity="info" variant="filled">
+          <AlertTitle>Now in Beta!</AlertTitle>
+          Material React Table V2 is now in beta. The library is mostly stable
+          and ready for use, but the documentation is still being updated.
+        </Alert>
         <Typography
           sx={{
             textAlign: 'center',
@@ -35,7 +42,6 @@ const HomePage = () => {
             },
             fontWeight: 'bold',
             mt: '5rem',
-            mb: '0.5rem',
             lineHeight: {
               xs: '2.5rem',
               sm: '3.5rem',
@@ -72,35 +78,6 @@ const HomePage = () => {
             </Box>
           </Box>
         </Typography>
-        <Box
-          sx={{
-            display: 'flex',
-            margin: 'auto',
-            alignItems: 'center',
-            gap: '4px',
-          }}
-        >
-          👀
-          <Link href="/changelog#version-2-roadmap-(july-2023)">
-            <MuiLink
-              sx={(theme) => ({
-                textAlign: 'center',
-                background: `-webkit-linear-gradient(left, ${theme.palette.error.main}, ${theme.palette.warning.main})`,
-                display: 'inline',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                margin: 'auto',
-                textDecoration: 'none',
-                '&:hover': {
-                  textDecoration: 'underline',
-                },
-              })}
-            >
-              V2.0 Still in Alpha, but now installable!
-            </MuiLink>
-          </Link>
-          👀
-        </Box>
         <Typography
           color="text.secondary"
           sx={{
