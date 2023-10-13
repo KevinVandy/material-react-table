@@ -65,7 +65,7 @@ export const MRT_TableHeadCellColumnActionsButton = <
               opacity: 1,
             },
             height: '2rem',
-            m: '-8px -4px',
+            m: '-4px',
             opacity: 0.3,
             transform: `scale(0.85) ${
               columnFilterDisplayMode !== 'popover' ? 'translateX(-4px)' : ''

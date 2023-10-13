@@ -5,7 +5,7 @@ import { SampleCodeSnippet } from './SampleCodeSnippet';
 type Tab = 'npm' | 'pnpm' | 'yarn';
 
 const defaultPackagesString =
-  'material-react-table@alpha @mui/material @mui/x-date-pickers @mui/icons-material @emotion/react @emotion/styled';
+  'material-react-table@beta @mui/material @mui/x-date-pickers @mui/icons-material @emotion/react @emotion/styled';
 
 export const InstallCommand = ({
   packagesString = defaultPackagesString,

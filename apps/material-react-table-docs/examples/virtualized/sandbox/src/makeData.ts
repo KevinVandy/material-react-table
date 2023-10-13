@@ -32,7 +32,7 @@ export const makeData = (numberOfRows: number) =>
     state: faker.location.state(),
     country: faker.location.country(),
     petName: faker.animal.cat(),
-    age: faker.datatype.float({ min: 0, max: 100 }),
+    age: faker.number.float({ min: 0, max: 100 }),
     salary: faker.datatype
       .float({ min: 0, max: 1000000 })
       .toLocaleString('en-US', {

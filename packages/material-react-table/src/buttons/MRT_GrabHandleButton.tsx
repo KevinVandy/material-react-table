@@ -6,6 +6,7 @@ import { type MRT_TableInstance } from '../types';
 
 interface Props<TData extends Record<string, any>> {
   iconButtonProps?: IconButtonProps;
+  location?: 'column' | 'row';
   onDragEnd: DragEventHandler<HTMLButtonElement>;
   onDragStart: DragEventHandler<HTMLButtonElement>;
   table: MRT_TableInstance<TData>;
@@ -13,6 +14,7 @@ interface Props<TData extends Record<string, any>> {
 
 export const MRT_GrabHandleButton = <TData extends Record<string, any>>({
   iconButtonProps,
+  location,
   onDragEnd,
   onDragStart,
   table,
@@ -53,7 +55,7 @@ export const MRT_GrabHandleButton = <TData extends Record<string, any>>({
           },
           cursor: 'grab',
           m: '0 -0.1rem',
-          opacity: 0.3,
+          opacity: location === 'row' ? 1 : 0.3,
           p: '2px',
           transition: 'all 150ms ease-in-out',
           ...(parseFromValuesOrFunc(iconButtonProps?.sx, theme) as any),

@@ -38,6 +38,7 @@ export const MRT_TableBodyRowGrabHandle = <TData extends Record<string, any>>({
   return (
     <MRT_GrabHandleButton
       iconButtonProps={iconButtonProps}
+      location="row"
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}
       table={table}
