@@ -59,6 +59,7 @@ export const MRT_Localization_KO: MRT_Localization = {
   noResultsFound: '찾은 결과가 없습니다.',
   of: '/',
   or: '또는',
+  pin: '고정',
   pinToLeft: '왼쪽에 고정',
   pinToRight: '오른쪽에 고정',
   resetColumnSize: '열 크기 초기화',

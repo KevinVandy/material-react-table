@@ -60,6 +60,7 @@ export const MRT_Localization_ET: MRT_Localization = {
   noResultsFound: 'Tulemusi ei leitud',
   of: '/',
   or: 'või',
+  pin: 'Kinnita',
   pinToLeft: 'Kinnita vasakule',
   pinToRight: 'Kinnita paremale',
   resetColumnSize: 'Lähtesta veeru suurus',

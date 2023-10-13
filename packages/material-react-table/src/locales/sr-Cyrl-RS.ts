@@ -59,6 +59,7 @@ export const MRT_Localization_SR_CYRL_RS: MRT_Localization = {
   noResultsFound: 'Нема резултата',
   of: 'од',
   or: 'или',
+  pin: 'Закачи',
   pinToLeft: 'Закачи лево',
   pinToRight: 'Закачи десно',
   resetColumnSize: 'Ресетуј ширину колоне',

@@ -159,7 +159,7 @@ export interface MRT_Localization {
   noResultsFound: string;
   of: string;
   or: string;
-  pin?: string;
+  pin: string;
   pinToLeft: string;
   pinToRight: string;
   resetColumnSize: string;

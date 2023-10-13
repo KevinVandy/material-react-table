@@ -59,6 +59,7 @@ export const MRT_Localization_DA: MRT_Localization = {
   noResultsFound: 'Ingen resultater fundet',
   of: 'af',
   or: 'eller',
+  pin: 'Fastgør',
   pinToLeft: 'Fastgør til venstre',
   pinToRight: 'Fastgør til højre',
   resetColumnSize: 'Nulstil kolonnebredde',

@@ -59,6 +59,7 @@ export const MRT_Localization_ZH_HANT: MRT_Localization = {
   noResultsFound: '未找到結果',
   of: '/',
   or: '或',
+  pin: '固定',
   pinToLeft: '固定至左邊',
   pinToRight: '固定至右邊',
   resetColumnSize: '重置欄位大小',

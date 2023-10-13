@@ -60,6 +60,7 @@ export const MRT_Localization_SK: MRT_Localization = {
   noResultsFound: 'Nenájdené žiadne výsledky',
   of: 'z',
   or: 'alebo',
+  pin: 'Pripnúť',
   pinToLeft: 'Pripnúť doľava',
   pinToRight: 'Pripnúť doprava',
   resetColumnSize: 'Resetovať šírku stĺpcov',

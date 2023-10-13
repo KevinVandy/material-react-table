@@ -59,6 +59,7 @@ export const MRT_Localization_HY: MRT_Localization = {
   noResultsFound: 'Արդյունքներ չեն գտնվել',
   of: '-ից',
   or: 'կամ',
+  pin: 'Կցել',
   pinToLeft: 'Կցել ձախից',
   pinToRight: 'Կցել աջից',
   resetColumnSize: 'Չեղարկել սյունակի չափը',

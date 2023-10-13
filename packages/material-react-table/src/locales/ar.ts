@@ -14,7 +14,6 @@ export const MRT_Localization_AR: MRT_Localization = {
   collapseAll: 'إخفاء الكل',
   columnActions: 'إجراءات العمود',
   copiedToClipboard: 'نسخ إلى الحافظة',
-
   dropToGroupBy: 'أفلت للمجموعة حسب {column}',
   edit: 'تعديل',
   expand: 'إظهار',
@@ -60,6 +59,7 @@ export const MRT_Localization_AR: MRT_Localization = {
   noResultsFound: 'لم يتم العثور على نتائج',
   of: 'ل',
   or: 'أو',
+  pin: 'تثبيت',
   pinToLeft: 'تثبيت جهة اليسار',
   pinToRight: 'تثبيت على اليمين',
   resetColumnSize: 'Reset column size',

@@ -59,6 +59,7 @@ export const MRT_Localization_JA: MRT_Localization = {
   noResultsFound: '結果なし',
   of: '/',
   or: 'または',
+  pin: '固定',
   pinToLeft: '左に固定',
   pinToRight: '右に固定',
   resetColumnSize: '列のサイズをリセット',

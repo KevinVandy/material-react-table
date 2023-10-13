@@ -60,6 +60,7 @@ export const MRT_Localization_FI: MRT_Localization = {
   noResultsFound: 'Ei tuloksia',
   of: '/',
   or: 'tai',
+  pin: 'Kiinnitä',
   pinToLeft: 'Kiinnitä vasemmalle',
   pinToRight: 'Kiinnitä oikealle',
   resetColumnSize: 'Nollaa sarakkeen koko',

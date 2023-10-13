@@ -59,6 +59,7 @@ export const MRT_Localization_UK: MRT_Localization = {
   noResultsFound: 'Нічого не знайдено',
   of: 'з',
   or: 'або',
+  pin: 'Закріпити',
   pinToLeft: 'Закріпити ліворуч',
   pinToRight: 'Закріпити праворуч',
   resetColumnSize: 'Скинути розмір стовпця',

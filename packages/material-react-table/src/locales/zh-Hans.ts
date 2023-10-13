@@ -59,6 +59,7 @@ export const MRT_Localization_ZH_HANS: MRT_Localization = {
   noResultsFound: '未找到结果',
   of: '/',
   or: '或',
+  pin: '固定',
   pinToLeft: '固定至左边',
   pinToRight: '固定至右边',
   resetColumnSize: '重置栏位大小',

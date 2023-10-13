@@ -60,6 +60,7 @@ export const MRT_Localization_ID: MRT_Localization = {
   noResultsFound: 'Tidak ada hasil yang ditemukan',
   of: 'dari',
   or: 'atau',
+  pin: 'Sematkan',
   pinToLeft: 'Sematkan ke kiri',
   pinToRight: 'Sematkan ke kanan',
   resetColumnSize: 'Reset ukuran kolom',

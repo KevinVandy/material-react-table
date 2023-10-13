@@ -59,6 +59,7 @@ export const MRT_Localization_NL: MRT_Localization = {
   noResultsFound: 'Geen resultaten gevonden',
   of: 'van',
   or: 'of',
+  pin: 'Vastzetten',
   pinToLeft: 'Links vastzetten',
   pinToRight: 'Rechts vastzetten',
   resetColumnSize: 'Kolombreedte resetten',

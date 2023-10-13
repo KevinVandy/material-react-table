@@ -59,6 +59,7 @@ export const MRT_Localization_RO: MRT_Localization = {
   noResultsFound: 'Niciun rezultat găsit',
   of: 'din',
   or: 'sau',
+  pin: 'Fixează',
   pinToLeft: 'Fixează la stanga',
   pinToRight: 'Fixează la dreapta',
   resetColumnSize: 'Resetează dimensiune coloană',

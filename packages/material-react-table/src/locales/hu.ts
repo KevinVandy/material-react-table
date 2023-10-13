@@ -59,6 +59,7 @@ export const MRT_Localization_HU: MRT_Localization = {
   noResultsFound: 'Nincs találat',
   of: 'összesen',
   or: 'vagy',
+  pin: 'Rögzítés',
   pinToLeft: 'Rögzítés balra',
   pinToRight: 'Rögzítés jobbra',
   resetColumnSize: 'Oszlop méretének alaphelyzetbe állítása',

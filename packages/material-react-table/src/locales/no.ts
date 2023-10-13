@@ -59,6 +59,7 @@ export const MRT_Localization_NO: MRT_Localization = {
   noRecordsToDisplay: 'Ingen poster å vise',
   noResultsFound: 'Ingen resultater funnet',
   of: 'av',
+  pin: 'Fest',
   pinToLeft: 'Fest til venstre',
   pinToRight: 'Fest til høyre',
   or: 'eller',

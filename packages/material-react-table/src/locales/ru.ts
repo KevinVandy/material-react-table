@@ -59,6 +59,7 @@ export const MRT_Localization_RU: MRT_Localization = {
   noResultsFound: 'Результатов не найдено',
   of: 'из',
   or: 'или',
+  pin: 'Прикрепить',
   pinToLeft: 'Прикрепить слева',
   pinToRight: 'Прикрепить справа',
   resetColumnSize: 'Сбросить размер колонок',

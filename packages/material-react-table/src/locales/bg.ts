@@ -59,6 +59,7 @@ export const MRT_Localization_BG: MRT_Localization = {
   noResultsFound: 'Няма намерени резултати',
   of: 'от',
   or: 'или',
+  pin: 'Закачи',
   pinToLeft: 'Закачи отляво',
   pinToRight: 'Закачи отдясно',
   resetColumnSize: 'Нулиране на размера на колоната',

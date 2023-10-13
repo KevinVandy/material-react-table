@@ -59,6 +59,7 @@ export const MRT_Localization_FA: MRT_Localization = {
   noResultsFound: 'موردی یافت نشد.',
   of: 'از',
   or: 'یا',
+  pin: 'پین',
   pinToLeft: 'پین به چپ',
   pinToRight: 'پین به راست',
   resetColumnSize: 'تنظیم مجدد اندازه ستون',

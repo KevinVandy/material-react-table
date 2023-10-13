@@ -59,6 +59,7 @@ export const MRT_Localization_VI: MRT_Localization = {
   noResultsFound: 'Không có kết quả nào được tìm thấy',
   of: 'trên',
   or: 'hoặc',
+  pin: 'Ghim',
   pinToLeft: 'Ghim sang trái',
   pinToRight: 'Ghim sang phải',
   resetColumnSize: 'Đặt lại kích thước cột',

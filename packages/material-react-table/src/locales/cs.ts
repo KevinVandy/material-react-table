@@ -60,6 +60,7 @@ export const MRT_Localization_CS: MRT_Localization = {
   noResultsFound: 'Nenalezeny žádné výsledky',
   of: 'z',
   or: 'nebo',
+  pin: 'Připnout',
   pinToLeft: 'Připnout doleva',
   pinToRight: 'Připnout doprava',
   resetColumnSize: 'Resetovat šířku sloupců',

@@ -59,6 +59,7 @@ export const MRT_Localization_SV: MRT_Localization = {
   noResultsFound: 'Inga resultat funna',
   of: 'av',
   or: 'eller',
+  pin: 'Fäst',
   pinToLeft: 'Fäst till vänster',
   pinToRight: 'Fäst till höger',
   resetColumnSize: 'Återställ kolumnstorlek',

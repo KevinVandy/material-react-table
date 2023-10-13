@@ -59,6 +59,7 @@ export const MRT_Localization_SR_LATN_RS: MRT_Localization = {
   noResultsFound: 'Nema rezultata',
   of: 'od',
   or: 'ili',
+  pin: 'Zakači',
   pinToLeft: 'Zakači levo',
   pinToRight: 'Zakači desno',
   resetColumnSize: 'Resetuj širinu kolone',

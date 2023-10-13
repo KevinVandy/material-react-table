@@ -59,6 +59,7 @@ export const MRT_Localization_ES: MRT_Localization = {
   noResultsFound: 'No se encontraron resultados',
   of: 'de',
   or: 'o',
+  pin: 'Anclar',
   pinToLeft: 'Anclar a la izquierda',
   pinToRight: 'Anclar a la derecha',
   resetColumnSize: 'Resetear tamaño de columna',
