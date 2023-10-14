@@ -26,8 +26,8 @@ const EditingCRUDExamples = ({ isPage = false }) => {
           }
         >
           <Tab label="Modal" value="editing-crud" />
-         <Tab label="Inline Row" value="editing-crud-inline-row" />
-           <Tab label="Inline Cell" value="editing-crud-inline-cell" />
+          <Tab label="Inline Row" value="editing-crud-inline-row" />
+          <Tab label="Inline Cell" value="editing-crud-inline-cell" />
           <Tab label="Inline Table" value="editing-crud-inline-table" />
           <Link href="/docs/examples" passHref legacyBehavior>
             <Tab
@@ -44,9 +44,9 @@ const EditingCRUDExamples = ({ isPage = false }) => {
       </Box>
       <Box>
         {activeTab === 'editing-crud' && <ModalExample />}
-       {activeTab === 'editing-crud-inline-row' && <InlineRowExample />}
-      {activeTab === 'editing-crud-inline-cell' && <InlineCellExample />}
-           {activeTab === 'editing-crud-inline-table' && <InlineTableExample />}
+        {activeTab === 'editing-crud-inline-row' && <InlineRowExample />}
+        {activeTab === 'editing-crud-inline-cell' && <InlineCellExample />}
+        {activeTab === 'editing-crud-inline-table' && <InlineTableExample />}
       </Box>
     </>
   );
