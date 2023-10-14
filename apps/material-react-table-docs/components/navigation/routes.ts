@@ -4,6 +4,7 @@ export type RouteItem = {
   items?: RouteItem[];
   divider?: boolean;
   external?: boolean;
+  secondaryItems?: RouteItem[];
 };
 
 export const routes: Array<RouteItem> = [
@@ -100,6 +101,10 @@ export const routes: Array<RouteItem> = [
         label: 'Advanced Example',
       },
       {
+        href: '/docs/examples/custom-headless',
+        label: 'Custom Headless Example',
+      },
+      {
         href: '/docs/examples/aggregation-and-grouping',
         label: 'Aggregation/Grouping Example',
       },
@@ -112,12 +117,14 @@ export const routes: Array<RouteItem> = [
         label: 'Editing (CRUD) Example',
       },
       {
-        href: '/docs/examples/remote',
-        label: 'Remote Data Fetching Example',
-      },
-      {
         href: '/docs/examples/react-query',
-        label: 'React Query Example',
+        label: 'Remote Data Fetching Examples',
+        secondaryItems: [
+          {
+            href: '/docs/examples/remote',
+            label: 'Remote Data Fetching',
+          },
+        ],
       },
       {
         href: '/docs/examples/virtualized',

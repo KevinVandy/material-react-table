@@ -20,6 +20,7 @@ import { LinkHeading } from '../components/mdx/LinkHeading';
 import { FeatureTable } from '../components/mdx/FeatureTable';
 import { Contributors } from '../components/mdx/Contributors';
 import { InstallCommand } from '../components/mdx/InstallCommand';
+import BasicExamples from '../example-groups/BasicExamples';
 
 const HomePage = () => {
   return (
@@ -246,8 +247,11 @@ const HomePage = () => {
           />
           <GuideCard title="Selection" href="docs/guides/row-selection" />
         </Box>
-        <LinkCards />
       </Stack>
+      <Typography my="2rem" textAlign="center" variant="h3">
+        Examples To Get You Started
+      </Typography>
+      <BasicExamples />
       <Typography
         sx={{
           textAlign: 'center',
@@ -298,6 +302,7 @@ const HomePage = () => {
         Maintainers and Contributors
       </LinkHeading>
       <Contributors />
+      <LinkCards />
     </>
   );
 };

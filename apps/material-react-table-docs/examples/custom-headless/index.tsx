@@ -1,4 +1,3 @@
-import React from 'react';
 import { SourceCodeSnippet } from '../../components/mdx/SourceCodeSnippet';
 import Example from './sandbox/src/TS';
 const JS = require('!!raw-loader!./sandbox/src/JS.js').default;
@@ -10,7 +9,7 @@ const ExampleTable = ({ showTopRow = true }) => {
       Component={Example}
       javaScriptCode={JS}
       typeScriptCode={TS}
-      tableId="minimal"
+      tableId="custom-headless"
       showTopRow={showTopRow}
     />
   );

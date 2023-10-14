@@ -50,6 +50,7 @@ export interface Props {
   legacyCode?: string;
   tableId: string;
   typeScriptCode: string;
+  showTopRow?: boolean;
 }
 
 export const SourceCodeSnippet = ({
@@ -59,6 +60,7 @@ export const SourceCodeSnippet = ({
   legacyCode,
   tableId,
   typeScriptCode,
+  showTopRow = true,
 }: Props) => {
   const plausible = usePlausible();
   const theme = useTheme();
@@ -102,135 +104,136 @@ export const SourceCodeSnippet = ({
         m: '2rem auto',
       }}
     >
-      <Divider />
       {Component && (
         <>
-          <Box
-            sx={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '1rem',
-              alignItems: 'center',
-            }}
-          >
-            <LinkHeading
-              tableId={tableId}
-              variant="h4"
-              textTransform="capitalize"
-            >
-              Demo
-            </LinkHeading>
+          {showTopRow && (
             <Box
               sx={{
                 display: 'flex',
-                justifyContent: 'space-between',
-                flexGrow: 1,
                 flexWrap: 'wrap',
-                gap: '2rem',
+                gap: '1rem',
+                alignItems: 'center',
               }}
             >
-              <Box
-                sx={{
-                  display: { xs: 'grid', sm: 'flex' },
-                  flexWrap: 'wrap',
-                  gap: '1rem',
-                  justifyContent: { xs: 'center', lg: 'flex-start' },
-                  width: { xs: '100%', lg: 'auto' },
-                }}
+              <LinkHeading
+                tableId={tableId}
+                variant="h4"
+                textTransform="capitalize"
               >
-                <Button
-                  color="success"
-                  endIcon={<LaunchIcon />}
-                  href={`https://stackblitz.com/github/KevinVandy/material-react-table/tree/v2/apps/material-react-table-docs/examples/${tableId}/sandbox?file=src/TS.tsx`}
-                  onClick={() => plausible('open-stackblitz')}
-                  rel="noopener"
-                  startIcon={<ElectricBoltIcon />}
-                  sx={{ cursor: 'pointer' }}
-                  target="_blank"
-                  variant="outlined"
-                >
-                  Open Stackblitz
-                </Button>
-                <Button
-                  color="warning"
-                  endIcon={<LaunchIcon />}
-                  href={`https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/v2/apps/material-react-table-docs/examples/${tableId}/sandbox?file=/src/TS.tsx`}
-                  onClick={() => plausible('open-code-sandbox')}
-                  rel="noopener"
-                  startIcon={<CodeIcon />}
-                  sx={{ cursor: 'pointer' }}
-                  target="_blank"
-                  variant="outlined"
-                >
-                  Open Code Sandbox
-                </Button>
-                <Button
-                  color="info"
-                  endIcon={<LaunchIcon />}
-                  href={`https://github.com/KevinVandy/material-react-table/tree/v2/apps/material-react-table-docs/examples/${tableId}/sandbox/src/${
-                    codeTab === 'ts'
-                      ? 'TS.tsx'
-                      : codeTab === 'js'
-                      ? 'JS.js'
-                      : codeTab === 'legacy'
-                      ? 'Props.tsx'
-                      : 'API.ts'
-                  }`}
-                  onClick={() => plausible('open-on-github')}
-                  rel="noopener"
-                  startIcon={<GitHubIcon />}
-                  sx={{ cursor: 'pointer' }}
-                  target="_blank"
-                  variant="outlined"
-                >
-                  Open on GitHub
-                </Button>
-              </Box>
+                Demo
+              </LinkHeading>
               <Box
                 sx={{
                   display: 'flex',
-                  width: 'auto',
-                  gap: '1rem',
-                  justifyContent: { xs: 'center', xl: 'flex-end' },
+                  justifyContent: 'space-between',
                   flexGrow: 1,
+                  flexWrap: 'wrap',
+                  gap: '2rem',
                 }}
               >
-                <TextField
-                  label="Primary"
-                  type="color"
-                  value={rgbToHex(primaryColor ?? '#4dabf5')}
-                  onChange={(e) => setPrimaryColor(e.target.value)}
-                  onClick={() => plausible('change-primary-color')}
-                  sx={{ minWidth: '60px' }}
-                  variant="standard"
-                />
-                <TextField
-                  label="Secondary"
-                  type="color"
-                  value={rgbToHex(secondaryColor)}
-                  onChange={(e) => setSecondaryColor(e.target.value)}
-                  onClick={() => plausible('change-secondary-color')}
-                  sx={{ minWidth: '60px' }}
-                  variant="standard"
-                />
-                <Select
-                  value={isLightTheme ? 'light' : 'dark'}
-                  onChange={(e) => {
-                    setIsLightTheme(e.target.value === 'light');
-                    plausible(
-                      `toggle-theme-${
-                        e.target.value === 'light' ? 'light' : 'dark'
-                      }-mode`,
-                    );
+                <Box
+                  sx={{
+                    display: { xs: 'grid', sm: 'flex' },
+                    flexWrap: 'wrap',
+                    gap: '1rem',
+                    justifyContent: { xs: 'center', lg: 'flex-start' },
+                    width: { xs: '100%', lg: 'auto' },
                   }}
-                  variant="standard"
                 >
-                  <MenuItem value="light">Light</MenuItem>
-                  <MenuItem value="dark">Dark</MenuItem>
-                </Select>
+                  <Button
+                    color="success"
+                    endIcon={<LaunchIcon />}
+                    href={`https://stackblitz.com/github/KevinVandy/material-react-table/tree/v2/apps/material-react-table-docs/examples/${tableId}/sandbox?file=src/TS.tsx`}
+                    onClick={() => plausible('open-stackblitz')}
+                    rel="noopener"
+                    startIcon={<ElectricBoltIcon />}
+                    sx={{ cursor: 'pointer' }}
+                    target="_blank"
+                    variant="outlined"
+                  >
+                    Open Stackblitz
+                  </Button>
+                  <Button
+                    color="warning"
+                    endIcon={<LaunchIcon />}
+                    href={`https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/v2/apps/material-react-table-docs/examples/${tableId}/sandbox?file=/src/TS.tsx`}
+                    onClick={() => plausible('open-code-sandbox')}
+                    rel="noopener"
+                    startIcon={<CodeIcon />}
+                    sx={{ cursor: 'pointer' }}
+                    target="_blank"
+                    variant="outlined"
+                  >
+                    Open Code Sandbox
+                  </Button>
+                  <Button
+                    color="info"
+                    endIcon={<LaunchIcon />}
+                    href={`https://github.com/KevinVandy/material-react-table/tree/v2/apps/material-react-table-docs/examples/${tableId}/sandbox/src/${
+                      codeTab === 'ts'
+                        ? 'TS.tsx'
+                        : codeTab === 'js'
+                        ? 'JS.js'
+                        : codeTab === 'legacy'
+                        ? 'Props.tsx'
+                        : 'API.ts'
+                    }`}
+                    onClick={() => plausible('open-on-github')}
+                    rel="noopener"
+                    startIcon={<GitHubIcon />}
+                    sx={{ cursor: 'pointer' }}
+                    target="_blank"
+                    variant="outlined"
+                  >
+                    Open on GitHub
+                  </Button>
+                </Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    width: 'auto',
+                    gap: '1rem',
+                    justifyContent: { xs: 'center', xl: 'flex-end' },
+                    flexGrow: 1,
+                  }}
+                >
+                  <TextField
+                    label="Primary"
+                    type="color"
+                    value={rgbToHex(primaryColor ?? '#4dabf5')}
+                    onChange={(e) => setPrimaryColor(e.target.value)}
+                    onClick={() => plausible('change-primary-color')}
+                    sx={{ minWidth: '60px' }}
+                    variant="standard"
+                  />
+                  <TextField
+                    label="Secondary"
+                    type="color"
+                    value={rgbToHex(secondaryColor)}
+                    onChange={(e) => setSecondaryColor(e.target.value)}
+                    onClick={() => plausible('change-secondary-color')}
+                    sx={{ minWidth: '60px' }}
+                    variant="standard"
+                  />
+                  <Select
+                    value={isLightTheme ? 'light' : 'dark'}
+                    onChange={(e) => {
+                      setIsLightTheme(e.target.value === 'light');
+                      plausible(
+                        `toggle-theme-${
+                          e.target.value === 'light' ? 'light' : 'dark'
+                        }-mode`,
+                      );
+                    }}
+                    variant="standard"
+                  >
+                    <MenuItem value="light">Light</MenuItem>
+                    <MenuItem value="dark">Dark</MenuItem>
+                  </Select>
+                </Box>
               </Box>
             </Box>
-          </Box>
+          )}
           <Component />
         </>
       )}

@@ -1,0 +1,28 @@
+import Head from 'next/head';
+import Examples from '../../../example-groups/BasicExamples';
+
+<Head>
+  <title>{'Custom Headless Example - Material React Table V2 Docs'}</title>
+  <meta
+    name="description"
+    content="A custom headless example of Material React Table which shows how you can use the useMaterialReactTable hook to build with your own UI components"
+  />
+  <meta
+    property="og:title"
+    content="Custom Headless Material React Table Example"
+  />
+  <meta
+    property="og:description"
+    content="A custom headless example of Material React Table which shows how you can use the useMaterialReactTable hook to build with your own UI components"
+  />
+</Head>
+
+## Custom Headless Example
+
+For advanced use cases where you want to be in 100% control of your UI components, you can use Material React Table in a more headless way, kind of like how you would use [stock TanStack Table](https://tanstack.com/table/v8/docs/examples/react/basic).
+
+The power and flexibility here is almost limitless, as you can combine some already built-in Material React Table components alongside your own custom components. For the MRT components to work properly, all you need to do is pass the `table` object returned from the `useMaterialReactTable` hook.
+
+<Examples isPage />
+
+View Extra Storybook **[Examples](https://www.Material-react-table.dev/?path=/story/prop-playground--default)**
