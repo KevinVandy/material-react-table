@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useState } from 'react';
+import { useReducer, useRef, useState } from 'react';
 import {
   MaterialReactTable,
   MRT_ToggleFullScreenButton,

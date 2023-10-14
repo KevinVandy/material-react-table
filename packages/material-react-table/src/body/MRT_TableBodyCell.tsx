@@ -26,7 +26,7 @@ import { type MRT_Cell, type MRT_TableInstance } from '../types';
 interface Props<TData extends Record<string, any>> {
   cell: MRT_Cell<TData>;
   measureElement?: (element: HTMLTableCellElement) => void;
-  numRows: number;
+  numRows?: number;
   rowIndex: number;
   rowRef: RefObject<HTMLTableRowElement>;
   table: MRT_TableInstance<TData>;
@@ -119,14 +119,14 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
     const isHoveredRow = hoveredRow?.id === row.id;
     const isFirstColumn = getIsFirstColumn(column, table);
     const isLastColumn = getIsLastColumn(column, table);
-    const isLastRow = rowIndex === numRows - 1;
+    const isLastRow = numRows && rowIndex === numRows - 1;
 
     const borderStyle =
-      columnSizingInfo.isResizingColumn === column.id
-        ? `2px solid ${theme.palette.primary.main} !important`
-        : isDraggingColumn || isDraggingRow
+      isDraggingColumn || isDraggingRow
         ? `1px dashed ${theme.palette.text.secondary} !important`
-        : isHoveredColumn || isHoveredRow
+        : isHoveredColumn ||
+          isHoveredRow ||
+          columnSizingInfo.isResizingColumn === column.id
         ? `2px dashed ${theme.palette.primary.main} !important`
         : undefined;
 

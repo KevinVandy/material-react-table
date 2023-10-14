@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
 import { ContentCopy } from '@mui/icons-material';
 import { data, type Person } from './makeData';

@@ -114,7 +114,21 @@ export const routes: Array<RouteItem> = [
       },
       {
         href: '/docs/examples/editing-crud',
-        label: 'Editing (CRUD) Example',
+        label: 'Editing (CRUD) Examples',
+        secondaryItems: [
+          {
+            href: '/docs/examples/editing-crud-inline-row',
+            label: 'Inline Row Editing',
+          },
+          {
+            href: '/docs/examples/editing-crud-inline-cell',
+            label: 'Inline Cell Editing',
+          },
+          {
+            href: '/docs/examples/editing-crud-inline-table',
+            label: 'Inline Table Editing',
+          },
+        ],
       },
       {
         href: '/docs/examples/react-query',

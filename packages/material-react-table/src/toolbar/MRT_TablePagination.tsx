@@ -62,8 +62,9 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
       sx={{
         alignItems: 'center',
         display: 'flex',
+        flexWrap: 'wrap',
         gap: '8px',
-        justifyContent: 'space-between',
+        justifyContent: { md: 'space-between', sm: 'center' },
         justifySelf: 'flex-end',
         mt:
           position === 'top' &&
@@ -83,11 +84,12 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
             {localization.rowsPerPage}
           </InputLabel>
           <Select
+            disableUnderline
             id="mrt-rows-per-page"
             inputProps={{ 'aria-label': localization.rowsPerPage }}
             label={localization.rowsPerPage}
             onChange={(event) => setPageSize(+event.target.value)}
-            sx={{ '&::before': { border: 'none' }, mb: 0 }}
+            sx={{ mb: 0 }}
             value={pageSize}
             variant="standard"
           >
@@ -122,6 +124,7 @@ export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
       ) : paginationDisplayMode === 'default' ? (
         <>
           <Typography
+            align="center"
             sx={{ mb: 0, minWidth: '10ch', mx: '4px' }}
             variant="body2"
           >{`${

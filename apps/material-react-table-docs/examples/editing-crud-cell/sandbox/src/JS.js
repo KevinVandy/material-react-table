@@ -1,21 +1,14 @@
 import { useMemo, useState } from 'react';
 import {
-  MRT_EditActionButtons,
   MaterialReactTable,
   // createRow,
-  type MRT_ColumnDef,
-  type MRT_Row,
-  type MRT_TableOptions,
   useMaterialReactTable,
 } from 'material-react-table';
 import {
   Box,
   Button,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
+  CircularProgress,
   IconButton,
-  Stack,
   Tooltip,
   Typography,
 } from '@mui/material';
@@ -26,16 +19,15 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
-import { type User, fakeData, usStates } from './makeData';
-import EditIcon from '@mui/icons-material/Edit';
+import { fakeData, usStates } from './makeData';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const Example = () => {
-  const [validationErrors, setValidationErrors] = useState<
-    Record<string, string | undefined>
-  >({});
+  const [validationErrors, setValidationErrors] = useState({});
+  //keep track of rows that have been edited
+  const [editedUsers, setEditedUsers] = useState({});
 
-  const columns = useMemo<MRT_ColumnDef<User>[]>(
+  const columns = useMemo(
     () => [
       {
         accessorKey: 'id',
@@ -46,65 +38,84 @@ const Example = () => {
       {
         accessorKey: 'firstName',
         header: 'First Name',
-        muiEditTextFieldProps: {
-          type: 'email',
+        muiEditTextFieldProps: ({ cell, row }) => ({
+          type: 'text',
           required: true,
-          error: !!validationErrors?.firstName,
-          helperText: validationErrors?.firstName,
-          //remove any previous validation errors when user focuses on the input
-          onFocus: () =>
+          error: !!validationErrors?.[cell.id],
+          helperText: validationErrors?.[cell.id],
+          //store edited user in state to be saved later
+          onBlur: (event) => {
+            const validationError = !validateRequired(event.currentTarget.value)
+              ? 'Required'
+              : undefined;
             setValidationErrors({
               ...validationErrors,
-              firstName: undefined,
-            }),
-          //optionally add validation checking for onBlur or onChange
-        },
+              [cell.id]: validationError,
+            });
+            setEditedUsers({ ...editedUsers, [row.id]: row.original });
+          },
+        }),
       },
       {
         accessorKey: 'lastName',
         header: 'Last Name',
-        muiEditTextFieldProps: {
-          type: 'email',
+        muiEditTextFieldProps: ({ cell, row }) => ({
+          type: 'text',
           required: true,
-          error: !!validationErrors?.lastName,
-          helperText: validationErrors?.lastName,
-          //remove any previous validation errors when user focuses on the input
-          onFocus: () =>
+          error: !!validationErrors?.[cell.id],
+          helperText: validationErrors?.[cell.id],
+          //store edited user in state to be saved later
+          onBlur: (event) => {
+            const validationError = !validateRequired(event.currentTarget.value)
+              ? 'Required'
+              : undefined;
             setValidationErrors({
               ...validationErrors,
-              lastName: undefined,
-            }),
-        },
+              [cell.id]: validationError,
+            });
+            setEditedUsers({ ...editedUsers, [row.id]: row.original });
+          },
+        }),
       },
       {
         accessorKey: 'email',
         header: 'Email',
-        muiEditTextFieldProps: {
+        muiEditTextFieldProps: ({ cell, row }) => ({
           type: 'email',
           required: true,
-          error: !!validationErrors?.email,
-          helperText: validationErrors?.email,
-          //remove any previous validation errors when user focuses on the input
-          onFocus: () =>
+          error: !!validationErrors?.[cell.id],
+          helperText: validationErrors?.[cell.id],
+          //store edited user in state to be saved later
+          onBlur: (event) => {
+            const validationError = !validateEmail(event.currentTarget.value)
+              ? 'Incorrect Email Format'
+              : undefined;
             setValidationErrors({
               ...validationErrors,
-              email: undefined,
-            }),
-        },
+              [cell.id]: validationError,
+            });
+            setEditedUsers({ ...editedUsers, [row.id]: row.original });
+          },
+        }),
       },
       {
         accessorKey: 'state',
         header: 'State',
         editVariant: 'select',
         editSelectOptions: usStates,
-        muiEditTextFieldProps: {
+        muiEditTextFieldProps: ({ row }) => ({
           select: true,
           error: !!validationErrors?.state,
           helperText: validationErrors?.state,
-        },
+          onChange: (event) =>
+            setEditedUsers({
+              ...editedUsers,
+              [row.id]: { ...row.original, state: event.target.value },
+            }),
+        }),
       },
     ],
-    [validationErrors],
+    [editedUsers, validationErrors],
   );
 
   //call CREATE hook
@@ -118,17 +129,14 @@ const Example = () => {
     isLoading: isLoadingUsers,
   } = useGetUsers();
   //call UPDATE hook
-  const { mutateAsync: updateUser, isLoading: isUpdatingUser } =
-    useUpdateUser();
+  const { mutateAsync: updateUsers, isLoading: isUpdatingUsers } =
+    useUpdateUsers();
   //call DELETE hook
   const { mutateAsync: deleteUser, isLoading: isDeletingUser } =
     useDeleteUser();
 
   //CREATE action
-  const handleCreateUser: MRT_TableOptions<User>['onCreatingRowSave'] = async ({
-    values,
-    table,
-  }) => {
+  const handleCreateUser = async ({ values, table }) => {
     const newValidationErrors = validateUser(values);
     if (Object.values(newValidationErrors).some((error) => error)) {
       setValidationErrors(newValidationErrors);
@@ -140,22 +148,14 @@ const Example = () => {
   };
 
   //UPDATE action
-  const handleSaveUser: MRT_TableOptions<User>['onEditingRowSave'] = async ({
-    values,
-    table,
-  }) => {
-    const newValidationErrors = validateUser(values);
-    if (Object.values(newValidationErrors).some((error) => error)) {
-      setValidationErrors(newValidationErrors);
-      return;
-    }
-    setValidationErrors({});
-    await updateUser(values);
-    table.setEditingRow(null); //exit editing mode
+  const handleSaveUsers = async () => {
+    if (Object.values(validationErrors).some((error) => !!error)) return;
+    await updateUsers(Object.values(editedUsers));
+    setEditedUsers({});
   };
 
   //DELETE action
-  const openDeleteConfirmModal = (row: MRT_Row<User>) => {
+  const openDeleteConfirmModal = (row) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
       deleteUser(row.original.id);
     }
@@ -164,9 +164,11 @@ const Example = () => {
   const table = useMaterialReactTable({
     columns,
     data: fetchedUsers,
-    createDisplayMode: 'modal', //default ('row', and 'custom' are also available)
-    editDisplayMode: 'modal', //default ('row', 'cell', 'table', and 'custom' are also available)
+    createDisplayMode: 'row', // ('modal', and 'custom' are also available)
+    editDisplayMode: 'cell', // ('modal', 'row', 'table', and 'custom' are also available)
     enableEditing: true,
+    enableRowActions: true,
+    positionActionsColumn: 'last',
     getRowId: (row) => row.id,
     muiToolbarAlertBannerProps: isLoadingUsersError
       ? {
@@ -181,48 +183,31 @@ const Example = () => {
     },
     onCreatingRowCancel: () => setValidationErrors({}),
     onCreatingRowSave: handleCreateUser,
-    onEditingRowCancel: () => setValidationErrors({}),
-    onEditingRowSave: handleSaveUser,
-    //optionally customize modal content
-    renderCreateRowModalContent: ({ table, row, internalEditComponents }) => (
-      <>
-        <DialogTitle variant="h3">Create New User</DialogTitle>
-        <DialogContent
-          sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
-        >
-          {internalEditComponents} {/* or render custom edit components here */}
-        </DialogContent>
-        <DialogActions>
-          <MRT_EditActionButtons variant="text" table={table} row={row} />
-        </DialogActions>
-      </>
-    ),
-    //optionally customize modal content
-    renderEditRowModalContent: ({ table, row, internalEditComponents }) => (
-      <>
-        <DialogTitle variant="h3">Edit User</DialogTitle>
-        <DialogContent
-          sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
-        >
-          {internalEditComponents} {/* or render custom edit components here */}
-        </DialogContent>
-        <DialogActions>
-          <MRT_EditActionButtons variant="text" table={table} row={row} />
-        </DialogActions>
-      </>
-    ),
-    renderRowActions: ({ row, table }) => (
+    renderRowActions: ({ row }) => (
       <Box sx={{ display: 'flex', gap: '1rem' }}>
-        <Tooltip title="Edit">
-          <IconButton onClick={() => table.setEditingRow(row)}>
-            <EditIcon />
-          </IconButton>
-        </Tooltip>
         <Tooltip title="Delete">
           <IconButton color="error" onClick={() => openDeleteConfirmModal(row)}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
+      </Box>
+    ),
+    renderBottomToolbarCustomActions: () => (
+      <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+        <Button
+          color="success"
+          variant="contained"
+          onClick={handleSaveUsers}
+          disabled={
+            Object.keys(editedUsers).length === 0 ||
+            Object.values(validationErrors).some((error) => !!error)
+          }
+        >
+          {isUpdatingUsers ? <CircularProgress size={25} /> : 'Save'}
+        </Button>
+        {Object.values(validationErrors).some((error) => !!error) && (
+          <Typography color="error">Fix errors before submitting</Typography>
+        )}
       </Box>
     ),
     renderTopToolbarCustomActions: ({ table }) => (
@@ -243,7 +228,7 @@ const Example = () => {
     ),
     state: {
       isLoading: isLoadingUsers,
-      isSaving: isCreatingUser || isUpdatingUser || isDeletingUser,
+      isSaving: isCreatingUser || isUpdatingUsers || isDeletingUser,
       showAlertBanner: isLoadingUsersError,
       showProgressBars: isFetchingUsers,
     },
@@ -256,24 +241,20 @@ const Example = () => {
 function useCreateUser() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (user: User) => {
+    mutationFn: async (user) => {
       //send api update request here
       await new Promise((resolve) => setTimeout(resolve, 1000)); //fake api call
       return Promise.resolve();
     },
     //client side optimistic update
-    onMutate: (newUserInfo: User) => {
-      queryClient.setQueryData(
-        ['users'],
-        (prevUsers: any) =>
-          [
-            ...prevUsers,
-            {
-              ...newUserInfo,
-              id: (Math.random() + 1).toString(36).substring(7),
-            },
-          ] as User[],
-      );
+    onMutate: (newUserInfo) => {
+      queryClient.setQueryData(['users'], (prevUsers) => [
+        ...prevUsers,
+        {
+          ...newUserInfo,
+          id: (Math.random() + 1).toString(36).substring(7),
+        },
+      ]);
     },
     // onSettled: () => queryClient.invalidateQueries({ queryKey: ['users'] }), //refetch users after mutation, disabled for demo
   });
@@ -281,7 +262,7 @@ function useCreateUser() {
 
 //READ hook (get users from api)
 function useGetUsers() {
-  return useQuery<User[]>({
+  return useQuery({
     queryKey: ['users'],
     queryFn: async () => {
       //send api request here
@@ -293,22 +274,21 @@ function useGetUsers() {
 }
 
 //UPDATE hook (put user in api)
-function useUpdateUser() {
+function useUpdateUsers() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (user: User) => {
+    mutationFn: async (users) => {
       //send api update request here
       await new Promise((resolve) => setTimeout(resolve, 1000)); //fake api call
       return Promise.resolve();
     },
     //client side optimistic update
-    onMutate: (newUserInfo: User) => {
-      queryClient.setQueryData(
-        ['users'],
-        (prevUsers: any) =>
-          prevUsers?.map((prevUser: User) =>
-            prevUser.id === newUserInfo.id ? newUserInfo : prevUser,
-          ),
+    onMutate: (newUsers) => {
+      queryClient.setQueryData(['users'], (prevUsers) =>
+        prevUsers?.map((user) => {
+          const newUser = newUsers.find((u) => u.id === user.id);
+          return newUser ? newUser : user;
+        }),
       );
     },
     // onSettled: () => queryClient.invalidateQueries({ queryKey: ['users'] }), //refetch users after mutation, disabled for demo
@@ -319,17 +299,15 @@ function useUpdateUser() {
 function useDeleteUser() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (userId: string) => {
+    mutationFn: async (userId) => {
       //send api update request here
       await new Promise((resolve) => setTimeout(resolve, 1000)); //fake api call
       return Promise.resolve();
     },
     //client side optimistic update
-    onMutate: (userId: string) => {
-      queryClient.setQueryData(
-        ['users'],
-        (prevUsers: any) =>
-          prevUsers?.filter((user: User) => user.id !== userId),
+    onMutate: (userId) => {
+      queryClient.setQueryData(['users'], (prevUsers) =>
+        prevUsers?.filter((user) => user.id !== userId),
       );
     },
     // onSettled: () => queryClient.invalidateQueries({ queryKey: ['users'] }), //refetch users after mutation, disabled for demo
@@ -347,8 +325,8 @@ const ExampleWithProviders = () => (
 
 export default ExampleWithProviders;
 
-const validateRequired = (value: string) => !!value.length;
-const validateEmail = (email: string) =>
+const validateRequired = (value) => !!value.length;
+const validateEmail = (email) =>
   !!email.length &&
   email
     .toLowerCase()
@@ -356,7 +334,7 @@ const validateEmail = (email: string) =>
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     );
 
-function validateUser(user: User) {
+function validateUser(user) {
   return {
     firstName: !validateRequired(user.firstName)
       ? 'First Name is Required'

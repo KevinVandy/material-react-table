@@ -120,7 +120,7 @@ npm install material-react-table
 > Read the full usage docs [here](https://www.material-react-table.com/docs/getting-started/usage/)
 
 ```jsx
-import React, { useMemo, useRef, useState, useEffect } from 'react';
+import { useMemo, useRef, useState, useEffect } from 'react';
 import { MaterialReactTable } from 'material-react-table';
 
 const data = [

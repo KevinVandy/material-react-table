@@ -16,7 +16,7 @@ import { type MRT_Cell, type MRT_Row, type MRT_TableInstance } from '../types';
 interface Props<TData extends Record<string, any>> {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
   measureElement?: (element: HTMLTableRowElement) => void;
-  numRows: number;
+  numRows?: number;
   pinnedRowIds?: string[];
   row: MRT_Row<TData>;
   rowIndex: number;

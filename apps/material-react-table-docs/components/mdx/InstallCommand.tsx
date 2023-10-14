@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Tab, Tabs } from '@mui/material';
 import { SampleCodeSnippet } from './SampleCodeSnippet';
 

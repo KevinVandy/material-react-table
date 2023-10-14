@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { MaterialReactTable, type MRT_Virtualizer } from 'material-react-table';
 import { fakeColumns, fakeData } from './makeData';
 

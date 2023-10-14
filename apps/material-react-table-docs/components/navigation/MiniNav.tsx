@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Link, Typography, useMediaQuery } from '@mui/material';
 import { useRouter } from 'next/router';
 import { EthicalAd } from '../mdx/EthicalAd';

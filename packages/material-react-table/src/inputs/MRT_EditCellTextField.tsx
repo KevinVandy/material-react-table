@@ -100,10 +100,10 @@ export const MRT_EditCellTextField = <TData extends Record<string, any>>({
         }
       }}
       label={
-        ['custom', 'modal'].includes(
+        !['custom', 'modal'].includes(
           (isCreating ? createDisplayMode : editDisplayMode) as string,
         )
-          ? column.columnDef.header
+          ? columnDef.header
           : undefined
       }
       margin="none"
@@ -119,6 +119,14 @@ export const MRT_EditCellTextField = <TData extends Record<string, any>>({
       value={value}
       variant="standard"
       {...textFieldProps}
+      InputProps={{
+        disableUnderline: editDisplayMode === 'table',
+        ...textFieldProps.InputProps,
+      }}
+      inputProps={{
+        autoComplete: 'new-password', // disable autocomplete and autofill
+        ...textFieldProps.inputProps,
+      }}
       onBlur={handleBlur}
       onChange={handleChange}
       onClick={(e) => {

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import {
   MaterialReactTable,
   MRT_ToggleDensePaddingButton,

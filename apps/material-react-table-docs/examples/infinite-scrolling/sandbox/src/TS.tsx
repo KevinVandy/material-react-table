@@ -1,5 +1,5 @@
-import React, {
-  UIEvent,
+import {
+  type UIEvent,
   useCallback,
   useEffect,
   useMemo,

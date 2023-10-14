@@ -40,6 +40,7 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
     getState,
     getTopRows,
     options: {
+      createDisplayMode,
       enableGlobalFilterRankedResults,
       enablePagination,
       enableRowPinning,
@@ -64,6 +65,7 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
   } = table;
   const {
     columnFilters,
+    creatingRow,
     density,
     draggingRow,
     expanded,
@@ -222,6 +224,9 @@ export const MRT_TableBody = <TData extends Record<string, any>>({
           ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
         })}
       >
+        {creatingRow && createDisplayMode === 'row' && (
+          <MRT_TableBodyRow row={creatingRow} rowIndex={-1} table={table} />
+        )}
         {tableBodyProps?.children ??
           (!rows.length ? (
             <tr
