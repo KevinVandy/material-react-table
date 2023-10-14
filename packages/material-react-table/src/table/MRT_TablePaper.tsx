@@ -52,7 +52,7 @@ export const MRT_TablePaper = <TData extends Record<string, any>>({
               right: 0,
               top: 0,
               width: '100vw',
-              zIndex: 10,
+              zIndex: 9999,
             }
           : {}),
         ...tablePaperProps?.style,

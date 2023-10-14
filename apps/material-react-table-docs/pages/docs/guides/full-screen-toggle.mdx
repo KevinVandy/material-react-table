@@ -3,7 +3,9 @@ import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 
 <Head>
-  <title>Full Screen Toggle Feature Guide - Material React Table V2 Docs</title>
+  <title>
+    {'Full Screen Toggle Feature Guide - Material React Table V2 Docs'}
+  </title>
   <meta
     name="description"
     content="How to use, customize, or disable the full screen toggle button feature of Material React Table"
@@ -15,7 +17,13 @@ import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable
 ### Relevant Props
 
 <TableOptionsTable
-  onlyOptions={new Set(['enableFullScreenToggle', 'onIsFullScreenChange'])}
+  onlyOptions={
+    new Set([
+      'enableFullScreenToggle',
+      'onIsFullScreenChange',
+      'muiTablePaperProps',
+    ])
+  }
 />
 
 ### Relevant State
@@ -26,8 +34,9 @@ import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable
 
 The full screen toggle button is enabled by default. You can hide it by setting the `enableFullScreenToggle` prop to `false`.
 
-```tsx
+```jsx
 return (
+
   <MaterialReactTable
     columns={columns
     data={data}
@@ -35,3 +44,37 @@ return (
   />
 );
 ```
+
+### Change Z-Index of Full Screen Table
+
+Under the hood in Material React Table V2, when the table is full screen, these `styles` are applied to the root mui paper component:
+
+```jsx
+{
+  bottom: 0,
+  height: '100vh',
+  left: 0,
+  margin: 0,
+  maxHeight: '100vh',
+  maxWidth: '100vw',
+  padding: 0,
+  position: 'fixed',
+  right: 0,
+  top: 0,
+  width: '100vw',
+  zIndex: 9999,
+}
+```
+
+If you need to change the `zIndex` of the full screen table, you can do so by passing in a `muiTablePaperProps` prop with a `style` object that has a `zIndex` property.
+
+```jsx
+muiTablePaperProps: ({ table }) => ({
+  //not sx
+  style: {
+    zIndex: table.getState().isFullScreen ? 1000 : undefined,
+  },
+});
+```
+
+> Note: The `sx` prop will not work here because the `style` prop was used internally instead of the `sx` prop for higher specificity.
