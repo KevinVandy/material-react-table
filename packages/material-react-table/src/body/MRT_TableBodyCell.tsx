@@ -122,11 +122,11 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
     const isLastRow = numRows && rowIndex === numRows - 1;
 
     const borderStyle =
-      isDraggingColumn || isDraggingRow
+      columnSizingInfo.isResizingColumn === column.id
+        ? `2px solid ${theme.palette.primary.main} !important`
+        : isDraggingColumn || isDraggingRow
         ? `1px dashed ${theme.palette.text.secondary} !important`
-        : isHoveredColumn ||
-          isHoveredRow ||
-          columnSizingInfo.isResizingColumn === column.id
+        : isHoveredColumn || isHoveredRow || columnSizingInfo.isResizingColumn === column.id
         ? `2px dashed ${theme.palette.primary.main} !important`
         : undefined;
 
