@@ -139,6 +139,12 @@ const data = [
     muix: true,
   },
   {
+    feature: 'Same Column Multi-Filtering',
+    mrt: false,
+    mt: false,
+    muix: true,
+  },
+  {
     feature: 'Filter Modes',
     mrt: true,
     mt: false,
@@ -199,10 +205,22 @@ const data = [
     muix: true,
   },
   {
+    feature: 'Row Pinning',
+    mrt: true,
+    mt: false,
+    muix: true,
+  },
+  {
     feature: 'Row Selection',
     mrt: true,
     mt: true,
     muix: true,
+  },
+  {
+    feature: 'Row Spanning',
+    mrt: false,
+    mt: false,
+    muix: null,
   },
   {
     feature: 'SSR Compatibility',
