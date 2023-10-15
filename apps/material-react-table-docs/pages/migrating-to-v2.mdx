@@ -26,6 +26,7 @@ import { InstallCommand } from '../components/mdx/InstallCommand';
 9. Improved Table Head Cell Default Styles
 10. Improved Column Sizing and Layout Modes for Column Resizing features
 11. All internal MRT components are now exported for custom headless use cases
+12. New optional `createMRTColumnHelper` utitlity function for better `TValue`/`cell.getValue()` type inference
 
 ### Breaking Changes
 
@@ -79,6 +80,8 @@ export const App = () => {
 - `muiTableHeadCellFilterCheckboxProps` -> `muiFilterCheckboxProps`
 - `muiTableHeadCellFilterTextFieldProps` -> `muiFilterTextFieldProps`
 - `muiTableHeadCellFilterSliderProps` -> `muiFilterSliderProps`
+- `MRT_FilterFnsState` -> `MRT_ColumnFilterFns`
+- `MaterialReactTableProps` -> `MRT_TableOptions`
 
 ### useMaterialReactTable
 
