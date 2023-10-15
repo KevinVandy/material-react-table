@@ -144,7 +144,7 @@ export const SourceCodeSnippet = ({
                 <Button
                   color="success"
                   endIcon={<LaunchIcon />}
-                  href={`https://stackblitz.com/github/KevinVandy/material-react-table/tree/main/apps/material-react-table-docs/examples/${tableId}/sandbox?file=src/TS.tsx`}
+                  href={`https://stackblitz.com/github/KevinVandy/material-react-table/tree/v1/apps/material-react-table-docs/examples/${tableId}/sandbox?file=src/TS.tsx`}
                   onClick={() => plausible('open-stackblitz')}
                   rel="noopener"
                   startIcon={<ElectricBoltIcon />}
@@ -157,7 +157,7 @@ export const SourceCodeSnippet = ({
                 <Button
                   color="warning"
                   endIcon={<LaunchIcon />}
-                  href={`https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/main/apps/material-react-table-docs/examples/${tableId}/sandbox?file=/src/TS.tsx`}
+                  href={`https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/v1/apps/material-react-table-docs/examples/${tableId}/sandbox?file=/src/TS.tsx`}
                   onClick={() => plausible('open-code-sandbox')}
                   rel="noopener"
                   startIcon={<CodeIcon />}
@@ -170,7 +170,7 @@ export const SourceCodeSnippet = ({
                 <Button
                   color="info"
                   endIcon={<LaunchIcon />}
-                  href={`https://github.com/KevinVandy/material-react-table/tree/main/apps/material-react-table-docs/examples/${tableId}/sandbox/src/${
+                  href={`https://github.com/KevinVandy/material-react-table/tree/v1/apps/material-react-table-docs/examples/${tableId}/sandbox/src/${
                     isTypeScript ? 'TS.tsx' : 'JS.js'
                   }`}
                   onClick={() => plausible('open-on-github')}
