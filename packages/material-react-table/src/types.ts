@@ -6,6 +6,7 @@ import {
   type SetStateAction,
 } from 'react';
 import {
+  type AccessorFn,
   type AggregationFn,
   type Cell,
   type Column,
@@ -16,6 +17,7 @@ import {
   type ColumnSizingInfoState,
   type ColumnSizingState,
   type DeepKeys,
+  type DeepValue,
   type ExpandedState,
   type FilterFn,
   type GroupingState,
@@ -24,6 +26,7 @@ import {
   type OnChangeFn,
   type PaginationState,
   type Row,
+  type RowData,
   type RowSelectionState,
   type SortingFn,
   type SortingState,
@@ -82,6 +85,8 @@ export type MRT_DensityState = 'comfortable' | 'compact' | 'spacious';
 
 export type MRT_ColumnFilterFnsState = Record<string, MRT_FilterOption>;
 
+export type MRT_RowData = RowData;
+
 export type {
   ColumnFiltersState as MRT_ColumnFiltersState,
   ColumnOrderState as MRT_ColumnOrderState,
@@ -98,6 +103,22 @@ export type {
   Virtualizer as MRT_Virtualizer,
   VirtualizerOptions as MRT_VirtualizerOptions,
   VisibilityState as MRT_VisibilityState,
+};
+
+export type MRT_ColumnHelper<TData extends Record<string, any>> = {
+  accessor: <
+    TAccessor extends AccessorFn<TData> | DeepKeys<TData>,
+    TValue extends TAccessor extends AccessorFn<TData, infer TReturn>
+      ? TReturn
+      : TAccessor extends DeepKeys<TData>
+      ? DeepValue<TData, TAccessor>
+      : never,
+  >(
+    accessor: TAccessor,
+    column: MRT_DisplayColumnDef<TData, TValue>,
+  ) => MRT_ColumnDef<TData, TValue>;
+  display: (column: MRT_DisplayColumnDef<TData>) => MRT_ColumnDef<TData>;
+  group: (column: MRT_GroupColumnDef<TData>) => MRT_ColumnDef<TData>;
 };
 
 export interface MRT_Localization {
@@ -299,8 +320,11 @@ export type MRT_TableState<TData extends Record<string, any>> = TableState & {
   showToolbarDropZone: boolean;
 };
 
-export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
-  ColumnDef<TData, unknown>,
+export type MRT_ColumnDef<
+  TData extends Record<string, any>,
+  TValue = unknown,
+> = Omit<
+  ColumnDef<TData, TValue>,
   | 'accessorKey'
   | 'aggregatedCell'
   | 'aggregationFn'
@@ -313,54 +337,54 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
   | 'sortingFn'
 > & {
   AggregatedCell?: (props: {
-    cell: MRT_Cell<TData>;
-    column: MRT_Column<TData>;
+    cell: MRT_Cell<TData, TValue>;
+    column: MRT_Column<TData, TValue>;
     row: MRT_Row<TData>;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   Cell?: (props: {
-    cell: MRT_Cell<TData>;
-    column: MRT_Column<TData>;
-    renderedCellValue: ReactNode | number | string;
+    cell: MRT_Cell<TData, TValue>;
+    column: MRT_Column<TData, TValue>;
+    renderedCellValue: ReactNode;
     row: MRT_Row<TData>;
     rowRef?: RefObject<HTMLTableRowElement>;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   Edit?: (props: {
-    cell: MRT_Cell<TData>;
-    column: MRT_Column<TData>;
+    cell: MRT_Cell<TData, TValue>;
+    column: MRT_Column<TData, TValue>;
     row: MRT_Row<TData>;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   Filter?: (props: {
-    column: MRT_Column<TData>;
+    column: MRT_Column<TData, TValue>;
     header: MRT_Header<TData>;
     rangeFilterIndex?: number;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   Footer?:
     | ((props: {
-        column: MRT_Column<TData>;
+        column: MRT_Column<TData, TValue>;
         footer: MRT_Header<TData>;
         table: MRT_TableInstance<TData>;
       }) => ReactNode)
     | ReactNode;
   GroupedCell?: (props: {
-    cell: MRT_Cell<TData>;
-    column: MRT_Column<TData>;
+    cell: MRT_Cell<TData, TValue>;
+    column: MRT_Column<TData, TValue>;
     row: MRT_Row<TData>;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   Header?:
     | ((props: {
-        column: MRT_Column<TData>;
+        column: MRT_Column<TData, TValue>;
         header: MRT_Header<TData>;
         table: MRT_TableInstance<TData>;
       }) => ReactNode)
     | ReactNode;
   PlaceholderCell?: (props: {
-    cell: MRT_Cell<TData>;
-    column: MRT_Column<TData>;
+    cell: MRT_Cell<TData, TValue>;
+    column: MRT_Column<TData, TValue>;
     row: MRT_Row<TData>;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
@@ -370,7 +394,7 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
    *
    * @example accessorFn: (row) => row.username
    */
-  accessorFn?: (originalRow: TData) => any;
+  accessorFn?: (originalRow: TData) => TValue;
   /**
    * Either an `accessorKey` or a combination of an `accessorFn` and `id` are required for a data column definition.
    * Specify which key in the row this column should use to access the correct data.
@@ -393,7 +417,7 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
   columnFilterModeOptions?: Array<
     LiteralUnion<string & MRT_FilterOption>
   > | null;
-  columns?: MRT_ColumnDef<TData>[];
+  columns?: MRT_ColumnDef<TData, TValue>[];
   editSelectOptions?: ({ text: string; value: any } | string)[];
   editVariant?: 'select' | 'text';
   enableClickToCopy?: boolean;
@@ -447,7 +471,7 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
     | IconButtonProps;
   muiCopyButtonProps?:
     | ((props: {
-        cell: MRT_Cell<TData>;
+        cell: MRT_Cell<TData, TValue>;
         column: MRT_Column<TData>;
         row: MRT_Row<TData>;
         table: MRT_TableInstance<TData>;
@@ -455,7 +479,7 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
     | ButtonProps;
   muiEditTextFieldProps?:
     | ((props: {
-        cell: MRT_Cell<TData>;
+        cell: MRT_Cell<TData, TValue>;
         column: MRT_Column<TData>;
         row: MRT_Row<TData>;
         table: MRT_TableInstance<TData>;
@@ -495,7 +519,7 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
     | TextFieldProps;
   muiTableBodyCellProps?:
     | ((props: {
-        cell: MRT_Cell<TData>;
+        cell: MRT_Cell<TData, TValue>;
         column: MRT_Column<TData>;
         row: MRT_Row<TData>;
         table: MRT_TableInstance<TData>;
@@ -528,21 +552,34 @@ export type MRT_ColumnDef<TData extends Record<string, any>> = Omit<
   sortingFn?: MRT_SortingFn<TData>;
 };
 
-export type MRT_DefinedColumnDef<TData extends Record<string, any>> = Omit<
-  MRT_ColumnDef<TData>,
-  'defaultDisplayColumn' | 'id'
-> & {
+export type MRT_DisplayColumnDef<
+  TData extends Record<string, any>,
+  TValue = unknown,
+> = Omit<MRT_ColumnDef<TData, TValue>, 'accessorFn' | 'accessorKey'>;
+
+export type MRT_GroupColumnDef<TData extends Record<string, any>> =
+  MRT_DisplayColumnDef<TData, any> & {
+    columns: MRT_ColumnDef<TData>[];
+  };
+
+export type MRT_DefinedColumnDef<
+  TData extends Record<string, any>,
+  TValue = unknown,
+> = Omit<MRT_ColumnDef<TData, TValue>, 'defaultDisplayColumn' | 'id'> & {
   _filterFn: MRT_FilterOption;
-  defaultDisplayColumn: Partial<MRT_ColumnDef<TData>>;
+  defaultDisplayColumn: Partial<MRT_ColumnDef<TData, TValue>>;
   id: string;
 };
 
-export type MRT_Column<TData extends Record<string, any>> = Omit<
-  Column<TData, unknown>,
+export type MRT_Column<
+  TData extends Record<string, any>,
+  TValue = unknown,
+> = Omit<
+  Column<TData, TValue>,
   'columnDef' | 'columns' | 'filterFn' | 'footer' | 'header'
 > & {
-  columnDef: MRT_DefinedColumnDef<TData>;
-  columns?: MRT_Column<TData>[];
+  columnDef: MRT_DefinedColumnDef<TData, TValue>;
+  columns?: MRT_Column<TData, TValue>[];
   filterFn?: MRT_FilterFn<TData>;
   footer: string;
   header: string;
@@ -572,11 +609,11 @@ export type MRT_Row<TData extends Record<string, any>> = Omit<
   subRows?: MRT_Row<TData>[];
 };
 
-export type MRT_Cell<TData extends Record<string, any>> = Omit<
-  Cell<TData, unknown>,
-  'column' | 'row'
-> & {
-  column: MRT_Column<TData>;
+export type MRT_Cell<
+  TData extends Record<string, any>,
+  TValue = unknown,
+> = Omit<Cell<TData, TValue>, 'column' | 'row'> & {
+  column: MRT_Column<TData, TValue>;
   row: MRT_Row<TData>;
 };
 
@@ -662,7 +699,7 @@ export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
    * See all Columns Options on the official docs site:
    * @link https://www.material-react-table.com/docs/api/column-options
    */
-  columns: MRT_ColumnDef<TData>[];
+  columns: MRT_ColumnDef<TData, any>[];
   createDisplayMode?: 'custom' | 'modal' | 'row';
   /**
    * Pass your data as an array of objects. Objects can theoretically be any shape, but it's best to keep them consistent.

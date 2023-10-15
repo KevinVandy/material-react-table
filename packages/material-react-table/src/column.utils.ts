@@ -15,10 +15,13 @@ import { type MRT_SortingFns } from './sortingFns';
 import {
   type MRT_Column,
   type MRT_ColumnDef,
+  type MRT_ColumnHelper,
   type MRT_ColumnOrderState,
   type MRT_DefinedColumnDef,
+  type MRT_DisplayColumnDef,
   type MRT_DisplayColumnIds,
   type MRT_FilterOption,
+  type MRT_GroupColumnDef,
   type MRT_GroupingState,
   type MRT_Header,
   type MRT_Row,
@@ -443,3 +446,23 @@ export const extraIndexRangeExtractor = (
   }
   return newIndexs;
 };
+
+export function createMRTColumnHelper<
+  TData extends Record<string, any>,
+>(): MRT_ColumnHelper<TData> {
+  return {
+    accessor: (accessor, column) => {
+      return typeof accessor === 'function'
+        ? ({
+            ...column,
+            accessorFn: accessor,
+          } as any)
+        : {
+            ...column,
+            accessorKey: accessor,
+          };
+    },
+    display: (column) => column as MRT_DisplayColumnDef<TData>,
+    group: (column) => column as MRT_GroupColumnDef<TData>,
+  };
+}
