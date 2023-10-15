@@ -1,5 +1,6 @@
 import {
   MaterialReactTable,
+  createMRTColumnHelper,
   useMaterialReactTable,
 } from 'material-react-table';
 import { Box, Button } from '@mui/material';
@@ -7,36 +8,32 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { mkConfig, generateCsv, download } from 'export-to-csv'; //or use your library of choice here
 import { data } from './makeData';
 
+const columnHelper = createMRTColumnHelper();
+
 const columns = [
-  {
-    accessorKey: 'id',
+  columnHelper.accessor('id', {
     header: 'ID',
     size: 40,
-  },
-  {
-    accessorKey: 'firstName',
+  }),
+  columnHelper.accessor('firstName', {
     header: 'First Name',
     size: 120,
-  },
-  {
-    accessorKey: 'lastName',
+  }),
+  columnHelper.accessor('lastName', {
     header: 'Last Name',
     size: 120,
-  },
-  {
-    accessorKey: 'company',
+  }),
+  columnHelper.accessor('company', {
     header: 'Company',
     size: 300,
-  },
-  {
-    accessorKey: 'city',
+  }),
+  columnHelper.accessor('city', {
     header: 'City',
-  },
-  {
-    accessorKey: 'country',
+  }),
+  columnHelper.accessor('country', {
     header: 'Country',
     size: 220,
-  },
+  }),
 ];
 
 const csvConfig = mkConfig({
