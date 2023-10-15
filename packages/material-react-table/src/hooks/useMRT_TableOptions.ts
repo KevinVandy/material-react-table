@@ -5,11 +5,15 @@ import { MRT_FilterFns } from '../filterFns';
 import { MRT_Default_Icons } from '../icons';
 import { MRT_Localization_EN } from '../locales/en';
 import { MRT_SortingFns } from '../sortingFns';
-import { type MRT_DefinedTableOptions, type MRT_TableOptions } from '../types';
+import {
+  type MRT_DefinedTableOptions,
+  type MRT_RowData,
+  type MRT_TableOptions,
+} from '../types';
 
-export const useMRT_TableOptions: <TData extends Record<string, any>>(
+export const useMRT_TableOptions: <TData extends MRT_RowData>(
   tableOptions: MRT_TableOptions<TData>,
-) => MRT_DefinedTableOptions<TData> = <TData extends Record<string, any>>({
+) => MRT_DefinedTableOptions<TData> = <TData extends MRT_RowData>({
   aggregationFns,
   autoResetExpanded = false,
   columnFilterDisplayMode = 'subheader',

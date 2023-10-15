@@ -10,7 +10,7 @@ import { MRT_ToolbarDropZone } from './MRT_ToolbarDropZone';
 import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_GlobalFilterTextField } from '../inputs/MRT_GlobalFilterTextField';
-import { type MRT_TableInstance } from '../types';
+import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
 export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
   alignItems: 'flex-start',
@@ -25,11 +25,11 @@ export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
   zIndex: 1,
 });
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TopToolbar = <TData extends Record<string, any>>({
+export const MRT_TopToolbar = <TData extends MRT_RowData>({
   table,
 }: Props<TData>) => {
   const {

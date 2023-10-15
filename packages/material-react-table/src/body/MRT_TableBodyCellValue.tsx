@@ -1,17 +1,21 @@
 import { type ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import { darken, lighten } from '@mui/material/styles';
-import { type MRT_Cell, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Cell,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 import highlightWords from 'highlight-words';
 
 const allowedTypes = ['string', 'number'];
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   cell: MRT_Cell<TData>;
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TableBodyCellValue = <TData extends Record<string, any>>({
+export const MRT_TableBodyCellValue = <TData extends MRT_RowData>({
   cell,
   table,
 }: Props<TData>) => {

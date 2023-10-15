@@ -1,14 +1,18 @@
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import { type MRT_Column, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Column,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   column: MRT_Column<TData>;
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ColumnPinningButtons = <TData extends Record<string, any>>({
+export const MRT_ColumnPinningButtons = <TData extends MRT_RowData>({
   column,
   table,
 }: Props<TData>) => {

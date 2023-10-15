@@ -122,12 +122,12 @@ In my opinion, instead of creating a re-usable component, it is instead actually
 ##### Re-usable Default Options
 
 ```ts
-import { type MRT_TableOptions } from 'material-react-table';
+import { type MRT_RowData, type MRT_TableOptions } from 'material-react-table';
 
 //define re-useable default table options for all tables in your app
-export const getDefaultMRTOptions = <
-  TData extends Record<string, any> = {},
->(): Partial<MRT_TableOptions<TData>> => ({
+export const getDefaultMRTOptions = <TData extends MRT_RowData>(): Partial<
+  MRT_TableOptions<TData>
+> => ({
   enableGlobalFilter: false,
   enableRowPinning: true,
   initialState: { showColumnFilters: true },
@@ -190,13 +190,13 @@ Doing it this way, you maintain 100% control of your table instance and any stat
 If you still want to just create a re-usable MRT component instead, you can do that too, of course. Here is a type-safe way to do that:
 
 ```tsx
-interface Props<TData extends Record<string, any> = {}>
+interface Props<TData extends MRT_RowData>
   extends MRT_TableOptions<TData> {
   columns: MRT_ColumnDef<TData>[];
   data: TData[];
 }
 
-export const CustomMRTTable = <TData extends Record<string, any> = {}>({
+export const CustomMRTTable = <TData extends MRT_RowData>({
   columns,
   data,
   ...rest
@@ -213,4 +213,3 @@ export const CustomMRTTable = <TData extends Record<string, any> = {}>({
 ```
 
 By using the `TData` generic correctly, you can maintain type-safety in your re-usable component that will adapt to different types of data you will have throughout your application.
-

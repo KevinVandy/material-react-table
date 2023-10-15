@@ -1,14 +1,18 @@
 import Box from '@mui/material/Box';
 import { MRT_RowPinButton } from '../buttons/MRT_RowPinButton';
 import { parseFromValuesOrFunc } from '../column.utils';
-import { type MRT_Row, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Row,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   row: MRT_Row<TData>;
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TableBodyRowPinButton = <TData extends Record<string, any>>({
+export const MRT_TableBodyRowPinButton = <TData extends MRT_RowData>({
   row,
   table,
 }: Props<TData>) => {

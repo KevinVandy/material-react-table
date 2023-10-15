@@ -2,9 +2,9 @@ import { type DragEventHandler } from 'react';
 import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { parseFromValuesOrFunc } from '../column.utils';
-import { type MRT_TableInstance } from '../types';
+import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   iconButtonProps?: IconButtonProps;
   location?: 'column' | 'row';
   onDragEnd: DragEventHandler<HTMLButtonElement>;
@@ -12,7 +12,7 @@ interface Props<TData extends Record<string, any>> {
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_GrabHandleButton = <TData extends Record<string, any>>({
+export const MRT_GrabHandleButton = <TData extends MRT_RowData>({
   iconButtonProps,
   location,
   onDragEnd,

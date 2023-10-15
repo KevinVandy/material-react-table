@@ -14,9 +14,13 @@ import {
   parseFromValuesOrFunc,
 } from '../column.utils';
 import { rankGlobalFuzzy } from '../sortingFns';
-import { type MRT_Row, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Row,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
   table: MRT_TableInstance<TData>;
   virtualColumns?: VirtualItem[];
@@ -24,7 +28,7 @@ interface Props<TData extends Record<string, any>> {
   virtualPaddingRight?: number;
 }
 
-export const MRT_TableBody = <TData extends Record<string, any>>({
+export const MRT_TableBody = <TData extends MRT_RowData>({
   columnVirtualizer,
   table,
   virtualColumns,

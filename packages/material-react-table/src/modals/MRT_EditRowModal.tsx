@@ -6,14 +6,18 @@ import Stack from '@mui/material/Stack';
 import { MRT_EditActionButtons } from '../buttons/MRT_EditActionButtons';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
-import { type MRT_Row, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Row,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   open: boolean;
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_EditRowModal = <TData extends Record<string, any>>({
+export const MRT_EditRowModal = <TData extends MRT_RowData>({
   open,
   table,
 }: Props<TData>) => {

@@ -1,13 +1,13 @@
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { parseFromValuesOrFunc } from '../column.utils';
-import { type MRT_TableInstance } from '../types';
+import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ExpandAllButton = <TData extends Record<string, any>>({
+export const MRT_ExpandAllButton = <TData extends MRT_RowData>({
   table,
 }: Props<TData>) => {
   const {

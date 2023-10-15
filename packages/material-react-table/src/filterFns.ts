@@ -4,8 +4,9 @@ import {
   rankings,
 } from '@tanstack/match-sorter-utils';
 import { type Row, filterFns } from '@tanstack/react-table';
+import { type MRT_RowData } from './types';
 
-const fuzzy = <TData extends Record<string, any>>(
+const fuzzy = <TData extends MRT_RowData>(
   row: Row<TData>,
   columnId: string,
   filterValue: number | string,
@@ -20,7 +21,7 @@ const fuzzy = <TData extends Record<string, any>>(
 
 fuzzy.autoRemove = (val: any) => !val;
 
-const contains = <TData extends Record<string, any>>(
+const contains = <TData extends MRT_RowData>(
   row: Row<TData>,
   id: string,
   filterValue: number | string,
@@ -34,7 +35,7 @@ const contains = <TData extends Record<string, any>>(
 
 contains.autoRemove = (val: any) => !val;
 
-const startsWith = <TData extends Record<string, any>>(
+const startsWith = <TData extends MRT_RowData>(
   row: Row<TData>,
   id: string,
   filterValue: number | string,
@@ -48,7 +49,7 @@ const startsWith = <TData extends Record<string, any>>(
 
 startsWith.autoRemove = (val: any) => !val;
 
-const endsWith = <TData extends Record<string, any>>(
+const endsWith = <TData extends MRT_RowData>(
   row: Row<TData>,
   id: string,
   filterValue: number | string,
@@ -62,7 +63,7 @@ const endsWith = <TData extends Record<string, any>>(
 
 endsWith.autoRemove = (val: any) => !val;
 
-const equals = <TData extends Record<string, any>>(
+const equals = <TData extends MRT_RowData>(
   row: Row<TData>,
   id: string,
   filterValue: number | string,
@@ -72,7 +73,7 @@ const equals = <TData extends Record<string, any>>(
 
 equals.autoRemove = (val: any) => !val;
 
-const notEquals = <TData extends Record<string, any>>(
+const notEquals = <TData extends MRT_RowData>(
   row: Row<TData>,
   id: string,
   filterValue: number | string,
@@ -82,7 +83,7 @@ const notEquals = <TData extends Record<string, any>>(
 
 notEquals.autoRemove = (val: any) => !val;
 
-const greaterThan = <TData extends Record<string, any>>(
+const greaterThan = <TData extends MRT_RowData>(
   row: Row<TData>,
   id: string,
   filterValue: number | string,
@@ -94,7 +95,7 @@ const greaterThan = <TData extends Record<string, any>>(
 
 greaterThan.autoRemove = (val: any) => !val;
 
-const greaterThanOrEqualTo = <TData extends Record<string, any>>(
+const greaterThanOrEqualTo = <TData extends MRT_RowData>(
   row: Row<TData>,
   id: string,
   filterValue: number | string,
@@ -102,7 +103,7 @@ const greaterThanOrEqualTo = <TData extends Record<string, any>>(
 
 greaterThanOrEqualTo.autoRemove = (val: any) => !val;
 
-const lessThan = <TData extends Record<string, any>>(
+const lessThan = <TData extends MRT_RowData>(
   row: Row<TData>,
   id: string,
   filterValue: number | string,
@@ -114,7 +115,7 @@ const lessThan = <TData extends Record<string, any>>(
 
 lessThan.autoRemove = (val: any) => !val;
 
-const lessThanOrEqualTo = <TData extends Record<string, any>>(
+const lessThanOrEqualTo = <TData extends MRT_RowData>(
   row: Row<TData>,
   id: string,
   filterValue: number | string,
@@ -122,7 +123,7 @@ const lessThanOrEqualTo = <TData extends Record<string, any>>(
 
 lessThanOrEqualTo.autoRemove = (val: any) => !val;
 
-const between = <TData extends Record<string, any>>(
+const between = <TData extends MRT_RowData>(
   row: Row<TData>,
   id: string,
   filterValues: [number | string, number | string],
@@ -137,7 +138,7 @@ const between = <TData extends Record<string, any>>(
 
 between.autoRemove = (val: any) => !val;
 
-const betweenInclusive = <TData extends Record<string, any>>(
+const betweenInclusive = <TData extends MRT_RowData>(
   row: Row<TData>,
   id: string,
   filterValues: [number | string, number | string],
@@ -152,7 +153,7 @@ const betweenInclusive = <TData extends Record<string, any>>(
 
 betweenInclusive.autoRemove = (val: any) => !val;
 
-const empty = <TData extends Record<string, any>>(
+const empty = <TData extends MRT_RowData>(
   row: Row<TData>,
   id: string,
   _filterValue: number | string,
@@ -160,7 +161,7 @@ const empty = <TData extends Record<string, any>>(
 
 empty.autoRemove = (val: any) => !val;
 
-const notEmpty = <TData extends Record<string, any>>(
+const notEmpty = <TData extends MRT_RowData>(
   row: Row<TData>,
   id: string,
   _filterValue: number | string,

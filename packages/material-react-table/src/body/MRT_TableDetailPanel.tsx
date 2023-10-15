@@ -5,9 +5,13 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { lighten } from '@mui/material/styles';
 import { parseFromValuesOrFunc } from '../column.utils';
-import { type MRT_Row, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Row,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   parentRowRef: RefObject<HTMLTableRowElement>;
   row: MRT_Row<TData>;
   rowIndex: number;
@@ -15,7 +19,7 @@ interface Props<TData extends Record<string, any>> {
   virtualRow?: VirtualItem;
 }
 
-export const MRT_TableDetailPanel = <TData extends Record<string, any>>({
+export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
   parentRowRef,
   row,
   rowIndex,

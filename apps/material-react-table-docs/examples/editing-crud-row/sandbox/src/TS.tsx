@@ -7,12 +7,7 @@ import {
   type MRT_TableOptions,
   useMaterialReactTable,
 } from 'material-react-table';
-import {
-  Box,
-  Button,
-  IconButton,
-  Tooltip,
-} from '@mui/material';
+import { Box, Button, IconButton, Tooltip } from '@mui/material';
 import {
   QueryClient,
   QueryClientProvider,

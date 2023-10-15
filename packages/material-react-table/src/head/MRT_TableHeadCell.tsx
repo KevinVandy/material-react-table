@@ -11,14 +11,18 @@ import { MRT_TableHeadCellResizeHandle } from './MRT_TableHeadCellResizeHandle';
 import { MRT_TableHeadCellSortLabel } from './MRT_TableHeadCellSortLabel';
 import { getCommonCellStyles } from '../column.utils';
 import { parseFromValuesOrFunc } from '../column.utils';
-import { type MRT_Header, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Header,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TableHeadCell = <TData extends Record<string, any>>({
+export const MRT_TableHeadCell = <TData extends MRT_RowData>({
   header,
   table,
 }: Props<TData>) => {

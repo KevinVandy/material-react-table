@@ -2,13 +2,13 @@ import { type MouseEvent, useState } from 'react';
 import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { MRT_ShowHideColumnsMenu } from '../menus/MRT_ShowHideColumnsMenu';
-import { type MRT_TableInstance } from '../types';
+import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any>> extends IconButtonProps {
+interface Props<TData extends MRT_RowData> extends IconButtonProps {
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ShowHideColumnsButton = <TData extends Record<string, any>>({
+export const MRT_ShowHideColumnsButton = <TData extends MRT_RowData>({
   table,
   ...rest
 }: Props<TData>) => {

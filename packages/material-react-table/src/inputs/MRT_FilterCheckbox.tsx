@@ -2,14 +2,18 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Tooltip from '@mui/material/Tooltip';
 import { parseFromValuesOrFunc } from '../column.utils';
-import { type MRT_Column, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Column,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   column: MRT_Column<TData>;
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_FilterCheckbox = <TData extends Record<string, any>>({
+export const MRT_FilterCheckbox = <TData extends MRT_RowData>({
   column,
   table,
 }: Props<TData>) => {

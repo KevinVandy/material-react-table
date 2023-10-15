@@ -2,15 +2,19 @@ import Badge from '@mui/material/Badge';
 import { type TableCellProps } from '@mui/material/TableCell';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Tooltip from '@mui/material/Tooltip';
-import { type MRT_Header, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Header,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
   tableCellProps?: TableCellProps;
 }
 
-export const MRT_TableHeadCellSortLabel = <TData extends Record<string, any>>({
+export const MRT_TableHeadCellSortLabel = <TData extends MRT_RowData>({
   header,
   table,
 }: Props<TData>) => {

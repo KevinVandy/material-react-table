@@ -1,15 +1,17 @@
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
-import { type MRT_Header, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Header,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TableHeadCellResizeHandle = <
-  TData extends Record<string, any>,
->({
+export const MRT_TableHeadCellResizeHandle = <TData extends MRT_RowData>({
   header,
   table,
 }: Props<TData>) => {

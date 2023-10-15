@@ -26,7 +26,6 @@ import {
   type OnChangeFn,
   type PaginationState,
   type Row,
-  type RowData,
   type RowSelectionState,
   type SortingFn,
   type SortingState,
@@ -85,7 +84,7 @@ export type MRT_DensityState = 'comfortable' | 'compact' | 'spacious';
 
 export type MRT_ColumnFilterFnsState = Record<string, MRT_FilterOption>;
 
-export type MRT_RowData = RowData;
+export type MRT_RowData = Record<string, any>;
 
 export type {
   ColumnFiltersState as MRT_ColumnFiltersState,
@@ -105,7 +104,7 @@ export type {
   VisibilityState as MRT_VisibilityState,
 };
 
-export type MRT_ColumnHelper<TData extends Record<string, any>> = {
+export type MRT_ColumnHelper<TData extends MRT_RowData> = {
   accessor: <
     TAccessor extends AccessorFn<TData> | DeepKeys<TData>,
     TValue extends TAccessor extends AccessorFn<TData, infer TReturn>
@@ -213,13 +212,13 @@ export interface MRT_Localization {
   unpinAll: string;
 }
 
-export interface MRT_RowModel<TData extends Record<string, any>> {
+export interface MRT_RowModel<TData extends MRT_RowData> {
   flatRows: MRT_Row<TData>[];
   rows: MRT_Row<TData>[];
   rowsById: { [key: string]: MRT_Row<TData> };
 }
 
-export type MRT_TableInstance<TData extends Record<string, any>> = Omit<
+export type MRT_TableInstance<TData extends MRT_RowData> = Omit<
   Table<TData>,
   | 'getAllColumns'
   | 'getAllFlatColumns'
@@ -291,13 +290,13 @@ export type MRT_TableInstance<TData extends Record<string, any>> = Omit<
   setShowToolbarDropZone: Dispatch<SetStateAction<boolean>>;
 };
 
-export type MRT_DefinedTableOptions<TData extends Record<string, any>> =
+export type MRT_DefinedTableOptions<TData extends MRT_RowData> =
   MRT_TableOptions<TData> & {
     icons: MRT_Icons;
     localization: MRT_Localization;
   };
 
-export type MRT_TableState<TData extends Record<string, any>> = TableState & {
+export type MRT_TableState<TData extends MRT_RowData> = TableState & {
   columnFilterFns: MRT_ColumnFilterFnsState;
   creatingRow: MRT_Row<TData> | null;
   density: MRT_DensityState;
@@ -320,10 +319,7 @@ export type MRT_TableState<TData extends Record<string, any>> = TableState & {
   showToolbarDropZone: boolean;
 };
 
-export type MRT_ColumnDef<
-  TData extends Record<string, any>,
-  TValue = unknown,
-> = Omit<
+export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
   ColumnDef<TData, TValue>,
   | 'accessorKey'
   | 'aggregatedCell'
@@ -553,17 +549,17 @@ export type MRT_ColumnDef<
 };
 
 export type MRT_DisplayColumnDef<
-  TData extends Record<string, any>,
+  TData extends MRT_RowData,
   TValue = unknown,
 > = Omit<MRT_ColumnDef<TData, TValue>, 'accessorFn' | 'accessorKey'>;
 
-export type MRT_GroupColumnDef<TData extends Record<string, any>> =
+export type MRT_GroupColumnDef<TData extends MRT_RowData> =
   MRT_DisplayColumnDef<TData, any> & {
     columns: MRT_ColumnDef<TData>[];
   };
 
 export type MRT_DefinedColumnDef<
-  TData extends Record<string, any>,
+  TData extends MRT_RowData,
   TValue = unknown,
 > = Omit<MRT_ColumnDef<TData, TValue>, 'defaultDisplayColumn' | 'id'> & {
   _filterFn: MRT_FilterOption;
@@ -571,10 +567,7 @@ export type MRT_DefinedColumnDef<
   id: string;
 };
 
-export type MRT_Column<
-  TData extends Record<string, any>,
-  TValue = unknown,
-> = Omit<
+export type MRT_Column<TData extends MRT_RowData, TValue = unknown> = Omit<
   Column<TData, TValue>,
   'columnDef' | 'columns' | 'filterFn' | 'footer' | 'header'
 > & {
@@ -585,21 +578,21 @@ export type MRT_Column<
   header: string;
 };
 
-export type MRT_Header<TData extends Record<string, any>> = Omit<
+export type MRT_Header<TData extends MRT_RowData> = Omit<
   Header<TData, unknown>,
   'column'
 > & {
   column: MRT_Column<TData>;
 };
 
-export type MRT_HeaderGroup<TData extends Record<string, any>> = Omit<
+export type MRT_HeaderGroup<TData extends MRT_RowData> = Omit<
   HeaderGroup<TData>,
   'headers'
 > & {
   headers: MRT_Header<TData>[];
 };
 
-export type MRT_Row<TData extends Record<string, any>> = Omit<
+export type MRT_Row<TData extends MRT_RowData> = Omit<
   Row<TData>,
   '_valuesCache' | 'getAllCells' | 'getVisibleCells' | 'subRows'
 > & {
@@ -609,17 +602,17 @@ export type MRT_Row<TData extends Record<string, any>> = Omit<
   subRows?: MRT_Row<TData>[];
 };
 
-export type MRT_Cell<
-  TData extends Record<string, any>,
-  TValue = unknown,
-> = Omit<Cell<TData, TValue>, 'column' | 'row'> & {
+export type MRT_Cell<TData extends MRT_RowData, TValue = unknown> = Omit<
+  Cell<TData, TValue>,
+  'column' | 'row'
+> & {
   column: MRT_Column<TData, TValue>;
   row: MRT_Row<TData>;
 };
 
 export type MRT_AggregationOption = string & keyof typeof MRT_AggregationFns;
 
-export type MRT_AggregationFn<TData extends Record<string, any>> =
+export type MRT_AggregationFn<TData extends MRT_RowData> =
   | AggregationFn<TData>
   | MRT_AggregationOption;
 
@@ -627,7 +620,7 @@ export type MRT_SortingOption = LiteralUnion<
   string & keyof typeof MRT_SortingFns
 >;
 
-export type MRT_SortingFn<TData extends Record<string, any>> =
+export type MRT_SortingFn<TData extends MRT_RowData> =
   | MRT_SortingOption
   | SortingFn<TData>;
 
@@ -635,7 +628,7 @@ export type MRT_FilterOption = LiteralUnion<
   string & keyof typeof MRT_FilterFns
 >;
 
-export type MRT_FilterFn<TData extends Record<string, any>> =
+export type MRT_FilterFn<TData extends MRT_RowData> =
   | FilterFn<TData>
   | MRT_FilterOption;
 
@@ -663,7 +656,7 @@ export type MRT_DisplayColumnIds =
  * See the full props list on the official docs site:
  * @link https://www.material-react-table.com/docs/api/props
  */
-export type MRT_TableOptions<TData extends Record<string, any>> = Omit<
+export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   Partial<TableOptions<TData>>,
   | 'columns'
   | 'data'

@@ -6,16 +6,16 @@ import { alpha, lighten } from '@mui/material/styles';
 import { MRT_Table } from './MRT_Table';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_EditRowModal } from '../modals';
-import { type MRT_TableInstance } from '../types';
+import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
 const useIsomorphicLayoutEffect =
   typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TableContainer = <TData extends Record<string, any>>({
+export const MRT_TableContainer = <TData extends MRT_RowData>({
   table,
 }: Props<TData>) => {
   const {

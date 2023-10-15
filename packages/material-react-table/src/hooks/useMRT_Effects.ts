@@ -1,8 +1,12 @@
 import { useEffect, useReducer, useRef } from 'react';
 import { getCanRankRows } from '../column.utils';
-import { type MRT_SortingState, type MRT_TableInstance } from '../types';
+import {
+  type MRT_RowData,
+  type MRT_SortingState,
+  type MRT_TableInstance,
+} from '../types';
 
-export const useMRT_Effects = <TData extends Record<string, any> = {}>(
+export const useMRT_Effects = <TData extends MRT_RowData>(
   table: MRT_TableInstance<TData>,
 ) => {
   const {

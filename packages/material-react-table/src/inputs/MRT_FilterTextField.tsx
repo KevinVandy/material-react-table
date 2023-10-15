@@ -23,15 +23,19 @@ import {
 } from '@mui/x-date-pickers/DatePicker';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
-import { type MRT_Header, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Header,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   header: MRT_Header<TData>;
   rangeFilterIndex?: number;
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_FilterTextField = <TData extends Record<string, any>>({
+export const MRT_FilterTextField = <TData extends MRT_RowData>({
   header,
   rangeFilterIndex,
   table,

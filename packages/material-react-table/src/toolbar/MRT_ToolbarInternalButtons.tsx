@@ -4,13 +4,13 @@ import { MRT_ToggleDensePaddingButton } from '../buttons/MRT_ToggleDensePaddingB
 import { MRT_ToggleFiltersButton } from '../buttons/MRT_ToggleFiltersButton';
 import { MRT_ToggleFullScreenButton } from '../buttons/MRT_ToggleFullScreenButton';
 import { MRT_ToggleGlobalFilterButton } from '../buttons/MRT_ToggleGlobalFilterButton';
-import { type MRT_TableInstance } from '../types';
+import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ToolbarInternalButtons = <TData extends Record<string, any>>({
+export const MRT_ToolbarInternalButtons = <TData extends MRT_RowData>({
   table,
 }: Props<TData>) => {
   const {

@@ -7,16 +7,16 @@ import PaginationItem from '@mui/material/PaginationItem';
 import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
 import { parseFromValuesOrFunc } from '../column.utils';
-import { type MRT_TableInstance } from '../types';
+import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
 const defaultRowsPerPage = [5, 10, 15, 20, 25, 30, 50, 100];
 
-interface Props<TData extends Record<string, any> = {}> {
+interface Props<TData extends MRT_RowData> {
   position?: 'bottom' | 'top';
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TablePagination = <TData extends Record<string, any> = {}>({
+export const MRT_TablePagination = <TData extends MRT_RowData>({
   position = 'bottom',
   table,
 }: Props<TData>) => {

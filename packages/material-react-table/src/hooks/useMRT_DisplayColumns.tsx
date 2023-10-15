@@ -12,6 +12,7 @@ import {
   type MRT_DefinedTableOptions,
   type MRT_GroupingState,
   type MRT_Row,
+  type MRT_RowData,
 } from '../types';
 
 const blankColProps = {
@@ -23,14 +24,14 @@ const blankColProps = {
   },
 };
 
-interface Params<TData extends Record<string, any>> {
+interface Params<TData extends MRT_RowData> {
   columnOrder: MRT_ColumnOrderState;
   creatingRow: MRT_Row<TData> | null;
   grouping: MRT_GroupingState;
   tableOptions: MRT_DefinedTableOptions<TData>;
 }
 
-export const useMRT_DisplayColumns = <TData extends Record<string, any>>({
+export const useMRT_DisplayColumns = <TData extends MRT_RowData>({
   columnOrder,
   creatingRow,
   grouping,

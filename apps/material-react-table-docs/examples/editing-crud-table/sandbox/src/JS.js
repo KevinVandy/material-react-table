@@ -165,7 +165,7 @@ const Example = () => {
     columns,
     data: fetchedUsers,
     createDisplayMode: 'row', // ('modal', and 'custom' are also available)
-    editDisplayMode: 'table', // ('modal', 'row', 'cell', and 'custom' are also 
+    editDisplayMode: 'table', // ('modal', 'row', 'cell', and 'custom' are also
     enableEditing: true,
     enableRowActions: true,
     positionActionsColumn: 'last',

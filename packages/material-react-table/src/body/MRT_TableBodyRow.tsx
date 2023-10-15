@@ -11,9 +11,14 @@ import {
 import { MRT_TableBodyCell, Memo_MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import { parseFromValuesOrFunc } from '../column.utils';
-import { type MRT_Cell, type MRT_Row, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Cell,
+  type MRT_Row,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
   measureElement?: (element: HTMLTableRowElement) => void;
   numRows?: number;
@@ -27,7 +32,7 @@ interface Props<TData extends Record<string, any>> {
   virtualRow?: VirtualItem;
 }
 
-export const MRT_TableBodyRow = <TData extends Record<string, any>>({
+export const MRT_TableBodyRow = <TData extends MRT_RowData>({
   columnVirtualizer,
   measureElement,
   numRows,

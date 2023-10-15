@@ -14,9 +14,13 @@ import Typography from '@mui/material/Typography';
 import { MRT_ColumnPinningButtons } from '../buttons/MRT_ColumnPinningButtons';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 import { reorderColumn } from '../column.utils';
-import { type MRT_Column, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Column,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   allColumns: MRT_Column<TData>[];
   column: MRT_Column<TData>;
   hoveredColumn: MRT_Column<TData> | null;
@@ -24,9 +28,7 @@ interface Props<TData extends Record<string, any>> {
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ShowHideColumnsMenuItems = <
-  TData extends Record<string, any>,
->({
+export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
   allColumns,
   column,
   hoveredColumn,

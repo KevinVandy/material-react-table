@@ -6,7 +6,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { MRT_FilterOptionMenu } from './MRT_FilterOptionMenu';
-import { type MRT_Header, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Header,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
 export const commonMenuItemStyles = {
   alignItems: 'center',
@@ -20,14 +24,14 @@ export const commonListItemStyles = {
   display: 'flex',
 };
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   anchorEl: HTMLElement | null;
   header: MRT_Header<TData>;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ColumnActionMenu = <TData extends Record<string, any>>({
+export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
   anchorEl,
   header,
   setAnchorEl,

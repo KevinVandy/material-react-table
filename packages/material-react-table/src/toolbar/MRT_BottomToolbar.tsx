@@ -8,13 +8,13 @@ import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 import { MRT_ToolbarDropZone } from './MRT_ToolbarDropZone';
 import { commonToolbarStyles } from './MRT_TopToolbar';
 import { parseFromValuesOrFunc } from '../column.utils';
-import { type MRT_TableInstance } from '../types';
+import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_BottomToolbar = <TData extends Record<string, any>>({
+export const MRT_BottomToolbar = <TData extends MRT_RowData>({
   table,
 }: Props<TData>) => {
   const {

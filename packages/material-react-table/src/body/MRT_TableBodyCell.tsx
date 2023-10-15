@@ -21,9 +21,13 @@ import {
   parseFromValuesOrFunc,
 } from '../column.utils';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
-import { type MRT_Cell, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Cell,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   cell: MRT_Cell<TData>;
   measureElement?: (element: HTMLTableCellElement) => void;
   numRows?: number;
@@ -33,7 +37,7 @@ interface Props<TData extends Record<string, any>> {
   virtualCell?: VirtualItem;
 }
 
-export const MRT_TableBodyCell = <TData extends Record<string, any>>({
+export const MRT_TableBodyCell = <TData extends MRT_RowData>({
   cell,
   measureElement,
   numRows,
@@ -126,7 +130,9 @@ export const MRT_TableBodyCell = <TData extends Record<string, any>>({
         ? `2px solid ${theme.palette.primary.main} !important`
         : isDraggingColumn || isDraggingRow
         ? `1px dashed ${theme.palette.text.secondary} !important`
-        : isHoveredColumn || isHoveredRow || columnSizingInfo.isResizingColumn === column.id
+        : isHoveredColumn ||
+          isHoveredRow ||
+          columnSizingInfo.isResizingColumn === column.id
         ? `2px dashed ${theme.palette.primary.main} !important`
         : undefined;
 

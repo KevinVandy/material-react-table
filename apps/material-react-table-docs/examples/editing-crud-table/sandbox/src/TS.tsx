@@ -174,7 +174,7 @@ const Example = () => {
     columns,
     data: fetchedUsers,
     createDisplayMode: 'row', // ('modal', and 'custom' are also available)
-    editDisplayMode: 'table', // ('modal', 'row', 'cell', and 'custom' are also 
+    editDisplayMode: 'table', // ('modal', 'row', 'cell', and 'custom' are also
     enableEditing: true,
     enableRowActions: true,
     positionActionsColumn: 'last',
@@ -204,7 +204,7 @@ const Example = () => {
     renderBottomToolbarCustomActions: () => (
       <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
         <Button
-          color='success'
+          color="success"
           variant="contained"
           onClick={handleSaveUsers}
           disabled={

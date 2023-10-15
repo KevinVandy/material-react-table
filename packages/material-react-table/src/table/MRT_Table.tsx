@@ -13,13 +13,13 @@ import {
 } from '../column.utils';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
 import { MRT_TableHead } from '../head/MRT_TableHead';
-import { type MRT_TableInstance } from '../types';
+import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_Table = <TData extends Record<string, any>>({
+export const MRT_Table = <TData extends MRT_RowData>({
   table,
 }: Props<TData>) => {
   const {

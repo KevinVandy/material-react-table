@@ -204,7 +204,7 @@ const Example = () => {
     renderBottomToolbarCustomActions: () => (
       <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
         <Button
-          color='success'
+          color="success"
           variant="contained"
           onClick={handleSaveUsers}
           disabled={

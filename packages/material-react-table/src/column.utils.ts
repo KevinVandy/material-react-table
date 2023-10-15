@@ -25,16 +25,17 @@ import {
   type MRT_GroupingState,
   type MRT_Header,
   type MRT_Row,
+  type MRT_RowData,
   type MRT_TableInstance,
   type MRT_TableOptions,
 } from './types';
 
-export const getColumnId = <TData extends Record<string, any>>(
+export const getColumnId = <TData extends MRT_RowData>(
   columnDef: MRT_ColumnDef<TData>,
 ): string =>
   columnDef.id ?? columnDef.accessorKey?.toString?.() ?? columnDef.header;
 
-export const getAllLeafColumnDefs = <TData extends Record<string, any>>(
+export const getAllLeafColumnDefs = <TData extends MRT_RowData>(
   columns: MRT_ColumnDef<TData>[],
 ): MRT_ColumnDef<TData>[] => {
   const allLeafColumnDefs: MRT_ColumnDef<TData>[] = [];
@@ -51,7 +52,7 @@ export const getAllLeafColumnDefs = <TData extends Record<string, any>>(
   return allLeafColumnDefs;
 };
 
-export const prepareColumns = <TData extends Record<string, any>>({
+export const prepareColumns = <TData extends MRT_RowData>({
   aggregationFns,
   columnDefs,
   columnFilterFns,
@@ -125,7 +126,7 @@ export const prepareColumns = <TData extends Record<string, any>>({
     return columnDef;
   }) as MRT_DefinedColumnDef<TData>[];
 
-export const reorderColumn = <TData extends Record<string, any>>(
+export const reorderColumn = <TData extends MRT_RowData>(
   draggedColumn: MRT_Column<TData>,
   targetColumn: MRT_Column<TData>,
   columnOrder: MRT_ColumnOrderState,
@@ -142,7 +143,7 @@ export const reorderColumn = <TData extends Record<string, any>>(
   return newColumnOrder;
 };
 
-export const showExpandColumn = <TData extends Record<string, any>>(
+export const showExpandColumn = <TData extends MRT_RowData>(
   props: MRT_TableOptions<TData>,
   grouping?: MRT_GroupingState,
 ) =>
@@ -152,7 +153,7 @@ export const showExpandColumn = <TData extends Record<string, any>>(
     props.renderDetailPanel
   );
 
-export const getLeadingDisplayColumnIds = <TData extends Record<string, any>>(
+export const getLeadingDisplayColumnIds = <TData extends MRT_RowData>(
   props: MRT_TableOptions<TData>,
 ) =>
   [
@@ -173,7 +174,7 @@ export const getLeadingDisplayColumnIds = <TData extends Record<string, any>>(
     props.layoutMode === 'grid-no-grow' && 'mrt-row-spacer',
   ].filter(Boolean) as MRT_DisplayColumnIds[];
 
-export const getTrailingDisplayColumnIds = <TData extends Record<string, any>>(
+export const getTrailingDisplayColumnIds = <TData extends MRT_RowData>(
   props: MRT_TableOptions<TData>,
 ) =>
   [
@@ -187,7 +188,7 @@ export const getTrailingDisplayColumnIds = <TData extends Record<string, any>>(
       'mrt-row-expand',
   ].filter(Boolean) as MRT_DisplayColumnIds[];
 
-export const getDefaultColumnOrderIds = <TData extends Record<string, any>>(
+export const getDefaultColumnOrderIds = <TData extends MRT_RowData>(
   props: MRT_TableOptions<TData>,
 ) => {
   const leadingDisplayCols: string[] = getLeadingDisplayColumnIds(props);
@@ -202,7 +203,7 @@ export const getDefaultColumnOrderIds = <TData extends Record<string, any>>(
   return [...leadingDisplayCols, ...allLeafColumnDefs, ...trailingDisplayCols];
 };
 
-export const getDefaultColumnFilterFn = <TData extends Record<string, any>>(
+export const getDefaultColumnFilterFn = <TData extends MRT_RowData>(
   columnDef: MRT_ColumnDef<TData>,
 ): MRT_FilterOption => {
   if (columnDef.filterVariant === 'multi-select') return 'arrIncludesSome';
@@ -215,7 +216,7 @@ export const getDefaultColumnFilterFn = <TData extends Record<string, any>>(
   return 'fuzzy';
 };
 
-export const getIsFirstColumn = <TData extends Record<string, any>>(
+export const getIsFirstColumn = <TData extends MRT_RowData>(
   column: MRT_Column<TData>,
   table: MRT_TableInstance<TData>,
 ) => {
@@ -225,7 +226,7 @@ export const getIsFirstColumn = <TData extends Record<string, any>>(
     : table.getVisibleLeafColumns()[0].id === column.id;
 };
 
-export const getIsLastColumn = <TData extends Record<string, any>>(
+export const getIsLastColumn = <TData extends MRT_RowData>(
   column: MRT_Column<TData>,
   table: MRT_TableInstance<TData>,
 ) => {
@@ -236,7 +237,7 @@ export const getIsLastColumn = <TData extends Record<string, any>>(
     : columns[columns.length - 1].id === column.id;
 };
 
-export const getIsLastLeftPinnedColumn = <TData extends Record<string, any>>(
+export const getIsLastLeftPinnedColumn = <TData extends MRT_RowData>(
   table: MRT_TableInstance<TData>,
   column: MRT_Column<TData>,
 ) => {
@@ -246,13 +247,13 @@ export const getIsLastLeftPinnedColumn = <TData extends Record<string, any>>(
   );
 };
 
-export const getIsFirstRightPinnedColumn = <TData extends Record<string, any>>(
+export const getIsFirstRightPinnedColumn = <TData extends MRT_RowData>(
   column: MRT_Column<TData>,
 ) => {
   return column.getIsPinned() === 'right' && column.getPinnedIndex() === 0;
 };
 
-export const getTotalRight = <TData extends Record<string, any>>(
+export const getTotalRight = <TData extends MRT_RowData>(
   table: MRT_TableInstance<TData>,
   column: MRT_Column<TData>,
 ) => {
@@ -262,7 +263,7 @@ export const getTotalRight = <TData extends Record<string, any>>(
     .reduce((acc, col) => acc + col.getSize(), 0);
 };
 
-export const getCanRankRows = <TData extends Record<string, any>>(
+export const getCanRankRows = <TData extends MRT_RowData>(
   table: MRT_TableInstance<TData>,
 ) => {
   const { getState, options } = table;
@@ -287,7 +288,7 @@ export const getCanRankRows = <TData extends Record<string, any>>(
   );
 };
 
-export const getCommonCellStyles = <TData extends Record<string, any>>({
+export const getCommonCellStyles = <TData extends MRT_RowData>({
   column,
   header,
   table,
@@ -412,7 +413,7 @@ export const flexRender = _flexRender as (
   props: any,
 ) => JSX.Element | ReactNode;
 
-export const createRow = <TData extends Record<string, any>>(
+export const createRow = <TData extends MRT_RowData>(
   table: MRT_TableInstance<TData>,
   originalRow?: TData,
 ): MRT_Row<TData> =>
@@ -448,7 +449,7 @@ export const extraIndexRangeExtractor = (
 };
 
 export function createMRTColumnHelper<
-  TData extends Record<string, any>,
+  TData extends MRT_RowData,
 >(): MRT_ColumnHelper<TData> {
   return {
     accessor: (accessor, column) => {

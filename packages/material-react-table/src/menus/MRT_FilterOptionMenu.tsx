@@ -7,6 +7,7 @@ import {
   type MRT_Header,
   type MRT_InternalFilterOption,
   type MRT_Localization,
+  type MRT_RowData,
   type MRT_TableInstance,
 } from '../types';
 
@@ -104,7 +105,7 @@ const emptyModes = ['empty', 'notEmpty'];
 const arrModes = ['arrIncludesSome', 'arrIncludesAll', 'arrIncludes'];
 const rangeVariants = ['range-slider', 'date-range', 'range'];
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   anchorEl: HTMLElement | null;
   header?: MRT_Header<TData>;
   onSelect?: () => void;
@@ -113,7 +114,7 @@ interface Props<TData extends Record<string, any>> {
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_FilterOptionMenu = <TData extends Record<string, any>>({
+export const MRT_FilterOptionMenu = <TData extends MRT_RowData>({
   anchorEl,
   header,
   onSelect,

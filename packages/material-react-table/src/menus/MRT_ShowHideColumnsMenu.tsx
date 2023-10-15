@@ -5,16 +5,20 @@ import Divider from '@mui/material/Divider';
 import Menu from '@mui/material/Menu';
 import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
 import { getDefaultColumnOrderIds } from '../column.utils';
-import { type MRT_Column, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Column,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   anchorEl: HTMLElement | null;
   isSubMenu?: boolean;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ShowHideColumnsMenu = <TData extends Record<string, any>>({
+export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
   anchorEl,
   setAnchorEl,
   table,

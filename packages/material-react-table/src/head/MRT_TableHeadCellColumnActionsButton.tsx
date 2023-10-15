@@ -3,15 +3,19 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
-import { type MRT_Header, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Header,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_TableHeadCellColumnActionsButton = <
-  TData extends Record<string, any>,
+  TData extends MRT_RowData,
 >({
   header,
   table,

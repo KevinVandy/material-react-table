@@ -2,16 +2,16 @@ import { type VirtualItem } from '@tanstack/react-virtual';
 import TableFooter from '@mui/material/TableFooter';
 import { MRT_TableFooterRow } from './MRT_TableFooterRow';
 import { parseFromValuesOrFunc } from '../column.utils';
-import { type MRT_TableInstance } from '../types';
+import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   table: MRT_TableInstance<TData>;
   virtualColumns?: VirtualItem[];
   virtualPaddingLeft?: number;
   virtualPaddingRight?: number;
 }
 
-export const MRT_TableFooter = <TData extends Record<string, any>>({
+export const MRT_TableFooter = <TData extends MRT_RowData>({
   table,
   virtualColumns,
   virtualPaddingLeft,

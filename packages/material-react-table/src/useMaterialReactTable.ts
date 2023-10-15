@@ -1,8 +1,12 @@
 import { useMRT_TableInstance } from './hooks/useMRT_TableInstance';
 import { useMRT_TableOptions } from './hooks/useMRT_TableOptions';
-import { type MRT_TableInstance, type MRT_TableOptions } from './types';
+import {
+  type MRT_RowData,
+  type MRT_TableInstance,
+  type MRT_TableOptions,
+} from './types';
 
-export const useMaterialReactTable = <TData extends Record<string, any>>(
+export const useMaterialReactTable = <TData extends MRT_RowData>(
   tableOptions: MRT_TableOptions<TData>,
 ): MRT_TableInstance<TData> => {
   const parsedTableOptions = useMRT_TableOptions(tableOptions);

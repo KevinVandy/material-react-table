@@ -3,13 +3,13 @@ import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import { alpha } from '@mui/material/styles';
-import { type MRT_TableInstance } from '../types';
+import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_ToolbarDropZone = <TData extends Record<string, any>>({
+export const MRT_ToolbarDropZone = <TData extends MRT_RowData>({
   table,
 }: Props<TData>) => {
   const {

@@ -8,14 +8,18 @@ import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import { type TextFieldProps } from '@mui/material/TextField';
 import { parseFromValuesOrFunc } from '../column.utils';
-import { type MRT_Cell, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Cell,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   cell: MRT_Cell<TData>;
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_EditCellTextField = <TData extends Record<string, any>>({
+export const MRT_EditCellTextField = <TData extends MRT_RowData>({
   cell,
   table,
 }: Props<TData>) => {

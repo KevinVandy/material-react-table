@@ -3,13 +3,13 @@ import { MRT_TableContainer } from './MRT_TableContainer';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_BottomToolbar } from '../toolbar/MRT_BottomToolbar';
 import { MRT_TopToolbar } from '../toolbar/MRT_TopToolbar';
-import { type MRT_TableInstance } from '../types';
+import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_TablePaper = <TData extends Record<string, any>>({
+export const MRT_TablePaper = <TData extends MRT_RowData>({
   table,
 }: Props<TData>) => {
   const {

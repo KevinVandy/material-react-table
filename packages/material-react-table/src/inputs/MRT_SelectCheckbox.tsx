@@ -4,15 +4,19 @@ import Radio, { type RadioProps } from '@mui/material/Radio';
 import Tooltip from '@mui/material/Tooltip';
 import { type Theme } from '@mui/material/styles';
 import { parseFromValuesOrFunc } from '../column.utils';
-import { type MRT_Row, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Row,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
-interface Props<TData extends Record<string, any>> {
+interface Props<TData extends MRT_RowData> {
   row?: MRT_Row<TData>;
   selectAll?: boolean;
   table: MRT_TableInstance<TData>;
 }
 
-export const MRT_SelectCheckbox = <TData extends Record<string, any>>({
+export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
   row,
   selectAll,
   table,
