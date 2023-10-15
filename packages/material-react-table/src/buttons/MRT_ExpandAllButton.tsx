@@ -37,9 +37,8 @@ export const MRT_ExpandAllButton = <TData extends MRT_RowData>({
       enterDelay={1000}
       enterNextDelay={1000}
       title={
-        iconButtonProps?.title ?? isAllRowsExpanded
-          ? localization.collapseAll
-          : localization.expandAll
+        iconButtonProps?.title ??
+        (isAllRowsExpanded ? localization.collapseAll : localization.expandAll)
       }
     >
       <span>
