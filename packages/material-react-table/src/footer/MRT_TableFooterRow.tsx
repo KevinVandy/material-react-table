@@ -63,9 +63,9 @@ export const MRT_TableFooterRow = ({
           ? footerGroup.headers[footerOrVirtualFooter.index]
           : (footerOrVirtualFooter as MRT_Header);
 
-        return (
+        return footer ? (
           <MRT_TableFooterCell footer={footer} key={footer.id} table={table} />
-        );
+        ) : null;
       })}
       {virtualPaddingRight ? (
         <th style={{ display: 'flex', width: virtualPaddingRight }} />

@@ -22,7 +22,7 @@ As of June 2023, most feature development is complete for MRT Version 1. MRT Ver
   <AlertTitle>
     MRT V2 is now in <b>Beta!</b>
   </AlertTitle>
-  <Typography variant='overline'>October 13, 2023</Typography>
+  <Typography variant="overline">October 13, 2023</Typography>
   <Typography>
     Material React Table V2 is now in beta. The library is mostly stable and
     ready for use, but the documentation is still being updated.
@@ -45,7 +45,16 @@ As of June 2023, most feature development is complete for MRT Version 1. MRT Ver
 
 ## Changelog
 
-### Version 1 (Latest)
+### Version 1
+
+#### v1.15.1 (2023-10-15) - V2 Backported fixes
+
+- Replaced `"Unsorted"` tooltip on header sort icon buttons with sort by next sort direction tooltip
+- Fixed accessorFn being called during loading and other undefined data states during loading
+- Fixed some button tooltips titles were not overridable
+- Fixed virtualized nested column header groups to not crash
+- Upgraded to latest TanStack Table `v8.10.7` various performance improvements and bug fixes
+- Upgraded to latest TanStack Virtual `v3.0.0-beta.65` for various bug fixes
 
 #### v1.15.0 (2023-09-25) - TanStack version bumps
 

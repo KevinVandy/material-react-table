@@ -25,12 +25,15 @@ export const MRT_TableHeadCellSortLabel = ({
   const { column } = header;
   const { columnDef } = column;
   const { sorting } = getState();
+  const sorted = column.getIsSorted();
 
-  const sortTooltip = column.getIsSorted()
-    ? column.getIsSorted() === 'desc'
+  const sortTooltip = sorted
+    ? sorted === 'desc'
       ? localization.sortedByColumnDesc.replace('{column}', columnDef.header)
       : localization.sortedByColumnAsc.replace('{column}', columnDef.header)
-    : localization.unsorted;
+    : column.getNextSortingOrder() === 'desc'
+    ? localization.sortByColumnDesc.replace('{column}', columnDef.header)
+    : localization.sortByColumnAsc.replace('{column}', columnDef.header);
 
   return (
     <Tooltip arrow placement="top" title={sortTooltip}>
@@ -40,12 +43,8 @@ export const MRT_TableHeadCellSortLabel = ({
       >
         <TableSortLabel
           aria-label={sortTooltip}
-          active={!!column.getIsSorted()}
-          direction={
-            column.getIsSorted()
-              ? (column.getIsSorted() as 'asc' | 'desc')
-              : undefined
-          }
+          active={!!sorted}
+          direction={sorted ? (sorted as 'asc' | 'desc') : undefined}
           sx={{
             flex: '0 0',
             width: '2.4ch',

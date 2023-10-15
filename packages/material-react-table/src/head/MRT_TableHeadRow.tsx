@@ -53,9 +53,9 @@ export const MRT_TableHeadRow = ({
           ? headerGroup.headers[headerOrVirtualHeader.index]
           : (headerOrVirtualHeader as MRT_Header);
 
-        return (
+        return header ? (
           <MRT_TableHeadCell header={header} key={header.id} table={table} />
-        );
+        ) : null;
       })}
       {virtualPaddingRight ? (
         <th style={{ display: 'flex', width: virtualPaddingRight }} />
