@@ -104,7 +104,7 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
         }
       }}
       label={
-        !['custom', 'modal'].includes(
+        ['custom', 'modal'].includes(
           (isCreating ? createDisplayMode : editDisplayMode) as string,
         )
           ? columnDef.header
