@@ -40,6 +40,13 @@ const moreData = [...Array(551)].map(() => ({
   lastName: faker.person.lastName(),
 }));
 
+const bigData = [...Array(11_111)].map(() => ({
+  address: faker.location.streetAddress(),
+  age: faker.number.int(80),
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
+}));
+
 export const PaginationEnabledDefault = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
@@ -51,6 +58,21 @@ export const PaginationEnabledDefaultMoreData = () => (
     muiTableContainerProps={{
       sx: {
         minHeight: '600px',
+      },
+    }}
+  />
+);
+
+export const PaginationEnabledDefaultBigData = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={bigData}
+    enableRowVirtualization
+    initialState={{ pagination: { pageIndex: 0, pageSize: 1000 } }}
+    muiPaginationProps={{ rowsPerPageOptions: [100, 1000] }}
+    muiTableContainerProps={{
+      sx: {
+        height: '600px',
       },
     }}
   />
