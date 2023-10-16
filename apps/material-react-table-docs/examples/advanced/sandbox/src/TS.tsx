@@ -153,6 +153,10 @@ const Example = () => {
     initialState: { showColumnFilters: true, showGlobalFilter: true },
     paginationDisplayMode: 'pages',
     positionToolbarAlertBanner: 'bottom',
+    muiSearchTextFieldProps: {
+      size: 'small',
+      variant: 'outlined',
+    },
     muiPaginationProps: {
       color: 'secondary',
       rowsPerPageOptions: [10, 20, 30],
@@ -232,7 +236,7 @@ const Example = () => {
       return (
         <Box
           sx={(theme) => ({
-            backgroundColor: lighten(theme.palette.background.default, 0.04),
+            backgroundColor: lighten(theme.palette.background.default, 0.05),
             display: 'flex',
             gap: '0.5rem',
             p: '8px',
@@ -244,31 +248,33 @@ const Example = () => {
             <MRT_GlobalFilterTextField table={table} />
             <MRT_ToggleFiltersButton table={table} />
           </Box>
-          <Box sx={{ display: 'flex', gap: '0.5rem' }}>
-            <Button
-              color="error"
-              disabled={!table.getIsSomeRowsSelected()}
-              onClick={handleDeactivate}
-              variant="contained"
-            >
-              Deactivate
-            </Button>
-            <Button
-              color="success"
-              disabled={!table.getIsSomeRowsSelected()}
-              onClick={handleActivate}
-              variant="contained"
-            >
-              Activate
-            </Button>
-            <Button
-              color="info"
-              disabled={!table.getIsSomeRowsSelected()}
-              onClick={handleContact}
-              variant="contained"
-            >
-              Contact
-            </Button>
+          <Box>
+            <Box sx={{ display: 'flex', gap: '0.5rem' }}>
+              <Button
+                color="error"
+                disabled={!table.getIsSomeRowsSelected()}
+                onClick={handleDeactivate}
+                variant="contained"
+              >
+                Deactivate
+              </Button>
+              <Button
+                color="success"
+                disabled={!table.getIsSomeRowsSelected()}
+                onClick={handleActivate}
+                variant="contained"
+              >
+                Activate
+              </Button>
+              <Button
+                color="info"
+                disabled={!table.getIsSomeRowsSelected()}
+                onClick={handleContact}
+                variant="contained"
+              >
+                Contact
+              </Button>
+            </Box>
           </Box>
         </Box>
       );

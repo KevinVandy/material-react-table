@@ -333,6 +333,8 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
     sx: (theme) => ({
       minWidth: isDateFilter
         ? '160px'
+        : enableColumnFilterModes && rangeFilterIndex === 0
+        ? '110px'
         : isRangeFilter
         ? '100px'
         : !filterChipLabel

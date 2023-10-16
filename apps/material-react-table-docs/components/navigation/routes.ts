@@ -137,6 +137,24 @@ export const routes: Array<RouteItem> = [
         ],
       },
       {
+        href: '/docs/examples/sticky-header',
+        label: 'Sticky Pinning Examples',
+        secondaryItems: [
+          {
+            href: '/docs/examples/column-pinning',
+            label: 'Column Pinning',
+          },
+          {
+            href: '/docs/examples/sticky-row-pinning',
+            label: 'Row Pinning (Sticky)',
+          },
+          {
+            href: '/docs/examples/static-row-pinning',
+            label: 'Row Pinning (Static)',
+          },
+        ],
+      },
+      {
         href: '/docs/examples/react-query',
         label: 'Remote Data Fetching Examples',
         secondaryItems: [

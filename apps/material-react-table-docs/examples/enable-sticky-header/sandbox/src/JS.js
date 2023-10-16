@@ -1,9 +1,13 @@
 import { useMemo } from 'react';
-import { MaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 import { data } from './makeData';
 
 const Example = () => {
   const columns = useMemo(
+    //column definitions...
     () => [
       {
         accessorKey: 'firstName',
@@ -27,17 +31,28 @@ const Example = () => {
       },
     ],
     [],
+    //end
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableStickyHeader
-      enableStickyFooter
-      muiTableContainerProps={{ sx: { maxHeight: '300px' } }}
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableBottomToolbar: false,
+    enableStickyHeader: true,
+    enableStickyFooter: true,
+    enablePagination: false,
+    muiTableContainerProps: { sx: { maxHeight: '400px' } },
+    muiTableBodyCellProps: {
+      sx: (theme) => ({
+        backgroundColor:
+          theme.palette.mode === 'dark'
+            ? theme.palette.grey[900]
+            : theme.palette.grey[50],
+      }),
+    },
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

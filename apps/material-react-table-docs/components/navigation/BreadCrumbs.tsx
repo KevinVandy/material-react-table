@@ -1,11 +1,18 @@
 import { useMemo } from 'react';
 import Link from 'next/link';
-import { Breadcrumbs as MuiBreadcrumbs, Link as MuiLink } from '@mui/material';
+import {
+  Box,
+  IconButton,
+  Breadcrumbs as MuiBreadcrumbs,
+  Link as MuiLink,
+  Tooltip,
+} from '@mui/material';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { ArrowBack } from '@mui/icons-material';
 
 export const BreadCrumbs = () => {
-  const { route } = useRouter();
+  const { route, back } = useRouter();
 
   const breadCrumbLinks = useMemo(() => {
     const routes = route.split('/');
@@ -48,27 +55,41 @@ export const BreadCrumbs = () => {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </Head>
-      <MuiBreadcrumbs aria-label="breadcrumb" sx={{ pt: '1rem' }}>
-        {breadCrumbLinks.map((link, index) => (
-          <Link key={index} href={link} passHref legacyBehavior>
-            <MuiLink
-              color="inherit"
-              sx={{ cursor: 'pointer', textTransform: 'capitalize' }}
-              underline="hover"
-            >
-              {link === '/'
-                ? 'Home'
-                : link
-                    .split('/')
-                    .pop()
-                    ?.replaceAll('-', ' ')
-                    ?.replaceAll('css', 'CSS')
-                    ?.replaceAll(' ui', ' UI')
-                    ?.replaceAll('api', 'API')}
-            </MuiLink>
-          </Link>
-        ))}
-      </MuiBreadcrumbs>
+      <Box
+        sx={{ display: 'flex', alignItems: 'center', gap: '1rem', pt: '1rem' }}
+      >
+        <Tooltip title="Go Back">
+          <IconButton
+            aria-label="Go Back"
+            color="inherit"
+            onClick={back}
+            size="small"
+          >
+            <ArrowBack />
+          </IconButton>
+        </Tooltip>
+        <MuiBreadcrumbs aria-label="breadcrumb" sx={{ m: 0 }}>
+          {breadCrumbLinks.map((link, index) => (
+            <Link key={index} href={link} passHref legacyBehavior>
+              <MuiLink
+                color="inherit"
+                sx={{ cursor: 'pointer', textTransform: 'capitalize' }}
+                underline="hover"
+              >
+                {link === '/'
+                  ? 'Home'
+                  : link
+                      .split('/')
+                      .pop()
+                      ?.replaceAll('-', ' ')
+                      ?.replaceAll('css', 'CSS')
+                      ?.replaceAll(' ui', ' UI')
+                      ?.replaceAll('api', 'API')}
+              </MuiLink>
+            </Link>
+          ))}
+        </MuiBreadcrumbs>
+      </Box>
     </>
   );
 };

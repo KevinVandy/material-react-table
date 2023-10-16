@@ -398,6 +398,7 @@ export const SourceCodeSnippet = ({
                         : '0.5rem 0.25rem',
                       overflowX: 'auto',
                       fontSize: '11pt',
+                      lineHeight: '1.5em',
                     }}
                   >
                     {tokens.map((line, i) => (
