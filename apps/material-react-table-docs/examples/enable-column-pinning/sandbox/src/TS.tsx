@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
 import { data, type Person } from './makeData';
+import { MenuItem } from '@mui/material';
 
 const Example = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
@@ -32,10 +33,13 @@ const Example = () => {
         accessorKey: 'city', //this column gets pinned to the right by default because of the initial state,
         header: 'City',
       },
-
       {
         accessorKey: 'state', //this column gets pinned left by default because of the the initial state,
         header: 'State',
+      },
+      {
+        accessorKey: 'country',
+        header: 'Country',
       },
     ],
     [],
@@ -46,7 +50,13 @@ const Example = () => {
       columns={columns}
       data={data}
       enableColumnPinning
-      initialState={{ columnPinning: { left: ['state'], right: ['city'] } }}
+      enableRowActions
+      renderRowActionMenuItems={() => [
+        <MenuItem key="action">Action</MenuItem>,
+      ]}
+      initialState={{
+        columnPinning: { left: ['mrt-row-actions', 'state'], right: ['city'] },
+      }}
     />
   );
 };

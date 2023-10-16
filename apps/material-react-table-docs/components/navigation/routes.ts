@@ -137,6 +137,20 @@ export const routes: Array<RouteItem> = [
         ],
       },
       {
+        href: '/docs/examples/filter-variants',
+        label: 'Filtering Examples',
+        secondaryItems: [
+          {
+            href: '/docs/examples/faceted-values',
+            label: 'Faceted Values',
+          },
+          {
+            href: '/docs/examples/filter-modes',
+            label: 'Filter Modes',
+          },
+        ],
+      },
+      {
         href: '/docs/examples/sticky-header',
         label: 'Sticky Pinning Examples',
         secondaryItems: [

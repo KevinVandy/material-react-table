@@ -21,20 +21,6 @@ const Example = () => {
         size: 200,
       },
       {
-        accessorFn: (originalRow) => new Date(originalRow.hireDate), //convert to date for sorting and filtering
-        id: 'hireDate',
-        header: 'Hire Date',
-        filterVariant: 'date-range',
-        Cell: ({ cell }) => cell.getValue<Date>().toLocaleDateString(), // convert back to string for display
-      },
-      {
-        accessorKey: 'age',
-        header: 'Age',
-        filterVariant: 'range',
-        filterFn: 'between',
-        size: 80,
-      },
-      {
         accessorKey: 'salary',
         header: 'Salary',
         Cell: ({ cell }) =>
@@ -55,6 +41,20 @@ const Example = () => {
               currency: 'USD',
             }),
         },
+      },
+      {
+        accessorFn: (originalRow) => new Date(originalRow.hireDate), //convert to date for sorting and filtering
+        id: 'hireDate',
+        header: 'Hire Date',
+        filterVariant: 'date-range',
+        Cell: ({ cell }) => cell.getValue<Date>().toLocaleDateString(), // convert back to string for display
+      },
+      {
+        accessorKey: 'age',
+        header: 'Age',
+        filterVariant: 'range',
+        filterFn: 'between',
+        size: 80,
       },
       {
         accessorKey: 'city',

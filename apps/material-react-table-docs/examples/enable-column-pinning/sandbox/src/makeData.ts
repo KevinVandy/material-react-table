@@ -6,6 +6,7 @@ export type Person = {
   address: string;
   city: string;
   state: string;
+  country: string;
 };
 
 export const data = [
@@ -17,6 +18,7 @@ export const data = [
     address: '261 Erdman Ford',
     city: 'East Daphne',
     state: 'Kentucky',
+    country: 'United States',
   },
   {
     id: '2',
@@ -26,6 +28,7 @@ export const data = [
     address: '769 Dominic Grove',
     city: 'Columbus',
     state: 'Ohio',
+    country: 'United States',
   },
   {
     id: '3',
@@ -35,6 +38,7 @@ export const data = [
     address: '566 Brakus Inlet',
     city: 'South Linda',
     state: 'West Virginia',
+    country: 'United States',
   },
   {
     id: '4',
@@ -44,6 +48,7 @@ export const data = [
     address: '722 Emie Stream',
     city: 'Lincoln',
     state: 'Nebraska',
+    country: 'United States',
   },
   {
     id: '5',
@@ -53,5 +58,17 @@ export const data = [
     address: '32188 Larkin Turnpike',
     city: 'Charleston',
     state: 'South Carolina',
+    country: 'United States',
   },
+  {
+    id: '6',
+    firstName: 'Brandon',
+    middleName: 'Joe',
+    lastName: 'Kutch',
+    address: '5660 Kuhn Village',
+    city: 'Vancouver',
+    state: 'British Columbia',
+    country: 'Canada',
+
+  }
 ];

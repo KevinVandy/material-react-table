@@ -1,14 +1,13 @@
 import { useRouter } from 'next/router';
 import { Box, Tab, Tabs } from '@mui/material';
-import StickyHeaderExample from '../examples/enable-sticky-header';
-import ColumnPinningExample from '../examples/enable-column-pinning';
-import RowPinningStickyExample from '../examples/enable-row-pinning-sticky';
-import RowPinningStaticExample from '../examples/enable-row-pinning-static';
+import FilterVariantsExample from '../examples/customize-filter-variants';
+import FacetedValuesExample from '../examples/enable-filter-facet-values';
+import FilterModesExample from '../examples/customize-filter-modes';
 import { useState } from 'react';
 import Link from 'next/link';
 import LaunchIcon from '@mui/icons-material/Launch';
 
-const StickyPinningExamples = ({ isPage = false }) => {
+const FilteringExamples = ({ isPage = false }) => {
   const { pathname, push } = useRouter();
   const [activeTab, setActiveTab] = useState(
     isPage ? pathname.split('/').pop() : 'export-csv',
@@ -25,10 +24,18 @@ const StickyPinningExamples = ({ isPage = false }) => {
               : setActiveTab(newPath as string)
           }
         >
-          <Tab label="Sticky Header" value="sticky-header" />
-          <Tab label="Column Pinning" value="column-pinning" />
-          <Tab label="Row Pinning (Sticky)" value="sticky-row-pinning" />
-          <Tab label="Row Pinning (Static)" value="static-row-pinning" />
+          <Tab label="Filter Variants" value="filter-variants" />
+          <Tab label="Faceted Values" value="faceted-values" />
+          <Tab label="Filter Switching" value="filter-switching" />
+          <Tab
+            label={
+              <Box>
+                Server-Side Filtering
+                <LaunchIcon sx={{ fontSize: '1rem' }} />
+              </Box>
+            }
+            value="react-query"
+          />
           <Link href="/docs/examples" passHref legacyBehavior>
             <Tab
               label={
@@ -43,13 +50,12 @@ const StickyPinningExamples = ({ isPage = false }) => {
         </Tabs>
       </Box>
       <Box>
-        {activeTab === 'sticky-header' && <StickyHeaderExample />}
-        {activeTab === 'column-pinning' && <ColumnPinningExample />}
-        {activeTab === 'sticky-row-pinning' && <RowPinningStickyExample />}
-        {activeTab === 'static-row-pinning' && <RowPinningStaticExample />}
+        {activeTab === 'filter-variants' && <FilterVariantsExample />}
+        {activeTab === 'faceted-values' && <FacetedValuesExample />}
+        {activeTab === 'filter-switching' && <FilterModesExample />}
       </Box>
     </>
   );
 };
 
-export default StickyPinningExamples;
+export default FilteringExamples;
