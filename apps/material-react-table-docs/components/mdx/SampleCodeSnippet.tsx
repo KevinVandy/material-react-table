@@ -48,6 +48,13 @@ export const SampleCodeSnippet = (props: Props) => {
     );
   }
 
+  const language = props.className?.replace?.(/language-/, '') as any;
+
+  let code = props.children;
+  if (language === 'bash') {
+    code = `$ ${props.children}`;
+  }
+
   return (
     <Paper
       elevation={3}
@@ -58,9 +65,11 @@ export const SampleCodeSnippet = (props: Props) => {
       }}
     >
       <Highlight
-        code={props.children}
-        language={props.className?.replace?.(/language-/, '') as any}
-        theme={theme.palette.mode === 'dark' ? themes.nightOwl : themes.github}
+        code={code}
+        language={language}
+        theme={
+          theme.palette.mode === 'dark' ? themes.oneDark : themes.jettwaveLight
+        }
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <div

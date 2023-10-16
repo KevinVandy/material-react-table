@@ -1,0 +1,268 @@
+import Head from 'next/head';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+import DisableExample from '../../../examples/minimal';
+import CustomTopToolbarExample from '../../../examples/custom-top-toolbar';
+import ExternalExample from '../../../examples/external-toolbar';
+
+<Head>
+  <title>{'Toolbar Customization Guide - Material React Table V2 Docs'}</title>
+  <meta
+    name="description"
+    content="How to customize the Toolbars, add buttons to toolbars, or customize progress bars and alert banners in Material React Table"
+  />
+</Head>
+
+## Toolbar Customization Guide
+
+This guide shows you how to [hide](#hide-or-disable-toolbars), [customize](#customize-toolbar-buttons), or [override](#override-with-custom-toolbar-components) the top and bottom toolbars in Material React Table.
+
+> Note: This guide has become much more simple since the introduction of the `useMaterialReactTable` hook in v2. <br />
+> No more `tableInstanceRef` or `useReducer` rerender hacks required!
+
+### Relevant Table Options
+
+<TableOptionsTable
+  onlyOptions={
+    new Set([
+      'enableBottomToolbar',
+      'enableToolbarInternalActions',
+      'enableTopToolbar',
+      'muiBottomToolbarProps',
+      'muiLinearProgressProps',
+      'muiToolbarAlertBannerChipProps',
+      'muiToolbarAlertBannerProps',
+      'muiTopToolbarProps',
+      'positionGlobalFilter',
+      'positionPagination',
+      'positionToolbarAlertBanner',
+      'positionToolbarDropZone',
+      'renderBottomToolbar',
+      'renderBottomToolbarCustomActions',
+      'renderToolbarInternalActions',
+      'renderTopToolbar',
+      'renderTopToolbarCustomActions',
+    ])
+  }
+/>
+
+### Relevant State
+
+<StateOptionsTable
+  onlyOptions={new Set(['showAlertBanner', 'showProgressBars'])}
+/>
+
+### Hide or Disable Toolbars
+
+There are `enableTopToolbar` and `enableBottomToolbar` table options that you can use to show or hide the toolbars.
+
+```jsx
+const table = useMaterialReactTable({
+  data,
+  columns,
+  enableTopToolbar: false,
+  enableBottomToolbar: false,
+});
+
+return <MaterialReactTable table={table} />;
+```
+
+Alternatively, you could just use a different MRT component that does not have the toolbars built-in. For example, use the `<MRT_TableContainer />` or `<MRT_Table />` components instead of the `<MaterialReactTable />` component.
+
+```jsx
+const table = useMaterialReactTable({
+  data,
+  columns,
+});
+
+//This MRT sub-component does not contain the code for the toolbars. MRT_TablePaper and MaterialReactTable do.
+return <MRT_TableContainer table={table} />;
+```
+
+#### No Toolbars Example
+
+<DisableExample />
+
+### Customize Toolbar buttons
+
+Everything in the toolbars are customizable. You can add your own buttons or change the order of the built-in buttons.
+
+#### Customize Built-In Internal Toolbar Button Area
+
+The `renderToolbarInternalActions` table option allows you to redefine the built-in buttons that usually reside in the top right of the top toolbar. You can reorder the icon buttons or even insert your own custom buttons. All of the built-in buttons are available to be imported from 'material-react-table'.
+
+```jsx
+import {
+  MaterialReactTable,
+  MRT_ShowHideColumnsButton,
+  MRT_ToggleFullScreenButton,
+} from 'material-react-table';
+
+const table = useMaterialReactTable({
+  data,
+  columns,
+  renderToolbarInternalActions: ({ table }) => (
+    <>
+      {/* add your own custom print button or something */}
+      <IconButton onClick={() => showPrintPreview(true)}>
+        <PrintIcon />
+      </IconButton>
+      {/* built-in buttons (must pass in table prop for them to work!) */}
+      <MRT_ShowHideColumnsButton table={table} />
+      <MRT_ToggleFullScreenButton table={table} />
+    </>
+  ),
+});
+
+return <MaterialReactTable table={table} />;
+```
+
+#### Add Custom Toolbar Buttons/Components
+
+The `renderTopToolbarCustomActions` and `renderBottomToolbarCustomActions` table options allow you to add your own custom buttons or components to the top and bottom toolbar areas. These props are functions that return a ReactNode. You can add your own buttons or whatever components you want.
+
+In all of these `render...` table options, you get access to the `table` instance that you can use to perform actions or extract data from the table.
+
+```jsx
+const table = useMaterialReactTable({
+  data,
+  columns,
+  enableRowSelection: true,
+  //Simply adding a table title to the top-left of the top toolbar
+  renderTopToolbarCustomActions: () => (
+    <Typography variant="h3">Customer's Table</Typography>
+  ),
+  //Adding a custom button to the bottom toolbar
+  renderBottomToolbarCustomActions: ({ table }) => (
+    <Button
+      variant="contained"
+      color="lightblue"
+      //extract all selected rows from the table instance and do something with them
+      onClick={() => handleDownloadRows(table.getSelectedRowModel().rows)}
+    >
+      Download Selected Rows
+    </Button>
+  ),
+});
+
+return <MaterialReactTable table={table} />;
+```
+
+#### Custom Toolbar Actions Example
+
+<CustomTopToolbarExample />
+
+### Position Toolbar Areas
+
+The `positionToolbarAlertBanner`, `positionGlobalFilter`, `positionPagination`, and `positionToolbarDropZone` table options allow you to swap the default position of certain areas of the toolbars. Experiment moving them around until you find a layout that works for you.
+
+```jsx
+const table = useMaterialReactTable({
+  data,
+  columns
+  //if rendering top toolbar buttons, sometimes you want alerts to be at the bottom
+  positionToolbarAlertBanner: 'bottom',
+  positionGlobalFilter: 'left', //move the search box to the left of the top toolbar
+  positionPagination: 'top',
+  renderTopToolbarCustomActions: () => <Box>...</Box>,
+});
+
+return <MaterialReactTable table={table} />;
+```
+
+### Customize Toolbar Props and Styles
+
+The `muiTopToolbarProps`, `muiBottomToolbarProps`, `muiToolbarAlertBannerProps`, and `muiToolbarAlertBannerChipProps` table options allow you to customize the props and styles of the underlying Material components that make up the toolbar components. Remember that you can pass CSS overrides to their `sx` or `style` props. Some have found this useful for forcing `position: absolute` on alerts, etc.
+
+### Customize Linear Progress Bars
+
+The progress bars that display in both the top and bottom toolbars become visible when either the `isLoading` or `showProgressBars` state options are set to `true`. You can customize the progress bars by passing in props to the `muiLinearProgressProps` table option. By default, the progress bars have a full animated progress bar, but you can set the `value` prop to a number between 0 and 100 to show real progress values if your table is doing some complicated long running tasks that you want to show progress for. Visit the [Material UI Progress docs](https://mui.com/material-ui/react-progress/) to learn more.
+
+```jsx
+const table = useMaterialReactTable({
+  data,
+  columns,
+  muiLinearProgressProps: ({ isTopToolbar }) => ({
+    color: 'warning',
+    sx: { display: isTopToolbar ? 'block' : 'none' }, //only show top toolbar progress bar
+    value: fetchProgress, //show precise real progress value if you so desire
+  }),
+  state: {
+    isLoading,
+    showProgressBars,
+  },
+});
+
+return <MaterialReactTable table={table} />;
+```
+
+### Customize Toolbar Alert Banner
+
+The toolbar alert banner is an internal component used to display alerts to the user. By default, it will automatically show messages around the number of selected rows or grouping state.
+
+However, you can repurpose this alert banner to show your own custom messages too. You can force the alert banner to show by setting the `showAlertBanner` state option to `true`. You can then customize the messages and other stylings using the `muiToolbarAlertBannerProps` to create your custom message. You probably saw this in the [Remote Data](/docs/examples/remote) or [React Query](/docs/examples/react-query) examples.
+
+```jsx
+const table = useMaterialReactTable({
+  data,
+  columns,
+  //show a custom error message if there was an error fetching data in the top toolbar
+  muiToolbarAlertBannerProps: isError
+    ? {
+        color: 'error',
+        children: 'Network Error. Could not fetch data.',
+      }
+    : undefined,
+  state: {
+    showAlertBanner: isError,
+    showProgressBars: isFetching,
+  },
+});
+
+return <MaterialReactTable table={table} />;
+```
+
+### Override with Custom Toolbar Components
+
+If you want to completely override the default toolbar components, you can do so by passing in your own custom components to the `renderTopToolbar` and `renderBottomToolbar` props.
+
+The drawback to this approach is that you will not get all the automatic features of the default toolbar components, such as the automatic alert banner, progress bars, etc. You will have to implement all of that yourself if you still want those features. Though you can also just import those MRT components and use them in your custom toolbar.
+
+```jsx
+import {
+  MRT_GlobalFilterTextInput, //import MRT sub components!
+  MRT_TablePagination,
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
+
+const table = useMaterialReactTable({
+  data,
+  columns,
+  renderTopToolbar: ({ table }) => (
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}
+    >
+      <MRT_GlobalFilterTextInput table={table} />
+      <MRT_TablePagination table={table} />
+    </Box>
+  ),
+  renderBottomToolbar: ({ table }) => (
+    <Box>
+      <Button>Download</Button>
+    </Box>
+  ),
+});
+
+return <MaterialReactTable table={table} />;
+```
+
+### Build Your Own Toolbar
+
+Instead of overriding the toolbar components up above, you may want 100% control over the layout and styling of your table controls and where they are on the page. You can do this by just using a MRT sub component such as `<MRT_TableContainer />` for the table component, which does not have the internal toolbar components built-in. Optionally, build your own custom toolbar components using the other MRT sub components.
+
+<ExternalExample />

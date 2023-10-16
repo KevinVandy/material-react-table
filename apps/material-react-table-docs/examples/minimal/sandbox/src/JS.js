@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
-import { MaterialReactTable } from 'material-react-table';
+import {
+  MRT_Table, //import alternative sub-component if we do not want toolbars
+  useMaterialReactTable,
+} from 'material-react-table';
 import { data } from './makeData';
 
 export const Example = () => {
@@ -31,34 +34,33 @@ export const Example = () => {
     //end
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableColumnActions={false}
-      enableColumnFilters={false}
-      enablePagination={false}
-      enableSorting={false}
-      enableBottomToolbar={false}
-      enableTopToolbar={false}
-      muiTableBodyRowProps={{ hover: false }}
-      muiTableProps={{
-        sx: {
-          border: '1px solid rgba(81, 81, 81, 1)',
-        },
-      }}
-      muiTableHeadCellProps={{
-        sx: {
-          border: '1px solid rgba(81, 81, 81, 1)',
-        },
-      }}
-      muiTableBodyCellProps={{
-        sx: {
-          border: '1px solid rgba(81, 81, 81, 1)',
-        },
-      }}
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableColumnActions: false,
+    enableColumnFilters: false,
+    enablePagination: false,
+    enableSorting: false,
+    muiTableBodyRowProps: { hover: false },
+    muiTableProps: {
+      sx: {
+        border: '1px solid rgba(81, 81, 81, .5)',
+      },
+    },
+    muiTableHeadCellProps: {
+      sx: {
+        border: '1px solid rgba(81, 81, 81, .5)',
+      },
+    },
+    muiTableBodyCellProps: {
+      sx: {
+        border: '1px solid rgba(81, 81, 81, .5)',
+      },
+    },
+  });
+
+  //using MRT_Table instead of MaterialReactTable if we do not need any of the toolbar components or features
+  return <MRT_Table table={table} />;
 };
 
 export default Example;

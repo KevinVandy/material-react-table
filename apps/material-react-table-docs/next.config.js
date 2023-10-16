@@ -10,6 +10,16 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/docs/examples/data-export',
+        destination: '/docs/guides/export-csv',
+        permanent: true,
+      },
+      {
+        source: '/docs/guides/customize-toolbars',
+        destination: '/docs/guides/toolbar-customization',
+        permanent: true,
+      },
+      {
         source: '/docs/guides/filtering',
         destination: '/docs/guides/column-filtering',
         permanent: true,

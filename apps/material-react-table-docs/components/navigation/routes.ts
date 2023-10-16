@@ -206,7 +206,7 @@ export const routes: Array<RouteItem> = [
             label: 'State Management',
           },
           {
-            href: '/docs/guides/customize-toolbars',
+            href: '/docs/guides/toolbar-customization',
             label: 'Toolbar Customization',
           },
         ],

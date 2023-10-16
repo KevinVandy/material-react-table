@@ -58,11 +58,6 @@ const ColumnOptionsTable = ({ onlyOptions }: Props) => {
         ),
       },
       {
-        accessorKey: 'required',
-        enableGlobalFilter: false,
-        header: 'Required',
-      },
-      {
         accessorKey: 'defaultValue',
         enableGlobalFilter: false,
         header: 'Default Value',
@@ -155,13 +150,10 @@ const ColumnOptionsTable = ({ onlyOptions }: Props) => {
       enableBottomToolbar={false}
       enableTopToolbar={!onlyOptions}
       initialState={{
-        columnVisibility: { required: false, description: false },
+        columnVisibility: { description: false },
         density: 'compact',
         showGlobalFilter: true,
-        sorting: [
-          { id: 'required', desc: true },
-          { id: 'columnOption', desc: false },
-        ],
+        sorting: [{ id: 'columnOption', desc: false }],
       }}
       muiSearchTextFieldProps={{
         placeholder: 'Search Column Options',

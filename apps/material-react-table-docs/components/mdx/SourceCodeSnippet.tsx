@@ -131,62 +131,64 @@ export const SourceCodeSnippet = ({
                   gap: '2rem',
                 }}
               >
-                <Box
-                  sx={{
-                    display: { xs: 'grid', sm: 'flex' },
-                    flexWrap: 'wrap',
-                    gap: '1rem',
-                    justifyContent: { xs: 'center', lg: 'flex-start' },
-                    width: { xs: '100%', lg: 'auto' },
-                  }}
-                >
-                  <Button
-                    color="success"
-                    endIcon={<LaunchIcon />}
-                    href={`https://stackblitz.com/github/KevinVandy/material-react-table/tree/v2/apps/material-react-table-docs/examples/${tableId}/sandbox?file=src/TS.tsx`}
-                    onClick={() => plausible('open-stackblitz')}
-                    rel="noopener"
-                    startIcon={<ElectricBoltIcon />}
-                    sx={{ cursor: 'pointer' }}
-                    target="_blank"
-                    variant="outlined"
+                <Box sx={{display: 'flex', alignItems: 'center'}}>
+                  <Box
+                    sx={{
+                      display: { xs: 'grid', sm: 'flex' },
+                      flexWrap: 'wrap',
+                      gap: '1rem',
+                      justifyContent: { xs: 'center', lg: 'flex-start' },
+                      width: { xs: '100%', lg: 'auto' },
+                    }}
                   >
-                    Open Stackblitz
-                  </Button>
-                  <Button
-                    color="warning"
-                    endIcon={<LaunchIcon />}
-                    href={`https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/v2/apps/material-react-table-docs/examples/${tableId}/sandbox?file=/src/TS.tsx`}
-                    onClick={() => plausible('open-code-sandbox')}
-                    rel="noopener"
-                    startIcon={<CodeIcon />}
-                    sx={{ cursor: 'pointer' }}
-                    target="_blank"
-                    variant="outlined"
-                  >
-                    Open Code Sandbox
-                  </Button>
-                  <Button
-                    color="info"
-                    endIcon={<LaunchIcon />}
-                    href={`https://github.com/KevinVandy/material-react-table/tree/v2/apps/material-react-table-docs/examples/${tableId}/sandbox/src/${
-                      codeTab === 'ts'
-                        ? 'TS.tsx'
-                        : codeTab === 'js'
-                        ? 'JS.js'
-                        : codeTab === 'legacy'
-                        ? 'Props.tsx'
-                        : 'API.ts'
-                    }`}
-                    onClick={() => plausible('open-on-github')}
-                    rel="noopener"
-                    startIcon={<GitHubIcon />}
-                    sx={{ cursor: 'pointer' }}
-                    target="_blank"
-                    variant="outlined"
-                  >
-                    Open on GitHub
-                  </Button>
+                    <Button
+                      color="success"
+                      endIcon={<LaunchIcon />}
+                      href={`https://stackblitz.com/github/KevinVandy/material-react-table/tree/v2/apps/material-react-table-docs/examples/${tableId}/sandbox?file=src/TS.tsx`}
+                      onClick={() => plausible('open-stackblitz')}
+                      rel="noopener"
+                      startIcon={<ElectricBoltIcon />}
+                      sx={{ cursor: 'pointer' }}
+                      target="_blank"
+                      variant="outlined"
+                    >
+                      Open Stackblitz
+                    </Button>
+                    <Button
+                      color="warning"
+                      endIcon={<LaunchIcon />}
+                      href={`https://codesandbox.io/s/github/KevinVandy/material-react-table/tree/v2/apps/material-react-table-docs/examples/${tableId}/sandbox?file=/src/TS.tsx`}
+                      onClick={() => plausible('open-code-sandbox')}
+                      rel="noopener"
+                      startIcon={<CodeIcon />}
+                      sx={{ cursor: 'pointer' }}
+                      target="_blank"
+                      variant="outlined"
+                    >
+                      Open Code Sandbox
+                    </Button>
+                    <Button
+                      color="info"
+                      endIcon={<LaunchIcon />}
+                      href={`https://github.com/KevinVandy/material-react-table/tree/v2/apps/material-react-table-docs/examples/${tableId}/sandbox/src/${
+                        codeTab === 'ts'
+                          ? 'TS.tsx'
+                          : codeTab === 'js'
+                          ? 'JS.js'
+                          : codeTab === 'legacy'
+                          ? 'Props.tsx'
+                          : 'API.ts'
+                      }`}
+                      onClick={() => plausible('open-on-github')}
+                      rel="noopener"
+                      startIcon={<GitHubIcon />}
+                      sx={{ cursor: 'pointer' }}
+                      target="_blank"
+                      variant="outlined"
+                    >
+                      Open on GitHub
+                    </Button>
+                  </Box>
                 </Box>
                 <Box
                   sx={{
@@ -356,7 +358,9 @@ export const SourceCodeSnippet = ({
               }
               language={codeTab !== 'js' ? 'tsx' : 'jsx'}
               theme={
-                theme.palette.mode === 'dark' ? themes.nightOwl : themes.github
+                theme.palette.mode === 'dark'
+                  ? themes.oneDark
+                  : themes.jettwaveLight
               }
             >
               {({ className, style, tokens, getLineProps, getTokenProps }) => (
@@ -393,6 +397,7 @@ export const SourceCodeSnippet = ({
                         ? '3rem 0.5rem 1rem 0.5rem'
                         : '0.5rem 0.25rem',
                       overflowX: 'auto',
+                      fontSize: '11pt',
                     }}
                   >
                     {tokens.map((line, i) => (
