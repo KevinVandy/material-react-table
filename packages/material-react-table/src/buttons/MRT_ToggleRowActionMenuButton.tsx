@@ -77,7 +77,8 @@ export const MRT_ToggleRowActionMenuButton = <TData extends MRT_RowData>({
       ) : showEditActionButtons ? (
         <MRT_EditActionButtons row={row} table={table} />
       ) : !renderRowActionMenuItems &&
-        parseFromValuesOrFunc(enableEditing, row) ? (
+        parseFromValuesOrFunc(enableEditing, row) &&
+        ['modal', 'row'].includes(editDisplayMode!) ? (
         <Tooltip arrow placement="right" title={localization.edit}>
           <IconButton
             aria-label={localization.edit}

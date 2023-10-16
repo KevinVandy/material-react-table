@@ -224,9 +224,10 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       onDragEnter={handleDragEnter}
       sx={(theme) => ({
         '&:hover': {
-          outline: ['cell', 'table'].includes(editDisplayMode ?? '')
-            ? `1px solid ${theme.palette.text.secondary}`
-            : undefined,
+          outline:
+            ['cell', 'table'].includes(editDisplayMode ?? '') && isEditable
+              ? `1px solid ${theme.palette.text.secondary}`
+              : undefined,
           outlineOffset: '-1px',
           textOverflow: 'clip',
         },

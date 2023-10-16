@@ -224,6 +224,53 @@ export const EditingEnabledEditModeCell = () => {
   );
 };
 
+export const EditingEnabledEditModeCellWithRowActions = () => {
+  const [tableData, setTableData] = useState(data);
+
+  const handleSaveCell = (cell: MRT_Cell<Person>, value: any) => {
+    //@ts-ignore
+    tableData[cell.row.index][cell.column.id] = value;
+    setTableData([...tableData]);
+  };
+
+  return (
+    <MaterialReactTable
+      columns={[
+        {
+          accessorKey: 'firstName',
+          header: 'First Name',
+        },
+        {
+          accessorKey: 'lastName',
+          header: 'Last Name',
+        },
+        {
+          accessorKey: 'address',
+          header: 'Address',
+        },
+        {
+          accessorKey: 'state',
+          header: 'State',
+        },
+        {
+          accessorKey: 'phoneNumber',
+          enableEditing: false,
+          header: 'Phone Number',
+        },
+      ]}
+      data={tableData}
+      editDisplayMode="cell"
+      enableEditing
+      enableRowActions
+      muiEditTextFieldProps={({ cell }) => ({
+        onBlur: (event) => {
+          handleSaveCell(cell, event.target.value);
+        },
+      })}
+    />
+  );
+};
+
 export const EditingEnabledEditModeTable = () => {
   const [tableData, setTableData] = useState(data);
 
