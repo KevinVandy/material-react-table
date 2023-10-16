@@ -1,15 +1,17 @@
 import { useRouter } from 'next/router';
 import { Box, Tab, Tabs } from '@mui/material';
-import ReactQueryExample from '../examples/react-query';
-import RemoteExample from '../examples/remote';
+import FullyVirtualizedExample from '../examples/virtualized';
+import RowVirtualization from '../examples/enable-row-virtualization';
+import ColumnVirtualization from '../examples/enable-column-virtualization';
+import InfiniteScrolling from '../examples/infinite-scrolling';
 import { useState } from 'react';
 import Link from 'next/link';
 import LaunchIcon from '@mui/icons-material/Launch';
 
-const RemoteFetchingExamples = ({ isPage = false }) => {
+const VirtualizedExamples = ({ isPage = false }) => {
   const { pathname, push } = useRouter();
   const [activeTab, setActiveTab] = useState(
-    isPage ? pathname.split('/').pop() : 'react-query',
+    isPage ? pathname.split('/').pop() : 'export-csv',
   );
 
   return (
@@ -23,17 +25,10 @@ const RemoteFetchingExamples = ({ isPage = false }) => {
               : setActiveTab(newPath as string)
           }
         >
-          <Tab label="React Query" value="react-query" />
-          <Tab label="useEffect" value="remote" />
-          <Tab
-            label={
-              <Box>
-                Infinite Scrolling
-                <LaunchIcon sx={{ fontSize: '1rem' }} />
-              </Box>
-            }
-            value="infinite-scrolling"
-          />
+          <Tab label="Fully Virtualized" value="virtualized" />
+          <Tab label="Row Virtualization" value="row-virtualization" />
+          <Tab label="Column Virtualization" value="column-virtualization" />
+          <Tab label="Infinite Scrolling" value="infinite-scrolling" />
           <Link href="/docs/examples" passHref legacyBehavior>
             <Tab
               label={
@@ -48,11 +43,13 @@ const RemoteFetchingExamples = ({ isPage = false }) => {
         </Tabs>
       </Box>
       <Box>
-        {activeTab === 'react-query' && <ReactQueryExample />}
-        {activeTab === 'remote' && <RemoteExample />}
+        {activeTab === 'virtualized' && <FullyVirtualizedExample />}
+        {activeTab === 'row-virtualization' && <RowVirtualization />}
+        {activeTab === 'column-virtualization' && <ColumnVirtualization />}
+        {activeTab === 'infinite-scrolling' && <InfiniteScrolling />}
       </Box>
     </>
   );
 };
 
-export default RemoteFetchingExamples;
+export default VirtualizedExamples;

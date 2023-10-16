@@ -186,7 +186,7 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
         ...draggingBorders,
       })}
     >
-      {header.isPlaceholder ? null : (
+      {header.isPlaceholder || column.id === 'mrt-row-spacer' ? null : (
         <Box
           className="Mui-TableHeadCell-Content"
           sx={{

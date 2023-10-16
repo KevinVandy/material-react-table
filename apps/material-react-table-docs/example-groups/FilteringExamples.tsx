@@ -3,6 +3,7 @@ import { Box, Tab, Tabs } from '@mui/material';
 import FilterVariantsExample from '../examples/customize-filter-variants';
 import FacetedValuesExample from '../examples/enable-filter-facet-values';
 import FilterModesExample from '../examples/customize-filter-modes';
+import PopoverFiltersExample from '../examples/alternate-column-filtering'
 import { useState } from 'react';
 import Link from 'next/link';
 import LaunchIcon from '@mui/icons-material/Launch';
@@ -27,6 +28,7 @@ const FilteringExamples = ({ isPage = false }) => {
           <Tab label="Filter Variants" value="filter-variants" />
           <Tab label="Faceted Values" value="faceted-values" />
           <Tab label="Filter Switching" value="filter-switching" />
+          <Tab label="Popover Filters" value="popover-filters" />
           <Tab
             label={
               <Box>
@@ -53,6 +55,7 @@ const FilteringExamples = ({ isPage = false }) => {
         {activeTab === 'filter-variants' && <FilterVariantsExample />}
         {activeTab === 'faceted-values' && <FacetedValuesExample />}
         {activeTab === 'filter-switching' && <FilterModesExample />}
+        {activeTab === 'popover-filters' && <PopoverFiltersExample />}
       </Box>
     </>
   );

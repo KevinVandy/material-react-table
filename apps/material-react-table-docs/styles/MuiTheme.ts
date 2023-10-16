@@ -17,6 +17,22 @@ export const theme = ({
         main: isLightTheme ? darken(secondaryColor, 0.1) : secondaryColor,
       },
     },
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            textTransform: 'none',
+          },
+        },
+      },
+      MuiTab: {
+        styleOverrides: {
+          root: {
+            textTransform: 'none',
+          },
+        },
+      },
+    },
     typography: {
       h1: {
         fontSize: '1.8rem',

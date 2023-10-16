@@ -81,6 +81,7 @@ export const SampleCodeSnippet = (props: Props) => {
                   ? '2rem auto'
                   : 0,
               fontSize: '11pt',
+              lineHeight: '1.4rem',
             }}
           >
             {props.enableCopyButton !== false && (

@@ -139,7 +139,7 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>({
           ) && {
             columnDefType: 'display',
             header: '',
-            id: 'spacer',
+            id: 'mrt-row-spacer',
             muiTableBodyCellProps: blankColProps,
             muiTableFooterCellProps: blankColProps,
             muiTableHeadCellProps: blankColProps,

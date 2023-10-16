@@ -174,17 +174,27 @@ export const routes: Array<RouteItem> = [
         secondaryItems: [
           {
             href: '/docs/examples/remote',
-            label: 'Remote Data Fetching',
+            label: 'Remote Data Fetching Example',
           },
         ],
       },
       {
         href: '/docs/examples/virtualized',
-        label: 'Virtualized Example',
-      },
-      {
-        href: '/docs/examples/infinite-scrolling',
-        label: 'Infinite Scrolling Example',
+        label: 'Virtualized Examples',
+        secondaryItems: [
+          {
+            href: '/docs/examples/row-virtualization',
+            label: 'Row Virtualization Example',
+          },
+          {
+            href: '/docs/examples/column-virtualization',
+            label: 'Column Virtualization Example',
+          },
+          {
+            href: '/docs/examples/infinite-scrolling',
+            label: 'Infinite Scrolling Example',
+          },
+        ],
       },
       {
         href: 'https://www.material-react-table.dev',
