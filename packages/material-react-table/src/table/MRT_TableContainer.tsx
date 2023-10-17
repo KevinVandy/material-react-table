@@ -38,7 +38,7 @@ export const MRT_TableContainer = <TData extends MRT_RowData>({
   } = getState();
 
   const loading =
-    (isLoading || showLoadingOverlay) && showLoadingOverlay !== false;
+    showLoadingOverlay !== false && (isLoading || showLoadingOverlay);
 
   const [totalToolbarHeight, setTotalToolbarHeight] = useState(0);
 

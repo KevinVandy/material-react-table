@@ -1,249 +1,330 @@
-import { useCallback, useMemo, useState } from 'react';
-import { MaterialReactTable } from 'material-react-table';
+import { useMemo, useState } from 'react';
+import {
+  MRT_EditActionButtons,
+  MaterialReactTable,
+  // createRow,
+  useMaterialReactTable,
+} from 'material-react-table';
 import {
   Box,
   Button,
-  Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   IconButton,
-  MenuItem,
-  Stack,
-  TextField,
   Tooltip,
 } from '@mui/material';
-import { Delete, Edit } from '@mui/icons-material';
-import { data, states } from './makeData';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
+import { fakeData, usStates } from './makeData';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Example = () => {
-  const [createModalOpen, setCreateModalOpen] = useState(false);
-  const [tableData, setTableData] = useState(() => data);
   const [validationErrors, setValidationErrors] = useState({});
-
-  const handleCreateNewRow = (values) => {
-    tableData.push(values);
-    setTableData([...tableData]);
-  };
-
-  const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
-    if (!Object.keys(validationErrors).length) {
-      tableData[row.index] = values;
-      //send/receive api updates here, then refetch or update local table data for re-render
-      setTableData([...tableData]);
-      exitEditingMode(); //required to exit editing mode and close modal
-    }
-  };
-
-  const handleCancelRowEdits = () => {
-    setValidationErrors({});
-  };
-
-  const handleDeleteRow = useCallback(
-    (row) => {
-      if (
-        !confirm(`Are you sure you want to delete ${row.getValue('firstName')}`)
-      ) {
-        return;
-      }
-      //send api delete request here, then refetch or update local table data for re-render
-      tableData.splice(row.index, 1);
-      setTableData([...tableData]);
-    },
-    [tableData],
-  );
-
-  const getCommonEditTextFieldProps = useCallback(
-    (cell) => {
-      return {
-        error: !!validationErrors[cell.id],
-        helperText: validationErrors[cell.id],
-        onBlur: (event) => {
-          const isValid =
-            cell.column.id === 'email'
-              ? validateEmail(event.target.value)
-              : cell.column.id === 'age'
-              ? validateAge(+event.target.value)
-              : validateRequired(event.target.value);
-          if (!isValid) {
-            //set validation error for cell if invalid
-            setValidationErrors({
-              ...validationErrors,
-              [cell.id]: `${cell.column.columnDef.header} is required`,
-            });
-          } else {
-            //remove validation error for cell if valid
-            delete validationErrors[cell.id];
-            setValidationErrors({
-              ...validationErrors,
-            });
-          }
-        },
-      };
-    },
-    [validationErrors],
-  );
 
   const columns = useMemo(
     () => [
       {
         accessorKey: 'id',
-        header: 'ID',
-        enableColumnOrdering: false,
-        enableEditing: false, //disable editing on this column
-        enableSorting: false,
+        header: 'Id',
+        enableEditing: false,
         size: 80,
       },
       {
         accessorKey: 'firstName',
         header: 'First Name',
-        size: 140,
-        muiEditTextFieldProps: ({ cell }) => ({
-          ...getCommonEditTextFieldProps(cell),
-        }),
+        muiEditTextFieldProps: {
+          type: 'email',
+          required: true,
+          error: !!validationErrors?.firstName,
+          helperText: validationErrors?.firstName,
+          //remove any previous validation errors when user focuses on the input
+          onFocus: () =>
+            setValidationErrors({
+              ...validationErrors,
+              firstName: undefined,
+            }),
+          //optionally add validation checking for onBlur or onChange
+        },
       },
       {
         accessorKey: 'lastName',
         header: 'Last Name',
-        size: 140,
-        muiEditTextFieldProps: ({ cell }) => ({
-          ...getCommonEditTextFieldProps(cell),
-        }),
+        muiEditTextFieldProps: {
+          type: 'email',
+          required: true,
+          error: !!validationErrors?.lastName,
+          helperText: validationErrors?.lastName,
+          //remove any previous validation errors when user focuses on the input
+          onFocus: () =>
+            setValidationErrors({
+              ...validationErrors,
+              lastName: undefined,
+            }),
+        },
       },
       {
         accessorKey: 'email',
         header: 'Email',
-        muiEditTextFieldProps: ({ cell }) => ({
-          ...getCommonEditTextFieldProps(cell),
+        muiEditTextFieldProps: {
           type: 'email',
-        }),
-      },
-      {
-        accessorKey: 'age',
-        header: 'Age',
-        size: 80,
-        muiEditTextFieldProps: ({ cell }) => ({
-          ...getCommonEditTextFieldProps(cell),
-          type: 'number',
-        }),
+          required: true,
+          error: !!validationErrors?.email,
+          helperText: validationErrors?.email,
+          //remove any previous validation errors when user focuses on the input
+          onFocus: () =>
+            setValidationErrors({
+              ...validationErrors,
+              email: undefined,
+            }),
+        },
       },
       {
         accessorKey: 'state',
         header: 'State',
+        editVariant: 'select',
+        editSelectOptions: usStates,
         muiEditTextFieldProps: {
-          select: true, //change to select for a dropdown
-          children: states.map((state) => (
-            <MenuItem key={state} value={state}>
-              {state}
-            </MenuItem>
-          )),
+          select: true,
+          error: !!validationErrors?.state,
+          helperText: validationErrors?.state,
         },
       },
     ],
-    [getCommonEditTextFieldProps],
+    [validationErrors],
   );
 
-  return (
-    <>
-      <MaterialReactTable
-        displayColumnDefOptions={{
-          'mrt-row-actions': {
-            muiTableHeadCellProps: {
-              align: 'center',
-            },
-            size: 120,
-          },
-        }}
-        columns={columns}
-        data={tableData}
-        editDisplayMode="modal" //default
-        enableColumnOrdering
-        enableEditing
-        onEditingRowSave={handleSaveRowEdits}
-        onEditingRowCancel={handleCancelRowEdits}
-        renderRowActions={({ row, table }) => (
-          <Box sx={{ display: 'flex', gap: '1rem' }}>
-            <Tooltip arrow placement="left" title="Edit">
-              <IconButton onClick={() => table.setEditingRow(row)}>
-                <Edit />
-              </IconButton>
-            </Tooltip>
-            <Tooltip arrow placement="right" title="Delete">
-              <IconButton color="error" onClick={() => handleDeleteRow(row)}>
-                <Delete />
-              </IconButton>
-            </Tooltip>
-          </Box>
-        )}
-        renderTopToolbarCustomActions={() => (
-          <Button
-            color="secondary"
-            onClick={() => setCreateModalOpen(true)}
-            variant="contained"
-          >
-            Create New Account
-          </Button>
-        )}
-      />
-      <CreateNewAccountModal
-        columns={columns}
-        open={createModalOpen}
-        onClose={() => setCreateModalOpen(false)}
-        onSubmit={handleCreateNewRow}
-      />
-    </>
-  );
-};
+  //call CREATE hook
+  const { mutateAsync: createUser, isLoading: isCreatingUser } =
+    useCreateUser();
+  //call READ hook
+  const {
+    data: fetchedUsers = [],
+    isError: isLoadingUsersError,
+    isFetching: isFetchingUsers,
+    isLoading: isLoadingUsers,
+  } = useGetUsers();
+  //call UPDATE hook
+  const { mutateAsync: updateUser, isLoading: isUpdatingUser } =
+    useUpdateUser();
+  //call DELETE hook
+  const { mutateAsync: deleteUser, isLoading: isDeletingUser } =
+    useDeleteUser();
 
-//example of creating a mui dialog modal for creating new rows
-export const CreateNewAccountModal = ({ open, columns, onClose, onSubmit }) => {
-  const [values, setValues] = useState(() =>
-    columns.reduce((acc, column) => {
-      acc[column.accessorKey ?? ''] = '';
-      return acc;
-    }, {}),
-  );
-
-  const handleSubmit = () => {
-    //put your validation logic here
-    onSubmit(values);
-    onClose();
+  //CREATE action
+  const handleCreateUser = async ({ values, table }) => {
+    const newValidationErrors = validateUser(values);
+    if (Object.values(newValidationErrors).some((error) => error)) {
+      setValidationErrors(newValidationErrors);
+      return;
+    }
+    setValidationErrors({});
+    await createUser(values);
+    table.setCreatingRow(null); //exit creating mode
   };
 
-  return (
-    <Dialog open={open}>
-      <DialogTitle textAlign="center">Create New Account</DialogTitle>
-      <DialogContent>
-        <form onSubmit={(e) => e.preventDefault()}>
-          <Stack
-            sx={{
-              width: '100%',
-              minWidth: { xs: '300px', sm: '360px', md: '400px' },
-              gap: '1.5rem',
-            }}
-          >
-            {columns.map((column) => (
-              <TextField
-                key={column.accessorKey}
-                label={column.header}
-                name={column.accessorKey}
-                onChange={(e) =>
-                  setValues({ ...values, [e.target.name]: e.target.value })
-                }
-              />
-            ))}
-          </Stack>
-        </form>
-      </DialogContent>
-      <DialogActions sx={{ p: '1.25rem' }}>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button color="secondary" onClick={handleSubmit} variant="contained">
-          Create New Account
-        </Button>
-      </DialogActions>
-    </Dialog>
-  );
+  //UPDATE action
+  const handleSaveUser = async ({ values, table }) => {
+    const newValidationErrors = validateUser(values);
+    if (Object.values(newValidationErrors).some((error) => error)) {
+      setValidationErrors(newValidationErrors);
+      return;
+    }
+    setValidationErrors({});
+    await updateUser(values);
+    table.setEditingRow(null); //exit editing mode
+  };
+
+  //DELETE action
+  const openDeleteConfirmModal = (row) => {
+    if (window.confirm('Are you sure you want to delete this user?')) {
+      deleteUser(row.original.id);
+    }
+  };
+
+  const table = useMaterialReactTable({
+    columns,
+    data: fetchedUsers,
+    createDisplayMode: 'modal', //default ('row', and 'custom' are also available)
+    editDisplayMode: 'modal', //default ('row', 'cell', 'table', and 'custom' are also available)
+    enableEditing: true,
+    getRowId: (row) => row.id,
+    muiToolbarAlertBannerProps: isLoadingUsersError
+      ? {
+          color: 'error',
+          children: 'Error loading data',
+        }
+      : undefined,
+    muiTableContainerProps: {
+      sx: {
+        minHeight: '500px',
+      },
+    },
+    onCreatingRowCancel: () => setValidationErrors({}),
+    onCreatingRowSave: handleCreateUser,
+    onEditingRowCancel: () => setValidationErrors({}),
+    onEditingRowSave: handleSaveUser,
+    //optionally customize modal content
+    renderCreateRowModalContent: ({ table, row, internalEditComponents }) => (
+      <>
+        <DialogTitle variant="h3">Create New User</DialogTitle>
+        <DialogContent
+          sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+        >
+          {internalEditComponents} {/* or render custom edit components here */}
+        </DialogContent>
+        <DialogActions>
+          <MRT_EditActionButtons variant="text" table={table} row={row} />
+        </DialogActions>
+      </>
+    ),
+    //optionally customize modal content
+    renderEditRowModalContent: ({ table, row, internalEditComponents }) => (
+      <>
+        <DialogTitle variant="h3">Edit User</DialogTitle>
+        <DialogContent
+          sx={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
+        >
+          {internalEditComponents} {/* or render custom edit components here */}
+        </DialogContent>
+        <DialogActions>
+          <MRT_EditActionButtons variant="text" table={table} row={row} />
+        </DialogActions>
+      </>
+    ),
+    renderRowActions: ({ row, table }) => (
+      <Box sx={{ display: 'flex', gap: '1rem' }}>
+        <Tooltip title="Edit">
+          <IconButton onClick={() => table.setEditingRow(row)}>
+            <EditIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Delete">
+          <IconButton color="error" onClick={() => openDeleteConfirmModal(row)}>
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
+      </Box>
+    ),
+    renderTopToolbarCustomActions: ({ table }) => (
+      <Button
+        variant="contained"
+        onClick={() => {
+          table.setCreatingRow(true); //simplest way to open the create row modal with no default values
+          //or you can pass in a row object to set default values with the `createRow` helper function
+          // table.setCreatingRow(
+          //   createRow(table, {
+          //     //optionally pass in default values for the new row, useful for nested data or other complex scenarios
+          //   }),
+          // );
+        }}
+      >
+        Create New User
+      </Button>
+    ),
+    state: {
+      isLoading: isLoadingUsers,
+      isSaving: isCreatingUser || isUpdatingUser || isDeletingUser,
+      showAlertBanner: isLoadingUsersError,
+      showProgressBars: isFetchingUsers,
+    },
+  });
+
+  return <MaterialReactTable table={table} />;
 };
+
+//CREATE hook (post new user to api)
+function useCreateUser() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (user) => {
+      //send api update request here
+      await new Promise((resolve) => setTimeout(resolve, 1000)); //fake api call
+      return Promise.resolve();
+    },
+    //client side optimistic update
+    onMutate: (newUserInfo) => {
+      queryClient.setQueryData(['users'], (prevUsers) => [
+        ...prevUsers,
+        {
+          ...newUserInfo,
+          id: (Math.random() + 1).toString(36).substring(7),
+        },
+      ]);
+    },
+    // onSettled: () => queryClient.invalidateQueries({ queryKey: ['users'] }), //refetch users after mutation, disabled for demo
+  });
+}
+
+//READ hook (get users from api)
+function useGetUsers() {
+  return useQuery({
+    queryKey: ['users'],
+    queryFn: async () => {
+      //send api request here
+      await new Promise((resolve) => setTimeout(resolve, 1000)); //fake api call
+      return Promise.resolve(fakeData);
+    },
+    refetchOnWindowFocus: false,
+  });
+}
+
+//UPDATE hook (put user in api)
+function useUpdateUser() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (user) => {
+      //send api update request here
+      await new Promise((resolve) => setTimeout(resolve, 1000)); //fake api call
+      return Promise.resolve();
+    },
+    //client side optimistic update
+    onMutate: (newUserInfo) => {
+      queryClient.setQueryData(['users'], (prevUsers) =>
+        prevUsers?.map((prevUser) =>
+          prevUser.id === newUserInfo.id ? newUserInfo : prevUser,
+        ),
+      );
+    },
+    // onSettled: () => queryClient.invalidateQueries({ queryKey: ['users'] }), //refetch users after mutation, disabled for demo
+  });
+}
+
+//DELETE hook (delete user in api)
+function useDeleteUser() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (userId) => {
+      //send api update request here
+      await new Promise((resolve) => setTimeout(resolve, 1000)); //fake api call
+      return Promise.resolve();
+    },
+    //client side optimistic update
+    onMutate: (userId) => {
+      queryClient.setQueryData(['users'], (prevUsers) =>
+        prevUsers?.filter((user) => user.id !== userId),
+      );
+    },
+    // onSettled: () => queryClient.invalidateQueries({ queryKey: ['users'] }), //refetch users after mutation, disabled for demo
+  });
+}
+
+const queryClient = new QueryClient();
+
+const ExampleWithProviders = () => (
+  //Put this with your other react-query providers near root of your app
+  <QueryClientProvider client={queryClient}>
+    <Example />
+  </QueryClientProvider>
+);
+
+export default ExampleWithProviders;
 
 const validateRequired = (value) => !!value.length;
 const validateEmail = (email) =>
@@ -253,6 +334,13 @@ const validateEmail = (email) =>
     .match(
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     );
-const validateAge = (age) => age >= 18 && age <= 50;
 
-export default Example;
+function validateUser(user) {
+  return {
+    firstName: !validateRequired(user.firstName)
+      ? 'First Name is Required'
+      : '',
+    lastName: !validateRequired(user.lastName) ? 'Last Name is Required' : '',
+    email: !validateEmail(user.email) ? 'Incorrect Email Format' : '',
+  };
+}

@@ -129,9 +129,20 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
       InputProps={{
         disableUnderline: editDisplayMode === 'table',
         ...textFieldProps.InputProps,
+        sx: (theme) => ({
+          mb: 0,
+          ...(parseFromValuesOrFunc(
+            textFieldProps?.InputProps?.sx,
+            theme,
+          ) as any),
+        }),
       }}
       inputProps={{
         autoComplete: 'new-password', // disable autocomplete and autofill
+        sx: {
+          p: 0,
+          ...textFieldProps?.inputProps?.sx,
+        },
         ...textFieldProps.inputProps,
       }}
       onBlur={handleBlur}

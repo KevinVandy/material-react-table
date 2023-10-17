@@ -94,7 +94,7 @@ export const MRT_EditRowModal = <TData extends MRT_RowData>({
             <form onSubmit={(e) => e.preventDefault()}>
               <Stack
                 sx={{
-                  gap: '24px',
+                  gap: '32px',
                   paddingTop: '16px',
                   width: '100%',
                 }}

@@ -200,7 +200,7 @@ const Example = () => {
       <>
         <DialogTitle variant="h3">Edit User</DialogTitle>
         <DialogContent
-          sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+          sx={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
         >
           {internalEditComponents} {/* or render custom edit components here */}
         </DialogContent>
