@@ -31,7 +31,6 @@ export const MRT_Table = <TData extends MRT_RowData>({
       columnVirtualizerOptions,
       columns,
       enableColumnPinning,
-      enableColumnResizing,
       enableColumnVirtualization,
       enableStickyHeader,
       enableTableFooter,
@@ -168,10 +167,6 @@ export const MRT_Table = <TData extends MRT_RowData>({
       sx={(theme) => ({
         borderCollapse: 'separate',
         display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-        tableLayout:
-          layoutMode === 'semantic' && enableColumnResizing
-            ? 'fixed'
-            : undefined,
         ...(parseFromValuesOrFunc(tableProps?.sx, theme) as any),
       })}
     >

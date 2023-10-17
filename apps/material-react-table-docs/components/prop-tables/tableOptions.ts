@@ -914,13 +914,13 @@ export const tableOptions: TableOption[] = [
   },
   {
     tableOption: 'layoutMode',
-    defaultValue: "'semantic'",
+    defaultValue: "'semantic' //(changes based on other enabled features)",
     description: '',
     link: '/docs/guides/',
     linkText: 'TODO',
     required: false,
     source: 'MRT',
-    type: "'semantic' | 'grid'",
+    type: "'semantic' | 'grid' | 'grid-no-grow'",
   },
   {
     tableOption: 'localization',

@@ -171,7 +171,6 @@ export const getLeadingDisplayColumnIds = <TData extends MRT_RowData>(
       'mrt-row-expand',
     props.enableRowSelection && 'mrt-row-select',
     props.enableRowNumbers && 'mrt-row-numbers',
-    props.layoutMode === 'grid-no-grow' && 'mrt-row-spacer',
   ].filter(Boolean) as MRT_DisplayColumnIds[];
 
 export const getTrailingDisplayColumnIds = <TData extends MRT_RowData>(
@@ -186,6 +185,7 @@ export const getTrailingDisplayColumnIds = <TData extends MRT_RowData>(
     props.positionExpandColumn === 'last' &&
       showExpandColumn(props) &&
       'mrt-row-expand',
+    props.layoutMode === 'grid-no-grow' && 'mrt-row-spacer',
   ].filter(Boolean) as MRT_DisplayColumnIds[];
 
 export const getDefaultColumnOrderIds = <TData extends MRT_RowData>(

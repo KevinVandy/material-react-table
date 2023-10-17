@@ -39,7 +39,10 @@ export const SampleCodeSnippet = (props: Props) => {
     return (
       <code
         style={{
-          backgroundColor: alpha(theme.palette.primary.main, 0.2),
+          backgroundColor: alpha(
+            theme.palette.primary.main,
+            theme.palette.mode === 'dark' ? 0.2 : 0.1,
+          ),
           padding: '4px',
           margin: '0 0.5ch',
           fontSize: '11pt',

@@ -3,10 +3,11 @@ import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import Example from '../../../examples/enable-column-resizing';
-import NoGrowExample from '../../../examples/enable-column-resizing-no-grow';
 
 <Head>
-  <title>Column Resizing Feature Guide - Material React Table V2 Docs</title>
+  <title>
+    {'Column Resizing Feature Guide - Material React Table V2 Docs'}
+  </title>
   <meta
     name="description"
     content="How to use and customize the column resizing features of Material React Table"
@@ -17,8 +18,6 @@ import NoGrowExample from '../../../examples/enable-column-resizing-no-grow';
 
 Material React Table lets you easily change the default widths (sizes) of columns and has a built-in column resizing draggable handle feature.
 
-> Upgrade to MRT v1.7.0 for big column resizing performance improvements!
-
 ### Relevant Props
 
 <TableOptionsTable
@@ -27,6 +26,7 @@ Material React Table lets you easily change the default widths (sizes) of column
       'columnResizeMode',
       'defaultColumn',
       'enableColumnResizing',
+      'layoutMode',
       'onColumnSizingChange',
       'onColumnSizingInfoChange',
     ])
@@ -41,7 +41,17 @@ Material React Table lets you easily change the default widths (sizes) of column
 
 ### Relevant State
 
-<StateOptionsTable onlyOptions={new Set(['columnSizing', 'columnSizingInfo'])} />
+<StateOptionsTable
+  onlyOptions={new Set(['columnSizing', 'columnSizingInfo'])}
+/>
+
+### Layout Modes
+
+Material React Table has 3 layout modes that affect how columns styles are applied internally. Depending on which features you enable, the `layoutMode` table option will automatically change to the appropriate value, though you can override it with your own value if you want.
+
+1. `"semantic"` (default with default features) - uses default css styles that come with `<table>`, `<tr>`, `<td>`, etc. elements.
+2. `"grid"` (default when virtualization is enabled) - uses CSS Grid and Flexbox styles instead of default styles.
+3. `"grid-no-grow"` (default when column resizing is enabled) - uses CSS Grid and Flexbox styles, but also sets `flex-grow: 0` on all columns.
 
 ### Change Default Column Widths
 
@@ -51,7 +61,7 @@ This was also covered in the [Data Columns Guide](/docs/guides/data-columns), bu
 
 You can change the width of any column by setting its `size` option on the column definition. `minSize` and `maxSize` are also available to enforce limits during resizing.
 
-```tsx
+```jsx
 const columns = [
   {
     accessorKey: 'id',
@@ -73,37 +83,17 @@ const columns = [
 ];
 ```
 
-You may notice, however, that the column sizes might not change as much as you would expect. This is because the browser treats `<th>` and `<td>` elements differently with in a `<table>` element by default.
-
-You can improve this slightly by changing the table layout to `"fixed"` instead of the default `"auto"` in the `muiTableProps`. Though note that this only works if you are using the default `"semantic"` layout mode (and no virtualization features).
-
-```tsx
-<MaterialReactTable
-  muiTableProps={{
-    sx: {
-      tableLayout: 'fixed',
-    },
-  }}
-/>
-```
-
-The columns will still try to increase their width to take up the full width of the table, but the columns that do have a defined size will have their width respected more.
-
-For further reading on how table-layout `fixed` vs `auto` works, we recommend reading this [blog post](https://css-tricks.com/almanac/properties/t/table-layout/) by CSS-Tricks.
-
-If you are using either virtualization features or have the layoutMode set to `"grid"`, another option is to turn off flex grow for both the table head and body cells. [You can see this down below at the bottom of this page](#disable-column-growing)
-
 #### Default Column
 
 By default, columns will have the following size properties defined:
 
-```tsx
+```jsx
 defaultColumn = { minSize: 40, maxSize: 1000, size: 180 }; //units are in px
 ```
 
 You can modify the default column widths by setting the `defaultColumn` prop on the table.
 
-```tsx
+```jsx
 <MaterialReactTable
   columns={columns}
   data={data}
@@ -119,21 +109,17 @@ You can modify the default column widths by setting the `defaultColumn` prop on 
 
 `enableColumnResizing` is the boolean prop that enables the column resizing feature.
 
-```tsx
+```jsx
 <MaterialReactTable columns={columns} data={data} enableColumnResizing />
 ```
 
 You can disable specific columns from being resizable by setting the `enableResizing` column option to false in their respective column definition.
 
-> When Column Resizing is enabled and the layoutMode is still set to the default `"semantic"` value, a CSS `table-layout: fixed` style is automatically added to the `<table>` element in order to make the browser respect the widths of the columns more.
-
 #### Column Resize Mode
-
-> The default columnResizeMode was changed to `"onChange"` in v1.7.0 instead of `"onEnd"` because most of the column resizing performance issues were fixed.
 
 The default `columnResizeMode` is `onChange` (in MRT versions v1.7+), which means that the column resizing will occur immediately as the user drags the column resize handle. If you are running into performance issues because of many other enabled features, you might want to set the `columnResizeMode` to `onEnd` instead. This will make the column resizing only occur after the user has finished dragging the column resize handle and released their mouse.
 
-```tsx
+```jsx
 <MaterialReactTable
   columns={columns}
   data={data}
@@ -144,31 +130,19 @@ The default `columnResizeMode` is `onChange` (in MRT versions v1.7+), which mean
 
 <Example />
 
-#### Disable Column Growing
+#### Enable Column Growing
 
-> New in v1.7
+> MRT V2 has a new "opposite" behavior in regards to column sizes when column resizing is enabled compared to MRT V2
 
-If you want to prevent the columns from growing to fill the width of the table, use this flexbox trick when the layoutMode is `"grid"`:
+When column resizing is enabled, by default, a layoutMode of `"grid-no-grow"` will be applied internally. This means that columns will have an absolute size and they will not grow to fill in the remaining space of the table.
 
-```tsx
+```jsx
 <MaterialReactTable
   columns={columns}
   data={data}
   enableColumnResizing
-  layoutMode="grid" //instead of the default "semantic" layout mode
-  muiTableHeadCellProps={{
-    sx: {
-      flex: '0 0 auto',
-    },
-  }}
-  muiTableBodyCellProps={{
-    sx: {
-      flex: '0 0 auto',
-    },
-  }}
+  layoutMode="grid" //instead of the default "grid-no-grow" when column resizing is enabled
 />
 ```
-
-<NoGrowExample />
 
 View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-column-resizing-examples)**

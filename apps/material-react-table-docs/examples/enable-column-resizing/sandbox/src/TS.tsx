@@ -12,22 +12,22 @@ const Example = () => {
       {
         accessorKey: 'lastName',
         header: 'Last Name',
-        enableResizing: false, //disable resizing for this column
       },
       {
         accessorKey: 'email',
         header: 'Email Address',
-        size: 200, //increase the width of this column
+        size: 250, //increase the width of this column
       },
       {
         accessorKey: 'city',
         header: 'City',
-        size: 120, //decrease the width of this column
+        size: 200, //decrease the width of this column
+        enableResizing: false, //disable resizing for this column
       },
       {
         accessorKey: 'country',
         header: 'Country',
-        size: 100, //decrease the width of this column
+        size: 140, //decrease the width of this column
       },
     ],
     [],
@@ -41,7 +41,7 @@ const Example = () => {
       defaultColumn={{
         maxSize: 400,
         minSize: 80,
-        size: 150, //default size is usually 180
+        size: 160, //default size is usually 180
       }}
       enableColumnResizing
       columnResizeMode="onChange" //default
