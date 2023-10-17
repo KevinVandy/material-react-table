@@ -27,17 +27,20 @@ export const MRT_TableHeadCellSortLabel = <TData extends MRT_RowData>({
   } = table;
   const { column } = header;
   const { columnDef } = column;
-  const { sorting } = getState();
+  const { isLoading, showSkeletons, sorting } = getState();
 
   const isSorted = !!column.getIsSorted();
 
-  const sortTooltip = column.getIsSorted()
-    ? column.getIsSorted() === 'desc'
-      ? localization.sortedByColumnDesc.replace('{column}', columnDef.header)
-      : localization.sortedByColumnAsc.replace('{column}', columnDef.header)
-    : column.getNextSortingOrder() === 'desc'
-    ? localization.sortByColumnDesc.replace('{column}', columnDef.header)
-    : localization.sortByColumnAsc.replace('{column}', columnDef.header);
+  const sortTooltip =
+    isLoading || showSkeletons
+      ? ''
+      : column.getIsSorted()
+      ? column.getIsSorted() === 'desc'
+        ? localization.sortedByColumnDesc.replace('{column}', columnDef.header)
+        : localization.sortedByColumnAsc.replace('{column}', columnDef.header)
+      : column.getNextSortingOrder() === 'desc'
+      ? localization.sortByColumnDesc.replace('{column}', columnDef.header)
+      : localization.sortByColumnAsc.replace('{column}', columnDef.header);
 
   return (
     <Tooltip arrow placement="top" title={sortTooltip}>

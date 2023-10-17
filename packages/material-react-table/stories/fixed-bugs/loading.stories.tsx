@@ -228,7 +228,7 @@ export const AccessorKeyWhileLoading = () => {
     //column definitions...
     () => [
       {
-        accessorFn: (row) => `${row.name.firstName} ${row.name.lastName}`,
+        accessorFn: (row) => `${row.name.firstName.toUpperCase()} ${row.name.lastName.toUpperCase()}`,
         header: 'Name',
         id: 'name',
       },
@@ -253,12 +253,6 @@ export const AccessorKeyWhileLoading = () => {
     <MaterialReactTable
       columns={columns}
       data={[]}
-      enableBottomToolbar={false}
-      enableColumnActions={false}
-      enableColumnFilters={false}
-      enablePagination={false}
-      enableSorting={false}
-      enableTopToolbar={false}
       state={{ isLoading: true }}
     />
   );
