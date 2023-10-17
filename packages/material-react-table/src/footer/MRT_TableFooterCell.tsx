@@ -1,4 +1,4 @@
-import TableCell from '@mui/material/TableCell';
+import TableCell, { type TableCellProps } from '@mui/material/TableCell';
 import { getCommonCellStyles, parseFromValuesOrFunc } from '../column.utils';
 import {
   type MRT_Header,
@@ -6,7 +6,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends TableCellProps {
   footer: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -14,6 +14,7 @@ interface Props<TData extends MRT_RowData> {
 export const MRT_TableFooterCell = <TData extends MRT_RowData>({
   footer,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -24,12 +25,11 @@ export const MRT_TableFooterCell = <TData extends MRT_RowData>({
   const { columnDef } = column;
   const { columnDefType } = columnDef;
 
+  const args = { column, table };
   const tableCellProps = {
-    ...parseFromValuesOrFunc(muiTableFooterCellProps, { column, table }),
-    ...parseFromValuesOrFunc(columnDef.muiTableFooterCellProps, {
-      column,
-      table,
-    }),
+    ...parseFromValuesOrFunc(muiTableFooterCellProps, args),
+    ...parseFromValuesOrFunc(columnDef.muiTableFooterCellProps, args),
+    ...rest,
   };
 
   return (
@@ -39,7 +39,7 @@ export const MRT_TableFooterCell = <TData extends MRT_RowData>({
       variant="head"
       {...tableCellProps}
       sx={(theme) => ({
-        display: layoutMode?.startsWith('grid') ? 'grid' : 'table-cell',
+        display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
         fontWeight: 'bold',
         justifyContent: columnDefType === 'group' ? 'center' : undefined,
         p:
@@ -56,10 +56,11 @@ export const MRT_TableFooterCell = <TData extends MRT_RowData>({
           tableCellProps,
           theme,
         }),
+        ...(parseFromValuesOrFunc(tableCellProps?.sx, theme) as any),
       })}
     >
-      <>
-        {footer.isPlaceholder
+      {tableCellProps.children ??
+        (footer.isPlaceholder
           ? null
           : parseFromValuesOrFunc(columnDef.Footer, {
               column,
@@ -67,8 +68,7 @@ export const MRT_TableFooterCell = <TData extends MRT_RowData>({
               table,
             }) ??
             columnDef.footer ??
-            null}
-      </>
+            null)}
     </TableCell>
   );
 };

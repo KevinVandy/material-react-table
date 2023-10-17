@@ -16,6 +16,7 @@ import {
 } from '../types';
 
 const blankColProps = {
+  children: null,
   sx: {
     flex: '1 0 auto',
     minWidth: 0,

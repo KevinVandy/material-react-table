@@ -1,5 +1,5 @@
 import { type MouseEvent, useState } from 'react';
-import IconButton from '@mui/material/IconButton';
+import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { MRT_EditActionButtons } from './MRT_EditActionButtons';
 import { parseFromValuesOrFunc } from '../column.utils';
@@ -22,7 +22,7 @@ const commonIconButtonStyles = {
   width: '2rem',
 };
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends IconButtonProps {
   cell: MRT_Cell<TData>;
   row: MRT_Row<TData>;
   table: MRT_TableInstance<TData>;
@@ -32,6 +32,7 @@ export const MRT_ToggleRowActionMenuButton = <TData extends MRT_RowData>({
   cell,
   row,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -84,6 +85,7 @@ export const MRT_ToggleRowActionMenuButton = <TData extends MRT_RowData>({
             aria-label={localization.edit}
             onClick={handleStartEditMode}
             sx={commonIconButtonStyles}
+            {...rest}
           >
             <EditIcon />
           </IconButton>
@@ -101,6 +103,7 @@ export const MRT_ToggleRowActionMenuButton = <TData extends MRT_RowData>({
               onClick={handleOpenRowActionMenu}
               size="small"
               sx={commonIconButtonStyles}
+              {...rest}
             >
               <MoreHorizIcon />
             </IconButton>

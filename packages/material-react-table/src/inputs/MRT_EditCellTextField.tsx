@@ -14,7 +14,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends TextFieldProps<'standard'> {
   cell: MRT_Cell<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -22,6 +22,7 @@ interface Props<TData extends MRT_RowData> {
 export const MRT_EditCellTextField = <TData extends MRT_RowData>({
   cell,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -54,6 +55,7 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
       row,
       table,
     }),
+    ...rest,
   };
 
   const saveInputValueToRowCache = (newValue: string) => {
@@ -120,6 +122,7 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
           : undefined
       }
       select={isSelectEdit}
+      size="small"
       value={value}
       variant="standard"
       {...textFieldProps}

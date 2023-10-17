@@ -1,7 +1,7 @@
 import { type MouseEvent } from 'react';
 import Box from '@mui/material/Box';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Menu from '@mui/material/Menu';
+import Menu, { type MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import {
   commonListItemStyles,
@@ -14,7 +14,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends Partial<MenuProps> {
   anchorEl: HTMLElement | null;
   handleEdit: (event: MouseEvent) => void;
   row: MRT_Row<TData>;
@@ -28,6 +28,7 @@ export const MRT_RowActionMenu = <TData extends MRT_RowData>({
   row,
   setAnchorEl,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -49,6 +50,7 @@ export const MRT_RowActionMenu = <TData extends MRT_RowData>({
       onClick={(event) => event.stopPropagation()}
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
+      {...rest}
     >
       {parseFromValuesOrFunc(enableEditing, row) && (
         <MenuItem onClick={handleEdit} sx={commonMenuItemStyles}>

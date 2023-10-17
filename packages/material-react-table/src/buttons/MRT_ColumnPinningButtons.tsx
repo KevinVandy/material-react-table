@@ -1,13 +1,14 @@
-import Box from '@mui/material/Box';
+import Box, { type BoxProps } from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import { parseFromValuesOrFunc } from '../column.utils';
 import {
   type MRT_Column,
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends BoxProps {
   column: MRT_Column<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -15,6 +16,7 @@ interface Props<TData extends MRT_RowData> {
 export const MRT_ColumnPinningButtons = <TData extends MRT_RowData>({
   column,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     options: {
@@ -28,7 +30,14 @@ export const MRT_ColumnPinningButtons = <TData extends MRT_RowData>({
   };
 
   return (
-    <Box sx={{ minWidth: '70px', textAlign: 'center' }}>
+    <Box
+      {...rest}
+      sx={(theme) => ({
+        minWidth: '70px',
+        textAlign: 'center',
+        ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
+      })}
+    >
       {column.getIsPinned() ? (
         <Tooltip arrow title={localization.unpin}>
           <IconButton onClick={() => handlePinColumn(false)} size="small">

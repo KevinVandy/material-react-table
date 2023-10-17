@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import Box from '@mui/material/Box';
-import Menu from '@mui/material/Menu';
+import Menu, { type MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import {
   type MRT_FilterOption,
@@ -105,7 +105,7 @@ const emptyModes = ['empty', 'notEmpty'];
 const arrModes = ['arrIncludesSome', 'arrIncludesAll', 'arrIncludes'];
 const rangeVariants = ['range-slider', 'date-range', 'range'];
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends Partial<MenuProps> {
   anchorEl: HTMLElement | null;
   header?: MRT_Header<TData>;
   onSelect?: () => void;
@@ -121,6 +121,7 @@ export const MRT_FilterOptionMenu = <TData extends MRT_RowData>({
   setAnchorEl,
   setFilterValue,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -240,6 +241,7 @@ export const MRT_FilterOptionMenu = <TData extends MRT_RowData>({
       anchorOrigin={{ horizontal: 'right', vertical: 'center' }}
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
+      {...rest}
     >
       {(header && column && columnDef
         ? columnDef.renderColumnFilterModeMenuItems?.({

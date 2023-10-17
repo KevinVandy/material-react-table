@@ -1,12 +1,13 @@
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
+import Divider, { type DividerProps } from '@mui/material/Divider';
+import { parseFromValuesOrFunc } from '../column.utils';
 import {
   type MRT_Header,
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends DividerProps {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -14,6 +15,7 @@ interface Props<TData extends MRT_RowData> {
 export const MRT_TableHeadCellResizeHandle = <TData extends MRT_RowData>({
   header,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -62,7 +64,7 @@ export const MRT_TableHeadCellResizeHandle = <TData extends MRT_RowData>({
         className="Mui-TableHeadCell-ResizeHandle-Divider"
         flexItem
         orientation="vertical"
-        sx={{
+        sx={(theme) => ({
           borderRadius: '2px',
           borderWidth: '2px',
           height: '24px',
@@ -72,7 +74,8 @@ export const MRT_TableHeadCellResizeHandle = <TData extends MRT_RowData>({
             : 'all 150ms ease-in-out',
           userSelect: 'none',
           zIndex: 4,
-        }}
+          ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
+        })}
       />
     </Box>
   );

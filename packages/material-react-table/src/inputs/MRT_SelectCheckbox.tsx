@@ -10,7 +10,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends CheckboxProps {
   row?: MRT_Row<TData>;
   selectAll?: boolean;
   table: MRT_TableInstance<TData>;
@@ -20,6 +20,7 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
   row,
   selectAll,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -35,9 +36,12 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
   } = table;
   const { density, isLoading } = getState();
 
-  const checkboxProps = !row
-    ? parseFromValuesOrFunc(muiSelectAllCheckboxProps, { table })
-    : parseFromValuesOrFunc(muiSelectCheckboxProps, { row, table });
+  const checkboxProps = {
+    ...(!row
+      ? parseFromValuesOrFunc(muiSelectAllCheckboxProps, { table })
+      : parseFromValuesOrFunc(muiSelectCheckboxProps, { row, table })),
+    ...rest,
+  };
 
   const allRowsSelected = selectAll
     ? selectAllMode === 'page'

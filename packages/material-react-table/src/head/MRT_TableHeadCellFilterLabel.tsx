@@ -1,17 +1,18 @@
 import { type MouseEvent, useState } from 'react';
 import Box from '@mui/material/Box';
 import Grow from '@mui/material/Grow';
-import IconButton from '@mui/material/IconButton';
+import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
 import Popover from '@mui/material/Popover';
 import Tooltip from '@mui/material/Tooltip';
 import { MRT_TableHeadCellFilterContainer } from './MRT_TableHeadCellFilterContainer';
+import { parseFromValuesOrFunc } from '../column.utils';
 import {
   type MRT_Header,
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends IconButtonProps {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -19,6 +20,7 @@ interface Props<TData extends MRT_RowData> {
 export const MRT_TableHeadCellFilterLabel = <TData extends MRT_RowData = {}>({
   header,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     options: {
@@ -106,7 +108,8 @@ export const MRT_TableHeadCellFilterLabel = <TData extends MRT_RowData = {}>({
                 event.stopPropagation();
               }}
               size="small"
-              sx={{
+              {...rest}
+              sx={(theme) => ({
                 height: '16px',
                 ml: '4px',
                 opacity: isFilterActive ? 1 : 0.3,
@@ -114,7 +117,8 @@ export const MRT_TableHeadCellFilterLabel = <TData extends MRT_RowData = {}>({
                 transform: 'scale(0.75)',
                 transition: 'all 150ms ease-in-out',
                 width: '16px',
-              }}
+                ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
+              })}
             >
               <FilterAltIcon />
             </IconButton>

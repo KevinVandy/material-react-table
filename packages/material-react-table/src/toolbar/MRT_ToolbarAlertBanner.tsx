@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import Alert from '@mui/material/Alert';
+import Alert, { type AlertProps } from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
@@ -9,7 +9,7 @@ import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_SelectCheckbox } from '../inputs';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends AlertProps {
   stackAlertBanner?: boolean;
   table: MRT_TableInstance<TData>;
 }
@@ -17,6 +17,7 @@ interface Props<TData extends MRT_RowData> {
 export const MRT_ToolbarAlertBanner = <TData extends MRT_RowData>({
   stackAlertBanner,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getPrePaginationRowModel,
@@ -36,9 +37,12 @@ export const MRT_ToolbarAlertBanner = <TData extends MRT_RowData>({
   } = table;
   const { density, grouping, showAlertBanner } = getState();
 
-  const alertProps = parseFromValuesOrFunc(muiToolbarAlertBannerProps, {
-    table,
-  });
+  const alertProps = {
+    ...parseFromValuesOrFunc(muiToolbarAlertBannerProps, {
+      table,
+    }),
+    ...rest,
+  };
 
   const chipProps = parseFromValuesOrFunc(muiToolbarAlertBannerChipProps, {
     table,

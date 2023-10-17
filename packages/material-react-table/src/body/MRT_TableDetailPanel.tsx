@@ -1,7 +1,7 @@
 import { type RefObject } from 'react';
 import { type VirtualItem } from '@tanstack/react-virtual';
 import Collapse from '@mui/material/Collapse';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { type TableCellProps } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { lighten } from '@mui/material/styles';
 import { parseFromValuesOrFunc } from '../column.utils';
@@ -11,7 +11,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends TableCellProps {
   parentRowRef: RefObject<HTMLTableRowElement>;
   row: MRT_Row<TData>;
   rowIndex: number;
@@ -25,6 +25,7 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
   rowIndex,
   table,
   virtualRow,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -45,10 +46,13 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
     table,
   });
 
-  const tableCellProps = parseFromValuesOrFunc(muiDetailPanelProps, {
-    row,
-    table,
-  });
+  const tableCellProps = {
+    ...parseFromValuesOrFunc(muiDetailPanelProps, {
+      row,
+      table,
+    }),
+    ...rest,
+  };
 
   return (
     <TableRow
@@ -77,7 +81,7 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
             ? lighten(theme.palette.background.default, 0.05)
             : undefined,
           borderBottom: !row.getIsExpanded() ? 'none' : undefined,
-          display: layoutMode?.startsWith('grid') ? 'flex' : 'table-cell',
+          display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
           py: row.getIsExpanded() ? '1rem' : 0,
           transition: 'all 150ms ease-in-out',
           width: `${table.getTotalSize()}px`,

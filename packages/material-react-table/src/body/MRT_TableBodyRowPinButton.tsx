@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import { type IconButtonProps } from '@mui/material/IconButton';
 import { MRT_RowPinButton } from '../buttons/MRT_RowPinButton';
 import { parseFromValuesOrFunc } from '../column.utils';
 import {
@@ -7,7 +8,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends IconButtonProps {
   row: MRT_Row<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -15,6 +16,7 @@ interface Props<TData extends MRT_RowData> {
 export const MRT_TableBodyRowPinButton = <TData extends MRT_RowData>({
   row,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -26,6 +28,12 @@ export const MRT_TableBodyRowPinButton = <TData extends MRT_RowData>({
 
   if (!canPin) return null;
 
+  const rowPinButtonProps = {
+    row,
+    table,
+    ...rest,
+  };
+
   if (rowPinningDisplayMode === 'top-and-bottom' && !row.getIsPinned()) {
     return (
       <Box
@@ -34,8 +42,8 @@ export const MRT_TableBodyRowPinButton = <TData extends MRT_RowData>({
           flexDirection: density === 'compact' ? 'row' : 'column',
         }}
       >
-        <MRT_RowPinButton pinningPosition="top" row={row} table={table} />
-        <MRT_RowPinButton pinningPosition="bottom" row={row} table={table} />
+        <MRT_RowPinButton pinningPosition="top" {...rowPinButtonProps} />
+        <MRT_RowPinButton pinningPosition="bottom" {...rowPinButtonProps} />
       </Box>
     );
   }
@@ -43,8 +51,7 @@ export const MRT_TableBodyRowPinButton = <TData extends MRT_RowData>({
   return (
     <MRT_RowPinButton
       pinningPosition={rowPinningDisplayMode === 'bottom' ? 'bottom' : 'top'}
-      row={row}
-      table={table}
+      {...rowPinButtonProps}
     />
   );
 };

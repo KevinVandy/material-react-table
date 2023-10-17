@@ -11,7 +11,13 @@ import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
 const defaultRowsPerPage = [5, 10, 15, 20, 25, 30, 50, 100];
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData>
+  extends Partial<
+    PaginationProps & {
+      rowsPerPageOptions?: number[];
+      showRowsPerPage?: boolean;
+    }
+  > {
   position?: 'bottom' | 'top';
   table: MRT_TableInstance<TData>;
 }
@@ -19,6 +25,7 @@ interface Props<TData extends MRT_RowData> {
 export const MRT_TablePagination = <TData extends MRT_RowData>({
   position = 'bottom',
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getPrePaginationRowModel,
@@ -39,9 +46,12 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
     showGlobalFilter,
   } = getState();
 
-  const paginationProps = parseFromValuesOrFunc(muiPaginationProps, {
-    table,
-  });
+  const paginationProps = {
+    ...parseFromValuesOrFunc(muiPaginationProps, {
+      table,
+    }),
+    ...rest,
+  };
 
   const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
   const numberOfPages = Math.ceil(totalRowCount / pageSize);
@@ -54,7 +64,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
     showFirstButton = showFirstLastPageButtons,
     showLastButton = showFirstLastPageButtons,
     showRowsPerPage = true,
-    ...rest
+    ..._rest
   } = paginationProps ?? {};
 
   return (
@@ -73,7 +83,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
             ? '3rem'
             : undefined,
         position: 'relative',
-        px: '4px',
+        px: '8px',
         py: '12px',
         zIndex: 2,
       }}
@@ -119,13 +129,13 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
           )}
           showFirstButton={showFirstButton}
           showLastButton={showLastButton}
-          {...(rest as PaginationProps)}
+          {..._rest}
         />
       ) : paginationDisplayMode === 'default' ? (
         <>
           <Typography
             align="center"
-            sx={{ mb: 0, minWidth: '10ch', mx: '4px' }}
+            sx={{ mb: 0, minWidth: '8ch', mx: '4px' }}
             variant="body2"
           >{`${
             lastRowIndex === 0 ? 0 : (firstRowIndex + 1).toLocaleString()

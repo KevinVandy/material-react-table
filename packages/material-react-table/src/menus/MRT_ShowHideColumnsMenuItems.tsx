@@ -7,20 +7,20 @@ import {
 } from 'react';
 import Box from '@mui/material/Box';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import MenuItem from '@mui/material/MenuItem';
+import MenuItem, { type MenuItemProps } from '@mui/material/MenuItem';
 import Switch from '@mui/material/Switch';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { MRT_ColumnPinningButtons } from '../buttons/MRT_ColumnPinningButtons';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
-import { reorderColumn } from '../column.utils';
+import { parseFromValuesOrFunc, reorderColumn } from '../column.utils';
 import {
   type MRT_Column,
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends MenuItemProps {
   allColumns: MRT_Column<TData>[];
   column: MRT_Column<TData>;
   hoveredColumn: MRT_Column<TData> | null;
@@ -34,6 +34,7 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
   hoveredColumn,
   setHoveredColumn,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -93,6 +94,7 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
         disableRipple
         onDragEnter={handleDragEnter}
         ref={menuItemRef as any}
+        {...rest}
         sx={(theme) => ({
           alignItems: 'center',
           justifyContent: 'flex-start',
@@ -106,6 +108,7 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
           outlineOffset: '-2px',
           pl: `${(column.depth + 0.5) * 2}rem`,
           py: '6px',
+          ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
         })}
       >
         <Box

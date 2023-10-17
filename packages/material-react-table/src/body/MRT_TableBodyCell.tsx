@@ -7,9 +7,8 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { type VirtualItem } from '@tanstack/react-virtual';
 import Skeleton from '@mui/material/Skeleton';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { type TableCellProps } from '@mui/material/TableCell';
 import { useTheme } from '@mui/material/styles';
 import { MRT_TableBodyCellValue } from './MRT_TableBodyCellValue';
 import { MRT_TableBodyRowGrabHandle } from './MRT_TableBodyRowGrabHandle';
@@ -27,14 +26,14 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends TableCellProps {
   cell: MRT_Cell<TData>;
   measureElement?: (element: HTMLTableCellElement) => void;
   numRows?: number;
   rowIndex: number;
   rowRef: RefObject<HTMLTableRowElement>;
   table: MRT_TableInstance<TData>;
-  virtualCell?: VirtualItem;
+  virtualIndex?: number;
 }
 
 export const MRT_TableBodyCell = <TData extends MRT_RowData>({
@@ -44,7 +43,8 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
   rowIndex,
   rowRef,
   table,
-  virtualCell,
+  virtualIndex,
+  ...rest
 }: Props<TData>) => {
   const theme = useTheme();
   const {
@@ -83,19 +83,11 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
   const { columnDef } = column;
   const { columnDefType } = columnDef;
 
+  const args = { cell, column, row, table };
   const tableCellProps = {
-    ...parseFromValuesOrFunc(muiTableBodyCellProps, {
-      cell,
-      column,
-      row,
-      table,
-    }),
-    ...parseFromValuesOrFunc(columnDef.muiTableBodyCellProps, {
-      cell,
-      column,
-      row,
-      table,
-    }),
+    ...parseFromValuesOrFunc(muiTableBodyCellProps, args),
+    ...parseFromValuesOrFunc(columnDef.muiTableBodyCellProps, args),
+    ...rest,
   };
 
   const skeletonProps = parseFromValuesOrFunc(muiSkeletonProps, {
@@ -213,7 +205,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
 
   return (
     <TableCell
-      data-index={virtualCell?.index}
+      data-index={virtualIndex}
       ref={(node: HTMLTableCellElement) => {
         if (node) {
           measureElement?.(node);
@@ -275,47 +267,53 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
         ...draggingBorders,
       })}
     >
-      <>
-        {cell.getIsPlaceholder() ? (
-          columnDef.PlaceholderCell?.({ cell, column, row, table }) ?? null
-        ) : isLoading || showSkeletons ? (
-          <Skeleton
-            animation="wave"
-            height={20}
-            width={skeletonWidth}
-            {...skeletonProps}
-          />
-        ) : enableRowNumbers &&
-          rowNumberMode === 'static' &&
-          column.id === 'mrt-row-numbers' ? (
-          rowIndex + 1
-        ) : column.id === 'mrt-row-drag' ? (
-          <MRT_TableBodyRowGrabHandle row={row} rowRef={rowRef} table={table} />
-        ) : columnDefType === 'display' &&
-          (column.id === 'mrt-row-select' ||
-            column.id === 'mrt-row-expand' ||
-            !row.getIsGrouped()) ? (
-          columnDef.Cell?.({
-            cell,
-            column,
-            renderedCellValue: cell.renderValue() as any,
-            row,
-            table,
-          })
-        ) : isCreating || isEditing ? (
-          <MRT_EditCellTextField cell={cell} table={table} />
-        ) : (enableClickToCopy || columnDef.enableClickToCopy) &&
-          columnDef.enableClickToCopy !== false ? (
-          <MRT_CopyButton cell={cell} table={table}>
+      {tableCellProps.children ?? (
+        <>
+          {cell.getIsPlaceholder() ? (
+            columnDef.PlaceholderCell?.({ cell, column, row, table }) ?? null
+          ) : isLoading || showSkeletons ? (
+            <Skeleton
+              animation="wave"
+              height={20}
+              width={skeletonWidth}
+              {...skeletonProps}
+            />
+          ) : enableRowNumbers &&
+            rowNumberMode === 'static' &&
+            column.id === 'mrt-row-numbers' ? (
+            rowIndex + 1
+          ) : column.id === 'mrt-row-drag' ? (
+            <MRT_TableBodyRowGrabHandle
+              row={row}
+              rowRef={rowRef}
+              table={table}
+            />
+          ) : columnDefType === 'display' &&
+            (column.id === 'mrt-row-select' ||
+              column.id === 'mrt-row-expand' ||
+              !row.getIsGrouped()) ? (
+            columnDef.Cell?.({
+              cell,
+              column,
+              renderedCellValue: cell.renderValue() as any,
+              row,
+              table,
+            })
+          ) : isCreating || isEditing ? (
+            <MRT_EditCellTextField cell={cell} table={table} />
+          ) : (enableClickToCopy || columnDef.enableClickToCopy) &&
+            columnDef.enableClickToCopy !== false ? (
+            <MRT_CopyButton cell={cell} table={table}>
+              <MRT_TableBodyCellValue cell={cell} table={table} />
+            </MRT_CopyButton>
+          ) : (
             <MRT_TableBodyCellValue cell={cell} table={table} />
-          </MRT_CopyButton>
-        ) : (
-          <MRT_TableBodyCellValue cell={cell} table={table} />
-        )}
-        {cell.getIsGrouped() && !columnDef.GroupedCell && (
-          <> ({row.subRows?.length})</>
-        )}
-      </>
+          )}
+          {cell.getIsGrouped() && !columnDef.GroupedCell && (
+            <> ({row.subRows?.length})</>
+          )}
+        </>
+      )}
     </TableCell>
   );
 };

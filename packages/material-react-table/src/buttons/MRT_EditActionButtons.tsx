@@ -1,15 +1,16 @@
-import Box from '@mui/material/Box';
+import Box, { type BoxProps } from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import { parseFromValuesOrFunc } from '../column.utils';
 import {
   type MRT_Row,
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends BoxProps {
   row: MRT_Row<TData>;
   table: MRT_TableInstance<TData>;
   variant?: 'icon' | 'text';
@@ -19,6 +20,7 @@ export const MRT_EditActionButtons = <TData extends MRT_RowData>({
   row,
   table,
   variant = 'icon',
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -83,7 +85,11 @@ export const MRT_EditActionButtons = <TData extends MRT_RowData>({
   return (
     <Box
       onClick={(e) => e.stopPropagation()}
-      sx={{ display: 'flex', gap: '0.75rem' }}
+      sx={(theme) => ({
+        display: 'flex',
+        gap: '0.75rem',
+        ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
+      })}
     >
       {variant === 'icon' ? (
         <>

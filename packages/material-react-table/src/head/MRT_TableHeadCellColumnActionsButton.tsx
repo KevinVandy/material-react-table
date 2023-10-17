@@ -1,5 +1,5 @@
 import { type MouseEvent, useState } from 'react';
-import IconButton from '@mui/material/IconButton';
+import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
@@ -9,7 +9,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends IconButtonProps {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -19,6 +19,7 @@ export const MRT_TableHeadCellColumnActionsButton = <
 >({
   header,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     options: {
@@ -48,6 +49,7 @@ export const MRT_TableHeadCellColumnActionsButton = <
       column,
       table,
     }),
+    ...rest,
   };
 
   return (
@@ -71,7 +73,7 @@ export const MRT_TableHeadCellColumnActionsButton = <
             height: '2rem',
             m: '-4px',
             opacity: 0.3,
-            transform: `scale(0.85) ${
+            transform: `scale(0.8) ${
               columnFilterDisplayMode !== 'popover' ? 'translateX(-4px)' : ''
             }`,
             transition: 'opacity 150ms',

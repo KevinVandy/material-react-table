@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import FormHelperText from '@mui/material/FormHelperText';
-import Slider from '@mui/material/Slider';
+import Slider, { type SliderProps } from '@mui/material/Slider';
 import Stack from '@mui/material/Stack';
 import { parseFromValuesOrFunc } from '../column.utils';
 import {
@@ -9,7 +9,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends SliderProps {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -17,6 +17,7 @@ interface Props<TData extends MRT_RowData> {
 export const MRT_FilterRangeSlider = <TData extends MRT_RowData>({
   header,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     options: { enableColumnFilterModes, localization, muiFilterSliderProps },
@@ -33,6 +34,7 @@ export const MRT_FilterRangeSlider = <TData extends MRT_RowData>({
   const sliderProps = {
     ...parseFromValuesOrFunc(muiFilterSliderProps, { column, table }),
     ...parseFromValuesOrFunc(columnDef.muiFilterSliderProps, { column, table }),
+    ...rest,
   };
 
   let [min, max] =

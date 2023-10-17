@@ -9,19 +9,20 @@ import {
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
-import TextField from '@mui/material/TextField';
+import TextField, { type TextFieldProps } from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
 import { debounce } from '@mui/material/utils';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends TextFieldProps<'standard'> {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_GlobalFilterTextField = <TData extends MRT_RowData>({
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -37,9 +38,12 @@ export const MRT_GlobalFilterTextField = <TData extends MRT_RowData>({
   } = table;
   const { globalFilter, showGlobalFilter } = getState();
 
-  const textFieldProps = parseFromValuesOrFunc(muiSearchTextFieldProps, {
-    table,
-  });
+  const textFieldProps = {
+    ...parseFromValuesOrFunc(muiSearchTextFieldProps, {
+      table,
+    }),
+    ...rest,
+  };
 
   const isMounted = useRef(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);

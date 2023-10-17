@@ -1,5 +1,5 @@
 import { type VirtualItem } from '@tanstack/react-virtual';
-import TableRow from '@mui/material/TableRow';
+import TableRow, { type TableRowProps } from '@mui/material/TableRow';
 import { lighten } from '@mui/material/styles';
 import { MRT_TableFooterCell } from './MRT_TableFooterCell';
 import { parseFromValuesOrFunc } from '../column.utils';
@@ -10,7 +10,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends TableRowProps {
   footerGroup: MRT_HeaderGroup<TData>;
   table: MRT_TableInstance<TData>;
   virtualColumns?: VirtualItem[];
@@ -24,6 +24,7 @@ export const MRT_TableFooterRow = <TData extends MRT_RowData>({
   virtualColumns,
   virtualPaddingLeft,
   virtualPaddingRight,
+  ...rest
 }: Props<TData>) => {
   const {
     options: { layoutMode, muiTableFooterRowProps },
@@ -40,10 +41,13 @@ export const MRT_TableFooterRow = <TData extends MRT_RowData>({
   )
     return null;
 
-  const tableRowProps = parseFromValuesOrFunc(muiTableFooterRowProps, {
-    footerGroup,
-    table,
-  });
+  const tableRowProps = {
+    ...parseFromValuesOrFunc(muiTableFooterRowProps, {
+      footerGroup,
+      table,
+    }),
+    ...rest,
+  };
 
   return (
     <TableRow

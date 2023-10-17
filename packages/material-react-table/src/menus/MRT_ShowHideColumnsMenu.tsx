@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
-import Menu from '@mui/material/Menu';
+import Menu, { type MenuProps } from '@mui/material/Menu';
 import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
 import { getDefaultColumnOrderIds } from '../column.utils';
 import {
@@ -11,7 +11,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends Partial<MenuProps> {
   anchorEl: HTMLElement | null;
   isSubMenu?: boolean;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
@@ -22,6 +22,7 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
   anchorEl,
   setAnchorEl,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getAllColumns,
@@ -85,6 +86,7 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
       anchorEl={anchorEl}
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
+      {...rest}
     >
       <Box
         sx={{

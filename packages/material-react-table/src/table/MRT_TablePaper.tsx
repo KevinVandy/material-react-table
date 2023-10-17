@@ -1,16 +1,17 @@
-import Paper from '@mui/material/Paper';
+import Paper, { type PaperProps } from '@mui/material/Paper';
 import { MRT_TableContainer } from './MRT_TableContainer';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_BottomToolbar } from '../toolbar/MRT_BottomToolbar';
 import { MRT_TopToolbar } from '../toolbar/MRT_TopToolbar';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends PaperProps {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_TablePaper = <TData extends MRT_RowData>({
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -25,7 +26,10 @@ export const MRT_TablePaper = <TData extends MRT_RowData>({
   } = table;
   const { isFullScreen } = getState();
 
-  const tablePaperProps = parseFromValuesOrFunc(muiTablePaperProps, { table });
+  const tablePaperProps = {
+    ...parseFromValuesOrFunc(muiTablePaperProps, { table }),
+    ...rest,
+  };
 
   return (
     <Paper

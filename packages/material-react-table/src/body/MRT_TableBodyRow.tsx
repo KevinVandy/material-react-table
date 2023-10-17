@@ -162,7 +162,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
           boxSizing: 'border-box',
           display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
           opacity: isPinned
-            ? 0.98
+            ? 0.97
             : draggingRow?.id === row.id || hoveredRow?.id === row.id
             ? 0.5
             : 1,
@@ -209,8 +209,8 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
             rowIndex,
             rowRef,
             table,
-            virtualCell: columnVirtualizer
-              ? (cellOrVirtualCell as VirtualItem)
+            virtualIndex: columnVirtualizer
+              ? (cellOrVirtualCell as VirtualItem).index
               : undefined,
           };
           return cell ? (

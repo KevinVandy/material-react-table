@@ -1,17 +1,19 @@
-import Box from '@mui/material/Box';
+import Box, { type BoxProps } from '@mui/material/Box';
 import { MRT_ShowHideColumnsButton } from '../buttons/MRT_ShowHideColumnsButton';
 import { MRT_ToggleDensePaddingButton } from '../buttons/MRT_ToggleDensePaddingButton';
 import { MRT_ToggleFiltersButton } from '../buttons/MRT_ToggleFiltersButton';
 import { MRT_ToggleFullScreenButton } from '../buttons/MRT_ToggleFullScreenButton';
 import { MRT_ToggleGlobalFilterButton } from '../buttons/MRT_ToggleGlobalFilterButton';
+import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends BoxProps {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_ToolbarInternalButtons = <TData extends MRT_RowData>({
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     options: {
@@ -31,11 +33,13 @@ export const MRT_ToolbarInternalButtons = <TData extends MRT_RowData>({
 
   return (
     <Box
-      sx={{
+      {...rest}
+      sx={(theme) => ({
         alignItems: 'center',
         display: 'flex',
         zIndex: 3,
-      }}
+        ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
+      })}
     >
       {renderToolbarInternalActions?.({
         table,

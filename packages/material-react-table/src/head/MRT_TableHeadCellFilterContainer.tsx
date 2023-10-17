@@ -1,4 +1,4 @@
-import Collapse from '@mui/material/Collapse';
+import Collapse, { type CollapseProps } from '@mui/material/Collapse';
 import { MRT_FilterCheckbox } from '../inputs/MRT_FilterCheckbox';
 import { MRT_FilterRangeFields } from '../inputs/MRT_FilterRangeFields';
 import { MRT_FilterRangeSlider } from '../inputs/MRT_FilterRangeSlider';
@@ -9,7 +9,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends CollapseProps {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -17,6 +17,7 @@ interface Props<TData extends MRT_RowData> {
 export const MRT_TableHeadCellFilterContainer = <TData extends MRT_RowData>({
   header,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -31,6 +32,7 @@ export const MRT_TableHeadCellFilterContainer = <TData extends MRT_RowData>({
       in={showColumnFilters || columnFilterDisplayMode === 'popover'}
       mountOnEnter
       unmountOnExit
+      {...rest}
     >
       {columnDef.filterVariant === 'checkbox' ? (
         <MRT_FilterCheckbox column={column} table={table} />

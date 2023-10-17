@@ -4,7 +4,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends IconButtonProps {
   iconButtonProps?: IconButtonProps;
   location?: 'column' | 'row';
   onDragEnd: DragEventHandler<HTMLButtonElement>;
@@ -18,6 +18,7 @@ export const MRT_GrabHandleButton = <TData extends MRT_RowData>({
   onDragEnd,
   onDragStart,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     options: {
@@ -26,22 +27,24 @@ export const MRT_GrabHandleButton = <TData extends MRT_RowData>({
     },
   } = table;
 
+  const _iconButtonProps = { ...iconButtonProps, ...rest };
+
   return (
     <Tooltip
       arrow
       enterDelay={1000}
       enterNextDelay={1000}
       placement="top"
-      title={iconButtonProps?.title ?? localization.move}
+      title={_iconButtonProps?.title ?? localization.move}
     >
       <IconButton
         disableRipple
         draggable="true"
         size="small"
-        {...iconButtonProps}
+        {..._iconButtonProps}
         onClick={(e) => {
           e.stopPropagation();
-          iconButtonProps?.onClick?.(e);
+          _iconButtonProps?.onClick?.(e);
         }}
         onDragEnd={onDragEnd}
         onDragStart={onDragStart}
@@ -58,7 +61,7 @@ export const MRT_GrabHandleButton = <TData extends MRT_RowData>({
           opacity: location === 'row' ? 1 : 0.3,
           p: '2px',
           transition: 'all 150ms ease-in-out',
-          ...(parseFromValuesOrFunc(iconButtonProps?.sx, theme) as any),
+          ...(parseFromValuesOrFunc(_iconButtonProps?.sx, theme) as any),
         })}
         title={undefined}
       >

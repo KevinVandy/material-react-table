@@ -3,7 +3,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Menu from '@mui/material/Menu';
+import Menu, { type MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { MRT_FilterOptionMenu } from './MRT_FilterOptionMenu';
 import {
@@ -24,7 +24,7 @@ export const commonListItemStyles = {
   display: 'flex',
 };
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends Partial<MenuProps> {
   anchorEl: HTMLElement | null;
   header: MRT_Header<TData>;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
@@ -36,6 +36,7 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
   header,
   setAnchorEl,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -396,6 +397,7 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
       anchorEl={anchorEl}
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
+      {...rest}
     >
       {columnDef.renderColumnActionsMenuItems?.({
         closeMenu: () => setAnchorEl(null),

@@ -5,7 +5,7 @@ import {
   type Virtualizer,
   useVirtualizer,
 } from '@tanstack/react-virtual';
-import TableBody from '@mui/material/TableBody';
+import TableBody, { type TableBodyProps } from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';
 import { MRT_TableBodyRow, Memo_MRT_TableBodyRow } from './MRT_TableBodyRow';
 import {
@@ -20,7 +20,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends TableBodyProps {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
   table: MRT_TableInstance<TData>;
   virtualColumns?: VirtualItem[];
@@ -34,6 +34,7 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
   virtualColumns,
   virtualPaddingLeft,
   virtualPaddingRight,
+  ...rest
 }: Props<TData>) => {
   const {
     getBottomRows,
@@ -80,7 +81,10 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
     sorting,
   } = getState();
 
-  const tableBodyProps = parseFromValuesOrFunc(muiTableBodyProps, { table });
+  const tableBodyProps = {
+    ...parseFromValuesOrFunc(muiTableBodyProps, { table }),
+    ...rest,
+  };
   const rowVirtualizerProps = parseFromValuesOrFunc(rowVirtualizerOptions, {
     table,
   });
@@ -243,7 +247,7 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
                 style={{
                   display: layoutMode?.startsWith('grid')
                     ? 'grid'
-                    : 'table-cell',
+                    : undefined,
                 }}
               >
                 {renderEmptyRowsFallback?.({ table }) ?? (

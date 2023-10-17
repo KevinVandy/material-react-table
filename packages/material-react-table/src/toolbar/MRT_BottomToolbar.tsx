@@ -1,5 +1,4 @@
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
+import Box, { type BoxProps } from '@mui/material/Box';
 import { alpha } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
@@ -10,12 +9,13 @@ import { commonToolbarStyles } from './MRT_TopToolbar';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends BoxProps {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_BottomToolbar = <TData extends MRT_RowData>({
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -33,13 +33,15 @@ export const MRT_BottomToolbar = <TData extends MRT_RowData>({
 
   const isMobile = useMediaQuery('(max-width:720px)');
 
-  const toolbarProps = parseFromValuesOrFunc(muiBottomToolbarProps, { table });
+  const toolbarProps = {
+    ...parseFromValuesOrFunc(muiBottomToolbarProps, { table }),
+    ...rest,
+  };
 
   const stackAlertBanner = isMobile || !!renderBottomToolbarCustomActions;
 
   return (
-    <Toolbar
-      variant="dense"
+    <Box
       {...toolbarProps}
       ref={(node: HTMLDivElement) => {
         if (node) {
@@ -103,6 +105,6 @@ export const MRT_BottomToolbar = <TData extends MRT_RowData>({
             )}
         </Box>
       </Box>
-    </Toolbar>
+    </Box>
   );
 };

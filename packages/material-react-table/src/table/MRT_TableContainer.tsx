@@ -1,9 +1,9 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
-import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
-import TableContainer from '@mui/material/TableContainer';
-import { alpha, lighten } from '@mui/material/styles';
+import TableContainer, {
+  type TableContainerProps,
+} from '@mui/material/TableContainer';
 import { MRT_Table } from './MRT_Table';
+import { MRT_TableLoadingOverlay } from './MRT_TableLoadingOverlay';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_EditRowModal } from '../modals';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
@@ -11,12 +11,13 @@ import { type MRT_RowData, type MRT_TableInstance } from '../types';
 const useIsomorphicLayoutEffect =
   typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends TableContainerProps {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_TableContainer = <TData extends MRT_RowData>({
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -24,8 +25,6 @@ export const MRT_TableContainer = <TData extends MRT_RowData>({
       createDisplayMode,
       editDisplayMode,
       enableStickyHeader,
-      localization,
-      muiCircularProgressProps,
       muiTableContainerProps,
     },
     refs: { bottomToolbarRef, tableContainerRef, topToolbarRef },
@@ -43,14 +42,12 @@ export const MRT_TableContainer = <TData extends MRT_RowData>({
 
   const [totalToolbarHeight, setTotalToolbarHeight] = useState(0);
 
-  const tableContainerProps = parseFromValuesOrFunc(muiTableContainerProps, {
-    table,
-  });
-
-  const circularProgressProps = parseFromValuesOrFunc(
-    muiCircularProgressProps,
-    { table },
-  );
+  const tableContainerProps = {
+    ...parseFromValuesOrFunc(muiTableContainerProps, {
+      table,
+    }),
+    ...rest,
+  };
 
   useIsomorphicLayoutEffect(() => {
     const topToolbarHeight =
@@ -72,7 +69,7 @@ export const MRT_TableContainer = <TData extends MRT_RowData>({
   return (
     <TableContainer
       aria-busy={loading}
-      aria-describedby="mrt-progress"
+      aria-describedby={loading ? 'mrt-progress' : undefined}
       {...tableContainerProps}
       ref={(node: HTMLDivElement) => {
         if (node) {
@@ -99,33 +96,7 @@ export const MRT_TableContainer = <TData extends MRT_RowData>({
         ...(parseFromValuesOrFunc(tableContainerProps?.sx, theme) as any),
       })}
     >
-      {loading ? (
-        <Box
-          sx={(theme) => ({
-            alignItems: 'center',
-            backgroundColor: alpha(
-              lighten(theme.palette.background.paper, 0.05),
-              0.5,
-            ),
-            bottom: 0,
-            display: 'flex',
-            justifyContent: 'center',
-            left: 0,
-            maxHeight: '100vh',
-            position: 'absolute',
-            right: 0,
-            top: 0,
-            width: '100%',
-            zIndex: 2,
-          })}
-        >
-          <CircularProgress
-            aria-label={localization.noRecordsToDisplay}
-            id="mrt-progress"
-            {...circularProgressProps}
-          />
-        </Box>
-      ) : null}
+      {loading ? <MRT_TableLoadingOverlay table={table} /> : null}
       <MRT_Table table={table} />
       {(createModalOpen || editModalOpen) && (
         <MRT_EditRowModal open table={table} />

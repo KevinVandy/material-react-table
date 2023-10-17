@@ -1,8 +1,8 @@
-import dts from 'rollup-plugin-dts';
-import external from 'rollup-plugin-peer-deps-external';
+import { babel } from '@rollup/plugin-babel';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
-import { babel } from '@rollup/plugin-babel';
+import dts from 'rollup-plugin-dts';
+import external from 'rollup-plugin-peer-deps-external';
 
 export default [
   {

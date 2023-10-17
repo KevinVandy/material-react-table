@@ -1,5 +1,5 @@
-import { type MouseEvent, type ReactNode, useState } from 'react';
-import Button from '@mui/material/Button';
+import { type MouseEvent, useState } from 'react';
+import Button, { type ButtonProps } from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import { parseFromValuesOrFunc } from '../column.utils';
 import {
@@ -8,16 +8,15 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends ButtonProps {
   cell: MRT_Cell<TData>;
-  children: ReactNode;
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_CopyButton = <TData extends MRT_RowData>({
   cell,
-  children,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     options: { localization, muiCopyButtonProps },
@@ -47,6 +46,7 @@ export const MRT_CopyButton = <TData extends MRT_RowData>({
       row,
       table,
     }),
+    ...rest,
   };
 
   return (
@@ -81,9 +81,7 @@ export const MRT_CopyButton = <TData extends MRT_RowData>({
           ...(parseFromValuesOrFunc(buttonProps?.sx, theme) as any),
         })}
         title={undefined}
-      >
-        {children}
-      </Button>
+      />
     </Tooltip>
   );
 };

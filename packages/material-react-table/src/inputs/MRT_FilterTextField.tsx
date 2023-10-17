@@ -29,7 +29,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends TextFieldProps<'standard'> {
   header: MRT_Header<TData>;
   rangeFilterIndex?: number;
   table: MRT_TableInstance<TData>;
@@ -39,6 +39,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
   header,
   rangeFilterIndex,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     options: {
@@ -64,6 +65,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
       column,
       table,
     }),
+    ...rest,
   };
 
   const autocompleteProps = {

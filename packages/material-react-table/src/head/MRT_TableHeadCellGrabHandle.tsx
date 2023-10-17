@@ -1,4 +1,5 @@
 import { type DragEvent, type RefObject } from 'react';
+import { type IconButtonProps } from '@mui/material/IconButton';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 import { parseFromValuesOrFunc, reorderColumn } from '../column.utils';
 import {
@@ -7,7 +8,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends IconButtonProps {
   column: MRT_Column<TData>;
   table: MRT_TableInstance<TData>;
   tableHeadCellRef: RefObject<HTMLTableCellElement>;
@@ -17,6 +18,7 @@ export const MRT_TableHeadCellGrabHandle = <TData extends MRT_RowData>({
   column,
   table,
   tableHeadCellRef,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -34,6 +36,7 @@ export const MRT_TableHeadCellGrabHandle = <TData extends MRT_RowData>({
       column,
       table,
     }),
+    ...rest
   };
 
   const handleDragStart = (event: DragEvent<HTMLButtonElement>) => {

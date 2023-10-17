@@ -1,14 +1,15 @@
 import { type MouseEvent, useState } from 'react';
 import { type RowPinningPosition } from '@tanstack/react-table';
-import IconButton from '@mui/material/IconButton';
+import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import { parseFromValuesOrFunc } from '../column.utils';
 import {
   type MRT_Row,
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends IconButtonProps {
   pinningPosition: RowPinningPosition;
   row: MRT_Row<TData>;
   table: MRT_TableInstance<TData>;
@@ -18,6 +19,7 @@ export const MRT_RowPinButton = <TData extends MRT_RowData>({
   pinningPosition,
   row,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     options: {
@@ -51,10 +53,12 @@ export const MRT_RowPinButton = <TData extends MRT_RowData>({
         onMouseEnter={() => setTooltipOpened(true)}
         onMouseLeave={() => setTooltipOpened(false)}
         size="small"
-        sx={{
+        {...rest}
+        sx={(theme) => ({
           height: '24px',
           width: '24px',
-        }}
+          ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
+        })}
       >
         {isPinned ? (
           <CloseIcon />

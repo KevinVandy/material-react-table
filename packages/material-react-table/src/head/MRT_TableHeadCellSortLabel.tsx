@@ -1,14 +1,17 @@
 import Badge from '@mui/material/Badge';
 import { type TableCellProps } from '@mui/material/TableCell';
-import TableSortLabel from '@mui/material/TableSortLabel';
+import TableSortLabel, {
+  type TableSortLabelProps,
+} from '@mui/material/TableSortLabel';
 import Tooltip from '@mui/material/Tooltip';
+import { parseFromValuesOrFunc } from '../column.utils';
 import {
   type MRT_Header,
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends TableSortLabelProps {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
   tableCellProps?: TableCellProps;
@@ -17,6 +20,7 @@ interface Props<TData extends MRT_RowData> {
 export const MRT_TableHeadCellSortLabel = <TData extends MRT_RowData>({
   header,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -68,12 +72,21 @@ export const MRT_TableHeadCellSortLabel = <TData extends MRT_RowData>({
             e.stopPropagation();
             header.column.getToggleSortingHandler()?.(e);
           }}
-          sx={{
+          {...rest}
+          sx={(theme) => ({
+            '.MuiTableSortLabel-icon': {
+              color: `${
+                theme.palette.mode === 'dark'
+                  ? theme.palette.text.primary
+                  : theme.palette.text.secondary
+              } !important`,
+            },
             flex: '0 0',
             opacity: isSorted ? 1 : 0.3,
             transition: 'all 150ms ease-in-out',
             width: '3ch',
-          }}
+            ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
+          })}
         />
       </Badge>
     </Tooltip>

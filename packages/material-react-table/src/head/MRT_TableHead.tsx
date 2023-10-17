@@ -1,11 +1,11 @@
 import { type VirtualItem } from '@tanstack/react-virtual';
-import TableHead from '@mui/material/TableHead';
+import TableHead, { type TableHeadProps } from '@mui/material/TableHead';
 import { MRT_TableHeadRow } from './MRT_TableHeadRow';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_ToolbarAlertBanner } from '../toolbar';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends TableHeadProps {
   table: MRT_TableInstance<TData>;
   virtualColumns?: VirtualItem[];
   virtualPaddingLeft?: number;
@@ -17,6 +17,7 @@ export const MRT_TableHead = <TData extends MRT_RowData>({
   virtualColumns,
   virtualPaddingLeft,
   virtualPaddingRight,
+  ...rest
 }: Props<TData>) => {
   const {
     getHeaderGroups,
@@ -32,7 +33,10 @@ export const MRT_TableHead = <TData extends MRT_RowData>({
   } = table;
   const { isFullScreen, showAlertBanner } = getState();
 
-  const tableHeadProps = parseFromValuesOrFunc(muiTableHeadProps, { table });
+  const tableHeadProps = {
+    ...parseFromValuesOrFunc(muiTableHeadProps, { table }),
+    ...rest,
+  };
 
   const stickyHeader = enableStickyHeader || isFullScreen;
 
@@ -65,7 +69,7 @@ export const MRT_TableHead = <TData extends MRT_RowData>({
           <th
             colSpan={table.getVisibleLeafColumns().length}
             style={{
-              display: layoutMode?.startsWith('grid') ? 'grid' : 'table-cell',
+              display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
               padding: 0,
             }}
           >

@@ -1,5 +1,5 @@
 import { type VirtualItem } from '@tanstack/react-virtual';
-import TableRow from '@mui/material/TableRow';
+import TableRow, { type TableRowProps } from '@mui/material/TableRow';
 import { alpha, lighten } from '@mui/material/styles';
 import { MRT_TableHeadCell } from './MRT_TableHeadCell';
 import { parseFromValuesOrFunc } from '../column.utils';
@@ -10,7 +10,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends TableRowProps {
   headerGroup: MRT_HeaderGroup<TData>;
   table: MRT_TableInstance<TData>;
   virtualColumns?: VirtualItem[];
@@ -24,15 +24,19 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
   virtualColumns,
   virtualPaddingLeft,
   virtualPaddingRight,
+  ...rest
 }: Props<TData>) => {
   const {
     options: { layoutMode, muiTableHeadRowProps },
   } = table;
 
-  const tableRowProps = parseFromValuesOrFunc(muiTableHeadRowProps, {
-    headerGroup,
-    table,
-  });
+  const tableRowProps = {
+    ...parseFromValuesOrFunc(muiTableHeadRowProps, {
+      headerGroup,
+      table,
+    }),
+    rest,
+  };
 
   return (
     <TableRow

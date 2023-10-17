@@ -1,4 +1,4 @@
-import Dialog from '@mui/material/Dialog';
+import Dialog, { type DialogProps } from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -12,7 +12,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends Partial<DialogProps> {
   open: boolean;
   table: MRT_TableInstance<TData>;
 }
@@ -20,6 +20,7 @@ interface Props<TData extends MRT_RowData> {
 export const MRT_EditRowModal = <TData extends MRT_RowData>({
   open,
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getState,
@@ -42,6 +43,7 @@ export const MRT_EditRowModal = <TData extends MRT_RowData>({
     ...parseFromValuesOrFunc(muiEditRowModalProps, { row, table }),
     ...(creatingRow &&
       parseFromValuesOrFunc(muiCreateRowModalProps, { row, table })),
+    ...rest,
   };
 
   const internalEditComponents = row

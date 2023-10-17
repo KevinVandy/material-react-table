@@ -1,14 +1,15 @@
-import IconButton from '@mui/material/IconButton';
+import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends IconButtonProps {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_ExpandAllButton = <TData extends MRT_RowData>({
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getCanSomeRowsExpand,
@@ -25,9 +26,12 @@ export const MRT_ExpandAllButton = <TData extends MRT_RowData>({
   } = table;
   const { density, isLoading } = getState();
 
-  const iconButtonProps = parseFromValuesOrFunc(muiExpandAllButtonProps, {
-    table,
-  });
+  const iconButtonProps = {
+    ...parseFromValuesOrFunc(muiExpandAllButtonProps, {
+      table,
+    }),
+    ...rest,
+  };
 
   const isAllRowsExpanded = getIsAllRowsExpanded();
 

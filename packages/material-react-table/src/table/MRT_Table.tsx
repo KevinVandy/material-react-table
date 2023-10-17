@@ -4,7 +4,7 @@ import {
   type Virtualizer,
   useVirtualizer,
 } from '@tanstack/react-virtual';
-import Table from '@mui/material/Table';
+import Table, { type TableProps } from '@mui/material/Table';
 import { MRT_TableBody, Memo_MRT_TableBody } from '../body/MRT_TableBody';
 import {
   extraIndexRangeExtractor,
@@ -15,12 +15,13 @@ import { MRT_TableFooter } from '../footer/MRT_TableFooter';
 import { MRT_TableHead } from '../head/MRT_TableHead';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends TableProps {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_Table = <TData extends MRT_RowData>({
   table,
+  ...rest
 }: Props<TData>) => {
   const {
     getFlatHeaders,
@@ -50,7 +51,10 @@ export const MRT_Table = <TData extends MRT_RowData>({
     isFullScreen,
   } = getState();
 
-  const tableProps = parseFromValuesOrFunc(muiTableProps, { table });
+  const tableProps = {
+    ...parseFromValuesOrFunc(muiTableProps, { table }),
+    ...rest,
+  };
 
   const columnVirtualizerProps = parseFromValuesOrFunc(
     columnVirtualizerOptions,
@@ -157,32 +161,27 @@ export const MRT_Table = <TData extends MRT_RowData>({
   };
 
   return (
-    <>
-      <Table
-        stickyHeader={enableStickyHeader || isFullScreen}
-        {...tableProps}
-        style={{ ...columnSizeVars, ...tableProps?.style }}
-        sx={(theme) => ({
-          borderCollapse: 'separate',
-          display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-          tableLayout:
-            layoutMode === 'semantic' && enableColumnResizing
-              ? 'fixed'
-              : undefined,
-          ...(parseFromValuesOrFunc(tableProps?.sx, theme) as any),
-        })}
-      >
-        {enableTableHead && <MRT_TableHead {...props} />}
-        {memoMode === 'table-body' || columnSizingInfo.isResizingColumn ? (
-          <Memo_MRT_TableBody
-            columnVirtualizer={columnVirtualizer}
-            {...props}
-          />
-        ) : (
-          <MRT_TableBody columnVirtualizer={columnVirtualizer} {...props} />
-        )}
-        {enableTableFooter && <MRT_TableFooter {...props} />}
-      </Table>
-    </>
+    <Table
+      stickyHeader={enableStickyHeader || isFullScreen}
+      {...tableProps}
+      style={{ ...columnSizeVars, ...tableProps?.style }}
+      sx={(theme) => ({
+        borderCollapse: 'separate',
+        display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
+        tableLayout:
+          layoutMode === 'semantic' && enableColumnResizing
+            ? 'fixed'
+            : undefined,
+        ...(parseFromValuesOrFunc(tableProps?.sx, theme) as any),
+      })}
+    >
+      {enableTableHead && <MRT_TableHead {...props} />}
+      {memoMode === 'table-body' || columnSizingInfo.isResizingColumn ? (
+        <Memo_MRT_TableBody columnVirtualizer={columnVirtualizer} {...props} />
+      ) : (
+        <MRT_TableBody columnVirtualizer={columnVirtualizer} {...props} />
+      )}
+      {enableTableFooter && <MRT_TableFooter {...props} />}
+    </Table>
   );
 };

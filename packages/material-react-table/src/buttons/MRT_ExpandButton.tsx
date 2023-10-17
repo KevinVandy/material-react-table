@@ -1,5 +1,5 @@
 import { type MouseEvent } from 'react';
-import IconButton from '@mui/material/IconButton';
+import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { parseFromValuesOrFunc } from '../column.utils';
 import {
@@ -8,7 +8,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends IconButtonProps {
   row: MRT_Row<TData>;
   table: MRT_TableInstance<TData>;
 }

@@ -1,6 +1,6 @@
 import { type DragEvent, useMemo } from 'react';
 import Box from '@mui/material/Box';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { type TableCellProps } from '@mui/material/TableCell';
 import { useTheme } from '@mui/material/styles';
 import { type Theme } from '@mui/material/styles';
 import { MRT_TableHeadCellColumnActionsButton } from './MRT_TableHeadCellColumnActionsButton';
@@ -17,7 +17,7 @@ import {
   type MRT_TableInstance,
 } from '../types';
 
-interface Props<TData extends MRT_RowData> {
+interface Props<TData extends MRT_RowData> extends TableCellProps {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -25,6 +25,7 @@ interface Props<TData extends MRT_RowData> {
 export const MRT_TableHeadCell = <TData extends MRT_RowData>({
   header,
   table,
+  ...rest
 }: Props<TData>) => {
   const theme = useTheme();
   const {
@@ -60,6 +61,7 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
       column,
       table,
     }),
+    ...rest,
   };
 
   const showColumnActions =
@@ -186,97 +188,104 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
         ...draggingBorders,
       })}
     >
-      {header.isPlaceholder || column.id === 'mrt-row-spacer' ? null : (
-        <Box
-          className="Mui-TableHeadCell-Content"
-          sx={{
-            alignItems: 'center',
-            display: 'flex',
-            flexDirection:
-              tableCellProps?.align === 'right' ? 'row-reverse' : 'row',
-            justifyContent:
-              columnDefType === 'group' || tableCellProps?.align === 'center'
-                ? 'center'
-                : column.getCanResize()
-                ? 'space-between'
-                : 'flex-start',
-            position: 'relative',
-            width: '100%',
-          }}
-        >
-          <Box
-            className="Mui-TableHeadCell-Content-Labels"
-            onClick={column.getToggleSortingHandler()}
-            sx={{
-              alignItems: 'center',
-              cursor:
-                column.getCanSort() && columnDefType !== 'group'
-                  ? 'pointer'
-                  : undefined,
-              display: 'flex',
-              flexDirection:
-                tableCellProps?.align === 'right' ? 'row-reverse' : 'row',
-              overflow: columnDefType === 'data' ? 'hidden' : undefined,
-              pl:
-                tableCellProps?.align === 'center'
-                  ? `${headerPL}rem`
-                  : undefined,
-            }}
-          >
+      {header.isPlaceholder
+        ? null
+        : tableCellProps.children ?? (
             <Box
-              className="Mui-TableHeadCell-Content-Wrapper"
+              className="Mui-TableHeadCell-Content"
               sx={{
-                '&:hover': {
-                  textOverflow: 'clip',
-                },
-                minWidth: `${Math.min(columnDef.header?.length ?? 0, 4)}ch`,
-                overflow: columnDefType === 'data' ? 'hidden' : undefined,
-                textOverflow: 'ellipsis',
-                whiteSpace:
-                  (columnDef.header?.length ?? 0) < 20 ? 'nowrap' : 'normal',
+                alignItems: 'center',
+                display: 'flex',
+                flexDirection:
+                  tableCellProps?.align === 'right' ? 'row-reverse' : 'row',
+                justifyContent:
+                  columnDefType === 'group' ||
+                  tableCellProps?.align === 'center'
+                    ? 'center'
+                    : column.getCanResize()
+                    ? 'space-between'
+                    : 'flex-start',
+                position: 'relative',
+                width: '100%',
               }}
-              title={columnDefType === 'data' ? columnDef.header : undefined}
             >
-              {headerElement}
-            </Box>
-            {column.getCanFilter() && (
-              <MRT_TableHeadCellFilterLabel header={header} table={table} />
-            )}
-            {column.getCanSort() && (
-              <MRT_TableHeadCellSortLabel
-                header={header}
-                table={table}
-                tableCellProps={tableCellProps}
-              />
-            )}
-          </Box>
-          {columnDefType !== 'group' && (
-            <Box
-              className="Mui-TableHeadCell-Content-Actions"
-              sx={{ whiteSpace: 'nowrap' }}
-            >
-              {showDragHandle && (
-                <MRT_TableHeadCellGrabHandle
-                  column={column}
-                  table={table}
-                  tableHeadCellRef={{
-                    current: tableHeadCellRefs.current[column.id],
+              <Box
+                className="Mui-TableHeadCell-Content-Labels"
+                onClick={column.getToggleSortingHandler()}
+                sx={{
+                  alignItems: 'center',
+                  cursor:
+                    column.getCanSort() && columnDefType !== 'group'
+                      ? 'pointer'
+                      : undefined,
+                  display: 'flex',
+                  flexDirection:
+                    tableCellProps?.align === 'right' ? 'row-reverse' : 'row',
+                  overflow: columnDefType === 'data' ? 'hidden' : undefined,
+                  pl:
+                    tableCellProps?.align === 'center'
+                      ? `${headerPL}rem`
+                      : undefined,
+                }}
+              >
+                <Box
+                  className="Mui-TableHeadCell-Content-Wrapper"
+                  sx={{
+                    '&:hover': {
+                      textOverflow: 'clip',
+                    },
+                    minWidth: `${Math.min(columnDef.header?.length ?? 0, 4)}ch`,
+                    overflow: columnDefType === 'data' ? 'hidden' : undefined,
+                    textOverflow: 'ellipsis',
+                    whiteSpace:
+                      (columnDef.header?.length ?? 0) < 20
+                        ? 'nowrap'
+                        : 'normal',
                   }}
-                />
+                  title={
+                    columnDefType === 'data' ? columnDef.header : undefined
+                  }
+                >
+                  {headerElement}
+                </Box>
+                {column.getCanFilter() && (
+                  <MRT_TableHeadCellFilterLabel header={header} table={table} />
+                )}
+                {column.getCanSort() && (
+                  <MRT_TableHeadCellSortLabel
+                    header={header}
+                    table={table}
+                    tableCellProps={tableCellProps}
+                  />
+                )}
+              </Box>
+              {columnDefType !== 'group' && (
+                <Box
+                  className="Mui-TableHeadCell-Content-Actions"
+                  sx={{ whiteSpace: 'nowrap' }}
+                >
+                  {showDragHandle && (
+                    <MRT_TableHeadCellGrabHandle
+                      column={column}
+                      table={table}
+                      tableHeadCellRef={{
+                        current: tableHeadCellRefs.current[column.id],
+                      }}
+                    />
+                  )}
+                  {showColumnActions && (
+                    <MRT_TableHeadCellColumnActionsButton
+                      header={header}
+                      table={table}
+                    />
+                  )}
+                </Box>
               )}
-              {showColumnActions && (
-                <MRT_TableHeadCellColumnActionsButton
-                  header={header}
-                  table={table}
-                />
+              {column.getCanResize() && (
+                <MRT_TableHeadCellResizeHandle header={header} table={table} />
               )}
             </Box>
           )}
-          {column.getCanResize() && (
-            <MRT_TableHeadCellResizeHandle header={header} table={table} />
-          )}
-        </Box>
-      )}
       {columnFilterDisplayMode === 'subheader' && column.getCanFilter() && (
         <MRT_TableHeadCellFilterContainer header={header} table={table} />
       )}

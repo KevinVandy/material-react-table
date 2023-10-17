@@ -42,6 +42,7 @@ import {
 } from '@tanstack/react-virtual';
 import { type AlertProps } from '@mui/material/Alert';
 import { type AutocompleteProps } from '@mui/material/Autocomplete';
+import { type BoxProps } from '@mui/material/Box';
 import { type ButtonProps } from '@mui/material/Button';
 import { type CheckboxProps } from '@mui/material/Checkbox';
 import { type ChipProps } from '@mui/material/Chip';
@@ -62,7 +63,6 @@ import { type TableFooterProps } from '@mui/material/TableFooter';
 import { type TableHeadProps } from '@mui/material/TableHead';
 import { type TableRowProps } from '@mui/material/TableRow';
 import { type TextFieldProps } from '@mui/material/TextField';
-import { type ToolbarProps } from '@mui/material/Toolbar';
 import { type DatePickerProps } from '@mui/x-date-pickers';
 import { type MRT_AggregationFns } from './aggregationFns';
 import { type MRT_FilterFns } from './filterFns';
@@ -771,8 +771,8 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
    */
   memoMode?: 'cells' | 'rows' | 'table-body';
   muiBottomToolbarProps?:
-    | ((props: { table: MRT_TableInstance<TData> }) => ToolbarProps)
-    | ToolbarProps;
+    | ((props: { table: MRT_TableInstance<TData> }) => BoxProps)
+    | BoxProps;
   muiCircularProgressProps?:
     | ((props: { table: MRT_TableInstance<TData> }) => CircularProgressProps)
     | CircularProgressProps;
@@ -973,8 +973,8 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
     | ((props: { table: MRT_TableInstance<TData> }) => AlertProps)
     | AlertProps;
   muiTopToolbarProps?:
-    | ((props: { table: MRT_TableInstance<TData> }) => ToolbarProps)
-    | ToolbarProps;
+    | ((props: { table: MRT_TableInstance<TData> }) => BoxProps)
+    | BoxProps;
   onColumnFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterOption }>;
   onCreatingRowCancel?: (props: {
     row: MRT_Row<TData>;

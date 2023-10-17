@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import { lighten } from '@mui/material/styles';
 import { type Theme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -15,12 +14,11 @@ import { type MRT_RowData, type MRT_TableInstance } from '../types';
 export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
   alignItems: 'flex-start',
   backgroundColor: lighten(theme.palette.background.default, 0.05),
-  backgroundImage: 'none',
   display: 'grid',
   flexWrap: 'wrap-reverse',
   minHeight: '3.5rem',
   overflow: 'hidden',
-  p: '0 !important',
+  position: 'relative',
   transition: 'all 150ms ease-in-out',
   zIndex: 1,
 });
@@ -58,8 +56,7 @@ export const MRT_TopToolbar = <TData extends MRT_RowData>({
     isMobile || !!renderTopToolbarCustomActions || showGlobalFilter;
 
   return (
-    <Toolbar
-      variant="dense"
+    <Box
       {...toolbarProps}
       ref={(ref: HTMLDivElement) => {
         topToolbarRef.current = ref;
@@ -69,9 +66,9 @@ export const MRT_TopToolbar = <TData extends MRT_RowData>({
         }
       }}
       sx={(theme) => ({
-        position: isFullScreen ? 'sticky' : undefined,
-        top: isFullScreen ? '0' : undefined,
         ...commonToolbarStyles({ theme }),
+        position: isFullScreen ? 'sticky' : 'relative',
+        top: isFullScreen ? '0' : undefined,
         ...(parseFromValuesOrFunc(toolbarProps?.sx, theme) as any),
       })}
     >
@@ -126,6 +123,6 @@ export const MRT_TopToolbar = <TData extends MRT_RowData>({
           <MRT_TablePagination position="top" table={table} />
         )}
       <MRT_LinearProgressBar isTopToolbar table={table} />
-    </Toolbar>
+    </Box>
   );
 };
