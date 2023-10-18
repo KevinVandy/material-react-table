@@ -105,10 +105,6 @@ export const routes: Array<RouteItem> = [
         label: 'Custom Headless Example',
       },
       {
-        href: '/docs/examples/aggregation-and-grouping',
-        label: 'Aggregation/Grouping Example',
-      },
-      {
         href: '/docs/examples/export-csv',
         label: 'Data Export Examples',
         secondaryItems: [
@@ -135,6 +131,16 @@ export const routes: Array<RouteItem> = [
             label: 'Inline Table Editing',
           },
         ],
+      },
+      {
+        href: '/docs/examples/aggregation-and-grouping',
+        label: 'Expanding / Grouping Examples',
+        secondaryItems: [
+          {
+            href: '/docs/examples/detail-panel',
+            label: 'Detail Panel (Expanding)',
+          },
+        ]
       },
       {
         href: '/docs/examples/filter-variants',

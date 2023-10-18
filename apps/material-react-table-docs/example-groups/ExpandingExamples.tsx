@@ -1,17 +1,16 @@
 import { useRouter } from 'next/router';
 import { Box, Tab, Tabs } from '@mui/material';
-import BasicExample from '../examples/basic';
-import MinimalExample from '../examples/minimal';
-import AdvancedExample from '../examples/advanced';
-import CustomHeadlessExample from '../examples/custom-headless';
+import AggregationAndGroupingExample from '../examples/aggregation-and-grouping';
+import DetailExample from '../examples/enable-detail-panel';
+import ExpandingTreeExample from '../examples/expanding-tree-expanded';
 import { useState } from 'react';
 import Link from 'next/link';
 import LaunchIcon from '@mui/icons-material/Launch';
 
-const BasicExamples = ({ isPage = false }) => {
+const ExpandingExamples = ({ isPage = false }) => {
   const { pathname, push } = useRouter();
   const [activeTab, setActiveTab] = useState(
-    isPage ? pathname.split('/').pop() : 'basic',
+    isPage ? pathname.split('/').pop() : 'detail-panel',
   );
 
   return (
@@ -25,10 +24,12 @@ const BasicExamples = ({ isPage = false }) => {
               : setActiveTab(newPath as string)
           }
         >
-          <Tab label="Basic" value="basic" />
-          <Tab label="Minimal" value="minimal" />
-          <Tab label="Advanced" value="advanced" />
-          <Tab label="Custom Headless" value="custom-headless" />
+          <Tab
+            label="Aggregation and Grouping"
+            value="aggregation-and-grouping"
+          />
+          <Tab label="Detail Panel" value="detail-panel" />
+          <Tab label="Expanding Tree" value="expanding-tree" />
           <Link href="/docs/examples" passHref legacyBehavior>
             <Tab
               label={
@@ -43,15 +44,14 @@ const BasicExamples = ({ isPage = false }) => {
         </Tabs>
       </Box>
       <Box>
-        {activeTab === 'basic' && <BasicExample showTopRow={isPage} />}
-        {activeTab === 'minimal' && <MinimalExample showTopRow={isPage} />}
-        {activeTab === 'advanced' && <AdvancedExample showTopRow={isPage} />}
-        {activeTab === 'custom-headless' && (
-          <CustomHeadlessExample showTopRow={isPage} />
+        {activeTab === 'aggregation-and-grouping' && (
+          <AggregationAndGroupingExample />
         )}
+        {activeTab === 'detail-panel' && <DetailExample />}
+        {activeTab === 'expanding-tree' && <ExpandingTreeExample />}
       </Box>
     </>
   );
 };
 
-export default BasicExamples;
+export default ExpandingExamples;

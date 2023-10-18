@@ -11,7 +11,7 @@ const nextConfig = {
     return [
       {
         source: '/docs/examples/data-export',
-        destination: '/docs/guides/export-csv',
+        destination: '/docs/examples/export-csv',
         permanent: true,
       },
       {

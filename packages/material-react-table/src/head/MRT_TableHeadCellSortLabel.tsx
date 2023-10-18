@@ -1,5 +1,4 @@
 import Badge from '@mui/material/Badge';
-import { type TableCellProps } from '@mui/material/TableCell';
 import TableSortLabel, {
   type TableSortLabelProps,
 } from '@mui/material/TableSortLabel';
@@ -14,7 +13,6 @@ import {
 interface Props<TData extends MRT_RowData> extends TableSortLabelProps {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
-  tableCellProps?: TableCellProps;
 }
 
 export const MRT_TableHeadCellSortLabel = <TData extends MRT_RowData>({

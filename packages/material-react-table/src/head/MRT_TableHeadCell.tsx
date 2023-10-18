@@ -252,11 +252,7 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
                   <MRT_TableHeadCellFilterLabel header={header} table={table} />
                 )}
                 {column.getCanSort() && (
-                  <MRT_TableHeadCellSortLabel
-                    header={header}
-                    table={table}
-                    tableCellProps={tableCellProps}
-                  />
+                  <MRT_TableHeadCellSortLabel header={header} table={table} />
                 )}
               </Box>
               {columnDefType !== 'group' && (
