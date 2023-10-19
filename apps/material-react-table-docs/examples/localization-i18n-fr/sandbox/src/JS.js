@@ -1,5 +1,3 @@
-import React from 'react';
-
 //Import Material React Table and its Types
 import { MaterialReactTable } from 'material-react-table';
 

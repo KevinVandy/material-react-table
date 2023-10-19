@@ -1,6 +1,6 @@
 import typescript from '@rollup/plugin-typescript';
 import { rollup } from 'rollup';
-import copy from 'rollup-plugin-copy';
+import fs from 'fs';
 
 const supportedLocales = [
   'ar',
@@ -48,30 +48,51 @@ async function build(locale) {
         declarationDir: undefined,
         rootDir: './src',
       }),
-      copy({
-        targets: [
-          ...['cjs', 'esm'].map((format) => ({
-            dest: './locales',
-            rename: () =>
-              format === 'esm' ? `${locale}.${format}.d.ts` : `${locale}.d.ts`,
-            src: `./dist/esm/types/locales/${locale}.d.ts`,
-          })),
-        ],
-      }),
     ],
   });
 
   await bundle.write({
-    file: `./locales/${locale}.js`,
+    file: `./locales/${locale}/index.js`,
     format: 'cjs',
     sourcemap: true,
   });
 
   await bundle.write({
-    file: `./locales/${locale}.esm.js`,
+    file: `./locales/${locale}/index.esm.js`,
     format: 'esm',
     sourcemap: true,
   });
+
+  const typeFile = `import { type MRT_Localization } from '../..';
+  export declare const MRT_Localization_${locale
+    .toUpperCase()
+    .replaceAll('-', '_')}: MRT_Localization;
+  `;
+
+  await fs.writeFile(`./locales/${locale}/index.d.ts`, typeFile, (err) => {
+    if (err) console.log(err);
+  });
+
+  await fs.writeFile(`./locales/${locale}/index.esm.d.ts`, typeFile, (err) => {
+    if (err) console.log(err);
+  });
+
+  await fs.writeFile(
+    `./locales/${locale}/package.json`,
+    JSON.stringify(
+      {
+        sideEffects: false,
+        module: './index.esm.js',
+        main: './index.js',
+        types: './index.d.ts',
+      },
+      null,
+      2,
+    ),
+    (err) => {
+      if (err) console.log(err);
+    },
+  );
 
   // eslint-disable-next-line
   console.log(`Built ${locale} locale`);

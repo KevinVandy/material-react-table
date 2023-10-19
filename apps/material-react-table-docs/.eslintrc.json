@@ -2,12 +2,14 @@
   "extends": [
     "next/core-web-vitals",
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "plugins": [
     "@typescript-eslint",
-    "mui-path-imports"
+    "mui-path-imports",
+    "@tanstack/query"
   ],
   "rules": {
     "@next/next/no-img-element": "off",

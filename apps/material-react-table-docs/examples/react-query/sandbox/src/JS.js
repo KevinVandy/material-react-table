@@ -5,6 +5,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import {
   QueryClient,
   QueryClientProvider,
+  keepPreviousData,
   useQuery,
 } from '@tanstack/react-query';
 
@@ -46,7 +47,7 @@ const Example = () => {
       const json = await response.json();
       return json;
     },
-    keepPreviousData: true,
+    placeholderData: keepPreviousData,
   });
 
   const columns = useMemo(

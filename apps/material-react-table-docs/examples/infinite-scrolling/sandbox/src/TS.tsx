@@ -74,14 +74,14 @@ const Example = () => {
   const { data, fetchNextPage, isError, isFetching, isLoading } =
     useInfiniteQuery<UserApiResponse>({
       queryKey: ['table-data', columnFilters, globalFilter, sorting],
-      queryFn: async ({ pageParam = 0 }) => {
+      queryFn: async ({ pageParam }) => {
         const url = new URL(
           '/api/data',
           process.env.NODE_ENV === 'production'
             ? 'https://www.material-react-table.com'
             : 'http://localhost:3000',
         );
-        url.searchParams.set('start', `${pageParam * fetchSize}`);
+        url.searchParams.set('start', `${(pageParam as number) * fetchSize}`);
         url.searchParams.set('size', `${fetchSize}`);
         url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
         url.searchParams.set('globalFilter', globalFilter ?? '');
@@ -91,8 +91,8 @@ const Example = () => {
         const json = (await response.json()) as UserApiResponse;
         return json;
       },
+      initialPageParam: 0,
       getNextPageParam: (_lastGroup, groups) => groups.length,
-      keepPreviousData: true,
       refetchOnWindowFocus: false,
     });
 

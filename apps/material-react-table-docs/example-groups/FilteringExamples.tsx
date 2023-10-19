@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { Box, Tab, Tabs } from '@mui/material';
 import FilterVariantsExample from '../examples/customize-filter-variants';
 import FacetedValuesExample from '../examples/enable-filter-facet-values';
 import FilterModesExample from '../examples/customize-filter-modes';
-import PopoverFiltersExample from '../examples/alternate-column-filtering'
-import { useState } from 'react';
+import PopoverFiltersExample from '../examples/alternate-column-filtering';
 import Link from 'next/link';
 import LaunchIcon from '@mui/icons-material/Launch';
 

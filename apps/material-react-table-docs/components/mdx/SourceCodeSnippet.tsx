@@ -131,7 +131,7 @@ export const SourceCodeSnippet = ({
                   gap: '2rem',
                 }}
               >
-                <Box sx={{display: 'flex', alignItems: 'center'}}>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <Box
                     sx={{
                       display: { xs: 'grid', sm: 'flex' },

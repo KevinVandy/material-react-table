@@ -36,7 +36,7 @@ export const MRT_TableHeadCellGrabHandle = <TData extends MRT_RowData>({
       column,
       table,
     }),
-    ...rest
+    ...rest,
   };
 
   const handleDragStart = (event: DragEvent<HTMLButtonElement>) => {

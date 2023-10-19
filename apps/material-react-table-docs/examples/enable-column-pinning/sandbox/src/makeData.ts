@@ -69,6 +69,5 @@ export const data = [
     city: 'Vancouver',
     state: 'British Columbia',
     country: 'Canada',
-
-  }
+  },
 ];

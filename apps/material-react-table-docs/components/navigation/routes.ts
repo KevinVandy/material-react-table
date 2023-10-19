@@ -140,7 +140,7 @@ export const routes: Array<RouteItem> = [
             href: '/docs/examples/detail-panel',
             label: 'Detail Panel (Expanding)',
           },
-        ]
+        ],
       },
       {
         href: '/docs/examples/filter-variants',

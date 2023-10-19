@@ -245,9 +245,7 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
               <td
                 colSpan={table.getVisibleLeafColumns().length}
                 style={{
-                  display: layoutMode?.startsWith('grid')
-                    ? 'grid'
-                    : undefined,
+                  display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
                 }}
               >
                 {renderEmptyRowsFallback?.({ table }) ?? (

@@ -60,8 +60,8 @@ const Example = () => {
         const json = await response.json();
         return json;
       },
+      initialPageParam: 0,
       getNextPageParam: (_lastGroup, groups) => groups.length,
-      keepPreviousData: true,
       refetchOnWindowFocus: false,
     });
 

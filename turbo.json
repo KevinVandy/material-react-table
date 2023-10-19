@@ -45,7 +45,7 @@
         "locales/**"
       ]
     },
-    "lib:build-no-locales": {
+    "lib:build-lib": {
       "outputs": [
         "dist/**"
       ]

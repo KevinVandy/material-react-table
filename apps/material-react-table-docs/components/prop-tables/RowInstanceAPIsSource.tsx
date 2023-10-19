@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { SourceCodeSnippet } from '../mdx/SourceCodeSnippet';
 const TS = require('!!raw-loader!./RowInstanceAPIsTable.tsx').default;

@@ -1,4 +1,3 @@
-import React from 'react';
 import { alpha, Card, CardContent, Typography } from '@mui/material';
 import Link from 'next/link';
 

@@ -48,7 +48,6 @@ export const ThemeContextProvider = ({ children }) => {
           isLightTheme,
           primaryColor,
           secondaryColor,
-          
         })}
       >
         <LocalizationProvider dateAdapter={AdapterDayjs}>
