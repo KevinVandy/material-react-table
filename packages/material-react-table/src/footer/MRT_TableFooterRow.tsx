@@ -1,8 +1,8 @@
 import { type VirtualItem } from '@tanstack/react-virtual';
 import TableRow, { type TableRowProps } from '@mui/material/TableRow';
-import { lighten } from '@mui/material/styles';
 import { MRT_TableFooterCell } from './MRT_TableFooterCell';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { getMRTTheme } from '../style.utils';
 import {
   type MRT_Header,
   type MRT_HeaderGroup,
@@ -53,7 +53,7 @@ export const MRT_TableFooterRow = <TData extends MRT_RowData>({
     <TableRow
       {...tableRowProps}
       sx={(theme) => ({
-        backgroundColor: lighten(theme.palette.background.default, 0.05),
+        backgroundColor: getMRTTheme(table, theme).baseBackgroundColor,
         display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
         width: '100%',
         ...(parseFromValuesOrFunc(tableRowProps?.sx, theme) as any),

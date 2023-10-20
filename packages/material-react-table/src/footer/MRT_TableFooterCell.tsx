@@ -1,5 +1,6 @@
 import TableCell, { type TableCellProps } from '@mui/material/TableCell';
-import { getCommonCellStyles, parseFromValuesOrFunc } from '../column.utils';
+import { parseFromValuesOrFunc } from '../column.utils';
+import { getCommonMRTCellStyles } from '../style.utils';
 import {
   type MRT_Header,
   type MRT_RowData,
@@ -50,7 +51,7 @@ export const MRT_TableFooterCell = <TData extends MRT_RowData>({
             : '1.5rem',
         verticalAlign: 'top',
         zIndex: column.getIsPinned() && columnDefType !== 'group' ? 2 : 1,
-        ...getCommonCellStyles({
+        ...getCommonMRTCellStyles({
           column,
           table,
           tableCellProps,

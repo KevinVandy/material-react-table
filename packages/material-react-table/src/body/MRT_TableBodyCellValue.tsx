@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 import Box from '@mui/material/Box';
-import { darken, lighten } from '@mui/material/styles';
+import { getMRTTheme } from '../style.utils';
 import {
   type MRT_Cell,
   type MRT_RowData,
@@ -83,12 +83,12 @@ export const MRT_TableBodyCellValue = <TData extends MRT_RowData>({
                 match
                   ? {
                       backgroundColor: (theme) =>
-                        theme.palette.mode === 'dark'
-                          ? darken(theme.palette.warning.dark, 0.25)
-                          : lighten(theme.palette.warning.light, 0.5),
+                        getMRTTheme(table, theme).matchHighlightColor,
                       borderRadius: '2px',
                       color: (theme) =>
-                        theme.palette.mode === 'dark' ? 'white' : 'black',
+                        theme.palette.mode === 'dark'
+                          ? theme.palette.common.white
+                          : theme.palette.common.black,
                       padding: '2px 1px',
                     }
                   : undefined
@@ -112,5 +112,5 @@ export const MRT_TableBodyCellValue = <TData extends MRT_RowData>({
     });
   }
 
-  return <>{renderedCellValue}</>;
+  return renderedCellValue;
 };

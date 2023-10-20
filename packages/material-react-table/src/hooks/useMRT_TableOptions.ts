@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { MRT_AggregationFns } from '../aggregationFns';
-import { MRT_DefaultColumn, MRT_DefaultDisplayColumn } from '../column.utils';
 import { MRT_FilterFns } from '../filterFns';
 import { MRT_Default_Icons } from '../icons';
 import { MRT_Localization_EN } from '../locales/en';
@@ -10,6 +9,28 @@ import {
   type MRT_RowData,
   type MRT_TableOptions,
 } from '../types';
+
+const MRT_DefaultColumn = {
+  filterVariant: 'text',
+  maxSize: 1000,
+  minSize: 40,
+  size: 180,
+} as const;
+
+const MRT_DefaultDisplayColumn = {
+  columnDefType: 'display',
+  enableClickToCopy: false,
+  enableColumnActions: false,
+  enableColumnDragging: false,
+  enableColumnFilter: false,
+  enableColumnOrdering: false,
+  enableEditing: false,
+  enableGlobalFilter: false,
+  enableGrouping: false,
+  enableHiding: false,
+  enableResizing: false,
+  enableSorting: false,
+} as const;
 
 export const useMRT_TableOptions: <TData extends MRT_RowData>(
   tableOptions: MRT_TableOptions<TData>,

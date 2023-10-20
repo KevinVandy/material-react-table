@@ -1,9 +1,10 @@
 import typescript from '@rollup/plugin-typescript';
-import { rollup } from 'rollup';
 import fs from 'fs';
+import { rollup } from 'rollup';
 
 const supportedLocales = [
   'ar',
+  'az',
   'bg',
   'cs',
   'da',
@@ -47,6 +48,7 @@ async function build(locale) {
         declaration: false,
         declarationDir: undefined,
         rootDir: './src',
+        sourceMap: false,
       }),
     ],
   });
@@ -70,10 +72,12 @@ async function build(locale) {
   `;
 
   await fs.writeFile(`./locales/${locale}/index.d.ts`, typeFile, (err) => {
+    // eslint-disable-next-line
     if (err) console.log(err);
   });
 
   await fs.writeFile(`./locales/${locale}/index.esm.d.ts`, typeFile, (err) => {
+    // eslint-disable-next-line
     if (err) console.log(err);
   });
 
@@ -81,15 +85,16 @@ async function build(locale) {
     `./locales/${locale}/package.json`,
     JSON.stringify(
       {
-        sideEffects: false,
-        module: './index.esm.js',
         main: './index.js',
+        module: './index.esm.js',
+        sideEffects: false,
         types: './index.d.ts',
       },
       null,
       2,
     ),
     (err) => {
+      // eslint-disable-next-line
       if (err) console.log(err);
     },
   );

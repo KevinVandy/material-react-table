@@ -1,4 +1,5 @@
 import {
+  type CSSProperties,
   type Dispatch,
   type MutableRefObject,
   type ReactNode,
@@ -770,6 +771,13 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
    * @link https://www.material-react-table.com/docs/guides/memoize-components
    */
   memoMode?: 'cells' | 'rows' | 'table-body';
+  mrtTheme?: {
+    baseBackgroundColor?: CSSProperties['backgroundColor'];
+    draggingBorderColor?: CSSProperties['borderColor'];
+    matchHighlightColor?: CSSProperties['backgroundColor'];
+    pinnedRowBackgroundColor?: CSSProperties['backgroundColor'];
+    selectedRowBackgroundColor?: CSSProperties['backgroundColor'];
+  };
   muiBottomToolbarProps?:
     | ((props: { table: MRT_TableInstance<TData> }) => BoxProps)
     | BoxProps;

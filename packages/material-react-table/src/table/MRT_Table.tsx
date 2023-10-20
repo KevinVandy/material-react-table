@@ -8,11 +8,11 @@ import Table, { type TableProps } from '@mui/material/Table';
 import { MRT_TableBody, Memo_MRT_TableBody } from '../body/MRT_TableBody';
 import {
   extraIndexRangeExtractor,
-  parseCSSVarId,
   parseFromValuesOrFunc,
 } from '../column.utils';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
 import { MRT_TableHead } from '../head/MRT_TableHead';
+import { parseCSSVarId } from '../style.utils';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends MRT_RowData> extends TableProps {

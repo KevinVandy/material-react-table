@@ -1,4 +1,4 @@
-import { type CSSProperties, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import {
   createRow as _createRow,
   flexRender as _flexRender,
@@ -6,9 +6,6 @@ import {
   type Row,
 } from '@tanstack/react-table';
 import { type Range, defaultRangeExtractor } from '@tanstack/react-virtual';
-import { type TableCellProps } from '@mui/material/TableCell';
-import { alpha, lighten } from '@mui/material/styles';
-import { type Theme } from '@mui/material/styles';
 import { type MRT_AggregationFns } from './aggregationFns';
 import { type MRT_FilterFns } from './filterFns';
 import { type MRT_SortingFns } from './sortingFns';
@@ -23,7 +20,6 @@ import {
   type MRT_FilterOption,
   type MRT_GroupColumnDef,
   type MRT_GroupingState,
-  type MRT_Header,
   type MRT_Row,
   type MRT_RowData,
   type MRT_TableInstance,
@@ -288,125 +284,10 @@ export const getCanRankRows = <TData extends MRT_RowData>(
   );
 };
 
-export const getCommonCellStyles = <TData extends MRT_RowData>({
-  column,
-  header,
-  table,
-  tableCellProps,
-  theme,
-}: {
-  column: MRT_Column<TData>;
-  header?: MRT_Header<TData>;
-  table: MRT_TableInstance<TData>;
-  tableCellProps: TableCellProps;
-  theme: Theme;
-}) => {
-  const {
-    options: { layoutMode },
-  } = table;
-  const widthStyles: CSSProperties = {
-    minWidth: `max(calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
-      header?.id ?? column.id,
-    )}-size) * 1px), ${column.columnDef.minSize ?? 30}px)`,
-    width: `calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
-      header?.id ?? column.id,
-    )}-size) * 1px)`,
-  };
-
-  if (layoutMode === 'grid') {
-    widthStyles.flex = `var(--${header ? 'header' : 'col'}-${parseCSSVarId(
-      header?.id ?? column.id,
-    )}-size) 0 auto`;
-  } else if (layoutMode === 'grid-no-grow') {
-    widthStyles.flex = '0 0 auto';
-  }
-
-  return {
-    backgroundColor:
-      column.getIsPinned() && column.columnDef.columnDefType !== 'group'
-        ? alpha(lighten(theme.palette.background.default, 0.04), 0.97)
-        : 'inherit',
-    backgroundImage: 'inherit',
-    boxShadow: getIsLastLeftPinnedColumn(table, column)
-      ? `-4px 0 8px -6px ${alpha(theme.palette.common.black, 0.2)} inset`
-      : getIsFirstRightPinnedColumn(column)
-      ? `4px 0 8px -6px ${alpha(theme.palette.common.black, 0.2)} inset`
-      : undefined,
-    display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
-    left:
-      column.getIsPinned() === 'left'
-        ? `${column.getStart('left')}px`
-        : undefined,
-    ml:
-      table.options.enableColumnVirtualization &&
-      column.getIsPinned() === 'left' &&
-      column.getPinnedIndex() === 0
-        ? `-${
-            column.getSize() *
-            (table.getState().columnPinning.left?.length ?? 1)
-          }px`
-        : undefined,
-    mr:
-      table.options.enableColumnVirtualization &&
-      column.getIsPinned() === 'right' &&
-      column.getPinnedIndex() === table.getVisibleLeafColumns().length - 1
-        ? `-${
-            column.getSize() *
-            (table.getState().columnPinning.right?.length ?? 1) *
-            1.2
-          }px`
-        : undefined,
-    opacity:
-      table.getState().draggingColumn?.id === column.id ||
-      table.getState().hoveredColumn?.id === column.id
-        ? 0.5
-        : 1,
-    position:
-      column.getIsPinned() && column.columnDef.columnDefType !== 'group'
-        ? 'sticky'
-        : undefined,
-    right:
-      column.getIsPinned() === 'right'
-        ? `${getTotalRight(table, column)}px`
-        : undefined,
-    transition: table.options.enableColumnVirtualization
-      ? 'none'
-      : `padding 150ms ease-in-out`,
-    ...widthStyles,
-    // ...(!table.options.enableColumnResizing && widthStyles), //let devs pass in width styles if column resizing is disabled
-    ...(parseFromValuesOrFunc(tableCellProps?.sx, theme) as any),
-    // ...(table.options.enableColumnResizing && widthStyles), //don't let devs pass in width styles if column resizing is enabled
-  };
-};
-
-export const MRT_DefaultColumn = {
-  filterVariant: 'text',
-  maxSize: 1000,
-  minSize: 40,
-  size: 180,
-} as const;
-
-export const MRT_DefaultDisplayColumn = {
-  columnDefType: 'display',
-  enableClickToCopy: false,
-  enableColumnActions: false,
-  enableColumnDragging: false,
-  enableColumnFilter: false,
-  enableColumnOrdering: false,
-  enableEditing: false,
-  enableGlobalFilter: false,
-  enableGrouping: false,
-  enableHiding: false,
-  enableResizing: false,
-  enableSorting: false,
-} as const;
-
 export const parseFromValuesOrFunc = <T, U>(
   fn: ((arg: U) => T) | T | undefined,
   arg: U,
 ): T | undefined => (fn instanceof Function ? fn(arg) : fn);
-
-export const parseCSSVarId = (id: string) => id.replace(/[^a-zA-Z0-9]/g, '_');
 
 export const flexRender = _flexRender as (
   Comp: Renderable<any>,

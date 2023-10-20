@@ -125,11 +125,24 @@ export const MRT_GlobalFilterTextField = <TData extends MRT_RowData>({
           ) : (
             <SearchIcon style={{ marginRight: '4px' }} />
           ),
+          ...textFieldProps.InputProps,
+          sx: (theme) => ({
+            mb: 0,
+            ...(parseFromValuesOrFunc(
+              textFieldProps?.InputProps?.sx,
+              theme,
+            ) as any),
+          }),
+        }}
+        inputProps={{
+          autoComplete: 'new-password', // disable autocomplete and autofill
+          ...textFieldProps.inputProps,
         }}
         onChange={handleChange}
         placeholder={localization.search}
+        size="small"
         value={searchValue ?? ''}
-        variant="standard"
+        variant="outlined"
         {...textFieldProps}
         inputRef={(inputRef) => {
           searchInputRef.current = inputRef;

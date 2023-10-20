@@ -3,8 +3,8 @@ import { type VirtualItem } from '@tanstack/react-virtual';
 import Collapse from '@mui/material/Collapse';
 import TableCell, { type TableCellProps } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import { lighten } from '@mui/material/styles';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { getMRTTheme } from '../style.utils';
 import {
   type MRT_Row,
   type MRT_RowData,
@@ -78,7 +78,7 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
         {...tableCellProps}
         sx={(theme) => ({
           backgroundColor: virtualRow
-            ? lighten(theme.palette.background.default, 0.05)
+            ? getMRTTheme(table, theme).baseBackgroundColor
             : undefined,
           borderBottom: !row.getIsExpanded() ? 'none' : undefined,
           display: layoutMode?.startsWith('grid') ? 'flex' : undefined,

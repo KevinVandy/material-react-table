@@ -14,12 +14,12 @@ import { MRT_TableBodyCellValue } from './MRT_TableBodyCellValue';
 import { MRT_TableBodyRowGrabHandle } from './MRT_TableBodyRowGrabHandle';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 import {
-  getCommonCellStyles,
   getIsFirstColumn,
   getIsLastColumn,
   parseFromValuesOrFunc,
 } from '../column.utils';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
+import { getCommonMRTCellStyles, getMRTTheme } from '../style.utils';
 import {
   type MRT_Cell,
   type MRT_RowData,
@@ -97,6 +97,8 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     table,
   });
 
+  const { draggingBorderColor } = getMRTTheme(table, theme);
+
   const [skeletonWidth, setSkeletonWidth] = useState(100);
   useEffect(() => {
     if ((!isLoading && !showSkeletons) || skeletonWidth !== 100) return;
@@ -119,13 +121,13 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
 
     const borderStyle =
       columnSizingInfo.isResizingColumn === column.id
-        ? `2px solid ${theme.palette.primary.main} !important`
+        ? `2px solid ${draggingBorderColor} !important`
         : isDraggingColumn || isDraggingRow
-        ? `1px dashed ${theme.palette.text.secondary} !important`
+        ? `1px dashed ${theme.palette.grey[500]} !important`
         : isHoveredColumn ||
           isHoveredRow ||
           columnSizingInfo.isResizingColumn === column.id
-        ? `2px dashed ${theme.palette.primary.main} !important`
+        ? `2px dashed ${draggingBorderColor} !important`
         : undefined;
 
     if (columnSizingInfo.isResizingColumn === column.id) {
@@ -218,7 +220,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
         '&:hover': {
           outline:
             ['cell', 'table'].includes(editDisplayMode ?? '') && isEditable
-              ? `1px solid ${theme.palette.text.secondary}`
+              ? `1px solid ${theme.palette.grey[500]}`
               : undefined,
           outlineOffset: '-1px',
           textOverflow: 'clip',
@@ -258,7 +260,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
           row.getIsPinned() || density === 'compact' ? 'nowrap' : 'normal',
         zIndex:
           draggingColumn?.id === column.id ? 2 : column.getIsPinned() ? 1 : 0,
-        ...getCommonCellStyles({
+        ...getCommonMRTCellStyles({
           column,
           table,
           tableCellProps,

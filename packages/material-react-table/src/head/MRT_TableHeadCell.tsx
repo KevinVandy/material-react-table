@@ -9,8 +9,8 @@ import { MRT_TableHeadCellFilterLabel } from './MRT_TableHeadCellFilterLabel';
 import { MRT_TableHeadCellGrabHandle } from './MRT_TableHeadCellGrabHandle';
 import { MRT_TableHeadCellResizeHandle } from './MRT_TableHeadCellResizeHandle';
 import { MRT_TableHeadCellSortLabel } from './MRT_TableHeadCellSortLabel';
-import { getCommonCellStyles } from '../column.utils';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { getCommonMRTCellStyles, getMRTTheme } from '../style.utils';
 import {
   type MRT_Header,
   type MRT_RowData,
@@ -64,6 +64,8 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
     ...rest,
   };
 
+  const { draggingBorderColor } = getMRTTheme(table, theme);
+
   const showColumnActions =
     (enableColumnActions || columnDef.enableColumnActions) &&
     columnDef.enableColumnActions !== false;
@@ -89,11 +91,11 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
     const borderStyle =
       columnSizingInfo.isResizingColumn === column.id &&
       !header.subHeaders.length
-        ? `2px solid ${theme.palette.primary.main} !important`
+        ? `2px solid ${draggingBorderColor} !important`
         : draggingColumn?.id === column.id
-        ? `1px dashed ${theme.palette.text.secondary}`
+        ? `1px dashed ${theme.palette.grey[500]}`
         : hoveredColumn?.id === column.id
-        ? `2px dashed ${theme.palette.primary.main}`
+        ? `2px dashed ${draggingBorderColor}`
         : undefined;
 
     if (columnSizingInfo.isResizingColumn === column.id) {
@@ -178,7 +180,7 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
             : column.getIsPinned() && columnDefType !== 'group'
             ? 2
             : 1,
-        ...getCommonCellStyles({
+        ...getCommonMRTCellStyles({
           column,
           header,
           table,

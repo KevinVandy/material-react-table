@@ -10,6 +10,7 @@ export * from './inputs';
 export * from './menus';
 export * from './modals';
 export * from './sortingFns';
+export * from './style.utils';
 export * from './table';
 export * from './toolbar';
 export * from './types';

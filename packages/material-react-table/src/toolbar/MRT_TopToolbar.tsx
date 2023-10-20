@@ -1,6 +1,4 @@
 import Box from '@mui/material/Box';
-import { lighten } from '@mui/material/styles';
-import { type Theme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
 import { MRT_TablePagination } from './MRT_TablePagination';
@@ -9,19 +7,8 @@ import { MRT_ToolbarDropZone } from './MRT_ToolbarDropZone';
 import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_GlobalFilterTextField } from '../inputs/MRT_GlobalFilterTextField';
+import { getCommonToolbarStyles } from '../style.utils';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
-
-export const commonToolbarStyles = ({ theme }: { theme: Theme }) => ({
-  alignItems: 'flex-start',
-  backgroundColor: lighten(theme.palette.background.default, 0.05),
-  display: 'grid',
-  flexWrap: 'wrap-reverse',
-  minHeight: '3.5rem',
-  overflow: 'hidden',
-  position: 'relative',
-  transition: 'all 150ms ease-in-out',
-  zIndex: 1,
-});
 
 interface Props<TData extends MRT_RowData> {
   table: MRT_TableInstance<TData>;
@@ -66,7 +53,7 @@ export const MRT_TopToolbar = <TData extends MRT_RowData>({
         }
       }}
       sx={(theme) => ({
-        ...commonToolbarStyles({ theme }),
+        ...getCommonToolbarStyles({ table, theme }),
         position: isFullScreen ? 'sticky' : 'relative',
         top: isFullScreen ? '0' : undefined,
         ...(parseFromValuesOrFunc(toolbarProps?.sx, theme) as any),
@@ -86,6 +73,7 @@ export const MRT_TopToolbar = <TData extends MRT_RowData>({
           alignItems: 'flex-start',
           boxSizing: 'border-box',
           display: 'flex',
+          gap: '0.5rem',
           justifyContent: 'space-between',
           p: '0.5rem',
           position: stackAlertBanner ? 'relative' : 'absolute',
@@ -101,8 +89,10 @@ export const MRT_TopToolbar = <TData extends MRT_RowData>({
         {enableToolbarInternalActions ? (
           <Box
             sx={{
+              alignItems: 'center',
               display: 'flex',
               flexWrap: 'wrap-reverse',
+              gap: '0.5rem',
               justifyContent: 'flex-end',
             }}
           >

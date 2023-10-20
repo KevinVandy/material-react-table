@@ -1,8 +1,9 @@
 import { type VirtualItem } from '@tanstack/react-virtual';
+import { alpha } from '@mui/material';
 import TableRow, { type TableRowProps } from '@mui/material/TableRow';
-import { alpha, lighten } from '@mui/material/styles';
 import { MRT_TableHeadCell } from './MRT_TableHeadCell';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { getMRTTheme } from '../style.utils';
 import {
   type MRT_Header,
   type MRT_HeaderGroup,
@@ -42,7 +43,7 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
     <TableRow
       {...tableRowProps}
       sx={(theme) => ({
-        backgroundColor: lighten(theme.palette.background.default, 0.05),
+        backgroundColor: getMRTTheme(table, theme).baseBackgroundColor,
         boxShadow: `4px 0 8px ${alpha(theme.palette.common.black, 0.1)}`,
         display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
         top: 0,

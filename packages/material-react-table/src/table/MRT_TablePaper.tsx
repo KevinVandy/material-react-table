@@ -56,7 +56,7 @@ export const MRT_TablePaper = <TData extends MRT_RowData>({
               right: 0,
               top: 0,
               width: '100vw',
-              zIndex: 9999,
+              zIndex: 999,
             }
           : {}),
         ...tablePaperProps?.style,

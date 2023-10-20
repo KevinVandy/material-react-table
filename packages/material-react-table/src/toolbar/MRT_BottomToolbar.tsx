@@ -1,12 +1,12 @@
+import { alpha } from '@mui/material';
 import Box, { type BoxProps } from '@mui/material/Box';
-import { alpha } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 import { MRT_ToolbarDropZone } from './MRT_ToolbarDropZone';
-import { commonToolbarStyles } from './MRT_TopToolbar';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { getCommonToolbarStyles } from '../style.utils';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends MRT_RowData> extends BoxProps {
@@ -53,11 +53,11 @@ export const MRT_BottomToolbar = <TData extends MRT_RowData>({
         }
       }}
       sx={(theme) => ({
-        ...commonToolbarStyles({ theme }),
+        ...getCommonToolbarStyles({ table, theme }),
         bottom: isFullScreen ? '0' : undefined,
         boxShadow: `0 1px 2px -1px ${alpha(
-          theme.palette.common.black,
-          0.1,
+          theme.palette.grey[700],
+          0.5,
         )} inset`,
         left: 0,
         position: isFullScreen ? 'fixed' : 'relative',

@@ -2,8 +2,9 @@ import Box from '@mui/material/Box';
 import CircularProgress, {
   type CircularProgressProps,
 } from '@mui/material/CircularProgress';
-import { alpha, lighten } from '@mui/material/styles';
+import { alpha } from '@mui/material/styles';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { getMRTTheme } from '../style.utils';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends MRT_RowData> extends CircularProgressProps {
@@ -28,7 +29,7 @@ export const MRT_TableLoadingOverlay = <TData extends MRT_RowData>({
       sx={(theme) => ({
         alignItems: 'center',
         backgroundColor: alpha(
-          lighten(theme.palette.background.paper, 0.05),
+          getMRTTheme(table, theme).baseBackgroundColor,
           0.5,
         ),
         bottom: 0,

@@ -11,6 +11,7 @@ import {
 import { MRT_TableBodyCell, Memo_MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { getMRTTheme } from '../style.utils';
 import {
   type MRT_Cell,
   type MRT_Row,
@@ -118,6 +119,12 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
 
   const rowRef = useRef<HTMLTableRowElement | null>(null);
 
+  const {
+    baseBackgroundColor,
+    pinnedRowBackgroundColor,
+    selectedRowBackgroundColor,
+  } = getMRTTheme(table, theme)
+
   return (
     <>
       <TableRow
@@ -142,16 +149,13 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
             backgroundColor:
               tableRowProps?.hover !== false
                 ? row.getIsSelected()
-                  ? `${alpha(theme.palette.primary.main, 0.2)}`
+                  ? `${alpha(selectedRowBackgroundColor, 0.3)}`
                   : theme.palette.mode === 'dark'
-                  ? `${lighten(theme.palette.background.default, 0.12)}`
-                  : `${darken(theme.palette.background.default, 0.05)}`
+                  ? `${lighten(baseBackgroundColor, 0.05)}`
+                  : `${darken(baseBackgroundColor, 0.05)}`
                 : undefined,
           },
-          backgroundColor: `${lighten(
-            theme.palette.background.default,
-            0.05,
-          )} !important`,
+          backgroundColor: `${baseBackgroundColor} !important`,
           bottom:
             !virtualRow && bottomPinnedIndex !== undefined && isPinned
               ? `${
@@ -173,9 +177,9 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
             : undefined,
           td: {
             backgroundColor: row.getIsSelected()
-              ? alpha(theme.palette.primary.main, 0.2)
+              ? selectedRowBackgroundColor
               : isPinned
-              ? alpha(theme.palette.primary.main, 0.1)
+              ? pinnedRowBackgroundColor
               : undefined,
           },
           top: virtualRow

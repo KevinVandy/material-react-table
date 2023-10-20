@@ -8,8 +8,5 @@ import {
 
 export const useMaterialReactTable = <TData extends MRT_RowData>(
   tableOptions: MRT_TableOptions<TData>,
-): MRT_TableInstance<TData> => {
-  const parsedTableOptions = useMRT_TableOptions(tableOptions);
-  const tableInstance = useMRT_TableInstance(parsedTableOptions);
-  return tableInstance;
-};
+): MRT_TableInstance<TData> =>
+  useMRT_TableInstance(useMRT_TableOptions(tableOptions));

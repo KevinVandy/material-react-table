@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import { MRT_ColumnPinningButtons } from '../buttons/MRT_ColumnPinningButtons';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 import { parseFromValuesOrFunc, reorderColumn } from '../column.utils';
+import { getMRTTheme } from '../style.utils';
 import {
   type MRT_Column,
   type MRT_RowData,
@@ -101,9 +102,9 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
           my: 0,
           opacity: isDragging ? 0.5 : 1,
           outline: isDragging
-            ? `2px dashed ${theme.palette.divider}`
+            ? `2px dashed ${theme.palette.grey[500]}`
             : hoveredColumn?.id === column.id
-            ? `2px dashed ${theme.palette.primary.main}`
+            ? `2px dashed ${getMRTTheme(table, theme).draggingBorderColor}`
             : 'none',
           outlineOffset: '-2px',
           pl: `${(column.depth + 0.5) * 2}rem`,
