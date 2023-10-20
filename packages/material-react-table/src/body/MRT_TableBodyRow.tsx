@@ -123,7 +123,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
     baseBackgroundColor,
     pinnedRowBackgroundColor,
     selectedRowBackgroundColor,
-  } = getMRTTheme(table, theme)
+  } = getMRTTheme(table, theme);
 
   return (
     <>
