@@ -123,12 +123,12 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       columnSizingInfo.isResizingColumn === column.id
         ? `2px solid ${draggingBorderColor} !important`
         : isDraggingColumn || isDraggingRow
-        ? `1px dashed ${theme.palette.grey[500]} !important`
-        : isHoveredColumn ||
-          isHoveredRow ||
-          columnSizingInfo.isResizingColumn === column.id
-        ? `2px dashed ${draggingBorderColor} !important`
-        : undefined;
+          ? `1px dashed ${theme.palette.grey[500]} !important`
+          : isHoveredColumn ||
+            isHoveredRow ||
+            columnSizingInfo.isResizingColumn === column.id
+            ? `2px dashed ${draggingBorderColor} !important`
+            : undefined;
 
     if (columnSizingInfo.isResizingColumn === column.id) {
       return { borderRight: borderStyle };
@@ -136,24 +136,24 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
 
     return borderStyle
       ? {
-          borderBottom:
-            isDraggingRow || isHoveredRow || isLastRow
-              ? borderStyle
-              : undefined,
-          borderLeft:
-            isDraggingColumn ||
+        borderBottom:
+          isDraggingRow || isHoveredRow || isLastRow
+            ? borderStyle
+            : undefined,
+        borderLeft:
+          isDraggingColumn ||
             isHoveredColumn ||
             ((isDraggingRow || isHoveredRow) && isFirstColumn)
-              ? borderStyle
-              : undefined,
-          borderRight:
-            isDraggingColumn ||
+            ? borderStyle
+            : undefined,
+        borderRight:
+          isDraggingColumn ||
             isHoveredColumn ||
             ((isDraggingRow || isHoveredRow) && isLastColumn)
-              ? borderStyle
-              : undefined,
-          borderTop: isDraggingRow || isHoveredRow ? borderStyle : undefined,
-        }
+            ? borderStyle
+            : undefined,
+        borderTop: isDraggingRow || isHoveredRow ? borderStyle : undefined,
+      }
       : undefined;
   }, [
     columnSizingInfo.isResizingColumn,
@@ -238,22 +238,21 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
               ? '0 0.5rem'
               : '0.5rem'
             : density === 'comfortable'
-            ? columnDefType === 'display'
-              ? '0.5rem 0.75rem'
-              : '1rem'
-            : columnDefType === 'display'
-            ? '1rem 1.25rem'
-            : '1.5rem',
-        pl:
+              ? columnDefType === 'display'
+                ? '0.5rem 0.75rem'
+                : '1rem'
+              : columnDefType === 'display'
+                ? '1rem 1.25rem'
+                : '1.5rem',
+        [theme.direction === 'rtl' ? 'pr' : 'pl']:
           column.id === 'mrt-row-expand'
-            ? `${
-                row.depth +
-                (density === 'compact'
-                  ? 0.5
-                  : density === 'comfortable'
-                  ? 0.75
-                  : 1.25)
-              }rem`
+            ? `${row.depth +
+            (density === 'compact'
+              ? 0.5
+              : density === 'comfortable'
+                ? 0.75
+                : 1.25)
+            }rem`
             : undefined,
         textOverflow: columnDefType !== 'display' ? 'ellipsis' : undefined,
         whiteSpace:
