@@ -23,7 +23,6 @@ export const MRT_TableHeadCellColumnActionsButton = <
 }: Props<TData>) => {
   const {
     options: {
-      columnFilterDisplayMode,
       icons: { MoreVertIcon },
       localization,
       muiColumnActionsButtonProps,
@@ -71,18 +70,15 @@ export const MRT_TableHeadCellColumnActionsButton = <
               opacity: 1,
             },
             height: '2rem',
-            m: '-4px',
+            m: '-8px -4px',
             opacity: 0.3,
-            transform: `scale(0.8) ${
-              columnFilterDisplayMode !== 'popover' ? 'translateX(-4px)' : ''
-            }`,
-            transition: 'opacity 150ms',
+            transition: 'all 150ms',
             width: '2rem',
             ...(parseFromValuesOrFunc(iconButtonProps?.sx, theme) as any),
           })}
           title={undefined}
         >
-          <MoreVertIcon />
+          <MoreVertIcon style={{ transform: 'scale(0.9)' }} />
         </IconButton>
       </Tooltip>
       {anchorEl && (

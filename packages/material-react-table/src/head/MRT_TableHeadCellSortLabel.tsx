@@ -56,7 +56,9 @@ export const MRT_TableHeadCellSortLabel = <TData extends MRT_RowData>({
               ? (props) => (
                   <SyncAltIcon
                     {...props}
-                    style={{ transform: 'rotate(-90deg) scaleX(0.8)' }}
+                    style={{
+                      transform: 'rotate(-90deg) scaleX(0.9) translateX(-1px)',
+                    }}
                   />
                 )
               : ArrowDownwardIcon

@@ -54,13 +54,13 @@ async function build(locale) {
   await bundle.write({
     file: `./locales/${locale}/index.js`,
     format: 'cjs',
-    sourcemap: true,
+    sourcemap: false,
   });
 
   await bundle.write({
     file: `./locales/${locale}/index.esm.js`,
     format: 'esm',
-    sourcemap: true,
+    sourcemap: false,
   });
 
   const typeFile = `import { type MRT_Localization } from '../..';
