@@ -19,9 +19,9 @@ function App({ Component, pageProps }: AppProps) {
 
   const showBreadCrumbs = pathname !== '/';
   const showMiniNav =
-    (pathname.includes('/docs/') &&
-      !pathname.includes('/examples/') &&
-      !pathname.includes('/api/')) ||
+    pathname.includes('/docs/getting-started') ||
+    pathname.includes('/docs/guides') ||
+    pathname.includes('/migrating') ||
     pathname === '/about' ||
     pathname === '/changelog';
 

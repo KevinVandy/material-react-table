@@ -10,6 +10,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/docs/guides/typescript',
+        destination: '/docs/guides/best-practices',
+        permanent: true,
+      },
+      {
         source: '/docs/examples/data-export',
         destination: '/docs/examples/export-csv',
         permanent: true,

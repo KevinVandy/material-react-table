@@ -218,8 +218,8 @@ export const routes: Array<RouteItem> = [
         href: '/docs/guides#fundamentals',
         items: [
           {
-            href: '/docs/guides/typescript',
-            label: 'TypeScript',
+            href: '/docs/guides/best-practices',
+            label: 'Best Practices (TypeScript)',
           },
           {
             href: '/docs/guides/data-columns',
