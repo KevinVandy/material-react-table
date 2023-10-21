@@ -19,13 +19,13 @@ export const MiniNav = () => {
     <Box
       sx={{
         position: isXLDesktop ? 'fixed' : undefined,
-        top: '80px',
+        top: '60px',
         right: '2rem',
         minWidth: '100px',
         maxWidth: isXLDesktop ? '250px' : '500px',
       }}
     >
-      <Typography component="div" variant="h6">
+      <Typography mt="1rem" component="div" variant="h6">
         On This Page
       </Typography>
       <ul

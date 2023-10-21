@@ -61,7 +61,7 @@ You can alternatively use the `accessorFn` property. Here are at least three way
 In each case, the `id` property is now required since there is no `accessorKey` for MRT to derive it from.
 
 ```tsx
-const columns = useMemo(
+const columns = useMemo<MRT_ColumnDef<Customer>[]>(
   () => [
     {
       //simple accessorFn that works the same way as an `accessorKey`
@@ -84,6 +84,28 @@ const columns = useMemo(
   ],
   [],
 );
+```
+
+#### Method 3 - Using createMRTColumnHelper
+
+> New in V2 (After many requests)
+
+Alternatively you can use the `createMRTColumnHelper` utility function to define your columns definitions in a slightly more type-safe way. Instantiate a `columnHelper` by passing in your `TData` type as a generic argument. Then the first argument of the `columnHelper.accessor()` method can be either an `accessorKey` or an `accessorFn`. Then you can specify the rest of the column options as the second argument.
+
+```tsx
+const columnHelper = createMRTColumnHelper<Customer>();
+
+const columns = [
+  //accessorKey as first argument, rest of column options as second argument
+  columnHelper.accessor('name', {
+    header: 'Last Name',
+  }),
+  //accessorFn as first argument, rest of column options as second argument
+  columnHelper.accessor((row) => Number(row.age), {
+    header: 'Age',
+    id: 'age', //id is required when using accessorFn
+  }),
+];
 ```
 
 ### Custom Header Render
@@ -222,27 +244,27 @@ const columns = [
 ];
 ```
 
-However, the column sizes might not change as much as you would expect. This is because the browser treats `<th>` and `<td>` elements differently with in a `<table>` element by default.
+If exact column sizes are important to you, you may want to consider using one of the other `layoutModes` other than the default `"semantic"` layouMode.
 
-You can improve this slightly by changing the table layout to `fixed` instead of the default `auto` in the `muiTableProps`.
+#### Layout Modes
+
+Material React Table has 3 layout modes that affect how columns styles are applied internally. Depending on which features you enable, the `layoutMode` table option will automatically change to the appropriate value, though you can override it with your own value if you want.
+
+1. `"semantic"` (default with default features) - uses default css styles that come with `<table>`, `<tr>`, `<td>`, etc. elements.
+2. `"grid"` (default when virtualization is enabled) - uses CSS Grid and Flexbox styles instead of default styles.
+3. `"grid-no-grow"` (default when column resizing is enabled) - uses CSS Grid and Flexbox styles, but also sets `flex-grow: 0` on all columns and adds an empty "spacer" column to the end of the table to fill the potential remaining space.
+
+If you want your columns to have an absolute width, you can use the `"grid-no-grow"` layout mode and set the `size` option on each column.
 
 ```tsx
-<MaterialReactTable
-  muiTableProps={{
-    sx: {
-      tableLayout: 'fixed',
-    },
-  }}
-/>
+const table = useMaterialReactTable({
+  columns,
+  data,
+  layoutMode: 'grid-no-grow', //absolute column widths that will NOT grow to fill remaining space
+});
 ```
 
-The columns will still try to increase their width to take up the full width of the table, but the columns that do have a defined size will have their width respected more.
-
-To learn more about how table-layout `fixed` vs `auto` works, we recommend reading this [blog post](https://css-tricks.com/almanac/properties/t/table-layout/) by CSS-Tricks.
-
-#### Disable Column Growing
-
-By default, columns grow to fill the width of the table. However, you can disable this behavior by setting the `flexGrow` css for the table head and body cells to `0` when the `layoutMode` prop is also set to `"grid"`. This is covered in more detail in the [Column Resizing Guide](/docs/guides/column-resizing#disable-column-growing).
+> The `'grid-no-grow'` layoutMode is new in MRT V2.
 
 ### Set Column Alignment
 

@@ -114,6 +114,7 @@ const columns = [
   }),
   //accessorFn as first argument, rest of column options as second argument
   columnHelper.accessor((row) => Number(row.age), {
+    id; 'age', //id required for accessorFn
     header: 'Age',
     filterVariant: 'range-slider', //you should get type hints for all possible column options that you can define here
     Cell: ({ cell }) => <span>{cell.getValue()}</span>, //cell.getValue() will be typed as number instead of unknown

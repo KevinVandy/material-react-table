@@ -61,7 +61,7 @@ export const BreadCrumbs = () => {
         <Tooltip title="Go Back">
           <IconButton
             aria-label="Go Back"
-            color="inherit"
+            color="default"
             onClick={back}
             size="small"
           >
