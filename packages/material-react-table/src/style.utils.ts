@@ -32,7 +32,7 @@ export const getMRTTheme = <TData extends MRT_RowData>(
       : lighten(theme.palette.warning.light, 0.5),
   pinnedRowBackgroundColor: alpha(theme.palette.primary.main, 0.1),
   selectedRowBackgroundColor: alpha(theme.palette.primary.main, 0.2),
-  ...table.options.mrtTheme,
+  ...parseFromValuesOrFunc(table.options.mrtTheme, theme),
 });
 
 export const getCommonMRTCellStyles = <TData extends MRT_RowData>({

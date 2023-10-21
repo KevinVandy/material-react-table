@@ -1,7 +1,11 @@
 import { useMemo } from 'react';
-import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+  type MRT_ColumnDef,
+} from 'material-react-table';
 import { data, type Person } from './makeData';
-import { darken } from '@mui/material';
+import { lighten } from '@mui/material';
 
 const Example = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
@@ -43,26 +47,37 @@ const Example = () => {
     //end
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      muiTablePaperProps={{
-        elevation: 0,
-        sx: {
-          borderRadius: '0',
-          border: '1px dashed #e0e0e0',
-        },
-      }}
-      muiTableBodyProps={{
-        sx: (theme) => ({
-          '& tr:nth-of-type(odd)': {
-            backgroundColor: darken(theme.palette.background.default, 0.1),
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableColumnResizing: true,
+    enableRowPinning: true,
+    enableRowSelection: true,
+    muiTablePaperProps: {
+      elevation: 0,
+      sx: {
+        borderRadius: '0',
+      },
+    },
+    muiTableBodyProps: {
+      sx: (theme) => ({
+        '& tr:nth-of-type(odd):not([data-selected="true"]):not([data-pinned="true"]) > td':
+          {
+            backgroundColor: 'rgba(32, 55, 43, 1)',
           },
-        }),
-      }}
-    />
-  );
+        '& tr:nth-of-type(odd):not([data-selected="true"]):not([data-pinned="true"]):hover > td':
+          {
+            backgroundColor: 'rgba(55, 66, 55, 1)',
+          },
+      }),
+    },
+    mrtTheme: (theme) => ({
+      baseBackgroundColor: 'rgba(3, 44, 43, 1)',
+      draggingBorderColor: theme.palette.secondary.main,
+    }),
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

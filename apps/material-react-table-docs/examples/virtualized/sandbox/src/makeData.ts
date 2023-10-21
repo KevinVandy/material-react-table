@@ -33,7 +33,7 @@ export const makeData = (numberOfRows: number) =>
     country: faker.location.country(),
     petName: faker.animal.cat(),
     age: faker.number.float({ min: 0, max: 100 }),
-    salary: faker.datatype
+    salary: faker.number
       .float({ min: 0, max: 1000000 })
       .toLocaleString('en-US', {
         style: 'currency',

@@ -129,6 +129,8 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
     <>
       <TableRow
         data-index={virtualRow?.index}
+        data-pinned={!!isPinned || undefined}
+        data-selected={row.getIsSelected() || undefined}
         onDragEnter={handleDragEnter}
         ref={(node: HTMLTableRowElement) => {
           if (node) {

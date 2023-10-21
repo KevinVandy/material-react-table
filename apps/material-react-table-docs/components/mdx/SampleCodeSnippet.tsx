@@ -100,12 +100,25 @@ export const SampleCodeSnippet = (props: Props) => {
                 ...style,
                 minHeight: '3rem',
                 overflowX: 'auto',
-                padding: '1rem 2.5rem 0 1rem',
+                padding: '1rem 1rem 0 1rem',
                 ...props?.style,
               }}
             >
               {tokens.map((line, i) => (
-                <div key={i} {...getLineProps({ line, key: i })}>
+                <div
+                  key={i}
+                  {...getLineProps({ line, key: i })}
+                  style={{
+                    textDecoration: line[0].content.startsWith('-')
+                      ? 'line-through'
+                      : undefined,
+                    color: line[0].content.startsWith('-')
+                      ? theme.palette.error.main
+                      : line[0].content.startsWith('+')
+                      ? theme.palette.success.main
+                      : undefined,
+                  }}
+                >
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({ token, key })} />
                   ))}

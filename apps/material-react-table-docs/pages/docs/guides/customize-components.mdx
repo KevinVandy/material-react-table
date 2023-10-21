@@ -6,7 +6,9 @@ import CustomizeStylesExample from '../../../examples/customize-table-styles';
 import { Box } from '@mui/material';
 
 <Head>
-  <title>{'Customize (Style) Components Guide - Material React Table V2 Docs'}</title>
+  <title>
+    {'Customize (Style) Components Guide - Material React Table V2 Docs'}
+  </title>
   <meta
     name="description"
     content="How to customize and pass props to Material UI components and set up a Material UI Theme in Material React Table"
@@ -27,31 +29,36 @@ All props labeled `mui...Props` get forwarded to Material UI components. Here is
   onlyOptions={
     new Set([
       'muiBottomToolbarProps',
+      'muiColumnActionsButtonProps',
+      'muiColumnDragHandleProps',
+      'muiCopyButtonProps',
+      'muiDetailPanelProps',
+      'muiEditRowDialogProps',
+      'muiEditTextFieldProps',
       'muiExpandAllButtonProps',
       'muiExpandButtonProps',
+      'muiFilterAutocompleteProps',
+      'muiFilterCheckboxProps',
+      'muiFilterDatePickerProps',
+      'muiFilterSliderProps',
+      'muiFilterTextFieldProps',
       'muiLinearProgressProps',
+      'muiPaginationProps',
+      'muiRowDragHandleProps',
       'muiSearchTextFieldProps',
       'muiSelectAllCheckboxProps',
       'muiSelectCheckboxProps',
-      'muiCopyButtonProps',
-      'muiEditTextFieldProps',
-      'muiTableBodyCellProps',
       'muiSkeletonProps',
+      'muiTableBodyCellProps',
       'muiTableBodyProps',
-      'muiRowDragHandleProps',
       'muiTableBodyRowProps',
       'muiTableContainerProps',
-      'muiDetailPanelProps',
       'muiTableFooterCellProps',
       'muiTableFooterProps',
       'muiTableFooterRowProps',
-      'muiColumnActionsButtonProps',
-      'muiColumnDragHandleProps',
-      'muiFilterTextFieldProps',
       'muiTableHeadCellProps',
       'muiTableHeadProps',
       'muiTableHeadRowProps',
-      'muiPaginationProps',
       'muiTablePaperProps',
       'muiTableProps',
       'muiToolbarAlertBannerChipProps',
@@ -68,12 +75,16 @@ Some of the column options expose the same props as above, but on a per column b
 <ColumnOptionsTable
   onlyOptions={
     new Set([
+      'muiColumnActionsButtonProps',
       'muiCopyButtonProps',
       'muiEditTextFieldProps',
+      'muiFilterAutocompleteProps',
+      'muiFilterCheckboxProps',
+      'muiFilterDatePickerProps',
+      'muiFilterSliderProps',
+      'muiFilterTextFieldProps',
       'muiTableBodyCellProps',
       'muiTableFooterCellProps',
-      'muiColumnActionsButtonProps',
-      'muiFilterTextFieldProps',
       'muiTableHeadCellProps',
     ])
   }
@@ -88,30 +99,34 @@ Each prop can either be passed as an object or as a callback function where you 
 #### Static Prop Objects
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableRowSelection
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableRowSelection: true,
   //passing the static object variant if no dynamic logic is needed
-  muiSelectCheckboxProps={{
+  muiSelectCheckboxProps: {
     color: 'secondary', //makes all checkboxes use the secondary color
-  }}
-/>
+  },
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 #### Callback Functions to Dynamically Set Prop Values
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableRowSelection
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableRowSelection: true,
   //passing the callback function variant. (You should get type hints for all the callback parameters available)
-  muiSelectCheckboxProps={({ row }) => ({
+  muiSelectCheckboxProps: ({ row }) => ({
     color: 'secondary',
     disabled: row.original.isAccountLocked, //access the row data to determine if the checkbox should be disabled
-  })}
-/>
+  }),
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 ### Styling Material UI Components
@@ -129,41 +144,45 @@ Don't worry, `className` and `style` props will still work, but let's show off s
 1. The `sx` prop can be used just a simply as a `style` prop by default
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  muiTableHeadCellProps={{
+const table = useMaterialReactTable({
+  columns,
+  data,
+  muiTableHeadCellProps: {
     //simple styling with the `sx` prop, works just like a style prop in this example
     sx: {
       fontWeight: 'normal',
       fontSize: '14px',
     },
-  }}
-/>
+  },
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 2. The `sx` prop gets easy access to your _muiTheme_ without you having to call the theme from a `useTheme` hook.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  muiTableHeadCellProps={{
+const table = useMaterialReactTable({
+  columns,
+  data,
+  muiTableHeadCellProps: {
     //no useTheme hook needed, just use the `sx` prop with the theme callback
     sx: (theme) => ({
       color: theme.palette.text.secondary,
     }),
-  }}
-/>
+  },
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 3. The `sx` prop gives you a much more concise way to add media queries to your styling.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  muiTableHeadCellProps={{
+const table = useMaterialReactTable({
+  columns,
+  data,
+  muiTableHeadCellProps: {
     //easier way to create media queries, no useMediaQuery hook needed.
     sx: {
       fontSize: {
@@ -174,8 +193,10 @@ Don't worry, `className` and `style` props will still work, but let's show off s
         xl: '14px',
       },
     },
-  }}
-/>
+  },
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 There are many more advantages to using the `sx` prop, but that is all we will discuss in these docs. You can learn more about it the official [Material UI Docs](https://mui.com/system/getting-started/the-sx-prop/).
@@ -209,40 +230,56 @@ return (
 );
 ```
 
-#### Important Theme Values used by Material React Table
-
-`<MaterialReactTable />` will primarily use the following values internally from your Material UI Theme by default:
-
-- `theme.palette.background.default` - used as the background color for most table components by default
-- `theme.palette.divider` - used in dividers in menus and for the column resizing handle
-- `theme.palette.info.main` - used in the Toolbar Alert Banner and the Toolbar DropZone component
-- `theme.palette.primary.main` - used as the primary color for anything colorful in the table (input fields, checkboxes, dragging borders, etc.)
-
-Notice that by default, the <Box component="span" sx={{color: "secondary.main", display: 'inline'}}>secondary color</Box> isn't used at all. Remember though that you can always override which color a component uses by passing in a `mui...Props` prop, like how we changed checkboxes to use the secondary color in the [example above](#static-prop-objects).
-
 #### Custom Material UI Theme Example
 
-A common use case for this could be if you want to switch your primary and secondary colors, just for this table. Let's take a look at an example that does that, along with some other styling tweaks, so that we can make an ugly table.
-
 <ThemeExample />
+
+### MRT Theme Values
+
+> New in V2
+
+Material React Table has a new `mrtTheme` table option where you can change a few of the default color values used by Material React Table.
+
+The default background color of the table toolbars and table are controlled by the `mrtTheme.baseBackgroundColor` value. Dragging borders, selected or pinned rows, and filter match highlighting are also configurable in the `mrtTheme` object.
+
+Here is the default `mrtTheme` object used internally if not overridden:
+
+```jsx
+{
+  baseBackgroundColor:
+    theme.palette.mode === 'dark'
+      ? lighten(theme.palette.background.default, 0.05)
+      : theme.palette.background.default,
+  draggingBorderColor: theme.palette.primary.main,
+  matchHighlightColor:
+    theme.palette.mode === 'dark'
+      ? darken(theme.palette.warning.dark, 0.25)
+      : lighten(theme.palette.warning.light, 0.5),
+  pinnedRowBackgroundColor: alpha(theme.palette.primary.main, 0.1),
+  selectedRowBackgroundColor: alpha(theme.palette.primary.main, 0.2),
+  ...table.options.mrtTheme,
+};
+```
 
 ### Customize Table Paper Styling
 
 You can customize both the props and the styles of the internal `<Paper />` component that wraps the table by passing in a `muiTablePaperProps` prop. This is useful if you want to change the elevation of the paper, or add a border radius, or any other styling you want to do to the paper.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  muiTablePaperProps={{
+const table = useMaterialReactTable({
+  columns,
+  data,
+  muiTablePaperProps: {
     elevation: 0, //change the mui box shadow
     //customize paper styles
     sx: {
       borderRadius: '0',
       border: '1px dashed #e0e0e0',
     },
-  }}
-/>
+  },
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 ### Customize Table Body, Rows, Columns, and Cells
@@ -252,18 +289,20 @@ You can customize both the props and the styles of the internal `<Paper />` comp
 If you need to style many of the rows or columns in a consistent manner, it usually makes sense to style the `<TableBody />` component itself. For example if you want to stripe the rows, you can do something like this:
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  muiTableBodyProps={{
+const table = useMaterialReactTable({
+  columns,
+  data,
+  muiTableBodyProps: {
     sx: {
       //stripe the rows, make odd rows a darker color
-      '& tr:nth-of-type(odd)': {
+      '& tr:nth-of-type(odd) > td': {
         backgroundColor: '#f5f5f5',
       },
     },
-  }}
-/>
+  },
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 #### Stripe Columns Example
@@ -271,23 +310,23 @@ If you need to style many of the rows or columns in a consistent manner, it usua
 Similarly, if you want to stripe the columns, you can do something like this:
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  muiTableBodyProps={{
+const table = useMaterialReactTable({
+  columns,
+  data,
+  muiTableBodyProps: {
     sx: {
       //stripe the rows, make odd rows a darker color
       '& td:nth-of-type(odd)': {
         backgroundColor: '#f5f5f5',
       },
     },
-  }}
-  muiTableBodyCellProps={{
+  },
+  muiTableBodyCellProps: {
     sx: {
       borderRight: '2px solid #e0e0e0', //add a border between columns
     },
-  }}
-/>
+  },
+});
 ```
 
 <CustomizeStylesExample />

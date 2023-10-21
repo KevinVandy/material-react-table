@@ -64,6 +64,7 @@ import { type TableFooterProps } from '@mui/material/TableFooter';
 import { type TableHeadProps } from '@mui/material/TableHead';
 import { type TableRowProps } from '@mui/material/TableRow';
 import { type TextFieldProps } from '@mui/material/TextField';
+import { type Theme } from '@mui/material/styles';
 import { type DatePickerProps } from '@mui/x-date-pickers';
 import { type MRT_AggregationFns } from './aggregationFns';
 import { type MRT_FilterFns } from './filterFns';
@@ -211,6 +212,14 @@ export interface MRT_Localization {
   ungroupByColumn: string;
   unpin: string;
   unpinAll: string;
+}
+
+export interface MRT_Theme {
+  baseBackgroundColor?: CSSProperties['backgroundColor'];
+  draggingBorderColor?: CSSProperties['borderColor'];
+  matchHighlightColor?: CSSProperties['backgroundColor'];
+  pinnedRowBackgroundColor?: CSSProperties['backgroundColor'];
+  selectedRowBackgroundColor?: CSSProperties['backgroundColor'];
 }
 
 export interface MRT_RowModel<TData extends MRT_RowData> {
@@ -771,13 +780,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
    * @link https://www.material-react-table.com/docs/guides/memoize-components
    */
   memoMode?: 'cells' | 'rows' | 'table-body';
-  mrtTheme?: {
-    baseBackgroundColor?: CSSProperties['backgroundColor'];
-    draggingBorderColor?: CSSProperties['borderColor'];
-    matchHighlightColor?: CSSProperties['backgroundColor'];
-    pinnedRowBackgroundColor?: CSSProperties['backgroundColor'];
-    selectedRowBackgroundColor?: CSSProperties['backgroundColor'];
-  };
+  mrtTheme?: ((theme: Theme) => MRT_Theme) | MRT_Theme;
   muiBottomToolbarProps?:
     | ((props: { table: MRT_TableInstance<TData> }) => BoxProps)
     | BoxProps;
