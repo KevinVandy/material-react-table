@@ -1,16 +1,28 @@
 import { useMemo } from 'react';
-import { MaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 import { data } from './makeData';
-import { darken } from '@mui/material';
+import { darken, lighten, useTheme } from '@mui/material';
 
 const Example = () => {
+  const theme = useTheme();
+
+  //light or dark green
+  const baseBackgroundColor =
+    theme.palette.mode === 'dark'
+      ? 'rgba(3, 44, 43, 1)'
+      : 'rgba(244, 255, 233, 1)';
+
   const columns = useMemo(
     //column definitions...
     () => [
       {
         accessorKey: 'id',
         header: 'ID',
-        size: 50,
+        size: 100,
+        enableColumnFilter: false,
       },
       {
         accessorKey: 'firstName',
@@ -43,26 +55,45 @@ const Example = () => {
     //end
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      muiTablePaperProps={{
-        elevation: 0,
-        sx: {
-          borderRadius: '0',
-          border: '1px dashed #e0e0e0',
-        },
-      }}
-      muiTableBodyProps={{
-        sx: (theme) => ({
-          '& tr:nth-of-type(odd)': {
-            backgroundColor: darken(theme.palette.background.default, 0.1),
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableColumnResizing: true,
+    enableRowPinning: true,
+    enableRowSelection: true,
+    muiTablePaperProps: {
+      elevation: 0,
+      sx: {
+        borderRadius: '0',
+      },
+    },
+    muiTableBodyProps: {
+      sx: (theme) => ({
+        '& tr:nth-of-type(odd):not([data-selected="true"]):not([data-pinned="true"]) > td':
+          {
+            backgroundColor: darken(baseBackgroundColor, 0.1),
           },
-        }),
-      }}
-    />
-  );
+        '& tr:nth-of-type(odd):not([data-selected="true"]):not([data-pinned="true"]):hover > td':
+          {
+            backgroundColor: darken(baseBackgroundColor, 0.2),
+          },
+        '& tr:nth-of-type(even):not([data-selected="true"]):not([data-pinned="true"]) > td':
+          {
+            backgroundColor: lighten(baseBackgroundColor, 0.1),
+          },
+        '& tr:nth-of-type(even):not([data-selected="true"]):not([data-pinned="true"]):hover > td':
+          {
+            backgroundColor: darken(baseBackgroundColor, 0.2),
+          },
+      }),
+    },
+    mrtTheme: (theme) => ({
+      baseBackgroundColor: baseBackgroundColor,
+      draggingBorderColor: theme.palette.secondary.main,
+    }),
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

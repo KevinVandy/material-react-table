@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Example from '../../../examples/enable-column-ordering';
 
 <Head>
-  <title>Table Event Listeners Guide - Material React Table V2 Docs</title>
+  <title>{'Table Event Listeners Guide - Material React Table V2 Docs'}</title>
   <meta
     name="description"
     content="How to add event listeners such as onClicks and onChange events to components in Material React Table"
@@ -24,41 +24,47 @@ Here are a few common examples of some useful event listeners you might want to 
 #### Add an onClick to a Table Row
 
 ```jsx
-<MaterialReactTable
-  muiTableBodyRowProps={({ row }) => ({
+const table = useMaterialReactTable({
+  columns,
+  data,
+  muiTableBodyRowProps: ({ row }) => ({
     onClick: (event) => {
       console.info(event, row.id);
     },
     sx: {
       cursor: 'pointer', //you might want to change the cursor too when adding an onClick
     },
-  })}
-/>
+  }),
+});
 ```
 
 #### Add an onDoubleClick to a Table Cell
 
 ```jsx
-<MaterialReactTable
-  muiTableBodyCellProps={({ cell }) => ({
+const table = useMaterialReactTable({
+  columns,
+  data,
+  muiTableBodyCellProps: ({ cell }) => ({
     onDoubleClick: (event) => {
       console.info(event, cell.id);
     },
-  })}
-/>
+  }),
+});
 ```
 
 #### Add an onBlur to an Edit TextField
 
 ```jsx
 //add to every edit text field
-<MaterialReactTable
-  muiEditTextFieldProps={({ cell }) => ({
+const table = useMaterialReactTable({
+  columns,
+  data,
+  muiEditTextFieldProps: ({ cell }) => ({
     onBlur: (event) => {
       console.info(event, cell.id);
     },
-  })}
-/>
+  }),
+});
 ```
 
 ```jsx
@@ -81,14 +87,15 @@ const columns = [
 > Warning: Be careful when using onChange, as it can trigger re-renders with every keystroke, which can lead to performance issues
 
 ```jsx
-//add to every edit text field
-<MaterialReactTable
-  muiEditTextFieldProps={({ cell }) => ({
+const table = useMaterialReactTable({
+  columns,
+  data,
+  muiEditTextFieldProps: ({ cell }) => ({
     onChange: (event) => {
       console.info(event, cell.id);
     },
-  })}
-/>
+  }),
+});
 ```
 
 ```jsx
