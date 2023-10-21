@@ -1,6 +1,7 @@
 import Paper, { type PaperProps } from '@mui/material/Paper';
 import { MRT_TableContainer } from './MRT_TableContainer';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { getMRTTheme } from '../style.utils';
 import { MRT_BottomToolbar } from '../toolbar/MRT_BottomToolbar';
 import { MRT_TopToolbar } from '../toolbar/MRT_TopToolbar';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
@@ -62,6 +63,7 @@ export const MRT_TablePaper = <TData extends MRT_RowData>({
         ...tablePaperProps?.style,
       }}
       sx={(theme) => ({
+        backgroundColor: getMRTTheme(table, theme).baseBackgroundColor,
         overflow: 'hidden',
         transition: 'all 100ms ease-in-out',
         ...(parseFromValuesOrFunc(tablePaperProps?.sx, theme) as any),

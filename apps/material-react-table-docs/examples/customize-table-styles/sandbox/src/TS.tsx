@@ -5,16 +5,25 @@ import {
   type MRT_ColumnDef,
 } from 'material-react-table';
 import { data, type Person } from './makeData';
-import { lighten } from '@mui/material';
+import { darken, lighten, useTheme } from '@mui/material';
 
 const Example = () => {
+  const theme = useTheme();
+
+  //light or dark green
+  const baseBackgroundColor =
+    theme.palette.mode === 'dark'
+      ? 'rgba(3, 44, 43, 1)'
+      : 'rgba(244, 255, 233, 1)';
+
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
     //column definitions...
     () => [
       {
         accessorKey: 'id',
         header: 'ID',
-        size: 50,
+        size: 100,
+        enableColumnFilter: false,
       },
       {
         accessorKey: 'firstName',
@@ -63,16 +72,24 @@ const Example = () => {
       sx: (theme) => ({
         '& tr:nth-of-type(odd):not([data-selected="true"]):not([data-pinned="true"]) > td':
           {
-            backgroundColor: 'rgba(32, 55, 43, 1)',
+            backgroundColor: darken(baseBackgroundColor, 0.1),
           },
         '& tr:nth-of-type(odd):not([data-selected="true"]):not([data-pinned="true"]):hover > td':
           {
-            backgroundColor: 'rgba(55, 66, 55, 1)',
+            backgroundColor: darken(baseBackgroundColor, 0.2),
+          },
+          '& tr:nth-of-type(even):not([data-selected="true"]):not([data-pinned="true"]) > td':
+          {
+            backgroundColor: lighten(baseBackgroundColor, 0.1),
+          },
+        '& tr:nth-of-type(even):not([data-selected="true"]):not([data-pinned="true"]):hover > td':
+          {
+            backgroundColor: darken(baseBackgroundColor, 0.2),
           },
       }),
     },
     mrtTheme: (theme) => ({
-      baseBackgroundColor: 'rgba(3, 44, 43, 1)',
+      baseBackgroundColor: baseBackgroundColor,
       draggingBorderColor: theme.palette.secondary.main,
     }),
   });
