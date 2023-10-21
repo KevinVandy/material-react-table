@@ -139,10 +139,6 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
       }}
       inputProps={{
         autoComplete: 'new-password', // disable autocomplete and autofill
-        sx: {
-          p: 0,
-          ...textFieldProps?.inputProps?.sx,
-        },
         ...textFieldProps.inputProps,
       }}
       onBlur={handleBlur}

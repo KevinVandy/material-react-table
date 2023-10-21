@@ -12,6 +12,15 @@ export type StateOption = {
 
 export const stateOptions: StateOption[] = [
   {
+    defaultValue: '',
+    description: 'a variable representing the currently creating row',
+    link: '',
+    linkText: '',
+    source: 'MRT',
+    stateOption: 'creatingRow',
+    type: 'MRT_Row',
+  },
+  {
     defaultValue: '{}',
     description:
       'an array of objects with id and value properties, representing the current filter values for each column',

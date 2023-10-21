@@ -27,11 +27,11 @@ export const MRT_EditRowModal = <TData extends MRT_RowData>({
     options: {
       localization,
       muiCreateRowModalProps,
-      muiEditRowModalProps,
+      muiEditRowDialogProps,
       onCreatingRowCancel,
       onEditingRowCancel,
-      renderCreateRowModalContent,
-      renderEditRowModalContent,
+      renderCreateRowDialogContent,
+      renderEditRowDialogContent,
     },
     setCreatingRow,
     setEditingRow,
@@ -40,7 +40,7 @@ export const MRT_EditRowModal = <TData extends MRT_RowData>({
   const row = (creatingRow ?? editingRow) as MRT_Row<TData>;
 
   const dialogProps = {
-    ...parseFromValuesOrFunc(muiEditRowModalProps, { row, table }),
+    ...parseFromValuesOrFunc(muiEditRowDialogProps, { row, table }),
     ...(creatingRow &&
       parseFromValuesOrFunc(muiCreateRowModalProps, { row, table })),
     ...rest,
@@ -76,12 +76,12 @@ export const MRT_EditRowModal = <TData extends MRT_RowData>({
       {...dialogProps}
     >
       {((creatingRow &&
-        renderCreateRowModalContent?.({
+        renderCreateRowDialogContent?.({
           internalEditComponents,
           row,
           table,
         })) ||
-        renderEditRowModalContent?.({
+        renderEditRowDialogContent?.({
           internalEditComponents,
           row,
           table,

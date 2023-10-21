@@ -182,7 +182,7 @@ const Example = () => {
     onEditingRowCancel: () => setValidationErrors({}),
     onEditingRowSave: handleSaveUser,
     //optionally customize modal content
-    renderCreateRowModalContent: ({ table, row, internalEditComponents }) => (
+    renderCreateRowDialogContent: ({ table, row, internalEditComponents }) => (
       <>
         <DialogTitle variant="h3">Create New User</DialogTitle>
         <DialogContent
@@ -196,7 +196,7 @@ const Example = () => {
       </>
     ),
     //optionally customize modal content
-    renderEditRowModalContent: ({ table, row, internalEditComponents }) => (
+    renderEditRowDialogContent: ({ table, row, internalEditComponents }) => (
       <>
         <DialogTitle variant="h3">Edit User</DialogTitle>
         <DialogContent

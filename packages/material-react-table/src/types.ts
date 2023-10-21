@@ -816,7 +816,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
         table: MRT_TableInstance<TData>;
       }) => TableCellProps)
     | TableCellProps;
-  muiEditRowModalProps?:
+  muiEditRowDialogProps?:
     | ((props: {
         row: MRT_Row<TData>;
         table: MRT_TableInstance<TData>;
@@ -1043,7 +1043,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
     onSelectFilterMode: (filterMode: MRT_FilterOption) => void;
     table: MRT_TableInstance<TData>;
   }) => ReactNode[];
-  renderCreateRowModalContent?: (props: {
+  renderCreateRowDialogContent?: (props: {
     internalEditComponents: ReactNode[];
     row: MRT_Row<TData>;
     table: MRT_TableInstance<TData>;
@@ -1052,7 +1052,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
     row: MRT_Row<TData>;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
-  renderEditRowModalContent?: (props: {
+  renderEditRowDialogContent?: (props: {
     internalEditComponents: ReactNode[];
     row: MRT_Row<TData>;
     table: MRT_TableInstance<TData>;

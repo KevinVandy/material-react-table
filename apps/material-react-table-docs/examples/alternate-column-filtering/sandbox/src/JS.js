@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
-import { MaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 import { data } from './makeData';
 
 const Example = () => {
@@ -21,7 +24,7 @@ const Example = () => {
         accessorKey: 'gender',
         header: 'Gender',
         filterFn: 'equals',
-        editSelectOptions: ['Male', 'Female', 'Other'],
+        filterSelectOptions: ['Male', 'Female', 'Other'],
         filterVariant: 'select',
       },
       {
@@ -33,13 +36,13 @@ const Example = () => {
     [],
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      columnFilterDisplayMode="popover"
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    columnFilterDisplayMode: 'popover',
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

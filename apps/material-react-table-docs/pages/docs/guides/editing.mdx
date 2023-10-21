@@ -2,13 +2,10 @@ import Head from 'next/head';
 import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
-import EditingCellExample from '../../../examples/enable-editing-cell';
-import EditingModalExample from '../../../examples/enable-editing-modal';
-import EditingRowExample from '../../../examples/enable-editing-row';
-import EditingTableExample from '../../../examples/enable-editing-table';
+import EditingCrudExamples from '../../../example-groups/EditingCRUDExamples';
 
 <Head>
-  <title>Editing Feature Guide - Material React Table V2 Docs</title>
+  <title>{'Editing Feature Guide - Material React Table V2 Docs'}</title>
   <meta
     name="description"
     content="How to enable data editing features in Material React Table"
@@ -19,20 +16,27 @@ import EditingTableExample from '../../../examples/enable-editing-table';
 
 If your tables need full CRUD functionality, you can enable editing features in Material React Table.
 
-There are four visually distinct editing modes to choose from, whether you want to let users [edit data in a modal](#modal-editing-mode), [inline one row at a time](#row-editing-mode), [one cell at a time](#cell-editing-mode), or just always have [editing enabled for every cell](#table-editing-mode).
+There are five visually distinct editing modes to choose from, whether you want to let users [edit data in a modal](#modal-edit-display-mode), [inline one row at a time](#row-edit-display-mode), [one cell at a time](#cell-edit-display-mode), or just always have [editing enabled for every cell](#table-edit-display-mode), or a [completely custom editing UI](#custom-edit-display-mode).
 
 ### Relevant Props
 
 <TableOptionsTable
   onlyOptions={
     new Set([
+      'createDisplayMode',
       'editDisplayMode',
       'enableEditing',
+      'muiEditRowDialogProps',
       'muiEditTextFieldProps',
+      'onCreatingRowCancel',
+      'onCreatingRowChange',
+      'onCreatingRowSave',
       'onEditingCellChange',
       'onEditingRowCancel',
       'onEditingRowChange',
       'onEditingRowSave',
+      'renderEditRowDialogContent',
+      'renderCreateRowDialogContent',
     ])
   }
 />
@@ -52,63 +56,182 @@ There are four visually distinct editing modes to choose from, whether you want 
 
 ### Relevant State Options
 
-<StateOptionsTable onlyOptions={new Set(['editingCell', 'editingRow'])} />
+<StateOptionsTable
+  onlyOptions={new Set(['editingCell', 'editingRow', 'creatingRow'])}
+/>
 
 ### Enable Editing
 
-To enable editing, you first need to set the `enableEditing` prop to `true`.
+To enable editing, you first need to set the `enableEditing` table option to `true`.
 
 ```jsx
-<MaterialReactTable columns={columns} data={data} enableEditing={true} />
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableEditing: true,
+});
 ```
 
-However, this is just the first step. You will need to hook up logic and event listeners, but it depends on which editing mode you want to use.
+However, this is just the first step. You will need to hook up logic and event listeners, but it depends on which `editDisplayMode` you want to use.
 
-### Editing Modes
+### Edit Display Modes
 
-Material React Table has four supported editing modes: `"modal"` (default), `"row"`, `"cell"` and `"table"`. You can specify which editing mode you want to use by passing the `editDisplayMode` prop.
+There are five different editDisplayModes to choose from. The default is `"modal"`, but you can also choose `"row"`, `"cell"`, `"table"`, or `"custom"`.
 
-#### Modal Editing Mode
+#### Modal Edit Display Mode
 
-The `"modal"` editing mode opens up a dialog where the user can edit data for one row at a time. No data is saved to the table until the user clicks the save button. Clicking the cancel button clears out any changes that were made on that row.
+When using the default `"modal"` editDisplayMode, the user will be presented with a modal dialog where they can edit the data for one row at a time. No data is saved until the user clicks the save button. Clicking the cancel button clears out any changes that were made on that row.
 
 An `onEditingRowSave` callback function prop must be provided where you will get access to the updated row data so that changes can be processed and saved. It is up to you how you handle the data. This function has a `exitEditingMode` parameter that must be called in order to exit editing mode upon save. The reason for this is so that you can perform validation checks before letting the modal close.
 
-> The `onEditingRowSave` callback function prop includes an `exitEditingMode` parameter that must be called in order to exit editing mode upon save. The reason for this is so that you can perform validation checks before letting the modal close.
+By default, Material React Table will render all of the cells in the row as text fields in a vertical stack. You can customize or override this behavior with the `muiEditRowDialogProps` table option, or the `renderEditRowDialogContent` table option.
 
-<EditingModalExample />
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableEditing: true,
+  editDisplayMode: 'modal', //default
+  onCreatingRowSave: ({ table, values }) => {
+    //validate data
+    //save data to api
+    table.setEditingRow(null); //exit editing mode
+  },
+  onEditingRowCancel: () => {
+    //clear any validation errors
+  },
+  muiEditRowDialogProps: {
+    //optionally customize the dialog
+  },
+  renderEditRowDialogContent: ({ internalEditComponents, row, table }) => {
+    //optionally, completely override the render of the dialog content
+    //use `internalEditComponents` to render the generated text fields, or completely render your own form and inputs
+  },
+});
+```
 
-#### Row Editing Mode
+#### Row Edit Display Mode
 
-The `row` editing mode is an inline row editing mode. When edit mode is activated, the row shows the edit components in the data cells. No data is saved to the table until the user clicks the save button. Clicking the cancel button clears out any changes that were made on that row.
+The `"row"` editDisplayMode works just like the default `"modal"` editDisplayMode, except that the editing components will render inline in the table instead of in a modal dialog. Only one row is made editable at a time.
 
-You must provide an `onEditingRowSave` callback function prop where you will get access to the updated row data so that changes can be processed and saved. It is up to you how you handle the data. This function has a `exitEditingMode` parameter that must be called in order to exit editing mode upon save. The reason for this is so that you can perform validation checks before letting the modal close.
+By default, you will probably not want to save any data until the user clicks the save button, though you could wire up `onChange` or `onBlur` events to save data as the user inputs data.
 
-> The `onEditingRowSave` callback function prop includes an `exitEditingMode` parameter that must be called in order to exit editing mode upon save. The reason for this is so that you can perform validation checks before letting the modal close.
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableEditing: true,
+  editDisplayMode: 'row',
+  onEditingRowSave: ({ table, values }) => {
+    //validate data
+    //save data to api
+    table.setEditingRow(null); //exit editing mode
+  },
+  onEditingRowCancel: () => {
+    //clear any validation errors
+  },
+});
+```
 
-<EditingRowExample />
+#### Cell Edit Display Mode
 
-#### Cell Editing Mode
-
-The `cell` editing mode is a bit simpler visually. Uses double-click cells to activate editing mode, but only for that cell.
+The `"cell"` editDisplayMode is a bit simpler visually. By default, a user can double-click a cell to activate editing mode, but only for that cell.
 
 Then there is a bit of work for you to do to wire up either the `onBlur`, `onChange`, etc., events yourself in order to save the table data. This can be done in the `muiEditTextFieldProps` prop or column definition option.
 
-<EditingCellExample />
+```jsx
+const columns = [
+  {
+    accessor: 'age',
+    header: 'Age',
+    muiEditTextFieldProps: ({ cell, row, table }) => ({
+      onBlur: (event) => {
+        //validate data
+        //save data to api and/or rerender table
+        // table.setEditingCell(null) is called automatically onBlur internally
+      },
+    }),
+  },
+];
 
-#### Table Editing Mode
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableEditing: true,
+  editDisplayMode: 'cell',
+  //optionally, use single-click to activate editing mode instead of default double-click
+  muiTableBodyCellProps: ({ table, cell }) => ({
+    onClick: () => {
+      table.setEditingCell(cell);
+    },
+  }),
+});
+```
 
-The `table` editing mode is similar to the `cell` editing mode, but it simply has all of the data cells in the table become editable all at once.
+#### Table Edit Display Mode
 
-To save data, you must hook up the `onBlur`, `onChange`, etc., events yourself. This can be done in the `muiEditTextFieldProps` prop or column definition option.
+The `"table"` editDisplayMode is similar to the `"cell"` editDisplayMode, but it simply has all of the data cells in the table become editable all at once. You will most likely wire up all of the logic the same way as the `"cell"` editDisplayMode.
 
-<EditingTableExample />
+#### Custom Edit Display Mode
+
+There is another option if you don't like any of the built-in editDisplayModes UI. If you want to completely handle your own editing UI, you can use the `"custom"` editDisplayMode. This will give you access to the `editingCell`, `editingRow`, and `creatingRow` state options, but MRT will not render any editing UI for you. This is common for rendering a form in a sidebar or similar.
+
+### Enable Creating
+
+> New in V2
+
+Material React Table offers new functionality to make creating news rows of data easier. It works just like the editing features, but with separate state options and callbacks. A Blank row is added to the table or modal for the user to fill out and submit.
+
+#### Create Display Modes
+
+There are just three different createDisplayModes to choose from. The default is `"modal"`, but you can also choose `"row"` or `"custom"`. They work exactly the same as their editDisplayMode counterparts.
+
+#### Trigger Create Mode
+
+To trigger a new blank row to be added to the table, we just need to just populate the `creatingRow` state option with a new blank row. This can be done with the `table.setCreatingRow` table instance API. You can either pass in `true` as an argument, or pass in row object with default values.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableEditing: true,
+  editDisplayMode: 'modal',
+  createDisplayMode: 'modal',
+  onCreatingRowSave: ({ table, values }) => {
+    //validate data
+    //save data to api
+    table.setCreatingRow(null); //exit creating mode
+  },
+  onCreatingRowCancel: () => {
+    //clear any validation errors
+  },
+  renderTopToolbarCustomActions: ({ table }) => (
+    <Button
+      onClick={() => {
+        table.setCreatingRow(true); //simplest way to open the create row modal with no default values
+        //or you can pass in a row object to set default values with the `createRow` helper function
+        // table.setCreatingRow(
+        //   createRow(table, {
+        //     //optionally pass in default values for the new row, useful for nested data or other complex scenarios
+        //   }),
+        // );
+      }}
+    >
+      Create New User
+    </Button>
+  ),
+});
+```
+
+### CRUD Examples
+
+<EditingCrudExamples />
 
 ### Customizing Editing Components
 
 You can pass any Material UI TextField Props with the `muiEditTextFieldProps` prop.
 
-```tsx
+```jsx
 const columns = [
   {
     accessor: 'age',
@@ -128,7 +251,7 @@ You can add validation to the editing components by using the `muiEditTextFieldP
 
 If you are implementing validation, you may also need to use the `onEditingRowCancel` prop to clear the validation error state.
 
-```tsx
+```jsx
 const [validationErrors, setValidationErrors] = useState({});
 
 const columns = [
@@ -178,7 +301,7 @@ const columns = [
 
 You can customize the actions column in a few different ways in the `displayColumnDefOptions` prop's `'mrt-row-actions'` section.
 
-```tsx
+```jsx
 <MaterialReactTable
   data={data}
   columns={columns}
@@ -193,7 +316,3 @@ You can customize the actions column in a few different ways in the `displayColu
   }}
 />
 ```
-
-### React-Hook-Form Example
-
-TODO
