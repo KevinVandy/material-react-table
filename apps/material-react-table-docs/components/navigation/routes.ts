@@ -115,6 +115,20 @@ export const routes: Array<RouteItem> = [
         ],
       },
       {
+        href: '/docs/examples/column-ordering',
+        label: 'Dragging / Ordering Examples',
+        secondaryItems: [
+          {
+            href: '/docs/examples/row-ordering',
+            label: 'Row Ordering',
+          },
+          {
+            href: '/docs/examples/row-dragging',
+            label: 'Row Dragging',
+          },
+        ],
+      },
+      {
         href: '/docs/examples/editing-crud',
         label: 'Editing (CRUD) Examples',
         secondaryItems: [
@@ -151,8 +165,8 @@ export const routes: Array<RouteItem> = [
             label: 'Faceted Values',
           },
           {
-            href: '/docs/examples/filter-modes',
-            label: 'Filter Modes',
+            href: '/docs/examples/filter-switching',
+            label: 'Filter Switching',
           },
         ],
       },

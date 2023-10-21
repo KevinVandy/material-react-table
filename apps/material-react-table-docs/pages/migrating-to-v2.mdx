@@ -42,7 +42,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 export const App = () => {
   return (
-    <ThemeProvider theme={(theme = createTheme({}))}>
+    <ThemeProvider theme={createTheme({})}>
       {/* Add this if using date filter features */}
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <MyApp />

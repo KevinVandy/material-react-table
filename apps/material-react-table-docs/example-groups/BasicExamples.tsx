@@ -18,6 +18,8 @@ const BasicExamples = ({ isPage = false }) => {
     <>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs
+          scrollButtons="auto"
+          variant="scrollable"
           value={isPage ? pathname.split('/').pop() : activeTab}
           onChange={(_e, newPath) =>
             isPage && newPath !== 'more'
@@ -29,6 +31,83 @@ const BasicExamples = ({ isPage = false }) => {
           <Tab label="Minimal" value="minimal" />
           <Tab label="Advanced" value="advanced" />
           <Tab label="Custom Headless" value="custom-headless" />
+          <Link href="/docs/examples/export-csv" passHref legacyBehavior>
+            <Tab
+              label={
+                <Box>
+                  Data Export
+                  <LaunchIcon sx={{ fontSize: '1rem' }} />
+                </Box>
+              }
+              value="more"
+            />
+          </Link>
+          <Link href="/docs/examples/column-ordering" passHref legacyBehavior>
+            <Tab
+              label={
+                <Box>
+                  DnD
+                  <LaunchIcon sx={{ fontSize: '1rem' }} />
+                </Box>
+              }
+              value="more"
+            />
+          </Link>
+          <Link href="/docs/examples/editing-crud" passHref legacyBehavior>
+            <Tab
+              label={
+                <Box>
+                  Editing
+                  <LaunchIcon sx={{ fontSize: '1rem' }} />
+                </Box>
+              }
+              value="more"
+            />
+          </Link>
+          <Link href="/docs/examples/filter-variants" passHref legacyBehavior>
+            <Tab
+              label={
+                <Box>
+                  Filtering
+                  <LaunchIcon sx={{ fontSize: '1rem' }} />
+                </Box>
+              }
+              value="more"
+            />
+          </Link>
+          <Link href="/docs/examples/react-query" passHref legacyBehavior>
+            <Tab
+              label={
+                <Box>
+                  Fetching
+                  <LaunchIcon sx={{ fontSize: '1rem' }} />
+                </Box>
+              }
+              value="more"
+            />
+          </Link>
+          <Link href="/docs/examples/sticky-header" passHref legacyBehavior>
+            <Tab
+              label={
+                <Box>
+                  Pinning
+                  <LaunchIcon sx={{ fontSize: '1rem' }} />
+                </Box>
+              }
+              value="more"
+            />
+          </Link>
+          <Link href="/docs/examples/virtualized" passHref legacyBehavior>
+            <Tab
+              label={
+                <Box>
+                  Virtualization
+                  <LaunchIcon sx={{ fontSize: '1rem' }} />
+                </Box>
+              }
+              value="more"
+            />
+          </Link>
           <Link href="/docs/examples" passHref legacyBehavior>
             <Tab
               label={
