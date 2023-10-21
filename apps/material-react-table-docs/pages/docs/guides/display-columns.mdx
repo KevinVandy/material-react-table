@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Example from '../../../examples/customize-display-columns';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 
 <Head>
   <title>{'Display (Built-in) Columns - Material React Table V2 Docs'}</title>
@@ -14,6 +15,12 @@ import Example from '../../../examples/customize-display-columns';
 Display columns are used to display non-data elements in a table. They only require an `id` and `header` in the column definition. They do not need an `accessorKey` or `accessorFn`, as they are not meant to connect to your data at all.
 
 Display columns do not have any processing features, such as sorting, filtering, grouping, etc. enabled on them by default.
+
+### Relevant Table Options
+
+<TableOptionsTable
+  onlyOptions={new Set(['displayColumnDefOptions', 'defaultDisplayColumn'])}
+/>
 
 ### Built-in MRT Display Columns
 
@@ -52,41 +59,61 @@ All of these values are able to be overridden if needed, and you'll learn about 
 
 It is possible to change and override the default behavior of built-in display columns. Whether you want to change the default column width, add some styles, or enable some features, such as column actions or column drag and drop, you can do it with the `displayColumnDefOptions` prop.
 
-#### Display Column Definition Options Prop
+#### Default Display Column Table Option
+
+First of all, if you want to enable or disable some feature for all display columns, you can just use the `defaultDisplayColumn` prop. This will apply to all display columns, including any custom display columns you create.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  defaultDisplayColumn: {
+    enableColumnOrdering: true,
+    enableColumnResizing: true,
+    minSize: 100,
+  },
+});
+```
+
+#### Display Column Definition Options Table Option
 
 Let's say you need to adjust the width of the Actions column to be wide enough to fit all of your action buttons. You could do that as follows:
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  displayColumnDefOptions={{ 'mrt-row-actions': { size: 300 } }} //change width of actions column to 300px
-  enableRowActions
-  renderRowActions={({ row }) => (
-    <div>
+const table = useMaterialReactTable({
+  columns,
+  data,
+  displayColumnDefOptions: { 'mrt-row-actions': { size: 300 } }, //change width of actions column to 300px
+  enableRowActions: true,
+  renderRowActions: ({ row }) => (
+    <Box>
       <Button>Action 1</Button>
       <Button>Action 2</Button>
       <Button>Action 3</Button>
-    </div>
-  )}
-/>
-```
+    </Box>
+  ),
+});
+
+return <MaterialReactTable table={table} />;
+````
 
 Or maybe you want to enable a feature that is off by default for display columns, such as column ordering or pinning.
 
-```tsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  displayColumnDefOptions={{
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  displayColumnDefOptions: {
     'mrt-row-numbers': {
       enableOrdering: true,
       enablePinning: true,
       enableColumnActions: true,
     },
-  }}
-  enableRowNumbers
-/>
+  },
+  enableRowNumbers: true,
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 Here is a full example and demo for customizing display columns.
@@ -97,7 +124,7 @@ Here is a full example and demo for customizing display columns.
 
 You do not have to use the built in Row Actions feature. You can just create your own display columns instead. It is as easy as creating a normal column, only specifying the `columnDefType` as `display`.
 
-```tsx
+```jsx
 const columns = [
   {
     id: 'sendEmail',

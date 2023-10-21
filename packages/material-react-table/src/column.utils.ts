@@ -316,17 +316,17 @@ export const extraIndexRangeExtractor = (
   range: Range,
   draggingIndex: number,
 ) => {
-  const newIndexs = defaultRangeExtractor(range);
+  const newIndexes = defaultRangeExtractor(range);
   if (
     draggingIndex >= 0 &&
     draggingIndex < Math.max(range.startIndex - range.overscan, 0)
   ) {
-    newIndexs.unshift(draggingIndex);
+    newIndexes.unshift(draggingIndex);
   }
   if (draggingIndex >= 0 && draggingIndex > range.endIndex + range.overscan) {
-    newIndexs.push(draggingIndex);
+    newIndexes.push(draggingIndex);
   }
-  return newIndexs;
+  return newIndexes;
 };
 
 export function createMRTColumnHelper<

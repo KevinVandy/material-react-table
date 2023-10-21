@@ -14,6 +14,7 @@ import {
   type MRT_Row,
   type MRT_RowData,
 } from '../types';
+import { MRT_DefaultDisplayColumn } from './useMRT_TableOptions';
 
 const blankColProps = {
   children: null,
@@ -50,8 +51,8 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>({
             ),
             header: tableOptions.localization.pin,
             size: 60,
-            ...tableOptions.defaultDisplayColumn,
             ...tableOptions.displayColumnDefOptions?.['mrt-row-pin'],
+            columnDefType: 'display',
             id: 'mrt-row-pin',
           },
           (tableOptions.state?.columnOrder ?? columnOrder).includes(
@@ -66,8 +67,8 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>({
             ),
             header: tableOptions.localization.move,
             size: 60,
-            ...tableOptions.defaultDisplayColumn,
             ...tableOptions.displayColumnDefOptions?.['mrt-row-drag'],
+            columnDefType: 'display',
             id: 'mrt-row-drag',
           },
           ((tableOptions.state?.columnOrder ?? columnOrder).includes(
@@ -83,8 +84,8 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>({
             ),
             header: tableOptions.localization.actions,
             size: 70,
-            ...tableOptions.defaultDisplayColumn,
             ...tableOptions.displayColumnDefOptions?.['mrt-row-actions'],
+            columnDefType: 'display',
             id: 'mrt-row-actions',
           },
           (tableOptions.state?.columnOrder ?? columnOrder).includes(
@@ -102,8 +103,8 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>({
                 : null,
               header: tableOptions.localization.expand,
               size: 60,
-              ...tableOptions.defaultDisplayColumn,
               ...tableOptions.displayColumnDefOptions?.['mrt-row-expand'],
+              columnDefType: 'display',
               id: 'mrt-row-expand',
             },
           (tableOptions.state?.columnOrder ?? columnOrder).includes(
@@ -119,8 +120,8 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>({
                 : null,
             header: tableOptions.localization.select,
             size: 60,
-            ...tableOptions.defaultDisplayColumn,
             ...tableOptions.displayColumnDefOptions?.['mrt-row-select'],
+            columnDefType: 'display',
             id: 'mrt-row-select',
           },
           (tableOptions.state?.columnOrder ?? columnOrder).includes(
@@ -130,14 +131,15 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>({
             Header: () => tableOptions.localization.rowNumber,
             header: tableOptions.localization.rowNumbers,
             size: 60,
-            ...tableOptions.defaultDisplayColumn,
             ...tableOptions.displayColumnDefOptions?.['mrt-row-numbers'],
+            columnDefType: 'display',
             id: 'mrt-row-numbers',
           },
-
           (tableOptions.state?.columnOrder ?? columnOrder).includes(
             'mrt-row-spacer',
           ) && {
+            ...tableOptions.displayColumnDefOptions?.['mrt-row-spacer'],
+            ...MRT_DefaultDisplayColumn,
             columnDefType: 'display',
             header: '',
             id: 'mrt-row-spacer',

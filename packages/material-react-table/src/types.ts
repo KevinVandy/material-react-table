@@ -655,7 +655,8 @@ export type MRT_DisplayColumnIds =
   | 'mrt-row-expand'
   | 'mrt-row-numbers'
   | 'mrt-row-pin'
-  | 'mrt-row-select';
+  | 'mrt-row-select'
+  | 'mrt-row-spacer';
 
 /**
  * `columns` and `data` props are the only required props, but there are over 170 other optional props.
@@ -718,9 +719,9 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   /**
    * Change the default options for display columns.
    */
-  defaultDisplayColumn?: Partial<MRT_ColumnDef<TData>>;
+  defaultDisplayColumn?: Partial<MRT_DisplayColumnDef<TData>>;
   displayColumnDefOptions?: Partial<{
-    [key in MRT_DisplayColumnIds]: Partial<MRT_ColumnDef<TData>>;
+    [key in MRT_DisplayColumnIds]: Partial<MRT_DisplayColumnDef<TData>>;
   }>;
   editDisplayMode?: 'cell' | 'custom' | 'modal' | 'row' | 'table';
   enableBottomToolbar?: boolean;

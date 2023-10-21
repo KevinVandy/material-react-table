@@ -57,7 +57,7 @@ export const MRT_TableHeadCellResizeHandle = <TData extends MRT_RowData>({
             : '-28px',
         position: 'absolute',
         px: '4px',
-        right: '0',
+        right: column.columnDef.columnDefType === 'display' ? '4px' : '0',
       })}
     >
       <Divider

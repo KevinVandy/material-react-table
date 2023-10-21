@@ -10,14 +10,14 @@ import {
   type MRT_TableOptions,
 } from '../types';
 
-const MRT_DefaultColumn = {
+export const MRT_DefaultColumn = {
   filterVariant: 'text',
   maxSize: 1000,
   minSize: 40,
   size: 180,
 } as const;
 
-const MRT_DefaultDisplayColumn = {
+export const MRT_DefaultDisplayColumn = {
   columnDefType: 'display',
   enableClickToCopy: false,
   enableColumnActions: false,

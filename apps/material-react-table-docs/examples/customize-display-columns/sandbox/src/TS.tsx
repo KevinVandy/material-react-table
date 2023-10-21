@@ -1,6 +1,10 @@
 import { useMemo } from 'react';
 import { Box, Button } from '@mui/material';
-import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+  type MRT_ColumnDef,
+} from 'material-react-table';
 import { data, type Person } from './makeData';
 
 const Example = () => {
@@ -32,46 +36,49 @@ const Example = () => {
     //end
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      displayColumnDefOptions={{
-        'mrt-row-actions': {
-          size: 350, //set custom width
-          muiTableHeadCellProps: {
-            align: 'center', //change head cell props
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    defaultDisplayColumn: {
+      enableResizing: true, //turn on some features that are usually off for all display columns
+    },
+    displayColumnDefOptions: {
+      'mrt-row-actions': {
+        size: 350, //set custom width
+        muiTableHeadCellProps: {
+          align: 'center', //change head cell props
+        },
+      },
+      'mrt-row-numbers': {
+        enableColumnOrdering: true, //turn on some features that are usually off
+        enableResizing: true,
+        muiTableHeadCellProps: {
+          sx: {
+            fontSize: '1.2rem',
           },
         },
-        'mrt-row-numbers': {
-          enableColumnOrdering: true, //turn on some features that are usually off
-          enableResizing: true,
-          muiTableHeadCellProps: {
-            sx: {
-              fontSize: '1.2rem',
-            },
-          },
-        },
-        'mrt-row-select': {
-          enableColumnActions: true,
-          enableHiding: true,
-          size: 100,
-        },
-      }}
-      enableColumnResizing
-      enableColumnOrdering
-      enableRowNumbers
-      enableRowSelection
-      enableRowActions
-      renderRowActions={({ row }) => (
-        <Box sx={{ display: 'flex', gap: '1rem' }}>
-          <Button>Button 1</Button>
-          <Button>Button 2</Button>
-          <Button>Button 3</Button>
-        </Box>
-      )}
-    />
-  );
+      },
+      'mrt-row-select': {
+        enableColumnActions: true,
+        enableHiding: true,
+        size: 100,
+      },
+    },
+    enableColumnResizing: true,
+    enableColumnOrdering: true,
+    enableRowNumbers: true,
+    enableRowSelection: true,
+    enableRowActions: true,
+    renderRowActions: ({ row }) => (
+      <Box sx={{ display: 'flex', gap: '1rem' }}>
+        <Button>Button 1</Button>
+        <Button>Button 2</Button>
+        <Button>Button 3</Button>
+      </Box>
+    ),
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

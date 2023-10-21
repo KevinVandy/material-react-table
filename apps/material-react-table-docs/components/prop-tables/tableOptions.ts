@@ -184,6 +184,17 @@ export const tableOptions: TableOption[] = [
     type: 'Partial<MRT_ColumnDef<TData>>',
   },
   {
+    tableOption: 'defaultDisplayColumn',
+    defaultValue: '',
+    description:
+      'Default column options to use for all display column defs supplied to the table. This is useful for providing default cell/header/footer renderers, or turning on or off certain features for all display columns.',
+    link: '/docs/guides/display-columns',
+    linkText: 'MRT Display Columns Docs',
+    required: false,
+    source: 'MRT',
+    type: 'Partial<MRT_DisplayColumnDef<TData>>',
+  },
+  {
     tableOption: 'displayColumnDefOptions',
     defaultValue: '',
     description:
@@ -192,18 +203,18 @@ export const tableOptions: TableOption[] = [
     linkText: 'MRT Display Columns Docs',
     required: false,
     source: 'MRT',
-    type: '{ [key: string]: MRT_ColumnDef<TData> }',
+    type: '{ [key: string]: MRT_DisplayColumnDef<TData> }',
   },
   {
     tableOption: 'editDisplayMode',
     defaultValue: "'modal'",
     description:
-      'You can choose between 4 different built-in editing modes. Edit a row in a modal, or a row inline, just 1 cell at a time, or always have all cells editable.',
+      'You can choose between 5 different built-in editing modes. Edit a row in a modal, or a row inline, just 1 cell at a time, or always have all cells editable.',
     link: '/docs/guides/editing#editing-modes',
     linkText: 'MRT Editing Docs',
     required: false,
     source: 'MRT',
-    type: "'modal' | 'cell' | 'row' | 'table'",
+    type: "'modal' | 'cell' | 'row' | 'table' | 'custom",
   },
   {
     tableOption: 'enableBottomToolbar',
