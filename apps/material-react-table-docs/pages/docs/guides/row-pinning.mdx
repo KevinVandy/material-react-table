@@ -59,11 +59,40 @@ const table = useMaterialReactTable({
 
 By default, the row pinning feature will add a position sticky style to the pinned rows. This means that the pinned rows will stay in place if the row is already in view. However, the rows will stay in view as the user scrolls up or down.
 
+Sticky row pinning will work best if you give your rows a fixed height, or at least disable any kind of whitespace wrapping.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableRowPinning: true,
+  muiTableBodyRowProps: ({ row, table }) => {
+    const { density } = table.getState();
+    return {
+      sx: {
+        //Set a fixed height for pinned rows
+        height: row.getIsPinned()
+          ? `${
+              //Default mrt row height estimates. Adjust as needed.
+              density === 'compact' ? 37 : density === 'comfortable' ? 53 : 69
+            }px`
+          : undefined,
+      },
+    };
+  },
+  rowPinningDisplayMode: 'sticky', // default
+});
+```
+
 <StickyExample />
+
+> Note: Sticky Row Pinning is not currently compatible with row virtualization.
 
 ### Static Row Pinning
 
 Some of the other row pinning modes will show pinned rows at the top or bottom of the the table regardless of scrolling. This is a simpler implementation of the row pinning feature.
+
+Static row pinning does not require set row heights, as they will render in a normal `<tbody>` element that itself is what is sticky.
 
 <StaticExample />
 
