@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
-import { MaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 import { data } from './makeData';
 import { MenuItem } from '@mui/material';
 
@@ -12,6 +15,7 @@ const Example = () => {
         header: 'ID',
         size: 50,
       },
+      //column definitions...
       {
         accessorKey: 'firstName',
         header: 'First Name',
@@ -29,6 +33,7 @@ const Example = () => {
         header: 'Address',
         size: 300,
       },
+      //end
       {
         accessorKey: 'city', //this column gets pinned to the right by default because of the initial state,
         header: 'City',
@@ -45,20 +50,18 @@ const Example = () => {
     [],
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableColumnPinning
-      enableRowActions
-      renderRowActionMenuItems={() => [
-        <MenuItem key="action">Action</MenuItem>,
-      ]}
-      initialState={{
-        columnPinning: { left: ['mrt-row-actions', 'state'], right: ['city'] },
-      }}
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableColumnPinning: true,
+    enableRowActions: true,
+    renderRowActionMenuItems: () => [<MenuItem key="action">Action</MenuItem>],
+    initialState: {
+      columnPinning: { left: ['mrt-row-actions', 'state'], right: ['city'] },
+    },
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;
