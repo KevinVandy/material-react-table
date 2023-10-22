@@ -36,10 +36,12 @@ const Example = () => {
       state={{ isLoading: true }}
       muiCircularProgressProps={{
         color: 'secondary',
+        thickness: 5,
+        size: 55,
       }}
       muiSkeletonProps={{
         animation: 'pulse',
-        height: 33,
+        height: 28,
       }}
     />
   );

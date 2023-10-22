@@ -3,7 +3,7 @@ import ColumnInstanceAPIsTable from '../../../components/prop-tables/ColumnInsta
 import SourceCode from '../../../components/prop-tables/ColumnInstanceAPIsSource';
 
 <Head>
-  <title>Column Instance APIs - Material React Table V2 Docs</title>
+  <title>{'Column Instance APIs - Material React Table V2 Docs'}</title>
   <meta
     name="description"
     content="All the column instance methods and objects that can be accessed from a column instance in Material React Table"
@@ -49,18 +49,16 @@ const columns = [
   },
 ];
 
-return (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    //or in callback props like this
-    muiTableBodyCellProps={({ column }) => ({
-      sx:
-        boxShadow: column.getIsPinned() ? '0 0 0 2px red' : 'none',
-      }),
-    }
-  />
-);
+const table = useMaterialReactTable({
+  columns,
+  data,
+  //or in callback props like this
+  muiTableBodyCellProps: ({ column }) => ({
+    sx: {
+      boxShadow: column.getIsPinned() ? '0 0 0 2px red' : 'none',
+    },
+  }),
+});
 ```
 
 > NOTE: These are NOT [column options](/docs/api/column-options) for Material React Table. These are just static methods on a column instance that you can use.

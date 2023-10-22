@@ -1092,6 +1092,16 @@ export const tableOptions: TableOption[] = [
     type: 'LinearProgressProps | ({ isTopToolbar, table }) => LinearProgressProps',
   },
   {
+    tableOption: 'muiCircularProgressProps',
+    defaultValue: '',
+    description: '',
+    link: 'https://mui.com/material-ui/api/circular-progress/#props',
+    linkText: 'Material UI CircularProgress Props',
+    required: false,
+    source: 'Material UI',
+    type: 'CircularProgressProps | ({ table }) => CircularProgressProps',
+  },
+  {
     tableOption: 'muiSearchTextFieldProps',
     defaultValue: '',
     description: '',

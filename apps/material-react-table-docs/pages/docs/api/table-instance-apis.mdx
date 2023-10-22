@@ -3,7 +3,7 @@ import TableInstanceAPIsTable from '../../../components/prop-tables/TableInstanc
 import SourceCode from '../../../components/prop-tables/TableInstanceAPIsSource';
 
 <Head>
-  <title>Table Instance APIs - Material React Table V2 Docs</title>
+  <title>{'Table Instance APIs - Material React Table V2 Docs'}</title>
   <meta
     name="description"
     content="All the table instance methods and objects that can be accessed from the table instance in Material React Table"
@@ -20,9 +20,7 @@ import SourceCode from '../../../components/prop-tables/TableInstanceAPIsSource'
 
 ## Table Instance APIs
 
-Internally, Material React Table uses the `useReactTable` hook from TanStack Table to create a table instance that handles a majority of the logic and events and the state for the table.
-
-You can access this table instance yourself by either setting up a `tableInstanceRef` or by consuming a `table` param from many of the callback functions in many of the props.
+These are the methods available on the `table` instance that is returned from the `useMaterialReactTable` hook. You can use these methods to interact with the table instance.
 
 ```jsx
 const columns = useMemo(() => [

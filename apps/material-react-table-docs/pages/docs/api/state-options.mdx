@@ -3,7 +3,7 @@ import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable
 import SourceCode from '../../../components/prop-tables/StateOptionsSource';
 
 <Head>
-  <title>State Options - Material React Table V2 Docs</title>
+  <title>{'State Options - Material React Table V2 Docs'}</title>
   <meta
     name="description"
     content="All the state options that can be used in Material React Table"
@@ -24,19 +24,18 @@ import SourceCode from '../../../components/prop-tables/StateOptionsSource';
 
 Here is a list of all the state options you can pass to `initialState` or `state`.
 
-```tsx
-<MaterialReactTable
-  initialState={
-    {
-      // all the state options you can pass here
-    }
-  }
-  state={
-    {
-      // or here
-    }
-  }
-/>
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  //note: each individual state must be mutually exclusive to `initial state` or `state`
+  initialState: {
+    // all the state options you can pass here
+  },
+  state: {
+    // or here
+  },
+});
 ```
 
 <StateOptionsTable />

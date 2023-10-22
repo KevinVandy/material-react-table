@@ -3,7 +3,7 @@ import CellInstanceAPIsTable from '../../../components/prop-tables/CellInstanceA
 import SourceCode from '../../../components/prop-tables/CellInstanceAPIsSource';
 
 <Head>
-  <title>Cell Instance APIs - Material React Table V2 Docs</title>
+  <title>{'Cell Instance APIs - Material React Table V2 Docs'}</title>
   <meta
     name="description"
     content="All the cell instance methods and objects that can be accessed from a cell in Material React Table"
@@ -42,16 +42,14 @@ const columns = [
   },
 ];
 
-return (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    //or in callback props like this
-    muiEditTextFieldProps={({ cell }) => ({
-      disabled: cell.getValue() === 'admin',
-    })}
-  />
-);
+const table = useMaterialReactTable({
+  columns,
+  data,
+  //or in callback props like this
+  muiEditTextFieldProps: ({ cell }) => ({
+    disabled: cell.getValue() === 'admin',
+  }),
+});
 ```
 
 > NOTE: These are NOT [props](/docs/api/props) or [column options](/docs/api/column-options) for Material React Table. These are just static methods on a cell instance that you can use.
