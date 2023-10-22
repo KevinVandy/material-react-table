@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import { MaterialReactTable } from 'material-react-table';
 
+const data = [];
+
 const Example = () => {
   const columns = useMemo(
     //column definitions...
@@ -29,8 +31,15 @@ const Example = () => {
   return (
     <MaterialReactTable
       columns={columns}
-      data={[]}
+      data={data}
       state={{ isLoading: true }}
+      muiCircularProgressProps={{
+        color: 'secondary',
+      }}
+      muiSkeletonProps={{
+        animation: 'pulse',
+        height: 33,
+      }}
     />
   );
 };

@@ -47,14 +47,69 @@ While you are fetching your data, you may want to show some loading indicators. 
 
 ### isLoading UI
 
-Rather than coding your own spinner or loading indicator, you can simply set the `isLoading` state to `true`, and Material React Table will show progress bars and cell skeletons for you.
+There are three different loading UI features that are built into Material React Table:
+
+1. Loading Overlay - shows spinner overlay over the table container. (New in V2)
+2. Cell Skeletons - show pretty and shimmering skeletons for each cell.
+3. Linear Progress Bars - shows progress bars above and/or below the table.
+
+You can use any combination of these loading UIs by managing the `showLoadingOverlay`, `showSkeletons`, and `showProgressBars` states.
+
+There are also two other loading states that are shortcuts for combining some of the above states:
+
+- `isLoading` - shows loading overlay and cell skeletons.
+- `isSaving` - shows the progress bars and adds spinners to the save buttons in editing features.
+
+Here is some of the recommended loading UI that you might use with React Query:
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data ?? []} //fallback to array if data is undefined
-  state={{ isLoading: true }}
-/>
+const {
+  data = [],
+  isLoading: isLoadingTodos,
+  isRefetching: isRefetchingTodos,
+} = useQuery({
+  /**/
+});
+
+const { mutate, isPending: isSavingTodos } = useMutation({
+  /**/
+});
+
+const table = useMaterialReactTable({
+  columns,
+  data,
+  state: {
+    isLoading: isLoadingTodos, //cell skeletons and loading overlay
+    showProgressBars: isRefetchingTodos, //progress bars while refetching
+    isSaving: isSavingTodos, //progress bars and save button spinners
+  },
+});
+
+return <MaterialReactTable table={table} />;
+```
+
+> Note: The Loading Overlay UI makes the table container non-interactive while it is showing. This is usually desired while no data is yet in the table. Consider avoiding using the Loading Overlay UI during "refetching" operations like filtering, sorting, or pagination.
+
+### Customize Loading UI
+
+You can customize the loading UI by passing props to the `muiSkeletonProps`, `muiLinearProgressProps`, and `muiCircularProgressProps` props.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  muiSkeletonProps: {
+    animation: 'wave',
+  },
+  muiLinearProgressProps: {
+    color: 'secondary',
+  },
+  muiCircularProgressProps: {
+    color: 'secondary',
+  },
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 <LoadingExample />
@@ -64,16 +119,14 @@ Rather than coding your own spinner or loading indicator, you can simply set the
 If you do not want both progress bars and cell skeletons to show, you can use the `showProgressBars` and `showSkeletons` states, instead.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data ?? []} //fallback to array if data is undefined
-  state={{ showProgressBars: true }} //or showSkeletons
-/>
+const table = useMaterialReactTable({
+  columns,
+  data,
+  state: {
+    showProgressBars: true, //or showSkeletons
+  },
+});
 ```
-
-### Customize Linear Progress Bars
-
-You can customize the linear progress bars by passing props to the `muiLinearProgressProps` prop.
 
 <LinearProgressExample />
 

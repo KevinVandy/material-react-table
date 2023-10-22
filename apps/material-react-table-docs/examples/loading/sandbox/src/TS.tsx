@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
-import { Person } from './makeData';
+import { type Person } from './makeData';
+
+const data: Array<Person> = [];
 
 const Example = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
@@ -30,8 +32,15 @@ const Example = () => {
   return (
     <MaterialReactTable
       columns={columns}
-      data={[]}
+      data={data}
       state={{ isLoading: true }}
+      muiCircularProgressProps={{
+        color: 'secondary',
+      }}
+      muiSkeletonProps={{
+        animation: 'pulse',
+        height: 33,
+      }}
     />
   );
 };

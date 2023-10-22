@@ -283,7 +283,7 @@ export const routes: Array<RouteItem> = [
           },
           {
             href: '/docs/guides/async-loading',
-            label: 'Async Loading',
+            label: 'Async Loading UI',
           },
           {
             href: '/docs/guides/click-to-copy',
