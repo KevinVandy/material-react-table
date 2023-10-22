@@ -59,6 +59,21 @@ const table = useMaterialReactTable({
 return <MaterialReactTable table={table} />;
 ```
 
+### Apply Absolute Column Widths
+
+You might consider using the `layoutMode: 'grid-no-grow'` table option to give all columns an exact width if you don't want the columns collapsing a little while scrolling. Some people like this subtle behavior, but others do not.
+
+```jsx
+const table = useMaterialReactTable({
+  data,
+  columns,
+  enableColumnPinning: true,
+  layoutMode: 'grid-no-grow',
+});
+
+return <MaterialReactTable table={table} />;
+```
+
 #### Column Pinning Example
 
 <Example />
