@@ -43,6 +43,20 @@ const Example = () => {
         maxHeight: '400px',
       },
     },
+    muiTableBodyRowProps: ({ row, table }) => {
+      const { density } = table.getState();
+      return {
+        sx: {
+          //Set a fixed height for pinned rows
+          height: row.getIsPinned()
+            ? `${
+                //Default mrt row height estimates. Adjust as needed.
+                density === 'compact' ? 37 : density === 'comfortable' ? 53 : 69
+              }px`
+            : undefined,
+        },
+      };
+    },
   });
 
   return <MaterialReactTable table={table} />;
