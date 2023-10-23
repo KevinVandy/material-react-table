@@ -87,12 +87,14 @@ return <MaterialReactTable table={table} />;
 If you do not want the drag buttons that come with the grouping feature, you can independently disable them without disabling the grouping feature entirely by setting the `enableColumnDragging` prop to `false`.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableGrouping
-  enableColumnDragging={false} //do not show drag handle buttons, but still show grouping options in column actions menu
-/>
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableGrouping: true,
+  enableColumnDragging: false, //do not show drag handle buttons, but still show grouping options in column actions menu
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 ### Group Columns by Default
@@ -100,12 +102,14 @@ If you do not want the drag buttons that come with the grouping feature, you can
 If you want columns to be grouped by default, you can set the `grouping` state in either the `initialState` or `state` prop.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableGrouping
-  initialState={{ grouping: ['location', 'department'] }} //group by location and department by default
-/>
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableGrouping: true,
+  initialState: { grouping: ['location', 'department'] }, //group by location and department by default
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 ### Expand Grouped Rows by Default
@@ -113,15 +117,17 @@ If you want columns to be grouped by default, you can set the `grouping` state i
 In addition to grouping columns by default, you may also want those grouped rows to be expanded and visible by default, too. You can do this by setting the `expanded` state to `true` in either the `initialState` or `state` prop.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableGrouping
-  initialState={{
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableGrouping: true,
+  initialState: {
     grouping: ['location', 'department'], //group by location and department by default and expand grouped rows
     expanded: true, //show grouped rows by default
-  }}
-/>
+  },
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 ### Aggregation on Grouped Rows
@@ -162,14 +168,14 @@ const columns = [
   },
 ];
 
-return (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    enableGrouping
-    initialState={{ grouping: ['team'], expanded: true }}
-  />
-);
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableGrouping: true,
+  initialState: { grouping: ['team'], expanded: true },
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 #### Custom Aggregation Functions
@@ -197,17 +203,20 @@ const averageScore = useMemo(() => {
   return totalPoints / totalPlayers;
 }, [data]);
 
-const columns = [
-  {
-    accessorKey: 'name',
-    header: 'Name',
-  },
-  {
-    accessorKey: 'score',
-    header: 'Score',
-    Footer: () => <div>Average Score: {averageScore}</div>, //do not do calculations in render, do them in useMemo hook and pass them in here
-  },
-];
+const columns = useMemo(
+  () => [
+    {
+      accessorKey: 'name',
+      header: 'Name',
+    },
+    {
+      accessorKey: 'score',
+      header: 'Score',
+      Footer: () => <div>Average Score: {averageScore}</div>, //do not do calculations in render, do them in useMemo hook and pass them in here
+    },
+  ],
+  [averageScore],
+);
 ```
 
 > Please remember to perform heavy aggregation calculations in a useMemo hook to avoid unnecessary re-renders!
@@ -249,8 +258,6 @@ const columns = [
 
 #### PlaceholderCell Column Option
 
-> New in v1.7.4
-
 "Placeholder Cells" are cells that are usually meant to be empty in grouped rows and columns. They are simply rendered with a value of `null` by default, but you can override the default render for these cells with the `PlaceholderCell` render option on a column definition.
 
 ```jsx
@@ -270,8 +277,6 @@ const columns = [
 <AggregationExample />
 
 ### Multiple Aggregations Per column
-
-> New in v1.3!
 
 You may want to calculate more than one aggregation per column. This is now easier if you are upgraded to at least v1.3.0. You can now specify an array of `aggregationFn`s, and then reference the aggregation results from an array in the `AggregatedCell` render option.
 

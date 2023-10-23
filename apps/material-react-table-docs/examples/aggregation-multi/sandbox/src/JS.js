@@ -1,6 +1,9 @@
 import { useMemo } from 'react';
 import { Box } from '@mui/material';
-import { MaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 import { data } from './makeData';
 
 const localeStringOptions = {
@@ -75,23 +78,23 @@ const Example = () => {
     [],
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableGrouping
-      enableStickyHeader
-      initialState={{
-        density: 'compact',
-        expanded: true, //expand all groups by default
-        grouping: ['state', 'gender'], //an array of columns to group by by default (can be multiple)
-        pagination: { pageIndex: 0, pageSize: 20 },
-        sorting: [{ id: 'state', desc: false }], //sort by state by default
-      }}
-      muiToolbarAlertBannerChipProps={{ color: 'primary' }}
-      muiTableContainerProps={{ sx: { maxHeight: 700 } }}
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableGrouping: true,
+    enableStickyHeader: true,
+    initialState: {
+      density: 'compact',
+      expanded: true, //expand all groups by default
+      grouping: ['state'], //an array of columns to group by by default (can be multiple)
+      pagination: { pageIndex: 0, pageSize: 20 },
+      sorting: [{ id: 'state', desc: false }], //sort by state by default
+    },
+    muiToolbarAlertBannerChipProps: { color: 'primary' },
+    muiTableContainerProps: { sx: { maxHeight: 700 } },
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;
