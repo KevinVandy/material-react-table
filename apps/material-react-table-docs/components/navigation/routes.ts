@@ -192,6 +192,10 @@ export const routes: Array<RouteItem> = [
             href: '/docs/examples/filter-switching',
             label: 'Filter Switching Example',
           },
+          {
+            href: '/docs/examples/popover-filters',
+            label: 'Popover Filters Example',
+          }
         ],
       },
       {
@@ -215,7 +219,7 @@ export const routes: Array<RouteItem> = [
             label: 'Row Pinning (Static) Example',
           },
           {
-            href: '/docs/examples/select-row-pinning',
+            href: '/docs/examples/sticky-row-selection',
             label: 'Sticky Row Selection Example',
           },
         ],
