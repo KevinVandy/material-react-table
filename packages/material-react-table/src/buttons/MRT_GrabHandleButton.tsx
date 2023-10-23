@@ -31,7 +31,6 @@ export const MRT_GrabHandleButton = <TData extends MRT_RowData>({
 
   return (
     <Tooltip
-      arrow
       enterDelay={1000}
       enterNextDelay={1000}
       placement="top"

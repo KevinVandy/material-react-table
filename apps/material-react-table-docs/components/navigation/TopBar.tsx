@@ -114,7 +114,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
         `}
       </style>
       <AppBar position="fixed">
-        <Toolbar sx={{p: '2px 4px'}} disableGutters variant="dense">
+        <Toolbar sx={{ p: '2px 4px' }} disableGutters variant="dense">
           <Box sx={{ display: 'flex' }}>
             {!isDesktop && (
               <IconButton
@@ -192,10 +192,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
                 rel="noopener"
                 target="_blank"
               >
-                <IconButton
-                  aria-label="Github"
-                  size="small"
-                >
+                <IconButton aria-label="Github" size="small">
                   <GitHubIcon fontSize={isMobile ? 'medium' : 'large'} />
                 </IconButton>
               </a>
@@ -206,10 +203,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
                 rel="noopener"
                 target="_blank"
               >
-                <IconButton
-                  aria-label="Discord"
-                  size="small"
-                >
+                <IconButton aria-label="Discord" size="small">
                   <img
                     alt="Discord"
                     height={isMobile ? 20 : 25}

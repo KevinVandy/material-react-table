@@ -96,7 +96,6 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
 
   return (
     <Tooltip
-      arrow
       enterDelay={1000}
       enterNextDelay={1000}
       title={

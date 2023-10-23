@@ -154,7 +154,6 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
               }}
               control={
                 <Tooltip
-                  arrow
                   enterDelay={1000}
                   enterNextDelay={1000}
                   title={localization.toggleVisibility}

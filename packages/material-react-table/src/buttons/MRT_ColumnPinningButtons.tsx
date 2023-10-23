@@ -39,14 +39,14 @@ export const MRT_ColumnPinningButtons = <TData extends MRT_RowData>({
       })}
     >
       {column.getIsPinned() ? (
-        <Tooltip arrow title={localization.unpin}>
+        <Tooltip title={localization.unpin}>
           <IconButton onClick={() => handlePinColumn(false)} size="small">
             <PushPinIcon />
           </IconButton>
         </Tooltip>
       ) : (
         <>
-          <Tooltip arrow title={localization.pinToLeft}>
+          <Tooltip title={localization.pinToLeft}>
             <IconButton onClick={() => handlePinColumn('left')} size="small">
               <PushPinIcon
                 style={{
@@ -55,7 +55,7 @@ export const MRT_ColumnPinningButtons = <TData extends MRT_RowData>({
               />
             </IconButton>
           </Tooltip>
-          <Tooltip arrow title={localization.pinToRight}>
+          <Tooltip title={localization.pinToRight}>
             <IconButton onClick={() => handlePinColumn('right')} size="small">
               <PushPinIcon
                 style={{

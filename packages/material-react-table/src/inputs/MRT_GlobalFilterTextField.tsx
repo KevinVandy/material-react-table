@@ -95,7 +95,7 @@ export const MRT_GlobalFilterTextField = <TData extends MRT_RowData>({
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <Tooltip arrow title={localization.clearSearch ?? ''}>
+              <Tooltip title={localization.clearSearch ?? ''}>
                 <span>
                   <IconButton
                     aria-label={localization.clearSearch}
@@ -111,7 +111,7 @@ export const MRT_GlobalFilterTextField = <TData extends MRT_RowData>({
           ),
           startAdornment: enableGlobalFilterModes ? (
             <InputAdornment position="start">
-              <Tooltip arrow title={localization.changeSearchMode}>
+              <Tooltip title={localization.changeSearchMode}>
                 <IconButton
                   aria-label={localization.changeSearchMode}
                   onClick={handleGlobalFilterMenuOpen}

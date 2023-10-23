@@ -73,7 +73,13 @@ const columns = [
   },
 ];
 
-return <MaterialReactTable columns={columns} data={data} enableGrouping />;
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableGrouping: true,
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 #### Hide Drag Buttons for Grouping

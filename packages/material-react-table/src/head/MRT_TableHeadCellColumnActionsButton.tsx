@@ -54,7 +54,6 @@ export const MRT_TableHeadCellColumnActionsButton = <
   return (
     <>
       <Tooltip
-        arrow
         enterDelay={1000}
         enterNextDelay={1000}
         placement="top"

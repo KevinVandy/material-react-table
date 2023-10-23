@@ -93,12 +93,12 @@ export const MRT_EditActionButtons = <TData extends MRT_RowData>({
     >
       {variant === 'icon' ? (
         <>
-          <Tooltip arrow title={localization.cancel}>
+          <Tooltip title={localization.cancel}>
             <IconButton aria-label={localization.cancel} onClick={handleCancel}>
               <CancelIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip arrow title={localization.save}>
+          <Tooltip title={localization.save}>
             <IconButton
               aria-label={localization.save}
               color="info"

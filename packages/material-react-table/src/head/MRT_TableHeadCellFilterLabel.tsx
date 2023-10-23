@@ -92,7 +92,7 @@ export const MRT_TableHeadCellFilterLabel = <TData extends MRT_RowData = {}>({
         unmountOnExit
       >
         <Box component="span" sx={{ flex: '0 0' }}>
-          <Tooltip arrow placement="top" title={filterTooltip}>
+          <Tooltip placement="top" title={filterTooltip}>
             <IconButton
               disableRipple
               onClick={(event: MouseEvent<HTMLButtonElement>) => {

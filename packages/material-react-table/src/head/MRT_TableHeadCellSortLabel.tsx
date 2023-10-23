@@ -45,7 +45,7 @@ export const MRT_TableHeadCellSortLabel = <TData extends MRT_RowData>({
       : localization.sortByColumnAsc.replace('{column}', columnDef.header);
 
   return (
-    <Tooltip arrow placement="top" title={sortTooltip}>
+    <Tooltip placement="top" title={sortTooltip}>
       <Badge
         badgeContent={sorting.length > 1 ? column.getSortIndex() + 1 : 0}
         overlap="circular"

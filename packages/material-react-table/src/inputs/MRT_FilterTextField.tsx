@@ -242,7 +242,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
         position="end"
         sx={{ mr: isSelectFilter || isMultiSelectFilter ? '20px' : undefined }}
       >
-        <Tooltip arrow placement="right" title={localization.clearFilter ?? ''}>
+        <Tooltip placement="right" title={localization.clearFilter ?? ''}>
           <span>
             <IconButton
               aria-label={localization.clearFilter}
@@ -264,7 +264,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
 
   const startAdornment = showChangeModeButton ? (
     <InputAdornment position="start">
-      <Tooltip arrow title={localization.changeFilterMode}>
+      <Tooltip title={localization.changeFilterMode}>
         <span>
           <IconButton
             aria-label={localization.changeFilterMode}

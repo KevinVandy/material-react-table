@@ -30,7 +30,6 @@ export const MRT_ToggleFullScreenButton = <TData extends MRT_RowData>({
 
   return (
     <Tooltip
-      arrow
       open={tooltipOpened}
       title={rest?.title ?? localization.toggleFullScreen}
     >

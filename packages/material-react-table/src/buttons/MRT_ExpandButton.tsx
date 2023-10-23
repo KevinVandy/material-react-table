@@ -44,7 +44,6 @@ export const MRT_ExpandButton = <TData extends MRT_RowData>({
 
   return (
     <Tooltip
-      arrow
       disableHoverListener={!canExpand && !renderDetailPanel}
       enterDelay={1000}
       enterNextDelay={1000}

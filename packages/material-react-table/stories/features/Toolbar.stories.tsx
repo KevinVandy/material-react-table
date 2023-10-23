@@ -130,7 +130,7 @@ export const CustomTopToolbarActions = () => (
 
       return (
         <div>
-          <Tooltip arrow title="Create New User">
+          <Tooltip title="Create New User">
             <IconButton onClick={handleCreateNewUser}>
               <AddBoxIcon />
             </IconButton>
@@ -153,7 +153,7 @@ export const CustomBottomToolbarActions = () => (
 
       return (
         <div>
-          <Tooltip arrow title="Create New User">
+          <Tooltip title="Create New User">
             <IconButton onClick={handleCreateNewUser}>
               <AddBoxIcon />
             </IconButton>
@@ -292,12 +292,12 @@ export const ToolbarAlertBannerBottom = () => (
 
       return (
         <div>
-          <Tooltip arrow title="Create New User">
+          <Tooltip title="Create New User">
             <IconButton onClick={handleCreateNewUser}>
               <AddBoxIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip arrow title="Remove Users">
+          <Tooltip title="Remove Users">
             <span>
               <IconButton
                 disabled={table.getSelectedRowModel().flatRows.length === 0}
@@ -329,12 +329,12 @@ export const ToolbarAlertBannerBottomWithActionsAlsoBottom = () => (
 
       return (
         <div>
-          <Tooltip arrow title="Create New User">
+          <Tooltip title="Create New User">
             <IconButton onClick={handleCreateNewUser}>
               <AddBoxIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip arrow title="Remove Users">
+          <Tooltip title="Remove Users">
             <span>
               <IconButton
                 disabled={table.getSelectedRowModel().flatRows.length === 0}

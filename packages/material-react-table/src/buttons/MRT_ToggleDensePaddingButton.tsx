@@ -31,7 +31,7 @@ export const MRT_ToggleDensePaddingButton = <TData extends MRT_RowData>({
   };
 
   return (
-    <Tooltip arrow title={rest?.title ?? localization.toggleDensity}>
+    <Tooltip title={rest?.title ?? localization.toggleDensity}>
       <IconButton
         aria-label={localization.toggleDensity}
         onClick={handleToggleDensePadding}

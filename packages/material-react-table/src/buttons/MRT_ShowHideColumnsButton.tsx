@@ -27,7 +27,7 @@ export const MRT_ShowHideColumnsButton = <TData extends MRT_RowData>({
 
   return (
     <>
-      <Tooltip arrow title={rest?.title ?? localization.showHideColumns}>
+      <Tooltip title={rest?.title ?? localization.showHideColumns}>
         <IconButton
           aria-label={localization.showHideColumns}
           onClick={handleClick}

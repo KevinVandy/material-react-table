@@ -80,7 +80,7 @@ export const MRT_ToggleRowActionMenuButton = <TData extends MRT_RowData>({
       ) : !renderRowActionMenuItems &&
         parseFromValuesOrFunc(enableEditing, row) &&
         ['modal', 'row'].includes(editDisplayMode!) ? (
-        <Tooltip arrow placement="right" title={localization.edit}>
+        <Tooltip placement="right" title={localization.edit}>
           <IconButton
             aria-label={localization.edit}
             onClick={handleStartEditMode}
@@ -93,7 +93,6 @@ export const MRT_ToggleRowActionMenuButton = <TData extends MRT_RowData>({
       ) : renderRowActionMenuItems ? (
         <>
           <Tooltip
-            arrow
             enterDelay={1000}
             enterNextDelay={1000}
             title={localization.rowActions}

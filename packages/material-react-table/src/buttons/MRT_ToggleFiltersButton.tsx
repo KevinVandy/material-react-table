@@ -25,7 +25,7 @@ export const MRT_ToggleFiltersButton = <TData extends MRT_RowData>({
   };
 
   return (
-    <Tooltip arrow title={rest?.title ?? localization.showHideFilters}>
+    <Tooltip title={rest?.title ?? localization.showHideFilters}>
       <IconButton
         aria-label={localization.showHideFilters}
         onClick={handleToggleShowFilters}

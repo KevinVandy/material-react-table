@@ -78,7 +78,7 @@ const Example = () => {
           {
             backgroundColor: darken(baseBackgroundColor, 0.2),
           },
-          '& tr:nth-of-type(even):not([data-selected="true"]):not([data-pinned="true"]) > td':
+        '& tr:nth-of-type(even):not([data-selected="true"]):not([data-pinned="true"]) > td':
           {
             backgroundColor: lighten(baseBackgroundColor, 0.1),
           },
