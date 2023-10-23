@@ -66,6 +66,12 @@ async function build(locale) {
     sourcemap: false,
   });
 
+  await bundle.write({
+    file: `./locales/${locale}.js`,
+    format: 'esm',
+    sourcemap: false,
+  });
+
   const typeFile = `import { type MRT_Localization } from '../..';
 export declare const MRT_Localization_${locale
     .toUpperCase()
