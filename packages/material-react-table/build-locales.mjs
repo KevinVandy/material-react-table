@@ -1,3 +1,4 @@
+/* eslint-disable perfectionist/sort-objects */
 import typescript from '@rollup/plugin-typescript';
 import fs from 'fs';
 import { rollup } from 'rollup';
@@ -66,7 +67,7 @@ async function build(locale) {
   });
 
   const typeFile = `import { type MRT_Localization } from '../..';
-  export declare const MRT_Localization_${locale
+export declare const MRT_Localization_${locale
     .toUpperCase()
     .replaceAll('-', '_')}: MRT_Localization;
   `;
@@ -89,6 +90,14 @@ async function build(locale) {
         module: './index.esm.js',
         sideEffects: false,
         types: './index.d.ts',
+        exports: {
+          '.': {
+            types: './index.d.ts',
+            import: './index.esm.js',
+            require: './index.js',
+          },
+          './package.json': './package.json',
+        },
       },
       null,
       2,
