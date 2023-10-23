@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
   MaterialReactTable,
+  useMaterialReactTable,
   type MRT_ColumnDef,
   type MRT_ColumnFiltersState,
   type MRT_PaginationState,
@@ -82,11 +83,11 @@ const Example = () => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    columnFilters,
-    globalFilter,
-    pagination.pageIndex,
-    pagination.pageSize,
-    sorting,
+    columnFilters, //re-fetch when column filters change
+    globalFilter, //re-fetch when global filter changes
+    pagination.pageIndex, //re-fetch when page index changes
+    pagination.pageSize, //re-fetch when page size changes
+    sorting, //re-fetch when sorting changes
   ]);
 
   const columns = useMemo<MRT_ColumnDef<User>[]>(
@@ -117,40 +118,38 @@ const Example = () => {
     [],
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableRowSelection
-      getRowId={(row) => row.phoneNumber}
-      initialState={{ showColumnFilters: true }}
-      manualFiltering
-      manualPagination
-      manualSorting
-      muiToolbarAlertBannerProps={
-        isError
-          ? {
-              color: 'error',
-              children: 'Error loading data',
-            }
-          : undefined
-      }
-      onColumnFiltersChange={setColumnFilters}
-      onGlobalFilterChange={setGlobalFilter}
-      onPaginationChange={setPagination}
-      onSortingChange={setSorting}
-      rowCount={rowCount}
-      state={{
-        columnFilters,
-        globalFilter,
-        isLoading,
-        pagination,
-        showAlertBanner: isError,
-        showProgressBars: isRefetching,
-        sorting,
-      }}
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableRowSelection: true,
+    getRowId: (row) => row.phoneNumber,
+    initialState: { showColumnFilters: true },
+    manualFiltering: true,
+    manualPagination: true,
+    manualSorting: true,
+    muiToolbarAlertBannerProps: isError
+      ? {
+          color: 'error',
+          children: 'Error loading data',
+        }
+      : undefined,
+    onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: setGlobalFilter,
+    onPaginationChange: setPagination,
+    onSortingChange: setSorting,
+    rowCount,
+    state: {
+      columnFilters,
+      globalFilter,
+      isLoading,
+      pagination,
+      showAlertBanner: isError,
+      showProgressBars: isRefetching,
+      sorting,
+    },
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

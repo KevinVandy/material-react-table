@@ -114,7 +114,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
         `}
       </style>
       <AppBar position="fixed">
-        <Toolbar disableGutters variant="dense">
+        <Toolbar sx={{p: '2px 4px'}} disableGutters variant="dense">
           <Box sx={{ display: 'flex' }}>
             {!isDesktop && (
               <IconButton
@@ -142,8 +142,8 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
                 <Image
                   alt="MRT logo"
                   src="/mrt_logo.svg"
-                  height={isTablet ? 35 : 45}
-                  width={isTablet ? 35 : 45}
+                  height={isTablet ? 35 : 40}
+                  width={isTablet ? 35 : 40}
                 />
                 {!isMobile && 'Material React Table'}
               </Typography>
@@ -155,7 +155,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
                 onOpen={() => plausible('version-select')}
                 value="v2"
                 size="small"
-                sx={{ m: '8px', height: '2rem' }}
+                sx={{ m: '8px', height: '30px' }}
               >
                 <Link
                   legacyBehavior
@@ -194,7 +194,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
               >
                 <IconButton
                   aria-label="Github"
-                  size={isMobile ? 'small' : 'medium'}
+                  size="small"
                 >
                   <GitHubIcon fontSize={isMobile ? 'medium' : 'large'} />
                 </IconButton>
@@ -208,7 +208,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
               >
                 <IconButton
                   aria-label="Discord"
-                  size={isMobile ? 'small' : 'medium'}
+                  size="small"
                 >
                   <img
                     alt="Discord"
@@ -231,7 +231,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
                     `toggle-theme-${isLightTheme ? 'dark' : 'light'}-mode`,
                   );
                 }}
-                size={isMobile ? 'small' : 'medium'}
+                size="small"
               >
                 {isLightTheme ? (
                   <LightModeIcon fontSize={isMobile ? 'medium' : 'large'} />

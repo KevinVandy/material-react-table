@@ -1,22 +1,42 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
   MaterialReactTable,
-  useMaterialReactTable,
+  type MRT_ColumnDef,
+  type MRT_ColumnFiltersState,
+  type MRT_PaginationState,
+  type MRT_SortingState,
 } from 'material-react-table';
+
+type UserApiResponse = {
+  data: Array<User>;
+  meta: {
+    totalRowCount: number;
+  };
+};
+
+type User = {
+  firstName: string;
+  lastName: string;
+  address: string;
+  state: string;
+  phoneNumber: string;
+};
 
 const Example = () => {
   //data and fetching state
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<User[]>([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isRefetching, setIsRefetching] = useState(false);
   const [rowCount, setRowCount] = useState(0);
 
   //table state
-  const [columnFilters, setColumnFilters] = useState([]);
+  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
+    [],
+  );
   const [globalFilter, setGlobalFilter] = useState('');
-  const [sorting, setSorting] = useState([]);
-  const [pagination, setPagination] = useState({
+  const [sorting, setSorting] = useState<MRT_SortingState>([]);
+  const [pagination, setPagination] = useState<MRT_PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   });
@@ -47,7 +67,7 @@ const Example = () => {
 
       try {
         const response = await fetch(url.href);
-        const json = await response.json();
+        const json = (await response.json()) as UserApiResponse;
         setData(json.data);
         setRowCount(json.meta.totalRowCount);
       } catch (error) {
@@ -69,7 +89,7 @@ const Example = () => {
     sorting,
   ]);
 
-  const columns = useMemo(
+  const columns = useMemo<MRT_ColumnDef<User>[]>(
     () => [
       {
         accessorKey: 'firstName',
@@ -97,38 +117,40 @@ const Example = () => {
     [],
   );
 
-  const table = useMaterialReactTable({
-    columns,
-    data,
-    enableRowSelection: true,
-    getRowId: (row) => row.phoneNumber,
-    initialState: { showColumnFilters: true },
-    manualFiltering: true,
-    manualPagination: true,
-    manualSorting: true,
-    muiToolbarAlertBannerProps: isError
-      ? {
-          color: 'error',
-          children: 'Error loading data',
-        }
-      : undefined,
-    onColumnFiltersChange: setColumnFilters,
-    onGlobalFilterChange: setGlobalFilter,
-    onPaginationChange: setPagination,
-    onSortingChange: setSorting,
-    rowCount,
-    state: {
-      columnFilters,
-      globalFilter,
-      isLoading,
-      pagination,
-      showAlertBanner: isError,
-      showProgressBars: isRefetching,
-      sorting,
-    },
-  });
-
-  return <MaterialReactTable table={table} />;
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      enableRowSelection
+      getRowId={(row) => row.phoneNumber}
+      initialState={{ showColumnFilters: true }}
+      manualFiltering
+      manualPagination
+      manualSorting
+      muiToolbarAlertBannerProps={
+        isError
+          ? {
+              color: 'error',
+              children: 'Error loading data',
+            }
+          : undefined
+      }
+      onColumnFiltersChange={setColumnFilters}
+      onGlobalFilterChange={setGlobalFilter}
+      onPaginationChange={setPagination}
+      onSortingChange={setSorting}
+      rowCount={rowCount}
+      state={{
+        columnFilters,
+        globalFilter,
+        isLoading,
+        pagination,
+        showAlertBanner: isError,
+        showProgressBars: isRefetching,
+        sorting,
+      }}
+    />
+  );
 };
 
 export default Example;

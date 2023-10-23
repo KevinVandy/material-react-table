@@ -64,6 +64,7 @@ export const MRT_TablePaper = <TData extends MRT_RowData>({
       }}
       sx={(theme) => ({
         backgroundColor: getMRTTheme(table, theme).baseBackgroundColor,
+        backgroundImage: 'unset',
         overflow: 'hidden',
         transition: 'all 100ms ease-in-out',
         ...(parseFromValuesOrFunc(tablePaperProps?.sx, theme) as any),

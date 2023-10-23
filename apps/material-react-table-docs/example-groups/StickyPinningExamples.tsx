@@ -4,6 +4,7 @@ import StickyHeaderExample from '../examples/enable-sticky-header';
 import ColumnPinningExample from '../examples/enable-column-pinning';
 import RowPinningStickyExample from '../examples/enable-row-pinning-sticky';
 import RowPinningStaticExample from '../examples/enable-row-pinning-static';
+import StickySelectExample from '../examples/enable-row-pinning-select';
 import { useState } from 'react';
 import Link from 'next/link';
 import LaunchIcon from '@mui/icons-material/Launch';
@@ -29,6 +30,7 @@ const StickyPinningExamples = ({ isPage = false }) => {
           <Tab label="Column Pinning" value="column-pinning" />
           <Tab label="Row Pinning (Sticky)" value="sticky-row-pinning" />
           <Tab label="Row Pinning (Static)" value="static-row-pinning" />
+          <Tab label="Sticky Row Selection" value="sticky-row-selection" />
           <Link href="/docs/examples" passHref legacyBehavior>
             <Tab
               label={
@@ -47,6 +49,7 @@ const StickyPinningExamples = ({ isPage = false }) => {
         {activeTab === 'column-pinning' && <ColumnPinningExample />}
         {activeTab === 'sticky-row-pinning' && <RowPinningStickyExample />}
         {activeTab === 'static-row-pinning' && <RowPinningStaticExample />}
+        {activeTab === 'sticky-row-selection' && <StickySelectExample />}
       </Box>
     </>
   );

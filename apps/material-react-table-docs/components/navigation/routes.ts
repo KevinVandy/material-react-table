@@ -186,6 +186,10 @@ export const routes: Array<RouteItem> = [
             href: '/docs/examples/static-row-pinning',
             label: 'Row Pinning (Static)',
           },
+          {
+            href: '/docs/examples/select-row-pinning',
+            label: 'Sticky Row Selection',
+          },
         ],
       },
       {
