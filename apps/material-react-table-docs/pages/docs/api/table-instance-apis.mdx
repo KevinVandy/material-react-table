@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import TableInstanceAPIsTable from '../../../components/prop-tables/TableInstanceAPIsTable';
 import SourceCode from '../../../components/prop-tables/TableInstanceAPIsSource';
+import InstanceAPIsSwitcher from '../../../example-groups/InstanceAPIsSwitcher';
 
 <Head>
   <title>{'Table Instance APIs - Material React Table V2 Docs'}</title>
@@ -19,6 +20,10 @@ import SourceCode from '../../../components/prop-tables/TableInstanceAPIsSource'
 </Head>
 
 ## Table Instance APIs
+
+<InstanceAPIsSwitcher />
+
+> NOTE: These are NOT the [table options](/docs/api/table-options) for Material React Table. These are just static methods on a table instance that you can use.
 
 These are the methods available on the `table` instance that is returned from the `useMaterialReactTable` hook. You can use these methods to interact with the table instance.
 
@@ -43,8 +48,6 @@ const someEventHandler = () => {
 
 return <MaterialReactTable table={table} />;
 ```
-
-> NOTE: These are NOT the [table options](/docs/api/table-options) for Material React Table. These are just static methods on a table instance that you can use.
 
 <TableInstanceAPIsTable />
 

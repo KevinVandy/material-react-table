@@ -19,6 +19,8 @@ const StickyPinningExamples = ({ isPage = false }) => {
     <>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs
+          textColor="secondary"
+          indicatorColor="secondary"
           value={isPage ? pathname.split('/').pop() : activeTab}
           onChange={(_e, newPath) =>
             isPage && newPath !== 'more'

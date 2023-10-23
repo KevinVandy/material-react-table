@@ -31,7 +31,7 @@ export const TableOfContentsListItem = ({
   </li>
 );
 interface Props {
-  items: Array<any>;
+  items: Array<RouteItem>;
   isFooter?: boolean;
   variant?: 'list' | 'heading';
 }
@@ -52,18 +52,19 @@ const TableOfContentsList = ({
         {items.map((item, index) => {
           return (
             <Fragment key={index}>
-              <TableOfContentsListItem item={item} isFooter={isFooter} />
-              {item.secondaryItems
-                ? item.secondaryItems.map((item, index) => {
-                    return (
-                      <TableOfContentsListItem
-                        key={index}
-                        item={item}
-                        isFooter={isFooter}
-                      />
-                    );
-                  })
-                : null}
+              {item.secondaryItems ? (
+                item.secondaryItems.map((item, index) => {
+                  return (
+                    <TableOfContentsListItem
+                      key={index}
+                      item={item}
+                      isFooter={isFooter}
+                    />
+                  );
+                })
+              ) : (
+                <TableOfContentsListItem item={item} isFooter={isFooter} />
+              )}
             </Fragment>
           );
         })}
@@ -77,11 +78,14 @@ const TableOfContentsList = ({
             <LinkHeading variant="h3" href={item.href}>
               {item.label}
             </LinkHeading>
-            {item.items && (
+            {(item.items || item.secondaryItems) && (
               <TableOfContentsList
                 items={[
-                  ...item.items,
-                  ...(item.secondaryItems ? item.secondaryItems : []),
+                  ...(item.secondaryItems
+                    ? item.secondaryItems
+                    : item.items
+                    ? item.items
+                    : []),
                 ]}
               />
             )}

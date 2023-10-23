@@ -212,7 +212,7 @@ export const Footer = () => {
                 routes
                   .find((item) => item.href === '/docs/api')
                   ?.items?.find((item) => item.label === 'Props and Options')
-                  ?.items ?? []
+                  ?.secondaryItems ?? []
               }
               isFooter
             />
@@ -221,7 +221,7 @@ export const Footer = () => {
                 routes
                   .find((item) => item.href === '/docs/api')
                   ?.items?.find((item) => item.label === 'Instance APIs')
-                  ?.items ?? []
+                  ?.secondaryItems ?? []
               }
               isFooter
             />

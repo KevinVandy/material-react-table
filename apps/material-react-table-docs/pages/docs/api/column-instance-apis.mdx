@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import ColumnInstanceAPIsTable from '../../../components/prop-tables/ColumnInstanceAPIsTable';
 import SourceCode from '../../../components/prop-tables/ColumnInstanceAPIsSource';
+import InstanceAPIsSwitcher from '../../../example-groups/InstanceAPIsSwitcher';
 
 <Head>
   <title>{'Column Instance APIs - Material React Table V2 Docs'}</title>
@@ -19,6 +20,10 @@ import SourceCode from '../../../components/prop-tables/ColumnInstanceAPIsSource
 </Head>
 
 ## Column Instance APIs
+
+<InstanceAPIsSwitcher />
+
+> NOTE: These are NOT [column options](/docs/api/column-options) for Material React Table. These are just static methods on a column instance that you can use.
 
 Each column has a `column` instance object associated with it that can be accessed in callback props and other places in the table.
 
@@ -61,7 +66,7 @@ const table = useMaterialReactTable({
 });
 ```
 
-> NOTE: These are NOT [column options](/docs/api/column-options) for Material React Table. These are just static methods on a column instance that you can use.
+
 
 <ColumnInstanceAPIsTable />
 

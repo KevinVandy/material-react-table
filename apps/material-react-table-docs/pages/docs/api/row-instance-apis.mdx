@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import RowInstanceAPIsTable from '../../../components/prop-tables/RowInstanceAPIsTable';
 import SourceCode from '../../../components/prop-tables/RowInstanceAPIsSource';
+import InstanceAPIsSwitcher from '../../../example-groups/InstanceAPIsSwitcher';
 
 <Head>
   <title>{'Row Instance APIs - Material React Table V2 Docs'}</title>
@@ -19,6 +20,10 @@ import SourceCode from '../../../components/prop-tables/RowInstanceAPIsSource';
 </Head>
 
 ## Row Instance APIs
+
+<InstanceAPIsSwitcher />
+
+> NOTE: These are NOT [props](/docs/api/props) or [column options](/docs/api/column-options) for Material React Table. These are just static methods on a row instance that you can use.
 
 Every row in the table has an associated row instance that can be accessed in many of the callback props that you can use to access a row's information and methods.
 
@@ -60,7 +65,7 @@ const table = useMaterialReactTable({
 });
 ```
 
-> NOTE: These are NOT [props](/docs/api/props) or [column options](/docs/api/column-options) for Material React Table. These are just static methods on a row instance that you can use.
+
 
 <RowInstanceAPIsTable />
 

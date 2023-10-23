@@ -9,9 +9,15 @@ interface Props {
   depth?: number;
   routes: RouteItem[];
   setNavOpen: (navOpen: boolean) => void;
+  isSecondary?: boolean;
 }
 
-export const SideBarItems = ({ depth = 1, routes, setNavOpen }: Props) => {
+export const SideBarItems = ({
+  depth = 1,
+  routes,
+  setNavOpen,
+  isSecondary,
+}: Props) => {
   const { pathname } = useRouter();
   const isMobile = useMediaQuery('(max-width: 900px)');
 
@@ -30,34 +36,39 @@ export const SideBarItems = ({ depth = 1, routes, setNavOpen }: Props) => {
       {routes.map(
         ({ href, items, label, divider, external, secondaryItems }) => {
           const secondaryHrefs = secondaryItems?.map((i) => i.href);
+
+          const isSelected = pathname === href;
+          const isSelectedParent = secondaryHrefs?.includes(pathname);
+          const willBeSecondary = !!secondaryItems?.length && isSelectedParent;
+
           return (
             <Fragment key={label}>
               <Link href={href} target={external ? '_blank' : undefined}>
                 <ListItemButton
                   divider={divider}
-                  selected={
-                    pathname === href || secondaryHrefs?.includes(pathname)
-                  }
+                  selected={isSelected && !isSelectedParent}
                   ref={(node) =>
-                    selectedItemRef(
-                      node,
-                      pathname === href || secondaryHrefs?.includes(pathname),
-                    )
+                    selectedItemRef(node, isSelected && !isSelectedParent)
                   }
                   onClick={handleCloseMenu}
                   sx={(theme) => ({
-                    color: !items
+                    color: isSecondary
+                      ? theme.palette.mode === 'dark'
+                        ? theme.palette.secondary.light
+                        : theme.palette.secondary.dark
+                      : !items
                       ? theme.palette.mode === 'dark'
                         ? theme.palette.primary.main
                         : theme.palette.primary.dark
                       : depth === 1
                       ? theme.palette.text.primary
                       : theme.palette.text.secondary,
-                    fontSize: !items
-                      ? '0.9rem'
-                      : depth === 1
-                      ? '1.25rem'
-                      : '1rem',
+                    fontSize:
+                      !items && !isSelectedParent
+                        ? '0.9rem'
+                        : depth === 1
+                        ? '1.25rem'
+                        : '1rem',
                     height: items ? '2.5rem' : '2rem',
                     lineHeight: depth === 0 && !items ? '1.25rem' : '0.75rem',
                     padding: '0',
@@ -79,9 +90,10 @@ export const SideBarItems = ({ depth = 1, routes, setNavOpen }: Props) => {
                   </Box>
                 </ListItemButton>
               </Link>
-              {items && (
+              {(items || willBeSecondary) && (
                 <SideBarItems
-                  routes={items}
+                  routes={willBeSecondary ? secondaryItems : items!}
+                  isSecondary={willBeSecondary}
                   depth={depth + 1}
                   setNavOpen={setNavOpen}
                 />

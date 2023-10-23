@@ -44,8 +44,8 @@ export const routes: Array<RouteItem> = [
     items: [
       {
         label: 'Props and Options',
-        href: '/docs/api#props-and-options',
-        items: [
+        href: '/docs/api/table-options',
+        secondaryItems: [
           {
             href: '/docs/api/table-options',
             label: 'Table Options (Props)',
@@ -62,8 +62,8 @@ export const routes: Array<RouteItem> = [
       },
       {
         label: 'Instance APIs',
-        href: '/docs/api#instance-apis',
-        items: [
+        href: '/docs/api/table-instance-apis',
+        secondaryItems: [
           {
             href: '/docs/api/table-instance-apis',
             label: 'Table Instance APIs',
@@ -109,8 +109,12 @@ export const routes: Array<RouteItem> = [
         label: 'Data Export Examples',
         secondaryItems: [
           {
+            href: '/docs/examples/export-csv',
+            label: 'Export to CSV Example',
+          },
+          {
             href: '/docs/examples/export-pdf',
-            label: 'Export to PDF',
+            label: 'Export to PDF Example',
           },
         ],
       },
@@ -119,12 +123,16 @@ export const routes: Array<RouteItem> = [
         label: 'Dragging / Ordering Examples',
         secondaryItems: [
           {
+            href: '/docs/examples/column-ordering',
+            label: 'Column Ordering Example',
+          },
+          {
             href: '/docs/examples/row-ordering',
-            label: 'Row Ordering',
+            label: 'Row Ordering Example',
           },
           {
             href: '/docs/examples/row-dragging',
-            label: 'Row Dragging',
+            label: 'Row Dragging Example',
           },
         ],
       },
@@ -133,16 +141,20 @@ export const routes: Array<RouteItem> = [
         label: 'Editing (CRUD) Examples',
         secondaryItems: [
           {
+            href: '/docs/examples/editing-crud',
+            label: 'Modal Editing Example',
+          },
+          {
             href: '/docs/examples/editing-crud-inline-row',
-            label: 'Inline Row Editing',
+            label: 'Inline Row Editing Example',
           },
           {
             href: '/docs/examples/editing-crud-inline-cell',
-            label: 'Inline Cell Editing',
+            label: 'Inline Cell Editing Example',
           },
           {
             href: '/docs/examples/editing-crud-inline-table',
-            label: 'Inline Table Editing',
+            label: 'Inline Table Editing Example',
           },
         ],
       },
@@ -151,8 +163,16 @@ export const routes: Array<RouteItem> = [
         label: 'Expanding / Grouping Examples',
         secondaryItems: [
           {
+            href: '/docs/examples/aggregation-and-grouping',
+            label: 'Aggregation and Grouping Example',
+          },
+          {
             href: '/docs/examples/detail-panel',
-            label: 'Detail Panel (Expanding)',
+            label: 'Detail Panel (Expanding) Example',
+          },
+          {
+            href: '/docs/examples/expanding-tree',
+            label: 'Expanding Sub-Rows (Tree) Example',
           },
         ],
       },
@@ -161,12 +181,16 @@ export const routes: Array<RouteItem> = [
         label: 'Filtering Examples',
         secondaryItems: [
           {
+            href: '/docs/examples/filter-variants',
+            label: 'Filter Variants Example',
+          },
+          {
             href: '/docs/examples/faceted-values',
-            label: 'Faceted Values',
+            label: 'Faceted Values Example',
           },
           {
             href: '/docs/examples/filter-switching',
-            label: 'Filter Switching',
+            label: 'Filter Switching Example',
           },
         ],
       },
@@ -175,20 +199,24 @@ export const routes: Array<RouteItem> = [
         label: 'Sticky Pinning Examples',
         secondaryItems: [
           {
+            href: '/docs/examples/sticky-header',
+            label: 'Sticky Header Example',
+          },
+          {
             href: '/docs/examples/column-pinning',
-            label: 'Column Pinning',
+            label: 'Column Pinning Example',
           },
           {
             href: '/docs/examples/sticky-row-pinning',
-            label: 'Row Pinning (Sticky)',
+            label: 'Row Pinning (Sticky) Example',
           },
           {
             href: '/docs/examples/static-row-pinning',
-            label: 'Row Pinning (Static)',
+            label: 'Row Pinning (Static) Example',
           },
           {
             href: '/docs/examples/select-row-pinning',
-            label: 'Sticky Row Selection',
+            label: 'Sticky Row Selection Example',
           },
         ],
       },
@@ -196,6 +224,10 @@ export const routes: Array<RouteItem> = [
         href: '/docs/examples/react-query',
         label: 'Remote Data Fetching Examples',
         secondaryItems: [
+          {
+            href: '/docs/examples/react-query',
+            label: 'React Query Example',
+          },
           {
             href: '/docs/examples/remote',
             label: 'Remote Data Fetching Example',
@@ -206,6 +238,10 @@ export const routes: Array<RouteItem> = [
         href: '/docs/examples/virtualized',
         label: 'Virtualized Examples',
         secondaryItems: [
+          {
+            href: '/docs/examples/virtualized',
+            label: 'Fully Virtualized Example',
+          },
           {
             href: '/docs/examples/row-virtualization',
             label: 'Row Virtualization Example',
