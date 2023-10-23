@@ -1,46 +1,37 @@
 import { useMemo } from 'react';
-import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+  type MRT_ColumnDef,
+} from 'material-react-table';
+import { data, type Person } from './makeData';
 
 const Example = () => {
-  const columns = useMemo(
-    () =>
-      [
-        {
-          accessorKey: 'id',
-          enableColumnActions: false,
-          header: 'ID',
-        },
-        {
-          accessorKey: 'firstName',
-          header: 'First Name',
-        },
-        {
-          accessorKey: 'lastName',
-          header: 'Last Name',
-        },
-      ] as MRT_ColumnDef<(typeof data)[0]>[],
-    [],
-  );
-
-  const data = useMemo(
-    //data definitions...
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       {
-        id: 1,
-        firstName: 'Dylan',
-        lastName: 'Murray',
+        accessorKey: 'id',
+        enableColumnActions: false,
+        header: 'ID',
       },
       {
-        id: 2,
-        firstName: 'Raquel',
-        lastName: 'Kohler',
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
       },
     ],
     [],
-    //end
   );
 
-  return <MaterialReactTable columns={columns} data={data} />;
+  const table = useMaterialReactTable({
+    columns,
+    data,
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

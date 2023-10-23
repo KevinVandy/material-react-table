@@ -1,23 +1,13 @@
 import { useMemo } from 'react';
-import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
-
-const data =
-  //data definitions...
-  [
-    {
-      id: 1,
-      firstName: 'Dillon',
-      lastName: 'Howler',
-    },
-    {
-      id: 2,
-      firstName: 'Ross',
-      lastName: 'Everest',
-    },
-  ]; //end
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+  type MRT_ColumnDef,
+} from 'material-react-table';
+import { data, type Person } from './makeData';
 
 const Example = () => {
-  const columns = useMemo<MRT_ColumnDef<(typeof data)[0]>[]>(
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
     //column definitions...
     () => [
       {
@@ -36,19 +26,19 @@ const Example = () => {
     [], //end
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      muiTableHeadCellProps={{
-        sx: {
-          '& .Mui-TableHeadCell-Content': {
-            justifyContent: 'space-between',
-          },
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    muiTableHeadCellProps: {
+      sx: {
+        '& .Mui-TableHeadCell-Content': {
+          justifyContent: 'space-between',
         },
-      }}
-    />
-  );
+      },
+    },
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

@@ -1,24 +1,14 @@
 import { useMemo } from 'react';
-import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+  type MRT_ColumnDef,
+} from 'material-react-table';
 import { Divider, MenuItem } from '@mui/material';
-
-//data definitions...
-const data = [
-  {
-    id: 1,
-    firstName: 'Dylan',
-    lastName: 'Murray',
-  },
-  {
-    id: 2,
-    firstName: 'Raquel',
-    lastName: 'Kohler',
-  },
-];
-//end
+import { data, type Person } from './makeData';
 
 const Example = () => {
-  const columns = useMemo<MRT_ColumnDef<(typeof data)[0]>[]>(
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       {
         accessorKey: 'id',
@@ -106,14 +96,14 @@ const Example = () => {
     [],
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      //or you could define the menu items here for all columns
-      // renderColumnActionsMenuItems={({ closeMenu }) => []}
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    //or you could define the menu items here for all columns
+    // renderColumnActionsMenuItems: ({ closeMenu }) => [],
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

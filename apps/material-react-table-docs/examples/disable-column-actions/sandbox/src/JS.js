@@ -1,5 +1,9 @@
 import { useMemo } from 'react';
-import { MaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
+import { data } from './makeData';
 
 const Example = () => {
   const columns = useMemo(
@@ -21,25 +25,12 @@ const Example = () => {
     [],
   );
 
-  const data = useMemo(
-    //data definitions...
-    () => [
-      {
-        id: 1,
-        firstName: 'Dylan',
-        lastName: 'Murray',
-      },
-      {
-        id: 2,
-        firstName: 'Raquel',
-        lastName: 'Kohler',
-      },
-    ],
-    [],
-    //end
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+  });
 
-  return <MaterialReactTable columns={columns} data={data} />;
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

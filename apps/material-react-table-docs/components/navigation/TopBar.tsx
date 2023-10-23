@@ -114,7 +114,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
         `}
       </style>
       <AppBar position="fixed">
-        <Toolbar variant="dense">
+        <Toolbar disableGutters variant="dense">
           <Box sx={{ display: 'flex' }}>
             {!isDesktop && (
               <IconButton
@@ -134,7 +134,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
                   alignItems: 'center',
                   cursor: 'pointer',
                   display: 'flex',
-                  fontSize: isTablet ? '1.6rem' : undefined,
+                  fontSize: isTablet ? '1.6rem' : '1.5rem',
                   gap: '1rem',
                 }}
                 variant="h1"
@@ -183,10 +183,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
             sx={{
               display: 'flex',
               alignItems: 'center',
-              gap: {
-                xs: '0.25rem',
-                sm: '0.5rem',
-              },
+              gap: '0.25rem',
             }}
           >
             <Tooltip arrow title="Github">
