@@ -1,0 +1,38 @@
+{
+  "name": "test-remix",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "scripts": {
+    "build": "remix build",
+    "dev": "remix dev --manual --port 3010",
+    "start": "remix-serve ./build/index.js",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.14",
+    "@mui/material": "^5.14.14",
+    "@mui/x-date-pickers": "^6.16.2",
+    "@remix-run/css-bundle": "^2.1.0",
+    "@remix-run/node": "^2.1.0",
+    "@remix-run/react": "^2.1.0",
+    "@remix-run/serve": "^2.1.0",
+    "isbot": "^3.6.8",
+    "material-react-table": "workspace:*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "^2.1.0",
+    "@remix-run/eslint-config": "^2.1.0",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
+    "eslint": "^8.38.0",
+    "typescript": "^5.1.6"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

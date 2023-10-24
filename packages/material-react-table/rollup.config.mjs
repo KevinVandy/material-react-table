@@ -1,3 +1,4 @@
+import pkg from './package.json' assert { type: 'json' };
 import { babel } from '@rollup/plugin-babel';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
@@ -18,12 +19,12 @@ export default [
     input: './src/index.ts',
     output: [
       {
-        file: './dist/cjs/index.js',
+        file: `./${pkg.main}`,
         format: 'cjs',
         sourcemap: true,
       },
       {
-        file: './dist/esm/material-react-table.esm.js',
+        file: `./${pkg.module}`,
         format: 'esm',
         sourcemap: true,
       },
@@ -42,7 +43,7 @@ export default [
   },
   {
     input: './dist/esm/types/index.d.ts',
-    output: [{ file: './dist/index.d.ts', format: 'esm' }],
+    output: [{ file: `./${pkg.typings}`, format: 'esm' }],
     plugins: [dts()],
   },
 ];

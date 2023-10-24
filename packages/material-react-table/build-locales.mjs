@@ -54,65 +54,71 @@ async function build(locale) {
     ],
   });
 
+  // await bundle.write({
+  //   file: `./locales/${locale}/index.js`,
+  //   format: 'cjs',
+  //   sourcemap: false,
+  // });
+
+  // await bundle.write({
+  //   file: `./locales/${locale}/index.esm.js`,
+  //   format: 'esm',
+  //   sourcemap: false,
+  // });
+
   await bundle.write({
-    file: `./locales/${locale}/index.js`,
+    file: `./locales/${locale}.cjs`,
     format: 'cjs',
     sourcemap: false,
   });
 
   await bundle.write({
-    file: `./locales/${locale}/index.esm.js`,
+    file: `./locales/${locale}.mjs`,
     format: 'esm',
     sourcemap: false,
   });
 
-  await bundle.write({
-    file: `./locales/${locale}.js`,
-    format: 'esm',
-    sourcemap: false,
-  });
-
-  const typeFile = `import { type MRT_Localization } from '../..';
+  const typeFile = `import { type MRT_Localization } from '..';
 export declare const MRT_Localization_${locale
     .toUpperCase()
     .replaceAll('-', '_')}: MRT_Localization;
   `;
 
-  await fs.writeFile(`./locales/${locale}/index.d.ts`, typeFile, (err) => {
+  await fs.writeFile(`./locales/${locale}.d.ts`, typeFile, (err) => {
     // eslint-disable-next-line
     if (err) console.log(err);
   });
 
-  await fs.writeFile(`./locales/${locale}/index.esm.d.ts`, typeFile, (err) => {
-    // eslint-disable-next-line
-    if (err) console.log(err);
-  });
+  // await fs.writeFile(`./locales/${locale}/index.esm.d.ts`, typeFile, (err) => {
+  //   // eslint-disable-next-line
+  //   if (err) console.log(err);
+  // });
 
-  await fs.writeFile(
-    `./locales/${locale}/package.json`,
-    JSON.stringify(
-      {
-        main: './index.js',
-        module: './index.esm.js',
-        sideEffects: false,
-        types: './index.d.ts',
-        exports: {
-          '.': {
-            types: './index.d.ts',
-            import: './index.esm.js',
-            require: './index.js',
-          },
-          './package.json': './package.json',
-        },
-      },
-      null,
-      2,
-    ),
-    (err) => {
-      // eslint-disable-next-line
-      if (err) console.log(err);
-    },
-  );
+  // await fs.writeFile(
+  //   `./locales/${locale}/package.json`,
+  //   JSON.stringify(
+  //     {
+  //       main: './index.cjs',
+  //       module: './index.mjs',
+  //       sideEffects: false,
+  //       types: './index.d.ts',
+  //       exports: {
+  //         '.': {
+  //           types: './index.d.ts',
+  //           import: './index.esm.js',
+  //           require: './index.js',
+  //         },
+  //         './package.json': './package.json',
+  //       },
+  //     },
+  //     null,
+  //     2,
+  //   ),
+  //   (err) => {
+  //     // eslint-disable-next-line
+  //     if (err) console.log(err);
+  //   },
+  // );
 
   // eslint-disable-next-line
   console.log(`Built ${locale} locale`);
