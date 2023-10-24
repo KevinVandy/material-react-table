@@ -160,7 +160,7 @@ importers:
         specifier: ^3.6.8
         version: 3.7.0
       material-react-table:
-        specifier: workspace:2.0.0-beta.8
+        specifier: workspace:*
         version: link:../../packages/material-react-table
       react:
         specifier: ^18.2.0
@@ -187,6 +187,64 @@ importers:
       typescript:
         specifier: ^5.1.6
         version: 5.2.2
+
+  apps/test-vite:
+    dependencies:
+      '@emotion/react':
+        specifier: ^11.11.1
+        version: 11.11.1(@types/react@18.2.29)(react@18.2.0)
+      '@emotion/styled':
+        specifier: ^11.11.0
+        version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.29)(react@18.2.0)
+      '@mui/icons-material':
+        specifier: ^5.14.14
+        version: 5.14.14(@mui/material@5.14.14)(@types/react@18.2.29)(react@18.2.0)
+      '@mui/material':
+        specifier: ^5.14.14
+        version: 5.14.14(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.29)(react-dom@18.2.0)(react@18.2.0)
+      '@mui/x-date-pickers':
+        specifier: ^6.16.2
+        version: 6.16.2(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@mui/material@5.14.14)(@mui/system@5.14.14)(@types/react@18.2.29)(dayjs@1.11.10)(react-dom@18.2.0)(react@18.2.0)
+      material-react-table:
+        specifier: workspace:2.0.0-beta.8
+        version: link:../../packages/material-react-table
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.2.15
+        version: 18.2.29
+      '@types/react-dom':
+        specifier: ^18.2.7
+        version: 18.2.14
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^6.0.0
+        version: 6.8.0(@typescript-eslint/parser@6.8.0)(eslint@8.51.0)(typescript@5.2.2)
+      '@typescript-eslint/parser':
+        specifier: ^6.0.0
+        version: 6.8.0(eslint@8.51.0)(typescript@5.2.2)
+      '@vitejs/plugin-react':
+        specifier: ^4.0.3
+        version: 4.1.0(vite@4.5.0)
+      eslint:
+        specifier: ^8.45.0
+        version: 8.51.0
+      eslint-plugin-react-hooks:
+        specifier: ^4.6.0
+        version: 4.6.0(eslint@8.51.0)
+      eslint-plugin-react-refresh:
+        specifier: ^0.4.3
+        version: 0.4.3(eslint@8.51.0)
+      typescript:
+        specifier: ^5.0.2
+        version: 5.2.2
+      vite:
+        specifier: ^4.4.5
+        version: 4.5.0(@types/node@20.8.7)
 
   packages/material-react-table:
     dependencies:
@@ -8152,6 +8210,14 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
+    dependencies:
+      eslint: 8.51.0
+    dev: true
+
+  /eslint-plugin-react-refresh@0.4.3(eslint@8.51.0):
+    resolution: {integrity: sha512-Hh0wv8bUNY877+sI0BlCUlsS0TYYQqvzEwJsJJPM2WF4RnTStSnSR3zdJYa2nPOJgg3UghXi54lVyMSmpCalzA==}
+    peerDependencies:
+      eslint: '>=7'
     dependencies:
       eslint: 8.51.0
     dev: true

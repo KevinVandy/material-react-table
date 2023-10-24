@@ -1,12 +1,10 @@
-import type { MetaFunction } from '@remix-run/node';
-
 import { useMemo } from 'react';
 import {
   MaterialReactTable,
   useMaterialReactTable,
   type MRT_ColumnDef,
 } from 'material-react-table';
-import { MRT_Localization_ES } from 'material-react-table/locales/es';
+import { MRT_Localization_AR } from 'material-react-table/locales/ar';
 
 //example data type
 type Person = {
@@ -68,14 +66,7 @@ const data: Person[] = [
   },
 ];
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: 'New Remix App' },
-    { name: 'description', content: 'Welcome to Remix!' },
-  ];
-};
-
-export default function Index() {
+const Example = () => {
   //should be memoized or stable
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
@@ -111,8 +102,10 @@ export default function Index() {
   const table = useMaterialReactTable({
     columns,
     data,
-    localization: MRT_Localization_ES,
+    localization: MRT_Localization_AR,
   });
 
   return <MaterialReactTable table={table} />;
-}
+};
+
+export default Example;

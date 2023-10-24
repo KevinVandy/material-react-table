@@ -1,4 +1,5 @@
-/* eslint-disable perfectionist/sort-objects */
+/* eslint-disable */
+import pkg from './package.json' assert { type: 'json' };
 import typescript from '@rollup/plugin-typescript';
 import fs from 'fs';
 import { rollup } from 'rollup';
@@ -54,20 +55,8 @@ async function build(locale) {
     ],
   });
 
-  // await bundle.write({
-  //   file: `./locales/${locale}/index.js`,
-  //   format: 'cjs',
-  //   sourcemap: false,
-  // });
-
-  // await bundle.write({
-  //   file: `./locales/${locale}/index.esm.js`,
-  //   format: 'esm',
-  //   sourcemap: false,
-  // });
-
   await bundle.write({
-    file: `./locales/${locale}.cjs`,
+    file: `./locales/${locale}.js`,
     format: 'cjs',
     sourcemap: false,
   });
@@ -85,42 +74,9 @@ export declare const MRT_Localization_${locale
   `;
 
   await fs.writeFile(`./locales/${locale}.d.ts`, typeFile, (err) => {
-    // eslint-disable-next-line
     if (err) console.log(err);
   });
 
-  // await fs.writeFile(`./locales/${locale}/index.esm.d.ts`, typeFile, (err) => {
-  //   // eslint-disable-next-line
-  //   if (err) console.log(err);
-  // });
-
-  // await fs.writeFile(
-  //   `./locales/${locale}/package.json`,
-  //   JSON.stringify(
-  //     {
-  //       main: './index.cjs',
-  //       module: './index.mjs',
-  //       sideEffects: false,
-  //       types: './index.d.ts',
-  //       exports: {
-  //         '.': {
-  //           types: './index.d.ts',
-  //           import: './index.esm.js',
-  //           require: './index.js',
-  //         },
-  //         './package.json': './package.json',
-  //       },
-  //     },
-  //     null,
-  //     2,
-  //   ),
-  //   (err) => {
-  //     // eslint-disable-next-line
-  //     if (err) console.log(err);
-  //   },
-  // );
-
-  // eslint-disable-next-line
   console.log(`Built ${locale} locale`);
 }
 
@@ -128,7 +84,20 @@ async function run() {
   for (const locale of supportedLocales) {
     await build(locale);
   }
+  pkg.exports = {
+    ...pkg.exports,
+    ...supportedLocales.reduce((acc, locale) => {
+      acc[`./locales/${locale}`] = {
+        import: `./locales/${locale}.mjs`,
+        default: `./locales/${locale}.js`,
+        types: `./locales/${locale}.d.ts`,
+      };
+      return acc;
+    }, {}),
+  };
+  await fs.writeFile('./package.json', JSON.stringify(pkg, null, 2), (err) => {
+    if (err) console.log(err);
+  });
 }
 
-// eslint-disable-next-line
 run().catch((error) => console.error(error));

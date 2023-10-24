@@ -34,7 +34,181 @@
       "default": "./dist/cjs/index.js"
     },
     "./package.json": "./package.json",
-    "./locales/*": "./locales/*"
+    "./locales/ar": {
+      "import": "./locales/ar.mjs",
+      "default": "./locales/ar.js",
+      "types": "./locales/ar.d.ts"
+    },
+    "./locales/az": {
+      "import": "./locales/az.mjs",
+      "default": "./locales/az.js",
+      "types": "./locales/az.d.ts"
+    },
+    "./locales/bg": {
+      "import": "./locales/bg.mjs",
+      "default": "./locales/bg.js",
+      "types": "./locales/bg.d.ts"
+    },
+    "./locales/cs": {
+      "import": "./locales/cs.mjs",
+      "default": "./locales/cs.js",
+      "types": "./locales/cs.d.ts"
+    },
+    "./locales/da": {
+      "import": "./locales/da.mjs",
+      "default": "./locales/da.js",
+      "types": "./locales/da.d.ts"
+    },
+    "./locales/de": {
+      "import": "./locales/de.mjs",
+      "default": "./locales/de.js",
+      "types": "./locales/de.d.ts"
+    },
+    "./locales/en": {
+      "import": "./locales/en.mjs",
+      "default": "./locales/en.js",
+      "types": "./locales/en.d.ts"
+    },
+    "./locales/es": {
+      "import": "./locales/es.mjs",
+      "default": "./locales/es.js",
+      "types": "./locales/es.d.ts"
+    },
+    "./locales/et": {
+      "import": "./locales/et.mjs",
+      "default": "./locales/et.js",
+      "types": "./locales/et.d.ts"
+    },
+    "./locales/fa": {
+      "import": "./locales/fa.mjs",
+      "default": "./locales/fa.js",
+      "types": "./locales/fa.d.ts"
+    },
+    "./locales/fi": {
+      "import": "./locales/fi.mjs",
+      "default": "./locales/fi.js",
+      "types": "./locales/fi.d.ts"
+    },
+    "./locales/fr": {
+      "import": "./locales/fr.mjs",
+      "default": "./locales/fr.js",
+      "types": "./locales/fr.d.ts"
+    },
+    "./locales/hu": {
+      "import": "./locales/hu.mjs",
+      "default": "./locales/hu.js",
+      "types": "./locales/hu.d.ts"
+    },
+    "./locales/hy": {
+      "import": "./locales/hy.mjs",
+      "default": "./locales/hy.js",
+      "types": "./locales/hy.d.ts"
+    },
+    "./locales/id": {
+      "import": "./locales/id.mjs",
+      "default": "./locales/id.js",
+      "types": "./locales/id.d.ts"
+    },
+    "./locales/it": {
+      "import": "./locales/it.mjs",
+      "default": "./locales/it.js",
+      "types": "./locales/it.d.ts"
+    },
+    "./locales/ja": {
+      "import": "./locales/ja.mjs",
+      "default": "./locales/ja.js",
+      "types": "./locales/ja.d.ts"
+    },
+    "./locales/ko": {
+      "import": "./locales/ko.mjs",
+      "default": "./locales/ko.js",
+      "types": "./locales/ko.d.ts"
+    },
+    "./locales/nl": {
+      "import": "./locales/nl.mjs",
+      "default": "./locales/nl.js",
+      "types": "./locales/nl.d.ts"
+    },
+    "./locales/no": {
+      "import": "./locales/no.mjs",
+      "default": "./locales/no.js",
+      "types": "./locales/no.d.ts"
+    },
+    "./locales/np": {
+      "import": "./locales/np.mjs",
+      "default": "./locales/np.js",
+      "types": "./locales/np.d.ts"
+    },
+    "./locales/pl": {
+      "import": "./locales/pl.mjs",
+      "default": "./locales/pl.js",
+      "types": "./locales/pl.d.ts"
+    },
+    "./locales/pt": {
+      "import": "./locales/pt.mjs",
+      "default": "./locales/pt.js",
+      "types": "./locales/pt.d.ts"
+    },
+    "./locales/pt-BR": {
+      "import": "./locales/pt-BR.mjs",
+      "default": "./locales/pt-BR.js",
+      "types": "./locales/pt-BR.d.ts"
+    },
+    "./locales/ro": {
+      "import": "./locales/ro.mjs",
+      "default": "./locales/ro.js",
+      "types": "./locales/ro.d.ts"
+    },
+    "./locales/ru": {
+      "import": "./locales/ru.mjs",
+      "default": "./locales/ru.js",
+      "types": "./locales/ru.d.ts"
+    },
+    "./locales/sk": {
+      "import": "./locales/sk.mjs",
+      "default": "./locales/sk.js",
+      "types": "./locales/sk.d.ts"
+    },
+    "./locales/sr-Cyrl-RS": {
+      "import": "./locales/sr-Cyrl-RS.mjs",
+      "default": "./locales/sr-Cyrl-RS.js",
+      "types": "./locales/sr-Cyrl-RS.d.ts"
+    },
+    "./locales/sr-Latn-RS": {
+      "import": "./locales/sr-Latn-RS.mjs",
+      "default": "./locales/sr-Latn-RS.js",
+      "types": "./locales/sr-Latn-RS.d.ts"
+    },
+    "./locales/sv": {
+      "import": "./locales/sv.mjs",
+      "default": "./locales/sv.js",
+      "types": "./locales/sv.d.ts"
+    },
+    "./locales/tr": {
+      "import": "./locales/tr.mjs",
+      "default": "./locales/tr.js",
+      "types": "./locales/tr.d.ts"
+    },
+    "./locales/uk": {
+      "import": "./locales/uk.mjs",
+      "default": "./locales/uk.js",
+      "types": "./locales/uk.d.ts"
+    },
+    "./locales/vi": {
+      "import": "./locales/vi.mjs",
+      "default": "./locales/vi.js",
+      "types": "./locales/vi.d.ts"
+    },
+    "./locales/zh-Hans": {
+      "import": "./locales/zh-Hans.mjs",
+      "default": "./locales/zh-Hans.js",
+      "types": "./locales/zh-Hans.d.ts"
+    },
+    "./locales/zh-Hant": {
+      "import": "./locales/zh-Hant.mjs",
+      "default": "./locales/zh-Hant.js",
+      "types": "./locales/zh-Hant.d.ts"
+    }
   },
   "files": [
     "dist",
