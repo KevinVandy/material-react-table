@@ -3,7 +3,7 @@ import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable
 import LocaleExamples from '../../../example-groups/LocaleExamples';
 
 <Head>
-  <title>Localization/i18n Guide - Material React Table V2 Docs</title>
+  <title>{'Localization/i18n Guide - Material React Table V2 Docs'}</title>
   <meta
     name="description"
     content="How to customize localization and translations (i18n) in Material React Table"
@@ -32,15 +32,18 @@ Scroll and find your language below to see an example of how to use it.
 
 <LocaleExamples />
 
+> Note: In some frameworks like Remix, you may need to use a full import path like <br /> > `import { MRT_Localization_ES } from 'material-react-table/locales/es/index.js';` or <br /> > `import { MRT_Localization_ES } from 'material-react-table/locales/es/index.esm.js';` <br />
+> to properly import the locale.
+
 ### Custom Non-Built-In Translations
 
 If you want to use a language that is not included in the library, you can still easily add your own custom translations to the `localization` prop.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  localization={{
+const table = useMaterialReactTable({
+  columns,
+  data,
+  localization: {
     actions: 'Ações',
     and: 'e',
     cancel: 'Cancelar',
@@ -51,8 +54,10 @@ If you want to use a language that is not included in the library, you can still
     clearSort: 'Limpar classificações',
     clickToCopy: 'Clique para copiar',
     // ... and many more - see link below for full list of translation keys
-  }}
-/>
+  },
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 For a full list of all available translation keys, see [here](https://github.com/KevinVandy/material-react-table/blob/v2/packages/material-react-table/src/locales/en.ts)
