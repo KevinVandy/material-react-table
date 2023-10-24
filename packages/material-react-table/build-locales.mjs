@@ -1,5 +1,4 @@
 /* eslint-disable */
-import pkg from './package.json' assert { type: 'json' };
 import typescript from '@rollup/plugin-typescript';
 import fs from 'fs';
 import { rollup } from 'rollup';
@@ -56,26 +55,47 @@ async function build(locale) {
   });
 
   await bundle.write({
-    file: `./locales/${locale}.js`,
+    file: `./locales/${locale}/index.js`,
     format: 'cjs',
     sourcemap: false,
   });
 
   await bundle.write({
-    file: `./locales/${locale}.mjs`,
+    file: `./locales/${locale}/index.esm.js`,
     format: 'esm',
     sourcemap: false,
   });
 
-  const typeFile = `import { type MRT_Localization } from '..';
+  const typeFile = `import { type MRT_Localization } from '../..';
 export declare const MRT_Localization_${locale
     .toUpperCase()
     .replaceAll('-', '_')}: MRT_Localization;
   `;
 
-  await fs.writeFile(`./locales/${locale}.d.ts`, typeFile, (err) => {
+  await fs.writeFile(`./locales/${locale}/index.d.ts`, typeFile, (err) => {
     if (err) console.log(err);
   });
+
+  await fs.writeFile(`./locales/${locale}/index.esm.d.ts`, typeFile, (err) => {
+    if (err) console.log(err);
+  });
+
+  await fs.writeFile(
+    `./locales/${locale}/package.json`,
+    JSON.stringify(
+      {
+        main: 'index.js',
+        module: 'index.esm.js',
+        sideEffects: false,
+        types: 'index.d.ts',
+      },
+      null,
+      2,
+    ),
+    (err) => {
+      if (err) console.log(err);
+    },
+  );
 
   console.log(`Built ${locale} locale`);
 }
@@ -84,21 +104,6 @@ async function run() {
   for (const locale of supportedLocales) {
     await build(locale);
   }
-
-  pkg.exports = {
-    ...pkg.exports,
-    ...supportedLocales.reduce((acc, locale) => {
-      acc[`./locales/${locale}`] = {
-        types: `./locales/${locale}.d.ts`,
-        require: `./locales/${locale}.js`,
-        default: `./locales/${locale}.mjs`,
-      };
-      return acc;
-    }, {}),
-  };
-  await fs.writeFile('./package.json', JSON.stringify(pkg, null, 2), (err) => {
-    if (err) console.log(err);
-  });
 }
 
 run().catch((error) => console.error(error));

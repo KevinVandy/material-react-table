@@ -4,7 +4,7 @@ import {
   useMaterialReactTable,
   type MRT_ColumnDef,
 } from 'material-react-table';
-import { MRT_Localization_AR } from 'material-react-table/locales/ar';
+import { MRT_Localization_ES } from 'material-react-table/locales/es';
 
 //example data type
 type Person = {
@@ -102,7 +102,7 @@ const Example = () => {
   const table = useMaterialReactTable({
     columns,
     data,
-    localization: MRT_Localization_AR,
+    localization: MRT_Localization_ES,
   });
 
   return <MaterialReactTable table={table} />;

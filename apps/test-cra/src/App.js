@@ -1,25 +1,12 @@
-import type { MetaFunction } from '@remix-run/node';
 import { useMemo } from 'react';
 import {
   MaterialReactTable,
   useMaterialReactTable,
-  type MRT_ColumnDef,
 } from 'material-react-table';
-import { MRT_Localization_ES } from 'material-react-table/locales/es/index.js';
-
-//example data type
-type Person = {
-  name: {
-    firstName: string;
-    lastName: string;
-  };
-  address: string;
-  city: string;
-  state: string;
-};
+import { MRT_Localization_ES } from 'material-react-table/locales/es';
 
 //nested data is ok, see accessorKeys in ColumnDef below
-const data: Person[] = [
+const data = [
   {
     name: {
       firstName: 'John',
@@ -67,16 +54,9 @@ const data: Person[] = [
   },
 ];
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: 'New Remix App' },
-    { name: 'description', content: 'Welcome to Remix!' },
-  ];
-};
-
-export default function Index() {
+const Example = () => {
   //should be memoized or stable
-  const columns = useMemo<MRT_ColumnDef<Person>[]>(
+  const columns = useMemo(
     () => [
       {
         accessorKey: 'name.firstName', //access nested data with dot notation
@@ -114,4 +94,6 @@ export default function Index() {
   });
 
   return <MaterialReactTable table={table} />;
-}
+};
+
+export default Example;

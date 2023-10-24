@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0-beta.10",
+  "version": "2.0.0-beta.13",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -27,189 +27,6 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
-      "default": "./dist/index.esm.js"
-    },
-    "./package.json": "./package.json",
-    "./locales/ar": {
-      "types": "./locales/ar.d.ts",
-      "require": "./locales/ar.js",
-      "default": "./locales/ar.mjs"
-    },
-    "./locales/az": {
-      "types": "./locales/az.d.ts",
-      "require": "./locales/az.js",
-      "default": "./locales/az.mjs"
-    },
-    "./locales/bg": {
-      "types": "./locales/bg.d.ts",
-      "require": "./locales/bg.js",
-      "default": "./locales/bg.mjs"
-    },
-    "./locales/cs": {
-      "types": "./locales/cs.d.ts",
-      "require": "./locales/cs.js",
-      "default": "./locales/cs.mjs"
-    },
-    "./locales/da": {
-      "types": "./locales/da.d.ts",
-      "require": "./locales/da.js",
-      "default": "./locales/da.mjs"
-    },
-    "./locales/de": {
-      "types": "./locales/de.d.ts",
-      "require": "./locales/de.js",
-      "default": "./locales/de.mjs"
-    },
-    "./locales/en": {
-      "types": "./locales/en.d.ts",
-      "require": "./locales/en.js",
-      "default": "./locales/en.mjs"
-    },
-    "./locales/es": {
-      "types": "./locales/es.d.ts",
-      "require": "./locales/es.js",
-      "default": "./locales/es.mjs"
-    },
-    "./locales/et": {
-      "types": "./locales/et.d.ts",
-      "require": "./locales/et.js",
-      "default": "./locales/et.mjs"
-    },
-    "./locales/fa": {
-      "types": "./locales/fa.d.ts",
-      "require": "./locales/fa.js",
-      "default": "./locales/fa.mjs"
-    },
-    "./locales/fi": {
-      "types": "./locales/fi.d.ts",
-      "require": "./locales/fi.js",
-      "default": "./locales/fi.mjs"
-    },
-    "./locales/fr": {
-      "types": "./locales/fr.d.ts",
-      "require": "./locales/fr.js",
-      "default": "./locales/fr.mjs"
-    },
-    "./locales/hu": {
-      "types": "./locales/hu.d.ts",
-      "require": "./locales/hu.js",
-      "default": "./locales/hu.mjs"
-    },
-    "./locales/hy": {
-      "types": "./locales/hy.d.ts",
-      "require": "./locales/hy.js",
-      "default": "./locales/hy.mjs"
-    },
-    "./locales/id": {
-      "types": "./locales/id.d.ts",
-      "require": "./locales/id.js",
-      "default": "./locales/id.mjs"
-    },
-    "./locales/it": {
-      "types": "./locales/it.d.ts",
-      "require": "./locales/it.js",
-      "default": "./locales/it.mjs"
-    },
-    "./locales/ja": {
-      "types": "./locales/ja.d.ts",
-      "require": "./locales/ja.js",
-      "default": "./locales/ja.mjs"
-    },
-    "./locales/ko": {
-      "types": "./locales/ko.d.ts",
-      "require": "./locales/ko.js",
-      "default": "./locales/ko.mjs"
-    },
-    "./locales/nl": {
-      "types": "./locales/nl.d.ts",
-      "require": "./locales/nl.js",
-      "default": "./locales/nl.mjs"
-    },
-    "./locales/no": {
-      "types": "./locales/no.d.ts",
-      "require": "./locales/no.js",
-      "default": "./locales/no.mjs"
-    },
-    "./locales/np": {
-      "types": "./locales/np.d.ts",
-      "require": "./locales/np.js",
-      "default": "./locales/np.mjs"
-    },
-    "./locales/pl": {
-      "types": "./locales/pl.d.ts",
-      "require": "./locales/pl.js",
-      "default": "./locales/pl.mjs"
-    },
-    "./locales/pt": {
-      "types": "./locales/pt.d.ts",
-      "require": "./locales/pt.js",
-      "default": "./locales/pt.mjs"
-    },
-    "./locales/pt-BR": {
-      "types": "./locales/pt-BR.d.ts",
-      "require": "./locales/pt-BR.js",
-      "default": "./locales/pt-BR.mjs"
-    },
-    "./locales/ro": {
-      "types": "./locales/ro.d.ts",
-      "require": "./locales/ro.js",
-      "default": "./locales/ro.mjs"
-    },
-    "./locales/ru": {
-      "types": "./locales/ru.d.ts",
-      "require": "./locales/ru.js",
-      "default": "./locales/ru.mjs"
-    },
-    "./locales/sk": {
-      "types": "./locales/sk.d.ts",
-      "require": "./locales/sk.js",
-      "default": "./locales/sk.mjs"
-    },
-    "./locales/sr-Cyrl-RS": {
-      "types": "./locales/sr-Cyrl-RS.d.ts",
-      "require": "./locales/sr-Cyrl-RS.js",
-      "default": "./locales/sr-Cyrl-RS.mjs"
-    },
-    "./locales/sr-Latn-RS": {
-      "types": "./locales/sr-Latn-RS.d.ts",
-      "require": "./locales/sr-Latn-RS.js",
-      "default": "./locales/sr-Latn-RS.mjs"
-    },
-    "./locales/sv": {
-      "types": "./locales/sv.d.ts",
-      "require": "./locales/sv.js",
-      "default": "./locales/sv.mjs"
-    },
-    "./locales/tr": {
-      "types": "./locales/tr.d.ts",
-      "require": "./locales/tr.js",
-      "default": "./locales/tr.mjs"
-    },
-    "./locales/uk": {
-      "types": "./locales/uk.d.ts",
-      "require": "./locales/uk.js",
-      "default": "./locales/uk.mjs"
-    },
-    "./locales/vi": {
-      "types": "./locales/vi.d.ts",
-      "require": "./locales/vi.js",
-      "default": "./locales/vi.mjs"
-    },
-    "./locales/zh-Hans": {
-      "types": "./locales/zh-Hans.d.ts",
-      "require": "./locales/zh-Hans.js",
-      "default": "./locales/zh-Hans.mjs"
-    },
-    "./locales/zh-Hant": {
-      "types": "./locales/zh-Hant.d.ts",
-      "require": "./locales/zh-Hant.js",
-      "default": "./locales/zh-Hant.mjs"
-    }
-  },
   "files": [
     "dist",
     "locales",
@@ -251,38 +68,36 @@
     "@faker-js/faker": "^8.2.0",
     "@mui/icons-material": "^5.14.14",
     "@mui/material": "^5.14.14",
-    "@mui/x-date-pickers": "^6.16.2",
-    "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@mui/x-date-pickers": "^6.16.3",
     "@rollup/plugin-typescript": "^11.1.5",
-    "@size-limit/preset-small-lib": "^9.0.0",
-    "@storybook/addon-a11y": "^7.5.0",
-    "@storybook/addon-essentials": "^7.5.0",
-    "@storybook/addon-interactions": "^7.5.0",
-    "@storybook/addon-links": "^7.5.0",
-    "@storybook/addon-storysource": "^7.5.0",
-    "@storybook/blocks": "^7.5.0",
-    "@storybook/react": "^7.5.0",
-    "@storybook/react-vite": "^7.5.0",
+    "@size-limit/preset-small-lib": "^10.0.1",
+    "@storybook/addon-a11y": "^7.5.1",
+    "@storybook/addon-essentials": "^7.5.1",
+    "@storybook/addon-interactions": "^7.5.1",
+    "@storybook/addon-links": "^7.5.1",
+    "@storybook/addon-storysource": "^7.5.1",
+    "@storybook/blocks": "^7.5.1",
+    "@storybook/react": "^7.5.1",
+    "@storybook/react-vite": "^7.5.1",
     "@storybook/testing-library": "^0.2.2",
-    "@types/node": "^20.8.7",
-    "@types/react": "^18.2.29",
+    "@types/node": "^20.8.8",
+    "@types/react": "^18.2.31",
     "@types/react-dom": "^18.2.14",
-    "@typescript-eslint/eslint-plugin": "^6.8.0",
-    "@typescript-eslint/parser": "^6.8.0",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
     "@vitejs/plugin-react": "^4.1.0",
-    "eslint": "^8.51.0",
+    "eslint": "^8.52.0",
     "eslint-plugin-mui-path-imports": "^0.0.15",
     "eslint-plugin-perfectionist": "^2.2.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
-    "rollup": "^4.1.4",
+    "rollup": "^2.79.1",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "size-limit": "^9.0.0",
-    "storybook": "^7.5.0",
+    "size-limit": "^10.0.1",
+    "storybook": "^7.5.1",
     "storybook-dark-mode": "^3.0.1",
     "tslib": "^2.6.2",
     "typescript": "^5.2.2",
@@ -300,7 +115,7 @@
   "dependencies": {
     "@tanstack/match-sorter-utils": "8.8.4",
     "@tanstack/react-table": "8.10.7",
-    "@tanstack/react-virtual": "3.0.0-beta.66",
+    "@tanstack/react-virtual": "3.0.0-beta.68",
     "highlight-words": "1.2.2"
   }
 }
