@@ -206,7 +206,7 @@ importers:
         specifier: ^6.16.2
         version: 6.16.2(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@mui/material@5.14.14)(@mui/system@5.14.14)(@types/react@18.2.29)(dayjs@1.11.10)(react-dom@18.2.0)(react@18.2.0)
       material-react-table:
-        specifier: workspace:2.0.0-beta.8
+        specifier: workspace:*
         version: link:../../packages/material-react-table
       react:
         specifier: ^18.2.0
