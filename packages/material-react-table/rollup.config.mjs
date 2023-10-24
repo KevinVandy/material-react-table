@@ -42,7 +42,7 @@ export default [
     ],
   },
   {
-    input: './dist/esm/types/index.d.ts',
+    input: './dist/types/index.d.ts',
     output: [{ file: `./${pkg.typings}`, format: 'esm' }],
     plugins: [dts()],
   },

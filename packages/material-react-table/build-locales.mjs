@@ -84,13 +84,14 @@ async function run() {
   for (const locale of supportedLocales) {
     await build(locale);
   }
+
   pkg.exports = {
     ...pkg.exports,
     ...supportedLocales.reduce((acc, locale) => {
       acc[`./locales/${locale}`] = {
-        import: `./locales/${locale}.mjs`,
-        default: `./locales/${locale}.js`,
         types: `./locales/${locale}.d.ts`,
+        require: `./locales/${locale}.js`,
+        default: `./locales/${locale}.mjs`,
       };
       return acc;
     }, {}),

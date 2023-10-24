@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0-beta.9",
+  "version": "2.0.0-beta.10",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -24,190 +24,190 @@
     "url": "https://github.com/KevinVandy/material-react-table/issues"
   },
   "sideEffects": false,
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/material-react-table.esm.js",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/esm/material-react-table.esm.js",
-      "default": "./dist/cjs/index.js"
+      "require": "./dist/index.js",
+      "default": "./dist/index.esm.js"
     },
     "./package.json": "./package.json",
     "./locales/ar": {
-      "import": "./locales/ar.mjs",
-      "default": "./locales/ar.js",
-      "types": "./locales/ar.d.ts"
+      "types": "./locales/ar.d.ts",
+      "require": "./locales/ar.js",
+      "default": "./locales/ar.mjs"
     },
     "./locales/az": {
-      "import": "./locales/az.mjs",
-      "default": "./locales/az.js",
-      "types": "./locales/az.d.ts"
+      "types": "./locales/az.d.ts",
+      "require": "./locales/az.js",
+      "default": "./locales/az.mjs"
     },
     "./locales/bg": {
-      "import": "./locales/bg.mjs",
-      "default": "./locales/bg.js",
-      "types": "./locales/bg.d.ts"
+      "types": "./locales/bg.d.ts",
+      "require": "./locales/bg.js",
+      "default": "./locales/bg.mjs"
     },
     "./locales/cs": {
-      "import": "./locales/cs.mjs",
-      "default": "./locales/cs.js",
-      "types": "./locales/cs.d.ts"
+      "types": "./locales/cs.d.ts",
+      "require": "./locales/cs.js",
+      "default": "./locales/cs.mjs"
     },
     "./locales/da": {
-      "import": "./locales/da.mjs",
-      "default": "./locales/da.js",
-      "types": "./locales/da.d.ts"
+      "types": "./locales/da.d.ts",
+      "require": "./locales/da.js",
+      "default": "./locales/da.mjs"
     },
     "./locales/de": {
-      "import": "./locales/de.mjs",
-      "default": "./locales/de.js",
-      "types": "./locales/de.d.ts"
+      "types": "./locales/de.d.ts",
+      "require": "./locales/de.js",
+      "default": "./locales/de.mjs"
     },
     "./locales/en": {
-      "import": "./locales/en.mjs",
-      "default": "./locales/en.js",
-      "types": "./locales/en.d.ts"
+      "types": "./locales/en.d.ts",
+      "require": "./locales/en.js",
+      "default": "./locales/en.mjs"
     },
     "./locales/es": {
-      "import": "./locales/es.mjs",
-      "default": "./locales/es.js",
-      "types": "./locales/es.d.ts"
+      "types": "./locales/es.d.ts",
+      "require": "./locales/es.js",
+      "default": "./locales/es.mjs"
     },
     "./locales/et": {
-      "import": "./locales/et.mjs",
-      "default": "./locales/et.js",
-      "types": "./locales/et.d.ts"
+      "types": "./locales/et.d.ts",
+      "require": "./locales/et.js",
+      "default": "./locales/et.mjs"
     },
     "./locales/fa": {
-      "import": "./locales/fa.mjs",
-      "default": "./locales/fa.js",
-      "types": "./locales/fa.d.ts"
+      "types": "./locales/fa.d.ts",
+      "require": "./locales/fa.js",
+      "default": "./locales/fa.mjs"
     },
     "./locales/fi": {
-      "import": "./locales/fi.mjs",
-      "default": "./locales/fi.js",
-      "types": "./locales/fi.d.ts"
+      "types": "./locales/fi.d.ts",
+      "require": "./locales/fi.js",
+      "default": "./locales/fi.mjs"
     },
     "./locales/fr": {
-      "import": "./locales/fr.mjs",
-      "default": "./locales/fr.js",
-      "types": "./locales/fr.d.ts"
+      "types": "./locales/fr.d.ts",
+      "require": "./locales/fr.js",
+      "default": "./locales/fr.mjs"
     },
     "./locales/hu": {
-      "import": "./locales/hu.mjs",
-      "default": "./locales/hu.js",
-      "types": "./locales/hu.d.ts"
+      "types": "./locales/hu.d.ts",
+      "require": "./locales/hu.js",
+      "default": "./locales/hu.mjs"
     },
     "./locales/hy": {
-      "import": "./locales/hy.mjs",
-      "default": "./locales/hy.js",
-      "types": "./locales/hy.d.ts"
+      "types": "./locales/hy.d.ts",
+      "require": "./locales/hy.js",
+      "default": "./locales/hy.mjs"
     },
     "./locales/id": {
-      "import": "./locales/id.mjs",
-      "default": "./locales/id.js",
-      "types": "./locales/id.d.ts"
+      "types": "./locales/id.d.ts",
+      "require": "./locales/id.js",
+      "default": "./locales/id.mjs"
     },
     "./locales/it": {
-      "import": "./locales/it.mjs",
-      "default": "./locales/it.js",
-      "types": "./locales/it.d.ts"
+      "types": "./locales/it.d.ts",
+      "require": "./locales/it.js",
+      "default": "./locales/it.mjs"
     },
     "./locales/ja": {
-      "import": "./locales/ja.mjs",
-      "default": "./locales/ja.js",
-      "types": "./locales/ja.d.ts"
+      "types": "./locales/ja.d.ts",
+      "require": "./locales/ja.js",
+      "default": "./locales/ja.mjs"
     },
     "./locales/ko": {
-      "import": "./locales/ko.mjs",
-      "default": "./locales/ko.js",
-      "types": "./locales/ko.d.ts"
+      "types": "./locales/ko.d.ts",
+      "require": "./locales/ko.js",
+      "default": "./locales/ko.mjs"
     },
     "./locales/nl": {
-      "import": "./locales/nl.mjs",
-      "default": "./locales/nl.js",
-      "types": "./locales/nl.d.ts"
+      "types": "./locales/nl.d.ts",
+      "require": "./locales/nl.js",
+      "default": "./locales/nl.mjs"
     },
     "./locales/no": {
-      "import": "./locales/no.mjs",
-      "default": "./locales/no.js",
-      "types": "./locales/no.d.ts"
+      "types": "./locales/no.d.ts",
+      "require": "./locales/no.js",
+      "default": "./locales/no.mjs"
     },
     "./locales/np": {
-      "import": "./locales/np.mjs",
-      "default": "./locales/np.js",
-      "types": "./locales/np.d.ts"
+      "types": "./locales/np.d.ts",
+      "require": "./locales/np.js",
+      "default": "./locales/np.mjs"
     },
     "./locales/pl": {
-      "import": "./locales/pl.mjs",
-      "default": "./locales/pl.js",
-      "types": "./locales/pl.d.ts"
+      "types": "./locales/pl.d.ts",
+      "require": "./locales/pl.js",
+      "default": "./locales/pl.mjs"
     },
     "./locales/pt": {
-      "import": "./locales/pt.mjs",
-      "default": "./locales/pt.js",
-      "types": "./locales/pt.d.ts"
+      "types": "./locales/pt.d.ts",
+      "require": "./locales/pt.js",
+      "default": "./locales/pt.mjs"
     },
     "./locales/pt-BR": {
-      "import": "./locales/pt-BR.mjs",
-      "default": "./locales/pt-BR.js",
-      "types": "./locales/pt-BR.d.ts"
+      "types": "./locales/pt-BR.d.ts",
+      "require": "./locales/pt-BR.js",
+      "default": "./locales/pt-BR.mjs"
     },
     "./locales/ro": {
-      "import": "./locales/ro.mjs",
-      "default": "./locales/ro.js",
-      "types": "./locales/ro.d.ts"
+      "types": "./locales/ro.d.ts",
+      "require": "./locales/ro.js",
+      "default": "./locales/ro.mjs"
     },
     "./locales/ru": {
-      "import": "./locales/ru.mjs",
-      "default": "./locales/ru.js",
-      "types": "./locales/ru.d.ts"
+      "types": "./locales/ru.d.ts",
+      "require": "./locales/ru.js",
+      "default": "./locales/ru.mjs"
     },
     "./locales/sk": {
-      "import": "./locales/sk.mjs",
-      "default": "./locales/sk.js",
-      "types": "./locales/sk.d.ts"
+      "types": "./locales/sk.d.ts",
+      "require": "./locales/sk.js",
+      "default": "./locales/sk.mjs"
     },
     "./locales/sr-Cyrl-RS": {
-      "import": "./locales/sr-Cyrl-RS.mjs",
-      "default": "./locales/sr-Cyrl-RS.js",
-      "types": "./locales/sr-Cyrl-RS.d.ts"
+      "types": "./locales/sr-Cyrl-RS.d.ts",
+      "require": "./locales/sr-Cyrl-RS.js",
+      "default": "./locales/sr-Cyrl-RS.mjs"
     },
     "./locales/sr-Latn-RS": {
-      "import": "./locales/sr-Latn-RS.mjs",
-      "default": "./locales/sr-Latn-RS.js",
-      "types": "./locales/sr-Latn-RS.d.ts"
+      "types": "./locales/sr-Latn-RS.d.ts",
+      "require": "./locales/sr-Latn-RS.js",
+      "default": "./locales/sr-Latn-RS.mjs"
     },
     "./locales/sv": {
-      "import": "./locales/sv.mjs",
-      "default": "./locales/sv.js",
-      "types": "./locales/sv.d.ts"
+      "types": "./locales/sv.d.ts",
+      "require": "./locales/sv.js",
+      "default": "./locales/sv.mjs"
     },
     "./locales/tr": {
-      "import": "./locales/tr.mjs",
-      "default": "./locales/tr.js",
-      "types": "./locales/tr.d.ts"
+      "types": "./locales/tr.d.ts",
+      "require": "./locales/tr.js",
+      "default": "./locales/tr.mjs"
     },
     "./locales/uk": {
-      "import": "./locales/uk.mjs",
-      "default": "./locales/uk.js",
-      "types": "./locales/uk.d.ts"
+      "types": "./locales/uk.d.ts",
+      "require": "./locales/uk.js",
+      "default": "./locales/uk.mjs"
     },
     "./locales/vi": {
-      "import": "./locales/vi.mjs",
-      "default": "./locales/vi.js",
-      "types": "./locales/vi.d.ts"
+      "types": "./locales/vi.d.ts",
+      "require": "./locales/vi.js",
+      "default": "./locales/vi.mjs"
     },
     "./locales/zh-Hans": {
-      "import": "./locales/zh-Hans.mjs",
-      "default": "./locales/zh-Hans.js",
-      "types": "./locales/zh-Hans.d.ts"
+      "types": "./locales/zh-Hans.d.ts",
+      "require": "./locales/zh-Hans.js",
+      "default": "./locales/zh-Hans.mjs"
     },
     "./locales/zh-Hant": {
-      "import": "./locales/zh-Hant.mjs",
-      "default": "./locales/zh-Hant.js",
-      "types": "./locales/zh-Hant.d.ts"
+      "types": "./locales/zh-Hant.d.ts",
+      "require": "./locales/zh-Hant.js",
+      "default": "./locales/zh-Hant.mjs"
     }
   },
   "files": [
@@ -217,11 +217,11 @@
   ],
   "size-limit": [
     {
-      "path": "dist/cjs/index.js",
+      "path": "dist/index.js",
       "limit": "59 KB"
     },
     {
-      "path": "dist/esm/material-react-table.esm.js",
+      "path": "dist/index.esm.js",
       "limit": "55 KB"
     }
   ],
@@ -233,7 +233,7 @@
     "build-locales": "pnpm lib:build-locales",
     "build-lib": "pnpm lib:build-lib",
     "dev": "pnpm lib:dev",
-    "lib:build": "rm -rf dist && pnpm build-lib && pnpm build-locales && rm -rf dist/cjs/types dist/esm/types",
+    "lib:build": "rm -rf dist && pnpm build-lib && pnpm build-locales && rm -rf dist/types",
     "lib:build-locales": "rm -rf locales && node build-locales.mjs",
     "lib:build-lib": "rm -rf dist && rollup -c rollup.config.mjs && size-limit",
     "lib:dev": "rollup -c rollup.config.mjs --watch",
