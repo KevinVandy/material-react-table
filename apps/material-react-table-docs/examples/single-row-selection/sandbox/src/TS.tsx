@@ -1,9 +1,22 @@
 import { useMemo, useState } from 'react';
 import {
   MaterialReactTable,
+  useMaterialReactTable,
   type MRT_ColumnDef,
   type MRT_RowSelectionState,
 } from 'material-react-table';
+
+//data definitions...
+interface Person {
+  userId: string;
+  firstName: string;
+  lastName: string;
+  age: number;
+  address: string;
+  city: string;
+  state: string;
+}
+//end
 
 const data = [
   //data definitions...
@@ -29,57 +42,57 @@ const data = [
 ];
 
 const Example = () => {
-  const columns = useMemo(
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
     //column definitions...
-    () =>
-      [
-        {
-          accessorKey: 'firstName',
-          header: 'First Name',
-        },
-        {
-          accessorKey: 'lastName',
-          header: 'Last Name',
-        },
-        {
-          accessorKey: 'age',
-          header: 'Age',
-        },
-        {
-          accessorKey: 'address',
-          header: 'Address',
-        },
-        {
-          accessorKey: 'city',
-          header: 'City',
-        },
-        {
-          accessorKey: 'state',
-          header: 'State',
-        },
-      ] as MRT_ColumnDef<(typeof data)[0]>[],
+    () => [
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+      {
+        accessorKey: 'age',
+        header: 'Age',
+      },
+      {
+        accessorKey: 'address',
+        header: 'Address',
+      },
+      {
+        accessorKey: 'city',
+        header: 'City',
+      },
+      {
+        accessorKey: 'state',
+        header: 'State',
+      },
+    ],
     [], //end
   );
 
   //optionally, you can manage the row selection state yourself
   const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableMultiRowSelection={false} //use radio buttons instead of checkboxes
-      enableRowSelection
-      getRowId={(row) => row.userId} //give each row a more useful id
-      muiTableBodyRowProps={({ row }) => ({
-        //add onClick to row to select upon clicking anywhere in the row
-        onClick: row.getToggleSelectedHandler(),
-        sx: { cursor: 'pointer' },
-      })}
-      onRowSelectionChange={setRowSelection} //connect internal row selection state to your own
-      state={{ rowSelection }} //pass our managed row selection state to the table to use
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableRowSelection: true,
+    enableMultiRowSelection: false, //use radio buttons instead of checkboxes
+    getRowId: (row) => row.userId, //give each row a more useful id
+    muiTableBodyRowProps: ({ row }) => ({
+      //add onClick to row to select upon clicking anywhere in the row
+      onClick: row.getToggleSelectedHandler(),
+      sx: { cursor: 'pointer' },
+    }),
+    positionToolbarAlertBanner: 'bottom', //move the alert banner to the bottom
+    onRowSelectionChange: setRowSelection, //connect internal row selection state to your own
+    state: { rowSelection }, //pass our managed row selection state to the table to use
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

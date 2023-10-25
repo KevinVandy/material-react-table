@@ -1,5 +1,8 @@
 import { useMemo, useState } from 'react';
-import { MaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 
 const data = [
   //data definitions...
@@ -57,24 +60,25 @@ const Example = () => {
   );
 
   //optionally, you can manage the row selection state yourself
-  const [rowSelection, setRowSelection] = useState < RowSelectionState > {};
+  const [rowSelection, setRowSelection] = useState({});
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableMultiRowSelection={false} //use radio buttons instead of checkboxes
-      enableRowSelection
-      getRowId={(row) => row.userId} //give each row a more useful id
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableRowSelection: true,
+    enableMultiRowSelection: false, //use radio buttons instead of checkboxes
+    getRowId: (row) => row.userId, //give each row a more useful id
+    muiTableBodyRowProps: ({ row }) => ({
       //add onClick to row to select upon clicking anywhere in the row
-      muiTableBodyRowProps={({ row }) => ({
-        onClick: row.getToggleSelectedHandler(),
-        sx: { cursor: 'pointer' },
-      })}
-      onRowSelectionChange={setRowSelection} //connect internal row selection state to your own
-      state={{ rowSelection }} //pass our managed row selection state to the table to use
-    />
-  );
+      onClick: row.getToggleSelectedHandler(),
+      sx: { cursor: 'pointer' },
+    }),
+    positionToolbarAlertBanner: 'bottom', //move the alert banner to the bottom
+    onRowSelectionChange: setRowSelection, //connect internal row selection state to your own
+    state: { rowSelection }, //pass our managed row selection state to the table to use
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

@@ -1,9 +1,22 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   MaterialReactTable,
+  useMaterialReactTable,
   type MRT_ColumnDef,
   type MRT_RowSelectionState,
 } from 'material-react-table';
+
+//data definitions...
+interface Person {
+  userId: string;
+  firstName: string;
+  lastName: string;
+  age: number;
+  address: string;
+  city: string;
+  state: string;
+}
+//end
 
 const data = [
   //data definitions...
@@ -29,7 +42,7 @@ const data = [
 ];
 
 const Example = () => {
-  const columns = useMemo<MRT_ColumnDef<(typeof data)[0]>[]>(
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
     //column definitions...
     () => [
       {
@@ -57,31 +70,33 @@ const Example = () => {
         header: 'State',
       },
     ],
-    [], //end
+    [],
+    //end
   );
 
   const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      getRowId={(row) => row.userId}
-      muiTableBodyRowProps={({ row }) => ({
-        //implement row selection click events manually
-        onClick: () =>
-          setRowSelection((prev) => ({
-            ...prev,
-            [row.id]: !prev[row.id],
-          })),
-        selected: rowSelection[row.id],
-        sx: {
-          cursor: 'pointer',
-        },
-      })}
-      state={{ rowSelection }}
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    getRowId: (row) => row.userId,
+    muiTableBodyRowProps: ({ row }) => ({
+      //implement row selection click events manually
+      onClick: () =>
+        setRowSelection((prev) => ({
+          ...prev,
+          [row.id]: !prev[row.id],
+        })),
+      selected: rowSelection[row.id],
+      sx: {
+        cursor: 'pointer',
+      },
+    }),
+    onRowSelectionChange: setRowSelection,
+    state: { rowSelection },
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

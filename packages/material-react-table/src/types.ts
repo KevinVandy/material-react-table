@@ -1113,7 +1113,6 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
       }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>)
     | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>;
   selectAllMode?: 'all' | 'page';
-  selectDisplayMode?: 'checkbox' | 'radio' | 'switch';
   /**
    * Manage state externally any way you want, then pass it back into MRT.
    */

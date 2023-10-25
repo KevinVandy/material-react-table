@@ -7,6 +7,7 @@ import { data } from './makeData';
 
 const Example = () => {
   const columns = useMemo(
+    //column definitions...
     () => [
       {
         accessorKey: 'firstName',
@@ -26,6 +27,7 @@ const Example = () => {
       },
     ],
     [],
+    //end
   );
 
   const table = useMaterialReactTable({
@@ -37,6 +39,14 @@ const Example = () => {
     enableStickyHeader: true,
     rowPinningDisplayMode: 'select-sticky',
     getRowId: (row) => row.email,
+    initialState: {
+      rowPinning: {
+        top: ['ereinger@mailinator.com'],
+      },
+      rowSelection: {
+        'ereinger@mailinator.com': true,
+      },
+    },
     muiTableContainerProps: {
       sx: {
         maxHeight: '400px',
