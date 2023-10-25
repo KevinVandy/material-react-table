@@ -27,7 +27,7 @@ export const MRT_TablePaper = <TData extends MRT_RowData>({
   } = table;
   const { isFullScreen } = getState();
 
-  const tablePaperProps = {
+  const paperProps = {
     ...parseFromValuesOrFunc(muiTablePaperProps, { table }),
     ...rest,
   };
@@ -35,12 +35,12 @@ export const MRT_TablePaper = <TData extends MRT_RowData>({
   return (
     <Paper
       elevation={2}
-      {...tablePaperProps}
+      {...paperProps}
       ref={(ref: HTMLDivElement) => {
         tablePaperRef.current = ref;
-        if (tablePaperProps?.ref) {
+        if (paperProps?.ref) {
           //@ts-ignore
-          tablePaperProps.ref.current = ref;
+          paperProps.ref.current = ref;
         }
       }}
       style={{
@@ -60,14 +60,14 @@ export const MRT_TablePaper = <TData extends MRT_RowData>({
               zIndex: 999,
             }
           : {}),
-        ...tablePaperProps?.style,
+        ...paperProps?.style,
       }}
       sx={(theme) => ({
         backgroundColor: getMRTTheme(table, theme).baseBackgroundColor,
         backgroundImage: 'unset',
         overflow: 'hidden',
         transition: 'all 100ms ease-in-out',
-        ...(parseFromValuesOrFunc(tablePaperProps?.sx, theme) as any),
+        ...(parseFromValuesOrFunc(paperProps?.sx, theme) as any),
       })}
     >
       {enableTopToolbar &&

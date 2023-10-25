@@ -225,6 +225,15 @@ export const Footer = () => {
               }
               isFooter
             />
+            <TableOfContentsList
+              items={
+                routes
+                  .find((item) => item.href === '/docs/api')
+                  ?.items?.find((item) => item.label === 'Components and Hooks')
+                  ?.secondaryItems ?? []
+              }
+              isFooter
+            />
           </Box>
           <Box>
             <Typography>Examples</Typography>

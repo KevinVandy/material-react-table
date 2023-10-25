@@ -6,6 +6,7 @@ export * from './column.utils';
 export * from './filterFns';
 export * from './footer';
 export * from './head';
+export * from './hooks';
 export * from './inputs';
 export * from './menus';
 export * from './modals';

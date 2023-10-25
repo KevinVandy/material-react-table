@@ -1,0 +1,198 @@
+import Head from 'next/head';
+
+<Head>
+  <title>{'MRT Components - Material React Table V2 Docs'}</title>
+  <meta
+    name="description"
+    content="All the internal MRT components that can be used to build your own custom table components"
+  />
+  <meta property="og:title" content="Material React Table Table Components" />
+  <meta
+    property="og:description"
+    content="All the internal MRT components that can be used to build your own custom table components"
+  />
+</Head>
+
+## MRT Components
+
+In previous versions of `material-react-table`, you only had the option to use the `<MaterialReactTable />` component. Now in version 2, all internal MRT components are exported for you to to optionally use to build up your own custom table components.
+
+### \<MaterialReactTable /\>
+
+[View Source Code on GitHub](https://github.com/KevinVandy/material-react-table/blob/v2/packages/material-react-table/src/MaterialReactTable.tsx)
+
+For most use cases, you will probably just use the default `<MaterialReactTable />` component.
+
+It accepts table options as props, just like in v1, but it also now simply accepts the `table` instance as its only prop instead. You have the choice to use the `useMaterialReactTable` hook to create the table instance in your own scope or not. Using the `table` prop with the `useMaterialReactTable` hook is recommended, because it will give you more flexibility as your table features get more complex.
+
+```jsx
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
+//...
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableRowPinning: true,
+});
+return <MaterialReactTable table={table} />; //recommended
+```
+
+```jsx
+import { MaterialReactTable } from 'material-react-table';
+//...
+return <MaterialReactTable columns={columns} data={data} enableRowPinning />; //passing props instead like in v1 is possible
+```
+
+> Do not pass both a `table` prop and other table options as props. Additional table options passed to the `<MaterialReactTable />` component will be ignored if a `table` prop is passed. Either specify all table options in the `useMaterialReactTable` hook or pass all of them as props to the `<MaterialReactTable />` component.
+
+### MRT\_\* Sub Components
+
+Material React Table now exports all of its internal components. You can use them for your own use cases.
+
+#### Table Components
+
+[View Table Components Source Code on GitHub](https://github.com/KevinVandy/material-react-table/tree/v2/packages/material-react-table/src/table)
+
+##### \<MRT_TablePaper /\>
+
+The `<MRT_TablePaper />` component is the outermost component of the table. Using this is pretty much the same thing as using the `<MaterialReactTable />` component, except that you cannot pass table options as props to it.
+
+The Paper component includes UI for the table and the toolbar components.
+
+##### \<MRT_TableContainer /\>
+
+The `<MRT_TableContainer />` component is the container for the table. It only contains the table ui, but none of the toolbar components.
+
+This is a popular use case for tables that do not want the built-in toolbars, but still want all of the other table features.
+
+##### \<MRT_Table /\>
+
+The `<MRT_Table />` component contains the `<table>` element, and all of the table head, body, and footer components.
+
+Be aware that using this deep of a component, you will lose out on row virtualization, modal editing, and full screen features. Use the above `<MRT_TableContainer />` if you want to use those features.
+
+##### \<MRT_TableLoadingOverlay /\>
+
+Shows a loading spinner over the table above the `MRT_Table` component when the table is loading.
+
+#### TableHead Components
+
+[View TableHead Components Source Code on GitHub](https://github.com/KevinVandy/material-react-table/tree/v2/packages/material-react-table/src/head)
+
+##### \<MRT_TableHead /\>
+
+The `<MRT_TableHead />` component contains the `<thead>` element, and all of the table head rows.
+
+##### \<MRT_TableHeadRow /\>
+
+The `<MRT_TableHeadRow />` is a `<tr>` element that contains all of the table head cells in a row
+
+##### \<MRT_TableHeadCell /\>
+
+The `<MRT_TableHeadCell />` is a `<th>` element that contains all of the table head cell components. It contains all of the other table head cell components down below depending on which features are enabled.
+
+##### \<MRT_TableHeadCellColumnActionsButton /\>
+
+A button that opens up the column actions menu.
+
+##### \<MRT_TableHeadCellSortLabel /\>
+
+The Sort Icon Button and Label next to a table header
+
+##### \<MRT_TableHeadCellFilterLabel /\>
+
+The Filter Icon Button and Label next to a table header
+
+##### \<MRT_TableHeadCellGrabHandle /\>
+
+The Grab Handle Icon Button next to a table header used for column dragging
+
+##### \<MRT_TableHeadCellResizeHandle /\>
+
+The Resize Handle Icon Button next to a table header used for column resizing
+
+##### \<MRT_TableHeadCellFilterContainer /\>
+
+The Filter Container that contains the filter input and filter actions
+
+#### TableBody Components
+
+[View TableBody Components Source Code on GitHub](https://github.com/KevinVandy/material-react-table/tree/v2/packages/material-react-table/src/body)
+
+##### \<MRT_TableBody /\>
+
+The `<MRT_TableBody />` component contains the `<tbody>` element, and all of the table body rows. It has the ability to render multiple table bodies, depending on if static row pinning features are enabled and used.
+
+##### \<MRT_TableBodyRow /\>
+
+The `<MRT_TableBodyRow />` is a `<tr>` element that contains all of the table body cells in a row.
+
+##### \<MRT_TableDetailPanel /\>
+
+A row and all column-spanning row for rendering detail panels for a row.
+
+##### \<MRT_TableBodyCell /\>
+
+The `<MRT_TableBodyCell />` is a `<td>` element that surrounds the cell value or custom `Cell` render.
+
+##### \<MRT_TableBodyCellValue /\>
+
+Renders the value of a cell. This is a popular component to use as an alternative to TanStack Table's `flexRender` method. It renders everything inside of the `<td>`, but not the `<td>` itself.
+
+##### \<MRT_TableBodyRowGrabHandle /\>
+
+A button for grabbing a row for dragging.
+
+##### \<MRT_TableBodyRowPinButton /\>
+
+A button or buttons for pinning a row.
+
+#### TableFooter Components
+
+[View TableFooter Components Source Code on GitHub](https://github.com/KevinVandy/material-react-table/tree/v2/packages/material-react-table/src/footer)
+
+##### \<MRT_TableFooter /\>
+
+The `<MRT_TableFooter />` component contains the `<tfoot>` element, and all of the table footer rows.
+
+##### \<MRT_TableFooterRow /\>
+
+The `<MRT_TableFooterRow />` is a `<tr>` element that contains all of the table footer cells in a row.
+
+##### \<MRT_TableFooterCell /\>
+
+The `<MRT_TableFooterCell />` is a `<td>` element that surrounds the cell value or custom `Footer` render.
+
+#### Input Components
+
+[View Input Components Source Code on GitHub](https://github.com/KevinVandy/material-react-table/tree/v2/packages/material-react-table/src/inputs)
+
+##### \<MRT_EditCellTextField /\>
+
+The textfield component for editing a cell value that can either show in a modal or table cell.
+
+##### \<MRT_GlobalFilterTextField /\>
+
+The search textfield component for global filtering.
+
+##### \<MRT_FilterTextField /\>
+
+The textfield component for filtering a column. A somewhat comprehensive component that can be a textfield, select, multi-select, or date picker.
+
+##### \<MRT_FilterCheckbox /\>
+
+The checkbox component for filtering a column by boolean values.
+
+##### \<MRT_FilterRangeSlider /\>
+
+The range slider component for filtering a column by a range of numbers.
+
+##### \<MRT_FilterFilterRangeFields /\>
+
+A Container component that will render two MRT_FilterTextField components for filtering in a range (min and max).
+
+##### \<MRT_SelectCheckbox /\>
+
+A checkbox component for selecting a row or selecting all rows from the table header.

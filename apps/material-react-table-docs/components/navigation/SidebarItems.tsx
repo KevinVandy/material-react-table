@@ -69,6 +69,7 @@ export const SideBarItems = ({
                         : depth === 1
                         ? '1.25rem'
                         : '1rem',
+                    fontWeight: isSelectedParent ? 'bold' : 'normal',
                     height: items ? '2.5rem' : '2rem',
                     lineHeight: depth === 0 && !items ? '1.25rem' : '0.75rem',
                     padding: '0',

@@ -232,8 +232,8 @@ const HomePage = () => {
             gap: '1rem',
           }}
         >
-          <GuideCard title="Props" href="/docs/api/props" />
-          <GuideCard title="Basic Example" href="docs/examples/basic" />
+          <GuideCard title="Best Practices" href="/docs/guides/best-practices" />
+          <GuideCard title="Table Options" href="/docs/api/table-options" />
           <GuideCard title="Advanced Example" href="docs/examples/advanced" />
           <GuideCard
             title="Fetching Example"

@@ -82,6 +82,20 @@ export const routes: Array<RouteItem> = [
           },
         ],
       },
+      {
+        label: 'Components and Hooks',
+        href: '/docs/api/mrt-components',
+        secondaryItems: [
+          {
+            href: '/docs/api/mrt-components',
+            label: 'MRT Components',
+          },
+          {
+            href: '/docs/api/mrt-hooks',
+            label: 'MRT Hooks',
+          },
+        ],
+      },
     ],
   },
   {
@@ -195,7 +209,7 @@ export const routes: Array<RouteItem> = [
           {
             href: '/docs/examples/popover-filters',
             label: 'Popover Filters Example',
-          }
+          },
         ],
       },
       {

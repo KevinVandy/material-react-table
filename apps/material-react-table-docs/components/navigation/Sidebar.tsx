@@ -26,12 +26,12 @@ export const SideBar = ({ navOpen, setNavOpen }: Props) => {
         sx={{
           overflow: 'visible',
           overflowY: navOpen ? 'overlay' : 'hidden',
-          mt: '49px',
+          mt: '52px',
           p: 0,
           pb: '10rem',
           scrollPaddingTop: '20%',
           transition: 'all .2s',
-          width: navOpen ? '280px' : 0,
+          width: navOpen ? '290px' : 0,
           '@media (max-width: 900px)': {
             mt: '50px',
           },

@@ -82,6 +82,7 @@ export const BreadCrumbs = () => {
                       .split('/')
                       .pop()
                       ?.replaceAll('-', ' ')
+                      ?.replaceAll('mrt', 'MRT')
                       ?.replaceAll('css', 'CSS')
                       ?.replaceAll(' ui', ' UI')
                       ?.replaceAll('api', 'API')}
