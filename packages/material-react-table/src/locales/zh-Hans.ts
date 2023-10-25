@@ -1,7 +1,7 @@
 import { type MRT_Localization } from '..';
 
 export const MRT_Localization_ZH_HANS: MRT_Localization = {
-  actions: '动作',
+  actions: '操作',
   and: '与',
   cancel: '取消',
   changeFilterMode: '更改过滤模式',
@@ -12,7 +12,7 @@ export const MRT_Localization_ZH_HANS: MRT_Localization = {
   clickToCopy: '点击以复制',
   collapse: '折叠',
   collapseAll: '全部折叠',
-  columnActions: '列动作',
+  columnActions: '列操作',
   copiedToClipboard: '已复制至剪贴板',
   dropToGroupBy: '拖放以按 {column} 分组',
   edit: '编辑',
@@ -64,7 +64,7 @@ export const MRT_Localization_ZH_HANS: MRT_Localization = {
   pinToRight: '固定至右边',
   resetColumnSize: '重置列大小',
   resetOrder: '重置排序',
-  rowActions: '行动作',
+  rowActions: '行操作',
   rowNumber: '#',
   rowNumbers: '行号码',
   rowsPerPage: '每页行数',
