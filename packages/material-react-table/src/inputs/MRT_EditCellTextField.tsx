@@ -62,9 +62,9 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
     //@ts-ignore
     row._valuesCache[column.id] = newValue;
     if (isCreating) {
-      setCreatingRow({ ...row });
+      setCreatingRow(row);
     } else if (isEditing) {
-      setEditingRow({ ...row });
+      setEditingRow(row);
     }
   };
 
