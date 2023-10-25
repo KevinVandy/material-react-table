@@ -5,7 +5,7 @@ import AlternatePaginationExample from '../../../examples/alternate-pagination';
 import RemoteExample from '../../../examples/remote';
 
 <Head>
-  <title>Pagination Guide - Material React Table V2 Docs</title>
+  <title>{'Pagination Guide - Material React Table V2 Docs'}</title>
   <meta
     name="description"
     content="How to use, customize, or disable pagination features in Material React Table"
@@ -56,6 +56,36 @@ const table = useMaterialReactTable({
 ```
 
 ### Customize Pagination
+
+#### Pagination State
+
+If you want to change the rows per page value or the initial page index, you can do that through either the `initialState` or `state` table option.
+
+```jsx
+//using initialState if you do not need to manage the pagination state yourself
+const table = useMaterialReactTable({
+  columns,
+  data,
+  initialState: { pagination: { pageSize: 25, pageIndex: 2 } }, //customize the default page size and page index
+});
+```
+
+```jsx
+//using state if you want to manage the pagination state yourself
+const [pagination, setPagination] = useState({
+  pageIndex: 0,
+  pageSize: 5, //customize the default page size
+});
+
+const table = useMaterialReactTable({
+  columns,
+  data,
+  onPaginationChange: setPagination, //hoist pagination state to your state when it changes internally
+  state: { pagination }, //pass the pagination state to the table
+});
+```
+
+> Note: Do not pass pagination state to both `initialState` and `state` at the same time. The `state` will overwrite the `initialState` values.
 
 #### Customize Pagination Behavior
 
