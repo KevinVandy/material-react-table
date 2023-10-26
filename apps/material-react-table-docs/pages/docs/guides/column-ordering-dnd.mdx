@@ -5,7 +5,7 @@ import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable
 import DNDExample from '../../../examples/enable-column-ordering';
 
 <Head>
-  <title>Column Ordering/DnD Guide - Material React Table V2 Docs</title>
+  <title>{'Column Ordering/DnD Guide - Material React Table V2 Docs'}</title>
   <meta
     name="description"
     content="How to use and customize the column ordering and drag and drop features of Material React Table"
@@ -48,12 +48,12 @@ By Default, Material React Table will order the columns in the order they are de
 
 The Column Order State is an array of string column ids, that come from the ids or accessorKeys that you defined in your column definitions.
 
-```tsx
-<MaterialReactTable
-  data={data}
-  columns={columns}
-  enableRowSelection
-  initialState={{
+```jsx
+const table = useMaterialReactTable({
+  data,
+  columns,
+  enableRowSelection: true,
+  initialState: {
     columnOrder: [
       'name',
       'email',
@@ -62,8 +62,10 @@ The Column Order State is an array of string column ids, that come from the ids 
       'country',
       'mrt-row-select', //move the built-in selection column to the end of the table
     ],
-  }}
-/>
+  },
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 ### Manage Column Order State
@@ -80,15 +82,17 @@ const [columnOrder, setColumnOrder] = useState(
   columns.map((c) => c.accessorKey), //array of column ids
 );
 
-return (
-  <MaterialReactTable
-    data={data}
-    columns={columns}
-    enableRowSelection
-    state={state}
-    onColumnOrderChange={onColumnOrderChange}
-  />
-);
+const table = useMaterialReactTable({
+  data,
+  columns,
+  enableRowSelection: true,
+  state: {
+    columnOrder,
+  },
+  onColumnOrderChange: setColumnOrder,
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 ### Enable Column Ordering with Drag and Drop
