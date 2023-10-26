@@ -21,7 +21,22 @@ import OptionsSwitcher from '../../../example-groups/OptionsSwitcher';
 
 ## Table Options (Props)
 
-<OptionsSwitcher />
+<OptionsSwitcher
+  links={[
+    {
+      label: 'Table Options',
+      value: 'table-options',
+    },
+    {
+      label: 'Column Options',
+      value: 'column-options',
+    },
+    {
+      label: 'State Options',
+      value: 'state-options',
+    },
+  ]}
+/>
 
 > Many of the options you can pass to `useMaterialReactTable` are the same as the ones you can pass to the TanStack Table [useReactTable](https://tanstack.com/table/v8/docs/api/core/table) hook.
 

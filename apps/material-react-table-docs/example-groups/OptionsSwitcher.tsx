@@ -1,7 +1,14 @@
 import { useRouter } from 'next/router';
 import { Box, Tab, Tabs } from '@mui/material';
 
-const OptionsSwitcher = () => {
+interface Props {
+  links: {
+    value: string;
+    label: string;
+  }[];
+}
+
+const OptionsSwitcher = ({ links }: Props) => {
   const { pathname, push } = useRouter();
 
   return (
@@ -15,9 +22,9 @@ const OptionsSwitcher = () => {
           value={pathname.split('/').pop()}
           onChange={(_e, newPath) => push(newPath as string)}
         >
-          <Tab label={<Box>Table Options</Box>} value="table-options" />
-          <Tab label={<Box>Column Options</Box>} value="column-options" />
-          <Tab label={<Box>State Options</Box>} value="state-options" />
+          {links.map(({ value, label }) => (
+            <Tab key={value} label={<Box>{label}</Box>} value={value} />
+          ))}
         </Tabs>
       </Box>
     </>

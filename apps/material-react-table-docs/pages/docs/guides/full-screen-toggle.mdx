@@ -33,14 +33,13 @@ import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable
 The full screen toggle button is enabled by default. You can hide it by setting the `enableFullScreenToggle` prop to `false`.
 
 ```jsx
-return (
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableFullScreenToggle: false,
+});
 
-  <MaterialReactTable
-    columns={columns
-    data={data}
-    enableFullScreenToggle={false}
-  />
-);
+return <MaterialReactTable table={table} />;
 ```
 
 ### Change Z-Index of Full Screen Table

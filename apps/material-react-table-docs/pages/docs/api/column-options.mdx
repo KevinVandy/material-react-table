@@ -21,7 +21,22 @@ import OptionsSwitcher from '../../../example-groups/OptionsSwitcher';
 
 ## Column Options
 
-<OptionsSwitcher />
+<OptionsSwitcher
+  links={[
+    {
+      label: 'Table Options',
+      value: 'table-options',
+    },
+    {
+      label: 'Column Options',
+      value: 'column-options',
+    },
+    {
+      label: 'State Options',
+      value: 'state-options',
+    },
+  ]}
+/>
 
 > Many of the column options you can pass here are the same as the ones that you can pass to the [useReactTable](https://tanstack.com/table/v8/docs/api/core/column-def) ColumnDefs
 

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import ColumnInstanceAPIsTable from '../../../components/prop-tables/ColumnInstanceAPIsTable';
 import SourceCode from '../../../components/prop-tables/ColumnInstanceAPIsSource';
-import InstanceAPIsSwitcher from '../../../example-groups/InstanceAPIsSwitcher';
+import OptionsSwitcher from '../../../example-groups/OptionsSwitcher';
 
 <Head>
   <title>{'Column Instance APIs - Material React Table V2 Docs'}</title>
@@ -21,7 +21,26 @@ import InstanceAPIsSwitcher from '../../../example-groups/InstanceAPIsSwitcher';
 
 ## Column Instance APIs
 
-<InstanceAPIsSwitcher />
+<OptionsSwitcher
+  links={[
+    {
+      label: 'Table Instance APIs',
+      value: 'table-instance-apis',
+    },
+    {
+      label: 'Column Instance APIs',
+      value: 'column-instance-apis',
+    },
+    {
+      label: 'Row Instance APIs',
+      value: 'row-instance-apis',
+    },
+    {
+      label: 'Cell Instance APIs',
+      value: 'cell-instance-apis',
+    },
+  ]}
+/>
 
 > NOTE: These are NOT [column options](/docs/api/column-options) for Material React Table. These are just static methods on a column instance that you can use.
 
@@ -65,8 +84,6 @@ const table = useMaterialReactTable({
   }),
 });
 ```
-
-
 
 <ColumnInstanceAPIsTable />
 

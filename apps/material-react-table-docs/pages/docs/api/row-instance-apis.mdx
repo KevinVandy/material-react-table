@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import RowInstanceAPIsTable from '../../../components/prop-tables/RowInstanceAPIsTable';
 import SourceCode from '../../../components/prop-tables/RowInstanceAPIsSource';
-import InstanceAPIsSwitcher from '../../../example-groups/InstanceAPIsSwitcher';
+import OptionsSwitcher from '../../../example-groups/OptionsSwitcher';
 
 <Head>
   <title>{'Row Instance APIs - Material React Table V2 Docs'}</title>
@@ -21,7 +21,26 @@ import InstanceAPIsSwitcher from '../../../example-groups/InstanceAPIsSwitcher';
 
 ## Row Instance APIs
 
-<InstanceAPIsSwitcher />
+<OptionsSwitcher
+  links={[
+    {
+      label: 'Table Instance APIs',
+      value: 'table-instance-apis',
+    },
+    {
+      label: 'Column Instance APIs',
+      value: 'column-instance-apis',
+    },
+    {
+      label: 'Row Instance APIs',
+      value: 'row-instance-apis',
+    },
+    {
+      label: 'Cell Instance APIs',
+      value: 'cell-instance-apis',
+    },
+  ]}
+/>
 
 > NOTE: These are NOT [props](/docs/api/props) or [column options](/docs/api/column-options) for Material React Table. These are just static methods on a row instance that you can use.
 

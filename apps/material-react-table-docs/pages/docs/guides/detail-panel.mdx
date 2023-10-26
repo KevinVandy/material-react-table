@@ -48,29 +48,19 @@ The recommended way to access the row data for the detail panel is to pull from 
 
 If you want some or all rows to be expanded by default, you can specify that in the `initialState.expanded` prop. Pass `true` to expand all rows, or specify which rowIds should be expanded.
 
-```tsx
-//expand first 2 rows by default
-<MaterialReactTable
-  data={data}
-  columns={columns}
-  initialState={{
-    expanded: {
-      1: true,
-      2: true,
-    },
-  }}
-/>
-```
-
-```tsx
-//expand all rows by default
-<MaterialReactTable
-  data={data}
-  columns={columns}
-  initialState={{
+```jsx
+const table = useMaterialReactTable({
+  data,
+  columns,
+  initialState: {
     expanded: true,
-  }}
-/>
+    // or expand specific rows by default
+    // expanded: {
+    //   1: true,
+    //   2: true,
+    // },
+  },
+});
 ```
 
 ### Position Expand Column Last
