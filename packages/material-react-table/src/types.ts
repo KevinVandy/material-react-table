@@ -424,7 +424,17 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
     LiteralUnion<string & MRT_FilterOption>
   > | null;
   columns?: MRT_ColumnDef<TData, TValue>[];
-  editSelectOptions?: ({ text: string; value: any } | string)[];
+  editSelectOptions?: (
+    | {
+        label?: string;
+        /**
+         * @deprecated use `label` instead
+         */
+        text?: string;
+        value: any;
+      }
+    | string
+  )[];
   editVariant?: 'select' | 'text';
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;
@@ -434,7 +444,17 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
   enableEditing?: ((row: MRT_Row<TData>) => boolean) | boolean;
   enableFilterMatchHighlighting?: boolean;
   filterFn?: MRT_FilterFn<TData>;
-  filterSelectOptions?: ({ text: string; value: any } | string)[];
+  filterSelectOptions?: (
+    | {
+        label?: string;
+        /**
+         * @deprecated use `label` instead
+         */
+        text?: string;
+        value: any;
+      }
+    | string
+  )[];
   filterVariant?:
     | 'autocomplete'
     | 'checkbox'

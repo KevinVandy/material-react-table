@@ -1,4 +1,8 @@
-import { MaterialReactTable, useMaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+  type MRT_ColumnDef,
+} from 'material-react-table';
 import { data, type Person } from './makeData';
 import { Button } from '@mui/material';
 
@@ -46,9 +50,9 @@ const Example = () => {
         Clear All Sorting
       </Button>
     ),
-  })
+  });
 
-  return <MaterialReactTable table={table} />
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

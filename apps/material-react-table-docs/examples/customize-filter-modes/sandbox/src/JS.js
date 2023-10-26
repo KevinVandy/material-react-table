@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
-import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 import { MenuItem } from '@mui/material';
 import { data } from './makeData';
 

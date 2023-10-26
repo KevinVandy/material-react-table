@@ -232,7 +232,10 @@ const HomePage = () => {
             gap: '1rem',
           }}
         >
-          <GuideCard title="Best Practices" href="/docs/guides/best-practices" />
+          <GuideCard
+            title="Best Practices"
+            href="/docs/guides/best-practices"
+          />
           <GuideCard title="Table Options" href="/docs/api/table-options" />
           <GuideCard title="Advanced Example" href="docs/examples/advanced" />
           <GuideCard

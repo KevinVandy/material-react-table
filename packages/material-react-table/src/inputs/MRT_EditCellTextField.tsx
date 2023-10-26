@@ -7,7 +7,7 @@ import {
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import { type TextFieldProps } from '@mui/material/TextField';
-import { parseFromValuesOrFunc } from '../column.utils';
+import { getValueAndLabel, parseFromValuesOrFunc } from '../column.utils';
 import {
   type MRT_Cell,
   type MRT_RowData,
@@ -150,33 +150,23 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
       onKeyDown={handleEnterKeyDown}
     >
       {textFieldProps.children ??
-        columnDef?.editSelectOptions?.map(
-          (option: { text: string; value: string } | string) => {
-            let value: string;
-            let text: string;
-            if (typeof option !== 'object') {
-              value = option;
-              text = option;
-            } else {
-              value = option.value;
-              text = option.text;
-            }
-            return (
-              <MenuItem
-                key={value}
-                sx={{
-                  alignItems: 'center',
-                  display: 'flex',
-                  gap: '0.5rem',
-                  m: 0,
-                }}
-                value={value}
-              >
-                {text}
-              </MenuItem>
-            );
-          },
-        )}
+        columnDef?.editSelectOptions?.map((option) => {
+          const { label, value } = getValueAndLabel(option);
+          return (
+            <MenuItem
+              key={value}
+              sx={{
+                alignItems: 'center',
+                display: 'flex',
+                gap: '0.5rem',
+                m: 0,
+              }}
+              value={value}
+            >
+              {label}
+            </MenuItem>
+          );
+        })}
     </TextField>
   );
 };

@@ -167,13 +167,13 @@ export const FilterFnAndFilterVariants = () => (
       {
         accessorKey: 'state',
         filterSelectOptions: [
-          { text: 'AL', value: 'Alabama' },
-          { text: 'AZ', value: 'Arizona' },
-          { text: 'CA', value: 'California' },
-          { text: 'FL', value: 'Florida' },
-          { text: 'GA', value: 'Georgia' },
-          { text: 'NY', value: 'New York' },
-          { text: 'TX', value: 'Texas' },
+          { label: 'AL', value: 'Alabama' },
+          { label: 'AZ', value: 'Arizona' },
+          { label: 'CA', value: 'California' },
+          { label: 'FL', value: 'Florida' },
+          { label: 'GA', value: 'Georgia' },
+          { label: 'NY', value: 'New York' },
+          { label: 'TX', value: 'Texas' },
         ],
         filterVariant: 'multi-select',
         header: 'State',
@@ -189,12 +189,16 @@ export const FilterFnAndFilterVariantsFaceted = () => (
     columns={[
       {
         accessorKey: 'firstName',
-        filterFn: 'fuzzy', // default
+        filterSelectOptions: data.map((row) => ({
+          label: row.firstName.toUpperCase(),
+          value: row.firstName,
+        })), //hard coded
+        filterVariant: 'autocomplete',
         header: 'First Name',
       },
       {
         accessorKey: 'lastName',
-        filterVariant: 'autocomplete',
+        filterVariant: 'autocomplete', //faceted auto generated select options
         header: 'Last Name',
       },
       {

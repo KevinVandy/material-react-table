@@ -144,7 +144,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: 'Array<string | { text: string; value: string }>',
+    type: 'Array<string | { label: string; value: string }>',
   },
   {
     columnOption: 'editVariant',
@@ -335,7 +335,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: 'Array<string | { text: string; value: string }>',
+    type: 'Array<string | { label: string; value: string }>',
   },
   {
     columnOption: 'filterVariant',

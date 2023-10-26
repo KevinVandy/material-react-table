@@ -34,9 +34,9 @@ const Example = () => {
         header: 'Gender',
         filterFn: 'equals',
         filterSelectOptions: [
-          { text: 'Male', value: 'Male' },
-          { text: 'Female', value: 'Female' },
-          { text: 'Other', value: 'Other' },
+          { label: 'Male', value: 'Male' },
+          { label: 'Female', value: 'Female' },
+          { label: 'Other', value: 'Other' },
         ],
         filterVariant: 'select',
       },
