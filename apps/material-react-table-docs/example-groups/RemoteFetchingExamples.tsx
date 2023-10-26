@@ -36,6 +36,17 @@ const RemoteFetchingExamples = ({ isPage = false }) => {
             }
             value="infinite-scrolling"
           />
+          <Link href="/docs/examples/editing-crud" passHref legacyBehavior>
+            <Tab
+              label={
+                <Box>
+                  CRUD Examples
+                  <LaunchIcon sx={{ fontSize: '1rem' }} />
+                </Box>
+              }
+              value="more"
+            />
+          </Link>
           <Link href="/docs/examples" passHref legacyBehavior>
             <Tab
               label={

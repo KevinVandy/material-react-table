@@ -31,6 +31,17 @@ const EditingCRUDExamples = ({ isPage = false }) => {
           <Tab label="Inline Row" value="editing-crud-inline-row" />
           <Tab label="Inline Cell" value="editing-crud-inline-cell" />
           <Tab label="Inline Table" value="editing-crud-inline-table" />
+          <Link href="/docs/examples/remote" passHref legacyBehavior>
+            <Tab
+              label={
+                <Box>
+                  Non TanStack Query Fetching
+                  <LaunchIcon sx={{ fontSize: '1rem' }} />
+                </Box>
+              }
+              value="more"
+            />
+          </Link>
           <Link href="/docs/examples" passHref legacyBehavior>
             <Tab
               label={

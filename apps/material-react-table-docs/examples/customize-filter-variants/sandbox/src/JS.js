@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
-import { MaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 import { citiesList, data, usStateList } from './makeData';
 
 const Example = () => {
@@ -72,13 +75,13 @@ const Example = () => {
     [],
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      initialState={{ showColumnFilters: true }}
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    initialState: { showColumnFilters: true },
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 //Date Picker Imports - these should just be in your Context Provider
