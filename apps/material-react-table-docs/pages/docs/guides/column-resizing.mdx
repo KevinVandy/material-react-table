@@ -92,15 +92,15 @@ defaultColumn = { minSize: 40, maxSize: 1000, size: 180 }; //units are in px
 You can modify the default column widths by setting the `defaultColumn` prop on the table.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  defaultColumn={{
+const table = useMaterialReactTable({
+  columns,
+  data,
+  defaultColumn: {
     minSize: 20, //allow columns to get smaller than default
     maxSize: 9001, //allow columns to get larger than default
     size: 260, //make columns wider by default
-  }}
-/>
+  },
+});
 ```
 
 ### Enable Column Resizing Feature
@@ -108,7 +108,13 @@ You can modify the default column widths by setting the `defaultColumn` prop on 
 `enableColumnResizing` is the boolean prop that enables the column resizing feature.
 
 ```jsx
-<MaterialReactTable columns={columns} data={data} enableColumnResizing />
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableColumnResizing: true,
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 You can disable specific columns from being resizable by setting the `enableResizing` column option to false in their respective column definition.
@@ -118,12 +124,12 @@ You can disable specific columns from being resizable by setting the `enableResi
 The default `columnResizeMode` is `onChange` (in MRT versions v1.7+), which means that the column resizing will occur immediately as the user drags the column resize handle. If you are running into performance issues because of many other enabled features, you might want to set the `columnResizeMode` to `onEnd` instead. This will make the column resizing only occur after the user has finished dragging the column resize handle and released their mouse.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableColumnResizing
-  columnResizeMode="onEnd" //instead of the default "onChange" mode
-/>
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableColumnResizing: true,
+  columnResizeMode: 'onEnd', //instead of the default "onChange" mode
+});
 ```
 
 <Example />
@@ -135,12 +141,12 @@ The default `columnResizeMode` is `onChange` (in MRT versions v1.7+), which mean
 When column resizing is enabled, by default, a layoutMode of `"grid-no-grow"` will be applied internally. This means that columns will have an absolute size and they will not grow to fill in the remaining space of the table.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableColumnResizing
-  layoutMode="grid" //instead of the default "grid-no-grow" when column resizing is enabled
-/>
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableColumnResizing: true,
+  layoutMode: 'grid', //instead of the default "grid-no-grow" when column resizing is enabled
+});
 ```
 
 View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-column-resizing-examples)**

@@ -1,11 +1,15 @@
 import { useMemo } from 'react';
-import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+  type MRT_ColumnDef,
+} from 'material-react-table';
 import { data, type Person } from './makeData';
 
 const Example = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
+    //column definitions...
     () => [
-      //column definitions...
       {
         accessorKey: 'firstName',
         header: 'First Name',
@@ -26,20 +30,19 @@ const Example = () => {
         accessorKey: 'state',
         header: 'State',
       },
-      //end
     ],
-
     [],
+    //end
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableRowNumbers
-      rowNumberMode="static"
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableRowNumbers: true,
+    rowNumberMode: 'static', // default
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;
