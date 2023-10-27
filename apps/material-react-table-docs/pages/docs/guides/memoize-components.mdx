@@ -5,7 +5,7 @@ import MemoizeTableBodyExample from '../../../examples/memoize-table-body';
 import Box from '@mui/material/Box';
 
 <Head>
-  <title>Memoize Components Guide - Material React Table V2 Docs</title>
+  <title>{'Memoize Components Guide - Material React Table V2 Docs'}</title>
   <meta
     name="description"
     content="How to memoize certain table components in Material React Table in order to improve render performance."
@@ -14,11 +14,11 @@ import Box from '@mui/material/Box';
 
 ## Memoize Components Guide
 
-As of version 1.1, Material React Table has introduced a new `memoMode` prop that will allow you to either memoize table cells, table rows, or the entire table body in order to improve render performance on large tables.
+Material React Table a `memoMode` table option that will allow you to explicitly memoize either table cells, table rows, or the entire table body in order to improve render performance on large tables.
 
 However, memoizing these components will **BREAK** some features!
 
-> DON'T MEMOIZE COMPONENTS UNLESS YOU KNOW WHAT YOU'RE DOING AND UNDERSTAND WHICH FEATURES WILL BREAK.
+> Using these memoization features are usually unnecessary, but available if you need them. They can break some features, so use them with caution.
 
 ### Memoizing Table Cells
 

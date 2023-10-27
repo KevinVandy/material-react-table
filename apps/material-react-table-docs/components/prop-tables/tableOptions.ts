@@ -1988,7 +1988,7 @@ export const tableOptions: TableOption[] = [
     type: 'number',
   },
   {
-    tableOption: 'rowNumberMode',
+    tableOption: 'rowNumberDisplayMode',
     defaultValue: "'original'",
     description: '',
     link: '',

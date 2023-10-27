@@ -60,7 +60,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       layoutMode,
       muiSkeletonProps,
       muiTableBodyCellProps,
-      rowNumberMode,
+      rowNumberDisplayMode,
     },
     refs: { editInputRefs },
     setEditingCell,
@@ -281,7 +281,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
               {...skeletonProps}
             />
           ) : enableRowNumbers &&
-            rowNumberMode === 'static' &&
+            rowNumberDisplayMode === 'static' &&
             column.id === 'mrt-row-numbers' ? (
             rowIndex + 1
           ) : column.id === 'mrt-row-drag' ? (

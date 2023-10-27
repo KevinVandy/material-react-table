@@ -1114,7 +1114,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   rowCount?: number;
-  rowNumberMode?: 'original' | 'static';
+  rowNumberDisplayMode?: 'original' | 'static';
   rowPinningDisplayMode?:
     | 'bottom'
     | 'select-bottom'

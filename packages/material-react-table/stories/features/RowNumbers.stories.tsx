@@ -44,7 +44,7 @@ export const enableRowNumbersOriginal = () => (
     columns={columns}
     data={data}
     enableRowNumbers
-    rowNumberMode="original"
+    rowNumberDisplayMode="original"
   />
 );
 
@@ -54,7 +54,7 @@ export const enableRowNumbersStatic = () => (
     data={data}
     enableRowNumbers
     enableRowVirtualization
-    rowNumberMode="static"
+    rowNumberDisplayMode="static"
   />
 );
 
@@ -65,7 +65,7 @@ export const enableRowNumbersOriginalVirtual = () => (
     enableBottomToolbar={false}
     enablePagination={false}
     enableRowNumbers
-    rowNumberMode="original"
+    rowNumberDisplayMode="original"
   />
 );
 
@@ -77,6 +77,6 @@ export const enableRowNumbersStaticVirtual = () => (
     enablePagination={false}
     enableRowNumbers
     enableRowVirtualization
-    rowNumberMode="static"
+    rowNumberDisplayMode="static"
   />
 );

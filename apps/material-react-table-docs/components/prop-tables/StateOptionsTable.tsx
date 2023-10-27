@@ -164,7 +164,7 @@ const StateOptionsTable = ({ onlyOptions }: Props) => {
           {row.original.description || 'No Description Provided... Yet...'}
         </Typography>
       )}
-      rowNumberMode="static"
+      rowNumberDisplayMode="static"
       onColumnPinningChange={setColumnPinning}
       state={{ columnPinning }}
     />

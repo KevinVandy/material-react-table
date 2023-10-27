@@ -16,7 +16,7 @@ import { InstallCommand } from '../components/mdx/InstallCommand';
 ### New Feature Highlights
 
 1. The new optional, but recommended `useMaterialReactTable` hook that allows you to create the `table` instance in your own scope.
-2. Greatly improved Editing and Creating features.
+2. Greatly improved Editing and new Creating features.
 3. New Row Pinning Features
 4. New Column Filtering `'popover'` display mode to give a more "excel-like" filtering experience.
 5. New Autocomplete, Date, and Date Range Filter variants
@@ -26,7 +26,9 @@ import { InstallCommand } from '../components/mdx/InstallCommand';
 9. Improved Table Head Cell Default Styles
 10. Improved Column Sizing and Layout Modes for Column Resizing features
 11. All internal MRT components are now exported for custom headless use cases
-12. New optional `createMRTColumnHelper` utitlity function for better `TValue`/`cell.getValue()` type inference
+12. New optional `createMRTColumnHelper` utility function for better `TValue`/`cell.getValue()` type inference
+
+See the full [changelog](/changelog#version-2.0.0---10-27-2023) for more details.
 
 ### Breaking Changes
 
@@ -64,6 +66,7 @@ export const App = () => {
 #### Renamed Props/Options
 
 - `editingMode` -> `editDisplayMode`
+- `rowNumberMode` -> `rowNumberDisplayMode`
 - `enablePinning` -> `enableColumnPinning` and `enableRowPinning`
 - `virtualizerInstanceRef` split into `columnVirtualizerRef` and `rowVirtualizerRef`
 - `virtualizerProps` split into `columnVirtualizerOptions` and `rowVirtualizerOptions`
@@ -157,3 +160,5 @@ export const MyTableComponent = () => {
   );
 };
 ```
+
+Is anything missing from this v2 migration guide? Make a PR or join the [Discord](https://discord.gg/5wqyRx6fnm) to discuss.

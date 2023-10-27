@@ -38,7 +38,7 @@ const Example = () => {
     columns,
     data,
     enableRowNumbers: true,
-    rowNumberMode: 'original',
+    rowNumberDisplayMode: 'original',
   });
 
   return <MaterialReactTable table={table} />;

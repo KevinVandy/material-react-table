@@ -18,18 +18,18 @@ Material React Table has an easy to implement row number features. There are two
 ### Relevant Table Options
 
 <TableOptionsTable
-  onlyOptions={new Set(['enableRowNumbers', 'rowNumberMode'])}
+  onlyOptions={new Set(['enableRowNumbers', 'rowNumberDisplayMode'])}
 />
 
 ### Enable Row Numbers (Static Mode)
 
-In the default rowNumberMode (`static`), row numbers are just a static part of the table in their own column. They act like the row numbers in an excel spreadsheet. Sorting and filtering will not affect the row numbers.
+In the default rowNumberDisplayMode (`static`), row numbers are just a static part of the table in their own column. They act like the row numbers in an excel spreadsheet. Sorting and filtering will not affect the row numbers.
 
 <StaticExample />
 
 ### Enable Row Numbers (Original Mode)
 
-Alternatively, use the `"original"` rowNumberMode to have row numbers linked to the original index of the data array. This means that when you search or filter, the same row numbers will stay with the same rows as data is sorted and filtered.
+Alternatively, use the `"original"` rowNumberDisplayMode to have row numbers linked to the original index of the data array. This means that when you search or filter, the same row numbers will stay with the same rows as data is sorted and filtered.
 
 <OriginalExample />
 
