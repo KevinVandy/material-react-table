@@ -1,5 +1,9 @@
 import { useMemo } from 'react';
-import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+  type MRT_ColumnDef,
+} from 'material-react-table';
 
 const Example = () => {
   const columns = useMemo(
@@ -73,13 +77,14 @@ const Example = () => {
     ],
     [],
   );
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      initialState={{ columnVisibility: { address: false } }}
-    />
-  );
+
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    initialState: { columnVisibility: { address: false } },
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

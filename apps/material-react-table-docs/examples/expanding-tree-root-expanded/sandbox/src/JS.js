@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
-import { MaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 import { Button } from '@mui/material';
 
 //data definitions...
@@ -119,18 +122,18 @@ const Example = () => {
     [],
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableExpanding
-      getRowId={(originalRow) => originalRow.id}
-      initialState={{ expanded: initialExpandedRootRows }} //only expand the root rows by default
-      renderTopToolbarCustomActions={({ table }) => (
-        <Button onClick={() => table.resetExpanded()}>Reset Expanded</Button>
-      )}
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableExpanding: true,
+    getRowId: (originalRow) => originalRow.id,
+    initialState: { expanded: initialExpandedRootRows }, //only expand the root rows by default
+    renderTopToolbarCustomActions: ({ table }) => (
+      <Button onClick={() => table.resetExpanded()}>Reset Expanded</Button>
+    ),
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

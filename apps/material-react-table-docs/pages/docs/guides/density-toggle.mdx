@@ -4,7 +4,7 @@ import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable
 import DisableExample from '../../../examples/disable-density-toggle';
 
 <Head>
-  <title>Density Toggle Guide - Material React Table V2 Docs</title>
+  <title>{'Density Toggle Guide - Material React Table V2 Docs'}</title>
   <meta
     name="description"
     content="How to use, customize, or disable the density toggle button feature of Material React Table"
@@ -38,11 +38,13 @@ A density toggle is shown by default to let a user change the density to cycle t
 If you want to change the default density, you can set it in either the `initialState` prop or the `state` prop.
 
 ```tsx
-<MaterialReactTable
-  data={data}
-  columns={columns}
-  initialState={{ density: 'compact' }}
-/>
+const table = useMaterialReactTable({
+  data,
+  columns,
+  initialState: { density: 'compact' },
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 ### Disable or Hide the Density Toggle
