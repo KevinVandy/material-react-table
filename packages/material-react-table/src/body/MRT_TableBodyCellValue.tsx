@@ -56,7 +56,7 @@ export const MRT_TableBodyCellValue = <TData extends MRT_RowData>({
   if (
     enableFilterMatchHighlighting &&
     columnDef.enableFilterMatchHighlighting !== false &&
-    renderedCellValue &&
+    String(renderedCellValue) &&
     allowedTypes.includes(typeof renderedCellValue) &&
     ((filterValue &&
       allowedTypes.includes(typeof filterValue) &&
