@@ -297,7 +297,7 @@ export const SourceCodeSnippet = ({
                     selected={codeTab === 'legacy'}
                     sx={{ textTransform: 'none' }}
                   >
-                    {isMobile ? 'Legacy' : 'Legacy Props API'}
+                    {isMobile ? 'Legacy' : 'Props API'}
                   </ToggleButton>
                 )}
                 {apiCode && (
