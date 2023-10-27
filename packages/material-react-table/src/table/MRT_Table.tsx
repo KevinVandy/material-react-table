@@ -65,7 +65,9 @@ export const MRT_Table = <TData extends MRT_RowData>({
     const colSizes: { [key: string]: number } = {};
     for (let i = 0; i < headers.length; i++) {
       const header = headers[i];
-      const colSize = header.getSize();
+      let colSize = header.getSize();
+      if (header.subHeaders?.length)
+        colSize = colSize * 1.05 + header.subHeaders.length * 2;
       colSizes[`--header-${parseCSSVarId(header.id)}-size`] = colSize;
       colSizes[`--col-${parseCSSVarId(header.column.id)}-size`] = colSize;
     }

@@ -73,7 +73,7 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
   enableTopToolbar = true,
   filterFns,
   icons,
-  layoutMode = 'semantic',
+  layoutMode,
   localization,
   manualFiltering,
   manualGrouping,
@@ -118,13 +118,13 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
     [defaultDisplayColumn],
   );
 
-  if (layoutMode === 'semantic') {
-    if (rest.enableRowVirtualization || rest.enableColumnVirtualization) {
-      layoutMode = 'grid';
-    }
-    if (enableColumnResizing) {
-      layoutMode = 'grid-no-grow';
-    }
+  layoutMode =
+    layoutMode || (enableColumnResizing ? 'grid-no-grow' : 'semantic');
+  if (
+    layoutMode === 'semantic' &&
+    (rest.enableRowVirtualization || rest.enableColumnVirtualization)
+  ) {
+    layoutMode = 'grid';
   }
 
   if (rest.enableRowVirtualization) {

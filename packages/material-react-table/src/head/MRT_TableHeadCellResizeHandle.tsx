@@ -46,7 +46,8 @@ export const MRT_TableHeadCellResizeHandle = <TData extends MRT_RowData>({
       sx={(theme) => ({
         '&:active > hr': {
           backgroundColor: theme.palette.info.main,
-          opacity: header.subHeaders.length ? 1 : 0,
+          opacity:
+            header.subHeaders.length || columnResizeMode === 'onEnd' ? 1 : 0,
         },
         cursor: 'col-resize',
         mr:

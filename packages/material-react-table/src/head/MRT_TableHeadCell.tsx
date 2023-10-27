@@ -32,6 +32,7 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
     getState,
     options: {
       columnFilterDisplayMode,
+      columnResizeMode,
       enableColumnActions,
       enableColumnDragging,
       enableColumnOrdering,
@@ -88,17 +89,20 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
   }, [showColumnActions, showDragHandle]);
 
   const draggingBorders = useMemo(() => {
-    const borderStyle =
+    const showResizeBorder =
       columnSizingInfo.isResizingColumn === column.id &&
-      !header.subHeaders.length
-        ? `2px solid ${draggingBorderColor} !important`
-        : draggingColumn?.id === column.id
-        ? `1px dashed ${theme.palette.grey[500]}`
-        : hoveredColumn?.id === column.id
-        ? `2px dashed ${draggingBorderColor}`
-        : undefined;
+      columnResizeMode === 'onChange' &&
+      !header.subHeaders.length;
 
-    if (columnSizingInfo.isResizingColumn === column.id) {
+    const borderStyle = showResizeBorder
+      ? `2px solid ${draggingBorderColor} !important`
+      : draggingColumn?.id === column.id
+      ? `1px dashed ${theme.palette.grey[500]}`
+      : hoveredColumn?.id === column.id
+      ? `2px dashed ${draggingBorderColor}`
+      : undefined;
+
+    if (showResizeBorder) {
       return { borderRight: borderStyle };
     }
     const draggingBorders = borderStyle
