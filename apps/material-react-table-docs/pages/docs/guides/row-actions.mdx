@@ -4,7 +4,7 @@ import MenuItemsExample from '../../../examples/row-actions-menu-items';
 import ButtonsExample from '../../../examples/row-actions-buttons';
 
 <Head>
-  <title>Row Actions Guide - Material React Table V2 Docs</title>
+  <title>{'Row Actions Guide - Material React Table V2 Docs'}</title>
   <meta
     name="description"
     content="How to add row action buttons to each row in Material React Table"
@@ -33,38 +33,44 @@ Using the built-in Row Actions column is optional, as you can simply create your
 
 ### Enable Row Actions
 
-You can enable the row actions feature by setting the `enableRowActions` prop to `true`.
+You can enable the row actions feature by setting the `enableRowActions` table option to `true`.
 
 You can then add your row action components with either the `renderRowActions` or `renderRowActionMenuItems` props.
 
 #### Add Row Actions Menu Items
 
-If you want to embed all of your row actions into a single menu, you can use the `renderRowActionMenuItems` prop.
+If you want to embed all of your row actions into a single menu, you can use the `renderRowActionMenuItems` table option.
 
 ```jsx
-<MaterialReactTable
-  enableRowActions
-  renderRowActionMenuItems={({ row }) => [
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableRowActions: true,
+  renderRowActionMenuItems: ({ row }) => [
     <MenuItem key="edit" onClick={() => console.info('Edit')}>
       Edit
     </MenuItem>,
     <MenuItem key="delete" onClick={() => console.info('Delete')}>
       Delete
     </MenuItem>,
-  ]}
-/>
+  ],
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 <MenuItemsExample />
 
 #### Add Row Action Buttons
 
-If you want to add row action buttons, you can use the `renderRowActions` prop.
+If you want to add row action buttons, you can use the `renderRowActions` table option.
 
 ```jsx
-<MaterialReactTable
-  enableRowActions
-  renderRowActions={({ row }) => (
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableRowActions: true,
+  renderRowActions: ({ row }) => (
     <Box>
       <IconButton onClick={() => console.info('Edit')}>
         <EditIcon />
@@ -73,8 +79,10 @@ If you want to add row action buttons, you can use the `renderRowActions` prop.
         <DeleteIcon />
       </IconButton>
     </Box>
-  )}
-/>
+  ),
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 <ButtonsExample />
@@ -83,36 +91,41 @@ If you want to add row action buttons, you can use the `renderRowActions` prop.
 
 #### Change Row Actions Display Column Options
 
-You can customize all column def options for the row actions column, including the column width, header text, and more using the `displayColumnDefOptions` prop.
+You can customize all column def options for the row actions column, including the column width, header text, and more using the `displayColumnDefOptions` table option.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  displayColumnDefOptions={{
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableRowActions: true,
+  displayColumnDefOptions: {
     'mrt-row-actions': {
       header: 'Change Account Settings', //change header text
       size: 300, //make actions column wider
     },
-  }}
-  renderRowActions={({ table }) => (
+  },
+  renderRowActions: ({ table }) => (
     <Box>
       <Button>Button 1</Button>
       <Button>Button 2</Button>
       <Button>Button 3</Button>
     </Box>
-  )}
-/>
+  ),
+});
 ```
 
 #### Position Row Actions Column
 
-You can position the row actions column to the left or right (first or last column) of the table using the `positionActionsColumn` prop. The default is as the first column.
+You can position the row actions column to the left or right (first or last column) of the table using the `positionActionsColumn` table option. The default is as the first column.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  positionActionsColumn="last"
-/>
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableRowActions: true,
+  positionActionsColumn: 'last',
+  renderRowActions: ({ table }) => (
+    //...
+  ),
+})
 ```

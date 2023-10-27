@@ -131,7 +131,7 @@ return <MaterialReactTable table={table} />;
 
 ### Styling Material UI Components
 
-Each `mui...Prop` has multiple options for you to add styling to the component. You could simply pass `className` or `style` props to any `mui...Props` prop, but there is also the `sx` prop...which totally rocks!
+Each `mui...Prop` has multiple options for you to add styling to the component. You could simply pass `className` or `style` props to any `mui...Props` prop, but there is also the `sx` table option...which totally rocks!
 
 > Hint: You should just use the `sx` prop for all styling instead of `className` or `style` props.
 
@@ -139,7 +139,7 @@ Each `mui...Prop` has multiple options for you to add styling to the component. 
 
 The recommended way to style Material UI components in Material React Table will be the [`sx` prop](https://mui.com/system/basics/#the-sx-prop) throughout this docs site, as it is both the most simple and the most powerful way to style Material UI components as of Material UI V5. They can work and be as simple as a `style` prop, but behind the scenes, they work more like emotion styled-components by using `mui/system`.
 
-Don't worry, `className` and `style` props will still work, but let's show off some of the more elegant syntax you can use with the `sx` prop.
+Don't worry, `className` and `style` props will still work, but let's show off some of the more elegant syntax you can use with the `sx` table option.
 
 1. The `sx` prop can be used just a simply as a `style` prop by default
 
@@ -225,7 +225,7 @@ import { createTheme, ThemeProvider } from '@mui/material';
 //in one of your normal components
 return (
   <ThemeProvider theme={createTheme({...})}>
-    <MaterialReactTable columns={columns} data={data} />
+    <MaterialReactTable table={table} />
   </ThemeProvider>
 );
 ```
@@ -263,7 +263,7 @@ Here is the default `mrtTheme` object used internally if not overridden:
 
 ### Customize Table Paper Styling
 
-You can customize both the props and the styles of the internal `<Paper />` component that wraps the table by passing in a `muiTablePaperProps` prop. This is useful if you want to change the elevation of the paper, or add a border radius, or any other styling you want to do to the paper.
+You can customize both the props and the styles of the internal `<Paper />` component that wraps the table by passing in a `muiTablePaperProps` table option. This is useful if you want to change the elevation of the paper, or add a border radius, or any other styling you want to do to the paper.
 
 ```jsx
 const table = useMaterialReactTable({

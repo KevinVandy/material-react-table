@@ -714,7 +714,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
       }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableCellElement>>)
     | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableCellElement>>;
   /**
-   * The columns to display in the table. `accessorKey`s or `accessorFn`s must match keys in the `data` prop.
+   * The columns to display in the table. `accessorKey`s or `accessorFn`s must match keys in the `data` table option.
    *
    * See more info on creating columns on the official docs site:
    * @link https://www.material-react-table.com/docs/guides/data-columns
@@ -733,7 +733,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
    */
   data: TData[];
   /**
-   * Instead of specifying a bunch of the same options for each column, you can just change an option in the `defaultColumn` prop to change a default option for all columns.
+   * Instead of specifying a bunch of the same options for each column, you can just change an option in the `defaultColumn` table option to change a default option for all columns.
    */
   defaultColumn?: Partial<MRT_ColumnDef<TData>>;
   /**

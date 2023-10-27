@@ -35,7 +35,7 @@ A density toggle is shown by default to let a user change the density to cycle t
 
 #### Change Default Density
 
-If you want to change the default density, you can set it in either the `initialState` prop or the `state` prop.
+If you want to change the default density, you can set it in either the `initialState` table option or the `state` table option.
 
 ```tsx
 const table = useMaterialReactTable({
@@ -51,6 +51,6 @@ return <MaterialReactTable table={table} />;
 
 You can change the default density and disable the density toggle itself if you want.
 
-In this example, the density toggle is disabled and a `compact` density is set by default in the `initialState` prop.
+In this example, the density toggle is disabled and a `compact` density is set by default in the `initialState` table option.
 
 <DisableExample />

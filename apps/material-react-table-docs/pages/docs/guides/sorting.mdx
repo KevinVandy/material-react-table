@@ -58,7 +58,7 @@ Material React Table supports almost any sorting scenario you may have. Client-s
 
 ### Disable Sorting
 
-Sorting can be disabled globally by setting the `enableSorting` prop to `false`. This will disable sorting for all columns. You can also disable sorting for individual columns by setting the `enableSorting` column option to `false`.
+Sorting can be disabled globally by setting the `enableSorting` table option to `false`. This will disable sorting for all columns. You can also disable sorting for individual columns by setting the `enableSorting` column option to `false`.
 
 ```tsx
 const columns = [
@@ -105,7 +105,7 @@ Client-side sorting is enabled by default. When sorting is toggled on for a colu
 
 #### Multi-Sorting
 
-Multi-sorting is also enabled by default, which means you can sort by multiple columns at once. You can do this by clicking on a column header while holding down the `shift` key. The table will then be sorted by the previously sorted column, followed by the newly clicked column. Alternatively, if you want multi-sorting to be the default click behavior without the need to hold `shift`, you can set the `isMultiSortEvent` prop to `() => true`.
+Multi-sorting is also enabled by default, which means you can sort by multiple columns at once. You can do this by clicking on a column header while holding down the `shift` key. The table will then be sorted by the previously sorted column, followed by the newly clicked column. Alternatively, if you want multi-sorting to be the default click behavior without the need to hold `shift`, you can set the `isMultiSortEvent` table option to `() => true`.
 
 ```jsx
 const table = useMaterialReactTable({
@@ -115,11 +115,11 @@ const table = useMaterialReactTable({
 });
 ```
 
-You can limit the number of columns that can be sorted at once by setting the `maxMultiSortColCount` prop, or you can disable multi-sorting entirely by setting the `enableMultiSort` prop to `false`.
+You can limit the number of columns that can be sorted at once by setting the `maxMultiSortColCount` prop, or you can disable multi-sorting entirely by setting the `enableMultiSort` table option to `false`.
 
 #### Sorting Removal
 
-By default, users can remove a sort on a column by clicking through the sort direction options or selecting "Clear Sort" from the column actions menu. You can disable this feature by setting the `enableSortingRemoval` prop to `false`.
+By default, users can remove a sort on a column by clicking through the sort direction options or selecting "Clear Sort" from the column actions menu. You can disable this feature by setting the `enableSortingRemoval` table option to `false`.
 
 ```jsx
 const table = useMaterialReactTable({
@@ -131,7 +131,7 @@ const table = useMaterialReactTable({
 
 #### Sort Direction
 
-By default, columns with `string` datatypes will sort alphabetically in ascending order, but columns with `number` datatypes will sort numerically in descending order. You can change the default sort direction per column by specifying the `sortDescFirst` column option to either `true` or `false`. You can also change the default sort direction globally by setting the `sortDescFirst` prop to either `true` or `false`.
+By default, columns with `string` datatypes will sort alphabetically in ascending order, but columns with `number` datatypes will sort numerically in descending order. You can change the default sort direction per column by specifying the `sortDescFirst` column option to either `true` or `false`. You can also change the default sort direction globally by setting the `sortDescFirst` table option to either `true` or `false`.
 
 <MultiSortingExample />
 
@@ -143,7 +143,7 @@ There are six built-in sorting functions you can choose from: ` alphanumeric`, `
 
 #### Add Custom Sorting Functions
 
-If none of these sorting functions meet your needs, you can add your own custom sorting functions by specifying more sorting functions in the `sortingFns` prop.
+If none of these sorting functions meet your needs, you can add your own custom sorting functions by specifying more sorting functions in the `sortingFns` table option.
 
 ```jsx
 const table = useMaterialReactTable({
@@ -178,11 +178,11 @@ const columns = [
 
 ### Manual Server-Side Sorting
 
-If you are working with large data sets, you may want to let your back-end APIs handle all of the sorting and pagination processing instead of doing it client-side. You can do this by setting the `manualSorting` prop to `true`. This will disable the default client-side sorting and pagination features and will let you implement your own sorting and pagination logic.
+If you are working with large data sets, you may want to let your back-end APIs handle all of the sorting and pagination processing instead of doing it client-side. You can do this by setting the `manualSorting` table option to `true`. This will disable the default client-side sorting and pagination features and will let you implement your own sorting and pagination logic.
 
 > When `manualSorting` is set to `true`, Material React Table assumes that your `data` is already sorted by the time you are passing it to the table.
 
-If you need to sort your data in a back-end API, then you will also probably need access to the internal `sorting` state from the table. You can do this by managing the `sorting` state yourself and then passing it to the table via the `state` prop. You can also pass a callback function to the `onSortingChange` prop, which will be called whenever the `sorting` state changes internally in the table
+If you need to sort your data in a back-end API, then you will also probably need access to the internal `sorting` state from the table. You can do this by managing the `sorting` state yourself and then passing it to the table via the `state` table option. You can also pass a callback function to the `onSortingChange` prop, which will be called whenever the `sorting` state changes internally in the table
 
 ```jsx
 const [sorting, setSorting] = useState([]);

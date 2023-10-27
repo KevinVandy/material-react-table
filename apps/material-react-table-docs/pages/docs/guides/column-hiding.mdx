@@ -46,7 +46,7 @@ return <MaterialReactTable table={table} />;
 
 ### Disable Column Hiding
 
-If you do not want this feature to be enabled at all, you can disable it by setting the `enableHiding` prop to `false`.
+If you do not want this feature to be enabled at all, you can disable it by setting the `enableHiding` table option to `false`.
 
 ```jsx
 const table = useMaterialReactTable({
@@ -58,13 +58,13 @@ const table = useMaterialReactTable({
 
 Alternatively, you can disable hiding specific columns by setting the `enableHiding` column option to `false` per column.
 
-If you want to hide certain columns by default, you can specify an column visibility in the `initialState.columnVisibility` prop. This can also be useful for making the column hiding state persistent.
+If you want to hide certain columns by default, you can specify an column visibility in the `initialState.columnVisibility` table option. This can also be useful for making the column hiding state persistent.
 
 <Example />
 
 ### Enable Column Hiding on Display Columns
 
-By default, column hiding is only enabled on data columns. Display columns, such as `mrt-row-numbers`, `mrt-row-select`, etc., do not have column hiding enabled, and their toggle will be disabled. You can turn that back on by setting the `enableHiding` option to `true` in the `displayColumnsOptions` prop.
+By default, column hiding is only enabled on data columns. Display columns, such as `mrt-row-numbers`, `mrt-row-select`, etc., do not have column hiding enabled, and their toggle will be disabled. You can turn that back on by setting the `enableHiding` option to `true` in the `displayColumnsOptions` table option.
 
 ```jsx
 const table = useMaterialReactTable({
@@ -78,6 +78,6 @@ const table = useMaterialReactTable({
 });
 ```
 
-See the [Display Columns Feature Guide](/docs/guides/display-columns#display-column-definition-options-prop) for a more in depth explanation of the `displayColumnsOptions` prop.
+See the [Display Columns Feature Guide](/docs/guides/display-columns#display-column-definition-options-prop) for a more in depth explanation of the `displayColumnsOptions` table option.
 
 View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-column-hiding-examples)**

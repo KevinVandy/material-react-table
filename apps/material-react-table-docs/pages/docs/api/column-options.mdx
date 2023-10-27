@@ -54,7 +54,9 @@ const columns = useMemo(
   [],
 );
 
-return <MaterialReactTable columns={columns} data={data} />;
+const table = useMaterialReactTable({ columns, data });
+
+return <MaterialReactTable table={table} />;
 ```
 
 <ColumnOptionsTable />

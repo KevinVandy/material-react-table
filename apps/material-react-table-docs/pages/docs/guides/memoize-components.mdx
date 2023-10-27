@@ -39,12 +39,12 @@ These features are incompatible with cell memoization because they depend on tab
 </Box>
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableDensityToggle={false} //density does not work with memoized cells
-  memoMode="cells" // memoize table cells to improve render performance, but break some features
-/>
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableDensityToggle: false, //density does not work with memoized cells
+  memoMode: 'cells', // memoize table cells to improve render performance, but break some features
+})
 ```
 
 <MemoizeCellsExample />
@@ -69,13 +69,13 @@ These features are incompatible with row memoization because they require the en
 </Box>
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableDensityToggle={false} //density does not work with memoized rows
-  enableHiding={false} //column hiding does not work with memoized rows
-  memoMode="rows" // memoize table rows to improve render performance, but break a lot of features
-/>
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableDensityToggle: false, //density does not work with memoized rows
+  enableHiding: false, //column hiding does not work with memoized rows
+  memoMode: 'rows', // memoize table rows to improve render performance, but break a lot of features
+})
 ```
 
 <MemoizeRowsExample />
@@ -102,18 +102,18 @@ None of these features will work with table body memoization because the entire 
 </Box>
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableColumnActions={false} //no need for column actions if none of them are enabled
-  enableColumnFilters={false} //filtering does not work with memoized table body
-  enableDensityToggle={false} //density does not work with memoized table body
-  enableGlobalFilter={false} //searching does not work with memoized table body
-  enableHiding={false} //column hiding does not work with memoized table body
-  enablePagination={false} //pagination does not work with memoized table body
-  enableSorting={false} //sorting does not work with memoized table body
-  memoMode="table-body" // memoize table body to improve render performance, but break all features
-/>
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableColumnActions: false, //no need for column actions if none of them are enabled
+  enableColumnFilters: false, //filtering does not work with memoized table body
+  enableDensityToggle: false, //density does not work with memoized table body
+  enableGlobalFilter: false, //searching does not work with memoized table body
+  enableHiding: false, //column hiding does not work with memoized table body
+  enablePagination: false, //pagination does not work with memoized table body
+  enableSorting: false, //sorting does not work with memoized table body
+  memoMode: 'table-body', // memoize table body to improve render performance, but break all features
+})
 ```
 
 <MemoizeTableBodyExample />

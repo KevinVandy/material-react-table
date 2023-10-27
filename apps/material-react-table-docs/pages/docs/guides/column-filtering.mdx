@@ -87,7 +87,7 @@ Filtering is one of the most powerful features of Material React Table and is en
 
 ### Disable Filtering Features
 
-Various subsets of filtering features can be disabled. If you want to disable filtering completely, you can set the `enableColumnFilters` prop to `false` to remove all filters from each column. Alternatively, `enableColumnFilter` can be set to `false` for individual columns.
+Various subsets of filtering features can be disabled. If you want to disable filtering completely, you can set the `enableColumnFilters` table option to `false` to remove all filters from each column. Alternatively, `enableColumnFilter` can be set to `false` for individual columns.
 
 `enableFilters` can be set to `false` to disable both column filters and the global search filter.
 
@@ -111,7 +111,7 @@ Material React Table has several built-in filter variants for advanced filtering
 
 #### Faceted Values for Filter Variants
 
-Faceted values are a list of unique values for a column that gets generated under the hood from table data when the `enableFacetedValues` prop is set to `true`. These values can be used to populate the select dropdowns for the `'select'` and `'multi-select'` filter variants, or the min and max values for the `'range-slider'` variant. This means that you no longer need to manually specify the `filterSelectOptions` prop for these variants manually, especially if you are using client-side filtering.
+Faceted values are a list of unique values for a column that gets generated under the hood from table data when the `enableFacetedValues` table option is set to `true`. These values can be used to populate the select dropdowns for the `'select'` and `'multi-select'` filter variants, or the min and max values for the `'range-slider'` variant. This means that you no longer need to manually specify the `filterSelectOptions` table option for these variants manually, especially if you are using client-side filtering.
 
 <EnableColumnFacetValuesExample />
 
@@ -119,23 +119,23 @@ Faceted values are a list of unique values for a column that gets generated unde
 
 If you are using server-side pagination and filtering, you can still customize the faceted values output with the `getFacetedUniqueValues` and `getFacetedMinMaxValues` props.
 
-```tsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableFacetedValues={true}
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableFacetedValues: true,
   //if using server-side pagination and filtering
-  getFacetedMinMaxValues={(table) => {
+  getFacetedMinMaxValues: (table) => {
     //fetch min and max values from server
     return [minValue, maxValue];
-  }}
+  },
   //if using server-side filtering
-  getFacetedUniqueValues={(table) => {
+  getFacetedUniqueValues: (table) => {
     const uniqueValueMap = new Map<string, number>();
     //fetch unique values from server, ideally including the count of each unique value
     return uniqueValueMap;
-  }}
-/>
+  },
+})
 ```
 
 ### Column Filter Display Modes
@@ -214,7 +214,7 @@ This function will be used to filter 1 row at a time and should return a `boolea
 
 #### Add Custom Filter Functions
 
-You can add custom filter functions to the `filterFns` prop. These will be available to all columns to use. The `filterFn` prop on a column will override any filter function with the same name in the `filterFns` prop.
+You can add custom filter functions to the `filterFns` table option. These will be available to all columns to use. The `filterFn` table option on a column will override any filter function with the same name in the `filterFns` table option.
 
 ```jsx
 const columns = [
@@ -225,32 +225,34 @@ const columns = [
   },
 ];
 
-return (
-  <MaterialReactTable
-    data={data}
-    columns={columns}
-    filterFns={{
-      customFilterFn: (row, id, filterValue) => {
-        return row.customField === value;
-      },
-    }}
-  />
-);
+const table = useMaterialReactTable({
+  columns,
+  data,
+  filterFns: {
+    customFilterFn: (row, id, filterValue) => {
+      return row.customField === value;
+    },
+  },
+});
 ```
 
 ### Filter Modes
 
 #### Enable Column Filter Modes (Filter Switching)
 
-If you want to let the user switch between multiple different filter modes from a drop-down menu on the Filter Textfield, you can enable that with the `enableColumnFilterModes` prop or column option. This will enable the filter icon in the filter text field to open a drop-down menu with the available filter modes when clicked.
+If you want to let the user switch between multiple different filter modes from a drop-down menu on the Filter Textfield, you can enable that with the `enableColumnFilterModes` table option or column option. This will enable the filter icon in the filter text field to open a drop-down menu with the available filter modes when clicked.
 
 ```tsx
-<MaterialReactTable columns={columns} data={data} enableColumnFilterModes />
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableColumnFilterModes: true,
+});
 ```
 
 #### Customize Filter Modes
 
-You can narrow down the available filter mode options by setting the `columnFilterModeOptions` prop or a column specific `columnFilterModeOptions` option.
+You can narrow down the available filter mode options by setting the `columnFilterModeOptions` table option or a column specific `columnFilterModeOptions` option.
 
 ```tsx
 const columns = [
@@ -269,7 +271,7 @@ const columns = [
 
 #### Render Custom Filter Mode Menu
 
-You can also render custom menu items in the filter mode drop-down menu by setting the `renderColumnFilterModeMenuItems` prop or column option. This option is a function that takes in the column and returns an array of `MenuItem` components. This is useful if you want to add custom filter modes that are not included in Material React Table, or if you just want to render the menu in your own custom way
+You can also render custom menu items in the filter mode drop-down menu by setting the `renderColumnFilterModeMenuItems` table option or column option. This option is a function that takes in the column and returns an array of `MenuItem` components. This is useful if you want to add custom filter modes that are not included in Material React Table, or if you just want to render the menu in your own custom way
 
 ```jsx
 const columns = [
@@ -293,14 +295,14 @@ const columns = [
   },
 ];
 
-return (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    enableColumnFilterModes
-    // renderColumnFilterModeMenuItems could go here if you want to apply to all columns
-  />
-);
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableColumnFilterModes: true,
+  // renderColumnFilterModeMenuItems could go here if you want to apply to all columns
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 <CustomizeFilterModesExample />
@@ -313,9 +315,9 @@ Check out the [Expanded Leaf Row Filtering Behavior docs](/docs/guides/expanding
 
 ### Manual Server-Side Column Filtering
 
-A very common use case when you have a lot of data is to filter the data on the server, instead of client-side. In this case, you will want to set the `manualFiltering` prop to `true` and manage the `columnFilters` state yourself like so (can work in conjunction with [manual global filtering](https://www.material-react-table.com/docs/guides/global-filtering#manual-server-side-global-filtering)).
+A very common use case when you have a lot of data is to filter the data on the server, instead of client-side. In this case, you will want to set the `manualFiltering` table option to `true` and manage the `columnFilters` state yourself like so (can work in conjunction with [manual global filtering](https://www.material-react-table.com/docs/guides/global-filtering#manual-server-side-global-filtering)).
 
-```tsx
+```jsx
 // You can manage and have control over the columnFilters state yourself
 const [columnFilters, setColumnFilters] = useState([]);
 const [data, setData] = useState([]); //data will get updated after re-fetching
@@ -328,15 +330,15 @@ useEffect(() => {
   };
 }, [columnFilters]);
 
-return (
-  <MaterialReactTable
-    columns={columns}
-    data={data} // this will already be filtered on the server
-    manualFiltering //turn off client-side filtering
-    onColumnFiltersChange={setColumnFilters} //hoist internal columnFilters state to your state
-    state={{ columnFilters }} //pass in your own managed columnFilters state
-  />
-);
+const table = useMaterialReactTable({
+  columns,
+  data, // this will already be filtered on the server
+  manualFiltering: true, //turn off client-side filtering
+  onColumnFiltersChange: setColumnFilters, //hoist internal columnFilters state to your state
+  state: { columnFilters }, //pass in your own managed columnFilters state
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 > Specifying `manualFiltering` turns off all client-side filtering and assumes that the `data` you pass to `<MaterialReactTable />` is already filtered.
@@ -347,9 +349,9 @@ Here is the full Remote Data example featuring server-side **filtering**, pagina
 
 ### Customize Material UI Filter components
 
-You can customize the Material UI filter components by setting the `muiFilterTextFieldProps` prop or column option.
+You can customize the Material UI filter components by setting the `muiFilterTextFieldProps` table option or column option.
 
-You can also turn a filter textfield into a select dropdown by setting the `filterSelectOptions` prop or column option.
+You can also turn a filter textfield into a select dropdown by setting the `filterSelectOptions` table option or column option.
 
 <CustomizeFilterComponentsExample />
 
@@ -361,7 +363,7 @@ If you need custom filter components that are much more complex than text-boxes 
 
 Filter Match Highlighting is a new featured enabled by default that will highlight text in the table body cells that matches the current filter query with a shade of the <Box component="span" color="warning.main">`theme.palette.warning.main`</Box> color.
 
-Filter Match Highlighting will only work on columns with the default `text` filter variant. Also, if you are using a custom `Cell` render override for a column, you will need to use the `renderedCellValue` prop instead of `cell.getValue()` in order to preserve the filter match highlighting.
+Filter Match Highlighting will only work on columns with the default `text` filter variant. Also, if you are using a custom `Cell` render override for a column, you will need to use the `renderedCellValue` table option instead of `cell.getValue()` in order to preserve the filter match highlighting.
 
 ```jsx
 const columns = [
@@ -375,14 +377,14 @@ const columns = [
 
 #### Disable Filter Match Highlighting
 
-This feature can be disabled by setting the `enableFilterMatchHighlighting` prop to `false`.
+This feature can be disabled by setting the `enableFilterMatchHighlighting` table option to `false`.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableFilterMatchHighlighting={false}
-/>
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableFilterMatchHighlighting: false,
+});
 ```
 
 View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-filtering-examples)**

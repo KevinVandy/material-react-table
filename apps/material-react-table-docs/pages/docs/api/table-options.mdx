@@ -44,12 +44,17 @@ Here is a list of all the table options that you can pass to the `useMaterialRea
 
 ```jsx
 const table = useMaterialReactTable({
-  // all the options that you can pass here
+  // all the options that you can pass here (recommended)
 });
 
-//Note: you can also pass table options directly to the MaterialReactTable component instead of the useMaterialReactTable hook
-//But this will not be encouraged as it will be deprecated in the future
-return <MaterialReactTable table={table} />;
+//or all of the props that could be passed to `<MaterialReactTable />` IF not using `useMaterialReactTable` hook
+return (
+  <MaterialReactTable
+  // all of the props that could be passed here if no `table` prop is passed
+  />
+);
+
+return <MaterialReactTable table={table} />; //recommended
 ```
 
 <TableOptionsTable />

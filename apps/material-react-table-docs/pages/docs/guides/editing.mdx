@@ -137,7 +137,7 @@ const table = useMaterialReactTable({
 
 The `"cell"` editDisplayMode is a bit simpler visually. By default, a user can double-click a cell to activate editing mode, but only for that cell.
 
-Then there is a bit of work for you to do to wire up either the `onBlur`, `onChange`, etc., events yourself in order to save the table data. This can be done in the `muiEditTextFieldProps` prop or column definition option.
+Then there is a bit of work for you to do to wire up either the `onBlur`, `onChange`, etc., events yourself in order to save the table data. This can be done in the `muiEditTextFieldProps` table option or column definition option.
 
 ```jsx
 const columns = [
@@ -229,7 +229,7 @@ const table = useMaterialReactTable({
 
 ### Customizing Editing Components
 
-You can pass any Material UI TextField Props with the `muiEditTextFieldProps` prop.
+You can pass any Material UI TextField Props with the `muiEditTextFieldProps` table option.
 
 ```jsx
 const columns = [
@@ -249,7 +249,7 @@ const columns = [
 
 You can add validation to the editing components by using the `muiEditTextFieldProps` events. You can write your validation logic and hook it up to the `onBlur`, `onChange`, etc., events, then set the `error` and `helperText` props accordingly.
 
-If you are implementing validation, you may also need to use the `onEditingRowCancel` prop to clear the validation error state.
+If you are implementing validation, you may also need to use the `onEditingRowCancel` table option to clear the validation error state.
 
 ```jsx
 const [validationErrors, setValidationErrors] = useState({});
@@ -292,7 +292,18 @@ const columns = [
   {
     accessorKey: 'email',
     header: 'Email',
-    Edit: ({ cell, column, table }) => <Autocomplete />,
+    Edit: ({ cell, column, row, table }) => {
+      const onBlur = (event) => {
+        row._valueCache[column.id] = event.target.value;
+        if (isCreating) {
+          setCreatingRow(row);
+        } else if (isEditing) {
+          setEditingRow(row);
+        }
+      };
+
+      return <CustomInput onBlur={onBlur} />;
+    },
   },
 ];
 ```
@@ -302,17 +313,18 @@ const columns = [
 You can customize the actions column in a few different ways in the `displayColumnDefOptions` prop's `'mrt-row-actions'` section.
 
 ```jsx
-<MaterialReactTable
-  data={data}
-  columns={columns}
-  displayColumnDefOptions={{
+const table = useMaterialReactTable({
+  columns,
+  data,
+  displayColumnDefOptions: {
     'mrt-row-actions': {
       header: 'Edit', //change "Actions" to "Edit"
+      size: 120,
       //use a text button instead of a icon button
       Cell: ({ row, table }) => (
         <Button onClick={() => table.setEditingRow(row)}>Edit Customer</Button>
       ),
     },
-  }}
-/>
+  },
+});
 ```

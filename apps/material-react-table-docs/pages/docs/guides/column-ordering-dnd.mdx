@@ -44,7 +44,7 @@ Whether you just want to change the default column order in your table or let co
 
 ### Change the Default Column Order
 
-By Default, Material React Table will order the columns in the order they are defined in the `columns` prop. And Display Columns such as Actions, Selection, Expansion, etc., get added to either the beginning or the end of the table. You can customize all of this by defining your own `columnOrder` State and passing it either to the `initialState` or `state` props.
+By Default, Material React Table will order the columns in the order they are defined in the `columns` table option. And Display Columns such as Actions, Selection, Expansion, etc., get added to either the beginning or the end of the table. You can customize all of this by defining your own `columnOrder` State and passing it either to the `initialState` or `state` props.
 
 The Column Order State is an array of string column ids, that come from the ids or accessorKeys that you defined in your column definitions.
 
@@ -70,7 +70,7 @@ return <MaterialReactTable table={table} />;
 
 ### Manage Column Order State
 
-If you need to manage the `columnOrder` state yourself, you can do so in the `state` prop and `onColumnOrderChange` callback, but you will also need to initialize the `columnOrder` state yourself.
+If you need to manage the `columnOrder` state yourself, you can do so in the `state` table option and `onColumnOrderChange` callback, but you will also need to initialize the `columnOrder` state yourself.
 
 ```jsx
 const columns = [
@@ -97,7 +97,7 @@ return <MaterialReactTable table={table} />;
 
 ### Enable Column Ordering with Drag and Drop
 
-Material React Table has a built-in drag and drop feature to reorder columns. This feature is enabled by passing the `enableColumnOrdering` prop.
+Material React Table has a built-in drag and drop feature to reorder columns. This feature is enabled by passing the `enableColumnOrdering` table option.
 
 The ability for a column to have a drag and drop handle can be specified by setting the `enableColumnOrdering` option on the column.
 
