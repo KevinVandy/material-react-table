@@ -21,7 +21,6 @@ for file in *; do
 
       ## Update dependency versions
       npx npm-check-updates -u
-      npx npm-check-updates -u material-react-table -t greatest
 
       # Run npm install
       npm install --package-lock-only --force
