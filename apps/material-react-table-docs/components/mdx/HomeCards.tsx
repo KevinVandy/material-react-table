@@ -189,6 +189,8 @@ export const HomeCards = () => {
               Column Pinning
             </AnchorLink>
             ,{' '}
+            <AnchorLink href="/docs/guides/row-pinning">Row Pinning</AnchorLink>
+            ,{' '}
             <AnchorLink href="/docs/guides/row-numbers">Row Numbers</AnchorLink>
             ,{' '}
             <AnchorLink href="/docs/guides/click-to-copy">
