@@ -17,16 +17,16 @@ This should be an easy to moderate upgrade for most developers. The only breakin
 
 ### New Feature Highlights
 
-1. The new optional, but recommended `useMaterialReactTable` hook that allows you to create the `table` instance in your own scope.
-2. Greatly improved Editing and new Creating features.
-3. New Row Pinning Features
-4. New Column Filtering `'popover'` display mode to give a more "excel-like" filtering experience.
-5. New Autocomplete, Date, and Date Range Filter variants
-6. New Pagination UI options
-7. New Alert Banner UI options and overrides available
-8. New Loading Overlay UI
-9. Improved Table Head Cell Default Styles
-10. Improved Column Sizing and Layout Modes for Column Resizing features
+1. New optional but recommended `useMaterialReactTable` hook that allows you to create the `table` instance in your own scope
+2. Greatly improved editing and new creating features
+3. New row pinning Features
+4. New column filtering `'popover'` display mode to give a more "Excel-like" filtering experience
+5. New autocomplete, date, and date range filter variants
+6. New pagination UI options
+7. New alert banner UI options and overrides available
+8. New loading overlay UI
+9. Improved table head cell default styles
+10. Improved column sizing and layout modes for column resizing features
 11. All internal MRT components are now exported for custom headless use cases
 12. New optional `createMRTColumnHelper` utility function for better `TValue`/`cell.getValue()` type inference
 
@@ -34,7 +34,7 @@ See the full [changelog](/changelog#version-2.0.0---10-27-2023) for more details
 
 ### Upgrade Dependencies
 
-To upgrade (and upgrade all other MUI dependencies), just run the install commands again.
+To upgrade (and upgrade all other MUI dependencies), simply run the install commands again.
 
 <InstallCommand />
 
@@ -46,7 +46,7 @@ Your `package.json` should have `"material-react-table": "^2.x.x"` as a dependen
 
 <InstallCommand packagesString="@mui/x-date-pickers" />
 
-- If you use the date picker features, you will also need to import the `LocalizationProvider` from `@mui/x-date-pickers` and wrap your app in it. See [here](https://mui.com/x/react-date-pickers/adapters-locale/) for more details.
+- If you use the date picker features, you will also need to import the `LocalizationProvider` from `@mui/x-date-pickers` and wrap your app in it. Click [here](https://mui.com/x/react-date-pickers/adapters-locale/) for more details.
 
 ```jsx
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -71,7 +71,7 @@ export const App = () => {
 + import { MaterialReactTable, useMaterialReactTable } from 'material-react-table'
 ```
 
-- There is no longer a `tableInstanceRef` prop. It has been replaced by the `useMaterialReactTable` hook, which is way easier to use. It will also be recommended that all table options should be passed to the new `useMaterialReactTable` hook instead as props to the `<MaterialReactTable />` component. See [below](#usematerialreacttable) for more details.
+- The `tableInstanceRef` prop has been replaced by the `useMaterialReactTable` hook, which is much easier to use. It is also recommended that all table options be passed to the new `useMaterialReactTable` hook instead as props to the `<MaterialReactTable />` component. See [below](#usematerialreacttable) for more details.
 
 #### Renamed Props/Options
 
@@ -98,9 +98,9 @@ export const App = () => {
 
 ### useMaterialReactTable
 
-Passing all table options as props to `<MaterialReactTable />` will still work, but there is a new and better way to define table options with the `useMaterialReactTable` hook.
+Passing all table options as props to `<MaterialReactTable />` still works, but there now is an improved way to define table options with the `useMaterialReactTable` hook.
 
-For example, here is a classic example for how to use Material React Table in V1 (still works in V2):
+For example, here is a classic example for how to use Material React Table in V1 (still works in v2):
 
 ```jsx
 import { MaterialReactTable } from 'material-react-table';
@@ -120,7 +120,7 @@ export const MyTableComponent = () => {
 };
 ```
 
-But now, you can define all table options in the `useMaterialReactTable`.
+But you can now define all table options in the `useMaterialReactTable`.
 
 ```jsx
 import {
@@ -147,9 +147,9 @@ export const MyTableComponent = () => {
 
 There are a few reasons why having full access to the `table` instance is better than having MRT create it under the hood for you.
 
-1. No more need for a confusing `tableInstanceRef` prop that doesn't properly cause re-renders when the table instance changes. Now any component that consumes the `table` instance will properly re-render when the table instance changes.
+1. There is no longer a need for a confusing `tableInstanceRef` prop that doesn't properly cause re-renders when the table instance changes. Now, any component that consumes the `table` instance will properly re-render when the table instance changes.
 
-2. Allows for you to not need to use all of Material React Table's components. For example, if you only want to use the `Table` component with no TableContainer or Toolbars, you can simply import a different component from Material React Table.
+2. It allows you to not have to use all of Material React Table's components. For example, if you only want to use the `Table` component with no TableContainer or Toolbars, you can simply import a different component from Material React Table.
 
 ```jsx
 import { MRT_Table, useMaterialReactTable } from 'material-react-table';
@@ -173,13 +173,13 @@ export const MyTableComponent = () => {
 
 ### Column Sizing and Layout Modes
 
-There are some new column sizing behaviors to be aware of in V2.
+There are some new column sizing behaviors to be aware of in v2.
 
 In addition to the `"semantic"` and `"grid"` layoutModes, there is now a new `"grid-no-grow"` layoutMode that is automatically enabled by default when `enableColumnResizing` is `true`.
 
-This new layoutMode will keep columns in a fixed width, and columns will not grow to fill any remaining horizontal space. This is probably a very welcome change for most, but you can revert the behavior back to the old behavior by setting the layoutMode table option to `"grid"` or `"semantic"` manually.
+This new layoutMode keeps columns in a fixed width, and columns will not grow to fill any remaining horizontal space. This is likely a very welcome change for most, but you can revert the behavior back to the old behavior by setting the layoutMode table option to `"grid"` or `"semantic"` manually.
 
-If you were previously trying to accomplish the same `"grid-no-grow"` by setting the flex-grow CSS to 0 in V1, it is recommended that you now remove that CSS in favor of just using the new `"grid-no-grow"` layoutMode, which will also add an invisible `"mrt-row-spacer"` display column that makes the row borders look better.
+If you were previously trying to accomplish the same `"grid-no-grow"` by setting the flex-grow CSS to 0 in V1, it is recommended that you now remove that CSS in favor of simply using the new `"grid-no-grow"` layoutMode, which will also add an invisible `"mrt-row-spacer"` display column that makes the row borders look better.
 
 ```diff
 - muiTableHeadCellProps={{
