@@ -13,6 +13,8 @@ import { InstallCommand } from '../components/mdx/InstallCommand';
 
 ## Migrating to Material React Table V2 from V1
 
+This should be an easy to moderate upgrade for most developers. The only breaking changes have to do with the removed `tableInstanceRef`, some renamed props/options, and new column sizing behaviors.
+
 ### New Feature Highlights
 
 1. The new optional, but recommended `useMaterialReactTable` hook that allows you to create the `table` instance in your own scope.
@@ -30,9 +32,17 @@ import { InstallCommand } from '../components/mdx/InstallCommand';
 
 See the full [changelog](/changelog#version-2.0.0---10-27-2023) for more details.
 
+### Upgrade Dependencies
+
+To upgrade (and upgrade all other MUI dependencies), just run the install commands again.
+
+<InstallCommand />
+
+Your `package.json` should have `"material-react-table": "^2.x.x"` as a dependency.
+
 ### Breaking Changes
 
-- `@mui/x-date-pickers v >=6.15.0` is now a required peer dependency. Install it with:
+- `@mui/x-date-pickers v >=6.15.0` is now a required peer dependency. If not already installed from the previous step, install it with:
 
 <InstallCommand packagesString="@mui/x-date-pickers" />
 
@@ -160,5 +170,31 @@ export const MyTableComponent = () => {
   );
 };
 ```
+
+### Column Sizing and Layout Modes
+
+There are some new column sizing behaviors to be aware of in V2.
+
+In addition to the `"semantic"` and `"grid"` layoutModes, there is now a new `"grid-no-grow"` layoutMode that is automatically enabled by default when `enableColumnResizing` is `true`.
+
+This new layoutMode will keep columns in a fixed width, and columns will not grow to fill any remaining horizontal space. This is probably a very welcome change for most, but you can revert the behavior back to the old behavior by setting the layoutMode table option to `"grid"` or `"semantic"` manually.
+
+If you were previously trying to accomplish the same `"grid-no-grow"` by setting the flex-grow CSS to 0 in V1, it is recommended that you now remove that CSS in favor of just using the new `"grid-no-grow"` layoutMode, which will also add an invisible `"mrt-row-spacer"` display column that makes the row borders look better.
+
+```diff
+- muiTableHeadCellProps={{
+-   sx: {
+-     flex: '0 0 auto',
+-   },
+- }}
+- muiTableBodyCellProps={{
+-   sx: {
+-     flex: '0 0 auto',
+-   },
+- }}
++ layoutMode="grid-no-grow"
+```
+
+<br />
 
 Is anything missing from this v2 migration guide? Make a PR or join the [Discord](https://discord.gg/5wqyRx6fnm) to discuss.
