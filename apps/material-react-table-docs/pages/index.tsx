@@ -25,29 +25,14 @@ import { Contributors } from '../components/mdx/Contributors';
 const HomePage = () => {
   return (
     <>
-      <Alert sx={{ mt: '2rem' }} severity="info" variant="filled">
-        <AlertTitle>
-          MRT V2 is now in <b>Beta!</b>
-        </AlertTitle>
-        <Typography variant='overline'>October 13, 2023</Typography>
-        <Typography>
-          Material React Table V2 is now in beta. The library is mostly stable
-          and ready for use, but the documentation is still being updated.
-        </Typography>
+      <Alert sx={{ mt: '2rem' }} severity="warning" variant="outlined">
+        <AlertTitle>MRT V2 was released October 27, 2023.</AlertTitle>
         <Typography>
           <Link
-            href="https://v2.material-react-table.com/migrating-to-v2"
+            href="https://material-react-table.com/migrating-to-v2"
             passHref
           >
-            <MuiLink
-              sx={{
-                textDecorationColor: (theme) =>
-                  theme.palette.primary.contrastText,
-                color: (theme) => theme.palette.primary.contrastText,
-              }}
-              target="_blank"
-              rel="noopener"
-            >
+            <MuiLink target="_blank" rel="noopener">
               View the V2 migration docs here
             </MuiLink>
           </Link>
