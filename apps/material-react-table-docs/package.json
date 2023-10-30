@@ -26,7 +26,7 @@
     "@mui/material": "^5.14.15",
     "@mui/x-date-pickers": "^6.17.0",
     "@next/mdx": "^14.0.0",
-    "@tanstack/react-query": "^5.0.5",
+    "@tanstack/react-query": "^5.4.3",
     "@types/mdx": "^2.0.9",
     "dayjs": "^1.11.10",
     "export-to-csv": "^1.2.1",

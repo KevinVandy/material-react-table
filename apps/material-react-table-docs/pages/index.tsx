@@ -32,7 +32,15 @@ const HomePage = () => {
           <Link href="/migrating-to-v2" passHref legacyBehavior>
             <MuiLink>V2 Migration Guide</MuiLink>
           </Link>{' '}
-          to learn how to upgrade.
+          to learn how to upgrade or view the{' '}
+          <Link
+            href="/blog/announcing-material-react-table-v2"
+            passHref
+            legacyBehavior
+          >
+            <MuiLink>Blog Post</MuiLink>
+          </Link>{' '}
+          announcing V2.
         </Alert>
         <Typography
           sx={{
