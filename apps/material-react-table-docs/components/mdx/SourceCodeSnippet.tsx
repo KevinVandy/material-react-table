@@ -1,22 +1,26 @@
-import { useState } from 'react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { Highlight, themes } from 'prism-react-renderer';
 import {
-  ToggleButton,
-  ToggleButtonGroup,
-  useTheme,
-  styled,
-  IconButton,
-  Tooltip,
-  Divider,
-  useMediaQuery,
+  Alert,
+  AlertTitle,
   Box,
   Button,
+  Collapse,
+  Divider,
+  IconButton,
+  Link as MuiLink,
+  MenuItem,
   Paper,
   Select,
-  MenuItem,
   TextField,
+  ToggleButton,
+  ToggleButtonGroup,
+  Tooltip,
   rgbToHex,
-  Collapse,
+  styled,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import CodeIcon from '@mui/icons-material/Code';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -78,6 +82,21 @@ export const SourceCodeSnippet = ({
   >('ts');
   const [isCopied, setIsCopied] = useState(false);
   const [isFullCode, setIsFullCode] = useState(false);
+  const [showV2Alert, setShowV2Alert] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const v2AlertDismissed = localStorage.getItem('v2AlertDismissed');
+    if (!v2AlertDismissed) {
+      setShowV2Alert(true);
+    }
+  }, []);
+
+  const handleDismissV2Alert = () => {
+    localStorage.setItem('v2AlertDismissed', 'true');
+    setShowV2Alert(false);
+    plausible('dismiss-v2-alert');
+  };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(
@@ -240,6 +259,31 @@ export const SourceCodeSnippet = ({
         </>
       )}
       <div>
+        <Collapse in={showV2Alert}>
+          <Alert
+            onClose={handleDismissV2Alert}
+            sx={{ mb: '1rem' }}
+            severity="info"
+            variant="outlined"
+            closeText="Don't show again"
+          >
+            <AlertTitle>This example is written for MRT V2.</AlertTitle>
+            If your app is still using MRT V1, either{' '}
+            <Link href="/migrating-to-v2" passHref legacyBehavior>
+              <MuiLink>Upgrade to MRT V2</MuiLink>
+            </Link>{' '}
+            or use the{' '}
+            <MuiLink
+              href="https://v1.material-react-table.com"
+              rel="noopener"
+              target="_blank"
+              onClick={() => plausible('version-select')}
+            >
+              V1 Docs
+            </MuiLink>{' '}
+            instead. (useMaterialReactTable only exists in V2)
+          </Alert>
+        </Collapse>
         <Box
           sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', width: '100%' }}
         >
@@ -293,6 +337,7 @@ export const SourceCodeSnippet = ({
                     value="js"
                     onClick={() => {
                       setCodeTab('legacy');
+                      plausible('toggle-to-legacy');
                     }}
                     selected={codeTab === 'legacy'}
                     sx={{ textTransform: 'none' }}
@@ -304,6 +349,7 @@ export const SourceCodeSnippet = ({
                   <ToggleButton
                     onClick={() => {
                       setCodeTab('api');
+                      plausible('toggle-to-api');
                     }}
                     value="api"
                     selected={codeTab === 'api'}
@@ -315,6 +361,7 @@ export const SourceCodeSnippet = ({
                 <ToggleButton
                   onClick={() => {
                     setCodeTab('sandbox');
+                    plausible('toggle-to-sandbox');
                   }}
                   value="sandbox"
                   selected={codeTab === 'sandbox'}
