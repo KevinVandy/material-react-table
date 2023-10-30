@@ -50,6 +50,7 @@ const Example = () => {
         },
       },
       'mrt-row-numbers': {
+        enableColumnDragging: true,
         enableColumnOrdering: true, //turn on some features that are usually off
         enableResizing: true,
         muiTableHeadCellProps: {
