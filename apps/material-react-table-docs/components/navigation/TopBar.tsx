@@ -60,17 +60,6 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
   const { isLightTheme, setIsLightTheme } = useThemeContext();
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      docsearch({
-        appId: '1W9SWN5ZAH',
-        apiKey: '680b219eaef484622046bf76cef8544a',
-        indexName: 'material-react-table',
-        container: '#docsearch',
-      });
-    }
-  }, []);
-
-  useEffect(() => {
     if (typeof window === 'undefined') return;
     if (isMounted.current && isXLDesktop) {
       try {
@@ -91,28 +80,6 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
 
   return (
     <>
-      <style global jsx>
-        {`
-          :root {
-            --docsearch-primary-color: #1565c0;
-            --docsearch-highlight-color: #1565c0;
-            --docsearch-logo-color: #1565c0;
-            ${!isLightTheme
-              ? `--docsearch-container-background: rgba(11, 11, 11, 0.8);
-         --docsearch-footer-background: #222;
-         --docsearch-hit-background: #333;
-         --docsearch-hit-color: #fff;
-         --docsearch-hit-shadow: none;
-         --docsearch-modal-background: #222;
-         --docsearch-modal-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-         --docsearch-searchbox-background: #000;
-         --docsearch-searchbox-focus-background: #000;
-         --docsearch-text-color: #fff;
-        `
-              : ''}
-          }
-        `}
-      </style>
       <AppBar position="fixed">
         <Toolbar variant="dense">
           <Box display="flex">
@@ -171,14 +138,9 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
               </Select>
             </ThemeProvider>
           </Box>
-          <Box
-            onClick={() => plausible('open-search')}
-            id="docsearch"
-            sx={{
-              display: 'grid',
-              width: isDesktop ? '400px' : !isTablet ? '250px' : undefined,
-            }}
-          />
+          <Typography variant="overline" color="warning.main" mr="12%">
+            Legacy V1 Docs
+          </Typography>
           <Box
             sx={{
               display: 'flex',

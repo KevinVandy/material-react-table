@@ -1,12 +1,28 @@
 import Head from 'next/head';
 import { FAQs } from '../../../components/mdx/FAQs';
+import { Link as MuiLink, Alert, AlertTitle, Typography } from '@mui/material';
 
 <Head>
-  <title>Installation - Material React Table Docs</title>
+  <title>Installation - Material React Table V1 Docs</title>
   <meta name="description" content="How to install Material React Table" />
 </Head>
 
 ## Installation
+
+<Alert sx={{ mt: '2rem' }} severity="warning" variant="outlined">
+  <AlertTitle>MRT V2 was released October 27, 2023.</AlertTitle>
+  <Typography>
+    {' '}
+    These install instructions are for the old V1 version of Material React Table.
+    <MuiLink
+      href="https://material-react-table.com/getting-started/install"
+      target="_blank"
+      rel="noopener"
+    >
+      View the V2 installation docs
+    </MuiLink>
+  </Typography>
+</Alert>
 
 > `material-react-table` requires **Material UI V5** packages as dependencies in your project.
 >

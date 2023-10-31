@@ -6,7 +6,7 @@ import CustomTopToolbarExample from '../../../examples/custom-top-toolbar';
 import ExternalExample from '../../../examples/external-toolbar';
 
 <Head>
-  <title>Toolbar Customization Guide - Material React Table Docs</title>
+  <title>Toolbar Customization Guide - Material React Table V1 Docs</title>
   <meta
     name="description"
     content="How to customize the Toolbars, add buttons to toolbars, or customize progress bars and alert banners in Material React Table"
@@ -75,7 +75,8 @@ Everything in the toolbars is customizable. You can add your own buttons or chan
 The `renderToolbarInternalActions` prop allows you to redefine the built-in buttons that usually reside in the top right of the top toolbar. You can reorder the icon buttons or even insert your own custom buttons. All of the built-in buttons are available to be imported from 'material-react-table'.
 
 ```tsx
-import { MaterialReactTable, 
+import {
+  MaterialReactTable,
   MRT_ShowHideColumnsButton,
   MRT_FullScreenToggleButton,
 } from 'material-react-table';
@@ -223,7 +224,8 @@ The drawback to this approach is that you will not get all the automatic feature
 If you are using a custom toolbar, you can still import some of the built-in MRT components to use in your custom toolbar. For example, you can import all of the built-in internal toolbar icon buttons components and use them in your custom toolbar.
 
 ```jsx
-import { MaterialReactTable, 
+import {
+  MaterialReactTable,
   MRT_ShowHideColumnsButton, // import the built-in show/hide columns button
   MRT_FullScreenToggleButton, // import the built-in full screen toggle button
 } from 'material-react-table';
