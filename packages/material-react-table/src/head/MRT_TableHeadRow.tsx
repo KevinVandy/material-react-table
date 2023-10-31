@@ -36,7 +36,7 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
       headerGroup,
       table,
     }),
-    rest,
+    ...rest,
   };
 
   return (
