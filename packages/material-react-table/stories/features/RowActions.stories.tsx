@@ -125,6 +125,45 @@ export const RowActionsAndEditingEnabled = () => (
   />
 );
 
+export const RowActionsAndEditingCellEnabled = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    editDisplayMode="cell"
+    enableEditing
+    enableRowActions
+    renderRowActionMenuItems={({ closeMenu, row }) => [
+      <MenuItem
+        key={1}
+        onClick={() => {
+          console.info('View Profile', row);
+          closeMenu();
+        }}
+      >
+        <AccountCircleIcon /> View Profile
+      </MenuItem>,
+      <MenuItem
+        key={2}
+        onClick={() => {
+          console.info('Remove', row);
+          closeMenu();
+        }}
+      >
+        <DeleteIcon /> Remove
+      </MenuItem>,
+      <MenuItem
+        key={3}
+        onClick={() => {
+          console.info('Share', row);
+          closeMenu();
+        }}
+      >
+        <ShareIcon /> Share
+      </MenuItem>,
+    ]}
+  />
+);
+
 export const RowActionsLastColumn = () => (
   <MaterialReactTable
     columns={columns}
