@@ -113,7 +113,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
           }
         `}
       </style>
-      <AppBar position="fixed">
+      <AppBar sx={{ opacity: 0.95 }} position="fixed">
         <Toolbar sx={{ p: '2px 4px' }} disableGutters variant="dense">
           <Box sx={{ display: 'flex' }}>
             {!isDesktop && (

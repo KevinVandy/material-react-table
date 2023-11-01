@@ -55,6 +55,16 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   },
   {
     accessorKey: 'state',
+    filterSelectOptions: [
+      { label: 'AL', value: 'Alabama' },
+      { label: 'AZ', value: 'Arizona' },
+      { label: 'CA', value: 'California' },
+      { label: 'FL', value: 'Florida' },
+      { label: 'GA', value: 'Georgia' },
+      { label: 'NY', value: 'New York' },
+      { label: 'TX', value: 'Texas' },
+    ],
+    filterVariant: 'multi-select',
     header: 'State',
   },
 ];
