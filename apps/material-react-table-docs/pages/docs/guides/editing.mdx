@@ -294,7 +294,7 @@ const columns = [
     header: 'Email',
     Edit: ({ cell, column, row, table }) => {
       const onBlur = (event) => {
-        row._valueCache[column.id] = event.target.value;
+        row._valuesCache[column.id] = event.target.value;
         if (isCreating) {
           setCreatingRow(row);
         } else if (isEditing) {
