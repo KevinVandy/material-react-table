@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
-import { MaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 
 export const data = [
   {
@@ -84,14 +87,14 @@ const Example = () => {
     //end
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableExpanding
-      enableExpandAll //default
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableExpandAll: false, //hide expand all double arrow in column header
+    enableExpanding: true,
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

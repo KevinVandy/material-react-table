@@ -80,9 +80,8 @@ export const SampleCodeSnippet = (props: Props) => {
             style={{
               position: 'relative',
               margin:
-                props.margin ?? props.enableCopyButton !== false
-                  ? '2rem auto'
-                  : 0,
+                props.margin ??
+                (props.enableCopyButton !== false ? '2rem auto' : 0),
               fontSize: '11pt',
               lineHeight: '1.4rem',
             }}
@@ -100,7 +99,7 @@ export const SampleCodeSnippet = (props: Props) => {
                 ...style,
                 minHeight: '3rem',
                 overflowX: 'auto',
-                padding: '1rem 1rem 0 1rem',
+                padding: '0.75rem 1rem 0 1rem',
                 ...props?.style,
               }}
             >

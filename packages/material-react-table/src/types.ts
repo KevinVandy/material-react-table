@@ -424,7 +424,17 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
     LiteralUnion<string & MRT_FilterOption>
   > | null;
   columns?: MRT_ColumnDef<TData, TValue>[];
-  editSelectOptions?: ({ text: string; value: any } | string)[];
+  editSelectOptions?: (
+    | {
+        label?: string;
+        /**
+         * @deprecated use `label` instead
+         */
+        text?: string;
+        value: any;
+      }
+    | string
+  )[];
   editVariant?: 'select' | 'text';
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;
@@ -434,7 +444,17 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
   enableEditing?: ((row: MRT_Row<TData>) => boolean) | boolean;
   enableFilterMatchHighlighting?: boolean;
   filterFn?: MRT_FilterFn<TData>;
-  filterSelectOptions?: ({ text: string; value: any } | string)[];
+  filterSelectOptions?: (
+    | {
+        label?: string;
+        /**
+         * @deprecated use `label` instead
+         */
+        text?: string;
+        value: any;
+      }
+    | string
+  )[];
   filterVariant?:
     | 'autocomplete'
     | 'checkbox'
@@ -694,7 +714,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
       }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableCellElement>>)
     | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableCellElement>>;
   /**
-   * The columns to display in the table. `accessorKey`s or `accessorFn`s must match keys in the `data` prop.
+   * The columns to display in the table. `accessorKey`s or `accessorFn`s must match keys in the `data` table option.
    *
    * See more info on creating columns on the official docs site:
    * @link https://www.material-react-table.com/docs/guides/data-columns
@@ -713,7 +733,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
    */
   data: TData[];
   /**
-   * Instead of specifying a bunch of the same options for each column, you can just change an option in the `defaultColumn` prop to change a default option for all columns.
+   * Instead of specifying a bunch of the same options for each column, you can just change an option in the `defaultColumn` table option to change a default option for all columns.
    */
   defaultColumn?: Partial<MRT_ColumnDef<TData>>;
   /**
@@ -1094,7 +1114,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   rowCount?: number;
-  rowNumberMode?: 'original' | 'static';
+  rowNumberDisplayMode?: 'original' | 'static';
   rowPinningDisplayMode?:
     | 'bottom'
     | 'select-bottom'
@@ -1113,7 +1133,6 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
       }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>)
     | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>;
   selectAllMode?: 'all' | 'page';
-  selectDisplayMode?: 'checkbox' | 'radio' | 'switch';
   /**
    * Manage state externally any way you want, then pass it back into MRT.
    */

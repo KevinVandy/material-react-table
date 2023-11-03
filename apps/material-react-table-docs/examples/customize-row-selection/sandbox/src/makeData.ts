@@ -1,4 +1,13 @@
-export const data = [
+export interface Person {
+  firstName: string;
+  lastName: string;
+  age: number;
+  address: string;
+  city: string;
+  state: string;
+}
+
+export const data: Person[] = [
   {
     firstName: 'Dylan',
     lastName: 'Murray',

@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { Tab, Tabs } from '@mui/material';
 import { SampleCodeSnippet } from './SampleCodeSnippet';
 
-type Tab = 'npm' | 'pnpm' | 'yarn';
+type Tab = 'npm' | 'pnpm' | 'yarn' | 'bun';
 
 const defaultPackagesString =
-  'material-react-table@beta @mui/material @mui/x-date-pickers @mui/icons-material @emotion/react @emotion/styled';
+  'material-react-table @mui/material @mui/x-date-pickers @mui/icons-material @emotion/react @emotion/styled';
 
 export const InstallCommand = ({
   packagesString = defaultPackagesString,
@@ -25,6 +25,7 @@ export const InstallCommand = ({
         <Tab label="NPM" value="npm" />
         <Tab label="PNPM" value="pnpm" />
         <Tab label="Yarn" value="yarn" sx={{ textTransform: 'none' }} />
+        <Tab label="Bun" value="bun" sx={{ textTransform: 'none' }} />
       </Tabs>
       <SampleCodeSnippet
         className="language-bash"
@@ -35,7 +36,9 @@ export const InstallCommand = ({
           ? `npm i ${packagesString}`
           : tab === 'pnpm'
           ? `pnpm add ${packagesString}`
-          : `yarn add ${packagesString}`}
+          : tab === 'yarn'
+          ? `yarn add ${packagesString}`
+          : `bun add ${packagesString}`}
       </SampleCodeSnippet>
     </>
   );

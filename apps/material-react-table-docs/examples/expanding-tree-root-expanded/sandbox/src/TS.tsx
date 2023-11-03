@@ -3,6 +3,7 @@ import {
   MaterialReactTable,
   type MRT_ExpandedState,
   type MRT_ColumnDef,
+  useMaterialReactTable,
 } from 'material-react-table';
 import { Button } from '@mui/material';
 
@@ -133,18 +134,18 @@ const Example = () => {
     [],
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableExpanding
-      getRowId={(originalRow) => originalRow.id}
-      initialState={{ expanded: initialExpandedRootRows }} //only expand the root rows by default
-      renderTopToolbarCustomActions={({ table }) => (
-        <Button onClick={() => table.resetExpanded()}>Reset Expanded</Button>
-      )}
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableExpanding: true,
+    getRowId: (originalRow) => originalRow.id,
+    initialState: { expanded: initialExpandedRootRows }, //only expand the root rows by default
+    renderTopToolbarCustomActions: ({ table }) => (
+      <Button onClick={() => table.resetExpanded()}>Reset Expanded</Button>
+    ),
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

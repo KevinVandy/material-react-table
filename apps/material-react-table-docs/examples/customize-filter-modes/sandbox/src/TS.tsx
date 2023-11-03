@@ -1,5 +1,9 @@
 import { useMemo } from 'react';
-import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+  type MRT_ColumnDef,
+} from 'material-react-table';
 import { MenuItem } from '@mui/material';
 import { data, type Person } from './makeData';
 
@@ -48,24 +52,22 @@ const Example = () => {
     [],
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableColumnFilterModes //enable changing filter mode for all columns unless explicitly disabled in a column def
-      initialState={{ showColumnFilters: true }} //show filters by default
-      filterFns={{
-        customFilterFn: (row, id, filterValue) => {
-          return row.getValue(id) === filterValue;
-        },
-      }}
-      localization={
-        {
-          filterCustomFilterFn: 'Custom Filter Fn',
-        } as any
-      }
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableColumnFilterModes: true, //enable changing filter mode for all columns unless explicitly disabled in a column def
+    initialState: { showColumnFilters: true }, //show filters by default
+    filterFns: {
+      customFilterFn: (row, id, filterValue) => {
+        return row.getValue(id) === filterValue;
+      },
+    },
+    localization: {
+      filterCustomFilterFn: 'Custom Filter Fn',
+    } as any,
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

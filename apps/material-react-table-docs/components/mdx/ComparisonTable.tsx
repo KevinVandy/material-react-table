@@ -1,5 +1,9 @@
-import { Box, Link } from '@mui/material';
-import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
+import { Box, Link, Paper } from '@mui/material';
+import {
+  MRT_TableContainer,
+  type MRT_ColumnDef,
+  useMaterialReactTable,
+} from 'material-react-table';
 
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
@@ -15,8 +19,10 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
           color:
             cell.getValue() === 'Material React Table'
               ? theme.palette.primary.main
-              : cell.getValue() === 'TanStack Table (React Table)'
+              : cell.getValue() === 'Mantine React Table'
               ? theme.palette.secondary.light
+              : cell.getValue() === 'TanStack Table (React Table)'
+              ? theme.palette.error.main
               : theme.palette.text.primary,
           fontWeight: 'bold',
           textDecoration: 'none',
@@ -64,7 +70,7 @@ const data = [
     library: 'Material React Table',
     libraryLink: '#',
     freeOrLicensed: 'Free MIT',
-    bundleSize: 47,
+    bundleSize: 53,
     bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/material-react-table@latest?color=blue',
     bundlePhobiaLink:
@@ -73,10 +79,22 @@ const data = [
       'Built on top of TanStack Table V8 and Material UI V5, Material React Table (MRT) is a batteries-included React table library that attempts to provide all the table features you need while trying to stay as highly performant and lightweight as possible. Customization is treated as a top priority to let you override any styles you need to change. Initially built in 2022, so it is still somewhat new.',
   },
   {
+    library: 'Mantine React Table',
+    libraryLink: 'https://www.mantine-react-table.com',
+    freeOrLicensed: 'Free MIT',
+    bundleSize: 48,
+    bundlePhobiaImg:
+      'https://badgen.net/bundlephobia/minzip/mantine-react-table@latest?color=blue',
+    bundlePhobiaLink:
+      'https://bundlephobia.com/package/mantine-react-table@latest',
+    description:
+      'Mantine React Table is Material React Table\'s sister library. It was forked from Material React Table and just uses Mantine instead of Material UI. If you want a more "pure" CSS component library to use with MRT, or you are a Tailwind user, then Mantine React Table might actually be a better fit for you.',
+  },
+  {
     library: 'TanStack Table (React Table)',
     libraryLink: 'https://tanstack.com/table',
     freeOrLicensed: 'Free MIT',
-    bundleSize: 13,
+    bundleSize: 14,
     bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/@tanstack/react-table@latest',
     bundlePhobiaLink:
@@ -110,7 +128,7 @@ const data = [
     library: 'MUI X Data Grid MIT/Pro/Premium',
     libraryLink: 'https://mui.com/store/items/mui-x-premium/',
     freeOrLicensed: 'MIT or Paid License',
-    bundleSize: 123,
+    bundleSize: 135,
     bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/@mui/x-data-grid-pro?color=orange',
     bundlePhobiaLink:
@@ -122,7 +140,7 @@ const data = [
     library: 'AG Grid Community/Enterprise',
     libraryLink: 'https://www.ag-grid.com/license-pricing',
     freeOrLicensed: 'MIT or Paid License',
-    bundleSize: 270,
+    bundleSize: 332,
     bundlePhobiaImg:
       'https://badgen.net/bundlephobia/minzip/ag-grid-enterprise?color=red',
     bundlePhobiaLink:
@@ -133,14 +151,11 @@ const data = [
 ];
 
 export const ComparisonTable = () => {
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enablePagination={false}
-      enableColumnActions={false}
-      enableBottomToolbar={false}
-      enableTopToolbar={false}
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableColumnActions: false,
+  });
+
+  return <MRT_TableContainer component={Paper} table={table} />;
 };

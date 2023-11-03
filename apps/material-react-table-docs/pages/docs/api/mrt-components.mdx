@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import OptionsSwitcher from '../../../example-groups/OptionsSwitcher';
 
 <Head>
   <title>{'MRT Components - Material React Table V2 Docs'}</title>
@@ -14,6 +15,21 @@ import Head from 'next/head';
 </Head>
 
 ## MRT Components
+
+<OptionsSwitcher
+  links={[
+    {
+      label: 'MRT Components',
+      value: 'mrt-components',
+    },
+    {
+      label: 'MRT Hooks',
+      value: 'mrt-hooks',
+    },
+  ]}
+/>
+
+<br />
 
 In previous versions of `material-react-table`, you only had the option to use the `<MaterialReactTable />` component. Now in version 2, all internal MRT components are exported for you to to optionally use to build up your own custom table components.
 

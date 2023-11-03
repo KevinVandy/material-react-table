@@ -113,7 +113,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
           }
         `}
       </style>
-      <AppBar position="fixed">
+      <AppBar sx={{ opacity: 0.95 }} position="fixed">
         <Toolbar sx={{ p: '2px 4px' }} disableGutters variant="dense">
           <Box sx={{ display: 'flex' }}>
             {!isDesktop && (
@@ -159,7 +159,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
               >
                 <Link
                   legacyBehavior
-                  href={`https://material-react-table.com/${pathname}`}
+                  href={`https://v1.material-react-table.com/${pathname}`}
                 >
                   <MenuItem sx={{ m: 0 }} value="v1">
                     V1

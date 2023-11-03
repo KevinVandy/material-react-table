@@ -135,7 +135,8 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
         <>
           <Typography
             align="center"
-            sx={{ mb: 0, minWidth: '8ch', mx: '4px' }}
+            component="span"
+            sx={{ m: '0 4px', minWidth: '8ch' }}
             variant="body2"
           >{`${
             lastRowIndex === 0 ? 0 : (firstRowIndex + 1).toLocaleString()

@@ -7,7 +7,7 @@ import AggregationMultiExample from '../../../examples/aggregation-multi';
 
 <Head>
   <title>
-    {'Aggregation and Grouping Feature Guide - Material React Table V2 Docs'}
+    {'Aggregation and Grouping Guide - Material React Table V2 Docs'}
   </title>
   <meta
     name="description"
@@ -52,10 +52,14 @@ Material React Table has built-in grouping and aggregation features. There are o
 
 ### Enable Grouping
 
-To enable grouping, set the `enableGrouping` prop to `true`. This will both add a drag handle button so that columns can be dragged to the dropzone to be grouped and will add an entry column actions menu to group or ungroup a column.
+To enable grouping, set the `enableGrouping` table option to `true`. This will both add a drag handle button so that columns can be dragged to the dropzone to be grouped and will add an entry column actions menu to group or ungroup a column.
 
 ```jsx
-<MaterialReactTable columns={columns} data={data} enableGrouping />
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableGrouping: true,
+});
 ```
 
 #### Disable Grouping Per Column
@@ -84,7 +88,7 @@ return <MaterialReactTable table={table} />;
 
 #### Hide Drag Buttons for Grouping
 
-If you do not want the drag buttons that come with the grouping feature, you can independently disable them without disabling the grouping feature entirely by setting the `enableColumnDragging` prop to `false`.
+If you do not want the drag buttons that come with the grouping feature, you can independently disable them without disabling the grouping feature entirely by setting the `enableColumnDragging` table option to `false`.
 
 ```jsx
 const table = useMaterialReactTable({
@@ -99,7 +103,7 @@ return <MaterialReactTable table={table} />;
 
 ### Group Columns by Default
 
-If you want columns to be grouped by default, you can set the `grouping` state in either the `initialState` or `state` prop.
+If you want columns to be grouped by default, you can set the `grouping` state in either the `initialState` or `state` table option.
 
 ```jsx
 const table = useMaterialReactTable({
@@ -114,7 +118,7 @@ return <MaterialReactTable table={table} />;
 
 ### Expand Grouped Rows by Default
 
-In addition to grouping columns by default, you may also want those grouped rows to be expanded and visible by default, too. You can do this by setting the `expanded` state to `true` in either the `initialState` or `state` prop.
+In addition to grouping columns by default, you may also want those grouped rows to be expanded and visible by default, too. You can do this by setting the `expanded` state to `true` in either the `initialState` or `state` table option.
 
 ```jsx
 const table = useMaterialReactTable({

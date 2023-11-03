@@ -1,5 +1,9 @@
 import { useMemo } from 'react';
-import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+  type MRT_ColumnDef,
+} from 'material-react-table';
 
 export type Person = {
   id: number;
@@ -30,9 +34,9 @@ const Example = () => {
         header: 'Gender',
         filterFn: 'equals',
         filterSelectOptions: [
-          { text: 'Male', value: 'Male' },
-          { text: 'Female', value: 'Female' },
-          { text: 'Other', value: 'Other' },
+          { label: 'Male', value: 'Male' },
+          { label: 'Female', value: 'Female' },
+          { label: 'Other', value: 'Other' },
         ],
         filterVariant: 'select',
       },
@@ -81,17 +85,17 @@ const Example = () => {
     //end
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      initialState={{ showColumnFilters: true }} //show filters by default
-      muiFilterTextFieldProps={{
-        sx: { m: '0.5rem 0', width: '100%' },
-        variant: 'outlined',
-      }}
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    initialState: { showColumnFilters: true },
+    muiFilterTextFieldProps: {
+      sx: { m: '0.5rem 0', width: '100%' },
+      variant: 'outlined',
+    },
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

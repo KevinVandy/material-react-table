@@ -42,6 +42,9 @@ export const Example = () => {
     enableColumnFilters: false,
     enablePagination: false,
     enableSorting: false,
+    mrtTheme: (theme) => ({
+      baseBackgroundColor: theme.palette.background.default, //change default background color
+    }),
     muiTableBodyRowProps: { hover: false },
     muiTableProps: {
       sx: {
@@ -51,6 +54,8 @@ export const Example = () => {
     muiTableHeadCellProps: {
       sx: {
         border: '1px solid rgba(81, 81, 81, .5)',
+        fontStyle: 'italic',
+        fontWeight: 'normal',
       },
     },
     muiTableBodyCellProps: {

@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
-import { MaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 import { data } from './makeData';
 
 const Example = () => {
@@ -9,11 +12,11 @@ const Example = () => {
         accessorKey: 'firstName',
         header: 'First Name',
       },
+      //column definitions...
       {
         accessorKey: 'lastName',
         header: 'Last Name',
       },
-      //column definitions...
       {
         accessorKey: 'address',
         header: 'Address',
@@ -32,9 +35,13 @@ const Example = () => {
     [],
   );
 
-  return (
-    <MaterialReactTable columns={columns} data={data} enableColumnOrdering />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableColumnOrdering: true,
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

@@ -8,9 +8,7 @@ import ExpandedRootExample from '../../../examples/expanding-tree-root-expanded'
 
 <Head>
   <title>
-    {
-      'Expanding Sub-Rows/Tree Data Feature Guide - Material React Table V2 Docs'
-    }
+    {'Expanding Sub-Rows/Tree Data Guide - Material React Table V2 Docs'}
   </title>
   <meta
     name="description"
@@ -57,9 +55,9 @@ Material React Table has support for expanding sub-rows or tree data. This featu
 
 ### Enable Expanding Sub-Rows
 
-To enable expanding sub-rows, you must first set the `enableExpanding` prop to `true`.
+To enable expanding sub-rows, you must first set the `enableExpanding` table option to `true`.
 
-However, your data must also be formatted in a way to allow for expanding rows that are in some way related to each other. By default, Material React Table will look for a special `subRows` property on each row of your data and treat any array of rows that it finds as the sub-rows for that row. You can customize or override this behavior by passing a custom `getSubRows` prop.
+However, your data must also be formatted in a way to allow for expanding rows that are in some way related to each other. By default, Material React Table will look for a special `subRows` property on each row of your data and treat any array of rows that it finds as the sub-rows for that row. You can customize or override this behavior by passing a custom `getSubRows` table option.
 
 ```jsx
 const data = [
@@ -75,42 +73,42 @@ const data = [
   },
 ];
 
-return (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    enableExpanding
-    getSubRows={(originalRow) => originalRow.subRows} //default, can customize
-  />
-);
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableExpanding: true,
+  getSubRows: (originalRow) => originalRow.subRows, //default, can customize
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 <EnableExample />
 
 ### Expand All Rows Button
 
-By default, Material React Table will show the expand all button in the expand column header. You can disable this by setting the `enableExpandAll` prop to `false`.
+By default, Material React Table will show the expand all button in the expand column header. You can disable this by setting the `enableExpandAll` table option to `false`.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableExpanding
-  enableExpandAll={false} //hide expand all button in header
-/>
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableExpanding: true,
+  enableExpandAll: false, //hide expand all button in header
+});
 ```
 
 ### Expanded Rows Pagination Behavior
 
-By default, Material React Table will treat expanded sub-rows the same as any other row when it comes to pagination. This means that some expanded rows may be on the next page. You can change this behavior by setting the `paginateExpandedRows` prop to `false`.
+By default, Material React Table will treat expanded sub-rows the same as any other row when it comes to pagination. This means that some expanded rows may be on the next page. You can change this behavior by setting the `paginateExpandedRows` table option to `false`.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableExpanding
-  paginateExpandedRows={false} //expanded rows will be on the same page as their parent row
-/>
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableExpanding: true,
+  paginateExpandedRows: false, //expanded rows will be on the same page as their parent row
+});
 ```
 
 ### Expanded Leaf Row Filtering Behavior
@@ -119,32 +117,30 @@ If you are using the [filtering features](/docs/guides/column-filtering) alongsi
 
 #### Filter From Leaf Rows
 
-By default, filtering is done from parent rows down (so if a parent row is filtered out, all of its children will be filtered out as well). Setting the `filterFromLeafRows` prop to `true` will cause filtering to be done from leaf rows up (which means parent rows will be kept so long as one of their child, or grand-child, etc. rows pass the filtering).
+By default, filtering is done from parent rows down (so if a parent row is filtered out, all of its children will be filtered out as well). Setting the `filterFromLeafRows` table option to `true` will cause filtering to be done from leaf rows up (which means parent rows will be kept so long as one of their child, or grand-child, etc. rows pass the filtering).
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableExpanding
-  filterFromLeafRows //search for child rows and preserve parent rows
-/>
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableExpanding: true,
+  filterFromLeafRows: true, //search for child rows and preserve parent rows
+});
 ```
 
 #### Max Leaf Row Filter Depth
 
-> New in `v1.3.11` from TanStack Table v8.6.0 and later!
-
-By default, filtering is done for all rows (max depth of 100), no matter if they are root level parent rows or the child leaf rows of a parent row. Setting the `maxLeafRowFilterDepth` prop to `0` will cause filtering to only be applied to the root level parent rows, with all sub-rows remaining unfiltered. Similarly, setting this option to 1 will cause filtering to only be applied to child leaf rows 1 level deep, and so on.
+By default, filtering is done for all rows (max depth of 100), no matter if they are root level parent rows or the child leaf rows of a parent row. Setting the `maxLeafRowFilterDepth` table option to `0` will cause filtering to only be applied to the root level parent rows, with all sub-rows remaining unfiltered. Similarly, setting this option to 1 will cause filtering to only be applied to child leaf rows 1 level deep, and so on.
 
 This is useful for situations where you want a row's entire child hierarchy to be visible, regardless of the applied filter.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableExpanding
-  maxLeafRowFilterDepth={0} //When filtering root rows, keep all child rows of the passing parent rows
-/>
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableExpanding: true,
+  maxLeafRowFilterDepth: 0, //When filtering root rows, keep all child rows of the passing parent rows
+});
 ```
 
 ### Expand All Rows By Default
@@ -154,12 +150,12 @@ You can manage the initial state of the expanded rows with the `expanded` state 
 For example, you may want all rows to be expanded by default. To do this, you can simply set the `expanded` state option to `true`.
 
 ```jsx
-<MaterialReactTable
-  columns={columns}
-  data={data}
-  enableExpanding
-  initialState={{ expanded: true }} //all rows expanded by default
-/>
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableExpanding: true,
+  initialState: { expanded: true }, //all rows expanded by default
+});
 ```
 
 <ExpandedExample />

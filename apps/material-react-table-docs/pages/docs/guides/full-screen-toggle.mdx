@@ -3,9 +3,7 @@ import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 
 <Head>
-  <title>
-    {'Full Screen Toggle Feature Guide - Material React Table V2 Docs'}
-  </title>
+  <title>{'Full Screen Toggle Guide - Material React Table V2 Docs'}</title>
   <meta
     name="description"
     content="How to use, customize, or disable the full screen toggle button feature of Material React Table"
@@ -32,17 +30,16 @@ import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable
 
 ### Disable Full Screen Toggle
 
-The full screen toggle button is enabled by default. You can hide it by setting the `enableFullScreenToggle` prop to `false`.
+The full screen toggle button is enabled by default. You can hide it by setting the `enableFullScreenToggle` table option to `false`.
 
 ```jsx
-return (
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableFullScreenToggle: false,
+});
 
-  <MaterialReactTable
-    columns={columns
-    data={data}
-    enableFullScreenToggle={false}
-  />
-);
+return <MaterialReactTable table={table} />;
 ```
 
 ### Change Z-Index of Full Screen Table
@@ -66,7 +63,7 @@ Under the hood in Material React Table V2, when the table is full screen, these 
 }
 ```
 
-If you need to change the `zIndex` of the full screen table, you can do so by passing in a `muiTablePaperProps` prop with a `style` object that has a `zIndex` property.
+If you need to change the `zIndex` of the full screen table, you can do so by passing in a `muiTablePaperProps` table option with a `style` object that has a `zIndex` property.
 
 ```jsx
 muiTablePaperProps: ({ table }) => ({
@@ -77,4 +74,4 @@ muiTablePaperProps: ({ table }) => ({
 });
 ```
 
-> Note: The `sx` prop will not work here because the `style` prop was used internally instead of the `sx` prop for higher specificity.
+> Note: The `sx` table option will not work here because the `style` table option was used internally instead of the `sx` table option for higher specificity.

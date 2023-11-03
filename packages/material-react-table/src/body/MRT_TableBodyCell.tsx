@@ -50,6 +50,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
   const {
     getState,
     options: {
+      columnResizeMode,
       createDisplayMode,
       editDisplayMode,
       enableClickToCopy,
@@ -60,7 +61,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       layoutMode,
       muiSkeletonProps,
       muiTableBodyCellProps,
-      rowNumberMode,
+      rowNumberDisplayMode,
     },
     refs: { editInputRefs },
     setEditingCell,
@@ -118,19 +119,21 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     const isFirstColumn = getIsFirstColumn(column, table);
     const isLastColumn = getIsLastColumn(column, table);
     const isLastRow = numRows && rowIndex === numRows - 1;
+    const showResizeBorder =
+      columnSizingInfo.isResizingColumn === column.id &&
+      columnResizeMode === 'onChange';
 
-    const borderStyle =
-      columnSizingInfo.isResizingColumn === column.id
-        ? `2px solid ${draggingBorderColor} !important`
-        : isDraggingColumn || isDraggingRow
-        ? `1px dashed ${theme.palette.grey[500]} !important`
-        : isHoveredColumn ||
-          isHoveredRow ||
-          columnSizingInfo.isResizingColumn === column.id
-        ? `2px dashed ${draggingBorderColor} !important`
-        : undefined;
+    const borderStyle = showResizeBorder
+      ? `2px solid ${draggingBorderColor} !important`
+      : isDraggingColumn || isDraggingRow
+      ? `1px dashed ${theme.palette.grey[500]} !important`
+      : isHoveredColumn ||
+        isHoveredRow ||
+        columnSizingInfo.isResizingColumn === column.id
+      ? `2px dashed ${draggingBorderColor} !important`
+      : undefined;
 
-    if (columnSizingInfo.isResizingColumn === column.id) {
+    if (showResizeBorder) {
       return { borderRight: borderStyle };
     }
 
@@ -281,7 +284,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
               {...skeletonProps}
             />
           ) : enableRowNumbers &&
-            rowNumberMode === 'static' &&
+            rowNumberDisplayMode === 'static' &&
             column.id === 'mrt-row-numbers' ? (
             rowIndex + 1
           ) : column.id === 'mrt-row-drag' ? (

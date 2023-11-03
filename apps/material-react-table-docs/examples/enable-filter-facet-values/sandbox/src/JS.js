@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
-import { MaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 import { data } from './makeData';
 
 const Example = () => {
@@ -48,14 +51,14 @@ const Example = () => {
     [],
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableFacetedValues
-      initialState={{ showColumnFilters: true }}
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableFacetedValues: true,
+    initialState: { showColumnFilters: true },
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

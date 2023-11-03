@@ -348,3 +348,20 @@ export function createMRTColumnHelper<
     group: (column) => column as MRT_GroupColumnDef<TData>,
   };
 }
+
+export const getValueAndLabel = (
+  option: { label?: string; text?: string; value: string } | string,
+): { label: string; value: string } => {
+  let label: string = '';
+  let value: string = '';
+  if (option) {
+    if (typeof option !== 'object') {
+      label = option;
+      value = option;
+    } else {
+      label = option.label ?? option.text ?? option.value;
+      value = option.value ?? label;
+    }
+  }
+  return { label, value };
+};

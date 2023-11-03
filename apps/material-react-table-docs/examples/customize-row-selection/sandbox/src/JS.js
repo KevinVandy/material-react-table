@@ -1,11 +1,14 @@
 import { useMemo } from 'react';
-import { MaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 import { data } from './makeData';
 
 const Example = () => {
   const columns = useMemo(
+    //column definitions...
     () => [
-      //column definitions...
       {
         accessorKey: 'firstName',
         header: 'First Name',
@@ -30,20 +33,21 @@ const Example = () => {
         accessorKey: 'state',
         header: 'State',
       },
-      //end
     ],
     [],
+    //end
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableSelectAll={false}
-      enableRowSelection={(row) => row.original.age >= 21} //enable row selection conditionally per row
-      muiSelectCheckboxProps={{ color: 'secondary' }}
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableSelectAll: false,
+    enableRowSelection: (row) => row.original.age >= 21, //enable row selection conditionally per row
+    muiSelectCheckboxProps: { color: 'secondary' },
+    positionToolbarAlertBanner: 'head-overlay',
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

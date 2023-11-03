@@ -3,9 +3,7 @@ import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable
 import EnableExample from '../../../examples/enable-sticky-header';
 
 <Head>
-  <title>
-    Sticky Header/Footer Feature Guide - Material React Table V2 Docs
-  </title>
+  <title>Sticky Header/Footer Guide - Material React Table V2 Docs</title>
   <meta
     name="description"
     content="How to use and customize the sticky header feature in Material React Table"
@@ -24,9 +22,9 @@ The sticky header and footer feature allows you to keep the header and footer of
 
 ### Enable Sticky Header
 
-Enabling the sticky header is as simple as setting the `enableStickyHeader` prop to `true`. This will make the header of the table stick to the top and remain visible while scrolling through the table.
+Enabling the sticky header is as simple as setting the `enableStickyHeader` table option to `true`. This will make the header of the table stick to the top and remain visible while scrolling through the table.
 
-When the sticky header is enabled, you will probably also want to give the table a maxHeight so that the table can scroll vertically and keep the header visible. You can do this by styling the table container with the `muiTableContainerProps` prop.
+When the sticky header is enabled, you will probably also want to give the table a maxHeight so that the table can scroll vertically and keep the header visible. You can do this by styling the table container with the `muiTableContainerProps` table option.
 
 > If no maxHeight is specified, the table container will default to a `100vh` maxHeight when `enableStickyHeader` is enabled.
 
@@ -41,7 +39,7 @@ When the sticky header is enabled, you will probably also want to give the table
 
 ### Enable Sticky Footer
 
-Similarly, enabling the sticky footer is as simple as setting the `enableStickyFooter` prop to `true`. This will make the footer of the table stick to the bottom of the table and always be visible, even before the table is scrolled to the bottom.
+Similarly, enabling the sticky footer is as simple as setting the `enableStickyFooter` table option to `true`. This will make the footer of the table stick to the bottom of the table and always be visible, even before the table is scrolled to the bottom.
 
 ```tsx
 <MaterialReactTable columns={columns} data={data} enableStickyFooter />

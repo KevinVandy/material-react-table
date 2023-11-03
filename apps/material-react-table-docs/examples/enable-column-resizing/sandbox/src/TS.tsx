@@ -1,5 +1,9 @@
 import { useMemo } from 'react';
-import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+  type MRT_ColumnDef,
+} from 'material-react-table';
 import { data, type Person } from './makeData';
 
 const Example = () => {
@@ -33,20 +37,20 @@ const Example = () => {
     [],
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      //optionally override the default column widths
-      defaultColumn={{
-        maxSize: 400,
-        minSize: 80,
-        size: 160, //default size is usually 180
-      }}
-      enableColumnResizing
-      columnResizeMode="onChange" //default
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    //optionally override the default column widths
+    defaultColumn: {
+      maxSize: 400,
+      minSize: 80,
+      size: 160, //default size is usually 180
+    },
+    enableColumnResizing: true,
+    columnResizeMode: 'onChange', //default
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

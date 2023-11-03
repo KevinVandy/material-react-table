@@ -1,9 +1,22 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
   MaterialReactTable,
+  useMaterialReactTable,
   type MRT_ColumnDef,
   type MRT_RowSelectionState,
 } from 'material-react-table';
+
+//data definitions...
+interface Person {
+  userId: string;
+  firstName: string;
+  lastName: string;
+  age: number;
+  address: string;
+  city: string;
+  state: string;
+}
+//end
 
 const data = [
   {
@@ -28,56 +41,56 @@ const data = [
 ];
 
 const Example = () => {
-  const columns = useMemo(
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
     //column definitions...
-    () =>
-      [
-        {
-          accessorKey: 'firstName',
-          header: 'First Name',
-        },
-        {
-          accessorKey: 'lastName',
-          header: 'Last Name',
-        },
-        {
-          accessorKey: 'age',
-          header: 'Age',
-        },
-        {
-          accessorKey: 'address',
-          header: 'Address',
-        },
-        {
-          accessorKey: 'city',
-          header: 'City',
-        },
-        {
-          accessorKey: 'state',
-          header: 'State',
-        },
-      ] as MRT_ColumnDef<(typeof data)[0]>[],
+    () => [
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+      {
+        accessorKey: 'age',
+        header: 'Age',
+      },
+      {
+        accessorKey: 'address',
+        header: 'Address',
+      },
+      {
+        accessorKey: 'city',
+        header: 'City',
+      },
+      {
+        accessorKey: 'state',
+        header: 'State',
+      },
+    ],
     [], //end
   );
 
   //optionally, you can manage the row selection state yourself
   const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
 
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableRowSelection: true,
+    getRowId: (row) => row.userId, //give each row a more useful id
+    onRowSelectionChange: setRowSelection, //connect internal row selection state to your own
+    state: { rowSelection }, //pass our managed row selection state to the table to use
+  });
+
+  //do something when the row selection changes...
   useEffect(() => {
-    //do something when the row selection changes...
-    console.info({ rowSelection });
+    console.info({ rowSelection }); //read your managed row selection state
+    // console.info(table.getState().rowSelection); //alternate way to get the row selection state
   }, [rowSelection]);
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableRowSelection
-      getRowId={(row) => row.userId} //give each row a more useful id
-      onRowSelectionChange={setRowSelection} //connect internal row selection state to your own
-      state={{ rowSelection }} //pass our managed row selection state to the table to use
-    />
-  );
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

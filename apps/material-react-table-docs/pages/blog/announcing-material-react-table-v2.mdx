@@ -1,0 +1,234 @@
+import Head from 'next/head';
+import Image from 'next/image';
+import { BlogAuthor } from '../../components/mdx/BlogAuthor';
+import { EthicalAd } from '../../components/mdx/EthicalAd';
+
+<Head>
+  <title>{'Announcing Material React Table V2 - MRT Blog'}</title>
+  <meta
+    name="description"
+    content="Material React Table V2 has been released. This update brings MRT much closer back to its TanStack Table foundation that it is built upon with the introduction of the useMaterialReactTable hook."
+  />
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: 'Announcing Material React Table V2',
+        keywords: [
+          'React',
+          'Material Design',
+          'Material UI',
+          'Datagrid',
+          'NPM',
+        ],
+        wordCount: 1150,
+        datePublished: '2023-10-30',
+        dateModified: '2023-10-30',
+        author: [
+          {
+            '@type': 'Person',
+            name: 'Kevin Van Cott',
+            url: 'https://www.kevinvancott.dev/',
+          },
+        ],
+      }),
+    }}
+  />
+</Head>
+
+## Announcing Material React Table V2
+
+<BlogAuthor publishDate="2023/10/30" />
+
+Material React Table V2 has been released. This update brings MRT much closer back to its TanStack Table foundation that it is built upon with the introduction of the `useMaterialReactTable` hook. Along with this new paradigm, there are also many other new features and improvements.
+
+### MRT is Now a Table Component Library
+
+The first iteration of Material React Table served mostly as a traditional react data-grid library. The `<MaterialReactTable />` component was the only component exported from the library, and it was configurable through its props. Now Material React Table can still be used in this way, but there are now way more options to use MRT that give you much more control over both your UI markup and the logic that drives it.
+
+#### The useMaterialReactTable Hook
+
+Material React Table is built on top of [TanStack Table](https://tanstack.com/table/v8), but MRT was not transferring most of the benefits of TanStack Table to the users of MRT V1. The main advantage of using TanStack Table is that it solves most of the "table logic" for you and gives you simplified apis to build out your table markup how you want to build it.
+
+MRT was originally creating a TanStack Table instance under the hood of of Material React Table that powered most of the internal logic, but MRT users had limited access to this table instance. And, of course, there was just the one `<MaterialReactTable />` component that was exported from the library for the UI. This component was very customizable with all of its exposed `mui*Props`, but advanced customization was often still limited.
+
+```jsx
+//MRT V1 - still works in V2
+import { MaterialReactTable } from 'material-react-table';
+//...
+return (
+  <MaterialReactTable //V1 single component (still available in V2)
+    columns={columns}
+    data={data}
+    enableRowSelection
+    //options...
+  />
+);
+```
+
+Now, MRT gives you the `useMaterialReactTable` hook to create a mui-enhanced TanStack Table instance in your own scope. When you have the full table instance at your disposal, you can do a lot more with it. Read internal state, row models, or calling apis to mutate the table state are now much easier.
+
+```jsx
+//MRT V2
+import {
+  useMaterialReactTable,
+  MaterialReactTable,
+} from 'material-react-table';
+//...
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableRowSelection: true,
+  //options...
+});
+
+console.log(table.getState());
+
+return <MaterialReactTable table={table} />;
+```
+
+Material React Table V1 let you do this to some extent with a `tableInstanceRef` prop, but because a reference to the internal table instance was simply being copied to a React Ref, there were many issues with re-renders not being triggered properly and state not being in sync. Now, the `useMaterialReactTable` hook gives you the real full table instance, so none of these issues exist anymore.
+
+#### MRT Sub components
+
+Internally, most MRT components just need the `table` instance passed to them as a prop to work properly since all state management and logic is in this `table` instance. So, while `<MaterialReactTable />` is the main component that you will still likely use for a pre-built data-grid, now in MRT V2, you can use any of the sub components that make up `<MaterialReactTable />` to build your own custom data-grid mixed with your own UI.
+
+```jsx
+import {
+  useMaterialReactTable,
+  MRT_Table,
+  MRT_TablePagination,
+} from 'material-react-table';
+
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableRowSelection: true,
+  //options...
+});
+
+return (
+  <Box>
+    <Box>Custom Top Toolbar</Box>
+    {/* Lighter weight MRT sub component with no toolbars built in */}
+    <MRT_Table table={table} />
+    {/* Render MRT pagination separately where you want */}
+    <MRT_TablePagination table={table} />
+  </Box>
+);
+```
+
+You can go even further with this and use the `useMaterialReactTable` hook to build 100% of your own custom table markup. This is shown in the new [Custom Headless Example](/docs/examples/custom-headless) in the docs. Here's an abbreviated version of that example:
+
+```jsx
+import {
+  MRT_TableBodyCellValue,
+  flexRender,
+  useMaterialReactTable,
+} from 'material-react-table';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material';
+//...
+
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableRowSelection: true,
+  //options...
+});
+
+// Build your own custom table markup with Material UI components from `table` instance
+return (
+  <TableContainer>
+    <Table>
+      {/* Use your own markup, customize however you want using the power of TanStack Table */}
+      <TableHead>
+        {table.getHeaderGroups().map((headerGroup) => (
+          <TableRow key={headerGroup.id}>
+            {headerGroup.headers.map((header) => (
+              <TableCell align="center" variant="head" key={header.id}>
+                {header.isPlaceholder
+                  ? null
+                  : flexRender(
+                      header.column.columnDef.Header ??
+                        header.column.columnDef.header,
+                      header.getContext(),
+                    )}
+              </TableCell>
+            ))}
+          </TableRow>
+        ))}
+      </TableHead>
+      <TableBody>
+        {table.getRowModel().rows.map((row) => (
+          <TableRow key={row.id} selected={row.getIsSelected()}>
+            {row.getVisibleCells().map((cell) => (
+              <TableCell align="center" variant="body" key={cell.id}>
+                {/* Use MRT's cell renderer that provides better logic than flexRender */}
+                <MRT_TableBodyCellValue cell={cell} table={table} />
+              </TableCell>
+            ))}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  </TableContainer>
+);
+```
+
+At this point, you would almost just be using TanStack Table directly, though you get all of the MRT bonus features and MUI TypeScript friendliness if you use the `useMaterialReactTable` hook instead of the TanStack Table `useReactTable` hook.
+
+You can arguably think of Material React Table as being a gentle introduction to TanStack Table, but being very easy to integrate with Material UI. If you ever want to remove MRT from your project in favor of Vanilla TanStack Table, it will not be that difficult to do.
+
+<EthicalAd id="blog" />
+
+### What Else is New in MRT V2?
+
+Along with this new optional paradigm, there are also some other great new features introduced in Material React Table V2. Here's a quick list of some of the other new features:
+
+- New Row Pinning features
+- New Autocomplete, Date, and Date-Range filter variants
+- New Popover Filter UI available
+- New Pagination UI Options
+- Greatly improved Editing (and creating new rows) features
+- Improved Column Sizing and Resizing behaviors
+- Improved Table Head Cell UI Design
+- New optional `createMRTColumnHelper` utility function for better `TValue`/`cell.getValue()` type inference
+
+See the full [changelog](/changelog#version-2.0.0---10-27-2023) for all new features and changes.
+
+### What's Next for MaterialReactTable?
+
+This release was about 5 months in the making. It probably could have been released a lot faster, but a lot of development time has also gone to Material React Table's sister library, [Mantine React Table](https://www.mantine-react-table.com). Both of these MRT libraries have been leap-frogging each other all year in terms of features and bug fixes. For the most part, both libraries receive the same features, bug fixes, and locales. But these major releases take time, and a lot of time is spent updating the docs and examples. Overall, receiving feedback and fixes from both communities had been a great advantage to both libraries, as most ideas and fixes get copied over to the other library.
+
+There are some new non-breaking features that are being planned for V2 over the next few months.
+
+#### Bundle Size Improvements
+
+I have been exploring how to make MRT have even more lightweight options for its headless mode. I think ideally, MRT could aim to offer solutions with bundle sizes anywhere from 10kb-60kb depending on the complexity needed. Currently, you will see around 42kb - 53kb of bundle size depending on with MRT components you use. This is still great compared to other data-grid libraries that are often 200kb+ in bundle size, but there is still a lot of room for improvement. A separate `useMaterialReactTableLight` hook sounds like it will make a lot of sense. More to come on this soon.
+
+#### Manual Row Virtualization
+
+Currently, if you use the new custom headless paradigm, row virtualization is going to be somewhat hard to implement. I'm exploring adding new easy to use hooks like `useMRTVirtualRows` to bring these features to the custom headless paradigm.
+
+#### Even More Editing Features
+
+Filtering got a big upgrade in the initial release of MRT V2. Editing did too, but even more pre-built edit variants could solve a lot more use cases.
+
+<EthicalAd id="blog" />
+
+### Another New MRT Library?
+
+MUI is coming out with a new component library similar to Material UI called Joy UI. I am personally very interested in creating another fork of MRT built with Joy UI components. No one else has asked for this yet, so we'll see if it happens.
+
+### Get Involved in the Future of MRT
+
+If you like what is happening with Material React Table, consider joining the discussion either in the [Discord](https://discord.gg/5wqyRx6fnm) or [GitHub Discussions](https://github.com/KevinVandy/material-react-table/discussions)

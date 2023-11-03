@@ -26,10 +26,21 @@ const HomePage = () => {
   return (
     <>
       <Stack sx={{ maxWidth: '1200px', m: 'auto' }}>
-        <Alert sx={{ mt: '2rem' }} severity="info" variant="filled">
-          <AlertTitle>Now in Beta!</AlertTitle>
-          Material React Table V2 is now in beta. The library is mostly stable
-          and ready for use, but the documentation is still being updated.
+        <Alert sx={{ mt: '2rem' }} severity="success" variant="outlined">
+          <AlertTitle>MRT Version 2 has been released!</AlertTitle>
+          (October 27, 2023) See the{' '}
+          <Link href="/migrating-to-v2" passHref legacyBehavior>
+            <MuiLink>V2 Migration Guide</MuiLink>
+          </Link>{' '}
+          to learn how to upgrade or view the{' '}
+          <Link
+            href="/blog/announcing-material-react-table-v2"
+            passHref
+            legacyBehavior
+          >
+            <MuiLink>Blog Post</MuiLink>
+          </Link>{' '}
+          announcing V2.
         </Alert>
         <Typography
           sx={{
@@ -42,7 +53,7 @@ const HomePage = () => {
               xl: '5rem',
             },
             fontWeight: 'bold',
-            mt: '5rem',
+            mt: '4rem',
             lineHeight: {
               xs: '2.5rem',
               sm: '3.5rem',
@@ -216,7 +227,7 @@ const HomePage = () => {
           </Link>
         </Box>
         <Box>
-          <InstallCommand centered />
+          <InstallCommand centered variant="fullWidth" />
         </Box>
         <HomeCards />
         <Typography my="2rem" textAlign="center" variant="h3">
@@ -232,7 +243,10 @@ const HomePage = () => {
             gap: '1rem',
           }}
         >
-          <GuideCard title="Best Practices" href="/docs/guides/best-practices" />
+          <GuideCard
+            title="Best Practices"
+            href="/docs/guides/best-practices"
+          />
           <GuideCard title="Table Options" href="/docs/api/table-options" />
           <GuideCard title="Advanced Example" href="docs/examples/advanced" />
           <GuideCard

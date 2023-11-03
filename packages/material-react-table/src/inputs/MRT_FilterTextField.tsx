@@ -21,7 +21,7 @@ import {
   DatePicker,
   type DatePickerProps,
 } from '@mui/x-date-pickers/DatePicker';
-import { parseFromValuesOrFunc } from '../column.utils';
+import { getValueAndLabel, parseFromValuesOrFunc } from '../column.utils';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 import {
   type MRT_Header,
@@ -309,6 +309,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
       </label>
     ) : null,
     inputProps: {
+      'aria-label': filterPlaceholder,
       autoComplete: 'new-password', // disable autocomplete and autofill
       disabled: !!filterChipLabel,
       sx: {
@@ -373,9 +374,13 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
       ) : isAutocompleteFilter ? (
         <Autocomplete
           freeSolo
-          getOptionLabel={(option) => option}
-          onChange={(_e, newValue) => handleChange(newValue)}
-          options={dropdownOptions ?? []}
+          getOptionLabel={(option) => getValueAndLabel(option).label}
+          onChange={(_e, newValue) =>
+            handleChange(getValueAndLabel(newValue).value)
+          }
+          options={
+            dropdownOptions?.map((option) => getValueAndLabel(option)) ?? []
+          }
           {...autocompleteProps}
           renderInput={(builtinTextFieldProps) => (
             <TextField
@@ -407,19 +412,13 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
                   ) : (
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '2px' }}>
                       {(selected as string[])?.map((value) => {
-                        const selectedValue = dropdownOptions?.find((option) =>
-                          option instanceof Object
-                            ? option.value === value
-                            : option === value,
+                        const selectedValue = dropdownOptions?.find(
+                          (option) => getValueAndLabel(option).value === value,
                         );
                         return (
                           <Chip
                             key={value}
-                            label={
-                              selectedValue instanceof Object
-                                ? selectedValue.text
-                                : selectedValue
-                            }
+                            label={getValueAndLabel(selectedValue).label}
                           />
                         );
                       })}
@@ -438,44 +437,33 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
             </MenuItem>,
             ...[
               textFieldProps.children ??
-                dropdownOptions?.map(
-                  (option: { text: string; value: string } | string, index) => {
-                    if (!option) return '';
-                    let value: string;
-                    let text: string;
-                    if (typeof option !== 'object') {
-                      value = option;
-                      text = option;
-                    } else {
-                      value = option.value;
-                      text = option.text;
-                    }
-                    return (
-                      <MenuItem
-                        key={`${index}-${value}`}
-                        sx={{
-                          alignItems: 'center',
-                          display: 'flex',
-                          gap: '0.5rem',
-                          m: 0,
-                        }}
-                        value={value}
-                      >
-                        {isMultiSelectFilter && (
-                          <Checkbox
-                            checked={(
-                              (column.getFilterValue() ?? []) as string[]
-                            ).includes(value)}
-                            sx={{ mr: '0.5rem' }}
-                          />
-                        )}
-                        {text}{' '}
-                        {!columnDef.filterSelectOptions &&
-                          `(${facetedUniqueValues.get(value)})`}
-                      </MenuItem>
-                    );
-                  },
-                ),
+                dropdownOptions?.map((option, index) => {
+                  const { label, value } = getValueAndLabel(option);
+                  return (
+                    <MenuItem
+                      key={`${index}-${value}`}
+                      sx={{
+                        alignItems: 'center',
+                        display: 'flex',
+                        gap: '0.5rem',
+                        m: 0,
+                      }}
+                      value={value}
+                    >
+                      {isMultiSelectFilter && (
+                        <Checkbox
+                          checked={(
+                            (column.getFilterValue() ?? []) as string[]
+                          ).includes(value)}
+                          sx={{ mr: '0.5rem' }}
+                        />
+                      )}
+                      {label}{' '}
+                      {!columnDef.filterSelectOptions &&
+                        `(${facetedUniqueValues.get(value)})`}
+                    </MenuItem>
+                  );
+                }),
             ],
           ]}
         </TextField>

@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
-import { MaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 
 export const data = [
   {
@@ -91,17 +94,17 @@ const Example = () => {
     //end
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableExpandAll={false} //hide expand all double arrow in column header
-      enableExpanding
-      filterFromLeafRows //apply filtering to all rows instead of just parent rows
-      initialState={{ expanded: true }} //expand all rows by default
-      paginateExpandedRows={false} //When rows are expanded, do not count sub-rows as number of rows on the page towards pagination
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableExpandAll: false, //hide expand all double arrow in column header
+    enableExpanding: true,
+    filterFromLeafRows: true, //apply filtering to all rows instead of just parent rows
+    initialState: { expanded: true }, //expand all rows by default
+    paginateExpandedRows: false, //When rows are expanded, do not count sub-rows as number of rows on the page towards pagination
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

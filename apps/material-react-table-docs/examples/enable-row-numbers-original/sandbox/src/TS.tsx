@@ -1,5 +1,9 @@
 import { useMemo } from 'react';
-import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+  type MRT_ColumnDef,
+} from 'material-react-table';
 import { data, type Person } from './makeData';
 
 const Example = () => {
@@ -31,14 +35,14 @@ const Example = () => {
     //end
   );
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableRowNumbers
-      rowNumberMode="original" //default
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableRowNumbers: true,
+    rowNumberDisplayMode: 'original',
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 export default Example;

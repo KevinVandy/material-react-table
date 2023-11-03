@@ -8,10 +8,79 @@ import Head from 'next/head';
   />
 </Head>
 
+## Changelog
+
+### Version 2
+
+#### Version 2.0.2 - 11-01-2023
+
+- Fixed bug with popover filters null ref focus
+
+#### Version 2.0.1 - 10-31-2023
+
+- Fixed bug where edit row action menu was created for all editDisplayModes
+- Fixed rest spread on table head row
+- Changed pagination text to a span instead of with hardcoded 0 margin and padding
+
+#### Version 2.0.0 - 10-27-2023
+
+- Made `MaterialReactTable` a named export instead of a default export.
+- Made `@mui/x-date-pickers` a required peer dependency.
+- Added new `useMaterialReactTable` hook to replace the need for the `tableInstanceRef` prop.
+- Now exporting all `MRT_*` sub-components and utility functions from `material-react-table` package to allow for easier building of custom UIs in headless mode.
+- Added `createMRTColumnHelper` utility function to help with creating columns with slightly more type-safety.
+- Added new `mrtTheme` table option to allow for changing some basic mui theme colors that are hard to target with CSS or the mui theme provider.
+- Added new `layoutMode: 'grid-no-grow'` option for better column resizing behavior.
+- Improved column resizing UI.
+- Added new `columnFilterDisplayMode` option to allow for different filter UIs.
+- Added new `createDisplayMode` table option to allow for different create/editing UIs. Added new functionality for creating new rows in the table.
+- Renamed `editMode` prop to `editDisplayMode` table option.
+- Added new `paginationDisplayMode` option to allow for different pagination UIs.
+- Added new `rowPinningDisplayMode` table option and row pinning features.
+- Added new `"autocomplete"` filterVariant.
+- Added new `"date"` filterVariant.
+- Added new `"date-range"` filterVariant.
+- Added new loading overlay UI features when `isLoading` or `showLoadingOverlay` are true Progress bars no longer show when `isLoading` is true.
+- Changed the default sort icon and show it as visible with a low opacity by default in table header cells.
+- Changed the filter label icon to show before the sort icon in table header cells.
+- Changed the default global filter search box UI to be compact and outlined.
+- Changed edit text field UI to be more compact by default.
+- Changed the default rowNumberDisplayMode to `"static"`.
+- Changed how the full screen table UI works internally. (No more mui full screen dialog, just simple CSS)
+- Upgraded to TanStack Table `v8.10.7`
+- Upgraded to TanStack Virtual `v3.0.0-beta.68`
+- Renamed options
+  - `editingMode` -> `editDisplayMode`
+  - `rowNumberMode` -> `rowNumberDisplayMode`
+  - `enablePinning` -> `enableColumnPinning` and `enableRowPinning`
+  - `virtualizerInstanceRef` split into `columnVirtualizerRef` and `rowVirtualizerRef`
+  - `virtualizerProps` split into `columnVirtualizerOptions` and `rowVirtualizerOptions`
+  - `columnVirtualizerProps` -> `columnVirtualizerOptions`
+  - `rowVirtualizerProps` -> `rowVirtualizerOptions`
+  - `muiTablePaginationProps` -> `muiPaginationProps`
+  - `muiTableBodyCellCopyButtonProps` -> `muiCopyButtonProps`
+  - `muiTableBodyCellEditTextFieldProps` -> `muiEditTextFieldProps`
+  - `muiTableBodyCellSkeletonProps` -> `muiSkeletonProps`
+  - `muiTableBodyRowDragHandleProps` -> `muiRowDragHandleProps`
+  - `muiTableDetailPanelProps` -> `muiDetailPanelProps`
+  - `muiTableHeadCellColumnActionsButtonProps` -> `muiColumnActionsButtonProps`
+  - `muiTableHeadCellDragHandleProps` -> `muiColumnDragHandleProps`
+  - `muiTableHeadCellFilterCheckboxProps` -> `muiFilterCheckboxProps`
+  - `muiTableHeadCellFilterTextFieldProps` -> `muiFilterTextFieldProps`
+  - `muiTableHeadCellFilterSliderProps` -> `muiFilterSliderProps`
+  - `MRT_FilterFnsState` -> `MRT_ColumnFilterFns`
+  - `MaterialReactTableProps` -> `MRT_TableOptions`
+
+Is anything missing from this v2 changelog? Make a PR or join the [Discord](https://discord.gg/5wqyRx6fnm) to discuss.
+
+### Version 1
+
+See the old [V1 Changelog](https://v1.material-react-table.com/changelog)
+
 ## Roadmap
 
 ### Version 2 Roadmap (2023)
 
-Version 2 should be released as stable by the end of 2023.
+Material React Table V2 was a big release months in the making that mostly focussed on the new `useMaterialReactTable` hook and paradigms. New features will be added and many bug fixes around virtualization compatibility with advanced features will be prioritized first.
 
-If you are interested in following along the development of any of these features, be sure to join the [Discord](https://discord.gg/5wqyRx6fnm)
+A lighter weight `useMaterialReactTableLight` hook is also being considered in the near future that will be a bit more bare-bones and tree-shakable. All features will be opt-in and will not be enabled by default.

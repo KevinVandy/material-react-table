@@ -48,6 +48,24 @@ export const ColumnResizingEnabledDefaultOnChange = () => (
   <MaterialReactTable columns={columns} data={data} enableColumnResizing />
 );
 
+export const ColumnResizingEnabledDefaultOnChangeGrid = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnResizing
+    layoutMode="grid"
+  />
+);
+
+export const ColumnResizingEnabledDefaultOnChangeSemantic = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnResizing
+    layoutMode="semantic"
+  />
+);
+
 export const ColumnResizingEnabledNoColumnActions = () => (
   <MaterialReactTable
     columns={columns}

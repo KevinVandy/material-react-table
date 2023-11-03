@@ -33,6 +33,7 @@ export const MRT_RowActionMenu = <TData extends MRT_RowData>({
   const {
     getState,
     options: {
+      editDisplayMode,
       enableEditing,
       icons: { EditIcon },
       localization,
@@ -52,16 +53,17 @@ export const MRT_RowActionMenu = <TData extends MRT_RowData>({
       open={!!anchorEl}
       {...rest}
     >
-      {parseFromValuesOrFunc(enableEditing, row) && (
-        <MenuItem onClick={handleEdit} sx={commonMenuItemStyles}>
-          <Box sx={commonListItemStyles}>
-            <ListItemIcon>
-              <EditIcon />
-            </ListItemIcon>
-            {localization.edit}
-          </Box>
-        </MenuItem>
-      )}
+      {parseFromValuesOrFunc(enableEditing, row) &&
+        ['modal', 'row'].includes(editDisplayMode!) && (
+          <MenuItem onClick={handleEdit} sx={commonMenuItemStyles}>
+            <Box sx={commonListItemStyles}>
+              <ListItemIcon>
+                <EditIcon />
+              </ListItemIcon>
+              {localization.edit}
+            </Box>
+          </MenuItem>
+        )}
       {renderRowActionMenuItems?.({
         closeMenu: () => setAnchorEl(null),
         row,
