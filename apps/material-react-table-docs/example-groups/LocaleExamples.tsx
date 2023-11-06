@@ -1,17 +1,24 @@
 import { useState } from 'react';
 import { Box, Tab, Tabs } from '@mui/material';
+import AM_Table from '../examples/localization-i18n-am';
+import AR_Table from "../examples/localization-i18n-ar";
+import AZ_Table from '../examples/localization-i18n-az';
+import BG_Table from '../examples/localization-i18n-bg';
 import CS_Table from '../examples/localization-i18n-cs';
 import DA_Table from '../examples/localization-i18n-da';
 import DE_Table from '../examples/localization-i18n-de';
 import EN_Table from '../examples/localization-i18n-en';
 import ES_Table from '../examples/localization-i18n-es';
+import ET_Table from '../examples/localization-i18n-et';
 import FA_Table from '../examples/localization-i18n-fa';
 import FI_Table from '../examples/localization-i18n-fi';
 import FR_Table from '../examples/localization-i18n-fr';
 import HU_Table from '../examples/localization-i18n-hu';
+import HY_Table from '../examples/localization-i18n-hy';
 import ID_Table from '../examples/localization-i18n-id';
 import IT_Table from '../examples/localization-i18n-it';
 import JA_Table from '../examples/localization-i18n-ja';
+import KO_Table from '../examples/localization-i18n-ko';
 import NL_Table from '../examples/localization-i18n-nl';
 import NO_Table from '../examples/localization-i18n-no';
 import NP_Table from '../examples/localization-i18n-np';
@@ -31,18 +38,25 @@ import ZH_HANS_Table from '../examples/localization-i18n-zh-hans';
 import ZH_HANT_Table from '../examples/localization-i18n-zh-hant';
 
 const supportedLocales = [
+  'am',
+  'ar',
+  'az',
+  'bg',
   'cs',
   'da',
   'de',
   'en',
   'es',
+  'et',
   'fa',
   'fi',
   'fr',
   'hu',
+  'hy',
   'id',
   'it',
   'ja',
+  'ko',
   'nl',
   'no',
   'np',
@@ -86,18 +100,25 @@ const LocaleExamples = () => {
           ))}
         </Tabs>
       </Box>
+      {currentLocale === 'am' && <AM_Table />}
+      {currentLocale === 'ar' && <AR_Table />}
+      {currentLocale === 'az' && <AZ_Table />}
+      {currentLocale === 'bg' && <BG_Table />}
       {currentLocale === 'cs' && <CS_Table />}
       {currentLocale === 'da' && <DA_Table />}
       {currentLocale === 'de' && <DE_Table />}
       {currentLocale === 'en' && <EN_Table />}
       {currentLocale === 'es' && <ES_Table />}
+      {currentLocale === 'et' && <ET_Table />}
       {currentLocale === 'fa' && <FA_Table />}
       {currentLocale === 'fi' && <FI_Table />}
       {currentLocale === 'fr' && <FR_Table />}
       {currentLocale === 'hu' && <HU_Table />}
+      {currentLocale === 'hy' && <HY_Table />}
       {currentLocale === 'id' && <ID_Table />}
       {currentLocale === 'it' && <IT_Table />}
       {currentLocale === 'ja' && <JA_Table />}
+      {currentLocale === 'ko' && <KO_Table />}
       {currentLocale === 'nl' && <NL_Table />}
       {currentLocale === 'no' && <NO_Table />}
       {currentLocale === 'np' && <NP_Table />}

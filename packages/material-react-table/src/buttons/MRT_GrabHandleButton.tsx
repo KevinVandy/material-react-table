@@ -37,6 +37,7 @@ export const MRT_GrabHandleButton = <TData extends MRT_RowData>({
       title={_iconButtonProps?.title ?? localization.move}
     >
       <IconButton
+        aria-label={_iconButtonProps.title ?? localization.move}
         disableRipple
         draggable="true"
         size="small"
