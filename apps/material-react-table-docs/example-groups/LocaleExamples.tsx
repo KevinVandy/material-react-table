@@ -29,12 +29,14 @@ import UK_Table from '../examples/localization-i18n-uk';
 import VI_Table from '../examples/localization-i18n-vi';
 import ZH_HANS_Table from '../examples/localization-i18n-zh-hans';
 import ZH_HANT_Table from '../examples/localization-i18n-zh-hant';
+import AR_Table from "../examples/localization-i18n-ar";
 
 const supportedLocales = [
   'cs',
   'da',
   'de',
   'en',
+  'ar',
   'es',
   'fa',
   'fi',
@@ -90,6 +92,7 @@ const LocaleExamples = () => {
       {currentLocale === 'da' && <DA_Table />}
       {currentLocale === 'de' && <DE_Table />}
       {currentLocale === 'en' && <EN_Table />}
+      {currentLocale === 'ar' && <AR_Table />}
       {currentLocale === 'es' && <ES_Table />}
       {currentLocale === 'fa' && <FA_Table />}
       {currentLocale === 'fi' && <FI_Table />}
