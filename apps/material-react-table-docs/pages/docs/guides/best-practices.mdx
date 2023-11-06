@@ -341,3 +341,35 @@ export const YourComponent = () => {
   );
 };
 ```
+
+### Debugging Material React Table
+
+Material React Table _(though really TanStack Table)_ can be a lot easier to debug than other data grid libraries. This is because you are often in charge of the state that you care about, and the entire table instance is available to you in your own scope if you are using the `useMaterialReactTable` hook. There are also some advanced TanStack Table Dev Tools that you can optionally install.
+
+#### Console Logging from the Table Instance
+
+When in doubt, console log it! There are a lot of things you can easily console log. Here are some examples:
+
+##### Console Log All Internal Table State
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  //** */
+});
+
+console.log(table.getState());
+```
+
+##### Console Log Current Rendering Rows
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  //** */
+});
+
+console.log(table.getRowModel().rows);
+```
