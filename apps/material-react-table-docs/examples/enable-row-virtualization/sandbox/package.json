@@ -14,17 +14,17 @@
     "@emotion/styled": "^11.11.0",
     "@faker-js/faker": "^8.2.0",
     "@mui/icons-material": "^5.14.16",
-    "@mui/material": "^5.14.16",
-    "@mui/x-date-pickers": "^6.17.0",
+    "@mui/material": "^5.14.17",
+    "@mui/x-date-pickers": "^6.18.0",
     "dayjs": "^1.11.10",
-    "material-react-table": "^2.0.2",
+    "material-react-table": "^2.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.33",
+    "@types/react": "^18.2.36",
     "@types/react-dom": "^18.2.14",
-    "@vitejs/plugin-react": "^4.1.0",
+    "@vitejs/plugin-react": "^4.1.1",
     "typescript": "^5.2.2",
     "vite": "^4.5.0"
   }
