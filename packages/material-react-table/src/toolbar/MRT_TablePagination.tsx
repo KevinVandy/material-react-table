@@ -14,7 +14,7 @@ const defaultRowsPerPage = [5, 10, 15, 20, 25, 30, 50, 100];
 interface Props<TData extends MRT_RowData>
   extends Partial<
     PaginationProps & {
-      rowsPerPageOptions?: number[];
+      rowsPerPageOptions?: { label: string; value: number }[] | number[];
       showRowsPerPage?: boolean;
     }
   > {
@@ -103,11 +103,17 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
             value={pageSize}
             variant="standard"
           >
-            {rowsPerPageOptions.map((value) => (
-              <MenuItem key={value} sx={{ m: 0 }} value={value}>
-                {value}
-              </MenuItem>
-            ))}
+            {rowsPerPageOptions.map((option) =>
+              typeof option === 'number' ? (
+                <MenuItem key={option} sx={{ m: 0 }} value={option}>
+                  {option}
+                </MenuItem>
+              ) : (
+                <MenuItem key={option.value} sx={{ m: 0 }} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ),
+            )}
           </Select>
         </Box>
       )}
