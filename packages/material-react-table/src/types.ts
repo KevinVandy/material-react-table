@@ -904,13 +904,13 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   muiPaginationProps?:
     | ((props: { table: MRT_TableInstance<TData> }) => Partial<
         PaginationProps & {
-          rowsPerPageOptions?: number[];
+          rowsPerPageOptions?: {label: string; value: number}[] | number[];
           showRowsPerPage?: boolean;
         }
       >)
     | Partial<
         PaginationProps & {
-          rowsPerPageOptions?: number[];
+          rowsPerPageOptions?: {label: string; value: number;}[] | number[];
           showRowsPerPage?: boolean;
         }
       >;
