@@ -60,6 +60,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
   const lastRowIndex = Math.min(pageIndex * pageSize + pageSize, totalRowCount);
 
   const {
+    SelectProps,
     rowsPerPageOptions = defaultRowsPerPage,
     showFirstButton = showFirstLastPageButtons,
     showLastButton = showFirstLastPageButtons,
@@ -98,22 +99,29 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
             id="mrt-rows-per-page"
             inputProps={{ 'aria-label': localization.rowsPerPage }}
             label={localization.rowsPerPage}
-            onChange={(event) => setPageSize(+event.target.value)}
+            onChange={(event) => setPageSize(+(event.target.value as any))}
             sx={{ mb: 0 }}
             value={pageSize}
             variant="standard"
+            {...SelectProps}
           >
-            {rowsPerPageOptions.map((option) =>
-              typeof option === 'number' ? (
-                <MenuItem key={option} sx={{ m: 0 }} value={option}>
-                  {option}
-                </MenuItem>
-              ) : (
-                <MenuItem key={option.value} sx={{ m: 0 }} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ),
-            )}
+            {rowsPerPageOptions.map((option) => {
+              const value = typeof option !== 'number' ? option.value : option;
+              const label =
+                typeof option !== 'number' ? option.label : `${option}`;
+              return (
+                SelectProps?.children ??
+                (SelectProps?.native ? (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ) : (
+                  <MenuItem key={value} sx={{ m: 0 }} value={value}>
+                    {label}
+                  </MenuItem>
+                ))
+              );
+            })}
           </Select>
         </Box>
       )}

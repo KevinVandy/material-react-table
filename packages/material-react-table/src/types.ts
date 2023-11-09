@@ -54,6 +54,7 @@ import { type LinearProgressProps } from '@mui/material/LinearProgress';
 import { type PaginationProps } from '@mui/material/Pagination';
 import { type PaperProps } from '@mui/material/Paper';
 import { type RadioProps } from '@mui/material/Radio';
+import { type SelectProps } from '@mui/material/Select';
 import { type SkeletonProps } from '@mui/material/Skeleton';
 import { type SliderProps } from '@mui/material/Slider';
 import { type TableProps } from '@mui/material/Table';
@@ -904,13 +905,15 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   muiPaginationProps?:
     | ((props: { table: MRT_TableInstance<TData> }) => Partial<
         PaginationProps & {
-          rowsPerPageOptions?: {label: string; value: number}[] | number[];
+          SelectProps?: Partial<SelectProps>;
+          rowsPerPageOptions?: { label: string; value: number }[] | number[];
           showRowsPerPage?: boolean;
         }
       >)
     | Partial<
         PaginationProps & {
-          rowsPerPageOptions?: {label: string; value: number;}[] | number[];
+          SelectProps?: Partial<SelectProps>;
+          rowsPerPageOptions?: { label: string; value: number }[] | number[];
           showRowsPerPage?: boolean;
         }
       >;

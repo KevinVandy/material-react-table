@@ -88,6 +88,18 @@ export const PaginationEnabledDefaultNoRowsPerPage = () => (
   />
 );
 
+export const PaginationEnabledCustomizeRowsPerPage = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    muiPaginationProps={{
+      SelectProps: {
+        native: true,
+      },
+    }}
+  />
+);
+
 export const PaginationPagesDisplayMode = () => (
   <MaterialReactTable
     columns={columns}
