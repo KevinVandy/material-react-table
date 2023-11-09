@@ -241,6 +241,7 @@ export type MRT_TableInstance<TData extends MRT_RowData> = Omit<
   | 'getExpandedRowModel'
   | 'getFlatHeaders'
   | 'getHeaderGroups'
+  | 'getLeafHeaders'
   | 'getLeftLeafColumns'
   | 'getPaginationRowModel'
   | 'getPreFilteredRowModel'
@@ -262,6 +263,7 @@ export type MRT_TableInstance<TData extends MRT_RowData> = Omit<
   getExpandedRowModel: () => MRT_RowModel<TData>;
   getFlatHeaders: () => MRT_Header<TData>[];
   getHeaderGroups: () => MRT_HeaderGroup<TData>[];
+  getLeafHeaders: () => MRT_Header<TData>[];
   getLeftLeafColumns: () => MRT_Column<TData>[];
   getPaginationRowModel: () => MRT_RowModel<TData>;
   getPreFilteredRowModel: () => MRT_RowModel<TData>;

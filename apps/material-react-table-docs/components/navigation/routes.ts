@@ -210,6 +210,10 @@ export const routes: Array<RouteItem> = [
             href: '/docs/examples/popover-filters',
             label: 'Popover Filters Example',
           },
+          {
+            href: '/docs/examples/custom-filter-ui',
+            label: 'Custom Filter UI Example',
+          },
         ],
       },
       {

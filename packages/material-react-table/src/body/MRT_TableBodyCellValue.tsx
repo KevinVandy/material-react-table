@@ -60,7 +60,7 @@ export const MRT_TableBodyCellValue = <TData extends MRT_RowData>({
     allowedTypes.includes(typeof renderedCellValue) &&
     ((filterValue &&
       allowedTypes.includes(typeof filterValue) &&
-      columnDef.filterVariant === 'text') ||
+      ['autocomplete', 'text'].includes(columnDef.filterVariant!)) ||
       (globalFilter &&
         allowedTypes.includes(typeof globalFilter) &&
         column.getCanGlobalFilter()))
