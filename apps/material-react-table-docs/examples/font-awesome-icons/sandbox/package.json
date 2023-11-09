@@ -17,15 +17,15 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mui/icons-material": "^5.14.16",
     "@mui/material": "^5.14.17",
-    "@mui/x-date-pickers": "^6.18.0",
+    "@mui/x-date-pickers": "^6.18.1",
     "dayjs": "^1.11.10",
-    "material-react-table": "^2.0.3",
+    "material-react-table": "^2.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.36",
-    "@types/react-dom": "^18.2.14",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
     "@vitejs/plugin-react": "^4.1.1",
     "typescript": "^5.2.2",
     "vite": "^4.5.0"
