@@ -188,6 +188,10 @@ export const routes: Array<RouteItem> = [
             href: '/docs/examples/expanding-tree',
             label: 'Expanding Sub-Rows (Tree) Example',
           },
+          {
+            href: '/docs/examples/expanding-tree-flat-parse',
+            label: 'Expanding Parsed Tree Example',
+          },
         ],
       },
       {

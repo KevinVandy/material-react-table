@@ -33,7 +33,10 @@ const ExpandingExamples = ({ isPage = false }) => {
           />
           <Tab label="Detail Panel" value="detail-panel" />
           <Tab label="Expanding Tree" value="expanding-tree" />
-          <Tab label="Expanding Flat Tree" value="expanding-tree-flat-parse" />
+          <Tab
+            label="Expanding Parsed Tree"
+            value="expanding-tree-flat-parse"
+          />
           <Link href="/docs/examples" passHref legacyBehavior>
             <Tab
               label={
