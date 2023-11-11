@@ -5,6 +5,7 @@ import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable
 import EnableExample from '../../../examples/enable-expanding-tree';
 import ExpandedExample from '../../../examples/expanding-tree-expanded';
 import ExpandedRootExample from '../../../examples/expanding-tree-root-expanded';
+import ExpandingParsedTreeExample from '../../../examples/expanding-tree-flat-parse';
 
 <Head>
   <title>
@@ -69,8 +70,10 @@ const data = [
         id: 2,
         name: 'Jane Doe',
       },
+      //more sub rows...
     ],
   },
+  //more rows...
 ];
 
 const table = useMaterialReactTable({
@@ -82,8 +85,6 @@ const table = useMaterialReactTable({
 
 return <MaterialReactTable table={table} />;
 ```
-
-<EnableExample />
 
 ### Expand All Rows Button
 
@@ -97,6 +98,21 @@ const table = useMaterialReactTable({
   enableExpandAll: false, //hide expand all button in header
 });
 ```
+
+<EnableExample />
+
+### Generate Sub Rows with getSubRows
+
+If your data is not yet in a tree structure, but the data has relationships that can be parsed into a tree, you can use the `getSubRows` table option to let TanStack Table find the sub rows for each row.
+
+There are a couple key things you have to do to make this work:
+
+1. Only pass in root (top level) rows in your data prop.
+2. Set the `getSubRows` table option to a function that scans all the rest of your data and returns the sub rows for a given row.
+
+> NOTE: Be conscious of the performance implications of the `getSubRows` function. It will be called for every row in your table, so it should be performant.
+
+<ExpandingParsedTreeExample />
 
 ### Expanded Rows Pagination Behavior
 

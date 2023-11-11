@@ -3,6 +3,7 @@ import { Box, Tab, Tabs } from '@mui/material';
 import AggregationAndGroupingExample from '../examples/aggregation-and-grouping';
 import DetailExample from '../examples/enable-detail-panel';
 import ExpandingTreeExample from '../examples/expanding-tree-expanded';
+import ExpandingParsedTreeExample from '../examples/expanding-tree-flat-parse';
 import { useState } from 'react';
 import Link from 'next/link';
 import LaunchIcon from '@mui/icons-material/Launch';
@@ -32,6 +33,7 @@ const ExpandingExamples = ({ isPage = false }) => {
           />
           <Tab label="Detail Panel" value="detail-panel" />
           <Tab label="Expanding Tree" value="expanding-tree" />
+          <Tab label="Expanding Flat Tree" value="expanding-tree-flat-parse" />
           <Link href="/docs/examples" passHref legacyBehavior>
             <Tab
               label={
@@ -51,6 +53,9 @@ const ExpandingExamples = ({ isPage = false }) => {
         )}
         {activeTab === 'detail-panel' && <DetailExample />}
         {activeTab === 'expanding-tree' && <ExpandingTreeExample />}
+        {activeTab === 'expanding-tree-flat-parse' && (
+          <ExpandingParsedTreeExample />
+        )}
       </Box>
     </>
   );
