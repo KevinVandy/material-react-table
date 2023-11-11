@@ -8,6 +8,7 @@ import {
 } from 'react';
 import {
   MaterialReactTable,
+  useMaterialReactTable,
   type MRT_ColumnDef,
   type MRT_ColumnFiltersState,
   type MRT_SortingState,
@@ -18,8 +19,9 @@ import {
   QueryClient,
   QueryClientProvider,
   useInfiniteQuery,
-} from '@tanstack/react-query';
+} from '@tanstack/react-query'; //Note: this is TanStack React Query V5
 
+//Your API response shape will probably be different. Knowing a total row count is important though.
 type UserApiResponse = {
   data: Array<User>;
   meta: {
@@ -73,7 +75,12 @@ const Example = () => {
 
   const { data, fetchNextPage, isError, isFetching, isLoading } =
     useInfiniteQuery<UserApiResponse>({
-      queryKey: ['table-data', columnFilters, globalFilter, sorting],
+      queryKey: [
+        'table-data',
+        columnFilters, //refetch when columnFilters changes
+        globalFilter, //refetch when globalFilter changes
+        sorting, //refetch when sorting changes
+      ],
       queryFn: async ({ pageParam }) => {
         const url = new URL(
           '/api/data',
@@ -137,55 +144,53 @@ const Example = () => {
     fetchMoreOnBottomReached(tableContainerRef.current);
   }, [fetchMoreOnBottomReached]);
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={flatData}
-      enablePagination={false}
-      enableRowNumbers
-      enableRowVirtualization //optional, but recommended if it is likely going to be more than 100 rows
-      manualFiltering
-      manualSorting
-      muiTableContainerProps={{
-        ref: tableContainerRef, //get access to the table container element
-        sx: { maxHeight: '600px' }, //give the table a max height
-        onScroll: (
-          event: UIEvent<HTMLDivElement>, //add an event listener to the table container element
-        ) => fetchMoreOnBottomReached(event.target as HTMLDivElement),
-      }}
-      muiToolbarAlertBannerProps={
-        isError
-          ? {
-              color: 'error',
-              children: 'Error loading data',
-            }
-          : undefined
-      }
-      onColumnFiltersChange={setColumnFilters}
-      onGlobalFilterChange={setGlobalFilter}
-      onSortingChange={setSorting}
-      renderBottomToolbarCustomActions={() => (
-        <Typography>
-          Fetched {totalFetched} of {totalDBRowCount} total rows.
-        </Typography>
-      )}
-      state={{
-        columnFilters,
-        globalFilter,
-        isLoading,
-        showAlertBanner: isError,
-        showProgressBars: isFetching,
-        sorting,
-      }}
-      rowVirtualizerInstanceRef={rowVirtualizerInstanceRef} //get access to the virtualizer instance
-      rowVirtualizerOptions={{ overscan: 4 }}
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data: flatData,
+    enablePagination: false,
+    enableRowNumbers: true,
+    enableRowVirtualization: true,
+    manualFiltering: true,
+    manualSorting: true,
+    muiTableContainerProps: {
+      ref: tableContainerRef, //get access to the table container element
+      sx: { maxHeight: '600px' }, //give the table a max height
+      onScroll: (event: UIEvent<HTMLDivElement>) =>
+        fetchMoreOnBottomReached(event.target as HTMLDivElement), //add an event listener to the table container element
+    },
+    muiToolbarAlertBannerProps: isError
+      ? {
+          color: 'error',
+          children: 'Error loading data',
+        }
+      : undefined,
+    onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: setGlobalFilter,
+    onSortingChange: setSorting,
+    renderBottomToolbarCustomActions: () => (
+      <Typography>
+        Fetched {totalFetched} of {totalDBRowCount} total rows.
+      </Typography>
+    ),
+    state: {
+      columnFilters,
+      globalFilter,
+      isLoading,
+      showAlertBanner: isError,
+      showProgressBars: isFetching,
+      sorting,
+    },
+    rowVirtualizerInstanceRef, //get access to the virtualizer instance
+    rowVirtualizerOptions: { overscan: 4 },
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 const queryClient = new QueryClient();
 
 const ExampleWithReactQueryProvider = () => (
+  //App.tsx or AppProviders file. Don't just wrap this component with QueryClientProvider! Wrap your whole App!
   <QueryClientProvider client={queryClient}>
     <Example />
   </QueryClientProvider>
