@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { MaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 import { makeData } from './makeData';
 
 const Example = () => {
@@ -74,25 +77,22 @@ const Example = () => {
     }
   }, [sorting]);
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data} //10,000 rows
-      enableBottomToolbar={false}
-      enableGlobalFilterModes
-      enablePagination={false}
-      enableRowNumbers
-      enableRowVirtualization
-      muiTableContainerProps={{ sx: { maxHeight: '600px' } }}
-      onSortingChange={setSorting}
-      state={{ isLoading, sorting }}
-      rowVirtualizerInstanceRef={rowVirtualizerInstanceRef} //optional
-      rowVirtualizerOptions={{ overscan: 8 }} //optionally customize the virtualizer
-    />
-  );
-};
+  const table = useMaterialReactTable({
+    columns,
+    data, //10,000 rows
+    enableBottomToolbar: false,
+    enableGlobalFilterModes: true,
+    enablePagination: false,
+    enableRowNumbers: true,
+    enableRowVirtualization: true,
+    muiTableContainerProps: { sx: { maxHeight: '600px' } },
+    onSortingChange: setSorting,
+    state: { isLoading, sorting },
+    rowVirtualizerInstanceRef, //optional
+    rowVirtualizerOptions: { overscan: 5 }, //optionally customize the row virtualizer
+  });
 
-//virtualizerInstanceRef was renamed to rowVirtualizerInstanceRef in v1.5.0
-//virtualizerProps was renamed to rowVirtualizerOptions in v1.5.0
+  return <MaterialReactTable table={table} />;
+};
 
 export default Example;

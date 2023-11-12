@@ -54,7 +54,7 @@ export const Example = () => {
       sx: {
         border: '1px solid rgba(81, 81, 81, .5)',
         fontStyle: 'italic',
-        fontWeight: 'normal'
+        fontWeight: 'normal',
       },
     },
     muiTableBodyCellProps: {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Tab, Tabs } from '@mui/material';
 import AM_Table from '../examples/localization-i18n-am';
-import AR_Table from "../examples/localization-i18n-ar";
+import AR_Table from '../examples/localization-i18n-ar';
 import AZ_Table from '../examples/localization-i18n-az';
 import BG_Table from '../examples/localization-i18n-bg';
 import CS_Table from '../examples/localization-i18n-cs';

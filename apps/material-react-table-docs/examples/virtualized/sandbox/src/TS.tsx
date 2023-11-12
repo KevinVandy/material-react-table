@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   MaterialReactTable,
+  useMaterialReactTable,
   type MRT_ColumnDef,
   type MRT_SortingState,
   type MRT_Virtualizer,
@@ -112,30 +113,27 @@ const Example = () => {
     }
   }, [sorting]);
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data} //10,000 rows
-      defaultDisplayColumn={{ enableResizing: true }}
-      enableBottomToolbar={false}
-      enableColumnResizing
-      enableColumnVirtualization
-      enableGlobalFilterModes
-      enablePagination={false}
-      enableColumnPinning
-      enableRowNumbers
-      enableRowVirtualization
-      muiTableContainerProps={{ sx: { maxHeight: '600px' } }}
-      onSortingChange={setSorting}
-      state={{ isLoading, sorting }}
-      rowVirtualizerInstanceRef={rowVirtualizerInstanceRef} //optional
-      rowVirtualizerOptions={{ overscan: 5 }} //optionally customize the row virtualizer
-      columnVirtualizerOptions={{ overscan: 2 }} //optionally customize the column virtualizer
-    />
-  );
-};
+  const table = useMaterialReactTable({
+    columns,
+    data, //10,000 rows
+    defaultDisplayColumn: { enableResizing: true },
+    enableBottomToolbar: false,
+    enableColumnResizing: true,
+    enableColumnVirtualization: true,
+    enableGlobalFilterModes: true,
+    enablePagination: false,
+    enableColumnPinning: true,
+    enableRowNumbers: true,
+    enableRowVirtualization: true,
+    muiTableContainerProps: { sx: { maxHeight: '600px' } },
+    onSortingChange: setSorting,
+    state: { isLoading, sorting },
+    rowVirtualizerInstanceRef, //optional
+    rowVirtualizerOptions: { overscan: 5 }, //optionally customize the row virtualizer
+    columnVirtualizerOptions: { overscan: 2 }, //optionally customize the column virtualizer
+  });
 
-//virtualizerInstanceRef was renamed to rowVirtualizerInstanceRef in v1.5.0
-//virtualizerProps was renamed to rowVirtualizerOptions in v1.5.0
+  return <MaterialReactTable table={table} />;
+};
 
 export default Example;
