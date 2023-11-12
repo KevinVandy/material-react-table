@@ -100,7 +100,7 @@ const Example = () => {
 
   const table = useMaterialReactTable({
     columns,
-    data,
+    data, //data must be memoized or stable (useState, useMemo, defined outside of this component, etc.)
   });
 
   return <MaterialReactTable table={table} />;

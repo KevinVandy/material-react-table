@@ -37,7 +37,7 @@ export const Example = () => {
 
   const table = useMaterialReactTable({
     columns,
-    data,
+    data, //data must be memoized or stable (useState, useMemo, defined outside of this component, etc.)
     enableColumnActions: false,
     enableColumnFilters: false,
     enablePagination: false,

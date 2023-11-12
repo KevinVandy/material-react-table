@@ -11,7 +11,7 @@ import SimpleCodeSandbox from '../../../examples/SimpleCodeSandbox';
 
 ## Usage
 
-Here is a brief overview of how to use Material React Table. These are very simple examples and will not cover all features of the library, but should be a great starting point.
+Here is a brief overview of how to use Material React Table. This is a very simple example and will not cover all features of the library, but should be a great starting point.
 
 ### Setup
 
@@ -26,7 +26,10 @@ If you need to change the colors of the table components, advanced [Material UI 
 Once you have everything installed, you can import from `material-react-table` like this:
 
 ```tsx
-import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 ```
 
 `MaterialReactTable` is the main component that you will use to render your table.
@@ -36,6 +39,8 @@ import { MaterialReactTable, useMaterialReactTable } from 'material-react-table'
 ### Creating Data/Rows
 
 Your data must be an array of objects that have properties matching the accessors in your column definitions. The objects themselves can theoretically be in any shape, but it will be easier to set up your columns if your data is already in a flat object format like the example below, but it is not required.
+
+> **Common Gotcha**: When defining `data` that will be passed to a `useMaterialReactTable` hook, make sure that the `data` is _memoized_ or _stable_ (i.e. `useState`, `useMemo`, defined outside of your table component, etc.). Otherwise you may get infinite renders.
 
 #### Simple Data Example
 
@@ -54,11 +59,11 @@ const data = [
 ];
 ```
 
-Your data does NOT have to be created statically like this, of course. More than likely, your data is being fetched from a backend API. Check out the [Remote Data example](/docs/examples/remote) to see how you can use a remote data source.
+Your data does NOT have to be created statically like this, of course. More than likely, your data is being fetched from a backend API. Check out the [Remote Data examples](/docs/examples/react-query) to see how you can fetch data and pass it to your tables.
 
 ### Creating Columns
 
-There are several different ways to define columns, depending on your needs. Let's create some basic "data" columns. That is, columns that connect to our data. Since we defined our data in a flat object format, we can simply use the `accessorKey` property to access the data.
+There are several different ways to define columns, depending on your needs. Let's create some basic `"data"` columns. That is, columns that connect to our data. Most of the time, we can simply use the `accessorKey` property to access the data if the data is in a simple format. Alternatively, if some data in a column needs some logic or processing, you can use the `accessorFn` property to define a function that returns the data for each cell.
 
 #### Simple Column Definition Example
 
@@ -82,7 +87,7 @@ const columns = useMemo(
 
 ### Full Simple Example
 
-Put it all together, and you have a basic table! You can also play around and enable some features, either per column in the column definitions, or as props passed to `<MaterialReactTable />`.
+Put it all together, and you have a basic table! You can also play around and enable some features, either per column in the column definitions, or as table options passed to `useMaterialReactTable`.
 
 ```tsx
 import { useMemo } from 'react';
@@ -118,6 +123,7 @@ export default function App() {
         accessorKey: 'name', //simple recommended way to define a column
         header: 'Name',
         muiTableHeadCellProps: { style: { color: 'green' } }, //custom props
+        enableHiding: false, //disable a feature for this column
       },
       {
         accessorFn: (originalRow) => originalRow.age, //alternate way
@@ -134,17 +140,17 @@ export default function App() {
     columns,
     data, //must be memoized or stable (useState, useMemo, defined outside of this component, etc.)
     enableRowSelection: true, //enable some features
-    enableColumnOrdering: true,
+    enableColumnOrdering: true, //enable a feature for all columns
     enableGlobalFilter: false, //turn off a feature
   });
 
   //note: you can also pass table options as props directly to <MaterialReactTable /> instead of using useMaterialReactTable
-  //but that is not recommended and will likely be deprecated in the future
+  //but the useMaterialReactTable hook will be the most recommended way to define table options
   return <MaterialReactTable table={table} />;
 }
 ```
 
-> **Note:** It is very important that the columns and data definitions are _memoized_ or _stable_. Otherwise, the entire table will be re-rendered during every react re-render in your application, which can lead to performance issues. To make a variable stable, store it in `useState`, wrap it in `useMemo`, or define it outside of a component so it does not get recreated on every render.
+> **Note:** Again, it is very important that the columns and data definitions are _memoized_ or _stable_. Otherwise, the entire table will be re-rendered during every react re-render in your application, which can lead to performance issues. To make a variable stable, store it in `useState`, wrap it in `useMemo`, define it outside of a component, or in your state management tool of choice so it does not get recreated on every render and cause an infinite re-render loop.
 
 ### Live Code Sandbox Example
 
