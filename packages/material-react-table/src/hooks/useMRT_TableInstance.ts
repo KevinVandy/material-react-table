@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   getCoreRowModel,
   getExpandedRowModel,
@@ -84,6 +84,12 @@ export const useMRT_TableInstance: <TData extends MRT_RowData>(
   const [columnOrder, setColumnOrder] = useState<MRT_ColumnOrderState>(
     initialState.columnOrder ?? [],
   );
+  useEffect(() => {
+    const initState = tableOptions.initialState ?? {};
+    setColumnOrder(
+      initState.columnOrder ?? getDefaultColumnOrderIds(tableOptions),
+    );
+  }, [tableOptions.columns]);
   const [density, setDensity] = useState<MRT_DensityState>(
     initialState?.density ?? 'comfortable',
   );
