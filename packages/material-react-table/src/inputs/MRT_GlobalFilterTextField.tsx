@@ -92,6 +92,16 @@ export const MRT_GlobalFilterTextField = <TData extends MRT_RowData>({
       unmountOnExit
     >
       <TextField
+        inputProps={{
+          autoComplete: 'new-password', // disable autocomplete and autofill
+          ...textFieldProps.inputProps,
+        }}
+        onChange={handleChange}
+        placeholder={localization.search}
+        size="small"
+        value={searchValue ?? ''}
+        variant="outlined"
+        {...textFieldProps}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -134,16 +144,6 @@ export const MRT_GlobalFilterTextField = <TData extends MRT_RowData>({
             ) as any),
           }),
         }}
-        inputProps={{
-          autoComplete: 'new-password', // disable autocomplete and autofill
-          ...textFieldProps.inputProps,
-        }}
-        onChange={handleChange}
-        placeholder={localization.search}
-        size="small"
-        value={searchValue ?? ''}
-        variant="outlined"
-        {...textFieldProps}
         inputRef={(inputRef) => {
           searchInputRef.current = inputRef;
           if (textFieldProps?.inputRef) {
