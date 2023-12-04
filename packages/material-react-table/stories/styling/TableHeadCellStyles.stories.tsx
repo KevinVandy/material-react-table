@@ -38,6 +38,20 @@ export const DefaultTableHeadCellStyles = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
+export const ColorSortIcon = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    muiTableHeadCellProps={({ column }) => ({
+      sx: {
+        '& .MuiTableSortLabel-icon': {
+          color: column.getIsSorted() ? 'limegreen !important' : undefined,
+        },
+      },
+    })}
+  />
+);
+
 export const StyleAllMuiTableHeadCell = () => (
   <MaterialReactTable
     columns={columns}
