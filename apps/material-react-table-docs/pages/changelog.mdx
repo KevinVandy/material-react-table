@@ -12,6 +12,13 @@ import Head from 'next/head';
 
 ### Version 2
 
+#### Version 2.0.5 - 12-05-2023
+
+- Upgraded to TanStack Virtual `v3.0.1` stable release
+- Added `MuiTablePagination-root` class to mrt pagination root element for easier styling
+- Fixed potential duplicate key warning while rendering skeleton rows when `getRowId` table option is provided and doesn't properly return `undefined`
+- Fixed `muiSearchTextFieldProps.InputProps` now able to partially overridden
+
 #### Version 2.0.4 - 11-09-2023
 
 - Add support for `'all'` rows pagination option

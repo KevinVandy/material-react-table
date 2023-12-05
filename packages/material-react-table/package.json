@@ -1,5 +1,5 @@
 {
-  "version": "2.0.4",
+  "version": "2.0.5",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -35,11 +35,11 @@
   "size-limit": [
     {
       "path": "dist/index.js",
-      "limit": "59 KB"
+      "limit": "53 KB"
     },
     {
       "path": "dist/index.esm.js",
-      "limit": "55 KB"
+      "limit": "50 KB"
     }
   ],
   "engines": {
@@ -81,7 +81,7 @@
     "@storybook/react-vite": "^7.6.3",
     "@storybook/testing-library": "^0.2.2",
     "@types/node": "^20.10.3",
-    "@types/react": "^18.2.41",
+    "@types/react": "^18.2.42",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
