@@ -70,6 +70,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
 
   return (
     <Box
+      className="MuiTablePagination-root"
       sx={{
         alignItems: 'center',
         display: 'flex',
