@@ -186,6 +186,15 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
     ? rowVirtualizer.getVirtualItems()
     : undefined;
 
+  const commonRowProps = {
+    columnVirtualizer,
+    numRows: rows.length,
+    table,
+    virtualColumns,
+    virtualPaddingLeft,
+    virtualPaddingRight,
+  };
+
   return (
     <>
       {!rowPinningDisplayMode?.includes('sticky') &&
@@ -202,15 +211,9 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
           >
             {getTopRows().map((row, rowIndex) => {
               const props = {
-                columnVirtualizer,
-                measureElement: rowVirtualizer?.measureElement,
-                numRows: rows.length,
+                ...commonRowProps,
                 row,
                 rowIndex,
-                table,
-                virtualColumns,
-                virtualPaddingLeft,
-                virtualPaddingRight,
               };
               return memoMode === 'rows' ? (
                 <Memo_MRT_TableBodyRow key={row.id} {...props} />
@@ -275,24 +278,22 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
                   ? rows[rowOrVirtualRow.index]
                   : (rowOrVirtualRow as MRT_Row<TData>);
                 const props = {
-                  columnVirtualizer,
+                  ...commonRowProps,
                   measureElement: rowVirtualizer?.measureElement,
-                  numRows: rows.length,
                   pinnedRowIds,
                   row,
                   rowIndex: rowVirtualizer ? rowOrVirtualRow.index : rowIndex,
-                  table,
-                  virtualColumns,
-                  virtualPaddingLeft,
-                  virtualPaddingRight,
                   virtualRow: rowVirtualizer
                     ? (rowOrVirtualRow as VirtualItem)
                     : undefined,
                 };
                 return memoMode === 'rows' ? (
-                  <Memo_MRT_TableBodyRow key={row.id} {...props} />
+                  <Memo_MRT_TableBodyRow
+                    key={`${row.id}${row.index}`}
+                    {...props}
+                  />
                 ) : (
-                  <MRT_TableBodyRow key={row.id} {...props} />
+                  <MRT_TableBodyRow key={`${row.id}${row.index}`} {...props} />
                 );
               })}
             </>
@@ -312,18 +313,12 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
           >
             {getBottomRows().map((row, rowIndex) => {
               const props = {
-                columnVirtualizer,
-                measureElement: rowVirtualizer?.measureElement,
-                numRows: rows.length,
+                ...commonRowProps,
                 row,
                 rowIndex,
-                table,
-                virtualColumns,
-                virtualPaddingLeft,
-                virtualPaddingRight,
               };
               return memoMode === 'rows' ? (
-                <Memo_MRT_TableBodyRow key={row.id} {...props} />
+                <Memo_MRT_TableBodyRow key={`${row.id}`} {...props} />
               ) : (
                 <MRT_TableBodyRow key={row.id} {...props} />
               );
