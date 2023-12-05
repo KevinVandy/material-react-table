@@ -37,12 +37,19 @@ export const MRT_TableHeadCellSortLabel = <TData extends MRT_RowData>({
     isLoading || showSkeletons
       ? ''
       : column.getIsSorted()
-      ? column.getIsSorted() === 'desc'
-        ? localization.sortedByColumnDesc.replace('{column}', columnDef.header)
-        : localization.sortedByColumnAsc.replace('{column}', columnDef.header)
-      : column.getNextSortingOrder() === 'desc'
-      ? localization.sortByColumnDesc.replace('{column}', columnDef.header)
-      : localization.sortByColumnAsc.replace('{column}', columnDef.header);
+        ? column.getIsSorted() === 'desc'
+          ? localization.sortedByColumnDesc.replace(
+              '{column}',
+              columnDef.header,
+            )
+          : localization.sortedByColumnAsc.replace('{column}', columnDef.header)
+        : column.getNextSortingOrder() === 'desc'
+          ? localization.sortByColumnDesc.replace('{column}', columnDef.header)
+          : localization.sortByColumnAsc.replace('{column}', columnDef.header);
+
+  const direction = isSorted
+    ? (column.getIsSorted() as 'asc' | 'desc')
+    : undefined;
 
   return (
     <Tooltip placement="top" title={sortTooltip}>
@@ -56,7 +63,7 @@ export const MRT_TableHeadCellSortLabel = <TData extends MRT_RowData>({
               ? (props) => (
                   <SyncAltIcon
                     {...props}
-                    direction={isSorted ? (column.getIsSorted() as 'asc' | 'desc') : undefined}
+                    direction={direction}
                     style={{
                       transform: 'rotate(-90deg) scaleX(0.9) translateX(-1px)',
                     }}
@@ -66,9 +73,7 @@ export const MRT_TableHeadCellSortLabel = <TData extends MRT_RowData>({
           }
           active
           aria-label={sortTooltip}
-          direction={
-            isSorted ? (column.getIsSorted() as 'asc' | 'desc') : undefined
-          }
+          direction={direction}
           onClick={(e) => {
             e.stopPropagation();
             header.column.getToggleSortingHandler()?.(e);

@@ -40,7 +40,7 @@ const initData = [...Array(25)].map(() => ({
   age: faker.number.int(20) + 18,
   email: faker.internet.email(),
   firstName: faker.person.firstName(),
-  id: faker.random.alphaNumeric(6),
+  id: faker.string.alphanumeric(6),
   lastName: faker.person.lastName(),
   state: faker.location.state(),
 }));
