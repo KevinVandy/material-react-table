@@ -12,13 +12,13 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.19",
-    "@mui/material": "^5.14.19",
+    "@mui/material": "^5.14.20",
     "export-to-csv": "^1.2.1",
     "material-react-table": "^2.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "jspdf": "^2.5.1",
-    "jspdf-autotable": "^3.7.1"
+    "jspdf-autotable": "^3.8.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.42",
