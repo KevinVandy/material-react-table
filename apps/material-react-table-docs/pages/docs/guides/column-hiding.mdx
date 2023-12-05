@@ -44,6 +44,30 @@ const table = useMaterialReactTable({
 return <MaterialReactTable table={table} />;
 ```
 
+### Dynamically Hide Columns
+
+If you need to control how the columns are hidden dynamically, you can use `state` instead of `initialState` along with the `onColumnVisibilityChange` table option. Or alternatively you can use the `setColumnVisibility` table instance api.
+
+```jsx
+const [columnVisibility, setColumnVisibility] = useState({
+  firstName: false,
+});
+
+useEffect(() => {
+  setColumnVisibility({ firstName: true }); //programmatically show firstName column
+}, [someDependency]);
+
+const table = useMaterialReactTable({
+  columns,
+  data,
+  state: { columnVisibility }, //manage columnVisibility state
+  onColumnVisibilityChange: setColumnVisibility,
+});
+
+//NOTE: Instead of managing the columnVisibility state yourself, we could call a table instance api
+table.setColumnVisibility({ firstName: true }); //programmatically show firstName column
+```
+
 ### Disable Column Hiding
 
 If you do not want this feature to be enabled at all, you can disable it by setting the `enableHiding` table option to `false`.
