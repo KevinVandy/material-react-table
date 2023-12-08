@@ -14,6 +14,7 @@ const defaultRowsPerPage = [5, 10, 15, 20, 25, 30, 50, 100];
 interface Props<TData extends MRT_RowData>
   extends Partial<
     PaginationProps & {
+      disabled?: boolean;
       rowsPerPageOptions?: { label: string; value: number }[] | number[];
       showRowsPerPage?: boolean;
     }
@@ -61,6 +62,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
 
   const {
     SelectProps,
+    disabled = false,
     rowsPerPageOptions = defaultRowsPerPage,
     showFirstButton = showFirstLastPageButtons,
     showLastButton = showFirstLastPageButtons,
@@ -97,6 +99,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
           </InputLabel>
           <Select
             disableUnderline
+            disabled={disabled}
             id="mrt-rows-per-page"
             inputProps={{ 'aria-label': localization.rowsPerPage }}
             label={localization.rowsPerPage}
@@ -129,6 +132,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
       {paginationDisplayMode === 'pages' ? (
         <Pagination
           count={numberOfPages}
+          disabled={disabled}
           onChange={(_e, newPageIndex) => setPageIndex(newPageIndex - 1)}
           page={pageIndex + 1}
           renderItem={(item) => (
@@ -162,7 +166,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
             {showFirstButton && (
               <IconButton
                 aria-label={localization.goToFirstPage}
-                disabled={pageIndex <= 0}
+                disabled={pageIndex <= 0 || disabled}
                 onClick={() => setPageIndex(0)}
                 size="small"
               >
@@ -171,7 +175,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
             )}
             <IconButton
               aria-label={localization.goToPreviousPage}
-              disabled={pageIndex <= 0}
+              disabled={pageIndex <= 0 || disabled}
               onClick={() => setPageIndex(pageIndex - 1)}
               size="small"
             >
@@ -179,7 +183,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
             </IconButton>
             <IconButton
               aria-label={localization.goToNextPage}
-              disabled={lastRowIndex >= totalRowCount}
+              disabled={lastRowIndex >= totalRowCount || disabled}
               onClick={() => setPageIndex(pageIndex + 1)}
               size="small"
             >
@@ -188,7 +192,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
             {showLastButton && (
               <IconButton
                 aria-label={localization.goToLastPage}
-                disabled={lastRowIndex >= totalRowCount}
+                disabled={lastRowIndex >= totalRowCount || disabled}
                 onClick={() => setPageIndex(numberOfPages - 1)}
                 size="small"
               >

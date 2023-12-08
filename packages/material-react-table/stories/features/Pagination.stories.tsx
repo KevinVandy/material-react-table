@@ -185,3 +185,17 @@ export const CustomizePaginationComponents = () => (
     }}
   />
 );
+
+export const DisabledPaginationComponents = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    initialState={{ pagination: { pageIndex: 0, pageSize: 5 } }}
+    muiPaginationProps={{
+      disabled: true,
+      rowsPerPageOptions: [5, 10, 20],
+      showFirstButton: false,
+      showLastButton: false,
+    }}
+  />
+);
