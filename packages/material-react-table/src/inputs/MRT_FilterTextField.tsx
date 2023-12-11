@@ -402,9 +402,9 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
         />
       ) : (
         <TextField
-          onChange={handleTextFieldChange}
           select={isSelectFilter || isMultiSelectFilter}
           {...commonTextFieldProps}
+          onChange={handleTextFieldChange}
           SelectProps={{
             displayEmpty: true,
             multiple: isMultiSelectFilter,
