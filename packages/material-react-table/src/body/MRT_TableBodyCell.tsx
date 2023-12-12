@@ -126,12 +126,12 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     const borderStyle = showResizeBorder
       ? `2px solid ${draggingBorderColor} !important`
       : isDraggingColumn || isDraggingRow
-      ? `1px dashed ${theme.palette.grey[500]} !important`
-      : isHoveredColumn ||
-        isHoveredRow ||
-        columnSizingInfo.isResizingColumn === column.id
-      ? `2px dashed ${draggingBorderColor} !important`
-      : undefined;
+        ? `1px dashed ${theme.palette.grey[500]} !important`
+        : isHoveredColumn ||
+            isHoveredRow ||
+            columnSizingInfo.isResizingColumn === column.id
+          ? `2px dashed ${draggingBorderColor} !important`
+          : undefined;
 
     if (showResizeBorder) {
       return { borderRight: borderStyle };
@@ -168,6 +168,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
   ]);
 
   const isEditable =
+    !cell.getIsPlaceholder() &&
     parseFromValuesOrFunc(enableEditing, row) &&
     parseFromValuesOrFunc(columnDef.enableEditing, row) !== false;
 
@@ -222,7 +223,8 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       sx={(theme) => ({
         '&:hover': {
           outline:
-            ['cell', 'table'].includes(editDisplayMode ?? '') && isEditable
+            (editDisplayMode === 'cell' && isEditable) ||
+            (editDisplayMode === 'table' && (isCreating || isEditing))
               ? `1px solid ${theme.palette.grey[500]}`
               : undefined,
           outlineOffset: '-1px',
@@ -241,12 +243,12 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
               ? '0 0.5rem'
               : '0.5rem'
             : density === 'comfortable'
-            ? columnDefType === 'display'
-              ? '0.5rem 0.75rem'
-              : '1rem'
-            : columnDefType === 'display'
-            ? '1rem 1.25rem'
-            : '1.5rem',
+              ? columnDefType === 'display'
+                ? '0.5rem 0.75rem'
+                : '1rem'
+              : columnDefType === 'display'
+                ? '1rem 1.25rem'
+                : '1.5rem',
         textOverflow: columnDefType !== 'display' ? 'ellipsis' : undefined,
         [theme.direction === 'rtl' ? 'pr' : 'pl']:
           column.id === 'mrt-row-expand'
@@ -255,8 +257,8 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
                 (density === 'compact'
                   ? 0.5
                   : density === 'comfortable'
-                  ? 0.75
-                  : 1.25)
+                    ? 0.75
+                    : 1.25)
               }rem`
             : undefined,
         whiteSpace:

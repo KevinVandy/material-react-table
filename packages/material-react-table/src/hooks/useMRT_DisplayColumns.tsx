@@ -10,11 +10,12 @@ import {
   type MRT_ColumnDef,
   type MRT_ColumnOrderState,
   type MRT_DefinedTableOptions,
+  type MRT_DisplayColumnIds,
   type MRT_GroupingState,
+  type MRT_Localization,
   type MRT_Row,
   type MRT_RowData,
 } from '../types';
-import { MRT_DefaultDisplayColumn } from './useMRT_TableOptions';
 
 const blankColProps = {
   children: null,
@@ -33,124 +34,28 @@ interface Params<TData extends MRT_RowData> {
   tableOptions: MRT_DefinedTableOptions<TData>;
 }
 
-export const useMRT_DisplayColumns = <TData extends MRT_RowData>({
-  columnOrder,
-  creatingRow,
-  grouping,
-  tableOptions,
-}: Params<TData>) => {
+export const useMRT_DisplayColumns = <TData extends MRT_RowData>(
+  params: Params<TData>,
+) => {
+  const { columnOrder, creatingRow, grouping, tableOptions } = params;
+  const order = tableOptions.state?.columnOrder ?? columnOrder;
+
   return useMemo(
     () =>
-      (
-        [
-          (tableOptions.state?.columnOrder ?? columnOrder).includes(
-            'mrt-row-pin',
-          ) && {
-            Cell: ({ row, table }) => (
-              <MRT_TableBodyRowPinButton row={row} table={table} />
-            ),
-            header: tableOptions.localization.pin,
-            size: 60,
-            ...tableOptions.displayColumnDefOptions?.['mrt-row-pin'],
-            columnDefType: 'display',
-            id: 'mrt-row-pin',
-          },
-          (tableOptions.state?.columnOrder ?? columnOrder).includes(
-            'mrt-row-drag',
-          ) && {
-            Cell: ({ row, rowRef, table }) => (
-              <MRT_TableBodyRowGrabHandle
-                row={row}
-                rowRef={rowRef as RefObject<HTMLTableRowElement>}
-                table={table}
-              />
-            ),
-            header: tableOptions.localization.move,
-            size: 60,
-            ...tableOptions.displayColumnDefOptions?.['mrt-row-drag'],
-            columnDefType: 'display',
-            id: 'mrt-row-drag',
-          },
-          ((tableOptions.state?.columnOrder ?? columnOrder).includes(
-            'mrt-row-actions',
-          ) ||
-            (creatingRow && tableOptions.createDisplayMode === 'row')) && {
-            Cell: ({ cell, row, table }) => (
-              <MRT_ToggleRowActionMenuButton
-                cell={cell}
-                row={row}
-                table={table}
-              />
-            ),
-            header: tableOptions.localization.actions,
-            size: 70,
-            ...tableOptions.displayColumnDefOptions?.['mrt-row-actions'],
-            columnDefType: 'display',
-            id: 'mrt-row-actions',
-          },
-          (tableOptions.state?.columnOrder ?? columnOrder).includes(
-            'mrt-row-expand',
-          ) &&
-            showExpandColumn(
-              tableOptions,
-              tableOptions.state?.grouping ?? grouping,
-            ) && {
-              Cell: ({ row, table }) => (
-                <MRT_ExpandButton row={row} table={table} />
-              ),
-              Header: tableOptions.enableExpandAll
-                ? ({ table }) => <MRT_ExpandAllButton table={table} />
-                : null,
-              header: tableOptions.localization.expand,
-              size: 60,
-              ...tableOptions.displayColumnDefOptions?.['mrt-row-expand'],
-              columnDefType: 'display',
-              id: 'mrt-row-expand',
-            },
-          (tableOptions.state?.columnOrder ?? columnOrder).includes(
-            'mrt-row-select',
-          ) && {
-            Cell: ({ row, table }) => (
-              <MRT_SelectCheckbox row={row} table={table} />
-            ),
-            Header:
-              tableOptions.enableSelectAll &&
-              tableOptions.enableMultiRowSelection
-                ? ({ table }) => <MRT_SelectCheckbox selectAll table={table} />
-                : null,
-            header: tableOptions.localization.select,
-            size: 60,
-            ...tableOptions.displayColumnDefOptions?.['mrt-row-select'],
-            columnDefType: 'display',
-            id: 'mrt-row-select',
-          },
-          (tableOptions.state?.columnOrder ?? columnOrder).includes(
-            'mrt-row-numbers',
-          ) && {
-            Cell: ({ row }) => row.index + 1,
-            Header: () => tableOptions.localization.rowNumber,
-            header: tableOptions.localization.rowNumbers,
-            size: 60,
-            ...tableOptions.displayColumnDefOptions?.['mrt-row-numbers'],
-            columnDefType: 'display',
-            id: 'mrt-row-numbers',
-          },
-          (tableOptions.state?.columnOrder ?? columnOrder).includes(
-            'mrt-row-spacer',
-          ) && {
-            ...tableOptions.displayColumnDefOptions?.['mrt-row-spacer'],
-            ...MRT_DefaultDisplayColumn,
-            columnDefType: 'display',
-            header: '',
-            id: 'mrt-row-spacer',
-            muiTableBodyCellProps: blankColProps,
-            muiTableFooterCellProps: blankColProps,
-            muiTableHeadCellProps: blankColProps,
-          },
-        ] as MRT_ColumnDef<TData>[]
-      ).filter(Boolean),
+      [
+        makeRowPinColumn,
+        makeRowDragColumn,
+        makeRowActionsColumn,
+        makeRowExpandColumn,
+        makeSelectColumn,
+        makeRowNumbersColumn,
+        makeSpacerColumn,
+      ]
+        .map((makeCol) => makeCol(params, order))
+        .filter(Boolean),
     [
       columnOrder,
+      creatingRow,
       grouping,
       tableOptions.displayColumnDefOptions,
       tableOptions.editDisplayMode,
@@ -177,3 +82,145 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>({
     ],
   );
 };
+
+function defaultDisplayColumnProps<TData extends Record<string, any> = {}>(
+  {
+    defaultDisplayColumn,
+    displayColumnDefOptions,
+    localization,
+  }: MRT_DefinedTableOptions<TData>,
+  id: MRT_DisplayColumnIds,
+  header?: keyof MRT_Localization,
+  size = 60,
+) {
+  return {
+    header: header ? localization[header]! : '',
+    ...defaultDisplayColumn,
+    ...displayColumnDefOptions?.[id],
+    id,
+    size,
+  } as const;
+}
+
+function makeRowPinColumn<TData extends Record<string, any> = {}>(
+  { tableOptions }: Params<TData>,
+  order: MRT_ColumnOrderState,
+): MRT_ColumnDef<TData> | null {
+  const id: MRT_DisplayColumnIds = 'mrt-row-pin';
+  if (order.includes(id)) {
+    return {
+      Cell: ({ row, table }) => (
+        <MRT_TableBodyRowPinButton row={row} table={table} />
+      ),
+      ...defaultDisplayColumnProps(tableOptions, id, 'pin'),
+    };
+  }
+  return null;
+}
+
+function makeRowDragColumn<TData extends Record<string, any> = {}>(
+  { tableOptions }: Params<TData>,
+  order: MRT_ColumnOrderState,
+): MRT_ColumnDef<TData> | null {
+  const id: MRT_DisplayColumnIds = 'mrt-row-drag';
+  if (order.includes(id)) {
+    return {
+      Cell: ({ row, rowRef, table }) => (
+        <MRT_TableBodyRowGrabHandle
+          row={row}
+          rowRef={rowRef as RefObject<HTMLTableRowElement>}
+          table={table}
+        />
+      ),
+      ...defaultDisplayColumnProps(tableOptions, id, 'move'),
+    };
+  }
+  return null;
+}
+
+function makeRowActionsColumn<TData extends Record<string, any> = {}>(
+  { creatingRow, tableOptions }: Params<TData>,
+  order: MRT_ColumnOrderState,
+): MRT_ColumnDef<TData> | null {
+  const id: MRT_DisplayColumnIds = 'mrt-row-actions';
+  if (
+    order.includes(id) ||
+    (creatingRow && tableOptions.createDisplayMode === 'row')
+  ) {
+    return {
+      Cell: ({ cell, row, table }) => (
+        <MRT_ToggleRowActionMenuButton cell={cell} row={row} table={table} />
+      ),
+      ...defaultDisplayColumnProps(tableOptions, id, 'actions'),
+    };
+  }
+  return null;
+}
+
+function makeRowExpandColumn<TData extends Record<string, any> = {}>(
+  { grouping, tableOptions }: Params<TData>,
+  order: MRT_ColumnOrderState,
+): MRT_ColumnDef<TData> | null {
+  const id: MRT_DisplayColumnIds = 'mrt-row-expand';
+  if (
+    order.includes(id) &&
+    showExpandColumn(tableOptions, tableOptions.state?.grouping ?? grouping)
+  ) {
+    return {
+      Cell: ({ row, table }) => <MRT_ExpandButton row={row} table={table} />,
+      Header: tableOptions.enableExpandAll
+        ? ({ table }) => <MRT_ExpandAllButton table={table} />
+        : undefined,
+      ...defaultDisplayColumnProps(tableOptions, id, 'expand'),
+    };
+  }
+  return null;
+}
+
+function makeSelectColumn<TData extends Record<string, any> = {}>(
+  { tableOptions }: Params<TData>,
+  order: MRT_ColumnOrderState,
+): MRT_ColumnDef<TData> | null {
+  const id: MRT_DisplayColumnIds = 'mrt-row-select';
+  if (order.includes(id)) {
+    return {
+      Cell: ({ row, table }) => <MRT_SelectCheckbox row={row} table={table} />,
+      Header:
+        tableOptions.enableSelectAll && tableOptions.enableMultiRowSelection
+          ? ({ table }) => <MRT_SelectCheckbox selectAll table={table} />
+          : undefined,
+      ...defaultDisplayColumnProps(tableOptions, id, 'select'),
+    };
+  }
+  return null;
+}
+
+function makeRowNumbersColumn<TData extends Record<string, any> = {}>(
+  { tableOptions }: Params<TData>,
+  order: MRT_ColumnOrderState,
+): MRT_ColumnDef<TData> | null {
+  const id: MRT_DisplayColumnIds = 'mrt-row-numbers';
+  if (order.includes(id) || tableOptions.enableRowNumbers)
+    return {
+      Cell: ({ row }) => row.index + 1,
+      Header: () => tableOptions.localization.rowNumber,
+      ...defaultDisplayColumnProps(tableOptions, id, 'rowNumbers'),
+    };
+  return null;
+}
+
+function makeSpacerColumn<TData extends Record<string, any> = {}>(
+  { tableOptions }: Params<TData>,
+  order: MRT_ColumnOrderState,
+): MRT_ColumnDef<TData> | null {
+  const id: MRT_DisplayColumnIds = 'mrt-row-spacer';
+  if (order.includes(id)) {
+    return {
+      ...defaultDisplayColumnProps(tableOptions, id, undefined, 0),
+      muiTableBodyCellProps: blankColProps,
+      muiTableFooterCellProps: blankColProps,
+      muiTableHeadCellProps: blankColProps,
+    };
+  }
+  return null;
+}
