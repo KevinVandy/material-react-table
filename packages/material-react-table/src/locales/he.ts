@@ -70,7 +70,8 @@ export const MRT_Localization_HE: MRT_Localization = {
   rowsPerPage: 'שורות לעמוד',
   save: 'שמור',
   search: 'חיפוש',
-  selectedCountOfRowCountRowsSelected: '{selectedCount} מתוך {rowCount} שורות נבחרו',
+  selectedCountOfRowCountRowsSelected:
+    '{selectedCount} מתוך {rowCount} שורות נבחרו',
   select: 'בחר',
   showAll: 'הצג הכל',
   showAllColumns: 'הצג את כל העמודות',

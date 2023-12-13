@@ -62,8 +62,8 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
       row
         ? row.getToggleSelectedHandler()(event)
         : selectAllMode === 'all'
-        ? table.getToggleAllRowsSelectedHandler()(event)
-        : table.getToggleAllPageRowsSelectedHandler()(event);
+          ? table.getToggleAllRowsSelectedHandler()(event)
+          : table.getToggleAllPageRowsSelectedHandler()(event);
       if (enableRowPinning && rowPinningDisplayMode?.includes('select')) {
         if (row) {
           row.pin(

@@ -107,10 +107,10 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
     ? textFieldProps?.placeholder ??
       localization.filterByColumn?.replace('{column}', String(columnDef.header))
     : rangeFilterIndex === 0
-    ? localization.min
-    : rangeFilterIndex === 1
-    ? localization.max
-    : '';
+      ? localization.min
+      : rangeFilterIndex === 1
+        ? localization.max
+        : '';
   const allowedColumnFilterOptions =
     columnDef?.columnFilterModeOptions ?? columnFilterModeOptions;
   const showChangeModeButton =
@@ -127,10 +127,10 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
     isMultiSelectFilter
       ? (column.getFilterValue() as string[]) || []
       : isRangeFilter
-      ? (column.getFilterValue() as [string, string])?.[
-          rangeFilterIndex as number
-        ] || ''
-      : (column.getFilterValue() as string) ?? '',
+        ? (column.getFilterValue() as [string, string])?.[
+            rangeFilterIndex as number
+          ] || ''
+        : (column.getFilterValue() as string) ?? '',
   );
 
   const handleChangeDebounced = useCallback(
@@ -161,8 +161,8 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
       textFieldProps.type === 'date'
         ? event.target.valueAsDate
         : textFieldProps.type === 'number'
-        ? event.target.valueAsNumber
-        : event.target.value;
+          ? event.target.valueAsNumber
+          : event.target.value;
     handleChange(newValue);
     textFieldProps?.onChange?.(event);
   };
@@ -337,12 +337,12 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
       minWidth: isDateFilter
         ? '160px'
         : enableColumnFilterModes && rangeFilterIndex === 0
-        ? '110px'
-        : isRangeFilter
-        ? '100px'
-        : !filterChipLabel
-        ? '120px'
-        : 'auto',
+          ? '110px'
+          : isRangeFilter
+            ? '100px'
+            : !filterChipLabel
+              ? '120px'
+              : 'auto',
       mx: '-2px',
       p: 0,
       width: 'calc(100% + 4px)',

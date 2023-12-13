@@ -98,10 +98,10 @@ const TableOptionsTable = ({ onlyOptions }: Props) => {
                 row.original.source === 'MRT'
                   ? 'text.primary'
                   : row.original.source === 'Material UI'
-                  ? 'primary.main'
-                  : row.original.source === 'TanStack Table'
-                  ? 'secondary.main'
-                  : undefined
+                    ? 'primary.main'
+                    : row.original.source === 'TanStack Table'
+                      ? 'secondary.main'
+                      : undefined
               }
               target={
                 cell.getValue<string>().startsWith('http')

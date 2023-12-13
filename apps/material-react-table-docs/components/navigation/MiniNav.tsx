@@ -53,10 +53,10 @@ export const MiniNav = () => {
                   heading.localName === 'h3'
                     ? '1rem'
                     : heading.localName === 'h4'
-                    ? '2rem'
-                    : heading.localName === 'h5'
-                    ? '3rem'
-                    : 0,
+                      ? '2rem'
+                      : heading.localName === 'h5'
+                        ? '3rem'
+                        : 0,
               }}
             >
               <Link

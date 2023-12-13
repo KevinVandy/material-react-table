@@ -114,8 +114,8 @@ export const SampleCodeSnippet = (props: Props) => {
                     color: line[0].content.startsWith('-')
                       ? theme.palette.error.main
                       : line[0].content.startsWith('+')
-                      ? theme.palette.success.main
-                      : undefined,
+                        ? theme.palette.success.main
+                        : undefined,
                   }}
                 >
                   {line.map((token, key) => (

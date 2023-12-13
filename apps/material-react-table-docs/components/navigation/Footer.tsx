@@ -36,10 +36,10 @@ export const Footer = () => {
           ['/'].includes(pathname)
             ? 'index.tsx'
             : ['/docs', '/docs/api', '/docs/examples', '/docs/guides'].includes(
-                pathname,
-              )
-            ? '/index.mdx'
-            : '.mdx'
+                  pathname,
+                )
+              ? '/index.mdx'
+              : '.mdx'
         }`}
         onClick={() => plausible('edit-on-github')}
         rel="noopener"

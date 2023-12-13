@@ -97,10 +97,10 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
     const borderStyle = showResizeBorder
       ? `2px solid ${draggingBorderColor} !important`
       : draggingColumn?.id === column.id
-      ? `1px dashed ${theme.palette.grey[500]}`
-      : hoveredColumn?.id === column.id
-      ? `2px dashed ${draggingBorderColor}`
-      : undefined;
+        ? `1px dashed ${theme.palette.grey[500]}`
+        : hoveredColumn?.id === column.id
+          ? `2px dashed ${draggingBorderColor}`
+          : undefined;
 
     if (showResizeBorder) {
       return { borderRight: borderStyle };
@@ -158,32 +158,32 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
           density === 'compact'
             ? '0.5rem'
             : density === 'comfortable'
-            ? columnDefType === 'display'
-              ? '0.75rem'
-              : '1rem'
-            : columnDefType === 'display'
-            ? '1rem 1.25rem'
-            : '1.5rem',
+              ? columnDefType === 'display'
+                ? '0.75rem'
+                : '1rem'
+              : columnDefType === 'display'
+                ? '1rem 1.25rem'
+                : '1.5rem',
         pb:
           columnDefType === 'display'
             ? 0
             : showColumnFilters || density === 'compact'
-            ? '0.4rem'
-            : '0.6rem',
+              ? '0.4rem'
+              : '0.6rem',
         pt:
           columnDefType === 'group' || density === 'compact'
             ? '0.25rem'
             : density === 'comfortable'
-            ? '.75rem'
-            : '1.25rem',
+              ? '.75rem'
+              : '1.25rem',
         userSelect: enableMultiSort && column.getCanSort() ? 'none' : undefined,
         verticalAlign: 'top',
         zIndex:
           column.getIsResizing() || draggingColumn?.id === column.id
             ? 3
             : column.getIsPinned() && columnDefType !== 'group'
-            ? 2
-            : 1,
+              ? 2
+              : 1,
         ...getCommonMRTCellStyles({
           column,
           header,
@@ -209,8 +209,8 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
                   tableCellProps?.align === 'center'
                     ? 'center'
                     : column.getCanResize()
-                    ? 'space-between'
-                    : 'flex-start',
+                      ? 'space-between'
+                      : 'flex-start',
                 position: 'relative',
                 width: '100%',
               }}
@@ -264,7 +264,11 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
               {columnDefType !== 'group' && (
                 <Box
                   className="Mui-TableHeadCell-Content-Actions"
-                  sx={{ whiteSpace: 'nowrap' }}
+                  sx={{
+                    overflow: 'hidden',
+                    position: 'relative',
+                    whiteSpace: 'nowrap',
+                  }}
                 >
                   {showDragHandle && (
                     <MRT_TableHeadCellGrabHandle

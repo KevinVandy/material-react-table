@@ -84,8 +84,8 @@ const TableOfContentsList = ({
                   ...(item.secondaryItems
                     ? item.secondaryItems
                     : item.items
-                    ? item.items
-                    : []),
+                      ? item.items
+                      : []),
                 ]}
               />
             )}

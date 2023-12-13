@@ -103,10 +103,10 @@ export const SourceCodeSnippet = ({
       (codeTab === 'ts'
         ? typeScriptCode
         : codeTab === 'js'
-        ? javaScriptCode
-        : codeTab === 'legacy'
-        ? legacyCode
-        : apiCode) ?? '',
+          ? javaScriptCode
+          : codeTab === 'legacy'
+            ? legacyCode
+            : apiCode) ?? '',
     );
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 3000);
@@ -193,10 +193,10 @@ export const SourceCodeSnippet = ({
                         codeTab === 'ts'
                           ? 'TS.tsx'
                           : codeTab === 'js'
-                          ? 'JS.js'
-                          : codeTab === 'legacy'
-                          ? 'Props.tsx'
-                          : 'API.ts'
+                            ? 'JS.js'
+                            : codeTab === 'legacy'
+                              ? 'Props.tsx'
+                              : 'API.ts'
                       }`}
                       onClick={() => plausible('open-on-github')}
                       rel="noopener"
@@ -398,10 +398,10 @@ export const SourceCodeSnippet = ({
                 (codeTab === 'ts'
                   ? typeScriptCode
                   : codeTab === 'js'
-                  ? javaScriptCode
-                  : codeTab === 'legacy'
-                  ? legacyCode
-                  : apiCode) ?? ''
+                    ? javaScriptCode
+                    : codeTab === 'legacy'
+                      ? legacyCode
+                      : apiCode) ?? ''
               }
               language={codeTab !== 'js' ? 'tsx' : 'jsx'}
               theme={

@@ -52,10 +52,10 @@ export const MRT_TableHeadCellResizeHandle = <TData extends MRT_RowData>({
         cursor: 'col-resize',
         mr:
           density === 'compact'
-            ? '-12px'
+            ? '-8px'
             : density === 'comfortable'
-            ? '-20px'
-            : '-28px',
+              ? '-16px'
+              : '-24px',
         position: 'absolute',
         px: '4px',
         right: column.columnDef.columnDefType === 'display' ? '4px' : '0',
@@ -70,6 +70,7 @@ export const MRT_TableHeadCellResizeHandle = <TData extends MRT_RowData>({
           borderWidth: '2px',
           height: '24px',
           touchAction: 'none',
+          transform: 'translateX(4px)',
           transition: column.getIsResizing()
             ? undefined
             : 'all 150ms ease-in-out',

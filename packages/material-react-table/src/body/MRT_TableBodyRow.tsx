@@ -153,8 +153,8 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
                 ? row.getIsSelected()
                   ? `${alpha(selectedRowBackgroundColor, 0.3)}`
                   : theme.palette.mode === 'dark'
-                  ? `${lighten(baseBackgroundColor, 0.05)}`
-                  : `${darken(baseBackgroundColor, 0.05)}`
+                    ? `${lighten(baseBackgroundColor, 0.05)}`
+                    : `${darken(baseBackgroundColor, 0.05)}`
                 : undefined,
           },
           backgroundColor: `${baseBackgroundColor} !important`,
@@ -170,28 +170,28 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
           opacity: isPinned
             ? 0.97
             : draggingRow?.id === row.id || hoveredRow?.id === row.id
-            ? 0.5
-            : 1,
+              ? 0.5
+              : 1,
           position: virtualRow
             ? 'absolute'
             : rowPinningDisplayMode?.includes('sticky') && isPinned
-            ? 'sticky'
-            : undefined,
+              ? 'sticky'
+              : undefined,
           td: {
             backgroundColor: row.getIsSelected()
               ? selectedRowBackgroundColor
               : isPinned
-              ? pinnedRowBackgroundColor
-              : undefined,
+                ? pinnedRowBackgroundColor
+                : undefined,
           },
           top: virtualRow
             ? 0
             : topPinnedIndex !== undefined && isPinned
-            ? `${
-                topPinnedIndex * rowHeight +
-                (enableStickyHeader || isFullScreen ? tableHeadHeight - 1 : 0)
-              }px`
-            : undefined,
+              ? `${
+                  topPinnedIndex * rowHeight +
+                  (enableStickyHeader || isFullScreen ? tableHeadHeight - 1 : 0)
+                }px`
+              : undefined,
           transition: virtualRow ? 'none' : 'all 150ms ease-in-out',
           width: '100%',
           zIndex:

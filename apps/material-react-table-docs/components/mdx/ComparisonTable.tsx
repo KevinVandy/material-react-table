@@ -20,10 +20,10 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
             cell.getValue() === 'Material React Table'
               ? theme.palette.primary.main
               : cell.getValue() === 'Mantine React Table'
-              ? theme.palette.secondary.light
-              : cell.getValue() === 'TanStack Table (React Table)'
-              ? theme.palette.error.main
-              : theme.palette.text.primary,
+                ? theme.palette.secondary.light
+                : cell.getValue() === 'TanStack Table (React Table)'
+                  ? theme.palette.error.main
+                  : theme.palette.text.primary,
           fontWeight: 'bold',
           textDecoration: 'none',
           '&:hover': {

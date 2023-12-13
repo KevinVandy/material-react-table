@@ -83,8 +83,8 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
     boxShadow: getIsLastLeftPinnedColumn(table, column)
       ? `-4px 0 8px -6px ${alpha(theme.palette.grey[700], 0.5)} inset`
       : getIsFirstRightPinnedColumn(column)
-      ? `4px 0 8px -6px ${alpha(theme.palette.grey[700], 0.5)} inset`
-      : undefined,
+        ? `4px 0 8px -6px ${alpha(theme.palette.grey[700], 0.5)} inset`
+        : undefined,
     display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
     left:
       column.getIsPinned() === 'left'

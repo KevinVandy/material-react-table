@@ -106,8 +106,8 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
           outline: isDragging
             ? `2px dashed ${theme.palette.grey[500]}`
             : hoveredColumn?.id === column.id
-            ? `2px dashed ${getMRTTheme(table, theme).draggingBorderColor}`
-            : 'none',
+              ? `2px dashed ${getMRTTheme(table, theme).draggingBorderColor}`
+              : 'none',
           outlineOffset: '-2px',
           pl: `${(column.depth + 0.5) * 2}rem`,
           py: '6px',

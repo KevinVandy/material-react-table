@@ -57,18 +57,18 @@ export const SideBarItems = ({
                         ? theme.palette.secondary.light
                         : theme.palette.secondary.dark
                       : !items
-                      ? theme.palette.mode === 'dark'
-                        ? theme.palette.primary.main
-                        : theme.palette.primary.dark
-                      : depth === 1
-                      ? theme.palette.text.primary
-                      : theme.palette.text.secondary,
+                        ? theme.palette.mode === 'dark'
+                          ? theme.palette.primary.main
+                          : theme.palette.primary.dark
+                        : depth === 1
+                          ? theme.palette.text.primary
+                          : theme.palette.text.secondary,
                     fontSize:
                       !items && !isSelectedParent
                         ? '0.9rem'
                         : depth === 1
-                        ? '1.25rem'
-                        : '1rem',
+                          ? '1.25rem'
+                          : '1rem',
                     fontWeight: isSelectedParent ? 'bold' : 'normal',
                     height: items ? '2.5rem' : '2rem',
                     lineHeight: depth === 0 && !items ? '1.25rem' : '0.75rem',

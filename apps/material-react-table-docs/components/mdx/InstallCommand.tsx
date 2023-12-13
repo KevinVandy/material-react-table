@@ -35,10 +35,10 @@ export const InstallCommand = ({
         {tab === 'npm'
           ? `npm i ${packagesString}`
           : tab === 'pnpm'
-          ? `pnpm add ${packagesString}`
-          : tab === 'yarn'
-          ? `yarn add ${packagesString}`
-          : `bun add ${packagesString}`}
+            ? `pnpm add ${packagesString}`
+            : tab === 'yarn'
+              ? `yarn add ${packagesString}`
+              : `bun add ${packagesString}`}
       </SampleCodeSnippet>
     </>
   );

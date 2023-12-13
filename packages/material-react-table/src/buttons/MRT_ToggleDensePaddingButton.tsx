@@ -25,8 +25,8 @@ export const MRT_ToggleDensePaddingButton = <TData extends MRT_RowData>({
       density === 'comfortable'
         ? 'compact'
         : density === 'compact'
-        ? 'spacious'
-        : 'comfortable';
+          ? 'spacious'
+          : 'comfortable';
     setDensity(nextDensity);
   };
 

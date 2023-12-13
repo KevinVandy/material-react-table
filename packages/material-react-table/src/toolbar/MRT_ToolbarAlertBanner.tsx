@@ -100,8 +100,8 @@ export const MRT_ToolbarAlertBanner = <TData extends MRT_RowData>({
           mb: stackAlertBanner
             ? 0
             : positionToolbarAlertBanner === 'bottom'
-            ? '-1rem'
-            : undefined,
+              ? '-1rem'
+              : undefined,
           p: 0,
           position: 'relative',
           right: 0,
@@ -124,10 +124,10 @@ export const MRT_ToolbarAlertBanner = <TData extends MRT_RowData>({
                   positionToolbarAlertBanner !== 'head-overlay'
                     ? '0.5rem 1rem'
                     : density === 'spacious'
-                    ? '0.75rem 1.25rem'
-                    : density === 'comfortable'
-                    ? '0.5rem 0.75rem'
-                    : '0.25rem 0.5rem',
+                      ? '0.75rem 1.25rem'
+                      : density === 'comfortable'
+                        ? '0.5rem 0.75rem'
+                        : '0.25rem 0.5rem',
               }}
             >
               {alertProps?.children}

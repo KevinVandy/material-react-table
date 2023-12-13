@@ -47,8 +47,8 @@ export const MRT_TableFooterCell = <TData extends MRT_RowData>({
           density === 'compact'
             ? '0.5rem'
             : density === 'comfortable'
-            ? '1rem'
-            : '1.5rem',
+              ? '1rem'
+              : '1.5rem',
         verticalAlign: 'top',
         zIndex: column.getIsPinned() && columnDefType !== 'group' ? 2 : 1,
         ...getCommonMRTCellStyles({

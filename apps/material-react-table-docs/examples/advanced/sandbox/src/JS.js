@@ -84,8 +84,8 @@ const Example = () => {
                     cell.getValue() < 50_000
                       ? theme.palette.error.dark
                       : cell.getValue() >= 50_000 && cell.getValue() < 75_000
-                      ? theme.palette.warning.dark
-                      : theme.palette.success.dark,
+                        ? theme.palette.warning.dark
+                        : theme.palette.success.dark,
                   borderRadius: '0.25rem',
                   color: '#fff',
                   maxWidth: '9ch',
