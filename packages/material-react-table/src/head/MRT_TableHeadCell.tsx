@@ -265,8 +265,6 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
                 <Box
                   className="Mui-TableHeadCell-Content-Actions"
                   sx={{
-                    overflow: 'hidden',
-                    position: 'relative',
                     whiteSpace: 'nowrap',
                   }}
                 >

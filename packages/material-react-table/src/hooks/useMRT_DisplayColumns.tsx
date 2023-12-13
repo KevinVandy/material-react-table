@@ -36,7 +36,7 @@ interface Params<TData extends MRT_RowData> {
 
 export const useMRT_DisplayColumns = <TData extends MRT_RowData>(
   params: Params<TData>,
-) => {
+): MRT_ColumnDef<TData>[] => {
   const { columnOrder, creatingRow, grouping, tableOptions } = params;
   const order = tableOptions.state?.columnOrder ?? columnOrder;
 
@@ -52,7 +52,7 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>(
         makeSpacerColumn,
       ]
         .map((makeCol) => makeCol(params, order))
-        .filter(Boolean),
+        .filter(Boolean) as MRT_ColumnDef<TData>[],
     [
       columnOrder,
       creatingRow,
