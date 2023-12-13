@@ -17,16 +17,6 @@ import {
   type MRT_RowData,
 } from '../types';
 
-const blankColProps = {
-  children: null,
-  sx: {
-    flex: '1 0 auto',
-    minWidth: 0,
-    p: 0,
-    width: 0,
-  },
-};
-
 interface Params<TData extends MRT_RowData> {
   columnOrder: MRT_ColumnOrderState;
   creatingRow: MRT_Row<TData> | null;
@@ -208,6 +198,16 @@ function makeRowNumbersColumn<TData extends Record<string, any> = {}>(
     };
   return null;
 }
+
+const blankColProps = {
+  children: null,
+  sx: {
+    flex: '1 0 auto',
+    minWidth: 0,
+    p: 0,
+    width: 0,
+  },
+};
 
 function makeSpacerColumn<TData extends Record<string, any> = {}>(
   { tableOptions }: Params<TData>,

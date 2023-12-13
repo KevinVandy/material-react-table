@@ -931,3 +931,58 @@ export const EnableEditingConditionallyTable = () => {
     />
   );
 };
+
+export const EditingCellManualOnChange = () => {
+  const [tableData, setTableData] = useState(data);
+
+  const handleSaveCell = (cell: MRT_Cell<Person>, value: any) => {
+    //@ts-ignore
+    tableData[cell.row.index][cell.column.id] = value;
+    setTableData([...tableData]);
+  };
+
+  return (
+    <MaterialReactTable
+      columns={[
+        {
+          accessorKey: 'firstName',
+          header: 'First Name',
+        },
+        {
+          accessorKey: 'lastName',
+          header: 'Last Name',
+        },
+        {
+          accessorKey: 'address',
+          header: 'Address',
+        },
+        {
+          accessorKey: 'state',
+          header: 'State',
+          muiEditTextFieldProps: ({ cell }) => ({
+            onChange: (event) =>
+              console.log('state col onChange', event.target.value),
+            onBlur: (event) => {
+              handleSaveCell(cell, event.target.value);
+            },
+          }),
+        },
+        {
+          accessorKey: 'phoneNumber',
+          enableEditing: false,
+          header: 'Phone Number',
+        },
+      ]}
+      data={tableData}
+      editDisplayMode="cell"
+      enableEditing
+      muiEditTextFieldProps={({ cell }) => ({
+        onChange: (event) =>
+          console.log('all col onChange', event.target.value),
+        onBlur: (event) => {
+          handleSaveCell(cell, event.target.value);
+        },
+      })}
+    />
+  );
+};
