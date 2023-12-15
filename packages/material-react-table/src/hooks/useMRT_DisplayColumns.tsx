@@ -37,7 +37,7 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>(
         makeRowDragColumn,
         makeRowActionsColumn,
         makeRowExpandColumn,
-        makeSelectColumn,
+        makeRowSelectColumn,
         makeRowNumbersColumn,
         makeSpacerColumn,
       ]
@@ -73,7 +73,7 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>(
   );
 };
 
-function defaultDisplayColumnProps<TData extends Record<string, any> = {}>(
+function defaultDisplayColumnProps<TData extends MRT_RowData>(
   {
     defaultDisplayColumn,
     displayColumnDefOptions,
@@ -84,15 +84,15 @@ function defaultDisplayColumnProps<TData extends Record<string, any> = {}>(
   size = 60,
 ) {
   return {
-    header: header ? localization[header]! : '',
     ...defaultDisplayColumn,
+    header: header ? localization[header]! : '',
+    size,
     ...displayColumnDefOptions?.[id],
     id,
-    size,
   } as const;
 }
 
-function makeRowPinColumn<TData extends Record<string, any> = {}>(
+function makeRowPinColumn<TData extends MRT_RowData>(
   { tableOptions }: Params<TData>,
   order: MRT_ColumnOrderState,
 ): MRT_ColumnDef<TData> | null {
@@ -108,7 +108,7 @@ function makeRowPinColumn<TData extends Record<string, any> = {}>(
   return null;
 }
 
-function makeRowDragColumn<TData extends Record<string, any> = {}>(
+function makeRowDragColumn<TData extends MRT_RowData>(
   { tableOptions }: Params<TData>,
   order: MRT_ColumnOrderState,
 ): MRT_ColumnDef<TData> | null {
@@ -128,7 +128,7 @@ function makeRowDragColumn<TData extends Record<string, any> = {}>(
   return null;
 }
 
-function makeRowActionsColumn<TData extends Record<string, any> = {}>(
+function makeRowActionsColumn<TData extends MRT_RowData>(
   { creatingRow, tableOptions }: Params<TData>,
   order: MRT_ColumnOrderState,
 ): MRT_ColumnDef<TData> | null {
@@ -147,7 +147,7 @@ function makeRowActionsColumn<TData extends Record<string, any> = {}>(
   return null;
 }
 
-function makeRowExpandColumn<TData extends Record<string, any> = {}>(
+function makeRowExpandColumn<TData extends MRT_RowData>(
   { grouping, tableOptions }: Params<TData>,
   order: MRT_ColumnOrderState,
 ): MRT_ColumnDef<TData> | null {
@@ -167,7 +167,7 @@ function makeRowExpandColumn<TData extends Record<string, any> = {}>(
   return null;
 }
 
-function makeSelectColumn<TData extends Record<string, any> = {}>(
+function makeRowSelectColumn<TData extends MRT_RowData>(
   { tableOptions }: Params<TData>,
   order: MRT_ColumnOrderState,
 ): MRT_ColumnDef<TData> | null {
@@ -185,7 +185,7 @@ function makeSelectColumn<TData extends Record<string, any> = {}>(
   return null;
 }
 
-function makeRowNumbersColumn<TData extends Record<string, any> = {}>(
+function makeRowNumbersColumn<TData extends MRT_RowData>(
   { tableOptions }: Params<TData>,
   order: MRT_ColumnOrderState,
 ): MRT_ColumnDef<TData> | null {
@@ -209,7 +209,7 @@ const blankColProps = {
   },
 };
 
-function makeSpacerColumn<TData extends Record<string, any> = {}>(
+function makeSpacerColumn<TData extends MRT_RowData>(
   { tableOptions }: Params<TData>,
   order: MRT_ColumnOrderState,
 ): MRT_ColumnDef<TData> | null {

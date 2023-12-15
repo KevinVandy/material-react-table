@@ -12,33 +12,37 @@ import Head from 'next/head';
 
 ### Version 2
 
-#### Version 2.0.5 - 12-05-2023
+#### Version 2.0.6 - 2023-12-15
+
+- Fixed horizontal scrollbar showing up in layoutMode grid with column resizing enabled
+
+#### Version 2.0.5 - 2023-12-05
 
 - Upgraded to TanStack Virtual `v3.0.1` stable release
 - Added `MuiTablePagination-root` class to mrt pagination root element for easier styling
 - Fixed potential duplicate key warning while rendering skeleton rows when `getRowId` table option is provided and doesn't properly return `undefined`
 - Fixed `muiSearchTextFieldProps.InputProps` now able to partially overridden
 
-#### Version 2.0.4 - 11-09-2023
+#### Version 2.0.4 - 2023-11-09
 
 - Add support for `'all'` rows pagination option
 - Added `muiPaginationProps.SelectProps` support back to allow for native select
 
-#### Version 2.0.3 - 11-06-2023
+#### Version 2.0.3 - 2023-11-06
 
 - Locale updates
 
-#### Version 2.0.2 - 11-01-2023
+#### Version 2.0.2 - 2023-11-01
 
 - Fixed bug with popover filters null ref focus
 
-#### Version 2.0.1 - 10-31-2023
+#### Version 2.0.1 - 2023-10-31
 
 - Fixed bug where edit row action menu was created for all editDisplayModes
 - Fixed rest spread on table head row
 - Changed pagination text to a span instead of with hardcoded 0 margin and padding
 
-#### Version 2.0.0 - 10-27-2023
+#### Version 2.0.0 - 2023-10-27
 
 - Made `MaterialReactTable` a named export instead of a default export.
 - Made `@mui/x-date-pickers` a required peer dependency.
