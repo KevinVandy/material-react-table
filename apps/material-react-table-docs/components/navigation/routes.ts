@@ -255,6 +255,10 @@ export const routes: Array<RouteItem> = [
             label: 'React Query Example',
           },
           {
+            href: '/docs/examples/dynamic-columns',
+            label: 'Dynamic Columns Example',
+          },
+          {
             href: '/docs/examples/remote',
             label: 'Remote Data Fetching Example',
           },

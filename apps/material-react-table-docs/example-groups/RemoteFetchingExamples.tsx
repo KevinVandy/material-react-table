@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { Box, Tab, Tabs } from '@mui/material';
 import ReactQueryExample from '../examples/react-query';
+import DynamicColumns from '../examples/dynamic-columns';
 import RemoteExample from '../examples/remote';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -26,6 +27,7 @@ const RemoteFetchingExamples = ({ isPage = false }) => {
           }
         >
           <Tab label="React Query" value="react-query" />
+          <Tab label="Dynamic Columns" value="dynamic-columns" />
           <Tab label="useEffect" value="remote" />
           <Tab
             label={
@@ -62,6 +64,7 @@ const RemoteFetchingExamples = ({ isPage = false }) => {
       </Box>
       <Box>
         {activeTab === 'react-query' && <ReactQueryExample />}
+        {activeTab === 'dynamic-columns' && <DynamicColumns />}
         {activeTab === 'remote' && <RemoteExample />}
       </Box>
     </>
