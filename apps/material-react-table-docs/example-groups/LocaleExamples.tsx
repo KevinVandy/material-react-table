@@ -13,6 +13,7 @@ import ET_Table from '../examples/localization-i18n-et';
 import FA_Table from '../examples/localization-i18n-fa';
 import FI_Table from '../examples/localization-i18n-fi';
 import FR_Table from '../examples/localization-i18n-fr';
+import HE_Table from '../examples/localization-i18n-he';
 import HU_Table from '../examples/localization-i18n-hu';
 import HY_Table from '../examples/localization-i18n-hy';
 import ID_Table from '../examples/localization-i18n-id';
@@ -51,6 +52,7 @@ const supportedLocales = [
   'fa',
   'fi',
   'fr',
+  'he',
   'hu',
   'hy',
   'id',
@@ -113,6 +115,7 @@ const LocaleExamples = () => {
       {currentLocale === 'fa' && <FA_Table />}
       {currentLocale === 'fi' && <FI_Table />}
       {currentLocale === 'fr' && <FR_Table />}
+      {currentLocale === 'he' && <HE_Table />}
       {currentLocale === 'hu' && <HU_Table />}
       {currentLocale === 'hy' && <HY_Table />}
       {currentLocale === 'id' && <ID_Table />}

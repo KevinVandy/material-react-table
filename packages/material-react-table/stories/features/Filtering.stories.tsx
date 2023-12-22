@@ -567,6 +567,41 @@ export const CustomFilterComponent = () => (
   />
 );
 
+export const CustomizeFilterTextFields = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+      {
+        accessorKey: 'age',
+        header: 'Age',
+      },
+      {
+        accessorKey: 'gender',
+        filterVariant: 'select',
+        header: 'Gender',
+      },
+      {
+        accessorKey: 'address',
+        header: 'Address',
+      },
+      {
+        accessorKey: 'state',
+        header: 'State',
+      },
+    ]}
+    muiFilterTextFieldProps={{ variant: 'outlined' }}
+    data={data}
+    initialState={{ showColumnFilters: true }}
+  />
+);
+
 export const ManualFiltering = () => {
   const [rows, setRows] = useState(() => [...data]);
   const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(

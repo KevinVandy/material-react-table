@@ -160,9 +160,17 @@ const table = useMaterialReactTable({
   enableEditing: true,
   editDisplayMode: 'cell',
   //optionally, use single-click to activate editing mode instead of default double-click
-  muiTableBodyCellProps: ({ table, cell }) => ({
+  muiTableBodyCellProps: ({ cell, column, table }) => ({
     onClick: () => {
-      table.setEditingCell(cell);
+      table.setEditingCell(cell); //set editing cell
+      //optionally, focus the text field
+      queueMicrotask(() => {
+        const textField = table.refs.editInputRefs.current[column.id];
+        if (textField) {
+          textField.focus();
+          textField.select?.();
+        }
+      });
     },
   }),
 });

@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useTheme } from '@mui/material';
 import { MRT_AggregationFns } from '../aggregationFns';
 import { MRT_FilterFns } from '../filterFns';
 import { MRT_Default_Icons } from '../icons';
@@ -38,6 +39,7 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
   aggregationFns,
   autoResetExpanded = false,
   columnFilterDisplayMode = 'subheader',
+  columnResizeDirection,
   columnResizeMode = 'onChange',
   createDisplayMode = 'modal',
   defaultColumn,
@@ -92,6 +94,7 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
   sortingFns,
   ...rest
 }: MRT_TableOptions<TData>) => {
+  const theme = useTheme();
   const _icons = useMemo(() => ({ ...MRT_Default_Icons, ...icons }), [icons]);
   const _localization = useMemo(
     () => ({
@@ -117,6 +120,10 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
     }),
     [defaultDisplayColumn],
   );
+
+  if (!columnResizeDirection) {
+    columnResizeDirection = theme.direction || 'ltr';
+  }
 
   layoutMode =
     layoutMode || (enableColumnResizing ? 'grid-no-grow' : 'semantic');
@@ -146,6 +153,7 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
     aggregationFns: _aggregationFns,
     autoResetExpanded,
     columnFilterDisplayMode,
+    columnResizeDirection,
     columnResizeMode,
     createDisplayMode,
     defaultColumn: _defaultColumn,

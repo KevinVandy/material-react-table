@@ -30,6 +30,8 @@ const Example = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
+      defaultColumn={{ size: 250 }}
+      columnResizeDirection="rtl"
       enableColumnFilterModes
       enableColumnOrdering
       enableColumnResizing

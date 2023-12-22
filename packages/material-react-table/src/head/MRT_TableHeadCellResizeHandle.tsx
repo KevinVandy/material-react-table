@@ -19,11 +19,20 @@ export const MRT_TableHeadCellResizeHandle = <TData extends MRT_RowData>({
 }: Props<TData>) => {
   const {
     getState,
-    options: { columnResizeMode },
+    options: { columnResizeDirection, columnResizeMode },
     setColumnSizingInfo,
   } = table;
   const { density } = getState();
   const { column } = header;
+
+  const mx =
+    density === 'compact'
+      ? '-8px'
+      : density === 'comfortable'
+        ? '-16px'
+        : '-24px';
+
+  const lr = column.columnDef.columnDefType === 'display' ? '4px' : '0';
 
   return (
     <Box
@@ -40,7 +49,10 @@ export const MRT_TableHeadCellResizeHandle = <TData extends MRT_RowData>({
       style={{
         transform:
           column.getIsResizing() && columnResizeMode === 'onEnd'
-            ? `translateX(${getState().columnSizingInfo.deltaOffset ?? 0}px)`
+            ? `translateX(${
+                (columnResizeDirection === 'rtl' ? -1 : 1) *
+                (getState().columnSizingInfo.deltaOffset ?? 0)
+              }px)`
             : undefined,
       }}
       sx={(theme) => ({
@@ -50,15 +62,12 @@ export const MRT_TableHeadCellResizeHandle = <TData extends MRT_RowData>({
             header.subHeaders.length || columnResizeMode === 'onEnd' ? 1 : 0,
         },
         cursor: 'col-resize',
-        mr:
-          density === 'compact'
-            ? '-8px'
-            : density === 'comfortable'
-              ? '-16px'
-              : '-24px',
+        left: columnResizeDirection === 'rtl' ? lr : undefined,
+        ml: columnResizeDirection === 'rtl' ? mx : undefined,
+        mr: columnResizeDirection === 'ltr' ? mx : undefined,
         position: 'absolute',
         px: '4px',
-        right: column.columnDef.columnDefType === 'display' ? '4px' : '0',
+        right: columnResizeDirection === 'ltr' ? lr : undefined,
       })}
     >
       <Divider

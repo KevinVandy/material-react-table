@@ -48,6 +48,17 @@ export const ColumnResizingEnabledDefaultOnChange = () => (
   <MaterialReactTable columns={columns} data={data} enableColumnResizing />
 );
 
+export const ColumnResizingEnabledDefaultOnChangeRTL = () => (
+  <div style={{ direction: 'rtl' }}>
+    <MaterialReactTable
+      columnResizeDirection="rtl"
+      columns={columns}
+      data={data}
+      enableColumnResizing
+    />
+  </div>
+);
+
 export const ColumnResizingEnabledDefaultOnChangeGrid = () => (
   <MaterialReactTable
     columns={columns}
@@ -57,6 +68,18 @@ export const ColumnResizingEnabledDefaultOnChangeGrid = () => (
   />
 );
 
+export const ColumnResizingEnabledDefaultOnChangeGridRTL = () => (
+  <div style={{ direction: 'rtl' }}>
+    <MaterialReactTable
+      columnResizeDirection="rtl"
+      columns={columns}
+      data={data}
+      enableColumnResizing
+      layoutMode="grid"
+    />
+  </div>
+);
+
 export const ColumnResizingEnabledDefaultOnChangeSemantic = () => (
   <MaterialReactTable
     columns={columns}
@@ -64,6 +87,18 @@ export const ColumnResizingEnabledDefaultOnChangeSemantic = () => (
     enableColumnResizing
     layoutMode="semantic"
   />
+);
+
+export const ColumnResizingEnabledDefaultOnChangeSemanticRTL = () => (
+  <div style={{ direction: 'rtl' }}>
+    <MaterialReactTable
+      columnResizeDirection="rtl"
+      columns={columns}
+      data={data}
+      enableColumnResizing
+      layoutMode="semantic"
+    />
+  </div>
 );
 
 export const ColumnResizingEnabledNoColumnActions = () => (
@@ -116,6 +151,18 @@ export const ColumnResizingEnabledOnEnd = () => (
     data={data}
     enableColumnResizing
   />
+);
+
+export const ColumnResizingEnabledOnEndRTL = () => (
+  <div style={{ direction: 'rtl' }}>
+    <MaterialReactTable
+      columnResizeDirection="rtl"
+      columnResizeMode="onEnd"
+      columns={columns}
+      data={data}
+      enableColumnResizing
+    />
+  </div>
 );
 
 export const ColumnResizingCustomDefaultWidths = () => (
@@ -242,4 +289,17 @@ export const ColumnResizingLayoutGridGrow = () => (
     enableRowSelection
     layoutMode="grid"
   />
+);
+
+export const ColumnResizingLayoutGridGrowRTL = () => (
+  <div style={{ direction: 'rtl' }}>
+    <MaterialReactTable
+      columnResizeDirection="rtl"
+      columns={columns.slice(0, 3)}
+      data={data}
+      enableColumnResizing
+      enableRowSelection
+      layoutMode="grid"
+    />
+  </div>
 );

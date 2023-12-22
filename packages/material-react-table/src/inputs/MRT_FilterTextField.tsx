@@ -290,7 +290,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
         whiteSpace: 'nowrap',
       },
     },
-    InputProps: endAdornment //hack because mui looks for presense of endAdornment key instead of undefined
+    InputProps: endAdornment //hack because mui looks for presence of endAdornment key instead of undefined
       ? { endAdornment, startAdornment }
       : { startAdornment },
     fullWidth: true,

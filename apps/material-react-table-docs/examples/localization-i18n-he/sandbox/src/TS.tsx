@@ -2,7 +2,7 @@
 import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
 
 //Import Material React Table Translations
-import { MRT_Localization_HY } from 'material-react-table/src/locales/hy';
+import { MRT_Localization_HE } from 'material-react-table/locales/he';
 
 //mock data
 import { data, type Person } from './makeData';
@@ -11,16 +11,16 @@ const columns: MRT_ColumnDef<Person>[] = [
   //column definitions...
   {
     accessorKey: 'firstName',
-    header: 'Անուն',
+    header: 'שם פרטי',
   },
   {
     accessorKey: 'lastName',
-    header: 'Ազգանուն',
+    header: 'שם משפחה',
     enableClickToCopy: true,
   },
   {
     accessorKey: 'age',
-    header: 'Տարիք',
+    header: 'גיל',
   },
   //end
 ];
@@ -41,20 +41,21 @@ const Example = () => {
       enableRowSelection
       enableSelectAll={false}
       initialState={{ showColumnFilters: true, showGlobalFilter: true }}
-      localization={MRT_Localization_HY}
+      localization={MRT_Localization_HE}
     />
   );
 };
 
 //App.tsx or similar
 import { createTheme, ThemeProvider, useTheme } from '@mui/material';
-import { hyAM } from '@mui/material/locale';
+import { heIL } from '@mui/material/locale';
 
 const ExampleWithThemeProvider = () => {
   const theme = useTheme(); //replace with your theme/createTheme
+
   return (
     //Setting Material UI locale as best practice to result in better accessibility
-    <ThemeProvider theme={createTheme({ ...theme, direction: 'rtl' }, hyAM)}>
+    <ThemeProvider theme={createTheme({ ...theme, direction: 'rtl' }, heIL)}>
       <div style={{ direction: 'rtl' }}>
         <Example />
       </div>

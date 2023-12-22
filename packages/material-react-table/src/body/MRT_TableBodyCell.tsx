@@ -50,6 +50,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
   const {
     getState,
     options: {
+      columnResizeDirection,
       columnResizeMode,
       createDisplayMode,
       editDisplayMode,
@@ -119,28 +120,28 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     const isFirstColumn = getIsFirstColumn(column, table);
     const isLastColumn = getIsLastColumn(column, table);
     const isLastRow = numRows && rowIndex === numRows - 1;
+    const isResizingColumn = columnSizingInfo.isResizingColumn === column.id;
     const showResizeBorder =
-      columnSizingInfo.isResizingColumn === column.id &&
-      columnResizeMode === 'onChange';
+      isResizingColumn && columnResizeMode === 'onChange';
 
     const borderStyle = showResizeBorder
       ? `2px solid ${draggingBorderColor} !important`
       : isDraggingColumn || isDraggingRow
         ? `1px dashed ${theme.palette.grey[500]} !important`
-        : isHoveredColumn ||
-            isHoveredRow ||
-            columnSizingInfo.isResizingColumn === column.id
+        : isHoveredColumn || isHoveredRow || isResizingColumn
           ? `2px dashed ${draggingBorderColor} !important`
           : undefined;
 
     if (showResizeBorder) {
-      return { borderRight: borderStyle };
+      return columnResizeDirection === 'ltr'
+        ? { borderRight: borderStyle }
+        : { borderLeft: borderStyle };
     }
 
     return borderStyle
       ? {
           borderBottom:
-            isDraggingRow || isHoveredRow || isLastRow
+            isDraggingRow || isHoveredRow || (isLastRow && !isResizingColumn)
               ? borderStyle
               : undefined,
           borderLeft:

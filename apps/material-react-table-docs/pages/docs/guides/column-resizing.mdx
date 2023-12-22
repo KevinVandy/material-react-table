@@ -3,6 +3,7 @@ import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import Example from '../../../examples/enable-column-resizing';
+import RTLExample from '../../../examples/localization-i18n-fa';
 
 <Head>
   <title>{'Column Resizing Guide - Material React Table V2 Docs'}</title>
@@ -21,6 +22,7 @@ Material React Table lets you easily change the default widths (sizes) of column
 <TableOptionsTable
   onlyOptions={
     new Set([
+      'columnResizeDirection',
       'columnResizeMode',
       'defaultColumn',
       'enableColumnResizing',
@@ -148,5 +150,30 @@ const table = useMaterialReactTable({
   layoutMode: 'grid', //instead of the default "grid-no-grow" when column resizing is enabled
 });
 ```
+
+### Column Resize Direction
+
+> New in V2.1
+
+If you are displaying your table in a RTL (right-to-left) language, you can set the `columnResizeDirection` table option to `"rtl"` to make the column resize handle appear on the left side of the column instead of the right side. This may behave differently depending on which Emotion or MUI theme settings you have enabled.
+
+If you have already set the proper `theme.direction` setting in your MUI theme, then this option will already have been set automatically for you, but you can still override it using the `columnResizeDirection` table option.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableColumnResizing: true,
+  columnResizeDirection: 'rtl', //instead of the default "ltr" direction
+});
+
+return (
+  <div style={{ direction: 'rtl' }}> {/* app-wide style? */}
+    <MaterialReactTable table={table} />
+  </div>
+);
+```
+
+<RTLExample />
 
 View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-column-resizing-examples)**

@@ -127,7 +127,9 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
       variant="standard"
       {...textFieldProps}
       InputProps={{
-        disableUnderline: editDisplayMode === 'table',
+        ...(textFieldProps.variant !== 'outlined'
+          ? { disableUnderline: editDisplayMode === 'table' }
+          : {}),
         ...textFieldProps.InputProps,
         sx: (theme) => ({
           mb: 0,

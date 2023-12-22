@@ -67,6 +67,17 @@ export const tableOptions: TableOption[] = [
     type: 'Array<MRT_FilterOption | string> | null',
   },
   {
+    tableOption: 'columnResizeDirection',
+    defaultValue: "muiTheme.direction || 'ltr'",
+    description:
+      'Determines the direction of column resizing. ltr = left to right, rtl = right to left.',
+    link: 'https://tanstack.com/table/v8/docs/api/features/column-sizing#columnresizedirection',
+    linkText: 'MRT Column Resizing Docs',
+    required: false,
+    source: 'TanStack Table',
+    type: "'ltr' | 'rtl'",
+  },
+  {
     tableOption: 'columnResizeMode',
     defaultValue: "'onChange'",
     description:
@@ -1038,7 +1049,7 @@ export const tableOptions: TableOption[] = [
     linkText: 'TanStack Table Core Docs',
     required: false,
     source: 'TanStack Table',
-    type: ' <T>(defaultOptions: T, options: Partial<T>) => T',
+    type: '<T>(defaultOptions: T, options: Partial<T>) => T',
   },
   {
     tableOption: 'meta',
@@ -1463,7 +1474,7 @@ export const tableOptions: TableOption[] = [
     linkText: 'TanStack Table Column Sizing Docs',
     required: false,
     source: 'TanStack Table',
-    type: ' OnChangeFn<ColumnSizingState>',
+    type: 'OnChangeFn<ColumnSizingState>',
   },
   {
     tableOption: 'onColumnSizingInfoChange',

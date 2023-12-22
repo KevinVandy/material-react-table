@@ -51,7 +51,7 @@ export const MRT_Localization_FR: MRT_Localization = {
   groupByColumn: 'Grouper par {column}',
   groupedBy: 'Groupé par ',
   hideAll: 'Cacher tout',
-  hideColumn: 'Cacher {column} colonne',
+  hideColumn: 'Cacher colonne {column}',
   max: 'Max',
   min: 'Min',
   move: 'Déplacer',

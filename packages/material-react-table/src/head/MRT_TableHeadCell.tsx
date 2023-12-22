@@ -32,6 +32,7 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
     getState,
     options: {
       columnFilterDisplayMode,
+      columnResizeDirection,
       columnResizeMode,
       enableColumnActions,
       enableColumnDragging,
@@ -103,7 +104,9 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
           : undefined;
 
     if (showResizeBorder) {
-      return { borderRight: borderStyle };
+      return columnResizeDirection === 'ltr'
+        ? { borderRight: borderStyle }
+        : { borderLeft: borderStyle };
     }
     const draggingBorders = borderStyle
       ? {
