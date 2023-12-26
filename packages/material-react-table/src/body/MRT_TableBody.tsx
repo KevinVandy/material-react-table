@@ -289,11 +289,11 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
                 };
                 return memoMode === 'rows' ? (
                   <Memo_MRT_TableBodyRow
-                    key={`${row.id}${row.index}`}
+                    key={`${row.id}-${row.index}`}
                     {...props}
                   />
                 ) : (
-                  <MRT_TableBodyRow key={`${row.id}${row.index}`} {...props} />
+                  <MRT_TableBodyRow key={`${row.id}-${row.index}`} {...props} />
                 );
               })}
             </>
