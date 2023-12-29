@@ -223,6 +223,17 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
             })}
           </TableBody>
         )}
+      {creatingRow && createDisplayMode === 'row' && (
+        <TableBody
+          {...tableBodyProps}
+          sx={(theme) => ({
+            display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
+            ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
+          })}
+        >
+          <MRT_TableBodyRow row={creatingRow} rowIndex={-1} table={table} />
+        </TableBody>
+      )}
       <TableBody
         {...tableBodyProps}
         sx={(theme) => ({
@@ -235,42 +246,47 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
           ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
         })}
       >
-        {creatingRow && createDisplayMode === 'row' && (
-          <MRT_TableBodyRow row={creatingRow} rowIndex={-1} table={table} />
-        )}
         {tableBodyProps?.children ??
           (!rows.length ? (
-            <tr
-              style={{
-                display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-              }}
-            >
-              <td
-                colSpan={table.getVisibleLeafColumns().length}
-                style={{
-                  display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-                }}
-              >
-                {renderEmptyRowsFallback?.({ table }) ?? (
-                  <Typography
-                    sx={{
-                      color: 'text.secondary',
-                      fontStyle: 'italic',
-                      maxWidth: `min(100vw, ${
-                        tablePaperRef.current?.clientWidth ?? 360
-                      }px)`,
-                      py: '2rem',
-                      textAlign: 'center',
-                      width: '100%',
+            <>
+              {(!creatingRow || createDisplayMode !== 'row') && (
+                <tr
+                  style={{
+                    display: layoutMode?.startsWith('grid')
+                      ? 'grid'
+                      : undefined,
+                  }}
+                >
+                  <td
+                    colSpan={table.getVisibleLeafColumns().length}
+                    style={{
+                      display: layoutMode?.startsWith('grid')
+                        ? 'grid'
+                        : undefined,
                     }}
                   >
-                    {globalFilter || columnFilters.length
-                      ? localization.noResultsFound
-                      : localization.noRecordsToDisplay}
-                  </Typography>
-                )}
-              </td>
-            </tr>
+                    {renderEmptyRowsFallback?.({ table }) ?? (
+                      <Typography
+                        sx={{
+                          color: 'text.secondary',
+                          fontStyle: 'italic',
+                          maxWidth: `min(100vw, ${
+                            tablePaperRef.current?.clientWidth ?? 360
+                          }px)`,
+                          py: '2rem',
+                          textAlign: 'center',
+                          width: '100%',
+                        }}
+                      >
+                        {globalFilter || columnFilters.length
+                          ? localization.noResultsFound
+                          : localization.noRecordsToDisplay}
+                      </Typography>
+                    )}
+                  </td>
+                </tr>
+              )}
+            </>
           ) : (
             <>
               {(virtualRows ?? rows).map((rowOrVirtualRow, rowIndex) => {
