@@ -303,10 +303,10 @@ const columns = [
     Edit: ({ cell, column, row, table }) => {
       const onBlur = (event) => {
         row._valuesCache[column.id] = event.target.value;
-        if (isCreating) {
-          setCreatingRow(row);
-        } else if (isEditing) {
-          setEditingRow(row);
+        if (column.isCreating) {
+          table.setCreatingRow(row);
+        } else if (column.isEditing) {
+          table.setEditingRow(row);
         }
       };
 
