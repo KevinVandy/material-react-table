@@ -8,7 +8,7 @@ const meta: Meta = {
 
 export default meta;
 
-const longColumns: MRT_ColumnDef[] = [
+const longColumns: MRT_ColumnDef<any>[] = [
   {
     accessorKey: 'firstName',
     header: 'First Name',
@@ -86,6 +86,31 @@ const longData = [...Array(500)].map(() => ({
   state: faker.location.state(),
   zipCode: faker.location.zipCode(),
 }));
+
+export const EnableRowVirtualizationFixed = () => (
+  <MaterialReactTable
+    columns={longColumns}
+    data={longData}
+    enableBottomToolbar={false}
+    enablePagination={false}
+    enableRowNumbers
+    enableRowVirtualization
+    rowVirtualizationDisplayMode='fixed'
+  />
+);
+
+export const EnableRowVirtualizationGridFixed = () => (
+  <MaterialReactTable
+    columns={longColumns}
+    data={longData}
+    enableBottomToolbar={false}
+    enablePagination={false}
+    enableRowNumbers
+    enableRowVirtualization
+    layoutMode='grid'
+    rowVirtualizationDisplayMode='fixed'
+  />
+);
 
 export const EnableRowVirtualizationDense = () => (
   <MaterialReactTable

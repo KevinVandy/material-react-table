@@ -1,19 +1,10 @@
-import { memo, useCallback, useMemo } from 'react';
-import {
-  type Range,
-  type VirtualItem,
-  type Virtualizer,
-  useVirtualizer,
-} from '@tanstack/react-virtual';
+import { memo, useMemo } from 'react';
+import { type VirtualItem, type Virtualizer } from '@tanstack/react-virtual';
 import TableBody, { type TableBodyProps } from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';
 import { MRT_TableBodyRow, Memo_MRT_TableBodyRow } from './MRT_TableBodyRow';
-import {
-  extraIndexRangeExtractor,
-  getCanRankRows,
-  parseFromValuesOrFunc,
-} from '../column.utils';
-import { rankGlobalFuzzy } from '../sortingFns';
+import { parseFromValuesOrFunc } from '../column.utils';
+import { useMRT_Rows } from '../hooks/useMRT_Rows';
 import {
   type MRT_Row,
   type MRT_RowData,
@@ -22,6 +13,7 @@ import {
 
 interface Props<TData extends MRT_RowData> extends TableBodyProps {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
+  rowVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableRowElement>;
   table: MRT_TableInstance<TData>;
   virtualColumns?: VirtualItem[];
   virtualPaddingLeft?: number;
@@ -30,6 +22,7 @@ interface Props<TData extends MRT_RowData> extends TableBodyProps {
 
 export const MRT_TableBody = <TData extends MRT_RowData>({
   columnVirtualizer,
+  rowVirtualizer,
   table,
   virtualColumns,
   virtualPaddingLeft,
@@ -38,56 +31,31 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
 }: Props<TData>) => {
   const {
     getBottomRows,
-    getCenterRows,
     getIsSomeRowsPinned,
-    getPrePaginationRowModel,
     getRowModel,
     getState,
     getTopRows,
     options: {
       createDisplayMode,
-      enableGlobalFilterRankedResults,
-      enablePagination,
-      enableRowPinning,
-      enableRowVirtualization,
       enableStickyFooter,
       enableStickyHeader,
       layoutMode,
       localization,
-      manualExpanding,
-      manualFiltering,
-      manualGrouping,
-      manualPagination,
-      manualSorting,
       memoMode,
       muiTableBodyProps,
       renderEmptyRowsFallback,
       rowPinningDisplayMode,
-      rowVirtualizerInstanceRef,
-      rowVirtualizerOptions,
+      rowVirtualizationDisplayMode,
     },
-    refs: { tableContainerRef, tableFooterRef, tableHeadRef, tablePaperRef },
+    refs: { tableFooterRef, tableHeadRef, tablePaperRef },
   } = table;
-  const {
-    columnFilters,
-    creatingRow,
-    density,
-    draggingRow,
-    expanded,
-    globalFilter,
-    isFullScreen,
-    pagination,
-    rowPinning,
-    sorting,
-  } = getState();
+  const { columnFilters, creatingRow, globalFilter, isFullScreen, rowPinning } =
+    getState();
 
   const tableBodyProps = {
     ...parseFromValuesOrFunc(muiTableBodyProps, { table }),
     ...rest,
   };
-  const rowVirtualizerProps = parseFromValuesOrFunc(rowVirtualizerOptions, {
-    table,
-  });
 
   const tableHeadHeight =
     ((enableStickyHeader || isFullScreen) &&
@@ -95,23 +63,6 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
     0;
   const tableFooterHeight =
     (enableStickyFooter && tableFooterRef.current?.clientHeight) || 0;
-
-  const shouldRankRows = useMemo(
-    () =>
-      getCanRankRows(table) &&
-      !Object.values(sorting).some(Boolean) &&
-      globalFilter,
-    [
-      enableGlobalFilterRankedResults,
-      expanded,
-      globalFilter,
-      manualExpanding,
-      manualFiltering,
-      manualGrouping,
-      manualSorting,
-      sorting,
-    ],
-  );
 
   const pinnedRowIds = useMemo(
     () =>
@@ -121,66 +72,7 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
     [rowPinning, table.getRowModel().rows],
   );
 
-  const rows = useMemo(() => {
-    let rows: MRT_Row<TData>[] = [];
-    if (!shouldRankRows) {
-      rows =
-        !enableRowPinning || rowPinningDisplayMode?.includes('sticky')
-          ? getRowModel().rows
-          : getCenterRows();
-    } else {
-      rows = getPrePaginationRowModel().rows.sort((a, b) =>
-        rankGlobalFuzzy(a, b),
-      );
-      if (enablePagination && !manualPagination) {
-        const start = pagination.pageIndex * pagination.pageSize;
-        rows = rows.slice(start, start + pagination.pageSize);
-      }
-    }
-    if (enableRowPinning && rowPinningDisplayMode?.includes('sticky')) {
-      rows = [
-        ...getTopRows().filter((row) => !pinnedRowIds.includes(row.id)),
-        ...rows,
-        ...getBottomRows().filter((row) => !pinnedRowIds.includes(row.id)),
-      ];
-    }
-
-    return rows;
-  }, [
-    shouldRankRows,
-    shouldRankRows ? getPrePaginationRowModel().rows : getRowModel().rows,
-    pagination.pageIndex,
-    pagination.pageSize,
-    rowPinning,
-  ]);
-
-  const rowVirtualizer:
-    | Virtualizer<HTMLDivElement, HTMLTableRowElement>
-    | undefined = enableRowVirtualization
-    ? useVirtualizer({
-        count: rows.length,
-        estimateSize: () =>
-          density === 'compact' ? 37 : density === 'comfortable' ? 58 : 73,
-        getScrollElement: () => tableContainerRef.current,
-        measureElement:
-          typeof window !== 'undefined' &&
-          navigator.userAgent.indexOf('Firefox') === -1
-            ? (element) => element?.getBoundingClientRect().height
-            : undefined,
-        overscan: 4,
-        rangeExtractor: useCallback(
-          (range: Range) => {
-            return extraIndexRangeExtractor(range, draggingRow?.index ?? 0);
-          },
-          [draggingRow],
-        ),
-        ...rowVirtualizerProps,
-      })
-    : undefined;
-
-  if (rowVirtualizerInstanceRef && rowVirtualizer) {
-    rowVirtualizerInstanceRef.current = rowVirtualizer;
-  }
+  const rows = useMRT_Rows(table);
 
   const virtualRows = rowVirtualizer
     ? rowVirtualizer.getVirtualItems()
@@ -227,9 +119,10 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
         {...tableBodyProps}
         sx={(theme) => ({
           display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-          height: rowVirtualizer
-            ? `${rowVirtualizer.getTotalSize()}px`
-            : 'inherit',
+          height:
+            rowVirtualizer && rowVirtualizationDisplayMode === 'dynamic'
+              ? `${rowVirtualizer.getTotalSize()}px`
+              : undefined,
           minHeight: !rows.length ? '100px' : undefined,
           position: 'relative',
           ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),

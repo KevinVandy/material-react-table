@@ -90,6 +90,7 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
   positionToolbarDropZone = 'top',
   rowNumberDisplayMode = 'static',
   rowPinningDisplayMode = 'sticky',
+  rowVirtualizationDisplayMode = 'dynamic',
   selectAllMode = 'page',
   sortingFns,
   ...rest
@@ -129,7 +130,9 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
     layoutMode || (enableColumnResizing ? 'grid-no-grow' : 'semantic');
   if (
     layoutMode === 'semantic' &&
-    (rest.enableRowVirtualization || rest.enableColumnVirtualization)
+    ((rest.enableRowVirtualization &&
+      rowVirtualizationDisplayMode === 'dynamic') ||
+      rest.enableColumnVirtualization)
   ) {
     layoutMode = 'grid';
   }
@@ -204,6 +207,7 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
     positionToolbarDropZone,
     rowNumberDisplayMode,
     rowPinningDisplayMode,
+    rowVirtualizationDisplayMode,
     selectAllMode,
     sortingFns: _sortingFns,
     ...rest,

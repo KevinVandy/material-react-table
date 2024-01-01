@@ -60,6 +60,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
       muiTableBodyRowProps,
       renderDetailPanel,
       rowPinningDisplayMode,
+      rowVirtualizationDisplayMode,
     },
     refs: { tableFooterRef, tableHeadRef },
     setHoveredRow,
@@ -106,10 +107,17 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
 
   const sx = parseFromValuesOrFunc(tableRowProps?.sx, theme as any);
 
-  const rowHeight =
+  const defaultRowHeight =
+    density === 'compact' ? 37 : density === 'comfortable' ? 53 : 69;
+
+  const customRowHeight =
     // @ts-ignore
-    parseInt(tableRowProps?.style?.height ?? sx?.height, 10) ||
-    (density === 'compact' ? 37 : density === 'comfortable' ? 53 : 69);
+    parseInt(tableRowProps?.style?.height ?? sx?.height, 10) || undefined;
+
+  const rowHeight = customRowHeight || defaultRowHeight;
+
+  const isDynamicVirtualRow =
+    virtualRow && rowVirtualizationDisplayMode === 'dynamic';
 
   const handleDragEnter = (_e: DragEvent) => {
     if (enableRowOrdering && draggingRow) {
@@ -128,21 +136,27 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
   return (
     <>
       <TableRow
-        data-index={virtualRow?.index}
+        data-index={rowIndex}
         data-pinned={!!isPinned || undefined}
         data-selected={row.getIsSelected() || undefined}
         onDragEnter={handleDragEnter}
         ref={(node: HTMLTableRowElement) => {
           if (node) {
             rowRef.current = node;
-            measureElement?.(node);
+            if (isDynamicVirtualRow) {
+              measureElement?.(node);
+            }
           }
         }}
         selected={row.getIsSelected()}
         {...tableRowProps}
         style={{
           transform: virtualRow
-            ? `translateY(${virtualRow?.start}px)`
+            ? `translateY(${
+                isDynamicVirtualRow
+                  ? virtualRow.start
+                  : virtualRow.start - rowIndex * virtualRow.size
+              }px)`
             : undefined,
           ...tableRowProps?.style,
         }}
@@ -172,7 +186,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
             : draggingRow?.id === row.id || hoveredRow?.id === row.id
               ? 0.5
               : 1,
-          position: virtualRow
+          position: isDynamicVirtualRow
             ? 'absolute'
             : rowPinningDisplayMode?.includes('sticky') && isPinned
               ? 'sticky'
@@ -184,7 +198,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
                 ? pinnedRowBackgroundColor
                 : undefined,
           },
-          top: virtualRow
+          top: isDynamicVirtualRow
             ? 0
             : topPinnedIndex !== undefined && isPinned
               ? `${
@@ -192,13 +206,18 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
                   (enableStickyHeader || isFullScreen ? tableHeadHeight - 1 : 0)
                 }px`
               : undefined,
-          transition: virtualRow ? 'none' : 'all 150ms ease-in-out',
+          transition: isDynamicVirtualRow ? 'none' : 'all 150ms ease-in-out',
           width: '100%',
           zIndex:
             rowPinningDisplayMode?.includes('sticky') && isPinned
               ? 2
               : undefined,
           ...(sx as any),
+          height:
+            (virtualRow && !isDynamicVirtualRow) ||
+            customRowHeight
+              ? `${customRowHeight ?? virtualRow?.size}px`
+              : undefined,
         })}
       >
         {virtualPaddingLeft ? (
