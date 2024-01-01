@@ -5,7 +5,6 @@ import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
 import { MRT_TableHead } from '../head/MRT_TableHead';
 import { useMRT_ColumnVirtualizer } from '../hooks/useMRT_ColumnVirtualizer';
-import { useMRT_RowVirtualizer } from '../hooks/useMRT_RowVirtualizer';
 import { parseCSSVarId } from '../style.utils';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
@@ -53,7 +52,6 @@ export const MRT_Table = <TData extends MRT_RowData>({
   }, [columns, columnSizing, columnSizingInfo, columnVisibility]);
 
   const columnVirtualizer = useMRT_ColumnVirtualizer(table);
-  const rowVirtualizer = useMRT_RowVirtualizer(table);
 
   const { virtualPaddingLeft, virtualPaddingRight } = columnVirtualizer ?? {};
 
@@ -71,7 +69,6 @@ export const MRT_Table = <TData extends MRT_RowData>({
   const commonTableBodyProps = {
     ...commonTableGroupProps,
     columnVirtualizer,
-    rowVirtualizer,
   };
 
   return (

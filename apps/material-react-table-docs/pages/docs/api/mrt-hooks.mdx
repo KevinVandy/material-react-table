@@ -28,10 +28,126 @@ import OptionsSwitcher from '../../../example-groups/OptionsSwitcher';
 
 <br />
 
+MRT has been adopting more and more of a hooks based approach for its internal logic. Its API is becoming more standardized so that you can use the same hooks that the MRT components use internally to build your own custom headless table if you want to.
+
 ### useMaterialReactTable
 
-The main hook from Material React Table. It creates a TanStack Table instance with all of the features that MRT provides and that you enable.
+[Source Code](https://github.com/KevinVandy/material-react-table/blob/v2/packages/material-react-table/src/useMaterialReactTable.ts)
 
-### useMaterialReactTableLight
+> This is probably the only MRT hook you will need to use, unless you are writing a custom headless table.
 
-> Would you be interested in a "lightweight" version MRT that doesn't import all of the features from TanStack Table by default? If so, voice your opinion in the [Discord](https://discord.gg/5wqyRx6fnm). It may be added in a near future non-major feature release.
+This is the main hook from Material React Table. It creates a TanStack Table instance with all of the features that MRT provides and that you enable, and uses the proper default table options.
+
+```tsx
+import { useMaterialReactTable } from 'material-react-table';
+
+const table = useMaterialReactTable({
+  ...options,
+});
+```
+
+This hook is the combination of 2 other internal MRT hooks: [`useMRT_TableOptions`](#usemrt_tableoptions), and [`useMRT_TableInstance`](#usemrt_tableinstance).
+
+### useMRT_TableOptions
+
+[Source Code](https://github.com/KevinVandy/material-react-table/blob/v2/packages/material-react-table/src/hooks/useMRT_TableOptions.ts)
+
+This hook simply takes in your custom table options and merges them with the default table options. It also does some extra logic to make sure that some default table options are set correctly based on other enabled features. For example, if you enable row virtualization features, the sticky header will also be enabled by default, and the layoutMode will adjust accordingly.
+
+```tsx
+import { useMRT_TableOptions } from 'material-react-table';
+
+const transformedTableOptions = useMRT_TableOptions({
+  ...options,
+});
+```
+
+### useMRT_TableInstance
+
+[Source Code](https://github.com/KevinVandy/material-react-table/blob/v2/packages/material-react-table/src/hooks/useMRT_TableInstance.ts)
+
+This is where most of the magic happens. This hook is responsible for creating the TanStack Table instance, and adding all of the MRT features to it. It needs table options to be passed in to it correctly, with good defaults, and it will return the table instance.
+
+```tsx
+import { useMRT_TableInstance } from 'material-react-table';
+
+const table = useMRT_TableInstance({
+  ...transformedTableOptions, //usually from useMRT_TableOptions
+});
+```
+
+This hook also uses the [`useMRT_DisplayColumns`](#usemrt_displaycolumns) and [`useMRT_Effects`](#usemrt_effects) to generate the built-in display columns (row numbers, actions, selection, etc) and house some extra useEffect hooks needed by some MRT features on a table wide level.
+
+### useMRT_DisplayColumns
+
+[Source Code](https://github.com/KevinVandy/material-react-table/blob/v2/packages/material-react-table/src/hooks/useMRT_DisplayColumns.tsx)
+
+This hook is responsible for generating the built-in display columns (row numbers, actions, selection, etc) and adding them to the table instance's columns array, alongside your own defined columns.
+
+### useMRT_Effects
+
+[Source Code](https://github.com/KevinVandy/material-react-table/blob/v2/packages/material-react-table/src/hooks/useMRT_Effects.ts)
+
+This hook is responsible for adding some extra useEffect hooks to the table instance. These hooks are needed by some MRT features on a table wide level.
+
+### useMRT_Rows
+
+> New in v2.2.0
+
+[Source Code](https://github.com/KevinVandy/material-react-table/blob/v2/packages/material-react-table/src/hooks/useMRT_Rows.ts)
+
+This hook is mostly a wrapper around `table.getRowModel`, but with a bit more custom logic for fuzzy ranking, row pinning, and more. It consumes a `table` instance and returns the rows that should be rendered in the main table body. This can be a useful hook if you are writing a custom headless table, but still want all of the extra MRT enhanced behavior for fuzzy ranking, row pinning, etc. Alternatively, you can just use `table.getRowModel()` for a more vanilla TanStack Table experience.
+
+```tsx
+import { useMaterialReactTable, useMRT_Rows } from 'material-react-table';
+
+const table = useMaterialReactTable({
+  ...options,
+});
+
+const rows = useMRT_Rows(table);
+
+return rows.map((row) => {
+  //render row
+});
+```
+
+### useMRT_ColumnVirtualizer
+
+> New in v2.2.0
+
+[Source Code](https://github.com/KevinVandy/material-react-table/blob/v2/packages/material-react-table/src/hooks/useMRT_ColumnVirtualizer.ts)
+
+This hook is a wrapper around the `useVirtualizer` hook from TanStack Virtual. It consumes a `table` instance and returns a Column Virtualizer instance that is optimized for MRT table columns, with considerations for other MRT features like column pinning, column resizing, column hiding, and more.
+
+```tsx
+import { useMaterialReactTable, useMRT_ColumnVirtualizer } from 'material-react-table';
+
+const table = useMaterialReactTable({
+  ...options,
+});
+
+const columnVirtualizer = useMRT_ColumnVirtualizer(table);
+```
+
+You would only need to use this hook if you are writing a custom headless table and want the same default column virtualization behavior that MRT provides. If you are using the MRT components, this hook is already used internally by the `MRT_Table` component.
+
+### useMRT_RowVirtualizer
+
+> New in v2.2.0
+
+[Source Code](https://github.com/KevinVandy/material-react-table/blob/v2/packages/material-react-table/src/hooks/useMRT_RowVirtualizer.ts)
+
+This hook is a wrapper around the `useVirtualizer` hook from TanStack Virtual. It consumes a `table` instance and returns a Row Virtualizer instance that is optimized for MRT table rows, with considerations for other MRT features like row pinning, row dragging, and more.
+
+```tsx
+import { useMaterialReactTable, useMRT_RowVirtualizer } from 'material-react-table';
+
+const table = useMaterialReactTable({
+  ...options,
+});
+
+const rowVirtualizer = useMRT_RowVirtualizer(table);
+```
+
+You would only need to use this hook if you are writing a custom headless table and want the same default row virtualization behavior that MRT provides. If you are using the MRT components, this hook is already used internally by the `MRT_Table` component.

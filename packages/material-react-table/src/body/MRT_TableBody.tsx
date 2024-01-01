@@ -4,6 +4,7 @@ import TableBody, { type TableBodyProps } from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';
 import { MRT_TableBodyRow, Memo_MRT_TableBodyRow } from './MRT_TableBodyRow';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { useMRT_RowVirtualizer } from '../hooks';
 import { useMRT_Rows } from '../hooks/useMRT_Rows';
 import {
   type MRT_Row,
@@ -13,7 +14,6 @@ import {
 
 interface Props<TData extends MRT_RowData> extends TableBodyProps {
   columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
-  rowVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableRowElement>;
   table: MRT_TableInstance<TData>;
   virtualColumns?: VirtualItem[];
   virtualPaddingLeft?: number;
@@ -22,7 +22,6 @@ interface Props<TData extends MRT_RowData> extends TableBodyProps {
 
 export const MRT_TableBody = <TData extends MRT_RowData>({
   columnVirtualizer,
-  rowVirtualizer,
   table,
   virtualColumns,
   virtualPaddingLeft,
@@ -72,6 +71,8 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
   );
 
   const rows = useMRT_Rows(table);
+
+  const rowVirtualizer = useMRT_RowVirtualizer(table);
 
   const virtualRows = rowVirtualizer
     ? rowVirtualizer.getVirtualItems()
