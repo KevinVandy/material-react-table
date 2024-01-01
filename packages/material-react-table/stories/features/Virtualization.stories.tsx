@@ -87,31 +87,6 @@ const longData = [...Array(500)].map(() => ({
   zipCode: faker.location.zipCode(),
 }));
 
-export const EnableRowVirtualizationFixed = () => (
-  <MaterialReactTable
-    columns={longColumns}
-    data={longData}
-    enableBottomToolbar={false}
-    enablePagination={false}
-    enableRowNumbers
-    enableRowVirtualization
-    rowVirtualizationDisplayMode='fixed'
-  />
-);
-
-export const EnableRowVirtualizationGridFixed = () => (
-  <MaterialReactTable
-    columns={longColumns}
-    data={longData}
-    enableBottomToolbar={false}
-    enablePagination={false}
-    enableRowNumbers
-    enableRowVirtualization
-    layoutMode='grid'
-    rowVirtualizationDisplayMode='fixed'
-  />
-);
-
 export const EnableRowVirtualizationDense = () => (
   <MaterialReactTable
     columns={longColumns}

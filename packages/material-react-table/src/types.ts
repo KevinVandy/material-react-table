@@ -1128,7 +1128,6 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
     | 'sticky'
     | 'top'
     | 'top-and-bottom';
-  rowVirtualizationDisplayMode?: 'dynamic' | 'fixed';
   rowVirtualizerInstanceRef?: MutableRefObject<Virtualizer<
     HTMLDivElement,
     HTMLTableRowElement

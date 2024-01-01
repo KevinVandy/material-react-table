@@ -1,5 +1,4 @@
-import { type ReactNode, useMemo } from 'react';
-import Box from '@mui/material/Box';
+import { useMemo } from 'react';
 import Table, { type TableProps } from '@mui/material/Table';
 import { MRT_TableBody, Memo_MRT_TableBody } from '../body/MRT_TableBody';
 import { parseFromValuesOrFunc } from '../column.utils';
@@ -29,7 +28,6 @@ export const MRT_Table = <TData extends MRT_RowData>({
       layoutMode,
       memoMode,
       muiTableProps,
-      rowVirtualizationDisplayMode,
     },
   } = table;
   const { columnSizing, columnSizingInfo, columnVisibility, isFullScreen } =
@@ -77,42 +75,23 @@ export const MRT_Table = <TData extends MRT_RowData>({
   };
 
   return (
-    <MRT_FixedVirtualTableContainer
-      height={
-        rowVirtualizer && rowVirtualizationDisplayMode === 'fixed'
-          ? rowVirtualizer.getTotalSize()
-          : undefined
-      }
+    <Table
+      stickyHeader={enableStickyHeader || isFullScreen}
+      {...tableProps}
+      style={{ ...columnSizeVars, ...tableProps?.style }}
+      sx={(theme) => ({
+        borderCollapse: 'separate',
+        display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
+        ...(parseFromValuesOrFunc(tableProps?.sx, theme) as any),
+      })}
     >
-      <Table
-        stickyHeader={enableStickyHeader || isFullScreen}
-        {...tableProps}
-        style={{ ...columnSizeVars, ...tableProps?.style }}
-        sx={(theme) => ({
-          borderCollapse: 'separate',
-          display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-          ...(parseFromValuesOrFunc(tableProps?.sx, theme) as any),
-        })}
-      >
-        {enableTableHead && <MRT_TableHead {...commonTableGroupProps} />}
-        {memoMode === 'table-body' || columnSizingInfo.isResizingColumn ? (
-          <Memo_MRT_TableBody {...commonTableBodyProps} />
-        ) : (
-          <MRT_TableBody {...commonTableBodyProps} />
-        )}
-        {enableTableFooter && <MRT_TableFooter {...commonTableGroupProps} />}
-      </Table>
-    </MRT_FixedVirtualTableContainer>
+      {enableTableHead && <MRT_TableHead {...commonTableGroupProps} />}
+      {memoMode === 'table-body' || columnSizingInfo.isResizingColumn ? (
+        <Memo_MRT_TableBody {...commonTableBodyProps} />
+      ) : (
+        <MRT_TableBody {...commonTableBodyProps} />
+      )}
+      {enableTableFooter && <MRT_TableFooter {...commonTableGroupProps} />}
+    </Table>
   );
-};
-
-export const MRT_FixedVirtualTableContainer = ({
-  children,
-  height,
-}: {
-  children: ReactNode;
-  height?: number;
-}) => {
-  if (!height) return children;
-  return <Box sx={{ height: `${height}px` }}>{children}</Box>;
 };

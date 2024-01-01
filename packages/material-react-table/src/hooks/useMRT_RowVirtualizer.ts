@@ -22,7 +22,6 @@ export const useMRT_RowVirtualizer = <
     getState,
     options: {
       enableRowVirtualization,
-      rowVirtualizationDisplayMode,
       rowVirtualizerInstanceRef,
       rowVirtualizerOptions,
     },
@@ -41,7 +40,6 @@ export const useMRT_RowVirtualizer = <
           density === 'compact' ? 37 : density === 'comfortable' ? 58 : 73,
         getScrollElement: () => tableContainerRef.current,
         measureElement:
-          rowVirtualizationDisplayMode === 'dynamic' &&
           typeof window !== 'undefined' &&
           navigator.userAgent.indexOf('Firefox') === -1
             ? (element) => element?.getBoundingClientRect().height

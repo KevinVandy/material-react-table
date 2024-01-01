@@ -45,7 +45,6 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
       muiTableBodyProps,
       renderEmptyRowsFallback,
       rowPinningDisplayMode,
-      rowVirtualizationDisplayMode,
     },
     refs: { tableFooterRef, tableHeadRef, tablePaperRef },
   } = table;
@@ -120,7 +119,7 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
         sx={(theme) => ({
           display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
           height:
-            rowVirtualizer && rowVirtualizationDisplayMode === 'dynamic'
+            rowVirtualizer
               ? `${rowVirtualizer.getTotalSize()}px`
               : undefined,
           minHeight: !rows.length ? '100px' : undefined,
