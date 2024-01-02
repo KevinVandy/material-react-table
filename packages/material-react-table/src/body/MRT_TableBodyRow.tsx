@@ -219,7 +219,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
             rowIndex,
             rowRef,
             table,
-            virtualIndex: columnVirtualizer
+            virtualColumnIndex: columnVirtualizer
               ? (cellOrVirtualCell as VirtualItem).index
               : undefined,
           };
