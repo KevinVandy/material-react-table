@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import {
   type MRT_Cell,
@@ -128,6 +129,9 @@ export const EditingEnabledEditModeModalDefault = () => {
       data={tableData}
       enableEditing
       onEditingRowSave={handleSaveRow}
+      renderTopToolbarCustomActions={({ table }) => (
+        <Button onClick={() => table.setCreatingRow(true)}>Add</Button>
+      )}
     />
   );
 };
@@ -170,10 +174,72 @@ export const EditingEnabledEditModeRow = () => {
           header: 'Phone Number',
         },
       ]}
+      createDisplayMode="row"
       data={tableData}
       editDisplayMode="row"
       enableEditing
       onEditingRowSave={handleSaveRow}
+      renderTopToolbarCustomActions={({ table }) => (
+        <Button onClick={() => table.setCreatingRow(true)}>Add</Button>
+      )}
+    />
+  );
+};
+
+export const EditingEnabledEditModeRowVirtualized = () => {
+  const [tableData, setTableData] = useState(data);
+
+  const handleSaveRow: MRT_TableOptions<Person>['onEditingRowSave'] = ({
+    exitEditingMode,
+    row,
+    values,
+  }) => {
+    tableData[row.index] = values;
+    setTableData([...tableData]);
+    exitEditingMode();
+  };
+
+  return (
+    <MaterialReactTable
+      columns={[
+        {
+          accessorKey: 'firstName',
+          header: 'First Name',
+        },
+        {
+          accessorKey: 'lastName',
+          header: 'Last Name',
+        },
+        {
+          accessorKey: 'address',
+          header: 'Address',
+        },
+        {
+          accessorKey: 'state',
+          header: 'State',
+        },
+        {
+          accessorKey: 'phoneNumber',
+          enableEditing: false,
+          header: 'Phone Number',
+        },
+      ]}
+      createDisplayMode="row"
+      data={tableData}
+      displayColumnDefOptions={{
+        'mrt-row-actions': {
+          size: 100,
+        },
+      }}
+      editDisplayMode="row"
+      enableEditing
+      enablePagination={false}
+      enableRowVirtualization
+      muiTableContainerProps={{ sx: { height: 400 } }}
+      onEditingRowSave={handleSaveRow}
+      renderTopToolbarCustomActions={({ table }) => (
+        <Button onClick={() => table.setCreatingRow(true)}>Add</Button>
+      )}
     />
   );
 };
@@ -212,6 +278,7 @@ export const EditingEnabledEditModeCell = () => {
           header: 'Phone Number',
         },
       ]}
+      createDisplayMode="row"
       data={tableData}
       editDisplayMode="cell"
       enableEditing
@@ -220,6 +287,9 @@ export const EditingEnabledEditModeCell = () => {
           handleSaveCell(cell, event.target.value);
         },
       })}
+      renderTopToolbarCustomActions={({ table }) => (
+        <Button onClick={() => table.setCreatingRow(true)}>Add</Button>
+      )}
     />
   );
 };
@@ -258,6 +328,7 @@ export const EditingEnabledEditModeCellWithRowActions = () => {
           header: 'Phone Number',
         },
       ]}
+      createDisplayMode="row"
       data={tableData}
       editDisplayMode="cell"
       enableEditing
@@ -267,6 +338,9 @@ export const EditingEnabledEditModeCellWithRowActions = () => {
           handleSaveCell(cell, event.target.value);
         },
       })}
+      renderTopToolbarCustomActions={({ table }) => (
+        <Button onClick={() => table.setCreatingRow(true)}>Add</Button>
+      )}
     />
   );
 };
@@ -563,81 +637,6 @@ export const EditingCustomizeInput = () => {
     />
   );
 };
-
-// export const EditingWithValidation = () => {
-//   const [tableData, setTableData] = useState(data);
-//   const [firstNameError, setFirstNameError] = useState<string | boolean>(false);
-//   const [lastNameError, setLastNameError] = useState<string | boolean>(false);
-//   const [phoneNumberError, setPhoneNumberError] = useState<string | boolean>(
-//     false,
-//   );
-
-//   const handleSaveRow = ({ row, values }) => {
-//     tableData[row.index] = values;
-//     setTableData([...tableData]);
-//   };
-
-//   const validateFirstName = (value: string) => {
-//     if (value.length === 0) return 'First name is required';
-//     return false;
-//   };
-
-//   const validateLastName = (value: string) => {
-//     if (value.length === 0) return 'Last name is required';
-//     return false;
-//   };
-
-//   const validatePhoneNumber = (value: string) => {
-//     if (value.length === 0) return 'Phone number is required';
-//     if (!value.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/))
-//       return 'Invalid phone number';
-//     return false;
-//   };
-
-//   return (
-//     <MaterialReactTable
-//       columns={[
-//         {
-//           header: 'First Name',
-//           accessorKey: 'firstName',
-//           muiEditTextFieldProps: {
-//             error: !!firstNameError,
-//             helperText: firstNameError,
-//           },
-//           onCellEditChange: ({ event }) => {
-//             setFirstNameError(validateFirstName(event.target.value));
-//           },
-//         },
-//         {
-//           header: 'Last Name',
-//           accessorKey: 'lastName',
-//           muiEditTextFieldProps: {
-//             error: !!lastNameError,
-//             helperText: lastNameError,
-//           },
-//           onCellEditChange: ({ event }) => {
-//             setLastNameError(validateLastName(event.target.value));
-//           },
-//         },
-//         {
-//           header: 'Phone Number',
-//           accessorKey: 'phoneNumber',
-//           muiEditTextFieldProps: {
-//             error: !!phoneNumberError,
-//             helperText: phoneNumberError,
-//           },
-//           onCellEditChange: ({ event }) => {
-//             setPhoneNumberError(validatePhoneNumber(event.target.value));
-//           },
-//         },
-//       ]}
-//       data={tableData}
-//       enableRowActions
-//       enableEditing
-//       onEditingRowSave={handleSaveRow}
-//     />
-//   );
-// };
 
 export const EditingEnabledAsync = () => {
   const [tableData, setTableData] = useState(data);
@@ -960,11 +959,11 @@ export const EditingCellManualOnChange = () => {
           accessorKey: 'state',
           header: 'State',
           muiEditTextFieldProps: ({ cell }) => ({
-            onChange: (event) =>
-              console.log('state col onChange', event.target.value),
             onBlur: (event) => {
               handleSaveCell(cell, event.target.value);
             },
+            onChange: (event) =>
+              console.log('state col onChange', event.target.value),
           }),
         },
         {
@@ -977,11 +976,11 @@ export const EditingCellManualOnChange = () => {
       editDisplayMode="cell"
       enableEditing
       muiEditTextFieldProps={({ cell }) => ({
-        onChange: (event) =>
-          console.log('all col onChange', event.target.value),
         onBlur: (event) => {
           handleSaveCell(cell, event.target.value);
         },
+        onChange: (event) =>
+          console.log('all col onChange', event.target.value),
       })}
     />
   );

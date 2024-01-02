@@ -87,6 +87,10 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
     virtualPaddingRight,
   };
 
+  const CreatingRow = creatingRow && createDisplayMode === 'row' && (
+    <MRT_TableBodyRow {...commonRowProps} row={creatingRow} rowIndex={-1} />
+  );
+
   return (
     <>
       {!rowPinningDisplayMode?.includes('sticky') &&
@@ -115,24 +119,32 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
             })}
           </TableBody>
         )}
+      {rowVirtualizer && CreatingRow && (
+        <TableBody
+          {...tableBodyProps}
+          sx={(theme) => ({
+            display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
+            ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
+          })}
+        >
+          {CreatingRow}
+        </TableBody>
+      )}
       <TableBody
         {...tableBodyProps}
         sx={(theme) => ({
           display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-          height:
-            rowVirtualizer
-              ? `${rowVirtualizer.getTotalSize()}px`
-              : undefined,
+          height: rowVirtualizer
+            ? `${rowVirtualizer.getTotalSize()}px`
+            : undefined,
           minHeight: !rows.length ? '100px' : undefined,
           position: 'relative',
           ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
         })}
       >
-        {creatingRow && createDisplayMode === 'row' && (
-          <MRT_TableBodyRow row={creatingRow} rowIndex={-1} table={table} />
-        )}
+        {!rowVirtualizer && CreatingRow}
         {tableBodyProps?.children ??
-          (!rows.length ? (
+          (!rows.length && !CreatingRow ? (
             <tr
               style={{
                 display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
