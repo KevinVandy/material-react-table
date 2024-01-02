@@ -98,15 +98,18 @@ export const MRT_EditActionButtons = <TData extends MRT_RowData>({
               <CancelIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title={localization.save}>
-            <IconButton
-              aria-label={localization.save}
-              color="info"
-              onClick={handleSubmitRow}
-            >
-              {isSaving ? <CircularProgress size={18} /> : <SaveIcon />}
-            </IconButton>
-          </Tooltip>
+          {((isCreating && onCreatingRowSave) ||
+            (isEditing && onEditingRowSave)) && (
+            <Tooltip title={localization.save}>
+              <IconButton
+                aria-label={localization.save}
+                color="info"
+                onClick={handleSubmitRow}
+              >
+                {isSaving ? <CircularProgress size={18} /> : <SaveIcon />}
+              </IconButton>
+            </Tooltip>
+          )}
         </>
       ) : (
         <>
