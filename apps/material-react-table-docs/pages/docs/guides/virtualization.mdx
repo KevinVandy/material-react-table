@@ -4,7 +4,7 @@ import EnableRowExample from '../../../examples/enable-row-virtualization';
 import EnableColumnExample from '../../../examples/enable-column-virtualization';
 
 <Head>
-  <title>Virtualization Guide - Material React Table V2 Docs</title>
+  <title>{'Virtualization Guide - Material React Table V2 Docs'}</title>
   <meta
     name="description"
     content="How to virtualize rows and columns in Material React Table to improve performance and user experience when there are a lot of rows or a lot of columns in the table."
@@ -153,3 +153,48 @@ See the official TanStack [Virtualizer Instance API Docs](https://tanstack.com/v
 Try out the performance of the [fully virtualized example](/docs/examples/virtualized) with **10,000 rows** and over a dozen columns! Filtering, search, and sorting also maintain usable performance.
 
 View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-virtualization)**
+
+### Headless Virtualization with MRT Hooks
+
+If you are building a custom table in headless mode, you can still take advantage of some of the built-in virtualization functionality via the `useMRT_ColumnVirtualizer` and `useMRT_RowVirtualizer` hooks, which are wrappers for the TanStack Virtual `useVirtualizer` hook.
+
+If you go this route, you will need to consult the [TanStack Virtual Docs](https://tanstack.com/virtual/v3) for more information on the exact styles and markup needed for the virtualization to work properly.
+
+Here is the basics of how to use the MRT virtualization hooks:
+
+```tsx
+import {
+  useMaterialReactTable,
+  useMRT_Rows,
+  useMRT_RowVirtualizer,
+  useMRT_ColumnVirtualizer,
+} from 'material-react-table';
+
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableColumnVirtualization: true,
+  enableRowVirtualization: true,
+  columnVirtualizerOptions: {
+    //...virtualizer options
+  },
+  rowVirtualizerOptions: {
+    //...virtualizer options
+  },
+});
+
+const rows = useMRT_Rows(table); //alternative to table.getRowModel()
+
+const columnVirtualizer = useMRT_ColumnVirtualizer(table);
+const rowVirtualizer = useMRT_RowVirtualizer(table);
+
+//down in your row render
+const virtualRows = rowVirtualizer.getVirtualItems();
+
+virtualRows.map((virtualRow) => {
+  const row = rows[virtualRow.index];
+  return <Row key={row.id} />;
+});
+```
+
+Alternatively, just use the `useVirtualizer` hook directly from `@tanstack/react-virtual` if you want to build your own virtualization logic from scratch. The MRT hooks are provided as opinionated wrappers for your potential convenience.
