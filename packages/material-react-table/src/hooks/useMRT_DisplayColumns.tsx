@@ -136,7 +136,9 @@ function makeRowActionsColumn<TData extends MRT_RowData>(
   const id: MRT_DisplayColumnIds = 'mrt-row-actions';
   if (
     order.includes(id) ||
-    (creatingRow && tableOptions.createDisplayMode === 'row')
+    (creatingRow &&
+      tableOptions.createDisplayMode === 'row' &&
+      (tableOptions.onCreatingRowSave || tableOptions.onCreatingRowCancel))
   ) {
     return {
       Cell: ({ cell, row, table }) => (

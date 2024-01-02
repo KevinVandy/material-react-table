@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 import MenuItem from '@mui/material/MenuItem';
 import {
   type MRT_Cell,
@@ -288,7 +289,28 @@ export const EditingEnabledEditModeCell = () => {
         },
       })}
       renderTopToolbarCustomActions={({ table }) => (
-        <Button onClick={() => table.setCreatingRow(true)}>Add</Button>
+        <Stack direction="row" gap={3}>
+          <Button
+            variant="outlined"
+            onClick={() => {
+              if (table.getState().creatingRow) {
+                table.setCreatingRow(null);
+                return;
+              }
+              table.setCreatingRow(true);
+            }}
+          >
+            {!table.getState().creatingRow ? 'Add' : 'Cancel'}
+          </Button>
+
+          <Button
+            disabled={!table.getState().creatingRow}
+            variant="contained"
+            onClick={() => table.setCreatingRow(null)}
+          >
+            Save
+          </Button>
+        </Stack>
       )}
     />
   );
