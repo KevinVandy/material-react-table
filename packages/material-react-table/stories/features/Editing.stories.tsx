@@ -234,6 +234,7 @@ export const EditingEnabledEditModeRowVirtualized = () => {
       editDisplayMode="row"
       enableEditing
       enablePagination={false}
+      enableRowSelection
       enableRowVirtualization
       muiTableContainerProps={{ sx: { height: 400 } }}
       onEditingRowSave={handleSaveRow}
