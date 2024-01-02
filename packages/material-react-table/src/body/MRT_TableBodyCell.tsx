@@ -33,7 +33,7 @@ interface Props<TData extends MRT_RowData> extends TableCellProps {
   rowIndex: number;
   rowRef: RefObject<HTMLTableRowElement>;
   table: MRT_TableInstance<TData>;
-  virtualIndex?: number;
+  virtualColumnIndex?: number;
 }
 
 export const MRT_TableBodyCell = <TData extends MRT_RowData>({
@@ -43,7 +43,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
   rowIndex,
   rowRef,
   table,
-  virtualIndex,
+  virtualColumnIndex,
   ...rest
 }: Props<TData>) => {
   const theme = useTheme();
@@ -212,7 +212,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
 
   return (
     <TableCell
-      data-index={virtualIndex}
+      data-index={virtualColumnIndex}
       ref={(node: HTMLTableCellElement) => {
         if (node) {
           measureElement?.(node);

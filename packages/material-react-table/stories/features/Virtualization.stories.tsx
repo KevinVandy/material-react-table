@@ -8,7 +8,7 @@ const meta: Meta = {
 
 export default meta;
 
-const longColumns: MRT_ColumnDef[] = [
+const longColumns: MRT_ColumnDef<any>[] = [
   {
     accessorKey: 'firstName',
     header: 'First Name',

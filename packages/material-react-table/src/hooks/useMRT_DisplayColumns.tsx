@@ -16,6 +16,7 @@ import {
   type MRT_Row,
   type MRT_RowData,
 } from '../types';
+import { MRT_DefaultDisplayColumn } from '.';
 
 interface Params<TData extends MRT_RowData> {
   columnOrder: MRT_ColumnOrderState;
@@ -217,6 +218,7 @@ function makeSpacerColumn<TData extends MRT_RowData>(
   if (order.includes(id)) {
     return {
       ...defaultDisplayColumnProps(tableOptions, id, undefined, 0),
+      ...MRT_DefaultDisplayColumn,
       muiTableBodyCellProps: blankColProps,
       muiTableFooterCellProps: blankColProps,
       muiTableHeadCellProps: blankColProps,

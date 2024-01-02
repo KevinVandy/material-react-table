@@ -106,10 +106,14 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
 
   const sx = parseFromValuesOrFunc(tableRowProps?.sx, theme as any);
 
-  const rowHeight =
+  const defaultRowHeight =
+    density === 'compact' ? 37 : density === 'comfortable' ? 53 : 69;
+
+  const customRowHeight =
     // @ts-ignore
-    parseInt(tableRowProps?.style?.height ?? sx?.height, 10) ||
-    (density === 'compact' ? 37 : density === 'comfortable' ? 53 : 69);
+    parseInt(tableRowProps?.style?.height ?? sx?.height, 10) || undefined;
+
+  const rowHeight = customRowHeight || defaultRowHeight;
 
   const handleDragEnter = (_e: DragEvent) => {
     if (enableRowOrdering && draggingRow) {
@@ -128,7 +132,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
   return (
     <>
       <TableRow
-        data-index={virtualRow?.index}
+        data-index={rowIndex}
         data-pinned={!!isPinned || undefined}
         data-selected={row.getIsSelected() || undefined}
         onDragEnter={handleDragEnter}
@@ -142,7 +146,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
         {...tableRowProps}
         style={{
           transform: virtualRow
-            ? `translateY(${virtualRow?.start}px)`
+            ? `translateY(${virtualRow.start}px)`
             : undefined,
           ...tableRowProps?.style,
         }}
