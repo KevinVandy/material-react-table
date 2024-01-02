@@ -12,6 +12,12 @@ import Head from 'next/head';
 
 ### Version 2
 
+#### Version 2.3.0 - 2024-01-02
+
+- Added new `visibleInShowHideMenu` column option to allow for columns to be hidden from the show/hide columns menu, regardless of column visibility state.
+- Fixed bug where the Show All button in the show/hide columns menu did not properly skip columns with `enableHiding: false` set.
+- Fixed bug where creatingRow did not work with virtualization enabled.
+
 #### Version 2.2.0 - 2024-01-01
 
 - Added new `useMRT_Rows`, `useMRT_ColumnVirtualizer`, and `useMRT_RowVirtualizer` hooks to allow for more advanced use cases for headless mode.

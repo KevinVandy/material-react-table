@@ -579,6 +579,7 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
     table: MRT_TableInstance<TData>;
   }) => ReactNode[];
   sortingFn?: MRT_SortingFn<TData>;
+  visibleInShowHideMenu?: boolean;
 };
 
 export type MRT_DisplayColumnDef<

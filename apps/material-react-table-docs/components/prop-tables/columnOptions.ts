@@ -599,4 +599,14 @@ export const columnOptions: ColumnOption[] = [
     required: false,
     type: '',
   },
+  {
+    columnOption: 'visibleInShowHideMenu',
+    defaultValue: 'true',
+    description: 'Set to false if you want to hide a column from the show/hide menu.',
+    link: '/docs/guides/column-hiding#hide-column-from-show-hide-menu',
+    linkText: 'MRT Column Hiding Docs',
+    source: 'MRT',
+    required: false,
+    type: 'boolean',
+  },
 ];

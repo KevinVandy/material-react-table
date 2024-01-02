@@ -14,7 +14,7 @@ import Example from '../../../examples/disable-column-hiding';
 
 ## Column Hiding Feature Guide
 
-The column hiding feature is enabled by default and allows the user to hide data columns from either the column actions menu or the columns menu.
+The column hiding feature is enabled by default and allows the user to hide data columns from either the column actions menu or the show/hide columns menu.
 
 ### Relevant Table Options
 
@@ -24,7 +24,9 @@ The column hiding feature is enabled by default and allows the user to hide data
 
 ### Relevant Column Options
 
-<ColumnOptionsTable onlyOptions={new Set(['enableHiding'])} />
+<ColumnOptionsTable
+  onlyOptions={new Set(['enableHiding', 'visibleInShowHideMenu'])}
+/>
 
 ### Relevant State
 
@@ -82,7 +84,7 @@ const table = useMaterialReactTable({
 
 Alternatively, you can disable hiding specific columns by setting the `enableHiding` column option to `false` per column.
 
-If you want to hide certain columns by default, you can specify an column visibility in the `initialState.columnVisibility` table option. This can also be useful for making the column hiding state persistent.
+If you want to hide certain columns by default, you can specify column visibility in the `initialState.columnVisibility` table option.
 
 <Example />
 
@@ -103,5 +105,39 @@ const table = useMaterialReactTable({
 ```
 
 See the [Display Columns Feature Guide](/docs/guides/display-columns#display-column-definition-options-prop) for a more in depth explanation of the `displayColumnsOptions` table option.
+
+### Hide Column From Show Hide Menu
+
+> New in v2.3.0
+
+By default, all columns are visible in the column show hide menu that is opened from the columns button in the toolbar internal actions button. You can hide a column from this menu by setting the `visibleInShowHideMenu` column option to `false`.
+
+```jsx
+const columns = [
+  {
+    accessorKey: 'uuid',
+    header: 'UUID',
+    visibleInShowHideMenu: false, //hide this column from the show hide menu, but still show the column in the table
+  },
+];
+
+const table = useMaterialReactTable({
+  columns,
+  data,
+  displayColumnDefOptions: {
+    'mrt-row-actions': {
+      visibleInShowHideMenu: false, //hide the built-in row actions column from the show hide menu
+    },
+  },
+});
+```
+
+### Custom Columns Menu
+
+The `MRT_ShowHideColumnsMenu` component is one of the few MRT components that is pretty opinionated and not easily customizable. Instead of trying to customize the menu with overrides, it might be easier for you to just build your own new button and menu from scratch using the Table and Column Instance APIs.
+
+Adding your own Toolbar Buttons is covered in the [Toolbar Guide](/docs/guides/toolbar-customization#customize-built-in-internal-toolbar-button-area)
+
+If all you want to do is customize the buttons above the columns menu, you can import and use the `MRT_ShowHideColumnsMenuItems` component from material react table, which is a component that renders the columns in the list with the toggle switches, but then render your own buttons in the top or bottom of the menu itself.
 
 View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-column-hiding-examples)**
