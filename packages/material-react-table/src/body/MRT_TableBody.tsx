@@ -130,10 +130,9 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
         {...tableBodyProps}
         sx={(theme) => ({
           display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-          height:
-            rowVirtualizer
-              ? `${rowVirtualizer.getTotalSize()}px`
-              : undefined,
+          height: rowVirtualizer
+            ? `${rowVirtualizer.getTotalSize()}px`
+            : undefined,
           minHeight: !rows.length ? '100px' : undefined,
           position: 'relative',
           ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
