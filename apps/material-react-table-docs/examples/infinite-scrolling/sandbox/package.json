@@ -15,7 +15,7 @@
     "@mui/icons-material": "^5.15.2",
     "@mui/material": "^5.15.2",
     "@tanstack/react-query": "^5.17.0",
-    "material-react-table": "^2.2.0",
+    "material-react-table": "^2.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
