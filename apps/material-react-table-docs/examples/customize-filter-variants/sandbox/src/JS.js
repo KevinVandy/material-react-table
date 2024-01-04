@@ -24,20 +24,6 @@ const Example = () => {
         size: 200,
       },
       {
-        accessorFn: (originalRow) => new Date(originalRow.hireDate), //convert to date for sorting and filtering
-        id: 'hireDate',
-        header: 'Hire Date',
-        filterVariant: 'date-range',
-        Cell: ({ cell }) => cell.getValue().toLocaleDateString(), // convert back to string for display
-      },
-      {
-        accessorKey: 'age',
-        header: 'Age',
-        filterVariant: 'range',
-        filterFn: 'between',
-        size: 80,
-      },
-      {
         accessorKey: 'salary',
         header: 'Salary',
         Cell: ({ cell }) =>
@@ -60,6 +46,13 @@ const Example = () => {
         },
       },
       {
+        accessorKey: 'age',
+        header: 'Age',
+        filterVariant: 'range',
+        filterFn: 'between',
+        size: 80,
+      },
+      {
         accessorKey: 'city',
         header: 'City',
         filterVariant: 'select',
@@ -70,6 +63,30 @@ const Example = () => {
         header: 'State',
         filterVariant: 'multi-select',
         filterSelectOptions: usStateList, //custom options list (as opposed to faceted list)
+      },
+      {
+        accessorFn: (originalRow) => new Date(originalRow.hireDate), //convert to date for sorting and filtering
+        id: 'hireDate',
+        header: 'Hire Date',
+        filterVariant: 'date-range',
+        Cell: ({ cell }) => cell.getValue().toLocaleDateString(), // convert back to string for display
+      },
+      {
+        accessorFn: (originalRow) => new Date(originalRow.arrivalTime), //convert to date for sorting and filtering
+        id: 'arrivalTime',
+        header: 'Arrival Time',
+        filterVariant: 'datetime-range',
+        Cell: ({ cell }) =>
+          `${cell.getValue().toLocaleDateString()} ${cell
+            .getValue()
+            .toLocaleTimeString()}`, // convert back to string for display
+      },
+      {
+        accessorFn: (originalRow) => new Date(originalRow.departureTime), //convert to date for sorting and filtering
+        id: 'departureTime',
+        header: 'Departure Time',
+        filterVariant: 'time-range',
+        Cell: ({ cell }) => cell.getValue().toLocaleTimeString(), // convert back to string for display
       },
     ],
     [],

@@ -44,8 +44,10 @@ Filtering is one of the most powerful features of Material React Table and is en
       'muiFilterAutocompleteProps',
       'muiFilterCheckboxProps',
       'muiFilterDatePickerProps',
+      'muiFilterDateTimePickerProps',
       'muiFilterSliderProps',
       'muiFilterTextFieldProps',
+      'muiFilterTimePickerProps',
       'onColumnFilterFnsChange',
       'onColumnFiltersChange',
       'onShowColumnFiltersChange',
@@ -70,8 +72,10 @@ Filtering is one of the most powerful features of Material React Table and is en
       'muiFilterAutocompleteProps',
       'muiFilterCheckboxProps',
       'muiFilterDatePickerProps',
+      'muiFilterDateTimePickerProps',
       'muiFilterSliderProps',
       'muiFilterTextFieldProps',
+      'muiFilterTimePickerProps',
       'renderColumnFilterModeMenuItems',
     ])
   }
@@ -102,10 +106,16 @@ Material React Table has several built-in filter variants for advanced filtering
 - `'range'` - shows min and max text fields for filtering a range of values
 - `'range-slider'` - shows a slider for filtering a range of values
 - `'date'` - shows a date picker for filtering by date values
+- `'datetime'` - shows a date and time picker for filtering by date and time values
 - `'date-range'` - shows a date range picker for filtering by date ranges
+- `'datetime-range'` - shows a date and time range picker for filtering by date and time ranges
+- `'time'` - shows a time picker for filtering by time values
+- `'time-range'` - shows a time range picker for filtering by time ranges
 - `'checkbox'` - shows a checkbox for filtering by `'true'` or `'false'` values
 
-> `'autocomplete'`, `'date'`, `'datetime'`, `'date-range'`, and `'datetime-range'` variants are new in v2
+> `'autocomplete'`, `'date'`, and `'date-range'`, variants are new in v2.0.0
+>
+> `datetime`, `datetime-range`, `time`, and `time-range` variants are new in v2.4.0
 
 <CustomizeFilterVariantsExample />
 

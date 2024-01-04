@@ -69,6 +69,7 @@ import { type Theme } from '@mui/material/styles';
 import {
   type DatePickerProps,
   type DateTimePickerProps,
+  type TimePickerProps,
 } from '@mui/x-date-pickers';
 import { type MRT_AggregationFns } from './aggregationFns';
 import { type MRT_FilterFns } from './filterFns';
@@ -109,6 +110,19 @@ export type {
   VirtualizerOptions as MRT_VirtualizerOptions,
   VisibilityState as MRT_VisibilityState,
 };
+
+export type MRT_ColumnVirtualizer<
+  TScrollElement extends Element | Window = HTMLDivElement,
+  TItemElement extends Element = HTMLTableCellElement,
+> = Virtualizer<TScrollElement, TItemElement> & {
+  virtualPaddingLeft?: number;
+  virtualPaddingRight?: number;
+};
+
+export type MRT_RowVirtualizer<
+  TScrollElement extends Element | Window = HTMLDivElement,
+  TItemElement extends Element = HTMLTableRowElement,
+> = Virtualizer<TScrollElement, TItemElement>;
 
 export type MRT_ColumnHelper<TData extends MRT_RowData> = {
   accessor: <
@@ -472,7 +486,9 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
     | 'range'
     | 'range-slider'
     | 'select'
-    | 'text';
+    | 'text'
+    | 'time'
+    | 'time-range';
   /**
    * footer must be a string. If you want custom JSX to render the footer, you can also specify a `Footer` option. (Capital F)
    */
@@ -558,6 +574,13 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
         table: MRT_TableInstance<TData>;
       }) => TextFieldProps)
     | TextFieldProps;
+  muiFilterTimePickerProps?:
+    | ((props: {
+        column: MRT_Column<TData>;
+        rangeFilterIndex?: number;
+        table: MRT_TableInstance<TData>;
+      }) => TimePickerProps<any>)
+    | TimePickerProps<any>;
   muiTableBodyCellProps?:
     | ((props: {
         cell: MRT_Cell<TData, TValue>;
@@ -720,10 +743,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   columnFilterModeOptions?: Array<
     LiteralUnion<string & MRT_FilterOption>
   > | null;
-  columnVirtualizerInstanceRef?: MutableRefObject<Virtualizer<
-    HTMLDivElement,
-    HTMLTableCellElement
-  > | null>;
+  columnVirtualizerInstanceRef?: MutableRefObject<MRT_ColumnVirtualizer | null>;
   columnVirtualizerOptions?:
     | ((props: {
         table: MRT_TableInstance<TData>;
@@ -918,6 +938,13 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
         table: MRT_TableInstance<TData>;
       }) => TextFieldProps)
     | TextFieldProps;
+  muiFilterTimePickerProps?:
+    | ((props: {
+        column: MRT_Column<TData>;
+        rangeFilterIndex?: number;
+        table: MRT_TableInstance<TData>;
+      }) => TimePickerProps<any>)
+    | TimePickerProps<any>;
   muiLinearProgressProps?:
     | ((props: {
         isTopToolbar: boolean;
@@ -1148,10 +1175,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
     | 'sticky'
     | 'top'
     | 'top-and-bottom';
-  rowVirtualizerInstanceRef?: MutableRefObject<Virtualizer<
-    HTMLDivElement,
-    HTMLTableRowElement
-  > | null>;
+  rowVirtualizerInstanceRef?: MutableRefObject<MRT_RowVirtualizer | null>;
   rowVirtualizerOptions?:
     | ((props: {
         table: MRT_TableInstance<TData>;

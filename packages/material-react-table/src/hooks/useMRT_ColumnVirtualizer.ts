@@ -1,14 +1,17 @@
 import { useCallback, useMemo } from 'react';
 import {
   type Range,
-  type Virtualizer,
   useVirtualizer,
 } from '@tanstack/react-virtual';
 import {
   extraIndexRangeExtractor,
   parseFromValuesOrFunc,
 } from '../column.utils';
-import { type MRT_RowData, type MRT_TableInstance } from '../types';
+import {
+  type MRT_ColumnVirtualizer,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
 export const useMRT_ColumnVirtualizer = <
   TData extends MRT_RowData,
@@ -16,12 +19,7 @@ export const useMRT_ColumnVirtualizer = <
   TItemElement extends Element = HTMLTableCellElement,
 >(
   table: MRT_TableInstance<TData>,
-):
-  | (Virtualizer<TScrollElement, TItemElement> & {
-      virtualPaddingLeft?: number;
-      virtualPaddingRight?: number;
-    })
-  | undefined => {
+): MRT_ColumnVirtualizer | undefined => {
   const {
     getState,
     options: {
@@ -59,8 +57,9 @@ export const useMRT_ColumnVirtualizer = <
 
   //get first 16 column widths and average them if calc is needed
   const averageColumnWidth = useMemo(() => {
-    if (!enableColumnVirtualization || columnVirtualizerProps?.estimateSize)
+    if (!enableColumnVirtualization || columnVirtualizerProps?.estimateSize) {
       return 0;
+    }
     const columnsWidths =
       table
         .getRowModel()
@@ -98,7 +97,7 @@ export const useMRT_ColumnVirtualizer = <
           [leftPinnedIndexes, rightPinnedIndexes, draggingColumnIndex],
         ),
         ...columnVirtualizerProps,
-      }) as unknown as Virtualizer<TScrollElement, TItemElement>)
+      }) as unknown as MRT_ColumnVirtualizer<TScrollElement, TItemElement>)
     : undefined;
 
   if (columnVirtualizerInstanceRef && columnVirtualizer) {

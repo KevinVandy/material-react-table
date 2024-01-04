@@ -513,11 +513,21 @@ export const columnOptions: ColumnOption[] = [
     columnOption: 'muiFilterDateTimePickerProps',
     defaultValue: '',
     description: '',
-    link: 'https://mui.com/x/api/date-pickers/datetime-picker/',
+    link: 'https://mui.com/x/api/date-pickers/date-time-picker/',
     linkText: 'MUI X DateTimePicker Props',
     source: 'Material UI',
     required: false,
     type: 'DateTimePickerProps | ({ column, rangeFilterIndex, table }) => DateTimePickerProps',
+  },
+  {
+    columnOption: 'muiFilterTimePickerProps',
+    defaultValue: '',
+    description: '',
+    link: 'https://mui.com/x/api/date-pickers/time-picker/',
+    linkText: 'MUI X TimePicker Props',
+    source: 'Material UI',
+    required: false,
+    type: 'TimePickerProps | ({ column, rangeFilterIndex, table }) => TimePickerProps',
   },
   {
     columnOption: 'muiFilterSliderProps',
@@ -612,7 +622,8 @@ export const columnOptions: ColumnOption[] = [
   {
     columnOption: 'visibleInShowHideMenu',
     defaultValue: 'true',
-    description: 'Set to false if you want to hide a column from the show/hide menu.',
+    description:
+      'Set to false if you want to hide a column from the show/hide menu.',
     link: '/docs/guides/column-hiding#hide-column-from-show-hide-menu',
     linkText: 'MRT Column Hiding Docs',
     source: 'MRT',

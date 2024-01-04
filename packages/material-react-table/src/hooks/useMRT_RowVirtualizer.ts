@@ -1,9 +1,5 @@
 import { useCallback } from 'react';
-import {
-  type Range,
-  type Virtualizer,
-  useVirtualizer,
-} from '@tanstack/react-virtual';
+import { type Range, useVirtualizer } from '@tanstack/react-virtual';
 import {
   extraIndexRangeExtractor,
   parseFromValuesOrFunc,
@@ -11,6 +7,7 @@ import {
 import {
   type MRT_Row,
   type MRT_RowData,
+  type MRT_RowVirtualizer,
   type MRT_TableInstance,
 } from '../types';
 
@@ -21,7 +18,7 @@ export const useMRT_RowVirtualizer = <
 >(
   table: MRT_TableInstance<TData>,
   rows?: MRT_Row<TData>[],
-): Virtualizer<TScrollElement, TItemElement> | undefined => {
+): MRT_RowVirtualizer<TScrollElement, TItemElement> | undefined => {
   const {
     getRowModel,
     getState,
@@ -57,7 +54,7 @@ export const useMRT_RowVirtualizer = <
           [draggingRow],
         ),
         ...rowVirtualizerProps,
-      }) as unknown as Virtualizer<TScrollElement, TItemElement>)
+      }) as unknown as MRT_RowVirtualizer<TScrollElement, TItemElement>)
     : undefined;
 
   if (rowVirtualizerInstanceRef && rowVirtualizer) {

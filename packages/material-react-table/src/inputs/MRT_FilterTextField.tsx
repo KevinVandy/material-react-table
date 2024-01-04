@@ -25,6 +25,10 @@ import {
   DateTimePicker,
   type DateTimePickerProps,
 } from '@mui/x-date-pickers/DateTimePicker';
+import {
+  TimePicker,
+  type TimePickerProps,
+} from '@mui/x-date-pickers/TimePicker';
 import { getValueAndLabel, parseFromValuesOrFunc } from '../column.utils';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 import {
@@ -56,6 +60,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
       muiFilterDatePickerProps,
       muiFilterDateTimePickerProps,
       muiFilterTextFieldProps,
+      muiFilterTimePickerProps,
     },
     refs: { filterInputRefs },
     setColumnFilterFns,
@@ -97,7 +102,16 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
     }),
   };
 
-  const isDateFilter = filterVariant?.startsWith('date');
+  const timePickerProps: TimePickerProps<any> = {
+    ...parseFromValuesOrFunc(muiFilterTimePickerProps, { column, table }),
+    ...parseFromValuesOrFunc(columnDef.muiFilterTimePickerProps, {
+      column,
+      table,
+    }),
+  };
+
+  const isDateFilter =
+    filterVariant?.startsWith('date') || filterVariant?.startsWith('time');
   const isAutocompleteFilter = filterVariant === 'autocomplete';
   const isRangeFilter =
     filterVariant?.includes('range') || rangeFilterIndex !== undefined;
@@ -363,14 +377,34 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
     }),
   };
 
+  const commonDatePickerProps = {
+    onChange: (newDate: any) => {
+      handleChange(newDate);
+    },
+    value: filterValue || null,
+  };
+
   return (
     <>
-      {filterVariant?.startsWith('datetime') ? (
-        <DateTimePicker
-          onChange={(newDate) => {
-            handleChange(newDate);
+      {filterVariant?.startsWith('time') ? (
+        <TimePicker
+          {...commonDatePickerProps}
+          {...timePickerProps}
+          slotProps={{
+            field: {
+              clearable: true,
+              onClear: () => handleClear(),
+              ...timePickerProps?.slotProps?.field,
+            },
+            textField: {
+              ...commonTextFieldProps,
+              ...timePickerProps?.slotProps?.textField,
+            },
           }}
-          value={filterValue || null}
+        />
+      ) : filterVariant?.startsWith('datetime') ? (
+        <DateTimePicker
+          {...commonDatePickerProps}
           {...dateTimePickerProps}
           slotProps={{
             field: {
@@ -386,10 +420,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
         />
       ) : filterVariant?.startsWith('date') ? (
         <DatePicker
-          onChange={(newDate) => {
-            handleChange(newDate);
-          }}
-          value={filterValue || null}
+          {...commonDatePickerProps}
           {...datePickerProps}
           slotProps={{
             field: {

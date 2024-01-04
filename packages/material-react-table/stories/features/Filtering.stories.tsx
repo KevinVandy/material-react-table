@@ -72,13 +72,14 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
 const data = [...Array(120)].map(() => ({
   address: faker.location.streetAddress(),
   age: faker.number.int(100),
+  arrivalTime: faker.date.recent(),
   birthDate: faker.date.birthdate({ max: 2020, min: 1980 }),
+  departureTime: faker.date.recent(),
   firstName: faker.person.firstName(),
   gender: Math.random() < 0.8 ? faker.person.sex() : faker.person.gender(),
   hireDate: faker.date.birthdate({ max: 2024, min: 2011 }),
   isActive: faker.datatype.boolean(),
   lastName: faker.person.lastName(),
-  arrivalTime: faker.date.recent(),
   state: faker.location.state(),
 }));
 
@@ -167,10 +168,16 @@ export const FilterFnAndFilterVariants = () => (
       {
         Cell: ({ cell }) => cell.getValue<Date>().toLocaleString(), //transform data to readable format for cell render
         accessorFn: (row) => new Date(row.arrivalTime), //transform data before processing so sorting works
-        filterFn: 'greaterThan',
-        filterVariant: 'datetime',
+        filterVariant: 'datetime-range',
         header: 'Arrival time',
         id: 'arrivalTime',
+      },
+      {
+        Cell: ({ cell }) => cell.getValue<Date>().toLocaleString(), //transform data to readable format for cell render
+        accessorFn: (row) => new Date(row.departureTime), //transform data before processing so sorting works
+        filterVariant: 'time-range',
+        header: 'Departure Time',
+        id: 'departureTime',
       },
       {
         accessorKey: 'gender',
@@ -605,9 +612,9 @@ export const CustomizeFilterTextFields = () => (
         header: 'State',
       },
     ]}
-    muiFilterTextFieldProps={{ variant: 'outlined' }}
     data={data}
     initialState={{ showColumnFilters: true }}
+    muiFilterTextFieldProps={{ variant: 'outlined' }}
   />
 );
 

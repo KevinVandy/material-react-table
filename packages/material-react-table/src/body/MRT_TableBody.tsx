@@ -1,5 +1,5 @@
 import { memo, useMemo } from 'react';
-import { type VirtualItem, type Virtualizer } from '@tanstack/react-virtual';
+import { type VirtualItem } from '@tanstack/react-virtual';
 import TableBody, { type TableBodyProps } from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';
 import { MRT_TableBodyRow, Memo_MRT_TableBodyRow } from './MRT_TableBodyRow';
@@ -7,25 +7,22 @@ import { parseFromValuesOrFunc } from '../column.utils';
 import { useMRT_RowVirtualizer } from '../hooks';
 import { useMRT_Rows } from '../hooks/useMRT_Rows';
 import {
+  type MRT_ColumnVirtualizer,
   type MRT_Row,
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../types';
 
 interface Props<TData extends MRT_RowData> extends TableBodyProps {
-  columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
+  columnVirtualizer?: MRT_ColumnVirtualizer;
   table: MRT_TableInstance<TData>;
   virtualColumns?: VirtualItem[];
-  virtualPaddingLeft?: number;
-  virtualPaddingRight?: number;
 }
 
 export const MRT_TableBody = <TData extends MRT_RowData>({
   columnVirtualizer,
   table,
   virtualColumns,
-  virtualPaddingLeft,
-  virtualPaddingRight,
   ...rest
 }: Props<TData>) => {
   const {
@@ -62,15 +59,14 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
   const tableFooterHeight =
     (enableStickyFooter && tableFooterRef.current?.clientHeight) || 0;
 
-  const pinnedRowIds = useMemo(
-    () =>
-      getRowModel()
-        .rows.filter((row) => row.getIsPinned())
-        .map((r) => r.id),
-    [rowPinning, table.getRowModel().rows],
-  );
+  const pinnedRowIds = useMemo(() => {
+    if (!rowPinning.bottom?.length && !rowPinning.top?.length) return [];
+    return getRowModel()
+      .rows.filter((row) => row.getIsPinned())
+      .map((r) => r.id);
+  }, [rowPinning, getRowModel().rows]);
 
-  const rows = useMRT_Rows(table);
+  const rows = useMRT_Rows(table, pinnedRowIds);
 
   const rowVirtualizer = useMRT_RowVirtualizer(table, rows);
 
@@ -83,8 +79,6 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
     numRows: rows.length,
     table,
     virtualColumns,
-    virtualPaddingLeft,
-    virtualPaddingRight,
   };
 
   const CreatingRow = creatingRow && createDisplayMode === 'row' && (

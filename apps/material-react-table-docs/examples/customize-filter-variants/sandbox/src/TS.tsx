@@ -47,13 +47,6 @@ const Example = () => {
         },
       },
       {
-        accessorFn: (originalRow) => new Date(originalRow.hireDate), //convert to date for sorting and filtering
-        id: 'hireDate',
-        header: 'Hire Date',
-        filterVariant: 'date-range',
-        Cell: ({ cell }) => cell.getValue<Date>().toLocaleDateString(), // convert back to string for display
-      },
-      {
         accessorKey: 'age',
         header: 'Age',
         filterVariant: 'range',
@@ -71,6 +64,30 @@ const Example = () => {
         header: 'State',
         filterVariant: 'multi-select',
         filterSelectOptions: usStateList, //custom options list (as opposed to faceted list)
+      },
+      {
+        accessorFn: (originalRow) => new Date(originalRow.hireDate), //convert to date for sorting and filtering
+        id: 'hireDate',
+        header: 'Hire Date',
+        filterVariant: 'date-range',
+        Cell: ({ cell }) => cell.getValue<Date>().toLocaleDateString(), // convert back to string for display
+      },
+      {
+        accessorFn: (originalRow) => new Date(originalRow.arrivalTime), //convert to date for sorting and filtering
+        id: 'arrivalTime',
+        header: 'Arrival Time',
+        filterVariant: 'datetime-range',
+        Cell: ({ cell }) =>
+          `${cell.getValue<Date>().toLocaleDateString()} ${cell
+            .getValue<Date>()
+            .toLocaleTimeString()}`, // convert back to string for display
+      },
+      {
+        accessorFn: (originalRow) => new Date(originalRow.departureTime), //convert to date for sorting and filtering
+        id: 'departureTime',
+        header: 'Departure Time',
+        filterVariant: 'time-range',
+        Cell: ({ cell }) => cell.getValue<Date>().toLocaleTimeString(), // convert back to string for display
       },
     ],
     [],

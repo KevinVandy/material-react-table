@@ -12,6 +12,16 @@ import Head from 'next/head';
 
 ### Version 2
 
+#### Version 2.4.0 - 2024-01-04
+
+- Upgraded to TanStack Table `v8.11.3` for bug fixes with expanding and row selection
+- Added `'datetime'`, `'datetime-range'`, `'time'`, and `'time-range'` filter variants
+- Added Tooltips to pagination buttons
+- Added new `MRT_ColumnVirtualizer` and `MRT_RowVirtualizer` types
+- Added behavior to not render Save Row button unless either `onCreatingRowSave` or `onEditingRowSave` is provided
+- Allowed `muiColumnActionsButtonProps.children` to be overridden with a custom icon
+- Fixed issue with Sticky Row Pinning and Row Virtualization
+
 #### Version 2.3.1 - 2024-01-02
 
 - disable row selection for creating row

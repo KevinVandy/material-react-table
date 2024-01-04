@@ -1,5 +1,5 @@
 import { type DragEvent, memo, useMemo, useRef } from 'react';
-import { type VirtualItem, type Virtualizer } from '@tanstack/react-virtual';
+import { type VirtualItem } from '@tanstack/react-virtual';
 import TableRow from '@mui/material/TableRow';
 import {
   type Theme,
@@ -14,13 +14,14 @@ import { parseFromValuesOrFunc } from '../column.utils';
 import { getMRTTheme } from '../style.utils';
 import {
   type MRT_Cell,
+  type MRT_ColumnVirtualizer,
   type MRT_Row,
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../types';
 
 interface Props<TData extends MRT_RowData> {
-  columnVirtualizer?: Virtualizer<HTMLDivElement, HTMLTableCellElement>;
+  columnVirtualizer?: MRT_ColumnVirtualizer;
   measureElement?: (element: HTMLTableRowElement) => void;
   numRows?: number;
   pinnedRowIds?: string[];
@@ -28,8 +29,6 @@ interface Props<TData extends MRT_RowData> {
   rowIndex: number;
   table: MRT_TableInstance<TData>;
   virtualColumns?: VirtualItem[];
-  virtualPaddingLeft?: number;
-  virtualPaddingRight?: number;
   virtualRow?: VirtualItem;
 }
 
@@ -42,8 +41,6 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
   rowIndex,
   table,
   virtualColumns,
-  virtualPaddingLeft,
-  virtualPaddingRight,
   virtualRow,
 }: Props<TData>) => {
   const theme = useTheme();
@@ -74,6 +71,8 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
     isFullScreen,
     rowPinning,
   } = getState();
+
+  const { virtualPaddingLeft, virtualPaddingRight } = columnVirtualizer ?? {};
 
   const isPinned = enableRowPinning && row.getIsPinned();
 

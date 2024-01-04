@@ -9,6 +9,7 @@ import {
 
 export const useMRT_Rows = <TData extends MRT_RowData>(
   table: MRT_TableInstance<TData>,
+  pinnedRowIds: string[] = [],
 ): MRT_Row<TData>[] => {
   const {
     getBottomRows,
@@ -47,14 +48,6 @@ export const useMRT_Rows = <TData extends MRT_RowData>(
       manualSorting,
       sorting,
     ],
-  );
-
-  const pinnedRowIds = useMemo(
-    () =>
-      getRowModel()
-        .rows.filter((row) => row.getIsPinned())
-        .map((r) => r.id),
-    [rowPinning, table.getRowModel().rows],
   );
 
   const rows = useMemo(() => {

@@ -5,6 +5,7 @@ import { MRT_TableHeadCell } from './MRT_TableHeadCell';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { getMRTTheme } from '../style.utils';
 import {
+  type MRT_ColumnVirtualizer,
   type MRT_Header,
   type MRT_HeaderGroup,
   type MRT_RowData,
@@ -12,24 +13,24 @@ import {
 } from '../types';
 
 interface Props<TData extends MRT_RowData> extends TableRowProps {
+  columnVirtualizer?: MRT_ColumnVirtualizer;
   headerGroup: MRT_HeaderGroup<TData>;
   table: MRT_TableInstance<TData>;
   virtualColumns?: VirtualItem[];
-  virtualPaddingLeft?: number;
-  virtualPaddingRight?: number;
 }
 
 export const MRT_TableHeadRow = <TData extends MRT_RowData>({
+  columnVirtualizer,
   headerGroup,
   table,
   virtualColumns,
-  virtualPaddingLeft,
-  virtualPaddingRight,
   ...rest
 }: Props<TData>) => {
   const {
     options: { layoutMode, muiTableHeadRowProps },
   } = table;
+
+  const { virtualPaddingLeft, virtualPaddingRight } = columnVirtualizer ?? {};
 
   const tableRowProps = {
     ...parseFromValuesOrFunc(muiTableHeadRowProps, {

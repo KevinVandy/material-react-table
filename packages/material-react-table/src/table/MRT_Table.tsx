@@ -53,22 +53,14 @@ export const MRT_Table = <TData extends MRT_RowData>({
 
   const columnVirtualizer = useMRT_ColumnVirtualizer(table);
 
-  const { virtualPaddingLeft, virtualPaddingRight } = columnVirtualizer ?? {};
-
   const virtualColumns = columnVirtualizer
     ? columnVirtualizer.getVirtualItems()
     : undefined;
 
   const commonTableGroupProps = {
+    columnVirtualizer,
     table,
     virtualColumns,
-    virtualPaddingLeft,
-    virtualPaddingRight,
-  };
-
-  const commonTableBodyProps = {
-    ...commonTableGroupProps,
-    columnVirtualizer,
   };
 
   return (
@@ -84,9 +76,9 @@ export const MRT_Table = <TData extends MRT_RowData>({
     >
       {enableTableHead && <MRT_TableHead {...commonTableGroupProps} />}
       {memoMode === 'table-body' || columnSizingInfo.isResizingColumn ? (
-        <Memo_MRT_TableBody {...commonTableBodyProps} />
+        <Memo_MRT_TableBody {...commonTableGroupProps} />
       ) : (
-        <MRT_TableBody {...commonTableBodyProps} />
+        <MRT_TableBody {...commonTableGroupProps} />
       )}
       {enableTableFooter && <MRT_TableFooter {...commonTableGroupProps} />}
     </Table>
