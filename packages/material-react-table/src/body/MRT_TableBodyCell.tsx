@@ -318,7 +318,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
             <MRT_TableBodyCellValue cell={cell} table={table} />
           )}
           {cell.getIsGrouped() && !columnDef.GroupedCell && (
-            <>({row.subRows?.length})</>
+            <> ({row.subRows?.length})</>
           )}
         </>
       )}

@@ -1,4 +1,4 @@
-import { type MouseEvent } from 'react';
+import { type MouseEvent, useState } from 'react';
 import { type RowPinningPosition } from '@tanstack/react-table';
 import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
@@ -31,16 +31,26 @@ export const MRT_RowPinButton = <TData extends MRT_RowData>({
 
   const isPinned = row.getIsPinned();
 
+  const [tooltipOpened, setTooltipOpened] = useState(false);
+
   const handleTogglePin = (event: MouseEvent<HTMLButtonElement>) => {
+    setTooltipOpened(false);
     event.stopPropagation();
     row.pin(isPinned ? false : pinningPosition);
   };
 
   return (
-    <Tooltip title={isPinned ? localization.unpin : localization.pin}>
+    <Tooltip
+      enterDelay={1000}
+      enterNextDelay={1000}
+      open={tooltipOpened}
+      title={isPinned ? localization.unpin : localization.pin}
+    >
       <IconButton
         aria-label={localization.pin}
         onClick={handleTogglePin}
+        onMouseEnter={() => setTooltipOpened(true)}
+        onMouseLeave={() => setTooltipOpened(false)}
         size="small"
         {...rest}
         sx={(theme) => ({
