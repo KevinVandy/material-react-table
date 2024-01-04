@@ -206,23 +206,25 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
       : []),
     ...(enableColumnFilters && column.getCanFilter()
       ? [
-          <MenuItem
-            disabled={
-              !columnFilterValue ||
-              (Array.isArray(columnFilterValue) &&
-                !columnFilterValue.filter((value) => value).length)
-            }
-            key={3}
-            onClick={handleClearFilter}
-            sx={commonMenuItemStyles}
-          >
-            <Box sx={commonListItemStyles}>
-              <ListItemIcon>
-                <FilterListOffIcon />
-              </ListItemIcon>
-              {localization.clearFilter}
-            </Box>
-          </MenuItem>,
+          !['empty', 'notEmpty'].includes(columnDef._filterFn) && (
+            <MenuItem
+              disabled={
+                !columnFilterValue ||
+                (Array.isArray(columnFilterValue) &&
+                  !columnFilterValue.filter((value) => value).length)
+              }
+              key={3}
+              onClick={handleClearFilter}
+              sx={commonMenuItemStyles}
+            >
+              <Box sx={commonListItemStyles}>
+                <ListItemIcon>
+                  <FilterListOffIcon />
+                </ListItemIcon>
+                {localization.clearFilter}
+              </Box>
+            </MenuItem>
+          ),
           columnFilterDisplayMode === 'subheader' && (
             <MenuItem
               disabled={showColumnFilters && !enableColumnFilterModes}
