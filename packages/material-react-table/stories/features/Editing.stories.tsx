@@ -178,10 +178,67 @@ export const EditingEnabledEditModeRow = () => {
       data={tableData}
       editDisplayMode="row"
       enableEditing
+      onCreatingRowSave={() => {}}
       onEditingRowSave={handleSaveRow}
       renderTopToolbarCustomActions={({ table }) => (
         <Button onClick={() => table.setCreatingRow(true)}>Add</Button>
       )}
+    />
+  );
+};
+
+export const EditingEnabledEditModeRowCustomSave = () => {
+  const [tableData, setTableData] = useState(data);
+
+  const handleSaveRow: MRT_TableOptions<Person>['onEditingRowSave'] = ({
+    exitEditingMode,
+    row,
+    values,
+  }) => {
+    tableData[row.index] = values;
+    setTableData([...tableData]);
+    exitEditingMode();
+  };
+
+  return (
+    <MaterialReactTable
+      columns={[
+        {
+          accessorKey: 'firstName',
+          header: 'First Name',
+        },
+        {
+          accessorKey: 'lastName',
+          header: 'Last Name',
+        },
+        {
+          accessorKey: 'address',
+          header: 'Address',
+        },
+        {
+          accessorKey: 'state',
+          header: 'State',
+        },
+        {
+          accessorKey: 'phoneNumber',
+          enableEditing: false,
+          header: 'Phone Number',
+        },
+      ]}
+      createDisplayMode="row"
+      data={tableData}
+      editDisplayMode="row"
+      enableEditing
+      onEditingRowSave={handleSaveRow}
+      renderTopToolbarCustomActions={({ table }) =>
+        table.getState().creatingRow ? (
+          <Button color="success" onClick={() => {}}>
+            Save
+          </Button>
+        ) : (
+          <Button onClick={() => table.setCreatingRow(true)}>Add</Button>
+        )
+      }
     />
   );
 };
@@ -237,6 +294,7 @@ export const EditingEnabledEditModeRowVirtualized = () => {
       enableRowSelection
       enableRowVirtualization
       muiTableContainerProps={{ sx: { height: 400 } }}
+      onCreatingRowSave={() => {}}
       onEditingRowSave={handleSaveRow}
       renderTopToolbarCustomActions={({ table }) => (
         <Button onClick={() => table.setCreatingRow(true)}>Add</Button>
@@ -288,6 +346,7 @@ export const EditingEnabledEditModeCell = () => {
           handleSaveCell(cell, event.target.value);
         },
       })}
+      onCreatingRowSave={() => {}}
       renderTopToolbarCustomActions={({ table }) => (
         <Button onClick={() => table.setCreatingRow(true)}>Add</Button>
       )}
@@ -339,6 +398,7 @@ export const EditingEnabledEditModeCellWithRowActions = () => {
           handleSaveCell(cell, event.target.value);
         },
       })}
+      onCreatingRowSave={() => {}}
       renderTopToolbarCustomActions={({ table }) => (
         <Button onClick={() => table.setCreatingRow(true)}>Add</Button>
       )}
