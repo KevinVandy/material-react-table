@@ -7,8 +7,6 @@ import {
   Stack,
   Typography,
   Link as MuiLink,
-  Alert,
-  AlertTitle,
 } from '@mui/material';
 import { ArrowForwardIos } from '@mui/icons-material';
 import { HomeCards } from '../components/mdx/HomeCards';
@@ -26,22 +24,6 @@ const HomePage = () => {
   return (
     <>
       <Stack sx={{ maxWidth: '1200px', m: 'auto' }}>
-        <Alert sx={{ mt: '2rem' }} severity="success" variant="outlined">
-          <AlertTitle>MRT Version 2 has been released!</AlertTitle>
-          (October 27, 2023) See the{' '}
-          <Link href="/migrating-to-v2" passHref legacyBehavior>
-            <MuiLink>V2 Migration Guide</MuiLink>
-          </Link>{' '}
-          to learn how to upgrade or view the{' '}
-          <Link
-            href="/blog/announcing-material-react-table-v2"
-            passHref
-            legacyBehavior
-          >
-            <MuiLink>Blog Post</MuiLink>
-          </Link>{' '}
-          announcing V2.
-        </Alert>
         <Typography
           sx={{
             textAlign: 'center',
