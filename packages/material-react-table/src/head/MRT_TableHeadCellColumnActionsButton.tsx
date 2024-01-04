@@ -77,7 +77,9 @@ export const MRT_TableHeadCellColumnActionsButton = <
           })}
           title={undefined}
         >
+          {iconButtonProps?.children ?? (
           <MoreVertIcon style={{ transform: 'scale(0.9)' }} />
+          )}
         </IconButton>
       </Tooltip>
       {anchorEl && (
