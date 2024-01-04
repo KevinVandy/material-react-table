@@ -11,8 +11,8 @@
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.15.2",
-    "@mui/material": "^5.15.2",
+    "@mui/icons-material": "^5.15.3",
+    "@mui/material": "^5.15.3",
     "export-to-csv": "^1.2.2",
     "material-react-table": "^2.3.1",
     "react": "^18.2.0",
