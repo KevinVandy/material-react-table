@@ -8,7 +8,11 @@ import {
   extraIndexRangeExtractor,
   parseFromValuesOrFunc,
 } from '../column.utils';
-import { type MRT_RowData, type MRT_TableInstance } from '../types';
+import {
+  type MRT_Row,
+  type MRT_RowData,
+  type MRT_TableInstance,
+} from '../types';
 
 export const useMRT_RowVirtualizer = <
   TData extends MRT_RowData,
@@ -16,6 +20,7 @@ export const useMRT_RowVirtualizer = <
   TItemElement extends Element = HTMLTableRowElement,
 >(
   table: MRT_TableInstance<TData>,
+  rows?: MRT_Row<TData>[],
 ): Virtualizer<TScrollElement, TItemElement> | undefined => {
   const {
     getRowModel,
@@ -35,7 +40,7 @@ export const useMRT_RowVirtualizer = <
 
   const rowVirtualizer = enableRowVirtualization
     ? (useVirtualizer({
-        count: getRowModel().rows.length,
+        count: rows?.length ?? getRowModel().rows.length,
         estimateSize: () =>
           density === 'compact' ? 37 : density === 'comfortable' ? 58 : 73,
         getScrollElement: () => tableContainerRef.current,
