@@ -1,8 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import {
-  type Range,
-  useVirtualizer,
-} from '@tanstack/react-virtual';
+import { type Range, useVirtualizer } from '@tanstack/react-virtual';
 import {
   extraIndexRangeExtractor,
   parseFromValuesOrFunc,
@@ -49,7 +46,8 @@ export const useMRT_ColumnVirtualizer = <
               .map(
                 (c) =>
                   table.getVisibleLeafColumns().length - c.getPinnedIndex() - 1,
-              ),
+              )
+              .sort((a, b) => a - b),
           ]
         : [[], []],
     [columnPinning, enableColumnVirtualization, enableColumnPinning],
@@ -110,14 +108,18 @@ export const useMRT_ColumnVirtualizer = <
     : undefined;
 
   if (columnVirtualizer && virtualColumns?.length) {
-    // @ts-ignore
     columnVirtualizer.virtualPaddingLeft =
-      virtualColumns[leftPinnedIndexes!.length]?.start ?? 0;
-    // @ts-ignore
+      (virtualColumns[leftPinnedIndexes.length]?.start ?? 0) -
+      (virtualColumns[leftPinnedIndexes.length - 1]?.end ?? 0);
     columnVirtualizer.virtualPaddingRight =
       columnVirtualizer.getTotalSize() -
-      (virtualColumns[virtualColumns.length - 1 - rightPinnedIndexes!.length]
-        ?.end ?? 0);
+      (virtualColumns[virtualColumns.length - rightPinnedIndexes.length - 1]
+        ?.end ?? 0) -
+      (rightPinnedIndexes.length
+        ? columnVirtualizer.getTotalSize() -
+          (virtualColumns[virtualColumns.length - rightPinnedIndexes.length]
+            ?.start ?? 0)
+        : 0);
   }
 
   return columnVirtualizer as any;
