@@ -72,7 +72,7 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
 
   const rows = useMRT_Rows(table);
 
-  const rowVirtualizer = useMRT_RowVirtualizer(table);
+  const rowVirtualizer = useMRT_RowVirtualizer(table, rows);
 
   const virtualRows = rowVirtualizer
     ? rowVirtualizer.getVirtualItems()
