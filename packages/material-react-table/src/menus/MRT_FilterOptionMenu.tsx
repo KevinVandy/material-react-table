@@ -103,7 +103,7 @@ export const mrtFilterOptions = (
 const rangeModes = ['between', 'betweenInclusive', 'inNumberRange'];
 const emptyModes = ['empty', 'notEmpty'];
 const arrModes = ['arrIncludesSome', 'arrIncludesAll', 'arrIncludes'];
-const rangeVariants = ['range-slider', 'date-range', 'range'];
+const rangeVariants = ['range-slider', 'date-range', 'datetime-range', 'range'];
 
 interface Props<TData extends MRT_RowData> extends Partial<MenuProps> {
   anchorEl: HTMLElement | null;

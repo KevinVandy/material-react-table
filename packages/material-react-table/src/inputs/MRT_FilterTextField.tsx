@@ -21,6 +21,10 @@ import {
   DatePicker,
   type DatePickerProps,
 } from '@mui/x-date-pickers/DatePicker';
+import {
+  DateTimePicker,
+  type DateTimePickerProps,
+} from '@mui/x-date-pickers/DateTimePicker';
 import { getValueAndLabel, parseFromValuesOrFunc } from '../column.utils';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 import {
@@ -50,6 +54,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
       manualFiltering,
       muiFilterAutocompleteProps,
       muiFilterDatePickerProps,
+      muiFilterDateTimePickerProps,
       muiFilterTextFieldProps,
     },
     refs: { filterInputRefs },
@@ -79,6 +84,14 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
   const datePickerProps: DatePickerProps<any> = {
     ...parseFromValuesOrFunc(muiFilterDatePickerProps, { column, table }),
     ...parseFromValuesOrFunc(columnDef.muiFilterDatePickerProps, {
+      column,
+      table,
+    }),
+  };
+
+  const dateTimePickerProps: DateTimePickerProps<any> = {
+    ...parseFromValuesOrFunc(muiFilterDateTimePickerProps, { column, table }),
+    ...parseFromValuesOrFunc(columnDef.muiFilterDateTimePickerProps, {
       column,
       table,
     }),
@@ -352,7 +365,26 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
 
   return (
     <>
-      {isDateFilter ? (
+      {filterVariant?.startsWith('datetime') ? (
+        <DateTimePicker
+          onChange={(newDate) => {
+            handleChange(newDate);
+          }}
+          value={filterValue || null}
+          {...dateTimePickerProps}
+          slotProps={{
+            field: {
+              clearable: true,
+              onClear: () => handleClear(),
+              ...dateTimePickerProps?.slotProps?.field,
+            },
+            textField: {
+              ...commonTextFieldProps,
+              ...dateTimePickerProps?.slotProps?.textField,
+            },
+          }}
+        />
+      ) : filterVariant?.startsWith('date') ? (
         <DatePicker
           onChange={(newDate) => {
             handleChange(newDate);

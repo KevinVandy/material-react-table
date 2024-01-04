@@ -510,6 +510,16 @@ export const columnOptions: ColumnOption[] = [
     type: 'DatePickerProps | ({ column, rangeFilterIndex, table }) => DatePickerProps',
   },
   {
+    columnOption: 'muiFilterDateTimePickerProps',
+    defaultValue: '',
+    description: '',
+    link: 'https://mui.com/x/api/date-pickers/datetime-picker/',
+    linkText: 'MUI X DateTimePicker Props',
+    source: 'Material UI',
+    required: false,
+    type: 'DateTimePickerProps | ({ column, rangeFilterIndex, table }) => DateTimePickerProps',
+  },
+  {
     columnOption: 'muiFilterSliderProps',
     defaultValue: '',
     description: '',

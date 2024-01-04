@@ -66,7 +66,10 @@ import { type TableHeadProps } from '@mui/material/TableHead';
 import { type TableRowProps } from '@mui/material/TableRow';
 import { type TextFieldProps } from '@mui/material/TextField';
 import { type Theme } from '@mui/material/styles';
-import { type DatePickerProps } from '@mui/x-date-pickers';
+import {
+  type DatePickerProps,
+  type DateTimePickerProps,
+} from '@mui/x-date-pickers';
 import { type MRT_AggregationFns } from './aggregationFns';
 import { type MRT_FilterFns } from './filterFns';
 import { type MRT_Icons } from './icons';
@@ -463,6 +466,8 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
     | 'checkbox'
     | 'date'
     | 'date-range'
+    | 'datetime'
+    | 'datetime-range'
     | 'multi-select'
     | 'range'
     | 'range-slider'
@@ -533,6 +538,13 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
         table: MRT_TableInstance<TData>;
       }) => DatePickerProps<any>)
     | DatePickerProps<any>;
+  muiFilterDateTimePickerProps?:
+    | ((props: {
+        column: MRT_Column<TData>;
+        rangeFilterIndex?: number;
+        table: MRT_TableInstance<TData>;
+      }) => DateTimePickerProps<any>)
+    | DateTimePickerProps<any>;
   muiFilterSliderProps?:
     | ((props: {
         column: MRT_Column<TData>;
@@ -886,6 +898,13 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
         table: MRT_TableInstance<TData>;
       }) => DatePickerProps<any>)
     | DatePickerProps<any>;
+  muiFilterDateTimePickerProps?:
+    | ((props: {
+        column: MRT_Column<TData>;
+        rangeFilterIndex?: number;
+        table: MRT_TableInstance<TData>;
+      }) => DateTimePickerProps<any>)
+    | DateTimePickerProps<any>;
   muiFilterSliderProps?:
     | ((props: {
         column: MRT_Column<TData>;
