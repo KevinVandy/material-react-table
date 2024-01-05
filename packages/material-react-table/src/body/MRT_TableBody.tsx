@@ -16,13 +16,11 @@ import {
 interface Props<TData extends MRT_RowData> extends TableBodyProps {
   columnVirtualizer?: MRT_ColumnVirtualizer;
   table: MRT_TableInstance<TData>;
-  virtualColumns?: VirtualItem[];
 }
 
 export const MRT_TableBody = <TData extends MRT_RowData>({
   columnVirtualizer,
   table,
-  virtualColumns,
   ...rest
 }: Props<TData>) => {
   const {
@@ -70,15 +68,12 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
 
   const rowVirtualizer = useMRT_RowVirtualizer(table, rows);
 
-  const virtualRows = rowVirtualizer
-    ? rowVirtualizer.getVirtualItems()
-    : undefined;
+  const { virtualRows } = rowVirtualizer ?? {};
 
   const commonRowProps = {
     columnVirtualizer,
     numRows: rows.length,
     table,
-    virtualColumns,
   };
 
   const CreatingRow = creatingRow && createDisplayMode === 'row' && (
@@ -186,13 +181,11 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
                     ? (rowOrVirtualRow as VirtualItem)
                     : undefined,
                 };
+                const key = `${row.id}-${row.index}`;
                 return memoMode === 'rows' ? (
-                  <Memo_MRT_TableBodyRow
-                    key={`${row.id}-${row.index}`}
-                    {...props}
-                  />
+                  <Memo_MRT_TableBodyRow key={key} {...props} />
                 ) : (
-                  <MRT_TableBodyRow key={`${row.id}-${row.index}`} {...props} />
+                  <MRT_TableBodyRow key={key} {...props} />
                 );
               })}
             </>
@@ -217,7 +210,7 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
                 rowIndex,
               };
               return memoMode === 'rows' ? (
-                <Memo_MRT_TableBodyRow key={`${row.id}`} {...props} />
+                <Memo_MRT_TableBodyRow key={row.id} {...props} />
               ) : (
                 <MRT_TableBodyRow key={row.id} {...props} />
               );

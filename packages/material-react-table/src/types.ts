@@ -93,28 +93,30 @@ export type MRT_ColumnFilterFnsState = Record<string, MRT_FilterOption>;
 
 export type MRT_RowData = Record<string, any>;
 
-export type {
-  ColumnFiltersState as MRT_ColumnFiltersState,
-  ColumnOrderState as MRT_ColumnOrderState,
-  ColumnPinningState as MRT_ColumnPinningState,
-  ColumnSizingInfoState as MRT_ColumnSizingInfoState,
-  ColumnSizingState as MRT_ColumnSizingState,
-  ExpandedState as MRT_ExpandedState,
-  GroupingState as MRT_GroupingState,
-  PaginationState as MRT_PaginationState,
-  RowSelectionState as MRT_RowSelectionState,
-  SortingState as MRT_SortingState,
-  Updater as MRT_Updater,
-  VirtualItem as MRT_VirtualItem,
-  Virtualizer as MRT_Virtualizer,
-  VirtualizerOptions as MRT_VirtualizerOptions,
-  VisibilityState as MRT_VisibilityState,
-};
+export type MRT_ColumnFiltersState = ColumnFiltersState;
+export type MRT_ColumnOrderState = ColumnOrderState;
+export type MRT_ColumnPinningState = ColumnPinningState;
+export type MRT_ColumnSizingInfoState = ColumnSizingInfoState;
+export type MRT_ColumnSizingState = ColumnSizingState;
+export type MRT_ExpandedState = ExpandedState;
+export type MRT_GroupingState = GroupingState;
+export type MRT_PaginationState = PaginationState;
+export type MRT_RowSelectionState = RowSelectionState;
+export type MRT_SortingState = SortingState;
+export type MRT_Updater<T> = Updater<T>;
+export type MRT_VirtualItem = VirtualItem;
+export type MRT_VisibilityState = VisibilityState;
+
+export type MRT_VirtualizerOptions<
+  TScrollElement extends Element | Window = Element | Window,
+  TItemElement extends Element = Element,
+> = VirtualizerOptions<TScrollElement, TItemElement>;
 
 export type MRT_ColumnVirtualizer<
   TScrollElement extends Element | Window = HTMLDivElement,
   TItemElement extends Element = HTMLTableCellElement,
 > = Virtualizer<TScrollElement, TItemElement> & {
+  virtualColumns: MRT_VirtualItem[];
   virtualPaddingLeft?: number;
   virtualPaddingRight?: number;
 };
@@ -122,7 +124,16 @@ export type MRT_ColumnVirtualizer<
 export type MRT_RowVirtualizer<
   TScrollElement extends Element | Window = HTMLDivElement,
   TItemElement extends Element = HTMLTableRowElement,
-> = Virtualizer<TScrollElement, TItemElement>;
+> = Virtualizer<TScrollElement, TItemElement> & {
+  virtualRows: MRT_VirtualItem[];
+};
+
+/**
+ * @deprecated use `MRT_ColumnVirtualizer` or `MRT_RowVirtualizer` instead
+ */
+export type MRT_Virtualizer<_TScrollElement = any, _TItemElement = any> =
+  | MRT_ColumnVirtualizer
+  | MRT_RowVirtualizer;
 
 export type MRT_ColumnHelper<TData extends MRT_RowData> = {
   accessor: <
@@ -743,7 +754,9 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   columnFilterModeOptions?: Array<
     LiteralUnion<string & MRT_FilterOption>
   > | null;
-  columnVirtualizerInstanceRef?: MutableRefObject<MRT_ColumnVirtualizer | null>;
+  columnVirtualizerInstanceRef?: MutableRefObject<
+    MRT_ColumnVirtualizer | MRT_Virtualizer | null
+  >;
   columnVirtualizerOptions?:
     | ((props: {
         table: MRT_TableInstance<TData>;
@@ -955,6 +968,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
     | ((props: { table: MRT_TableInstance<TData> }) => Partial<
         PaginationProps & {
           SelectProps?: Partial<SelectProps>;
+          disabled?: boolean;
           rowsPerPageOptions?: { label: string; value: number }[] | number[];
           showRowsPerPage?: boolean;
         }
@@ -962,6 +976,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
     | Partial<
         PaginationProps & {
           SelectProps?: Partial<SelectProps>;
+          disabled?: boolean;
           rowsPerPageOptions?: { label: string; value: number }[] | number[];
           showRowsPerPage?: boolean;
         }
@@ -1175,7 +1190,9 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
     | 'sticky'
     | 'top'
     | 'top-and-bottom';
-  rowVirtualizerInstanceRef?: MutableRefObject<MRT_RowVirtualizer | null>;
+  rowVirtualizerInstanceRef?: MutableRefObject<
+    MRT_RowVirtualizer | MRT_Virtualizer | null
+  >;
   rowVirtualizerOptions?:
     | ((props: {
         table: MRT_TableInstance<TData>;

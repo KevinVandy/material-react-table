@@ -1,8 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import {
-  type Range,
-  useVirtualizer,
-} from '@tanstack/react-virtual';
+import { type Range, useVirtualizer } from '@tanstack/react-virtual';
 import {
   extraIndexRangeExtractor,
   parseFromValuesOrFunc,
@@ -49,7 +46,8 @@ export const useMRT_ColumnVirtualizer = <
               .map(
                 (c) =>
                   table.getVisibleLeafColumns().length - c.getPinnedIndex() - 1,
-              ),
+              )
+              .sort((a, b) => a - b),
           ]
         : [[], []],
     [columnPinning, enableColumnVirtualization, enableColumnPinning],
@@ -69,9 +67,11 @@ export const useMRT_ColumnVirtualizer = <
     return columnsWidths.reduce((a, b) => a + b, 0) / columnsWidths.length;
   }, [table.getRowModel().rows, columnPinning, columnVisibility]);
 
-  const draggingColumnIndex = table
-    .getVisibleLeafColumns()
-    .findIndex((c) => c.id === draggingColumn?.id);
+  const draggingColumnIndex = draggingColumn?.id
+    ? table
+        .getVisibleLeafColumns()
+        .findIndex((c) => c.id === draggingColumn?.id)
+    : undefined;
 
   const columnVirtualizer = enableColumnVirtualization
     ? (useVirtualizer({
@@ -100,24 +100,27 @@ export const useMRT_ColumnVirtualizer = <
       }) as unknown as MRT_ColumnVirtualizer<TScrollElement, TItemElement>)
     : undefined;
 
-  if (columnVirtualizerInstanceRef && columnVirtualizer) {
-    //@ts-ignore
-    columnVirtualizerInstanceRef.current = columnVirtualizer;
-  }
-
-  const virtualColumns = columnVirtualizer
-    ? columnVirtualizer.getVirtualItems()
-    : undefined;
-
-  if (columnVirtualizer && virtualColumns?.length) {
-    // @ts-ignore
-    columnVirtualizer.virtualPaddingLeft =
-      virtualColumns[leftPinnedIndexes!.length]?.start ?? 0;
-    // @ts-ignore
-    columnVirtualizer.virtualPaddingRight =
-      columnVirtualizer.getTotalSize() -
-      (virtualColumns[virtualColumns.length - 1 - rightPinnedIndexes!.length]
-        ?.end ?? 0);
+  if (columnVirtualizer) {
+    const virtualColumns = columnVirtualizer.getVirtualItems();
+    columnVirtualizer.virtualColumns = virtualColumns;
+    if (virtualColumns.length) {
+      columnVirtualizer.virtualPaddingLeft =
+        (virtualColumns[leftPinnedIndexes.length]?.start ?? 0) -
+        (virtualColumns[leftPinnedIndexes.length - 1]?.end ?? 0);
+      columnVirtualizer.virtualPaddingRight =
+        columnVirtualizer.getTotalSize() -
+        (virtualColumns[virtualColumns.length - rightPinnedIndexes.length - 1]
+          ?.end ?? 0) -
+        (rightPinnedIndexes.length
+          ? columnVirtualizer.getTotalSize() -
+            (virtualColumns[virtualColumns.length - rightPinnedIndexes.length]
+              ?.start ?? 0)
+          : 0);
+    }
+    if (columnVirtualizerInstanceRef) {
+      //@ts-ignore
+      columnVirtualizerInstanceRef.current = columnVirtualizer;
+    }
   }
 
   return columnVirtualizer as any;

@@ -28,7 +28,6 @@ interface Props<TData extends MRT_RowData> {
   row: MRT_Row<TData>;
   rowIndex: number;
   table: MRT_TableInstance<TData>;
-  virtualColumns?: VirtualItem[];
   virtualRow?: VirtualItem;
 }
 
@@ -40,7 +39,6 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
   row,
   rowIndex,
   table,
-  virtualColumns,
   virtualRow,
 }: Props<TData>) => {
   const theme = useTheme();
@@ -72,7 +70,8 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
     rowPinning,
   } = getState();
 
-  const { virtualPaddingLeft, virtualPaddingRight } = columnVirtualizer ?? {};
+  const { virtualColumns, virtualPaddingLeft, virtualPaddingRight } =
+    columnVirtualizer ?? {};
 
   const isPinned = enableRowPinning && row.getIsPinned();
 

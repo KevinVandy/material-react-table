@@ -53,14 +53,9 @@ export const MRT_Table = <TData extends MRT_RowData>({
 
   const columnVirtualizer = useMRT_ColumnVirtualizer(table);
 
-  const virtualColumns = columnVirtualizer
-    ? columnVirtualizer.getVirtualItems()
-    : undefined;
-
   const commonTableGroupProps = {
     columnVirtualizer,
     table,
-    virtualColumns,
   };
 
   return (

@@ -90,25 +90,6 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
       column.getIsPinned() === 'left'
         ? `${column.getStart('left')}px`
         : undefined,
-    ml:
-      table.options.enableColumnVirtualization &&
-      column.getIsPinned() === 'left' &&
-      column.getPinnedIndex() === 0
-        ? `-${
-            column.getSize() *
-            (table.getState().columnPinning.left?.length ?? 1)
-          }px`
-        : undefined,
-    mr:
-      table.options.enableColumnVirtualization &&
-      column.getIsPinned() === 'right' &&
-      column.getPinnedIndex() === table.getVisibleLeafColumns().length - 1
-        ? `-${
-            column.getSize() *
-            (table.getState().columnPinning.right?.length ?? 1) *
-            1.2
-          }px`
-        : undefined,
     opacity:
       table.getState().draggingColumn?.id === column.id ||
       table.getState().hoveredColumn?.id === column.id
