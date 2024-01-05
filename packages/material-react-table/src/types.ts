@@ -962,6 +962,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
     | ((props: { table: MRT_TableInstance<TData> }) => Partial<
         PaginationProps & {
           SelectProps?: Partial<SelectProps>;
+          disabled?: boolean;
           rowsPerPageOptions?: { label: string; value: number }[] | number[];
           showRowsPerPage?: boolean;
         }
@@ -969,6 +970,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
     | Partial<
         PaginationProps & {
           SelectProps?: Partial<SelectProps>;
+          disabled?: boolean;
           rowsPerPageOptions?: { label: string; value: number }[] | number[];
           showRowsPerPage?: boolean;
         }

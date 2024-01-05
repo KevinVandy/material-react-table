@@ -4,7 +4,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Pagination, { type PaginationProps } from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
-import Select from '@mui/material/Select';
+import Select, { type SelectProps } from '@mui/material/Select';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { parseFromValuesOrFunc } from '../column.utils';
@@ -15,6 +15,7 @@ const defaultRowsPerPage = [5, 10, 15, 20, 25, 30, 50, 100];
 interface Props<TData extends MRT_RowData>
   extends Partial<
     PaginationProps & {
+      SelectProps?: Partial<SelectProps>;
       disabled?: boolean;
       rowsPerPageOptions?: { label: string; value: number }[] | number[];
       showRowsPerPage?: boolean;
