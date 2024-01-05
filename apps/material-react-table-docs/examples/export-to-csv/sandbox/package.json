@@ -14,7 +14,7 @@
     "@mui/icons-material": "^5.15.3",
     "@mui/material": "^5.15.3",
     "export-to-csv": "^1.2.2",
-    "material-react-table": "^2.4.0",
+    "material-react-table": "^2.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
