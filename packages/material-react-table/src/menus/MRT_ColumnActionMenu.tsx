@@ -67,6 +67,7 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
       renderColumnActionsMenuItems,
     },
     refs: { filterInputRefs },
+    setColumnFilterFns,
     setColumnOrder,
     setColumnSizingInfo,
     setShowColumnFilters,
@@ -119,8 +120,14 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
   };
 
   const handleClearFilter = () => {
-    column.setFilterValue('');
+    column.setFilterValue(undefined);
     setAnchorEl(null);
+    if (['empty', 'notEmpty'].includes(columnDef._filterFn)) {
+      setColumnFilterFns((prev) => ({
+        ...prev,
+        [header.id]: allowedColumnFilterOptions?.[0] ?? 'fuzzy',
+      }));
+    }
   };
 
   const handleFilterByColumn = () => {
@@ -206,25 +213,23 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
       : []),
     ...(enableColumnFilters && column.getCanFilter()
       ? [
-          !['empty', 'notEmpty'].includes(columnDef._filterFn) && (
-            <MenuItem
-              disabled={
-                !columnFilterValue ||
-                (Array.isArray(columnFilterValue) &&
-                  !columnFilterValue.filter((value) => value).length)
-              }
-              key={3}
-              onClick={handleClearFilter}
-              sx={commonMenuItemStyles}
-            >
-              <Box sx={commonListItemStyles}>
-                <ListItemIcon>
-                  <FilterListOffIcon />
-                </ListItemIcon>
-                {localization.clearFilter}
-              </Box>
-            </MenuItem>
-          ),
+          <MenuItem
+            disabled={
+              !columnFilterValue ||
+              (Array.isArray(columnFilterValue) &&
+                !columnFilterValue.filter((value) => value).length)
+            }
+            key={3}
+            onClick={handleClearFilter}
+            sx={commonMenuItemStyles}
+          >
+            <Box sx={commonListItemStyles}>
+              <ListItemIcon>
+                <FilterListOffIcon />
+              </ListItemIcon>
+              {localization.clearFilter}
+            </Box>
+          </MenuItem>,
           columnFilterDisplayMode === 'subheader' && (
             <MenuItem
               disabled={showColumnFilters && !enableColumnFilterModes}
