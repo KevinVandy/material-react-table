@@ -12,7 +12,7 @@ import {
   type MRT_ColumnDef,
   type MRT_ColumnFiltersState,
   type MRT_SortingState,
-  type MRT_Virtualizer,
+  type MRT_RowVirtualizer,
 } from 'material-react-table';
 import { Typography } from '@mui/material';
 import {
@@ -64,8 +64,7 @@ const fetchSize = 25;
 
 const Example = () => {
   const tableContainerRef = useRef<HTMLDivElement>(null); //we can get access to the underlying TableContainer element and react to its scroll events
-  const rowVirtualizerInstanceRef =
-    useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null); //we can get access to the underlying Virtualizer instance and call its scrollToIndex method
+  const rowVirtualizerInstanceRef = useRef<MRT_RowVirtualizer>(null); //we can get access to the underlying Virtualizer instance and call its scrollToIndex method
 
   const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
     [],

@@ -105,10 +105,7 @@ export type MRT_RowSelectionState = RowSelectionState;
 export type MRT_SortingState = SortingState;
 export type MRT_Updater<T> = Updater<T>;
 export type MRT_VirtualItem = VirtualItem;
-export type MRT_Virtualizer<
-  TScrollElement extends Element | Window = Element | Window,
-  TItemElement extends Element = Element,
-> = Virtualizer<TScrollElement, TItemElement>;
+
 export type MRT_VirtualizerOptions<
   TScrollElement extends Element | Window = Element | Window,
   TItemElement extends Element = Element,
@@ -130,6 +127,13 @@ export type MRT_RowVirtualizer<
 > = Virtualizer<TScrollElement, TItemElement> & {
   virtualRows: MRT_VirtualItem[];
 };
+
+/**
+ * @deprecated use `MRT_ColumnVirtualizer` or `MRT_RowVirtualizer` instead
+ */
+export type MRT_Virtualizer<_TScrollElement = any, _TItemElement = any> =
+  | MRT_ColumnVirtualizer
+  | MRT_RowVirtualizer;
 
 export type MRT_ColumnHelper<TData extends MRT_RowData> = {
   accessor: <
@@ -750,7 +754,9 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   columnFilterModeOptions?: Array<
     LiteralUnion<string & MRT_FilterOption>
   > | null;
-  columnVirtualizerInstanceRef?: MutableRefObject<MRT_ColumnVirtualizer | null>;
+  columnVirtualizerInstanceRef?: MutableRefObject<
+    MRT_ColumnVirtualizer | MRT_Virtualizer | null
+  >;
   columnVirtualizerOptions?:
     | ((props: {
         table: MRT_TableInstance<TData>;
@@ -1184,7 +1190,9 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
     | 'sticky'
     | 'top'
     | 'top-and-bottom';
-  rowVirtualizerInstanceRef?: MutableRefObject<MRT_RowVirtualizer | null>;
+  rowVirtualizerInstanceRef?: MutableRefObject<
+    MRT_RowVirtualizer | MRT_Virtualizer | null
+  >;
   rowVirtualizerOptions?:
     | ((props: {
         table: MRT_TableInstance<TData>;
