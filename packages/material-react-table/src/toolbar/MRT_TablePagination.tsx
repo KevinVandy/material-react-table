@@ -72,6 +72,9 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
     ..._rest
   } = paginationProps ?? {};
 
+  const disableBack = pageIndex <= 0 || disabled;
+  const disableNext = lastRowIndex >= totalRowCount || disabled;
+
   return (
     <Box
       className="MuiTablePagination-root"
@@ -166,47 +169,55 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
           } ${totalRowCount.toLocaleString()}`}</Typography>
           <Box gap="xs">
             {showFirstButton && (
-              <Tooltip title={localization.goToFirstPage}>
-                <IconButton
-                  aria-label={localization.goToFirstPage}
-                  disabled={pageIndex <= 0 || disabled}
-                  onClick={() => setPageIndex(0)}
-                  size="small"
-                >
-                  <FirstPageIcon />
-                </IconButton>
+              <Tooltip enterDelay={1000} title={localization.goToFirstPage}>
+                <span>
+                  <IconButton
+                    aria-label={localization.goToFirstPage}
+                    disabled={disableBack}
+                    onClick={() => setPageIndex(0)}
+                    size="small"
+                  >
+                    <FirstPageIcon />
+                  </IconButton>
+                </span>
               </Tooltip>
             )}
-            <Tooltip title={localization.goToPreviousPage}>
-              <IconButton
-                aria-label={localization.goToPreviousPage}
-                disabled={pageIndex <= 0 || disabled}
-                onClick={() => setPageIndex(pageIndex - 1)}
-                size="small"
-              >
-                <ChevronLeftIcon />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title={localization.goToNextPage}>
-              <IconButton
-                aria-label={localization.goToNextPage}
-                disabled={lastRowIndex >= totalRowCount || disabled}
-                onClick={() => setPageIndex(pageIndex + 1)}
-                size="small"
-              >
-                <ChevronRightIcon />
-              </IconButton>
-            </Tooltip>
-            {showLastButton && (
-              <Tooltip title={localization.goToLastPage}>
+            <Tooltip enterDelay={1000} title={localization.goToPreviousPage}>
+              <span>
                 <IconButton
-                  aria-label={localization.goToLastPage}
-                  disabled={lastRowIndex >= totalRowCount || disabled}
-                  onClick={() => setPageIndex(numberOfPages - 1)}
+                  aria-label={localization.goToPreviousPage}
+                  disabled={disableBack}
+                  onClick={() => setPageIndex(pageIndex - 1)}
                   size="small"
                 >
-                  <LastPageIcon />
+                  <ChevronLeftIcon />
                 </IconButton>
+              </span>
+            </Tooltip>
+            <Tooltip enterDelay={1000} title={localization.goToNextPage}>
+              <span>
+                <IconButton
+                  aria-label={localization.goToNextPage}
+                  disabled={disableNext}
+                  onClick={() => setPageIndex(pageIndex + 1)}
+                  size="small"
+                >
+                  <ChevronRightIcon />
+                </IconButton>
+              </span>
+            </Tooltip>
+            {showLastButton && (
+              <Tooltip enterDelay={1000} title={localization.goToLastPage}>
+                <span>
+                  <IconButton
+                    aria-label={localization.goToLastPage}
+                    disabled={disableNext}
+                    onClick={() => setPageIndex(numberOfPages - 1)}
+                    size="small"
+                  >
+                    <LastPageIcon />
+                  </IconButton>
+                </span>
               </Tooltip>
             )}
           </Box>
