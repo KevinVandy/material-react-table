@@ -1,4 +1,3 @@
-import { type VirtualItem } from '@tanstack/react-virtual';
 import TableRow, { type TableRowProps } from '@mui/material/TableRow';
 import { MRT_TableFooterCell } from './MRT_TableFooterCell';
 import { parseFromValuesOrFunc } from '../column.utils';
@@ -15,21 +14,20 @@ interface Props<TData extends MRT_RowData> extends TableRowProps {
   columnVirtualizer?: MRT_ColumnVirtualizer;
   footerGroup: MRT_HeaderGroup<TData>;
   table: MRT_TableInstance<TData>;
-  virtualColumns?: VirtualItem[];
 }
 
 export const MRT_TableFooterRow = <TData extends MRT_RowData>({
   columnVirtualizer,
   footerGroup,
   table,
-  virtualColumns,
   ...rest
 }: Props<TData>) => {
   const {
     options: { layoutMode, muiTableFooterRowProps },
   } = table;
 
-  const { virtualPaddingLeft, virtualPaddingRight } = columnVirtualizer ?? {};
+  const { virtualColumns, virtualPaddingLeft, virtualPaddingRight } =
+    columnVirtualizer ?? {};
 
   // if no content in row, skip row
   if (

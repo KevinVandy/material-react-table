@@ -1,4 +1,3 @@
-import { type VirtualItem } from '@tanstack/react-virtual';
 import TableFooter, { type TableFooterProps } from '@mui/material/TableFooter';
 import { MRT_TableFooterRow } from './MRT_TableFooterRow';
 import { parseFromValuesOrFunc } from '../column.utils';
@@ -11,13 +10,11 @@ import {
 interface Props<TData extends MRT_RowData> extends TableFooterProps {
   columnVirtualizer?: MRT_ColumnVirtualizer;
   table: MRT_TableInstance<TData>;
-  virtualColumns?: VirtualItem[];
 }
 
 export const MRT_TableFooter = <TData extends MRT_RowData>({
   columnVirtualizer,
   table,
-  virtualColumns,
   ...rest
 }: Props<TData>) => {
   const {
@@ -68,7 +65,6 @@ export const MRT_TableFooter = <TData extends MRT_RowData>({
           footerGroup={footerGroup as any}
           key={footerGroup.id}
           table={table}
-          virtualColumns={virtualColumns}
         />
       ))}
     </TableFooter>

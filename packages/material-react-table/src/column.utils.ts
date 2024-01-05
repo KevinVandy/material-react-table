@@ -314,9 +314,10 @@ export const createRow = <TData extends MRT_RowData>(
 
 export const extraIndexRangeExtractor = (
   range: Range,
-  draggingIndex: number,
+  draggingIndex?: number,
 ) => {
   const newIndexes = defaultRangeExtractor(range);
+  if (draggingIndex === undefined) return newIndexes;
   if (
     draggingIndex >= 0 &&
     draggingIndex < Math.max(range.startIndex - range.overscan, 0)
