@@ -105,12 +105,12 @@ export type MRT_RowSelectionState = RowSelectionState;
 export type MRT_SortingState = SortingState;
 export type MRT_Updater<T> = Updater<T>;
 export type MRT_VirtualItem = VirtualItem;
+export type MRT_VisibilityState = VisibilityState;
 
 export type MRT_VirtualizerOptions<
   TScrollElement extends Element | Window = Element | Window,
   TItemElement extends Element = Element,
 > = VirtualizerOptions<TScrollElement, TItemElement>;
-export type MRT_VisibilityState = VisibilityState;
 
 export type MRT_ColumnVirtualizer<
   TScrollElement extends Element | Window = HTMLDivElement,
