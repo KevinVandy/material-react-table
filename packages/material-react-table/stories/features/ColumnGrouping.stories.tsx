@@ -82,6 +82,17 @@ export const ColumnGroupingEnabledWithSelection = () => (
   />
 );
 
+export const ColumnGroupingEnabledWithSelectionRemove = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableGrouping
+    enableRowSelection
+    groupedColumnMode="remove"
+    initialState={{ expanded: true, grouping: ['state'] }}
+  />
+);
+
 export const ColumnGroupingNoDragHandles = () => (
   <MaterialReactTable
     columns={columns}

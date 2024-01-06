@@ -1,5 +1,6 @@
 import { type ReactNode, type RefObject, useMemo } from 'react';
 import Stack from '@mui/material/Stack';
+import Tooltip from '@mui/material/Tooltip';
 import { MRT_TableBodyRowGrabHandle } from '../body';
 import { MRT_TableBodyRowPinButton } from '../body/MRT_TableBodyRowPinButton';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
@@ -161,12 +162,22 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
     return {
       Cell: ({ row, table }) => {
         const expandButtonProps = { row, table };
-        const subRowsLength = row.subRows?.length ?? 0;
-        if (tableOptions.groupedColumnMode === 'remove') {
+        const subRowsLength = row.subRows?.length;
+        if (
+          tableOptions.groupedColumnMode === 'remove' &&
+          row.groupingColumnId
+        ) {
           return (
             <Stack alignItems="center" flexDirection="row" gap="0.25rem">
               <MRT_ExpandButton {...expandButtonProps} />
-              <span>{row.groupingValue as ReactNode}</span>
+              <Tooltip
+                enterDelay={1000}
+                enterNextDelay={1000}
+                placement="right"
+                title={table.getColumn(row.groupingColumnId).columnDef.header}
+              >
+                <span>{row.groupingValue as ReactNode}</span>
+              </Tooltip>
               {!!subRowsLength && <span>({subRowsLength})</span>}
             </Stack>
           );
