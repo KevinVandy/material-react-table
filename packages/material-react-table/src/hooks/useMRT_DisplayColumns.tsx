@@ -69,8 +69,10 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>(
       tableOptions.renderDetailPanel,
       tableOptions.renderRowActionMenuItems,
       tableOptions.renderRowActions,
+      tableOptions.state?.addColumnToLeafNode,
       tableOptions.state?.columnOrder,
       tableOptions.state?.grouping,
+      tableOptions.showOpenedGroup,
     ],
   );
 };

@@ -1201,9 +1201,9 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
       }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>)
     | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>;
   selectAllMode?: 'all' | 'page';
+  showOpenedGroup?: boolean;
   /**
    * Manage state externally any way you want, then pass it back into MRT.
    */
-  showOpenedGroup?: boolean;
   state?: Partial<MRT_TableState<TData>>;
 };

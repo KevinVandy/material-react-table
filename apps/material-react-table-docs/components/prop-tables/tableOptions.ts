@@ -358,6 +358,17 @@ export const tableOptions: TableOption[] = [
     type: 'boolean',
   },
   {
+    tableOption: 'enableGroupingSingleColumn',
+    defaultValue: '',
+    description:
+      'Single group column is automatically added by the grid containing all row groups under a single row group hierarchy.',
+    link: '',
+    linkText: '',
+    required: false,
+    source: 'MRT',
+    type: 'boolean',
+  },
+  {
     tableOption: 'enableFacetedValues',
     defaultValue: 'true',
     description:
@@ -2059,6 +2070,17 @@ export const tableOptions: TableOption[] = [
     required: false,
     source: 'TanStack Table',
     type: 'Record<string, SortingFn>',
+  },
+  {
+    tableOption: 'showOpenedGroup',
+    defaultValue: '',
+    description:
+      'This option will show the name of the opened group inside the group column.',
+    link: '',
+    linkText: '',
+    required: false,
+    source: 'MRT',
+    type: 'boolean',
   },
   {
     tableOption: 'state',
