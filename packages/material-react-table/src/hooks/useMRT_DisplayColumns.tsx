@@ -160,14 +160,18 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
   ) {
     return {
       Cell: ({ row, table }) => {
+        const isGroupedSingleColumn =
+          tableOptions?.enableGroupingSingleColumn &&
+          tableOptions?.groupedColumnMode === 'remove';
+
         return (
           <>
             <MRT_ExpandButton row={row} table={table} />
-            {tableOptions?.enableGroupingSingleColumn &&
-              tableOptions?.groupedColumnMode === 'remove' &&
-              row.groupingValue}
-            {tableOptions?.enableGroupingSingleColumn &&
-              tableOptions?.groupedColumnMode === 'remove' &&
+            {isGroupedSingleColumn && row.groupingValue}
+            {isGroupedSingleColumn && row.getCanExpand() && (
+              <> ({row.subRows?.length})</>
+            )}
+            {isGroupedSingleColumn &&
               tableOptions?.showOpenedGroup &&
               !row.getCanExpand() &&
               row.original?.[
