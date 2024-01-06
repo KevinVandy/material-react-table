@@ -1203,5 +1203,6 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   /**
    * Manage state externally any way you want, then pass it back into MRT.
    */
+  showOpenedGroup?: boolean;
   state?: Partial<MRT_TableState<TData>>;
 };

@@ -429,6 +429,7 @@ export const GroupingWithSingleColumnTest = () => {
         density: 'compact',
         grouping: ['gender', 'state'],
       }}
+      showOpenedGroup
     />
   );
 };

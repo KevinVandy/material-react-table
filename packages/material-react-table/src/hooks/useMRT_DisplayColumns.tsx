@@ -166,6 +166,13 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
             {tableOptions?.enableGroupingSingleColumn &&
               tableOptions?.groupedColumnMode === 'remove' &&
               row.groupingValue}
+            {tableOptions?.enableGroupingSingleColumn &&
+              tableOptions?.groupedColumnMode === 'remove' &&
+              tableOptions?.showOpenedGroup &&
+              !row.getCanExpand() &&
+              row.original?.[
+                table.getState().grouping[table.getState().grouping.length - 1]
+              ]}
           </>
         );
       },
