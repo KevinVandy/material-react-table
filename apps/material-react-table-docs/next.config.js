@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  transpilePackages: ['material-react-table'],
+  transpilePackages: ['material-react-table', '@mui/x-charts'],
   reactStrictMode: true,
   i18n: {
     locales: ['en'],

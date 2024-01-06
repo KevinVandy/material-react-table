@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { Box, Tab, Tabs } from '@mui/material';
 import AggregationAndGroupingExample from '../examples/aggregation-and-grouping';
 import DetailExample from '../examples/enable-detail-panel';
+import ChartDetailPanelExample from '../examples/chart-detail-panel';
 import ExpandingTreeExample from '../examples/expanding-tree-expanded';
 import ExpandingParsedTreeExample from '../examples/expanding-tree-flat-parse';
 import { useState } from 'react';
@@ -32,6 +33,7 @@ const ExpandingExamples = ({ isPage = false }) => {
             value="aggregation-and-grouping"
           />
           <Tab label="Detail Panel" value="detail-panel" />
+          <Tab label="Chart Detail Panel" value="chart-detail-panel" />
           <Tab label="Expanding Tree" value="expanding-tree" />
           <Tab
             label="Expanding Parsed Tree"
@@ -55,6 +57,7 @@ const ExpandingExamples = ({ isPage = false }) => {
           <AggregationAndGroupingExample />
         )}
         {activeTab === 'detail-panel' && <DetailExample />}
+        {activeTab === 'chart-detail-panel' && <ChartDetailPanelExample />}
         {activeTab === 'expanding-tree' && <ExpandingTreeExample />}
         {activeTab === 'expanding-tree-flat-parse' && (
           <ExpandingParsedTreeExample />

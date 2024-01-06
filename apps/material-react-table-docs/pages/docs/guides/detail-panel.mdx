@@ -3,6 +3,7 @@ import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import Example from '../../../examples/enable-detail-panel';
 import AlternateExample from '../../../examples/alternate-detail-panel';
+import ChartDetailPanelExample from '../../../examples/chart-detail-panel';
 
 <Head>
   <title>{'Detail Panel Expanding Guide - Material React Table V2 Docs'}</title>
@@ -68,5 +69,11 @@ const table = useMaterialReactTable({
 If you want to position the expand column last, you can set the `positionExpandColumn` table option to `'last'`.
 
 <AlternateExample />
+
+### Detail Panel With Charts
+
+The detail panel can be used to show a variety of content. Here's an example of a detail panel rendering charts with the [MUI X Charts](https://mui.com/x/react-charts/getting-started/) library.
+
+<ChartDetailPanelExample />
 
 View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-detail-panel-examples-)**

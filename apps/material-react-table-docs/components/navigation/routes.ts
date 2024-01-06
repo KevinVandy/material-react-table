@@ -185,6 +185,10 @@ export const routes: Array<RouteItem> = [
             label: 'Detail Panel (Expanding) Example',
           },
           {
+            href: '/docs/examples/chart-detail-panel',
+            label: 'Chart Detail Panel Example',
+          },
+          {
             href: '/docs/examples/expanding-tree',
             label: 'Expanding Sub-Rows (Tree) Example',
           },

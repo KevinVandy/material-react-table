@@ -89,8 +89,9 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
     }
   };
 
-  if (!columnDef.header || columnDef.visibleInShowHideMenu === false)
+  if (!columnDef.header || columnDef.visibleInShowHideMenu === false) {
     return null;
+  }
 
   return (
     <>
