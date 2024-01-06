@@ -56,7 +56,6 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>(
       tableOptions.enableEditing,
       tableOptions.enableExpandAll,
       tableOptions.enableExpanding,
-      tableOptions.enableGroupingSingleColumn,
       tableOptions.enableGrouping,
       tableOptions.enableRowActions,
       tableOptions.enableRowDragging,
@@ -69,10 +68,8 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>(
       tableOptions.renderDetailPanel,
       tableOptions.renderRowActionMenuItems,
       tableOptions.renderRowActions,
-      tableOptions.state?.addColumnToLeafNode,
       tableOptions.state?.columnOrder,
       tableOptions.state?.grouping,
-      tableOptions.showOpenedGroup,
     ],
   );
 };
@@ -160,45 +157,11 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
     order.includes(id) &&
     showExpandColumn(tableOptions, tableOptions.state?.grouping ?? grouping)
   ) {
-    const arrGrouping = tableOptions.state?.grouping ?? grouping;
     return {
-      Cell: ({ row, table }) => {
-        const isGroupedSingleColumn =
-          tableOptions?.enableGroupingSingleColumn &&
-          tableOptions?.groupedColumnMode === 'remove';
-        return (
-          <>
-            <MRT_ExpandButton row={row} table={table} />
-            {isGroupedSingleColumn && row.groupingValue}
-            {isGroupedSingleColumn && row.getCanExpand() && (
-              <> ({row.subRows?.length})</>
-            )}
-            {isGroupedSingleColumn &&
-              tableOptions?.showOpenedGroup &&
-              !row.getCanExpand() &&
-              row.original?.[
-                table.getState().addColumnToLeafNode ??
-                  arrGrouping[arrGrouping.length - 1]
-              ]}
-          </>
-        );
-      },
-      Header: ({ table }) => {
-        return (
-          <>
-            {tableOptions.enableExpandAll && (
-              <MRT_ExpandAllButton table={table} />
-            )}
-            {tableOptions?.enableGroupingSingleColumn &&
-            tableOptions?.groupedColumnMode === 'remove'
-              ? table.getState().addColumnToLeafNode
-                ? table.getColumn?.(table.getState().addColumnToLeafNode ?? '')
-                    ?.columnDef?.header
-                : 'Group' /* Add key localization */
-              : undefined}
-          </>
-        );
-      },
+      Cell: ({ row, table }) => <MRT_ExpandButton row={row} table={table} />,
+      Header: tableOptions.enableExpandAll
+        ? ({ table }) => <MRT_ExpandAllButton table={table} />
+        : undefined,
       ...defaultDisplayColumnProps(tableOptions, id, 'expand'),
     };
   }

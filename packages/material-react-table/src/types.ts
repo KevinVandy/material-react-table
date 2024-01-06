@@ -338,7 +338,6 @@ export type MRT_DefinedTableOptions<TData extends MRT_RowData> =
   };
 
 export type MRT_TableState<TData extends MRT_RowData> = TableState & {
-  addColumnToLeafNode?: string;
   columnFilterFns: MRT_ColumnFilterFnsState;
   creatingRow: MRT_Row<TData> | null;
   density: MRT_DensityState;
@@ -809,7 +808,6 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   enableFullScreenToggle?: boolean;
   enableGlobalFilterModes?: boolean;
   enableGlobalFilterRankedResults?: boolean;
-  enableGroupingSingleColumn?: boolean;
   enablePagination?: boolean;
   enableRowActions?: boolean;
   enableRowDragging?: boolean;
@@ -1201,7 +1199,6 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
       }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>)
     | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>;
   selectAllMode?: 'all' | 'page';
-  showOpenedGroup?: boolean;
   /**
    * Manage state externally any way you want, then pass it back into MRT.
    */

@@ -13,15 +13,6 @@ export type StateOption = {
 export const stateOptions: StateOption[] = [
   {
     defaultValue: '',
-    description: 'a variable will be used to render the leaf node.',
-    link: '',
-    linkText: '',
-    source: 'MRT',
-    stateOption: 'addColumnToLeafNode',
-    type: 'string',
-  },
-  {
-    defaultValue: '',
     description: 'a variable representing the currently creating row',
     link: '',
     linkText: '',
