@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import {
   type MRT_Column,
   type MRT_ColumnDef,
+  type MRT_Row,
   MaterialReactTable,
 } from '../../src';
 import { faker } from '@faker-js/faker';
@@ -371,6 +372,18 @@ export const GroupingWithSingleColumn = () => {
         columnVisibility: { 'mrt-row-expand': false },
         density: 'compact',
         grouping: ['gender', 'state'],
+      }}
+      muiTableBodyRowProps={({ row }) => {
+        return {
+          sx: {
+            bgcolor:
+              row.groupingColumnId === 'gender'
+                ? 'darkgreen'
+                : row.groupingColumnId === 'state'
+                  ? 'slategrey'
+                  : 'inherit',
+          },
+        };
       }}
     />
   );
