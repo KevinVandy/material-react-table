@@ -11,7 +11,6 @@ import Skeleton from '@mui/material/Skeleton';
 import TableCell, { type TableCellProps } from '@mui/material/TableCell';
 import { useTheme } from '@mui/material/styles';
 import { MRT_TableBodyCellValue } from './MRT_TableBodyCellValue';
-import { MRT_TableBodyRowGrabHandle } from './MRT_TableBodyRowGrabHandle';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 import {
   getIsFirstColumn,
@@ -210,6 +209,11 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     }
   };
 
+  const cellValueProps = {
+    cell,
+    table,
+  };
+
   return (
     <TableCell
       data-index={virtualColumnIndex}
@@ -290,12 +294,6 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
             rowNumberDisplayMode === 'static' &&
             column.id === 'mrt-row-numbers' ? (
             rowIndex + 1
-          ) : column.id === 'mrt-row-drag' ? (
-            <MRT_TableBodyRowGrabHandle
-              row={row}
-              rowRef={rowRef}
-              table={table}
-            />
           ) : columnDefType === 'display' &&
             (column.id === 'mrt-row-select' ||
               column.id === 'mrt-row-expand' ||
@@ -305,6 +303,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
               column,
               renderedCellValue: cell.renderValue() as any,
               row,
+              rowRef,
               table,
             })
           ) : isCreating || isEditing ? (
@@ -312,10 +311,10 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
           ) : (enableClickToCopy || columnDef.enableClickToCopy) &&
             columnDef.enableClickToCopy !== false ? (
             <MRT_CopyButton cell={cell} table={table}>
-              <MRT_TableBodyCellValue cell={cell} table={table} />
+              <MRT_TableBodyCellValue {...cellValueProps} />
             </MRT_CopyButton>
           ) : (
-            <MRT_TableBodyCellValue cell={cell} table={table} />
+            <MRT_TableBodyCellValue {...cellValueProps} />
           )}
           {cell.getIsGrouped() && !columnDef.GroupedCell && (
             <> ({row.subRows?.length})</>
