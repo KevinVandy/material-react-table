@@ -56,6 +56,7 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>(
       tableOptions.enableEditing,
       tableOptions.enableExpandAll,
       tableOptions.enableExpanding,
+      tableOptions.enableGroupingSingleColumn,
       tableOptions.enableGrouping,
       tableOptions.enableRowActions,
       tableOptions.enableRowDragging,
@@ -158,10 +159,28 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
     showExpandColumn(tableOptions, tableOptions.state?.grouping ?? grouping)
   ) {
     return {
-      Cell: ({ row, table }) => <MRT_ExpandButton row={row} table={table} />,
-      Header: tableOptions.enableExpandAll
-        ? ({ table }) => <MRT_ExpandAllButton table={table} />
-        : undefined,
+      Cell: ({ row, table }) => {
+        return (
+          <>
+            <MRT_ExpandButton row={row} table={table} />
+            {tableOptions?.enableGroupingSingleColumn &&
+              tableOptions?.groupedColumnMode === 'remove' &&
+              row.groupingValue}
+          </>
+        );
+      },
+      Header: ({ table }) => {
+        return (
+          <>
+            {tableOptions.enableExpandAll && (
+              <MRT_ExpandAllButton table={table} />
+            )}
+            {tableOptions?.enableGroupingSingleColumn &&
+              tableOptions?.groupedColumnMode === 'remove' &&
+              'Group'}
+          </>
+        );
+      },
       ...defaultDisplayColumnProps(tableOptions, id, 'expand'),
     };
   }

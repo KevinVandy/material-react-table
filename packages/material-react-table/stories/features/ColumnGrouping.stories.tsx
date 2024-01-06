@@ -388,3 +388,47 @@ export const GroupingWithSingleColumn = () => {
     />
   );
 };
+
+export const GroupingWithSingleColumnTest = () => {
+  const _columns = useMemo<MRT_ColumnDef<Person>[]>(
+    () => [
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+      {
+        accessorKey: 'gender',
+        header: 'Gender',
+      },
+      {
+        accessorKey: 'city',
+        header: 'City',
+      },
+      {
+        accessorKey: 'state',
+        header: 'State',
+      },
+    ],
+    [],
+  );
+
+  return (
+    <MaterialReactTable
+      columns={_columns}
+      data={data}
+      enableColumnDragging
+      // enableExpandAll={false}
+      enableGrouping
+      enableGroupingSingleColumn
+      groupedColumnMode="remove"
+      initialState={{
+        density: 'compact',
+        grouping: ['gender', 'state'],
+      }}
+    />
+  );
+};
