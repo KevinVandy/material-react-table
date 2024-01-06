@@ -338,6 +338,7 @@ export type MRT_DefinedTableOptions<TData extends MRT_RowData> =
   };
 
 export type MRT_TableState<TData extends MRT_RowData> = TableState & {
+  addColumnToLeafNode?: string;
   columnFilterFns: MRT_ColumnFilterFnsState;
   creatingRow: MRT_Row<TData> | null;
   density: MRT_DensityState;

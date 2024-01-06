@@ -171,7 +171,10 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
               tableOptions?.showOpenedGroup &&
               !row.getCanExpand() &&
               row.original?.[
-                table.getState().grouping[table.getState().grouping.length - 1]
+                table.getState().addColumnToLeafNode ??
+                  table.getState().grouping[
+                    table.getState().grouping.length - 1
+                  ]
               ]}
           </>
         );

@@ -426,6 +426,7 @@ export const GroupingWithSingleColumnTest = () => {
       enableGroupingSingleColumn
       groupedColumnMode="remove"
       initialState={{
+        addColumnToLeafNode: 'firstName',
         density: 'compact',
         grouping: ['gender', 'state'],
       }}
