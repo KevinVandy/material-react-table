@@ -1,4 +1,6 @@
-import { type RefObject, useMemo } from 'react';
+import { type ReactNode, type RefObject, useMemo } from 'react';
+import Stack from '@mui/material/Stack';
+import Tooltip from '@mui/material/Tooltip';
 import { MRT_TableBodyRowGrabHandle } from '../body';
 import { MRT_TableBodyRowPinButton } from '../body/MRT_TableBodyRowPinButton';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
@@ -158,7 +160,31 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
     showExpandColumn(tableOptions, tableOptions.state?.grouping ?? grouping)
   ) {
     return {
-      Cell: ({ row, table }) => <MRT_ExpandButton row={row} table={table} />,
+      Cell: ({ row, table }) => {
+        const expandButtonProps = { row, table };
+        const subRowsLength = row.subRows?.length;
+        if (
+          tableOptions.groupedColumnMode === 'remove' &&
+          row.groupingColumnId
+        ) {
+          return (
+            <Stack alignItems="center" flexDirection="row" gap="0.25rem">
+              <MRT_ExpandButton {...expandButtonProps} />
+              <Tooltip
+                enterDelay={1000}
+                enterNextDelay={1000}
+                placement="right"
+                title={table.getColumn(row.groupingColumnId).columnDef.header}
+              >
+                <span>{row.groupingValue as ReactNode}</span>
+              </Tooltip>
+              {!!subRowsLength && <span>({subRowsLength})</span>}
+            </Stack>
+          );
+        } else {
+          return <MRT_ExpandButton {...expandButtonProps} />;
+        }
+      },
       Header: tableOptions.enableExpandAll
         ? ({ table }) => <MRT_ExpandAllButton table={table} />
         : undefined,
