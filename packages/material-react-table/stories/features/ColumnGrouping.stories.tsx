@@ -47,16 +47,32 @@ const columns = [
   },
 ] as MRT_ColumnDef<Person>[];
 
-const data = [...Array(200)].map(() => ({
+const data = [...Array(500)].map(() => ({
   city: faker.location.city(),
   firstName: faker.person.firstName(),
-  gender: Math.random() < 0.9 ? faker.person.sex() : faker.person.gender(),
+  gender: Math.random() < 0.99 ? faker.person.sex() : faker.person.gender(),
   lastName: faker.person.lastName(),
   state: faker.location.state(),
 }));
 
 export const ColumnGroupingEnabled = () => (
-  <MaterialReactTable columns={columns} data={data} enableGrouping />
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableGrouping
+    groupedColumnMode="reorder"
+    initialState={{ expanded: true, grouping: ['state', 'gender'] }}
+  />
+);
+
+export const GroupingColumnModeRemove = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableGrouping
+    groupedColumnMode="remove"
+    initialState={{ expanded: true, grouping: ['state', 'gender'] }}
+  />
 );
 
 export const ColumnGroupingEnabledWithSelection = () => (
