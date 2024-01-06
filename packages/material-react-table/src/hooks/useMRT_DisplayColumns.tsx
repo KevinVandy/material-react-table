@@ -161,11 +161,13 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
     return {
       Cell: ({ row, table }) => {
         const expandButtonProps = { row, table };
+        const subRowsLength = row.subRows?.length ?? 0;
         if (tableOptions.groupedColumnMode === 'remove') {
           return (
             <Stack alignItems="center" flexDirection="row" gap="0.25rem">
               <MRT_ExpandButton {...expandButtonProps} />
               <span>{row.groupingValue as ReactNode}</span>
+              {!!subRowsLength && <span>({subRowsLength})</span>}
             </Stack>
           );
         } else {
