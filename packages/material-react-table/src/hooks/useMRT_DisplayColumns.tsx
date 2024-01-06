@@ -190,8 +190,12 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
               <MRT_ExpandAllButton table={table} />
             )}
             {tableOptions?.enableGroupingSingleColumn &&
-              tableOptions?.groupedColumnMode === 'remove' &&
-              'Group'}
+            tableOptions?.groupedColumnMode === 'remove'
+              ? table.getState().addColumnToLeafNode
+                ? table.getColumn?.(table.getState().addColumnToLeafNode ?? '')
+                    ?.columnDef?.header
+                : 'Group' /* Add key localization */
+              : undefined}
           </>
         );
       },

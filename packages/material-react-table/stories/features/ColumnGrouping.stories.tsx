@@ -290,48 +290,6 @@ export const GroupingWithSingleColumn = () => {
   const _columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       {
-        AggregatedCell: ({ row, table }) => {
-          const {
-            options: {
-              icons: { ExpandMoreIcon },
-            },
-          } = table;
-
-          if (!row.groupingColumnId || !row.groupingValue) {
-            return null;
-          }
-
-          return (
-            <Stack alignItems="center" flexDirection="row">
-              <IconButton
-                onClick={() => row.toggleExpanded(!row.getIsExpanded())}
-                size="small"
-              >
-                <ExpandMoreIcon
-                  style={{
-                    transform: `rotate(${!row.getIsExpanded() ? -90 : 0}deg)`,
-                  }}
-                />
-              </IconButton>
-              <Typography>{row.groupingValue as ReactNode}</Typography>
-            </Stack>
-          );
-        },
-        accessorKey: 'group',
-        columnDefType: 'display',
-        header: 'Group',
-        muiTableBodyCellProps: ({ row }) => {
-          return {
-            sx: {
-              justifyContent: 'left',
-              pl: `calc(${row.depth * 16}px)`,
-              textAlign: 'left',
-            },
-          };
-        },
-        visibleInShowHideMenu: false,
-      },
-      {
         accessorKey: 'firstName',
         header: 'First Name',
       },
@@ -361,35 +319,22 @@ export const GroupingWithSingleColumn = () => {
       data={data}
       displayColumnDefOptions={{
         'mrt-row-expand': {
-          enableHiding: false,
           visibleInShowHideMenu: false,
         },
       }}
       enableColumnDragging
       enableGrouping
+      enableGroupingSingleColumn
       groupedColumnMode="remove"
       initialState={{
-        columnVisibility: { 'mrt-row-expand': false },
         density: 'compact',
         grouping: ['gender', 'state'],
-      }}
-      muiTableBodyRowProps={({ row }) => {
-        return {
-          sx: {
-            bgcolor:
-              row.groupingColumnId === 'gender'
-                ? 'darkgreen'
-                : row.groupingColumnId === 'state'
-                  ? 'slategrey'
-                  : 'inherit',
-          },
-        };
       }}
     />
   );
 };
 
-export const GroupingWithSingleColumnTest = () => {
+export const GroupingWithSingleColumnWithShowOpenedGroup = () => {
   const _columns = useMemo<MRT_ColumnDef<Person>[]>(
     () => [
       {
@@ -420,16 +365,87 @@ export const GroupingWithSingleColumnTest = () => {
     <MaterialReactTable
       columns={_columns}
       data={data}
+      displayColumnDefOptions={{
+        'mrt-row-expand': {
+          visibleInShowHideMenu: false,
+        },
+      }}
       enableColumnDragging
-      // enableExpandAll={false}
       enableGrouping
       enableGroupingSingleColumn
       groupedColumnMode="remove"
       initialState={{
-        addColumnToLeafNode: 'firstName',
+        addColumnToLeafNode: 'city',
+        columnVisibility: { city: false },
         density: 'compact',
         grouping: ['gender', 'state'],
       }}
+      showOpenedGroup
+    />
+  );
+};
+
+export const GroupingWithSingleColumnWithRowVirtualization = () => {
+  const _columns = useMemo<MRT_ColumnDef<Person>[]>(
+    () => [
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+      {
+        accessorKey: 'gender',
+        header: 'Gender',
+      },
+      {
+        accessorKey: 'city',
+        header: 'City',
+      },
+      {
+        accessorKey: 'state',
+        header: 'State',
+      },
+    ],
+    [],
+  );
+
+  return (
+    <MaterialReactTable
+      columns={_columns}
+      data={data}
+      displayColumnDefOptions={{
+        'mrt-row-expand': {
+          visibleInShowHideMenu: false,
+        },
+      }}
+      enableColumnDragging
+      enableGrouping
+      enableGroupingSingleColumn
+      enablePagination={false}
+      enableRowVirtualization
+      groupedColumnMode="remove"
+      initialState={{
+        addColumnToLeafNode: 'city',
+        columnVisibility: { city: false },
+        density: 'compact',
+        grouping: ['gender', 'state'],
+      }}
+      muiTableBodyRowProps={({ row }) => {
+        return {
+          sx: {
+            bgcolor:
+              row.depth === 0
+                ? 'darkgreen'
+                : row.depth === 1
+                  ? 'slategrey'
+                  : 'inherit',
+          },
+        };
+      }}
+      muiTableContainerProps={{ sx: { maxHeight: 600 } }}
       showOpenedGroup
     />
   );
