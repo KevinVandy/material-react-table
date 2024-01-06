@@ -1,7 +1,4 @@
-import { type ReactNode, useEffect, useMemo, useState } from 'react';
-import IconButton from '@mui/material/IconButton';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import { useEffect, useMemo, useState } from 'react';
 import {
   type MRT_Column,
   type MRT_ColumnDef,
@@ -297,97 +294,6 @@ export const GroupingAndDraggingWithSomeDisabledGrouping = () => {
       data={data}
       enableColumnDragging
       enableGrouping
-    />
-  );
-};
-
-export const GroupingWithSingleColumn = () => {
-  const _columns = useMemo<MRT_ColumnDef<Person>[]>(
-    () => [
-      {
-        AggregatedCell: ({ row, table }) => {
-          const {
-            options: {
-              icons: { ExpandMoreIcon },
-            },
-          } = table;
-
-          if (!row.groupingColumnId || !row.groupingValue) {
-            return null;
-          }
-
-          return (
-            <Stack alignItems="center" flexDirection="row">
-              <IconButton
-                onClick={() => row.toggleExpanded(!row.getIsExpanded())}
-                size="small"
-              >
-                <ExpandMoreIcon
-                  style={{
-                    transform: `rotate(${!row.getIsExpanded() ? -90 : 0}deg)`,
-                  }}
-                />
-              </IconButton>
-              <Typography>{row.groupingValue as ReactNode}</Typography>
-            </Stack>
-          );
-        },
-        accessorKey: 'group',
-        columnDefType: 'display',
-        header: 'Group',
-        muiTableBodyCellProps: ({ row }) => {
-          return {
-            sx: {
-              justifyContent: 'left',
-              pl: `calc(${row.depth * 16}px)`,
-              textAlign: 'left',
-            },
-          };
-        },
-        visibleInShowHideMenu: false,
-      },
-      {
-        accessorKey: 'firstName',
-        header: 'First Name',
-      },
-      {
-        accessorKey: 'lastName',
-        header: 'Last Name',
-      },
-      {
-        accessorKey: 'gender',
-        header: 'Gender',
-      },
-      {
-        accessorKey: 'city',
-        header: 'City',
-      },
-      {
-        accessorKey: 'state',
-        header: 'State',
-      },
-    ],
-    [],
-  );
-
-  return (
-    <MaterialReactTable
-      columns={_columns}
-      data={data}
-      displayColumnDefOptions={{
-        'mrt-row-expand': {
-          enableHiding: false,
-          visibleInShowHideMenu: false,
-        },
-      }}
-      enableColumnDragging
-      enableGrouping
-      groupedColumnMode="remove"
-      initialState={{
-        columnVisibility: { 'mrt-row-expand': false },
-        density: 'compact',
-        grouping: ['gender', 'state'],
-      }}
     />
   );
 };
