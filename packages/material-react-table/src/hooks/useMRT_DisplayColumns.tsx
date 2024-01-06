@@ -160,12 +160,12 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
     order.includes(id) &&
     showExpandColumn(tableOptions, tableOptions.state?.grouping ?? grouping)
   ) {
+    const arrGrouping = tableOptions.state?.grouping ?? grouping;
     return {
       Cell: ({ row, table }) => {
         const isGroupedSingleColumn =
           tableOptions?.enableGroupingSingleColumn &&
           tableOptions?.groupedColumnMode === 'remove';
-
         return (
           <>
             <MRT_ExpandButton row={row} table={table} />
@@ -178,9 +178,7 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
               !row.getCanExpand() &&
               row.original?.[
                 table.getState().addColumnToLeafNode ??
-                  table.getState().grouping[
-                    table.getState().grouping.length - 1
-                  ]
+                  arrGrouping[arrGrouping.length - 1]
               ]}
           </>
         );
