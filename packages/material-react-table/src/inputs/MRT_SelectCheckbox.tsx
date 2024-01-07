@@ -50,7 +50,9 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
     : undefined;
 
   const commonProps = {
-    checked: selectAll ? allRowsSelected : row?.getIsSelected(),
+    checked: selectAll
+      ? allRowsSelected
+      : row?.getIsSelected() || row?.getIsAllSubRowsSelected(),
     disabled:
       isLoading || (row && !row.getCanSelect()) || row?.id === 'mrt-row-create',
     inputProps: {
