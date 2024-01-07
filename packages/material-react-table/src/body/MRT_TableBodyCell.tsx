@@ -57,11 +57,9 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       enableColumnOrdering,
       enableEditing,
       enableGrouping,
-      enableRowNumbers,
       layoutMode,
       muiSkeletonProps,
       muiTableBodyCellProps,
-      rowNumberDisplayMode,
     },
     refs: { editInputRefs },
     setEditingCell,
@@ -290,13 +288,10 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
               width={skeletonWidth}
               {...skeletonProps}
             />
-          ) : enableRowNumbers &&
-            rowNumberDisplayMode === 'static' &&
-            column.id === 'mrt-row-numbers' ? (
-            rowIndex + 1
           ) : columnDefType === 'display' &&
-            (column.id === 'mrt-row-select' ||
-              column.id === 'mrt-row-expand' ||
+            (['mrt-row-expand', 'mrt-row-numbers', 'mrt-row-select'].includes(
+              column.id,
+            ) ||
               !row.getIsGrouped()) ? (
             columnDef.Cell?.({
               cell,
@@ -304,6 +299,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
               renderedCellValue: cell.renderValue() as any,
               row,
               rowRef,
+              staticRowIndex: rowIndex,
               table,
             })
           ) : isCreating || isEditing ? (

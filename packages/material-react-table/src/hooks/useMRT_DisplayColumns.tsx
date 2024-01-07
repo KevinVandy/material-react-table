@@ -219,7 +219,10 @@ function makeRowNumbersColumn<TData extends MRT_RowData>(
   const id: MRT_DisplayColumnIds = 'mrt-row-numbers';
   if (order.includes(id) || tableOptions.enableRowNumbers)
     return {
-      Cell: ({ row }) => row.index + 1,
+      Cell: ({ row, staticRowIndex }) =>
+        ((tableOptions.rowNumberDisplayMode === 'static'
+          ? staticRowIndex
+          : row.index) ?? 0) + 1,
       Header: () => tableOptions.localization.rowNumber,
       ...defaultDisplayColumnProps(tableOptions, id, 'rowNumbers'),
     };

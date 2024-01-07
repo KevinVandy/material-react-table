@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type ReactNode, type RefObject } from 'react';
 import Box from '@mui/material/Box';
 import { getMRTTheme } from '../style.utils';
 import {
@@ -12,11 +12,15 @@ const allowedTypes = ['string', 'number'];
 
 interface Props<TData extends MRT_RowData> {
   cell: MRT_Cell<TData>;
+  rowRef?: RefObject<HTMLTableRowElement>;
+  staticRowIndex?: number;
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_TableBodyCellValue = <TData extends MRT_RowData>({
   cell,
+  rowRef,
+  staticRowIndex,
   table,
 }: Props<TData>) => {
   const {
@@ -108,6 +112,8 @@ export const MRT_TableBodyCellValue = <TData extends MRT_RowData>({
       column,
       renderedCellValue,
       row,
+      rowRef,
+      staticRowIndex,
       table,
     });
   }

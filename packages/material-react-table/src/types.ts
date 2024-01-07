@@ -385,6 +385,7 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
     renderedCellValue: ReactNode;
     row: MRT_Row<TData>;
     rowRef?: RefObject<HTMLTableRowElement>;
+    staticRowIndex?: number;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   Edit?: (props: {
