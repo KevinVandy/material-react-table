@@ -17,7 +17,7 @@ export default meta;
 const data = [...Array(2000)].map(() => ({
   age: faker.number.int({ max: 65, min: 18 }),
   firstName: faker.person.firstName(),
-  gender: Math.random() < 0.9 ? faker.person.sex() : faker.person.gender(),
+  gender: Math.random() < 0.95 ? faker.person.sex() : faker.person.gender(),
   lastName: faker.person.lastName(),
   salary: Number(faker.finance.amount(10000, 100000, 0)),
   state: faker.location.state(),
@@ -30,11 +30,13 @@ const averageAge = data.reduce((acc, curr) => acc + curr.age, 0) / data.length;
 
 const columns = [
   {
+    AggregatedCell: () => '-',
     accessorKey: 'firstName',
     enableGrouping: false,
     header: 'First Name',
   },
   {
+    AggregatedCell: () => '-',
     accessorKey: 'lastName',
     enableGrouping: false,
     header: 'Last Name',
@@ -125,6 +127,35 @@ export const AggregationExpandedDefault = () => (
     data={data}
     enableGrouping
     initialState={{ expanded: true }}
+  />
+);
+
+export const AggregationRemoveMode = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableGrouping
+    groupedColumnMode="remove"
+    initialState={{ expanded: true, grouping: ['state', 'gender'] }}
+  />
+);
+
+export const AggregationRemoveModeCustomGroupedCell = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    displayColumnDefOptions={{
+      'mrt-row-expand': {
+        //last item in array of grouping state
+        GroupedCell: ({ row, table }) => {
+          const { grouping } = table.getState();
+          return row.getValue(grouping[grouping.length - 1]);
+        },
+      },
+    }}
+    enableGrouping
+    groupedColumnMode="remove"
+    initialState={{ expanded: true, grouping: ['state', 'gender'] }}
   />
 );
 
