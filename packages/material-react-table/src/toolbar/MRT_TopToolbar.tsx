@@ -36,11 +36,23 @@ export const MRT_TopToolbar = <TData extends MRT_RowData>({
   const { isFullScreen, showGlobalFilter } = getState();
 
   const isMobile = useMediaQuery('(max-width:720px)');
+  const isTablet = useMediaQuery('(max-width:1024px)');
 
   const toolbarProps = parseFromValuesOrFunc(muiTopToolbarProps, { table });
 
   const stackAlertBanner =
-    isMobile || !!renderTopToolbarCustomActions || showGlobalFilter;
+    isMobile ||
+    !!renderTopToolbarCustomActions ||
+    (showGlobalFilter && isTablet);
+
+  const globalFilterProps = {
+    sx: !isTablet
+      ? {
+          zIndex: 2,
+        }
+      : undefined,
+    table,
+  };
 
   return (
     <Box
@@ -83,7 +95,7 @@ export const MRT_TopToolbar = <TData extends MRT_RowData>({
         }}
       >
         {enableGlobalFilter && positionGlobalFilter === 'left' && (
-          <MRT_GlobalFilterTextField table={table} />
+          <MRT_GlobalFilterTextField {...globalFilterProps} />
         )}
         {renderTopToolbarCustomActions?.({ table }) ?? <span />}
         {enableToolbarInternalActions ? (
@@ -97,14 +109,14 @@ export const MRT_TopToolbar = <TData extends MRT_RowData>({
             }}
           >
             {enableGlobalFilter && positionGlobalFilter === 'right' && (
-              <MRT_GlobalFilterTextField table={table} />
+              <MRT_GlobalFilterTextField {...globalFilterProps} />
             )}
             <MRT_ToolbarInternalButtons table={table} />
           </Box>
         ) : (
           enableGlobalFilter &&
           positionGlobalFilter === 'right' && (
-            <MRT_GlobalFilterTextField table={table} />
+            <MRT_GlobalFilterTextField {...globalFilterProps} />
           )
         )}
       </Box>
