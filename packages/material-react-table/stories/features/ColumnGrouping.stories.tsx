@@ -72,6 +72,21 @@ export const GroupingColumnModeRemove = () => (
   />
 );
 
+export const GroupingColumnModeRemoveCustomHeader = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    displayColumnDefOptions={{
+      'mrt-row-expand': {
+        Header: 'Groups',
+      },
+    }}
+    enableGrouping
+    groupedColumnMode="remove"
+    initialState={{ expanded: true, grouping: ['state', 'gender'] }}
+  />
+);
+
 export const GroupingColumnModeRemovePaginatePreExpand = () => (
   <MaterialReactTable
     columns={columns}
@@ -94,7 +109,6 @@ export const GroupingColumnModeRemoveCustomGroupedCell = () => (
           const { grouping } = table.getState();
           return row.getValue(grouping[grouping.length - 1]);
         },
-        Header: 'Groups',
       },
     }}
     enableGrouping
