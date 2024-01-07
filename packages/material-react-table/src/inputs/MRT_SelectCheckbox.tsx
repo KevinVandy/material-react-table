@@ -13,12 +13,14 @@ import {
 interface Props<TData extends MRT_RowData> extends CheckboxProps {
   row?: MRT_Row<TData>;
   selectAll?: boolean;
+  staticRowIndex?: number;
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
   row,
   selectAll,
+  staticRowIndex,
   table,
   ...rest
 }: Props<TData>) => {
@@ -39,7 +41,11 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
   const checkboxProps = {
     ...(!row
       ? parseFromValuesOrFunc(muiSelectAllCheckboxProps, { table })
-      : parseFromValuesOrFunc(muiSelectCheckboxProps, { row, table })),
+      : parseFromValuesOrFunc(muiSelectCheckboxProps, {
+          row,
+          staticRowIndex,
+          table,
+        })),
     ...rest,
   };
 

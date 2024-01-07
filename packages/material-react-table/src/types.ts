@@ -997,6 +997,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   muiSelectCheckboxProps?:
     | ((props: {
         row: MRT_Row<TData>;
+        staticRowIndex?: number;
         table: MRT_TableInstance<TData>;
       }) => CheckboxProps | RadioProps)
     | (CheckboxProps | RadioProps);

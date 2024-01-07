@@ -220,7 +220,13 @@ function makeRowSelectColumn<TData extends MRT_RowData>(
   const id: MRT_DisplayColumnIds = 'mrt-row-select';
   if (order.includes(id)) {
     return {
-      Cell: ({ row, table }) => <MRT_SelectCheckbox row={row} table={table} />,
+      Cell: ({ row, staticRowIndex, table }) => (
+        <MRT_SelectCheckbox
+          row={row}
+          staticRowIndex={staticRowIndex}
+          table={table}
+        />
+      ),
       Header:
         tableOptions.enableSelectAll && tableOptions.enableMultiRowSelection
           ? ({ table }) => <MRT_SelectCheckbox selectAll table={table} />
