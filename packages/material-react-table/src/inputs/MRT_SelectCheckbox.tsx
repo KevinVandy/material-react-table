@@ -1,4 +1,4 @@
-import { type MouseEvent } from 'react';
+import { type ChangeEvent, type MouseEvent } from 'react';
 import Checkbox, { type CheckboxProps } from '@mui/material/Checkbox';
 import Radio, { type RadioProps } from '@mui/material/Radio';
 import Tooltip from '@mui/material/Tooltip';
@@ -43,11 +43,43 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
     ...rest,
   };
 
+  const isStickySelection =
+    enableRowPinning && rowPinningDisplayMode?.includes('select');
+
   const allRowsSelected = selectAll
     ? selectAllMode === 'page'
       ? table.getIsAllPageRowsSelected()
       : table.getIsAllRowsSelected()
     : undefined;
+
+  const onSelectionChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    row: MRT_Row<TData>,
+  ) => {
+    if (row?.getIsAllSubRowsSelected()) {
+      row?.subRows?.forEach((r) => r.toggleSelected(false));
+    }
+    row.getToggleSelectedHandler()(event);
+
+    if (isStickySelection) {
+      row.pin(
+        !row.getIsPinned() && event.target.checked
+          ? rowPinningDisplayMode?.includes('bottom')
+            ? 'bottom'
+            : 'top'
+          : false,
+      );
+    }
+  };
+
+  const onSelectAllChange = (event: ChangeEvent<HTMLInputElement>) => {
+    selectAllMode === 'all'
+      ? table.getToggleAllRowsSelectedHandler()(event)
+      : table.getToggleAllPageRowsSelectedHandler()(event);
+    if (isStickySelection) {
+      table.setRowPinning({ bottom: [], top: [] });
+    }
+  };
 
   const commonProps = {
     checked: selectAll
@@ -62,26 +94,7 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
     },
     onChange: (event) => {
       event.stopPropagation();
-      row
-        ? row?.getIsAllSubRowsSelected()
-          ? row?.subRows?.forEach((r) => r.toggleSelected(false))
-          : row.getToggleSelectedHandler()(event)
-        : selectAllMode === 'all'
-          ? table.getToggleAllRowsSelectedHandler()(event)
-          : table.getToggleAllPageRowsSelectedHandler()(event);
-      if (enableRowPinning && rowPinningDisplayMode?.includes('select')) {
-        if (row) {
-          row.pin(
-            !row.getIsPinned() && event.target.checked
-              ? rowPinningDisplayMode?.includes('bottom')
-                ? 'bottom'
-                : 'top'
-              : false,
-          );
-        } else {
-          table.setRowPinning({ bottom: [], top: [] });
-        }
-      }
+      row ? onSelectionChange(event, row) : onSelectAllChange(event);
     },
     size: (density === 'compact' ? 'small' : 'medium') as 'medium' | 'small',
     ...checkboxProps,
