@@ -56,8 +56,8 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
     event: ChangeEvent<HTMLInputElement>,
     row: MRT_Row<TData>,
   ) => {
-    if (row?.getIsAllSubRowsSelected()) {
-      row?.subRows?.forEach((r) => r.toggleSelected(false));
+    if (row.getIsAllSubRowsSelected()) {
+      row.subRows?.forEach((r) => r.toggleSelected(false));
     }
     row.getToggleSelectedHandler()(event);
 

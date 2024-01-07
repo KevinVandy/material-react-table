@@ -161,7 +161,7 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
     showExpandColumn(tableOptions, tableOptions.state?.grouping ?? grouping)
   ) {
     return {
-      Cell: ({ row, table }) => {
+      Cell: ({ cell, column, row, table }) => {
         const expandButtonProps = { row, table };
         const subRowsLength = row.subRows?.length;
         if (
@@ -183,7 +183,12 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
             </Stack>
           );
         } else {
-          return <MRT_ExpandButton {...expandButtonProps} />;
+          return (
+            <>
+              <MRT_ExpandButton {...expandButtonProps} />
+              {column.columnDef.GroupedCell?.({ cell, column, row, table })}
+            </>
+          );
         }
       },
       Header: tableOptions.enableExpandAll

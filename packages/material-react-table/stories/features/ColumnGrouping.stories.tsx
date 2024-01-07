@@ -44,10 +44,10 @@ const columns = [
   },
 ] as MRT_ColumnDef<Person>[];
 
-const data = [...Array(500)].map(() => ({
+const data = [...Array(300)].map(() => ({
   city: faker.location.city(),
   firstName: faker.person.firstName(),
-  gender: Math.random() < 0.99 ? faker.person.sex() : faker.person.gender(),
+  gender: Math.random() < 0.95 ? faker.person.sex() : faker.person.gender(),
   lastName: faker.person.lastName(),
   state: faker.location.state(),
 }));
@@ -66,6 +66,37 @@ export const GroupingColumnModeRemove = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    enableGrouping
+    groupedColumnMode="remove"
+    initialState={{ expanded: true, grouping: ['state', 'gender'] }}
+  />
+);
+
+export const GroupingColumnModeRemovePaginatePreExpand = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableGrouping
+    groupedColumnMode="remove"
+    initialState={{ expanded: true, grouping: ['state', 'gender'] }}
+    paginateExpandedRows={false}
+  />
+);
+
+export const GroupingColumnModeRemoveCustomGroupedCell = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    displayColumnDefOptions={{
+      'mrt-row-expand': {
+        //last item in array of grouping state
+        GroupedCell: ({ row, table }) => {
+          const { grouping } = table.getState();
+          return row.getValue(grouping[grouping.length - 1]);
+        },
+        Header: 'Groups',
+      },
+    }}
     enableGrouping
     groupedColumnMode="remove"
     initialState={{ expanded: true, grouping: ['state', 'gender'] }}
