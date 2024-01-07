@@ -63,7 +63,9 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
     onChange: (event) => {
       event.stopPropagation();
       row
-        ? row.getToggleSelectedHandler()(event)
+        ? row?.getIsAllSubRowsSelected()
+          ? row?.subRows?.forEach((r) => r.toggleSelected(false))
+          : row.getToggleSelectedHandler()(event)
         : selectAllMode === 'all'
           ? table.getToggleAllRowsSelectedHandler()(event)
           : table.getToggleAllPageRowsSelectedHandler()(event);
