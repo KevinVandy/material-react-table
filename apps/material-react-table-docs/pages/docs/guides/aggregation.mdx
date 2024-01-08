@@ -6,18 +6,18 @@ import AggregationExample from '../../../examples/aggregation-and-grouping';
 import AggregationMultiExample from '../../../examples/aggregation-multi';
 
 <Head>
-  <title>
-    {'Aggregation and Grouping Guide - Material React Table V2 Docs'}
-  </title>
+  <title>{'Aggregation Guide - Material React Table V2 Docs'}</title>
   <meta
     name="description"
     content="How to use and customize the aggregation and grouping features of Material React Table"
   />
 </Head>
 
-## Aggregation and Grouping Feature Guide
+## Aggregation Feature Guide
 
-Material React Table has built-in grouping and aggregation features. There are options for both automatic client-side grouping and aggregation, as well as manual server-side grouping and aggregation. This guide will walk you through the different options and how to use and customize them.
+Material React Table has built-in aggregation features. There are options for both automatic client-side grouping and aggregation, as well as manual server-side grouping and aggregation. This guide will walk you through the different options and how to use and customize them.
+
+> See the [Column Grouping Guide](./column-grouping) as a prerequisite to this guide. The Aggregation and Grouping Guide was recently split into two separate guides.
 
 ### Relevant Table Options
 
@@ -42,97 +42,19 @@ Material React Table has built-in grouping and aggregation features. There are o
 
 <ColumnOptionsTable
   onlyOptions={
-    new Set(['AggregatedCell', 'Footer', 'GroupedCell', 'enableGrouping'])
+    new Set([
+      'AggregatedCell',
+      'Footer',
+      'GroupedCell',
+      'PlaceholderCell',
+      'enableGrouping',
+    ])
   }
 />
 
 ### Relevant State
 
 <StateOptionsTable onlyOptions={new Set(['grouping', 'expanded'])} />
-
-### Enable Grouping
-
-To enable grouping, set the `enableGrouping` table option to `true`. This will both add a drag handle button so that columns can be dragged to the dropzone to be grouped and will add an entry column actions menu to group or ungroup a column.
-
-```jsx
-const table = useMaterialReactTable({
-  columns,
-  data,
-  enableGrouping: true,
-});
-```
-
-#### Disable Grouping Per Column
-
-```jsx
-const columns = [
-  {
-    accessorKey: 'name',
-    header: 'Name',
-    enableGrouping: false, // disable grouping for this column
-  },
-  {
-    accessorKey: 'age',
-    header: 'Age',
-  },
-];
-
-const table = useMaterialReactTable({
-  columns,
-  data,
-  enableGrouping: true,
-});
-
-return <MaterialReactTable table={table} />;
-```
-
-#### Hide Drag Buttons for Grouping
-
-If you do not want the drag buttons that come with the grouping feature, you can independently disable them without disabling the grouping feature entirely by setting the `enableColumnDragging` table option to `false`.
-
-```jsx
-const table = useMaterialReactTable({
-  columns,
-  data,
-  enableGrouping: true,
-  enableColumnDragging: false, //do not show drag handle buttons, but still show grouping options in column actions menu
-});
-
-return <MaterialReactTable table={table} />;
-```
-
-### Group Columns by Default
-
-If you want columns to be grouped by default, you can set the `grouping` state in either the `initialState` or `state` table option.
-
-```jsx
-const table = useMaterialReactTable({
-  columns,
-  data,
-  enableGrouping: true,
-  initialState: { grouping: ['location', 'department'] }, //group by location and department by default
-});
-
-return <MaterialReactTable table={table} />;
-```
-
-### Expand Grouped Rows by Default
-
-In addition to grouping columns by default, you may also want those grouped rows to be expanded and visible by default, too. You can do this by setting the `expanded` state to `true` in either the `initialState` or `state` table option.
-
-```jsx
-const table = useMaterialReactTable({
-  columns,
-  data,
-  enableGrouping: true,
-  initialState: {
-    grouping: ['location', 'department'], //group by location and department by default and expand grouped rows
-    expanded: true, //show grouped rows by default
-  },
-});
-
-return <MaterialReactTable table={table} />;
-```
 
 ### Aggregation on Grouped Rows
 

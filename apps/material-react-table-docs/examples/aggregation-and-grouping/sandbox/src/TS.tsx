@@ -117,10 +117,16 @@ const Example = () => {
   const table = useMaterialReactTable({
     columns,
     data,
+    displayColumnDefOptions: {
+      'mrt-row-expand': {
+        enableResizing: true,
+      },
+    },
     enableColumnResizing: true,
     enableGrouping: true,
     enableStickyHeader: true,
     enableStickyFooter: true,
+    groupedColumnMode: 'remove', //instead of the default 'reorder'
     initialState: {
       density: 'compact',
       expanded: true, //expand all groups by default

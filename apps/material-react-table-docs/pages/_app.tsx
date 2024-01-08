@@ -79,7 +79,7 @@ function App({ Component, pageProps }: AppProps) {
                 color: theme.palette.text.primary,
                 minHeight: '100vh',
                 p: `64px ${showMiniNav && isXLDesktop ? '250px' : '32px'} 0 ${
-                  (navOpen || isDesktop) && !isMobile ? '300px' : '32px'
+                  (navOpen || isDesktop) && !isMobile ? '320px' : '32px'
                 }`,
                 transition: 'all 100ms ease-in-out',
               })}

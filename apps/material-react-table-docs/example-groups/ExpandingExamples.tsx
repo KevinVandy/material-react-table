@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
 import { Box, Tab, Tabs } from '@mui/material';
+import EnableColumnGroupingExample from '../examples/enable-column-grouping';
+import CustomizeRemoveColumnGroupingExample from '../examples/customize-remove-column-grouping';
 import AggregationAndGroupingExample from '../examples/aggregation-and-grouping';
 import DetailExample from '../examples/enable-detail-panel';
 import ChartDetailPanelExample from '../examples/chart-detail-panel';
@@ -28,17 +30,16 @@ const ExpandingExamples = ({ isPage = false }) => {
               : setActiveTab(newPath as string)
           }
         >
+          <Tab label="Expanding Tree" value="expanding-tree" />
           <Tab
-            label="Aggregation and Grouping"
-            value="aggregation-and-grouping"
+            label="Parsed Tree"
+            value="expanding-tree-flat-parse"
           />
           <Tab label="Detail Panel" value="detail-panel" />
           <Tab label="Chart Detail Panel" value="chart-detail-panel" />
-          <Tab label="Expanding Tree" value="expanding-tree" />
-          <Tab
-            label="Expanding Parsed Tree"
-            value="expanding-tree-flat-parse"
-          />
+          <Tab label="Column Grouping" value="column-grouping" />
+          <Tab label="Customized Grouping" value="customized-grouping" />
+          <Tab label="Aggregation" value="aggregation-and-grouping" />
           <Link href="/docs/examples" passHref legacyBehavior>
             <Tab
               label={
@@ -53,14 +54,18 @@ const ExpandingExamples = ({ isPage = false }) => {
         </Tabs>
       </Box>
       <Box>
-        {activeTab === 'aggregation-and-grouping' && (
-          <AggregationAndGroupingExample />
-        )}
-        {activeTab === 'detail-panel' && <DetailExample />}
-        {activeTab === 'chart-detail-panel' && <ChartDetailPanelExample />}
         {activeTab === 'expanding-tree' && <ExpandingTreeExample />}
         {activeTab === 'expanding-tree-flat-parse' && (
           <ExpandingParsedTreeExample />
+        )}
+        {activeTab === 'detail-panel' && <DetailExample />}
+        {activeTab === 'chart-detail-panel' && <ChartDetailPanelExample />}
+        {activeTab === 'column-grouping' && <EnableColumnGroupingExample />}
+        {activeTab === 'customized-grouping' && (
+          <CustomizeRemoveColumnGroupingExample />
+        )}
+        {activeTab === 'aggregation-and-grouping' && (
+          <AggregationAndGroupingExample />
         )}
       </Box>
     </>

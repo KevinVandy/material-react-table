@@ -140,6 +140,16 @@ export const AggregationRemoveMode = () => (
   />
 );
 
+export const AggregationFalseMode = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableGrouping
+    groupedColumnMode={false}
+    initialState={{ expanded: true, grouping: ['state', 'gender'] }}
+  />
+);
+
 export const AggregationRemoveModeCustomGroupedCell = () => (
   <MaterialReactTable
     columns={columns}

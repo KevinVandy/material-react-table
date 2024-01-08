@@ -100,6 +100,7 @@ const Example = () => {
     enableExpandAll: false, //hide expand all double arrow in column header
     enableExpanding: true,
     filterFromLeafRows: true, //apply filtering to all rows instead of just parent rows
+    getSubRows: (row) => row.subRows, //default
     initialState: { expanded: true }, //expand all rows by default
     paginateExpandedRows: false, //When rows are expanded, do not count sub-rows as number of rows on the page towards pagination
   });

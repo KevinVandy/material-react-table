@@ -1,0 +1,212 @@
+import Head from 'next/head';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+import ColumnGroupingExample from '../../../examples/enable-column-grouping';
+import CustomizeRemoveColumnGroupingExample from '../../../examples/customize-remove-column-grouping';
+
+<Head>
+  <title>{'Column Grouping Guide - Material React Table V2 Docs'}</title>
+  <meta
+    name="description"
+    content="How to use and customize the column grouping features of Material React Table"
+  />
+</Head>
+
+## Column Grouping Feature Guide
+
+Material React Table has built-in column grouping features. There are options for both automatic client-side grouping as well as manual server-side grouping. This guide will walk you through the different options and how to use and customize them.
+
+### Relevant Table Options
+
+<TableOptionsTable
+  onlyOptions={
+    new Set([
+      'enableExpandAll',
+      'enableGrouping',
+      'getGroupedRowModel',
+      'groupedColumnMode',
+      'manualGrouping',
+      'muiToolbarAlertBannerChipProps',
+      'onGroupingChange',
+      'positionToolbarAlertBanner',
+    ])
+  }
+/>
+
+### Relevant Column Options
+
+<ColumnOptionsTable
+  onlyOptions={
+    new Set([
+      'AggregatedCell',
+      'GroupedCell',
+      'PlaceholderCell',
+      'enableGrouping',
+    ])
+  }
+/>
+
+### Relevant State
+
+<StateOptionsTable onlyOptions={new Set(['grouping', 'expanded'])} />
+
+### Enable Grouping
+
+To enable grouping, set the `enableGrouping` table option to `true`. This will both add a drag handle button so that columns can be dragged to the dropzone to be grouped and will add an entry column actions menu to group or ungroup a column.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableGrouping: true,
+});
+```
+
+### Grouped Column Mode
+
+> New in v2.5.0, The `"remove"` columnGroupMode now has an official UI implementation
+
+The `groupedColumnMode` table option controls how grouped columns are displayed once a column has been grouped. There are three options:
+
+1. `"reorder"` (default) - Grouped columns will be displayed as the first columns in the table, followed by the 'mrt-row-expand' display column, followed by the remaining columns in their original order.
+2. `"remove"` - Grouped columns will be removed from the table and only their aggregate values will be displayed alongside the expand button in the 'mrt-row-expand' display column, followed by the remaining columns in their original order.
+3. `false` - Grouping columns will have no effect on the column order. The 'mrt-row-expand' display column will be displayed as the first column in the table, followed by the remaining columns in their original order.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableGrouping: true,
+  groupedColumnMode: 'remove', //instead of default "reorder"
+});
+```
+
+<ColumnGroupingExample />
+
+#### Disable Grouping Per Column
+
+```jsx
+const columns = [
+  {
+    accessorKey: 'name',
+    header: 'Name',
+    enableGrouping: false, // disable grouping for this column
+  },
+  {
+    accessorKey: 'age',
+    header: 'Age',
+  },
+];
+
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableGrouping: true,
+});
+
+return <MaterialReactTable table={table} />;
+```
+
+#### Hide Drag Buttons for Grouping
+
+If you do not want the drag buttons that come with the grouping feature, you can independently disable them without disabling the grouping feature entirely by setting the `enableColumnDragging` table option to `false`.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableGrouping: true,
+  enableColumnDragging: false, //do not show drag handle buttons, but still show grouping options in column actions menu
+});
+
+return <MaterialReactTable table={table} />;
+```
+
+### Group Columns by Default
+
+If you want columns to be grouped by default, you can set the `grouping` state in either the `initialState` or `state` table option.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableGrouping: true,
+  initialState: { grouping: ['location', 'department'] }, //group by location and department by default
+});
+
+return <MaterialReactTable table={table} />;
+```
+
+### Expand Grouped Rows by Default
+
+In addition to grouping columns by default, you may also want those grouped rows to be expanded and visible by default, too. You can do this by setting the `expanded` state to `true` in either the `initialState` or `state` table option.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableGrouping: true,
+  initialState: {
+    grouping: ['location', 'department'], //group by location and department by default and expand grouped rows
+    expanded: true, //show grouped rows by default
+  },
+});
+
+return <MaterialReactTable table={table} />;
+```
+
+### Customize Expand Column
+
+You can customize the expand column by using the `displayColumnDefOptions` table option.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableGrouping: true,
+  displayColumnDefOptions: {
+    'mrt-row-expand': {
+      size: 120, //make the expand column wider
+    },
+  },
+});
+```
+
+Going further, you can completely overhaul how the expand column renders using custom `Cell` and `Header` renders here for advanced use cases.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableGrouping: true,
+  displayColumnDefOptions: {
+    'mrt-row-expand': {
+      Cell: ({ row, table }) => {
+        return (
+          <>
+            <MRT_ExpandButton row={row} table={table} />
+            {/*custom content*/}
+          </>
+        );
+      },
+      Header: ({ table }) => {
+        return (
+          <>
+            <MRT_ExpandAllButton table={table} />
+            {/*custom content*/}
+          </>
+        );
+      },
+    },
+  },
+});
+```
+
+<CustomizeRemoveColumnGroupingExample />
+
+### Manual Grouping
+
+Manual Grouping means that the `data` that you pass to the table is already grouped and aggregated, and you do not want Material React Table to do any of the grouping or aggregation for you. This is useful if you are using a backend API to do the grouping and aggregation for you, and you just want to display the results. However, you will need to put your data in the specific format that the `expanding` features understand.
+
+> Learn more about [Expanding Sub Rows](/docs/guides/expanding-sub-rows) and [Aggregation](/docs/guides/aggregation) Features in their own dedicated guides.

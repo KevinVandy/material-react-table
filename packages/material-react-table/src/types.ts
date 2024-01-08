@@ -675,10 +675,19 @@ export type MRT_HeaderGroup<TData extends MRT_RowData> = Omit<
 
 export type MRT_Row<TData extends MRT_RowData> = Omit<
   Row<TData>,
-  '_valuesCache' | 'getAllCells' | 'getVisibleCells' | 'subRows'
+  | '_valuesCache'
+  | 'getAllCells'
+  | 'getParentRow'
+  | 'getParentRows'
+  | 'getRow'
+  | 'getVisibleCells'
+  | 'subRows'
 > & {
   _valuesCache: Record<LiteralUnion<string & DeepKeys<TData>>, any>;
   getAllCells: () => MRT_Cell<TData>[];
+  getParentRow: () => MRT_Row<TData> | null;
+  getParentRows: () => MRT_Row<TData>[];
+  getRow: () => MRT_Row<TData>;
   getVisibleCells: () => MRT_Cell<TData>[];
   subRows?: MRT_Row<TData>[];
 };

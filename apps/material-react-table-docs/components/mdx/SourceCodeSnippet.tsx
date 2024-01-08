@@ -473,7 +473,8 @@ export const SourceCodeSnippet = ({
                         {line.map((token, key) => {
                           if (
                             token.content === '//column definitions...' ||
-                            token.content === '//data definitions...'
+                            token.content === '//data definitions...' ||
+                            token.content === '//demo...'
                           ) {
                             skipCodeLine = true;
                             if (isFullCode) {

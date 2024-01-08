@@ -173,12 +173,16 @@ export const routes: Array<RouteItem> = [
         ],
       },
       {
-        href: '/docs/examples/aggregation-and-grouping',
+        href: '/docs/examples/expanding-tree',
         label: 'Expanding / Grouping Examples',
         secondaryItems: [
           {
-            href: '/docs/examples/aggregation-and-grouping',
-            label: 'Aggregation and Grouping Example',
+            href: '/docs/examples/expanding-tree',
+            label: 'Expanding Sub-Rows (Tree) Example',
+          },
+          {
+            href: '/docs/examples/expanding-tree-flat-parse',
+            label: 'Expanding Parsed Tree Example',
           },
           {
             href: '/docs/examples/detail-panel',
@@ -189,12 +193,16 @@ export const routes: Array<RouteItem> = [
             label: 'Chart Detail Panel Example',
           },
           {
-            href: '/docs/examples/expanding-tree',
-            label: 'Expanding Sub-Rows (Tree) Example',
+            href: '/docs/examples/column-grouping',
+            label: 'Column Grouping Example',
           },
           {
-            href: '/docs/examples/expanding-tree-flat-parse',
-            label: 'Expanding Parsed Tree Example',
+            href: '/docs/examples/customized-grouping',
+            label: 'Customized Grouping Example',
+          },
+          {
+            href: '/docs/examples/aggregation-and-grouping',
+            label: 'Aggregation Example',
           },
         ],
       },
@@ -352,8 +360,8 @@ export const routes: Array<RouteItem> = [
         href: '/docs/guides#feature-guides',
         items: [
           {
-            href: '/docs/guides/aggregation-and-grouping',
-            label: 'Aggregation and Grouping',
+            href: '/docs/guides/aggregation',
+            label: 'Aggregation',
           },
           {
             href: '/docs/guides/async-loading',
@@ -370,6 +378,10 @@ export const routes: Array<RouteItem> = [
           {
             href: '/docs/guides/column-filtering',
             label: 'Column Filtering',
+          },
+          {
+            href: '/docs/guides/column-grouping',
+            label: 'Column Grouping',
           },
           {
             href: '/docs/guides/column-hiding',

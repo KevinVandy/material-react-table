@@ -72,6 +72,16 @@ export const GroupingColumnModeRemove = () => (
   />
 );
 
+export const GroupingColumnModeFalse = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableGrouping
+    groupedColumnMode={false}
+    initialState={{ expanded: true, grouping: ['state', 'gender'] }}
+  />
+);
+
 export const GroupingColumnModeRemoveCustomHeader = () => (
   <MaterialReactTable
     columns={columns}

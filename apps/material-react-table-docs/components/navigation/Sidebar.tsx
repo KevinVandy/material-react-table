@@ -31,7 +31,7 @@ export const SideBar = ({ navOpen, setNavOpen }: Props) => {
           pb: '10rem',
           scrollPaddingTop: '20%',
           transition: 'all .2s',
-          width: navOpen ? '290px' : 0,
+          width: navOpen ? '300px' : 0,
           '@media (max-width: 900px)': {
             mt: '50px',
           },

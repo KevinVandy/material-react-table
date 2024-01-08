@@ -207,7 +207,14 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
             );
           }
         : undefined,
-      ...defaultDisplayColumnProps(tableOptions, id, 'expand'),
+      ...defaultDisplayColumnProps(
+        tableOptions,
+        id,
+        'expand',
+        tableOptions.groupedColumnMode === 'remove'
+          ? tableOptions?.defaultColumn?.size
+          : 60,
+      ),
     };
   }
   return null;

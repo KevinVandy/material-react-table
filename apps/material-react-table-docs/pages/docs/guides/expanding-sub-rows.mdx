@@ -38,6 +38,7 @@ Material React Table has support for expanding sub-rows or tree data. This featu
       'getIsRowExpanded',
       'getRowCanExpand',
       'getSubRows',
+      'groupedColumnMode',
       'manualExpanding',
       'maxLeafRowFilterDepth',
       'muiExpandAllButtonProps',
@@ -181,3 +182,21 @@ const table = useMaterialReactTable({
 Here is a slightly more complex initial expanded state example where all the root rows are expanded by default, but none of the sub rows themselves are expanded by default. We just need to find all of the root row ids and set their key in the `expanded` `initialState` option to `true`.
 
 <ExpandedRootExample />
+
+### Customize Expand Column
+
+You can customize the expand column by using the `displayColumnDefOptions` table option.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableGrouping: true,
+  displayColumnDefOptions: {
+    'mrt-row-expand': {
+      enableResizing: true, //allow resizing
+      size: 120, //make the expand column wider
+    },
+  },
+});
+```
