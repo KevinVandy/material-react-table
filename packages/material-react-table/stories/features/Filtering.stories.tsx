@@ -600,6 +600,7 @@ export const CustomizeFilterTextFields = () => (
       },
       {
         accessorKey: 'gender',
+        filterSelectOptions: ['Male', 'Female', 'Other'],
         filterVariant: 'select',
         header: 'Gender',
       },

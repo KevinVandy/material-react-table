@@ -139,6 +139,7 @@ export const MRT_TableHeadCellFilterLabel = <TData extends MRT_RowData = {}>({
         }}
         onKeyDown={(event) => event.key === 'Enter' && setAnchorEl(null)}
         open={!!anchorEl}
+        slotProps={{ paper: { sx: { overflow: 'visible' } } }}
         transformOrigin={{
           horizontal: 'center',
           vertical: 'bottom',
