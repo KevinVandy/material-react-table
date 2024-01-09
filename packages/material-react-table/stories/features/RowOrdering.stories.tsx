@@ -232,3 +232,51 @@ export const RowOrderingWithRowVirtualization = () => {
     />
   );
 };
+
+const fakeColumns = [...Array(500)].map((_, i) => {
+  return {
+    accessorKey: i.toString(),
+    header: 'Column ' + i.toString(),
+  };
+});
+
+const fakeData = [...Array(500)].map(() => ({
+  ...Object.fromEntries(
+    fakeColumns.map((col) => [col.accessorKey, faker.person.firstName()]),
+  ),
+}));
+
+export const RowOrderingWithColumnVirtualization = () => {
+  const [data, setData] = useState(() => fakeData);
+
+  return (
+    <MaterialReactTable
+      autoResetPageIndex={false}
+      columns={fakeColumns}
+      data={data}
+      displayColumnDefOptions={{
+        'mrt-row-drag': {
+          enableColumnDragging: true,
+          enableColumnOrdering: true,
+        },
+      }}
+      enableColumnOrdering
+      enableColumnVirtualization
+      enableRowOrdering
+      enableSorting={false}
+      muiRowDragHandleProps={({ table }) => ({
+        onDragEnd: () => {
+          const { draggingRow, hoveredRow } = table.getState();
+          if (hoveredRow && draggingRow) {
+            data.splice(
+              (hoveredRow as MRT_Row<any>).index,
+              0,
+              data.splice(draggingRow.index, 1)[0],
+            );
+            setData([...data]);
+          }
+        },
+      })}
+    />
+  );
+};

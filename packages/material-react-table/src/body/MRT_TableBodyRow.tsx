@@ -74,6 +74,8 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
     columnVirtualizer ?? {};
 
   const isPinned = enableRowPinning && row.getIsPinned();
+  const isDraggingRow = draggingRow?.id === row.id;
+  const isHoveredRow = hoveredRow?.id === row.id;
 
   const tableRowProps = parseFromValuesOrFunc(muiTableBodyRowProps, {
     row,
@@ -132,7 +134,9 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
       <TableRow
         data-index={rowIndex}
         data-pinned={!!isPinned || undefined}
-        data-selected={row.getIsSelected() || undefined}
+        data-selected={
+          row.getIsSelected() || row.getIsAllSubRowsSelected() || undefined
+        }
         onDragEnter={handleDragEnter}
         ref={(node: HTMLTableRowElement) => {
           if (node) {
@@ -169,11 +173,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
               : undefined,
           boxSizing: 'border-box',
           display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
-          opacity: isPinned
-            ? 0.97
-            : draggingRow?.id === row.id || hoveredRow?.id === row.id
-              ? 0.5
-              : 1,
+          opacity: isPinned ? 0.97 : isDraggingRow || isHoveredRow ? 0.5 : 1,
           position: virtualRow
             ? 'absolute'
             : rowPinningDisplayMode?.includes('sticky') && isPinned
@@ -212,7 +212,10 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
             : (cellOrVirtualCell as MRT_Cell<TData>);
           const props = {
             cell,
-            measureElement: columnVirtualizer?.measureElement,
+            measureElement:
+              !isDraggingRow && !isHoveredRow
+                ? columnVirtualizer?.measureElement
+                : undefined,
             numRows,
             rowIndex,
             rowRef,
