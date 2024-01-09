@@ -3,7 +3,7 @@ import {
   MaterialReactTable,
   useMaterialReactTable,
 } from 'material-react-table';
-import { data} from './makeData';
+import { data } from './makeData';
 import {
   FormControl,
   FormControlLabel,
@@ -47,9 +47,8 @@ const Example = () => {
   );
 
   //demo state
-  const [groupedColumnMode, setGroupedColumnMode] = useState<
-    false | 'remove' | 'reorder'
-  >('remove'); //default is 'reorder
+  const [groupedColumnMode, setGroupedColumnMode] =
+    (useState < false) | 'remove' | ('reorder' > 'remove'); //default is 'reorder
 
   const table = useMaterialReactTable({
     columns,
@@ -78,10 +77,7 @@ const Example = () => {
 export default Example;
 
 //demo...
-const DemoRadioGroup = ({
-  groupedColumnMode,
-  setGroupedColumnMode,
-}) => {
+const DemoRadioGroup = ({ groupedColumnMode, setGroupedColumnMode }) => {
   return (
     <FormControl sx={{ margin: 'auto', textAlign: 'center' }}>
       <FormLabel>Grouped Column Mode</FormLabel>
@@ -90,9 +86,7 @@ const DemoRadioGroup = ({
         value={groupedColumnMode}
         onChange={(event) =>
           setGroupedColumnMode(
-            event.target.value === 'false'
-              ? false
-              : (event.target.value),
+            event.target.value === 'false' ? false : event.target.value,
           )
         }
       >

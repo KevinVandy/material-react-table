@@ -220,8 +220,10 @@ export const MRT_FilterOptionMenu = <TData extends MRT_RowData>({
         if (Array.isArray(currentFilterValue)) {
           column.setFilterValue('');
           setFilterValue?.('');
-        } else if (currentFilterValue === ' ' &&
-          emptyModes.includes(prevFilterMode)) {
+        } else if (
+          currentFilterValue === ' ' &&
+          emptyModes.includes(prevFilterMode)
+        ) {
           column.setFilterValue(undefined);
         } else {
           column.setFilterValue(currentFilterValue); // perform new filter render

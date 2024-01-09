@@ -72,7 +72,11 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
 
   const handleDragStart = (e: DragEvent<HTMLButtonElement>) => {
     setIsDragging(true);
-    e.dataTransfer.setDragImage(menuItemRef.current as HTMLElement, 0, 0);
+    try {
+      e.dataTransfer.setDragImage(menuItemRef.current as HTMLElement, 0, 0);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const handleDragEnd = (_e: DragEvent<HTMLButtonElement>) => {

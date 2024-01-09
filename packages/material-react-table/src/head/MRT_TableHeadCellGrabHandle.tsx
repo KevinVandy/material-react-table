@@ -42,11 +42,15 @@ export const MRT_TableHeadCellGrabHandle = <TData extends MRT_RowData>({
   const handleDragStart = (event: DragEvent<HTMLButtonElement>) => {
     iconButtonProps?.onDragStart?.(event);
     setDraggingColumn(column);
-    event.dataTransfer.setDragImage(
-      tableHeadCellRef.current as HTMLElement,
-      0,
-      0,
-    );
+    try {
+      event.dataTransfer.setDragImage(
+        tableHeadCellRef.current as HTMLElement,
+        0,
+        0,
+      );
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const handleDragEnd = (event: DragEvent<HTMLButtonElement>) => {

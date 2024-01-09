@@ -34,7 +34,11 @@ export const MRT_TableBodyRowGrabHandle = <TData extends MRT_RowData>({
 
   const handleDragStart = (event: DragEvent<HTMLButtonElement>) => {
     iconButtonProps?.onDragStart?.(event);
-    event.dataTransfer.setDragImage(rowRef.current as HTMLElement, 0, 0);
+    try {
+      event.dataTransfer.setDragImage(rowRef.current as HTMLElement, 0, 0);
+    } catch (e) {
+      console.error(e);
+    }
     table.setDraggingRow(row as any);
   };
 

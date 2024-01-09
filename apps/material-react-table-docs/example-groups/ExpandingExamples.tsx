@@ -31,10 +31,7 @@ const ExpandingExamples = ({ isPage = false }) => {
           }
         >
           <Tab label="Expanding Tree" value="expanding-tree" />
-          <Tab
-            label="Parsed Tree"
-            value="expanding-tree-flat-parse"
-          />
+          <Tab label="Parsed Tree" value="expanding-tree-flat-parse" />
           <Tab label="Detail Panel" value="detail-panel" />
           <Tab label="Chart Detail Panel" value="chart-detail-panel" />
           <Tab label="Column Grouping" value="column-grouping" />
