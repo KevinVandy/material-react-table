@@ -114,6 +114,24 @@ export const Footer = () => {
         </MuiLink>
       </Typography>
       <EthicalAd id="footer" text />
+      <Typography
+        sx={{
+          mt: '2rem',
+          textAlign: 'center',
+        }}
+        variant="subtitle2"
+      >
+        <MuiLink
+          sx={{ color: '#6366f1' }}
+          target="_blank"
+          href={`https://plausible.io/material-react-table.com?${new URLSearchParams(
+            { page: pathname },
+          ).toString()}`}
+        >
+          Plausible Analytics
+        </MuiLink>{' '}
+        for this page
+      </Typography>
       <Paper
         elevation={3}
         sx={{
