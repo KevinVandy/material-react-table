@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Remove from '@mui/icons-material/Remove';
 import Send from '@mui/icons-material/Send';
 import Box from '@mui/material/Box';
@@ -7,6 +7,7 @@ import {
   type MRT_ColumnDef,
   MRT_SelectCheckbox,
   MaterialReactTable,
+  useMaterialReactTable,
 } from '../../src';
 import { faker } from '@faker-js/faker';
 import { type Meta } from '@storybook/react';
@@ -35,7 +36,7 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
     header: 'Address',
   },
 ];
-const data = [...Array(15)].map(() => ({
+const data = [...Array(50)].map(() => ({
   address: faker.location.streetAddress(),
   age: faker.number.int(80),
   firstName: faker.person.firstName(),
@@ -219,3 +220,94 @@ export const CustomAlertBannerHeadOverlay = () => (
     )}
   />
 );
+
+export const MultiSelectRowWithHoldShift = () => {
+  const [prevSelectedStaticRowIndex, setPrevSelectedStaticRowIndex] =
+    useState<number>();
+
+  //--------------------------------------------------
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enablePagination: false,
+    enableRowSelection: (row) => row.original.age > 10,
+    enableRowVirtualization: true,
+    getRowId: (row) => row.firstName,
+    muiSelectAllCheckboxProps: {
+      onClick: () => setPrevSelectedStaticRowIndex(undefined),
+    },
+    muiSelectCheckboxProps: ({ row, staticRowIndex }) => ({
+      onClick: (e) => {
+        if (e.shiftKey) {
+          if (!row.getCanSelect() || staticRowIndex === undefined) {
+            return;
+          }
+          handleMultiRowSelectionWithShiftKey({
+            rowId: row.id,
+            rowIndex: staticRowIndex,
+          });
+          return;
+        }
+        setPrevSelectedStaticRowIndex(staticRowIndex);
+      },
+    }),
+    muiTableBodyCellProps: { style: { userSelect: 'none' } },
+    muiTableBodyRowProps: ({ row, staticRowIndex }) => ({
+      onClick: (e) => {
+        if (!e.shiftKey || !row.getCanSelect()) {
+          return;
+        }
+        handleMultiRowSelectionWithShiftKey({
+          rowId: row.id,
+          rowIndex: staticRowIndex,
+        });
+      },
+      sx: { cursor: 'pointer' },
+    }),
+    muiTableContainerProps: { sx: { height: '600px' } },
+  });
+
+  //--------------------------------------------------
+  const handleMultiRowSelectionWithShiftKey = useCallback(
+    (opts: { rowId: string; rowIndex: number }) => {
+      const { rowId, rowIndex } = opts;
+      if (prevSelectedStaticRowIndex === undefined) {
+        table.setRowSelection((updater) => {
+          return { ...updater, [rowId]: true };
+        });
+      } else {
+        const start = Math.min(prevSelectedStaticRowIndex, rowIndex);
+        const end = Math.max(prevSelectedStaticRowIndex, rowIndex);
+        handleMultiRowSelection({ end, start });
+      }
+      setPrevSelectedStaticRowIndex(rowIndex);
+    },
+    [prevSelectedStaticRowIndex],
+  );
+
+  //--------------------------------------------------
+  const handleMultiRowSelection = useCallback(
+    (opts: { end: number; start: number }) => {
+      const { end, start } = opts;
+      const rows = table.getRowModel().rows;
+      const res: Record<string, boolean> = {};
+      for (let i = end; i >= start; i--) {
+        if (!rows[i]?.getCanSelect()) {
+          continue;
+        }
+        res[rows[i]['id']] = true;
+      }
+      table.setRowSelection((updater) => {
+        return { ...updater, ...res };
+      });
+    },
+    [],
+  );
+
+  // TODO: Reset prevSelectedStaticRowIndex when sorting changes
+  useEffect(() => {
+    setPrevSelectedStaticRowIndex(undefined);
+  }, [table.getState().sorting]);
+
+  return <MaterialReactTable table={table} />;
+};
