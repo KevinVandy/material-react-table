@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useMemo } from 'react';
 import Alert, { type AlertProps } from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Box from '@mui/material/Box';
@@ -21,7 +21,6 @@ export const MRT_ToolbarAlertBanner = <TData extends MRT_RowData>({
 }: Props<TData>) => {
   const {
     getPrePaginationRowModel,
-    getSelectedRowModel,
     getState,
     options: {
       enableRowSelection,
@@ -35,7 +34,7 @@ export const MRT_ToolbarAlertBanner = <TData extends MRT_RowData>({
     },
     refs: { tablePaperRef },
   } = table;
-  const { density, grouping, showAlertBanner } = getState();
+  const { density, grouping, rowSelection, showAlertBanner } = getState();
 
   const alertProps = {
     ...parseFromValuesOrFunc(muiToolbarAlertBannerProps, {
@@ -48,13 +47,15 @@ export const MRT_ToolbarAlertBanner = <TData extends MRT_RowData>({
     table,
   });
 
+  const selectedRowCount = useMemo(
+    () => Object.values(rowSelection).filter(Boolean).length,
+    [rowSelection],
+  );
+
   const selectedAlert =
-    getSelectedRowModel().rows.length > 0
+    selectedRowCount > 0
       ? localization.selectedCountOfRowCountRowsSelected
-          ?.replace(
-            '{selectedCount}',
-            getSelectedRowModel().rows.length.toString(),
-          )
+          ?.replace('{selectedCount}', selectedRowCount.toLocaleString())
           ?.replace(
             '{rowCount}',
             (rowCount ?? getPrePaginationRowModel().rows.length).toString(),
