@@ -47,8 +47,7 @@ const Example = () => {
   );
 
   //demo state
-  const [groupedColumnMode, setGroupedColumnMode] =
-    (useState < false) | 'remove' | ('reorder' > 'remove'); //default is 'reorder
+  const [groupedColumnMode, setGroupedColumnMode] = useState('reorder'); //default is 'reorder
 
   const table = useMaterialReactTable({
     columns,
