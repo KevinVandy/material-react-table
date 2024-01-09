@@ -2,7 +2,7 @@ import Head from 'next/head';
 import SimpleCodeSandbox from '../../../examples/SimpleCodeSandbox';
 
 <Head>
-  <title>Usage - Material React Table V2 Docs</title>
+  <title>{'Usage - Material React Table V2 Docs'}</title>
   <meta
     name="description"
     content="A brief overview of how to use material-react-table and create columns and data"
@@ -75,6 +75,13 @@ const columns = useMemo(
       header: 'Name',
       accessorKey: 'name', //simple recommended way to define a column
       //more column options can be added here to enable/disable features, customize look and feel, etc.
+      //optional custom cell render
+      Cell: ({ row }) => (
+        <Box sx={{ display: 'flex', gap: '2ch', alignItems: 'center' }}>
+          <img src={row.original.imageUrl} />
+          <a href={row.profileUrl}>{row.name}</a>
+        </Box>
+      ),
     },
     {
       header: 'Age',
@@ -84,6 +91,8 @@ const columns = useMemo(
   [],
 );
 ```
+
+> Note: Do NOT have your accessors resolve JSX or markup. That's what custom `Cell` renders are for. Accessors should only return primitive data so that the table can sort, filter, search, and group properly.
 
 ### Full Simple Example
 

@@ -88,6 +88,9 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
   };
 
   const commonProps = {
+    'aria-label': selectAll
+      ? localization.toggleSelectAll
+      : localization.toggleSelectRow,
     checked: selectAll
       ? allRowsSelected
       : row?.getIsSelected() || row?.getIsAllSubRowsSelected(),
