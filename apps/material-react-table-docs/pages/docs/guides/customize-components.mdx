@@ -330,3 +330,17 @@ const table = useMaterialReactTable({
 ```
 
 <CustomizeStylesExample />
+
+### Customize No Rows overlay
+
+As part of the customization options, we allow you to override the No Records overlay.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  renderEmptyRowsFallback: ({table}) => (
+    <span>Customized No Rows Overlay</span>
+  )
+});
+```
