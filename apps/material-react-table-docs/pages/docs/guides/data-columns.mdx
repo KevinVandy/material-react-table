@@ -21,6 +21,8 @@ The other type of column that you can make is a display column, which you can le
 
 Each column definition must have at least an `accessorKey` (or a combination of an `id` and `accessorFn`) and a `header` property. The `accessorKey`/`accessorFn` property is the key that will be used to join the data from the `data` keys. The `header` property is used to display the column header, but is also used in other places in the table.
 
+> Note: Do NOT have your accessors resolve JSX or markup. That's what custom [`Cell`](#custom-cell-render) renders are for. Accessors should only return primitive data so that the table can sort, filter, search, and group properly.
+
 #### Method 1 - Using an accessorKey (Recommended)
 
 The simplest and most common way to define a column is to use the `accessorKey` property. The `accessorKey` property is the key that will be used to join the data from the `data` keys.
