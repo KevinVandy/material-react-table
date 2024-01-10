@@ -353,7 +353,6 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
       }
     },
     margin: 'none',
-    onClick: (e: MouseEvent<HTMLInputElement>) => e.stopPropagation(),
     placeholder:
       filterChipLabel || isSelectFilter || isMultiSelectFilter
         ? undefined
@@ -459,6 +458,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
                 ...commonTextFieldProps?.inputProps,
               }}
               onChange={handleTextFieldChange}
+              onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
             />
           )}
           value={filterValue}
@@ -493,6 +493,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
             ...commonTextFieldProps.SelectProps,
           }}
           onChange={handleTextFieldChange}
+          onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
           value={filterValue ?? ''}
         >
           {(isSelectFilter || isMultiSelectFilter) && [
