@@ -1,7 +1,4 @@
-
-import {
-  MaterialReactTable,
-} from '../../src';
+import { MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
 import { type Meta } from '@storybook/react';
 
@@ -19,7 +16,6 @@ const data = [...Array(120)].map(() => ({
   hireDate: faker.date.birthdate({ max: 2024, min: 2011 }),
   startTime: faker.date.recent(),
 }));
-
 
 export const MobileDateTimePickers = () => (
   <MaterialReactTable
@@ -39,7 +35,7 @@ export const MobileDateTimePickers = () => (
         header: 'Hire Date',
         id: 'hireDate',
       },
-      { 
+      {
         Cell: ({ cell }) => cell.getValue<Date>().toLocaleString(), //transform data to readable format for cell render
         accessorFn: (row) => new Date(row.departureTime), //transform data before processing so sorting works
         filterVariant: 'datetime',
