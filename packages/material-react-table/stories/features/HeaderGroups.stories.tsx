@@ -117,6 +117,15 @@ export const HeaderGroupsWithColumResizing = () => (
   <MaterialReactTable columns={columns} data={data} enableColumnResizing />
 );
 
+export const HeaderGroupsWithSemanticColumResizing = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnResizing
+    layoutMode="semantic"
+  />
+);
+
 export const MixedHeaderGroups = () => {
   return (
     <MaterialReactTable
