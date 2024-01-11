@@ -8,28 +8,29 @@ import { Box, Typography } from '@mui/material';
 import { data, type Person } from './makeData';
 
 const Example = () => {
-  const columns = useMemo(
-    () =>
-      [
-        {
-          accessorKey: 'id',
-          header: 'ID',
-          size: 50,
-        },
-        {
-          accessorKey: 'firstName',
-          header: 'First Name',
-        },
-        {
-          accessorKey: 'middleName',
-          header: 'Middle Name',
-        },
-        {
-          accessorKey: 'lastName',
-          header: 'Last Name',
-        },
-      ] as MRT_ColumnDef<Person>[],
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
+    //column definitions...
+    () => [
+      {
+        accessorKey: 'id',
+        header: 'ID',
+        size: 50,
+      },
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'middleName',
+        header: 'Middle Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+    ],
     [],
+    //end
   );
 
   const table = useMaterialReactTable({

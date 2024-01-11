@@ -4,11 +4,14 @@ import {
   useMaterialReactTable,
   type MRT_ColumnDef,
 } from 'material-react-table';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery } from '@mui/material';
 import { data, type Person } from './makeData';
 
 const Example = () => {
+  const isMobile = useMediaQuery('(max-width: 720px)');
+
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
+    //column definitions...
     () => [
       {
         accessorKey: 'id',
@@ -29,22 +32,29 @@ const Example = () => {
       },
     ],
     [],
+    //end
   );
 
   const table = useMaterialReactTable({
     columns,
     data,
-    displayColumnDefOptions: {
-      'mrt-row-expand': {
-        muiTableHeadCellProps: {
-          align: 'right',
-        },
-        muiTableBodyCellProps: {
-          align: 'right',
-        },
-      },
+    // displayColumnDefOptions: { //built-in now in v2.6.0 when positionExpandColumn is 'last'
+    //   'mrt-row-expand': {
+    //     muiTableHeadCellProps: {
+    //       align: 'right',
+    //     },
+    //     muiTableBodyCellProps: {
+    //       align: 'right',
+    //     },
+    //   },
+    // },
+    enableColumnPinning: isMobile, //alternative
+    initialState: {
+      expanded: true,
     },
-    initialState: { expanded: true },
+    state: {
+      columnPinning: isMobile ? { right: ['mrt-row-expand'] } : {}, //alternative
+    },
     renderDetailPanel: ({ row }) => (
       <Box
         sx={{
@@ -60,6 +70,7 @@ const Example = () => {
         <Typography>Country: {row.original.country}</Typography>
       </Box>
     ),
+    positionExpandColumn: 'last',
   });
 
   return <MaterialReactTable table={table} />;

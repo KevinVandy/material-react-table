@@ -97,7 +97,7 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
           transition: !enableRowVirtualization
             ? 'all 150ms ease-in-out'
             : undefined,
-          width: `${table.getTotalSize()}px`,
+          width: `100%`,
           ...(parseFromValuesOrFunc(tableCellProps?.sx, theme) as any),
         })}
       >

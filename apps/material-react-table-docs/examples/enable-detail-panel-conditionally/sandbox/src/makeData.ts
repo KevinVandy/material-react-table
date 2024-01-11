@@ -3,13 +3,13 @@ export type Person = {
   firstName: string;
   middleName: string;
   lastName: string;
-  address: string;
-  city: string;
-  state: string;
-  country: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  country?: string;
 };
 
-export const data: Person[] = [
+export const data = [
   {
     id: '1',
     firstName: 'Dylan',
@@ -35,10 +35,6 @@ export const data: Person[] = [
     firstName: 'Ervin',
     middleName: 'Kris',
     lastName: 'Reinger',
-    address: '566 Brakus Inlet',
-    city: 'South Linda',
-    state: 'West Virginia',
-    country: 'United States',
   },
   {
     id: '4',
@@ -55,9 +51,5 @@ export const data: Person[] = [
     firstName: 'Branson',
     middleName: 'John',
     lastName: 'Frami',
-    address: '32188 Larkin Turnpike',
-    city: 'Charleston',
-    state: 'South Carolina',
-    country: 'United States',
   },
 ];

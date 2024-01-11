@@ -4,6 +4,8 @@ import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable
 import Example from '../../../examples/enable-detail-panel';
 import AlternateExample from '../../../examples/alternate-detail-panel';
 import ChartDetailPanelExample from '../../../examples/chart-detail-panel';
+import ExampleVirtualized from '../../../examples/enable-detail-panel-virtualized';
+import ExampleConditional from '../../../examples/enable-detail-panel-conditionally';
 
 <Head>
   <title>{'Detail Panel Expanding Guide - Material React Table V2 Docs'}</title>
@@ -13,7 +15,7 @@ import ChartDetailPanelExample from '../../../examples/chart-detail-panel';
   />
 </Head>
 
-## Detail Panel (Expanding) Feature Guide
+## Detail Panel Feature Guide
 
 Material React Table has multiple kinds of expanding features. This guide will show you how to use the detail panel feature to expand a single row to show more information for that row.
 
@@ -25,6 +27,10 @@ If you are looking for how to expand multiple rows from a tree data structure, s
   onlyOptions={
     new Set([
       'displayColumnDefOptions',
+      'enableExpandAll',
+      'muiDetailPanelProps',
+      'muiExpandAllButtonProps',
+      'muiExpandButtonProps',
       'positionExpandColumn',
       'renderDetailPanel',
     ])
@@ -44,6 +50,62 @@ The recommended way to access the row data for the detail panel is to pull from 
 > Using `row.getValue('columnId')` will not work for data that does not have its own column. Using `row.original.columnId` is recommended for detail panels since the data in the detail panel usually does not have its own column.
 
 <Example />
+
+### Disable Expand All Button
+
+If you don't want to show the expand all button, you can set the `enableExpandAll` table option to `false`.
+
+```jsx
+const table = useMaterialReactTable({
+  data,
+  columns,
+  enableExpandAll: false,
+});
+```
+
+### Enable Detail Panel Conditionally Per Row
+
+If the return value of your `renderDetailPanel` function returns `null` or a falsy value for a row, the expand button will be disabled for that row.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  renderDetailPanel: ({ row }) =>
+    row.original.someCondition ? <DetailPanelContent /> : null,
+});
+```
+
+One thing to note about the implementation of conditional detail panels is that additional `<tr>` elements will still be created for all rows, even if they do not have detail panel content. It is implemented this way in order to avoid bugs with row virtualization, or striped row CSS.
+
+### Rotate Expand Icon
+
+If you don't like the default rotation styles for the expand icons, you can pass in custom CSS to the `muiExpandButtonProps` and `muiExpandAllButtonProps` table options.
+
+### Customize or Style Detail Panel
+
+You can use the `muiDetailPanelProps` table option to pass in custom props to the detail panel. These props are passed to the `<td>` element that contains the detail panel content.
+
+If you need to customize the `<tr>` element containing the detail panel cell, you can just use the `muiTableBodyRowProps` table option that you use for customizing all rows. There is a `isDetailPanel` parameter that is available to you to target only detail panel rows.
+
+```jsx
+const table = useMaterialReactTable({
+  data,
+  columns,
+  muiDetailPanelProps: ({ row }) => ({
+    sx: {
+      //...
+    },
+  }),
+  muiTableBodyRowProps: ({ isDetailPanel, row }) => ({
+    sx: {
+      // isDetailPanel ? ... : ...
+    },
+  }),
+});
+```
+
+<ExampleConditional />
 
 ### Expand Detail Panel By Default
 
@@ -68,6 +130,8 @@ const table = useMaterialReactTable({
 
 If you want to position the expand column last, you can set the `positionExpandColumn` table option to `'last'`.
 
+Alternatively though, you could use the [Column Pinning Feature](/docs/guides/column-pinning) to pin the expand column to the right side of the table.
+
 <AlternateExample />
 
 ### Detail Panel With Charts
@@ -75,5 +139,13 @@ If you want to position the expand column last, you can set the `positionExpandC
 The detail panel can be used to show a variety of content. Here's an example of a detail panel rendering charts with the [MUI X Charts](https://mui.com/x/react-charts/getting-started/) library.
 
 <ChartDetailPanelExample />
+
+### Detail Panels with Virtualization
+
+> New in v2.6.0
+
+If you are using row virtualization, detail panels will now work more properly as of version 2.6.0. However, there are some caveats to be aware of. In order for row virtualization to work well, many of the animation/transitions have been disabled. This means that the detail panel will not animate open and closed. It will simply appear and disappear.
+
+<ExampleVirtualized />
 
 View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-detail-panel-examples-)**

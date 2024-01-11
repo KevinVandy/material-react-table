@@ -68,6 +68,7 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>(
       tableOptions.groupedColumnMode,
       tableOptions.localization,
       tableOptions.positionActionsColumn,
+      tableOptions.positionExpandColumn,
       tableOptions.renderDetailPanel,
       tableOptions.renderRowActionMenuItems,
       tableOptions.renderRowActions,
@@ -160,6 +161,13 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
     order.includes(id) &&
     showExpandColumn(tableOptions, tableOptions.state?.grouping ?? grouping)
   ) {
+    const alignProps =
+      tableOptions.positionExpandColumn === 'last'
+        ? ({
+            align: 'right',
+          } as const)
+        : undefined;
+
     return {
       Cell: ({ cell, column, row, table }) => {
         const expandButtonProps = { row, table };
@@ -207,6 +215,8 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
             );
           }
         : undefined,
+      muiTableBodyCellProps: alignProps,
+      muiTableHeadCellProps: alignProps,
       ...defaultDisplayColumnProps(
         tableOptions,
         id,
