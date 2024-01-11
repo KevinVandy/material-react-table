@@ -94,3 +94,22 @@ export const minHeightParent = () => (
     />
   </div>
 );
+
+export const ContainerHeight = () => (
+  <div style={{ height: '300px' }}>
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      muiTableContainerProps={({ table }) => ({
+        sx: {
+          height: `calc(100% - ${table.refs.topToolbarRef.current?.offsetHeight}px - ${table.refs.bottomToolbarRef.current?.offsetHeight}px)`,
+        },
+      })}
+      muiTablePaperProps={{
+        sx: {
+          height: '100%',
+        },
+      }}
+    />
+  </div>
+);
