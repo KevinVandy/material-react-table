@@ -128,3 +128,8 @@ export const getCommonToolbarStyles = <TData extends MRT_RowData>({
   transition: 'all 150ms ease-in-out',
   zIndex: 1,
 });
+
+export const flipIconStyles = (theme: Theme) =>
+  theme.direction === 'rtl'
+    ? { style: { transform: 'scaleX(-1)' } }
+    : undefined;

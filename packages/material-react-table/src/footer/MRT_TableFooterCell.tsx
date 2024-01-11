@@ -1,4 +1,5 @@
 import TableCell, { type TableCellProps } from '@mui/material/TableCell';
+import { useTheme } from '@mui/material/styles';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { getCommonMRTCellStyles } from '../style.utils';
 import {
@@ -17,6 +18,7 @@ export const MRT_TableFooterCell = <TData extends MRT_RowData>({
   table,
   ...rest
 }: Props<TData>) => {
+  const theme = useTheme();
   const {
     getState,
     options: { layoutMode, muiTableFooterCellProps },
@@ -35,9 +37,15 @@ export const MRT_TableFooterCell = <TData extends MRT_RowData>({
 
   return (
     <TableCell
-      align={columnDefType === 'group' ? 'center' : 'left'}
+      align={
+        columnDefType === 'group'
+          ? 'center'
+          : theme.direction === 'rtl'
+            ? 'right'
+            : 'left'
+      }
       colSpan={footer.colSpan}
-      variant="head"
+      variant="footer"
       {...tableCellProps}
       sx={(theme) => ({
         display: layoutMode?.startsWith('grid') ? 'grid' : undefined,

@@ -154,7 +154,7 @@ export const EnableRowVirtualizationWithColumnResizing = () => (
 export const EnableRowVirtualizationWithDetailPanel = () => (
   <MaterialReactTable
     columns={longColumns}
-    data={longData.slice(0, 100)}
+    data={longData}
     enableBottomToolbar={false}
     enablePagination={false}
     enableRowNumbers

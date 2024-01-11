@@ -1,9 +1,9 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShareIcon from '@mui/icons-material/Share';
-import { styled } from '@mui/material';
 import Button from '@mui/material/Button';
 import MuiMenuItem from '@mui/material/MenuItem';
+import { styled } from '@mui/material/styles';
 import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
 import { type Meta } from '@storybook/react';

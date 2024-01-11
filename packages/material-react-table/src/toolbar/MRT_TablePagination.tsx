@@ -7,7 +7,9 @@ import PaginationItem from '@mui/material/PaginationItem';
 import Select, { type SelectProps } from '@mui/material/Select';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material/styles';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { flipIconStyles } from '../style.utils';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
 const defaultRowsPerPage = [5, 10, 15, 20, 25, 30, 50, 100];
@@ -30,6 +32,8 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
   table,
   ...rest
 }: Props<TData>) => {
+  const theme = useTheme();
+
   const {
     getPrePaginationRowModel,
     getState,
@@ -177,7 +181,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
                     onClick={() => setPageIndex(0)}
                     size="small"
                   >
-                    <FirstPageIcon />
+                    <FirstPageIcon {...flipIconStyles(theme)} />
                   </IconButton>
                 </span>
               </Tooltip>
@@ -190,7 +194,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
                   onClick={() => setPageIndex(pageIndex - 1)}
                   size="small"
                 >
-                  <ChevronLeftIcon />
+                  <ChevronLeftIcon {...flipIconStyles(theme)} />
                 </IconButton>
               </span>
             </Tooltip>
@@ -202,7 +206,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
                   onClick={() => setPageIndex(pageIndex + 1)}
                   size="small"
                 >
-                  <ChevronRightIcon />
+                  <ChevronRightIcon {...flipIconStyles(theme)} />
                 </IconButton>
               </span>
             </Tooltip>
@@ -215,7 +219,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
                     onClick={() => setPageIndex(numberOfPages - 1)}
                     size="small"
                   >
-                    <LastPageIcon />
+                    <LastPageIcon {...flipIconStyles(theme)} />
                   </IconButton>
                 </span>
               </Tooltip>

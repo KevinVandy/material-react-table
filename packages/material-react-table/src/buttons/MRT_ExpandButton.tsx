@@ -1,6 +1,7 @@
 import { type MouseEvent } from 'react';
 import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import { useTheme } from '@mui/material/styles';
 import { parseFromValuesOrFunc } from '../column.utils';
 import {
   type MRT_Row,
@@ -17,12 +18,14 @@ export const MRT_ExpandButton = <TData extends MRT_RowData>({
   row,
   table,
 }: Props<TData>) => {
+  const theme = useTheme();
   const {
     getState,
     options: {
       icons: { ExpandMoreIcon },
       localization,
       muiExpandButtonProps,
+      positionExpandColumn,
       renderDetailPanel,
     },
   } = table;
@@ -42,9 +45,11 @@ export const MRT_ExpandButton = <TData extends MRT_RowData>({
     iconButtonProps?.onClick?.(event);
   };
 
+  const detailPanel = !!renderDetailPanel?.({ row, table });
+
   return (
     <Tooltip
-      disableHoverListener={!canExpand && !renderDetailPanel}
+      disableHoverListener={!canExpand && !detailPanel}
       enterDelay={1000}
       enterNextDelay={1000}
       title={
@@ -55,12 +60,12 @@ export const MRT_ExpandButton = <TData extends MRT_RowData>({
       <span>
         <IconButton
           aria-label={localization.expand}
-          disabled={!canExpand && !renderDetailPanel}
+          disabled={!canExpand && !detailPanel}
           {...iconButtonProps}
           onClick={handleToggleExpand}
           sx={(theme) => ({
             height: density === 'compact' ? '1.75rem' : '2.25rem',
-            opacity: !canExpand && !renderDetailPanel ? 0.3 : 1,
+            opacity: !canExpand && !detailPanel ? 0.3 : 1,
             width: density === 'compact' ? '1.75rem' : '2.25rem',
             ...(parseFromValuesOrFunc(iconButtonProps?.sx, theme) as any),
           })}
@@ -70,7 +75,14 @@ export const MRT_ExpandButton = <TData extends MRT_RowData>({
             <ExpandMoreIcon
               style={{
                 transform: `rotate(${
-                  !canExpand && !renderDetailPanel ? -90 : isExpanded ? -180 : 0
+                  !canExpand && !renderDetailPanel
+                    ? positionExpandColumn === 'last' ||
+                      theme.direction === 'rtl'
+                      ? 90
+                      : -90
+                    : isExpanded
+                      ? -180
+                      : 0
                 }deg)`,
                 transition: 'transform 150ms',
               }}

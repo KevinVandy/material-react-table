@@ -93,7 +93,8 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
       : localization.toggleSelectRow,
     checked: selectAll
       ? allRowsSelected
-      : row?.getIsSelected() || row?.getIsAllSubRowsSelected(),
+      : row?.getIsSelected() ||
+        (row?.getIsAllSubRowsSelected() && row.getCanSelectSubRows()),
     disabled:
       isLoading || (row && !row.getCanSelect()) || row?.id === 'mrt-row-create',
     inputProps: {
@@ -139,7 +140,7 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
           indeterminate={
             selectAll
               ? table.getIsSomeRowsSelected() && !allRowsSelected
-              : row?.getIsSomeSelected()
+              : row?.getIsSomeSelected() && row.getCanSelectSubRows()
           }
           {...commonProps}
         />

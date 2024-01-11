@@ -1,4 +1,6 @@
+import { ThemeProvider, useTheme } from '@mui/material/styles';
 import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
+import { MRT_Localization_HE } from '../../src/locales/he';
 import { faker } from '@faker-js/faker';
 import { type Meta } from '@storybook/react';
 
@@ -63,6 +65,31 @@ const data = [...Array(5)].map(() => ({
 export const SubRowTreeEnabledDefault = () => (
   <MaterialReactTable columns={columns} data={data} enableExpanding />
 );
+
+export const SubRowTreeEnabledPositionLast = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableExpanding
+    positionExpandColumn="last"
+  />
+);
+
+export const SubRowTreeEnabledDefaultRTL = () => {
+  const theme = useTheme();
+  return (
+    <ThemeProvider theme={{ ...theme, direction: 'rtl' }}>
+      <div style={{ direction: 'rtl' }}>
+        <MaterialReactTable
+          columns={columns}
+          data={data}
+          enableExpanding
+          localization={MRT_Localization_HE}
+        />
+      </div>
+    </ThemeProvider>
+  );
+};
 
 export const SubRowTreeDisableExpandAll = () => (
   <MaterialReactTable

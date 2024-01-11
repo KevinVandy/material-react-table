@@ -1,5 +1,5 @@
-import { alpha } from '@mui/material';
 import TableRow, { type TableRowProps } from '@mui/material/TableRow';
+import { alpha } from '@mui/material/styles';
 import { MRT_TableHeadCell } from './MRT_TableHeadCell';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { getMRTTheme } from '../style.utils';

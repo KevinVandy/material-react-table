@@ -29,8 +29,8 @@ interface Props<TData extends MRT_RowData> extends TableCellProps {
   cell: MRT_Cell<TData>;
   measureElement?: (element: HTMLTableCellElement) => void;
   numRows?: number;
-  rowIndex: number;
   rowRef: RefObject<HTMLTableRowElement>;
+  staticRowIndex: number;
   table: MRT_TableInstance<TData>;
   virtualColumnIndex?: number;
 }
@@ -39,8 +39,8 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
   cell,
   measureElement,
   numRows,
-  rowIndex,
   rowRef,
+  staticRowIndex,
   table,
   virtualColumnIndex,
   ...rest
@@ -60,6 +60,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       layoutMode,
       muiSkeletonProps,
       muiTableBodyCellProps,
+      positionExpandColumn,
     },
     refs: { editInputRefs },
     setEditingCell,
@@ -116,7 +117,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     const isHoveredRow = hoveredRow?.id === row.id;
     const isFirstColumn = getIsFirstColumn(column, table);
     const isLastColumn = getIsLastColumn(column, table);
-    const isLastRow = numRows && rowIndex === numRows - 1;
+    const isLastRow = numRows && staticRowIndex === numRows - 1;
     const isResizingColumn = columnSizingInfo.isResizingColumn === column.id;
     const showResizeBorder =
       isResizingColumn && columnResizeMode === 'onChange';
@@ -162,7 +163,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     draggingRow,
     hoveredColumn,
     hoveredRow,
-    rowIndex,
+    staticRowIndex,
   ]);
 
   const isEditable =
@@ -214,6 +215,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
 
   return (
     <TableCell
+      align={theme.direction === 'rtl' ? 'right' : 'left'}
       data-index={virtualColumnIndex}
       ref={(node: HTMLTableCellElement) => {
         if (node) {
@@ -253,7 +255,9 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
                 ? '1rem 1.25rem'
                 : '1.5rem',
         textOverflow: columnDefType !== 'display' ? 'ellipsis' : undefined,
-        [theme.direction === 'rtl' ? 'pr' : 'pl']:
+        [theme.direction === 'rtl' || positionExpandColumn === 'last'
+          ? 'pr'
+          : 'pl']:
           column.id === 'mrt-row-expand'
             ? `${
                 row.depth +
@@ -299,7 +303,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
               renderedCellValue: cell.renderValue() as any,
               row,
               rowRef,
-              staticRowIndex: rowIndex,
+              staticRowIndex,
               table,
             })
           ) : isCreating || isEditing ? (

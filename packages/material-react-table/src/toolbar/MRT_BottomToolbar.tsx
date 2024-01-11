@@ -1,5 +1,5 @@
-import { alpha } from '@mui/material';
 import Box, { type BoxProps } from '@mui/material/Box';
+import { alpha } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
 import { MRT_TablePagination } from './MRT_TablePagination';

@@ -12,6 +12,15 @@ import Head from 'next/head';
 
 ### Version 2
 
+#### Version 2.6.0 - 2024-01-11 (Coming Soon Once more testing is done)
+
+- Added support for Detail Panels and Row Virtualization at the same time
+- Added support for Conditional Detail Panels (expand button is disabled when renderDetailPanel returns falsy value). Empty detail panels `<tr>` still render for virtualization and striped rows to work properly.
+- Fixed Row Selection indeterminate and checked state when sub-row selection is off
+- Fixed Expand Row Button padding and rotation in RTL mode
+- Fixed Pagination Icon Buttons in RTL mode
+- Set a default "right" cell alignment when theme.direction is "rtl"
+
 #### Version 2.5.2 - 2024-01-10
 
 - Fixed bug where Date and Time Picker filters were not opening properly on mobile devices

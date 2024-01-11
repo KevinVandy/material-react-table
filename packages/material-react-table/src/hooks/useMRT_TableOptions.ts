@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useTheme } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { MRT_AggregationFns } from '../aggregationFns';
 import { MRT_FilterFns } from '../filterFns';
 import { MRT_Default_Icons } from '../icons';

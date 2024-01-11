@@ -8,13 +8,15 @@ import { getMRTTheme } from '../style.utils';
 import {
   type MRT_Row,
   type MRT_RowData,
+  type MRT_RowVirtualizer,
   type MRT_TableInstance,
 } from '../types';
 
 interface Props<TData extends MRT_RowData> extends TableCellProps {
   parentRowRef: RefObject<HTMLTableRowElement>;
   row: MRT_Row<TData>;
-  rowIndex: number;
+  rowVirtualizer?: MRT_RowVirtualizer;
+  staticRowIndex: number;
   table: MRT_TableInstance<TData>;
   virtualRow?: VirtualItem;
 }
@@ -22,7 +24,8 @@ interface Props<TData extends MRT_RowData> extends TableCellProps {
 export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
   parentRowRef,
   row,
-  rowIndex,
+  rowVirtualizer,
+  staticRowIndex,
   table,
   virtualRow,
   ...rest
@@ -31,6 +34,7 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
     getState,
     getVisibleLeafColumns,
     options: {
+      enableRowVirtualization,
       layoutMode,
       muiDetailPanelProps,
       muiTableBodyRowProps,
@@ -42,7 +46,7 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
   const tableRowProps = parseFromValuesOrFunc(muiTableBodyRowProps, {
     isDetailPanel: true,
     row,
-    staticRowIndex: rowIndex,
+    staticRowIndex,
     table,
   });
 
@@ -54,9 +58,17 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
     ...rest,
   };
 
+  const DetailPanel = !isLoading && renderDetailPanel?.({ row, table });
+
   return (
     <TableRow
       className="Mui-TableBodyCell-DetailPanel"
+      data-index={renderDetailPanel ? staticRowIndex * 2 + 1 : staticRowIndex}
+      ref={(node: HTMLTableRowElement) => {
+        if (node) {
+          rowVirtualizer?.measureElement?.(node);
+        }
+      }}
       {...tableRowProps}
       sx={(theme) => ({
         display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
@@ -68,7 +80,6 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
           ? `translateY(${virtualRow?.start}px)`
           : undefined,
         width: '100%',
-        zIndex: virtualRow ? 2 : undefined,
         ...(parseFromValuesOrFunc(tableRowProps?.sx, theme) as any),
       })}
     >
@@ -82,15 +93,19 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
             : undefined,
           borderBottom: !row.getIsExpanded() ? 'none' : undefined,
           display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
-          py: row.getIsExpanded() ? '1rem' : 0,
-          transition: 'all 150ms ease-in-out',
+          py: !!DetailPanel && row.getIsExpanded() ? '1rem' : 0,
+          transition: !enableRowVirtualization
+            ? 'all 150ms ease-in-out'
+            : undefined,
           width: `${table.getTotalSize()}px`,
           ...(parseFromValuesOrFunc(tableCellProps?.sx, theme) as any),
         })}
       >
-        {renderDetailPanel && (
-          <Collapse in={row.getIsExpanded()} mountOnEnter unmountOnExit>
-            {!isLoading && renderDetailPanel({ row, table })}
+        {enableRowVirtualization ? (
+          row.getIsExpanded() && DetailPanel
+        ) : (
+          <Collapse in={!!row.getIsExpanded()} mountOnEnter unmountOnExit>
+            {DetailPanel}
           </Collapse>
         )}
       </TableCell>

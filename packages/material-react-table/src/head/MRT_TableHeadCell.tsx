@@ -130,7 +130,7 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
     }
   };
 
-  const headerElement =
+  const HeaderElement =
     parseFromValuesOrFunc(columnDef.Header, {
       column,
       header,
@@ -139,7 +139,13 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
 
   return (
     <TableCell
-      align={columnDefType === 'group' ? 'center' : 'left'}
+      align={
+        columnDefType === 'group'
+          ? 'center'
+          : theme.direction === 'rtl'
+            ? 'right'
+            : 'left'
+      }
       colSpan={header.colSpan}
       onDragEnter={handleDragEnter}
       ref={(node: HTMLTableCellElement) => {
@@ -255,7 +261,7 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
                     columnDefType === 'data' ? columnDef.header : undefined
                   }
                 >
-                  {headerElement}
+                  {HeaderElement}
                 </Box>
                 {column.getCanFilter() && (
                   <MRT_TableHeadCellFilterLabel header={header} table={table} />

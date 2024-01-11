@@ -117,6 +117,49 @@ export const DetailPanelEnabledConditional = () => (
       state: faker.location.state(),
       zipCode: faker.location.zipCode(),
     }))}
+    renderDetailPanel={({ row }) =>
+      row.original.age > 50 ? (
+        <div style={{ display: 'grid' }}>
+          <span>City: {row.original.city}</span>
+          <span>State: {row.original.state}</span>
+          <span>Zip: {row.original.zipCode}</span>
+          <span>Phone: {row.original.phone}</span>
+        </div>
+      ) : undefined
+    }
+  />
+);
+
+export const DetailPanelEnabledConditionalHide = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+      {
+        accessorKey: 'age',
+        header: 'Age',
+      },
+      {
+        accessorKey: 'address',
+        header: 'Address',
+      },
+    ]}
+    data={[...Array(10)].map(() => ({
+      address: faker.location.streetAddress(),
+      age: faker.number.int(100) + 5,
+      city: faker.location.city(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      phone: faker.phone.number(),
+      state: faker.location.state(),
+      zipCode: faker.location.zipCode(),
+    }))}
     muiExpandButtonProps={({ row }) => ({
       sx: {
         display: row.original.age > 50 ? 'flex' : 'none',
@@ -131,7 +174,7 @@ export const DetailPanelEnabledConditional = () => (
           <span>Phone: {row.original.phone}</span>
         </div>
       ) : (
-        'Not Enabled'
+        'No details available'
       )
     }
   />
