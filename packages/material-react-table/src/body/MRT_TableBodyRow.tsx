@@ -136,13 +136,15 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
         data-index={renderDetailPanel ? staticRowIndex * 2 : staticRowIndex}
         data-pinned={!!isPinned || undefined}
         data-selected={
-          row.getIsSelected() || row.getIsAllSubRowsSelected() || undefined
+          row?.getIsSelected() ||
+          (row?.getIsAllSubRowsSelected() && row.getCanSelectSubRows()) ||
+          undefined
         }
         onDragEnter={handleDragEnter}
         ref={(node: HTMLTableRowElement) => {
           if (node) {
             rowRef.current = node;
-            rowVirtualizer?.measureElement?.(node);
+            rowVirtualizer?.measureElement(node);
           }
         }}
         selected={row.getIsSelected()}

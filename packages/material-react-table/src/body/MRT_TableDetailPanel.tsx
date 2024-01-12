@@ -1,5 +1,4 @@
 import { type RefObject } from 'react';
-import { type VirtualItem } from '@tanstack/react-virtual';
 import Collapse from '@mui/material/Collapse';
 import TableCell, { type TableCellProps } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
@@ -10,6 +9,7 @@ import {
   type MRT_RowData,
   type MRT_RowVirtualizer,
   type MRT_TableInstance,
+  type MRT_VirtualItem,
 } from '../types';
 
 interface Props<TData extends MRT_RowData> extends TableCellProps {
@@ -18,7 +18,7 @@ interface Props<TData extends MRT_RowData> extends TableCellProps {
   rowVirtualizer?: MRT_RowVirtualizer;
   staticRowIndex: number;
   table: MRT_TableInstance<TData>;
-  virtualRow?: VirtualItem;
+  virtualRow?: MRT_VirtualItem;
 }
 
 export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
@@ -104,7 +104,7 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
         {enableRowVirtualization ? (
           row.getIsExpanded() && DetailPanel
         ) : (
-          <Collapse in={!!row.getIsExpanded()} mountOnEnter unmountOnExit>
+          <Collapse in={row.getIsExpanded()} mountOnEnter unmountOnExit>
             {DetailPanel}
           </Collapse>
         )}
