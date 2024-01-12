@@ -12,21 +12,16 @@ const Example = () => {
     //column definitions...
     () => [
       {
-        accessorKey: 'id',
-        header: 'ID',
-        size: 50,
-      },
-      {
         accessorKey: 'firstName',
         header: 'First Name',
       },
       {
-        accessorKey: 'middleName',
-        header: 'Middle Name',
-      },
-      {
         accessorKey: 'lastName',
         header: 'Last Name',
+      },
+      {
+        accessorKey: 'email',
+        header: 'Email',
       },
     ],
     [],
@@ -36,7 +31,14 @@ const Example = () => {
   const table = useMaterialReactTable({
     columns,
     data,
+    enableBottomToolbar: false,
+    enablePagination: false,
     enableRowVirtualization: true,
+    muiTableContainerProps: {
+      sx: {
+        maxHeight: '500px',
+      },
+    },
     renderDetailPanel: ({ row }) => (
       <Box
         sx={{
@@ -52,6 +54,24 @@ const Example = () => {
         <Typography>Country: {row.original.country}</Typography>
       </Box>
     ),
+    rowVirtualizerOptions: ({ table }) => {
+      const { density, expanded } = table.getState();
+      return {
+        //adjust to your needs
+        estimateSize: (index) =>
+          index % 2 === 1 //even rows are normal rows, odd rows are detail panels
+            ? //Estimate open detail panels as 80px tall, closed detail panels as 0px tall
+              expanded === true
+              ? 80
+              : 0
+            : //estimate normal row heights
+              density === 'compact'
+              ? 37
+              : density === 'comfortable'
+                ? 58
+                : 73,
+      };
+    },
   });
 
   return <MaterialReactTable table={table} />;

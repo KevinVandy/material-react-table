@@ -146,6 +146,35 @@ The detail panel can be used to show a variety of content. Here's an example of 
 
 If you are using row virtualization, detail panels will now work more properly as of version 2.6.0. However, there are some caveats to be aware of. In order for row virtualization to work well, many of the animation/transitions have been disabled. This means that the detail panel will not animate open and closed. It will simply appear and disappear.
 
+You also may need to specify some more accurate row height estimations for the row virtualizer in order to achieve the best scrollbar behavior. See the [Row Virtualization Guide](/docs/guides/row-virtualization) for the full details on this topic, but here's an example of how you might do that.
+
+```jsx
+const table = useMaterialReactTable({
+  data,
+  columns,
+  enableRowVirtualization: true,
+  renderDetailPanel: ({ row }) => <DetailPanelContent />,
+  rowVirtualizerOptions: ({ table }) => {
+    const { density, expanded } = table.getState();
+    return {
+      //adjust to your needs
+      estimateSize: (index) =>
+        index % 2 === 1 //even rows are normal rows, odd rows are detail panels
+          ? //Estimate open detail panels as 80px tall, closed detail panels as 0px tall
+            expanded === true
+            ? 80
+            : 0
+          : //estimate normal row heights
+            density === 'compact'
+            ? 37
+            : density === 'comfortable'
+              ? 58
+              : 73,
+    };
+  },
+});
+```
+
 <ExampleVirtualized />
 
 View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-detail-panel-examples-)**
