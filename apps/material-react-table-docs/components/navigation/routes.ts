@@ -185,14 +185,6 @@ export const routes: Array<RouteItem> = [
             label: 'Expanding Parsed Tree Example',
           },
           {
-            href: '/docs/examples/detail-panel',
-            label: 'Detail Panel (Expanding) Example',
-          },
-          {
-            href: '/docs/examples/chart-detail-panel',
-            label: 'Chart Detail Panel Example',
-          },
-          {
             href: '/docs/examples/column-grouping',
             label: 'Column Grouping Example',
           },
@@ -203,6 +195,14 @@ export const routes: Array<RouteItem> = [
           {
             href: '/docs/examples/aggregation-and-grouping',
             label: 'Aggregation Example',
+          },
+          {
+            href: '/docs/examples/detail-panel',
+            label: 'Detail Panel (Expanding) Example',
+          },
+          {
+            href: '/docs/examples/chart-detail-panel',
+            label: 'Chart Detail Panel Example',
           },
         ],
       },
@@ -265,6 +265,10 @@ export const routes: Array<RouteItem> = [
           {
             href: '/docs/examples/react-query',
             label: 'React Query Example',
+          },
+          {
+            href: '/docs/examples/lazy-detail-panel',
+            label: 'Lazy Detail Panel Example',
           },
           {
             href: '/docs/examples/dynamic-columns',

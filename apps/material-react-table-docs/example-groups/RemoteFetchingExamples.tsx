@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { Box, Tab, Tabs } from '@mui/material';
 import ReactQueryExample from '../examples/react-query';
+import LazyDetailPanelExample from '../examples/lazy-detail-panel';
 import DynamicColumns from '../examples/dynamic-columns';
 import RemoteExample from '../examples/remote';
 import { useState } from 'react';
@@ -17,6 +18,8 @@ const RemoteFetchingExamples = ({ isPage = false }) => {
     <>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs
+          scrollButtons="auto"
+          variant="scrollable"
           textColor="secondary"
           indicatorColor="secondary"
           value={isPage ? pathname.split('/').pop() : activeTab}
@@ -27,6 +30,7 @@ const RemoteFetchingExamples = ({ isPage = false }) => {
           }
         >
           <Tab label="React Query" value="react-query" />
+          <Tab label="Lazy Detail Panel" value="lazy-detail-panel" />
           <Tab label="Dynamic Columns" value="dynamic-columns" />
           <Tab label="useEffect" value="remote" />
           <Tab
@@ -64,6 +68,7 @@ const RemoteFetchingExamples = ({ isPage = false }) => {
       </Box>
       <Box>
         {activeTab === 'react-query' && <ReactQueryExample />}
+        {activeTab === 'lazy-detail-panel' && <LazyDetailPanelExample />}
         {activeTab === 'dynamic-columns' && <DynamicColumns />}
         {activeTab === 'remote' && <RemoteExample />}
       </Box>

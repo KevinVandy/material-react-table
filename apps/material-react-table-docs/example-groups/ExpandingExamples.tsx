@@ -3,7 +3,7 @@ import { Box, Tab, Tabs } from '@mui/material';
 import EnableColumnGroupingExample from '../examples/enable-column-grouping';
 import CustomizeRemoveColumnGroupingExample from '../examples/customize-remove-column-grouping';
 import AggregationAndGroupingExample from '../examples/aggregation-and-grouping';
-import DetailExample from '../examples/enable-detail-panel';
+import DetailExample from '../examples/enable-detail-panel-conditionally';
 import ChartDetailPanelExample from '../examples/chart-detail-panel';
 import ExpandingTreeExample from '../examples/expanding-tree-expanded';
 import ExpandingParsedTreeExample from '../examples/expanding-tree-flat-parse';
@@ -21,6 +21,8 @@ const ExpandingExamples = ({ isPage = false }) => {
     <>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs
+          scrollButtons="auto"
+          variant="scrollable"
           textColor="secondary"
           indicatorColor="secondary"
           value={isPage ? pathname.split('/').pop() : activeTab}
@@ -32,11 +34,22 @@ const ExpandingExamples = ({ isPage = false }) => {
         >
           <Tab label="Expanding Tree" value="expanding-tree" />
           <Tab label="Parsed Tree" value="expanding-tree-flat-parse" />
-          <Tab label="Detail Panel" value="detail-panel" />
-          <Tab label="Chart Detail Panel" value="chart-detail-panel" />
           <Tab label="Column Grouping" value="column-grouping" />
           <Tab label="Customized Grouping" value="customized-grouping" />
           <Tab label="Aggregation" value="aggregation-and-grouping" />
+          <Tab label="Detail Panel" value="detail-panel" />
+          <Tab label="Chart Detail Panel" value="chart-detail-panel" />
+          <Link href="/docs/examples/lazy-detail-panel" passHref legacyBehavior>
+            <Tab
+              label={
+                <Box>
+                  Lazy Detail Panel
+                  <LaunchIcon sx={{ fontSize: '1rem' }} />
+                </Box>
+              }
+              value="more"
+            />
+          </Link>
           <Link href="/docs/examples" passHref legacyBehavior>
             <Tab
               label={

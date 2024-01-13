@@ -1,0 +1,28 @@
+import Head from 'next/head';
+import Examples from '../../../example-groups/RemoteFetchingExamples';
+
+<Head>
+  <title>{'Lazy Detail Panel Example - Material React Table V2 Docs'}</title>
+  <meta
+    name="description"
+    content="A Material React Table example show how use use expandable rows to show additional information about a row and load the data for the detail panel only after the user expands the row."
+  />
+  <meta
+    property="og:title"
+    content="Lazy Detail Panel Material React Table Example"
+  />
+  <meta
+    property="og:description"
+    content="A Material React Table example show how use use expandable rows to show additional information about a row and load the data for the detail panel only after the user expands the row."
+  />
+</Head>
+
+## Lazy Detail Panel Example
+
+Fetching the additional data for the detail panels only after the user clicks to expand the row can be a good way to improve performance, and it is pretty easy to implement in Material React Table.
+
+It's even easier if you are using [React Query.](https://tanstack.com/query/latest) In this example, react query is used to fetch the data for the detail panel, but only after the user clicks to expand the row. The data is also cached for a certain period of time so that when the detail panel is closed and reopened, the data is already available and won't need to be re-fetched.
+
+<Examples isPage />
+
+View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-aggregation-examples)**

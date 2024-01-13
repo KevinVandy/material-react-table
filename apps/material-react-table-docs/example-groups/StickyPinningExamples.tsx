@@ -19,6 +19,8 @@ const StickyPinningExamples = ({ isPage = false }) => {
     <>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs
+          scrollButtons="auto"
+          variant="scrollable"
           textColor="secondary"
           indicatorColor="secondary"
           value={isPage ? pathname.split('/').pop() : activeTab}
