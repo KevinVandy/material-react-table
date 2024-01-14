@@ -6,8 +6,14 @@ import { type NextApiRequest, type NextApiResponse } from 'next';
 
 //This is just a simple mock of a backend API where you would do server-side pagination, filtering, and sorting
 //You would most likely want way more validation and error handling than this in a real world application
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  await new Promise((resolve) => setTimeout(resolve, 500));
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+  if (process.env.NODE_ENV === 'development') {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
+  
   let dbData = getData();
   const { start, size, filters, sorting, globalFilter } = req.query as Record<
     string,

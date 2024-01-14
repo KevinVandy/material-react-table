@@ -9,8 +9,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  //simulate slow API response
-  await new Promise((resolve) => setTimeout(resolve, 500));
+  if (process.env.NODE_ENV === 'development') {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
 
   const { start, size, filters, sorting, globalFilter, expandedRowIds } =
     req.query as Record<string, string>;
