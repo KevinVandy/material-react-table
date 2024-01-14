@@ -1,5 +1,5 @@
-import { ThemeProvider } from '@mui/material';
-import { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { theme } from './MuiTheme';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -43,6 +43,7 @@ export const ThemeContextProvider = ({ children }) => {
         setSecondaryColor,
       }}
     >
+      <CssBaseline />
       <ThemeProvider
         theme={theme({
           isLightTheme,

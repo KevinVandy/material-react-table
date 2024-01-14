@@ -34,6 +34,17 @@ const ExpandingExamples = ({ isPage = false }) => {
         >
           <Tab label="Expanding Tree" value="expanding-tree" />
           <Tab label="Parsed Tree" value="expanding-tree-flat-parse" />
+          <Link href="/docs/examples/lazy-sub-rows" passHref legacyBehavior>
+            <Tab
+              label={
+                <Box>
+                  Lazy Sub-Rows
+                  <LaunchIcon sx={{ fontSize: '1rem' }} />
+                </Box>
+              }
+              value="more"
+            />
+          </Link>
           <Tab label="Column Grouping" value="column-grouping" />
           <Tab label="Customized Grouping" value="customized-grouping" />
           <Tab label="Aggregation" value="aggregation-and-grouping" />

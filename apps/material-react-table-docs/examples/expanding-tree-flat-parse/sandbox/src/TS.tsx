@@ -101,7 +101,6 @@ const Example = () => {
       },
       {
         accessorKey: 'state',
-        enableColumnOrdering: false,
         header: 'State',
       },
     ],

@@ -5,7 +5,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   //simulating a slow response
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 500));
   const { phoneNumber } = req.query;
   const data = fullData.find(
     (item) =>

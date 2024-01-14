@@ -1,0 +1,30 @@
+import Head from 'next/head';
+import Examples from '../../../example-groups/RemoteFetchingExamples';
+
+<Head>
+  <title>{'Lazy Sub-Rows Example - Material React Table V2 Docs'}</title>
+  <meta
+    name="description"
+    content="A Material React Table example show how use use expandable rows to fetch additional sub-rows data only after the user expands the row."
+  />
+  <meta
+    property="og:title"
+    content="Lazy Sub-Rows Material React Table Example"
+  />
+  <meta
+    property="og:description"
+    content="A Material React Table example show how use use expandable rows to fetch additional sub-rows data only after the user expands the row."
+  />
+</Head>
+
+## Lazy Sub-Rows Example
+
+If you have a ton of nested data that you want to display, but you don't want to fetch it all up front, you can set up Material React Table to only fetch the sub-rows data when the user expands the row.
+
+There are quite a few ways in which you could implement fetching sub-rows lazily. This example is just one way to do it.
+
+This example combines concepts from the [React Query Example](/docs/examples/react-query) and the [Expanding Parsed Tree Example](/docs/examples/expanding-tree-flat-parse).
+
+<Examples isPage />
+
+View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/features-aggregation-examples)**

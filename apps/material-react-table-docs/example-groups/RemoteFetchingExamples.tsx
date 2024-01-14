@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { Box, Tab, Tabs } from '@mui/material';
 import ReactQueryExample from '../examples/react-query';
 import LazyDetailPanelExample from '../examples/lazy-detail-panel';
+import LazySubRowsExample from '../examples/lazy-sub-rows';
 import DynamicColumns from '../examples/dynamic-columns';
 import RemoteExample from '../examples/remote';
 import { useState } from 'react';
@@ -30,9 +31,10 @@ const RemoteFetchingExamples = ({ isPage = false }) => {
           }
         >
           <Tab label="React Query" value="react-query" />
-          <Tab label="Lazy Detail Panel" value="lazy-detail-panel" />
-          <Tab label="Dynamic Columns" value="dynamic-columns" />
           <Tab label="useEffect" value="remote" />
+          <Tab label="Dynamic Columns" value="dynamic-columns" />
+          <Tab label="Lazy Detail Panel" value="lazy-detail-panel" />
+          <Tab label="Lazy Sub-Rows" value="lazy-sub-rows" />
           <Tab
             label={
               <Box>
@@ -68,9 +70,10 @@ const RemoteFetchingExamples = ({ isPage = false }) => {
       </Box>
       <Box>
         {activeTab === 'react-query' && <ReactQueryExample />}
-        {activeTab === 'lazy-detail-panel' && <LazyDetailPanelExample />}
-        {activeTab === 'dynamic-columns' && <DynamicColumns />}
         {activeTab === 'remote' && <RemoteExample />}
+        {activeTab === 'dynamic-columns' && <DynamicColumns />}
+        {activeTab === 'lazy-detail-panel' && <LazyDetailPanelExample />}
+        {activeTab === 'lazy-sub-rows' && <LazySubRowsExample />}
       </Box>
     </>
   );

@@ -267,16 +267,20 @@ export const routes: Array<RouteItem> = [
             label: 'React Query Example',
           },
           {
-            href: '/docs/examples/lazy-detail-panel',
-            label: 'Lazy Detail Panel Example',
+            href: '/docs/examples/remote',
+            label: 'useEffect Fetching Example',
           },
           {
             href: '/docs/examples/dynamic-columns',
             label: 'Dynamic Columns Example',
           },
           {
-            href: '/docs/examples/remote',
-            label: 'Remote Data Fetching Example',
+            href: '/docs/examples/lazy-detail-panel',
+            label: 'Lazy Detail Panel Example',
+          },
+          {
+            href: '/docs/examples/lazy-sub-rows',
+            label: 'Lazy Sub-Rows Example',
           },
         ],
       },

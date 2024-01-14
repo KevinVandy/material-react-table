@@ -75,7 +75,6 @@ const Example = () => {
       sorting, //refetch when sorting changes
     ],
     queryFn: async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1000)); //simulate network delay
       const fetchURL = new URL(
         '/api/data',
         process.env.NODE_ENV === 'production'

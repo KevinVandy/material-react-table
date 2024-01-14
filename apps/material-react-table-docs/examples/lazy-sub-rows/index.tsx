@@ -9,7 +9,7 @@ const ExampleTable = () => {
       Component={Example}
       javaScriptCode={JS}
       typeScriptCode={TS}
-      tableId="react-query"
+      tableId="lazy-sub-rows"
     />
   );
 };

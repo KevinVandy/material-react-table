@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
-import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
 import EnableExample from '../../../examples/enable-expanding-tree';
 import ExpandedExample from '../../../examples/expanding-tree-expanded';
 import ExpandedRootExample from '../../../examples/expanding-tree-root-expanded';
 import ExpandingParsedTreeExample from '../../../examples/expanding-tree-flat-parse';
+import LazySubRowsExample from '../../../examples/lazy-sub-rows';
 
 <Head>
   <title>
@@ -37,6 +37,7 @@ Material React Table has support for expanding sub-rows or tree data. This featu
       'getExpandedRowModel',
       'getIsRowExpanded',
       'getRowCanExpand',
+      'getRowId',
       'getSubRows',
       'groupedColumnMode',
       'manualExpanding',
@@ -110,6 +111,8 @@ There are a couple key things you have to do to make this work:
 
 1. Only pass in root (top level) rows in your data prop.
 2. Set the `getSubRows` table option to a function that scans all the rest of your data and returns the sub rows for a given row.
+
+This can sometimes be useful in combination with [lazy loading sub rows](#lazy-load-sub-rows).
 
 > NOTE: Be conscious of the performance implications of the `getSubRows` function. It will be called for every row in your table, so it should be performant.
 
@@ -200,3 +203,15 @@ const table = useMaterialReactTable({
   },
 });
 ```
+
+### Lazy Load Sub Rows
+
+If you have a ton of nested data that you want to display, but you don't want to fetch it all up front, you can set up Material React Table to only fetch the sub-rows data when the user expands the row.
+
+There are quite a few ways in which you could implement fetching sub-rows lazily. This example is just one way to do it.
+
+The main concept to understand from this example is that you can manage the `expanded` state option in your own scope, and fetch the data for your table based on that state.
+
+How your data is structured from the server is up to you. It is usually easiest to have the server do the hard work and return the data in a nested tree structure, but you can also return the data in a flat structure and use the `getSubRows` table option to parse the data into a tree structure.
+
+<LazySubRowsExample />

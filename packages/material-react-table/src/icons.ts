@@ -32,43 +32,7 @@ import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-export interface MRT_Icons {
-  ArrowDownwardIcon: any;
-  ArrowRightIcon: any;
-  CancelIcon: any;
-  ChevronLeftIcon: any;
-  ChevronRightIcon: any;
-  ClearAllIcon: any;
-  CloseIcon: any;
-  DensityLargeIcon: any;
-  DensityMediumIcon: any;
-  DensitySmallIcon: any;
-  DragHandleIcon: any;
-  DynamicFeedIcon: any;
-  EditIcon: any;
-  ExpandMoreIcon: any;
-  FilterAltIcon: any;
-  FilterListIcon: any;
-  FilterListOffIcon: any;
-  FirstPageIcon?: any;
-  FullscreenExitIcon: any;
-  FullscreenIcon: any;
-  KeyboardDoubleArrowDownIcon: any;
-  LastPageIcon?: any;
-  MoreHorizIcon: any;
-  MoreVertIcon: any;
-  PushPinIcon: any;
-  RestartAltIcon: any;
-  SaveIcon: any;
-  SearchIcon: any;
-  SearchOffIcon: any;
-  SortIcon: any;
-  SyncAltIcon?: any;
-  ViewColumnIcon: any;
-  VisibilityOffIcon: any;
-}
-
-export const MRT_Default_Icons: MRT_Icons = {
+export const MRT_Default_Icons = {
   ArrowDownwardIcon,
   ArrowRightIcon,
   CancelIcon,
@@ -102,4 +66,6 @@ export const MRT_Default_Icons: MRT_Icons = {
   SyncAltIcon,
   ViewColumnIcon,
   VisibilityOffIcon,
-};
+} as const;
+
+export type MRT_Icons = Record<keyof typeof MRT_Default_Icons, any>;
