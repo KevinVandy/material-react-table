@@ -3,7 +3,6 @@ import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable
 import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
 import ThemeExample from '../../../examples/mui-theme';
 import CustomizeStylesExample from '../../../examples/customize-table-styles';
-import { Box } from '@mui/material';
 
 <Head>
   <title>
@@ -131,9 +130,7 @@ return <MaterialReactTable table={table} />;
 
 ### Styling Material UI Components
 
-Each `mui...Prop` has multiple options for you to add styling to the component. You could simply pass `className` or `style` props to any `mui...Props` prop, but there is also the `sx` table option...which totally rocks!
-
-> Hint: You should just use the `sx` prop for all styling instead of `className` or `style` props.
+Each `mui...Prop` has multiple options for you to add styling to the component. You could simply pass `className` or `style` props to any `mui...Props` prop, but there is also the `sx` table option, which is the recommended way to style Material UI components in Material React Table.
 
 #### The SX Prop
 
@@ -141,7 +138,7 @@ The recommended way to style Material UI components in Material React Table will
 
 Don't worry, `className` and `style` props will still work, but let's show off some of the more elegant syntax you can use with the `sx` table option.
 
-1. The `sx` prop can be used just a simply as a `style` prop by default
+1. The `sx` prop can be used just as simply as a `style` prop by default (though it applies CSS classes using Emotion under the hood).
 
 ```jsx
 const table = useMaterialReactTable({
@@ -200,6 +197,57 @@ return <MaterialReactTable table={table} />;
 ```
 
 There are many more advantages to using the `sx` prop, but that is all we will discuss in these docs. You can learn more about it the official [Material UI Docs](https://mui.com/system/getting-started/the-sx-prop/).
+
+### Conditional Styling
+
+Using the `sx`, `style`, or `className` props and the parameters from the callback functions (cell, column, row, table instance APIs, etc.), you can easily add conditional styling to your Material UI components. Here's a few examples
+
+#### Style Selected Rows
+
+```jsx
+const table = useMaterialReactTable({
+  muiTableBodyRowProps: ({ row }) => ({
+    //conditionally style selected rows
+    sx: {
+      fontWeight: row.getIsSelected() ? 'bold' : 'normal',
+    },
+  }),
+});
+```
+
+#### Style Expanded Rows
+
+```jsx
+const table = useMaterialReactTable({
+  muiTableBodyRowProps: ({ row }) => ({
+    //conditionally style expanded rows
+    sx: {
+      fontWeight: row.getIsExpanded() ? 'bold' : 'normal',
+    },
+  }),
+});
+```
+
+#### Style Pinned Columns
+
+```jsx
+const table = useMaterialReactTable({
+  muiTableHeadCellProps: ({ column }) => ({
+    //conditionally style pinned columns
+    sx: {
+      backgroundColor: column.getIsPinned() ? '#f5f5f5' : 'inherit',
+    },
+  }),
+  muiTableBodyCellProps: ({ column }) => ({
+    //conditionally style pinned columns
+    sx: {
+      fontWeight: column.getIsPinned() ? 'bold' : 'normal',
+    },
+  }),
+});
+```
+
+There are hundreds of table, column, header, row, and cell instance APIs that you can use for conditional styling and other logic. See the [Table Instance APIs](/docs/api/table-instance-apis), [Column Instance APIs](/docs/api/column-instance-apis), [Row Instance APIs](/docs/api/row-instance-apis), and [Cell Instance APIs](/docs/api/cell-instance-apis) docs for more info.
 
 ### Material UI Theme
 
@@ -339,8 +387,8 @@ As part of the customization options, we allow you to override the No Records ov
 const table = useMaterialReactTable({
   columns,
   data,
-  renderEmptyRowsFallback: ({table}) => (
+  renderEmptyRowsFallback: ({ table }) => (
     <span>Customized No Rows Overlay</span>
-  )
+  ),
 });
 ```

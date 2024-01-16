@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Tab, Tabs } from '@mui/material';
 import AM_Table from '../examples/localization-i18n-am';
 import AR_Table from '../examples/localization-i18n-ar';
@@ -37,6 +37,8 @@ import UK_Table from '../examples/localization-i18n-uk';
 import VI_Table from '../examples/localization-i18n-vi';
 import ZH_HANS_Table from '../examples/localization-i18n-zh-hans';
 import ZH_HANT_Table from '../examples/localization-i18n-zh-hant';
+import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 const supportedLocales = [
   'am',
@@ -79,7 +81,22 @@ const supportedLocales = [
 ];
 
 const LocaleExamples = () => {
-  const [currentLocale, setCurrentLocale] = useState('es');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [currentLocale, _setCurrentLocale] = useState('es');
+
+  useEffect(() => {
+    _setCurrentLocale(searchParams.get('locale') || 'es');
+  }, [searchParams]);
+
+  const setCurrentLocale = (locale: string) => {
+    _setCurrentLocale(locale);
+    window.history.replaceState(
+      null,
+      '',
+      `${router.pathname}?locale=${locale}`,
+    );
+  };
 
   return (
     <>

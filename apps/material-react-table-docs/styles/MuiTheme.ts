@@ -50,18 +50,22 @@ export const theme = ({
         fontSize: '1.5rem',
         lineHeight: '3rem',
         marginBottom: '1rem',
+        fontWeight: 'bold',
       },
       h4: {
         fontSize: '1.25rem',
         lineHeight: '2rem',
+        fontWeight: 'bold',
       },
       h5: {
         fontSize: '1.1rem',
         lineHeight: '3rem',
+        fontWeight: 'bold',
       },
       h6: {
         fontSize: '1rem',
         lineHeight: '3rem',
+        fontWeight: 'bold',
       },
       subtitle1: {
         marginBottom: '1rem',
