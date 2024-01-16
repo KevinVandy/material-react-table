@@ -4,6 +4,7 @@ import Radio, { type RadioProps } from '@mui/material/Radio';
 import Tooltip from '@mui/material/Tooltip';
 import { type Theme } from '@mui/material/styles';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { getCommonTooltipProps } from '../style.utils';
 import {
   type MRT_Row,
   type MRT_RowData,
@@ -124,8 +125,7 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
 
   return (
     <Tooltip
-      enterDelay={1000}
-      enterNextDelay={1000}
+      {...getCommonTooltipProps()}
       title={
         checkboxProps?.title ??
         (selectAll

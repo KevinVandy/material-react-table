@@ -1,5 +1,6 @@
 import { type CSSProperties } from 'react';
 import { type TableCellProps } from '@mui/material/TableCell';
+import { type TooltipProps } from '@mui/material/Tooltip';
 import { alpha, darken, lighten } from '@mui/material/styles';
 import { type Theme } from '@mui/material/styles';
 import {
@@ -133,3 +134,12 @@ export const flipIconStyles = (theme: Theme) =>
   theme.direction === 'rtl'
     ? { style: { transform: 'scaleX(-1)' } }
     : undefined;
+
+export const getCommonTooltipProps = (
+  placement?: TooltipProps['placement'],
+): Partial<TooltipProps> => ({
+  disableInteractive: true,
+  enterDelay: 1000,
+  enterNextDelay: 1000,
+  placement,
+});

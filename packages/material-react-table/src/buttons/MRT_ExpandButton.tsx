@@ -3,6 +3,7 @@ import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { useTheme } from '@mui/material/styles';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { getCommonTooltipProps } from '../style.utils';
 import {
   type MRT_Row,
   type MRT_RowData,
@@ -50,8 +51,7 @@ export const MRT_ExpandButton = <TData extends MRT_RowData>({
   return (
     <Tooltip
       disableHoverListener={!canExpand && !detailPanel}
-      enterDelay={1000}
-      enterNextDelay={1000}
+      {...getCommonTooltipProps()}
       title={
         iconButtonProps?.title ??
         (isExpanded ? localization.collapse : localization.expand)

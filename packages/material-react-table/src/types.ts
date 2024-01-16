@@ -1122,6 +1122,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   onShowToolbarDropZoneChange?: OnChangeFn<boolean>;
   paginationDisplayMode?: 'custom' | 'default' | 'pages';
   positionActionsColumn?: 'first' | 'last';
+  positionCreatingRow?: 'bottom' | 'top' | number;
   positionExpandColumn?: 'first' | 'last';
   positionGlobalFilter?: 'left' | 'none' | 'right';
   positionPagination?: 'both' | 'bottom' | 'none' | 'top';

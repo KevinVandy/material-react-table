@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import { MRT_ColumnPinningButtons } from '../buttons/MRT_ColumnPinningButtons';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 import { parseFromValuesOrFunc, reorderColumn } from '../column.utils';
-import { getMRTTheme } from '../style.utils';
+import { getCommonTooltipProps, getMRTTheme } from '../style.utils';
 import {
   type MRT_Column,
   type MRT_RowData,
@@ -160,8 +160,7 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
               }}
               control={
                 <Tooltip
-                  enterDelay={1000}
-                  enterNextDelay={1000}
+                  {...getCommonTooltipProps()}
                   title={localization.toggleVisibility}
                 >
                   <Switch />

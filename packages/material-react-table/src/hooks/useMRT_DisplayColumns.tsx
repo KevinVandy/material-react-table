@@ -8,30 +8,21 @@ import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
 import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMenuButton';
 import { showExpandColumn } from '../column.utils';
 import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
+import { getCommonTooltipProps } from '../style.utils';
 import {
   type MRT_ColumnDef,
-  type MRT_ColumnOrderState,
   type MRT_DefinedTableOptions,
   type MRT_DisplayColumnIds,
-  type MRT_GroupingState,
   type MRT_Localization,
-  type MRT_Row,
   type MRT_RowData,
 } from '../types';
 import { MRT_DefaultDisplayColumn } from '.';
 
-interface Params<TData extends MRT_RowData> {
-  columnOrder: MRT_ColumnOrderState;
-  creatingRow: MRT_Row<TData> | null;
-  grouping: MRT_GroupingState;
-  tableOptions: MRT_DefinedTableOptions<TData>;
-}
-
 export const useMRT_DisplayColumns = <TData extends MRT_RowData>(
-  params: Params<TData>,
+  tableOptions: MRT_DefinedTableOptions<TData>,
 ): MRT_ColumnDef<TData>[] => {
-  const { columnOrder, creatingRow, grouping, tableOptions } = params;
-  const order = tableOptions.state?.columnOrder ?? columnOrder;
+  const { columnOrder, creatingRow, grouping, pagination } =
+    tableOptions.state!;
 
   return useMemo(
     () =>
@@ -44,12 +35,13 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>(
         makeRowNumbersColumn,
         makeSpacerColumn,
       ]
-        .map((makeCol) => makeCol(params, order))
+        .map((makeCol) => makeCol(tableOptions))
         .filter(Boolean) as MRT_ColumnDef<TData>[],
     [
       columnOrder,
       creatingRow,
       grouping,
+      pagination,
       tableOptions.displayColumnDefOptions,
       tableOptions.editDisplayMode,
       tableOptions.enableColumnDragging,
@@ -72,8 +64,6 @@ export const useMRT_DisplayColumns = <TData extends MRT_RowData>(
       tableOptions.renderDetailPanel,
       tableOptions.renderRowActionMenuItems,
       tableOptions.renderRowActions,
-      tableOptions.state?.columnOrder,
-      tableOptions.state?.grouping,
     ],
   );
 };
@@ -98,11 +88,11 @@ function defaultDisplayColumnProps<TData extends MRT_RowData>(
 }
 
 function makeRowPinColumn<TData extends MRT_RowData>(
-  { tableOptions }: Params<TData>,
-  order: MRT_ColumnOrderState,
+  tableOptions: MRT_DefinedTableOptions<TData>,
 ): MRT_ColumnDef<TData> | null {
   const id: MRT_DisplayColumnIds = 'mrt-row-pin';
-  if (order.includes(id)) {
+  const { columnOrder } = tableOptions.state!;
+  if (columnOrder?.includes(id)) {
     return {
       Cell: ({ row, table }) => (
         <MRT_TableBodyRowPinButton row={row} table={table} />
@@ -114,11 +104,11 @@ function makeRowPinColumn<TData extends MRT_RowData>(
 }
 
 function makeRowDragColumn<TData extends MRT_RowData>(
-  { tableOptions }: Params<TData>,
-  order: MRT_ColumnOrderState,
+  tableOptions: MRT_DefinedTableOptions<TData>,
 ): MRT_ColumnDef<TData> | null {
   const id: MRT_DisplayColumnIds = 'mrt-row-drag';
-  if (order.includes(id)) {
+  const { columnOrder } = tableOptions.state!;
+  if (columnOrder?.includes(id)) {
     return {
       Cell: ({ row, rowRef, table }) => (
         <MRT_TableBodyRowGrabHandle
@@ -134,12 +124,12 @@ function makeRowDragColumn<TData extends MRT_RowData>(
 }
 
 function makeRowActionsColumn<TData extends MRT_RowData>(
-  { creatingRow, tableOptions }: Params<TData>,
-  order: MRT_ColumnOrderState,
+  tableOptions: MRT_DefinedTableOptions<TData>,
 ): MRT_ColumnDef<TData> | null {
   const id: MRT_DisplayColumnIds = 'mrt-row-actions';
+  const { columnOrder, creatingRow } = tableOptions.state!;
   if (
-    order.includes(id) ||
+    columnOrder?.includes(id) ||
     (creatingRow && tableOptions.createDisplayMode === 'row')
   ) {
     return {
@@ -153,14 +143,11 @@ function makeRowActionsColumn<TData extends MRT_RowData>(
 }
 
 function makeRowExpandColumn<TData extends MRT_RowData>(
-  { grouping, tableOptions }: Params<TData>,
-  order: MRT_ColumnOrderState,
+  tableOptions: MRT_DefinedTableOptions<TData>,
 ): MRT_ColumnDef<TData> | null {
   const id: MRT_DisplayColumnIds = 'mrt-row-expand';
-  if (
-    order.includes(id) &&
-    showExpandColumn(tableOptions, tableOptions.state?.grouping ?? grouping)
-  ) {
+  const { columnOrder, grouping } = tableOptions.state!;
+  if (columnOrder?.includes(id) && showExpandColumn(tableOptions, grouping)) {
     const alignProps =
       tableOptions.positionExpandColumn === 'last'
         ? ({
@@ -180,9 +167,7 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
             <Stack alignItems="center" flexDirection="row" gap="0.25rem">
               <MRT_ExpandButton {...expandButtonProps} />
               <Tooltip
-                enterDelay={1000}
-                enterNextDelay={1000}
-                placement="right"
+                {...getCommonTooltipProps('right')}
                 title={table.getColumn(row.groupingColumnId).columnDef.header}
               >
                 <span>{row.groupingValue as ReactNode}</span>
@@ -206,11 +191,11 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
                 <MRT_ExpandAllButton table={table} />
                 {tableOptions.groupedColumnMode === 'remove' &&
                   grouping
-                    .map(
+                    ?.map(
                       (groupedColumnId) =>
                         table.getColumn(groupedColumnId).columnDef.header,
                     )
-                    .join(', ')}
+                    ?.join(', ')}
               </>
             );
           }
@@ -231,11 +216,11 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
 }
 
 function makeRowSelectColumn<TData extends MRT_RowData>(
-  { tableOptions }: Params<TData>,
-  order: MRT_ColumnOrderState,
+  tableOptions: MRT_DefinedTableOptions<TData>,
 ): MRT_ColumnDef<TData> | null {
   const id: MRT_DisplayColumnIds = 'mrt-row-select';
-  if (order.includes(id)) {
+  const { columnOrder } = tableOptions.state!;
+  if (columnOrder?.includes(id)) {
     return {
       Cell: ({ row, staticRowIndex, table }) => (
         <MRT_SelectCheckbox
@@ -255,15 +240,16 @@ function makeRowSelectColumn<TData extends MRT_RowData>(
 }
 
 function makeRowNumbersColumn<TData extends MRT_RowData>(
-  { tableOptions }: Params<TData>,
-  order: MRT_ColumnOrderState,
+  tableOptions: MRT_DefinedTableOptions<TData>,
 ): MRT_ColumnDef<TData> | null {
   const id: MRT_DisplayColumnIds = 'mrt-row-numbers';
-  if (order.includes(id) || tableOptions.enableRowNumbers)
+  const { columnOrder, pagination } = tableOptions.state!;
+  if (columnOrder?.includes(id) || tableOptions.enableRowNumbers)
     return {
       Cell: ({ row, staticRowIndex }) =>
         ((tableOptions.rowNumberDisplayMode === 'static'
-          ? staticRowIndex
+          ? (staticRowIndex || 0) +
+            (pagination?.pageSize || 0) * (pagination?.pageIndex || 0)
           : row.index) ?? 0) + 1,
       Header: () => tableOptions.localization.rowNumber,
       ...defaultDisplayColumnProps(tableOptions, id, 'rowNumbers'),
@@ -282,11 +268,11 @@ const blankColProps = {
 };
 
 function makeSpacerColumn<TData extends MRT_RowData>(
-  { tableOptions }: Params<TData>,
-  order: MRT_ColumnOrderState,
+  tableOptions: MRT_DefinedTableOptions<TData>,
 ): MRT_ColumnDef<TData> | null {
   const id: MRT_DisplayColumnIds = 'mrt-row-spacer';
-  if (order.includes(id)) {
+  const { columnOrder } = tableOptions.state!;
+  if (columnOrder?.includes(id)) {
     return {
       ...defaultDisplayColumnProps(tableOptions, id, undefined, 0),
       ...MRT_DefaultDisplayColumn,

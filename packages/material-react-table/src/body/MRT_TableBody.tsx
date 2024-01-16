@@ -37,6 +37,7 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
       localization,
       memoMode,
       muiTableBodyProps,
+      positionCreatingRow,
       renderDetailPanel,
       renderEmptyRowsFallback,
       rowPinningDisplayMode,
@@ -85,6 +86,18 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
     />
   );
 
+  const CreatingRowBody = rowVirtualizer && CreatingRow && (
+    <TableBody
+      {...tableBodyProps}
+      sx={(theme) => ({
+        display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
+        ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
+      })}
+    >
+      {CreatingRow}
+    </TableBody>
+  );
+
   return (
     <>
       {!rowPinningDisplayMode?.includes('sticky') &&
@@ -113,17 +126,7 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
             })}
           </TableBody>
         )}
-      {rowVirtualizer && CreatingRow && (
-        <TableBody
-          {...tableBodyProps}
-          sx={(theme) => ({
-            display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-            ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
-          })}
-        >
-          {CreatingRow}
-        </TableBody>
-      )}
+      {positionCreatingRow === 'top' && CreatingRowBody}
       <TableBody
         {...tableBodyProps}
         sx={(theme) => ({
@@ -136,7 +139,7 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
           ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
         })}
       >
-        {!rowVirtualizer && CreatingRow}
+        {!rowVirtualizer && positionCreatingRow === 'top' && CreatingRow}
         {tableBodyProps?.children ??
           (!rows.length && !CreatingRow ? (
             <tr
@@ -206,7 +209,9 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
               })}
             </>
           ))}
+        {!rowVirtualizer && positionCreatingRow === 'bottom' && CreatingRow}
       </TableBody>
+      {positionCreatingRow === 'bottom' && CreatingRowBody}
       {!rowPinningDisplayMode?.includes('sticky') &&
         getIsSomeRowsPinned('bottom') && (
           <TableBody

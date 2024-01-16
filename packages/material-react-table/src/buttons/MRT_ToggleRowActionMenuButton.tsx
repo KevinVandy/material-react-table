@@ -4,6 +4,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { MRT_EditActionButtons } from './MRT_EditActionButtons';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_RowActionMenu } from '../menus/MRT_RowActionMenu';
+import { getCommonTooltipProps } from '../style.utils';
 import {
   type MRT_Cell,
   type MRT_Row,
@@ -92,11 +93,7 @@ export const MRT_ToggleRowActionMenuButton = <TData extends MRT_RowData>({
         </Tooltip>
       ) : renderRowActionMenuItems ? (
         <>
-          <Tooltip
-            enterDelay={1000}
-            enterNextDelay={1000}
-            title={localization.rowActions}
-          >
+          <Tooltip {...getCommonTooltipProps()} title={localization.rowActions}>
             <IconButton
               aria-label={localization.rowActions}
               onClick={handleOpenRowActionMenu}

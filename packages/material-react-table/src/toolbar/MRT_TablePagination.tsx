@@ -9,7 +9,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 import { parseFromValuesOrFunc } from '../column.utils';
-import { flipIconStyles } from '../style.utils';
+import { flipIconStyles, getCommonTooltipProps } from '../style.utils';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
 const defaultRowsPerPage = [5, 10, 15, 20, 25, 30, 50, 100];
@@ -78,6 +78,8 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
 
   const disableBack = pageIndex <= 0 || disabled;
   const disableNext = lastRowIndex >= totalRowCount || disabled;
+
+  const tooltipProps = getCommonTooltipProps();
 
   return (
     <Box
@@ -173,7 +175,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
           } ${totalRowCount.toLocaleString()}`}</Typography>
           <Box gap="xs">
             {showFirstButton && (
-              <Tooltip enterDelay={1000} title={localization.goToFirstPage}>
+              <Tooltip {...tooltipProps} title={localization.goToFirstPage}>
                 <span>
                   <IconButton
                     aria-label={localization.goToFirstPage}
@@ -186,7 +188,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
                 </span>
               </Tooltip>
             )}
-            <Tooltip enterDelay={1000} title={localization.goToPreviousPage}>
+            <Tooltip {...tooltipProps} title={localization.goToPreviousPage}>
               <span>
                 <IconButton
                   aria-label={localization.goToPreviousPage}
@@ -198,7 +200,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
                 </IconButton>
               </span>
             </Tooltip>
-            <Tooltip enterDelay={1000} title={localization.goToNextPage}>
+            <Tooltip {...tooltipProps} title={localization.goToNextPage}>
               <span>
                 <IconButton
                   aria-label={localization.goToNextPage}
@@ -211,7 +213,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
               </span>
             </Tooltip>
             {showLastButton && (
-              <Tooltip enterDelay={1000} title={localization.goToLastPage}>
+              <Tooltip {...tooltipProps} title={localization.goToLastPage}>
                 <span>
                   <IconButton
                     aria-label={localization.goToLastPage}

@@ -6,15 +6,13 @@ import {
   type Row,
 } from '@tanstack/react-table';
 import { type Range, defaultRangeExtractor } from '@tanstack/react-virtual';
-import { type MRT_AggregationFns } from './aggregationFns';
-import { type MRT_FilterFns } from './filterFns';
-import { type MRT_SortingFns } from './sortingFns';
 import {
   type MRT_Column,
   type MRT_ColumnDef,
   type MRT_ColumnHelper,
   type MRT_ColumnOrderState,
   type MRT_DefinedColumnDef,
+  type MRT_DefinedTableOptions,
   type MRT_DisplayColumnDef,
   type MRT_DisplayColumnIds,
   type MRT_FilterOption,
@@ -49,42 +47,30 @@ export const getAllLeafColumnDefs = <TData extends MRT_RowData>(
 };
 
 export const prepareColumns = <TData extends MRT_RowData>({
-  aggregationFns,
   columnDefs,
-  columnFilterFns,
-  defaultDisplayColumn,
-  filterFns,
-  sortingFns,
+  tableOptions,
 }: {
-  aggregationFns: typeof MRT_AggregationFns &
-    MRT_TableOptions<TData>['aggregationFns'];
   columnDefs: MRT_ColumnDef<TData>[];
-  columnFilterFns: { [key: string]: MRT_FilterOption };
-  defaultDisplayColumn: Partial<MRT_ColumnDef<TData>>;
-  filterFns: typeof MRT_FilterFns & MRT_TableOptions<TData>['filterFns'];
-  sortingFns: typeof MRT_SortingFns & MRT_TableOptions<TData>['sortingFns'];
-}): MRT_DefinedColumnDef<TData>[] =>
-  columnDefs.map((columnDef) => {
+  tableOptions: MRT_DefinedTableOptions<TData>;
+}): MRT_DefinedColumnDef<TData>[] => {
+  const {
+    aggregationFns = {},
+    defaultDisplayColumn,
+    filterFns = {},
+    sortingFns = {},
+    state: { columnFilterFns = {} } = {},
+  } = tableOptions;
+  return columnDefs.map((columnDef) => {
     //assign columnId
     if (!columnDef.id) columnDef.id = getColumnId(columnDef);
-    if (process.env.NODE_ENV !== 'production' && !columnDef.id) {
-      console.error(
-        'Column definitions must have a valid `accessorKey` or `id` property',
-      );
-    }
-
     //assign columnDefType
     if (!columnDef.columnDefType) columnDef.columnDefType = 'data';
     if (columnDef.columns?.length) {
       columnDef.columnDefType = 'group';
       //recursively prepare columns if this is a group column
       columnDef.columns = prepareColumns({
-        aggregationFns,
         columnDefs: columnDef.columns,
-        columnFilterFns,
-        defaultDisplayColumn,
-        filterFns,
-        sortingFns,
+        tableOptions,
       });
     } else if (columnDef.columnDefType === 'data') {
       //assign aggregationFns if multiple aggregationFns are provided
@@ -121,6 +107,7 @@ export const prepareColumns = <TData extends MRT_RowData>({
     }
     return columnDef;
   }) as MRT_DefinedColumnDef<TData>[];
+};
 
 export const reorderColumn = <TData extends MRT_RowData>(
   draggedColumn: MRT_Column<TData>,

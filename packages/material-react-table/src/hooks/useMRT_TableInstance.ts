@@ -29,6 +29,7 @@ import {
   type MRT_DensityState,
   type MRT_FilterOption,
   type MRT_GroupingState,
+  type MRT_PaginationState,
   type MRT_Row,
   type MRT_RowData,
   type MRT_TableInstance,
@@ -62,6 +63,8 @@ export const useMRT_TableInstance: <TData extends MRT_RowData>(
     return initState;
   }, []);
 
+  tableOptions.initialState = initialState;
+
   const [creatingRow, _setCreatingRow] = useState<MRT_Row<TData> | null>(
     initialState.creatingRow ?? null,
   );
@@ -81,7 +84,7 @@ export const useMRT_TableInstance: <TData extends MRT_RowData>(
         })),
       ),
     );
-  const [columnOrder, setColumnOrder] = useState<MRT_ColumnOrderState>(
+  const [columnOrder, onColumnOrderChange] = useState<MRT_ColumnOrderState>(
     initialState.columnOrder ?? [],
   );
   const [density, setDensity] = useState<MRT_DensityState>(
@@ -101,7 +104,7 @@ export const useMRT_TableInstance: <TData extends MRT_RowData>(
   const [globalFilterFn, setGlobalFilterFn] = useState<MRT_FilterOption>(
     initialState.globalFilterFn ?? 'fuzzy',
   );
-  const [grouping, setGrouping] = useState<MRT_GroupingState>(
+  const [grouping, onGroupingChange] = useState<MRT_GroupingState>(
     initialState.grouping ?? [],
   );
   const [hoveredColumn, setHoveredColumn] = useState<Partial<
@@ -112,6 +115,9 @@ export const useMRT_TableInstance: <TData extends MRT_RowData>(
   );
   const [isFullScreen, setIsFullScreen] = useState<boolean>(
     initialState?.isFullScreen ?? false,
+  );
+  const [pagination, onPaginationChange] = useState<MRT_PaginationState>(
+    initialState?.pagination ?? { pageIndex: 0, pageSize: 10 },
   );
   const [showAlertBanner, setShowAlertBanner] = useState<boolean>(
     tableOptions.initialState?.showAlertBanner ?? false,
@@ -126,32 +132,40 @@ export const useMRT_TableInstance: <TData extends MRT_RowData>(
     initialState?.showToolbarDropZone ?? false,
   );
 
-  const displayColumns = useMRT_DisplayColumns({
+  tableOptions.state = {
+    columnFilterFns,
     columnOrder,
     creatingRow,
+    density,
+    draggingColumn,
+    draggingRow,
+    editingCell,
+    editingRow,
+    globalFilterFn,
     grouping,
-    tableOptions,
-  });
+    hoveredColumn,
+    hoveredRow,
+    isFullScreen,
+    pagination,
+    showAlertBanner,
+    showColumnFilters,
+    showGlobalFilter,
+    showToolbarDropZone,
+    ...tableOptions.state,
+  };
 
-  const columnDefs = useMemo(
+  const displayColumns = useMRT_DisplayColumns(tableOptions);
+
+  tableOptions.columns = useMemo(
     () =>
       prepareColumns({
-        aggregationFns: tableOptions.aggregationFns as any,
         columnDefs: [...displayColumns, ...tableOptions.columns],
-        columnFilterFns: tableOptions.state?.columnFilterFns ?? columnFilterFns,
-        defaultDisplayColumn: tableOptions.defaultDisplayColumn ?? {},
-        filterFns: tableOptions.filterFns as any,
-        sortingFns: tableOptions.sortingFns as any,
+        tableOptions,
       }),
-    [
-      columnFilterFns,
-      displayColumns,
-      tableOptions.columns,
-      tableOptions.state?.columnFilterFns,
-    ],
+    [displayColumns, tableOptions.columns],
   );
 
-  const data: TData[] = useMemo(
+  tableOptions.data = useMemo(
     () =>
       (tableOptions.state?.isLoading || tableOptions.state?.showSkeletons) &&
       !tableOptions.data.length
@@ -209,58 +223,35 @@ export const useMRT_TableInstance: <TData extends MRT_RowData>(
       ? getSortedRowModel()
       : undefined,
     getSubRows: (row) => row?.subRows,
-    onColumnOrderChange: setColumnOrder,
-    onGroupingChange: setGrouping,
+    onColumnOrderChange,
+    onGroupingChange,
+    onPaginationChange,
     ...tableOptions,
-    //@ts-ignore
-    columns: columnDefs,
-    data,
     globalFilterFn: tableOptions.filterFns?.[globalFilterFn ?? 'fuzzy'],
-    initialState,
-    state: {
-      columnFilterFns,
-      columnOrder,
-      creatingRow,
-      density,
-      draggingColumn,
-      draggingRow,
-      editingCell,
-      editingRow,
-      globalFilterFn,
-      grouping,
-      hoveredColumn,
-      hoveredRow,
-      isFullScreen,
-      showAlertBanner,
-      showColumnFilters,
-      showGlobalFilter,
-      showToolbarDropZone,
-      ...tableOptions.state,
-    },
   }) as MRT_TableInstance<TData>;
 
-  // @ts-ignore
+  //@ts-ignore
   table.refs = {
-    // @ts-ignore
+    //@ts-ignore
     bottomToolbarRef,
     editInputRefs,
     filterInputRefs,
-    // @ts-ignore
+    //@ts-ignore
     searchInputRef,
-    // @ts-ignore
+    //@ts-ignore
     tableContainerRef,
-    // @ts-ignore
+    //@ts-ignore
     tableFooterRef,
     tableHeadCellRefs,
-    // @ts-ignore
+    //@ts-ignore
     tableHeadRef,
-    // @ts-ignore
+    //@ts-ignore
     tablePaperRef,
-    // @ts-ignore
+    //@ts-ignore
     topToolbarRef,
   };
 
-  const setCreatingRow = (row: MRT_Updater<MRT_Row<TData> | null | true>) => {
+  table.setCreatingRow = (row: MRT_Updater<MRT_Row<TData> | null | true>) => {
     let _row = row;
     if (row === true) {
       _row = createRow(table);
@@ -268,8 +259,6 @@ export const useMRT_TableInstance: <TData extends MRT_RowData>(
     tableOptions?.onCreatingRowChange?.(_row as MRT_Row<TData> | null) ??
       _setCreatingRow(_row as MRT_Row<TData> | null);
   };
-
-  table.setCreatingRow = setCreatingRow;
   table.setColumnFilterFns =
     tableOptions.onColumnFilterFnsChange ?? setColumnFilterFns;
   table.setDensity = tableOptions.onDensityChange ?? setDensity;

@@ -3,6 +3,7 @@ import { type RowPinningPosition } from '@tanstack/react-table';
 import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { getCommonTooltipProps } from '../style.utils';
 import {
   type MRT_Row,
   type MRT_RowData,
@@ -41,8 +42,7 @@ export const MRT_RowPinButton = <TData extends MRT_RowData>({
 
   return (
     <Tooltip
-      enterDelay={1000}
-      enterNextDelay={1000}
+      {...getCommonTooltipProps()}
       open={tooltipOpened}
       title={isPinned ? localization.unpin : localization.pin}
     >

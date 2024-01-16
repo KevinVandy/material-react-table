@@ -2,6 +2,7 @@ import { type MouseEvent, useState } from 'react';
 import Button, { type ButtonProps } from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { getCommonTooltipProps } from '../style.utils';
 import {
   type MRT_Cell,
   type MRT_RowData,
@@ -51,9 +52,7 @@ export const MRT_CopyButton = <TData extends MRT_RowData>({
 
   return (
     <Tooltip
-      enterDelay={1000}
-      enterNextDelay={1000}
-      placement="top"
+      {...getCommonTooltipProps('top')}
       title={
         buttonProps?.title ??
         (copied ? localization.copiedToClipboard : localization.clickToCopy)

@@ -2,6 +2,7 @@ import Checkbox, { type CheckboxProps } from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Tooltip from '@mui/material/Tooltip';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { getCommonTooltipProps } from '../style.utils';
 import {
   type MRT_Column,
   type MRT_RowData,
@@ -44,8 +45,7 @@ export const MRT_FilterCheckbox = <TData extends MRT_RowData>({
 
   return (
     <Tooltip
-      enterDelay={1000}
-      enterNextDelay={1000}
+      {...getCommonTooltipProps()}
       title={checkboxProps?.title ?? filterLabel}
     >
       <FormControlLabel

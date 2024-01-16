@@ -3,6 +3,7 @@ import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { parseFromValuesOrFunc } from '../column.utils';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
+import { getCommonTooltipProps } from '../style.utils';
 import {
   type MRT_Header,
   type MRT_RowData,
@@ -54,9 +55,7 @@ export const MRT_TableHeadCellColumnActionsButton = <
   return (
     <>
       <Tooltip
-        enterDelay={1000}
-        enterNextDelay={1000}
-        placement="top"
+        {...getCommonTooltipProps('top')}
         title={iconButtonProps?.title ?? localization.columnActions}
       >
         <IconButton
