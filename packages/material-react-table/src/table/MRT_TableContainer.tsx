@@ -5,7 +5,7 @@ import TableContainer, {
 import { MRT_Table } from './MRT_Table';
 import { MRT_TableLoadingOverlay } from './MRT_TableLoadingOverlay';
 import { parseFromValuesOrFunc } from '../column.utils';
-import { MRT_EditRowModal } from '../modals';
+import { MRT_EditRowModal } from '../modals/MRT_EditRowModal';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
 const useIsomorphicLayoutEffect =

@@ -1,7 +1,7 @@
 import { type ReactNode, type RefObject, useMemo } from 'react';
 import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
-import { MRT_TableBodyRowGrabHandle } from '../body';
+import { MRT_TableBodyRowGrabHandle } from '../body/MRT_TableBodyRowGrabHandle';
 import { MRT_TableBodyRowPinButton } from '../body/MRT_TableBodyRowPinButton';
 import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
 import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
@@ -16,7 +16,7 @@ import {
   type MRT_Localization,
   type MRT_RowData,
 } from '../types';
-import { MRT_DefaultDisplayColumn } from '.';
+import { MRT_DefaultDisplayColumn } from './useMRT_TableOptions';
 
 export const useMRT_DisplayColumns = <TData extends MRT_RowData>(
   tableOptions: MRT_DefinedTableOptions<TData>,

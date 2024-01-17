@@ -1,7 +1,7 @@
 import TableHead, { type TableHeadProps } from '@mui/material/TableHead';
 import { MRT_TableHeadRow } from './MRT_TableHeadRow';
 import { parseFromValuesOrFunc } from '../column.utils';
-import { MRT_ToolbarAlertBanner } from '../toolbar';
+import { MRT_ToolbarAlertBanner } from '../toolbar/MRT_ToolbarAlertBanner';
 import {
   type MRT_ColumnVirtualizer,
   type MRT_RowData,

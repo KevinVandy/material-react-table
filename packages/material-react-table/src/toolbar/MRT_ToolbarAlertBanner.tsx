@@ -6,7 +6,7 @@ import Chip from '@mui/material/Chip';
 import Collapse from '@mui/material/Collapse';
 import Stack from '@mui/material/Stack';
 import { parseFromValuesOrFunc } from '../column.utils';
-import { MRT_SelectCheckbox } from '../inputs';
+import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 import { type MRT_RowData, type MRT_TableInstance } from '../types';
 
 interface Props<TData extends MRT_RowData> extends AlertProps {
