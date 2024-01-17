@@ -11,8 +11,14 @@ export const useMRT_Effects = <TData extends MRT_RowData>(
 ) => {
   const {
     getIsSomeRowsPinned,
+    getPrePaginationRowModel,
     getState,
-    options: { enablePagination, enableRowPinning, rowCount },
+    options: {
+      autoResetPageIndex,
+      enablePagination,
+      enableRowPinning,
+      rowCount,
+    },
   } = table;
   const {
     density,
@@ -23,6 +29,8 @@ export const useMRT_Effects = <TData extends MRT_RowData>(
     showSkeletons,
     sorting,
   } = getState();
+
+  const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
 
   const rerender = useReducer(() => ({}), {})[1];
   const isMounted = useRef(false);
@@ -55,15 +63,14 @@ export const useMRT_Effects = <TData extends MRT_RowData>(
 
   //if page index is out of bounds, set it to the last page
   useEffect(() => {
-    if (!enablePagination || isLoading || showSkeletons) return;
+    if (!enablePagination || autoResetPageIndex || isLoading || showSkeletons)
+      return;
     const { pageIndex, pageSize } = pagination;
-    const totalRowCount =
-      rowCount ?? table.getPrePaginationRowModel().rows.length;
     const firstVisibleRowIndex = pageIndex * pageSize;
-    if (firstVisibleRowIndex > totalRowCount) {
-      table.setPageIndex(Math.floor(totalRowCount / pageSize));
+    if (firstVisibleRowIndex >= totalRowCount) {
+      table.setPageIndex(Math.ceil(totalRowCount / pageSize) - 1);
     }
-  }, [rowCount, table.getPrePaginationRowModel().rows.length]);
+  }, [totalRowCount]);
 
   //turn off sort when global filter is looking for ranked results
   const appliedSort = useRef<MRT_SortingState>(sorting);
