@@ -30,22 +30,19 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
     getState,
     getTopRows,
     options: {
-      createDisplayMode,
       enableStickyFooter,
       enableStickyHeader,
       layoutMode,
       localization,
       memoMode,
       muiTableBodyProps,
-      positionCreatingRow,
       renderDetailPanel,
       renderEmptyRowsFallback,
       rowPinningDisplayMode,
     },
     refs: { tableFooterRef, tableHeadRef, tablePaperRef },
   } = table;
-  const { columnFilters, creatingRow, globalFilter, isFullScreen, rowPinning } =
-    getState();
+  const { columnFilters, globalFilter, isFullScreen, rowPinning } = getState();
 
   const tableBodyProps = {
     ...parseFromValuesOrFunc(muiTableBodyProps, { table }),
@@ -78,26 +75,6 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
     table,
   };
 
-  const CreatingRow = creatingRow && createDisplayMode === 'row' && (
-    <MRT_TableBodyRow
-      {...commonRowProps}
-      row={creatingRow}
-      staticRowIndex={-1}
-    />
-  );
-
-  const CreatingRowBody = rowVirtualizer && CreatingRow && (
-    <TableBody
-      {...tableBodyProps}
-      sx={(theme) => ({
-        display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-        ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
-      })}
-    >
-      {CreatingRow}
-    </TableBody>
-  );
-
   return (
     <>
       {!rowPinningDisplayMode?.includes('sticky') &&
@@ -126,7 +103,6 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
             })}
           </TableBody>
         )}
-      {positionCreatingRow === 'top' && CreatingRowBody}
       <TableBody
         {...tableBodyProps}
         sx={(theme) => ({
@@ -139,9 +115,8 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
           ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
         })}
       >
-        {!rowVirtualizer && positionCreatingRow === 'top' && CreatingRow}
         {tableBodyProps?.children ??
-          (!rows.length && !CreatingRow ? (
+          (!rows.length ? (
             <tr
               style={{
                 display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
@@ -209,9 +184,7 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
               })}
             </>
           ))}
-        {!rowVirtualizer && positionCreatingRow === 'bottom' && CreatingRow}
       </TableBody>
-      {positionCreatingRow === 'bottom' && CreatingRowBody}
       {!rowPinningDisplayMode?.includes('sticky') &&
         getIsSomeRowsPinned('bottom') && (
           <TableBody

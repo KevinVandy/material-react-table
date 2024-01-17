@@ -12,11 +12,13 @@ import {
 
 interface Props<TData extends MRT_RowData> extends IconButtonProps {
   row: MRT_Row<TData>;
+  staticRowIndex?: number;
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_ExpandButton = <TData extends MRT_RowData>({
   row,
+  staticRowIndex,
   table,
 }: Props<TData>) => {
   const theme = useTheme();
@@ -34,6 +36,7 @@ export const MRT_ExpandButton = <TData extends MRT_RowData>({
 
   const iconButtonProps = parseFromValuesOrFunc(muiExpandButtonProps, {
     row,
+    staticRowIndex,
     table,
   });
 

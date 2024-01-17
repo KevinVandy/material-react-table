@@ -284,6 +284,10 @@ export const flexRender = _flexRender as (
 export const createRow = <TData extends MRT_RowData>(
   table: MRT_TableInstance<TData>,
   originalRow?: TData,
+  rowIndex = -1,
+  depth = 0,
+  subRows?: MRT_Row<TData>[],
+  parentId?: string,
 ): MRT_Row<TData> =>
   _createRow(
     table as any,
@@ -295,8 +299,10 @@ export const createRow = <TData extends MRT_RowData>(
           [getColumnId(col)]: '',
         })),
       ),
-    -1,
-    0,
+    rowIndex,
+    depth,
+    subRows as any,
+    parentId,
   ) as MRT_Row<TData>;
 
 export const extraIndexRangeExtractor = (

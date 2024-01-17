@@ -19,6 +19,7 @@ export const useMRT_Rows = <TData extends MRT_RowData>(
     getState,
     getTopRows,
     options: {
+      createDisplayMode,
       enableGlobalFilterRankedResults,
       enablePagination,
       enableRowPinning,
@@ -27,11 +28,18 @@ export const useMRT_Rows = <TData extends MRT_RowData>(
       manualGrouping,
       manualPagination,
       manualSorting,
+      positionCreatingRow,
       rowPinningDisplayMode,
     },
   } = table;
-  const { expanded, globalFilter, pagination, rowPinning, sorting } =
-    getState();
+  const {
+    creatingRow,
+    expanded,
+    globalFilter,
+    pagination,
+    rowPinning,
+    sorting,
+  } = getState();
 
   const shouldRankRows = useMemo(
     () =>
@@ -73,14 +81,32 @@ export const useMRT_Rows = <TData extends MRT_RowData>(
         ...getBottomRows().filter((row) => !pinnedRowIds.includes(row.id)),
       ];
     }
+    if (
+      positionCreatingRow !== undefined &&
+      creatingRow &&
+      createDisplayMode === 'row'
+    ) {
+      const creatingRowIndex = !isNaN(+positionCreatingRow)
+        ? +positionCreatingRow
+        : positionCreatingRow === 'top'
+          ? 0
+          : rows.length;
+      rows = [
+        ...rows.slice(0, creatingRowIndex),
+        creatingRow,
+        ...rows.slice(creatingRowIndex),
+      ];
+    }
 
     return rows;
   }, [
-    shouldRankRows,
-    shouldRankRows ? getPrePaginationRowModel().rows : getRowModel().rows,
+    creatingRow,
     pagination.pageIndex,
     pagination.pageSize,
+    positionCreatingRow,
     rowPinning,
+    shouldRankRows ? getPrePaginationRowModel().rows : getRowModel().rows,
+    shouldRankRows,
   ]);
 
   return rows;

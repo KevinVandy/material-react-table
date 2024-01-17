@@ -26,12 +26,14 @@ const commonIconButtonStyles = {
 interface Props<TData extends MRT_RowData> extends IconButtonProps {
   cell: MRT_Cell<TData>;
   row: MRT_Row<TData>;
+  staticRowIndex?: number;
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_ToggleRowActionMenuButton = <TData extends MRT_RowData>({
   cell,
   row,
+  staticRowIndex,
   table,
   ...rest
 }: Props<TData>) => {
@@ -75,7 +77,7 @@ export const MRT_ToggleRowActionMenuButton = <TData extends MRT_RowData>({
   return (
     <>
       {renderRowActions && !showEditActionButtons ? (
-        renderRowActions({ cell, row, table })
+        renderRowActions({ cell, row, staticRowIndex, table })
       ) : showEditActionButtons ? (
         <MRT_EditActionButtons row={row} table={table} />
       ) : !renderRowActionMenuItems &&
@@ -109,6 +111,7 @@ export const MRT_ToggleRowActionMenuButton = <TData extends MRT_RowData>({
             handleEdit={handleStartEditMode}
             row={row}
             setAnchorEl={setAnchorEl}
+            staticRowIndex={staticRowIndex}
             table={table}
           />
         </>

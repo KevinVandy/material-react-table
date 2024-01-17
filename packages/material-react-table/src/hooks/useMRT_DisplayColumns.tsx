@@ -133,8 +133,13 @@ function makeRowActionsColumn<TData extends MRT_RowData>(
     (creatingRow && tableOptions.createDisplayMode === 'row')
   ) {
     return {
-      Cell: ({ cell, row, table }) => (
-        <MRT_ToggleRowActionMenuButton cell={cell} row={row} table={table} />
+      Cell: ({ cell, row, staticRowIndex, table }) => (
+        <MRT_ToggleRowActionMenuButton
+          cell={cell}
+          row={row}
+          staticRowIndex={staticRowIndex}
+          table={table}
+        />
       ),
       ...defaultDisplayColumnProps(tableOptions, id, 'actions'),
     };
@@ -156,8 +161,8 @@ function makeRowExpandColumn<TData extends MRT_RowData>(
         : undefined;
 
     return {
-      Cell: ({ cell, column, row, table }) => {
-        const expandButtonProps = { row, table };
+      Cell: ({ cell, column, row, staticRowIndex, table }) => {
+        const expandButtonProps = { row, staticRowIndex, table };
         const subRowsLength = row.subRows?.length;
         if (
           tableOptions.groupedColumnMode === 'remove' &&

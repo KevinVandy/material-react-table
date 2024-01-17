@@ -919,6 +919,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   muiExpandButtonProps?:
     | ((props: {
         row: MRT_Row<TData>;
+        staticRowIndex?: number;
         table: MRT_TableInstance<TData>;
       }) => IconButtonProps)
     | IconButtonProps;
@@ -1171,11 +1172,13 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   renderRowActionMenuItems?: (props: {
     closeMenu: () => void;
     row: MRT_Row<TData>;
+    staticRowIndex?: number;
     table: MRT_TableInstance<TData>;
   }) => ReactNode[];
   renderRowActions?: (props: {
     cell: MRT_Cell<TData>;
     row: MRT_Row<TData>;
+    staticRowIndex?: number;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
   renderToolbarAlertBannerContent?: (props: {

@@ -19,6 +19,7 @@ interface Props<TData extends MRT_RowData> extends Partial<MenuProps> {
   handleEdit: (event: MouseEvent) => void;
   row: MRT_Row<TData>;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
+  staticRowIndex?: number;
   table: MRT_TableInstance<TData>;
 }
 
@@ -27,6 +28,7 @@ export const MRT_RowActionMenu = <TData extends MRT_RowData>({
   handleEdit,
   row,
   setAnchorEl,
+  staticRowIndex,
   table,
   ...rest
 }: Props<TData>) => {
@@ -67,6 +69,7 @@ export const MRT_RowActionMenu = <TData extends MRT_RowData>({
       {renderRowActionMenuItems?.({
         closeMenu: () => setAnchorEl(null),
         row,
+        staticRowIndex,
         table,
       })}
     </Menu>
