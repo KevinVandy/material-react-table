@@ -125,7 +125,6 @@ const Example = () => {
     enableGrouping: true,
     enableStickyHeader: true,
     enableStickyFooter: true,
-    groupedColumnMode: 'remove', //instead of the default 'reorder'
     initialState: {
       density: 'compact',
       expanded: true, //expand all groups by default
