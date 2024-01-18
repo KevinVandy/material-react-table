@@ -25,10 +25,10 @@
     "storybook:dev": "turbo run storybook"
   },
   "devDependencies": {
-    "prettier": "^3.1.1",
+    "prettier": "^3.2.4",
     "turbo": "^1.11.3"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.0.0"
   }
 }
