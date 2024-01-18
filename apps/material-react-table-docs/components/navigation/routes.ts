@@ -170,6 +170,10 @@ export const routes: Array<RouteItem> = [
             href: '/docs/examples/editing-crud-inline-table',
             label: 'Inline Table Editing Example',
           },
+          {
+            href: '/docs/examples/editing-crud-tree',
+            label: 'Tree Editing Example',
+          },
         ],
       },
       {

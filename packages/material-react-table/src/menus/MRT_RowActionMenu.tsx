@@ -3,11 +3,13 @@ import Box from '@mui/material/Box';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu, { type MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { useTheme } from '@mui/material/styles';
 import {
   commonListItemStyles,
   commonMenuItemStyles,
 } from './MRT_ColumnActionMenu';
 import { parseFromValuesOrFunc } from '../column.utils';
+import { getMRTTheme } from '../style.utils';
 import {
   type MRT_Row,
   type MRT_RowData,
@@ -44,11 +46,17 @@ export const MRT_RowActionMenu = <TData extends MRT_RowData>({
   } = table;
   const { density } = getState();
 
+  const theme = useTheme();
+  const { menuBackgroundColor } = getMRTTheme(table, theme);
+
   return (
     <Menu
-      MenuListProps={{
-        dense: density === 'compact',
-      }}
+    MenuListProps={{
+      dense: density === 'compact',
+      sx: {
+        backgroundColor: menuBackgroundColor,
+      },
+    }}
       anchorEl={anchorEl}
       onClick={(event) => event.stopPropagation()}
       onClose={() => setAnchorEl(null)}

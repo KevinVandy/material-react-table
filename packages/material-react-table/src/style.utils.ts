@@ -21,20 +21,26 @@ export const parseCSSVarId = (id: string) => id.replace(/[^a-zA-Z0-9]/g, '_');
 export const getMRTTheme = <TData extends MRT_RowData>(
   table: MRT_TableInstance<TData>,
   theme: Theme,
-) => ({
-  baseBackgroundColor:
-    theme.palette.mode === 'dark'
+) => {
+  const themeOverrides = parseFromValuesOrFunc(table.options.mrtTheme, theme);
+  const baseBackgroundColor =
+    themeOverrides?.baseBackgroundColor ??
+    (theme.palette.mode === 'dark'
       ? lighten(theme.palette.background.default, 0.05)
-      : theme.palette.background.default,
-  draggingBorderColor: theme.palette.primary.main,
-  matchHighlightColor:
-    theme.palette.mode === 'dark'
-      ? darken(theme.palette.warning.dark, 0.25)
-      : lighten(theme.palette.warning.light, 0.5),
-  pinnedRowBackgroundColor: alpha(theme.palette.primary.main, 0.1),
-  selectedRowBackgroundColor: alpha(theme.palette.primary.main, 0.2),
-  ...parseFromValuesOrFunc(table.options.mrtTheme, theme),
-});
+      : theme.palette.background.default);
+  return {
+    baseBackgroundColor,
+    draggingBorderColor: theme.palette.primary.main,
+    matchHighlightColor:
+      theme.palette.mode === 'dark'
+        ? darken(theme.palette.warning.dark, 0.25)
+        : lighten(theme.palette.warning.light, 0.5),
+    menuBackgroundColor: lighten(baseBackgroundColor, 0.07),
+    pinnedRowBackgroundColor: alpha(theme.palette.primary.main, 0.1),
+    selectedRowBackgroundColor: alpha(theme.palette.primary.main, 0.2),
+    ...themeOverrides,
+  };
+};
 
 export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
   column,

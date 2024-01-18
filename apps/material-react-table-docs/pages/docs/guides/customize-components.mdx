@@ -293,19 +293,23 @@ The default background color of the table toolbars and table are controlled by t
 Here is the default `mrtTheme` object used internally if not overridden:
 
 ```jsx
-{
-  baseBackgroundColor:
-    theme.palette.mode === 'dark'
-      ? lighten(theme.palette.background.default, 0.05)
-      : theme.palette.background.default,
+const themeOverrides = parseFromValuesOrFunc(table.options.mrtTheme, theme);
+const baseBackgroundColor =
+  themeOverrides?.baseBackgroundColor ??
+  (theme.palette.mode === 'dark'
+    ? lighten(theme.palette.background.default, 0.05)
+    : theme.palette.background.default);
+return {
+  baseBackgroundColor,
   draggingBorderColor: theme.palette.primary.main,
   matchHighlightColor:
     theme.palette.mode === 'dark'
       ? darken(theme.palette.warning.dark, 0.25)
       : lighten(theme.palette.warning.light, 0.5),
+  menuBackgroundColor: lighten(baseBackgroundColor, 0.07),
   pinnedRowBackgroundColor: alpha(theme.palette.primary.main, 0.1),
   selectedRowBackgroundColor: alpha(theme.palette.primary.main, 0.2),
-  ...table.options.mrtTheme,
+  ...themeOverrides,
 };
 ```
 

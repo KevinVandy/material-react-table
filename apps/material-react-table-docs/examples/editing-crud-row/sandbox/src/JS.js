@@ -31,7 +31,6 @@ const Example = () => {
         accessorKey: 'firstName',
         header: 'First Name',
         muiEditTextFieldProps: {
-          type: 'email',
           required: true,
           error: !!validationErrors?.firstName,
           helperText: validationErrors?.firstName,
@@ -48,7 +47,6 @@ const Example = () => {
         accessorKey: 'lastName',
         header: 'Last Name',
         muiEditTextFieldProps: {
-          type: 'email',
           required: true,
           error: !!validationErrors?.lastName,
           helperText: validationErrors?.lastName,

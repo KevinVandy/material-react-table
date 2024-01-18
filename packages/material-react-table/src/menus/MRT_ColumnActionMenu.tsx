@@ -5,7 +5,9 @@ import IconButton from '@mui/material/IconButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu, { type MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { useTheme } from '@mui/material/styles';
 import { MRT_FilterOptionMenu } from './MRT_FilterOptionMenu';
+import { getMRTTheme } from '../style.utils';
 import {
   type MRT_Header,
   type MRT_RowData,
@@ -396,11 +398,17 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
       : []),
   ].filter(Boolean);
 
+  const theme = useTheme();
+  const { menuBackgroundColor } = getMRTTheme(table, theme);
+
   return (
     <Menu
-      MenuListProps={{
-        dense: density === 'compact',
-      }}
+    MenuListProps={{
+      dense: density === 'compact',
+      sx: {
+        backgroundColor: menuBackgroundColor,
+      },
+    }}
       anchorEl={anchorEl}
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}

@@ -61,6 +61,17 @@ const ExpandingExamples = ({ isPage = false }) => {
               value="more"
             />
           </Link>
+          <Link href="/docs/examples/editing-crud-tree" passHref legacyBehavior>
+            <Tab
+              label={
+                <Box>
+                  Editing Sub-Rows
+                  <LaunchIcon sx={{ fontSize: '1rem' }} />
+                </Box>
+              }
+              value="more"
+            />
+          </Link>
           <Link href="/docs/examples" passHref legacyBehavior>
             <Tab
               label={

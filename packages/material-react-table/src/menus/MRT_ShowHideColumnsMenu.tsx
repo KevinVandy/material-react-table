@@ -1,10 +1,12 @@
 import { useMemo, useState } from 'react';
+import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Menu, { type MenuProps } from '@mui/material/Menu';
 import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
 import { getDefaultColumnOrderIds } from '../column.utils';
+import { getMRTTheme } from '../style.utils';
 import {
   type MRT_Column,
   type MRT_RowData,
@@ -77,10 +79,16 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
     null,
   );
 
+  const theme = useTheme();
+  const { menuBackgroundColor } = getMRTTheme(table, theme);
+
   return (
     <Menu
       MenuListProps={{
         dense: density === 'compact',
+        sx: {
+          backgroundColor: menuBackgroundColor,
+        },
       }}
       anchorEl={anchorEl}
       onClose={() => setAnchorEl(null)}

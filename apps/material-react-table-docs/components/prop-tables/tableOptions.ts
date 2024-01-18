@@ -1819,8 +1819,19 @@ export const tableOptions: TableOption[] = [
     type: "'first' | 'last'",
   },
   {
+    tableOption: 'positionCreatingRow',
+    defaultValue: "'top'",
+    description:
+      'Where to render the new blank inserted row when in creating mode. Passing in a number will render the row before the row at that index.',
+    link: '',
+    linkText: '',
+    required: false,
+    source: 'MRT',
+    type: "'top' | 'bottom' | number",
+  },
+  {
     tableOption: 'positionExpandColumn',
-    defaultValue: '',
+    defaultValue: "'first'",
     description: '',
     link: '',
     linkText: '',
@@ -1830,7 +1841,7 @@ export const tableOptions: TableOption[] = [
   },
   {
     tableOption: 'positionGlobalFilter',
-    defaultValue: '',
+    defaultValue: "'right'",
     description: '',
     link: '',
     linkText: '',
@@ -1840,7 +1851,7 @@ export const tableOptions: TableOption[] = [
   },
   {
     tableOption: 'positionPagination',
-    defaultValue: '',
+    defaultValue: "'bottom'",
     description: '',
     link: '',
     linkText: '',
@@ -1850,7 +1861,7 @@ export const tableOptions: TableOption[] = [
   },
   {
     tableOption: 'positionToolbarAlertBanner',
-    defaultValue: '',
+    defaultValue: "'top'",
     description: '',
     link: '',
     linkText: '',
@@ -1860,7 +1871,7 @@ export const tableOptions: TableOption[] = [
   },
   {
     tableOption: 'positionToolbarDropZone',
-    defaultValue: '',
+    defaultValue: "'top'",
     description: '',
     link: '',
     linkText: '',

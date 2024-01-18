@@ -247,6 +247,7 @@ export interface MRT_Theme {
   baseBackgroundColor?: CSSProperties['backgroundColor'];
   draggingBorderColor?: CSSProperties['borderColor'];
   matchHighlightColor?: CSSProperties['backgroundColor'];
+  menuBackgroundColor?: CSSProperties['backgroundColor'];
   pinnedRowBackgroundColor?: CSSProperties['backgroundColor'];
   selectedRowBackgroundColor?: CSSProperties['backgroundColor'];
 }

@@ -35,8 +35,9 @@ There are five visually distinct editing modes to choose from, whether you want 
       'onEditingRowCancel',
       'onEditingRowChange',
       'onEditingRowSave',
-      'renderEditRowDialogContent',
+      'positionCreatingRow',
       'renderCreateRowDialogContent',
+      'renderEditRowDialogContent',
     ])
   }
 />
@@ -46,6 +47,7 @@ There are five visually distinct editing modes to choose from, whether you want 
 <ColumnOptionsTable
   onlyOptions={
     new Set([
+      'Edit',
       'editSelectOptions',
       'editVariant',
       'enableEditing',
@@ -73,6 +75,36 @@ const table = useMaterialReactTable({
 ```
 
 However, this is just the first step. You will need to hook up logic and event listeners, but it depends on which `editDisplayMode` you want to use.
+
+### Disable Editing
+
+Editing can be turned off on a per-column basis with the `enableEditing` column option.
+
+```jsx
+const columns = [
+  {
+    accessorKey: 'age',
+    header: 'Age',
+    enableEditing: false,
+  },
+];
+```
+
+In the modal editing mode, a disabled text field will still be rendered for columns with editing disabled, but in the row, cell, and table editing modes, normal cell values will be rendered instead of text fields.
+
+If you want to completely remove an editing textfield from the editing modal or render the normal cell value instead, you can use the `Edit` column option to override the editing UI for that column.
+
+```jsx
+const columns = [
+  {
+    accessorKey: 'age',
+    header: 'Age',
+    enableEditing: false,
+    Edit: () => null, //don't render anything in the editing modal for this column
+    //or Edit: ({ cell, renderedCellValue }) => <>{renderedCellValue}</>, //render the normal cell value instead of a text field
+  },
+];
+```
 
 ### Edit Display Modes
 
@@ -193,6 +225,24 @@ Material React Table offers new functionality to make creating news rows of data
 #### Create Display Modes
 
 There are just three different createDisplayModes to choose from. The default is `"modal"`, but you can also choose `"row"` or `"custom"`. They work exactly the same as their editDisplayMode counterparts.
+
+#### Position Creating Row
+
+> New in v2.7
+
+By default, the creating row will be added to the top of the table. You can change this behavior with the `positionCreatingRow` table option.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableEditing: true,
+  createDisplayMode: 'modal',
+  positionCreatingRow: 'bottom', //default is 'top'
+});
+```
+
+In advanced use cases, such as editing nested expanding sub-rows, you could even pass in a number to the `positionCreatingRow` table option to specify the index of the row to insert the creating row before.
 
 #### Trigger Create Mode
 

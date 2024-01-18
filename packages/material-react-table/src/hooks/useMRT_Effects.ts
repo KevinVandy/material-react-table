@@ -13,12 +13,7 @@ export const useMRT_Effects = <TData extends MRT_RowData>(
     getIsSomeRowsPinned,
     getPrePaginationRowModel,
     getState,
-    options: {
-      autoResetPageIndex,
-      enablePagination,
-      enableRowPinning,
-      rowCount,
-    },
+    options: { enablePagination, enableRowPinning, rowCount },
   } = table;
   const {
     density,
@@ -63,8 +58,7 @@ export const useMRT_Effects = <TData extends MRT_RowData>(
 
   //if page index is out of bounds, set it to the last page
   useEffect(() => {
-    if (!enablePagination || autoResetPageIndex || isLoading || showSkeletons)
-      return;
+    if (!enablePagination || isLoading || showSkeletons) return;
     const { pageIndex, pageSize } = pagination;
     const firstVisibleRowIndex = pageIndex * pageSize;
     if (firstVisibleRowIndex >= totalRowCount) {

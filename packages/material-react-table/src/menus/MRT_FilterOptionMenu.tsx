@@ -2,6 +2,8 @@ import { useMemo } from 'react';
 import Box from '@mui/material/Box';
 import Menu, { type MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { useTheme } from '@mui/material/styles';
+import { getMRTTheme } from '../style.utils';
 import {
   type MRT_FilterOption,
   type MRT_Header,
@@ -237,10 +239,16 @@ export const MRT_FilterOptionMenu = <TData extends MRT_RowData>({
   const filterOption =
     !!header && columnDef ? columnDef._filterFn : globalFilterFn;
 
+  const theme = useTheme();
+  const { menuBackgroundColor } = getMRTTheme(table, theme);
+
   return (
     <Menu
       MenuListProps={{
         dense: density === 'compact',
+        sx: {
+          backgroundColor: menuBackgroundColor,
+        },
       }}
       anchorEl={anchorEl}
       anchorOrigin={{ horizontal: 'right', vertical: 'center' }}

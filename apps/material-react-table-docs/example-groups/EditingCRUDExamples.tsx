@@ -7,6 +7,7 @@ import ModalExample from '../examples/editing-crud-modal';
 import InlineRowExample from '../examples/editing-crud-row';
 import InlineCellExample from '../examples/editing-crud-cell';
 import InlineTableExample from '../examples/editing-crud-table';
+import TreeEditingExample from '../examples/editing-crud-tree';
 
 const EditingCRUDExamples = ({ isPage = false }) => {
   const { pathname, push } = useRouter();
@@ -33,6 +34,7 @@ const EditingCRUDExamples = ({ isPage = false }) => {
           <Tab label="Inline Row" value="editing-crud-inline-row" />
           <Tab label="Inline Cell" value="editing-crud-inline-cell" />
           <Tab label="Inline Table" value="editing-crud-inline-table" />
+          <Tab label="Tree Editing" value="editing-crud-tree" />
           <Link href="/docs/examples/remote" passHref legacyBehavior>
             <Tab
               label={
@@ -62,6 +64,7 @@ const EditingCRUDExamples = ({ isPage = false }) => {
         {activeTab === 'editing-crud-inline-row' && <InlineRowExample />}
         {activeTab === 'editing-crud-inline-cell' && <InlineCellExample />}
         {activeTab === 'editing-crud-inline-table' && <InlineTableExample />}
+        {activeTab === 'editing-crud-tree' && <TreeEditingExample />}
       </Box>
     </>
   );
