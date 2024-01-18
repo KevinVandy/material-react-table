@@ -101,7 +101,7 @@ const table = useMaterialReactTable({
 
 ### Default Sorting Features
 
-Client-side sorting is enabled by default. When sorting is toggled on for a column, the table will be sorted by an [`alphanumeric` sorting algorithm](https://tanstack.com/table/v8/docs/api/features/sorting#sorting-functions) by default.
+Client-side sorting is enabled by default. When sorting is toggled on for a column, the table will be sorted by the [`basic` sorting algorithm](https://tanstack.com/table/v8/docs/api/features/sorting#sorting-functions) by default.
 
 #### Multi-Sorting
 
@@ -137,7 +137,7 @@ By default, columns with `string` datatypes will sort alphabetically in ascendin
 
 ### Sorting Functions
 
-By default, Material React Table will use an `alphanumeric` sorting function for all columns.
+By default, Material React Table will use the `basic` sorting function for all columns.
 
 There are six built-in sorting functions you can choose from: ` alphanumeric`, `alphanumericCaseSensitive`, `text`, `textCaseSensitive`, `datetime`, and `basic`. You can learn more about these built-in sorting functions in the [TanStack Table Sorting API docs](https://tanstack.com/table/v8/docs/api/features/sorting#sorting-functions).
 
@@ -165,7 +165,7 @@ const columns = [
   {
     accessorKey: 'name',
     header: 'Name',
-    sortingFn: 'textCaseSensitive', //use the built-in textCaseSensitive sorting function instead of the default alphanumeric sorting function
+    sortingFn: 'textCaseSensitive', //use the built-in textCaseSensitive sorting function instead of the default basic sorting function
   },
   {
     accessorKey: 'age',
