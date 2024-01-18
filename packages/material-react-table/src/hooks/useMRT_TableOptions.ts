@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { MRT_AggregationFns } from '../aggregationFns';
-import { MRT_FilterFns } from '../filterFns';
+import { MRT_AggregationFns } from '../fns/aggregationFns';
+import { MRT_FilterFns } from '../fns/filterFns';
+import { MRT_SortingFns } from '../fns/sortingFns';
 import { MRT_Default_Icons } from '../icons';
 import { MRT_Localization_EN } from '../locales/en';
-import { MRT_SortingFns } from '../sortingFns';
 import {
   type MRT_DefinedTableOptions,
   type MRT_RowData,

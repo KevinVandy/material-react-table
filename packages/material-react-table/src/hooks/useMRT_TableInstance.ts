@@ -12,14 +12,6 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
-  createRow,
-  getAllLeafColumnDefs,
-  getColumnId,
-  getDefaultColumnFilterFn,
-  getDefaultColumnOrderIds,
-  prepareColumns,
-} from '../column.utils';
-import {
   type MRT_Cell,
   type MRT_Column,
   type MRT_ColumnDef,
@@ -36,6 +28,14 @@ import {
   type MRT_TableState,
   type MRT_Updater,
 } from '../types';
+import {
+  getAllLeafColumnDefs,
+  getColumnId,
+  getDefaultColumnFilterFn,
+  getDefaultColumnOrderIds,
+  prepareColumns,
+} from '../utils/column.utils';
+import { createRow } from '../utils/tanstack.helpers';
 import { useMRT_DisplayColumns } from './useMRT_DisplayColumns';
 import { useMRT_Effects } from './useMRT_Effects';
 

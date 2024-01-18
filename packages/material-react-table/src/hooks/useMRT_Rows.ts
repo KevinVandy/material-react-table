@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
-import { getCanRankRows } from '../column.utils';
-import { rankGlobalFuzzy } from '../sortingFns';
+import { rankGlobalFuzzy } from '../fns/sortingFns';
 import {
   type MRT_Row,
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../types';
+import { getCanRankRows } from '../utils/row.utils';
 
 export const useMRT_Rows = <TData extends MRT_RowData>(
   table: MRT_TableInstance<TData>,

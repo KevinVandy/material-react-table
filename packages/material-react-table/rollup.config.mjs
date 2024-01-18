@@ -8,6 +8,7 @@ export default [
     external: [
       '@mui/icons-material',
       '@mui/material',
+      '@mui/x-date-pickers',
       '@tanstack/match-sorter-utils',
       '@tanstack/react-table',
       '@tanstack/react-virtual',

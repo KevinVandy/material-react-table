@@ -1,14 +1,12 @@
 import { type ReactNode, type RefObject, useMemo } from 'react';
 import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
-import { MRT_TableBodyRowGrabHandle } from '../body/MRT_TableBodyRowGrabHandle';
-import { MRT_TableBodyRowPinButton } from '../body/MRT_TableBodyRowPinButton';
-import { MRT_ExpandAllButton } from '../buttons/MRT_ExpandAllButton';
-import { MRT_ExpandButton } from '../buttons/MRT_ExpandButton';
-import { MRT_ToggleRowActionMenuButton } from '../buttons/MRT_ToggleRowActionMenuButton';
-import { showExpandColumn } from '../column.utils';
-import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
-import { getCommonTooltipProps } from '../style.utils';
+import { MRT_TableBodyRowGrabHandle } from '../components/body/MRT_TableBodyRowGrabHandle';
+import { MRT_TableBodyRowPinButton } from '../components/body/MRT_TableBodyRowPinButton';
+import { MRT_ExpandAllButton } from '../components/buttons/MRT_ExpandAllButton';
+import { MRT_ExpandButton } from '../components/buttons/MRT_ExpandButton';
+import { MRT_ToggleRowActionMenuButton } from '../components/buttons/MRT_ToggleRowActionMenuButton';
+import { MRT_SelectCheckbox } from '../components/inputs/MRT_SelectCheckbox';
 import {
   type MRT_ColumnDef,
   type MRT_DefinedTableOptions,
@@ -16,6 +14,8 @@ import {
   type MRT_Localization,
   type MRT_RowData,
 } from '../types';
+import { showExpandColumn } from '../utils/column.utils';
+import { getCommonTooltipProps } from '../utils/style.utils';
 import { MRT_DefaultDisplayColumn } from './useMRT_TableOptions';
 
 export const useMRT_DisplayColumns = <TData extends MRT_RowData>(

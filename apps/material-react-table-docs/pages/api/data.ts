@@ -13,7 +13,7 @@ export default async function handler(
   if (process.env.NODE_ENV === 'development') {
     await new Promise((resolve) => setTimeout(resolve, 500));
   }
-  
+
   let dbData = getData();
   const { start, size, filters, sorting, globalFilter } = req.query as Record<
     string,
@@ -40,12 +40,11 @@ export default async function handler(
 
   if (globalFilter) {
     dbData = dbData.filter((row) =>
-      Object.keys(row).some(
-        (columnId) =>
-          row[columnId]
-            ?.toString()
-            ?.toLowerCase()
-            ?.includes?.((globalFilter as string).toLowerCase()),
+      Object.keys(row).some((columnId) =>
+        row[columnId]
+          ?.toString()
+          ?.toLowerCase()
+          ?.includes?.((globalFilter as string).toLowerCase()),
       ),
     );
   }

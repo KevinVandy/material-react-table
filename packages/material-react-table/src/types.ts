@@ -71,10 +71,10 @@ import {
   type DateTimePickerProps,
   type TimePickerProps,
 } from '@mui/x-date-pickers';
-import { type MRT_AggregationFns } from './aggregationFns';
-import { type MRT_FilterFns } from './filterFns';
+import { type MRT_AggregationFns } from './fns/aggregationFns';
+import { type MRT_FilterFns } from './fns/filterFns';
+import { type MRT_SortingFns } from './fns/sortingFns';
 import { type MRT_Icons } from './icons';
-import { type MRT_SortingFns } from './sortingFns';
 
 export type { MRT_Icons };
 export type LiteralUnion<T extends U, U = string> =
