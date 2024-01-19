@@ -63,7 +63,30 @@ const data = [...Array(5)].map(() => ({
 }));
 
 export const SubRowTreeEnabledDefault = () => (
-  <MaterialReactTable columns={columns} data={data} enableExpanding />
+  <MaterialReactTable columns={columns} data={data} />
+);
+
+export const SubRowTreeLayoutGrid = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    displayColumnDefOptions={{
+      'mrt-row-expand': {
+        muiTableBodyCellProps: {
+          sx: {
+            border: '1px solid red',
+            flex: '0 0 100px',
+            maxWidth: '100px',
+            overflow: 'hidden',
+            width: '100px',
+          },
+        },
+      },
+    }}
+    enableExpanding
+    initialState={{ expanded: true }}
+    layoutMode="grid"
+  />
 );
 
 export const SubRowTreeEnabledPositionLast = () => (

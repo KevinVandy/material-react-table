@@ -7,8 +7,8 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
-import { parseFromValuesOrFunc } from '../../utils/utils';
 import { getMRTTheme } from '../../utils/style.utils';
+import { parseFromValuesOrFunc } from '../../utils/utils';
 
 interface Props<TData extends MRT_RowData> extends TableRowProps {
   columnVirtualizer?: MRT_ColumnVirtualizer;

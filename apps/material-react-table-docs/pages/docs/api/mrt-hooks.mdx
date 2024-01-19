@@ -76,13 +76,7 @@ const table = useMRT_TableInstance({
 });
 ```
 
-This hook also uses the [`useMRT_DisplayColumns`](#usemrt_displaycolumns) and [`useMRT_Effects`](#usemrt_effects) to generate the built-in display columns (row numbers, actions, selection, etc) and house some extra useEffect hooks needed by some MRT features on a table wide level.
-
-### useMRT_DisplayColumns
-
-[Source Code](https://github.com/KevinVandy/material-react-table/blob/v2/packages/material-react-table/src/hooks/useMRT_DisplayColumns.tsx)
-
-This hook is responsible for generating the built-in display columns (row numbers, actions, selection, etc) and adding them to the table instance's columns array, alongside your own defined columns.
+This hook also uses the [`useMRT_Effects`](#usemrt_effects)
 
 ### useMRT_Effects
 
@@ -121,7 +115,10 @@ return rows.map((row) => {
 This hook is a wrapper around the `useVirtualizer` hook from TanStack Virtual. It consumes a `table` instance and returns a Column Virtualizer instance that is optimized for MRT table columns, with considerations for other MRT features like column pinning, column resizing, column hiding, and more.
 
 ```tsx
-import { useMaterialReactTable, useMRT_ColumnVirtualizer } from 'material-react-table';
+import {
+  useMaterialReactTable,
+  useMRT_ColumnVirtualizer,
+} from 'material-react-table';
 
 const table = useMaterialReactTable({
   ...options,
@@ -141,7 +138,10 @@ You would only need to use this hook if you are writing a custom headless table 
 This hook is a wrapper around the `useVirtualizer` hook from TanStack Virtual. It consumes a `table` instance and returns a Row Virtualizer instance that is optimized for MRT table rows, with considerations for other MRT features like row pinning, row dragging, and more.
 
 ```tsx
-import { useMaterialReactTable, useMRT_RowVirtualizer } from 'material-react-table';
+import {
+  useMaterialReactTable,
+  useMRT_RowVirtualizer,
+} from 'material-react-table';
 
 const table = useMaterialReactTable({
   ...options,
