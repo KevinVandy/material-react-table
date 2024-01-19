@@ -33,9 +33,9 @@ import {
   getAllLeafColumnDefs,
   getColumnId,
   getDefaultColumnFilterFn,
-  getDefaultColumnOrderIds,
   prepareColumns,
 } from '../utils/column.utils';
+import { getDefaultColumnOrderIds } from '../utils/displayColumn.utils';
 import { createRow } from '../utils/tanstack.helpers';
 import { useMRT_DisplayColumns } from './useMRT_DisplayColumns';
 import { useMRT_Effects } from './useMRT_Effects';

@@ -4,44 +4,54 @@ import {
   type MRT_RowData,
   type MRT_StatefulTableOptions,
 } from '../types';
-import { useMRT_RowActionsColumnDef } from './display-columns/useMRT_RowActionsColumnDef';
-import { useMRT_RowDragColumnDef } from './display-columns/useMRT_RowDragColumnDef';
-import { useMRT_RowExpandColumnDef } from './display-columns/useMRT_RowExpandColumnDef';
-import { useMRT_RowNumbersColumnDef } from './display-columns/useMRT_RowNumbersColumnDef';
-import { useMRT_RowPinningColumnDef } from './display-columns/useMRT_RowPinningColumnDef';
-import { useMRT_RowSelectColumnDef } from './display-columns/useMRT_RowSelectColumnDef';
-import { useMRT_RowSpacerColumnDef } from './display-columns/useMRT_RowSpacerColumnDef';
+import {
+  showRowActionsColumn,
+  showRowDragColumn,
+  showRowExpandColumn,
+  showRowNumbersColumn,
+  showRowPinningColumn,
+  showRowSelectionColumn,
+  showRowSpacerColumn,
+} from '../utils/displayColumn.utils';
+import { getMRT_RowActionsColumnDef } from './display-columns/getMRT_RowActionsColumnDef';
+import { getMRT_RowDragColumnDef } from './display-columns/getMRT_RowDragColumnDef';
+import { getMRT_RowExpandColumnDef } from './display-columns/getMRT_RowExpandColumnDef';
+import { getMRT_RowNumbersColumnDef } from './display-columns/getMRT_RowNumbersColumnDef';
+import { getMRT_RowPinningColumnDef } from './display-columns/getMRT_RowPinningColumnDef';
+import { getMRT_RowSelectColumnDef } from './display-columns/getMRT_RowSelectColumnDef';
+import { getMRT_RowSpacerColumnDef } from './display-columns/getMRT_RowSpacerColumnDef';
 
 export const useMRT_DisplayColumns = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
 ): MRT_ColumnDef<TData>[] => {
-  const mrtPinningColumnDef = useMRT_RowPinningColumnDef(tableOptions);
-  const mrtDragColumnDef = useMRT_RowDragColumnDef(tableOptions);
-  const mrtActionsColumnDef = useMRT_RowActionsColumnDef(tableOptions);
-  const mrtExpandColumnDef = useMRT_RowExpandColumnDef(tableOptions);
-  const mrtSelectColumnDef = useMRT_RowSelectColumnDef(tableOptions);
-  const mrtNumbersColumnDef = useMRT_RowNumbersColumnDef(tableOptions);
-  const mrtSpacerColumnDef = useMRT_RowSpacerColumnDef(tableOptions);
-  
+  const _showRowPinningColumn = showRowPinningColumn(tableOptions);
+  const _showRowDragColumn = showRowDragColumn(tableOptions);
+  const _showRowActionsColumn = showRowActionsColumn(tableOptions);
+  const _showRowExpandColumn = showRowExpandColumn(tableOptions);
+  const _showRowSelectionColumn = showRowSelectionColumn(tableOptions);
+  const _showRowNumbersColumn = showRowNumbersColumn(tableOptions);
+  const _showRowSpacerColumn = showRowSpacerColumn(tableOptions);
+
   return useMemo(
     () =>
       [
-        mrtPinningColumnDef,
-        mrtDragColumnDef,
-        mrtActionsColumnDef,
-        mrtExpandColumnDef,
-        mrtSelectColumnDef,
-        mrtNumbersColumnDef,
-        mrtSpacerColumnDef,
+        _showRowPinningColumn && getMRT_RowPinningColumnDef(tableOptions),
+        _showRowDragColumn && getMRT_RowDragColumnDef(tableOptions),
+        _showRowActionsColumn && getMRT_RowActionsColumnDef(tableOptions),
+        _showRowExpandColumn && getMRT_RowExpandColumnDef(tableOptions),
+        _showRowSelectionColumn && getMRT_RowSelectColumnDef(tableOptions),
+        _showRowNumbersColumn && getMRT_RowNumbersColumnDef(tableOptions),
+        _showRowSpacerColumn && getMRT_RowSpacerColumnDef(tableOptions),
       ].filter(Boolean) as MRT_ColumnDef<TData>[],
     [
-      mrtPinningColumnDef,
-      mrtDragColumnDef,
-      mrtActionsColumnDef,
-      mrtExpandColumnDef,
-      mrtSelectColumnDef,
-      mrtNumbersColumnDef,
-      mrtSpacerColumnDef,
+      _showRowPinningColumn,
+      _showRowDragColumn,
+      _showRowActionsColumn,
+      _showRowExpandColumn,
+      _showRowSelectionColumn,
+      _showRowNumbersColumn,
+      _showRowSpacerColumn,
+      tableOptions,
     ],
   );
 };

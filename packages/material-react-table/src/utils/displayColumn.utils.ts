@@ -1,9 +1,9 @@
 import {
   type MRT_DefinedTableOptions,
   type MRT_DisplayColumnIds,
-  type MRT_GroupingState,
   type MRT_Localization,
   type MRT_RowData,
+  type MRT_StatefulTableOptions,
 } from '../types';
 import { getAllLeafColumnDefs, getColumnId } from './column.utils';
 
@@ -29,58 +29,101 @@ export function defaultDisplayColumnProps<TData extends MRT_RowData>({
   } as const;
 }
 
-export const showExpandColumn = <TData extends MRT_RowData>(
-  tableOptions: MRT_DefinedTableOptions<TData>,
-  grouping?: MRT_GroupingState,
-) =>
-  !!(
-    tableOptions.enableExpanding ||
-    (tableOptions.enableGrouping &&
-      (grouping === undefined || grouping?.length)) ||
-    tableOptions.renderDetailPanel
+export const showRowPinningColumn = <TData extends MRT_RowData>(
+  tableOptions: MRT_StatefulTableOptions<TData>,
+) => {
+  const { enableRowPinning, rowPinningDisplayMode } = tableOptions;
+  return enableRowPinning && !rowPinningDisplayMode?.startsWith('select');
+};
+
+export const showRowDragColumn = <TData extends MRT_RowData>(
+  tableOptions: MRT_StatefulTableOptions<TData>,
+) => {
+  const { enableRowDragging, enableRowOrdering } = tableOptions;
+  return enableRowDragging || enableRowOrdering;
+};
+
+export const showRowExpandColumn = <TData extends MRT_RowData>(
+  tableOptions: MRT_StatefulTableOptions<TData>,
+) => {
+  const {
+    enableExpanding,
+    enableGrouping,
+    renderDetailPanel,
+    state: { grouping },
+  } = tableOptions;
+  return !!(
+    enableExpanding ||
+    (enableGrouping && (grouping === undefined || grouping?.length)) ||
+    renderDetailPanel
   );
+};
+
+export const showRowActionsColumn = <TData extends MRT_RowData>(
+  tableOptions: MRT_StatefulTableOptions<TData>,
+) => {
+  const {
+    createDisplayMode,
+    editDisplayMode,
+    enableEditing,
+    enableRowActions,
+    state: { creatingRow },
+  } = tableOptions;
+  return (
+    enableRowActions ||
+    (enableEditing && ['modal', 'row'].includes(editDisplayMode ?? '')) ||
+    (creatingRow && createDisplayMode === 'row')
+  );
+};
+
+export const showRowSelectionColumn = <TData extends MRT_RowData>(
+  tableOptions: MRT_StatefulTableOptions<TData>,
+) => tableOptions.enableRowSelection;
+
+export const showRowNumbersColumn = <TData extends MRT_RowData>(
+  tableOptions: MRT_StatefulTableOptions<TData>,
+) => tableOptions.enableRowNumbers;
+
+export const showRowSpacerColumn = <TData extends MRT_RowData>(
+  tableOptions: MRT_StatefulTableOptions<TData>,
+) => tableOptions.layoutMode === 'grid-no-grow';
 
 export const getLeadingDisplayColumnIds = <TData extends MRT_RowData>(
-  props: MRT_DefinedTableOptions<TData>,
+  tableOptions: MRT_StatefulTableOptions<TData>,
 ) =>
   [
-    props.enableRowPinning &&
-      !props.rowPinningDisplayMode?.startsWith('select') &&
-      'mrt-row-pin',
-    (props.enableRowDragging || props.enableRowOrdering) && 'mrt-row-drag',
-    props.positionActionsColumn === 'first' &&
-      (props.enableRowActions ||
-        (props.enableEditing &&
-          ['modal', 'row'].includes(props.editDisplayMode ?? ''))) &&
+    showRowPinningColumn(tableOptions) && 'mrt-row-pin',
+    showRowDragColumn(tableOptions) && 'mrt-row-drag',
+    tableOptions.positionActionsColumn === 'first' &&
+      showRowActionsColumn(tableOptions) &&
       'mrt-row-actions',
-    props.positionExpandColumn === 'first' &&
-      showExpandColumn(props) &&
+    tableOptions.positionExpandColumn === 'first' &&
+      showRowExpandColumn(tableOptions) &&
       'mrt-row-expand',
-    props.enableRowSelection && 'mrt-row-select',
-    props.enableRowNumbers && 'mrt-row-numbers',
+    showRowSelectionColumn(tableOptions) && 'mrt-row-select',
+    showRowNumbersColumn(tableOptions) && 'mrt-row-numbers',
   ].filter(Boolean) as MRT_DisplayColumnIds[];
 
 export const getTrailingDisplayColumnIds = <TData extends MRT_RowData>(
-  props: MRT_DefinedTableOptions<TData>,
+  tableOptions: MRT_StatefulTableOptions<TData>,
 ) =>
   [
-    props.positionActionsColumn === 'last' &&
-      (props.enableRowActions ||
-        (props.enableEditing &&
-          ['modal', 'row'].includes(props.editDisplayMode ?? ''))) &&
+    tableOptions.positionActionsColumn === 'last' &&
+      showRowActionsColumn(tableOptions) &&
       'mrt-row-actions',
-    props.positionExpandColumn === 'last' &&
-      showExpandColumn(props) &&
+    tableOptions.positionExpandColumn === 'last' &&
+      showRowExpandColumn(tableOptions) &&
       'mrt-row-expand',
-    props.layoutMode === 'grid-no-grow' && 'mrt-row-spacer',
+    showRowSpacerColumn(tableOptions) && 'mrt-row-spacer',
   ].filter(Boolean) as MRT_DisplayColumnIds[];
 
 export const getDefaultColumnOrderIds = <TData extends MRT_RowData>(
-  props: MRT_DefinedTableOptions<TData>,
+  tableOptions: MRT_StatefulTableOptions<TData>,
 ) => {
-  const leadingDisplayCols: string[] = getLeadingDisplayColumnIds(props);
-  const trailingDisplayCols: string[] = getTrailingDisplayColumnIds(props);
-  const allLeafColumnDefs = getAllLeafColumnDefs(props.columns)
+  const leadingDisplayCols: string[] = getLeadingDisplayColumnIds(tableOptions);
+  const trailingDisplayCols: string[] =
+    getTrailingDisplayColumnIds(tableOptions);
+  const allLeafColumnDefs = getAllLeafColumnDefs(tableOptions.columns)
     .map((columnDef) => getColumnId(columnDef))
     .filter(
       (columnId) =>
