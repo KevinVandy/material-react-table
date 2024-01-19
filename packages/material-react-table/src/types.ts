@@ -344,6 +344,7 @@ export type MRT_StatefulTableOptions<TData extends MRT_RowData> =
       MRT_TableState<TData>,
       | 'columnFilterFns'
       | 'columnOrder'
+      | 'columnSizingInfo'
       | 'creatingRow'
       | 'density'
       | 'draggingColumn'

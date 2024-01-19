@@ -14,7 +14,6 @@ import { getMRT_RowSpacerColumnDef } from './getMRT_RowSpacerColumnDef';
 export const getMRT_DisplayColumns = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
 ): MRT_ColumnDef<TData>[] => {
-  console.log('useMRT_DisplayColumns');
   return [
     getMRT_RowNumbersColumnDef(tableOptions),
     getMRT_RowSelectColumnDef(tableOptions),

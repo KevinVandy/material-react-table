@@ -93,14 +93,7 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
   );
   const [columnSizingInfo, onColumnSizingInfoChange] =
     useState<MRT_ColumnSizingInfoState>(
-      initialState.columnSizingInfo ?? {
-        columnSizingStart: [],
-        deltaOffset: null,
-        deltaPercentage: null,
-        isResizingColumn: false,
-        startOffset: null,
-        startSize: null,
-      },
+      initialState.columnSizingInfo ?? ({} as MRT_ColumnSizingInfoState),
     );
   const [density, setDensity] = useState<MRT_DensityState>(
     initialState?.density ?? 'comfortable',
@@ -172,15 +165,18 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
 
   const tableOptions = _tableOptions as MRT_StatefulTableOptions<TData>;
 
-  tableOptions.columns = prepareColumns({
-    columnDefs: [
-      ...getMRT_DisplayColumns(tableOptions),
-      ...tableOptions.columns,
-    ],
-    tableOptions,
-  });
-
-  console.log('create column defs');
+  //don't recompute columnDefs while resizing column.
+  const columnDefsRef = useRef<MRT_ColumnDef<TData>[]>([]);
+  tableOptions.columns = tableOptions.state.columnSizingInfo.isResizingColumn
+    ? columnDefsRef.current
+    : prepareColumns({
+        columnDefs: [
+          ...getMRT_DisplayColumns(tableOptions),
+          ...tableOptions.columns,
+        ],
+        tableOptions,
+      });
+  columnDefsRef.current = tableOptions.columns;
 
   tableOptions.data = useMemo(
     () =>
