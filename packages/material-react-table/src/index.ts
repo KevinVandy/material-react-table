@@ -2,6 +2,9 @@ export * from './types';
 
 //helpers
 export * from './utils/tanstack.helpers';
+export * from './utils/column.utils';
+export * from './utils/displayColumn.utils';
+export * from './utils/row.utils';
 
 //fns
 export * from './fns/aggregationFns';

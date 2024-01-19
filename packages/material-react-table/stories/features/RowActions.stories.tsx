@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShareIcon from '@mui/icons-material/Share';
@@ -86,6 +87,52 @@ export const RowActionsEnabled = () => (
     ]}
   />
 );
+
+export const RowActionsEnabledConditionally = () => {
+  const [enabled, setEnabled] = useState(false);
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      enableRowActions={enabled}
+      initialState={{
+        columnOrder: ['mrt-row-actions', ...columns.map((c) => c.accessorKey!)],
+      }}
+      renderRowActionMenuItems={({ closeMenu, row }) => [
+        <MenuItem
+          key={1}
+          onClick={() => {
+            console.info('View Profile', row);
+            closeMenu();
+          }}
+        >
+          <AccountCircleIcon /> View Profile
+        </MenuItem>,
+        <MenuItem
+          key={2}
+          onClick={() => {
+            console.info('Remove', row);
+            closeMenu();
+          }}
+        >
+          <DeleteIcon /> Remove
+        </MenuItem>,
+        <MenuItem
+          key={3}
+          onClick={() => {
+            console.info('Share', row);
+            closeMenu();
+          }}
+        >
+          <ShareIcon /> Share
+        </MenuItem>,
+      ]}
+      renderTopToolbarCustomActions={() => (
+        <Button onClick={() => setEnabled(!enabled)}>Toggle Row Actions</Button>
+      )}
+    />
+  );
+};
 
 export const RowActionsAndEditingEnabled = () => (
   <MaterialReactTable

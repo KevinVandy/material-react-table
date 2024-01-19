@@ -136,6 +136,60 @@ export const EditingEnabledEditModeModalDefault = () => {
   );
 };
 
+export const EditingFeatureEnabledConditionally = () => {
+  const [enabled, setEnabled] = useState(false);
+  const [tableData, setTableData] = useState(data);
+
+  const handleSaveRow: MRT_TableOptions<Person>['onEditingRowSave'] = ({
+    exitEditingMode,
+    row,
+    values,
+  }) => {
+    tableData[row.index] = values;
+    setTableData([...tableData]);
+    exitEditingMode();
+  };
+
+  const columns = [
+    {
+      accessorKey: 'firstName',
+      header: 'First Name',
+    },
+    {
+      accessorKey: 'lastName',
+      header: 'Last Name',
+    },
+    {
+      accessorKey: 'address',
+      header: 'Address',
+    },
+    {
+      accessorKey: 'state',
+      header: 'State',
+    },
+    {
+      accessorKey: 'phoneNumber',
+      enableEditing: false,
+      header: 'Phone Number',
+    },
+  ];
+
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={tableData}
+      enableEditing={enabled}
+      initialState={{
+        columnOrder: ['mrt-row-actions', ...columns.map((c) => c.accessorKey!)],
+      }}
+      onEditingRowSave={handleSaveRow}
+      renderTopToolbarCustomActions={() => (
+        <Button onClick={() => setEnabled(!enabled)}>Toggle Editing</Button>
+      )}
+    />
+  );
+};
+
 export const EditingEnabledEditModeRow = () => {
   const [tableData, setTableData] = useState(data);
 

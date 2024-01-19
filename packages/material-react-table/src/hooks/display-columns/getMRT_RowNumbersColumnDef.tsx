@@ -15,7 +15,7 @@ export const getMRT_RowNumbersColumnDef = <TData extends MRT_RowData>(
     return null;
   }
 
-  const { rowNumberDisplayMode } = tableOptions;
+  const { localization, rowNumberDisplayMode } = tableOptions;
   const {
     pagination: { pageIndex, pageSize },
   } = tableOptions.state;
@@ -25,6 +25,7 @@ export const getMRT_RowNumbersColumnDef = <TData extends MRT_RowData>(
       ((rowNumberDisplayMode === 'static'
         ? (staticRowIndex || 0) + (pageSize || 0) * (pageIndex || 0)
         : row.index) ?? 0) + 1,
+    Header: () => localization.rowNumber,
     ...defaultDisplayColumnProps({
       header: 'rowNumbers',
       id: 'mrt-row-numbers',
