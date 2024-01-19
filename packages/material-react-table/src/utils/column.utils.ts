@@ -5,12 +5,9 @@ import {
   type MRT_ColumnOrderState,
   type MRT_DefinedColumnDef,
   type MRT_DefinedTableOptions,
-  type MRT_DisplayColumnIds,
   type MRT_FilterOption,
-  type MRT_GroupingState,
   type MRT_RowData,
   type MRT_TableInstance,
-  type MRT_TableOptions,
 } from '../types';
 
 export const getColumnId = <TData extends MRT_RowData>(
@@ -113,66 +110,6 @@ export const reorderColumn = <TData extends MRT_RowData>(
     newColumnOrder.splice(newColumnOrder.indexOf(draggedColumn.id), 1)[0],
   );
   return newColumnOrder;
-};
-
-export const showExpandColumn = <TData extends MRT_RowData>(
-  props: MRT_TableOptions<TData>,
-  grouping?: MRT_GroupingState,
-) =>
-  !!(
-    props.enableExpanding ||
-    (props.enableGrouping && (grouping === undefined || grouping?.length)) ||
-    props.renderDetailPanel
-  );
-
-export const getLeadingDisplayColumnIds = <TData extends MRT_RowData>(
-  props: MRT_TableOptions<TData>,
-) =>
-  [
-    props.enableRowPinning &&
-      !props.rowPinningDisplayMode?.startsWith('select') &&
-      'mrt-row-pin',
-    (props.enableRowDragging || props.enableRowOrdering) && 'mrt-row-drag',
-    props.positionActionsColumn === 'first' &&
-      (props.enableRowActions ||
-        (props.enableEditing &&
-          ['modal', 'row'].includes(props.editDisplayMode ?? ''))) &&
-      'mrt-row-actions',
-    props.positionExpandColumn === 'first' &&
-      showExpandColumn(props) &&
-      'mrt-row-expand',
-    props.enableRowSelection && 'mrt-row-select',
-    props.enableRowNumbers && 'mrt-row-numbers',
-  ].filter(Boolean) as MRT_DisplayColumnIds[];
-
-export const getTrailingDisplayColumnIds = <TData extends MRT_RowData>(
-  props: MRT_TableOptions<TData>,
-) =>
-  [
-    props.positionActionsColumn === 'last' &&
-      (props.enableRowActions ||
-        (props.enableEditing &&
-          ['modal', 'row'].includes(props.editDisplayMode ?? ''))) &&
-      'mrt-row-actions',
-    props.positionExpandColumn === 'last' &&
-      showExpandColumn(props) &&
-      'mrt-row-expand',
-    props.layoutMode === 'grid-no-grow' && 'mrt-row-spacer',
-  ].filter(Boolean) as MRT_DisplayColumnIds[];
-
-export const getDefaultColumnOrderIds = <TData extends MRT_RowData>(
-  props: MRT_TableOptions<TData>,
-) => {
-  const leadingDisplayCols: string[] = getLeadingDisplayColumnIds(props);
-  const trailingDisplayCols: string[] = getTrailingDisplayColumnIds(props);
-  const allLeafColumnDefs = getAllLeafColumnDefs(props.columns)
-    .map((columnDef) => getColumnId(columnDef))
-    .filter(
-      (columnId) =>
-        !leadingDisplayCols.includes(columnId) &&
-        !trailingDisplayCols.includes(columnId),
-    );
-  return [...leadingDisplayCols, ...allLeafColumnDefs, ...trailingDisplayCols];
 };
 
 export const getDefaultColumnFilterFn = <TData extends MRT_RowData>(

@@ -302,7 +302,7 @@ export type MRT_TableInstance<TData extends MRT_RowData> = Omit<
   getSelectedRowModel: () => MRT_RowModel<TData>;
   getState: () => MRT_TableState<TData>;
   getTopRows: () => MRT_Row<TData>[];
-  options: MRT_DefinedTableOptions<TData>;
+  options: MRT_StatefulTableOptions<TData>;
   refs: {
     bottomToolbarRef: MutableRefObject<HTMLDivElement>;
     editInputRefs: MutableRefObject<Record<string, HTMLInputElement>>;
@@ -336,6 +336,31 @@ export type MRT_DefinedTableOptions<TData extends MRT_RowData> =
   MRT_TableOptions<TData> & {
     icons: MRT_Icons;
     localization: MRT_Localization;
+  };
+
+export type MRT_StatefulTableOptions<TData extends MRT_RowData> =
+  MRT_DefinedTableOptions<TData> & {
+    state: Pick<
+      MRT_TableState<TData>,
+      | 'columnFilterFns'
+      | 'columnOrder'
+      | 'creatingRow'
+      | 'density'
+      | 'draggingColumn'
+      | 'draggingRow'
+      | 'editingCell'
+      | 'editingRow'
+      | 'globalFilterFn'
+      | 'grouping'
+      | 'hoveredColumn'
+      | 'hoveredRow'
+      | 'isFullScreen'
+      | 'pagination'
+      | 'showAlertBanner'
+      | 'showColumnFilters'
+      | 'showGlobalFilter'
+      | 'showToolbarDropZone'
+    >;
   };
 
 export type MRT_TableState<TData extends MRT_RowData> = TableState & {

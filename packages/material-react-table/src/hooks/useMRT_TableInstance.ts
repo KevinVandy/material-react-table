@@ -24,6 +24,7 @@ import {
   type MRT_PaginationState,
   type MRT_Row,
   type MRT_RowData,
+  type MRT_StatefulTableOptions,
   type MRT_TableInstance,
   type MRT_TableState,
   type MRT_Updater,
@@ -39,11 +40,9 @@ import { createRow } from '../utils/tanstack.helpers';
 import { useMRT_DisplayColumns } from './useMRT_DisplayColumns';
 import { useMRT_Effects } from './useMRT_Effects';
 
-export const useMRT_TableInstance: <TData extends MRT_RowData>(
+export const useMRT_TableInstance = <TData extends MRT_RowData>(
   tableOptions: MRT_DefinedTableOptions<TData>,
-) => MRT_TableInstance<TData> = <TData extends MRT_RowData>(
-  tableOptions: MRT_DefinedTableOptions<TData>,
-) => {
+): MRT_TableInstance<TData> => {
   const bottomToolbarRef = useRef<HTMLDivElement>(null);
   const editInputRefs = useRef<Record<string, HTMLInputElement>>({});
   const filterInputRefs = useRef<Record<string, HTMLInputElement>>({});
@@ -154,7 +153,9 @@ export const useMRT_TableInstance: <TData extends MRT_RowData>(
     ...tableOptions.state,
   };
 
-  const displayColumns = useMRT_DisplayColumns(tableOptions);
+  const displayColumns = useMRT_DisplayColumns(
+    tableOptions as MRT_StatefulTableOptions<TData>,
+  );
 
   tableOptions.columns = useMemo(
     () =>
