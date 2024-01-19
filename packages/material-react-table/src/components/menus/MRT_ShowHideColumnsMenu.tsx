@@ -10,7 +10,7 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
-import { getDefaultColumnOrderIds } from '../../utils/column.utils';
+import { getDefaultColumnOrderIds } from '../../utils/displayColumn.utils';
 import { getMRTTheme } from '../../utils/style.utils';
 
 interface Props<TData extends MRT_RowData> extends Partial<MenuProps> {
@@ -114,9 +114,7 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
         {enableColumnOrdering && (
           <Button
             onClick={() =>
-              table.setColumnOrder(
-                getDefaultColumnOrderIds(table.options as any),
-              )
+              table.setColumnOrder(getDefaultColumnOrderIds(table.options))
             }
           >
             {localization.resetOrder}

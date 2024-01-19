@@ -17,6 +17,7 @@ import {
   type MRT_ColumnDef,
   type MRT_ColumnFilterFnsState,
   type MRT_ColumnOrderState,
+  type MRT_ColumnSizingInfoState,
   type MRT_DefinedTableOptions,
   type MRT_DensityState,
   type MRT_FilterOption,
@@ -37,11 +38,11 @@ import {
 } from '../utils/column.utils';
 import { getDefaultColumnOrderIds } from '../utils/displayColumn.utils';
 import { createRow } from '../utils/tanstack.helpers';
-import { useMRT_DisplayColumns } from './useMRT_DisplayColumns';
+import { getMRT_DisplayColumns } from './display-columns/getMRT_DisplayColumns';
 import { useMRT_Effects } from './useMRT_Effects';
 
 export const useMRT_TableInstance = <TData extends MRT_RowData>(
-  tableOptions: MRT_DefinedTableOptions<TData>,
+  _tableOptions: MRT_DefinedTableOptions<TData>,
 ): MRT_TableInstance<TData> => {
   const bottomToolbarRef = useRef<HTMLDivElement>(null);
   const editInputRefs = useRef<Record<string, HTMLInputElement>>({});
@@ -55,14 +56,18 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
   const tableFooterRef = useRef<HTMLTableSectionElement>(null);
 
   const initialState: Partial<MRT_TableState<TData>> = useMemo(() => {
-    const initState = tableOptions.initialState ?? {};
+    const initState = _tableOptions.initialState ?? {};
     initState.columnOrder =
-      initState.columnOrder ?? getDefaultColumnOrderIds(tableOptions);
-    initState.globalFilterFn = tableOptions.globalFilterFn ?? 'fuzzy';
+      initState.columnOrder ??
+      getDefaultColumnOrderIds({
+        ..._tableOptions,
+        state: { ..._tableOptions.initialState, ..._tableOptions.state },
+      } as MRT_StatefulTableOptions<TData>);
+    initState.globalFilterFn = _tableOptions.globalFilterFn ?? 'fuzzy';
     return initState;
   }, []);
 
-  tableOptions.initialState = initialState;
+  _tableOptions.initialState = initialState;
 
   const [creatingRow, _setCreatingRow] = useState<MRT_Row<TData> | null>(
     initialState.creatingRow ?? null,
@@ -72,7 +77,7 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
       Object.assign(
         {},
         ...getAllLeafColumnDefs(
-          tableOptions.columns as MRT_ColumnDef<TData>[],
+          _tableOptions.columns as MRT_ColumnDef<TData>[],
         ).map((col) => ({
           [getColumnId(col)]:
             col.filterFn instanceof Function
@@ -86,6 +91,17 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
   const [columnOrder, onColumnOrderChange] = useState<MRT_ColumnOrderState>(
     initialState.columnOrder ?? [],
   );
+  const [columnSizingInfo, onColumnSizingInfoChange] =
+    useState<MRT_ColumnSizingInfoState>(
+      initialState.columnSizingInfo ?? {
+        columnSizingStart: [],
+        deltaOffset: null,
+        deltaPercentage: null,
+        isResizingColumn: false,
+        startOffset: null,
+        startSize: null,
+      },
+    );
   const [density, setDensity] = useState<MRT_DensityState>(
     initialState?.density ?? 'comfortable',
   );
@@ -119,7 +135,7 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
     initialState?.pagination ?? { pageIndex: 0, pageSize: 10 },
   );
   const [showAlertBanner, setShowAlertBanner] = useState<boolean>(
-    tableOptions.initialState?.showAlertBanner ?? false,
+    initialState?.showAlertBanner ?? false,
   );
   const [showColumnFilters, setShowColumnFilters] = useState<boolean>(
     initialState?.showColumnFilters ?? false,
@@ -131,9 +147,10 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
     initialState?.showToolbarDropZone ?? false,
   );
 
-  tableOptions.state = {
+  _tableOptions.state = {
     columnFilterFns,
     columnOrder,
+    columnSizingInfo,
     creatingRow,
     density,
     draggingColumn,
@@ -150,32 +167,29 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
     showColumnFilters,
     showGlobalFilter,
     showToolbarDropZone,
-    ...tableOptions.state,
+    ..._tableOptions.state,
   };
 
-  const displayColumns = useMRT_DisplayColumns(
-    tableOptions as MRT_StatefulTableOptions<TData>,
-  );
+  const tableOptions = _tableOptions as MRT_StatefulTableOptions<TData>;
 
-  tableOptions.columns = useMemo(
-    () =>
-      prepareColumns({
-        columnDefs: [...displayColumns, ...tableOptions.columns],
-        tableOptions,
-      }),
-    [displayColumns, tableOptions.columns],
-  );
+  tableOptions.columns = prepareColumns({
+    columnDefs: [
+      ...getMRT_DisplayColumns(tableOptions),
+      ...tableOptions.columns,
+    ],
+    tableOptions,
+  });
+
+  console.log('create column defs');
 
   tableOptions.data = useMemo(
     () =>
-      (tableOptions.state?.isLoading || tableOptions.state?.showSkeletons) &&
+      (tableOptions.state.isLoading || tableOptions.state.showSkeletons) &&
       !tableOptions.data.length
         ? [
-            ...Array(
-              tableOptions.state?.pagination?.pageSize ||
-                initialState?.pagination?.pageSize ||
-                10,
-            ).fill(null),
+            ...Array(Math.min(tableOptions.state.pagination.pageSize, 20)).fill(
+              null,
+            ),
           ].map(() =>
             Object.assign(
               {},
@@ -187,8 +201,8 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
         : tableOptions.data,
     [
       tableOptions.data,
-      tableOptions.state?.isLoading,
-      tableOptions.state?.showSkeletons,
+      tableOptions.state.isLoading,
+      tableOptions.state.showSkeletons,
     ],
   );
 
@@ -225,6 +239,7 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
       : undefined,
     getSubRows: (row) => row?.subRows,
     onColumnOrderChange,
+    onColumnSizingInfoChange,
     onGroupingChange,
     onPaginationChange,
     ...tableOptions,

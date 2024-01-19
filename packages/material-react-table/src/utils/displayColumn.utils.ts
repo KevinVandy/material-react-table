@@ -71,8 +71,8 @@ export const showRowActionsColumn = <TData extends MRT_RowData>(
   } = tableOptions;
   return (
     enableRowActions ||
-    (enableEditing && ['modal', 'row'].includes(editDisplayMode ?? '')) ||
-    (creatingRow && createDisplayMode === 'row')
+    (creatingRow && createDisplayMode === 'row') ||
+    (enableEditing && ['modal', 'row'].includes(editDisplayMode ?? ''))
   );
 };
 

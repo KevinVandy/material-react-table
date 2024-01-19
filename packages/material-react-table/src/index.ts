@@ -11,7 +11,6 @@ export * from './fns/sortingFns';
 //hooks
 export * from './hooks/useMaterialReactTable';
 export * from './hooks/useMRT_ColumnVirtualizer';
-export * from './hooks/useMRT_DisplayColumns';
 export * from './hooks/useMRT_Effects';
 export * from './hooks/useMRT_RowVirtualizer';
 export * from './hooks/useMRT_Rows';

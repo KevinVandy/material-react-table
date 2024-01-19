@@ -5,11 +5,18 @@ import {
   type MRT_RowData,
   type MRT_StatefulTableOptions,
 } from '../../types';
-import { defaultDisplayColumnProps } from '../../utils/displayColumn.utils';
+import {
+  defaultDisplayColumnProps,
+  showRowDragColumn,
+} from '../../utils/displayColumn.utils';
 
 export const getMRT_RowDragColumnDef = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
 ): MRT_ColumnDef<TData> | null => {
+  if (!showRowDragColumn(tableOptions)) {
+    return null;
+  }
+
   return {
     Cell: ({ row, rowRef, table }) => (
       <MRT_TableBodyRowGrabHandle
