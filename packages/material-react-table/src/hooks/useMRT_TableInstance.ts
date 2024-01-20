@@ -165,17 +165,20 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
 
   const tableOptions = _tableOptions as MRT_StatefulTableOptions<TData>;
 
-  //don't recompute columnDefs while resizing column.
+  //don't recompute columnDefs while resizing column or dragging column/row
   const columnDefsRef = useRef<MRT_ColumnDef<TData>[]>([]);
-  tableOptions.columns = tableOptions.state.columnSizingInfo.isResizingColumn
-    ? columnDefsRef.current
-    : prepareColumns({
-        columnDefs: [
-          ...getMRT_DisplayColumns(tableOptions),
-          ...tableOptions.columns,
-        ],
-        tableOptions,
-      });
+  tableOptions.columns =
+    tableOptions.state.columnSizingInfo.isResizingColumn ||
+    tableOptions.state.draggingColumn ||
+    tableOptions.state.draggingRow
+      ? columnDefsRef.current
+      : prepareColumns({
+          columnDefs: [
+            ...getMRT_DisplayColumns(tableOptions),
+            ...tableOptions.columns,
+          ],
+          tableOptions,
+        });
   columnDefsRef.current = tableOptions.columns;
 
   tableOptions.data = useMemo(
