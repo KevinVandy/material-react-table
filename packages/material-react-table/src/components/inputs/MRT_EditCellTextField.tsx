@@ -35,11 +35,10 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
   const { column, row } = cell;
   const { columnDef } = column;
   const { creatingRow, editingRow } = getState();
-  const { editSelectOptions } = columnDef;
+  const { editSelectOptions, editVariant } = columnDef;
 
   const isCreating = creatingRow?.id === row.id;
   const isEditing = editingRow?.id === row.id;
-  const isSelectEdit = columnDef.editVariant === 'select';
 
   const [value, setValue] = useState(() => cell.getValue<string>());
 
@@ -66,6 +65,8 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
     table,
   });
 
+  const isSelectEdit = editVariant === 'select' || textFieldProps?.select;
+
   const saveInputValueToRowCache = (newValue: string) => {
     //@ts-ignore
     row._valuesCache[column.id] = newValue;
@@ -79,7 +80,7 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     textFieldProps.onChange?.(event);
     setValue(event.target.value);
-    if (textFieldProps?.select) {
+    if (isSelectEdit) {
       saveInputValueToRowCache(event.target.value);
     }
   };
