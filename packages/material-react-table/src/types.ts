@@ -531,6 +531,10 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
    */
   footer?: string;
   /**
+   * If `layoutMode` is `'grid-no-grow'`, you can specify the flex grow value for individual columns to still grow and take up remaining space.
+   */
+  grow?: boolean | number;
+  /**
    * header must be a string. If you want custom JSX to render the header, you can also specify a `Header` option. (Capital H)
    */
   header: string;

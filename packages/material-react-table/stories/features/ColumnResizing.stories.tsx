@@ -228,7 +228,6 @@ export const ColumnResizingWithHeaderGroups = () => (
       lastName: faker.person.lastName(),
     }))}
     enableColumnResizing
-    enableRowSelection
   />
 );
 

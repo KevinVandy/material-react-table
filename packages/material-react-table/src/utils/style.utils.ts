@@ -58,10 +58,12 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
   const {
     options: { layoutMode },
   } = table;
+  const { columnDef } = column;
+
   const widthStyles: CSSProperties = {
     minWidth: `max(calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
       header?.id ?? column.id,
-    )}-size) * 1px), ${column.columnDef.minSize ?? 30}px)`,
+    )}-size) * 1px), ${columnDef.minSize ?? 30}px)`,
     width: `calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
       header?.id ?? column.id,
     )}-size) * 1px${header && layoutMode === 'grid-no-grow' ? ` + ${header?.subHeaders?.length ?? 0}rem` : ''})`,
@@ -72,12 +74,12 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
       header?.id ?? column.id,
     )}-size) 0 auto`;
   } else if (layoutMode === 'grid-no-grow') {
-    widthStyles.flex = '0 0 auto';
+    widthStyles.flex = `${+(columnDef.grow || 0)} 0 auto`;
   }
 
   return {
     backgroundColor:
-      column.getIsPinned() && column.columnDef.columnDefType !== 'group'
+      column.getIsPinned() && columnDef.columnDefType !== 'group'
         ? alpha(
             darken(
               getMRTTheme(table, theme).baseBackgroundColor,
@@ -103,7 +105,7 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
         ? 0.5
         : 1,
     position:
-      column.getIsPinned() && column.columnDef.columnDefType !== 'group'
+      column.getIsPinned() && columnDef.columnDefType !== 'group'
         ? 'sticky'
         : undefined,
     right:
