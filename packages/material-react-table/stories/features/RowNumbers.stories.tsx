@@ -39,22 +39,35 @@ const data = [...Array(100)].map(() => ({
   state: faker.location.state(),
 }));
 
+export const enableRowNumbersStatic = () => (
+  <MaterialReactTable columns={columns} data={data} enableRowNumbers />
+);
+
+export const enableRowNumbersStaticGrid = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowNumbers
+    layoutMode="grid"
+  />
+);
+
+export const enableRowNumbersStaticGridNoGrow = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowNumbers
+    layoutMode="grid-no-grow"
+  />
+);
+
 export const enableRowNumbersOriginal = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     enableRowNumbers
-    rowNumberDisplayMode="original"
-  />
-);
-
-export const enableRowNumbersStatic = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    enableRowNumbers
     enableRowVirtualization
-    rowNumberDisplayMode="static"
+    rowNumberDisplayMode="original"
   />
 );
 

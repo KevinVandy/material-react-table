@@ -148,6 +148,40 @@ export const CustomWidthsGridNoGrowIndividualGrow = () => (
   />
 );
 
+export const CustomWidthsGridIndividualShrink = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        accessorKey: 'id',
+        grow: false,
+        header: 'ID',
+        size: 50,
+      },
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+        size: 300,
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+        size: 100,
+      },
+      {
+        accessorKey: 'age',
+        header: 'Age',
+        size: 50,
+      },
+      {
+        accessorKey: 'address',
+        header: 'Address',
+      },
+    ]}
+    data={data}
+    layoutMode="grid"
+  />
+);
+
 export const SmallWidthsSemantic = () => (
   <MaterialReactTable
     columns={[

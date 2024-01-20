@@ -12,6 +12,18 @@ import Head from 'next/head';
 
 ### Version 2
 
+#### Version 2.8.0 - 2024-01-19
+
+- Removed internal display column def memoization that caused edge cases with enabling and disabling features conditionally. (like `enableRowActions` and `enableEditing`, etc.)
+- Improved Column Resizing and Column/Row DnD Performance by caching column definitions while user is dragging.
+- Added new `grow` column option to allow for columns to grow to fill the remaining space in the table when `layoutMode: 'grid-no-grow'` is enabled, or to force a column to not grow when `layoutMode: 'grid'` is enabled and `grow: false` is set.
+  - `mrt-row-select`, `mrt-row-drag`, `mrt-row-pin`, and `mrt-row-number` columns are now set to `grow: false` by default now.
+  - `mrt-row-expand` column is also set to `grow: false` if only detail panels are enabled.
+  - `mrt-row-expand` is now set to a `size: 100` by default (slightly wider)
+- Fixed indentation of mrt expand column when layoutMode was grid or grid-no-grow (using margin instead of padding now)
+- Modified `editSelectOptions` to allow for dynamic values on a per-cell basis. `({ row, cell, etc. }) => []`
+- Fixed edit textbox controlled component warning
+
 #### Version 2.7.0 - 2024-01-18
 
 - New `'positionCreatingRow'` table option to customize where the creating row is rendered in the table body.

@@ -144,7 +144,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: 'Array<string | { label: string; value: string }>',
+    type: 'DropdownOption[] | (({ cell, column, row, table, }) => DropdownOption[])',
   },
   {
     columnOption: 'editVariant',
@@ -388,6 +388,17 @@ export const columnOptions: ColumnOption[] = [
     source: 'TanStack Table',
     required: false,
     type: 'boolean',
+  },
+  {
+    columnOption: 'grow',
+    defaultValue: '',
+    description:
+      "If `layoutMode` is `'grid'` or `'grid-no-grow'`, you can specify the flex grow value for individual columns to still grow and take up remaining space, or set to `false`/0 to not grow.",
+    link: '',
+    linkText: '',
+    source: 'MRT',
+    required: false,
+    type: 'boolean | number',
   },
   {
     columnOption: 'maxSize',

@@ -47,6 +47,24 @@ export const SelectionEnabled = () => (
   <MaterialReactTable columns={columns} data={data} enableRowSelection />
 );
 
+export const SelectionEnabledGrid = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowSelection
+    layoutMode="grid"
+  />
+);
+
+export const SelectionEnabledGridNoGrow = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowSelection
+    layoutMode="grid-no-grow"
+  />
+);
+
 export const SelectionEnabledConditionally = () => (
   <MaterialReactTable
     columns={columns}

@@ -57,3 +57,31 @@ export const RowDraggingEnabled = () => {
     />
   );
 };
+
+export const RowDraggingEnabledGrid = () => {
+  const [data, _setData] = useState(() => initData);
+
+  return (
+    <MaterialReactTable
+      autoResetPageIndex={false}
+      columns={columns}
+      data={data}
+      enableRowDragging
+      layoutMode='grid'
+    />
+  );
+};
+
+export const RowDraggingEnabledGridNoGrow = () => {
+  const [data, _setData] = useState(() => initData);
+
+  return (
+    <MaterialReactTable
+      autoResetPageIndex={false}
+      columns={columns}
+      data={data}
+      enableRowDragging
+      layoutMode='grid-no-grow'
+    />
+  );
+};

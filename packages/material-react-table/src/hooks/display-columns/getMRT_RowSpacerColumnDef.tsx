@@ -12,7 +12,6 @@ import {
 const blankColProps = {
   children: null,
   sx: {
-    flex: '1 0 auto',
     minWidth: 0,
     p: 0,
     width: 0,
@@ -32,6 +31,7 @@ export const getMRT_RowSpacerColumnDef = <TData extends MRT_RowData>(
       size: 0,
       tableOptions,
     }),
+    grow: true,
     ...MRT_DefaultDisplayColumn,
     muiTableBodyCellProps: blankColProps,
     muiTableFooterCellProps: blankColProps,

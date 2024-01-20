@@ -531,7 +531,7 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
    */
   footer?: string;
   /**
-   * If `layoutMode` is `'grid-no-grow'`, you can specify the flex grow value for individual columns to still grow and take up remaining space.
+   * If `layoutMode` is `'grid'` or `'grid-no-grow'`, you can specify the flex grow value for individual columns to still grow and take up remaining space, or set to `false`/0 to not grow.
    */
   grow?: boolean | number;
   /**

@@ -70,9 +70,13 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
   };
 
   if (layoutMode === 'grid') {
-    widthStyles.flex = `var(--${header ? 'header' : 'col'}-${parseCSSVarId(
-      header?.id ?? column.id,
-    )}-size) 0 auto`;
+    widthStyles.flex = `${
+      [0, false].includes(columnDef.grow!)
+        ? 0
+        : `var(--${header ? 'header' : 'col'}-${parseCSSVarId(
+            header?.id ?? column.id,
+          )}-size)`
+    } 0 auto`;
   } else if (layoutMode === 'grid-no-grow') {
     widthStyles.flex = `${+(columnDef.grow || 0)} 0 auto`;
   }

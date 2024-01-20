@@ -20,6 +20,7 @@ export const getMRT_RowPinningColumnDef = <TData extends MRT_RowData>(
     Cell: ({ row, table }) => (
       <MRT_TableBodyRowPinButton row={row} table={table} />
     ),
+    grow: false,
     ...defaultDisplayColumnProps({
       header: 'pin',
       id: 'mrt-row-pin',

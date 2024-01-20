@@ -25,6 +25,7 @@ Material React Table lets you easily change the default widths (sizes) of column
       'columnResizeDirection',
       'columnResizeMode',
       'defaultColumn',
+      'displayColumnDefOptions',
       'enableColumnResizing',
       'layoutMode',
       'onColumnSizingChange',
@@ -36,7 +37,9 @@ Material React Table lets you easily change the default widths (sizes) of column
 ### Relevant Column Options
 
 <ColumnOptionsTable
-  onlyOptions={new Set(['enableResizing', 'maxSize', 'minSize', 'size'])}
+  onlyOptions={
+    new Set(['enableResizing', 'grow', 'maxSize', 'minSize', 'size'])
+  }
 />
 
 ### Relevant State
@@ -66,6 +69,7 @@ const columns = [
   {
     accessorKey: 'id',
     header: 'ID',
+    grow: false, //don't allow this column to grow to fill in remaining space - new in v2.8
     size: 50, //small column
   },
   {
@@ -78,10 +82,25 @@ const columns = [
   {
     accessorKey: 'email',
     header: 'Email',
+    grow: true, //allow this column to grow to fill in remaining space - new in v2.8
     size: 300, //large column
   },
 ];
 ```
+
+#### Column Grow
+
+> New in v2.8 - You can now set a `grow` column option if using layoutMode `"grid-no-grow"` or `"grid"`
+
+You can also set `grow` properties on the column definitions when using layoutMode `"grid-no-grow"` or `"grid"`.
+
+If the layout mode of your table is `"grid"` and you set `grow: false` on a column, that column will have a fixed size and will not grow to fill in the remaining space of the table.
+
+If the layout mode of your table is `"grid-no-grow"` and you set `grow: true` on a column, that column will grow to fill in the remaining space of the table.
+
+If the layout mode of your table is `"grid-no-grow"` and you set `grow: 1` on one column, and `grow: 2` on another column, the first column will grow to fill in 1/3 of the remaining space of the table, and the second column will grow to fill in 2/3 of the remaining space of the table.
+
+If the layout mode of your table is `"semantic"`, the `grow` column option will have no effect, but columns will size themselves to fit their own content better than the other layout modes.
 
 #### Default Column
 
@@ -103,6 +122,31 @@ const table = useMaterialReactTable({
     size: 260, //make columns wider by default
   },
 });
+```
+
+#### Change Sizes of Built-in Display Columns
+
+As discussed further in the [Display Columns Guide](/docs/guides/display-columns), you can customize the options of the built-in columns that get generated under the hood by MRT by enabling certain features.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  displayColumnDefOptions: {
+    'mrt-row-select': {
+      size: 50, //adjust the size of the row select column
+      grow: false, //new in v2.8 (default is false for this column)
+    },
+    'mrt-row-numbers': {
+      enableResizing: true, //allow the row numbers column to be resized
+      size: 40,
+      grow: true, //new in v2.8
+    },
+  },
+  enableRowNumbers: true,
+});
+
+return <MaterialReactTable table={table} />;
 ```
 
 ### Enable Column Resizing Feature
@@ -168,7 +212,9 @@ const table = useMaterialReactTable({
 });
 
 return (
-  <div style={{ direction: 'rtl' }}> {/* app-wide style? */}
+  <div style={{ direction: 'rtl' }}>
+    {' '}
+    {/* app-wide style? */}
     <MaterialReactTable table={table} />
   </div>
 );

@@ -59,6 +59,14 @@ export const Loading = () => (
   <MaterialReactTable columns={columns} data={[]} state={{ isLoading: true }} />
 );
 
+export const Loading5 = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={[]}
+    state={{ isLoading: true, pagination: { pageIndex: 0, pageSize: 5 } }}
+  />
+);
+
 export const LoadingWithProgressBars = () => (
   <MaterialReactTable
     columns={columns}

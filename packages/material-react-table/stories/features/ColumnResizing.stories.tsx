@@ -38,6 +38,7 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
 const data = [...Array(88)].map(() => ({
   address: faker.location.streetAddress(),
   firstName: faker.person.firstName(),
+  id: faker.number.int(100),
   lastName: faker.person.lastName(),
   phoneNumber: faker.phone.number(),
   state: faker.location.state(),
@@ -62,6 +63,30 @@ export const ColumnResizingEnabledDefaultOnChangeRTL = () => (
 export const ColumnResizingEnabledDefaultOnChangeGrid = () => (
   <MaterialReactTable
     columns={columns}
+    data={data}
+    enableColumnResizing
+    layoutMode="grid"
+  />
+);
+
+export const ColumnResizingDefaultOnChangeGridWithIndividualShrink = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        accessorKey: 'id',
+        grow: false,
+        header: 'ID',
+        size: 30,
+      },
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+    ]}
     data={data}
     enableColumnResizing
     layoutMode="grid"

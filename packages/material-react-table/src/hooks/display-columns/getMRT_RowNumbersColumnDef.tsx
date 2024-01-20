@@ -26,6 +26,7 @@ export const getMRT_RowNumbersColumnDef = <TData extends MRT_RowData>(
         ? (staticRowIndex || 0) + (pageSize || 0) * (pageIndex || 0)
         : row.index) ?? 0) + 1,
     Header: () => localization.rowNumber,
+    grow: false,
     ...defaultDisplayColumnProps({
       header: 'rowNumbers',
       id: 'mrt-row-numbers',
