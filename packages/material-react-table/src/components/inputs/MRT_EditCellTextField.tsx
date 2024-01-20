@@ -35,6 +35,7 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
   const { column, row } = cell;
   const { columnDef } = column;
   const { creatingRow, editingRow } = getState();
+  const { editSelectOptions } = columnDef;
 
   const isCreating = creatingRow?.id === row.id;
   const isEditing = editingRow?.id === row.id;
@@ -57,6 +58,13 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
     }),
     ...rest,
   };
+
+  const selectOptions = parseFromValuesOrFunc(editSelectOptions, {
+    cell,
+    column,
+    row,
+    table,
+  });
 
   const saveInputValueToRowCache = (newValue: string) => {
     //@ts-ignore
@@ -152,7 +160,7 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
       onKeyDown={handleEnterKeyDown}
     >
       {textFieldProps.children ??
-        columnDef?.editSelectOptions?.map((option) => {
+        selectOptions?.map((option) => {
           const { label, value } = getValueAndLabel(option);
           return (
             <MenuItem

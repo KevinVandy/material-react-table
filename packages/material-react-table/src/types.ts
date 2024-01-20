@@ -87,6 +87,17 @@ export type Xor<A, B> =
   | Prettify<A & { [k in keyof B]?: never }>
   | Prettify<B & { [k in keyof A]?: never }>;
 
+export type DropdownOption =
+  | {
+      label?: string;
+      /**
+       * @deprecated use `label` instead
+       */
+      text?: string;
+      value: any;
+    }
+  | string;
+
 export type MRT_DensityState = 'comfortable' | 'compact' | 'spacious';
 
 export type MRT_ColumnFilterFnsState = Record<string, MRT_FilterOption>;
@@ -483,17 +494,14 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
     LiteralUnion<string & MRT_FilterOption>
   > | null;
   columns?: MRT_ColumnDef<TData, TValue>[];
-  editSelectOptions?: (
-    | {
-        label?: string;
-        /**
-         * @deprecated use `label` instead
-         */
-        text?: string;
-        value: any;
-      }
-    | string
-  )[];
+  editSelectOptions?:
+    | ((props: {
+        cell: MRT_Cell<TData, TValue>;
+        column: MRT_Column<TData>;
+        row: MRT_Row<TData>;
+        table: MRT_TableInstance<TData>;
+      }) => DropdownOption[])
+    | DropdownOption[];
   editVariant?: 'select' | 'text';
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;
@@ -503,17 +511,7 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
   enableEditing?: ((row: MRT_Row<TData>) => boolean) | boolean;
   enableFilterMatchHighlighting?: boolean;
   filterFn?: MRT_FilterFn<TData>;
-  filterSelectOptions?: (
-    | {
-        label?: string;
-        /**
-         * @deprecated use `label` instead
-         */
-        text?: string;
-        value: any;
-      }
-    | string
-  )[];
+  filterSelectOptions?: DropdownOption[];
   filterVariant?:
     | 'autocomplete'
     | 'checkbox'
