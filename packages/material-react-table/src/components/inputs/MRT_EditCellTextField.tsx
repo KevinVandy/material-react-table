@@ -131,7 +131,7 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
       }
       select={isSelectEdit}
       size="small"
-      value={value}
+      value={value ?? ''}
       variant="standard"
       {...textFieldProps}
       InputProps={{
