@@ -114,7 +114,21 @@ export const HeaderGroupsWithColumnPinning = () => (
 );
 
 export const HeaderGroupsWithColumResizing = () => (
-  <MaterialReactTable columns={columns} data={data} enableColumnResizing />
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnResizing
+    enableRowSelection
+  />
+);
+
+export const HeaderGroupsWithColumResizingGrid = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableColumnResizing
+    layoutMode="grid"
+  />
 );
 
 export const HeaderGroupsWithSemanticColumResizing = () => (
