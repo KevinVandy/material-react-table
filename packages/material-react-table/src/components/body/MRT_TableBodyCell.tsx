@@ -57,7 +57,6 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       layoutMode,
       muiSkeletonProps,
       muiTableBodyCellProps,
-      positionExpandColumn,
     },
     refs: { editInputRefs },
     setEditingCell,
@@ -252,19 +251,6 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
                 ? '1rem 1.25rem'
                 : '1.5rem',
         textOverflow: columnDefType !== 'display' ? 'ellipsis' : undefined,
-        [theme.direction === 'rtl' || positionExpandColumn === 'last'
-          ? 'pr'
-          : 'pl']:
-          column.id === 'mrt-row-expand'
-            ? `${
-                row.depth +
-                (density === 'compact'
-                  ? 0.5
-                  : density === 'comfortable'
-                    ? 0.75
-                    : 1.25)
-              }rem`
-            : undefined,
         whiteSpace:
           row.getIsPinned() || density === 'compact' ? 'nowrap' : 'normal',
         zIndex:

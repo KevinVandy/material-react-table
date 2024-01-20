@@ -8,7 +8,7 @@ const meta: Meta = {
 
 export default meta;
 
-export const DetailPanelEnabled = () => (
+export const DetailPanelEnabledSemantic = () => (
   <MaterialReactTable
     columns={[
       {
@@ -33,6 +33,80 @@ export const DetailPanelEnabled = () => (
       state: faker.location.state(),
       zipCode: faker.location.zipCode(),
     }))}
+    renderDetailPanel={({ row }) => (
+      <div style={{ display: 'grid' }}>
+        <span>City: {row.original.city}</span>
+        <span>State: {row.original.state}</span>
+        <span>Zip: {row.original.zipCode}</span>
+        <span>Phone: {row.original.phone}</span>
+      </div>
+    )}
+  />
+);
+
+export const DetailPanelEnabledGrid = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+      {
+        accessorKey: 'address',
+        header: 'Address',
+      },
+    ]}
+    data={[...Array(5)].map(() => ({
+      address: faker.location.streetAddress(),
+      city: faker.location.city(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      phone: faker.phone.number(),
+      state: faker.location.state(),
+      zipCode: faker.location.zipCode(),
+    }))}
+    layoutMode="grid"
+    renderDetailPanel={({ row }) => (
+      <div style={{ display: 'grid' }}>
+        <span>City: {row.original.city}</span>
+        <span>State: {row.original.state}</span>
+        <span>Zip: {row.original.zipCode}</span>
+        <span>Phone: {row.original.phone}</span>
+      </div>
+    )}
+  />
+);
+
+export const DetailPanelEnabledGridNoGrow = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+      {
+        accessorKey: 'address',
+        header: 'Address',
+      },
+    ]}
+    data={[...Array(5)].map(() => ({
+      address: faker.location.streetAddress(),
+      city: faker.location.city(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      phone: faker.phone.number(),
+      state: faker.location.state(),
+      zipCode: faker.location.zipCode(),
+    }))}
+    layoutMode="grid-no-grow"
     renderDetailPanel={({ row }) => (
       <div style={{ display: 'grid' }}>
         <span>City: {row.original.city}</span>
@@ -72,7 +146,7 @@ export const CustomExpandRotation = () => (
     enableExpandAll={false}
     muiExpandButtonProps={({ row }) => ({
       sx: {
-        transform: row.getIsExpanded() ? 'rotate(0deg)' : 'rotate(-90deg)',
+        transform: row.getIsExpanded() ? 'rotate(180deg)' : 'rotate(-90deg)',
         transition: 'transform 0.2s',
       },
     })}

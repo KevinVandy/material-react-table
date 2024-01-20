@@ -69,6 +69,9 @@ export const MRT_ExpandButton = <TData extends MRT_RowData>({
           sx={(theme) => ({
             height: density === 'compact' ? '1.75rem' : '2.25rem',
             opacity: !canExpand && !detailPanel ? 0.3 : 1,
+            [theme.direction === 'rtl' || positionExpandColumn === 'last'
+              ? 'mr'
+              : 'ml']: `${row.depth * 16}px`,
             width: density === 'compact' ? '1.75rem' : '2.25rem',
             ...(parseFromValuesOrFunc(iconButtonProps?.sx, theme) as any),
           })}

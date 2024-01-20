@@ -63,7 +63,7 @@ const data = [...Array(5)].map(() => ({
 }));
 
 export const SubRowTreeEnabledDefault = () => (
-  <MaterialReactTable columns={columns} data={data} />
+  <MaterialReactTable columns={columns} data={data} enableExpanding />
 );
 
 export const SubRowTreeLayoutGrid = () => (
@@ -72,20 +72,27 @@ export const SubRowTreeLayoutGrid = () => (
     data={data}
     displayColumnDefOptions={{
       'mrt-row-expand': {
-        muiTableBodyCellProps: {
-          sx: {
-            border: '1px solid red',
-            flex: '0 0 100px',
-            maxWidth: '100px',
-            overflow: 'hidden',
-            width: '100px',
-          },
-        },
+        // size: 100,
       },
     }}
     enableExpanding
     initialState={{ expanded: true }}
     layoutMode="grid"
+  />
+);
+
+export const SubRowTreeLayoutGridNoGrow = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    displayColumnDefOptions={{
+      'mrt-row-expand': {
+        // size: 100,
+      },
+    }}
+    enableExpanding
+    initialState={{ expanded: true }}
+    layoutMode="grid-no-grow"
   />
 );
 
@@ -108,6 +115,23 @@ export const SubRowTreeEnabledDefaultRTL = () => {
           data={data}
           enableExpanding
           localization={MRT_Localization_HE}
+        />
+      </div>
+    </ThemeProvider>
+  );
+};
+
+export const SubRowTreeEnabledDefaultRTLAndPositionLast = () => {
+  const theme = useTheme();
+  return (
+    <ThemeProvider theme={{ ...theme, direction: 'rtl' }}>
+      <div style={{ direction: 'rtl' }}>
+        <MaterialReactTable
+          columns={columns}
+          data={data}
+          enableExpanding
+          localization={MRT_Localization_HE}
+          positionActionsColumn="last"
         />
       </div>
     </ThemeProvider>
