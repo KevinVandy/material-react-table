@@ -408,6 +408,10 @@ export const routes: Array<RouteItem> = [
             label: 'Column Pinning (Sticky)',
           },
           {
+            href: '/docs/guides/column-size',
+            label: 'Column Size (Widths)',
+          },
+          {
             href: '/docs/guides/column-resizing',
             label: 'Column Resizing',
           },

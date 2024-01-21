@@ -1,0 +1,174 @@
+import Head from 'next/head';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
+import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
+
+<Head>
+  <title>{'Column Size Guide - Material React Table V2 Docs'}</title>
+  <meta
+    name="description"
+    content="How to column width in Material React Table"
+  />
+</Head>
+
+## Column Size Feature Guide
+
+Material React Table lets you easily change the default widths (sizes) of columns.
+
+### Relevant Table Options
+
+<TableOptionsTable
+  onlyOptions={
+    new Set([
+      'defaultColumn',
+      'defaultDisplayColumn',
+      'displayColumnDefOptions',
+      'layoutMode',
+    ])
+  }
+/>
+
+### Relevant Column Options
+
+<ColumnOptionsTable
+  onlyOptions={new Set(['grow', 'maxSize', 'minSize', 'size'])}
+/>
+
+### Relevant State
+
+<StateOptionsTable onlyOptions={new Set(['columnSizing'])} />
+
+### Layout Modes
+
+Material React Table has 3 layout modes that affect how columns styles are applied internally. Depending on which features you enable, the `layoutMode` table option will automatically change to the appropriate value, though you can override it with your own value if you want.
+
+1. `"semantic"` (default with default features) - uses default css styles that come with `<table>`, `<tr>`, `<td>`, etc. elements.
+2. `"grid"` (default when virtualization is enabled) - uses CSS Grid and Flexbox styles instead of default styles.
+3. `"grid-no-grow"` (default when column resizing is enabled) - uses CSS Grid and Flexbox styles, but also sets `flex-grow: 0` on all columns and adds an empty "spacer" column to the end of the table to fill the potential remaining space.
+
+If you want your columns to have an absolute width, you can use the `"grid-no-grow"` layout mode and set the `size` option on each column.
+
+### Column Size
+
+You can change the width of any column by setting its `size` option on the column definition. There are `minSize` and `maxSize` column options available to enforce limits during resizing events.
+
+The `size`, `minSize`, and `maxSize` do not take in any CSS width unit. They are only numbers that represent the width of the column in pixels.
+
+```jsx
+const columns = [
+  {
+    accessorKey: 'id',
+    header: 'ID',
+    grow: false, //don't allow this column to grow to fill in remaining space - new in v2.8
+    size: 50, //small column
+  },
+  {
+    accessorKey: 'username',
+    header: 'Username',
+    minSize: 100, //min size enforced during resizing
+    maxSize: 400, //max size enforced during resizing
+    size: 180, //medium column
+  },
+  {
+    accessorKey: 'email',
+    header: 'Email',
+    grow: true, //allow this column to grow to fill in remaining space - new in v2.8
+    size: 300, //large column
+  },
+];
+```
+
+### Column Grow
+
+> New in v2.8 - You can now set a `grow` column option if using layoutMode `"grid-no-grow"` or `"grid"`
+
+You can also set `grow` properties on the column definitions when using layoutMode `"grid-no-grow"` or `"grid"`.
+
+If the layout mode of your table is `"grid"` and you set `grow: false` on a column, that column will have a fixed size and will not grow to fill in the remaining space of the table.
+
+If the layout mode of your table is `"grid-no-grow"` and you set `grow: true` on a column, that column will grow to fill in the remaining space of the table.
+
+If the layout mode of your table is `"grid-no-grow"` and you set `grow: 1` on one column, and `grow: 2` on another column, the first column will grow to fill in 1/3 of the remaining space of the table, and the second column will grow to fill in 2/3 of the remaining space of the table.
+
+If the layout mode of your table is `"semantic"`, the `grow` column option will have no effect, but columns will size themselves to fit their own content better than the other layout modes.
+
+### But I Want My Columns to Have a Percentage Width
+
+Material React Table is not designed to use percentage column widths well by default. This is because having horizontal scrollbars on tables is both a very common use case, and usually the best way to ensure that the actual content of the cells in each column is visible and not cutoff or wrapped excessively.
+
+If you disagree with that, that's fair, and you're not out of luck. Material React Table exposes all mui props, so if you really want to, you can add whatever CSS you want to achieve your own custom column widths behavior. This is not recommended by the maintainer, but some developers have found it useful to set all column sizes and minSizes to a very small number like `1`, `1.5`, `2`, ect., and then use either `layoutMode: "semantic"` or `layoutMode: "grid"`. This makes the columns act more like they are using percentage widths, up until a certain point. If you really need to never have a horizontal scrollbar, you can edit the `muiTableContainerProps.sx` styles to set `overflowX: "hidden"`. Be very careful with this though, as this could cause your table to be unusable on smaller screens.
+
+If the above still does not get you to where you need to be, `muiTableHeadCellProps.sx`, `muiTableBodyCellProps.sx`, and `muiTableFooterCellProps.sx` and more are all exposed and available to you to override with whatever custom CSS that you need. Just be aware that non of the built-in TanStack Table size APIs will be accurate anymore.
+
+#### Side Note: Just Make Your Scrollbars Prettier
+
+Making your scrollbars look better (especially on Windows and Linux) can go a long way to not letting a horizontal scrollbar ruin the look of your table.
+
+Here's what this docs site uses in its global CSS to make scrollbars to more like the default Mac OS scrollbars for everyone:
+
+```css
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar {
+  right: 0;
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #999;
+  border-radius: 8px;
+  width: 12px;
+  height: 12px;
+}
+```
+
+### Default Column
+
+By default, columns will have the following size properties defined:
+
+```jsx
+defaultColumn = { minSize: 40, maxSize: 1000, size: 180 }; //units are in px
+```
+
+You can modify the default column widths by setting the `defaultColumn` table option on the table.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  defaultColumn: {
+    minSize: 20, //allow columns to get smaller than default
+    maxSize: 9001, //allow columns to get larger than default
+    size: 260, //make columns wider by default
+  },
+});
+```
+
+### Change Sizes of Built-in Display Columns
+
+As discussed further in the [Display Columns Guide](/docs/guides/display-columns), you can customize the options of the built-in columns that get generated under the hood by MRT by enabling certain features.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  displayColumnDefOptions: {
+    'mrt-row-select': {
+      size: 50, //adjust the size of the row select column
+      grow: false, //new in v2.8 (default is false for this column)
+    },
+    'mrt-row-numbers': {
+      size: 40,
+      grow: true, //new in v2.8 (allow this column to grow to fill in remaining space)
+    },
+  },
+  enableRowNumbers: true,
+});
+
+return <MaterialReactTable table={table} />;
+```
+
+View Extra Storybook **[Examples](https://www.material-react-table.dev/?path=/story/styling-custom-column-widths)**

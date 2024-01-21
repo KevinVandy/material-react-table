@@ -39,6 +39,8 @@ export const useMRT_ColumnVirtualizer = <
     },
   );
 
+  const visibleColumns = getVisibleLeafColumns();
+
   const [leftPinnedIndexes, rightPinnedIndexes] = useMemo(
     () =>
       enableColumnPinning
@@ -46,8 +48,7 @@ export const useMRT_ColumnVirtualizer = <
             getLeftLeafColumns().map((c) => c.getPinnedIndex()),
             getRightLeafColumns()
               .map(
-                (column) =>
-                  getVisibleLeafColumns().length - column.getPinnedIndex() - 1,
+                (column) => visibleColumns.length - column.getPinnedIndex() - 1,
               )
               .sort((a, b) => a - b),
           ]
@@ -61,14 +62,14 @@ export const useMRT_ColumnVirtualizer = <
   const draggingColumnIndex = useMemo(
     () =>
       draggingColumn?.id
-        ? getVisibleLeafColumns().findIndex((c) => c.id === draggingColumn?.id)
+        ? visibleColumns.findIndex((c) => c.id === draggingColumn?.id)
         : undefined,
     [draggingColumn?.id],
   );
 
   const columnVirtualizer = useVirtualizer({
-    count: getVisibleLeafColumns().length,
-    estimateSize: (index) => getVisibleLeafColumns()[index].getSize(),
+    count: visibleColumns.length,
+    estimateSize: (index) => visibleColumns[index].getSize(),
     getScrollElement: () => tableContainerRef.current,
     horizontal: true,
     overscan: 3,

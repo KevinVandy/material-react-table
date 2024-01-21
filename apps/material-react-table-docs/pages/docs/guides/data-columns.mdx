@@ -25,7 +25,7 @@ Each column definition must have at least an `accessorKey` (or a combination of 
 
 #### Method 1 - Using an accessorKey (Recommended)
 
-The simplest and most common way to define a column is to use the `accessorKey` property. The `accessorKey` property is the key that will be used to join the data from the `data` keys.
+The simplest and most common way to define a column is to use the `accessorKey` column option. The `accessorKey` column option is the key that will be used to join the data from the `data` keys.
 
 The `accessorKey` must match one of the keys in your data, or else no data will show up in the column. The `accessorKey` also supports dot notation, so you can access nested data.
 
@@ -58,7 +58,7 @@ const columns = useMemo<MRT_ColumnDef<Customer>[]>( //TS helps with the autocomp
 
 #### Method 2 - Using an accessorFn and id
 
-You can alternatively use the `accessorFn` property. Here are at least three ways you can use it.
+You can alternatively use the `accessorFn` column option. Here are at least three ways you can use it.
 
 In each case, the `id` property is now required since there is no `accessorKey` for MRT to derive it from.
 
@@ -95,15 +95,17 @@ const columns = useMemo<MRT_ColumnDef<Customer>[]>(
 Alternatively you can use the `createMRTColumnHelper` utility function to define your columns definitions in a slightly more type-safe way. Instantiate a `columnHelper` by passing in your `TData` type as a generic argument. Then the first argument of the `columnHelper.accessor()` method can be either an `accessorKey` or an `accessorFn`. Then you can specify the rest of the column options as the second argument.
 
 ```tsx
-const columnHelper = createMRTColumnHelper<Customer>();
+const columnHelper = createMRTColumnHelper<Customer>(); //TS now knows the shape of your data
 
 const columns = [
   //accessorKey as first argument, rest of column options as second argument
   columnHelper.accessor('name', {
+    //TS should provide autocomplete for valid accessorKeys
     header: 'Last Name',
   }),
   //accessorFn as first argument, rest of column options as second argument
   columnHelper.accessor((row) => Number(row.age), {
+    //TS should provide autocomplete for valid properties on your data
     header: 'Age',
     id: 'age', //id is required when using accessorFn
   }),
@@ -123,7 +125,7 @@ const columns = useMemo(
       accessorKey: 'name',
       header: 'Name',
       Header: ({ column }) => (
-        <i style={{ color: 'red' }}>{column.columnDef.header}</i>
+        <i style={{ color: 'red' }}>{column.columnDef.header}</i> //re-use the header we already defined
       ), //arrow function
     },
     {
@@ -138,14 +140,27 @@ const columns = useMemo(
 
 ### Custom Cell Render
 
-Similarly, the data cells in a column can have a custom JSX render with the `Cell` option.
+Similarly, the data cells in a column can have a custom JSX render with the `Cell` option. This is one of the most common features used in MRT.
+
+Using the `Cell` column option should be the only way that you use to render custom JSX in table cells. Do not put JSX in an accessorFn, or else the table will not be able to sort, filter, search, or group properly.
 
 ```tsx
 const columns = useMemo(
   () => [
     {
+      accessorFn: (row) => `${row.firstName} ${row.lastName}`,
+      header: 'Name',
+      //Add a link in a cell render
+      Cell: ({ renderedCellValue, row }) => (
+        <Link to={`/profile/${row.original.username}`}>
+          {renderedCellValue}
+        </Link>
+      ),
+    },
+    {
       accessorKey: 'salary',
       header: 'Salary',
+      //Format a number in a cell render
       Cell: ({ cell }) => (
         <span>${cell.getValue<number>().toLocaleString()}</span>
       ),
@@ -153,6 +168,7 @@ const columns = useMemo(
     {
       accessorKey: 'profileImage',
       header: 'Profile Image',
+      //Render images in a cell render
       Cell: ({ cell }) => <img src={cell.getValue<string>()} />,
     },
   ],
@@ -192,37 +208,11 @@ const columns = useMemo(
 
 > See the [Customize Components Guide](/docs/guides/customize-components) for more ways to style and customize header and cell components.
 
-### Enable or Disable Features Per Column
-
-In the same way that you can pass props to the main `<MaterialReactTable />` component to enable or disable features, you can also specify options on the column definitions to enable or disable features on a per-column basis.
-
-```tsx
-const columns = useMemo(
-  () => [
-    {
-      accessorKey: 'salary',
-      header: 'Salary',
-      enableClickToCopy: true, //enable click to copy on this column
-    },
-    {
-      accessorKey: 'profileImage',
-      header: 'Profile Image',
-      enableSorting: false, //disable sorting on this column
-    },
-  ],
-  [],
-);
-```
-
-> See all the column options you can use in the [Column Options API Reference](/docs/api/column-options).
-
 ### Set Column Widths
 
-This topic is covered in detail in the [Column Resizing Guide](/docs/guides/column-resizing), but here is a brief overview.
+This topic is covered in detail in the [Column Size Guide](/docs/guides/column-size), but here is a brief overview.
 
-Setting a CSS (sx or style) width prop will NOT work. Material React Table (or, more accurately, TanStack Table) will keep track and set the widths of each column internally.
-
-You CAN, however, change the default width of any column by setting its `size` option on the column definition. `minSize` and `maxSize` are also available to set the minimum and maximum width of the column during resizing.
+Setting a CSS (sx or style) width prop in the `muiTableHeadCellProps`, `muiTableBodyCellProps`, etc. might not work well, and is redundant. MRT/TanStack Table has an official way to set column widths with the `size`, `minSize`, `maxSize`, and `grow` column options.
 
 ```tsx
 const columns = [
@@ -230,6 +220,7 @@ const columns = [
     accessorKey: 'id',
     header: 'ID',
     size: 50, //small column
+    grow: false, //don't allow this column to grow (if layoutMode is grid)
   },
   {
     accessorKey: 'username',
@@ -246,27 +237,7 @@ const columns = [
 ];
 ```
 
-If exact column sizes are important to you, you may want to consider using one of the other `layoutModes` other than the default `"semantic"` layoutMode.
-
-#### Layout Modes
-
-Material React Table has 3 layout modes that affect how columns styles are applied internally. Depending on which features you enable, the `layoutMode` table option will automatically change to the appropriate value, though you can override it with your own value if you want.
-
-1. `"semantic"` (default with default features) - uses default css styles that come with `<table>`, `<tr>`, `<td>`, etc. elements.
-2. `"grid"` (default when virtualization is enabled) - uses CSS Grid and Flexbox styles instead of default styles.
-3. `"grid-no-grow"` (default when column resizing is enabled) - uses CSS Grid and Flexbox styles, but also sets `flex-grow: 0` on all columns and adds an empty "spacer" column to the end of the table to fill the potential remaining space.
-
-If you want your columns to have an absolute width, you can use the `"grid-no-grow"` layout mode and set the `size` option on each column.
-
-```tsx
-const table = useMaterialReactTable({
-  columns,
-  data,
-  layoutMode: 'grid-no-grow', //absolute column widths that will NOT grow to fill remaining space
-});
-```
-
-> The `'grid-no-grow'` layoutMode is new in MRT V2.
+There is a lot of different behaviors for column widths depending on what other features are enabled or how they are configured. See the [Column Size Guide](/docs/guides/column-size) for more details on the `layoutMode`s, and how and why they are enabled and how they affect column widths.
 
 ### Set Column Alignment
 
@@ -300,3 +271,27 @@ const columns = [
 ```
 
 <AlignmentExample />
+
+### Enable or Disable Features Per Column
+
+In the same way that you can pass props to the main `<MaterialReactTable />` component to enable or disable features, you can also specify options on the column definitions to enable or disable features on a per-column basis.
+
+```tsx
+const columns = useMemo(
+  () => [
+    {
+      accessorKey: 'salary',
+      header: 'Salary',
+      enableClickToCopy: true, //enable click to copy on this column
+    },
+    {
+      accessorKey: 'profileImage',
+      header: 'Profile Image',
+      enableSorting: false, //disable sorting on this column
+    },
+  ],
+  [],
+);
+```
+
+> See all the column options you can use in the [Column Options API Reference](/docs/api/column-options).

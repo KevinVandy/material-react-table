@@ -381,3 +381,19 @@ export const MaxVirtualization = () => (
     muiTablePaperProps={{ sx: { m: 'auto', maxWidth: 1000 } }}
   />
 );
+
+export const EmptyDataVirtualization = () => (
+  <MaterialReactTable
+    columns={fakeColumns}
+    data={[]}
+    enableBottomToolbar={false}
+    enableColumnPinning
+    enableColumnResizing
+    enableColumnVirtualization
+    enablePagination={false}
+    enableRowNumbers
+    enableRowVirtualization
+    muiTableContainerProps={{ sx: { maxHeight: 500 } }}
+    muiTablePaperProps={{ sx: { margin: 'auto', maxWidth: 1000 } }}
+  />
+);

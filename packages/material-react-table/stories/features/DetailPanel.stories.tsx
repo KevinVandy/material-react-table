@@ -254,6 +254,47 @@ export const DetailPanelEnabledConditionalHide = () => (
   />
 );
 
+export const DetailPanelSingleExpand = () => {
+  return (
+    <MaterialReactTable
+      columns={[
+        {
+          accessorKey: 'firstName',
+          header: 'First Name',
+        },
+        {
+          accessorKey: 'lastName',
+          header: 'Last Name',
+        },
+        {
+          accessorKey: 'address',
+          header: 'Address',
+        },
+      ]}
+      data={[...Array(5)].map(() => ({
+        address: faker.location.streetAddress(),
+        city: faker.location.city(),
+        firstName: faker.person.firstName(),
+        lastName: faker.person.lastName(),
+        phone: faker.phone.number(),
+        state: faker.location.state(),
+        zipCode: faker.location.zipCode(),
+      }))}
+      muiExpandButtonProps={({ row, table }) => ({
+        onClick: () => table.setExpanded({ [row.id]: !row.getIsExpanded() }),
+      })}
+      renderDetailPanel={({ row }) => (
+        <div style={{ display: 'grid' }}>
+          <span>City: {row.original.city}</span>
+          <span>State: {row.original.state}</span>
+          <span>Zip: {row.original.zipCode}</span>
+          <span>Phone: {row.original.phone}</span>
+        </div>
+      )}
+    />
+  );
+};
+
 export const DetailPanelExpandColumnLast = () => (
   <MaterialReactTable
     columns={[
