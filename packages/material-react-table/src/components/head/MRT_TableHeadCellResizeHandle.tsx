@@ -25,6 +25,8 @@ export const MRT_TableHeadCellResizeHandle = <TData extends MRT_RowData>({
   const { density } = getState();
   const { column } = header;
 
+  const handler = header.getResizeHandler();
+
   const mx =
     density === 'compact'
       ? '-8px'
@@ -44,8 +46,8 @@ export const MRT_TableHeadCellResizeHandle = <TData extends MRT_RowData>({
         }));
         column.resetSize();
       }}
-      onMouseDown={header.getResizeHandler()}
-      onTouchStart={header.getResizeHandler()}
+      onMouseDown={handler}
+      onTouchStart={handler}
       style={{
         transform:
           column.getIsResizing() && columnResizeMode === 'onEnd'

@@ -76,7 +76,7 @@ export const ColumnResizingDefaultOnChangeGridWithIndividualShrink = () => (
         accessorKey: 'id',
         grow: false,
         header: 'ID',
-        size: 30,
+        size: 50,
       },
       {
         accessorKey: 'firstName',

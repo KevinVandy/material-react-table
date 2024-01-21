@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
 import { type Meta } from '@storybook/react';
@@ -138,6 +141,30 @@ export const EnableRowVirtualizationTallContent = () => (
     enableRowVirtualization
   />
 );
+
+export const VirtualizationConditionallyWontToggle = () => {
+  const [enabled, setEnabled] = useState(true);
+  return (
+    <MaterialReactTable
+      columns={longColumns}
+      data={longData}
+      enableBottomToolbar={false}
+      enableColumnVirtualization={enabled}
+      enablePagination={false}
+      enableRowNumbers
+      enableRowVirtualization={enabled}
+      initialState={{ density: 'compact' }}
+      renderTopToolbarCustomActions={() => (
+        <Stack alignItems="center" direction="row">
+          <Button onClick={() => setEnabled(!enabled)}>
+            Toggle Virtualization
+          </Button>
+          * Virtualization features cannot be toggled
+        </Stack>
+      )}
+    />
+  );
+};
 
 export const EnableRowVirtualizationWithColumnResizing = () => (
   <MaterialReactTable
