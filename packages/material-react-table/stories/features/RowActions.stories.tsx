@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Edit from '@mui/icons-material/Edit';
 import ShareIcon from '@mui/icons-material/Share';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import MuiMenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/material/styles';
 import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
@@ -308,5 +310,28 @@ export const CustomRowActionButtonsLastColumn = () => (
         </Button>
       </div>
     )}
+  />
+);
+
+export const RowActionsCompleteOverride = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    displayColumnDefOptions={{
+      'mrt-row-actions': {
+        Cell: ({ row, table }) => (
+          <>
+            <Button variant="contained">Custom Row Action</Button>
+            <IconButton onClick={() => table.setEditingRow(row)}>
+              <Edit />
+            </IconButton>
+          </>
+        ),
+        size: 300,
+      },
+    }}
+    editDisplayMode="row"
+    enableEditing
+    enableRowActions
   />
 );
