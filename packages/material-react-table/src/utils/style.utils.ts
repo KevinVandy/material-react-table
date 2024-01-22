@@ -55,10 +55,13 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
   tableCellProps: TableCellProps;
   theme: Theme;
 }) => {
+  const { baseBackgroundColor } = getMRTTheme(table, theme);
   const {
-    options: { layoutMode },
+    options: { enableColumnVirtualization, layoutMode },
   } = table;
   const { columnDef } = column;
+
+  const isPinned = columnDef.columnDefType !== 'group' && column.getIsPinned();
 
   const widthStyles: CSSProperties = {
     minWidth: `max(calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
@@ -81,44 +84,56 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
     widthStyles.flex = `${+(columnDef.grow || 0)} 0 auto`;
   }
 
-  return {
-    backgroundColor:
-      column.getIsPinned() && columnDef.columnDefType !== 'group'
-        ? alpha(
+  const pinnedStyles = isPinned
+    ? {
+        '&[data-pinned="true"]': {
+          '&:before': {
+            backgroundColor: 'transparent',
+            content: '""',
+            height: '100%',
+            left: 0,
+            position: 'absolute',
+            top: 0,
+            width: '100%',
+          },
+          backgroundColor: alpha(
             darken(
-              getMRTTheme(table, theme).baseBackgroundColor,
+              baseBackgroundColor,
               theme.palette.mode === 'dark' ? 0.05 : 0.01,
             ),
             0.97,
-          )
-        : 'inherit',
+          ),
+          boxShadow: getIsLastLeftPinnedColumn(table, column)
+            ? `-4px 0 8px -6px ${alpha(theme.palette.grey[700], 0.5)} inset`
+            : getIsFirstRightPinnedColumn(column)
+              ? `4px 0 8px -6px ${alpha(theme.palette.grey[700], 0.5)} inset`
+              : undefined,
+          left:
+            isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
+          opacity: 0.98,
+          position: 'sticky',
+          right:
+            isPinned === 'right'
+              ? `${getTotalRight(table, column)}px`
+              : undefined,
+          zIndex: 1,
+        },
+      }
+    : {};
+
+  return {
+    backgroundColor: 'inherit',
     backgroundImage: 'inherit',
-    boxShadow: getIsLastLeftPinnedColumn(table, column)
-      ? `-4px 0 8px -6px ${alpha(theme.palette.grey[700], 0.5)} inset`
-      : getIsFirstRightPinnedColumn(column)
-        ? `4px 0 8px -6px ${alpha(theme.palette.grey[700], 0.5)} inset`
-        : undefined,
     display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
-    left:
-      column.getIsPinned() === 'left'
-        ? `${column.getStart('left')}px`
-        : undefined,
     opacity:
       table.getState().draggingColumn?.id === column.id ||
       table.getState().hoveredColumn?.id === column.id
         ? 0.5
         : 1,
-    position:
-      column.getIsPinned() && columnDef.columnDefType !== 'group'
-        ? 'sticky'
-        : undefined,
-    right:
-      column.getIsPinned() === 'right'
-        ? `${getTotalRight(table, column)}px`
-        : undefined,
-    transition: table.options.enableColumnVirtualization
+    transition: enableColumnVirtualization
       ? 'none'
       : `padding 150ms ease-in-out`,
+    ...pinnedStyles,
     ...widthStyles,
     ...(parseFromValuesOrFunc(tableCellProps?.sx, theme) as any),
   };

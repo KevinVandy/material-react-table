@@ -19,11 +19,13 @@ import { parseFromValuesOrFunc } from '../../utils/utils';
 
 interface Props<TData extends MRT_RowData> extends TableCellProps {
   header: MRT_Header<TData>;
+  staticColumnIndex?: number;
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_TableHeadCell = <TData extends MRT_RowData>({
   header,
+  staticColumnIndex,
   table,
   ...rest
 }: Props<TData>) => {
@@ -37,6 +39,7 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
       enableColumnActions,
       enableColumnDragging,
       enableColumnOrdering,
+      enableColumnPinning,
       enableGrouping,
       enableMultiSort,
       layoutMode,
@@ -67,6 +70,11 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
   };
 
   const { draggingBorderColor } = getMRTTheme(table, theme);
+
+  const isColumnPinned =
+    enableColumnPinning &&
+    columnDef.columnDefType !== 'group' &&
+    column.getIsPinned();
 
   const showColumnActions =
     (enableColumnActions || columnDef.enableColumnActions) &&
@@ -147,6 +155,8 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
             : 'left'
       }
       colSpan={header.colSpan}
+      data-index={staticColumnIndex}
+      data-pinned={!!isColumnPinned || undefined}
       onDragEnter={handleDragEnter}
       ref={(node: HTMLTableCellElement) => {
         if (node) {

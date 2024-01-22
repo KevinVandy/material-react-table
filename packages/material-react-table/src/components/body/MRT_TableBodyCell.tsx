@@ -163,7 +163,10 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     staticRowIndex,
   ]);
 
-  const isPinned = enableColumnPinning && row.getIsPinned();
+  const isColumnPinned =
+    enableColumnPinning &&
+    columnDef.columnDefType !== 'group' &&
+    column.getIsPinned();
 
   const isEditable =
     !cell.getIsPlaceholder() &&
@@ -216,7 +219,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     <TableCell
       align={theme.direction === 'rtl' ? 'right' : 'left'}
       data-index={staticColumnIndex}
-      data-pinned={!!isPinned || undefined}
+      data-pinned={!!isColumnPinned || undefined}
       ref={(node: HTMLTableCellElement) => {
         if (node) {
           measureElement?.(node);

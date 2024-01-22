@@ -7,6 +7,7 @@ import {
   type MRT_HeaderGroup,
   type MRT_RowData,
   type MRT_TableInstance,
+  type MRT_VirtualItem,
 } from '../../types';
 import { getMRTTheme } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
@@ -52,15 +53,25 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
       {virtualPaddingLeft ? (
         <th style={{ display: 'flex', width: virtualPaddingLeft }} />
       ) : null}
-      {(virtualColumns ?? headerGroup.headers).map((headerOrVirtualHeader) => {
-        const header = virtualColumns
-          ? headerGroup.headers[headerOrVirtualHeader.index]
-          : (headerOrVirtualHeader as MRT_Header<TData>);
+      {(virtualColumns ?? headerGroup.headers).map(
+        (headerOrVirtualHeader, staticColumnIndex) => {
+          let header = headerOrVirtualHeader as MRT_Header<TData>;
+          if (columnVirtualizer) {
+            staticColumnIndex = (headerOrVirtualHeader as MRT_VirtualItem)
+              .index;
+            header = headerGroup.headers[staticColumnIndex];
+          }
 
-        return header ? (
-          <MRT_TableHeadCell header={header} key={header.id} table={table} />
-        ) : null;
-      })}
+          return header ? (
+            <MRT_TableHeadCell
+              header={header}
+              key={header.id}
+              staticColumnIndex={staticColumnIndex}
+              table={table}
+            />
+          ) : null;
+        },
+      )}
       {virtualPaddingRight ? (
         <th style={{ display: 'flex', width: virtualPaddingRight }} />
       ) : null}

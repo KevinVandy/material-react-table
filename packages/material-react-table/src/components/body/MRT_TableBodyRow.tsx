@@ -140,7 +140,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
         data-pinned={!!isPinned || undefined}
         data-selected={
           row?.getIsSelected() ||
-          (row?.getIsAllSubRowsSelected() && row.getCanSelectSubRows()) ||
+          (row.getCanSelectSubRows() && row?.getIsAllSubRowsSelected()) ||
           undefined
         }
         onDragEnter={handleDragEnter}

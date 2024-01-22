@@ -10,23 +10,30 @@ import { parseFromValuesOrFunc } from '../../utils/utils';
 
 interface Props<TData extends MRT_RowData> extends TableCellProps {
   footer: MRT_Header<TData>;
+  staticColumnIndex?: number;
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_TableFooterCell = <TData extends MRT_RowData>({
   footer,
+  staticColumnIndex,
   table,
   ...rest
 }: Props<TData>) => {
   const theme = useTheme();
   const {
     getState,
-    options: { layoutMode, muiTableFooterCellProps },
+    options: { enableColumnPinning, layoutMode, muiTableFooterCellProps },
   } = table;
   const { density } = getState();
   const { column } = footer;
   const { columnDef } = column;
   const { columnDefType } = columnDef;
+
+  const isColumnPinned =
+    enableColumnPinning &&
+    columnDef.columnDefType !== 'group' &&
+    column.getIsPinned();
 
   const args = { column, table };
   const tableCellProps = {
@@ -45,6 +52,8 @@ export const MRT_TableFooterCell = <TData extends MRT_RowData>({
             : 'left'
       }
       colSpan={footer.colSpan}
+      data-index={staticColumnIndex}
+      data-pinned={!!isColumnPinned || undefined}
       variant="footer"
       {...tableCellProps}
       sx={(theme) => ({
