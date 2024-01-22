@@ -150,7 +150,12 @@ const Example = () => {
     enableFacetedValues: true,
     enableRowActions: true,
     enableRowSelection: true,
-    initialState: { showColumnFilters: true, showGlobalFilter: true },
+    initialState: {
+      showColumnFilters: true,
+      showGlobalFilter: true,
+      columnPinning: { left: ['email'] },
+      rowSelection: { 1: true },
+    },
     paginationDisplayMode: 'pages',
     positionToolbarAlertBanner: 'bottom',
     muiSearchTextFieldProps: {

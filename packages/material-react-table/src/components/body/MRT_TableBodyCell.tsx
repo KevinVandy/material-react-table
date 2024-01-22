@@ -27,9 +27,9 @@ interface Props<TData extends MRT_RowData> extends TableCellProps {
   measureElement?: (element: HTMLTableCellElement) => void;
   numRows?: number;
   rowRef: RefObject<HTMLTableRowElement>;
+  staticColumnIndex?: number;
   staticRowIndex: number;
   table: MRT_TableInstance<TData>;
-  virtualColumnIndex?: number;
 }
 
 export const MRT_TableBodyCell = <TData extends MRT_RowData>({
@@ -37,9 +37,9 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
   measureElement,
   numRows,
   rowRef,
+  staticColumnIndex,
   staticRowIndex,
   table,
-  virtualColumnIndex,
   ...rest
 }: Props<TData>) => {
   const theme = useTheme();
@@ -52,6 +52,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       editDisplayMode,
       enableClickToCopy,
       enableColumnOrdering,
+      enableColumnPinning,
       enableEditing,
       enableGrouping,
       layoutMode,
@@ -162,6 +163,8 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     staticRowIndex,
   ]);
 
+  const isPinned = enableColumnPinning && row.getIsPinned();
+
   const isEditable =
     !cell.getIsPlaceholder() &&
     parseFromValuesOrFunc(enableEditing, row) &&
@@ -212,7 +215,8 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
   return (
     <TableCell
       align={theme.direction === 'rtl' ? 'right' : 'left'}
-      data-index={virtualColumnIndex}
+      data-index={staticColumnIndex}
+      data-pinned={!!isPinned || undefined}
       ref={(node: HTMLTableCellElement) => {
         if (node) {
           measureElement?.(node);

@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { CssBaseline } from '@mui/material';
 
 const lightTheme = createTheme({
   palette: { mode: 'light' },
@@ -42,6 +43,7 @@ const preview: Preview = {
 
       return (
         <ThemeProvider theme={defaultTheme}>
+          <CssBaseline />
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Typography
               sx={{

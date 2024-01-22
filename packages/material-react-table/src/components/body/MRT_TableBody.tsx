@@ -151,6 +151,7 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
           ) : (
             <>
               {(virtualRows ?? rows).map((rowOrVirtualRow, staticRowIndex) => {
+                let row = rowOrVirtualRow as MRT_Row<TData>;
                 if (rowVirtualizer) {
                   if (renderDetailPanel) {
                     if (rowOrVirtualRow.index % 2 === 1) {
@@ -161,10 +162,8 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
                   } else {
                     staticRowIndex = rowOrVirtualRow.index;
                   }
+                  row = rows[staticRowIndex];
                 }
-                const row = rowVirtualizer
-                  ? rows[staticRowIndex]
-                  : (rowOrVirtualRow as MRT_Row<TData>);
                 const props = {
                   ...commonRowProps,
                   pinnedRowIds,

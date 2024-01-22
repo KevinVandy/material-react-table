@@ -66,7 +66,7 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
     )}-size) * 1px), ${columnDef.minSize ?? 30}px)`,
     width: `calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
       header?.id ?? column.id,
-    )}-size) * 1px${header && layoutMode === 'grid-no-grow' ? ` + ${header?.subHeaders?.length ?? 0}rem` : ''})`,
+    )}-size) * 1px)`,
   };
 
   if (layoutMode === 'grid') {
