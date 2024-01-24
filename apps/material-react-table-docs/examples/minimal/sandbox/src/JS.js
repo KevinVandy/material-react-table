@@ -48,6 +48,9 @@ export const Example = () => {
     muiTableProps: {
       sx: {
         border: '1px solid rgba(81, 81, 81, .5)',
+        caption: {
+          captionSide: 'top',
+        },
       },
     },
     muiTableHeadCellProps: {
@@ -62,6 +65,8 @@ export const Example = () => {
         border: '1px solid rgba(81, 81, 81, .5)',
       },
     },
+    renderCaption: ({ table }) =>
+      `Here is a table rendered with the lighter weight MRT_Table sub-component, rendering ${table.getRowModel().rows.length} rows.`,
   });
 
   //using MRT_Table instead of MaterialReactTable if we do not need any of the toolbar components or features

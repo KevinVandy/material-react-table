@@ -57,9 +57,7 @@ export const TopCaption = () => (
     columns={columns}
     data={data}
     muiTableProps={{
-      sx: {
-        captionSide: 'top',
-      },
+      sx: { caption: { captionSide: 'top' } },
     }}
     renderCaption={() => 'Table Caption'}
   />

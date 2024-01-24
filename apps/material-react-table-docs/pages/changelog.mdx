@@ -12,13 +12,20 @@ import Head from 'next/head';
 
 ### Version 2
 
+#### Version 2.9.0 - Coming Soon
+
+- Added new `renderCaption` table option to allow for a `<caption>` element to be rendered within the table
+- Fixed row hover opacity styles for pinned columns and selected rows
+- Standardized `data-index`, `data-pinned`, and `data-selected` attributes on body rows, head cells, body cells, and footer cells where applicable
+- Column virtualization performance optimizations
+
 #### Version 2.8.0 - 2024-01-19
 
 - Removed internal display column def memoization that caused edge cases with enabling and disabling features conditionally. (like `enableRowActions` and `enableEditing`, etc.)
-- Improved Column Resizing and Column/Row DnD Performance by caching column definitions while user is dragging.
-- Added new `grow` column option to allow for columns to grow to fill the remaining space in the table when `layoutMode: 'grid-no-grow'` is enabled, or to force a column to not grow when `layoutMode: 'grid'` is enabled and `grow: false` is set.
-  - `mrt-row-select`, `mrt-row-drag`, `mrt-row-pin`, and `mrt-row-number` columns are now set to `grow: false` by default now.
-  - `mrt-row-expand` column is also set to `grow: false` if only detail panels are enabled.
+- Improved Column Resizing and Column/Row DnD Performance by caching column definitions while user is dragging
+- Added new `grow` column option to allow for columns to grow to fill the remaining space in the table when `layoutMode: 'grid-no-grow'` is enabled, or to force a column to not grow when `layoutMode: 'grid'` is enabled and `grow: false` is set
+  - `mrt-row-select`, `mrt-row-drag`, `mrt-row-pin`, and `mrt-row-number` columns are now set to `grow: false` by default now
+  - `mrt-row-expand` column is also set to `grow: false` if only detail panels are enabled
   - `mrt-row-expand` is now set to a `size: 100` by default (slightly wider)
 - Fixed indentation of mrt expand column when layoutMode was grid or grid-no-grow (using margin instead of padding now)
 - Modified `editSelectOptions` to allow for dynamic values on a per-cell basis. `({ row, cell, etc. }) => []`
@@ -26,11 +33,11 @@ import Head from 'next/head';
 
 #### Version 2.7.0 - 2024-01-18
 
-- New `'positionCreatingRow'` table option to customize where the creating row is rendered in the table body.
-- All MRT MUI menus now use the `baseBackgroundColor` mrt theme color for the menu background color.
-- Fixed bug where the page index was not being reset to last page with rows when number of rows in the table changed.
-- Made some tooltips text non-interactive to prevent accidental clicks.
-- Simplified internal column preparation APIs.
+- New `'positionCreatingRow'` table option to customize where the creating row is rendered in the table body
+- All MRT MUI menus now use the `baseBackgroundColor` mrt theme color for the menu background color
+- Fixed bug where the page index was not being reset to last page with rows when number of rows in the table changed
+- Made some tooltips text non-interactive to prevent accidental clicks
+- Simplified internal column preparation APIs
 
 #### Version 2.6.1 - 2024-01-11
 
@@ -61,9 +68,9 @@ import Head from 'next/head';
 
 #### Version 2.5.0 - 2024-01-08
 
-- Implemented better default UI for `groupedColumnMode: 'remove'`. Expand column shows grouped row values.
+- Implemented better default UI for `groupedColumnMode: 'remove'`. Expand column shows grouped row values
 - Fixed grouped parent row selection toggling bugs
-- Tweaked media queries for search textbox on top of top toolbar alert banner.
+- Tweaked media queries for search textbox on top of top toolbar alert banner
 
 #### Version 2.4.1 - 2024-01-05
 
@@ -88,13 +95,13 @@ import Head from 'next/head';
 
 #### Version 2.3.0 - 2024-01-02
 
-- Added new `visibleInShowHideMenu` column option to allow for columns to be hidden from the show/hide columns menu, regardless of column visibility state.
-- Fixed bug where the Show All button in the show/hide columns menu did not properly skip columns with `enableHiding: false` set.
-- Fixed bug where creatingRow did not work with virtualization enabled.
+- Added new `visibleInShowHideMenu` column option to allow for columns to be hidden from the show/hide columns menu, regardless of column visibility state
+- Fixed bug where the Show All button in the show/hide columns menu did not properly skip columns with `enableHiding: false` set
+- Fixed bug where creatingRow did not work with virtualization enabled
 
 #### Version 2.2.0 - 2024-01-01
 
-- Added new `useMRT_Rows`, `useMRT_ColumnVirtualizer`, and `useMRT_RowVirtualizer` hooks to allow for more advanced use cases for headless mode.
+- Added new `useMRT_Rows`, `useMRT_ColumnVirtualizer`, and `useMRT_RowVirtualizer` hooks to allow for more advanced use cases for headless mode
 - Fixed possible duplicate table body row keys warning
 
 #### Version 2.1.0 - 2023-12-22

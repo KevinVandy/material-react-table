@@ -153,8 +153,6 @@ const Example = () => {
     initialState: {
       showColumnFilters: true,
       showGlobalFilter: true,
-      columnPinning: { left: ['email'], right: ['jobTitle'] },
-      rowSelection: { 1: true },
     },
     paginationDisplayMode: 'pages',
     positionToolbarAlertBanner: 'bottom',

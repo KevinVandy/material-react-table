@@ -1890,6 +1890,16 @@ export const tableOptions: TableOption[] = [
     type: 'ReactNode | ({ table }) => ReactNode',
   },
   {
+    tableOption: 'renderCaption',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: 'ReactNode | ({ table }) => ReactNode',
+  },
+  {
     tableOption: 'renderColumnActionsMenuItems',
     defaultValue: '',
     description: '',

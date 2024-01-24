@@ -135,10 +135,11 @@ export default function App() {
         enableHiding: false, //disable a feature for this column
       },
       {
-        accessorFn: (originalRow) => originalRow.age, //alternate way
+        accessorFn: (originalRow) => parseInt(originalRow.age), //alternate way
         id: 'age', //id required if you use accessorFn instead of accessorKey
         header: 'Age',
         Header: <i style={{ color: 'red' }}>Age</i>, //optional custom markup
+        Cell: ({ cell }) => <i>{cell.getValue<number>().toLocaleString()}</i>, //optional custom cell render
       },
     ],
     [],
