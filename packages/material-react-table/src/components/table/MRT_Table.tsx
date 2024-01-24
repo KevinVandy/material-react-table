@@ -20,6 +20,7 @@ export const MRT_Table = <TData extends MRT_RowData>({
     getFlatHeaders,
     getState,
     options: {
+      caption,
       columns,
       enableStickyHeader,
       enableTableFooter,
@@ -67,6 +68,7 @@ export const MRT_Table = <TData extends MRT_RowData>({
         ...(parseFromValuesOrFunc(tableProps?.sx, theme) as any),
       })}
     >
+      {caption && (typeof caption === 'string' ? <caption>{caption}</caption> : caption)}
       {enableTableHead && <MRT_TableHead {...commonTableGroupProps} />}
       {memoMode === 'table-body' || columnSizingInfo.isResizingColumn ? (
         <Memo_MRT_TableBody {...commonTableGroupProps} />
