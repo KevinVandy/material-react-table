@@ -50,8 +50,8 @@
     "build-locales": "pnpm lib:build-locales",
     "build-lib": "pnpm lib:build-lib",
     "dev": "pnpm lib:dev",
-    "lib:build": "rm -rf dist && pnpm build-lib && pnpm build-locales && rm -rf dist/types",
-    "lib:build-locales": "rm -rf locales && node build-locales.mjs",
+    "lib:build": "pnpm build-lib && pnpm build-locales",
+    "lib:build-locales": "node build-locales.mjs",
     "lib:build-lib": "rm -rf dist && rollup -c rollup.config.mjs && size-limit",
     "lib:dev": "rollup -c rollup.config.mjs --watch",
     "lint": "eslint .",
@@ -94,6 +94,8 @@
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
     "rollup": "^2.79.1",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "size-limit": "^11.0.2",
@@ -118,4 +120,4 @@
     "@tanstack/react-virtual": "3.0.2",
     "highlight-words": "1.2.2"
   }
-} 
+}

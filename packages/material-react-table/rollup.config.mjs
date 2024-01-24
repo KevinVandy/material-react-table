@@ -1,5 +1,7 @@
 import pkg from './package.json' assert { type: 'json' };
 import typescript from '@rollup/plugin-typescript';
+import copy from 'rollup-plugin-copy';
+import del from 'rollup-plugin-delete';
 import dts from 'rollup-plugin-dts';
 import external from 'rollup-plugin-peer-deps-external';
 
@@ -38,6 +40,12 @@ export default [
   {
     input: './dist/types/index.d.ts',
     output: [{ file: `./${pkg.typings}`, format: 'esm' }],
-    plugins: [dts()],
+    plugins: [
+      del({
+        hook: 'buildEnd',
+        targets: ['dist/types'],
+      }),
+      dts(),
+    ],
   },
 ];

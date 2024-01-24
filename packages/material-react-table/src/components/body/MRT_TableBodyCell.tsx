@@ -263,6 +263,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
         zIndex:
           draggingColumn?.id === column.id ? 2 : column.getIsPinned() ? 1 : 0,
         ...getCommonMRTCellStyles({
+          cell,
           column,
           table,
           tableCellProps,

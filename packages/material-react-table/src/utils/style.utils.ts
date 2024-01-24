@@ -4,6 +4,7 @@ import { type TooltipProps } from '@mui/material/Tooltip';
 import { alpha, darken, lighten } from '@mui/material/styles';
 import { type Theme } from '@mui/material/styles';
 import {
+  type MRT_Cell,
   type MRT_Column,
   type MRT_Header,
   type MRT_RowData,
@@ -42,26 +43,46 @@ export const getMRTTheme = <TData extends MRT_RowData>(
   };
 };
 
+const pinnedBeforeAfterStyles = {
+  content: '""',
+  height: '100%',
+  left: 0,
+  position: 'absolute',
+  top: 0,
+  width: '100%',
+  zIndex: -1,
+};
+
 export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
+  cell,
   column,
   header,
   table,
   tableCellProps,
   theme,
 }: {
+  cell?: MRT_Cell<TData>;
   column: MRT_Column<TData>;
   header?: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
   tableCellProps: TableCellProps;
   theme: Theme;
 }) => {
-  const { baseBackgroundColor } = getMRTTheme(table, theme);
+  const {
+    baseBackgroundColor,
+    pinnedRowBackgroundColor,
+    selectedRowBackgroundColor,
+  } = getMRTTheme(table, theme);
   const {
     options: { enableColumnVirtualization, layoutMode },
   } = table;
   const { columnDef } = column;
+  const { row } = cell ?? {};
 
-  const isPinned = columnDef.columnDefType !== 'group' && column.getIsPinned();
+  const isColumnPinned =
+    columnDef.columnDefType !== 'group' && column.getIsPinned();
+  const isRowPinned = row?.getIsPinned();
+  const isRowSelected = row?.getIsSelected();
 
   const widthStyles: CSSProperties = {
     minWidth: `max(calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
@@ -84,40 +105,42 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
     widthStyles.flex = `${+(columnDef.grow || 0)} 0 auto`;
   }
 
-  const pinnedStyles = isPinned
+  const pinnedStyles = isColumnPinned
     ? {
-        '&[data-pinned="true"]': {
-          '&:before': {
-            backgroundColor: 'transparent',
-            content: '""',
-            height: '100%',
-            left: 0,
-            position: 'absolute',
-            top: 0,
-            width: '100%',
-          },
+        '&:after': {
+          backgroundColor: isRowSelected
+            ? selectedRowBackgroundColor
+            : isRowPinned
+              ? pinnedRowBackgroundColor
+              : undefined,
+          ...pinnedBeforeAfterStyles,
+        },
+        '&:before': {
           backgroundColor: alpha(
             darken(
               baseBackgroundColor,
               theme.palette.mode === 'dark' ? 0.05 : 0.01,
             ),
-            0.97,
+            0.9,
           ),
-          boxShadow: getIsLastLeftPinnedColumn(table, column)
-            ? `-4px 0 8px -6px ${alpha(theme.palette.grey[700], 0.5)} inset`
-            : getIsFirstRightPinnedColumn(column)
-              ? `4px 0 8px -6px ${alpha(theme.palette.grey[700], 0.5)} inset`
-              : undefined,
-          left:
-            isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
-          opacity: 0.98,
-          position: 'sticky',
-          right:
-            isPinned === 'right'
-              ? `${getTotalRight(table, column)}px`
-              : undefined,
-          zIndex: 1,
+          ...pinnedBeforeAfterStyles,
         },
+        boxShadow: getIsLastLeftPinnedColumn(table, column)
+          ? `-4px 0 8px -6px ${alpha(theme.palette.grey[700], 0.5)} inset`
+          : getIsFirstRightPinnedColumn(column)
+            ? `4px 0 8px -6px ${alpha(theme.palette.grey[700], 0.5)} inset`
+            : undefined,
+        left:
+          isColumnPinned === 'left'
+            ? `${column.getStart('left')}px`
+            : undefined,
+        opacity: 0.98,
+        position: 'sticky',
+        right:
+          isColumnPinned === 'right'
+            ? `${getTotalRight(table, column)}px`
+            : undefined,
+        zIndex: 1,
       }
     : {};
 
