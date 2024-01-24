@@ -27,6 +27,7 @@ export const MRT_Table = <TData extends MRT_RowData>({
       layoutMode,
       memoMode,
       muiTableProps,
+      renderCaption,
     },
   } = table;
   const { columnSizing, columnSizingInfo, columnVisibility, isFullScreen } =
@@ -36,6 +37,8 @@ export const MRT_Table = <TData extends MRT_RowData>({
     ...parseFromValuesOrFunc(muiTableProps, { table }),
     ...rest,
   };
+
+  const caption = parseFromValuesOrFunc(renderCaption, { table });
 
   const columnSizeVars = useMemo(() => {
     const headers = getFlatHeaders();
@@ -67,6 +70,7 @@ export const MRT_Table = <TData extends MRT_RowData>({
         ...(parseFromValuesOrFunc(tableProps?.sx, theme) as any),
       })}
     >
+      {!!caption && <caption>{caption}</caption>}
       {enableTableHead && <MRT_TableHead {...commonTableGroupProps} />}
       {memoMode === 'table-body' || columnSizingInfo.isResizingColumn ? (
         <Memo_MRT_TableBody {...commonTableGroupProps} />
