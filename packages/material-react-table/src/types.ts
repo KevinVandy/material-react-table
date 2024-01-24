@@ -1164,6 +1164,9 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   renderBottomToolbarCustomActions?: (props: {
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
+  renderCaption?:
+    | ((props: { table: MRT_TableInstance<TData> }) => ReactNode)
+    | ReactNode;
   renderColumnActionsMenuItems?: (props: {
     closeMenu: () => void;
     column: MRT_Column<TData>;
