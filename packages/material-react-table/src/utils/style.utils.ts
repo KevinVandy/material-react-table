@@ -4,7 +4,6 @@ import { type TooltipProps } from '@mui/material/Tooltip';
 import { alpha, darken, lighten } from '@mui/material/styles';
 import { type Theme } from '@mui/material/styles';
 import {
-  type MRT_Cell,
   type MRT_Column,
   type MRT_Header,
   type MRT_RowData,
@@ -43,7 +42,7 @@ export const getMRTTheme = <TData extends MRT_RowData>(
   };
 };
 
-const pinnedBeforeAfterStyles = {
+export const pinnedBeforeAfterStyles = {
   content: '""',
   height: '100%',
   left: 0,
@@ -53,15 +52,46 @@ const pinnedBeforeAfterStyles = {
   zIndex: -1,
 };
 
+export const getCommonPinnedCellStyles = <TData extends MRT_RowData>({
+  column,
+  table,
+  theme,
+}: {
+  column?: MRT_Column<TData>;
+  table: MRT_TableInstance<TData>;
+  theme: Theme;
+}) => {
+  const { baseBackgroundColor } = getMRTTheme(table, theme);
+  return {
+    '&[data-pinned="true"]': {
+      '&:before': {
+        backgroundColor: alpha(
+          darken(
+            baseBackgroundColor,
+            theme.palette.mode === 'dark' ? 0.05 : 0.01,
+          ),
+          0.97,
+        ),
+        boxShadow: column
+          ? getIsLastLeftPinnedColumn(table, column)
+            ? `-4px 0 4px -4px ${alpha(theme.palette.grey[700], 0.5)} inset`
+            : getIsFirstRightPinnedColumn(column)
+              ? `4px 0 4px -4px ${alpha(theme.palette.grey[700], 0.5)} inset`
+              : undefined
+          : undefined,
+        ...pinnedBeforeAfterStyles,
+      },
+    },
+  };
+};
+
 export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
-  cell,
   column,
   header,
   table,
   tableCellProps,
   theme,
 }: {
-  cell?: MRT_Cell<TData>;
   column: MRT_Column<TData>;
   header?: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
@@ -69,20 +99,12 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
   theme: Theme;
 }) => {
   const {
-    baseBackgroundColor,
-    pinnedRowBackgroundColor,
-    selectedRowBackgroundColor,
-  } = getMRTTheme(table, theme);
-  const {
     options: { enableColumnVirtualization, layoutMode },
   } = table;
   const { columnDef } = column;
-  const { row } = cell ?? {};
 
   const isColumnPinned =
     columnDef.columnDefType !== 'group' && column.getIsPinned();
-  const isRowPinned = row?.getIsPinned();
-  const isRowSelected = row?.getIsSelected();
 
   const widthStyles: CSSProperties = {
     minWidth: `max(calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
@@ -107,34 +129,12 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
 
   const pinnedStyles = isColumnPinned
     ? {
-        '&:after': {
-          backgroundColor: isRowSelected
-            ? selectedRowBackgroundColor
-            : isRowPinned
-              ? pinnedRowBackgroundColor
-              : undefined,
-          ...pinnedBeforeAfterStyles,
-        },
-        '&:before': {
-          backgroundColor: alpha(
-            darken(
-              baseBackgroundColor,
-              theme.palette.mode === 'dark' ? 0.05 : 0.01,
-            ),
-            0.9,
-          ),
-          ...pinnedBeforeAfterStyles,
-        },
-        boxShadow: getIsLastLeftPinnedColumn(table, column)
-          ? `-4px 0 8px -6px ${alpha(theme.palette.grey[700], 0.5)} inset`
-          : getIsFirstRightPinnedColumn(column)
-            ? `4px 0 8px -6px ${alpha(theme.palette.grey[700], 0.5)} inset`
-            : undefined,
+        ...getCommonPinnedCellStyles({ column, table, theme }),
         left:
           isColumnPinned === 'left'
             ? `${column.getStart('left')}px`
             : undefined,
-        opacity: 0.98,
+        opacity: 0.97,
         position: 'sticky',
         right:
           isColumnPinned === 'right'
@@ -153,9 +153,11 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
       table.getState().hoveredColumn?.id === column.id
         ? 0.5
         : 1,
+    position: 'relative',
     transition: enableColumnVirtualization
       ? 'none'
       : `padding 150ms ease-in-out`,
+    zIndex: 0,
     ...pinnedStyles,
     ...widthStyles,
     ...(parseFromValuesOrFunc(tableCellProps?.sx, theme) as any),

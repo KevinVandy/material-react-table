@@ -8,19 +8,18 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
+import { getIsRowSelected } from '../../utils/row.utils';
 import { getCommonTooltipProps } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
 interface Props<TData extends MRT_RowData> extends CheckboxProps {
   row?: MRT_Row<TData>;
-  selectAll?: boolean;
   staticRowIndex?: number;
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
   row,
-  selectAll,
   staticRowIndex,
   table,
   ...rest
@@ -38,6 +37,8 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
     },
   } = table;
   const { density, isLoading } = getState();
+
+  const selectAll = !row;
 
   const checkboxProps = {
     ...(!row
@@ -92,10 +93,7 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
     'aria-label': selectAll
       ? localization.toggleSelectAll
       : localization.toggleSelectRow,
-    checked: selectAll
-      ? allRowsSelected
-      : row?.getIsSelected() ||
-        (row?.getIsAllSubRowsSelected() && row.getCanSelectSubRows()),
+    checked: selectAll ? allRowsSelected : getIsRowSelected({ row, table }),
     disabled:
       isLoading || (row && !row.getCanSelect()) || row?.id === 'mrt-row-create',
     inputProps: {

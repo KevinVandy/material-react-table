@@ -10,12 +10,12 @@ import { getAllLeafColumnDefs, getColumnId } from './column.utils';
 export function defaultDisplayColumnProps<TData extends MRT_RowData>({
   header,
   id,
-  size = 60,
+  size,
   tableOptions,
 }: {
   header?: keyof MRT_Localization;
   id: MRT_DisplayColumnIds;
-  size?: number;
+  size: number;
   tableOptions: MRT_DefinedTableOptions<TData>;
 }) {
   const { defaultDisplayColumn, displayColumnDefOptions, localization } =

@@ -28,6 +28,7 @@ export const getMRT_RowActionsColumnDef = <TData extends MRT_RowData>(
     ...defaultDisplayColumnProps({
       header: 'actions',
       id: 'mrt-row-actions',
+      size: 70,
       tableOptions,
     }),
   };

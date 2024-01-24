@@ -224,7 +224,7 @@ export const CustomAlertBannerHeadOverlay = () => (
             width: '100%',
           }}
         >
-          <MRT_SelectCheckbox selectAll table={table} /> {selectedAlert}{' '}
+          <MRT_SelectCheckbox table={table} /> {selectedAlert}{' '}
         </Box>
         <Box sx={{ display: 'flex', gap: '6px' }}>
           <Button color="success" startIcon={<Send />} variant="contained">

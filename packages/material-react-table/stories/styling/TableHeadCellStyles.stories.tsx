@@ -44,7 +44,7 @@ export const ColorSortIcon = () => (
     data={data}
     muiTableHeadCellProps={({ column }) => ({
       sx: {
-        '& .MuiTableSortLabel-icon': {
+        '& .MuiTableSortLabel-root svg': {
           color: column.getIsSorted() ? 'limegreen !important' : undefined,
         },
       },

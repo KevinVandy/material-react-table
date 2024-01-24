@@ -86,9 +86,11 @@ export const getMRT_RowExpandColumnDef = <TData extends MRT_RowData>(
       id: 'mrt-row-expand',
       size:
         groupedColumnMode === 'remove'
-          ? defaultColumn?.size
+          ? defaultColumn?.size ?? 180
           : renderDetailPanel
-            ? 60
+            ? enableExpandAll
+              ? 60
+              : 70
             : 100,
       tableOptions,
     }),

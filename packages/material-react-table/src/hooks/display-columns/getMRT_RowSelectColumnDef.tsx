@@ -28,12 +28,13 @@ export const getMRT_RowSelectColumnDef = <TData extends MRT_RowData>(
     ),
     Header:
       enableSelectAll && enableMultiRowSelection
-        ? ({ table }) => <MRT_SelectCheckbox selectAll table={table} />
+        ? ({ table }) => <MRT_SelectCheckbox table={table} />
         : undefined,
     grow: false,
     ...defaultDisplayColumnProps({
       header: 'select',
       id: 'mrt-row-select',
+      size: enableSelectAll ? 60 : 70,
       tableOptions,
     }),
   };

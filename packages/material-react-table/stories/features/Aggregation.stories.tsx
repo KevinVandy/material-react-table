@@ -121,6 +121,15 @@ export const Aggregation = () => (
   <MaterialReactTable columns={columns} data={data} enableGrouping />
 );
 
+export const AggregationWithSelection = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableGrouping
+    enableRowSelection
+  />
+);
+
 export const AggregationExpandedDefault = () => (
   <MaterialReactTable
     columns={columns}

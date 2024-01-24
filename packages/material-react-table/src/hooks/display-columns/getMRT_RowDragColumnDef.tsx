@@ -29,6 +29,7 @@ export const getMRT_RowDragColumnDef = <TData extends MRT_RowData>(
     ...defaultDisplayColumnProps({
       header: 'move',
       id: 'mrt-row-drag',
+      size: 60,
       tableOptions,
     }),
   };

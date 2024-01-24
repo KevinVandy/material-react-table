@@ -127,13 +127,7 @@ export const EnableRowVirtualizationSpacious = () => (
 
 export const EnableRowVirtualizationTallContent = () => (
   <MaterialReactTable
-    columns={[
-      ...longColumns,
-      {
-        accessorKey: 'favoriteQuote',
-        header: 'Favorite Quote',
-      },
-    ]}
+    columns={longColumns}
     data={longData}
     enableBottomToolbar={false}
     enablePagination={false}

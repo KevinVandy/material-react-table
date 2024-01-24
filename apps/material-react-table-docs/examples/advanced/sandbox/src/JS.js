@@ -137,7 +137,14 @@ const Example = () => {
     enableFacetedValues: true,
     enableRowActions: true,
     enableRowSelection: true,
-    initialState: { showColumnFilters: true, showGlobalFilter: true },
+    initialState: {
+      showColumnFilters: true,
+      showGlobalFilter: true,
+      columnPinning: {
+        left: ['mrt-row-expand', 'mrt-row-select'],
+        right: ['mrt-row-actions'],
+      },
+    },
     paginationDisplayMode: 'pages',
     positionToolbarAlertBanner: 'bottom',
     muiSearchTextFieldProps: {
@@ -153,9 +160,13 @@ const Example = () => {
     renderDetailPanel: ({ row }) => (
       <Box
         sx={{
+          alignItems: 'center',
           display: 'flex',
           justifyContent: 'space-around',
-          alignItems: 'center',
+          left: '30px',
+          maxWidth: '1000px',
+          position: 'sticky',
+          width: '100%',
         }}
       >
         <img

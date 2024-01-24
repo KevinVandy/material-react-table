@@ -24,6 +24,7 @@ export const getMRT_RowPinningColumnDef = <TData extends MRT_RowData>(
     ...defaultDisplayColumnProps({
       header: 'pin',
       id: 'mrt-row-pin',
+      size: 60,
       tableOptions,
     }),
   };

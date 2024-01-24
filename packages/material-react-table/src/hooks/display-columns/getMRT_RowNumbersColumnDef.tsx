@@ -30,6 +30,7 @@ export const getMRT_RowNumbersColumnDef = <TData extends MRT_RowData>(
     ...defaultDisplayColumnProps({
       header: 'rowNumbers',
       id: 'mrt-row-numbers',
+      size: 50,
       tableOptions,
     }),
   };

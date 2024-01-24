@@ -139,7 +139,7 @@ export const MRT_ToolbarAlertBanner = <TData extends MRT_RowData>({
                 {enableRowSelection &&
                   enableSelectAll &&
                   positionToolbarAlertBanner === 'head-overlay' && (
-                    <MRT_SelectCheckbox selectAll table={table} />
+                    <MRT_SelectCheckbox table={table} />
                   )}{' '}
                 {selectedAlert}
               </Box>
