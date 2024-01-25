@@ -1,16 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
-import {
-  getCoreRowModel,
-  getExpandedRowModel,
-  getFacetedMinMaxValues,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  getFilteredRowModel,
-  getGroupedRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
+import { useReactTable } from '@tanstack/react-table';
 import {
   type MRT_Cell,
   type MRT_Column,
@@ -207,36 +196,6 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
 
   //@ts-ignore
   const table = useReactTable({
-    getCoreRowModel: getCoreRowModel(),
-    getExpandedRowModel:
-      tableOptions.enableExpanding || tableOptions.enableGrouping
-        ? getExpandedRowModel()
-        : undefined,
-    getFacetedMinMaxValues: tableOptions.enableFacetedValues
-      ? getFacetedMinMaxValues()
-      : undefined,
-    getFacetedRowModel: tableOptions.enableFacetedValues
-      ? getFacetedRowModel()
-      : undefined,
-    getFacetedUniqueValues: tableOptions.enableFacetedValues
-      ? getFacetedUniqueValues()
-      : undefined,
-    getFilteredRowModel:
-      tableOptions.enableColumnFilters ||
-      tableOptions.enableGlobalFilter ||
-      tableOptions.enableFilters
-        ? getFilteredRowModel()
-        : undefined,
-    getGroupedRowModel: tableOptions.enableGrouping
-      ? getGroupedRowModel()
-      : undefined,
-    getPaginationRowModel: tableOptions.enablePagination
-      ? getPaginationRowModel()
-      : undefined,
-    getSortedRowModel: tableOptions.enableSorting
-      ? getSortedRowModel()
-      : undefined,
-    getSubRows: (row) => row?.subRows,
     onColumnOrderChange,
     onColumnSizingInfoChange,
     onGroupingChange,

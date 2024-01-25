@@ -1,4 +1,15 @@
 import { useMemo } from 'react';
+import {
+  getCoreRowModel,
+  getExpandedRowModel,
+  getFacetedMinMaxValues,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
+  getGroupedRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+} from '@tanstack/react-table';
 import { useTheme } from '@mui/material/styles';
 import { MRT_AggregationFns } from '../fns/aggregationFns';
 import { MRT_FilterFns } from '../fns/filterFns';
@@ -55,6 +66,7 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
   enableDensityToggle = true,
   enableExpandAll = true,
   enableExpanding,
+  enableFacetedValues = false,
   enableFilterMatchHighlighting = true,
   enableFilters = true,
   enableFullScreenToggle = true,
@@ -178,6 +190,7 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
     enableDensityToggle,
     enableExpandAll,
     enableExpanding,
+    enableFacetedValues,
     enableFilterMatchHighlighting,
     enableFilters,
     enableFullScreenToggle,
@@ -199,6 +212,26 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
     enableToolbarInternalActions,
     enableTopToolbar,
     filterFns,
+    getCoreRowModel: getCoreRowModel(),
+    getExpandedRowModel:
+      enableExpanding || enableGrouping ? getExpandedRowModel() : undefined,
+    getFacetedMinMaxValues: enableFacetedValues
+      ? getFacetedMinMaxValues()
+      : undefined,
+    getFacetedRowModel: enableFacetedValues ? getFacetedRowModel() : undefined,
+    getFacetedUniqueValues: enableFacetedValues
+      ? getFacetedUniqueValues()
+      : undefined,
+    getFilteredRowModel:
+      enableColumnFilters || enableGlobalFilter || enableFilters
+        ? getFilteredRowModel()
+        : undefined,
+    getGroupedRowModel: enableGrouping ? getGroupedRowModel() : undefined,
+    getPaginationRowModel: enablePagination
+      ? getPaginationRowModel()
+      : undefined,
+    getSortedRowModel: enableSorting ? getSortedRowModel() : undefined,
+    getSubRows: (row) => row?.subRows,
     icons,
     layoutMode,
     localization,
