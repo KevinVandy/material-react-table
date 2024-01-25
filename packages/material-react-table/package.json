@@ -1,5 +1,5 @@
 {
-  "version": "2.9.0",
+  "version": "2.9.1",
   "license": "MIT",
   "name": "material-react-table",
   "description": "A fully featured Material UI V5 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
@@ -61,14 +61,14 @@
     "storybook:dev": "storybook dev -p 6006"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.7",
+    "@babel/core": "^7.23.9",
     "@babel/preset-react": "^7.23.3",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "@faker-js/faker": "^8.3.1",
-    "@mui/icons-material": "^5.15.5",
-    "@mui/material": "^5.15.5",
-    "@mui/x-date-pickers": "^6.19.0",
+    "@faker-js/faker": "^8.4.0",
+    "@mui/icons-material": "^5.15.6",
+    "@mui/material": "^5.15.6",
+    "@mui/x-date-pickers": "^6.19.2",
     "@rollup/plugin-typescript": "^11.1.6",
     "@size-limit/preset-small-lib": "^11.0.2",
     "@storybook/addon-a11y": "^7.6.10",
@@ -80,11 +80,11 @@
     "@storybook/react": "^7.6.10",
     "@storybook/react-vite": "^7.6.10",
     "@storybook/testing-library": "^0.2.2",
-    "@types/node": "^20.11.5",
+    "@types/node": "^20.11.6",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
-    "@typescript-eslint/eslint-plugin": "^6.19.0",
-    "@typescript-eslint/parser": "^6.19.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.56.0",
     "eslint-plugin-mui-path-imports": "^0.0.15",
@@ -115,8 +115,8 @@
     "react-dom": ">=18.0"
   },
   "dependencies": {
-    "@tanstack/match-sorter-utils": "8.11.3",
-    "@tanstack/react-table": "8.11.6",
+    "@tanstack/match-sorter-utils": "8.11.7",
+    "@tanstack/react-table": "8.11.7",
     "@tanstack/react-virtual": "3.0.2",
     "highlight-words": "1.2.2"
   }

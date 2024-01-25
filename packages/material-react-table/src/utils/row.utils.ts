@@ -12,7 +12,10 @@ export const getIsRowSelected = <TData extends MRT_RowData>({
   row: MRT_Row<TData>;
   table: MRT_TableInstance<TData>;
 }) => {
-  const { options: enableRowSelection } = table;
+  const {
+    options: { enableRowSelection },
+  } = table;
+
   return (
     row.getIsSelected() ||
     (parseFromValuesOrFunc(enableRowSelection, row) &&

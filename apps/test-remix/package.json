@@ -12,9 +12,9 @@
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.15.5",
-    "@mui/material": "^5.15.5",
-    "@mui/x-date-pickers": "^6.19.0",
+    "@mui/icons-material": "^5.15.6",
+    "@mui/material": "^5.15.6",
+    "@mui/x-date-pickers": "^6.19.2",
     "@remix-run/css-bundle": "^2.5.1",
     "@remix-run/node": "^2.5.1",
     "@remix-run/react": "^2.5.1",
