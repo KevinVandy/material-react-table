@@ -197,12 +197,6 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
               : '1.25rem',
         userSelect: enableMultiSort && column.getCanSort() ? 'none' : undefined,
         verticalAlign: 'top',
-        zIndex:
-          column.getIsResizing() || draggingColumn?.id === column.id
-            ? 3
-            : column.getIsPinned() && columnDefType !== 'group'
-              ? 2
-              : 1,
         ...getCommonMRTCellStyles({
           column,
           header,

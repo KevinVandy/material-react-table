@@ -11,26 +11,32 @@ export default meta;
 const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
   {
     accessorKey: 'firstName',
+    footer: 'First Name',
     header: 'First Name',
   },
   {
     accessorKey: 'lastName',
+    footer: 'Last Name',
     header: 'Last Name',
   },
   {
     accessorKey: 'age',
+    footer: 'Age',
     header: 'Age',
   },
   {
     accessorKey: 'address',
+    footer: 'Address',
     header: 'Address',
   },
   {
     accessorKey: 'state',
+    footer: 'State',
     header: 'State',
   },
   {
     accessorKey: 'phoneNumber',
+    footer: 'Phone Number',
     header: 'Phone Number',
   },
 ];
@@ -48,12 +54,35 @@ export const DefaultLeft = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
+export const DefaultLeftGrid = () => (
+  <MaterialReactTable columns={columns} data={data} layoutMode="grid" />
+);
+
 export const RightCells = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
-    enableColumnResizing
     muiTableBodyCellProps={{
+      align: 'right',
+    }}
+    muiTableFooterCellProps={{
+      align: 'right',
+    }}
+    muiTableHeadCellProps={{
+      align: 'right',
+    }}
+  />
+);
+
+export const RightCellsGrid = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    layoutMode="grid"
+    muiTableBodyCellProps={{
+      align: 'right',
+    }}
+    muiTableFooterCellProps={{
       align: 'right',
     }}
     muiTableHeadCellProps={{
@@ -69,6 +98,26 @@ export const CenterCells = () => (
     muiTableBodyCellProps={{
       align: 'center',
     }}
+    muiTableFooterCellProps={{
+      align: 'center',
+    }}
+    muiTableHeadCellProps={{
+      align: 'center',
+    }}
+  />
+);
+
+export const CenterCellsGrid = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    layoutMode="grid"
+    muiTableBodyCellProps={{
+      align: 'center',
+    }}
+    muiTableFooterCellProps={{
+      align: 'center',
+    }}
     muiTableHeadCellProps={{
       align: 'center',
     }}
@@ -81,6 +130,9 @@ export const CenterCellsWithGrabHandle = () => (
     data={data}
     enableColumnDragging
     muiTableBodyCellProps={{
+      align: 'center',
+    }}
+    muiTableFooterCellProps={{
       align: 'center',
     }}
     muiTableHeadCellProps={{
@@ -98,6 +150,9 @@ export const CenterCellsWithGrabHandleNoSorting = () => (
     muiTableBodyCellProps={{
       align: 'center',
     }}
+    muiTableFooterCellProps={{
+      align: 'center',
+    }}
     muiTableHeadCellProps={{
       align: 'center',
     }}
@@ -110,6 +165,9 @@ export const CenterCellsNoColumnActions = () => (
     data={data}
     enableColumnActions={false}
     muiTableBodyCellProps={{
+      align: 'center',
+    }}
+    muiTableFooterCellProps={{
       align: 'center',
     }}
     muiTableHeadCellProps={{

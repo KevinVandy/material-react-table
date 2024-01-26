@@ -237,6 +237,7 @@ export const SourceCodeSnippet = ({
                     variant="standard"
                   />
                   <Select
+                    MenuProps={{ disableScrollLock: true }}
                     value={isLightTheme ? 'light' : 'dark'}
                     onChange={(e) => {
                       setIsLightTheme(e.target.value === 'light');

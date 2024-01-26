@@ -1,16 +1,26 @@
-html,
 body {
   background-color: #111;
   padding: 0;
   margin: 0;
-  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family:
+    'Open Sans',
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    Fira Sans,
+    Droid Sans,
+    Helvetica Neue,
+    sans-serif;
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
   overflow-y: overlay;
   overflow-x: hidden;
 }
- 
+
 a {
   color: inherit;
   text-decoration: none;
@@ -26,13 +36,13 @@ a {
 
 ::-webkit-scrollbar {
   right: 0;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: #999;
   border-radius: 8px;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
 }

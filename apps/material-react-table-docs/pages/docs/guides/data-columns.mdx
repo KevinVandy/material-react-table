@@ -248,22 +248,28 @@ const columns = [
   {
     accessorKey: 'id',
     header: 'ID',
-    //right align the header and body cells
+    //right align the header, body, and footer cells each individually
     muiTableHeadCellProps: {
       align: 'right',
     },
     muiTableBodyCellProps: {
+      align: 'right',
+    },
+    muiTableFooterCellProps: {
       align: 'right',
     },
   },
   {
     accessorKey: 'username',
     header: 'Username',
-    //center align the header and body cells
+    //center align the header, body, and footer cells each individually
     muiTableHeadCellProps: {
       align: 'center',
     },
     muiTableBodyCellProps: {
+      align: 'center',
+    },
+    muiTableFooterCellProps: {
       align: 'center',
     },
   },

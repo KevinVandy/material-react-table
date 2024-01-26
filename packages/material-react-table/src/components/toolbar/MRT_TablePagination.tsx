@@ -8,6 +8,7 @@ import Select, { type SelectProps } from '@mui/material/Select';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 import { flipIconStyles, getCommonTooltipProps } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
@@ -33,6 +34,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
   ...rest
 }: Props<TData>) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery('(max-width: 720px)');
 
   const {
     getPrePaginationRowModel,
@@ -67,17 +69,21 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
   const lastRowIndex = Math.min(pageIndex * pageSize + pageSize, totalRowCount);
 
   const {
-    SelectProps,
+    SelectProps = {},
     disabled = false,
     rowsPerPageOptions = defaultRowsPerPage,
     showFirstButton = showFirstLastPageButtons,
     showLastButton = showFirstLastPageButtons,
     showRowsPerPage = true,
-    ..._rest
+    ...restPaginationProps
   } = paginationProps ?? {};
 
   const disableBack = pageIndex <= 0 || disabled;
   const disableNext = lastRowIndex >= totalRowCount || disabled;
+
+  if (isMobile && SelectProps?.native !== false) {
+    SelectProps.native = true;
+  }
 
   const tooltipProps = getCommonTooltipProps();
 
@@ -109,10 +115,13 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
             {localization.rowsPerPage}
           </InputLabel>
           <Select
+            MenuProps={{ disableScrollLock: true }}
             disableUnderline
             disabled={disabled}
-            id="mrt-rows-per-page"
-            inputProps={{ 'aria-label': localization.rowsPerPage }}
+            inputProps={{
+              'aria-label': localization.rowsPerPage,
+              id: 'mrt-rows-per-page',
+            }}
             label={localization.rowsPerPage}
             onChange={(event) => setPageSize(+(event.target.value as any))}
             sx={{ mb: 0 }}
@@ -159,7 +168,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
           )}
           showFirstButton={showFirstButton}
           showLastButton={showLastButton}
-          {..._rest}
+          {...restPaginationProps}
         />
       ) : paginationDisplayMode === 'default' ? (
         <>

@@ -23,7 +23,7 @@ export const MRT_TableFooterCell = <TData extends MRT_RowData>({
   const theme = useTheme();
   const {
     getState,
-    options: { enableColumnPinning, layoutMode, muiTableFooterCellProps },
+    options: { enableColumnPinning, muiTableFooterCellProps },
   } = table;
   const { density } = getState();
   const { column } = footer;
@@ -57,9 +57,7 @@ export const MRT_TableFooterCell = <TData extends MRT_RowData>({
       variant="footer"
       {...tableCellProps}
       sx={(theme) => ({
-        display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
         fontWeight: 'bold',
-        justifyContent: columnDefType === 'group' ? 'center' : undefined,
         p:
           density === 'compact'
             ? '0.5rem'
@@ -67,9 +65,9 @@ export const MRT_TableFooterCell = <TData extends MRT_RowData>({
               ? '1rem'
               : '1.5rem',
         verticalAlign: 'top',
-        zIndex: column.getIsPinned() && columnDefType !== 'group' ? 2 : 1,
         ...getCommonMRTCellStyles({
           column,
+          header: footer,
           table,
           tableCellProps,
           theme,

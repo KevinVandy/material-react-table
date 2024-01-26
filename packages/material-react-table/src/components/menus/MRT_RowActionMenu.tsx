@@ -58,6 +58,7 @@ export const MRT_RowActionMenu = <TData extends MRT_RowData>({
         },
       }}
       anchorEl={anchorEl}
+      disableScrollLock
       onClick={(event) => event.stopPropagation()}
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}

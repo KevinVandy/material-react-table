@@ -410,6 +410,7 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
         },
       }}
       anchorEl={anchorEl}
+      disableScrollLock
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
       {...rest}

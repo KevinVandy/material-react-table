@@ -91,6 +91,7 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
         },
       }}
       anchorEl={anchorEl}
+      disableScrollLock
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
       {...rest}

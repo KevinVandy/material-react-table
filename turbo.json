@@ -21,7 +21,6 @@
     "docs:build": {
       "cache": false,
       "outputs": [
-        "dist/**",
         "build/**"
       ]
     },
@@ -33,12 +32,6 @@
     },
     "docs:start": {
       "cache": false
-    },
-    "lib:build": {
-      "outputs": [
-        "dist/**",
-        "locales/**"
-      ]
     },
     "lib:build-locales": {
       "outputs": [

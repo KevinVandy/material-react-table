@@ -153,6 +153,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
             >
               <Select
                 onOpen={() => plausible('version-select')}
+                MenuProps={{ disableScrollLock: true }}
                 value="v2"
                 size="small"
                 sx={{ m: '8px', height: '30px' }}

@@ -252,6 +252,7 @@ export const MRT_FilterOptionMenu = <TData extends MRT_RowData>({
       }}
       anchorEl={anchorEl}
       anchorOrigin={{ horizontal: 'right', vertical: 'center' }}
+      disableScrollLock
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
       {...rest}

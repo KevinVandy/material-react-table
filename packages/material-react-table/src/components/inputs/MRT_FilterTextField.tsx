@@ -468,6 +468,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
           select={isSelectFilter || isMultiSelectFilter}
           {...commonTextFieldProps}
           SelectProps={{
+            MenuProps: { disableScrollLock: true },
             displayEmpty: true,
             multiple: isMultiSelectFilter,
             renderValue: isMultiSelectFilter

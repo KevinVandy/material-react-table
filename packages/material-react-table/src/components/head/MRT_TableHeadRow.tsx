@@ -25,7 +25,7 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
   ...rest
 }: Props<TData>) => {
   const {
-    options: { layoutMode, muiTableHeadRowProps },
+    options: { enableStickyHeader, layoutMode, muiTableHeadRowProps },
   } = table;
 
   const { virtualColumns, virtualPaddingLeft, virtualPaddingRight } =
@@ -46,6 +46,10 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
         backgroundColor: getMRTTheme(table, theme).baseBackgroundColor,
         boxShadow: `4px 0 8px ${alpha(theme.palette.common.black, 0.1)}`,
         display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
+        position:
+          enableStickyHeader && layoutMode === 'semantic'
+            ? 'sticky'
+            : 'relative',
         top: 0,
         ...(parseFromValuesOrFunc(tableRowProps?.sx, theme) as any),
       })}

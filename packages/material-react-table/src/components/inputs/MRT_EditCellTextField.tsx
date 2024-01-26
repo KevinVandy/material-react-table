@@ -148,8 +148,11 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
           ) as any),
         }),
       }}
+      SelectProps={{
+        MenuProps: { disableScrollLock: true },
+      }}
       inputProps={{
-        autoComplete: 'new-password', // disable autocomplete and autofill
+        autoComplete: 'new-password', //disable autocomplete and autofill
         ...textFieldProps.inputProps,
       }}
       onBlur={handleBlur}

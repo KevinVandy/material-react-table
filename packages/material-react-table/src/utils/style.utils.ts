@@ -42,7 +42,7 @@ export const getMRTTheme = <TData extends MRT_RowData>(
   };
 };
 
-export const pinnedBeforeAfterStyles = {
+export const commonCellBeforeAfterStyles = {
   content: '""',
   height: '100%',
   left: 0,
@@ -79,7 +79,7 @@ export const getCommonPinnedCellStyles = <TData extends MRT_RowData>({
               ? `4px 0 4px -4px ${alpha(theme.palette.grey[700], 0.5)} inset`
               : undefined
           : undefined,
-        ...pinnedBeforeAfterStyles,
+        ...commonCellBeforeAfterStyles,
       },
     },
   };
@@ -99,9 +99,12 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
   theme: Theme;
 }) => {
   const {
+    getState,
     options: { enableColumnVirtualization, layoutMode },
   } = table;
+  const { draggingColumn } = getState();
   const { columnDef } = column;
+  const { columnDefType } = columnDef;
 
   const isColumnPinned =
     columnDef.columnDefType !== 'group' && column.getIsPinned();
@@ -140,7 +143,6 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
           isColumnPinned === 'right'
             ? `${getTotalRight(table, column)}px`
             : undefined,
-        zIndex: 1,
       }
     : {};
 
@@ -148,6 +150,12 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
     backgroundColor: 'inherit',
     backgroundImage: 'inherit',
     display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
+    justifyContent:
+      columnDefType === 'group'
+        ? 'center'
+        : layoutMode?.startsWith('grid')
+          ? tableCellProps.align
+          : undefined,
     opacity:
       table.getState().draggingColumn?.id === column.id ||
       table.getState().hoveredColumn?.id === column.id
@@ -157,7 +165,12 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
     transition: enableColumnVirtualization
       ? 'none'
       : `padding 150ms ease-in-out`,
-    zIndex: 0,
+    zIndex:
+      column.getIsResizing() || draggingColumn?.id === column.id
+        ? 2
+        : columnDefType !== 'group' && isColumnPinned
+          ? 1
+          : 0,
     ...pinnedStyles,
     ...widthStyles,
     ...(parseFromValuesOrFunc(tableCellProps?.sx, theme) as any),

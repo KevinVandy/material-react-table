@@ -241,9 +241,6 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
         alignItems: layoutMode?.startsWith('grid') ? 'center' : undefined,
         cursor:
           isEditable && editDisplayMode === 'cell' ? 'pointer' : 'inherit',
-        justifyContent: layoutMode?.startsWith('grid')
-          ? tableCellProps.align
-          : undefined,
         overflow: 'hidden',
         p:
           density === 'compact'
@@ -260,8 +257,6 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
         textOverflow: columnDefType !== 'display' ? 'ellipsis' : undefined,
         whiteSpace:
           row.getIsPinned() || density === 'compact' ? 'nowrap' : 'normal',
-        zIndex:
-          draggingColumn?.id === column.id ? 2 : column.getIsPinned() ? 1 : 0,
         ...getCommonMRTCellStyles({
           column,
           table,

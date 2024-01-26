@@ -21,9 +21,9 @@ import {
 } from '../../types';
 import { getIsRowSelected } from '../../utils/row.utils';
 import {
+  commonCellBeforeAfterStyles,
   getCommonPinnedCellStyles,
   getMRTTheme,
-  pinnedBeforeAfterStyles,
 } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
@@ -176,13 +176,11 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
           ...tableRowProps?.style,
         }}
         sx={(theme: Theme) => ({
-          '&:hover td': {
-            '&:after': {
-              backgroundColor: cellHighlightColorHover
-                ? alpha(cellHighlightColorHover, 0.3)
-                : undefined,
-              ...pinnedBeforeAfterStyles,
-            },
+          '&:hover td:after': {
+            backgroundColor: cellHighlightColorHover
+              ? alpha(cellHighlightColorHover, 0.3)
+              : undefined,
+            ...commonCellBeforeAfterStyles,
           },
           backgroundColor: `${baseBackgroundColor} !important`,
           bottom:
@@ -199,11 +197,11 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
             ? 'absolute'
             : rowPinningDisplayMode?.includes('sticky') && isRowPinned
               ? 'sticky'
-              : undefined,
+              : 'relative',
           td: {
             '&:after': {
               backgroundColor: cellHighlightColor,
-              ...pinnedBeforeAfterStyles,
+              ...commonCellBeforeAfterStyles,
             },
             ...getCommonPinnedCellStyles({ table, theme }),
           },
@@ -218,9 +216,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
           transition: virtualRow ? 'none' : 'all 150ms ease-in-out',
           width: '100%',
           zIndex:
-            rowPinningDisplayMode?.includes('sticky') && isRowPinned
-              ? 2
-              : undefined,
+            rowPinningDisplayMode?.includes('sticky') && isRowPinned ? 2 : 0,
           ...(sx as any),
         })}
       >
