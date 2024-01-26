@@ -1,5 +1,5 @@
+html,
 body {
-  background-color: #111;
   padding: 0;
   margin: 0;
   font-family:
@@ -19,6 +19,10 @@ body {
   scroll-padding-top: 5rem;
   overflow-y: overlay;
   overflow-x: hidden;
+}
+
+body {
+  background-color: #111;
 }
 
 a {

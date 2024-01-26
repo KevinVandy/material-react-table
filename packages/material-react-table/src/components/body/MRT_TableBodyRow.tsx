@@ -176,12 +176,12 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
           ...tableRowProps?.style,
         }}
         sx={(theme: Theme) => ({
-          '&:hover td:after': {
-            backgroundColor: cellHighlightColorHover
-              ? alpha(cellHighlightColorHover, 0.3)
-              : undefined,
-            ...commonCellBeforeAfterStyles,
-          },
+          '&:hover td:after': cellHighlightColorHover
+            ? {
+                backgroundColor: alpha(cellHighlightColorHover, 0.3),
+                ...commonCellBeforeAfterStyles,
+              }
+            : undefined,
           backgroundColor: `${baseBackgroundColor} !important`,
           bottom:
             !virtualRow && bottomPinnedIndex !== undefined && isRowPinned
@@ -199,12 +199,14 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
               ? 'sticky'
               : 'relative',
           td: {
-            '&:after': {
-              backgroundColor: cellHighlightColor,
-              ...commonCellBeforeAfterStyles,
-            },
             ...getCommonPinnedCellStyles({ table, theme }),
           },
+          'td:after': cellHighlightColor
+            ? {
+                backgroundColor: cellHighlightColor,
+                ...commonCellBeforeAfterStyles,
+              }
+            : undefined,
           top: virtualRow
             ? 0
             : topPinnedIndex !== undefined && isRowPinned
