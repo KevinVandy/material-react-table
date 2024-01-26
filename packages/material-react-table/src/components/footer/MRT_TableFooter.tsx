@@ -54,7 +54,7 @@ export const MRT_TableFooter = <TData extends MRT_RowData>({
             ? `1px solid ${theme.palette.grey[300]}`
             : `1px solid ${theme.palette.grey[700]}`
           : undefined,
-        position: stickFooter ? 'sticky' : undefined,
+        position: stickFooter ? 'sticky' : 'relative',
         zIndex: stickFooter ? 1 : undefined,
         ...(parseFromValuesOrFunc(tableFooterProps?.sx, theme) as any),
       })}

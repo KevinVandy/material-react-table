@@ -12,6 +12,17 @@ import Head from 'next/head';
 
 ### Version 2
 
+#### Version 2.9.2 - 2024-01-25
+
+- Added `disableScrollLock: true` to all MUI Menus and Select Menus to keep menus with their anchor origin while scrolling by default
+- Switched pagination rows per page select to use native select by default in mobile viewports
+- Fixed pagination rows per page input label for accessibility attribute
+- Removed unnecessary `::after` pseudo elements on table cells if they were unused
+- Fixed edge cases with footer cell alignment
+- Added `position: 'relative'` to table and all rows and cells
+  - Fixed semantic sticky header regression
+  - Fixed row order/dragging with column virtualization enabled bug
+
 #### Version 2.9.1 - 2024-01-25
 
 - Fixed row selection highlighting logic on grouped/aggregated rows

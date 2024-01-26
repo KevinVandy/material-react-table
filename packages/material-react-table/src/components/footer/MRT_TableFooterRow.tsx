@@ -55,6 +55,7 @@ export const MRT_TableFooterRow = <TData extends MRT_RowData>({
       sx={(theme) => ({
         backgroundColor: getMRTTheme(table, theme).baseBackgroundColor,
         display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
+        position: 'relative',
         width: '100%',
         ...(parseFromValuesOrFunc(tableRowProps?.sx, theme) as any),
       })}
