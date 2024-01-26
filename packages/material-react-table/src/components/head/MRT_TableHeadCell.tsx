@@ -10,6 +10,7 @@ import { MRT_TableHeadCellGrabHandle } from './MRT_TableHeadCellGrabHandle';
 import { MRT_TableHeadCellResizeHandle } from './MRT_TableHeadCellResizeHandle';
 import { MRT_TableHeadCellSortLabel } from './MRT_TableHeadCellSortLabel';
 import {
+  type MRT_ColumnVirtualizer,
   type MRT_Header,
   type MRT_RowData,
   type MRT_TableInstance,
@@ -18,12 +19,14 @@ import { getCommonMRTCellStyles, getMRTTheme } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
 interface Props<TData extends MRT_RowData> extends TableCellProps {
+  columnVirtualizer?: MRT_ColumnVirtualizer;
   header: MRT_Header<TData>;
   staticColumnIndex?: number;
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_TableHeadCell = <TData extends MRT_RowData>({
+  columnVirtualizer,
   header,
   staticColumnIndex,
   table,
@@ -161,6 +164,9 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
       ref={(node: HTMLTableCellElement) => {
         if (node) {
           tableHeadCellRefs.current[column.id] = node;
+          if (columnDefType !== 'group') {
+            columnVirtualizer?.measureElement?.(node);
+          }
         }
       }}
       {...tableCellProps}

@@ -68,6 +68,7 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
 
           return header ? (
             <MRT_TableHeadCell
+              columnVirtualizer={columnVirtualizer}
               header={header}
               key={header.id}
               staticColumnIndex={staticColumnIndex}

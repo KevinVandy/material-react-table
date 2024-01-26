@@ -24,7 +24,6 @@ import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 
 interface Props<TData extends MRT_RowData> extends TableCellProps {
   cell: MRT_Cell<TData>;
-  measureElement?: (element: HTMLTableCellElement) => void;
   numRows?: number;
   rowRef: RefObject<HTMLTableRowElement>;
   staticColumnIndex?: number;
@@ -34,7 +33,6 @@ interface Props<TData extends MRT_RowData> extends TableCellProps {
 
 export const MRT_TableBodyCell = <TData extends MRT_RowData>({
   cell,
-  measureElement,
   numRows,
   rowRef,
   staticColumnIndex,
@@ -220,11 +218,6 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       align={theme.direction === 'rtl' ? 'right' : 'left'}
       data-index={staticColumnIndex}
       data-pinned={!!isColumnPinned || undefined}
-      ref={(node: HTMLTableCellElement) => {
-        if (node) {
-          measureElement?.(node);
-        }
-      }}
       {...tableCellProps}
       onDoubleClick={handleDoubleClick}
       onDragEnter={handleDragEnter}

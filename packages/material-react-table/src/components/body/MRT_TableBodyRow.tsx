@@ -234,10 +234,6 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
             }
             const props = {
               cell,
-              measureElement:
-                !isDraggingRow && !isHoveredRow
-                  ? columnVirtualizer?.measureElement
-                  : undefined,
               numRows,
               rowRef,
               staticColumnIndex,
