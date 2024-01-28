@@ -49,6 +49,7 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
 ) => MRT_DefinedTableOptions<TData> = <TData extends MRT_RowData>({
   aggregationFns,
   autoResetExpanded = false,
+  cellActionTrigger = 'right-click',
   columnFilterDisplayMode = 'subheader',
   columnResizeDirection,
   columnResizeMode = 'onChange',
@@ -173,6 +174,7 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
   return {
     aggregationFns,
     autoResetExpanded,
+    cellActionTrigger,
     columnFilterDisplayMode,
     columnResizeDirection,
     columnResizeMode,

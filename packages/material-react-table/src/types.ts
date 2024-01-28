@@ -315,17 +315,19 @@ export type MRT_TableInstance<TData extends MRT_RowData> = Omit<
   getTopRows: () => MRT_Row<TData>[];
   options: MRT_StatefulTableOptions<TData>;
   refs: {
-    bottomToolbarRef: MutableRefObject<HTMLDivElement>;
+    actionCellRef: MutableRefObject<HTMLTableCellElement | null>;
+    bottomToolbarRef: MutableRefObject<HTMLDivElement | null>;
     editInputRefs: MutableRefObject<Record<string, HTMLInputElement>>;
     filterInputRefs: MutableRefObject<Record<string, HTMLInputElement>>;
-    searchInputRef: MutableRefObject<HTMLInputElement>;
-    tableContainerRef: MutableRefObject<HTMLDivElement>;
-    tableFooterRef: MutableRefObject<HTMLTableSectionElement>;
+    searchInputRef: MutableRefObject<HTMLInputElement | null>;
+    tableContainerRef: MutableRefObject<HTMLDivElement | null>;
+    tableFooterRef: MutableRefObject<HTMLTableSectionElement | null>;
     tableHeadCellRefs: MutableRefObject<Record<string, HTMLTableCellElement>>;
-    tableHeadRef: MutableRefObject<HTMLTableSectionElement>;
-    tablePaperRef: MutableRefObject<HTMLDivElement>;
-    topToolbarRef: MutableRefObject<HTMLDivElement>;
+    tableHeadRef: MutableRefObject<HTMLTableSectionElement | null>;
+    tablePaperRef: MutableRefObject<HTMLDivElement | null>;
+    topToolbarRef: MutableRefObject<HTMLDivElement | null>;
   };
+  setActionCell: Dispatch<SetStateAction<MRT_Cell<TData> | null>>;
   setColumnFilterFns: Dispatch<SetStateAction<MRT_ColumnFilterFnsState>>;
   setCreatingRow: Dispatch<SetStateAction<MRT_Row<TData> | null | true>>;
   setDensity: Dispatch<SetStateAction<MRT_DensityState>>;
@@ -376,6 +378,7 @@ export type MRT_StatefulTableOptions<TData extends MRT_RowData> =
   };
 
 export type MRT_TableState<TData extends MRT_RowData> = TableState & {
+  actionCell?: MRT_Cell<TData> | null;
   columnFilterFns: MRT_ColumnFilterFnsState;
   creatingRow: MRT_Row<TData> | null;
   density: MRT_DensityState;
@@ -642,6 +645,21 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
         table: MRT_TableInstance<TData>;
       }) => TableCellProps)
     | TableCellProps;
+  renderCellActionMenuItems?: (props: {
+    cell: MRT_Cell<TData>;
+    closeMenu: () => void;
+    row: MRT_Row<TData>;
+    staticColumnIndex?: number;
+    staticRowIndex?: number;
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode[];
+  renderCellActions?: (props: {
+    cell: MRT_Cell<TData>;
+    row: MRT_Row<TData>;
+    staticColumnIndex?: number;
+    staticRowIndex?: number;
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode;
   renderColumnActionsMenuItems?: (props: {
     closeMenu: () => void;
     column: MRT_Column<TData>;
@@ -789,6 +807,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   | 'onStateChange'
   | 'state'
 > & {
+  cellActionTrigger?: 'click' | 'hover' | 'right-click';
   columnFilterDisplayMode?: 'custom' | 'popover' | 'subheader';
   columnFilterModeOptions?: Array<
     LiteralUnion<string & MRT_FilterOption>
@@ -833,6 +852,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   }>;
   editDisplayMode?: 'cell' | 'custom' | 'modal' | 'row' | 'table';
   enableBottomToolbar?: boolean;
+  enableCellActions?: ((cell: MRT_Cell<TData>) => boolean) | boolean;
   enableClickToCopy?: boolean;
   enableColumnActions?: boolean;
   enableColumnDragging?: boolean;
@@ -1115,6 +1135,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   muiTopToolbarProps?:
     | ((props: { table: MRT_TableInstance<TData> }) => BoxProps)
     | BoxProps;
+  onActionCellChange?: OnChangeFn<MRT_Cell<TData> | null>;
   onColumnFilterFnsChange?: OnChangeFn<{ [key: string]: MRT_FilterOption }>;
   onCreatingRowCancel?: (props: {
     row: MRT_Row<TData>;
@@ -1167,6 +1188,21 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   renderCaption?:
     | ((props: { table: MRT_TableInstance<TData> }) => ReactNode)
     | ReactNode;
+  renderCellActionMenuItems?: (props: {
+    cell: MRT_Cell<TData>;
+    closeMenu: () => void;
+    row: MRT_Row<TData>;
+    staticColumnIndex?: number;
+    staticRowIndex?: number;
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode[];
+  renderCellActions?: (props: {
+    cell: MRT_Cell<TData>;
+    row: MRT_Row<TData>;
+    staticColumnIndex?: number;
+    staticRowIndex?: number;
+    table: MRT_TableInstance<TData>;
+  }) => ReactNode;
   renderColumnActionsMenuItems?: (props: {
     closeMenu: () => void;
     column: MRT_Column<TData>;

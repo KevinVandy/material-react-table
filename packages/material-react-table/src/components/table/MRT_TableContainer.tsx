@@ -6,6 +6,7 @@ import { MRT_Table } from './MRT_Table';
 import { MRT_TableLoadingOverlay } from './MRT_TableLoadingOverlay';
 import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
+import { MRT_CellActionMenu } from '../menus/MRT_CellActionMenu';
 import { MRT_EditRowModal } from '../modals/MRT_EditRowModal';
 
 const useIsomorphicLayoutEffect =
@@ -24,12 +25,14 @@ export const MRT_TableContainer = <TData extends MRT_RowData>({
     options: {
       createDisplayMode,
       editDisplayMode,
+      enableCellActions,
       enableStickyHeader,
       muiTableContainerProps,
     },
     refs: { bottomToolbarRef, tableContainerRef, topToolbarRef },
   } = table;
   const {
+    actionCell,
     creatingRow,
     editingRow,
     isFullScreen,
@@ -101,6 +104,7 @@ export const MRT_TableContainer = <TData extends MRT_RowData>({
       {(createModalOpen || editModalOpen) && (
         <MRT_EditRowModal open table={table} />
       )}
+      {enableCellActions && actionCell && <MRT_CellActionMenu table={table} />}
     </TableContainer>
   );
 };

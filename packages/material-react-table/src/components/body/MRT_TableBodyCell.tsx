@@ -1,16 +1,18 @@
 import {
-  type DragEvent,
   type MouseEvent,
+  type MutableRefObject,
   type RefObject,
   memo,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import Skeleton from '@mui/material/Skeleton';
 import TableCell, { type TableCellProps } from '@mui/material/TableCell';
 import { useTheme } from '@mui/material/styles';
 import { MRT_TableBodyCellValue } from './MRT_TableBodyCellValue';
+import { useMRT_CellEventHandlers } from '../../hooks/useMRT_CellEventHandlers';
 import {
   type MRT_Cell,
   type MRT_RowData,
@@ -49,17 +51,14 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       createDisplayMode,
       editDisplayMode,
       enableClickToCopy,
-      enableColumnOrdering,
       enableColumnPinning,
       enableEditing,
-      enableGrouping,
       layoutMode,
       muiSkeletonProps,
       muiTableBodyCellProps,
     },
     refs: { editInputRefs },
     setEditingCell,
-    setHoveredColumn,
   } = table;
   const {
     columnSizingInfo,
@@ -93,6 +92,10 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
   });
 
   const { draggingBorderColor } = getMRTTheme(table, theme);
+
+  const cellRef = useRef<HTMLTableCellElement>(
+    null,
+  ) as MutableRefObject<HTMLTableCellElement>;
 
   const [skeletonWidth, setSkeletonWidth] = useState(100);
   useEffect(() => {
@@ -196,22 +199,18 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     }
   };
 
-  const handleDragEnter = (e: DragEvent<HTMLTableCellElement>) => {
-    tableCellProps?.onDragEnter?.(e);
-    if (enableGrouping && hoveredColumn?.id === 'drop-zone') {
-      setHoveredColumn(null);
-    }
-    if (enableColumnOrdering && draggingColumn) {
-      setHoveredColumn(
-        columnDef.enableColumnOrdering !== false ? column : null,
-      );
-    }
-  };
-
   const cellValueProps = {
     cell,
     table,
   };
+
+  const {
+    handleContextMenu,
+    handleDragEnter,
+    handleMouseEnter,
+    handleMouseLeave,
+    handleOnClick,
+  } = useMRT_CellEventHandlers({ cell, cellRef, table, tableCellProps });
 
   return (
     <TableCell
@@ -219,8 +218,21 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       data-index={staticColumnIndex}
       data-pinned={!!isColumnPinned || undefined}
       {...tableCellProps}
+      onClick={handleOnClick}
+      onContextMenu={handleContextMenu}
       onDoubleClick={handleDoubleClick}
       onDragEnter={handleDragEnter}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      ref={(node: HTMLTableCellElement) => {
+        if (node) {
+          cellRef.current = node;
+          if (tableCellProps?.ref) {
+            //@ts-ignore
+            tableCellProps.ref.current = node;
+          }
+        }
+      }}
       sx={(theme) => ({
         '&:hover': {
           outline:
