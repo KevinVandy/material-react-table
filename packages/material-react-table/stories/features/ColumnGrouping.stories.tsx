@@ -53,6 +53,10 @@ const data = [...Array(300)].map(() => ({
 }));
 
 export const ColumnGroupingEnabled = () => (
+  <MaterialReactTable columns={columns} data={data} enableGrouping />
+);
+
+export const ColumnGroupingEnabledReorder = () => (
   <MaterialReactTable
     columns={columns}
     data={data}

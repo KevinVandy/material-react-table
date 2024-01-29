@@ -53,6 +53,20 @@ export const ColumnOrderingEnabled = () => (
   <MaterialReactTable columns={columns} data={data} enableColumnOrdering />
 );
 
+export const DisplayColumnOrderingEnabled = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    defaultDisplayColumn={{ enableColumnOrdering: true }}
+    enableColumnOrdering
+    enableRowActions
+    enableRowDragging
+    enableRowNumbers
+    enableRowSelection
+    positionActionsColumn="last"
+  />
+);
+
 export const ColumnOrderingDisabledPerColumn = () => (
   <MaterialReactTable
     columns={[

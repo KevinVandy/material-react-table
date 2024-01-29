@@ -131,6 +131,7 @@ export const MRT_TableHeadCellFilterLabel = <TData extends MRT_RowData = {}>({
           horizontal: 'center',
           vertical: 'top',
         }}
+        disableScrollLock
         onClick={(event) => event.stopPropagation()}
         onClose={(event) => {
           //@ts-ignore

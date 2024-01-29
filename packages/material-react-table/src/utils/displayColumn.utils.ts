@@ -119,16 +119,34 @@ export const getTrailingDisplayColumnIds = <TData extends MRT_RowData>(
 
 export const getDefaultColumnOrderIds = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
+  reset = false,
 ) => {
-  const leadingDisplayCols: string[] = getLeadingDisplayColumnIds(tableOptions);
-  const trailingDisplayCols: string[] =
+  const {
+    state: { columnOrder: currentColumnOrderIds = [] },
+  } = tableOptions;
+
+  const leadingDisplayColIds: string[] =
+    getLeadingDisplayColumnIds(tableOptions);
+  const trailingDisplayColIds: string[] =
     getTrailingDisplayColumnIds(tableOptions);
-  const allLeafColumnDefs = getAllLeafColumnDefs(tableOptions.columns)
-    .map((columnDef) => getColumnId(columnDef))
-    .filter(
-      (columnId) =>
-        !leadingDisplayCols.includes(columnId) &&
-        !trailingDisplayCols.includes(columnId),
-    );
-  return [...leadingDisplayCols, ...allLeafColumnDefs, ...trailingDisplayCols];
+
+  const defaultColumnDefIds = getAllLeafColumnDefs(tableOptions.columns).map(
+    (columnDef) => getColumnId(columnDef),
+  );
+
+  let allLeafColumnDefIds = reset
+    ? defaultColumnDefIds
+    : Array.from(new Set([...currentColumnOrderIds, ...defaultColumnDefIds]));
+
+  allLeafColumnDefIds = allLeafColumnDefIds.filter(
+    (colId) =>
+      !leadingDisplayColIds.includes(colId) &&
+      !trailingDisplayColIds.includes(colId),
+  );
+
+  return [
+    ...leadingDisplayColIds,
+    ...allLeafColumnDefIds,
+    ...trailingDisplayColIds,
+  ];
 };

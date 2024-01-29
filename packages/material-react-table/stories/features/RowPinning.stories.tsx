@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import Button from '@mui/material/Button';
 import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
 import { type Meta } from '@storybook/react';
@@ -47,6 +49,22 @@ const data = [...Array(50)].map(() => ({
 export const RowPinningStickyDefaultEnabled = () => (
   <MaterialReactTable columns={columns} data={data} enableRowPinning />
 );
+
+export const RowPinningEnabledConditionally = () => {
+  const [enableRowPinning, setEnableRowPinning] = useState(false);
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      enableRowPinning={enableRowPinning}
+      renderTopToolbarCustomActions={() => (
+        <Button onClick={() => setEnableRowPinning(!enableRowPinning)}>
+          Toggle Row Pinning
+        </Button>
+      )}
+    />
+  );
+};
 
 export const RowPinningStickyNoPagination = () => (
   <MaterialReactTable

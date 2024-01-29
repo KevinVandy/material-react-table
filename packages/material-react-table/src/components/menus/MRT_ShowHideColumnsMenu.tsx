@@ -115,7 +115,9 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
         {enableColumnOrdering && (
           <Button
             onClick={() =>
-              table.setColumnOrder(getDefaultColumnOrderIds(table.options))
+              table.setColumnOrder(
+                getDefaultColumnOrderIds(table.options, true),
+              )
             }
           >
             {localization.resetOrder}
