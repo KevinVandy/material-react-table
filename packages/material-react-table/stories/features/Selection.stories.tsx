@@ -47,6 +47,24 @@ export const SelectionEnabled = () => (
   <MaterialReactTable columns={columns} data={data} enableRowSelection />
 );
 
+export const SelectionFeatureEnabledConditionally = () => {
+  const [enabled, setEnabled] = useState(false);
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      defaultDisplayColumn={{ enableColumnOrdering: true }}
+      enableColumnOrdering
+      enableRowSelection={enabled}
+      renderTopToolbarCustomActions={() => (
+        <Button onClick={() => setEnabled(!enabled)}>
+          Toggle Row Selection
+        </Button>
+      )}
+    />
+  );
+};
+
 export const SelectionEnabledGrid = () => (
   <MaterialReactTable
     columns={columns}

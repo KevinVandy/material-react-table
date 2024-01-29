@@ -67,7 +67,7 @@ export const RowDraggingEnabledGrid = () => {
       columns={columns}
       data={data}
       enableRowDragging
-      layoutMode='grid'
+      layoutMode="grid"
     />
   );
 };
@@ -81,7 +81,7 @@ export const RowDraggingEnabledGridNoGrow = () => {
       columns={columns}
       data={data}
       enableRowDragging
-      layoutMode='grid-no-grow'
+      layoutMode="grid-no-grow"
     />
   );
 };

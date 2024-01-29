@@ -4,10 +4,7 @@ import {
   type MRT_RowData,
   type MRT_StatefulTableOptions,
 } from '../../types';
-import {
-  defaultDisplayColumnProps,
-  showRowSpacerColumn,
-} from '../../utils/displayColumn.utils';
+import { defaultDisplayColumnProps } from '../../utils/displayColumn.utils';
 
 const blankColProps = {
   children: null,
@@ -21,10 +18,6 @@ const blankColProps = {
 export const getMRT_RowSpacerColumnDef = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
 ): MRT_ColumnDef<TData> | null => {
-  if (!showRowSpacerColumn(tableOptions)) {
-    return null;
-  }
-
   return {
     ...defaultDisplayColumnProps({
       id: 'mrt-row-spacer',

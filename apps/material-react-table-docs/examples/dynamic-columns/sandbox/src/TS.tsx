@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   MaterialReactTable,
   useMaterialReactTable,
@@ -6,7 +6,7 @@ import {
   type MRT_ColumnFiltersState,
   type MRT_PaginationState,
   type MRT_SortingState,
-  type MRT_ColumnOrderState,
+  // type MRT_ColumnOrderState,
 } from 'material-react-table';
 import { IconButton, Tooltip } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
@@ -56,7 +56,8 @@ const Example = () => {
   });
 
   //if using dynamic columns that are loaded after table instance creation, we will need to manage the column order state ourselves
-  const [columnOrder, setColumnOrder] = useState<MRT_ColumnOrderState>([]);
+  //UPDATE: No longer needed as of v2.10.0
+  // const [columnOrder, setColumnOrder] = useState<MRT_ColumnOrderState>([]);
 
   //consider storing this code in a custom hook (i.e useFetchUsers)
   const {
@@ -113,10 +114,11 @@ const Example = () => {
     [data],
   );
 
-  useEffect(() => {
-    //if using dynamic columns that are loaded after table instance creation, we will need to set the column order state ourselves
-    setColumnOrder(columns.map((column) => column.id!));
-  }, [columns]);
+  //UPDATE: No longer needed as of v2.10.0
+  // useEffect(() => {
+  //   //if using dynamic columns that are loaded after table instance creation, we will need to set the column order state ourselves
+  //   setColumnOrder(columns.map((column) => column.id!));
+  // }, [columns]);
 
   const table = useMaterialReactTable({
     columns,
@@ -140,7 +142,7 @@ const Example = () => {
         }
       : undefined,
     onColumnFiltersChange: setColumnFilters,
-    onColumnOrderChange: setColumnOrder,
+    // onColumnOrderChange: setColumnOrder,
     onGlobalFilterChange: setGlobalFilter,
     onPaginationChange: setPagination,
     onSortingChange: setSorting,
@@ -154,7 +156,7 @@ const Example = () => {
     rowCount: meta?.totalRowCount ?? 0,
     state: {
       columnFilters,
-      columnOrder,
+      // columnOrder,
       globalFilter,
       isLoading,
       pagination,

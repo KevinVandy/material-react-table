@@ -97,9 +97,6 @@ export const RowActionsEnabledConditionally = () => {
       columns={columns}
       data={data}
       enableRowActions={enabled}
-      initialState={{
-        columnOrder: ['mrt-row-actions', ...columns.map((c) => c.accessorKey!)],
-      }}
       renderRowActionMenuItems={({ closeMenu, row }) => [
         <MenuItem
           key={1}

@@ -8,19 +8,12 @@ import {
   type MRT_RowData,
   type MRT_StatefulTableOptions,
 } from '../../types';
-import {
-  defaultDisplayColumnProps,
-  showRowExpandColumn,
-} from '../../utils/displayColumn.utils';
+import { defaultDisplayColumnProps } from '../../utils/displayColumn.utils';
 import { getCommonTooltipProps } from '../../utils/style.utils';
 
 export const getMRT_RowExpandColumnDef = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
 ): MRT_ColumnDef<TData> | null => {
-  if (!showRowExpandColumn(tableOptions)) {
-    return null;
-  }
-
   const {
     defaultColumn,
     enableExpandAll,
