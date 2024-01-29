@@ -506,7 +506,10 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
       }) => DropdownOption[])
     | DropdownOption[];
   editVariant?: 'select' | 'text';
-  enableClickToCopy?: boolean;
+  enableClickToCopy?:
+    | 'context-menu'
+    | ((cell: MRT_Cell<TData>) => 'context-menu' | boolean)
+    | boolean;
   enableColumnActions?: boolean;
   enableColumnDragging?: boolean;
   enableColumnFilterModes?: boolean;
@@ -648,18 +651,12 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
   renderCellActionMenuItems?: (props: {
     cell: MRT_Cell<TData>;
     closeMenu: () => void;
+    column: MRT_Column<TData>;
     row: MRT_Row<TData>;
     staticColumnIndex?: number;
     staticRowIndex?: number;
     table: MRT_TableInstance<TData>;
   }) => ReactNode[];
-  renderCellActions?: (props: {
-    cell: MRT_Cell<TData>;
-    row: MRT_Row<TData>;
-    staticColumnIndex?: number;
-    staticRowIndex?: number;
-    table: MRT_TableInstance<TData>;
-  }) => ReactNode;
   renderColumnActionsMenuItems?: (props: {
     closeMenu: () => void;
     column: MRT_Column<TData>;
@@ -807,7 +804,6 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   | 'onStateChange'
   | 'state'
 > & {
-  cellActionTrigger?: 'click' | 'hover' | 'right-click';
   columnFilterDisplayMode?: 'custom' | 'popover' | 'subheader';
   columnFilterModeOptions?: Array<
     LiteralUnion<string & MRT_FilterOption>
@@ -853,7 +849,10 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   editDisplayMode?: 'cell' | 'custom' | 'modal' | 'row' | 'table';
   enableBottomToolbar?: boolean;
   enableCellActions?: ((cell: MRT_Cell<TData>) => boolean) | boolean;
-  enableClickToCopy?: boolean;
+  enableClickToCopy?:
+    | 'context-menu'
+    | ((cell: MRT_Cell<TData>) => 'context-menu' | boolean)
+    | boolean;
   enableColumnActions?: boolean;
   enableColumnDragging?: boolean;
   enableColumnFilterModes?: boolean;
@@ -1191,18 +1190,12 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   renderCellActionMenuItems?: (props: {
     cell: MRT_Cell<TData>;
     closeMenu: () => void;
+    column: MRT_Column<TData>;
     row: MRT_Row<TData>;
     staticColumnIndex?: number;
     staticRowIndex?: number;
     table: MRT_TableInstance<TData>;
   }) => ReactNode[];
-  renderCellActions?: (props: {
-    cell: MRT_Cell<TData>;
-    row: MRT_Row<TData>;
-    staticColumnIndex?: number;
-    staticRowIndex?: number;
-    table: MRT_TableInstance<TData>;
-  }) => ReactNode;
   renderColumnActionsMenuItems?: (props: {
     closeMenu: () => void;
     column: MRT_Column<TData>;

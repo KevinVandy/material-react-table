@@ -19,7 +19,7 @@ const data = [...Array(2000)].map(() => ({
   firstName: faker.person.firstName(),
   gender: Math.random() < 0.95 ? faker.person.sex() : faker.person.gender(),
   lastName: faker.person.lastName(),
-  salary: Number(faker.finance.amount(10000, 100000, 0)),
+  salary: Number(faker.finance.amount({ dec: 0, max: 100000, min: 10000 })),
   state: faker.location.state(),
 }));
 

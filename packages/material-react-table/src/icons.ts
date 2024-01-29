@@ -5,6 +5,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import CloseIcon from '@mui/icons-material/Close';
+import ContentCopy from '@mui/icons-material/ContentCopy';
 import DensityLargeIcon from '@mui/icons-material/DensityLarge';
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
@@ -40,6 +41,7 @@ export const MRT_Default_Icons = {
   ChevronRightIcon,
   ClearAllIcon,
   CloseIcon,
+  ContentCopy,
   DensityLargeIcon,
   DensityMediumIcon,
   DensitySmallIcon,

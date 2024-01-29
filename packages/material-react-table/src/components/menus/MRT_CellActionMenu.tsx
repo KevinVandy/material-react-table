@@ -2,7 +2,6 @@ import Box from '@mui/material/Box';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu, { type MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import Popover from '@mui/material/Popover';
 import { useTheme } from '@mui/material/styles';
 import {
   commonListItemStyles,
@@ -24,17 +23,19 @@ export const MRT_CellActionMenu = <TData extends MRT_RowData>({
     getState,
     options: {
       editDisplayMode,
+      enableClickToCopy,
       enableEditing,
-      icons: { EditIcon },
+      icons: { ContentCopy, EditIcon },
       localization,
       renderCellActionMenuItems,
-      renderCellActions,
     },
     refs: { actionCellRef },
   } = table;
   const { actionCell, density } = getState();
   const cell = actionCell!;
   const { row } = cell;
+  const { column } = cell;
+  const { columnDef } = column;
 
   const theme = useTheme();
   const { menuBackgroundColor } = getMRTTheme(table, theme);
@@ -45,17 +46,31 @@ export const MRT_CellActionMenu = <TData extends MRT_RowData>({
     actionCellRef.current = null;
   };
 
-  const cellActionsPopoverContent = renderCellActions?.({
-    cell: actionCell!,
-    row,
-    table,
-  });
-
-  const menuItems = [
+  const internalMenuItems = [
+    (parseFromValuesOrFunc(enableClickToCopy, cell) === 'context-menu' ||
+      parseFromValuesOrFunc(columnDef.enableClickToCopy, cell) ===
+        'context-menu') && (
+      <MenuItem
+        divider
+        onClick={(event) => {
+          event.stopPropagation();
+          navigator.clipboard.writeText(cell.getValue() as string);
+        }}
+        sx={commonMenuItemStyles}
+      >
+        <Box sx={commonListItemStyles}>
+          <ListItemIcon>
+            <ContentCopy />
+          </ListItemIcon>
+          {localization.clickToCopy}
+        </Box>
+      </MenuItem>
+    ),
     parseFromValuesOrFunc(enableEditing, row) && editDisplayMode === 'cell' && (
       <MenuItem
+        divider
         onClick={() => {
-          table.setEditingCell(actionCell!);
+          table.setEditingCell(cell!);
         }}
         sx={commonMenuItemStyles}
       >
@@ -68,50 +83,33 @@ export const MRT_CellActionMenu = <TData extends MRT_RowData>({
       </MenuItem>
     ),
     renderCellActionMenuItems?.({
-      cell: actionCell!,
+      cell: cell!,
       closeMenu: handleClose,
+      column: column,
       row,
       table,
     }),
   ].filter(Boolean);
 
   return (
-    <>
-      {!!cellActionsPopoverContent && (
-        <Popover
-          anchorEl={actionCellRef.current}
-          onClick={(event) => event.stopPropagation()}
-          onClose={handleClose}
-          open={true}
-          slotProps={{ paper: { sx: { overflow: 'visible' } } }}
-          transformOrigin={{
-            horizontal: 'center',
-            vertical: 'bottom',
-          }}
-        >
-          {cellActionsPopoverContent}
-        </Popover>
-      )}
-      hello
-      {!!menuItems.length && (
-        <Menu
-          MenuListProps={{
-            dense: density === 'compact',
-            sx: {
-              backgroundColor: menuBackgroundColor,
-            },
-          }}
-          anchorEl={actionCellRef.current}
-          disableScrollLock
-          onClick={(event) => event.stopPropagation()}
-          onClose={handleClose}
-          open={!!actionCell}
-          transformOrigin={{ horizontal: -100, vertical: 8 }}
-          {...rest}
-        >
-          {menuItems}
-        </Menu>
-      )}
-    </>
+    !!internalMenuItems.length && (
+      <Menu
+        MenuListProps={{
+          dense: density === 'compact',
+          sx: {
+            backgroundColor: menuBackgroundColor,
+          },
+        }}
+        anchorEl={actionCellRef.current}
+        disableScrollLock
+        onClick={(event) => event.stopPropagation()}
+        onClose={handleClose}
+        open={!!cell}
+        transformOrigin={{ horizontal: -100, vertical: 8 }}
+        {...rest}
+      >
+        {internalMenuItems}
+      </Menu>
+    )
   );
 };

@@ -1,4 +1,5 @@
 import {
+  type DragEvent,
   type MouseEvent,
   type MutableRefObject,
   type RefObject,
@@ -12,7 +13,6 @@ import Skeleton from '@mui/material/Skeleton';
 import TableCell, { type TableCellProps } from '@mui/material/TableCell';
 import { useTheme } from '@mui/material/styles';
 import { MRT_TableBodyCellValue } from './MRT_TableBodyCellValue';
-import { useMRT_CellEventHandlers } from '../../hooks/useMRT_CellEventHandlers';
 import {
   type MRT_Cell,
   type MRT_RowData,
@@ -50,15 +50,19 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       columnResizeMode,
       createDisplayMode,
       editDisplayMode,
+      enableCellActions,
       enableClickToCopy,
+      enableColumnOrdering,
       enableColumnPinning,
       enableEditing,
+      enableGrouping,
       layoutMode,
       muiSkeletonProps,
       muiTableBodyCellProps,
     },
     refs: { editInputRefs },
     setEditingCell,
+    setHoveredColumn,
   } = table;
   const {
     columnSizingInfo,
@@ -185,6 +189,21 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
   const isCreating =
     isEditable && createDisplayMode === 'row' && creatingRow?.id === row.id;
 
+  const showClickToCopyButton =
+    (parseFromValuesOrFunc(enableClickToCopy, cell) === true ||
+      parseFromValuesOrFunc(columnDef.enableClickToCopy, cell) === true) &&
+    !['context-menu', false].includes(
+      // @ts-ignore
+      parseFromValuesOrFunc(columnDef.enableClickToCopy, cell),
+    );
+
+  const isRightClickable = parseFromValuesOrFunc(enableCellActions, cell);
+
+  const cellValueProps = {
+    cell,
+    table,
+  };
+
   const handleDoubleClick = (event: MouseEvent<HTMLTableCellElement>) => {
     tableCellProps?.onDoubleClick?.(event);
     if (isEditable && editDisplayMode === 'cell') {
@@ -199,18 +218,26 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     }
   };
 
-  const cellValueProps = {
-    cell,
-    table,
+  const handleDragEnter = (e: DragEvent<HTMLTableCellElement>) => {
+    tableCellProps?.onDragEnter?.(e);
+    if (enableGrouping && hoveredColumn?.id === 'drop-zone') {
+      setHoveredColumn(null);
+    }
+    if (enableColumnOrdering && draggingColumn) {
+      setHoveredColumn(
+        columnDef.enableColumnOrdering !== false ? column : null,
+      );
+    }
   };
 
-  const {
-    handleContextMenu,
-    handleDragEnter,
-    handleMouseEnter,
-    handleMouseLeave,
-    handleOnClick,
-  } = useMRT_CellEventHandlers({ cell, cellRef, table, tableCellProps });
+  const handleContextMenu = (e: MouseEvent<HTMLTableCellElement>) => {
+    tableCellProps?.onContextMenu?.(e);
+    if (isRightClickable) {
+      e.preventDefault();
+      table.setActionCell(cell);
+      table.refs.actionCellRef.current = cellRef.current;
+    }
+  };
 
   return (
     <TableCell
@@ -218,12 +245,9 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       data-index={staticColumnIndex}
       data-pinned={!!isColumnPinned || undefined}
       {...tableCellProps}
-      onClick={handleOnClick}
       onContextMenu={handleContextMenu}
       onDoubleClick={handleDoubleClick}
       onDragEnter={handleDragEnter}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
       ref={(node: HTMLTableCellElement) => {
         if (node) {
           cellRef.current = node;
@@ -244,8 +268,11 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
           textOverflow: 'clip',
         },
         alignItems: layoutMode?.startsWith('grid') ? 'center' : undefined,
-        cursor:
-          isEditable && editDisplayMode === 'cell' ? 'pointer' : 'inherit',
+        cursor: isRightClickable
+          ? 'context-menu'
+          : isEditable && editDisplayMode === 'cell'
+            ? 'pointer'
+            : 'inherit',
         overflow: 'hidden',
         p:
           density === 'compact'
@@ -298,8 +325,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
             })
           ) : isCreating || isEditing ? (
             <MRT_EditCellTextField cell={cell} table={table} />
-          ) : (enableClickToCopy || columnDef.enableClickToCopy) &&
-            columnDef.enableClickToCopy !== false ? (
+          ) : showClickToCopyButton && columnDef.enableClickToCopy !== false ? (
             <MRT_CopyButton cell={cell} table={table}>
               <MRT_TableBodyCellValue {...cellValueProps} />
             </MRT_CopyButton>

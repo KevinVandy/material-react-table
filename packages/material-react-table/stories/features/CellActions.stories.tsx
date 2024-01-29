@@ -1,4 +1,3 @@
-import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
@@ -53,7 +52,7 @@ export const CellActionsDisabledDefault = () => (
   <MaterialReactTable columns={columns} data={data} />
 );
 
-export const CellActionsContextMenu = () => (
+export const CellActions = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -65,32 +64,15 @@ export const CellActionsContextMenu = () => (
   />
 );
 
-export const CellActionsHover = () => (
+export const CellActionsWithClickToCopy = () => (
   <MaterialReactTable
-    cellActionTrigger="hover"
     columns={columns}
     data={data}
     enableCellActions
-    renderCellActions={() => <Box>Hello</Box>}
-  />
-);
-
-export const CellActionsClick = () => (
-  <MaterialReactTable
-    cellActionTrigger="click"
-    columns={columns}
-    data={data}
-    enableCellActions
-    renderCellActions={() => <Box>Hello</Box>}
-  />
-);
-
-export const CellActionsRightClick = () => (
-  <MaterialReactTable
-    cellActionTrigger="right-click"
-    columns={columns}
-    data={data}
-    enableCellActions
-    renderCellActions={() => <Box>Hello</Box>}
+    enableClickToCopy
+    renderCellActionMenuItems={() => [
+      <MenuItem key={1}>Item 1</MenuItem>,
+      <MenuItem key={2}>Item 2</MenuItem>,
+    ]}
   />
 );
