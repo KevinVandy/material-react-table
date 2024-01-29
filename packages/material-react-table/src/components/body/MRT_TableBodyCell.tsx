@@ -18,6 +18,7 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
+import { isCellEditable, openEditingCell } from '../../utils/cell.utils';
 import { getIsFirstColumn, getIsLastColumn } from '../../utils/column.utils';
 import { getCommonMRTCellStyles, getMRTTheme } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
@@ -54,14 +55,11 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       enableClickToCopy,
       enableColumnOrdering,
       enableColumnPinning,
-      enableEditing,
       enableGrouping,
       layoutMode,
       muiSkeletonProps,
       muiTableBodyCellProps,
     },
-    refs: { editInputRefs },
-    setEditingCell,
     setHoveredColumn,
   } = table;
   const {
@@ -174,10 +172,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     columnDef.columnDefType !== 'group' &&
     column.getIsPinned();
 
-  const isEditable =
-    !cell.getIsPlaceholder() &&
-    parseFromValuesOrFunc(enableEditing, row) &&
-    parseFromValuesOrFunc(columnDef.enableEditing, row) !== false;
+  const isEditable = isCellEditable({ cell, table });
 
   const isEditing =
     isEditable &&
@@ -207,16 +202,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
 
   const handleDoubleClick = (event: MouseEvent<HTMLTableCellElement>) => {
     tableCellProps?.onDoubleClick?.(event);
-    if (isEditable && editDisplayMode === 'cell') {
-      setEditingCell(cell);
-      queueMicrotask(() => {
-        const textField = editInputRefs.current[column.id];
-        if (textField) {
-          textField.focus();
-          textField.select?.();
-        }
-      });
-    }
+    openEditingCell({ cell, table });
   };
 
   const handleDragEnter = (e: DragEvent<HTMLTableCellElement>) => {

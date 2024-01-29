@@ -1,5 +1,7 @@
-import MenuItem from '@mui/material/MenuItem';
+import Email from '@mui/icons-material/Email';
+import PersonOffOutlined from '@mui/icons-material/PersonOffOutlined';
 import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
+import { MRT_ActionMenuItem } from '../../src/components/menus/MRT_ActionMenuItem';
 import { faker } from '@faker-js/faker';
 import { type Meta } from '@storybook/react';
 
@@ -48,18 +50,30 @@ const data: Row[] = [...Array(100)].map(() => ({
   state: faker.location.state(),
 }));
 
-export const CellActionsDisabledDefault = () => (
-  <MaterialReactTable columns={columns} data={data} />
-);
-
-export const CellActions = () => (
+export const CellActionsEnabled = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     enableCellActions
-    renderCellActionMenuItems={() => [
-      <MenuItem key={1}>Item 1</MenuItem>,
-      <MenuItem key={2}>Item 2</MenuItem>,
+    renderCellActionMenuItems={({ closeMenu, table }) => [
+      <MRT_ActionMenuItem
+        icon={<Email />}
+        key={1}
+        label="Item 1"
+        onClick={() => {
+          closeMenu();
+        }}
+        table={table}
+      />,
+      <MRT_ActionMenuItem
+        icon={<PersonOffOutlined />}
+        key={2}
+        label="Item 2"
+        onClick={() => {
+          closeMenu();
+        }}
+        table={table}
+      />,
     ]}
   />
 );
@@ -70,36 +84,56 @@ export const CellActionsWithClickToCopy = () => (
     data={data}
     enableCellActions
     enableClickToCopy
-    renderCellActionMenuItems={() => [
-      <MenuItem key={1}>Item 1</MenuItem>,
-      <MenuItem key={2}>Item 2</MenuItem>,
+    renderCellActionMenuItems={({ closeMenu, table }) => [
+      <MRT_ActionMenuItem
+        icon={<Email />}
+        key={1}
+        label="Item 1"
+        onClick={() => {
+          closeMenu();
+        }}
+        table={table}
+      />,
+      <MRT_ActionMenuItem
+        icon={<PersonOffOutlined />}
+        key={2}
+        label="Item 2"
+        onClick={() => {
+          closeMenu();
+        }}
+        table={table}
+      />,
     ]}
   />
 );
 
-export const CellActionsWithClickToCopyContextMenu = () => (
-  <MaterialReactTable
-    columns={columns}
-    data={data}
-    enableCellActions
-    enableClickToCopy="context-menu"
-    renderCellActionMenuItems={() => [
-      <MenuItem key={1}>Item 1</MenuItem>,
-      <MenuItem key={2}>Item 2</MenuItem>,
-    ]}
-  />
-);
-
-export const CellActionsCellEditing = () => (
+export const CellActionsWithBuiltIns = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     editDisplayMode="cell"
     enableCellActions
+    enableClickToCopy="context-menu"
     enableEditing
-    renderCellActionMenuItems={() => [
-      <MenuItem key={1}>Item 1</MenuItem>,
-      <MenuItem key={2}>Item 2</MenuItem>,
+    renderCellActionMenuItems={({ closeMenu, table }) => [
+      <MRT_ActionMenuItem
+        icon={<Email />}
+        key={1}
+        label="Item 1"
+        onClick={() => {
+          closeMenu();
+        }}
+        table={table}
+      />,
+      <MRT_ActionMenuItem
+        icon={<PersonOffOutlined />}
+        key={2}
+        label="Item 2"
+        onClick={() => {
+          closeMenu();
+        }}
+        table={table}
+      />,
     ]}
   />
 );

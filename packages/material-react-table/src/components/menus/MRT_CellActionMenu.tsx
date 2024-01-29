@@ -1,7 +1,8 @@
 import Menu, { type MenuProps } from '@mui/material/Menu';
 import { useTheme } from '@mui/material/styles';
-import { MRT_MenuItem } from './MRT_MenuItem';
+import { MRT_ActionMenuItem } from './MRT_ActionMenuItem';
 import { type MRT_RowData, type MRT_TableInstance } from '../../types';
+import { openEditingCell } from '../../utils/cell.utils';
 import { getMRTTheme } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
@@ -44,28 +45,32 @@ export const MRT_CellActionMenu = <TData extends MRT_RowData>({
     (parseFromValuesOrFunc(enableClickToCopy, cell) === 'context-menu' ||
       parseFromValuesOrFunc(columnDef.enableClickToCopy, cell) ===
         'context-menu') && (
-      <MRT_MenuItem
+      <MRT_ActionMenuItem
         divider
-        icon={ContentCopy}
+        icon={<ContentCopy />}
         label={localization.copy}
         onClick={(event) => {
           event.stopPropagation();
           navigator.clipboard.writeText(cell.getValue() as string);
+          handleClose();
         }}
+        table={table}
       />
     ),
     parseFromValuesOrFunc(enableEditing, row) && editDisplayMode === 'cell' && (
-      <MRT_MenuItem
+      <MRT_ActionMenuItem
         divider
-        icon={EditIcon}
+        icon={<EditIcon />}
         label={localization.edit}
         onClick={() => {
-          table.setEditingCell(cell!);
+          openEditingCell({ cell, table });
+          handleClose();
         }}
+        table={table}
       />
     ),
     renderCellActionMenuItems?.({
-      cell: cell!,
+      cell,
       closeMenu: handleClose,
       column: column,
       row,

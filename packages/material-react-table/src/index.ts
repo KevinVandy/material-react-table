@@ -2,6 +2,7 @@ export * from './types';
 
 //helpers
 export * from './utils/tanstack.helpers';
+export * from './utils/cell.utils';
 export * from './utils/column.utils';
 export * from './utils/displayColumn.utils';
 export * from './utils/row.utils';
@@ -67,6 +68,7 @@ export * from './components/inputs/MRT_FilterTextField';
 export * from './components/inputs/MRT_GlobalFilterTextField';
 export * from './components/inputs/MRT_SelectCheckbox';
 //menu components
+export * from './components/menus/MRT_ActionMenuItem';
 export * from './components/menus/MRT_ColumnActionMenu';
 export * from './components/menus/MRT_FilterOptionMenu';
 export * from './components/menus/MRT_RowActionMenu';

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import Menu, { type MenuProps } from '@mui/material/Menu';
 import { useTheme } from '@mui/material/styles';
-import { MRT_MenuItem } from './MRT_MenuItem';
+import { MRT_ActionMenuItem } from './MRT_ActionMenuItem';
 import {
   type MRT_FilterOption,
   type MRT_Header,
@@ -276,13 +276,14 @@ export const MRT_FilterOptionMenu = <TData extends MRT_RowData>({
           })) ??
         internalFilterOptions.map(
           ({ divider, label, option, symbol }, index) => (
-            <MRT_MenuItem
+            <MRT_ActionMenuItem
               divider={divider}
               icon={symbol}
               key={index}
               label={label}
               onClick={() => handleSelectFilterMode(option as MRT_FilterOption)}
               selected={option === filterOption}
+              table={table}
               value={option}
             />
           ),

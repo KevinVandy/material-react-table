@@ -1,7 +1,7 @@
 import { type MouseEvent } from 'react';
 import Menu, { type MenuProps } from '@mui/material/Menu';
 import { useTheme } from '@mui/material/styles';
-import { MRT_MenuItem } from './MRT_MenuItem';
+import { MRT_ActionMenuItem } from './MRT_ActionMenuItem';
 import {
   type MRT_Row,
   type MRT_RowData,
@@ -60,10 +60,11 @@ export const MRT_RowActionMenu = <TData extends MRT_RowData>({
     >
       {parseFromValuesOrFunc(enableEditing, row) &&
         ['modal', 'row'].includes(editDisplayMode!) && (
-          <MRT_MenuItem
-            icon={EditIcon}
+          <MRT_ActionMenuItem
+            icon={<EditIcon />}
             label={localization.edit}
             onClick={handleEdit}
+            table={table}
           />
         )}
       {renderRowActionMenuItems?.({
