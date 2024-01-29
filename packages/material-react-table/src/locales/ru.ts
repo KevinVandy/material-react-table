@@ -10,6 +10,7 @@ export const MRT_Localization_RU: MRT_Localization = {
   clearSearch: 'Очистить поиск',
   clearSort: 'Очистить сортировку',
   clickToCopy: 'Нажмите, чтобы скопировать',
+  copy: 'Копировать',
   columnActions: 'Действие колонки',
   copiedToClipboard: 'Скопировано в буфер обмена',
   collapse: 'Свернуть',

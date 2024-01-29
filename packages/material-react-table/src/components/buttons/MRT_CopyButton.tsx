@@ -74,6 +74,7 @@ export const MRT_CopyButton = <TData extends MRT_RowData>({
           letterSpacing: 'inherit',
           m: '-0.25rem',
           minWidth: 'unset',
+          py: 0,
           textAlign: 'inherit',
           textTransform: 'inherit',
           ...(parseFromValuesOrFunc(buttonProps?.sx, theme) as any),

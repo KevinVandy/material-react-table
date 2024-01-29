@@ -10,6 +10,7 @@ export const MRT_Localization_UK: MRT_Localization = {
   clearSearch: 'Очистити пошук',
   clearSort: 'Очистити сортування',
   clickToCopy: 'Натисніть, щоб скопіювати',
+  copy: 'Копіювати',
   collapse: 'Згорнути',
   collapseAll: 'Згорнути все',
   columnActions: 'Дії стовпця',

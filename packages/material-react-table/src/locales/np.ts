@@ -10,6 +10,7 @@ export const MRT_Localization_NP: MRT_Localization = {
   clearSearch: 'खोजिएको शब्द मेट्नुहोस्',
   clearSort: 'क्रम हटाउनुहोस्',
   clickToCopy: 'प्रतिलिपि बनाउन क्लिक गर्नुहोस्',
+  copy: 'प्रतिलिपि बनाउनुहोस्',
   collapse: 'संकुचित गर्नुहोस्',
   collapseAll: 'सबै संकुचित गर्नुहोस्',
   columnActions: 'यस स्तम्भका कार्यहरू',

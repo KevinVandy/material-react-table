@@ -4,7 +4,6 @@ import fs from 'fs';
 import { rollup } from 'rollup';
 
 const supportedLocales = [
-  'am',
   'ar',
   'az',
   'bg',

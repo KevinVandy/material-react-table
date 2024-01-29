@@ -10,6 +10,7 @@ export const MRT_Localization_FA: MRT_Localization = {
   clearSearch: 'پاک کردن جستجو',
   clearSort: 'پاک کردن مرتب سازی',
   clickToCopy: 'کپی کردن',
+  copy: 'کپی',
   collapse: 'بستن',
   collapseAll: 'بستن همه',
   columnActions: 'اقدامات ستون',

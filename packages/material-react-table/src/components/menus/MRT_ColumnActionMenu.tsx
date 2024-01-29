@@ -1,30 +1,14 @@
-import { useState } from 'react';
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
+import { type MouseEvent, useState } from 'react';
 import Menu, { type MenuProps } from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import { useTheme } from '@mui/material/styles';
 import { MRT_FilterOptionMenu } from './MRT_FilterOptionMenu';
+import { MRT_ActionMenuItem } from './MRT_ActionMenuItem';
 import {
   type MRT_Header,
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
 import { getMRTTheme } from '../../utils/style.utils';
-
-export const commonMenuItemStyles = {
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  my: 0,
-  py: '6px',
-};
-
-export const commonListItemStyles = {
-  alignItems: 'center',
-  display: 'flex',
-};
 
 interface Props<TData extends MRT_RowData> extends Partial<MenuProps> {
   anchorEl: HTMLElement | null;
@@ -54,7 +38,6 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
       enableSorting,
       enableSortingRemoval,
       icons: {
-        ArrowRightIcon,
         ClearAllIcon,
         DynamicFeedIcon,
         FilterListIcon,
@@ -143,7 +126,7 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
     setAnchorEl(null);
   };
 
-  const handleOpenFilterModeMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenFilterModeMenu = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation();
     setFilterMenuAnchorEl(event.currentTarget);
   };
@@ -164,106 +147,75 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
     ...(enableSorting && column.getCanSort()
       ? [
           enableSortingRemoval !== false && (
-            <MenuItem
-              disabled={!column.getIsSorted()}
+            <MRT_ActionMenuItem
+              icon={<ClearAllIcon />}
               key={0}
+              label={localization.clearSort}
               onClick={handleClearSort}
-              sx={commonMenuItemStyles}
-            >
-              <Box sx={commonListItemStyles}>
-                <ListItemIcon>
-                  <ClearAllIcon />
-                </ListItemIcon>
-                {localization.clearSort}
-              </Box>
-            </MenuItem>
+              table={table}
+            />
           ),
-          <MenuItem
+          <MRT_ActionMenuItem
             disabled={column.getIsSorted() === 'asc'}
+            icon={
+              <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
+            }
             key={1}
+            label={localization.sortByColumnAsc?.replace(
+              '{column}',
+              String(columnDef.header),
+            )}
             onClick={handleSortAsc}
-            sx={commonMenuItemStyles}
-          >
-            <Box sx={commonListItemStyles}>
-              <ListItemIcon>
-                <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
-              </ListItemIcon>
-              {localization.sortByColumnAsc?.replace(
-                '{column}',
-                String(columnDef.header),
-              )}
-            </Box>
-          </MenuItem>,
-          <MenuItem
+            table={table}
+          />,
+          <MRT_ActionMenuItem
             disabled={column.getIsSorted() === 'desc'}
             divider={enableColumnFilters || enableGrouping || enableHiding}
+            icon={<SortIcon />}
             key={2}
+            label={localization.sortByColumnDesc?.replace(
+              '{column}',
+              String(columnDef.header),
+            )}
             onClick={handleSortDesc}
-            sx={commonMenuItemStyles}
-          >
-            <Box sx={commonListItemStyles}>
-              <ListItemIcon>
-                <SortIcon />
-              </ListItemIcon>
-              {localization.sortByColumnDesc?.replace(
-                '{column}',
-                String(columnDef.header),
-              )}
-            </Box>
-          </MenuItem>,
+            table={table}
+          />,
         ]
       : []),
     ...(enableColumnFilters && column.getCanFilter()
       ? [
-          <MenuItem
+          <MRT_ActionMenuItem
             disabled={
               !columnFilterValue ||
               (Array.isArray(columnFilterValue) &&
                 !columnFilterValue.filter((value) => value).length)
             }
+            icon={<FilterListOffIcon />}
             key={3}
+            label={localization.clearFilter}
             onClick={handleClearFilter}
-            sx={commonMenuItemStyles}
-          >
-            <Box sx={commonListItemStyles}>
-              <ListItemIcon>
-                <FilterListOffIcon />
-              </ListItemIcon>
-              {localization.clearFilter}
-            </Box>
-          </MenuItem>,
+            table={table}
+          />,
           columnFilterDisplayMode === 'subheader' && (
-            <MenuItem
+            <MRT_ActionMenuItem
               disabled={showColumnFilters && !enableColumnFilterModes}
               divider={enableGrouping || enableHiding}
+              icon={<FilterListIcon />}
               key={4}
+              label={localization.filterByColumn?.replace(
+                '{column}',
+                String(columnDef.header),
+              )}
               onClick={
                 showColumnFilters
                   ? handleOpenFilterModeMenu
                   : handleFilterByColumn
               }
-              sx={commonMenuItemStyles}
-            >
-              <Box sx={commonListItemStyles}>
-                <ListItemIcon>
-                  <FilterListIcon />
-                </ListItemIcon>
-                {localization.filterByColumn?.replace(
-                  '{column}',
-                  String(columnDef.header),
-                )}
-              </Box>
-              {showFilterModeSubMenu && (
-                <IconButton
-                  onClick={handleOpenFilterModeMenu}
-                  onMouseEnter={handleOpenFilterModeMenu}
-                  size="small"
-                  sx={{ p: 0 }}
-                >
-                  <ArrowRightIcon />
-                </IconButton>
-              )}
-            </MenuItem>
+              onOpenSubMenu={
+                showFilterModeSubMenu ? handleOpenFilterModeMenu : undefined
+              }
+              table={table}
+            />
           ),
           showFilterModeSubMenu && (
             <MRT_FilterOptionMenu
@@ -279,121 +231,86 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
       : []),
     ...(enableGrouping && column.getCanGroup()
       ? [
-          <MenuItem
+          <MRT_ActionMenuItem
             divider={enableColumnPinning}
+            icon={<DynamicFeedIcon />}
             key={6}
+            label={localization[
+              column.getIsGrouped() ? 'ungroupByColumn' : 'groupByColumn'
+            ]?.replace('{column}', String(columnDef.header))}
             onClick={handleGroupByColumn}
-            sx={commonMenuItemStyles}
-          >
-            <Box sx={commonListItemStyles}>
-              <ListItemIcon>
-                <DynamicFeedIcon />
-              </ListItemIcon>
-              {localization[
-                column.getIsGrouped() ? 'ungroupByColumn' : 'groupByColumn'
-              ]?.replace('{column}', String(columnDef.header))}
-            </Box>
-          </MenuItem>,
+            table={table}
+          />,
         ]
       : []),
     ...(enableColumnPinning && column.getCanPin()
       ? [
-          <MenuItem
+          <MRT_ActionMenuItem
             disabled={column.getIsPinned() === 'left' || !column.getCanPin()}
+            icon={<PushPinIcon style={{ transform: 'rotate(90deg)' }} />}
             key={7}
+            label={localization.pinToLeft}
             onClick={() => handlePinColumn('left')}
-            sx={commonMenuItemStyles}
-          >
-            <Box sx={commonListItemStyles}>
-              <ListItemIcon>
-                <PushPinIcon style={{ transform: 'rotate(90deg)' }} />
-              </ListItemIcon>
-              {localization.pinToLeft}
-            </Box>
-          </MenuItem>,
-          <MenuItem
+            table={table}
+          />,
+          <MRT_ActionMenuItem
             disabled={column.getIsPinned() === 'right' || !column.getCanPin()}
+            icon={<PushPinIcon style={{ transform: 'rotate(-90deg)' }} />}
             key={8}
+            label={localization.pinToRight}
             onClick={() => handlePinColumn('right')}
-            sx={commonMenuItemStyles}
-          >
-            <Box sx={commonListItemStyles}>
-              <ListItemIcon>
-                <PushPinIcon style={{ transform: 'rotate(-90deg)' }} />
-              </ListItemIcon>
-              {localization.pinToRight}
-            </Box>
-          </MenuItem>,
-          <MenuItem
+            table={table}
+          />,
+          <MRT_ActionMenuItem
             disabled={!column.getIsPinned()}
             divider={enableHiding}
+            icon={<PushPinIcon />}
             key={9}
+            label={localization.unpin}
             onClick={() => handlePinColumn(false)}
-            sx={commonMenuItemStyles}
-          >
-            <Box sx={commonListItemStyles}>
-              <ListItemIcon>
-                <PushPinIcon />
-              </ListItemIcon>
-              {localization.unpin}
-            </Box>
-          </MenuItem>,
+            table={table}
+          />,
         ]
       : []),
     ...(enableColumnResizing && column.getCanResize()
       ? [
-          <MenuItem
+          <MRT_ActionMenuItem
             disabled={!columnSizing[column.id]}
+            icon={<RestartAltIcon />}
             key={10}
+            label={localization.resetColumnSize}
             onClick={handleResetColumnSize}
-            sx={commonMenuItemStyles}
-          >
-            <Box sx={commonListItemStyles}>
-              <ListItemIcon>
-                <RestartAltIcon />
-              </ListItemIcon>
-              {localization.resetColumnSize}
-            </Box>
-          </MenuItem>,
+            table={table}
+          />,
         ]
       : []),
     ...(enableHiding
       ? [
-          <MenuItem
+          <MRT_ActionMenuItem
             disabled={!column.getCanHide()}
+            icon={<VisibilityOffIcon />}
             key={11}
+            label={localization.hideColumn?.replace(
+              '{column}',
+              String(columnDef.header),
+            )}
             onClick={handleHideColumn}
-            sx={commonMenuItemStyles}
-          >
-            <Box sx={commonListItemStyles}>
-              <ListItemIcon>
-                <VisibilityOffIcon />
-              </ListItemIcon>
-              {localization.hideColumn?.replace(
-                '{column}',
-                String(columnDef.header),
-              )}
-            </Box>
-          </MenuItem>,
-          <MenuItem
+            table={table}
+          />,
+          <MRT_ActionMenuItem
             disabled={
               !Object.values(columnVisibility).filter((visible) => !visible)
                 .length
             }
+            icon={<ViewColumnIcon />}
             key={12}
+            label={localization.showAllColumns?.replace(
+              '{column}',
+              String(columnDef.header),
+            )}
             onClick={handleShowAllColumns}
-            sx={commonMenuItemStyles}
-          >
-            <Box sx={commonListItemStyles}>
-              <ListItemIcon>
-                <ViewColumnIcon />
-              </ListItemIcon>
-              {localization.showAllColumns?.replace(
-                '{column}',
-                String(columnDef.header),
-              )}
-            </Box>
-          </MenuItem>,
+            table={table}
+          />,
         ]
       : []),
   ].filter(Boolean);

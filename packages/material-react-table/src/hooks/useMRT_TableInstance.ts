@@ -53,6 +53,7 @@ import { useMRT_Effects } from './useMRT_Effects';
 export const useMRT_TableInstance = <TData extends MRT_RowData>(
   definedTableOptions: MRT_DefinedTableOptions<TData>,
 ): MRT_TableInstance<TData> => {
+  const actionCellRef = useRef<HTMLTableCellElement>(null);
   const bottomToolbarRef = useRef<HTMLDivElement>(null);
   const editInputRefs = useRef<Record<string, HTMLInputElement>>({});
   const filterInputRefs = useRef<Record<string, HTMLInputElement>>({});
@@ -82,6 +83,9 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
 
   definedTableOptions.initialState = initialState;
 
+  const [actionCell, setActionCell] = useState<MRT_Cell<TData> | null>(
+    initialState.actionCell ?? null,
+  );
   const [creatingRow, _setCreatingRow] = useState<MRT_Row<TData> | null>(
     initialState.creatingRow ?? null,
   );
@@ -154,6 +158,7 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
   );
 
   definedTableOptions.state = {
+    actionCell,
     columnFilterFns,
     columnOrder,
     columnSizingInfo,
@@ -258,27 +263,22 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
     globalFilterFn: statefulTableOptions.filterFns?.[globalFilterFn ?? 'fuzzy'],
   }) as MRT_TableInstance<TData>;
 
-  //@ts-ignore
   table.refs = {
-    //@ts-ignore
+    actionCellRef,
     bottomToolbarRef,
     editInputRefs,
     filterInputRefs,
-    //@ts-ignore
     searchInputRef,
-    //@ts-ignore
     tableContainerRef,
-    //@ts-ignore
     tableFooterRef,
     tableHeadCellRefs,
-    //@ts-ignore
     tableHeadRef,
-    //@ts-ignore
     tablePaperRef,
-    //@ts-ignore
     topToolbarRef,
   };
 
+  table.setActionCell =
+    statefulTableOptions.onActionCellChange ?? setActionCell;
   table.setCreatingRow = (row: MRT_Updater<MRT_Row<TData> | null | true>) => {
     let _row = row;
     if (row === true) {

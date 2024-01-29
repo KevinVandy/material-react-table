@@ -10,6 +10,7 @@ export const MRT_Localization_NO: MRT_Localization = {
   clearSearch: 'Tøm søk',
   clearSort: 'Tøm sortering',
   clickToCopy: 'Klikk for å kopiere',
+  copy: 'Kopier',
   collapse: 'Kollaps',
   collapseAll: 'Kollapse alle',
   columnActions: 'Kolonnehandlinger',

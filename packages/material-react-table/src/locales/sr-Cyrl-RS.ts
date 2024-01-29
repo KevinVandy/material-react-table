@@ -10,6 +10,7 @@ export const MRT_Localization_SR_CYRL_RS: MRT_Localization = {
   clearSearch: 'Поништи претрагу',
   clearSort: 'Поништи сортирање',
   clickToCopy: 'Кликни да копираш',
+  copy: 'Копирај',
   collapse: 'Рашири',
   collapseAll: 'Рашири све',
   columnActions: 'Акције над колонама',
