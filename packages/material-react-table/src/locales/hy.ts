@@ -10,6 +10,7 @@ export const MRT_Localization_HY: MRT_Localization = {
   clearSearch: 'Մաքրել որոնումը',
   clearSort: 'Մաքրել տեսակավորումը',
   clickToCopy: 'Սեղմել պատճենելու համար',
+  copy: 'Պատճենել',
   columnActions: 'Սյունակի գործողություն',
   copiedToClipboard: 'Պատճենվել է փոխանակման բուֆերում',
   collapse: 'Փոքրացնել',

@@ -10,6 +10,7 @@ export const MRT_Localization_DE: MRT_Localization = {
   clearSearch: 'Suche zurücksetzen',
   clearSort: 'Sortierung zurücksetzen',
   clickToCopy: 'Kopieren',
+  copy: 'Kopieren',
   columnActions: 'Spalten-Aktionen',
   copiedToClipboard: 'In die Zwischenablage kopiert',
   collapse: 'Einklappen',

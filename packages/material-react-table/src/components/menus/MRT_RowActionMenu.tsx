@@ -1,13 +1,7 @@
 import { type MouseEvent } from 'react';
-import Box from '@mui/material/Box';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu, { type MenuProps } from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import { useTheme } from '@mui/material/styles';
-import {
-  commonListItemStyles,
-  commonMenuItemStyles,
-} from './MRT_ColumnActionMenu';
+import { MRT_MenuItem } from './MRT_MenuItem';
 import {
   type MRT_Row,
   type MRT_RowData,
@@ -66,14 +60,11 @@ export const MRT_RowActionMenu = <TData extends MRT_RowData>({
     >
       {parseFromValuesOrFunc(enableEditing, row) &&
         ['modal', 'row'].includes(editDisplayMode!) && (
-          <MenuItem onClick={handleEdit} sx={commonMenuItemStyles}>
-            <Box sx={commonListItemStyles}>
-              <ListItemIcon>
-                <EditIcon />
-              </ListItemIcon>
-              {localization.edit}
-            </Box>
-          </MenuItem>
+          <MRT_MenuItem
+            icon={EditIcon}
+            label={localization.edit}
+            onClick={handleEdit}
+          />
         )}
       {renderRowActionMenuItems?.({
         closeMenu: () => setAnchorEl(null),

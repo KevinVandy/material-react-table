@@ -10,6 +10,7 @@ export const MRT_Localization_TR: MRT_Localization = {
   clearSearch: 'Aramayı Temizle',
   clearSort: 'Sıralamayı Sıfırla',
   clickToCopy: 'Kopyala',
+  copy: 'Kopyala',
   columnActions: 'Sütun İşlemleri',
   copiedToClipboard: 'Panoya Kopyalandı',
   collapse: 'Daralt',

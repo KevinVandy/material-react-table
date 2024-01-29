@@ -10,6 +10,7 @@ export const MRT_Localization_SR_LATN_RS: MRT_Localization = {
   clearSearch: 'Poništi pretragu',
   clearSort: 'Poništi sortiranje',
   clickToCopy: 'Klikni da kopiraš',
+  copy: 'Kopiraj',
   collapse: 'Raširi',
   collapseAll: 'Raširi sve',
   columnActions: 'Akcije nad kolonama',

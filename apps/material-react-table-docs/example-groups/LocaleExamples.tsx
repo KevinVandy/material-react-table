@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Box, Tab, Tabs } from '@mui/material';
-import AM_Table from '../examples/localization-i18n-am';
 import AR_Table from '../examples/localization-i18n-ar';
 import AZ_Table from '../examples/localization-i18n-az';
 import BG_Table from '../examples/localization-i18n-bg';
@@ -41,7 +40,6 @@ import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 
 const supportedLocales = [
-  'am',
   'ar',
   'az',
   'bg',
@@ -119,7 +117,6 @@ const LocaleExamples = () => {
           ))}
         </Tabs>
       </Box>
-      {currentLocale === 'am' && <AM_Table />}
       {currentLocale === 'ar' && <AR_Table />}
       {currentLocale === 'az' && <AZ_Table />}
       {currentLocale === 'bg' && <BG_Table />}

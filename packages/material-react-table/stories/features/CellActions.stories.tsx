@@ -76,3 +76,30 @@ export const CellActionsWithClickToCopy = () => (
     ]}
   />
 );
+
+export const CellActionsWithClickToCopyContextMenu = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableCellActions
+    enableClickToCopy="context-menu"
+    renderCellActionMenuItems={() => [
+      <MenuItem key={1}>Item 1</MenuItem>,
+      <MenuItem key={2}>Item 2</MenuItem>,
+    ]}
+  />
+);
+
+export const CellActionsCellEditing = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    editDisplayMode="cell"
+    enableCellActions
+    enableEditing
+    renderCellActionMenuItems={() => [
+      <MenuItem key={1}>Item 1</MenuItem>,
+      <MenuItem key={2}>Item 2</MenuItem>,
+    ]}
+  />
+);

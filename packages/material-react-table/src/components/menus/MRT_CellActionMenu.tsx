@@ -1,12 +1,6 @@
-import Box from '@mui/material/Box';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu, { type MenuProps } from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import { useTheme } from '@mui/material/styles';
-import {
-  commonListItemStyles,
-  commonMenuItemStyles,
-} from './MRT_ColumnActionMenu';
+import { MRT_MenuItem } from './MRT_MenuItem';
 import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 import { getMRTTheme } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
@@ -50,37 +44,25 @@ export const MRT_CellActionMenu = <TData extends MRT_RowData>({
     (parseFromValuesOrFunc(enableClickToCopy, cell) === 'context-menu' ||
       parseFromValuesOrFunc(columnDef.enableClickToCopy, cell) ===
         'context-menu') && (
-      <MenuItem
+      <MRT_MenuItem
         divider
+        icon={ContentCopy}
+        label={localization.copy}
         onClick={(event) => {
           event.stopPropagation();
           navigator.clipboard.writeText(cell.getValue() as string);
         }}
-        sx={commonMenuItemStyles}
-      >
-        <Box sx={commonListItemStyles}>
-          <ListItemIcon>
-            <ContentCopy />
-          </ListItemIcon>
-          {localization.clickToCopy}
-        </Box>
-      </MenuItem>
+      />
     ),
     parseFromValuesOrFunc(enableEditing, row) && editDisplayMode === 'cell' && (
-      <MenuItem
+      <MRT_MenuItem
         divider
+        icon={EditIcon}
+        label={localization.edit}
         onClick={() => {
           table.setEditingCell(cell!);
         }}
-        sx={commonMenuItemStyles}
-      >
-        <Box sx={commonListItemStyles}>
-          <ListItemIcon>
-            <EditIcon />
-          </ListItemIcon>
-          {localization.edit}
-        </Box>
-      </MenuItem>
+      />
     ),
     renderCellActionMenuItems?.({
       cell: cell!,

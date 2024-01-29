@@ -10,6 +10,7 @@ export const MRT_Localization_ZH_HANS: MRT_Localization = {
   clearSearch: '清除搜索',
   clearSort: '清除排序',
   clickToCopy: '点击以复制',
+  copy: '复制',
   collapse: '折叠',
   collapseAll: '全部折叠',
   columnActions: '列操作',

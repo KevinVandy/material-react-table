@@ -10,6 +10,7 @@ export const MRT_Localization_FI: MRT_Localization = {
   clearSearch: 'Tyhjennä haku',
   clearSort: 'Tyhjennä lajittelu',
   clickToCopy: 'Kopioi napsauttamalla',
+  copy: 'Kopioi',
   collapse: 'Supista',
   collapseAll: 'Supista kaikki',
   columnActions: 'Saraketoiminnot',

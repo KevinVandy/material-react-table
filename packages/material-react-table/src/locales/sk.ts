@@ -10,6 +10,7 @@ export const MRT_Localization_SK: MRT_Localization = {
   clearSearch: 'Vyčistiť hľadanie',
   clearSort: 'Vyčistiť zoradenie',
   clickToCopy: 'Kliknutím skopírovať',
+  copy: 'Kopírovať',
   collapse: 'Zbaliť',
   collapseAll: 'Zbaliť všetko',
   columnActions: 'Akcie stĺpca',

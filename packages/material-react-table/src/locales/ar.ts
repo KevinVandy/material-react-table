@@ -10,6 +10,7 @@ export const MRT_Localization_AR: MRT_Localization = {
   clearSearch: 'إعادة تعيين البحث',
   clearSort: 'إعادة تعيين الفرز',
   clickToCopy: 'انقر للنسخ',
+  copy: 'نسخ',
   collapse: 'إخفاء',
   collapseAll: 'إخفاء الكل',
   columnActions: 'إجراءات العمود',

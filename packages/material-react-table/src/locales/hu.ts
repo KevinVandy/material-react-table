@@ -10,6 +10,7 @@ export const MRT_Localization_HU: MRT_Localization = {
   clearSearch: 'Keresés törlése',
   clearSort: 'Rendezés törlése',
   clickToCopy: 'Kattintson a másoláshoz',
+  copy: 'Másolás',
   collapse: 'Összecsukás',
   collapseAll: 'Mindet összecsuk',
   columnActions: 'Oszlop műveletek',

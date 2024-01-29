@@ -65,6 +65,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     setHoveredColumn,
   } = table;
   const {
+    actionCell,
     columnSizingInfo,
     creatingRow,
     density,
@@ -260,11 +261,11 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       sx={(theme) => ({
         '&:hover': {
           outline:
+            actionCell?.id === cell.id ||
             (editDisplayMode === 'cell' && isEditable) ||
             (editDisplayMode === 'table' && (isCreating || isEditing))
               ? `1px solid ${theme.palette.grey[500]}`
               : undefined,
-          outlineOffset: '-1px',
           textOverflow: 'clip',
         },
         alignItems: layoutMode?.startsWith('grid') ? 'center' : undefined,
@@ -273,6 +274,11 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
           : isEditable && editDisplayMode === 'cell'
             ? 'pointer'
             : 'inherit',
+        outline:
+          actionCell?.id === cell.id
+            ? `1px solid ${theme.palette.grey[500]}`
+            : undefined,
+        outlineOffset: '-1px',
         overflow: 'hidden',
         p:
           density === 'compact'
@@ -286,6 +292,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
               : columnDefType === 'display'
                 ? '1rem 1.25rem'
                 : '1.5rem',
+
         textOverflow: columnDefType !== 'display' ? 'ellipsis' : undefined,
         whiteSpace:
           row.getIsPinned() || density === 'compact' ? 'nowrap' : 'normal',
