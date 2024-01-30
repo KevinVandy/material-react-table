@@ -31,21 +31,21 @@ export function defaultDisplayColumnProps<TData extends MRT_RowData>({
 
 export const showRowPinningColumn = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
-) => {
+): boolean => {
   const { enableRowPinning, rowPinningDisplayMode } = tableOptions;
-  return enableRowPinning && !rowPinningDisplayMode?.startsWith('select');
+  return !!(enableRowPinning && !rowPinningDisplayMode?.startsWith('select'));
 };
 
 export const showRowDragColumn = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
-) => {
+): boolean => {
   const { enableRowDragging, enableRowOrdering } = tableOptions;
-  return enableRowDragging || enableRowOrdering;
+  return !!(enableRowDragging || enableRowOrdering);
 };
 
 export const showRowExpandColumn = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
-) => {
+): boolean => {
   const {
     enableExpanding,
     enableGrouping,
@@ -61,7 +61,7 @@ export const showRowExpandColumn = <TData extends MRT_RowData>(
 
 export const showRowActionsColumn = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
-) => {
+): boolean => {
   const {
     createDisplayMode,
     editDisplayMode,
@@ -69,7 +69,7 @@ export const showRowActionsColumn = <TData extends MRT_RowData>(
     enableRowActions,
     state: { creatingRow },
   } = tableOptions;
-  return (
+  return !!(
     enableRowActions ||
     (creatingRow && createDisplayMode === 'row') ||
     (enableEditing && ['modal', 'row'].includes(editDisplayMode ?? ''))
@@ -78,15 +78,15 @@ export const showRowActionsColumn = <TData extends MRT_RowData>(
 
 export const showRowSelectionColumn = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
-) => tableOptions.enableRowSelection;
+): boolean => !!tableOptions.enableRowSelection;
 
 export const showRowNumbersColumn = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
-) => tableOptions.enableRowNumbers;
+): boolean => !!tableOptions.enableRowNumbers;
 
 export const showRowSpacerColumn = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
-) => tableOptions.layoutMode === 'grid-no-grow';
+): boolean => tableOptions.layoutMode === 'grid-no-grow';
 
 export const getLeadingDisplayColumnIds = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
