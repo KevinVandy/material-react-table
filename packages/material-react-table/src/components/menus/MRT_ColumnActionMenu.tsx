@@ -26,6 +26,7 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
 }: Props<TData>) => {
   const {
     getState,
+    getAllLeafColumns,
     options: {
       columnFilterDisplayMode,
       columnFilterModeOptions,
@@ -56,7 +57,6 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
     setColumnOrder,
     setColumnSizingInfo,
     setShowColumnFilters,
-    toggleAllColumnsVisible,
   } = table;
   const { column } = header;
   const { columnDef } = column;
@@ -122,7 +122,9 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
   };
 
   const handleShowAllColumns = () => {
-    toggleAllColumnsVisible(true);
+    getAllLeafColumns()
+      .filter((col) => col.columnDef.enableHiding !== false)
+      .forEach((col) => col.toggleVisibility(true));
     setAnchorEl(null);
   };
 
