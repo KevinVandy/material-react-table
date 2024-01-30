@@ -203,3 +203,42 @@ export const ColumnHidingColumnsNotVisibleInShowHide = () => (
     data={data}
   />
 );
+export const ColumnHidingWithColumnsHiddenAndNotVisibleInShowHide = () => (
+  <MaterialReactTable
+    columns={[
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+      {
+        accessorKey: 'address',
+        header: 'Address',
+        visibleInShowHideMenu: false,
+      },
+      {
+        accessorKey: 'state',
+        header: 'State',
+      },
+      {
+        accessorKey: 'zip',
+        header: 'Zip',
+      },
+      {
+        accessorKey: 'email',
+        header: 'Email Address',
+      },
+      {
+        accessorKey: 'phoneNumber',
+        header: 'Phone Number',
+      },
+    ]}
+    data={data}
+    initialState={{
+      columnVisibility: { address: false }
+    }}
+  />
+);
