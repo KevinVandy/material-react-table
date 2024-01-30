@@ -315,7 +315,7 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
     statefulTableOptions.onShowGlobalFilterChange ?? setShowGlobalFilter;
   table.setShowToolbarDropZone =
     statefulTableOptions.onShowToolbarDropZoneChange ?? setShowToolbarDropZone;
-
+console.log("instance render")
   //recalculate column order when columns change or features are toggled on/off
   useEffect(() => {
     table.setColumnOrder(getDefaultColumnOrderIds(statefulTableOptions));

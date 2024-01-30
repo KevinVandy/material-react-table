@@ -338,6 +338,24 @@ export const routes: Array<RouteItem> = [
             label: 'Display (Built-in) Columns',
           },
           {
+            href: '/docs/guides/table-event-listeners',
+            label: 'Event Listeners (onClicks)',
+          },
+          {
+            href: '/docs/guides/memoization',
+            label: 'Memoization (Performance)',
+          },
+          {
+            href: '/docs/guides/state-management',
+            label: 'State Management',
+          },
+        ],
+      },
+      {
+        label: 'Customization Guides',
+        href: '/docs/guides#customization-guides',
+        items: [
+          {
             href: '/docs/guides/customize-components',
             label: 'Customize (Style) Components',
           },
@@ -347,19 +365,7 @@ export const routes: Array<RouteItem> = [
           },
           {
             href: '/docs/guides/localization',
-            label: 'Localization (i18n)',
-          },
-          {
-            href: '/docs/guides/memoize-components',
-            label: 'Memoize Components',
-          },
-          {
-            href: '/docs/guides/table-event-listeners',
-            label: 'Event Listeners (onClicks)',
-          },
-          {
-            href: '/docs/guides/state-management',
-            label: 'State Management',
+            label: 'Localization / Custom Text (i18n)',
           },
           {
             href: '/docs/guides/toolbar-customization',
@@ -368,49 +374,9 @@ export const routes: Array<RouteItem> = [
         ],
       },
       {
-        label: 'Feature Guides',
-        href: '/docs/guides#feature-guides',
+        label: 'Size / Width Guides',
+        href: '/docs/guides#size---width-guides',
         items: [
-          {
-            href: '/docs/guides/aggregation',
-            label: 'Aggregation',
-          },
-          {
-            href: '/docs/guides/async-loading',
-            label: 'Async Loading UI',
-          },
-          {
-            href: '/docs/guides/click-to-copy',
-            label: 'Click to Copy',
-          },
-          {
-            href: '/docs/guides/cell-actions',
-            label: 'Cell Actions (Context Menu)',
-          },
-          {
-            href: '/docs/guides/column-actions',
-            label: 'Column Actions (Menu)',
-          },
-          {
-            href: '/docs/guides/column-filtering',
-            label: 'Column Filtering',
-          },
-          {
-            href: '/docs/guides/column-grouping',
-            label: 'Column Grouping',
-          },
-          {
-            href: '/docs/guides/column-hiding',
-            label: 'Column Hiding',
-          },
-          {
-            href: '/docs/guides/column-ordering-dnd',
-            label: 'Column Ordering and Dragging',
-          },
-          {
-            href: '/docs/guides/column-pinning',
-            label: 'Column Pinning (Sticky)',
-          },
           {
             href: '/docs/guides/column-size',
             label: 'Column Size (Widths)',
@@ -424,60 +390,142 @@ export const routes: Array<RouteItem> = [
             label: 'Density Toggle',
           },
           {
-            href: '/docs/guides/detail-panel',
-            label: 'Detail Panel (Expanding)',
-          },
-          {
-            href: '/docs/guides/editing',
-            label: 'Editing (Editable)',
-          },
-          {
-            href: '/docs/guides/expanding-sub-rows',
-            label: 'Expanding Sub-Rows (Tree)',
-          },
-          {
             href: '/docs/guides/full-screen-toggle',
             label: 'Full Screen Toggle',
           },
+        ],
+      },
+      {
+        label: 'Big Data Guides',
+        href: '/docs/guides#big-data-guides',
+        items: [
           {
-            href: '/docs/guides/global-filtering',
-            label: 'Global Filtering (Search)',
+            href: '/docs/guides/async-loading',
+            label: 'Async Loading UI',
           },
           {
             href: '/docs/guides/pagination',
             label: 'Pagination',
           },
           {
-            href: '/docs/guides/row-actions',
-            label: 'Row Actions (Buttons)',
+            href: '/docs/guides/virtualization',
+            label: 'Virtualization (Scrolling)',
+          },
+        ],
+      },
+      {
+        label: 'Data Mutation Guides',
+        href: '/docs/guides#data-mutation-guides',
+        items: [
+          {
+            href: '/docs/guides/row-selection',
+            label: 'Row Selection (Checkboxes)',
           },
           {
-            href: '/docs/guides/row-numbers',
-            label: 'Row Numbers',
+            href: '/docs/guides/editing',
+            label: 'Editing (Text Fields)',
+          },
+        ],
+      },
+      {
+        label: 'Filtering / Hiding Guides',
+        href: '/docs/guides#filtering---hiding-guides',
+        items: [
+          {
+            href: '/docs/guides/column-filtering',
+            label: 'Column Filtering',
+          },
+          {
+            href: '/docs/guides/global-filtering',
+            label: 'Global Filtering (Search)',
+          },
+          {
+            href: '/docs/guides/column-hiding',
+            label: 'Column Hiding',
+          },
+        ],
+      },
+      {
+        label: 'Grouping / Expanding Guides',
+        href: '/docs/guides#grouping---expanding-guides',
+        items: [
+          {
+            href: '/docs/guides/detail-panel',
+            label: 'Detail Panel (Expanding)',
+          },
+          {
+            href: '/docs/guides/expanding-sub-rows',
+            label: 'Expanding Sub-Rows (Tree)',
+          },
+          {
+            href: '/docs/guides/column-grouping',
+            label: 'Column Grouping',
+          },
+          {
+            href: '/docs/guides/aggregation',
+            label: 'Aggregation',
+          },
+        ],
+      },
+      {
+        label: 'Sticky Pinning / Freezing Guides',
+        href: '/docs/guides#sticky-pinning---freezing-guides',
+        items: [
+          {
+            href: '/docs/guides/sticky-header',
+            label: 'Sticky Header/Footer',
+          },
+          {
+            href: '/docs/guides/column-pinning',
+            label: 'Column Pinning (Sticky)',
+          },
+          {
+            href: '/docs/guides/row-pinning',
+            label: 'Row Pinning (Sticky)',
+          },
+        ],
+      },
+      {
+        label: 'Sort / Order / DnD Guides',
+        href: '/docs/guides#sort---order---dnd-guides',
+        items: [
+          {
+            href: '/docs/guides/sorting',
+            label: 'Sorting',
           },
           {
             href: '/docs/guides/row-ordering-dnd',
             label: 'Row Ordering and Dragging',
           },
           {
-            href: '/docs/guides/row-pinning',
-            label: 'Row Pinning (Sticky)',
+            href: '/docs/guides/column-ordering-dnd',
+            label: 'Column Ordering and Dragging',
           },
           {
-            href: '/docs/guides/row-selection',
-            label: 'Row Selection (Checkboxes)',
+            href: '/docs/guides/row-numbers',
+            label: 'Row Numbers',
+          },
+        ],
+      },
+      {
+        label: 'Action Button / Menu Guides',
+        href: '/docs/guides#action-button---menu-guides',
+        items: [
+          {
+            href: '/docs/guides/column-actions',
+            label: 'Column Actions (Menu)',
           },
           {
-            href: '/docs/guides/sorting',
-            label: 'Sorting',
+            href: '/docs/guides/cell-actions',
+            label: 'Cell Actions (Context Menu)',
           },
           {
-            href: '/docs/guides/sticky-header',
-            label: 'Sticky Header/Footer',
+            href: '/docs/guides/row-actions',
+            label: 'Row Actions (Buttons)',
           },
           {
-            href: '/docs/guides/virtualization',
-            label: 'Virtualization (Large Data)',
+            href: '/docs/guides/click-to-copy',
+            label: 'Click to Copy',
           },
         ],
       },

@@ -10,6 +10,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/docs/guides/memoize-components',
+        destination: '/docs/guides/memoization',
+        permanent: true,
+      },
+      {
         source: '/docs/guides/aggregation-and-grouping',
         destination: '/docs/guides/column-grouping',
         permanent: true,

@@ -1,0 +1,164 @@
+import Head from 'next/head';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
+
+<Head>
+  <title>{'Memoize Components Guide - Material React Table V2 Docs'}</title>
+  <meta
+    name="description"
+    content="How and what to memoize to improve performance in Material React Table."
+  />
+</Head>
+
+## Memoization (Performance) Guide
+
+Material React Table already uses some memoization techniques to improve performance for you automatically under the hood to improve performance during some events like column resizing. In this guide, we'll go over the basics of what is recommended to be memoized, what you need to keep in mind for performance, and how to tweak advanced memoization settings for your specific use case.
+
+### Relevant Table Options
+
+<TableOptionsTable onlyOptions={new Set(['columns', 'data', 'memoMode'])} />
+
+### What to Memoize
+
+First of all, when these docs refer to memoization, we are not necessarily talking just about the React `useMemo` hook. Using the `useMemo` hook is just one way to give an variable a stable reference in React. `useMemo`, `useState`, `useReducer`, `useQuery` (React Query), storing state in a state management library like Zustand or Redux, or even just defining a variable outside of a component are all ways to give a variable a stable reference.
+
+#### Give Data a Stable Reference
+
+The only truly required thing that must have a stable reference for both Material React Table and TanStack Table is the `data` table option. If your `data` does not have a stable reference, the table will enter an infinite loop of re-rendering upon any state change.
+
+> Failing to give `data` a stable reference can cause an infinite loop of re-renders.
+
+##### _Why does this happen? Is this a bug in MRT or TanStack Table?_
+
+No, this is not a bug in either MRT or TanStack Table. This is just fundamentally how React works. TanStack Table is designed to re-render whenever the `data` changes. You would probably be equally surprised and upset if MRT only accepted what you passed in as `data` on the first render and never updated after a refetch or state change.
+
+```jsx
+export default function MyComponent() {
+  const columns = [
+    // ...
+  ];
+
+  //😵 BAD: This will cause an infinite loop of re-renders because `data` is redefined as a new array on every render
+  const data = [
+    // ...
+  ];
+
+  const table = useMaterialReactTable({
+    columns,
+    data, //data is defined as a const in the same scope as `useMaterialReactTable`, will cause infinite loop
+  });
+
+  return <MaterialReactTable table={table} />;
+}
+```
+
+##### I'm still getting an infinite loop of re-renders, but I'm using useMemo!
+
+Sometimes developers will properly memoize their `data`, but don't end up passing that memoized `data` to the table, and apply some extra transformation or filtering to the `data` before passing it to the table. This common mistake will still cause an infinite loop of re-renders.
+
+```jsx
+export default function MyComponent() {
+  const columns = [
+    // ...
+  ];
+
+  //GOOD: Storing `data` in state gives it a stable reference
+  const [data, setData] = useState([
+    // ...
+  ]);
+
+  //GOOD: This still preserves the stable reference of `data` and will not cause an infinite loop of re-renders
+  const filteredData = useMemo(
+    () => data.filter((row) => row.isActive),
+    [data],
+  );
+
+  const table = useMaterialReactTable({
+    columns,
+    //GOOD: Reading from the `data` state is stable
+    data,
+
+    //😵 BAD: This is ignoring the stable reference of `data` and re-creating a new array on every render
+    data: data.filter((row) => row.isActive),
+
+    //GOOD: This is still reading from the stable reference from a `useMemo` hook
+    data: filteredData,
+  });
+
+  return <MaterialReactTable table={table} />;
+}
+```
+
+#### Memoize Columns
+
+You will generally have better performance if you properly memoize your `columns` array, or give it a stable reference like you would with `data`. Not giving `columns` a stable reference will not cause an infinite loop of re-renders like `data`, but it will still cause the table to re-render more than necessary. The columns `useMemo` dependency array does not need to be an empty array. If your column definitions are derived from other state, you should include that state in the dependency array.
+
+```jsx
+const columns = useMemo(
+  () => [
+    // ...
+  ],
+  [],
+);
+
+//OR
+
+const columns = useMemo(
+  () => [
+    // ...
+  ],
+  [dependency1, dependency2], //if column defs are derived from other state, don't forget to include that state in the dependency array
+);
+
+//OR
+
+const [columns, setColumns] = useState(() => [
+  // ...
+]);
+```
+
+#### Other Options to Memoize
+
+Usually you will not need to memoize any other options besides `columns` and `data`. However, if you have any expensive logic in any of the `render*` options, you may benefit from wrapping that logic in a React `useCallback` hook. It is not recommended to start off by wrapping all of your `render*` options in `useCallback` hooks, as this usually does not even provide a noticeable performance improvement. This usually takes some experimentation.
+
+Here's an example for how to render detail panels with a `useCallback` optimization. Getting the TypeScript types correct in the `useCallback` can be tricky, but here's how you can do it:
+
+```tsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  renderDetailPanel: useCallback<
+    Required<MRT_TableOptions<Person>>['renderDetailPanel'] //TS needed to get the correct type of the inner arrow function below
+  >(
+    ({ row, table }) =>
+      <DetailPanelComponent row={row} />
+    [], //add proper dependencies here if needed
+  ),
+});
+```
+
+All of the other `mui*Props` components could also be memoized with either `useMemo` or `useCallback` if you have complicated expensive logic in them for some reason in the same way as above.
+
+### Memo Mode
+
+Material React Table already memoizes columns and the entire `<tbody>` component during column resizing, and column/row drag and drop events. This actually does make a significant performance improvement, and is why it is possible to have the performance that it does during these events.
+
+If you need to reach into the internals and apply some custom memoization, MRT exposes a limited way to do this. The Table Body, Table Rows, or all Table Cells can be memoized with the `memoMode` table option.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  //memoize all cells. This value can be applied dynamically based on a certain scenario/condition if needed
+  memoMode: 'cell', // 'cell' | 'row' | 'table-body'
+});
+```
+
+Usually you should not ever need to do this, and be aware that this will stop certain features from functioning correctly. For example, if you memoize all table cells, the density toggle feature will not work anymore. If you memoize the entire table body, most features including virtualization will not work anymore. You'll be left with a table that is mostly frozen after first render, but it could improve the overall performance of your web page if you don't need any of these interactive features.
+
+> Don't use `memoMode` unless you know what you're doing and have a specific use case for it.
+
+### React Forget
+
+In the future, React may finally release their magical "React Forget" compiler that will make all memoization problems in React disappear, and you won't have to worry about any of this. But until then, the above solutions are the best we have.
+
+View Extra Storybook [Examples](https://www.material-react-table.dev/?path=/story/features-memo-mode-examples)

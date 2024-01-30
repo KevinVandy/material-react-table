@@ -242,28 +242,16 @@ export const Footer = () => {
             />
           </Box>
           <Box>
-            <Typography>Fundamental Guides</Typography>
-            <TableOfContentsList
-              items={
-                (
-                  routes.find((item) => item.href === '/docs/guides')?.items ??
-                  []
-                ).find((item) => item.label === 'Fundamentals')?.items ?? []
-              }
-              isFooter
-            />
-          </Box>
-          <Box>
-            <Typography>Feature Guides</Typography>
-            <TableOfContentsList
-              items={
-                (
-                  routes.find((item) => item.href === '/docs/guides')?.items ??
-                  []
-                ).find((item) => item.label === 'Feature Guides')?.items ?? []
-              }
-              isFooter
-            />
+            <Typography>Guides</Typography>
+            {routes
+              .find((item) => item.href === '/docs/guides')
+              ?.items?.map((item) => (
+                <TableOfContentsList
+                  key={item.href}
+                  items={item?.items ?? []}
+                  isFooter
+                />
+              ))}
           </Box>
         </Box>
       </Paper>
