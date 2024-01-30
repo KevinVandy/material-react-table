@@ -218,6 +218,7 @@ export const ColumnHidingWithColumnsHiddenAndNotVisibleInShowHide = () => (
         accessorKey: 'address',
         header: 'Address',
         visibleInShowHideMenu: false,
+        enableHiding: false,
       },
       {
         accessorKey: 'state',
