@@ -1,12 +1,10 @@
 import {
   type DragEvent,
   type MouseEvent,
-  type MutableRefObject,
   type RefObject,
   memo,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from 'react';
 import Skeleton from '@mui/material/Skeleton';
@@ -95,10 +93,6 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
   });
 
   const { draggingBorderColor } = getMRTTheme(table, theme);
-
-  const cellRef = useRef<HTMLTableCellElement>(
-    null,
-  ) as MutableRefObject<HTMLTableCellElement>;
 
   const [skeletonWidth, setSkeletonWidth] = useState(100);
   useEffect(() => {
@@ -222,7 +216,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     if (isRightClickable) {
       e.preventDefault();
       table.setActionCell(cell);
-      table.refs.actionCellRef.current = cellRef.current;
+      table.refs.actionCellRef.current = e.currentTarget;
     }
   };
 
@@ -235,15 +229,6 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       onContextMenu={handleContextMenu}
       onDoubleClick={handleDoubleClick}
       onDragEnter={handleDragEnter}
-      ref={(node: HTMLTableCellElement) => {
-        if (node) {
-          cellRef.current = node;
-          if (tableCellProps?.ref) {
-            //@ts-ignore
-            tableCellProps.ref.current = node;
-          }
-        }
-      }}
       sx={(theme) => ({
         '&:hover': {
           outline:

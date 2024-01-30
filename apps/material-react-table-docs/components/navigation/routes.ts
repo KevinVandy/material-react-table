@@ -384,6 +384,10 @@ export const routes: Array<RouteItem> = [
             label: 'Click to Copy',
           },
           {
+            href: '/docs/guides/cell-actions',
+            label: 'Cell Actions (Context Menu)',
+          },
+          {
             href: '/docs/guides/column-actions',
             label: 'Column Actions (Menu)',
           },

@@ -17,7 +17,7 @@ This project uses PNPM and a TurboRepo with 2 projects.
 
 ### 1. Fork and Clone the project
 
-Create your own fork, clone, and then make a feature/bugfix branch off of `main`. Branch name does not really matter.
+Create your own fork, clone, and then make a feature/bugfix branch off of `v2`. Branch name does not really matter.
 
 ### 2. Install Dependencies
 
@@ -51,4 +51,4 @@ The Docs site will open on `port 3000` by default.
 pnpm lib:build
 ```
 
-> Note: After building the library, if you are running the docs site locally, it will use the compiled output of the dist folder. This can be annoying if you are trying to test changes to the library in the docs site itself. Just delete the `/dist` folder to test lib changes in the docs site.
+> Note: After building the library, if you are running the docs site locally, it will use the compiled output of the dist folder. This can be annoying if you are trying to test changes to the library in the docs site itself. Just delete the `/dist` folder and restart the docs app to test lib changes in the docs site.

@@ -4,6 +4,7 @@ import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { MRT_ActionMenuItem } from '../../src/components/menus/MRT_ActionMenuItem';
 import { faker } from '@faker-js/faker';
 import { type Meta } from '@storybook/react';
+import { Divider } from '@mui/material';
 
 const meta: Meta = {
   title: 'Features/Cell Action Examples',
@@ -51,6 +52,24 @@ const data: Row[] = [...Array(100)].map(() => ({
 }));
 
 export const CellActionsEnabled = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableCellActions
+    enableClickToCopy="context-menu"
+  />
+);
+
+export const CellActionsEnabledConditionally = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableCellActions={(cell) => cell.row.index % 2 === 0}
+    enableClickToCopy="context-menu"
+  />
+);
+
+export const CellActionsEnabledCustom = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
@@ -115,7 +134,9 @@ export const CellActionsWithBuiltIns = () => (
     enableCellActions
     enableClickToCopy="context-menu"
     enableEditing
-    renderCellActionMenuItems={({ closeMenu, table }) => [
+    renderCellActionMenuItems={({ closeMenu, table, internalMenuItems }) => [
+      ...internalMenuItems,
+      <Divider key="divider" />,
       <MRT_ActionMenuItem
         icon={<Email />}
         key={1}

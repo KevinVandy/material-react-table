@@ -175,9 +175,11 @@ const Example = () => {
     data: fetchedUsers,
     createDisplayMode: 'row', // ('modal', and 'custom' are also available)
     editDisplayMode: 'cell', // ('modal', 'row', 'table', and 'custom' are also available)
+    enableCellActions: true,
+    enableClickToCopy: 'context-menu',
+    enableColumnPinning: true,
     enableEditing: true,
     enableRowActions: true,
-    positionActionsColumn: 'last',
     getRowId: (row) => row.id,
     muiToolbarAlertBannerProps: isLoadingUsersError
       ? {
@@ -235,6 +237,11 @@ const Example = () => {
         Create New User
       </Button>
     ),
+    initialState: {
+      columnPinning: {
+        right: ['mrt-row-actions'],
+      },
+    },
     state: {
       isLoading: isLoadingUsers,
       isSaving: isCreatingUser || isUpdatingUsers || isDeletingUser,

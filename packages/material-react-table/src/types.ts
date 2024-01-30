@@ -653,6 +653,7 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
     cell: MRT_Cell<TData>;
     closeMenu: () => void;
     column: MRT_Column<TData>;
+    internalMenuItems: ReactNode[];
     row: MRT_Row<TData>;
     staticColumnIndex?: number;
     staticRowIndex?: number;
@@ -1192,6 +1193,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
     cell: MRT_Cell<TData>;
     closeMenu: () => void;
     column: MRT_Column<TData>;
+    internalMenuItems: ReactNode[];
     row: MRT_Row<TData>;
     staticColumnIndex?: number;
     staticRowIndex?: number;

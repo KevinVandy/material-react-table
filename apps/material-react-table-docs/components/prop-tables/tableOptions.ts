@@ -245,7 +245,7 @@ export const tableOptions: TableOption[] = [
     linkText: 'MRT Click to Copy Docs',
     required: false,
     source: 'MRT',
-    type: 'boolean',
+    type: "boolean | 'context-menu' | ((cell: MRT_Cell<TData>) => 'context-menu' | boolean)",
   },
   {
     tableOption: 'enableColumnActions',
@@ -500,6 +500,16 @@ export const tableOptions: TableOption[] = [
     required: false,
     source: '',
     type: 'boolean',
+  },
+  {
+    tableOption: 'enableCellActions',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '((cell: MRT_Cell<TData>) => boolean) | boolean',
   },
   {
     tableOption: 'enableRowActions',
@@ -1898,6 +1908,16 @@ export const tableOptions: TableOption[] = [
     required: false,
     source: '',
     type: 'ReactNode | ({ table }) => ReactNode',
+  },
+  {
+    tableOption: 'renderCellActionMenuItems',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '{ cell, closeMenu, column, internalMenuItems, row, staticColumnIndex, staticRowIndex, table }) => ReactNode[]',
   },
   {
     tableOption: 'renderColumnActionsMenuItems',

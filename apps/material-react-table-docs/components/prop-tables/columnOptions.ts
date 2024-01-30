@@ -162,9 +162,9 @@ export const columnOptions: ColumnOption[] = [
     description: 'Enable the click to copy feature for this column.',
     link: '/docs/guides/click-to-copy#enable-click-to-copy-per-column',
     linkText: 'MRT Click to Copy Docs',
-    source: 'MRT',
     required: false,
-    type: 'boolean',
+    source: 'MRT',
+    type: "boolean | 'context-menu' | ((cell: MRT_Cell<TData>) => 'context-menu' | boolean)",
   },
   {
     columnOption: 'enableColumnActions',
@@ -609,6 +609,16 @@ export const columnOptions: ColumnOption[] = [
     source: 'TanStack Table',
     required: false,
     type: 'false | 1 | -1',
+  },
+  {
+    columnOption: 'renderCellActionMenuItems',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '{ cell, closeMenu, column, internalMenuItems, row, staticColumnIndex, staticRowIndex, table }) => ReactNode[]',
   },
   {
     columnOption: 'renderColumnActionsMenuItems',

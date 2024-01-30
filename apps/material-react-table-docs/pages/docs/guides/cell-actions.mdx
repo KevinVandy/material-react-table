@@ -1,0 +1,156 @@
+import Head from 'next/head';
+import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
+import ColumnOptionsTable from '../../../components/prop-tables/ColumnOptionsTable';
+
+<Head>
+  <title>{'Cell Actions Guide - Material React Table V2 Docs'}</title>
+  <meta
+    name="description"
+    content="How to add cell action context menus to each cell in Material React Table"
+  />
+</Head>
+
+## Cell Actions Feature Guide
+
+> New in v2.10.0
+
+Material React Table provides you an easy shell to render a context menu for when a table cell/row is right clicked or otherwise activated. This is useful for providing additional actions that can be performed on a cell or row.
+
+### Relevant Table Options
+
+<TableOptionsTable
+  onlyOptions={
+    new Set([
+      'enableCellActions',
+      'enableClickToCopy',
+      'renderCellActionMenuItems',
+    ])
+  }
+/>
+
+### Relevant Column Options
+
+<ColumnOptionsTable
+  onlyOptions={
+    new Set([
+      'enableCellActions',
+      'enableClickToCopy',
+      'renderCellActionMenuItems',
+    ])
+  }
+/>
+
+### Enable Cell Actions
+
+To enable cell actions, you need to set the `enableCellActions` option to `true` for the cells that you want to have access to the context menu. This can be done at the table level or at the column level, and accepts a boolean or a function that returns a boolean.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableCellActions: true,
+  //or
+  enableCellActions: (cell) => (cell.row.original.someCondition ? true : false),
+});
+```
+
+### Render Cell Action Menu Items
+
+The cell actions context menu will only appear if there are items to display. You can provide the `renderCellActionMenuItems` table option or column option to render the appropriate items in the context menu for each cell.
+
+MRT also provides a `MRT_ActionMenuItem` component that you can use to render the menu items. This just a wrapper for the MUI MenuItem component that also provides consistent CSS for styling the icons, spacing, and optional sub-menu items. Use it if you want to have a consistent look and feel with all of the other built-in MRT Menus.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableCellActions: true,
+  renderCellActionMenuItems: ({ closeMenu, cell, row, table }) => [
+    //array required
+    <MRT_ActionMenuItem //or just use the normal MUI MenuItem
+      icon={<Email />}
+      key={1}
+      label="Item 1"
+      onClick={() => {
+        //your logic here
+        closeMenu(); //close the menu after the action is performed
+      }}
+      table={table}
+    />,
+    <MRT_ActionMenuItem
+      icon={<PersonOffOutlined />}
+      key={2}
+      label="Item 2"
+      onClick={async () => {
+        //await your logic here
+        closeMenu(); //close the menu after the async action is performed
+      }}
+      table={table}
+    />,
+  ],
+});
+```
+
+### Include Automatic Cell Actions
+
+A few cell actions are included by default when certain other features are enabled.
+
+- A "Copy" action will be included when the `enableClickToCopy` option is set to `"context-menu"` (instead of `true`) for the table or column.
+
+- An "Edit" action will be included when the `enableEditing` option is set to `true` and the `editDisplayMode` option is set to `"cell"`. This will not disable the default double-click to edit behavior, but will provide an additional way to edit the cell.
+
+More built-in cell actions may be added in the future.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableCellActions: true,
+  enableClickToCopy: 'context-menu',
+  enableEditing: true,
+  editDisplayMode: 'cell',
+});
+```
+
+If you want to render these actions alongside your custom actions, you will just need to include the `internalMenuItems` parameter in your `renderCellActionMenuItems` function.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableCellActions: true,
+  enableClickToCopy: 'context-menu',
+  enableEditing: true,
+  editDisplayMode: 'cell',
+  renderCellActionMenuItems: ({
+    closeMenu,
+    cell,
+    row,
+    table,
+    internalMenuItems,
+  }) => [
+    ...internalMenuItems, //render the copy and edit actions wherever you want in the list
+    <Divider />, //optionally place a Menu Divider to separate groups of actions
+    <MRT_ActionMenuItem
+      icon={<Email />}
+      key={1}
+      label="Item 1"
+      onClick={() => {
+        //your logic here
+        closeMenu(); //close the menu after the action is performed
+      }}
+      table={table}
+    />,
+    <MRT_ActionMenuItem
+      icon={<PersonOffOutlined />}
+      key={2}
+      label="Item 2"
+      onClick={async () => {
+        //await your logic here
+        closeMenu(); //close the menu after the async action is performed
+      }}
+      table={table}
+    />,
+  ],
+});
+```

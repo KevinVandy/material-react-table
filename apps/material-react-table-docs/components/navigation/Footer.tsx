@@ -55,28 +55,6 @@ export const Footer = () => {
         Suggest an Edit for this page on GitHub
       </Button>
       <Typography
-        sx={{
-          justifyContent: 'center',
-          display: 'flex',
-          alignContent: 'center',
-        }}
-        variant="subtitle2"
-      >
-        You can help make these docs better!{' '}
-        <a
-          aria-label="Learn how to contribute"
-          href="http://makeapullrequest.com"
-          target="_blank"
-          rel="noopener"
-          style={{ marginLeft: '0.5rem' }}
-        >
-          <img
-            alt="PRs are Welcome"
-            src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square"
-          />
-        </a>
-      </Typography>
-      <Typography
         variant="subtitle1"
         sx={{
           mt: '2rem',

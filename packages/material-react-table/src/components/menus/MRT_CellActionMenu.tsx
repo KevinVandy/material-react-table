@@ -46,7 +46,7 @@ export const MRT_CellActionMenu = <TData extends MRT_RowData>({
       parseFromValuesOrFunc(columnDef.enableClickToCopy, cell) ===
         'context-menu') && (
       <MRT_ActionMenuItem
-        divider
+        key={'mrt-copy'}
         icon={<ContentCopy />}
         label={localization.copy}
         onClick={(event) => {
@@ -59,7 +59,7 @@ export const MRT_CellActionMenu = <TData extends MRT_RowData>({
     ),
     parseFromValuesOrFunc(enableEditing, row) && editDisplayMode === 'cell' && (
       <MRT_ActionMenuItem
-        divider
+        key={'mrt-edit'}
         icon={<EditIcon />}
         label={localization.edit}
         onClick={() => {
@@ -69,17 +69,23 @@ export const MRT_CellActionMenu = <TData extends MRT_RowData>({
         table={table}
       />
     ),
-    renderCellActionMenuItems?.({
-      cell,
-      closeMenu: handleClose,
-      column: column,
-      row,
-      table,
-    }),
   ].filter(Boolean);
 
+  const renderActionProps = {
+    cell,
+    closeMenu: handleClose,
+    column,
+    internalMenuItems,
+    row,
+    table,
+  };
+
+  const menuItems =
+    columnDef.renderCellActionMenuItems?.(renderActionProps) ??
+    renderCellActionMenuItems?.(renderActionProps);
+
   return (
-    !!internalMenuItems.length && (
+    (!!menuItems?.length || !!internalMenuItems?.length) && (
       <Menu
         MenuListProps={{
           dense: density === 'compact',
@@ -95,7 +101,7 @@ export const MRT_CellActionMenu = <TData extends MRT_RowData>({
         transformOrigin={{ horizontal: -100, vertical: 8 }}
         {...rest}
       >
-        {internalMenuItems}
+        {menuItems ?? internalMenuItems}
       </Menu>
     )
   );
