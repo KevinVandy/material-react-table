@@ -46,7 +46,8 @@ const Example = () => {
       }),
     }),
     //custom expand button rotation
-    muiExpandButtonProps: ({ row }) => ({
+    muiExpandButtonProps: ({ row, table }) => ({
+      onClick: () => table.setExpanded({ [row.id]: !row.getIsExpanded() }), //only 1 detail panel open at a time
       sx: {
         transform: row.getIsExpanded() ? 'rotate(180deg)' : 'rotate(-90deg)',
         transition: 'transform 0.2s',

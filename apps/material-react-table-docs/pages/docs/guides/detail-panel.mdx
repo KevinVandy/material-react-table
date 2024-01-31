@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import TableOptionsTable from '../../../components/prop-tables/TableOptionsTable';
 import StateOptionsTable from '../../../components/prop-tables/StateOptionsTable';
-import Example from '../../../examples/enable-detail-panel';
 import AlternateExample from '../../../examples/alternate-detail-panel';
 import ChartDetailPanelExample from '../../../examples/chart-detail-panel';
 import ExampleVirtualized from '../../../examples/enable-detail-panel-virtualized';
@@ -50,8 +49,6 @@ The recommended way to access the row data for the detail panel is to pull from 
 
 > Using `row.getValue('columnId')` will not work for data that does not have its own column. Using `row.original.columnId` is recommended for detail panels since the data in the detail panel usually does not have its own column.
 
-<Example />
-
 ### Disable Expand All Button
 
 If you don't want to show the expand all button, you can set the `enableExpandAll` table option to `false`.
@@ -78,6 +75,21 @@ const table = useMaterialReactTable({
 ```
 
 One thing to note about the implementation of conditional detail panels is that additional `<tr>` elements will still be created for all rows, even if they do not have detail panel content. It is implemented this way in order to avoid bugs with row virtualization, or striped row CSS.
+
+### Only Allow One Detail Panel Open At A Time
+
+If you want to only allow one detail panel to be open at a time, all you have to do is add your own `onClick` logic to the `muiExpandButtonProps` table option.
+
+```jsx
+const table = useMaterialReactTable({
+  data,
+  columns,
+  renderDetailPanel: ({ row }) => <DetailPanelContent />,
+  muiExpandButtonProps: ({ row, table }) => ({
+    onClick: () => table.setExpanded({ [row.id]: !row.getIsExpanded() }), //set only this row to be expanded
+  }),
+});
+```
 
 ### Rotate Expand Icon
 

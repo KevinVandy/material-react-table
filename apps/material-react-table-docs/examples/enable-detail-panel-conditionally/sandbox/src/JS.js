@@ -36,8 +36,17 @@ const Example = () => {
     columns,
     data,
     enableExpandAll: false, //disable expand all button
+    muiDetailPanelProps: () => ({
+      sx: (theme) => ({
+        backgroundColor:
+          theme.palette.mode === 'dark'
+            ? 'rgba(255,210,244,0.1)'
+            : 'rgba(0,0,0,0.1)',
+      }),
+    }),
     //custom expand button rotation
-    muiExpandButtonProps: ({ row }) => ({
+    muiExpandButtonProps: ({ row, table }) => ({
+      onClick: () => table.setExpanded({ [row.id]: !row.getIsExpanded() }), //only 1 detail panel open at a time
       sx: {
         transform: row.getIsExpanded() ? 'rotate(180deg)' : 'rotate(-90deg)',
         transition: 'transform 0.2s',
