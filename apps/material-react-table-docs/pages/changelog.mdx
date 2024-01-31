@@ -12,11 +12,16 @@ import Head from 'next/head';
 
 ### Version 2
 
-#### Version 2.10.0 - Coming Soon
+#### Version 2.10.0 - 2024-01-31
 
-- Added automatic column order state recalculation for dynamic columns
+- Added automatic column order state recalculation for dynamic columns and dynamic MRT display columns being enabled/disabled
   - Fixed bugs where enabling a feature like row selection conditionally would add columns to the end of the table when columnOrder state was not manually managed
-- Added new Cell Actions features (cell context menus and popovers)
+  - Fixed bugs where the show/hide columns menu would be empty when loading in dynamic column definitions without providing the columnOrder state manually
+- Added new Cell Actions features which will show a MUI context menu when a cell is right-clicked
+  - New `enableCellActions` table option
+  - New `renderCellActionMenuItems` table and column options
+  - New `MRT_ActionMenuItem` component to make styling all MRT menu items consistently (icons, text, spacing) easier to be consistent.
+- Fixed bug where the show all columns action menu item ignored the `enableHiding` column option
 
 #### Version 2.9.2 - 2024-01-25
 

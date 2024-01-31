@@ -44,9 +44,13 @@ Whether you just want to change the default column order in your table or let co
 
 ### Change the Default Column Order
 
-By Default, Material React Table will order the columns in the order they are defined in the `columns` table option. And Display Columns such as Actions, Selection, Expansion, etc., get added to either the beginning or the end of the table. You can customize all of this by defining your own `columnOrder` State and passing it either to the `initialState` or `state` props.
+By Default, Material React Table will order the columns in the order they are defined in the `columns` table option. And Display Columns such as Actions, Selection, Expansion, etc., get added to either the beginning or the end of the table. You can customize all of this by defining your own `columnOrder` state and passing it either to the `initialState` or `state` table options.
 
-The Column Order State is an array of string column ids, that come from the ids or accessorKeys that you defined in your column definitions.
+The `columnOrder` state is an array of string column ids, that come from the ids or accessorKeys that you defined in your column definitions.
+
+If you are enabling features that generate built-in MRT display columns such as `enableRowSelection`, `enableRowNumbers`, `enableRowActions`, etc., you should include those column ids in your `columnOrder` state at the index you want them to appear in the table. If you do not include them, MRT should automatically insert them at either the beginning or the end of the table just fine, but it might not be in the order you want.
+
+See the [Display Columns Guide](/docs/guides/display-columns) for more information on what `"mrt-row-\*"` column ids are available.
 
 ```jsx
 const table = useMaterialReactTable({
@@ -68,9 +72,13 @@ const table = useMaterialReactTable({
 return <MaterialReactTable table={table} />;
 ```
 
+> **Note:** If the number of `columns` and the length of the `columnOrder` state do not match, MRT will automatically re-generate the `columnOrder` state internally as of v2.10.0.
+
 ### Manage Column Order State
 
-If you need to manage the `columnOrder` state yourself, you can do so in the `state` table option and `onColumnOrderChange` callback, but you will also need to initialize the `columnOrder` state yourself.
+If you need easier access to the `columnOrder` state, you can store the column order in your own state management, and then pass it back into the MRT `state` table option and sync back up internal mutations with the `onColumnOrderChange` callback.
+
+You should also should initialize the `columnOrder` state yourself for the best results. Though, as of v2.10.0, if you do not initialize the `columnOrder` state, as Material React Table will generate a default column order for you based on the order of the columns passed in the `columns` option, so you only need to properly initialize the column order state if there is a problem with the default order.
 
 ```jsx
 const columns = [
@@ -79,7 +87,7 @@ const columns = [
 
 //easy shortcut to initialize the columnOrder state as array of column ids
 const [columnOrder, setColumnOrder] = useState(
-  columns.map((c) => c.accessorKey), //array of column ids
+  ['mrt-row-select', ...columns.map((c) => c.accessorKey)], //array of column ids (Initializing is optional as of v2.10.0)
 );
 
 const table = useMaterialReactTable({
