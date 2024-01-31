@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useReactTable } from '@tanstack/react-table';
 import {
   type MRT_Cell,
@@ -185,14 +185,6 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
   const statefulTableOptions =
     definedTableOptions as MRT_StatefulTableOptions<TData>;
 
-  const _showRowPinningColumn = showRowPinningColumn(statefulTableOptions);
-  const _showRowDragColumn = showRowDragColumn(statefulTableOptions);
-  const _showRowActionsColumn = showRowActionsColumn(statefulTableOptions);
-  const _showRowExpandColumn = showRowExpandColumn(statefulTableOptions);
-  const _showRowSelectColumn = showRowSelectionColumn(statefulTableOptions);
-  const _showRowNumbersColumn = showRowNumbersColumn(statefulTableOptions);
-  const _showRowSpacerColumn = showRowSpacerColumn(statefulTableOptions);
-
   //don't recompute columnDefs while resizing column or dragging column/row
   const columnDefsRef = useRef<MRT_ColumnDef<TData>[]>([]);
   statefulTableOptions.columns =
@@ -203,22 +195,22 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
       : prepareColumns({
           columnDefs: [
             ...([
-              _showRowPinningColumn &&
+              showRowPinningColumn(statefulTableOptions) &&
                 getMRT_RowPinningColumnDef(statefulTableOptions),
-              _showRowDragColumn &&
+              showRowDragColumn(statefulTableOptions) &&
                 getMRT_RowDragColumnDef(statefulTableOptions),
-              _showRowActionsColumn &&
+              showRowActionsColumn(statefulTableOptions) &&
                 getMRT_RowActionsColumnDef(statefulTableOptions),
-              _showRowExpandColumn &&
+              showRowExpandColumn(statefulTableOptions) &&
                 getMRT_RowExpandColumnDef(statefulTableOptions),
-              _showRowSelectColumn &&
+              showRowSelectionColumn(statefulTableOptions) &&
                 getMRT_RowSelectColumnDef(statefulTableOptions),
-              _showRowNumbersColumn &&
+              showRowNumbersColumn(statefulTableOptions) &&
                 getMRT_RowNumbersColumnDef(statefulTableOptions),
             ].filter(Boolean) as MRT_ColumnDef<TData>[]),
             ...statefulTableOptions.columns,
             ...([
-              _showRowSpacerColumn &&
+              showRowSpacerColumn(statefulTableOptions) &&
                 getMRT_RowSpacerColumnDef(statefulTableOptions),
             ].filter(Boolean) as MRT_ColumnDef<TData>[]),
           ],
@@ -226,6 +218,7 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
         });
   columnDefsRef.current = statefulTableOptions.columns;
 
+  //if loading, generate blank rows to show skeleton loaders
   statefulTableOptions.data = useMemo(
     () =>
       (statefulTableOptions.state.isLoading ||
@@ -315,20 +308,6 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
     statefulTableOptions.onShowGlobalFilterChange ?? setShowGlobalFilter;
   table.setShowToolbarDropZone =
     statefulTableOptions.onShowToolbarDropZoneChange ?? setShowToolbarDropZone;
-console.log("instance render")
-  //recalculate column order when columns change or features are toggled on/off
-  useEffect(() => {
-    table.setColumnOrder(getDefaultColumnOrderIds(statefulTableOptions));
-  }, [
-    statefulTableOptions.columns.length,
-    _showRowNumbersColumn,
-    _showRowActionsColumn,
-    _showRowExpandColumn,
-    _showRowSelectColumn,
-    _showRowDragColumn,
-    _showRowPinningColumn,
-    _showRowSpacerColumn,
-  ]);
 
   useMRT_Effects(table);
 

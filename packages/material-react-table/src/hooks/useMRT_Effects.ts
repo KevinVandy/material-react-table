@@ -4,6 +4,7 @@ import {
   type MRT_SortingState,
   type MRT_TableInstance,
 } from '../types';
+import { getDefaultColumnOrderIds } from '../utils/displayColumn.utils';
 import { getCanRankRows } from '../utils/row.utils';
 
 export const useMRT_Effects = <TData extends MRT_RowData>(
@@ -16,6 +17,7 @@ export const useMRT_Effects = <TData extends MRT_RowData>(
     options: { enablePagination, enableRowPinning, rowCount },
   } = table;
   const {
+    columnOrder,
     density,
     globalFilter,
     isFullScreen,
@@ -25,6 +27,7 @@ export const useMRT_Effects = <TData extends MRT_RowData>(
     sorting,
   } = getState();
 
+  const totalColumnCount = table.options.columns.length;
   const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
 
   const rerender = useReducer(() => ({}), {})[1];
@@ -90,4 +93,11 @@ export const useMRT_Effects = <TData extends MRT_RowData>(
       }, 150);
     }
   }, [density]);
+
+  //recalculate column order when columns change or features are toggled on/off
+  useEffect(() => {
+    if (totalColumnCount !== columnOrder.length) {
+      table.setColumnOrder(getDefaultColumnOrderIds(table.options));
+    }
+  }, [totalColumnCount]);
 };

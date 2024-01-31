@@ -1,7 +1,11 @@
 import { useMemo, useState } from 'react';
 import { MaterialReactTable } from 'material-react-table';
 import { Box, IconButton } from '@mui/material';
-import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import {
+  Edit as EditIcon,
+  Delete as DeleteIcon,
+  Email as EmailIcon,
+} from '@mui/icons-material';
 import { data as initialData } from './makeData';
 
 export const Example = () => {
@@ -39,6 +43,13 @@ export const Example = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
+      layoutMode="grid"
+      displayColumnDefOptions={{
+        'mrt-row-actions': {
+          size: 180, //if using layoutMode that is not 'semantic', the columns will not auto-size, so you need to set the size manually
+          grow: false,
+        },
+      }}
       enableRowActions
       renderRowActions={({ row, table }) => (
         <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: '8px' }}>

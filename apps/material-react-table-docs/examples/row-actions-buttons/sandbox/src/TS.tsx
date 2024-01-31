@@ -43,6 +43,13 @@ export const Example = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
+      layoutMode="grid"
+      displayColumnDefOptions={{
+        'mrt-row-actions': {
+          size: 180, //if using layoutMode that is not 'semantic', the columns will not auto-size, so you need to set the size manually
+          grow: false,
+        },
+      }}
       enableRowActions
       renderRowActions={({ row, table }) => (
         <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: '8px' }}>

@@ -129,9 +129,26 @@ export const ColumnOrderingNoDragHandles = () => (
 );
 
 export const ColumnOrderingStateManaged = () => {
-  const [columnOrder, setColumnOrder] = useState<MRT_ColumnOrderState>([
-    'mrt-row-select',
+  const [columnOrder, setColumnOrder] = useState<MRT_ColumnOrderState>(() =>
+    columns.map((c) => c.accessorKey as string),
+  );
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      defaultDisplayColumn={{ enableColumnOrdering: true, enableHiding: true }}
+      enableColumnOrdering
+      enableRowSelection
+      onColumnOrderChange={setColumnOrder}
+      state={{ columnOrder }}
+    />
+  );
+};
+
+export const ColumnOrderingStateManagedCustom = () => {
+  const [columnOrder, setColumnOrder] = useState<MRT_ColumnOrderState>(() => [
     ...columns.map((c) => c.accessorKey as string),
+    'mrt-row-select',
   ]);
   return (
     <MaterialReactTable

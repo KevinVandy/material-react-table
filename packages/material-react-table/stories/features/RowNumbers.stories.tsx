@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import Button from '@mui/material/Button';
 import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { faker } from '@faker-js/faker';
 import { type Meta } from '@storybook/react';
@@ -42,6 +44,22 @@ const data = [...Array(100)].map(() => ({
 export const enableRowNumbersStatic = () => (
   <MaterialReactTable columns={columns} data={data} enableRowNumbers />
 );
+
+export const enableRowNumbersConditionally = () => {
+  const [enableRowNumbers, setEnableRowNumbers] = useState(false);
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={data}
+      enableRowNumbers={enableRowNumbers}
+      renderTopToolbarCustomActions={() => (
+        <Button onClick={() => setEnableRowNumbers(!enableRowNumbers)}>
+          Toggle Row Numbers
+        </Button>
+      )}
+    />
+  );
+};
 
 export const enableRowNumbersStaticGrid = () => (
   <MaterialReactTable

@@ -1,10 +1,10 @@
 import Email from '@mui/icons-material/Email';
 import PersonOffOutlined from '@mui/icons-material/PersonOffOutlined';
+import Divider from '@mui/material/Divider';
 import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
 import { MRT_ActionMenuItem } from '../../src/components/menus/MRT_ActionMenuItem';
 import { faker } from '@faker-js/faker';
 import { type Meta } from '@storybook/react';
-import { Divider } from '@mui/material';
 
 const meta: Meta = {
   title: 'Features/Cell Action Examples',
@@ -134,7 +134,7 @@ export const CellActionsWithBuiltIns = () => (
     enableCellActions
     enableClickToCopy="context-menu"
     enableEditing
-    renderCellActionMenuItems={({ closeMenu, table, internalMenuItems }) => [
+    renderCellActionMenuItems={({ closeMenu, internalMenuItems, table }) => [
       ...internalMenuItems,
       <Divider key="divider" />,
       <MRT_ActionMenuItem

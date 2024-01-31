@@ -1,7 +1,11 @@
 import { useMemo } from 'react';
-import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
+import {
+  MaterialReactTable,
+  MRT_ActionMenuItem,
+  type MRT_ColumnDef,
+} from 'material-react-table';
 import { data, type Person } from './makeData';
-import { MenuItem } from '@mui/material';
+import { Edit, Delete } from '@mui/icons-material';
 
 export const Example = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
@@ -37,13 +41,21 @@ export const Example = () => {
       columns={columns}
       data={data}
       enableRowActions
-      renderRowActionMenuItems={({ row }) => [
-        <MenuItem key="edit" onClick={() => console.info('Edit')}>
-          Edit
-        </MenuItem>,
-        <MenuItem key="delete" onClick={() => console.info('Delete')}>
-          Delete
-        </MenuItem>,
+      renderRowActionMenuItems={({ row, table }) => [
+        <MRT_ActionMenuItem //or just use a normal MUI MenuItem component
+          icon={<Edit />}
+          key="edit"
+          label="Edit"
+          onClick={() => console.info('Edit')}
+          table={table}
+        />,
+        <MRT_ActionMenuItem
+          icon={<Delete />}
+          key="delete"
+          label="Delete"
+          onClick={() => console.info('Delete')}
+          table={table}
+        />,
       ]}
     />
   );
