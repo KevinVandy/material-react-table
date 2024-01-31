@@ -41,6 +41,19 @@ const preview: Preview = {
         }
       }, [useDarkMode()]);
 
+      useEffect(() => {
+        if (process.env.NODE_ENV === 'development') return;
+        const script = document.createElement('script');
+        script.src = 'https://plausible.io/js/script.js';
+        script.setAttribute('data-domain', 'material-react-table.dev');
+        script.defer = true;
+
+        document.body.appendChild(script);
+        return () => {
+          document.body.removeChild(script);
+        };
+      }, []);
+
       return (
         <ThemeProvider theme={defaultTheme}>
           <CssBaseline />

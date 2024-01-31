@@ -31,7 +31,6 @@ export const useMRT_Effects = <TData extends MRT_RowData>(
   const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
 
   const rerender = useReducer(() => ({}), {})[1];
-  const isMounted = useRef(false);
   const initialBodyHeight = useRef<string>();
   const previousTop = useRef<number>();
 
@@ -41,11 +40,12 @@ export const useMRT_Effects = <TData extends MRT_RowData>(
     }
   }, []);
 
+  //hide scrollbars when table is in full screen mode, preserve body scroll position after full screen exit
   useEffect(() => {
-    if (isMounted && typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') {
       if (isFullScreen) {
         previousTop.current = document.body.getBoundingClientRect().top; //save scroll position
-        document.body.style.height = '100vh'; //hide page scrollbars when table is in full screen mode
+        document.body.style.height = '100dvh'; //hide page scrollbars when table is in full screen mode
       } else {
         document.body.style.height = initialBodyHeight.current as string;
         if (!previousTop.current) return;
@@ -56,8 +56,14 @@ export const useMRT_Effects = <TData extends MRT_RowData>(
         });
       }
     }
-    isMounted.current = true;
   }, [isFullScreen]);
+
+  //recalculate column order when columns change or features are toggled on/off
+  useEffect(() => {
+    if (totalColumnCount !== columnOrder.length) {
+      table.setColumnOrder(getDefaultColumnOrderIds(table.options));
+    }
+  }, [totalColumnCount]);
 
   //if page index is out of bounds, set it to the last page
   useEffect(() => {
@@ -86,6 +92,7 @@ export const useMRT_Effects = <TData extends MRT_RowData>(
     }
   }, [globalFilter]);
 
+  //fix pinned row top style when density changes
   useEffect(() => {
     if (enableRowPinning && getIsSomeRowsPinned()) {
       setTimeout(() => {
@@ -93,11 +100,4 @@ export const useMRT_Effects = <TData extends MRT_RowData>(
       }, 150);
     }
   }, [density]);
-
-  //recalculate column order when columns change or features are toggled on/off
-  useEffect(() => {
-    if (totalColumnCount !== columnOrder.length) {
-      table.setColumnOrder(getDefaultColumnOrderIds(table.options));
-    }
-  }, [totalColumnCount]);
 };
