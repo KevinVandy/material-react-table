@@ -46,8 +46,8 @@ export const MRT_CellActionMenu = <TData extends MRT_RowData>({
       parseFromValuesOrFunc(columnDef.enableClickToCopy, cell) ===
         'context-menu') && (
       <MRT_ActionMenuItem
-        key={'mrt-copy'}
         icon={<ContentCopy />}
+        key={'mrt-copy'}
         label={localization.copy}
         onClick={(event) => {
           event.stopPropagation();
@@ -59,8 +59,8 @@ export const MRT_CellActionMenu = <TData extends MRT_RowData>({
     ),
     parseFromValuesOrFunc(enableEditing, row) && editDisplayMode === 'cell' && (
       <MRT_ActionMenuItem
-        key={'mrt-edit'}
         icon={<EditIcon />}
+        key={'mrt-edit'}
         label={localization.edit}
         onClick={() => {
           openEditingCell({ cell, table });

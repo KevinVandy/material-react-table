@@ -115,12 +115,10 @@ export const reorderColumn = <TData extends MRT_RowData>(
 export const getDefaultColumnFilterFn = <TData extends MRT_RowData>(
   columnDef: MRT_ColumnDef<TData>,
 ): MRT_FilterOption => {
-  if (columnDef.filterVariant === 'multi-select') return 'arrIncludesSome';
-  if (columnDef.filterVariant?.includes('range')) return 'betweenInclusive';
-  if (
-    columnDef.filterVariant === 'select' ||
-    columnDef.filterVariant === 'checkbox'
-  )
+  const { filterVariant } = columnDef;
+  if (filterVariant === 'multi-select') return 'arrIncludesSome';
+  if (filterVariant?.includes('range')) return 'betweenInclusive';
+  if (filterVariant === 'select' || filterVariant === 'checkbox')
     return 'equals';
   return 'fuzzy';
 };

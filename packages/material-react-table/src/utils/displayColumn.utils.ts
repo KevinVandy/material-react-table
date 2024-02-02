@@ -54,7 +54,7 @@ export const showRowExpandColumn = <TData extends MRT_RowData>(
   } = tableOptions;
   return !!(
     enableExpanding ||
-    (enableGrouping && (grouping === undefined || grouping?.length)) ||
+    (enableGrouping && grouping?.length) ||
     renderDetailPanel
   );
 };

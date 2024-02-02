@@ -1,8 +1,8 @@
 import { type MouseEvent, useState } from 'react';
 import Menu, { type MenuProps } from '@mui/material/Menu';
 import { useTheme } from '@mui/material/styles';
-import { MRT_FilterOptionMenu } from './MRT_FilterOptionMenu';
 import { MRT_ActionMenuItem } from './MRT_ActionMenuItem';
+import { MRT_FilterOptionMenu } from './MRT_FilterOptionMenu';
 import {
   type MRT_Header,
   type MRT_RowData,
@@ -25,8 +25,8 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
   ...rest
 }: Props<TData>) => {
   const {
-    getState,
     getAllLeafColumns,
+    getState,
     options: {
       columnFilterDisplayMode,
       columnFilterModeOptions,
