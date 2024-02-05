@@ -8,6 +8,7 @@ export const MRT_Localization_AZ: MRT_Localization = {
   changeSearchMode: 'Axtarış Rejimini Dəyiş',
   clearFilter: 'Filteri təmizlə',
   clearSearch: 'Axtarışı təmizlə',
+  clearSelection: 'Seçimi təmizlə',
   clearSort: 'Sıralamanı sıfırla',
   clickToCopy: 'Köçür',
   copy: 'Köçür',

@@ -4,14 +4,15 @@ import Tooltip from '@mui/material/Tooltip';
 import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 import { MRT_ShowHideColumnsMenu } from '../menus/MRT_ShowHideColumnsMenu';
 
-interface Props<TData extends MRT_RowData> extends IconButtonProps {
+export interface MRT_ShowHideColumnsButtonProps<TData extends MRT_RowData>
+  extends IconButtonProps {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_ShowHideColumnsButton = <TData extends MRT_RowData>({
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_ShowHideColumnsButtonProps<TData>) => {
   const {
     options: {
       icons: { ViewColumnIcon },

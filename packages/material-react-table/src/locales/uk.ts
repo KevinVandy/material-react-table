@@ -8,6 +8,7 @@ export const MRT_Localization_UK: MRT_Localization = {
   changeSearchMode: 'Змінити режим пошуку',
   clearFilter: 'Очистити фільтр',
   clearSearch: 'Очистити пошук',
+  clearSelection: 'Скасувати вибір',
   clearSort: 'Очистити сортування',
   clickToCopy: 'Натисніть, щоб скопіювати',
   copy: 'Копіювати',

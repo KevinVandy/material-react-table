@@ -18,7 +18,8 @@ import {
 import { getCommonMRTCellStyles, getMRTTheme } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends TableCellProps {
+export interface MRT_TableHeadCellProps<TData extends MRT_RowData>
+  extends TableCellProps {
   columnVirtualizer?: MRT_ColumnVirtualizer;
   header: MRT_Header<TData>;
   staticColumnIndex?: number;
@@ -31,7 +32,7 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
   staticColumnIndex,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableHeadCellProps<TData>) => {
   const theme = useTheme();
   const {
     getState,
@@ -267,9 +268,6 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
                         ? 'nowrap'
                         : 'normal',
                   }}
-                  title={
-                    columnDefType === 'data' ? columnDef.header : undefined
-                  }
                 >
                   {HeaderElement}
                 </Box>

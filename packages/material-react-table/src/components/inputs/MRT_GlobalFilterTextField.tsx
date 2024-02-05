@@ -16,14 +16,15 @@ import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 
-interface Props<TData extends MRT_RowData> extends TextFieldProps<'standard'> {
+export interface MRT_GlobalFilterTextFieldProps<TData extends MRT_RowData>
+  extends TextFieldProps<'standard'> {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_GlobalFilterTextField = <TData extends MRT_RowData>({
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_GlobalFilterTextFieldProps<TData>) => {
   const {
     getState,
     options: {

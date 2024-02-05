@@ -9,7 +9,8 @@ import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_SelectCheckbox } from '../inputs/MRT_SelectCheckbox';
 
-interface Props<TData extends MRT_RowData> extends AlertProps {
+export interface MRT_ToolbarAlertBannerProps<TData extends MRT_RowData>
+  extends AlertProps {
   stackAlertBanner?: boolean;
   table: MRT_TableInstance<TData>;
 }
@@ -18,7 +19,7 @@ export const MRT_ToolbarAlertBanner = <TData extends MRT_RowData>({
   stackAlertBanner,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_ToolbarAlertBannerProps<TData>) => {
   const {
     getPrePaginationRowModel,
     getState,

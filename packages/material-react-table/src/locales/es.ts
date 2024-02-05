@@ -8,6 +8,7 @@ export const MRT_Localization_ES: MRT_Localization = {
   changeSearchMode: 'Cambiar modo de búsqueda',
   clearFilter: 'Borrar filtro',
   clearSearch: 'Borrar búsqueda',
+  clearSelection: 'Borrar selección',
   clearSort: 'Borrar ordenamiento',
   clickToCopy: 'Haga click para copiar',
   copy: 'Copiar',

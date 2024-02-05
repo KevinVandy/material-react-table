@@ -8,7 +8,8 @@ import {
 import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 
-interface Props<TData extends MRT_RowData> extends IconButtonProps {
+export interface MRT_TableBodyRowGrabHandleProps<TData extends MRT_RowData>
+  extends IconButtonProps {
   row: MRT_Row<TData>;
   rowRef: RefObject<HTMLTableRowElement>;
   table: MRT_TableInstance<TData>;
@@ -19,7 +20,7 @@ export const MRT_TableBodyRowGrabHandle = <TData extends MRT_RowData>({
   rowRef,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableBodyRowGrabHandleProps<TData>) => {
   const {
     options: { muiRowDragHandleProps },
   } = table;
@@ -50,7 +51,7 @@ export const MRT_TableBodyRowGrabHandle = <TData extends MRT_RowData>({
 
   return (
     <MRT_GrabHandleButton
-      iconButtonProps={iconButtonProps}
+      {...iconButtonProps}
       location="row"
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}

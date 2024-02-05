@@ -6,14 +6,15 @@ import { alpha } from '@mui/material/styles';
 import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends BoxProps {
+export interface MRT_ToolbarDropZoneProps<TData extends MRT_RowData>
+  extends BoxProps {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_ToolbarDropZone = <TData extends MRT_RowData>({
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_ToolbarDropZoneProps<TData>) => {
   const {
     getState,
     options: { enableGrouping, localization },

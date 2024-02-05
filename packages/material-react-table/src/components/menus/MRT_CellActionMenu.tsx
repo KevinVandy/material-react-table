@@ -6,14 +6,15 @@ import { openEditingCell } from '../../utils/cell.utils';
 import { getMRTTheme } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends Partial<MenuProps> {
+export interface MRT_CellActionMenuProps<TData extends MRT_RowData>
+  extends Partial<MenuProps> {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_CellActionMenu = <TData extends MRT_RowData>({
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_CellActionMenuProps<TData>) => {
   const {
     getState,
     options: {

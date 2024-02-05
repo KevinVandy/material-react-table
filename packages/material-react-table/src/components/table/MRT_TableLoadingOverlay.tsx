@@ -7,14 +7,15 @@ import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 import { getMRTTheme } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends CircularProgressProps {
+export interface MRT_TableLoadingOverlayProps<TData extends MRT_RowData>
+  extends CircularProgressProps {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_TableLoadingOverlay = <TData extends MRT_RowData>({
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableLoadingOverlayProps<TData>) => {
   const {
     options: { localization, muiCircularProgressProps },
   } = table;
@@ -41,14 +42,16 @@ export const MRT_TableLoadingOverlay = <TData extends MRT_RowData>({
         right: 0,
         top: 0,
         width: '100%',
-        zIndex: 2,
+        zIndex: 3,
       })}
     >
-      <CircularProgress
-        aria-label={localization.noRecordsToDisplay}
-        id="mrt-progress"
-        {...circularProgressProps}
-      />
+      {circularProgressProps?.Component ?? (
+        <CircularProgress
+          aria-label={localization.noRecordsToDisplay}
+          id="mrt-progress"
+          {...circularProgressProps}
+        />
+      )}
     </Box>
   );
 };

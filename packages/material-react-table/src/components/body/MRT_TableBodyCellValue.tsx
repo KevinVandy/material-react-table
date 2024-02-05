@@ -10,7 +10,7 @@ import highlightWords from 'highlight-words';
 
 const allowedTypes = ['string', 'number'];
 
-interface Props<TData extends MRT_RowData> {
+export interface MRT_TableBodyCellValueProps<TData extends MRT_RowData> {
   cell: MRT_Cell<TData>;
   rowRef?: RefObject<HTMLTableRowElement>;
   staticRowIndex?: number;
@@ -22,7 +22,7 @@ export const MRT_TableBodyCellValue = <TData extends MRT_RowData>({
   rowRef,
   staticRowIndex,
   table,
-}: Props<TData>) => {
+}: MRT_TableBodyCellValueProps<TData>) => {
   const {
     getState,
     options: { enableFilterMatchHighlighting },

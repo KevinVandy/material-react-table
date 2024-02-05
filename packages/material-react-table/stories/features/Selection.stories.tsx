@@ -7,6 +7,7 @@ import {
   type MRT_ColumnDef,
   MRT_SelectCheckbox,
   MaterialReactTable,
+  getMRT_RowSelectionHandler,
   useMaterialReactTable,
 } from '../../src';
 import { faker } from '@faker-js/faker';
@@ -36,7 +37,8 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
     header: 'Address',
   },
 ];
-const data = [...Array(50)].map(() => ({
+
+const data = [...Array(15)].map(() => ({
   address: faker.location.streetAddress(),
   age: faker.number.int(80),
   firstName: faker.person.firstName(),
@@ -44,33 +46,21 @@ const data = [...Array(50)].map(() => ({
 }));
 
 export const SelectionEnabled = () => (
-  <MaterialReactTable columns={columns} data={data} enableRowSelection />
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowNumbers
+    enableRowSelection
+  />
 );
-
-export const SelectionFeatureEnabledConditionally = () => {
-  const [enabled, setEnabled] = useState(false);
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      defaultDisplayColumn={{ enableColumnOrdering: true }}
-      enableColumnOrdering
-      enableRowSelection={enabled}
-      renderTopToolbarCustomActions={() => (
-        <Button onClick={() => setEnabled(!enabled)}>
-          Toggle Row Selection
-        </Button>
-      )}
-    />
-  );
-};
 
 export const SelectionEnabledGrid = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    enableRowNumbers
     enableRowSelection
-    layoutMode="grid"
+    layoutMode='grid'
   />
 );
 
@@ -78,8 +68,19 @@ export const SelectionEnabledGridNoGrow = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
+    enableRowNumbers
     enableRowSelection
-    layoutMode="grid-no-grow"
+    layoutMode='grid-no-grow'
+  />
+);
+
+export const BatchSelectionDisabled = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableBatchRowSelection={false}
+    enableRowNumbers
+    enableRowSelection
   />
 );
 
@@ -91,15 +92,35 @@ export const SelectionEnabledConditionally = () => (
   />
 );
 
+export const SelectionEnabledConditionallyWithInitial = () => (
+  <MaterialReactTable
+    columns={columns}
+    data={data}
+    enableRowSelection={(row) => row.original.age >= 21}
+    initialState={{
+      rowSelection: {
+        1: true,
+        2: true,
+        3: true,
+        4: true,
+        5: true,
+        6: true,
+      },
+    }}
+  />
+);
+
 export const SelectionEnabledWithRowClick = () => (
   <MaterialReactTable
     columns={columns}
     data={data}
     enableRowSelection
-    muiTableBodyRowProps={({ row }) => ({
-      onClick: row.getToggleSelectedHandler(),
-      sx: {
+    muiTableBodyRowProps={({ row, staticRowIndex, table }) => ({
+      onClick: (event) =>
+        getMRT_RowSelectionHandler()({ event, row, staticRowIndex, table }),
+      style: {
         cursor: 'pointer',
+        userSelect: 'none',
       },
     })}
   />

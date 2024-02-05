@@ -15,7 +15,7 @@ import { parseFromValuesOrFunc } from '../../utils/utils';
 
 const defaultRowsPerPage = [5, 10, 15, 20, 25, 30, 50, 100];
 
-interface Props<TData extends MRT_RowData>
+export interface MRT_TablePaginationProps<TData extends MRT_RowData>
   extends Partial<
     PaginationProps & {
       SelectProps?: Partial<SelectProps>;
@@ -32,7 +32,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
   position = 'bottom',
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TablePaginationProps<TData>) => {
   const theme = useTheme();
   const isMobile = useMediaQuery('(max-width: 720px)');
 

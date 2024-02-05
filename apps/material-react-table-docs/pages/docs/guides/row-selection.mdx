@@ -24,6 +24,7 @@ Material React Table has a built-in row selection feature and makes it easy to m
 <TableOptionsTable
   onlyOptions={
     new Set([
+      'enableBatchRowSelection',
       'enableMultiRowSelection',
       'enableRowSelection',
       'enableSelectAll',
@@ -55,6 +56,21 @@ const table = useMaterialReactTable({
 });
 
 return <MaterialReactTable table={table} />;
+```
+
+### Batch Row Selection
+
+> New in v2.11.0
+
+By default, when the user holds down the <kbd>Shift</kbd> key and clicks a row, all rows between the last selected row and the clicked row will be selected. This can be disabled with the `enableBatchRowSelection` table option.
+
+```jsx
+const table = useMantineReactTable({
+  columns,
+  data,
+  enableRowSelection: true,
+  enableBatchRowSelection: false, //disable batch row selection with shift key
+});
 ```
 
 #### Enable Row Selection Conditionally Per Row

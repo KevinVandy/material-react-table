@@ -9,7 +9,8 @@ import {
 import { getCommonTooltipProps } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends ButtonProps {
+export interface MRT_CopyButtonProps<TData extends MRT_RowData>
+  extends ButtonProps {
   cell: MRT_Cell<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -18,7 +19,7 @@ export const MRT_CopyButton = <TData extends MRT_RowData>({
   cell,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_CopyButtonProps<TData>) => {
   const {
     options: { localization, muiCopyButtonProps },
   } = table;

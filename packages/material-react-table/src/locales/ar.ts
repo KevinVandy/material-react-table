@@ -8,6 +8,7 @@ export const MRT_Localization_AR: MRT_Localization = {
   changeSearchMode: 'تغيير وضع البحث',
   clearFilter: 'إعادة تعين المرشح',
   clearSearch: 'إعادة تعيين البحث',
+  clearSelection: 'إعادة تعيين التحديد',
   clearSort: 'إعادة تعيين الفرز',
   clickToCopy: 'انقر للنسخ',
   copy: 'نسخ',

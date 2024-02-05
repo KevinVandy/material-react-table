@@ -8,6 +8,7 @@ export const MRT_Localization_RU: MRT_Localization = {
   changeSearchMode: 'Изменить режим поиска',
   clearFilter: 'Очистить фильтр',
   clearSearch: 'Очистить поиск',
+  clearSelection: 'Очистить выбор',
   clearSort: 'Очистить сортировку',
   clickToCopy: 'Нажмите, чтобы скопировать',
   copy: 'Копировать',

@@ -23,7 +23,8 @@ const commonIconButtonStyles = {
   width: '2rem',
 };
 
-interface Props<TData extends MRT_RowData> extends IconButtonProps {
+export interface MRT_ToggleRowActionMenuButtonProps<TData extends MRT_RowData>
+  extends IconButtonProps {
   cell: MRT_Cell<TData>;
   row: MRT_Row<TData>;
   staticRowIndex?: number;
@@ -36,7 +37,7 @@ export const MRT_ToggleRowActionMenuButton = <TData extends MRT_RowData>({
   staticRowIndex,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_ToggleRowActionMenuButtonProps<TData>) => {
   const {
     getState,
     options: {

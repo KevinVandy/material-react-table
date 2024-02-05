@@ -23,7 +23,8 @@ import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 
-interface Props<TData extends MRT_RowData> extends TableCellProps {
+export interface MRT_TableBodyCellProps<TData extends MRT_RowData>
+  extends TableCellProps {
   cell: MRT_Cell<TData>;
   numRows?: number;
   rowRef: RefObject<HTMLTableRowElement>;
@@ -40,7 +41,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
   staticRowIndex,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableBodyCellProps<TData>) => {
   const theme = useTheme();
   const {
     getState,

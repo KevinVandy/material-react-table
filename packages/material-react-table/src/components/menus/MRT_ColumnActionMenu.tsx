@@ -10,7 +10,8 @@ import {
 } from '../../types';
 import { getMRTTheme } from '../../utils/style.utils';
 
-interface Props<TData extends MRT_RowData> extends Partial<MenuProps> {
+export interface MRT_ColumnActionMenuProps<TData extends MRT_RowData>
+  extends Partial<MenuProps> {
   anchorEl: HTMLElement | null;
   header: MRT_Header<TData>;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
@@ -23,7 +24,7 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
   setAnchorEl,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_ColumnActionMenuProps<TData>) => {
   const {
     getAllLeafColumns,
     getState,

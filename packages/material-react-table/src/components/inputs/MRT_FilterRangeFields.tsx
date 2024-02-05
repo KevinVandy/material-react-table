@@ -7,7 +7,8 @@ import {
 } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends BoxProps {
+export interface MRT_FilterRangeFieldsProps<TData extends MRT_RowData>
+  extends BoxProps {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -16,7 +17,7 @@ export const MRT_FilterRangeFields = <TData extends MRT_RowData>({
   header,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_FilterRangeFieldsProps<TData>) => {
   return (
     <Box
       {...rest}

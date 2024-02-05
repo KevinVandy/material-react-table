@@ -8,14 +8,14 @@ import { MRT_TableBody, Memo_MRT_TableBody } from '../body/MRT_TableBody';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
 import { MRT_TableHead } from '../head/MRT_TableHead';
 
-interface Props<TData extends MRT_RowData> extends TableProps {
+export interface MRT_TableProps<TData extends MRT_RowData> extends TableProps {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_Table = <TData extends MRT_RowData>({
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableProps<TData>) => {
   const {
     getFlatHeaders,
     getState,

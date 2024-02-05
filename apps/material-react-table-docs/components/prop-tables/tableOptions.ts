@@ -300,7 +300,8 @@ export const tableOptions: TableOption[] = [
   {
     tableOption: 'enableColumnVirtualization',
     defaultValue: '',
-    description: '',
+    description:
+      'Enables column virtualization and creates an MRT_ColumnVirtualizer instance internally. This option CANNOT be enabled conditionally. Other side effects include layoutMode will be set either to "grid" or "grid-no-grow"',
     link: '/docs/guides/virtualization#enable-column-virtualization',
     linkText: 'MRT Virtualization Docs',
     required: false,
@@ -581,21 +582,33 @@ export const tableOptions: TableOption[] = [
     source: '',
     type: "'sticky' | 'top' | 'bottom' | 'top-and-bottom' | 'select-sticky' | 'select-top' | 'select-bottom'",
   },
-
+  {
+    tableOption: 'enableBatchRowSelection',
+    defaultValue: 'true',
+    description:
+      'If true, the user can select multiple rows at once by holding down the shift key while clicking.',
+    link: '/docs/guides/row-selection#batch-row-selection',
+    linkText: 'MRT Row Selection Docs',
+    required: false,
+    source: 'MRT',
+    type: 'boolean',
+  },
   {
     tableOption: 'enableRowSelection',
     defaultValue: '',
-    description: '',
-    link: '',
-    linkText: '',
+    description:
+      'Enables row selection either for every row, or on a per-row basis using a function.',
+    link: '/docs/guides/row-selection#enable-row-selection',
+    linkText: 'MRT Row Selection Docs',
     required: false,
-    source: '',
+    source: 'MRT',
     type: 'boolean | (row: MRT_Row) => boolean',
   },
   {
     tableOption: 'enableRowVirtualization',
     defaultValue: '',
-    description: '',
+    description:
+      'Enables row virtualization and creates an MRT_RowVirtualizer instance internally. This option CANNOT be enabled conditionally. Other side effects include layoutMode will be set either to "grid" or "grid-no-grow"',
     link: '/docs/guides/virtualization#enable-row-virtualization',
     linkText: 'MRT Virtualization Docs',
     required: false,

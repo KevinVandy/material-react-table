@@ -12,7 +12,8 @@ import {
 } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends IconButtonProps {
+export interface MRT_TableHeadCellFilterLabelProps<TData extends MRT_RowData>
+  extends IconButtonProps {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -21,7 +22,7 @@ export const MRT_TableHeadCellFilterLabel = <TData extends MRT_RowData = {}>({
   header,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableHeadCellFilterLabelProps<TData>) => {
   const {
     options: {
       columnFilterDisplayMode,

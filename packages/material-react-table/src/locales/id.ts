@@ -8,6 +8,7 @@ export const MRT_Localization_ID: MRT_Localization = {
   changeSearchMode: 'Ubah mode pencarian',
   clearFilter: 'Hapus filter',
   clearSearch: 'Hapus pencarian',
+  clearSelection: 'Hapus pilihan',
   clearSort: 'Hapus urutan',
   clickToCopy: 'Klik untuk menyalin',
   copy: 'Salin',

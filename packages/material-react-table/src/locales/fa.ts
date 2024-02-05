@@ -8,6 +8,7 @@ export const MRT_Localization_FA: MRT_Localization = {
   changeSearchMode: 'تغییر حالت جستجو',
   clearFilter: 'پاک کردن فیلتر',
   clearSearch: 'پاک کردن جستجو',
+  clearSelection: 'پاک کردن انتخاب',
   clearSort: 'پاک کردن مرتب سازی',
   clickToCopy: 'کپی کردن',
   copy: 'کپی',

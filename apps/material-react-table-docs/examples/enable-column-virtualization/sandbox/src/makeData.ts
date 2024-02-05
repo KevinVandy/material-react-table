@@ -4,6 +4,7 @@ export const fakeColumns = [...Array(500)].map((_, i) => {
   return {
     accessorKey: i.toString(),
     header: 'Column ' + i.toString(),
+    size: Math.floor(Math.random() * 100) + 150,
   };
 });
 

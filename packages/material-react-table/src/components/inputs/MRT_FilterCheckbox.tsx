@@ -9,7 +9,8 @@ import {
 import { getCommonTooltipProps } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends CheckboxProps {
+export interface MRT_FilterCheckboxProps<TData extends MRT_RowData>
+  extends CheckboxProps {
   column: MRT_Column<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -18,7 +19,7 @@ export const MRT_FilterCheckbox = <TData extends MRT_RowData>({
   column,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_FilterCheckboxProps<TData>) => {
   const {
     getState,
     options: { localization, muiFilterCheckboxProps },

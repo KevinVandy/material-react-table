@@ -7,7 +7,8 @@ import {
 } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends DividerProps {
+export interface MRT_TableHeadCellResizeHandleProps<TData extends MRT_RowData>
+  extends DividerProps {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -16,7 +17,7 @@ export const MRT_TableHeadCellResizeHandle = <TData extends MRT_RowData>({
   header,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableHeadCellResizeHandleProps<TData>) => {
   const {
     getState,
     options: { columnResizeDirection, columnResizeMode },

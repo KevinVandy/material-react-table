@@ -11,7 +11,8 @@ import {
 import { getMRTTheme } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends TableRowProps {
+export interface MRT_TableFooterRowProps<TData extends MRT_RowData>
+  extends TableRowProps {
   columnVirtualizer?: MRT_ColumnVirtualizer;
   footerGroup: MRT_HeaderGroup<TData>;
   table: MRT_TableInstance<TData>;
@@ -22,7 +23,7 @@ export const MRT_TableFooterRow = <TData extends MRT_RowData>({
   footerGroup,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableFooterRowProps<TData>) => {
   const {
     options: { layoutMode, muiTableFooterRowProps },
   } = table;
@@ -38,8 +39,9 @@ export const MRT_TableFooterRow = <TData extends MRT_RowData>({
           !!header.column.columnDef.footer) ||
         header.column.columnDef.Footer,
     )
-  )
+  ) {
     return null;
+  }
 
   const tableRowProps = {
     ...parseFromValuesOrFunc(muiTableFooterRowProps, {

@@ -12,7 +12,8 @@ import {
 import { getMRTTheme } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends TableCellProps {
+export interface MRT_TableDetailPanelProps<TData extends MRT_RowData>
+  extends TableCellProps {
   parentRowRef: RefObject<HTMLTableRowElement>;
   row: MRT_Row<TData>;
   rowVirtualizer?: MRT_RowVirtualizer;
@@ -29,7 +30,7 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
   table,
   virtualRow,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableDetailPanelProps<TData>) => {
   const {
     getState,
     getVisibleLeafColumns,

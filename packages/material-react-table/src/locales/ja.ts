@@ -8,6 +8,7 @@ export const MRT_Localization_JA: MRT_Localization = {
   changeSearchMode: '検索モードを変更',
   clearFilter: 'リセット',
   clearSearch: 'リセット',
+  clearSelection: '選択を解除',
   clearSort: '並べ替えを解除',
   clickToCopy: 'クリックでコピー',
   copy: 'コピー',

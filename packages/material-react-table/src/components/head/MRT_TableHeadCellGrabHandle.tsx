@@ -9,7 +9,8 @@ import { reorderColumn } from '../../utils/column.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 
-interface Props<TData extends MRT_RowData> extends IconButtonProps {
+export interface MRT_TableHeadCellGrabHandleProps<TData extends MRT_RowData>
+  extends IconButtonProps {
   column: MRT_Column<TData>;
   table: MRT_TableInstance<TData>;
   tableHeadCellRef: RefObject<HTMLTableCellElement>;
@@ -20,7 +21,7 @@ export const MRT_TableHeadCellGrabHandle = <TData extends MRT_RowData>({
   table,
   tableHeadCellRef,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableHeadCellGrabHandleProps<TData>) => {
   const {
     getState,
     options: { enableColumnOrdering, muiColumnDragHandleProps },
@@ -73,7 +74,7 @@ export const MRT_TableHeadCellGrabHandle = <TData extends MRT_RowData>({
 
   return (
     <MRT_GrabHandleButton
-      iconButtonProps={iconButtonProps}
+      {...iconButtonProps}
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}
       table={table}

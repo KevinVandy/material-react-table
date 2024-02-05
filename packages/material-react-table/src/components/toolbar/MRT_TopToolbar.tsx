@@ -10,13 +10,13 @@ import { getCommonToolbarStyles } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_GlobalFilterTextField } from '../inputs/MRT_GlobalFilterTextField';
 
-interface Props<TData extends MRT_RowData> {
+export interface MRT_TopToolbarProps<TData extends MRT_RowData> {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_TopToolbar = <TData extends MRT_RowData>({
   table,
-}: Props<TData>) => {
+}: MRT_TopToolbarProps<TData>) => {
   const {
     getState,
     options: {

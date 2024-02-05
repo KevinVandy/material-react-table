@@ -10,7 +10,8 @@ import {
 import { getMRTTheme } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends Partial<MenuProps> {
+export interface MRT_RowActionMenuProps<TData extends MRT_RowData>
+  extends Partial<MenuProps> {
   anchorEl: HTMLElement | null;
   handleEdit: (event: MouseEvent) => void;
   row: MRT_Row<TData>;
@@ -27,7 +28,7 @@ export const MRT_RowActionMenu = <TData extends MRT_RowData>({
   staticRowIndex,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_RowActionMenuProps<TData>) => {
   const {
     getState,
     options: {

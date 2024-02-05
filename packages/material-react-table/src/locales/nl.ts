@@ -8,6 +8,7 @@ export const MRT_Localization_NL: MRT_Localization = {
   changeSearchMode: 'Zoekmodus wijzigen',
   clearFilter: 'Filter wissen',
   clearSearch: 'Zoekbalk wissen',
+  clearSelection: 'Selectie wissen',
   clearSort: 'Annuleer sortering',
   clickToCopy: 'Klik om te kopiëren',
   copy: 'Kopiëren',

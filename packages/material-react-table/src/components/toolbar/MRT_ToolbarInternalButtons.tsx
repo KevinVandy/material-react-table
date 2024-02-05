@@ -7,14 +7,15 @@ import { MRT_ToggleFiltersButton } from '../buttons/MRT_ToggleFiltersButton';
 import { MRT_ToggleFullScreenButton } from '../buttons/MRT_ToggleFullScreenButton';
 import { MRT_ToggleGlobalFilterButton } from '../buttons/MRT_ToggleGlobalFilterButton';
 
-interface Props<TData extends MRT_RowData> extends BoxProps {
+export interface MRT_ToolbarInternalButtonsProps<TData extends MRT_RowData>
+  extends BoxProps {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_ToolbarInternalButtons = <TData extends MRT_RowData>({
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_ToolbarInternalButtonsProps<TData>) => {
   const {
     options: {
       columnFilterDisplayMode,

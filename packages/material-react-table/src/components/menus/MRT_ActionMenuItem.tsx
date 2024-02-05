@@ -5,7 +5,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import MenuItem, { type MenuItemProps } from '@mui/material/MenuItem';
 import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 
-interface Props<TData extends MRT_RowData> extends MenuItemProps {
+export interface MRT_ActionMenuItemProps<TData extends MRT_RowData>
+  extends MenuItemProps {
   icon: ReactNode;
   label: string;
   onOpenSubMenu?: MenuItemProps['onClick'] | MenuItemProps['onMouseEnter'];
@@ -18,7 +19,7 @@ export const MRT_ActionMenuItem = <TData extends MRT_RowData>({
   onOpenSubMenu,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_ActionMenuItemProps<TData>) => {
   const {
     options: {
       icons: { ArrowRightIcon },

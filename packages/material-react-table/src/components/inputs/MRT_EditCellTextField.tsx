@@ -14,7 +14,8 @@ import {
 } from '../../types';
 import { getValueAndLabel, parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends TextFieldProps<'standard'> {
+export interface MRT_EditCellTextFieldProps<TData extends MRT_RowData>
+  extends TextFieldProps<'standard'> {
   cell: MRT_Cell<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -23,7 +24,7 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
   cell,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_EditCellTextFieldProps<TData>) => {
   const {
     getState,
     options: { createDisplayMode, editDisplayMode, muiEditTextFieldProps },

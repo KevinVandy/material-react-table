@@ -22,7 +22,8 @@ import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_ColumnPinningButtons } from '../buttons/MRT_ColumnPinningButtons';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 
-interface Props<TData extends MRT_RowData> extends MenuItemProps {
+export interface MRT_ShowHideColumnsMenuItemsProps<TData extends MRT_RowData>
+  extends MenuItemProps {
   allColumns: MRT_Column<TData>[];
   column: MRT_Column<TData>;
   hoveredColumn: MRT_Column<TData> | null;
@@ -37,7 +38,7 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
   setHoveredColumn,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_ShowHideColumnsMenuItemsProps<TData>) => {
   const {
     getState,
     options: {

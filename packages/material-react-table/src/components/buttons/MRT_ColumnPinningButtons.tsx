@@ -8,7 +8,8 @@ import {
 } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends BoxProps {
+export interface MRT_ColumnPinningButtonsProps<TData extends MRT_RowData>
+  extends BoxProps {
   column: MRT_Column<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -17,7 +18,7 @@ export const MRT_ColumnPinningButtons = <TData extends MRT_RowData>({
   column,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_ColumnPinningButtonsProps<TData>) => {
   const {
     options: {
       icons: { PushPinIcon },

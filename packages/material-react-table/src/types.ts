@@ -170,6 +170,7 @@ export interface MRT_Localization {
   changeSearchMode: string;
   clearFilter: string;
   clearSearch: string;
+  clearSelection: string;
   clearSort: string;
   clickToCopy: string;
   collapse: string;
@@ -320,6 +321,7 @@ export type MRT_TableInstance<TData extends MRT_RowData> = Omit<
     bottomToolbarRef: MutableRefObject<HTMLDivElement | null>;
     editInputRefs: MutableRefObject<Record<string, HTMLInputElement>>;
     filterInputRefs: MutableRefObject<Record<string, HTMLInputElement>>;
+    lastSelectedRowId: MutableRefObject<null | string>;
     searchInputRef: MutableRefObject<HTMLInputElement | null>;
     tableContainerRef: MutableRefObject<HTMLDivElement | null>;
     tableFooterRef: MutableRefObject<HTMLTableSectionElement | null>;
@@ -849,6 +851,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
     [key in MRT_DisplayColumnIds]: Partial<MRT_DisplayColumnDef<TData>>;
   }>;
   editDisplayMode?: 'cell' | 'custom' | 'modal' | 'row' | 'table';
+  enableBatchRowSelection?: boolean;
   enableBottomToolbar?: boolean;
   enableCellActions?: ((cell: MRT_Cell<TData>) => boolean) | boolean;
   enableClickToCopy?:
@@ -915,8 +918,10 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
     | ((props: { table: MRT_TableInstance<TData> }) => BoxProps)
     | BoxProps;
   muiCircularProgressProps?:
-    | ((props: { table: MRT_TableInstance<TData> }) => CircularProgressProps)
-    | CircularProgressProps;
+    | ((props: {
+        table: MRT_TableInstance<TData>;
+      }) => CircularProgressProps & { Component?: ReactNode })
+    | (CircularProgressProps & { Component?: ReactNode });
   muiColumnActionsButtonProps?:
     | ((props: {
         column: MRT_Column<TData>;

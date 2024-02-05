@@ -10,7 +10,8 @@ import {
 import { getCommonTooltipProps } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends IconButtonProps {
+export interface MRT_RowPinButtonProps<TData extends MRT_RowData>
+  extends IconButtonProps {
   pinningPosition: RowPinningPosition;
   row: MRT_Row<TData>;
   table: MRT_TableInstance<TData>;
@@ -21,7 +22,7 @@ export const MRT_RowPinButton = <TData extends MRT_RowData>({
   row,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_RowPinButtonProps<TData>) => {
   const {
     options: {
       icons: { CloseIcon, PushPinIcon },

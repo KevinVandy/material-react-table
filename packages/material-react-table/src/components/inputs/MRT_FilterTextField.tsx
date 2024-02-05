@@ -37,7 +37,8 @@ import {
 import { getValueAndLabel, parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 
-interface Props<TData extends MRT_RowData> extends TextFieldProps<'standard'> {
+export interface MRT_FilterTextFieldProps<TData extends MRT_RowData>
+  extends TextFieldProps<'standard'> {
   header: MRT_Header<TData>;
   rangeFilterIndex?: number;
   table: MRT_TableInstance<TData>;
@@ -48,7 +49,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
   rangeFilterIndex,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_FilterTextFieldProps<TData>) => {
   const {
     options: {
       columnFilterModeOptions,

@@ -10,7 +10,9 @@ import { getCommonTooltipProps } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_ColumnActionMenu } from '../menus/MRT_ColumnActionMenu';
 
-interface Props<TData extends MRT_RowData> extends IconButtonProps {
+export interface MRT_TableHeadCellColumnActionsButtonProps<
+  TData extends MRT_RowData,
+> extends IconButtonProps {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -21,7 +23,7 @@ export const MRT_TableHeadCellColumnActionsButton = <
   header,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableHeadCellColumnActionsButtonProps<TData>) => {
   const {
     options: {
       icons: { MoreVertIcon },

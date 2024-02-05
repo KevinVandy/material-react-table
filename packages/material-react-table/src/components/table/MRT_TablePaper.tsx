@@ -6,14 +6,15 @@ import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_BottomToolbar } from '../toolbar/MRT_BottomToolbar';
 import { MRT_TopToolbar } from '../toolbar/MRT_TopToolbar';
 
-interface Props<TData extends MRT_RowData> extends PaperProps {
+export interface MRT_TablePaperProps<TData extends MRT_RowData>
+  extends PaperProps {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_TablePaper = <TData extends MRT_RowData>({
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TablePaperProps<TData>) => {
   const {
     getState,
     options: {

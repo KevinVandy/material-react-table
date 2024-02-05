@@ -12,7 +12,8 @@ import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_EditActionButtons } from '../buttons/MRT_EditActionButtons';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 
-interface Props<TData extends MRT_RowData> extends Partial<DialogProps> {
+export interface MRT_EditRowModalProps<TData extends MRT_RowData>
+  extends Partial<DialogProps> {
   open: boolean;
   table: MRT_TableInstance<TData>;
 }
@@ -21,7 +22,7 @@ export const MRT_EditRowModal = <TData extends MRT_RowData>({
   open,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_EditRowModalProps<TData>) => {
   const {
     getState,
     options: {

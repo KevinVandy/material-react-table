@@ -8,7 +8,8 @@ import {
 import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_RowPinButton } from '../buttons/MRT_RowPinButton';
 
-interface Props<TData extends MRT_RowData> extends IconButtonProps {
+export interface MRT_TableBodyRowPinButtonProps<TData extends MRT_RowData>
+  extends IconButtonProps {
   row: MRT_Row<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -17,7 +18,7 @@ export const MRT_TableBodyRowPinButton = <TData extends MRT_RowData>({
   row,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableBodyRowPinButtonProps<TData>) => {
   const {
     getState,
     options: { enableRowPinning, rowPinningDisplayMode },

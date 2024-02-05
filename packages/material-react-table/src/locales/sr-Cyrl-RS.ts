@@ -8,6 +8,7 @@ export const MRT_Localization_SR_CYRL_RS: MRT_Localization = {
   changeSearchMode: 'Промени режим претраге',
   clearFilter: 'Поништи филтер',
   clearSearch: 'Поништи претрагу',
+  clearSelection: 'Поништи избор',
   clearSort: 'Поништи сортирање',
   clickToCopy: 'Кликни да копираш',
   copy: 'Копирај',

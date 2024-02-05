@@ -8,7 +8,8 @@ import {
 import { getCommonMRTCellStyles } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends TableCellProps {
+export interface MRT_TableFooterCellProps<TData extends MRT_RowData>
+  extends TableCellProps {
   footer: MRT_Header<TData>;
   staticColumnIndex?: number;
   table: MRT_TableInstance<TData>;
@@ -19,7 +20,7 @@ export const MRT_TableFooterCell = <TData extends MRT_RowData>({
   staticColumnIndex,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableFooterCellProps<TData>) => {
   const theme = useTheme();
   const {
     getState,

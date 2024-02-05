@@ -8,6 +8,7 @@ export const MRT_Localization_HE: MRT_Localization = {
   changeSearchMode: 'שינוי מצב חיפוש',
   clearFilter: 'נקה סינון',
   clearSearch: 'נקה חיפוש',
+  clearSelection: 'נקה בחירה',
   clearSort: 'נקה מיון',
   clickToCopy: 'לחץ להעתקה',
   copy: 'העתק',

@@ -8,6 +8,7 @@ export const MRT_Localization_ET: MRT_Localization = {
   changeSearchMode: 'Muuda otsingu režiimi',
   clearFilter: 'Tühista filter',
   clearSearch: 'Tühjenda otsing',
+  clearSelection: 'Tühjenda valik',
   clearSort: 'Tühjenda sorteerimine',
   clickToCopy: 'Klõpsa kopeerimiseks',
   copy: 'Kopeeri',

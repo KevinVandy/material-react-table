@@ -8,7 +8,8 @@ import {
 import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_ToolbarAlertBanner } from '../toolbar/MRT_ToolbarAlertBanner';
 
-interface Props<TData extends MRT_RowData> extends TableHeadProps {
+export interface MRT_TableHeadProps<TData extends MRT_RowData>
+  extends TableHeadProps {
   columnVirtualizer?: MRT_ColumnVirtualizer;
   table: MRT_TableInstance<TData>;
 }
@@ -17,7 +18,7 @@ export const MRT_TableHead = <TData extends MRT_RowData>({
   columnVirtualizer,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableHeadProps<TData>) => {
   const {
     getHeaderGroups,
     getSelectedRowModel,

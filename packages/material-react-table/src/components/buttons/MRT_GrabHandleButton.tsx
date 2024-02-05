@@ -5,7 +5,8 @@ import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 import { getCommonTooltipProps } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends IconButtonProps {
+export interface MRT_GrabHandleButtonProps<TData extends MRT_RowData>
+  extends IconButtonProps {
   iconButtonProps?: IconButtonProps;
   location?: 'column' | 'row';
   onDragEnd: DragEventHandler<HTMLButtonElement>;
@@ -14,13 +15,10 @@ interface Props<TData extends MRT_RowData> extends IconButtonProps {
 }
 
 export const MRT_GrabHandleButton = <TData extends MRT_RowData>({
-  iconButtonProps,
   location,
-  onDragEnd,
-  onDragStart,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_GrabHandleButtonProps<TData>) => {
   const {
     options: {
       icons: { DragHandleIcon },
@@ -28,25 +26,21 @@ export const MRT_GrabHandleButton = <TData extends MRT_RowData>({
     },
   } = table;
 
-  const _iconButtonProps = { ...iconButtonProps, ...rest };
-
   return (
     <Tooltip
       {...getCommonTooltipProps('top')}
-      title={_iconButtonProps?.title ?? localization.move}
+      title={rest?.title ?? localization.move}
     >
       <IconButton
-        aria-label={_iconButtonProps.title ?? localization.move}
+        aria-label={rest.title ?? localization.move}
         disableRipple
         draggable="true"
         size="small"
-        {..._iconButtonProps}
+        {...rest}
         onClick={(e) => {
           e.stopPropagation();
-          _iconButtonProps?.onClick?.(e);
+          rest?.onClick?.(e);
         }}
-        onDragEnd={onDragEnd}
-        onDragStart={onDragStart}
         sx={(theme) => ({
           '&:active': {
             cursor: 'grabbing',
@@ -57,10 +51,10 @@ export const MRT_GrabHandleButton = <TData extends MRT_RowData>({
           },
           cursor: 'grab',
           m: '0 -0.1rem',
-          opacity: location === 'row' ? 1 : 0.3,
+          opacity: location === 'row' ? 1 : 0.5,
           p: '2px',
           transition: 'all 150ms ease-in-out',
-          ...(parseFromValuesOrFunc(_iconButtonProps?.sx, theme) as any),
+          ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
         })}
         title={undefined}
       >

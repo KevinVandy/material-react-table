@@ -13,7 +13,8 @@ import {
 import { getDefaultColumnOrderIds } from '../../utils/displayColumn.utils';
 import { getMRTTheme } from '../../utils/style.utils';
 
-interface Props<TData extends MRT_RowData> extends Partial<MenuProps> {
+export interface MRT_ShowHideColumnsMenuProps<TData extends MRT_RowData>
+  extends Partial<MenuProps> {
   anchorEl: HTMLElement | null;
   isSubMenu?: boolean;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
@@ -25,7 +26,7 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
   setAnchorEl,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_ShowHideColumnsMenuProps<TData>) => {
   const {
     getAllColumns,
     getAllLeafColumns,

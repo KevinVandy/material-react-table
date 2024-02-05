@@ -4,14 +4,15 @@ import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 import { getCommonTooltipProps } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends IconButtonProps {
+export interface MRT_ExpandAllButtonProps<TData extends MRT_RowData>
+  extends IconButtonProps {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_ExpandAllButton = <TData extends MRT_RowData>({
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_ExpandAllButtonProps<TData>) => {
   const {
     getCanSomeRowsExpand,
     getIsAllRowsExpanded,

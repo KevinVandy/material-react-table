@@ -12,14 +12,15 @@ import { MRT_EditRowModal } from '../modals/MRT_EditRowModal';
 const useIsomorphicLayoutEffect =
   typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
-interface Props<TData extends MRT_RowData> extends TableContainerProps {
+export interface MRT_TableContainerProps<TData extends MRT_RowData>
+  extends TableContainerProps {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_TableContainer = <TData extends MRT_RowData>({
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableContainerProps<TData>) => {
   const {
     getState,
     options: {

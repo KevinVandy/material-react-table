@@ -10,7 +10,8 @@ import {
 import { getCommonTooltipProps } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends IconButtonProps {
+export interface MRT_ExpandButtonProps<TData extends MRT_RowData>
+  extends IconButtonProps {
   row: MRT_Row<TData>;
   staticRowIndex?: number;
   table: MRT_TableInstance<TData>;
@@ -20,7 +21,7 @@ export const MRT_ExpandButton = <TData extends MRT_RowData>({
   row,
   staticRowIndex,
   table,
-}: Props<TData>) => {
+}: MRT_ExpandButtonProps<TData>) => {
   const theme = useTheme();
   const {
     getState,

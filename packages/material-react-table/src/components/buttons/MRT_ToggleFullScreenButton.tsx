@@ -3,14 +3,15 @@ import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 
-interface Props<TData extends MRT_RowData> extends IconButtonProps {
+export interface MRT_ToggleFullScreenButtonProps<TData extends MRT_RowData>
+  extends IconButtonProps {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_ToggleFullScreenButton = <TData extends MRT_RowData>({
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_ToggleFullScreenButtonProps<TData>) => {
   const {
     getState,
     options: {

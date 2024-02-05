@@ -8,6 +8,7 @@ export const MRT_Localization_NP: MRT_Localization = {
   changeSearchMode: 'खोज प्रणाली परिवर्तन गर्नुहोस्',
   clearFilter: 'फिल्टर हटाउनुहोस्',
   clearSearch: 'खोजिएको शब्द मेट्नुहोस्',
+  clearSelection: 'चयन हटाउनुहोस्',
   clearSort: 'क्रम हटाउनुहोस्',
   clickToCopy: 'प्रतिलिपि बनाउन क्लिक गर्नुहोस्',
   copy: 'प्रतिलिपि बनाउनुहोस्',

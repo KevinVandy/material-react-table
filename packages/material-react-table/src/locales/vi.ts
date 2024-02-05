@@ -8,6 +8,7 @@ export const MRT_Localization_VI: MRT_Localization = {
   changeSearchMode: 'Thay đổi chế độ tìm kiếm',
   clearFilter: 'Xoá bộ lọc',
   clearSearch: 'Xoá ô tìm kiếm',
+  clearSelection: 'Xoá lựa chọn',
   clearSort: 'Huỷ sắp xếp',
   clickToCopy: 'Nhấn vào để sao chép',
   copy: 'Sao chép',

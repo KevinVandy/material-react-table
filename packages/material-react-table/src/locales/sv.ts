@@ -8,6 +8,7 @@ export const MRT_Localization_SV: MRT_Localization = {
   changeSearchMode: 'Ändra sökläge',
   clearFilter: 'Rensa filter',
   clearSearch: 'Rensa sök',
+  clearSelection: 'Rensa val',
   clearSort: 'Rensa sortering',
   clickToCopy: 'Klicka för att kopiera',
   copy: 'Kopiera',

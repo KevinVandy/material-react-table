@@ -8,6 +8,7 @@ export const MRT_Localization_KO: MRT_Localization = {
   changeSearchMode: '검색 모드 변경',
   clearFilter: '필터 초기화',
   clearSearch: '검색 초기화',
+  clearSelection: '선택 초기화',
   clearSort: '정렬 초기화',
   clickToCopy: '클릭하여 복사하기',
   copy: '복사',

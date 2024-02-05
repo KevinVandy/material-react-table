@@ -8,6 +8,7 @@ export const MRT_Localization_HY: MRT_Localization = {
   changeSearchMode: 'Փոխել որոնման ռեժիմը',
   clearFilter: 'Մաքրել զտիչը',
   clearSearch: 'Մաքրել որոնումը',
+  clearSelection: 'Մաքրել ընտրությունը',
   clearSort: 'Մաքրել տեսակավորումը',
   clickToCopy: 'Սեղմել պատճենելու համար',
   copy: 'Պատճենել',

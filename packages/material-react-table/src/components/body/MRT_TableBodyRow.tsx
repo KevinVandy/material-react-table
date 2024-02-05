@@ -1,6 +1,6 @@
 import { type DragEvent, memo, useMemo, useRef } from 'react';
 import { type VirtualItem } from '@tanstack/react-virtual';
-import TableRow from '@mui/material/TableRow';
+import TableRow, { type TableRowProps } from '@mui/material/TableRow';
 import {
   type Theme,
   alpha,
@@ -27,7 +27,8 @@ import {
 } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> {
+export interface MRT_TableBodyRowProps<TData extends MRT_RowData>
+  extends TableRowProps {
   columnVirtualizer?: MRT_ColumnVirtualizer;
   numRows?: number;
   pinnedRowIds?: string[];
@@ -47,7 +48,8 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
   staticRowIndex,
   table,
   virtualRow,
-}: Props<TData>) => {
+  ...rest
+}: MRT_TableBodyRowProps<TData>) => {
   const theme = useTheme();
 
   const {
@@ -87,11 +89,14 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
   const isDraggingRow = draggingRow?.id === row.id;
   const isHoveredRow = hoveredRow?.id === row.id;
 
-  const tableRowProps = parseFromValuesOrFunc(muiTableBodyRowProps, {
-    row,
-    staticRowIndex,
-    table,
-  });
+  const tableRowProps = {
+    ...parseFromValuesOrFunc(muiTableBodyRowProps, {
+      row,
+      staticRowIndex,
+      table,
+    }),
+    ...rest,
+  };
 
   const [bottomPinnedIndex, topPinnedIndex] = useMemo(() => {
     if (

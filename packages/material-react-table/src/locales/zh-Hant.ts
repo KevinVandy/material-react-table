@@ -8,6 +8,7 @@ export const MRT_Localization_ZH_HANT: MRT_Localization = {
   changeSearchMode: '更改搜尋模式',
   clearFilter: '清除過濾',
   clearSearch: '清除搜尋',
+  clearSelection: '清除選擇',
   clearSort: '清除排序',
   clickToCopy: '點擊以複製',
   copy: '複製',

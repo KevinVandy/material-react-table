@@ -8,6 +8,7 @@ export const MRT_Localization_HU: MRT_Localization = {
   changeSearchMode: 'Keresés módjának megváltoztatása',
   clearFilter: 'Szűrő törlése',
   clearSearch: 'Keresés törlése',
+  clearSelection: 'Kiválasztás törlése',
   clearSort: 'Rendezés törlése',
   clickToCopy: 'Kattintson a másoláshoz',
   copy: 'Másolás',

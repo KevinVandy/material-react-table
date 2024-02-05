@@ -9,7 +9,8 @@ import {
 } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends SliderProps {
+export interface MRT_FilterRangeSliderProps<TData extends MRT_RowData>
+  extends SliderProps {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -18,7 +19,7 @@ export const MRT_FilterRangeSlider = <TData extends MRT_RowData>({
   header,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_FilterRangeSliderProps<TData>) => {
   const {
     options: { enableColumnFilterModes, localization, muiFilterSliderProps },
     refs: { filterInputRefs },

@@ -5,7 +5,8 @@ import LinearProgress, {
 import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends LinearProgressProps {
+export interface MRT_LinearProgressBarProps<TData extends MRT_RowData>
+  extends LinearProgressProps {
   isTopToolbar: boolean;
   table: MRT_TableInstance<TData>;
 }
@@ -14,7 +15,7 @@ export const MRT_LinearProgressBar = <TData extends MRT_RowData>({
   isTopToolbar,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_LinearProgressBarProps<TData>) => {
   const {
     getState,
     options: { muiLinearProgressProps },

@@ -9,14 +9,15 @@ import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 import { getCommonToolbarStyles } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends BoxProps {
+export interface MRT_BottomToolbarProps<TData extends MRT_RowData>
+  extends BoxProps {
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_BottomToolbar = <TData extends MRT_RowData>({
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_BottomToolbarProps<TData>) => {
   const {
     getState,
     options: {

@@ -10,7 +10,8 @@ import {
 } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends TableSortLabelProps {
+export interface MRT_TableHeadCellSortLabelProps<TData extends MRT_RowData>
+  extends TableSortLabelProps {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -19,7 +20,7 @@ export const MRT_TableHeadCellSortLabel = <TData extends MRT_RowData>({
   header,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableHeadCellSortLabelProps<TData>) => {
   const {
     getState,
     options: {

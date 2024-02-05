@@ -7,7 +7,8 @@ import {
 } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends TableFooterProps {
+export interface MRT_TableFooterProps<TData extends MRT_RowData>
+  extends TableFooterProps {
   columnVirtualizer?: MRT_ColumnVirtualizer;
   table: MRT_TableInstance<TData>;
 }
@@ -16,7 +17,7 @@ export const MRT_TableFooter = <TData extends MRT_RowData>({
   columnVirtualizer,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableFooterProps<TData>) => {
   const {
     getFooterGroups,
     getState,

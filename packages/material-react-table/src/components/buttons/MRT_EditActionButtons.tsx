@@ -10,7 +10,8 @@ import {
 } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends BoxProps {
+export interface MRT_EditActionButtonsProps<TData extends MRT_RowData>
+  extends BoxProps {
   row: MRT_Row<TData>;
   table: MRT_TableInstance<TData>;
   variant?: 'icon' | 'text';
@@ -21,7 +22,7 @@ export const MRT_EditActionButtons = <TData extends MRT_RowData>({
   table,
   variant = 'icon',
   ...rest
-}: Props<TData>) => {
+}: MRT_EditActionButtonsProps<TData>) => {
   const {
     getState,
     options: {

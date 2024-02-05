@@ -8,6 +8,7 @@ export const MRT_Localization_DA: MRT_Localization = {
   changeSearchMode: 'Skift søgetilstand',
   clearFilter: 'Ryd filter',
   clearSearch: 'Ryd søgning',
+  clearSelection: 'Ryd valg',
   clearSort: 'Ryd sortering',
   clickToCopy: 'Tryk for at kopiere',
   copy: 'Kopier',

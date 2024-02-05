@@ -9,7 +9,9 @@ import { MRT_FilterRangeFields } from '../inputs/MRT_FilterRangeFields';
 import { MRT_FilterRangeSlider } from '../inputs/MRT_FilterRangeSlider';
 import { MRT_FilterTextField } from '../inputs/MRT_FilterTextField';
 
-interface Props<TData extends MRT_RowData> extends CollapseProps {
+export interface MRT_TableHeadCellFilterContainerProps<
+  TData extends MRT_RowData,
+> extends CollapseProps {
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
@@ -18,7 +20,7 @@ export const MRT_TableHeadCellFilterContainer = <TData extends MRT_RowData>({
   header,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableHeadCellFilterContainerProps<TData>) => {
   const {
     getState,
     options: { columnFilterDisplayMode },

@@ -12,7 +12,8 @@ import {
 import { getMRTTheme } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
-interface Props<TData extends MRT_RowData> extends TableRowProps {
+export interface MRT_TableHeadRowProps<TData extends MRT_RowData>
+  extends TableRowProps {
   columnVirtualizer?: MRT_ColumnVirtualizer;
   headerGroup: MRT_HeaderGroup<TData>;
   table: MRT_TableInstance<TData>;
@@ -23,7 +24,7 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
   headerGroup,
   table,
   ...rest
-}: Props<TData>) => {
+}: MRT_TableHeadRowProps<TData>) => {
   const {
     options: { enableStickyHeader, layoutMode, muiTableHeadRowProps },
   } = table;
