@@ -1,0 +1,65 @@
+import Head from 'next/head';
+
+<Head>
+  <title>
+    {'MRT V2 and V3 Roadmap - Material React Table V2 Docs'}
+  </title>
+  <meta
+    name="description"
+    content="Material React Table Roadmap for V2, V3, and Beyond. Learn about the future of Material React Table and what to expect in the coming years."
+  />
+</Head>
+
+## MRT Roadmap
+
+Here is what is being planned for the future of Material React Table.
+
+### Version 2 Roadmap (2023-2024)
+
+Most large planned features for V2 have been built and released as of February 2024 (v2.11). Now the focus will be on bug fixes and smaller improvements. Development is definitely not stopping, and as you can see above, January 2024 was a very busy month for MRT development. The remaining work to be done is to solve remaining feature incompatibilities.
+
+The reason for so much development early in the year was to get MRT to be as feature complete as possible before the next big upgrades that are coming from Material UI and TanStack.
+
+A new `useMaterialReactTableLight` hook could be added to MRT V2 to allow for smaller bundle sizes for those who don't want all of the pre-loaded features of MRT, but as you will see down below, this might be way more effective in a future release built on top of a new version 9 of TanStack Table instead of the current limitations of the current version 8 of TanStack Table.
+
+### Version 3 Roadmap (2024)
+
+There are some very large efforts being planned for V3/V4
+
+#### 1. Material UI V6
+
+Material UI V6 is expected to be released halfway through 2024 with a new opt-in zero-runtime styling engine (without Emotion). This will be a big deal when it comes out, and MRT performance should benefit greatly from it. The goal is to have MRT ready to take 100% advantage of this by the time Material UI V6 is released as stable.
+
+In addition, around the same time, both Base UI and Joy UI (by MUI) are expected to finally be released as stable. Once this happens, the goal is to have Material React Table offered in 3 different adapters (Base UI, Material UI, and Joy UI) with mostly the same core API.
+
+[Base UI](https://mui.com/base-ui/getting-started/) is very interesting, as it will be an unstyled version of Material UI, which will allow for the most flexibility in styling, and the smallest bundle size. This will also probably be the best option for those of you who want to use Tailwind with MRT.
+
+[Joy UI](https://mui.com/joy-ui/getting-started/) is very interesting to me, as it is a component library that looks very similar to my new favorite component library ([Mantine](https://mantine.dev)), but it will still have the same DX as Material UI.
+
+#### 2. TanStack Table V9
+
+In addition to being the creator and maintainer of both Material React Table and Mantine React Table, I am also a maintainer and collaborator for TanStack Table itself. A couple of other TanStack maintainers and I are planning some big changes to TanStack Table for V9 in order to make it much more flexible (especially in terms of bundle-size). If you want to follow along with that development, or even contribute (or just voice your opinions), you can join the [TanStack Table V9 Roadmap GitHub Discussion](https://github.com/TanStack/table/discussions/5270)
+
+Some things that could come out of TanStack Table V9 that would be beneficial to MRT:
+
+- Smaller bundle size with much more tree-shaking of unused features (table factories)
+- Subscriptions for table state slice changes via the new TanStack Store library (for even more efficient re-renders)
+- Making extending TanStack Table with custom features easier to integrate on a lower level
+- More alternative row models
+- Multiple Filters Per Column support (like MUI X Data Grid)
+
+And much more with a general API refresh!
+
+I think most likely, MRT would be able to upgrade to this in MRT V4, rather than V3, as I want to keep each major version of MRT as easy as possible to upgrade to.
+
+It might be a race between Material UI V6 and TanStack Table V9 to see which one comes out first, and then MRT will upgrade to each in a staggered manner. As of February 2024, TanStack Table V9 development has barely started, but many ideas have been discussed.
+
+#### 3. Material UI V7
+
+As soon as possibly the end of the year in 2024 (though I personally doubt it), MUI could release Material UI V7 with a component design overhaul based on the new Material Design 3.0 guidelines. When this comes out, MRT will have another major version bump to upgrade to it.
+
+Read more about the future of Material UI versions in their [official blog post](https://mui.com/blog/2023-material-ui-v6-and-beyond/)
+
+#### 4. Mantine React Table
+
+Material React Table's sister library,[ Mantine React Table](https://mantine-react-table..com), continues to be developed in parallel, as it is nearing a stable V2 release itself. If you like MRT, but prefer to write pure CSS/CSS Modules instead of styled components or the `sx` prop, you'll probably like Mantine React Table more than Material React Table.

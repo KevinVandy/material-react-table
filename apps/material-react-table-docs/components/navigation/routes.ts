@@ -18,11 +18,11 @@ export const routes: Array<RouteItem> = [
   },
   {
     href: '/changelog',
-    label: 'Changelog & Roadmap',
+    label: 'Changelog',
   },
   {
-    href: '/migrating-to-v2',
-    label: 'Migrating to v2',
+    href: '/roadmap',
+    label: 'Roadmap',
   },
   {
     label: 'Getting Started',
@@ -35,6 +35,10 @@ export const routes: Array<RouteItem> = [
       {
         href: '/docs/getting-started/usage',
         label: 'Usage',
+      },
+      {
+        href: '/docs/getting-started/migrating-to-v2',
+        label: 'Migrating to v2',
       },
     ],
   },

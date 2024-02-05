@@ -1,23 +1,18 @@
 import Head from 'next/head';
 
 <Head>
-  <title>{'V2 Changelog and Roadmap - Material React Table V2 Docs'}</title>
-  <meta
-    name="description"
-    content="Material React Table V1 Changelog and Roadmap for future development"
-  />
+  <title>{'MRT V2 Changelog - Material React Table V2 Docs'}</title>
+  <meta name="description" content="Material React Table V2 Changelog" />
 </Head>
 
-## Changelog
+## MRT V2 Changelog
 
-### Version 2
-
-#### Version 2.11.1 - 2024-02-05
+### Version 2.11.1 - 2024-02-05
 
 - Fixed bug where new batch row selection feature did not account for `manualPagination`
 - Fixed bug where parent selected checkbox should not be indeterminate when the row itself is selected
 
-#### Version 2.11.0 - 2024-02-05
+### Version 2.11.0 - 2024-02-05
 
 - Added new `enableBatchRowSelection` table option that is enabled by default that allows users to select multiple rows at once by holding down the shift key and clicking on a row
 - Added small "Clear selection" button to the toolbar alert banner selected message by default when rows are selected
@@ -26,7 +21,7 @@ import Head from 'next/head';
 - Fixed Autocomplete filter showing filter values instead of display labels once value is selected
 - Removed default Header html title attribute on all header cells
 
-#### Version 2.10.0 - 2024-01-31
+### Version 2.10.0 - 2024-01-31
 
 - Added automatic column order state recalculation for dynamic columns and dynamic MRT display columns being enabled/disabled
   - Fixed bugs where enabling a feature like row selection conditionally would add columns to the end of the table when columnOrder state was not manually managed
@@ -37,7 +32,7 @@ import Head from 'next/head';
   - New `MRT_ActionMenuItem` component to make styling all MRT menu items consistently (icons, text, spacing) easier to be consistent
 - Fixed bug where the show all columns action menu item ignored the `enableHiding` column option
 
-#### Version 2.9.2 - 2024-01-25
+### Version 2.9.2 - 2024-01-25
 
 - Added `disableScrollLock: true` to all MUI Menus and Select Menus to keep menus with their anchor origin while scrolling by default
 - Switched pagination rows per page select to use native select by default in mobile viewports
@@ -48,18 +43,18 @@ import Head from 'next/head';
   - Fixed semantic sticky header regression
   - Fixed row order/dragging with column virtualization enabled bug
 
-#### Version 2.9.1 - 2024-01-25
+### Version 2.9.1 - 2024-01-25
 
 - Fixed row selection highlighting logic on grouped/aggregated rows
 
-#### Version 2.9.0 - 2024-01-24
+### Version 2.9.0 - 2024-01-24
 
 - Added new `renderCaption` table option to allow for a `<caption>` element to be rendered within the table
 - Fixed row hover opacity style issues for pinned columns and selected rows with `::before` and `::after` pseudo elements in pinned cells
 - Standardized `data-index`, `data-pinned`, and `data-selected` attributes on body rows, head cells, body cells, and footer cells where applicable
 - Column virtualization performance optimizations
 
-#### Version 2.8.0 - 2024-01-19
+### Version 2.8.0 - 2024-01-19
 
 - Removed internal display column def memoization that caused edge cases with enabling and disabling features conditionally. (like `enableRowActions` and `enableEditing`, etc.)
 - Improved Column Resizing and Column/Row DnD Performance by caching column definitions while user is dragging
@@ -71,7 +66,7 @@ import Head from 'next/head';
 - Modified `editSelectOptions` to allow for dynamic values on a per-cell basis. `({ row, cell, etc. }) => []`
 - Fixed edit textbox controlled component warning
 
-#### Version 2.7.0 - 2024-01-18
+### Version 2.7.0 - 2024-01-18
 
 - New `'positionCreatingRow'` table option to customize where the creating row is rendered in the table body
 - All MRT MUI menus now use the `baseBackgroundColor` mrt theme color for the menu background color
@@ -79,11 +74,11 @@ import Head from 'next/head';
 - Made some tooltips text non-interactive to prevent accidental clicks
 - Simplified internal column preparation APIs
 
-#### Version 2.6.1 - 2024-01-11
+### Version 2.6.1 - 2024-01-11
 
 - Upgraded to TanStack Table `v8.11.6` for SSR bugfix (document not defined)
 
-#### Version 2.6.0 - 2024-01-11
+### Version 2.6.0 - 2024-01-11
 
 - Added support for Detail Panels and Row Virtualization at the same time
 - Added support for Conditional Detail Panels (expand button is disabled when renderDetailPanel returns falsy value). Empty detail panels `<tr>` still render for virtualization and striped rows to work properly.
@@ -94,11 +89,11 @@ import Head from 'next/head';
 - Improved Header Group Column Sizing
 - Removed some internal `"@mui/material"` imports. (Could speed up dev server hot reloads in some cases)
 
-#### Version 2.5.2 - 2024-01-10
+### Version 2.5.2 - 2024-01-10
 
 - Fixed bug where Date and Time Picker filters were not opening properly on mobile devices
 
-#### Version 2.5.1 - 2024-01-09
+### Version 2.5.1 - 2024-01-09
 
 - Fixed selected row count in toolbar alert banner when using manualPagination
 - Fixed row dragging with column virtualization enabled
@@ -106,19 +101,19 @@ import Head from 'next/head';
 - Fixed any setDragImage errors with internal try/catch when refs are null
 - Fixed filter range slider not having a min width in popover columnFilterDisplayMode
 
-#### Version 2.5.0 - 2024-01-08
+### Version 2.5.0 - 2024-01-08
 
 - Implemented better default UI for `groupedColumnMode: 'remove'`. Expand column shows grouped row values
 - Fixed grouped parent row selection toggling bugs
 - Tweaked media queries for search textbox on top of top toolbar alert banner
 
-#### Version 2.4.1 - 2024-01-05
+### Version 2.4.1 - 2024-01-05
 
 - Fixed MUI Pagination disabled tooltip warning
 - Fixed Column Pinning Spacing with Column Virtualization
 - Fixed Column Action Clear Filter Item when filterFn was "empty" or "notEmpty"
 
-#### Version 2.4.0 - 2024-01-04
+### Version 2.4.0 - 2024-01-04
 
 - Upgraded to TanStack Table `v8.11.3` for bug fixes with expanding and row selection
 - Added `'datetime'`, `'datetime-range'`, `'time'`, and `'time-range'` filter variants
@@ -128,61 +123,61 @@ import Head from 'next/head';
 - Allowed `muiColumnActionsButtonProps.children` to be overridden with a custom icon
 - Fixed issue with Sticky Row Pinning and Row Virtualization
 
-#### Version 2.3.1 - 2024-01-02
+### Version 2.3.1 - 2024-01-02
 
 - disable row selection for creating row
 - fixed virtualized column index warning
 
-#### Version 2.3.0 - 2024-01-02
+### Version 2.3.0 - 2024-01-02
 
 - Added new `visibleInShowHideMenu` column option to allow for columns to be hidden from the show/hide columns menu, regardless of column visibility state
 - Fixed bug where the Show All button in the show/hide columns menu did not properly skip columns with `enableHiding: false` set
 - Fixed bug where creatingRow did not work with virtualization enabled
 
-#### Version 2.2.0 - 2024-01-01
+### Version 2.2.0 - 2024-01-01
 
 - Added new `useMRT_Rows`, `useMRT_ColumnVirtualizer`, and `useMRT_RowVirtualizer` hooks to allow for more advanced use cases for headless mode
 - Fixed possible duplicate table body row keys warning
 
-#### Version 2.1.0 - 2023-12-22
+### Version 2.1.0 - 2023-12-22
 
 - Upgraded to TanStack Table `v8.11.2` for new `columnResizeDirection` table option
 - Added proper column resizing support for right-to-left languages
 - Updated French locale
 - Fixed warning on edit textfield with outlined variant
 
-#### Version 2.0.6 - 2023-12-15
+### Version 2.0.6 - 2023-12-15
 
 - Fixed horizontal scrollbar showing up in layoutMode grid with column resizing enabled
 - add `disabled` prop to `muiTablePaginationProps`
 
-#### Version 2.0.5 - 2023-12-05
+### Version 2.0.5 - 2023-12-05
 
 - Upgraded to TanStack Virtual `v3.0.1` stable release
 - Added `MuiTablePagination-root` class to mrt pagination root element for easier styling
 - Fixed potential duplicate key warning while rendering skeleton rows when `getRowId` table option is provided and doesn't properly return `undefined`
 - Fixed `muiSearchTextFieldProps.InputProps` now able to partially overridden
 
-#### Version 2.0.4 - 2023-11-09
+### Version 2.0.4 - 2023-11-09
 
 - Add support for `'all'` rows pagination option
 - Added `muiPaginationProps.SelectProps` support back to allow for native select
 
-#### Version 2.0.3 - 2023-11-06
+### Version 2.0.3 - 2023-11-06
 
 - Locale updates
 
-#### Version 2.0.2 - 2023-11-01
+### Version 2.0.2 - 2023-11-01
 
 - Fixed bug with popover filters null ref focus
 
-#### Version 2.0.1 - 2023-10-31
+### Version 2.0.1 - 2023-10-31
 
 - Fixed bug where edit row action menu was created for all editDisplayModes
 - Fixed rest spread on table head row
 - Changed pagination text to a span instead of with hardcoded 0 margin and padding
 
-#### Version 2.0.0 - 2023-10-27
+### Version 2.0.0 - 2023-10-27
 
 - Made `MaterialReactTable` a named export instead of a default export.
 - Made `@mui/x-date-pickers` a required peer dependency.
@@ -234,14 +229,8 @@ import Head from 'next/head';
 
 Is anything missing from this v2 changelog? Make a PR or join the [Discord](https://discord.gg/5wqyRx6fnm) to discuss.
 
-### Version 1
+## Old MRT Version 1 Changelog
 
 See the old [V1 Changelog](https://v1.material-react-table.com/changelog)
 
-## Roadmap
-
-### Version 2 Roadmap (2024)
-
-Most large 
-
-A lighter weight `useMaterialReactTableLight` hook is also being considered in the near future that will be a bit more bare-bones and tree-shakable. All features will be opt-in and will not be enabled by default.
+> Curious about future releases? Check out the [Roadmap](/roadmap)

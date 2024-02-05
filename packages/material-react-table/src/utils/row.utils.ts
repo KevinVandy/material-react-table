@@ -151,6 +151,7 @@ export const getMRT_RowSelectionHandler =
       getState,
       options: {
         enableBatchRowSelection,
+        enableMultiRowSelection,
         enableRowPinning,
         manualPagination,
         rowPinningDisplayMode,
@@ -174,6 +175,7 @@ export const getMRT_RowSelectionHandler =
     // if shift key is pressed, select all rows between last selected and this one
     if (
       enableBatchRowSelection &&
+      enableMultiRowSelection &&
       (event as any).nativeEvent.shiftKey &&
       lastSelectedRowId.current !== null
     ) {

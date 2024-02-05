@@ -10,6 +10,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/migrating-to-v2',
+        destination: '/docs/getting-started/migrating-to-v2',
+        permanent: true,
+      },
+      {
         source: '/docs/guides/memoize-components',
         destination: '/docs/guides/memoization',
         permanent: true,
