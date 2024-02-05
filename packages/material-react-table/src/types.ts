@@ -380,7 +380,7 @@ export type MRT_StatefulTableOptions<TData extends MRT_RowData> =
     >;
   };
 
-export type MRT_TableState<TData extends MRT_RowData> = TableState & {
+export interface MRT_TableState<TData extends MRT_RowData> extends TableState {
   actionCell?: MRT_Cell<TData> | null;
   columnFilterFns: MRT_ColumnFilterFnsState;
   creatingRow: MRT_Row<TData> | null;
@@ -402,7 +402,7 @@ export type MRT_TableState<TData extends MRT_RowData> = TableState & {
   showProgressBars: boolean;
   showSkeletons: boolean;
   showToolbarDropZone: boolean;
-};
+}
 
 export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
   ColumnDef<TData, TValue>,
@@ -429,6 +429,7 @@ export type MRT_ColumnDef<TData extends MRT_RowData, TValue = unknown> = Omit<
     renderedCellValue: ReactNode;
     row: MRT_Row<TData>;
     rowRef?: RefObject<HTMLTableRowElement>;
+    staticColumnIndex?: number;
     staticRowIndex?: number;
     table: MRT_TableInstance<TData>;
   }) => ReactNode;

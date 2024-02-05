@@ -161,6 +161,10 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
           ] || ''
         : (column.getFilterValue() as string) ?? '',
   );
+  const [autocompleteValue, setAutocompleteValue] =
+    useState<DropdownOption | null>(
+      isAutocompleteFilter ? (filterValue as DropdownOption | null) : null,
+    );
 
   const handleChangeDebounced = useCallback(
     debounce(
@@ -194,6 +198,11 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
           : event.target.value;
     handleChange(newValue);
     textFieldProps?.onChange?.(event);
+  };
+
+  const handleAutocompleteChange = (newValue: DropdownOption) => {
+    setAutocompleteValue(newValue);
+    handleChange(getValueAndLabel(newValue).value);
   };
 
   const handleClear = () => {
@@ -435,41 +444,35 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
             },
           }}
         />
-      ) : isAutocompleteFilter ? (() => {
-          const [autocompleteValue, setAutocompleteValue] = useState<DropdownOption | null>(null);
-          const handleAutocompleteChange = (newValue: DropdownOption) => {
-            setAutocompleteValue(newValue);
-            handleChange(getValueAndLabel(newValue).value);
-          };
-          return <Autocomplete
-            freeSolo
-            getOptionLabel={(option) => getValueAndLabel(option).label}
-            onChange={(_e, newValue) => handleAutocompleteChange(newValue)}
-            options={
-              dropdownOptions?.map((option) => getValueAndLabel(option)) ?? []
-            }
-            {...autocompleteProps}
-            renderInput={(builtinTextFieldProps) => (
-              <TextField
-                {...builtinTextFieldProps}
-                {...commonTextFieldProps}
-                InputProps={{
-                  ...builtinTextFieldProps.InputProps,
-                  startAdornment:
+      ) : isAutocompleteFilter ? (
+        <Autocomplete
+          freeSolo
+          getOptionLabel={(option) => getValueAndLabel(option).label}
+          onChange={(_e, newValue) => handleAutocompleteChange(newValue)}
+          options={
+            dropdownOptions?.map((option) => getValueAndLabel(option)) ?? []
+          }
+          {...autocompleteProps}
+          renderInput={(builtinTextFieldProps) => (
+            <TextField
+              {...builtinTextFieldProps}
+              {...commonTextFieldProps}
+              InputProps={{
+                ...builtinTextFieldProps.InputProps,
+                startAdornment:
                   commonTextFieldProps?.InputProps?.startAdornment,
-                }}
-                inputProps={{
-                  ...builtinTextFieldProps.inputProps,
-                  ...commonTextFieldProps?.inputProps,
-                }}
-                onChange={handleTextFieldChange}
-                onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
-              />
-            )}
-            value={autocompleteValue}
-          />;
-        }
-      )() : (
+              }}
+              inputProps={{
+                ...builtinTextFieldProps.inputProps,
+                ...commonTextFieldProps?.inputProps,
+              }}
+              onChange={handleTextFieldChange}
+              onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
+            />
+          )}
+          value={autocompleteValue}
+        />
+      ) : (
         <TextField
           select={isSelectFilter || isMultiSelectFilter}
           {...commonTextFieldProps}

@@ -39,6 +39,7 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
       rowPinningDisplayMode,
       selectAllMode,
     },
+    refs: { lastSelectedRowId },
   } = table;
   const { density, isLoading } = getState();
 
@@ -76,6 +77,7 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
     if (isStickySelection) {
       table.setRowPinning({ bottom: [], top: [] });
     }
+    lastSelectedRowId.current = null;
   };
 
   const commonProps = {

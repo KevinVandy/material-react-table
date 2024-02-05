@@ -60,7 +60,7 @@ export const SelectionEnabledGrid = () => (
     data={data}
     enableRowNumbers
     enableRowSelection
-    layoutMode='grid'
+    layoutMode="grid"
   />
 );
 
@@ -70,7 +70,7 @@ export const SelectionEnabledGridNoGrow = () => (
     data={data}
     enableRowNumbers
     enableRowSelection
-    layoutMode='grid-no-grow'
+    layoutMode="grid-no-grow"
   />
 );
 

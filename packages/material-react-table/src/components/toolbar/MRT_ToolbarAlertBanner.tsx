@@ -2,6 +2,7 @@ import { Fragment, useMemo } from 'react';
 import Alert, { type AlertProps } from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import Collapse from '@mui/material/Collapse';
 import Stack from '@mui/material/Stack';
@@ -21,19 +22,21 @@ export const MRT_ToolbarAlertBanner = <TData extends MRT_RowData>({
   ...rest
 }: MRT_ToolbarAlertBannerProps<TData>) => {
   const {
+    getFilteredSelectedRowModel,
     getPrePaginationRowModel,
     getState,
     options: {
       enableRowSelection,
       enableSelectAll,
       localization,
+      manualPagination,
       muiToolbarAlertBannerChipProps,
       muiToolbarAlertBannerProps,
       positionToolbarAlertBanner,
       renderToolbarAlertBannerContent,
       rowCount,
     },
-    refs: { tablePaperRef },
+    refs: { lastSelectedRowId, tablePaperRef },
   } = table;
   const { density, grouping, rowSelection, showAlertBanner } = getState();
 
@@ -48,20 +51,33 @@ export const MRT_ToolbarAlertBanner = <TData extends MRT_RowData>({
     table,
   });
 
-  const selectedRowCount = useMemo(
-    () => Object.values(rowSelection).filter(Boolean).length,
-    [rowSelection],
-  );
+  const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
 
+  const selectedRowCount = useMemo(
+    () =>
+      manualPagination
+        ? Object.values(rowSelection).filter(Boolean).length
+        : getFilteredSelectedRowModel().rows.length,
+    [rowSelection, totalRowCount, manualPagination],
+  );
   const selectedAlert =
-    selectedRowCount > 0
-      ? localization.selectedCountOfRowCountRowsSelected
+    selectedRowCount > 0 ? (
+      <Stack alignItems="center" direction="row" gap="16px">
+        {localization.selectedCountOfRowCountRowsSelected
           ?.replace('{selectedCount}', selectedRowCount.toLocaleString())
-          ?.replace(
-            '{rowCount}',
-            (rowCount ?? getPrePaginationRowModel().rows.length).toString(),
-          )
-      : null;
+          ?.replace('{rowCount}', totalRowCount.toString())}
+        <Button
+          onClick={() => {
+            table.toggleAllRowsSelected(false);
+            lastSelectedRowId.current = null;
+          }}
+          size="small"
+          sx={{ p: '2px' }}
+        >
+          {localization.clearSelection}
+        </Button>
+      </Stack>
+    ) : null;
 
   const groupedAlert =
     grouping.length > 0 ? (

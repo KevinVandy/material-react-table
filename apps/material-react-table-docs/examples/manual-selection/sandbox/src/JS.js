@@ -71,7 +71,7 @@ const Example = () => {
       onClick: () =>
         setRowSelection((prev) => ({
           ...prev,
-          [row.id]: !prev[row.id],
+          [row.id]: !prev[row.id], //this is a simple toggle implementation
         })),
       selected: rowSelection[row.id],
       sx: {

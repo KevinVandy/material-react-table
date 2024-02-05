@@ -76,6 +76,10 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
     getRightLeafColumns(),
   ]) as MRT_Column<TData>[];
 
+  const isNestedColumns = allColumns.some(
+    (col) => col.columnDef.columnDefType === 'group',
+  );
+
   const [hoveredColumn, setHoveredColumn] = useState<MRT_Column<TData> | null>(
     null,
   );
@@ -147,6 +151,7 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
           allColumns={allColumns}
           column={column}
           hoveredColumn={hoveredColumn}
+          isNestedColumns={isNestedColumns}
           key={`${index}-${column.id}`}
           setHoveredColumn={setHoveredColumn}
           table={table}

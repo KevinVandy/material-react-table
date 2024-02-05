@@ -216,7 +216,7 @@ export const FilterFnAndFilterVariantsFaceted = () => (
       {
         accessorKey: 'firstName',
         filterSelectOptions: data.map((row) => ({
-          label: row.firstName.toUpperCase(),
+          label: row.firstName.toUpperCase().split('').reverse().join(''),
           value: row.firstName,
         })), //hard coded
         filterVariant: 'autocomplete',

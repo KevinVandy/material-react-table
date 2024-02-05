@@ -114,7 +114,25 @@ return <MaterialReactTable table={table} />;
 
 <LoadingExample />
 
-#### Only Show Progress Bars or Skeletons
+#### Custom Loading Spinner component
+
+> New in v2.11.0
+
+If you need to use a custom loading spinner component other than the built-in MUI one, you can now pass in custom component in the `muiCircularProgressProps` `Component` prop.
+
+```jsx
+import { MyCustomSpinner } from './MyCustomSpinner';
+
+const table = useMaterialReactTable({
+  columns,
+  data,
+  muiCircularProgressProps: {
+    Component: <MyCustomSpinner />,
+  },
+});
+```
+
+### Only Show Progress Bars or Skeletons
 
 If you do not want both progress bars and cell skeletons to show, you can use the `showProgressBars` and `showSkeletons` states, instead.
 

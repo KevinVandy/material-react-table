@@ -13,6 +13,7 @@ const allowedTypes = ['string', 'number'];
 export interface MRT_TableBodyCellValueProps<TData extends MRT_RowData> {
   cell: MRT_Cell<TData>;
   rowRef?: RefObject<HTMLTableRowElement>;
+  staticColumnIndex?: number;
   staticRowIndex?: number;
   table: MRT_TableInstance<TData>;
 }
@@ -20,6 +21,7 @@ export interface MRT_TableBodyCellValueProps<TData extends MRT_RowData> {
 export const MRT_TableBodyCellValue = <TData extends MRT_RowData>({
   cell,
   rowRef,
+  staticColumnIndex,
   staticRowIndex,
   table,
 }: MRT_TableBodyCellValueProps<TData>) => {
@@ -113,6 +115,7 @@ export const MRT_TableBodyCellValue = <TData extends MRT_RowData>({
       renderedCellValue,
       row,
       rowRef,
+      staticColumnIndex,
       staticRowIndex,
       table,
     });

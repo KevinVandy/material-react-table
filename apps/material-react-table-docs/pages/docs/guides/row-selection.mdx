@@ -58,6 +58,18 @@ const table = useMaterialReactTable({
 return <MaterialReactTable table={table} />;
 ```
 
+#### Enable Row Selection Conditionally Per Row
+
+You can also enable row selection conditionally per row with the same `enableRowSelection` table option, but with a callback function instead of a boolean.
+
+```jsx
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableRowSelection: (row) => row.original.age > 18, //disable row selection for rows with age <= 18
+});
+```
+
 ### Batch Row Selection
 
 > New in v2.11.0
@@ -70,18 +82,6 @@ const table = useMantineReactTable({
   data,
   enableRowSelection: true,
   enableBatchRowSelection: false, //disable batch row selection with shift key
-});
-```
-
-#### Enable Row Selection Conditionally Per Row
-
-You can also enable row selection conditionally per row with the same `enableRowSelection` table option, but with a callback function instead of a boolean.
-
-```jsx
-const table = useMaterialReactTable({
-  columns,
-  data,
-  enableRowSelection: (row) => row.original.age > 18, //disable row selection for rows with age <= 18
 });
 ```
 
@@ -174,8 +174,9 @@ const table = useMaterialReactTable({
   data,
   enableRowSelection: true,
   //clicking anywhere on the row will select it
-  muiTableBodyRowProps: ({ row }) => ({
-    onClick: row.getToggleSelectedHandler(),
+  muiTableBodyRowProps: ({ row, staticRowIndex, table }) => ({
+    onClick: (event) =>
+      getMRT_RowSelectionHandler()({ event, row, staticRowIndex, table }), //import this helper function from material-react-table
     sx: { cursor: 'pointer' },
   }),
 });

@@ -12,6 +12,15 @@ import Head from 'next/head';
 
 ### Version 2
 
+#### Version 2.11.0 - 2024-02-05
+
+- Added new `enableBatchRowSelection` table option that is enabled by default that allows users to select multiple rows at once by holding down the shift key and clicking on a row
+- Added small "Clear selection" button to the toolbar alert banner selected message by default when rows are selected
+- Now exporting all `MRT_*Props` component prop types
+- Added new override option for passing in custom spinner while loading data with the `muiCircularProgressProps.Component` prop
+- Fixed Autocomplete filter showing filter values instead of display labels once value is selected
+- Removed default Header html title attribute on all header cells
+
 #### Version 2.10.0 - 2024-01-31
 
 - Added automatic column order state recalculation for dynamic columns and dynamic MRT display columns being enabled/disabled
@@ -20,7 +29,7 @@ import Head from 'next/head';
 - Added new Cell Actions features which will show a MUI context menu when a cell is right-clicked
   - New `enableCellActions` table option
   - New `renderCellActionMenuItems` table and column options
-  - New `MRT_ActionMenuItem` component to make styling all MRT menu items consistently (icons, text, spacing) easier to be consistent.
+  - New `MRT_ActionMenuItem` component to make styling all MRT menu items consistently (icons, text, spacing) easier to be consistent
 - Fixed bug where the show all columns action menu item ignored the `enableHiding` column option
 
 #### Version 2.9.2 - 2024-01-25

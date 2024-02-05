@@ -194,7 +194,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
                 target="_blank"
               >
                 <IconButton aria-label="Github" size="small">
-                  <GitHubIcon fontSize={isMobile ? 'medium' : 'large'} />
+                  <GitHubIcon />
                 </IconButton>
               </a>
             </Tooltip>
@@ -207,7 +207,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
                 <IconButton aria-label="Discord" size="small">
                   <img
                     alt="Discord"
-                    height={isMobile ? 20 : 25}
+                    height={20}
                     style={{
                       padding: '-3px',
                       borderRadius: '50%',
@@ -228,11 +228,7 @@ export const TopBar = ({ navOpen, setNavOpen }: Props) => {
                 }}
                 size="small"
               >
-                {isLightTheme ? (
-                  <LightModeIcon fontSize={isMobile ? 'medium' : 'large'} />
-                ) : (
-                  <DarkModeIcon fontSize={isMobile ? 'medium' : 'large'} />
-                )}
+                {isLightTheme ? <LightModeIcon /> : <DarkModeIcon />}
               </IconButton>
             </Tooltip>
           </Box>

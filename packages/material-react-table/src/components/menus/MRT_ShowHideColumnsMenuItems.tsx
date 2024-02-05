@@ -27,6 +27,7 @@ export interface MRT_ShowHideColumnsMenuItemsProps<TData extends MRT_RowData>
   allColumns: MRT_Column<TData>[];
   column: MRT_Column<TData>;
   hoveredColumn: MRT_Column<TData> | null;
+  isNestedColumns: boolean;
   setHoveredColumn: Dispatch<SetStateAction<MRT_Column<TData> | null>>;
   table: MRT_TableInstance<TData>;
 }
@@ -35,6 +36,7 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
   allColumns,
   column,
   hoveredColumn,
+  isNestedColumns,
   setHoveredColumn,
   table,
   ...rest
@@ -131,9 +133,7 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
         >
           {columnDefType !== 'group' &&
             enableColumnOrdering &&
-            !allColumns.some(
-              (col) => col.columnDef.columnDefType === 'group',
-            ) &&
+            !isNestedColumns &&
             (columnDef.enableColumnOrdering !== false ? (
               <MRT_GrabHandleButton
                 onDragEnd={handleDragEnd}
@@ -184,6 +184,7 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
           allColumns={allColumns}
           column={c}
           hoveredColumn={hoveredColumn}
+          isNestedColumns={isNestedColumns}
           key={`${i}-${c.id}`}
           setHoveredColumn={setHoveredColumn}
           table={table}

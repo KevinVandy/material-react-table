@@ -299,6 +299,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
               renderedCellValue: cell.renderValue() as any,
               row,
               rowRef,
+              staticColumnIndex,
               staticRowIndex,
               table,
             })

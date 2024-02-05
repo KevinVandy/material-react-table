@@ -100,12 +100,16 @@ const Example = () => {
             ))}
           </TableHead>
           <TableBody>
-            {table.getRowModel().rows.map((row) => (
+            {table.getRowModel().rows.map((row, rowIndex) => (
               <TableRow key={row.id} selected={row.getIsSelected()}>
-                {row.getVisibleCells().map((cell) => (
+                {row.getVisibleCells().map((cell, _columnIndex) => (
                   <TableCell align="center" variant="body" key={cell.id}>
                     {/* Use MRT's cell renderer that provides better logic than flexRender */}
-                    <MRT_TableBodyCellValue cell={cell} table={table} />
+                    <MRT_TableBodyCellValue
+                      cell={cell}
+                      table={table}
+                      staticRowIndex={rowIndex} //just for batch row selection to work
+                    />
                   </TableCell>
                 ))}
               </TableRow>
