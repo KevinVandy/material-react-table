@@ -129,8 +129,8 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
       ) : (
         <Checkbox
           indeterminate={
-            selectAll
-              ? table.getIsSomeRowsSelected() && !allRowsSelected
+            !isChecked && selectAll
+              ? table.getIsSomeRowsSelected()
               : row?.getIsSomeSelected() && row.getCanSelectSubRows()
           }
           {...commonProps}

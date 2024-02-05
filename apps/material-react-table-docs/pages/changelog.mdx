@@ -12,6 +12,11 @@ import Head from 'next/head';
 
 ### Version 2
 
+#### Version 2.11.1 - 2024-02-05
+
+- Fixed bug where new batch row selection feature did not account for `manualPagination`
+- Fixed bug where parent selected checkbox should not be indeterminate when the row itself is selected
+
 #### Version 2.11.0 - 2024-02-05
 
 - Added new `enableBatchRowSelection` table option that is enabled by default that allows users to select multiple rows at once by holding down the shift key and clicking on a row
@@ -235,8 +240,8 @@ See the old [V1 Changelog](https://v1.material-react-table.com/changelog)
 
 ## Roadmap
 
-### Version 2 Roadmap (2023)
+### Version 2 Roadmap (2024)
 
-Material React Table V2 was a big release months in the making that mostly focussed on the new `useMaterialReactTable` hook and paradigms. New features will be added and many bug fixes around virtualization compatibility with advanced features will be prioritized first.
+Most large 
 
 A lighter weight `useMaterialReactTableLight` hook is also being considered in the near future that will be a bit more bare-bones and tree-shakable. All features will be opt-in and will not be enabled by default.

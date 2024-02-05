@@ -152,6 +152,7 @@ export const getMRT_RowSelectionHandler =
       options: {
         enableBatchRowSelection,
         enableRowPinning,
+        manualPagination,
         rowPinningDisplayMode,
       },
       refs: { lastSelectedRowId: lastSelectedRowId },
@@ -160,12 +161,14 @@ export const getMRT_RowSelectionHandler =
       pagination: { pageIndex, pageSize },
     } = getState();
 
-    const isChecked = getIsRowSelected({ row, table });
+    const paginationOffset = manualPagination ? 0 : pageSize * pageIndex;
+
+    const isCurrentRowChecked = getIsRowSelected({ row, table });
 
     const isStickySelection =
       enableRowPinning && rowPinningDisplayMode?.includes('select');
 
-    // toggle selected of this row
+    // toggle selection of this row
     row.getToggleSelectedHandler()(event);
 
     // if shift key is pressed, select all rows between last selected and this one
@@ -175,24 +178,34 @@ export const getMRT_RowSelectionHandler =
       lastSelectedRowId.current !== null
     ) {
       const rows = getMRT_Rows(table, undefined, true);
+
       const lastIndex = rows.findIndex(
         (r) => r.id === lastSelectedRowId.current,
       );
+
       if (lastIndex !== -1) {
-        const currentIndex = staticRowIndex + pageSize * pageIndex;
+        const isLastIndexChecked = getIsRowSelected({
+          row: rows?.[lastIndex],
+          table,
+        });
+
+        const currentIndex = staticRowIndex + paginationOffset;
         const [start, end] =
           lastIndex < currentIndex
             ? [lastIndex, currentIndex]
             : [currentIndex, lastIndex];
-        if (
-          rows[currentIndex].getIsSelected() !== rows[lastIndex].getIsSelected()
-        ) {
+
+        // toggle selection of all rows between last selected and this one
+        // but only if the last selected row is not the same as the current one
+        if (isCurrentRowChecked !== isLastIndexChecked) {
           for (let i = start; i <= end; i++) {
-            rows[i].toggleSelected(!isChecked);
+            rows[i].toggleSelected(!isCurrentRowChecked);
           }
         }
       }
     }
+
+    // record the last selected row id
     lastSelectedRowId.current = row.id;
 
     // if all sub rows were selected, unselect them
@@ -202,7 +215,7 @@ export const getMRT_RowSelectionHandler =
 
     if (isStickySelection) {
       row.pin(
-        !row.getIsPinned() && isChecked
+        !row.getIsPinned() && isCurrentRowChecked
           ? rowPinningDisplayMode?.includes('bottom')
             ? 'bottom'
             : 'top'
