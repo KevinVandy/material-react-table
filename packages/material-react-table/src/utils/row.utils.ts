@@ -184,8 +184,12 @@ export const getMRT_RowSelectionHandler =
           lastIndex < currentIndex
             ? [lastIndex, currentIndex]
             : [currentIndex, lastIndex];
-        for (let i = start; i <= end; i++) {
-          rows[i].toggleSelected(!isChecked);
+        if (
+          rows[currentIndex].getIsSelected() !== rows[lastIndex].getIsSelected()
+        ) {
+          for (let i = start; i <= end; i++) {
+            rows[i].toggleSelected(!isChecked);
+          }
         }
       }
     }
