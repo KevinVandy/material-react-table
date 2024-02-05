@@ -24,7 +24,8 @@ function App({ Component, pageProps }: AppProps) {
     pathname.includes('/docs/guides/') ||
     pathname.includes('/migrating') ||
     pathname === '/about' ||
-    pathname === '/changelog';
+    pathname === '/changelog' ||
+    pathname === '/roadmap';
 
   const isMobile = useMediaQuery('(max-width: 900px)');
   const isDesktop = useMediaQuery('(min-width: 1500px)');
