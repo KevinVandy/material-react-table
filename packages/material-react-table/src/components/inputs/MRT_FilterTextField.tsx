@@ -30,6 +30,7 @@ import {
   type TimePickerProps,
 } from '@mui/x-date-pickers/TimePicker';
 import {
+  type DropdownOption,
   type MRT_Header,
   type MRT_RowData,
   type MRT_TableInstance,
@@ -434,37 +435,41 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
             },
           }}
         />
-      ) : isAutocompleteFilter ? (
-        <Autocomplete
-          freeSolo
-          getOptionLabel={(option) => getValueAndLabel(option).label}
-          onChange={(_e, newValue) =>
-            handleChange(getValueAndLabel(newValue).value)
-          }
-          options={
-            dropdownOptions?.map((option) => getValueAndLabel(option)) ?? []
-          }
-          {...autocompleteProps}
-          renderInput={(builtinTextFieldProps) => (
-            <TextField
-              {...builtinTextFieldProps}
-              {...commonTextFieldProps}
-              InputProps={{
-                ...builtinTextFieldProps.InputProps,
-                startAdornment:
+      ) : isAutocompleteFilter ? (() => {
+          const [autocompleteValue, setAutocompleteValue] = useState<DropdownOption | null>(null);
+          const handleAutocompleteChange = (newValue: DropdownOption) => {
+            setAutocompleteValue(newValue);
+            handleChange(getValueAndLabel(newValue).value);
+          };
+          return <Autocomplete
+            freeSolo
+            getOptionLabel={(option) => getValueAndLabel(option).label}
+            onChange={(_e, newValue) => handleAutocompleteChange(newValue)}
+            options={
+              dropdownOptions?.map((option) => getValueAndLabel(option)) ?? []
+            }
+            {...autocompleteProps}
+            renderInput={(builtinTextFieldProps) => (
+              <TextField
+                {...builtinTextFieldProps}
+                {...commonTextFieldProps}
+                InputProps={{
+                  ...builtinTextFieldProps.InputProps,
+                  startAdornment:
                   commonTextFieldProps?.InputProps?.startAdornment,
-              }}
-              inputProps={{
-                ...builtinTextFieldProps.inputProps,
-                ...commonTextFieldProps?.inputProps,
-              }}
-              onChange={handleTextFieldChange}
-              onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
-            />
-          )}
-          value={filterValue}
-        />
-      ) : (
+                }}
+                inputProps={{
+                  ...builtinTextFieldProps.inputProps,
+                  ...commonTextFieldProps?.inputProps,
+                }}
+                onChange={handleTextFieldChange}
+                onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
+              />
+            )}
+            value={autocompleteValue}
+          />;
+        }
+      )() : (
         <TextField
           select={isSelectFilter || isMultiSelectFilter}
           {...commonTextFieldProps}
