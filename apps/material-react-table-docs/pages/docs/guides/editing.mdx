@@ -124,7 +124,7 @@ const table = useMaterialReactTable({
   data,
   enableEditing: true,
   editDisplayMode: 'modal', //default
-  onCreatingRowSave: ({ table, values }) => {
+  onEditingRowSave: ({ table, values }) => {
     //validate data
     //save data to api
     table.setEditingRow(null); //exit editing mode
