@@ -87,7 +87,7 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
     },
     onChange: (event) => {
       event.stopPropagation();
-      row ? onSelectionChange!(event) : onSelectAllChange(event);
+      selectAll ? onSelectAllChange(event) : onSelectionChange!(event);
     },
     size: (density === 'compact' ? 'small' : 'medium') as 'medium' | 'small',
     ...checkboxProps,

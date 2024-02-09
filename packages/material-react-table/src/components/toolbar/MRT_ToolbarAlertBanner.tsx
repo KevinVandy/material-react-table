@@ -68,7 +68,9 @@ export const MRT_ToolbarAlertBanner = <TData extends MRT_RowData>({
           ?.replace('{selectedCount}', selectedRowCount.toLocaleString())
           ?.replace('{rowCount}', totalRowCount.toString())}
         <Button
-          onClick={(event) => getMRT_SelectAllHandler({ table })(event, false)}
+          onClick={(event) =>
+            getMRT_SelectAllHandler({ table })(event, false, true)
+          }
           size="small"
           sx={{ p: '2px' }}
         >

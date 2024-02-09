@@ -243,13 +243,14 @@ export const getMRT_SelectAllHandler =
   (
     event: ChangeEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>,
     value?: boolean,
+    forceAll?: boolean,
   ) => {
     const {
       options: { enableRowPinning, rowPinningDisplayMode, selectAllMode },
       refs: { lastSelectedRowId },
     } = table;
 
-    selectAllMode === 'all'
+    selectAllMode === 'all' || forceAll
       ? table.toggleAllRowsSelected(value ?? (event as any).target.checked)
       : table.toggleAllPageRowsSelected(value ?? (event as any).target.checked);
     if (enableRowPinning && rowPinningDisplayMode?.includes('select')) {
