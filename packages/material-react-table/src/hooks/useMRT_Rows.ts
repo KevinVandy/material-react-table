@@ -8,7 +8,6 @@ import { getMRT_Rows } from '../utils/row.utils';
 
 export const useMRT_Rows = <TData extends MRT_RowData>(
   table: MRT_TableInstance<TData>,
-  pinnedRowIds: string[] = [],
 ): MRT_Row<TData>[] => {
   const {
     getRowModel,
@@ -25,7 +24,7 @@ export const useMRT_Rows = <TData extends MRT_RowData>(
   } = getState();
 
   const rows = useMemo(
-    () => getMRT_Rows(table, pinnedRowIds),
+    () => getMRT_Rows(table),
     [
       creatingRow,
       data,

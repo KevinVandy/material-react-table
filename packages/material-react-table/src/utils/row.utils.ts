@@ -9,11 +9,9 @@ import { parseFromValuesOrFunc } from './utils';
 
 export const getMRT_Rows = <TData extends MRT_RowData>(
   table: MRT_TableInstance<TData>,
-  pinnedRowIds: string[] = [],
   all?: boolean,
 ): MRT_Row<TData>[] => {
   const {
-    getBottomRows,
     getCenterRows,
     getPrePaginationRowModel,
     getRowModel,
@@ -41,6 +39,7 @@ export const getMRT_Rows = <TData extends MRT_RowData>(
           : getRowModel().rows
         : getCenterRows();
   } else {
+    // fuzzy ranking adjustments
     rows = getPrePaginationRowModel().rows.sort((a, b) =>
       rankGlobalFuzzy(a, b),
     );
@@ -48,14 +47,23 @@ export const getMRT_Rows = <TData extends MRT_RowData>(
       const start = pagination.pageIndex * pagination.pageSize;
       rows = rows.slice(start, start + pagination.pageSize);
     }
+    if (enableRowPinning && !rowPinningDisplayMode?.includes('sticky')) {
+      // "re-center-ize" the rows (no top or bottom pinned rows unless sticky)
+      rows = rows.filter((row) => !row.getIsPinned());
+    }
   }
+  // row pinning adjustments
   if (enableRowPinning && rowPinningDisplayMode?.includes('sticky')) {
+    const centerPinnedRowIds = rows
+      .filter((row) => row.getIsPinned())
+      .map((r) => r.id);
+
     rows = [
-      ...getTopRows().filter((row) => !pinnedRowIds.includes(row.id)),
+      ...getTopRows().filter((row) => !centerPinnedRowIds.includes(row.id)),
       ...rows,
-      ...getBottomRows().filter((row) => !pinnedRowIds.includes(row.id)),
     ];
   }
+  // blank inserted creating row adjustments
   if (
     positionCreatingRow !== undefined &&
     creatingRow &&
@@ -135,18 +143,19 @@ export const getIsRowSelected = <TData extends MRT_RowData>({
 };
 
 export const getMRT_RowSelectionHandler =
-  () =>
   <TData extends MRT_RowData>({
-    event,
     row,
     staticRowIndex = 0,
     table,
   }: {
-    event: ChangeEvent<HTMLInputElement> | MouseEvent<HTMLTableRowElement>;
     row: MRT_Row<TData>;
     staticRowIndex?: number;
     table: MRT_TableInstance<TData>;
-  }) => {
+  }) =>
+  (
+    event: ChangeEvent<HTMLInputElement> | MouseEvent<HTMLTableRowElement>,
+    value?: boolean,
+  ) => {
     const {
       getState,
       options: {
@@ -164,13 +173,12 @@ export const getMRT_RowSelectionHandler =
 
     const paginationOffset = manualPagination ? 0 : pageSize * pageIndex;
 
-    const isCurrentRowChecked = getIsRowSelected({ row, table });
-
-    const isStickySelection =
-      enableRowPinning && rowPinningDisplayMode?.includes('select');
+    const wasCurrentRowChecked = getIsRowSelected({ row, table });
 
     // toggle selection of this row
-    row.getToggleSelectedHandler()(event);
+    row.toggleSelected(value ?? !wasCurrentRowChecked);
+
+    const changedRowIds = new Set<string>([row.id]);
 
     // if shift key is pressed, select all rows between last selected and this one
     if (
@@ -179,7 +187,7 @@ export const getMRT_RowSelectionHandler =
       (event as any).nativeEvent.shiftKey &&
       lastSelectedRowId.current !== null
     ) {
-      const rows = getMRT_Rows(table, undefined, true);
+      const rows = getMRT_Rows(table, true);
 
       const lastIndex = rows.findIndex(
         (r) => r.id === lastSelectedRowId.current,
@@ -199,9 +207,10 @@ export const getMRT_RowSelectionHandler =
 
         // toggle selection of all rows between last selected and this one
         // but only if the last selected row is not the same as the current one
-        if (isCurrentRowChecked !== isLastIndexChecked) {
+        if (wasCurrentRowChecked !== isLastIndexChecked) {
           for (let i = start; i <= end; i++) {
-            rows[i].toggleSelected(!isCurrentRowChecked);
+            rows[i].toggleSelected(!wasCurrentRowChecked);
+            changedRowIds.add(rows[i].id);
           }
         }
       }
@@ -215,13 +224,36 @@ export const getMRT_RowSelectionHandler =
       row.subRows?.forEach((r) => r.toggleSelected(false));
     }
 
-    if (isStickySelection) {
-      row.pin(
-        !row.getIsPinned() && isCurrentRowChecked
-          ? rowPinningDisplayMode?.includes('bottom')
-            ? 'bottom'
-            : 'top'
-          : false,
-      );
+    if (enableRowPinning && rowPinningDisplayMode?.includes('select')) {
+      changedRowIds.forEach((rowId) => {
+        const rowToTogglePin = table.getRow(rowId);
+        rowToTogglePin.pin(
+          !wasCurrentRowChecked //was not previously pinned or selected
+            ? rowPinningDisplayMode?.includes('bottom')
+              ? 'bottom'
+              : 'top'
+            : false,
+        );
+      });
     }
+  };
+
+export const getMRT_SelectAllHandler =
+  <TData extends MRT_RowData>({ table }: { table: MRT_TableInstance<TData> }) =>
+  (
+    event: ChangeEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>,
+    value?: boolean,
+  ) => {
+    const {
+      options: { enableRowPinning, rowPinningDisplayMode, selectAllMode },
+      refs: { lastSelectedRowId },
+    } = table;
+
+    selectAllMode === 'all'
+      ? table.toggleAllRowsSelected(value ?? (event as any).target.checked)
+      : table.toggleAllPageRowsSelected(value ?? (event as any).target.checked);
+    if (enableRowPinning && rowPinningDisplayMode?.includes('select')) {
+      table.setRowPinning({ bottom: [], top: [] });
+    }
+    lastSelectedRowId.current = null;
   };

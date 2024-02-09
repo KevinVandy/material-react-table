@@ -176,7 +176,7 @@ const table = useMaterialReactTable({
   //clicking anywhere on the row will select it
   muiTableBodyRowProps: ({ row, staticRowIndex, table }) => ({
     onClick: (event) =>
-      getMRT_RowSelectionHandler()({ event, row, staticRowIndex, table }), //import this helper function from material-react-table
+      getMRT_RowSelectionHandler({ row, staticRowIndex, table })(event), //import this helper function from material-react-table
     sx: { cursor: 'pointer' },
   }),
 });

@@ -295,7 +295,6 @@ export const GroupingColumnsSetState = () => {
       columns={columns}
       data={data}
       enableGrouping
-      state={{ columnOrder: columns.map((c) => c.accessorKey as string) }}
     />
   );
 };

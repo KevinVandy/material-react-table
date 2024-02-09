@@ -64,7 +64,7 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
       .map((r) => r.id);
   }, [rowPinning, getRowModel().rows]);
 
-  const rows = useMRT_Rows(table, pinnedRowIds);
+  const rows = useMRT_Rows(table);
 
   const rowVirtualizer = useMRT_RowVirtualizer(table, rows);
 

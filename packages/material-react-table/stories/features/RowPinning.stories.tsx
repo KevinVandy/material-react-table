@@ -137,6 +137,7 @@ export const RowPinningTopMode = () => (
     data={data}
     enablePagination={false}
     enableRowPinning
+    keepPinnedRows={false}
     muiTableContainerProps={{
       sx: {
         maxHeight: '600px',

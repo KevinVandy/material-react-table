@@ -117,7 +117,7 @@ export const SelectionEnabledWithRowClick = () => (
     enableRowSelection
     muiTableBodyRowProps={({ row, staticRowIndex, table }) => ({
       onClick: (event) =>
-        getMRT_RowSelectionHandler()({ event, row, staticRowIndex, table }),
+        getMRT_RowSelectionHandler({ row, staticRowIndex, table })(event),
       style: {
         cursor: 'pointer',
         userSelect: 'none',

@@ -1,4 +1,4 @@
-import { type ChangeEvent, type MouseEvent } from 'react';
+import { type MouseEvent } from 'react';
 import Checkbox, { type CheckboxProps } from '@mui/material/Checkbox';
 import Radio, { type RadioProps } from '@mui/material/Radio';
 import Tooltip from '@mui/material/Tooltip';
@@ -11,6 +11,7 @@ import {
 import {
   getIsRowSelected,
   getMRT_RowSelectionHandler,
+  getMRT_SelectAllHandler,
 } from '../../utils/row.utils';
 import { getCommonTooltipProps } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
@@ -32,21 +33,15 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
     getState,
     options: {
       enableMultiRowSelection,
-      enableRowPinning,
       localization,
       muiSelectAllCheckboxProps,
       muiSelectCheckboxProps,
-      rowPinningDisplayMode,
       selectAllMode,
     },
-    refs: { lastSelectedRowId },
   } = table;
   const { density, isLoading } = getState();
 
   const selectAll = !row;
-
-  const isStickySelection =
-    enableRowPinning && rowPinningDisplayMode?.includes('select');
 
   const allRowsSelected = selectAll
     ? selectAllMode === 'page'
@@ -68,17 +63,15 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
     ...rest,
   };
 
-  const onSelectionChange = getMRT_RowSelectionHandler();
+  const onSelectionChange = row
+    ? getMRT_RowSelectionHandler({
+        row,
+        staticRowIndex,
+        table,
+      })
+    : undefined;
 
-  const onSelectAllChange = (event: ChangeEvent<HTMLInputElement>) => {
-    selectAllMode === 'all'
-      ? table.getToggleAllRowsSelectedHandler()(event)
-      : table.getToggleAllPageRowsSelectedHandler()(event);
-    if (isStickySelection) {
-      table.setRowPinning({ bottom: [], top: [] });
-    }
-    lastSelectedRowId.current = null;
-  };
+  const onSelectAllChange = getMRT_SelectAllHandler({ table });
 
   const commonProps = {
     'aria-label': selectAll
@@ -94,9 +87,7 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
     },
     onChange: (event) => {
       event.stopPropagation();
-      row
-        ? onSelectionChange({ event, row, staticRowIndex, table })
-        : onSelectAllChange(event);
+      row ? onSelectionChange!(event) : onSelectAllChange(event);
     },
     size: (density === 'compact' ? 'small' : 'medium') as 'medium' | 'small',
     ...checkboxProps,
