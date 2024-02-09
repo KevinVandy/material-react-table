@@ -11,20 +11,20 @@
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.15.7",
-    "@mui/material": "^5.15.7",
+    "@mui/icons-material": "^5.15.9",
+    "@mui/material": "^5.15.9",
     "export-to-csv": "^1.2.2",
-    "material-react-table": "^2.11.1",
+    "material-react-table": "^2.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.1"
   },
   "devDependencies": {
-    "@types/react": "^18.2.53",
-    "@types/react-dom": "^18.2.18",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
     "@vitejs/plugin-react": "^4.2.1",
     "typescript": "^5.3.3",
-    "vite": "^5.0.12"
+    "vite": "^5.1.0"
   }
 }
