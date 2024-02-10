@@ -1,13 +1,11 @@
 import { type MouseEvent } from 'react';
 import Menu, { type MenuProps } from '@mui/material/Menu';
-import { useTheme } from '@mui/material/styles';
 import { MRT_ActionMenuItem } from './MRT_ActionMenuItem';
 import {
   type MRT_Row,
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
-import { getMRTTheme } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
 export interface MRT_RowActionMenuProps<TData extends MRT_RowData>
@@ -36,13 +34,11 @@ export const MRT_RowActionMenu = <TData extends MRT_RowData>({
       enableEditing,
       icons: { EditIcon },
       localization,
+      mrtTheme: { menuBackgroundColor },
       renderRowActionMenuItems,
     },
   } = table;
   const { density } = getState();
-
-  const theme = useTheme();
-  const { menuBackgroundColor } = getMRTTheme(table, theme);
 
   return (
     <Menu

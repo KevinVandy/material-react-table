@@ -290,13 +290,7 @@ export const GroupingColumnsSetState = () => {
     ]);
   }, []);
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableGrouping
-    />
-  );
+  return <MaterialReactTable columns={columns} data={data} enableGrouping />;
 };
 
 export const ColumnGroupingDropZoneAlwaysVisible = () => {

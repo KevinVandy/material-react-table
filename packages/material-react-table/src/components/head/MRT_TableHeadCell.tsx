@@ -15,7 +15,7 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
-import { getCommonMRTCellStyles, getMRTTheme } from '../../utils/style.utils';
+import { getCommonMRTCellStyles } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
 export interface MRT_TableHeadCellProps<TData extends MRT_RowData>
@@ -47,6 +47,7 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
       enableGrouping,
       enableMultiSort,
       layoutMode,
+      mrtTheme: { draggingBorderColor },
       muiTableHeadCellProps,
     },
     refs: { tableHeadCellRefs },
@@ -72,8 +73,6 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
     }),
     ...rest,
   };
-
-  const { draggingBorderColor } = getMRTTheme(table, theme);
 
   const isColumnPinned =
     enableColumnPinning &&

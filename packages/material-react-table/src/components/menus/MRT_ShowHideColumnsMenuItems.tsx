@@ -17,7 +17,7 @@ import {
   type MRT_TableInstance,
 } from '../../types';
 import { reorderColumn } from '../../utils/column.utils';
-import { getCommonTooltipProps, getMRTTheme } from '../../utils/style.utils';
+import { getCommonTooltipProps } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_ColumnPinningButtons } from '../buttons/MRT_ColumnPinningButtons';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
@@ -48,6 +48,7 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
       enableColumnPinning,
       enableHiding,
       localization,
+      mrtTheme: { draggingBorderColor },
     },
     setColumnOrder,
   } = table;
@@ -116,7 +117,7 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
           outline: isDragging
             ? `2px dashed ${theme.palette.grey[500]}`
             : hoveredColumn?.id === column.id
-              ? `2px dashed ${getMRTTheme(table, theme).draggingBorderColor}`
+              ? `2px dashed ${draggingBorderColor}`
               : 'none',
           outlineOffset: '-2px',
           pl: `${(column.depth + 0.5) * 2}rem`,

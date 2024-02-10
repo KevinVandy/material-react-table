@@ -8,6 +8,8 @@ import {
   type MRT_Header,
   type MRT_RowData,
   type MRT_TableInstance,
+  type MRT_TableOptions,
+  type MRT_Theme,
 } from '../types';
 import {
   getIsFirstRightPinnedColumn,
@@ -19,26 +21,26 @@ import { parseFromValuesOrFunc } from './utils';
 export const parseCSSVarId = (id: string) => id.replace(/[^a-zA-Z0-9]/g, '_');
 
 export const getMRTTheme = <TData extends MRT_RowData>(
-  table: MRT_TableInstance<TData>,
-  theme: Theme,
-) => {
-  const themeOverrides = parseFromValuesOrFunc(table.options.mrtTheme, theme);
+  mrtTheme: MRT_TableOptions<TData>['mrtTheme'],
+  muiTheme: Theme,
+): MRT_Theme => {
+  const mrtThemeOverrides = parseFromValuesOrFunc(mrtTheme, muiTheme);
   const baseBackgroundColor =
-    themeOverrides?.baseBackgroundColor ??
-    (theme.palette.mode === 'dark'
-      ? lighten(theme.palette.background.default, 0.05)
-      : theme.palette.background.default);
+    mrtThemeOverrides?.baseBackgroundColor ??
+    (muiTheme.palette.mode === 'dark'
+      ? lighten(muiTheme.palette.background.default, 0.05)
+      : muiTheme.palette.background.default);
   return {
     baseBackgroundColor,
-    draggingBorderColor: theme.palette.primary.main,
+    draggingBorderColor: muiTheme.palette.primary.main,
     matchHighlightColor:
-      theme.palette.mode === 'dark'
-        ? darken(theme.palette.warning.dark, 0.25)
-        : lighten(theme.palette.warning.light, 0.5),
+      muiTheme.palette.mode === 'dark'
+        ? darken(muiTheme.palette.warning.dark, 0.25)
+        : lighten(muiTheme.palette.warning.light, 0.5),
     menuBackgroundColor: lighten(baseBackgroundColor, 0.07),
-    pinnedRowBackgroundColor: alpha(theme.palette.primary.main, 0.1),
-    selectedRowBackgroundColor: alpha(theme.palette.primary.main, 0.2),
-    ...themeOverrides,
+    pinnedRowBackgroundColor: alpha(muiTheme.palette.primary.main, 0.1),
+    selectedRowBackgroundColor: alpha(muiTheme.palette.primary.main, 0.2),
+    ...mrtThemeOverrides,
   };
 };
 
@@ -61,7 +63,7 @@ export const getCommonPinnedCellStyles = <TData extends MRT_RowData>({
   table: MRT_TableInstance<TData>;
   theme: Theme;
 }) => {
-  const { baseBackgroundColor } = getMRTTheme(table, theme);
+  const { baseBackgroundColor } = table.options.mrtTheme;
   return {
     '&[data-pinned="true"]': {
       '&:before': {
@@ -179,13 +181,12 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
 
 export const getCommonToolbarStyles = <TData extends MRT_RowData>({
   table,
-  theme,
 }: {
   table: MRT_TableInstance<TData>;
   theme: Theme;
 }) => ({
   alignItems: 'flex-start',
-  backgroundColor: getMRTTheme(table, theme).baseBackgroundColor,
+  backgroundColor: table.options.mrtTheme.baseBackgroundColor,
   display: 'grid',
   flexWrap: 'wrap-reverse',
   minHeight: '3.5rem',

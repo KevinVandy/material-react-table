@@ -1,9 +1,7 @@
 import Menu, { type MenuProps } from '@mui/material/Menu';
-import { useTheme } from '@mui/material/styles';
 import { MRT_ActionMenuItem } from './MRT_ActionMenuItem';
 import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 import { openEditingCell } from '../../utils/cell.utils';
-import { getMRTTheme } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
 export interface MRT_CellActionMenuProps<TData extends MRT_RowData>
@@ -23,6 +21,7 @@ export const MRT_CellActionMenu = <TData extends MRT_RowData>({
       enableEditing,
       icons: { ContentCopy, EditIcon },
       localization,
+      mrtTheme: { menuBackgroundColor },
       renderCellActionMenuItems,
     },
     refs: { actionCellRef },
@@ -32,9 +31,6 @@ export const MRT_CellActionMenu = <TData extends MRT_RowData>({
   const { row } = cell;
   const { column } = cell;
   const { columnDef } = column;
-
-  const theme = useTheme();
-  const { menuBackgroundColor } = getMRTTheme(table, theme);
 
   const handleClose = (event?: any) => {
     event?.stopPropagation();

@@ -9,7 +9,6 @@ import {
   type MRT_TableInstance,
   type MRT_VirtualItem,
 } from '../../types';
-import { getMRTTheme } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
 export interface MRT_TableHeadRowProps<TData extends MRT_RowData>
@@ -26,7 +25,12 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
   ...rest
 }: MRT_TableHeadRowProps<TData>) => {
   const {
-    options: { enableStickyHeader, layoutMode, muiTableHeadRowProps },
+    options: {
+      enableStickyHeader,
+      layoutMode,
+      mrtTheme: { baseBackgroundColor },
+      muiTableHeadRowProps,
+    },
   } = table;
 
   const { virtualColumns, virtualPaddingLeft, virtualPaddingRight } =
@@ -44,7 +48,7 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
     <TableRow
       {...tableRowProps}
       sx={(theme) => ({
-        backgroundColor: getMRTTheme(table, theme).baseBackgroundColor,
+        backgroundColor: baseBackgroundColor,
         boxShadow: `4px 0 8px ${alpha(theme.palette.common.black, 0.1)}`,
         display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
         position:

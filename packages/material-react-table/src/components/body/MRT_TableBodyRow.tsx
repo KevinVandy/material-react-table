@@ -23,7 +23,6 @@ import { getIsRowSelected } from '../../utils/row.utils';
 import {
   commonCellBeforeAfterStyles,
   getCommonPinnedCellStyles,
-  getMRTTheme,
 } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
@@ -61,6 +60,11 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
       enableStickyHeader,
       layoutMode,
       memoMode,
+      mrtTheme: {
+        baseBackgroundColor,
+        pinnedRowBackgroundColor,
+        selectedRowBackgroundColor,
+      },
       muiTableBodyRowProps,
       renderDetailPanel,
       rowPinningDisplayMode,
@@ -137,12 +141,6 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
   };
 
   const rowRef = useRef<HTMLTableRowElement | null>(null);
-
-  const {
-    baseBackgroundColor,
-    pinnedRowBackgroundColor,
-    selectedRowBackgroundColor,
-  } = getMRTTheme(table, theme);
 
   const cellHighlightColor = isRowSelected
     ? selectedRowBackgroundColor

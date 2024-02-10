@@ -1,6 +1,5 @@
 import { type MouseEvent, useState } from 'react';
 import Menu, { type MenuProps } from '@mui/material/Menu';
-import { useTheme } from '@mui/material/styles';
 import { MRT_ActionMenuItem } from './MRT_ActionMenuItem';
 import { MRT_FilterOptionMenu } from './MRT_FilterOptionMenu';
 import {
@@ -8,7 +7,6 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
-import { getMRTTheme } from '../../utils/style.utils';
 
 export interface MRT_ColumnActionMenuProps<TData extends MRT_RowData>
   extends Partial<MenuProps> {
@@ -51,6 +49,7 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
         VisibilityOffIcon,
       },
       localization,
+      mrtTheme: { menuBackgroundColor },
       renderColumnActionsMenuItems,
     },
     refs: { filterInputRefs },
@@ -317,9 +316,6 @@ export const MRT_ColumnActionMenu = <TData extends MRT_RowData>({
         ]
       : []),
   ].filter(Boolean);
-
-  const theme = useTheme();
-  const { menuBackgroundColor } = getMRTTheme(table, theme);
 
   return (
     <Menu

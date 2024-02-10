@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import Menu, { type MenuProps } from '@mui/material/Menu';
-import { useTheme } from '@mui/material/styles';
 import { MRT_ActionMenuItem } from './MRT_ActionMenuItem';
 import {
   type MRT_FilterOption,
@@ -10,7 +9,6 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
-import { getMRTTheme } from '../../utils/style.utils';
 
 export const mrtFilterOptions = (
   localization: MRT_Localization,
@@ -131,6 +129,7 @@ export const MRT_FilterOptionMenu = <TData extends MRT_RowData>({
       columnFilterModeOptions,
       globalFilterModeOptions,
       localization,
+      mrtTheme: { menuBackgroundColor },
       renderColumnFilterModeMenuItems,
       renderGlobalFilterModeMenuItems,
     },
@@ -238,9 +237,6 @@ export const MRT_FilterOptionMenu = <TData extends MRT_RowData>({
 
   const filterOption =
     !!header && columnDef ? columnDef._filterFn : globalFilterFn;
-
-  const theme = useTheme();
-  const { menuBackgroundColor } = getMRTTheme(table, theme);
 
   return (
     <Menu

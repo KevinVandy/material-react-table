@@ -8,7 +8,6 @@ import {
   type MRT_TableInstance,
   type MRT_VirtualItem,
 } from '../../types';
-import { getMRTTheme } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
 export interface MRT_TableFooterRowProps<TData extends MRT_RowData>
@@ -25,7 +24,11 @@ export const MRT_TableFooterRow = <TData extends MRT_RowData>({
   ...rest
 }: MRT_TableFooterRowProps<TData>) => {
   const {
-    options: { layoutMode, muiTableFooterRowProps },
+    options: {
+      layoutMode,
+      mrtTheme: { baseBackgroundColor },
+      muiTableFooterRowProps,
+    },
   } = table;
 
   const { virtualColumns, virtualPaddingLeft, virtualPaddingRight } =
@@ -55,7 +58,7 @@ export const MRT_TableFooterRow = <TData extends MRT_RowData>({
     <TableRow
       {...tableRowProps}
       sx={(theme) => ({
-        backgroundColor: getMRTTheme(table, theme).baseBackgroundColor,
+        backgroundColor: baseBackgroundColor,
         display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
         position: 'relative',
         width: '100%',

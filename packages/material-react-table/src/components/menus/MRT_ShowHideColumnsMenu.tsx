@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Menu, { type MenuProps } from '@mui/material/Menu';
-import { useTheme } from '@mui/material/styles';
 import { MRT_ShowHideColumnsMenuItems } from './MRT_ShowHideColumnsMenuItems';
 import {
   type MRT_Column,
@@ -11,7 +10,6 @@ import {
   type MRT_TableInstance,
 } from '../../types';
 import { getDefaultColumnOrderIds } from '../../utils/displayColumn.utils';
-import { getMRTTheme } from '../../utils/style.utils';
 
 export interface MRT_ShowHideColumnsMenuProps<TData extends MRT_RowData>
   extends Partial<MenuProps> {
@@ -42,6 +40,7 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
       enableColumnPinning,
       enableHiding,
       localization,
+      mrtTheme: { menuBackgroundColor },
     },
   } = table;
   const { columnOrder, columnPinning, density } = getState();
@@ -83,9 +82,6 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
   const [hoveredColumn, setHoveredColumn] = useState<MRT_Column<TData> | null>(
     null,
   );
-
-  const theme = useTheme();
-  const { menuBackgroundColor } = getMRTTheme(table, theme);
 
   return (
     <Menu

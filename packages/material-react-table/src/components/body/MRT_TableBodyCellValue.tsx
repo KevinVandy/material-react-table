@@ -5,7 +5,6 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
-import { getMRTTheme } from '../../utils/style.utils';
 import highlightWords from 'highlight-words';
 
 const allowedTypes = ['string', 'number'];
@@ -27,7 +26,10 @@ export const MRT_TableBodyCellValue = <TData extends MRT_RowData>({
 }: MRT_TableBodyCellValueProps<TData>) => {
   const {
     getState,
-    options: { enableFilterMatchHighlighting },
+    options: {
+      enableFilterMatchHighlighting,
+      mrtTheme: { matchHighlightColor },
+    },
   } = table;
   const { column, row } = cell;
   const { columnDef } = column;
@@ -88,8 +90,7 @@ export const MRT_TableBodyCellValue = <TData extends MRT_RowData>({
               sx={
                 match
                   ? {
-                      backgroundColor: (theme) =>
-                        getMRTTheme(table, theme).matchHighlightColor,
+                      backgroundColor: matchHighlightColor,
                       borderRadius: '2px',
                       color: (theme) =>
                         theme.palette.mode === 'dark'

@@ -21,6 +21,7 @@ import {
   type MRT_RowData,
   type MRT_TableOptions,
 } from '../types';
+import { getMRTTheme } from '../utils/style.utils';
 
 export const MRT_DefaultColumn = {
   filterVariant: 'text',
@@ -96,6 +97,7 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
   manualGrouping,
   manualPagination,
   manualSorting,
+  mrtTheme,
   paginationDisplayMode = 'default',
   positionActionsColumn = 'first',
   positionCreatingRow = 'top',
@@ -120,6 +122,7 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
     }),
     [localization],
   );
+  mrtTheme = useMemo(() => getMRTTheme(mrtTheme, theme), [mrtTheme, theme]);
   aggregationFns = useMemo(
     () => ({ ...MRT_AggregationFns, ...aggregationFns }),
     [],
@@ -241,6 +244,7 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
     manualGrouping,
     manualPagination,
     manualSorting,
+    mrtTheme,
     paginationDisplayMode,
     positionActionsColumn,
     positionCreatingRow,

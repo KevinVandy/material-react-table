@@ -18,7 +18,7 @@ import {
 } from '../../types';
 import { isCellEditable, openEditingCell } from '../../utils/cell.utils';
 import { getIsFirstColumn, getIsLastColumn } from '../../utils/column.utils';
-import { getCommonMRTCellStyles, getMRTTheme } from '../../utils/style.utils';
+import { getCommonMRTCellStyles } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
 import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
@@ -56,6 +56,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       enableColumnPinning,
       enableGrouping,
       layoutMode,
+      mrtTheme: { draggingBorderColor },
       muiSkeletonProps,
       muiTableBodyCellProps,
     },
@@ -92,8 +93,6 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     row,
     table,
   });
-
-  const { draggingBorderColor } = getMRTTheme(table, theme);
 
   const [skeletonWidth, setSkeletonWidth] = useState(100);
   useEffect(() => {

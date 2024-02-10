@@ -1,5 +1,4 @@
 import {
-  type CSSProperties,
   type Dispatch,
   type MutableRefObject,
   type ReactNode,
@@ -257,12 +256,12 @@ export interface MRT_Localization {
 }
 
 export interface MRT_Theme {
-  baseBackgroundColor?: CSSProperties['backgroundColor'];
-  draggingBorderColor?: CSSProperties['borderColor'];
-  matchHighlightColor?: CSSProperties['backgroundColor'];
-  menuBackgroundColor?: CSSProperties['backgroundColor'];
-  pinnedRowBackgroundColor?: CSSProperties['backgroundColor'];
-  selectedRowBackgroundColor?: CSSProperties['backgroundColor'];
+  baseBackgroundColor: string;
+  draggingBorderColor: string;
+  matchHighlightColor: string;
+  menuBackgroundColor: string;
+  pinnedRowBackgroundColor: string;
+  selectedRowBackgroundColor: string;
 }
 
 export interface MRT_RowModel<TData extends MRT_RowData> {
@@ -348,11 +347,14 @@ export type MRT_TableInstance<TData extends MRT_RowData> = Omit<
   setShowToolbarDropZone: Dispatch<SetStateAction<boolean>>;
 };
 
-export type MRT_DefinedTableOptions<TData extends MRT_RowData> =
-  MRT_TableOptions<TData> & {
-    icons: MRT_Icons;
-    localization: MRT_Localization;
-  };
+export type MRT_DefinedTableOptions<TData extends MRT_RowData> = Omit<
+  MRT_TableOptions<TData>,
+  'icons' | 'localization' | 'mrtTheme'
+> & {
+  icons: MRT_Icons;
+  localization: MRT_Localization;
+  mrtTheme: Required<MRT_Theme>;
+};
 
 export type MRT_StatefulTableOptions<TData extends MRT_RowData> =
   MRT_DefinedTableOptions<TData> & {
@@ -914,7 +916,7 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
    * @link https://www.material-react-table.com/docs/guides/memoize-components
    */
   memoMode?: 'cells' | 'rows' | 'table-body';
-  mrtTheme?: ((theme: Theme) => MRT_Theme) | MRT_Theme;
+  mrtTheme?: ((theme: Theme) => Partial<MRT_Theme>) | Partial<MRT_Theme>;
   muiBottomToolbarProps?:
     | ((props: { table: MRT_TableInstance<TData> }) => BoxProps)
     | BoxProps;

@@ -9,7 +9,6 @@ import {
   type MRT_TableInstance,
   type MRT_VirtualItem,
 } from '../../types';
-import { getMRTTheme } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
 export interface MRT_TableDetailPanelProps<TData extends MRT_RowData>
@@ -37,6 +36,7 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
     options: {
       enableRowVirtualization,
       layoutMode,
+      mrtTheme: { baseBackgroundColor },
       muiDetailPanelProps,
       muiTableBodyRowProps,
       renderDetailPanel,
@@ -89,9 +89,7 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
         colSpan={getVisibleLeafColumns().length}
         {...tableCellProps}
         sx={(theme) => ({
-          backgroundColor: virtualRow
-            ? getMRTTheme(table, theme).baseBackgroundColor
-            : undefined,
+          backgroundColor: virtualRow ? baseBackgroundColor : undefined,
           borderBottom: !row.getIsExpanded() ? 'none' : undefined,
           display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
           py: !!DetailPanel && row.getIsExpanded() ? '1rem' : 0,
