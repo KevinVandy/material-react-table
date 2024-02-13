@@ -210,3 +210,100 @@ const table = useMaterialReactTable({
 Manual Grouping means that the `data` that you pass to the table is already grouped and aggregated, and you do not want Material React Table to do any of the grouping or aggregation for you. This is useful if you are using a backend API to do the grouping and aggregation for you, and you just want to display the results. However, you will need to put your data in the specific format that the `expanding` features understand.
 
 > Learn more about [Expanding Sub Rows](/docs/guides/expanding-sub-rows) and [Aggregation](/docs/guides/aggregation) Features in their own dedicated guides.
+
+## Manual Grouping with Nextjs SSR
+
+```jsx
+//MaterialTable.tsx
+const searchParams = useSearchParams();
+const router = useRouter();
+const [grouping, setGrouping] = useState<MRT_GroupingState>([]);
+
+const columns = useMemo<MRT_ColumnDef<Customer>[]>(
+  () => [
+    {
+      accessorKey: 'id',
+      header: 'ID',
+      enableGrouping: false,
+    },
+    {
+      accessorKey: 'firstName',
+      header: 'First Name',
+    },
+    {
+      accessorKey: 'lastName',
+      header: 'Last Name',
+    },
+    {
+      accessorKey: 'email',
+      header: 'Email',
+    },
+  ],
+  [],
+);
+
+useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    columns.map((item: any, key: any) => {
+      const field = grouping.find((header: any) => header === item.accessorKey);
+      if (field) {
+        params.set(`group${key}`, `${field}`);
+      } else {
+        params.delete(`group${key}`);
+      }
+    });
+
+    router.push('?' + params);
+  }, [grouping]);
+
+const table = useMaterialReactTable({
+  columns,
+  data,
+  enableGrouping: true,
+  manualGrouping: true,
+  displayColumnDefOptions: {
+      'mrt-row-expand': {
+        Header: () => (
+          <Stack direction={'row'} alignContent="center">
+            <MRT_ExpandAllButton table={table} />
+            <Box>Groups</Box>
+          </Stack>
+        ),
+
+        GroupedCell: ({ row, table }) => {
+          const { grouping } = table.getState();
+
+          return (
+            <>
+              {row.getValue(grouping[grouping.length - 1])}{' '}
+              {row.original?.count > 0 ? `(${row.original?.count})` : ''}
+            </>
+          );
+        },
+      },
+    },
+ state: {
+      grouping,
+    },
+});
+```
+You can get search params on your page.tsx 
+```jsx
+//page.tsx
+
+type Props = {
+  searchParams: {[key: string]: string | string[] | undefined}
+}
+
+const Page = async ({searchParams}: Props) => {
+let catchGroup: string[] = Object.entries(searchParams).filter((item: any) => item[0].startsWith('group'));
+const groups: string[] = catchGroup.map((item: any) => item[1]);
+//your backend logic may be diffrent
+const groupData = await fetchGroup(GROUP_QUERY, {
+groupBy: groups
+})
+.
+.
+.
+}
+```
