@@ -11,11 +11,6 @@ import {
   type MRT_TableOptions,
   type MRT_Theme,
 } from '../types';
-import {
-  getIsFirstRightPinnedColumn,
-  getIsLastLeftPinnedColumn,
-  getTotalRight,
-} from '../utils/column.utils';
 import { parseFromValuesOrFunc } from './utils';
 
 export const parseCSSVarId = (id: string) => id.replace(/[^a-zA-Z0-9]/g, '_');
@@ -64,6 +59,8 @@ export const getCommonPinnedCellStyles = <TData extends MRT_RowData>({
   theme: Theme;
 }) => {
   const { baseBackgroundColor } = table.options.mrtTheme;
+  const isPinned = column?.getIsPinned();
+
   return {
     '&[data-pinned="true"]': {
       '&:before': {
@@ -75,9 +72,9 @@ export const getCommonPinnedCellStyles = <TData extends MRT_RowData>({
           0.97,
         ),
         boxShadow: column
-          ? getIsLastLeftPinnedColumn(table, column)
+          ? isPinned === 'left' && column.getIsLastColumn(isPinned)
             ? `-4px 0 4px -4px ${alpha(theme.palette.grey[700], 0.5)} inset`
-            : getIsFirstRightPinnedColumn(column)
+            : isPinned === 'right' && column.getIsFirstColumn(isPinned)
               ? `4px 0 4px -4px ${alpha(theme.palette.grey[700], 0.5)} inset`
               : undefined
           : undefined,
@@ -143,7 +140,7 @@ export const getCommonMRTCellStyles = <TData extends MRT_RowData>({
         position: 'sticky',
         right:
           isColumnPinned === 'right'
-            ? `${getTotalRight(table, column)}px`
+            ? `${column.getAfter('right')}px`
             : undefined,
       }
     : {};

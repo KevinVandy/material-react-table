@@ -17,7 +17,6 @@ import {
   type MRT_TableInstance,
 } from '../../types';
 import { isCellEditable, openEditingCell } from '../../utils/cell.utils';
-import { getIsFirstColumn, getIsLastColumn } from '../../utils/column.utils';
 import { getCommonMRTCellStyles } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_CopyButton } from '../buttons/MRT_CopyButton';
@@ -110,8 +109,8 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     const isHoveredColumn = hoveredColumn?.id === column.id;
     const isDraggingRow = draggingRow?.id === row.id;
     const isHoveredRow = hoveredRow?.id === row.id;
-    const isFirstColumn = getIsFirstColumn(column, table);
-    const isLastColumn = getIsLastColumn(column, table);
+    const isFirstColumn = column.getIsFirstColumn();
+    const isLastColumn = column.getIsLastColumn();
     const isLastRow = numRows && staticRowIndex === numRows - 1;
     const isResizingColumn = columnSizingInfo.isResizingColumn === column.id;
     const showResizeBorder =

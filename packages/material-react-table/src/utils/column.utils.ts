@@ -7,7 +7,6 @@ import {
   type MRT_DefinedTableOptions,
   type MRT_FilterOption,
   type MRT_RowData,
-  type MRT_TableInstance,
 } from '../types';
 
 export const getColumnId = <TData extends MRT_RowData>(
@@ -121,51 +120,4 @@ export const getDefaultColumnFilterFn = <TData extends MRT_RowData>(
   if (filterVariant === 'select' || filterVariant === 'checkbox')
     return 'equals';
   return 'fuzzy';
-};
-
-export const getIsFirstColumn = <TData extends MRT_RowData>(
-  column: MRT_Column<TData>,
-  table: MRT_TableInstance<TData>,
-) => {
-  const leftColumns = table.getLeftVisibleLeafColumns();
-  return leftColumns.length
-    ? leftColumns[0].id === column.id
-    : table.getVisibleLeafColumns()[0].id === column.id;
-};
-
-export const getIsLastColumn = <TData extends MRT_RowData>(
-  column: MRT_Column<TData>,
-  table: MRT_TableInstance<TData>,
-) => {
-  const rightColumns = table.getRightVisibleLeafColumns();
-  const columns = table.getVisibleLeafColumns();
-  return rightColumns.length
-    ? rightColumns[rightColumns.length - 1].id === column.id
-    : columns[columns.length - 1].id === column.id;
-};
-
-export const getIsLastLeftPinnedColumn = <TData extends MRT_RowData>(
-  table: MRT_TableInstance<TData>,
-  column: MRT_Column<TData>,
-) => {
-  return (
-    column.getIsPinned() === 'left' &&
-    table.getLeftLeafHeaders().length - 1 === column.getPinnedIndex()
-  );
-};
-
-export const getIsFirstRightPinnedColumn = <TData extends MRT_RowData>(
-  column: MRT_Column<TData>,
-) => {
-  return column.getIsPinned() === 'right' && column.getPinnedIndex() === 0;
-};
-
-export const getTotalRight = <TData extends MRT_RowData>(
-  table: MRT_TableInstance<TData>,
-  column: MRT_Column<TData>,
-) => {
-  return table
-    .getRightLeafHeaders()
-    .slice(column.getPinnedIndex() + 1)
-    .reduce((acc, col) => acc + col.getSize(), 0);
 };

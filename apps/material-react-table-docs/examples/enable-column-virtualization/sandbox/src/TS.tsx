@@ -15,8 +15,9 @@ const Example = () => {
     columnVirtualizerOptions: { overscan: 4 }, //optionally customize the virtualizer
     columns: fakeColumns, //500 columns
     data: fakeData,
-    enableColumnVirtualization: true,
     enableColumnPinning: true,
+    enableColumnResizing: true,
+    enableColumnVirtualization: true,
     enableRowNumbers: true,
   });
 

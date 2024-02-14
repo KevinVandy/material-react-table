@@ -12,9 +12,9 @@
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.15.7",
-    "@mui/material": "^5.15.7",
-    "@mui/x-date-pickers": "^6.19.3",
+    "@mui/icons-material": "^5.15.10",
+    "@mui/material": "^5.15.10",
+    "@mui/x-date-pickers": "^6.19.4",
     "@remix-run/css-bundle": "^2.6.0",
     "@remix-run/node": "^2.6.0",
     "@remix-run/react": "^2.6.0",
@@ -27,8 +27,8 @@
   "devDependencies": {
     "@remix-run/dev": "^2.6.0",
     "@remix-run/eslint-config": "^2.6.0",
-    "@types/react": "^18.2.52",
-    "@types/react-dom": "^18.2.18",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
     "eslint": "^8.56.0",
     "typescript": "^5.3.3"
   },
