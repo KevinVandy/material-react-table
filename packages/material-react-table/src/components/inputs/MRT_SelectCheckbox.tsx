@@ -58,6 +58,7 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
       ? parseFromValuesOrFunc(muiSelectAllCheckboxProps, { table })
       : parseFromValuesOrFunc(muiSelectCheckboxProps, {
           row,
+          staticRowIndex,
           table,
         })),
     ...rest,
