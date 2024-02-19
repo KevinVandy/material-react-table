@@ -2033,6 +2033,16 @@ export const tableOptions: TableOption[] = [
     type: '({ table }) => ReactNode',
   },
   {
+    tableOption: 'renderToolbarAlertBannerContent',
+    defaultValue: '',
+    description: '',
+    link: '',
+    linkText: '',
+    required: false,
+    source: '',
+    type: '({ table, groupedAlert, selectedAlert }) => ReactNode',
+  },
+  {
     tableOption: 'renderTopToolbar',
     defaultValue: '',
     description: '',
