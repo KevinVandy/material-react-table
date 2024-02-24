@@ -1,4 +1,4 @@
-import { type MouseEvent, useState } from 'react';
+import { type MouseEvent, useState, useMemo } from 'react';
 import Box from '@mui/material/Box';
 import Grow from '@mui/material/Grow';
 import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
@@ -10,7 +10,7 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
-import { parseFromValuesOrFunc } from '../../utils/utils';
+import { getValueAndLabel, parseFromValuesOrFunc } from '../../utils/utils';
 
 export interface MRT_TableHeadCellFilterLabelProps<TData extends MRT_RowData>
   extends IconButtonProps {
@@ -38,6 +38,20 @@ export const MRT_TableHeadCellFilterLabel = <TData extends MRT_RowData = {}>({
   const filterValue = column.getFilterValue();
 
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+
+  const filterSelectOptionsLookup = useMemo(
+    () =>
+      (columnDef.filterSelectOptions?.map(getValueAndLabel) ?? []).reduce(
+        (acc, { value, label }) => ({ ...acc, [value]: label as string }),
+        {} as Record<string, string>,
+      ),
+    [columnDef.filterSelectOptions],
+  );
+
+  const isFilterSelectOptions =
+    (columnDef.filterVariant === 'select' ||
+      columnDef.filterVariant === 'multi-select') &&
+    Boolean(Object.keys(filterSelectOptionsLookup).length);
 
   const isFilterActive =
     (Array.isArray(filterValue) && filterValue.some(Boolean)) ||
@@ -73,10 +87,18 @@ export const MRT_TableHeadCellFilterLabel = <TData extends MRT_RowData = {}>({
             '{filterValue}',
             `"${
               Array.isArray(filterValue)
-                ? (filterValue as [string, string]).join(
-                    `" ${isRangeFilter ? localization.and : localization.or} "`,
-                  )
-                : (filterValue as string)
+                ? (filterValue as [string, string])
+                    .map((value) =>
+                      isFilterSelectOptions
+                        ? filterSelectOptionsLookup[value]
+                        : value,
+                    )
+                    .join(
+                      `" ${isRangeFilter ? localization.and : localization.or} "`,
+                    )
+                : isFilterSelectOptions
+                  ? filterSelectOptionsLookup[filterValue as string]
+                  : (filterValue as string)
             }"`,
           )
           .replace('" "', '');
