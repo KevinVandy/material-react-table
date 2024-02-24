@@ -34,7 +34,6 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
     getState,
     getVisibleLeafColumns,
     options: {
-      enableRowVirtualization,
       layoutMode,
       mrtTheme: { baseBackgroundColor },
       muiDetailPanelProps,
@@ -93,14 +92,12 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
           borderBottom: !row.getIsExpanded() ? 'none' : undefined,
           display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
           py: !!DetailPanel && row.getIsExpanded() ? '1rem' : 0,
-          transition: !enableRowVirtualization
-            ? 'all 150ms ease-in-out'
-            : undefined,
+          transition: !virtualRow ? 'all 150ms ease-in-out' : undefined,
           width: `100%`,
           ...(parseFromValuesOrFunc(tableCellProps?.sx, theme) as any),
         })}
       >
-        {enableRowVirtualization ? (
+        {virtualRow ? (
           row.getIsExpanded() && DetailPanel
         ) : (
           <Collapse in={row.getIsExpanded()} mountOnEnter unmountOnExit>
