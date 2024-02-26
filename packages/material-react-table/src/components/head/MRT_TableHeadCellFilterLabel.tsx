@@ -10,18 +10,19 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
-import { type ColumnFilterInfo } from '../../utils/column.utils';
+import {
+  getColumnFilterInfo,
+  useDropdownOptions,
+} from '../../utils/column.utils';
 import { getValueAndLabel, parseFromValuesOrFunc } from '../../utils/utils';
 
 export interface MRT_TableHeadCellFilterLabelProps<TData extends MRT_RowData>
   extends IconButtonProps {
-  columnFilterInfo: ColumnFilterInfo;
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_TableHeadCellFilterLabel = <TData extends MRT_RowData = {}>({
-  columnFilterInfo,
   header,
   table,
   ...rest
@@ -44,11 +45,12 @@ export const MRT_TableHeadCellFilterLabel = <TData extends MRT_RowData = {}>({
 
   const {
     currentFilterOption,
-    dropdownOptions,
     isMultiSelectFilter,
     isRangeFilter,
     isSelectFilter,
-  } = columnFilterInfo;
+  } = getColumnFilterInfo({ header, table });
+
+  const dropdownOptions = useDropdownOptions({ header, table });
 
   const getSelectLabel = (index?: number) =>
     getValueAndLabel(
@@ -169,11 +171,7 @@ export const MRT_TableHeadCellFilterLabel = <TData extends MRT_RowData = {}>({
           }}
         >
           <Box sx={{ p: '1rem' }}>
-            <MRT_TableHeadCellFilterContainer
-              columnFilterInfo={columnFilterInfo}
-              header={header}
-              table={table}
-            />
+            <MRT_TableHeadCellFilterContainer header={header} table={table} />
           </Box>
         </Popover>
       )}

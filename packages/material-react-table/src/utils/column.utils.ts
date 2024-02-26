@@ -126,9 +126,7 @@ export const getDefaultColumnFilterFn = <TData extends MRT_RowData>(
   return 'fuzzy';
 };
 
-export type ColumnFilterInfo = ReturnType<typeof useColumnFilterInfo>;
-
-export const useColumnFilterInfo = <TData extends MRT_RowData>({
+export const getColumnFilterInfo = <TData extends MRT_RowData>({
   header,
   table,
 }: {
@@ -163,7 +161,36 @@ export const useColumnFilterInfo = <TData extends MRT_RowData>({
 
   const facetedUniqueValues = column.getFacetedUniqueValues();
 
-  const dropdownOptions = useMemo<DropdownOption[] | undefined>(
+  return {
+    allowedColumnFilterOptions,
+    currentFilterOption,
+    facetedUniqueValues,
+    isAutocompleteFilter,
+    isDateFilter,
+    isMultiSelectFilter,
+    isRangeFilter,
+    isSelectFilter,
+    isTextboxFilter,
+  } as const;
+};
+
+export const useDropdownOptions = <TData extends MRT_RowData>({
+  header,
+  table,
+}: {
+  header: MRT_Header<TData>;
+  table: MRT_TableInstance<TData>;
+}): DropdownOption[] | undefined => {
+  const { column } = header;
+  const { columnDef } = column;
+  const {
+    facetedUniqueValues,
+    isAutocompleteFilter,
+    isMultiSelectFilter,
+    isSelectFilter,
+  } = getColumnFilterInfo({ header, table });
+
+  return useMemo<DropdownOption[] | undefined>(
     () =>
       columnDef.filterSelectOptions ??
       ((isSelectFilter || isMultiSelectFilter || isAutocompleteFilter) &&
@@ -179,17 +206,4 @@ export const useColumnFilterInfo = <TData extends MRT_RowData>({
       isSelectFilter,
     ],
   );
-
-  return {
-    allowedColumnFilterOptions,
-    currentFilterOption,
-    dropdownOptions,
-    facetedUniqueValues,
-    isAutocompleteFilter,
-    isDateFilter,
-    isMultiSelectFilter,
-    isRangeFilter,
-    isSelectFilter,
-    isTextboxFilter,
-  } as const;
 };

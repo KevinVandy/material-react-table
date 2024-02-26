@@ -211,7 +211,9 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
   };
 
   const handleDragOver = (e: DragEvent) => {
-    e.preventDefault();
+    if (columnDef.enableColumnOrdering !== false) {
+      e.preventDefault();
+    }
   };
 
   const handleContextMenu = (e: MouseEvent<HTMLTableCellElement>) => {

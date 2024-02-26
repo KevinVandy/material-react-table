@@ -17,9 +17,6 @@ View [Documentation](https://www.material-react-table.com/)
 <a href="https://github.com/KevinVandy/material-react-table/blob/v2/LICENSE" target="_blank">
   <img alt="" src="https://badgen.net/github/license/KevinVandy/material-react-table?color=blue" />
 </a>
-<a href="http://makeapullrequest.com" target="_blank">
-  <img alt="" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" />
-</a>
  <a
   href="https://github.com/sponsors/kevinvandy"
   target="_blank"
@@ -27,14 +24,21 @@ View [Documentation](https://www.material-react-table.com/)
 >
   <img alt="" src="https://img.shields.io/badge/sponsor-violet" />
 </a>
+<a
+  href="https://discord.gg/5wqyRx6fnm"
+  target="_blank"
+  rel="noopener"
+>
+  <img alt="" src="https://dcbadge.vercel.app/api/server/5wqyRx6fnm?style=flat">
+</a>
 
 ## About
 
 ### _Quickly Create React Data Tables with Material Design_
 
-### __Built with [Material UI <sup>V5</sup>](https://mui.com) and [TanStack Table <sup>V8</sup>](https://tanstack.com/table/v8)__
+### **Built with [Material UI <sup>V5</sup>](https://mui.com) and [TanStack Table <sup>V8</sup>](https://tanstack.com/table/v8)**
 
-<img src="https://material-react-table.com/banner.png" alt="MRT" height="50"/>
+<img src="https://material-react-table.com/banner.png" alt="MRT" height="50" />
 
 > Want to use Mantine instead of Material UI? Check out [Mantine React Table](https://www.mantine-react-table.com)
 
@@ -46,19 +50,19 @@ View [Documentation](https://www.material-react-table.com/)
 
 ### Quick Examples
 
- - [Basic Table](https://www.material-react-table.com/docs/examples/basic/) (See Default Features)
- - [Minimal Table](https://www.material-react-table.com/docs/examples/minimal/) (Turn off Features like Pagination, Sorting, Filtering, and Toolbars)
- - [Advanced Table](https://www.material-react-table.com/docs/examples/advanced/) (See some of the Advanced Features)
- - [Custom Headless Table](https://www.material-react-table.com/docs/examples/custom-headless/) (Build your own table markup)
- - [Dragging / Ordering Examples](https://www.material-react-table.com/docs/examples/column-ordering/) (Drag and Drop)
- - [Editing (CRUD) Examples](https://www.material-react-table.com/docs/examples/editing-crud/) (Create, Edit, and Delete Rows)
- - [Expanding / Grouping Examples](https://www.material-react-table.com/docs/examples/aggregation-and-grouping/) (Sum, Average, Count, etc.)
- - [Filtering Examples](https://www.material-react-table.com/docs/examples/filter-variants/) (Faceted Values, Switching Filters, etc.)
- - [Sticky Pinning Examples](https://www.material-react-table.com/docs/examples/sticky-header/) (Sticky Headers, Sticky Columns, Sticky Rows, etc.)
- - [Remote Data Fetching Examples](https://www.material-react-table.com/docs/examples/react-query/) (Server-side Pagination, Sorting, and Filtering)
- - [Virtualized Examples](https://www.material-react-table.com/docs/examples/virtualized/) (10,000 rows at once!)
- - [Infinite Scrolling](https://www.material-react-table.com/docs/examples/infinite-scrolling/) (Fetch data as you scroll)
- - [Localization (i18n)](https://www.material-react-table.com/docs/guides/localization#built-in-locale-examples) (Over a dozen languages built-in)
+- [Basic Table](https://www.material-react-table.com/docs/examples/basic/) (See Default Features)
+- [Minimal Table](https://www.material-react-table.com/docs/examples/minimal/) (Turn off Features like Pagination, Sorting, Filtering, and Toolbars)
+- [Advanced Table](https://www.material-react-table.com/docs/examples/advanced/) (See some of the Advanced Features)
+- [Custom Headless Table](https://www.material-react-table.com/docs/examples/custom-headless/) (Build your own table markup)
+- [Dragging / Ordering Examples](https://www.material-react-table.com/docs/examples/column-ordering/) (Drag and Drop)
+- [Editing (CRUD) Examples](https://www.material-react-table.com/docs/examples/editing-crud/) (Create, Edit, and Delete Rows)
+- [Expanding / Grouping Examples](https://www.material-react-table.com/docs/examples/aggregation-and-grouping/) (Sum, Average, Count, etc.)
+- [Filtering Examples](https://www.material-react-table.com/docs/examples/filter-variants/) (Faceted Values, Switching Filters, etc.)
+- [Sticky Pinning Examples](https://www.material-react-table.com/docs/examples/sticky-header/) (Sticky Headers, Sticky Columns, Sticky Rows, etc.)
+- [Remote Data Fetching Examples](https://www.material-react-table.com/docs/examples/react-query/) (Server-side Pagination, Sorting, and Filtering)
+- [Virtualized Examples](https://www.material-react-table.com/docs/examples/virtualized/) (10,000 rows at once!)
+- [Infinite Scrolling](https://www.material-react-table.com/docs/examples/infinite-scrolling/) (Fetch data as you scroll)
+- [Localization (i18n)](https://www.material-react-table.com/docs/guides/localization#built-in-locale-examples) (Over a dozen languages built-in)
 
 View additional [storybook examples](https://www.material-react-table.dev/)
 
@@ -68,7 +72,7 @@ _All features can easily be enabled/disabled_
 
 _**Fully Fleshed out [Docs](https://www.material-react-table.com/docs/guides#guides) are available for all features**_
 
-- [x] 30-54kb gzipped - [Bundlephobia](https://bundlephobia.com/package/material-react-table)
+- [x] 30-56kb gzipped - [Bundlephobia](https://bundlephobia.com/package/material-react-table)
 - [x] Advanced TypeScript Generics Support (TypeScript Optional)
 - [x] Aggregation and Grouping (Sum, Average, Count, etc.)
 - [x] Cell Actions (Right-click Context Menu)
@@ -132,7 +136,10 @@ npm install material-react-table
 
 ```jsx
 import { useMemo, useState, useEffect } from 'react';
-import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
 
 //data must be stable reference (useState, useMemo, useQuery, defined outside of component, etc.)
 const data = [
@@ -144,7 +151,7 @@ const data = [
     name: 'Sara',
     age: 25,
   },
-]
+];
 
 export default function App() {
   const columns = useMemo(
@@ -185,7 +192,7 @@ export default function App() {
   const someEventHandler = () => {
     //read the table state during an event from the table instance
     console.log(table.getState().sorting);
-  }
+  };
 
   return (
     <MaterialReactTable table={table} /> //other more lightweight MRT sub components also available

@@ -15,7 +15,6 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
-import { useColumnFilterInfo } from '../../utils/column.utils';
 import { getCommonMRTCellStyles } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
@@ -74,11 +73,6 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
     }),
     ...rest,
   };
-
-  const columnFilterInfo = useColumnFilterInfo({
-    header,
-    table,
-  });
 
   const isColumnPinned =
     enableColumnPinning &&
@@ -148,7 +142,9 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
   };
 
   const handleDragOver = (e: DragEvent) => {
-    e.preventDefault();
+    if (columnDef.enableColumnOrdering !== false) {
+      e.preventDefault();
+    }
   };
 
   const HeaderElement =
@@ -282,11 +278,7 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
                   {HeaderElement}
                 </Box>
                 {column.getCanFilter() && (
-                  <MRT_TableHeadCellFilterLabel
-                    columnFilterInfo={columnFilterInfo}
-                    header={header}
-                    table={table}
-                  />
+                  <MRT_TableHeadCellFilterLabel header={header} table={table} />
                 )}
                 {column.getCanSort() && (
                   <MRT_TableHeadCellSortLabel header={header} table={table} />
@@ -322,11 +314,7 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
             </Box>
           )}
       {columnFilterDisplayMode === 'subheader' && column.getCanFilter() && (
-        <MRT_TableHeadCellFilterContainer
-          columnFilterInfo={columnFilterInfo}
-          header={header}
-          table={table}
-        />
+        <MRT_TableHeadCellFilterContainer header={header} table={table} />
       )}
     </TableCell>
   );

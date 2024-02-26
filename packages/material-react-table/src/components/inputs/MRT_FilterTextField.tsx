@@ -34,20 +34,21 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
-import { type ColumnFilterInfo } from '../../utils/column.utils';
+import {
+  getColumnFilterInfo,
+  useDropdownOptions,
+} from '../../utils/column.utils';
 import { getValueAndLabel, parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 
 export interface MRT_FilterTextFieldProps<TData extends MRT_RowData>
   extends TextFieldProps<'standard'> {
-  columnFilterInfo: ColumnFilterInfo;
   header: MRT_Header<TData>;
   rangeFilterIndex?: number;
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_FilterTextField = <TData extends MRT_RowData>({
-  columnFilterInfo,
   header,
   rangeFilterIndex,
   table,
@@ -116,7 +117,6 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
   const {
     allowedColumnFilterOptions,
     currentFilterOption,
-    dropdownOptions,
     facetedUniqueValues,
     isAutocompleteFilter,
     isDateFilter,
@@ -124,7 +124,9 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
     isRangeFilter,
     isSelectFilter,
     isTextboxFilter,
-  } = columnFilterInfo;
+  } = getColumnFilterInfo({ header, table });
+
+  const dropdownOptions = useDropdownOptions({ header, table });
 
   const filterChipLabel = ['empty', 'notEmpty'].includes(currentFilterOption)
     ? //@ts-ignore
