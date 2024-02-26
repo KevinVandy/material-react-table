@@ -55,7 +55,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
     options: {
       columnFilterModeOptions,
       enableColumnFilterModes,
-      icons: { CloseIcon, FilterListIcon },
+      icons: { ArrowDropDownIcon, CloseIcon, FilterListIcon },
       localization,
       manualFiltering,
       muiFilterAutocompleteProps,
@@ -276,10 +276,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
 
   const endAdornment =
     !isAutocompleteFilter && !isDateFilter && !filterChipLabel ? (
-      <InputAdornment
-        position="end"
-        sx={{ mr: isSelectFilter || isMultiSelectFilter ? '20px' : undefined }}
-      >
+      <InputAdornment position="end">
         <Tooltip placement="right" title={localization.clearFilter ?? ''}>
           <span>
             <IconButton
@@ -369,6 +366,10 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
         ? undefined
         : filterPlaceholder,
     variant: 'standard',
+    SelectProps: {
+      IconComponent: () => <ArrowDropDownIcon />,
+      ...textFieldProps.SelectProps,
+    },
     ...textFieldProps,
     sx: (theme) => ({
       minWidth: isDateFilter

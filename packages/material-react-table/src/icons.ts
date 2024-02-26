@@ -1,4 +1,5 @@
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import CancelIcon from '@mui/icons-material/Cancel';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -35,6 +36,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 export const MRT_Default_Icons = {
   ArrowDownwardIcon,
+  ArrowDropDownIcon,
   ArrowRightIcon,
   CancelIcon,
   ChevronLeftIcon,
