@@ -140,6 +140,10 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
     }
   };
 
+  const handleDragOver = (e: DragEvent) => {
+    e.preventDefault();
+  };
+
   const rowRef = useRef<HTMLTableRowElement | null>(null);
 
   const cellHighlightColor = isRowSelected
@@ -164,6 +168,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
         data-pinned={!!isRowPinned || undefined}
         data-selected={isRowSelected || undefined}
         onDragEnter={handleDragEnter}
+        onDragOver={handleDragOver}
         ref={(node: HTMLTableRowElement) => {
           if (node) {
             rowRef.current = node;
