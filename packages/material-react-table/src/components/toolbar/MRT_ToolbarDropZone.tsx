@@ -29,6 +29,10 @@ export const MRT_ToolbarDropZone = <TData extends MRT_RowData>({
     setHoveredColumn({ id: 'drop-zone' });
   };
 
+  const handleDragOver = (e: DragEvent) => {
+    e.preventDefault();
+  };
+
   useEffect(() => {
     if (table.options.state?.showToolbarDropZone !== undefined) {
       setShowToolbarDropZone(
@@ -45,6 +49,7 @@ export const MRT_ToolbarDropZone = <TData extends MRT_RowData>({
       <Box
         className="Mui-ToolbarDropZone"
         onDragEnter={handleDragEnter}
+        onDragOver={handleDragOver}
         {...rest}
         sx={(theme) => ({
           alignItems: 'center',
