@@ -6,7 +6,7 @@ export const parseFromValuesOrFunc = <T, U>(
 ): T | undefined => (fn instanceof Function ? fn(arg) : fn);
 
 export const getValueAndLabel = (
-  option: DropdownOption,
+  option?: DropdownOption,
 ): { label: string; value: string } => {
   let label: string = '';
   let value: string = '';

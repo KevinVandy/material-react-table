@@ -3,7 +3,6 @@ import {
   type MouseEvent,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -35,17 +34,20 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
+import { type ColumnFilterInfo } from '../../utils/column.utils';
 import { getValueAndLabel, parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 
 export interface MRT_FilterTextFieldProps<TData extends MRT_RowData>
   extends TextFieldProps<'standard'> {
+  columnFilterInfo: ColumnFilterInfo;
   header: MRT_Header<TData>;
   rangeFilterIndex?: number;
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_FilterTextField = <TData extends MRT_RowData>({
+  columnFilterInfo,
   header,
   rangeFilterIndex,
   table,
@@ -53,7 +55,6 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
 }: MRT_FilterTextFieldProps<TData>) => {
   const {
     options: {
-      columnFilterModeOptions,
       enableColumnFilterModes,
       icons: { CloseIcon, FilterListIcon },
       localization,
@@ -112,17 +113,19 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
     }),
   };
 
-  const isDateFilter =
-    filterVariant?.startsWith('date') || filterVariant?.startsWith('time');
-  const isAutocompleteFilter = filterVariant === 'autocomplete';
-  const isRangeFilter =
-    filterVariant?.includes('range') || rangeFilterIndex !== undefined;
-  const isSelectFilter = filterVariant === 'select';
-  const isMultiSelectFilter = filterVariant === 'multi-select';
-  const isTextboxFilter =
-    ['autocomplete', 'text'].includes(filterVariant!) ||
-    (!isSelectFilter && !isMultiSelectFilter);
-  const currentFilterOption = columnDef._filterFn;
+  const {
+    allowedColumnFilterOptions,
+    currentFilterOption,
+    dropdownOptions,
+    facetedUniqueValues,
+    isAutocompleteFilter,
+    isDateFilter,
+    isMultiSelectFilter,
+    isRangeFilter,
+    isSelectFilter,
+    isTextboxFilter,
+  } = columnFilterInfo;
+
   const filterChipLabel = ['empty', 'notEmpty'].includes(currentFilterOption)
     ? //@ts-ignore
       localization[
@@ -132,6 +135,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
         }`
       ]
     : '';
+
   const filterPlaceholder = !isRangeFilter
     ? textFieldProps?.placeholder ??
       localization.filterByColumn?.replace('{column}', String(columnDef.header))
@@ -140,16 +144,14 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
       : rangeFilterIndex === 1
         ? localization.max
         : '';
-  const allowedColumnFilterOptions =
-    columnDef?.columnFilterModeOptions ?? columnFilterModeOptions;
-  const showChangeModeButton =
+
+  const showChangeModeButton = !!(
     enableColumnFilterModes &&
     columnDef.enableColumnFilterModes !== false &&
     !rangeFilterIndex &&
     (allowedColumnFilterOptions === undefined ||
-      !!allowedColumnFilterOptions?.length);
-
-  const facetedUniqueValues = column.getFacetedUniqueValues();
+      !!allowedColumnFilterOptions?.length)
+  );
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [filterValue, setFilterValue] = useState<string | string[]>(() =>
@@ -256,23 +258,6 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
       <>{columnDef.Filter?.({ column, header, rangeFilterIndex, table })}</>
     );
   }
-
-  const dropdownOptions = useMemo(
-    () =>
-      columnDef.filterSelectOptions ??
-      ((isSelectFilter || isMultiSelectFilter || isAutocompleteFilter) &&
-      facetedUniqueValues
-        ? Array.from(facetedUniqueValues.keys())
-            .filter((value) => value !== null && value !== undefined)
-            .sort((a, b) => a.localeCompare(b))
-        : undefined),
-    [
-      columnDef.filterSelectOptions,
-      facetedUniqueValues,
-      isMultiSelectFilter,
-      isSelectFilter,
-    ],
-  );
 
   const endAdornment =
     !isAutocompleteFilter && !isDateFilter && !filterChipLabel ? (
@@ -447,8 +432,12 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
       ) : isAutocompleteFilter ? (
         <Autocomplete
           freeSolo
-          getOptionLabel={(option) => getValueAndLabel(option).label}
-          onChange={(_e, newValue) => handleAutocompleteChange(newValue)}
+          getOptionLabel={(option: DropdownOption) =>
+            getValueAndLabel(option).label
+          }
+          onChange={(_e, newValue: DropdownOption) =>
+            handleAutocompleteChange(newValue)
+          }
           options={
             dropdownOptions?.map((option) => getValueAndLabel(option)) ?? []
           }

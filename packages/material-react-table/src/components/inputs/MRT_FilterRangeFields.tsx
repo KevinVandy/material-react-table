@@ -5,15 +5,18 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
+import { type ColumnFilterInfo } from '../../utils/column.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
 export interface MRT_FilterRangeFieldsProps<TData extends MRT_RowData>
   extends BoxProps {
+  columnFilterInfo: ColumnFilterInfo;
   header: MRT_Header<TData>;
   table: MRT_TableInstance<TData>;
 }
 
 export const MRT_FilterRangeFields = <TData extends MRT_RowData>({
+  columnFilterInfo,
   header,
   table,
   ...rest
@@ -28,8 +31,15 @@ export const MRT_FilterRangeFields = <TData extends MRT_RowData>({
         ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
       })}
     >
-      <MRT_FilterTextField header={header} rangeFilterIndex={0} table={table} />
-      <MRT_FilterTextField header={header} rangeFilterIndex={1} table={table} />
+      {[0, 1].map((rangeFilterIndex) => (
+        <MRT_FilterTextField
+          columnFilterInfo={columnFilterInfo}
+          header={header}
+          key={rangeFilterIndex}
+          rangeFilterIndex={rangeFilterIndex}
+          table={table}
+        />
+      ))}
     </Box>
   );
 };

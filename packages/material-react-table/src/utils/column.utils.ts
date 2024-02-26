@@ -1,12 +1,16 @@
+import { useMemo } from 'react';
 import { type Row } from '@tanstack/react-table';
 import {
+  type DropdownOption,
   type MRT_Column,
   type MRT_ColumnDef,
   type MRT_ColumnOrderState,
   type MRT_DefinedColumnDef,
   type MRT_DefinedTableOptions,
   type MRT_FilterOption,
+  type MRT_Header,
   type MRT_RowData,
+  type MRT_TableInstance,
 } from '../types';
 
 export const getColumnId = <TData extends MRT_RowData>(
@@ -120,4 +124,72 @@ export const getDefaultColumnFilterFn = <TData extends MRT_RowData>(
   if (filterVariant === 'select' || filterVariant === 'checkbox')
     return 'equals';
   return 'fuzzy';
+};
+
+export type ColumnFilterInfo = ReturnType<typeof useColumnFilterInfo>;
+
+export const useColumnFilterInfo = <TData extends MRT_RowData>({
+  header,
+  table,
+}: {
+  header: MRT_Header<TData>;
+  table: MRT_TableInstance<TData>;
+}) => {
+  const {
+    options: { columnFilterModeOptions },
+  } = table;
+  const { column } = header;
+  const { columnDef } = column;
+  const { filterVariant } = columnDef;
+
+  const isDateFilter = !!(
+    filterVariant?.startsWith('date') || filterVariant?.startsWith('time')
+  );
+  const isAutocompleteFilter = filterVariant === 'autocomplete';
+  const isRangeFilter =
+    filterVariant?.includes('range') ||
+    ['between', 'betweenInclusive', 'inNumberRange'].includes(
+      columnDef._filterFn,
+    );
+  const isSelectFilter = filterVariant === 'select';
+  const isMultiSelectFilter = filterVariant === 'multi-select';
+  const isTextboxFilter =
+    ['autocomplete', 'text'].includes(filterVariant!) ||
+    (!isSelectFilter && !isMultiSelectFilter);
+  const currentFilterOption = columnDef._filterFn;
+
+  const allowedColumnFilterOptions =
+    columnDef?.columnFilterModeOptions ?? columnFilterModeOptions;
+
+  const facetedUniqueValues = column.getFacetedUniqueValues();
+
+  const dropdownOptions = useMemo<DropdownOption[] | undefined>(
+    () =>
+      columnDef.filterSelectOptions ??
+      ((isSelectFilter || isMultiSelectFilter || isAutocompleteFilter) &&
+      facetedUniqueValues
+        ? Array.from(facetedUniqueValues.keys())
+            .filter((value) => value !== null && value !== undefined)
+            .sort((a, b) => a.localeCompare(b))
+        : undefined),
+    [
+      columnDef.filterSelectOptions,
+      facetedUniqueValues,
+      isMultiSelectFilter,
+      isSelectFilter,
+    ],
+  );
+
+  return {
+    allowedColumnFilterOptions,
+    currentFilterOption,
+    dropdownOptions,
+    facetedUniqueValues,
+    isAutocompleteFilter,
+    isDateFilter,
+    isMultiSelectFilter,
+    isRangeFilter,
+    isSelectFilter,
+    isTextboxFilter,
+  } as const;
 };

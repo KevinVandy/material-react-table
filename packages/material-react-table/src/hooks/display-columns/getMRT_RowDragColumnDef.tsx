@@ -9,7 +9,7 @@ import { defaultDisplayColumnProps } from '../../utils/displayColumn.utils';
 
 export const getMRT_RowDragColumnDef = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
-): MRT_ColumnDef<TData> | null => {
+): MRT_ColumnDef<TData> => {
   return {
     Cell: ({ row, rowRef, table }) => (
       <MRT_TableBodyRowGrabHandle

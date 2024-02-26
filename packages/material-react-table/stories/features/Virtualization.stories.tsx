@@ -96,7 +96,6 @@ export const EnableRowVirtualizationDense = () => (
     data={longData}
     enableBottomToolbar={false}
     enablePagination={false}
-    enableRowNumbers
     enableRowVirtualization
     initialState={{ density: 'compact' }}
   />
