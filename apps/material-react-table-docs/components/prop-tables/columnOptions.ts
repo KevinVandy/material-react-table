@@ -346,7 +346,7 @@ export const columnOptions: ColumnOption[] = [
     linkText: '',
     source: 'MRT',
     required: false,
-    type: "'text' | 'select' | 'multi-select' | 'range' | 'range-slider' | 'checkbox'",
+    type: "'text' | 'select' | 'multi-select' | 'range' | 'range-slider' | 'checkbox' | 'autocomplete' | 'date' | 'date-range' | 'datetime' | 'datetime-range' | 'time' | 'time-range'",
   },
   {
     columnOption: 'getGroupingValue',
