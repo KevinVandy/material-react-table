@@ -7,6 +7,15 @@ import Head from 'next/head';
 
 ## MRT V2 Changelog
 
+> Note: As of v2.12.0, the React and ReactDom peer dependencies have been moved back down to React v17 in order to help more people upgrade to MRT v2 without having to upgrade to React v18.
+
+### Version 2.12.0 - 2024-02-26
+
+- **Marked React 17 as a peer dependency instead of React 18 since concurrent features are not yet being utilized under the hood in MRT** *(not until MRT v3 now)*
+- Filter label tooltip will show label instead of value when a label is provided to filterSelectOptions
+- Fixed Column and Row Dragging element animation to not go back to where it started when dragging
+- Replaced dv styles with dvh styles in full-screen mode
+
 ### Version 2.11.3 - 2024-02-14
 
 - Upgraded to TanStack Table v8.12.0 for new column pinning/sizing/pinning instance APIs and better column resizing performance

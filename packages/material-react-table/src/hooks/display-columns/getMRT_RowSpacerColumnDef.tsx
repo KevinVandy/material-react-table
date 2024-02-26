@@ -17,7 +17,7 @@ const blankColProps = {
 
 export const getMRT_RowSpacerColumnDef = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
-): MRT_ColumnDef<TData> | null => {
+): MRT_ColumnDef<TData> => {
   return {
     ...defaultDisplayColumnProps({
       id: 'mrt-row-spacer',

@@ -141,6 +141,12 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
     }
   };
 
+  const handleDragOver = (e: DragEvent) => {
+    if (columnDef.enableColumnOrdering !== false) {
+      e.preventDefault();
+    }
+  };
+
   const HeaderElement =
     parseFromValuesOrFunc(columnDef.Header, {
       column,
@@ -161,6 +167,7 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
       data-index={staticColumnIndex}
       data-pinned={!!isColumnPinned || undefined}
       onDragEnter={handleDragEnter}
+      onDragOver={handleDragOver}
       ref={(node: HTMLTableCellElement) => {
         if (node) {
           tableHeadCellRefs.current[column.id] = node;

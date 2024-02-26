@@ -13,7 +13,7 @@ import { getCommonTooltipProps } from '../../utils/style.utils';
 
 export const getMRT_RowExpandColumnDef = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
-): MRT_ColumnDef<TData> | null => {
+): MRT_ColumnDef<TData> => {
   const {
     defaultColumn,
     enableExpandAll,

@@ -73,7 +73,7 @@ const longColumns: MRT_ColumnDef<any>[] = [
   },
 ];
 
-const longData = [...Array(500)].map(() => ({
+const longData = [...Array(1000)].map(() => ({
   address: faker.location.streetAddress(),
   city: faker.location.city(),
   country: faker.location.country(),
@@ -96,7 +96,6 @@ export const EnableRowVirtualizationDense = () => (
     data={longData}
     enableBottomToolbar={false}
     enablePagination={false}
-    enableRowNumbers
     enableRowVirtualization
     initialState={{ density: 'compact' }}
   />
@@ -108,7 +107,6 @@ export const EnableRowVirtualizationComfortable = () => (
     data={longData}
     enableBottomToolbar={false}
     enablePagination={false}
-    enableRowNumbers
     enableRowVirtualization
   />
 );
@@ -119,7 +117,6 @@ export const EnableRowVirtualizationSpacious = () => (
     data={longData}
     enableBottomToolbar={false}
     enablePagination={false}
-    enableRowNumbers
     enableRowVirtualization
     initialState={{ density: 'spacious' }}
   />
@@ -130,6 +127,7 @@ export const EnableRowVirtualizationTallContent = () => (
     columns={longColumns}
     data={longData}
     enableBottomToolbar={false}
+    enableColumnResizing
     enablePagination={false}
     enableRowNumbers
     enableRowVirtualization

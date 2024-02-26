@@ -20,8 +20,6 @@ export const MRT_TableHead = <TData extends MRT_RowData>({
   ...rest
 }: MRT_TableHeadProps<TData>) => {
   const {
-    getHeaderGroups,
-    getSelectedRowModel,
     getState,
     options: {
       enableStickyHeader,
@@ -60,7 +58,7 @@ export const MRT_TableHead = <TData extends MRT_RowData>({
       })}
     >
       {positionToolbarAlertBanner === 'head-overlay' &&
-      (showAlertBanner || getSelectedRowModel().rows.length > 0) ? (
+      (showAlertBanner || table.getSelectedRowModel().rows.length > 0) ? (
         <tr
           style={{
             display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
@@ -77,14 +75,16 @@ export const MRT_TableHead = <TData extends MRT_RowData>({
           </th>
         </tr>
       ) : (
-        getHeaderGroups().map((headerGroup) => (
-          <MRT_TableHeadRow
-            columnVirtualizer={columnVirtualizer}
-            headerGroup={headerGroup as any}
-            key={headerGroup.id}
-            table={table}
-          />
-        ))
+        table
+          .getHeaderGroups()
+          .map((headerGroup) => (
+            <MRT_TableHeadRow
+              columnVirtualizer={columnVirtualizer}
+              headerGroup={headerGroup as any}
+              key={headerGroup.id}
+              table={table}
+            />
+          ))
       )}
     </TableHead>
   );

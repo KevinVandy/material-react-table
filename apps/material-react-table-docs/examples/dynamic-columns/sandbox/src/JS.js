@@ -99,6 +99,7 @@ const Example = () => {
   const table = useMaterialReactTable({
     columns,
     data,
+    enableRowSelection: true,
     initialState: { showColumnFilters: true },
     manualFiltering: true, //turn off built-in client-side filtering
     manualPagination: true, //turn off built-in client-side pagination

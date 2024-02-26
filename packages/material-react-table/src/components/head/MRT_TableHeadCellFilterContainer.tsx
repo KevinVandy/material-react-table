@@ -4,6 +4,7 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
+import { getColumnFilterInfo } from '../../utils/column.utils';
 import { MRT_FilterCheckbox } from '../inputs/MRT_FilterCheckbox';
 import { MRT_FilterRangeFields } from '../inputs/MRT_FilterRangeFields';
 import { MRT_FilterRangeSlider } from '../inputs/MRT_FilterRangeSlider';
@@ -28,6 +29,7 @@ export const MRT_TableHeadCellFilterContainer = <TData extends MRT_RowData>({
   const { showColumnFilters } = getState();
   const { column } = header;
   const { columnDef } = column;
+  const { isRangeFilter } = getColumnFilterInfo({ header, table });
 
   return (
     <Collapse
@@ -40,10 +42,7 @@ export const MRT_TableHeadCellFilterContainer = <TData extends MRT_RowData>({
         <MRT_FilterCheckbox column={column} table={table} />
       ) : columnDef.filterVariant === 'range-slider' ? (
         <MRT_FilterRangeSlider header={header} table={table} />
-      ) : columnDef.filterVariant?.includes('range') ||
-        ['between', 'betweenInclusive', 'inNumberRange'].includes(
-          columnDef._filterFn,
-        ) ? (
+      ) : isRangeFilter ? (
         <MRT_FilterRangeFields header={header} table={table} />
       ) : (
         <MRT_FilterTextField header={header} table={table} />

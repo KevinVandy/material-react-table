@@ -210,6 +210,12 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
     }
   };
 
+  const handleDragOver = (e: DragEvent) => {
+    if (columnDef.enableColumnOrdering !== false) {
+      e.preventDefault();
+    }
+  };
+
   const handleContextMenu = (e: MouseEvent<HTMLTableCellElement>) => {
     tableCellProps?.onContextMenu?.(e);
     if (isRightClickable) {
@@ -228,6 +234,7 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       onContextMenu={handleContextMenu}
       onDoubleClick={handleDoubleClick}
       onDragEnter={handleDragEnter}
+      onDragOver={handleDragOver}
       sx={(theme) => ({
         '&:hover': {
           outline:

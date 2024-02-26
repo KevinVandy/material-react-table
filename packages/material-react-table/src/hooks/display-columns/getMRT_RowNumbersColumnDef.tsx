@@ -7,7 +7,7 @@ import { defaultDisplayColumnProps } from '../../utils/displayColumn.utils';
 
 export const getMRT_RowNumbersColumnDef = <TData extends MRT_RowData>(
   tableOptions: MRT_StatefulTableOptions<TData>,
-): MRT_ColumnDef<TData> | null => {
+): MRT_ColumnDef<TData> => {
   const { localization, rowNumberDisplayMode } = tableOptions;
   const {
     pagination: { pageIndex, pageSize },
