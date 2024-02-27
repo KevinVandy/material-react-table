@@ -124,8 +124,8 @@ See the official TanStack [Virtualizer Options API Docs](https://tanstack.com/vi
 In a similar way that you can [access the underlying table instance](/docs/guides/table-state-management#access-the-underlying-table-instance-reference), you can also access the underlying virtualizer instances. This can be useful for accessing methods like the `scrollToIndex` method, which can be used to programmatically scroll to a specific row or column.
 
 ```tsx
-const columnVirtualizerInstanceRef = useRef<Virtualizer>(null);
-const rowVirtualizerInstanceRef = useRef<Virtualizer>(null);
+const columnVirtualizerInstanceRef = useRef<MRT_ColumnVirtualizer>(null);
+const rowVirtualizerInstanceRef = useRef<MRT_RowVirtualizer>(null);
 
 useEffect(() => {
   if (rowVirtualizerInstanceRef.current) {
