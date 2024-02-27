@@ -353,10 +353,6 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
         ? undefined
         : filterPlaceholder,
     variant: 'standard',
-    SelectProps: {
-      IconComponent: () => <ArrowDropDownIcon />,
-      ...textFieldProps.SelectProps,
-    },
     ...textFieldProps,
     sx: (theme) => ({
       minWidth: isDateFilter
@@ -472,6 +468,8 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
             MenuProps: { disableScrollLock: true },
             displayEmpty: true,
             multiple: isMultiSelectFilter,
+            SelectDisplayProps: { style: { paddingRight: 0 } },
+            IconComponent: () => <ArrowDropDownIcon />,
             renderValue: isMultiSelectFilter
               ? (selected: any) =>
                   !selected?.length ? (
