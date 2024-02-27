@@ -37,7 +37,6 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
   const isMobile = useMediaQuery('(max-width: 720px)');
 
   const {
-    getPrePaginationRowModel,
     getState,
     options: {
       enableToolbarInternalActions,
@@ -45,10 +44,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
       localization,
       muiPaginationProps,
       paginationDisplayMode,
-      rowCount,
     },
-    setPageIndex,
-    setPageSize,
   } = table;
   const {
     pagination: { pageIndex = 0, pageSize = 10 },
@@ -62,8 +58,8 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
     ...rest,
   };
 
-  const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
-  const numberOfPages = Math.ceil(totalRowCount / pageSize);
+  const totalRowCount = table.getRowCount();
+  const numberOfPages = table.getPageCount();
   const showFirstLastPageButtons = numberOfPages > 2;
   const firstRowIndex = pageIndex * pageSize;
   const lastRowIndex = Math.min(pageIndex * pageSize + pageSize, totalRowCount);
@@ -123,7 +119,9 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
               id: 'mrt-rows-per-page',
             }}
             label={localization.rowsPerPage}
-            onChange={(event) => setPageSize(+(event.target.value as any))}
+            onChange={(event) =>
+              table.setPageSize(+(event.target.value as any))
+            }
             sx={{ mb: 0 }}
             value={pageSize}
             variant="standard"
@@ -153,7 +151,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
         <Pagination
           count={numberOfPages}
           disabled={disabled}
-          onChange={(_e, newPageIndex) => setPageIndex(newPageIndex - 1)}
+          onChange={(_e, newPageIndex) => table.setPageIndex(newPageIndex - 1)}
           page={pageIndex + 1}
           renderItem={(item) => (
             <PaginationItem
@@ -189,7 +187,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
                   <IconButton
                     aria-label={localization.goToFirstPage}
                     disabled={disableBack}
-                    onClick={() => setPageIndex(0)}
+                    onClick={() => table.firstPage()}
                     size="small"
                   >
                     <FirstPageIcon {...flipIconStyles(theme)} />
@@ -202,7 +200,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
                 <IconButton
                   aria-label={localization.goToPreviousPage}
                   disabled={disableBack}
-                  onClick={() => setPageIndex(pageIndex - 1)}
+                  onClick={() => table.previousPage()}
                   size="small"
                 >
                   <ChevronLeftIcon {...flipIconStyles(theme)} />
@@ -214,7 +212,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
                 <IconButton
                   aria-label={localization.goToNextPage}
                   disabled={disableNext}
-                  onClick={() => setPageIndex(pageIndex + 1)}
+                  onClick={() => table.nextPage()}
                   size="small"
                 >
                   <ChevronRightIcon {...flipIconStyles(theme)} />
@@ -227,7 +225,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
                   <IconButton
                     aria-label={localization.goToLastPage}
                     disabled={disableNext}
-                    onClick={() => setPageIndex(numberOfPages - 1)}
+                    onClick={() => table.lastPage()}
                     size="small"
                   >
                     <LastPageIcon {...flipIconStyles(theme)} />

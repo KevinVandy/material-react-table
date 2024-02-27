@@ -1267,7 +1267,6 @@ export type MRT_TableOptions<TData extends MRT_RowData> = Omit<
   renderTopToolbarCustomActions?: (props: {
     table: MRT_TableInstance<TData>;
   }) => ReactNode;
-  rowCount?: number;
   rowNumberDisplayMode?: 'original' | 'static';
   rowPinningDisplayMode?:
     | 'bottom'
