@@ -27,7 +27,6 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
 }: MRT_ShowHideColumnsMenuProps<TData>) => {
   const {
     getAllColumns,
-    getAllLeafColumns,
     getCenterLeafColumns,
     getIsAllColumnsVisible,
     getIsSomeColumnsPinned,
@@ -45,10 +44,20 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
   } = table;
   const { columnOrder, columnPinning, density } = getState();
 
-  const handleToggleAllColumns = (value?: boolean) => {
-    getAllLeafColumns()
+  const changeColumnVisibility = (
+    columns: MRT_Column<TData>[],
+    value?: boolean,
+  ) => {
+    columns
       .filter((col) => col.columnDef.enableHiding !== false)
-      .forEach((col) => col.toggleVisibility(value));
+      .forEach((col) => {
+        col.toggleVisibility(value);
+        if (col.columns) changeColumnVisibility(col.columns, value);
+      });
+  };
+
+  const handleToggleAllColumns = (value?: boolean) => {
+    changeColumnVisibility(getAllColumns(), value);
   };
 
   const allColumns = useMemo(() => {
