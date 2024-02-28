@@ -47,7 +47,9 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
 
   const handleToggleAllColumns = (value?: boolean) => {
     getAllLeafColumns()
-      .filter((col) => col.columnDef.enableHiding !== false)
+      .filter(
+        (col) => col.columnDef.enableHiding !== false && !col.getIsPinned(),
+      )
       .forEach((col) => col.toggleVisibility(value));
   };
 

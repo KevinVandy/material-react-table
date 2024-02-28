@@ -16,10 +16,7 @@ export const useMRT_ColumnVirtualizer = <
   table: MRT_TableInstance<TData>,
 ): MRT_ColumnVirtualizer | undefined => {
   const {
-    getLeftLeafColumns,
-    getRightLeafColumns,
     getState,
-    getVisibleLeafColumns,
     options: {
       columnVirtualizerInstanceRef,
       columnVirtualizerOptions,
@@ -28,7 +25,7 @@ export const useMRT_ColumnVirtualizer = <
     },
     refs: { tableContainerRef },
   } = table;
-  const { columnPinning, draggingColumn } = getState();
+  const { columnPinning, columnVisibility, draggingColumn } = getState();
 
   if (!enableColumnVirtualization) return undefined;
 
@@ -39,21 +36,22 @@ export const useMRT_ColumnVirtualizer = <
     },
   );
 
-  const visibleColumns = getVisibleLeafColumns();
+  const visibleColumns = table.getVisibleLeafColumns();
 
   const [leftPinnedIndexes, rightPinnedIndexes] = useMemo(
     () =>
       enableColumnPinning
         ? [
-            getLeftLeafColumns().map((c) => c.getPinnedIndex()),
-            getRightLeafColumns()
+            table.getLeftVisibleLeafColumns().map((c) => c.getPinnedIndex()),
+            table
+              .getRightVisibleLeafColumns()
               .map(
                 (column) => visibleColumns.length - column.getPinnedIndex() - 1,
               )
               .sort((a, b) => a - b),
           ]
         : [[], []],
-    [columnPinning, enableColumnPinning],
+    [columnPinning, columnVisibility, enableColumnPinning],
   );
 
   const numPinnedLeft = leftPinnedIndexes.length;

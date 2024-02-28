@@ -360,6 +360,13 @@ export const tableInstanceAPIs: TableInstanceAPI[] = [
     linkText: '',
   },
   {
+    tableInstanceAPI: 'getRowCount',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
     tableInstanceAPI: 'getPageOptions',
     type: '',
     description: '',
@@ -850,7 +857,14 @@ export const tableInstanceAPIs: TableInstanceAPI[] = [
     linkText: '',
   },
   {
-    tableInstanceAPI: 'setPageCount',
+    tableInstanceAPI: 'lastPage',
+    type: '',
+    description: '',
+    link: '',
+    linkText: '',
+  },
+  {
+    tableInstanceAPI: 'firstPage',
     type: '',
     description: '',
     link: '',
