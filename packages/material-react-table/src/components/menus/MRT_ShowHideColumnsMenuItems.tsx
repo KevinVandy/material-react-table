@@ -66,8 +66,13 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
       column?.columns?.forEach?.((childColumn: MRT_Column<TData>) => {
         childColumn.toggleVisibility(!switchChecked);
       });
+      column.toggleVisibility(!switchChecked);
     } else {
       column.toggleVisibility();
+      if(column?.parent) {
+        const isOneVisible = column.parent.getLeafColumns().some((col) => col === column ? !col.getIsVisible() : col.getIsVisible());
+        column.parent.toggleVisibility(isOneVisible)
+      }
     }
   };
 
