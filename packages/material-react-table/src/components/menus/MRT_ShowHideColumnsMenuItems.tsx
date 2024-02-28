@@ -56,10 +56,7 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
   const { columnDef } = column;
   const { columnDefType } = columnDef;
 
-  const switchChecked =
-    (columnDefType !== 'group' && column.getIsVisible()) ||
-    (columnDefType === 'group' &&
-      column.getLeafColumns().some((col) => col.getIsVisible()));
+  const switchChecked = column.getIsVisible();
 
   const handleToggleColumnHidden = (column: MRT_Column<TData>) => {
     if (columnDefType === 'group') {

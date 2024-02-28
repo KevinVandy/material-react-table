@@ -28,7 +28,7 @@
     "@mui/x-date-pickers": "^6.19.5",
     "@next/mdx": "^14.1.0",
     "@tanstack/react-query": "^5.24.1",
-    "@tanstack/react-table-devtools": "^8.13.0",
+    "@tanstack/react-table-devtools": "^8.13.2",
     "@types/mdx": "^2.0.11",
     "dayjs": "^1.11.10",
     "export-to-csv": "^1.2.3",
@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.20.1",
-    "@types/node": "^20.11.20",
+    "@types/node": "^20.11.22",
     "@types/react": "^18.2.60",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^7.1.0",

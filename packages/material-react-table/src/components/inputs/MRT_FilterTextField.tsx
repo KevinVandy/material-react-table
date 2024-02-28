@@ -73,45 +73,32 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
   const { columnDef } = column;
   const { filterVariant } = columnDef;
 
+  const args = { column, rangeFilterIndex, table };
+
   const textFieldProps: TextFieldProps = {
-    ...parseFromValuesOrFunc(muiFilterTextFieldProps, { column, table }),
-    ...parseFromValuesOrFunc(columnDef.muiFilterTextFieldProps, {
-      column,
-      table,
-    }),
+    ...parseFromValuesOrFunc(muiFilterTextFieldProps, args),
+    ...parseFromValuesOrFunc(columnDef.muiFilterTextFieldProps, args),
     ...rest,
   };
 
   const autocompleteProps = {
-    ...parseFromValuesOrFunc(muiFilterAutocompleteProps, { column, table }),
-    ...parseFromValuesOrFunc(columnDef.muiFilterAutocompleteProps, {
-      column,
-      table,
-    }),
+    ...parseFromValuesOrFunc(muiFilterAutocompleteProps, args),
+    ...parseFromValuesOrFunc(columnDef.muiFilterAutocompleteProps, args),
   };
 
   const datePickerProps: DatePickerProps<any> = {
-    ...parseFromValuesOrFunc(muiFilterDatePickerProps, { column, table }),
-    ...parseFromValuesOrFunc(columnDef.muiFilterDatePickerProps, {
-      column,
-      table,
-    }),
+    ...parseFromValuesOrFunc(muiFilterDatePickerProps, args),
+    ...parseFromValuesOrFunc(columnDef.muiFilterDatePickerProps, args),
   };
 
   const dateTimePickerProps: DateTimePickerProps<any> = {
-    ...parseFromValuesOrFunc(muiFilterDateTimePickerProps, { column, table }),
-    ...parseFromValuesOrFunc(columnDef.muiFilterDateTimePickerProps, {
-      column,
-      table,
-    }),
+    ...parseFromValuesOrFunc(muiFilterDateTimePickerProps, args),
+    ...parseFromValuesOrFunc(columnDef.muiFilterDateTimePickerProps, args),
   };
 
   const timePickerProps: TimePickerProps<any> = {
-    ...parseFromValuesOrFunc(muiFilterTimePickerProps, { column, table }),
-    ...parseFromValuesOrFunc(columnDef.muiFilterTimePickerProps, {
-      column,
-      table,
-    }),
+    ...parseFromValuesOrFunc(muiFilterTimePickerProps, args),
+    ...parseFromValuesOrFunc(columnDef.muiFilterTimePickerProps, args),
   };
 
   const {
