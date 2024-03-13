@@ -228,14 +228,18 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
       ? getFacetedUniqueValues()
       : undefined,
     getFilteredRowModel:
-      enableColumnFilters || enableGlobalFilter || enableFilters
+      (enableColumnFilters || enableGlobalFilter || enableFilters) &&
+      !manualFiltering
         ? getFilteredRowModel()
         : undefined,
-    getGroupedRowModel: enableGrouping ? getGroupedRowModel() : undefined,
-    getPaginationRowModel: enablePagination
-      ? getPaginationRowModel()
-      : undefined,
-    getSortedRowModel: enableSorting ? getSortedRowModel() : undefined,
+    getGroupedRowModel:
+      enableGrouping && !manualGrouping ? getGroupedRowModel() : undefined,
+    getPaginationRowModel:
+      enablePagination && !manualPagination
+        ? getPaginationRowModel()
+        : undefined,
+    getSortedRowModel:
+      enableSorting && !manualSorting ? getSortedRowModel() : undefined,
     getSubRows: (row) => row?.subRows,
     icons,
     layoutMode,
