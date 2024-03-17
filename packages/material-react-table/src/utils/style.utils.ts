@@ -27,7 +27,7 @@ export const getMRTTheme = <TData extends MRT_RowData>(
       : muiTheme.palette.background.default);
   return {
     baseBackgroundColor,
-    draggingBorderColor: muiTheme.palette.primary.main,
+    draggingBorderColor: muiTheme.palette.primary!.main,
     matchHighlightColor:
       muiTheme.palette.mode === 'dark'
         ? darken(muiTheme.palette.warning.dark, 0.25)
