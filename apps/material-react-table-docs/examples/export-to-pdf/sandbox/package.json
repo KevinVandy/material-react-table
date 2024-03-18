@@ -11,9 +11,9 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.15.12",
-    "@mui/material": "^5.15.12",
-    "export-to-csv": "^1.2.3",
+    "@mui/icons-material": "^5.15.13",
+    "@mui/material": "^5.15.13",
+    "export-to-csv": "^1.2.4",
     "material-react-table": "^2.12.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -21,10 +21,10 @@
     "jspdf-autotable": "^3.8.2"
   },
   "devDependencies": {
-    "@types/react": "^18.2.64",
-    "@types/react-dom": "^18.2.20",
+    "@types/react": "^18.2.67",
+    "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
     "typescript": "^5.4.2",
-    "vite": "^5.1.5"
+    "vite": "^5.1.6"
   }
 }
