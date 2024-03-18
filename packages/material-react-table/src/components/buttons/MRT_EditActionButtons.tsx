@@ -105,8 +105,8 @@ export const MRT_EditActionButtons = <TData extends MRT_RowData>({
               <IconButton
                 aria-label={localization.save}
                 color="info"
-                onClick={handleSubmitRow}
                 disabled={isSaving}
+                onClick={handleSubmitRow}
               >
                 {isSaving ? <CircularProgress size={18} /> : <SaveIcon />}
               </IconButton>
@@ -119,10 +119,10 @@ export const MRT_EditActionButtons = <TData extends MRT_RowData>({
             {localization.cancel}
           </Button>
           <Button
+            disabled={isSaving}
             onClick={handleSubmitRow}
             sx={{ minWidth: '100px' }}
             variant="contained"
-            disabled={isSaving}
           >
             {isSaving && <CircularProgress color="inherit" size={18} />}
             {localization.save}

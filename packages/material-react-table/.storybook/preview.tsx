@@ -40,8 +40,7 @@ const preview: Preview = {
         )[0] as HTMLElement;
         channel.on(DARK_MODE_EVENT_NAME, setDark);
         if (sbRoot) {
-          sbRoot.style.backgroundColor =
-            theme.palette.background.default;
+          sbRoot.style.backgroundColor = theme.palette.background.default;
         }
         return () => channel.off(DARK_MODE_EVENT_NAME, setDark);
       }, [theme]);
