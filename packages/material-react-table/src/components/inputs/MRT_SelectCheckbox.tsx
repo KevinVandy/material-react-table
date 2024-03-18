@@ -117,7 +117,7 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
       }
     >
       {enableMultiRowSelection === false ? (
-        <Radio {...commonProps} />
+        <Radio {...(commonProps as any)} />
       ) : (
         <Checkbox
           indeterminate={

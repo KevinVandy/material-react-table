@@ -73,7 +73,7 @@ const longColumns: MRT_ColumnDef<any>[] = [
   },
 ];
 
-const longData = [...Array(1000)].map(() => ({
+const longData = [...Array(5000)].map(() => ({
   address: faker.location.streetAddress(),
   city: faker.location.city(),
   country: faker.location.country(),

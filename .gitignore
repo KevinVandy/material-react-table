@@ -39,3 +39,5 @@ yarn-error.log*
 
 # turbo
 .turbo
+
+*storybook.log

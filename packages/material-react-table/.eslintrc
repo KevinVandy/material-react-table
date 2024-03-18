@@ -2,10 +2,15 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:storybook/recommended",
     "plugin:perfectionist/recommended-natural",
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "mui-path-imports", "perfectionist"],
+  "plugins": [
+    "@typescript-eslint",
+    "mui-path-imports",
+    "perfectionist"
+  ],
   "rules": {
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/ban-types": "off",
@@ -38,11 +43,20 @@
         ],
         "custom-groups": {
           "value": {
-            "react": ["react", "react-*"],
-            "storybook": ["@storybook/**"],
+            "react": [
+              "react",
+              "react-*"
+            ],
+            "storybook": [
+              "@storybook/**"
+            ],
             "tanstack": "@tanstack/**",
             "mui": "@mui/**",
-            "mrt": ["./MRT_**", "../**MRT_**", "../../src"],
+            "mrt": [
+              "./MRT_**",
+              "../**MRT_**",
+              "../../src"
+            ],
             "faker": "@faker/**",
           },
           "type": {
@@ -54,5 +68,9 @@
     ],
   },
   "root": true,
-  "ignorePatterns": ["dist/", "locales/", "node_modules/"],
+  "ignorePatterns": [
+    "dist/",
+    "locales/",
+    "node_modules/"
+  ],
 }
