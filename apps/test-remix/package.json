@@ -14,7 +14,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.14",
     "@mui/material": "^5.15.14",
-    "@mui/x-date-pickers": "^6.19.7",
+    "@mui/x-date-pickers": "^7.0.0",
     "@remix-run/css-bundle": "^2.8.1",
     "@remix-run/node": "^2.8.1",
     "@remix-run/react": "^2.8.1",
@@ -27,10 +27,10 @@
   "devDependencies": {
     "@remix-run/dev": "^2.8.1",
     "@remix-run/eslint-config": "^2.8.1",
-    "@types/react": "^18.2.67",
+    "@types/react": "^18.2.71",
     "@types/react-dom": "^18.2.22",
     "eslint": "^8.57.0",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.3"
   },
   "engines": {
     "node": ">=18.0.0"
