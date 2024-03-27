@@ -65,7 +65,7 @@ const Example = () => {
             }}
             variant="contained"
           >
-            Crete New Account
+            Create New Account
           </Button>
         </Box>
         <MRT_GlobalFilterTextField table={table} />
