@@ -131,11 +131,13 @@ export const getIsRowSelected = <TData extends MRT_RowData>({
   table: MRT_TableInstance<TData>;
 }) => {
   const {
-    options: { enableRowSelection },
+    options: { enableRowSelection, enableSubRowSelection },
   } = table;
 
   return (
-    row.getIsSelected() ||
+    (enableSubRowSelection
+      ? row.getIsSelected() && !row.getCanExpand()
+      : row.getIsSelected()) ||
     (parseFromValuesOrFunc(enableRowSelection, row) &&
       row.getCanSelectSubRows() &&
       row.getIsAllSubRowsSelected())
