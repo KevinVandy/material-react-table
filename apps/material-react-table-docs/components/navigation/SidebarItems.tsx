@@ -70,9 +70,11 @@ export const SideBarItems = ({
                 <ListItemButton
                   divider={divider}
                   selected={isSelected && !isSelectedParent}
-                  ref={(node) =>
-                    selectedItemRef(node, isSelected && !isSelectedParent)
-                  }
+                  ref={useCallback(
+                    (node) =>
+                      selectedItemRef(node, isSelected && !isSelectedParent),
+                    [],
+                  )}
                   onClick={handleCloseMenu}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {

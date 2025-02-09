@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import TableContainer, {
   type TableContainerProps,
 } from '@mui/material/TableContainer';
@@ -75,7 +75,7 @@ export const MRT_TableContainer = <TData extends MRT_RowData>({
       aria-busy={loading}
       aria-describedby={loading ? 'mrt-progress' : undefined}
       {...tableContainerProps}
-      ref={(node: HTMLDivElement) => {
+      ref={useCallback((node: HTMLDivElement) => {
         if (node) {
           tableContainerRef.current = node;
           if (tableContainerProps?.ref) {
@@ -83,7 +83,7 @@ export const MRT_TableContainer = <TData extends MRT_RowData>({
             tableContainerProps.ref.current = node;
           }
         }
-      }}
+      }, [])}
       style={{
         maxHeight: isFullScreen
           ? `calc(100vh - ${totalToolbarHeight}px)`

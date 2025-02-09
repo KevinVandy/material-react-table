@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import Table, { type TableProps } from '@mui/material/Table';
 import { useMRT_ColumnVirtualizer } from '../../hooks/useMRT_ColumnVirtualizer';
 import { type MRT_RowData, type MRT_TableInstance } from '../../types';
@@ -63,7 +63,7 @@ export const MRT_Table = <TData extends MRT_RowData>({
     <Table
       stickyHeader={enableStickyHeader || isFullScreen}
       {...tableProps}
-      ref={(node: HTMLTableElement) => {
+      ref={useCallback((node: HTMLTableElement) => {
         if (node) {
           tableRef.current = node;
           if (tableProps?.ref) {
@@ -71,7 +71,7 @@ export const MRT_Table = <TData extends MRT_RowData>({
             tableProps.ref.current = node;
           }
         }
-      }}
+      }, [])}
       style={{ ...columnSizeVars, ...tableProps?.style }}
       sx={(theme) => ({
         borderCollapse: 'separate',

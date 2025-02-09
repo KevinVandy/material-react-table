@@ -1,4 +1,4 @@
-import { type DragEvent, useMemo } from 'react';
+import { type DragEvent, useCallback, useMemo } from 'react';
 import Box from '@mui/material/Box';
 import TableCell, { type TableCellProps } from '@mui/material/TableCell';
 import { useTheme } from '@mui/material/styles';
@@ -189,14 +189,14 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
       data-sort={column.getIsSorted() || undefined}
       onDragEnter={handleDragEnter}
       onDragOver={handleDragOver}
-      ref={(node: HTMLTableCellElement) => {
+      ref={useCallback((node: HTMLTableCellElement) => {
         if (node) {
           tableHeadCellRefs.current![column.id] = node;
           if (columnDefType !== 'group') {
             columnVirtualizer?.measureElement?.(node);
           }
         }
-      }}
+      }, [])}
       tabIndex={enableKeyboardShortcuts ? 0 : undefined}
       {...tableCellProps}
       onKeyDown={handleKeyDown}

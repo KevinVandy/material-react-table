@@ -1,4 +1,4 @@
-import { type DragEvent, memo, useMemo, useRef } from 'react';
+import { type DragEvent, memo, useCallback, useMemo, useRef } from 'react';
 import TableRow, { type TableRowProps } from '@mui/material/TableRow';
 import {
   type Theme,
@@ -165,15 +165,16 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
         data-selected={isRowSelected || undefined}
         onDragEnter={handleDragEnter}
         onDragOver={handleDragOver}
-        ref={(node: HTMLTableRowElement) => {
+        ref={useCallback((node: HTMLTableRowElement) => {
           if (node) {
             rowRef.current = node;
             if (rowVirtualizer) {
               rowVirtualizer?.measureElement(node);
               tableRowRefsMap.current?.set(virtualRowIndex!, node);
+              rowRef.current.style.transform = `translateY(${rowVirtualizer?.getOffsetForIndex(virtualRowIndex!)}px)`;
             }
           }
-        }}
+        }, [])}
         selected={isRowSelected}
         {...tableRowProps}
         sx={(theme: Theme) => ({

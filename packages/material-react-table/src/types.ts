@@ -121,7 +121,6 @@ export type MRT_ColumnVirtualizer<
   TScrollElement extends Element = HTMLDivElement,
   TItemElement extends Element = HTMLTableCellElement,
 > = Virtualizer<TScrollElement, TItemElement> & {
-  virtualColumns: MRT_VirtualItem[];
   virtualPaddingLeft?: number;
   virtualPaddingRight?: number;
 };
@@ -129,7 +128,10 @@ export type MRT_ColumnVirtualizer<
 export type MRT_RowVirtualizer<
   TScrollElement extends Element = HTMLDivElement,
   TItemElement extends Element = HTMLTableRowElement,
-> = Virtualizer<TScrollElement, TItemElement>;
+> = Virtualizer<TScrollElement, TItemElement> & {
+  virtualPaddingTop?: number;
+  virtualPaddingBottom?: number;
+};
 
 export type MRT_ColumnHelper<TData extends MRT_RowData> = {
   accessor: <
@@ -828,8 +830,10 @@ export interface MRT_TableOptions<TData extends MRT_RowData>
   columnVirtualizerOptions?:
     | ((props: {
         table: MRT_TableInstance<TData>;
-      }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableCellElement>>)
-    | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableCellElement>>;
+      }) => Partial<
+        MRT_VirtualizerOptions<HTMLDivElement, HTMLTableCellElement>
+      >)
+    | Partial<MRT_VirtualizerOptions<HTMLDivElement, HTMLTableCellElement>>;
   createDisplayMode?: 'custom' | 'modal' | 'row';
   /**
    * Pass your data as an array of objects. Objects can theoretically be any shape, but it's best to keep them consistent.
@@ -1278,8 +1282,10 @@ export interface MRT_TableOptions<TData extends MRT_RowData>
   rowVirtualizerOptions?:
     | ((props: {
         table: MRT_TableInstance<TData>;
-      }) => Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>)
-    | Partial<VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>;
+      }) => Partial<
+        MRT_VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>
+      >)
+    | Partial<MRT_VirtualizerOptions<HTMLDivElement, HTMLTableRowElement>>;
   selectAllMode?: 'all' | 'page';
   /**
    * Manage state externally any way you want, then pass it back into MRT.

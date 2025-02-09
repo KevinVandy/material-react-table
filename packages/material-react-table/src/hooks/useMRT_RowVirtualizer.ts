@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { type Range, useVirtualizer } from '@tanstack/react-virtual';
 import {
   type MRT_Row,
@@ -8,7 +8,6 @@ import {
 } from '../types';
 import { parseFromValuesOrFunc } from '../utils/utils';
 import { extraIndexRangeExtractor } from '../utils/virtualization.utils';
-import { useIsomorphicLayoutEffect } from '../components/table/MRT_TableContainer';
 
 export const useMRT_RowVirtualizer = <
   TData extends MRT_RowData,
@@ -58,7 +57,7 @@ export const useMRT_RowVirtualizer = <
         : undefined,
     onChange: (instance) => {
       if (tableBodyRef.current) {
-        tableBodyRef.current!.style.height = `${instance.getTotalSize()}px`;
+        tableBodyRef.current.style.height = `${instance.getTotalSize()}px`;
       }
       instance.getVirtualItems().forEach((virtualRow) => {
         const rowRef = tableRowRefsMap.current?.get(virtualRow.index);
@@ -69,7 +68,7 @@ export const useMRT_RowVirtualizer = <
     overscan: 4,
     rangeExtractor: useCallback(
       (range: Range) => {
-        return extraIndexRangeExtractor(range, draggingRow?.index ?? 0);
+        return extraIndexRangeExtractor(range, draggingRow?.index);
       },
       [draggingRow],
     ),
@@ -81,7 +80,7 @@ export const useMRT_RowVirtualizer = <
     rowVirtualizerInstanceRef.current = rowVirtualizer;
   }
 
-  useIsomorphicLayoutEffect(() => {
+  useEffect(() => {
     rowVirtualizer.measure();
   }, [table.getState()]);
 

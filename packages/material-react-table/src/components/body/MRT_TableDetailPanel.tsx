@@ -1,4 +1,4 @@
-import { type RefObject } from 'react';
+import { useCallback, type RefObject } from 'react';
 import Collapse from '@mui/material/Collapse';
 import TableCell, { type TableCellProps } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
@@ -65,11 +65,11 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
     <TableRow
       className="Mui-TableBodyCell-DetailPanel"
       data-index={renderDetailPanel ? staticRowIndex * 2 + 1 : staticRowIndex}
-      ref={(node: HTMLTableRowElement) => {
+      ref={useCallback((node: HTMLTableRowElement) => {
         if (node) {
           rowVirtualizer?.measureElement?.(node);
         }
-      }}
+      }, [])}
       {...tableRowProps}
       sx={(theme) => ({
         display: layoutMode?.startsWith('grid') ? 'flex' : undefined,

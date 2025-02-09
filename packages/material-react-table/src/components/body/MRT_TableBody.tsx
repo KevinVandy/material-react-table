@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import TableBody, { type TableBodyProps } from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';
 import { MRT_TableBodyRow, Memo_MRT_TableBodyRow } from './MRT_TableBodyRow';
@@ -67,11 +67,6 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
 
   const rowVirtualizer = useMRT_RowVirtualizer(table, rows);
 
-  // This gets set from direct DOM manipulation in useMRT_RowVirtualizer subsequently
-  const initialVirtualTableBodyHeight = useMemo(() => {
-    return rowVirtualizer?.getTotalSize();
-  }, []);
-
   const commonRowProps = {
     columnVirtualizer,
     numRows: rows.length,
@@ -108,18 +103,21 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
         )}
       <TableBody
         {...tableBodyProps}
-        ref={(node: HTMLTableSectionElement) => {
+        ref={useCallback((node: HTMLTableSectionElement) => {
           if (node) {
             tableBodyRef.current = node;
             if (tableBodyProps?.ref) {
               //@ts-expect-error
               tableBodyProps.ref.current = node;
             }
+            if (rowVirtualizer) {
+              tableBodyRef.current.style.height = `${rowVirtualizer.getTotalSize()}px`;
+            }
           }
-        }}
+        }, [])}
         sx={(theme) => ({
           display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-          minHeight: !rows.length ? '100px' : initialVirtualTableBodyHeight,
+          minHeight: !rows.length ? '100px' : undefined,
           position: 'relative',
           ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
         })}

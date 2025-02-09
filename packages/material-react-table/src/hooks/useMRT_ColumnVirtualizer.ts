@@ -90,7 +90,7 @@ export const useMRT_ColumnVirtualizer = <
     onChange: (instance) => {
       const columnVirtualizer = instance as MRT_ColumnVirtualizer;
       const virtualColumns = columnVirtualizer.getVirtualItems();
-      columnVirtualizer.virtualColumns = virtualColumns as any;
+
       const numColumns = virtualColumns.length;
 
       if (numColumns) {

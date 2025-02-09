@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import Box, { type BoxProps } from '@mui/material/Box';
 import { alpha } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -44,7 +45,7 @@ export const MRT_BottomToolbar = <TData extends MRT_RowData>({
   return (
     <Box
       {...toolbarProps}
-      ref={(node: HTMLDivElement) => {
+      ref={useCallback((node: HTMLDivElement) => {
         if (node) {
           bottomToolbarRef.current = node;
           if (toolbarProps?.ref) {
@@ -52,7 +53,7 @@ export const MRT_BottomToolbar = <TData extends MRT_RowData>({
             toolbarProps.ref.current = node;
           }
         }
-      }}
+      }, [])}
       sx={(theme) => ({
         ...getCommonToolbarStyles({ table, theme }),
         bottom: isFullScreen ? '0' : undefined,
