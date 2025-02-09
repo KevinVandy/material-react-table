@@ -53,18 +53,21 @@ import { useMRT_Effects } from './useMRT_Effects';
 export const useMRT_TableInstance = <TData extends MRT_RowData>(
   definedTableOptions: MRT_DefinedTableOptions<TData>,
 ): MRT_TableInstance<TData> => {
-  const lastSelectedRowId = useRef<null | string>(null);
   const actionCellRef = useRef<HTMLTableCellElement>(null);
   const bottomToolbarRef = useRef<HTMLDivElement>(null);
   const editInputRefs = useRef<Record<string, HTMLInputElement>>({});
   const filterInputRefs = useRef<Record<string, HTMLInputElement>>({});
+  const lastSelectedRowId = useRef<null | string>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const tableBodyRef = useRef<HTMLTableSectionElement>(null);
   const tableContainerRef = useRef<HTMLDivElement>(null);
-  const tableHeadCellRefs = useRef<Record<string, HTMLTableCellElement>>({});
-  const tablePaperRef = useRef<HTMLDivElement>(null);
-  const topToolbarRef = useRef<HTMLDivElement>(null);
-  const tableHeadRef = useRef<HTMLTableSectionElement>(null);
   const tableFooterRef = useRef<HTMLTableSectionElement>(null);
+  const tableHeadCellRefs = useRef<Record<string, HTMLTableCellElement>>({});
+  const tableHeadRef = useRef<HTMLTableSectionElement>(null);
+  const tablePaperRef = useRef<HTMLDivElement>(null);
+  const tableRef = useRef<HTMLTableElement>(null);
+  const tableRowRefsMap = useRef<Map<number, HTMLTableRowElement>>(new Map());
+  const topToolbarRef = useRef<HTMLDivElement>(null);
 
   //transform initial state with proper column order
   const initialState: Partial<MRT_TableState<TData>> = useMemo(() => {
@@ -264,11 +267,14 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
     filterInputRefs,
     lastSelectedRowId,
     searchInputRef,
+    tableBodyRef,
     tableContainerRef,
     tableFooterRef,
     tableHeadCellRefs,
     tableHeadRef,
     tablePaperRef,
+    tableRef,
+    tableRowRefsMap,
     topToolbarRef,
   };
 

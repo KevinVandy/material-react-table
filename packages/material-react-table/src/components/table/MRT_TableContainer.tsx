@@ -9,7 +9,7 @@ import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_CellActionMenu } from '../menus/MRT_CellActionMenu';
 import { MRT_EditRowModal } from '../modals/MRT_EditRowModal';
 
-const useIsomorphicLayoutEffect =
+export const useIsomorphicLayoutEffect =
   typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 export interface MRT_TableContainerProps<TData extends MRT_RowData>

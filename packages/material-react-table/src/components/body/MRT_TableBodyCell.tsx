@@ -12,6 +12,7 @@ import TableCell, { type TableCellProps } from '@mui/material/TableCell';
 import { useTheme } from '@mui/material/styles';
 import { MRT_TableBodyCellValue } from './MRT_TableBodyCellValue';
 import {
+  MRT_ColumnVirtualizer,
   type MRT_Cell,
   type MRT_RowData,
   type MRT_TableInstance,
@@ -29,6 +30,7 @@ import { MRT_EditCellTextField } from '../inputs/MRT_EditCellTextField';
 export interface MRT_TableBodyCellProps<TData extends MRT_RowData>
   extends TableCellProps {
   cell: MRT_Cell<TData>;
+  columnVirtualizer?: MRT_ColumnVirtualizer;
   numRows?: number;
   rowRef: RefObject<HTMLTableRowElement | null>;
   staticColumnIndex?: number;
@@ -38,6 +40,7 @@ export interface MRT_TableBodyCellProps<TData extends MRT_RowData>
 
 export const MRT_TableBodyCell = <TData extends MRT_RowData>({
   cell,
+  columnVirtualizer,
   numRows,
   rowRef,
   staticColumnIndex,
@@ -347,5 +350,5 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
 
 export const Memo_MRT_TableBodyCell = memo(
   MRT_TableBodyCell,
-  (prev, next) => next.cell === prev.cell,
+  (_prev, _next) => true,
 ) as typeof MRT_TableBodyCell;

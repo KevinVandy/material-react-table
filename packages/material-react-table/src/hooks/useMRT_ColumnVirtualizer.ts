@@ -10,7 +10,7 @@ import { extraIndexRangeExtractor } from '../utils/virtualization.utils';
 
 export const useMRT_ColumnVirtualizer = <
   TData extends MRT_RowData,
-  TScrollElement extends Element | Window = HTMLDivElement,
+  TScrollElement extends Element = HTMLDivElement,
   TItemElement extends Element = HTMLTableCellElement,
 >(
   table: MRT_TableInstance<TData>,
@@ -23,7 +23,7 @@ export const useMRT_ColumnVirtualizer = <
       enableColumnPinning,
       enableColumnVirtualization,
     },
-    refs: { tableContainerRef },
+    refs: { tableContainerRef, tableRef },
   } = table;
   const { columnPinning, columnVisibility, draggingColumn } = getState();
 
@@ -87,33 +87,44 @@ export const useMRT_ColumnVirtualizer = <
       },
       [leftPinnedIndexes, rightPinnedIndexes, draggingColumnIndex],
     ),
+    onChange: (instance) => {
+      const columnVirtualizer = instance as MRT_ColumnVirtualizer;
+      const virtualColumns = columnVirtualizer.getVirtualItems();
+      columnVirtualizer.virtualColumns = virtualColumns as any;
+      const numColumns = virtualColumns.length;
+
+      if (numColumns) {
+        const totalSize = columnVirtualizer.getTotalSize();
+
+        const leftNonPinnedStart = virtualColumns[numPinnedLeft]?.start || 0;
+        const leftNonPinnedEnd =
+          virtualColumns[leftPinnedIndexes.length - 1]?.end || 0;
+
+        const rightNonPinnedStart =
+          virtualColumns[numColumns - numPinnedRight]?.start || 0;
+        const rightNonPinnedEnd =
+          virtualColumns[numColumns - numPinnedRight - 1]?.end || 0;
+
+        columnVirtualizer.virtualPaddingLeft =
+          leftNonPinnedStart - leftNonPinnedEnd;
+
+        columnVirtualizer.virtualPaddingRight =
+          totalSize -
+          rightNonPinnedEnd -
+          (numPinnedRight ? totalSize - rightNonPinnedStart : 0);
+
+        tableRef.current?.style.setProperty(
+          '--col-mrt-virtualizer-left',
+          `${columnVirtualizer.virtualPaddingLeft}px`,
+        );
+        tableRef.current?.style.setProperty(
+          '--col-mrt-virtualizer-right',
+          `${columnVirtualizer.virtualPaddingRight}px`,
+        );
+      }
+    },
     ...columnVirtualizerProps,
   }) as unknown as MRT_ColumnVirtualizer<TScrollElement, TItemElement>;
-
-  const virtualColumns = columnVirtualizer.getVirtualItems();
-  columnVirtualizer.virtualColumns = virtualColumns as any;
-  const numColumns = virtualColumns.length;
-
-  if (numColumns) {
-    const totalSize = columnVirtualizer.getTotalSize();
-
-    const leftNonPinnedStart = virtualColumns[numPinnedLeft]?.start || 0;
-    const leftNonPinnedEnd =
-      virtualColumns[leftPinnedIndexes.length - 1]?.end || 0;
-
-    const rightNonPinnedStart =
-      virtualColumns[numColumns - numPinnedRight]?.start || 0;
-    const rightNonPinnedEnd =
-      virtualColumns[numColumns - numPinnedRight - 1]?.end || 0;
-
-    columnVirtualizer.virtualPaddingLeft =
-      leftNonPinnedStart - leftNonPinnedEnd;
-
-    columnVirtualizer.virtualPaddingRight =
-      totalSize -
-      rightNonPinnedEnd -
-      (numPinnedRight ? totalSize - rightNonPinnedStart : 0);
-  }
 
   if (columnVirtualizerInstanceRef) {
     //@ts-expect-error

@@ -1,5 +1,4 @@
 import { type DragEvent, memo, useMemo, useRef } from 'react';
-import { type VirtualItem } from '@tanstack/react-virtual';
 import TableRow, { type TableRowProps } from '@mui/material/TableRow';
 import {
   type Theme,
@@ -8,7 +7,7 @@ import {
   lighten,
   useTheme,
 } from '@mui/material/styles';
-import { MRT_TableBodyCell, Memo_MRT_TableBodyCell } from './MRT_TableBodyCell';
+import { Memo_MRT_TableBodyCell, MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import {
   type MRT_Cell,
@@ -17,7 +16,6 @@ import {
   type MRT_RowData,
   type MRT_RowVirtualizer,
   type MRT_TableInstance,
-  type MRT_VirtualItem,
 } from '../../types';
 import { getIsRowSelected } from '../../utils/row.utils';
 import {
@@ -35,7 +33,7 @@ export interface MRT_TableBodyRowProps<TData extends MRT_RowData>
   rowVirtualizer?: MRT_RowVirtualizer;
   staticRowIndex: number;
   table: MRT_TableInstance<TData>;
-  virtualRow?: VirtualItem;
+  virtualRowIndex?: number;
 }
 
 export const MRT_TableBodyRow = <TData extends MRT_RowData>({
@@ -46,7 +44,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
   rowVirtualizer,
   staticRowIndex,
   table,
-  virtualRow,
+  virtualRowIndex,
   ...rest
 }: MRT_TableBodyRowProps<TData>) => {
   const theme = useTheme();
@@ -69,7 +67,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
       renderDetailPanel,
       rowPinningDisplayMode,
     },
-    refs: { tableFooterRef, tableHeadRef },
+    refs: { tableFooterRef, tableHeadRef, tableRowRefsMap },
     setHoveredRow,
   } = table;
   const {
@@ -85,9 +83,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
 
   const visibleCells = row.getVisibleCells();
 
-  const { virtualColumns, virtualPaddingLeft, virtualPaddingRight } =
-    columnVirtualizer ?? {};
-
+  const isVirtualRow = virtualRowIndex !== undefined;
   const isRowSelected = getIsRowSelected({ row, table });
   const isRowPinned = enableRowPinning && row.getIsPinned();
   const isDraggingRow = draggingRow?.id === row.id;
@@ -172,17 +168,14 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
         ref={(node: HTMLTableRowElement) => {
           if (node) {
             rowRef.current = node;
-            rowVirtualizer?.measureElement(node);
+            if (rowVirtualizer) {
+              rowVirtualizer?.measureElement(node);
+              tableRowRefsMap.current?.set(virtualRowIndex!, node);
+            }
           }
         }}
         selected={isRowSelected}
         {...tableRowProps}
-        style={{
-          transform: virtualRow
-            ? `translateY(${virtualRow.start}px)`
-            : undefined,
-          ...tableRowProps?.style,
-        }}
         sx={(theme: Theme) => ({
           '&:hover td:after': cellHighlightColorHover
             ? {
@@ -192,7 +185,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
             : undefined,
           backgroundColor: `${baseBackgroundColor} !important`,
           bottom:
-            !virtualRow && bottomPinnedIndex !== undefined && isRowPinned
+            !isVirtualRow && bottomPinnedIndex !== undefined && isRowPinned
               ? `${
                   bottomPinnedIndex * rowHeight +
                   (enableStickyFooter ? tableFooterHeight - 1 : 0)
@@ -201,7 +194,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
           boxSizing: 'border-box',
           display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
           opacity: isRowPinned ? 0.97 : isDraggingRow || isHoveredRow ? 0.5 : 1,
-          position: virtualRow
+          position: isVirtualRow
             ? 'absolute'
             : rowPinningDisplayMode?.includes('sticky') && isRowPinned
               ? 'sticky'
@@ -215,7 +208,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
                 ...commonCellBeforeAfterStyles,
               }
             : undefined,
-          top: virtualRow
+          top: isVirtualRow
             ? 0
             : topPinnedIndex !== undefined && isRowPinned
               ? `${
@@ -223,21 +216,26 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
                   (enableStickyHeader || isFullScreen ? tableHeadHeight - 1 : 0)
                 }px`
               : undefined,
-          transition: virtualRow ? 'none' : 'all 150ms ease-in-out',
+          transition: isVirtualRow ? 'none' : 'all 150ms ease-in-out',
           width: '100%',
           zIndex:
             rowPinningDisplayMode?.includes('sticky') && isRowPinned ? 2 : 0,
           ...(sx as any),
         })}
       >
-        {virtualPaddingLeft ? (
-          <td style={{ display: 'flex', width: virtualPaddingLeft }} />
+        {columnVirtualizer ? (
+          <td
+            style={{
+              display: 'flex',
+              width: 'var(--col-mrt-virtualizer-left)',
+            }}
+          />
         ) : null}
-        {(virtualColumns ?? visibleCells).map(
-          (cellOrVirtualCell, staticColumnIndex) => {
-            let cell = cellOrVirtualCell as MRT_Cell<TData>;
+        {(columnVirtualizer?.getVirtualIndexes() ?? visibleCells).map(
+          (cellOrVirtualCellIndex, staticColumnIndex) => {
+            let cell = cellOrVirtualCellIndex as MRT_Cell<TData>;
             if (columnVirtualizer) {
-              staticColumnIndex = (cellOrVirtualCell as MRT_VirtualItem).index;
+              staticColumnIndex = cellOrVirtualCellIndex as number;
               cell = visibleCells[staticColumnIndex];
             }
             const props = {
@@ -250,7 +248,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
             };
             const key = `${cell.id}-${staticRowIndex}`;
             return cell ? (
-              memoMode === 'cells' &&
+              (memoMode === 'cells' || columnVirtualizer?.isScrolling) &&
               cell.column.columnDef.columnDefType === 'data' &&
               !draggingColumn &&
               !draggingRow &&
@@ -263,8 +261,13 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
             ) : null;
           },
         )}
-        {virtualPaddingRight ? (
-          <td style={{ display: 'flex', width: virtualPaddingRight }} />
+        {columnVirtualizer ? (
+          <td
+            style={{
+              display: 'flex',
+              width: 'var(--col-mrt-virtualizer-right)',
+            }}
+          />
         ) : null}
       </TableRow>
       {renderDetailPanel && !row.getIsGrouped() && (
@@ -274,7 +277,7 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
           rowVirtualizer={rowVirtualizer}
           staticRowIndex={staticRowIndex}
           table={table}
-          virtualRow={virtualRow}
+          virtualRowIndex={virtualRowIndex}
         />
       )}
     </>
@@ -283,6 +286,8 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
 
 export const Memo_MRT_TableBodyRow = memo(
   MRT_TableBodyRow,
-  (prev, next) =>
-    prev.row === next.row && prev.staticRowIndex === next.staticRowIndex,
+  (_prev, next) =>
+    (next.table.options.memoMode === 'rows' ||
+      next.rowVirtualizer?.isScrolling === true) &&
+    !next.columnVirtualizer?.isScrolling,
 ) as typeof MRT_TableBodyRow;

@@ -1,5 +1,4 @@
 import { memo, useMemo } from 'react';
-import { type VirtualItem } from '@tanstack/react-virtual';
 import TableBody, { type TableBodyProps } from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';
 import { MRT_TableBodyRow, Memo_MRT_TableBodyRow } from './MRT_TableBodyRow';
@@ -41,7 +40,7 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
       renderEmptyRowsFallback,
       rowPinningDisplayMode,
     },
-    refs: { tableFooterRef, tableHeadRef, tablePaperRef },
+    refs: { tableBodyRef, tableFooterRef, tableHeadRef, tablePaperRef },
   } = table;
   const { columnFilters, globalFilter, isFullScreen, rowPinning } = getState();
 
@@ -68,7 +67,10 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
 
   const rowVirtualizer = useMRT_RowVirtualizer(table, rows);
 
-  const { virtualRows } = rowVirtualizer ?? {};
+  // This gets set from direct DOM manipulation in useMRT_RowVirtualizer subsequently
+  const initialVirtualTableBodyHeight = useMemo(() => {
+    return rowVirtualizer?.getTotalSize();
+  }, []);
 
   const commonRowProps = {
     columnVirtualizer,
@@ -96,7 +98,7 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
                 row,
                 staticRowIndex,
               };
-              return memoMode === 'rows' ? (
+              return memoMode === 'rows' || rowVirtualizer?.isScrolling ? (
                 <Memo_MRT_TableBodyRow key={row.id} {...props} />
               ) : (
                 <MRT_TableBodyRow key={row.id} {...props} />
@@ -106,12 +108,18 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
         )}
       <TableBody
         {...tableBodyProps}
+        ref={(node: HTMLTableSectionElement) => {
+          if (node) {
+            tableBodyRef.current = node;
+            if (tableBodyProps?.ref) {
+              //@ts-expect-error
+              tableBodyProps.ref.current = node;
+            }
+          }
+        }}
         sx={(theme) => ({
           display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-          height: rowVirtualizer
-            ? `${rowVirtualizer.getTotalSize()}px`
-            : undefined,
-          minHeight: !rows.length ? '100px' : undefined,
+          minHeight: !rows.length ? '100px' : initialVirtualTableBodyHeight,
           position: 'relative',
           ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
         })}
@@ -151,37 +159,39 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
             </tr>
           ) : (
             <>
-              {(virtualRows ?? rows).map((rowOrVirtualRow, staticRowIndex) => {
-                let row = rowOrVirtualRow as MRT_Row<TData>;
-                if (rowVirtualizer) {
-                  if (renderDetailPanel) {
-                    if (rowOrVirtualRow.index % 2 === 1) {
-                      return null;
+              {(rowVirtualizer?.getVirtualIndexes() ?? rows).map(
+                (rowOrVirtualRowIndex, staticRowIndex) => {
+                  let row = rowOrVirtualRowIndex as MRT_Row<TData>;
+                  if (rowVirtualizer) {
+                    const virtualIndex = rowOrVirtualRowIndex as number;
+                    if (renderDetailPanel) {
+                      if (virtualIndex % 2 === 1) {
+                        return null;
+                      } else {
+                        staticRowIndex = virtualIndex / 2;
+                      }
                     } else {
-                      staticRowIndex = rowOrVirtualRow.index / 2;
+                      staticRowIndex = virtualIndex;
                     }
-                  } else {
-                    staticRowIndex = rowOrVirtualRow.index;
+                    row = rows[staticRowIndex];
                   }
-                  row = rows[staticRowIndex];
-                }
-                const props = {
-                  ...commonRowProps,
-                  pinnedRowIds,
-                  row,
-                  rowVirtualizer,
-                  staticRowIndex,
-                  virtualRow: rowVirtualizer
-                    ? (rowOrVirtualRow as VirtualItem)
-                    : undefined,
-                };
-                const key = `${row.id}-${row.index}`;
-                return memoMode === 'rows' ? (
-                  <Memo_MRT_TableBodyRow key={key} {...props} />
-                ) : (
-                  <MRT_TableBodyRow key={key} {...props} />
-                );
-              })}
+                  return (
+                    <Memo_MRT_TableBodyRow
+                      key={row.id}
+                      {...commonRowProps}
+                      pinnedRowIds={pinnedRowIds}
+                      row={row}
+                      rowVirtualizer={rowVirtualizer}
+                      staticRowIndex={staticRowIndex}
+                      virtualRowIndex={
+                        rowVirtualizer
+                          ? (rowOrVirtualRowIndex as number)
+                          : undefined
+                      }
+                    />
+                  );
+                },
+              )}
             </>
           ))}
       </TableBody>
@@ -217,5 +227,7 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
 
 export const Memo_MRT_TableBody = memo(
   MRT_TableBody,
-  (prev, next) => prev.table.options.data === next.table.options.data,
+  (_prev, next) =>
+    next.table.options.memoMode === 'table-body' ||
+    !!next.table.getState().columnSizingInfo.isResizingColumn,
 ) as typeof MRT_TableBody;

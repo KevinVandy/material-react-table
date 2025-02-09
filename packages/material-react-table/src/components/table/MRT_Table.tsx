@@ -4,7 +4,7 @@ import { useMRT_ColumnVirtualizer } from '../../hooks/useMRT_ColumnVirtualizer';
 import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 import { parseCSSVarId } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
-import { MRT_TableBody, Memo_MRT_TableBody } from '../body/MRT_TableBody';
+import { Memo_MRT_TableBody } from '../body/MRT_TableBody';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
 import { MRT_TableHead } from '../head/MRT_TableHead';
 
@@ -25,10 +25,10 @@ export const MRT_Table = <TData extends MRT_RowData>({
       enableTableFooter,
       enableTableHead,
       layoutMode,
-      memoMode,
       muiTableProps,
       renderCaption,
     },
+    refs: { tableRef },
   } = table;
   const { columnSizing, columnSizingInfo, columnVisibility, isFullScreen } =
     getState();
@@ -63,6 +63,15 @@ export const MRT_Table = <TData extends MRT_RowData>({
     <Table
       stickyHeader={enableStickyHeader || isFullScreen}
       {...tableProps}
+      ref={(node: HTMLTableElement) => {
+        if (node) {
+          tableRef.current = node;
+          if (tableProps?.ref) {
+            //@ts-expect-error
+            tableProps.ref.current = node;
+          }
+        }
+      }}
       style={{ ...columnSizeVars, ...tableProps?.style }}
       sx={(theme) => ({
         borderCollapse: 'separate',
@@ -73,11 +82,7 @@ export const MRT_Table = <TData extends MRT_RowData>({
     >
       {!!Caption && <caption>{Caption}</caption>}
       {enableTableHead && <MRT_TableHead {...commonTableGroupProps} />}
-      {memoMode === 'table-body' || columnSizingInfo.isResizingColumn ? (
-        <Memo_MRT_TableBody {...commonTableGroupProps} />
-      ) : (
-        <MRT_TableBody {...commonTableGroupProps} />
-      )}
+      <Memo_MRT_TableBody {...commonTableGroupProps} />
       {enableTableFooter && <MRT_TableFooter {...commonTableGroupProps} />}
     </Table>
   );

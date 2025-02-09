@@ -113,12 +113,12 @@ export type MRT_VirtualItem = VirtualItem;
 export type MRT_VisibilityState = VisibilityState;
 
 export type MRT_VirtualizerOptions<
-  TScrollElement extends Element | Window = Element | Window,
+  TScrollElement extends Element = Element,
   TItemElement extends Element = Element,
 > = VirtualizerOptions<TScrollElement, TItemElement>;
 
 export type MRT_ColumnVirtualizer<
-  TScrollElement extends Element | Window = HTMLDivElement,
+  TScrollElement extends Element = HTMLDivElement,
   TItemElement extends Element = HTMLTableCellElement,
 > = Virtualizer<TScrollElement, TItemElement> & {
   virtualColumns: MRT_VirtualItem[];
@@ -127,11 +127,9 @@ export type MRT_ColumnVirtualizer<
 };
 
 export type MRT_RowVirtualizer<
-  TScrollElement extends Element | Window = HTMLDivElement,
+  TScrollElement extends Element = HTMLDivElement,
   TItemElement extends Element = HTMLTableRowElement,
-> = Virtualizer<TScrollElement, TItemElement> & {
-  virtualRows: MRT_VirtualItem[];
-};
+> = Virtualizer<TScrollElement, TItemElement>;
 
 export type MRT_ColumnHelper<TData extends MRT_RowData> = {
   accessor: <
@@ -318,6 +316,9 @@ export type MRT_TableInstance<TData extends MRT_RowData> = Omit<
     tableHeadCellRefs: RefObject<Record<string, HTMLTableCellElement> | null>;
     tableHeadRef: RefObject<HTMLTableSectionElement | null>;
     tablePaperRef: RefObject<HTMLDivElement | null>;
+    tableRef: RefObject<HTMLTableElement | null>;
+    tableBodyRef: RefObject<HTMLTableSectionElement | null>;
+    tableRowRefsMap: RefObject<Map<number, HTMLTableRowElement> | null>;
     topToolbarRef: RefObject<HTMLDivElement | null>;
   };
   setActionCell: Dispatch<SetStateAction<MRT_Cell<TData> | null>>;

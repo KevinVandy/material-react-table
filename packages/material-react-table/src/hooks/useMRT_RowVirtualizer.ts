@@ -8,10 +8,11 @@ import {
 } from '../types';
 import { parseFromValuesOrFunc } from '../utils/utils';
 import { extraIndexRangeExtractor } from '../utils/virtualization.utils';
+import { useIsomorphicLayoutEffect } from '../components/table/MRT_TableContainer';
 
 export const useMRT_RowVirtualizer = <
   TData extends MRT_RowData,
-  TScrollElement extends Element | Window = HTMLDivElement,
+  TScrollElement extends Element = HTMLDivElement,
   TItemElement extends Element = HTMLTableRowElement,
 >(
   table: MRT_TableInstance<TData>,
@@ -26,7 +27,7 @@ export const useMRT_RowVirtualizer = <
       rowVirtualizerInstanceRef,
       rowVirtualizerOptions,
     },
-    refs: { tableContainerRef },
+    refs: { tableContainerRef, tableRowRefsMap, tableBodyRef },
   } = table;
   const { density, draggingRow, expanded } = getState();
 
@@ -55,6 +56,16 @@ export const useMRT_RowVirtualizer = <
       navigator.userAgent.indexOf('Firefox') === -1
         ? (element) => element?.getBoundingClientRect().height
         : undefined,
+    onChange: (instance) => {
+      if (tableBodyRef.current) {
+        tableBodyRef.current!.style.height = `${instance.getTotalSize()}px`;
+      }
+      instance.getVirtualItems().forEach((virtualRow) => {
+        const rowRef = tableRowRefsMap.current?.get(virtualRow.index);
+        if (!rowRef) return;
+        rowRef.style.transform = `translateY(${virtualRow.start}px)`;
+      });
+    },
     overscan: 4,
     rangeExtractor: useCallback(
       (range: Range) => {
@@ -65,12 +76,14 @@ export const useMRT_RowVirtualizer = <
     ...rowVirtualizerProps,
   }) as unknown as MRT_RowVirtualizer<TScrollElement, TItemElement>;
 
-  rowVirtualizer.virtualRows = rowVirtualizer.getVirtualItems() as any;
-
   if (rowVirtualizerInstanceRef) {
     //@ts-expect-error
     rowVirtualizerInstanceRef.current = rowVirtualizer;
   }
+
+  useIsomorphicLayoutEffect(() => {
+    rowVirtualizer.measure();
+  }, [table.getState()]);
 
   return rowVirtualizer;
 };

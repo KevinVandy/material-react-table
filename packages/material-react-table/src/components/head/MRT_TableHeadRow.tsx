@@ -7,7 +7,6 @@ import {
   type MRT_HeaderGroup,
   type MRT_RowData,
   type MRT_TableInstance,
-  type MRT_VirtualItem,
 } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
@@ -33,9 +32,6 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
     },
   } = table;
 
-  const { virtualColumns, virtualPaddingLeft, virtualPaddingRight } =
-    columnVirtualizer ?? {};
-
   const tableRowProps = {
     ...parseFromValuesOrFunc(muiTableHeadRowProps, {
       headerGroup,
@@ -59,18 +55,21 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
         ...(parseFromValuesOrFunc(tableRowProps?.sx, theme) as any),
       })}
     >
-      {virtualPaddingLeft ? (
-        <th style={{ display: 'flex', width: virtualPaddingLeft }} />
+      {columnVirtualizer ? (
+        <th
+          style={{
+            display: 'flex',
+            width: 'var(--col-mrt-virtualizer-left)',
+          }}
+        />
       ) : null}
-      {(virtualColumns ?? headerGroup.headers).map(
-        (headerOrVirtualHeader, staticColumnIndex) => {
-          let header = headerOrVirtualHeader as MRT_Header<TData>;
+      {(columnVirtualizer?.getVirtualIndexes() ?? headerGroup.headers).map(
+        (headerOrVirtualHeaderIndex, staticColumnIndex) => {
+          let header = headerOrVirtualHeaderIndex as MRT_Header<TData>;
           if (columnVirtualizer) {
-            staticColumnIndex = (headerOrVirtualHeader as MRT_VirtualItem)
-              .index;
+            staticColumnIndex = headerOrVirtualHeaderIndex as number;
             header = headerGroup.headers[staticColumnIndex];
           }
-
           return header ? (
             <MRT_TableHeadCell
               columnVirtualizer={columnVirtualizer}
@@ -82,8 +81,13 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
           ) : null;
         },
       )}
-      {virtualPaddingRight ? (
-        <th style={{ display: 'flex', width: virtualPaddingRight }} />
+      {columnVirtualizer ? (
+        <th
+          style={{
+            display: 'flex',
+            width: 'var(--col-mrt-virtualizer-right)',
+          }}
+        />
       ) : null}
     </TableRow>
   );

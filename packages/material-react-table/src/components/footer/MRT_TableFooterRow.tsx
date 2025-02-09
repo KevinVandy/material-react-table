@@ -6,7 +6,6 @@ import {
   type MRT_HeaderGroup,
   type MRT_RowData,
   type MRT_TableInstance,
-  type MRT_VirtualItem,
 } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
@@ -30,9 +29,6 @@ export const MRT_TableFooterRow = <TData extends MRT_RowData>({
       muiTableFooterRowProps,
     },
   } = table;
-
-  const { virtualColumns, virtualPaddingLeft, virtualPaddingRight } =
-    columnVirtualizer ?? {};
 
   // if no content in row, skip row
   if (
@@ -65,15 +61,19 @@ export const MRT_TableFooterRow = <TData extends MRT_RowData>({
         ...(parseFromValuesOrFunc(tableRowProps?.sx, theme) as any),
       })}
     >
-      {virtualPaddingLeft ? (
-        <th style={{ display: 'flex', width: virtualPaddingLeft }} />
+      {columnVirtualizer ? (
+        <th
+          style={{
+            display: 'flex',
+            width: 'var(--col-mrt-virtualizer-left)',
+          }}
+        />
       ) : null}
-      {(virtualColumns ?? footerGroup.headers).map(
-        (footerOrVirtualFooter, staticColumnIndex) => {
-          let footer = footerOrVirtualFooter as MRT_Header<TData>;
+      {(columnVirtualizer?.getVirtualIndexes() ?? footerGroup.headers).map(
+        (footerOrVirtualFooterIndex, staticColumnIndex) => {
+          let footer = footerOrVirtualFooterIndex as MRT_Header<TData>;
           if (columnVirtualizer) {
-            staticColumnIndex = (footerOrVirtualFooter as MRT_VirtualItem)
-              .index;
+            staticColumnIndex = footerOrVirtualFooterIndex as number;
             footer = footerGroup.headers[staticColumnIndex];
           }
 
@@ -87,8 +87,13 @@ export const MRT_TableFooterRow = <TData extends MRT_RowData>({
           ) : null;
         },
       )}
-      {virtualPaddingRight ? (
-        <th style={{ display: 'flex', width: virtualPaddingRight }} />
+      {columnVirtualizer ? (
+        <th
+          style={{
+            display: 'flex',
+            width: 'var(--col-mrt-virtualizer-right)',
+          }}
+        />
       ) : null}
     </TableRow>
   );
