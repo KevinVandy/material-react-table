@@ -179,7 +179,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
       textFieldProps.type === 'date'
         ? event.target.valueAsDate
         : textFieldProps.type === 'number'
-          ? event.target.valueAsNumber
+          ?  isNaN(event.target.valueAsNumber) ? undefined : event.target.value
           : event.target.value;
     handleChange(newValue);
     textFieldProps?.onChange?.(event);
