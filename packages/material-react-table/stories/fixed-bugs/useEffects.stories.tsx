@@ -5,10 +5,12 @@ import MenuItem from '@mui/material/MenuItem';
 import {
   type MRT_ColumnDef,
   type MRT_ColumnFiltersState,
+  MRT_PaginationState,
   MaterialReactTable,
 } from '../../src';
 import { faker } from '@faker-js/faker';
 import { type Meta } from '@storybook/react';
+import { Updater } from '@tanstack/react-table';
 
 const meta: Meta = {
   title: 'Fixed Bugs/useEffects',
@@ -320,6 +322,45 @@ export const DelayedFacetedValues = () => {
       state={{
         isLoading,
       }}
+    />
+  );
+};
+
+export const PreventUnnecessaryPaginationChangeByOutOfBoundsCheck = () => {
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 5,
+  });
+
+  const columns: MRT_ColumnDef<Person>[] = [
+    {
+      accessorKey: 'firstName',
+      header: 'First Name',
+    },
+    {
+      accessorKey: 'lastName',
+      header: 'Last Name',
+    },
+    {
+      accessorKey: 'address',
+      header: 'Address',
+    },
+  ];
+
+  const handlePaginationChange = (updater: Updater<MRT_PaginationState>) => {
+    console.log('Pagination change should not be triggered');
+    setPagination(updater);
+  };
+
+  return (
+    <MaterialReactTable
+      columns={columns}
+      data={[]}
+      manualPagination={true}
+      rowCount={0}
+      enablePagination
+      onPaginationChange={handlePaginationChange}
+      state={{ pagination }}
     />
   );
 };

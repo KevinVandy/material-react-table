@@ -69,9 +69,12 @@ export const useMRT_Effects = <TData extends MRT_RowData>(
   useEffect(() => {
     if (!enablePagination || isLoading || showSkeletons) return;
     const { pageIndex, pageSize } = pagination;
-    const firstVisibleRowIndex = pageIndex * pageSize;
-    if (firstVisibleRowIndex >= totalRowCount) {
-      table.setPageIndex(Math.ceil(totalRowCount / pageSize) - 1);
+    const totalPages: number =
+      totalRowCount > 0 ? Math.ceil(totalRowCount / pageSize) : 1;
+    const isOutOfBounds: boolean = pageIndex < 0 || pageIndex >= totalPages;
+
+    if (isOutOfBounds) {
+      table.setPageIndex(totalPages - 1);
     }
   }, [totalRowCount, enablePagination, isLoading, showSkeletons]);
 
