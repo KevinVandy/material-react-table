@@ -343,8 +343,8 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
         ...textFieldProps.slotProps?.formHelperText,
       },
       input: endAdornment //hack because mui looks for presence of endAdornment key instead of undefined
-        ? { endAdornment, startAdornment }
-        : { startAdornment },
+        ? {endAdornment, startAdornment, ...textFieldProps.slotProps?.input}
+        : {startAdornment, ...textFieldProps.slotProps?.input},
       htmlInput: {
         'aria-label': filterPlaceholder,
         autoComplete: 'off',
