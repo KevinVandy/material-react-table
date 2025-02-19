@@ -51,6 +51,7 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
       mrtTheme: { draggingBorderColor },
     },
     setColumnOrder,
+    setColumnPinning,
   } = table;
   const { columnOrder } = getState();
   const { columnDef } = column;
@@ -85,7 +86,12 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
     setIsDragging(false);
     setHoveredColumn(null);
     if (hoveredColumn) {
-      setColumnOrder(reorderColumn(column, hoveredColumn, columnOrder));
+      const reorderedColumns = reorderColumn(column, hoveredColumn, columnOrder);
+      setColumnOrder(reorderedColumns);
+      setColumnPinning(({ left = [], right = [] }) => ({
+        left: reorderedColumns.filter(header => left.includes(header)),
+        right: reorderedColumns.filter(header => right.includes(header)),
+      }));
     }
   };
 

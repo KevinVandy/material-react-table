@@ -38,6 +38,11 @@ const columns: MRT_ColumnDef<(typeof data)[0]>[] = [
     accessorKey: 'state',
     header: 'State',
   },
+  {
+    accessorKey: "phone",
+    header: "Phone",
+    enablePinning: false,
+  }
 ];
 
 const data = [...Array(100)].map(() => ({
@@ -47,6 +52,7 @@ const data = [...Array(100)].map(() => ({
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
   state: faker.location.state(),
+  phone: faker.phone.number(),
 }));
 
 export const ColumnOrderingEnabled = () => (

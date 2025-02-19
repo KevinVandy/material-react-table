@@ -26,6 +26,7 @@ export const MRT_TableHeadCellGrabHandle = <TData extends MRT_RowData>({
     getState,
     options: { enableColumnOrdering, muiColumnDragHandleProps },
     setColumnOrder,
+    setColumnPinning,
     setDraggingColumn,
     setHoveredColumn,
   } = table;
@@ -64,9 +65,12 @@ export const MRT_TableHeadCellGrabHandle = <TData extends MRT_RowData>({
       hoveredColumn &&
       hoveredColumn?.id !== draggingColumn?.id
     ) {
-      setColumnOrder(
-        reorderColumn(column, hoveredColumn as MRT_Column<TData>, columnOrder),
-      );
+      const reorderedColumns = reorderColumn(column, hoveredColumn as MRT_Column<TData>, columnOrder);
+      setColumnOrder(reorderedColumns);
+      setColumnPinning(({ left = [], right = [] }) => ({
+        left: reorderedColumns.filter(header => left.includes(header)),
+        right: reorderedColumns.filter(header => right.includes(header)),
+      }));
     }
     setDraggingColumn(null);
     setHoveredColumn(null);
