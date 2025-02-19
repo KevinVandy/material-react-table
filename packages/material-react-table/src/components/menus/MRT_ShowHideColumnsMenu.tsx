@@ -63,7 +63,14 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
           getCenterLeafColumns().find((col) => col?.id === colId),
         ),
         ...getRightLeafColumns(),
-      ].filter(Boolean);
+      ]
+        .filter(Boolean)
+        .sort((a, b) => {
+          return (
+            columnOrder.indexOf((a as MRT_Column<TData>).id) -
+            columnOrder.indexOf((b as MRT_Column<TData>).id)
+          );
+        });
     }
     return columns;
   }, [
