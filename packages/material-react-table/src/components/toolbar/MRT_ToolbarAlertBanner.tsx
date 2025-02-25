@@ -53,13 +53,14 @@ export const MRT_ToolbarAlertBanner = <TData extends MRT_RowData>({
   });
 
   const totalRowCount = rowCount ?? getCoreRowModel().rows.length;
+  const filteredRowCount = getFilteredSelectedRowModel().rows.length;
 
   const selectedRowCount = useMemo(
     () =>
       manualPagination
         ? Object.values(rowSelection).filter(Boolean).length
-        : getFilteredSelectedRowModel().rows.length,
-    [rowSelection, totalRowCount, manualPagination],
+        : filteredRowCount,
+    [rowSelection, totalRowCount, manualPagination, filteredRowCount],
   );
   const selectedAlert =
     selectedRowCount > 0 ? (
