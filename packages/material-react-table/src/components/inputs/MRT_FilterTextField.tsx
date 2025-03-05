@@ -512,12 +512,14 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
                             (option) =>
                               getValueAndLabel(option).value === value,
                           );
-                          return (
-                            <Chip
-                              key={value}
-                              label={getValueAndLabel(selectedValue).label}
-                            />
-                          );
+                          if (selectedValue) {
+                            return (
+                              <Chip
+                                key={value}
+                                label={getValueAndLabel(selectedValue).label}
+                              />
+                            );
+                          }
                         })}
                       </Box>
                     )
