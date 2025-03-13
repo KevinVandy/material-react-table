@@ -1,0 +1,4 @@
+# CODEOWNERS file
+# Owners will be requested for a review
+/.semaphore @edwardydropit @dropit-dev/DevOps
+/.github @edwardydropit @dropit-dev/DevOps
