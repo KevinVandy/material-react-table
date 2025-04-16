@@ -222,7 +222,7 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
   //if loading, generate blank rows to show skeleton loaders
   statefulTableOptions.data = useMemo(
     () =>
-      (statefulTableOptions.state.isLoading ||
+      (statefulTableOptions.state.isLoading &&
         statefulTableOptions.state.showSkeletons) &&
       !statefulTableOptions.data.length
         ? [
