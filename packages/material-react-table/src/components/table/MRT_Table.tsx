@@ -4,7 +4,7 @@ import { useMRT_ColumnVirtualizer } from '../../hooks/useMRT_ColumnVirtualizer';
 import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 import { parseCSSVarId } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
-import { Memoizable_MRT_TableBody } from '../body/MRT_TableBody';
+import { Memo_MRT_TableBody } from '../body/MRT_TableBody';
 import { MRT_TableFooter } from '../footer/MRT_TableFooter';
 import { MRT_TableHead } from '../head/MRT_TableHead';
 
@@ -73,7 +73,7 @@ export const MRT_Table = <TData extends MRT_RowData>({
     >
       {!!Caption && <caption>{Caption}</caption>}
       {enableTableHead && <MRT_TableHead {...commonTableGroupProps} />}
-      <Memoizable_MRT_TableBody
+      <Memo_MRT_TableBody
         {...commonTableGroupProps}
         skipMemoization={!(memoMode === 'table-body' || columnSizingInfo.isResizingColumn)}
       />

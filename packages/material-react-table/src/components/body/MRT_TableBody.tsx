@@ -17,8 +17,9 @@ export interface MRT_TableBodyProps<TData extends MRT_RowData>
   extends TableBodyProps {
   columnVirtualizer?: MRT_ColumnVirtualizer;
   table: MRT_TableInstance<TData>;
-  skipMemoization?: boolean
 }
+
+type MRT_TableBody_WithMemoizationHintsProps<TData extends MRT_RowData> = MRT_TableBodyProps<TData> & { skipMemoization?: boolean; }
 
 export const MRT_TableBody = <TData extends MRT_RowData>({
   columnVirtualizer,
@@ -135,9 +136,8 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
                     sx={{
                       color: 'text.secondary',
                       fontStyle: 'italic',
-                      maxWidth: `min(100vw, ${
-                        tablePaperRef.current?.clientWidth ?? 360
-                      }px)`,
+                      maxWidth: `min(100vw, ${tablePaperRef.current?.clientWidth ?? 360
+                        }px)`,
                       py: '2rem',
                       textAlign: 'center',
                       width: '100%',
@@ -216,10 +216,14 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
   );
 };
 
-export const Memoizable_MRT_TableBody = memo(
-  MRT_TableBody,
-  (prev, next) => {
-    return prev.table.options.data === next.table.options.data
-      && !next.skipMemoization
-  },
-) as typeof MRT_TableBody;
+const MRT_TableBody_WithMemoizationHints = <TData extends MRT_RowData>(props: MRT_TableBody_WithMemoizationHintsProps<TData>) => {
+  const { skipMemoization, ...rest } = props;
+  return <MRT_TableBody {...rest} />;
+};
+
+export const Memo_MRT_TableBody = memo(
+    MRT_TableBody_WithMemoizationHints,
+    (prev, next) =>
+      prev.table.options.data === next.table.options.data &&
+      !next.skipMemoization
+) as typeof MRT_TableBody_WithMemoizationHints
