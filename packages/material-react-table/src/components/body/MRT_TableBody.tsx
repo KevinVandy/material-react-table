@@ -17,6 +17,7 @@ export interface MRT_TableBodyProps<TData extends MRT_RowData>
   extends TableBodyProps {
   columnVirtualizer?: MRT_ColumnVirtualizer;
   table: MRT_TableInstance<TData>;
+  skipMemoization?: boolean
 }
 
 export const MRT_TableBody = <TData extends MRT_RowData>({
@@ -215,7 +216,10 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
   );
 };
 
-export const Memo_MRT_TableBody = memo(
+export const Memoizable_MRT_TableBody = memo(
   MRT_TableBody,
-  (prev, next) => prev.table.options.data === next.table.options.data,
+  (prev, next) => {
+    return prev.table.options.data === next.table.options.data
+      && !next.skipMemoization
+  },
 ) as typeof MRT_TableBody;
