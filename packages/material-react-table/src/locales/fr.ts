@@ -58,7 +58,7 @@ export const MRT_Localization_FR: MRT_Localization = {
   max: 'Max',
   min: 'Min',
   move: 'Déplacer',
-  noRecordsToDisplay: 'Aucun enregistrement à afficher',
+  noRecordsToDisplay: 'Aucune entrée à afficher',
   noResultsFound: 'Aucun résultat trouvé',
   of: 'de',
   or: 'ou',
