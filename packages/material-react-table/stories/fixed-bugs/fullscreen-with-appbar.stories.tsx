@@ -1,5 +1,5 @@
 import { AppBar, Box, CssBaseline, Toolbar } from '@mui/material';
-import { type Meta } from '@storybook/react';
+import { type Meta } from '@storybook/react-vite';
 import {
   MaterialReactTable,
   useMaterialReactTable,

@@ -14,6 +14,7 @@ const config: StorybookConfig = {
     '../stories/**/*.mdx',
     '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
   ],
+
   addons: [
     getAbsolutePath('@storybook/addon-links'),
     getAbsolutePath('@storybook/addon-essentials'),
@@ -21,15 +22,14 @@ const config: StorybookConfig = {
     getAbsolutePath('@storybook/addon-storysource'),
     getAbsolutePath('storybook-dark-mode'),
   ],
+
   framework: {
     name: getAbsolutePath('@storybook/react-vite'),
     options: {},
   },
-  docs: {
-    autodocs: 'tag',
-  },
+
   typescript: {
     reactDocgen: 'react-docgen-typescript',
-  },
+  }
 };
 export default config;

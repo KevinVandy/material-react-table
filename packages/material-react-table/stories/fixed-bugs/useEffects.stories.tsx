@@ -9,7 +9,7 @@ import {
   MaterialReactTable,
 } from '../../src';
 import { faker } from '@faker-js/faker';
-import { type Meta } from '@storybook/react';
+import { type Meta } from '@storybook/react-vite';
 import { Updater } from '@tanstack/react-table';
 
 const meta: Meta = {

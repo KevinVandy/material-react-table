@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { addons } from '@storybook/preview-api';
-import { Preview } from '@storybook/react';
+import { useEffect, useState } from 'react';
+import { addons } from 'storybook/preview-api';
+import { Preview } from '@storybook/react-vite';
 import { useDarkMode, DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
