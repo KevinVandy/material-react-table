@@ -402,6 +402,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
           {...commonDatePickerProps}
           {...timePickerProps}
           slotProps={{
+            ...timePickerProps?.slotProps,
             field: {
               clearable: true,
               onClear: () => handleClear(),
@@ -418,6 +419,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
           {...commonDatePickerProps}
           {...dateTimePickerProps}
           slotProps={{
+            ...dateTimePickerProps?.slotProps,
             field: {
               clearable: true,
               onClear: () => handleClear(),
@@ -434,6 +436,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
           {...commonDatePickerProps}
           {...datePickerProps}
           slotProps={{
+            ...datePickerProps?.slotProps,
             field: {
               clearable: true,
               onClear: () => handleClear(),
