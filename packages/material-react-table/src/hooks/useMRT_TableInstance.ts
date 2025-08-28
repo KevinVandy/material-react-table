@@ -229,9 +229,11 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
             ...Array(
               Math.min(statefulTableOptions.state.pagination.pageSize, 20),
             ).fill(null),
-          ].map(() =>
+          ].map((_, index) =>
             Object.assign(
-              {},
+              {
+                'mrt-skeleton-id': `skeleton-${index}`,
+              },
               ...getAllLeafColumnDefs(statefulTableOptions.columns).map(
                 (col) => ({
                   [getColumnId(col)]: null,
@@ -246,6 +248,15 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
       statefulTableOptions.state.showSkeletons,
     ],
   );
+
+  statefulTableOptions.getRowId = useMemo(() => {
+    const getRowId = statefulTableOptions.getRowId;
+    return (originalRow, index, parentRow) => {
+      if ('mrt-skeleton-id' in originalRow)
+        return originalRow['mrt-skeleton-id'];
+      return getRowId?.(originalRow, index, parentRow);
+    };
+  }, [statefulTableOptions.getRowId]);
 
   //@ts-expect-error
   const table = useReactTable({
