@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { addons } from '@storybook/preview-api';
-import { Preview } from '@storybook/react';
-import { useDarkMode, DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
+import { useEffect, useState } from 'react';
+import { addons } from 'storybook/preview-api';
+import { Preview } from '@storybook/react-vite';
+// import { useDarkMode, DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
@@ -34,16 +34,16 @@ const preview: Preview = {
       const [isDark, setDark] = useState(true);
       const theme = isDark ? darkTheme : lightTheme;
 
-      useEffect(() => {
-        const sbRoot = document.getElementsByClassName(
-          'sb-show-main',
-        )[0] as HTMLElement;
-        channel.on(DARK_MODE_EVENT_NAME, setDark);
-        if (sbRoot) {
-          sbRoot.style.backgroundColor = theme.palette.background.default;
-        }
-        return () => channel.off(DARK_MODE_EVENT_NAME, setDark);
-      }, [theme]);
+      // useEffect(() => {
+      //   const sbRoot = document.getElementsByClassName(
+      //     'sb-show-main',
+      //   )[0] as HTMLElement;
+      //   channel.on(DARK_MODE_EVENT_NAME, setDark);
+      //   if (sbRoot) {
+      //     sbRoot.style.backgroundColor = theme.palette.background.default;
+      //   }
+      //   return () => channel.off(DARK_MODE_EVENT_NAME, setDark);
+      // }, [theme]);
 
       useEffect(() => {
         if (process.env.NODE_ENV === 'development') return;
@@ -65,7 +65,7 @@ const preview: Preview = {
             <Typography
               sx={{
                 pb: '0.5rem',
-                color: useDarkMode() ? '#fff' : '#666',
+                // color: useDarkMode() ? '#fff' : '#666',
               }}
               variant="subtitle2"
             >
@@ -82,7 +82,7 @@ const preview: Preview = {
               variant="subtitle2"
               sx={{
                 pb: '1rem',
-                color: useDarkMode() ? '#fff' : '#666',
+                // color: useDarkMode() ? '#fff' : '#666',
               }}
             >
               View Source code for these examples in the code tab below or{' '}

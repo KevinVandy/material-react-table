@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { type MRT_ColumnDef, MaterialReactTable } from '../../src';
-import { type Meta } from '@storybook/react';
+import { type Meta } from '@storybook/react-vite';
 
 const meta: Meta = {
   title: 'Fixed Bugs/Loading Data',

@@ -6,7 +6,7 @@ import {
   MaterialReactTable,
 } from '../../src';
 import { faker } from '@faker-js/faker';
-import { type Meta } from '@storybook/react';
+import { type Meta } from '@storybook/react-vite';
 
 const meta: Meta = {
   title: 'Features/Aggregation Examples',
