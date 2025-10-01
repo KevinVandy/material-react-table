@@ -67,6 +67,7 @@ export const MRT_Localization_EN: MRT_Localization = {
   pinToRight: 'Pin to right',
   resetColumnSize: 'Reset column size',
   resetOrder: 'Reset order',
+  resetPins: 'Reset pins',
   rowActions: 'Row Actions',
   rowNumber: '#',
   rowNumbers: 'Row Numbers',

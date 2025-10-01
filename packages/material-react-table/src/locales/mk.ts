@@ -73,7 +73,8 @@ export const MRT_Localization_MK: MRT_Localization = {
   rowsPerPage: 'Редови по страница',
   save: 'Зачувај',
   search: 'Барај',
-  selectedCountOfRowCountRowsSelected: '{selectedCount} од {rowCount} ред(ови) избрани',
+  selectedCountOfRowCountRowsSelected:
+    '{selectedCount} од {rowCount} ред(ови) избрани',
   select: 'Избери',
   showAll: 'Прикажи сè',
   showAllColumns: 'Прикажи ги сите колони',

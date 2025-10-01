@@ -135,7 +135,9 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
                       color: 'text.secondary',
                       fontStyle: 'italic',
                       maxWidth: `min(100vw, ${
-                        tablePaperRef.current?.clientWidth ? tablePaperRef.current?.clientWidth + "px" : "100%"
+                        tablePaperRef.current?.clientWidth
+                          ? tablePaperRef.current?.clientWidth + 'px'
+                          : '100%'
                       })`,
                       py: '2rem',
                       textAlign: 'center',

@@ -55,6 +55,7 @@ const Example = () => {
     columns,
     data,
     enableColumnPinning: true,
+    enableColumnResetPins: true,
     enableRowActions: true,
     layoutMode: 'grid-no-grow', //constant column widths
     renderRowActionMenuItems: () => [<MenuItem key="action">Action</MenuItem>],

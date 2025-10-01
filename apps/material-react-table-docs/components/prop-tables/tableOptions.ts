@@ -523,6 +523,28 @@ export const tableOptions: TableOption[] = [
     type: 'boolean',
   },
   {
+    tableOption: 'enableColumnResetPins',
+    defaultValue: '',
+    description:
+      "Determines if 'Reset Pins' option is available in the Show/Hide columns menu.",
+    link: '/docs/guides/column-pinning',
+    linkText: 'MRT Column Pinning Docs',
+    required: false,
+    source: 'MRT',
+    type: 'boolean',
+  },
+  {
+    tableOption: 'enableColumnUnpinAll',
+    defaultValue: 'true',
+    description:
+      "Determines if 'Unpin All' option is available in the Show/Hide columns menu.",
+    link: '/docs/guides/column-pinning',
+    linkText: 'MRT Column Pinning Docs',
+    required: false,
+    source: 'MRT',
+    type: 'boolean',
+  },
+  {
     tableOption: 'enableCellActions',
     defaultValue: '',
     description: '',
