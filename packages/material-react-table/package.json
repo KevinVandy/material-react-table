@@ -106,9 +106,9 @@
   "peerDependencies": {
     "@emotion/react": ">=11.13",
     "@emotion/styled": ">=11.13",
-    "@mui/icons-material": ">=6",
-    "@mui/material": ">=6",
-    "@mui/x-date-pickers": ">=7.15",
+    "@mui/icons-material": ">=6 || ^7.0.0",
+    "@mui/material": ">=6 || ^7.0.0",
+    "@mui/x-date-pickers": ">=7.15 || ^7.0.0",
     "react": ">=18.0",
     "react-dom": ">=18.0"
   },
