@@ -37,9 +37,11 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
       muiSelectAllCheckboxProps,
       muiSelectCheckboxProps,
       selectAllMode,
+      manualPagination,
+      rowCount,
     },
   } = table;
-  const { density, isLoading } = getState();
+  const { density, isLoading, rowSelection } = getState();
 
   const selectAll = !row;
 
@@ -49,8 +51,29 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
       : table.getIsAllRowsSelected()
     : undefined;
 
+  const isVisuallyChecked =
+    selectAll && manualPagination && rowCount !== undefined
+      ? Object.keys(rowSelection).length === rowCount
+      : allRowsSelected;
+
+  const isSomeRowsSelected = selectAll
+    ? manualPagination && rowCount !== undefined
+      ? Object.keys(rowSelection).length > 0 &&
+        Object.keys(rowSelection).length < rowCount
+      : selectAllMode === 'page' && table.getIsAllPageRowsSelected()
+        ? false
+        : table.getIsSomeRowsSelected()
+    : undefined;
+
+  const shouldDeselect =
+    selectAll && manualPagination && rowCount !== undefined
+      ? selectAllMode === 'page'
+        ? table.getIsAllPageRowsSelected()
+        : Object.keys(rowSelection).length === rowCount
+      : allRowsSelected;
+
   const isChecked = selectAll
-    ? allRowsSelected
+    ? isVisuallyChecked
     : getIsRowSelected({ row, table });
 
   const checkboxProps = {
@@ -74,6 +97,19 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
 
   const onSelectAllChange = getMRT_SelectAllHandler({ table });
 
+  const handleSelectAllChange = (event: any) => {
+    event.stopPropagation();
+    if (selectAll && manualPagination && rowCount !== undefined) {
+      const syntheticEvent = {
+        ...event,
+        target: { ...event.target, checked: !shouldDeselect },
+      };
+      onSelectAllChange(syntheticEvent);
+    } else {
+      onSelectAllChange(event);
+    }
+  };
+
   const commonProps = {
     'aria-label': selectAll
       ? localization.toggleSelectAll
@@ -88,7 +124,7 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
     },
     onChange: (event) => {
       event.stopPropagation();
-      selectAll ? onSelectAllChange(event) : onSelectionChange!(event);
+      selectAll ? handleSelectAllChange(event) : onSelectionChange!(event);
     },
     size: (density === 'compact' ? 'small' : 'medium') as 'medium' | 'small',
     ...checkboxProps,
@@ -122,7 +158,7 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
         <Checkbox
           indeterminate={
             !isChecked && selectAll
-              ? table.getIsSomeRowsSelected()
+              ? isSomeRowsSelected
               : row?.getIsSomeSelected() && row.getCanSelectSubRows()
           }
           {...commonProps}
