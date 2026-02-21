@@ -76,7 +76,7 @@ export const MRT_Localization_FR: MRT_Localization = {
   selectedCountOfRowCountRowsSelected:
     '{selectedCount} sur {rowCount} ligne(s)',
   select: 'Sélectionner',
-  showAll: 'Afficher tous',
+  showAll: 'Afficher tout',
   showAllColumns: 'Afficher toutes les colonnes',
   showHideColumns: 'Afficher/Masquer les colonnes',
   showHideFilters: 'Afficher/Masquer les filtres',
