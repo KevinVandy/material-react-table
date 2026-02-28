@@ -32,7 +32,6 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
     getCenterLeafColumns,
     getIsAllColumnsVisible,
     getIsSomeColumnsPinned,
-    getIsSomeColumnsVisible,
     getLeftLeafColumns,
     getRightLeafColumns,
     getState,
@@ -101,6 +100,11 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
     null,
   );
 
+  const areAllHideableColumnsHidden = () =>
+    getAllLeafColumns()
+      .filter((column) => column.columnDef.enableHiding !== false)
+      .every((column) => !column.getIsVisible());
+
   return (
     <Menu
       MenuListProps={{
@@ -125,7 +129,7 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
       >
         {enableHiding && (
           <Button
-            disabled={!getIsSomeColumnsVisible()}
+            disabled={areAllHideableColumnsHidden()}
             onClick={() => handleToggleAllColumns(false)}
           >
             {localization.hideAll}
