@@ -101,9 +101,10 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
   );
 
   const areAllHideableColumnsHidden = () =>
-    getAllLeafColumns()
-      .filter((column) => column.columnDef.enableHiding !== false)
-      .every((column) => !column.getIsVisible());
+    getAllLeafColumns().every(
+      (column) =>
+        column.columnDef.enableHiding === false || !column.getIsVisible(),
+    );
 
   return (
     <Menu
