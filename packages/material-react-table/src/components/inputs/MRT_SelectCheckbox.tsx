@@ -43,10 +43,15 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
 
   const selectAll = !row;
 
+  const getLeafRows = () => (
+    selectAllMode === 'page'
+    ? table.getPaginationRowModel().flatRows
+    : table.getPrePaginationRowModel().flatRows
+  ).filter((r) => !r.getIsGrouped());
+
+  // Fix: getIsAllPageRowsSelected() / getIsAllRowsSelected() include group rows
   const allRowsSelected = selectAll
-    ? selectAllMode === 'page'
-      ? table.getIsAllPageRowsSelected()
-      : table.getIsAllRowsSelected()
+    ? getLeafRows().every((r) => r.getIsSelected())
     : undefined;
 
   const isChecked = selectAll
@@ -122,7 +127,8 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
         <Checkbox
           indeterminate={
             !isChecked && selectAll
-              ? table.getIsSomeRowsSelected()
+              ? // Fix: getIsSomeRowsSelected() includes group rows, use leaf-only filter
+                getLeafRows().some((r) => r.getIsSelected())
               : row?.getIsSomeSelected() && row.getCanSelectSubRows()
           }
           {...commonProps}
