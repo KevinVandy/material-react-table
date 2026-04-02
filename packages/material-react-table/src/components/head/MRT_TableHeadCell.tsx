@@ -1,23 +1,22 @@
-import { type DragEvent, useMemo, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import TableCell, { type TableCellProps } from '@mui/material/TableCell';
-import { useTheme } from '@mui/material/styles';
-import { type Theme } from '@mui/material/styles';
-import { MRT_TableHeadCellColumnActionsButton } from './MRT_TableHeadCellColumnActionsButton';
-import { MRT_TableHeadCellFilterContainer } from './MRT_TableHeadCellFilterContainer';
-import { MRT_TableHeadCellFilterLabel } from './MRT_TableHeadCellFilterLabel';
-import { MRT_TableHeadCellGrabHandle } from './MRT_TableHeadCellGrabHandle';
-import { MRT_TableHeadCellResizeHandle } from './MRT_TableHeadCellResizeHandle';
-import { MRT_TableHeadCellSortLabel } from './MRT_TableHeadCellSortLabel';
+import { type Theme, useTheme } from '@mui/material/styles';
+import { type DragEvent, useCallback, useMemo } from 'react';
 import {
   type MRT_ColumnVirtualizer,
   type MRT_Header,
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
+import { cellKeyboardShortcuts } from '../../utils/cell.utils';
 import { getCommonMRTCellStyles } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
-import { cellKeyboardShortcuts } from '../../utils/cell.utils';
+import { MRT_TableHeadCellColumnActionsButton } from './MRT_TableHeadCellColumnActionsButton';
+import { MRT_TableHeadCellFilterContainer } from './MRT_TableHeadCellFilterContainer';
+import { MRT_TableHeadCellFilterLabel } from './MRT_TableHeadCellFilterLabel';
+import { MRT_TableHeadCellGrabHandle } from './MRT_TableHeadCellGrabHandle';
+import { MRT_TableHeadCellResizeHandle } from './MRT_TableHeadCellResizeHandle';
+import { MRT_TableHeadCellSortLabel } from './MRT_TableHeadCellSortLabel';
 
 export interface MRT_TableHeadCellProps<TData extends MRT_RowData>
   extends TableCellProps {
@@ -216,6 +215,7 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
         flexDirection: layoutMode?.startsWith('grid') ? 'column' : undefined,
         fontWeight: 'bold',
         overflow: 'visible',
+        color: theme.palette.text.primary,
         p:
           density === 'compact'
             ? '0.5rem'

@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { addons } from '@storybook/preview-api';
-import { Preview } from '@storybook/react';
-import { useDarkMode, DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import { createTheme } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { CssBaseline } from '@mui/material';
+import { addons } from '@storybook/preview-api';
+import { Preview } from '@storybook/react';
+import { useEffect, useState } from 'react';
+import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
+import ThemeProvider from '../src/theme';
 
 const channel = addons.getChannel();
 
@@ -58,11 +56,12 @@ const preview: Preview = {
         };
       }, []);
 
+      console.log('isDark', isDark);
+
       return (
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
+        <ThemeProvider mode={isDark ? 'dark' : 'light'}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Typography
+            {/* <Typography
               sx={{
                 pb: '0.5rem',
                 color: useDarkMode() ? '#fff' : '#666',
@@ -92,7 +91,7 @@ const preview: Preview = {
               >
                 here on GitHub.
               </Link>
-            </Typography>
+            </Typography> */}
             <Story {...context} />
           </LocalizationProvider>
         </ThemeProvider>

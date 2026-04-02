@@ -1,51 +1,53 @@
-import CssBaseline from "@mui/material/CssBaseline";
-import { hrHR, type Localization } from "@mui/material/locale";
+import CssBaseline from '@mui/material/CssBaseline';
+import { hrHR, type Localization } from '@mui/material/locale';
 import {
   createTheme,
   ThemeProvider as MuiThemeProvider,
   type ThemeOptions,
-} from "@mui/material/styles";
-import merge from "lodash/merge";
-import { useMemo, useState } from "react";
+} from '@mui/material/styles';
+import merge from 'lodash/merge';
+import { useMemo, useState } from 'react';
 
-import { customShadows } from "./custom-shadows";
-import { createContrast } from "./options/contrast";
-import { createPresets } from "./options/presets";
+import { customShadows } from './custom-shadows';
+import { createContrast } from './options/contrast';
+import { createPresets } from './options/presets';
 // options
-import RTL from "./options/right-to-left";
-import { componentsOverrides } from "./overrides";
+import RTL from './options/right-to-left';
+import { componentsOverrides } from './overrides';
 
 // system
-import { palette } from "./palette";
-import { shadows } from "./shadows";
-import { typography } from "./typography";
+import { palette } from './palette';
+import { shadows } from './shadows';
+import { typography } from './typography';
 
 // ----------------------------------------------------------------------
 
 type Props = {
   children: React.ReactNode;
+  mode?: 'light' | 'dark';
 };
 
-export default function ThemeProvider({ children }: Props) {
+export default function ThemeProvider({ children, mode = 'light' }: Props) {
+  console.log('Theme Provider Rendered with mode:', mode);
   const [selectedLanguage, _setSelectedLanguage] = useState<Localization>(hrHR);
 
-  const presets = createPresets("default");
+  const presets = createPresets('default');
 
-  const contrast = createContrast("default", "light");
+  const contrast = createContrast('default', mode);
 
   const memoizedValue = useMemo(
     () => ({
       palette: {
-        ...palette("light"),
+        ...palette(mode),
         ...presets.palette,
         ...contrast.palette,
       },
       customShadows: {
-        ...customShadows("light"),
+        ...customShadows(mode),
         ...presets.customShadows,
       },
-      direction: "ltr",
-      shadows: shadows("light"),
+      direction: 'ltr',
+      shadows: shadows(mode),
       shape: { borderRadius: 8 },
       typography,
       components: {
@@ -53,7 +55,7 @@ export default function ThemeProvider({ children }: Props) {
           defaultProps: {
             slotProps: {
               popper: {
-                modifiers: [{ name: "offset", options: { offset: [0, -16] } }],
+                modifiers: [{ name: 'offset', options: { offset: [0, -16] } }],
               },
             },
           },
@@ -61,11 +63,11 @@ export default function ThemeProvider({ children }: Props) {
         MuiDataGrid: {
           styleOverrides: {
             root: {
-              "& .MuiDataGrid-cell:focus": {
-                outline: "none",
+              '& .MuiDataGrid-cell:focus': {
+                outline: 'none',
               },
-              "& .MuiDataGrid-cell:focus-within": {
-                outline: "none",
+              '& .MuiDataGrid-cell:focus-within': {
+                outline: 'none',
               },
             },
           },
@@ -75,7 +77,7 @@ export default function ThemeProvider({ children }: Props) {
         snackbar: 999999,
       },
     }),
-    [presets.palette, presets.customShadows, contrast.palette],
+    [presets.palette, presets.customShadows, contrast.palette, mode],
   );
 
   const theme = createTheme(memoizedValue as ThemeOptions);

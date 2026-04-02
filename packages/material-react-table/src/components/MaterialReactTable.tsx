@@ -1,5 +1,4 @@
 import { useMaterialReactTable } from '../hooks/useMaterialReactTable';
-import ThemeProvider from '../theme';
 import {
   type MRT_RowData,
   type MRT_TableInstance,
@@ -33,9 +32,5 @@ export const MaterialReactTable = <TData extends MRT_RowData>(
     table = useMaterialReactTable(props);
   }
 
-  return (
-    <ThemeProvider>
-      <MRT_TablePaper table={table} />
-    </ThemeProvider>
-  );
+  return <MRT_TablePaper table={table} />;
 };
