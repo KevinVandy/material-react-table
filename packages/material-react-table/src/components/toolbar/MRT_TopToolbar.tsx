@@ -1,14 +1,14 @@
 import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { type MRT_RowData, type MRT_TableInstance } from '../../types';
+import { getCommonToolbarStyles } from '../../utils/style.utils';
+import { parseFromValuesOrFunc } from '../../utils/utils';
+import { MRT_GlobalFilterTextField } from '../inputs/MRT_GlobalFilterTextField';
 import { MRT_LinearProgressBar } from './MRT_LinearProgressBar';
 import { MRT_TablePagination } from './MRT_TablePagination';
 import { MRT_ToolbarAlertBanner } from './MRT_ToolbarAlertBanner';
 import { MRT_ToolbarDropZone } from './MRT_ToolbarDropZone';
 import { MRT_ToolbarInternalButtons } from './MRT_ToolbarInternalButtons';
-import { type MRT_RowData, type MRT_TableInstance } from '../../types';
-import { getCommonToolbarStyles } from '../../utils/style.utils';
-import { parseFromValuesOrFunc } from '../../utils/utils';
-import { MRT_GlobalFilterTextField } from '../inputs/MRT_GlobalFilterTextField';
 
 export interface MRT_TopToolbarProps<TData extends MRT_RowData> {
   table: MRT_TableInstance<TData>;
@@ -68,18 +68,11 @@ export const MRT_TopToolbar = <TData extends MRT_RowData>({
         ...getCommonToolbarStyles({ table, theme }),
         position: isFullScreen ? 'sticky' : 'relative',
         top: isFullScreen ? '0' : undefined,
+        backgroundColor: theme.palette.background.default,
+        borderBottom: `1px solid ${theme.palette.divider}`,
         ...(parseFromValuesOrFunc(toolbarProps?.sx, theme) as any),
       })}
     >
-      {positionToolbarAlertBanner === 'top' && (
-        <MRT_ToolbarAlertBanner
-          stackAlertBanner={stackAlertBanner}
-          table={table}
-        />
-      )}
-      {['both', 'top'].includes(positionToolbarDropZone ?? '') && (
-        <MRT_ToolbarDropZone table={table} />
-      )}
       <Box
         sx={{
           alignItems: 'flex-start',
@@ -97,7 +90,6 @@ export const MRT_TopToolbar = <TData extends MRT_RowData>({
         {enableGlobalFilter && positionGlobalFilter === 'left' && (
           <MRT_GlobalFilterTextField {...globalFilterProps} />
         )}
-        {renderTopToolbarCustomActions?.({ table }) ?? <span />}
         {enableToolbarInternalActions ? (
           <Box
             sx={{
@@ -112,6 +104,7 @@ export const MRT_TopToolbar = <TData extends MRT_RowData>({
               <MRT_GlobalFilterTextField {...globalFilterProps} />
             )}
             <MRT_ToolbarInternalButtons table={table} />
+            {renderTopToolbarCustomActions?.({ table }) ?? <span />}
           </Box>
         ) : (
           enableGlobalFilter &&
@@ -120,6 +113,15 @@ export const MRT_TopToolbar = <TData extends MRT_RowData>({
           )
         )}
       </Box>
+      {['both', 'top'].includes(positionToolbarDropZone ?? '') && (
+        <MRT_ToolbarDropZone table={table} />
+      )}
+      {positionToolbarAlertBanner === 'top' && (
+        <MRT_ToolbarAlertBanner
+          stackAlertBanner={stackAlertBanner}
+          table={table}
+        />
+      )}
       {enablePagination &&
         ['both', 'top'].includes(positionPagination ?? '') && (
           <MRT_TablePagination position="top" table={table} />

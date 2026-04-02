@@ -16,6 +16,7 @@ export const MRT_Localization_EN: MRT_Localization = {
   collapse: 'Collapse',
   collapseAll: 'Collapse all',
   columnActions: 'Column Actions',
+  columns: 'Columns',
   copiedToClipboard: 'Copied to clipboard',
   dropToGroupBy: 'Drop to group by {column}',
   edit: 'Edit',

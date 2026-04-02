@@ -240,6 +240,8 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
               : '1.25rem',
         userSelect: enableMultiSort && column.getCanSort() ? 'none' : undefined,
         verticalAlign: 'top',
+        borderBottom: 'none',
+        paddingBottom: 'none',
         ...getCommonMRTCellStyles({
           column,
           header,

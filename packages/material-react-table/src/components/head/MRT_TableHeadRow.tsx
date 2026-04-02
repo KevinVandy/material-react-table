@@ -1,6 +1,4 @@
 import TableRow, { type TableRowProps } from '@mui/material/TableRow';
-import { alpha } from '@mui/material/styles';
-import { MRT_TableHeadCell } from './MRT_TableHeadCell';
 import {
   type MRT_ColumnVirtualizer,
   type MRT_Header,
@@ -10,6 +8,7 @@ import {
   type MRT_VirtualItem,
 } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
+import { MRT_TableHeadCell } from './MRT_TableHeadCell';
 
 export interface MRT_TableHeadRowProps<TData extends MRT_RowData>
   extends TableRowProps {
@@ -48,8 +47,7 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
     <TableRow
       {...tableRowProps}
       sx={(theme) => ({
-        backgroundColor: baseBackgroundColor,
-        boxShadow: `4px 0 8px ${alpha(theme.palette.common.black, 0.1)}`,
+        backgroundColor: theme.palette.background.default,
         display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
         position:
           enableStickyHeader && layoutMode === 'semantic'

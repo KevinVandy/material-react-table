@@ -20,7 +20,6 @@ export const MRT_TablePaper = <TData extends MRT_RowData>({
     options: {
       enableBottomToolbar,
       enableTopToolbar,
-      mrtTheme: { baseBackgroundColor },
       muiTablePaperProps,
       renderBottomToolbar,
       renderTopToolbar,
@@ -70,6 +69,9 @@ export const MRT_TablePaper = <TData extends MRT_RowData>({
       }}
       sx={(theme) => ({
         backgroundImage: 'unset',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
         overflow: 'hidden',
         transition: 'all 100ms ease-in-out',
         ...(parseFromValuesOrFunc(paperProps?.sx, theme) as any),

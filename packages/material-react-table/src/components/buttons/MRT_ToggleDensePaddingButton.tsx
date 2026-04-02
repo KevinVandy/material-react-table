@@ -40,11 +40,11 @@ export const MRT_ToggleDensePaddingButton = <TData extends MRT_RowData>({
         title={undefined}
       >
         {density === 'compact' ? (
-          <DensitySmallIcon />
+          <DensitySmallIcon fontSize="small" />
         ) : density === 'comfortable' ? (
-          <DensityMediumIcon />
+          <DensityMediumIcon fontSize="small" />
         ) : (
-          <DensityLargeIcon />
+          <DensityLargeIcon fontSize="small" />
         )}
       </IconButton>
     </Tooltip>

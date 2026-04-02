@@ -165,6 +165,7 @@ export interface MRT_Localization {
   collapse: string;
   collapseAll: string;
   columnActions: string;
+  columns: string;
   copiedToClipboard: string;
   copy: string;
   dropToGroupBy: string;

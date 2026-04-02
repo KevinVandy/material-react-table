@@ -39,6 +39,8 @@ const preview: Preview = {
         channel.on(DARK_MODE_EVENT_NAME, setDark);
         if (sbRoot) {
           sbRoot.style.backgroundColor = theme.palette.background.default;
+          sbRoot.style.height = '100%';
+          sbRoot.style.padding = '0';
         }
         return () => channel.off(DARK_MODE_EVENT_NAME, setDark);
       }, [theme]);

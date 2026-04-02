@@ -1,5 +1,5 @@
-import { useMemo } from 'react';
 import Table, { type TableProps } from '@mui/material/Table';
+import { useMemo } from 'react';
 import { useMRT_ColumnVirtualizer } from '../../hooks/useMRT_ColumnVirtualizer';
 import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 import { parseCSSVarId } from '../../utils/style.utils';

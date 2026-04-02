@@ -1,3 +1,9 @@
+import Box from '@mui/material/Box';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import MenuItem, { type MenuItemProps } from '@mui/material/MenuItem';
+import Switch from '@mui/material/Switch';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 import {
   type Dispatch,
   type DragEvent,
@@ -5,12 +11,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import Box from '@mui/material/Box';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import MenuItem, { type MenuItemProps } from '@mui/material/MenuItem';
-import Switch from '@mui/material/Switch';
-import Tooltip from '@mui/material/Tooltip';
-import Typography from '@mui/material/Typography';
 import {
   type MRT_Column,
   type MRT_RowData,
@@ -173,7 +173,7 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
                   {...getCommonTooltipProps()}
                   title={localization.toggleVisibility}
                 >
-                  <Switch />
+                  <Switch size="small" />
                 </Tooltip>
               }
               disabled={!column.getCanHide()}

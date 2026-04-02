@@ -1,4 +1,4 @@
-import { useId, useMemo } from 'react';
+import { useTheme } from '@mui/material/styles';
 import {
   getCoreRowModel,
   getExpandedRowModel,
@@ -10,7 +10,7 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
 } from '@tanstack/react-table';
-import { useTheme } from '@mui/material/styles';
+import { useId, useMemo } from 'react';
 import { MRT_AggregationFns } from '../fns/aggregationFns';
 import { MRT_FilterFns } from '../fns/filterFns';
 import { MRT_SortingFns } from '../fns/sortingFns';
@@ -61,31 +61,31 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
   enableBottomToolbar = true,
   enableColumnActions = true,
   enableColumnFilters = true,
-  enableColumnOrdering = false,
-  enableColumnPinning = false,
-  enableColumnResizing = false,
+  enableColumnOrdering = true,
+  enableColumnPinning = true,
+  enableColumnResizing = true,
   enableColumnVirtualization,
   enableDensityToggle = true,
   enableExpandAll = true,
   enableExpanding,
   enableFacetedValues = false,
   enableFilterMatchHighlighting = true,
-  enableFilters = true,
+  enableFilters = false,
   enableFullScreenToggle = true,
-  enableGlobalFilter = true,
+  enableGlobalFilter = false,
   enableGlobalFilterRankedResults = true,
-  enableGrouping = false,
+  enableGrouping = true,
   enableHiding = true,
   enableKeyboardShortcuts = true,
   enableMultiRowSelection = true,
   enableMultiSort = true,
   enablePagination = true,
-  enableRowPinning = false,
-  enableRowSelection = false,
+  enableRowPinning = true,
+  enableRowSelection = true,
   enableRowVirtualization,
   enableSelectAll = true,
   enableSorting = true,
-  enableStickyHeader = false,
+  enableStickyHeader = true,
   enableTableFooter = true,
   enableTableHead = true,
   enableToolbarInternalActions = true,

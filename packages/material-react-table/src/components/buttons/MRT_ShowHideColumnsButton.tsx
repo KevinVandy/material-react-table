@@ -35,7 +35,7 @@ export const MRT_ShowHideColumnsButton = <TData extends MRT_RowData>({
           {...rest}
           title={undefined}
         >
-          <ViewColumnIcon />
+          <ViewColumnIcon fontSize="small" />
         </IconButton>
       </Tooltip>
       {anchorEl && (

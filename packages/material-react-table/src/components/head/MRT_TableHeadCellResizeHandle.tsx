@@ -79,7 +79,7 @@ export const MRT_TableHeadCellResizeHandle = <TData extends MRT_RowData>({
         orientation="vertical"
         sx={(theme) => ({
           borderRadius: '2px',
-          borderWidth: '2px',
+          borderWidth: '1px',
           height: '24px',
           touchAction: 'none',
           transform: 'translateX(4px)',

@@ -1,5 +1,5 @@
-import { useMemo, useRef, useState } from 'react';
 import { useReactTable } from '@tanstack/react-table';
+import { useMemo, useRef, useState } from 'react';
 import {
   type MRT_Cell,
   type MRT_Column,
@@ -114,7 +114,7 @@ export const useMRT_TableInstance = <TData extends MRT_RowData>(
       initialState.columnSizingInfo ?? ({} as MRT_ColumnSizingInfoState),
     );
   const [density, setDensity] = useState<MRT_DensityState>(
-    initialState?.density ?? 'comfortable',
+    initialState?.density ?? 'compact',
   );
   const [draggingColumn, setDraggingColumn] =
     useState<MRT_Column<TData> | null>(initialState.draggingColumn ?? null);

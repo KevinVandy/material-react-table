@@ -16,6 +16,7 @@ export const MRT_Localization_NL: MRT_Localization = {
   collapse: 'Samenvouwen',
   collapseAll: 'Alles samenvouwen',
   columnActions: 'Kolom acties',
+  columns: 'Kolommen',
   copiedToClipboard: 'Gekopieerd naar klembord',
   dropToGroupBy: 'Laat vallen om te groeperen op {column}',
   edit: 'Bewerk',

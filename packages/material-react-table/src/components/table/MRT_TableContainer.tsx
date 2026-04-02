@@ -1,13 +1,13 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
 import TableContainer, {
   type TableContainerProps,
 } from '@mui/material/TableContainer';
-import { MRT_Table } from './MRT_Table';
-import { MRT_TableLoadingOverlay } from './MRT_TableLoadingOverlay';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { type MRT_RowData, type MRT_TableInstance } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_CellActionMenu } from '../menus/MRT_CellActionMenu';
 import { MRT_EditRowModal } from '../modals/MRT_EditRowModal';
+import { MRT_Table } from './MRT_Table';
+import { MRT_TableLoadingOverlay } from './MRT_TableLoadingOverlay';
 
 const useIsomorphicLayoutEffect =
   typeof window !== 'undefined' ? useLayoutEffect : useEffect;
@@ -91,6 +91,8 @@ export const MRT_TableContainer = <TData extends MRT_RowData>({
         ...tableContainerProps?.style,
       }}
       sx={(theme) => ({
+        flex: '1 1 auto',
+        height: '100%',
         maxHeight: enableStickyHeader
           ? `clamp(350px, calc(100vh - ${totalToolbarHeight}px), 9999px)`
           : undefined,

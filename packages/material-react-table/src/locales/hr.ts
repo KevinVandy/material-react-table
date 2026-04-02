@@ -16,6 +16,7 @@ export const MRT_Localization_HR: MRT_Localization = {
   collapse: 'Sažmi',
   collapseAll: 'Sažmi sve',
   columnActions: 'Radnje s stupcima',
+  columns: 'Kolone',
   copiedToClipboard: 'Kopirano u međuspremnik',
   dropToGroupBy: 'Ispusti za grupiranje po {column}',
   edit: 'Uredi',

@@ -1,8 +1,7 @@
-import { type CSSProperties } from 'react';
 import { type TableCellProps } from '@mui/material/TableCell';
 import { type TooltipProps } from '@mui/material/Tooltip';
-import { alpha, darken, lighten } from '@mui/material/styles';
-import { type Theme } from '@mui/material/styles';
+import { alpha, darken, lighten, type Theme } from '@mui/material/styles';
+import { type CSSProperties } from 'react';
 import {
   type MRT_Column,
   type MRT_Header,
@@ -20,11 +19,7 @@ export const getMRTTheme = <TData extends MRT_RowData>(
   muiTheme: Theme,
 ): MRT_Theme => {
   const mrtThemeOverrides = parseFromValuesOrFunc(mrtTheme, muiTheme);
-  const baseBackgroundColor =
-    mrtThemeOverrides?.baseBackgroundColor ??
-    (muiTheme.palette.mode === 'dark'
-      ? lighten(muiTheme.palette.background.default, 0.05)
-      : muiTheme.palette.background.default);
+  const baseBackgroundColor = muiTheme.palette.background.default;
   return {
     baseBackgroundColor,
     cellNavigationOutlineColor: muiTheme.palette.primary.main,

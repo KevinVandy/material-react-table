@@ -1,5 +1,3 @@
-import { type DragEvent, memo, useMemo, useRef } from 'react';
-import { type VirtualItem } from '@tanstack/react-virtual';
 import TableRow, { type TableRowProps } from '@mui/material/TableRow';
 import {
   type Theme,
@@ -8,8 +6,8 @@ import {
   lighten,
   useTheme,
 } from '@mui/material/styles';
-import { MRT_TableBodyCell, Memo_MRT_TableBodyCell } from './MRT_TableBodyCell';
-import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
+import { type VirtualItem } from '@tanstack/react-virtual';
+import { type DragEvent, memo, useMemo, useRef } from 'react';
 import {
   type MRT_Cell,
   type MRT_ColumnVirtualizer,
@@ -25,6 +23,8 @@ import {
   getCommonPinnedCellStyles,
 } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
+import { MRT_TableBodyCell, Memo_MRT_TableBodyCell } from './MRT_TableBodyCell';
+import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 
 export interface MRT_TableBodyRowProps<TData extends MRT_RowData>
   extends TableRowProps {

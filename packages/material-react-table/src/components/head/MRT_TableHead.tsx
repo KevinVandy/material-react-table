@@ -1,5 +1,4 @@
 import TableHead, { type TableHeadProps } from '@mui/material/TableHead';
-import { MRT_TableHeadRow } from './MRT_TableHeadRow';
 import {
   type MRT_ColumnVirtualizer,
   type MRT_RowData,
@@ -7,6 +6,7 @@ import {
 } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_ToolbarAlertBanner } from '../toolbar/MRT_ToolbarAlertBanner';
+import { MRT_TableHeadRow } from './MRT_TableHeadRow';
 
 export interface MRT_TableHeadProps<TData extends MRT_RowData>
   extends TableHeadProps {
@@ -50,11 +50,11 @@ export const MRT_TableHead = <TData extends MRT_RowData>({
       }}
       sx={(theme) => ({
         display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-        opacity: 0.97,
         position: stickyHeader ? 'sticky' : 'relative',
         top: stickyHeader && layoutMode?.startsWith('grid') ? 0 : undefined,
         zIndex: stickyHeader ? 2 : undefined,
         ...(parseFromValuesOrFunc(tableHeadProps?.sx, theme) as any),
+        borderBottom: `1px solid ${theme.palette.divider}`,
       })}
     >
       {positionToolbarAlertBanner === 'head-overlay' &&
