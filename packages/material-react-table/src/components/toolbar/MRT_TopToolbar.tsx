@@ -98,13 +98,14 @@ export const MRT_TopToolbar = <TData extends MRT_RowData>({
               flexWrap: 'wrap-reverse',
               gap: '0.5rem',
               justifyContent: 'flex-end',
+              width: '100%',
             }}
           >
+            {renderTopToolbarCustomActions?.({ table }) ?? <span />}
             {enableGlobalFilter && positionGlobalFilter === 'right' && (
               <MRT_GlobalFilterTextField {...globalFilterProps} />
             )}
             <MRT_ToolbarInternalButtons table={table} />
-            {renderTopToolbarCustomActions?.({ table }) ?? <span />}
           </Box>
         ) : (
           enableGlobalFilter &&
