@@ -2,7 +2,7 @@
 import { MaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
 
 //Import Material React Table Translations
-import { MRT_Localization_HE } from 'material-react-table/locales/he';
+import { MRT_Localization_HR } from 'material-react-table/locales/hr';
 
 //mock data
 import { data, type Person } from './makeData';
@@ -41,7 +41,7 @@ const Example = () => {
       enableRowSelection
       enableSelectAll={false}
       initialState={{ showColumnFilters: true, showGlobalFilter: true }}
-      localization={MRT_Localization_HE}
+      localization={MRT_Localization_HR}
     />
   );
 };

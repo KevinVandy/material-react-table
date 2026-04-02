@@ -3,46 +3,7 @@ import typescript from '@rollup/plugin-typescript';
 import fs from 'fs';
 import { rollup } from 'rollup';
 
-const supportedLocales = [
-  'ar',
-  'az',
-  'bg',
-  'cs',
-  'da',
-  'de',
-  'el',
-  'en',
-  'es',
-  'et',
-  'fa',
-  'fi',
-  'fr',
-  'he',
-  'hr',
-  'hu',
-  'hy',
-  'id',
-  'it',
-  'ja',
-  'ko',
-  'nl',
-  'no',
-  'np',
-  'pl',
-  'pt',
-  'pt-BR',
-  'ro',
-  'ru',
-  'sk',
-  'sr-Cyrl-RS',
-  'sr-Latn-RS',
-  'sv',
-  'tr',
-  'uk',
-  'vi',
-  'zh-Hans',
-  'zh-Hant',
-];
+const supportedLocales = ['de', 'en', 'fr', 'hr', 'nl'];
 
 async function build(locale) {
   const bundle = await rollup({
