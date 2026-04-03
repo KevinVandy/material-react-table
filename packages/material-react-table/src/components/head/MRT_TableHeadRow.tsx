@@ -47,7 +47,7 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
     <TableRow
       {...tableRowProps}
       sx={(theme) => ({
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: baseBackgroundColor,
         display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
         position:
           enableStickyHeader && layoutMode === 'semantic'

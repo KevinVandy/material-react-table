@@ -3,7 +3,9 @@ import IconButton from '@mui/material/IconButton';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Pagination, { type PaginationProps } from '@mui/material/Pagination';
-import PaginationItem from '@mui/material/PaginationItem';
+import PaginationItem, {
+  PaginationItemProps,
+} from '@mui/material/PaginationItem';
 import Select, { type SelectProps } from '@mui/material/Select';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
@@ -14,6 +16,13 @@ import { flipIconStyles, getCommonTooltipProps } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
 const defaultRowsPerPage = [5, 10, 15, 20, 25, 30, 50, 100];
+
+type MRT_PaginationItemColor = NonNullable<PaginationItemProps['color']>;
+
+const isPaginationItemColor = (
+  color: PaginationProps['color'],
+): color is MRT_PaginationItemColor =>
+  color === 'primary' || color === 'secondary' || color === 'standard';
 
 export interface MRT_TablePaginationProps<TData extends MRT_RowData>
   extends Partial<
@@ -151,17 +160,27 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
           disabled={disabled}
           onChange={(_e, newPageIndex) => table.setPageIndex(newPageIndex - 1)}
           page={pageIndex + 1}
-          renderItem={(item) => (
-            <PaginationItem
-              slots={{
-                first: FirstPageIcon,
-                last: LastPageIcon,
-                next: ChevronRightIcon,
-                previous: ChevronLeftIcon,
-              }}
-              {...item}
-            />
-          )}
+          renderItem={(item) => {
+            const { color, variant, ...restItem } = item;
+            const itemVariant =
+              variant === 'outlined' || variant === 'text'
+                ? variant
+                : undefined;
+
+            return (
+              <PaginationItem
+                color={isPaginationItemColor(color) ? color : undefined}
+                slots={{
+                  first: FirstPageIcon,
+                  last: LastPageIcon,
+                  next: ChevronRightIcon,
+                  previous: ChevronLeftIcon,
+                }}
+                variant={itemVariant}
+                {...restItem}
+              />
+            );
+          }}
           showFirstButton={showFirstButton}
           showLastButton={showLastButton}
           {...restPaginationProps}
