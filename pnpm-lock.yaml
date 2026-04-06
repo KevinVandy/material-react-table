@@ -159,6 +159,9 @@ importers:
       highlight-words:
         specifier: 2.0.0
         version: 2.0.0
+      use-debounce:
+        specifier: ^10.1.1
+        version: 10.1.1(react@19.0.0)
     devDependencies:
       '@emotion/cache':
         specifier: ^11.14.0
@@ -3787,6 +3790,12 @@ packages:
 
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
+
+  use-debounce@10.1.1:
+    resolution: {integrity: sha512-kvds8BHR2k28cFsxW8k3nc/tRga2rs1RHYCqmmGqb90MEeE++oALwzh2COiuBLO1/QXiOuShXoSN2ZpWnMmvuQ==}
+    engines: {node: '>= 16.0.0'}
+    peerDependencies:
+      react: '*'
 
   util@0.12.5:
     resolution: {integrity: sha512-kZf/K6hEIrWHI6XqOFUiiMa+79wE/D8Q+NCNAWclkyg3b4d2k7s0QGepNjiABc+aR3N1PAyHL7p6UcLY6LmrnA==}
@@ -8105,6 +8114,10 @@ snapshots:
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
+
+  use-debounce@10.1.1(react@19.0.0):
+    dependencies:
+      react: 19.0.0
 
   util@0.12.5:
     dependencies:

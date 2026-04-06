@@ -1298,3 +1298,44 @@ export interface MRT_TableData<TData extends MRT_RowData> {
   data: TData[];
   rowCount: number;
 }
+
+export type UseServerTableStateOptions<TData extends MRT_RowData> = {
+  initialState?: Partial<MRT_TableState<TData>>;
+  saveState?: (state: MRT_TableState<TData>) => void;
+  saveDebounceMs?: number;
+};
+
+export type UseServerTableStateReturn = {
+  // trenutni state — prosljeđuješ u table
+  tableState: {
+    pagination: MRT_PaginationState;
+    sorting: MRT_SortingState;
+    grouping: MRT_GroupingState;
+    columnSizing: MRT_ColumnSizingState;
+    columnVisibility: MRT_VisibilityState;
+    columnOrder: MRT_ColumnOrderState;
+    columnPinning: MRT_ColumnPinningState;
+    density: MRT_DensityState;
+    expanded: MRT_ExpandedState;
+    rowSelection: MRT_RowSelectionState;
+  };
+  // handleri — prosljeđuješ u onXChange
+  handlers: {
+    onPaginationChange: OnChangeFn<MRT_PaginationState>;
+    onSortingChange: OnChangeFn<MRT_SortingState>;
+    onGroupingChange: OnChangeFn<MRT_GroupingState>;
+    onColumnSizingChange: OnChangeFn<MRT_ColumnSizingState>;
+    onColumnVisibilityChange: OnChangeFn<MRT_VisibilityState>;
+    onColumnOrderChange: OnChangeFn<MRT_ColumnOrderState>;
+    onColumnPinningChange: OnChangeFn<MRT_ColumnPinningState>;
+    onDensityChange: OnChangeFn<MRT_DensityState>;
+    onExpandedChange: OnChangeFn<MRT_ExpandedState>;
+    onRowSelectionChange: OnChangeFn<MRT_RowSelectionState>;
+  };
+  // koji state triggeruje fetch (za useEffect deps)
+  fetchTrigger: {
+    pagination: MRT_PaginationState;
+    sorting: MRT_SortingState;
+    grouping: MRT_GroupingState;
+  };
+};

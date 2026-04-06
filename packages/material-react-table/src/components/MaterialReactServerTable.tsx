@@ -18,6 +18,7 @@ export interface MaterialReactServerTableProps<TData extends MRT_RowData> {
 export const MaterialReactServerTable = <TData extends MRT_RowData>({
   loadConfig,
   loadData,
+  saveState,
 }: MaterialReactServerTableProps<TData>) => {
   const [configLoading, setConfigLoading] = useState(true);
   const [config, setConfig] = useState<MRT_TableConfig<TData> | null>(null);
@@ -58,6 +59,7 @@ export const MaterialReactServerTable = <TData extends MRT_RowData>({
     <MaterialReactServerTableInstance<TData>
       config={config}
       loadData={loadData}
+      saveState={saveState}
     />
   );
 };
