@@ -89,7 +89,6 @@ export const useServerTableState = <TData extends MRT_RowData>({
     stateKey: keyof MRT_TableState<TData>,
   ) => {
     return (updater: React.SetStateAction<T>) => {
-      console.log(`Updating ${stateKey} and saving state...`);
       setter(updater);
       debouncedSave({
         [stateKey]: functionalUpdate(updater, currentValue),
