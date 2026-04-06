@@ -34,7 +34,6 @@ export const MRT_TablePaper = <TData extends MRT_RowData>({
   };
 
   const theme = useTheme();
-  console.log(theme.palette.mode);
 
   return (
     <Paper

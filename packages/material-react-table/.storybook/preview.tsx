@@ -58,8 +58,6 @@ const preview: Preview = {
         };
       }, []);
 
-      console.log('isDark', isDark);
-
       return (
         <ThemeProvider mode={isDark ? 'dark' : 'light'}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>

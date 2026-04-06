@@ -28,7 +28,6 @@ type Props = {
 };
 
 export default function ThemeProvider({ children, mode = 'light' }: Props) {
-  console.log('Theme Provider Rendered with mode:', mode);
   const [selectedLanguage, _setSelectedLanguage] = useState<Localization>(hrHR);
 
   const presets = createPresets('default');

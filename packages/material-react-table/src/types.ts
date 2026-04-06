@@ -1,9 +1,33 @@
+import { type AlertProps } from '@mui/material/Alert';
+import { type AutocompleteProps } from '@mui/material/Autocomplete';
+import { type BoxProps } from '@mui/material/Box';
+import { type ButtonProps } from '@mui/material/Button';
+import { type CheckboxProps } from '@mui/material/Checkbox';
+import { type ChipProps } from '@mui/material/Chip';
+import { type CircularProgressProps } from '@mui/material/CircularProgress';
+import { type DialogProps } from '@mui/material/Dialog';
+import { type IconButtonProps } from '@mui/material/IconButton';
+import { type LinearProgressProps } from '@mui/material/LinearProgress';
+import { type PaginationProps } from '@mui/material/Pagination';
+import { type PaperProps } from '@mui/material/Paper';
+import { type RadioProps } from '@mui/material/Radio';
+import { type SelectProps } from '@mui/material/Select';
+import { type SkeletonProps } from '@mui/material/Skeleton';
+import { type SliderProps } from '@mui/material/Slider';
+import { type TableProps } from '@mui/material/Table';
+import { type TableBodyProps } from '@mui/material/TableBody';
+import { type TableCellProps } from '@mui/material/TableCell';
+import { type TableContainerProps } from '@mui/material/TableContainer';
+import { type TableFooterProps } from '@mui/material/TableFooter';
+import { type TableHeadProps } from '@mui/material/TableHead';
+import { type TableRowProps } from '@mui/material/TableRow';
+import { type TextFieldProps } from '@mui/material/TextField';
+import { type Theme } from '@mui/material/styles';
 import {
-  type Dispatch,
-  type ReactNode,
-  type RefObject,
-  type SetStateAction,
-} from 'react';
+  type DatePickerProps,
+  type DateTimePickerProps,
+  type TimePickerProps,
+} from '@mui/x-date-pickers';
 import {
   type AccessorFn,
   type AggregationFn,
@@ -39,36 +63,12 @@ import {
   type Virtualizer,
   type VirtualizerOptions,
 } from '@tanstack/react-virtual';
-import { type AlertProps } from '@mui/material/Alert';
-import { type AutocompleteProps } from '@mui/material/Autocomplete';
-import { type BoxProps } from '@mui/material/Box';
-import { type ButtonProps } from '@mui/material/Button';
-import { type CheckboxProps } from '@mui/material/Checkbox';
-import { type ChipProps } from '@mui/material/Chip';
-import { type CircularProgressProps } from '@mui/material/CircularProgress';
-import { type DialogProps } from '@mui/material/Dialog';
-import { type IconButtonProps } from '@mui/material/IconButton';
-import { type LinearProgressProps } from '@mui/material/LinearProgress';
-import { type PaginationProps } from '@mui/material/Pagination';
-import { type PaperProps } from '@mui/material/Paper';
-import { type RadioProps } from '@mui/material/Radio';
-import { type SelectProps } from '@mui/material/Select';
-import { type SkeletonProps } from '@mui/material/Skeleton';
-import { type SliderProps } from '@mui/material/Slider';
-import { type TableProps } from '@mui/material/Table';
-import { type TableBodyProps } from '@mui/material/TableBody';
-import { type TableCellProps } from '@mui/material/TableCell';
-import { type TableContainerProps } from '@mui/material/TableContainer';
-import { type TableFooterProps } from '@mui/material/TableFooter';
-import { type TableHeadProps } from '@mui/material/TableHead';
-import { type TableRowProps } from '@mui/material/TableRow';
-import { type TextFieldProps } from '@mui/material/TextField';
-import { type Theme } from '@mui/material/styles';
 import {
-  type DatePickerProps,
-  type DateTimePickerProps,
-  type TimePickerProps,
-} from '@mui/x-date-pickers';
+  type Dispatch,
+  type ReactNode,
+  type RefObject,
+  type SetStateAction,
+} from 'react';
 import { type MRT_AggregationFns } from './fns/aggregationFns';
 import { type MRT_FilterFns } from './fns/filterFns';
 import { type MRT_SortingFns } from './fns/sortingFns';
@@ -1287,4 +1287,14 @@ export interface MRT_TableOptions<TData extends MRT_RowData>
    * Manage state externally any way you want, then pass it back into MRT.
    */
   state?: Partial<MRT_TableState<TData>>;
+}
+
+export interface MRT_TableConfig<TData extends MRT_RowData> {
+  columns: MRT_ColumnDef<TData, unknown>[];
+  initialState?: Partial<MRT_TableState<TData>>;
+}
+
+export interface MRT_TableData<TData extends MRT_RowData> {
+  data: TData[];
+  rowCount: number;
 }

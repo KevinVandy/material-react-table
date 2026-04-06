@@ -2,7 +2,8 @@
   "include": [
     "src",
     "@types/node",
-    "stories"
+    "stories",
+    ".storybook"
   ],
   "compilerOptions": {
     "declaration": true,
