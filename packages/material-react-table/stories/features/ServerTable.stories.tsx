@@ -42,12 +42,10 @@ const simulateDelay = (ms: number) => {
 export const Basic = () => (
   <MaterialReactServerTable<Person>
     loadConfig={async () => {
-      console.log('Loading table configuration...');
       await simulateDelay(800);
       return { columns };
     }}
     loadData={async (state) => {
-      console.log('Loading data with state...');
       await simulateDelay(600);
       const { pageIndex, pageSize } = state.pagination;
       const start = pageIndex * pageSize;
@@ -57,7 +55,6 @@ export const Basic = () => (
       };
     }}
     saveState={async () => {
-      console.log('Saving state...');
       await simulateDelay(200);
     }}
   />
