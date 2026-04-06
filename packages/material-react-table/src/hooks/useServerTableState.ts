@@ -23,7 +23,7 @@ export const useServerTableState = <TData extends MRT_RowData>({
   saveState,
   saveDebounceMs = 500,
 }: UseServerTableStateOptions<TData>): UseServerTableStateReturn => {
-  // --- State koji triggeruje fetch ---
+  // --- State that triggers a data fetch ---
   const [pagination, setPagination] = useState<MRT_PaginationState>(
     initialState?.pagination ?? { pageIndex: 0, pageSize: 10 },
   );
@@ -34,7 +34,7 @@ export const useServerTableState = <TData extends MRT_RowData>({
     initialState?.grouping ?? [],
   );
 
-  // --- State koji se samo sprema (ne triggeruje fetch) ---
+  // --- State that is only persisted (does not trigger a fetch) ---
   const [columnSizing, setColumnSizing] = useState<MRT_ColumnSizingState>(
     initialState?.columnSizing ?? {},
   );
@@ -58,12 +58,12 @@ export const useServerTableState = <TData extends MRT_RowData>({
   );
 
   // --- Debounced save ---
-  // saveState je opcionalan — ako ga nema, ne radimo ništa
+  // saveState is optional — if not provided, do nothing
   const debouncedSave = useDebouncedCallback(
     (partial: Partial<MRT_TableState<TData>>) => {
       if (!saveState) return;
 
-      // Koristimo functional update pattern da uvijek imamo svježi state
+      // Use functional update pattern to always work with the latest values
       saveState({
         pagination,
         sorting,
@@ -75,14 +75,13 @@ export const useServerTableState = <TData extends MRT_RowData>({
         density,
         expanded,
         rowSelection,
-        ...partial, // override sa najsvježijim vrijednostima
+        ...partial, // override with the latest values
       } as MRT_TableState<TData>);
     },
     saveDebounceMs,
   );
 
-  // --- Helper: napravi handler koji setuje state i debounced sprema ---
-  // Ovo je interni helper, ne eksportujemo ga
+  // --- Internal helper: creates a handler that updates state and debounced-saves ---
   const makePersistentHandler = <T>(
     setter: React.Dispatch<React.SetStateAction<T>>,
     currentValue: T,
@@ -111,12 +110,12 @@ export const useServerTableState = <TData extends MRT_RowData>({
     },
 
     handlers: {
-      // Fetch trigeri — samo setuju state, ne persistuju
+      // Fetch triggers — only update state, do not persist
       onPaginationChange: setPagination,
       onSortingChange: setSorting,
       onGroupingChange: setGrouping,
 
-      // Persistent handleri — setuju + debounced snimaju
+      // Persistent handlers — update state and debounced-save
       onColumnSizingChange: makePersistentHandler(
         setColumnSizing,
         columnSizing,
@@ -150,7 +149,7 @@ export const useServerTableState = <TData extends MRT_RowData>({
       ),
     },
 
-    // Samo ovo ide u useEffect deps za fetch
+    // Only these go into useEffect deps for the data fetch
     fetchTrigger: {
       pagination,
       sorting,
