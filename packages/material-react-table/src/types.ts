@@ -1313,7 +1313,7 @@ export type UseServerTableStateReturn = {
     grouping: MRT_GroupingState;
     columnSizing: MRT_ColumnSizingState;
     columnVisibility: MRT_VisibilityState;
-    columnOrder: MRT_ColumnOrderState;
+    columnOrder?: MRT_ColumnOrderState;
     columnPinning: MRT_ColumnPinningState;
     density: MRT_DensityState;
     expanded: MRT_ExpandedState;

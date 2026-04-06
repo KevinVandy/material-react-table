@@ -41,14 +41,14 @@ export const useServerTableState = <TData extends MRT_RowData>({
   const [columnVisibility, setColumnVisibility] = useState<MRT_VisibilityState>(
     initialState?.columnVisibility ?? {},
   );
-  const [columnOrder, setColumnOrder] = useState<MRT_ColumnOrderState>(
-    initialState?.columnOrder ?? [],
+  const [columnOrder, setColumnOrder] = useState<MRT_ColumnOrderState | null>(
+    initialState?.columnOrder ?? null,
   );
   const [columnPinning, setColumnPinning] = useState<MRT_ColumnPinningState>(
     initialState?.columnPinning ?? { left: [], right: [] },
   );
   const [density, setDensity] = useState<MRT_DensityState>(
-    initialState?.density ?? 'comfortable',
+    initialState?.density ?? 'compact',
   );
   const [expanded, setExpanded] = useState<MRT_ExpandedState>(
     initialState?.expanded ?? {},
@@ -70,7 +70,7 @@ export const useServerTableState = <TData extends MRT_RowData>({
         grouping,
         columnSizing,
         columnVisibility,
-        columnOrder,
+        ...(columnOrder !== null && { columnOrder }),
         columnPinning,
         density,
         expanded,
@@ -89,7 +89,9 @@ export const useServerTableState = <TData extends MRT_RowData>({
     stateKey: keyof MRT_TableState<TData>,
   ) => {
     return (updater: React.SetStateAction<T>) => {
+      console.log(`Updating ${stateKey} and saving state...`);
       setter(updater);
+      // if (!isMounted.current) return;
       debouncedSave({
         [stateKey]: functionalUpdate(updater, currentValue),
       } as Partial<MRT_TableState<TData>>);
@@ -103,7 +105,7 @@ export const useServerTableState = <TData extends MRT_RowData>({
       grouping,
       columnSizing,
       columnVisibility,
-      columnOrder,
+      ...(columnOrder !== null && { columnOrder }),
       columnPinning,
       density,
       expanded,
@@ -127,11 +129,11 @@ export const useServerTableState = <TData extends MRT_RowData>({
         columnVisibility,
         'columnVisibility',
       ),
-      onColumnOrderChange: makePersistentHandler(
-        setColumnOrder,
-        columnOrder,
-        'columnOrder',
-      ),
+      onColumnOrderChange: (updater) => {
+        const newValue = functionalUpdate(updater, columnOrder ?? []);
+        setColumnOrder(newValue);
+        debouncedSave({ columnOrder: newValue });
+      },
       onColumnPinningChange: makePersistentHandler(
         setColumnPinning,
         columnPinning,
