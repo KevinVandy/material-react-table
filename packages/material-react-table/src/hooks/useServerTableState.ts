@@ -91,7 +91,6 @@ export const useServerTableState = <TData extends MRT_RowData>({
     return (updater: React.SetStateAction<T>) => {
       console.log(`Updating ${stateKey} and saving state...`);
       setter(updater);
-      // if (!isMounted.current) return;
       debouncedSave({
         [stateKey]: functionalUpdate(updater, currentValue),
       } as Partial<MRT_TableState<TData>>);
