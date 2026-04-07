@@ -175,14 +175,17 @@ export const getMRT_RowSelectionHandler =
 
     const wasCurrentRowChecked = getIsRowSelected({ row, table });
 
-    // Fix: toggleSelected() on a group row also writes its own ID into rowSelection 
-    // Removing it, keeping only the leaf row IDs
+    // If this is a group row, toggle all its leaf sub-rows instead of itself
+    // to prevent the group row ID from entering rowSelection
     if (row.getIsGrouped()) {
-      table.setRowSelection((prev) => {
-        const next = { ...prev };
-        delete next[row.id];
-        return next;
+      const newValue = value ?? !wasCurrentRowChecked;
+      row.getLeafRows().forEach((leafRow) => {
+        if (leafRow.getCanSelect()) {
+          leafRow.toggleSelected(newValue);
+        }
       });
+      lastSelectedRowId.current = row.id;
+      return;
     }
 
     // toggle selection of this row
