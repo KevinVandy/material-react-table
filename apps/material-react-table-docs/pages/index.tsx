@@ -28,11 +28,11 @@ const HomePage = () => {
       <Stack sx={{ maxWidth: '1200px', m: 'auto' }}>
         <Alert severity="success" variant="outlined" sx={{}}>
           <AlertTitle>
-            Material React Table V3 was released September 5th, 2024!
+            Material React Table V4 — now with Material UI V9!
           </AlertTitle>
-          <Typography>Upgrade to MRT V3 and Material UI V6 Today!</Typography>
-          <MuiLink href="/docs/getting-started/migrating-to-v3">
-            View the V3 Migration Guide here.
+          <Typography>Upgrade to MRT V4 and Material UI V9 Today!</Typography>
+          <MuiLink href="/docs/getting-started/migrating-to-v4">
+            View the V4 Migration Guide here.
           </MuiLink>
         </Alert>
         <Typography
@@ -79,7 +79,7 @@ const HomePage = () => {
                 },
               }}
             >
-              V3
+              V4
             </Box>
           </Box>
         </Typography>
@@ -110,7 +110,7 @@ const HomePage = () => {
               target="_blank"
               rel="noopener"
             >
-              Material&nbsp;UI<sup>V6</sup>
+              Material&nbsp;UI<sup>V9</sup>
             </MuiLink>
           </Link>{' '}
           and&nbsp;
@@ -223,7 +223,7 @@ const HomePage = () => {
           <InstallCommand centered variant="fullWidth" />
         </Box>
         <HomeCards />
-        <Typography my="2rem" textAlign="center" variant="h3">
+        <Typography sx={{ my: '2rem', textAlign: 'center' }} variant="h3">
           Popular Docs
         </Typography>
         <Box
@@ -255,7 +255,7 @@ const HomePage = () => {
           <GuideCard title="Selection" href="docs/guides/row-selection" />
         </Box>
       </Stack>
-      <Typography my="2rem" textAlign="center" variant="h3">
+      <Typography sx={{ my: '2rem', textAlign: 'center' }} variant="h3">
         Examples To Get You Started
       </Typography>
       <BasicExamples />
@@ -305,7 +305,7 @@ const HomePage = () => {
       <Typography component="p" variant="subtitle2" sx={{ mt: '1rem' }}>
         *If you see any inaccuracies in this table, PRs are welcome!
       </Typography>
-      <LinkHeading mt="4rem" textAlign="center" variant="h3">
+      <LinkHeading sx={{ mt: '4rem', textAlign: 'center' }} variant="h3">
         Maintainers and Contributors
       </LinkHeading>
       <Contributors />
