@@ -70,32 +70,40 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
         }
       }}
       {...tableRowProps}
-      sx={(theme) => ({
-        display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
-        position: virtualRow ? 'absolute' : undefined,
-        top: virtualRow
-          ? `${parentRowRef.current?.getBoundingClientRect()?.height}px`
-          : undefined,
-        transform: virtualRow
-          ? `translateY(${virtualRow?.start}px)`
-          : undefined,
-        width: '100%',
-        ...(parseFromValuesOrFunc(tableRowProps?.sx, theme) as any),
-      })}
+      sx={[
+        {
+          display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
+          position: virtualRow ? 'absolute' : undefined,
+          top: virtualRow
+            ? `${parentRowRef.current?.getBoundingClientRect()?.height}px`
+            : undefined,
+          transform: virtualRow
+            ? `translateY(${virtualRow?.start}px)`
+            : undefined,
+          width: '100%',
+        },
+        ...(Array.isArray(tableRowProps?.sx)
+          ? tableRowProps.sx
+          : [tableRowProps?.sx]),
+      ]}
     >
       <TableCell
         className="Mui-TableBodyCell-DetailPanel"
         colSpan={getVisibleLeafColumns().length}
         {...tableCellProps}
-        sx={(theme) => ({
-          backgroundColor: virtualRow ? baseBackgroundColor : undefined,
-          borderBottom: !row.getIsExpanded() ? 'none' : undefined,
-          display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
-          py: !!DetailPanel && row.getIsExpanded() ? '1rem' : 0,
-          transition: !virtualRow ? 'all 150ms ease-in-out' : undefined,
-          width: `100%`,
-          ...(parseFromValuesOrFunc(tableCellProps?.sx, theme) as any),
-        })}
+        sx={[
+          {
+            backgroundColor: virtualRow ? baseBackgroundColor : undefined,
+            borderBottom: !row.getIsExpanded() ? 'none' : undefined,
+            display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
+            py: !!DetailPanel && row.getIsExpanded() ? '1rem' : 0,
+            transition: !virtualRow ? 'all 150ms ease-in-out' : undefined,
+            width: '100%',
+          },
+          ...(Array.isArray(tableCellProps?.sx)
+            ? tableCellProps.sx
+            : [tableCellProps?.sx]),
+        ]}
       >
         {virtualRow ? (
           row.getIsExpanded() && DetailPanel

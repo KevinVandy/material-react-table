@@ -18,7 +18,6 @@ import {
 } from '../../types';
 import { reorderColumn } from '../../utils/column.utils';
 import { getCommonTooltipProps } from '../../utils/style.utils';
-import { parseFromValuesOrFunc } from '../../utils/utils';
 import { MRT_ColumnPinningButtons } from '../buttons/MRT_ColumnPinningButtons';
 import { MRT_GrabHandleButton } from '../buttons/MRT_GrabHandleButton';
 
@@ -116,21 +115,23 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
         onDragEnter={handleDragEnter}
         ref={menuItemRef as any}
         {...rest}
-        sx={(theme) => ({
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          my: 0,
-          opacity: isDragging ? 0.5 : 1,
-          outline: isDragging
-            ? `2px dashed ${theme.palette.grey[500]}`
-            : hoveredColumn?.id === column.id
-              ? `2px dashed ${draggingBorderColor}`
-              : 'none',
-          outlineOffset: '-2px',
-          pl: `${(column.depth + 0.5) * 2}rem`,
-          py: '6px',
-          ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
-        })}
+        sx={[
+          (theme) => ({
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            my: 0,
+            opacity: isDragging ? 0.5 : 1,
+            outline: isDragging
+              ? `2px dashed ${theme.palette.grey[500]}`
+              : hoveredColumn?.id === column.id
+                ? `2px dashed ${draggingBorderColor}`
+                : 'none',
+            outlineOffset: '-2px',
+            pl: `${(column.depth + 0.5) * 2}rem`,
+            py: '6px',
+          }),
+          ...(Array.isArray(rest?.sx) ? rest.sx : [rest?.sx]),
+        ]}
       >
         <Box
           sx={{
@@ -160,7 +161,7 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
           {enableHiding ? (
             <FormControlLabel
               checked={switchChecked}
-              componentsProps={{
+              slotProps={{
                 typography: {
                   sx: {
                     mb: 0,

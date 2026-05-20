@@ -48,14 +48,18 @@ export const MRT_TableHead = <TData extends MRT_RowData>({
           tableHeadProps.ref.current = ref;
         }
       }}
-      sx={(theme) => ({
-        display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-        opacity: 0.97,
-        position: stickyHeader ? 'sticky' : 'relative',
-        top: stickyHeader && layoutMode?.startsWith('grid') ? 0 : undefined,
-        zIndex: stickyHeader ? 2 : undefined,
-        ...(parseFromValuesOrFunc(tableHeadProps?.sx, theme) as any),
-      })}
+      sx={[
+        {
+          display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
+          opacity: 0.97,
+          position: stickyHeader ? 'sticky' : 'relative',
+          top: stickyHeader && layoutMode?.startsWith('grid') ? 0 : undefined,
+          zIndex: stickyHeader ? 2 : undefined,
+        },
+        ...(Array.isArray(tableHeadProps?.sx)
+          ? tableHeadProps.sx
+          : [tableHeadProps?.sx]),
+      ]}
     >
       {positionToolbarAlertBanner === 'head-overlay' &&
       (showAlertBanner || table.getSelectedRowModel().rows.length > 0) ? (

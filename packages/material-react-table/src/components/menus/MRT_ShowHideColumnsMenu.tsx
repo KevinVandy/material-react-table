@@ -103,12 +103,12 @@ export const MRT_ShowHideColumnsMenu = <TData extends MRT_RowData>({
 
   return (
     <Menu
-      MenuListProps={{
+      slotProps={{ list: {
         dense: density === 'compact',
         sx: {
           backgroundColor: menuBackgroundColor,
         },
-      }}
+      } }}
       anchorEl={anchorEl}
       disableScrollLock
       onClose={() => setAnchorEl(null)}

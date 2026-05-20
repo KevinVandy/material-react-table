@@ -112,14 +112,14 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
             MenuProps={{ disableScrollLock: true }}
             disableUnderline
             disabled={disabled}
-            inputProps={{
-              'aria-label': localization.rowsPerPage,
-              id: `mrt-rows-per-page-${id}`,
+            slotProps={{
+              input: {
+                'aria-label': localization.rowsPerPage,
+                id: `mrt-rows-per-page-${id}`,
+              },
             }}
             label={localization.rowsPerPage}
-            onChange={(event) =>
-              table.setPageSize(+(event.target.value as any))
-            }
+            onChange={(event) => table.setPageSize(Number(event.target.value))}
             sx={{ mb: 0 }}
             value={pageSize}
             variant="standard"
@@ -180,7 +180,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
           }-${lastRowIndex.toLocaleString(localization.language)} ${
             localization.of
           } ${totalRowCount.toLocaleString(localization.language)}`}</Typography>
-          <Box gap="xs">
+          <Box sx={{ display: 'flex' }}>
             {showFirstButton && (
               <Tooltip {...tooltipProps} title={localization.goToFirstPage}>
                 <span>

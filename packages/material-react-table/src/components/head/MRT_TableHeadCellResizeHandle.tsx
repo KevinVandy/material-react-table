@@ -5,7 +5,6 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
-import { parseFromValuesOrFunc } from '../../utils/utils';
 
 export interface MRT_TableHeadCellResizeHandleProps<TData extends MRT_RowData>
   extends DividerProps {
@@ -77,19 +76,21 @@ export const MRT_TableHeadCellResizeHandle = <TData extends MRT_RowData>({
         className="Mui-TableHeadCell-ResizeHandle-Divider"
         flexItem
         orientation="vertical"
-        sx={(theme) => ({
-          borderRadius: '2px',
-          borderWidth: '2px',
-          height: '24px',
-          touchAction: 'none',
-          transform: 'translateX(4px)',
-          transition: column.getIsResizing()
-            ? undefined
-            : 'all 150ms ease-in-out',
-          userSelect: 'none',
-          zIndex: 4,
-          ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
-        })}
+        sx={[
+          {
+            borderRadius: '2px',
+            borderWidth: '2px',
+            height: '24px',
+            touchAction: 'none',
+            transform: 'translateX(4px)',
+            transition: column.getIsResizing()
+              ? undefined
+              : 'all 150ms ease-in-out',
+            userSelect: 'none',
+            zIndex: 4,
+          },
+          ...(Array.isArray(rest?.sx) ? rest.sx : [rest?.sx]),
+        ]}
       />
     </Box>
   );

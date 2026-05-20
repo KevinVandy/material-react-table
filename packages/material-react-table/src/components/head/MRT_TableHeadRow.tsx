@@ -1,5 +1,4 @@
 import TableRow, { type TableRowProps } from '@mui/material/TableRow';
-import { alpha } from '@mui/material/styles';
 import { MRT_TableHeadCell } from './MRT_TableHeadCell';
 import {
   type MRT_ColumnVirtualizer,
@@ -9,6 +8,7 @@ import {
   type MRT_TableInstance,
   type MRT_VirtualItem,
 } from '../../types';
+import { mrtAlpha } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
 export interface MRT_TableHeadRowProps<TData extends MRT_RowData>
@@ -47,17 +47,21 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
   return (
     <TableRow
       {...tableRowProps}
-      sx={(theme) => ({
-        backgroundColor: baseBackgroundColor,
-        boxShadow: `4px 0 8px ${alpha(theme.palette.common.black, 0.1)}`,
-        display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
-        position:
-          enableStickyHeader && layoutMode === 'semantic'
-            ? 'sticky'
-            : 'relative',
-        top: 0,
-        ...(parseFromValuesOrFunc(tableRowProps?.sx, theme) as any),
-      })}
+      sx={[
+        (theme) => ({
+          backgroundColor: baseBackgroundColor,
+          boxShadow: `4px 0 8px ${mrtAlpha(theme.palette.common.black, 0.1, 'rgba(0,0,0,0.1)')}`,
+          display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
+          position:
+            enableStickyHeader && layoutMode === 'semantic'
+              ? 'sticky'
+              : 'relative',
+          top: 0,
+        }),
+        ...(Array.isArray(tableRowProps?.sx)
+          ? tableRowProps.sx
+          : [tableRowProps?.sx]),
+      ]}
     >
       {virtualPaddingLeft ? (
         <th style={{ display: 'flex', width: virtualPaddingLeft }} />

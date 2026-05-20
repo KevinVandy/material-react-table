@@ -64,12 +64,14 @@ export const MRT_Table = <TData extends MRT_RowData>({
       stickyHeader={enableStickyHeader || isFullScreen}
       {...tableProps}
       style={{ ...columnSizeVars, ...tableProps?.style }}
-      sx={(theme) => ({
-        borderCollapse: 'separate',
-        display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-        position: 'relative',
-        ...(parseFromValuesOrFunc(tableProps?.sx, theme) as any),
-      })}
+      sx={[
+        {
+          borderCollapse: 'separate',
+          display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
+          position: 'relative',
+        },
+        ...(Array.isArray(tableProps?.sx) ? tableProps.sx : [tableProps?.sx]),
+      ]}
     >
       {!!Caption && <caption>{Caption}</caption>}
       {enableTableHead && <MRT_TableHead {...commonTableGroupProps} />}

@@ -254,52 +254,51 @@ export const MRT_TableBodyCell = <TData extends MRT_RowData>({
       onDoubleClick={handleDoubleClick}
       onDragEnter={handleDragEnter}
       onDragOver={handleDragOver}
-      sx={(theme) => ({
-        '&:hover': {
+      sx={[
+        (t) => ({
+          '&:hover': {
+            outline:
+              actionCell?.id === cell.id ||
+              (editDisplayMode === 'cell' && isEditable) ||
+              (editDisplayMode === 'table' && (isCreating || isEditing))
+                ? `1px solid ${t.palette.grey[500]}`
+                : undefined,
+            textOverflow: 'clip',
+          },
+          alignItems: layoutMode?.startsWith('grid') ? 'center' : undefined,
+          cursor: isRightClickable
+            ? 'context-menu'
+            : isEditable && editDisplayMode === 'cell'
+              ? 'pointer'
+              : 'inherit',
           outline:
-            actionCell?.id === cell.id ||
-            (editDisplayMode === 'cell' && isEditable) ||
-            (editDisplayMode === 'table' && (isCreating || isEditing))
-              ? `1px solid ${theme.palette.grey[500]}`
+            actionCell?.id === cell.id
+              ? `1px solid ${t.palette.grey[500]}`
               : undefined,
-          textOverflow: 'clip',
-        },
-        alignItems: layoutMode?.startsWith('grid') ? 'center' : undefined,
-        cursor: isRightClickable
-          ? 'context-menu'
-          : isEditable && editDisplayMode === 'cell'
-            ? 'pointer'
-            : 'inherit',
-        outline:
-          actionCell?.id === cell.id
-            ? `1px solid ${theme.palette.grey[500]}`
-            : undefined,
-        outlineOffset: '-1px',
-        overflow: 'hidden',
-        p:
-          density === 'compact'
-            ? columnDefType === 'display'
-              ? '0 0.5rem'
-              : '0.5rem'
-            : density === 'comfortable'
+          outlineOffset: '-1px',
+          overflow: 'hidden',
+          p:
+            density === 'compact'
               ? columnDefType === 'display'
-                ? '0.5rem 0.75rem'
-                : '1rem'
-              : columnDefType === 'display'
-                ? '1rem 1.25rem'
-                : '1.5rem',
-
-        textOverflow: columnDefType !== 'display' ? 'ellipsis' : undefined,
-        whiteSpace:
-          row.getIsPinned() || density === 'compact' ? 'nowrap' : 'normal',
-        ...getCommonMRTCellStyles({
-          column,
-          table,
-          tableCellProps,
-          theme,
+                ? '0 0.5rem'
+                : '0.5rem'
+              : density === 'comfortable'
+                ? columnDefType === 'display'
+                  ? '0.5rem 0.75rem'
+                  : '1rem'
+                : columnDefType === 'display'
+                  ? '1rem 1.25rem'
+                  : '1.5rem',
+          textOverflow: columnDefType !== 'display' ? 'ellipsis' : undefined,
+          whiteSpace:
+            row.getIsPinned() || density === 'compact' ? 'nowrap' : 'normal',
+          ...draggingBorders,
         }),
-        ...draggingBorders,
-      })}
+        ...(() => {
+          const s = getCommonMRTCellStyles({ column, table, tableCellProps, theme });
+          return Array.isArray(s) ? s : [s];
+        })(),
+      ]}
     >
       {tableCellProps.children ?? (
         <>

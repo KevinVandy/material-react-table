@@ -61,19 +61,23 @@ export const MRT_TableFooter = <TData extends MRT_RowData>({
           tableFooterProps.ref.current = ref;
         }
       }}
-      sx={(theme) => ({
-        bottom: stickFooter ? 0 : undefined,
-        display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-        opacity: stickFooter ? 0.97 : undefined,
-        outline: stickFooter
-          ? theme.palette.mode === 'light'
-            ? `1px solid ${theme.palette.grey[300]}`
-            : `1px solid ${theme.palette.grey[700]}`
-          : undefined,
-        position: stickFooter ? 'sticky' : 'relative',
-        zIndex: stickFooter ? 1 : undefined,
-        ...(parseFromValuesOrFunc(tableFooterProps?.sx, theme) as any),
-      })}
+      sx={[
+        (theme) => ({
+          bottom: stickFooter ? 0 : undefined,
+          display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
+          opacity: stickFooter ? 0.97 : undefined,
+          outline: stickFooter
+            ? theme.palette.mode === 'light'
+              ? `1px solid ${theme.palette.grey[300]}`
+              : `1px solid ${theme.palette.grey[700]}`
+            : undefined,
+          position: stickFooter ? 'sticky' : 'relative',
+          zIndex: stickFooter ? 1 : undefined,
+        }),
+        ...(Array.isArray(tableFooterProps?.sx)
+          ? tableFooterProps.sx
+          : [tableFooterProps?.sx]),
+      ]}
     >
       {footerGroups.map((footerGroup) => (
         <MRT_TableFooterRow

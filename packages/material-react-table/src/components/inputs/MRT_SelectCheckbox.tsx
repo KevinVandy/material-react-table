@@ -2,7 +2,7 @@ import { type MouseEvent } from 'react';
 import Checkbox, { type CheckboxProps } from '@mui/material/Checkbox';
 import Radio, { type RadioProps } from '@mui/material/Radio';
 import Tooltip from '@mui/material/Tooltip';
-import { type Theme } from '@mui/material/styles';
+
 import {
   type MRT_Row,
   type MRT_RowData,
@@ -74,17 +74,19 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
 
   const onSelectAllChange = getMRT_SelectAllHandler({ table });
 
-  const commonProps = {
+  const commonProps: CheckboxProps = {
     'aria-label': selectAll
       ? localization.toggleSelectAll
       : localization.toggleSelectRow,
     checked: isChecked,
     disabled:
       isLoading || (row && !row.getCanSelect()) || row?.id === 'mrt-row-create',
-    inputProps: {
-      'aria-label': selectAll
-        ? localization.toggleSelectAll
-        : localization.toggleSelectRow,
+    slotProps: {
+      input: {
+        'aria-label': selectAll
+          ? localization.toggleSelectAll
+          : localization.toggleSelectRow,
+      },
     },
     onChange: (event) => {
       event.stopPropagation();
@@ -96,15 +98,19 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
       e.stopPropagation();
       checkboxProps?.onClick?.(e);
     },
-    sx: (theme: Theme) => ({
-      height: density === 'compact' ? '1.75rem' : '2.5rem',
-      m: density !== 'compact' ? '-0.4rem' : undefined,
-      width: density === 'compact' ? '1.75rem' : '2.5rem',
-      zIndex: 0,
-      ...parseFromValuesOrFunc(checkboxProps?.sx, theme),
-    }),
+    sx: [
+      {
+        height: density === 'compact' ? '1.75rem' : '2.5rem',
+        m: density !== 'compact' ? '-0.4rem' : undefined,
+        width: density === 'compact' ? '1.75rem' : '2.5rem',
+        zIndex: 0,
+      },
+      ...(Array.isArray(checkboxProps?.sx)
+        ? checkboxProps.sx
+        : [checkboxProps?.sx]),
+    ],
     title: undefined,
-  } as CheckboxProps | RadioProps;
+  };
 
   return (
     <Tooltip
@@ -117,7 +123,7 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
       }
     >
       {enableMultiRowSelection === false ? (
-        <Radio {...(commonProps as any)} />
+        <Radio {...(commonProps as RadioProps)} />
       ) : (
         <Checkbox
           indeterminate={

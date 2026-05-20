@@ -53,12 +53,16 @@ export const MRT_ExpandAllButton = <TData extends MRT_RowData>({
           }
           onClick={() => toggleAllRowsExpanded(!isAllRowsExpanded)}
           {...iconButtonProps}
-          sx={(theme) => ({
-            height: density === 'compact' ? '1.75rem' : '2.25rem',
-            mt: density !== 'compact' ? '-0.25rem' : undefined,
-            width: density === 'compact' ? '1.75rem' : '2.25rem',
-            ...(parseFromValuesOrFunc(iconButtonProps?.sx, theme) as any),
-          })}
+          sx={[
+            {
+              height: density === 'compact' ? '1.75rem' : '2.25rem',
+              mt: density !== 'compact' ? '-0.25rem' : undefined,
+              width: density === 'compact' ? '1.75rem' : '2.25rem',
+            },
+            ...(Array.isArray(iconButtonProps?.sx)
+              ? iconButtonProps.sx
+              : [iconButtonProps?.sx]),
+          ]}
           title={undefined}
         >
           {iconButtonProps?.children ?? (

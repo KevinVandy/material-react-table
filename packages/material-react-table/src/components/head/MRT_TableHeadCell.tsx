@@ -2,7 +2,6 @@ import { type DragEvent, useMemo, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import TableCell, { type TableCellProps } from '@mui/material/TableCell';
 import { useTheme } from '@mui/material/styles';
-import { type Theme } from '@mui/material/styles';
 import { MRT_TableHeadCellColumnActionsButton } from './MRT_TableHeadCellColumnActionsButton';
 import { MRT_TableHeadCellFilterContainer } from './MRT_TableHeadCellFilterContainer';
 import { MRT_TableHeadCellFilterLabel } from './MRT_TableHeadCellFilterLabel';
@@ -207,48 +206,56 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
       tabIndex={enableKeyboardShortcuts ? 0 : undefined}
       {...tableCellProps}
       onKeyDown={handleKeyDown}
-      sx={(theme: Theme) => ({
-        '& :hover': {
-          '.MuiButtonBase-root': {
-            opacity: 1,
+      sx={[
+        {
+          '& :hover': {
+            '.MuiButtonBase-root': {
+              opacity: 1,
+            },
           },
+          flexDirection: layoutMode?.startsWith('grid') ? 'column' : undefined,
+          fontWeight: 'bold',
+          overflow: 'visible',
+          p:
+            density === 'compact'
+              ? '0.5rem'
+              : density === 'comfortable'
+                ? columnDefType === 'display'
+                  ? '0.75rem'
+                  : '1rem'
+                : columnDefType === 'display'
+                  ? '1rem 1.25rem'
+                  : '1.5rem',
+          pb:
+            columnDefType === 'display'
+              ? 0
+              : showColumnFilters || density === 'compact'
+                ? '0.4rem'
+                : '0.6rem',
+          pt:
+            columnDefType === 'group' || density === 'compact'
+              ? '0.25rem'
+              : density === 'comfortable'
+                ? '.75rem'
+                : '1.25rem',
+          userSelect: enableMultiSort && column.getCanSort() ? 'none' : undefined,
+          verticalAlign: 'top',
+          ...draggingBorders,
         },
-        flexDirection: layoutMode?.startsWith('grid') ? 'column' : undefined,
-        fontWeight: 'bold',
-        overflow: 'visible',
-        p:
-          density === 'compact'
-            ? '0.5rem'
-            : density === 'comfortable'
-              ? columnDefType === 'display'
-                ? '0.75rem'
-                : '1rem'
-              : columnDefType === 'display'
-                ? '1rem 1.25rem'
-                : '1.5rem',
-        pb:
-          columnDefType === 'display'
-            ? 0
-            : showColumnFilters || density === 'compact'
-              ? '0.4rem'
-              : '0.6rem',
-        pt:
-          columnDefType === 'group' || density === 'compact'
-            ? '0.25rem'
-            : density === 'comfortable'
-              ? '.75rem'
-              : '1.25rem',
-        userSelect: enableMultiSort && column.getCanSort() ? 'none' : undefined,
-        verticalAlign: 'top',
-        ...getCommonMRTCellStyles({
-          column,
-          header,
-          table,
-          tableCellProps,
-          theme,
-        }),
-        ...draggingBorders,
-      })}
+        ...(() => {
+          const s = getCommonMRTCellStyles({
+            column,
+            header,
+            table,
+            tableCellProps,
+            theme,
+          });
+          return Array.isArray(s) ? s : [s];
+        })(),
+        ...(Array.isArray(tableCellProps?.sx)
+          ? tableCellProps.sx
+          : [tableCellProps?.sx]),
+      ]}
     >
       {header.isPlaceholder
         ? null

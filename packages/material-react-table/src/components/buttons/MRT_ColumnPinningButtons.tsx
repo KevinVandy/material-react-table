@@ -6,7 +6,6 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
-import { parseFromValuesOrFunc } from '../../utils/utils';
 
 export interface MRT_ColumnPinningButtonsProps<TData extends MRT_RowData>
   extends BoxProps {
@@ -33,11 +32,10 @@ export const MRT_ColumnPinningButtons = <TData extends MRT_RowData>({
   return (
     <Box
       {...rest}
-      sx={(theme) => ({
-        minWidth: '70px',
-        textAlign: 'center',
-        ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
-      })}
+      sx={[
+        { minWidth: '70px', textAlign: 'center' },
+        ...(Array.isArray(rest?.sx) ? rest.sx : [rest?.sx]),
+      ]}
     >
       {column.getIsPinned() ? (
         <Tooltip title={localization.unpin}>

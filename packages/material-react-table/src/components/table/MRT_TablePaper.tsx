@@ -67,13 +67,15 @@ export const MRT_TablePaper = <TData extends MRT_RowData>({
           : {}),
         ...paperProps?.style,
       }}
-      sx={(theme) => ({
-        backgroundColor: baseBackgroundColor,
-        backgroundImage: 'unset',
-        overflow: 'hidden',
-        transition: 'all 100ms ease-in-out',
-        ...(parseFromValuesOrFunc(paperProps?.sx, theme) as any),
-      })}
+      sx={[
+        {
+          backgroundColor: baseBackgroundColor,
+          backgroundImage: 'unset',
+          overflow: 'hidden',
+          transition: 'all 100ms ease-in-out',
+        },
+        ...(Array.isArray(paperProps?.sx) ? paperProps.sx : [paperProps?.sx]),
+      ]}
     >
       {enableTopToolbar &&
         (parseFromValuesOrFunc(renderTopToolbar, { table }) ?? (
