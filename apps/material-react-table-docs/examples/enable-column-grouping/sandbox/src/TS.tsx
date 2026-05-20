@@ -66,7 +66,7 @@ const Example = () => {
   });
 
   return (
-    <Stack gap="1rem">
+    <Stack sx={{ gap: '1rem' }}>
       <DemoRadioGroup
         groupedColumnMode={groupedColumnMode}
         setGroupedColumnMode={setGroupedColumnMode}

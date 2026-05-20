@@ -62,7 +62,7 @@ const DetailPanel = ({ row }: { row: MRT_Row<User> }) => {
   const { favoriteMusic, favoriteSong, quote } = userInfo ?? {};
 
   return (
-    <Stack gap="0.5rem" minHeight="00px">
+    <Stack sx={{ gap: '0.5rem', minHeight: '00px' }}>
       <div>
         <b>Favorite Music:</b> {favoriteMusic}
       </div>
