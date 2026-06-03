@@ -2174,4 +2174,14 @@ export const tableOptions: TableOption[] = [
     source: 'MRT',
     type: 'MutableRefObject<Virtualizer | null>',
   },
+  {
+    tableOption: 'paginationDisplayMode',
+    defaultValue: 'default',
+    description: '',
+    link: '/docs/guides/pagination',
+    linkText: '',
+    required: false,
+    source: 'MRT',
+    type: "'custom' | 'page' | 'pages'",
+  },
 ];
