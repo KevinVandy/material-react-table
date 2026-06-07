@@ -19,7 +19,8 @@ for file in *; do
       # Change directory to the sandbox directory
       cd sandbox
 
-      ## Update dependency versions
+      ## Update dependency versions (MUI is kept on Material v7 + compatible MUI X in this repo:
+      ## @mui/material ^7.3.10, @mui/icons-material ^7.3.10, @mui/x-date-pickers ^7.29.4, @mui/x-charts ^8.28.2)
       npx npm-check-updates -u
 
       # Run npm install
