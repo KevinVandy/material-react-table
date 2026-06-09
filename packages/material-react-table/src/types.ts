@@ -217,6 +217,7 @@ export interface MRT_Localization {
   pinToRight: string;
   resetColumnSize: string;
   resetOrder: string;
+  resetPins: string;
   rowActions: string;
   rowNumber: string;
   rowNumbers: string;
@@ -862,6 +863,8 @@ export interface MRT_TableOptions<TData extends MRT_RowData>
   enableColumnDragging?: boolean;
   enableColumnFilterModes?: boolean;
   enableColumnOrdering?: boolean;
+  enableColumnResetPins?: boolean;
+  enableColumnUnpinAll?: boolean;
   enableColumnVirtualization?: boolean;
   enableDensityToggle?: boolean;
   enableEditing?: ((row: MRT_Row<TData>) => boolean) | boolean;
