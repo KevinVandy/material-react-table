@@ -175,11 +175,10 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
                     ? (rowOrVirtualRow as VirtualItem)
                     : undefined,
                 };
-                const key = `${row.id}-${row.index}`;
                 return memoMode === 'rows' ? (
-                  <Memo_MRT_TableBodyRow key={key} {...props} />
+                  <Memo_MRT_TableBodyRow key={row.id} {...props} />
                 ) : (
-                  <MRT_TableBodyRow key={key} {...props} />
+                  <MRT_TableBodyRow key={row.id} {...props} />
                 );
               })}
             </>
