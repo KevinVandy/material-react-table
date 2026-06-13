@@ -10,6 +10,8 @@ import {
   type MRT_VirtualItem,
 } from '../../types';
 import { parseFromValuesOrFunc } from '../../utils/utils';
+import { useMemo } from 'react';
+import { VirtualItem } from '@tanstack/react-virtual';
 
 export interface MRT_TableHeadRowProps<TData extends MRT_RowData>
   extends TableRowProps {
@@ -44,6 +46,11 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
     ...rest,
   };
 
+  const headerColumns: VirtualItem[] | MRT_Header<TData>[] = useMemo(
+    () => (virtualColumns?.length ? virtualColumns : headerGroup.headers),
+    [headerGroup.headers, virtualColumns],
+  );
+
   return (
     <TableRow
       {...tableRowProps}
@@ -62,26 +69,23 @@ export const MRT_TableHeadRow = <TData extends MRT_RowData>({
       {virtualPaddingLeft ? (
         <th style={{ display: 'flex', width: virtualPaddingLeft }} />
       ) : null}
-      {(virtualColumns ?? headerGroup.headers).map(
-        (headerOrVirtualHeader, staticColumnIndex) => {
-          let header = headerOrVirtualHeader as MRT_Header<TData>;
-          if (columnVirtualizer) {
-            staticColumnIndex = (headerOrVirtualHeader as MRT_VirtualItem)
-              .index;
-            header = headerGroup.headers[staticColumnIndex];
-          }
+      {headerColumns.map((headerOrVirtualHeader, staticColumnIndex) => {
+        let header = headerOrVirtualHeader as MRT_Header<TData>;
+        if (columnVirtualizer && virtualColumns?.length) {
+          staticColumnIndex = (headerOrVirtualHeader as MRT_VirtualItem).index;
+          header = headerGroup.headers[staticColumnIndex];
+        }
 
-          return header ? (
-            <MRT_TableHeadCell
-              columnVirtualizer={columnVirtualizer}
-              header={header}
-              key={header.id}
-              staticColumnIndex={staticColumnIndex}
-              table={table}
-            />
-          ) : null;
-        },
-      )}
+        return header ? (
+          <MRT_TableHeadCell
+            columnVirtualizer={columnVirtualizer}
+            header={header}
+            key={header.id}
+            staticColumnIndex={staticColumnIndex}
+            table={table}
+          />
+        ) : null;
+      })}
       {virtualPaddingRight ? (
         <th style={{ display: 'flex', width: virtualPaddingRight }} />
       ) : null}
