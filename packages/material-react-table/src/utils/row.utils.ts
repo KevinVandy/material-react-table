@@ -175,6 +175,19 @@ export const getMRT_RowSelectionHandler =
 
     const wasCurrentRowChecked = getIsRowSelected({ row, table });
 
+    // If this is a group row, toggle all its leaf sub-rows instead of itself
+    // to prevent the group row ID from entering rowSelection
+    if (row.getIsGrouped()) {
+      const newValue = value ?? !wasCurrentRowChecked;
+      row.getLeafRows().forEach((leafRow) => {
+        if (leafRow.getCanSelect()) {
+          leafRow.toggleSelected(newValue);
+        }
+      });
+      lastSelectedRowId.current = row.id;
+      return;
+    }
+
     // toggle selection of this row
     row.toggleSelected(value ?? !wasCurrentRowChecked);
 
@@ -250,9 +263,17 @@ export const getMRT_SelectAllHandler =
       refs: { lastSelectedRowId },
     } = table;
 
-    selectAllMode === 'all' || forceAll
-      ? table.toggleAllRowsSelected(value ?? (event as any).target.checked)
-      : table.toggleAllPageRowsSelected(value ?? (event as any).target.checked);
+    // Fix: replaces toggleAllPageRowsSelected() / toggleAllRowsSelected() which
+    // include group rows in flatRows, causing group IDs to pollute rowSelection.
+    const checked = value ?? (event as any).target.checked;
+    const rows = (selectAllMode === 'all' || forceAll
+      ? table.getPrePaginationRowModel().flatRows
+      : table.getPaginationRowModel().flatRows
+    ).filter((row) => !row.getIsGrouped());
+    rows.forEach((row) => {
+      if (row.getCanSelect()) row.toggleSelected(checked);
+    });
+    
     if (enableRowPinning && rowPinningDisplayMode?.includes('select')) {
       table.setRowPinning({ bottom: [], top: [] });
     }
