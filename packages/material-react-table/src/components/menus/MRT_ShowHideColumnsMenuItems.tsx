@@ -109,6 +109,17 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
     return null;
   }
 
+  const isColumnVisibilityToggleDisabled = () => {
+    const cols = column.columns;
+
+    const isNonHidable = (c: MRT_Column<TData>) =>
+      c.columnDef.enableHiding === false;
+
+    if (!cols?.length || !cols.some(isNonHidable)) return !column.getCanHide();
+
+    return cols.every((c) => isNonHidable(c) || !c.getIsVisible());
+  };
+
   return (
     <>
       <MenuItem
@@ -176,7 +187,7 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
                   <Switch />
                 </Tooltip>
               }
-              disabled={!column.getCanHide()}
+              disabled={isColumnVisibilityToggleDisabled()}
               label={columnDef.header}
               onChange={() => handleToggleColumnHidden(column)}
             />
