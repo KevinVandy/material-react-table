@@ -65,7 +65,7 @@ const fetchSize = 25;
 const Example = () => {
   const tableContainerRef = useRef<HTMLDivElement>(null); //we can get access to the underlying TableContainer element and react to its scroll events
   const rowVirtualizerInstanceRef = useRef<MRT_RowVirtualizer>(null); //we can get access to the underlying Virtualizer instance and call its scrollToIndex method
-
+  const [currentMaxPages, setCurrentMaxPages] = useState(4);
   const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
     [],
   );
@@ -100,6 +100,7 @@ const Example = () => {
       initialPageParam: 0,
       getNextPageParam: (_lastGroup, groups) => groups.length,
       refetchOnWindowFocus: false,
+      maxPages: currentMaxPages,
     });
 
   const flatData = useMemo(
@@ -109,6 +110,22 @@ const Example = () => {
 
   const totalDBRowCount = data?.pages?.[0]?.meta?.totalRowCount ?? 0;
   const totalFetched = flatData.length;
+
+  const handleScroll = useCallback(() => {
+    const containerElement = tableContainerRef.current;
+    if (containerElement) {
+      const { scrollHeight, scrollTop, clientHeight } = containerElement;
+
+      if (
+        scrollHeight - scrollTop - clientHeight < 400 &&
+        !isFetching &&
+        totalFetched < totalDBRowCount &&
+        currentMaxPages < totalDBRowCount / fetchSize
+      ) {
+        setCurrentMaxPages((prevMaxPages) => prevMaxPages + 2);
+      }
+    }
+  }, [currentMaxPages, isFetching, totalFetched, totalDBRowCount]);
 
   //called on scroll and possibly on mount to fetch more data as the user scrolls and reaches bottom of table
   const fetchMoreOnBottomReached = useCallback(
@@ -137,6 +154,16 @@ const Example = () => {
       console.error(error);
     }
   }, [sorting, columnFilters, globalFilter]);
+
+  useEffect(() => {
+    const containerElement = tableContainerRef.current;
+    if (containerElement) {
+      containerElement.addEventListener('scroll', handleScroll);
+      return () => {
+        containerElement.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, [handleScroll]);
 
   //a check on mount to see if the table is already scrolled to the bottom and immediately needs to fetch more data
   useEffect(() => {
