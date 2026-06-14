@@ -1,4 +1,4 @@
-import { ReactNode, useMemo, type MouseEvent } from 'react';
+import { isValidElement, ReactNode, useMemo, type MouseEvent } from 'react';
 import Menu, { type MenuProps } from '@mui/material/Menu';
 import { MRT_ActionMenuItem } from './MRT_ActionMenuItem';
 import {
@@ -42,7 +42,19 @@ export const MRT_RowActionMenu = <TData extends MRT_RowData>({
 
   const menuItems = useMemo(() => {
     const items: ReactNode[] = [];
-    const editItem = parseFromValuesOrFunc(enableEditing, row) &&
+
+    const rowActionMenuItems = renderRowActionMenuItems?.({
+      closeMenu: () => setAnchorEl(null),
+      row,
+      staticRowIndex,
+      table,
+    });
+
+    const hasEditItem = rowActionMenuItems?.some(
+      (item) => isValidElement(item) && item.key === 'edit',
+    );
+
+    const editItem = !hasEditItem && parseFromValuesOrFunc(enableEditing, row) &&
       ['modal', 'row'].includes(editDisplayMode!) && (
         <MRT_ActionMenuItem
           key={'edit'}
@@ -53,12 +65,6 @@ export const MRT_RowActionMenu = <TData extends MRT_RowData>({
         />
       );
     if (editItem) items.push(editItem);
-    const rowActionMenuItems = renderRowActionMenuItems?.({
-      closeMenu: () => setAnchorEl(null),
-      row,
-      staticRowIndex,
-      table,
-    });
     if (rowActionMenuItems?.length) items.push(...rowActionMenuItems);
     return items;
   }, [renderRowActionMenuItems, row, staticRowIndex, table]);
