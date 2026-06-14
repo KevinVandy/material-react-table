@@ -3,9 +3,11 @@ import {
   type MRT_Column,
   type MRT_ColumnDef,
   MaterialReactTable,
+  useMaterialReactTable,
 } from '../../src';
 import { faker } from '@faker-js/faker';
 import { type Meta } from '@storybook/react';
+import { Button } from '@mui/material';
 
 const meta: Meta = {
   title: 'Features/Column Grouping Examples',
@@ -359,4 +361,60 @@ export const GroupingAndDraggingWithSomeDisabledGrouping = () => {
       enableGrouping
     />
   );
+};
+
+export const GroupingBug = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button
+        onClick={() => {
+          setOpen(!open);
+        }}
+      >
+        Toggle
+      </Button>
+
+      {open && <GroupingTableBug />}
+    </>
+  );
+};
+
+const GroupingTableBug = () => {
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
+    () => [
+      {
+        accessorKey: 'firstName',
+        enableGrouping: false,
+        header: 'First Name',
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+      },
+    ],
+    [],
+  );
+
+  const rowCount = useMemo(() => data.length ?? 0, [data.length]);
+
+  const table = useMaterialReactTable({
+    rowCount,
+    enableRowVirtualization: true,
+    columns,
+    data,
+    enableGrouping: true,
+    groupedColumnMode: 'remove',
+    enablePagination: false,
+    initialState: { expanded: true },
+    state: { grouping: ['firstName'] },
+
+    // Bug when set `enableTopToolbar: false`
+    enableTopToolbar: false,
+  });
+
+  console.log('[table] rowModel', table.getRowModel());
+
+  return <MaterialReactTable table={table} />;
 };
