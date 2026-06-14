@@ -168,6 +168,8 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
             newFilterValues[rangeFilterIndex as number] = newValue ?? undefined;
             return newFilterValues;
           });
+        } else if (isMultiSelectFilter && Array.isArray(newValue) && newValue.length === 0) {
+          column.setFilterValue(undefined);
         } else {
           column.setFilterValue(newValue ?? undefined);
         }
@@ -209,7 +211,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
   const handleClear = () => {
     if (isMultiSelectFilter) {
       setFilterValue([]);
-      column.setFilterValue([]);
+      column.setFilterValue(undefined);
     } else if (isRangeFilter) {
       setFilterValue('');
       column.setFilterValue((old: [string | undefined, string | undefined]) => {
