@@ -27,6 +27,20 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "module": "./dist/index.esm.js",
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./*": "./*"
+  },
   "files": [
     "dist",
     "locales",
