@@ -1,8 +1,19 @@
 /** @type {import('next').NextConfig} */
+const path = require('path');
 
 const nextConfig = {
   transpilePackages: ['material-react-table', '@mui/x-charts'],
   reactStrictMode: true,
+  webpack(config) {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@mui/x-date-pickers': path.resolve(
+        __dirname,
+        'node_modules/@mui/x-date-pickers',
+      ),
+    };
+    return config;
+  },
   i18n: {
     locales: ['en'],
     defaultLocale: 'en',

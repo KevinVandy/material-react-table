@@ -8,7 +8,8 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
-import { Edit, GitHub } from '@mui/icons-material';
+import Edit from '@mui/icons-material/Edit';
+import GitHub from '@mui/icons-material/GitHub';
 import TableOfContentsList from './TableOfContentsList';
 import { routes } from './routes';
 import { EthicalAd } from '../mdx/EthicalAd';
@@ -120,7 +121,7 @@ export const Footer = () => {
           p: '1.5rem',
         }}
       >
-        <Typography color="text.secondary" textAlign="center">
+        <Typography color="text.secondary" sx={{ textAlign: 'center' }}>
           © {new Date().getFullYear()} Kevin&nbsp;Van&nbsp;Cott
         </Typography>
         <Box

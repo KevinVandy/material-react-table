@@ -59,6 +59,17 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
     }),
     ...rest,
   };
+  const {
+    InputProps: legacyInputProps,
+    inputProps: legacyHtmlInputProps,
+    SelectProps: legacySelectProps,
+    slotProps,
+    ...restTextFieldProps
+  } = textFieldProps as TextFieldProps & {
+    InputProps?: any;
+    SelectProps?: any;
+    inputProps?: any;
+  };
 
   const selectOptions = parseFromValuesOrFunc(editSelectOptions, {
     cell,
@@ -138,27 +149,34 @@ export const MRT_EditCellTextField = <TData extends MRT_RowData>({
       size="small"
       value={value ?? ''}
       variant="standard"
-      {...textFieldProps}
-      InputProps={{
-        ...(textFieldProps.variant !== 'outlined'
-          ? { disableUnderline: editDisplayMode === 'table' }
-          : {}),
-        ...textFieldProps.InputProps,
-        sx: (theme) => ({
-          mb: 0,
-          ...(parseFromValuesOrFunc(
-            textFieldProps?.InputProps?.sx,
-            theme,
-          ) as any),
-        }),
-      }}
-      SelectProps={{
-        MenuProps: { disableScrollLock: true },
-        ...textFieldProps.SelectProps,
-      }}
-      inputProps={{
-        autoComplete: 'off',
-        ...textFieldProps.inputProps,
+      {...restTextFieldProps}
+      slotProps={{
+        ...slotProps,
+        htmlInput: {
+          autoComplete: 'off',
+          ...legacyHtmlInputProps,
+          ...slotProps?.htmlInput,
+        },
+        input: {
+          ...(textFieldProps.variant !== 'outlined'
+            ? { disableUnderline: editDisplayMode === 'table' }
+            : {}),
+          ...legacyInputProps,
+          ...slotProps?.input,
+          sx: (theme) => ({
+            mb: 0,
+            ...(parseFromValuesOrFunc(legacyInputProps?.sx, theme) as any),
+            ...(parseFromValuesOrFunc(
+              (slotProps?.input as any)?.sx,
+              theme,
+            ) as any),
+          }),
+        },
+        select: {
+          MenuProps: { disableScrollLock: true },
+          ...legacySelectProps,
+          ...slotProps?.select,
+        },
       }}
       onBlur={handleBlur}
       onChange={handleChange}

@@ -114,7 +114,7 @@ export const FullscreenIsAboveAppbar = () => {
           <p>App</p>
         </Toolbar>
       </AppBar>
-      <Box padding={2}>
+      <Box sx={{ padding: 2 }}>
         <MaterialReactTable table={table} />
       </Box>
     </>

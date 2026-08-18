@@ -69,9 +69,9 @@ export const SideBar = ({ navOpen, setNavOpen }: Props) => {
 
   return (
     <Drawer
-      PaperProps={{ component: 'aside' }}
       open={navOpen}
       onClose={() => setNavOpen(false)}
+      slotProps={{ paper: { component: 'aside' } }}
       variant={isMobile ? 'temporary' : 'permanent'}
       sx={{
         zIndex: 4,

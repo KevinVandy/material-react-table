@@ -20,7 +20,8 @@ import {
 } from '@mui/material';
 
 //Icons Imports
-import { AccountCircle, Send } from '@mui/icons-material';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Send from '@mui/icons-material/Send';
 
 //Mock Data
 import { data } from './makeData';

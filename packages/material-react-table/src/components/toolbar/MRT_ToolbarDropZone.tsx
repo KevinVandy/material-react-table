@@ -69,7 +69,7 @@ export const MRT_ToolbarDropZone = <TData extends MRT_RowData>({
           ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
         })}
       >
-        <Typography fontStyle="italic">
+        <Typography sx={{ fontStyle: 'italic' }}>
           {localization.dropToGroupBy.replace(
             '{column}',
             draggingColumn?.columnDef?.header ?? '',

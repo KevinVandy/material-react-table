@@ -36,7 +36,9 @@ export const getMRT_RowExpandColumnDef = <TData extends MRT_RowData>(
       const subRowsLength = row.subRows?.length;
       if (groupedColumnMode === 'remove' && row.groupingColumnId) {
         return (
-          <Stack alignItems="center" flexDirection="row" gap="0.25rem">
+          <Stack
+            sx={{ alignItems: 'center', flexDirection: 'row', gap: '0.25rem' }}
+          >
             <MRT_ExpandButton {...expandButtonProps} />
             <Tooltip
               {...getCommonTooltipProps('right')}

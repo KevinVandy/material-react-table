@@ -61,10 +61,10 @@ const data = [
   },
   {
     mrtVersion: '3.x (This Version)',
-    muiVersion: '6.0+',
+    muiVersion: '6.0+ / tested with 9.x',
     muiXDatePickers: '7.15.0+',
     reactVersion: '18.0+',
-    muiIconsVersion: '6.0+',
+    muiIconsVersion: '6.0+ / tested with 9.x',
     emotionVersion: '11.0+',
     pigmentCSS: 'Optional',
   },

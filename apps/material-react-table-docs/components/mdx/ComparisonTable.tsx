@@ -76,7 +76,7 @@ const data = [
     bundlePhobiaLink:
       'https://bundlephobia.com/package/material-react-table@latest',
     description:
-      'Built on top of TanStack Table V8 and Material UI V6, Material React Table (MRT) is a batteries-included React table library that attempts to provide all the table features you need while trying to stay as highly performant and lightweight as possible. Customization is treated as a top priority to let you override any styles you need to change. Initially built in 2022, so it is still somewhat new.',
+      'Built on top of TanStack Table V8 and Material UI V9, Material React Table (MRT) is a batteries-included React table library that attempts to provide all the table features you need while trying to stay as highly performant and lightweight as possible. Customization is treated as a top priority to let you override any styles you need to change. Initially built in 2022, so it is still somewhat new.',
   },
   {
     library: 'Mantine React Table',

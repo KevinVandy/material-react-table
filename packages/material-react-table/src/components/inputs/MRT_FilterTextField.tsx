@@ -74,6 +74,15 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
     ...parseFromValuesOrFunc(columnDef.muiFilterTextFieldProps, args),
     ...rest,
   };
+  const {
+    InputProps: legacyInputProps,
+    inputProps: legacyHtmlInputProps,
+    slotProps,
+    ...restTextFieldProps
+  } = textFieldProps as typeof textFieldProps & {
+    InputProps?: any;
+    inputProps?: any;
+  };
 
   const autocompleteProps = {
     ...parseFromValuesOrFunc(muiFilterAutocompleteProps, args),
@@ -341,20 +350,25 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
         ? undefined
         : filterPlaceholder,
     variant: 'standard',
-    ...textFieldProps,
+    ...restTextFieldProps,
     slotProps: {
-      ...textFieldProps.slotProps,
+      ...slotProps,
       formHelperText: {
         sx: {
           fontSize: '0.75rem',
           lineHeight: '0.8rem',
           whiteSpace: 'nowrap',
         },
-        ...textFieldProps.slotProps?.formHelperText,
+        ...slotProps?.formHelperText,
       },
       input: endAdornment //hack because mui looks for presence of endAdornment key instead of undefined
-        ? { endAdornment, startAdornment, ...textFieldProps.slotProps?.input }
-        : { startAdornment, ...textFieldProps.slotProps?.input },
+        ? {
+            endAdornment,
+            startAdornment,
+            ...legacyInputProps,
+            ...slotProps?.input,
+          }
+        : { startAdornment, ...legacyInputProps, ...slotProps?.input },
       htmlInput: {
         'aria-label': filterPlaceholder,
         autoComplete: 'off',
@@ -364,7 +378,8 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
           width: filterChipLabel ? 0 : undefined,
         },
         title: filterPlaceholder,
-        ...textFieldProps.slotProps?.htmlInput,
+        ...legacyHtmlInputProps,
+        ...slotProps?.htmlInput,
       },
     },
     onKeyDown: (e) => {
@@ -394,6 +409,25 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
     },
     value: filterValue || null,
   };
+
+  if (typeof window === 'undefined' && isDateFilter) {
+    return (
+      <>
+        <TextField
+          {...commonTextFieldProps}
+          onChange={handleTextFieldChange}
+          value={filterValue}
+        />
+        <MRT_FilterOptionMenu
+          anchorEl={anchorEl}
+          header={header}
+          setAnchorEl={setAnchorEl}
+          setFilterValue={setFilterValue}
+          table={table}
+        />
+      </>
+    );
+  }
 
   return (
     <>
@@ -471,14 +505,14 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
                 ...builtinTextFieldProps.slotProps,
                 ...commonTextFieldProps.slotProps,
                 input: {
-                  ...builtinTextFieldProps.InputProps,
+                  ...(builtinTextFieldProps as any).InputProps,
                   ...builtinTextFieldProps.slotProps?.input,
                   startAdornment:
                     //@ts-expect-error
                     commonTextFieldProps?.slotProps?.input?.startAdornment,
                 },
                 htmlInput: {
-                  ...builtinTextFieldProps.inputProps,
+                  ...(builtinTextFieldProps as any).inputProps,
                   ...builtinTextFieldProps.slotProps?.htmlInput,
                   ...commonTextFieldProps?.slotProps?.htmlInput,
                 },

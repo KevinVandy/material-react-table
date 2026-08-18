@@ -45,6 +45,15 @@ export const MRT_GlobalFilterTextField = <TData extends MRT_RowData>({
     }),
     ...rest,
   };
+  const {
+    InputProps: legacyInputProps,
+    inputProps: legacyHtmlInputProps,
+    slotProps,
+    ...restTextFieldProps
+  } = textFieldProps as typeof textFieldProps & {
+    InputProps?: any;
+    inputProps?: any;
+  };
 
   const isMounted = useRef(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -93,57 +102,63 @@ export const MRT_GlobalFilterTextField = <TData extends MRT_RowData>({
       unmountOnExit
     >
       <TextField
-        inputProps={{
-          autoComplete: 'off',
-          ...textFieldProps.inputProps,
-        }}
         onChange={handleChange}
         placeholder={localization.search}
         size="small"
         value={searchValue ?? ''}
         variant="outlined"
-        {...textFieldProps}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <Tooltip title={localization.clearSearch ?? ''}>
-                <span>
+        {...restTextFieldProps}
+        slotProps={{
+          ...slotProps,
+          htmlInput: {
+            autoComplete: 'off',
+            ...legacyHtmlInputProps,
+            ...slotProps?.htmlInput,
+          },
+          input: {
+            endAdornment: (
+              <InputAdornment position="end">
+                <Tooltip title={localization.clearSearch ?? ''}>
+                  <span>
+                    <IconButton
+                      aria-label={localization.clearSearch}
+                      disabled={!searchValue?.length}
+                      onClick={handleClear}
+                      size="small"
+                    >
+                      <CloseIcon />
+                    </IconButton>
+                  </span>
+                </Tooltip>
+              </InputAdornment>
+            ),
+            startAdornment: enableGlobalFilterModes ? (
+              <InputAdornment position="start">
+                <Tooltip title={localization.changeSearchMode}>
                   <IconButton
-                    aria-label={localization.clearSearch}
-                    disabled={!searchValue?.length}
-                    onClick={handleClear}
+                    aria-label={localization.changeSearchMode}
+                    onClick={handleGlobalFilterMenuOpen}
                     size="small"
+                    sx={{ height: '1.75rem', width: '1.75rem' }}
                   >
-                    <CloseIcon />
+                    <SearchIcon />
                   </IconButton>
-                </span>
-              </Tooltip>
-            </InputAdornment>
-          ),
-          startAdornment: enableGlobalFilterModes ? (
-            <InputAdornment position="start">
-              <Tooltip title={localization.changeSearchMode}>
-                <IconButton
-                  aria-label={localization.changeSearchMode}
-                  onClick={handleGlobalFilterMenuOpen}
-                  size="small"
-                  sx={{ height: '1.75rem', width: '1.75rem' }}
-                >
-                  <SearchIcon />
-                </IconButton>
-              </Tooltip>
-            </InputAdornment>
-          ) : (
-            <SearchIcon style={{ marginRight: '4px' }} />
-          ),
-          ...textFieldProps.InputProps,
-          sx: (theme) => ({
-            mb: 0,
-            ...(parseFromValuesOrFunc(
-              textFieldProps?.InputProps?.sx,
-              theme,
-            ) as any),
-          }),
+                </Tooltip>
+              </InputAdornment>
+            ) : (
+              <SearchIcon style={{ marginRight: '4px' }} />
+            ),
+            ...legacyInputProps,
+            ...slotProps?.input,
+            sx: (theme) => ({
+              mb: 0,
+              ...(parseFromValuesOrFunc(legacyInputProps?.sx, theme) as any),
+              ...(parseFromValuesOrFunc(
+                (slotProps?.input as any)?.sx,
+                theme,
+              ) as any),
+            }),
+          },
         }}
         inputRef={(inputRef) => {
           searchInputRef.current = inputRef;

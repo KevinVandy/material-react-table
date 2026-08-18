@@ -21,6 +21,7 @@ export const MRT_Table = <TData extends MRT_RowData>({
     getState,
     options: {
       columns,
+      enableRowVirtualization,
       enableStickyHeader,
       enableTableFooter,
       enableTableHead,
@@ -73,7 +74,8 @@ export const MRT_Table = <TData extends MRT_RowData>({
     >
       {!!Caption && <caption>{Caption}</caption>}
       {enableTableHead && <MRT_TableHead {...commonTableGroupProps} />}
-      {memoMode === 'table-body' || columnSizingInfo.isResizingColumn ? (
+      {memoMode === 'table-body' ||
+      (columnSizingInfo.isResizingColumn && !enableRowVirtualization) ? (
         <Memo_MRT_TableBody {...commonTableGroupProps} />
       ) : (
         <MRT_TableBody {...commonTableGroupProps} />

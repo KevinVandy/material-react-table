@@ -127,10 +127,10 @@ export const useMRT_TableOptions: <TData extends MRT_RowData>(
   mrtTheme = useMemo(() => getMRTTheme(mrtTheme, theme), [mrtTheme, theme]);
   aggregationFns = useMemo(
     () => ({ ...MRT_AggregationFns, ...aggregationFns }),
-    [],
+    [aggregationFns],
   );
-  filterFns = useMemo(() => ({ ...MRT_FilterFns, ...filterFns }), []);
-  sortingFns = useMemo(() => ({ ...MRT_SortingFns, ...sortingFns }), []);
+  filterFns = useMemo(() => ({ ...MRT_FilterFns, ...filterFns }), [filterFns]);
+  sortingFns = useMemo(() => ({ ...MRT_SortingFns, ...sortingFns }), [sortingFns]);
   defaultColumn = useMemo(
     () => ({ ...MRT_DefaultColumn, ...defaultColumn }),
     [defaultColumn],

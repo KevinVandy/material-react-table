@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { ArrowBack } from '@mui/icons-material';
+import ArrowBack from '@mui/icons-material/ArrowBack';
 
 export const BreadCrumbs = () => {
   const { route, back } = useRouter();

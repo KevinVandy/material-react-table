@@ -160,7 +160,7 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
           {enableHiding ? (
             <FormControlLabel
               checked={switchChecked}
-              componentsProps={{
+              slotProps={{
                 typography: {
                   sx: {
                     mb: 0,

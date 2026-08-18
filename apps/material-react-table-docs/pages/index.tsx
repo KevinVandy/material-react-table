@@ -10,7 +10,7 @@ import {
   Alert,
   AlertTitle,
 } from '@mui/material';
-import { ArrowForwardIos } from '@mui/icons-material';
+import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos';
 import { HomeCards } from '../components/mdx/HomeCards';
 import { LinkCards } from '../components/mdx/LinkCards';
 import { StatBadges } from '../components/mdx/StatBadges';
@@ -30,7 +30,7 @@ const HomePage = () => {
           <AlertTitle>
             Material React Table V3 was released September 5th, 2024!
           </AlertTitle>
-          <Typography>Upgrade to MRT V3 and Material UI V6 Today!</Typography>
+          <Typography>Upgrade to MRT V3 and Material UI V9 Today!</Typography>
           <MuiLink href="/docs/getting-started/migrating-to-v3">
             View the V3 Migration Guide here.
           </MuiLink>
@@ -223,7 +223,7 @@ const HomePage = () => {
           <InstallCommand centered variant="fullWidth" />
         </Box>
         <HomeCards />
-        <Typography my="2rem" textAlign="center" variant="h3">
+        <Typography sx={{ my: '2rem', textAlign: 'center' }} variant="h3">
           Popular Docs
         </Typography>
         <Box
@@ -255,7 +255,7 @@ const HomePage = () => {
           <GuideCard title="Selection" href="docs/guides/row-selection" />
         </Box>
       </Stack>
-      <Typography my="2rem" textAlign="center" variant="h3">
+      <Typography sx={{ my: '2rem', textAlign: 'center' }} variant="h3">
         Examples To Get You Started
       </Typography>
       <BasicExamples />
@@ -305,7 +305,7 @@ const HomePage = () => {
       <Typography component="p" variant="subtitle2" sx={{ mt: '1rem' }}>
         *If you see any inaccuracies in this table, PRs are welcome!
       </Typography>
-      <LinkHeading mt="4rem" textAlign="center" variant="h3">
+      <LinkHeading sx={{ mt: '4rem', textAlign: 'center' }} variant="h3">
         Maintainers and Contributors
       </LinkHeading>
       <Contributors />

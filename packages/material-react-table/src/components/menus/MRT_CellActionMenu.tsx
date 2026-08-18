@@ -81,13 +81,22 @@ export const MRT_CellActionMenu = <TData extends MRT_RowData>({
     columnDef.renderCellActionMenuItems?.(renderActionProps) ??
     renderCellActionMenuItems?.(renderActionProps);
 
+  const { slotProps, ...restMenuProps } = rest as typeof rest & {
+    slotProps?: any;
+  };
+
   return (
     (!!menuItems?.length || !!internalMenuItems?.length) && (
       <Menu
-        MenuListProps={{
-          dense: density === 'compact',
-          sx: {
-            backgroundColor: menuBackgroundColor,
+        slotProps={{
+          ...slotProps,
+          list: {
+            dense: density === 'compact',
+            ...slotProps?.list,
+            sx: {
+              backgroundColor: menuBackgroundColor,
+              ...slotProps?.list?.sx,
+            },
           },
         }}
         anchorEl={actionCellRef.current}
@@ -96,7 +105,7 @@ export const MRT_CellActionMenu = <TData extends MRT_RowData>({
         onClose={handleClose}
         open={!!cell}
         transformOrigin={{ horizontal: -100, vertical: 8 }}
-        {...rest}
+        {...restMenuProps}
       >
         {menuItems ?? internalMenuItems}
       </Menu>

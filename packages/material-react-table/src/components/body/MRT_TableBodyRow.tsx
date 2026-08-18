@@ -169,11 +169,17 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
         data-selected={isRowSelected || undefined}
         onDragEnter={handleDragEnter}
         onDragOver={handleDragOver}
-        ref={(node: HTMLTableRowElement) => {
-          if (node) {
-            rowRef.current = node;
-            rowVirtualizer?.measureElement(node);
-          }
+        ref={(node: HTMLTableRowElement | null) => {
+          rowRef.current = node;
+          // ★null 必须透传给 virtualizer(2026-08-18 实测内存事故后改):
+          // @tanstack/virtual 的 measureElement 只在**收到 null** 时才会遍历
+          // elementsCache、把已断开的元素 unobserve 并从缓存里删掉 —— 那是它唯一的
+          // 清扫入口。原先的 `if (node)` 守卫把这条路整个挡死,于是行卸载后
+          // ResizeObserver 仍强引用着那个 <tr>,整棵行子树无法回收。
+          // 实测(~500 行的表完整滚一遍,每次采样前强制 GC 只看存活):
+          // 残留 14900 个游离节点、371 个监听器,反复滚动不再增长(每个 key 最多留一份)
+          // 但也永不释放;手工补一次 measureElement(null) 当场全部释放。
+          rowVirtualizer?.measureElement(node);
         }}
         selected={isRowSelected}
         {...tableRowProps}

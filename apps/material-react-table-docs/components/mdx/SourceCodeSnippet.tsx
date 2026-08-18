@@ -29,6 +29,8 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { LinkHeading } from './LinkHeading';
 import { usePlausible } from 'next-plausible';
 import { useThemeContext } from '../../styles/ThemeContext';
@@ -117,8 +119,8 @@ export const SourceCodeSnippet = ({
             >
               <LinkHeading
                 tableId={tableId}
+                sx={{ textTransform: 'capitalize' }}
                 variant="h4"
-                textTransform="capitalize"
               >
                 Demo
               </LinkHeading>
@@ -232,7 +234,9 @@ export const SourceCodeSnippet = ({
             </Box>
           )}
           <Collapse in={!['stackblitz', 'sandbox'].includes(codeTab)}>
-            <Component />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Component />
+            </LocalizationProvider>
           </Collapse>
         </>
       )}
@@ -267,7 +271,7 @@ export const SourceCodeSnippet = ({
         >
           <LinkHeading
             tableId={tableId}
-            textTransform="capitalize"
+            sx={{ textTransform: 'capitalize' }}
             variant="h4"
           >
             Source Code

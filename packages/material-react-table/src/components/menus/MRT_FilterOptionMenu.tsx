@@ -238,12 +238,21 @@ export const MRT_FilterOptionMenu = <TData extends MRT_RowData>({
   const filterOption =
     !!header && columnDef ? columnDef._filterFn : globalFilterFn;
 
+  const { slotProps, ...restMenuProps } = rest as typeof rest & {
+    slotProps?: any;
+  };
+
   return (
     <Menu
-      MenuListProps={{
-        dense: density === 'compact',
-        sx: {
-          backgroundColor: menuBackgroundColor,
+      slotProps={{
+        ...slotProps,
+        list: {
+          dense: density === 'compact',
+          ...slotProps?.list,
+          sx: {
+            backgroundColor: menuBackgroundColor,
+            ...slotProps?.list?.sx,
+          },
         },
       }}
       anchorEl={anchorEl}
@@ -251,7 +260,7 @@ export const MRT_FilterOptionMenu = <TData extends MRT_RowData>({
       disableScrollLock
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
-      {...rest}
+      {...restMenuProps}
     >
       {(header && column && columnDef
         ? (columnDef.renderColumnFilterModeMenuItems?.({

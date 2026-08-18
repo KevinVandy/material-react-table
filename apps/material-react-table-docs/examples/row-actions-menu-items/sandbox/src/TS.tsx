@@ -5,7 +5,8 @@ import {
   type MRT_ColumnDef,
 } from 'material-react-table';
 import { data, type Person } from './makeData';
-import { Edit, Delete } from '@mui/icons-material';
+import Delete from '@mui/icons-material/Delete';
+import Edit from '@mui/icons-material/Edit';
 
 export const Example = () => {
   const columns = useMemo<MRT_ColumnDef<Person>[]>(

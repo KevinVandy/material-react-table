@@ -97,10 +97,12 @@ export const useMRT_Effects = <TData extends MRT_RowData>(
 
   //fix pinned row top style when density changes
   useEffect(() => {
-    if (enableRowPinning && getIsSomeRowsPinned()) {
-      setTimeout(() => {
-        rerender();
-      }, 150);
-    }
+    if (!enableRowPinning || !getIsSomeRowsPinned()) return undefined;
+
+    const timeoutId = setTimeout(() => {
+      rerender();
+    }, 150);
+
+    return () => clearTimeout(timeoutId);
   }, [density]);
 };

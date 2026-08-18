@@ -25,7 +25,7 @@ export const MiniNav = () => {
         maxWidth: isXLDesktop ? '250px' : '500px',
       }}
     >
-      <Typography mt="1rem" component="div" variant="h6">
+      <Typography component="div" sx={{ mt: '1rem' }} variant="h6">
         On This Page
       </Typography>
       <ul

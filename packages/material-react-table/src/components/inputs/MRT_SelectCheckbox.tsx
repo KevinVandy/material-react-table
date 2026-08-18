@@ -63,6 +63,11 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
         })),
     ...rest,
   };
+  const {
+    inputProps: legacyInputProps,
+    slotProps,
+    ...restCheckboxProps
+  } = checkboxProps as typeof checkboxProps & { inputProps?: any };
 
   const onSelectionChange = row
     ? getMRT_RowSelectionHandler({
@@ -81,17 +86,22 @@ export const MRT_SelectCheckbox = <TData extends MRT_RowData>({
     checked: isChecked,
     disabled:
       isLoading || (row && !row.getCanSelect()) || row?.id === 'mrt-row-create',
-    inputProps: {
-      'aria-label': selectAll
-        ? localization.toggleSelectAll
-        : localization.toggleSelectRow,
+    slotProps: {
+      ...slotProps,
+      input: {
+        'aria-label': selectAll
+          ? localization.toggleSelectAll
+          : localization.toggleSelectRow,
+        ...legacyInputProps,
+        ...slotProps?.input,
+      },
     },
     onChange: (event) => {
       event.stopPropagation();
       selectAll ? onSelectAllChange(event) : onSelectionChange!(event);
     },
     size: (density === 'compact' ? 'small' : 'medium') as 'medium' | 'small',
-    ...checkboxProps,
+    ...restCheckboxProps,
     onClick: (e: MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
       checkboxProps?.onClick?.(e);

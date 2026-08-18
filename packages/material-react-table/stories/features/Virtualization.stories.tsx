@@ -147,7 +147,7 @@ export const VirtualizationConditionallyWontToggle = () => {
       enableRowVirtualization={enabled}
       initialState={{ density: 'compact' }}
       renderTopToolbarCustomActions={() => (
-        <Stack alignItems="center" direction="row">
+        <Stack direction="row" sx={{ alignItems: 'center' }}>
           <Button onClick={() => setEnabled(!enabled)}>
             Toggle Virtualization
           </Button>

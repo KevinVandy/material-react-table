@@ -160,14 +160,16 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
   };
 
   const handleRef = useCallback(
-    (node: HTMLTableCellElement) => {
-      if (node) {
-        if (tableHeadCellRefs.current) {
-          tableHeadCellRefs.current[column.id] = node;
-        }
-        if (columnDefType !== 'group') {
-          columnVirtualizer?.measureElement?.(node);
-        }
+    (node: HTMLTableCellElement | null) => {
+      if (tableHeadCellRefs.current) {
+        // 卸载时把条目删掉而不是留一个悬空元素:这张表是按 column.id 长期持有的。
+        if (node) tableHeadCellRefs.current[column.id] = node;
+        else delete tableHeadCellRefs.current[column.id];
+      }
+      if (columnDefType !== 'group') {
+        // ★null 必须透传:理由同 MRT_TableBodyRow。列虚拟化下横向滚动会以同样的方式
+        // 让卸载后的表头单元格被 ResizeObserver 攥住。
+        columnVirtualizer?.measureElement?.(node);
       }
     },
     [column.id, columnDefType, columnVirtualizer, tableHeadCellRefs],
@@ -326,7 +328,7 @@ export const MRT_TableHeadCell = <TData extends MRT_RowData>({
                       column={column}
                       table={table}
                       tableHeadCellRef={{
-                        current: tableHeadCellRefs.current?.[column.id]!,
+                        current: tableHeadCellRefs.current?.[column.id] ?? null,
                       }}
                     />
                   )}

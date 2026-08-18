@@ -17,7 +17,7 @@ function App({ Component, pageProps }: AppProps) {
         <title>Material React Table V3</title>
         <meta
           name="description"
-          content="Material React Table, a fully featured Material UI V6 implementation of TanStack React Table V8. Written from the ground up in TypeScript."
+          content="Material React Table, a fully featured Material UI V9 implementation of TanStack React Table V8. Written from the ground up in TypeScript."
         />
         <link
           rel="canonical"

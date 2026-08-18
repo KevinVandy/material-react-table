@@ -180,7 +180,7 @@ export const MRT_TablePagination = <TData extends MRT_RowData>({
           }-${lastRowIndex.toLocaleString(localization.language)} ${
             localization.of
           } ${totalRowCount.toLocaleString(localization.language)}`}</Typography>
-          <Box gap="xs">
+          <Box sx={{ gap: 'xs' }}>
             {showFirstButton && (
               <Tooltip {...tooltipProps} title={localization.goToFirstPage}>
                 <span>

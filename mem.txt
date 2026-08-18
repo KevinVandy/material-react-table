@@ -1,0 +1,41 @@
+三条核心构建指令：
+
+指令	作用
+pnpm build	完整构建 = build-lib + build-locales（先删 dist，再编译主包，再编译所有 locale）
+pnpm build-lib	只构建主包 → 产出 dist/index.esm.js、dist/index.js
+pnpm build-locales	只构建 locale → 产出 locales/zh-Hans/index.esm.js 等 38 个目录
+当前后台跑的 node build-locales.mjs 等价于 pnpm build-locales，只是绕开了 pnpm 直接调 Node。
+
+如果需要从头完整重建（主包 + locale）：
+cd /mnt/d/Gits/material-react-table/packages/material-react-table
+pnpm build
+如果只缺 locale 产物（当前情况）：
+pnpm build-locales
+
+主包已构建，产物是 3月27日 18:19 编译的，dist/ 里有完整的五个文件：
+
+文件	说明
+index.esm.js (275K)	ESM 格式，Vite 使用的就是这个
+index.js (295K)	CJS 格式
+index.d.ts (93K)	TypeScript 类型声明
+*.map	两份 source map
+主包不需要重新构建，当前用的 alias 直接指向的就是这个 dist/index.esm.js。只有 locale 产物是缺的，后台那个 build-locales.mjs 正在补上。
+
+方式 1（更快）：
+cd /mnt/d/Project/daqgate/ProtocolWeb
+rm -rf node_modules/material-react-table
+yarn install
+只重装这一个包，几秒钟。
+
+方式 2（等价）：
+cd /mnt/d/Project/daqgate/ProtocolWeb
+yarn add material-react-table@file:/mnt/d/Gits/material-react-table/packages/material-react-table
+但既然你已经加了 Vite alias，源码改了直接刷新就生效，这两种方式都不再需要了。只有在你想移除 alias、回到用 node_modules 版本时才需要执行一次。
+
+不改全局环境：绕过根目录 turbo，分别构建子包
+如果你只是要构建库包，执行：
+cd D:\Gits\material-react-table\packages\material-react-table
+corepack pnpm install
+corepack pnpm build
+
+如果你还要等价于根目录完整 build（含 docs 包），再额外执行：

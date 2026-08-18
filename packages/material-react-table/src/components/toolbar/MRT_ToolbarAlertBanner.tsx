@@ -64,7 +64,7 @@ export const MRT_ToolbarAlertBanner = <TData extends MRT_RowData>({
   );
   const selectedAlert =
     selectedRowCount > 0 ? (
-      <Stack alignItems="center" direction="row" gap="16px">
+      <Stack direction="row" sx={{ alignItems: 'center', gap: '16px' }}>
         {localization.selectedCountOfRowCountRowsSelected
           ?.replace(
             '{selectedCount}',

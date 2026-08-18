@@ -53,10 +53,10 @@ const Example = () => {
   });
 
   return (
-    <Stack direction={isMobile ? 'column-reverse' : 'row'} gap="8px">
+    <Stack direction={isMobile ? 'column-reverse' : 'row'} sx={{ gap: '8px' }}>
       <MRT_TableContainer table={table} />
       <Paper>
-        <Stack p="8px" gap="8px">
+        <Stack sx={{ gap: '8px', p: '8px' }}>
           {table
             .getLeafHeaders()
             .map(

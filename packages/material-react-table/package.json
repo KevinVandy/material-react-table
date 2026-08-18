@@ -1,8 +1,11 @@
 {
-  "version": "3.2.1",
+  "version": "3.2.2",
   "license": "MIT",
-  "name": "material-react-table",
-  "description": "A fully featured Material UI V6 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
+  "name": "@daihua/material-react-table",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "A fully featured Material UI V9 implementation of TanStack React Table V8, written from the ground up in TypeScript.",
   "author": "KevinVandy",
   "keywords": [
     "react-table",
@@ -13,7 +16,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/KevinVandy/material-react-table"
+    "url": "https://github.com/daihua2/material-react-table",
+    "directory": "packages/material-react-table"
   },
   "funding": {
     "type": "github",
@@ -52,7 +56,7 @@
     "dev": "pnpm lib:dev",
     "lib:build": "pnpm build-lib && pnpm build-locales",
     "lib:build-locales": "node build-locales.mjs",
-    "lib:build-lib": "rm -rf dist && rollup -c rollup.config.mjs && size-limit",
+    "lib:build-lib": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\" && rollup -c rollup.config.mjs && size-limit",
     "lib:dev": "rollup -c rollup.config.mjs --watch",
     "lint": "eslint .",
     "size": "size-limit",
@@ -65,9 +69,9 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@faker-js/faker": "^9.3.0",
-    "@mui/icons-material": "^6.2.1",
-    "@mui/material": "^6.2.1",
-    "@mui/x-date-pickers": "^7.23.3",
+    "@mui/icons-material": "^9.0.0",
+    "@mui/material": "^9.0.0",
+    "@mui/x-date-pickers": "^9.0.4",
     "@rollup/plugin-typescript": "^11.1.6",
     "@size-limit/preset-small-lib": "^11.1.6",
     "@storybook/addon-a11y": "^8.4.7",
@@ -106,9 +110,9 @@
   "peerDependencies": {
     "@emotion/react": ">=11.13",
     "@emotion/styled": ">=11.13",
-    "@mui/icons-material": ">=6",
-    "@mui/material": ">=6",
-    "@mui/x-date-pickers": ">=7.15",
+    "@mui/icons-material": ">=6 <10",
+    "@mui/material": ">=6 <10",
+    "@mui/x-date-pickers": ">=7.15 <10",
     "react": ">=18.0",
     "react-dom": ">=18.0"
   },
