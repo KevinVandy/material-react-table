@@ -64,10 +64,9 @@ export const MRT_TableDetailPanel = <TData extends MRT_RowData>({
     <TableRow
       className="Mui-TableBodyCell-DetailPanel"
       data-index={renderDetailPanel ? staticRowIndex * 2 + 1 : staticRowIndex}
-      ref={(node: HTMLTableRowElement) => {
-        if (node) {
-          rowVirtualizer?.measureElement?.(node);
-        }
+      ref={(node: HTMLTableRowElement | null) => {
+        // ★null 必须透传:理由同 MRT_TableBodyRow —— 那是 virtualizer 唯一的清扫入口。
+        rowVirtualizer?.measureElement?.(node);
       }}
       {...tableRowProps}
       sx={(theme) => ({
