@@ -25,7 +25,7 @@ export const BlogAuthor = ({
           alignItems: 'center',
         }}
       >
-        <Typography fontSize="14pt" variant="caption">
+        <Typography sx={{ fontSize: '14pt' }} variant="caption">
           By{' '}
           <Link
             color="text.primary"

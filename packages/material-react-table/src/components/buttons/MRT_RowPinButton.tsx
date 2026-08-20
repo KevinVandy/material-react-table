@@ -8,7 +8,6 @@ import {
   type MRT_TableInstance,
 } from '../../types';
 import { getCommonTooltipProps } from '../../utils/style.utils';
-import { parseFromValuesOrFunc } from '../../utils/utils';
 
 export interface MRT_RowPinButtonProps<TData extends MRT_RowData>
   extends IconButtonProps {
@@ -56,11 +55,10 @@ export const MRT_RowPinButton = <TData extends MRT_RowData>({
         onMouseLeave={() => setTooltipOpened(false)}
         size="small"
         {...rest}
-        sx={(theme) => ({
-          height: '24px',
-          width: '24px',
-          ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
-        })}
+        sx={[
+          { height: '24px', width: '24px' },
+          ...(Array.isArray(rest?.sx) ? rest.sx : [rest?.sx]),
+        ]}
       >
         {isPinned ? (
           <CloseIcon />

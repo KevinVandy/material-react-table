@@ -118,7 +118,7 @@ export const SourceCodeSnippet = ({
               <LinkHeading
                 tableId={tableId}
                 variant="h4"
-                textTransform="capitalize"
+                sx={{ textTransform: 'capitalize' }}
               >
                 Demo
               </LinkHeading>
@@ -267,7 +267,7 @@ export const SourceCodeSnippet = ({
         >
           <LinkHeading
             tableId={tableId}
-            textTransform="capitalize"
+            sx={{ textTransform: 'capitalize' }}
             variant="h4"
           >
             Source Code

@@ -25,11 +25,11 @@
     "storybook:dev": "turbo run storybook"
   },
   "devDependencies": {
-    "prettier": "^3.4.2",
-    "turbo": "2.3.3"
+    "prettier": "^3.8.3",
+    "turbo": "2.9.14"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=24.0.0"
   },
-  "packageManager": "pnpm@9.3.0"
+  "packageManager": "pnpm@11.1.0"
 }

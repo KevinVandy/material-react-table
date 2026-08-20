@@ -73,24 +73,31 @@ export const MRT_TableFooterCell = <TData extends MRT_RowData>({
       variant="footer"
       {...tableCellProps}
       onKeyDown={handleKeyDown}
-      sx={(theme) => ({
-        fontWeight: 'bold',
-        p:
-          density === 'compact'
-            ? '0.5rem'
-            : density === 'comfortable'
-              ? '1rem'
-              : '1.5rem',
-        verticalAlign: 'top',
-        ...getCommonMRTCellStyles({
-          column,
-          header: footer,
-          table,
-          tableCellProps,
-          theme,
-        }),
-        ...(parseFromValuesOrFunc(tableCellProps?.sx, theme) as any),
-      })}
+      sx={[
+        {
+          fontWeight: 'bold',
+          p:
+            density === 'compact'
+              ? '0.5rem'
+              : density === 'comfortable'
+                ? '1rem'
+                : '1.5rem',
+          verticalAlign: 'top',
+        },
+        ...(() => {
+          const s = getCommonMRTCellStyles({
+            column,
+            header: footer,
+            table,
+            tableCellProps,
+            theme,
+          });
+          return Array.isArray(s) ? s : [s];
+        })(),
+        ...(Array.isArray(tableCellProps?.sx)
+          ? tableCellProps.sx
+          : [tableCellProps?.sx]),
+      ]}
     >
       {tableCellProps.children ??
         (footer.isPlaceholder

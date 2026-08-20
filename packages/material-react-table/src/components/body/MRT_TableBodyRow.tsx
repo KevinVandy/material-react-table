@@ -1,13 +1,7 @@
 import { type DragEvent, memo, useMemo, useRef } from 'react';
 import { type VirtualItem } from '@tanstack/react-virtual';
 import TableRow, { type TableRowProps } from '@mui/material/TableRow';
-import {
-  type Theme,
-  alpha,
-  darken,
-  lighten,
-  useTheme,
-} from '@mui/material/styles';
+import { type Theme, useTheme } from '@mui/material/styles';
 import { MRT_TableBodyCell, Memo_MRT_TableBodyCell } from './MRT_TableBodyCell';
 import { MRT_TableDetailPanel } from './MRT_TableDetailPanel';
 import {
@@ -23,6 +17,10 @@ import { getIsRowSelected } from '../../utils/row.utils';
 import {
   commonCellBeforeAfterStyles,
   getCommonPinnedCellStyles,
+  mrtAlpha,
+  mrtDarken,
+  mrtLighten,
+  resolveBaseBackground,
 } from '../../utils/style.utils';
 import { parseFromValuesOrFunc } from '../../utils/utils';
 
@@ -123,14 +121,23 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
   const tableFooterHeight =
     (enableStickyFooter && tableFooterRef.current?.clientHeight) || 0;
 
-  const sx = parseFromValuesOrFunc(tableRowProps?.sx, theme as any);
+  // Resolve user sx to extract an optional explicit row height
+  const sxForHeight = (
+    Array.isArray(tableRowProps?.sx)
+      ? tableRowProps.sx[0]
+      : typeof tableRowProps?.sx === 'function'
+        ? tableRowProps.sx(theme)
+        : tableRowProps?.sx
+  ) as Record<string, unknown> | undefined;
 
   const defaultRowHeight =
     density === 'compact' ? 37 : density === 'comfortable' ? 53 : 69;
 
   const customRowHeight =
-    // @ts-expect-error
-    parseInt(tableRowProps?.style?.height ?? sx?.height, 10) || undefined;
+    parseInt(
+      (tableRowProps?.style?.height as string) ?? (sxForHeight?.height as string),
+      10,
+    ) || undefined;
 
   const rowHeight = customRowHeight || defaultRowHeight;
 
@@ -152,13 +159,15 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
       ? pinnedRowBackgroundColor
       : undefined;
 
+  const baseBackgroundFallback = resolveBaseBackground(theme, baseBackgroundColor);
+
   const cellHighlightColorHover =
     tableRowProps?.hover !== false
       ? isRowSelected
         ? cellHighlightColor
         : theme.palette.mode === 'dark'
-          ? `${lighten(baseBackgroundColor, 0.3)}`
-          : `${darken(baseBackgroundColor, 0.3)}`
+          ? mrtLighten(baseBackgroundColor, 0.3, baseBackgroundFallback)
+          : mrtDarken(baseBackgroundColor, 0.3, baseBackgroundFallback)
       : undefined;
 
   return (
@@ -183,52 +192,62 @@ export const MRT_TableBodyRow = <TData extends MRT_RowData>({
             : undefined,
           ...tableRowProps?.style,
         }}
-        sx={(theme: Theme) => ({
-          '&:hover td:after': cellHighlightColorHover
-            ? {
-                backgroundColor: alpha(cellHighlightColorHover, 0.3),
-                ...commonCellBeforeAfterStyles,
-              }
-            : undefined,
-          backgroundColor: `${baseBackgroundColor} !important`,
-          bottom:
-            !virtualRow && bottomPinnedIndex !== undefined && isRowPinned
-              ? `${
-                  bottomPinnedIndex * rowHeight +
-                  (enableStickyFooter ? tableFooterHeight - 1 : 0)
-                }px`
+        sx={[
+          (t: Theme) => ({
+            '&:hover td:after': cellHighlightColorHover
+              ? {
+                  backgroundColor: mrtAlpha(
+                    cellHighlightColorHover,
+                    0.3,
+                    baseBackgroundFallback,
+                  ),
+                  ...commonCellBeforeAfterStyles,
+                }
               : undefined,
-          boxSizing: 'border-box',
-          display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
-          opacity: isRowPinned ? 0.97 : isDraggingRow || isHoveredRow ? 0.5 : 1,
-          position: virtualRow
-            ? 'absolute'
-            : rowPinningDisplayMode?.includes('sticky') && isRowPinned
-              ? 'sticky'
-              : 'relative',
-          td: {
-            ...getCommonPinnedCellStyles({ table, theme }),
-          },
-          'td:after': cellHighlightColor
-            ? {
-                backgroundColor: cellHighlightColor,
-                ...commonCellBeforeAfterStyles,
-              }
-            : undefined,
-          top: virtualRow
-            ? 0
-            : topPinnedIndex !== undefined && isRowPinned
-              ? `${
-                  topPinnedIndex * rowHeight +
-                  (enableStickyHeader || isFullScreen ? tableHeadHeight - 1 : 0)
-                }px`
+            backgroundColor: `${baseBackgroundColor} !important`,
+            bottom:
+              !virtualRow && bottomPinnedIndex !== undefined && isRowPinned
+                ? `${
+                    bottomPinnedIndex * rowHeight +
+                    (enableStickyFooter ? tableFooterHeight - 1 : 0)
+                  }px`
+                : undefined,
+            boxSizing: 'border-box',
+            display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
+            opacity: isRowPinned ? 0.97 : isDraggingRow || isHoveredRow ? 0.5 : 1,
+            position: virtualRow
+              ? 'absolute'
+              : rowPinningDisplayMode?.includes('sticky') && isRowPinned
+                ? 'sticky'
+                : 'relative',
+            td: {
+              ...getCommonPinnedCellStyles({ table, theme: t }),
+            },
+            'td:after': cellHighlightColor
+              ? {
+                  backgroundColor: cellHighlightColor,
+                  ...commonCellBeforeAfterStyles,
+                }
               : undefined,
-          transition: virtualRow ? 'none' : 'all 150ms ease-in-out',
-          width: '100%',
-          zIndex:
-            rowPinningDisplayMode?.includes('sticky') && isRowPinned ? 2 : 0,
-          ...(sx as any),
-        })}
+            top: virtualRow
+              ? 0
+              : topPinnedIndex !== undefined && isRowPinned
+                ? `${
+                    topPinnedIndex * rowHeight +
+                    (enableStickyHeader || isFullScreen
+                      ? tableHeadHeight - 1
+                      : 0)
+                  }px`
+                : undefined,
+            transition: virtualRow ? 'none' : 'all 150ms ease-in-out',
+            width: '100%',
+            zIndex:
+              rowPinningDisplayMode?.includes('sticky') && isRowPinned ? 2 : 0,
+          }),
+          ...(Array.isArray(tableRowProps?.sx)
+            ? tableRowProps.sx
+            : [tableRowProps?.sx]),
+        ]}
       >
         {virtualPaddingLeft ? (
           <td style={{ display: 'flex', width: virtualPaddingLeft }} />

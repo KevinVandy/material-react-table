@@ -48,7 +48,7 @@ const Example = () => {
     displayColumnDefOptions: {
       'mrt-row-expand': {
         Header: () => (
-          <Stack direction="row" alignItems="center">
+          <Stack sx={{ flexDirection: 'row', alignItems: 'center' }}>
             <MRT_ExpandAllButton table={table} />
             <Box>Groups</Box>
           </Stack>

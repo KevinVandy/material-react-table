@@ -2,9 +2,8 @@ import { type DragEvent, useEffect } from 'react';
 import Box, { type BoxProps } from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
-import { alpha } from '@mui/material/styles';
 import { type MRT_RowData, type MRT_TableInstance } from '../../types';
-import { parseFromValuesOrFunc } from '../../utils/utils';
+import { mrtAlpha } from '../../utils/style.utils';
 
 export interface MRT_ToolbarDropZoneProps<TData extends MRT_RowData>
   extends BoxProps {
@@ -51,25 +50,30 @@ export const MRT_ToolbarDropZone = <TData extends MRT_RowData>({
         onDragEnter={handleDragEnter}
         onDragOver={handleDragOver}
         {...rest}
-        sx={(theme) => ({
-          alignItems: 'center',
-          backdropFilter: 'blur(4px)',
-          backgroundColor: alpha(
-            theme.palette.info.main,
-            hoveredColumn?.id === 'drop-zone' ? 0.2 : 0.1,
-          ),
-          border: `dashed ${theme.palette.info.main} 2px`,
-          boxSizing: 'border-box',
-          display: 'flex',
-          height: '100%',
-          justifyContent: 'center',
-          position: 'absolute',
-          width: '100%',
-          zIndex: 4,
-          ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
-        })}
+        sx={[
+          (theme) => ({
+            alignItems: 'center',
+            backdropFilter: 'blur(4px)',
+            backgroundColor: mrtAlpha(
+              theme.palette.info.main,
+              hoveredColumn?.id === 'drop-zone' ? 0.2 : 0.1,
+              hoveredColumn?.id === 'drop-zone'
+                ? 'rgba(2,136,209,0.2)'
+                : 'rgba(2,136,209,0.1)',
+            ),
+            border: `dashed ${theme.palette.info.main} 2px`,
+            boxSizing: 'border-box',
+            display: 'flex',
+            height: '100%',
+            justifyContent: 'center',
+            position: 'absolute',
+            width: '100%',
+            zIndex: 4,
+          }),
+          ...(Array.isArray(rest?.sx) ? rest.sx : [rest?.sx]),
+        ]}
       >
-        <Typography fontStyle="italic">
+        <Typography sx={{ fontStyle: 'italic' }}>
           {localization.dropToGroupBy.replace(
             '{column}',
             draggingColumn?.columnDef?.header ?? '',

@@ -64,12 +64,16 @@ export const MRT_TopToolbar = <TData extends MRT_RowData>({
           toolbarProps.ref.current = ref;
         }
       }}
-      sx={(theme) => ({
-        ...getCommonToolbarStyles({ table, theme }),
-        position: isFullScreen ? 'sticky' : 'relative',
-        top: isFullScreen ? '0' : undefined,
-        ...(parseFromValuesOrFunc(toolbarProps?.sx, theme) as any),
-      })}
+      sx={[
+        (theme) => ({
+          ...getCommonToolbarStyles({ table, theme }),
+          position: isFullScreen ? 'sticky' : 'relative',
+          top: isFullScreen ? '0' : undefined,
+        }),
+        ...(Array.isArray(toolbarProps?.sx)
+          ? toolbarProps.sx
+          : [toolbarProps?.sx]),
+      ]}
     >
       {positionToolbarAlertBanner === 'top' && (
         <MRT_ToolbarAlertBanner

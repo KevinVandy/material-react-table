@@ -22,6 +22,7 @@ import { debounce } from '@mui/material/utils';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { type PickerValidDate } from '@mui/x-date-pickers/models';
 import {
   type DropdownOption,
   type MRT_Header,
@@ -32,7 +33,7 @@ import {
   getColumnFilterInfo,
   useDropdownOptions,
 } from '../../utils/column.utils';
-import { getValueAndLabel, parseFromValuesOrFunc } from '../../utils/utils';
+import { getValueAndLabel, parseFromValuesOrFunc, resolveSlotProps } from '../../utils/utils';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 
 export interface MRT_FilterTextFieldProps<TData extends MRT_RowData>
@@ -83,17 +84,17 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
   const datePickerProps = {
     ...parseFromValuesOrFunc(muiFilterDatePickerProps, args),
     ...parseFromValuesOrFunc(columnDef.muiFilterDatePickerProps, args),
-  } as any;
+  };
 
   const dateTimePickerProps = {
     ...parseFromValuesOrFunc(muiFilterDateTimePickerProps, args),
     ...parseFromValuesOrFunc(columnDef.muiFilterDateTimePickerProps, args),
-  } as any;
+  };
 
   const timePickerProps = {
     ...parseFromValuesOrFunc(muiFilterTimePickerProps, args),
     ...parseFromValuesOrFunc(columnDef.muiFilterTimePickerProps, args),
-  } as any;
+  };
 
   const {
     allowedColumnFilterOptions,
@@ -328,13 +329,6 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
         )}
       </label>
     ) : null,
-    inputRef: (inputRef) => {
-      filterInputRefs.current![`${column.id}-${rangeFilterIndex ?? 0}`] =
-        inputRef;
-      if (textFieldProps.inputRef) {
-        textFieldProps.inputRef = inputRef;
-      }
-    },
     margin: 'none',
     placeholder:
       filterChipLabel || isSelectFilter || isMultiSelectFilter
@@ -365,35 +359,90 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
         },
         title: filterPlaceholder,
         ...textFieldProps.slotProps?.htmlInput,
+        ref: (inputRef: HTMLInputElement | null) => {
+          if (inputRef) {
+            filterInputRefs.current![`${column.id}-${rangeFilterIndex ?? 0}`] =
+              inputRef;
+          }
+          const userRef = (
+            textFieldProps.slotProps?.htmlInput as
+              | { ref?: (el: HTMLInputElement | null) => void }
+              | undefined
+          )?.ref;
+          if (typeof userRef === 'function') userRef(inputRef);
+        },
       },
     },
     onKeyDown: (e) => {
       e.stopPropagation();
       textFieldProps.onKeyDown?.(e);
     },
-    sx: (theme) => ({
-      minWidth: isDateFilter
-        ? '160px'
-        : enableColumnFilterModes && rangeFilterIndex === 0
-          ? '110px'
-          : isRangeFilter
-            ? '100px'
-            : !filterChipLabel
-              ? '120px'
-              : 'auto',
-      mx: '-2px',
-      p: 0,
-      width: 'calc(100% + 4px)',
-      ...(parseFromValuesOrFunc(textFieldProps?.sx, theme) as any),
-    }),
+    sx: [
+      {
+        minWidth: isDateFilter
+          ? '160px'
+          : enableColumnFilterModes && rangeFilterIndex === 0
+            ? '110px'
+            : isRangeFilter
+              ? '100px'
+              : !filterChipLabel
+                ? '120px'
+                : 'auto',
+        mx: '-2px',
+        p: 0,
+        width: 'calc(100% + 4px)',
+      },
+      ...(Array.isArray(textFieldProps?.sx)
+        ? textFieldProps.sx
+        : [textFieldProps?.sx]),
+    ],
   };
 
   const commonDatePickerProps = {
-    onChange: (newDate: any) => {
+    onChange: (newDate: PickerValidDate | null) => {
       handleChange(newDate);
     },
-    value: filterValue || null,
+    // filterValue holds a PickerValidDate at runtime for date filters (set by picker onChange)
+    value: (filterValue || null) as PickerValidDate | null,
   };
+
+  // PickersTextField renders a div with a different slotProps structure and HTMLDivElement-typed
+  // event handlers. Extract only the styling/state props shared by both TextField and PickersTextField.
+  const pickerTextFieldProps = (({
+    className,
+    color,
+    disabled,
+    error,
+    focused,
+    fullWidth,
+    helperText,
+    hiddenLabel,
+    id,
+    label,
+    margin,
+    required,
+    size,
+    style,
+    sx,
+    variant,
+  }) => ({
+    className,
+    color,
+    disabled,
+    error,
+    focused,
+    fullWidth,
+    helperText,
+    hiddenLabel,
+    id,
+    label,
+    margin,
+    required,
+    size,
+    style,
+    sx,
+    variant,
+  }))(commonTextFieldProps);
 
   return (
     <>
@@ -409,7 +458,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
               ...timePickerProps?.slotProps?.field,
             },
             textField: {
-              ...commonTextFieldProps,
+              ...pickerTextFieldProps,
               ...timePickerProps?.slotProps?.textField,
             },
           }}
@@ -426,7 +475,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
               ...dateTimePickerProps?.slotProps?.field,
             },
             textField: {
-              ...commonTextFieldProps,
+              ...pickerTextFieldProps,
               ...dateTimePickerProps?.slotProps?.textField,
             },
           }}
@@ -443,7 +492,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
               ...datePickerProps?.slotProps?.field,
             },
             textField: {
-              ...commonTextFieldProps,
+              ...pickerTextFieldProps,
               ...datePickerProps?.slotProps?.textField,
             },
           }}
@@ -470,18 +519,24 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
               slotProps={{
                 ...builtinTextFieldProps.slotProps,
                 ...commonTextFieldProps.slotProps,
-                input: {
-                  ...builtinTextFieldProps.InputProps,
-                  ...builtinTextFieldProps.slotProps?.input,
-                  startAdornment:
-                    //@ts-expect-error
-                    commonTextFieldProps?.slotProps?.input?.startAdornment,
-                },
-                htmlInput: {
-                  ...builtinTextFieldProps.inputProps,
-                  ...builtinTextFieldProps.slotProps?.htmlInput,
-                  ...commonTextFieldProps?.slotProps?.htmlInput,
-                },
+                input: resolveSlotProps(
+                  commonTextFieldProps.slotProps?.input,
+                  resolveSlotProps(
+                    builtinTextFieldProps.slotProps?.input,
+                    null,
+                    {},
+                  ),
+                  {},
+                ),
+                htmlInput: resolveSlotProps(
+                  commonTextFieldProps.slotProps?.htmlInput,
+                  resolveSlotProps(
+                    builtinTextFieldProps.slotProps?.htmlInput,
+                    null,
+                    {},
+                  ),
+                  {},
+                ),
               }}
               onClick={(e: MouseEvent<HTMLInputElement>) => e.stopPropagation()}
             />
@@ -496,7 +551,7 @@ export const MRT_FilterTextField = <TData extends MRT_RowData>({
             ...commonTextFieldProps.slotProps,
             inputLabel: {
               shrink: isSelectFilter || isMultiSelectFilter,
-              ...(commonTextFieldProps.slotProps?.inputLabel as any),
+              ...commonTextFieldProps.slotProps?.inputLabel,
             },
             select: {
               MenuProps: { disableScrollLock: true },

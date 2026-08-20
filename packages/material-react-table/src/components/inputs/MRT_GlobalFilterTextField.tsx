@@ -13,7 +13,7 @@ import TextField, { type TextFieldProps } from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
 import { debounce } from '@mui/material/utils';
 import { type MRT_RowData, type MRT_TableInstance } from '../../types';
-import { parseFromValuesOrFunc } from '../../utils/utils';
+import { parseFromValuesOrFunc, resolveSlotProps } from '../../utils/utils';
 import { MRT_FilterOptionMenu } from '../menus/MRT_FilterOptionMenu';
 
 export interface MRT_GlobalFilterTextFieldProps<TData extends MRT_RowData>
@@ -39,7 +39,7 @@ export const MRT_GlobalFilterTextField = <TData extends MRT_RowData>({
   } = table;
   const { globalFilter, showGlobalFilter } = getState();
 
-  const textFieldProps = {
+  const textFieldProps: TextFieldProps = {
     ...parseFromValuesOrFunc(muiSearchTextFieldProps, {
       table,
     }),
@@ -63,6 +63,7 @@ export const MRT_GlobalFilterTextField = <TData extends MRT_RowData>({
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
     handleChangeDebounced(event);
+    textFieldProps?.onChange?.(event);
   };
 
   const handleGlobalFilterMenuOpen = (event: MouseEvent<HTMLElement>) => {
@@ -93,63 +94,63 @@ export const MRT_GlobalFilterTextField = <TData extends MRT_RowData>({
       unmountOnExit
     >
       <TextField
-        inputProps={{
-          autoComplete: 'off',
-          ...textFieldProps.inputProps,
-        }}
         onChange={handleChange}
         placeholder={localization.search}
         size="small"
         value={searchValue ?? ''}
         variant="outlined"
         {...textFieldProps}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <Tooltip title={localization.clearSearch ?? ''}>
-                <span>
-                  <IconButton
-                    aria-label={localization.clearSearch}
-                    disabled={!searchValue?.length}
-                    onClick={handleClear}
-                    size="small"
-                  >
-                    <CloseIcon />
-                  </IconButton>
-                </span>
-              </Tooltip>
-            </InputAdornment>
+        slotProps={{
+          ...textFieldProps.slotProps,
+          htmlInput: resolveSlotProps(
+            textFieldProps.slotProps?.htmlInput,
+            {
+              autoComplete: 'off',
+              ref: (inputRef: HTMLInputElement | null) => {
+                searchInputRef.current = inputRef;
+              },
+            },
+            {},
           ),
-          startAdornment: enableGlobalFilterModes ? (
-            <InputAdornment position="start">
-              <Tooltip title={localization.changeSearchMode}>
-                <IconButton
-                  aria-label={localization.changeSearchMode}
-                  onClick={handleGlobalFilterMenuOpen}
-                  size="small"
-                  sx={{ height: '1.75rem', width: '1.75rem' }}
-                >
-                  <SearchIcon />
-                </IconButton>
-              </Tooltip>
-            </InputAdornment>
-          ) : (
-            <SearchIcon style={{ marginRight: '4px' }} />
+          input: resolveSlotProps(
+            textFieldProps.slotProps?.input,
+            {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Tooltip title={localization.clearSearch ?? ''}>
+                    <span>
+                      <IconButton
+                        aria-label={localization.clearSearch}
+                        disabled={!searchValue?.length}
+                        onClick={handleClear}
+                        size="small"
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                    </span>
+                  </Tooltip>
+                </InputAdornment>
+              ),
+              startAdornment: enableGlobalFilterModes ? (
+                <InputAdornment position="start">
+                  <Tooltip title={localization.changeSearchMode}>
+                    <IconButton
+                      aria-label={localization.changeSearchMode}
+                      onClick={handleGlobalFilterMenuOpen}
+                      size="small"
+                      sx={{ height: '1.75rem', width: '1.75rem' }}
+                    >
+                      <SearchIcon />
+                    </IconButton>
+                  </Tooltip>
+                </InputAdornment>
+              ) : (
+                <SearchIcon style={{ marginRight: '4px' }} />
+              ),
+              sx: { mb: 0 },
+            },
+            {},
           ),
-          ...textFieldProps.InputProps,
-          sx: (theme) => ({
-            mb: 0,
-            ...(parseFromValuesOrFunc(
-              textFieldProps?.InputProps?.sx,
-              theme,
-            ) as any),
-          }),
-        }}
-        inputRef={(inputRef) => {
-          searchInputRef.current = inputRef;
-          if (textFieldProps?.inputRef) {
-            textFieldProps.inputRef = inputRef;
-          }
         }}
       />
       <MRT_FilterOptionMenu

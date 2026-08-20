@@ -73,11 +73,12 @@ export const MRT_FilterCheckbox = <TData extends MRT_RowData>({
               e.stopPropagation();
               checkboxProps?.onClick?.(e);
             }}
-            sx={(theme) => ({
-              height: '2.5rem',
-              width: '2.5rem',
-              ...(parseFromValuesOrFunc(checkboxProps?.sx, theme) as any),
-            })}
+            sx={[
+              { height: '2.5rem', width: '2.5rem' },
+              ...(Array.isArray(checkboxProps?.sx)
+                ? checkboxProps.sx
+                : [checkboxProps?.sx]),
+            ]}
           />
         }
         disableTypography

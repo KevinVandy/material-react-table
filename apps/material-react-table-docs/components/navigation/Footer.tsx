@@ -120,7 +120,7 @@ export const Footer = () => {
           p: '1.5rem',
         }}
       >
-        <Typography color="text.secondary" textAlign="center">
+        <Typography color="text.secondary" sx={{ textAlign: 'center' }}>
           © {new Date().getFullYear()} Kevin&nbsp;Van&nbsp;Cott
         </Typography>
         <Box

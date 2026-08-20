@@ -14,7 +14,7 @@ import {
   getColumnFilterInfo,
   useDropdownOptions,
 } from '../../utils/column.utils';
-import { getValueAndLabel, parseFromValuesOrFunc } from '../../utils/utils';
+import { getValueAndLabel } from '../../utils/utils';
 
 export interface MRT_TableHeadCellFilterLabelProps<TData extends MRT_RowData>
   extends IconButtonProps {
@@ -130,16 +130,18 @@ export const MRT_TableHeadCellFilterLabel = <TData extends MRT_RowData = {}>({
               }}
               size="small"
               {...rest}
-              sx={(theme) => ({
-                height: '16px',
-                ml: '4px',
-                opacity: isFilterActive ? 1 : 0.3,
-                p: '8px',
-                transform: 'scale(0.75)',
-                transition: 'all 150ms ease-in-out',
-                width: '16px',
-                ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
-              })}
+              sx={[
+                {
+                  height: '16px',
+                  ml: '4px',
+                  opacity: isFilterActive ? 1 : 0.3,
+                  p: '8px',
+                  transform: 'scale(0.75)',
+                  transition: 'all 150ms ease-in-out',
+                  width: '16px',
+                },
+                ...(Array.isArray(rest?.sx) ? rest.sx : [rest?.sx]),
+              ]}
             >
               <FilterAltIcon />
             </IconButton>

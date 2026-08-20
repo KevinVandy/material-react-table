@@ -65,17 +65,19 @@ export const MRT_TableHeadCellColumnActionsButton = <
           onClick={handleClick}
           size="small"
           {...iconButtonProps}
-          sx={(theme) => ({
-            '&:hover': {
-              opacity: 1,
+          sx={[
+            {
+              '&:hover': { opacity: 1 },
+              height: '2rem',
+              m: '-8px -4px',
+              opacity: 0.3,
+              transition: 'all 150ms',
+              width: '2rem',
             },
-            height: '2rem',
-            m: '-8px -4px',
-            opacity: 0.3,
-            transition: 'all 150ms',
-            width: '2rem',
-            ...(parseFromValuesOrFunc(iconButtonProps?.sx, theme) as any),
-          })}
+            ...(Array.isArray(iconButtonProps?.sx)
+              ? iconButtonProps.sx
+              : [iconButtonProps?.sx]),
+          ]}
           title={undefined}
         >
           {iconButtonProps?.children ?? (

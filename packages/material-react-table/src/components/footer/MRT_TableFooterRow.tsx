@@ -57,13 +57,17 @@ export const MRT_TableFooterRow = <TData extends MRT_RowData>({
   return (
     <TableRow
       {...tableRowProps}
-      sx={(theme) => ({
-        backgroundColor: baseBackgroundColor,
-        display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
-        position: 'relative',
-        width: '100%',
-        ...(parseFromValuesOrFunc(tableRowProps?.sx, theme) as any),
-      })}
+      sx={[
+        {
+          backgroundColor: baseBackgroundColor,
+          display: layoutMode?.startsWith('grid') ? 'flex' : undefined,
+          position: 'relative',
+          width: '100%',
+        },
+        ...(Array.isArray(tableRowProps?.sx)
+          ? tableRowProps.sx
+          : [tableRowProps?.sx]),
+      ]}
     >
       {virtualPaddingLeft ? (
         <th style={{ display: 'flex', width: virtualPaddingLeft }} />

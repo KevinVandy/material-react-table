@@ -81,7 +81,7 @@ const Example = () => {
         </Box>
       </Box>
       {/* Some Page Content */}
-      <Typography p="16px 4px">
+      <Typography sx={{ p: '16px 4px' }}>
         {
           "Hey I'm some page content. I'm just one of your normal components between your custom toolbar and the MRT Table below"
         }

@@ -8,7 +8,6 @@ import {
   type MRT_RowData,
   type MRT_TableInstance,
 } from '../../types';
-import { parseFromValuesOrFunc } from '../../utils/utils';
 
 export interface MRT_TableHeadCellSortLabelProps<TData extends MRT_RowData>
   extends TableSortLabelProps {
@@ -80,20 +79,22 @@ export const MRT_TableHeadCellSortLabel = <TData extends MRT_RowData>({
             header.column.getToggleSortingHandler()?.(e);
           }}
           {...rest}
-          sx={(theme) => ({
-            '.MuiTableSortLabel-icon': {
-              color: `${
-                theme.palette.mode === 'dark'
-                  ? theme.palette.text.primary
-                  : theme.palette.text.secondary
-              } !important`,
-            },
-            flex: '0 0',
-            opacity: isSorted ? 1 : 0.3,
-            transition: 'all 150ms ease-in-out',
-            width: '3ch',
-            ...(parseFromValuesOrFunc(rest?.sx, theme) as any),
-          })}
+          sx={[
+            (theme) => ({
+              '.MuiTableSortLabel-icon': {
+                color: `${
+                  theme.palette.mode === 'dark'
+                    ? theme.palette.text.primary
+                    : theme.palette.text.secondary
+                } !important`,
+              },
+              flex: '0 0',
+              opacity: isSorted ? 1 : 0.3,
+              transition: 'all 150ms ease-in-out',
+              width: '3ch',
+            }),
+            ...(Array.isArray(rest?.sx) ? rest.sx : [rest?.sx]),
+          ]}
         />
       </Badge>
     </Tooltip>

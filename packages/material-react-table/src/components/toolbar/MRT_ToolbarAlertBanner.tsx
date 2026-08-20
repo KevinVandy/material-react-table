@@ -64,7 +64,7 @@ export const MRT_ToolbarAlertBanner = <TData extends MRT_RowData>({
   );
   const selectedAlert =
     selectedRowCount > 0 ? (
-      <Stack alignItems="center" direction="row" gap="16px">
+      <Stack sx={{ alignItems: 'center', flexDirection: 'row', gap: '16px' }}>
         {localization.selectedCountOfRowCountRowsSelected
           ?.replace(
             '{selectedCount}',
@@ -112,29 +112,33 @@ export const MRT_ToolbarAlertBanner = <TData extends MRT_RowData>({
         color="info"
         icon={false}
         {...alertProps}
-        sx={(theme) => ({
-          '& .MuiAlert-message': {
-            maxWidth: `calc(${
-              tablePaperRef.current?.clientWidth ?? 360
-            }px - 1rem)`,
+        sx={[
+          {
+            '& .MuiAlert-message': {
+              maxWidth: `calc(${
+                tablePaperRef.current?.clientWidth ?? 360
+              }px - 1rem)`,
+              width: '100%',
+            },
+            borderRadius: 0,
+            fontSize: '1rem',
+            left: 0,
+            mb: stackAlertBanner
+              ? 0
+              : positionToolbarAlertBanner === 'bottom'
+                ? '-1rem'
+                : undefined,
+            p: 0,
+            position: 'relative',
+            right: 0,
+            top: 0,
             width: '100%',
+            zIndex: 2,
           },
-          borderRadius: 0,
-          fontSize: '1rem',
-          left: 0,
-          mb: stackAlertBanner
-            ? 0
-            : positionToolbarAlertBanner === 'bottom'
-              ? '-1rem'
-              : undefined,
-          p: 0,
-          position: 'relative',
-          right: 0,
-          top: 0,
-          width: '100%',
-          zIndex: 2,
-          ...(parseFromValuesOrFunc(alertProps?.sx, theme) as any),
-        })}
+          ...(Array.isArray(alertProps?.sx)
+            ? alertProps.sx
+            : [alertProps?.sx]),
+        ]}
       >
         {renderToolbarAlertBannerContent?.({
           groupedAlert,

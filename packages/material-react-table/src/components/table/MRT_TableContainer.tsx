@@ -90,15 +90,19 @@ export const MRT_TableContainer = <TData extends MRT_RowData>({
           : undefined,
         ...tableContainerProps?.style,
       }}
-      sx={(theme) => ({
-        maxHeight: enableStickyHeader
-          ? `clamp(350px, calc(100vh - ${totalToolbarHeight}px), 9999px)`
-          : undefined,
-        maxWidth: '100%',
-        overflow: 'auto',
-        position: 'relative',
-        ...(parseFromValuesOrFunc(tableContainerProps?.sx, theme) as any),
-      })}
+      sx={[
+        {
+          maxHeight: enableStickyHeader
+            ? `clamp(350px, calc(100vh - ${totalToolbarHeight}px), 9999px)`
+            : undefined,
+          maxWidth: '100%',
+          overflow: 'auto',
+          position: 'relative',
+        },
+        ...(Array.isArray(tableContainerProps?.sx)
+          ? tableContainerProps.sx
+          : [tableContainerProps?.sx]),
+      ]}
     >
       {loading ? <MRT_TableLoadingOverlay table={table} /> : null}
       <MRT_Table table={table} />

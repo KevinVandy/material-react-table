@@ -65,21 +65,25 @@ export const MRT_CopyButton = <TData extends MRT_RowData>({
         type="button"
         variant="text"
         {...buttonProps}
-        sx={(theme) => ({
-          backgroundColor: 'transparent',
-          border: 'none',
-          color: 'inherit',
-          cursor: 'copy',
-          fontFamily: 'inherit',
-          fontSize: 'inherit',
-          letterSpacing: 'inherit',
-          m: '-0.25rem',
-          minWidth: 'unset',
-          py: 0,
-          textAlign: 'inherit',
-          textTransform: 'inherit',
-          ...(parseFromValuesOrFunc(buttonProps?.sx, theme) as any),
-        })}
+        sx={[
+          {
+            backgroundColor: 'transparent',
+            border: 'none',
+            color: 'inherit',
+            cursor: 'copy',
+            fontFamily: 'inherit',
+            fontSize: 'inherit',
+            letterSpacing: 'inherit',
+            m: '-0.25rem',
+            minWidth: 'unset',
+            py: 0,
+            textAlign: 'inherit',
+            textTransform: 'inherit',
+          },
+          ...(Array.isArray(buttonProps?.sx)
+            ? buttonProps.sx
+            : [buttonProps?.sx]),
+        ]}
         title={undefined}
       />
     </Tooltip>

@@ -1,4 +1,4 @@
-# Material React Table V3
+# Material React Table V4
 
 View [Documentation](https://www.material-react-table.com/)
 
@@ -36,7 +36,7 @@ View [Documentation](https://www.material-react-table.com/)
 
 ### _Quickly Create React Data Tables with Material Design_
 
-### **Built with [Material UI <sup>V6</sup>](https://mui.com) and [TanStack Table <sup>V8</sup>](https://tanstack.com/table/v8)**
+### **Built with [Material UI <sup>V9</sup>](https://mui.com) and [TanStack Table <sup>V8</sup>](https://tanstack.com/table/v8)**
 
 <img src="https://material-react-table.com/banner.png" alt="MRT" height="50" />
 
@@ -114,9 +114,9 @@ _**Fully Fleshed out [Docs](https://www.material-react-table.com/docs/guides#gui
 
 View the full [Installation Docs](https://www.material-react-table.com/docs/getting-started/install)
 
-1. Ensure that you have React 18 or later installed
+1. Ensure that you have React 19 or later installed
 
-2. Install Peer Dependencies (Material UI V6)
+2. Install Peer Dependencies (Material UI V9)
 
 ```bash
 npm install @mui/material @mui/x-date-pickers @mui/icons-material @emotion/react @emotion/styled
@@ -128,7 +128,7 @@ npm install @mui/material @mui/x-date-pickers @mui/icons-material @emotion/react
 npm install material-react-table
 ```
 
-> _`@tanstack/react-table`, `@tanstack/react-virtual`, and `@tanstack/match-sorter-utils`_ are internal dependencies, so you do NOT need to install them yourself.
+> _`@tanstack/react-table` v8.21, `@tanstack/react-virtual` v3.13, and `@tanstack/match-sorter-utils` v8.19_ are internal dependencies, so you do NOT need to install them yourself.
 
 ### Usage
 

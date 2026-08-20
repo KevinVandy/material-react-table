@@ -82,13 +82,17 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
         getIsSomeRowsPinned('top') && (
           <TableBody
             {...tableBodyProps}
-            sx={(theme) => ({
-              display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-              position: 'sticky',
-              top: tableHeadHeight - 1,
-              zIndex: 1,
-              ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
-            })}
+            sx={[
+              {
+                display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
+                position: 'sticky',
+                top: tableHeadHeight - 1,
+                zIndex: 1,
+              },
+              ...(Array.isArray(tableBodyProps?.sx)
+                ? tableBodyProps.sx
+                : [tableBodyProps?.sx]),
+            ]}
           >
             {getTopRows().map((row, staticRowIndex) => {
               const props = {
@@ -106,15 +110,19 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
         )}
       <TableBody
         {...tableBodyProps}
-        sx={(theme) => ({
-          display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-          height: rowVirtualizer
-            ? `${rowVirtualizer.getTotalSize()}px`
-            : undefined,
-          minHeight: !rows.length ? '100px' : undefined,
-          position: 'relative',
-          ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
-        })}
+        sx={[
+          {
+            display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
+            height: rowVirtualizer
+              ? `${rowVirtualizer.getTotalSize()}px`
+              : undefined,
+            minHeight: !rows.length ? '100px' : undefined,
+            position: 'relative',
+          },
+          ...(Array.isArray(tableBodyProps?.sx)
+            ? tableBodyProps.sx
+            : [tableBodyProps?.sx]),
+        ]}
       >
         {tableBodyProps?.children ??
           (!rows.length ? (
@@ -189,13 +197,17 @@ export const MRT_TableBody = <TData extends MRT_RowData>({
         getIsSomeRowsPinned('bottom') && (
           <TableBody
             {...tableBodyProps}
-            sx={(theme) => ({
-              bottom: tableFooterHeight - 1,
-              display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
-              position: 'sticky',
-              zIndex: 1,
-              ...(parseFromValuesOrFunc(tableBodyProps?.sx, theme) as any),
-            })}
+            sx={[
+              {
+                bottom: tableFooterHeight - 1,
+                display: layoutMode?.startsWith('grid') ? 'grid' : undefined,
+                position: 'sticky',
+                zIndex: 1,
+              },
+              ...(Array.isArray(tableBodyProps?.sx)
+                ? tableBodyProps.sx
+                : [tableBodyProps?.sx]),
+            ]}
           >
             {getBottomRows().map((row, staticRowIndex) => {
               const props = {
